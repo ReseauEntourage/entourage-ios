@@ -388,6 +388,8 @@
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
 		2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */; };
 		2636B9642A7BA199007EE1B2 /* anim_rugby.json in Resources */ = {isa = PBXBuildFile; fileRef = 2636B9632A7BA199007EE1B2 /* anim_rugby.json */; };
+		264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */; };
+		264446D22AA1E05B00EA2EED /* ActionPassedOneContrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264446D12AA1E05B00EA2EED /* ActionPassedOneContrib.swift */; };
 		2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */; };
 		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
@@ -796,6 +798,8 @@
 		2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UILabel.swift; sourceTree = "<group>"; };
 		2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RugbySpecialPopUpViewController.swift; sourceTree = "<group>"; };
 		2636B9632A7BA199007EE1B2 /* anim_rugby.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anim_rugby.json; sourceTree = "<group>"; };
+		264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPasseOneDemand.swift; sourceTree = "<group>"; };
+		264446D12AA1E05B00EA2EED /* ActionPassedOneContrib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPassedOneContrib.swift; sourceTree = "<group>"; };
 		2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
@@ -1740,6 +1744,8 @@
 			children = (
 				26BE845F2A67F26000DC2586 /* ActionPassedOneVC.swift */,
 				26BE84632A67F50500DC2586 /* ActionPassedTwoVC.swift */,
+				264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */,
+				264446D12AA1E05B00EA2EED /* ActionPassedOneContrib.swift */,
 			);
 			path = actionpassed;
 			sourceTree = "<group>";
@@ -2122,6 +2128,7 @@
 				02B94C23284F594A006059EF /* HomeMainViewModel.swift in Sources */,
 				2619E1432A261C93000BD574 /* WelcomeTwoViewController.swift in Sources */,
 				26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */,
+				264446D22AA1E05B00EA2EED /* ActionPassedOneContrib.swift in Sources */,
 				02E0EFA328787082009B2C65 /* EventDetailTopFullCell.swift in Sources */,
 				02A92C222897E68B000DFF95 /* ActionCreatePhase1ViewController.swift in Sources */,
 				0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */,
@@ -2163,6 +2170,7 @@
 				024131D9286207D100561FB4 /* EventMainHomeViewController.swift in Sources */,
 				021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */,
 				026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */,
+				264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */,
 				02FB5444287DC01200E4B9FA /* EventDetailFullCell.swift in Sources */,
 				025D8766278DEC2100909101 /* Extensions.swift in Sources */,
 				028D4F562937970500A0BDD3 /* OnboardingPhase1ViewController.swift in Sources */,

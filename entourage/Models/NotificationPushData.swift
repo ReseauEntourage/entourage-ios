@@ -16,6 +16,7 @@ struct NotificationPushData {
     //value = h1, j2, j8, j11
     var url: String? = nil
     var stage:String? = nil
+    var context:String? = nil
     
     init(instanceName:String, instanceId:Int, postId:Int?) {
         self.instanceType = InstanceType.getFromString(key: instanceName)
