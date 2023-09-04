@@ -58,7 +58,7 @@ class HomeMainViewController: UIViewController {
         AnalyticsLoggerManager.logEvent(name: Home_view_home)
         //TODO here reconnect
         //showPopUpAction(actionType: "contribution", title: "my contrib")
-        showPopUpAction(actionType: "solicitation", title: "my demand")
+        //showPopUpAction(actionType: "solicitation", title: "my demand")
         
     }
     
