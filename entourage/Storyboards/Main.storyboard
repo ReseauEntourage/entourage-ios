@@ -1242,13 +1242,13 @@ Ligne 2</string>
         <!--Action Passed OneVC-->
         <scene sceneID="aS4-bc-hAJ">
             <objects>
-                <viewController storyboardIdentifier="ActionPassedOneVC" id="qRe-G3-gOY" customClass="ActionPassedOneVC" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActionPassedOneVC" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" id="qRe-G3-gOY" customClass="ActionPassedOneVC" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Tn-N1-PXG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hNi-yx-puV">
-                                <rect key="frame" x="20" y="327.5" width="374" height="255"/>
+                                <rect key="frame" x="20" y="320.5" width="374" height="255"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_close_orange_v8" translatesAutoresizingMaskIntoConstraints="NO" id="aqB-Lz-k6d">
                                         <rect key="frame" x="354" y="20" width="0.0" height="20"/>
@@ -1299,13 +1299,12 @@ Ligne 2</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="9mL-jh-quD"/>
                         <color key="backgroundColor" name="noir_alpha_50"/>
                         <constraints>
-                            <constraint firstItem="hNi-yx-puV" firstAttribute="centerY" secondItem="9mL-jh-quD" secondAttribute="centerY" id="KJk-st-vyQ"/>
-                            <constraint firstItem="hNi-yx-puV" firstAttribute="centerX" secondItem="9mL-jh-quD" secondAttribute="centerX" id="bzX-N0-0F1"/>
-                            <constraint firstItem="hNi-yx-puV" firstAttribute="leading" secondItem="9mL-jh-quD" secondAttribute="leading" constant="20" id="n6Q-UX-Gcd"/>
-                            <constraint firstItem="9mL-jh-quD" firstAttribute="trailing" secondItem="hNi-yx-puV" secondAttribute="trailing" constant="20" id="rmC-0A-lxD"/>
+                            <constraint firstItem="hNi-yx-puV" firstAttribute="centerY" secondItem="5Tn-N1-PXG" secondAttribute="centerY" id="KJk-st-vyQ"/>
+                            <constraint firstItem="hNi-yx-puV" firstAttribute="centerX" secondItem="5Tn-N1-PXG" secondAttribute="centerX" id="bzX-N0-0F1"/>
+                            <constraint firstItem="hNi-yx-puV" firstAttribute="leading" secondItem="5Tn-N1-PXG" secondAttribute="leading" constant="20" id="n6Q-UX-Gcd"/>
+                            <constraint firstAttribute="trailing" secondItem="hNi-yx-puV" secondAttribute="trailing" constant="20" id="rmC-0A-lxD"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1320,7 +1319,7 @@ Ligne 2</string>
         <!--Action Passed TwoVC-->
         <scene sceneID="RNI-dg-oh2">
             <objects>
-                <viewController storyboardIdentifier="ActionPassedTwoVC" id="58E-4Y-JgB" customClass="ActionPassedTwoVC" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActionPassedTwoVC" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" id="58E-4Y-JgB" customClass="ActionPassedTwoVC" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hr9-9O-jvN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1542,13 +1541,13 @@ Ligne 2</string>
         <!--Action Passed One Contrib-->
         <scene sceneID="m9V-lQ-aro">
             <objects>
-                <viewController storyboardIdentifier="ActionPassedOneContrib" id="Ku7-CF-N4L" customClass="ActionPassedOneContrib" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="25g-JW-piT">
+                <viewController storyboardIdentifier="ActionPassedOneContrib" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" id="Ku7-CF-N4L" customClass="ActionPassedOneContrib" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="25g-JW-piT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJ9-dm-4VP">
-                                <rect key="frame" x="20" y="353.5" width="374" height="203"/>
+                                <rect key="frame" x="20" y="346.5" width="374" height="203"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_close_orange_v8" translatesAutoresizingMaskIntoConstraints="NO" id="aFB-1W-JKA">
                                         <rect key="frame" x="334" y="20" width="20" height="20"/>
@@ -1632,13 +1631,12 @@ Ligne 2</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="5Dj-MH-FdG"/>
                         <color key="backgroundColor" name="noir_alpha_50"/>
                         <constraints>
-                            <constraint firstItem="TJ9-dm-4VP" firstAttribute="centerX" secondItem="5Dj-MH-FdG" secondAttribute="centerX" id="0pR-1J-NMt"/>
-                            <constraint firstItem="TJ9-dm-4VP" firstAttribute="centerY" secondItem="5Dj-MH-FdG" secondAttribute="centerY" id="2kz-8v-ImX"/>
-                            <constraint firstItem="TJ9-dm-4VP" firstAttribute="leading" secondItem="5Dj-MH-FdG" secondAttribute="leading" constant="20" id="WwL-TI-LvB"/>
-                            <constraint firstItem="5Dj-MH-FdG" firstAttribute="trailing" secondItem="TJ9-dm-4VP" secondAttribute="trailing" constant="20" id="rU7-9j-YXY"/>
+                            <constraint firstItem="TJ9-dm-4VP" firstAttribute="centerX" secondItem="25g-JW-piT" secondAttribute="centerX" id="0pR-1J-NMt"/>
+                            <constraint firstItem="TJ9-dm-4VP" firstAttribute="centerY" secondItem="25g-JW-piT" secondAttribute="centerY" id="2kz-8v-ImX"/>
+                            <constraint firstItem="TJ9-dm-4VP" firstAttribute="leading" secondItem="25g-JW-piT" secondAttribute="leading" constant="20" id="WwL-TI-LvB"/>
+                            <constraint firstAttribute="trailing" secondItem="TJ9-dm-4VP" secondAttribute="trailing" constant="20" id="rU7-9j-YXY"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1655,7 +1653,7 @@ Ligne 2</string>
         <!--Action Passe One Demand-->
         <scene sceneID="BvE-us-0oY">
             <objects>
-                <viewController storyboardIdentifier="ActionPasseOneDemand" id="1Q0-fN-nHm" customClass="ActionPasseOneDemand" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActionPasseOneDemand" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overFullScreen" id="1Q0-fN-nHm" customClass="ActionPasseOneDemand" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fv6-Zp-7ur">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

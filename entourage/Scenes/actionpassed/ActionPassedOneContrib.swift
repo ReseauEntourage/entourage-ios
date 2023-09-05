@@ -21,12 +21,14 @@ class ActionPassedOneContrib:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         ui_label_content.attributedText = stylizeContentContrib()
         ic_cross.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCrossClicked(tapGestureRecognizer:)))
         ic_cross.addGestureRecognizer(tapGestureRecognizer)
         self.ui_btn_yes.addTarget(self, action: #selector(onYesClicked), for: .touchUpInside)
         self.ui_btn_no.addTarget(self, action: #selector(onNoClicked), for: .touchUpInside)
+
 
     }
     
