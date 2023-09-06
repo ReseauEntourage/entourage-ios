@@ -14,8 +14,8 @@ protocol ActionPassedOneVCDelegate{
 class ActionPassedOneVC:UIViewController {
     
     //OUTLET
-    @IBOutlet weak var ui_label: UILabel!
     @IBOutlet weak var ic_cross: UIImageView!
+    @IBOutlet weak var ui_label: UILabel!
     var actionId = 0
     var actionType:String = ""
 
