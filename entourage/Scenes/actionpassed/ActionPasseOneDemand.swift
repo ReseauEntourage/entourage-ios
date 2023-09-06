@@ -12,7 +12,6 @@ import UIKit
 class ActionPasseOneDemand:UIViewController {
     
     @IBOutlet weak var ic_cross: UIImageView!
-    
     @IBOutlet weak var ui_label_content: UILabel!
     @IBOutlet weak var ui_btn_no: UIButton!
     @IBOutlet weak var ui_btn_yes: UIButton!
