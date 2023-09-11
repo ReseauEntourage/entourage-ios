@@ -22,8 +22,6 @@ class ReportGroupPageViewController: UIPageViewController {
     var haveChosen = false
     var titleDelegate:TitleDelegate? = nil
     var messageId:Int? = nil
-    var analyticsClickName = ""
-
     
     var reportVc:ReportGroupViewController? = nil
     var chooseVc:ReportGroupChoosePageViewController? = nil
@@ -38,14 +36,18 @@ class ReportGroupPageViewController: UIPageViewController {
         guard let reportVc = reportVc else {
             return
         }
-
-        if checkIsMe() {
-            self.goBack()
-        }else{
-            haveChosen = true
-            self.titleDelegate?.setTitleForSignal()
-            setViewControllers([reportVc], direction: .forward, animated: true)
+        chooseVc = storyboard?.instantiateViewController(withIdentifier: "reportChooseGroupVC") as? ReportGroupChoosePageViewController
+        chooseVc?.delegate = self
+        chooseVc?.postId = postId
+        chooseVc?.groupId = groupId
+        chooseVc?.eventId = self.eventId
+        chooseVc?.chatMessageId = messageId
+        chooseVc?.conversationId = conversationId
+        chooseVc?.actionId = actionId
+        if let _userid = self.userId {
+            chooseVc?.userId = _userid
         }
+        setViewControllers([chooseVc!], direction: .forward, animated: true)
     }
     
     func viewController(isSend:Bool) -> UIViewController? {
@@ -106,12 +108,10 @@ extension ReportGroupPageViewController: ReportGroupPageDelegate {
     func closeMain() {
         self.parentDelegate?.showMessage(signalType: signalType)
         self.parent?.dismiss(animated: true)
-        
     }
     func closeMainForDelete() {
         self.parentDelegate?.publicationDeleted()
         self.parent?.dismiss(animated: true)
-
     }
 }
 
@@ -122,98 +122,4 @@ protocol ReportGroupPageDelegate: AnyObject {
     func closeMain()
     func closeMainForDelete()
     func chooseReport()
-}
-
-
-extension ReportGroupPageViewController{
-
-    func checkIsMe() -> Bool{
-        if let _myId = UserDefaults.currentUser?.uuid{
-            if self.userId != nil {
-                if _myId == String(self.userId!) {
-                    return true
-                }else{
-                    return false
-                }
-            }
-        }else{
-            return false
-        }
-        return false
-    }
-    
-    func checkparameterType() -> ParamSupressType{
-        if (groupId != nil || eventId != nil) && messageId != nil {
-            return .commment
-        }else if messageId != nil && groupId == nil && eventId == nil{
-            return.message
-        }else{
-            return .publication
-        }
-        return .publication
-    }
-    func showAlert(){
-        var alerteTitle = ""
-        var alerteText = ""
-        var analyticsName = ""
-        switch(checkparameterType()){
-        case .message:
-            alerteTitle = "supress_alert_title_message".localized
-            alerteText = "supress_alert_text_message".localized
-            analyticsName = Click_delete_mess
-            self.analyticsClickName = Delete_mess
-        case .commment:
-            alerteTitle = "supress_alert_title_comment".localized
-            alerteText = "supress_alert_text_comment".localized
-            analyticsName = Click_delete_comm
-            self.analyticsClickName = Delete_comm
-        case .publication:
-            alerteTitle = "supress_alert_title_publi".localized
-            alerteText = "supress_alert_text_publi".localized
-            analyticsName = Click_delete_post
-            self.analyticsClickName = Delete_post
-
-        case .action:
-            alerteTitle = "supress_alert_title_publi".localized
-            alerteText = "supress_alert_text_publi".localized
-            analyticsName = Click_delete_post
-            self.analyticsClickName = Delete_post
-        }
-        
-        AnalyticsLoggerManager.logEvent(name: analyticsName)
-        let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontBoutonBlanc(size: 15, color: .orange), bgColor: .appOrangeLight_70, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "supress_button_title".localized, titleStyle:ApplicationTheme.getFontBoutonBlanc(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: alerteTitle, message: alerteText, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
-        alertVC.delegate = self
-        alertVC.show()
-    }
-}
-
-extension ReportGroupPageViewController: MJAlertControllerDelegate {
-    func validateLeftButton(alertTag: MJAlertTAG) {
-    }
-    func validateRightButton(alertTag: MJAlertTAG) {
-        AnalyticsLoggerManager.logEvent(name: self.analyticsClickName)
-        if let _groupId = groupId, let _postId = postId {
-            NeighborhoodService.deletePostMessage(groupId: _groupId, messageId: _postId) { error in
-                if error == nil {
-                    self.parentDelegate?.publicationDeleted()
-                    self.parent?.dismiss(animated: true)
-                }
-            }
-        }
-        if let _eventId = eventId , let _postId = postId{
-            EventService.deletePostMessage(eventId: _eventId, messageId: _postId) { error in
-                self.parentDelegate?.publicationDeleted()
-                self.parent?.dismiss(animated: true)
-            }
-        }
-        if let _chatmessageId = messageId {
-            MessagingService.deletetCommentFor(chatMessageId: _chatmessageId) { error in
-                self.parentDelegate?.publicationDeleted()
-                self.parent?.dismiss(animated: true)
-            }
-        }
-    }
 }
