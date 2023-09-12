@@ -36,18 +36,24 @@ class ReportGroupPageViewController: UIPageViewController {
         guard let reportVc = reportVc else {
             return
         }
-        chooseVc = storyboard?.instantiateViewController(withIdentifier: "reportChooseGroupVC") as? ReportGroupChoosePageViewController
-        chooseVc?.delegate = self
-        chooseVc?.postId = postId
-        chooseVc?.groupId = groupId
-        chooseVc?.eventId = self.eventId
-        chooseVc?.chatMessageId = messageId
-        chooseVc?.conversationId = conversationId
-        chooseVc?.actionId = actionId
-        if let _userid = self.userId {
-            chooseVc?.userId = _userid
+        if(signalType == .group || signalType == .event || signalType == .conversation){
+            haveChosen = true
+            self.titleDelegate?.setTitleForSignal()
+            setViewControllers([reportVc], direction: .forward, animated: true)
+        }else{
+            chooseVc = storyboard?.instantiateViewController(withIdentifier: "reportChooseGroupVC") as? ReportGroupChoosePageViewController
+            chooseVc?.delegate = self
+            chooseVc?.postId = postId
+            chooseVc?.groupId = groupId
+            chooseVc?.eventId = self.eventId
+            chooseVc?.chatMessageId = messageId
+            chooseVc?.conversationId = conversationId
+            chooseVc?.actionId = actionId
+            if let _userid = self.userId {
+                chooseVc?.userId = _userid
+            }
+            setViewControllers([chooseVc!], direction: .forward, animated: true)
         }
-        setViewControllers([chooseVc!], direction: .forward, animated: true)
     }
     
     func viewController(isSend:Bool) -> UIViewController? {
