@@ -82,7 +82,8 @@ extension ParamsAboutViewController: UITableViewDataSource, UITableViewDelegate 
             webUrl = URL(string: _urlStr)
         }
         WebLinkManager.openUrlInApp(url: webUrl, presenterViewController: self)
-
+ 
+        
     }
     
     private func showEmail(email:String) {
