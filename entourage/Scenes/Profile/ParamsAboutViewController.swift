@@ -19,7 +19,7 @@ class ParamsAboutViewController: BasePopViewController {
         MenuItemInfos(title:"params_about_charte",url:CHARTE_URL),
         MenuItemInfos(title:"params_about_partner",url:PARTNER_URL, openInApp: false),
         MenuItemInfos(title:"params_about_faq",slug:MENU_ABOUT_SLUG_FAQ),
-        MenuItemInfos(title:"params_about_email",email:emailContact),
+        MenuItemInfos(title:"params_about_email",url:emailContact),
         MenuItemInfos(title:"params_about_gift",slug:MENU_ABOUT_SLUG_GIFT),
         MenuItemInfos(title:"params_about_ambassador",url:AMBASSADOR_URL),
         MenuItemInfos(title:"params_about_rate_app",url:APPSTORE_URL, openInApp: false),
