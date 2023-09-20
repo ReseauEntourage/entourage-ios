@@ -107,6 +107,27 @@
                                     <action selector="OnBtnNewClick:" destination="VrH-NF-DrI" eventType="touchUpInside" id="JL9-hz-hKx"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQT-pv-D3x">
+                                <rect key="frame" x="222" y="794" width="160" height="34"/>
+                                <color key="backgroundColor" name="orange_app"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="3ec-RG-qpU"/>
+                                    <constraint firstAttribute="height" constant="34" id="toa-c8-mTJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="14"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Créer un événement">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="18"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="OnExpandedFloatingButtonClick:" destination="VrH-NF-DrI" eventType="touchUpInside" id="27M-kw-YMJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2uF-F5-HOj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -114,6 +135,8 @@
                             <constraint firstItem="o1E-lu-6Md" firstAttribute="top" secondItem="2uF-F5-HOj" secondAttribute="top" id="2b2-TN-XCv"/>
                             <constraint firstItem="NKt-xy-FEu" firstAttribute="leading" secondItem="2uF-F5-HOj" secondAttribute="leading" constant="20" id="BGA-S0-1YT"/>
                             <constraint firstItem="Ehd-N9-VRq" firstAttribute="width" secondItem="Ehd-N9-VRq" secondAttribute="height" multiplier="392:416" id="Bkz-KD-J9Y"/>
+                            <constraint firstItem="2uF-F5-HOj" firstAttribute="trailing" secondItem="RQT-pv-D3x" secondAttribute="trailing" constant="32" id="GjT-6i-Zsw"/>
+                            <constraint firstItem="RQT-pv-D3x" firstAttribute="centerY" secondItem="crh-3L-A6A" secondAttribute="centerY" id="Q0J-eo-jus"/>
                             <constraint firstItem="apv-Np-uYM" firstAttribute="leading" secondItem="2uF-F5-HOj" secondAttribute="leading" constant="20" id="S2r-oS-GBC"/>
                             <constraint firstAttribute="bottom" secondItem="NKt-xy-FEu" secondAttribute="bottom" id="Wh7-zC-Zpz"/>
                             <constraint firstItem="apv-Np-uYM" firstAttribute="top" secondItem="2uF-F5-HOj" secondAttribute="top" id="XMP-rJ-bFr"/>
@@ -129,6 +152,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="expandedfloatingButton" destination="RQT-pv-D3x" id="e5G-5s-HX1"/>
+                        <outlet property="floatingButton" destination="crh-3L-A6A" id="bqf-Ex-sU9"/>
                         <outlet property="ui_btn_filter" destination="7Z8-nl-pVO" id="e7Q-yb-R50"/>
                         <outlet property="ui_location_filter" destination="OcW-j0-b1x" id="Zh0-fc-kyj"/>
                         <outlet property="ui_table_view" destination="NKt-xy-FEu" id="j4O-pG-ytz"/>

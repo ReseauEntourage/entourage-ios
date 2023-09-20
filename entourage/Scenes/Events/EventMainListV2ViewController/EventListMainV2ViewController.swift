@@ -22,6 +22,8 @@ class EventListMainV2ViewController:UIViewController{
     //OUTLET
     @IBOutlet weak var ui_btn_filter: UIButton!
     
+    @IBOutlet weak var floatingButton: UIButton!
+    @IBOutlet weak var expandedfloatingButton: UIButton!
     @IBOutlet weak var ui_location_filter: UILabel!
     @IBOutlet weak var ui_title_label: UILabel!
     @IBOutlet weak var ui_table_view: UITableView!
@@ -60,10 +62,22 @@ class EventListMainV2ViewController:UIViewController{
         pullRefreshControl.tintColor = .appOrange
         pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)
         ui_table_view.refreshControl = pullRefreshControl
+        deployButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         loadForInit()
+    }
+    
+    func retractButton() {
+        self.floatingButton.isHidden = false
+        self.expandedfloatingButton.isHidden = true
+    }
+
+    func deployButton() {
+        self.floatingButton.isHidden = true
+        self.expandedfloatingButton.isHidden = false
     }
     
     func loadForInit(){
@@ -105,10 +119,7 @@ class EventListMainV2ViewController:UIViewController{
     }
     
     func configureDTO(){
-        print("eho passed here")
         tableDTO.removeAll()
-        print("eho discover count : " , discoverEvent.count)
-        print("eho my event count : ", myEvent.count)
         if myEvent.count > 0 {
             tableDTO.append(.firstHeader)
             tableDTO.append(.myEventCell)
@@ -143,10 +154,30 @@ class EventListMainV2ViewController:UIViewController{
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
+    @IBAction func OnExpandedFloatingButtonClick(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Event_action_create)
+        let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
+        navVC.parentController = self.tabBarController
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
+    }
+    
 }
 
 //MARK: Tableview delegates
 extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSource{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if ui_table_view.contentOffset.y <= 0.0 {
+            DispatchQueue.main.async {
+                self.deployButton()
+            }
+        }else{
+            DispatchQueue.main.async {
+                self.retractButton()
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableDTO.count
     }

@@ -39,7 +39,7 @@ class MyEventCollectionViewCell:UICollectionViewCell{
     
     func configure(event:Event){
 
-        ui_title_event.text = event.title
+        ui_title_event.text = event.title + "\n"
         
         if let imageUrl = event.metadata?.portrait_url, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
             self.updateImage(mainUrl: mainUrl)
