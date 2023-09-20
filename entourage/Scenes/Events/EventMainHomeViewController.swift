@@ -17,23 +17,13 @@ struct EventsSorted {
 
 class EventMainHomeViewController: UIViewController {
     
-    @IBOutlet weak var ui_view_filter_button: UIView!
-    @IBOutlet weak var ui_view_selector: UIView!
     @IBOutlet weak var ui_image_inside_top_constraint: NSLayoutConstraint!
-    @IBOutlet weak var ui_image_constraint_height: NSLayoutConstraint!
-    @IBOutlet weak var ui_image: UIImageView!
     
-    @IBOutlet weak var ui_constraint_bottom_label: NSLayoutConstraint!
     
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_label_title: UILabel!
     
     @IBOutlet weak var ui_tableview: UITableView!
-    
-    @IBOutlet weak var ui_label_events: UILabel!
-    @IBOutlet weak var ui_view_indicator_events: UIView!
-    @IBOutlet weak var ui_label_discover: UILabel!
-    @IBOutlet weak var ui_view_indicator_discover: UIView!
     
     //Views empty
     @IBOutlet weak var ui_view_empty: UIView!
@@ -444,35 +434,24 @@ class EventMainHomeViewController: UIViewController {
         self.ui_view_empty_discover.isHidden = true
         
         if isEventSelected {
-            ui_label_events.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
-            
-            ui_label_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
-            
-            ui_view_indicator_events.isHidden = false
-            ui_view_indicator_discover.isHidden = true
             self.showHideFilterView(isHidden: true)
         }
         else {
-            ui_label_events.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             
-            ui_label_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             
-            ui_view_indicator_events.isHidden = true
-            ui_view_indicator_discover.isHidden = false
             self.showHideFilterView(isHidden: false)
         }
         self.ui_tableview.reloadData()
     }
     
     func showHideFilterView(isHidden:Bool) {
-        ui_view_filter_button.isHidden = isHidden
         if isHidden {
             ui_tableview.contentInset = UIEdgeInsets(top: viewNormalHeight ,left: 0,bottom: 0,right: 0)
             ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: viewNormalHeight ,left: 0,bottom: 0,right: 0)
         }
         else {
-            ui_tableview.contentInset = UIEdgeInsets(top: viewNormalHeight + ui_view_filter_button.frame.height ,left: 0,bottom: 0,right: 0)
-            ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: viewNormalHeight + ui_view_filter_button.frame.height ,left: 0,bottom: 0,right: 0)
+            ui_tableview.contentInset = UIEdgeInsets(top: viewNormalHeight,left: 0,bottom: 0,right: 0)
+            ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: viewNormalHeight,left: 0,bottom: 0,right: 0)
         }
     }
     
@@ -491,19 +470,13 @@ class EventMainHomeViewController: UIViewController {
         ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
         ui_location_filter.text = currentFilter.getFilterButtonString()
         ui_label_title.text = "event_main_page_title".localized
-        ui_label_events.text = "event_main_page_button_myEvents".localized
-        ui_label_discover.text = "event_main_page_button_discover".localized
         
-        ui_view_selector.addRadiusTopOnly(radius: ApplicationTheme.bigCornerRadius)
         
-        maxImageHeight = ui_image_constraint_height.constant
         imageNormalHeight = maxImageHeight
         
         ui_label_title.font = UIFont.systemFont(ofSize: maxLabelFont)
         labelNormalFontHeight = maxLabelFont
         
-        ui_constraint_bottom_label.constant = maxLabelBottomConstraint
-        labelNormalConstraintBottom = ui_constraint_bottom_label.constant
         
         ui_view_height_constraint.constant = maxViewHeight
         viewNormalHeight = ui_view_height_constraint.constant
@@ -523,7 +496,6 @@ class EventMainHomeViewController: UIViewController {
         
         ui_image_inside_top_constraint.constant = ui_image_inside_top_constraint.constant - topSafeAreaInsets
         
-        ui_view_filter_button.isHidden = true
         ui_tableview.contentInset = UIEdgeInsets(top: viewNormalHeight ,left: 0,bottom: 0,right: 0)
         ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: viewNormalHeight ,left: 0,bottom: 0,right: 0)
         
@@ -719,7 +691,6 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         let yImage = imageNormalHeight - (scrollView.contentOffset.y + imageNormalHeight)
         let diffImage = maxViewHeight - maxImageHeight
         let heightImage = min(max(yImage - diffImage, minImageHeight), maxImageHeight)
-        ui_image.alpha = heightImage / maxImageHeight
         
         let yView = viewNormalHeight - (scrollView.contentOffset.y + viewNormalHeight)
         let heightView = min(max(yView, minViewHeight), maxViewHeight)
@@ -731,11 +702,9 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
             return
         }
         
-        ui_image.isHidden = false
         
         let yLabel = labelNormalConstraintBottom - (scrollView.contentOffset.y + labelNormalConstraintBottom)
         let heightLabel = min(max(yLabel, minLabelBottomConstraint), maxLabelBottomConstraint)
-        ui_constraint_bottom_label.constant = heightLabel
         
         let yLabelFont = labelNormalFontHeight - (scrollView.contentOffset.y + labelNormalFontHeight)
         let heightLabelFont = min(max((minLabelFont * yLabelFont) / minViewHeight, minLabelFont), maxLabelFont)

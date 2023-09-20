@@ -391,6 +391,9 @@
 "mainUserTitleActivity" = "Mon activité";
 "mainUserTitleActions" = "Contributions";
 "mainUserTitleEvents" = "Événements";
+"all_event_title" = "Tous les événements";
+"my_event_title" = "Mes événements";
+"mainUserTitleEvents" = "Événements";
 
 "mainUserTitleGroup" = "Groupe\nde voisins";
 "mainUserTitleGroups" = "Groupes\nde voisins";
@@ -515,7 +518,7 @@
 "param_notifs_switch_notifs" = "Notifications";
 "param_notifs_switch_messages" = "Notifications message";
 "param_notifs_switch_groups" = "Notifications groupe";
-"param_notifs_switch_events" = "Notifications évènement";
+"param_notifs_switch_events" = "Notifications événement";
 "param_notifs_switch_actions" = "Notifications dons & service";
 "param_notifs_validate" = "Appliquer les modifications";
 
@@ -955,10 +958,10 @@
 "event_event_discover_empty_title" = "Oups, aucun événement autour de vous";
 "event_event_discover_empty_subtitle" = "Si aucun événement ne se trouve près de vous, vous pouvez élargir votre zone de recherche.";
 "event_no_event_but_discover" = "C'est l'occasion de découvrir ce qu'il se passe près de chez nous, ou de créer un nouvel événement !";
-"event_no_event_go_create" = "Aucun évènement autour de vous. N'hésitez pas à en créer un !";
+"event_no_event_go_create" = "Aucun événement autour de vous. N'hésitez pas à en créer un !";
 "event_event_discover_clear_filters" = "Réinitialiser les filtres";
-"event_title_btn_discover_event" = "Découvrir les évènements";
-"event_title_btn_create_event" = "Créer un évènement";
+"event_title_btn_discover_event" = "Découvrir les événements";
+"event_title_btn_create_event" = "Créer un événement";
 "event_event_discover_empty_search_title" =  "Mince, aucun résultat ne correspond à votre recherche !";
 "event_event_discover_empty_search_subtitle" = "Vous ne trouvez pas l'événement de vos rêves ? N'attendez plus pour le créer ou élargissez votre zone de recherche.";
 "event_detail_button_more" = "En savoir plus";
@@ -1315,7 +1318,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcomeone_content_main" = "Pour beaucoup, la rue est un lieu de passage.\nPour certains, c'est un quotidien.\nAlors pour commencer, rencontrez celles et\nceux qui la vivent tous les jours.";
 "welcomeone_content" = "Retrouvez nos contenus de sensibilisation içi";
 
-"welcome_three_title_event" = "6000 personnes se sont fait de nouveaux amis lors d'un évènement Entourage";
+"welcome_three_title_event" = "6000 personnes se sont fait de nouveaux amis lors d'un événement Entourage";
 "welcome_three_title_demand" = "Donnez un coup de pouce à vos voisins";
 "welcome_three_title_contrib" = "Pas d'entraide autour de vous ? Créez-la !";
 

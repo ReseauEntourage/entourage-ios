@@ -73,8 +73,7 @@ class MainTabbarViewController: UITabBarController {
     
     
     @objc func showDiscoverEvents() {
-        if let vc = eventsVC.topViewController as? EventMainHomeViewController {
-            vc.setDiscoverFirst()
+        if let vc = eventsVC.topViewController as? EventListMainV2ViewController {
         }
         self.selectedIndex = 4
         self.boldSelectedItem()
@@ -82,8 +81,7 @@ class MainTabbarViewController: UITabBarController {
     }
     
     @objc func showMyEvents() {
-        if let vc = eventsVC.topViewController as? EventMainHomeViewController {
-            vc.setDiscoverFirst()
+        if let vc = eventsVC.topViewController as? EventListMainV2ViewController {
         }
         self.selectedIndex = 4
         self.boldSelectedItem()
@@ -160,7 +158,7 @@ class MainTabbarViewController: UITabBarController {
         groupVC.tabBarItem.tag = 3
         
         
-        let _eventsVC = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "home_events_vc")
+        let _eventsVC = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "home_new_events_vc")
         eventsVC = UINavigationController.init(rootViewController: _eventsVC)
         eventsVC.isNavigationBarHidden = true
         eventsVC.tabBarItem.title = "tabbar_events".localized
