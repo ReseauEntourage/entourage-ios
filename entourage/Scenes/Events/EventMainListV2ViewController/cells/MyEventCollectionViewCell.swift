@@ -51,7 +51,7 @@ class MyEventCollectionViewCell:UICollectionViewCell{
             ui_iv_event.image = UIImage.init(named: "ic_placeholder_event")
         }
             
-        ui_date_event.text = event.startDateTimeFormatted
+        ui_date_event.text = event.startDateFormatted
         ui_place_event.text = event.addressName
     }
     
