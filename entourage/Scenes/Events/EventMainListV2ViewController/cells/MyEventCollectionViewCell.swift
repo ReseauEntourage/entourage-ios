@@ -36,7 +36,6 @@ class MyEventCollectionViewCell:UICollectionViewCell{
         mask.path = path.cgPath
         ui_iv_event.layer.mask = mask
     }
-    
     func configure(event:Event){
 
         ui_title_event.text = event.title + "\n"
