@@ -40,7 +40,7 @@ class HomeMainViewController: UIViewController {
         
         //Notif for updating actions after tabbar selected
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationHomeUpdate), object: nil)
-
+        
         self.ui_notif_bell.image = UIImage.init(named: "ic_notif_off")
         
     }
@@ -104,7 +104,7 @@ class HomeMainViewController: UIViewController {
     func getHomeUser() {
         homeViewModel.getHomeDetail { isOk in
             self.updateTopView()
-
+            
             if self.homeViewModel.userHome.congratulations.count > 0 {
                 self.addTimerShowPop()
             }
@@ -132,15 +132,16 @@ class HomeMainViewController: UIViewController {
         return;
         
         let timer = Timer(fireAt: Date().addingTimeInterval(1), interval: 0, target: self, selector: #selector(self.showCongratPopup), userInfo: nil, repeats: false)
-              
+        
         RunLoop.current.add(timer, forMode: .common)
     }
-        
+    
     @objc private func showCongratPopup() {
         let homeVC = HomeCongratPopupViewController()
         homeVC.configureCongrat(actions: homeViewModel.userHome.congratulations, parentVC: self.tabBarController)
         homeVC.show()
     }
+
     
     @objc func testWelcomeNotif() {
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
@@ -151,14 +152,14 @@ class HomeMainViewController: UIViewController {
     func updateTopView() {
         ui_username.text = String.init(format: "home_title_welcome".localized, homeViewModel.userHome.displayName)
         
-//        ui_username.isUserInteractionEnabled = true
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
-//        ui_username.addGestureRecognizer(tapGestureRecognizer)
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
-            ui_username.isUserInteractionEnabled = true
-            ui_username.addGestureRecognizer(longPressRecognizer)
-            ui_view_user.isUserInteractionEnabled = true
-            ui_view_user.addGestureRecognizer(longPressRecognizer)
+////        ui_username.isUserInteractionEnabled = true
+////        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
+////        ui_username.addGestureRecognizer(tapGestureRecognizer)
+//        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
+//            ui_username.isUserInteractionEnabled = true
+//            ui_username.addGestureRecognizer(longPressRecognizer)
+//            ui_view_user.isUserInteractionEnabled = true
+//            ui_view_user.addGestureRecognizer(longPressRecognizer)
         
         
         if let _urlstr = homeViewModel.userHome.avatarURL,  let url = URL(string: _urlstr) {
@@ -294,6 +295,7 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if indexPath.section == section_agir {
+            AnalyticsLoggerManager.logEvent(name: Home_to_begin)
             let action = homeViewModel.actions[indexPath.row - 1]
             homeViewModel.getEventFromAction(action)
         }
@@ -344,6 +346,10 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     
     func showNeighborhoodDetail(id:Int) {
         DeepLinkManager.showNeighborhoodDetail(id: id)
+    }
+    
+    func showNeighborhoodDetailWithCreatePost(id:Int,group:Neighborhood) {
+        DeepLinkManager.showNeighborhoodDetailWithCreatePost(id: id, group:group)
     }
     
     func showAllNeighborhoods() {
@@ -444,6 +450,29 @@ extension HomeMainViewController:SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         refreshDatasFromTab()
     }
+}
+
+extension HomeMainViewController:WelcomeOneDelegate{
+    func onClickedLink() {
+        AnalyticsLoggerManager.logEvent(name: Action_WelcomeOfferHelp_Day1)
+        showResources()
+    }
+    
+    
+}
+
+extension HomeMainViewController:WelcomeTwoDelegate {
+    func goMyGroup(id: Int, group: Neighborhood) {
+        showNeighborhoodDetailWithCreatePost(id: id,group:group)
+        
+    }
+    func goGroupList() {
+        self.showAllNeighborhoods()
+    }
+}
+
+extension HomeMainViewController:WelcomeThreeDelegate{
+    
 }
 
 enum EntourageLink: String {

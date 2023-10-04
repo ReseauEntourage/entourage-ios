@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NunitoSans-Bold.ttf">
+            <string>NunitoSans-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="jEH-oH-HPd" customClass="SecondaryTextWelcomeCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="543" height="90"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jEH-oH-HPd" id="7po-BB-mWg">
+                <rect key="frame" x="0.0" y="0.0" width="543" height="90"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Besoin d'inspiration ?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbp-7R-ZEi">
+                        <rect key="frame" x="20" y="10" width="503" height="72"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                        <color key="textColor" name="orange_app"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" name="orange_tres_tres_clair"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="dbp-7R-ZEi" secondAttribute="trailing" constant="20" id="Jz2-l2-WIn"/>
+                    <constraint firstItem="dbp-7R-ZEi" firstAttribute="top" secondItem="7po-BB-mWg" secondAttribute="top" constant="10" id="fA1-kq-lcG"/>
+                    <constraint firstAttribute="bottom" secondItem="dbp-7R-ZEi" secondAttribute="bottom" constant="8" id="n6F-YQ-z5r"/>
+                    <constraint firstItem="dbp-7R-ZEi" firstAttribute="leading" secondItem="7po-BB-mWg" secondAttribute="leading" constant="20" id="qA1-Hj-vgq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ui_label" destination="dbp-7R-ZEi" id="y3e-iN-XIx"/>
+            </connections>
+            <point key="canvasLocation" x="216.03053435114504" y="-45.070422535211272"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="orange_app">
+            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_tres_tres_clair">
+            <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

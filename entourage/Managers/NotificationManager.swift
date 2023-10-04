@@ -26,6 +26,7 @@ struct NotificationManager {
     static func didRegisterForRemoteNotificationsWithDeviceToken(token:Data) {
         let tokenStr = self.deviceTokenString(data: token)
         Logger.print("***** token str ? \(tokenStr)")
+        print("eho token ", tokenStr)
         UserDefaults.pushToken = tokenStr
         if let _ = UserDefaults.currentUser {
             self.getAuthorizationStatusWithCompletionHandler { status in

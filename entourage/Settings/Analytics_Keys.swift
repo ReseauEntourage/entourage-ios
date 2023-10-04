@@ -150,6 +150,7 @@ let Home_action_eventcount = "Action__Home__EventCounter"
 let Home_action_moderator = "Action__Home__Moderator"
 let Home_action_map = "Action__Home__Map"
 let Home_view_notif = "View__Notif"
+let Home_to_begin = "Action__Home__HowToStart"
 
 //SHARE ACTION
 let contrib_share = "Action__Contrib__Share"
@@ -230,6 +231,12 @@ let PreOnboard_view_choice = "View__Start__SignUpOrLoginPage"
 let PreOnboard_action_signup = "Action__Onboarding__SignUpStart"
 let PreOnboard_action_signin = "Action__Login__LoginStart"
 
+//WELCOME PUSH
+let View_WelcomeOfferHelp_Day1 = "View_WelcomeOfferHelp_Day1"
+let Action_WelcomeOfferHelp_Day1 = "Action_WelcomeOfferHelp_Day1"
+let View_WelcomeOfferHelp_Day2 = "View_WelcomeOfferHelp_Day2"
+let Action_WelcomeOfferHelp_Day2 = "Action_WelcomeOfferHelp_Day2"
+
 //Onboarding
 let Onboard_name = "View__Onboarding__InputNames"
 let Onboard_code = "View__Onboarding__InputCode"
@@ -263,3 +270,26 @@ let action_demand_report  = "Action__Demand__Report"
 let action_contrib_report_confirm = "Action__Contrib__Report_Confirmation"
 let action_demand_report_confim = "Action__Demand__Report_Confirmation"
 
+let View_WelcomeOfferHelp_Day5A = "View_WelcomeOfferHelp_Day5A"
+
+let Action_WelcomeOfferHelp_Day5A = "Action_WelcomeOfferHelp_Day5A"
+
+let Action_WelcomeOfferHelp_Day5ACard = "Action_WelcomeOfferHelp_Day5ACard"
+
+let View_WelcomeOfferHelp_Day5B = "View_WelcomeOfferHelp_Day5B"
+
+let Action_WelcomeOfferHelp_Day5B = "Action_WelcomeOfferHelp_Day5B"
+
+let Action_WelcomeOfferHelp_Day5BCard = "Action_WelcomeOfferHelp_Day5BCard"
+
+let View_WelcomeOfferHelp_Day5C = "View_WelcomeOfferHelp_Day5C"
+
+let Action_WelcomeOfferHelp_Day5C = "Action_WelcomeOfferHelp_Day5C"
+
+//WELCOME FOUR
+let View_WelcomeOfferHelp_Day8 = "View_WelcomeOfferHelp_Day8"
+let Action_WelcomeOfferHelp_Day8 = "Action_WelcomeOfferHelp_Day8"
+
+//WELCOME FIVE
+let View_WelcomeOfferHelp_Day11 = "View_WelcomeOfferHelp_Day11"
+let Action_WelcomeOfferHelp_Day11 = "Action_WelcomeOfferHelp_Day11"

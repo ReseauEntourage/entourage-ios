@@ -171,6 +171,18 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVC, animated: true)
         }
     }
+    
+    static func showNeighborhoodDetailWithCreatePost(id:Int,group:Neighborhood) {
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
+        if let navVC = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodDetailViewController {
+            vc.isAfterCreation = false
+            vc.neighborhoodId = id
+            vc.isShowCreatePost = true
+            vc.neighborhood = group
+            AppState.getTopViewController()?.present(navVC, animated: true)
+        }
+    }
+
 
     
     static func showOuting(id:Int) {
@@ -191,6 +203,64 @@ struct DeepLinkManager {
             vc.action = nil
             vc.isContrib = isContrib
             AppState.getTopViewController()?.present(navVc, animated: true)
+        }
+    }
+    
+    static func showWelcomeOne(){
+        DispatchQueue.main.async {
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    vc.delegate = currentVc.self
+                    currentVc.present(vc, animated: true)
+                }
+                
+            }
+        }
+    }
+    static func showWelcomeTwo(){
+        DispatchQueue.main.async {
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    vc.delegate = currentVc.self
+                    currentVc.present(vc, animated: true)
+                }
+                
+            }
+        }
+    }
+    static func showWelcomeThree(){
+        DispatchQueue.main.async {
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "welcomethreevc") as? WelcomeThreeViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    vc.delegate = currentVc.self
+                    currentVc.present(vc, animated: true)
+                }
+                
+            }
+        }
+    }
+    static func showWelcomeFour(){
+        DispatchQueue.main.async {
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    currentVc.present(vc, animated: true)
+                }
+            }
+        }
+        
+    }
+    static func showWelcomeFive(){
+        DispatchQueue.main.async {
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "welcomefivevc") as? WelcomeFiveViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    currentVc.present(vc, animated: true)
+                }
+            }
         }
     }
 
@@ -300,6 +370,13 @@ struct DeepLinkManager {
         if let vc = AppState.getTopViewController(){
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
                 _tabbar.showMyEvents()
+            }
+        }
+    }
+    static func showDiscoverOutingListUniversalLink() {
+        if let vc = AppState.getTopViewController(){
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showDiscoverEvents()
             }
         }
     }

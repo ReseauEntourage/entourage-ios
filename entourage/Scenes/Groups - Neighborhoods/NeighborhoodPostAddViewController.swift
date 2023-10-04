@@ -43,7 +43,7 @@ class NeighborhoodPostAddViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         ui_top_view.populateView(title: "neighborhood_add_post_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: false)
         ui_lb_message.text = "neighborhood_add_post_message_title".localized
         ui_lb_message_dsc.text = "neighborhood_add_post_message_subtitle".localized

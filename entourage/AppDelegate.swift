@@ -86,8 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func handleAppLaunchFromNotificationCenter(userInfos:[String:Any]) {
         self.handleNotification(userInfos: userInfos, isFromBackground: true, isFromStart: true)
-        
         AppState.checkNotifcationsAndGoMainScreen()
+        
     }
     
     
@@ -141,6 +141,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func getTopViewController() -> UIViewController? {
+        if var topController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            return topController
+        }
+        return nil
+    }
 
     
     func handleNotification(userInfos:[String:Any]?, isFromBackground:Bool, isFromStart:Bool) {
@@ -148,15 +158,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.print("***** isFrom BG : \(isFromBackground)")
         Logger.print("***** isFrom Start : \(isFromStart)")
         
+        if let userInfos = userInfos, let content = userInfos["content"] as? [String:Any],let extras = content["extra"] as? [String:Any], let stage = extras["stage"] as? String {
+            if stage == "h1" {
+                DeepLinkManager.showWelcomeOne()
+                return
+            }
+            if stage == "j2" {
+                DeepLinkManager.showWelcomeTwo()
+                return
+            }
+            if stage == "j5" {
+                DeepLinkManager.showWelcomeThree()
+                return
+            }
+            if stage == "j8" {
+                DeepLinkManager.showWelcomeFour()
+                return
+            }
+            if stage == "j11" {
+                DeepLinkManager.showWelcomeFive()
+                return
+            }
+            
+        }
+        
         guard let userInfos = userInfos,let content = userInfos["content"] as? [String:Any], let extras = content["extra"] as? [String:Any],let instance = extras["instance"] as? String, let instanceId = extras["instance_id"] as? Int  else {
             return
         }
+        
+        
         Logger.print("***** extras : \(extras) ")
         Logger.print("***** Instance : \(instance) - id : \(instanceId)")
         let postId = extras["post_id"] as? Int
         Logger.print("***** post id : \(postId) ")
-        
-        let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId, postId: postId)
+        let stage = extras["stage"]
+        let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId, postId: postId, stage: stage as! String)
         
         if isFromBackground {
             DeepLinkManager.presentAction(notification: notifData)
