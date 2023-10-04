@@ -225,13 +225,6 @@ class HomeMainViewController: UIViewController {
         homeVC.show()
     }
     
-    
-    @objc func testWelcomeNotif() {
-        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "paramsHelpVC") as! ParamsAboutViewController
-        self.navigationController?.present(vc, animated: true, completion: nil)
-    }
-    
     func updateTopView() {
         ui_username.text = String.init(format: "home_title_welcome".localized, homeViewModel.userHome.displayName)
         
