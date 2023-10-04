@@ -166,10 +166,15 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         self.ui_textview_message.text = nil
         ui_iv_bt_send.image = UIImage.init(named: "ic_send_comment_off")
         NeighborhoodService.postCommentFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId, message: message) { error in
-            
+
             if error == nil {
                 if isRetry {
-                    self.messagesForRetry.remove(at: positionForRetry)
+                    // Ensure positionForRetry is in valid range before removing from array
+                    if positionForRetry >= 0 && positionForRetry < self.messagesForRetry.count {
+                        self.messagesForRetry.remove(at: positionForRetry)
+                    } else {
+                        print("Error: positionForRetry out of range. Value: \(positionForRetry), Array Count: \(self.messagesForRetry.count)")
+                    }
                 }
                 self.getMessages()
                 return
@@ -181,13 +186,13 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                 postMsg.content = message
                 postMsg.user = UserLightNeighborhood()
                 postMsg.isRetryMsg = true
-                
+
                 self.messagesForRetry.append(postMsg)
-                
+
                 self.isStartEditing = false
                 self.ui_view_empty.isHidden = true
                 self.ui_tableview.reloadData()
-                
+
                 if self.messages.count + self.messagesForRetry.count > 0 {
                     DispatchQueue.main.async {
                         let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
@@ -197,6 +202,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             }
         }
     }
+
     
     func getDetailPost() {
         NeighborhoodService.getDetailPostMessage(neighborhoodId: neighborhoodId, parentPostId: parentCommentId) { message, error in

@@ -558,69 +558,76 @@ class NeighborhoodHomeViewController: UIViewController {
 extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (isGroupsSelected && myNeighborhoods.isEmpty && !isfirstLoadingMyGroup) || (isSearch && neighborhoodsSearch.isEmpty && isSendedSearch) || (!isGroupsSelected && neighborhoodsDiscovered.isEmpty) {
-          //  showEmptyView()
-        }
-        else {
-            hideEmptyView()
-        }
-        
-        return isGroupsSelected ? myNeighborhoods.count : isSearch ? neighborhoodsSearch.count + 1 : neighborhoodsDiscovered.count + 1 //Search
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isGroupsSelected {
-            let neighborhood = myNeighborhoods[indexPath.row]
-            
-            var cellName = "cellGroup"
-            
-            if neighborhood.creator.uid == UserDefaults.currentUser?.sid {
-                cellName = "cellGroupMy"
+            if (isGroupsSelected && myNeighborhoods.isEmpty && !isfirstLoadingMyGroup) || (isSearch && neighborhoodsSearch.isEmpty && isSendedSearch) || (!isGroupsSelected && neighborhoodsDiscovered.isEmpty) {
+              //  showEmptyView()
+            }
+            else {
+                hideEmptyView()
             }
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! NeighborhoodHomeGroupCell
+            return isGroupsSelected ? myNeighborhoods.count : isSearch ? neighborhoodsSearch.count + 1 : neighborhoodsDiscovered.count + 1 //Search
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            if isGroupsSelected {
+                guard let neighborhood = myNeighborhoods[safe: indexPath.row] else {
+                    return UITableViewCell()
+                }
+                
+                let cellName = (neighborhood.creator.uid == UserDefaults.currentUser?.sid) ? "cellGroupMy" : "cellGroup"
+                
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as? NeighborhoodHomeGroupCell else {
+                    return UITableViewCell()
+                }
+                
+                cell.populateCell(neighborhood: neighborhood)
+                
+                return cell
+            }
             
+            if indexPath.row == 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellSearch", for: indexPath) as? NeighborhoodHomeSearchCell else {
+                    return UITableViewCell()
+                }
+                
+                cell.populateCell(delegate: self, isSearch:isSearch,isCellUserSearch: false)
+                
+                return cell
+            }
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroup", for: indexPath) as? NeighborhoodHomeGroupCell,
+                  let neighborhood = isSearch ? neighborhoodsSearch[safe: indexPath.row - 1] : neighborhoodsDiscovered[safe: indexPath.row - 1] else {
+                return UITableViewCell()
+            }
+
             cell.populateCell(neighborhood: neighborhood)
             
             return cell
         }
         
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellSearch", for: indexPath) as! NeighborhoodHomeSearchCell
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            var neighborhood: Neighborhood?
             
-            cell.populateCell(delegate: self, isSearch:isSearch,isCellUserSearch: false)
-            
-            return cell
-        }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroup", for: indexPath)as! NeighborhoodHomeGroupCell
-        let neighborhood = isSearch ? neighborhoodsSearch[indexPath.row - 1] : neighborhoodsDiscovered[indexPath.row - 1]
-        cell.populateCell(neighborhood: neighborhood)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var neighborhood:Neighborhood
-        
-        if isGroupsSelected {
-            neighborhood = myNeighborhoods[indexPath.row]
-            AnalyticsLoggerManager.logEvent(name: Action_Group_MyGroup_Card)
-        }
-        else {
-            if indexPath.row == 0 { return }
-            neighborhood = isSearch ? neighborhoodsSearch[indexPath.row - 1] : neighborhoodsDiscovered[indexPath.row - 1]
-            
-            if isSearch {
-                AnalyticsLoggerManager.logEvent(name: Action_Group_Search_SeeResult)
+            if isGroupsSelected {
+                neighborhood = myNeighborhoods[safe: indexPath.row]
+                AnalyticsLoggerManager.logEvent(name: Action_Group_MyGroup_Card)
             }
             else {
-                AnalyticsLoggerManager.logEvent(name: Action_Group_Discover_Card)
+                if indexPath.row == 0 { return }
+                neighborhood = isSearch ? neighborhoodsSearch[safe: indexPath.row - 1] : neighborhoodsDiscovered[safe: indexPath.row - 1]
+                
+                if isSearch {
+                    AnalyticsLoggerManager.logEvent(name: Action_Group_Search_SeeResult)
+                }
+                else {
+                    AnalyticsLoggerManager.logEvent(name: Action_Group_Discover_Card)
+                }
             }
+            
+            guard let neighborhoodId = neighborhood?.uid else { return }
+            
+            self.showNeighborhood(neighborhoodId: neighborhoodId, neighborhood: neighborhood)
         }
-        
-        self.showNeighborhood(neighborhoodId: neighborhood.uid,neighborhood:neighborhood)
-        
-    }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if isLoading { return }
@@ -704,5 +711,12 @@ extension NeighborhoodHomeViewController: NeighborhoodHomeSearchDelegate {
         else {
             isAlreadyClearRows = false
         }
+    }
+}
+
+
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }

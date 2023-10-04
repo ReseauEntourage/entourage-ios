@@ -352,9 +352,21 @@ struct DeepLinkManager {
     }
     
     static func showContribListUniversalLink() {
-        if let vc = AppState.getTopViewController(){
-            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
-                _tabbar.showActionsContrib()
+        if let vc = AppState.getTopViewController() {
+            // Verifier si le viewController est présenté comme modal
+            if vc.isModal {
+                // Fermer le modal avant de lancer la commande
+                vc.dismiss(animated: true) {
+                    if let _vc = AppState.getTopViewController() {
+                        if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
+                            _tabbar.showActionsContrib()
+                        }
+                    }
+                }
+            } else {
+                if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                    _tabbar.showActionsContrib()
+                }
             }
         }
     }

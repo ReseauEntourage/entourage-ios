@@ -83,7 +83,7 @@ class MainTabbarViewController: UITabBarController {
     
     @objc func showMyEvents() {
         if let vc = eventsVC.topViewController as? EventMainHomeViewController {
-            vc.setMyFirst()
+            vc.setDiscoverFirst()
         }
         self.selectedIndex = 4
         self.boldSelectedItem()
