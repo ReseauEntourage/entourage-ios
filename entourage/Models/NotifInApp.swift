@@ -29,7 +29,7 @@ struct NotifInApp:Codable {
     
     
     func getNotificationPushData() -> NotificationPushData {
-        return NotificationPushData(instanceName: instanceString, instanceId: instanceId ?? 0, postId:postId, stage: "")
+        return NotificationPushData(instanceName: instanceString, instanceId: instanceId ?? 0, postId:postId)
     }
     
     
