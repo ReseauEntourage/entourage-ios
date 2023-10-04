@@ -63,7 +63,7 @@ class MainTabbarViewController: UITabBarController {
     }
     @objc func showMyNeighborhoods() {
         if let vc = groupVC.topViewController as? NeighborhoodHomeViewController {
-            vc.setMyFirst()
+            vc.setDiscoverFirst()
         }
         self.selectedIndex = 3
         self.boldSelectedItem()

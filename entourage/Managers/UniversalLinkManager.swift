@@ -32,6 +32,13 @@ struct UniversalLinkManager {
             if components.host != stagingURL {
                 iterator = 1
             }
+            
+            if pathComponents.contains("actions"){
+                if let url = components.url {
+                    print("eho url ", url)
+                    WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
+                }
+            }
                 
             if pathComponents.contains("outings") && pathComponents.contains("chat_messages"){
                 if pathComponents.count > 3 + iterator , let _eventhashId = pathComponents[2+iterator] as? String, let _posthashId = pathComponents[3+iterator] as? String {

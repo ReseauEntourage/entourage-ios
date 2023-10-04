@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import ActiveLabel
+
+protocol DetailMessageTopCellDelegate{
+    func showWebView(url:URL)
+}
 
 class DetailMessageTopPostCell: UITableViewCell {
     
@@ -13,7 +18,7 @@ class DetailMessageTopPostCell: UITableViewCell {
     
     @IBOutlet weak var ui_user: UILabel!
     
-    @IBOutlet weak var ui_comment: UILabel!
+    @IBOutlet weak var ui_comment: ActiveLabel!
     
     @IBOutlet weak var ui_image_post: UIImageView?
     
@@ -25,24 +30,32 @@ class DetailMessageTopPostCell: UITableViewCell {
     
     var postId:Int = 0
     var imageUrl:URL? = nil
+    var delegate:DetailMessageTopCellDelegate?
     
     var postMessage:PostMessage!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        print("eho top cell")
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
         ui_user.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 12), color: .appOrangeLight))
         
         ui_comment.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        
+        ui_comment.enabledTypes = [.url]
+        ui_comment.handleURLTap { url in
+            // Ouvrez le lien dans Safari, par exemple
+            self.delegate?.showWebView(url: url)
+        }
         ui_image_post?.layer.cornerRadius = 8
+
     }
     
     func populateCell(message:PostMessage) {
         self.postMessage = message
         ui_user.text = "\(message.user?.displayName ?? "-") le \(message.createdDateFormatted)"
         ui_comment.text = message.content
+
         postId = message.uid
         
         if let _url = message.user?.avatarURL, let url = URL(string: _url) {

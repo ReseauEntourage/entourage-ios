@@ -256,7 +256,7 @@ extension EventDetailMessagesViewController: UITableViewDataSource, UITableViewD
             
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! DetailMessageTopPostCell
             cell.populateCell(message: postMessage!)
-            
+            cell.delegate = self
             return cell
         }
         
@@ -383,4 +383,10 @@ extension EventDetailMessagesViewController:GroupDetailDelegate {
 //MARK: - Protocol -
 protocol UpdateCommentCountDelegate:AnyObject {
     func updateCommentCount(parentCommentId:Int,nbComments:Int, currentIndexPathSelected:IndexPath?)
+}
+
+extension EventDetailMessagesViewController:DetailMessageTopCellDelegate{
+    func showWebView(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+    }
 }

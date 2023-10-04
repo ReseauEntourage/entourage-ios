@@ -388,6 +388,8 @@
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
 		2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */; };
 		2636B9642A7BA199007EE1B2 /* anim_rugby.json in Resources */ = {isa = PBXBuildFile; fileRef = 2636B9632A7BA199007EE1B2 /* anim_rugby.json */; };
+		264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */; };
+		264446D22AA1E05B00EA2EED /* ActionPassedOneContrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264446D12AA1E05B00EA2EED /* ActionPassedOneContrib.swift */; };
 		2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */; };
 		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
@@ -796,6 +798,8 @@
 		2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UILabel.swift; sourceTree = "<group>"; };
 		2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RugbySpecialPopUpViewController.swift; sourceTree = "<group>"; };
 		2636B9632A7BA199007EE1B2 /* anim_rugby.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anim_rugby.json; sourceTree = "<group>"; };
+		264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPasseOneDemand.swift; sourceTree = "<group>"; };
+		264446D12AA1E05B00EA2EED /* ActionPassedOneContrib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPassedOneContrib.swift; sourceTree = "<group>"; };
 		2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
@@ -1740,6 +1744,8 @@
 			children = (
 				26BE845F2A67F26000DC2586 /* ActionPassedOneVC.swift */,
 				26BE84632A67F50500DC2586 /* ActionPassedTwoVC.swift */,
+				264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */,
+				264446D12AA1E05B00EA2EED /* ActionPassedOneContrib.swift */,
 			);
 			path = actionpassed;
 			sourceTree = "<group>";
@@ -1846,14 +1852,14 @@
 			mainGroup = 025D870D278DD33600909101;
 			packageReferences = (
 				02DB3BC627A14DFC004732C9 /* XCRemoteSwiftPackageReference "Nantes" */,
-				0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */,
+				0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */,
+				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */,
 				029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02E0098A27E37B1100BB23CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */,
+				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */,
 				02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
-				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */,
+				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */,
 			);
 			productRefGroup = 025D8717278DD33600909101 /* Products */;
 			projectDirPath = "";
@@ -2122,6 +2128,7 @@
 				02B94C23284F594A006059EF /* HomeMainViewModel.swift in Sources */,
 				2619E1432A261C93000BD574 /* WelcomeTwoViewController.swift in Sources */,
 				26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */,
+				264446D22AA1E05B00EA2EED /* ActionPassedOneContrib.swift in Sources */,
 				02E0EFA328787082009B2C65 /* EventDetailTopFullCell.swift in Sources */,
 				02A92C222897E68B000DFF95 /* ActionCreatePhase1ViewController.swift in Sources */,
 				0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */,
@@ -2163,6 +2170,7 @@
 				024131D9286207D100561FB4 /* EventMainHomeViewController.swift in Sources */,
 				021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */,
 				026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */,
+				264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */,
 				02FB5444287DC01200E4B9FA /* EventDetailFullCell.swift in Sources */,
 				025D8766278DEC2100909101 /* Extensions.swift in Sources */,
 				028D4F562937970500A0BDD3 /* OnboardingPhase1ViewController.swift in Sources */,
@@ -2692,7 +2700,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+		020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -2700,7 +2708,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */ = {
+		0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swiftify-Corp/IHProgressHUD.git";
 			requirement = {
@@ -2708,7 +2716,7 @@
 				minimumVersion = 0.1.8;
 			};
 		};
-		0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -2724,7 +2732,7 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -2748,7 +2756,7 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */ = {
+		02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/optonaut/ActiveLabel.swift.git";
 			requirement = {
@@ -2769,22 +2777,22 @@
 /* Begin XCSwiftPackageProductDependency section */
 		020AF5DD286064AC0012AE60 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			package = 020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */;
 			productName = Lottie;
 		};
 		0246604C27D8A49E00FE1EF8 /* IHProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */;
+			package = 0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */;
 			productName = IHProgressHUD;
 		};
 		0288A8E327CD11E9008D7011 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */;
 			productName = SDWebImage;
 		};
 		0288A8E527CD11E9008D7011 /* SDWebImageMapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */;
 			productName = SDWebImageMapKit;
 		};
 		029E307E27DB60D300B12357 /* FirebaseAnalytics */ = {
@@ -2794,7 +2802,7 @@
 		};
 		02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = 02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */;
 			productName = IQKeyboardManagerSwift;
 		};
 		02DB3BC727A14DFC004732C9 /* Nantes */ = {
@@ -2824,7 +2832,7 @@
 		};
 		02E9D6C12970124900F9625D /* ActiveLabel */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */;
+			package = 02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */;
 			productName = ActiveLabel;
 		};
 		02F827702967287B000CA150 /* SimpleKeychain */ = {

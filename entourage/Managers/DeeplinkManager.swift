@@ -11,6 +11,52 @@ import Foundation
 struct DeepLinkManager {
     
     static func presentAction(notification:NotificationPushData) {
+        if notification.stage != nil && !notification.stage!.isEmpty{
+            if notification.stage == "h1" {
+                DeepLinkManager.showWelcomeOne()
+                return
+            }
+            if notification.stage == "j2" {
+                DeepLinkManager.showWelcomeTwo()
+                return
+            }
+            if notification.stage == "j5" {
+                DeepLinkManager.showWelcomeThree()
+                return
+            }
+            if notification.stage == "j8" {
+                DeepLinkManager.showWelcomeFour()
+                return
+            }
+            if notification.stage == "j11" {
+                DeepLinkManager.showWelcomeFive()
+                return
+            }
+            
+        }
+        if notification.context != nil && !notification.context!.isEmpty{
+            if notification.context == "h1" {
+                DeepLinkManager.showWelcomeOne()
+                return
+            }
+            if notification.context == "j2" {
+                DeepLinkManager.showWelcomeTwo()
+                return
+            }
+            if notification.stage == "j5" {
+                DeepLinkManager.showWelcomeThree()
+                return
+            }
+            if notification.context == "j8" {
+                DeepLinkManager.showWelcomeFour()
+                return
+            }
+            if notification.context == "j11" {
+                DeepLinkManager.showWelcomeFive()
+                return
+            }
+            
+        }
         switch notification.instanceType {
         case .users:
             showUser(userId: notification.instanceId)
@@ -419,6 +465,7 @@ struct DeepLinkManager {
             }
         }
     }
+    
     
     static func showResourceUniversalLink(id:String) {
         if let vc = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {

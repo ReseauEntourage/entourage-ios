@@ -293,3 +293,17 @@ let Action_WelcomeOfferHelp_Day8 = "Action_WelcomeOfferHelp_Day8"
 //WELCOME FIVE
 let View_WelcomeOfferHelp_Day11 = "View_WelcomeOfferHelp_Day11"
 let Action_WelcomeOfferHelp_Day11 = "Action_WelcomeOfferHelp_Day11"
+
+let View__StateDemandPop__Day10 = "View__StateDemandPop__Day10"
+let Clic__StateDemandPop__No__Day10 = "Clic__StateDemandPop__No__Day10"
+let Clic__StateDemandPop__Yes__Day10 = "Clic__StateDemandPop__Yes__Day10"
+let View__StateDemandPop__No__Day10 = "View__StateDemandPop__No__Day10"
+let View__DeleteDemandPop__Day10 = "View__DeleteDemandPop__Day10"
+let   Clic__SeeDemand__Day10 = "Clic__SeeDemand__Day10"
+
+let  View__StateContribPop__Day10 = "View__StateContribPop__Day10"
+let  Clic__StateContribPop__No__Day10 = "Clic__StateContribPop__No__Day10"
+let  Clic__StateContribPop__Yes__Day10 = "Clic__StateContribPop__Yes__Day10"
+let  View__StateContribPop__No__Day10 = "View__StateContribPop__No__Day10"
+let  Clic__SeeContrib__Day10 = "Clic__SeeContrib__Day10"
+let   View__DeleteContribPop__Day10 = "View__DeleteContribPop__Day10"
