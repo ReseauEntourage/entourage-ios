@@ -56,7 +56,61 @@ class HomeMainViewController: UIViewController {
         }
         
         AnalyticsLoggerManager.logEvent(name: Home_view_home)
+        //TODO here reconnect
+        //showPopLeave(actionType: "contribution", title: "my contrib")
+        //showPopLeave(actionType: "solicitation", title: "my demand")
+        checkDateAndShowPopUp()
         
+    }
+    
+    func checkDateAndShowPopUp() {
+        let userDefaults = UserDefaults.standard
+
+           if userDefaults.bool(forKey: "isPopupShown") {
+               // Popup already shown, return
+               return
+           }
+
+        let currentDate = Date()
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
+
+        // Date de début (27 août à 17h)
+        var startComponents = DateComponents()
+        startComponents.year = 2023
+        startComponents.month = 8
+        startComponents.day = 27
+        startComponents.hour = 17
+        guard let startDate = calendar.date(from: startComponents) else {
+            return
+            
+        }
+
+        // Date de fin (28 août à 17h)
+        var endComponents = DateComponents()
+        endComponents.year = 2023
+        endComponents.month = 8
+        endComponents.day = 28
+        endComponents.hour = 17
+        guard let endDate = calendar.date(from: endComponents) else {
+            return
+            
+        }
+
+        // Vérifier si la date actuelle est entre la date de début et la date de fin
+        
+        let condition = currentDate >= startDate && currentDate <= endDate
+        print("eho popup : " , condition )
+        if currentDate >= startDate && currentDate <= endDate {
+            //Call to participate
+            NeighborhoodService.joinNeighborhood(groupId: 44) { user, error in
+                if let rugbySpecialPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "RugbySpecialPopUpVC") {
+                    rugbySpecialPopUpVC.modalPresentationStyle = .overCurrentContext
+                    self.present(rugbySpecialPopUpVC, animated: true, completion: nil)
+                    userDefaults.set(true, forKey: "isPopupShown")
+                }
+            }
+        }
     }
     
     func extrctURLComponent(urlString:String) -> URLComponents{
@@ -101,12 +155,43 @@ class HomeMainViewController: UIViewController {
         
     }
     
+    func showPopLeave(actionType:String, title:String) {
+        if actionType == "solicitation"{
+            let contentString = String(format: "custom_dialog_action_content_one_demande".localized, title)
+            let customAlert = MJAlertController()
+            let buttonAccept = MJAlertButtonType(title: "No".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+            let buttonCancel = MJAlertButtonType(title: "Yes".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+            
+            customAlert.configureAlert(alertTitle: "custom_dialog_action_title_one_demand".localized, message: contentString, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+            
+            customAlert.alertTagName = .None
+            customAlert.delegate = self
+            customAlert.show()
+        }else if actionType == "contribution" {
+            let contentString = String(format: "custom_dialog_action_content_one_contrib".localized, title)
+            
+            let customAlert = MJAlertController()
+            let buttonAccept = MJAlertButtonType(title: "No".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+            let buttonCancel = MJAlertButtonType(title: "Yes".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+            
+            customAlert.configureAlert(alertTitle: "custom_dialog_action_title_one_contrib".localized, message: contentString, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+            
+            customAlert.alertTagName = .None
+            customAlert.delegate = self
+            customAlert.show()
+        }
+        
+    }
+    
     func getHomeUser() {
         homeViewModel.getHomeDetail { isOk in
             self.updateTopView()
             
             if self.homeViewModel.userHome.congratulations.count > 0 {
                 self.addTimerShowPop()
+            }
+            if self.homeViewModel.userHome.unclosedAction != nil {
+                self.showPopLeave(actionType: (self.homeViewModel.userHome.unclosedAction?.actionType)!, title: (self.homeViewModel.userHome.unclosedAction?.title)!)
             }
         }
     }
@@ -141,7 +226,7 @@ class HomeMainViewController: UIViewController {
         homeVC.configureCongrat(actions: homeViewModel.userHome.congratulations, parentVC: self.tabBarController)
         homeVC.show()
     }
-
+    
     
     @objc func testWelcomeNotif() {
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
@@ -152,14 +237,14 @@ class HomeMainViewController: UIViewController {
     func updateTopView() {
         ui_username.text = String.init(format: "home_title_welcome".localized, homeViewModel.userHome.displayName)
         
-////        ui_username.isUserInteractionEnabled = true
-////        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
-////        ui_username.addGestureRecognizer(tapGestureRecognizer)
-//        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
-//            ui_username.isUserInteractionEnabled = true
-//            ui_username.addGestureRecognizer(longPressRecognizer)
-//            ui_view_user.isUserInteractionEnabled = true
-//            ui_view_user.addGestureRecognizer(longPressRecognizer)
+        ////        ui_username.isUserInteractionEnabled = true
+        ////        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
+        ////        ui_username.addGestureRecognizer(tapGestureRecognizer)
+        //        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
+        //            ui_username.isUserInteractionEnabled = true
+        //            ui_username.addGestureRecognizer(longPressRecognizer)
+        //            ui_view_user.isUserInteractionEnabled = true
+        //            ui_view_user.addGestureRecognizer(longPressRecognizer)
         
         
         if let _urlstr = homeViewModel.userHome.avatarURL,  let url = URL(string: _urlstr) {
@@ -472,6 +557,18 @@ extension HomeMainViewController:WelcomeTwoDelegate {
 }
 
 extension HomeMainViewController:WelcomeThreeDelegate{
+    
+}
+
+extension HomeMainViewController:MJAlertControllerDelegate{
+    func validateLeftButton(alertTag: MJAlertTAG) {
+        //Here launch one
+    }
+    
+    func validateRightButton(alertTag: MJAlertTAG) {
+        //Here launch two
+    }
+    
     
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct UserHome:Codable {
     var id: Int = 0
     private var _displayName: String? = nil
@@ -17,6 +18,8 @@ struct UserHome:Codable {
     var neighborhoodParticipationsCount: Int = 0
     var actions = HomeActions()
     var moderator:HomeModerator? = nil
+    var unclosedAction:SummaryAction? = nil
+    
     
     var congratulations = HomeActions()
     
@@ -40,6 +43,7 @@ struct UserHome:Codable {
         case actions = "recommandations"
         case moderator
         case congratulations
+        case unclosedAction = "unclosed_action"
     }
 }
 
@@ -123,6 +127,18 @@ struct HomeActionParams:Codable {
         case id
         case uuid
         case url
+    }
+}
+
+struct SummaryAction:Codable {
+    var id:Int?
+    var actionType:String?
+    var title:String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case actionType = "action_type"
+        case title = "title"
     }
 }
 

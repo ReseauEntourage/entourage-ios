@@ -39,26 +39,8 @@ class ParamsAboutViewController: BasePopViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        forMarionDoReverseTotal()
       }
-      func forMarionDoReverseTotal(){
-        //125302 || 2
-        if let user = UserDefaults.currentUser {
-          print("eho" , user.uuid)
-          if user.uuid == "125302" || user.uuid == "2" || user.uuid == "4210" {
-            UIView.animate(withDuration: 0.3) {
-                self.view.transform = CGAffineTransform(scaleX: -1, y: 1)//rotationAngle: CGFloat.pi/2)
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
-              let animationView = AnimationView(name: "explosion")
-              animationView.frame = CGRect(x: 0, y: 0, width: 500, height: 500)
-              animationView.contentMode = .scaleAspectFill
-              self.view.addSubview(animationView)
-              animationView.play()
-            }
-          }
-        }
-      }
+
 }
 
 //MARK: - UITableViewDataSource, UITableViewDelegate -

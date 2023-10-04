@@ -1358,6 +1358,9 @@ L2</string>
         <designable name="Q0i-xf-RJX">
             <size key="intrinsicContentSize" width="41.5" height="20.5"/>
         </designable>
+        <designable name="VSX-1z-7hS">
+            <size key="intrinsicContentSize" width="37" height="16"/>
+        </designable>
     </designables>
     <resources>
         <image name="header_orange_light" width="392" height="416"/>

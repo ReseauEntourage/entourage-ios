@@ -386,6 +386,8 @@
 		2619E1492A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619E1482A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift */; };
 		2619E14B2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619E14A2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift */; };
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
+		2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */; };
+		2636B9642A7BA199007EE1B2 /* anim_rugby.json in Resources */ = {isa = PBXBuildFile; fileRef = 2636B9632A7BA199007EE1B2 /* anim_rugby.json */; };
 		2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */; };
 		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
@@ -399,6 +401,8 @@
 		268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */; };
 		26A60E212A3A05AD004849FB /* WelcomeFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */; };
 		26BC119929C88CD700F204BB /* NeighborhoodPostDeletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */; };
+		26BE84602A67F26000DC2586 /* ActionPassedOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BE845F2A67F26000DC2586 /* ActionPassedOneVC.swift */; };
+		26BE84642A67F50500DC2586 /* ActionPassedTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BE84632A67F50500DC2586 /* ActionPassedTwoVC.swift */; };
 		26C1BB662A3AF0D100C81C09 /* WelcomeFourImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB652A3AF0D100C81C09 /* WelcomeFourImageCell.swift */; };
 		26C1BB682A3AF13F00C81C09 /* WelcomeFourImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C1BB672A3AF13F00C81C09 /* WelcomeFourImageCell.xib */; };
 		26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */; };
@@ -790,6 +794,8 @@
 		2619E1482A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTwoGroupExampleCell.swift; sourceTree = "<group>"; };
 		2619E14A2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTwoDescribingCell.swift; sourceTree = "<group>"; };
 		2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UILabel.swift; sourceTree = "<group>"; };
+		2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RugbySpecialPopUpViewController.swift; sourceTree = "<group>"; };
+		2636B9632A7BA199007EE1B2 /* anim_rugby.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anim_rugby.json; sourceTree = "<group>"; };
 		2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
@@ -803,6 +809,8 @@
 		268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertWithImageController.xib; sourceTree = "<group>"; };
 		26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourViewController.swift; sourceTree = "<group>"; };
 		26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostDeletedCell.xib; sourceTree = "<group>"; };
+		26BE845F2A67F26000DC2586 /* ActionPassedOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPassedOneVC.swift; sourceTree = "<group>"; };
+		26BE84632A67F50500DC2586 /* ActionPassedTwoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPassedTwoVC.swift; sourceTree = "<group>"; };
 		26C1BB652A3AF0D100C81C09 /* WelcomeFourImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourImageCell.swift; sourceTree = "<group>"; };
 		26C1BB672A3AF13F00C81C09 /* WelcomeFourImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFourImageCell.xib; sourceTree = "<group>"; };
 		26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeDemandExampleCell.swift; sourceTree = "<group>"; };
@@ -1129,6 +1137,7 @@
 		025D876C278DF44800909101 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				2636B9632A7BA199007EE1B2 /* anim_rugby.json */,
 				265565F12A3C9DB700CEFB3D /* explosion.json */,
 				020AF5E428607EFE0012AE60 /* congrat_short_anim.json */,
 				02CCE67027D78C2F00D6976C /* Fonts */,
@@ -1237,6 +1246,8 @@
 		02681953278DF6E400A98A4A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2636B9602A7B9EB3007EE1B2 /* special_notifications */,
+				26BE845E2A67F22700DC2586 /* actionpassed */,
 				2645C1CC2A14FD9000AE8953 /* Welcome */,
 				02681977278DF72D00A98A4A /* pre_onboarding */,
 				02E069CB279184B3006DB1B6 /* Onboarding */,
@@ -1676,6 +1687,14 @@
 			path = welcome2cells;
 			sourceTree = "<group>";
 		};
+		2636B9602A7B9EB3007EE1B2 /* special_notifications */ = {
+			isa = PBXGroup;
+			children = (
+				2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */,
+			);
+			path = special_notifications;
+			sourceTree = "<group>";
+		};
 		2645C1CC2A14FD9000AE8953 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
@@ -1714,6 +1733,15 @@
 				268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */,
 			);
 			path = AlertWithImage;
+			sourceTree = "<group>";
+		};
+		26BE845E2A67F22700DC2586 /* actionpassed */ = {
+			isa = PBXGroup;
+			children = (
+				26BE845F2A67F26000DC2586 /* ActionPassedOneVC.swift */,
+				26BE84632A67F50500DC2586 /* ActionPassedTwoVC.swift */,
+			);
+			path = actionpassed;
 			sourceTree = "<group>";
 		};
 		26C1BB642A3AEE2900C81C09 /* welcome4cell */ = {
@@ -1870,6 +1898,7 @@
 				025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */,
 				02B94C38284F9FB3006059EF /* HomeHelpCell.xib in Resources */,
 				02E7845D2811A8DB00177F13 /* Neighborhood.storyboard in Resources */,
+				2636B9642A7BA199007EE1B2 /* anim_rugby.json in Resources */,
 				02DB3BBA27A1496A004732C9 /* PartnerDetails.storyboard in Resources */,
 				02A3DD3127FDC03B0060EC2E /* Neighborhood.xcassets in Resources */,
 				02B94C30284F9277006059EF /* HomeSectionCell.xib in Resources */,
@@ -2127,6 +2156,7 @@
 				026819C3278E10DA00A98A4A /* User.swift in Sources */,
 				02ADAAB3280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift in Sources */,
 				0288A8D727CCD8F5008D7011 /* UserPhotoAddViewController.swift in Sources */,
+				26BE84642A67F50500DC2586 /* ActionPassedTwoVC.swift in Sources */,
 				0288A8DB27CD00FD008D7011 /* Extensions_UIImage.swift in Sources */,
 				026819BD278E105600A98A4A /* OTLoginV2ViewController.swift in Sources */,
 				026819BE278E105600A98A4A /* OTLoginPlaceViewController.swift in Sources */,
@@ -2215,6 +2245,7 @@
 				02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */,
 				0268C254285A2B1400294055 /* Floaty.swift in Sources */,
 				02A3DD3727FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift in Sources */,
+				26BE84602A67F26000DC2586 /* ActionPassedOneVC.swift in Sources */,
 				0208937B28BCFDBC00160F1E /* DeeplinkManager.swift in Sources */,
 				021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */,
 				0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */,
@@ -2284,6 +2315,7 @@
 				02B94C27284F63AB006059EF /* HomeContribCell.swift in Sources */,
 				26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */,
 				02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */,
+				2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */,
 				021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */,
 				02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */,
 			);

@@ -28,8 +28,8 @@ class MainParamsViewController: UIViewController {
         
         isStaging = EnvironmentConfigurationManager.sharedInstance.runsOnStaging
         
+        self.versionInfo = "v\(Bundle.main.versionName)"
         if isStaging {
-            self.versionInfo = "v:\(Bundle.main.versionName)"
             self.tokenInfo = "TOKEN Firebase:\nNon disponible"
             
             Messaging.messaging().token { token, error in
@@ -39,9 +39,6 @@ class MainParamsViewController: UIViewController {
                     self.ui_tableview?.reloadData()
                 }
             }
-        }
-        else {
-            self.versionInfo = "v:\(Bundle.main.versionName)"
         }
     }
 }
