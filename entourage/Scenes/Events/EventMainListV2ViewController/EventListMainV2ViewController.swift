@@ -30,7 +30,7 @@ class EventListMainV2ViewController:UIViewController{
     //VAR
     private var currentPageMy = 0
     private var currentPageDiscover = 0
-    private let numberOfItemsForWS = 20
+    private let numberOfItemsForWS = 7
     private var currentFilter = EventActionLocationFilters()
     private var tableDTO = [EventListTableDTO]()
     private var discoverEvent = [Event]()

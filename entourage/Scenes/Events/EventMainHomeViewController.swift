@@ -155,7 +155,7 @@ class EventMainHomeViewController: UIViewController {
     @objc func refreshDatasFromTab() {
         currentFilter.resetToDefault()
         ui_location_filter.text = currentFilter.getFilterButtonString()
-        
+
         currentPageMy = 1
         currentPageDiscover = 1
         

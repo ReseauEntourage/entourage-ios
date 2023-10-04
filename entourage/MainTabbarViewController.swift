@@ -95,6 +95,13 @@ class MainTabbarViewController: UITabBarController {
         self.selectedIndex = 1
         self.boldSelectedItem()
     }
+    @objc func showActionsDemand() {
+        if let vc = actionsVC.topViewController as? ActionsMainHomeViewController {
+            vc.setSolicitationsFirst()
+        }
+        self.selectedIndex = 1
+        self.boldSelectedItem()
+    }
     @objc func showHome() {
         self.selectedIndex = 0
         self.boldSelectedItem()
@@ -122,7 +129,7 @@ class MainTabbarViewController: UITabBarController {
     
     func setupVCs() {
         
-        let _homeVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "homeVC")
+        let _homeVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "homev2vc")
         homeVC = UINavigationController.init(rootViewController: _homeVC)
         homeVC.isNavigationBarHidden = true
         homeVC.tabBarItem.title = "tabbar_home".localized

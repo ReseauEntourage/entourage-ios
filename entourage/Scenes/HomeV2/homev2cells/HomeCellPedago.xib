@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NunitoSans-Regular.ttf">
+            <string>NunitoSans-Regular</string>
+        </array>
+        <array key="Quicksand-Bold.ttf">
+            <string>Quicksand-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeCellPedago" rowHeight="157" id="ZmD-vT-KlZ" customClass="HomeCellPedago" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="794" height="102"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZmD-vT-KlZ" id="pft-Hc-zTJ">
+                <rect key="frame" x="0.0" y="0.0" width="794" height="102"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gRI-L8-5gX">
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="102"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="sde-Ol-zhi"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LSb-aD-GbS">
+                        <rect key="frame" x="100" y="10" width="42.333333333333343" height="19"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvI-6b-SI3">
+                                <rect key="frame" x="5" y="2" width="32.333333333333336" height="15"/>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="12"/>
+                                <color key="textColor" name="orange_light"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="Beige"/>
+                        <constraints>
+                            <constraint firstItem="fvI-6b-SI3" firstAttribute="top" secondItem="LSb-aD-GbS" secondAttribute="top" constant="2" id="GQy-Oo-cMH"/>
+                            <constraint firstAttribute="trailing" secondItem="fvI-6b-SI3" secondAttribute="trailing" constant="5" id="VTV-nx-3Pb"/>
+                            <constraint firstAttribute="bottom" secondItem="fvI-6b-SI3" secondAttribute="bottom" constant="2" id="hiI-Ty-NVn"/>
+                            <constraint firstItem="fvI-6b-SI3" firstAttribute="leading" secondItem="LSb-aD-GbS" secondAttribute="leading" constant="5" id="hiU-OK-nDJ"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNF-wM-bUh">
+                        <rect key="frame" x="100" y="32" width="684" height="35"/>
+                        <string key="text">Label
+Label</string>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RhZ-k6-26z">
+                        <rect key="frame" x="100" y="75.333333333333329" width="684" height="16.666666666666671"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="12"/>
+                        <color key="textColor" name="grey_light"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="tNF-wM-bUh" secondAttribute="trailing" constant="10" id="4Pe-E6-6Dh"/>
+                    <constraint firstAttribute="bottom" secondItem="RhZ-k6-26z" secondAttribute="bottom" constant="10" id="G6m-Nc-CbT"/>
+                    <constraint firstItem="tNF-wM-bUh" firstAttribute="leading" secondItem="gRI-L8-5gX" secondAttribute="trailing" constant="10" id="I0P-Pm-Vgp"/>
+                    <constraint firstItem="gRI-L8-5gX" firstAttribute="leading" secondItem="pft-Hc-zTJ" secondAttribute="leading" id="Jrc-9V-xOb"/>
+                    <constraint firstAttribute="trailing" secondItem="RhZ-k6-26z" secondAttribute="trailing" constant="10" id="KCc-zU-zQh"/>
+                    <constraint firstItem="tNF-wM-bUh" firstAttribute="top" secondItem="fvI-6b-SI3" secondAttribute="bottom" constant="5" id="Wod-oc-vcY"/>
+                    <constraint firstItem="LSb-aD-GbS" firstAttribute="top" secondItem="pft-Hc-zTJ" secondAttribute="top" constant="10" id="YcK-Nb-HTt"/>
+                    <constraint firstItem="RhZ-k6-26z" firstAttribute="leading" secondItem="gRI-L8-5gX" secondAttribute="trailing" constant="10" id="gYh-S1-WjI"/>
+                    <constraint firstAttribute="bottom" secondItem="gRI-L8-5gX" secondAttribute="bottom" id="iCN-kM-Bla"/>
+                    <constraint firstItem="gRI-L8-5gX" firstAttribute="top" secondItem="pft-Hc-zTJ" secondAttribute="top" id="lPz-bA-yCw"/>
+                    <constraint firstItem="LSb-aD-GbS" firstAttribute="leading" secondItem="gRI-L8-5gX" secondAttribute="trailing" constant="10" id="q2g-YH-mAc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ui_image" destination="gRI-L8-5gX" id="2Ci-y8-TL4"/>
+                <outlet property="ui_label_duration" destination="RhZ-k6-26z" id="4Sr-BC-LiR"/>
+                <outlet property="ui_label_pedago" destination="fvI-6b-SI3" id="Sdi-HM-3dX"/>
+                <outlet property="ui_label_title" destination="tNF-wM-bUh" id="inD-lm-Lxu"/>
+            </connections>
+            <point key="canvasLocation" x="196.94656488549617" y="-15.492957746478874"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Beige">
+            <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="grey_light">
+            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_light">
+            <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

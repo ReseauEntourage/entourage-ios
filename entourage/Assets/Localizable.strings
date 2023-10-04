@@ -1369,3 +1369,40 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "pop_up_rugby_france_content" = "Les plus belles rencontres ne se font pas forcément au stade ! Rejoignez le groupe \"Vivons le sport ensemble\"";
 
 
+/* New Home string */
+"home_v2_title" = "L'app qui recrée du lien entre voisins";
+
+"home_v2_title_action" = "Donner un coup de pouce";
+"home_v2_subtitle_action" = "Vos voisins ont besoin de vous !";
+"home_v2_btn_more_action" = "Voir toutes les demandes";
+
+"home_v2_title_event" = "Participer à un événement solidaire";
+"home_v2_subtitle_event" = "Le plein de solidarité à proximité";
+"home_v2_btn_more_event" = "Voir tous les événements";
+
+"home_v2_title_group" = "Vos groupes de voisins";
+"home_v2_subtitle_group" = "Échanger avec vos voisins de tous horizons";
+"home_v2_btn_more_group" = "Voir tous les groupes";
+
+"home_v2_title_map" = "Découvrir des adresses utiles";
+"home_v2_subtitle_map" = "Toutes les structures solidaires à proximité";
+"home_v2_button_map" = "Carte des lieux solidaires près de vous";
+
+"home_v2_title_pedago" = "Tout savoir pour passer à l‘action";
+"home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";
+"home_v2_btn_more_pedago" = "Consulter tous les articles";
+
+"home_v2_pedago_item_tag_all" = "Tout";
+"home_v2_pedago_item_tag_act" = "Agir";
+"home_v2_pedago_item_tag_inspire" = "Inspirer";
+"home_v2_pedago_item_tag_understand" = "Comprendre";
+
+"home_v2_title_help" = "Vous êtes perdu ?";
+"home_v2_subtitle_help" = "Pas de panique, commencez pas à pas !";
+"home_v2_btn_more_help" = "Consulter tous les articles";
+
+"home_v2_help_title_one" = "Comment créer un groupe ?";
+"home_v2_help_title_two" = "Comment créer un événement ?";
+"home_v2_help_title_three" = "Une question ?\nContactez";
+
+"home_v2_pedag_item_lenght_title" = "%d min de lecture";
