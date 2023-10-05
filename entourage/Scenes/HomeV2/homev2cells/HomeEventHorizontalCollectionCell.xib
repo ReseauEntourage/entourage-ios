@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="13H-LX-KCU">
-                        <rect key="frame" x="0.0" y="10" width="669" height="197"/>
+                        <rect key="frame" x="0.0" y="0.0" width="669" height="207"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VCW-mn-WlH">
                             <size key="itemSize" width="128" height="128"/>
@@ -32,7 +32,7 @@
                     <constraint firstItem="13H-LX-KCU" firstAttribute="leading" secondItem="vDO-Da-VjE" secondAttribute="leading" id="2MF-0v-MbI"/>
                     <constraint firstAttribute="bottom" secondItem="13H-LX-KCU" secondAttribute="bottom" id="WcL-Di-BcX"/>
                     <constraint firstAttribute="trailing" secondItem="13H-LX-KCU" secondAttribute="trailing" id="mF2-yE-Ma2"/>
-                    <constraint firstItem="13H-LX-KCU" firstAttribute="top" secondItem="vDO-Da-VjE" secondAttribute="top" constant="10" id="osd-s1-GiA"/>
+                    <constraint firstItem="13H-LX-KCU" firstAttribute="top" secondItem="vDO-Da-VjE" secondAttribute="top" id="osd-s1-GiA"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
