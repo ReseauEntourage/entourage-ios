@@ -39,5 +39,27 @@ class HomeCellPedago:UITableViewCell{
         else {
             ui_image.image = UIImage(named: "placeholder_action")
         }
+        switch pedago.tag{
+        case .All:
+            ui_label_pedago.text = "home_v2_pedago_item_tag_all".localized
+        case .Understand:
+            ui_label_pedago.text = "home_v2_pedago_item_tag_understand".localized
+        case .Act:
+            ui_label_pedago.text = "home_v2_pedago_item_tag_act".localized
+        case .Inspire:
+            ui_label_pedago.text = "home_v2_pedago_item_tag_inspire".localized
+        case .None:
+            ui_label_title.text = "Autre"
+        }
+        if let _duration = pedago.duration{
+            if _duration > 0 {
+                ui_label_duration.text = String(format: "home_v2_pedag_item_lenght_title".localized, _duration)
+            }else{
+                ui_label_duration.isHidden = true
+            }
+        }else{
+            ui_label_duration.isHidden = true
+
+        }
     }
 }

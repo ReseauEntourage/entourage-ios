@@ -259,9 +259,9 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellSeeAll(let seeAllType):
             switch seeAllType{
             case .seeAllDemand:
-                DeepLinkManager.showOutingListUniversalLink()
-            case .seeAllEvent:
                 DeepLinkManager.showDemandListUniversalLink()
+            case .seeAllEvent:
+                DeepLinkManager.showOutingListUniversalLink()
             case .seeAllGroup:
                 DeepLinkManager.showNeiborhoodListUniversalLink()
             case .seeAllPedago:

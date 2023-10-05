@@ -27,7 +27,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pum-gi-995">
-                        <rect key="frame" x="16" y="164" width="30" height="16.666666666666657"/>
+                        <rect key="frame" x="16" y="164" width="134" height="16.666666666666657"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="12"/>
                         <color key="textColor" name="grey_light"/>
                         <nil key="highlightedColor"/>
@@ -73,13 +73,13 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbx-iU-fKN">
-                        <rect key="frame" x="15.999999999999996" y="145" width="37.666666666666657" height="17"/>
+                        <rect key="frame" x="16" y="145" width="134" height="17"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="14"/>
                         <color key="textColor" name="grey_dark"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sog-D9-1B8">
-                        <rect key="frame" x="16" y="182.66666666666666" width="30" height="16.666666666666657"/>
+                        <rect key="frame" x="16" y="182.66666666666666" width="134" height="16.666666666666657"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="12"/>
                         <color key="textColor" name="grey_light"/>
                         <nil key="highlightedColor"/>
@@ -87,13 +87,16 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Wbx-iU-fKN" firstAttribute="top" secondItem="5Jp-Rr-gO8" secondAttribute="bottom" constant="10" id="8Qf-cB-uzN"/>
+                    <constraint firstAttribute="trailing" secondItem="Wbx-iU-fKN" secondAttribute="trailing" constant="10" id="Asf-73-cGC"/>
                     <constraint firstItem="5Jp-Rr-gO8" firstAttribute="top" secondItem="FPI-rg-wn6" secondAttribute="bottom" constant="10" id="Bdp-xR-r8Z"/>
                     <constraint firstItem="pum-gi-995" firstAttribute="leading" secondItem="5sa-JG-LtS" secondAttribute="leading" constant="16" id="CLD-Ec-YNp"/>
                     <constraint firstAttribute="trailing" secondItem="FPI-rg-wn6" secondAttribute="trailing" id="Kw1-Om-5YJ"/>
+                    <constraint firstAttribute="trailing" secondItem="pum-gi-995" secondAttribute="trailing" constant="10" id="MfH-IO-1gW"/>
                     <constraint firstItem="5Jp-Rr-gO8" firstAttribute="leading" secondItem="5sa-JG-LtS" secondAttribute="leading" constant="16" id="OR6-6S-0Nr"/>
                     <constraint firstItem="5Jp-Rr-gO8" firstAttribute="top" secondItem="FPI-rg-wn6" secondAttribute="bottom" constant="10" id="TI6-1b-Eyk"/>
                     <constraint firstItem="pum-gi-995" firstAttribute="top" secondItem="Wbx-iU-fKN" secondAttribute="bottom" constant="2" id="TWt-IH-8zu"/>
                     <constraint firstItem="FPI-rg-wn6" firstAttribute="leading" secondItem="5sa-JG-LtS" secondAttribute="leading" id="Xu4-0M-JEb"/>
+                    <constraint firstAttribute="trailing" secondItem="sog-D9-1B8" secondAttribute="trailing" constant="10" id="be5-oE-1LV"/>
                     <constraint firstItem="Wbx-iU-fKN" firstAttribute="leading" secondItem="5sa-JG-LtS" secondAttribute="leading" constant="16" id="gPA-6m-3s7"/>
                     <constraint firstItem="FPI-rg-wn6" firstAttribute="top" secondItem="5sa-JG-LtS" secondAttribute="top" id="jJB-Cf-dd8"/>
                     <constraint firstItem="sog-D9-1B8" firstAttribute="top" secondItem="pum-gi-995" secondAttribute="bottom" constant="2" id="oN3-oc-pg0"/>

@@ -30,7 +30,7 @@
                         <rect key="frame" x="16" y="10" width="762" height="110"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUc-UL-CfJ">
-                                <rect key="frame" x="100" y="83.333333333333343" width="652" height="16.666666666666657"/>
+                                <rect key="frame" x="100" y="83.333333333333329" width="652" height="16.666666666666671"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="12"/>
                                 <color key="textColor" name="grey_light"/>
                                 <nil key="highlightedColor"/>
@@ -42,27 +42,33 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pnT-2M-wbY">
-                                <rect key="frame" x="100" y="10" width="42.333333333333343" height="19"/>
+                                <rect key="frame" x="100" y="10" width="42.333333333333343" height="22"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBt-j9-VNQ">
-                                        <rect key="frame" x="5" y="2" width="32.333333333333336" height="15"/>
+                                        <rect key="frame" x="5" y="2" width="32.333333333333336" height="18"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="12"/>
                                         <color key="textColor" name="orange_light"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="Beige"/>
+                                <color key="backgroundColor" name="beige_lighter"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="WBt-j9-VNQ" secondAttribute="trailing" constant="5" id="0tL-mI-kGc"/>
                                     <constraint firstItem="WBt-j9-VNQ" firstAttribute="leading" secondItem="pnT-2M-wbY" secondAttribute="leading" constant="5" id="1qf-B8-XJt"/>
+                                    <constraint firstAttribute="height" constant="22" id="CDP-P3-jaC"/>
                                     <constraint firstItem="WBt-j9-VNQ" firstAttribute="centerY" secondItem="pnT-2M-wbY" secondAttribute="centerY" id="IWa-zJ-iFF"/>
                                     <constraint firstItem="WBt-j9-VNQ" firstAttribute="top" secondItem="pnT-2M-wbY" secondAttribute="top" constant="2" id="baw-c5-qBb"/>
                                     <constraint firstAttribute="bottom" secondItem="WBt-j9-VNQ" secondAttribute="bottom" constant="2" id="r49-SW-Wob"/>
                                     <constraint firstItem="WBt-j9-VNQ" firstAttribute="centerX" secondItem="pnT-2M-wbY" secondAttribute="centerX" id="w9R-XV-dD8"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="11"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paw-8t-e1g">
-                                <rect key="frame" x="100" y="32" width="652" height="35"/>
+                                <rect key="frame" x="100" y="35" width="652" height="35"/>
                                 <string key="text">Label
 Label</string>
                                 <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="14"/>
@@ -105,8 +111,8 @@ Label</string>
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="Beige">
-            <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="beige_lighter">
+            <color red="1" green="0.96078431372549022" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="grey_light">
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

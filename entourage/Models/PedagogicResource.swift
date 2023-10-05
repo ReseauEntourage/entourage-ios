@@ -22,6 +22,7 @@ struct PedagogicResource: Codable {
     var url:String? = nil
     var isRead = false
     var bodyHtml:String? = nil
+    var duration:Int? = 0
     
     var tag:PedagogicTag {
         get {
@@ -47,6 +48,7 @@ struct PedagogicResource: Codable {
         case url
         case isRead = "watched"
         case bodyHtml = "html"
+        case duration
     }
 }
 
