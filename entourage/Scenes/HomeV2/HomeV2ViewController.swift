@@ -33,6 +33,7 @@ class HomeV2ViewController:UIViewController{
     
     //OUTLET
     
+    @IBOutlet weak var ui_spinner: UIActivityIndicatorView!
     @IBOutlet weak var ui_drivable_top_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_drivable_table_view_top_constraint: NSLayoutConstraint!
     
@@ -158,8 +159,11 @@ class HomeV2ViewController:UIViewController{
             }
         }
         self.ui_table_view.reloadData()
+        self.ui_spinner.isHidden = true
+
     }
     func initHome(){
+        self.ui_spinner.isHidden = false
         self.getNotif()
     }
     func updateTopView() {
@@ -545,9 +549,9 @@ extension HomeV2ViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 { // Si le défilement est supérieur à 0
             // Mettre à jour la contrainte et cacher le label
-            if ui_drivable_top_constraint.constant != 10 {
+            if ui_drivable_top_constraint.constant != 5 {
                 UIView.animate(withDuration: 0.3) {
-                    self.ui_drivable_top_constraint.constant = 10
+                    self.ui_drivable_top_constraint.constant = 5
                     self.ui_drivable_table_view_top_constraint.constant = 15
                     self.ui_label_subtitle.alpha = 0
                     self.view.layoutIfNeeded() // Force la mise à jour de la vue pour refléter le changement de contrainte
@@ -555,9 +559,9 @@ extension HomeV2ViewController: UIScrollViewDelegate {
             }
         } else { // Si le défilement est à 0 ou en dessous
             // Rétablir la contrainte et afficher le label
-            if ui_drivable_top_constraint.constant != 40 {
+            if ui_drivable_top_constraint.constant != 20 {
                 UIView.animate(withDuration: 0.3) {
-                    self.ui_drivable_top_constraint.constant = 40
+                    self.ui_drivable_top_constraint.constant = 20
                     self.ui_drivable_table_view_top_constraint.constant = 40
                     self.ui_label_subtitle.alpha = 1
                     self.view.layoutIfNeeded() // Force la mise à jour de la vue pour refléter le changement de contrainte

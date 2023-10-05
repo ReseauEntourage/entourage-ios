@@ -40,6 +40,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="khV-wV-Thm"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pnT-2M-wbY">
                                 <rect key="frame" x="100" y="10" width="42.333333333333343" height="22"/>
