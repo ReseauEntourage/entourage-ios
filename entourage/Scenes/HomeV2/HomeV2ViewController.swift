@@ -301,9 +301,9 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellSeeAll(_):
             return UITableView.automaticDimension
         case .cellEvent(_):
-            return 210
+            return 200
         case .cellGroup(_):
-            return 130
+            return 120
         case .cellPedago(_):
             return UITableView.automaticDimension
         case .cellMap:
