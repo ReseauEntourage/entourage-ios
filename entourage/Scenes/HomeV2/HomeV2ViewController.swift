@@ -55,9 +55,10 @@ class HomeV2ViewController:UIViewController{
     var pedagoCreateGroup:PedagogicResource?
     
     override func viewDidLoad() {
-        
+        prepareUINotifAndAvatar()
         ui_table_view.delegate = self
         ui_table_view.dataSource = self
+
         //Register cells
         //CELL TITLE
         ui_table_view.register(UINib(nibName: HomeV2CellTitle.identifier, bundle: nil), forCellReuseIdentifier: HomeV2CellTitle.identifier)
@@ -83,6 +84,14 @@ class HomeV2ViewController:UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         currentFilter.resetToDefault()
         self.initHome()
+    }
+    
+    func prepareUINotifAndAvatar(){
+        ui_view_notif.layer.cornerRadius = 18
+        ui_view_notif.clipsToBounds = true
+        
+        ui_image_user_avatar.layer.cornerRadius = 18
+        ui_image_user_avatar.clipsToBounds = true
     }
     
     func configureDTO(){
@@ -145,6 +154,7 @@ class HomeV2ViewController:UIViewController{
             self.ui_image_notif.image = UIImage(named: "ic_notif_on") // Assurez-vous que l'image "ic_white_notif_on" est disponible dans votre projet.
             self.ui_view_notif.backgroundColor = UIColor.appOrange // Utilisez la couleur orange que vous avez ajoutée précédemment.
         }
+        prepareUINotifAndAvatar()
     }
     
     
@@ -261,19 +271,19 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellAction(_):
             return UITableView.automaticDimension
         case .cellSeeAll(_):
-            return 50
+            return UITableView.automaticDimension
         case .cellEvent(_):
-            return 220
+            return 210
         case .cellGroup(_):
-            return 140
-        case .cellPedago(_):
             return 130
+        case .cellPedago(_):
+            return UITableView.automaticDimension
         case .cellMap:
             return UITableView.automaticDimension
         case .cellIAmLost(_):
-            return 85
+            return UITableView.automaticDimension
         case .moderator(_,_):
-            return 85
+            return UITableView.automaticDimension
         }
     }
 }
@@ -290,6 +300,7 @@ extension HomeV2ViewController{
     func getDemandes(){
         ActionsService.getAllActions(isContrib: false, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
             if let actions = actions {
+                self.allDemands.removeAll()
                 self.allDemands.append(contentsOf: actions)
             }
             self.getMyGroups()
@@ -300,6 +311,7 @@ extension HomeV2ViewController{
         guard let token = UserDefaults.currentUser?.uuid else { return }
         NeighborhoodService.getNeighborhoodsForUserId(token,currentPage: 1, per: 10, completion: { groups, error in
             if let groups = groups {
+                self.allGroups.removeAll()
                 self.allGroups.append(contentsOf: groups)
             }
             self.getEvents()
@@ -308,6 +320,7 @@ extension HomeV2ViewController{
     func getEvents(){
     EventService.getAllEventsDiscover(currentPage: 1, per: 10, filters: currentFilter.getfiltersForWS()) { events, error in
             if let events = events , events.count > 0 {
+                self.allEvents.removeAll()
                 self.allEvents.append(contentsOf: events)
             }
         self.getPedago()
@@ -318,6 +331,7 @@ extension HomeV2ViewController{
     func getPedago(){
         HomeService.getResources { resources, error in
             if let resources = resources {
+                self.allPedagos.removeAll()
                 for k in 0...2{
                     self.allPedagos.append(resources[k])
                 }
@@ -346,13 +360,8 @@ extension HomeV2ViewController{
 
 //MARK: CLICK ON CELLS FUNCTIONS
 extension HomeV2ViewController {
-    func showAction(actionId:Int,isContrib:Bool, isAfterCreation:Bool = false, action:Action? = nil) {
-        if let navvc = storyboard?.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navvc.topViewController as? ActionDetailFullViewController {
-            vc.actionId = actionId
-            vc.action = action
-            vc.isContrib = false
-            self.tabBarController?.present(navvc, animated: true)
-        }
+    func showAction(actionId:Int, isContrib:Bool, isAfterCreation:Bool = false, action:Action? = nil) {
+        DeepLinkManager.showAction(id: actionId, isContrib: isContrib)
     }
     
     func showPedagogic(pedagogic:PedagogicResource){

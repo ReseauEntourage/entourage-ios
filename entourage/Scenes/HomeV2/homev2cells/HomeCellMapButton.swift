@@ -28,7 +28,12 @@ class HomeCellMapButton:UITableViewCell{
     func configure(title:String){
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = ui_gradient_view.bounds
-        gradientLayer.colors = [UIColor.red.cgColor, UIColor.blue.cgColor]
+
+        // Convertir les valeurs hexadécimales en UIColor
+        let color1 = UIColor(hexString: "#F55F24")
+        let color2 = UIColor(hexString: "#FF9C5D")
+
+        gradientLayer.colors = [color1.cgColor, color2.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         ui_gradient_view.layer.insertSublayer(gradientLayer, at: 0)

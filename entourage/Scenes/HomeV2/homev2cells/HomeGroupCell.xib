@@ -49,6 +49,7 @@
             </collectionViewCellContentView>
             <size key="customSize" width="334" height="288"/>
             <connections>
+                <outlet property="containerView" destination="JrJ-86-Hc3" id="hse-ab-sOp"/>
                 <outlet property="ui_image" destination="e5z-oP-k0g" id="d5H-dw-Quq"/>
                 <outlet property="ui_label_title" destination="EoD-YF-Wmm" id="Z7x-i2-Utd"/>
             </connections>

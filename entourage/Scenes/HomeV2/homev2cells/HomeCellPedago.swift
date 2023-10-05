@@ -12,6 +12,7 @@ import SDWebImage
 class HomeCellPedago:UITableViewCell{
     
     //OUTLET
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_label_pedago: UILabel!
     @IBOutlet weak var ui_label_title: UILabel!
@@ -24,11 +25,13 @@ class HomeCellPedago:UITableViewCell{
     }
     
     override func awakeFromNib() {
-        
+        containerView.layer.cornerRadius = 15
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.appBeige.cgColor
+        containerView.clipsToBounds = true
     }
     
     func configure(pedago:PedagogicResource){
-
         ui_label_title.text = pedago.title
         if let imageUrl = pedago.imageUrl, let url = URL(string: imageUrl) {
             ui_image.sd_setImage(with: url, placeholderImage:UIImage(named: "placeholder_action"))
@@ -36,10 +39,5 @@ class HomeCellPedago:UITableViewCell{
         else {
             ui_image.image = UIImage(named: "placeholder_action")
         }
-        //ui_label_duration = pedago.
-        print("eho " , pedago.bodyHtml)
-        print("eho " , pedago.description)
     }
-    
-    
 }

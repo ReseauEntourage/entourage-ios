@@ -14,6 +14,7 @@ class HomeGroupCell:UICollectionViewCell {
     //OUTLET
     @IBOutlet weak var ui_image: UIImageView!
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var ui_label_title: UILabel!
     //VARIABLE
     class var identifier: String {
@@ -21,7 +22,10 @@ class HomeGroupCell:UICollectionViewCell {
     }
     
     override func awakeFromNib() {
-        
+        containerView.layer.cornerRadius = 15
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.appBeige.cgColor
+        containerView.clipsToBounds = true
     }
     
     func configure(group:Neighborhood){

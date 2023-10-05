@@ -96,6 +96,7 @@
             </collectionViewCellContentView>
             <size key="customSize" width="159" height="208"/>
             <connections>
+                <outlet property="containerView" destination="5sa-JG-LtS" id="Use-PR-8ho"/>
                 <outlet property="ui_image_event" destination="FPI-rg-wn6" id="Tn0-k8-FeW"/>
                 <outlet property="ui_image_interest" destination="glI-Qu-s4R" id="Th8-T8-30v"/>
                 <outlet property="ui_label_date" destination="pum-gi-995" id="0RX-R0-efp"/>

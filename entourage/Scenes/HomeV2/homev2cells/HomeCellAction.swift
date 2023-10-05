@@ -26,7 +26,7 @@ class HomeCellAction:UITableViewCell{
     }
     
     override func awakeFromNib() {
-        containerView.layer.cornerRadius = 10
+        containerView.layer.cornerRadius = 15
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.appBeige.cgColor
         containerView.clipsToBounds = true
@@ -53,21 +53,32 @@ class HomeCellAction:UITableViewCell{
         else {
             ui_image.image = UIImage.init(named: "ic_placeholder_action")
         }
-    
-        guard let sectionName = action.sectionName else {
-            ui_label_tag.text = nil
-            ui_image_tag.image = nil
-            return
-        }
         
-        ui_label_tag.text = Metadatas.sharedInstance.getTagSectionName(key: sectionName)?.name
-        
-        if let imgStr = Metadatas.sharedInstance.getTagSectionImageName(key: sectionName) {
-            ui_image_tag.image = UIImage.init(named: imgStr)?.sd_tintedImage(with: .appOrangeLight)
-        }
-        else {
-            ui_image_tag.image = nil
+        if let _sectionName = action.sectionName{
+            switch _sectionName{
+            case "social":
+                ui_image_tag.image = UIImage.init(named: "ic_action_social")?.sd_tintedImage(with: .appOrangeLight)
+                ui_label_tag.text = "home_v2_action_type_social".localized
+            case "clothes":
+                ui_image_tag.image = UIImage.init(named: "ic_action_clothes")?.sd_tintedImage(with: .appOrangeLight)
+                ui_label_tag.text = "home_v2_action_type_clothes".localized
+
+            case "equipment":
+                ui_image_tag.image = UIImage.init(named: "ic_action_equipment")?.sd_tintedImage(with: .appOrangeLight)
+                ui_label_tag.text = "home_v2_action_type_equipment".localized
+
+            case "hygiene":
+                ui_image_tag.image = UIImage.init(named: "ic_action_hygiene")?.sd_tintedImage(with: .appOrangeLight)
+                ui_label_tag.text = "home_v2_action_type_hygiène".localized
+
+            case "services":
+                ui_image_tag.image = UIImage.init(named: "ic_action_services")?.sd_tintedImage(with: .appOrangeLight)
+                ui_label_tag.text = "home_v2_action_type_services".localized
+
+            default:
+                ui_image_tag.image = UIImage.init(named: "ic_action_services")?.sd_tintedImage(with: .appOrangeLight)
+                ui_label_tag.text = "home_v2_action_type_other".localized
+            }
         }
     }
-    
 }

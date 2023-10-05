@@ -13,6 +13,7 @@ import SDWebImage
 class HomeCellEvent:UICollectionViewCell{
     
     //OUTLET
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var ui_label_place: UILabel!
     
     @IBOutlet weak var ui_label_date: UILabel!
@@ -28,7 +29,10 @@ class HomeCellEvent:UICollectionViewCell{
     }
     
     override func awakeFromNib() {
-        
+        containerView.layer.cornerRadius = 15
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.appBeige.cgColor
+        containerView.clipsToBounds = true
     }
 
     

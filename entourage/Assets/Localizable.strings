@@ -1406,3 +1406,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_help_title_three" = "Une question ?\nContactez";
 
 "home_v2_pedag_item_lenght_title" = "%d min de lecture";
+
+"home_v2_action_type_social" = "Social";
+"home_v2_action_type_clothes" = "Vêtements";
+"home_v2_action_type_equipment" = "Equipement";
+"home_v2_action_type_hygiène" = "Hygiène";
+"home_v2_action_type_services" = "Services";
+"home_v2_action_type_other" = "Autres";
