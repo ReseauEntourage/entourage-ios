@@ -32,11 +32,14 @@ enum HomeV2DTO{
 class HomeV2ViewController:UIViewController{
     
     //OUTLET
+    
+    @IBOutlet weak var ui_drivable_top_constraint: NSLayoutConstraint!
+    @IBOutlet weak var ui_drivable_table_view_top_constraint: NSLayoutConstraint!
+    
     @IBOutlet weak var ui_table_view: UITableView!
     @IBOutlet weak var ui_button_notif: UIButton!
     @IBOutlet weak var ui_view_notif: UIView!
     @IBOutlet weak var ui_image_notif: UIImageView!
-    
     @IBOutlet weak var ui_image_user_avatar: UIImageView!
     @IBOutlet weak var ui_label_subtitle: UILabel!
     //VARIABLE
@@ -89,9 +92,30 @@ class HomeV2ViewController:UIViewController{
     func prepareUINotifAndAvatar(){
         ui_view_notif.layer.cornerRadius = 18
         ui_view_notif.clipsToBounds = true
-        
         ui_image_user_avatar.layer.cornerRadius = 18
         ui_image_user_avatar.clipsToBounds = true
+        ui_button_notif.addTarget(self, action: #selector(onNotifClick), for: .touchUpInside)
+        ui_image_user_avatar.isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onAvatarClick))
+        ui_image_user_avatar.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func onAvatarClick(){
+        AnalyticsLoggerManager.logEvent(name: Home_action_profile)
+        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
+    }
+    
+    @objc func onNotifClick(){
+        AnalyticsLoggerManager.logEvent(name: Home_action_notif)
+        if let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav") as? UINavigationController {
+            navVC.modalPresentationStyle = .fullScreen
+            if let vc = navVC.topViewController as? NotificationsInAppViewController {
+                vc.hasToShowDot =  notificationCount > 0
+            }
+            self.tabBarController?.present(navVC, animated: true)
+        }
     }
     
     func configureDTO(){
@@ -509,6 +533,34 @@ extension HomeV2ViewController:MJAlertControllerDelegate{
                 
                 if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     currentVc.present(vc, animated: true)
+                }
+            }
+        }
+    }
+}
+
+//MARK: SCROLLVIEW ANIMATION
+
+extension HomeV2ViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 { // Si le défilement est supérieur à 0
+            // Mettre à jour la contrainte et cacher le label
+            if ui_drivable_top_constraint.constant != 10 {
+                UIView.animate(withDuration: 0.3) {
+                    self.ui_drivable_top_constraint.constant = 10
+                    self.ui_drivable_table_view_top_constraint.constant = 15
+                    self.ui_label_subtitle.alpha = 0
+                    self.view.layoutIfNeeded() // Force la mise à jour de la vue pour refléter le changement de contrainte
+                }
+            }
+        } else { // Si le défilement est à 0 ou en dessous
+            // Rétablir la contrainte et afficher le label
+            if ui_drivable_top_constraint.constant != 40 {
+                UIView.animate(withDuration: 0.3) {
+                    self.ui_drivable_top_constraint.constant = 40
+                    self.ui_drivable_table_view_top_constraint.constant = 40
+                    self.ui_label_subtitle.alpha = 1
+                    self.view.layoutIfNeeded() // Force la mise à jour de la vue pour refléter le changement de contrainte
                 }
             }
         }

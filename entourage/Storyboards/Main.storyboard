@@ -51,6 +51,7 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_user" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ab8-d9-2BI">
                                 <rect key="frame" x="16" y="88" width="36" height="36"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="lLY-pc-m2D"/>
                                     <constraint firstAttribute="width" constant="36" id="m1Z-K6-5NW"/>
@@ -141,6 +142,8 @@
                     </view>
                     <connections>
                         <outlet property="ui_button_notif" destination="lRH-gb-oWJ" id="E2a-e0-LH5"/>
+                        <outlet property="ui_drivable_table_view_top_constraint" destination="0Wu-zW-nCy" id="0KS-Jp-gkd"/>
+                        <outlet property="ui_drivable_top_constraint" destination="WId-U2-ycX" id="8wC-tK-6s1"/>
                         <outlet property="ui_image_notif" destination="n2D-Cu-dCS" id="2xX-Iv-uGP"/>
                         <outlet property="ui_image_user_avatar" destination="Ab8-d9-2BI" id="5FW-ad-ULY"/>
                         <outlet property="ui_label_subtitle" destination="fbg-P1-PX5" id="lt8-Ww-hF8"/>

@@ -197,6 +197,12 @@ extension UILabel {
     }
 }
 
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+}
+
 extension UIView {
     @IBInspectable var cradius: CGFloat {
         get {

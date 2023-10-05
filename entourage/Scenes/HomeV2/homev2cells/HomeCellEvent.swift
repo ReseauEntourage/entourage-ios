@@ -51,6 +51,38 @@ class HomeCellEvent:UICollectionViewCell{
             
         ui_label_date.text = event.startDateFormatted
         ui_label_place.text = event.addressName
+        if let _interests = event.interests{
+            if _interests.count > 0{
+                if let _interest = event.interests?[0]{
+                    ui_label_interest.text = _interest.capitalizingFirstLetter()
+                    switch _interest {
+                    case "activites":
+                        ui_image_interest.image = UIImage(named: "interest_activities")
+                    case "animaux":
+                        ui_image_interest.image = UIImage(named: "interest_animals")
+                    case "bien-etre":
+                        ui_image_interest.image = UIImage(named: "interest_wellness")
+                    case "cuisine":
+                        ui_image_interest.image = UIImage(named: "interest_cooking")
+                    case "culture":
+                        ui_image_interest.image = UIImage(named: "interest_art")
+                    case "jeux":
+                        ui_image_interest.image = UIImage(named: "interest_game")
+                    case "sport":
+                        ui_image_interest.image = UIImage(named: "interest_sport")
+                    case "nature":
+                        ui_image_interest.image = UIImage(named: "interest_nature")
+                    case "marauding":
+                        ui_image_interest.image = UIImage(named: "interest_nomad")
+                    default:
+                        ui_image_interest.image = UIImage(named: "interest_others")
+                    }
+                }
+            }else{
+                ui_label_interest.text = "Autre"
+                ui_image_interest.image = UIImage(named: "interest_others")
+            }
+        }
     }
     
     private func updateImage(mainUrl:URL) {
