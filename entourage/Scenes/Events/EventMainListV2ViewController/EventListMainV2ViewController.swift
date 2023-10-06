@@ -176,7 +176,7 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
                 // Interpolation linéaire pour ajuster la taille de la police en fonction du déplacement
                 let fontSize = 24 - (yOffset / 100) * (24 - 18)
                 self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: fontSize)
-
+                self.deployButton()
                 // Ajustez les autres éléments en fonction du déplacement également, si nécessaire
                 self.ui_top_contrainst_table_view.constant = 100 - 0.4 * yOffset
                 self.ui_contraint_title.constant = 20 - 0.1 * yOffset
@@ -184,6 +184,7 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
 
             } else if yOffset > 100 {
                 // Réglez sur les valeurs minimales si le déplacement dépasse 100
+                self.retractButton()
                 self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 18)
                 self.ui_top_contrainst_table_view.constant = 60
                 self.ui_contraint_title.constant = 10
