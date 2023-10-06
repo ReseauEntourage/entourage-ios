@@ -90,6 +90,7 @@ class EventListMainV2ViewController:UIViewController{
         self.isEndOfMyEventList = false
         self.myEvent.removeAll()
         self.discoverEvent.removeAll()
+        self.isOnlyDiscoverPagination = false
         isFromFilter = false
         self.getDiscoverEvent()
     }
