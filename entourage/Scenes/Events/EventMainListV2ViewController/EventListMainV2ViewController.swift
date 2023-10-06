@@ -171,7 +171,7 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         DispatchQueue.main.async {
             if self.ui_table_view.contentOffset.y <= 0.0 {
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.01) {
                     self.deployButton()
                     self.ui_top_contrainst_table_view.constant = 100
                     self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 24)
@@ -180,7 +180,7 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
                     self.view.layoutIfNeeded()
                 }
             } else {
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.01) {
                     self.retractButton()
                     self.ui_top_contrainst_table_view.constant = 60
                     self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 18)
