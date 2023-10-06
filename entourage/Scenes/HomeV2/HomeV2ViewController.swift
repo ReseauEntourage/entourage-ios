@@ -87,7 +87,10 @@ class HomeV2ViewController:UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         currentFilter.resetToDefault()
+        self.loadMetadatas()
+
         self.initHome()
+        
     }
     
     func prepareUINotifAndAvatar(){
@@ -269,7 +272,7 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
             case .seeAllGroup:
                 DeepLinkManager.showNeiborhoodListUniversalLink()
             case .seeAllPedago:
-                DeepLinkManager.showOutingListUniversalLink()
+                DeepLinkManager.showRessourceListUniversalLink()
             }
         case .cellEvent(_):
             return
@@ -360,8 +363,17 @@ extension HomeV2ViewController{
         HomeService.getResources { resources, error in
             if let resources = resources {
                 self.allPedagos.removeAll()
-                for k in 0...2{
-                    self.allPedagos.append(resources[k])
+                var pedagoReads = [PedagogicResource]()
+                for resource in resources {
+                    if resource.isRead == false{
+                        pedagoReads.append(resource)
+                    }
+                }
+                for pedagoRead in pedagoReads {
+                    self.allPedagos.append(pedagoRead)
+                    if self.allPedagos.count > 1{
+                        break
+                    }
                 }
                 for pedago in resources{
                     if pedago.id == 32{
@@ -381,6 +393,11 @@ extension HomeV2ViewController{
                 
             }
             self?.configureDTO()
+        }
+    }
+     func loadMetadatas() {
+        MetadatasService.getMetadatas { error in
+            Logger.print("***** return get metadats ? \(error)")
         }
     }
     

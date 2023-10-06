@@ -22,6 +22,8 @@ class EventListMainV2ViewController:UIViewController{
     //OUTLET
     @IBOutlet weak var ui_btn_filter: UIButton!
     
+    @IBOutlet weak var ui_contraint_title: NSLayoutConstraint!
+    @IBOutlet weak var ui_top_contrainst_table_view: NSLayoutConstraint!
     @IBOutlet weak var floatingButton: UIButton!
     @IBOutlet weak var expandedfloatingButton: UIButton!
     @IBOutlet weak var ui_location_filter: UILabel!
@@ -167,13 +169,23 @@ class EventListMainV2ViewController:UIViewController{
 //MARK: Tableview delegates
 extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSource{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if ui_table_view.contentOffset.y <= 0.0 {
-            DispatchQueue.main.async {
-                self.deployButton()
-            }
-        }else{
-            DispatchQueue.main.async {
-                self.retractButton()
+        DispatchQueue.main.async {
+            if self.ui_table_view.contentOffset.y <= 0.0 {
+                UIView.animate(withDuration: 0.3) {
+                    self.deployButton()
+                    self.ui_contraint_title.constant = 20
+                    self.ui_top_contrainst_table_view.constant = 100
+                    self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 24)
+                    self.view.layoutIfNeeded()
+                }
+            } else {
+                UIView.animate(withDuration: 0.3) {
+                    self.retractButton()
+                    self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+                    self.ui_contraint_title.constant = 20
+                    self.ui_top_contrainst_table_view.constant = 55
+                    self.view.layoutIfNeeded()
+                }
             }
         }
     }
@@ -346,3 +358,5 @@ extension EventListMainV2ViewController{
         }
     }
 }
+
+

@@ -50,7 +50,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXe-y7-8G7">
-                                <rect key="frame" x="106" y="35.666666666666664" width="30" height="16.666666666666664"/>
+                                <rect key="frame" x="101" y="35.666666666666664" width="30" height="16.666666666666664"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="12"/>
                                 <color key="textColor" name="orange_light"/>
                                 <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                             <constraint firstItem="3Cq-Zr-HzC" firstAttribute="top" secondItem="H8v-nC-eJt" secondAttribute="top" constant="10" id="Uyd-AO-6jY"/>
                             <constraint firstItem="Ffu-Nh-uCX" firstAttribute="top" secondItem="H8v-nC-eJt" secondAttribute="top" id="Xr1-zZ-f95"/>
                             <constraint firstAttribute="trailing" secondItem="e9Y-no-f1i" secondAttribute="trailing" constant="10" id="aFP-jI-Vaz"/>
-                            <constraint firstItem="mXe-y7-8G7" firstAttribute="leading" secondItem="uM4-6V-qux" secondAttribute="trailing" constant="10" id="dTH-we-yBi"/>
+                            <constraint firstItem="mXe-y7-8G7" firstAttribute="leading" secondItem="uM4-6V-qux" secondAttribute="trailing" constant="5" id="dTH-we-yBi"/>
                             <constraint firstItem="mXe-y7-8G7" firstAttribute="centerY" secondItem="uM4-6V-qux" secondAttribute="centerY" id="eZ8-Yr-Ug4"/>
                             <constraint firstAttribute="bottom" secondItem="uM4-6V-qux" secondAttribute="bottom" constant="10" id="ggr-nT-yOc"/>
                             <constraint firstAttribute="bottom" secondItem="Ffu-Nh-uCX" secondAttribute="bottom" id="w1Q-2d-0NW"/>

@@ -31,14 +31,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ok-J7-Jd7">
-                        <rect key="frame" x="16" y="55.666666666666664" width="516" height="19.333333333333336"/>
+                        <rect key="frame" x="16" y="52.666666666666664" width="516" height="22.333333333333336"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="0Ok-J7-Jd7" firstAttribute="top" secondItem="UwV-yC-Zjb" secondAttribute="bottom" constant="5" id="1mR-Gu-Vp6"/>
+                    <constraint firstItem="0Ok-J7-Jd7" firstAttribute="top" secondItem="UwV-yC-Zjb" secondAttribute="bottom" constant="2" id="1mR-Gu-Vp6"/>
                     <constraint firstItem="0Ok-J7-Jd7" firstAttribute="leading" secondItem="cT8-7H-JMl" secondAttribute="leading" constant="16" id="3P0-jp-Fac"/>
                     <constraint firstAttribute="bottom" secondItem="0Ok-J7-Jd7" secondAttribute="bottom" constant="10" id="AG8-RW-0KO"/>
                     <constraint firstAttribute="trailing" secondItem="UwV-yC-Zjb" secondAttribute="trailing" constant="16" id="Hoi-gf-NvK"/>

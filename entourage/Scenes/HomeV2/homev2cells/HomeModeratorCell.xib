@@ -15,11 +15,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeModeratorCell" rowHeight="171" id="geW-xp-TH0" customClass="HomeModeratorCell" customModule="Ent_Beta" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="567" height="88"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeModeratorCell" rowHeight="197" id="geW-xp-TH0" customClass="HomeModeratorCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="567" height="114"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="geW-xp-TH0" id="StR-XD-kBu">
-                <rect key="frame" x="0.0" y="0.0" width="567" height="88"/>
+                <rect key="frame" x="0.0" y="0.0" width="567" height="114"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zPb-0Z-MjV">
@@ -68,7 +68,7 @@
                     <constraint firstItem="zPb-0Z-MjV" firstAttribute="leading" secondItem="StR-XD-kBu" secondAttribute="leading" constant="16" id="1b8-98-lef"/>
                     <constraint firstItem="zPb-0Z-MjV" firstAttribute="top" secondItem="StR-XD-kBu" secondAttribute="top" constant="10" id="O2p-Il-Lmx"/>
                     <constraint firstAttribute="trailing" secondItem="zPb-0Z-MjV" secondAttribute="trailing" constant="16" id="OYa-6m-Vrx"/>
-                    <constraint firstAttribute="bottom" secondItem="zPb-0Z-MjV" secondAttribute="bottom" constant="10" id="oyA-ME-QtK"/>
+                    <constraint firstAttribute="bottom" secondItem="zPb-0Z-MjV" secondAttribute="bottom" constant="26" id="oyA-ME-QtK"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -76,7 +76,7 @@
                 <outlet property="ui_image" destination="qcV-DB-YFJ" id="iwA-s3-eGB"/>
                 <outlet property="ui_label_title" destination="eAW-wQ-Gw9" id="yRq-6P-qja"/>
             </connections>
-            <point key="canvasLocation" x="223.66412213740458" y="31.690140845070424"/>
+            <point key="canvasLocation" x="223.66412213740458" y="40.845070422535215"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -45,7 +45,7 @@
                                 <rect key="frame" x="292" y="48" width="101.5" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Z8-nl-pVO">
-                                        <rect key="frame" x="0.0" y="0.0" width="81.5" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="81.5" height="34"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="OnFilterClick:" destination="VrH-NF-DrI" eventType="touchUpInside" id="5BR-4M-COO"/>
@@ -136,7 +136,6 @@
                             <constraint firstItem="NKt-xy-FEu" firstAttribute="top" secondItem="apv-Np-uYM" secondAttribute="bottom" constant="20" id="86P-qL-ULQ"/>
                             <constraint firstItem="NKt-xy-FEu" firstAttribute="leading" secondItem="2uF-F5-HOj" secondAttribute="leading" constant="5" id="BGA-S0-1YT"/>
                             <constraint firstItem="Ehd-N9-VRq" firstAttribute="width" secondItem="Ehd-N9-VRq" secondAttribute="height" multiplier="392:416" id="Bkz-KD-J9Y"/>
-                            <constraint firstItem="NKt-xy-FEu" firstAttribute="top" secondItem="7Z8-nl-pVO" secondAttribute="bottom" constant="20" id="D4C-qt-mVx"/>
                             <constraint firstItem="2uF-F5-HOj" firstAttribute="trailing" secondItem="RQT-pv-D3x" secondAttribute="trailing" constant="32" id="GjT-6i-Zsw"/>
                             <constraint firstItem="RQT-pv-D3x" firstAttribute="centerY" secondItem="crh-3L-A6A" secondAttribute="centerY" id="Q0J-eo-jus"/>
                             <constraint firstItem="apv-Np-uYM" firstAttribute="leading" secondItem="2uF-F5-HOj" secondAttribute="leading" constant="20" id="S2r-oS-GBC"/>
@@ -149,6 +148,7 @@
                             <constraint firstItem="Ehd-N9-VRq" firstAttribute="leading" secondItem="2uF-F5-HOj" secondAttribute="leading" id="lit-w4-haQ"/>
                             <constraint firstItem="NKt-xy-FEu" firstAttribute="top" secondItem="A5B-NE-ybi" secondAttribute="top" constant="100" id="m4N-cx-gLM"/>
                             <constraint firstAttribute="trailing" secondItem="crh-3L-A6A" secondAttribute="trailing" constant="32" id="maB-tw-pTg"/>
+                            <constraint firstItem="7Z8-nl-pVO" firstAttribute="centerY" secondItem="apv-Np-uYM" secondAttribute="centerY" id="ud4-HH-O8Q"/>
                             <constraint firstItem="2uF-F5-HOj" firstAttribute="trailing" secondItem="o1E-lu-6Md" secondAttribute="trailing" constant="20.5" id="vFc-KG-RIq"/>
                             <constraint firstItem="apv-Np-uYM" firstAttribute="leading" secondItem="2uF-F5-HOj" secondAttribute="leading" constant="20" id="y9r-R8-i1B"/>
                         </constraints>
@@ -157,9 +157,11 @@
                         <outlet property="expandedfloatingButton" destination="RQT-pv-D3x" id="e5G-5s-HX1"/>
                         <outlet property="floatingButton" destination="crh-3L-A6A" id="bqf-Ex-sU9"/>
                         <outlet property="ui_btn_filter" destination="7Z8-nl-pVO" id="e7Q-yb-R50"/>
+                        <outlet property="ui_contraint_title" destination="86P-qL-ULQ" id="ECS-cf-3Hr"/>
                         <outlet property="ui_location_filter" destination="OcW-j0-b1x" id="Zh0-fc-kyj"/>
                         <outlet property="ui_table_view" destination="NKt-xy-FEu" id="j4O-pG-ytz"/>
                         <outlet property="ui_title_label" destination="apv-Np-uYM" id="3iR-wL-Ztr"/>
+                        <outlet property="ui_top_contrainst_table_view" destination="m4N-cx-gLM" id="lJr-B7-6Fm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wDP-lR-CWB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
