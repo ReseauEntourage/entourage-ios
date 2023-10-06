@@ -173,17 +173,18 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
             if self.ui_table_view.contentOffset.y <= 0.0 {
                 UIView.animate(withDuration: 0.3) {
                     self.deployButton()
-                    self.ui_contraint_title.constant = 20
                     self.ui_top_contrainst_table_view.constant = 100
                     self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 24)
+                    self.ui_contraint_title.constant = 20
+
                     self.view.layoutIfNeeded()
                 }
             } else {
                 UIView.animate(withDuration: 0.3) {
                     self.retractButton()
-                    self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 14)
-                    self.ui_contraint_title.constant = 20
-                    self.ui_top_contrainst_table_view.constant = 55
+                    self.ui_top_contrainst_table_view.constant = 60
+                    self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 18)
+                    self.ui_contraint_title.constant = 10
                     self.view.layoutIfNeeded()
                 }
             }

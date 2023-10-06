@@ -42,10 +42,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1E-lu-6Md">
-                                <rect key="frame" x="292" y="48" width="101.5" height="30"/>
+                                <rect key="frame" x="292" y="50" width="101.5" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Z8-nl-pVO">
-                                        <rect key="frame" x="0.0" y="0.0" width="81.5" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="81.5" height="30"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="OnFilterClick:" destination="VrH-NF-DrI" eventType="touchUpInside" id="5BR-4M-COO"/>
@@ -132,7 +132,7 @@
                         <viewLayoutGuide key="safeArea" id="2uF-F5-HOj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="o1E-lu-6Md" firstAttribute="top" secondItem="2uF-F5-HOj" secondAttribute="top" id="2b2-TN-XCv"/>
+                            <constraint firstItem="o1E-lu-6Md" firstAttribute="centerY" secondItem="apv-Np-uYM" secondAttribute="centerY" id="1Qj-4N-l0D"/>
                             <constraint firstItem="NKt-xy-FEu" firstAttribute="top" secondItem="apv-Np-uYM" secondAttribute="bottom" constant="20" id="86P-qL-ULQ"/>
                             <constraint firstItem="NKt-xy-FEu" firstAttribute="leading" secondItem="2uF-F5-HOj" secondAttribute="leading" constant="5" id="BGA-S0-1YT"/>
                             <constraint firstItem="Ehd-N9-VRq" firstAttribute="width" secondItem="Ehd-N9-VRq" secondAttribute="height" multiplier="392:416" id="Bkz-KD-J9Y"/>
@@ -148,7 +148,6 @@
                             <constraint firstItem="Ehd-N9-VRq" firstAttribute="leading" secondItem="2uF-F5-HOj" secondAttribute="leading" id="lit-w4-haQ"/>
                             <constraint firstItem="NKt-xy-FEu" firstAttribute="top" secondItem="A5B-NE-ybi" secondAttribute="top" constant="100" id="m4N-cx-gLM"/>
                             <constraint firstAttribute="trailing" secondItem="crh-3L-A6A" secondAttribute="trailing" constant="32" id="maB-tw-pTg"/>
-                            <constraint firstItem="7Z8-nl-pVO" firstAttribute="centerY" secondItem="apv-Np-uYM" secondAttribute="centerY" id="ud4-HH-O8Q"/>
                             <constraint firstItem="2uF-F5-HOj" firstAttribute="trailing" secondItem="o1E-lu-6Md" secondAttribute="trailing" constant="20.5" id="vFc-KG-RIq"/>
                             <constraint firstItem="apv-Np-uYM" firstAttribute="leading" secondItem="2uF-F5-HOj" secondAttribute="leading" constant="20" id="y9r-R8-i1B"/>
                         </constraints>
