@@ -20,7 +20,8 @@ class HomeSeeAllCell: UITableViewCell{
     }
     
     override func awakeFromNib() {
-        
+        self.contentView.backgroundColor = UIColor(named: "white_orange_home")
+
     }
     
     func configure(type:seeAllCellType){

@@ -22,6 +22,7 @@ class HomeModeratorCell:UITableViewCell{
     }
     
     override func awakeFromNib() {
+        self.contentView.backgroundColor = UIColor(named: "white_orange_home")
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = containerView.bounds
 

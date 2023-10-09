@@ -31,6 +31,7 @@ class HomeEventHorizontalCollectionCell:UITableViewCell{
     var delegate:HomeEventHCCDelegate?
     
     override  func awakeFromNib() {
+        self.contentView.backgroundColor = UIColor(named: "white_orange_home")
         ui_collection_view.delegate = self
         ui_collection_view.dataSource = self
         // Enregistrement de la cellule de collectionView
@@ -42,6 +43,7 @@ class HomeEventHorizontalCollectionCell:UITableViewCell{
     }
     
     func configure(events:[Event]){
+        tableDTO.removeAll()
         for event in events {
             tableDTO.append(.eventCell(event: event))
         }
@@ -67,7 +69,7 @@ extension HomeEventHorizontalCollectionCell:UICollectionViewDelegate, UICollecti
         return UICollectionViewCell()
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 160, height: 200)
+        return CGSize(width: 160, height: 215)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

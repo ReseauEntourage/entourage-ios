@@ -30,6 +30,7 @@ class HomeGroupHorizontalCollectionCell:UITableViewCell{
     }
     
     override  func awakeFromNib() {
+        self.contentView.backgroundColor = UIColor(named: "white_orange_home")
         ui_collection_view.delegate = self
         ui_collection_view.dataSource = self
         // Enregistrement de la cellule de collectionView
@@ -41,6 +42,7 @@ class HomeGroupHorizontalCollectionCell:UITableViewCell{
     }
     
     func configure(groups:[Neighborhood]){
+        tableDTO.removeAll()
         for group in groups {
             tableDTO.append(.groupCell(group: group))
         }

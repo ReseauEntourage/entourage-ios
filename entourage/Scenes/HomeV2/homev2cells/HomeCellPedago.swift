@@ -25,6 +25,7 @@ class HomeCellPedago:UITableViewCell{
     }
     
     override func awakeFromNib() {
+        self.contentView.backgroundColor = UIColor(named: "white_orange_home")
         containerView.layer.cornerRadius = 15
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.appBeige.cgColor

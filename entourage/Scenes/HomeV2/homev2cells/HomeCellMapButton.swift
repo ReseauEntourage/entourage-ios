@@ -22,7 +22,8 @@ class HomeCellMapButton:UITableViewCell{
     }
     
     override func awakeFromNib() {
-        
+        self.contentView.backgroundColor = UIColor(named: "white_orange_home")
+
     }
     
     func configure(title:String){

@@ -99,7 +99,6 @@ class HomeMainViewController: UIViewController {
 //        // Vérifier si la date actuelle est entre la date de début et la date de fin
 //
 //        let condition = currentDate >= startDate && currentDate <= endDate
-//        print("eho popup : " , condition )
 //        if currentDate >= startDate && currentDate <= endDate {
 //            //Call to participate
 //            NeighborhoodService.joinNeighborhood(groupId: 44) { user, error in

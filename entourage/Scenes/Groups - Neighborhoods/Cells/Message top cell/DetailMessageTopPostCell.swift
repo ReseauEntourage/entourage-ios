@@ -36,7 +36,6 @@ class DetailMessageTopPostCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        print("eho top cell")
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
         ui_user.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 12), color: .appOrangeLight))

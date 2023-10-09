@@ -62,7 +62,7 @@ class HomeV2ViewController:UIViewController{
         prepareUINotifAndAvatar()
         ui_table_view.delegate = self
         ui_table_view.dataSource = self
-
+        ui_table_view.backgroundColor = UIColor(named: "white_orange_home")
         //Register cells
         //CELL TITLE
         ui_table_view.register(UINib(nibName: HomeV2CellTitle.identifier, bundle: nil), forCellReuseIdentifier: HomeV2CellTitle.identifier)
@@ -304,7 +304,7 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellSeeAll(_):
             return UITableView.automaticDimension
         case .cellEvent(_):
-            return 200
+            return 215
         case .cellGroup(_):
             return 120
         case .cellPedago(_):
@@ -350,8 +350,8 @@ extension HomeV2ViewController{
     }
     func getEvents(){
     EventService.getAllEventsDiscover(currentPage: 1, per: 10, filters: currentFilter.getfiltersForWS()) { events, error in
-            self.allEvents.removeAll()
-            if let events = events , events.count > 0 {
+            if let events = events {
+                self.allEvents.removeAll()
                 self.allEvents.append(contentsOf: events)
             }
         self.getPedago()

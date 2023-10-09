@@ -224,7 +224,6 @@ class NeighborhoodDetailViewController: UIViewController {
             }
         
             self.neighborhood = group
-            print("eho isMemberFromCall " , group?.isMember)
             self.splitMessages()
             self.ui_tableview.reloadData()
             self.isLoading = false
@@ -495,11 +494,9 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
 
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                print("eho isMember here" , neighborhood.isMember)
                 let isMember = neighborhood.isMember
                 let identifier = isMember ? NeighborhoodDetailTopMemberCell.identifier : NeighborhoodDetailTopCell.identifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-                print("eho isMember " , isMember)
                 if isMember, let memberCell = cell as? NeighborhoodDetailTopMemberCell {
                     memberCell.populateCell(neighborhood: neighborhood, isFollowingGroup: true, isFromOnlyDetail: false, delegate: self)
                 } else if let topCell = cell as? NeighborhoodDetailTopCell {
