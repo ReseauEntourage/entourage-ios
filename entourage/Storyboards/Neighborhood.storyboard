@@ -1983,7 +1983,7 @@
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Rejoindre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTC-Vg-fqi">
-                                                            <rect key="frame" x="20" y="12" width="73" height="20.5"/>
+                                                            <rect key="frame" x="20" y="13.5" width="73" height="17.5"/>
                                                             <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -2018,13 +2018,13 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTC-fT-9Za">
-                                                    <rect key="frame" x="28" y="183" width="350" height="19"/>
+                                                    <rect key="frame" x="28" y="183" width="350" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW0-ZT-oQz" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                    <rect key="frame" x="28" y="206" width="350" height="20.5"/>
+                                                    <rect key="frame" x="28" y="204.5" width="350" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2035,7 +2035,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgx-5d-gDq" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
-                                                    <rect key="frame" x="28" y="250.5" width="350" height="224.5"/>
+                                                    <rect key="frame" x="28" y="246" width="350" height="229"/>
                                                     <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="FDc-Ka-865"/>
@@ -2246,7 +2246,7 @@
     </scenes>
     <designables>
         <designable name="qW0-ZT-oQz">
-            <size key="intrinsicContentSize" width="90.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="93.5" height="17.5"/>
         </designable>
     </designables>
     <resources>

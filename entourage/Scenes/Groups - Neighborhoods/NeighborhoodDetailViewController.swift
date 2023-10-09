@@ -31,6 +31,7 @@ class NeighborhoodDetailViewController: UIViewController {
     var maxImageHeight:CGFloat = 73
     var minImageHeight:CGFloat = 0
     var viewNormalHeight:CGFloat = 0
+
     
     var messagesNew = [PostMessage]()
     var messagesOld = [PostMessage]()
@@ -81,12 +82,10 @@ class NeighborhoodDetailViewController: UIViewController {
             showCreatePost()
             isShowCreatePost = false
         }
-        getNeighborhoodDetail()
-        //Notif for updating neighborhood infos
-        //NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
-        //Notif for updating when create new Event + Show Detail event
+        self.getNeighborhoodDetail(hasToRefreshLists:true)
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreateEvent), name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFromLeave), name: NSNotification.Name(rawValue: kNotificationUpdateFromLeave), object: nil)
     }
     
 
@@ -182,14 +181,18 @@ class NeighborhoodDetailViewController: UIViewController {
     @objc private func updateFromCreateEvent() {
         updateNeighborhood()
     }
+    @objc func updateFromLeave() {
+        updateNeighborhood()
+    }
     
     @objc private func refreshNeighborhood() {
         updateNeighborhood()
     }
     
     @objc func updateNeighborhood() {
-        getNeighborhoodDetail()
+        self.getNeighborhoodDetail(hasToRefreshLists:true)
     }
+
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -221,6 +224,7 @@ class NeighborhoodDetailViewController: UIViewController {
             }
         
             self.neighborhood = group
+            print("eho isMemberFromCall " , group?.isMember)
             self.splitMessages()
             self.ui_tableview.reloadData()
             self.isLoading = false
@@ -284,7 +288,6 @@ class NeighborhoodDetailViewController: UIViewController {
         guard let neighborhood = neighborhood else {
             return
         }
-        
         if isAdd {
             IHProgressHUD.show()
             NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
@@ -296,8 +299,7 @@ class NeighborhoodDetailViewController: UIViewController {
                     
                     self.isAfterCreation = true
                     self.neighborhood?.membersCount = count
-                    self.ui_tableview.reloadData()
-                    self.getNeighborhoodDetail(hasToRefreshLists:true)
+                    self.getNeighborhoodDetail()
                     self.showWelcomeMessage()
                 }
             }
@@ -308,6 +310,7 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     func showWelcomeMessage(){
+
         //I_present_view_pop
         AnalyticsLoggerManager.logEvent(name: I_present_view_pop)
 
@@ -336,6 +339,7 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     func showPopLeave() {
+
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "params_leave_group_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         let buttonCancel = MJAlertButtonType(title: "params_leave_group_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
@@ -359,8 +363,6 @@ class NeighborhoodDetailViewController: UIViewController {
                 let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount - 1 : 0
                 
                 self.neighborhood?.membersCount = count
-                
-                self.ui_tableview.reloadData()
                 self.getNeighborhoodDetail(hasToRefreshLists:true)
 
             }
@@ -377,7 +379,6 @@ class NeighborhoodDetailViewController: UIViewController {
         else {
             addRemoveMember(isAdd: true)
         }
-        self.ui_tableview.reloadData()
     }
     
     //MARK: - IBAction -
@@ -385,6 +386,7 @@ class NeighborhoodDetailViewController: UIViewController {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Option)
         if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "params_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodParamsGroupViewController {
             vc.neighborhood = neighborhood
+            vc.dismissDelegate = self
             self.navigationController?.present(navVC, animated: true)
         }
     }
@@ -437,18 +439,17 @@ class NeighborhoodDetailViewController: UIViewController {
 extension NeighborhoodDetailViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag:MJAlertTAG) {
         AnalyticsLoggerManager.logEvent(name: i_present_close_pop)
+
     }
     
     func validateRightButton(alertTag:MJAlertTAG) {
-        if alertTag == .welcomeMessage{
-            AnalyticsLoggerManager.logEvent(name: I_present_click_i_post)
-            showCreatePost()
-        }
-        
+        self.getNeighborhoodDetail(hasToRefreshLists:true)
+        AnalyticsLoggerManager.logEvent(name: I_present_click_i_post)
+        showCreatePost()
+
     }
     func closePressed(alertTag:MJAlertTAG) {
         AnalyticsLoggerManager.logEvent(name: I_present_click_i_post)
-
     }
 }
 
@@ -494,13 +495,15 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
 
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                let isMember = neighborhood.isMember && !isAfterCreation
+                print("eho isMember here" , neighborhood.isMember)
+                let isMember = neighborhood.isMember
                 let identifier = isMember ? NeighborhoodDetailTopMemberCell.identifier : NeighborhoodDetailTopCell.identifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+                print("eho isMember " , isMember)
                 if isMember, let memberCell = cell as? NeighborhoodDetailTopMemberCell {
-                    memberCell.populateCell(neighborhood: neighborhood, isFollowingGroup: true, delegate: self)
+                    memberCell.populateCell(neighborhood: neighborhood, isFollowingGroup: true, isFromOnlyDetail: false, delegate: self)
                 } else if let topCell = cell as? NeighborhoodDetailTopCell {
-                    topCell.populateCell(neighborhood: neighborhood, isFollowingGroup: false, delegate: self)
+                    topCell.populateCell(neighborhood: neighborhood, isFollowingGroup: false, isFromOnlyDetail: false, delegate: self)
                 }
                 return cell
             } else {
@@ -809,7 +812,7 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
 }
 extension NeighborhoodDetailViewController:GroupDetailDelegate{
     func publicationDeleted() {
-        getNeighborhoodDetail()
+        self.getNeighborhoodDetail(hasToRefreshLists:true)
         self.ui_tableview.reloadData()
     }
     
@@ -857,5 +860,11 @@ extension NeighborhoodDetailViewController{
                 self.ui_view_full_image.isHidden = false
             }
         }
+    }
+}
+
+extension NeighborhoodDetailViewController:NeighborhoodParamDismissDelegate{
+    func onDismiss() {
+        self.getNeighborhoodDetail()
     }
 }

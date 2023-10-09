@@ -52,7 +52,6 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
         guard let neighborhood = neighborhood else {
             return
         }
-        
         if isAdd {
             IHProgressHUD.show()
             NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
@@ -63,7 +62,6 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
                     let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount + 1 : 1
                     
                     self.neighborhood?.membersCount = count
-                    self.ui_tableview.reloadData()
                     self.delegate?.refreshNeighborhoodModified()
                 }
             }
@@ -71,6 +69,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
         else {
             showPopLeave()
         }
+        
     }
     
     func joinLeaveGroup() {
@@ -83,7 +82,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
         else {
             addRemoveMember(isAdd: true)
         }
-        self.ui_tableview.reloadData()
+        
     }
     
     func showPopLeave() {
@@ -145,7 +144,7 @@ extension NeighborhoodDetailOnlyViewController: UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! NeighborhoodDetailTopCell
-        cell.populateCell(neighborhood: self.neighborhood, isFollowingGroup: false, delegate: self)
+        cell.populateCell(neighborhood: self.neighborhood, isFollowingGroup: self.neighborhood?.isMember ?? false, isFromOnlyDetail: true, delegate: self)
         return cell
     }
 }
