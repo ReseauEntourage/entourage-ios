@@ -119,10 +119,6 @@
                                     <constraint firstItem="lRH-gb-oWJ" firstAttribute="leading" secondItem="ID9-wg-jda" secondAttribute="leading" id="yXP-LH-fkh"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Cp8-TL-Hb0">
-                                <rect key="frame" x="188.5" y="436.5" width="37" height="37"/>
-                                <color key="color" name="orange_app"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xmZ-dL-AV6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -130,9 +126,7 @@
                             <constraint firstItem="n8R-LH-7qk" firstAttribute="top" secondItem="WQ6-vW-DN9" secondAttribute="bottom" constant="40" id="0Wu-zW-nCy"/>
                             <constraint firstItem="WQ6-vW-DN9" firstAttribute="centerX" secondItem="xmZ-dL-AV6" secondAttribute="centerX" id="2hn-Nt-jKG"/>
                             <constraint firstItem="n8R-LH-7qk" firstAttribute="trailing" secondItem="xmZ-dL-AV6" secondAttribute="trailing" id="49P-ky-QiR"/>
-                            <constraint firstItem="Cp8-TL-Hb0" firstAttribute="centerY" secondItem="xmZ-dL-AV6" secondAttribute="centerY" id="4Ln-dY-Cef"/>
                             <constraint firstItem="RRt-Lt-sHo" firstAttribute="top" secondItem="7r4-E0-dtf" secondAttribute="top" id="5nE-wq-veZ"/>
-                            <constraint firstItem="Cp8-TL-Hb0" firstAttribute="centerX" secondItem="xmZ-dL-AV6" secondAttribute="centerX" id="AlJ-sI-cLn"/>
                             <constraint firstItem="Ab8-d9-2BI" firstAttribute="leading" secondItem="xmZ-dL-AV6" secondAttribute="leading" constant="16" id="BBZ-H6-DuP"/>
                             <constraint firstItem="ID9-wg-jda" firstAttribute="centerY" secondItem="Ab8-d9-2BI" secondAttribute="centerY" id="D65-X2-XWN"/>
                             <constraint firstItem="RRt-Lt-sHo" firstAttribute="leading" secondItem="xmZ-dL-AV6" secondAttribute="leading" id="IKt-1k-Kjz"/>
@@ -154,7 +148,6 @@
                         <outlet property="ui_image_notif" destination="n2D-Cu-dCS" id="2xX-Iv-uGP"/>
                         <outlet property="ui_image_user_avatar" destination="Ab8-d9-2BI" id="5FW-ad-ULY"/>
                         <outlet property="ui_label_subtitle" destination="fbg-P1-PX5" id="lt8-Ww-hF8"/>
-                        <outlet property="ui_spinner" destination="Cp8-TL-Hb0" id="DMg-07-FXZ"/>
                         <outlet property="ui_table_view" destination="n8R-LH-7qk" id="mHM-lf-DBS"/>
                         <outlet property="ui_view_notif" destination="ID9-wg-jda" id="IJe-yq-jo3"/>
                     </connections>

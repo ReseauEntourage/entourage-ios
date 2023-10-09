@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SafariServices
+import IHProgressHUD
 
 
 enum seeAllCellType{
@@ -33,7 +34,6 @@ class HomeV2ViewController:UIViewController{
     
     //OUTLET
     
-    @IBOutlet weak var ui_spinner: UIActivityIndicatorView!
     @IBOutlet weak var ui_drivable_top_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_drivable_table_view_top_constraint: NSLayoutConstraint!
     
@@ -59,6 +59,8 @@ class HomeV2ViewController:UIViewController{
     var pedagoCreateGroup:PedagogicResource?
     
     override func viewDidLoad() {
+        IHProgressHUD.show()
+
         prepareUINotifAndAvatar()
         ui_table_view.delegate = self
         ui_table_view.dataSource = self
@@ -162,11 +164,9 @@ class HomeV2ViewController:UIViewController{
             }
         }
         self.ui_table_view.reloadData()
-        self.ui_spinner.isHidden = true
-
+        IHProgressHUD.dismiss()
     }
     func initHome(){
-        self.ui_spinner.isHidden = false
         self.getNotif()
     }
     func updateTopView() {
