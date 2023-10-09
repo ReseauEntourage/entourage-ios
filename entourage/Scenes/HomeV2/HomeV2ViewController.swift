@@ -350,8 +350,8 @@ extension HomeV2ViewController{
     }
     func getEvents(){
     EventService.getAllEventsDiscover(currentPage: 1, per: 10, filters: currentFilter.getfiltersForWS()) { events, error in
+            self.allEvents.removeAll()
             if let events = events , events.count > 0 {
-                self.allEvents.removeAll()
                 self.allEvents.append(contentsOf: events)
             }
         self.getPedago()
