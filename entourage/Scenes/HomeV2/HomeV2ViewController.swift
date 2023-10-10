@@ -375,6 +375,7 @@ extension HomeV2ViewController{
                         break
                     }
                 }
+                #if DEBUG
                 for pedago in resources{
                     if pedago.id == 32{
                         self.pedagoCreateEvent = pedago
@@ -382,6 +383,15 @@ extension HomeV2ViewController{
                         self.pedagoCreateGroup = pedago
                     }
                 }
+                #else
+                for pedago in resources{
+                    if pedago.id == 15{
+                        self.pedagoCreateEvent = pedago
+                    }else if pedago.id == 37{
+                        self.pedagoCreateGroup = pedago
+                    }
+                }
+                #endif
             }
             self.getHomeDetail()
         }
