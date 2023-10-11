@@ -28,6 +28,7 @@ enum HomeV2DTO{
     case cellMap
     case cellIAmLost(helpType:HomeNeedHelpType)
     case moderator(name:String, imageUrl:String)
+    case cellHZ
 }
 
 class HomeV2ViewController:UIViewController{
@@ -84,6 +85,8 @@ class HomeV2ViewController:UIViewController{
         ui_table_view.register(UINib(nibName: HomeNeedHelpCell.identifier, bundle: nil), forCellReuseIdentifier: HomeNeedHelpCell.identifier)
         //CELL MODERATOR
         ui_table_view.register(UINib(nibName: HomeModeratorCell.identifier, bundle: nil), forCellReuseIdentifier: HomeModeratorCell.identifier)
+        //CELL HZ
+        ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
 
     }
     
@@ -154,6 +157,9 @@ class HomeV2ViewController:UIViewController{
                 tableDTO.append(.cellPedago(pedago: pedago))
             }
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
+        }
+        if allEvents.count == 0 && allDemands.count == 0 {
+            tableDTO.append(.cellHZ)
         }
         tableDTO.append(.cellTitle(title: "home_v2_title_help".localized, subtitle: "home_v2_subtitle_help".localized))
         tableDTO.append(.cellIAmLost(helpType: .createGroup))
@@ -254,6 +260,12 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
                 cell.configure(title: name, imageUrl: imageUrl)
                 return cell
             }
+        case .cellHZ:
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeHZCell") as? HomeHZCell{
+                cell.selectionStyle = .none
+                cell.delegate = self
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -293,6 +305,8 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
             if let _moderator = self.userHome.moderator{
                 showUserProfile(id: _moderator.id!)
             }
+        case .cellHZ:
+            return
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -306,7 +320,7 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellEvent(_):
             return 215
         case .cellGroup(_):
-            return 120
+            return 130
         case .cellPedago(_):
             return UITableView.automaticDimension
         case .cellMap:
@@ -314,6 +328,8 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellIAmLost(_):
             return UITableView.automaticDimension
         case .moderator(_,_):
+            return UITableView.automaticDimension
+        case .cellHZ:
             return UITableView.automaticDimension
         }
     }
@@ -595,6 +611,15 @@ extension HomeV2ViewController: UIScrollViewDelegate {
                 }
             }
         }
+    }
+}
+
+extension HomeV2ViewController: HomeHZCellDelegate {
+    func onCLickGoBuffet() {
+        let urlStr = "https://reseauentourage.notion.site/Buffet-du-lien-social-69c20e089dbd483cb093e90ae2953a54"
+        var webUrl:URL?
+        webUrl = URL(string: urlStr)
+        WebLinkManager.openUrlInApp(url: webUrl, presenterViewController: self)
     }
 }
 

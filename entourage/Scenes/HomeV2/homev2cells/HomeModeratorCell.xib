@@ -69,7 +69,7 @@
                     <constraint firstItem="zPb-0Z-MjV" firstAttribute="leading" secondItem="StR-XD-kBu" secondAttribute="leading" constant="16" id="1b8-98-lef"/>
                     <constraint firstItem="zPb-0Z-MjV" firstAttribute="top" secondItem="StR-XD-kBu" secondAttribute="top" constant="10" id="O2p-Il-Lmx"/>
                     <constraint firstAttribute="trailing" secondItem="zPb-0Z-MjV" secondAttribute="trailing" constant="16" id="OYa-6m-Vrx"/>
-                    <constraint firstAttribute="bottom" secondItem="zPb-0Z-MjV" secondAttribute="bottom" constant="26" id="oyA-ME-QtK"/>
+                    <constraint firstAttribute="bottom" secondItem="zPb-0Z-MjV" secondAttribute="bottom" constant="28" id="oyA-ME-QtK"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
