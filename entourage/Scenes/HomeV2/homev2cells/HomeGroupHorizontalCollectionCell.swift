@@ -73,6 +73,7 @@ extension HomeGroupHorizontalCollectionCell:UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch tableDTO[indexPath.row]{
         case .groupCell(let group):
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Group_Detail)
             delegate?.goToMyGroup(group: group)
         }
     }

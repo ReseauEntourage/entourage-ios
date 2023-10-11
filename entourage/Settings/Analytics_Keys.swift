@@ -307,3 +307,30 @@ let  Clic__StateContribPop__Yes__Day10 = "Clic__StateContribPop__Yes__Day10"
 let  View__StateContribPop__No__Day10 = "View__StateContribPop__No__Day10"
 let  Clic__SeeContrib__Day10 = "Clic__SeeContrib__Day10"
 let   View__DeleteContribPop__Day10 = "View__DeleteContribPop__Day10"
+
+//NEW EVENT HOME V2
+let   View__Home = "View__Home"//
+let   Action__Home__Notif = "Action__Home__Notif"//
+let   Action__Tab__Profil = "Action__Tab__Profil"//
+let   Action_Home_Demand_Detail = "Action_Home_Demand_Detail"
+let   Action_Home_Demand_All = "Action_Home_Demand_All"//
+let  Action_Home_Event_Detail = "Action_Home_Event_Detail"//
+let   Action_Home_Event_All = "Action_Home_Event_All"//
+let   Action_Home_Group_Detail = "Action_Home_Group_Detail"
+let   Action_Home_Group_All = "Action_Home_Group_All"//
+let   Action__Home__Map = "Action__Home__Map"//
+let   Action_Home_Article = "Action_Home_Article"//
+let   Action__Home__Pedago = "Action__Home__Pedago"//
+let   Action_Home_CreateEvent = "Action_Home_CreateEvent"//
+let   Action_Home_CreateGroup = "Action_Home_CreateGroup"//
+let   Action__Home__Moderator = "Action__Home__Moderator"//
+let   Action_Home_Contrib_Detail = "Action_Home_Contrib_Detail"
+let   Action_Home_Contrib_All = "Action_Home_Contrib_All"
+let   Action_Home_Buffet = "Action_Home_Buffet"//
+
+// NEW EVENT
+let   View__Event__List = "View__Event__List"
+let   Action__Event__LocationFilter = "Action__Event__LocationFilter"
+let   Action__Event__New = "Action__Event__New"
+
+

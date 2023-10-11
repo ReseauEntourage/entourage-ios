@@ -61,7 +61,7 @@ class HomeV2ViewController:UIViewController{
     
     override func viewDidLoad() {
         IHProgressHUD.show()
-
+        AnalyticsLoggerManager.logEvent(name: View__Home)
         prepareUINotifAndAvatar()
         ui_table_view.delegate = self
         ui_table_view.dataSource = self
@@ -110,14 +110,14 @@ class HomeV2ViewController:UIViewController{
     }
     
     @objc func onAvatarClick(){
-        AnalyticsLoggerManager.logEvent(name: Home_action_profile)
+        AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
         let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
     
     @objc func onNotifClick(){
-        AnalyticsLoggerManager.logEvent(name: Home_action_notif)
+        AnalyticsLoggerManager.logEvent(name: Action__Home__Notif)
         if let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav") as? UINavigationController {
             navVC.modalPresentationStyle = .fullScreen
             if let vc = navVC.topViewController as? NotificationsInAppViewController {
@@ -274,16 +274,21 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellTitle(_,_):
             return
         case .cellAction(let action):
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
             self.showAction(actionId: action.id, isContrib: false, action: action)
         case .cellSeeAll(let seeAllType):
             switch seeAllType{
             case .seeAllDemand:
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_All)
                 DeepLinkManager.showDemandListUniversalLink()
             case .seeAllEvent:
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Event_All)
                 DeepLinkManager.showOutingListUniversalLink()
             case .seeAllGroup:
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Group_All)
                 DeepLinkManager.showNeiborhoodListUniversalLink()
             case .seeAllPedago:
+                AnalyticsLoggerManager.logEvent(name: Action__Home__Pedago)
                 DeepLinkManager.showRessourceListUniversalLink()
             }
         case .cellEvent(_):
@@ -291,21 +296,27 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellGroup(_):
             return
         case .cellPedago(let pedago):
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Article)
             showPedagogic(pedagogic: pedago)
         case .cellMap:
+            AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
             self.showAllPois()
         case .cellIAmLost(let helpType):
             switch helpType{
             case .createEvent:
+                AnalyticsLoggerManager.logEvent(name: Action_Home_CreateEvent)
                 showPedagogic(pedagogic: pedagoCreateEvent!)
             case .createGroup:
+                AnalyticsLoggerManager.logEvent(name: Action_Home_CreateGroup)
                 showPedagogic(pedagogic: pedagoCreateGroup!)
             }
         case .moderator(let name, let imageUrl):
             if let _moderator = self.userHome.moderator{
+                AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
                 showUserProfile(id: _moderator.id!)
             }
         case .cellHZ:
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Buffet)
             return
         }
     }
