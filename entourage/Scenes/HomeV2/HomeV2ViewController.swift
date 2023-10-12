@@ -58,6 +58,7 @@ class HomeV2ViewController:UIViewController{
     var userHome:UserHome = UserHome()
     var pedagoCreateEvent:PedagogicResource?
     var pedagoCreateGroup:PedagogicResource?
+    var isContributionPreference = false
     
     override func viewDidLoad() {
         IHProgressHUD.show()
@@ -131,11 +132,19 @@ class HomeV2ViewController:UIViewController{
         self.tableDTO.removeAll()
         self.updateTopView()
         if(allDemands.count > 0){
-            tableDTO.append(.cellTitle(title: "home_v2_title_action".localized, subtitle: "home_v2_subtitle_action".localized))
-            for demand in allDemands {
-                tableDTO.append(.cellAction(action: demand))
+            if isContributionPreference {
+                tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
+                for demand in allDemands {
+                    tableDTO.append(.cellAction(action: demand))
+                }
+                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
+            }else{
+                tableDTO.append(.cellTitle(title: "home_v2_title_action".localized, subtitle: "home_v2_subtitle_action".localized))
+                for demand in allDemands {
+                    tableDTO.append(.cellAction(action: demand))
+                }
+                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
             }
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
         }
         if allEvents.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_event".localized, subtitle: "home_v2_subtitle_event".localized))
@@ -158,7 +167,7 @@ class HomeV2ViewController:UIViewController{
             }
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
         }
-        if allEvents.count == 0 && allDemands.count == 0 {
+        if allEvents.count == 0 && allDemands.count == 0 && !isContributionPreference {
             tableDTO.append(.cellHZ)
         }
         tableDTO.append(.cellTitle(title: "home_v2_title_help".localized, subtitle: "home_v2_subtitle_help".localized))
@@ -218,7 +227,7 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellSeeAll(let seeAllType):
             if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeSeeAllCell") as? HomeSeeAllCell{
                 cell.selectionStyle = .none
-                cell.configure(type: seeAllType)
+                cell.configure(type: seeAllType,isContrib: self.isContributionPreference)
                 return cell
             }
             
@@ -274,13 +283,23 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellTitle(_,_):
             return
         case .cellAction(let action):
-            AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
-            self.showAction(actionId: action.id, isContrib: false, action: action)
+            if isContributionPreference {
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_Detail)
+                self.showAction(actionId: action.id, isContrib: true, action: action)
+            }else{
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
+                self.showAction(actionId: action.id, isContrib: false, action: action)
+            }
         case .cellSeeAll(let seeAllType):
             switch seeAllType{
             case .seeAllDemand:
-                AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_All)
-                DeepLinkManager.showDemandListUniversalLink()
+                if isContributionPreference {
+                    AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_All)
+                    DeepLinkManager.showContribListUniversalLink()
+                }else{
+                    AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_All)
+                    DeepLinkManager.showDemandListUniversalLink()
+                }
             case .seeAllEvent:
                 AnalyticsLoggerManager.logEvent(name: Action_Home_Event_All)
                 DeepLinkManager.showOutingListUniversalLink()
@@ -352,16 +371,26 @@ extension HomeV2ViewController{
     func getNotif(){
         HomeService.getNotificationsCount { count, error in
             self.notificationCount = count ?? 0
-            self.getDemandes()
+            self.getMyGroups()
         }
     }
     func getDemandes(){
-        ActionsService.getAllActions(isContrib: false, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
-            if let actions = actions {
-                self.allDemands.removeAll()
-                self.allDemands.append(contentsOf: actions)
+        if isContributionPreference {
+            ActionsService.getAllActions(isContrib: true, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
+                if let actions = actions {
+                    self.allDemands.removeAll()
+                    self.allDemands.append(contentsOf: actions)
+                }
+                self.configureDTO()
             }
-            self.getMyGroups()
+        }else{
+            ActionsService.getAllActions(isContrib: false, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
+                if let actions = actions {
+                    self.allDemands.removeAll()
+                    self.allDemands.append(contentsOf: actions)
+                }
+                self.configureDTO()
+            }
         }
     }
     
@@ -427,9 +456,13 @@ extension HomeV2ViewController{
         HomeService.getUserHome { [weak self] userHome, error in
             if let userHome = userHome {
                 self?.userHome = userHome
-                
+                if userHome.preference == "contribution" {
+                    self?.isContributionPreference = true
+                }else{
+                    self?.isContributionPreference = false
+                }
             }
-            self?.configureDTO()
+            self?.getDemandes()
         }
     }
      func loadMetadatas() {

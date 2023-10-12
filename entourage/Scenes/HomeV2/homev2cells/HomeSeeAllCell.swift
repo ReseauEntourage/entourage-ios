@@ -24,10 +24,14 @@ class HomeSeeAllCell: UITableViewCell{
 
     }
     
-    func configure(type:seeAllCellType){
+    func configure(type:seeAllCellType, isContrib:Bool){
         switch type{
         case .seeAllDemand:
-            self.ui_label_see_all.text = "home_v2_btn_more_action".localized
+            if isContrib {
+                self.ui_label_see_all.text = "home_v2_btn_more_action_contrib".localized
+            }else{
+                self.ui_label_see_all.text = "home_v2_btn_more_action".localized
+            }
         case .seeAllEvent:
             self.ui_label_see_all.text = "home_v2_btn_more_event".localized
         case .seeAllGroup:

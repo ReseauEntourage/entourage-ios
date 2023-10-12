@@ -1376,6 +1376,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_subtitle_action" = "Vos voisins ont besoin de vous !";
 "home_v2_btn_more_action" = "Voir toutes les demandes";
 
+"home_v2_title_action_contrib" = "Besoin d'un coup de pouce ?";
+"home_v2_subtitle_action_contrib" = "Découvrez ce que proposent vos voisins !";
+"home_v2_btn_more_action_contrib" = "Voir toutes les contributions";
+
 "home_v2_title_event" = "Participer à un événement solidaire";
 "home_v2_subtitle_event" = "Le plein de solidarité à proximité";
 "home_v2_btn_more_event" = "Voir tous les événements";
