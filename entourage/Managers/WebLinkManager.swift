@@ -36,7 +36,7 @@ struct WebLinkManager {
         }
     }
 
-    private static func openUrlInApp(url:URL?, presenterViewController:UIViewController?, safariDelegate:SFSafariViewControllerDelegate? = nil) {
+     static func openUrlInApp(url:URL?, presenterViewController:UIViewController?, safariDelegate:SFSafariViewControllerDelegate? = nil) {
         guard let url = url else {
             return
         }

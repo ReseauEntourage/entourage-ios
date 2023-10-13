@@ -73,8 +73,7 @@ class MainTabbarViewController: UITabBarController {
     
     
     @objc func showDiscoverEvents() {
-        if let vc = eventsVC.topViewController as? EventMainHomeViewController {
-            vc.setDiscoverFirst()
+        if let vc = eventsVC.topViewController as? EventListMainV2ViewController {
         }
         self.selectedIndex = 4
         self.boldSelectedItem()
@@ -82,8 +81,7 @@ class MainTabbarViewController: UITabBarController {
     }
     
     @objc func showMyEvents() {
-        if let vc = eventsVC.topViewController as? EventMainHomeViewController {
-            vc.setDiscoverFirst()
+        if let vc = eventsVC.topViewController as? EventListMainV2ViewController {
         }
         self.selectedIndex = 4
         self.boldSelectedItem()
@@ -93,6 +91,13 @@ class MainTabbarViewController: UITabBarController {
     @objc func showActionsContrib() {
         if let vc = actionsVC.topViewController as? ActionsMainHomeViewController {
             vc.setContributionsFirst()
+        }
+        self.selectedIndex = 1
+        self.boldSelectedItem()
+    }
+    @objc func showActionsDemand() {
+        if let vc = actionsVC.topViewController as? ActionsMainHomeViewController {
+            vc.setSolicitationsFirst()
         }
         self.selectedIndex = 1
         self.boldSelectedItem()
@@ -124,7 +129,7 @@ class MainTabbarViewController: UITabBarController {
     
     func setupVCs() {
         
-        let _homeVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "homeVC")
+        let _homeVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "homev2vc")
         homeVC = UINavigationController.init(rootViewController: _homeVC)
         homeVC.isNavigationBarHidden = true
         homeVC.tabBarItem.title = "tabbar_home".localized
@@ -160,7 +165,7 @@ class MainTabbarViewController: UITabBarController {
         groupVC.tabBarItem.tag = 3
         
         
-        let _eventsVC = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "home_events_vc")
+        let _eventsVC = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "home_new_events_vc")
         eventsVC = UINavigationController.init(rootViewController: _eventsVC)
         eventsVC.isNavigationBarHidden = true
         eventsVC.tabBarItem.title = "tabbar_events".localized

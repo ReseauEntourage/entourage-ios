@@ -125,7 +125,7 @@ let kAPIGetDeleteMessageInConv = "conversations/%d/chat_messages/%d"
 
 
 //WebLink
-let emailContact = "app@entourage.social"
+let emailContact = "https://www.entourage.social/contact/"
 let GDS_INFO_ALERT_WEB_LINK = "https://soliguide.fr"
 let ENTOURAGE_BITLY_LINK = "https://bit.ly/applientourage"
 let PROPOSE_STRUCTURE_URL = "%@links/propose-poi/redirect?token=%@"

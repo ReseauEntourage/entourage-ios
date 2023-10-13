@@ -256,7 +256,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
                     vc.delegate = currentVc.self
                     currentVc.present(vc, animated: true)
                 }
@@ -268,7 +268,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
                     vc.delegate = currentVc.self
                     currentVc.present(vc, animated: true)
                 }
@@ -280,7 +280,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomethreevc") as? WelcomeThreeViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
                     vc.delegate = currentVc.self
                     currentVc.present(vc, animated: true)
                 }
@@ -292,7 +292,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -303,7 +303,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomefivevc") as? WelcomeFiveViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -416,6 +416,25 @@ struct DeepLinkManager {
             }
         }
     }
+    static func showDemandListUniversalLink() {
+        if let vc = AppState.getTopViewController() {
+            // Verifier si le viewController est présenté comme modal
+            if vc.isModal {
+                // Fermer le modal avant de lancer la commande
+                vc.dismiss(animated: true) {
+                    if let _vc = AppState.getTopViewController() {
+                        if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
+                            _tabbar.showActionsDemand()
+                        }
+                    }
+                }
+            } else {
+                if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                    _tabbar.showActionsDemand()
+                }
+            }
+        }
+    }
     static func showSolicitationListUniversalLink() {
         if let vc = AppState.getTopViewController(){
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
@@ -459,7 +478,7 @@ struct DeepLinkManager {
         }
     }
     static func showNeiborhoodListUniversalLink() {
-        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+        if let vc = AppState.getTopViewController() as? HomeV2ViewController{
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
                 _tabbar.showMyNeighborhoods()
             }

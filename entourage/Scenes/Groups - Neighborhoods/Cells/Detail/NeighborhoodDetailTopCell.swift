@@ -38,6 +38,7 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     let cornerRadiusTag:CGFloat = 15
     
     var isFollowingGroup = false
+    var isFromOnlyDetail = false
     
     class var identifier:String {return String(describing: self) }
     
@@ -76,10 +77,11 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     
     
     
-    func populateCell(neighborhood:Neighborhood?,isFollowingGroup:Bool, delegate:NeighborhoodDetailTopCellDelegate) {
+    func populateCell(neighborhood:Neighborhood?,isFollowingGroup:Bool, isFromOnlyDetail:Bool, delegate:NeighborhoodDetailTopCellDelegate) {
         
         self.delegate = delegate
         self.isFollowingGroup = isFollowingGroup
+        self.isFromOnlyDetail = isFromOnlyDetail
         ui_img_member_1.isHidden = true
         ui_img_member_2.isHidden = true
         ui_img_member_3.isHidden = true
@@ -131,25 +133,37 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         }
 
         let currentUserId = UserDefaults.currentUser?.sid
-        if isFollowingGroup {
+        
+        if isFromOnlyDetail{
+            if let _ = neighborhood.members.first(where: {$0.uid == currentUserId}) {
+                ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
+                ui_view_button_join.backgroundColor = .clear
+                ui_img_bt_join.image = UIImage.init(named: "ic_check_member_orange")
+                ui_lbl_bt_join.text = "neighborhood_detail_button_join_member".localized
+            }else if isFollowingGroup{
+                ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
+                ui_view_button_join.backgroundColor = .clear
+                ui_img_bt_join.image = UIImage.init(named: "ic_check_member_orange")
+                ui_lbl_bt_join.text = "neighborhood_detail_button_join_member".localized
+            }else {
+                ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
+                ui_view_button_join.backgroundColor = .appOrange
+                ui_img_bt_join.image = UIImage.init(named: "ic_plus_white")
+                ui_lbl_bt_join.text = "neighborhood_detail_button_join_join".localized
+            }
+        }else if isFollowingGroup {
             ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
             ui_view_button_join.backgroundColor = .clear
-            ui_view_button_join.layer.borderWidth = 0
+            ui_view_button_join.layer.borderColor = UIColor.clear.cgColor
             ui_img_bt_join.image = UIImage.init(named: "ic_next_orange")
             ui_lbl_bt_join.attributedText = Utils.formatStringUnderline(textString: "neighborhood_detail_button_more".localized, textColor: .appOrange,font: ApplicationTheme.getFontH2Noir().font)
-        }
-        else if let _ = neighborhood.members.first(where: {$0.uid == currentUserId}) {
-            ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
-            ui_view_button_join.backgroundColor = .clear
-            ui_img_bt_join.image = UIImage.init(named: "ic_check_member_orange")
-            ui_lbl_bt_join.text = "neighborhood_detail_button_join_member".localized
-        }
-        else {
+        }else{
             ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
             ui_view_button_join.backgroundColor = .appOrange
             ui_img_bt_join.image = UIImage.init(named: "ic_plus_white")
             ui_lbl_bt_join.text = "neighborhood_detail_button_join_join".localized
         }
+       
         
         if let _interests = neighborhood.interests {
             ui_taglist_view?.removeAllTags()

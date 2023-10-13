@@ -16,8 +16,6 @@ struct UniversalLinkManager {
     
     static func handleUniversalLink(components:URLComponents){
         let pathComponents = components.path.components(separatedBy: "/")
-        print("eho pathComponent " , pathComponents)
-        print("eho ")
         // check if the incoming URL matches any of the URLs you want to handle
         if components.host == stagingURL || components.host == prodURL || components.host == prodURL2 || components.host == stagingURL2  {
             
@@ -35,7 +33,6 @@ struct UniversalLinkManager {
             
             if pathComponents.contains("actions"){
                 if let url = components.url {
-                    print("eho url ", url)
                     WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
                 }
             }
@@ -56,7 +53,6 @@ struct UniversalLinkManager {
                 if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
                     DeepLinkManager.showOutingUniversalLink(id: _hashId)
                 }else{
-                    print("eho got here")
                     DeepLinkManager.showOutingListUniversalLink()
                 }
             }else if pathComponents.contains("neighborhoods") || pathComponents.contains("groups") {

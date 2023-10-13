@@ -7,13 +7,17 @@
 
 import UIKit
 
+protocol NeighborhoodParamDismissDelegate{
+    func onDismiss()
+}
+
 class NeighborhoodParamsGroupViewController: BasePopViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
     
     var neighborhood:Neighborhood? = nil
-    
     var groupUserType:GroupUserType = .Viewer
+    var dismissDelegate:NeighborhoodParamDismissDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,6 +203,7 @@ extension NeighborhoodParamsGroupViewController: GroupDetailDelegate {
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodParamsGroupViewController: MJNavBackViewDelegate {
     func goBack() {
+        self.dismissDelegate?.onDismiss()
         self.navigationController?.dismiss(animated: true)
     }
 }

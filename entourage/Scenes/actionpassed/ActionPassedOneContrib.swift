@@ -49,7 +49,7 @@ class ActionPassedOneContrib:UIViewController {
                     if self.actionType != nil {
                         vc.setActionType(actionType: self.actionType!)
                     }
-                    if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
                         currentVc.present(vc, animated: true)
                     }
                 }
@@ -69,7 +69,7 @@ class ActionPassedOneContrib:UIViewController {
                         vc.setActionType(actionType: self.actionType!)
                     }
                     
-                    if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
                         currentVc.present(vc, animated: true)
                     }
                 }
