@@ -54,7 +54,7 @@
                                     <constraint firstAttribute="width" constant="200" id="92e-nf-cQQ"/>
                                     <constraint firstAttribute="height" constant="32" id="bCl-wc-MIo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="16"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button">
                                     <color key="titleColor" name="orange_app"/>
