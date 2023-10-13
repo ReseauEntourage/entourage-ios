@@ -167,7 +167,13 @@ class HomeV2ViewController:UIViewController{
             }
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
         }
-        if allEvents.count == 0 && allDemands.count == 0 && !isContributionPreference {
+        var _offlineEvents = [Event]()
+        for event in allEvents{
+            if event.isOnline == false {
+                _offlineEvents.append(event)
+            }
+        }
+        if _offlineEvents.count == 0 && allDemands.count == 0 && !isContributionPreference {
             tableDTO.append(.cellHZ)
         }
         tableDTO.append(.cellTitle(title: "home_v2_title_help".localized, subtitle: "home_v2_subtitle_help".localized))
