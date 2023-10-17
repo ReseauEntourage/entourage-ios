@@ -295,6 +295,8 @@ extension EventListMainV2ViewController{
                     self.isEndOfDiscoverList = true
                 }
                 self.discoverEvent.append(contentsOf: _events)
+                self.configureDTO()
+                self.isLoading = false
             }else if let _error = error {
                 //TODO ERROR Trigger warning
             }
@@ -303,7 +305,9 @@ extension EventListMainV2ViewController{
     }
     
     func getMyEvent(){
-
+        if isEndOfMyEventList {
+            return
+        }
         EventService.getAllEventsForUser(currentPage: currentPageMy, per: numberOfItemsForWS) { events, error in
             
             if(self.isFromFilter){
