@@ -32,7 +32,7 @@ class EventListMainV2ViewController:UIViewController{
     //VAR
     private var currentPageMy = 0
     private var currentPageDiscover = 0
-    private let numberOfItemsForWS = 7
+    private let numberOfItemsForWS = 10
     private var currentFilter = EventActionLocationFilters()
     private var tableDTO = [EventListTableDTO]()
     private var discoverEvent = [Event]()
@@ -303,9 +303,7 @@ extension EventListMainV2ViewController{
     }
     
     func getMyEvent(){
-        if isEndOfMyEventList {
-            return
-        }
+
         EventService.getAllEventsForUser(currentPage: currentPageMy, per: numberOfItemsForWS) { events, error in
             
             if(self.isFromFilter){
