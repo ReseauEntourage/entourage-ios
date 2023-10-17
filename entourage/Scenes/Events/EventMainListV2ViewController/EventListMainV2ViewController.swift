@@ -65,10 +65,11 @@ class EventListMainV2ViewController:UIViewController{
         pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)
         ui_table_view.refreshControl = pullRefreshControl
         deployButton()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        AnalyticsLoggerManager.logEvent(name: View__Event__List)
         loadForInit()
     }
     
@@ -142,8 +143,8 @@ class EventListMainV2ViewController:UIViewController{
     }
     
     @IBAction func OnFilterClick(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action__Event__LocationFilter)
         if let vc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
-            AnalyticsLoggerManager.logEvent(name: Event_action_filter)
             vc.currentFilter = self.currentFilter
             vc.modalPresentationStyle = .fullScreen
             vc.delegate = self
@@ -151,14 +152,14 @@ class EventListMainV2ViewController:UIViewController{
         }
     }
     @IBAction func OnBtnNewClick(_ sender: Any) {
-        AnalyticsLoggerManager.logEvent(name: Event_action_create)
+        AnalyticsLoggerManager.logEvent(name: Action__Event__New)
         let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
     @IBAction func OnExpandedFloatingButtonClick(_ sender: Any) {
-        AnalyticsLoggerManager.logEvent(name: Event_action_create)
+        AnalyticsLoggerManager.logEvent(name: Action__Event__New)
         let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
