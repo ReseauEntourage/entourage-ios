@@ -10,9 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="NunitoSans-Regular.ttf">
-            <string>NunitoSans-Regular</string>
-        </array>
         <array key="Quicksand-Bold.ttf">
             <string>Quicksand-Bold</string>
         </array>
@@ -30,12 +27,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="400"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNL-PX-hVm">
-                                <rect key="frame" x="286" y="740" width="79" height="50"/>
+                                <rect key="frame" x="290" y="740" width="75" height="50"/>
                                 <color key="backgroundColor" name="orange_app"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="zWI-fd-oMU"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Next">
