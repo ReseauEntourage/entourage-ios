@@ -39,6 +39,31 @@ struct UserService {
         }
     }
     
+    static func updateLanguage(userId: Int, lang: String, completion: @escaping (_ success: Bool) -> Void) {
+        
+        
+        guard let token = UserDefaults.token else {
+            completion(false)
+            return
+        }
+        print("token ", token)
+        // Définissez l'endpoint
+        let endpoint = String.init(format: "users/%d?user[lang]=%@&token=%@", userId, lang,token)
+
+        // Vous pourriez avoir besoin de modifier cette méthode ou d'en créer une nouvelle si
+        // NetworkManager ne prend pas en charge les requêtes PUT directement.
+        NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+            
+            guard let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error updating language - \(error)")
+                DispatchQueue.main.async { completion(false) }
+                return
+            }
+            DispatchQueue.main.async { completion(true) }
+        }
+    }
+
+    
     static func updateUserPassword(pwd:String, completion: @escaping (_ user:User?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else { completion(nil,nil)

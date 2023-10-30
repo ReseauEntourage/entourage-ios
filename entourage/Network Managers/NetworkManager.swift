@@ -264,7 +264,7 @@ class NetworkManager {
     
     func requestPut(endPoint:String,headers:[String:String]?, body:Data?, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
         let url = getBaseUrl() + endPoint
-        
+        print("eho url " , url)
         guard let url = URL(string: url) else {
             completionHandler(nil,nil,nil)
             return

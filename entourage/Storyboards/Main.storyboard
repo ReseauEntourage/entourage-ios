@@ -78,7 +78,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L'app qui recrée du lien entre voisins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbg-P1-PX5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L'app qui recrée du lien entre voisins" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbg-P1-PX5">
                                 <rect key="frame" x="101" y="99" width="212" height="15"/>
                                 <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -132,6 +132,7 @@
                             <constraint firstItem="RRt-Lt-sHo" firstAttribute="leading" secondItem="xmZ-dL-AV6" secondAttribute="leading" id="IKt-1k-Kjz"/>
                             <constraint firstAttribute="bottom" secondItem="n8R-LH-7qk" secondAttribute="bottom" id="IW2-xV-kg2"/>
                             <constraint firstItem="fbg-P1-PX5" firstAttribute="centerX" secondItem="WQ6-vW-DN9" secondAttribute="centerX" id="P5J-YP-ptL"/>
+                            <constraint firstItem="fbg-P1-PX5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ab8-d9-2BI" secondAttribute="trailing" constant="5" id="RII-q6-gnq"/>
                             <constraint firstItem="xmZ-dL-AV6" firstAttribute="trailing" secondItem="RRt-Lt-sHo" secondAttribute="trailing" id="VHz-Dl-qN8"/>
                             <constraint firstItem="n8R-LH-7qk" firstAttribute="leading" secondItem="xmZ-dL-AV6" secondAttribute="leading" id="Vt3-v7-dXt"/>
                             <constraint firstItem="Ab8-d9-2BI" firstAttribute="top" secondItem="xmZ-dL-AV6" secondAttribute="top" constant="20" id="WId-U2-ycX"/>
@@ -139,6 +140,7 @@
                             <constraint firstItem="fbg-P1-PX5" firstAttribute="top" secondItem="WQ6-vW-DN9" secondAttribute="bottom" constant="8" symbolic="YES" id="fXL-JY-K5e"/>
                             <constraint firstItem="n8R-LH-7qk" firstAttribute="trailing" secondItem="xmZ-dL-AV6" secondAttribute="trailing" id="mq8-Rn-dOu"/>
                             <constraint firstItem="WQ6-vW-DN9" firstAttribute="centerY" secondItem="Ab8-d9-2BI" secondAttribute="centerY" constant="-10" id="v4E-u8-qGj"/>
+                            <constraint firstItem="lRH-gb-oWJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fbg-P1-PX5" secondAttribute="trailing" constant="5" id="vWa-bB-qCU"/>
                         </constraints>
                     </view>
                     <connections>

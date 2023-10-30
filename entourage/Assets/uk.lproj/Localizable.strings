@@ -1,0 +1,1437 @@
+/*
+  Localizable.strings
+  entourage
+
+  Created by Jerome on 12/01/2022.
+  
+*/
+
+//Divers
+"attention_pop_title" = "Увага";
+"close" = "Закрити";
+"error" = "Помилка";
+"generic_error" = "Сталася помилка. Перевірте підключення до мережі та повторіть спробу.";
+"connection_error" = "Помилка логіну";
+"connection_imposible" = "Не може підключитися";
+"tryAgain" = "Спробуйте знову";
+"tryAgain_short" = "Спробуйте знову";
+"ok" = "в порядку";
+"OK" = "в порядку";
+"validate" = "Для підтвердження";
+"create" = "Створити";
+"edit" = "Редагувати";
+"modify" = "Щоб змінити";
+"showAll" = "Бачити все";
+"searchForAddress" = "Знайдіть адресу";
+"cancel" = "Скасувати";
+"refuseAlert" = "Відмовитися";
+"activate" = "Увімкнути";
+"km" = "км";
+"Yes" = "Так";
+"No" = "Немає";
+"yes" = "Так";
+"no" = "Немає";
+"about_email_notavailable" = "Електронна пошта не знайдена";
+"Loading" = "Завантаження";
+"Admin" = "адмін";
+//TABBAR
+"tabbar_home" = "Ласкаво просимо";
+"tabbar_gifts" = "Взаємодопомога";
+"tabbar_messages" = "дискусії";
+"tabbar_groups" = "Групи";
+"tabbar_events" = "Події";
+
+"errorSettings" = "Потрібна авторизація";
+"toSettings" = "Налаштування";
+"authCameraSettings" = "Дозвольте доступ до камери.";
+"authGpsSettings" = "Дозвольте доступ до GPS.";
+
+"WIP" = "скоро";
+"notImplemented" = "Наступний доступний ;)";
+"today" = "Сьогодні";
+"yesterday" = "вчора";
+"Today" = "Сьогодні";
+"Yesterday" = "вчора";
+"the" = "THE";
+"The" = "THE";
+//PreOnboarding
+"next" = "Слідую";
+"connectMe" = "авторизуватися";
+"previous" = "Попередній";
+"bt_pass" = "Пас";
+
+"intro_title_1" = "Соціальна мережа, справді соціальна.";
+"intro_subtitle_1" = "Наша місія: мобілізувати та підготувати громадян для підтримки найбільш ізольованих.";
+"intro_title_2" = "У програмі Entourage:";
+"intro_subtitle_2" = "Зустрічайте схожих на вас сусідів під час заходів та обговорюйте акції солідарності.";
+"intro_title_3" = "Антураж з вами!";
+"intro_subtitle_3" = "Команди амбасадорів, волонтерів і модераторів Entourage підтримують і направляють вас щодня.";
+
+"preOnboard_choice_description" = "Соціальна мережа, справді соціальна.";
+"preOnboard_choice_signup" = "Я реєструюся";
+"preOnboard_choice_login" = "У мене вже є обліковий запис";
+"preOnboard_choice_weblink" = "Хто така асоціація Entourage?";
+
+//Login
+"error_login_phone_length" = "Номер телефону має містити принаймні %d цифр";
+"error_login_code_lenght" = "Код повинен складатися з 6 цифр";
+"error_login_resendCode_unknow" = "Невідомий номер телефону, спробуйте ще раз.";
+"error_login_phoneNumberOrCode" = "Номер телефону та цей код доступу не збігаються.";
+"error_login_phoneNumberFormat" = "Помилка підключення. Ваш телефон має бути у форматі: \n+33, 06 або 07";
+
+"login_title" = "Підключення";
+"login_phone_placeholder" = "Номер телефону";
+"login_placeholder_code" = "введіть ваш код";
+"login_button_connect" = "Я підключаю";
+"login_button_resend_code" = "Знову надіслати запит на код";
+"login_resend_code_title" = "Знову надіслати запит на код";
+"login_resend_code_button_yes" = "Запитуйте";
+"login_resend_code_button_no" = "Скасувати";
+"login_resend_code_title" = "Знову надіслати запит на код";
+"login_resend_code_message" = "Бажаєте повторно надіслати запит на код для свого номера телефону:";
+"login_label_country" = "Країна";
+"login_label_phone" = "Телефон";
+"login_label_code" = "Закодований";
+"login_button_change_phone" = "Я змінив номер телефону";
+
+"login_change_phone_title" = "Новий номер";
+"login_change_phone_old_number" = "Старе питання";
+"login_change_phone_new_number" = "Новий номер";
+"login_change_phone_email" = "Електронна адреса (необов'язково)";
+"login_change_phone_bt_validate" = "Надіслати";
+"login_change_phone_old_number_placeholder" = "Старе питання";
+"login_change_phone_new_number_placeholder" = "Новий номер";
+"login_change_phone_email_placeholder" = "Електронна пошта";
+"login_change_send_ok" = "Ваш запит надіслано.\n\n\nСлужба підтримки Entourage повідомить вас, коли зміна номера буде завершена.";
+"login_change_bt_return" = "Назад";
+
+"login_change_warning_title" = "Увага";
+"login_change_error_phone" = "Будь ласка, перевірте ваші номери телефонів";
+"login_change_error_mail" = "Перевірте свою електронну адресу";
+
+"login_change_error_return" = "Помилка";
+
+"login_change_error_not_found" = "Старий номер невідомий.\nПеревірте.";
+"login_change_error_deleted" = "Старий номер видалено.\nПеревірте.";
+"login_change_error_blocked" = "Старий номер заблоковано.\nПеревірте.";
+"login_change_error_identical" = "Обидва номери однакові.\nПеревірте новий номер.";
+"login_change_error_generic" = "Старий номер невідомий або видалений.\nПеревірте номери.";
+
+//Login next
+"login_info_pop_action" = "У своєму профілі ви можете персоналізувати свою стрічку новин і отримані рекомендації. Вибирайте з дотриманням повної конфіденційності, якщо ви зараз: сусід, який підтримує вас, потребуюча особа, товариство.";
+"login_pop_information" = "Новинка! Адаптуйте Entourage під свої бажання та потреби!";
+"login_info_pop_validate" = "Зрозумів!";
+"pop_info_entourage_custom_yes" = "Персоналізація";
+"pop_info_entourage_custom_no" = "Пізніше";
+"pop_info_entourage_custom_no_more" = "Не показуй мені більше";
+"login_email_pwd_title" = "ОК добре !";
+"login_email_pwd_description" = "Тепер давайте завершимо створення вашого облікового запису!";
+
+//Onboarding
+"onboard_bt_create" = "Створити";
+"onboard_bt_back" = "Попередній";
+"onboard_bt_next" = "Слідую";
+//Phase 1
+"onboard_welcome_title" = "Ласкаво просимо!";
+"onboard_welcome_info" = "Буде видно лише першу літеру.";
+"onboard_welcome_firstname" = "Ім'я*";
+"onboard_welcome_placeholder_firstname" = "Ваше ім'я";
+"onboard_welcome_lastname" = "Ім'я*";
+"onboard_welcome_placeholder_lastname" = "Твоє ім'я";
+"onboard_welcome_country" = "країна*";
+"onboard_welcome_phone" = "Телефон*";
+"onboard_welcome_mail" = "Електронна пошта";
+"onboard_welcome_placeholder_mail" = "youraddress@mail.com";
+"onboard_welcome_consent" = "Я хотів би отримати інформацію та поради від Entourage";
+"onboard_welcome_info_mandatory" = "*Обов'язкові поля. Ваша інформація залишатиметься конфіденційною та ніколи не буде передана третім особам.";
+
+//Phase2
+"onboard_sms_title" = "Введіть код, отриманий в SMS";
+"onboard_sms_sub" = "Вам щойно надіслано SMS на адресу:";
+"onboard_sms_modify" = "- Щоб змінити";
+"onboard_sms_no_code" = "Немає коду? Повторіть спробу через 1 хв";
+"onboard_sms_wait_retry" = "Немає коду? Повторіть спробу через %@";
+"onboard_sms_wait_retry_end" = "Знову надіслати запит на код";
+
+//Phase 3
+"onboard_phone_title" = "Приємно познайомитися, %@!";
+
+"onboard_phase3_title" = "Окрім зустрічей з людьми, як би ви хотіли зробити внесок у спільноту Entourage?";
+"onboard_title_entour" = "Об'ємний";
+"onboard_subtitle_entour" = "Запропонуйте допомогу...";
+"onboard_title_beentour" = "Бути оточеним";
+"onboard_subtitle_beentour" = "Зверніться по допомогу, знайдіть соціальні структури навколо мене...";
+"onboard_place_title_new" = "Який ваш район?";
+"onboard_place_desc" = "* Адреса є конфіденційною та ніколи не повідомлятиметься";
+"onboard_place_infos_placeholder" = "Адреса, місто або відділ";
+"onboard_info_asso" = "Я асоціація";
+
+//Phase End
+"onboard_end_title" = "Ласкаво просимо до спільноти Entourage";
+"onboard_end_subtitle" = "Вітаємо, ви готові принести солідарність у життя навколо вас.";
+"onboard_end_button" = "Почніть людську пригоду";
+
+//Onboard errors
+"onboard_error_Usertype" = "Виберіть принаймні один внесок";
+"onboard_error_place" = "Будь ласка, виберіть адресу";
+"onboard_error_firstname" = "Ім'я має містити не менше 2 літер.";
+"onboard_error_lastname" = "В назві повинно бути не менше 2 букв.";
+"onboard_error_email" = "Адреса електронної пошти недійсна.";
+"onboard_error_phone" = "Номер повинен складатися з 9 або 10 цифр.";
+//A supp
+"onboard_button_pass" = "Пас";
+
+"onboard_welcome_sub" = "Перш за все...\nЯк тебе звати?";
+
+
+
+"onboard_phone_sub" = "Який у тебе номер телефону ?";
+"onboard_phone_info" = "Ця інформація залишатиметься конфіденційною. Ми просто хочемо переконатися, що ви не робот, а людина з великим серцем!";
+"onboard_phone_placeholder_phone" = "Телефон";
+
+"onboard_sms_no_pwd" = "Будь ласка, введіть пароль";
+"attention_pop_title" = "Увага";
+"onboard_sms_pop_alert" = "Зачекайте %d с, перш ніж поновлювати запит.";
+"onboard_type_title" = "Приємно познайомитися, %@.";
+"onboard_type_sub" = "Як ви хочете налаштувати програму?";
+"onboard_type_description" = "Entourage ставить вам ці кілька запитань, щоб привітати вас і підтримати якнайкраще!\n(Ця інформація не буде видимою для інших учасників мережі).";
+"onboard_type_description_italic" = "(Ця інформація не буде видима іншим учасникам мережі).";
+"onboard_type_choice1" = "Допомагати бездомним людям і створювати зв’язки у вашому районі.";
+"onboard_type_choice2" = "Просити допомоги та відкривати місця солідарності.";
+"onboard_type_choice3" = "Говорити від імені вашої структури.";
+"onboard_type_choice_title1" = "Солідарний сусід";
+"onboard_type_choice_title2" = "Ізольована або ненадійна особа";
+"onboard_type_choice_title3" = "Асоціація або державна служба";
+"onboard_place_title" = "Який ваш район?";
+"onboard_place_description" = "Ви зможете відповідати на запити людей, які опинились у скрутному становищі, та асоціацій у вашому районі, а також ви самі зможете пропонувати пожертвування свого часу чи матеріалів.";
+"onboard_place_title_sdf" = "В якому районі ви зазвичай живете?";
+"onboard_place_description_sdf" = "Ви зможете просити допомоги у сусідів і знайомитися з новими людьми під час дружніх мережевих заходів.";
+"onboard_place_info" = "Entourage не повідомляє цю адресу.";
+"onboard_place_placeholder" = "Наприклад: 35000";
+"onboard_email_pwd_title" = "ОК добре !";
+"onboard_email_pwd_email_info" = "Залиште нам свою електронну адресу, щоб отримувати інформацію та поради від Entourage!";
+"onboard_email_pwd_email_info2" = "Entourage не повідомляє вашу електронну адресу.";
+"onboard_email_pwd_description" = "Тепер давайте завершимо створення вашого облікового запису!";
+"onboard_email_pwd_info_length" = "Додайте щонайменше 8 символів.";
+"onboard_email_pwd_placeholder_email" = "Електронна пошта";
+"onboard_email_pwd_placeholder_pwd" = "Пароль";
+"onboard_email_pwd_placeholder_confirm_pwd" = "Підтвердити пароль";
+"onboard_email_pwd_error_email" = "невірна адреса електронної пошти";
+"onboard_email_pwd_error_pwd_match" = "2 паролі не ідентичні";
+"onboard_photo_title" = "Дякуємо, %@!";
+"onboard_photo_description" = "Останній штрих: ви можете додати своє фото. Члени Entourage у вашому районі не можуть дочекатися зустрічі з вами!";
+
+
+"onboard_email_pwd_placeholder_confirm_pwd" = "Підтвердити пароль";
+"onboard_email_pwd_placeholder_email" = "Електронна пошта";
+"onboard_email_pwd_placeholder_pwd" = "Пароль";
+"onboard_email_pwd_description" = "Тепер давайте завершимо створення вашого облікового запису!";
+"onboard_email_pwd_info_length" = "Додайте щонайменше 8 символів.";
+"onboard_email_pwd_title" = "ОК добре !";
+"onboard_email_pwd_email_info" = "Залиште нам свою електронну адресу, щоб отримувати інформацію та поради від Entourage!";
+"onboard_email_pwd_email_info2" = "Entourage не повідомляє вашу електронну адресу.";
+"onboard_email_pwd_description" = "Тепер давайте завершимо створення вашого облікового запису!";
+//Fin supp
+
+
+//Onboarding Assos
+"onboard_asso_start_title" = "Добре !";
+"onboard_asso_start_description" = "Entourage - це асоціація, яка обслуговує вашу діяльність.";
+"onboard_asso_start_description_bold" = "Оточення";
+"onboard_asso_start_description2" = "Деякі чудові історії, які демонструють цінність спільноти Entourage.";
+"onboard_asso_info_title" = "Якщо говорити конкретно, у додатку функції призначені для вас";
+"onboard_asso_info_description" = "Будьте добре ідентифіковані в мережі та залучайте свою спільноту";
+"onboard_asso_info_1" = "Перевірений профіль для кожного вашого учасника: гарантія довіри для ваших сусідів";
+"onboard_asso_info_1_bold" = "Перевірений профіль";
+"onboard_asso_info_2" = "Сторінка для вашої структури: щоб інформувати місцеве про вашу діяльність та потреби.";
+"onboard_asso_info_2_bold" = "Сторінка для вашої структури";
+"onboard_asso_info_3" = "Надсилання сповіщень у вашому районі та за його межами членам спільноти.";
+"onboard_asso_info_3_bold" = "Надсилання повідомлень";
+"onboard_asso_fill_title" = "Розкажіть про свою структуру";
+"onboard_asso_fill_description" = "Розкажіть нам більше про вашу асоціацію, ми зв’яжемося з вами, щоб перевірити ваш профіль і створити для вас сторінку асоціації!";
+"onboard_asso_fill_name_placeholder" = "Назва моєї асоціації";
+"onboard_asso_fill_cp_placeholder" = "Поштовий індекс моєї асоціації";
+"onboard_asso_fill_function_placeholder" = "моя функція";
+"onboard_asso_fill_error" = "Заповніть усі поля.\nДякуємо";
+"onboard_asso_search_creation" = "Створення: %@";
+"onboard_asso_activity_title" = "%@, який ваш основний бізнес?";
+"onboard_asso_activity_description" = "Виберіть сектор(и) діяльності вашої структури, це дозволить нам запропонувати вам найкращий спосіб використання програми та мобілізувати спільноту Entourage.";
+"onboard_asso_activity_error" = "Введіть принаймні 1 центр інтересів.\nДякуємо";
+"onboard_asso_activity_choice_1" = "Допомога для людей \n";
+"onboard_asso_activity_choice_2" = "Initiatives culturelles\net sportives";
+"onboard_asso_activity_choice_3" = "Сервіс\nПублічний";
+"onboard_asso_activity_choice_4" = "інші ?";
+"onboard_asso_search" = "дослідження";
+
+//Onboarding Sdf
+"onboard_sdf_activity_title" = "%@, що ви шукаєте?";
+"onboard_sdf_activity_description" = "Кілька можливих варіантів.\nЄ тисячі способів отримати підтримку та допомогу.";
+"onboard_sdf_activity_error" = "Введіть принаймні 1 центр інтересів.\nДякуємо";
+"onboard_sdf_activity_choice_1" = "Створіть \n коло друзів";
+"onboard_sdf_activity_choice_2" = "Беріть участь у \nподіях";
+"onboard_sdf_activity_choice_3" = "Ставте \nзапитання";
+"onboard_sdf_activity_choice_4" = "Запит\n на допомогу";
+"onboard_sdf_activity_choice_5" = "Зорієнтуватися";
+"onboard_sdf_activity_choice_6" = "Знайти\nасоціації";
+
+//Onboarding Neighbour
+"onboard_neighbour_activity_title" = "%@, що ви хочете зробити у своєму районі?";
+"onboard_neighbour_activity_description" = "Кілька можливих варіантів.\nМи зробимо для вас відповідні пропозиції.";
+"onboard_sneighbour_activity_error" = "Введіть принаймні 1 центр інтересів.\nДякуємо";
+"onboard_neighbour_activity_choice_1" = "Повідом мене";
+"onboard_neighbour_activity_choice_2" = "Беріть участь у \nподіях";
+"onboard_neighbour_activity_choice_3" = "Оточіть ізольовану людину \n";
+"onboard_neighbour_activity_choice_4" = "Робіть пожертви\nматеріали";
+"onboard_neighbour_activity_choice_5" = "Приєднуйтеся до\nасоціації";
+
+
+//Onboarding Place tunnel SDF / Voisins
+"onboard_place_title2_sdf" = "Чудово!";
+"onboard_place_description2_sdf" = "Бажаєте додати інший район?";
+"onboard_place_title2" = "Чудово!";
+"onboard_place_description2" = "Ви щойно приєдналися до учасників свого району. Ви хочете додати ще один округ для виступів?";
+
+//Pop inform notifications
+"pop_notification_title" = "Нічого не пропустіть!";
+"pop_notification_description" = "У Entourage ви створюватимете зв’язки між підтримуючими сусідами.\nАктивуйте сповіщення, щоб отримувати сповіщення про ваші нові повідомлення.";
+"pop_notification_bt_activate" = "Увімкнути";
+"pop_notification_bt_cancel" = "Скасувати";
+
+//Errors Onboarding
+"onboarding_error_firstname" = "Ім'я має містити не менше 2 літер.";
+"onboarding_error_lastname" = "В назві повинно бути не менше 2 букв.";
+"onboarding_error_email" = "Адреса електронної пошти недійсна.";
+"onboarding_error_phone" = "Номер повинен складатися з 9 або 10 цифр.";
+"onboarding_help_label" = "Потрібна допомога?\nЗв’яжіться з командою Entourage.";
+"invalidCode" = "Недійсний код підтвердження";
+"invalidPhoneNumber" = "Недійсний номер телефону";
+"invalidPhoneNumberOrCode" = "Номер телефону та цей код доступу не збігаються.";
+"mustAddCode" = "Будь ласка, введіть код підтвердження";
+"invalidPhoneNumberFormat" = "Помилка підключення. Ваш телефон має бути у форматі: \n+33, 06 або 07";
+"requestSent" = "Запит надіслано";
+"requestNotSent" = "Запит не відправлено";
+"alreadyRegisteredMessage" = "Номер вже зареєстрований. Ви мали отримати код у SMS.";
+"alreadyRegistereMessageGoBack" = "Номер уже зареєстрований, ми перенаправить вас на сторінку входу.";
+"onboarding_error_email" = "Адреса електронної пошти недійсна.";
+
+/*******
+ Guide Map
+ */
+"info_share_sms_poi" = "Добрий ранок ! Ось адреса %@, яка може вас зацікавити.\n%@\n%@\nЩоб дізнатися більше про це місце та налагодити зв’язки між підтримуючими сусідами, я призначу вам зустріч у мережі Entourage %@";
+"title_new_gds" = "Місця солідарності";
+"home_button_map" = "Карта";
+"home_button_list" = "Список";
+"home_button_filters" = "Фільтри";
+"home_button_filters_on" = "Фільтри включені";
+//Solidarity Guide
+"button_reset_filters" = "Скасувати фільтри";
+"filter_solidarity_guide_categories" = "Категорії";
+"guide_display_feed" = "Їсти";
+"guide_display_housing" = "житло";
+"guide_display_heal" = "Побалувати себе";
+"guide_display_refresh" = "Оновити";
+"guide_display_orientation" = "Орієнтуйтесь";
+"guide_display_caring" = "Благополуччя та діяльність";
+"guide_display_reinsertion" = "Реінтегруватися";
+"guide_display_partners" = "Асоціації та служби, активні на Entourage";
+"partners_entourage" = "Організація активна на Entourage";
+"guide_display_donate" = "Шукаємо пожертви";
+"guide_display_volunteer" = "Шукаємо волонтерів";
+"guide_display_info_mutli" = "Місця, що пропонують послуги кількох категорій";
+
+"guide_display_toilettes" = "Ванна кімната";
+"guide_display_fontaines" = "Фонтани";
+"guide_display_laver" = "Душові кабіни";
+"guide_display_laverie" = "Пральні";
+
+"guide_display_vetements" = "Одяг і матеріали";
+"guide_display_boite" = "Скриньки для пожертв і читайте";
+"guide_display_bagageries" = "Камера зберігання багажу";
+
+"DetailPoiContact" = "контакт";
+"DetailPoiPublic" = "Аудиторія";
+"DetailPoiLanguage" = "Розмовні мови";
+"DetailPoiOpenTime" = "Розклади";
+
+"info_soliguide_1" = "Інформацію про це місце надає Soliguide, солідарна картографія.";
+"info_soliguide_2" = "Ще більш повна інформація доступна кількома мовами";
+"info_button_soliguide_consult" = "Проконсультуватися";
+"guideTitle" = "Посібник солідарності";
+
+/*******
+//Partner detail
+****/
+"title_association" = "Асоціація";
+"title_asso_donation" = "Приймайте пожертви";
+"title_asso_volunteer" = "Шукаємо волонтерів";
+"title_asso_information" = "контакт";
+"title_asso_needs" = "потреби";
+"title_asso_accept_needs" = "Приймає пожертви";
+"title_asso_accept_volunteers" = "Шукаємо волонтерів";
+"title_asso_contact" = "контакт";
+"title_asso_phone" = "Номер телефону";
+"title_asso_phone_light" = "Телефон";
+"title_asso_website" = "Веб-сайт";
+"title_asso_address" = "Адреса";
+"title_asso_address_big" = "Адреса";
+"title_asso_email_light" = "Електронна пошта";
+
+//Pop follow/unfollow partner
+"buttonFollowOnPartner" = "Абонент";
+"buttonFollowOffPartner" = "Підпишіться";
+"partner_pop_unfollow_title" = "Ви хочете скасувати підписку?";
+"partner_pop_unfollow_message" = "Відписавшись, ви більше не будете отримувати сповіщення, новини та нові події від цього об'єднання.";
+
+/**********
+ Profile
+ */
+"myProfileButton" = "Мій профіль";
+"myParamsButton" = "Налаштування";
+"profile_title" = "Профіль";
+"mainUserTitleActivity" = "Моя діяльність";
+"mainUserTitleActions" = "Внески";
+"mainUserTitleEvents" = "Події";
+"all_event_title" = "Всі події";
+"my_event_title" = "Мої події";
+"mainUserTitleEvents" = "Події";
+
+"mainUserTitleGroup" = "Група\nсусідів";
+"mainUserTitleGroups" = "Групи\nсусідів";
+"mainUserTitleOuting" = "Подія\n";
+"mainUserTitleOutings" = "Події\n";
+
+"mainUserBioPlaceholder" = "Заповнювач для органічного?";
+"mainUserBirthPlaceholder" = "01-03";
+"mainUserEmailPlaceholder" = "email@gmail.com";
+
+"mainUserTitleInfos" = "Моя інформація";
+"mainUserTitleBirth" = "день народження";
+"mainUserTitlePhone" = "Телефон";
+"mainUserTitleEmail" = "Електронна пошта";
+"mainUserTitleCity" = "Місто і район дії *";
+
+"mainUserTitleRadius" = "Протягом *";
+"mainUserDescRadius" = "* Ваша зона дії дозволяє вам визначити, як далеко ви можете діяти та рухатися";
+
+"mainUserCityRadius" = "У радіусі %d км";
+"mainUserCityRadiusBold" = "%d км";
+
+"memberSince" = "Член оточення з";
+
+/*******
+//Profile Edit
+ */
+"editUserProfileTitle" = "Редагувати мою інформацію";
+"editUserBioPlaceholder" = "Заповнювач для органічного?";
+"editUserModPhoto" = "Редагувати моє фото";
+"editUserTitleFirstname" = "Ім'я";
+"editUserTitleLastname" = "Ім'я";
+"editUserTitleBio" = "Опис (макс. 200 символів)";
+"editUserTitleBirthday" = "день народження";
+"editUserTitlePhone" = "Телефон";
+"editUserTitleEmail" = "Електронна пошта";
+"editUserTitleCity" = "Місто і район дії *";
+"editUserTitleRadius" = "Протягом *";
+"editUserDescRadius" = "* Ваша зона дії дозволяє вам визначити, як далеко ви можете діяти та рухатися";
+"editProfileInterest_title" = "Мої інтереси";
+
+"editUserPlaceholderFirstname" = "Рок";
+"editUserPlaceholderLastname" = "Dupont";
+"editUserPlaceholderBirthday" = "01-03";
+"editUserPlaceholderEMail" = "pierre@gmail.com";
+"editUserPlaceholderBio" = "П'єр, 42 роки, чекаю зустрічі :)";
+
+"editUserProfileValidate" = "Застосувати зміни";
+
+//Profile Edit error
+"editUser_error_firstname" = "Ім'я має містити не менше 2 літер.";
+"editUser_error_lastname" = "В назві повинно бути не менше 2 букв.";
+"editUser_error_bio" = "Біографія має містити принаймні 2 літери.";
+"editUser_error_email" = "Недійсна електронна адреса.";
+"editUser_error_birthday" = "Недійсна дата народження.";
+"editUser_error_profile" = "Помилка редагування профілю.";
+
+//Profile edit interests
+"editUserInterestsTitle" = "Змінити мої інтереси";
+"editUserInterestsInfo" = "Виберіть одну або кілька категорій, які вас цікавлять.";
+"editUserInterestsValidate" = "Застосувати зміни";
+"editUserInterests_error" = "Виберіть принаймні одну категорію";
+"interest_other_name" = "Інший";
+//profile edit location
+"profileEditLocationTitle" = "Де ти хочеш виступати?";
+"profileEditLocationDescription" = "Entourage — це соціальна мережа!\nВідкрийте для себе ініціативи у вашому районі та налагодьте зв’язки зі своїми сусідами.";
+"profileEditLocationLegend*" = "Додати місце *";
+"profileEditLocationLegend_" = "Додайте місце";
+"profileEditLocationPlaceholder" = "Місто чи департамент";
+"profileEditLocationLegend" = "* Entourage не повідомляє цю адресу.";
+"profileEditLocationErrorAddress" = "Недійсна адреса.";
+
+
+// take photo profile
+"take_photo_title" = "Додати фото?";
+"take_photo_description" = "З фото відразу приємніше. Покажи нам свою найтеплішу посмішку.";
+"take_photo" = "Щоб сфотографувати";
+"take_gallery" = "Імпортувати з галереї";
+"description_move_photo" = "Перемістіть і масштабуйте, щоб налаштувати фотографію профілю.";
+
+
+//Location
+"ask_permission_location_recenter_map" = "Щоб перефокусуватися навколо себе, необхідно активувати геолокацію";
+"no_location_recenter_map" = "Помилка геолокації.";
+
+/*******
+//Settings
+ */
+"params_notifs" = "Сповіщення";
+"params_help" = "Довідка та Про";
+"params_unlock" = "Розблокувати контакти";
+"params_share" = "Поділіться додатком";
+"params_logout" = "Вийти з аккаунта";
+"params_suppress" = "Видалити мій обліковий запис";
+"params_logout_pop_title" = "Відключити";
+"params_logout_pop_message" = "Ви хочете вийти?";
+"params_suppress_pop_title" = "Видалення облікового запису";
+"params_suppress_pop_message" = "Ви хочете видалити свій обліковий запис?";
+"params_suppress_pop_suppress" = "ВИДАЛИТИ";
+"params_suppress_pop_cancel" = "Скасувати";
+"params_account_not_deleted" = "Обліковий запис не видалено.\nEПомилка: %@";
+"params_account_deleted" = "Ваш обліковий запис видалено.";
+"params_logout_pop_logout" = "Відключити";
+"params_logout_pop_cancel" = "Скасувати";
+"params_suggest" = "Пропозиція щодо програми?";
+"menu_info_text_share" = "Добрий ранок ! Завдяки мережі Entourage я беру участь в акціях солідарності між сусідами без дому та без нього. Приєднуйтесь до мене: %@";
+//Settings about menu
+"params_about_charte" = "Етична хартія Entourage";
+"params_about_rate_app" = "Оцініть програму";
+"params_about_faq" = "Питання що часто задаються";
+"params_about_gift" = "Пожертвуйте Entourage";
+"params_about_ambassador" = "Стань волонтерським амбасадором";
+"params_about_cgu" = "Умови використання";
+"params_about_privacy" = "Політика конфіденційності";
+"params_about_email" = "Зв'яжіться з Entourage";
+"params_about_licences" = "Ліцензія з відкритим кодом";
+"params_about_partner" = "Наші меценати та партнери";
+"params_about_title" = "Довідка та Про";
+
+//Settings Notifs
+"params_notifs_title" = "Управління сповіщеннями";
+"param_notifs_switch_notifs" = "Сповіщення";
+"param_notifs_switch_messages" = "Сповіщення про повідомлення";
+"param_notifs_switch_groups" = "Групові сповіщення";
+"param_notifs_switch_events" = "Сповіщення про події";
+"param_notifs_switch_actions" = "Сповіщення про пожертви та послуги";
+"param_notifs_validate" = "Застосувати зміни";
+
+//NOTIF
+"notif_contrib_title" = "Сусід пропонує нову допомогу. Можливо, це вас зацікавить?";
+"notif_solicitation_title" = "Сусід шукає техніку. Може, ви могли б йому допомогти?";
+//Detail user profile
+"detail_user_send_message" = "Щоб написати повідомлення";
+"detail_user_his_activity" = "Його діяльність";
+"detail_user_his_interests" = "хобі";
+"detail_user_button_signal" = "Користувач звіту";
+"report_user_title" = "Повідомити про учасника";
+"report_user_mandatory" = "- ОБОВ'ЯЗКОВО";
+"report_user_optional" = "- необов'язковий";
+"report_user_description" = "Повідомте нам причину вашого повідомлення";
+"report_user_message_description" = "Повідомте нам причину вашого повідомлення";
+"report_user_next_button" = "Слідую";
+"report_user_validate_button" = "Надіслати";
+"report_user_back_button" = "Назад";
+"report_user_placeholder" = "Швидко опишіть тему вашої доповіді.";
+"report_user_signal_error" = "Виберіть принаймні одну причину.";
+"report_user_message_error" = "Будь ласка, введіть своє повідомлення. ДЯКУЮ";
+"report_user_message_success" = "Користувач повідомив";
+"parameter_publication" = "Налаштування публікації";
+"parameter_message" = "Налаштування повідомлень";
+"parameter_action" = "щоб повідомити про проблему";
+"parameter_comment" = "Налаштування коментарів";
+"supress_button_title" = "ВИДАЛИТИ";
+"supress_alert_title_publi" = "Видалити пост";
+"supress_alert_text_publi" = "Ви б хотіли видалити цю публікацію?";
+
+"supress_alert_title_message" = "Видалити повідомлення";
+"supress_alert_text_message" = "Чи бажаєте ви видалити це повідомлення з розмови?";
+
+"supress_alert_title_comment" = "Видалити коментар";
+"supress_alert_text_comment" = "Ви б хотіли видалити цей коментар?";
+
+
+"deleted_post_text" = "Ця публікація була видалена";
+
+//REPORT AND SUPPRESS POPUP
+"report_post_cell_title" = "звіт";
+"suppress_post_cell_title" = "Видалити мій пост";
+"report_post_cell_subtitle" = "Повідомити про цю публікацію команді Entourage";
+"report_action_cell_subtitle" = "Повідомте про цю допомогу команді Entourage";
+
+"report_comment_cell_title" = "звіт";
+"suppress_comment_cell_title" = "Видали мій коментар";
+"report_comment_cell_subtitle" = "Повідомте про цей коментар команді Entourage";
+
+"report_message_cell_title" = "звіт";
+"suppress_message_cell_title" = "Видали моє повідомлення";
+"report_message_cell_subtitle" = "Повідомте про це повідомлення команді Entourage";
+
+
+"suppress_post_cell_subtitle" = "";
+"suppress_message_cell_subtitle" = "";
+"suppress_comment_cell_subtitle" = "";
+
+"deleted_message" = "Це повідомлення було видалено";
+"deleted_comment" = "Цей коментар було видалено";
+
+/********
+ GROUP
+ */
+
+//Create group
+"neighborhoodCreatePopCloseBackTitle" = "Увага";
+"neighborhoodCreatePopCloseBackMessage" = "Якщо ви вийдете з форми створення групи, вся введена інформація буде втрачена.";
+"neighborhoodCreatePopCloseBackQuit" = "Залишити";
+"neighborhoodCreatePopCloseBackCancel" = "Скасувати";
+
+"neighborhood_create_group_bt_back" = "Попередній";
+"neighborhood_create_group_bt_next" = "Слідую";
+"neighborhood_create_group_bt_create" = "Створити";
+
+"neighborhood_create_group_title" = "Нова група";
+"neighborhood_create_title_phase" = "етап";
+"neighborhood_create_title_phase_nb" = "0%d.";
+
+"neighborhoodCreateNameTitle" = "Назва групи - обов'язково";
+"neighborhoodCreateNamePlaceholderName" = "Сусіди Парижа 18";
+"neighborhoodCreateNameSubtitle" = "- ОБОВ'ЯЗКОВО";
+
+"neighborhoodCreateDescriptionTitle" = "Напишіть опис";
+"neighborhoodCreateDescriptionSubtitle" = "потрібно (максимум 150 символів)";
+"neighborhoodCreateTitleDescriptionPlaceholder" = "Зустріти сусідів з 18-го";
+
+
+"neighborhoodCreatePlaceTitle" = "Додати локацію - обов'язково";
+"neighborhoodCreatePlaceSubtitle" = "- ОБОВ'ЯЗКОВО";
+"neighborhoodCreatePlaceDescription" = "Entourage не повідомляє цю адресу користувачам.";
+"neighborhoodCreatePlaceInfos" = "Адреса, місто або відділ";
+
+//Error create group
+"neighborhoodCreateInputErrorMinCharName" = "Назва групи має містити не менше 2 символів.";
+"neighborhoodCreatePhase1_error" = "Будь ласка, заповніть усі обов'язкові поля";
+"neighborhoodCreatePhase2_error" = "Необхідно вибрати категорію.";
+"neighborhoodCreateInputErrorMandatory" = "Поле для заповнення";
+
+//Phase 2
+"neighborhoodCreateCatMessage" = "Виберіть категорію (категорії), яка найкраще описує тему обговорення в групі. - ОБОВ'ЯЗКОВО";
+"neighborhoodCreateCatMessageMandatory" = "- ОБОВ'ЯЗКОВО";
+"neighborhoodCreateCatOtherTitle" = "Опишіть категорію своєї групи одним словом";
+"neighborhoodCreateCatOtherPlaceholder" = "Будь ласка, введіть максимум 80 символів";
+
+"neighborhoodCreatePhase2_others_error" = "Будь ласка, вкажіть іншу категорію";
+
+//Phase 3
+"addPhotoCreateDescriptionTitle" = "Напишіть вітальне повідомлення";
+"addPhotoCreateDescriptionSubtitle" = "необов'язково (макс. 200 символів)";
+"addPhotoCreateDescriptionPlaceholder" = "Вітаємо нових учасників! Вони прочитають це повідомлення, щойно приєднаються до групи.";
+"addPhotoCreateTitle" = "Додати фото - обов'язково";
+"addPhotoCreateTitleHighlight" = "- ОБОВ'ЯЗКОВО";
+"addPhotoCreateDescription" = "Ви можете змінити це пізніше";
+"neighborhoodCreatePhase3_error" = "Виберіть зображення";
+
+//Phase completed
+"neighborhoodCreateValidateTitle" = "Ваша група онлайн!";
+"neighborhoodCreateValidateSubtitle" = "Вітаємо, ви щойно створили нову групу. Щоб зробити його більш активним, створіть перший пост.";
+
+"neighborhoodCreateValidatePostMessage" = "Опублікувати повідомлення";
+"neighborhoodCreateValidatePass" = "Пас";
+
+//Select Photo group
+"neighborhood_choosephoto_title" = "Виберіть фото";
+"neighborhood_choosephoto_validate" = "Для підтвердження";
+"neighborhood_choosephoto_error" = "Виберіть зображення";
+
+/***
+* Edit group
+***/
+"neighborhood_edit_group_title" = "Редагувати групу";
+"neighborhoodEditPhotoTitle" = "Редагувати фото";
+"neighborhoodEditCatMessage" = "Виберіть категорію (категорії), яка найкраще описує тему обговорення в групі. - ОБОВ'ЯЗКОВО";
+"neighborhoodEditCatMessageHighlight" = "- ОБОВ'ЯЗКОВО";
+"neighborhoodEdit_error" = "Будь ласка, заповніть усі обов'язкові поля";
+"neighborhoodEditValidateTitle" = "Ваша група була змінена! ЗАПОВНЮВАЧ";
+
+/***
+ * Create Post group
+ */
+"neighborhood_menu_post_event" = "Створіть подію в групі";
+"neighborhood_menu_post_post" = "Створити пост";
+
+"neighborhood_add_post_title" = "Створити пост";
+"neighborhood_add_post_message_title" = "Напишіть своє повідомлення";
+"neighborhood_add_post_message_subtitle" = "";
+"neighborhood_add_post_message_placeholder" = "Напишіть своє повідомлення…";
+"neighborhood_add_post_image_title" = "Додайте картинку";
+"neighborhood_add_post_image_subtitle" = "- необов'язковий";
+"neighborhood_add_post_send_button" = "Поділіться";
+"neighborhood_add_post_title_image" = "Додайте картинку";
+"neighborhood_add_post_image_info_move" = "Перемістіть і масштабуйте, щоб налаштувати фотографію.";
+"neighborhood_add_post_image_bt_validate" = "Для підтвердження";
+"neighborhood_add_post_image_bt_cancel" = "ВИДАЛИТИ";
+"neighborhood_add_post_error" = "Помилка публікації, спробуйте ще раз";
+/******
+ * Group / communauté
+ */
+"neighborhood_main_page_title" = "Групи";
+"neighborhood_main_page_button_myGroups" = "Мої групи";
+"neighborhood_main_page_button_discover" = "Я відкриваю";
+"neighborhoodInputSearch" = "Пошук групи";
+"neighborhood_main_page_members" = "%d учасників";
+"neighborhood_main_page_member" = "Член %d";
+"neighborhood_main_page_events_future_single" = "%d очікувана подія";
+"neighborhood_main_page_events_future_plural" = "%d запланованих подій";
+
+"neighborhood_group_my_empty_title" = "Ви ще не приєдналися до групи.";
+"neighborhood_group_my_empty_button" = "Відкрийте для себе групи";
+"neighborhood_group_search_empty_title" = "На жаль, немає результатів, що відповідають вашому пошуку.";
+"neighborhood_group_search_empty_subtitle" = "Якщо немає групи на цю тему, створіть її!";
+"neighborhood_group_discover_empty_title" = "На жаль, навколо вас ще немає інших груп.";
+"neighborhood_group_discover_empty_subtitle" = "Не соромтеся створювати нові групи сусідів!";
+/*************
+ * Group detail
+ */
+"title_is_ambassador" = "Посол •";
+"title_is_admin" = "Адміністратор •";
+
+"neighborhood_detail_button_join_member" = "Член";
+"neighborhood_detail_button_join_join" = "Приєднуйтесь";
+"welcome_message_placeholder" = "Не соромтеся надіслати перше повідомлення, щоб представитися.";
+"welcome_message_title" = "Вітаємо, ви учасник групи!";
+"welcome_message_btn_title" = "Я представляюсь";
+
+"neighborhood_detail_members" = "%d учасників";
+"neighborhood_detail_member" = "Член %d";
+"neighborhood_detail_about_title" = "Про групу";
+"neighborhood_detail_event_title" = "Події";
+"neighborhood_detail_button_more" = "Вивчайте більше";
+
+"neighborhood_event_group_section_title_more" = "Побачити більше";
+"neighborhood_event_group_section_title" = "Групові заходи";
+"neighborhood_post_group_section_title" = "Стрічка новин";
+"neighborhood_post_group_section_new_posts_title" = "Нові публікації";
+"neighborhood_post_group_section_old_posts_title" = "Старі видання";
+"neighborhood_empty_event_title" = "У цій групі ще не заплановано жодної події";
+"neighborhood_empty_event_subtitle" = "Натисніть «+», щоб створити його";
+"neighborhood_empty_post_title" = "У цій групі (поки що) немає публікацій";
+"neighborhood_empty_post_subtitle" = "привіт! Це можливість поділитися першою новиною, щоб розпочати дискусію!";
+"neighborhood_about_group_title" = "Про групу";
+
+"neighborhood_post_noComment" = "Без коментарів";
+"neighborhood_post_1Comment" = "%d коментар";
+"neighborhood_post_XComments" = "%d коментарів";
+
+"neighborhood_comments_title" = "Опублікувати коментарі";
+"neighborhood_comments_placeholder_discut" = "Обговорити...";
+"neighborhood_comments_send" = "Надіслати";
+"neighborhood_no_messageComment" = "Поки немає коментарів";
+"neighborhood_messageComment_notAuth" = "Щоб прокоментувати цю публікацію, приєднайтеся до групи “%@”!";
+
+"neighborhood_error_messageSend" = "Помилка публікації, повторіть спробу";
+"comment_post" = "Коментувати...";
+//Params
+"neighborhood_params_title" = "Налаштування групи";
+"neighborhood_params_cgu" = "Правила групи";
+"neighborhood_params_share" = "Поділитися групою";
+"neighborhood_params_edit" = "Редагувати інформацію про групу";
+"neighborhood_params_signal" = "щоб повідомити про проблему";
+"neighborhood_params_cgu_title" = "Правило";
+"neighborhood_params_cgu_description" = "Правила групи, читайте уважно.";
+"neighborhood_params_participant" = "учасник";
+"neighborhood_params_participants" = "учасників";
+"neighborhood_params_quit" = "Вийти з групи";
+
+"neighborhood_params_notif_title" = "Повідомте мене про";
+"neighborhood_params_notif_all" = "Вся групова діяльність";
+"neighborhood_params_notif_new_events" = "Нові події";
+"neighborhood_params_notif_new_messages" = "Нові повідомлення";
+"neighborhood_params_notif_new_members" = "Прихід нових учасників";
+
+"neighborhood_users_title" = "Переглянути учасників";
+"neighborhood_userInput_search" = "Пошук учасника групи";
+
+//Pop leave group
+"params_leave_group_pop_title" = "Вийти з групи";
+"params_leave_group_pop_message" = "Ви хочете залишити групу?";
+"params_leave_group_pop_bt_quit" = "Залишити";
+"params_leave_group_pop_bt_cancel" = "Скасувати";
+//CGU
+"neighborhood_CGU_1_title" = "Ставлення";
+"neighborhood_CGU_1" = "Обмін у групах має відбуватися з повагою, довірою та взаємодопомогою між членами, щоб кожен почувався в безпеці та в теплому оточенні. Тому забороняється робити принизливі, агресивні, образливі, дискримінаційні, наполегливі, нетерпимі чи наклепницькі коментарі.";
+"neighborhood_CGU_2_title" = "Торгівля";
+"neighborhood_CGU_2" = "Групи є місцями обміну та взаємодопомоги між сусідами, тому реклама заборонена, як і пропозиції купівлі, продажу чи оренди.";
+"neighborhood_CGU_3_title" = "Джекпот";
+"neighborhood_CGU_3" = "Загалом між учасниками груп немає грошових відносин, призові фонди заборонені.";
+"neighborhood_CGU_4_title" = "Теми";
+"neighborhood_CGU_4" = "Доброзичливе вільне вираження є правилом для груп. Однак, щоб поважати аполітичний і світський характер Entourage та в інтересах захисту людей, теми, пов’язані з політикою, релігією, медициною чи сексуальністю, заборонені.";
+"neighborhood_CGU_5_title" = "Захист людей";
+"neighborhood_CGU_5" = "Публікації не можуть містити жодних персональних даних, які дозволяють точно ідентифікувати та знайти особу, а також будь-яких конфіденційних даних про людей (медичне, судове, етичне походження, дані про сексуальну чи політичну орієнтацію тощо).";
+
+//Report Group / comment / publication
+"report_event_title" = "Повідомити про подію";
+"report_group_title" = "щоб повідомити про проблему";
+"report_publication_title" = "Повідомити про пост";
+"report_comment_title" = "Повідомити про коментар";
+"report_contrib_title" = "Звіт про внесок";
+"report_solicitation_title" = "Запит звіту";
+"report_conversation_title" = "Повідомити про розмову";
+"report_group_message_success" = "Ваш запит надіслано. Наша команда опрацює його якомога швидше.";
+"report_group_description" = "Повідомте нам причину вашого повідомлення";
+"report_group_mandatory" = "- ОБОВ'ЯЗКОВО";
+"report_group_next_button" = "Слідую";
+"report_group_signal_error" = "Виберіть принаймні одну причину.";
+"report_group_message_description" = "Повідомте нам причину вашого повідомлення";
+"report_group_optional" = "- необов'язковий";
+"report_group_validate_button" = "Надіслати";
+"report_group_back_button" = "Назад";
+"report_group_placeholder" = "Швидко опишіть тему вашої доповіді.";
+
+/** Home*/
+"home_title_welcome" = "Вітаємо, %@!";
+"home_contrib_title" = "Мої дії в мережі";
+"home_meeting_title" = "Красиві зустрічі Антураж";
+"home_no_meeting_title" = "Ще немає зустрічей Entourage";
+"home_messages_title" = "Відправлене повідомлення";
+"home_events_title" = "Події\n";
+"home_groups_title" = "Сусідні групи";
+"home_event_title" = "Участь у заході";
+"home_group_title" = "Група сусідів";
+"home_no_message_title" = "Ще не надіслано жодного повідомлення";
+"home_no_event_title" = "Відвідайте свій перший захід";
+"home_no_group_title" = "Не чекайте більше, щоб приєднатися до групи сусідів!";
+
+"home_actions_title" = "Я тільки починаю";
+"home_help_title" = "Потрібна допомога";
+"home_help_subtitle" = "Ваш путівник у додатку";
+"home_cell_pedago" = "Усе, що вам потрібно знати, щоб діяти";
+"home_cell_map" = "Карта місць солідарності";
+"home_cell_map_subtitle" = "Денні прийоми, камера зберігання багажу…";
+
+"home_resources_title" = "Весь навчальний контент";
+"home_resource_title" = "Навчальний зміст";
+"pedagogic_read" = "Читай!";
+"resource_all" = "все";
+"resource_understand" = "Зрозуміти";
+"resource_act" = "Діяти";
+"resource_inspire" = "НадихАтись";
+
+"resource_title_understand" = "Зрозуміти";
+"resource_title_act" = "Діяти";
+"resource_title_inspire" = "НадихАтись";
+
+/** Home popup congratulation */
+"home_congrat_title_single" = "молодець ! Ви виконали %d нову дію!";
+"home_congrat_title_plural" = "молодець ! Ви виконали %d нових дій!";
+"home_congrat_title_next" = "Чудово, щось нове на прийомі!";
+
+//Home popup info encouters
+"home_info_encounter_pop_title" = "Щоб організувати чудову зустріч, \n немає нічого простішого!";
+"home_info_encounter_pop_subtitle" = "Ваш лічильник збільшується з кожною участю в події та з кожним новим внеском або зробленим запитом.";
+
+/** Events*/
+"passed_event" = "Минулі події";
+
+
+//EVENT TOP Cell
+"event_top_cell_organised_by" = "Організовано";
+"event_top_cell_asso" = "Подія %@";
+
+
+//SHARE
+"share_solicitation" = "Цей запит може вас зацікавити.";
+"share_contribution" = "Цей внесок може вас зацікавити.";
+"share_event" = "Ця подія Entourage може вас зацікавити.";
+"share_group" = "Ця група сусідів Entourage може вас зацікавити.";
+
+
+
+//Create
+
+"eventCreatePopCloseBackTitle" = "Увага";
+"eventCreatePopCloseBackMessage" = "Якщо ви вийдете з форми створення події, вся введена інформація буде втрачена.";
+"eventCreatePopCloseBackQuit" = "Залишити";
+"eventCreatePopCloseBackCancel" = "Скасувати";
+
+"event_create_group_bt_back" = "Попередній";
+"event_create_group_bt_next" = "Слідую";
+"event_create_group_bt_create" = "Для підтвердження";
+"eventCreateInputErrorMandatory" = "Поле для заповнення";
+"event_mod_group_bt_mod" = "Щоб змінити";
+
+"event_mod_title" = "Редагувати мою подію";
+"event_create_title" = "нова подія";
+"event_create_title_phase" = "етап";
+"event_create_title_phase_nb" = "0%d.";
+
+"event_create_phase_1_name" = "Назва події - обов'язково";
+"event_create_phase_1_name_placeholder" = "Дайте події чітку назву";
+"event_create_phase_1_name_error" = "Назва події має містити не менше 2 символів.";
+"event_create_phase_1_desc" = "Опис - обов'язковий";
+"event_create_phase_1_desc_placeholder" = "Швидко покажіть, що буде";
+"event_create_phase_1_desc_subtitle" = "(макс. 900 символів)";
+"event_create_phase_1_photo" = "Фото - обов'язково";
+"event_create_phase_1_photo_desc" = "Ви можете змінити це пізніше";
+
+"event_create_mandatory" = "- ОБОВ'ЯЗКОВО";
+
+"event_create_phase2_date" = "Дата - обов'язково";
+"event_create_phase2_date_placeholder" = "дд/мм/рррр";
+"event_create_phase2_time_start" = "Час початку";
+"event_create_phase2_time_start" = "чч-хм";
+"event_create_phase2_time_end" = "Час закінчення";
+"event_create_phase2_time_end_placeholder" = "чч-хм";
+
+"event_create_phase2_recurrence" = "Повторення - обов'язково";
+"recurrence_once" = "Тільки один раз";
+"recurrence_week" = "Кожного тижня";
+"recurrence_every2Weeks" = "Кожних два тижні";
+"recurrence_month" = "Раз на місяць";
+"eventCreateInputErrorTimeStart" = "Виберіть дату раніше";
+"eventCreateInputErrorTimeEnd" = "Виберіть час початку раніше";
+
+"event_create_phase3_title" = "Розташування - обов'язкове";
+"event_create_phase3_title_place" = "Додати локацію - обов'язково";
+"event_create_phase3_title_online" = "Додайте URL – обов’язково";
+
+"event_create_phase3_presentiel" = "Особисто";
+"event_create_phase3_online" = "Онлайн";
+"event_create_phase3_online_error" = "Обов'язкове поле";
+"event_create_phase3_placeholder_place" = "Адреса, місто...";
+"event_create_phase3_placeholder_online" = "Веб-адреса";
+
+"event_create_phase3_title_limit" = "Чи кількість місць на заході обмежена? - ОБОВ'ЯЗКОВО";
+"event_create_phase3_title_nb_places" = "Кількість місць - обов'язкова";
+"event_create_phase3_title_nb_places_placeholder" = "Кількість місць";
+"event_create_phase3_limit_yes" = "Так";
+"event_create_phase3_limit_no" = "Немає";
+"event_create_phase3_limit_error" = "Обов'язкове поле";
+
+"event_create_phase4_title" = "Виберіть категорію (категорії), яка найкраще описує тему події. - ОБОВ'ЯЗКОВО";
+
+"event_create_phase5_title" = "Поділіться подією у своїх групах\n – потрібно";
+"event_share_option" = "Поділіться подією";
+"event_create_phase5_desc" = "Ви можете поділитися подією лише з групами, учасником яких ви є. Тоді ваша подія стане видимою у вибраних групах, і всі учасники групи зможуть взяти участь.";
+"createEventNotShare" = "Не діліться в жодній групі";
+"createEventShare" = "Поділіться в одній або кількох групах";
+
+"eventCreateEnd_button_show" = "Переглянути мою подію";
+"eventCreateEnd_title" = "Ваша подія онлайн!";
+"eventCreateEnd_subtitle" = "Félicitations, vous venez de créer un nouvel événement. Pour le rendre plus actif, parlez-en sur vos groupes !
+";
+
+"eventCreatePhase1_error" = "Будь ласка, заповніть усі обов'язкові поля";
+"eventCreatePhase2_error" = "Будь ласка, заповніть усі обов'язкові поля";
+"eventCreatePhase3_error" = "Будь ласка, заповніть усі обов'язкові поля";
+"eventCreatePhase4_error" = "Необхідно вибрати категорію.";
+"eventCreatePhase5_error" = "Потрібно вибрати принаймні одну групу.";
+
+"eventModPopCloseBackTitle" = "Увага";
+"eventModPopCloseBackMessage" = "Якщо ви вийдете з форми редагування події, уся введена інформація буде втрачена.";
+"eventModPopCloseBackQuit" = "Залишити";
+"eventModPopCloseBackCancel" = "Скасувати";
+
+//Event group list
+"event_members_cell_list" = "%d учасників";
+"event_member_cell_list" = "%d учасник";
+"event_group_title_list" = "Також група організовує:";
+"event_places_detail" = "%d місць";
+"event_places_distance" = "%@ до %@";
+
+
+
+//Event pop choose location
+"event_location_title" = "Знайдіть свою подію";
+"event_location_detail" = "Адреса буде додана до детального опису вашої події.";
+
+/* Home Event*/
+"event_main_page_title" = "Події";
+"event_main_page_button_myEvents" = "я беру участь";
+"event_main_page_button_discover" = "Я відкриваю";
+"event_event_my_empty_title" = "Ви ще не приєдналися до події";
+"event_event_my_empty_subtitle" = "Це можливість дізнатися, що відбувається поруч з вами, або створити нову подію!";
+"event_event_discover_empty_title" = "На жаль, навколо вас немає подій";
+"event_event_discover_empty_subtitle" = "Якщо поблизу вас немає подій, ви можете розширити область пошуку.";
+"event_no_event_but_discover" = "Це можливість дізнатися, що відбувається поруч з нами, або створити нову подію!";
+"event_no_event_go_create" = "Ніяких подій навколо вас. Не соромтеся створити його!";
+"event_event_discover_clear_filters" = "Скинути фільтри";
+"event_title_btn_discover_event" = "Відкрийте для себе події";
+"event_title_btn_create_event" = "Створіть подію";
+"event_event_discover_empty_search_title" = "Блін, немає результатів, які відповідають вашому пошуку!";
+"event_event_discover_empty_search_subtitle" = "Не можете знайти подію своєї мрії? Не чекайте більше, щоб створити його або розширити область пошуку.";
+"event_detail_button_more" = "Вивчайте більше";
+
+"event_detail_button_participe_ON" = "брати участь";
+"event_detail_button_participe_OFF" = "брати участь";
+"event_detail_about_title" = "Знати";
+"event_detail_post_section_title" = "Новини";
+"event_detail_post_section_new_posts_title" = "Нові публікації";
+"event_detail_post_section_old_posts_title" = "Старі видання";
+
+"event_time_detail_full" = "Від %@ до %@";
+"event_places_detail_full" = "Обмежена кількість місць: %d";
+"event_created_full" = "Створено %@";
+"event_updated_full" = "Змінено %@";
+"event_canceled_full" = "Скасовано %@";
+"event_cancel_alone" = "Скасовано";
+
+"event_empty_post_title" = "Про цю подію (поки що) немає жодної публікації";
+"event_empty_post_subtitle" = "Чому б не почати дискусію з сусідами?";
+
+"event_users_title" = "Переглянути учасників";
+"event_userInput_search" = "Пошук учасника події";
+
+"event_detail_full_title" = "Про подію";
+
+"event_detail_groups_title" = "Асоційовані групи:";
+"event_detail_group_title" = "Пов'язана група:";
+"event_detail_cats_title" = "Категорії:";
+"event_detail_cat_title" = "Категорія:";
+"event_cancel_list" = "Скасовано";
+"event_canceled" = "Захід скасовано";
+
+//Event filters
+"event_filter_title" = "Події - фільтри пошуку";
+"event_filter_profile" = "За адресою, вказаною в профілі";
+"event_filter_google" = "За новою адресою";
+"event_filter_gps" = "Навколо мого поточного місцезнаходження";
+"event_filter_search" = "Досліджувати :";
+"event_filter_radius_radius" = "У межах:";
+"event_filter_error_place" = "Виберіть адресу";
+"event_filter_google_placeholder" = "Виберіть адресу";
+"event_filter_position_placeholder" = "Моя позиція";
+
+//Pop leave/cancel event
+"params_leave_event_pop_title" = "Залиште подію";
+"params_leave_event_pop_message" = "Ви хочете залишити подію?";
+"params_leave_event_pop_bt_quit" = "Залишити";
+"params_leave_event_pop_bt_cancel" = "Скасувати";
+
+"params_cancel_event_pop_bt_delete" = "Скасувати";
+"params_cancel_event_pop_bt_cancel" = "Назад";
+"params_cancel_event_pop_title" = "Скасувати подію";
+"params_cancel_event_pop_message" = "Ви хочете скасувати подію? Всі учасники будуть повідомлені про скасування.";
+"params_cancel_event_recurrency_title" = "Скасувати подію, що повторюється";
+"params_cancel_event_recurrency_choice1" = "Ця подія";
+"params_cancel_event_recurrency_choice2" = "Ця подія і всі наступні";
+
+"event_mod_pop_title" = "Редагувати повторювану подію";
+"event_mod_pop_validate_bt" = "Для підтвердження";
+"event_mod_ok" = "Змінено подію PLACEHOLDER";
+"event_mod_nok" = "Помилка редагування події. ЗАПОВНЮВАЧ";
+"event_create_ok" = "Помилка створення події. ЗАПОВНЮВАЧ";
+//Contacts pop add
+"event_add_contact_accept" = "додати";
+"event_add_contact_cancel" = "Скасувати";
+"event_add_contact_yes" = "Так";
+"event_add_contact_no" = "Немає";
+"event_add_contact_title" = "Ваша реєстрація врахована!";
+"event_add_contact_description" = "Бажаєте додати цю подію до свого особистого календаря?";
+
+"event_add_contact_places_title" = "Захід з обмеженою кількістю місць";
+"event_add_contact_places_description" = "Зверніть увагу, кількість місць на цій події обмежена, тому ваша реєстрація не гарантується. Адміністратор заходу зв’яжеться з вами для підтвердження бронювання місця.";
+"event_add_contact_error" = "Щоб додати подію до свого календаря, потрібно ввімкнути доступ до календаря";
+"event_add_contact_refuse" = "Відмовитися";
+"event_add_contact_activate" = "Увімкнути";
+
+//Event settings
+"event_params_title" = "Налаштування події";
+"event_params_cgu" = "Статут заходів";
+"event_params_edit" = "Редагувати подію";
+"event_params_recurrency" = "Редагувати повторення";
+"event_params_signal" = "Повідомити про подію";
+"event_params_cgu_title" = "Статут заходів";
+"event_params_cgu_description" = "Статут заходів, читайте уважно.";
+"event_params_participant" = "учасник";
+"event_params_participants" = "учасників";
+"event_params_quit" = "Залиште подію";
+"event_params_cancel" = "Скасувати подію";
+
+"event_params_notif_title" = "Повідомте мене про";
+"event_params_notif_all" = "Вся подійна діяльність";
+"event_params_notif_new_publications" = "Нові публікації";
+"event_params_notif_new_members" = "Прихід нових учасників";
+
+"event_edit_recurrency_title" = "Повторюваність";
+"event_edit_recurrency_date" = "Дата події";
+"event_edit_recurrency_back" = "Скасувати";
+"event_edit_recurrency_next" = "Для підтвердження";
+
+//Event MEssages
+"event_comments_title" = "Опублікувати коментарі";
+"event_comments_placeholder_discut" = "Обговорити...";
+"event_comments_send" = "Надіслати";
+"event_no_messageComment" = "Поки немає коментарів";
+"event_messageComment_notAuth" = "Щоб прокоментувати цю публікацію, приєднайтеся до події “%@”!";
+//CGU
+"event_CGU_1_title" = "Бути добрим";
+"event_CGU_1" = "Я використовую програму з метою взаємодопомоги для людей, які перебувають у дуже нестабільних або виключених ситуаціях.";
+"event_CGU_2_title" = "Колектова угода";
+"event_CGU_2" = "Я забезпечую згоду зацікавлених людей перед створенням дії.";
+"event_CGU_3_title" = "Забезпечення захисту людей";
+"event_CGU_3" = "Я гарантую, що не повідомлятиму конфіденційних особистих даних (медичних, юридичних тощо), а також дозволятиму точну ідентифікацію чи місцезнаходження людей.";
+"event_CGU_4_title" = "Будьте єдині, без різниці";
+"event_CGU_4" = "Я зобов'язуюсь не робити різниці щодо раси, кольору шкіри, статі, мови, релігії, політичних поглядів, власності, народження чи будь-якого іншого стану.";
+
+//MARK: - Actions -
+"action_menu_demand" = "Створіть запит";
+"action_menu_contrib" = "Створіть внесок";
+"action_create_title_phase" = "етап";
+"action_create_title_phase_nb" = "0%d.";
+"action_create_group_bt_back" = "Попередній";
+"action_create_group_bt_next" = "Слідую";
+"action_create_group_bt_create" = "Для підтвердження";
+
+"actionCreatePopCloseBackTitle" = "Увага";
+"actionCreatePopCloseBackMessage" = "Якщо ви вийдете з форми створення %@, уся введена інформація буде втрачена.";
+"actionCreatePopCloseBackQuit" = "Залишити";
+"actionCreatePopCloseBackCancel" = "Скасувати";
+
+"action_solicitation" = "запит";
+"action_contrib" = "внесок";
+
+"action_create_title_contrib" = "Новий внесок";
+"action_create_title_solicitation" = "Новий запит";
+"action_charte_title" = "Етичний кодекс";
+"action_create_info_contrib" = "Vous cherchez à proposer une contribution qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_contrib_underline" = "дізнайтеся більше тут.";
+"action_create_info_demand" = "Vous cherchez à proposer une demande qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_demand_underline" = "дізнайтеся більше тут.";
+
+"action_create_mandatory" = "- ОБОВ'ЯЗКОВО";
+"action_create_phase_1_name" = "Назва дії - обов'язково";
+"action_create_phase_1_name_placeholder" = "Назвіть свій %@";
+"action_create_phase_1_name_subtitle" = "Дайте коротку та зрозумілу назву своєму %@";
+"action_create_phase_1_name_error" = "Назва %@ має містити принаймні 2 символи.";
+
+"action_add_post_title_image" = "Додайте картинку";
+
+"action_create_phase_1_desc" = "Опис - обов'язковий";
+"action_create_phase_1_desc_placeholder" = "Опишіть свій %@";
+"action_create_phase_1_desc_subtitle" = "Детально опишіть %@, який ви пропонуєте";
+
+"action_PhotoCreateTitle" = "Додати фото - за бажанням";
+"action_PhotoCreateTitleHighlight" = "- необов'язковий";
+"action_PhotoCreateDescription" = "Ви можете змінити це пізніше";
+"action_CreatePhase1_error" = "Виберіть зображення";
+
+"action_create_title_category" = "Виберіть категорію, яка найкраще описує ваш %@. - ОБОВ'ЯЗКОВО";
+"action_create_title_category_mandatory" = "- ОБОВ'ЯЗКОВО";
+
+//Edit location page
+"actionCellLocationTitle" = "Знайдіть %@";
+"actionCellLocationDescription" = "Ваше точне місцезнаходження не повідомлятиметься, ви можете вказати місцезнаходження, відмінне від зони дії вашого профілю.";
+
+"actionEditLocationTitle" = "Знайдіть %@";
+"actionEditLocationDescription" = "Ваше точне місцезнаходження не повідомлятиметься, ви можете вказати місцезнаходження, відмінне від зони дії вашого профілю.";
+"actionEditLocationLegend" = "Додайте місце";
+
+"actionCreatePhase1_error" = "Будь ласка, заповніть усі обов'язкові поля.";
+"actionCreatePhase2_error" = "Необхідно вибрати категорію.";
+"actionCreatePhase3_error" = "Виберіть адресу.";
+"action_create_nok" = "Помилка створення %@. ЗАПОВНЮВАЧ";
+//Charte Actions
+"accept_charte" = "прийняти";
+"action_charte_1_title" = "Взаємодопомога";
+"action_charte_1" = "Додаток дозволяє створювати нові зустрічі між сусідами та заохочувати час обміну. Віддалена допомога (автомобілем, доставкою, подарунковим ваучером, призовим фондом тощо) не дозволена.";
+"action_charte_2_title" = "Внески та запити";
+"action_charte_2" = "Я можу вимагати чи пропонувати матеріальні блага (обладнання, одяг тощо), послуги (пральня, друк документів тощо) і час для спільного спілкування (кава, діяльність тощо).\nI не може вимагати чи пропонувати фінансову допомогу, житло чи їжу допомога. Але якщо мені це потрібно, я можу зв'язатися з модератором, який мене скерує.";
+"action_charte_3_title" = "Згода";
+"action_charte_3" = "Коли я публікую запит для третьої сторони, я обов’язково отримую їхню згоду заздалегідь.";
+"action_charte_4_title" = "Жодної дискримінації";
+"action_charte_4" = "Я зобов'язуюсь вступати в стосунки з людьми без дискримінації (за расою, релігією, сексуальною орієнтацією, політичними переконаннями тощо).";
+"action_charte_5_title" = "Захист людей";
+"action_charte_5" = "Я гарантую, що мої дії не містять будь-яких персональних даних (прізвища, номера телефону, точної адреси тощо), які дозволяють точно ідентифікувати та знайти особу, а також будь-яких конфіденційних даних (медичних, юридичних тощо).";
+
+//Create action end
+"action_create_close_button" = "До кінця";
+"contribCreateEnd_title" = "Ваш внесок створено!";
+"contribCreateEnd_subtitle" = "Вітаємо, ви щойно створили новий внесок. Щоб зробити це більш помітним, обговоріть це у своїх групах!";
+"solicitationCreateEnd_title" = "Ваш запит створено!";
+"solicitationCreateEnd_subtitle" = "Вітаємо, ви щойно створили новий запит. Щоб зробити це більш помітним, обговоріть це у своїх групах!";
+
+
+//Home Actions
+"actions_main_page_title" = "Взаємодопомога";
+"actions_main_page_button_contribs" = "Внески";
+"actions_main_page_button_solicitations" = "Запити";
+"action_contrib_empty_title" = "Немає внесків, які відповідають вашій області пошуку";
+"action_contrib_empty_subtitle" = "Ви можете розширити поле пошуку або зробити внесок";
+"action_solicitation_empty_title" = "Жоден запит не відповідає вашій області пошуку";
+"action_solicitation_empty_subtitle" = "Ви можете розширити поле пошуку або створити запит";
+"action_filter_category" = "Категорія";
+"action_filter_categories" = "Категорії";
+"action_filter_title" = "Фільтрувати за категоріями";
+"action_filter_location_title" = "Фільтрувати за розташуванням";
+//detail my actions
+"action_your" = "Ваша дія";
+"actions_my_title" = "Мої оголошення";
+"action_detail_title_location" = "Місцезнаходження";
+"atKm" = "%0f км від мене";
+"AtKm" = "%0f км від мене";
+"Atm" = "%0f м від мене";
+"atm" = "%0f м від мене";
+"Contrib" = "внесок";
+"Demand" = "запит";
+
+"action_created_at" = "Створено %@";
+"action_member_since" = "Учасник з %@";
+"action_cancel" = "Оголошення видалено";
+
+"params_cancel_action_pop_bt_delete" = "Скасувати";
+"params_cancel_action_pop_bt_cancel" = "Назад";
+"params_cancel_action_pop_title" = "Скасувати дію";
+"params_cancel_action_pop_message" = "Ви хочете скасувати дію?";
+
+"params_cancel_action_pop_bt_yes" = "Так";
+"params_cancel_action_pop_bt_no" = "Немає";
+"params_cancel_action_pop_bt_valid" = "Надіслати";
+"params_cancel_action_pop_title" = "Видалити %@";
+"params_cancel_action_pop_subtitle" = "Ваш %@ був успішним?";
+
+"params_cancel_action_pop_comment" = "Розкажіть нам більше про свій досвід - необов'язково";
+"action_optional" = "- необов'язковий";
+"params_cancel_action_pop_comment_placeholder" = "Розкажіть про свій досвід!";
+
+"action_view_canceled_title" = "Оголошення видалено...";
+"action_view_canceled_contrib_subtitle" = "Ви можете шукати інші внески, які можуть вас зацікавити, або опублікувати оголошення.";
+"action_view_canceled_demand_subtitle" = "Ви можете шукати інші запити, які можуть вас зацікавити, або опублікувати оголошення.";
+"action_view_canceled_demand_button" = "Список запитів";
+"action_view_canceled_contrib_button" = "Список внесків";
+
+
+//CGU
+"action_params_cgu_title" = "Етичний кодекс";
+"action_params_cgu_description" = "";
+"action_CGU_1_title" = "Взаємодопомога";
+"action_CGU_1" = "Додаток дозволяє створювати нові зустрічі між сусідами та заохочувати час обміну. Віддалена допомога (автомобілем, доставкою, подарунковим ваучером, призовим фондом тощо) не дозволена.";
+"action_CGU_2_title" = "Внески та запити";
+"action_CGU_2" = "Я можу просити або пропонувати матеріальні блага (обладнання, одяг тощо), послуги (пральня, друк документів тощо) та час спільного спілкування (кава, заходи тощо). Я не можу вимагати чи пропонувати фінансову допомогу, допомогу з проживанням чи харчуванням. Але якщо мені це потрібно, я можу зв'язатися з модератором, який мене скерує.";
+"action_CGU_3_title" = "Згода";
+"action_CGU_3" = "Коли я публікую запит для третьої сторони, я обов’язково отримую їхню згоду заздалегідь.";
+"action_CGU_4_title" = "Жодної дискримінації";
+"action_CGU_4" = "Я зобов'язуюсь вступати в стосунки з людьми без дискримінації (за расою, релігією, сексуальною орієнтацією, політичними переконаннями тощо).";
+"action_CGU_5_title" = "Захист людей";
+"action_CGU_5" = "Я гарантую, що мої дії не містять будь-яких персональних даних (прізвища, номера телефону, точної адреси тощо), які дозволяють точно ідентифікувати та знайти особу, а також будь-яких конфіденційних даних (медичних, юридичних тощо).";
+
+"edit_edit_contrib_title" = "Редагувати\nвнесок";
+"edit_edit_solicitation_title" = "Редагувати\nзапит";
+
+/*
+ Messages
+ */
+"Messages_title" = "дискусії";
+"messaging_message_placeholder_discut" = "Нове повідомлення";
+"messaging_message_title" = "Розмова";
+"messaging_message_send" = "Надіслати";
+"messaging_message_no_message" = "Ще 0 повідомлень";
+
+"message_title_new_conv" = "Нова розмова";
+"message_subtitle_new_conv" = "Ви ще не взаємодіяли з цим користувачем. Якщо виникла проблема, ви можете повідомити про розмову в налаштуваннях.";
+"message_error_create_conversation" = "Помилка створення бесіди";
+
+"conversation_params_title" = "Налаштування чату";
+"conv_param_title_profil" = "Перегляд профілю";
+"conv_param_title_signal" = "звіт";
+"conv_param_subtitle_signal" = "Повідомити про цю розмову команді Entourage.";
+"conv_param_title_members" = "Учасники бесіди";
+"conv_param_title_signal_action" = "звіт";
+"conv_param_subtitle_signal_action" = "Повідомити про цю розмову команді Entourage.";
+"conv_param_qui_action" = "Залиште розмову";
+"conv_param_title_block" = "Блокувати";
+"conv_param_subtitle_block" = "%@ більше не зможе писати вам.";
+
+//Pop leave conversation
+"params_leave_conv_pop_title" = "Залиште розмову";
+"params_leave_conv_pop_message" = "Ви хочете залишити розмову?";
+"params_leave_conv_pop_bt_quit" = "Залишити";
+"params_leave_conv_pop_bt_cancel" = "Скасувати";
+
+//Pop block user inside conversation
+"params_block_user_conv_pop_title" = "Заблокувати користувача";
+"params_block_user_conv_pop_message" = "Бажаєте заблокувати %@?\nЦей користувач більше не зможе надсилати вам повідомлення. Ви можете будь-коли розблокувати користувача в налаштуваннях профілю.";
+"params_block_user_conv_pop_bt_quit" = "Блокувати";
+"params_block_user_conv_pop_bt_cancel" = "Скасувати";
+
+"params_block_user_conv_pop_validate_title" = "Заблокувати %@";
+"params_block_user_conv_pop_validate_subtitle" = "Цей контакт заблоковано.";
+"params_block_user_conv_pop_validate_bt" = "в порядку";
+
+"message_user_blocked_by_me_list" = "Ви заблокували цей контакт";
+"message_user_blocked_by_me" = "Ви заблокували %@. Ви більше не можете надіслати йому повідомлення.";
+"message_user_blocked_by_other" = "Ви більше не можете надсилати повідомлення %@. Цю розмову заблоковано.";
+
+"settingsUnblockUserInfo" = "Виберіть один або кілька контактів для розблокування.";
+"settingsUnblockBT" = "Розблокувати";
+"settingsUnblockUser_error" = "Виберіть хоча б один контакт";
+
+"params_unblock_user_pop_title" = "Розблокувати контакт";
+"params_unblock_users_pop_title" = "Розблокувати контакти";
+"params_unblock_user_pop_message" = "Бажаєте розблокувати %@?\nВи знову зможете надсилати повідомлення один одному.";
+"params_unblock_user_pop_bt_unblock" = "Розблокувати";
+"params_unblock_user_pop_bt_cancel" = "Скасувати";
+
+"params_unblock_user_pop_validate_title" = "Розблокувати %@";
+"params_unblock_user_pop_validate_subtitle" = "Цей контакт щойно розблоковано, ви можете писати один одному знову.";
+"params_unblock_users_pop_validate_subtitle" = "Ці контакти щойно розблоковано, ви можете писати один одному знову.";
+"params_unblock_user_pop_validate_bt" = "в порядку";
+
+"param_empty_blocked_user" = "Ви не заблокували жодного контакту.";
+
+"conversation_users_title" = "Учасники бесіди";
+"conversation_userInput_search" = "Пошук учасника чату";
+"conversation_search_empty_title" = "На жаль, немає результатів, які відповідають вашому пошуку!";
+
+"notifs_title" = "Сповіщення";
+"duration_month" = "%d місяць";
+"duration_weeks" = "%d тиждень";
+"duration_days" = "%d j";
+"duration_hours" = "%d год";
+"duration_minutes" = "%d хв";
+"duration_secondes" = "прямо зараз";
+
+
+//Pwd change
+"param_title_change_pwd" = "Змінити пароль";
+"param_change_pwd_title" = "Пароль";
+"placeholder_changePwd" = "Введіть код";
+"oldCode" = "Старий код доступу";
+"newCode" = "Новий код доступу";
+"confirmCode" = "Підтвердьте код";
+"pwdError" = "Невірний пароль";
+"pwdShort" = "Новий пароль занадто короткий";
+"pwdDiff" = "Паролі не збігаються";
+"pwdUpdated" = "Оновлення пароля";
+"pwdUpdatedErr" = "Помилка оновлення";
+
+
+//WELCOME STRINGS
+
+"welcomeone_title" = "Ласкаво просимо до справді соціальної мережі \n";
+"welcomeone_content_main" = "Для багатьох вулиця — це місце проходу.\nДля деяких — це повсякденне життя.\nSДля початку познайомтеся з тими та\nтими, хто живе цим щодня.";
+"welcomeone_content" = "Знайдіть наш матеріал для підвищення обізнаності тут";
+
+"welcome_three_title_event" = "6000 людей знайшли нових друзів на заході Entourage";
+"welcome_three_title_demand" = "Протягни руку допомоги сусідам";
+"welcome_three_title_contrib" = "Навколо вас немає підтримки? Створіть його!";
+
+"welcome_two_no_group" = "Представтеся своїй групі сусідів";
+
+"welcome_three_maintext_event" = "Знайдіть подію, яка вас цікавить, і приходьте та насолодіться дружнім моментом";
+"welcome_three_maintext_demand" = "Подивіться на запити, опубліковані поблизу вас:";
+"welcome_three_maintext_contrib" = "Хороший спосіб налагодити зв’язки між сусідами – поділитися своїми інтересами, пристрастями або просто випити кави, щоб познайомитися.";
+
+"welcome_three_mainbutton_event" = "Відкрийте для себе події";
+"welcome_three_mainbutton_demand" = "Відкрийте запити";
+"welcome_three_mainbutton_contrib" = "Створіть внесок";
+
+"welcome_three_contrib_example_one_title" = "Побалакати за кавою";
+"welcome_three_contrib_example_one_distance" = "10 м від мене";
+"welcome_three_contrib_example_one_loca" = "Париж (75010)";
+"welcome_three_contrib_example_one_date" = "21 червня 2022 року о 12 год.";
+
+"welcome_three_contrib_example_two_title" = "Дарування жіночого одягу";
+"welcome_three_contrib_example_two_distance" = "10 м від мене";
+"welcome_three_contrib_example_two_loca" = "Париж (75010)";
+"welcome_three_contrib_example_two_date" = "21 червня 2022 року о 12 год.";
+
+"welcome_four_main_button_title" = "Розпочніть вікторину";
+"welcome_four_title" = "На ваш розсуд";
+"welcome_four_main_text" = "Як щодо невеликої вікторини, щоб розвіяти упередження щодо світу вулиці?";
+"welcome_four_second_text" = "На Вашу думку, який відсоток бездомних має мобільний телефон?";
+
+"welcome_five_title" = "Вже 10 днів: ласкаво просимо в сім'ю!";
+"welcome_five_main_text_title" = "Це шалено, як швидко летить час, коли ти в хорошій компанії.\n\nТепер допоможи нам розширити мережу Entourage: принеси свій!";
+"welcome_five_main_button_title" = "Поділіться додатком";
+
+"custom_dialog_action_title_one_contrib" = "Де ваш внесок?";
+"custom_dialog_action_title_one_demand" = "Де ваш запит?";
+"custom_dialog_action_title_two" = "Дякую за Ваше терпіння";
+"custom_dialog_action_title_three" = "Гарні новини !";
+
+"custom_dialog_action_content_one_contrib" = "Votre action \"%@\" est-elle terminée ?";
+"custom_dialog_action_content_one_demande" = "%@\n\nВи знайшли те, що шукали?";
+"custom_dialog_action_content_two_contrib" = "Порада: подивіться внески. Сусід може запропонувати те, що ви шукаєте";
+"custom_dialog_action_content_two_demande" = "Порада: перегляньте запити поблизу вас. Можливо сусід зацікавиться";
+"custom_dialog_action_content_three_contrib" = "Велике спасибі за вашу відданість. Ми зможемо видалити ваш внесок.";
+"custom_dialog_action_content_three_demande" = "Велике спасибі за вашу відданість. Ми зможемо видалити ваш запит.";
+"custom_dialog_action_two_button_contrib" = "Переглянути внески";
+"custom_dialog_action_two_button_demand" = "Переглянути запити";
+
+"pop_up_rugby_france_title" = "Давайте переживемо Кубок світу з регбі разом";
+"pop_up_rugby_france_content" = "Les plus belles rencontres ne se font pas forcément au stade ! Rejoignez le groupe \"Vivons le sport ensemble\"";
+
+
+/* New Home string */
+"home_v2_title" = "Додаток, який відтворює зв'язки між сусідами";
+
+"home_v2_title_action" = "Дайте поштовх";
+"home_v2_subtitle_action" = "Ви потрібні своїм сусідам!";
+"home_v2_btn_more_action" = "Переглянути всі запити";
+
+"home_v2_title_action_contrib" = "Потрібна допомога?";
+"home_v2_subtitle_action_contrib" = "Дізнайтеся, що пропонують ваші сусіди!";
+"home_v2_btn_more_action_contrib" = "Переглянути всі внески";
+
+"home_v2_title_event" = "Взяти участь в акції солідарності";
+"home_v2_subtitle_event" = "Багато солідарності поруч";
+"home_v2_btn_more_event" = "Переглянути всі події";
+
+"home_v2_title_group" = "Ваші групи сусідів";
+"home_v2_subtitle_group" = "Обмінюйтеся з сусідами з усіх верств суспільства";
+"home_v2_btn_more_group" = "Переглянути всі групи";
+
+"home_v2_title_map" = "Відкрийте для себе корисні адреси";
+"home_v2_subtitle_map" = "Всі споруди солідарності поруч";
+"home_v2_button_map" = "Карта місць солідарності поблизу вас";
+
+"home_v2_title_pedago" = "Усе, що вам потрібно знати, щоб діяти";
+"home_v2_subtitle_pedago" = "Боротьба з нестабільністю – це як усе, цьому можна навчитися!";
+"home_v2_btn_more_pedago" = "Переглянути всі статті";
+
+"home_v2_pedago_item_tag_all" = "все";
+"home_v2_pedago_item_tag_act" = "Діяти";
+"home_v2_pedago_item_tag_inspire" = "Надихайте";
+"home_v2_pedago_item_tag_understand" = "Зрозуміти";
+
+"home_v2_title_help" = "Ви заблукали?";
+"home_v2_subtitle_help" = "Не панікуйте, починайте крок за кроком!";
+"home_v2_btn_more_help" = "Переглянути всі статті";
+
+"home_v2_help_title_one" = "Як створити групу?";
+"home_v2_help_title_two" = "Як створити подію?";
+"home_v2_help_title_three" = "Запитання?\nЗв’язатися";
+
+"home_v2_pedag_item_lenght_title" = "%d хв. читання";
+
+"home_v2_action_type_social" = "Соціальний";
+"home_v2_action_type_clothes" = "Одяг";
+"home_v2_action_type_equipment" = "Обладнання";
+"home_v2_action_type_hygiène" = "Гігієна";
+"home_v2_action_type_services" = "Послуги";
+"home_v2_action_type_other" = "інші";
+
+"home_v2_hz_item_title" = "Гей, здається, тут трохи тихо...";
+"home_v2_hz_item_subtitle" = "Що якби ви принесли трохи солідарності у своє місто? Entourage дає вам ключі, щоб почати!";
+"home_v2_hz_item_button" = "Вивчайте більше";
+
+"lang_fr" = "Французька";
+"lang_en" = "Англійська";
+"lang_de" = "Німецька";
+"lang_uk" = "Українська";
+"lang_es" = "Іспанська";
+"lang_ro" = "Румунська";
+"lang_ar" = "Арабська";
+"lang_pl" = "Польська";
+
+"params_language" = "Мови";
+"onboarding_lang_bienvenue" = "Ласкаво просимо !";
+"onboarding_lang_select" = "Виберіть вашу мову";
+"onboarding_lang_suivant" = "Далі";

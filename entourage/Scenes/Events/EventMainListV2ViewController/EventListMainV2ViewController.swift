@@ -47,6 +47,9 @@ class EventListMainV2ViewController:UIViewController{
 
     
     override func viewDidLoad() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
+
         //Title
         self.ui_title_label.text = "tabbar_events".localized
         //Table View
@@ -140,6 +143,13 @@ class EventListMainV2ViewController:UIViewController{
         self.ui_table_view.reloadData()
         self.pullRefreshControl.endRefreshing()
         isLoading = false
+    }
+    @objc func showNewEvent(_ notification:Notification) {
+        if let eventId = notification.userInfo?[kNotificationEventShowId] as? Int {
+            DispatchQueue.main.async {
+                self.showEvent(eventId: eventId, isAfterCreation: true)
+            }
+        }
     }
     
     @IBAction func OnFilterClick(_ sender: Any) {
@@ -309,7 +319,7 @@ extension EventListMainV2ViewController{
         if isEndOfMyEventList {
             return
         }
-        EventService.getAllEventsForUser(currentPage: currentPageMy, per: numberOfItemsForWS) { events, error in
+        EventService.getAllEventsForUser(currentPage: currentPageMy, per: 50) { events, error in
             
             if(self.isFromFilter){
                 self.isFromFilter = false

@@ -44,6 +44,7 @@ class HomeV2ViewController:UIViewController{
     @IBOutlet weak var ui_image_notif: UIImageView!
     @IBOutlet weak var ui_image_user_avatar: UIImageView!
     @IBOutlet weak var ui_label_subtitle: UILabel!
+    
     //VARIABLE
     var tableDTO = [HomeV2DTO]()
     var notificationCount = 0
@@ -188,6 +189,7 @@ class HomeV2ViewController:UIViewController{
         IHProgressHUD.dismiss()
     }
     func initHome(){
+        self.ui_label_subtitle.text = "home_v2_title".localized
         self.getNotif()
     }
     func updateTopView() {

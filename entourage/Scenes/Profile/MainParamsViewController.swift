@@ -118,6 +118,16 @@ extension MainParamsViewController:MainParamsMenuDelegate {
             let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
             let navvc = sb.instantiateViewController(withIdentifier: "editpwdNav")
             self.navigationController?.present(navvc, animated: true, completion: nil)
+        case .Translation:
+            let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+            let navvc = sb.instantiateViewController(withIdentifier: "translation")
+            self.navigationController?.present(navvc, animated: true, completion: nil)
+        case .Language:
+            let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+            let navvc = sb.instantiateViewController(withIdentifier: "language") as! ProfileLanguageChooseViewController
+            navvc.delegate = self
+            
+            self.navigationController?.present(navvc, animated: true, completion: nil)
         }
     }
     
@@ -169,4 +179,12 @@ extension MainParamsViewController: MJAlertControllerDelegate {
     
     func validateRightButton(alertTag:MJAlertTAG) {}
     func closePressed(alertTag:MJAlertTAG) {}
+}
+
+extension MainParamsViewController:ProfileLanguageCloseDelegate{
+    func onDismiss() {
+        self.dismiss(animated: true) {
+            AppState.navigateToMainApp()
+        }
+    }
 }
