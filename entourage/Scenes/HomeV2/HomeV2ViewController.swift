@@ -464,7 +464,6 @@ extension HomeV2ViewController{
         HomeService.getUserHome { [weak self] userHome, error in
             if let userHome = userHome {
                 self?.userHome = userHome
-                print("eho userHome preference " , userHome.preference)
                 if userHome.preference == "contribution" {
                     self?.isContributionPreference = true
                 }else{

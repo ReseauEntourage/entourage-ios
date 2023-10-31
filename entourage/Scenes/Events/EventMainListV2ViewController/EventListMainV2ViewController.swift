@@ -305,10 +305,18 @@ extension EventListMainV2ViewController{
                 if _events.count < self.numberOfItemsForWS{
                     self.isEndOfDiscoverList = true
                 }
-                self.discoverEvent.append(contentsOf: _events)
+                
+                // Filtrer les événements pour ne pas ajouter de doublons
+                let uniqueEvents = _events.filter { newEvent in
+                    !self.discoverEvent.contains { existingEvent in
+                        existingEvent.uid == newEvent.uid
+                    }
+                }
+                
+                self.discoverEvent.append(contentsOf: uniqueEvents)
                 self.configureDTO()
                 self.isLoading = false
-            }else if let _error = error {
+            } else if let _error = error {
                 //TODO ERROR Trigger warning
             }
             self.getMyEvent()
