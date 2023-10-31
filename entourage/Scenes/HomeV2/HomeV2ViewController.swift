@@ -340,7 +340,9 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .moderator(let name, let imageUrl):
             if let _moderator = self.userHome.moderator{
                 AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
-                showUserProfile(id: _moderator.id!)
+                if let _id = _moderator.id{
+                    showUserProfile(id: _id)
+                }
             }
         case .cellHZ:
             AnalyticsLoggerManager.logEvent(name: Action_Home_Buffet)
