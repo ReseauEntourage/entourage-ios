@@ -26,6 +26,8 @@ class LanguageCell:UITableViewCell {
     }
     
     func configure(lang:String, isSelected:Bool){
+        ui_view_container.layer.borderWidth = 1.0
+        ui_view_container.layer.borderColor = UIColor.appBeige.cgColor
         switch(lang){
         case "fr":
             //
