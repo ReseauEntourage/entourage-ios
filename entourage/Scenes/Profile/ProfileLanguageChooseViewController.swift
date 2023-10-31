@@ -39,10 +39,20 @@ class ProfileLanguageChooseViewController:UIViewController{
         ui_iv_cross.addGestureRecognizer(tapGestureRecognizer)
 
     }
+    /*            LanguageItem("Français", isSelected = LanguageManager.mapLanguageToCode("Français") == currentLanguageCode),
+     LanguageItem("English", isSelected = LanguageManager.mapLanguageToCode("English") == currentLanguageCode),
+     LanguageItem("العربية", isSelected = LanguageManager.mapLanguageToCode("العربية") == currentLanguageCode),
+     LanguageItem("Українська", isSelected = LanguageManager.mapLanguageToCode("Українська") == currentLanguageCode),
+     LanguageItem("Español", isSelected = LanguageManager.mapLanguageToCode("Español") == currentLanguageCode),
+     LanguageItem("Deutsch", isSelected = LanguageManager.mapLanguageToCode("Deutsch") == currentLanguageCode),
+     LanguageItem("Română", isSelected = LanguageManager.mapLanguageToCode("Română") == currentLanguageCode),
+     LanguageItem("Polski", isSelected = LanguageManager.mapLanguageToCode("Polski") == currentLanguageCode)
+     )**/
+    
     func fillDTO(){
         tableDTO.removeAll()
         let preferredLanguage = LanguageManager.loadLanguageFromPreferences()
-        let languages = ["fr", "en", "es", "ar", "uk", "de", "ro"]
+        let languages = ["fr", "en", "ar", "es", "uk", "de", "ro", "pl"]
         for lang in languages {
             let isSelected = lang == preferredLanguage
             tableDTO.append(.languageCell(lang: lang, isSelected: isSelected))
