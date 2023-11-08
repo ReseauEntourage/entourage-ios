@@ -96,7 +96,7 @@ class EventListMainV2ViewController:UIViewController{
         self.discoverEvent.removeAll()
         self.isOnlyDiscoverPagination = false
         isFromFilter = false
-        self.getDiscoverEvent()
+        self.getMyEvent()
     }
     
     func loadForFilter(){
@@ -105,14 +105,15 @@ class EventListMainV2ViewController:UIViewController{
         self.isEndOfDiscoverList = false
         self.discoverEvent.removeAll()
         self.currentPageDiscover = 0
-        self.getDiscoverEvent()
+        self.getMyEvent()
     }
     
     func loadForPaginationDiscover(){
         isLoading = true
         self.currentPageDiscover += 1
         self.isOnlyDiscoverPagination = true
-        self.getDiscoverEvent()
+        self.getMyEvent()
+
     }
     
     func loadForMyEventPagination(){
@@ -319,37 +320,40 @@ extension EventListMainV2ViewController{
             } else if let _error = error {
                 //TODO ERROR Trigger warning
             }
-            self.getMyEvent()
+            self.configureDTO()
         }
     }
     
     func getMyEvent(){
         if isEndOfMyEventList {
+            self.getDiscoverEvent()
             return
         }
         EventService.getAllEventsForUser(currentPage: currentPageMy, per: 50) { events, error in
             
             if(self.isFromFilter){
                 self.isFromFilter = false
-                self.configureDTO()
+                self.getDiscoverEvent()
                 return
             }
             if(self.isOnlyDiscoverPagination){
                 self.isOnlyDiscoverPagination = false
-                self.configureDTO()
+                self.getDiscoverEvent()
                 return
             }
             
             if let _events = events{
                 if _events.count < self.numberOfItemsForWS{
                     self.isEndOfMyEventList = true
+                    
                 }
                 self.myEvent.append(contentsOf: _events)
             }else if let _error = error {
                 //TODO ERROR Trigger warning
             }
-            self.configureDTO()
+            self.getDiscoverEvent()
         }
+        
     }
 }
 

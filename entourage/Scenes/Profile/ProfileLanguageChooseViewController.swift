@@ -43,7 +43,7 @@ class ProfileLanguageChooseViewController:UIViewController{
     func fillDTO(){
         tableDTO.removeAll()
         let preferredLanguage = LanguageManager.loadLanguageFromPreferences()
-        let languages = ["fr", "en", "es", "uk", "de", "ro", "pl"]
+        let languages = ["fr", "en", "uk", "es", "de", "ro", "pl"]
         for lang in languages {
             let isSelected = lang == preferredLanguage
             tableDTO.append(.languageCell(lang: lang, isSelected: isSelected))
