@@ -1422,16 +1422,44 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_hz_item_subtitle" = "ماذا لو جلبت القليل من التضامن إلى مدينتك؟ Entourage يمنحك المفاتيح للبدء!";
 "home_v2_hz_item_button" = "اقرأ المزيد";
 
-"lang_fr" = "الفرنسية";
-"lang_en" = "الإنجليزية";
-"lang_de" = "الألمانية";
-"lang_uk" = "الأوكرانية";
-"lang_es" = "الإسبانية";
-"lang_ro" = "الرومانية";
-"lang_ar" = "العربية";
-"lang_pl" = "البولندية";
+"lang_fr" = " - الفرنسية";
+"lang_en" = " - الإنجليزية";
+"lang_de" = " - الألمانية";
+"lang_uk" = " - الأوكرانية";
+"lang_es" = " - الإسبانية";
+"lang_ro" = " - الرومانية";
+"lang_ar" = " - العربية";
+"lang_pl" = " - البولندية";
 
 "params_language" = "لغات";
 "onboarding_lang_bienvenue" = "أهلاً !";
 "onboarding_lang_select" = "اختر لغتك";
 "onboarding_lang_suivant" = "التالي";
+"translation_bottom_fragment_title" = "نترجم تلقائيًا الرسائل المكتوبة من قبل المواطنين.";
+"translation_bottom_fragment_main_title" = "الترجمة";
+
+"action_social_name" = "وقت المشاركة";
+"action_social_subname" = "قهوة، نشاط...";
+
+"action_services_name" = "خدمة";
+"action_services_subname" = "غسيل، طباعة الوثائق...";
+
+"action_clothes_name" = "ملابس";
+"action_clothes_subname" = "أحذية، معطف...";
+
+"action_equipment_name" = "معدات";
+"action_equipment_subname" = "هاتف، كيس نوم...";
+
+"action_hygiene_name" = "منتج النظافة";
+"action_hygiene_subname" = "صابون، حماية صحية...";
+
+"interest_activites" = "الأنشطة اليدوية";
+"interest_animaux" = "الحيوانات";
+"interest_bien_etre" = "الرفاهية";
+"interest_cuisine" = "الطبخ";
+"interest_culture" = "الفن والثقافة";
+"interest_jeux" = "الألعاب";
+"interest_nature" = "الطبيعة";
+"interest_sport" = "الرياضة";
+"interest_marauding" = "اللقاءات البدوية";
+"interest_other" = "أخرى";

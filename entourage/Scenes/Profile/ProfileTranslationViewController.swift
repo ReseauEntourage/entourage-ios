@@ -10,9 +10,13 @@ import UIKit
 
 class ProfileTranslationViewController:UIViewController {
     
+    
+    
     override func viewDidLoad() {
         
     }
     
+    @IBAction func onValidateClick(_ sender: Any) {
+    }
     
 }

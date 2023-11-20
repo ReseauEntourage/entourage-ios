@@ -483,7 +483,7 @@
 //Settings
  */
 "params_translation" = "Traduction";
-"params_language" = "Langues";
+"params_language" = "Langue";
 "params_notifs" = "Notifications";
 "params_help" = "Aide et à propos";
 "params_unlock" = "Débloquer des contacts";
@@ -1424,15 +1424,43 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_hz_item_subtitle" = "Et si vous mettiez un peu de solidarité dans votre ville ? Entourage vous donne les clés pour vous lancer !";
 "home_v2_hz_item_button" = "En savoir plus";
 
-"lang_fr" = "Français";
-"lang_en" = "Anglais";
-"lang_de" = "Allemand";
-"lang_uk" = "Ukrainien";
-"lang_es" = "Espagnol";
-"lang_ro" = "Roumain";
-"lang_ar" = "Arabe";
-"lang_pl" = "Polonais";
+"lang_fr" = " - Français";
+"lang_en" = " - Anglais";
+"lang_de" = " - Allemand";
+"lang_uk" = " - Ukrainien";
+"lang_es" = " - Espagnol";
+"lang_ro" = " - Roumain";
+"lang_ar" = " - Arabe";
+"lang_pl" = " - Polonais";
 
 "onboarding_lang_bienvenue" = "Bienvenue !";
 "onboarding_lang_select" = "Sélectionner la langue";
 "onboarding_lang_suivant" = "Suivant";
+"translation_bottom_fragment_title" = "Nous traduisons automatiquement les messages rédigés par les citoyens.";
+"translation_bottom_fragment_main_title" = "Traduction";
+
+"action_social_name" = "Partage de Temps";
+"action_social_subname" = "café, activité...";
+
+"action_services_name" = "Service";
+"action_services_subname" = "lessive, impression de documents...";
+
+"action_clothes_name" = "Vêtements";
+"action_clothes_subname" = "chaussures, manteau...";
+
+"action_equipment_name" = "Équipement";
+"action_equipment_subname" = "téléphone, sac de couchage...";
+
+"action_hygiene_name" = "Produit d'Hygiène";
+"action_hygiene_subname" = "savon, protection sanitaire...";
+
+"interest_activites" = "Activités Manuelles";
+"interest_animaux" = "Animaux";
+"interest_bien_etre" = "Bien-être";
+"interest_cuisine" = "Cuisine";
+"interest_culture" = "Art & Culture";
+"interest_jeux" = "Jeux";
+"interest_nature" = "Nature";
+"interest_sport" = "Sports";
+"interest_marauding" = "Rencontres Nomades";
+"interest_other" = "Autre";

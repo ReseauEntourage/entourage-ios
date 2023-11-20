@@ -2845,16 +2845,44 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_hz_item_subtitle" = "¿Y si trajeras un poco de solidaridad a tu ciudad? ¡Entourage te da las claves para empezar!";
 "home_v2_hz_item_button" = "Más información";
 
-"lang_fr" = "Francés";
-"lang_en" = "Inglés";
-"lang_de" = "Alemán";
-"lang_uk" = "Ucraniano";
-"lang_es" = "Español";
-"lang_ro" = "Rumano";
-"lang_ar" = "Árabe";
-"lang_pl" = "Polaco";
+"lang_fr" = " - Francés";
+"lang_en" = " - Inglés";
+"lang_de" = " - Alemán";
+"lang_uk" = " - Ucraniano";
+"lang_es" = " - Español";
+"lang_ro" = " - Rumano";
+"lang_ar" = " - Árabe";
+"lang_pl" = " - Polaco";
 
-"params_language" = "Idiomas";
+"params_language" = "Idioma";
 "onboarding_lang_bienvenue" = "¡Bienvenido!";
 "onboarding_lang_select" = "Seleccione su idioma";
 "onboarding_lang_suivant" = "Siguiente";
+"translation_bottom_fragment_title" = "Traducimos automáticamente los mensajes escritos por los ciudadanos.";
+"translation_bottom_fragment_main_title" = "Traducción";
+
+"action_social_name" = "Tiempo de compartir";
+"action_social_subname" = "café, actividad...";
+
+"action_services_name" = "Servicio";
+"action_services_subname" = "lavandería, impresión de documentos...";
+
+"action_clothes_name" = "Ropa";
+"action_clothes_subname" = "zapatos, abrigo...";
+
+"action_equipment_name" = "Equipamiento";
+"action_equipment_subname" = "teléfono, saco de dormir...";
+
+"action_hygiene_name" = "Producto de higiene";
+"action_hygiene_subname" = "jabón, protección sanitaria...";
+
+"interest_activites" = "Actividades manuales";
+"interest_animaux" = "Animales";
+"interest_bien_etre" = "Bienestar";
+"interest_cuisine" = "Cocina";
+"interest_culture" = "Arte y Cultura";
+"interest_jeux" = "Juegos";
+"interest_nature" = "Naturaleza";
+"interest_sport" = "Deportes";
+"interest_marauding" = "Encuentros nómadas";
+"interest_other" = "Otro";

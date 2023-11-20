@@ -1422,16 +1422,44 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_hz_item_subtitle" = "Dacă ai aduce puțină solidaritate în orașul tău? Entourage vă oferă cheile pentru a începe!";
 "home_v2_hz_item_button" = "Află mai multe";
 
-"lang_fr" = "Franceză";
-"lang_en" = "Engleză";
-"lang_de" = "Germană";
-"lang_uk" = "Ucraineană";
-"lang_es" = "Spaniolă";
-"lang_ro" = "Română";
-"lang_ar" = "Arabă";
-"lang_pl" = "Poloneză";
+"lang_fr" = " - Franceză";
+"lang_en" = " - Engleză";
+"lang_de" = " - Germană";
+"lang_uk" = " - Ucraineană";
+"lang_es" = " - Spaniolă";
+"lang_ro" = " - Română";
+"lang_ar" = " - Arabă";
+"lang_pl" = " - Poloneză";
 
 "params_language" = "Limbi";
 "onboarding_lang_bienvenue" = "Bine ați venit !";
 "onboarding_lang_select" = "Selectați limba dvs.";
 "onboarding_lang_suivant" = "Următorul";
+"translation_bottom_fragment_title" = "Traducem automat mesajele scrise de cetățeni.";
+"translation_bottom_fragment_main_title" = "Traducere";
+
+"action_social_name" = "Timp de partajare";
+"action_social_subname" = "cafea, activitate...";
+
+"action_services_name" = "Serviciu";
+"action_services_subname" = "spălătorie, tipărire documente...";
+
+"action_clothes_name" = "Îmbrăcăminte";
+"action_clothes_subname" = "încălțăminte, palton...";
+
+"action_equipment_name" = "Echipament";
+"action_equipment_subname" = "telefon, sac de dormit...";
+
+"action_hygiene_name" = "Produs de igienă";
+"action_hygiene_subname" = "săpun, protecție igienică...";
+
+"interest_activites" = "Activități manuale";
+"interest_animaux" = "Animale";
+"interest_bien_etre" = "Bine-înțeles";
+"interest_cuisine" = "Bucătărie";
+"interest_culture" = "Artă și cultură";
+"interest_jeux" = "Jocuri";
+"interest_nature" = "Natură";
+"interest_sport" = "Sport";
+"interest_marauding" = "Întâlniri nomade";
+"interest_other" = "Altul";

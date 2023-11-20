@@ -1422,16 +1422,44 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_hz_item_subtitle" = "Що якби ви принесли трохи солідарності у своє місто? Entourage дає вам ключі, щоб почати!";
 "home_v2_hz_item_button" = "Вивчайте більше";
 
-"lang_fr" = "Французька";
-"lang_en" = "Англійська";
-"lang_de" = "Німецька";
-"lang_uk" = "Українська";
-"lang_es" = "Іспанська";
-"lang_ro" = "Румунська";
-"lang_ar" = "Арабська";
-"lang_pl" = "Польська";
+"lang_fr" = " - Французька";
+"lang_en" = " - Англійська";
+"lang_de" = " - Німецька";
+"lang_uk" = " - Українська";
+"lang_es" = " - Іспанська";
+"lang_ro" = " - Румунська";
+"lang_ar" = " - Арабська";
+"lang_pl" = " - Польська";
 
 "params_language" = "Мови";
 "onboarding_lang_bienvenue" = "Ласкаво просимо !";
 "onboarding_lang_select" = "Виберіть вашу мову";
 "onboarding_lang_suivant" = "Далі";
+"translation_bottom_fragment_title" = "Ми автоматично перекладаємо повідомлення, написані громадянами.";
+"translation_bottom_fragment_main_title" = "Переклад";
+
+"action_social_name" = "Час спілкування";
+"action_social_subname" = "кава, активність...";
+
+"action_services_name" = "Сервіс";
+"action_services_subname" = "пральня, друк документів...";
+
+"action_clothes_name" = "Одяг";
+"action_clothes_subname" = "взуття, пальто...";
+
+"action_equipment_name" = "Обладнання";
+"action_equipment_subname" = "телефон, спальний мішок...";
+
+"action_hygiene_name" = "Гігієнічний продукт";
+"action_hygiene_subname" = "мило, гігієнічний захист...";
+
+"interest_activites" = "Ручні роботи";
+"interest_animaux" = "Тварини";
+"interest_bien_etre" = "Добробут";
+"interest_cuisine" = "Кулінарія";
+"interest_culture" = "Мистецтво та культура";
+"interest_jeux" = "Ігри";
+"interest_nature" = "Природа";
+"interest_sport" = "Спорт";
+"interest_marauding" = "Кочівні зустрічі";
+"interest_other" = "Інше";

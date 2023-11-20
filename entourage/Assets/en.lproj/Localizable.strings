@@ -1424,15 +1424,42 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_hz_item_subtitle" = "What if you brought a little solidarity to your city? Entourage gives you the keys to get started!";
 "home_v2_hz_item_button" = "Learn more";
 
-"lang_fr" = "French";
-"lang_en" = "English";
-"lang_de" = "German";
-"lang_uk" = "Ukrainian";
-"lang_es" = "Spanish";
-"lang_ro" = "Romanian";
-"lang_ar" = "Arabic";
-"lang_pl" = "Polish";
+"lang_fr" = " - French";
+"lang_en" = " - English";
+"lang_de" = " - German";
+"lang_uk" = " - Ukrainian";
+"lang_es" = " - Spanish";
+"lang_ro" = " - Romanian";
+"lang_ar" = " - Arabic";
+"lang_pl" = " - Polish";
 
 "onboarding_lang_bienvenue" = "Welcome !";
 "onboarding_lang_select" = "Select your language";
 "onboarding_lang_suivant" = "Next";
+"translation_bottom_fragment_title" = "We automatically translate messages written by citizens.";
+"translation_bottom_fragment_main_title" = "Translation";
+"action_social_name" = "Sharing Time";
+"action_social_subname" = "coffee, activity...";
+
+"action_services_name" = "Service";
+"action_services_subname" = "laundry, document printing...";
+
+"action_clothes_name" = "Clothing";
+"action_clothes_subname" = "shoes, coat...";
+
+"action_equipment_name" = "Equipment";
+"action_equipment_subname" = "phone, sleeping bag...";
+
+"action_hygiene_name" = "Hygiene";
+"action_hygiene_subname" = "soap, sanitary protection...";
+
+"interest_activites" = "Manual Activities";
+"interest_animaux" = "Animals";
+"interest_bien_etre" = "Well-being";
+"interest_cuisine" = "Cooking";
+"interest_culture" = "Art & Culture";
+"interest_jeux" = "Games";
+"interest_nature" = "Nature";
+"interest_sport" = "Sports";
+"interest_marauding" = "Homeless Encounters";
+"interest_other" = "Other";

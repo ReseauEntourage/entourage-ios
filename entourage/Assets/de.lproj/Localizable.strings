@@ -1422,16 +1422,44 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_hz_item_subtitle" = "Was wäre, wenn Sie ein wenig Solidarität in Ihre Stadt bringen würden? Entourage gibt Ihnen den Schlüssel zum Einstieg!";
 "home_v2_hz_item_button" = "Erfahren Sie mehr";
 
-"lang_fr" = "Französisch";
-"lang_en" = "Englisch";
-"lang_de" = "Deutsch";
-"lang_uk" = "Ukrainisch";
-"lang_es" = "Spanisch";
-"lang_ro" = "Rumänisch";
-"lang_ar" = "Arabisch";
-"lang_pl" = "Polnisch";
+"lang_fr" = " - Französisch";
+"lang_en" = " - Englisch";
+"lang_de" = " - Deutsch";
+"lang_uk" = " - Ukrainisch";
+"lang_es" = " - Spanisch";
+"lang_ro" = " - Rumänisch";
+"lang_ar" = " - Arabisch";
+"lang_pl" = " - Polnisch";
 
-"params_language" = "Sprachen";
+"params_language" = "Sprache";
 "onboarding_lang_bienvenue" = "Willkommen !";
 "onboarding_lang_select" = "Wählen Sie Ihre Sprache";
 "onboarding_lang_suivant" = "Weiter";
+"translation_bottom_fragment_title" = "Wir übersetzen automatisch Nachrichten, die von Bürgern verfasst wurden.";
+"translation_bottom_fragment_main_title" = "Übersetzung";
+
+"action_social_name" = "Gemeinsame Zeit";
+"action_social_subname" = "Kaffee, Aktivität...";
+
+"action_services_name" = "Dienstleistung";
+"action_services_subname" = "Wäsche, Dokumentendruck...";
+
+"action_clothes_name" = "Kleidung";
+"action_clothes_subname" = "Schuhe, Mantel...";
+
+"action_equipment_name" = "Ausrüstung";
+"action_equipment_subname" = "Telefon, Schlafsack...";
+
+"action_hygiene_name" = "Hygieneprodukt";
+"action_hygiene_subname" = "Seife, Hygieneschutz...";
+
+"interest_activites" = "Handwerkliche Tätigkeiten";
+"interest_animaux" = "Tiere";
+"interest_bien_etre" = "Wohlbefinden";
+"interest_cuisine" = "Kochen";
+"interest_culture" = "Kunst & Kultur";
+"interest_jeux" = "Spiele";
+"interest_nature" = "Natur";
+"interest_sport" = "Sport";
+"interest_marauding" = "Nomadische Begegnungen";
+"interest_other" = "Andere";

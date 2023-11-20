@@ -665,3 +665,87 @@ extension Event {
     }
     
 }
+
+class TagsUtils {
+    static func showTagTranslated(_ section: String) -> String {
+        switch section.lowercased() {
+        //EVENTS INTERESTS
+        case "activites", "activités manuelles":
+            return NSLocalizedString("interest_activites".localized, comment: "")
+        case "animaux":
+            return NSLocalizedString("interest_animaux".localized, comment: "")
+        case "bien-etre", "bien-être":
+            return NSLocalizedString("interest_bien_etre".localized, comment: "")
+        case "cuisine":
+            return NSLocalizedString("interest_cuisine".localized, comment: "")
+        case "culture", "art & culture":
+            return NSLocalizedString("interest_culture".localized, comment: "")
+        case "jeux":
+            return NSLocalizedString("interest_jeux".localized, comment: "")
+        case "nature":
+            return NSLocalizedString("interest_nature".localized, comment: "")
+        case "sport":
+            return NSLocalizedString("interest_sport".localized, comment: "")
+        case "marauding", "rencontres nomades":
+            return NSLocalizedString("interest_marauding".localized, comment: "")
+        case "other", "autre":
+            return NSLocalizedString("interest_other".localized, comment: "")
+            //ACTION TAGS
+        case "social":
+            return NSLocalizedString("action_social_name".localized, comment: "")
+        case "clothes":
+            return NSLocalizedString("action_clothes_name".localized, comment: "")
+        case "equipment":
+            return NSLocalizedString("action_equipment_name".localized, comment: "")
+        case "hygiene":
+            return NSLocalizedString("action_hygiene_name".localized, comment: "")
+        case "services":
+            return NSLocalizedString("action_services_name".localized, comment: "")
+        case "service":
+            return NSLocalizedString("action_services_name".localized, comment: "")
+        
+        case "temps de partage":
+            return NSLocalizedString("action_social_name".localized, comment: "")
+
+        case "vêtement":
+            return NSLocalizedString("action_services_name".localized, comment: "")
+
+        case "équipement":
+            return NSLocalizedString("action_equipment_name".localized, comment: "")
+
+        case "produit d'hygiène":
+            return NSLocalizedString("action_hygiene_name".localized, comment: "")
+
+        default:
+            return NSLocalizedString("interest_other".localized, comment: "")
+        }
+    }
+    static func showSubTagTranslated(_ section: String) -> String {
+        switch section {
+        case "social":
+            return NSLocalizedString("action_social_subname".localized, comment: "")
+        case "clothes":
+            return NSLocalizedString("action_clothes_subname".localized, comment: "")
+        case "equipment":
+            return NSLocalizedString("action_equipment_subname".localized, comment: "")
+        case "hygiene":
+            return NSLocalizedString("action_hygiene_subname".localized, comment: "")
+        case "services":
+            return NSLocalizedString("action_services_subname".localized, comment: "")
+            
+        case "café, activité...":
+            return NSLocalizedString("action_social_subname".localized, comment: "")
+        case "lessive, impression de documents...":
+            return NSLocalizedString("action_services_subname".localized, comment: "")
+        case "chaussures, manteau...":
+            return NSLocalizedString("action_clothes_subname".localized, comment: "")
+        case "téléphone, duvet...":
+            return NSLocalizedString("action_equipment_subname".localized, comment: "")
+        case "savon, protection hygiénique...":
+            return NSLocalizedString("action_hygiene_subname".localized, comment: "")
+            
+        default:
+            return NSLocalizedString("interest_other".localized, comment: "")
+        }
+    }
+}

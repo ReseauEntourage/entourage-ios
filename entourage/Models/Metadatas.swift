@@ -105,7 +105,7 @@ struct Tags:Codable {
     
     func getTagNameFrom(key:String) -> String {
         if let tag = tags.first(where: {$0.tagKey == key }) {
-            return tag.tagName
+            return TagsUtils.showTagTranslated(tag.tagName)
         }
         return key
     }
@@ -250,6 +250,7 @@ struct Sections:Codable {
     fileprivate var sections = [Section]()
     
     func getSectionNameFrom(key:String) -> (name:String,subtitle:String) {
+        return (TagsUtils.showTagTranslated(key), TagsUtils.showSubTagTranslated(key))
         if let cat = sections.first(where: {$0.catKey == key }) {
             return (cat.catName, cat.catSubtitle)
         }
