@@ -39,7 +39,13 @@ class OnboardingLanguageStoryBoard:UIViewController{
     
     func fillDTO(){
         tableDTO.removeAll()
-        let preferredLanguage = LanguageManager.loadLanguageFromPreferences()
+        var preferredLanguage = LanguageManager.loadLanguageFromPreferences()
+        if preferredLanguage.isEmpty {
+            let systemLocale = Locale.current
+            preferredLanguage = systemLocale.identifier // ou systemLocale.languageCode pour juste le code de langue
+            LanguageManager.saveLanguageToPreferences(languageCode: preferredLanguage)
+        }
+
         let languages = ["fr", "en","uk", "es", "de", "ro", "pl"]
         for lang in languages {
             let isSelected = lang == preferredLanguage
