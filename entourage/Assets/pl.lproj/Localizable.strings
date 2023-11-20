@@ -1450,7 +1450,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_equipment_name" = "Wyposażenie";
 "action_equipment_subname" = "telefon, śpiwór...";
 
-"action_hygiene_name" = "Produkt higieniczny";
+"action_hygiene_name" = "Higieniczny";
 "action_hygiene_subname" = "mydło, ochrona sanitarna...";
 
 "interest_activites" = "Działalność manualna";

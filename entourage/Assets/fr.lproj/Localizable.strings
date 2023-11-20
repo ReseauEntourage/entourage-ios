@@ -1451,7 +1451,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_equipment_name" = "Équipement";
 "action_equipment_subname" = "téléphone, sac de couchage...";
 
-"action_hygiene_name" = "Produit d'Hygiène";
+"action_hygiene_name" = "Hygiène";
 "action_hygiene_subname" = "savon, protection sanitaire...";
 
 "interest_activites" = "Activités Manuelles";
