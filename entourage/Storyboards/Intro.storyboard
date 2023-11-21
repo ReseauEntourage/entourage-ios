@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RE9-AO-8HQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RE9-AO-8HQ">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -100,7 +100,7 @@
                                     <action selector="action_show_weblink:" destination="2zv-zF-0rR" eventType="touchUpInside" id="WbC-rX-W1q"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="r03-QF-dvs">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_with_text_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="r03-QF-dvs">
                                 <rect key="frame" x="28" y="47" width="172.33333333333334" height="46.666666666666657"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46.670000000000002" id="Big-a3-Qj6"/>
@@ -159,6 +159,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="414"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="BOp-FH-5Oh"/>
+                                    <constraint firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="Icf-3o-ik5"/>
+                                    <constraint firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="lzM-g7-nle"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9Q-Aa-muj" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
@@ -360,7 +362,6 @@ sera réalisé.</string>
                             <constraint firstItem="Ngh-vo-MiO" firstAttribute="centerX" secondItem="7qK-hk-fSm" secondAttribute="centerX" id="7la-rn-lfL"/>
                             <constraint firstItem="36j-Zr-ZpH" firstAttribute="leading" secondItem="Adx-nN-lFb" secondAttribute="leading" constant="8" id="8xy-Pd-WYn"/>
                             <constraint firstItem="Ngh-vo-MiO" firstAttribute="centerX" secondItem="Adx-nN-lFb" secondAttribute="centerX" id="AAu-MR-GJ8"/>
-                            <constraint firstItem="voQ-5H-H9B" firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="Icf-3o-ik5"/>
                             <constraint firstItem="U9Q-Aa-muj" firstAttribute="trailing" secondItem="7qK-hk-fSm" secondAttribute="trailing" id="Mgv-6F-6ca"/>
                             <constraint firstItem="7qK-hk-fSm" firstAttribute="trailing" secondItem="q9H-6G-sf9" secondAttribute="trailing" constant="20" id="NQU-2N-3tA"/>
                             <constraint firstItem="36j-Zr-ZpH" firstAttribute="top" secondItem="7qK-hk-fSm" secondAttribute="top" constant="68" id="OIV-d8-jnJ"/>
@@ -372,7 +373,6 @@ sera réalisé.</string>
                             <constraint firstItem="voQ-5H-H9B" firstAttribute="top" secondItem="Adx-nN-lFb" secondAttribute="top" id="eVr-M1-a2c"/>
                             <constraint firstItem="7qK-hk-fSm" firstAttribute="bottom" secondItem="Ngh-vo-MiO" secondAttribute="bottom" constant="28" id="hPC-11-Xg7"/>
                             <constraint firstItem="Ngh-vo-MiO" firstAttribute="top" secondItem="36j-Zr-ZpH" secondAttribute="bottom" constant="20" id="hyo-Dy-Lrc"/>
-                            <constraint firstItem="voQ-5H-H9B" firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="lzM-g7-nle"/>
                             <constraint firstItem="q9H-6G-sf9" firstAttribute="top" secondItem="36j-Zr-ZpH" secondAttribute="top" constant="16" id="qcJ-eZ-xlX"/>
                             <constraint firstItem="7qK-hk-fSm" firstAttribute="trailing" secondItem="voQ-5H-H9B" secondAttribute="trailing" id="sef-Xy-LId"/>
                         </constraints>
@@ -407,6 +407,8 @@ sera réalisé.</string>
                             <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="bRw-c6-Gfp">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="414"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="37F-Rw-SxH"/>
+                                    <constraint firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="h5v-Qf-phX"/>
                                     <constraint firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="hpN-g2-Nnz"/>
                                 </constraints>
                             </imageView>
@@ -630,7 +632,6 @@ sera réalisé.</string>
                         <color key="backgroundColor" name="Beige"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="bRw-c6-Gfp" firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="37F-Rw-SxH"/>
                             <constraint firstItem="Mp3-gY-9uc" firstAttribute="trailing" secondItem="lTN-bS-s0u" secondAttribute="trailing" id="6q9-bj-H58"/>
                             <constraint firstItem="Mp3-gY-9uc" firstAttribute="bottom" secondItem="SrU-TU-bCM" secondAttribute="bottom" constant="28" id="7ZH-Qp-aQv"/>
                             <constraint firstItem="lTN-bS-s0u" firstAttribute="top" secondItem="Mp3-gY-9uc" secondAttribute="top" id="FPf-Nk-qhq"/>
@@ -641,7 +642,6 @@ sera réalisé.</string>
                             <constraint firstItem="mL7-ea-OOO" firstAttribute="top" secondItem="Mp3-gY-9uc" secondAttribute="top" constant="68" id="abY-Nl-rTr"/>
                             <constraint firstItem="bRw-c6-Gfp" firstAttribute="top" secondItem="Af0-Ah-vDg" secondAttribute="top" id="b2i-cn-b0N"/>
                             <constraint firstItem="SrU-TU-bCM" firstAttribute="centerX" secondItem="Af0-Ah-vDg" secondAttribute="centerX" id="eWT-AK-Ga5"/>
-                            <constraint firstItem="bRw-c6-Gfp" firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="h5v-Qf-phX"/>
                             <constraint firstItem="SrU-TU-bCM" firstAttribute="top" secondItem="mL7-ea-OOO" secondAttribute="bottom" constant="20" id="jgv-p1-KoC"/>
                             <constraint firstItem="Mp3-gY-9uc" firstAttribute="trailing" secondItem="bRw-c6-Gfp" secondAttribute="trailing" id="zdB-5H-Thf"/>
                         </constraints>
@@ -830,6 +830,10 @@ sera réalisé.</string>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_with_text_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="T2d-PY-v3N">
                                 <rect key="frame" x="32" y="97" width="172.33333333333334" height="46.666666666666657"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="172.33000000000001" id="JCX-Im-hA0"/>
+                                    <constraint firstAttribute="height" constant="46.670000000000002" id="Nyb-SQ-kAV"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1ha-Wm-FWG"/>
@@ -888,8 +892,7 @@ sera réalisé.</string>
         <image name="ic_intro_dot_selected" width="12" height="12"/>
         <image name="ic_intro_dot_unselected" width="12" height="12"/>
         <image name="ic_phone" width="20" height="20"/>
-        <image name="logo_horizontal" width="1157.199951171875" height="234.10000610351562"/>
-        <image name="logo_with_text_horizontal" width="172.33332824707031" height="46.666667938232422"/>
+        <image name="logo_with_text_horizontal" width="1157.199951171875" height="234.10000610351562"/>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
