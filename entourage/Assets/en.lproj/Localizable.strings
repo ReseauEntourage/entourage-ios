@@ -40,12 +40,12 @@
 "tabbar_messages" = "Chats";
 "tabbar_groups" = "Groups";
 "tabbar_events" = "Events";
-"nan" = "nan";
+
 "errorSettings" = "Authorization required";
 "toSettings" = "Settings";
 "authCameraSettings" = "Please allow access to the camera.";
 "authGpsSettings" = "Please allow GPS access.";
-"nan" = "nan";
+
 "WIP" = "Soon";
 "notImplemented" = "Available soon ;)";
 "today" = "Today";
@@ -59,26 +59,26 @@
 "connectMe" = "Log in";
 "previous" = "Previous";
 "bt_pass" = "Skip";
-"nan" = "nan";
+
 "intro_title_1" = "The social network, truly social.";
 "intro_subtitle_1" = "Our mission: to mobilize and equip citizens in order to support the most excluded.";
 "intro_title_2" = "On the Entourage app:";
 "intro_subtitle_2" = "Meet neighbors who are like you during events and discuss solidarity actions.";
 "intro_title_3" = "Entourage with you!";
 "intro_subtitle_3" = "Entourage's teams of ambassadors, volunteers and moderators support and guide you on a daily basis.";
-"nan" = "nan";
+
 "preOnboard_choice_description" = "The social network, truly social.";
 "preOnboard_choice_signup" = "Sign up";
 "preOnboard_choice_login" = "Log in";
 "preOnboard_choice_weblink" = "Who is the Entourage association?";
-"nan" = "nan";
+
 "//Login" = "nan";
 "error_login_phone_length" = "The phone number must be at least %d digits long";
 "error_login_code_lenght" = "The code must be 6 digits long";
 "error_login_resendCode_unknow" = "Unknown phone number, please try again.";
 "error_login_phoneNumberOrCode" = "The phone number and this access code do not match.";
 "error_login_phoneNumberFormat" = "Connexion error. Your phone number must be in the format: \n+33, 06 or 07";
-"nan" = "nan";
+
 "login_title" = "Log in";
 "login_phone_placeholder" = "Phone number";
 "login_placeholder_code" = "Enter your code";
@@ -93,7 +93,7 @@
 "login_label_phone" = "Phone number";
 "login_label_code" = "Code";
 "login_button_change_phone" = "My phone number has changed";
-"nan" = "nan";
+
 "login_change_phone_title" = "New phone number";
 "login_change_phone_old_number" = "Old phone number";
 "login_change_phone_new_number" = "New phone number";
@@ -104,19 +104,19 @@
 "login_change_phone_email_placeholder" = "E-mail";
 "login_change_send_ok" = "Your request has been sent.\n\n\nEntourage support team will notify you when the phone number change has been completed.";
 "login_change_bt_return" = "Back";
-"nan" = "nan";
+
 "login_change_warning_title" = "Attention";
 "login_change_error_phone" = "Please check your phone number";
 "login_change_error_mail" = "Please check your Eemail address";
-"nan" = "nan";
+
 "login_change_error_return" = "Error";
-"nan" = "nan";
+
 "login_change_error_not_found" = "Old number is unknown.\nPlease check.";
 "login_change_error_deleted" = "The old number has been removed.\nPlease check.";
 "login_change_error_blocked" = "The old number has been blocked.\nPlease check.";
 "login_change_error_identical" = "Both numbers are the same.\nPlease check the new number.";
 "login_change_error_generic" = "The old number is unknown or deleted.\nPlease check the numbers.";
-"nan" = "nan";
+
 "//Login next" = "nan";
 "login_info_pop_action" = "From your Profile, you can personalize your news feed and the recommendations received. Choose in complete confidentiality if you are currently: a supportive neighbor, person in need, association.";
 "login_pop_information" = "New ! Adapt Entourage to your desires and needs!";
@@ -126,7 +126,7 @@
 "pop_info_entourage_custom_no_more" = "Don't show me anymore";
 "login_email_pwd_title" = "Ok good !";
 "login_email_pwd_description" = "Now, let's finalize the creation of your account!";
-"nan" = "nan";
+
 "//Onboarding" = "nan";
 "onboard_bt_create" = "Create";
 "onboard_bt_back" = "Previous";
@@ -144,7 +144,7 @@
 "onboard_welcome_placeholder_mail" = "youraddress@mail.com";
 "onboard_welcome_consent" = "I agree to receive information and advice from Entourage";
 "onboard_welcome_info_mandatory" = "*Required fields. Your information will remain confidential and will never be communicated to third parties.";
-"nan" = "nan";
+
 "//Phase2" = "nan";
 "onboard_sms_title" = "Enter the code received by text message";
 "onboard_sms_sub" = "A text message has just been sent to :";
@@ -152,10 +152,10 @@
 "onboard_sms_no_code" = "No code received? Try again in 1 min";
 "onboard_sms_wait_retry" = "No code received? Try again in %@";
 "onboard_sms_wait_retry_end" = "Send a new code";
-"nan" = "nan";
+
 "//Phase 3" = "nan";
 "onboard_phone_title" = "Nice to meet you, %@!";
-"nan" = "nan";
+
 "onboard_phase3_title" = "Beyond meeting new people, how would you like to contribute to the Entourage community?";
 "onboard_title_entour" = "Surround";
 "onboard_subtitle_entour" = "Offer help...";
@@ -165,12 +165,12 @@
 "onboard_place_desc" = "* The address is confidential and will never be communicated";
 "onboard_place_infos_placeholder" = "Address, city or department";
 "onboard_info_asso" = "I am an association";
-"nan" = "nan";
+
 "//Phase End" = "nan";
 "onboard_end_title" = "Welcome to the Entourage Community";
 "onboard_end_subtitle" = "Congratulations, you're now ready to bring solidarity to life around you..";
 "onboard_end_button" = "Start the human adventure";
-"nan" = "nan";
+
 "//Onboard errors" = "nan";
 "onboard_error_Usertype" = "Please select at least one contribution";
 "onboard_error_place" = "Please choose an address";
@@ -180,15 +180,15 @@
 "onboard_error_phone" = "The number must be 9 or 10 digits long.";
 "//A supp" = "nan";
 "onboard_button_pass" = "Skip";
-"nan" = "nan";
+
 "onboard_welcome_sub" = "First of all...\nWhat is your name?";
-"nan" = "nan";
-"nan" = "nan";
-"nan" = "nan";
+
+
+
 "onboard_phone_sub" = "What is your phone number ?";
 "onboard_phone_info" = "This information will remain confidential. We just want to verify that you are not a robot, but a human with a big heart!";
 "onboard_phone_placeholder_phone" = "Phone number";
-"nan" = "nan";
+
 "onboard_sms_no_pwd" = "Please fill in the password";
 "attention_pop_title" = "Attention";
 "onboard_sms_pop_alert" = "Please wait for %d sec before renewing the request.";
@@ -220,8 +220,8 @@
 "onboard_email_pwd_error_pwd_match" = "The 2 passwords are not identical";
 "onboard_photo_title" = "Thanks, %@!";
 "onboard_photo_description" = "The final touch: you can add your photo. Entourage members in your neighborhood can’t wait to meet you!";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "onboard_email_pwd_placeholder_confirm_pwd" = "Confirm your password";
 "onboard_email_pwd_placeholder_email" = "E-mail";
 "onboard_email_pwd_placeholder_pwd" = "Password";
@@ -232,8 +232,8 @@
 "onboard_email_pwd_email_info2" = "Entourage does not share your email address.";
 "onboard_email_pwd_description" = "Now, let's finalize the creation of your account!";
 "//Fin supp" = "nan";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "//Onboarding Assos" = "nan";
 "onboard_asso_start_title" = "That's good !";
 "onboard_asso_start_description" = "Entourage is an association serving your activities.";
@@ -262,7 +262,7 @@
 "onboard_asso_activity_choice_3" = "Service\nPublic";
 "onboard_asso_activity_choice_4" = "Others ?";
 "onboard_asso_search" = "Research";
-"nan" = "nan";
+
 "//Onboarding Sdf" = "nan";
 "onboard_sdf_activity_title" = "%@, what are you looking for?";
 "onboard_sdf_activity_description" = "Several possible choices.\nThere are a thousand ways to be supported and helped.";
@@ -273,7 +273,7 @@
 "onboard_sdf_activity_choice_4" = "Request\nfor help";
 "onboard_sdf_activity_choice_5" = "Orient myself";
 "onboard_sdf_activity_choice_6" = "Find\nassociations";
-"nan" = "nan";
+
 "//Onboarding Neighbour" = "nan";
 "onboard_neighbour_activity_title" = "%@, what do you want to do in your neighborhood?";
 "onboard_neighbour_activity_description" = "Several possible choices.\nWe will make suitable proposals for you.";
@@ -283,20 +283,20 @@
 "onboard_neighbour_activity_choice_3" = "Surround an isolated person \n";
 "onboard_neighbour_activity_choice_4" = "Make donations\nmaterials";
 "onboard_neighbour_activity_choice_5" = "Get involved in\nthe association";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "//Onboarding Place tunnel SDF / Voisins" = "nan";
 "onboard_place_title2_sdf" = "Great !";
 "onboard_place_description2_sdf" = "Would you like to add another district?";
 "onboard_place_title2" = "Great !";
 "onboard_place_description2" = "You have just joined members of your neighborhood. Do you want to add another district in which to act?";
-"nan" = "nan";
+
 "//Pop inform notifications" = "nan";
 "pop_notification_title" = "Don't miss anything!";
 "pop_notification_description" = "On Entourage, you will create links between supportive neighbors.\nActivate notifications to be alerted of your new messages.";
 "pop_notification_bt_activate" = "Enable";
 "pop_notification_bt_cancel" = "Cancel";
-"nan" = "nan";
+
 "//Errors Onboarding" = "nan";
 "onboarding_error_firstname" = "The first name must contain at least 2 letters.";
 "onboarding_error_lastname" = "The name must have at least 2 letters.";
@@ -313,7 +313,7 @@
 "alreadyRegisteredMessage" = "The number is already registered. You should have received the code by SMS.";
 "alreadyRegistereMessageGoBack" = "The number is already registered, we will redirect you to the login page.";
 "onboarding_error_email" = "The email address is invalid.";
-"nan" = "nan";
+
 "/*******" = "nan";
 "Guide Map" = "nan";
 "*/" = "nan";
@@ -338,26 +338,26 @@
 "guide_display_donate" = "Looking for donations";
 "guide_display_volunteer" = "Looking for volunteers";
 "guide_display_info_mutli" = "Places offering services of several categories";
-"nan" = "nan";
+
 "guide_display_toilettes" = "Bathroom";
 "guide_display_fontaines" = "Fountains";
 "guide_display_laver" = "Showers";
 "guide_display_laverie" = "Laundromats";
-"nan" = "nan";
+
 "guide_display_vetements" = "Clothing & materials";
 "guide_display_boite" = "Donation boxes & books";
 "guide_display_bagageries" = "Luggage storage";
-"nan" = "nan";
+
 "DetailPoiContact" = "Contact";
 "DetailPoiPublic" = "Audience";
 "DetailPoiLanguage" = "Spoken languages";
 "DetailPoiOpenTime" = "Schedules";
-"nan" = "nan";
+
 "info_soliguide_1" = "Information on this location is provided by Soliguide, solidarity cartography.";
 "info_soliguide_2" = "For even more complete information available in several languages";
 "info_button_soliguide_consult" = "To consult";
 "guideTitle" = "Solidarity guide";
-"nan" = "nan";
+
 "/*******" = "nan";
 "//Partner detail" = "nan";
 "****/" = "nan";
@@ -375,13 +375,13 @@
 "title_asso_address" = "Address";
 "title_asso_address_big" = "Address";
 "title_asso_email_light" = "E-mail";
-"nan" = "nan";
+
 "//Pop follow/unfollow partner" = "nan";
 "buttonFollowOnPartner" = "Subscriber";
 "buttonFollowOffPartner" = "Subscribe";
 "partner_pop_unfollow_title" = "Do you want to unsubscribe?";
 "partner_pop_unfollow_message" = "If you unsubscribe, you will no longer receive notifications, news, and new events from this association.";
-"nan" = "nan";
+
 "/**********" = "nan";
 "Profile" = "nan";
 "*/" = "nan";
@@ -394,30 +394,30 @@
 "all_event_title" = "All events";
 "my_event_title" = "My events";
 "mainUserTitleEvents" = "Events";
-"nan" = "nan";
+
 "mainUserTitleGroup" = "Group\nof neighbors";
 "mainUserTitleGroups" = "Groups\nof neighbors";
 "mainUserTitleOuting" = "Event\n";
 "mainUserTitleOutings" = "Events\n";
-"nan" = "nan";
+
 "mainUserBioPlaceholder" = "Placeholder for organic?";
 "mainUserBirthPlaceholder" = "01-03";
 "mainUserEmailPlaceholder" = "email@gmail.com";
-"nan" = "nan";
+
 "mainUserTitleInfos" = "My information";
 "mainUserTitleBirth" = "Birthday";
 "mainUserTitlePhone" = "Phone number";
 "mainUserTitleEmail" = "E-mail";
 "mainUserTitleCity" = "City and area of ​​action *";
-"nan" = "nan";
+
 "mainUserTitleRadius" = "Within *";
 "mainUserDescRadius" = "* Your action zone allows you to define how far you can act and move";
-"nan" = "nan";
+
 "mainUserCityRadius" = "Within a radius of %d km";
 "mainUserCityRadiusBold" = "%d km";
-"nan" = "nan";
+
 "memberSince" = "Entourage member since";
-"nan" = "nan";
+
 "/*******" = "nan";
 "//Profile Edit" = "nan";
 "*/" = "nan";
@@ -434,15 +434,15 @@
 "editUserTitleRadius" = "Within *";
 "editUserDescRadius" = "*Your action zone allows you to define how far you can act and move";
 "editProfileInterest_title" = "My hobbies";
-"nan" = "nan";
+
 "editUserPlaceholderFirstname" = "Rock";
 "editUserPlaceholderLastname" = "Dupont";
 "editUserPlaceholderBirthday" = "01-03";
 "editUserPlaceholderEMail" = "pierre@gmail.com";
 "editUserPlaceholderBio" = "Pierre, 42 years old, looking forward to meeting you :)";
-"nan" = "nan";
+
 "editUserProfileValidate" = "Save";
-"nan" = "nan";
+
 "//Profile Edit error" = "nan";
 "editUser_error_firstname" = "The first name must contain at least 2 letters.";
 "editUser_error_lastname" = "The name must have at least 2 letters.";
@@ -450,7 +450,7 @@
 "editUser_error_email" = "Invalid email.";
 "editUser_error_birthday" = "Invalid date of birth.";
 "editUser_error_profile" = "Error editing profile.";
-"nan" = "nan";
+
 "//Profile edit interests" = "nan";
 "editUserInterestsTitle" = "Edit my hobbies";
 "editUserInterestsInfo" = "Select one or more categories that interest you.";
@@ -465,20 +465,20 @@
 "profileEditLocationPlaceholder" = "City or department";
 "profileEditLocationLegend" = "* Entourage does not communicate this address.";
 "profileEditLocationErrorAddress" = "Invalid address.";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "// take photo profile" = "nan";
 "take_photo_title" = "Add a photo ?";
 "take_photo_description" = "With a photo, it’s immediately nicer. Show us your warmest smile.";
 "take_photo" = "Take a picture";
 "take_gallery" = "Choose from gallery";
 "description_move_photo" = "Move and zoom to adjust the profile photo.";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "//Location" = "nan";
 "ask_permission_location_recenter_map" = "To refocus around you, you must activate geolocation";
 "no_location_recenter_map" = "Geolocation encountered an error.";
-"nan" = "nan";
+
 "/*******" = "nan";
 "//Settings" = "nan";
 "*/" = "nan";
@@ -512,7 +512,7 @@
 "params_about_licences" = "Open source license";
 "params_about_partner" = "Our sponsors and partners";
 "params_about_title" = "Help and support";
-"nan" = "nan";
+
 "//Settings Notifs" = "nan";
 "params_notifs_title" = "Notification settings";
 "param_notifs_switch_notifs" = "Notifications";
@@ -521,7 +521,7 @@
 "param_notifs_switch_events" = "Event notifications";
 "param_notifs_switch_actions" = "Donation and service notifications";
 "param_notifs_validate" = "Save";
-"nan" = "nan";
+
 "//NOTIF" = "nan";
 "notif_contrib_title" = "A neighbor offers new help. Maybe this might interest you?";
 "notif_solicitation_title" = "A neighbor is looking for equipment. Maybe you could help him?";
@@ -549,84 +549,84 @@
 "supress_button_title" = "Delete";
 "supress_alert_title_publi" = "Delete post";
 "supress_alert_text_publi" = "Would you like to delete this post?";
-"nan" = "nan";
+
 "supress_alert_title_message" = "Delete Message";
 "supress_alert_text_message" = "Would you like to remove this message from the conversation?";
-"nan" = "nan";
+
 "supress_alert_title_comment" = "Delete comment";
 "supress_alert_text_comment" = "Would you like to delete this comment?";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "deleted_post_text" = "This post has been deleted";
-"nan" = "nan";
+
 "//REPORT AND SUPPRESS POPUP" = "nan";
 "report_post_cell_title" = "Report";
 "suppress_post_cell_title" = "Delete my post";
 "report_post_cell_subtitle" = "Report this post to the Entourage team";
 "report_action_cell_subtitle" = "Report this assistance to the Entourage team";
-"nan" = "nan";
+
 "report_comment_cell_title" = "Report";
 "suppress_comment_cell_title" = "Delete my comment";
 "report_comment_cell_subtitle" = "Report this comment to the Entourage team";
-"nan" = "nan";
+
 "report_message_cell_title" = "Report";
 "suppress_message_cell_title" = "Delete my message";
 "report_message_cell_subtitle" = "Report this message to the Entourage team";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "suppress_post_cell_subtitle" = "";
 "suppress_message_cell_subtitle" = "";
 "suppress_comment_cell_subtitle" = "";
-"nan" = "nan";
+
 "deleted_message" = "This message has been deleted";
 "deleted_comment" = "This comment has been deleted";
-"nan" = "nan";
+
 "/********" = "nan";
 "GROUP" = "nan";
 "*/" = "nan";
-"nan" = "nan";
+
 "//Create group" = "nan";
 "neighborhoodCreatePopCloseBackTitle" = "Attention";
 "neighborhoodCreatePopCloseBackMessage" = "If you exit the group creation form, all information entered will be lost.";
 "neighborhoodCreatePopCloseBackQuit" = "Quit";
 "neighborhoodCreatePopCloseBackCancel" = "Cancel";
-"nan" = "nan";
+
 "neighborhood_create_group_bt_back" = "Previous";
 "Continue" = "Continue";
 "neighborhood_create_group_bt_create" = "Create";
-"nan" = "nan";
+
 "neighborhood_create_group_title" = "New group";
 "neighborhood_create_title_phase" = "Stage";
 "neighborhood_create_title_phase_nb" = "0%d.";
-"nan" = "nan";
+
 "neighborhoodCreateNameTitle" = "Group name - required";
 "neighborhoodCreateNamePlaceholderName" = "Neighbors of Paris 18";
 "neighborhoodCreateNameSubtitle" = "- required";
-"nan" = "nan";
+
 "neighborhoodCreateDescriptionTitle" = "Write a description";
 "neighborhoodCreateDescriptionSubtitle" = "required (150 characters max)";
 "neighborhoodCreateTitleDescriptionPlaceholder" = "To meet neighbors from the 18th";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "neighborhoodCreatePlaceTitle" = "Add a location - required";
 "neighborhoodCreatePlaceSubtitle" = "- required";
 "neighborhoodCreatePlaceDescription" = "Entourage does not communicate this address to users.";
 "neighborhoodCreatePlaceInfos" = "Address, city or department";
-"nan" = "nan";
+
 "//Error create group" = "nan";
 "neighborhoodCreateInputErrorMinCharName" = "The group name must contain at least 2 characters.";
 "neighborhoodCreatePhase1_error" = "Please fill in all mandatory fields";
 "neighborhoodCreatePhase2_error" = "A category must be selected.";
 "neighborhoodCreateInputErrorMandatory" = "Field to fill out";
-"nan" = "nan";
+
 "//Phase 2" = "nan";
 "neighborhoodCreateCatMessage" = "Select the category(ies) that best describe the group's discussion topic. - required";
 "neighborhoodCreateCatMessageMandatory" = "- required";
 "neighborhoodCreateCatOtherTitle" = "Describe your group category in one word";
 "neighborhoodCreateCatOtherPlaceholder" = "Please enter a maximum of 80 characters";
-"nan" = "nan";
+
 "neighborhoodCreatePhase2_others_error" = "Please specify miscellaneous category";
-"nan" = "nan";
+
 "//Phase 3" = "nan";
 "addPhotoCreateDescriptionTitle" = "Write a welcome message";
 "addPhotoCreateDescriptionSubtitle" = "optional (200 characters max)";
@@ -635,19 +635,19 @@
 "addPhotoCreateTitleHighlight" = "- required";
 "addPhotoCreateDescription" = "You can change it later";
 "neighborhoodCreatePhase3_error" = "Please select an image";
-"nan" = "nan";
+
 "//Phase completed" = "nan";
 "neighborhoodCreateValidateTitle" = "Your group is online!";
 "neighborhoodCreateValidateSubtitle" = "Congratulations, you have just created a new group. To make it more active, create the first post.";
-"nan" = "nan";
+
 "neighborhoodCreateValidatePostMessage" = "Post a message";
 "neighborhoodCreateValidatePass" = "Pass";
-"nan" = "nan";
+
 "//Select Photo group" = "nan";
 "neighborhood_choosephoto_title" = "Select a photo";
 "neighborhood_choosephoto_validate" = "Confirm";
 "neighborhood_choosephoto_error" = "Please select an image";
-"nan" = "nan";
+
 "/***" = "nan";
 "* Edit group" = "nan";
 "***/" = "nan";
@@ -657,13 +657,13 @@
 "neighborhoodEditCatMessageHighlight" = "- required";
 "neighborhoodEdit_error" = "Please fill in all mandatory fields";
 "neighborhoodEditValidateTitle" = "Your group has been modified! PLACEHOLDER";
-"nan" = "nan";
+
 "/***" = "nan";
 "* Create Post group" = "nan";
 "*/" = "nan";
 "neighborhood_menu_post_event" = "Create event on the group";
 "neighborhood_menu_post_post" = "Create post";
-"nan" = "nan";
+
 "neighborhood_add_post_title" = "Create post";
 "neighborhood_add_post_message_title" = "Write your message";
 "neighborhood_add_post_message_subtitle" = "";
@@ -687,7 +687,7 @@
 "neighborhood_main_page_member" = "%d member";
 "neighborhood_main_page_events_future_single" = "%d expected event";
 "neighborhood_main_page_events_future_plural" = "%d expected events";
-"nan" = "nan";
+
 "neighborhood_group_my_empty_title" = "You haven't joined a group yet.";
 "neighborhood_group_my_empty_button" = "Discove groups";
 "neighborhood_group_search_empty_title" = "No results matching your search";
@@ -699,19 +699,19 @@
 "*/" = "nan";
 "title_is_ambassador" = "Ambassador •";
 "title_is_admin" = "Administrator •";
-"nan" = "nan";
+
 "neighborhood_detail_button_join_member" = "Member";
 "neighborhood_detail_button_join_join" = "Join";
 "welcome_message_placeholder" = "Don’t hesitate to send a first message to introduce yourself.";
 "welcome_message_title" = "Congratulations, you're a member of the group!";
 "welcome_message_btn_title" = "I introduce myself";
-"nan" = "nan";
+
 "neighborhood_detail_members" = "%d members";
 "neighborhood_detail_member" = "%d member";
 "neighborhood_detail_about_title" = "About the group";
 "neighborhood_detail_event_title" = "Events";
 "neighborhood_detail_button_more" = "Learn more";
-"nan" = "nan";
+
 "neighborhood_event_group_section_title_more" = "See more";
 "neighborhood_event_group_section_title" = "Group events";
 "neighborhood_post_group_section_title" = "Feed";
@@ -722,17 +722,17 @@
 "neighborhood_empty_post_title" = "There are no posts (yet) on this group";
 "neighborhood_empty_post_subtitle" = "Feed";
 "neighborhood_about_group_title" = "About the group";
-"nan" = "nan";
+
 "neighborhood_post_noComment" = "No comments";
 "neighborhood_post_1Comment" = "%d comment";
 "neighborhood_post_XComments" = "%d comments";
-"nan" = "nan";
+
 "neighborhood_comments_title" = "Post Comments";
 "neighborhood_comments_placeholder_discut" = "Discuss...";
 "neighborhood_comments_send" = "Send";
 "neighborhood_no_messageComment" = "No comments yet";
 "neighborhood_messageComment_notAuth" = "To comment on this post, join the “%@” group!";
-"nan" = "nan";
+
 "neighborhood_error_messageSend" = "Publishing error, try again";
 "comment_post" = "Comment...";
 "//Params" = "nan";
@@ -746,16 +746,16 @@
 "neighborhood_params_participant" = "participant";
 "neighborhood_params_participants" = "participants";
 "neighborhood_params_quit" = "Leave the group";
-"nan" = "nan";
+
 "neighborhood_params_notif_title" = "Notify me of";
 "neighborhood_params_notif_all" = "All group activity";
 "neighborhood_params_notif_new_events" = "New events";
 "neighborhood_params_notif_new_messages" = "New messages";
 "neighborhood_params_notif_new_members" = "The arrival of new members";
-"nan" = "nan";
+
 "neighborhood_users_title" = "See members";
 "neighborhood_userInput_search" = "Search for a group member";
-"nan" = "nan";
+
 "//Pop leave group" = "nan";
 "params_leave_group_pop_title" = "Leave group";
 "params_leave_group_pop_message" = "Do you want to leave the group?";
@@ -772,7 +772,7 @@
 "neighborhood_CGU_4" = "Benevolent free expression is the rule on groups. However, to respect the apolitical and secular nature of Entourage and in the interest of protecting people, subjects relating to politics, religion, medicine or sexuality are not authorized.";
 "neighborhood_CGU_5_title" = "Protection of people";
 "neighborhood_CGU_5" = "Publications cannot contain any personal data allowing a person to be precisely identified and located nor any sensitive data about people (medical, judicial, ethical origin, sexual or political orientation data, etc.).";
-"nan" = "nan";
+
 "//Report Group / comment / publication" = "nan";
 "report_event_title" = "Report the event";
 "report_group_title" = "Report a problem";
@@ -791,7 +791,7 @@
 "report_group_validate_button" = "Send";
 "report_group_back_button" = "Back";
 "report_group_placeholder" = "Quickly describe the subject of your report.";
-"nan" = "nan";
+
 "/** Home*/" = "nan";
 "home_title_welcome" = "Welcome %@!";
 "home_contrib_title" = "My actions within the network";
@@ -805,14 +805,14 @@
 "home_no_message_title" = "No messages sent yet";
 "home_no_event_title" = "Attend your first event";
 "home_no_group_title" = "Don't wait any longer to join a group of neighbors!";
-"nan" = "nan";
+
 "home_actions_title" = "I just start";
 "home_help_title" = "Need help";
 "home_help_subtitle" = "Your guide in the app";
 "home_cell_pedago" = "Everything you need to know to take action";
 "home_cell_map" = "Map of solidarity places";
 "home_cell_map_subtitle" = "Day receptions, luggage storage…";
-"nan" = "nan";
+
 "home_resources_title" = "All educational content";
 "home_resource_title" = "Educational content";
 "pedagogic_read" = "Read!";
@@ -820,55 +820,55 @@
 "resource_understand" = "Understand";
 "resource_act" = "Act";
 "resource_inspire" = "Get inspired";
-"nan" = "nan";
+
 "resource_title_understand" = "Understand";
 "resource_title_act" = "Act";
 "resource_title_inspire" = "Get inspired";
-"nan" = "nan";
+
 "/** Home popup congratulation */" = "nan";
 "home_congrat_title_single" = "Well done ! You have carried out %d new action!";
 "home_congrat_title_plural" = "Well done ! You have completed %d new actions!";
 "home_congrat_title_next" = "Great, there's something new on reception!";
-"nan" = "nan";
+
 "//Home popup info encouters" = "nan";
 "home_info_encounter_pop_title" = "It's easy to create \n a beautiful encounter!";
 "home_info_encounter_pop_subtitle" = "Your counter increases with each participation in an event and with each new contribution or request made.";
-"nan" = "nan";
+
 "/** Events*/" = "nan";
 "passed_event" = "Past events";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "//EVENT TOP Cell" = "nan";
 "event_top_cell_organised_by" = "Organized by";
 "event_top_cell_asso" = "%@ event";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "//SHARE" = "nan";
 "share_solicitation" = "This request might interest you.";
 "share_contribution" = "This contribution might interest you.";
 "share_event" = "This Entourage event might interest you.";
 "share_group" = "This group of Entourage neighbors might interest you.";
-"nan" = "nan";
-"nan" = "nan";
-"nan" = "nan";
+
+
+
 "//Create" = "nan";
-"nan" = "nan";
+
 "eventCreatePopCloseBackTitle" = "Attention";
 "eventCreatePopCloseBackMessage" = "If you exit the event creation form, all information entered will be lost.";
 "eventCreatePopCloseBackQuit" = "Exit";
 "eventCreatePopCloseBackCancel" = "Cancel";
-"nan" = "nan";
+
 "event_create_group_bt_back" = "Previous";
 "event_create_group_bt_next" = "Continue";
 "event_create_group_bt_create" = "Confirm";
 "eventCreateInputErrorMandatory" = "Field to fill out";
 "event_mod_group_bt_mod" = "Edit";
-"nan" = "nan";
+
 "event_mod_title" = "Edit my event";
 "event_create_title" = "new event";
 "event_create_title_phase" = "Stage";
 "event_create_title_phase_nb" = "0%d.";
-"nan" = "nan";
+
 "event_create_phase_1_name" = "Event name - required";
 "event_create_phase_1_name_placeholder" = "Give the event an explicit name";
 "event_create_phase_1_name_error" = "The event name must contain at least 2 characters.";
@@ -877,16 +877,16 @@
 "event_create_phase_1_desc_subtitle" = "(900 characters max)";
 "event_create_phase_1_photo" = "Photo - required";
 "event_create_phase_1_photo_desc" = "You can change it later";
-"nan" = "nan";
+
 "event_create_mandatory" = "- required";
-"nan" = "nan";
+
 "event_create_phase2_date" = "Date - required";
 "event_create_phase2_date_placeholder" = "dd/mm/yyyy";
 "event_create_phase2_time_start" = "Start time";
 "event_create_phase2_time_start" = "hh-mm";
 "event_create_phase2_time_end" = "End time";
 "event_create_phase2_time_end_placeholder" = "hh-mm";
-"nan" = "nan";
+
 "event_create_phase2_recurrence" = "Recurrence - required";
 "recurrence_once" = "Just once";
 "recurrence_week" = "Every week";
@@ -894,61 +894,61 @@
 "recurrence_month" = "Once a month";
 "eventCreateInputErrorTimeStart" = "Choose date before";
 "eventCreateInputErrorTimeEnd" = "Choose start time before";
-"nan" = "nan";
+
 "event_create_phase3_title" = "Location - required";
 "event_create_phase3_title_place" = "Add a location - required";
 "event_create_phase3_title_online" = "Add a link URL - required";
-"nan" = "nan";
+
 "event_create_phase3_presentiel" = "In person";
 "event_create_phase3_online" = "Online";
 "event_create_phase3_online_error" = "Required Field";
 "event_create_phase3_placeholder_place" = "Address, city...";
 "event_create_phase3_placeholder_online" = "Web address";
-"nan" = "nan";
+
 "event_create_phase3_title_limit" = "Does the event have a limited number of places? - required";
 "event_create_phase3_title_nb_places" = "Number of places available - mandatory";
 "event_create_phase3_title_nb_places_placeholder" = "Number of places";
 "event_create_phase3_limit_yes" = "Yes";
 "event_create_phase3_limit_no" = "No";
 "event_create_phase3_limit_error" = "Required Field";
-"nan" = "nan";
+
 "event_create_phase4_title" = "Select the category(ies) that best describe the event topic. - required";
-"nan" = "nan";
+
 "event_create_phase5_title" = "Share the event in your groups\n- required";
 "event_share_option" = "Share the event";
 "event_create_phase5_desc" = "You can only share the event to groups of which you are a member. Your event will then be visible in the selected group(s) and all members of a group will be able to participate.";
 "createEventNotShare" = "Do not share in any group";
 "createEventShare" = "Share in one or more groups";
-"nan" = "nan";
+
 "eventCreateEnd_button_show" = "View my event";
 "eventCreateEnd_title" = "Your event is online!";
 "eventCreateEnd_subtitle" = "Félicitations, vous venez de créer un nouvel événement. Pour le rendre plus actif, parlez-en sur vos groupes !";
-";
 
-eventCreatePhase1_error"" = "Please fill in all mandatory fields";
+
+"eventCreatePhase1_error" = "Please fill in all mandatory fields";
 "eventCreatePhase2_error" = "Please fill in all mandatory fields";
 "eventCreatePhase3_error" = "Please fill in all mandatory fields";
 "eventCreatePhase4_error" = "A category must be selected.";
 "eventCreatePhase5_error" = "At least one group must be selected.";
-"nan" = "nan";
+
 "eventModPopCloseBackTitle" = "Attention";
 "eventModPopCloseBackMessage" = "If you exit the event edit form, all information entered will be lost.";
 "eventModPopCloseBackQuit" = "Quit";
 "eventModPopCloseBackCancel" = "Cancel";
-"nan" = "nan";
+
 "//Event group list" = "nan";
 "event_members_cell_list" = "%d participants";
 "event_member_cell_list" = "%d participant";
 "event_group_title_list" = "The group also organizes:";
 "event_places_detail" = "%d places";
 "event_places_distance" = "%@ to %@";
-"nan" = "nan";
-"nan" = "nan";
-"nan" = "nan";
+
+
+
 "//Event pop choose location" = "nan";
 "event_location_title" = "Locate your event";
 "event_location_detail" = "The address will be added to the detailed description of your event.";
-"nan" = "nan";
+
 "/* Home Event*/" = "nan";
 "event_main_page_title" = "Events";
 "event_main_page_button_myEvents" = "I participate";
@@ -965,36 +965,36 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "event_event_discover_empty_search_title" = "No results matching your search!";
 "event_event_discover_empty_search_subtitle" = "Can't find the event of your dreams? Don't wait any longer to create it or expand your search area.";
 "event_detail_button_more" = "Learn more";
-"nan" = "nan";
+
 "event_detail_button_participe_ON" = "Participate";
 "event_detail_button_participe_OFF" = "Participate";
 "event_detail_about_title" = "For more information";
 "event_detail_post_section_title" = "News";
 "event_detail_post_section_new_posts_title" = "New publications";
 "event_detail_post_section_old_posts_title" = "Old publications";
-"nan" = "nan";
+
 "event_time_detail_full" = "From %@ to %@";
 "event_places_detail_full" = "Limited number of places: %d";
 "event_created_full" = "Created the %@";
 "event_updated_full" = "Modified the %@";
 "event_canceled_full" = "Canceled the %@";
 "event_cancel_alone" = "Canceled";
-"nan" = "nan";
+
 "event_empty_post_title" = "There is no publication (yet) on this event";
 "event_empty_post_subtitle" = "Why not start a discussion with your neighbors?";
-"nan" = "nan";
+
 "event_users_title" = "View participants";
 "event_userInput_search" = "Search for an event attendee";
-"nan" = "nan";
+
 "event_detail_full_title" = "About the event";
-"nan" = "nan";
+
 "event_detail_groups_title" = "Associated groups:";
 "event_detail_group_title" = "Associated group:";
 "event_detail_cats_title" = "Categories:";
 "event_detail_cat_title" = "Category :";
 "event_cancel_list" = "Canceled";
 "event_canceled" = "Event canceled";
-"nan" = "nan";
+
 "//Event filters" = "nan";
 "event_filter_title" = "Events - Search filters";
 "event_filter_profile" = "To the address provided in my profile";
@@ -1005,13 +1005,13 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "event_filter_error_place" = "Please select an address";
 "event_filter_google_placeholder" = "Choose an address";
 "event_filter_position_placeholder" = "My location";
-"nan" = "nan";
+
 "//Pop leave/cancel event" = "nan";
 "params_leave_event_pop_title" = "Leave the event";
 "params_leave_event_pop_message" = "Do you want to leave the event?";
 "params_leave_event_pop_bt_quit" = "Quit";
 "params_leave_event_pop_bt_cancel" = "Cancel";
-"nan" = "nan";
+
 "params_cancel_event_pop_bt_delete" = "Cancel";
 "params_cancel_event_pop_bt_cancel" = "Back";
 "params_cancel_event_pop_title" = "Cancel event";
@@ -1019,7 +1019,7 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "params_cancel_event_recurrency_title" = "Cancel a recurring event";
 "params_cancel_event_recurrency_choice1" = "This event";
 "params_cancel_event_recurrency_choice2" = "This and all following events";
-"nan" = "nan";
+
 "event_mod_pop_title" = "Edit a recurring event";
 "event_mod_pop_validate_bt" = "Confirm";
 "event_mod_ok" = "Changed event PLACEHOLDER";
@@ -1032,13 +1032,13 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "event_add_contact_no" = "No";
 "event_add_contact_title" = "Your registration is taken into account!";
 "event_add_contact_description" = "Do you want to add this event to your personal calendar?";
-"nan" = "nan";
+
 "event_add_contact_places_title" = "Limited places event";
 "event_add_contact_places_description" = "Please note, this event has limited places, your registration is not guaranteed. The event administrator will get back to you to confirm your place reservation.";
 "event_add_contact_error" = "To add the event to your calendar, you must enable calendar access";
 "event_add_contact_refuse" = "Refuse";
 "event_add_contact_activate" = "Enable";
-"nan" = "nan";
+
 "//Event settings" = "nan";
 "event_params_title" = "Event settings";
 "event_params_cgu" = "Charter of events";
@@ -1051,17 +1051,17 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "event_params_participants" = "participants";
 "event_params_quit" = "Leave the event";
 "event_params_cancel" = "Cancel event";
-"nan" = "nan";
+
 "event_params_notif_title" = "Notify me of";
 "event_params_notif_all" = "All event activity";
 "event_params_notif_new_publications" = "New publications";
 "event_params_notif_new_members" = "The arrival of new participants";
-"nan" = "nan";
+
 "event_edit_recurrency_title" = "Recurrence";
 "event_edit_recurrency_date" = "Event date";
 "event_edit_recurrency_back" = "Cancel";
 "event_edit_recurrency_next" = "Confirm";
-"nan" = "nan";
+
 "//Event MEssages" = "nan";
 "event_comments_title" = "Post Comments";
 "event_comments_placeholder_discut" = "Discuss...";
@@ -1077,7 +1077,7 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "event_CGU_3" = "I guarantee not to communicate sensitive personal data (medical, legal, etc.), or allowing the precise identification or location of people.";
 "event_CGU_4_title" = "Be united, without distinction";
 "event_CGU_4" = "I undertake to make no distinction as to race, color, sex, language, religion, political opinion, property, birth or any other status.";
-"nan" = "nan";
+
 "//MARK: - Actions -" = "nan";
 "action_menu_demand" = "Create request";
 "action_menu_contrib" = "Create contribution";
@@ -1086,53 +1086,53 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "action_create_group_bt_back" = "Previous";
 "action_create_group_bt_next" = "Continue";
 "action_create_group_bt_create" = "Confirm";
-"nan" = "nan";
+
 "actionCreatePopCloseBackTitle" = "Attention";
 "actionCreatePopCloseBackMessage" = "If you exit the %@ creation form, all information entered will be lost.";
 "actionCreatePopCloseBackQuit" = "To leave";
 "actionCreatePopCloseBackCancel" = "Cancel";
-"nan" = "nan";
+
 "action_solicitation" = "request";
 "action_contrib" = "contribution";
-"nan" = "nan";
+
 "action_create_title_contrib" = "New contribution";
 "action_create_title_solicitation" = "New request";
 "action_charte_title" = "Code of ethics";
 "action_create_info_contrib" = "Vous cherchez à proposer une contribution qui ne rentre pas dans l'une de ces catégories ?";
-"Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici."" = "nan";
+"Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici." = "nan";
 "action_create_info_contrib_underline" = "learn more here.";
 "action_create_info_demand" = "Vous cherchez à proposer une demande qui ne rentre pas dans l'une de ces catégories ?";
-"Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici."" = "nan";
+"Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici." = "nan";
 "action_create_info_demand_underline" = "learn more here.";
-"nan" = "nan";
+
 "action_create_mandatory" = "- required";
 "action_create_phase_1_name" = "Action title - required";
 "action_create_phase_1_name_placeholder" = "Name your %@";
 "action_create_phase_1_name_subtitle" = "Give a short and explicit name to your %@";
 "action_create_phase_1_name_error" = "The %@ name must contain at least 2 characters.";
-"nan" = "nan";
+
 "action_add_post_title_image" = "Add a picture";
-"nan" = "nan";
+
 "action_create_phase_1_desc" = "Description - required";
 "action_create_phase_1_desc_placeholder" = "Describe your %@";
 "action_create_phase_1_desc_subtitle" = "Describe your proposed %@ in detail";
-"nan" = "nan";
+
 "action_PhotoCreateTitle" = "Add a photo - optional";
 "action_PhotoCreateTitleHighlight" = "- optional";
 "action_PhotoCreateDescription" = "You can change it later";
 "action_CreatePhase1_error" = "Please select an image";
-"nan" = "nan";
+
 "action_create_title_category" = "Select the category that best describes your %@. - required";
 "action_create_title_category_mandatory" = "- required";
-"nan" = "nan";
+
 "//Edit location page" = "nan";
 "actionCellLocationTitle" = "Locate your %@";
 "actionCellLocationDescription" = "Your precise location will not be shared, you can put a location other than the area of ​​action of your profile.";
-"nan" = "nan";
+
 "actionEditLocationTitle" = "Locate your %@";
 "actionEditLocationDescription" = "Your precise location will not be shared, you can put a location other than the area of ​​action of your profile.";
 "actionEditLocationLegend" = "Add a place";
-"nan" = "nan";
+
 "actionCreatePhase1_error" = "Please fill in all mandatory fields.";
 "actionCreatePhase2_error" = "A category must be selected.";
 "actionCreatePhase3_error" = "Please select an address.";
@@ -1149,15 +1149,15 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "action_charte_4" = "I undertake to enter into relationships with people without discrimination (race, religion, sexual orientation, political opinion, etc.).";
 "action_charte_5_title" = "Protection of people";
 "action_charte_5" = "I guarantee that my actions do not contain any personal data (last name, telephone number, precise address, etc.), allowing a person to be precisely identified and located, nor any sensitive data (medical, legal, etc.).";
-"nan" = "nan";
+
 "//Create action end" = "nan";
 "action_create_close_button" = "Finish";
 "contribCreateEnd_title" = "Your contribution has been created!";
 "contribCreateEnd_subtitle" = "Congratulations, you have just created a new contribution. To make it more visible, talk about it in your groups!";
 "solicitationCreateEnd_title" = "Your request has been created!";
 "solicitationCreateEnd_subtitle" = "Congratulations, you have just created a new request. To make it more visible, talk about it in your groups!";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "//Home Actions" = "nan";
 "actions_main_page_title" = "Mutual aid";
 "actions_main_page_button_contribs" = "Contributions";
@@ -1180,33 +1180,33 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "atm" = "%0f m from me";
 "Contrib" = "Contribution";
 "Demand" = "Request";
-"nan" = "nan";
+
 "action_created_at" = "Created %@ by";
 "action_member_since" = "Member since %@";
 "action_cancel" = "Listing deleted";
-"nan" = "nan";
+
 "params_cancel_action_pop_bt_delete" = "Cancel";
 "params_cancel_action_pop_bt_cancel" = "Back";
 "params_cancel_action_pop_title" = "Cancel action";
 "params_cancel_action_pop_message" = "Do you want to cancel the action?";
-"nan" = "nan";
+
 "params_cancel_action_pop_bt_yes" = "Yes";
 "params_cancel_action_pop_bt_no" = "No";
 "params_cancel_action_pop_bt_valid" = "Send";
 "params_cancel_action_pop_title" = "Delete %@";
 "params_cancel_action_pop_subtitle" = "Was your %@ successful?";
-"nan" = "nan";
+
 "params_cancel_action_pop_comment" = "Tell us more about your experience - optional";
 "action_optional" = "- optional";
 "params_cancel_action_pop_comment_placeholder" = "Tell us about your experience!";
-"nan" = "nan";
+
 "action_view_canceled_title" = "The listing has been deleted...";
 "action_view_canceled_contrib_subtitle" = "You can search for other contributions that may be of interest to you or post an ad.";
 "action_view_canceled_demand_subtitle" = "You can search for other requests that may be of interest to you or post an ad.";
 "action_view_canceled_demand_button" = "List of requests";
 "action_view_canceled_contrib_button" = "List of contributions";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "//CGU" = "nan";
 "action_params_cgu_title" = "Code of ethics";
 "action_params_cgu_description" = "";
@@ -1220,23 +1220,21 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "action_CGU_4" = "I undertake to enter into relationships with people without discrimination (race, religion, sexual orientation, political opinion, etc.).";
 "action_CGU_5_title" = "Protection of people";
 "action_CGU_5" = "I guarantee that my actions do not contain any personal data (last name, telephone number, precise address, etc.), allowing a person to be precisely identified and located, nor any sensitive data (medical, legal, etc.).";
-"nan" = "nan";
+
 "edit_edit_contrib_title" = "Edit\ncontribution";
 "edit_edit_solicitation_title" = "Edit\nrequest";
-"nan" = "nan";
-"/*" = "nan";
+
 "Messages" = "nan";
-"*/" = "nan";
 "Messages_title" = "Chats";
 "messaging_message_placeholder_discut" = "New message";
 "messaging_message_title" = "Conversation";
 "messaging_message_send" = "Send";
 "messaging_message_no_message" = "0 more messages";
-"nan" = "nan";
+
 "message_title_new_conv" = "New conversation";
 "message_subtitle_new_conv" = "You have not yet interacted with this user. If there is a problem, you can report the conversation in the settings.";
 "message_error_create_conversation" = "Error creating conversation";
-"nan" = "nan";
+
 "conversation_params_title" = "Chat Settings";
 "conv_param_title_profil" = "View profile";
 "conv_param_title_signal" = "Report";
@@ -1247,48 +1245,48 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "conv_param_qui_action" = "Leave the conversation";
 "conv_param_title_block" = "Block";
 "conv_param_subtitle_block" = "%@ will no longer be able to write to you.";
-"nan" = "nan";
+
 "//Pop leave conversation" = "nan";
 "params_leave_conv_pop_title" = "Leave the conversation";
 "params_leave_conv_pop_message" = "Do you want to leave the conversation?";
 "params_leave_conv_pop_bt_quit" = "Quit";
 "params_leave_conv_pop_bt_cancel" = "Cancel";
-"nan" = "nan";
+
 "//Pop block user inside conversation" = "nan";
 "params_block_user_conv_pop_title" = "Block user";
 "params_block_user_conv_pop_message" = "Would you like to block %@?\nThis user will no longer be able to send you messages. You can unblock the user at any time from your profile settings.";
 "params_block_user_conv_pop_bt_quit" = "To block";
 "params_block_user_conv_pop_bt_cancel" = "Cancel";
-"nan" = "nan";
+
 "params_block_user_conv_pop_validate_title" = "Block %@";
 "params_block_user_conv_pop_validate_subtitle" = "This contact has been blocked.";
 "params_block_user_conv_pop_validate_bt" = "OK";
-"nan" = "nan";
+
 "message_user_blocked_by_me_list" = "You have blocked this contact";
 "message_user_blocked_by_me" = "You have blocked %@ . You can no longer send him a message.";
 "message_user_blocked_by_other" = "You can no longer send messages to %@ . This conversation has been blocked.";
-"nan" = "nan";
+
 "settingsUnblockUserInfo" = "Select one or more contacts to unblock.";
 "settingsUnblockBT" = "Unblock";
 "settingsUnblockUser_error" = "Please choose at least one contact";
-"nan" = "nan";
+
 "params_unblock_user_pop_title" = "Unblock contact";
 "params_unblock_users_pop_title" = "Unblock contacts";
 "params_unblock_user_pop_message" = "Would you like to unblock %@?\nYou will be able to send messages to each other again.";
 "params_unblock_user_pop_bt_unblock" = "Unblock";
 "params_unblock_user_pop_bt_cancel" = "Cancel";
-"nan" = "nan";
+
 "params_unblock_user_pop_validate_title" = "Unlock %@";
 "params_unblock_user_pop_validate_subtitle" = "This contact has just been unblocked, you can write to each other again.";
 "params_unblock_users_pop_validate_subtitle" = "These contacts have just been unblocked, you can write to each other again.";
 "params_unblock_user_pop_validate_bt" = "OK";
-"nan" = "nan";
+
 "param_empty_blocked_user" = "You have not blocked any contacts.";
-"nan" = "nan";
+
 "conversation_users_title" = "Conversation Members";
 "conversation_userInput_search" = "Search for a chat member";
 "conversation_search_empty_title" = "No results matching your search!";
-"nan" = "nan";
+
 "notifs_title" = "Notifications";
 "duration_month" = "%d month";
 "duration_weeks" = "%d week";
@@ -1296,8 +1294,8 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "duration_hours" = "%d h";
 "duration_minutes" = "%d min";
 "duration_secondes" = "just now";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "//Pwd change" = "nan";
 "param_title_change_pwd" = "Change password";
 "param_change_pwd_title" = "Password";
@@ -1310,53 +1308,53 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "pwdDiff" = "Passwords do not match";
 "pwdUpdated" = "Password update";
 "pwdUpdatedErr" = "Update error";
-"nan" = "nan";
-"nan" = "nan";
+
+
 "//WELCOME STRINGS" = "nan";
-"nan" = "nan";
+
 "welcomeone_title" = "Welcome to the truly \nsocial network";
 "welcomeone_content_main" = "For many, the street is a place of passage.\nFor some, it is a daily life.\nSo to start, meet those and\nthose who live it every day.";
 "welcomeone_content" = "Find our awareness content here";
-"nan" = "nan";
+
 "welcome_three_title_event" = "6,000 people made new friends at an Entourage event";
 "welcome_three_title_demand" = "Give your neighbors a helping hand";
 "welcome_three_title_contrib" = "No support around you? Create it!";
-"nan" = "nan";
+
 "welcome_two_no_group" = "Introduce yourself to your group of neighbors";
-"nan" = "nan";
+
 "welcome_three_maintext_event" = "Find the event that interests you and come and enjoy a friendly moment";
 "welcome_three_maintext_demand" = "Take a look at requests published near you:";
 "welcome_three_maintext_contrib" = "A good way to create connections between neighbors is to share your interests, your passions or just a coffee to get to know each other.";
-"nan" = "nan";
+
 "welcome_three_mainbutton_event" = "Discover the events";
 "welcome_three_mainbutton_demand" = "Discover the requests";
 "welcome_three_mainbutton_contrib" = "Create contribution";
-"nan" = "nan";
+
 "welcome_three_contrib_example_one_title" = "Chat over a coffee";
 "welcome_three_contrib_example_one_distance" = "10 m from me";
 "welcome_three_contrib_example_one_loca" = "Paris (75010)";
 "welcome_three_contrib_example_one_date" = "June 21, 2022 at 12 p.m.";
-"nan" = "nan";
+
 "welcome_three_contrib_example_two_title" = "Donation of women's clothing";
 "welcome_three_contrib_example_two_distance" = "10 m from me";
 "welcome_three_contrib_example_two_loca" = "Paris (75010)";
 "welcome_three_contrib_example_two_date" = "June 21, 2022 at 12 p.m.";
-"nan" = "nan";
+
 "welcome_four_main_button_title" = "Start the quiz";
 "welcome_four_title" = "Up to you";
 "welcome_four_main_text" = "Would you like to take a test to help you deconstruct stereotypes and prejudice about homelessness?";
 "welcome_four_second_text" = "In your opinion, what percentage of homeless people have a cell phone?";
-"nan" = "nan";
+
 "welcome_five_title" = "Already 10 days old: welcome to the family!";
 "welcome_five_main_text_title" = "It's amazing how quickly time flies when you're in good company.\n\nNow help us grow the Entourage network: bring your own!";
 "welcome_five_main_button_title" = "Take a look at requests posted near you:";
-"nan" = "nan";
+
 "custom_dialog_action_title_one_contrib" = "What is the status of your contribution?";
 "custom_dialog_action_title_one_demand" = "What is the status of your request?";
 "custom_dialog_action_title_two" = "Thanks for your patience";
 "custom_dialog_action_title_three" = "Good news !";
-"nan" = "nan";
-"custom_dialog_action_content_one_contrib" = "Is your "%@" action over?"";
+
+"custom_dialog_action_content_one_contrib" = "Is your %@ action over?";
 "custom_dialog_action_content_one_demande" = "%@\n\nDid you find what you were looking for?";
 "custom_dialog_action_content_two_contrib" = "Tip: look for contributions near you. A neighbor might have what you're looking for.";
 "custom_dialog_action_content_two_demande" = "Tip: look for requests near you. A neighbor might have what you're looking for.";
@@ -1364,60 +1362,58 @@ eventCreatePhase1_error"" = "Please fill in all mandatory fields";
 "custom_dialog_action_content_three_demande" = "Many thanks for your commitment. We will be able to delete your request.";
 "custom_dialog_action_two_button_contrib" = "View contributions";
 "custom_dialog_action_two_button_demand" = "View requests";
-"nan" = "nan";
+
 "pop_up_rugby_france_title" = "Let's experience the Rugby World Cup together";
 "pop_up_rugby_france_content" = "Les plus belles rencontres ne se font pas forcément au stade ! Rejoignez le groupe \Vivons le sport ensemble\""";
-"nan" = "nan";
-"nan" = "nan";
-"/* New Home string */" = "nan";
+"/* New Home string */
 "home_v2_title" = "The app that brings neighbors together";
-"nan" = "nan";
+
 "home_v2_title_action" = "Give a helping hand";
 "home_v2_subtitle_action" = "Your neighbors need you!";
 "home_v2_btn_more_action" = "View all requests";
-"nan" = "nan";
+
 "home_v2_title_action_contrib" = "Need a little help?";
 "home_v2_subtitle_action_contrib" = "Find out what your neighbors have to offer!";
 "home_v2_btn_more_action_contrib" = "View all contributions";
-"nan" = "nan";
+
 "home_v2_title_event" = "Participate in a solidarity event";
 "home_v2_subtitle_event" = "Full of solidarity nearby";
 "home_v2_btn_more_event" = "View all events";
-"nan" = "nan";
+
 "home_v2_title_group" = "Your groups of neighbors";
 "home_v2_subtitle_group" = "Meet your neighbors from all walks of life";
 "home_v2_btn_more_group" = "View all groups";
-"nan" = "nan";
+
 "home_v2_title_map" = "Discover useful addresses";
 "home_v2_subtitle_map" = "All solidarity structures nearby";
 "home_v2_button_map" = "Map of solidarity places near you";
-"nan" = "nan";
+
 "home_v2_title_pedago" = "Everything you need to know";
 "home_v2_subtitle_pedago" = "Fighting precarity, like everything else, can be learned!";
 "home_v2_btn_more_pedago" = "View all articles";
-"nan" = "nan";
+
 "home_v2_pedago_item_tag_all" = "All";
 "home_v2_pedago_item_tag_act" = "Act";
 "home_v2_pedago_item_tag_inspire" = "Get inspired";
 "home_v2_pedago_item_tag_understand" = "Understand";
-"nan" = "nan";
+
 "home_v2_title_help" = "Are you lost?";
 "home_v2_subtitle_help" = "Don't panic, start step by step!";
 "home_v2_btn_more_help" = "View all articles";
-"nan" = "nan";
+
 "home_v2_help_title_one" = "How to create a group?";
 "home_v2_help_title_two" = "How to create an event?";
 "home_v2_help_title_three" = "A question?\nContact";
-"nan" = "nan";
+
 "home_v2_pedag_item_lenght_title" = "%d min read";
-"nan" = "nan";
+
 "home_v2_action_type_social" = "Social";
 "home_v2_action_type_clothes" = "Clothes";
 "home_v2_action_type_equipment" = "Equipment";
 "home_v2_action_type_hygiène" = "Hygiene";
 "home_v2_action_type_services" = "Services";
 "home_v2_action_type_other" = "Others";
-"nan" = "nan";
+
 "home_v2_hz_item_title" = "Hey, it seems a little quiet around here...";
 "home_v2_hz_item_subtitle" = "How about bringing solidarity to your city? Entourage gives you the keys to getting started!";
 "home_v2_hz_item_button" = "Learn more";
