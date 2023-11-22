@@ -35,11 +35,12 @@
 "Loading" = "Cargando";
 "Admin" = "Administración";
 //TABBAR
-"tabbar_home" = "bienvenida";
+"tabbar_home" = "Inicio";
 "tabbar_gifts" = "Ayuda mutua";
 "tabbar_messages" = "Discusiones";
 "tabbar_groups" = "Grupos";
 "tabbar_events" = "Eventos";
+
 
 "errorSettings" = "Autorización requerida";
 "toSettings" = "Ajustes";

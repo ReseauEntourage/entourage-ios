@@ -35,11 +35,12 @@
 "Loading" = "Завантаження";
 "Admin" = "адмін";
 //TABBAR
-"tabbar_home" = "Ласкаво просимо";
+"tabbar_home" = "Домівка";
 "tabbar_gifts" = "Взаємодопомога";
 "tabbar_messages" = "дискусії";
 "tabbar_groups" = "Групи";
 "tabbar_events" = "Події";
+
 
 "errorSettings" = "Потрібна авторизація";
 "toSettings" = "Налаштування";

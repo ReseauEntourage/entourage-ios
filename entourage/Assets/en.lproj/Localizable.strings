@@ -196,7 +196,7 @@
 "onboard_type_sub" = "How do you want to customize the app?";
 "onboard_type_description" = "Entourage asks you these few questions to welcome you and support you as best as possible!\n(This information will not be visible to other members of the network).";
 "onboard_type_description_italic" = "(This information will not be visible to other members of the network).";
-"onboard_type_choice1" = "To help homeless people and create connections in your neighborhood.";
+"onboard_type_choice1" = "To help Homelessness people and create connections in your neighborhood.";
 "onboard_type_choice2" = "To ask for help and discover places of solidarity.";
 "onboard_type_choice3" = "To speak on behalf of your structure.";
 "onboard_type_choice_title1" = "Solidarity neighbor";
@@ -1328,7 +1328,7 @@
 "welcome_four_main_button_title" = "Start the quiz";
 "welcome_four_title" = "Up to you";
 "welcome_four_main_text" = "Would you like to take a test to help you deconstruct stereotypes and prejudice about homelessness?";
-"welcome_four_second_text" = "In your opinion, what percentage of homeless people have a cell phone?";
+"welcome_four_second_text" = "In your opinion, what percentage of Homelessness people have a cell phone?";
 
 "welcome_five_title" = "Already 10 days old: welcome to the family!";
 "welcome_five_main_text_title" = "It's amazing how quickly time flies when you're in good company.\n\nNow help us grow the Entourage network: bring your own!";
@@ -1445,7 +1445,7 @@
 "interest_jeux" = "Games";
 "interest_nature" = "Nature";
 "interest_sport" = "Sports";
-"interest_marauding" = "Homeless Encounters";
+"interest_marauding" = "Homelessness Encounters";
 "interest_other" = "Other";
 "params_language" = "Language";
 "contact" = "Contact";

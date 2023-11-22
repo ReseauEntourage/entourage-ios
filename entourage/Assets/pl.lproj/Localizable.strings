@@ -35,11 +35,12 @@
 "Loading" = "Chargement";
 "Admin" = "Admin";
 //TABBAR
-"tabbar_home" = "Accueil";
-"tabbar_gifts" = "Entraide";
-"tabbar_messages" = "Discussions";
-"tabbar_groups" = "Groupes";
-"tabbar_events" = "Événements";
+"tabbar_home" = "Strona główna";
+"tabbar_gifts" = "Wzajemna pomoc";
+"tabbar_messages" = "Dyskusje";
+"tabbar_groups" = "Grupy";
+"tabbar_events" = "Wydarzenia";
+
 
 "errorSettings" = "Autorisation requise";
 "toSettings" = "Réglages";

@@ -35,9 +35,9 @@
 "Loading" = "Wird geladen";
 "Admin" = "Administrator";
 //TABBAR
-"tabbar_home" = "Willkommen";
+"tabbar_home" = "Home";
 "tabbar_gifts" = "Gegenseitige Hilfe";
-"tabbar_messages" = "Diskussionen";
+"tabbar_messages" = "Chats";
 "tabbar_groups" = "Gruppen";
 "tabbar_events" = "Veranstaltungen";
 
