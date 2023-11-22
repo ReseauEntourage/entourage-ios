@@ -67,6 +67,7 @@ class EventListMainV2ViewController:UIViewController{
         pullRefreshControl.tintColor = .appOrange
         pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)
         ui_table_view.refreshControl = pullRefreshControl
+        expandedfloatingButton.setTitle("event_title_btn_create_event".localized, for: .normal)
         deployButton()
         
     }

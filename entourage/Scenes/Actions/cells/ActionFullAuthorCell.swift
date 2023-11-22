@@ -55,7 +55,7 @@ class ActionFullAuthorCell: UITableViewCell {
         if(action.isMine()){
             ibBtnSignalProblem.setVisibilityGone()
         }
-        
+        ibBtnSignalProblem.setTitle("parameter_action".localized, for: .normal)
     }
 
     @IBAction func action_show_charte(_ sender: Any) {

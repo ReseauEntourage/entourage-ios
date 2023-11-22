@@ -30,6 +30,7 @@ class ActionDetailFullViewController: UIViewController {
     @IBOutlet weak var ui_view_empty: UIView!
     @IBOutlet weak var ui_button_share: UIButton!
     
+    @IBOutlet weak var ui_btn_contact: UIButton!
     
     var action:Action? = nil
     var actionId = 0
@@ -47,6 +48,7 @@ class ActionDetailFullViewController: UIViewController {
         ui_top_view.backgroundColor = .appBeigeClair
         let _title = isContrib ? "Contrib".localized : "Demand".localized
         ui_top_view.populateCustom(title: _title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil,doubleRightMargin: true)
+        ui_btn_contact.setTitle("contact".localized, for: .normal)
         
         getAction()
         setupBottomViews()

@@ -73,6 +73,7 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         ui_img_member_1.layer.cornerRadius = ui_img_member_1.frame.height / 2
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
+        ui_btn_share?.setTitle("neighborhood_add_post_send_button".localized, for: .normal)
     }
     
     
