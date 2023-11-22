@@ -115,6 +115,7 @@ class OTLoginV2ViewController: UIViewController {
         ui_label_country.text =  "login_label_country".localized
         ui_label_phone.text =  "login_label_phone".localized
         ui_label_code.text =  "login_label_code".localized
+        ui_label_country.isHidden = true
 
         ui_button_change_phone.setAttributedTitle(Utils.formatStringUnderline(textString: "login_button_change_phone".localized, textColor: .appGrisSombre40, font: ApplicationTheme.getFontNunitoRegular(size: 14)), for: .normal)
         
