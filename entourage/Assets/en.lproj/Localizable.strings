@@ -7,6 +7,7 @@
 */
 
 //Divers
+
 "attention_pop_title" = "Attention";
 "close" = "Close";
 "error" = "Error";
@@ -482,8 +483,6 @@
 /*******
 //Settings
  */
-"params_translation" = "Translation";
-"params_language" = "Language";
 "params_notifs" = "Notifications";
 "params_help" = "Help and About";
 "params_unlock" = "Unblock contacts";
@@ -1423,6 +1422,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_hz_item_title" = "Hey, it seems a little quiet around here...";
 "home_v2_hz_item_subtitle" = "What if you brought a little solidarity to your city? Entourage gives you the keys to get started!";
 "home_v2_hz_item_button" = "Learn more";
+
+//HERE NEW KEY
 
 "lang_fr" = " - French";
 "lang_en" = " - English";
