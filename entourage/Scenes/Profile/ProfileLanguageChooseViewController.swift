@@ -29,6 +29,7 @@ class ProfileLanguageChooseViewController:UIViewController{
 
     
     override func viewDidLoad() {
+        self.ui_label_title.text = "onboarding_lang_select".localized
         self.ui_table_view.delegate = self
         self.ui_table_view.dataSource = self
         ui_table_view.register(UINib(nibName: LanguageCell.identifier, bundle: nil), forCellReuseIdentifier: LanguageCell.identifier)
