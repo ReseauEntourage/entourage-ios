@@ -117,6 +117,8 @@ extension ProfileLanguageChooseViewController:UITableViewDelegate,UITableViewDat
             }
         }
         ui_table_view.reloadData()
+        self.ui_label_title.text = "onboarding_lang_select".localized
+
     }
 
 
