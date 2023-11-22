@@ -35,8 +35,8 @@
 "Loading" = "Chargement";
 "Admin" = "Admin";
 //TABBAR
-"tabbar_home" = "Strona główna";
-"tabbar_gifts" = "Wzajemna pomoc";
+"tabbar_home" = "Start";
+"tabbar_gifts" = "Pomoc";
 "tabbar_messages" = "Dyskusje";
 "tabbar_groups" = "Grupy";
 "tabbar_events" = "Wydarzenia";

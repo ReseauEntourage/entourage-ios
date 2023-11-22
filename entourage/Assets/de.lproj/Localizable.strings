@@ -36,10 +36,10 @@
 "Admin" = "Administrator";
 //TABBAR
 "tabbar_home" = "Home";
-"tabbar_gifts" = "Gegenseitige Hilfe";
+"tabbar_gifts" = " Hilfe";
 "tabbar_messages" = "Chats";
 "tabbar_groups" = "Gruppen";
-"tabbar_events" = "Veranstaltungen";
+"tabbar_events" = "Events";
 
 "errorSettings" = "Autorisierung erforderlich";
 "toSettings" = "Einstellungen";

@@ -36,7 +36,7 @@
 "Admin" = "адмін";
 //TABBAR
 "tabbar_home" = "Домівка";
-"tabbar_gifts" = "Взаємодопомога";
+"tabbar_gifts" = "допомога";
 "tabbar_messages" = "дискусії";
 "tabbar_groups" = "Групи";
 "tabbar_events" = "Події";
