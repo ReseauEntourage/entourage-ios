@@ -30,8 +30,9 @@ class ActionDetailFullViewController: UIViewController {
     @IBOutlet weak var ui_view_empty: UIView!
     @IBOutlet weak var ui_button_share: UIButton!
     
-    @IBOutlet weak var ui_btn_contact: UIButton!
-    
+    @IBOutlet weak var ui_label_supress_btn: UILabel!
+    @IBOutlet weak var ui_label_contact_btn: UILabel!
+    @IBOutlet weak var ui_label_modify_btn: UILabel!
     var action:Action? = nil
     var actionId = 0
     var hashedActionId = ""
@@ -48,7 +49,9 @@ class ActionDetailFullViewController: UIViewController {
         ui_top_view.backgroundColor = .appBeigeClair
         let _title = isContrib ? "Contrib".localized : "Demand".localized
         ui_top_view.populateCustom(title: _title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil,doubleRightMargin: true)
-        ui_btn_contact.setTitle("contact".localized, for: .normal)
+        ui_label_contact_btn.text =  "contact".localized
+        ui_label_supress_btn.text =  "neighborhood_add_post_image_bt_cancel".localized
+        ui_label_modify_btn.text =  "modify".localized
         
         getAction()
         setupBottomViews()

@@ -1377,6 +1377,9 @@
                         <outlet property="ui_cancel_button" destination="wOJ-Qp-5Ow" id="KqS-Io-TZI"/>
                         <outlet property="ui_cancel_subtitle" destination="GQO-c1-1zV" id="Uy0-7D-21C"/>
                         <outlet property="ui_cancel_title" destination="cBo-eY-yB8" id="Kaf-DR-Vrm"/>
+                        <outlet property="ui_label_contact_btn" destination="4eJ-Wx-eTd" id="VCW-AG-s0f"/>
+                        <outlet property="ui_label_modify_btn" destination="7Fh-mC-7C0" id="Gl8-c4-sYV"/>
+                        <outlet property="ui_label_supress_btn" destination="6ne-7w-7HA" id="hHz-yM-3lx"/>
                         <outlet property="ui_tableview" destination="c4Y-iZ-505" id="i5z-uC-omC"/>
                         <outlet property="ui_title_contact" destination="4eJ-Wx-eTd" id="Utj-35-sla"/>
                         <outlet property="ui_title_delete" destination="6ne-7w-7HA" id="HMS-gc-G7R"/>

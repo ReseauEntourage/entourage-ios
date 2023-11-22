@@ -28,9 +28,6 @@ class OnboardingLanguageStoryBoard:UIViewController{
 
     }
     func configureUI(){
-        /*"onboarding_lang_bienvenue" = "Welcome !";
-         "onboarding_lang_select" = "Select your language";
-         "onboarding_lang_suivant" = "Next";*/
         self.ui_label_title.text = "onboarding_lang_bienvenue".localized
         self.ui_label_select_language.text = "onboarding_lang_select".localized
         self.ui_button_next.setTitle("onboarding_lang_suivant".localized, for: .normal)
