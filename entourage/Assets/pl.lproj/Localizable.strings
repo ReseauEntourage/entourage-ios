@@ -1175,10 +1175,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_your" = "Votre action";
 "actions_my_title" = "Mes annonces";
 "action_detail_title_location" = "Localisation";
-"atKm" = "à %.0f km de moi";
-"AtKm" = "À %.0f km de moi";
-"Atm" = "À %.0f m de moi";
-"atm" = "À %.0f m de moi";
+"atKm" = "à %.4g km de moi";
+"AtKm" = "À %.4g km de moi";
+"Atm" = "À %.4g m de moi";
+"atm" = "À %.4g m de moi";
 "Contrib" = "Contribution";
 "Demand" = "Demande";
 

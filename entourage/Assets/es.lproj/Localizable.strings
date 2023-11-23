@@ -1175,10 +1175,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_your" = "Tu acción";
 "actions_my_title" = "Mis anuncios";
 "action_detail_title_location" = "Ubicación";
-"atKm" = "%0f km de mí";
-"AtKm" = "%0f km de mí";
-"Atm" = "%0f m de mí";
-"atm" = "%0f m de mí";
+"atKm" = "%.4g km de mí";
+"AtKm" = "%.4g km de mí";
+"Atm" = "%.4g m de mí";
+"atm" = "%.4g m de mí";
 "Contrib" = "Contribución";
 "Demand" = "Pedido";
 
@@ -2598,10 +2598,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_your" = "Tu acción";
 "actions_my_title" = "Mis anuncios";
 "action_detail_title_location" = "Ubicación";
-"atKm" = "%0f km de mí";
-"AtKm" = "%0f km de mí";
-"Atm" = "%0f m de mí";
-"atm" = "%0f m de mí";
+"atKm" = "%.4g km de mí";
+"AtKm" = "%.4g km de mí";
+"Atm" = "%.4g m de mí";
+"atm" = "%.4g m de mí";
 "Contrib" = "Contribución";
 "Demand" = "Pedido";
 

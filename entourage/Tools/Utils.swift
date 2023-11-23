@@ -251,7 +251,7 @@ import UIKit
         dateFormat.dateFormat = "dd MMMM YYYY"
         dateString =  dateFormat.string(from: date)
         
-        dateString = capitalizeFirst ? "\("The".localized) \(dateString)" : "\("the".localized) \(dateString)"
+        //dateString = capitalizeFirst ? "\("The".localized) \(dateString)" : "\("the".localized) \(dateString)"
         
         return dateString
     }

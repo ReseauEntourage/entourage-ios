@@ -1174,10 +1174,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_your" = "Deine Handlung";
 "actions_my_title" = "Meine Anzeigen";
 "action_detail_title_location" = "Standort";
-"atKm" = "%0f km von mir entfernt";
-"AtKm" = "%0f km von mir entfernt";
-"Atm" = "%0f m von mir entfernt";
-"atm" = "%0f m von mir entfernt";
+"atKm" = "%.4g km von mir entfernt";
+"AtKm" = "%.4g km von mir entfernt";
+"Atm" = "%.4g m von mir entfernt";
+"atm" = "%.4g m von mir entfernt";
 "Contrib" = "Beitrag";
 "Demand" = "Anfrage";
 

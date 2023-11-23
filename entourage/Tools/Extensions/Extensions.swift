@@ -265,10 +265,10 @@ extension Double {
         var distString = ""
         if self < 1 {
             let distance_in_meter = 100 * self
-            distString = String(format: "%.0f m", distance_in_meter.rounded())
+            distString = String(format: "%.4g m", distance_in_meter.rounded())
             return distString
         }else{
-            distString = String(format: "%.0f km", self.rounded())
+            distString = String(format: "%.4g km", self.rounded())
             return distString
         }
     }

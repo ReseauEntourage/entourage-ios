@@ -512,6 +512,7 @@
                         <outlet property="ui_image_constraint_height" destination="8v6-R0-Wx7" id="R7p-kK-bv4"/>
                         <outlet property="ui_image_inside_top_constraint" destination="h1Q-wQ-Kaj" id="pr4-BP-WPX"/>
                         <outlet property="ui_label_contribs" destination="yw9-cd-x7G" id="ZK9-jx-q1g"/>
+                        <outlet property="ui_label_my_announce_btn" destination="VX8-IZ-fwg" id="KGk-w1-Wui"/>
                         <outlet property="ui_label_nb_cat_filter" destination="8DK-6o-C1x" id="AcS-5a-VUz"/>
                         <outlet property="ui_label_solicitations" destination="Im2-Kv-C8q" id="T1I-iC-aAg"/>
                         <outlet property="ui_label_title" destination="Jxg-UM-6dR" id="56t-bW-njf"/>

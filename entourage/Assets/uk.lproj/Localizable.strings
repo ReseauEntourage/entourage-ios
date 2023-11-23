@@ -1175,10 +1175,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_your" = "Ваша дія";
 "actions_my_title" = "Мої оголошення";
 "action_detail_title_location" = "Місцезнаходження";
-"atKm" = "%0f км від мене";
-"AtKm" = "%0f км від мене";
-"Atm" = "%0f м від мене";
-"atm" = "%0f м від мене";
+"atKm" = "%.4g км від мене";
+"AtKm" = "%.4g км від мене";
+"Atm" = "%.4g м від мене";
+"atm" = "%.4g м від мене";
 "Contrib" = "внесок";
 "Demand" = "запит";
 

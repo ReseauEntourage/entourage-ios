@@ -1158,10 +1158,10 @@
 "action_your" = "Your action";
 "actions_my_title" = "My listings";
 "action_detail_title_location" = "Location";
-"atKm" = "%0f km from me";
-"AtKm" = "%0f km from me";
-"Atm" = "%0f m from me";
-"atm" = "%0f m from me";
+"atKm" = "%.4g km from me";
+"AtKm" = "%.4g km from me";
+"Atm" = "%.4g m from me";
+"atm" = "%.4g m from me";
 "Contrib" = "Contribution";
 "Demand" = "Request";
 

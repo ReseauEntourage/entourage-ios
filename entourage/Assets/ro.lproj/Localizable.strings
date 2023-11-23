@@ -1174,10 +1174,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_your" = "Acțiunea ta";
 "actions_my_title" = "Reclamele mele";
 "action_detail_title_location" = "Locație";
-"atKm" = "%0f km de mine";
-"AtKm" = "%0f km de mine";
-"Atm" = "%0f m de la mine";
-"atm" = "%0f m de la mine";
+"atKm" = "%.4g km de mine";
+"AtKm" = "%.4g km de mine";
+"Atm" = "%.4g m de la mine";
+"atm" = "%.4g m de la mine";
 "Contrib" = "Contribuţie";
 "Demand" = "Cerere";
 

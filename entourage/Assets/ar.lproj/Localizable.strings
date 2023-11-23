@@ -1176,10 +1176,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_your" = "عملك";
 "actions_my_title" = "إعلاناتي";
 "action_detail_title_location" = "موقع";
-"atKm" = "%0f كم مني";
-"AtKm" = "%0f كم مني";
-"Atm" = "%0f م مني";
-"atm" = "%0f م مني";
+"atKm" = "%.4g كم مني";
+"AtKm" = "%.4g كم مني";
+"Atm" = "%.4g م مني";
+"atm" = "%.4g م مني";
 "Contrib" = "مساهمة";
 "Demand" = "طلب";
 
