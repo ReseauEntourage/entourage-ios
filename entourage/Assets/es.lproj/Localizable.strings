@@ -2796,7 +2796,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 /* New Home string */
 "home_v2_title" = "La app que recrea los vínculos entre vecinos";
 
-"home_v2_title_action" = "dar un impulso";
+"home_v2_title_action" = "Echar una mano";
 "home_v2_subtitle_action" = "¡Tus vecinos te necesitan!";
 "home_v2_btn_more_action" = "Ver todas las solicitudes";
 
