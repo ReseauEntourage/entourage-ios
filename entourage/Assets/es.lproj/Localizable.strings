@@ -387,7 +387,7 @@
  Profile
  */
 "myProfileButton" = "Mi perfil";
-"myParamsButton" = "configuraciones";
+"myParamsButton" = "Configuraciones";
 "profile_title" = "Perfil";
 "mainUserTitleActivity" = "Mi actividad";
 "mainUserTitleActions" = "Contribuciones";
@@ -1459,7 +1459,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Loading" = "Cargando";
 "Admin" = "Administración";
 //TABBAR
-"tabbar_home" = "bienvenida";
+"tabbar_home" = "Home";
 "tabbar_gifts" = "Ayuda mutua";
 "tabbar_messages" = "Discusiones";
 "tabbar_groups" = "Grupos";
