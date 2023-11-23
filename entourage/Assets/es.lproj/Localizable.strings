@@ -1238,7 +1238,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "message_subtitle_new_conv" = "Aún no has interactuado con este usuario. Si hay un problema, puedes reportar la conversación en la configuración.";
 "message_error_create_conversation" = "Error al crear la conversación";
 
-"conversation_params_title" = "configuraciones de chat";
+"conversation_params_title" = "Configuraciones de chat";
 "conv_param_title_profil" = "Ver perfil";
 "conv_param_title_signal" = "Informe";
 "conv_param_subtitle_signal" = "Informe esta conversación al equipo de Entourage.";
@@ -1810,7 +1810,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
  Profile
  */
 "myProfileButton" = "Mi perfil";
-"myParamsButton" = "configuraciones";
+"myParamsButton" = "Configuraciones";
 "profile_title" = "Perfil";
 "mainUserTitleActivity" = "Mi actividad";
 "mainUserTitleActions" = "Contribuciones";
@@ -2661,7 +2661,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "message_subtitle_new_conv" = "Aún no has interactuado con este usuario. Si hay un problema, puedes reportar la conversación en la configuración.";
 "message_error_create_conversation" = "Error al crear la conversación";
 
-"conversation_params_title" = "configuraciones de chat";
+"conversation_params_title" = "Configuraciones de chat";
 "conv_param_title_profil" = "Ver perfil";
 "conv_param_title_signal" = "Informe";
 "conv_param_subtitle_signal" = "Informe esta conversación al equipo de Entourage.";
