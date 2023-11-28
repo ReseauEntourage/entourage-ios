@@ -32,13 +32,13 @@ class EventListMainV2ViewController:UIViewController{
     //VAR
     private var currentPageMy = 0
     private var currentPageDiscover = 0
-    private let numberOfItemsForWS = 10
+    private let numberOfItemsForWS = 40
     private var currentFilter = EventActionLocationFilters()
     private var tableDTO = [EventListTableDTO]()
     private var discoverEvent = [Event]()
     private var myEvent = [Event]()
     private var isFromFilter = false
-    private var nbOfItemsBeforePagingReload = 5
+    private var nbOfItemsBeforePagingReload = 2
     private var isLoading = false
     private var isOnlyDiscoverPagination = false
     var pullRefreshControl = UIRefreshControl()
