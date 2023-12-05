@@ -1465,3 +1465,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Кочівні зустрічі";
 "interest_other" = "Інше";
 "contact" = "Зв'язатися";
+
+"report_modal_title_translate" = "Перекласти";
+"report_modal_subtitle_translate" = "Ми автоматично перекладаємо повідомлення, написані громадянами";
+"layout_translate_title_original" = "Показати оригінал";
+"layout_translate_title_translation" = "Перекласти";
+"layout_translate_action_translation_button" = "Натисніть тут, щоб показати оригінальну версію";
+"layout_translate_title_original_button" = "Показати переклад";
+"layout_translate_title_original_title" = "Ця сторінка не була перекладена.";
+"layout_translate_title_translation_title" = "Деяка інформація була автоматично перекладена.";

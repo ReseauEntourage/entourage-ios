@@ -431,7 +431,8 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
             if indexPath.row >= messagesExtracted.messages.count {
                 let message = messagesForRetry[indexPath.row - messagesExtracted.messages.count]
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe", for: indexPath) as! NeighborhoodMessageCell
-                cell.populateCell(isMe: true, message: message, isRetry: true, positionRetry: indexPath.row - messagesExtracted.messages.count, delegate: self)
+                
+                cell.populateCell(isMe: true, message: message, isRetry: true, positionRetry: indexPath.row - messagesExtracted.messages.count, delegate: self, isTranslated: false)
                 return cell
             }
         }
@@ -556,6 +557,10 @@ protocol UpdateUnreadCountDelegate:AnyObject {
 }
 
 extension ConversationDetailMessagesViewController:GroupDetailDelegate{
+    func translateItem(id: Int) {
+        //TODO TRANSLATE
+    }
+    
     func showMessage(signalType: GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)

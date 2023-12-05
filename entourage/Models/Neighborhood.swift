@@ -10,6 +10,7 @@ struct Neighborhood:Codable {
     var uid:Int = 0
     var uuid_v2:String = ""
     var name:String = ""
+    
     var aboutGroup:String?
     var welcomeMessage:String?
     var membersCount:Int = 0
@@ -35,6 +36,10 @@ struct Neighborhood:Codable {
     
     var isSelected = false
     
+    var nameTranslations: Translations? = nil
+    var aboutGroupTranslations: Translations? = nil
+    var welcomeMessageTranslations: Translations? = nil
+    
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case uuid_v2 = "uuid_v2"
@@ -59,6 +64,9 @@ struct Neighborhood:Codable {
         case isMember = "member"
         case messages = "posts"
         case futureEvents = "future_outings"
+        case nameTranslations = "name_translations"
+        case aboutGroupTranslations = "description_translations"
+        case welcomeMessageTranslations = "welcome_message_translations"
     }
     
     func dictionaryForWS() -> [String:Any] {

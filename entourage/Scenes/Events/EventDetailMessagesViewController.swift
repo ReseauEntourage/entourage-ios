@@ -32,6 +32,8 @@ class EventDetailMessagesViewController: UIViewController {
     var hashedCommentId:String = ""
     var eventName = ""
     var isGroupMember = false
+    var translatedMessageIDs = Set<Int>()
+
     
     var messages = [PostMessage]()
     var meId:Int = 0
@@ -261,13 +263,14 @@ extension EventDetailMessagesViewController: UITableViewDataSource, UITableViewD
         }
         
         let realIndexPath = postMessage == nil ? indexPath.row : indexPath.row - 1
-        
+
         
         if messagesForRetry.count > 0 {
             if realIndexPath >= messages.count {
                 let message = messagesForRetry[realIndexPath - messages.count]
+                let isTranslated = translatedMessageIDs.contains(message.uid)
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe", for: indexPath) as! NeighborhoodMessageCell
-                cell.populateCell(isMe: true, message: message, isRetry: true, positionRetry: realIndexPath - messages.count, delegate: self)
+                cell.populateCell(isMe: true, message: message, isRetry: true, positionRetry: realIndexPath - messages.count, delegate: self, isTranslated: isTranslated)
                 return cell
             }
         }
@@ -281,7 +284,8 @@ extension EventDetailMessagesViewController: UITableViewDataSource, UITableViewD
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NeighborhoodMessageCell
-        cell.populateCell(isMe: isMe, message: message, isRetry: false, delegate: self)
+        let isTranslated = translatedMessageIDs.contains(message.uid)
+        cell.populateCell(isMe: isMe, message: message, isRetry: false, delegate: self,isTranslated:isTranslated)
         return cell
     }
 }
@@ -362,6 +366,20 @@ extension EventDetailMessagesViewController:MessageCellSignalDelegate {
 
 //MARK: - GroupDetailDelegate -
 extension EventDetailMessagesViewController:GroupDetailDelegate {
+    func translateItem(id: Int) {
+        if translatedMessageIDs.contains(id) {
+            translatedMessageIDs.remove(id)
+        } else {
+            translatedMessageIDs.insert(id)
+        }
+        
+        // Trouvez l'index du message et rechargez la cellule
+        if let index = messages.firstIndex(where: { $0.uid == id }) {
+            let indexPath = IndexPath(row: index + (postMessage != nil ? 1 : 0), section: 0)
+            ui_tableview.reloadRows(at: [indexPath], with: .none)
+        }
+    }
+    
     func publicationDeleted() {
         getMessages()
         self.ui_tableview.reloadData()

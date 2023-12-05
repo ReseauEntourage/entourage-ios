@@ -1465,3 +1465,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Spotkania koczownicze";
 "interest_other" = "Inne";
 "contact" = "Skontaktować się";
+
+"report_modal_title_translate" = "Tłumaczyć";
+"report_modal_subtitle_translate" = "Automatycznie tłumaczymy wiadomości napisane przez obywateli";
+"layout_translate_title_original" = "Pokaż oryginał";
+"layout_translate_title_translation" = "Przetłumacz";
+"layout_translate_action_translation_button" = "Kliknij tutaj, aby pokazać oryginalną wersję";
+"layout_translate_title_original_button" = "Pokaż tłumaczenie";
+"layout_translate_title_original_title" = "Ta strona nie została przetłumaczona.";
+"layout_translate_title_translation_title" = "Niektóre informacje zostały przetłumaczone automatycznie.";

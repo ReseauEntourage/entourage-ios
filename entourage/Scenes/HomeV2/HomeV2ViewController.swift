@@ -89,7 +89,7 @@ class HomeV2ViewController:UIViewController{
         ui_table_view.register(UINib(nibName: HomeModeratorCell.identifier, bundle: nil), forCellReuseIdentifier: HomeModeratorCell.identifier)
         //CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
-
+        self.checkAndCreateCookieIfNotExists()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -534,6 +534,15 @@ extension HomeV2ViewController {
             self.navigationController?.present(nav, animated: true)
         }
     }
+    
+    func checkAndCreateCookieIfNotExists() {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: "isTranslatedByDefault") == nil {
+            // Si le cookie n'existe pas, on crée un cookie avec la valeur true
+            defaults.set(true, forKey: "isTranslatedByDefault")
+        }
+    }
+
     
     func showResources() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "listPedagoNav") {

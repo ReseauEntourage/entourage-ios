@@ -1464,3 +1464,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Întâlniri nomade";
 "interest_other" = "Altul";
 "contact" = "Contactați";
+
+"report_modal_title_translate" = "Traduce";
+"report_modal_subtitle_translate" = "Traducem automat mesajele scrise de cetățeni";
+"layout_translate_title_original" = "Afișați originalul";
+"layout_translate_title_translation" = "Traduceți";
+"layout_translate_action_translation_button" = "Apăsați aici pentru a afișa versiunea originală";
+"layout_translate_title_original_button" = "Afișați traducerea";
+"layout_translate_title_original_title" = "Această pagină nu a fost tradusă.";
+"layout_translate_title_translation_title" = "Unele informații au fost traduse automat.";

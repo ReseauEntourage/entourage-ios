@@ -19,13 +19,16 @@ class ActionSolicitationDetailHomeCell: UITableViewCell {
     @IBOutlet weak var ui_username: UILabel!
     @IBOutlet weak var ui_view_separator: UIView!
     
+    
+    var isTranslated = false
+
+    
     class var identifier: String {
         return String(describing: self)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         ui_section.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange(size: 15, color: .appOrangeLight))
         ui_username.setupFontAndColor(style: ApplicationTheme.getFontLegend())
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
@@ -34,6 +37,8 @@ class ActionSolicitationDetailHomeCell: UITableViewCell {
         
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
     }
+    
+
     
     func populateCell(action:Action, hideSeparator:Bool) {
         

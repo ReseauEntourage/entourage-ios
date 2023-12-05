@@ -4082,7 +4082,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ic_cross" destination="tfM-Sj-ITT" id="YpZ-Dl-Keu"/>
+                        <outlet property="switch" destination="VPm-xR-ijh" id="r6P-vh-aTZ"/>
                         <outlet property="ui_label_language" destination="EY4-6o-Noh" id="yjD-8j-6yZ"/>
+                        <outlet property="ui_label_title" destination="m8x-yU-X7h" id="lMB-ve-BXb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cyc-cV-JX2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

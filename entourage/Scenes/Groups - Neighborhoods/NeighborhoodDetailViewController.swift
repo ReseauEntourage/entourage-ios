@@ -228,7 +228,8 @@ class NeighborhoodDetailViewController: UIViewController {
             self.ui_tableview.reloadData()
             self.isLoading = false
             self.populateTopView()
-            
+            self.neighborhood?.messages?.removeAll()
+            self.getMorePosts()
             if hasToRefreshLists {
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
             }
@@ -808,6 +809,10 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
     }
 }
 extension NeighborhoodDetailViewController:GroupDetailDelegate{
+    func translateItem(id: Int) {
+        //TODO TRANSLATE
+    }
+    
     func publicationDeleted() {
         self.getNeighborhoodDetail(hasToRefreshLists:true)
         self.ui_tableview.reloadData()

@@ -33,10 +33,12 @@ class ActionDetailFullViewController: UIViewController {
     @IBOutlet weak var ui_label_supress_btn: UILabel!
     @IBOutlet weak var ui_label_contact_btn: UILabel!
     @IBOutlet weak var ui_label_modify_btn: UILabel!
+    
     var action:Action? = nil
     var actionId = 0
     var hashedActionId = ""
     var isContrib = false
+    var isTranslated = false
     
     var parentVC:UIViewController? = nil
     
@@ -72,6 +74,8 @@ class ActionDetailFullViewController: UIViewController {
     @objc func updateAction() {
         getAction()
     }
+    
+
     
     func getAction() {
         var _actionId = ""
@@ -316,6 +320,10 @@ extension ActionDetailFullViewController: UITableViewDataSource, UITableViewDele
 
 //MARK: - GroupDetailDelegate -
 extension ActionDetailFullViewController: GroupDetailDelegate {
+    func translateItem(id: Int) {
+        //TODO Translate
+    }
+    
     func publicationDeleted() {
         getAction()
         self.ui_tableview.reloadData()

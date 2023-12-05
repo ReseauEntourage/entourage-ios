@@ -219,6 +219,10 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
 
 //MARK: - GroupDetailDelegate -
 extension ConversationParametersViewController: GroupDetailDelegate {
+    func translateItem(id: Int) {
+        //TODO TRANSLATE
+    }
+    
     func publicationDeleted() {
         if !isOneToOne {
             getConversation()

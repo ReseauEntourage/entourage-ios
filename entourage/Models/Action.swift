@@ -32,6 +32,9 @@ struct Action:Codable {
     private var createdAt:String? = nil
     private var updatedAt:String? = nil
     
+    var titleTranslations: Translations? = nil
+    var descriptionTranslations: Translations? = nil
+    
     func getChangedStatusDate() -> Date? {
         return statusChangedAt == nil ? nil : Utils.getDateFromWSDateString(statusChangedAt)
     }
@@ -63,7 +66,7 @@ struct Action:Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case id
         case uuid
         case uuid_v2
         case status
@@ -81,6 +84,8 @@ struct Action:Codable {
         case updatedAt = "updated_at"
         case statusChangedAt = "status_changed_at"
         case actionType = "action_type"
+        case titleTranslations = "title_translations"
+        case descriptionTranslations = "description_translations"
     }
     
     func dictionaryForWS() -> [String:Any] {

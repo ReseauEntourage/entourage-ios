@@ -39,6 +39,9 @@ struct Event:Codable {
     var posts:[PostMessage]? = nil
     var members:[MemberLight]? = nil
     
+    var titleTranslations: Translations? = nil
+    var descriptionTranslations: Translations? = nil
+    
     var status = ""
     private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
@@ -212,6 +215,8 @@ struct Event:Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case statusChangedAt = "status_changed_at"
+        case titleTranslations = "title_translations"
+        case descriptionTranslations = "description_translations"
     }
     
     func dictionaryForWS() -> [String:Any] {

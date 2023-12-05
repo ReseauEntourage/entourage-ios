@@ -1451,3 +1451,12 @@
 "interest_other" = "Other";
 "params_language" = "Language";
 "contact" = "Contact";
+
+"report_modal_title_translate" = "Translate";
+"report_modal_subtitle_translate" = "We automatically translate messages written by citizens";
+"layout_translate_title_original" = "Show original";
+"layout_translate_title_translation" = "Translate";
+"layout_translate_action_translation_button" = "Click here to show the original version";
+"layout_translate_title_original_button" = "Show translation";
+"layout_translate_title_original_title" = "This page has not been translated.";
+"layout_translate_title_translation_title" = "Some information has been automatically translated.";

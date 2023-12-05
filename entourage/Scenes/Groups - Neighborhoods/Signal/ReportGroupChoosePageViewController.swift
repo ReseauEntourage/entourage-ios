@@ -53,6 +53,9 @@ class ReportGroupChoosePageViewController:UIViewController {
         }else{
             table_dto.append(.report)
         }
+        if checkparameterType() == .commment && !checkIsMe() {
+            table_dto.append(.translate)
+        }
         ui_tableview.reloadData()
     }
     func checkIsMe() -> Bool{
@@ -106,9 +109,19 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
                 cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
                 return cell
             }
+        case .translate:
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "ReportChooseViewCell", for: indexPath ) as? ReportChooseViewCell {
+                cell.selectionStyle = .none
+                cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
+                return cell
+            }
         }
         
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -117,6 +130,8 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
             delegate?.chooseReport()
         case .suppress:
             showAlert()
+        case .translate:
+            delegate?.translateItem(id: chatMessageId!)
         }
     }
     

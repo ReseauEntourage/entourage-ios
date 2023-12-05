@@ -259,6 +259,8 @@ class EventDetailFeedViewController: UIViewController {
                      
             }
             self.event = event
+            self.event?.posts?.removeAll()
+            self.getMorePosts()
             self.splitMessages()
             self.isLoading = false
             
@@ -852,6 +854,10 @@ extension EventDetailFeedViewController: UIScrollViewDelegate {
 }
 
 extension EventDetailFeedViewController:GroupDetailDelegate{
+    func translateItem(id: Int) {
+        //TODO TRANSLATE
+    }
+    
     func publicationDeleted() {
         getEventDetail()
         self.ui_tableview.reloadData()

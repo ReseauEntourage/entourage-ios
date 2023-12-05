@@ -1465,3 +1465,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Rencontres Nomades";
 "interest_other" = "Autre";
 "contact" = "Contacter";
+
+"report_modal_title_translate" = "Traduire";
+"report_modal_subtitle_translate" = "Nous traduisons automatiquement les messages rédigés par les citoyens";
+"layout_translate_title_original" = "Afficher la version originale";
+"layout_translate_title_translation" = "Afficher la traduction";
+"layout_translate_action_translation_button" = "Cliquer ici pour afficher la version originale";
+"layout_translate_title_original_button" = "Afficher la traduction";
+"layout_translate_title_original_title" = "Cette page n’a pas été traduite.";
+"layout_translate_title_translation_title" = "Certaines informations ont été traduites automatiquement.";

@@ -814,14 +814,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="432"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Localisation" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpx-oK-hMD">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Localisation" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpx-oK-hMD">
                                                     <rect key="frame" x="28" y="27" width="350" height="19"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ZLn-AE-cDJ">
-                                                    <rect key="frame" x="12" y="66" width="382" height="297"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ZLn-AE-cDJ">
+                                                    <rect key="frame" x="12" y="66" width="382" height="359"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRl-Bo-9vB">
                                                             <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
@@ -892,8 +892,35 @@
                                                                 <constraint firstItem="ptz-cm-Fcz" firstAttribute="trailing" secondItem="brN-QU-gOd" secondAttribute="trailing" constant="-8" id="pl8-gd-qEi"/>
                                                             </constraints>
                                                         </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oa-zY-U3S">
+                                                            <rect key="frame" x="0.0" y="251" width="382" height="50"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_translation" translatesAutoresizingMaskIntoConstraints="NO" id="bgY-Mt-Dk1">
+                                                                    <rect key="frame" x="20" y="15" width="20" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="20" id="Dry-2T-qYn"/>
+                                                                        <constraint firstAttribute="width" constant="20" id="w0t-nq-Egh"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnc-j6-WJT">
+                                                                    <rect key="frame" x="48" y="15" width="334" height="18"/>
+                                                                    <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
+                                                                    <color key="textColor" name="grey_light"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" name="BeigeClair"/>
+                                                            <constraints>
+                                                                <constraint firstItem="bnc-j6-WJT" firstAttribute="top" secondItem="bgY-Mt-Dk1" secondAttribute="top" id="2AI-cn-N2D"/>
+                                                                <constraint firstItem="bgY-Mt-Dk1" firstAttribute="centerY" secondItem="6oa-zY-U3S" secondAttribute="centerY" id="QZB-Zh-M2y"/>
+                                                                <constraint firstItem="bnc-j6-WJT" firstAttribute="leading" secondItem="bgY-Mt-Dk1" secondAttribute="trailing" constant="8" symbolic="YES" id="WCN-eM-8Ow"/>
+                                                                <constraint firstAttribute="trailing" secondItem="bnc-j6-WJT" secondAttribute="trailing" id="gnR-Eg-bOr"/>
+                                                                <constraint firstItem="bgY-Mt-Dk1" firstAttribute="leading" secondItem="6oa-zY-U3S" secondAttribute="leading" constant="20" id="lfZ-V4-MiX"/>
+                                                                <constraint firstAttribute="height" constant="50" id="mx6-Lh-CuB"/>
+                                                            </constraints>
+                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QE6-Ii-ayy">
-                                                            <rect key="frame" x="0.0" y="251" width="382" height="46"/>
+                                                            <rect key="frame" x="0.0" y="313" width="382" height="46"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="65b-BG-yr7">
                                                                     <rect key="frame" x="16" y="16" width="83" height="30"/>
@@ -934,8 +961,8 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="FLV-Gw-mJ2"/>
                                                     </constraints>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kO-JV-Tm8">
-                                                    <rect key="frame" x="28" y="379" width="350" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kO-JV-Tm8">
+                                                    <rect key="frame" x="28" y="411.5" width="350" height="20.5"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -967,12 +994,14 @@
                                         <connections>
                                             <outlet property="ui_description" destination="0kO-JV-Tm8" id="W0F-u0-1Ed"/>
                                             <outlet property="ui_img_contrib" destination="brN-QU-gOd" id="qBm-ZX-Hfl"/>
+                                            <outlet property="ui_label_translate" destination="bnc-j6-WJT" id="0ev-wa-mpZ"/>
                                             <outlet property="ui_title_cancel" destination="Pz4-1C-9CR" id="EdR-Y1-vTP"/>
                                             <outlet property="ui_title_main" destination="Bpx-oK-hMD" id="05I-ha-kxs"/>
                                             <outlet property="ui_view_cancel" destination="FRl-Bo-9vB" id="HMb-kD-KXq"/>
                                             <outlet property="ui_view_cancel_opacity" destination="vid-tR-7X4" id="xf1-o0-OhC"/>
                                             <outlet property="ui_view_contrib" destination="MFy-g9-7LG" id="rUx-0X-nzL"/>
                                             <outlet property="ui_view_solicitation" destination="QE6-Ii-ayy" id="Yid-51-9I0"/>
+                                            <outlet property="ui_view_translate" destination="6oa-zY-U3S" id="TR2-c3-ebI"/>
                                             <outletCollection property="ui_view_tags" destination="ptz-cm-Fcz" collectionClass="NSMutableArray" id="W7U-cU-oYX"/>
                                             <outletCollection property="ui_view_tags" destination="65b-BG-yr7" collectionClass="NSMutableArray" id="xXy-wc-VJI"/>
                                             <outletCollection property="ui_title_tags" destination="DRd-Tk-Vmq" collectionClass="NSMutableArray" id="ggE-fo-p6F"/>
@@ -2162,6 +2191,7 @@
         <image name="ic_send_white_bold" width="22" height="22"/>
         <image name="ic_share" width="20" height="20"/>
         <image name="ic_tag_actions" width="14" height="14"/>
+        <image name="ic_translation" width="20" height="20"/>
         <image name="ic_trash_orange" width="22" height="22"/>
         <image name="img_neighb_valid_group" width="23" height="19"/>
         <image name="placeholder_user" width="124" height="124"/>
@@ -2170,6 +2200,9 @@
         </namedColor>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="grey_light">
+            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="grey_off">
             <color red="0.79600000381469727" green="0.79600000381469727" blue="0.79600000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

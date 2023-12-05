@@ -2888,3 +2888,13 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Encuentros nómadas";
 "interest_other" = "Otro";
 "contact" = "Contactar";
+
+"report_modal_title_translate" = "Traducir";
+"report_modal_subtitle_translate" = "Traducimos automáticamente los mensajes escritos por los ciudadanos";
+"layout_translate_title_original" = "Mostrar original";
+"layout_translate_title_translation" = "Traducir";
+"layout_translate_action_translation_button" = "Haz clic aquí para mostrar la versión original";
+"layout_translate_title_original_button" = "Mostrar traducción";
+"layout_translate_title_original_title" = "Esta página no ha sido traducida.";
+"layout_translate_title_translation_title" = "Alguna información ha sido traducida automáticamente.";
+

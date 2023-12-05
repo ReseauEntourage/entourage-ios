@@ -43,7 +43,6 @@ class ReportGroupMainViewController: BasePopViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ReportGroupPageViewController {
-
             vc.group = self.group
             vc.event = event
             vc.signalType = signalType
@@ -71,6 +70,7 @@ extension ReportGroupMainViewController: MJNavBackViewDelegate {
 protocol GroupDetailDelegate: AnyObject {
     func showMessage(signalType:GroupDetailSignalType)
     func publicationDeleted()
+    func translateItem(id:Int)
 }
 
 enum GroupDetailSignalType {

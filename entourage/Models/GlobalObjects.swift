@@ -53,6 +53,7 @@ struct PostMessage:Codable {
     var commentsCount:Int? = 0
     var messageImageUrl:String? = nil
     var status:String? = nil
+    var contentTranslations:Translations? = nil
     
     var isRetryMsg = false
     
@@ -74,6 +75,7 @@ struct PostMessage:Codable {
         case messageImageUrl = "image_url"
         case read
         case status
+        case contentTranslations = "content_translations"
     }
     
     //Use to sort messages in days Dicts

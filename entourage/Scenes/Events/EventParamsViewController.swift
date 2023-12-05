@@ -292,6 +292,10 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
 
 //MARK: - GroupDetailDelegate -
 extension EventParamsViewController: GroupDetailDelegate {
+    func translateItem(id: Int) {
+        //TODO TRANSLATE
+    }
+    
     func publicationDeleted() {
         self.ui_tableview.reloadData()
     }

@@ -436,6 +436,7 @@
 		2694A74A2ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */; };
 		2694A74C2ACD90D70042CFCA /* HomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */; };
 		2694A74E2ACD92510042CFCA /* HomeGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */; };
+		26A06E582B1E23B500AC323A /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A06E572B1E23B500AC323A /* Translations.swift */; };
 		26A60E212A3A05AD004849FB /* WelcomeFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */; };
 		26AD11962AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD11952AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift */; };
 		26AD11982AEA688800FA7BEC /* ProfileTranslationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD11972AEA688800FA7BEC /* ProfileTranslationViewController.swift */; };
@@ -905,6 +906,7 @@
 		2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeEventHorizontalCollectionCell.xib; sourceTree = "<group>"; };
 		2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGroupCell.swift; sourceTree = "<group>"; };
 		2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeGroupCell.xib; sourceTree = "<group>"; };
+		26A06E572B1E23B500AC323A /* Translations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translations.swift; sourceTree = "<group>"; };
 		26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourViewController.swift; sourceTree = "<group>"; };
 		26AD11952AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLanguageChooseViewController.swift; sourceTree = "<group>"; };
 		26AD11972AEA688800FA7BEC /* ProfileTranslationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTranslationViewController.swift; sourceTree = "<group>"; };
@@ -1057,6 +1059,7 @@
 				0264C5D528B4E51B001EA654 /* Conversation.swift */,
 				0208937C28BCFE3100160F1E /* NotificationPushData.swift */,
 				0227EC4E292CE8320049168E /* NotifInApp.swift */,
+				26A06E572B1E23B500AC323A /* Translations.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2351,6 +2354,7 @@
 				0262997B2790815000D84A6A /* APIKeys.swift in Sources */,
 				02A92C202897D374000DFF95 /* ActionCreatePageViewController.swift in Sources */,
 				026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */,
+				26A06E582B1E23B500AC323A /* Translations.swift in Sources */,
 				02B94C23284F594A006059EF /* HomeMainViewModel.swift in Sources */,
 				2619E1432A261C93000BD574 /* WelcomeTwoViewController.swift in Sources */,
 				26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */,

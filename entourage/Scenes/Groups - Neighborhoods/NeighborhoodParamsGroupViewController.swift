@@ -184,6 +184,10 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
 
 //MARK: - GroupDetailDelegate -
 extension NeighborhoodParamsGroupViewController: GroupDetailDelegate {
+    func translateItem(id: Int) {
+        //TODO Translate
+    }
+    
     func publicationDeleted() {
         self.ui_tableview.reloadData()
     }
