@@ -13,8 +13,8 @@ class ProfileTranslationViewController: UIViewController {
         super.viewDidLoad()
         
         // Initialisation du label
-        ui_label_language.text = "onboarding_lang_select".localized
-
+        ui_label_language.text = "translation_bottom_fragment_main_title".localized
+        ui_label_title.text = "translation_bottom_fragment_title".localized
         // Configuration du switch basé sur le cookie
         `switch`.isOn = getCookieValue()
 

@@ -73,7 +73,6 @@ class ParamMenuCell: UITableViewCell {
         ui_title_suppress_account.textColor = .appOrange
         ui_title_suppress_account.font = ApplicationTheme.getFontCourantBoldOrangeClair().font
         
-        ui_view_translation.setVisibilityGone()
     }
     
     private func setLabelTitle(label:UILabel) {
