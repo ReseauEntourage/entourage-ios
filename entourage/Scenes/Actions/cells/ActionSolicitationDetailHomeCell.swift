@@ -20,8 +20,6 @@ class ActionSolicitationDetailHomeCell: UITableViewCell {
     @IBOutlet weak var ui_view_separator: UIView!
     
     
-    var isTranslated = false
-
     
     class var identifier: String {
         return String(describing: self)

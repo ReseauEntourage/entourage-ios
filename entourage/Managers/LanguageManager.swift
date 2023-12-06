@@ -33,6 +33,14 @@ class LanguageManager {
         // Defaulting to English ("en") if no language has been selected
         return UserDefaults.standard.string(forKey: selectedLanguageKey) ?? "en"
     }
+    static func getTranslatedByDefaultValue() -> Bool {
+        if UserDefaults.standard.object(forKey: "isTranslatedByDefault") == nil {
+            // Si non, on définit la valeur par défaut à true
+            UserDefaults.standard.set(true, forKey: "isTranslatedByDefault")
+        }
+        // Puis on retourne la valeur
+        return UserDefaults.standard.bool(forKey: "isTranslatedByDefault")
+    }
 
     static func setLocale(langCode: String) {
         let locale = Locale(identifier: langCode)

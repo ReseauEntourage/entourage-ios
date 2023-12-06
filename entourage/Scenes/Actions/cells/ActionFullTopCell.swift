@@ -31,7 +31,7 @@ class ActionFullTopCell: UITableViewCell {
     @IBOutlet weak var ui_label_translate: UILabel!
     
     var action:Action? = nil
-    var isTranslated = false
+    var isTranslated = LanguageManager.getTranslatedByDefaultValue()
     
     override func awakeFromNib() {
         super.awakeFromNib()

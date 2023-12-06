@@ -39,9 +39,11 @@ class ProfileTranslationViewController: UIViewController {
 
     // Fonction pour obtenir la valeur du cookie (à adapter selon ton implémentation)
     func getCookieValue() -> Bool {
-        // Ici, récupère la valeur du cookie "isTranslatedByDefault"
-        // On suppose que ça retourne un Bool
-        // Remplace ceci par ton code de gestion de cookies
+        if UserDefaults.standard.object(forKey: "isTranslatedByDefault") == nil {
+            // Si non, on définit la valeur par défaut à true
+            UserDefaults.standard.set(true, forKey: "isTranslatedByDefault")
+        }
+        // Puis on retourne la valeur
         return UserDefaults.standard.bool(forKey: "isTranslatedByDefault")
     }
 

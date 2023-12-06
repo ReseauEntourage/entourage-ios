@@ -38,7 +38,6 @@ class ActionDetailFullViewController: UIViewController {
     var actionId = 0
     var hashedActionId = ""
     var isContrib = false
-    var isTranslated = false
     
     var parentVC:UIViewController? = nil
     

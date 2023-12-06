@@ -44,7 +44,7 @@ class NeighborhoodPostCell: UITableViewCell {
     var currentIndexPath:IndexPath? = nil
     var userId:Int? = nil
     var imageUrl:URL? = nil
-    var isTranslated: Bool = false
+    var isTranslated: Bool = LanguageManager.getTranslatedByDefaultValue()
 
     
     var postMessage:PostMessage!
