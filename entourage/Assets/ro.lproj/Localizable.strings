@@ -1473,3 +1473,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "layout_translate_title_original_button" = "Afișați traducerea";
 "layout_translate_title_original_title" = "Această pagină nu a fost tradusă.";
 "layout_translate_title_translation_title" = "Unele informații au fost traduse automat.";
+"params_translation" = "Traducere";

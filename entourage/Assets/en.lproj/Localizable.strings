@@ -1419,6 +1419,7 @@
 "lang_ar" = " - Arabic";
 "lang_pl" = " - Polish";
 
+"params_translation" = "Translation";
 "onboarding_lang_bienvenue" = "Welcome !";
 "onboarding_lang_select" = "Select your language";
 "onboarding_lang_suivant" = "Next";

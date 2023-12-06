@@ -1473,3 +1473,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "layout_translate_title_original_button" = "Übersetzung anzeigen";
 "layout_translate_title_original_title" = "Diese Seite wurde nicht übersetzt.";
 "layout_translate_title_translation_title" = "Einige Informationen wurden automatisch übersetzt.";
+"params_translation" = "Übersetzung";

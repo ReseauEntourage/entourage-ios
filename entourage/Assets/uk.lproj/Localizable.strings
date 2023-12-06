@@ -1474,3 +1474,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "layout_translate_title_original_button" = "Показати переклад";
 "layout_translate_title_original_title" = "Ця сторінка не була перекладена.";
 "layout_translate_title_translation_title" = "Деяка інформація була автоматично перекладена.";
+"params_translation" = "Переклад";
