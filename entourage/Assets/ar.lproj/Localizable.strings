@@ -1475,3 +1475,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "layout_translate_title_original_button" = "عرض الترجمة";
 "layout_translate_title_original_title" = "لم يتم ترجمة هذه الصفحة.";
 "layout_translate_title_translation_title" = "تم ترجمة بعض المعلومات تلقائيًا.";
+"params_translation" = "الترجمة";
