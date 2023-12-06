@@ -105,6 +105,14 @@ class EventDetailMessagesViewController: UIViewController {
             _ = ui_textview_message.becomeFirstResponder()
         }
     }
+    func setItemsTranslated(messages:[PostMessage]){
+        if LanguageManager.getTranslatedByDefaultValue(){
+            for _message in messages{
+                translatedMessageIDs.insert(_message.uid)
+            }
+        }
+
+    }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
@@ -155,7 +163,7 @@ class EventDetailMessagesViewController: UIViewController {
             if let messages = messages {
                 self.messages = messages
                 self.ui_view_empty.isHidden = self.messages.count > 0
-                
+                self.setItemsTranslated(messages: messages)
                 self.ui_tableview.reloadData()
                 
                 if self.postMessage == nil {

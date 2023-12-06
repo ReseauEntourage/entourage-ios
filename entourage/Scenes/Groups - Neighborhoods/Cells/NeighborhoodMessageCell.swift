@@ -143,7 +143,6 @@ class NeighborhoodMessageCell: UITableViewCell {
             }
         }
         if let _translation = message.contentTranslations{
-            print("eho translation " , _translation)
             if(isTranslated){
                 ui_message.text = _translation.translation
             }else{

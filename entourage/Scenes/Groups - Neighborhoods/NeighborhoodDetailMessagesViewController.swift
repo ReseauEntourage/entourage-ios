@@ -112,6 +112,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                 translatedMessageIDs.insert(_message.uid)
             }
         }
+
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
