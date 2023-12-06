@@ -866,7 +866,7 @@
 "event_mod_group_bt_mod" = "Editar";
 
 "event_mod_title" = "Editar mi evento";
-"event_create_title" = "nuevo evento";
+"event_create_title" = "Nuevo evento";
 "event_create_title_phase" = "Escenario";
 "event_create_title_phase_nb" = "0%d.";
 
@@ -1382,15 +1382,15 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_btn_more_action_contrib" = "Ver todas las contribuciones";
 
 "home_v2_title_event" = "Participa en un evento solidario";
-"home_v2_subtitle_event" = "Mucha solidaridad cerca.";
+"home_v2_subtitle_event" = "Mucha solidaridad cerca";
 "home_v2_btn_more_event" = "Ver todos los eventos";
 
 "home_v2_title_group" = "Tus grupos de vecinos";
-"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida.";
+"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida";
 "home_v2_btn_more_group" = "Ver todos los grupos";
 
 "home_v2_title_map" = "Descubra direcciones útiles";
-"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas.";
+"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas";
 "home_v2_button_map" = "Mapa de lugares solidarios cerca de ti";
 
 "home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";
@@ -2289,9 +2289,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_mod_group_bt_mod" = "Editar";
 
 "event_mod_title" = "Editar mi evento";
-"event_create_title" = "nuevo evento";
-"event_create_title_phase" = "Escenario";
-"event_create_title_phase_nb" = "0%d.";
 
 "event_create_phase_1_name" = "Nombre del evento: obligatorio";
 "event_create_phase_1_name_placeholder" = "Dale al evento un nombre explícito";
@@ -2805,15 +2802,15 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_btn_more_action_contrib" = "Ver todas las contribuciones";
 
 "home_v2_title_event" = "Participa en un evento solidario";
-"home_v2_subtitle_event" = "Mucha solidaridad cerca.";
+"home_v2_subtitle_event" = "Mucha solidaridad cerca";
 "home_v2_btn_more_event" = "Ver todos los eventos";
 
 "home_v2_title_group" = "Tus grupos de vecinos";
-"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida.";
+"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida";
 "home_v2_btn_more_group" = "Ver todos los grupos";
 
 "home_v2_title_map" = "Descubra direcciones útiles";
-"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas.";
+"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas";
 "home_v2_button_map" = "Mapa de lugares solidarios cerca de ti";
 
 "home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";

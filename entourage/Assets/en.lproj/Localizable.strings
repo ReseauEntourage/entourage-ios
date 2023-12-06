@@ -850,7 +850,7 @@
 "event_mod_group_bt_mod" = "Edit";
 
 "event_mod_title" = "Edit my event";
-"event_create_title" = "new event";
+"event_create_title" = "New event";
 "event_create_title_phase" = "Stage";
 "event_create_title_phase_nb" = "0%d.";
 

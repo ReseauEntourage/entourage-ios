@@ -865,7 +865,7 @@
 "event_mod_group_bt_mod" = "Ändern";
 
 "event_mod_title" = "Bearbeiten Sie meine Veranstaltung";
-"event_create_title" = "neues Event";
+"event_create_title" = "Neues Event";
 "event_create_title_phase" = "Bühne";
 "event_create_title_phase_nb" = "0%d.";
 

@@ -865,7 +865,7 @@
 "event_mod_group_bt_mod" = "A modifica";
 
 "event_mod_title" = "Editează-mi evenimentul";
-"event_create_title" = "eveniment nou";
+"event_create_title" = "Eveniment nou";
 "event_create_title_phase" = "Etapă";
 "event_create_title_phase_nb" = "0%d.";
 
