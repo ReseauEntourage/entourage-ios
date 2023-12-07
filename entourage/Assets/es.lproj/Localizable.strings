@@ -2896,3 +2896,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "layout_translate_title_translation_title" = "Alguna información ha sido traducida automáticamente.";
 
 "params_translation" = "Traducción";
+"Category_Food" = "Alimentación";
+"Category_Accommodation" = "Alojamiento";
+"Category_Health" = "Salud";
+"Category_Refresh" = "Refrescarse";
+"Category_Toilets" = "Aseos";
+"Category_Fountains" = "Fuentes";
+"Category_Wash" = "Lavarse";
+"Category_Laundries" = "Lavanderías";
+"Category_Orient" = "Orientación";
+"Category_SelfCare" = "Cuidado Personal";
+"Category_Clothes" = "Ropa y Materiales";
+"Category_DonationBox" = "Caja de Donaciones/Lectura";
+"Category_Reintegration" = "Reinserción";
+"Category_Partners" = "Socios";
+"Category_Other" = "Otro";
