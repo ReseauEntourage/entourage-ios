@@ -246,7 +246,7 @@ struct GuideFilters {
         case .SolidarityGuideKeyCaring:
             return "guide_display_caring".localized
         case .SolidarityGuideKeyReinsertion:
-            return "guide_display_reinsertion".localized
+            return "Category_Reintegration".localized
         case .SolidarityGuideKeyPartners:
             return "Category_Partners".localized
         case .SolidarityGuideKeyToilett:
@@ -263,6 +263,8 @@ struct GuideFilters {
             return "Category_DonationBox".localized
         case .SolidarityGuideKeyBagages:
             return  "guide_display_bagageries".localized
+        case .SolidarityGuideKeyDouches:
+            return "guide_display_laver".localized
         default:
             return ""
         }
