@@ -802,7 +802,7 @@
 "home_events_title" = "Eventos\n";
 "home_groups_title" = "Grupos de vecinos";
 "home_event_title" = "Participación en un evento.";
-"home_group_title" = "grupo de vecinos";
+"home_group_title" = "Grupo de vecinos";
 "home_no_message_title" = "Aún no se han enviado mensajes";
 "home_no_event_title" = "Asiste a tu primer evento";
 "home_no_group_title" = "¡No esperes más para unirte a un grupo de vecinos!";
@@ -2225,7 +2225,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_events_title" = "Eventos\n";
 "home_groups_title" = "Grupos de vecinos";
 "home_event_title" = "Participación en un evento.";
-"home_group_title" = "grupo de vecinos";
+"home_group_title" = "Grupo de vecinos";
 "home_no_message_title" = "Aún no se han enviado mensajes";
 "home_no_event_title" = "Asiste a tu primer evento";
 "home_no_group_title" = "¡No esperes más para unirte a un grupo de vecinos!";

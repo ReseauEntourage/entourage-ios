@@ -234,34 +234,34 @@ struct GuideFilters {
     
     @objc static func categoryStringForKey(key:GuideFiltersEnums) -> String {
         switch (key) {
+            
         case .SolidarityGuideKeyFood:
-            return "guide_display_feed".localized
+            return "Category_Food".localized
         case .SolidarityGuideKeyHousing:
-            return "guide_display_housing".localized
+            return "Category_Accommodation".localized
         case .SolidarityGuideKeyHeal:
-            return "guide_display_heal".localized
+            return "Category_Health".localized
         case .SolidarityGuideKeyOrientation:
-            return "guide_display_orientation".localized
+            return "Category_Orient".localized
         case .SolidarityGuideKeyCaring:
             return "guide_display_caring".localized
         case .SolidarityGuideKeyReinsertion:
             return "guide_display_reinsertion".localized
         case .SolidarityGuideKeyPartners:
-            return "guide_display_partners".localized
-            
+            return "Category_Partners".localized
         case .SolidarityGuideKeyToilett:
-            return "guide_display_toilettes".localized
+            return "Category_Toilets".localized
         case .SolidarityGuideKeyFontaines:
-            return "guide_display_fontaines".localized
+            return "Category_Fountains".localized
         case .SolidarityGuideKeyDouches:
-            return "guide_display_laver".localized
+            return "Category_Refresh".localized
         case .SolidarityGuideKeyLaverLinge:
-            return "guide_display_laverie".localized
+            return "Category_Laundries".localized
             
         case .SolidarityGuideKeyVetements:
-            return "guide_display_vetements".localized
+            return "Category_Clothes".localized
         case .SolidarityGuideKeyBoitesDons:
-            return "guide_display_boite".localized
+            return "Category_DonationBox".localized
         case .SolidarityGuideKeyBagages:
             return  "guide_display_bagageries".localized
         default:

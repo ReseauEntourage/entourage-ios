@@ -1370,7 +1370,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 
 /* New Home string */
-"home_v2_title" = "Die App, die Verbindungen zwischen Nachbarn wiederherstellt";
+"home_v2_title" = "Die App, die Nachbarn zusammenbringt";
 
 "home_v2_title_action" = "Geben Sie einen Schub";
 "home_v2_subtitle_action" = "Deine Nachbarn brauchen dich!";
