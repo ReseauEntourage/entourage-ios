@@ -257,7 +257,6 @@ struct GuideFilters {
             return "Category_Refresh".localized
         case .SolidarityGuideKeyLaverLinge:
             return "Category_Laundries".localized
-            
         case .SolidarityGuideKeyVetements:
             return "Category_Clothes".localized
         case .SolidarityGuideKeyBoitesDons:
