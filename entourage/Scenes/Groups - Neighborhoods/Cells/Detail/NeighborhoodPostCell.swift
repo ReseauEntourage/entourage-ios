@@ -51,8 +51,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleTranslationGesture))
-        ui_view_translate.addGestureRecognizer(tapGesture)
+
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
@@ -113,12 +112,18 @@ class NeighborhoodPostCell: UITableViewCell {
     }
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
-        let lang_item = message.contentTranslations?.from_lang
-        if lang_item == LanguageManager.getCurrentDeviceLanguage(){
-            ui_view_translate.setVisibilityGone()
-        }else{
-            ui_view_translate.setVisibilityVisible(height: 42)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleTranslationGesture))
+
+        if(ui_view_translate != nil){
+            ui_view_translate.addGestureRecognizer(tapGesture)
+            let lang_item = message.contentTranslations?.from_lang
+            if lang_item == LanguageManager.getCurrentDeviceLanguage(){
+                ui_view_translate.setVisibilityGone()
+            }else{
+                ui_view_translate.setVisibilityVisible(height: 42)
+            }
         }
+
         
         self.postMessage = message
         self.delegate = delegate
