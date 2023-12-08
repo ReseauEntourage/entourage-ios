@@ -1436,7 +1436,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_lang_bienvenue" = "Bienvenue !";
 "onboarding_lang_select" = "Sélectionner la langue";
 "onboarding_lang_suivant" = "Suivant";
-"translation_bottom_fragment_title" = "Nous traduisons automatiquement les messages rédigés par les citoyens.";
+"translation_bottom_fragment_title" = "Nous traduisons automatiquement les messages rédigés par les utilisateurs de l’application.";
 "translation_bottom_fragment_main_title" = "Traduction";
 
 "action_social_name" = "Partage de Temps";
@@ -1467,7 +1467,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contact" = "Contacter";
 
 "report_modal_title_translate" = "Traduire";
-"report_modal_subtitle_translate" = "Nous traduisons automatiquement les messages rédigés par les citoyens";
+"report_modal_subtitle_translate" = "Nous traduisons automatiquement les messages rédigés par les utilisateurs de l’application";
 "layout_translate_title_original" = "Afficher la version originale";
 "layout_translate_title_translation" = "Afficher la traduction";
 "layout_translate_action_translation_button" = "Cliquer ici pour afficher la version originale";
