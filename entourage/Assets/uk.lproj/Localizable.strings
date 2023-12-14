@@ -395,6 +395,10 @@
 "all_event_title" = "Всі події";
 "my_event_title" = "Мої події";
 "mainUserTitleEvents" = "Події";
+"all_group_title" = "Усі групи";
+"my_group_title" = "Мої групи";
+"mainTitleGroup" = "Групи";
+
 
 "mainUserTitleGroup" = "Група\nсусідів";
 "mainUserTitleGroups" = "Групи\nсусідів";

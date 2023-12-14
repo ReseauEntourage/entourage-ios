@@ -26,6 +26,9 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
     @IBOutlet weak var ui_picto_10: UIImageView!
     
     @IBOutlet weak var ui_label_admin: UILabel?
+    class var identifier: String {
+        return String(describing: self)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

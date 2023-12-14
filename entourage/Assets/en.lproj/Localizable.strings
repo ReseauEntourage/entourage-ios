@@ -355,7 +355,7 @@
 
 "info_soliguide_1" = "Information on this location is provided by Soliguide, solidarity cartography.";
 "info_soliguide_2" = "For even more complete information available in several languages";
-"info_button_soliguide_consult" = "To consult";
+"info_button_soliguide_consult" = "Consult";
 "guideTitle" = "Solidarity guide";
 
 
@@ -392,6 +392,9 @@
 "all_event_title" = "All events";
 "my_event_title" = "My events";
 "mainUserTitleEvents" = "Events";
+"all_group_title" = "All groups";
+"my_group_title" = "My groups";
+"mainTitleGroup" = "Groups";
 
 "mainUserTitleGroup" = "Group\nof neighbors";
 "mainUserTitleGroups" = "Groups\nof neighbors";

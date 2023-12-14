@@ -259,6 +259,7 @@ class EventDetailFeedViewController: UIViewController {
                      
             }
             self.event = event
+            print("eho event id ", event?.uid)
             self.event?.posts?.removeAll()
             self.getMorePosts()
             self.splitMessages()

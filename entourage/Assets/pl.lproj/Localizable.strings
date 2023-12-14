@@ -40,6 +40,9 @@
 "tabbar_messages" = "Dyskusje";
 "tabbar_groups" = "Grupy";
 "tabbar_events" = "Wydarzenia";
+"all_group_title" = "Wszystkie grupy";
+"my_group_title" = "Moje grupy";
+"mainTitleGroup" = "Grupy";
 
 
 "errorSettings" = "Autorisation requise";
@@ -395,6 +398,9 @@
 "all_event_title" = "Tous les événements";
 "my_event_title" = "Mes événements";
 "mainUserTitleEvents" = "Événements";
+"all_group_title" = "Tous les groupes";
+"my_group_title" = "Mes groupes";
+"mainUserTitleGroup" = "Groupes";
 
 "mainUserTitleGroup" = "Groupe\nde voisins";
 "mainUserTitleGroups" = "Groupes\nde voisins";

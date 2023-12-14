@@ -394,6 +394,10 @@
 "all_event_title" = "Tous les événements";
 "my_event_title" = "Mes événements";
 "mainUserTitleEvents" = "Événements";
+"all_group_title" = "Tous les groupes";
+"my_group_title" = "Mes groupes";
+"mainTitleGroup" = "Groupes";
+
 
 "mainUserTitleGroup" = "Groupe\nde voisins";
 "mainUserTitleGroups" = "Groupes\nde voisins";

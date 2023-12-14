@@ -396,6 +396,10 @@
 "all_event_title" = "كل الأحداث";
 "my_event_title" = "أحداثي";
 "mainUserTitleEvents" = "الأحداث";
+"all_group_title" = "جميع المجموعات";
+"my_group_title" = "مجموعاتي";
+"mainTitleGroup" = "المجموعات";
+
 
 "mainUserTitleGroup" = "مجموعة\nمن الجيران";
 "mainUserTitleGroups" = "المجموعات\nمن الجيران";

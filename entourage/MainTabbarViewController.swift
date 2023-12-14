@@ -156,7 +156,7 @@ class MainTabbarViewController: UITabBarController {
         messagesVC.tabBarItem.badgeColor = .appOrangeLight
         
         
-        let _groupVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "home")
+        let _groupVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "home_new_group_vc")
         groupVC = UINavigationController.init(rootViewController: _groupVC)
         groupVC.isNavigationBarHidden = true
         groupVC.tabBarItem.title = "tabbar_groups".localized

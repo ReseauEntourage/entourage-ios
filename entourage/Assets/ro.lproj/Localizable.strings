@@ -394,6 +394,10 @@
 "all_event_title" = "Toate evenimentele";
 "my_event_title" = "Evenimentele mele";
 "mainUserTitleEvents" = "Evenimente";
+"all_group_title" = "Toate grupurile";
+"my_group_title" = "Grupurile mele";
+"mainTitleGroup" = "Grupuri";
+
 
 "mainUserTitleGroup" = "Grup\nde vecini";
 "mainUserTitleGroups" = "Grupuri\nde vecini";

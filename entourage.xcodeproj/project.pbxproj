@@ -454,6 +454,8 @@
 		26C1BB662A3AF0D100C81C09 /* WelcomeFourImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB652A3AF0D100C81C09 /* WelcomeFourImageCell.swift */; };
 		26C1BB682A3AF13F00C81C09 /* WelcomeFourImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C1BB672A3AF13F00C81C09 /* WelcomeFourImageCell.xib */; };
 		26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */; };
+		26C70B402B2B46B1005C8846 /* NeighborhoodV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */; };
+		26C70B422B2B5D6F005C8846 /* CellGroupV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */; };
 		26CC9F7A2A331CF5005F7408 /* WelcomeThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */; };
 		26CC9F7D2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */; };
 		26CC9F7F2A337243005F7408 /* SecondaryTextWelcomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */; };
@@ -924,6 +926,8 @@
 		26C1BB652A3AF0D100C81C09 /* WelcomeFourImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourImageCell.swift; sourceTree = "<group>"; };
 		26C1BB672A3AF13F00C81C09 /* WelcomeFourImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFourImageCell.xib; sourceTree = "<group>"; };
 		26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeDemandExampleCell.swift; sourceTree = "<group>"; };
+		26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodV2ViewController.swift; sourceTree = "<group>"; };
+		26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellGroupV2.xib; sourceTree = "<group>"; };
 		26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeViewController.swift; sourceTree = "<group>"; };
 		26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryTextWelcomeCell.xib; sourceTree = "<group>"; };
 		26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTextWelcomeCell.swift; sourceTree = "<group>"; };
@@ -1554,6 +1558,8 @@
 				02C6E86A28203E1F009D4289 /* Signal */,
 				0224597B27FF54E300944DE4 /* Create */,
 				0224597227FF31FC00944DE4 /* Cells */,
+				26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */,
+				26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */,
 			);
 			path = "Groups - Neighborhoods";
 			sourceTree = "<group>";
@@ -2099,6 +2105,7 @@
 				2694A7462ACD68070042CFCA /* HomeCellEvent.xib in Resources */,
 				02A92C2E289816C8000DFF95 /* Actions.xcassets in Resources */,
 				0224597127FF290900944DE4 /* MJErrorInputTextView.xib in Resources */,
+				26C70B422B2B5D6F005C8846 /* CellGroupV2.xib in Resources */,
 				26F03C972A1B850C00450A61 /* WelcomeOneContentMain.xib in Resources */,
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
 				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
@@ -2493,6 +2500,7 @@
 				02A3DD3727FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift in Sources */,
 				26BE84602A67F26000DC2586 /* ActionPassedOneVC.swift in Sources */,
 				0208937B28BCFDBC00160F1E /* DeeplinkManager.swift in Sources */,
+				26C70B402B2B46B1005C8846 /* NeighborhoodV2ViewController.swift in Sources */,
 				021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */,
 				0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */,
 				022744732795C0FB005600A1 /* Partner.swift in Sources */,

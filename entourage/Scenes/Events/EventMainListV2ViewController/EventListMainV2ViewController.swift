@@ -374,6 +374,10 @@ extension EventListMainV2ViewController:EventFiltersDelegate {
 
 //MARK: Here handle pagination for collectionview
 extension EventListMainV2ViewController:EventListCollectionTableViewCellDelegate{
+    func goToMyGroup(group: Neighborhood) {
+        //Nothing to do
+    }
+    
     func goToMyEvent(event: Event) {
         self.showEvent(eventId: event.uid, event: event)
     }
