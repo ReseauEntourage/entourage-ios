@@ -28,6 +28,9 @@ class NeighborhoodV2ViewController:UIViewController {
     @IBOutlet weak var ui_tableview_top_constraint: NSLayoutConstraint!
     
     @IBOutlet weak var ui_bottom_title_constraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var ui_expanded_btn: UIButton!
+    @IBOutlet weak var ui_retracted_btn: UIButton!
     //VARIABLE
     private var groups = [Neighborhood]()
     private var myGroups = [Neighborhood]()
@@ -70,6 +73,16 @@ class NeighborhoodV2ViewController:UIViewController {
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
+    
+    @IBAction func createGroupexpanded(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_Group_Plus)
+        let navVC = UIStoryboard.init(name: StoryboardName.neighborhoodCreate, bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
+        navVC.parentController = self.tabBarController
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
+    }
+    
+    
     func loadForInit(){
         isLoading = true
         IHProgressHUD.show()
@@ -154,6 +167,8 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
                     self.ui_title.font = ApplicationTheme.getFontQuickSandBold(size: fontSize)
                     self.ui_tableview_top_constraint.constant = 100 - 0.4 * yOffset
                     self.ui_bottom_title_constraint.constant = 20 - 0.1 * yOffset
+                    self.ui_expanded_btn.isHidden = false
+                    self.ui_retracted_btn.isHidden = true
                     self.view.layoutIfNeeded()
 
                 } else if yOffset > 100 {
@@ -161,6 +176,8 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
                     self.ui_title.font = ApplicationTheme.getFontQuickSandBold(size: 18)
                     self.ui_tableview_top_constraint.constant = 60
                     self.ui_bottom_title_constraint.constant = 10
+                    self.ui_expanded_btn.isHidden = true
+                    self.ui_retracted_btn.isHidden = false
                     self.view.layoutIfNeeded()
                 }
             }

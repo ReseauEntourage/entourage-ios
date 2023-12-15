@@ -1983,7 +1983,7 @@
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Rejoindre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTC-Vg-fqi">
-                                                            <rect key="frame" x="20" y="13.5" width="73" height="17.5"/>
+                                                            <rect key="frame" x="20" y="12" width="73" height="20.5"/>
                                                             <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -2018,13 +2018,13 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTC-fT-9Za">
-                                                    <rect key="frame" x="28" y="183" width="350" height="17.5"/>
+                                                    <rect key="frame" x="28" y="183" width="350" height="19"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW0-ZT-oQz" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                    <rect key="frame" x="28" y="204.5" width="350" height="17.5"/>
+                                                    <rect key="frame" x="28" y="206" width="350" height="20.5"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2035,7 +2035,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgx-5d-gDq" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
-                                                    <rect key="frame" x="28" y="246" width="350" height="229"/>
+                                                    <rect key="frame" x="28" y="250.5" width="350" height="224.5"/>
                                                     <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="FDc-Ka-865"/>
@@ -2350,7 +2350,7 @@
                                                         <constraint firstItem="pW7-qF-Gsm" firstAttribute="width" secondItem="e3j-pc-Xzr" secondAttribute="width" id="r3j-Rk-ffx"/>
                                                     </constraints>
                                                 </stackView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KkR-5U-fiW">
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KkR-5U-fiW">
                                                     <rect key="frame" x="0.0" y="115" width="404" height="1"/>
                                                     <color key="backgroundColor" name="Beige"/>
                                                     <constraints>
@@ -2404,7 +2404,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amF-QM-NDA">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amF-QM-NDA">
                                 <rect key="frame" x="320" y="780" width="62" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="7Vv-dV-yHh"/>
@@ -2414,6 +2414,27 @@
                                 <state key="normal" image="ic_button_plus_fill"/>
                                 <connections>
                                     <action selector="create_group:" destination="yD5-G4-0ul" eventType="touchUpInside" id="KjS-g0-Jga"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yu0-VK-XeE">
+                                <rect key="frame" x="248" y="794" width="131" height="34"/>
+                                <color key="backgroundColor" name="orange_app"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="edg-xD-7x4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="14"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Créer un groupe">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="createGroupexpanded:" destination="yD5-G4-0ul" eventType="touchUpInside" id="Yyl-LL-dXD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2428,6 +2449,8 @@
                             <constraint firstItem="bvn-q0-PJ1" firstAttribute="trailing" secondItem="g2e-hk-rYJ" secondAttribute="trailing" constant="5" id="Lhl-8g-5aq"/>
                             <constraint firstItem="N8Y-tg-g50" firstAttribute="leading" secondItem="bvn-q0-PJ1" secondAttribute="leading" id="Smv-t6-BKl"/>
                             <constraint firstAttribute="trailing" secondItem="N8Y-tg-g50" secondAttribute="trailing" id="T3v-IB-CAf"/>
+                            <constraint firstItem="bvn-q0-PJ1" firstAttribute="bottom" secondItem="yu0-VK-XeE" secondAttribute="bottom" constant="34" id="eOT-RW-AhQ"/>
+                            <constraint firstItem="yu0-VK-XeE" firstAttribute="trailing" secondItem="g2e-hk-rYJ" secondAttribute="trailing" constant="-30" id="gqQ-oP-E9N"/>
                             <constraint firstAttribute="trailing" secondItem="amF-QM-NDA" secondAttribute="trailing" constant="32" id="mMs-Sn-ef8"/>
                             <constraint firstItem="g2e-hk-rYJ" firstAttribute="top" secondItem="Ho7-k3-UvD" secondAttribute="top" constant="100" id="n42-jn-xLs"/>
                             <constraint firstItem="g2e-hk-rYJ" firstAttribute="top" secondItem="LQE-yW-W0n" secondAttribute="bottom" constant="20" id="tQR-Vr-BZx"/>
@@ -2437,6 +2460,8 @@
                     <connections>
                         <outlet property="ui_bottom_title_constraint" destination="tQR-Vr-BZx" id="IwM-j7-Dhy"/>
                         <outlet property="ui_btn_create_group" destination="amF-QM-NDA" id="d5n-dn-Sh7"/>
+                        <outlet property="ui_expanded_btn" destination="yu0-VK-XeE" id="4h0-WU-1w7"/>
+                        <outlet property="ui_retracted_btn" destination="amF-QM-NDA" id="lKn-28-oqC"/>
                         <outlet property="ui_table_view" destination="g2e-hk-rYJ" id="9G3-HU-EKm"/>
                         <outlet property="ui_tableview_top_constraint" destination="n42-jn-xLs" id="0RY-Vb-iTY"/>
                         <outlet property="ui_title" destination="LQE-yW-W0n" id="tc9-jh-ZOz"/>
@@ -2449,7 +2474,7 @@
     </scenes>
     <designables>
         <designable name="qW0-ZT-oQz">
-            <size key="intrinsicContentSize" width="93.5" height="17.5"/>
+            <size key="intrinsicContentSize" width="90.5" height="20.5"/>
         </designable>
     </designables>
     <resources>
