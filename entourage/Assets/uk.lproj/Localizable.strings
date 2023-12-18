@@ -1494,3 +1494,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Category_Reintegration" = "Реінтеграція";
 "Category_Partners" = "Партнери";
 "Category_Other" = "Інше";
+"create_group_btn_title" = "Створити групу";

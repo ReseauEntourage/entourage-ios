@@ -2915,3 +2915,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Category_Reintegration" = "Reinserción";
 "Category_Partners" = "Socios";
 "Category_Other" = "Otro";
+"create_group_btn_title" = "Crear un grupo";

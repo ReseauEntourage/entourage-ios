@@ -46,6 +46,7 @@ class NeighborhoodV2ViewController:UIViewController {
     override func viewDidLoad() {
         AnalyticsLoggerManager.logEvent(name: View_Group_Show)
         ui_title.text = "mainTitleGroup".localized
+        ui_expanded_btn.setTitle("create_group_btn_title".localized, for: .normal) 
         pullRefreshControl.attributedTitle = NSAttributedString(string: "Loading".localized)
         pullRefreshControl.tintColor = .appOrange
         pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)

@@ -1495,3 +1495,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Category_Reintegration" = "إعادة التأهيل";
 "Category_Partners" = "الشركاء";
 "Category_Other" = "أخرى";
+"create_group_btn_title" = "إنشاء مجموعة";

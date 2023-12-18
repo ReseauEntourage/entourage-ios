@@ -1493,3 +1493,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Category_Reintegration" = "Reintegrare";
 "Category_Partners" = "Parteneri";
 "Category_Other" = "Altele";
+"create_group_btn_title" = "Crează un grup";

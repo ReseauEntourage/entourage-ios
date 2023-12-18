@@ -1496,3 +1496,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Category_Reintegration" = "Reintegracja";
 "Category_Partners" = "Partnerzy";
 "Category_Other" = "Inne";
+"create_group_btn_title" = "Utwórz grupę";
