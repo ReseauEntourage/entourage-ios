@@ -471,7 +471,11 @@ extension HomeV2ViewController{
                 }else{
                     self?.isContributionPreference = false
                 }
+                if  userHome.unclosedAction != nil {
+                    self?.showPopUpAction(actionType: (userHome.unclosedAction?.actionType)!, title: (userHome.unclosedAction?.title)!)
+                }
             }
+
             self?.getDemandes()
         }
     }
@@ -481,6 +485,32 @@ extension HomeV2ViewController{
         }
     }
     
+    func showPopUpAction(actionType:String, title:String) {
+        let actionId = self.userHome.unclosedAction?.id
+        AnalyticsLoggerManager.logEvent(name: View__StateDemandPop__Day10)
+
+        let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+        if actionType == "solicitation"{
+            if let vc = sb.instantiateViewController(withIdentifier: "ActionPasseOneDemand") as? ActionPasseOneDemand {
+                vc.setContent(content: title)
+                vc.setActionId(actionId: actionId)
+                vc.setActionType(actionType: actionType)
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    currentVc.present(vc, animated: true)
+                }
+            }
+        }
+        if actionType == "contribution"{
+            if let vc = sb.instantiateViewController(withIdentifier: "ActionPassedOneContrib") as? ActionPassedOneContrib {
+                vc.setContent(content: title)
+                vc.setActionId(actionId: actionId)
+                vc.setActionType(actionType: actionType)
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    currentVc.present(vc, animated: true)
+                }
+            }
+        }
+    }
 }
 
 //MARK: CLICK ON CELLS FUNCTIONS

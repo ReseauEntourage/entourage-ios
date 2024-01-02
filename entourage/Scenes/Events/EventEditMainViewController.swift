@@ -495,7 +495,7 @@ extension EventEditMainViewController: MJNavBackViewDelegate {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "eventModPopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
         let buttonValidate = MJAlertButtonType(title: "eventModPopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: "eventModPopCloseBackTitle".localized, message: "eventModPopCloseBackMessage".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        alertVC.configureAlert(alertTitle: "eventModPopCloseBackTitle".localized, message: "eventModPopCloseBackMessage".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         alertVC.delegate = self
         alertVC.show()
     }
