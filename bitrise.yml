@@ -32,7 +32,19 @@ workflows:
         - upload_bitcode: "no"
         - compile_bitcode: "no"
         - distribution_method: ad-hoc
-    - deploy-to-bitrise-io: {}
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_user_groups: none
+        - deploy_path: $BITRISE_IPA_PATH
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_user_groups: none
+        - deploy_path: $BITRISE_DSYM_PATH
+    - firebase-dsym-upload:
+        inputs:
+        - fdu_fabric_location: ./firebase_tools/upload-symbols
+        - fdu_logging: "yes"
+        - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
     - ruby-script:
         inputs:
         - ruby_content: |-
