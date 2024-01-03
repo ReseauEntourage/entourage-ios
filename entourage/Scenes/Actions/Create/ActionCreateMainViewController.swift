@@ -95,10 +95,10 @@ class ActionCreateMainViewController: UIViewController {
         ui_button_validate_charte.setTitle("accept_charte".localized, for: .normal)
         
         arrayDesc = ["action_charte_1".localized,"action_charte_2".localized,
-                     "action_charte_3".localized,"action_charte_4".localized,"action_charte_5".localized]
+                     "action_charte_3".localized,"action_charte_4".localized,"action_charte_5".localized, "create_group_btn_title".localized]
         
         arrayTitle = ["action_charte_1_title".localized,"action_charte_2_title".localized,
-                      "action_charte_3_title".localized,"action_charte_4_title".localized,"action_charte_5_title".localized]
+                      "action_charte_3_title".localized,"action_charte_4_title".localized,"action_charte_5_title".localized, "friendly_links_title".localized]
         ui_tableview_charte.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_tableview_charte.delegate = self
         ui_tableview_charte.dataSource = self

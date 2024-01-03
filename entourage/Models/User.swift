@@ -335,7 +335,6 @@ struct UserStats:Codable {
     var eventsCount:Int = 0
     var contribCreationCount:Int = 0
     var askCreactionCount:Int = 0
-    var isGoodWavesValidated:Bool = false
     var neighborhoodsCount:Int = 0
     var outingsCount:Int? = 0
     
@@ -347,7 +346,6 @@ struct UserStats:Codable {
         case eventsCount = "events_count"
         case contribCreationCount = "contribution_creation_count"
         case askCreactionCount = "ask_for_help_creation_count"
-        case isGoodWavesValidated = "good_waves_participation"
         case neighborhoodsCount = "neighborhoods_count"
         case outingsCount = "outings_count"
     }

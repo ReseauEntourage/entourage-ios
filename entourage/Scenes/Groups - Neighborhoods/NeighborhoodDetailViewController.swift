@@ -325,7 +325,7 @@ class NeighborhoodDetailViewController: UIViewController {
         }
         
         let alertVC = MJAlertController()
-        let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontCourantBoldOrange(size: 15), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontH1Blanc(size: 15), bgColor: .appOrange, cornerRadius: -1)
         alertVC.alertTagName = .welcomeMessage
         
         alertVC.configureAlert(alertTitle: title, message: message, buttonrightType: buttonWelcome, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: false)
