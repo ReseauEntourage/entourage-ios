@@ -123,14 +123,23 @@ class ActionFullTopCell: UITableViewCell {
         ui_description.text = action.description
         let lang_item = action.descriptionTranslations?.from_lang
         if lang_item == LanguageManager.getCurrentDeviceLanguage() {
-            isTranslated = false
+            // Cacher ui_view_translate si c'est la même langue que celle de l'appareil
             ui_view_translate.setVisibilityGone()
-            ui_title_main.text = action.titleTranslations?.original
-            ui_description.text = action.descriptionTranslations?.original
-        }else{
-            isTranslated = true
+        } else {
+            // Afficher ui_view_translate si les langues sont différentes
+
+        }
+        
+        let isTranslatedByDefault = LanguageManager.getTranslatedByDefaultValue()
+
+        if isTranslatedByDefault {
+            // Si l'utilisateur préfère la traduction par défaut
             ui_title_main.text = action.titleTranslations?.translation
             ui_description.text = action.descriptionTranslations?.translation
+        } else {
+            // Sinon, afficher le texte original
+            ui_title_main.text = action.titleTranslations?.original
+            ui_description.text = action.descriptionTranslations?.original
         }
         
         self.action = action
