@@ -307,7 +307,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_view_container" destination="ygl-BQ-bh6" id="I2q-dv-HKt"/>
                 <outlet property="ui_view_translate" destination="jal-ts-aFd" id="LC4-oe-Y2l"/>
             </connections>
-            <point key="canvasLocation" x="131.8840579710145" y="98.102678571428569"/>
+            <point key="canvasLocation" x="-296" y="97"/>
         </tableViewCell>
     </objects>
     <designables>

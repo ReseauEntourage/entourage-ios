@@ -120,6 +120,7 @@ class EventDetailFeedViewController: UIViewController {
         ui_tableview.register(UINib(nibName: EventDetailTopFullCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopFullCell.identifier)
         ui_tableview.register(UINib(nibName: EventDetailTopLightCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopLightCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostTranslationCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTranslationCell.identifier)
         
         ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
         ui_tableview.register(UINib(nibName: EventListSectionCell.neighborhoodHeaderIdentifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier)
@@ -261,8 +262,8 @@ class EventDetailFeedViewController: UIViewController {
             self.event = event
             print("eho event id ", event?.uid)
             self.event?.posts?.removeAll()
-            self.getMorePosts()
             self.splitMessages()
+            self.getMorePosts()
             self.isLoading = false
             
             if event?.isCanceled() ?? false {
@@ -285,23 +286,51 @@ class EventDetailFeedViewController: UIViewController {
     func getMorePosts() {
         self.isLoading = true
         EventService.getEventPostsPaging(id: eventId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
-            if let post = post {
+            guard let post = post, error == nil else {
+                // Gérer l'erreur ici si nécessaire
+                self.isLoading = false
+                return
+            }
+
+            DispatchQueue.main.async {
+                // Mettre à jour les données
                 self.event?.posts?.append(contentsOf: post)
                 self.splitMessages()
-                if self.hasNewAndOldSections {
-                    UIView.performWithoutAnimation {
-                        self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .none)
+
+                // Mise à jour de la vue table en fonction des scénarios
+                self.ui_tableview.performBatchUpdates({
+                    let currentSections = self.ui_tableview.numberOfSections
+
+                    // Scénario 1: Aucun message
+                    if self.event?.posts?.isEmpty ?? true {
+                        if currentSections > 0 {
+                            self.ui_tableview.deleteSections(IndexSet(integersIn: 0..<currentSections), with: .fade)
+                        }
+                    } else {
+                        // Scénario 2: Messages anciens et/ou nouveaux
+                        if self.hasNewAndOldSections {
+                            if currentSections == 1 {
+                                // Ajouter une section pour les nouveaux messages
+                                self.ui_tableview.insertSections(IndexSet(integer: 1), with: .fade)
+                            }
+                            // Recharger la section des messages anciens
+                            self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .fade)
+                        } else if currentSections == 3 {
+                            // Revenir à une seule section si nécessaire
+                            self.ui_tableview.deleteSections(IndexSet(integer: 2), with: .fade)
+                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
+                        } else {
+                            // Recharger la section existante
+                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
+                        }
                     }
-                }
-                else {
-                    UIView.performWithoutAnimation {
-                        self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .none)
-                    }
-                }
+                }, completion: nil)
+
                 self.isLoading = false
             }
         }
     }
+
     
     func splitMessages() {
         guard let messages = event?.posts else {
@@ -577,6 +606,9 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
             }
+            if postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid {
+                identifier = NeighborhoodPostTranslationCell.identifier
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
@@ -605,6 +637,9 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         if postmessage.status == "deleted" {
             identifier = NeighborhoodPostDeletedCell.identifier
+        }
+        if postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid {
+            identifier = NeighborhoodPostTranslationCell.identifier
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
         cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)

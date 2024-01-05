@@ -238,3 +238,6 @@ class NeighborhoodPostImageCell: NeighborhoodPostCell {
 class NeighborhoodPostDeletedCell:NeighborhoodPostCell{
     
 }
+class NeighborhoodPostTranslationCell:NeighborhoodPostCell{
+    
+}
