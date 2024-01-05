@@ -76,10 +76,12 @@ class NeighborhoodPostCell: UITableViewCell {
     func toggleTranslation() {
         isTranslated.toggle()
         // Mise à jour de ui_label_translate
-        ui_label_translate.text = isTranslated ? "layout_translate_title_original".localized : "layout_translate_title_translation".localized
-        ui_label_translate.font = UIFont(name: "Quicksand-Bold", size: 13)
-        ui_label_translate.textColor = UIColor.orange // Remplacez par la couleur orange exacte si nécessaire
-        ui_label_translate.isHighlighted = true // Surlignement
+        if ui_label_translate != nil {
+            ui_label_translate.text = isTranslated ? "layout_translate_title_original".localized : "layout_translate_title_translation".localized
+            ui_label_translate.font = UIFont(name: "Quicksand-Bold", size: 13)
+            ui_label_translate.textColor = UIColor.orange // Remplacez par la couleur orange exacte si nécessaire
+            ui_label_translate.isHighlighted = true // Surlignement
+        }
         
         // Mise à jour de ui_comment
         if isTranslated {
@@ -116,12 +118,6 @@ class NeighborhoodPostCell: UITableViewCell {
 
         if(ui_view_translate != nil){
             ui_view_translate.addGestureRecognizer(tapGesture)
-            let lang_item = message.contentTranslations?.from_lang
-            if lang_item == LanguageManager.getCurrentDeviceLanguage(){
-                ui_view_translate.setVisibilityGone()
-            }else{
-                ui_view_translate.setVisibilityVisible(height: 42)
-            }
         }
 
         

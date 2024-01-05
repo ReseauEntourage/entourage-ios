@@ -240,29 +240,51 @@ class NeighborhoodDetailViewController: UIViewController {
     func getMorePosts() {
         self.isLoading = true
         NeighborhoodService.getNeighborhoodPostsPaging(id: neighborhoodId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
-            if let post = post {
+            guard let post = post, error == nil else {
+                // Gérer l'erreur ici si nécessaire
+                self.isLoading = false
+                return
+            }
+
+            DispatchQueue.main.async {
+                // Mettre à jour les données
                 self.neighborhood?.messages?.append(contentsOf: post)
                 self.splitMessages()
-                let totalSections = self.numberOfSections(in: self.ui_tableview)
-                if self.hasNewAndOldSections && totalSections > 2 {
-                    UIView.performWithoutAnimation {
-                        self.ui_tableview.beginUpdates()
-                        self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .none)
-                        self.ui_tableview.endUpdates()
+
+                // Mise à jour de la vue table en fonction des scénarios
+                self.ui_tableview.performBatchUpdates({
+                    let currentSections = self.ui_tableview.numberOfSections
+
+                    // Scénario 1: Aucun message
+                    if self.neighborhood?.messages?.isEmpty ?? true {
+                        if currentSections > 0 {
+                            self.ui_tableview.deleteSections(IndexSet(integersIn: 0..<currentSections), with: .fade)
+                        }
+                    } else {
+                        // Scénario 2: Messages anciens et/ou nouveaux
+                        if self.hasNewAndOldSections {
+                            if currentSections == 1 {
+                                // Ajouter une section pour les nouveaux messages
+                                self.ui_tableview.insertSections(IndexSet(integer: 1), with: .fade)
+                            }
+                            // Recharger la section des messages anciens
+                            self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .fade)
+                        } else if currentSections == 3 {
+                            // Revenir à une seule section si nécessaire
+                            self.ui_tableview.deleteSections(IndexSet(integer: 2), with: .fade)
+                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
+                        } else {
+                            // Recharger la section existante
+                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
+                        }
                     }
-                }
-                else if totalSections > 1 {
-                    UIView.performWithoutAnimation {
-                        self.ui_tableview.beginUpdates()
-                        self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .none)
-                        self.ui_tableview.endUpdates()
-                    }
-                }
+                }, completion: nil)
+
                 self.isLoading = false
             }
-            //TODO: Error ?
         }
     }
+
 
     
     func splitMessages() {
@@ -534,10 +556,12 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
-                if postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid {
+                if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                     identifier = NeighborhoodPostTranslationCell.identifier
                 }
-                
+                print("eho user id ok ? " , UserDefaults.currentUser?.sid == postmessage.user?.sid)
+                print("eho translation ok ? " , postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage())
+
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
                 return cell
@@ -568,10 +592,12 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
-                if postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid {
+                if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                     identifier = NeighborhoodPostTranslationCell.identifier
                 }
-                
+                print("eho user id ok ? " , UserDefaults.currentUser?.sid == postmessage.user?.sid)
+                print("eho translation ok ? " , postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage())
+
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
                 return cell
@@ -586,9 +612,11 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
             }
-            if postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid {
+            if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                 identifier = NeighborhoodPostTranslationCell.identifier
             }
+            print("eho user id ok ? " , UserDefaults.currentUser?.sid == postmessage.user?.sid)
+            print("eho translation ok ? " , postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage())
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell

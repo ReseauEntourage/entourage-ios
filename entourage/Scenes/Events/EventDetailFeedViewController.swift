@@ -606,7 +606,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
             }
-            if postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid {
+            if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                 identifier = NeighborhoodPostTranslationCell.identifier
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
@@ -638,7 +638,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         if postmessage.status == "deleted" {
             identifier = NeighborhoodPostDeletedCell.identifier
         }
-        if postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid {
+        if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
             identifier = NeighborhoodPostTranslationCell.identifier
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
