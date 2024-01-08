@@ -559,8 +559,9 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                     identifier = NeighborhoodPostTranslationCell.identifier
                 }
-                print("eho user id ok ? " , UserDefaults.currentUser?.sid == postmessage.user?.sid)
-                print("eho translation ok ? " , postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage())
+                if(postmessage.contentTranslations == nil){
+                    postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+                }
 
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
@@ -595,8 +596,9 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                     identifier = NeighborhoodPostTranslationCell.identifier
                 }
-                print("eho user id ok ? " , UserDefaults.currentUser?.sid == postmessage.user?.sid)
-                print("eho translation ok ? " , postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage())
+                if(postmessage.contentTranslations == nil){
+                    postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+                }
 
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
@@ -615,8 +617,9 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                 identifier = NeighborhoodPostTranslationCell.identifier
             }
-            print("eho user id ok ? " , UserDefaults.currentUser?.sid == postmessage.user?.sid)
-            print("eho translation ok ? " , postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage())
+            if(postmessage.contentTranslations == nil){
+                postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell

@@ -845,8 +845,35 @@
                                                                 <constraint firstAttribute="height" constant="30" id="zkX-Sn-Im8"/>
                                                             </constraints>
                                                         </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oa-zY-U3S">
+                                                            <rect key="frame" x="0.0" y="42" width="382" height="50"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_translation" translatesAutoresizingMaskIntoConstraints="NO" id="bgY-Mt-Dk1">
+                                                                    <rect key="frame" x="20" y="15" width="20" height="20"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="20" id="Dry-2T-qYn"/>
+                                                                        <constraint firstAttribute="width" constant="20" id="w0t-nq-Egh"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnc-j6-WJT">
+                                                                    <rect key="frame" x="48" y="15" width="334" height="18"/>
+                                                                    <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
+                                                                    <color key="textColor" name="grey_light"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" name="BeigeClair"/>
+                                                            <constraints>
+                                                                <constraint firstItem="bnc-j6-WJT" firstAttribute="top" secondItem="bgY-Mt-Dk1" secondAttribute="top" id="2AI-cn-N2D"/>
+                                                                <constraint firstItem="bgY-Mt-Dk1" firstAttribute="centerY" secondItem="6oa-zY-U3S" secondAttribute="centerY" id="QZB-Zh-M2y"/>
+                                                                <constraint firstItem="bnc-j6-WJT" firstAttribute="leading" secondItem="bgY-Mt-Dk1" secondAttribute="trailing" constant="8" symbolic="YES" id="WCN-eM-8Ow"/>
+                                                                <constraint firstAttribute="trailing" secondItem="bnc-j6-WJT" secondAttribute="trailing" id="gnR-Eg-bOr"/>
+                                                                <constraint firstItem="bgY-Mt-Dk1" firstAttribute="leading" secondItem="6oa-zY-U3S" secondAttribute="leading" constant="20" id="lfZ-V4-MiX"/>
+                                                                <constraint firstAttribute="height" constant="50" id="mx6-Lh-CuB"/>
+                                                            </constraints>
+                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MFy-g9-7LG">
-                                                            <rect key="frame" x="0.0" y="42" width="382" height="197"/>
+                                                            <rect key="frame" x="0.0" y="104" width="382" height="197"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholder_action" translatesAutoresizingMaskIntoConstraints="NO" id="brN-QU-gOd">
                                                                     <rect key="frame" x="16" y="4" width="350" height="193"/>
@@ -890,33 +917,6 @@
                                                                 <constraint firstItem="ptz-cm-Fcz" firstAttribute="top" secondItem="brN-QU-gOd" secondAttribute="top" constant="8" id="Xe9-WE-dnn"/>
                                                                 <constraint firstItem="brN-QU-gOd" firstAttribute="leading" secondItem="MFy-g9-7LG" secondAttribute="leading" constant="16" id="g9a-Ny-Py1"/>
                                                                 <constraint firstItem="ptz-cm-Fcz" firstAttribute="trailing" secondItem="brN-QU-gOd" secondAttribute="trailing" constant="-8" id="pl8-gd-qEi"/>
-                                                            </constraints>
-                                                        </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oa-zY-U3S">
-                                                            <rect key="frame" x="0.0" y="251" width="382" height="50"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_translation" translatesAutoresizingMaskIntoConstraints="NO" id="bgY-Mt-Dk1">
-                                                                    <rect key="frame" x="20" y="15" width="20" height="20"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="20" id="Dry-2T-qYn"/>
-                                                                        <constraint firstAttribute="width" constant="20" id="w0t-nq-Egh"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnc-j6-WJT">
-                                                                    <rect key="frame" x="48" y="15" width="334" height="18"/>
-                                                                    <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
-                                                                    <color key="textColor" name="grey_light"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" name="BeigeClair"/>
-                                                            <constraints>
-                                                                <constraint firstItem="bnc-j6-WJT" firstAttribute="top" secondItem="bgY-Mt-Dk1" secondAttribute="top" id="2AI-cn-N2D"/>
-                                                                <constraint firstItem="bgY-Mt-Dk1" firstAttribute="centerY" secondItem="6oa-zY-U3S" secondAttribute="centerY" id="QZB-Zh-M2y"/>
-                                                                <constraint firstItem="bnc-j6-WJT" firstAttribute="leading" secondItem="bgY-Mt-Dk1" secondAttribute="trailing" constant="8" symbolic="YES" id="WCN-eM-8Ow"/>
-                                                                <constraint firstAttribute="trailing" secondItem="bnc-j6-WJT" secondAttribute="trailing" id="gnR-Eg-bOr"/>
-                                                                <constraint firstItem="bgY-Mt-Dk1" firstAttribute="leading" secondItem="6oa-zY-U3S" secondAttribute="leading" constant="20" id="lfZ-V4-MiX"/>
-                                                                <constraint firstAttribute="height" constant="50" id="mx6-Lh-CuB"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QE6-Ii-ayy">

@@ -76,12 +76,16 @@ class NeighborhoodPostCell: UITableViewCell {
     func toggleTranslation() {
         isTranslated.toggle()
         // Mise à jour de ui_label_translate
-        if ui_label_translate != nil {
-            ui_label_translate.text = isTranslated ? "layout_translate_title_original".localized : "layout_translate_title_translation".localized
+        if let ui_label_translate = ui_label_translate {
+            let text = isTranslated ? "layout_translate_title_original".localized : "layout_translate_title_translation".localized
+            let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+            let underlineAttributedString = NSAttributedString(string: text, attributes: underlineAttribute)
+            ui_label_translate.attributedText = underlineAttributedString
             ui_label_translate.font = UIFont(name: "Quicksand-Bold", size: 13)
-            ui_label_translate.textColor = UIColor.orange // Remplacez par la couleur orange exacte si nécessaire
-            ui_label_translate.isHighlighted = true // Surlignement
+            ui_label_translate.textColor = UIColor.orange
+            ui_label_translate.isHighlighted = true
         }
+
         
         // Mise à jour de ui_comment
         if isTranslated {
