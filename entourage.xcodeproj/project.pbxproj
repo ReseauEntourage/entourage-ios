@@ -436,6 +436,7 @@
 		2694A74A2ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */; };
 		2694A74C2ACD90D70042CFCA /* HomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */; };
 		2694A74E2ACD92510042CFCA /* HomeGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */; };
+		26A06BB12B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */; };
 		26A06E582B1E23B500AC323A /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A06E572B1E23B500AC323A /* Translations.swift */; };
 		26A60E212A3A05AD004849FB /* WelcomeFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */; };
 		26AD11962AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD11952AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift */; };
@@ -909,6 +910,7 @@
 		2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeEventHorizontalCollectionCell.xib; sourceTree = "<group>"; };
 		2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGroupCell.swift; sourceTree = "<group>"; };
 		2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeGroupCell.xib; sourceTree = "<group>"; };
+		26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostImageTranslationCell.xib; sourceTree = "<group>"; };
 		26A06E572B1E23B500AC323A /* Translations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translations.swift; sourceTree = "<group>"; };
 		26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourViewController.swift; sourceTree = "<group>"; };
 		26AD11952AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLanguageChooseViewController.swift; sourceTree = "<group>"; };
@@ -1173,6 +1175,7 @@
 				025C92C428341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib */,
 				26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */,
 				26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */,
+				26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -2164,6 +2167,7 @@
 				26F03C9F2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib in Resources */,
 				26F03C932A1B4E5900450A61 /* WelcomeOneTitleCell.xib in Resources */,
 				025D8723278DD33800909101 /* Assets.xcassets in Resources */,
+				26A06BB12B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib in Resources */,
 				26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */,
 				02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */,
 				0208268028A68447004B1222 /* ActionDeletePopsViewController.xib in Resources */,

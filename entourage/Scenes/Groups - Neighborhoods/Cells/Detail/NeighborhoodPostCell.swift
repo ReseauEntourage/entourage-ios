@@ -51,7 +51,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
@@ -132,6 +132,9 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_comment.handleURLTap { url in
             // Ouvrez le lien dans Safari, par exemple
             delegate.showWebviewUrl(url: url)
+        }
+        if postMessage.contentTranslations == nil {
+            ui_comment.text = postMessage.content
         }
         
         if let _status = message.status {
@@ -239,5 +242,8 @@ class NeighborhoodPostDeletedCell:NeighborhoodPostCell{
     
 }
 class NeighborhoodPostTranslationCell:NeighborhoodPostCell{
+    
+}
+class NeighborhoodPostImageTranslationCell:NeighborhoodPostCell{
     
 }

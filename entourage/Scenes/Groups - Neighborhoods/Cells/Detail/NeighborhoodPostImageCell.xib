@@ -84,7 +84,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="753" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJs-gC-gEm" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="28" y="116" width="292" height="41"/>
+                                <rect key="frame" x="28" y="68" width="292" height="41"/>
                                 <string key="text">Bienvenue à toi cher danseur !
 Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
@@ -92,13 +92,13 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo_group" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-dD-e9j">
-                                <rect key="frame" x="28" y="173" width="370" height="184"/>
+                                <rect key="frame" x="28" y="125" width="370" height="184"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="184" id="tOZ-7N-3p2"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsH-FQ-hzp">
-                                <rect key="frame" x="28" y="173" width="370" height="184"/>
+                                <rect key="frame" x="28" y="125" width="370" height="184"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="action_show_image:" destination="bPP-EV-zW9" eventType="touchUpInside" id="bvD-nJ-xD6"/>
@@ -192,14 +192,14 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_message_neighborhood" translatesAutoresizingMaskIntoConstraints="NO" id="9eH-ug-ufT">
-                                <rect key="frame" x="285.5" y="378" width="16" height="16"/>
+                                <rect key="frame" x="285.5" y="354" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="Go9-6D-fdD"/>
                                     <constraint firstAttribute="height" constant="16" id="uSB-oZ-jr9"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8Y-4D-rfb">
-                                <rect key="frame" x="285.5" y="370.5" width="112.5" height="31"/>
+                                <rect key="frame" x="285.5" y="346.5" width="112.5" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="gzd-0c-Mg2"/>
                                 </constraints>
@@ -209,7 +209,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="x commentaires" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLZ-kX-Eih">
-                                <rect key="frame" x="305.5" y="377" width="92.5" height="18"/>
+                                <rect key="frame" x="305.5" y="329" width="92.5" height="66"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -226,38 +226,10 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                     <color key="titleColor" name="gris_112"/>
                                 </state>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sf1-cd-6JB">
-                                <rect key="frame" x="28" y="64" width="388" height="42"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_translation" translatesAutoresizingMaskIntoConstraints="NO" id="BJi-Mu-j3B">
-                                        <rect key="frame" x="0.0" y="12" width="20" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="YW6-3N-ujE"/>
-                                            <constraint firstAttribute="width" constant="20" id="cW2-5R-DGW"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ZU-QO-zVw">
-                                        <rect key="frame" x="30" y="13.5" width="348" height="17.5"/>
-                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="14"/>
-                                        <color key="textColor" name="orange_app"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" name="BeigeClair"/>
-                                <constraints>
-                                    <constraint firstItem="BJi-Mu-j3B" firstAttribute="leading" secondItem="Sf1-cd-6JB" secondAttribute="leading" id="3Wd-Ja-jdc"/>
-                                    <constraint firstItem="6ZU-QO-zVw" firstAttribute="centerY" secondItem="BJi-Mu-j3B" secondAttribute="centerY" id="SZ5-Rc-djo"/>
-                                    <constraint firstAttribute="height" constant="42" id="VDY-9L-KDy"/>
-                                    <constraint firstAttribute="trailing" secondItem="6ZU-QO-zVw" secondAttribute="trailing" constant="10" id="Vjg-v7-9Fu"/>
-                                    <constraint firstItem="6ZU-QO-zVw" firstAttribute="leading" secondItem="BJi-Mu-j3B" secondAttribute="trailing" constant="10" id="hJF-vb-uh7"/>
-                                    <constraint firstItem="BJi-Mu-j3B" firstAttribute="top" secondItem="Sf1-cd-6JB" secondAttribute="top" constant="12" id="vMR-8M-DTX"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" name="BeigeClair"/>
                         <constraints>
                             <constraint firstItem="kLZ-kX-Eih" firstAttribute="trailing" secondItem="h0R-dD-e9j" secondAttribute="trailing" id="2JA-Uu-BJN"/>
-                            <constraint firstAttribute="trailing" secondItem="Sf1-cd-6JB" secondAttribute="trailing" constant="10" id="3tu-KQ-orq"/>
                             <constraint firstItem="koJ-PJ-1CY" firstAttribute="top" secondItem="qPp-vp-wdq" secondAttribute="top" id="4Og-OH-xkY"/>
                             <constraint firstAttribute="bottom" secondItem="20f-3G-Kdi" secondAttribute="bottom" constant="16" id="5A2-oV-y8z"/>
                             <constraint firstItem="20f-3G-Kdi" firstAttribute="top" secondItem="kLZ-kX-Eih" secondAttribute="bottom" constant="16" id="5qy-DG-2UF"/>
@@ -271,8 +243,6 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="jsH-FQ-hzp" firstAttribute="bottom" secondItem="h0R-dD-e9j" secondAttribute="bottom" id="HZI-G8-eNQ"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JBT-Y6-NRe" secondAttribute="trailing" constant="32" id="IfA-Oj-q41"/>
                             <constraint firstItem="E8Y-4D-rfb" firstAttribute="centerY" secondItem="kLZ-kX-Eih" secondAttribute="centerY" id="Jdz-bg-7gJ"/>
-                            <constraint firstItem="YJs-gC-gEm" firstAttribute="top" secondItem="Sf1-cd-6JB" secondAttribute="bottom" constant="10" id="NbX-he-SFg"/>
-                            <constraint firstItem="Sf1-cd-6JB" firstAttribute="top" secondItem="koJ-PJ-1CY" secondAttribute="bottom" constant="14" id="Qx7-TW-g7L"/>
                             <constraint firstItem="20f-3G-Kdi" firstAttribute="leading" secondItem="k8l-eW-UxZ" secondAttribute="leading" constant="28" id="R0z-9z-tbY"/>
                             <constraint firstItem="qPp-vp-wdq" firstAttribute="leading" secondItem="k8l-eW-UxZ" secondAttribute="leading" constant="28" id="R8A-VH-zy3"/>
                             <constraint firstItem="koJ-PJ-1CY" firstAttribute="trailing" secondItem="JBT-Y6-NRe" secondAttribute="trailing" id="RAA-ZP-XrC"/>
@@ -281,6 +251,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="m1C-Y9-g4k" firstAttribute="top" secondItem="koJ-PJ-1CY" secondAttribute="top" constant="-7" id="WBJ-Ov-GyR"/>
                             <constraint firstItem="E8Y-4D-rfb" firstAttribute="trailing" secondItem="kLZ-kX-Eih" secondAttribute="trailing" id="XAu-Ab-Brj"/>
                             <constraint firstItem="kLZ-kX-Eih" firstAttribute="leading" secondItem="9eH-ug-ufT" secondAttribute="trailing" constant="4" id="YJI-l5-ba4"/>
+                            <constraint firstItem="YJs-gC-gEm" firstAttribute="top" secondItem="JBT-Y6-NRe" secondAttribute="bottom" constant="10" id="b8q-rN-0PN"/>
                             <constraint firstItem="JBT-Y6-NRe" firstAttribute="centerY" secondItem="qPp-vp-wdq" secondAttribute="centerY" id="dA8-FC-Qq1"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YJs-gC-gEm" secondAttribute="trailing" constant="28" id="eIH-1Y-ytp"/>
                             <constraint firstItem="h0R-dD-e9j" firstAttribute="leading" secondItem="k8l-eW-UxZ" secondAttribute="leading" constant="28" id="ef5-su-QRP"/>
@@ -289,7 +260,6 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="E8Y-4D-rfb" firstAttribute="leading" secondItem="9eH-ug-ufT" secondAttribute="leading" id="q6o-cG-b4O"/>
                             <constraint firstAttribute="trailing" secondItem="h0R-dD-e9j" secondAttribute="trailing" constant="28" id="uTW-2v-2Cv"/>
                             <constraint firstItem="jsH-FQ-hzp" firstAttribute="top" secondItem="h0R-dD-e9j" secondAttribute="top" id="vbx-af-tIc"/>
-                            <constraint firstItem="Sf1-cd-6JB" firstAttribute="leading" secondItem="koJ-PJ-1CY" secondAttribute="leading" id="xIG-mp-xNe"/>
                             <constraint firstItem="YJs-gC-gEm" firstAttribute="leading" secondItem="qPp-vp-wdq" secondAttribute="leading" id="zbl-9z-k4H"/>
                             <constraint firstItem="jsH-FQ-hzp" firstAttribute="trailing" secondItem="h0R-dD-e9j" secondAttribute="trailing" id="zpk-5X-DXN"/>
                         </constraints>
@@ -312,14 +282,12 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_image_post" destination="h0R-dD-e9j" id="CJc-X3-miT"/>
                 <outlet property="ui_iv_user" destination="qPp-vp-wdq" id="zZW-qn-gUr"/>
                 <outlet property="ui_label_ambassador" destination="1mR-hh-flM" id="2iE-y4-JlW"/>
-                <outlet property="ui_label_translate" destination="6ZU-QO-zVw" id="9C5-na-veT"/>
                 <outlet property="ui_lb_chat" destination="n9K-Nf-KyW" id="KNq-Tf-k6w"/>
                 <outlet property="ui_username" destination="kif-wy-n4F" id="Nf0-v5-8Gu"/>
                 <outlet property="ui_view_bt_send" destination="dnV-Yy-csW" id="YZY-Xy-qBa"/>
                 <outlet property="ui_view_comment" destination="agT-ek-9AZ" id="Idb-QW-tzl"/>
                 <outlet property="ui_view_comment_post" destination="20f-3G-Kdi" id="M0A-kd-kog"/>
                 <outlet property="ui_view_container" destination="k8l-eW-UxZ" id="rJa-sI-nWK"/>
-                <outlet property="ui_view_translate" destination="Sf1-cd-6JB" id="9vI-bp-spS"/>
             </connections>
             <point key="canvasLocation" x="149.27536231884059" y="112.5"/>
         </tableViewCell>
@@ -332,7 +300,6 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
     <resources>
         <image name="ic_message_neighborhood" width="20" height="20"/>
         <image name="ic_send_comment" width="54" height="54"/>
-        <image name="ic_translation" width="20" height="20"/>
         <image name="placeholder_photo_group" width="391" height="110"/>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
