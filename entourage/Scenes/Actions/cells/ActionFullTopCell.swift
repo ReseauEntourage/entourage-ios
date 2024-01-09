@@ -81,7 +81,7 @@ class ActionFullTopCell: UITableViewCell {
             // "layout_translate_action_translation_button" en orange et souligné
             let clickHereString = NSLocalizedString("layout_translate_action_translation_button", comment: "")
             let clickHereAttributedString = NSMutableAttributedString(string: " \(clickHereString)")
-            clickHereAttributedString.addAttribute(.font, value: UIFont(name: "Quicksand-Bold", size: 13)!, range: NSRange(location: 0, length: clickHereAttributedString.length))
+            clickHereAttributedString.addAttribute(.font, value: UIFont(name: "Quicksand-Bold", size: 11)!, range: NSRange(location: 0, length: clickHereAttributedString.length))
             clickHereAttributedString.addAttribute(.foregroundColor, value: UIColor.orange, range: NSRange(location: 0, length: clickHereAttributedString.length))
             clickHereAttributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: clickHereAttributedString.length))
 
@@ -94,7 +94,7 @@ class ActionFullTopCell: UITableViewCell {
             // "layout_translate_title_original_button" en orange et souligné
             let originalButtonString = NSLocalizedString("layout_translate_title_original_button", comment: "")
             let originalButtonAttributedString = NSMutableAttributedString(string: originalButtonString)
-            originalButtonAttributedString.addAttribute(.font, value: UIFont(name: "Quicksand-Bold", size: 13)!, range: NSRange(location: 0, length: originalButtonAttributedString.length))
+            originalButtonAttributedString.addAttribute(.font, value: UIFont(name: "Quicksand-Bold", size: 11)!, range: NSRange(location: 0, length: originalButtonAttributedString.length))
             originalButtonAttributedString.addAttribute(.foregroundColor, value: UIColor.orange, range: NSRange(location: 0, length: originalButtonAttributedString.length))
             originalButtonAttributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: originalButtonAttributedString.length))
             fullAttributedString.append(originalButtonAttributedString)
