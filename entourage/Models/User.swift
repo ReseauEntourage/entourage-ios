@@ -329,7 +329,6 @@ struct UserPermissions:Codable {
 //MARK: - UserStats -
 struct UserStats:Codable {
     var entourageCount:Int = 0
-    var encounterCount:Int = 0
     var actionsCount:Int = 0
     var eventsCount:Int = 0
     var contribCreationCount:Int = 0
@@ -339,7 +338,6 @@ struct UserStats:Codable {
     
     enum CodingKeys: String, CodingKey {
         case entourageCount = "entourage_count"
-        case encounterCount = "encounter_count"
         case actionsCount = "actions_count"
         case eventsCount = "events_count"
         case contribCreationCount = "contribution_creation_count"
