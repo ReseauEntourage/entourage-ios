@@ -301,12 +301,9 @@ class EventDetailFeedViewController: UIViewController {
                 // Mise à jour de la vue table en fonction des scénarios
                 self.ui_tableview.performBatchUpdates({
                     let currentSections = self.ui_tableview.numberOfSections
-
                     // Scénario 1: Aucun message
                     if self.event?.posts?.isEmpty ?? true {
-                        if currentSections > 0 {
-                            self.ui_tableview.deleteSections(IndexSet(integersIn: 0..<currentSections), with: .fade)
-                        }
+                        
                     } else {
                         // Scénario 2: Messages anciens et/ou nouveaux
                         if self.hasNewAndOldSections {

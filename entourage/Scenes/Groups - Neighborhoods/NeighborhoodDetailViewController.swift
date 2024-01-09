@@ -258,9 +258,7 @@ class NeighborhoodDetailViewController: UIViewController {
 
                     // Scénario 1: Aucun message
                     if self.neighborhood?.messages?.isEmpty ?? true {
-                        if currentSections > 0 {
-                            self.ui_tableview.deleteSections(IndexSet(integersIn: 0..<currentSections), with: .fade)
-                        }
+
                     } else {
                         // Scénario 2: Messages anciens et/ou nouveaux
                         if self.hasNewAndOldSections {
