@@ -29,6 +29,7 @@ class ActionFullTopCell: UITableViewCell {
     
     @IBOutlet weak var ui_view_translate: UIView!
     @IBOutlet weak var ui_label_translate: UILabel!
+    @IBOutlet weak var ui_stackview: UIStackView!
     
     var action:Action? = nil
     var isTranslated = LanguageManager.getTranslatedByDefaultValue()
@@ -68,8 +69,10 @@ class ActionFullTopCell: UITableViewCell {
     func setTextTranslate() {
         // Configurer le UITapGestureRecognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTvTranslateClick))
-        ui_label_translate.isUserInteractionEnabled = true
-        ui_label_translate.addGestureRecognizer(tapGesture)
+        if ui_label_translate != nil{
+            ui_label_translate.isUserInteractionEnabled = true
+            ui_label_translate.addGestureRecognizer(tapGesture)
+        }
 
         let fullAttributedString = NSMutableAttributedString()
 
@@ -80,8 +83,8 @@ class ActionFullTopCell: UITableViewCell {
 
             // "layout_translate_action_translation_button" en orange et souligné
             let clickHereString = NSLocalizedString("layout_translate_action_translation_button", comment: "")
-            let clickHereAttributedString = NSMutableAttributedString(string: " \(clickHereString)")
-            clickHereAttributedString.addAttribute(.font, value: UIFont(name: "Quicksand-Bold", size: 11)!, range: NSRange(location: 0, length: clickHereAttributedString.length))
+            let clickHereAttributedString = NSMutableAttributedString(string: "\(clickHereString)")
+            clickHereAttributedString.addAttribute(.font, value: UIFont(name: "Quicksand-Bold", size: 12)!, range: NSRange(location: 0, length: clickHereAttributedString.length))
             clickHereAttributedString.addAttribute(.foregroundColor, value: UIColor.orange, range: NSRange(location: 0, length: clickHereAttributedString.length))
             clickHereAttributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: clickHereAttributedString.length))
 
@@ -89,18 +92,20 @@ class ActionFullTopCell: UITableViewCell {
         } else {
             // Etat 2: "layout_translate_title_translation_title" = "Some information has been automatically translated."
             let originalString = NSLocalizedString("layout_translate_title_original_title", comment: "")
-            fullAttributedString.append(NSAttributedString(string: "\(originalString) "))
+            fullAttributedString.append(NSAttributedString(string: "\(originalString)"))
 
             // "layout_translate_title_original_button" en orange et souligné
             let originalButtonString = NSLocalizedString("layout_translate_title_original_button", comment: "")
             let originalButtonAttributedString = NSMutableAttributedString(string: originalButtonString)
-            originalButtonAttributedString.addAttribute(.font, value: UIFont(name: "Quicksand-Bold", size: 11)!, range: NSRange(location: 0, length: originalButtonAttributedString.length))
+            originalButtonAttributedString.addAttribute(.font, value: UIFont(name: "Quicksand-Bold", size: 12)!, range: NSRange(location: 0, length: originalButtonAttributedString.length))
             originalButtonAttributedString.addAttribute(.foregroundColor, value: UIColor.orange, range: NSRange(location: 0, length: originalButtonAttributedString.length))
             originalButtonAttributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: originalButtonAttributedString.length))
             fullAttributedString.append(originalButtonAttributedString)
         }
         // Assigner le texte modifié à un UILabel
-        ui_label_translate.attributedText = fullAttributedString
+        if ui_label_translate != nil{
+            ui_label_translate.attributedText = fullAttributedString
+        }
         if(isTranslated){
             if let _title_translation = action?.titleTranslations{
                 ui_title_main.text = _title_translation.translation
@@ -121,10 +126,18 @@ class ActionFullTopCell: UITableViewCell {
     func populateCell(action:Action) {
         ui_title_main.text = action.title
         ui_description.text = action.description
+        
         let lang_item = action.descriptionTranslations?.from_lang
-        if lang_item == LanguageManager.getCurrentDeviceLanguage() {
+        print("eho lang action ", lang_item)
+        print("eho lang user ", LanguageManager.getCurrentDeviceLanguage())
+        if lang_item == LanguageManager.getCurrentDeviceLanguage() || action.titleTranslations == nil {
             // Cacher ui_view_translate si c'est la même langue que celle de l'appareil
-            ui_view_translate.setVisibilityGone()
+            if ui_stackview.arrangedSubviews.count > 1 {
+                let secondView = ui_stackview.arrangedSubviews[1]
+                ui_stackview.removeArrangedSubview(secondView)
+                secondView.removeFromSuperview() // Ne pas oublier cette étape!
+            }
+            //ui_view_translate.setVisibilityGone()
         } else {
             // Afficher ui_view_translate si les langues sont différentes
 

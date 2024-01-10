@@ -1476,8 +1476,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "layout_translate_title_translation" = "Afficher la traduction";
 "layout_translate_action_translation_button" = "Cliquer ici pour afficher la version originale";
 "layout_translate_title_original_button" = "Afficher la traduction";
-"layout_translate_title_original_title" = "Cette page n’a pas été traduite.";
-"layout_translate_title_translation_title" = "Certaines informations ont été traduites automatiquement.";
+"layout_translate_title_original_title" = "Cette page n’a pas été traduite. ";
+"layout_translate_title_translation_title" = "Certaines informations ont été traduites automatiquement. ";
 "Category_Food" = "Se nourrir";
 "Category_Accommodation" = "Se loger";
 "Category_Health" = "Se soigner";
