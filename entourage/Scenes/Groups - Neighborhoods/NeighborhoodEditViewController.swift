@@ -456,9 +456,11 @@ extension NeighborhoodEditViewController: MJNavBackViewDelegate {
 //MARK: - MJAlertControllerDelegate -
 extension NeighborhoodEditViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        self.dismiss(animated: true)
     }
-    func validateRightButton(alertTag: MJAlertTAG) {}
+    func validateRightButton(alertTag: MJAlertTAG) {
+        self.dismiss(animated: true)
+
+    }
 }
 
 //MARK: - NeighborhoodCreateAddOtherDelegate - Phase 2

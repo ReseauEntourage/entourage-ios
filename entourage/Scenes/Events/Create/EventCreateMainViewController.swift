@@ -416,8 +416,8 @@ extension EventCreateMainViewController: MJNavBackViewDelegate {
         }
         
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "eventCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "eventCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         alertVC.configureAlert(alertTitle: "eventCreatePopCloseBackTitle".localized, message: "eventCreatePopCloseBackMessage".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         alertVC.delegate = self
         alertVC.show()
@@ -427,9 +427,10 @@ extension EventCreateMainViewController: MJNavBackViewDelegate {
 //MARK: - MJAlertControllerDelegate -
 extension EventCreateMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        self.dismiss(animated: true)
     }
     func validateRightButton(alertTag: MJAlertTAG) {
+        self.dismiss(animated: true)
+
     }
 }
 

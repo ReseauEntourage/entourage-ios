@@ -115,9 +115,9 @@ class NeighborhoodPostAddPhotoViewController: BasePopViewController {
     func presentCameraSettings() {
         
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "cancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "toSettings".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "authCameraSettings".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        let buttonCancel = MJAlertButtonType(title: "cancel".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "toSettings".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "authCameraSettings".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         
         alertVC.delegate = self
         alertVC.show()
@@ -127,11 +127,13 @@ class NeighborhoodPostAddPhotoViewController: BasePopViewController {
 //MARK: - MJAlertControllerDelegate -
 extension NeighborhoodPostAddPhotoViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
+
+    }
+    func validateRightButton(alertTag: MJAlertTAG) {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-    func validateRightButton(alertTag: MJAlertTAG) {}
 }
 
 //MARK: - PickerVC Delegate -

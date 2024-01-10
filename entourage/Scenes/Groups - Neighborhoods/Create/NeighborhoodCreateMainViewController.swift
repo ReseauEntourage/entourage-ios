@@ -305,8 +305,8 @@ extension NeighborhoodCreateMainViewController: MJNavBackViewDelegate {
             return
         }
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         alertVC.configureAlert(alertTitle: "neighborhoodCreatePopCloseBackTitle".localized, message: "neighborhoodCreatePopCloseBackMessage".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         AnalyticsLoggerManager.logEvent(name: View_NewGroup_CancelPop)
         alertVC.delegate = self
@@ -318,10 +318,11 @@ extension NeighborhoodCreateMainViewController: MJNavBackViewDelegate {
 extension NeighborhoodCreateMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
         AnalyticsLoggerManager.logEvent(name: Action_NewGroup_CancelPop_Leave)
-        self.dismiss(animated: true)
     }
     func validateRightButton(alertTag: MJAlertTAG) {
         AnalyticsLoggerManager.logEvent(name: Action_NewGroup_CancelPop_Cancel)
+        self.dismiss(animated: true)
+
     }
 }
 

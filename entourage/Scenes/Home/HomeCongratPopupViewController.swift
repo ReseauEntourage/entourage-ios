@@ -71,8 +71,8 @@ class HomeCongratPopupViewController: UIViewController {
         
         ui_view_alert.layer.cornerRadius = cornerRadius
         
-        ui_title_1.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
-        ui_title_2.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
+        ui_title_1.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
+        ui_title_2.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
         
         ui_title_list_1.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_title_list_2.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())

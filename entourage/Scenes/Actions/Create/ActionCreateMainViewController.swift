@@ -360,8 +360,8 @@ extension ActionCreateMainViewController: MJNavBackViewDelegate {
         }
         
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "actionCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "actionCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "actionCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "actionCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         let message = String.init(format: "actionCreatePopCloseBackMessage".localized, isContrib ? "action_contrib".localized : "action_solicitation".localized)
         alertVC.configureAlert(alertTitle: "actionCreatePopCloseBackTitle".localized, message: message, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         alertVC.delegate = self
@@ -372,9 +372,11 @@ extension ActionCreateMainViewController: MJNavBackViewDelegate {
 //MARK: - MJAlertControllerDelegate -
 extension ActionCreateMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        self.dismiss(animated: true)
     }
-    func validateRightButton(alertTag: MJAlertTAG) {}
+    func validateRightButton(alertTag: MJAlertTAG) {
+        self.dismiss(animated: true)
+
+    }
 }
 
 //MARK: - Protocol TableView DataSource/delegate -

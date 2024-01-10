@@ -350,7 +350,7 @@ class NeighborhoodDetailViewController: UIViewController {
         let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontH1Blanc(size: 15), bgColor: .appOrange, cornerRadius: -1)
         alertVC.alertTagName = .welcomeMessage
         
-        alertVC.configureAlert(alertTitle: title, message: message, buttonrightType: buttonWelcome, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: false)
+        alertVC.configureAlert(alertTitle: title, message: message, buttonrightType: buttonWelcome, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: false)
         alertVC.delegate = self
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
@@ -363,10 +363,10 @@ class NeighborhoodDetailViewController: UIViewController {
     func showPopLeave() {
 
         let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "params_leave_group_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_leave_group_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonAccept = MJAlertButtonType(title: "params_leave_group_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_leave_group_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "params_leave_group_pop_title".localized, message: "params_leave_group_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        customAlert.configureAlert(alertTitle: "params_leave_group_pop_title".localized, message: "params_leave_group_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
         
         customAlert.alertTagName = .None
         customAlert.delegate = self
@@ -866,7 +866,7 @@ extension NeighborhoodDetailViewController:GroupDetailDelegate{
     
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
         let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
         
         alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)

@@ -165,8 +165,8 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
         
         AnalyticsLoggerManager.logEvent(name: analyticsName)
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontBoutonBlanc(size: 15, color: .orange), bgColor: .appOrangeLight_70, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "supress_button_title".localized, titleStyle:ApplicationTheme.getFontBoutonBlanc(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "supress_button_title".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         alertVC.configureAlert(alertTitle: alerteTitle, message: alerteText, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         alertVC.delegate = self
         alertVC.show()
