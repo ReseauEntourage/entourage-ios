@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -82,7 +82,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WnR-io-7tm" userLabel="Btn_left">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
-                                                    <color key="backgroundColor" name="orange_light_a50"/>
+                                                    <color key="backgroundColor" name="orange_light"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="le1-LC-88a"/>
                                                     </constraints>
@@ -151,7 +151,7 @@
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-O9-V1z">
-                                    <rect key="frame" x="0.0" y="0.0" width="298" height="131"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="298" height="164"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Supprimer la demande" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmw-8v-PXl">
                                             <rect key="frame" x="0.0" y="0.0" width="298" height="0.0"/>
@@ -171,21 +171,21 @@ L6</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="751" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GKv-ok-gNX" customClass="GrowingTextView" customModule="Ent_Beta" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="28" width="298" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="28" width="298" height="33"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="textColor" systemColor="labelColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                                         </textView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfP-Ws-wz6">
-                                            <rect key="frame" x="0.0" y="32" width="298" height="1"/>
+                                            <rect key="frame" x="0.0" y="65" width="298" height="1"/>
                                             <color key="backgroundColor" name="orange_light_a50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="JCy-28-IfJ"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OH6-xZ-GaA" userLabel="Btn_left">
-                                            <rect key="frame" x="109" y="83" width="80" height="48"/>
+                                            <rect key="frame" x="109" y="116" width="80" height="48"/>
                                             <color key="backgroundColor" name="orange_app"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="H2s-s5-vJ2"/>
@@ -259,6 +259,11 @@ L6</string>
             <point key="canvasLocation" x="131.8840579710145" y="117.85714285714285"/>
         </view>
     </objects>
+    <designables>
+        <designable name="GKv-ok-gNX">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <image name="close_new_orange" width="14" height="14"/>
         <namedColor name="orange_app">
