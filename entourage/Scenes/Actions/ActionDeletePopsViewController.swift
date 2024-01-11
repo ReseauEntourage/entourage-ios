@@ -147,9 +147,6 @@ class ActionDeletePopsViewController: UIViewController {
         sendCancelAction()
     }
     
-    @IBAction func action_close_pop(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 //MARK: - Growing delegate
