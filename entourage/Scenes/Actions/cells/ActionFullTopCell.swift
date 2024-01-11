@@ -41,7 +41,7 @@ class ActionFullTopCell: UITableViewCell {
         ui_view_solicitation.isHidden = true
         
         ui_img_contrib.layer.cornerRadius = 14
-        
+        ui_description.enableLongPressCopy()
         ui_view_cancel.layer.cornerRadius = 8
         ui_title_cancel.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldBlanc())
         ui_title_cancel.text = "action_cancel".localized
@@ -128,15 +128,7 @@ class ActionFullTopCell: UITableViewCell {
         ui_description.text = action.description
         
         let lang_item = action.descriptionTranslations?.from_lang
-        print("eho lang action ", lang_item)
-        print("eho lang user ", LanguageManager.getCurrentDeviceLanguage())
         if lang_item == LanguageManager.getCurrentDeviceLanguage() || action.titleTranslations == nil {
-            // Cacher ui_view_translate si c'est la même langue que celle de l'appareil
-//            if ui_stackview.arrangedSubviews.count > 1 {
-//                let secondView = ui_stackview.arrangedSubviews[1]
-//                ui_stackview.removeArrangedSubview(secondView)
-//                secondView.removeFromSuperview() // Ne pas oublier cette étape!
-//            }
             ui_view_translate.setVisibilityGone()
         } else {
             // Afficher ui_view_translate si les langues sont différentes
