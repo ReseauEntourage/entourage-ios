@@ -48,7 +48,7 @@
                                 <constraint firstAttribute="height" constant="9" id="brI-XS-AU0"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1Y-j5-qNg">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1Y-j5-qNg">
                             <rect key="frame" x="314" y="0.0" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="bEY-Ss-RdE"/>
@@ -151,7 +151,7 @@
                                     </constraints>
                                 </view>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-O9-V1z">
-                                    <rect key="frame" x="0.0" y="0.0" width="298" height="164"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="298" height="131"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Supprimer la demande" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmw-8v-PXl">
                                             <rect key="frame" x="0.0" y="0.0" width="298" height="0.0"/>
@@ -171,21 +171,21 @@ L6</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="751" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GKv-ok-gNX" customClass="GrowingTextView" customModule="Ent_Beta" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="28" width="298" height="33"/>
+                                            <rect key="frame" x="0.0" y="28" width="298" height="0.0"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="textColor" systemColor="labelColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                                         </textView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfP-Ws-wz6">
-                                            <rect key="frame" x="0.0" y="65" width="298" height="1"/>
+                                            <rect key="frame" x="0.0" y="32" width="298" height="1"/>
                                             <color key="backgroundColor" name="orange_light_a50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="JCy-28-IfJ"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OH6-xZ-GaA" userLabel="Btn_left">
-                                            <rect key="frame" x="109" y="116" width="80" height="48"/>
+                                            <rect key="frame" x="109" y="83" width="80" height="48"/>
                                             <color key="backgroundColor" name="orange_app"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="H2s-s5-vJ2"/>
