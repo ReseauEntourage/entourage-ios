@@ -302,7 +302,7 @@ extension EventParamsViewController: GroupDetailDelegate {
     
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrange, cornerRadius: -1)
         
         alertVC.configureAlert(alertTitle: "report_event_title".localized, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         

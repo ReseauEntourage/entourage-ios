@@ -479,8 +479,8 @@ class EventDetailFeedViewController: UIViewController {
                 DispatchQueue.main.async {
                     let alertVC = MJAlertController()
                     alertVC.alertTagName = .AcceptSettings
-                    let buttonCancel = MJAlertButtonType(title: "event_add_contact_refuse".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrangeLight, cornerRadius: -1)
-                    let buttonValidate = MJAlertButtonType(title: "event_add_contact_activate".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
+                    let buttonCancel = MJAlertButtonType(title: "event_add_contact_refuse".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+                    let buttonValidate = MJAlertButtonType(title: "event_add_contact_activate".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
                     alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "event_add_contact_error".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
                     
                     alertVC.delegate = self
@@ -494,10 +494,10 @@ class EventDetailFeedViewController: UIViewController {
         DispatchQueue.main.async {
             let alertVC = MJAlertController()
             alertVC.alertTagName = .AcceptAdd
-            let buttonCancel = MJAlertButtonType(title: "event_add_contact_no".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrangeLight, cornerRadius: -1)
+            let buttonCancel = MJAlertButtonType(title: "event_add_contact_no".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
             
             
-            let buttonValidate = MJAlertButtonType(title: "event_add_contact_yes".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
+            let buttonValidate = MJAlertButtonType(title: "event_add_contact_yes".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
             alertVC.configureAlert(alertTitle: "event_add_contact_title".localized, message: "event_add_contact_description".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
             
             alertVC.delegate = self
@@ -905,7 +905,7 @@ extension EventDetailFeedViewController:GroupDetailDelegate{
     
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
         
         alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)

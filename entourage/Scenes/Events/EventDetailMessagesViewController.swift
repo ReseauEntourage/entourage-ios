@@ -395,7 +395,7 @@ extension EventDetailMessagesViewController:GroupDetailDelegate {
     
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrange, cornerRadius: -1)
         let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
         
         alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)

@@ -80,8 +80,8 @@ class LocationManger:NSObject {
         let rootVC = presenterVC != nil ? presenterVC : AppState.getTopViewController()
         let message = message != nil ? message : "authGpsSettings".localized
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "refuseAlert".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrangeLight, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "toSettings".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "refuseAlert".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "toSettings".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         alertVC.configureAlert(alertTitle: "errorSettings".localized, message: message, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         
         alertVC.delegate = self
