@@ -49,8 +49,13 @@ class HomeCellEvent:UICollectionViewCell{
             ui_image_event.image = UIImage.init(named: "ic_placeholder_event")
         }
             
-        ui_label_date.text = event.startDateFormatted
-        ui_label_place.text = event.addressName
+        let addressComponents = event.addressName?.split(separator: ",")
+        if let lastComponent = addressComponents?.last {
+            ui_label_date.text = String(lastComponent).trimmingCharacters(in: .whitespaces)
+            
+        } else {
+            ui_label_date.text = event.addressName
+        }
         if let _interests = event.interests{
             if _interests.count > 0{
                 if let _interest = event.interests?[0]{
