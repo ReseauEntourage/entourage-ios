@@ -1499,3 +1499,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "create_group_btn_title" = "Utwórz grupę";
 "friendly_links_title" = "Przyjazne i solidarne więzi";
 "friendly_links_text" = "W Entourage głównym celem jest wspieranie przyjaznych i trwałych relacji. Zobowiązuję się szanować tę orientację, unikając wszelkich romantycznych lub miłosnych podejść lub publikacji. W ten sposób aktywnie przyczyniam się do utrzymania ciepłej i życzliwej atmosfery dla wszystkich.";
+"copied_text" = "Skopiowano do schowka!";
+"copy_the_text" = "Kopiuj tekst";
+"copy_the_text_explanation" = "Tekst zostanie skopiowany do schowka";

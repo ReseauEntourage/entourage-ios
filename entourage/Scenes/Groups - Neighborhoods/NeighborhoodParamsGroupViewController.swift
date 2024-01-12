@@ -251,6 +251,7 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
             vc.group = neighborhood
             vc.parentDelegate = self
             vc.signalType = .group
+            vc.textString = neighborhood?.aboutGroup
             self.navigationController?.present(vc, animated: true)
         }
     }

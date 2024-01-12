@@ -1482,3 +1482,6 @@
 "create_group_btn_title" = "Create group";
 "friendly_links_title" = "Friendly and Supportive Connections";
 "friendly_links_text" = "At Entourage, the main goal is to foster friendly and lasting relationships. I commit to respecting this focus by avoiding any romantic or amorous approach or publication. Thus, I actively contribute to maintaining a warm and caring environment for everyone.";
+"copied_text" = "Copied to clipboard!";
+"copy_the_text" = "Copy text";
+"copy_the_text_explanation" = "The text will be copied to the clipboard";

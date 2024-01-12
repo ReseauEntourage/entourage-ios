@@ -510,13 +510,14 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
 
 //MARK: - MessageCellSignalDelegate -
 extension ConversationDetailMessagesViewController:MessageCellSignalDelegate {
-    func signalMessage(messageId: Int, userId:Int) {
+    func signalMessage(messageId: Int, userId:Int, textString:String) {
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.parentDelegate = self
             vc.messageId = messageId
             vc.signalType = .comment
             vc.userId = userId
             vc.conversationId = conversationId
+            vc.textString = textString
             self.present(navvc, animated: true)
         }
         

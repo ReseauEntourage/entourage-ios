@@ -2918,3 +2918,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "create_group_btn_title" = "Crear un grupo";
 "friendly_links_title" = "Vínculos amistosos y solidarios";
 "friendly_links_text" = "En Entourage, el objetivo principal es fomentar lazos amistosos y duraderos. Me comprometo a respetar esta orientación evitando cualquier enfoque o publicación de carácter romántico o amoroso. De esta manera, contribuyo activamente a mantener un ambiente cálido y acogedor para todos.";
+"copied_text" = "¡Copiado al portapapeles!";
+"copy_the_text" = "Copiar el texto";
+"copy_the_text_explanation" = "El texto se copiará al portapapeles";

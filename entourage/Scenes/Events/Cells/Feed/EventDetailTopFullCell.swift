@@ -71,6 +71,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_lbl_about_title?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_lbl_about_title?.text = "event_detail_about_title".localized
         ui_lbl_about_desc?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_lbl_about_desc.enableLongPressCopy()
         ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_view_button_join.layer.cornerRadius = ui_view_button_join.frame.height / 2
         ui_view_button_join.layer.borderColor = UIColor.appOrange.cgColor

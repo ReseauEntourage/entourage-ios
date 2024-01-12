@@ -721,13 +721,14 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
         getDetailPost(neighborhoodId: self.neighborhoodId, parentPostId: postId)
     }
     
-    func signalPost(postId: Int, userId:Int) {
+    func signalPost(postId: Int, userId:Int, textString:String) {
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
             vc.postId = postId
             vc.parentDelegate = self
             vc.userId = userId
             vc.signalType = .publication
+            vc.textString = textString
             self.present(navvc, animated: true)
         }
         

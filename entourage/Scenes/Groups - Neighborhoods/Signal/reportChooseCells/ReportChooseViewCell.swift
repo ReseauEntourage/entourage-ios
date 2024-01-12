@@ -12,6 +12,7 @@ enum ReportCellType {
     case report
     case suppress
     case translate
+    case copy
 }
 
 class ReportChooseViewCell:UITableViewCell {
@@ -77,6 +78,10 @@ class ReportChooseViewCell:UITableViewCell {
             ui_image?.image = UIImage(named: "ic_translation")
             ui_title?.text = "report_modal_title_translate".localized
             ui_subtitle?.text = "report_modal_subtitle_translate".localized
+        case .copy:
+            ui_image?.image = UIImage(named: "ic_copy")
+            ui_title?.text = "copy_the_text".localized
+            ui_subtitle?.text = "copy_the_text_explanation".localized
         }
     }
 }

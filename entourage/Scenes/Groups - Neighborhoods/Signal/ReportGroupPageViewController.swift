@@ -22,6 +22,7 @@ class ReportGroupPageViewController: UIPageViewController {
     var haveChosen = false
     var titleDelegate:TitleDelegate? = nil
     var messageId:Int? = nil
+    var textString:String? = nil
     
     var reportVc:ReportGroupViewController? = nil
     var chooseVc:ReportGroupChoosePageViewController? = nil
@@ -48,6 +49,7 @@ class ReportGroupPageViewController: UIPageViewController {
             chooseVc?.chatMessageId = messageId
             chooseVc?.conversationId = conversationId
             chooseVc?.actionId = actionId
+            chooseVc?.textString = textString
             if let _userid = self.userId {
                 chooseVc?.userId = _userid
             }
@@ -72,6 +74,13 @@ class ReportGroupPageViewController: UIPageViewController {
 
 //MARK: - ReportUserPageDelegate -
 extension ReportGroupPageViewController: ReportGroupPageDelegate {
+    func copyItemText() {
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = self.textString
+        self.parent?.view.showToast(message: "copied_text".localized)
+        self.parent?.dismiss(animated: true)
+    }
+    
     func translateItem(id: Int) {
         parentDelegate?.translateItem(id: id)
         self.parent?.dismiss(animated: true)
@@ -133,4 +142,5 @@ protocol ReportGroupPageDelegate: AnyObject {
     func closeMainForDelete()
     func chooseReport()
     func translateItem(id:Int)
+    func copyItemText()
 }

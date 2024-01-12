@@ -30,7 +30,7 @@ class ActionFullMapCell: UITableViewCell {
         ui_mapview.layer.cornerRadius = 20
         
         ui_lbl_about_title?.text = "action_detail_title_location".localized
-        
+        ui_lbl_about_desc.enableLongPressCopy()
         self.ui_lbl_about_title.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontQuickSandBold(size: 15), color: .black))
         self.ui_lbl_about_desc.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontNunitoRegular(size: 11), color: .black))
     }

@@ -32,6 +32,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     var userId:Int? = nil
     var deletedImage:UIImage? = nil
     var deletedImageView:UIImageView? = nil
+    var innerPostMessage:PostMessage? = nil
     
     weak var delegate:MessageCellSignalDelegate? = nil
     
@@ -65,11 +66,12 @@ class NeighborhoodMessageCell: UITableViewCell {
     
     @objc func handleLongPressGesture(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == .began {
-            delegate?.signalMessage(messageId: messageId,userId: userId!)
+            delegate?.signalMessage(messageId: messageId,userId: userId!, textString: self.innerPostMessage?.content ?? "")
         }
     }
     
     func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:MessageCellSignalDelegate, isTranslated:Bool) {
+        innerPostMessage = message
         messageId = message.uid
         userId = message.user?.sid
         
@@ -240,11 +242,11 @@ class NeighborhoodMessageCell: UITableViewCell {
     }
     
     @objc func action_signal_conversation(){
-        delegate?.signalMessage(messageId: messageId,userId: userId!)
+        delegate?.signalMessage(messageId: messageId,userId: userId!, textString: innerPostMessage?.content ?? "")
     }
 
     @IBAction func action_signal_message(_ sender: Any) {
-        delegate?.signalMessage(messageId: messageId,userId: userId!)
+        delegate?.signalMessage(messageId: messageId,userId: userId!, textString: innerPostMessage?.content ?? "")
     }
     
     @IBAction func action_retry(_ sender: Any) {
@@ -258,7 +260,7 @@ class NeighborhoodMessageCell: UITableViewCell {
 }
 
 protocol MessageCellSignalDelegate:AnyObject {
-    func signalMessage(messageId:Int,userId:Int)
+    func signalMessage(messageId:Int,userId:Int,textString:String)
     func retrySend(message:String, positionForRetry:Int)
     func showUser(userId:Int?)
     func showWebUrl(url:URL)
