@@ -78,7 +78,7 @@ class ActionDeletePopsViewController: UIViewController {
         ui_bt_send.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         
         ui_title_demand.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
-        ui_title_comment.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
+        ui_title_comment.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
         ui_subtitle_demand.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
         let _attr = Utils.formatString(messageTxt: "params_cancel_action_pop_comment".localized, messageTxtHighlight: "action_optional".localized, fontColorType: ApplicationTheme.getFontCourantRegularNoir(), fontColorTypeHighlight: ApplicationTheme.getFontLegend())
