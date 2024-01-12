@@ -77,7 +77,7 @@ class ActionDeletePopsViewController: UIViewController {
         ui_bt_no.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_bt_send.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         
-        ui_title_demand.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
+        ui_title_demand.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
         ui_title_comment.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_subtitle_demand.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
