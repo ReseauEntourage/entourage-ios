@@ -282,7 +282,7 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
         case .firstHeader:
             return UITableView.automaticDimension
         case .myEventCell:
-            return 200
+            return 215
         case .secondHeader:
             return UITableView.automaticDimension
         case .discoverEventCell(_):

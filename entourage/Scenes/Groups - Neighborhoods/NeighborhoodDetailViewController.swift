@@ -632,7 +632,12 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        // Vérifie si la cellule est HomeEventHorizontalCollectionCell
+        if indexPath.section == 0 && indexPath.row == 1 {
+            return 265
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
     //Use to paging tableview ;)
