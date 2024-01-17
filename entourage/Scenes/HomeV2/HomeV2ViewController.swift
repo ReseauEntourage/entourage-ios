@@ -27,7 +27,7 @@ enum HomeV2DTO{
     case cellPedago(pedago:PedagogicResource)
     case cellMap
     case cellIAmLost(helpType:HomeNeedHelpType)
-    case moderator(name:String, imageUrl:String)
+    case moderator(name:String, imageUrl:String? = nil)
     case cellHZ
 }
 
@@ -181,8 +181,8 @@ class HomeV2ViewController:UIViewController{
         tableDTO.append(.cellIAmLost(helpType: .createGroup))
         tableDTO.append(.cellIAmLost(helpType: .createEvent))
         if let _moderator = userHome.moderator{
-            if let _name = _moderator.displayName, let _image = _moderator.imgUrl{
-                tableDTO.append(.moderator(name: _name, imageUrl: _image))
+            if let _name = _moderator.displayName{
+                tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
             }
         }
         self.ui_table_view.reloadData()
