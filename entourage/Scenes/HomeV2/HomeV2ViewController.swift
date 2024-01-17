@@ -592,7 +592,7 @@ extension HomeV2ViewController {
 }
 
 extension HomeV2ViewController:HomeEventHCCDelegate{
-    func goToMyEvent(event: Event) {
+    func goToMyEventHomeCell(event: Event) {
         showEvent(eventId: event.uid)
     }
     

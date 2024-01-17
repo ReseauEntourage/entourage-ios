@@ -58,6 +58,7 @@ class EventListMainV2ViewController:UIViewController{
         self.ui_table_view.delegate = self
         self.ui_table_view.dataSource = self
         ui_table_view.register(UINib(nibName: EventListCell.identifier, bundle: nil), forCellReuseIdentifier: EventListCell.identifier)
+        ui_table_view.register(UINib(nibName: HomeEventHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeEventHorizontalCollectionCell.identifier)
         ui_table_view.register(UINib(nibName: DividerCell.identifier, bundle: nil), forCellReuseIdentifier: DividerCell.identifier)
         ui_table_view.register(UINib(nibName: EventListCollectionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: EventListCollectionTableViewCell.identifier)
         ui_table_view.register(UINib(nibName: EmptyListCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyListCell.identifier)
@@ -230,12 +231,18 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
                 return cell
             }
         case .myEventCell:
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "EventListCollectionTableViewCell") as? EventListCollectionTableViewCell{
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeEventHorizontalCollectionCell") as? HomeEventHorizontalCollectionCell{
                 cell.selectionStyle = .none
                 cell.delegate = self
                 cell.configure(events: self.myEvent)
                 return cell
             }
+//            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "EventListCollectionTableViewCell") as? EventListCollectionTableViewCell{
+//                cell.selectionStyle = .none
+//                cell.delegate = self
+//                cell.configure(events: self.myEvent)
+//                return cell
+//            }
         case .secondHeader:
             if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "DividerCell") as? DividerCell{
                 cell.selectionStyle = .none
@@ -404,3 +411,8 @@ extension EventListMainV2ViewController{
 }
 
 
+extension EventListMainV2ViewController:HomeEventHCCDelegate{
+    func goToMyEventHomeCell(event: Event) {
+        showEvent(eventId: event.uid)
+    }
+}

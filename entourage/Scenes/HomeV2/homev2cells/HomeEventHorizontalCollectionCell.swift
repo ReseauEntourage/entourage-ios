@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol HomeEventHCCDelegate {
-    func goToMyEvent(event:Event)
+    func goToMyEventHomeCell(event:Event)
 
 }
 
@@ -76,7 +76,7 @@ extension HomeEventHorizontalCollectionCell:UICollectionViewDelegate, UICollecti
         switch tableDTO[indexPath.row]{
         case .eventCell(let event):
             AnalyticsLoggerManager.logEvent(name: Action_Home_Event_Detail)
-            delegate?.goToMyEvent(event: event)
+            delegate?.goToMyEventHomeCell(event: event)
         }
     }
 }
