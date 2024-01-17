@@ -337,7 +337,7 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
                 AnalyticsLoggerManager.logEvent(name: Action_Home_CreateGroup)
                 showPedagogic(pedagogic: pedagoCreateGroup!)
             }
-        case .moderator(let name, let imageUrl):
+        case .moderator(_,_):
             if let _moderator = self.userHome.moderator{
                 AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
                 if let _id = _moderator.id{
