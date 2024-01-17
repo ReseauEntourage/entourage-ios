@@ -92,7 +92,8 @@ class EventListMainV2ViewController:UIViewController{
     func loadForInit(){
         isLoading = true
         IHProgressHUD.show()
-
+        currentFilter = EventActionLocationFilters()
+        ui_location_filter.text = currentFilter.getFilterButtonString()
         self.currentPageMy = 0
         self.currentPageDiscover = 0
         self.isEndOfDiscoverList = false
