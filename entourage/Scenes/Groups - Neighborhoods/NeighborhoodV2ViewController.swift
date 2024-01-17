@@ -220,6 +220,7 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
         case .emptyCell:
             if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "EmptyListCell") as? EmptyListCell{
                 cell.selectionStyle = .none
+                cell.configureForGroup()
                 return cell
             }
         }
@@ -250,7 +251,7 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
         case .discoverGroupCell(_):
             return UITableView.automaticDimension
         case .emptyCell:
-            return UITableView.automaticDimension
+            return 500
         }
     }
     
