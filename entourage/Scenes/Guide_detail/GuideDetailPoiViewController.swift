@@ -105,13 +105,16 @@ import MessageUI
     //MARK: - IBACTIONS -
     @IBAction func action_show_soliguide(_ sender: Any) {
         //TODO: - In App ou pas ?
+        print("eho soliguide ")
         if let _url = poi?.soliguideUrl, let url = URL.init(string: _url), let _poiUid = poi?.uuid {
+            print("eho soliguide url " , _url)
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            
-            if let _poiId = poi?.soliguideId {
-                let _str = String.init(format:Soliguide_Click, _poiId,_poiUid,filtersSelectedFromMap)
-                AnalyticsLoggerManager.logEvent(name: _str)
-            }
+            AnalyticsLoggerManager.logEvent(name: Soliguide_Click)
+//
+//            if let _poiId = poi?.soliguideId {
+//                let _str = String.init(format:Soliguide_Click, _poiId,_poiUid,filtersSelectedFromMap)
+//                AnalyticsLoggerManager.logEvent(name: _str)
+//            }
         }
     }
     

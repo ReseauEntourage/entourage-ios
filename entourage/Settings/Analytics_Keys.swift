@@ -25,7 +25,7 @@ let Action_guideMap_SharePOI = "Action__GuideMap__SharePOI"
 let Action_guideMap_CallPOI = "Action__GuideMap__CallPOI"
 
 let Soliguide_Show_Poi = "Soligde__Show__%d_%@__Search_%@"
-let Soliguide_Click = "Soligde__Click__%@_%@__Search_%@"
+let Soliguide_Click = "Soligde__Click"
 
 let Action_guide_searchFilter_organiz = "Action__GuideMap__OrganizationsFilter"
 let Action_guide_searchFilter_Volunt = "Action__GuideMap__Volunteers"
