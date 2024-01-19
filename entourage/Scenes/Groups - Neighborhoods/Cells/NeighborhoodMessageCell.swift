@@ -33,6 +33,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     var deletedImage:UIImage? = nil
     var deletedImageView:UIImageView? = nil
     var innerPostMessage:PostMessage? = nil
+    var innerString:String = ""
     
     weak var delegate:MessageCellSignalDelegate? = nil
     
@@ -55,6 +56,8 @@ class NeighborhoodMessageCell: UITableViewCell {
                 self?.delegate?.showWebUrl(url: url)
             }
         }
+        ui_message.enableLongPressCopy()
+
         
         deletedImage = UIImage(named: "ic_deleted_comment")
         deletedImageView = UIImageView(image: deletedImage)
@@ -156,7 +159,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     }
     
     func populateCellConversation(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, isOne2One:Bool, delegate:MessageCellSignalDelegate) {
-        
+        self.innerPostMessage = message
         messageId = message.uid
         userId = message.user?.sid
         //change this line to mke three point appear
