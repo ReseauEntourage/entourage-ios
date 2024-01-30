@@ -54,7 +54,8 @@ struct PostMessage:Codable {
     var messageImageUrl:String? = nil
     var status:String? = nil
     var contentTranslations:Translations? = nil
-    
+    var reactions: [Reaction]?
+
     var isRetryMsg = false
     
     private var read:Bool? = nil
@@ -75,6 +76,7 @@ struct PostMessage:Codable {
         case messageImageUrl = "image_url"
         case read
         case status
+        case reactions
         case contentTranslations = "content_translations"
     }
     

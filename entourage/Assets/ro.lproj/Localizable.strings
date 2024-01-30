@@ -1499,3 +1499,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "copied_text" = "Copiat în clipboard!";
 "copy_the_text" = "Copiați textul";
 "copy_the_text_explanation" = "Textul va fi copiat în clipboard";
+"text_title_i_like" = "Îmi place";
+"text_title_comment" = "Comentează";
+"see_member_react" = "Persoanele care au reacționat";

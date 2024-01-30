@@ -1500,3 +1500,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "copied_text" = "Скопійовано до буферу обміну!";
 "copy_the_text" = "Скопіювати текст";
 "copy_the_text_explanation" = "Текст буде скопійовано до буферу обміну";
+"text_title_i_like" = "Подобається";
+"text_title_comment" = "Коментувати";
+"see_member_react" = "Люди, які відреагували";

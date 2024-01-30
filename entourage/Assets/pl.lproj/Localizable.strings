@@ -1502,3 +1502,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "copied_text" = "Skopiowano do schowka!";
 "copy_the_text" = "Kopiuj tekst";
 "copy_the_text_explanation" = "Tekst zostanie skopiowany do schowka";
+"text_title_i_like" = "Lubię to";
+"text_title_comment" = "Komentarz";
+"see_member_react" = "Osoby, które zareagowały";

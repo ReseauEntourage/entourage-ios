@@ -25,8 +25,6 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_view_comment_post: UIView!
     @IBOutlet weak var ui_view_comment: UIView!
     
-    @IBOutlet weak var ui_view_bt_send: UIView!
-    @IBOutlet weak var ui_lb_chat: UILabel!
     
     @IBOutlet weak var ui_label_ambassador: UILabel!
     
@@ -34,6 +32,12 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @IBOutlet weak var ui_view_translate: UIView!
     @IBOutlet weak var ui_label_translate: UILabel!
+    
+    @IBOutlet weak var ui_view_btn_i_like: UIView!
+    
+    @IBOutlet weak var ui_view_btn_i_comment: UIView!
+    
+    @IBOutlet weak var ui_reaction_stackview: UIStackView!
     
     class var identifier: String {
         return String(describing: self)
@@ -63,15 +67,36 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_comment.enableLongPressCopy()
         ui_image_post?.layer.cornerRadius = 8
         if ui_view_comment != nil {
-            ui_view_bt_send.layer.cornerRadius = ui_view_bt_send.frame.height / 2
             ui_view_comment.layer.cornerRadius = ui_view_comment.frame.height / 2
-            ui_view_comment.layer.borderColor = UIColor.appOrange.cgColor
-            ui_view_comment.layer.borderWidth = 1
-            ui_lb_chat.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
-            ui_lb_chat.text = "comment_post".localized
+
             ui_btn_signal_post.addTarget(self, action: #selector(signalClicked), for: .touchUpInside)
         }
-
+        if ui_view_btn_i_comment != nil {
+            let commentTapGesture = UITapGestureRecognizer(target: self, action: #selector(commentTapped))
+              ui_view_btn_i_comment.addGestureRecognizer(commentTapGesture)
+              ui_view_btn_i_comment.isUserInteractionEnabled = true
+        }
+        let commentsLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(commentLabelTapped))
+           ui_comments_nb.addGestureRecognizer(commentsLabelTapGesture)
+           ui_comments_nb.isUserInteractionEnabled = true  // Assure-toi que l'interaction utilisateur est activée
+        
+        if(ui_view_btn_i_like != nil){
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+                ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
+        }
+    }
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            showReactionsPopup()
+        }
+    }
+    
+    @objc func commentTapped() {
+        delegate?.showMessages(addComment: true, postId: postId, indexPathSelected: currentIndexPath, postMessage: postMessage)
+    }
+    
+    @objc func commentLabelTapped() {
+        delegate?.showMessages(addComment: false, postId: postId, indexPathSelected: currentIndexPath, postMessage: postMessage)
     }
     
     func toggleTranslation() {
@@ -117,6 +142,79 @@ class NeighborhoodPostCell: UITableViewCell {
     func setTranslatedText(){
         
     }
+    func showReactionsPopup() {
+        guard let storedReactions = getStoredReactionTypes() else { return }
+
+        let popupWidth: CGFloat = 250
+        let popupHeight: CGFloat = 50
+        let xOffset: CGFloat = 40 // Décalage sur la droite
+
+        // Trouver la position du bouton dans la fenêtre de l'application
+        guard let buttonFrame = ui_view_btn_i_like.superview?.convert(ui_view_btn_i_like.frame, to: nil) else { return }
+
+        // Calculer la position de la popup
+        let popupFrame = CGRect(x: buttonFrame.midX - (popupWidth / 2) + xOffset, y: buttonFrame.minY - popupHeight, width: popupWidth, height: popupHeight)
+
+        let popupView = ReactionsPopupView(reactions: storedReactions, frame: popupFrame, delegate: self)
+        
+        // Ajouter la popup à la fenêtre de l'application
+        if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+            window.addSubview(popupView)
+        }
+    }
+
+    
+    /* guard let _stackview = ui_reaction_stackview else{return} */
+    func displayReactions(for postMessage: PostMessage) {
+        guard let storedReactions = getStoredReactionTypes() else { return }
+        guard let _stackview = ui_reaction_stackview else{return}
+        // Réinitialiser le stack view
+        _stackview.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        var totalReactionsCount = 0
+
+        postMessage.reactions?.forEach { reaction in
+                if let reactionType = storedReactions.first(where: { $0.id == reaction.reactionId }) {
+                let container = UIView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+                container.layer.cornerRadius = container.frame.height / 2
+                container.layer.masksToBounds = true
+                container.layer.borderColor = UIColor.appGrey151.cgColor
+                container.layer.borderWidth = 1.0
+                container.backgroundColor = .white
+
+                let imageView = UIImageView()
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                container.addSubview(imageView)
+
+                // Contraintes pour le padding
+                NSLayoutConstraint.activate([
+                    imageView.topAnchor.constraint(equalTo: container.topAnchor, constant: 2),
+                    imageView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -2),
+                    imageView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 2),
+                    imageView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -2)
+                ])
+
+                imageView.contentMode = .scaleAspectFit
+
+                if let imageUrl = URL(string: reactionType.imageUrl ?? "") {
+                    // Charger l'image depuis imageUrl
+                    imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "default_reaction_icon"))
+                }
+                _stackview.addArrangedSubview(container)
+                totalReactionsCount += reaction.reactionsCount
+            }
+        }
+
+        if totalReactionsCount > 0 {
+            let reactionsCountLabel = UILabel()
+            reactionsCountLabel.text = "  " + "\(totalReactionsCount)"
+            _stackview.addArrangedSubview(reactionsCountLabel)
+        }
+        layoutIfNeeded()
+    }
+
+
+
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleTranslationGesture))
@@ -204,7 +302,20 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_label_ambassador.text = tagString
         }
         
+        displayReactions(for: message)
+        
     }
+    func getStoredReactionTypes() -> [ReactionType]? {
+        guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
+        do {
+            let reactions = try JSONDecoder().decode([ReactionType].self, from: reactionsData)
+            return reactions
+        } catch {
+            print("Erreur de décodage des réactions : \(error)")
+            return nil
+        }
+    }
+
 
     @IBAction func action_show_comments(_ sender: Any) {
         delegate?.showMessages(addComment: false,postId: postId, indexPathSelected: currentIndexPath,postMessage:postMessage)
@@ -229,7 +340,23 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showImage(imageUrl:URL?, postId:Int)
     func signalPost(postId:Int, userId:Int, textString:String)
     func showWebviewUrl(url:URL)
+    func addReaction(post:PostMessage, reactionType:ReactionType)
+    func deleteReaction(post:PostMessage, reactionType:ReactionType)
+    
 }
+
+extension NeighborhoodPostCell: ReactionsPopupViewDelegate {
+    func reactForPost(reactionType: ReactionType) {
+        self.delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
+        
+    }
+
+    func getReactionTypeById(_ id: Int) -> ReactionType? {
+        // Retourne le ReactionType correspondant à l'ID
+        return getStoredReactionTypes()?.first { $0.id == id }
+    }
+}
+
 
 
 class NeighborhoodPostTextCell: NeighborhoodPostCell {
@@ -248,3 +375,72 @@ class NeighborhoodPostTranslationCell:NeighborhoodPostCell{
 class NeighborhoodPostImageTranslationCell:NeighborhoodPostCell{
     
 }
+
+protocol ReactionsPopupViewDelegate: AnyObject {
+    func reactForPost(reactionType: ReactionType)
+    func getReactionTypeById(_ id: Int) -> ReactionType?
+}
+
+class ReactionsPopupView: UIView {
+
+    weak var delegate: ReactionsPopupViewDelegate?
+    
+    init(reactions: [ReactionType], frame: CGRect, delegate: ReactionsPopupViewDelegate?) {
+        super.init(frame: frame)
+        self.delegate = delegate
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 25
+        self.layer.masksToBounds = true
+        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.borderWidth = 1
+
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 10
+
+        for reaction in reactions {
+            let imageView = UIImageView()
+            if let imageUrl = URL(string: reaction.imageUrl ?? "") {
+                imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "default_reaction_icon"))
+            }
+            imageView.contentMode = .scaleAspectFit
+            imageView.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(reactionTapped))
+            imageView.addGestureRecognizer(tapGesture)
+            imageView.tag = reaction.id
+            stackView.addArrangedSubview(imageView)
+
+            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        }
+
+        self.addSubview(stackView)
+        NSLayoutConstraint.activate([
+                  stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),      // Padding en haut
+                  stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5), // Padding en bas
+                  stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10), // Padding à gauche
+                  stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10) // Padding à droite
+              ])
+    }
+    func dismiss() {
+        self.removeFromSuperview()
+    }
+
+    @objc func reactionTapped(_ sender: UITapGestureRecognizer) {
+        guard let imageView = sender.view as? UIImageView else { return }
+        let reactionId = imageView.tag
+        if let reaction = delegate?.getReactionTypeById(reactionId) {
+            delegate?.reactForPost(reactionType: reaction)
+        }
+        dismiss()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+

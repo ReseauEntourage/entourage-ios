@@ -69,6 +69,12 @@ class Metadatas:Codable {
                     addTags(json: tags, key: "signals", tags: &_tagsSignals)
                     addSections(json: tags, key: "sections", tags: &_tagsSections)
                 }
+                if let reactionsArray = json["reactions"] as? [[String: AnyObject]] {
+                    let reactionsData = try JSONSerialization.data(withJSONObject: reactionsArray)
+                    let reactions = try JSONDecoder().decode([ReactionType].self, from: reactionsData)
+                    UserDefaults.standard.set(reactionsData, forKey: "StoredReactions")
+
+                }
             }
         }
         catch {

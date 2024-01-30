@@ -468,4 +468,55 @@ struct EventService:ParsingDataCodable {
             DispatchQueue.main.async { completion(nil) }
         }
     }
+    
+    //reactions :
+    static func postReactionToEventPost(eventId: Int, postId: Int, reactionWrapper: ReactionWrapper, completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String(format: kAPIPostReactionEventPost, eventId, postId, token)
+
+        guard let bodyData = try? JSONEncoder().encode(reactionWrapper) else {
+            DispatchQueue.main.async { completion(nil) }
+            return
+        }
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { _, resp, error in
+            guard let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+    
+    static func deleteReactionToEventPost(eventId: Int, postId: Int, completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String(format: kAPIDeleteReactionEventPost, eventId, postId, token)
+
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { _, resp, error in
+            guard let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+    
+    static func getEventPostReactionDetails(eventId: Int, postId: Int, reactionId: Int, completion: @escaping ([UserLightNeighborhood]?, EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String(format: kAPIGetDetailsReactionEventPost, eventId, postId, reactionId, token)
+
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            let details: [UserLightNeighborhood]? = self.parseData(data: data, key: "users")
+            DispatchQueue.main.async { completion(details, nil) }
+        }
+    }
+
+    
+    
 }

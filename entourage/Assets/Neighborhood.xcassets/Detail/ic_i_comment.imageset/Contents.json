@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_comment_grey.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

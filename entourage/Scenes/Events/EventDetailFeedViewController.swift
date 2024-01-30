@@ -807,6 +807,20 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
+    func addReaction(post: PostMessage, reactionType: ReactionType) {
+        var reactionWrapper = ReactionWrapper()
+        reactionWrapper.reactionId = reactionType.id
+        EventService.postReactionToEventPost(eventId: self.eventId, postId: post.uid, reactionWrapper: reactionWrapper) { error in
+            print("eho passed here")
+        }
+    }
+    
+    func deleteReaction(post: PostMessage, reactionType: ReactionType) {
+        EventService.deleteReactionToEventPost(eventId: self.eventId, postId: post.uid) { error in
+            print("eho coucou i'm here")
+        }
+    }
+    
     func showWebviewUrl(url: URL) {
         WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }

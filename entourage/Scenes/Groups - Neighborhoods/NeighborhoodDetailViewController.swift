@@ -552,15 +552,16 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             if indexPath.row - 1 < messagesOld.count {
                 let postmessage = messagesOld[indexPath.row - 1]
                 var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-                if postmessage.status == "deleted" {
-                    identifier = NeighborhoodPostDeletedCell.identifier
-                }
+                
                 if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                     identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
                 }
-                print("eho contentTranslation " , postmessage.contentTranslations)
+                
                 if(postmessage.contentTranslations == nil){
                     identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+                }
+                if postmessage.status == "deleted" {
+                    identifier = NeighborhoodPostDeletedCell.identifier
                 }
                 print("eho identifier " , identifier)
 
@@ -591,18 +592,17 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             if indexPath.row - countToAdd < self.messagesNew.count {
                 let postmessage = self.messagesNew[indexPath.row - countToAdd]
                 var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-                if postmessage.status == "deleted" {
-                    identifier = NeighborhoodPostDeletedCell.identifier
-                }
+                
                 if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                     identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
                 }
-                print("eho contentTranslation " , postmessage.contentTranslations)
                 if(postmessage.contentTranslations == nil){
                     identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
                 }
+                if postmessage.status == "deleted" {
+                    identifier = NeighborhoodPostDeletedCell.identifier
+                }
                 print("eho identifier " , identifier)
-
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
                 return cell
@@ -614,15 +614,17 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         if let messages = neighborhood.messages, indexPath.row - countToAdd < messages.count {
             let postmessage = messages[indexPath.row - countToAdd]
             var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-            if postmessage.status == "deleted" {
-                identifier = NeighborhoodPostDeletedCell.identifier
-            }
+           
             if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
                 identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
             }
             if(postmessage.contentTranslations == nil){
                 identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             }
+            if postmessage.status == "deleted" {
+                identifier = NeighborhoodPostDeletedCell.identifier
+            }
+            print("eho identifier " , identifier)
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
@@ -718,6 +720,20 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
+    func addReaction(post: PostMessage, reactionType: ReactionType) {
+        var reactionWrapper = ReactionWrapper()
+        reactionWrapper.reactionId = reactionType.id
+        NeighborhoodService.postReactionToGroupPost(groupId: self.neighborhoodId, postId: post.uid, reactionWrapper: reactionWrapper) { error in
+            
+        }
+    }
+    
+    func deleteReaction(post: PostMessage,reactionType: ReactionType) {
+        NeighborhoodService.deleteReactionToGroupPost(groupId: self.neighborhoodId, postId: post.uid) { error in
+            print("eho i passed delete")
+        }
+    }
+    
     func showWebviewUrl(url: URL) {
         WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }

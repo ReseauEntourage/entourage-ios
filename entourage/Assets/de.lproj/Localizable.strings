@@ -1499,3 +1499,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "copied_text" = "In die Zwischenablage kopiert!";
 "copy_the_text" = "Text kopieren";
 "copy_the_text_explanation" = "Der Text wird in die Zwischenablage kopiert";
+"text_title_i_like" = "Gefällt mir";
+"text_title_comment" = "Kommentieren";
+"see_member_react" = "Personen, die reagiert haben";

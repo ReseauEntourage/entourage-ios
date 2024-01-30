@@ -426,6 +426,7 @@
 		2674FEC72ACDB6AC0013D674 /* HomeModeratorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674FEC62ACDB6AC0013D674 /* HomeModeratorCell.swift */; };
 		2674FEC92ACDB7520013D674 /* HomeModeratorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2674FEC82ACDB7520013D674 /* HomeModeratorCell.xib */; };
 		2684542C29DAC63700C944EA /* UniversalLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2684542B29DAC63700C944EA /* UniversalLinkManager.swift */; };
+		2685FFE22B68EA1D0083F683 /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685FFE12B68EA1D0083F683 /* Reaction.swift */; };
 		2689F3B42A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2689F3B32A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib */; };
 		2689F3B62A3B6D3E0009920D /* WelcomeFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */; };
 		268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FCA292967281100159C34 /* MJAlertWithImageController.swift */; };
@@ -900,6 +901,7 @@
 		2674FEC62ACDB6AC0013D674 /* HomeModeratorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModeratorCell.swift; sourceTree = "<group>"; };
 		2674FEC82ACDB7520013D674 /* HomeModeratorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeModeratorCell.xib; sourceTree = "<group>"; };
 		2684542B29DAC63700C944EA /* UniversalLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkManager.swift; sourceTree = "<group>"; };
+		2685FFE12B68EA1D0083F683 /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		2689F3B32A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeThreeDemandExampleCell.xib; sourceTree = "<group>"; };
 		2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFiveViewController.swift; sourceTree = "<group>"; };
 		268FCA292967281100159C34 /* MJAlertWithImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertWithImageController.swift; sourceTree = "<group>"; };
@@ -1068,6 +1070,7 @@
 				0208937C28BCFE3100160F1E /* NotificationPushData.swift */,
 				0227EC4E292CE8320049168E /* NotifInApp.swift */,
 				26A06E572B1E23B500AC323A /* Translations.swift */,
+				2685FFE12B68EA1D0083F683 /* Reaction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2274,6 +2277,7 @@
 				0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */,
 				0258AFE4282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift in Sources */,
 				029638F5286C801A00E10EFB /* EventCreateValidateViewController.swift in Sources */,
+				2685FFE22B68EA1D0083F683 /* Reaction.swift in Sources */,
 				02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */,
 				0268C251285A2B1400294055 /* FloatyItem.swift in Sources */,
 				021FD96028743EFF00D3AA54 /* EventListCell.swift in Sources */,

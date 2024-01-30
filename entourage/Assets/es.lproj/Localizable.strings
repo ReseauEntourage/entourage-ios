@@ -2921,3 +2921,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "copied_text" = "¡Copiado al portapapeles!";
 "copy_the_text" = "Copiar el texto";
 "copy_the_text_explanation" = "El texto se copiará al portapapeles";
+"text_title_i_like" = "Me gusta";
+"text_title_comment" = "Comentar";
+"see_member_react" = "Personas que reaccionaron";
