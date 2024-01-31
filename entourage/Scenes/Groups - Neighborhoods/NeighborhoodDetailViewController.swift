@@ -563,7 +563,6 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
-                print("eho identifier " , identifier)
 
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
@@ -602,7 +601,6 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
-                print("eho identifier " , identifier)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
                 return cell
@@ -624,7 +622,6 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
             }
-            print("eho identifier " , identifier)
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
@@ -702,6 +699,41 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
         }
     }
     
+    func updatedPostWithReaction(originalPost: PostMessage, reactionId: Int, addReaction: Bool) -> PostMessage {
+        var updatedReactions = originalPost.reactions ?? []
+
+        if addReaction {
+            // Ajouter une réaction
+            if let index = updatedReactions.firstIndex(where: { $0.reactionId == reactionId }) {
+                updatedReactions[index].reactionsCount += 1
+            } else {
+                let newReaction = Reaction(reactionId: reactionId, chatMessageId: originalPost.uid, reactionsCount: 1)
+                updatedReactions.append(newReaction)
+            }
+        } else {
+            // Supprimer une réaction
+            if let index = updatedReactions.firstIndex(where: { $0.reactionId == reactionId }) {
+                if updatedReactions[index].reactionsCount > 1 {
+                    updatedReactions[index].reactionsCount -= 1
+                } else {
+                    updatedReactions.remove(at: index)
+                }
+            }
+        }
+
+        var updatedPost = originalPost
+        updatedPost.reactions = updatedReactions
+        return updatedPost
+    }
+    func replacePostInArray(post: PostMessage) {
+        if let indexNew = messagesNew.firstIndex(where: { $0.uid == post.uid }) {
+            messagesNew[indexNew] = post
+        } else if let indexOld = messagesOld.firstIndex(where: { $0.uid == post.uid }) {
+            messagesOld[indexOld] = post
+        }
+    }
+
+    
     func joinLeave() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Join)
         joinLeaveGroup()
@@ -724,15 +756,24 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
         var reactionWrapper = ReactionWrapper()
         reactionWrapper.reactionId = reactionType.id
         NeighborhoodService.postReactionToGroupPost(groupId: self.neighborhoodId, postId: post.uid, reactionWrapper: reactionWrapper) { error in
-            
+            if error == nil {
+//                let updatedPost = self.updatedPostWithReaction(originalPost: post, reactionId: reactionType.id, addReaction: true)
+//                self.replacePostInArray(post: updatedPost)
+//                self.ui_tableview.reloadData()
+            }
         }
     }
-    
-    func deleteReaction(post: PostMessage,reactionType: ReactionType) {
+
+    func deleteReaction(post: PostMessage, reactionType: ReactionType) {
         NeighborhoodService.deleteReactionToGroupPost(groupId: self.neighborhoodId, postId: post.uid) { error in
-            print("eho i passed delete")
+            if error == nil {
+//                let updatedPost = self.updatedPostWithReaction(originalPost: post, reactionId: reactionType.id, addReaction: false)
+//                self.replacePostInArray(post: updatedPost)
+//                self.ui_tableview.reloadData()
+            }
         }
     }
+
     
     func showWebviewUrl(url: URL) {
         WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)

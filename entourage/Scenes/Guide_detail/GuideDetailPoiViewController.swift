@@ -105,9 +105,7 @@ import MessageUI
     //MARK: - IBACTIONS -
     @IBAction func action_show_soliguide(_ sender: Any) {
         //TODO: - In App ou pas ?
-        print("eho soliguide ")
         if let _url = poi?.soliguideUrl, let url = URL.init(string: _url), let _poiUid = poi?.uuid {
-            print("eho soliguide url " , _url)
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
             AnalyticsLoggerManager.logEvent(name: Soliguide_Click)
 //

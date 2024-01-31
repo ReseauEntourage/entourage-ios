@@ -214,9 +214,41 @@ class NeighborhoodPostCell: UITableViewCell {
     }
 
 
+    func updateReaction(reactionType: ReactionType, add: Bool) {
+        if add {
+            // Ajouter une réaction
+            postMessage.reactionId = reactionType.id
+            if let index = postMessage.reactions?.firstIndex(where: { $0.reactionId == reactionType.id }) {
+                // La réaction existe déjà, augmenter le compteur
+                postMessage.reactions?[index].reactionsCount += 1
+            } else {
+                // Ajouter une nouvelle réaction
+                let newReaction = Reaction(reactionId: reactionType.id, chatMessageId: postId, reactionsCount: 1)
+                if postMessage.reactions != nil {
+                    postMessage.reactions?.append(newReaction)
+                } else {
+                    postMessage.reactions = [newReaction]
+                }
+            }
+        } else {
+            // Supprimer une réaction
+            postMessage.reactionId = 0
+            if let index = postMessage.reactions?.firstIndex(where: { $0.reactionId == reactionType.id }) {
+                if postMessage.reactions?[index].reactionsCount ?? 0 > 1 {
+                    postMessage.reactions?[index].reactionsCount -= 1
+                } else {
+                    postMessage.reactions?.remove(at: index)
+                }
+            }
+        }
+
+        // Mettre à jour l'affichage des réactions
+        displayReactions(for: postMessage)
+    }
 
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
+        print("eho passed here ? ")
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleTranslationGesture))
 
         if(ui_view_translate != nil){
@@ -346,10 +378,49 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
 }
 
 extension NeighborhoodPostCell: ReactionsPopupViewDelegate {
+//    func reactForPost(reactionType: ReactionType) {
+//        if postMessage.reactionId == reactionType.id {
+//            self.delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
+//        } else {
+//            // Ajouter une nouvelle réaction
+//            self.delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
+//        }
+//    }
+//    func reactForPost(reactionType: ReactionType) {
+//        let alreadyReacted = postMessage.reactions?.contains(where: { $0.reactionId == reactionType.id }) ?? false
+//        if alreadyReacted {
+//            // Supprimer la réaction
+//            updateReaction(reactionType: reactionType, add: false)
+//            delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
+//        } else {
+//            // Ajouter une nouvelle réaction
+//            updateReaction(reactionType: reactionType, add: true)
+//            delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
+//        }
+//    }
     func reactForPost(reactionType: ReactionType) {
-        self.delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
-        
+        if postMessage.reactionId != 0 {
+            if postMessage.reactionId == reactionType.id {
+                // L'utilisateur souhaite supprimer sa réaction précédente
+                updateReaction(reactionType: reactionType, add: false)
+                delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
+            } else {
+                // Supprimer la réaction existante avant d'ajouter la nouvelle
+                if let existingReactionType = getReactionTypeById(postMessage.reactionId ?? 0) {
+                    updateReaction(reactionType: existingReactionType, add: false)
+                    delegate?.deleteReaction(post: self.postMessage, reactionType: existingReactionType)
+                }
+                // Ajouter la nouvelle réaction
+                updateReaction(reactionType: reactionType, add: true)
+                delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
+            }
+        } else {
+            // Ajouter une nouvelle réaction
+            updateReaction(reactionType: reactionType, add: true)
+            delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
+        }
     }
+
 
     func getReactionTypeById(_ id: Int) -> ReactionType? {
         // Retourne le ReactionType correspondant à l'ID
