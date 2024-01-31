@@ -84,6 +84,26 @@ class NeighborhoodPostCell: UITableViewCell {
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
                 ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
         }
+        if ui_view_btn_i_like != nil {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLittleTap))
+            ui_view_btn_i_like.addGestureRecognizer(tapGesture)
+        }
+    }
+    @objc func handleLittleTap(gesture: UITapGestureRecognizer) {
+        if gesture.state == .ended {
+            // Vérifier si l'utilisateur a déjà réagi
+            if postMessage.reactionId == 0, let firstReactionType = getStoredReactionTypes()?.first {
+                // Ajouter la première réaction disponible
+                updateReaction(reactionType: firstReactionType, add: true)
+                delegate?.addReaction(post: self.postMessage, reactionType: firstReactionType)
+            } else {
+                // Supprimer la réaction existante si l'utilisateur a déjà réagi
+                if let existingReactionType = getReactionTypeById(postMessage.reactionId ?? 0) {
+                    updateReaction(reactionType: existingReactionType, add: false)
+                    delegate?.deleteReaction(post: self.postMessage, reactionType: existingReactionType)
+                }
+            }
+        }
     }
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
