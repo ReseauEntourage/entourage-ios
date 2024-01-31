@@ -285,6 +285,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_comments_nb" destination="kLZ-kX-Eih" id="Cmy-cG-KCN"/>
                 <outlet property="ui_date" destination="ZBP-ld-rgY" id="fOU-Zf-CL0"/>
                 <outlet property="ui_image_post" destination="h0R-dD-e9j" id="CJc-X3-miT"/>
+                <outlet property="ui_image_react_btn" destination="QJ8-nO-gbP" id="1mR-sV-15e"/>
                 <outlet property="ui_iv_user" destination="qPp-vp-wdq" id="zZW-qn-gUr"/>
                 <outlet property="ui_label_ambassador" destination="1mR-hh-flM" id="2iE-y4-JlW"/>
                 <outlet property="ui_reaction_stackview" destination="2bY-1D-5no" id="EBa-ts-wqy"/>

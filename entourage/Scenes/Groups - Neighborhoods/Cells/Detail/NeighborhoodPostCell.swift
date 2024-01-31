@@ -39,6 +39,8 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @IBOutlet weak var ui_reaction_stackview: UIStackView!
     
+    @IBOutlet weak var ui_image_react_btn: UIImageView!
+    
     class var identifier: String {
         return String(describing: self)
     }
@@ -117,6 +119,17 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @objc func commentLabelTapped() {
         delegate?.showMessages(addComment: false, postId: postId, indexPathSelected: currentIndexPath, postMessage: postMessage)
+    }
+    
+    func updateReactionIcon() {
+        if ui_image_react_btn != nil {
+            // Mettre à jour l'icône en fonction de la valeur de reactionId
+            if postMessage.reactionId == 0 {
+                ui_image_react_btn.image = UIImage(named: "ic_i_like_grey")
+            } else {
+                ui_image_react_btn.image = UIImage(named: "ic_i_like")
+            }
+        }
     }
     
     func toggleTranslation() {
@@ -263,6 +276,7 @@ class NeighborhoodPostCell: UITableViewCell {
         }
 
         // Mettre à jour l'affichage des réactions
+        updateReactionIcon()
         displayReactions(for: postMessage)
     }
 
@@ -278,6 +292,7 @@ class NeighborhoodPostCell: UITableViewCell {
         
         self.postMessage = message
         self.delegate = delegate
+        updateReactionIcon()
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
         ui_comment.handleURLTap { url in

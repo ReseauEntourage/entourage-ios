@@ -300,6 +300,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_comment" destination="W9l-mW-EI1" id="3gf-H4-edD"/>
                 <outlet property="ui_comments_nb" destination="g2x-q5-Qeb" id="OSA-wi-nLw"/>
                 <outlet property="ui_date" destination="07l-KZ-bUR" id="ryC-cw-SPp"/>
+                <outlet property="ui_image_react_btn" destination="5Mc-Iu-7jG" id="roe-Es-Hj6"/>
                 <outlet property="ui_iv_user" destination="soI-RK-pCX" id="tEL-8d-zRU"/>
                 <outlet property="ui_label_ambassador" destination="Hyy-Jz-J3Y" id="CXx-VS-fHY"/>
                 <outlet property="ui_label_translate" destination="j5z-bu-Jla" id="Qe2-Ig-MvI"/>
