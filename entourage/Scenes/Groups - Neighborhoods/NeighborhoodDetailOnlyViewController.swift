@@ -193,6 +193,7 @@ extension NeighborhoodDetailOnlyViewController: NeighborhoodDetailTopCellDelegat
         }
     }
     
+    
     func joinLeave() {
         joinLeaveGroup()
     }

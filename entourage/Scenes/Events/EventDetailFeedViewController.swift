@@ -778,6 +778,15 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
             self.navigationController?.present(navVC, animated: true)
         }
     }
+    func showMemberReact(postId:Int){
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.event = event
+            vc.postId = postId
+            vc.eventId = eventId
+            vc.isFromReact = true
+            self.navigationController?.present(navVC, animated: true)
+        }
+    }
     func joinLeave() {
         joinLeaveEvent()
     }
@@ -807,6 +816,10 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
+    func onReactClickSeeMember(post: PostMessage) {
+        self.showMemberReact(postId: post.uid)
+    }
+    
     func addReaction(post: PostMessage, reactionType: ReactionType) {
         var reactionWrapper = ReactionWrapper()
         reactionWrapper.reactionId = reactionType.id

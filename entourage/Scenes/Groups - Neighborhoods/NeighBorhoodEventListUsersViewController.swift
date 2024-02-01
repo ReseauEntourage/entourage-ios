@@ -24,25 +24,36 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     var isAlreadyClearRows = false
     var isSearch = false
     
+    var reactionsTypes = [ReactionType]()
+    var groupId: Int? = nil
+    var postId: Int? = nil
+    var isFromReact = false
+    var eventId:Int? = nil
+    var reactionTypeList = [ReactionType]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
         let txtSearch = "neighborhood_group_search_empty_title".localized
-        
+        loadStoredReactionTypes()
+
         ui_top_view.populateView(title: title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
         
         ui_lb_no_result.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lb_no_result.text = txtSearch
         ui_view_no_result.isHidden = true
-        if isEvent {
-            getEventusers()
+        if isFromReact {
+            fetchReactionsDetails()
+        }else{
+            if isEvent {
+                getEventusers()
+            }
+            else {
+                getNeighborhoodUsers()
+                AnalyticsLoggerManager.logEvent(name: View_GroupMember_ShowList)
+            }
         }
-        else {
-            getNeighborhoodUsers()
-            AnalyticsLoggerManager.logEvent(name: View_GroupMember_ShowList)
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +107,65 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         }
         self.ui_tableview.reloadData()
     }
+    func fetchReactionsDetails() {
+        guard let postId = self.postId else { return }
+        
+        if let _groupId = self.groupId{
+            for reaction in self.reactionsTypes {
+                NeighborhoodService.getGroupPostReactionDetails(groupId: _groupId, postId: postId, reactionId: reaction.id) { [weak self] (users, error) in
+                    guard let self = self else { return }
+                    if let users = users {
+                        // Stocke les utilisateurs par ID de réaction
+                        for _user in users{
+                            self.users.append(_user)
+                            self.reactionTypeList.append(reaction)
+                        }
+                    } else if let error = error {
+                        print("Erreur lors de la récupération des détails des réactions: ")
+                    }
+                    
+                    // Met à jour l'UI ici si nécessaire, par exemple recharger les données de tableView
+                    self.ui_tableview.reloadData()
+                }
+            }
+
+        }
+        if let _eventId = self.eventId {
+            for reaction in self.reactionsTypes {
+                EventService.getEventPostReactionDetails(eventId: _eventId, postId: postId, reactionId: reaction.id) { [weak self] (users, error) in
+                    guard let self = self else { return }
+                    if let users = users {
+                        // Stocke les utilisateurs par ID de réaction
+                        for _user in users{
+                            self.users.append(_user)
+                            self.reactionTypeList.append(reaction)
+                        }
+                    } else if let error = error {
+                        print("Erreur lors de la récupération des détails des réactions: ")
+                    }
+                    
+                    // Met à jour l'UI ici si nécessaire, par exemple recharger les données de tableView
+                    self.ui_tableview.reloadData()
+                }
+            }
+        }
+        
+        // Ici, tu parcours tes réactions pour appeler getGroupPostReactionDetails pour chacune
+
+    }
+    func getStoredReactionTypes() -> [ReactionType]? {
+        guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
+        do {
+            let reactions = try JSONDecoder().decode([ReactionType].self, from: reactionsData)
+            return reactions
+        } catch {
+            print("Erreur de décodage des réactions : \(error)")
+            return nil
+        }
+    }
+    func loadStoredReactionTypes() {
+        reactionsTypes = getStoredReactionTypes() ?? []
+    }
 }
 
 //MARK: - Tableview Datasource/delegate -
@@ -124,12 +194,12 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
         else {
             user = self.users[position]
         }
-        
+        let _reactionType = reactionTypeList[position]
         let isMe = user.sid == UserDefaults.currentUser?.sid
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
         
-        cell.populateCell(isMe:isMe, username: user.displayName, role: user.getCommunityRoleWithPartnerFormated(), imageUrl: user.avatarURL, showBtMessage: true,delegate: self,position: position)
+        cell.populateCell(isMe:isMe, username: user.displayName, role: user.getCommunityRoleWithPartnerFormated(), imageUrl: user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType)
         return cell
     }
     

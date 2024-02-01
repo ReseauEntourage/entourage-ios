@@ -94,7 +94,7 @@ class NeighborhoodPostCell: UITableViewCell {
     @objc func handleLittleTap(gesture: UITapGestureRecognizer) {
         if gesture.state == .ended {
             // Vérifier si l'utilisateur a déjà réagi
-            if postMessage.reactionId == 0, let firstReactionType = getStoredReactionTypes()?.first {
+            if postMessage.reactionId == 0 || postMessage.reactionId == nil, let firstReactionType = getStoredReactionTypes()?.first {
                 // Ajouter la première réaction disponible
                 updateReaction(reactionType: firstReactionType, add: true)
                 delegate?.addReaction(post: self.postMessage, reactionType: firstReactionType)
@@ -123,8 +123,9 @@ class NeighborhoodPostCell: UITableViewCell {
     
     func updateReactionIcon() {
         if ui_image_react_btn != nil {
+            print("eho postMessage reactionId " , postMessage.reactionId)
             // Mettre à jour l'icône en fonction de la valeur de reactionId
-            if postMessage.reactionId == 0 {
+            if postMessage.reactionId == 0 || postMessage.reactionId == nil  {
                 ui_image_react_btn.image = UIImage(named: "ic_i_like_grey")
             } else {
                 ui_image_react_btn.image = UIImage(named: "ic_i_like")
@@ -203,7 +204,7 @@ class NeighborhoodPostCell: UITableViewCell {
         guard let _stackview = ui_reaction_stackview else{return}
         // Réinitialiser le stack view
         _stackview.arrangedSubviews.forEach { $0.removeFromSuperview() }
-
+        
         var totalReactionsCount = 0
 
         postMessage.reactions?.forEach { reaction in
@@ -231,7 +232,7 @@ class NeighborhoodPostCell: UITableViewCell {
 
                 if let imageUrl = URL(string: reactionType.imageUrl ?? "") {
                     // Charger l'image depuis imageUrl
-                    imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "default_reaction_icon"))
+                    imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
                 }
                 _stackview.addArrangedSubview(container)
                 totalReactionsCount += reaction.reactionsCount
@@ -243,9 +244,15 @@ class NeighborhoodPostCell: UITableViewCell {
             reactionsCountLabel.text = "  " + "\(totalReactionsCount)"
             _stackview.addArrangedSubview(reactionsCountLabel)
         }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
+        _stackview.isUserInteractionEnabled = true // Assure-toi que cette ligne est bien là
+        _stackview.addGestureRecognizer(tapGesture)
         layoutIfNeeded()
     }
-
+    
+    @objc func stackViewTapped() {
+        delegate?.onReactClickSeeMember(post: postMessage) // Assure-toi que `delegate` et `postMessage` sont accessibles ici
+    }
 
     func updateReaction(reactionType: ReactionType, add: Bool) {
         if add {
@@ -409,6 +416,7 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showWebviewUrl(url:URL)
     func addReaction(post:PostMessage, reactionType:ReactionType)
     func deleteReaction(post:PostMessage, reactionType:ReactionType)
+    func onReactClickSeeMember(post:PostMessage)
     
 }
 
@@ -510,7 +518,7 @@ class ReactionsPopupView: UIView {
         for reaction in reactions {
             let imageView = UIImageView()
             if let imageUrl = URL(string: reaction.imageUrl ?? "") {
-                imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "default_reaction_icon"))
+                imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
             }
             imageView.contentMode = .scaleAspectFit
             imageView.isUserInteractionEnabled = true
