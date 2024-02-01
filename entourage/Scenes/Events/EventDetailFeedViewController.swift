@@ -611,7 +611,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
                 identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
+            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.event?.isMember)
             return cell
         }
         
@@ -646,7 +646,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
+        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.event?.isMember)
         return cell
     }
     
@@ -816,6 +816,20 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
+    func ifNotMemberWarnUser() {
+        let alertController = UIAlertController(title: "Attention", message: "Vous devez rejoindre le groupe pour effectuer cette action.", preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: "OK", style: .default) { action in
+                    // Code à exécuter lorsque l'utilisateur touche le bouton OK
+                    // Tu peux le laisser vide si tu ne veux rien faire de spécial
+                }
+                
+                alertController.addAction(okAction)
+                
+                // Présenter l'alerte à l'utilisateur
+                present(alertController, animated: true, completion: nil)
+    }
+    
     func onReactClickSeeMember(post: PostMessage) {
         self.showMemberReact(postId: post.uid)
     }

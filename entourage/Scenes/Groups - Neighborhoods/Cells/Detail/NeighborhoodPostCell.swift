@@ -212,7 +212,7 @@ class NeighborhoodPostCell: UITableViewCell {
                 let container = UIView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
                 container.layer.cornerRadius = container.frame.height / 2
                 container.layer.masksToBounds = true
-                container.layer.borderColor = UIColor.appGrey151.cgColor
+                container.layer.borderColor = UIColor.appGrisReaction.cgColor
                 container.layer.borderWidth = 1.0
                 container.backgroundColor = .white
 
@@ -288,7 +288,7 @@ class NeighborhoodPostCell: UITableViewCell {
     }
 
     
-    func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
+    func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?, isMember:Bool?) {
         print("eho passed here ? ")
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleTranslationGesture))
 
@@ -377,8 +377,25 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         
         displayReactions(for: message)
-        
+        if let isMember = isMember, !isMember {
+            // Configurer pour les non-membres
+            ui_view_btn_i_like.isUserInteractionEnabled = true
+            ui_btn_signal_post.isUserInteractionEnabled = true
+            
+            // Ajouter un geste pour avertir l'utilisateur
+            let tapGestureForLike = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
+            ui_view_btn_i_like.addGestureRecognizer(tapGestureForLike)
+            
+            let tapGestureForSignal = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
+            ui_btn_signal_post.addGestureRecognizer(tapGestureForSignal)
+        }
     }
+    
+    @objc func ifNotMemberWarnUser() {
+        delegate?.ifNotMemberWarnUser()
+    }
+    
+    
     func getStoredReactionTypes() -> [ReactionType]? {
         guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
         do {
@@ -417,7 +434,8 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func addReaction(post:PostMessage, reactionType:ReactionType)
     func deleteReaction(post:PostMessage, reactionType:ReactionType)
     func onReactClickSeeMember(post:PostMessage)
-    
+    func ifNotMemberWarnUser()
+
 }
 
 extension NeighborhoodPostCell: ReactionsPopupViewDelegate {
@@ -505,9 +523,8 @@ class ReactionsPopupView: UIView {
         self.backgroundColor = .white
         self.layer.cornerRadius = 25
         self.layer.masksToBounds = true
-        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.borderColor = UIColor.appGrisReaction.cgColor
         self.layer.borderWidth = 1
-
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -526,7 +543,6 @@ class ReactionsPopupView: UIView {
             imageView.addGestureRecognizer(tapGesture)
             imageView.tag = reaction.id
             stackView.addArrangedSubview(imageView)
-
             imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
             imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
