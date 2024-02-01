@@ -57,7 +57,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
@@ -92,6 +92,7 @@ class NeighborhoodPostCell: UITableViewCell {
         }
     }
     @objc func handleLittleTap(gesture: UITapGestureRecognizer) {
+        AnalyticsLoggerManager.logEvent(name: Clic_Post_Like)
         if gesture.state == .ended {
             // Vérifier si l'utilisateur a déjà réagi
             if postMessage.reactionId == 0 || postMessage.reactionId == nil, let firstReactionType = getStoredReactionTypes()?.first {
@@ -107,8 +108,10 @@ class NeighborhoodPostCell: UITableViewCell {
             }
         }
     }
+
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
+            AnalyticsLoggerManager.logEvent(name: Clic_Post_List_Reactions)
             showReactionsPopup()
         }
     }
@@ -251,6 +254,7 @@ class NeighborhoodPostCell: UITableViewCell {
     }
     
     @objc func stackViewTapped() {
+        AnalyticsLoggerManager.logEvent(name: Clic_ListReactions_Contact)
         delegate?.onReactClickSeeMember(post: postMessage) // Assure-toi que `delegate` et `postMessage` sont accessibles ici
     }
 

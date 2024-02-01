@@ -333,4 +333,7 @@ let   View__Event__List = "View__Event__List"
 let   Action__Event__LocationFilter = "Action__Event__LocationFilter"
 let   Action__Event__New = "Action__Event__New"
 
+let   Clic_Post_Like = "Clic_Post_Like"
+let   Clic_Post_List_Reactions = "Clic_Post_List_Reactions"
+let   Clic_ListReactions_Contact = "Clic_ListReactions_Contact"
 
