@@ -522,6 +522,7 @@ class ReactionsPopupView: UIView {
     weak var delegate: ReactionsPopupViewDelegate?
     
     init(reactions: [ReactionType], frame: CGRect, delegate: ReactionsPopupViewDelegate?) {
+        
         super.init(frame: frame)
         self.delegate = delegate
         self.backgroundColor = .white
@@ -535,6 +536,8 @@ class ReactionsPopupView: UIView {
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 10
+        NotificationCenter.default.addObserver(self, selector: #selector(dismiss), name: Notification.Name("FermerReactionsPopup"), object: nil)
+
 
         for reaction in reactions {
             let imageView = UIImageView()
@@ -559,7 +562,11 @@ class ReactionsPopupView: UIView {
                   stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10) // Padding à droite
               ])
     }
-    func dismiss() {
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func dismiss() {
         self.removeFromSuperview()
     }
 

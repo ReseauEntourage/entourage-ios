@@ -105,30 +105,30 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zIA-8S-vtS">
-                                <rect key="frame" x="28" y="411" width="370" height="48"/>
+                                <rect key="frame" x="0.0" y="417" width="426" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9U-HK-Bgq">
-                                        <rect key="frame" x="0.0" y="0.0" width="370" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="426" height="48"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="action_add_comments:" destination="7bR-Xq-KWE" eventType="touchUpInside" id="oCy-44-RyA"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKP-rz-Nlq">
-                                        <rect key="frame" x="0.0" y="0.0" width="370" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="426" height="48"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E4M-OC-sBg">
-                                                <rect key="frame" x="5" y="0.0" width="166.66666666666666" height="48"/>
+                                                <rect key="frame" x="10" y="10" width="191.66666666666666" height="38"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_i_like_grey" translatesAutoresizingMaskIntoConstraints="NO" id="cFJ-ff-ciW">
-                                                        <rect key="frame" x="41.333333333333329" y="12" width="24" height="24"/>
+                                                        <rect key="frame" x="55" y="7" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="0GT-N5-A3d"/>
                                                             <constraint firstAttribute="width" constant="24" id="PzH-IW-U23"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J'aime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sah-IK-B01">
-                                                        <rect key="frame" x="70.333333333333343" y="14.333333333333313" width="96.333333333333343" height="19.333333333333329"/>
+                                                        <rect key="frame" x="84" y="9.3333333333333126" width="107.66666666666669" height="19.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -138,23 +138,23 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 <constraints>
                                                     <constraint firstItem="sah-IK-B01" firstAttribute="leading" secondItem="cFJ-ff-ciW" secondAttribute="trailing" constant="5" id="4ip-Ks-I33"/>
                                                     <constraint firstItem="sah-IK-B01" firstAttribute="centerY" secondItem="E4M-OC-sBg" secondAttribute="centerY" id="dPY-VO-SqP"/>
+                                                    <constraint firstItem="cFJ-ff-ciW" firstAttribute="leading" secondItem="E4M-OC-sBg" secondAttribute="leading" constant="55" id="qeP-H0-pgW"/>
                                                     <constraint firstItem="cFJ-ff-ciW" firstAttribute="centerY" secondItem="sah-IK-B01" secondAttribute="centerY" id="w1D-5r-FjJ"/>
-                                                    <constraint firstItem="cFJ-ff-ciW" firstAttribute="centerX" secondItem="E4M-OC-sBg" secondAttribute="centerX" constant="-30" id="w8e-pq-OkT"/>
                                                     <constraint firstAttribute="trailing" secondItem="sah-IK-B01" secondAttribute="trailing" id="yIc-Xx-9ui"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41F-5v-QqM">
-                                                <rect key="frame" x="203.66666666666663" y="0.0" width="166.33333333333337" height="48"/>
+                                                <rect key="frame" x="224.33333333333337" y="10" width="191.66666666666663" height="38"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_i_comment" translatesAutoresizingMaskIntoConstraints="NO" id="OZh-Z0-0xm">
-                                                        <rect key="frame" x="41.000000000000028" y="12" width="24" height="24"/>
+                                                        <rect key="frame" x="29" y="7" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="BZn-Mk-v7n"/>
                                                             <constraint firstAttribute="width" constant="24" id="wPM-QB-AgI"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commenter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNC-dc-sRT">
-                                                        <rect key="frame" x="70.000000000000028" y="13.666666666666687" width="86.333333333333343" height="20.666666666666671"/>
+                                                        <rect key="frame" x="57.999999999999979" y="8.6666666666666874" width="78.666666666666686" height="20.666666666666671"/>
                                                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -162,16 +162,15 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 </subviews>
                                                 <color key="backgroundColor" name="BeigeClair"/>
                                                 <constraints>
-                                                    <constraint firstItem="OZh-Z0-0xm" firstAttribute="centerX" secondItem="41F-5v-QqM" secondAttribute="centerX" constant="-30" id="0pa-lf-uzh"/>
                                                     <constraint firstItem="OZh-Z0-0xm" firstAttribute="centerY" secondItem="sNC-dc-sRT" secondAttribute="centerY" id="CFg-hn-mVt"/>
                                                     <constraint firstItem="sNC-dc-sRT" firstAttribute="leading" secondItem="OZh-Z0-0xm" secondAttribute="trailing" constant="5" id="Dz6-1i-Tc0"/>
-                                                    <constraint firstAttribute="trailing" secondItem="sNC-dc-sRT" secondAttribute="trailing" constant="10" id="KNa-GI-GbA"/>
+                                                    <constraint firstAttribute="trailing" secondItem="sNC-dc-sRT" secondAttribute="trailing" constant="55" id="KNa-GI-GbA"/>
                                                     <constraint firstItem="sNC-dc-sRT" firstAttribute="centerY" secondItem="41F-5v-QqM" secondAttribute="centerY" id="oJS-ez-c4h"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOV-z9-ZfP">
-                                                <rect key="frame" x="-20" y="0.0" width="410" height="1"/>
-                                                <color key="backgroundColor" name="grey_light"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="426" height="1"/>
+                                                <color key="backgroundColor" name="grey_reaction"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="G5R-6t-Oz2"/>
                                                 </constraints>
@@ -179,20 +178,19 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="E4M-OC-sBg" firstAttribute="leading" secondItem="uKP-rz-Nlq" secondAttribute="leading" constant="5" id="1Si-rh-mXz"/>
-                                            <constraint firstItem="41F-5v-QqM" firstAttribute="top" secondItem="uKP-rz-Nlq" secondAttribute="top" id="4xz-6F-rUX"/>
-                                            <constraint firstItem="41F-5v-QqM" firstAttribute="top" secondItem="uKP-rz-Nlq" secondAttribute="top" id="5c7-gB-Ptd"/>
+                                            <constraint firstItem="E4M-OC-sBg" firstAttribute="leading" secondItem="uKP-rz-Nlq" secondAttribute="leading" constant="10" id="1Si-rh-mXz"/>
+                                            <constraint firstItem="41F-5v-QqM" firstAttribute="top" secondItem="uKP-rz-Nlq" secondAttribute="top" constant="10" id="5c7-gB-Ptd"/>
                                             <constraint firstItem="41F-5v-QqM" firstAttribute="width" secondItem="uKP-rz-Nlq" secondAttribute="width" multiplier="0.45" id="8JV-Jd-eVh"/>
-                                            <constraint firstAttribute="trailing" secondItem="NOV-z9-ZfP" secondAttribute="trailing" constant="-20" id="MLU-P5-ueP"/>
+                                            <constraint firstAttribute="trailing" secondItem="NOV-z9-ZfP" secondAttribute="trailing" id="MLU-P5-ueP"/>
                                             <constraint firstAttribute="bottom" secondItem="41F-5v-QqM" secondAttribute="bottom" id="Tqs-sC-5EF"/>
                                             <constraint firstAttribute="bottom" secondItem="41F-5v-QqM" secondAttribute="bottom" id="WQi-HF-JRp"/>
                                             <constraint firstItem="E4M-OC-sBg" firstAttribute="width" secondItem="uKP-rz-Nlq" secondAttribute="width" multiplier="0.45" id="aKo-of-LP8"/>
                                             <constraint firstAttribute="height" constant="48" id="bN6-nD-EDl"/>
-                                            <constraint firstAttribute="trailing" secondItem="41F-5v-QqM" secondAttribute="trailing" id="e8v-XO-Otm"/>
+                                            <constraint firstAttribute="trailing" secondItem="41F-5v-QqM" secondAttribute="trailing" constant="10" id="e8v-XO-Otm"/>
                                             <constraint firstItem="NOV-z9-ZfP" firstAttribute="top" secondItem="uKP-rz-Nlq" secondAttribute="top" id="oC0-Aj-ZHL"/>
-                                            <constraint firstItem="NOV-z9-ZfP" firstAttribute="leading" secondItem="uKP-rz-Nlq" secondAttribute="leading" constant="-20" id="s48-TE-Gmf"/>
+                                            <constraint firstItem="NOV-z9-ZfP" firstAttribute="leading" secondItem="uKP-rz-Nlq" secondAttribute="leading" id="s48-TE-Gmf"/>
                                             <constraint firstAttribute="bottom" secondItem="E4M-OC-sBg" secondAttribute="bottom" id="uIC-yF-YFm"/>
-                                            <constraint firstItem="E4M-OC-sBg" firstAttribute="top" secondItem="uKP-rz-Nlq" secondAttribute="top" id="zqg-ne-E5B"/>
+                                            <constraint firstItem="E4M-OC-sBg" firstAttribute="top" secondItem="uKP-rz-Nlq" secondAttribute="top" constant="10" id="zqg-ne-E5B"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -210,7 +208,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKC-qc-Kbb">
-                                <rect key="frame" x="368" y="370.66666666666669" width="30" height="31"/>
+                                <rect key="frame" x="368" y="373.66666666666669" width="30" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Ndn-Go-RF0"/>
                                 </constraints>
@@ -220,7 +218,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="x commentaires" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahb-7s-SMk">
-                                <rect key="frame" x="305.66666666666669" y="377" width="92.333333333333314" height="18"/>
+                                <rect key="frame" x="305.66666666666669" y="377" width="92.333333333333314" height="24"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -279,7 +277,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstAttribute="trailing" secondItem="ltN-bm-iR9" secondAttribute="trailing" constant="10" id="CpQ-Nr-reo"/>
                             <constraint firstItem="Zrj-CH-VRQ" firstAttribute="top" secondItem="393-Jl-KYn" secondAttribute="bottom" constant="16" id="GGB-1G-hq2"/>
                             <constraint firstItem="ZvI-K4-vKV" firstAttribute="trailing" secondItem="Zrj-CH-VRQ" secondAttribute="trailing" id="I1h-cQ-xJO"/>
-                            <constraint firstAttribute="trailing" secondItem="zIA-8S-vtS" secondAttribute="trailing" constant="28" id="LNl-jI-rtt"/>
+                            <constraint firstAttribute="trailing" secondItem="zIA-8S-vtS" secondAttribute="trailing" id="LNl-jI-rtt"/>
                             <constraint firstAttribute="trailing" secondItem="Zrj-CH-VRQ" secondAttribute="trailing" constant="28" id="N8A-rI-j6i"/>
                             <constraint firstItem="SKC-qc-Kbb" firstAttribute="trailing" secondItem="ahb-7s-SMk" secondAttribute="trailing" id="QBK-bN-BcI"/>
                             <constraint firstItem="ahb-7s-SMk" firstAttribute="trailing" secondItem="Zrj-CH-VRQ" secondAttribute="trailing" id="Qtr-xu-Fq9"/>
@@ -288,7 +286,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="ZvI-K4-vKV" firstAttribute="top" secondItem="Zrj-CH-VRQ" secondAttribute="top" id="Y7d-S8-wkl"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="393-Jl-KYn" secondAttribute="trailing" constant="28" id="YG5-oI-0uX"/>
                             <constraint firstItem="b71-vy-dsX" firstAttribute="leading" secondItem="dNp-07-hWU" secondAttribute="leading" constant="28" id="bTT-ER-Osy"/>
-                            <constraint firstAttribute="bottom" secondItem="zIA-8S-vtS" secondAttribute="bottom" constant="16" id="bqc-F9-QvS"/>
+                            <constraint firstAttribute="bottom" secondItem="zIA-8S-vtS" secondAttribute="bottom" constant="10" id="bqc-F9-QvS"/>
                             <constraint firstItem="6ez-TF-p1n" firstAttribute="trailing" secondItem="e5z-ca-tgX" secondAttribute="trailing" id="ceX-qc-Msi"/>
                             <constraint firstItem="ZvI-K4-vKV" firstAttribute="bottom" secondItem="Zrj-CH-VRQ" secondAttribute="bottom" id="dOQ-YZ-cCZ"/>
                             <constraint firstItem="6ez-TF-p1n" firstAttribute="top" secondItem="b71-vy-dsX" secondAttribute="top" id="e8a-Tx-vUR"/>
@@ -299,11 +297,11 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="e5z-ca-tgX" firstAttribute="leading" secondItem="b71-vy-dsX" secondAttribute="trailing" constant="8" id="oFT-bM-d7c"/>
                             <constraint firstItem="zIA-8S-vtS" firstAttribute="top" secondItem="ahb-7s-SMk" secondAttribute="bottom" constant="16" id="vjA-h3-5ZF"/>
                             <constraint firstAttribute="trailing" secondItem="9cA-QV-fYb" secondAttribute="trailing" constant="24" id="vk5-ar-I4X"/>
-                            <constraint firstItem="zIA-8S-vtS" firstAttribute="leading" secondItem="dNp-07-hWU" secondAttribute="leading" constant="28" id="xgB-f4-xu0"/>
+                            <constraint firstItem="zIA-8S-vtS" firstAttribute="leading" secondItem="dNp-07-hWU" secondAttribute="leading" id="xgB-f4-xu0"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="-3" translatesAutoresizingMaskIntoConstraints="NO" id="EFg-hZ-kpj">
-                        <rect key="frame" x="12" y="389.66666666666669" width="27.333333333333329" height="25"/>
+                        <rect key="frame" x="12" y="392.66666666666669" width="27.333333333333329" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="BhG-gK-mpe"/>
                         </constraints>
@@ -357,8 +355,8 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="grey_light">
-            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="grey_reaction">
+            <color red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gris_112">
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

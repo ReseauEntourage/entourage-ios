@@ -88,6 +88,10 @@ class NeighborhoodDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromLeave), name: NSNotification.Name(rawValue: kNotificationUpdateFromLeave), object: nil)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("FermerReactionsPopup"), object: nil)
+    }
 
     
     func registerCellsNib() {
@@ -418,7 +422,10 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     //MARK: - Method uiscrollview delegate -
+    
     func scrollViewDidScroll( _ scrollView: UIScrollView) {
+        NotificationCenter.default.post(name: Notification.Name("FermerReactionsPopup"), object: nil)
+
         UIView.animate(withDuration: 0) {
             let yImage = self.maxImageHeight - (scrollView.contentOffset.y+self.maxImageHeight)
             let diffImage = (self.maxViewHeight - self.maxImageHeight)

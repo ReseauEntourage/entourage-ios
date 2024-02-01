@@ -118,7 +118,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Rejoindre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RpC-Az-CBT">
-                                <rect key="frame" x="20" y="12.5" width="73" height="17.5"/>
+                                <rect key="frame" x="20" y="11" width="73" height="20.5"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -262,7 +262,7 @@
     </objects>
     <designables>
         <designable name="N82-O7-OMh">
-            <size key="intrinsicContentSize" width="93.5" height="17.5"/>
+            <size key="intrinsicContentSize" width="90.5" height="20.5"/>
         </designable>
         <designable name="WJR-9r-zef">
             <size key="intrinsicContentSize" width="350" height="12"/>
