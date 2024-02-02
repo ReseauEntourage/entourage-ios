@@ -109,46 +109,46 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     }
     func fetchReactionsDetails() {
         guard let postId = self.postId else { return }
-        
-        if let _groupId = self.groupId{
-            for reaction in self.reactionsTypes {
-                NeighborhoodService.getGroupPostReactionDetails(groupId: _groupId, postId: postId, reactionId: reaction.id) { [weak self] (users, error) in
-                    guard let self = self else { return }
-                    if let users = users {
-                        // Stocke les utilisateurs par ID de réaction
-                        for _user in users{
-                            self.users.append(_user)
-                            self.reactionTypeList.append(reaction)
-                        }
-                    } else if let error = error {
-                        print("Erreur lors de la récupération des détails des réactions: ")
-                    }
-                    
-                    // Met à jour l'UI ici si nécessaire, par exemple recharger les données de tableView
-                    self.ui_tableview.reloadData()
-                }
-            }
-
-        }
-        if let _eventId = self.eventId {
-            for reaction in self.reactionsTypes {
-                EventService.getEventPostReactionDetails(eventId: _eventId, postId: postId, reactionId: reaction.id) { [weak self] (users, error) in
-                    guard let self = self else { return }
-                    if let users = users {
-                        // Stocke les utilisateurs par ID de réaction
-                        for _user in users{
-                            self.users.append(_user)
-                            self.reactionTypeList.append(reaction)
-                        }
-                    } else if let error = error {
-                        print("Erreur lors de la récupération des détails des réactions: ")
-                    }
-                    
-                    // Met à jour l'UI ici si nécessaire, par exemple recharger les données de tableView
-                    self.ui_tableview.reloadData()
-                }
-            }
-        }
+//        
+//        if let _groupId = self.groupId{
+//            for reaction in self.reactionsTypes {
+//                NeighborhoodService.getGroupPostReactionDetails(groupId: _groupId, postId: postId, reactionId: reaction.id) { [weak self] (users, error) in
+//                    guard let self = self else { return }
+//                    if let users = users {
+//                        // Stocke les utilisateurs par ID de réaction
+//                        for _user in users{
+//                            self.users.append(_user)
+//                            self.reactionTypeList.append(reaction)
+//                        }
+//                    } else if let error = error {
+//                        print("Erreur lors de la récupération des détails des réactions: ")
+//                    }
+//                    
+//                    // Met à jour l'UI ici si nécessaire, par exemple recharger les données de tableView
+//                    self.ui_tableview.reloadData()
+//                }
+//            }
+//
+//        }
+//        if let _eventId = self.eventId {
+//            for reaction in self.reactionsTypes {
+//                EventService.getEventPostReactionDetails(eventId: _eventId, postId: postId, reactionId: reaction.id) { [weak self] (users, error) in
+//                    guard let self = self else { return }
+//                    if let users = users {
+//                        // Stocke les utilisateurs par ID de réaction
+//                        for _user in users{
+//                            self.users.append(_user)
+//                            self.reactionTypeList.append(reaction)
+//                        }
+//                    } else if let error = error {
+//                        print("Erreur lors de la récupération des détails des réactions: ")
+//                    }
+//                    
+//                    // Met à jour l'UI ici si nécessaire, par exemple recharger les données de tableView
+//                    self.ui_tableview.reloadData()
+//                }
+//            }
+//        }
         
         // Ici, tu parcours tes réactions pour appeler getGroupPostReactionDetails pour chacune
 
