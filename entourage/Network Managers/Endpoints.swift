@@ -93,7 +93,7 @@ let kAPIGetOutingPostMessage = "outings/%@/chat_messages/%@?token=%@&image_size=
 let kAPIDeleteEventPostMessage = "outings/%d/chat_messages/%d?token=%@"
 let kAPIPostReactionEventPost = "outings/%d/chat_messages/%d/reactions?token=%@"
 let kAPIDeleteReactionEventPost = "outings/%d/chat_messages/%d/reactions?token=%@"
-let kAPIGetDetailsReactionEventPost = "outings/%d/chat_messages/%d/reactions/%d/details?token=%@"
+let kAPIGetDetailsReactionEventPost = "outings/%d/chat_messages/%d/reactions/users?token=%@"
 
 //Actions
 let kAPIGetContrib = "contributions/%@?token=%@"

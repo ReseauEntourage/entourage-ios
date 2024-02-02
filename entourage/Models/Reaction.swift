@@ -35,3 +35,20 @@ struct ReactionWrapper: Codable {
         case reactionId = "reaction_id"
     }
 }
+struct CompleteReactionsResponse: Codable {
+    let userReactions: [UserReaction]
+
+    enum CodingKeys: String, CodingKey {
+        case userReactions = "user_reactions"
+    }
+}
+
+struct UserReaction: Codable {
+    let reactionId: Int
+    let user: UserLightNeighborhood
+
+    enum CodingKeys: String, CodingKey {
+        case reactionId = "reaction_id"
+        case user
+    }
+}

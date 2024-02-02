@@ -503,9 +503,9 @@ struct EventService:ParsingDataCodable {
     }
 
     
-    static func getEventPostReactionDetails(eventId: Int, postId: Int, reactionId: Int, completion: @escaping ([UserLightNeighborhood]?, EntourageNetworkError?) -> Void) {
+    static func getEventPostReactionDetails(eventId: Int, postId: Int, completion: @escaping ([UserLightNeighborhood]?, EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
-        let endpoint = String(format: kAPIGetDetailsReactionEventPost, eventId, postId, reactionId, token)
+        let endpoint = String(format: kAPIGetDetailsReactionEventPost, eventId, postId, token)
 
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             guard let data = data, let response = resp as? HTTPURLResponse, response.statusCode < 300 else {

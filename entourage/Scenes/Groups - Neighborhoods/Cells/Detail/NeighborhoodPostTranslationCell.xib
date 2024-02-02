@@ -120,14 +120,14 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 <rect key="frame" x="10" y="10" width="201" height="38"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_i_like_grey" translatesAutoresizingMaskIntoConstraints="NO" id="5Mc-Iu-7jG">
-                                                        <rect key="frame" x="55" y="7" width="24" height="24"/>
+                                                        <rect key="frame" x="55" y="11.666666666666657" width="15" height="15"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="24" id="Ry4-ht-Cb8"/>
-                                                            <constraint firstAttribute="width" constant="24" id="q4B-2z-Vv6"/>
+                                                            <constraint firstAttribute="height" constant="15" id="Ry4-ht-Cb8"/>
+                                                            <constraint firstAttribute="width" constant="15" id="q4B-2z-Vv6"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J'aime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="joB-ZW-tcF">
-                                                        <rect key="frame" x="84" y="9.333333333333341" width="117" height="19.333333333333329"/>
+                                                        <rect key="frame" x="75" y="9.333333333333341" width="126" height="19.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -146,10 +146,10 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 <rect key="frame" x="191" y="10" width="201" height="38"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_i_comment" translatesAutoresizingMaskIntoConstraints="NO" id="vcA-xv-llG">
-                                                        <rect key="frame" x="38.333333333333343" y="7" width="24" height="24"/>
+                                                        <rect key="frame" x="47.333333333333343" y="11.666666666666657" width="15" height="15"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="24" id="JGg-cL-mZg"/>
-                                                            <constraint firstAttribute="width" constant="24" id="mEI-Gg-JU0"/>
+                                                            <constraint firstAttribute="height" constant="15" id="JGg-cL-mZg"/>
+                                                            <constraint firstAttribute="width" constant="15" id="mEI-Gg-JU0"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commenter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQh-6q-4gq">

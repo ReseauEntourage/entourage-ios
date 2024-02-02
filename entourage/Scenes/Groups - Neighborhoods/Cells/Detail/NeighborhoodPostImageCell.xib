@@ -114,15 +114,15 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 <rect key="frame" x="10" y="10" width="213" height="38"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_i_like_grey" translatesAutoresizingMaskIntoConstraints="NO" id="QJ8-nO-gbP">
-                                                        <rect key="frame" x="65" y="9" width="20" height="20"/>
+                                                        <rect key="frame" x="65" y="11.5" width="15" height="15"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="20" id="ACe-OW-6bR"/>
-                                                            <constraint firstAttribute="height" constant="20" id="Zil-4v-Rrn"/>
+                                                            <constraint firstAttribute="width" constant="15" id="ACe-OW-6bR"/>
+                                                            <constraint firstAttribute="height" constant="15" id="Zil-4v-Rrn"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J'aime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gae-3G-ZrX">
-                                                        <rect key="frame" x="90" y="9.5" width="123" height="19.5"/>
-                                                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="14"/>
+                                                        <rect key="frame" x="85" y="10" width="128" height="18"/>
+                                                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -140,16 +140,16 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 <rect key="frame" x="203" y="10" width="213" height="38"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commenter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doL-pk-ruU">
-                                                        <rect key="frame" x="69" y="9" width="79" height="20.5"/>
-                                                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
+                                                        <rect key="frame" x="79.5" y="10" width="68.5" height="18"/>
+                                                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_i_comment" translatesAutoresizingMaskIntoConstraints="NO" id="ii2-67-aGp">
-                                                        <rect key="frame" x="44" y="9" width="20" height="20"/>
+                                                        <rect key="frame" x="59.5" y="11.5" width="15" height="15"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="5yI-9b-2QR"/>
-                                                            <constraint firstAttribute="width" constant="20" id="Jao-L7-BFt"/>
+                                                            <constraint firstAttribute="height" constant="15" id="5yI-9b-2QR"/>
+                                                            <constraint firstAttribute="width" constant="15" id="Jao-L7-BFt"/>
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>

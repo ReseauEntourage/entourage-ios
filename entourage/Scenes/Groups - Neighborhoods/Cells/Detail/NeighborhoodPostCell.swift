@@ -200,20 +200,25 @@ class NeighborhoodPostCell: UITableViewCell {
         }
     }
 
-    
+    class RoundedView: UIView {
+        override var bounds: CGRect {
+            didSet {
+                layer.cornerRadius = bounds.size.width / 2
+            }
+        }
+    }
     /* guard let _stackview = ui_reaction_stackview else{return} */
     func displayReactions(for postMessage: PostMessage) {
         guard let storedReactions = getStoredReactionTypes() else { return }
-        guard let _stackview = ui_reaction_stackview else{return}
-        // Réinitialiser le stack view
+        guard let _stackview = ui_reaction_stackview else { return }
         _stackview.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         var totalReactionsCount = 0
 
         postMessage.reactions?.forEach { reaction in
-                if let reactionType = storedReactions.first(where: { $0.id == reaction.reactionId }) {
-                let container = UIView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-                container.layer.cornerRadius = container.frame.height / 2
+            if let reactionType = storedReactions.first(where: { $0.id == reaction.reactionId }) {
+                let container = RoundedView()
+                container.translatesAutoresizingMaskIntoConstraints = false
                 container.layer.masksToBounds = true
                 container.layer.borderColor = UIColor.appGrisReaction.cgColor
                 container.layer.borderWidth = 1.0
@@ -223,18 +228,19 @@ class NeighborhoodPostCell: UITableViewCell {
                 imageView.translatesAutoresizingMaskIntoConstraints = false
                 container.addSubview(imageView)
 
-                // Contraintes pour le padding
+                // Contraintes pour le container et le padding de l'image
                 NSLayoutConstraint.activate([
-                    imageView.topAnchor.constraint(equalTo: container.topAnchor, constant: 2),
-                    imageView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -2),
-                    imageView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 2),
-                    imageView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -2)
+                    container.widthAnchor.constraint(equalToConstant: 20),
+                    container.heightAnchor.constraint(equalToConstant: 20),
+                    imageView.widthAnchor.constraint(equalToConstant: 10),
+                    imageView.heightAnchor.constraint(equalToConstant: 10),
+                    imageView.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+                    imageView.centerYAnchor.constraint(equalTo: container.centerYAnchor)
                 ])
 
                 imageView.contentMode = .scaleAspectFit
 
                 if let imageUrl = URL(string: reactionType.imageUrl ?? "") {
-                    // Charger l'image depuis imageUrl
                     imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
                 }
                 _stackview.addArrangedSubview(container)
@@ -242,15 +248,23 @@ class NeighborhoodPostCell: UITableViewCell {
             }
         }
 
+        // Ajouter des contraintes au stack view lui-même si nécessaire
+        // Par exemple, si votre stack view doit avoir une hauteur spécifique
+        NSLayoutConstraint.activate([
+            _stackview.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        _stackview.layoutIfNeeded()
+
         if totalReactionsCount > 0 {
             let reactionsCountLabel = UILabel()
+            reactionsCountLabel.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 13), color: .black))
             reactionsCountLabel.text = "  " + "\(totalReactionsCount)"
             _stackview.addArrangedSubview(reactionsCountLabel)
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
-        _stackview.isUserInteractionEnabled = true // Assure-toi que cette ligne est bien là
+        _stackview.isUserInteractionEnabled = true
         _stackview.addGestureRecognizer(tapGesture)
-        layoutIfNeeded()
     }
     
     @objc func stackViewTapped() {

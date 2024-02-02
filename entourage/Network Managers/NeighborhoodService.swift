@@ -426,20 +426,37 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
 
-
-    static func getGroupPostReactionDetails(groupId: Int, postId: Int, reactionId: Int, completion: @escaping ([UserLightNeighborhood]?, EntourageNetworkError?) -> Void) {
-        guard let token = UserDefaults.token else {return}
-        let endpoint = String(format: kAPIGetDetailsReactionGroupPost, groupId, postId, reactionId, token)
+//
+//    static func getGroupPostReactionDetails(groupId: Int, postId: Int, completion: @escaping ([UserLightNeighborhood]?, EntourageNetworkError?) -> Void) {
+//        guard let token = UserDefaults.token else {return}
+//        let endpoint = String(format: kAPIGetDetailsReactionGroupPost, groupId, postId, token)
+//        
+//        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+//            guard let data = data, let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+//                DispatchQueue.main.async { completion(nil, error) }
+//                return
+//            }
+//            let details: [UserLightNeighborhood]? = self.parseData(data: data, key: "users")
+//            DispatchQueue.main.async { completion(details, nil) }
+//        }
+//    }
+    static func getPostReactionsDetails(postId: Int, completion: @escaping (CompleteReactionsResponse?, EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        // Assume kAPIGetDetailsReactionsPost est l'URL formatée qui inclut déjà les placeholders pour postId et token
+        let endpoint = String(format: kAPIGetDetailsReactionGroupPost, postId, token)
         
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             guard let data = data, let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
-                DispatchQueue.main.async { completion(nil, error) }
+                DispatchQueue.main.async { completion(nil, error) } // Adapte l'erreur selon ton modèle d'erreur
                 return
             }
-            let details: [UserLightNeighborhood]? = self.parseData(data: data, key: "users")
+            // Ici, on parse la réponse en utilisant la clé spécifique; dans ce cas, on s'attend à "user_reactions" au lieu de "users"
+            let details: CompleteReactionsResponse? = self.parseData(data: data, key: "user_reactions")
             DispatchQueue.main.async { completion(details, nil) }
         }
     }
+
+    
 
     static func deleteReactionToGroupPost(groupId: Int, postId: Int, completion: @escaping (EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
