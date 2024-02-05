@@ -107,8 +107,8 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20f-3G-Kdi">
                                 <rect key="frame" x="0.0" y="417" width="426" height="48"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wru-DS-doB">
-                                        <rect key="frame" x="0.0" y="0.0" width="426" height="48"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wru-DS-doB">
+                                        <rect key="frame" x="0.0" y="3" width="426" height="48"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vs3-XV-YFX">
                                                 <rect key="frame" x="10" y="10" width="213" height="38"/>
@@ -140,13 +140,13 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 <rect key="frame" x="203" y="10" width="213" height="38"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commenter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doL-pk-ruU">
-                                                        <rect key="frame" x="79.5" y="10" width="68.5" height="18"/>
+                                                        <rect key="frame" x="79" y="10" width="69" height="18"/>
                                                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_i_comment" translatesAutoresizingMaskIntoConstraints="NO" id="ii2-67-aGp">
-                                                        <rect key="frame" x="59.5" y="11.5" width="15" height="15"/>
+                                                        <rect key="frame" x="59" y="11.5" width="15" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="5yI-9b-2QR"/>
                                                             <constraint firstAttribute="width" constant="15" id="Jao-L7-BFt"/>
@@ -162,7 +162,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tgn-YJ-0me">
-                                                <rect key="frame" x="-20" y="0.0" width="466" height="1"/>
+                                                <rect key="frame" x="28" y="0.0" width="370" height="1"/>
                                                 <color key="backgroundColor" name="grey_reaction"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="zvO-ob-amk"/>
@@ -181,9 +181,9 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                             <constraint firstItem="3mx-IG-chD" firstAttribute="width" secondItem="wru-DS-doB" secondAttribute="width" multiplier="0.5" id="cHU-0P-BtD"/>
                                             <constraint firstItem="Vs3-XV-YFX" firstAttribute="leading" secondItem="wru-DS-doB" secondAttribute="leading" constant="10" id="egB-IB-LEr"/>
                                             <constraint firstAttribute="trailing" secondItem="3mx-IG-chD" secondAttribute="trailing" constant="10" id="ijS-rH-UXm"/>
-                                            <constraint firstAttribute="trailing" secondItem="tgn-YJ-0me" secondAttribute="trailing" constant="-20" id="oM9-O8-nLd"/>
+                                            <constraint firstAttribute="trailing" secondItem="tgn-YJ-0me" secondAttribute="trailing" constant="28" id="oM9-O8-nLd"/>
                                             <constraint firstItem="tgn-YJ-0me" firstAttribute="top" secondItem="wru-DS-doB" secondAttribute="top" id="vQ2-y0-8yu"/>
-                                            <constraint firstItem="tgn-YJ-0me" firstAttribute="leading" secondItem="wru-DS-doB" secondAttribute="leading" constant="-20" id="vvB-i7-Y86"/>
+                                            <constraint firstItem="tgn-YJ-0me" firstAttribute="leading" secondItem="wru-DS-doB" secondAttribute="leading" constant="28" id="vvB-i7-Y86"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -286,6 +286,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_image_react_btn" destination="QJ8-nO-gbP" id="1mR-sV-15e"/>
                 <outlet property="ui_iv_user" destination="qPp-vp-wdq" id="zZW-qn-gUr"/>
                 <outlet property="ui_label_ambassador" destination="1mR-hh-flM" id="2iE-y4-JlW"/>
+                <outlet property="ui_label_i_like" destination="Gae-3G-ZrX" id="XNs-Mk-5L4"/>
                 <outlet property="ui_reaction_stackview" destination="2bY-1D-5no" id="EBa-ts-wqy"/>
                 <outlet property="ui_username" destination="kif-wy-n4F" id="Nf0-v5-8Gu"/>
                 <outlet property="ui_view_btn_i_comment" destination="3mx-IG-chD" id="d6K-VB-O4n"/>

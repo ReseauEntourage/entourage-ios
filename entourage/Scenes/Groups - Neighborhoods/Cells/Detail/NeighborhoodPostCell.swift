@@ -40,6 +40,7 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_reaction_stackview: UIStackView!
     
     @IBOutlet weak var ui_image_react_btn: UIImageView!
+    @IBOutlet weak var ui_label_i_like: UILabel!
     
     class var identifier: String {
         return String(describing: self)
@@ -130,8 +131,10 @@ class NeighborhoodPostCell: UITableViewCell {
             // Mettre à jour l'icône en fonction de la valeur de reactionId
             if postMessage.reactionId == 0 || postMessage.reactionId == nil  {
                 ui_image_react_btn.image = UIImage(named: "ic_i_like_grey")
+                ui_label_i_like.textColor = UIColor.black
             } else {
                 ui_image_react_btn.image = UIImage(named: "ic_i_like")
+                ui_label_i_like.textColor = UIColor.appOrange
             }
         }
     }

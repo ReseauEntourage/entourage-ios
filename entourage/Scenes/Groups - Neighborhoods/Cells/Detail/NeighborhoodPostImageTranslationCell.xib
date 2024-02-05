@@ -169,7 +169,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOV-z9-ZfP">
-                                                <rect key="frame" x="0.0" y="0.0" width="426" height="1"/>
+                                                <rect key="frame" x="28" y="0.0" width="370" height="1"/>
                                                 <color key="backgroundColor" name="grey_reaction"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="G5R-6t-Oz2"/>
@@ -181,14 +181,14 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                             <constraint firstItem="E4M-OC-sBg" firstAttribute="leading" secondItem="uKP-rz-Nlq" secondAttribute="leading" constant="10" id="1Si-rh-mXz"/>
                                             <constraint firstItem="41F-5v-QqM" firstAttribute="top" secondItem="uKP-rz-Nlq" secondAttribute="top" constant="10" id="5c7-gB-Ptd"/>
                                             <constraint firstItem="41F-5v-QqM" firstAttribute="width" secondItem="uKP-rz-Nlq" secondAttribute="width" multiplier="0.45" id="8JV-Jd-eVh"/>
-                                            <constraint firstAttribute="trailing" secondItem="NOV-z9-ZfP" secondAttribute="trailing" id="MLU-P5-ueP"/>
+                                            <constraint firstAttribute="trailing" secondItem="NOV-z9-ZfP" secondAttribute="trailing" constant="28" id="MLU-P5-ueP"/>
                                             <constraint firstAttribute="bottom" secondItem="41F-5v-QqM" secondAttribute="bottom" id="Tqs-sC-5EF"/>
                                             <constraint firstAttribute="bottom" secondItem="41F-5v-QqM" secondAttribute="bottom" id="WQi-HF-JRp"/>
                                             <constraint firstItem="E4M-OC-sBg" firstAttribute="width" secondItem="uKP-rz-Nlq" secondAttribute="width" multiplier="0.45" id="aKo-of-LP8"/>
                                             <constraint firstAttribute="height" constant="48" id="bN6-nD-EDl"/>
                                             <constraint firstAttribute="trailing" secondItem="41F-5v-QqM" secondAttribute="trailing" constant="10" id="e8v-XO-Otm"/>
                                             <constraint firstItem="NOV-z9-ZfP" firstAttribute="top" secondItem="uKP-rz-Nlq" secondAttribute="top" id="oC0-Aj-ZHL"/>
-                                            <constraint firstItem="NOV-z9-ZfP" firstAttribute="leading" secondItem="uKP-rz-Nlq" secondAttribute="leading" id="s48-TE-Gmf"/>
+                                            <constraint firstItem="NOV-z9-ZfP" firstAttribute="leading" secondItem="uKP-rz-Nlq" secondAttribute="leading" constant="28" id="s48-TE-Gmf"/>
                                             <constraint firstAttribute="bottom" secondItem="E4M-OC-sBg" secondAttribute="bottom" id="uIC-yF-YFm"/>
                                             <constraint firstItem="E4M-OC-sBg" firstAttribute="top" secondItem="uKP-rz-Nlq" secondAttribute="top" constant="10" id="zqg-ne-E5B"/>
                                         </constraints>
@@ -327,6 +327,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_image_react_btn" destination="cFJ-ff-ciW" id="o7b-eg-B1H"/>
                 <outlet property="ui_iv_user" destination="b71-vy-dsX" id="Act-Ub-Ljy"/>
                 <outlet property="ui_label_ambassador" destination="ov1-Ee-3l4" id="MKg-yn-kpk"/>
+                <outlet property="ui_label_i_like" destination="sah-IK-B01" id="0kd-Li-EbQ"/>
                 <outlet property="ui_label_translate" destination="XFc-X3-tYy" id="ACB-Wf-jdK"/>
                 <outlet property="ui_reaction_stackview" destination="EFg-hZ-kpj" id="rX1-Fv-lyz"/>
                 <outlet property="ui_username" destination="LIi-jI-XGR" id="vbk-6W-dbq"/>

@@ -233,13 +233,13 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                 if !isEvent {
                     AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
                 }
-                user = self.usersSearch[indexPath.row - 1]
+                user = self.usersSearch[indexPath.row]
             }
             else {
                 if !isEvent {
                     AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
                 }
-                user = self.users[indexPath.row - 1]
+                user = self.users[indexPath.row]
             }
             
             if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
@@ -291,22 +291,40 @@ extension NeighBorhoodEventListUsersViewController:NeighborhoodUserCellDelegate 
         if !isEvent {
             AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member)
         }
-        
-        let user = isSearch ? usersSearch[position] : users[position]
-        
-        IHProgressHUD.show()
-        MessagingService.createOrGetConversation(userId: "\(user.sid)") { conversation, error in
-            IHProgressHUD.dismiss()
+        if position > -1{
+            let user = isSearch ? usersSearch[position] : users[position]
             
-            if let conversation = conversation {
-                self.showConversation(conversation: conversation, username: user.displayName)
-                return
+            IHProgressHUD.show()
+            MessagingService.createOrGetConversation(userId: "\(user.sid)") { conversation, error in
+                IHProgressHUD.dismiss()
+                
+                if let conversation = conversation {
+                    self.showConversation(conversation: conversation, username: user.displayName)
+                    return
+                }
+                var errorMsg = "message_error_create_conversation".localized
+                if let error = error {
+                    errorMsg = error.message
+                }
+                IHProgressHUD.showError(withStatus: errorMsg)
             }
-            var errorMsg = "message_error_create_conversation".localized
-            if let error = error {
-                errorMsg = error.message
+        }else{
+            let user = users[position + 1]
+            
+            IHProgressHUD.show()
+            MessagingService.createOrGetConversation(userId: "\(user.sid)") { conversation, error in
+                IHProgressHUD.dismiss()
+                
+                if let conversation = conversation {
+                    self.showConversation(conversation: conversation, username: user.displayName)
+                    return
+                }
+                var errorMsg = "message_error_create_conversation".localized
+                if let error = error {
+                    errorMsg = error.message
+                }
+                IHProgressHUD.showError(withStatus: errorMsg)
             }
-            IHProgressHUD.showError(withStatus: errorMsg)
         }
     }
     

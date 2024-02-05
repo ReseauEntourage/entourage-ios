@@ -168,7 +168,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5D-IV-ovS">
-                                                <rect key="frame" x="-20" y="0.0" width="442" height="1"/>
+                                                <rect key="frame" x="28" y="0.0" width="346" height="1"/>
                                                 <color key="backgroundColor" name="grey_reaction"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="JlA-ca-qyr"/>
@@ -183,13 +183,13 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                             <constraint firstAttribute="height" constant="48" id="KVQ-fx-aDt"/>
                                             <constraint firstItem="a5D-IV-ovS" firstAttribute="top" secondItem="ejE-Ps-q2Q" secondAttribute="top" id="cDX-fY-z8g"/>
                                             <constraint firstItem="cj8-a4-U1h" firstAttribute="top" secondItem="ejE-Ps-q2Q" secondAttribute="top" constant="10" id="eK3-Xi-xxg"/>
-                                            <constraint firstAttribute="trailing" secondItem="a5D-IV-ovS" secondAttribute="trailing" constant="-20" id="f3R-EC-Vwj"/>
+                                            <constraint firstAttribute="trailing" secondItem="a5D-IV-ovS" secondAttribute="trailing" constant="28" id="f3R-EC-Vwj"/>
                                             <constraint firstAttribute="trailing" secondItem="cj8-a4-U1h" secondAttribute="trailing" constant="10" id="luX-CK-YPt"/>
                                             <constraint firstItem="Hve-Jx-Kut" firstAttribute="width" secondItem="ejE-Ps-q2Q" secondAttribute="width" multiplier="0.5" id="mNZ-JP-TGF"/>
                                             <constraint firstItem="cj8-a4-U1h" firstAttribute="width" secondItem="ejE-Ps-q2Q" secondAttribute="width" multiplier="0.5" id="qoz-6O-Ie9"/>
                                             <constraint firstAttribute="bottom" secondItem="cj8-a4-U1h" secondAttribute="bottom" id="xfT-Zg-lKW"/>
                                             <constraint firstItem="Hve-Jx-Kut" firstAttribute="top" secondItem="ejE-Ps-q2Q" secondAttribute="top" constant="10" id="zU3-Jg-WDf"/>
-                                            <constraint firstItem="a5D-IV-ovS" firstAttribute="leading" secondItem="ejE-Ps-q2Q" secondAttribute="leading" constant="-20" id="zi1-PS-nGO"/>
+                                            <constraint firstItem="a5D-IV-ovS" firstAttribute="leading" secondItem="ejE-Ps-q2Q" secondAttribute="leading" constant="28" id="zi1-PS-nGO"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -302,6 +302,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_image_react_btn" destination="5Mc-Iu-7jG" id="roe-Es-Hj6"/>
                 <outlet property="ui_iv_user" destination="soI-RK-pCX" id="tEL-8d-zRU"/>
                 <outlet property="ui_label_ambassador" destination="Hyy-Jz-J3Y" id="CXx-VS-fHY"/>
+                <outlet property="ui_label_i_like" destination="joB-ZW-tcF" id="ulq-Gh-Ca2"/>
                 <outlet property="ui_label_translate" destination="j5z-bu-Jla" id="Qe2-Ig-MvI"/>
                 <outlet property="ui_reaction_stackview" destination="Vfg-aE-gjb" id="4Xs-tj-Kfr"/>
                 <outlet property="ui_username" destination="OYf-am-Q8w" id="ZlL-Pv-Uaf"/>
