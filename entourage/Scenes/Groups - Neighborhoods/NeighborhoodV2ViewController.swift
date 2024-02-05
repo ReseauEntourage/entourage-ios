@@ -39,7 +39,7 @@ class NeighborhoodV2ViewController:UIViewController {
     private let nbOfItemsBeforePagingReload = 2
     private var currentPageDiscover = 0
     private var currentPageMy = 0
-    private var numberOfItemsForWS = 100
+    private var numberOfItemsForWS = 10
     var pullRefreshControl = UIRefreshControl()
 
     
@@ -130,6 +130,7 @@ class NeighborhoodV2ViewController:UIViewController {
     func loadForPaginationDiscover(){
         isLoading = true
         self.currentPageDiscover += 1
+        getDiscoverGroup()
     }
     
     func configureDTO(){
@@ -184,6 +185,7 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
             }
         }
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableDTO.count
