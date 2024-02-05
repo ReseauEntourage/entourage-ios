@@ -46,9 +46,10 @@ class NeighborhoodUserCell: UITableViewCell {
         ui_username.text = username
         ui_role.text = role
         
+        
         self.delegate = delegate
         self.position = position
-        
+        print("position " , position)
         ui_bt_message.isHidden = !showBtMessage
         ui_picto_message.isHidden = !showBtMessage
         
