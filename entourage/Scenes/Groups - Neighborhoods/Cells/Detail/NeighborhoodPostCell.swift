@@ -352,7 +352,8 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         
         if message.commentsCount == 0 {
-            ui_comments_nb.text = "neighborhood_post_noComment".localized
+            //ui_comments_nb.text = "neighborhood_post_noComment".localized
+            ui_comments_nb.text = ""
             
             ui_comments_nb.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 13), color: .appGrisSombre40))
 
