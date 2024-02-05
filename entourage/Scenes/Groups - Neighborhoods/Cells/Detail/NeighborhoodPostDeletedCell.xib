@@ -89,14 +89,14 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" text="x commentaires" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spL-JO-nrf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="x commentaires" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spL-JO-nrf">
                                 <rect key="frame" x="281.66666666666669" y="135.66666666666666" width="92.333333333333314" height="18"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-rm-TR2">
-                                <rect key="frame" x="261.66666666666669" y="128" width="112.33333333333331" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-rm-TR2">
+                                <rect key="frame" x="344" y="129" width="30" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="LDe-lL-dvI"/>
                                 </constraints>
@@ -123,6 +123,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="qCK-5n-BTI" firstAttribute="leading" secondItem="5cd-hE-LPm" secondAttribute="leading" id="41H-j6-Dkn"/>
                             <constraint firstItem="JGI-rm-TR2" firstAttribute="trailing" secondItem="spL-JO-nrf" secondAttribute="trailing" id="5ko-S5-LMD"/>
                             <constraint firstItem="qCK-5n-BTI" firstAttribute="top" secondItem="5cd-hE-LPm" secondAttribute="top" id="7xk-zz-W93"/>
+                            <constraint firstItem="spL-JO-nrf" firstAttribute="top" secondItem="4rs-dT-shb" secondAttribute="bottom" constant="24.670000000000002" id="C9I-XP-r5b"/>
                             <constraint firstItem="xJ2-0C-9Dr" firstAttribute="centerY" secondItem="5cd-hE-LPm" secondAttribute="centerY" id="O1i-fT-E2p"/>
                             <constraint firstItem="4rs-dT-shb" firstAttribute="leading" secondItem="5cd-hE-LPm" secondAttribute="leading" id="RB4-hY-81w"/>
                             <constraint firstItem="4rs-dT-shb" firstAttribute="top" secondItem="5cd-hE-LPm" secondAttribute="bottom" constant="25" id="XUL-TL-THf"/>
@@ -135,6 +136,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="5cd-hE-LPm" firstAttribute="leading" secondItem="UuG-6g-tBc" secondAttribute="leading" constant="28" id="h2h-rp-w1n"/>
                             <constraint firstItem="xJ2-0C-9Dr" firstAttribute="leading" secondItem="5cd-hE-LPm" secondAttribute="trailing" constant="8" symbolic="YES" id="oMB-aR-btA"/>
                             <constraint firstAttribute="trailing" secondItem="spL-JO-nrf" secondAttribute="trailing" constant="28" id="qP8-Lx-Zog"/>
+                            <constraint firstAttribute="bottom" secondItem="spL-JO-nrf" secondAttribute="bottom" constant="22.329999999999998" id="tpf-e6-TN7"/>
                             <constraint firstItem="5cd-hE-LPm" firstAttribute="top" secondItem="UuG-6g-tBc" secondAttribute="top" constant="20" id="u8F-kE-bQk"/>
                             <constraint firstItem="qCK-5n-BTI" firstAttribute="bottom" secondItem="5cd-hE-LPm" secondAttribute="bottom" id="vy4-rT-mgS"/>
                         </constraints>
