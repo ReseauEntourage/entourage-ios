@@ -440,21 +440,29 @@ struct NeighborhoodService:ParsingDataCodable {
 //            DispatchQueue.main.async { completion(details, nil) }
 //        }
 //    }
-    static func getPostReactionsDetails(postId: Int, completion: @escaping (CompleteReactionsResponse?, EntourageNetworkError?) -> Void) {
+    static func getPostReactionsDetails(groupId: Int, postId: Int, completion: @escaping (CompleteReactionsResponse?, EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
-        // Assume kAPIGetDetailsReactionsPost est l'URL formatée qui inclut déjà les placeholders pour postId et token
-        let endpoint = String(format: kAPIGetDetailsReactionGroupPost, postId, token)
+        let endpoint = String(format: kAPIGetDetailsReactionGroupPost, groupId, postId, token)
         
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             guard let data = data, let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
                 DispatchQueue.main.async { completion(nil, error) } // Adapte l'erreur selon ton modèle d'erreur
                 return
             }
-            // Ici, on parse la réponse en utilisant la clé spécifique; dans ce cas, on s'attend à "user_reactions" au lieu de "users"
-            let details: CompleteReactionsResponse? = self.parseData(data: data, key: "user_reactions")
-            DispatchQueue.main.async { completion(details, nil) }
+            
+            do {
+                // Utilisation directe de JSONDecoder pour décoder la réponse
+                let decoder = JSONDecoder()
+                // Assurez-vous que la structure de la réponse correspond à ce que JSONDecoder s'attend à décoder
+                let details = try decoder.decode(CompleteReactionsResponse.self, from: data)
+                DispatchQueue.main.async { completion(details, nil) }
+            } catch {
+                print("Erreur lors du décodage des données: \(error)")
+                DispatchQueue.main.async { completion(nil, nil) }
+            }
         }
     }
+
 
     
 

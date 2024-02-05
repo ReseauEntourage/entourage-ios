@@ -17,6 +17,7 @@ class NeighborhoodUserCell: UITableViewCell {
     @IBOutlet weak var ic_image_reaction: UIImageView!
     @IBOutlet weak var ui_bt_message: UIButton!
     @IBOutlet weak var ui_picto_message: UIImageView!
+    @IBOutlet weak var ui_view: UIView!
     
     var position = 0
     weak var delegate: NeighborhoodUserCellDelegate? = nil
@@ -29,6 +30,15 @@ class NeighborhoodUserCell: UITableViewCell {
         ui_username.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_role.font = ApplicationTheme.getFontNunitoRegular(size: 11)
         ui_role.textColor = .appOrangeLight
+        // Configuration de l'arrondi pour ui_view
+        ui_view.layer.cornerRadius = ui_view.frame.height / 2
+        ui_view.clipsToBounds = true // Ceci est nécessaire pour appliquer l'arrondi
+        
+        // Configuration du bord
+        ui_view.layer.borderWidth = 1 // Définit la largeur du bord
+        ui_view.layer.borderColor = UIColor(named: "grey_reaction")?.cgColor
+        
+        
         
     }
     
@@ -51,9 +61,19 @@ class NeighborhoodUserCell: UITableViewCell {
         
         ui_bt_message.isHidden = isMe
         ui_picto_message.isHidden = isMe
-        if let imageUrl = URL(string: reactionType?.imageUrl ?? ""){
-            ui_image.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
+        // Supposons que reactionType.id contient l'ID de la réaction que tu veux afficher
+        if let reactionId = reactionType?.id,
+           let completeReactionType = getStoredReactionTypes()?.first(where: { $0.id == reactionId }),
+           let imageUrl = URL(string: completeReactionType.imageUrl ?? "") {
+            ic_image_reaction.isHidden = false
+            ui_view.isHidden = false
+            ic_image_reaction.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
+        } else {
+            // Gérer le cas où l'URL de l'image n'est pas disponible
+            ic_image_reaction.isHidden = true
+            ui_view.isHidden = true
         }
+        
     }
     
     func getStoredReactionTypes() -> [ReactionType]? {

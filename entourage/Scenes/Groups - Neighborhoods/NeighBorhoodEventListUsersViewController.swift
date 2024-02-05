@@ -8,12 +8,19 @@
 import UIKit
 import IHProgressHUD
 
+private enum TableDTO {
+    case searchCell
+    case userCell(user: UserLightNeighborhood, reactionType: ReactionType?)
+}
+
+
 class NeighBorhoodEventListUsersViewController: BasePopViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
     
     @IBOutlet weak var ui_lb_no_result: UILabel!
     @IBOutlet weak var ui_view_no_result: UIView!
+    
     
     var neighborhood:Neighborhood? = nil
     var event:Event? = nil
@@ -30,11 +37,16 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     var isFromReact = false
     var eventId:Int? = nil
     var reactionTypeList = [ReactionType]()
+    private var tableData: [TableDTO] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
+        var title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
+        if isFromReact {
+            title = "see_member_react".localized
+        }
         let txtSearch = "neighborhood_group_search_empty_title".localized
         loadStoredReactionTypes()
 
@@ -63,96 +75,106 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     
     
     func getNeighborhoodUsers() {
-        guard let neighborhood = neighborhood else {
-            return
-        }
+        guard let neighborhood = neighborhood else { return }
         
-        NeighborhoodService.getNeighborhoodUsers(neighborhoodId: neighborhood.uid, completion: { users, error in
-            if let _ = error {
-                self.goBack()
+        NeighborhoodService.getNeighborhoodUsers(neighborhoodId: neighborhood.uid, completion: { [weak self] users, error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if let users = users {
+                    self.users = users
+                    // Mise à jour de tableData
+                    self.tableData = [.searchCell] // Si tu veux toujours afficher la cellule de recherche
+                    self.tableData += users.map { .userCell(user: $0, reactionType: nil) }
+                    self.ui_tableview.reloadData()
+                } else if let error = error {
+                    print("Erreur lors de la récupération des utilisateurs: \(error)")
+                    // Gérer l'erreur, par exemple en affichant un message à l'utilisateur
+                }
             }
-            if let users = users {
-                self.users = users
-            }
-            self.ui_tableview.reloadData()
         })
     }
+
     
     func getEventusers() {
-        guard let event = event else {
-            return
-        }
+        guard let event = event else { return }
         
-        EventService.getEventUsers(eventId: event.uid, completion: { users, error in
-            if let _ = error {
-                self.goBack()
+        EventService.getEventUsers(eventId: event.uid, completion: { [weak self] users, error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Erreur lors de la récupération des utilisateurs de l'événement: \(error)")
+                    self.goBack()
+                    return
+                }
+                
+                if let users = users {
+                    self.users = users
+                    // Mise à jour de tableData pour refléter les nouveaux utilisateurs
+                    self.tableData = [.searchCell] // Inclure la cellule de recherche si nécessaire
+                    self.tableData += users.map { .userCell(user: $0, reactionType: nil) } // Pas de type de réaction pour les utilisateurs d'événement
+                    self.ui_tableview.reloadData()
+                    // Gérer l'affichage de "aucun résultat"
+                    self.ui_view_no_result.isHidden = !users.isEmpty
+                }
             }
-            if let users = users {
-                self.users = users
-            }
-            self.ui_tableview.reloadData()
         })
     }
-    
-    func searchUser(text:String) {
-        //TODO: find user
+
+    func searchUser(text: String) {
         usersSearch.removeAll()
-        let _searched = users.filter({$0.displayName.lowercased().contains(text.lowercased())})
-        usersSearch.append(contentsOf: _searched)
-        if usersSearch.count == 0 {
+        let searchedUsers = users.filter { $0.displayName.lowercased().contains(text.lowercased()) }
+        usersSearch.append(contentsOf: searchedUsers)
+
+        // Mise à jour de tableData pour les résultats de recherche
+        // En supposant que tu veuilles toujours afficher la cellule de recherche en haut
+        tableData = [.searchCell]
+        if usersSearch.isEmpty {
+            // Afficher "aucun résultat" si nécessaire
             ui_view_no_result.isHidden = false
-        }
-        else {
+            // Si tu veux afficher une cellule "Aucun résultat" dans le tableau :
+            // tableData.append(.noResultCell) // Assure-toi d'avoir un cas pour cela dans ton énum TableDTO
+        } else {
             ui_view_no_result.isHidden = true
+            // Ajoute les cellules utilisateur pour les résultats de la recherche à tableData
+            tableData += searchedUsers.map { .userCell(user: $0, reactionType: nil) } // Pas de type de réaction pour la recherche
         }
-        self.ui_tableview.reloadData()
+
+        // Mise à jour de l'UI
+        ui_tableview.reloadData()
     }
+
     func fetchReactionsDetails() {
         guard let postId = self.postId else { return }
-//        
-//        if let _groupId = self.groupId{
-//            for reaction in self.reactionsTypes {
-//                NeighborhoodService.getGroupPostReactionDetails(groupId: _groupId, postId: postId, reactionId: reaction.id) { [weak self] (users, error) in
-//                    guard let self = self else { return }
-//                    if let users = users {
-//                        // Stocke les utilisateurs par ID de réaction
-//                        for _user in users{
-//                            self.users.append(_user)
-//                            self.reactionTypeList.append(reaction)
-//                        }
-//                    } else if let error = error {
-//                        print("Erreur lors de la récupération des détails des réactions: ")
-//                    }
-//                    
-//                    // Met à jour l'UI ici si nécessaire, par exemple recharger les données de tableView
-//                    self.ui_tableview.reloadData()
-//                }
-//            }
-//
-//        }
-//        if let _eventId = self.eventId {
-//            for reaction in self.reactionsTypes {
-//                EventService.getEventPostReactionDetails(eventId: _eventId, postId: postId, reactionId: reaction.id) { [weak self] (users, error) in
-//                    guard let self = self else { return }
-//                    if let users = users {
-//                        // Stocke les utilisateurs par ID de réaction
-//                        for _user in users{
-//                            self.users.append(_user)
-//                            self.reactionTypeList.append(reaction)
-//                        }
-//                    } else if let error = error {
-//                        print("Erreur lors de la récupération des détails des réactions: ")
-//                    }
-//                    
-//                    // Met à jour l'UI ici si nécessaire, par exemple recharger les données de tableView
-//                    self.ui_tableview.reloadData()
-//                }
-//            }
-//        }
-        
-        // Ici, tu parcours tes réactions pour appeler getGroupPostReactionDetails pour chacune
 
+        let completion: (CompleteReactionsResponse?, EntourageNetworkError?) -> Void = { [weak self] response, error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if let userReactions = response?.userReactions {
+                    // Traite la réponse en stockant les utilisateurs et les réactions
+                    self.users = userReactions.map { $0.user }
+                    // Réinitialise et remplit reactionTypeList basé sur userReactions
+                    self.reactionTypeList = userReactions.map { ReactionType(id: $0.reactionId, key: nil, imageUrl: nil) }
+
+                    // Mise à jour de tableData pour refléter les nouvelles données
+                    self.tableData += self.users.enumerated().map { index, user in
+                        // Associer chaque utilisateur à son type de réaction pour la construction de la cellule
+                        .userCell(user: user, reactionType: self.reactionTypeList[safe: index])
+                    }
+                    self.ui_tableview.reloadData()
+                } else if let error = error {
+                    print("Erreur lors de la récupération des détails des réactions: \(error)")
+                }
+            }
+        }
+
+        if let groupId = self.groupId {
+            NeighborhoodService.getPostReactionsDetails(groupId: groupId, postId: postId, completion: completion)
+        } else if let eventId = self.eventId {
+            EventService.getEventPostReactionDetails(eventId: eventId, postId: postId, completion: completion)
+        }
     }
+
+
     func getStoredReactionTypes() -> [ReactionType]? {
         guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
         do {
@@ -171,60 +193,61 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 //MARK: - Tableview Datasource/delegate -
 extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearch {
-            return usersSearch.count + 1
-        }
-        return users.count + 1
+        return tableData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableData[indexPath.row]{
+            
+        case .searchCell:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_search", for: indexPath) as! NeighborhoodHomeSearchCell
+            let title = isEvent ? "event_userInput_search".localized : "neighborhood_userInput_search".localized
+            cell.populateCell(delegate: self, isSearch:isSearch,placeceholder:title, isCellUserSearch: true)
+            return cell
+        case .userCell(let _user,let _reactionType):
+            let position = indexPath.row - 1
+            let isMe = _user.sid == UserDefaults.currentUser?.sid
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
+            cell.populateCell(isMe:isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType)
+            return cell
+        
+        }
+        
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_search", for: indexPath) as! NeighborhoodHomeSearchCell
             let title = isEvent ? "event_userInput_search".localized : "neighborhood_userInput_search".localized
             cell.populateCell(delegate: self, isSearch:isSearch,placeceholder:title, isCellUserSearch: true)
             return cell
         }
-        
-        var user:UserLightNeighborhood
-        let position = indexPath.row - 1
-        
-        if isSearch {
-            user = self.usersSearch[position]
-        }
-        else {
-            user = self.users[position]
-        }
-        let _reactionType = reactionTypeList[position]
-        let isMe = user.sid == UserDefaults.currentUser?.sid
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
-        
-        cell.populateCell(isMe:isMe, username: user.displayName, role: user.getCommunityRoleWithPartnerFormated(), imageUrl: user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType)
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 { return }
-        
-        var user:UserLightNeighborhood
-        if isSearch {
-            if !isEvent {
-                AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
+        switch tableData[indexPath.row]{
+            
+        case .searchCell:
+            return
+        case .userCell(let _user, let _reactionType):
+            var user:UserLightNeighborhood
+            if isSearch {
+                if !isEvent {
+                    AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
+                }
+                user = self.usersSearch[indexPath.row - 1]
             }
-            user = self.usersSearch[indexPath.row - 1]
-        }
-        else {
-            if !isEvent {
-                AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
+            else {
+                if !isEvent {
+                    AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
+                }
+                user = self.users[indexPath.row - 1]
             }
-            user = self.users[indexPath.row - 1]
-        }
-        
-        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                _homeVC.currentUserId = "\(user.sid)"
-                
-                self.navigationController?.present(navVC, animated: true)
+            
+            if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
+                if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
+                    _homeVC.currentUserId = "\(user.sid)"
+                    
+                    self.navigationController?.present(navVC, animated: true)
+                }
             }
         }
     }
@@ -305,5 +328,11 @@ extension NeighBorhoodEventListUsersViewController:NeighborhoodUserCellDelegate 
 extension NeighBorhoodEventListUsersViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true)
+    }
+}
+
+extension Collection {
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }
