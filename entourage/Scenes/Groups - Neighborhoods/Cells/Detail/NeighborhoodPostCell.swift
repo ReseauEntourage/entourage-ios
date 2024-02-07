@@ -241,7 +241,7 @@ class NeighborhoodPostCell: UITableViewCell {
                     imageView.centerYAnchor.constraint(equalTo: container.centerYAnchor)
                 ])
 
-                imageView.contentMode = .scaleAspectFit
+                imageView.contentMode = .scaleAspectFill
 
                 if let imageUrl = URL(string: reactionType.imageUrl ?? "") {
                     imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
@@ -410,6 +410,18 @@ class NeighborhoodPostCell: UITableViewCell {
             
             let tapGestureForSignal = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
             ui_btn_signal_post.addGestureRecognizer(tapGestureForSignal)
+        }else{
+            if(ui_view_btn_i_like != nil){
+                let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+                    ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
+            }
+            if ui_view_btn_i_like != nil {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLittleTap))
+                ui_view_btn_i_like.addGestureRecognizer(tapGesture)
+            }
+            let tapGestureForSignal = UITapGestureRecognizer(target: self, action: #selector(signalClicked))
+            ui_btn_signal_post.addGestureRecognizer(tapGestureForSignal)
+            
         }
     }
     
@@ -562,7 +574,7 @@ class ReactionsPopupView: UIView {
             if let imageUrl = URL(string: reaction.imageUrl ?? "") {
                 imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
             }
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .scaleAspectFill
             imageView.isUserInteractionEnabled = true
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(reactionTapped))
             imageView.addGestureRecognizer(tapGesture)

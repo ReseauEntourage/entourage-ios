@@ -321,10 +321,11 @@ class NeighborhoodDetailViewController: UIViewController {
                 if let user = user {
                     let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
                     self.neighborhood?.members.append(member)
+                    self.neighborhood?.isMember = true
                     let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount + 1 : 1
-                    
                     self.isAfterCreation = true
                     self.neighborhood?.membersCount = count
+                    
                     self.getNeighborhoodDetail()
                     self.showWelcomeMessage()
                 }

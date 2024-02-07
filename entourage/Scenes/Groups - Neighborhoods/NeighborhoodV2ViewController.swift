@@ -97,7 +97,7 @@ class NeighborhoodV2ViewController:UIViewController {
     func getMyGroup(){
         guard let token = UserDefaults.currentUser?.uuid else { return }
 
-        NeighborhoodService.getNeighborhoodsForUserId(token,currentPage: currentPageMy, per: numberOfItemsForWS, completion: { groups, error in
+        NeighborhoodService.getNeighborhoodsForUserId(token,currentPage: currentPageMy, per: 50, completion: { groups, error in
             self.pullRefreshControl.endRefreshing()
             if let groups = groups {
                 self.myGroups.append(contentsOf: groups)
