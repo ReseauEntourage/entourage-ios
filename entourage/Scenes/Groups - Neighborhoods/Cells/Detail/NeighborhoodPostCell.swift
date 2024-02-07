@@ -400,14 +400,14 @@ class NeighborhoodPostCell: UITableViewCell {
         
         displayReactions(for: message)
         if let isMember = isMember, !isMember {
+            if ui_view_btn_i_like != nil {
+                ui_view_btn_i_like.isUserInteractionEnabled = true
+                // Ajouter un geste pour avertir l'utilisateur
+                let tapGestureForLike = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
+                ui_view_btn_i_like.addGestureRecognizer(tapGestureForLike)
+            }
             // Configurer pour les non-membres
-            ui_view_btn_i_like.isUserInteractionEnabled = true
             ui_btn_signal_post.isUserInteractionEnabled = true
-            
-            // Ajouter un geste pour avertir l'utilisateur
-            let tapGestureForLike = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
-            ui_view_btn_i_like.addGestureRecognizer(tapGestureForLike)
-            
             let tapGestureForSignal = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
             ui_btn_signal_post.addGestureRecognizer(tapGestureForSignal)
         }else{
