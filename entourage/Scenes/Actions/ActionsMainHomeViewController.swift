@@ -459,14 +459,17 @@ class ActionsMainHomeViewController: UIViewController {
         })
     }
     
-    func gotoTop(isAnimated:Bool = true) {
-        if isContribSelected && contribs.count == 0 { return }
-        else if !isContribSelected && solicitations.count == 0 { return }
-        let indexPath = IndexPath(row: 0, section: 0)
-        DispatchQueue.main.async {
-            self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: isAnimated)
+    func gotoTop(isAnimated: Bool = true) {
+        let section = 0 // Assumons que tu travailles avec la première section
+        let numberOfRows = ui_tableview.numberOfRows(inSection: section)
+        if numberOfRows > 0 {
+            let indexPath = IndexPath(row: 0, section: section)
+            DispatchQueue.main.async {
+                self.ui_tableview.scrollToRow(at: indexPath, at: .top, animated: isAnimated)
+            }
         }
     }
+
     
     func setupViews() {
         ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
