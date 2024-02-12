@@ -93,7 +93,9 @@ class ActionsMainHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.isContribSelected = AppManager.shared.isContributionPreference
+        self.currentSelectedIsContribs = !isContribSelected
+
         if let _sections = Metadatas.sharedInstance.tagsSections {
             currentSectionsFilter = _sections
         }
@@ -106,7 +108,6 @@ class ActionsMainHomeViewController: UIViewController {
         
         ui_tableview.register(UINib(nibName: ActionContribDetailHomeCell.identifier, bundle: nil), forCellReuseIdentifier: ActionContribDetailHomeCell.identifier)
         ui_tableview.register(UINib(nibName: ActionSolicitationDetailHomeCell.identifier, bundle: nil), forCellReuseIdentifier: ActionSolicitationDetailHomeCell.identifier)
-        
         setupEmptyViews()
         
         setupViews()
@@ -156,11 +157,13 @@ class ActionsMainHomeViewController: UIViewController {
     func setSolicitationsFirst() {
         self.isContribSelected = false
         self.currentSelectedIsContribs = true
+        AppManager.shared.isContributionPreference = false
     }
     //Use to change tab selection from other place
     func setContributionsFirst() {
         self.isContribSelected = true
         self.currentSelectedIsContribs = false
+        AppManager.shared.isContributionPreference = true
     }
     
     func setupFloatingButton() {

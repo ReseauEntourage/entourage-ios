@@ -471,6 +471,8 @@ extension HomeV2ViewController{
                 }else{
                     self?.isContributionPreference = false
                 }
+                AppManager.shared.isContributionPreference = self?.isContributionPreference ?? false
+
                 if  userHome.unclosedAction != nil {
                     self?.showPopUpAction(actionType: (userHome.unclosedAction?.actionType)!, title: (userHome.unclosedAction?.title)!)
                 }
@@ -716,3 +718,12 @@ extension HomeV2ViewController: HomeHZCellDelegate {
     }
 }
 
+
+
+class AppManager {
+    static let shared = AppManager()
+
+    var isContributionPreference: Bool = false
+
+    private init() {} // Ceci assure que AppManager ne peut être instancié qu'en utilisant `shared`
+}
