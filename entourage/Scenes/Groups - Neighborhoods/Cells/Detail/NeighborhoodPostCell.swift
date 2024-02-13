@@ -406,6 +406,8 @@ class NeighborhoodPostCell: UITableViewCell {
                 // Ajouter un geste pour avertir l'utilisateur
                 let tapGestureForLike = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
                 ui_view_btn_i_like.addGestureRecognizer(tapGestureForLike)
+                let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
+                    ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
             }
             // Configurer pour les non-membres
             ui_btn_signal_post.isUserInteractionEnabled = true
