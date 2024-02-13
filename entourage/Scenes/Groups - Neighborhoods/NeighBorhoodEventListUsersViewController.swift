@@ -322,7 +322,6 @@ extension NeighBorhoodEventListUsersViewController:NeighborhoodUserCellDelegate 
                 let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.setupFromOtherVC(conversationId: convId, title: username, isOneToOne: true, conversation: conversation)
-
                     self.present(vc, animated: true)
                 }
             }

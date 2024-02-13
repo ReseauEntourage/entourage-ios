@@ -263,6 +263,7 @@ class NeighborhoodPostCell: UITableViewCell {
             let reactionsCountLabel = UILabel()
             reactionsCountLabel.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 13), color: .black))
             reactionsCountLabel.text = "  " + "\(totalReactionsCount)"
+            reactionsCountLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
             _stackview.addArrangedSubview(reactionsCountLabel)
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
