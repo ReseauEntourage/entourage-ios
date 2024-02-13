@@ -231,24 +231,29 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
         case .searchCell:
             return
         case .userCell(let _user, let _reactionType):
-            var user:UserLightNeighborhood
+            var user:UserLightNeighborhood?
             if isSearch {
                 if !isEvent {
                     AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
                 }
-                user = self.usersSearch[indexPath.row]
+                if self.usersSearch.count < indexPath.row{
+                    user = self.usersSearch[indexPath.row]
+                }
             }
             else {
                 if !isEvent {
                     AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
                 }
-                user = self.users[indexPath.row]
+                if self.usersSearch.count < indexPath.row{
+                    user = self.users[indexPath.row]
+                }
             }
             
             if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
                 if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                    _homeVC.currentUserId = "\(user.sid)"
-                    
+                    if let _user = user{
+                        _homeVC.currentUserId = "\(_user.sid)"
+                    }
                     self.navigationController?.present(navVC, animated: true)
                 }
             }
@@ -290,7 +295,6 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
 //MARK: - NeighborhoodUserCellDelegate -
 extension NeighBorhoodEventListUsersViewController:NeighborhoodUserCellDelegate {
     func showSendMessageToUserForPosition(_ position: Int) {
-        
         if !isEvent {
             AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member)
         }
@@ -312,7 +316,6 @@ extension NeighBorhoodEventListUsersViewController:NeighborhoodUserCellDelegate 
             IHProgressHUD.showError(withStatus: errorMsg)
         }
     }
-    
     private func showConversation(conversation:Conversation?, username:String) {
         DispatchQueue.main.async {
             if let convId = conversation?.uid {
