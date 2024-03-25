@@ -1489,3 +1489,6 @@
 "text_title_i_like" = "Like";
 "text_title_comment" = "Comment";
 "see_member_react" = "People who reacted";
+
+"vote_singular" = "vote";
+"vote_plural" = "votes";

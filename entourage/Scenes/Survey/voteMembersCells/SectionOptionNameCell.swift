@@ -26,7 +26,9 @@ class SectionOptionNameCell:UITableViewCell{
     
     func configure(title:String, countVote:Int){
         self.ui_label_title_option.text = title
-        self.ui_label_number_vote.text = String(countVote)
+        let voteKey = countVote == 1 ? "vote_singular" : "vote_plural"
+        let localizedVoteText = NSLocalizedString(voteKey, comment: "")
+        self.ui_label_number_vote.text = "\(countVote) \(localizedVoteText)"
     }
     
 }
