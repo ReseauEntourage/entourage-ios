@@ -97,7 +97,43 @@ class HomeV2ViewController:UIViewController{
         self.loadMetadatas()
 
         self.initHome()
+        self.checkForUpdates()
         
+    }
+    
+    func checkForUpdates() {
+        let appStoreURL = URL(string: "http://itunes.apple.com/lookup?bundleId=social.entourage.entourage")!
+        let task = URLSession.shared.dataTask(with: appStoreURL) { (data, response, error) in
+            guard error == nil, let data = data else {
+                return
+            }
+
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let results = json["results"] as? [[String: Any]],
+                   let appStoreVersion = results.first?["version"] as? String,
+                   let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
+                   appStoreVersion.compare(currentVersion, options: .numeric) == .orderedDescending {
+                    
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Mise à jour disponible",
+                                                      message: "Une nouvelle version de l'application est disponible. Voulez-vous mettre à jour ?",
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Mettre à jour", style: .default, handler: { _ in
+                            if let url = URL(string: "itms-apps://itunes.apple.com/app/idYOUR_APP_ID"),
+                               UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
+                        }))
+                        alert.addAction(UIAlertAction(title: "Plus tard", style: .cancel, handler: nil))
+                        // Présenter l'alerte ici, par exemple avec self.present(alert, animated: true)
+                    }
+                }
+            } catch {
+                print("Erreur lors de la vérification de la mise à jour de l'application : \(error)")
+            }
+        }
+        task.resume()
     }
     
     func prepareUINotifAndAvatar(){
