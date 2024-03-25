@@ -325,6 +325,7 @@ extension EventListMainV2ViewController{
                 if _events.count < self.numberOfItemsForWS{
                     self.isEndOfDiscoverList = true
                 }
+                print("eho event size " , events?.count)
                 
                 // Filtrer les événements pour ne pas ajouter de doublons
                 let uniqueEvents = _events.filter { newEvent in

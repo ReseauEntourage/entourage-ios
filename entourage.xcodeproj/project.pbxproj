@@ -461,6 +461,22 @@
 		26CC9F7A2A331CF5005F7408 /* WelcomeThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */; };
 		26CC9F7D2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */; };
 		26CC9F7F2A337243005F7408 /* SecondaryTextWelcomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */; };
+		26D13E152BA1FC8900CAD4F7 /* Survey.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E142BA1FC8900CAD4F7 /* Survey.storyboard */; };
+		26D13E172BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E162BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift */; };
+		26D13E1C2BA35DA700CAD4F7 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E1B2BA35DA700CAD4F7 /* QuestionCell.swift */; };
+		26D13E1E2BA35ECF00CAD4F7 /* TitleOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E1D2BA35ECF00CAD4F7 /* TitleOptionCell.swift */; };
+		26D13E202BA35EE900CAD4F7 /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E1F2BA35EE900CAD4F7 /* OptionCell.swift */; };
+		26D13E222BA35F1700CAD4F7 /* QcmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E212BA35F1700CAD4F7 /* QcmCell.swift */; };
+		26D13E242BA35F3A00CAD4F7 /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E232BA35F3A00CAD4F7 /* QuestionCell.xib */; };
+		26D13E262BA35F6300CAD4F7 /* TitleOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E252BA35F6300CAD4F7 /* TitleOptionCell.xib */; };
+		26D13E282BA35F8200CAD4F7 /* OptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E272BA35F8200CAD4F7 /* OptionCell.xib */; };
+		26D13E2A2BA35FA600CAD4F7 /* QcmCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E292BA35FA600CAD4F7 /* QcmCell.xib */; };
+		26D13E2C2BA43E8A00CAD4F7 /* SurveyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E2B2BA43E8A00CAD4F7 /* SurveyService.swift */; };
+		26D13E2E2BA43F9900CAD4F7 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E2D2BA43F9900CAD4F7 /* Survey.swift */; };
+		26D13E302BA4AAE900CAD4F7 /* NeighborhoodPostSurveyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E2F2BA4AAE900CAD4F7 /* NeighborhoodPostSurveyCell.xib */; };
+		26D13E322BA8AC2800CAD4F7 /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E312BA8AC2800CAD4F7 /* SurveyView.swift */; };
+		26D13E352BB1EBA500CAD4F7 /* SectionOptionNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E342BB1EBA500CAD4F7 /* SectionOptionNameCell.swift */; };
+		26D13E372BB1EBF100CAD4F7 /* SectionOptionNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E362BB1EBF100CAD4F7 /* SectionOptionNameCell.xib */; };
 		26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */; };
 		26F03C932A1B4E5900450A61 /* WelcomeOneTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */; };
 		26F03C952A1B813C00450A61 /* WelcomeOneContentMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C942A1B813C00450A61 /* WelcomeOneContentMain.swift */; };
@@ -936,6 +952,22 @@
 		26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeViewController.swift; sourceTree = "<group>"; };
 		26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryTextWelcomeCell.xib; sourceTree = "<group>"; };
 		26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTextWelcomeCell.swift; sourceTree = "<group>"; };
+		26D13E142BA1FC8900CAD4F7 /* Survey.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Survey.storyboard; sourceTree = "<group>"; };
+		26D13E162BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSurveyViewController.swift; sourceTree = "<group>"; };
+		26D13E1B2BA35DA700CAD4F7 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		26D13E1D2BA35ECF00CAD4F7 /* TitleOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleOptionCell.swift; sourceTree = "<group>"; };
+		26D13E1F2BA35EE900CAD4F7 /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
+		26D13E212BA35F1700CAD4F7 /* QcmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QcmCell.swift; sourceTree = "<group>"; };
+		26D13E232BA35F3A00CAD4F7 /* QuestionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
+		26D13E252BA35F6300CAD4F7 /* TitleOptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleOptionCell.xib; sourceTree = "<group>"; };
+		26D13E272BA35F8200CAD4F7 /* OptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCell.xib; sourceTree = "<group>"; };
+		26D13E292BA35FA600CAD4F7 /* QcmCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QcmCell.xib; sourceTree = "<group>"; };
+		26D13E2B2BA43E8A00CAD4F7 /* SurveyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyService.swift; sourceTree = "<group>"; };
+		26D13E2D2BA43F9900CAD4F7 /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
+		26D13E2F2BA4AAE900CAD4F7 /* NeighborhoodPostSurveyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostSurveyCell.xib; sourceTree = "<group>"; };
+		26D13E312BA8AC2800CAD4F7 /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
+		26D13E342BB1EBA500CAD4F7 /* SectionOptionNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOptionNameCell.swift; sourceTree = "<group>"; };
+		26D13E362BB1EBF100CAD4F7 /* SectionOptionNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionOptionNameCell.xib; sourceTree = "<group>"; };
 		26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneTitleCell.swift; sourceTree = "<group>"; };
 		26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneTitleCell.xib; sourceTree = "<group>"; };
 		26F03C942A1B813C00450A61 /* WelcomeOneContentMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneContentMain.swift; sourceTree = "<group>"; };
@@ -1071,6 +1103,7 @@
 				0227EC4E292CE8320049168E /* NotifInApp.swift */,
 				26A06E572B1E23B500AC323A /* Translations.swift */,
 				2685FFE12B68EA1D0083F683 /* Reaction.swift */,
+				26D13E2D2BA43F9900CAD4F7 /* Survey.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1179,6 +1212,7 @@
 				26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */,
 				26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */,
 				26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */,
+				26D13E2F2BA4AAE900CAD4F7 /* NeighborhoodPostSurveyCell.xib */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1306,6 +1340,7 @@
 				02EFE479289BFC0D00D70C68 /* Action_Create.storyboard */,
 				0243DCC728AF832D00273679 /* Messages.storyboard */,
 				26AD11A22AEFF94F00FA7BEC /* LangueStoryboard.storyboard */,
+				26D13E142BA1FC8900CAD4F7 /* Survey.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1374,6 +1409,7 @@
 		02681953278DF6E400A98A4A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				26D13E132BA1F95400CAD4F7 /* Survey */,
 				26AD11A42AEFF96200FA7BEC /* LangueChoose */,
 				266B26372ABB16BC00C8EAD8 /* HomeV2 */,
 				2636B9602A7B9EB3007EE1B2 /* special_notifications */,
@@ -1637,6 +1673,7 @@
 				0262997A2790815000D84A6A /* APIKeys.swift */,
 				02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */,
 				02B57DA127FCB652005A567B /* ParsingDataCodable.swift */,
+				26D13E2B2BA43E8A00CAD4F7 /* SurveyService.swift */,
 			);
 			path = "Network Managers";
 			sourceTree = "<group>";
@@ -1977,6 +2014,41 @@
 			path = welcome3cells;
 			sourceTree = "<group>";
 		};
+		26D13E132BA1F95400CAD4F7 /* Survey */ = {
+			isa = PBXGroup;
+			children = (
+				26D13E332BB1EB7700CAD4F7 /* voteMembersCells */,
+				26D13E182BA34F8B00CAD4F7 /* createSurveyCells */,
+				26D13E162BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift */,
+				26D13E312BA8AC2800CAD4F7 /* SurveyView.swift */,
+			);
+			path = Survey;
+			sourceTree = "<group>";
+		};
+		26D13E182BA34F8B00CAD4F7 /* createSurveyCells */ = {
+			isa = PBXGroup;
+			children = (
+				26D13E1B2BA35DA700CAD4F7 /* QuestionCell.swift */,
+				26D13E1D2BA35ECF00CAD4F7 /* TitleOptionCell.swift */,
+				26D13E1F2BA35EE900CAD4F7 /* OptionCell.swift */,
+				26D13E212BA35F1700CAD4F7 /* QcmCell.swift */,
+				26D13E232BA35F3A00CAD4F7 /* QuestionCell.xib */,
+				26D13E252BA35F6300CAD4F7 /* TitleOptionCell.xib */,
+				26D13E272BA35F8200CAD4F7 /* OptionCell.xib */,
+				26D13E292BA35FA600CAD4F7 /* QcmCell.xib */,
+			);
+			path = createSurveyCells;
+			sourceTree = "<group>";
+		};
+		26D13E332BB1EB7700CAD4F7 /* voteMembersCells */ = {
+			isa = PBXGroup;
+			children = (
+				26D13E342BB1EBA500CAD4F7 /* SectionOptionNameCell.swift */,
+				26D13E362BB1EBF100CAD4F7 /* SectionOptionNameCell.xib */,
+			);
+			path = voteMembersCells;
+			sourceTree = "<group>";
+		};
 		466EAB21AD4207C796A4EC64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2128,6 +2200,7 @@
 				02E7845D2811A8DB00177F13 /* Neighborhood.storyboard in Resources */,
 				2636B9642A7BA199007EE1B2 /* anim_rugby.json in Resources */,
 				02DB3BBA27A1496A004732C9 /* PartnerDetails.storyboard in Resources */,
+				26D13E152BA1FC8900CAD4F7 /* Survey.storyboard in Resources */,
 				02A3DD3127FDC03B0060EC2E /* Neighborhood.xcassets in Resources */,
 				02B94C30284F9277006059EF /* HomeSectionCell.xib in Resources */,
 				2674FEC92ACDB7520013D674 /* HomeModeratorCell.xib in Resources */,
@@ -2150,12 +2223,16 @@
 				02CCE67427D78C7100D6976C /* Montserrat-Bold.ttf in Resources */,
 				02CCE67E27D78CAB00D6976C /* NunitoSans-Regular.ttf in Resources */,
 				029BD4F727EDC45E00AE67AF /* MJNavBackView.xib in Resources */,
+				26D13E372BB1EBF100CAD4F7 /* SectionOptionNameCell.xib in Resources */,
 				02B94C1E284F55D9006059EF /* Home.xcassets in Resources */,
 				028D4F52293795B700A0BDD3 /* Onboarding.storyboard in Resources */,
+				26D13E282BA35F8200CAD4F7 /* OptionCell.xib in Resources */,
 				266B262E2AB9DA3900C8EAD8 /* DividerCell.xib in Resources */,
 				0260E9D62936402100242A89 /* Intros.xcassets in Resources */,
 				021FD9672875F4ED00D3AA54 /* EventListMeCell.xib in Resources */,
 				264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */,
+				26D13E302BA4AAE900CAD4F7 /* NeighborhoodPostSurveyCell.xib in Resources */,
+				26D13E262BA35F6300CAD4F7 /* TitleOptionCell.xib in Resources */,
 				025C92BA28340F10000970D9 /* NeighborhoodDetailTopMemberCell.xib in Resources */,
 				26CC9F7D2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib in Resources */,
 				02B94C2C284F8F0C006059EF /* HomeActionCell.xib in Resources */,
@@ -2166,6 +2243,7 @@
 				023EC27F27FB2D8D003A3051 /* BasePopViewController_Template.xib in Resources */,
 				02E0EFA82878709D009B2C65 /* EventDetailTopLightCell.xib in Resources */,
 				2619CCE52AE948AB00276D67 /* Localizable.strings in Resources */,
+				26D13E2A2BA35FA600CAD4F7 /* QcmCell.xib in Resources */,
 				024131DB2862126B00561FB4 /* Events.xcassets in Resources */,
 				26F03C9F2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib in Resources */,
 				26F03C932A1B4E5900450A61 /* WelcomeOneTitleCell.xib in Resources */,
@@ -2207,6 +2285,7 @@
 				2674FEBB2ACD96EB0013D674 /* HomeGroupHorizontalCollectionCell.xib in Resources */,
 				26AD11A32AEFF94F00FA7BEC /* LangueStoryboard.storyboard in Resources */,
 				02CCE67D27D78CAB00D6976C /* NunitoSans-Bold.ttf in Resources */,
+				26D13E242BA35F3A00CAD4F7 /* QuestionCell.xib in Resources */,
 				02F5FEC527E0CB6800A14313 /* MJAlertController.xib in Resources */,
 				02F527782799990F00929431 /* GuideSolidarity.storyboard in Resources */,
 			);
@@ -2301,6 +2380,7 @@
 				02B94C47285223A4006059EF /* PedagogicListViewController.swift in Sources */,
 				266B26302AB9DCE000C8EAD8 /* EventListCollectionTableViewCell.swift in Sources */,
 				02FB543F287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift in Sources */,
+				26D13E2E2BA43F9900CAD4F7 /* Survey.swift in Sources */,
 				02040CF5288E97E000AB1FBB /* EventParamTopCell.swift in Sources */,
 				024131CF2862026500561FB4 /* EventCreatePhase1ViewController.swift in Sources */,
 				2674FEC72ACDB6AC0013D674 /* HomeModeratorCell.swift in Sources */,
@@ -2327,6 +2407,7 @@
 				02FB5454287DC38300E4B9FA /* EventDetailFullGroupTitleCell.swift in Sources */,
 				024131DD2863622600561FB4 /* GrowingTextview.swift in Sources */,
 				02681980278DF72D00A98A4A /* OTCarrouselLayout.swift in Sources */,
+				26D13E1E2BA35ECF00CAD4F7 /* TitleOptionCell.swift in Sources */,
 				02728DDD27F19A3800512DC0 /* PartnerDetailInfoCell.swift in Sources */,
 				26CC9F7A2A331CF5005F7408 /* WelcomeThreeViewController.swift in Sources */,
 				02A92C1E2897D347000DFF95 /* ActionCreateMainViewController.swift in Sources */,
@@ -2356,6 +2437,7 @@
 				264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */,
 				26AD11982AEA688800FA7BEC /* ProfileTranslationViewController.swift in Sources */,
 				0224597827FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift in Sources */,
+				26D13E202BA35EE900CAD4F7 /* OptionCell.swift in Sources */,
 				02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */,
 				2674FEB92ACD96BE0013D674 /* HomeGroupHorizontalCollectionCell.swift in Sources */,
 				024131D42862030A00561FB4 /* EventCreatePhase2ViewController.swift in Sources */,
@@ -2368,6 +2450,7 @@
 				02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */,
 				0232A6D62888126700A47828 /* EventActionLocationFilters.swift in Sources */,
 				02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */,
+				26D13E322BA8AC2800CAD4F7 /* SurveyView.swift in Sources */,
 				02FCB537281BDD2600682E61 /* NeighborhoodDetailTopCell.swift in Sources */,
 				02F5278327999AD700929431 /* MapPoi.swift in Sources */,
 				0262997B2790815000D84A6A /* APIKeys.swift in Sources */,
@@ -2384,6 +2467,7 @@
 				0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */,
 				26AD11A62AEFF99900FA7BEC /* OnboardingLanguageStoryBoard.swift in Sources */,
 				0268197D278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift in Sources */,
+				26D13E2C2BA43E8A00CAD4F7 /* SurveyService.swift in Sources */,
 				2674FEBD2ACD999A0013D674 /* HomeCellPedago.swift in Sources */,
 				02681950278DF6BD00A98A4A /* OTProgressBar.swift in Sources */,
 				02166C0B28A54568004D3FF8 /* ActionFilterValidateCell.swift in Sources */,
@@ -2392,7 +2476,9 @@
 				02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */,
 				02B57D9627FC430D005A567B /* ReportUserMainViewController.swift in Sources */,
 				02E21921283520A1002A1FCB /* NeighborhoodUploadPictureService.swift in Sources */,
+				26D13E172BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift in Sources */,
 				02CCE68927D7B51E00D6976C /* TagView.swift in Sources */,
+				26D13E1C2BA35DA700CAD4F7 /* QuestionCell.swift in Sources */,
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,
 				02B94C4D28522BB8006059EF /* PedagogicCell.swift in Sources */,
 				0285AD832806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift in Sources */,
@@ -2440,6 +2526,7 @@
 				026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */,
 				2674FEC32ACDA5800013D674 /* HomeNeedHelpCell.swift in Sources */,
 				26C1BB662A3AF0D100C81C09 /* WelcomeFourImageCell.swift in Sources */,
+				26D13E222BA35F1700CAD4F7 /* QcmCell.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
 				02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */,
 				022DC3EF2847996D00868760 /* Analytics_Keys.swift in Sources */,
@@ -2478,6 +2565,7 @@
 				02F50E1C28A1608E00011FE6 /* ActionEditMainViewController.swift in Sources */,
 				02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */,
 				0268C253285A2B1400294055 /* FloatyViewController.swift in Sources */,
+				26D13E352BB1EBA500CAD4F7 /* SectionOptionNameCell.swift in Sources */,
 				02A92C262897E6A9000DFF95 /* ActionCreatePhase3ViewController.swift in Sources */,
 				02E0EFA028783900009B2C65 /* EventDetailFeedViewController.swift in Sources */,
 				02B94C37284F9FB3006059EF /* HomeHelpCell.swift in Sources */,

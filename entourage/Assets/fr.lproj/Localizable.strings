@@ -669,6 +669,8 @@
  */
 "neighborhood_menu_post_event" = "Créer un événement sur le groupe";
 "neighborhood_menu_post_post" = "Créer une publication";
+"neighborhood_menu_post_survey" = "Créer un sondage";
+
 
 "neighborhood_add_post_title" = "Créer une publication";
 "neighborhood_add_post_message_title" = "Écrire votre message";

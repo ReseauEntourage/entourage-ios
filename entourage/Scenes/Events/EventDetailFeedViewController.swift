@@ -787,6 +787,17 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
             self.navigationController?.present(navVC, animated: true)
         }
     }
+    func showVote(post:PostMessage){
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.event = event
+            vc.survey = post.survey
+            vc.postId = post.uid
+            vc.isFromSurvey = true
+            vc.eventId = eventId
+            vc.isFromReact = false
+            self.navigationController?.present(navVC, animated: true)
+        }
+    }
     func joinLeave() {
         joinLeaveEvent()
     }
@@ -816,6 +827,23 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
+    func sendVoteView(post: PostMessage) {
+        self.showVote(post: post)
+    }
+    
+    func postSurveyResponse(forPostId postId: Int, withResponses responses: [Bool]) {
+        let groupId = self.eventId
+        
+        SurveyService.postSurveyResponseEvent(eventId: groupId, postId: postId, responses: responses) { isSuccess in
+            if isSuccess {
+                print("Réponse au sondage postée avec succès.")
+            } else {
+                print("Échec du postage de la réponse au sondage.")
+            }
+        }
+    }
+
+    
     func ifNotMemberWarnUser() {
         let alertController = UIAlertController(title: "Attention", message: "Vous devez rejoindre le groupe pour effectuer cette action.", preferredStyle: .alert)
                 

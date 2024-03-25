@@ -11,6 +11,8 @@ import IHProgressHUD
 private enum TableDTO {
     case searchCell
     case userCell(user: UserLightNeighborhood, reactionType: ReactionType?)
+    case surveySection(title: String, voteCount: Int)
+
 }
 
 
@@ -36,13 +38,16 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     var postId: Int? = nil
     var isFromReact = false
     var eventId:Int? = nil
+    var survey:Survey? = nil
+    var isFromSurvey = false
     var reactionTypeList = [ReactionType]()
     private var tableData: [TableDTO] = []
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        ui_tableview.register(UINib(nibName: SectionOptionNameCell.identifier, bundle: nil), forCellReuseIdentifier: SectionOptionNameCell.identifier)
+
         var title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
         if isFromReact {
             title = "see_member_react".localized
@@ -55,7 +60,9 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         ui_lb_no_result.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lb_no_result.text = txtSearch
         ui_view_no_result.isHidden = true
-        if isFromReact {
+        if isFromSurvey {
+            loadSurveyData()
+        }else if isFromReact {
             fetchReactionsDetails()
         }else{
             if isEvent {
@@ -72,6 +79,61 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         super.viewWillAppear(animated)
         self.navigationController?.hideTransparentNavigationBar()
     }
+    
+    func loadSurveyData() {
+        guard let _postId = self.postId, let survey = self.survey else {
+            print("Les informations de sondage ou le postId sont manquants.")
+            return
+        }
+
+        let completion: (SurveyResponsesListWrapper?, EntourageNetworkError?) -> Void = { [weak self] surveyResponsesListWrapper, error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if let error = error {
+                    // Utilise le type d'erreur spécifique pour traiter ou afficher l'erreur
+                    print("Erreur lors de la récupération des réponses de sondage: \(error)")
+                    return
+                }
+                guard let surveyResponsesList = surveyResponsesListWrapper?.responses else {
+                    print("Aucune réponse de sondage n'a été trouvée.")
+                    return
+                }
+
+                // Itérer sur chaque choix de la survey pour construire les sections
+                for (index, choice) in survey.choices.enumerated() {
+                    let voteCount = survey.summary[index] // Utiliser summary pour obtenir le nombre de votes pour chaque choix
+                    self.tableData.append(.surveySection(title: choice, voteCount: voteCount))
+
+                    // Ajouter les utilisateurs qui ont répondu à ce choix
+                    let usersForChoice = surveyResponsesList[index]
+                    self.tableData += usersForChoice.map { surveyUser in
+                        // Créer une instance vide de UserLightNeighborhood
+                        var userLight = UserLightNeighborhood()
+                        userLight.sid = surveyUser.id
+                        userLight.displayName = surveyUser.displayName
+                        userLight.avatarURL = surveyUser.avatarUrl
+
+                        userLight.communityRoles = surveyUser.communityRoles
+
+                        return TableDTO.userCell(user: userLight, reactionType: nil)
+                    }
+                }
+
+                // Recharger les données de la tableView
+                self.ui_tableview.reloadData()
+            }
+        }
+
+        // Appel au service pour obtenir les réponses de sondage basé sur eventId ou groupId
+        if let eventId = self.eventId {
+            SurveyService.getSurveyResponsesForEvent(eventId: eventId, postId: _postId, completion: completion)
+        } else if let groupId = self.groupId {
+            SurveyService.getSurveyResponsesForGroup(groupId: groupId, postId: _postId, completion: completion)
+        }
+    }
+
+
+
     
     
     func getNeighborhoodUsers() {
@@ -215,6 +277,12 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             cell.populateCell(isMe:isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType)
             return cell
         
+        case .surveySection(let title, let voteCount):
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "SectionOptionNameCell") as? SectionOptionNameCell{
+                cell.selectionStyle = .none
+                cell.configure(title: title, countVote: voteCount)
+                return cell
+            }
         }
         
         if indexPath.row == 0 {
@@ -223,6 +291,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             cell.populateCell(delegate: self, isSearch:isSearch,placeceholder:title, isCellUserSearch: true)
             return cell
         }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -257,6 +326,8 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                     self.navigationController?.present(navVC, animated: true)
                 }
             }
+        case .surveySection(title: let title, voteCount: let voteCount):
+            return
         }
     }
 }

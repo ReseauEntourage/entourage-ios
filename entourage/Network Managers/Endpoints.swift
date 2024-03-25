@@ -158,3 +158,14 @@ let kAPINotifsMarkRead = "inapp_notifications/%d?token=%@"
 let kAPINotifsGetPermissions = "notification_permissions?token=%@"
 let kAPINotifsPostPermissions = "notification_permissions?token=%@"
 
+// Survey Responses for Groups
+let kAPIPostSurveyResponseGroup = "neighborhoods/%d/chat_messages/%d/survey_responses?token=%@"
+let kAPIGetSurveyResponsesForGroup = "neighborhoods/%d/chat_messages/%d/survey_responses?token=%@"
+let kAPIDeleteSurveyResponseForGroup = "neighborhoods/%d/chat_messages/%d/survey_responses?token=%@"
+let kAPICreateSurveyInGroup = "neighborhoods/%d/chat_messages?token=%@"
+
+// Survey Responses for Events
+let kAPIPostSurveyResponseEvent = "outings/%d/chat_messages/%d/survey_responses?token=%@"
+let kAPIGetSurveyResponsesForEvent = "outings/%d/chat_messages/%d/survey_responses?token=%@"
+let kAPIDeleteSurveyResponseForEvent = "outings/%d/chat_messages/%d/survey_responses?token=%@"
+let kAPICreateSurveyInEvent = "outings/%d/chat_messages?token=%@"

@@ -56,6 +56,9 @@ struct PostMessage:Codable {
     var contentTranslations:Translations? = nil
     var reactions: [Reaction]?
     var reactionId:Int? = 0
+    var survey: Survey?
+    var surveyResponse: [Bool]? = []
+
 
     var isRetryMsg = false
     
@@ -80,6 +83,8 @@ struct PostMessage:Codable {
         case reactions
         case contentTranslations = "content_translations"
         case reactionId = "reaction_id"
+        case survey
+        case surveyResponse = "survey_response"
     }
     
     //Use to sort messages in days Dicts
@@ -123,5 +128,19 @@ struct MemberLight:Codable {
         case uid = "id"
         case username = "display_name"
         case imageUrl = "avatar_url"
+    }
+}
+
+
+// Structure équivalente de Survey pour iOS
+struct Survey: Codable {
+    var choices: [String]
+    var multiple: Bool
+    var summary: [Int]
+
+    enum CodingKeys: String, CodingKey {
+        case choices
+        case multiple
+        case summary
     }
 }
