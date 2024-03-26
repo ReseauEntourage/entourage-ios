@@ -155,7 +155,6 @@ extension CreateSurveyViewController:UITableViewDelegate, UITableViewDataSource{
         case .optionCell:
             if let cell = tableView.dequeueReusableCell(withIdentifier: OptionCell.identifier, for: indexPath) as? OptionCell {
                 let optionIndex = indexPath.row - tableDTO.filter { $0 == .questionCell || $0 == .titleOptionCell }.count
-                print("eho option index " , optionIndex)
                 cell.selectionStyle = .none
                 cell.configure(numberInList: optionIndex)
                 cell.delegate = self
@@ -194,11 +193,11 @@ extension CreateSurveyViewController:TitleOptionCellDelegate{
 
 extension CreateSurveyViewController:OptionCellDelegate{
     func onOptionChanged(option: String, numberInList: Int) {
-        if let lastOptionIndex = tableDTO.lastIndex(of: .optionCell), lastOptionIndex == tableDTO.count - 1, tableDTO.filter({ $0 == .optionCell }).count < 5 {
-            // Ajoute une nouvelle cellule d'option.
-            tableDTO.insert(.optionCell, at: lastOptionIndex + 1)
-            ui_tableview.insertRows(at: [IndexPath(row: lastOptionIndex + 1, section: 0)], with: .automatic)
-            // Pas besoin de reconfigurer immédiatement après l'insertion, car cela sera géré lors du rechargement de la cellule.
+        if let lastOptionIndex = tableDTO.lastIndex(of: .optionCell), tableDTO.filter({ $0 == .optionCell }).count < 5 {
+            if lastOptionIndex == numberInList + 3 {
+                tableDTO.insert(.optionCell, at: lastOptionIndex + 1)
+                ui_tableview.insertRows(at: [IndexPath(row: lastOptionIndex + 1, section: 0)], with: .automatic)
+            }
         }
         // Mise à jour de l'option correspondante.
         if numberInList < surveyOptions.count {

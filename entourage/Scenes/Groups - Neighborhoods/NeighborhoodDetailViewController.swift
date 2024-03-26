@@ -160,7 +160,7 @@ class NeighborhoodDetailViewController: UIViewController {
             self.showCreateEvent()
         }
         
-        let floatItem2 = createButtonItem(title: "neighborhood_menu_post_survey".localized, iconName: "ic_menu_button_create_event") { item in
+        let floatItem2 = createButtonItem(title: "neighborhood_menu_post_survey".localized, iconName: "ic_survey_creation") { item in
             self.showCreateSurvey()
         }
         

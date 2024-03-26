@@ -26,8 +26,8 @@ class EventDetailFeedViewController: UIViewController {
     
     @IBOutlet weak var ui_view_button_back: UIView!
     @IBOutlet weak var ui_view_button_settings: UIView!
-    @IBOutlet weak var ui_floaty_button: UIButton!
     
+    @IBOutlet weak var ui_floaty_bouton: Floaty!
     
     @IBOutlet weak var ui_view_full_image: UIView!
     @IBOutlet weak var ui_scrollview: UIScrollView!
@@ -76,6 +76,8 @@ class EventDetailFeedViewController: UIViewController {
         if !ApplicationTheme.iPhoneHasNotch() {
             maxViewHeight = maxViewHeight - 20
         }
+        setupFloatingButton()
+
         
         self.addShadowAndRadius(customView: ui_view_button_settings)
         self.addShadowAndRadius(customView: ui_view_button_back)
@@ -90,7 +92,7 @@ class EventDetailFeedViewController: UIViewController {
         
         populateTopView(isAfterLoading: false)
         
-        ui_floaty_button.isHidden = true
+        ui_floaty_bouton.isHidden = true
         ui_bt_floating_join.isHidden = true
         
         ui_view_canceled.isHidden = true
@@ -119,13 +121,36 @@ class EventDetailFeedViewController: UIViewController {
         ui_tableview.register(UINib(nibName: NeighborhoodPostDeletedCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostDeletedCell.identifier)
         ui_tableview.register(UINib(nibName: EventDetailTopFullCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopFullCell.identifier)
         ui_tableview.register(UINib(nibName: EventDetailTopLightCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopLightCell.identifier)
+        
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostTranslationCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTranslationCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostImageTranslationCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageTranslationCell.identifier)
-        
+        ui_tableview.register(UINib(nibName: NeighborhoodPostSurveyCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostSurveyCell.identifier)
         ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
         ui_tableview.register(UINib(nibName: EventListSectionCell.neighborhoodHeaderIdentifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier)
     }
+    
+    func setupFloatingButton() {
+
+        let floatItem2 = createButtonItem(title: "neighborhood_menu_post_survey".localized, iconName: "ic_survey_creation") { item in
+            self.showCreateSurvey()
+        }
+        
+        let floatItem3 = createButtonItem(title: "neighborhood_menu_post_post".localized, iconName: "ic_menu_button_create_post") { item in
+            AnalyticsLoggerManager.logEvent(name: Event_detail_action_post)
+            self.showCreatePost()
+        }
+        
+        ui_floaty_bouton.overlayColor = .white.withAlphaComponent(0.10)
+        ui_floaty_bouton.addBlurOverlay = true
+        ui_floaty_bouton.itemSpace = 24
+        ui_floaty_bouton.addItem(item: floatItem3)
+        ui_floaty_bouton.addItem(item: floatItem2)
+        ui_floaty_bouton.sticky = true
+        ui_floaty_bouton.animationSpeed = 0.3
+        ui_floaty_bouton.fabDelegate = self
+    }
+    
     
     private func addShadowAndRadius(customView:UIView) {
         customView.clipsToBounds = false
@@ -195,7 +220,7 @@ class EventDetailFeedViewController: UIViewController {
         }
         
         self.ui_label_title_event.text = self.event?.title
-        self.ui_floaty_button?.isHidden = self.event?.isMember ?? false ? false : true
+        self.ui_floaty_bouton?.isHidden = self.event?.isMember ?? false ? false : true
         
         self.ui_bt_floating_join.isHidden = true
     }
@@ -438,10 +463,7 @@ class EventDetailFeedViewController: UIViewController {
         joinLeaveEvent()
     }
     
-    @IBAction func action_create_post(_ sender: Any) {
-        AnalyticsLoggerManager.logEvent(name: Event_detail_action_post)
-        showCreatePost()
-    }
+
     @IBAction func action_tap_close_full_image(_ sender: Any) {
         ui_view_full_image.isHidden = true
     }
@@ -455,7 +477,15 @@ class EventDetailFeedViewController: UIViewController {
             self.navigationController?.present(vc, animated: true)
         }
     }
-    
+    func showCreateSurvey() {
+        let sb = UIStoryboard.init(name: StoryboardName.survey, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "create_survey") as? CreateSurveyViewController  {
+            vc.eventId = self.eventId
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
     func showPopInfoPlaces() {
         let customAlert = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
@@ -601,6 +631,9 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             
             let postmessage:PostMessage = messagesOld[indexPath.row - 1]
             var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            if postmessage.survey != nil {
+                identifier = NeighborhoodPostSurveyCell.identifier
+            }
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
             }
@@ -636,14 +669,19 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - countToAdd] : self.event!.posts![indexPath.row - countToAdd]
         
         var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-        if postmessage.status == "deleted" {
-            identifier = NeighborhoodPostDeletedCell.identifier
-        }
+        
+      
         if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
             identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
         }
         if(postmessage.contentTranslations == nil){
             identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        }
+        if postmessage.survey != nil {
+            identifier = NeighborhoodPostSurveyCell.identifier
+        }
+        if postmessage.status == "deleted" {
+            identifier = NeighborhoodPostDeletedCell.identifier
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
         cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.event?.isMember)
@@ -1016,9 +1054,35 @@ extension EventDetailFeedViewController{
     }
 }
 
+extension EventDetailFeedViewController:CreateSurveyValidationDelegate{
+    func onSurveyCreate() {
+        self.getEventDetail()
+    }
+}
+
+//MARK: - FloatyDelegate -
+extension EventDetailFeedViewController:FloatyDelegate {
+    func floatyWillOpen(_ floaty: Floaty) {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Plus)
+    }
+    
+    private func createButtonItem(title:String, iconName:String, handler:@escaping ((FloatyItem) -> Void)) -> FloatyItem {
+        let floatyItem = FloatyItem()
+        floatyItem.buttonColor = .clear
+        floatyItem.icon = UIImage(named: iconName)
+        floatyItem.titleLabel.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
+        floatyItem.titleShadowColor = .clear
+        floatyItem.title = title
+        floatyItem.imageSize = CGSize(width: 62, height: 62)
+        floatyItem.handler = handler
+        return floatyItem
+    }
+}
 
 enum TableIsOldAndNewPost {
     case onlyOld
     case newAndOld
     case onlyNew
 }
+
+
