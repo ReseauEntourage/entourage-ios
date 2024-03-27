@@ -55,7 +55,8 @@ class CreateSurveyViewController:UIViewController{
         ui_back_button.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleBackTap))
         ui_back_button.addGestureRecognizer(tapGestureRecognizer)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.initDTO()
     }
     
@@ -71,6 +72,24 @@ class CreateSurveyViewController:UIViewController{
 
     @objc func handleBackTap() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        let keyboardHeight = keyboardSize.height
+        let bottomInset = keyboardHeight - (view.safeAreaInsets.bottom)
+        ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+        ui_tableview.scrollIndicatorInsets = ui_tableview.contentInset
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        ui_tableview.contentInset = .zero
+        ui_tableview.scrollIndicatorInsets = .zero
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
 

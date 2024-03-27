@@ -39,6 +39,7 @@ class OptionCell: UITableViewCell, UITextViewDelegate {
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (ui_text_view.font?.pointSize ?? 16) / 2)
         placeholderLabel.frame.size = CGSize(width: ui_text_view.bounds.width - 10, height: 20)
         placeholderLabel.isHidden = ui_text_view.text.count > 0
+        addToolbarToKeyboard()
     }
     
     func addUnderlineToTextView() {
@@ -66,5 +67,19 @@ class OptionCell: UITableViewCell, UITextViewDelegate {
     
     func configure(numberInList:Int) {
         self.numberInList = numberInList
+    }
+    
+    private func addToolbarToKeyboard() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Fermer", style: .done, target: self, action: #selector(dismissKeyboard))
+
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        ui_text_view.inputAccessoryView = toolbar
+    }
+    @objc private func dismissKeyboard() {
+        ui_text_view.resignFirstResponder()
     }
 }

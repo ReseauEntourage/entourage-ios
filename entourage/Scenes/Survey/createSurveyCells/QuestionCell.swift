@@ -36,6 +36,7 @@ class QuestionCell: UITableViewCell, UITextViewDelegate {
         ui_text_view.autocapitalizationType = .sentences
         
         addUnderlineToTextView()
+        addToolbarToKeyboard()
     }
     
     func addUnderlineToTextView() {
@@ -63,5 +64,18 @@ class QuestionCell: UITableViewCell, UITextViewDelegate {
     
     func configure() {
         // Configuration supplémentaire si nécessaire
+    }
+    private func addToolbarToKeyboard() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Fermer", style: .done, target: self, action: #selector(dismissKeyboard))
+
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        ui_text_view.inputAccessoryView = toolbar
+    }
+    @objc private func dismissKeyboard() {
+        ui_text_view.resignFirstResponder()
     }
 }
