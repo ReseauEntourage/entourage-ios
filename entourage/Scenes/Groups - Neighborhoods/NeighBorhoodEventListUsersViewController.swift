@@ -10,6 +10,7 @@ import IHProgressHUD
 
 private enum TableDTO {
     case searchCell
+    case questionCell(title:String)
     case userCell(user: UserLightNeighborhood, reactionType: ReactionType?)
     case surveySection(title: String, voteCount: Int)
 
@@ -39,6 +40,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     var isFromReact = false
     var eventId:Int? = nil
     var survey:Survey? = nil
+    var questionTitle:String? = nil
     var isFromSurvey = false
     var reactionTypeList = [ReactionType]()
     private var tableData: [TableDTO] = []
@@ -47,10 +49,14 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_tableview.register(UINib(nibName: SectionOptionNameCell.identifier, bundle: nil), forCellReuseIdentifier: SectionOptionNameCell.identifier)
+        ui_tableview.register(UINib(nibName: QuestionSurveyVoteCell.identifier, bundle: nil), forCellReuseIdentifier: QuestionSurveyVoteCell.identifier)
 
         var title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
         if isFromReact {
             title = "see_member_react".localized
+        }
+        if isFromSurvey {
+            title = "Réponses au sondage"
         }
         let txtSearch = "neighborhood_group_search_empty_title".localized
         loadStoredReactionTypes()
@@ -100,6 +106,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                 }
 
                 // Itérer sur chaque choix de la survey pour construire les sections
+                self.tableData.append(.questionCell(title: self.questionTitle!))
                 for (index, choice) in survey.choices.enumerated() {
                     let voteCount = survey.summary[index] // Utiliser summary pour obtenir le nombre de votes pour chaque choix
                     self.tableData.append(.surveySection(title: choice, voteCount: voteCount))
@@ -284,6 +291,13 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                 cell.configure(title: title, countVote: voteCount)
                 return cell
             }
+        case .questionCell(let title):
+
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "QuestionSurveyVoteCell") as? QuestionSurveyVoteCell{
+                cell.selectionStyle = .none
+                cell.configure(title: title)
+                return cell
+            }
         }
         
         if indexPath.row == 0 {
@@ -315,10 +329,10 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                     AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
                 }
                 if self.usersSearch.count < indexPath.row{
-                    user = self.users[indexPath.row]
+                    
                 }
             }
-            
+            user = _user
             if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
                 if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
                     if let _user = user{
@@ -328,6 +342,8 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                 }
             }
         case .surveySection(title: let title, voteCount: let voteCount):
+            return
+        case .questionCell(title: let title):
             return
         }
     }

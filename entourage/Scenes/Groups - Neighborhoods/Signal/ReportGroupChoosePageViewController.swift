@@ -48,6 +48,9 @@ class ReportGroupChoosePageViewController:UIViewController {
     }
     
     func loadDTO(){
+        if textString != nil && textString != ""{
+            table_dto.append(.copy)
+        }
         if checkIsMe() {
             table_dto.append(.suppress)
         }else{
@@ -56,9 +59,7 @@ class ReportGroupChoosePageViewController:UIViewController {
         if checkparameterType() == .commment && !checkIsMe() {
             table_dto.append(.translate)
         }
-        if textString != nil && textString != ""{
-            table_dto.append(.copy)
-        }
+        
         ui_tableview.reloadData()
     }
     func checkIsMe() -> Bool{
@@ -130,7 +131,7 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 70
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

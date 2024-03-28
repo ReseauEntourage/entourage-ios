@@ -345,7 +345,6 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     func showWelcomeMessage(){
-
         //I_present_view_pop
         AnalyticsLoggerManager.logEvent(name: I_present_view_pop)
 
@@ -358,7 +357,6 @@ class NeighborhoodDetailViewController: UIViewController {
         {
             message = (neighborhood?.welcomeMessage)!
         }
-        
         let alertVC = MJAlertController()
         let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontH1Blanc(size: 15), bgColor: .appOrange, cornerRadius: -1)
         alertVC.alertTagName = .welcomeMessage
@@ -369,8 +367,6 @@ class NeighborhoodDetailViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
             alertVC.show()
         }
-        
-        
     }
     
     func showPopLeave() {
@@ -801,6 +797,7 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
         if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
             vc.neighborhood = self.neighborhood
             vc.survey = post.survey
+            vc.questionTitle = post.content
             vc.postId = post.uid
             vc.isFromSurvey = true
             vc.groupId = self.neighborhoodId

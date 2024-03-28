@@ -25,6 +25,8 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_view_comment_post: UIView!
     @IBOutlet weak var ui_view_comment: UIView!
     
+    @IBOutlet weak var ui_label_select_option: UILabel!
+    @IBOutlet weak var ui_label_nb_votes: UILabel!
     
     @IBOutlet weak var ui_label_ambassador: UILabel!
     
@@ -81,9 +83,14 @@ class NeighborhoodPostCell: UITableViewCell {
               ui_view_btn_i_comment.isUserInteractionEnabled = true
         }
         let commentsLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(commentLabelTapped))
+        let voteLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(voteLabelTapped))
            ui_comments_nb.addGestureRecognizer(commentsLabelTapGesture)
-           ui_comments_nb.isUserInteractionEnabled = true  // Assure-toi que l'interaction utilisateur est activée
         
+           ui_comments_nb.isUserInteractionEnabled = true  // Assure-toi que l'interaction utilisateur est activée
+        if ui_label_nb_votes != nil {
+            ui_label_nb_votes.addGestureRecognizer(voteLabelTapGesture)
+            ui_label_nb_votes.isUserInteractionEnabled = true  // Assure-toi que l'interaction utilisateur est activée
+        }
         if(ui_view_btn_i_like != nil){
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
                 ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
@@ -117,7 +124,17 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         
         guard let surveyResponses = postMessage.surveyResponse else { return }
-
+        
+        if ui_label_select_option != nil {
+            if let _multiple = postMessage.survey?.multiple{
+                if _multiple == true {
+                    ui_label_select_option.text = "Sélectionnez une ou plusieurs options"
+                }else {
+                    ui_label_select_option.text = "Sélectionnez une option"
+                }
+            }
+        }
+        
         ui_stackview_options.arrangedSubviews.forEach { $0.removeFromSuperview() }
         let totalVotes = survey.summary.reduce(0, +)
         survey.choices.enumerated().forEach { index, choice in
@@ -152,6 +169,11 @@ class NeighborhoodPostCell: UITableViewCell {
     @objc func commentLabelTapped() {
         delegate?.showMessages(addComment: false, postId: postId, indexPathSelected: currentIndexPath, postMessage: postMessage)
     }
+    @objc func voteLabelTapped() {
+        self.delegate?.sendVoteView(post: self.postMessage)
+
+    }
+
     
     func updateReactionIcon() {
         if ui_image_react_btn != nil {
@@ -387,19 +409,43 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_iv_user.image = UIImage.init(named: "placeholder_user")
         }
         
+        
+        
         if message.commentsCount == 0 {
             //ui_comments_nb.text = "neighborhood_post_noComment".localized
             ui_comments_nb.text = ""
             
             ui_comments_nb.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 13), color: .appGrisSombre40))
 
-        }
-        else {
+        }else {
             let msg:String = message.commentsCount ?? 0 <= 1 ? "neighborhood_post_1Comment".localized : "neighborhood_post_XComments".localized
             
             let attrStr = Utils.formatStringUnderline(textString: String.init(format: msg, message.commentsCount ?? 0), textColor: .black, font: ApplicationTheme.getFontChampInput().font)
             ui_comments_nb.attributedText = attrStr
         }
+        
+        if let survey = message.survey {
+            let totalVotes = survey.totalVotes // Utilisez l'extension pour obtenir le total des votes
+            let votesText = "\(totalVotes) vote\(totalVotes > 1 ? "s" : "")" // Gère le pluriel
+            
+            // Créer le texte souligné pour les votes
+            let votesAttrString = Utils.formatStringUnderline(textString: votesText, textColor: .black, font: ApplicationTheme.getFontChampInput().font)
+            
+            // Créer le texte final avec le " - " non souligné si commentsCount > 0
+            let finalAttrString = NSMutableAttributedString()
+            finalAttrString.append(votesAttrString)
+            
+            if let commentsCount = message.commentsCount, commentsCount > 0 {
+                finalAttrString.append(NSAttributedString(string: " - ", attributes: [NSAttributedString.Key.font: ApplicationTheme.getFontChampInput().font, NSAttributedString.Key.foregroundColor: UIColor.black]))
+            }
+            
+            // Assigner le texte au label
+            ui_label_nb_votes.attributedText = finalAttrString
+        } else {
+            // Gérez le cas où `message.survey` est nul
+        }
+
+
         
         if let urlStr = message.messageImageUrl, let url = URL(string: urlStr) {
             ui_image_post?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_post"))
@@ -689,3 +735,4 @@ extension NeighborhoodPostCell: SurveyOptionViewDelegate {
         delegate?.postSurveyResponse(forPostId: postMessage.uid, withResponses: surveyResponse)
     }
 }
+

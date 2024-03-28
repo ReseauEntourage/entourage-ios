@@ -305,6 +305,7 @@ extension ProfileEditorViewController: PlaceViewControllerDelegate {
             self.ui_tableview.reloadData()
         }
     }
+
 }
 
 //MARK: - EditProfilePhotoDelegate -

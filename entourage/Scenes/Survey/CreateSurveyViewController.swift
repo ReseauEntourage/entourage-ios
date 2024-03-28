@@ -60,6 +60,17 @@ class CreateSurveyViewController:UIViewController{
         self.initDTO()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Vérifiez si la première cellule est une QuestionCell.
+        if let questionCell = ui_tableview.cellForRow(at: IndexPath(row: 0, section: 0)) as? QuestionCell {
+            // Ouvrir le clavier pour le UITextView de la QuestionCell.
+            questionCell.ui_text_view.becomeFirstResponder()
+        }
+    }
+
+    
     private func initDTO(){
         self.tableDTO.append(.questionCell)
         self.tableDTO.append(.titleOptionCell)
@@ -127,15 +138,7 @@ class CreateSurveyViewController:UIViewController{
 
     @objc func cancelSurveyCreation() {
         // Logique du bouton annuler
-        let alertController = UIAlertController(title: "Attention", message: "Souhaitez-vous vraiment quitter ?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Non", style: .cancel, handler: nil)
-        let confirmAction = UIAlertAction(title: "Oui", style: .destructive) { _ in
-            self.dismiss(animated: true, completion: nil)
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(confirmAction)
-        
-        present(alertController, animated: true, completion: nil)
+        showAlertMessage()
     }
     
     func invalidDataAlert(){
@@ -145,7 +148,24 @@ class CreateSurveyViewController:UIViewController{
         present(alertController, animated: true, completion: nil)
     }
     
-    
+    func showAlertMessage(){
+
+        let title = "Attention"
+        let btnLeftTitle = "Annuler"
+        let btnRightTitle = "Quitter"
+        var message = "Si vous quittez la création de sondage, toutes les informations saisies seront perdues"
+
+        let alertVC = MJAlertController()
+        let buttonLeft = MJAlertButtonType(title: btnLeftTitle, titleStyle:ApplicationTheme.getFontH1Blanc(size: 15), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonRight = MJAlertButtonType(title: btnRightTitle, titleStyle:ApplicationTheme.getFontH1Blanc(size: 15), bgColor: .appOrange, cornerRadius: -1)
+
+        
+        alertVC.configureAlert(alertTitle: title, message: message, buttonrightType: buttonRight, buttonLeftType: buttonLeft, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: false)
+        alertVC.delegate = self
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            alertVC.show()
+        }
+    }
 }
 
 extension CreateSurveyViewController:UITableViewDelegate, UITableViewDataSource{
@@ -238,4 +258,16 @@ extension CreateSurveyViewController: MJNavBackViewDelegate {
     func goBack() {
         self.dismiss(animated: true)
     }
+}
+
+extension CreateSurveyViewController:MJAlertControllerDelegate{
+    func validateLeftButton(alertTag: MJAlertTAG) {
+        
+    }
+    
+    func validateRightButton(alertTag: MJAlertTAG) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }

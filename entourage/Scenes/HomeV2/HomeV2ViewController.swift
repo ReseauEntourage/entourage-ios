@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 import SafariServices
 import IHProgressHUD
-
+import CoreLocation
+import GooglePlaces
 
 enum seeAllCellType{
     case seeAllDemand
@@ -57,12 +58,15 @@ class HomeV2ViewController:UIViewController{
     var currentLocationFilter = EventActionLocationFilters()
     var currentSectionsFilter:Sections = Sections()
     var userHome:UserHome = UserHome()
+    var currentUser:User? = nil
+
     var pedagoCreateEvent:PedagogicResource?
     var pedagoCreateGroup:PedagogicResource?
     var isContributionPreference = false
     
     override func viewDidLoad() {
         IHProgressHUD.show()
+        currentUser = UserDefaults.currentUser
         AnalyticsLoggerManager.logEvent(name: View__Home)
         prepareUINotifAndAvatar()
         ui_table_view.delegate = self
@@ -98,7 +102,9 @@ class HomeV2ViewController:UIViewController{
 
         self.initHome()
         self.checkForUpdates()
-        
+        if currentUser?.addressPrimary == nil {
+            self.showSimpleAlertDialogForLocation()
+        }
     }
     
     func checkForUpdates() {
@@ -245,6 +251,16 @@ class HomeV2ViewController:UIViewController{
             self.ui_view_notif.backgroundColor = UIColor.appOrange // Utilisez la couleur orange que vous avez ajoutée précédemment.
         }
         prepareUINotifAndAvatar()
+    }
+    
+    func showSimpleAlertDialogForLocation() {
+        let alertController = SimpleAlertDialog(title: "Améliorez votre expérience !", message: "Pour connaître les actions et événements solidaires autour de chez vous, veuillez prendre un moment pour ajouter votre localité à votre profil.", btnTitle: "Ajouter ma localité")
+        alertController.delegate = self
+        self.present(alertController, animated: true)
+    }
+    func showSimpleAlertDialogtoThankLocation() {
+        let alertController = SimpleAlertDialog(title: "Localisation enregistrée !", message: "Nous vous remercions pour votre aide !", btnTitle: "Retour")
+        self.present(alertController, animated: true)
     }
     
     
@@ -762,4 +778,26 @@ class AppManager {
     var isContributionPreference: Bool = false
 
     private init() {} // Ceci assure que AppManager ne peut être instancié qu'en utilisant `shared`
+}
+
+extension HomeV2ViewController: PlaceViewControllerDelegate {
+    func modifyPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
+        if let gplace = googlePlace, let placeId = gplace.placeID {
+            UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { error in
+                if error?.error == nil {
+                    //Clean pour afficher l'adresse retournée depuis le WS on garde ?
+                    self.showSimpleAlertDialogtoThankLocation()
+                }
+            }
+        }
+    }
+}
+extension HomeV2ViewController:SimpleAlertClick{
+    func onClickMainButton() {
+        let sb = UIStoryboard(name: "ProfileParams", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
+            vc.placeVCDelegate = self
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
 }

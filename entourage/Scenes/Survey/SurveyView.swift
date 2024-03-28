@@ -106,14 +106,14 @@ class SurveyOptionView: UIView {
             // Contraintes pour le progressBar
             NSLayoutConstraint.activate([
                 progressBar.topAnchor.constraint(equalTo: radioButton.bottomAnchor, constant: 8), // Espace en haut
-                progressBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+                progressBar.leadingAnchor.constraint(equalTo: questionLabel.leadingAnchor),
                 progressBar.trailingAnchor.constraint(equalTo: trailingAnchor),
                 progressBar.heightAnchor.constraint(equalToConstant: 4) // Hauteur de la progressBar
             ])
 
             // Contraintes pour le answerCountLabel
             NSLayoutConstraint.activate([
-                answerCountLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: -25), // Espace en haut
+                answerCountLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: -30), // Espace en haut
                 answerCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
                 answerCountLabel.bottomAnchor.constraint(equalTo: bottomAnchor) // Pour s'assurer que la vue s'étende jusqu'en bas
             ])

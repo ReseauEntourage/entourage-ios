@@ -144,3 +144,8 @@ struct Survey: Codable {
         case summary
     }
 }
+extension Survey {
+    var totalVotes: Int {
+        return summary.reduce(0, +)
+    }
+}

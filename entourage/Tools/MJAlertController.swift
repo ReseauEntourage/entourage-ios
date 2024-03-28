@@ -271,6 +271,7 @@ protocol MJAlertControllerDelegate: AnyObject {
     func validateRightButton(alertTag:MJAlertTAG)
     func closePressed(alertTag:MJAlertTAG)
     func selectedChoice(position:Int)
+    
 }
 //MARK: - To make closePressed optional function -
 extension MJAlertControllerDelegate {

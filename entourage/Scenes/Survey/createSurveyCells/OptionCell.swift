@@ -16,7 +16,7 @@ class OptionCell: UITableViewCell, UITextViewDelegate {
     // Placeholder Label
     private let placeholderLabel: UILabel = {
         let label = UILabel()
-        label.text = "+ Ajouter votre option"
+        label.text = "+ Ajouter une option"
         label.font = UIFont(name: "NunitoSans-Italic", size: 16) // Ajuste la taille de la police si nécessaire
         label.textColor = UIColor.gray
         label.isHidden = true
@@ -31,15 +31,23 @@ class OptionCell: UITableViewCell, UITextViewDelegate {
     
     private func setupTextView() {
         ui_text_view.delegate = self
+        addUnderlineToTextView()
         ui_text_view.font = UIFont(name: "NunitoSans-Regular", size: 16)
         ui_text_view.autocapitalizationType = .sentences
-        addUnderlineToTextView()
         
         ui_text_view.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (ui_text_view.font?.pointSize ?? 16) / 2)
         placeholderLabel.frame.size = CGSize(width: ui_text_view.bounds.width - 10, height: 20)
         placeholderLabel.isHidden = ui_text_view.text.count > 0
         addToolbarToKeyboard()
+
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+        return updatedText.count <= 150
     }
     
     func addUnderlineToTextView() {
@@ -54,6 +62,11 @@ class OptionCell: UITableViewCell, UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        if !textView.text.isEmpty {
+            placeholderLabel.isHidden = true
+        }else{
+            placeholderLabel.isHidden = false
+        }
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -67,6 +80,8 @@ class OptionCell: UITableViewCell, UITextViewDelegate {
     
     func configure(numberInList:Int) {
         self.numberInList = numberInList
+        addUnderlineToTextView()
+
     }
     
     private func addToolbarToKeyboard() {

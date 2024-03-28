@@ -63,6 +63,9 @@ struct ApplicationTheme {
     static func getFontCourantRegularOrange(size:CGFloat = 15,color:UIColor = .appOrange) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
     }
+    static func getFontCourantBoldOrange(size:CGFloat = 15,color:UIColor = .appOrange) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: color)
+    }
     static func getFontCourantBoldOrange(size:CGFloat = 15) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .appOrange)
     }
