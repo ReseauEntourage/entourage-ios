@@ -94,6 +94,9 @@ class HomeV2ViewController:UIViewController{
         //CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
+        if currentUser?.addressPrimary == nil {
+            self.showSimpleAlertDialogForLocation()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,9 +105,7 @@ class HomeV2ViewController:UIViewController{
 
         self.initHome()
         self.checkForUpdates()
-        if currentUser?.addressPrimary == nil {
-            self.showSimpleAlertDialogForLocation()
-        }
+        
     }
     
     func checkForUpdates() {
@@ -787,6 +788,7 @@ extension HomeV2ViewController: PlaceViewControllerDelegate {
                 if error?.error == nil {
                     //Clean pour afficher l'adresse retournée depuis le WS on garde ?
                     self.showSimpleAlertDialogtoThankLocation()
+                    
                 }
             }
         }
