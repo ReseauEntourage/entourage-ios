@@ -45,7 +45,7 @@ class SimpleAlertDialog: UIViewController {
 
     private let actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor.appOrange // Assure-toi que cette couleur est bien définie quelque part.
+        button.backgroundColor = UIColor.appOrangeLight // Assure-toi que cette couleur est bien définie quelque part.
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Ajouter ma localité", for: .normal)
         button.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange(size: 15, color: .white))
@@ -80,8 +80,9 @@ class SimpleAlertDialog: UIViewController {
     private func layoutViews() {
         view.addSubview(backgroundView)
 
-        backgroundView.widthAnchor.constraint(equalToConstant: 270).isActive = true
-        backgroundView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        // Modifiez ici pour que backgroundView prenne toute la largeur de la vue parent moins 20 pixels de chaque côté
+        backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         backgroundView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
         backgroundView.addSubview(titleLabel)
@@ -109,6 +110,7 @@ class SimpleAlertDialog: UIViewController {
 
         actionButton.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
     }
+
 
     @objc private func didTapActionButton() {
         dismiss(animated: true, completion: {
