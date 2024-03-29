@@ -44,6 +44,7 @@ class HomeV2ViewController:UIViewController{
     @IBOutlet weak var ui_image_notif: UIImageView!
     @IBOutlet weak var ui_image_user_avatar: UIImageView!
     @IBOutlet weak var ui_label_subtitle: UILabel!
+    
     //VARIABLE
     var tableDTO = [HomeV2DTO]()
     var notificationCount = 0
@@ -188,6 +189,7 @@ class HomeV2ViewController:UIViewController{
         IHProgressHUD.dismiss()
     }
     func initHome(){
+        self.ui_label_subtitle.text = "home_v2_title".localized
         self.getNotif()
     }
     func updateTopView() {
@@ -338,7 +340,9 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .moderator(let name, let imageUrl):
             if let _moderator = self.userHome.moderator{
                 AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
-                showUserProfile(id: _moderator.id!)
+                if let _id = _moderator.id{
+                    showUserProfile(id: _id)
+                }
             }
         case .cellHZ:
             AnalyticsLoggerManager.logEvent(name: Action_Home_Buffet)
@@ -462,7 +466,6 @@ extension HomeV2ViewController{
         HomeService.getUserHome { [weak self] userHome, error in
             if let userHome = userHome {
                 self?.userHome = userHome
-                print("eho userHome preference " , userHome.preference)
                 if userHome.preference == "contribution" {
                     self?.isContributionPreference = true
                 }else{

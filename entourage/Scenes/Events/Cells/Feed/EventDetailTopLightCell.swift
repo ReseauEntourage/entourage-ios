@@ -49,6 +49,8 @@ class EventDetailTopLightCell: UITableViewCell {
     
     @IBOutlet weak var ui_label_organised_by: UILabel!
     @IBOutlet weak var ui_btn_organisez_by: UIButton!
+    
+    
     let cornerRadiusTag:CGFloat = 15
     
     class var identifier:String {return String(describing: self) }
@@ -71,7 +73,7 @@ class EventDetailTopLightCell: UITableViewCell {
         ui_view_place_limit.isHidden = true
         ui_view_members_more.isHidden = true
         ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
-
+        ui_btn_share.setTitle("neighborhood_add_post_send_button".localized, for: .normal)
     }
     
     @objc func onShareBtnClick(){

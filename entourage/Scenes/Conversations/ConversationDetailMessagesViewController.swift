@@ -540,7 +540,13 @@ extension ConversationDetailMessagesViewController:MessageCellSignalDelegate {
     }
     
     func showWebUrl(url: URL) {
-        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+        if WebLinkManager.isOurPatternURL(url){
+            self.dismiss(animated: true) {
+                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+            }
+        }else{
+            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+        }
     }
 }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RE9-AO-8HQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RE9-AO-8HQ">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -102,6 +102,10 @@
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_with_text_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="r03-QF-dvs">
                                 <rect key="frame" x="28" y="47" width="172.33333333333334" height="46.666666666666657"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46.670000000000002" id="Big-a3-Qj6"/>
+                                    <constraint firstAttribute="width" constant="172.33000000000001" id="VnG-DZ-sgz"/>
+                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le réseau de ceux qui n’ont pas de réseau" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvQ-co-Gs3">
                                 <rect key="frame" x="28" y="403" width="306" height="57.333333333333314"/>
@@ -155,6 +159,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="414"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="BOp-FH-5Oh"/>
+                                    <constraint firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="Icf-3o-ik5"/>
+                                    <constraint firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="lzM-g7-nle"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9Q-Aa-muj" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
@@ -356,7 +362,6 @@ sera réalisé.</string>
                             <constraint firstItem="Ngh-vo-MiO" firstAttribute="centerX" secondItem="7qK-hk-fSm" secondAttribute="centerX" id="7la-rn-lfL"/>
                             <constraint firstItem="36j-Zr-ZpH" firstAttribute="leading" secondItem="Adx-nN-lFb" secondAttribute="leading" constant="8" id="8xy-Pd-WYn"/>
                             <constraint firstItem="Ngh-vo-MiO" firstAttribute="centerX" secondItem="Adx-nN-lFb" secondAttribute="centerX" id="AAu-MR-GJ8"/>
-                            <constraint firstItem="voQ-5H-H9B" firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="Icf-3o-ik5"/>
                             <constraint firstItem="U9Q-Aa-muj" firstAttribute="trailing" secondItem="7qK-hk-fSm" secondAttribute="trailing" id="Mgv-6F-6ca"/>
                             <constraint firstItem="7qK-hk-fSm" firstAttribute="trailing" secondItem="q9H-6G-sf9" secondAttribute="trailing" constant="20" id="NQU-2N-3tA"/>
                             <constraint firstItem="36j-Zr-ZpH" firstAttribute="top" secondItem="7qK-hk-fSm" secondAttribute="top" constant="68" id="OIV-d8-jnJ"/>
@@ -368,7 +373,6 @@ sera réalisé.</string>
                             <constraint firstItem="voQ-5H-H9B" firstAttribute="top" secondItem="Adx-nN-lFb" secondAttribute="top" id="eVr-M1-a2c"/>
                             <constraint firstItem="7qK-hk-fSm" firstAttribute="bottom" secondItem="Ngh-vo-MiO" secondAttribute="bottom" constant="28" id="hPC-11-Xg7"/>
                             <constraint firstItem="Ngh-vo-MiO" firstAttribute="top" secondItem="36j-Zr-ZpH" secondAttribute="bottom" constant="20" id="hyo-Dy-Lrc"/>
-                            <constraint firstItem="voQ-5H-H9B" firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="lzM-g7-nle"/>
                             <constraint firstItem="q9H-6G-sf9" firstAttribute="top" secondItem="36j-Zr-ZpH" secondAttribute="top" constant="16" id="qcJ-eZ-xlX"/>
                             <constraint firstItem="7qK-hk-fSm" firstAttribute="trailing" secondItem="voQ-5H-H9B" secondAttribute="trailing" id="sef-Xy-LId"/>
                         </constraints>
@@ -403,6 +407,8 @@ sera réalisé.</string>
                             <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="bRw-c6-Gfp">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="414"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="37F-Rw-SxH"/>
+                                    <constraint firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="h5v-Qf-phX"/>
                                     <constraint firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="hpN-g2-Nnz"/>
                                 </constraints>
                             </imageView>
@@ -626,7 +632,6 @@ sera réalisé.</string>
                         <color key="backgroundColor" name="Beige"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="bRw-c6-Gfp" firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="37F-Rw-SxH"/>
                             <constraint firstItem="Mp3-gY-9uc" firstAttribute="trailing" secondItem="lTN-bS-s0u" secondAttribute="trailing" id="6q9-bj-H58"/>
                             <constraint firstItem="Mp3-gY-9uc" firstAttribute="bottom" secondItem="SrU-TU-bCM" secondAttribute="bottom" constant="28" id="7ZH-Qp-aQv"/>
                             <constraint firstItem="lTN-bS-s0u" firstAttribute="top" secondItem="Mp3-gY-9uc" secondAttribute="top" id="FPf-Nk-qhq"/>
@@ -637,7 +642,6 @@ sera réalisé.</string>
                             <constraint firstItem="mL7-ea-OOO" firstAttribute="top" secondItem="Mp3-gY-9uc" secondAttribute="top" constant="68" id="abY-Nl-rTr"/>
                             <constraint firstItem="bRw-c6-Gfp" firstAttribute="top" secondItem="Af0-Ah-vDg" secondAttribute="top" id="b2i-cn-b0N"/>
                             <constraint firstItem="SrU-TU-bCM" firstAttribute="centerX" secondItem="Af0-Ah-vDg" secondAttribute="centerX" id="eWT-AK-Ga5"/>
-                            <constraint firstItem="bRw-c6-Gfp" firstAttribute="width" secondItem="bRw-c6-Gfp" secondAttribute="height" multiplier="392:416" id="h5v-Qf-phX"/>
                             <constraint firstItem="SrU-TU-bCM" firstAttribute="top" secondItem="mL7-ea-OOO" secondAttribute="bottom" constant="20" id="jgv-p1-KoC"/>
                             <constraint firstItem="Mp3-gY-9uc" firstAttribute="trailing" secondItem="bRw-c6-Gfp" secondAttribute="trailing" id="zdB-5H-Thf"/>
                         </constraints>
@@ -751,13 +755,13 @@ sera réalisé.</string>
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJA-Ru-nzb">
-                                <rect key="frame" x="32" y="469" width="59" height="28"/>
+                                <rect key="frame" x="28" y="469" width="59" height="28"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
                                 <color key="textColor" name="orange_app"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzM-OW-YJs">
-                                <rect key="frame" x="32" y="504.99999999999994" width="41" height="20.333333333333314"/>
+                                <rect key="frame" x="28" y="504.99999999999994" width="41" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -825,14 +829,18 @@ sera réalisé.</string>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_with_text_horizontal" translatesAutoresizingMaskIntoConstraints="NO" id="T2d-PY-v3N">
-                                <rect key="frame" x="32" y="97" width="172.33333333333334" height="46.666666666666657"/>
+                                <rect key="frame" x="28" y="97" width="172.33333333333334" height="46.666666666666657"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="172.33000000000001" id="JCX-Im-hA0"/>
+                                    <constraint firstAttribute="height" constant="46.670000000000002" id="Nyb-SQ-kAV"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1ha-Wm-FWG"/>
                         <color key="backgroundColor" name="Beige"/>
                         <constraints>
-                            <constraint firstItem="JJA-Ru-nzb" firstAttribute="leading" secondItem="1ha-Wm-FWG" secondAttribute="leading" constant="32" id="04u-6Y-LsR"/>
-                            <constraint firstItem="T2d-PY-v3N" firstAttribute="leading" secondItem="1ha-Wm-FWG" secondAttribute="leading" constant="32" id="4SQ-0x-tGh"/>
+                            <constraint firstItem="JJA-Ru-nzb" firstAttribute="leading" secondItem="1ha-Wm-FWG" secondAttribute="leading" constant="28" id="04u-6Y-LsR"/>
+                            <constraint firstItem="T2d-PY-v3N" firstAttribute="leading" secondItem="1ha-Wm-FWG" secondAttribute="leading" constant="28" id="4SQ-0x-tGh"/>
                             <constraint firstItem="ZTe-db-f92" firstAttribute="leading" secondItem="1ha-Wm-FWG" secondAttribute="leading" id="7pU-gQ-bS5"/>
                             <constraint firstItem="e2v-jq-i0Q" firstAttribute="top" secondItem="1ha-Wm-FWG" secondAttribute="top" constant="20" id="9Oj-Jc-38o"/>
                             <constraint firstItem="Zqc-t2-UfH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HzM-OW-YJs" secondAttribute="bottom" constant="6" id="G7D-sj-Iwg"/>
@@ -842,9 +850,9 @@ sera réalisé.</string>
                             <constraint firstItem="1ha-Wm-FWG" firstAttribute="trailing" secondItem="kmM-1A-gkp" secondAttribute="trailing" constant="32" id="POC-Vp-mgj"/>
                             <constraint firstItem="1ha-Wm-FWG" firstAttribute="bottom" secondItem="kmM-1A-gkp" secondAttribute="bottom" constant="8" id="WvC-9I-O6t"/>
                             <constraint firstItem="Zqc-t2-UfH" firstAttribute="top" secondItem="kmM-1A-gkp" secondAttribute="top" constant="-8" id="f94-GB-iK2"/>
+                            <constraint firstItem="T2d-PY-v3N" firstAttribute="top" secondItem="1ha-Wm-FWG" secondAttribute="top" constant="50" id="fCU-mk-quP"/>
                             <constraint firstItem="uri-3o-3NP" firstAttribute="leading" secondItem="1ha-Wm-FWG" secondAttribute="leading" constant="32" id="gHW-sy-toQ"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="HzM-OW-YJs" secondAttribute="trailing" constant="48" id="hm2-Jt-uTm"/>
-                            <constraint firstItem="T2d-PY-v3N" firstAttribute="top" secondItem="e2v-jq-i0Q" secondAttribute="bottom" id="j8T-ke-Dtl"/>
                             <constraint firstItem="1ha-Wm-FWG" firstAttribute="trailing" secondItem="e2v-jq-i0Q" secondAttribute="trailing" constant="48" id="lkc-2E-hox"/>
                             <constraint firstItem="HzM-OW-YJs" firstAttribute="leading" secondItem="JJA-Ru-nzb" secondAttribute="leading" id="mfl-JZ-cwH"/>
                             <constraint firstItem="1ha-Wm-FWG" firstAttribute="trailing" secondItem="ZTe-db-f92" secondAttribute="trailing" id="miC-xb-GrN"/>
@@ -872,6 +880,11 @@ sera réalisé.</string>
             <point key="canvasLocation" x="-189.23076923076923" y="-2664.4549763033174"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Zqc-t2-UfH">
+            <size key="intrinsicContentSize" width="42.666666666666664" height="0.0"/>
+        </designable>
+    </designables>
     <resources>
         <image name="arrow_down" width="11" height="6"/>
         <image name="carousel_onboarding 1" width="390.33334350585938" height="348"/>
@@ -879,7 +892,7 @@ sera réalisé.</string>
         <image name="ic_intro_dot_selected" width="12" height="12"/>
         <image name="ic_intro_dot_unselected" width="12" height="12"/>
         <image name="ic_phone" width="20" height="20"/>
-        <image name="logo_with_text_horizontal" width="172.33332824707031" height="46.666667938232422"/>
+        <image name="logo_with_text_horizontal" width="1157.199951171875" height="234.10000610351562"/>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

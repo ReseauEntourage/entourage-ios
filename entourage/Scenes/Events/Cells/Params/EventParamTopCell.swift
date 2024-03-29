@@ -54,7 +54,7 @@ class EventParamTopCell: UITableViewCell {
             ui_taglist.removeAllTags()
             for interest in _interests {
                 if let tagName = Metadatas.sharedInstance.tagsInterest?.getTagNameFrom(key: interest) {
-                    ui_taglist.addTag(tagName)
+                    ui_taglist.addTag(TagsUtils.showTagTranslated(tagName))
                 }
                 else {
                     ui_taglist.addTag(interest)

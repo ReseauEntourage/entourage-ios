@@ -92,8 +92,6 @@ struct AuthService: ParsingDataCodable {
         let deviceStr = ProcessInfo.processInfo.operatingSystemVersionString
         let version:String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "-"
         let params = ["push_token": pushToken, "device_os":deviceStr, "version":version, "notifications_permissions":notifStatus]
-        
-        
         let parameters = ["application": params]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         Logger.print("Datas passed send push token \(parameters)")

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Logo-entourage-vertical.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

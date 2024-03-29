@@ -54,7 +54,7 @@ class HomeCellEvent:UICollectionViewCell{
         if let _interests = event.interests{
             if _interests.count > 0{
                 if let _interest = event.interests?[0]{
-                    ui_label_interest.text = _interest.capitalizingFirstLetter()
+                    ui_label_interest.text = TagsUtils.showTagTranslated(_interest)
                     switch _interest {
                     case "activites":
                         ui_image_interest.image = UIImage(named: "interest_activities")

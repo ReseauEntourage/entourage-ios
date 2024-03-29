@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -512,6 +512,7 @@
                         <outlet property="ui_image_constraint_height" destination="8v6-R0-Wx7" id="R7p-kK-bv4"/>
                         <outlet property="ui_image_inside_top_constraint" destination="h1Q-wQ-Kaj" id="pr4-BP-WPX"/>
                         <outlet property="ui_label_contribs" destination="yw9-cd-x7G" id="ZK9-jx-q1g"/>
+                        <outlet property="ui_label_my_announce_btn" destination="VX8-IZ-fwg" id="KGk-w1-Wui"/>
                         <outlet property="ui_label_nb_cat_filter" destination="8DK-6o-C1x" id="AcS-5a-VUz"/>
                         <outlet property="ui_label_solicitations" destination="Im2-Kv-C8q" id="T1I-iC-aAg"/>
                         <outlet property="ui_label_title" destination="Jxg-UM-6dR" id="56t-bW-njf"/>
@@ -1377,6 +1378,9 @@
                         <outlet property="ui_cancel_button" destination="wOJ-Qp-5Ow" id="KqS-Io-TZI"/>
                         <outlet property="ui_cancel_subtitle" destination="GQO-c1-1zV" id="Uy0-7D-21C"/>
                         <outlet property="ui_cancel_title" destination="cBo-eY-yB8" id="Kaf-DR-Vrm"/>
+                        <outlet property="ui_label_contact_btn" destination="4eJ-Wx-eTd" id="VCW-AG-s0f"/>
+                        <outlet property="ui_label_modify_btn" destination="7Fh-mC-7C0" id="Gl8-c4-sYV"/>
+                        <outlet property="ui_label_supress_btn" destination="6ne-7w-7HA" id="hHz-yM-3lx"/>
                         <outlet property="ui_tableview" destination="c4Y-iZ-505" id="i5z-uC-omC"/>
                         <outlet property="ui_title_contact" destination="4eJ-Wx-eTd" id="Utj-35-sla"/>
                         <outlet property="ui_title_delete" destination="6ne-7w-7HA" id="HMS-gc-G7R"/>

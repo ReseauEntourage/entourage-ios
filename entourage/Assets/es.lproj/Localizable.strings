@@ -1,0 +1,2890 @@
+/*
+  Localizable.strings
+  entourage
+
+  Created by Jerome on 12/01/2022.
+  
+*/
+
+//Divers
+"attention_pop_title" = "Atención";
+"close" = "Cerca";
+"error" = "Error";
+"generic_error" = "Se ha producido un error. Verifique su conexión de red e inténtelo nuevamente.";
+"connection_error" = "error de inicio de sesion";
+"connection_imposible" = "No puede conectarse";
+"tryAgain" = "Intentar otra vez";
+"tryAgain_short" = "Volver a intentar";
+"ok" = "DE ACUERDO";
+"OK" = "DE ACUERDO";
+"validate" = "Validar";
+"create" = "Crear";
+"edit" = "Editar";
+"modify" = "Editar";
+"showAll" = "Ver todo";
+"searchForAddress" = "encontrar una dirección";
+"cancel" = "anular";
+"refuseAlert" = "Rechazar";
+"activate" = "Permitir";
+"km" = "kilómetros";
+"Yes" = "Sí";
+"No" = "No";
+"yes" = "Sí";
+"no" = "No";
+"about_email_notavailable" = "El correo electrónico no encontrado";
+"Loading" = "Cargando";
+"Admin" = "Administración";
+//TABBAR
+"tabbar_home" = "Inicio";
+"tabbar_gifts" = "Ayuda mutua";
+"tabbar_messages" = "Discusiones";
+"tabbar_groups" = "Grupos";
+"tabbar_events" = "Eventos";
+
+
+"errorSettings" = "Autorización requerida";
+"toSettings" = "Ajustes";
+"authCameraSettings" = "Por favor permita el acceso a la cámara.";
+"authGpsSettings" = "Por favor permita el acceso GPS.";
+
+"WIP" = "Pronto";
+"notImplemented" = "Próximo disponible ;)";
+"today" = "Hoy";
+"yesterday" = "ayer";
+"Today" = "Hoy";
+"Yesterday" = "Ayer";
+"the" = "EL";
+"The" = "EL";
+//PreOnboarding
+"next" = "Próximo";
+"connectMe" = "Acceso";
+"previous" = "Anterior";
+"bt_pass" = "Gastar";
+
+"intro_title_1" = "La red social, verdaderamente social.";
+"intro_subtitle_1" = "Nuestra misión: movilizar y equipar a los ciudadanos para apoyar a los más excluidos.";
+"intro_title_2" = "En la aplicación Entourage:";
+"intro_subtitle_2" = "Conozca a vecinos como usted durante los eventos y discuta acciones solidarias.";
+"intro_title_3" = "Séquito contigo!";
+"intro_subtitle_3" = "Los equipos de embajadores, voluntarios y moderadores de Entourage lo apoyan y guían diariamente.";
+
+"preOnboard_choice_description" = "La red social, verdaderamente social.";
+"preOnboard_choice_signup" = "Me inscribo";
+"preOnboard_choice_login" = "ya tengo una cuenta";
+"preOnboard_choice_weblink" = "¿Quién es la asociación Entourage?";
+
+//Login
+"error_login_phone_length" = "El número de teléfono debe tener al menos %d dígitos";
+"error_login_code_lenght" = "El código debe tener 6 dígitos.";
+"error_login_resendCode_unknow" = "Número de teléfono desconocido, inténtalo de nuevo.";
+"error_login_phoneNumberOrCode" = "El número de teléfono y este código de acceso no coinciden.";
+"error_login_phoneNumberFormat" = "Error de conexión. Tu teléfono debe tener el formato: \n+33, 06 o 07";
+
+"login_title" = "Conexión";
+"login_phone_placeholder" = "Número de teléfono";
+"login_placeholder_code" = "Ingrese su código";
+"login_button_connect" = "Me conecto";
+"login_button_resend_code" = "Solicitar un código nuevamente";
+"login_resend_code_title" = "Solicitar un código nuevamente";
+"login_resend_code_button_yes" = "Preguntar";
+"login_resend_code_button_no" = "anular";
+"login_resend_code_title" = "Solicitar un código nuevamente";
+"login_resend_code_message" = "Quieres volver a solicitar un codep para tu número de teléfono:";
+"login_label_country" = "País";
+"login_label_phone" = "Teléfono";
+"login_label_code" = "codificado";
+"login_button_change_phone" = "cambié mi número de teléfono";
+
+"login_change_phone_title" = "Nuevo número";
+"login_change_phone_old_number" = "viejo problema";
+"login_change_phone_new_number" = "Nuevo número";
+"login_change_phone_email" = "Email opcional)";
+"login_change_phone_bt_validate" = "enviar a";
+"login_change_phone_old_number_placeholder" = "viejo problema";
+"login_change_phone_new_number_placeholder" = "Nuevo número";
+"login_change_phone_email_placeholder" = "Correo electrónico";
+"login_change_send_ok" = "Su solicitud ha sido enviada.\n\n\nEl soporte de Entourage le notificará cuando se complete el cambio de número.";
+"login_change_bt_return" = "Atrás";
+
+"login_change_warning_title" = "Atención";
+"login_change_error_phone" = "Por favor verifique sus números de teléfono";
+"login_change_error_mail" = "Por favor, compruebe su dirección de correo electrónico";
+
+"login_change_error_return" = "Error";
+
+"login_change_error_not_found" = "El número anterior es desconocido.\nPor favor, compruébalo.";
+"login_change_error_deleted" = "Se eliminó el número anterior.\nPor favor, compruébalo.";
+"login_change_error_blocked" = "El número anterior ha sido bloqueado.\nPor favor, compruébalo.";
+"login_change_error_identical" = "Ambos números son iguales.\nComprueba el nuevo número.";
+"login_change_error_generic" = "El número anterior es desconocido o eliminado.\nComprueba los números.";
+
+//Login next
+"login_info_pop_action" = "Desde tu perfil, puedes personalizar tus noticias y las recomendaciones recibidas. Elija con total confidencialidad si actualmente es: un vecino solidario, una persona necesitada, una asociación.";
+"login_pop_information" = "Nuevo ! ¡Adapta Entourage a tus deseos y necesidades!";
+"login_info_pop_validate" = "Comprendido !";
+"pop_info_entourage_custom_yes" = "Personalizar";
+"pop_info_entourage_custom_no" = "Más tarde";
+"pop_info_entourage_custom_no_more" = "No me muestres más";
+"login_email_pwd_title" = "Está bien !";
+"login_email_pwd_description" = "¡Ahora, finalicemos la creación de su cuenta!";
+
+//Onboarding
+"onboard_bt_create" = "Crear";
+"onboard_bt_back" = "Anterior";
+"onboard_bt_next" = "Próximo";
+//Phase 1
+"onboard_welcome_title" = "Bienvenido !";
+"onboard_welcome_info" = "Sólo la primera letra será visible.";
+"onboard_welcome_firstname" = "Nombre de pila*";
+"onboard_welcome_placeholder_firstname" = "Vuestro nombre";
+"onboard_welcome_lastname" = "Apellido*";
+"onboard_welcome_placeholder_lastname" = "Su nombre";
+"onboard_welcome_country" = "País*";
+"onboard_welcome_phone" = "Teléfono*";
+"onboard_welcome_mail" = "Correo electrónico";
+"onboard_welcome_placeholder_mail" = "tudirección@mail.com";
+"onboard_welcome_consent" = "Me gustaría recibir información y asesoramiento de Entourage";
+"onboard_welcome_info_mandatory" = "*Campos obligatorios. Su información permanecerá confidencial y nunca será comunicada a terceros.";
+
+//Phase2
+"onboard_sms_title" = "Introduce el código recibido por SMS";
+"onboard_sms_sub" = "Te acaban de enviar un SMS a:";
+"onboard_sms_modify" = "- Editar";
+"onboard_sms_no_code" = "¿Sin código? Vuelve a intentarlo en 1 min.";
+"onboard_sms_wait_retry" = "¿Sin código? Inténtalo de nuevo en %@";
+"onboard_sms_wait_retry_end" = "Solicitar un código nuevamente";
+
+//Phase 3
+"onboard_phone_title" = "¡Encantado de conocerte, %@!";
+
+"onboard_phase3_title" = "Además de conocer gente, ¿cómo quieres contribuir a la comunidad Entourage?";
+"onboard_title_entour" = "Rodear";
+"onboard_subtitle_entour" = "Ofrecer ayuda...";
+"onboard_title_beentour" = "Estar rodeado";
+"onboard_subtitle_beentour" = "Pedir ayuda, encontrar las estructuras sociales que me rodean...";
+"onboard_place_title_new" = "¿Cuál es tu barrio?";
+"onboard_place_desc" = "*La dirección es confidencial y nunca será comunicada";
+"onboard_place_infos_placeholder" = "Dirección, ciudad o departamento";
+"onboard_info_asso" = "soy una asociacion";
+
+//Phase End
+"onboard_end_title" = "Bienvenido a la comunidad Entourage";
+"onboard_end_subtitle" = "Felicitaciones, estás listo para darle vida a la solidaridad a tu alrededor.";
+"onboard_end_button" = "Comienza la aventura humana";
+
+//Onboard errors
+"onboard_error_Usertype" = "Por favor seleccione al menos una contribución";
+"onboard_error_place" = "Por favor elige una dirección";
+"onboard_error_firstname" = "El nombre debe contener al menos 2 letras.";
+"onboard_error_lastname" = "El nombre debe tener al menos 2 letras.";
+"onboard_error_email" = "La dirección de correo electrónico es inválida.";
+"onboard_error_phone" = "El número debe tener 9 o 10 dígitos.";
+//A supp
+"onboard_button_pass" = "Gastar";
+
+"onboard_welcome_sub" = "Primero que nada...\n¿Cómo te llamas?";
+
+
+
+"onboard_phone_sub" = "Cuál es su número de teléfono ?";
+"onboard_phone_info" = "Esta información permanecerá confidencial. ¡Solo queremos comprobar que no eres un robot, sino un humano con un gran corazón!";
+"onboard_phone_placeholder_phone" = "Teléfono";
+
+"onboard_sms_no_pwd" = "Por favor complete la contraseña";
+"attention_pop_title" = "Atención";
+"onboard_sms_pop_alert" = "Espere %d segundos antes de renovar la solicitud.";
+"onboard_type_title" = "Encantado de conocerte, %@.";
+"onboard_type_sub" = "¿Cómo quieres personalizar la aplicación?";
+"onboard_type_description" = "¡Entourage le hace estas pocas preguntas para darle la bienvenida y brindarle el mejor apoyo posible!\n(Esta información no será visible para otros miembros de la red).";
+"onboard_type_description_italic" = "(Esta información no será visible para otros miembros de la red).";
+"onboard_type_choice1" = "Para ayudar a las personas sin hogar y crear conexiones en su vecindario.";
+"onboard_type_choice2" = "Para pedir ayuda y descubrir lugares de solidaridad.";
+"onboard_type_choice3" = "Hablar en nombre de su estructura.";
+"onboard_type_choice_title1" = "Vecino solidario";
+"onboard_type_choice_title2" = "Persona aislada o precaria";
+"onboard_type_choice_title3" = "Asociación o servicio público";
+"onboard_place_title" = "¿Cuál es tu barrio?";
+"onboard_place_description" = "Podrás responder a las solicitudes de personas en dificultades y de asociaciones de tu barrio, y tú mismo podrás ofrecer donaciones de tu tiempo o materiales.";
+"onboard_place_title_sdf" = "¿En qué barrio vives habitualmente?";
+"onboard_place_description_sdf" = "Podrás pedir ayuda a tus vecinos y conocer gente nueva durante eventos amistosos de la red.";
+"onboard_place_info" = "Entourage no comunica esta dirección.";
+"onboard_place_placeholder" = "Ej: 35000";
+"onboard_email_pwd_title" = "Está bien !";
+"onboard_email_pwd_email_info" = "¡Déjanos tu email para recibir información y consejos de Entourage!";
+"onboard_email_pwd_email_info2" = "Entourage no comparte su dirección de correo electrónico.";
+"onboard_email_pwd_description" = "¡Ahora, finalicemos la creación de su cuenta!";
+"onboard_email_pwd_info_length" = "Incluye al menos 8 caracteres.";
+"onboard_email_pwd_placeholder_email" = "Correo electrónico";
+"onboard_email_pwd_placeholder_pwd" = "Contraseña";
+"onboard_email_pwd_placeholder_confirm_pwd" = "Confirmar la contraseña";
+"onboard_email_pwd_error_email" = "Dirección de correo electrónico no válida";
+"onboard_email_pwd_error_pwd_match" = "Las 2 contraseñas no son idénticas";
+"onboard_photo_title" = "¡Gracias, %@!";
+"onboard_photo_description" = "El toque final: puedes añadir tu foto. ¡Los miembros de Entourage en tu vecindario están ansiosos por conocerte!";
+
+
+"onboard_email_pwd_placeholder_confirm_pwd" = "Confirmar la contraseña";
+"onboard_email_pwd_placeholder_email" = "Correo electrónico";
+"onboard_email_pwd_placeholder_pwd" = "Contraseña";
+"onboard_email_pwd_description" = "¡Ahora, finalicemos la creación de su cuenta!";
+"onboard_email_pwd_info_length" = "Incluye al menos 8 caracteres.";
+"onboard_email_pwd_title" = "Está bien !";
+"onboard_email_pwd_email_info" = "¡Déjanos tu email para recibir información y consejos de Entourage!";
+"onboard_email_pwd_email_info2" = "Entourage no comparte su dirección de correo electrónico.";
+"onboard_email_pwd_description" = "¡Ahora, finalicemos la creación de su cuenta!";
+//Fin supp
+
+
+//Onboarding Assos
+"onboard_asso_start_title" = "Me cae bien !";
+"onboard_asso_start_description" = "Entourage es una asociación al servicio de sus actividades.";
+"onboard_asso_start_description_bold" = "Alrededores";
+"onboard_asso_start_description2" = "Algunas grandes historias que muestran el valor de la comunidad Entourage.";
+"onboard_asso_info_title" = "En concreto, en la aplicación, las funciones están dedicadas a ti.";
+"onboard_asso_info_description" = "Estar bien identificado en la red e involucrar a su comunidad";
+"onboard_asso_info_1" = "Un perfil verificado para cada uno de tus miembros: una garantía de confianza para tus vecinos";
+"onboard_asso_info_1_bold" = "Un perfil verificado";
+"onboard_asso_info_2" = "Una página para su estructura: para informar localmente sobre sus actividades y necesidades.";
+"onboard_asso_info_2_bold" = "Una página para tu estructura";
+"onboard_asso_info_3" = "Envío de notificaciones en su vecindario y más allá a los miembros de la comunidad.";
+"onboard_asso_info_3_bold" = "Envío de notificaciones";
+"onboard_asso_fill_title" = "Cuéntanos sobre tu estructura";
+"onboard_asso_fill_description" = "Cuéntenos más sobre su asociación, nos comunicaremos con usted para verificar su perfil y crear una página de asociación para usted.";
+"onboard_asso_fill_name_placeholder" = "Nombre de mi asociación";
+"onboard_asso_fill_cp_placeholder" = "Código postal de mi asociación.";
+"onboard_asso_fill_function_placeholder" = "mi función";
+"onboard_asso_fill_error" = "Complete todos los campos.\nGracias";
+"onboard_asso_search_creation" = "Creación de: %@";
+"onboard_asso_activity_title" = "%@, ¿cuál es su negocio principal?";
+"onboard_asso_activity_description" = "Seleccione el(los) sector(es) de actividad de su estructura, esto nos permitirá ofrecerle la mejor manera de utilizar la aplicación y movilizar a la comunidad Entourage.";
+"onboard_asso_activity_error" = "Ingrese al menos 1 centro de interés.\nGracias";
+"onboard_asso_activity_choice_1" = "Ayuda para personas \n";
+"onboard_asso_activity_choice_2" = "Initiatives culturelles\net sportives";
+"onboard_asso_activity_choice_3" = "Servicio\nPúblico";
+"onboard_asso_activity_choice_4" = "Otros ?";
+"onboard_asso_search" = "Investigación";
+
+//Onboarding Sdf
+"onboard_sdf_activity_title" = "%@, ¿qué estás buscando?";
+"onboard_sdf_activity_description" = "Varias opciones posibles.\nHay mil maneras de recibir apoyo y ayuda.";
+"onboard_sdf_activity_error" = "Ingrese al menos 1 centro de interés.\nGracias";
+"onboard_sdf_activity_choice_1" = "Crea un círculo \n de amigos";
+"onboard_sdf_activity_choice_2" = "Participa en \neventos";
+"onboard_sdf_activity_choice_3" = "Haga preguntas a \n";
+"onboard_sdf_activity_choice_4" = "Solicite\n ayuda";
+"onboard_sdf_activity_choice_5" = "Orientarme";
+"onboard_sdf_activity_choice_6" = "Buscar\nasociaciones";
+
+//Onboarding Neighbour
+"onboard_neighbour_activity_title" = "%@, ¿qué quieres hacer en tu vecindario?";
+"onboard_neighbour_activity_description" = "Varias opciones posibles.\nLe haremos propuestas adecuadas.";
+"onboard_sneighbour_activity_error" = "Ingrese al menos 1 centro de interés.\nGracias";
+"onboard_neighbour_activity_choice_1" = "Infórmame";
+"onboard_neighbour_activity_choice_2" = "Participa en \neventos";
+"onboard_neighbour_activity_choice_3" = "Rodear a una persona aislada \n";
+"onboard_neighbour_activity_choice_4" = "Haz donaciones\nmateriales";
+"onboard_neighbour_activity_choice_5" = "Participe en\nla asociación";
+
+
+//Onboarding Place tunnel SDF / Voisins
+"onboard_place_title2_sdf" = "Excelente !";
+"onboard_place_description2_sdf" = "¿Le gustaría agregar otro distrito?";
+"onboard_place_title2" = "Excelente !";
+"onboard_place_description2" = "Acabas de unirte a miembros de tu vecindario. ¿Quieres añadir otro distrito en el que actuar?";
+
+//Pop inform notifications
+"pop_notification_title" = "¡No te pierdas nada!";
+"pop_notification_description" = "En Entourage, creará vínculos entre vecinos que lo apoyen.\nActive notificaciones para recibir alertas de sus nuevos mensajes.";
+"pop_notification_bt_activate" = "Permitir";
+"pop_notification_bt_cancel" = "anular";
+
+//Errors Onboarding
+"onboarding_error_firstname" = "El nombre debe contener al menos 2 letras.";
+"onboarding_error_lastname" = "El nombre debe tener al menos 2 letras.";
+"onboarding_error_email" = "La dirección de correo electrónico es inválida.";
+"onboarding_error_phone" = "El número debe tener 9 o 10 dígitos.";
+"onboarding_help_label" = "¿Necesitas ayuda?\nPóngase en contacto con el equipo de Entourage.";
+"invalidCode" = "código de verificación invalido";
+"invalidPhoneNumber" = "Numero de telefono invalido";
+"invalidPhoneNumberOrCode" = "El número de teléfono y este código de acceso no coinciden.";
+"mustAddCode" = "Por favor ingresa un código de verificación";
+"invalidPhoneNumberFormat" = "Error de conexión. Tu teléfono debe tener el formato: \n+33, 06 o 07";
+"requestSent" = "Solicitud enviada";
+"requestNotSent" = "Solicitud no enviada";
+"alreadyRegisteredMessage" = "El número ya está registrado. Deberías haber recibido el código por SMS.";
+"alreadyRegistereMessageGoBack" = "El número ya está registrado, lo redireccionaremos a la página de inicio de sesión.";
+"onboarding_error_email" = "La dirección de correo electrónico es inválida.";
+
+/*******
+ Guide Map
+ */
+"info_share_sms_poi" = "Buenos dias ! Aquí está la dirección de %@ que podría interesarle.\n%@\n%@\nPara obtener más información sobre este lugar y crear vínculos entre vecinos solidarios, le daré una cita en la red Entourage %@";
+"title_new_gds" = "Lugares solidarios";
+"home_button_map" = "Mapa";
+"home_button_list" = "Lista";
+"home_button_filters" = "Filtros";
+"home_button_filters_on" = "Filtros habilitados";
+//Solidarity Guide
+"button_reset_filters" = "Cancelar filtros";
+"filter_solidarity_guide_categories" = "Categorías";
+"guide_display_feed" = "Alimentarse";
+"guide_display_housing" = "Alojarse";
+"guide_display_heal" = "Cuidarse";
+"guide_display_refresh" = "Refrescarse";
+"guide_display_orientation" = "Oriéntate";
+"guide_display_caring" = "Bienestar y actividades";
+"guide_display_reinsertion" = "Reintegrar";
+"guide_display_partners" = "Asociaciones y servicios activos en Entourage";
+"partners_entourage" = "Organización activa en Entourage";
+"guide_display_donate" = "Buscando donaciones";
+"guide_display_volunteer" = "buscando voluntarios";
+"guide_display_info_mutli" = "Lugares que ofrecen servicios de varias categorías.";
+
+"guide_display_toilettes" = "Baño";
+"guide_display_fontaines" = "fuentes";
+"guide_display_laver" = "Duchas";
+"guide_display_laverie" = "Lavanderías";
+
+"guide_display_vetements" = "Ropa y materiales";
+"guide_display_boite" = "Cajas de donación y lectura.";
+"guide_display_bagageries" = "Deposito de valijas";
+
+"DetailPoiContact" = "Contactar";
+"DetailPoiPublic" = "Audiencia";
+"DetailPoiLanguage" = "Lenguas habladas";
+"DetailPoiOpenTime" = "Horarios";
+
+"info_soliguide_1" = "La información sobre esta localización la proporciona Soliguide, cartografía solidaria.";
+"info_soliguide_2" = "Para obtener información aún más completa disponible en varios idiomas";
+"info_button_soliguide_consult" = "Consultar";
+"guideTitle" = "guía solidaria";
+
+/*******
+//Partner detail
+****/
+"title_association" = "Asociación";
+"title_asso_donation" = "Aceptar donaciones";
+"title_asso_volunteer" = "buscando voluntarios";
+"title_asso_information" = "Contactar";
+"title_asso_needs" = "Necesidades";
+"title_asso_accept_needs" = "Acepta donaciones";
+"title_asso_accept_volunteers" = "buscando voluntarios";
+"title_asso_contact" = "Contactar";
+"title_asso_phone" = "Número de teléfono";
+"title_asso_phone_light" = "Teléfono";
+"title_asso_website" = "Sitio web";
+"title_asso_address" = "DIRECCIÓN";
+"title_asso_address_big" = "Dirección postal";
+"title_asso_email_light" = "Correo electrónico";
+
+//Pop follow/unfollow partner
+"buttonFollowOnPartner" = "Abonado";
+"buttonFollowOffPartner" = "Suscribir";
+"partner_pop_unfollow_title" = "¿Quiere cancelar su suscripción?";
+"partner_pop_unfollow_message" = "Al darte de baja dejarás de recibir notificaciones, noticias y nuevos eventos de esta asociación.";
+
+/**********
+ Profile
+ */
+"myProfileButton" = "Mi perfil";
+"myParamsButton" = "Configuraciones";
+"profile_title" = "Perfil";
+"mainUserTitleActivity" = "Mi actividad";
+"mainUserTitleActions" = "Contribuciones";
+"mainUserTitleEvents" = "Eventos";
+"all_event_title" = "Todos los eventos";
+"my_event_title" = "mis eventos";
+"mainUserTitleEvents" = "Eventos";
+
+"mainUserTitleGroup" = "Grupo\nde vecinos";
+"mainUserTitleGroups" = "Grupos\nde vecinos";
+"mainUserTitleOuting" = "Evento\n";
+"mainUserTitleOutings" = "Eventos\n";
+
+"mainUserBioPlaceholder" = "¿Marcador de posición para orgánico?";
+"mainUserBirthPlaceholder" = "01-03";
+"mainUserEmailPlaceholder" = "correo electrónico@gmail.com";
+
+"mainUserTitleInfos" = "Mi informacion";
+"mainUserTitleBirth" = "Fecha de cumpleaños";
+"mainUserTitlePhone" = "Teléfono";
+"mainUserTitleEmail" = "Correo electrónico";
+"mainUserTitleCity" = "Ciudad y zona de actuación*";
+
+"mainUserTitleRadius" = "Dentro *";
+"mainUserDescRadius" = "* Tu zona de acción te permite definir hasta dónde puedes actuar y moverte";
+
+"mainUserCityRadius" = "En un radio de %d km";
+"mainUserCityRadiusBold" = "%d kilómetros";
+
+"memberSince" = "Miembro del séquito desde";
+
+/*******
+//Profile Edit
+ */
+"editUserProfileTitle" = "Editar mi información";
+"editUserBioPlaceholder" = "¿Marcador de posición para orgánico?";
+"editUserModPhoto" = "Editar mi foto";
+"editUserTitleFirstname" = "Nombre de pila";
+"editUserTitleLastname" = "apellido";
+"editUserTitleBio" = "Descripción (200 caracteres máximo)";
+"editUserTitleBirthday" = "Fecha de cumpleaños";
+"editUserTitlePhone" = "Teléfono";
+"editUserTitleEmail" = "Correo electrónico";
+"editUserTitleCity" = "Ciudad y zona de actuación*";
+"editUserTitleRadius" = "Dentro *";
+"editUserDescRadius" = "* Tu zona de acción te permite definir hasta dónde puedes actuar y moverte";
+"editProfileInterest_title" = "Mis intereses";
+
+"editUserPlaceholderFirstname" = "Piedra";
+"editUserPlaceholderLastname" = "Dupont";
+"editUserPlaceholderBirthday" = "01-03";
+"editUserPlaceholderEMail" = "pierre@gmail.com";
+"editUserPlaceholderBio" = "Pierre, 42 años, deseando conocerte :)";
+
+"editUserProfileValidate" = "Aplicar cambios";
+
+//Profile Edit error
+"editUser_error_firstname" = "El nombre debe contener al menos 2 letras.";
+"editUser_error_lastname" = "El nombre debe tener al menos 2 letras.";
+"editUser_error_bio" = "La biografía debe tener al menos 2 letras.";
+"editUser_error_email" = "Email inválido.";
+"editUser_error_birthday" = "Fecha de nacimiento invalida.";
+"editUser_error_profile" = "Error al editar el perfil.";
+
+//Profile edit interests
+"editUserInterestsTitle" = "cambiar mis intereses";
+"editUserInterestsInfo" = "Seleccione una o más categorías que le interesen.";
+"editUserInterestsValidate" = "Aplicar cambios";
+"editUserInterests_error" = "Por favor elija al menos una categoría";
+"interest_other_name" = "Otro";
+//profile edit location
+"profileEditLocationTitle" = "¿Dónde quieres actuar?";
+"profileEditLocationDescription" = "¡Entourage es una red social!\nDescubra iniciativas en su vecindario y establezca conexiones con sus vecinos.";
+"profileEditLocationLegend*" = "Añadir un lugar *";
+"profileEditLocationLegend_" = "Añadir un lugar";
+"profileEditLocationPlaceholder" = "ciudad o departamento";
+"profileEditLocationLegend" = "* Entourage no comunica esta dirección.";
+"profileEditLocationErrorAddress" = "Dirección inválida.";
+
+
+// take photo profile
+"take_photo_title" = "¿Agregar una imagen?";
+"take_photo_description" = "Con una foto, es inmediatamente mejor. Muéstranos tu más cálida sonrisa.";
+"take_photo" = "Tomar una fotografía";
+"take_gallery" = "Importar desde la galería";
+"description_move_photo" = "Mueve y haz zoom para ajustar la foto de perfil.";
+
+
+//Location
+"ask_permission_location_recenter_map" = "Para reenfocarte a tu alrededor debes activar la geolocalización";
+"no_location_recenter_map" = "La geolocalización encontró un error.";
+
+/*******
+//Settings
+ */
+"params_notifs" = "Notificaciones";
+"params_help" = "Ayuda y acerca de";
+"params_unlock" = "Desbloquear contactos";
+"params_share" = "Comparte la aplicación";
+"params_logout" = "Desconectarse";
+"params_suppress" = "Borrar mi cuenta";
+"params_logout_pop_title" = "Desconectar";
+"params_logout_pop_message" = "¿Quieres cerrar sesión?";
+"params_suppress_pop_title" = "Eliminación de cuenta";
+"params_suppress_pop_message" = "¿Quieres eliminar tu cuenta?";
+"params_suppress_pop_suppress" = "BORRAR";
+"params_suppress_pop_cancel" = "anular";
+"params_account_not_deleted" = "Cuenta no eliminada.\nError: %@";
+"params_account_deleted" = "Tu cuenta ha sido eliminada.";
+"params_logout_pop_logout" = "Desconectar";
+"params_logout_pop_cancel" = "anular";
+"params_suggest" = "¿Una sugerencia sobre la aplicación?";
+"menu_info_text_share" = "Buenos dias ! Gracias a la red Entourage participo en acciones solidarias entre vecinos con y sin vivienda. Únase a mí: %@";
+//Settings about menu
+"params_about_charte" = "Carta ética del entorno";
+"params_about_rate_app" = "Califica la aplicación";
+"params_about_faq" = "Preguntas frecuentes";
+"params_about_gift" = "Donar a Entourage";
+"params_about_ambassador" = "Conviértete en Embajador Voluntario";
+"params_about_cgu" = "Términos de servicio";
+"params_about_privacy" = "Política de confidencialidad";
+"params_about_email" = "Contacto Entorno";
+"params_about_licences" = "Licencia de código abierto";
+"params_about_partner" = "Nuestros patrocinadores y socios";
+"params_about_title" = "Ayuda y acerca de";
+
+//Settings Notifs
+"params_notifs_title" = "Gestión de notificaciones";
+"param_notifs_switch_notifs" = "Notificaciones";
+"param_notifs_switch_messages" = "Notificaciones de mensajes";
+"param_notifs_switch_groups" = "Notificaciones grupales";
+"param_notifs_switch_events" = "Notificaciones de eventos";
+"param_notifs_switch_actions" = "Notificaciones de donaciones y servicios";
+"param_notifs_validate" = "Aplicar cambios";
+
+//NOTIF
+"notif_contrib_title" = "Un vecino ofrece nueva ayuda. ¿Quizás esto te pueda interesar?";
+"notif_solicitation_title" = "Un vecino busca equipo. ¿Quizás podrías ayudarlo?";
+//Detail user profile
+"detail_user_send_message" = "Para escribir un mensaje";
+"detail_user_his_activity" = "Su actividad";
+"detail_user_his_interests" = "Centros de interés";
+"detail_user_button_signal" = "Reportar usuario";
+"report_user_title" = "Denunciar miembro";
+"report_user_mandatory" = "- OBLIGATORIO";
+"report_user_optional" = "- opcional";
+"report_user_description" = "Cuéntanos el motivo de tu denuncia";
+"report_user_message_description" = "Cuéntanos el motivo de tu denuncia";
+"report_user_next_button" = "Próximo";
+"report_user_validate_button" = "enviar a";
+"report_user_back_button" = "Atrás";
+"report_user_placeholder" = "Describe rápidamente el tema de tu informe.";
+"report_user_signal_error" = "Por favor elija al menos una causa.";
+"report_user_message_error" = "Por favor ingrese su mensaje. Gracias";
+"report_user_message_success" = "Usuario reportado";
+"parameter_publication" = "Configuración de publicaciones";
+"parameter_message" = "Configuración de mensajes";
+"parameter_action" = "Informar de un problema";
+"parameter_comment" = "Configuración de comentarios";
+"supress_button_title" = "BORRAR";
+"supress_alert_title_publi" = "Eliminar mensaje";
+"supress_alert_text_publi" = "¿Quieres eliminar esta publicación?";
+
+"supress_alert_title_message" = "Borrar mensaje";
+"supress_alert_text_message" = "¿Quieres eliminar este mensaje de la conversación?";
+
+"supress_alert_title_comment" = "Eliminar comentario";
+"supress_alert_text_comment" = "¿Quieres eliminar este comentario?";
+
+
+"deleted_post_text" = "Esta publicación ha sido eliminada.";
+
+//REPORT AND SUPPRESS POPUP
+"report_post_cell_title" = "Informe";
+"suppress_post_cell_title" = "eliminar mi publicación";
+"report_post_cell_subtitle" = "Reportar esta publicación al equipo de Entourage";
+"report_action_cell_subtitle" = "Informar de esta asistencia al equipo de Entourage";
+
+"report_comment_cell_title" = "Informe";
+"suppress_comment_cell_title" = "borrar mi comentario";
+"report_comment_cell_subtitle" = "Reportar este comentario al equipo de Entourage";
+
+"report_message_cell_title" = "Informe";
+"suppress_message_cell_title" = "borrar mi mensaje";
+"report_message_cell_subtitle" = "Reportar este mensaje al equipo de Entourage";
+
+
+"suppress_post_cell_subtitle" = "";
+"suppress_message_cell_subtitle" = "";
+"suppress_comment_cell_subtitle" = "";
+
+"deleted_message" = "Este mensaje ha sido eliminado";
+"deleted_comment" = "Este comentario ha sido eliminado.";
+
+/********
+ GROUP
+ */
+
+//Create group
+"neighborhoodCreatePopCloseBackTitle" = "Atención";
+"neighborhoodCreatePopCloseBackMessage" = "Si sale del formulario de creación de grupo, se perderá toda la información ingresada.";
+"neighborhoodCreatePopCloseBackQuit" = "Dejar";
+"neighborhoodCreatePopCloseBackCancel" = "anular";
+
+"neighborhood_create_group_bt_back" = "Anterior";
+"neighborhood_create_group_bt_next" = "Próximo";
+"neighborhood_create_group_bt_create" = "Crear";
+
+"neighborhood_create_group_title" = "Nuevo grupo";
+"neighborhood_create_title_phase" = "Escenario";
+"neighborhood_create_title_phase_nb" = "0%d.";
+
+"neighborhoodCreateNameTitle" = "Nombre del grupo: obligatorio";
+"neighborhoodCreateNamePlaceholderName" = "Los vecinos de París 18";
+"neighborhoodCreateNameSubtitle" = "- OBLIGATORIO";
+
+"neighborhoodCreateDescriptionTitle" = "Escriba una descripción";
+"neighborhoodCreateDescriptionSubtitle" = "requerido (150 caracteres máximo)";
+"neighborhoodCreateTitleDescriptionPlaceholder" = "Para quedar con vecinos del día 18";
+
+
+"neighborhoodCreatePlaceTitle" = "Agregar una ubicación (obligatorio)";
+"neighborhoodCreatePlaceSubtitle" = "- OBLIGATORIO";
+"neighborhoodCreatePlaceDescription" = "Entourage no comunica esta dirección a los usuarios.";
+"neighborhoodCreatePlaceInfos" = "Dirección, ciudad o departamento";
+
+//Error create group
+"neighborhoodCreateInputErrorMinCharName" = "El nombre del grupo debe contener al menos 2 caracteres.";
+"neighborhoodCreatePhase1_error" = "Por favor rellene todos los campos obligatorios";
+"neighborhoodCreatePhase2_error" = "Se debe seleccionar una categoría.";
+"neighborhoodCreateInputErrorMandatory" = "Campo a llenar";
+
+//Phase 2
+"neighborhoodCreateCatMessage" = "Seleccione la(s) categoría(s) que mejor describan el tema de discusión del grupo. - OBLIGATORIO";
+"neighborhoodCreateCatMessageMandatory" = "- OBLIGATORIO";
+"neighborhoodCreateCatOtherTitle" = "Describe la categoría de tu grupo en una palabra";
+"neighborhoodCreateCatOtherPlaceholder" = "Por favor introduzca un máximo de 80 caracteres";
+
+"neighborhoodCreatePhase2_others_error" = "Por favor especifique categoría miscelánea";
+
+//Phase 3
+"addPhotoCreateDescriptionTitle" = "Escribe un mensaje de bienvenida";
+"addPhotoCreateDescriptionSubtitle" = "opcional (200 caracteres máximo)";
+"addPhotoCreateDescriptionPlaceholder" = "¡Bienvenidos nuevos miembros! Leerán este mensaje tan pronto como se unan al grupo.";
+"addPhotoCreateTitle" = "Añadir una foto - obligatorio";
+"addPhotoCreateTitleHighlight" = "- OBLIGATORIO";
+"addPhotoCreateDescription" = "Puedes cambiarlo más tarde";
+"neighborhoodCreatePhase3_error" = "Por favor seleccione una imagen";
+
+//Phase completed
+"neighborhoodCreateValidateTitle" = "¡Tu grupo está en línea!";
+"neighborhoodCreateValidateSubtitle" = "Felicitaciones, acaba de crear un nuevo grupo. Para hacerlo más activo, crea la primera publicación.";
+
+"neighborhoodCreateValidatePostMessage" = "Deja un mensaje";
+"neighborhoodCreateValidatePass" = "Gastar";
+
+//Select Photo group
+"neighborhood_choosephoto_title" = "Selecciona una foto";
+"neighborhood_choosephoto_validate" = "Validar";
+"neighborhood_choosephoto_error" = "Por favor seleccione una imagen";
+
+/***
+* Edit group
+***/
+"neighborhood_edit_group_title" = "Editar grupo";
+"neighborhoodEditPhotoTitle" = "Editar foto";
+"neighborhoodEditCatMessage" = "Seleccione la(s) categoría(s) que mejor describan el tema de discusión del grupo. - OBLIGATORIO";
+"neighborhoodEditCatMessageHighlight" = "- OBLIGATORIO";
+"neighborhoodEdit_error" = "Por favor rellene todos los campos obligatorios";
+"neighborhoodEditValidateTitle" = "¡Tu grupo ha sido modificado! MARCADOR DE LUGAR";
+
+/***
+ * Create Post group
+ */
+"neighborhood_menu_post_event" = "Crear un evento en el grupo";
+"neighborhood_menu_post_post" = "Crear una publicación";
+
+"neighborhood_add_post_title" = "Crear una publicación";
+"neighborhood_add_post_message_title" = "escribe tu mensaje";
+"neighborhood_add_post_message_subtitle" = "";
+"neighborhood_add_post_message_placeholder" = "Escribe tu mensaje…";
+"neighborhood_add_post_image_title" = "Añadir una imagen";
+"neighborhood_add_post_image_subtitle" = "- opcional";
+"neighborhood_add_post_send_button" = "Compartir, repartir";
+"neighborhood_add_post_title_image" = "Añadir una imagen";
+"neighborhood_add_post_image_info_move" = "Mueve y haz zoom para ajustar la foto.";
+"neighborhood_add_post_image_bt_validate" = "Validar";
+"neighborhood_add_post_image_bt_cancel" = "BORRAR";
+"neighborhood_add_post_error" = "Error al publicar, por favor intenta nuevamente";
+/******
+ * Group / communauté
+ */
+"neighborhood_main_page_title" = "Grupos";
+"neighborhood_main_page_button_myGroups" = "Mis grupos";
+"neighborhood_main_page_button_discover" = "Yo descubro";
+"neighborhoodInputSearch" = "Buscar un grupo";
+"neighborhood_main_page_members" = "%d miembros";
+"neighborhood_main_page_member" = "%d miembro";
+"neighborhood_main_page_events_future_single" = "%d evento esperado";
+"neighborhood_main_page_events_future_plural" = "%d eventos planificados";
+
+"neighborhood_group_my_empty_title" = "Aún no te has unido a un grupo.";
+"neighborhood_group_my_empty_button" = "Descubre los grupos";
+"neighborhood_group_search_empty_title" = "Vaya, no hay resultados que coincidan con su búsqueda.";
+"neighborhood_group_search_empty_subtitle" = "Si no existe ningún grupo sobre este tema, ¡crea uno!";
+"neighborhood_group_discover_empty_title" = "Vaya, todavía no hay otros grupos a tu alrededor.";
+"neighborhood_group_discover_empty_subtitle" = "¡No dudes en crear nuevos grupos de vecinos!";
+/*************
+ * Group detail
+ */
+"title_is_ambassador" = "Embajador •";
+"title_is_admin" = "Administrador •";
+
+"neighborhood_detail_button_join_member" = "Miembro";
+"neighborhood_detail_button_join_join" = "Unirse";
+"welcome_message_placeholder" = "No dudes en enviar un primer mensaje para presentarte.";
+"welcome_message_title" = "¡Felicitaciones, eres miembro del grupo!";
+"welcome_message_btn_title" = "Me presento";
+
+"neighborhood_detail_members" = "%d miembros";
+"neighborhood_detail_member" = "%d miembro";
+"neighborhood_detail_about_title" = "Sobre el grupo";
+"neighborhood_detail_event_title" = "Eventos";
+"neighborhood_detail_button_more" = "Más información";
+
+"neighborhood_event_group_section_title_more" = "Ver más";
+"neighborhood_event_group_section_title" = "Eventos grupales";
+"neighborhood_post_group_section_title" = "Noticias";
+"neighborhood_post_group_section_new_posts_title" = "Nuevas publicaciones";
+"neighborhood_post_group_section_old_posts_title" = "Publicaciones antiguas";
+"neighborhood_empty_event_title" = "Aún no hay eventos planificados en este grupo";
+"neighborhood_empty_event_subtitle" = "Haga clic en “+” para crear uno";
+"neighborhood_empty_post_title" = "No hay publicaciones (todavía) en este grupo.";
+"neighborhood_empty_post_subtitle" = "¡Ey! ¡Esta es la oportunidad de compartir las primeras noticias para iniciar la discusión!";
+"neighborhood_about_group_title" = "Sobre el grupo";
+
+"neighborhood_post_noComment" = "Sin comentarios";
+"neighborhood_post_1Comment" = "%d comentario";
+"neighborhood_post_XComments" = "%d comentarios";
+
+"neighborhood_comments_title" = "Publicar comentarios";
+"neighborhood_comments_placeholder_discut" = "Conversar...";
+"neighborhood_comments_send" = "enviar a";
+"neighborhood_no_messageComment" = "Sin comentarios aún";
+"neighborhood_messageComment_notAuth" = "Para comentar esta publicación, únete al grupo ";
+
+"neighborhood_error_messageSend" = "Error al publicar, inténtalo de nuevo";
+"comment_post" = "Comentario...";
+//Params
+"neighborhood_params_title" = "Configuración de grupo";
+"neighborhood_params_cgu" = "Reglas del grupo";
+"neighborhood_params_share" = "Compartir grupo";
+"neighborhood_params_edit" = "Editar información del grupo";
+"neighborhood_params_signal" = "Informar de un problema";
+"neighborhood_params_cgu_title" = "El Reglamento";
+"neighborhood_params_cgu_description" = "Normas del grupo, lee atentamente.";
+"neighborhood_params_participant" = "partícipe";
+"neighborhood_params_participants" = "Participantes";
+"neighborhood_params_quit" = "abandonar el grupo";
+
+"neighborhood_params_notif_title" = "Notificarme de";
+"neighborhood_params_notif_all" = "Toda la actividad del grupo.";
+"neighborhood_params_notif_new_events" = "Nuevos eventos";
+"neighborhood_params_notif_new_messages" = "Nuevos mensajes";
+"neighborhood_params_notif_new_members" = "La llegada de nuevos miembros";
+
+"neighborhood_users_title" = "Ver miembros";
+"neighborhood_userInput_search" = "Buscar un miembro del grupo";
+
+//Pop leave group
+"params_leave_group_pop_title" = "abandonar el grupo";
+"params_leave_group_pop_message" = "¿Quieres dejar el grupo?";
+"params_leave_group_pop_bt_quit" = "Dejar";
+"params_leave_group_pop_bt_cancel" = "anular";
+//CGU
+"neighborhood_CGU_1_title" = "Actitud";
+"neighborhood_CGU_1" = "Los intercambios en grupo deben realizarse con respeto, confianza y asistencia mutua entre los miembros para que todos puedan sentirse seguros y en un ambiente cálido. Por tanto, no está permitido realizar comentarios degradantes, agresivos, insultantes, discriminatorios, insistentes, intolerantes o difamatorios.";
+"neighborhood_CGU_2_title" = "Comercio";
+"neighborhood_CGU_2" = "Los grupos son espacios de intercambio y ayuda mutua entre vecinos, por lo que está prohibida la publicidad, así como las propuestas de compra, venta o alquiler.";
+"neighborhood_CGU_3_title" = "Bote";
+"neighborhood_CGU_3" = "En general, no existe relación monetaria entre los miembros de los grupos, los premios acumulados están prohibidos.";
+"neighborhood_CGU_4_title" = "Temas";
+"neighborhood_CGU_4" = "La libre expresión benevolente es la regla en los grupos. Sin embargo, para respetar el carácter apolítico y laico de Entourage y en aras de proteger a las personas, no se autorizan temas relacionados con la política, la religión, la medicina o la sexualidad.";
+"neighborhood_CGU_5_title" = "protección de las personas";
+"neighborhood_CGU_5" = "Las publicaciones no pueden contener ningún dato personal que permita identificar y localizar con precisión a una persona ni datos sensibles sobre las personas (datos médicos, judiciales, origen ético, orientación sexual o política, etc.).";
+
+//Report Group / comment / publication
+"report_event_title" = "Reportar el evento";
+"report_group_title" = "Informar de un problema";
+"report_publication_title" = "Reportar publicacion";
+"report_comment_title" = "Reportar comentario";
+"report_contrib_title" = "Contribución del informe";
+"report_solicitation_title" = "Solicitud de informe";
+"report_conversation_title" = "Reportar la conversación";
+"report_group_message_success" = "Tu solicitud ha sido enviada. Nuestro equipo lo procesará lo más rápido posible.";
+"report_group_description" = "Cuéntanos el motivo de tu denuncia";
+"report_group_mandatory" = "- OBLIGATORIO";
+"report_group_next_button" = "Próximo";
+"report_group_signal_error" = "Por favor elija al menos una causa.";
+"report_group_message_description" = "Cuéntanos el motivo de tu denuncia";
+"report_group_optional" = "- opcional";
+"report_group_validate_button" = "enviar a";
+"report_group_back_button" = "Atrás";
+"report_group_placeholder" = "Describe rápidamente el tema de tu informe.";
+
+/** Home*/
+"home_title_welcome" = "¡Bienvenido %@!";
+"home_contrib_title" = "Mis acciones dentro de la red";
+"home_meeting_title" = "Hermosos encuentros Entourage";
+"home_no_meeting_title" = "Aún no hay reuniones de Entourage";
+"home_messages_title" = "Mensaje enviado";
+"home_events_title" = "Eventos\n";
+"home_groups_title" = "Grupos de vecinos";
+"home_event_title" = "Participación en un evento.";
+"home_group_title" = "grupo de vecinos";
+"home_no_message_title" = "Aún no se han enviado mensajes";
+"home_no_event_title" = "Asiste a tu primer evento";
+"home_no_group_title" = "¡No esperes más para unirte a un grupo de vecinos!";
+
+"home_actions_title" = "acabo de empezar";
+"home_help_title" = "Necesidad de ayuda";
+"home_help_subtitle" = "Tu guía en la aplicación";
+"home_cell_pedago" = "Todo lo que necesitas saber para actuar";
+"home_cell_map" = "Mapa de lugares solidarios";
+"home_cell_map_subtitle" = "Recepciones diurnas, consigna de equipaje…";
+
+"home_resources_title" = "Todo el contenido educativo.";
+"home_resource_title" = "Contenido educativo";
+"pedagogic_read" = "¡Leer!";
+"resource_all" = "Todo";
+"resource_understand" = "Comprender";
+"resource_act" = "Actuar";
+"resource_inspire" = "Inspírate";
+
+"resource_title_understand" = "Comprender";
+"resource_title_act" = "Actuar";
+"resource_title_inspire" = "Inspírate";
+
+/** Home popup congratulation */
+"home_congrat_title_single" = "Bien hecho ! ¡Has realizado %d nueva acción!";
+"home_congrat_title_plural" = "Bien hecho ! ¡Has completado %d nuevas acciones!";
+"home_congrat_title_next" = "¡Genial, hay algo nuevo en recepción!";
+
+//Home popup info encouters
+"home_info_encounter_pop_title" = "Para crear una gran reunión, \n ¡nada podría ser más sencillo!";
+"home_info_encounter_pop_subtitle" = "Tu contador aumenta con cada participación en un evento y con cada nueva contribución o solicitud realizada.";
+
+/** Events*/
+"passed_event" = "Eventos pasados";
+
+
+//EVENT TOP Cell
+"event_top_cell_organised_by" = "Organizado por";
+"event_top_cell_asso" = "Evento %@";
+
+
+//SHARE
+"share_solicitation" = "Esta solicitud podría interesarle.";
+"share_contribution" = "Esta contribución podría interesarte.";
+"share_event" = "Este evento de Entourage podría interesarte.";
+"share_group" = "Este grupo de vecinos de Entourage podría interesarte.";
+
+
+
+//Create
+
+"eventCreatePopCloseBackTitle" = "Atención";
+"eventCreatePopCloseBackMessage" = "Si sale del formulario de creación del evento, se perderá toda la información ingresada.";
+"eventCreatePopCloseBackQuit" = "Dejar";
+"eventCreatePopCloseBackCancel" = "anular";
+
+"event_create_group_bt_back" = "Anterior";
+"event_create_group_bt_next" = "Próximo";
+"event_create_group_bt_create" = "Validar";
+"eventCreateInputErrorMandatory" = "Campo a llenar";
+"event_mod_group_bt_mod" = "Editar";
+
+"event_mod_title" = "Editar mi evento";
+"event_create_title" = "nuevo evento";
+"event_create_title_phase" = "Escenario";
+"event_create_title_phase_nb" = "0%d.";
+
+"event_create_phase_1_name" = "Nombre del evento: obligatorio";
+"event_create_phase_1_name_placeholder" = "Dale al evento un nombre explícito";
+"event_create_phase_1_name_error" = "El nombre del evento debe contener al menos 2 caracteres.";
+"event_create_phase_1_desc" = "Descripción - requerido";
+"event_create_phase_1_desc_placeholder" = "Presente rápidamente lo que sucederá";
+"event_create_phase_1_desc_subtitle" = "(900 caracteres máximo)";
+"event_create_phase_1_photo" = "Foto - requerida";
+"event_create_phase_1_photo_desc" = "Puedes cambiarlo más tarde";
+
+"event_create_mandatory" = "- OBLIGATORIO";
+
+"event_create_phase2_date" = "Fecha requerida";
+"event_create_phase2_date_placeholder" = "dd/mm/aaaa";
+"event_create_phase2_time_start" = "Hora de inicio";
+"event_create_phase2_time_start" = "hh-mm";
+"event_create_phase2_time_end" = "Hora de finalización";
+"event_create_phase2_time_end_placeholder" = "hh-mm";
+
+"event_create_phase2_recurrence" = "Recurrencia - requerida";
+"recurrence_once" = "Solo una vez";
+"recurrence_week" = "Todas las semanas";
+"recurrence_every2Weeks" = "Cada dos semanas";
+"recurrence_month" = "Una vez al mes";
+"eventCreateInputErrorTimeStart" = "Elige fecha antes";
+"eventCreateInputErrorTimeEnd" = "Elija la hora de inicio antes";
+
+"event_create_phase3_title" = "Ubicación - requerida";
+"event_create_phase3_title_place" = "Agregar una ubicación (obligatorio)";
+"event_create_phase3_title_online" = "Agregar una URL (requerido)";
+
+"event_create_phase3_presentiel" = "En persona";
+"event_create_phase3_online" = "En línea";
+"event_create_phase3_online_error" = "campo obligatorio";
+"event_create_phase3_placeholder_place" = "Dirección, ciudad...";
+"event_create_phase3_placeholder_online" = "dirección web";
+
+"event_create_phase3_title_limit" = "¿El evento tiene un número limitado de plazas? - OBLIGATORIO";
+"event_create_phase3_title_nb_places" = "Número de plazas disponibles - obligatorio";
+"event_create_phase3_title_nb_places_placeholder" = "Número de plazas";
+"event_create_phase3_limit_yes" = "Sí";
+"event_create_phase3_limit_no" = "No";
+"event_create_phase3_limit_error" = "campo obligatorio";
+
+"event_create_phase4_title" = "Seleccione la(s) categoría(s) que mejor describan el tema del evento. - OBLIGATORIO";
+
+"event_create_phase5_title" = "Comparte el evento en tus grupos\n: obligatorio";
+"event_share_option" = "Compartir evento";
+"event_create_phase5_desc" = "Solo puedes compartir el evento con los grupos de los que eres miembro. Su evento será entonces visible en los grupos seleccionados y todos los miembros de un grupo podrán participar.";
+"createEventNotShare" = "No compartir en ningún grupo.";
+"createEventShare" = "Compartir en uno o más grupos";
+
+"eventCreateEnd_button_show" = "Ver mi evento";
+"eventCreateEnd_title" = "¡Tu evento está en línea!";
+"eventCreateEnd_subtitle" = "Félicitations, vous venez de créer un nouvel événement. Pour le rendre plus actif, parlez-en sur vos groupes !
+";
+
+"eventCreatePhase1_error" = "Por favor rellene todos los campos obligatorios";
+"eventCreatePhase2_error" = "Por favor rellene todos los campos obligatorios";
+"eventCreatePhase3_error" = "Por favor rellene todos los campos obligatorios";
+"eventCreatePhase4_error" = "Se debe seleccionar una categoría.";
+"eventCreatePhase5_error" = "Se debe seleccionar al menos un grupo.";
+
+"eventModPopCloseBackTitle" = "Atención";
+"eventModPopCloseBackMessage" = "Si sale del formulario de edición del evento, se perderá toda la información ingresada.";
+"eventModPopCloseBackQuit" = "Dejar";
+"eventModPopCloseBackCancel" = "anular";
+
+//Event group list
+"event_members_cell_list" = "%d participantes";
+"event_member_cell_list" = "%d participante";
+"event_group_title_list" = "El grupo también organiza:";
+"event_places_detail" = "%d lugares";
+"event_places_distance" = "%@ a %@";
+
+
+
+//Event pop choose location
+"event_location_title" = "Localiza tu evento";
+"event_location_detail" = "La dirección se agregará a la descripción detallada de su evento.";
+
+/* Home Event*/
+"event_main_page_title" = "Eventos";
+"event_main_page_button_myEvents" = "Participo";
+"event_main_page_button_discover" = "Yo descubro";
+"event_event_my_empty_title" = "Aún no te has unido a un evento";
+"event_event_my_empty_subtitle" = "¡Esta es la oportunidad de enterarte de lo que sucede cerca de ti o de crear un nuevo evento!";
+"event_event_discover_empty_title" = "Vaya, no hay eventos a tu alrededor";
+"event_event_discover_empty_subtitle" = "Si no hay eventos cerca de usted, puede ampliar su área de búsqueda.";
+"event_no_event_but_discover" = "¡Esta es una oportunidad para descubrir qué está sucediendo cerca de nosotros o para crear un nuevo evento!";
+"event_no_event_go_create" = "No hay eventos a tu alrededor. ¡No dudes en crear uno!";
+"event_event_discover_clear_filters" = "Restablecer filtros";
+"event_title_btn_discover_event" = "Descubre los eventos";
+"event_title_btn_create_event" = "Crear un evento";
+"event_event_discover_empty_search_title" = "¡Maldita sea, no hay resultados que coincidan con tu búsqueda!";
+"event_event_discover_empty_search_subtitle" = "¿No encuentras el evento de tus sueños? No esperes más para crearlo o ampliar tu área de búsqueda.";
+"event_detail_button_more" = "Más información";
+
+"event_detail_button_participe_ON" = "Participar";
+"event_detail_button_participe_OFF" = "Participar";
+"event_detail_about_title" = "A saber";
+"event_detail_post_section_title" = "Noticias";
+"event_detail_post_section_new_posts_title" = "Nuevas publicaciones";
+"event_detail_post_section_old_posts_title" = "Publicaciones antiguas";
+
+"event_time_detail_full" = "De %@ a %@";
+"event_places_detail_full" = "Número limitado de plazas: %d";
+"event_created_full" = "Creó el %@";
+"event_updated_full" = "Modificó el %@";
+"event_canceled_full" = "Cancelado el %@";
+"event_cancel_alone" = "Cancelado";
+
+"event_empty_post_title" = "No hay publicación (aún) sobre este evento.";
+"event_empty_post_subtitle" = "¿Por qué no iniciar la discusión con tus vecinos?";
+
+"event_users_title" = "Ver participantes";
+"event_userInput_search" = "Buscar un asistente al evento";
+
+"event_detail_full_title" = "Sobre el evento";
+
+"event_detail_groups_title" = "Grupos asociados:";
+"event_detail_group_title" = "Grupo asociado:";
+"event_detail_cats_title" = "Categorías:";
+"event_detail_cat_title" = "Categoría :";
+"event_cancel_list" = "Cancelado";
+"event_canceled" = "Evento cancelado";
+
+//Event filters
+"event_filter_title" = "Eventos - Filtros de búsqueda";
+"event_filter_profile" = "A la dirección proporcionada en mi perfil.";
+"event_filter_google" = "En una nueva dirección";
+"event_filter_gps" = "Alrededor de mi ubicación actual";
+"event_filter_search" = "Buscar :";
+"event_filter_radius_radius" = "Dentro :";
+"event_filter_error_place" = "Por favor seleccione una dirección";
+"event_filter_google_placeholder" = "Elige una dirección";
+"event_filter_position_placeholder" = "Mi posición";
+
+//Pop leave/cancel event
+"params_leave_event_pop_title" = "abandonar el evento";
+"params_leave_event_pop_message" = "¿Quieres abandonar el evento?";
+"params_leave_event_pop_bt_quit" = "Dejar";
+"params_leave_event_pop_bt_cancel" = "anular";
+
+"params_cancel_event_pop_bt_delete" = "anular";
+"params_cancel_event_pop_bt_cancel" = "Atrás";
+"params_cancel_event_pop_title" = "Cancelar evento";
+"params_cancel_event_pop_message" = "¿Quieres cancelar el evento? Todos los participantes serán notificados de la cancelación.";
+"params_cancel_event_recurrency_title" = "Cancelar un evento recurrente";
+"params_cancel_event_recurrency_choice1" = "Este evento";
+"params_cancel_event_recurrency_choice2" = "Este evento y todos los posteriores.";
+
+"event_mod_pop_title" = "Editar un evento recurrente";
+"event_mod_pop_validate_bt" = "Validar";
+"event_mod_ok" = "Evento modificado PLACEHOLDER";
+"event_mod_nok" = "Error al editar el evento. MARCADOR DE LUGAR";
+"event_create_ok" = "Error al crear el evento. MARCADOR DE LUGAR";
+//Contacts pop add
+"event_add_contact_accept" = "Agregar";
+"event_add_contact_cancel" = "anular";
+"event_add_contact_yes" = "Sí";
+"event_add_contact_no" = "No";
+"event_add_contact_title" = "¡Tu registro es tomado en cuenta!";
+"event_add_contact_description" = "¿Quieres agregar este evento a tu calendario personal?";
+
+"event_add_contact_places_title" = "Evento con plazas limitadas";
+"event_add_contact_places_description" = "Tenga en cuenta que este evento tiene plazas limitadas, su inscripción no está garantizada. El administrador del evento se comunicará contigo para confirmar tu reserva de lugar.";
+"event_add_contact_error" = "Para agregar el evento a su calendario, debe habilitar el acceso al calendario";
+"event_add_contact_refuse" = "Rechazar";
+"event_add_contact_activate" = "Permitir";
+
+//Event settings
+"event_params_title" = "Configuración de eventos";
+"event_params_cgu" = "Carta de eventos";
+"event_params_edit" = "Editar evento";
+"event_params_recurrency" = "Editar recurrencia";
+"event_params_signal" = "Reportar el evento";
+"event_params_cgu_title" = "Carta de eventos";
+"event_params_cgu_description" = "Carta de eventos, lea atentamente.";
+"event_params_participant" = "partícipe";
+"event_params_participants" = "Participantes";
+"event_params_quit" = "abandonar el evento";
+"event_params_cancel" = "Cancelar evento";
+
+"event_params_notif_title" = "Notificarme de";
+"event_params_notif_all" = "Toda la actividad del evento";
+"event_params_notif_new_publications" = "Nuevas publicaciones";
+"event_params_notif_new_members" = "La llegada de nuevos participantes";
+
+"event_edit_recurrency_title" = "Reaparición";
+"event_edit_recurrency_date" = "Fecha del evento";
+"event_edit_recurrency_back" = "anular";
+"event_edit_recurrency_next" = "Validar";
+
+//Event MEssages
+"event_comments_title" = "Publicar comentarios";
+"event_comments_placeholder_discut" = "Conversar...";
+"event_comments_send" = "enviar a";
+"event_no_messageComment" = "Sin comentarios aún";
+"event_messageComment_notAuth" = "Para comentar esta publicación, únete al evento ";
+//CGU
+"event_CGU_1_title" = "Sé amable";
+"event_CGU_1" = "Utilizo la aplicación con fines de ayuda mutua para personas en situaciones muy precarias o excluidas.";
+"event_CGU_2_title" = "Acuerdo de cobro revertido";
+"event_CGU_2" = "Aseguro el consentimiento de las personas interesadas antes de realizar una acción.";
+"event_CGU_3_title" = "Garantizar la protección de las personas.";
+"event_CGU_3" = "Garantizo no comunicar datos personales sensibles (médicos, jurídicos, etc.), ni que permitan la identificación o localización precisa de personas.";
+"event_CGU_4_title" = "Estar unidos, sin distinción";
+"event_CGU_4" = "Me comprometo a no hacer distinción de raza, color, sexo, idioma, religión, opinión política, propiedad, nacimiento o cualquier otra condición.";
+
+//MARK: - Actions -
+"action_menu_demand" = "Crear una solicitud";
+"action_menu_contrib" = "Crear una contribución";
+"action_create_title_phase" = "Escenario";
+"action_create_title_phase_nb" = "0%d.";
+"action_create_group_bt_back" = "Anterior";
+"action_create_group_bt_next" = "Próximo";
+"action_create_group_bt_create" = "Validar";
+
+"actionCreatePopCloseBackTitle" = "Atención";
+"actionCreatePopCloseBackMessage" = "Si sale del formulario de creación %@, se perderá toda la información ingresada.";
+"actionCreatePopCloseBackQuit" = "Dejar";
+"actionCreatePopCloseBackCancel" = "anular";
+
+"action_solicitation" = "pedido";
+"action_contrib" = "contribución";
+
+"action_create_title_contrib" = "Nueva contribución";
+"action_create_title_solicitation" = "Nueva solicitud";
+"action_charte_title" = "Código ético";
+"action_create_info_contrib" = "Vous cherchez à proposer une contribution qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_contrib_underline" = "Aprende más aquí.";
+"action_create_info_demand" = "Vous cherchez à proposer une demande qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_demand_underline" = "Aprende más aquí.";
+
+"action_create_mandatory" = "- OBLIGATORIO";
+"action_create_phase_1_name" = "Título de la acción: obligatorio";
+"action_create_phase_1_name_placeholder" = "Nombra tu %@";
+"action_create_phase_1_name_subtitle" = "Dale un nombre corto y explícito a tu %@";
+"action_create_phase_1_name_error" = "El nombre %@ debe contener al menos 2 caracteres.";
+
+"action_add_post_title_image" = "Añadir una imagen";
+
+"action_create_phase_1_desc" = "Descripción - requerido";
+"action_create_phase_1_desc_placeholder" = "Describe tu %@";
+"action_create_phase_1_desc_subtitle" = "Describe detalladamente el %@ que ofreces";
+
+"action_PhotoCreateTitle" = "Añadir una foto (opcional)";
+"action_PhotoCreateTitleHighlight" = "- opcional";
+"action_PhotoCreateDescription" = "Puedes cambiarlo más tarde";
+"action_CreatePhase1_error" = "Por favor seleccione una imagen";
+
+"action_create_title_category" = "Seleccione la categoría que mejor describa su %@. - OBLIGATORIO";
+"action_create_title_category_mandatory" = "- OBLIGATORIO";
+
+//Edit location page
+"actionCellLocationTitle" = "Localiza tu %@";
+"actionCellLocationDescription" = "Tu ubicación precisa no será compartida, puedes poner una ubicación distinta al área de acción de tu perfil.";
+
+"actionEditLocationTitle" = "Localiza tu %@";
+"actionEditLocationDescription" = "Tu ubicación precisa no será compartida, puedes poner una ubicación distinta al área de acción de tu perfil.";
+"actionEditLocationLegend" = "Añadir un lugar";
+
+"actionCreatePhase1_error" = "Por favor rellene todos los campos obligatorios.";
+"actionCreatePhase2_error" = "Se debe seleccionar una categoría.";
+"actionCreatePhase3_error" = "Por favor seleccione una dirección.";
+"action_create_nok" = "Error al crear %@. MARCADOR DE LUGAR";
+//Charte Actions
+"accept_charte" = "Aceptar";
+"action_charte_1_title" = "Ayuda mutua";
+"action_charte_1" = "La aplicación permite crear nuevos encuentros entre vecinos y propiciar momentos de intercambio. La asistencia remota (conducción, entrega, cheque regalo, premio acumulado, etc.) no está autorizada.";
+"action_charte_2_title" = "Contribuciones y solicitudes";
+"action_charte_2" = "Puedo solicitar u ofrecer bienes materiales (equipamiento, ropa, etc.), servicios (lavandería, impresión de documentos, etc.) y tiempo para compartir (café, actividad, etc.).\nI no puede solicitar ni ofrecer asistencia financiera ni alojamiento ni comida. ayuda. Pero si lo necesito puedo contactar con el moderador que me guiará.";
+"action_charte_3_title" = "Consentir";
+"action_charte_3" = "Cuando publico una solicitud para un tercero, me aseguro de obtener su consentimiento de antemano.";
+"action_charte_4_title" = "No discriminacion";
+"action_charte_4" = "Me comprometo a entablar relaciones con personas sin discriminación (raza, religión, orientación sexual, opinión política, etc.).";
+"action_charte_5_title" = "protección de las personas";
+"action_charte_5" = "Garantizo que mis acciones no contienen ningún dato personal (apellido, número de teléfono, dirección precisa, etc.) que permita identificar y localizar con precisión a una persona, ni ningún dato sensible (médico, jurídico, etc.).";
+
+//Create action end
+"action_create_close_button" = "Para terminar";
+"contribCreateEnd_title" = "¡Tu contribución ha sido creada!";
+"contribCreateEnd_subtitle" = "Felicitaciones, acaba de crear una nueva contribución. Para hacerlo más visible, ¡hablad de ello en vuestros grupos!";
+"solicitationCreateEnd_title" = "¡Tu solicitud ha sido creada!";
+"solicitationCreateEnd_subtitle" = "Felicitaciones, acaba de crear una nueva solicitud. Para hacerlo más visible, ¡hablad de ello en vuestros grupos!";
+
+
+//Home Actions
+"actions_main_page_title" = "Ayuda mutua";
+"actions_main_page_button_contribs" = "Contribuciones";
+"actions_main_page_button_solicitations" = "Peticiones";
+"action_contrib_empty_title" = "Ninguna contribución coincide con su área de búsqueda.";
+"action_contrib_empty_subtitle" = "Puedes ampliar tu campo de búsqueda o crear una contribución.";
+"action_solicitation_empty_title" = "Ninguna solicitud coincide con su área de búsqueda";
+"action_solicitation_empty_subtitle" = "Puede ampliar su campo de búsqueda o crear una solicitud";
+"action_filter_category" = "Categoría";
+"action_filter_categories" = "Categorías";
+"action_filter_title" = "Filtrar por categorías";
+"action_filter_location_title" = "Filtrar por ubicación";
+//detail my actions
+"action_your" = "Tu acción";
+"actions_my_title" = "Mis anuncios";
+"action_detail_title_location" = "Ubicación";
+"atKm" = "%.4g km de mí";
+"AtKm" = "%.4g km de mí";
+"Atm" = "%.4g m de mí";
+"atm" = "%.4g m de mí";
+"Contrib" = "Contribución";
+"Demand" = "Pedido";
+
+"action_created_at" = "Creado %@ por";
+"action_member_since" = "Miembro desde %@";
+"action_cancel" = "Anuncio eliminado";
+
+"params_cancel_action_pop_bt_delete" = "anular";
+"params_cancel_action_pop_bt_cancel" = "Atrás";
+"params_cancel_action_pop_title" = "Cancelar acción";
+"params_cancel_action_pop_message" = "¿Quieres cancelar la acción?";
+
+"params_cancel_action_pop_bt_yes" = "Sí";
+"params_cancel_action_pop_bt_no" = "No";
+"params_cancel_action_pop_bt_valid" = "enviar a";
+"params_cancel_action_pop_title" = "Eliminar %@";
+"params_cancel_action_pop_subtitle" = "¿Tu %@ fue exitoso?";
+
+"params_cancel_action_pop_comment" = "Cuéntanos más sobre tu experiencia - opcional";
+"action_optional" = "- opcional";
+"params_cancel_action_pop_comment_placeholder" = "¡Cuéntenos su experiencia!";
+
+"action_view_canceled_title" = "El anuncio ha sido eliminado...";
+"action_view_canceled_contrib_subtitle" = "Puedes buscar otras aportaciones que puedan ser de tu interés o publicar un anuncio.";
+"action_view_canceled_demand_subtitle" = "Puede buscar otras solicitudes que puedan ser de su interés o publicar un anuncio.";
+"action_view_canceled_demand_button" = "Lista de solicitudes";
+"action_view_canceled_contrib_button" = "Lista de contribuciones";
+
+
+//CGU
+"action_params_cgu_title" = "Código ético";
+"action_params_cgu_description" = "";
+"action_CGU_1_title" = "Ayuda mutua";
+"action_CGU_1" = "La aplicación permite crear nuevos encuentros entre vecinos y propiciar momentos de intercambio. La asistencia remota (conducción, entrega, cheque regalo, premio acumulado, etc.) no está autorizada.";
+"action_CGU_2_title" = "Contribuciones y solicitudes";
+"action_CGU_2" = "Puedo pedir u ofrecer bienes materiales (equipamiento, ropa, etc.), servicios (lavandería, impresión de documentos, etc.) y tiempos para compartir (café, actividad, etc.). No puedo solicitar ni ofrecer asistencia financiera, alojamiento o asistencia alimentaria. Pero si lo necesito puedo contactar con el moderador que me guiará.";
+"action_CGU_3_title" = "Consentir";
+"action_CGU_3" = "Cuando publico una solicitud para un tercero, me aseguro de obtener su consentimiento de antemano.";
+"action_CGU_4_title" = "No discriminacion";
+"action_CGU_4" = "Me comprometo a entablar relaciones con personas sin discriminación (raza, religión, orientación sexual, opinión política, etc.).";
+"action_CGU_5_title" = "protección de las personas";
+"action_CGU_5" = "Garantizo que mis acciones no contienen ningún dato personal (apellido, número de teléfono, dirección precisa, etc.) que permita identificar y localizar con precisión a una persona, ni ningún dato sensible (médico, jurídico, etc.).";
+
+"edit_edit_contrib_title" = "Editar\ncontribución";
+"edit_edit_solicitation_title" = "Editar\nsolicitud";
+
+/*
+ Messages
+ */
+"Messages_title" = "Discusiones";
+"messaging_message_placeholder_discut" = "Nuevo mensaje";
+"messaging_message_title" = "Conversación";
+"messaging_message_send" = "enviar a";
+"messaging_message_no_message" = "0 mensajes más";
+
+"message_title_new_conv" = "Nueva conversación";
+"message_subtitle_new_conv" = "Aún no has interactuado con este usuario. Si hay un problema, puedes reportar la conversación en la configuración.";
+"message_error_create_conversation" = "Error al crear la conversación";
+
+"conversation_params_title" = "Configuraciones de chat";
+"conv_param_title_profil" = "Ver perfil";
+"conv_param_title_signal" = "Informe";
+"conv_param_subtitle_signal" = "Informe esta conversación al equipo de Entourage.";
+"conv_param_title_members" = "Miembros de la conversación";
+"conv_param_title_signal_action" = "Informe";
+"conv_param_subtitle_signal_action" = "Informe esta conversación al equipo de Entourage.";
+"conv_param_qui_action" = "dejar la conversación";
+"conv_param_title_block" = "Bloquear";
+"conv_param_subtitle_block" = "%@ ya no podrá escribirle.";
+
+//Pop leave conversation
+"params_leave_conv_pop_title" = "dejar la conversación";
+"params_leave_conv_pop_message" = "¿Quieres abandonar la conversación?";
+"params_leave_conv_pop_bt_quit" = "Dejar";
+"params_leave_conv_pop_bt_cancel" = "anular";
+
+//Pop block user inside conversation
+"params_block_user_conv_pop_title" = "Bloquear usuario";
+"params_block_user_conv_pop_message" = "¿Quieres bloquear %@?\nEste usuario ya no podrá enviarte mensajes. Puedes desbloquear al usuario en cualquier momento desde la configuración de tu perfil.";
+"params_block_user_conv_pop_bt_quit" = "Bloquear";
+"params_block_user_conv_pop_bt_cancel" = "anular";
+
+"params_block_user_conv_pop_validate_title" = "Bloquear %@";
+"params_block_user_conv_pop_validate_subtitle" = "Este contacto ha sido bloqueado.";
+"params_block_user_conv_pop_validate_bt" = "DE ACUERDO";
+
+"message_user_blocked_by_me_list" = "Has bloqueado este contacto";
+"message_user_blocked_by_me" = "Has bloqueado a %@. Ya no puedes enviarle un mensaje.";
+"message_user_blocked_by_other" = "Ya no puedes enviar mensajes a %@. Esta conversación ha sido bloqueada.";
+
+"settingsUnblockUserInfo" = "Seleccione uno o más contactos para desbloquear.";
+"settingsUnblockBT" = "Desatascar";
+"settingsUnblockUser_error" = "Por favor elija al menos un contacto";
+
+"params_unblock_user_pop_title" = "Desbloquear contacto";
+"params_unblock_users_pop_title" = "Desbloquear contactos";
+"params_unblock_user_pop_message" = "¿Quieres desbloquear %@?\nPodréis enviaros mensajes entre vosotros nuevamente.";
+"params_unblock_user_pop_bt_unblock" = "Desatascar";
+"params_unblock_user_pop_bt_cancel" = "anular";
+
+"params_unblock_user_pop_validate_title" = "Desbloquear %@";
+"params_unblock_user_pop_validate_subtitle" = "Este contacto acaba de ser desbloqueado, podéis volver a escribiros.";
+"params_unblock_users_pop_validate_subtitle" = "Estos contactos acaban de ser desbloqueados, podéis volver a escribiros.";
+"params_unblock_user_pop_validate_bt" = "DE ACUERDO";
+
+"param_empty_blocked_user" = "No has bloqueado ningún contacto.";
+
+"conversation_users_title" = "Miembros de la conversación";
+"conversation_userInput_search" = "Buscar un miembro del chat";
+"conversation_search_empty_title" = "¡Ups, no hay resultados que coincidan con tu búsqueda!";
+
+"notifs_title" = "Notificaciones";
+"duration_month" = "%d mes";
+"duration_weeks" = "%d semana";
+"duration_days" = "%d j";
+"duration_hours" = "%d horas";
+"duration_minutes" = "%d mín.";
+"duration_secondes" = "En este momento";
+
+
+//Pwd change
+"param_title_change_pwd" = "Cambiar la contraseña";
+"param_change_pwd_title" = "Contraseña";
+"placeholder_changePwd" = "Ingrese el código";
+"oldCode" = "Código de acceso antiguo";
+"newCode" = "Nuevo código de acceso";
+"confirmCode" = "Confirma código";
+"pwdError" = "código incorrecto";
+"pwdShort" = "La nueva contraseña es demasiado corta";
+"pwdDiff" = "Las contraseñas no coinciden";
+"pwdUpdated" = "Actualización de contraseña";
+"pwdUpdatedErr" = "Error de actualización";
+
+
+//WELCOME STRINGS
+
+"welcomeone_title" = "Bienvenido a la red social \n verdaderamente social";
+"welcomeone_content_main" = "Para muchos, la calle es un lugar de paso.\nPara algunos, es la vida diaria.\nAsí que, para empezar, conoce a aquellos\nquienes la viven todos los días.";
+"welcomeone_content" = "Encuentre nuestro contenido de concientización aquí";
+
+"welcome_three_title_event" = "6.000 personas hicieron nuevos amigos en un evento de Entourage";
+"welcome_three_title_demand" = "Echa una mano a tus vecinos";
+"welcome_three_title_contrib" = "¿No hay apoyo a tu alrededor? ¡Créalo!";
+
+"welcome_two_no_group" = "Preséntate ante tu grupo de vecinos";
+
+"welcome_three_maintext_event" = "Encuentra el evento que te interesa y ven a disfrutar de un momento agradable";
+"welcome_three_maintext_demand" = "Echa un vistazo a las solicitudes publicadas cerca de ti:";
+"welcome_three_maintext_contrib" = "Una buena forma de crear conexiones entre vecinos es compartir tus intereses, tus pasiones o simplemente un café para conocerse.";
+
+"welcome_three_mainbutton_event" = "Descubre los eventos";
+"welcome_three_mainbutton_demand" = "Descubrir solicitudes";
+"welcome_three_mainbutton_contrib" = "Crear una contribución";
+
+"welcome_three_contrib_example_one_title" = "charlar tomando un cafe";
+"welcome_three_contrib_example_one_distance" = "10 m de mí";
+"welcome_three_contrib_example_one_loca" = "París (75010)";
+"welcome_three_contrib_example_one_date" = "21 de junio de 2022 a las 12 h.";
+
+"welcome_three_contrib_example_two_title" = "Donación de ropa de mujer.";
+"welcome_three_contrib_example_two_distance" = "10 m de mí";
+"welcome_three_contrib_example_two_loca" = "París (75010)";
+"welcome_three_contrib_example_two_date" = "21 de junio de 2022 a las 12 h.";
+
+"welcome_four_main_button_title" = "Iniciar el cuestionario";
+"welcome_four_title" = "Tú decides";
+"welcome_four_main_text" = "¿Qué tal un pequeño test para deconstruir prejuicios sobre el mundo de la calle?";
+"welcome_four_second_text" = "En su opinión, ¿qué porcentaje de personas sin hogar tiene teléfono móvil?";
+
+"welcome_five_title" = "Ya han pasado 10 días: ¡bienvenidos a la familia!";
+"welcome_five_main_text_title" = "Es una locura cómo pasa el tiempo cuando estás en buena compañía.\n\nAhora ayúdanos a hacer crecer la red Entourage: ¡trae la tuya!";
+"welcome_five_main_button_title" = "Comparte la aplicación";
+
+"custom_dialog_action_title_one_contrib" = "¿Dónde está tu aporte?";
+"custom_dialog_action_title_one_demand" = "¿Dónde está tu petición?";
+"custom_dialog_action_title_two" = "gracias por su paciencia";
+"custom_dialog_action_title_three" = "Buena noticia !";
+
+"custom_dialog_action_content_one_contrib" = "Votre action \"%@\" est-elle terminée ?";
+"custom_dialog_action_content_one_demande" = "%@\n\n ¿Encontraste lo que buscabas?";
+"custom_dialog_action_content_two_contrib" = "Consejo: mira las contribuciones. Un vecino podría ofrecerte lo que buscas";
+"custom_dialog_action_content_two_demande" = "Consejo: busque solicitudes cerca de usted. A un vecino le puede interesar";
+"custom_dialog_action_content_three_contrib" = "Muchas gracias por su compromiso. Podremos eliminar tu contribución.";
+"custom_dialog_action_content_three_demande" = "Muchas gracias por su compromiso. Podremos eliminar su solicitud.";
+"custom_dialog_action_two_button_contrib" = "Ver contribuciones";
+"custom_dialog_action_two_button_demand" = "Ver solicitudes";
+
+"pop_up_rugby_france_title" = "Vivamos juntos la Copa Mundial de Rugby";
+"pop_up_rugby_france_content" = "Les plus belles rencontres ne se font pas forcément au stade ! Rejoignez le groupe \"Vivons le sport ensemble\"";
+
+
+/* New Home string */
+"home_v2_title" = "La app que recrea los vínculos entre vecinos";
+
+"home_v2_title_action" = "Echar una mano";
+"home_v2_subtitle_action" = "¡Tus vecinos te necesitan!";
+"home_v2_btn_more_action" = "Ver todas las solicitudes";
+
+"home_v2_title_action_contrib" = "¿Necesitas ayuda?";
+"home_v2_subtitle_action_contrib" = "¡Descubre lo que ofrecen tus vecinos!";
+"home_v2_btn_more_action_contrib" = "Ver todas las contribuciones";
+
+"home_v2_title_event" = "Participa en un evento solidario";
+"home_v2_subtitle_event" = "Mucha solidaridad cerca.";
+"home_v2_btn_more_event" = "Ver todos los eventos";
+
+"home_v2_title_group" = "Tus grupos de vecinos";
+"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida.";
+"home_v2_btn_more_group" = "Ver todos los grupos";
+
+"home_v2_title_map" = "Descubra direcciones útiles";
+"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas.";
+"home_v2_button_map" = "Mapa de lugares solidarios cerca de ti";
+
+"home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";
+"home_v2_subtitle_pedago" = "Luchar contra la precariedad es como todo, ¡se aprende!";
+"home_v2_btn_more_pedago" = "Ver todos los artículos";
+
+"home_v2_pedago_item_tag_all" = "Todo";
+"home_v2_pedago_item_tag_act" = "Actuar";
+"home_v2_pedago_item_tag_inspire" = "Inspirar";
+"home_v2_pedago_item_tag_understand" = "Comprender";
+
+"home_v2_title_help" = "Estás perdido ?";
+"home_v2_subtitle_help" = "¡Que no cunda el pánico, empieza paso a paso!";
+"home_v2_btn_more_help" = "Ver todos los artículos";
+
+"home_v2_help_title_one" = "¿Cómo crear un grupo?";
+"home_v2_help_title_two" = "¿Cómo crear un evento?";
+"home_v2_help_title_three" = "¿Alguna pregunta?\nContacto";
+
+"home_v2_pedag_item_lenght_title" = "%d lectura mínima";
+
+"home_v2_action_type_social" = "Social";
+"home_v2_action_type_clothes" = "Ropa";
+"home_v2_action_type_equipment" = "Equipo";
+"home_v2_action_type_hygiène" = "Higiene";
+"home_v2_action_type_services" = "Servicios";
+"home_v2_action_type_other" = "Otros";
+
+"home_v2_hz_item_title" = "Oye, parece un poco tranquilo por aquí...";
+"home_v2_hz_item_subtitle" = "¿Y si trajeras un poco de solidaridad a tu ciudad? ¡Entourage te da las claves para empezar!";
+"home_v2_hz_item_button" = "Más información";
+/*
+  Localizable.strings
+  entourage
+
+  Created by Jerome on 12/01/2022.
+  
+*/
+
+//Divers
+"attention_pop_title" = "Atención";
+"close" = "Cerca";
+"error" = "Error";
+"generic_error" = "Se ha producido un error. Verifique su conexión de red e inténtelo nuevamente.";
+"connection_error" = "error de inicio de sesion";
+"connection_imposible" = "No puede conectarse";
+"tryAgain" = "Intentar otra vez";
+"tryAgain_short" = "Volver a intentar";
+"ok" = "DE ACUERDO";
+"OK" = "DE ACUERDO";
+"validate" = "Validar";
+"create" = "Crear";
+"edit" = "Editar";
+"modify" = "Editar";
+"showAll" = "Ver todo";
+"searchForAddress" = "encontrar una dirección";
+"cancel" = "anular";
+"refuseAlert" = "Rechazar";
+"activate" = "Permitir";
+"km" = "kilómetros";
+"Yes" = "Sí";
+"No" = "No";
+"yes" = "Sí";
+"no" = "No";
+"about_email_notavailable" = "El correo electrónico no encontrado";
+"Loading" = "Cargando";
+"Admin" = "Administración";
+//TABBAR
+"tabbar_home" = "Home";
+"tabbar_gifts" = "Ayuda mutua";
+"tabbar_messages" = "Discusiones";
+"tabbar_groups" = "Grupos";
+"tabbar_events" = "Eventos";
+
+"errorSettings" = "Autorización requerida";
+"toSettings" = "Ajustes";
+"authCameraSettings" = "Por favor permita el acceso a la cámara.";
+"authGpsSettings" = "Por favor permita el acceso GPS.";
+
+"WIP" = "Pronto";
+"notImplemented" = "Próximo disponible ;)";
+"today" = "Hoy";
+"yesterday" = "ayer";
+"Today" = "Hoy";
+"Yesterday" = "Ayer";
+"the" = "EL";
+"The" = "EL";
+//PreOnboarding
+"next" = "Próximo";
+"connectMe" = "Acceso";
+"previous" = "Anterior";
+"bt_pass" = "Gastar";
+
+"intro_title_1" = "La red social, verdaderamente social.";
+"intro_subtitle_1" = "Nuestra misión: movilizar y equipar a los ciudadanos para apoyar a los más excluidos.";
+"intro_title_2" = "En la aplicación Entourage:";
+"intro_subtitle_2" = "Conozca a vecinos como usted durante los eventos y discuta acciones solidarias.";
+"intro_title_3" = "Séquito contigo!";
+"intro_subtitle_3" = "Los equipos de embajadores, voluntarios y moderadores de Entourage lo apoyan y guían diariamente.";
+
+"preOnboard_choice_description" = "La red social, verdaderamente social.";
+"preOnboard_choice_signup" = "Me inscribo";
+"preOnboard_choice_login" = "ya tengo una cuenta";
+"preOnboard_choice_weblink" = "¿Quién es la asociación Entourage?";
+
+//Login
+"error_login_phone_length" = "El número de teléfono debe tener al menos %d dígitos";
+"error_login_code_lenght" = "El código debe tener 6 dígitos.";
+"error_login_resendCode_unknow" = "Número de teléfono desconocido, inténtalo de nuevo.";
+"error_login_phoneNumberOrCode" = "El número de teléfono y este código de acceso no coinciden.";
+"error_login_phoneNumberFormat" = "Error de conexión. Tu teléfono debe tener el formato: \n+33, 06 o 07";
+
+"login_title" = "Conexión";
+"login_phone_placeholder" = "Número de teléfono";
+"login_placeholder_code" = "Ingrese su código";
+"login_button_connect" = "Me conecto";
+"login_button_resend_code" = "Solicitar un código nuevamente";
+"login_resend_code_title" = "Solicitar un código nuevamente";
+"login_resend_code_button_yes" = "Preguntar";
+"login_resend_code_button_no" = "anular";
+"login_resend_code_title" = "Solicitar un código nuevamente";
+"login_resend_code_message" = "Quieres volver a solicitar un codep para tu número de teléfono:";
+"login_label_country" = "País";
+"login_label_phone" = "Teléfono";
+"login_label_code" = "codificado";
+"login_button_change_phone" = "cambié mi número de teléfono";
+
+"login_change_phone_title" = "Nuevo número";
+"login_change_phone_old_number" = "viejo problema";
+"login_change_phone_new_number" = "Nuevo número";
+"login_change_phone_email" = "Email opcional)";
+"login_change_phone_bt_validate" = "enviar a";
+"login_change_phone_old_number_placeholder" = "viejo problema";
+"login_change_phone_new_number_placeholder" = "Nuevo número";
+"login_change_phone_email_placeholder" = "Correo electrónico";
+"login_change_send_ok" = "Su solicitud ha sido enviada.\n\n\nEl soporte de Entourage le notificará cuando se complete el cambio de número.";
+"login_change_bt_return" = "Atrás";
+
+"login_change_warning_title" = "Atención";
+"login_change_error_phone" = "Por favor verifique sus números de teléfono";
+"login_change_error_mail" = "Por favor, compruebe su dirección de correo electrónico";
+
+"login_change_error_return" = "Error";
+
+"login_change_error_not_found" = "El número anterior es desconocido.\nPor favor, compruébalo.";
+"login_change_error_deleted" = "Se eliminó el número anterior.\nPor favor, compruébalo.";
+"login_change_error_blocked" = "El número anterior ha sido bloqueado.\nPor favor, compruébalo.";
+"login_change_error_identical" = "Ambos números son iguales.\nComprueba el nuevo número.";
+"login_change_error_generic" = "El número anterior es desconocido o eliminado.\nComprueba los números.";
+
+//Login next
+"login_info_pop_action" = "Desde tu perfil, puedes personalizar tus noticias y las recomendaciones recibidas. Elija con total confidencialidad si actualmente es: un vecino solidario, una persona necesitada, una asociación.";
+"login_pop_information" = "Nuevo ! ¡Adapta Entourage a tus deseos y necesidades!";
+"login_info_pop_validate" = "Comprendido !";
+"pop_info_entourage_custom_yes" = "Personalizar";
+"pop_info_entourage_custom_no" = "Más tarde";
+"pop_info_entourage_custom_no_more" = "No me muestres más";
+"login_email_pwd_title" = "Está bien !";
+"login_email_pwd_description" = "¡Ahora, finalicemos la creación de su cuenta!";
+
+//Onboarding
+"onboard_bt_create" = "Crear";
+"onboard_bt_back" = "Anterior";
+"onboard_bt_next" = "Próximo";
+//Phase 1
+"onboard_welcome_title" = "Bienvenido !";
+"onboard_welcome_info" = "Sólo la primera letra será visible.";
+"onboard_welcome_firstname" = "Nombre de pila*";
+"onboard_welcome_placeholder_firstname" = "Vuestro nombre";
+"onboard_welcome_lastname" = "Apellido*";
+"onboard_welcome_placeholder_lastname" = "Su nombre";
+"onboard_welcome_country" = "País*";
+"onboard_welcome_phone" = "Teléfono*";
+"onboard_welcome_mail" = "Correo electrónico";
+"onboard_welcome_placeholder_mail" = "tudirección@mail.com";
+"onboard_welcome_consent" = "Me gustaría recibir información y asesoramiento de Entourage";
+"onboard_welcome_info_mandatory" = "*Campos obligatorios. Su información permanecerá confidencial y nunca será comunicada a terceros.";
+
+//Phase2
+"onboard_sms_title" = "Introduce el código recibido por SMS";
+"onboard_sms_sub" = "Te acaban de enviar un SMS a:";
+"onboard_sms_modify" = "- Editar";
+"onboard_sms_no_code" = "¿Sin código? Vuelve a intentarlo en 1 min.";
+"onboard_sms_wait_retry" = "¿Sin código? Inténtalo de nuevo en %@";
+"onboard_sms_wait_retry_end" = "Solicitar un código nuevamente";
+
+//Phase 3
+"onboard_phone_title" = "¡Encantado de conocerte, %@!";
+
+"onboard_phase3_title" = "Además de conocer gente, ¿cómo quieres contribuir a la comunidad Entourage?";
+"onboard_title_entour" = "Rodear";
+"onboard_subtitle_entour" = "Ofrecer ayuda...";
+"onboard_title_beentour" = "Estar rodeado";
+"onboard_subtitle_beentour" = "Pedir ayuda, encontrar las estructuras sociales que me rodean...";
+"onboard_place_title_new" = "¿Cuál es tu barrio?";
+"onboard_place_desc" = "*La dirección es confidencial y nunca será comunicada";
+"onboard_place_infos_placeholder" = "Dirección, ciudad o departamento";
+"onboard_info_asso" = "soy una asociacion";
+
+//Phase End
+"onboard_end_title" = "Bienvenido a la comunidad Entourage";
+"onboard_end_subtitle" = "Felicitaciones, estás listo para darle vida a la solidaridad a tu alrededor.";
+"onboard_end_button" = "Comienza la aventura humana";
+
+//Onboard errors
+"onboard_error_Usertype" = "Por favor seleccione al menos una contribución";
+"onboard_error_place" = "Por favor elige una dirección";
+"onboard_error_firstname" = "El nombre debe contener al menos 2 letras.";
+"onboard_error_lastname" = "El nombre debe tener al menos 2 letras.";
+"onboard_error_email" = "La dirección de correo electrónico es inválida.";
+"onboard_error_phone" = "El número debe tener 9 o 10 dígitos.";
+//A supp
+"onboard_button_pass" = "Gastar";
+
+"onboard_welcome_sub" = "Primero que nada...\n¿Cómo te llamas?";
+
+
+
+"onboard_phone_sub" = "Cuál es su número de teléfono ?";
+"onboard_phone_info" = "Esta información permanecerá confidencial. ¡Solo queremos comprobar que no eres un robot, sino un humano con un gran corazón!";
+"onboard_phone_placeholder_phone" = "Teléfono";
+
+"onboard_sms_no_pwd" = "Por favor complete la contraseña";
+"attention_pop_title" = "Atención";
+"onboard_sms_pop_alert" = "Espere %d segundos antes de renovar la solicitud.";
+"onboard_type_title" = "Encantado de conocerte, %@.";
+"onboard_type_sub" = "¿Cómo quieres personalizar la aplicación?";
+"onboard_type_description" = "¡Entourage le hace estas pocas preguntas para darle la bienvenida y brindarle el mejor apoyo posible!\n(Esta información no será visible para otros miembros de la red).";
+"onboard_type_description_italic" = "(Esta información no será visible para otros miembros de la red).";
+"onboard_type_choice1" = "Para ayudar a las personas sin hogar y crear conexiones en su vecindario.";
+"onboard_type_choice2" = "Para pedir ayuda y descubrir lugares de solidaridad.";
+"onboard_type_choice3" = "Hablar en nombre de su estructura.";
+"onboard_type_choice_title1" = "Vecino solidario";
+"onboard_type_choice_title2" = "Persona aislada o precaria";
+"onboard_type_choice_title3" = "Asociación o servicio público";
+"onboard_place_title" = "¿Cuál es tu barrio?";
+"onboard_place_description" = "Podrás responder a las solicitudes de personas en dificultades y de asociaciones de tu barrio, y tú mismo podrás ofrecer donaciones de tu tiempo o materiales.";
+"onboard_place_title_sdf" = "¿En qué barrio vives habitualmente?";
+"onboard_place_description_sdf" = "Podrás pedir ayuda a tus vecinos y conocer gente nueva durante eventos amistosos de la red.";
+"onboard_place_info" = "Entourage no comunica esta dirección.";
+"onboard_place_placeholder" = "Ej: 35000";
+"onboard_email_pwd_title" = "Está bien !";
+"onboard_email_pwd_email_info" = "¡Déjanos tu email para recibir información y consejos de Entourage!";
+"onboard_email_pwd_email_info2" = "Entourage no comparte su dirección de correo electrónico.";
+"onboard_email_pwd_description" = "¡Ahora, finalicemos la creación de su cuenta!";
+"onboard_email_pwd_info_length" = "Incluye al menos 8 caracteres.";
+"onboard_email_pwd_placeholder_email" = "Correo electrónico";
+"onboard_email_pwd_placeholder_pwd" = "Contraseña";
+"onboard_email_pwd_placeholder_confirm_pwd" = "Confirmar la contraseña";
+"onboard_email_pwd_error_email" = "Dirección de correo electrónico no válida";
+"onboard_email_pwd_error_pwd_match" = "Las 2 contraseñas no son idénticas";
+"onboard_photo_title" = "¡Gracias, %@!";
+"onboard_photo_description" = "El toque final: puedes añadir tu foto. ¡Los miembros de Entourage en tu vecindario están ansiosos por conocerte!";
+
+
+"onboard_email_pwd_placeholder_confirm_pwd" = "Confirmar la contraseña";
+"onboard_email_pwd_placeholder_email" = "Correo electrónico";
+"onboard_email_pwd_placeholder_pwd" = "Contraseña";
+"onboard_email_pwd_description" = "¡Ahora, finalicemos la creación de su cuenta!";
+"onboard_email_pwd_info_length" = "Incluye al menos 8 caracteres.";
+"onboard_email_pwd_title" = "Está bien !";
+"onboard_email_pwd_email_info" = "¡Déjanos tu email para recibir información y consejos de Entourage!";
+"onboard_email_pwd_email_info2" = "Entourage no comparte su dirección de correo electrónico.";
+"onboard_email_pwd_description" = "¡Ahora, finalicemos la creación de su cuenta!";
+//Fin supp
+
+
+//Onboarding Assos
+"onboard_asso_start_title" = "Me cae bien !";
+"onboard_asso_start_description" = "Entourage es una asociación al servicio de sus actividades.";
+"onboard_asso_start_description_bold" = "Alrededores";
+"onboard_asso_start_description2" = "Algunas grandes historias que muestran el valor de la comunidad Entourage.";
+"onboard_asso_info_title" = "En concreto, en la aplicación, las funciones están dedicadas a ti.";
+"onboard_asso_info_description" = "Estar bien identificado en la red e involucrar a su comunidad";
+"onboard_asso_info_1" = "Un perfil verificado para cada uno de tus miembros: una garantía de confianza para tus vecinos";
+"onboard_asso_info_1_bold" = "Un perfil verificado";
+"onboard_asso_info_2" = "Una página para su estructura: para informar localmente sobre sus actividades y necesidades.";
+"onboard_asso_info_2_bold" = "Una página para tu estructura";
+"onboard_asso_info_3" = "Envío de notificaciones en su vecindario y más allá a los miembros de la comunidad.";
+"onboard_asso_info_3_bold" = "Envío de notificaciones";
+"onboard_asso_fill_title" = "Cuéntanos sobre tu estructura";
+"onboard_asso_fill_description" = "Cuéntenos más sobre su asociación, nos comunicaremos con usted para verificar su perfil y crear una página de asociación para usted.";
+"onboard_asso_fill_name_placeholder" = "Nombre de mi asociación";
+"onboard_asso_fill_cp_placeholder" = "Código postal de mi asociación.";
+"onboard_asso_fill_function_placeholder" = "mi función";
+"onboard_asso_fill_error" = "Complete todos los campos.\nGracias";
+"onboard_asso_search_creation" = "Creación de: %@";
+"onboard_asso_activity_title" = "%@, ¿cuál es su negocio principal?";
+"onboard_asso_activity_description" = "Seleccione el(los) sector(es) de actividad de su estructura, esto nos permitirá ofrecerle la mejor manera de utilizar la aplicación y movilizar a la comunidad Entourage.";
+"onboard_asso_activity_error" = "Ingrese al menos 1 centro de interés.\nGracias";
+"onboard_asso_activity_choice_1" = "Ayuda para personas \n";
+"onboard_asso_activity_choice_2" = "Initiatives culturelles\net sportives";
+"onboard_asso_activity_choice_3" = "Servicio\nPúblico";
+"onboard_asso_activity_choice_4" = "Otros ?";
+"onboard_asso_search" = "Investigación";
+
+//Onboarding Sdf
+"onboard_sdf_activity_title" = "%@, ¿qué estás buscando?";
+"onboard_sdf_activity_description" = "Varias opciones posibles.\nHay mil maneras de recibir apoyo y ayuda.";
+"onboard_sdf_activity_error" = "Ingrese al menos 1 centro de interés.\nGracias";
+"onboard_sdf_activity_choice_1" = "Crea un círculo \n de amigos";
+"onboard_sdf_activity_choice_2" = "Participa en \neventos";
+"onboard_sdf_activity_choice_3" = "Haga preguntas a \n";
+"onboard_sdf_activity_choice_4" = "Solicite\n ayuda";
+"onboard_sdf_activity_choice_5" = "Orientarme";
+"onboard_sdf_activity_choice_6" = "Buscar\nasociaciones";
+
+//Onboarding Neighbour
+"onboard_neighbour_activity_title" = "%@, ¿qué quieres hacer en tu vecindario?";
+"onboard_neighbour_activity_description" = "Varias opciones posibles.\nLe haremos propuestas adecuadas.";
+"onboard_sneighbour_activity_error" = "Ingrese al menos 1 centro de interés.\nGracias";
+"onboard_neighbour_activity_choice_1" = "Infórmame";
+"onboard_neighbour_activity_choice_2" = "Participa en \neventos";
+"onboard_neighbour_activity_choice_3" = "Rodear a una persona aislada \n";
+"onboard_neighbour_activity_choice_4" = "Haz donaciones\nmateriales";
+"onboard_neighbour_activity_choice_5" = "Participe en\nla asociación";
+
+
+//Onboarding Place tunnel SDF / Voisins
+"onboard_place_title2_sdf" = "Excelente !";
+"onboard_place_description2_sdf" = "¿Le gustaría agregar otro distrito?";
+"onboard_place_title2" = "Excelente !";
+"onboard_place_description2" = "Acabas de unirte a miembros de tu vecindario. ¿Quieres añadir otro distrito en el que actuar?";
+
+//Pop inform notifications
+"pop_notification_title" = "¡No te pierdas nada!";
+"pop_notification_description" = "En Entourage, creará vínculos entre vecinos que lo apoyen.\nActive notificaciones para recibir alertas de sus nuevos mensajes.";
+"pop_notification_bt_activate" = "Permitir";
+"pop_notification_bt_cancel" = "anular";
+
+//Errors Onboarding
+"onboarding_error_firstname" = "El nombre debe contener al menos 2 letras.";
+"onboarding_error_lastname" = "El nombre debe tener al menos 2 letras.";
+"onboarding_error_email" = "La dirección de correo electrónico es inválida.";
+"onboarding_error_phone" = "El número debe tener 9 o 10 dígitos.";
+"onboarding_help_label" = "¿Necesitas ayuda?\nPóngase en contacto con el equipo de Entourage.";
+"invalidCode" = "código de verificación invalido";
+"invalidPhoneNumber" = "Numero de telefono invalido";
+"invalidPhoneNumberOrCode" = "El número de teléfono y este código de acceso no coinciden.";
+"mustAddCode" = "Por favor ingresa un código de verificación";
+"invalidPhoneNumberFormat" = "Error de conexión. Tu teléfono debe tener el formato: \n+33, 06 o 07";
+"requestSent" = "Solicitud enviada";
+"requestNotSent" = "Solicitud no enviada";
+"alreadyRegisteredMessage" = "El número ya está registrado. Deberías haber recibido el código por SMS.";
+"alreadyRegistereMessageGoBack" = "El número ya está registrado, lo redireccionaremos a la página de inicio de sesión.";
+"onboarding_error_email" = "La dirección de correo electrónico es inválida.";
+
+/*******
+ Guide Map
+ */
+"info_share_sms_poi" = "Buenos dias ! Aquí está la dirección de %@ que podría interesarle.\n%@\n%@\nPara obtener más información sobre este lugar y crear vínculos entre vecinos solidarios, le daré una cita en la red Entourage %@";
+"title_new_gds" = "Lugares solidarios";
+"home_button_map" = "Mapa";
+"home_button_list" = "Lista";
+"home_button_filters" = "Filtros";
+"home_button_filters_on" = "Filtros habilitados";
+//Solidarity Guide
+"button_reset_filters" = "Cancelar filtros";
+"filter_solidarity_guide_categories" = "Categorías";
+"guide_display_feed" = "Alimentarse";
+"guide_display_housing" = "Alojarse";
+"guide_display_heal" = "Cuidarse";
+"guide_display_refresh" = "Refrescarse";
+"guide_display_orientation" = "Oriéntate";
+"guide_display_caring" = "Bienestar y actividades";
+"guide_display_reinsertion" = "Reintegrar";
+"guide_display_partners" = "Asociaciones y servicios activos en Entourage";
+"partners_entourage" = "Organización activa en Entourage";
+"guide_display_donate" = "Buscando donaciones";
+"guide_display_volunteer" = "buscando voluntarios";
+"guide_display_info_mutli" = "Lugares que ofrecen servicios de varias categorías.";
+
+"guide_display_toilettes" = "Baño";
+"guide_display_fontaines" = "fuentes";
+"guide_display_laver" = "Duchas";
+"guide_display_laverie" = "Lavanderías";
+
+"guide_display_vetements" = "Ropa y materiales";
+"guide_display_boite" = "Cajas de donación y lectura.";
+"guide_display_bagageries" = "Deposito de valijas";
+
+"DetailPoiContact" = "Contactar";
+"DetailPoiPublic" = "Audiencia";
+"DetailPoiLanguage" = "Lenguas habladas";
+"DetailPoiOpenTime" = "Horarios";
+
+"info_soliguide_1" = "La información sobre esta localización la proporciona Soliguide, cartografía solidaria.";
+"info_soliguide_2" = "Para obtener información aún más completa disponible en varios idiomas";
+"info_button_soliguide_consult" = "Consultar";
+"guideTitle" = "guía solidaria";
+
+/*******
+//Partner detail
+****/
+"title_association" = "Asociación";
+"title_asso_donation" = "Aceptar donaciones";
+"title_asso_volunteer" = "buscando voluntarios";
+"title_asso_information" = "Contactar";
+"title_asso_needs" = "Necesidades";
+"title_asso_accept_needs" = "Acepta donaciones";
+"title_asso_accept_volunteers" = "buscando voluntarios";
+"title_asso_contact" = "Contactar";
+"title_asso_phone" = "Número de teléfono";
+"title_asso_phone_light" = "Teléfono";
+"title_asso_website" = "Sitio web";
+"title_asso_address" = "DIRECCIÓN";
+"title_asso_address_big" = "Dirección postal";
+"title_asso_email_light" = "Correo electrónico";
+
+//Pop follow/unfollow partner
+"buttonFollowOnPartner" = "Abonado";
+"buttonFollowOffPartner" = "Suscribir";
+"partner_pop_unfollow_title" = "¿Quiere cancelar su suscripción?";
+"partner_pop_unfollow_message" = "Al darte de baja dejarás de recibir notificaciones, noticias y nuevos eventos de esta asociación.";
+
+/**********
+ Profile
+ */
+"myProfileButton" = "Mi perfil";
+"myParamsButton" = "Configuraciones";
+"profile_title" = "Perfil";
+"mainUserTitleActivity" = "Mi actividad";
+"mainUserTitleActions" = "Contribuciones";
+"mainUserTitleEvents" = "Eventos";
+"all_event_title" = "Todos los eventos";
+"my_event_title" = "mis eventos";
+"mainUserTitleEvents" = "Eventos";
+
+"mainUserTitleGroup" = "Grupo\nde vecinos";
+"mainUserTitleGroups" = "Grupos\nde vecinos";
+"mainUserTitleOuting" = "Evento\n";
+"mainUserTitleOutings" = "Eventos\n";
+
+"mainUserBioPlaceholder" = "¿Marcador de posición para orgánico?";
+"mainUserBirthPlaceholder" = "01-03";
+"mainUserEmailPlaceholder" = "correo electrónico@gmail.com";
+
+"mainUserTitleInfos" = "Mi informacion";
+"mainUserTitleBirth" = "Fecha de cumpleaños";
+"mainUserTitlePhone" = "Teléfono";
+"mainUserTitleEmail" = "Correo electrónico";
+"mainUserTitleCity" = "Ciudad y zona de actuación*";
+
+"mainUserTitleRadius" = "Dentro *";
+"mainUserDescRadius" = "* Tu zona de acción te permite definir hasta dónde puedes actuar y moverte";
+
+"mainUserCityRadius" = "En un radio de %d km";
+"mainUserCityRadiusBold" = "%d kilómetros";
+
+"memberSince" = "Miembro del séquito desde";
+
+/*******
+//Profile Edit
+ */
+"editUserProfileTitle" = "Editar mi información";
+"editUserBioPlaceholder" = "¿Marcador de posición para orgánico?";
+"editUserModPhoto" = "Editar mi foto";
+"editUserTitleFirstname" = "Nombre de pila";
+"editUserTitleLastname" = "apellido";
+"editUserTitleBio" = "Descripción (200 caracteres máximo)";
+"editUserTitleBirthday" = "Fecha de cumpleaños";
+"editUserTitlePhone" = "Teléfono";
+"editUserTitleEmail" = "Correo electrónico";
+"editUserTitleCity" = "Ciudad y zona de actuación*";
+"editUserTitleRadius" = "Dentro *";
+"editUserDescRadius" = "* Tu zona de acción te permite definir hasta dónde puedes actuar y moverte";
+"editProfileInterest_title" = "Mis intereses";
+
+"editUserPlaceholderFirstname" = "Piedra";
+"editUserPlaceholderLastname" = "Dupont";
+"editUserPlaceholderBirthday" = "01-03";
+"editUserPlaceholderEMail" = "pierre@gmail.com";
+"editUserPlaceholderBio" = "Pierre, 42 años, deseando conocerte :)";
+
+"editUserProfileValidate" = "Aplicar cambios";
+
+//Profile Edit error
+"editUser_error_firstname" = "El nombre debe contener al menos 2 letras.";
+"editUser_error_lastname" = "El nombre debe tener al menos 2 letras.";
+"editUser_error_bio" = "La biografía debe tener al menos 2 letras.";
+"editUser_error_email" = "Email inválido.";
+"editUser_error_birthday" = "Fecha de nacimiento invalida.";
+"editUser_error_profile" = "Error al editar el perfil.";
+
+//Profile edit interests
+"editUserInterestsTitle" = "cambiar mis intereses";
+"editUserInterestsInfo" = "Seleccione una o más categorías que le interesen.";
+"editUserInterestsValidate" = "Aplicar cambios";
+"editUserInterests_error" = "Por favor elija al menos una categoría";
+"interest_other_name" = "Otro";
+//profile edit location
+"profileEditLocationTitle" = "¿Dónde quieres actuar?";
+"profileEditLocationDescription" = "¡Entourage es una red social!\nDescubra iniciativas en su vecindario y establezca conexiones con sus vecinos.";
+"profileEditLocationLegend*" = "Añadir un lugar *";
+"profileEditLocationLegend_" = "Añadir un lugar";
+"profileEditLocationPlaceholder" = "ciudad o departamento";
+"profileEditLocationLegend" = "* Entourage no comunica esta dirección.";
+"profileEditLocationErrorAddress" = "Dirección inválida.";
+
+
+// take photo profile
+"take_photo_title" = "¿Agregar una imagen?";
+"take_photo_description" = "Con una foto, es inmediatamente mejor. Muéstranos tu más cálida sonrisa.";
+"take_photo" = "Tomar una fotografía";
+"take_gallery" = "Importar desde la galería";
+"description_move_photo" = "Mueve y haz zoom para ajustar la foto de perfil.";
+
+
+//Location
+"ask_permission_location_recenter_map" = "Para reenfocarte a tu alrededor debes activar la geolocalización";
+"no_location_recenter_map" = "La geolocalización encontró un error.";
+
+/*******
+//Settings
+ */
+"params_notifs" = "Notificaciones";
+"params_help" = "Ayuda y acerca de";
+"params_unlock" = "Desbloquear contactos";
+"params_share" = "Comparte la aplicación";
+"params_logout" = "Desconectarse";
+"params_suppress" = "Borrar mi cuenta";
+"params_logout_pop_title" = "Desconectar";
+"params_logout_pop_message" = "¿Quieres cerrar sesión?";
+"params_suppress_pop_title" = "Eliminación de cuenta";
+"params_suppress_pop_message" = "¿Quieres eliminar tu cuenta?";
+"params_suppress_pop_suppress" = "BORRAR";
+"params_suppress_pop_cancel" = "anular";
+"params_account_not_deleted" = "Cuenta no eliminada.\nError: %@";
+"params_account_deleted" = "Tu cuenta ha sido eliminada.";
+"params_logout_pop_logout" = "Desconectar";
+"params_logout_pop_cancel" = "anular";
+"params_suggest" = "¿Una sugerencia sobre la aplicación?";
+"menu_info_text_share" = "Buenos dias ! Gracias a la red Entourage participo en acciones solidarias entre vecinos con y sin vivienda. Únase a mí: %@";
+//Settings about menu
+"params_about_charte" = "Carta ética del entorno";
+"params_about_rate_app" = "Califica la aplicación";
+"params_about_faq" = "Preguntas frecuentes";
+"params_about_gift" = "Donar a Entourage";
+"params_about_ambassador" = "Conviértete en Embajador Voluntario";
+"params_about_cgu" = "Términos de servicio";
+"params_about_privacy" = "Política de confidencialidad";
+"params_about_email" = "Contacto Entorno";
+"params_about_licences" = "Licencia de código abierto";
+"params_about_partner" = "Nuestros patrocinadores y socios";
+"params_about_title" = "Ayuda y acerca de";
+
+//Settings Notifs
+"params_notifs_title" = "Gestión de notificaciones";
+"param_notifs_switch_notifs" = "Notificaciones";
+"param_notifs_switch_messages" = "Notificaciones de mensajes";
+"param_notifs_switch_groups" = "Notificaciones grupales";
+"param_notifs_switch_events" = "Notificaciones de eventos";
+"param_notifs_switch_actions" = "Notificaciones de donaciones y servicios";
+"param_notifs_validate" = "Aplicar cambios";
+
+//NOTIF
+"notif_contrib_title" = "Un vecino ofrece nueva ayuda. ¿Quizás esto te pueda interesar?";
+"notif_solicitation_title" = "Un vecino busca equipo. ¿Quizás podrías ayudarlo?";
+//Detail user profile
+"detail_user_send_message" = "Para escribir un mensaje";
+"detail_user_his_activity" = "Su actividad";
+"detail_user_his_interests" = "Centros de interés";
+"detail_user_button_signal" = "Reportar usuario";
+"report_user_title" = "Denunciar miembro";
+"report_user_mandatory" = "- OBLIGATORIO";
+"report_user_optional" = "- opcional";
+"report_user_description" = "Cuéntanos el motivo de tu denuncia";
+"report_user_message_description" = "Cuéntanos el motivo de tu denuncia";
+"report_user_next_button" = "Próximo";
+"report_user_validate_button" = "enviar a";
+"report_user_back_button" = "Atrás";
+"report_user_placeholder" = "Describe rápidamente el tema de tu informe.";
+"report_user_signal_error" = "Por favor elija al menos una causa.";
+"report_user_message_error" = "Por favor ingrese su mensaje. Gracias";
+"report_user_message_success" = "Usuario reportado";
+"parameter_publication" = "Configuración de publicaciones";
+"parameter_message" = "Configuración de mensajes";
+"parameter_action" = "Informar de un problema";
+"parameter_comment" = "Configuración de comentarios";
+"supress_button_title" = "BORRAR";
+"supress_alert_title_publi" = "Eliminar mensaje";
+"supress_alert_text_publi" = "¿Quieres eliminar esta publicación?";
+
+"supress_alert_title_message" = "Borrar mensaje";
+"supress_alert_text_message" = "¿Quieres eliminar este mensaje de la conversación?";
+
+"supress_alert_title_comment" = "Eliminar comentario";
+"supress_alert_text_comment" = "¿Quieres eliminar este comentario?";
+
+
+"deleted_post_text" = "Esta publicación ha sido eliminada.";
+
+//REPORT AND SUPPRESS POPUP
+"report_post_cell_title" = "Informe";
+"suppress_post_cell_title" = "eliminar mi publicación";
+"report_post_cell_subtitle" = "Reportar esta publicación al equipo de Entourage";
+"report_action_cell_subtitle" = "Informar de esta asistencia al equipo de Entourage";
+
+"report_comment_cell_title" = "Informe";
+"suppress_comment_cell_title" = "borrar mi comentario";
+"report_comment_cell_subtitle" = "Reportar este comentario al equipo de Entourage";
+
+"report_message_cell_title" = "Informe";
+"suppress_message_cell_title" = "borrar mi mensaje";
+"report_message_cell_subtitle" = "Reportar este mensaje al equipo de Entourage";
+
+
+"suppress_post_cell_subtitle" = "";
+"suppress_message_cell_subtitle" = "";
+"suppress_comment_cell_subtitle" = "";
+
+"deleted_message" = "Este mensaje ha sido eliminado";
+"deleted_comment" = "Este comentario ha sido eliminado.";
+
+/********
+ GROUP
+ */
+
+//Create group
+"neighborhoodCreatePopCloseBackTitle" = "Atención";
+"neighborhoodCreatePopCloseBackMessage" = "Si sale del formulario de creación de grupo, se perderá toda la información ingresada.";
+"neighborhoodCreatePopCloseBackQuit" = "Dejar";
+"neighborhoodCreatePopCloseBackCancel" = "anular";
+
+"neighborhood_create_group_bt_back" = "Anterior";
+"neighborhood_create_group_bt_next" = "Próximo";
+"neighborhood_create_group_bt_create" = "Crear";
+
+"neighborhood_create_group_title" = "Nuevo grupo";
+"neighborhood_create_title_phase" = "Escenario";
+"neighborhood_create_title_phase_nb" = "0%d.";
+
+"neighborhoodCreateNameTitle" = "Nombre del grupo: obligatorio";
+"neighborhoodCreateNamePlaceholderName" = "Los vecinos de París 18";
+"neighborhoodCreateNameSubtitle" = "- OBLIGATORIO";
+
+"neighborhoodCreateDescriptionTitle" = "Escriba una descripción";
+"neighborhoodCreateDescriptionSubtitle" = "requerido (150 caracteres máximo)";
+"neighborhoodCreateTitleDescriptionPlaceholder" = "Para quedar con vecinos del día 18";
+
+
+"neighborhoodCreatePlaceTitle" = "Agregar una ubicación (obligatorio)";
+"neighborhoodCreatePlaceSubtitle" = "- OBLIGATORIO";
+"neighborhoodCreatePlaceDescription" = "Entourage no comunica esta dirección a los usuarios.";
+"neighborhoodCreatePlaceInfos" = "Dirección, ciudad o departamento";
+
+//Error create group
+"neighborhoodCreateInputErrorMinCharName" = "El nombre del grupo debe contener al menos 2 caracteres.";
+"neighborhoodCreatePhase1_error" = "Por favor rellene todos los campos obligatorios";
+"neighborhoodCreatePhase2_error" = "Se debe seleccionar una categoría.";
+"neighborhoodCreateInputErrorMandatory" = "Campo a llenar";
+
+//Phase 2
+"neighborhoodCreateCatMessage" = "Seleccione la(s) categoría(s) que mejor describan el tema de discusión del grupo. - OBLIGATORIO";
+"neighborhoodCreateCatMessageMandatory" = "- OBLIGATORIO";
+"neighborhoodCreateCatOtherTitle" = "Describe la categoría de tu grupo en una palabra";
+"neighborhoodCreateCatOtherPlaceholder" = "Por favor introduzca un máximo de 80 caracteres";
+
+"neighborhoodCreatePhase2_others_error" = "Por favor especifique categoría miscelánea";
+
+//Phase 3
+"addPhotoCreateDescriptionTitle" = "Escribe un mensaje de bienvenida";
+"addPhotoCreateDescriptionSubtitle" = "opcional (200 caracteres máximo)";
+"addPhotoCreateDescriptionPlaceholder" = "¡Bienvenidos nuevos miembros! Leerán este mensaje tan pronto como se unan al grupo.";
+"addPhotoCreateTitle" = "Añadir una foto - obligatorio";
+"addPhotoCreateTitleHighlight" = "- OBLIGATORIO";
+"addPhotoCreateDescription" = "Puedes cambiarlo más tarde";
+"neighborhoodCreatePhase3_error" = "Por favor seleccione una imagen";
+
+//Phase completed
+"neighborhoodCreateValidateTitle" = "¡Tu grupo está en línea!";
+"neighborhoodCreateValidateSubtitle" = "Felicitaciones, acaba de crear un nuevo grupo. Para hacerlo más activo, crea la primera publicación.";
+
+"neighborhoodCreateValidatePostMessage" = "Deja un mensaje";
+"neighborhoodCreateValidatePass" = "Gastar";
+
+//Select Photo group
+"neighborhood_choosephoto_title" = "Selecciona una foto";
+"neighborhood_choosephoto_validate" = "Validar";
+"neighborhood_choosephoto_error" = "Por favor seleccione una imagen";
+
+/***
+* Edit group
+***/
+"neighborhood_edit_group_title" = "Editar grupo";
+"neighborhoodEditPhotoTitle" = "Editar foto";
+"neighborhoodEditCatMessage" = "Seleccione la(s) categoría(s) que mejor describan el tema de discusión del grupo. - OBLIGATORIO";
+"neighborhoodEditCatMessageHighlight" = "- OBLIGATORIO";
+"neighborhoodEdit_error" = "Por favor rellene todos los campos obligatorios";
+"neighborhoodEditValidateTitle" = "¡Tu grupo ha sido modificado! MARCADOR DE LUGAR";
+
+/***
+ * Create Post group
+ */
+"neighborhood_menu_post_event" = "Crear un evento en el grupo";
+"neighborhood_menu_post_post" = "Crear una publicación";
+
+"neighborhood_add_post_title" = "Crear una publicación";
+"neighborhood_add_post_message_title" = "escribe tu mensaje";
+"neighborhood_add_post_message_subtitle" = "";
+"neighborhood_add_post_message_placeholder" = "Escribe tu mensaje…";
+"neighborhood_add_post_image_title" = "Añadir una imagen";
+"neighborhood_add_post_image_subtitle" = "- opcional";
+"neighborhood_add_post_send_button" = "Compartir, repartir";
+"neighborhood_add_post_title_image" = "Añadir una imagen";
+"neighborhood_add_post_image_info_move" = "Mueve y haz zoom para ajustar la foto.";
+"neighborhood_add_post_image_bt_validate" = "Validar";
+"neighborhood_add_post_image_bt_cancel" = "BORRAR";
+"neighborhood_add_post_error" = "Error al publicar, por favor intenta nuevamente";
+/******
+ * Group / communauté
+ */
+"neighborhood_main_page_title" = "Grupos";
+"neighborhood_main_page_button_myGroups" = "Mis grupos";
+"neighborhood_main_page_button_discover" = "Yo descubro";
+"neighborhoodInputSearch" = "Buscar un grupo";
+"neighborhood_main_page_members" = "%d miembros";
+"neighborhood_main_page_member" = "%d miembro";
+"neighborhood_main_page_events_future_single" = "%d evento esperado";
+"neighborhood_main_page_events_future_plural" = "%d eventos planificados";
+
+"neighborhood_group_my_empty_title" = "Aún no te has unido a un grupo.";
+"neighborhood_group_my_empty_button" = "Descubre los grupos";
+"neighborhood_group_search_empty_title" = "Vaya, no hay resultados que coincidan con su búsqueda.";
+"neighborhood_group_search_empty_subtitle" = "Si no existe ningún grupo sobre este tema, ¡crea uno!";
+"neighborhood_group_discover_empty_title" = "Vaya, todavía no hay otros grupos a tu alrededor.";
+"neighborhood_group_discover_empty_subtitle" = "¡No dudes en crear nuevos grupos de vecinos!";
+/*************
+ * Group detail
+ */
+"title_is_ambassador" = "Embajador •";
+"title_is_admin" = "Administrador •";
+
+"neighborhood_detail_button_join_member" = "Miembro";
+"neighborhood_detail_button_join_join" = "Unirse";
+"welcome_message_placeholder" = "No dudes en enviar un primer mensaje para presentarte.";
+"welcome_message_title" = "¡Felicitaciones, eres miembro del grupo!";
+"welcome_message_btn_title" = "Me presento";
+
+"neighborhood_detail_members" = "%d miembros";
+"neighborhood_detail_member" = "%d miembro";
+"neighborhood_detail_about_title" = "Sobre el grupo";
+"neighborhood_detail_event_title" = "Eventos";
+"neighborhood_detail_button_more" = "Más información";
+
+"neighborhood_event_group_section_title_more" = "Ver más";
+"neighborhood_event_group_section_title" = "Eventos grupales";
+"neighborhood_post_group_section_title" = "Noticias";
+"neighborhood_post_group_section_new_posts_title" = "Nuevas publicaciones";
+"neighborhood_post_group_section_old_posts_title" = "Publicaciones antiguas";
+"neighborhood_empty_event_title" = "Aún no hay eventos planificados en este grupo";
+"neighborhood_empty_event_subtitle" = "Haga clic en “+” para crear uno";
+"neighborhood_empty_post_title" = "No hay publicaciones (todavía) en este grupo.";
+"neighborhood_empty_post_subtitle" = "¡Ey! ¡Esta es la oportunidad de compartir las primeras noticias para iniciar la discusión!";
+"neighborhood_about_group_title" = "Sobre el grupo";
+
+"neighborhood_post_noComment" = "Sin comentarios";
+"neighborhood_post_1Comment" = "%d comentario";
+"neighborhood_post_XComments" = "%d comentarios";
+
+"neighborhood_comments_title" = "Publicar comentarios";
+"neighborhood_comments_placeholder_discut" = "Conversar...";
+"neighborhood_comments_send" = "enviar a";
+"neighborhood_no_messageComment" = "Sin comentarios aún";
+"neighborhood_messageComment_notAuth" = "Para comentar esta publicación, únete al grupo ";
+
+"neighborhood_error_messageSend" = "Error al publicar, inténtalo de nuevo";
+"comment_post" = "Comentario...";
+//Params
+"neighborhood_params_title" = "Configuración de grupo";
+"neighborhood_params_cgu" = "Reglas del grupo";
+"neighborhood_params_share" = "Compartir grupo";
+"neighborhood_params_edit" = "Editar información del grupo";
+"neighborhood_params_signal" = "Informar de un problema";
+"neighborhood_params_cgu_title" = "El Reglamento";
+"neighborhood_params_cgu_description" = "Normas del grupo, lee atentamente.";
+"neighborhood_params_participant" = "partícipe";
+"neighborhood_params_participants" = "Participantes";
+"neighborhood_params_quit" = "abandonar el grupo";
+
+"neighborhood_params_notif_title" = "Notificarme de";
+"neighborhood_params_notif_all" = "Toda la actividad del grupo.";
+"neighborhood_params_notif_new_events" = "Nuevos eventos";
+"neighborhood_params_notif_new_messages" = "Nuevos mensajes";
+"neighborhood_params_notif_new_members" = "La llegada de nuevos miembros";
+
+"neighborhood_users_title" = "Ver miembros";
+"neighborhood_userInput_search" = "Buscar un miembro del grupo";
+
+//Pop leave group
+"params_leave_group_pop_title" = "abandonar el grupo";
+"params_leave_group_pop_message" = "¿Quieres dejar el grupo?";
+"params_leave_group_pop_bt_quit" = "Dejar";
+"params_leave_group_pop_bt_cancel" = "anular";
+//CGU
+"neighborhood_CGU_1_title" = "Actitud";
+"neighborhood_CGU_1" = "Los intercambios en grupo deben realizarse con respeto, confianza y asistencia mutua entre los miembros para que todos puedan sentirse seguros y en un ambiente cálido. Por tanto, no está permitido realizar comentarios degradantes, agresivos, insultantes, discriminatorios, insistentes, intolerantes o difamatorios.";
+"neighborhood_CGU_2_title" = "Comercio";
+"neighborhood_CGU_2" = "Los grupos son espacios de intercambio y ayuda mutua entre vecinos, por lo que está prohibida la publicidad, así como las propuestas de compra, venta o alquiler.";
+"neighborhood_CGU_3_title" = "Bote";
+"neighborhood_CGU_3" = "En general, no existe relación monetaria entre los miembros de los grupos, los premios acumulados están prohibidos.";
+"neighborhood_CGU_4_title" = "Temas";
+"neighborhood_CGU_4" = "La libre expresión benevolente es la regla en los grupos. Sin embargo, para respetar el carácter apolítico y laico de Entourage y en aras de proteger a las personas, no se autorizan temas relacionados con la política, la religión, la medicina o la sexualidad.";
+"neighborhood_CGU_5_title" = "protección de las personas";
+"neighborhood_CGU_5" = "Las publicaciones no pueden contener ningún dato personal que permita identificar y localizar con precisión a una persona ni datos sensibles sobre las personas (datos médicos, judiciales, origen ético, orientación sexual o política, etc.).";
+
+//Report Group / comment / publication
+"report_event_title" = "Reportar el evento";
+"report_group_title" = "Informar de un problema";
+"report_publication_title" = "Reportar publicacion";
+"report_comment_title" = "Reportar comentario";
+"report_contrib_title" = "Contribución del informe";
+"report_solicitation_title" = "Solicitud de informe";
+"report_conversation_title" = "Reportar la conversación";
+"report_group_message_success" = "Tu solicitud ha sido enviada. Nuestro equipo lo procesará lo más rápido posible.";
+"report_group_description" = "Cuéntanos el motivo de tu denuncia";
+"report_group_mandatory" = "- OBLIGATORIO";
+"report_group_next_button" = "Próximo";
+"report_group_signal_error" = "Por favor elija al menos una causa.";
+"report_group_message_description" = "Cuéntanos el motivo de tu denuncia";
+"report_group_optional" = "- opcional";
+"report_group_validate_button" = "enviar a";
+"report_group_back_button" = "Atrás";
+"report_group_placeholder" = "Describe rápidamente el tema de tu informe.";
+
+/** Home*/
+"home_title_welcome" = "¡Bienvenido %@!";
+"home_contrib_title" = "Mis acciones dentro de la red";
+"home_meeting_title" = "Hermosos encuentros Entourage";
+"home_no_meeting_title" = "Aún no hay reuniones de Entourage";
+"home_messages_title" = "Mensaje enviado";
+"home_events_title" = "Eventos\n";
+"home_groups_title" = "Grupos de vecinos";
+"home_event_title" = "Participación en un evento.";
+"home_group_title" = "grupo de vecinos";
+"home_no_message_title" = "Aún no se han enviado mensajes";
+"home_no_event_title" = "Asiste a tu primer evento";
+"home_no_group_title" = "¡No esperes más para unirte a un grupo de vecinos!";
+
+"home_actions_title" = "acabo de empezar";
+"home_help_title" = "Necesidad de ayuda";
+"home_help_subtitle" = "Tu guía en la aplicación";
+"home_cell_pedago" = "Todo lo que necesitas saber para actuar";
+"home_cell_map" = "Mapa de lugares solidarios";
+"home_cell_map_subtitle" = "Recepciones diurnas, consigna de equipaje…";
+
+"home_resources_title" = "Todo el contenido educativo.";
+"home_resource_title" = "Contenido educativo";
+"pedagogic_read" = "¡Leer!";
+"resource_all" = "Todo";
+"resource_understand" = "Comprender";
+"resource_act" = "Actuar";
+"resource_inspire" = "Inspírate";
+
+"resource_title_understand" = "Comprender";
+"resource_title_act" = "Actuar";
+"resource_title_inspire" = "Inspírate";
+
+/** Home popup congratulation */
+"home_congrat_title_single" = "Bien hecho ! ¡Has realizado %d nueva acción!";
+"home_congrat_title_plural" = "Bien hecho ! ¡Has completado %d nuevas acciones!";
+"home_congrat_title_next" = "¡Genial, hay algo nuevo en recepción!";
+
+//Home popup info encouters
+"home_info_encounter_pop_title" = "Para crear una gran reunión, \n ¡nada podría ser más sencillo!";
+"home_info_encounter_pop_subtitle" = "Tu contador aumenta con cada participación en un evento y con cada nueva contribución o solicitud realizada.";
+
+/** Events*/
+"passed_event" = "Eventos pasados";
+
+
+//EVENT TOP Cell
+"event_top_cell_organised_by" = "Organizado por";
+"event_top_cell_asso" = "Evento %@";
+
+
+//SHARE
+"share_solicitation" = "Esta solicitud podría interesarle.";
+"share_contribution" = "Esta contribución podría interesarte.";
+"share_event" = "Este evento de Entourage podría interesarte.";
+"share_group" = "Este grupo de vecinos de Entourage podría interesarte.";
+
+
+
+//Create
+
+"eventCreatePopCloseBackTitle" = "Atención";
+"eventCreatePopCloseBackMessage" = "Si sale del formulario de creación del evento, se perderá toda la información ingresada.";
+"eventCreatePopCloseBackQuit" = "Dejar";
+"eventCreatePopCloseBackCancel" = "anular";
+
+"event_create_group_bt_back" = "Anterior";
+"event_create_group_bt_next" = "Próximo";
+"event_create_group_bt_create" = "Validar";
+"eventCreateInputErrorMandatory" = "Campo a llenar";
+"event_mod_group_bt_mod" = "Editar";
+
+"event_mod_title" = "Editar mi evento";
+"event_create_title" = "nuevo evento";
+"event_create_title_phase" = "Escenario";
+"event_create_title_phase_nb" = "0%d.";
+
+"event_create_phase_1_name" = "Nombre del evento: obligatorio";
+"event_create_phase_1_name_placeholder" = "Dale al evento un nombre explícito";
+"event_create_phase_1_name_error" = "El nombre del evento debe contener al menos 2 caracteres.";
+"event_create_phase_1_desc" = "Descripción - requerido";
+"event_create_phase_1_desc_placeholder" = "Presente rápidamente lo que sucederá";
+"event_create_phase_1_desc_subtitle" = "(900 caracteres máximo)";
+"event_create_phase_1_photo" = "Foto - requerida";
+"event_create_phase_1_photo_desc" = "Puedes cambiarlo más tarde";
+
+"event_create_mandatory" = "- OBLIGATORIO";
+
+"event_create_phase2_date" = "Fecha requerida";
+"event_create_phase2_date_placeholder" = "dd/mm/aaaa";
+"event_create_phase2_time_start" = "Hora de inicio";
+"event_create_phase2_time_start" = "hh-mm";
+"event_create_phase2_time_end" = "Hora de finalización";
+"event_create_phase2_time_end_placeholder" = "hh-mm";
+
+"event_create_phase2_recurrence" = "Recurrencia - requerida";
+"recurrence_once" = "Solo una vez";
+"recurrence_week" = "Todas las semanas";
+"recurrence_every2Weeks" = "Cada dos semanas";
+"recurrence_month" = "Una vez al mes";
+"eventCreateInputErrorTimeStart" = "Elige fecha antes";
+"eventCreateInputErrorTimeEnd" = "Elija la hora de inicio antes";
+
+"event_create_phase3_title" = "Ubicación - requerida";
+"event_create_phase3_title_place" = "Agregar una ubicación (obligatorio)";
+"event_create_phase3_title_online" = "Agregar una URL (requerido)";
+
+"event_create_phase3_presentiel" = "En persona";
+"event_create_phase3_online" = "En línea";
+"event_create_phase3_online_error" = "campo obligatorio";
+"event_create_phase3_placeholder_place" = "Dirección, ciudad...";
+"event_create_phase3_placeholder_online" = "dirección web";
+
+"event_create_phase3_title_limit" = "¿El evento tiene un número limitado de plazas? - OBLIGATORIO";
+"event_create_phase3_title_nb_places" = "Número de plazas disponibles - obligatorio";
+"event_create_phase3_title_nb_places_placeholder" = "Número de plazas";
+"event_create_phase3_limit_yes" = "Sí";
+"event_create_phase3_limit_no" = "No";
+"event_create_phase3_limit_error" = "campo obligatorio";
+
+"event_create_phase4_title" = "Seleccione la(s) categoría(s) que mejor describan el tema del evento. - OBLIGATORIO";
+
+"event_create_phase5_title" = "Comparte el evento en tus grupos\n: obligatorio";
+"event_share_option" = "Compartir evento";
+"event_create_phase5_desc" = "Solo puedes compartir el evento con los grupos de los que eres miembro. Su evento será entonces visible en los grupos seleccionados y todos los miembros de un grupo podrán participar.";
+"createEventNotShare" = "No compartir en ningún grupo.";
+"createEventShare" = "Compartir en uno o más grupos";
+
+"eventCreateEnd_button_show" = "Ver mi evento";
+"eventCreateEnd_title" = "¡Tu evento está en línea!";
+"eventCreateEnd_subtitle" = "Félicitations, vous venez de créer un nouvel événement. Pour le rendre plus actif, parlez-en sur vos groupes !
+";
+
+"eventCreatePhase1_error" = "Por favor rellene todos los campos obligatorios";
+"eventCreatePhase2_error" = "Por favor rellene todos los campos obligatorios";
+"eventCreatePhase3_error" = "Por favor rellene todos los campos obligatorios";
+"eventCreatePhase4_error" = "Se debe seleccionar una categoría.";
+"eventCreatePhase5_error" = "Se debe seleccionar al menos un grupo.";
+
+"eventModPopCloseBackTitle" = "Atención";
+"eventModPopCloseBackMessage" = "Si sale del formulario de edición del evento, se perderá toda la información ingresada.";
+"eventModPopCloseBackQuit" = "Dejar";
+"eventModPopCloseBackCancel" = "anular";
+
+//Event group list
+"event_members_cell_list" = "%d participantes";
+"event_member_cell_list" = "%d participante";
+"event_group_title_list" = "El grupo también organiza:";
+"event_places_detail" = "%d lugares";
+"event_places_distance" = "%@ a %@";
+
+
+
+//Event pop choose location
+"event_location_title" = "Localiza tu evento";
+"event_location_detail" = "La dirección se agregará a la descripción detallada de su evento.";
+
+/* Home Event*/
+"event_main_page_title" = "Eventos";
+"event_main_page_button_myEvents" = "Participo";
+"event_main_page_button_discover" = "Yo descubro";
+"event_event_my_empty_title" = "Aún no te has unido a un evento";
+"event_event_my_empty_subtitle" = "¡Esta es la oportunidad de enterarte de lo que sucede cerca de ti o de crear un nuevo evento!";
+"event_event_discover_empty_title" = "Vaya, no hay eventos a tu alrededor";
+"event_event_discover_empty_subtitle" = "Si no hay eventos cerca de usted, puede ampliar su área de búsqueda.";
+"event_no_event_but_discover" = "¡Esta es una oportunidad para descubrir qué está sucediendo cerca de nosotros o para crear un nuevo evento!";
+"event_no_event_go_create" = "No hay eventos a tu alrededor. ¡No dudes en crear uno!";
+"event_event_discover_clear_filters" = "Restablecer filtros";
+"event_title_btn_discover_event" = "Descubre los eventos";
+"event_title_btn_create_event" = "Crear un evento";
+"event_event_discover_empty_search_title" = "¡Maldita sea, no hay resultados que coincidan con tu búsqueda!";
+"event_event_discover_empty_search_subtitle" = "¿No encuentras el evento de tus sueños? No esperes más para crearlo o ampliar tu área de búsqueda.";
+"event_detail_button_more" = "Más información";
+
+"event_detail_button_participe_ON" = "Participar";
+"event_detail_button_participe_OFF" = "Participar";
+"event_detail_about_title" = "A saber";
+"event_detail_post_section_title" = "Noticias";
+"event_detail_post_section_new_posts_title" = "Nuevas publicaciones";
+"event_detail_post_section_old_posts_title" = "Publicaciones antiguas";
+
+"event_time_detail_full" = "De %@ a %@";
+"event_places_detail_full" = "Número limitado de plazas: %d";
+"event_created_full" = "Creó el %@";
+"event_updated_full" = "Modificó el %@";
+"event_canceled_full" = "Cancelado el %@";
+"event_cancel_alone" = "Cancelado";
+
+"event_empty_post_title" = "No hay publicación (aún) sobre este evento.";
+"event_empty_post_subtitle" = "¿Por qué no iniciar la discusión con tus vecinos?";
+
+"event_users_title" = "Ver participantes";
+"event_userInput_search" = "Buscar un asistente al evento";
+
+"event_detail_full_title" = "Sobre el evento";
+
+"event_detail_groups_title" = "Grupos asociados:";
+"event_detail_group_title" = "Grupo asociado:";
+"event_detail_cats_title" = "Categorías:";
+"event_detail_cat_title" = "Categoría :";
+"event_cancel_list" = "Cancelado";
+"event_canceled" = "Evento cancelado";
+
+//Event filters
+"event_filter_title" = "Eventos - Filtros de búsqueda";
+"event_filter_profile" = "A la dirección proporcionada en mi perfil.";
+"event_filter_google" = "En una nueva dirección";
+"event_filter_gps" = "Alrededor de mi ubicación actual";
+"event_filter_search" = "Buscar :";
+"event_filter_radius_radius" = "Dentro :";
+"event_filter_error_place" = "Por favor seleccione una dirección";
+"event_filter_google_placeholder" = "Elige una dirección";
+"event_filter_position_placeholder" = "Mi posición";
+
+//Pop leave/cancel event
+"params_leave_event_pop_title" = "abandonar el evento";
+"params_leave_event_pop_message" = "¿Quieres abandonar el evento?";
+"params_leave_event_pop_bt_quit" = "Dejar";
+"params_leave_event_pop_bt_cancel" = "anular";
+
+"params_cancel_event_pop_bt_delete" = "anular";
+"params_cancel_event_pop_bt_cancel" = "Atrás";
+"params_cancel_event_pop_title" = "Cancelar evento";
+"params_cancel_event_pop_message" = "¿Quieres cancelar el evento? Todos los participantes serán notificados de la cancelación.";
+"params_cancel_event_recurrency_title" = "Cancelar un evento recurrente";
+"params_cancel_event_recurrency_choice1" = "Este evento";
+"params_cancel_event_recurrency_choice2" = "Este evento y todos los posteriores.";
+
+"event_mod_pop_title" = "Editar un evento recurrente";
+"event_mod_pop_validate_bt" = "Validar";
+"event_mod_ok" = "Evento modificado PLACEHOLDER";
+"event_mod_nok" = "Error al editar el evento. MARCADOR DE LUGAR";
+"event_create_ok" = "Error al crear el evento. MARCADOR DE LUGAR";
+//Contacts pop add
+"event_add_contact_accept" = "Agregar";
+"event_add_contact_cancel" = "anular";
+"event_add_contact_yes" = "Sí";
+"event_add_contact_no" = "No";
+"event_add_contact_title" = "¡Tu registro es tomado en cuenta!";
+"event_add_contact_description" = "¿Quieres agregar este evento a tu calendario personal?";
+
+"event_add_contact_places_title" = "Evento con plazas limitadas";
+"event_add_contact_places_description" = "Tenga en cuenta que este evento tiene plazas limitadas, su inscripción no está garantizada. El administrador del evento se comunicará contigo para confirmar tu reserva de lugar.";
+"event_add_contact_error" = "Para agregar el evento a su calendario, debe habilitar el acceso al calendario";
+"event_add_contact_refuse" = "Rechazar";
+"event_add_contact_activate" = "Permitir";
+
+//Event settings
+"event_params_title" = "Configuración de eventos";
+"event_params_cgu" = "Carta de eventos";
+"event_params_edit" = "Editar evento";
+"event_params_recurrency" = "Editar recurrencia";
+"event_params_signal" = "Reportar el evento";
+"event_params_cgu_title" = "Carta de eventos";
+"event_params_cgu_description" = "Carta de eventos, lea atentamente.";
+"event_params_participant" = "partícipe";
+"event_params_participants" = "Participantes";
+"event_params_quit" = "abandonar el evento";
+"event_params_cancel" = "Cancelar evento";
+
+"event_params_notif_title" = "Notificarme de";
+"event_params_notif_all" = "Toda la actividad del evento";
+"event_params_notif_new_publications" = "Nuevas publicaciones";
+"event_params_notif_new_members" = "La llegada de nuevos participantes";
+
+"event_edit_recurrency_title" = "Reaparición";
+"event_edit_recurrency_date" = "Fecha del evento";
+"event_edit_recurrency_back" = "anular";
+"event_edit_recurrency_next" = "Validar";
+
+//Event MEssages
+"event_comments_title" = "Publicar comentarios";
+"event_comments_placeholder_discut" = "Conversar...";
+"event_comments_send" = "enviar a";
+"event_no_messageComment" = "Sin comentarios aún";
+"event_messageComment_notAuth" = "Para comentar esta publicación, únete al evento ";
+//CGU
+"event_CGU_1_title" = "Sé amable";
+"event_CGU_1" = "Utilizo la aplicación con fines de ayuda mutua para personas en situaciones muy precarias o excluidas.";
+"event_CGU_2_title" = "Acuerdo de cobro revertido";
+"event_CGU_2" = "Aseguro el consentimiento de las personas interesadas antes de realizar una acción.";
+"event_CGU_3_title" = "Garantizar la protección de las personas.";
+"event_CGU_3" = "Garantizo no comunicar datos personales sensibles (médicos, jurídicos, etc.), ni que permitan la identificación o localización precisa de personas.";
+"event_CGU_4_title" = "Estar unidos, sin distinción";
+"event_CGU_4" = "Me comprometo a no hacer distinción de raza, color, sexo, idioma, religión, opinión política, propiedad, nacimiento o cualquier otra condición.";
+
+//MARK: - Actions -
+"action_menu_demand" = "Crear una solicitud";
+"action_menu_contrib" = "Crear una contribución";
+"action_create_title_phase" = "Escenario";
+"action_create_title_phase_nb" = "0%d.";
+"action_create_group_bt_back" = "Anterior";
+"action_create_group_bt_next" = "Próximo";
+"action_create_group_bt_create" = "Validar";
+
+"actionCreatePopCloseBackTitle" = "Atención";
+"actionCreatePopCloseBackMessage" = "Si sale del formulario de creación %@, se perderá toda la información ingresada.";
+"actionCreatePopCloseBackQuit" = "Dejar";
+"actionCreatePopCloseBackCancel" = "anular";
+
+"action_solicitation" = "pedido";
+"action_contrib" = "contribución";
+
+"action_create_title_contrib" = "Nueva contribución";
+"action_create_title_solicitation" = "Nueva solicitud";
+"action_charte_title" = "Código ético";
+"action_create_info_contrib" = "Vous cherchez à proposer une contribution qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_contrib_underline" = "Aprende más aquí.";
+"action_create_info_demand" = "Vous cherchez à proposer une demande qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_demand_underline" = "Aprende más aquí.";
+
+"action_create_mandatory" = "- OBLIGATORIO";
+"action_create_phase_1_name" = "Título de la acción: obligatorio";
+"action_create_phase_1_name_placeholder" = "Nombra tu %@";
+"action_create_phase_1_name_subtitle" = "Dale un nombre corto y explícito a tu %@";
+"action_create_phase_1_name_error" = "El nombre %@ debe contener al menos 2 caracteres.";
+
+"action_add_post_title_image" = "Añadir una imagen";
+
+"action_create_phase_1_desc" = "Descripción - requerido";
+"action_create_phase_1_desc_placeholder" = "Describe tu %@";
+"action_create_phase_1_desc_subtitle" = "Describe detalladamente el %@ que ofreces";
+
+"action_PhotoCreateTitle" = "Añadir una foto (opcional)";
+"action_PhotoCreateTitleHighlight" = "- opcional";
+"action_PhotoCreateDescription" = "Puedes cambiarlo más tarde";
+"action_CreatePhase1_error" = "Por favor seleccione una imagen";
+
+"action_create_title_category" = "Seleccione la categoría que mejor describa su %@. - OBLIGATORIO";
+"action_create_title_category_mandatory" = "- OBLIGATORIO";
+
+//Edit location page
+"actionCellLocationTitle" = "Localiza tu %@";
+"actionCellLocationDescription" = "Tu ubicación precisa no será compartida, puedes poner una ubicación distinta al área de acción de tu perfil.";
+
+"actionEditLocationTitle" = "Localiza tu %@";
+"actionEditLocationDescription" = "Tu ubicación precisa no será compartida, puedes poner una ubicación distinta al área de acción de tu perfil.";
+"actionEditLocationLegend" = "Añadir un lugar";
+
+"actionCreatePhase1_error" = "Por favor rellene todos los campos obligatorios.";
+"actionCreatePhase2_error" = "Se debe seleccionar una categoría.";
+"actionCreatePhase3_error" = "Por favor seleccione una dirección.";
+"action_create_nok" = "Error al crear %@. MARCADOR DE LUGAR";
+//Charte Actions
+"accept_charte" = "Aceptar";
+"action_charte_1_title" = "Ayuda mutua";
+"action_charte_1" = "La aplicación permite crear nuevos encuentros entre vecinos y propiciar momentos de intercambio. La asistencia remota (conducción, entrega, cheque regalo, premio acumulado, etc.) no está autorizada.";
+"action_charte_2_title" = "Contribuciones y solicitudes";
+"action_charte_2" = "Puedo solicitar u ofrecer bienes materiales (equipamiento, ropa, etc.), servicios (lavandería, impresión de documentos, etc.) y tiempo para compartir (café, actividad, etc.).\nI no puede solicitar ni ofrecer asistencia financiera ni alojamiento ni comida. ayuda. Pero si lo necesito puedo contactar con el moderador que me guiará.";
+"action_charte_3_title" = "Consentir";
+"action_charte_3" = "Cuando publico una solicitud para un tercero, me aseguro de obtener su consentimiento de antemano.";
+"action_charte_4_title" = "No discriminacion";
+"action_charte_4" = "Me comprometo a entablar relaciones con personas sin discriminación (raza, religión, orientación sexual, opinión política, etc.).";
+"action_charte_5_title" = "protección de las personas";
+"action_charte_5" = "Garantizo que mis acciones no contienen ningún dato personal (apellido, número de teléfono, dirección precisa, etc.) que permita identificar y localizar con precisión a una persona, ni ningún dato sensible (médico, jurídico, etc.).";
+
+//Create action end
+"action_create_close_button" = "Para terminar";
+"contribCreateEnd_title" = "¡Tu contribución ha sido creada!";
+"contribCreateEnd_subtitle" = "Felicitaciones, acaba de crear una nueva contribución. Para hacerlo más visible, ¡hablad de ello en vuestros grupos!";
+"solicitationCreateEnd_title" = "¡Tu solicitud ha sido creada!";
+"solicitationCreateEnd_subtitle" = "Felicitaciones, acaba de crear una nueva solicitud. Para hacerlo más visible, ¡hablad de ello en vuestros grupos!";
+
+
+//Home Actions
+"actions_main_page_title" = "Ayuda mutua";
+"actions_main_page_button_contribs" = "Contribuciones";
+"actions_main_page_button_solicitations" = "Peticiones";
+"action_contrib_empty_title" = "Ninguna contribución coincide con su área de búsqueda.";
+"action_contrib_empty_subtitle" = "Puedes ampliar tu campo de búsqueda o crear una contribución.";
+"action_solicitation_empty_title" = "Ninguna solicitud coincide con su área de búsqueda";
+"action_solicitation_empty_subtitle" = "Puede ampliar su campo de búsqueda o crear una solicitud";
+"action_filter_category" = "Categoría";
+"action_filter_categories" = "Categorías";
+"action_filter_title" = "Filtrar por categorías";
+"action_filter_location_title" = "Filtrar por ubicación";
+//detail my actions
+"action_your" = "Tu acción";
+"actions_my_title" = "Mis anuncios";
+"action_detail_title_location" = "Ubicación";
+"atKm" = "%.4g km de mí";
+"AtKm" = "%.4g km de mí";
+"Atm" = "%.4g m de mí";
+"atm" = "%.4g m de mí";
+"Contrib" = "Contribución";
+"Demand" = "Pedido";
+
+"action_created_at" = "Creado %@ por";
+"action_member_since" = "Miembro desde %@";
+"action_cancel" = "Anuncio eliminado";
+
+"params_cancel_action_pop_bt_delete" = "anular";
+"params_cancel_action_pop_bt_cancel" = "Atrás";
+"params_cancel_action_pop_title" = "Cancelar acción";
+"params_cancel_action_pop_message" = "¿Quieres cancelar la acción?";
+
+"params_cancel_action_pop_bt_yes" = "Sí";
+"params_cancel_action_pop_bt_no" = "No";
+"params_cancel_action_pop_bt_valid" = "enviar a";
+"params_cancel_action_pop_title" = "Eliminar %@";
+"params_cancel_action_pop_subtitle" = "¿Tu %@ fue exitoso?";
+
+"params_cancel_action_pop_comment" = "Cuéntanos más sobre tu experiencia - opcional";
+"action_optional" = "- opcional";
+"params_cancel_action_pop_comment_placeholder" = "¡Cuéntenos su experiencia!";
+
+"action_view_canceled_title" = "El anuncio ha sido eliminado...";
+"action_view_canceled_contrib_subtitle" = "Puedes buscar otras aportaciones que puedan ser de tu interés o publicar un anuncio.";
+"action_view_canceled_demand_subtitle" = "Puede buscar otras solicitudes que puedan ser de su interés o publicar un anuncio.";
+"action_view_canceled_demand_button" = "Lista de solicitudes";
+"action_view_canceled_contrib_button" = "Lista de contribuciones";
+
+
+//CGU
+"action_params_cgu_title" = "Código ético";
+"action_params_cgu_description" = "";
+"action_CGU_1_title" = "Ayuda mutua";
+"action_CGU_1" = "La aplicación permite crear nuevos encuentros entre vecinos y propiciar momentos de intercambio. La asistencia remota (conducción, entrega, cheque regalo, premio acumulado, etc.) no está autorizada.";
+"action_CGU_2_title" = "Contribuciones y solicitudes";
+"action_CGU_2" = "Puedo pedir u ofrecer bienes materiales (equipamiento, ropa, etc.), servicios (lavandería, impresión de documentos, etc.) y tiempos para compartir (café, actividad, etc.). No puedo solicitar ni ofrecer asistencia financiera, alojamiento o asistencia alimentaria. Pero si lo necesito puedo contactar con el moderador que me guiará.";
+"action_CGU_3_title" = "Consentir";
+"action_CGU_3" = "Cuando publico una solicitud para un tercero, me aseguro de obtener su consentimiento de antemano.";
+"action_CGU_4_title" = "No discriminacion";
+"action_CGU_4" = "Me comprometo a entablar relaciones con personas sin discriminación (raza, religión, orientación sexual, opinión política, etc.).";
+"action_CGU_5_title" = "protección de las personas";
+"action_CGU_5" = "Garantizo que mis acciones no contienen ningún dato personal (apellido, número de teléfono, dirección precisa, etc.) que permita identificar y localizar con precisión a una persona, ni ningún dato sensible (médico, jurídico, etc.).";
+
+"edit_edit_contrib_title" = "Editar\ncontribución";
+"edit_edit_solicitation_title" = "Editar\nsolicitud";
+
+/*
+ Messages
+ */
+"Messages_title" = "Discusiones";
+"messaging_message_placeholder_discut" = "Nuevo mensaje";
+"messaging_message_title" = "Conversación";
+"messaging_message_send" = "enviar a";
+"messaging_message_no_message" = "0 mensajes más";
+
+"message_title_new_conv" = "Nueva conversación";
+"message_subtitle_new_conv" = "Aún no has interactuado con este usuario. Si hay un problema, puedes reportar la conversación en la configuración.";
+"message_error_create_conversation" = "Error al crear la conversación";
+
+"conversation_params_title" = "Configuraciones de chat";
+"conv_param_title_profil" = "Ver perfil";
+"conv_param_title_signal" = "Informe";
+"conv_param_subtitle_signal" = "Informe esta conversación al equipo de Entourage.";
+"conv_param_title_members" = "Miembros de la conversación";
+"conv_param_title_signal_action" = "Informe";
+"conv_param_subtitle_signal_action" = "Informe esta conversación al equipo de Entourage.";
+"conv_param_qui_action" = "dejar la conversación";
+"conv_param_title_block" = "Bloquear";
+"conv_param_subtitle_block" = "%@ ya no podrá escribirle.";
+
+//Pop leave conversation
+"params_leave_conv_pop_title" = "dejar la conversación";
+"params_leave_conv_pop_message" = "¿Quieres abandonar la conversación?";
+"params_leave_conv_pop_bt_quit" = "Dejar";
+"params_leave_conv_pop_bt_cancel" = "anular";
+
+//Pop block user inside conversation
+"params_block_user_conv_pop_title" = "Bloquear usuario";
+"params_block_user_conv_pop_message" = "¿Quieres bloquear %@?\nEste usuario ya no podrá enviarte mensajes. Puedes desbloquear al usuario en cualquier momento desde la configuración de tu perfil.";
+"params_block_user_conv_pop_bt_quit" = "Bloquear";
+"params_block_user_conv_pop_bt_cancel" = "anular";
+
+"params_block_user_conv_pop_validate_title" = "Bloquear %@";
+"params_block_user_conv_pop_validate_subtitle" = "Este contacto ha sido bloqueado.";
+"params_block_user_conv_pop_validate_bt" = "DE ACUERDO";
+
+"message_user_blocked_by_me_list" = "Has bloqueado este contacto";
+"message_user_blocked_by_me" = "Has bloqueado a %@. Ya no puedes enviarle un mensaje.";
+"message_user_blocked_by_other" = "Ya no puedes enviar mensajes a %@. Esta conversación ha sido bloqueada.";
+
+"settingsUnblockUserInfo" = "Seleccione uno o más contactos para desbloquear.";
+"settingsUnblockBT" = "Desatascar";
+"settingsUnblockUser_error" = "Por favor elija al menos un contacto";
+
+"params_unblock_user_pop_title" = "Desbloquear contacto";
+"params_unblock_users_pop_title" = "Desbloquear contactos";
+"params_unblock_user_pop_message" = "¿Quieres desbloquear %@?\nPodréis enviaros mensajes entre vosotros nuevamente.";
+"params_unblock_user_pop_bt_unblock" = "Desatascar";
+"params_unblock_user_pop_bt_cancel" = "anular";
+
+"params_unblock_user_pop_validate_title" = "Desbloquear %@";
+"params_unblock_user_pop_validate_subtitle" = "Este contacto acaba de ser desbloqueado, podéis volver a escribiros.";
+"params_unblock_users_pop_validate_subtitle" = "Estos contactos acaban de ser desbloqueados, podéis volver a escribiros.";
+"params_unblock_user_pop_validate_bt" = "DE ACUERDO";
+
+"param_empty_blocked_user" = "No has bloqueado ningún contacto.";
+
+"conversation_users_title" = "Miembros de la conversación";
+"conversation_userInput_search" = "Buscar un miembro del chat";
+"conversation_search_empty_title" = "¡Ups, no hay resultados que coincidan con tu búsqueda!";
+
+"notifs_title" = "Notificaciones";
+"duration_month" = "%d mes";
+"duration_weeks" = "%d semana";
+"duration_days" = "%d j";
+"duration_hours" = "%d horas";
+"duration_minutes" = "%d mín.";
+"duration_secondes" = "En este momento";
+
+
+//Pwd change
+"param_title_change_pwd" = "Cambiar la contraseña";
+"param_change_pwd_title" = "Contraseña";
+"placeholder_changePwd" = "Ingrese el código";
+"oldCode" = "Código de acceso antiguo";
+"newCode" = "Nuevo código de acceso";
+"confirmCode" = "Confirma código";
+"pwdError" = "código incorrecto";
+"pwdShort" = "La nueva contraseña es demasiado corta";
+"pwdDiff" = "Las contraseñas no coinciden";
+"pwdUpdated" = "Actualización de contraseña";
+"pwdUpdatedErr" = "Error de actualización";
+
+
+//WELCOME STRINGS
+
+"welcomeone_title" = "Bienvenido a la red social \n verdaderamente social";
+"welcomeone_content_main" = "Para muchos, la calle es un lugar de paso.\nPara algunos, es la vida diaria.\nAsí que, para empezar, conoce a aquellos\nquienes la viven todos los días.";
+"welcomeone_content" = "Encuentre nuestro contenido de concientización aquí";
+
+"welcome_three_title_event" = "6.000 personas hicieron nuevos amigos en un evento de Entourage";
+"welcome_three_title_demand" = "Echa una mano a tus vecinos";
+"welcome_three_title_contrib" = "¿No hay apoyo a tu alrededor? ¡Créalo!";
+
+"welcome_two_no_group" = "Preséntate ante tu grupo de vecinos";
+
+"welcome_three_maintext_event" = "Encuentra el evento que te interesa y ven a disfrutar de un momento agradable";
+"welcome_three_maintext_demand" = "Echa un vistazo a las solicitudes publicadas cerca de ti:";
+"welcome_three_maintext_contrib" = "Una buena forma de crear conexiones entre vecinos es compartir tus intereses, tus pasiones o simplemente un café para conocerse.";
+
+"welcome_three_mainbutton_event" = "Descubre los eventos";
+"welcome_three_mainbutton_demand" = "Descubrir solicitudes";
+"welcome_three_mainbutton_contrib" = "Crear una contribución";
+
+"welcome_three_contrib_example_one_title" = "charlar tomando un cafe";
+"welcome_three_contrib_example_one_distance" = "10 m de mí";
+"welcome_three_contrib_example_one_loca" = "París (75010)";
+"welcome_three_contrib_example_one_date" = "21 de junio de 2022 a las 12 h.";
+
+"welcome_three_contrib_example_two_title" = "Donación de ropa de mujer.";
+"welcome_three_contrib_example_two_distance" = "10 m de mí";
+"welcome_three_contrib_example_two_loca" = "París (75010)";
+"welcome_three_contrib_example_two_date" = "21 de junio de 2022 a las 12 h.";
+
+"welcome_four_main_button_title" = "Iniciar el cuestionario";
+"welcome_four_title" = "Tú decides";
+"welcome_four_main_text" = "¿Qué tal un pequeño test para deconstruir prejuicios sobre el mundo de la calle?";
+"welcome_four_second_text" = "En su opinión, ¿qué porcentaje de personas sin hogar tiene teléfono móvil?";
+
+"welcome_five_title" = "Ya han pasado 10 días: ¡bienvenidos a la familia!";
+"welcome_five_main_text_title" = "Es una locura cómo pasa el tiempo cuando estás en buena compañía.\n\nAhora ayúdanos a hacer crecer la red Entourage: ¡trae la tuya!";
+"welcome_five_main_button_title" = "Comparte la aplicación";
+
+"custom_dialog_action_title_one_contrib" = "¿Dónde está tu aporte?";
+"custom_dialog_action_title_one_demand" = "¿Dónde está tu petición?";
+"custom_dialog_action_title_two" = "gracias por su paciencia";
+"custom_dialog_action_title_three" = "Buena noticia !";
+
+"custom_dialog_action_content_one_contrib" = "Votre action \"%@\" est-elle terminée ?";
+"custom_dialog_action_content_one_demande" = "%@\n\n ¿Encontraste lo que buscabas?";
+"custom_dialog_action_content_two_contrib" = "Consejo: mira las contribuciones. Un vecino podría ofrecerte lo que buscas";
+"custom_dialog_action_content_two_demande" = "Consejo: busque solicitudes cerca de usted. A un vecino le puede interesar";
+"custom_dialog_action_content_three_contrib" = "Muchas gracias por su compromiso. Podremos eliminar tu contribución.";
+"custom_dialog_action_content_three_demande" = "Muchas gracias por su compromiso. Podremos eliminar su solicitud.";
+"custom_dialog_action_two_button_contrib" = "Ver contribuciones";
+"custom_dialog_action_two_button_demand" = "Ver solicitudes";
+
+"pop_up_rugby_france_title" = "Vivamos juntos la Copa Mundial de Rugby";
+"pop_up_rugby_france_content" = "Les plus belles rencontres ne se font pas forcément au stade ! Rejoignez le groupe \"Vivons le sport ensemble\"";
+
+
+/* New Home string */
+"home_v2_title" = "La app que recrea los vínculos entre vecinos";
+
+"home_v2_title_action" = "Echar una mano";
+"home_v2_subtitle_action" = "¡Tus vecinos te necesitan!";
+"home_v2_btn_more_action" = "Ver todas las solicitudes";
+
+"home_v2_title_action_contrib" = "¿Necesitas ayuda?";
+"home_v2_subtitle_action_contrib" = "¡Descubre lo que ofrecen tus vecinos!";
+"home_v2_btn_more_action_contrib" = "Ver todas las contribuciones";
+
+"home_v2_title_event" = "Participa en un evento solidario";
+"home_v2_subtitle_event" = "Mucha solidaridad cerca.";
+"home_v2_btn_more_event" = "Ver todos los eventos";
+
+"home_v2_title_group" = "Tus grupos de vecinos";
+"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida.";
+"home_v2_btn_more_group" = "Ver todos los grupos";
+
+"home_v2_title_map" = "Descubra direcciones útiles";
+"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas.";
+"home_v2_button_map" = "Mapa de lugares solidarios cerca de ti";
+
+"home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";
+"home_v2_subtitle_pedago" = "Luchar contra la precariedad es como todo, ¡se aprende!";
+"home_v2_btn_more_pedago" = "Ver todos los artículos";
+
+"home_v2_pedago_item_tag_all" = "Todo";
+"home_v2_pedago_item_tag_act" = "Actuar";
+"home_v2_pedago_item_tag_inspire" = "Inspirar";
+"home_v2_pedago_item_tag_understand" = "Comprender";
+
+"home_v2_title_help" = "Estás perdido ?";
+"home_v2_subtitle_help" = "¡Que no cunda el pánico, empieza paso a paso!";
+"home_v2_btn_more_help" = "Ver todos los artículos";
+
+"home_v2_help_title_one" = "¿Cómo crear un grupo?";
+"home_v2_help_title_two" = "¿Cómo crear un evento?";
+"home_v2_help_title_three" = "¿Alguna pregunta?\nContacto";
+
+"home_v2_pedag_item_lenght_title" = "%d lectura mínima";
+
+"home_v2_action_type_social" = "Social";
+"home_v2_action_type_clothes" = "Ropa";
+"home_v2_action_type_equipment" = "Equipo";
+"home_v2_action_type_hygiène" = "Higiene";
+"home_v2_action_type_services" = "Servicios";
+"home_v2_action_type_other" = "Otros";
+
+"home_v2_hz_item_title" = "Oye, parece un poco tranquilo por aquí...";
+"home_v2_hz_item_subtitle" = "¿Y si trajeras un poco de solidaridad a tu ciudad? ¡Entourage te da las claves para empezar!";
+"home_v2_hz_item_button" = "Más información";
+
+"lang_fr" = " - Francés";
+"lang_en" = " - Inglés";
+"lang_de" = " - Alemán";
+"lang_uk" = " - Ucraniano";
+"lang_es" = " - Español";
+"lang_ro" = " - Rumano";
+"lang_ar" = " - Árabe";
+"lang_pl" = " - Polaco";
+
+"params_language" = "Idioma";
+"onboarding_lang_bienvenue" = "¡Bienvenido!";
+"onboarding_lang_select" = "Seleccione su idioma";
+"onboarding_lang_suivant" = "Siguiente";
+"translation_bottom_fragment_title" = "Traducimos automáticamente los mensajes escritos por los ciudadanos.";
+"translation_bottom_fragment_main_title" = "Traducción";
+
+"action_social_name" = "Tiempo de compartir";
+"action_social_subname" = "café, actividad...";
+
+"action_services_name" = "Servicio";
+"action_services_subname" = "lavandería, impresión de documentos...";
+
+"action_clothes_name" = "Ropa";
+"action_clothes_subname" = "zapatos, abrigo...";
+
+"action_equipment_name" = "Equipamiento";
+"action_equipment_subname" = "teléfono, saco de dormir...";
+
+"action_hygiene_name" = "Producto de higiene";
+"action_hygiene_subname" = "jabón, protección sanitaria...";
+
+"interest_activites" = "Actividades manuales";
+"interest_animaux" = "Animales";
+"interest_bien_etre" = "Bienestar";
+"interest_cuisine" = "Cocina";
+"interest_culture" = "Arte y Cultura";
+"interest_jeux" = "Juegos";
+"interest_nature" = "Naturaleza";
+"interest_sport" = "Deportes";
+"interest_marauding" = "Encuentros nómadas";
+"interest_other" = "Otro";
+"contact" = "Contactar";

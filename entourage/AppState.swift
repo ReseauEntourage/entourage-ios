@@ -53,10 +53,10 @@ struct AppState {
             AppState.getTopViewController()?.present(alertVC, animated: true, completion: nil)
         }
     }
-    
+    //TODO Here changed To Language Storyboard
     static func navigateToStartupScreen() {
         clearDatas(withKeychain: false)
-        let sb = UIStoryboard.init(name: StoryboardName.intro, bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.language, bundle: nil)
         let vc = sb.instantiateInitialViewController()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = vc

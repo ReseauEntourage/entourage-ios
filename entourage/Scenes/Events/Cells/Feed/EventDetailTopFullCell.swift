@@ -96,6 +96,8 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_view_place_limit.isHidden = true
         ui_view_members_more.isHidden = true
         ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
+        //TODO : double the ressource here for event top cell
+        ui_btn_share.setTitle("neighborhood_add_post_send_button".localized, for: .normal)
     }
     
     @objc func onShareBtnClick(){

@@ -50,6 +50,7 @@ class ActionsMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_title_bt_clear_filters: UILabel!
     
     @IBOutlet weak var ui_constraint_bt_location_width: NSLayoutConstraint!
+    @IBOutlet weak var ui_label_my_announce_btn: UILabel!
     
     var maxViewHeight:CGFloat = 134
     var minViewHeight:CGFloat = 92//108
@@ -494,6 +495,8 @@ class ActionsMainHomeViewController: UIViewController {
         
         ui_view_height_constraint.constant = maxViewHeight
         viewNormalHeight = ui_view_height_constraint.constant
+        
+        ui_label_my_announce_btn.text = "actions_my_title".localized
         
         if #available(iOS 13.0, *) {
             let window = UIApplication.shared.windows.first

@@ -33,10 +33,19 @@ class ParamMenuCell: UITableViewCell {
     @IBOutlet weak var ui_view_change_pwd: UIView!
     @IBOutlet weak var ui_title_change_pwd: UILabel!
     
+    @IBOutlet weak var ui_label_translation: UILabel!
+
+    @IBOutlet weak var ui_view_language: UIView!
+    @IBOutlet weak var ui_label_language: UILabel!
+    @IBOutlet weak var ui_view_translation: UIView!
+    
+    
     weak var delegate:MainParamsMenuDelegate? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        ui_label_translation.text = "params_translation".localized
+        ui_label_language.text = "params_language".localized
         ui_title_notifs.text = "params_notifs".localized
         ui_title_help.text = "params_help".localized
         ui_title_unlock_members.text = "params_unlock".localized
@@ -44,6 +53,7 @@ class ParamMenuCell: UITableViewCell {
         ui_title_logout.text = "params_logout".localized
         ui_title_suppress_account.text = "params_suppress".localized
         ui_title_change_pwd.text = "param_title_change_pwd".localized
+        
         
         
         ui_title_suggest.text = "params_suggest".localized
@@ -54,12 +64,16 @@ class ParamMenuCell: UITableViewCell {
         setLabelTitle(label: ui_title_share)
         setLabelTitle(label: ui_title_suggest)
         setLabelTitle(label: ui_title_change_pwd)
+        setLabelTitle(label: ui_label_translation)
+        setLabelTitle(label: ui_label_language)
         
         ui_title_logout.textColor = .appOrange
         ui_title_logout.font = ApplicationTheme.getFontNunitoBold(size: 15)
         
         ui_title_suppress_account.textColor = .appOrange
         ui_title_suppress_account.font = ApplicationTheme.getFontCourantBoldOrangeClair().font
+        
+        ui_view_translation.setVisibilityGone()
     }
     
     private func setLabelTitle(label:UILabel) {
@@ -72,6 +86,14 @@ class ParamMenuCell: UITableViewCell {
     }
     
     //MARK: - IBActions -
+    
+    @IBAction func action_show_translation(_ sender: Any) {
+        delegate?.actionMenu(type: .Translation)
+    }
+    @IBAction func action_show_language(_ sender: Any) {
+        delegate?.actionMenu(type: .Language)
+    }
+    
     @IBAction func action_show_notif(_ sender: Any) {
         delegate?.actionMenu(type: .Notifs)
     }
@@ -100,6 +122,8 @@ class ParamMenuCell: UITableViewCell {
 
 //MARK: - MainParamsMenuType -
 enum MainParamsMenuType {
+    case Translation
+    case Language
     case Notifs
     case Help
     case Unlock

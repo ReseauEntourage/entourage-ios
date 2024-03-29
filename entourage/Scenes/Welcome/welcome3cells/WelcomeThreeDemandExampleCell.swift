@@ -51,18 +51,14 @@ class WelcomeThreeDemandExampleCell:UITableViewCell{
     }
     
     func populateCell(action:Action, hideSeparator:Bool) {
-        
         ui_title.text = action.title
         ui_date.text = action.getCreatedDate()
-        
         if let _distance = action.distance {
             ui_location.text = _distance.displayDistance()
         }else{
             let displayAddress = action.metadata?.displayAddress ?? ""
             ui_location.text = "\(String.init(format: "AtKm".localized, "xx")) - \(displayAddress)"
         }
-    
-        
         ui_username.text = action.author?.displayName
         
         if let imageUrl = action.author?.avatarURL, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
@@ -75,13 +71,11 @@ class WelcomeThreeDemandExampleCell:UITableViewCell{
         else {
             ui_iv_user.image = UIImage.init(named: "placeholder_user")
         }
-    
         guard let sectionName = action.sectionName else {
             ui_section.text = nil
             ui_iv_section.image = nil
             return
         }
-        
         ui_section.text = Metadatas.sharedInstance.getTagSectionName(key: sectionName)?.name
         
         if let imgStr = Metadatas.sharedInstance.getTagSectionImageName(key: sectionName) {
@@ -91,7 +85,6 @@ class WelcomeThreeDemandExampleCell:UITableViewCell{
             ui_iv_section.image = nil
         }
     }
-    
 }
     
     

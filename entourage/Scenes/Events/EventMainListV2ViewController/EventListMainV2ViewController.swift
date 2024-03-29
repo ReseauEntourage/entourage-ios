@@ -47,6 +47,9 @@ class EventListMainV2ViewController:UIViewController{
 
     
     override func viewDidLoad() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
+
         //Title
         self.ui_title_label.text = "tabbar_events".localized
         //Table View
@@ -64,11 +67,13 @@ class EventListMainV2ViewController:UIViewController{
         pullRefreshControl.tintColor = .appOrange
         pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)
         ui_table_view.refreshControl = pullRefreshControl
+        expandedfloatingButton.setTitle("event_title_btn_create_event".localized, for: .normal)
         deployButton()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        AnalyticsLoggerManager.logEvent(name: View__Event__List)
         loadForInit()
     }
     
@@ -92,7 +97,7 @@ class EventListMainV2ViewController:UIViewController{
         self.discoverEvent.removeAll()
         self.isOnlyDiscoverPagination = false
         isFromFilter = false
-        self.getDiscoverEvent()
+        self.getMyEvent()
     }
     
     func loadForFilter(){
@@ -101,14 +106,15 @@ class EventListMainV2ViewController:UIViewController{
         self.isEndOfDiscoverList = false
         self.discoverEvent.removeAll()
         self.currentPageDiscover = 0
-        self.getDiscoverEvent()
+        self.getMyEvent()
     }
     
     func loadForPaginationDiscover(){
         isLoading = true
         self.currentPageDiscover += 1
         self.isOnlyDiscoverPagination = true
-        self.getDiscoverEvent()
+        self.getMyEvent()
+
     }
     
     func loadForMyEventPagination(){
@@ -140,10 +146,17 @@ class EventListMainV2ViewController:UIViewController{
         self.pullRefreshControl.endRefreshing()
         isLoading = false
     }
+    @objc func showNewEvent(_ notification:Notification) {
+        if let eventId = notification.userInfo?[kNotificationEventShowId] as? Int {
+            DispatchQueue.main.async {
+                self.showEvent(eventId: eventId, isAfterCreation: true)
+            }
+        }
+    }
     
     @IBAction func OnFilterClick(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action__Event__LocationFilter)
         if let vc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
-            AnalyticsLoggerManager.logEvent(name: Event_action_filter)
             vc.currentFilter = self.currentFilter
             vc.modalPresentationStyle = .fullScreen
             vc.delegate = self
@@ -151,14 +164,14 @@ class EventListMainV2ViewController:UIViewController{
         }
     }
     @IBAction func OnBtnNewClick(_ sender: Any) {
-        AnalyticsLoggerManager.logEvent(name: Event_action_create)
+        AnalyticsLoggerManager.logEvent(name: Action__Event__New)
         let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
     @IBAction func OnExpandedFloatingButtonClick(_ sender: Any) {
-        AnalyticsLoggerManager.logEvent(name: Event_action_create)
+        AnalyticsLoggerManager.logEvent(name: Action__Event__New)
         let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
@@ -294,43 +307,54 @@ extension EventListMainV2ViewController{
                 if _events.count < self.numberOfItemsForWS{
                     self.isEndOfDiscoverList = true
                 }
-                self.discoverEvent.append(contentsOf: _events)
+                
+                // Filtrer les événements pour ne pas ajouter de doublons
+                let uniqueEvents = _events.filter { newEvent in
+                    !self.discoverEvent.contains { existingEvent in
+                        existingEvent.uid == newEvent.uid
+                    }
+                }
+                
+                self.discoverEvent.append(contentsOf: uniqueEvents)
                 self.configureDTO()
                 self.isLoading = false
-            }else if let _error = error {
+            } else if let _error = error {
                 //TODO ERROR Trigger warning
             }
-            self.getMyEvent()
+            self.configureDTO()
         }
     }
     
     func getMyEvent(){
         if isEndOfMyEventList {
+            self.getDiscoverEvent()
             return
         }
-        EventService.getAllEventsForUser(currentPage: currentPageMy, per: numberOfItemsForWS) { events, error in
+        EventService.getAllEventsForUser(currentPage: currentPageMy, per: 50) { events, error in
             
             if(self.isFromFilter){
                 self.isFromFilter = false
-                self.configureDTO()
+                self.getDiscoverEvent()
                 return
             }
             if(self.isOnlyDiscoverPagination){
                 self.isOnlyDiscoverPagination = false
-                self.configureDTO()
+                self.getDiscoverEvent()
                 return
             }
             
             if let _events = events{
                 if _events.count < self.numberOfItemsForWS{
                     self.isEndOfMyEventList = true
+                    
                 }
                 self.myEvent.append(contentsOf: _events)
             }else if let _error = error {
                 //TODO ERROR Trigger warning
             }
-            self.configureDTO()
+            self.getDiscoverEvent()
         }
+        
     }
 }
 
