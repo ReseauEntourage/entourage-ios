@@ -92,7 +92,9 @@ class EventDetailFullCell: UITableViewCell {
         ui_lbl_about_title?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_lbl_about_title?.text = "event_detail_about_title".localized
         ui_lbl_about_desc?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        
+        if ui_lbl_about_desc != nil {
+            ui_lbl_about_desc.enableLongPressCopy()
+        }
         ui_title_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
         ui_title_bt_join.text = "event_detail_button_participe_ON".localized
         

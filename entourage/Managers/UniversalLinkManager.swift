@@ -18,6 +18,10 @@ struct UniversalLinkManager {
         let pathComponents = components.path.components(separatedBy: "/")
         // check if the incoming URL matches any of the URLs you want to handle
         if components.host == stagingURL || components.host == prodURL || components.host == prodURL2 || components.host == stagingURL2  {
+            if pathComponents.count ==  1 {
+                DeepLinkManager.showHomeUniversalLink()
+                return
+            }
             
             if pathComponents[0] == "" && pathComponents[1] == "" {
                 DeepLinkManager.showHomeUniversalLink()

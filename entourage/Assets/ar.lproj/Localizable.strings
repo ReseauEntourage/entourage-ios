@@ -1498,3 +1498,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "create_group_btn_title" = "إنشاء مجموعة";
 "friendly_links_title" = "روابط ودية وداعمة";
 "friendly_links_text" = "في Entourage، الهدف الرئيسي هو تعزيز الروابط الودية والمستدامة. أتعهد باحترام هذا التوجه من خلال تجنب أي نهج أو نشر ذي طابع رومانسي أو عاطفي. وبذلك، أساهم بنشاط في الحفاظ على بيئة دافئة ومرحبة للجميع.";
+"copied_text" = "تم النسخ إلى الحافظة!";
+"copy_the_text" = "انسخ النص";
+"copy_the_text_explanation" = "سيتم نسخ النص إلى الحافظة";

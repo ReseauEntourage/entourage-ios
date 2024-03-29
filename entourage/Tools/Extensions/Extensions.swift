@@ -208,7 +208,7 @@ extension UILabel {
         if gestureRecognizer.state == .began {
             let pasteboard = UIPasteboard.general
             pasteboard.string = self.text
-            self.showToast(message: "Texte copié", duration: 3.0)
+            self.showToast(message: "copied_text".localized, duration: 3.0)
         }
     }
 }
@@ -310,7 +310,7 @@ extension UIView {
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.textAlignment = .center
-        toastLabel.font = ApplicationTheme.getFontNunitoRegular(size: 24)
+        toastLabel.font = ApplicationTheme.getFontNunitoRegular(size: 12)
         toastLabel.text = message
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 10

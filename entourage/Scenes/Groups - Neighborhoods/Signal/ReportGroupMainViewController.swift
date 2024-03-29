@@ -20,6 +20,7 @@ class ReportGroupMainViewController: BasePopViewController {
     var userId:Int? = 0
     var conversationId:Int? = nil
     var messageId:Int? = nil
+    var textString:String? = nil
     
     weak var parentDelegate:GroupDetailDelegate? = nil
     
@@ -55,6 +56,7 @@ class ReportGroupMainViewController: BasePopViewController {
             vc.messageId = messageId
             vc.conversationId = conversationId
             vc.titleDelegate = self
+            vc.textString = textString
         }
     }
 }

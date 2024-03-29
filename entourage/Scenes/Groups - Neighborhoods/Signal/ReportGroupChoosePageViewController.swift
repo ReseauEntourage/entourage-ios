@@ -33,7 +33,7 @@ class ReportGroupChoosePageViewController:UIViewController {
     var userId:Int = 0
     var chatMessageId:Int? = nil
     var analyticsClickName = ""
-    
+    var textString:String? = nil
     
     var reportVc:ReportGroupViewController? = nil
     weak var delegate:ReportGroupPageDelegate? = nil
@@ -55,6 +55,9 @@ class ReportGroupChoosePageViewController:UIViewController {
         }
         if checkparameterType() == .commment && !checkIsMe() {
             table_dto.append(.translate)
+        }
+        if textString != nil && textString != ""{
+            table_dto.append(.copy)
         }
         ui_tableview.reloadData()
     }
@@ -115,6 +118,12 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
                 cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
                 return cell
             }
+        case .copy:
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "ReportChooseViewCell", for: indexPath ) as? ReportChooseViewCell {
+                cell.selectionStyle = .none
+                cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
+                return cell
+            }
         }
         
         return UITableViewCell()
@@ -132,6 +141,8 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
             showAlert()
         case .translate:
             delegate?.translateItem(id: chatMessageId!)
+        case .copy:
+            delegate?.copyItemText()
         }
     }
     

@@ -37,11 +37,15 @@ class HomeModeratorCell:UITableViewCell{
 
     }
     
-    func configure(title:String, imageUrl:String){
+    func configure(title:String, imageUrl:String? = nil){
         self.ui_label_title.text = "home_v2_help_title_three".localized + " " + title
-        if let mainUrl = URL(string: imageUrl) {
-            self.updateImage(mainUrl: mainUrl)
-        }else {
+        if let _urlImageString = imageUrl{
+            if let mainUrl = URL(string: _urlImageString) {
+                self.updateImage(mainUrl: mainUrl)
+            }else {
+                ui_image.image = UIImage.init(named: "placeholder_user")
+            }
+        }else{
             ui_image.image = UIImage.init(named: "placeholder_user")
         }
     }

@@ -24,15 +24,12 @@ class NeighborhoodEventsTableviewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ui_collectionview.register(UINib(nibName: NeighborhoodEventsCollectionviewCell.identifier, bundle: nil), forCellWithReuseIdentifier: NeighborhoodEventsCollectionviewCell.identifier)
-        
+        ui_collectionview.register(UINib(nibName: HomeCellEvent.identifier, bundle: nil), forCellWithReuseIdentifier: HomeCellEvent.identifier)
+
         ui_collectionview.dataSource = self
         ui_collectionview.delegate = self
-        
         let layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = CGSize(width: 136, height: 150)
         layout.scrollDirection = .horizontal
-        
         ui_collectionview.setCollectionViewLayout(layout, animated: true)
         ui_title_section.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
         ui_title_section.text = "neighborhood_event_group_section_title".localized
@@ -53,17 +50,18 @@ class NeighborhoodEventsTableviewCell: UITableViewCell {
     
 }
 
-extension NeighborhoodEventsTableviewCell: UICollectionViewDataSource, UICollectionViewDelegate {
+extension NeighborhoodEventsTableviewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return events.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NeighborhoodEventsCollectionviewCell.identifier, for: indexPath) as! NeighborhoodEventsCollectionviewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCellEvent.identifier, for: indexPath) as! HomeCellEvent
         let event = events[indexPath.row]
         Logger.print("***** Event future : \(event)")
         let _addressName = event.addressName ?? ""
-        cell.populateCell(title: event.title, imageUrl: event.getCurrentImageUrl, dateFormatted: event.startDateFormatted, addressName: _addressName)
+        cell.configure(event: event)
+        //cell.populateCell(title: event.title, imageUrl: event.getCurrentImageUrl, dateFormatted: event.startDateFormatted, addressName: _addressName)
         return cell
     }
     
@@ -71,6 +69,10 @@ extension NeighborhoodEventsTableviewCell: UICollectionViewDataSource, UICollect
         let event = events[indexPath.row]
         delegate?.showEvent(eventId: event.uid, isAfterCreation: false)
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 160, height: 215)
+    }
+    
 }
 
 protocol NeighborhoodEventsTableviewCellDelegate:AnyObject {

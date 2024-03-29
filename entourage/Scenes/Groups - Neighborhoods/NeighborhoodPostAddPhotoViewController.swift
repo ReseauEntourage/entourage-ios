@@ -52,14 +52,26 @@ class NeighborhoodPostAddPhotoViewController: BasePopViewController {
     
     //MARK: - Methods -
     
-    func showPicker(sourceType:UIImagePickerController.SourceType) {
-        pickerViewController = UIImagePickerController.init()
-        pickerViewController?.modalPresentationStyle = .currentContext
-        pickerViewController?.delegate = self
-        pickerViewController?.sourceType = sourceType
-        pickerViewController?.navigationBar.tintColor = .appOrange
-        pickerViewController?.navigationBar.backgroundColor = .white
-        self.navigationController?.present(pickerViewController!, animated: true, completion: nil)
+    func showPicker(sourceType: UIImagePickerController.SourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+            pickerViewController = UIImagePickerController()
+            pickerViewController?.modalPresentationStyle = .currentContext
+            pickerViewController?.delegate = self
+            pickerViewController?.sourceType = sourceType
+            pickerViewController?.navigationBar.tintColor = .appOrange
+            pickerViewController?.navigationBar.backgroundColor = .white
+
+            DispatchQueue.main.async {
+                if let picker = self.pickerViewController {
+                    self.navigationController?.present(picker, animated: true, completion: nil)
+                } else {
+                    // Gérer le cas où pickerViewController est nil
+                }
+            }
+        } else {
+            // Gérer le cas où le sourceType n'est pas disponible
+            // Par exemple, afficher une alerte à l'utilisateur
+        }
     }
     
     func showPhotoResize() {

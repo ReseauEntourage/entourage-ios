@@ -21,7 +21,7 @@ class NeighborhoodParamTopCell: UITableViewCell {
         super.awakeFromNib()
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
         ui_description.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        
+        ui_description.enableLongPressCopy()
         ui_taglist.backgroundColor = .appBeigeClair
         ui_taglist.tagBackgroundColor = ApplicationTheme.getFontCategoryBubble().color
         ui_taglist.cornerRadius = cornerRadiusTag

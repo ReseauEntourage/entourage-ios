@@ -14,6 +14,7 @@ class EventDetailTopLightCell: UITableViewCell {
     @IBOutlet weak var ui_iv_time: UIImageView!
     @IBOutlet weak var ui_iv_place: UIImageView!
     
+    @IBOutlet weak var icContraintAdressName: NSLayoutConstraint!
     @IBOutlet weak var ui_main_view: UIView!
     
     @IBOutlet weak var ui_title: UILabel!
@@ -171,6 +172,7 @@ class EventDetailTopLightCell: UITableViewCell {
             _addressName = event.addressName ?? "-"
             ui_iv_location.image = event.isCanceled() ? UIImage.init(named: "ic_location_grey") : UIImage.init(named: "ic_location")
         }
+
         if event.isCanceled() {
             ui_location_name.text = _addressName
         }
@@ -195,6 +197,30 @@ class EventDetailTopLightCell: UITableViewCell {
         if isEntourageEvent {
             ui_label_association.text = String(format: "event_top_cell_asso".localized, "Entourage")
             ui_view_association.isHidden = false
+        }
+        adjustConstraintForLabel(label: ui_location_name, constraint: icContraintAdressName)
+
+    }
+    
+    private func adjustConstraintForLabel(label: UILabel, constraint: NSLayoutConstraint) {
+        let text = label.text ?? ""
+        let font = label.font ?? UIFont.systemFont(ofSize: 17)
+
+        let maxSize = CGSize(width: label.frame.width, height: CGFloat.greatestFiniteMagnitude)
+        let textBoundingRect = NSString(string: text).boundingRect(
+            with: maxSize,
+            options: .usesLineFragmentOrigin,
+            attributes: [.font: font],
+            context: nil)
+
+        let singleLineHeight = "Test".size(withAttributes: [.font: font]).height
+
+        if textBoundingRect.height > singleLineHeight {
+            // Text occupies more than one line
+            constraint.constant = 40
+        } else {
+            // Text occupies only one line
+            constraint.constant = 20
         }
     }
     

@@ -337,7 +337,7 @@ extension EventDetailMessagesViewController: UITextViewDelegate {
 
 //MARK: - NeighborhoodMessageCellDelegate -
 extension EventDetailMessagesViewController:MessageCellSignalDelegate {
-    func signalMessage(messageId: Int, userId:Int) {
+    func signalMessage(messageId: Int, userId:Int, textString:String) {
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
             vc.postId = messageId
@@ -345,6 +345,7 @@ extension EventDetailMessagesViewController:MessageCellSignalDelegate {
             vc.signalType = .comment
             vc.userId = userId
             vc.messageId = messageId
+            vc.textString = textString
             self.present(navvc, animated: true)
         }
     }

@@ -42,6 +42,7 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_view_place_limit: UIView!
     @IBOutlet weak var ui_place_limit_nb: UILabel!
     
+    @IBOutlet weak var adress_view_top_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_iv_location: UIImageView!
     @IBOutlet weak var ui_location_name: UILabel!
     
@@ -71,6 +72,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_lbl_about_title?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_lbl_about_title?.text = "event_detail_about_title".localized
         ui_lbl_about_desc?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_lbl_about_desc.enableLongPressCopy()
         ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_view_button_join.layer.cornerRadius = ui_view_button_join.frame.height / 2
         ui_view_button_join.layer.borderColor = UIColor.appOrange.cgColor
@@ -191,7 +193,6 @@ class EventDetailTopFullCell: UITableViewCell {
             ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
         }
         
-        
         let currentUserId = UserDefaults.currentUser?.sid
         if let _ = event.members?.first(where: {$0.uid == currentUserId}) {
             ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
@@ -246,6 +247,30 @@ class EventDetailTopFullCell: UITableViewCell {
             ui_constraint_listview_top_margin?.constant = topMarginConstraint
         }
         self.disableButtonIfCancelOrPast(event: event)
+        adjustConstraintForLabel(label: ui_location_name, constraint: adress_view_top_constraint)
+
+    }
+    
+    private func adjustConstraintForLabel(label: UILabel, constraint: NSLayoutConstraint) {
+        let text = label.text ?? ""
+        let font = label.font ?? UIFont.systemFont(ofSize: 17)
+
+        let maxSize = CGSize(width: label.frame.width, height: CGFloat.greatestFiniteMagnitude)
+        let textBoundingRect = NSString(string: text).boundingRect(
+            with: maxSize,
+            options: .usesLineFragmentOrigin,
+            attributes: [.font: font],
+            context: nil)
+
+        let singleLineHeight = "Test".size(withAttributes: [.font: font]).height
+
+        if textBoundingRect.height > singleLineHeight {
+            // Text occupies more than one line
+            constraint.constant = 40
+        } else {
+            // Text occupies only one line
+            constraint.constant = 20
+        }
     }
     
     private func disableButtonIfCancelOrPast(event:Event){

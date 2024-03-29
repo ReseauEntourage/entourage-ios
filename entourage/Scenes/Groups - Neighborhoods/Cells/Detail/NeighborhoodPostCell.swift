@@ -52,6 +52,7 @@ class NeighborhoodPostCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
@@ -59,7 +60,7 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_date.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoLight(size: 9), color: .black))
         ui_comment.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_comments_nb.setupFontAndColor(style: ApplicationTheme.getFontChampInput())
-        
+        ui_comment.enableLongPressCopy()
         ui_image_post?.layer.cornerRadius = 8
         if ui_view_comment != nil {
             ui_view_bt_send.layer.cornerRadius = ui_view_bt_send.frame.height / 2
@@ -105,7 +106,7 @@ class NeighborhoodPostCell: UITableViewCell {
     }
     
     @objc func signalClicked(){
-        self.delegate?.signalPost(postId: self.postId, userId: self.userId!)
+        self.delegate?.signalPost(postId: self.postId, userId: self.userId!, textString: self.postMessage.content ?? "")
     }
     
     func removeButton() {
@@ -226,7 +227,7 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?, postMessage:PostMessage?)
     func showUser(userId:Int?)
     func showImage(imageUrl:URL?, postId:Int)
-    func signalPost(postId:Int, userId:Int)
+    func signalPost(postId:Int, userId:Int, textString:String)
     func showWebviewUrl(url:URL)
 }
 
