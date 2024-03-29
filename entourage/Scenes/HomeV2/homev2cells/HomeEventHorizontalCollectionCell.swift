@@ -75,6 +75,7 @@ extension HomeEventHorizontalCollectionCell:UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch tableDTO[indexPath.row]{
         case .eventCell(let event):
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Event_Detail)
             delegate?.goToMyEvent(event: event)
         }
     }

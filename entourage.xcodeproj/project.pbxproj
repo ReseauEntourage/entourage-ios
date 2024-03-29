@@ -390,6 +390,8 @@
 		2619E1492A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619E1482A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift */; };
 		2619E14B2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619E14A2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift */; };
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
+		2631DC5E2AD68FC40040C120 /* HomeHZCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2631DC5D2AD68FC40040C120 /* HomeHZCell.swift */; };
+		2631DC602AD690130040C120 /* HomeHZCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2631DC5F2AD690130040C120 /* HomeHZCell.xib */; };
 		2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */; };
 		2636B9642A7BA199007EE1B2 /* anim_rugby.json in Resources */ = {isa = PBXBuildFile; fileRef = 2636B9632A7BA199007EE1B2 /* anim_rugby.json */; };
 		264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */; };
@@ -834,6 +836,8 @@
 		2619E1482A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTwoGroupExampleCell.swift; sourceTree = "<group>"; };
 		2619E14A2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTwoDescribingCell.swift; sourceTree = "<group>"; };
 		2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UILabel.swift; sourceTree = "<group>"; };
+		2631DC5D2AD68FC40040C120 /* HomeHZCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHZCell.swift; sourceTree = "<group>"; };
+		2631DC5F2AD690130040C120 /* HomeHZCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHZCell.xib; sourceTree = "<group>"; };
 		2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RugbySpecialPopUpViewController.swift; sourceTree = "<group>"; };
 		2636B9632A7BA199007EE1B2 /* anim_rugby.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anim_rugby.json; sourceTree = "<group>"; };
 		264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPasseOneDemand.swift; sourceTree = "<group>"; };
@@ -1860,6 +1864,8 @@
 				2674FEC42ACDA5F00013D674 /* HomeNeedHelpCell.xib */,
 				2674FEC62ACDB6AC0013D674 /* HomeModeratorCell.swift */,
 				2674FEC82ACDB7520013D674 /* HomeModeratorCell.xib */,
+				2631DC5D2AD68FC40040C120 /* HomeHZCell.swift */,
+				2631DC5F2AD690130040C120 /* HomeHZCell.xib */,
 			);
 			path = homev2cells;
 			sourceTree = "<group>";
@@ -2021,6 +2027,7 @@
 				025FFE0B27DBAD5100783E8D /* ApiKeys.plist in Resources */,
 				2609BFA62AC2C7D00052111C /* HomeV2CellTitle.xib in Resources */,
 				26BFC9A02ACD4DB400FDA030 /* HomeCellAction.xib in Resources */,
+				2631DC602AD690130040C120 /* HomeHZCell.xib in Resources */,
 				025C92C028341007000970D9 /* NeighborhoodEmptyPostCell.xib in Resources */,
 				0223E5152864A4B200E7556E /* AddDescriptionTableViewCell.xib in Resources */,
 				0243DCCD28AF8DEF00273679 /* Messages.xcassets in Resources */,
@@ -2490,6 +2497,7 @@
 				02B94C27284F63AB006059EF /* HomeContribCell.swift in Sources */,
 				26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */,
 				266B26212AB8AD5600C8EAD8 /* EventListMainV2ViewController.swift in Sources */,
+				2631DC5E2AD68FC40040C120 /* HomeHZCell.swift in Sources */,
 				02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */,
 				2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */,
 				021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */,

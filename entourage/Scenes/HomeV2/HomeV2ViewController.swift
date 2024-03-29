@@ -28,6 +28,7 @@ enum HomeV2DTO{
     case cellMap
     case cellIAmLost(helpType:HomeNeedHelpType)
     case moderator(name:String, imageUrl:String)
+    case cellHZ
 }
 
 class HomeV2ViewController:UIViewController{
@@ -57,10 +58,11 @@ class HomeV2ViewController:UIViewController{
     var userHome:UserHome = UserHome()
     var pedagoCreateEvent:PedagogicResource?
     var pedagoCreateGroup:PedagogicResource?
+    var isContributionPreference = false
     
     override func viewDidLoad() {
         IHProgressHUD.show()
-
+        AnalyticsLoggerManager.logEvent(name: View__Home)
         prepareUINotifAndAvatar()
         ui_table_view.delegate = self
         ui_table_view.dataSource = self
@@ -84,6 +86,8 @@ class HomeV2ViewController:UIViewController{
         ui_table_view.register(UINib(nibName: HomeNeedHelpCell.identifier, bundle: nil), forCellReuseIdentifier: HomeNeedHelpCell.identifier)
         //CELL MODERATOR
         ui_table_view.register(UINib(nibName: HomeModeratorCell.identifier, bundle: nil), forCellReuseIdentifier: HomeModeratorCell.identifier)
+        //CELL HZ
+        ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
 
     }
     
@@ -107,14 +111,14 @@ class HomeV2ViewController:UIViewController{
     }
     
     @objc func onAvatarClick(){
-        AnalyticsLoggerManager.logEvent(name: Home_action_profile)
+        AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
         let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
     
     @objc func onNotifClick(){
-        AnalyticsLoggerManager.logEvent(name: Home_action_notif)
+        AnalyticsLoggerManager.logEvent(name: Action__Home__Notif)
         if let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav") as? UINavigationController {
             navVC.modalPresentationStyle = .fullScreen
             if let vc = navVC.topViewController as? NotificationsInAppViewController {
@@ -128,11 +132,19 @@ class HomeV2ViewController:UIViewController{
         self.tableDTO.removeAll()
         self.updateTopView()
         if(allDemands.count > 0){
-            tableDTO.append(.cellTitle(title: "home_v2_title_action".localized, subtitle: "home_v2_subtitle_action".localized))
-            for demand in allDemands {
-                tableDTO.append(.cellAction(action: demand))
+            if isContributionPreference {
+                tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
+                for demand in allDemands {
+                    tableDTO.append(.cellAction(action: demand))
+                }
+                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
+            }else{
+                tableDTO.append(.cellTitle(title: "home_v2_title_action".localized, subtitle: "home_v2_subtitle_action".localized))
+                for demand in allDemands {
+                    tableDTO.append(.cellAction(action: demand))
+                }
+                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
             }
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
         }
         if allEvents.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_event".localized, subtitle: "home_v2_subtitle_event".localized))
@@ -154,6 +166,15 @@ class HomeV2ViewController:UIViewController{
                 tableDTO.append(.cellPedago(pedago: pedago))
             }
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
+        }
+        var _offlineEvents = [Event]()
+        for event in allEvents{
+            if event.isOnline == false {
+                _offlineEvents.append(event)
+            }
+        }
+        if _offlineEvents.count == 0 && allDemands.count == 0 && !isContributionPreference {
+            tableDTO.append(.cellHZ)
         }
         tableDTO.append(.cellTitle(title: "home_v2_title_help".localized, subtitle: "home_v2_subtitle_help".localized))
         tableDTO.append(.cellIAmLost(helpType: .createGroup))
@@ -212,7 +233,7 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellSeeAll(let seeAllType):
             if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeSeeAllCell") as? HomeSeeAllCell{
                 cell.selectionStyle = .none
-                cell.configure(type: seeAllType)
+                cell.configure(type: seeAllType,isContrib: self.isContributionPreference)
                 return cell
             }
             
@@ -254,6 +275,12 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
                 cell.configure(title: name, imageUrl: imageUrl)
                 return cell
             }
+        case .cellHZ:
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeHZCell") as? HomeHZCell{
+                cell.selectionStyle = .none
+                cell.delegate = self
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -262,16 +289,31 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellTitle(_,_):
             return
         case .cellAction(let action):
-            self.showAction(actionId: action.id, isContrib: false, action: action)
+            if isContributionPreference {
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_Detail)
+                self.showAction(actionId: action.id, isContrib: true, action: action)
+            }else{
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
+                self.showAction(actionId: action.id, isContrib: false, action: action)
+            }
         case .cellSeeAll(let seeAllType):
             switch seeAllType{
             case .seeAllDemand:
-                DeepLinkManager.showDemandListUniversalLink()
+                if isContributionPreference {
+                    AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_All)
+                    DeepLinkManager.showContribListUniversalLink()
+                }else{
+                    AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_All)
+                    DeepLinkManager.showDemandListUniversalLink()
+                }
             case .seeAllEvent:
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Event_All)
                 DeepLinkManager.showOutingListUniversalLink()
             case .seeAllGroup:
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Group_All)
                 DeepLinkManager.showNeiborhoodListUniversalLink()
             case .seeAllPedago:
+                AnalyticsLoggerManager.logEvent(name: Action__Home__Pedago)
                 DeepLinkManager.showRessourceListUniversalLink()
             }
         case .cellEvent(_):
@@ -279,20 +321,28 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellGroup(_):
             return
         case .cellPedago(let pedago):
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Article)
             showPedagogic(pedagogic: pedago)
         case .cellMap:
+            AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
             self.showAllPois()
         case .cellIAmLost(let helpType):
             switch helpType{
             case .createEvent:
+                AnalyticsLoggerManager.logEvent(name: Action_Home_CreateEvent)
                 showPedagogic(pedagogic: pedagoCreateEvent!)
             case .createGroup:
+                AnalyticsLoggerManager.logEvent(name: Action_Home_CreateGroup)
                 showPedagogic(pedagogic: pedagoCreateGroup!)
             }
         case .moderator(let name, let imageUrl):
             if let _moderator = self.userHome.moderator{
+                AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
                 showUserProfile(id: _moderator.id!)
             }
+        case .cellHZ:
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Buffet)
+            return
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -306,7 +356,7 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellEvent(_):
             return 215
         case .cellGroup(_):
-            return 120
+            return 130
         case .cellPedago(_):
             return UITableView.automaticDimension
         case .cellMap:
@@ -314,6 +364,8 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellIAmLost(_):
             return UITableView.automaticDimension
         case .moderator(_,_):
+            return UITableView.automaticDimension
+        case .cellHZ:
             return UITableView.automaticDimension
         }
     }
@@ -325,16 +377,26 @@ extension HomeV2ViewController{
     func getNotif(){
         HomeService.getNotificationsCount { count, error in
             self.notificationCount = count ?? 0
-            self.getDemandes()
+            self.getMyGroups()
         }
     }
     func getDemandes(){
-        ActionsService.getAllActions(isContrib: false, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
-            if let actions = actions {
-                self.allDemands.removeAll()
-                self.allDemands.append(contentsOf: actions)
+        if isContributionPreference {
+            ActionsService.getAllActions(isContrib: true, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
+                if let actions = actions {
+                    self.allDemands.removeAll()
+                    self.allDemands.append(contentsOf: actions)
+                }
+                self.configureDTO()
             }
-            self.getMyGroups()
+        }else{
+            ActionsService.getAllActions(isContrib: false, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
+                if let actions = actions {
+                    self.allDemands.removeAll()
+                    self.allDemands.append(contentsOf: actions)
+                }
+                self.configureDTO()
+            }
         }
     }
     
@@ -400,9 +462,14 @@ extension HomeV2ViewController{
         HomeService.getUserHome { [weak self] userHome, error in
             if let userHome = userHome {
                 self?.userHome = userHome
-                
+                print("eho userHome preference " , userHome.preference)
+                if userHome.preference == "contribution" {
+                    self?.isContributionPreference = true
+                }else{
+                    self?.isContributionPreference = false
+                }
             }
-            self?.configureDTO()
+            self?.getDemandes()
         }
     }
      func loadMetadatas() {
@@ -595,6 +662,15 @@ extension HomeV2ViewController: UIScrollViewDelegate {
                 }
             }
         }
+    }
+}
+
+extension HomeV2ViewController: HomeHZCellDelegate {
+    func onCLickGoBuffet() {
+        let urlStr = "https://reseauentourage.notion.site/Buffet-du-lien-social-69c20e089dbd483cb093e90ae2953a54"
+        var webUrl:URL?
+        webUrl = URL(string: urlStr)
+        WebLinkManager.openUrlInApp(url: webUrl, presenterViewController: self)
     }
 }
 
