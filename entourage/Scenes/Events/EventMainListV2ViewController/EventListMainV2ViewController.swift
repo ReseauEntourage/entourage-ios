@@ -32,7 +32,7 @@ class EventListMainV2ViewController:UIViewController{
     //VAR
     private var currentPageMy = 0
     private var currentPageDiscover = 0
-    private let numberOfItemsForWS = 7
+    private let numberOfItemsForWS = 10
     private var currentFilter = EventActionLocationFilters()
     private var tableDTO = [EventListTableDTO]()
     private var discoverEvent = [Event]()
@@ -295,6 +295,8 @@ extension EventListMainV2ViewController{
                     self.isEndOfDiscoverList = true
                 }
                 self.discoverEvent.append(contentsOf: _events)
+                self.configureDTO()
+                self.isLoading = false
             }else if let _error = error {
                 //TODO ERROR Trigger warning
             }
