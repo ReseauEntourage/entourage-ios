@@ -191,6 +191,10 @@ workflows:
         - notify_user_groups: none
         - deploy_path: $BITRISE_IPA_PATH
     - cache-push: {}
+    meta:
+      bitrise.io:
+        stack: osx-xcode-15.3.x
+        machine_type_id: g2-m1.4core
   Entourage-TestFlight-xcode15:
     before_run:
     - Prepare
@@ -207,6 +211,10 @@ workflows:
         - deploy_path: $BITRISE_IPA_PATH
     - cache-push:
         is_always_run: true
+    meta:
+      bitrise.io:
+        stack: osx-xcode-15.3.x
+        machine_type_id: g2-m1.4core
   Prepare:
     steps:
     - set-java-version@1:
