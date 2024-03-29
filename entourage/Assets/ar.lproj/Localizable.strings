@@ -1501,3 +1501,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "copied_text" = "تم النسخ إلى الحافظة!";
 "copy_the_text" = "انسخ النص";
 "copy_the_text_explanation" = "سيتم نسخ النص إلى الحافظة";
+"text_title_i_like" = "أعجبني";
+"text_title_comment" = "تعليق";
+"see_member_react" = "الأشخاص الذين تفاعلوا";

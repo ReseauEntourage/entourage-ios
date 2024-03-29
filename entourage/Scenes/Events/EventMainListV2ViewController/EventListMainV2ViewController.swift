@@ -34,7 +34,7 @@ class EventListMainV2ViewController:UIViewController{
     //VAR
     private var currentPageMy = 0
     private var currentPageDiscover = 0
-    private let numberOfItemsForWS = 40
+    private let numberOfItemsForWS = 10
     private var currentFilter = EventActionLocationFilters()
     private var tableDTO = [EventListTableDTO]()
     private var discoverEvent = [Event]()
@@ -46,7 +46,7 @@ class EventListMainV2ViewController:UIViewController{
     var pullRefreshControl = UIRefreshControl()
     var isEndOfDiscoverList = false
     var isEndOfMyEventList = false
-
+    var comeFromDetail = false
     
     override func viewDidLoad() {
 
@@ -77,7 +77,10 @@ class EventListMainV2ViewController:UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         AnalyticsLoggerManager.logEvent(name: View__Event__List)
-        loadForInit()
+        if !comeFromDetail {
+            loadForInit()
+        }
+        comeFromDetail = false
     }
     
     func retractButton() {
@@ -399,6 +402,7 @@ extension EventListMainV2ViewController:EventListCollectionTableViewCellDelegate
 
 extension EventListMainV2ViewController{
     func showEvent(eventId:Int, isAfterCreation:Bool = false, event:Event? = nil) {
+        comeFromDetail = true
         if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
             vc.eventId = eventId
             vc.event = event

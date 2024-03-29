@@ -286,7 +286,6 @@ extension WelcomeThreeViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("eho")
         switch tableDTO[indexPath.row]{
         case .titleEventCell:
             print("doNothing")

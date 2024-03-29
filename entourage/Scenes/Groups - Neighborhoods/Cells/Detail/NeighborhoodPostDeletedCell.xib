@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJ2-0C-9Dr">
-                                <rect key="frame" x="60.999999999999993" y="10.666666666666671" width="74.333333333333314" height="44"/>
+                                <rect key="frame" x="60.999999999999993" y="10.666666666666668" width="74.333333333333314" height="43.666666666666657"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Username" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1h-xC-eW8">
                                         <rect key="frame" x="0.0" y="0.0" width="74.333333333333329" height="19"/>
@@ -49,7 +49,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSf-Dg-Hjf">
-                                        <rect key="frame" x="0.0" y="31.333333333333332" width="74.333333333333329" height="12.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="31.333333333333332" width="74.333333333333329" height="12.333333333333332"/>
                                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rs-dT-shb" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="28" y="70" width="291.66666666666669" height="48.666666666666657"/>
+                                <rect key="frame" x="28" y="70" width="291.66666666666669" height="41"/>
                                 <string key="text">Bienvenue à toi cher danseur !
 Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
@@ -95,15 +95,8 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_message_neighborhood" translatesAutoresizingMaskIntoConstraints="NO" id="2rl-8U-c8O">
-                                <rect key="frame" x="261.66666666666669" y="136.66666666666666" width="16" height="16"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="bLk-2f-KGx"/>
-                                    <constraint firstAttribute="width" constant="16" id="kFv-Fl-lPu"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-rm-TR2">
-                                <rect key="frame" x="261.66666666666669" y="129" width="112.33333333333331" height="31"/>
+                                <rect key="frame" x="344" y="129" width="30" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="LDe-lL-dvI"/>
                                 </constraints>
@@ -130,25 +123,22 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="qCK-5n-BTI" firstAttribute="leading" secondItem="5cd-hE-LPm" secondAttribute="leading" id="41H-j6-Dkn"/>
                             <constraint firstItem="JGI-rm-TR2" firstAttribute="trailing" secondItem="spL-JO-nrf" secondAttribute="trailing" id="5ko-S5-LMD"/>
                             <constraint firstItem="qCK-5n-BTI" firstAttribute="top" secondItem="5cd-hE-LPm" secondAttribute="top" id="7xk-zz-W93"/>
-                            <constraint firstItem="JGI-rm-TR2" firstAttribute="leading" secondItem="2rl-8U-c8O" secondAttribute="leading" id="HBq-v0-r1B"/>
+                            <constraint firstItem="spL-JO-nrf" firstAttribute="top" secondItem="4rs-dT-shb" secondAttribute="bottom" constant="24.670000000000002" id="C9I-XP-r5b"/>
                             <constraint firstItem="xJ2-0C-9Dr" firstAttribute="centerY" secondItem="5cd-hE-LPm" secondAttribute="centerY" id="O1i-fT-E2p"/>
-                            <constraint firstItem="spL-JO-nrf" firstAttribute="leading" secondItem="2rl-8U-c8O" secondAttribute="trailing" constant="4" id="QeW-31-LQE"/>
                             <constraint firstItem="4rs-dT-shb" firstAttribute="leading" secondItem="5cd-hE-LPm" secondAttribute="leading" id="RB4-hY-81w"/>
                             <constraint firstItem="4rs-dT-shb" firstAttribute="top" secondItem="5cd-hE-LPm" secondAttribute="bottom" constant="25" id="XUL-TL-THf"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xJ2-0C-9Dr" secondAttribute="trailing" constant="32" id="ZBt-1T-Arq"/>
                             <constraint firstAttribute="bottom" secondItem="JGI-rm-TR2" secondAttribute="bottom" constant="16" id="ZXH-Uf-cYb"/>
-                            <constraint firstItem="2rl-8U-c8O" firstAttribute="centerY" secondItem="spL-JO-nrf" secondAttribute="centerY" id="b3D-xF-npU"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4rs-dT-shb" secondAttribute="trailing" constant="28" id="dMg-3Q-EIZ"/>
                             <constraint firstItem="qCK-5n-BTI" firstAttribute="trailing" secondItem="xJ2-0C-9Dr" secondAttribute="trailing" id="eSZ-8l-7qC"/>
                             <constraint firstAttribute="trailing" secondItem="U7B-cf-Hxf" secondAttribute="trailing" constant="24" id="ehr-Kd-r35"/>
                             <constraint firstItem="U7B-cf-Hxf" firstAttribute="centerY" secondItem="qCK-5n-BTI" secondAttribute="centerY" constant="-10" id="fHH-Yp-vhm"/>
                             <constraint firstItem="5cd-hE-LPm" firstAttribute="leading" secondItem="UuG-6g-tBc" secondAttribute="leading" constant="28" id="h2h-rp-w1n"/>
-                            <constraint firstItem="2rl-8U-c8O" firstAttribute="top" secondItem="4rs-dT-shb" secondAttribute="bottom" constant="18" id="mMh-1h-5NI"/>
                             <constraint firstItem="xJ2-0C-9Dr" firstAttribute="leading" secondItem="5cd-hE-LPm" secondAttribute="trailing" constant="8" symbolic="YES" id="oMB-aR-btA"/>
                             <constraint firstAttribute="trailing" secondItem="spL-JO-nrf" secondAttribute="trailing" constant="28" id="qP8-Lx-Zog"/>
+                            <constraint firstAttribute="bottom" secondItem="spL-JO-nrf" secondAttribute="bottom" constant="22.329999999999998" id="tpf-e6-TN7"/>
                             <constraint firstItem="5cd-hE-LPm" firstAttribute="top" secondItem="UuG-6g-tBc" secondAttribute="top" constant="20" id="u8F-kE-bQk"/>
                             <constraint firstItem="qCK-5n-BTI" firstAttribute="bottom" secondItem="5cd-hE-LPm" secondAttribute="bottom" id="vy4-rT-mgS"/>
-                            <constraint firstItem="JGI-rm-TR2" firstAttribute="centerY" secondItem="2rl-8U-c8O" secondAttribute="centerY" id="w7d-1V-rUO"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -179,8 +169,12 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
             <point key="canvasLocation" x="131.29770992366412" y="63.732394366197184"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="4rs-dT-shb">
+            <size key="intrinsicContentSize" width="291.66666666666669" height="41"/>
+        </designable>
+    </designables>
     <resources>
-        <image name="ic_message_neighborhood" width="20" height="20"/>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -407,5 +407,77 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
+    //  REACTION CALL
+    static func postReactionToGroupPost(groupId: Int, postId: Int, reactionWrapper: ReactionWrapper, completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String(format: kAPIPostReactionGroupPost, groupId, postId, token)
+
+        guard let bodyData = try? JSONEncoder().encode(reactionWrapper) else {
+            DispatchQueue.main.async { completion(nil) }
+            return
+        }
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { _, resp, error in
+            guard let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+//
+//    static func getGroupPostReactionDetails(groupId: Int, postId: Int, completion: @escaping ([UserLightNeighborhood]?, EntourageNetworkError?) -> Void) {
+//        guard let token = UserDefaults.token else {return}
+//        let endpoint = String(format: kAPIGetDetailsReactionGroupPost, groupId, postId, token)
+//        
+//        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+//            guard let data = data, let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+//                DispatchQueue.main.async { completion(nil, error) }
+//                return
+//            }
+//            let details: [UserLightNeighborhood]? = self.parseData(data: data, key: "users")
+//            DispatchQueue.main.async { completion(details, nil) }
+//        }
+//    }
+    static func getPostReactionsDetails(groupId: Int, postId: Int, completion: @escaping (CompleteReactionsResponse?, EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIGetDetailsReactionGroupPost, groupId, postId, token)
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) } // Adapte l'erreur selon ton modèle d'erreur
+                return
+            }
+            
+            do {
+                // Utilisation directe de JSONDecoder pour décoder la réponse
+                let decoder = JSONDecoder()
+                // Assurez-vous que la structure de la réponse correspond à ce que JSONDecoder s'attend à décoder
+                let details = try decoder.decode(CompleteReactionsResponse.self, from: data)
+                DispatchQueue.main.async { completion(details, nil) }
+            } catch {
+                print("Erreur lors du décodage des données: \(error)")
+                DispatchQueue.main.async { completion(nil, nil) }
+            }
+        }
+    }
+
+
+    
+
+    static func deleteReactionToGroupPost(groupId: Int, postId: Int, completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String(format: kAPIDeleteReactionGroupPost, groupId, postId, token)
+        
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { _, resp, error in
+            guard let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
     
 }

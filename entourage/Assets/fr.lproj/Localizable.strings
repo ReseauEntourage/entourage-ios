@@ -1499,3 +1499,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "copied_text" = "Copié dans le presse-papier !";
 "copy_the_text" = "Copier le texte";
 "copy_the_text_explanation" = "Le texte sera copié dans le presse-papier";
+"text_title_i_like" = "Aimer";
+"text_title_comment" = "Commenter";
+"see_member_react" = "Personnes ayant réagi";

@@ -25,8 +25,6 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_view_comment_post: UIView!
     @IBOutlet weak var ui_view_comment: UIView!
     
-    @IBOutlet weak var ui_view_bt_send: UIView!
-    @IBOutlet weak var ui_lb_chat: UILabel!
     
     @IBOutlet weak var ui_label_ambassador: UILabel!
     
@@ -34,6 +32,15 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @IBOutlet weak var ui_view_translate: UIView!
     @IBOutlet weak var ui_label_translate: UILabel!
+    
+    @IBOutlet weak var ui_view_btn_i_like: UIView!
+    
+    @IBOutlet weak var ui_view_btn_i_comment: UIView!
+    
+    @IBOutlet weak var ui_reaction_stackview: UIStackView!
+    
+    @IBOutlet weak var ui_image_react_btn: UIImageView!
+    @IBOutlet weak var ui_label_i_like: UILabel!
     
     class var identifier: String {
         return String(describing: self)
@@ -51,7 +58,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
@@ -63,15 +70,73 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_comment.enableLongPressCopy()
         ui_image_post?.layer.cornerRadius = 8
         if ui_view_comment != nil {
-            ui_view_bt_send.layer.cornerRadius = ui_view_bt_send.frame.height / 2
             ui_view_comment.layer.cornerRadius = ui_view_comment.frame.height / 2
-            ui_view_comment.layer.borderColor = UIColor.appOrange.cgColor
-            ui_view_comment.layer.borderWidth = 1
-            ui_lb_chat.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
-            ui_lb_chat.text = "comment_post".localized
+
             ui_btn_signal_post.addTarget(self, action: #selector(signalClicked), for: .touchUpInside)
         }
+        if ui_view_btn_i_comment != nil {
+            let commentTapGesture = UITapGestureRecognizer(target: self, action: #selector(commentTapped))
+              ui_view_btn_i_comment.addGestureRecognizer(commentTapGesture)
+              ui_view_btn_i_comment.isUserInteractionEnabled = true
+        }
+        let commentsLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(commentLabelTapped))
+           ui_comments_nb.addGestureRecognizer(commentsLabelTapGesture)
+           ui_comments_nb.isUserInteractionEnabled = true  // Assure-toi que l'interaction utilisateur est activée
+        
+        if(ui_view_btn_i_like != nil){
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+                ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
+        }
+        if ui_view_btn_i_like != nil {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLittleTap))
+            ui_view_btn_i_like.addGestureRecognizer(tapGesture)
+        }
+    }
+    @objc func handleLittleTap(gesture: UITapGestureRecognizer) {
+        AnalyticsLoggerManager.logEvent(name: Clic_Post_Like)
+        if gesture.state == .ended {
+            // Vérifier si l'utilisateur a déjà réagi
+            if postMessage.reactionId == 0 || postMessage.reactionId == nil, let firstReactionType = getStoredReactionTypes()?.first {
+                // Ajouter la première réaction disponible
+                updateReaction(reactionType: firstReactionType, add: true)
+                delegate?.addReaction(post: self.postMessage, reactionType: firstReactionType)
+            } else {
+                // Supprimer la réaction existante si l'utilisateur a déjà réagi
+                if let existingReactionType = getReactionTypeById(postMessage.reactionId ?? 0) {
+                    updateReaction(reactionType: existingReactionType, add: false)
+                    delegate?.deleteReaction(post: self.postMessage, reactionType: existingReactionType)
+                }
+            }
+        }
+    }
 
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            AnalyticsLoggerManager.logEvent(name: Clic_Post_List_Reactions)
+            showReactionsPopup()
+        }
+    }
+    
+    @objc func commentTapped() {
+        delegate?.showMessages(addComment: true, postId: postId, indexPathSelected: currentIndexPath, postMessage: postMessage)
+    }
+    
+    @objc func commentLabelTapped() {
+        delegate?.showMessages(addComment: false, postId: postId, indexPathSelected: currentIndexPath, postMessage: postMessage)
+    }
+    
+    func updateReactionIcon() {
+        if ui_image_react_btn != nil {
+            print("eho postMessage reactionId " , postMessage.reactionId)
+            // Mettre à jour l'icône en fonction de la valeur de reactionId
+            if postMessage.reactionId == 0 || postMessage.reactionId == nil  {
+                ui_image_react_btn.image = UIImage(named: "ic_i_like_grey")
+                ui_label_i_like.textColor = UIColor.black
+            } else {
+                ui_image_react_btn.image = UIImage(named: "ic_i_like")
+                ui_label_i_like.textColor = UIColor.appOrange
+            }
+        }
     }
     
     func toggleTranslation() {
@@ -117,8 +182,135 @@ class NeighborhoodPostCell: UITableViewCell {
     func setTranslatedText(){
         
     }
+    func showReactionsPopup() {
+        guard let storedReactions = getStoredReactionTypes() else { return }
+
+        let popupWidth: CGFloat = 250
+        let popupHeight: CGFloat = 50
+        let xOffset: CGFloat = 40 // Décalage sur la droite
+
+        // Trouver la position du bouton dans la fenêtre de l'application
+        guard let buttonFrame = ui_view_btn_i_like.superview?.convert(ui_view_btn_i_like.frame, to: nil) else { return }
+
+        // Calculer la position de la popup
+        let popupFrame = CGRect(x: buttonFrame.midX - (popupWidth / 2) + xOffset, y: buttonFrame.minY - popupHeight, width: popupWidth, height: popupHeight)
+
+        let popupView = ReactionsPopupView(reactions: storedReactions, frame: popupFrame, delegate: self)
+        
+        // Ajouter la popup à la fenêtre de l'application
+        if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+            window.addSubview(popupView)
+        }
+    }
+
+    class RoundedView: UIView {
+        override var bounds: CGRect {
+            didSet {
+                layer.cornerRadius = bounds.size.width / 2
+            }
+        }
+    }
+    /* guard let _stackview = ui_reaction_stackview else{return} */
+    func displayReactions(for postMessage: PostMessage) {
+        guard let storedReactions = getStoredReactionTypes() else { return }
+        guard let _stackview = ui_reaction_stackview else { return }
+        _stackview.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        var totalReactionsCount = 0
+
+        postMessage.reactions?.forEach { reaction in
+            if let reactionType = storedReactions.first(where: { $0.id == reaction.reactionId }) {
+                let container = RoundedView()
+                container.translatesAutoresizingMaskIntoConstraints = false
+                container.layer.masksToBounds = true
+                container.layer.borderColor = UIColor.appGrisReaction.cgColor
+                container.layer.borderWidth = 1.0
+                container.backgroundColor = .white
+
+                let imageView = UIImageView()
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                container.addSubview(imageView)
+
+                // Contraintes pour le container et le padding de l'image
+                NSLayoutConstraint.activate([
+                    container.widthAnchor.constraint(equalToConstant: 20),
+                    container.heightAnchor.constraint(equalToConstant: 20),
+                    imageView.widthAnchor.constraint(equalToConstant: 10),
+                    imageView.heightAnchor.constraint(equalToConstant: 10),
+                    imageView.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+                    imageView.centerYAnchor.constraint(equalTo: container.centerYAnchor)
+                ])
+
+                imageView.contentMode = .scaleAspectFill
+
+                if let imageUrl = URL(string: reactionType.imageUrl ?? "") {
+                    imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
+                }
+                _stackview.addArrangedSubview(container)
+                totalReactionsCount += reaction.reactionsCount
+            }
+        }
+
+        // Ajouter des contraintes au stack view lui-même si nécessaire
+        // Par exemple, si votre stack view doit avoir une hauteur spécifique
+        NSLayoutConstraint.activate([
+            _stackview.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        _stackview.layoutIfNeeded()
+
+        if totalReactionsCount > 0 {
+            let reactionsCountLabel = UILabel()
+            reactionsCountLabel.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 13), color: .black))
+            reactionsCountLabel.text = "  " + "\(totalReactionsCount)"
+            _stackview.addArrangedSubview(reactionsCountLabel)
+        }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
+        _stackview.isUserInteractionEnabled = true
+        _stackview.addGestureRecognizer(tapGesture)
+    }
     
-    func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
+    @objc func stackViewTapped() {
+        AnalyticsLoggerManager.logEvent(name: Clic_ListReactions_Contact)
+        delegate?.onReactClickSeeMember(post: postMessage) // Assure-toi que `delegate` et `postMessage` sont accessibles ici
+    }
+
+    func updateReaction(reactionType: ReactionType, add: Bool) {
+        if add {
+            // Ajouter une réaction
+            postMessage.reactionId = reactionType.id
+            if let index = postMessage.reactions?.firstIndex(where: { $0.reactionId == reactionType.id }) {
+                // La réaction existe déjà, augmenter le compteur
+                postMessage.reactions?[index].reactionsCount += 1
+            } else {
+                // Ajouter une nouvelle réaction
+                let newReaction = Reaction(reactionId: reactionType.id, chatMessageId: postId, reactionsCount: 1)
+                if postMessage.reactions != nil {
+                    postMessage.reactions?.append(newReaction)
+                } else {
+                    postMessage.reactions = [newReaction]
+                }
+            }
+        } else {
+            // Supprimer une réaction
+            postMessage.reactionId = 0
+            if let index = postMessage.reactions?.firstIndex(where: { $0.reactionId == reactionType.id }) {
+                if postMessage.reactions?[index].reactionsCount ?? 0 > 1 {
+                    postMessage.reactions?[index].reactionsCount -= 1
+                } else {
+                    postMessage.reactions?.remove(at: index)
+                }
+            }
+        }
+
+        // Mettre à jour l'affichage des réactions
+        updateReactionIcon()
+        displayReactions(for: postMessage)
+    }
+
+    
+    func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?, isMember:Bool?) {
+        print("eho passed here ? ")
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleTranslationGesture))
 
         if(ui_view_translate != nil){
@@ -128,6 +320,7 @@ class NeighborhoodPostCell: UITableViewCell {
         
         self.postMessage = message
         self.delegate = delegate
+        updateReactionIcon()
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
         ui_comment.handleURLTap { url in
@@ -162,7 +355,8 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         
         if message.commentsCount == 0 {
-            ui_comments_nb.text = "neighborhood_post_noComment".localized
+            //ui_comments_nb.text = "neighborhood_post_noComment".localized
+            ui_comments_nb.text = ""
             
             ui_comments_nb.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 13), color: .appGrisSombre40))
 
@@ -204,7 +398,49 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_label_ambassador.text = tagString
         }
         
+        displayReactions(for: message)
+        if let isMember = isMember, !isMember {
+            if ui_view_btn_i_like != nil {
+                ui_view_btn_i_like.isUserInteractionEnabled = true
+                // Ajouter un geste pour avertir l'utilisateur
+                let tapGestureForLike = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
+                ui_view_btn_i_like.addGestureRecognizer(tapGestureForLike)
+            }
+            // Configurer pour les non-membres
+            ui_btn_signal_post.isUserInteractionEnabled = true
+            let tapGestureForSignal = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
+            ui_btn_signal_post.addGestureRecognizer(tapGestureForSignal)
+        }else{
+            if(ui_view_btn_i_like != nil){
+                let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+                    ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
+            }
+            if ui_view_btn_i_like != nil {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLittleTap))
+                ui_view_btn_i_like.addGestureRecognizer(tapGesture)
+            }
+            let tapGestureForSignal = UITapGestureRecognizer(target: self, action: #selector(signalClicked))
+            ui_btn_signal_post.addGestureRecognizer(tapGestureForSignal)
+            
+        }
     }
+    
+    @objc func ifNotMemberWarnUser() {
+        delegate?.ifNotMemberWarnUser()
+    }
+    
+    
+    func getStoredReactionTypes() -> [ReactionType]? {
+        guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
+        do {
+            let reactions = try JSONDecoder().decode([ReactionType].self, from: reactionsData)
+            return reactions
+        } catch {
+            print("Erreur de décodage des réactions : \(error)")
+            return nil
+        }
+    }
+
 
     @IBAction func action_show_comments(_ sender: Any) {
         delegate?.showMessages(addComment: false,postId: postId, indexPathSelected: currentIndexPath,postMessage:postMessage)
@@ -229,7 +465,64 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showImage(imageUrl:URL?, postId:Int)
     func signalPost(postId:Int, userId:Int, textString:String)
     func showWebviewUrl(url:URL)
+    func addReaction(post:PostMessage, reactionType:ReactionType)
+    func deleteReaction(post:PostMessage, reactionType:ReactionType)
+    func onReactClickSeeMember(post:PostMessage)
+    func ifNotMemberWarnUser()
+
 }
+
+extension NeighborhoodPostCell: ReactionsPopupViewDelegate {
+//    func reactForPost(reactionType: ReactionType) {
+//        if postMessage.reactionId == reactionType.id {
+//            self.delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
+//        } else {
+//            // Ajouter une nouvelle réaction
+//            self.delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
+//        }
+//    }
+//    func reactForPost(reactionType: ReactionType) {
+//        let alreadyReacted = postMessage.reactions?.contains(where: { $0.reactionId == reactionType.id }) ?? false
+//        if alreadyReacted {
+//            // Supprimer la réaction
+//            updateReaction(reactionType: reactionType, add: false)
+//            delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
+//        } else {
+//            // Ajouter une nouvelle réaction
+//            updateReaction(reactionType: reactionType, add: true)
+//            delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
+//        }
+//    }
+    func reactForPost(reactionType: ReactionType) {
+        if postMessage.reactionId != 0 {
+            if postMessage.reactionId == reactionType.id {
+                // L'utilisateur souhaite supprimer sa réaction précédente
+                updateReaction(reactionType: reactionType, add: false)
+                delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
+            } else {
+                // Supprimer la réaction existante avant d'ajouter la nouvelle
+                if let existingReactionType = getReactionTypeById(postMessage.reactionId ?? 0) {
+                    updateReaction(reactionType: existingReactionType, add: false)
+                    delegate?.deleteReaction(post: self.postMessage, reactionType: existingReactionType)
+                }
+                // Ajouter la nouvelle réaction
+                updateReaction(reactionType: reactionType, add: true)
+                delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
+            }
+        } else {
+            // Ajouter une nouvelle réaction
+            updateReaction(reactionType: reactionType, add: true)
+            delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
+        }
+    }
+
+
+    func getReactionTypeById(_ id: Int) -> ReactionType? {
+        // Retourne le ReactionType correspondant à l'ID
+        return getStoredReactionTypes()?.first { $0.id == id }
+    }
+}
+
 
 
 class NeighborhoodPostTextCell: NeighborhoodPostCell {
@@ -248,3 +541,77 @@ class NeighborhoodPostTranslationCell:NeighborhoodPostCell{
 class NeighborhoodPostImageTranslationCell:NeighborhoodPostCell{
     
 }
+
+protocol ReactionsPopupViewDelegate: AnyObject {
+    func reactForPost(reactionType: ReactionType)
+    func getReactionTypeById(_ id: Int) -> ReactionType?
+}
+
+class ReactionsPopupView: UIView {
+
+    weak var delegate: ReactionsPopupViewDelegate?
+    
+    init(reactions: [ReactionType], frame: CGRect, delegate: ReactionsPopupViewDelegate?) {
+        
+        super.init(frame: frame)
+        self.delegate = delegate
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 25
+        self.layer.masksToBounds = true
+        self.layer.borderColor = UIColor.appGrisReaction.cgColor
+        self.layer.borderWidth = 1
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 10
+        NotificationCenter.default.addObserver(self, selector: #selector(dismiss), name: Notification.Name("FermerReactionsPopup"), object: nil)
+
+
+        for reaction in reactions {
+            let imageView = UIImageView()
+            if let imageUrl = URL(string: reaction.imageUrl ?? "") {
+                imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
+            }
+            imageView.contentMode = .scaleAspectFill
+            imageView.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(reactionTapped))
+            imageView.addGestureRecognizer(tapGesture)
+            imageView.tag = reaction.id
+            stackView.addArrangedSubview(imageView)
+            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        }
+
+        self.addSubview(stackView)
+        NSLayoutConstraint.activate([
+                  stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),      // Padding en haut
+                  stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5), // Padding en bas
+                  stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10), // Padding à gauche
+                  stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10) // Padding à droite
+              ])
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func dismiss() {
+        self.removeFromSuperview()
+    }
+
+    @objc func reactionTapped(_ sender: UITapGestureRecognizer) {
+        guard let imageView = sender.view as? UIImageView else { return }
+        let reactionId = imageView.tag
+        if let reaction = delegate?.getReactionTypeById(reactionId) {
+            delegate?.reactForPost(reactionType: reaction)
+        }
+        dismiss()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+

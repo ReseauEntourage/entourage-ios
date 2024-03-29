@@ -148,6 +148,15 @@ extension EventDetailFullFeedViewController: EventDetailFullDelegate {
             self.navigationController?.present(navVC, animated: true)
         }
     }
+    func showMemberReact(postId:Int){
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.event = event
+            vc.postId = postId
+            vc.eventId = eventId
+            vc.isFromReact = true
+            self.navigationController?.present(navVC, animated: true)
+        }
+    }
     
     func showLocation() {
         if event?.isCanceled() ?? false { return }

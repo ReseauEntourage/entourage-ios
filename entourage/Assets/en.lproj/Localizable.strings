@@ -1485,3 +1485,6 @@
 "copied_text" = "Copied to clipboard!";
 "copy_the_text" = "Copy text";
 "copy_the_text_explanation" = "The text will be copied to the clipboard";
+"text_title_i_like" = "Like";
+"text_title_comment" = "Comment";
+"see_member_react" = "People who reacted";

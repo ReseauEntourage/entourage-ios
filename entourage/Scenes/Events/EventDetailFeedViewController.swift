@@ -611,7 +611,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
                 identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
+            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.event?.isMember)
             return cell
         }
         
@@ -646,7 +646,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
+        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.event?.isMember)
         return cell
     }
     
@@ -778,6 +778,15 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
             self.navigationController?.present(navVC, animated: true)
         }
     }
+    func showMemberReact(postId:Int){
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.event = event
+            vc.postId = postId
+            vc.eventId = eventId
+            vc.isFromReact = true
+            self.navigationController?.present(navVC, animated: true)
+        }
+    }
     func joinLeave() {
         joinLeaveEvent()
     }
@@ -807,6 +816,37 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
+    func ifNotMemberWarnUser() {
+        let alertController = UIAlertController(title: "Attention", message: "Vous devez rejoindre le groupe pour effectuer cette action.", preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: "OK", style: .default) { action in
+                    // Code à exécuter lorsque l'utilisateur touche le bouton OK
+                    // Tu peux le laisser vide si tu ne veux rien faire de spécial
+                }
+                
+                alertController.addAction(okAction)
+                
+                // Présenter l'alerte à l'utilisateur
+                present(alertController, animated: true, completion: nil)
+    }
+    
+    func onReactClickSeeMember(post: PostMessage) {
+        self.showMemberReact(postId: post.uid)
+    }
+    
+    func addReaction(post: PostMessage, reactionType: ReactionType) {
+        var reactionWrapper = ReactionWrapper()
+        reactionWrapper.reactionId = reactionType.id
+        EventService.postReactionToEventPost(eventId: self.eventId, postId: post.uid, reactionWrapper: reactionWrapper) { error in
+
+        }
+    }
+    
+    func deleteReaction(post: PostMessage, reactionType: ReactionType) {
+        EventService.deleteReactionToEventPost(eventId: self.eventId, postId: post.uid) { error in
+        }
+    }
+    
     func showWebviewUrl(url: URL) {
         WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }

@@ -97,26 +97,38 @@ class NetworkManager {
     }
     
     func requestPost(endPoint:String,headers:[String:String]?, body:Data?, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
+        
         let url = getBaseUrl() + endPoint
         
         guard let url = URL(string: url) else {
-            completionHandler(nil,nil,nil)
+            completionHandler(nil, nil, nil)
             return
         }
         
         var urlRequest = URLRequest.init(url: url)
         urlRequest.timeoutInterval = 40
         urlRequest.httpMethod = "POST"
-        
+
+        // Afficher l'URL et la méthode
+        Logger.print("URL: \(url)")
+        Logger.print("Method: \(urlRequest.httpMethod ?? "N/A")")
+
+        // Afficher les en-têtes
         if let _headers = headers {
-            for (key,value) in _headers {
+            for (key, value) in _headers {
                 urlRequest.addValue(value, forHTTPHeaderField: key)
+                Logger.print("Header: \(key) Value: \(value)")
+            }
+        }
+
+        // Afficher le corps de la requête
+        if let body = body {
+            urlRequest.httpBody = body
+            if let bodyString = String(data: body, encoding: .utf8) {
+                Logger.print("Body: \(bodyString)")
             }
         }
         
-        if let body = body {
-            urlRequest.httpBody = body
-        }
         
         addRequiereHeaders(urlRequest: &urlRequest)
         session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)

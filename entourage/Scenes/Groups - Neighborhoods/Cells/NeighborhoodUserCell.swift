@@ -14,8 +14,10 @@ class NeighborhoodUserCell: UITableViewCell {
     @IBOutlet weak var ui_role: UILabel!
     @IBOutlet weak var ui_view_separator: UIView!
     
+    @IBOutlet weak var ic_image_reaction: UIImageView!
     @IBOutlet weak var ui_bt_message: UIButton!
     @IBOutlet weak var ui_picto_message: UIImageView!
+    @IBOutlet weak var ui_view: UIView!
     
     var position = 0
     weak var delegate: NeighborhoodUserCellDelegate? = nil
@@ -28,16 +30,26 @@ class NeighborhoodUserCell: UITableViewCell {
         ui_username.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_role.font = ApplicationTheme.getFontNunitoRegular(size: 11)
         ui_role.textColor = .appOrangeLight
+        // Configuration de l'arrondi pour ui_view
+        ui_view.layer.cornerRadius = ui_view.frame.height / 2
+        ui_view.clipsToBounds = true // Ceci est nécessaire pour appliquer l'arrondi
+        
+        // Configuration du bord
+        ui_view.layer.borderWidth = 1 // Définit la largeur du bord
+        ui_view.layer.borderColor = UIColor(named: "grey_reaction")?.cgColor
+        
+        
         
     }
     
-    func populateCell(isMe:Bool, username:String, role:String?, imageUrl:String?, showBtMessage:Bool,delegate:NeighborhoodUserCellDelegate, position:Int) {
+    func populateCell(isMe:Bool, username:String, role:String?, imageUrl:String?, showBtMessage:Bool,delegate:NeighborhoodUserCellDelegate, position:Int, reactionType:ReactionType?) {
         ui_username.text = username
         ui_role.text = role
         
+        
         self.delegate = delegate
         self.position = position
-        
+        print("position " , position)
         ui_bt_message.isHidden = !showBtMessage
         ui_picto_message.isHidden = !showBtMessage
         
@@ -50,7 +62,30 @@ class NeighborhoodUserCell: UITableViewCell {
         
         ui_bt_message.isHidden = isMe
         ui_picto_message.isHidden = isMe
+        // Supposons que reactionType.id contient l'ID de la réaction que tu veux afficher
+        if let reactionId = reactionType?.id,
+           let completeReactionType = getStoredReactionTypes()?.first(where: { $0.id == reactionId }),
+           let imageUrl = URL(string: completeReactionType.imageUrl ?? "") {
+            ic_image_reaction.isHidden = false
+            ui_view.isHidden = false
+            ic_image_reaction.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
+        } else {
+            // Gérer le cas où l'URL de l'image n'est pas disponible
+            ic_image_reaction.isHidden = true
+            ui_view.isHidden = true
+        }
         
+    }
+    
+    func getStoredReactionTypes() -> [ReactionType]? {
+        guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
+        do {
+            let reactions = try JSONDecoder().decode([ReactionType].self, from: reactionsData)
+            return reactions
+        } catch {
+            print("Erreur de décodage des réactions : \(error)")
+            return nil
+        }
     }
     
     @IBAction func action_send_message(_ sender: Any) {

@@ -91,6 +91,9 @@ extension UIColor {
     static var appGrisSombre: UIColor {
         return UIColor(named: "gris_sombre") ?? .red
     }
+    static var appGrisReaction: UIColor {
+        return UIColor(named: "grey_reaction") ?? .red
+    }
     static var appGrisSombre40: UIColor {
         return UIColor(named: "gris_sombre_40") ?? .red
     }
