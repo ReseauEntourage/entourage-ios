@@ -233,7 +233,7 @@ class EventEditMainViewController: UIViewController {
     
     private func showPopRecurrency() {
         let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "event_mod_pop_validate_bt".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonAccept = MJAlertButtonType(title: "event_mod_pop_validate_bt".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         
         customAlert.configurePopWithChoice(alertTitle: "event_mod_pop_title".localized, choice1: "params_cancel_event_recurrency_choice1".localized, choice2: "params_cancel_event_recurrency_choice2".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), choiceStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
         
@@ -493,9 +493,9 @@ extension EventEditMainViewController: MJNavBackViewDelegate {
         }
         
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "eventModPopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "eventModPopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: "eventModPopCloseBackTitle".localized, message: "eventModPopCloseBackMessage".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        let buttonCancel = MJAlertButtonType(title: "eventModPopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "eventModPopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        alertVC.configureAlert(alertTitle: "eventModPopCloseBackTitle".localized, message: "eventModPopCloseBackMessage".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         alertVC.delegate = self
         alertVC.show()
     }

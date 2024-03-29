@@ -101,7 +101,7 @@ class ProfileEditBlockedUsersViewController: BasePopViewController {
     func showPopUnBlockUser(username:String, isSingle:Bool) {
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "params_unblock_user_pop_bt_unblock".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_unblock_user_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_unblock_user_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         
         let desc = String.init(format: "params_unblock_user_pop_message".localized, username)
         let title = isSingle ? "params_unblock_user_pop_title".localized : "params_unblock_users_pop_title".localized

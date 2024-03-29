@@ -32,6 +32,8 @@ class EventDetailMessagesViewController: UIViewController {
     var hashedCommentId:String = ""
     var eventName = ""
     var isGroupMember = false
+    var translatedMessageIDs = Set<Int>()
+
     
     var messages = [PostMessage]()
     var meId:Int = 0
@@ -103,6 +105,14 @@ class EventDetailMessagesViewController: UIViewController {
             _ = ui_textview_message.becomeFirstResponder()
         }
     }
+    func setItemsTranslated(messages:[PostMessage]){
+        if LanguageManager.getTranslatedByDefaultValue(){
+            for _message in messages{
+                translatedMessageIDs.insert(_message.uid)
+            }
+        }
+
+    }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
@@ -153,7 +163,7 @@ class EventDetailMessagesViewController: UIViewController {
             if let messages = messages {
                 self.messages = messages
                 self.ui_view_empty.isHidden = self.messages.count > 0
-                
+                self.setItemsTranslated(messages: messages)
                 self.ui_tableview.reloadData()
                 
                 if self.postMessage == nil {
@@ -261,13 +271,14 @@ extension EventDetailMessagesViewController: UITableViewDataSource, UITableViewD
         }
         
         let realIndexPath = postMessage == nil ? indexPath.row : indexPath.row - 1
-        
+
         
         if messagesForRetry.count > 0 {
             if realIndexPath >= messages.count {
                 let message = messagesForRetry[realIndexPath - messages.count]
+                let isTranslated = translatedMessageIDs.contains(message.uid)
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe", for: indexPath) as! NeighborhoodMessageCell
-                cell.populateCell(isMe: true, message: message, isRetry: true, positionRetry: realIndexPath - messages.count, delegate: self)
+                cell.populateCell(isMe: true, message: message, isRetry: true, positionRetry: realIndexPath - messages.count, delegate: self, isTranslated: isTranslated)
                 return cell
             }
         }
@@ -281,7 +292,8 @@ extension EventDetailMessagesViewController: UITableViewDataSource, UITableViewD
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NeighborhoodMessageCell
-        cell.populateCell(isMe: isMe, message: message, isRetry: false, delegate: self)
+        let isTranslated = translatedMessageIDs.contains(message.uid)
+        cell.populateCell(isMe: isMe, message: message, isRetry: false, delegate: self,isTranslated:isTranslated)
         return cell
     }
 }
@@ -362,6 +374,20 @@ extension EventDetailMessagesViewController:MessageCellSignalDelegate {
 
 //MARK: - GroupDetailDelegate -
 extension EventDetailMessagesViewController:GroupDetailDelegate {
+    func translateItem(id: Int) {
+        if translatedMessageIDs.contains(id) {
+            translatedMessageIDs.remove(id)
+        } else {
+            translatedMessageIDs.insert(id)
+        }
+        
+        // Trouvez l'index du message et rechargez la cellule
+        if let index = messages.firstIndex(where: { $0.uid == id }) {
+            let indexPath = IndexPath(row: index + (postMessage != nil ? 1 : 0), section: 0)
+            ui_tableview.reloadRows(at: [indexPath], with: .none)
+        }
+    }
+    
     func publicationDeleted() {
         getMessages()
         self.ui_tableview.reloadData()
@@ -369,7 +395,7 @@ extension EventDetailMessagesViewController:GroupDetailDelegate {
     
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrange, cornerRadius: -1)
         let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
         
         alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)

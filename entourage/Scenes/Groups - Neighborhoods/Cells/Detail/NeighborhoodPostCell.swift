@@ -32,6 +32,8 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @IBOutlet weak var ui_btn_signal_post: UIButton!
     
+    @IBOutlet weak var ui_view_translate: UIView!
+    @IBOutlet weak var ui_label_translate: UILabel!
     
     class var identifier: String {
         return String(describing: self)
@@ -42,11 +44,14 @@ class NeighborhoodPostCell: UITableViewCell {
     var currentIndexPath:IndexPath? = nil
     var userId:Int? = nil
     var imageUrl:URL? = nil
+    var isTranslated: Bool = !LanguageManager.getTranslatedByDefaultValue()
+
     
     var postMessage:PostMessage!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
@@ -68,6 +73,37 @@ class NeighborhoodPostCell: UITableViewCell {
 
     }
     
+    func toggleTranslation() {
+        isTranslated.toggle()
+        // Mise à jour de ui_label_translate
+        if let ui_label_translate = ui_label_translate {
+            let text = isTranslated ? "layout_translate_title_original".localized : "layout_translate_title_translation".localized
+            let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+            let underlineAttributedString = NSAttributedString(string: text, attributes: underlineAttribute)
+            ui_label_translate.attributedText = underlineAttributedString
+            ui_label_translate.font = UIFont(name: "Quicksand-Bold", size: 13)
+            ui_label_translate.textColor = UIColor.orange
+            ui_label_translate.isHighlighted = true
+        }
+
+        
+        // Mise à jour de ui_comment
+        if isTranslated {
+            if let _translation = postMessage.contentTranslations{
+                ui_comment.text = _translation.translation
+            }
+        } else {
+            if let _translation = postMessage.contentTranslations {
+                ui_comment.text = _translation.original
+            }
+        }
+    }
+
+
+    @objc func toggleTranslationGesture() {
+        toggleTranslation()
+    }
+    
     @objc func signalClicked(){
         self.delegate?.signalPost(postId: self.postId, userId: self.userId!)
     }
@@ -77,15 +113,28 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_btn_signal_post.removeFromSuperview()
     }
     
+    func setTranslatedText(){
+        
+    }
+    
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleTranslationGesture))
+
+        if(ui_view_translate != nil){
+            ui_view_translate.addGestureRecognizer(tapGesture)
+        }
+
+        
         self.postMessage = message
         self.delegate = delegate
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
-        ui_comment.text = message.content
         ui_comment.handleURLTap { url in
             // Ouvrez le lien dans Safari, par exemple
             delegate.showWebviewUrl(url: url)
+        }
+        if postMessage.contentTranslations == nil {
+            ui_comment.text = postMessage.content
         }
         
         if let _status = message.status {
@@ -96,7 +145,7 @@ class NeighborhoodPostCell: UITableViewCell {
             }else{
                 ui_comment.textColor = .black
                 ui_btn_signal_post.isHidden = false
-                ui_comment.text = message.content
+                toggleTranslation()
             }
         }
         
@@ -190,5 +239,11 @@ class NeighborhoodPostImageCell: NeighborhoodPostCell {
    // override class var identifier: String {return self.description()}
 }
 class NeighborhoodPostDeletedCell:NeighborhoodPostCell{
+    
+}
+class NeighborhoodPostTranslationCell:NeighborhoodPostCell{
+    
+}
+class NeighborhoodPostImageTranslationCell:NeighborhoodPostCell{
     
 }

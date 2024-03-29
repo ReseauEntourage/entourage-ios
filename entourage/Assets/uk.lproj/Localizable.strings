@@ -395,6 +395,10 @@
 "all_event_title" = "Всі події";
 "my_event_title" = "Мої події";
 "mainUserTitleEvents" = "Події";
+"all_group_title" = "Усі групи";
+"my_group_title" = "Мої групи";
+"mainTitleGroup" = "Групи";
+
 
 "mainUserTitleGroup" = "Група\nсусідів";
 "mainUserTitleGroups" = "Групи\nсусідів";
@@ -866,7 +870,7 @@
 "event_mod_group_bt_mod" = "Щоб змінити";
 
 "event_mod_title" = "Редагувати мою подію";
-"event_create_title" = "нова подія";
+"event_create_title" = "Hова подія";
 "event_create_title_phase" = "етап";
 "event_create_title_phase_nb" = "0%d.";
 
@@ -1465,3 +1469,31 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Кочівні зустрічі";
 "interest_other" = "Інше";
 "contact" = "Зв'язатися";
+
+"report_modal_title_translate" = "Перекласти";
+"report_modal_subtitle_translate" = "Ми автоматично перекладаємо повідомлення, написані громадянами";
+"layout_translate_title_original" = "Показати оригінал";
+"layout_translate_title_translation" = "Перекласти";
+"layout_translate_action_translation_button" = "Натисніть тут, щоб показати оригінальну версію";
+"layout_translate_title_original_button" = "Показати переклад";
+"layout_translate_title_original_title" = "Ця сторінка не була перекладена.";
+"layout_translate_title_translation_title" = "Деяка інформація була автоматично перекладена.";
+"params_translation" = "Переклад";
+"Category_Food" = "Їжа";
+"Category_Accommodation" = "Проживання";
+"Category_Health" = "Охорона здоров'я";
+"Category_Refresh" = "Освіжитися";
+"Category_Toilets" = "Туалети";
+"Category_Fountains" = "Фонтани";
+"Category_Wash" = "Митися";
+"Category_Laundries" = "Пральні";
+"Category_Orient" = "Орієнтація";
+"Category_SelfCare" = "Самообслуговування";
+"Category_Clothes" = "Одяг та обладнання";
+"Category_DonationBox" = "Коробка пожертв/Читання";
+"Category_Reintegration" = "Реінтеграція";
+"Category_Partners" = "Партнери";
+"Category_Other" = "Інше";
+"create_group_btn_title" = "Створити групу";
+"friendly_links_title" = "Дружні та солідарні зв'язки";
+"friendly_links_text" = "У Entourage основною метою є сприяння дружнім та стійким зв'язкам. Я зобов'язуюсь дотримуватися цього напрямку, уникаючи будь-яких романтичних чи коханих підходів чи публікацій. Таким чином, я активно сприяю підтриманню теплої та доброзичливої атмосфери для всіх.";

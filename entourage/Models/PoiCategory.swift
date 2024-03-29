@@ -46,36 +46,36 @@ struct PoiCategory {
     static func nameForCategoryId(sid:Int?) -> String {
         if sid == nil {return "--"}
             switch (sid) {
-        case 1:
-            return "Se nourrir"
-        case 2:
-            return "Se loger"
-        case 3:
-            return "Se soigner"
-        case 4:
-            return "Se rafraîchir"
-        case 40:
-            return "Toilettes"
-        case 41:
-            return "Fontaines"
-        case 42:
-            return "Se laver"
-        case 43:
-            return "Laveries"
-        case 5:
-            return "S'orienter"
-        case 6:
-            return "S'occuper de soi"
-        case 61:
-            return "Vêtements & matériels"
-        case 62:
-            return "Boite à dons/lire"
-        case 7:
-            return "Se réinsérer"
-        case 8:
-            return "Partenaires"
-        default:
-            return "Autre"
-        }
+                case 1:
+                    return "Category_Food".localized
+                case 2:
+                    return "Category_Accommodation".localized
+                case 3:
+                    return "Category_Health".localized
+                case 4:
+                    return "Category_Refresh".localized
+                case 40:
+                    return "Category_Toilets".localized
+                case 41:
+                    return "Category_Fountains".localized
+                case 42:
+                    return "Category_Wash".localized
+                case 43:
+                    return "Category_Laundries".localized
+                case 5:
+                    return "Category_Orient".localized
+                case 6:
+                    return "Category_SelfCare".localized
+                case 61:
+                    return "Category_Clothes".localized
+                case 62:
+                    return "Category_DonationBox".localized
+                case 7:
+                    return "Category_Reintegration".localized
+                case 8:
+                    return "Category_Partners".localized
+                default:
+                    return "Category_Other".localized
+                }
     }
 }

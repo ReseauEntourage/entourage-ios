@@ -395,6 +395,10 @@
 "all_event_title" = "Todos los eventos";
 "my_event_title" = "mis eventos";
 "mainUserTitleEvents" = "Eventos";
+"all_group_title" = "Todos los grupos";
+"my_group_title" = "Mis grupos";
+"mainTitleGroup" = "Grupos";
+
 
 "mainUserTitleGroup" = "Grupo\nde vecinos";
 "mainUserTitleGroups" = "Grupos\nde vecinos";
@@ -802,7 +806,7 @@
 "home_events_title" = "Eventos\n";
 "home_groups_title" = "Grupos de vecinos";
 "home_event_title" = "Participación en un evento.";
-"home_group_title" = "grupo de vecinos";
+"home_group_title" = "Grupo de vecinos";
 "home_no_message_title" = "Aún no se han enviado mensajes";
 "home_no_event_title" = "Asiste a tu primer evento";
 "home_no_group_title" = "¡No esperes más para unirte a un grupo de vecinos!";
@@ -866,7 +870,7 @@
 "event_mod_group_bt_mod" = "Editar";
 
 "event_mod_title" = "Editar mi evento";
-"event_create_title" = "nuevo evento";
+"event_create_title" = "Nuevo evento";
 "event_create_title_phase" = "Escenario";
 "event_create_title_phase_nb" = "0%d.";
 
@@ -1382,15 +1386,15 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_btn_more_action_contrib" = "Ver todas las contribuciones";
 
 "home_v2_title_event" = "Participa en un evento solidario";
-"home_v2_subtitle_event" = "Mucha solidaridad cerca.";
+"home_v2_subtitle_event" = "Mucha solidaridad cerca";
 "home_v2_btn_more_event" = "Ver todos los eventos";
 
 "home_v2_title_group" = "Tus grupos de vecinos";
-"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida.";
+"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida";
 "home_v2_btn_more_group" = "Ver todos los grupos";
 
 "home_v2_title_map" = "Descubra direcciones útiles";
-"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas.";
+"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas";
 "home_v2_button_map" = "Mapa de lugares solidarios cerca de ti";
 
 "home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";
@@ -2225,7 +2229,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_events_title" = "Eventos\n";
 "home_groups_title" = "Grupos de vecinos";
 "home_event_title" = "Participación en un evento.";
-"home_group_title" = "grupo de vecinos";
+"home_group_title" = "Grupo de vecinos";
 "home_no_message_title" = "Aún no se han enviado mensajes";
 "home_no_event_title" = "Asiste a tu primer evento";
 "home_no_group_title" = "¡No esperes más para unirte a un grupo de vecinos!";
@@ -2289,9 +2293,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_mod_group_bt_mod" = "Editar";
 
 "event_mod_title" = "Editar mi evento";
-"event_create_title" = "nuevo evento";
-"event_create_title_phase" = "Escenario";
-"event_create_title_phase_nb" = "0%d.";
 
 "event_create_phase_1_name" = "Nombre del evento: obligatorio";
 "event_create_phase_1_name_placeholder" = "Dale al evento un nombre explícito";
@@ -2805,15 +2806,15 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_btn_more_action_contrib" = "Ver todas las contribuciones";
 
 "home_v2_title_event" = "Participa en un evento solidario";
-"home_v2_subtitle_event" = "Mucha solidaridad cerca.";
+"home_v2_subtitle_event" = "Mucha solidaridad cerca";
 "home_v2_btn_more_event" = "Ver todos los eventos";
 
 "home_v2_title_group" = "Tus grupos de vecinos";
-"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida.";
+"home_v2_subtitle_group" = "Intercambia con tus vecinos de todos los ámbitos de la vida";
 "home_v2_btn_more_group" = "Ver todos los grupos";
 
 "home_v2_title_map" = "Descubra direcciones útiles";
-"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas.";
+"home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas";
 "home_v2_button_map" = "Mapa de lugares solidarios cerca de ti";
 
 "home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";
@@ -2888,3 +2889,32 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Encuentros nómadas";
 "interest_other" = "Otro";
 "contact" = "Contactar";
+
+"report_modal_title_translate" = "Traducir";
+"report_modal_subtitle_translate" = "Traducimos automáticamente los mensajes escritos por los ciudadanos";
+"layout_translate_title_original" = "Mostrar original";
+"layout_translate_title_translation" = "Traducir";
+"layout_translate_action_translation_button" = "Haz clic aquí para mostrar la versión original";
+"layout_translate_title_original_button" = "Mostrar traducción";
+"layout_translate_title_original_title" = "Esta página no ha sido traducida.";
+"layout_translate_title_translation_title" = "Alguna información ha sido traducida automáticamente.";
+
+"params_translation" = "Traducción";
+"Category_Food" = "Alimentación";
+"Category_Accommodation" = "Alojamiento";
+"Category_Health" = "Salud";
+"Category_Refresh" = "Refrescarse";
+"Category_Toilets" = "Aseos";
+"Category_Fountains" = "Fuentes";
+"Category_Wash" = "Lavarse";
+"Category_Laundries" = "Lavanderías";
+"Category_Orient" = "Orientación";
+"Category_SelfCare" = "Cuidado Personal";
+"Category_Clothes" = "Ropa y Materiales";
+"Category_DonationBox" = "Caja de Donaciones/Lectura";
+"Category_Reintegration" = "Reinserción";
+"Category_Partners" = "Socios";
+"Category_Other" = "Otro";
+"create_group_btn_title" = "Crear un grupo";
+"friendly_links_title" = "Vínculos amistosos y solidarios";
+"friendly_links_text" = "En Entourage, el objetivo principal es fomentar lazos amistosos y duraderos. Me comprometo a respetar esta orientación evitando cualquier enfoque o publicación de carácter romántico o amoroso. De esta manera, contribuyo activamente a mantener un ambiente cálido y acogedor para todos.";

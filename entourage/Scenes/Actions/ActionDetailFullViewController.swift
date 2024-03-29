@@ -33,6 +33,7 @@ class ActionDetailFullViewController: UIViewController {
     @IBOutlet weak var ui_label_supress_btn: UILabel!
     @IBOutlet weak var ui_label_contact_btn: UILabel!
     @IBOutlet weak var ui_label_modify_btn: UILabel!
+    
     var action:Action? = nil
     var actionId = 0
     var hashedActionId = ""
@@ -72,6 +73,8 @@ class ActionDetailFullViewController: UIViewController {
     @objc func updateAction() {
         getAction()
     }
+    
+
     
     func getAction() {
         var _actionId = ""
@@ -316,6 +319,10 @@ extension ActionDetailFullViewController: UITableViewDataSource, UITableViewDele
 
 //MARK: - GroupDetailDelegate -
 extension ActionDetailFullViewController: GroupDetailDelegate {
+    func translateItem(id: Int) {
+        //TODO Translate
+    }
+    
     func publicationDeleted() {
         getAction()
         self.ui_tableview.reloadData()
@@ -323,7 +330,7 @@ extension ActionDetailFullViewController: GroupDetailDelegate {
     
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         
         let _title = isContrib ? "report_contrib_title".localized : "report_solicitation_title".localized
         alertVC.configureAlert(alertTitle: _title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)

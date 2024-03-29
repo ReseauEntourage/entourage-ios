@@ -98,6 +98,9 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_tableview.register(UINib(nibName: NeighborhoodDetailTopCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodDetailTopMemberCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopMemberCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostTranslationCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTranslationCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostImageTranslationCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageTranslationCell.identifier)
+
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyEventCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyEventCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEventsTableviewCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEventsTableviewCell.identifier)
         ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
@@ -222,13 +225,13 @@ class NeighborhoodDetailViewController: UIViewController {
                 self.present(alertController, animated: true, completion: nil)
                 
             }
-        
             self.neighborhood = group
             self.splitMessages()
             self.ui_tableview.reloadData()
             self.isLoading = false
             self.populateTopView()
-            
+            self.neighborhood?.messages?.removeAll()
+            self.getMorePosts()
             if hasToRefreshLists {
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
             }
@@ -238,29 +241,49 @@ class NeighborhoodDetailViewController: UIViewController {
     func getMorePosts() {
         self.isLoading = true
         NeighborhoodService.getNeighborhoodPostsPaging(id: neighborhoodId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
-            if let post = post {
+            guard let post = post, error == nil else {
+                // Gérer l'erreur ici si nécessaire
+                self.isLoading = false
+                return
+            }
+
+            DispatchQueue.main.async {
+                // Mettre à jour les données
                 self.neighborhood?.messages?.append(contentsOf: post)
                 self.splitMessages()
-                let totalSections = self.numberOfSections(in: self.ui_tableview)
-                if self.hasNewAndOldSections && totalSections > 2 {
-                    UIView.performWithoutAnimation {
-                        self.ui_tableview.beginUpdates()
-                        self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .none)
-                        self.ui_tableview.endUpdates()
+
+                // Mise à jour de la vue table en fonction des scénarios
+                self.ui_tableview.performBatchUpdates({
+                    let currentSections = self.ui_tableview.numberOfSections
+
+                    // Scénario 1: Aucun message
+                    if self.neighborhood?.messages?.isEmpty ?? true {
+
+                    } else {
+                        // Scénario 2: Messages anciens et/ou nouveaux
+                        if self.hasNewAndOldSections {
+                            if currentSections == 1 {
+                                // Ajouter une section pour les nouveaux messages
+                                self.ui_tableview.insertSections(IndexSet(integer: 1), with: .fade)
+                            }
+                            // Recharger la section des messages anciens
+                            self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .fade)
+                        } else if currentSections == 3 {
+                            // Revenir à une seule section si nécessaire
+                            self.ui_tableview.deleteSections(IndexSet(integer: 2), with: .fade)
+                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
+                        } else {
+                            // Recharger la section existante
+                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
+                        }
                     }
-                }
-                else if totalSections > 1 {
-                    UIView.performWithoutAnimation {
-                        self.ui_tableview.beginUpdates()
-                        self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .none)
-                        self.ui_tableview.endUpdates()
-                    }
-                }
+                }, completion: nil)
+
                 self.isLoading = false
             }
-            //TODO: Error ?
         }
     }
+
 
     
     func splitMessages() {
@@ -324,10 +347,10 @@ class NeighborhoodDetailViewController: UIViewController {
         }
         
         let alertVC = MJAlertController()
-        let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontCourantBoldOrange(size: 15), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontH1Blanc(size: 15), bgColor: .appOrange, cornerRadius: -1)
         alertVC.alertTagName = .welcomeMessage
         
-        alertVC.configureAlert(alertTitle: title, message: message, buttonrightType: buttonWelcome, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: false)
+        alertVC.configureAlert(alertTitle: title, message: message, buttonrightType: buttonWelcome, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: false)
         alertVC.delegate = self
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
@@ -340,10 +363,10 @@ class NeighborhoodDetailViewController: UIViewController {
     func showPopLeave() {
 
         let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "params_leave_group_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_leave_group_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonAccept = MJAlertButtonType(title: "params_leave_group_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_leave_group_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "params_leave_group_pop_title".localized, message: "params_leave_group_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        customAlert.configureAlert(alertTitle: "params_leave_group_pop_title".localized, message: "params_leave_group_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
         
         customAlert.alertTagName = .None
         customAlert.delegate = self
@@ -532,6 +555,15 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
+                if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
+                    identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
+                }
+                print("eho contentTranslation " , postmessage.contentTranslations)
+                if(postmessage.contentTranslations == nil){
+                    identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+                }
+                print("eho identifier " , identifier)
+
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
                 return cell
@@ -562,6 +594,15 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
+                if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
+                    identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
+                }
+                print("eho contentTranslation " , postmessage.contentTranslations)
+                if(postmessage.contentTranslations == nil){
+                    identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+                }
+                print("eho identifier " , identifier)
+
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
                 return cell
@@ -575,6 +616,12 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
+            }
+            if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
+                identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
+            }
+            if(postmessage.contentTranslations == nil){
+                identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
@@ -808,6 +855,10 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
     }
 }
 extension NeighborhoodDetailViewController:GroupDetailDelegate{
+    func translateItem(id: Int) {
+        //TODO TRANSLATE
+    }
+    
     func publicationDeleted() {
         self.getNeighborhoodDetail(hasToRefreshLists:true)
         self.ui_tableview.reloadData()
@@ -815,7 +866,7 @@ extension NeighborhoodDetailViewController:GroupDetailDelegate{
     
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
         
         alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)

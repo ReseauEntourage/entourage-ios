@@ -183,7 +183,18 @@ struct ActionsService:ParsingDataCodable {
                 DispatchQueue.main.async { completion(nil, error) }
                 return
             }
-            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject]
+                if let jsonSolicitation = json?["solicitation"] as? [String: AnyObject] {
+                    let decoder = JSONDecoder()
+                    let jsonData = try JSONSerialization.data(withJSONObject: jsonSolicitation)
+                    let solicitationResponse = try decoder.decode(Action.self, from: jsonData)
+                    // Utilisez 'solicitationResponse' comme nécessaire
+                }
+            } catch {
+                print("Erreur de décodage : \(error)")
+            }
+
             let action:Action? = self.parseData(data: data, key: isContrib ? _contribution : _solicitation)
             DispatchQueue.main.async { completion(action, nil) }
         }

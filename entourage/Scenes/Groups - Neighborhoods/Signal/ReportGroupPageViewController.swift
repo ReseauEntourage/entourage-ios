@@ -29,7 +29,6 @@ class ReportGroupPageViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.isPagingEnabled = false
         
         reportVc = viewController(isSend:false) as? ReportGroupViewController
         
@@ -73,6 +72,11 @@ class ReportGroupPageViewController: UIPageViewController {
 
 //MARK: - ReportUserPageDelegate -
 extension ReportGroupPageViewController: ReportGroupPageDelegate {
+    func translateItem(id: Int) {
+        parentDelegate?.translateItem(id: id)
+        self.parent?.dismiss(animated: true)
+    }
+    
     func chooseReport() {
         haveChosen = true
         self.titleDelegate?.setTitleForSignal()
@@ -128,4 +132,5 @@ protocol ReportGroupPageDelegate: AnyObject {
     func closeMain()
     func closeMainForDelete()
     func chooseReport()
+    func translateItem(id:Int)
 }

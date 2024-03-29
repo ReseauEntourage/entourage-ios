@@ -40,6 +40,9 @@
 "tabbar_messages" = "Dyskusje";
 "tabbar_groups" = "Grupy";
 "tabbar_events" = "Wydarzenia";
+"all_group_title" = "Wszystkie grupy";
+"my_group_title" = "Moje grupy";
+"mainTitleGroup" = "Grupy";
 
 
 "errorSettings" = "Autorisation requise";
@@ -395,6 +398,9 @@
 "all_event_title" = "Tous les événements";
 "my_event_title" = "Mes événements";
 "mainUserTitleEvents" = "Événements";
+"all_group_title" = "Tous les groupes";
+"my_group_title" = "Mes groupes";
+"mainUserTitleGroup" = "Groupes";
 
 "mainUserTitleGroup" = "Groupe\nde voisins";
 "mainUserTitleGroups" = "Groupes\nde voisins";
@@ -1465,3 +1471,31 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Spotkania koczownicze";
 "interest_other" = "Inne";
 "contact" = "Skontaktować się";
+
+"report_modal_title_translate" = "Tłumaczyć";
+"report_modal_subtitle_translate" = "Automatycznie tłumaczymy wiadomości napisane przez obywateli";
+"layout_translate_title_original" = "Pokaż oryginał";
+"layout_translate_title_translation" = "Przetłumacz";
+"layout_translate_action_translation_button" = "Kliknij tutaj, aby pokazać oryginalną wersję";
+"layout_translate_title_original_button" = "Pokaż tłumaczenie";
+"layout_translate_title_original_title" = "Ta strona nie została przetłumaczona.";
+"layout_translate_title_translation_title" = "Niektóre informacje zostały przetłumaczone automatycznie.";
+"params_translation" = "Tłumaczenie";
+"Category_Food" = "Jedzenie";
+"Category_Accommodation" = "Zakwaterowanie";
+"Category_Health" = "Opieka zdrowotna";
+"Category_Refresh" = "Odświeżenie";
+"Category_Toilets" = "Toalety";
+"Category_Fountains" = "Fontanny";
+"Category_Wash" = "Myć się";
+"Category_Laundries" = "Pralnie";
+"Category_Orient" = "Orientacja";
+"Category_SelfCare" = "Samopielęgnacja";
+"Category_Clothes" = "Ubrania i sprzęt";
+"Category_DonationBox" = "Pudło darowizn/Czytanie";
+"Category_Reintegration" = "Reintegracja";
+"Category_Partners" = "Partnerzy";
+"Category_Other" = "Inne";
+"create_group_btn_title" = "Utwórz grupę";
+"friendly_links_title" = "Przyjazne i solidarne więzi";
+"friendly_links_text" = "W Entourage głównym celem jest wspieranie przyjaznych i trwałych relacji. Zobowiązuję się szanować tę orientację, unikając wszelkich romantycznych lub miłosnych podejść lub publikacji. W ten sposób aktywnie przyczyniam się do utrzymania ciepłej i życzliwej atmosfery dla wszystkich.";

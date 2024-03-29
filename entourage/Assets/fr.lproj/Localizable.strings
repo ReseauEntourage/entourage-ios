@@ -394,6 +394,10 @@
 "all_event_title" = "Tous les événements";
 "my_event_title" = "Mes événements";
 "mainUserTitleEvents" = "Événements";
+"all_group_title" = "Tous les groupes";
+"my_group_title" = "Mes groupes";
+"mainTitleGroup" = "Groupes";
+
 
 "mainUserTitleGroup" = "Groupe\nde voisins";
 "mainUserTitleGroups" = "Groupes\nde voisins";
@@ -1436,7 +1440,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_lang_bienvenue" = "Bienvenue !";
 "onboarding_lang_select" = "Sélectionner la langue";
 "onboarding_lang_suivant" = "Suivant";
-"translation_bottom_fragment_title" = "Nous traduisons automatiquement les messages rédigés par les citoyens.";
+"translation_bottom_fragment_title" = "Nous traduisons automatiquement les messages rédigés par les utilisateurs de l’application.";
 "translation_bottom_fragment_main_title" = "Traduction";
 
 "action_social_name" = "Partage de Temps";
@@ -1465,3 +1469,30 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Rencontres Nomades";
 "interest_other" = "Autre";
 "contact" = "Contacter";
+
+"report_modal_title_translate" = "Traduire";
+"report_modal_subtitle_translate" = "Nous traduisons automatiquement les messages rédigés par les utilisateurs de l’application";
+"layout_translate_title_original" = "Afficher la version originale";
+"layout_translate_title_translation" = "Afficher la traduction";
+"layout_translate_action_translation_button" = "Cliquer ici pour afficher la version originale";
+"layout_translate_title_original_button" = "Afficher la traduction";
+"layout_translate_title_original_title" = "Cette page n’a pas été traduite. ";
+"layout_translate_title_translation_title" = "Certaines informations ont été traduites automatiquement. ";
+"Category_Food" = "Se nourrir";
+"Category_Accommodation" = "Se loger";
+"Category_Health" = "Se soigner";
+"Category_Refresh" = "Se rafraîchir";
+"Category_Toilets" = "Toilettes";
+"Category_Fountains" = "Fontaines";
+"Category_Wash" = "Se laver";
+"Category_Laundries" = "Laveries";
+"Category_Orient" = "S'orienter";
+"Category_SelfCare" = "S'occuper de soi";
+"Category_Clothes" = "Vêtements & matériels";
+"Category_DonationBox" = "Boite à dons/lire";
+"Category_Reintegration" = "Se réinsérer";
+"Category_Partners" = "Partenaires";
+"Category_Other" = "Autre";
+"create_group_btn_title" = "Créer un groupe";
+"friendly_links_title" = "Liens amicaux et solidaires";
+"friendly_links_text" = "Chez Entourage, l'objectif principal est de favoriser les liens amicaux et durables. Je m'engage à respecter cette orientation en évitant toute démarche ou publication à caractère romantique ou amoureux. Ainsi, je contribue activement à maintenir un environnement chaleureux et bienveillant pour tous et toutes.";

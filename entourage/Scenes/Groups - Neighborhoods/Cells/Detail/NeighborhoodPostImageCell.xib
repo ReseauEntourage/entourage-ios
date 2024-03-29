@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -84,7 +84,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="753" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJs-gC-gEm" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="28" y="75" width="292" height="41"/>
+                                <rect key="frame" x="28" y="68" width="292" height="41"/>
                                 <string key="text">Bienvenue à toi cher danseur !
 Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
@@ -92,13 +92,13 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo_group" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-dD-e9j">
-                                <rect key="frame" x="28" y="132" width="370" height="184"/>
+                                <rect key="frame" x="28" y="125" width="370" height="184"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="184" id="tOZ-7N-3p2"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsH-FQ-hzp">
-                                <rect key="frame" x="28" y="132" width="370" height="184"/>
+                                <rect key="frame" x="28" y="125" width="370" height="184"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="action_show_image:" destination="bPP-EV-zW9" eventType="touchUpInside" id="bvD-nJ-xD6"/>
@@ -192,14 +192,14 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_message_neighborhood" translatesAutoresizingMaskIntoConstraints="NO" id="9eH-ug-ufT">
-                                <rect key="frame" x="285.5" y="357.5" width="16" height="16"/>
+                                <rect key="frame" x="285.5" y="354" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="Go9-6D-fdD"/>
                                     <constraint firstAttribute="height" constant="16" id="uSB-oZ-jr9"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8Y-4D-rfb">
-                                <rect key="frame" x="285.5" y="350" width="112.5" height="31"/>
+                                <rect key="frame" x="285.5" y="346.5" width="112.5" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="gzd-0c-Mg2"/>
                                 </constraints>
@@ -209,7 +209,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="x commentaires" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLZ-kX-Eih">
-                                <rect key="frame" x="305.5" y="336" width="92.5" height="59"/>
+                                <rect key="frame" x="305.5" y="329" width="92.5" height="66"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -251,10 +251,10 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="m1C-Y9-g4k" firstAttribute="top" secondItem="koJ-PJ-1CY" secondAttribute="top" constant="-7" id="WBJ-Ov-GyR"/>
                             <constraint firstItem="E8Y-4D-rfb" firstAttribute="trailing" secondItem="kLZ-kX-Eih" secondAttribute="trailing" id="XAu-Ab-Brj"/>
                             <constraint firstItem="kLZ-kX-Eih" firstAttribute="leading" secondItem="9eH-ug-ufT" secondAttribute="trailing" constant="4" id="YJI-l5-ba4"/>
+                            <constraint firstItem="YJs-gC-gEm" firstAttribute="top" secondItem="JBT-Y6-NRe" secondAttribute="bottom" constant="10" id="b8q-rN-0PN"/>
                             <constraint firstItem="JBT-Y6-NRe" firstAttribute="centerY" secondItem="qPp-vp-wdq" secondAttribute="centerY" id="dA8-FC-Qq1"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YJs-gC-gEm" secondAttribute="trailing" constant="28" id="eIH-1Y-ytp"/>
                             <constraint firstItem="h0R-dD-e9j" firstAttribute="leading" secondItem="k8l-eW-UxZ" secondAttribute="leading" constant="28" id="ef5-su-QRP"/>
-                            <constraint firstItem="YJs-gC-gEm" firstAttribute="top" secondItem="qPp-vp-wdq" secondAttribute="bottom" constant="25" id="f2r-za-QR3"/>
                             <constraint firstAttribute="trailing" secondItem="20f-3G-Kdi" secondAttribute="trailing" constant="28" id="hkE-eG-auU"/>
                             <constraint firstAttribute="trailing" secondItem="m1C-Y9-g4k" secondAttribute="trailing" constant="24" id="oo5-Wm-rM3"/>
                             <constraint firstItem="E8Y-4D-rfb" firstAttribute="leading" secondItem="9eH-ug-ufT" secondAttribute="leading" id="q6o-cG-b4O"/>
@@ -292,6 +292,11 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
             <point key="canvasLocation" x="149.27536231884059" y="112.5"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="YJs-gC-gEm">
+            <size key="intrinsicContentSize" width="292" height="41"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ic_message_neighborhood" width="20" height="20"/>
         <image name="ic_send_comment" width="54" height="54"/>

@@ -53,6 +53,9 @@ class ReportGroupChoosePageViewController:UIViewController {
         }else{
             table_dto.append(.report)
         }
+        if checkparameterType() == .commment && !checkIsMe() {
+            table_dto.append(.translate)
+        }
         ui_tableview.reloadData()
     }
     func checkIsMe() -> Bool{
@@ -106,9 +109,19 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
                 cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
                 return cell
             }
+        case .translate:
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "ReportChooseViewCell", for: indexPath ) as? ReportChooseViewCell {
+                cell.selectionStyle = .none
+                cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
+                return cell
+            }
         }
         
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -117,6 +130,8 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
             delegate?.chooseReport()
         case .suppress:
             showAlert()
+        case .translate:
+            delegate?.translateItem(id: chatMessageId!)
         }
     }
     
@@ -150,8 +165,8 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
         
         AnalyticsLoggerManager.logEvent(name: analyticsName)
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontBoutonBlanc(size: 15, color: .orange), bgColor: .appOrangeLight_70, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "supress_button_title".localized, titleStyle:ApplicationTheme.getFontBoutonBlanc(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "supress_button_title".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         alertVC.configureAlert(alertTitle: alerteTitle, message: alerteText, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         alertVC.delegate = self
         alertVC.show()

@@ -355,7 +355,7 @@
 
 "info_soliguide_1" = "Information on this location is provided by Soliguide, solidarity cartography.";
 "info_soliguide_2" = "For even more complete information available in several languages";
-"info_button_soliguide_consult" = "To consult";
+"info_button_soliguide_consult" = "Consult";
 "guideTitle" = "Solidarity guide";
 
 
@@ -392,6 +392,9 @@
 "all_event_title" = "All events";
 "my_event_title" = "My events";
 "mainUserTitleEvents" = "Events";
+"all_group_title" = "All groups";
+"my_group_title" = "My groups";
+"mainTitleGroup" = "Groups";
 
 "mainUserTitleGroup" = "Group\nof neighbors";
 "mainUserTitleGroups" = "Groups\nof neighbors";
@@ -850,7 +853,7 @@
 "event_mod_group_bt_mod" = "Edit";
 
 "event_mod_title" = "Edit my event";
-"event_create_title" = "new event";
+"event_create_title" = "New event";
 "event_create_title_phase" = "Stage";
 "event_create_title_phase_nb" = "0%d.";
 
@@ -1419,6 +1422,7 @@
 "lang_ar" = " - Arabic";
 "lang_pl" = " - Polish";
 
+"params_translation" = "Translation";
 "onboarding_lang_bienvenue" = "Welcome !";
 "onboarding_lang_select" = "Select your language";
 "onboarding_lang_suivant" = "Next";
@@ -1451,3 +1455,30 @@
 "interest_other" = "Other";
 "params_language" = "Language";
 "contact" = "Contact";
+
+"report_modal_title_translate" = "Translate";
+"report_modal_subtitle_translate" = "We automatically translate messages written by citizens";
+"layout_translate_title_original" = "Show original";
+"layout_translate_title_translation" = "Translate";
+"layout_translate_action_translation_button" = "\nClick here to show the original version";
+"layout_translate_title_original_button" = "\nShow translation";
+"layout_translate_title_original_title" = "This page has not been translated.";
+"layout_translate_title_translation_title" = "Some information has been automatically translated.";
+"Category_Food" = "Feed";
+"Category_Accommodation" = "Lodge";
+"Category_Health" = "Medical";
+"Category_Refresh" = "Refresh";
+"Category_Toilets" = "Toilets";
+"Category_Fountains" = "Fountains";
+"Category_Wash" = "Wash";
+"Category_Laundries" = "Laundries";
+"Category_Orient" = "Get oriented";
+"Category_SelfCare" = "Self Care";
+"Category_Clothes" = "Clothes & Equipment";
+"Category_DonationBox" = "Donation Box/Reading";
+"Category_Reintegration" = "Reintegration";
+"Category_Partners" = "Partners";
+"Category_Other" = "Other";
+"create_group_btn_title" = "Create group";
+"friendly_links_title" = "Friendly and Supportive Connections";
+"friendly_links_text" = "At Entourage, the main goal is to foster friendly and lasting relationships. I commit to respecting this focus by avoiding any romantic or amorous approach or publication. Thus, I actively contribute to maintaining a warm and caring environment for everyone.";

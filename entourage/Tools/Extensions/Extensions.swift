@@ -196,6 +196,22 @@ extension UILabel {
         textColor = style.color
     }
 }
+extension UILabel {
+
+    func enableLongPressCopy() {
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressToCopy))
+        self.addGestureRecognizer(longPress)
+        self.isUserInteractionEnabled = true
+    }
+
+    @objc private func handleLongPressToCopy(gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = self.text
+            self.showToast(message: "Texte copié", duration: 3.0)
+        }
+    }
+}
 
 extension String {
     func capitalizingFirstLetter() -> String {
@@ -283,5 +299,28 @@ extension UIView {
     func setVisibilityVisible(height:CGFloat) {
         self.isHidden = false
         self.heightAnchor.constraint(equalToConstant: height).isActive = true
+    }
+}
+
+extension UIView {
+    func showToast(message: String, duration: TimeInterval = 2.0) {
+        guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
+
+        let toastLabel = UILabel(frame: CGRect(x: window.frame.size.width / 2 - 150, y: window.frame.size.height - 100, width: 300, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center
+        toastLabel.font = ApplicationTheme.getFontNunitoRegular(size: 24)
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.clipsToBounds  =  true
+        window.addSubview(toastLabel)
+        
+        UIView.animate(withDuration: duration, delay: 0.1, options: .curveEaseOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }

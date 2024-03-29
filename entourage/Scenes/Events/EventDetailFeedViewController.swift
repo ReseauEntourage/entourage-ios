@@ -120,6 +120,8 @@ class EventDetailFeedViewController: UIViewController {
         ui_tableview.register(UINib(nibName: EventDetailTopFullCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopFullCell.identifier)
         ui_tableview.register(UINib(nibName: EventDetailTopLightCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopLightCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostTranslationCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTranslationCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostImageTranslationCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageTranslationCell.identifier)
         
         ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
         ui_tableview.register(UINib(nibName: EventListSectionCell.neighborhoodHeaderIdentifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier)
@@ -259,7 +261,10 @@ class EventDetailFeedViewController: UIViewController {
                      
             }
             self.event = event
+            print("eho event id ", event?.uid)
+            self.event?.posts?.removeAll()
             self.splitMessages()
+            self.getMorePosts()
             self.isLoading = false
             
             if event?.isCanceled() ?? false {
@@ -282,23 +287,48 @@ class EventDetailFeedViewController: UIViewController {
     func getMorePosts() {
         self.isLoading = true
         EventService.getEventPostsPaging(id: eventId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
-            if let post = post {
+            guard let post = post, error == nil else {
+                // Gérer l'erreur ici si nécessaire
+                self.isLoading = false
+                return
+            }
+
+            DispatchQueue.main.async {
+                // Mettre à jour les données
                 self.event?.posts?.append(contentsOf: post)
                 self.splitMessages()
-                if self.hasNewAndOldSections {
-                    UIView.performWithoutAnimation {
-                        self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .none)
+
+                // Mise à jour de la vue table en fonction des scénarios
+                self.ui_tableview.performBatchUpdates({
+                    let currentSections = self.ui_tableview.numberOfSections
+                    // Scénario 1: Aucun message
+                    if self.event?.posts?.isEmpty ?? true {
+                        
+                    } else {
+                        // Scénario 2: Messages anciens et/ou nouveaux
+                        if self.hasNewAndOldSections {
+                            if currentSections == 1 {
+                                // Ajouter une section pour les nouveaux messages
+                                self.ui_tableview.insertSections(IndexSet(integer: 1), with: .fade)
+                            }
+                            // Recharger la section des messages anciens
+                            self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .fade)
+                        } else if currentSections == 3 {
+                            // Revenir à une seule section si nécessaire
+                            self.ui_tableview.deleteSections(IndexSet(integer: 2), with: .fade)
+                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
+                        } else {
+                            // Recharger la section existante
+                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
+                        }
                     }
-                }
-                else {
-                    UIView.performWithoutAnimation {
-                        self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .none)
-                    }
-                }
+                }, completion: nil)
+
                 self.isLoading = false
             }
         }
     }
+
     
     func splitMessages() {
         guard let messages = event?.posts else {
@@ -353,7 +383,7 @@ class EventDetailFeedViewController: UIViewController {
     func showPopLeave() {
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         
         customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
         
@@ -428,7 +458,7 @@ class EventDetailFeedViewController: UIViewController {
     
     func showPopInfoPlaces() {
         let customAlert = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle: ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         
         customAlert.configureAlert(alertTitle: "event_add_contact_places_title".localized, message: "event_add_contact_places_description".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
         
@@ -449,9 +479,9 @@ class EventDetailFeedViewController: UIViewController {
                 DispatchQueue.main.async {
                     let alertVC = MJAlertController()
                     alertVC.alertTagName = .AcceptSettings
-                    let buttonCancel = MJAlertButtonType(title: "event_add_contact_refuse".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .appOrange), bgColor: .appOrangeLight_50, cornerRadius: -1)
-                    let buttonValidate = MJAlertButtonType(title: "event_add_contact_activate".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
-                    alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "event_add_contact_error".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+                    let buttonCancel = MJAlertButtonType(title: "event_add_contact_refuse".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+                    let buttonValidate = MJAlertButtonType(title: "event_add_contact_activate".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+                    alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "event_add_contact_error".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
                     
                     alertVC.delegate = self
                     alertVC.show()
@@ -464,11 +494,11 @@ class EventDetailFeedViewController: UIViewController {
         DispatchQueue.main.async {
             let alertVC = MJAlertController()
             alertVC.alertTagName = .AcceptAdd
-            let buttonCancel = MJAlertButtonType(title: "event_add_contact_no".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .appOrange), bgColor: .appOrangeLight_50, cornerRadius: -1)
+            let buttonCancel = MJAlertButtonType(title: "event_add_contact_no".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
             
             
-            let buttonValidate = MJAlertButtonType(title: "event_add_contact_yes".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
-            alertVC.configureAlert(alertTitle: "event_add_contact_title".localized, message: "event_add_contact_description".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+            let buttonValidate = MJAlertButtonType(title: "event_add_contact_yes".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+            alertVC.configureAlert(alertTitle: "event_add_contact_title".localized, message: "event_add_contact_description".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
             
             alertVC.delegate = self
             alertVC.show()
@@ -574,6 +604,12 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
             }
+            if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
+                identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
+            }
+            if(postmessage.contentTranslations == nil){
+                identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
@@ -602,6 +638,12 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         if postmessage.status == "deleted" {
             identifier = NeighborhoodPostDeletedCell.identifier
+        }
+        if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
+            identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
+        }
+        if(postmessage.contentTranslations == nil){
+            identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
         cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
@@ -852,6 +894,10 @@ extension EventDetailFeedViewController: UIScrollViewDelegate {
 }
 
 extension EventDetailFeedViewController:GroupDetailDelegate{
+    func translateItem(id: Int) {
+        //TODO TRANSLATE
+    }
+    
     func publicationDeleted() {
         getEventDetail()
         self.ui_tableview.reloadData()
@@ -859,7 +905,7 @@ extension EventDetailFeedViewController:GroupDetailDelegate{
     
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
         
         alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)

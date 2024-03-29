@@ -328,26 +328,20 @@ struct UserPermissions:Codable {
 
 //MARK: - UserStats -
 struct UserStats:Codable {
-    var tourCount:Int = 0
     var entourageCount:Int = 0
-    var encounterCount:Int = 0
     var actionsCount:Int = 0
     var eventsCount:Int = 0
     var contribCreationCount:Int = 0
     var askCreactionCount:Int = 0
-    var isGoodWavesValidated:Bool = false
     var neighborhoodsCount:Int = 0
     var outingsCount:Int? = 0
     
     enum CodingKeys: String, CodingKey {
-        case tourCount = "tour_count"
         case entourageCount = "entourage_count"
-        case encounterCount = "encounter_count"
         case actionsCount = "actions_count"
         case eventsCount = "events_count"
         case contribCreationCount = "contribution_creation_count"
         case askCreactionCount = "ask_for_help_creation_count"
-        case isGoodWavesValidated = "good_waves_participation"
         case neighborhoodsCount = "neighborhoods_count"
         case outingsCount = "outings_count"
     }

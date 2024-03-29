@@ -78,7 +78,7 @@ class ConversationParametersViewController: BasePopViewController {
     func showPopLeave() {
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "params_leave_conv_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_leave_conv_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_leave_conv_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         
         customAlert.configureAlert(alertTitle: "params_leave_conv_pop_title".localized, message: "params_leave_conv_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
         
@@ -120,7 +120,7 @@ class ConversationParametersViewController: BasePopViewController {
     func showPopBlockUser() {
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "params_block_user_conv_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_block_user_conv_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_block_user_conv_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         
         let desc = String.init(format: "params_block_user_conv_pop_message".localized, username)
         customAlert.configureAlert(alertTitle: "params_block_user_conv_pop_title".localized, message:desc, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
@@ -219,6 +219,10 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
 
 //MARK: - GroupDetailDelegate -
 extension ConversationParametersViewController: GroupDetailDelegate {
+    func translateItem(id: Int) {
+        //TODO TRANSLATE
+    }
+    
     func publicationDeleted() {
         if !isOneToOne {
             getConversation()
@@ -228,7 +232,7 @@ extension ConversationParametersViewController: GroupDetailDelegate {
     
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         
         alertVC.configureAlert(alertTitle: "report_conversation_title".localized, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         

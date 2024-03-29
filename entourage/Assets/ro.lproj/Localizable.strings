@@ -394,6 +394,10 @@
 "all_event_title" = "Toate evenimentele";
 "my_event_title" = "Evenimentele mele";
 "mainUserTitleEvents" = "Evenimente";
+"all_group_title" = "Toate grupurile";
+"my_group_title" = "Grupurile mele";
+"mainTitleGroup" = "Grupuri";
+
 
 "mainUserTitleGroup" = "Grup\nde vecini";
 "mainUserTitleGroups" = "Grupuri\nde vecini";
@@ -865,7 +869,7 @@
 "event_mod_group_bt_mod" = "A modifica";
 
 "event_mod_title" = "Editează-mi evenimentul";
-"event_create_title" = "eveniment nou";
+"event_create_title" = "Eveniment nou";
 "event_create_title_phase" = "Etapă";
 "event_create_title_phase_nb" = "0%d.";
 
@@ -1464,3 +1468,31 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "Întâlniri nomade";
 "interest_other" = "Altul";
 "contact" = "Contactați";
+
+"report_modal_title_translate" = "Traduce";
+"report_modal_subtitle_translate" = "Traducem automat mesajele scrise de cetățeni";
+"layout_translate_title_original" = "Afișați originalul";
+"layout_translate_title_translation" = "Traduceți";
+"layout_translate_action_translation_button" = "Apăsați aici pentru a afișa versiunea originală";
+"layout_translate_title_original_button" = "Afișați traducerea";
+"layout_translate_title_original_title" = "Această pagină nu a fost tradusă.";
+"layout_translate_title_translation_title" = "Unele informații au fost traduse automat.";
+"params_translation" = "Traducere";
+"Category_Food" = "Alimentație";
+"Category_Accommodation" = "Cazare";
+"Category_Health" = "Îngrijire medicală";
+"Category_Refresh" = "Reîmprospătare";
+"Category_Toilets" = "Toalete";
+"Category_Fountains" = "Fântâni";
+"Category_Wash" = "Spălare";
+"Category_Laundries" = "Spălătorii";
+"Category_Orient" = "Orientare";
+"Category_SelfCare" = "Îngrijire personală";
+"Category_Clothes" = "Haine și echipament";
+"Category_DonationBox" = "Cutie de donații/Citit";
+"Category_Reintegration" = "Reintegrare";
+"Category_Partners" = "Parteneri";
+"Category_Other" = "Altele";
+"create_group_btn_title" = "Crează un grup";
+"friendly_links_title" = "Legături prietenoase și solidare";
+"friendly_links_text" = "La Entourage, obiectivul principal este de a favoriza legăturile prietenoase și durabile. Mă angajez să respect această orientare evitând orice abordare sau publicare de natură romantică sau amorosă. Astfel, contribui activ la menț";

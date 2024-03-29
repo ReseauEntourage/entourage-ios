@@ -396,6 +396,10 @@
 "all_event_title" = "كل الأحداث";
 "my_event_title" = "أحداثي";
 "mainUserTitleEvents" = "الأحداث";
+"all_group_title" = "جميع المجموعات";
+"my_group_title" = "مجموعاتي";
+"mainTitleGroup" = "المجموعات";
+
 
 "mainUserTitleGroup" = "مجموعة\nمن الجيران";
 "mainUserTitleGroups" = "المجموعات\nمن الجيران";
@@ -1466,3 +1470,31 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "interest_marauding" = "اللقاءات البدوية";
 "interest_other" = "أخرى";
 "contact" = "اتصل";
+
+"report_modal_title_translate" = "ترجمة";
+"report_modal_subtitle_translate" = "نترجم تلقائيًا الرسائل التي كتبها المواطنون";
+"layout_translate_title_original" = "عرض الأصل";
+"layout_translate_title_translation" = "ترجمة";
+"layout_translate_action_translation_button" = "انقر هنا لعرض النسخة الأصلية";
+"layout_translate_title_original_button" = "عرض الترجمة";
+"layout_translate_title_original_title" = "لم يتم ترجمة هذه الصفحة.";
+"layout_translate_title_translation_title" = "تم ترجمة بعض المعلومات تلقائيًا.";
+"params_translation" = "الترجمة";
+"Category_Food" = "الطعام";
+"Category_Accommodation" = "الإقامة";
+"Category_Health" = "الرعاية الصحية";
+"Category_Refresh" = "التحديث";
+"Category_Toilets" = "المراحيض";
+"Category_Fountains" = "النوافير";
+"Category_Wash" = "الغسيل";
+"Category_Laundries" = "مغاسل";
+"Category_Orient" = "التوجيه";
+"Category_SelfCare" = "العناية الذاتية";
+"Category_Clothes" = "الملابس والمعدات";
+"Category_DonationBox" = "صندوق التبرعات/القراءة";
+"Category_Reintegration" = "إعادة التأهيل";
+"Category_Partners" = "الشركاء";
+"Category_Other" = "أخرى";
+"create_group_btn_title" = "إنشاء مجموعة";
+"friendly_links_title" = "روابط ودية وداعمة";
+"friendly_links_text" = "في Entourage، الهدف الرئيسي هو تعزيز الروابط الودية والمستدامة. أتعهد باحترام هذا التوجه من خلال تجنب أي نهج أو نشر ذي طابع رومانسي أو عاطفي. وبذلك، أساهم بنشاط في الحفاظ على بيئة دافئة ومرحبة للجميع.";

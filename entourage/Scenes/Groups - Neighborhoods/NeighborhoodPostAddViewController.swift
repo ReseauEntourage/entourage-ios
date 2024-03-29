@@ -8,6 +8,7 @@
 import UIKit
 import IHProgressHUD
 
+
 class NeighborhoodPostAddViewController: UIViewController {
     
     @IBOutlet weak var ui_top_view: MJNavBackView!
@@ -40,6 +41,7 @@ class NeighborhoodPostAddViewController: UIViewController {
     var isNeighborhood = true
     
     var isLoading = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,7 +150,6 @@ class NeighborhoodPostAddViewController: UIViewController {
         if isNeighborhood {
             NeighborhoodService.createPostMessage(groupId: neighborhoodId, message: message) { error in
                 self.isLoading = false
-                IHProgressHUD.dismiss()
                 
                 if error != nil {
                     self.ui_view_error.isHidden = false
@@ -162,7 +163,6 @@ class NeighborhoodPostAddViewController: UIViewController {
         else {
             EventService.createPostMessage(eventId: eventId, message: message) { error in
                 self.isLoading = false
-                IHProgressHUD.dismiss()
                 
                 if error != nil {
                     self.ui_view_error.isHidden = false
@@ -180,7 +180,6 @@ class NeighborhoodPostAddViewController: UIViewController {
         IHProgressHUD.show()
         if isNeighborhood {
             NeighborhoodUploadPictureService.prepareUploadWith(neighborhoodId: neighborhoodId, image: currentImage!, message: ui_tv_message.text) { isOk in
-                IHProgressHUD.dismiss()
                 self.isLoading = false
                 
                 if !isOk {
@@ -194,7 +193,6 @@ class NeighborhoodPostAddViewController: UIViewController {
         }
         else {
             EventUploadPictureService.prepareUploadWith(eventId: eventId, image: currentImage!, message: ui_tv_message.text) { isOk in
-                IHProgressHUD.dismiss()
                 self.isLoading = false
                 
                 if !isOk {
@@ -231,6 +229,9 @@ extension NeighborhoodPostAddViewController: TakePhotoDelegate {
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodPostAddViewController: MJNavBackViewDelegate {
     func goBack() {
-        self.dismiss(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            IHProgressHUD.dismiss()
+            self.dismiss(animated: true)
+        }
     }
 }

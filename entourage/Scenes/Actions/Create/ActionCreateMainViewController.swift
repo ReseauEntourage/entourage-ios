@@ -95,10 +95,10 @@ class ActionCreateMainViewController: UIViewController {
         ui_button_validate_charte.setTitle("accept_charte".localized, for: .normal)
         
         arrayDesc = ["action_charte_1".localized,"action_charte_2".localized,
-                     "action_charte_3".localized,"action_charte_4".localized,"action_charte_5".localized]
+                     "action_charte_3".localized,"action_charte_4".localized,"action_charte_5".localized, "friendly_links_text".localized]
         
         arrayTitle = ["action_charte_1_title".localized,"action_charte_2_title".localized,
-                      "action_charte_3_title".localized,"action_charte_4_title".localized,"action_charte_5_title".localized]
+                      "action_charte_3_title".localized,"action_charte_4_title".localized,"action_charte_5_title".localized, "friendly_links_title".localized]
         ui_tableview_charte.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_tableview_charte.delegate = self
         ui_tableview_charte.dataSource = self
@@ -360,10 +360,10 @@ extension ActionCreateMainViewController: MJNavBackViewDelegate {
         }
         
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "actionCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "actionCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "actionCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "actionCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         let message = String.init(format: "actionCreatePopCloseBackMessage".localized, isContrib ? "action_contrib".localized : "action_solicitation".localized)
-        alertVC.configureAlert(alertTitle: "actionCreatePopCloseBackTitle".localized, message: message, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        alertVC.configureAlert(alertTitle: "actionCreatePopCloseBackTitle".localized, message: message, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         alertVC.delegate = self
         alertVC.show()
     }
@@ -372,9 +372,11 @@ extension ActionCreateMainViewController: MJNavBackViewDelegate {
 //MARK: - MJAlertControllerDelegate -
 extension ActionCreateMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        self.dismiss(animated: true)
     }
-    func validateRightButton(alertTag: MJAlertTAG) {}
+    func validateRightButton(alertTag: MJAlertTAG) {
+        self.dismiss(animated: true)
+
+    }
 }
 
 //MARK: - Protocol TableView DataSource/delegate -

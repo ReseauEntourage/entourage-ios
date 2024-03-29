@@ -436,6 +436,8 @@
 		2694A74A2ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */; };
 		2694A74C2ACD90D70042CFCA /* HomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */; };
 		2694A74E2ACD92510042CFCA /* HomeGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */; };
+		26A06BB12B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */; };
+		26A06E582B1E23B500AC323A /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A06E572B1E23B500AC323A /* Translations.swift */; };
 		26A60E212A3A05AD004849FB /* WelcomeFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */; };
 		26AD11962AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD11952AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift */; };
 		26AD11982AEA688800FA7BEC /* ProfileTranslationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD11972AEA688800FA7BEC /* ProfileTranslationViewController.swift */; };
@@ -453,6 +455,8 @@
 		26C1BB662A3AF0D100C81C09 /* WelcomeFourImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB652A3AF0D100C81C09 /* WelcomeFourImageCell.swift */; };
 		26C1BB682A3AF13F00C81C09 /* WelcomeFourImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C1BB672A3AF13F00C81C09 /* WelcomeFourImageCell.xib */; };
 		26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */; };
+		26C70B402B2B46B1005C8846 /* NeighborhoodV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */; };
+		26C70B422B2B5D6F005C8846 /* CellGroupV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */; };
 		26CC9F7A2A331CF5005F7408 /* WelcomeThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */; };
 		26CC9F7D2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */; };
 		26CC9F7F2A337243005F7408 /* SecondaryTextWelcomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */; };
@@ -464,6 +468,7 @@
 		26F03C9B2A1B8BAB00450A61 /* WelcomeOneContentLast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C9A2A1B8BAB00450A61 /* WelcomeOneContentLast.xib */; };
 		26F03C9D2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C9C2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift */; };
 		26F03C9F2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C9E2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib */; };
+		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
 		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
 /* End PBXBuildFile section */
 
@@ -905,6 +910,8 @@
 		2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeEventHorizontalCollectionCell.xib; sourceTree = "<group>"; };
 		2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGroupCell.swift; sourceTree = "<group>"; };
 		2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeGroupCell.xib; sourceTree = "<group>"; };
+		26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostImageTranslationCell.xib; sourceTree = "<group>"; };
+		26A06E572B1E23B500AC323A /* Translations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translations.swift; sourceTree = "<group>"; };
 		26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourViewController.swift; sourceTree = "<group>"; };
 		26AD11952AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLanguageChooseViewController.swift; sourceTree = "<group>"; };
 		26AD11972AEA688800FA7BEC /* ProfileTranslationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTranslationViewController.swift; sourceTree = "<group>"; };
@@ -922,6 +929,8 @@
 		26C1BB652A3AF0D100C81C09 /* WelcomeFourImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourImageCell.swift; sourceTree = "<group>"; };
 		26C1BB672A3AF13F00C81C09 /* WelcomeFourImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFourImageCell.xib; sourceTree = "<group>"; };
 		26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeDemandExampleCell.swift; sourceTree = "<group>"; };
+		26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodV2ViewController.swift; sourceTree = "<group>"; };
+		26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellGroupV2.xib; sourceTree = "<group>"; };
 		26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeViewController.swift; sourceTree = "<group>"; };
 		26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryTextWelcomeCell.xib; sourceTree = "<group>"; };
 		26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTextWelcomeCell.swift; sourceTree = "<group>"; };
@@ -933,6 +942,7 @@
 		26F03C9A2A1B8BAB00450A61 /* WelcomeOneContentLast.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneContentLast.xib; sourceTree = "<group>"; };
 		26F03C9C2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneWebViewCell.swift; sourceTree = "<group>"; };
 		26F03C9E2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneWebViewCell.xib; sourceTree = "<group>"; };
+		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
 		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		EF9863871BD660A314749193 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
@@ -1057,6 +1067,7 @@
 				0264C5D528B4E51B001EA654 /* Conversation.swift */,
 				0208937C28BCFE3100160F1E /* NotificationPushData.swift */,
 				0227EC4E292CE8320049168E /* NotifInApp.swift */,
+				26A06E572B1E23B500AC323A /* Translations.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1163,6 +1174,8 @@
 				025C92C22834149B000970D9 /* NeighborhoodEventsTableviewCell.xib */,
 				025C92C428341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib */,
 				26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */,
+				26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */,
+				26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1551,6 +1564,8 @@
 				02C6E86A28203E1F009D4289 /* Signal */,
 				0224597B27FF54E300944DE4 /* Create */,
 				0224597227FF31FC00944DE4 /* Cells */,
+				26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */,
+				26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */,
 			);
 			path = "Groups - Neighborhoods";
 			sourceTree = "<group>";
@@ -2096,6 +2111,7 @@
 				2694A7462ACD68070042CFCA /* HomeCellEvent.xib in Resources */,
 				02A92C2E289816C8000DFF95 /* Actions.xcassets in Resources */,
 				0224597127FF290900944DE4 /* MJErrorInputTextView.xib in Resources */,
+				26C70B422B2B5D6F005C8846 /* CellGroupV2.xib in Resources */,
 				26F03C972A1B850C00450A61 /* WelcomeOneContentMain.xib in Resources */,
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
 				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
@@ -2151,6 +2167,8 @@
 				26F03C9F2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib in Resources */,
 				26F03C932A1B4E5900450A61 /* WelcomeOneTitleCell.xib in Resources */,
 				025D8723278DD33800909101 /* Assets.xcassets in Resources */,
+				26A06BB12B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib in Resources */,
+				26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */,
 				02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */,
 				0208268028A68447004B1222 /* ActionDeletePopsViewController.xib in Resources */,
 				264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */,
@@ -2351,6 +2369,7 @@
 				0262997B2790815000D84A6A /* APIKeys.swift in Sources */,
 				02A92C202897D374000DFF95 /* ActionCreatePageViewController.swift in Sources */,
 				026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */,
+				26A06E582B1E23B500AC323A /* Translations.swift in Sources */,
 				02B94C23284F594A006059EF /* HomeMainViewModel.swift in Sources */,
 				2619E1432A261C93000BD574 /* WelcomeTwoViewController.swift in Sources */,
 				26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */,
@@ -2489,6 +2508,7 @@
 				02A3DD3727FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift in Sources */,
 				26BE84602A67F26000DC2586 /* ActionPassedOneVC.swift in Sources */,
 				0208937B28BCFDBC00160F1E /* DeeplinkManager.swift in Sources */,
+				26C70B402B2B46B1005C8846 /* NeighborhoodV2ViewController.swift in Sources */,
 				021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */,
 				0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */,
 				022744732795C0FB005600A1 /* Partner.swift in Sources */,

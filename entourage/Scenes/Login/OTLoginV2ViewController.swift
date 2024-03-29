@@ -289,9 +289,9 @@ class OTLoginV2ViewController: UIViewController {
     func alertForResent(){
         let message = "login_resend_code_message".localized + phoneNumberString
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "login_resend_code_button_no".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "login_resend_code_button_yes".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrangeLight, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: "login_resend_code_title".localized, message: message, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        let buttonCancel = MJAlertButtonType(title: "login_resend_code_button_no".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "login_resend_code_button_yes".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        alertVC.configureAlert(alertTitle: "login_resend_code_title".localized, message: message, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         
         alertVC.delegate = self
         alertVC.show()
@@ -395,11 +395,12 @@ extension OTLoginV2ViewController: MJNavBackViewDelegate {
 
 extension OTLoginV2ViewController:MJAlertControllerDelegate{
     func validateLeftButton(alertTag: MJAlertTAG) {
-        resendCode(phone: phoneNumberString)
+        self.dismiss(animated: true)
     }
     
     func validateRightButton(alertTag: MJAlertTAG) {
-        self.dismiss(animated: true)
+        resendCode(phone: phoneNumberString)
+
     }
     
     

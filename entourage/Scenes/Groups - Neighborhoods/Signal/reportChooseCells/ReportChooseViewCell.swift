@@ -11,6 +11,7 @@ import UIKit
 enum ReportCellType {
     case report
     case suppress
+    case translate
 }
 
 class ReportChooseViewCell:UITableViewCell {
@@ -37,6 +38,7 @@ class ReportChooseViewCell:UITableViewCell {
         print(paramType)
         self.type = type
         self.paramType = paramType
+        self.ui_title?.numberOfLines = 0 
         var title = ""
         var subtitle = ""
         var reportsubtitle = ""
@@ -71,6 +73,10 @@ class ReportChooseViewCell:UITableViewCell {
             ui_image?.image = UIImage(named: "ic_supress")
             ui_title?.text = title
             ui_subtitle?.text = subtitle
+        case .translate:
+            ui_image?.image = UIImage(named: "ic_translation")
+            ui_title?.text = "report_modal_title_translate".localized
+            ui_subtitle?.text = "report_modal_subtitle_translate".localized
         }
     }
 }

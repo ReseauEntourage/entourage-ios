@@ -69,7 +69,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         }
     }
     
-    func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:MessageCellSignalDelegate) {
+    func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:MessageCellSignalDelegate, isTranslated:Bool) {
         messageId = message.uid
         userId = message.user?.sid
         
@@ -142,6 +142,14 @@ class NeighborhoodMessageCell: UITableViewCell {
                 }
             }
         }
+        if let _translation = message.contentTranslations{
+            if(isTranslated){
+                ui_message.text = _translation.translation
+            }else{
+                ui_message.text = _translation.original
+            }
+        }
+        
         layoutIfNeeded()
     }
     
@@ -227,6 +235,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 }
             }
         }
+        
         layoutIfNeeded()
     }
     
