@@ -34,19 +34,17 @@ class QuestionCell: UITableViewCell, UITextViewDelegate {
         ui_text_view.delegate = self
         ui_text_view.font = UIFont(name: "NunitoSans-Regular", size: 15)
         ui_text_view.autocapitalizationType = .sentences
-        
-        addUnderlineToTextView()
+        ui_text_view.textContainer.maximumNumberOfLines = 1
+        ui_text_view.textContainer.lineBreakMode = .byClipping
         addToolbarToKeyboard()
     }
     
-    func addUnderlineToTextView() {
-        let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0.0, y: ui_text_view.frame.height - 1, width: ui_text_view.frame.width, height: 1.0)
-        bottomLine.backgroundColor = UIColor.gray.cgColor
-        ui_text_view.layer.addSublayer(bottomLine)
-    }
+
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" { // Empêcher le retour à la ligne
+                return false
+            }
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)

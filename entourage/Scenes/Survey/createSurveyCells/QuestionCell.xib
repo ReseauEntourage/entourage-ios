@@ -32,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tjq-d6-2wP">
-                        <rect key="frame" x="20" y="85" width="430" height="30"/>
+                        <rect key="frame" x="20" y="85" width="430" height="50"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="jYT-83-Yr0"/>
@@ -41,14 +41,24 @@
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLz-1b-9l9">
+                        <rect key="frame" x="20" y="134" width="430" height="1"/>
+                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="CXJ-dq-pn2"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="tjq-d6-2wP" secondAttribute="trailing" constant="20" symbolic="YES" id="1Ed-Bn-QYB"/>
                     <constraint firstAttribute="trailing" secondItem="1dx-k7-PFs" secondAttribute="trailing" constant="20" symbolic="YES" id="5WM-CE-xTO"/>
+                    <constraint firstAttribute="trailing" secondItem="FLz-1b-9l9" secondAttribute="trailing" constant="20" id="5nq-EM-s9w"/>
                     <constraint firstItem="1dx-k7-PFs" firstAttribute="top" secondItem="8pg-S3-Pk4" secondAttribute="top" constant="36" id="7ov-YR-7lv"/>
+                    <constraint firstItem="FLz-1b-9l9" firstAttribute="leading" secondItem="8pg-S3-Pk4" secondAttribute="leading" constant="20" id="8F5-dw-TQk"/>
                     <constraint firstItem="1dx-k7-PFs" firstAttribute="leading" secondItem="8pg-S3-Pk4" secondAttribute="leading" constant="20" id="GFA-FX-k0R"/>
+                    <constraint firstAttribute="bottom" secondItem="FLz-1b-9l9" secondAttribute="bottom" id="Myg-2J-Hcn"/>
                     <constraint firstItem="tjq-d6-2wP" firstAttribute="leading" secondItem="8pg-S3-Pk4" secondAttribute="leading" constant="20" symbolic="YES" id="da4-VI-Hx8"/>
-                    <constraint firstAttribute="bottom" secondItem="tjq-d6-2wP" secondAttribute="bottom" constant="20" symbolic="YES" id="uPY-MQ-vkR"/>
+                    <constraint firstAttribute="bottom" secondItem="tjq-d6-2wP" secondAttribute="bottom" id="uPY-MQ-vkR"/>
                     <constraint firstItem="tjq-d6-2wP" firstAttribute="top" secondItem="1dx-k7-PFs" secondAttribute="bottom" constant="30" id="vBV-09-Gao"/>
                 </constraints>
             </tableViewCellContentView>
@@ -65,6 +75,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -252,6 +252,29 @@ class NeighborhoodPostCell: UITableViewCell {
             window.addSubview(popupView)
         }
     }
+    
+    func configureSurveyNumberLabel(){
+        if let survey = self.postMessage.survey {
+            let totalVotes = survey.totalVotes // Utilisez l'extension pour obtenir le total des votes
+            let votesText = "\(totalVotes) vote\(totalVotes > 1 ? "s" : "")" // Gère le pluriel
+            
+            // Créer le texte souligné pour les votes
+            let votesAttrString = Utils.formatStringUnderline(textString: votesText, textColor: .black, font: ApplicationTheme.getFontChampInput().font)
+            
+            // Créer le texte final avec le " - " non souligné si commentsCount > 0
+            let finalAttrString = NSMutableAttributedString()
+            finalAttrString.append(votesAttrString)
+            
+            if let commentsCount = self.postMessage.commentsCount, commentsCount > 0 {
+                finalAttrString.append(NSAttributedString(string: " - ", attributes: [NSAttributedString.Key.font: ApplicationTheme.getFontChampInput().font, NSAttributedString.Key.foregroundColor: UIColor.black]))
+            }
+            // Assigner le texte au label
+            ui_label_nb_votes.attributedText = finalAttrString
+        } else {
+            // Gérez le cas où `message.survey` est nul
+        }
+
+    }
 
     class RoundedView: UIView {
         override var bounds: CGRect {
@@ -424,27 +447,7 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_comments_nb.attributedText = attrStr
         }
         
-        if let survey = message.survey {
-            let totalVotes = survey.totalVotes // Utilisez l'extension pour obtenir le total des votes
-            let votesText = "\(totalVotes) vote\(totalVotes > 1 ? "s" : "")" // Gère le pluriel
-            
-            // Créer le texte souligné pour les votes
-            let votesAttrString = Utils.formatStringUnderline(textString: votesText, textColor: .black, font: ApplicationTheme.getFontChampInput().font)
-            
-            // Créer le texte final avec le " - " non souligné si commentsCount > 0
-            let finalAttrString = NSMutableAttributedString()
-            finalAttrString.append(votesAttrString)
-            
-            if let commentsCount = message.commentsCount, commentsCount > 0 {
-                finalAttrString.append(NSAttributedString(string: " - ", attributes: [NSAttributedString.Key.font: ApplicationTheme.getFontChampInput().font, NSAttributedString.Key.foregroundColor: UIColor.black]))
-            }
-            
-            // Assigner le texte au label
-            ui_label_nb_votes.attributedText = finalAttrString
-        } else {
-            // Gérez le cas où `message.survey` est nul
-        }
-
+        self.configureSurveyNumberLabel()
 
         
         if let urlStr = message.messageImageUrl, let url = URL(string: urlStr) {
@@ -687,6 +690,7 @@ class ReactionsPopupView: UIView {
 extension NeighborhoodPostCell: SurveyOptionViewDelegate {
     func didTapVote(surveyOptionView: SurveyOptionView, optionIndex: Int) {
         self.delegate?.sendVoteView(post: self.postMessage)
+
     }
     
     func didTapOption(_ surveyOptionView: SurveyOptionView, optionIndex: Int) {
@@ -718,7 +722,7 @@ extension NeighborhoodPostCell: SurveyOptionViewDelegate {
         // Sauvegarder les modifications
         postMessage.survey = localSurvey
         postMessage.surveyResponse = surveyResponse
-        
+        self.configureSurveyNumberLabel()
         // Mettre à jour l'interface utilisateur pour refléter les changements
         let totalVotes = localSurvey.summary.reduce(0, +)
         ui_stackview_options.arrangedSubviews.enumerated().forEach { (index, view) in

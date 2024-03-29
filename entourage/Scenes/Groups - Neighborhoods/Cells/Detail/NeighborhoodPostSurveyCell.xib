@@ -211,7 +211,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="x vote -" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Tk-zZ-Zn1">
-                                <rect key="frame" x="462.33333333333331" y="329" width="44.333333333333314" height="18"/>
+                                <rect key="frame" x="465.33333333333331" y="329" width="44.333333333333314" height="18"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -219,7 +219,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                         </subviews>
                         <color key="backgroundColor" name="BeigeClair"/>
                         <constraints>
-                            <constraint firstItem="Lto-PU-oVf" firstAttribute="leading" secondItem="6Tk-zZ-Zn1" secondAttribute="trailing" constant="5" id="1qp-9k-JkW"/>
+                            <constraint firstItem="Lto-PU-oVf" firstAttribute="leading" secondItem="6Tk-zZ-Zn1" secondAttribute="trailing" constant="2" id="1qp-9k-JkW"/>
                             <constraint firstAttribute="trailing" secondItem="Lto-PU-oVf" secondAttribute="trailing" constant="28" id="2Vz-cR-put"/>
                             <constraint firstAttribute="bottom" secondItem="wbg-uZ-FLG" secondAttribute="bottom" constant="10" id="5CF-mE-ngn"/>
                             <constraint firstItem="iXu-Yj-57B" firstAttribute="bottom" secondItem="fAM-Ud-g3t" secondAttribute="bottom" id="93w-of-oju"/>

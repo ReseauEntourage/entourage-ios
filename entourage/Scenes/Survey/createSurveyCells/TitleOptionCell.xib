@@ -22,7 +22,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Options" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3H9-yd-TJx">
-                        <rect key="frame" x="20" y="30" width="484" height="25"/>
+                        <rect key="frame" x="20" y="30" width="484" height="45"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -30,7 +30,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="3H9-yd-TJx" firstAttribute="top" secondItem="gZq-8D-AVW" secondAttribute="top" constant="30" id="3wv-qx-hGG"/>
-                    <constraint firstAttribute="bottom" secondItem="3H9-yd-TJx" secondAttribute="bottom" constant="20" symbolic="YES" id="5Rj-8m-ret"/>
+                    <constraint firstAttribute="bottom" secondItem="3H9-yd-TJx" secondAttribute="bottom" id="5Rj-8m-ret"/>
                     <constraint firstAttribute="trailing" secondItem="3H9-yd-TJx" secondAttribute="trailing" id="IIu-L3-cIB"/>
                     <constraint firstItem="3H9-yd-TJx" firstAttribute="leading" secondItem="gZq-8D-AVW" secondAttribute="leading" constant="20" symbolic="YES" id="qIc-DN-ukt"/>
                 </constraints>

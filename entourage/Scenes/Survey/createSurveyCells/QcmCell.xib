@@ -22,19 +22,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plusieurs réponses possibles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teT-Ld-CFv">
-                        <rect key="frame" x="20" y="20" width="204.66666666666666" height="41"/>
+                        <rect key="frame" x="20" y="20" width="204.66666666666666" height="51"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CwD-N0-1jU">
-                        <rect key="frame" x="284.66666666666669" y="25" width="51" height="31"/>
+                        <rect key="frame" x="284.66666666666669" y="30" width="51" height="31"/>
                     </switch>
                 </subviews>
                 <constraints>
                     <constraint firstItem="teT-Ld-CFv" firstAttribute="top" secondItem="e8g-A2-Uqk" secondAttribute="top" constant="20" symbolic="YES" id="2Hv-04-z2p"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CwD-N0-1jU" secondAttribute="trailing" constant="20" symbolic="YES" id="dkF-7s-KYW"/>
-                    <constraint firstAttribute="bottom" secondItem="teT-Ld-CFv" secondAttribute="bottom" constant="20" id="e1z-Ru-A11"/>
+                    <constraint firstAttribute="bottom" secondItem="teT-Ld-CFv" secondAttribute="bottom" constant="10" id="e1z-Ru-A11"/>
                     <constraint firstItem="CwD-N0-1jU" firstAttribute="leading" secondItem="teT-Ld-CFv" secondAttribute="trailing" constant="60" id="gm1-jH-zig"/>
                     <constraint firstItem="CwD-N0-1jU" firstAttribute="centerY" secondItem="teT-Ld-CFv" secondAttribute="centerY" id="n2H-zT-vP8"/>
                     <constraint firstItem="teT-Ld-CFv" firstAttribute="leading" secondItem="e8g-A2-Uqk" secondAttribute="leading" constant="20" symbolic="YES" id="tb0-EX-Odt"/>

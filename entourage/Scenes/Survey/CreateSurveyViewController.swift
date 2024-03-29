@@ -40,7 +40,7 @@ class CreateSurveyViewController:UIViewController{
     var eventId:Int = 0
     var surveyTitle: String = ""
     var surveyOptions: [String] = ["", "", "", "",""]
-    var isQCM: Bool = true
+    var isQCM: Bool = false
     var delegate:CreateSurveyValidationDelegate? = nil
 
     override func viewDidLoad() {
