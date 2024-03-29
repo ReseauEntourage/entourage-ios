@@ -105,7 +105,7 @@ struct Tags:Codable {
     
     func getTagNameFrom(key:String) -> String {
         if let tag = tags.first(where: {$0.tagKey == key }) {
-            return TagsUtils.showTagTranslated(tag.tagName)
+            return TagsUtils.showTagTranslated(tag.tagKey)
         }
         return key
     }

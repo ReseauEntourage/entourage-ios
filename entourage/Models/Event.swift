@@ -717,7 +717,7 @@ class TagsUtils {
             return NSLocalizedString("action_hygiene_name".localized, comment: "")
 
         default:
-            return NSLocalizedString("interest_other".localized, comment: "")
+            return section
         }
     }
     static func showSubTagTranslated(_ section: String) -> String {

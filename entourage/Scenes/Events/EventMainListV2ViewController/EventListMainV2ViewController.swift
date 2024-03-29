@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import SDWebImage
+import IHProgressHUD
+
 
 private enum EventListTableDTO{
     case firstHeader
@@ -32,13 +34,13 @@ class EventListMainV2ViewController:UIViewController{
     //VAR
     private var currentPageMy = 0
     private var currentPageDiscover = 0
-    private let numberOfItemsForWS = 10
+    private let numberOfItemsForWS = 40
     private var currentFilter = EventActionLocationFilters()
     private var tableDTO = [EventListTableDTO]()
     private var discoverEvent = [Event]()
     private var myEvent = [Event]()
     private var isFromFilter = false
-    private var nbOfItemsBeforePagingReload = 5
+    private var nbOfItemsBeforePagingReload = 2
     private var isLoading = false
     private var isOnlyDiscoverPagination = false
     var pullRefreshControl = UIRefreshControl()
@@ -47,7 +49,7 @@ class EventListMainV2ViewController:UIViewController{
 
     
     override func viewDidLoad() {
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
 
         //Title
@@ -89,6 +91,8 @@ class EventListMainV2ViewController:UIViewController{
     
     func loadForInit(){
         isLoading = true
+        IHProgressHUD.show()
+
         self.currentPageMy = 0
         self.currentPageDiscover = 0
         self.isEndOfDiscoverList = false
@@ -145,6 +149,7 @@ class EventListMainV2ViewController:UIViewController{
         self.ui_table_view.reloadData()
         self.pullRefreshControl.endRefreshing()
         isLoading = false
+        IHProgressHUD.dismiss()
     }
     @objc func showNewEvent(_ notification:Notification) {
         if let eventId = notification.userInfo?[kNotificationEventShowId] as? Int {

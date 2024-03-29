@@ -87,7 +87,7 @@ extension ActionCreatePhase2ViewController: UITableViewDelegate, UITableViewData
         
         let section = tagsSections?.getSections()[indexPath.row]
         
-        cell.populateCell(title: section?.name ?? "-" , isChecked: section!.isSelected, imageName: section?.getImageName(), subtitle: section?.subtitle, isSingleSelection: true)
+        cell.populateCell(title: section?.key ?? "-" , isChecked: section!.isSelected, imageName: section?.getImageName(), subtitle: section?.key, isSingleSelection: true)
         
         return cell
     }

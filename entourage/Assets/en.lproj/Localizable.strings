@@ -1070,6 +1070,8 @@
 "action_create_group_bt_back" = "Previous";
 "action_create_group_bt_next" = "Continue";
 "action_create_group_bt_create" = "Confirm";
+"neighborhood_create_group_bt_next" = "Next";
+
 
 "actionCreatePopCloseBackTitle" = "Attention";
 "actionCreatePopCloseBackMessage" = "If you exit the %@ creation form, all information entered will be lost.";

@@ -25,6 +25,7 @@ class SelectTagCell: UITableViewCell {
     }
     
     func populateCell(title:String,isChecked:Bool,imageName:String? = nil, hideSeparator:Bool = false, subtitle:String? = nil, isSingleSelection:Bool = false, imageUrl:String? = nil, isUser:Bool = false) {
+        
         ui_title.text = TagsUtils.showTagTranslated(title)
         if let _subtitle = subtitle{
             ui_subtitle?.text = TagsUtils.showSubTagTranslated(_subtitle)
