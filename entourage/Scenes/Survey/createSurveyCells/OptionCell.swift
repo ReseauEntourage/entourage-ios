@@ -49,7 +49,7 @@ class OptionCell: UITableViewCell, UITextViewDelegate {
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
-        return updatedText.count <= 150
+        return updatedText.count <= 70
     }
     
     func addUnderlineToTextView() {
