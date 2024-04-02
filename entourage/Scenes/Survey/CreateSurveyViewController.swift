@@ -218,6 +218,11 @@ extension CreateSurveyViewController:UITableViewDelegate, UITableViewDataSource{
 }
 
 extension CreateSurveyViewController:QuestionCellDelegate{
+    func textViewDidChangeInCell(_ cell: QuestionCell) {
+        self.ui_tableview.beginUpdates()
+        self.ui_tableview.endUpdates()
+    }
+    
     func onValidateQuestion(title:String) {
         self.surveyTitle = title
 
@@ -242,6 +247,8 @@ extension CreateSurveyViewController:OptionCellDelegate{
         if numberInList < surveyOptions.count {
             surveyOptions[numberInList] = option
         }
+        self.ui_tableview.beginUpdates()
+        self.ui_tableview.endUpdates()
     }
     
     

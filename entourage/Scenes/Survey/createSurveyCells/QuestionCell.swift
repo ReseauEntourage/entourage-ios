@@ -2,6 +2,8 @@ import UIKit
 
 protocol QuestionCellDelegate {
     func onValidateQuestion(title: String)
+    func textViewDidChangeInCell(_ cell: QuestionCell)
+
 }
 
 class QuestionCell: UITableViewCell, UITextViewDelegate {
@@ -30,21 +32,17 @@ class QuestionCell: UITableViewCell, UITextViewDelegate {
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (ui_text_view.font?.pointSize)! / 2)
         placeholderLabel.frame.size = CGSize(width: ui_text_view.frame.width - 10, height: 20)
         placeholderLabel.isHidden = ui_text_view.text.count > 0
-        
+        ui_text_view.isScrollEnabled = false
+
         ui_text_view.delegate = self
         ui_text_view.font = UIFont(name: "NunitoSans-Regular", size: 15)
         ui_text_view.autocapitalizationType = .sentences
-        ui_text_view.textContainer.maximumNumberOfLines = 1
-        ui_text_view.textContainer.lineBreakMode = .byClipping
         addToolbarToKeyboard()
     }
     
 
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" { // Empêcher le retour à la ligne
-                return false
-            }
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
@@ -66,6 +64,8 @@ class QuestionCell: UITableViewCell, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
+        delegate?.textViewDidChangeInCell(self)
+
     }
     
     func configure() {
