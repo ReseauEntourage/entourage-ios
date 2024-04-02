@@ -99,7 +99,7 @@ class SurveyOptionView: UIView {
             // Contraintes pour le questionLabel
             NSLayoutConstraint.activate([
                 questionLabel.leadingAnchor.constraint(equalTo: radioButton.trailingAnchor, constant: 8), // Espace entre le bouton et le texte
-                questionLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+                questionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
                 questionLabel.centerYAnchor.constraint(equalTo: radioButton.centerYAnchor)
             ])
 
