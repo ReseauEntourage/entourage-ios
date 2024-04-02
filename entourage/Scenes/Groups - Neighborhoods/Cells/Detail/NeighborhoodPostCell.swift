@@ -257,7 +257,12 @@ class NeighborhoodPostCell: UITableViewCell {
         if let survey = self.postMessage.survey {
             let totalVotes = survey.totalVotes // Utilisez l'extension pour obtenir le total des votes
             let votesText = "\(totalVotes) vote\(totalVotes > 1 ? "s" : "")" // Gère le pluriel
-            
+            if totalVotes == 0 {
+                self.ui_label_nb_votes.isHidden = true
+                return
+            }else{
+                self.ui_label_nb_votes.isHidden = false
+            }
             // Créer le texte souligné pour les votes
             let votesAttrString = Utils.formatStringUnderline(textString: votesText, textColor: .black, font: ApplicationTheme.getFontChampInput().font)
             
