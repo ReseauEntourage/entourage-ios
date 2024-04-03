@@ -424,6 +424,11 @@ class ConversationDetailMessagesViewController: UIViewController {
             vc.userId = currentUserId
             vc.conversationId = conversationId
             vc.isOneToOne = isOneToOne
+            if let _members = self.currentConversation?.members{
+                if _members.count > 2 {
+                    vc.isSeveral = true
+                }
+            }
             vc.username = currentMessageTitle ?? "-"
             vc.imBlocker = currentConversation?.imBlocker() ?? false
             self.paramVC = vc

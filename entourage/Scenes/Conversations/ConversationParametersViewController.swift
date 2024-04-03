@@ -17,6 +17,7 @@ class ConversationParametersViewController: BasePopViewController {
     var conversationId:Int? = nil
     var isCreator = false
     var username:String = ""
+    var isSeveral = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,37 +168,50 @@ extension ConversationParametersViewController: MJAlertControllerDelegate {
 //MARK: - Tableview Datasource/delegate -
 extension ConversationParametersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isOneToOne ? (imBlocker ? 2 : 3) : (isCreator ? 2 : 3)
+        // Si c'est une conversation entre deux personnes et l'utilisateur n'est pas un bloqueur
+        if isOneToOne {
+            return imBlocker ? 2 : 3 - (isSeveral ? 1 : 0)
+        } else {
+            // Si c'est une conversation de groupe et l'utilisateur est le créateur
+            return isCreator ? 2 : 3
+        }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row = indexPath.row
         
-        switch indexPath.row {
+        // Ajustement des indices si "isSeveral" est vrai et qu'il s'agit d'une conversation un à un
+        let isBlockCellRemoved = isOneToOne && isSeveral
+        let adjustedRow = isBlockCellRemoved && row >= 2 ? row + 1 : row
+
+        switch adjustedRow {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_arrow", for: indexPath) as! ConversationParamCell
             cell.populateCell(title: isOneToOne ? "conv_param_title_profil".localized : "conv_param_title_members".localized, subtitle: nil, isTitleOrange: false, pictoStr: "ic_user_conv")
-            
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
-            //One2one -> signal /  Signal
             cell.populateCell(title: isOneToOne ? "conv_param_title_signal".localized : "conv_param_title_signal_action".localized, subtitle: isOneToOne ? "conv_param_subtitle_signal".localized : "conv_param_subtitle_signal_action".localized, isTitleOrange: true, pictoStr: "ic_signal_orange")
             return cell
-            
-        default:
-            if isOneToOne {
+        case 2:
+            if isOneToOne && !isSeveral {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
-                //quit conv
                 let subtitle = String.init(format: "conv_param_subtitle_block".localized, username)
                 cell.populateCell(title: "conv_param_title_block".localized , subtitle: subtitle, isTitleOrange: true, pictoStr: "ic_user_block")
                 return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
+                cell.populateCell(title: "conv_param_qui_action".localized, subtitle: nil, isTitleOrange: true, pictoStr: "ic_leave_conv", hideSeparator: true)
+                return cell
             }
+        default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-            //quit conv
-            cell.populateCell(title: "conv_param_qui_action".localized, subtitle: nil,isTitleOrange: true, pictoStr: "ic_leave_conv", hideSeparator: true)
+            cell.populateCell(title: "conv_param_qui_action".localized, subtitle: nil, isTitleOrange: true, pictoStr: "ic_leave_conv", hideSeparator: true)
             return cell
         }
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
