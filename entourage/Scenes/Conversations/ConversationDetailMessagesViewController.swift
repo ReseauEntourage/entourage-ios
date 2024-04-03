@@ -246,9 +246,14 @@ class ConversationDetailMessagesViewController: UIViewController {
         if self.messagesExtracted.messages.isEmpty { self.ui_tableview.reloadData() }
         
         IHProgressHUD.show()
-        
+        var _convId = ""
+        if self.conversationId != 0 {
+            _convId = String(conversationId)
+        }else if hashedConversationId != "" {
+            _convId = hashedConversationId
+        }
         self.isLoading = true
-        MessagingService.getMessagesFor(conversationId: conversationId, currentPage: currentPage, per: numberOfItemsForWS) { messages, error in
+        MessagingService.getMessagesFor(conversationId: _convId, currentPage: currentPage, per: numberOfItemsForWS) { messages, error in
             IHProgressHUD.dismiss()
             if let messages = messages {
                 if self.currentPage > 1 {
@@ -279,12 +284,29 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
     
     func getDetailConversation() {
-        MessagingService.getDetailConversation(conversationId: conversationId) { conversation, error in
+        var _convId = ""
+        if self.conversationId != 0 {
+            _convId = String(conversationId)
+        }else if hashedConversationId != "" {
+            _convId = hashedConversationId
+        }
+        MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation {
                 if self.isOneToOne {
                     self.currentMessageTitle = conversation.members?.first(where: {$0.uid != self.meId})?.username
+                    if conversation.members!.count > 2 {
+                        self.currentMessageTitle = ""
+                        for k in 0...2 {
+                            self.currentMessageTitle = self.currentMessageTitle! + conversation.members![k].username! + " ,"
+                        }
+                        if self.currentMessageTitle?.last == ","{
+                            self.currentMessageTitle?.removeLast()
+                            self.currentMessageTitle = self.currentMessageTitle! + "..."
+                        }
+                    }
                     
                     let _title = self.currentMessageTitle ?? "messaging_message_title".localized
+                    self.ui_top_view.setTitlesOneLine()
                     self.ui_top_view.updateTitle(title: _title)
                 }
                 self.currentConversation = conversation

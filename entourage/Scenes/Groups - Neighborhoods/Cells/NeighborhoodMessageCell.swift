@@ -222,7 +222,9 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_view_error?.isHidden = true
             if isOne2One {
                 ui_date.text = "\(message.createdTimeFormatted)"
-                ui_username.text = " "
+                if let username = message.user?.displayName {
+                    ui_username.text = "\(username)"
+                }
             }
             else {
                 if isMe {

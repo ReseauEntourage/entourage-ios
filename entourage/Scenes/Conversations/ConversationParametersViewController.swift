@@ -44,8 +44,11 @@ class ConversationParametersViewController: BasePopViewController {
             self.goBack()
             return
         }
-        
-        MessagingService.getDetailConversation(conversationId: conversationId) { conversation, error in
+        var _convId = ""
+        if self.conversationId != 0 {
+            _convId = String(conversationId)
+        }
+        MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation,let isCreator = conversation.isCreator {
                 self.isCreator = isCreator
             }

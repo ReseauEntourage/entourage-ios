@@ -29,7 +29,7 @@ struct MessagingService:ParsingDataCodable {
         }
     }
     
-    static func getDetailConversation(conversationId:Int, completion: @escaping (_ conversation:Conversation?, _ error:EntourageNetworkError?) -> Void) {
+    static func getDetailConversation(conversationId:String, completion: @escaping (_ conversation:Conversation?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIConversationGetDetailConversation
@@ -50,7 +50,7 @@ struct MessagingService:ParsingDataCodable {
         }
     }
     
-    static func getMessagesFor(conversationId:Int,currentPage:Int, per:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
+    static func getMessagesFor(conversationId:String,currentPage:Int, per:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIGetConversationDetailMessages

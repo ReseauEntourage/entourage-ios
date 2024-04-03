@@ -56,11 +56,19 @@ class MJNavBackView: UIView {
         ui_subtitle.setupFontAndColor(style: ApplicationTheme.getFontCourantItalicNoir(size: 15))
     }
     
+    func setTitlesOneLine(){
+        for _uititle in ui_titles {
+            _uititle.numberOfLines = 1
+        }
+    }
+    
     func updateTitle(title:String) {
         for _uititle in ui_titles {
             _uititle.text = title
         }
     }
+    
+    
     
     func hideButtonBackForUnboarding(hide:Bool) {
         ui_view_close.isHidden = !hide
