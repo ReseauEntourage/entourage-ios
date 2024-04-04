@@ -15,6 +15,7 @@ struct PedagogicResources: Codable {
 
 struct PedagogicResource: Codable {
     var id:Int = 0
+    var uuid_v2:String = ""
     var title = ""
     private var categoryStr = ""
     var description:String? = nil
@@ -41,6 +42,7 @@ struct PedagogicResource: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
+        case uuid_v2 
         case title = "name"
         case categoryStr = "category"
         case description = "description"

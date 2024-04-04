@@ -246,6 +246,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         if self.messagesExtracted.messages.isEmpty { self.ui_tableview.reloadData() }
         
         IHProgressHUD.show()
+        
         var _convId = ""
         if self.conversationId != 0 {
             _convId = String(conversationId)
@@ -292,6 +293,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation {
+                
                 if self.isOneToOne {
                     self.currentMessageTitle = conversation.members?.first(where: {$0.uid != self.meId})?.username
                     if conversation.members!.count > 2 {
@@ -346,7 +348,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         
         let messagesSorted = MessagesSorted(messages: newMessages, datesSections: newMessagessSorted.count)
-        
+
         self.messagesExtracted.messages.removeAll()
         self.messagesExtracted = messagesSorted
     }
