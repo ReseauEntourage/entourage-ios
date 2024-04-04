@@ -296,15 +296,10 @@ class ConversationDetailMessagesViewController: UIViewController {
                 
                 if self.isOneToOne {
                     self.currentMessageTitle = conversation.members?.first(where: {$0.uid != self.meId})?.username
-                    if conversation.members!.count > 2 {
-                        self.currentMessageTitle = ""
-                        for k in 0...2 {
-                            self.currentMessageTitle = self.currentMessageTitle! + conversation.members![k].username! + " ,"
-                        }
-                        if self.currentMessageTitle?.last == ","{
-                            self.currentMessageTitle?.removeLast()
-                            self.currentMessageTitle = self.currentMessageTitle! + "..."
-                        }
+                    if conversation.members_count ?? 0 > 2 {
+                        let count = (conversation.members_count ?? 1) - 1
+                        self.currentMessageTitle = (self.currentMessageTitle ?? "") + " + " +  String(count)  + " membres"
+                        
                     }
                     
                     let _title = self.currentMessageTitle ?? "messaging_message_title".localized

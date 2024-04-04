@@ -45,6 +45,11 @@ class ConversationListMainCell: UITableViewCell {
     
     func populateCell(message:Conversation, delegate:ConversationListMainCellDelegate, position:Int) {
         ui_username.text = message.title
+        if let _messageTitle = message.title, let _count = message.members_count {
+            if _count > 2 {
+                ui_username.text = _messageTitle + " + " + String(_count) + " membres"
+            }
+        }
         ui_role.text = message.getRolesWithPartnerFormated()
         if let _message = message.getLastMessage {
             ui_detail_message.text = _message

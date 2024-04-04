@@ -17,6 +17,7 @@ struct Conversation:Codable {
     var section:String? = nil
     var user:MemberConversation? = nil
     var members:[MemberLight]? = nil
+    var members_count:Int? = 0
     var isCreator:Bool? = nil
     private var blockers:[String]? = nil
     
@@ -130,6 +131,7 @@ struct Conversation:Codable {
         case messages = "chat_messages"
         case hasPersonalPost = "has_personal_post"
         case members
+        case members_count
         case isCreator = "creator"
         case blockers
         case author
