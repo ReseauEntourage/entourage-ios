@@ -304,10 +304,15 @@ class ConversationDetailMessagesViewController: UIViewController {
                 self.ui_top_view.updateTitle(title: _title)
             }
             self.updateInputInfos()
-            MessagingService.addUserToConversation(conversationId: conversation.uuid ?? "") { success, error in
-                if success {
-                    self.getMessages()
-                } else {
+            if isFromDeeplink{
+                isFromDeeplink = false
+                MessagingService.addUserToConversation(conversationId: conversation.uuid ?? "") { success, error in
+                    if success {
+                        self.getDetailConversation()
+                        self.getMessages()
+                    } else {
+                        
+                    }
                 }
             }
         }
