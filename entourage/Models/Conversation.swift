@@ -10,6 +10,7 @@ import Foundation
 
 struct Conversation:Codable {
     var uid:Int = 0
+    var uuid:String? = nil
     var type:String? = nil
     var title:String? = nil
     private var lastMessage:LastMessage? = nil
@@ -122,6 +123,7 @@ struct Conversation:Codable {
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"
+        case uuid
         case title = "name"
         case type
         case lastMessage = "last_message"

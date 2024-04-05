@@ -500,8 +500,8 @@ struct DeepLinkManager {
     
     static func showConversationUniversalLink(conversationId:String) {
         if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-            print("eho conv id " , conversationId)
             vc.setupFromOtherVCWithHash(conversationId: conversationId, title: nil, isOneToOne: true)
+            vc.isFromDeeplink = true
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
