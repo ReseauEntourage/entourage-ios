@@ -45,7 +45,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     private var isOneToOne = true
     private var selectedIndexPath:IndexPath? = nil
     private weak var parentDelegate:UpdateUnreadCountDelegate? = nil
-    var isFromDeeplink = false
+    
     
     
     @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
@@ -286,38 +286,33 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
     
     func getDetailConversation() {
-        let _convId = conversationId != 0 ? String(conversationId) : hashedConversationId
-        MessagingService.getDetailConversation(conversationId: _convId) { [weak self] conversation, error in
-            guard let self = self, let conversation = conversation else { return }
-            
-            // Mise à jour de l'interface utilisateur avec les détails de la conversation
-            self.currentConversation = conversation
-            if self.isOneToOne {
-                self.currentMessageTitle = conversation.members?.first(where: {$0.uid != self.meId})?.username
-                if conversation.members_count ?? 0 > 2 {
-                    let count = (conversation.members_count ?? 1) - 1
-                    self.currentMessageTitle = (self.currentMessageTitle ?? "") + " + " + String(count) + " membres"
-                }
+        var _convId = ""
+        if self.conversationId != 0 {
+            _convId = String(conversationId)
+        }else if hashedConversationId != "" {
+            _convId = hashedConversationId
+        }
+        MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
+            if let conversation = conversation {
                 
-                let _title = self.currentMessageTitle ?? "messaging_message_title".localized
-                self.ui_top_view.setTitlesOneLine()
-                self.ui_top_view.updateTitle(title: _title)
-            }
-            self.updateInputInfos()
-            if isFromDeeplink{
-                isFromDeeplink = false
-                MessagingService.addUserToConversation(conversationId: conversation.uuid ?? "") { success, error in
-                    if success {
-                        self.getDetailConversation()
-                        self.getMessages()
-                    } else {
+                if self.isOneToOne {
+                    self.currentMessageTitle = conversation.members?.first(where: {$0.uid != self.meId})?.username
+                    if conversation.members_count ?? 0 > 2 {
+                        let count = (conversation.members_count ?? 1) - 1
+                        self.currentMessageTitle = (self.currentMessageTitle ?? "") + " + " +  String(count)  + " membres"
                         
                     }
+                    
+                    let _title = self.currentMessageTitle ?? "messaging_message_title".localized
+                    self.ui_top_view.setTitlesOneLine()
+                    self.ui_top_view.updateTitle(title: _title)
                 }
+                self.currentConversation = conversation
+                
+                self.updateInputInfos()
             }
         }
     }
-
     
     func updateInputInfos() {
         if currentConversation?.hasBlocker() ?? false {

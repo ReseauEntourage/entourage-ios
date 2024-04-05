@@ -498,11 +498,30 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(vc, animated: true)
     }
     
-    static func showConversationUniversalLink(conversationId:String) {
-        if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-            vc.setupFromOtherVCWithHash(conversationId: conversationId, title: nil, isOneToOne: true)
-            vc.isFromDeeplink = true
-            AppState.getTopViewController()?.present(vc, animated: true)
+    static func showConversationUniversalLink(conversationId: String) {
+        // Supposons que vous avez récupéré l'ID de l'utilisateur d'une manière ou d'une autre, peut-être stocké dans UserDefaults ou via un gestionnaire d'authentification
+        guard let userId = UserDefaults.currentUser?.sid else {
+            print("L'ID de l'utilisateur n'est pas disponible.")
+            return
+        }
+
+        // Ajouter l'utilisateur à la conversation avant de naviguer
+        MessagingService.addUserToConversation(conversationId: conversationId) { success, error in
+            guard success else {
+                if let error = error {
+                    print("Erreur lors de l'ajout à la conversation: \(error)")
+                } else {
+                    print("Erreur inconnue lors de l'ajout à la conversation.")
+                }
+                return
+            }
+
+            DispatchQueue.main.async {
+                if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                    vc.setupFromOtherVCWithHash(conversationId: conversationId, title: nil, isOneToOne: true)
+                    AppState.getTopViewController()?.present(vc, animated: true)
+                }
+            }
         }
     }
     
