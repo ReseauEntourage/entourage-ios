@@ -47,7 +47,7 @@ class ConversationListMainCell: UITableViewCell {
         ui_username.text = message.title
         if let _messageTitle = message.title, let _count = message.members_count {
             if _count > 2 {
-                ui_username.text = _messageTitle + " + " + String(_count) + " membres"
+                ui_username.text = _messageTitle + " + " + String(_count - 1) + " membres"
             }
         }
         ui_role.text = message.getRolesWithPartnerFormated()
