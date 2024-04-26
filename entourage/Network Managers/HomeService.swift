@@ -45,7 +45,7 @@ struct HomeService:ParsingDataCodable {
         }
     }
     
-    static func getResourceWithId(_ id:Int, completion: @escaping (_ resource:PedagogicResource?, _ error:EntourageNetworkError?) -> Void) {
+    static func getResourceWithId(_ id:String, completion: @escaping (_ resource:PedagogicResource?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIHomeGetResource

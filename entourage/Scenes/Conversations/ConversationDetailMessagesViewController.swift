@@ -47,6 +47,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     private weak var parentDelegate:UpdateUnreadCountDelegate? = nil
     
     
+    
     @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
     @IBOutlet weak var ui_view_block: UIView!
     @IBOutlet weak var ui_title_block: UILabel!
@@ -247,8 +248,14 @@ class ConversationDetailMessagesViewController: UIViewController {
         
         IHProgressHUD.show()
         
+        var _convId = ""
+        if self.conversationId != 0 {
+            _convId = String(conversationId)
+        }else if hashedConversationId != "" {
+            _convId = hashedConversationId
+        }
         self.isLoading = true
-        MessagingService.getMessagesFor(conversationId: conversationId, currentPage: currentPage, per: numberOfItemsForWS) { messages, error in
+        MessagingService.getMessagesFor(conversationId: _convId, currentPage: currentPage, per: numberOfItemsForWS) { messages, error in
             IHProgressHUD.dismiss()
             if let messages = messages {
                 if self.currentPage > 1 {
@@ -279,12 +286,25 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
     
     func getDetailConversation() {
-        MessagingService.getDetailConversation(conversationId: conversationId) { conversation, error in
+        var _convId = ""
+        if self.conversationId != 0 {
+            _convId = String(conversationId)
+        }else if hashedConversationId != "" {
+            _convId = hashedConversationId
+        }
+        MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation {
+                
                 if self.isOneToOne {
                     self.currentMessageTitle = conversation.members?.first(where: {$0.uid != self.meId})?.username
+                    if conversation.members_count ?? 0 > 2 {
+                        let count = (conversation.members_count ?? 1) - 1
+                        self.currentMessageTitle = (self.currentMessageTitle ?? "") + " + " +  String(count)  + " membres"
+                        
+                    }
                     
                     let _title = self.currentMessageTitle ?? "messaging_message_title".localized
+                    self.ui_top_view.setTitlesOneLine()
                     self.ui_top_view.updateTitle(title: _title)
                 }
                 self.currentConversation = conversation
@@ -324,7 +344,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         
         let messagesSorted = MessagesSorted(messages: newMessages, datesSections: newMessagessSorted.count)
-        
+
         self.messagesExtracted.messages.removeAll()
         self.messagesExtracted = messagesSorted
     }
@@ -402,6 +422,11 @@ class ConversationDetailMessagesViewController: UIViewController {
             vc.userId = currentUserId
             vc.conversationId = conversationId
             vc.isOneToOne = isOneToOne
+            if let _members = self.currentConversation?.members{
+                if _members.count > 2 {
+                    vc.isSeveral = true
+                }
+            }
             vc.username = currentMessageTitle ?? "-"
             vc.imBlocker = currentConversation?.imBlocker() ?? false
             self.paramVC = vc

@@ -118,6 +118,8 @@ let kAPIConversationPostCreateConversation = "conversations?token=%@"
 let kAPIConversationReportConversation = "conversations/%@/report?token=%@"
 let kAPIConversationQuitConversation = "conversations/%@/users?token=%@"
 let kAPIConversationGetDetailConversation = "conversations/%@?token=%@"
+let kAPIAddUserToConversation = "conversations/%@/users?token=%@"
+
 
 //Chat message
 let kAPIChatMessageDelete = "/chat_messages/%d?token=%@"
@@ -169,3 +171,4 @@ let kAPIPostSurveyResponseEvent = "outings/%d/chat_messages/%d/survey_responses?
 let kAPIGetSurveyResponsesForEvent = "outings/%d/chat_messages/%d/survey_responses?token=%@"
 let kAPIDeleteSurveyResponseForEvent = "outings/%d/chat_messages/%d/survey_responses?token=%@"
 let kAPICreateSurveyInEvent = "outings/%d/chat_messages?token=%@"
+

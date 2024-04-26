@@ -50,8 +50,10 @@ struct UniversalLinkManager {
                     DeepLinkManager.showNeighborhoodDetailMessageUniversalLink(instanceId: _grouphashId, postId: _posthashId)
                 }
 
-            }else if pathComponents.contains("conversations") && pathComponents.contains("chat_messages"){
-                DeepLinkManager.showConversationUniversalLink(conversationId: "AAAAA")
+            }else if pathComponents.contains("conversations"){
+                if let _convId = pathComponents[2+iterator] as? String {
+                    DeepLinkManager.showConversationUniversalLink(conversationId: _convId)
+                }
 
             }else if pathComponents.contains("outings") {
                 if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{

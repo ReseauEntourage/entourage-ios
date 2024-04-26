@@ -39,12 +39,17 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
     }
     
     func getDetailResource() {
-        guard let resourceId = resourceId else {
-            return
+        var _resourceId = ""
+        if self.resourceId != nil {
+            _resourceId = String(resourceId!)
+        }else if hashdResourceId != "" {
+            _resourceId = hashdResourceId ?? ""
         }
-        delegate?.markReadPedogicResource(id: resourceId)
-        HomeService.getResourceWithId(resourceId) { resource, error in
+        
+        delegate?.markReadPedogicResource(id: resourceId ?? 0)
+        HomeService.getResourceWithId(_resourceId) { resource, error in
             if let htmlBody = resource?.bodyHtml {
+
                 DispatchQueue.main.async {
                     self.ui_webview.loadHTMLString(htmlBody, baseURL: nil)
                 }

@@ -29,7 +29,7 @@ struct MessagingService:ParsingDataCodable {
         }
     }
     
-    static func getDetailConversation(conversationId:Int, completion: @escaping (_ conversation:Conversation?, _ error:EntourageNetworkError?) -> Void) {
+    static func getDetailConversation(conversationId:String, completion: @escaping (_ conversation:Conversation?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIConversationGetDetailConversation
@@ -50,7 +50,7 @@ struct MessagingService:ParsingDataCodable {
         }
     }
     
-    static func getMessagesFor(conversationId:Int,currentPage:Int, per:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
+    static func getMessagesFor(conversationId:String,currentPage:Int, per:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIGetConversationDetailMessages
@@ -255,5 +255,34 @@ struct MessagingService:ParsingDataCodable {
             DispatchQueue.main.async { completion(user, nil) }
         }
     }
+    
+    static func addUserToConversation(conversationId: String, completion: @escaping (_ success: Bool, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return completion(false, nil) }
+        let endpoint = String(format: kAPIAddUserToConversation, conversationId, token)
+        
+        // Pour déboguer, logguons l'URL complète de la requête
+        print("URL de la requête: \(endpoint)")
+
+        // Supposons que votre body est vide ou ajustez selon votre API
+        // Si vous devez envoyer un JSON vide, utilisez ceci :
+        let bodyData = "{}".data(using: .utf8)!
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            if let error = error {
+                print(" joinLogin Erreur lors de la requête: \(error)")
+            }
+
+            if let httpResponse = resp as? HTTPURLResponse {
+                if httpResponse.statusCode < 300  {
+                    DispatchQueue.main.async { completion(true, nil) }
+                } else {
+                    DispatchQueue.main.async { completion(false, nil) }
+                }
+            } else {
+            }
+        }
+    }
+
+
     
 }
