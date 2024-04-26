@@ -96,6 +96,7 @@ class NeighborhoodDetailViewController: UIViewController {
     
     func registerCellsNib() {
         ui_tableview.register(UINib(nibName: NeighborhoodPostTextCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTextCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostSurveyCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostSurveyCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostImageCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostDeletedCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostDeletedCell.identifier)
 
@@ -159,7 +160,11 @@ class NeighborhoodDetailViewController: UIViewController {
             self.showCreateEvent()
         }
         
-        let floatItem2 = createButtonItem(title: "neighborhood_menu_post_post".localized, iconName: "ic_menu_button_create_post") { item in
+        let floatItem2 = createButtonItem(title: "neighborhood_menu_post_survey".localized, iconName: "ic_survey_creation") { item in
+            self.showCreateSurvey()
+        }
+        
+        let floatItem3 = createButtonItem(title: "neighborhood_menu_post_post".localized, iconName: "ic_menu_button_create_post") { item in
             AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost)
             self.showCreatePost()
         }
@@ -167,6 +172,7 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_floaty_button.overlayColor = .white.withAlphaComponent(0.10)
         ui_floaty_button.addBlurOverlay = true
         ui_floaty_button.itemSpace = 24
+        ui_floaty_button.addItem(item: floatItem3)
         ui_floaty_button.addItem(item: floatItem2)
         ui_floaty_button.addItem(item: floatItem1)
         ui_floaty_button.sticky = true
@@ -219,6 +225,8 @@ class NeighborhoodDetailViewController: UIViewController {
         
         NeighborhoodService.getNeighborhoodDetail(id: _groupId) { group, error in
             self.pullRefreshControl.endRefreshing()
+            
+            print("eho group " , group)
             if let _ = error {
                 self.goBack()
             }
@@ -337,7 +345,6 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     func showWelcomeMessage(){
-
         //I_present_view_pop
         AnalyticsLoggerManager.logEvent(name: I_present_view_pop)
 
@@ -350,7 +357,6 @@ class NeighborhoodDetailViewController: UIViewController {
         {
             message = (neighborhood?.welcomeMessage)!
         }
-        
         let alertVC = MJAlertController()
         let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontH1Blanc(size: 15), bgColor: .appOrange, cornerRadius: -1)
         alertVC.alertTagName = .welcomeMessage
@@ -361,8 +367,6 @@ class NeighborhoodDetailViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
             alertVC.show()
         }
-        
-        
     }
     
     func showPopLeave() {
@@ -454,6 +458,17 @@ class NeighborhoodDetailViewController: UIViewController {
         }
     }
     
+    func showCreateSurvey() {
+        let sb = UIStoryboard.init(name: StoryboardName.survey, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "create_survey") as? CreateSurveyViewController  {
+            vc.groupId = self.neighborhoodId
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
+    
+    
     func showCreateEvent() {
         //TODO: a faire lien vers la créa d'event
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewEvent)
@@ -463,6 +478,7 @@ class NeighborhoodDetailViewController: UIViewController {
         vc.currentNeighborhoodId = neighborhood?.uid
         self.navigationController?.present(vc, animated: true)
     }
+    
 }
 
 //MARK: - MJAlertControllerDelegate -
@@ -568,9 +584,13 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if(postmessage.contentTranslations == nil){
                     identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
                 }
+                if postmessage.survey != nil {
+                    identifier = NeighborhoodPostSurveyCell.identifier
+                }
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
+                
                 print("eho identifier : " , identifier)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.neighborhood?.isMember)
@@ -606,6 +626,9 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if(postmessage.contentTranslations == nil){
                     identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
                 }
+                if postmessage.survey != nil {
+                    identifier = NeighborhoodPostSurveyCell.identifier
+                }
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
@@ -627,6 +650,9 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             }
             if(postmessage.contentTranslations == nil){
                 identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            }
+            if postmessage.survey != nil {
+                identifier = NeighborhoodPostSurveyCell.identifier
             }
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
@@ -767,10 +793,38 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
             self.navigationController?.present(navvc, animated: true)
         }
     }
+    func showVote(post:PostMessage){
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.neighborhood = self.neighborhood
+            vc.survey = post.survey
+            vc.questionTitle = post.content
+            vc.postId = post.uid
+            vc.isFromSurvey = true
+            vc.groupId = self.neighborhoodId
+            vc.isFromReact = false
+            self.navigationController?.present(navVC, animated: true)
+        }
+    }
 }
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
+    func sendVoteView(post: PostMessage) {
+        self.showVote(post: post)
+    }
+    
+    func postSurveyResponse(forPostId postId: Int, withResponses responses: [Bool]) {
+        let groupId = self.neighborhoodId
+        
+        SurveyService.postSurveyResponseGroup(groupId: groupId, postId: postId, responses: responses) { isSuccess in
+            if isSuccess {
+                print("Réponse au sondage postée avec succès.")
+            } else {
+                print("Échec du postage de la réponse au sondage.")
+            }
+        }
+    }
+    
     func ifNotMemberWarnUser() {
         let alertController = UIAlertController(title: "Attention", message: "Vous devez rejoindre le groupe pour effectuer cette action.", preferredStyle: .alert)
                 
@@ -1013,6 +1067,12 @@ extension NeighborhoodDetailViewController{
 
 extension NeighborhoodDetailViewController:NeighborhoodParamDismissDelegate{
     func onDismiss() {
+        self.getNeighborhoodDetail()
+    }
+}
+
+extension NeighborhoodDetailViewController:CreateSurveyValidationDelegate{
+    func onSurveyCreate() {
         self.getNeighborhoodDetail()
     }
 }

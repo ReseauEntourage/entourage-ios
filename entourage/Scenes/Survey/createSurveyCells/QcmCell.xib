@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Quicksand-Bold.ttf">
+            <string>Quicksand-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QcmCell" rowHeight="109" id="EzX-C5-3U1" customClass="QcmCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="432" height="109"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EzX-C5-3U1" id="e8g-A2-Uqk">
+                <rect key="frame" x="0.0" y="0.0" width="432" height="109"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plusieurs réponses possibles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teT-Ld-CFv">
+                        <rect key="frame" x="20" y="60" width="204.66666666666666" height="39"/>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CwD-N0-1jU">
+                        <rect key="frame" x="284.66666666666669" y="64" width="51" height="31"/>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="teT-Ld-CFv" firstAttribute="top" secondItem="e8g-A2-Uqk" secondAttribute="top" constant="60" id="2Hv-04-z2p"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CwD-N0-1jU" secondAttribute="trailing" constant="20" symbolic="YES" id="dkF-7s-KYW"/>
+                    <constraint firstAttribute="bottom" secondItem="teT-Ld-CFv" secondAttribute="bottom" constant="10" id="e1z-Ru-A11"/>
+                    <constraint firstItem="CwD-N0-1jU" firstAttribute="leading" secondItem="teT-Ld-CFv" secondAttribute="trailing" constant="60" id="gm1-jH-zig"/>
+                    <constraint firstItem="CwD-N0-1jU" firstAttribute="centerY" secondItem="teT-Ld-CFv" secondAttribute="centerY" id="n2H-zT-vP8"/>
+                    <constraint firstItem="teT-Ld-CFv" firstAttribute="leading" secondItem="e8g-A2-Uqk" secondAttribute="leading" constant="20" symbolic="YES" id="tb0-EX-Odt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ui_label_title" destination="teT-Ld-CFv" id="a4H-Lj-HH3"/>
+                <outlet property="ui_switch" destination="CwD-N0-1jU" id="Xu8-yc-57a"/>
+            </connections>
+            <point key="canvasLocation" x="149.61832061068702" y="42.605633802816904"/>
+        </tableViewCell>
+    </objects>
+</document>

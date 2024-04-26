@@ -25,6 +25,8 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_view_comment_post: UIView!
     @IBOutlet weak var ui_view_comment: UIView!
     
+    @IBOutlet weak var ui_label_select_option: UILabel!
+    @IBOutlet weak var ui_label_nb_votes: UILabel!
     
     @IBOutlet weak var ui_label_ambassador: UILabel!
     
@@ -41,6 +43,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @IBOutlet weak var ui_image_react_btn: UIImageView!
     @IBOutlet weak var ui_label_i_like: UILabel!
+    @IBOutlet weak var ui_stackview_options: UIStackView!
     
     class var identifier: String {
         return String(describing: self)
@@ -80,9 +83,14 @@ class NeighborhoodPostCell: UITableViewCell {
               ui_view_btn_i_comment.isUserInteractionEnabled = true
         }
         let commentsLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(commentLabelTapped))
+        let voteLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(voteLabelTapped))
            ui_comments_nb.addGestureRecognizer(commentsLabelTapGesture)
-           ui_comments_nb.isUserInteractionEnabled = true  // Assure-toi que l'interaction utilisateur est activée
         
+           ui_comments_nb.isUserInteractionEnabled = true  // Assure-toi que l'interaction utilisateur est activée
+        if ui_label_nb_votes != nil {
+            ui_label_nb_votes.addGestureRecognizer(voteLabelTapGesture)
+            ui_label_nb_votes.isUserInteractionEnabled = true  // Assure-toi que l'interaction utilisateur est activée
+        }
         if(ui_view_btn_i_like != nil){
             let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
                 ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
@@ -109,6 +117,43 @@ class NeighborhoodPostCell: UITableViewCell {
             }
         }
     }
+    func configureWithSurvey(survey: Survey) {
+        // Assurez-vous que surveyResponse a le bon nombre d'éléments
+        if postMessage.surveyResponse == nil || postMessage.surveyResponse?.count != survey.choices.count {
+            postMessage.surveyResponse = Array(repeating: false, count: survey.choices.count)
+        }
+        
+        guard let surveyResponses = postMessage.surveyResponse else { return }
+        
+        if ui_label_select_option != nil {
+            if let _multiple = postMessage.survey?.multiple{
+                if _multiple == true {
+                    ui_label_select_option.text = "Sélectionnez une ou plusieurs options"
+                }else {
+                    ui_label_select_option.text = "Sélectionnez une option"
+                }
+            }
+        }
+        
+        ui_stackview_options.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        let totalVotes = survey.summary.reduce(0, +)
+        survey.choices.enumerated().forEach { index, choice in
+            let surveyOptionView = SurveyOptionView()
+            surveyOptionView.questionLabel.text = choice
+            surveyOptionView.optionIndex = index
+            surveyOptionView.radioButton.isSelected = surveyResponses[index]
+
+            let votes = survey.summary[index]
+            let votePercentage = totalVotes > 0 ? Float(votes) / Float(totalVotes) : 0
+            surveyOptionView.progressBar.progress = votePercentage
+            surveyOptionView.answerCountLabel.text = "\(votes)"
+            surveyOptionView.delegate = self
+
+            ui_stackview_options.addArrangedSubview(surveyOptionView)
+        }
+        layoutIfNeeded()
+    }
+
 
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
@@ -124,6 +169,11 @@ class NeighborhoodPostCell: UITableViewCell {
     @objc func commentLabelTapped() {
         delegate?.showMessages(addComment: false, postId: postId, indexPathSelected: currentIndexPath, postMessage: postMessage)
     }
+    @objc func voteLabelTapped() {
+        self.delegate?.sendVoteView(post: self.postMessage)
+
+    }
+
     
     func updateReactionIcon() {
         if ui_image_react_btn != nil {
@@ -202,6 +252,34 @@ class NeighborhoodPostCell: UITableViewCell {
             window.addSubview(popupView)
         }
     }
+    
+    func configureSurveyNumberLabel(){
+        if let survey = self.postMessage.survey {
+            let totalVotes = survey.totalVotes // Utilisez l'extension pour obtenir le total des votes
+            let votesText = "\(totalVotes) vote\(totalVotes > 1 ? "s" : "")" // Gère le pluriel
+            if totalVotes == 0 {
+                self.ui_label_nb_votes.isHidden = true
+                return
+            }else{
+                self.ui_label_nb_votes.isHidden = false
+            }
+            // Créer le texte souligné pour les votes
+            let votesAttrString = Utils.formatStringUnderline(textString: votesText, textColor: .black, font: ApplicationTheme.getFontChampInput().font)
+            
+            // Créer le texte final avec le " - " non souligné si commentsCount > 0
+            let finalAttrString = NSMutableAttributedString()
+            finalAttrString.append(votesAttrString)
+            
+            if let commentsCount = self.postMessage.commentsCount, commentsCount > 0 {
+                finalAttrString.append(NSAttributedString(string: " - ", attributes: [NSAttributedString.Key.font: ApplicationTheme.getFontChampInput().font, NSAttributedString.Key.foregroundColor: UIColor.black]))
+            }
+            // Assigner le texte au label
+            ui_label_nb_votes.attributedText = finalAttrString
+        } else {
+            // Gérez le cas où `message.survey` est nul
+        }
+
+    }
 
     class RoundedView: UIView {
         override var bounds: CGRect {
@@ -228,15 +306,16 @@ class NeighborhoodPostCell: UITableViewCell {
                 container.backgroundColor = .white
 
                 let imageView = UIImageView()
+                imageView.backgroundColor = .white
                 imageView.translatesAutoresizingMaskIntoConstraints = false
                 container.addSubview(imageView)
 
                 // Contraintes pour le container et le padding de l'image
                 NSLayoutConstraint.activate([
-                    container.widthAnchor.constraint(equalToConstant: 20),
-                    container.heightAnchor.constraint(equalToConstant: 20),
-                    imageView.widthAnchor.constraint(equalToConstant: 10),
-                    imageView.heightAnchor.constraint(equalToConstant: 10),
+                    container.widthAnchor.constraint(equalToConstant: 25),
+                    container.heightAnchor.constraint(equalToConstant: 25),
+                    imageView.widthAnchor.constraint(equalToConstant: 15),
+                    imageView.heightAnchor.constraint(equalToConstant: 15),
                     imageView.centerXAnchor.constraint(equalTo: container.centerXAnchor),
                     imageView.centerYAnchor.constraint(equalTo: container.centerYAnchor)
                 ])
@@ -254,7 +333,7 @@ class NeighborhoodPostCell: UITableViewCell {
         // Ajouter des contraintes au stack view lui-même si nécessaire
         // Par exemple, si votre stack view doit avoir une hauteur spécifique
         NSLayoutConstraint.activate([
-            _stackview.heightAnchor.constraint(equalToConstant: 20)
+            _stackview.heightAnchor.constraint(equalToConstant: 25)
         ])
         
         _stackview.layoutIfNeeded()
@@ -263,6 +342,7 @@ class NeighborhoodPostCell: UITableViewCell {
             let reactionsCountLabel = UILabel()
             reactionsCountLabel.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 13), color: .black))
             reactionsCountLabel.text = "  " + "\(totalReactionsCount)"
+            reactionsCountLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
             _stackview.addArrangedSubview(reactionsCountLabel)
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stackViewTapped))
@@ -320,6 +400,9 @@ class NeighborhoodPostCell: UITableViewCell {
         
         self.postMessage = message
         self.delegate = delegate
+        if self.postMessage.survey != nil && self.ui_stackview_options != nil {
+            configureWithSurvey(survey: self.postMessage.survey!)
+        }
         updateReactionIcon()
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
@@ -354,19 +437,23 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_iv_user.image = UIImage.init(named: "placeholder_user")
         }
         
+        
+        
         if message.commentsCount == 0 {
             //ui_comments_nb.text = "neighborhood_post_noComment".localized
             ui_comments_nb.text = ""
             
             ui_comments_nb.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 13), color: .appGrisSombre40))
 
-        }
-        else {
+        }else {
             let msg:String = message.commentsCount ?? 0 <= 1 ? "neighborhood_post_1Comment".localized : "neighborhood_post_XComments".localized
             
             let attrStr = Utils.formatStringUnderline(textString: String.init(format: msg, message.commentsCount ?? 0), textColor: .black, font: ApplicationTheme.getFontChampInput().font)
             ui_comments_nb.attributedText = attrStr
         }
+        
+        self.configureSurveyNumberLabel()
+
         
         if let urlStr = message.messageImageUrl, let url = URL(string: urlStr) {
             ui_image_post?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_post"))
@@ -405,6 +492,8 @@ class NeighborhoodPostCell: UITableViewCell {
                 // Ajouter un geste pour avertir l'utilisateur
                 let tapGestureForLike = UITapGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
                 ui_view_btn_i_like.addGestureRecognizer(tapGestureForLike)
+                let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(ifNotMemberWarnUser))
+                    ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
             }
             // Configurer pour les non-membres
             ui_btn_signal_post.isUserInteractionEnabled = true
@@ -469,30 +558,13 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func deleteReaction(post:PostMessage, reactionType:ReactionType)
     func onReactClickSeeMember(post:PostMessage)
     func ifNotMemberWarnUser()
+    func postSurveyResponse(forPostId postId: Int, withResponses responses: [Bool])
+    func sendVoteView(post:PostMessage)
 
 }
 
 extension NeighborhoodPostCell: ReactionsPopupViewDelegate {
-//    func reactForPost(reactionType: ReactionType) {
-//        if postMessage.reactionId == reactionType.id {
-//            self.delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
-//        } else {
-//            // Ajouter une nouvelle réaction
-//            self.delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
-//        }
-//    }
-//    func reactForPost(reactionType: ReactionType) {
-//        let alreadyReacted = postMessage.reactions?.contains(where: { $0.reactionId == reactionType.id }) ?? false
-//        if alreadyReacted {
-//            // Supprimer la réaction
-//            updateReaction(reactionType: reactionType, add: false)
-//            delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
-//        } else {
-//            // Ajouter une nouvelle réaction
-//            updateReaction(reactionType: reactionType, add: true)
-//            delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
-//        }
-//    }
+
     func reactForPost(reactionType: ReactionType) {
         if postMessage.reactionId != 0 {
             if postMessage.reactionId == reactionType.id {
@@ -539,6 +611,9 @@ class NeighborhoodPostTranslationCell:NeighborhoodPostCell{
     
 }
 class NeighborhoodPostImageTranslationCell:NeighborhoodPostCell{
+    
+}
+class NeighborhoodPostSurveyCell:NeighborhoodPostCell{
     
 }
 
@@ -614,4 +689,59 @@ class ReactionsPopupView: UIView {
     }
 }
 
+
+
+
+extension NeighborhoodPostCell: SurveyOptionViewDelegate {
+    func didTapVote(surveyOptionView: SurveyOptionView, optionIndex: Int) {
+        self.delegate?.sendVoteView(post: self.postMessage)
+
+    }
+    
+    func didTapOption(_ surveyOptionView: SurveyOptionView, optionIndex: Int) {
+        guard var localSurvey = postMessage.survey, // Utilisez `var` ici pour une copie locale modifiable
+              localSurvey.choices.indices.contains(optionIndex) else { return }
+
+        // Initialiser surveyResponse si c'est nil
+        if postMessage.surveyResponse == nil {
+            postMessage.surveyResponse = Array(repeating: false, count: localSurvey.choices.count)
+        }
+
+        // Ce guard est maintenant sûr grâce à l'initialisation ci-dessus
+        guard var surveyResponse = postMessage.surveyResponse else { return }
+
+        // Réinitialiser les votes si le sondage n'est pas à choix multiples
+        if !localSurvey.multiple {
+            surveyResponse.indices.forEach { surveyResponse[$0] = false }
+            localSurvey.summary.indices.forEach { localSurvey.summary[$0] = 0 }
+        }
+        
+        // Inverser la réponse actuelle et ajuster le compteur de votes
+        surveyResponse[optionIndex].toggle()
+        if surveyResponse[optionIndex] {
+            localSurvey.summary[optionIndex] += 1
+        } else {
+            localSurvey.summary[optionIndex] = max(localSurvey.summary[optionIndex] - 1, 0)
+        }
+        
+        // Sauvegarder les modifications
+        postMessage.survey = localSurvey
+        postMessage.surveyResponse = surveyResponse
+        self.configureSurveyNumberLabel()
+        // Mettre à jour l'interface utilisateur pour refléter les changements
+        let totalVotes = localSurvey.summary.reduce(0, +)
+        ui_stackview_options.arrangedSubviews.enumerated().forEach { (index, view) in
+            if let optionView = view as? SurveyOptionView {
+                let votes = localSurvey.summary[index]
+                let votePercentage = totalVotes > 0 ? Float(votes) / Float(totalVotes) : 0
+                optionView.progressBar.progress = votePercentage
+                optionView.answerCountLabel.text = "\(votes)"
+                optionView.radioButton.isSelected = surveyResponse[index]
+            }
+        }
+
+        // Appeler le délégué pour effectuer l'action de réseau avec les réponses mises à jour
+        delegate?.postSurveyResponse(forPostId: postMessage.uid, withResponses: surveyResponse)
+    }
+}
 

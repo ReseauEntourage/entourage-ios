@@ -669,6 +669,8 @@
  */
 "neighborhood_menu_post_event" = "Créer un événement sur le groupe";
 "neighborhood_menu_post_post" = "Créer une publication";
+"neighborhood_menu_post_survey" = "Créer un sondage";
+
 
 "neighborhood_add_post_title" = "Créer une publication";
 "neighborhood_add_post_message_title" = "Écrire votre message";
@@ -1502,3 +1504,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "text_title_i_like" = "Aimer";
 "text_title_comment" = "Commenter";
 "see_member_react" = "Personnes ayant réagi";
+
+"vote_singular" = "vote";
+"vote_plural" = "votes";

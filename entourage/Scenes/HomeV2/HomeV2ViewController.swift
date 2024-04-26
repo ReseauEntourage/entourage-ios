@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 import SafariServices
 import IHProgressHUD
-
+import CoreLocation
+import GooglePlaces
 
 enum seeAllCellType{
     case seeAllDemand
@@ -57,12 +58,15 @@ class HomeV2ViewController:UIViewController{
     var currentLocationFilter = EventActionLocationFilters()
     var currentSectionsFilter:Sections = Sections()
     var userHome:UserHome = UserHome()
+    var currentUser:User? = nil
+
     var pedagoCreateEvent:PedagogicResource?
     var pedagoCreateGroup:PedagogicResource?
     var isContributionPreference = false
     
     override func viewDidLoad() {
         IHProgressHUD.show()
+        currentUser = UserDefaults.currentUser
         AnalyticsLoggerManager.logEvent(name: View__Home)
         prepareUINotifAndAvatar()
         ui_table_view.delegate = self
@@ -90,6 +94,9 @@ class HomeV2ViewController:UIViewController{
         //CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
+        if currentUser?.addressPrimary == nil {
+            self.showSimpleAlertDialogForLocation()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,7 +104,43 @@ class HomeV2ViewController:UIViewController{
         self.loadMetadatas()
 
         self.initHome()
+        self.checkForUpdates()
         
+    }
+    
+    func checkForUpdates() {
+        let appStoreURL = URL(string: "http://itunes.apple.com/lookup?bundleId=social.entourage.entourage")!
+        let task = URLSession.shared.dataTask(with: appStoreURL) { (data, response, error) in
+            guard error == nil, let data = data else {
+                return
+            }
+
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let results = json["results"] as? [[String: Any]],
+                   let appStoreVersion = results.first?["version"] as? String,
+                   let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
+                   appStoreVersion.compare(currentVersion, options: .numeric) == .orderedDescending {
+                    
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Mise à jour disponible",
+                                                      message: "Une nouvelle version de l'application est disponible. Voulez-vous mettre à jour ?",
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Mettre à jour", style: .default, handler: { _ in
+                            if let url = URL(string: "itms-apps://itunes.apple.com/app/idYOUR_APP_ID"),
+                               UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
+                        }))
+                        alert.addAction(UIAlertAction(title: "Plus tard", style: .cancel, handler: nil))
+                        // Présenter l'alerte ici, par exemple avec self.present(alert, animated: true)
+                    }
+                }
+            } catch {
+                print("Erreur lors de la vérification de la mise à jour de l'application : \(error)")
+            }
+        }
+        task.resume()
     }
     
     func prepareUINotifAndAvatar(){
@@ -209,6 +252,16 @@ class HomeV2ViewController:UIViewController{
             self.ui_view_notif.backgroundColor = UIColor.appOrange // Utilisez la couleur orange que vous avez ajoutée précédemment.
         }
         prepareUINotifAndAvatar()
+    }
+    
+    func showSimpleAlertDialogForLocation() {
+        let alertController = SimpleAlertDialog(title: "Améliorez votre expérience !", message: "Pour connaître les actions et événements solidaires autour de chez vous, veuillez prendre un moment pour ajouter votre localité à votre profil.", btnTitle: "Ajouter ma localité")
+        alertController.delegate = self
+        self.present(alertController, animated: true)
+    }
+    func showSimpleAlertDialogtoThankLocation() {
+        let alertController = SimpleAlertDialog(title: "Localisation enregistrée !", message: "Nous vous remercions pour votre aide !", btnTitle: "Retour")
+        self.present(alertController, animated: true)
     }
     
     
@@ -471,6 +524,8 @@ extension HomeV2ViewController{
                 }else{
                     self?.isContributionPreference = false
                 }
+                AppManager.shared.isContributionPreference = self?.isContributionPreference ?? false
+
                 if  userHome.unclosedAction != nil {
                     self?.showPopUpAction(actionType: (userHome.unclosedAction?.actionType)!, title: (userHome.unclosedAction?.title)!)
                 }
@@ -716,3 +771,35 @@ extension HomeV2ViewController: HomeHZCellDelegate {
     }
 }
 
+
+
+class AppManager {
+    static let shared = AppManager()
+
+    var isContributionPreference: Bool = false
+
+    private init() {} // Ceci assure que AppManager ne peut être instancié qu'en utilisant `shared`
+}
+
+extension HomeV2ViewController: PlaceViewControllerDelegate {
+    func modifyPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
+        if let gplace = googlePlace, let placeId = gplace.placeID {
+            UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { error in
+                if error?.error == nil {
+                    //Clean pour afficher l'adresse retournée depuis le WS on garde ?
+                    self.showSimpleAlertDialogtoThankLocation()
+                    
+                }
+            }
+        }
+    }
+}
+extension HomeV2ViewController:SimpleAlertClick{
+    func onClickMainButton() {
+        let sb = UIStoryboard(name: "ProfileParams", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
+            vc.placeVCDelegate = self
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
+}

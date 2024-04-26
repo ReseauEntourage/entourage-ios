@@ -274,7 +274,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="-3" translatesAutoresizingMaskIntoConstraints="NO" id="Vfg-aE-gjb">
+                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="-3" translatesAutoresizingMaskIntoConstraints="NO" id="Vfg-aE-gjb">
                         <rect key="frame" x="12" y="189.66666666666666" width="27.333333333333329" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="nDD-Nj-URm"/>

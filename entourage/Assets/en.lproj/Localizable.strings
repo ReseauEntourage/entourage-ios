@@ -659,6 +659,7 @@
 
 "neighborhood_menu_post_event" = "Create event on the group";
 "neighborhood_menu_post_post" = "Create post";
+"neighborhood_menu_post_survey" = "Create survey";
 
 "neighborhood_add_post_title" = "Create post";
 "neighborhood_add_post_message_title" = "Write your message";
@@ -1488,3 +1489,6 @@
 "text_title_i_like" = "Like";
 "text_title_comment" = "Comment";
 "see_member_react" = "People who reacted";
+
+"vote_singular" = "vote";
+"vote_plural" = "votes";

@@ -54,7 +54,9 @@ class DetailMessageTopPostCell: UITableViewCell {
         self.postMessage = message
         ui_user.text = "\(message.user?.displayName ?? "-") le \(message.createdDateFormatted)"
         ui_comment.text = message.content
-
+        if message.status == "deleted"{
+            ui_comment.text = "deleted_post_text".localized
+        }
         postId = message.uid
         
         if let _url = message.user?.avatarURL, let url = URL(string: _url) {

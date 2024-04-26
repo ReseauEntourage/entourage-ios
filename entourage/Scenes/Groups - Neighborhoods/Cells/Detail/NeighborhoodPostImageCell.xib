@@ -259,7 +259,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="jsH-FQ-hzp" firstAttribute="trailing" secondItem="h0R-dD-e9j" secondAttribute="trailing" id="zpk-5X-DXN"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="-3" translatesAutoresizingMaskIntoConstraints="NO" id="2bY-1D-5no">
+                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="-3" translatesAutoresizingMaskIntoConstraints="NO" id="2bY-1D-5no">
                         <rect key="frame" x="12" y="368.5" width="27.5" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="opc-wS-byz"/>

@@ -201,7 +201,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                     <color key="titleColor" name="gris_112"/>
                                 </state>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="-3" translatesAutoresizingMaskIntoConstraints="NO" id="7q6-Y1-sC0">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="-3" translatesAutoresizingMaskIntoConstraints="NO" id="7q6-Y1-sC0">
                                 <rect key="frame" x="10" y="129" width="27.5" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="U0e-6Q-Hbe"/>

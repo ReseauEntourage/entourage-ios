@@ -590,18 +590,38 @@
                                     <action selector="action_show_params:" destination="1Sc-VH-DcS" eventType="touchUpInside" id="2mn-Sb-9N8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztL-RH-rC0">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDV-QZ-aDe" customClass="Floaty" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="324" y="768" width="62" height="62"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="orange_light_a50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="62" id="AQI-i9-MLG"/>
-                                    <constraint firstAttribute="height" constant="62" id="HFr-lS-A8i"/>
+                                    <constraint firstAttribute="height" constant="62" id="63w-Bk-txs"/>
+                                    <constraint firstAttribute="width" constant="62" id="gsa-xa-Q0K"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="ic_button_plus_fill"/>
-                                <connections>
-                                    <action selector="action_create_post:" destination="1Sc-VH-DcS" eventType="touchUpInside" id="yVs-cu-cl5"/>
-                                </connections>
-                            </button>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="ic_button_plus_fill"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rotationDegrees">
+                                        <real key="value" value="135"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="itemSize">
+                                        <real key="value" value="62"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="buttonShadowColor">
+                                        <color key="value" name="orange_light_a50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
+                                        <color key="value" name="orange_light_a50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autoCloseOnTap" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="itemSpace">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasShadow" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="itemButtonColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0g5-JR-O6f">
                                 <rect key="frame" x="137" y="778" width="140" height="44"/>
                                 <subviews>
@@ -687,11 +707,13 @@
                         <constraints>
                             <constraint firstItem="tG7-Gh-1Qg" firstAttribute="trailing" secondItem="keO-la-aOU" secondAttribute="trailing" constant="-32" id="7aL-Dj-2Gi"/>
                             <constraint firstItem="WNs-CT-aUo" firstAttribute="trailing" secondItem="h8q-3a-IrB" secondAttribute="trailing" id="7ls-5s-mwR"/>
+                            <constraint firstItem="h8q-3a-IrB" firstAttribute="bottom" secondItem="ZDV-QZ-aDe" secondAttribute="bottom" constant="32" id="9N9-vX-CR2"/>
                             <constraint firstAttribute="trailing" secondItem="96a-eR-4eP" secondAttribute="trailing" id="AKM-9r-Tm6"/>
                             <constraint firstItem="0En-it-5CA" firstAttribute="top" secondItem="2TO-pb-TzV" secondAttribute="top" id="B6F-ni-lEg"/>
                             <constraint firstItem="s64-Vk-nq7" firstAttribute="trailing" secondItem="tG7-Gh-1Qg" secondAttribute="trailing" id="C2W-id-OO3"/>
                             <constraint firstItem="tG7-Gh-1Qg" firstAttribute="centerY" secondItem="keO-la-aOU" secondAttribute="centerY" id="D5P-dE-LrY"/>
                             <constraint firstItem="WNs-CT-aUo" firstAttribute="leading" secondItem="h8q-3a-IrB" secondAttribute="leading" id="DeH-qn-zWG"/>
+                            <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="ZDV-QZ-aDe" secondAttribute="trailing" constant="28" id="EWF-AE-3sp"/>
                             <constraint firstItem="0En-it-5CA" firstAttribute="leading" secondItem="2TO-pb-TzV" secondAttribute="leading" id="FxK-Ch-rEi"/>
                             <constraint firstItem="vYp-09-kV0" firstAttribute="leading" secondItem="h8q-3a-IrB" secondAttribute="leading" constant="4" id="H4x-HG-KxT"/>
                             <constraint firstItem="zD4-yh-EWb" firstAttribute="leading" secondItem="h8q-3a-IrB" secondAttribute="leading" constant="12" id="IeA-fu-KOJ"/>
@@ -710,13 +732,11 @@
                             <constraint firstItem="s64-Vk-nq7" firstAttribute="leading" secondItem="tG7-Gh-1Qg" secondAttribute="leading" id="eOW-ul-O7k"/>
                             <constraint firstItem="b8a-81-v78" firstAttribute="centerY" secondItem="tG7-Gh-1Qg" secondAttribute="centerY" id="ftD-Ge-jkq"/>
                             <constraint firstItem="s64-Vk-nq7" firstAttribute="top" secondItem="tG7-Gh-1Qg" secondAttribute="top" id="hHd-tT-o9T"/>
-                            <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="ztL-RH-rC0" secondAttribute="trailing" constant="28" id="hMq-MO-VB6"/>
                             <constraint firstItem="96a-eR-4eP" firstAttribute="leading" secondItem="h8q-3a-IrB" secondAttribute="leading" id="iOy-38-hyl"/>
                             <constraint firstAttribute="bottom" secondItem="96a-eR-4eP" secondAttribute="bottom" id="m1U-9J-Mfd"/>
                             <constraint firstAttribute="trailing" secondItem="0En-it-5CA" secondAttribute="trailing" id="oyk-oX-5n6"/>
                             <constraint firstItem="keO-la-aOU" firstAttribute="leading" secondItem="2TO-pb-TzV" secondAttribute="leading" id="rP1-qd-4j6"/>
                             <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="keO-la-aOU" secondAttribute="trailing" id="s2f-lo-Api"/>
-                            <constraint firstItem="h8q-3a-IrB" firstAttribute="bottom" secondItem="ztL-RH-rC0" secondAttribute="bottom" constant="32" id="tbY-M0-xLv"/>
                             <constraint firstItem="cq7-SG-lLc" firstAttribute="centerY" secondItem="keO-la-aOU" secondAttribute="centerY" id="uja-PY-jvx"/>
                             <constraint firstItem="ndW-m2-Mjh" firstAttribute="top" secondItem="h8q-3a-IrB" secondAttribute="top" constant="16" id="xOj-xQ-01W"/>
                         </constraints>
@@ -724,7 +744,7 @@
                     <navigationItem key="navigationItem" id="kgh-xa-f0g"/>
                     <connections>
                         <outlet property="ui_bt_floating_join" destination="0g5-JR-O6f" id="xp6-EQ-Cft"/>
-                        <outlet property="ui_floaty_button" destination="ztL-RH-rC0" id="gHn-Jm-g8s"/>
+                        <outlet property="ui_floaty_bouton" destination="ZDV-QZ-aDe" id="085-nr-dGV"/>
                         <outlet property="ui_iv_event" destination="CUf-aQ-xDD" id="y0o-sI-jB0"/>
                         <outlet property="ui_iv_event2" destination="WNs-CT-aUo" id="pq6-8v-dIN"/>
                         <outlet property="ui_iv_event_mini" destination="cq7-SG-lLc" id="6ne-7u-nzz"/>

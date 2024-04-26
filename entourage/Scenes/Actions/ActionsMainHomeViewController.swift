@@ -93,7 +93,9 @@ class ActionsMainHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.isContribSelected = AppManager.shared.isContributionPreference
+        self.currentSelectedIsContribs = !isContribSelected
+
         if let _sections = Metadatas.sharedInstance.tagsSections {
             currentSectionsFilter = _sections
         }
@@ -106,7 +108,6 @@ class ActionsMainHomeViewController: UIViewController {
         
         ui_tableview.register(UINib(nibName: ActionContribDetailHomeCell.identifier, bundle: nil), forCellReuseIdentifier: ActionContribDetailHomeCell.identifier)
         ui_tableview.register(UINib(nibName: ActionSolicitationDetailHomeCell.identifier, bundle: nil), forCellReuseIdentifier: ActionSolicitationDetailHomeCell.identifier)
-        
         setupEmptyViews()
         
         setupViews()
@@ -156,11 +157,13 @@ class ActionsMainHomeViewController: UIViewController {
     func setSolicitationsFirst() {
         self.isContribSelected = false
         self.currentSelectedIsContribs = true
+        AppManager.shared.isContributionPreference = false
     }
     //Use to change tab selection from other place
     func setContributionsFirst() {
         self.isContribSelected = true
         self.currentSelectedIsContribs = false
+        AppManager.shared.isContributionPreference = true
     }
     
     func setupFloatingButton() {
@@ -456,14 +459,17 @@ class ActionsMainHomeViewController: UIViewController {
         })
     }
     
-    func gotoTop(isAnimated:Bool = true) {
-        if isContribSelected && contribs.count == 0 { return }
-        else if !isContribSelected && solicitations.count == 0 { return }
-        let indexPath = IndexPath(row: 0, section: 0)
-        DispatchQueue.main.async {
-            self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: isAnimated)
+    func gotoTop(isAnimated: Bool = true) {
+        let section = 0 // Assumons que tu travailles avec la première section
+        let numberOfRows = ui_tableview.numberOfRows(inSection: section)
+        if numberOfRows > 0 {
+            let indexPath = IndexPath(row: 0, section: section)
+            DispatchQueue.main.async {
+                self.ui_tableview.scrollToRow(at: indexPath, at: .top, animated: isAnimated)
+            }
         }
     }
+
     
     func setupViews() {
         ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))

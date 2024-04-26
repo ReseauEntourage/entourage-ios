@@ -300,7 +300,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="zIA-8S-vtS" firstAttribute="leading" secondItem="dNp-07-hWU" secondAttribute="leading" id="xgB-f4-xu0"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="-3" translatesAutoresizingMaskIntoConstraints="NO" id="EFg-hZ-kpj">
+                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="-3" translatesAutoresizingMaskIntoConstraints="NO" id="EFg-hZ-kpj">
                         <rect key="frame" x="12" y="392.66666666666669" width="27.333333333333329" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="BhG-gK-mpe"/>

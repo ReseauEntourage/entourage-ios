@@ -42,6 +42,12 @@ class NeighborhoodUserCell: UITableViewCell {
         
     }
     
+    func hideSeparatorBarIfIsVote(isVote:Bool){
+        if isVote {
+            ui_view_separator.isHidden = true
+        }
+    }
+    
     func populateCell(isMe:Bool, username:String, role:String?, imageUrl:String?, showBtMessage:Bool,delegate:NeighborhoodUserCellDelegate, position:Int, reactionType:ReactionType?) {
         ui_username.text = username
         ui_role.text = role

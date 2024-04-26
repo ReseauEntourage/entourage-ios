@@ -29,6 +29,8 @@ class NetworkManager {
     
     func getBaseUrl() -> String {
         let envConfig = envConfig()
+        //WARNING: reset this 
+        //return "https://api.entourage.social/api/v1/"
         return envConfig.configCopy?[UserStorageKey.APIHostURL] as? String ?? ""
     }
     private func getApiKey() -> String {

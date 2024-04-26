@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NunitoSans-Italic.ttf">
+            <string>NunitoSans-Italic</string>
+        </array>
+        <array key="Quicksand-Bold.ttf">
+            <string>Quicksand-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="82" id="h5g-po-HPF" customClass="SectionOptionNameCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="573" height="82"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h5g-po-HPF" id="Mna-v1-i69">
+                <rect key="frame" x="0.0" y="0.0" width="573" height="82"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y92-cN-VUI">
+                        <rect key="frame" x="28.000000000000004" y="20" width="40.333333333333343" height="14"/>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_survey_clicked" translatesAutoresizingMaskIntoConstraints="NO" id="8eP-hc-Gdc">
+                        <rect key="frame" x="28" y="42" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Vg0-hf-vck"/>
+                            <constraint firstAttribute="width" constant="20" id="oDX-Kk-JoH"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnZ-4K-JSc">
+                        <rect key="frame" x="56" y="43" width="33" height="18"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Italic" family="Nunito Sans" pointSize="13"/>
+                        <color key="textColor" name="grey_text_deleted"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="8eP-hc-Gdc" secondAttribute="bottom" constant="20" symbolic="YES" id="247-Lz-k96"/>
+                    <constraint firstItem="Y92-cN-VUI" firstAttribute="top" secondItem="Mna-v1-i69" secondAttribute="top" constant="20" symbolic="YES" id="4qF-DZ-dkj"/>
+                    <constraint firstItem="8eP-hc-Gdc" firstAttribute="top" secondItem="Y92-cN-VUI" secondAttribute="bottom" constant="8" symbolic="YES" id="Ba0-Pn-qXj"/>
+                    <constraint firstItem="JnZ-4K-JSc" firstAttribute="leading" secondItem="8eP-hc-Gdc" secondAttribute="trailing" constant="8" symbolic="YES" id="FZ2-Gu-uW7"/>
+                    <constraint firstItem="Y92-cN-VUI" firstAttribute="leading" secondItem="Mna-v1-i69" secondAttribute="leading" constant="28" id="SwC-Ie-bfJ"/>
+                    <constraint firstItem="JnZ-4K-JSc" firstAttribute="centerY" secondItem="8eP-hc-Gdc" secondAttribute="centerY" id="inR-hT-0jK"/>
+                    <constraint firstItem="8eP-hc-Gdc" firstAttribute="leading" secondItem="Mna-v1-i69" secondAttribute="leading" constant="28" id="vVf-8t-TAs"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ui_label_number_vote" destination="JnZ-4K-JSc" id="6BN-hy-Jyx"/>
+                <outlet property="ui_label_title_option" destination="Y92-cN-VUI" id="u22-ZW-npf"/>
+            </connections>
+            <point key="canvasLocation" x="188.54961832061068" y="17.605633802816904"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_survey_clicked" width="20" height="20"/>
+        <namedColor name="grey_text_deleted">
+            <color red="0.65490196078431373" green="0.6470588235294118" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

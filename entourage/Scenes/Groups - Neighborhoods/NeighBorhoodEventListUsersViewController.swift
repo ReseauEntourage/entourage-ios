@@ -10,7 +10,10 @@ import IHProgressHUD
 
 private enum TableDTO {
     case searchCell
+    case questionCell(title:String)
     case userCell(user: UserLightNeighborhood, reactionType: ReactionType?)
+    case surveySection(title: String, voteCount: Int)
+
 }
 
 
@@ -36,16 +39,24 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     var postId: Int? = nil
     var isFromReact = false
     var eventId:Int? = nil
+    var survey:Survey? = nil
+    var questionTitle:String? = nil
+    var isFromSurvey = false
     var reactionTypeList = [ReactionType]()
     private var tableData: [TableDTO] = []
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        ui_tableview.register(UINib(nibName: SectionOptionNameCell.identifier, bundle: nil), forCellReuseIdentifier: SectionOptionNameCell.identifier)
+        ui_tableview.register(UINib(nibName: QuestionSurveyVoteCell.identifier, bundle: nil), forCellReuseIdentifier: QuestionSurveyVoteCell.identifier)
+
         var title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
         if isFromReact {
             title = "see_member_react".localized
+        }
+        if isFromSurvey {
+            title = "Réponses au sondage"
         }
         let txtSearch = "neighborhood_group_search_empty_title".localized
         loadStoredReactionTypes()
@@ -55,7 +66,9 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         ui_lb_no_result.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lb_no_result.text = txtSearch
         ui_view_no_result.isHidden = true
-        if isFromReact {
+        if isFromSurvey {
+            loadSurveyData()
+        }else if isFromReact {
             fetchReactionsDetails()
         }else{
             if isEvent {
@@ -72,6 +85,62 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         super.viewWillAppear(animated)
         self.navigationController?.hideTransparentNavigationBar()
     }
+    
+    func loadSurveyData() {
+        guard let _postId = self.postId, let survey = self.survey else {
+            print("Les informations de sondage ou le postId sont manquants.")
+            return
+        }
+
+        let completion: (SurveyResponsesListWrapper?, EntourageNetworkError?) -> Void = { [weak self] surveyResponsesListWrapper, error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if let error = error {
+                    // Utilise le type d'erreur spécifique pour traiter ou afficher l'erreur
+                    print("Erreur lors de la récupération des réponses de sondage: \(error)")
+                    return
+                }
+                guard let surveyResponsesList = surveyResponsesListWrapper?.responses else {
+                    print("Aucune réponse de sondage n'a été trouvée.")
+                    return
+                }
+
+                // Itérer sur chaque choix de la survey pour construire les sections
+                self.tableData.append(.questionCell(title: self.questionTitle!))
+                for (index, choice) in survey.choices.enumerated() {
+                    let voteCount = survey.summary[index] // Utiliser summary pour obtenir le nombre de votes pour chaque choix
+                    self.tableData.append(.surveySection(title: choice, voteCount: voteCount))
+
+                    // Ajouter les utilisateurs qui ont répondu à ce choix
+                    let usersForChoice = surveyResponsesList[index]
+                    self.tableData += usersForChoice.map { surveyUser in
+                        // Créer une instance vide de UserLightNeighborhood
+                        var userLight = UserLightNeighborhood()
+                        userLight.sid = surveyUser.id
+                        userLight.displayName = surveyUser.displayName
+                        userLight.avatarURL = surveyUser.avatarUrl
+
+                        userLight.communityRoles = surveyUser.communityRoles
+
+                        return TableDTO.userCell(user: userLight, reactionType: nil)
+                    }
+                }
+
+                // Recharger les données de la tableView
+                self.ui_tableview.reloadData()
+            }
+        }
+
+        // Appel au service pour obtenir les réponses de sondage basé sur eventId ou groupId
+        if let eventId = self.eventId {
+            SurveyService.getSurveyResponsesForEvent(eventId: eventId, postId: _postId, completion: completion)
+        } else if let groupId = self.groupId {
+            SurveyService.getSurveyResponsesForGroup(groupId: groupId, postId: _postId, completion: completion)
+        }
+    }
+
+
+
     
     
     func getNeighborhoodUsers() {
@@ -206,15 +275,29 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             return cell
         case .userCell(let _user,let _reactionType):
             var position = indexPath.row - 1
-            if isFromReact {
+            if isFromReact || isFromSurvey {
                 position = position + 1
             }
             let isMe = _user.sid == UserDefaults.currentUser?.sid
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
             cell.populateCell(isMe:isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType)
+            cell.hideSeparatorBarIfIsVote(isVote: self.isFromSurvey)
             return cell
         
+        case .surveySection(let title, let voteCount):
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "SectionOptionNameCell") as? SectionOptionNameCell{
+                cell.selectionStyle = .none
+                cell.configure(title: title, countVote: voteCount)
+                return cell
+            }
+        case .questionCell(let title):
+
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "QuestionSurveyVoteCell") as? QuestionSurveyVoteCell{
+                cell.selectionStyle = .none
+                cell.configure(title: title)
+                return cell
+            }
         }
         
         if indexPath.row == 0 {
@@ -223,6 +306,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             cell.populateCell(delegate: self, isSearch:isSearch,placeceholder:title, isCellUserSearch: true)
             return cell
         }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -231,27 +315,36 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
         case .searchCell:
             return
         case .userCell(let _user, let _reactionType):
-            var user:UserLightNeighborhood
+            var user:UserLightNeighborhood?
             if isSearch {
                 if !isEvent {
                     AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
                 }
-                user = self.usersSearch[indexPath.row]
+                if self.usersSearch.count < indexPath.row{
+                    user = self.usersSearch[indexPath.row]
+                }
             }
             else {
                 if !isEvent {
                     AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
                 }
-                user = self.users[indexPath.row]
+                if self.usersSearch.count < indexPath.row{
+                    
+                }
             }
-            
+            user = _user
             if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
                 if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                    _homeVC.currentUserId = "\(user.sid)"
-                    
+                    if let _user = user{
+                        _homeVC.currentUserId = "\(_user.sid)"
+                    }
                     self.navigationController?.present(navVC, animated: true)
                 }
             }
+        case .surveySection(title: let title, voteCount: let voteCount):
+            return
+        case .questionCell(title: let title):
+            return
         }
     }
 }
@@ -290,36 +383,37 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
 //MARK: - NeighborhoodUserCellDelegate -
 extension NeighBorhoodEventListUsersViewController:NeighborhoodUserCellDelegate {
     func showSendMessageToUserForPosition(_ position: Int) {
-        
-        if !isEvent {
-            AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member)
-        }
-        
-        let user = isSearch ? usersSearch[position] : users[position]
-        
-        IHProgressHUD.show()
-        MessagingService.createOrGetConversation(userId: "\(user.sid)") { conversation, error in
-            IHProgressHUD.dismiss()
+        // Assurez-vous que la position est dans les limites de tableData
+        guard position < tableData.count else { return }
+
+        // Trouver l'utilisateur à partir de tableData
+        if case let .userCell(user, _) = tableData[position] {
+            if !isEvent {
+                AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member)
+            }
             
-            if let conversation = conversation {
-                self.showConversation(conversation: conversation, username: user.displayName)
-                return
+            IHProgressHUD.show()
+            MessagingService.createOrGetConversation(userId: "\(user.sid)") { conversation, error in
+                IHProgressHUD.dismiss()
+                
+                if let conversation = conversation {
+                    self.showConversation(conversation: conversation, username: user.displayName)
+                    return
+                }
+                var errorMsg = "message_error_create_conversation".localized
+                if let error = error {
+                    errorMsg = error.message
+                }
+                IHProgressHUD.showError(withStatus: errorMsg)
             }
-            var errorMsg = "message_error_create_conversation".localized
-            if let error = error {
-                errorMsg = error.message
-            }
-            IHProgressHUD.showError(withStatus: errorMsg)
         }
     }
-    
     private func showConversation(conversation:Conversation?, username:String) {
         DispatchQueue.main.async {
             if let convId = conversation?.uid {
                 let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.setupFromOtherVC(conversationId: convId, title: username, isOneToOne: true, conversation: conversation)
-
                     self.present(vc, animated: true)
                 }
             }
