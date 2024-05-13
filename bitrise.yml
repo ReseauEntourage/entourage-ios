@@ -25,6 +25,7 @@ workflows:
       opts:
         is_expand: false
     steps:
+    - manage-ios-code-signing@2: {}
     - xcode-archive:
         inputs:
         - register_test_devices: "yes"
