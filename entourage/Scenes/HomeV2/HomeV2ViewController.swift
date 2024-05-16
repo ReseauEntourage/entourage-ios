@@ -235,6 +235,7 @@ class HomeV2ViewController:UIViewController{
     func initHome(){
         self.ui_label_subtitle.text = "home_v2_title".localized
         self.getNotif()
+        
     }
     func updateTopView() {
         
@@ -525,6 +526,31 @@ extension HomeV2ViewController{
                 }else{
                     self?.isContributionPreference = false
                 }
+                
+                if UserDefaults.currentUser?.addressPrimary == nil
+                    || userHome.preference == nil
+                    {
+                    let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+                    // Instancier le OnboardingStartViewController à partir de la storyboard
+                    if let onboardingVC = storyboard.instantiateViewController(withIdentifier: "onboardPhase3") as? OnboardingPhase3ViewController {
+                        onboardingVC.fromAppDelegate = self
+                        if let _adress = UserDefaults.currentUser?.addressPrimary{
+                            onboardingVC.location_name_new = _adress.displayAddress
+                        }
+                        if let _pref = userHome.preference {
+                            if _pref == "contribution"{
+                                onboardingVC.isEntour = true
+                            }else{
+                                onboardingVC.isBeEntour = true
+                            }
+                        }
+                        if UserDefaults.currentUser?.partner != nil {
+                            onboardingVC.isAsso = true
+                        }
+                        self?.present(onboardingVC, animated: true, completion: nil)
+                    }
+                }
+                
                 AppManager.shared.isContributionPreference = self?.isContributionPreference ?? false
 
                 if  userHome.unclosedAction != nil {
@@ -803,4 +829,32 @@ extension HomeV2ViewController:SimpleAlertClick{
             self.navigationController?.present(vc, animated: true)
         }
     }
+}
+
+extension HomeV2ViewController:Phase3fromAppDelegate{
+    func updatePreference(userType: UserType) {
+        var _user = currentUser
+        _user?.goal = userType.getGoalString()
+        UserService.updateUser(user: _user) { [weak self] user, error in
+            IHProgressHUD.dismiss()
+            print("error " , error)
+            if let user = user {
+                self?.currentUser = user
+            }
+        }
+    }
+    
+    func updateLoc(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
+        if let _place = googlePlace, let placeId = _place.placeID{
+            UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { [weak self] error in
+                print("error " , error)
+                IHProgressHUD.dismiss()
+                
+            }
+        }
+    }
+    
+
+    
+    
 }
