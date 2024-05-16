@@ -187,7 +187,7 @@ struct User: Codable {
         guard let roles = roles else {
             return false
         }
-        return roles.contains("ambassador")
+        return roles.contains("ambassador") || roles.contains("Ambassadeur")
     }
 }
 
@@ -285,7 +285,7 @@ struct UserLightNeighborhood: Codable {
         guard let role = role else {
             return false
         }
-        return role.contains("ambassador")
+        return role.contains("ambassador") || role.contains("Ambassadeur")
     }
 }
 

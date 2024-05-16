@@ -195,6 +195,13 @@ class HomeV2ViewController:UIViewController{
             tableDTO.append(.cellEvent(events: allEvents))
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
         }
+        if allPedagos.count > 0 {
+            tableDTO.append(.cellTitle(title: "home_v2_title_pedago".localized, subtitle: "home_v2_subtitle_pedago".localized))
+            for pedago in allPedagos {
+                tableDTO.append(.cellPedago(pedago: pedago))
+            }
+            tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
+        }
         if allGroups.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
             tableDTO.append(.cellGroup(groups: allGroups))
@@ -204,13 +211,7 @@ class HomeV2ViewController:UIViewController{
         tableDTO.append(.cellTitle(title: "home_v2_title_map".localized, subtitle: "home_v2_subtitle_map".localized))
         tableDTO.append(.cellMap)
         
-        if allPedagos.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_pedago".localized, subtitle: "home_v2_subtitle_pedago".localized))
-            for pedago in allPedagos {
-                tableDTO.append(.cellPedago(pedago: pedago))
-            }
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
-        }
+
         var _offlineEvents = [Event]()
         for event in allEvents{
             if event.isOnline == false {
@@ -221,8 +222,8 @@ class HomeV2ViewController:UIViewController{
             tableDTO.append(.cellHZ)
         }
         tableDTO.append(.cellTitle(title: "home_v2_title_help".localized, subtitle: "home_v2_subtitle_help".localized))
-        tableDTO.append(.cellIAmLost(helpType: .createGroup))
-        tableDTO.append(.cellIAmLost(helpType: .createEvent))
+        //tableDTO.append(.cellIAmLost(helpType: .createGroup))
+        //tableDTO.append(.cellIAmLost(helpType: .createEvent))
         if let _moderator = userHome.moderator{
             if let _name = _moderator.displayName{
                 tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
