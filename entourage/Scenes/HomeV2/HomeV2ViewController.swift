@@ -516,26 +516,21 @@ extension HomeV2ViewController{
                 }
                 
                 if UserDefaults.currentUser?.addressPrimary == nil
-                    || userHome.preference == nil
-                    {
+                    || userHome.preference == nil {
+                    // Obtenir la storyboard nommée "Onboarding"
                     let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-                    // Instancier le OnboardingStartViewController à partir de la storyboard
-                    if let onboardingVC = storyboard.instantiateViewController(withIdentifier: "onboardPhase3") as? OnboardingPhase3ViewController {
-                        onboardingVC.fromAppDelegate = self
-                        if let _adress = UserDefaults.currentUser?.addressPrimary{
-                            onboardingVC.location_name_new = _adress.displayAddress
+                    
+                    // Instancier le OnboardingPageViewController à partir de la storyboard
+                    if let onboardingPageVC = storyboard.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
+                        onboardingPageVC.currentPhasePosition = 3
+                        onboardingPageVC.shouldLaunchThird = true
+                        if let _user = UserDefaults.currentUser {
+                            onboardingPageVC.temporaryUser = _user
                         }
-                        if let _pref = userHome.preference {
-                            if _pref == "contribution"{
-                                onboardingVC.isEntour = true
-                            }else{
-                                onboardingVC.isBeEntour = true
-                            }
+                        if let window = UIApplication.shared.windows.first {
+                            window.rootViewController = onboardingPageVC
+                            window.makeKeyAndVisible()
                         }
-                        if UserDefaults.currentUser?.partner != nil {
-                            onboardingVC.isAsso = true
-                        }
-                        self?.present(onboardingVC, animated: true, completion: nil)
                     }
                 }
                 
