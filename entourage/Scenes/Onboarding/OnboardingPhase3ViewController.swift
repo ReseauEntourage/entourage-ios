@@ -12,6 +12,7 @@ import GooglePlaces
 protocol Phase3fromAppDelegate{
     func updatePreference(userType:UserType)
     func updateLoc(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?)
+    func sendOnboardingEnd()
 }
 
 class OnboardingPhase3ViewController: UIViewController {
@@ -38,8 +39,9 @@ class OnboardingPhase3ViewController: UIViewController {
     }
     
     @objc func onNextClick(){
-        self.dismiss(animated: true)
-
+        self.dismiss(animated: false) {
+            self.fromAppDelegate?.sendOnboardingEnd()
+        }
     }
     
 }

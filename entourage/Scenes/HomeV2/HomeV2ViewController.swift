@@ -832,12 +832,19 @@ extension HomeV2ViewController:SimpleAlertClick{
 }
 
 extension HomeV2ViewController:Phase3fromAppDelegate{
+    func sendOnboardingEnd() {
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        // Instancier le OnboardingStartViewController à partir de la storyboard
+        if let onboardingVC = storyboard.instantiateViewController(withIdentifier: "OnboardingEndViewController") as? OnboardingEndViewController {
+            self.present(onboardingVC, animated: true, completion: nil)
+        }
+    }
+    
     func updatePreference(userType: UserType) {
         var _user = currentUser
         _user?.goal = userType.getGoalString()
         UserService.updateUser(user: _user) { [weak self] user, error in
             IHProgressHUD.dismiss()
-            print("error " , error)
             if let user = user {
                 self?.currentUser = user
             }
@@ -847,14 +854,9 @@ extension HomeV2ViewController:Phase3fromAppDelegate{
     func updateLoc(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         if let _place = googlePlace, let placeId = _place.placeID{
             UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { [weak self] error in
-                print("error " , error)
                 IHProgressHUD.dismiss()
                 
             }
         }
     }
-    
-
-    
-    
 }
