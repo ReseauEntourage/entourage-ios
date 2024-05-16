@@ -25,6 +25,7 @@ class OnboardingStartViewController: UIViewController {
     var pageViewController:OnboardingPageViewController? = nil
     
     var currentPhasePosition = 1
+    // MARK: HERE IS A BOOLEAN TO LAUNCH THIS VC FROM HOME: SOME CONFIGURATION NEEDED TO ADAPT THE VC
     var shouldLaunchThird = false
     
     let minimumCharacters = 2
