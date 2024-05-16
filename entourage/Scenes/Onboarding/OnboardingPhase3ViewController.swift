@@ -35,6 +35,11 @@ class OnboardingPhase3ViewController: UIViewController {
     var userTypeSelected = UserType.none
     
     override func viewDidLoad() {
+        if fromAppDelegate != nil {
+            self.ui_next_btn.isHidden = false
+        }else{
+            self.ui_next_btn.isHidden = true
+        }
         self.ui_next_btn.addTarget(self, action: #selector(onNextClick), for: .touchUpInside)
     }
     

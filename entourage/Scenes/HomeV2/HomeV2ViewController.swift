@@ -94,9 +94,7 @@ class HomeV2ViewController:UIViewController{
         //CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
-        if currentUser?.addressPrimary == nil {
-            self.showSimpleAlertDialogForLocation()
-        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -254,16 +252,6 @@ class HomeV2ViewController:UIViewController{
             self.ui_view_notif.backgroundColor = UIColor.appOrange // Utilisez la couleur orange que vous avez ajoutée précédemment.
         }
         prepareUINotifAndAvatar()
-    }
-    
-    func showSimpleAlertDialogForLocation() {
-        let alertController = SimpleAlertDialog(title: "Améliorez votre expérience !", message: "Pour connaître les actions et événements solidaires autour de chez vous, veuillez prendre un moment pour ajouter votre localité à votre profil.", btnTitle: "Ajouter ma localité")
-        alertController.delegate = self
-        self.present(alertController, animated: true)
-    }
-    func showSimpleAlertDialogtoThankLocation() {
-        let alertController = SimpleAlertDialog(title: "Localisation enregistrée !", message: "Nous vous remercions pour votre aide !", btnTitle: "Retour")
-        self.present(alertController, animated: true)
     }
     
     
@@ -814,8 +802,6 @@ extension HomeV2ViewController: PlaceViewControllerDelegate {
             UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { error in
                 if error?.error == nil {
                     //Clean pour afficher l'adresse retournée depuis le WS on garde ?
-                    self.showSimpleAlertDialogtoThankLocation()
-                    
                 }
             }
         }

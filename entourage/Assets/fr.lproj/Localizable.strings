@@ -463,7 +463,7 @@
 "interest_other_name" = "Autre";
 //profile edit location
 "profileEditLocationTitle" = "Où souhaitez-vous agir ?";
-"profileEditLocationDescription" = "Entourage est un réseau social !\nDécouvrez les initiatives de votre quartier et tissez des liens avec vos voisins.";
+"profileEditLocationDescription" = "Nous vous demandons votre localité afin de vous proposer des contenus adaptés à votre localité. Soyez assuré(e) que vos informations resteront confidentielles et ne seront jamais partagées avec des tiers.";
 "profileEditLocationLegend*" = "Ajouter un lieu *";
 "profileEditLocationLegend_" = "Ajouter un lieu";
 "profileEditLocationPlaceholder" = "Ville ou département";
