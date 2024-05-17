@@ -121,6 +121,7 @@ workflows:
     before_run:
     - Prepare
     steps:
+    - manage-ios-code-signing@2: {}
     - xcode-archive:
         inputs:
         - automatic_code_signing: api-key
