@@ -178,6 +178,7 @@
 "onboard_error_lastname" = "Le nom doit comporter au moins 2 lettres.";
 "onboard_error_email" = "L’adresse email est invalide.";
 "onboard_error_phone" = "Le numéro doit comporter 9 ou 10 chiffres.";
+"onboard_error_general" = "Veuillez renseigner tous les champs obligatoires";
 //A supp
 "onboard_button_pass" = "Passer";
 

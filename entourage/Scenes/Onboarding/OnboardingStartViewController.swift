@@ -209,30 +209,30 @@ class OnboardingStartViewController: UIViewController {
         if currentPhasePosition == 1 {
             if temporaryUser.firstname.count < minimumCharacters {
                 isValid = false
-                message = "onboard_error_firstname".localized
+                message = "onboard_error_general".localized
             }
             else if temporaryUser.lastname.count < minimumCharacters {
                 isValid = false
-                message = "onboard_error_lastname".localized
+                message = "onboard_error_general".localized
             }
             else if phone?.count ?? 0 < minimumPhoneCharacters {
                 isValid = false
-                message = "onboard_error_phone".localized
+                message = "onboard_error_general".localized
             }
 
             else if email?.count ?? 0 > 0 && (email?.isValidEmail ?? false) == false {
                 isValid = false
-                message = "oonboard_error_email".localized
+                message = "onboard_error_general".localized
             }
         }
         if currentPhasePosition == 3 {
             if userTypeSelected == .none {
                 isValid = false
-                message = "onboard_error_Usertype".localized
+                message = "onboard_error_general".localized
             }
             else if temporaryLocation == nil && temporaryGooglePlace == nil {
                 isValid = false
-                message = "onboard_error_place".localized
+                message = "onboard_error_general".localized
             }
             
         }
