@@ -63,6 +63,7 @@ class HomeV2ViewController:UIViewController{
     var pedagoCreateEvent:PedagogicResource?
     var pedagoCreateGroup:PedagogicResource?
     var isContributionPreference = false
+    var shouldLaunchEventPopup:Int? = nil
     
     override func viewDidLoad() {
         IHProgressHUD.show()
@@ -103,8 +104,39 @@ class HomeV2ViewController:UIViewController{
 
         self.initHome()
         self.checkForUpdates()
-        
+        self.ifEventLastDay()
+        //self.testEventLastDay()
     }
+    
+    //MARK: TODO REMOVE THIS
+    func testEventLastDay(){
+        getEventAndLaunchPopup(eventId: "136208")
+    }
+    
+    func ifEventLastDay(){
+        if let _eventId = shouldLaunchEventPopup{
+            self.getEventAndLaunchPopup(eventId: String(_eventId))
+            shouldLaunchEventPopup = nil
+        }
+    }
+    
+    func getEventAndLaunchPopup(eventId:String){
+        EventService.getEventWithId(eventId) { event, error in
+            if let _event = event {
+                self.launchEventLastDayVC(with: _event)
+            }
+        }
+    }
+
+    private func launchEventLastDayVC(with event: Event) {
+           let storyboard = UIStoryboard(name: "Main", bundle: nil) // Remplacez "Main" par le nom de votre storyboard si nécessaire
+           if let eventLastDayVC = storyboard.instantiateViewController(withIdentifier: "eventLastDay") as? EventLastDayViewController {
+               eventLastDayVC.event = event
+               eventLastDayVC.user = currentUser
+               eventLastDayVC.modalPresentationStyle = .overCurrentContext
+               self.present(eventLastDayVC, animated: true, completion: nil)
+           }
+       }
     
     func checkForUpdates() {
         let appStoreURL = URL(string: "http://itunes.apple.com/lookup?bundleId=social.entourage.entourage")!

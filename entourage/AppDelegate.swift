@@ -159,6 +159,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.print("***** isFrom Start : \(isFromStart)")
         
         if let userInfos = userInfos, let content = userInfos["content"] as? [String:Any],let extras = content["extra"] as? [String:Any], let stage = extras["stage"] as? String {
+            if let popup = extras["popup"] as? String {
+                if popup == "outing_on_day_before" {
+                    if let instanceId = extras["instance_id"] as? Int {
+                        DeepLinkManager.showHomeUniversalLinkWithParam(instanceId)
+                    }
+                }
+            }
+           
+            
             if stage == "h1" {
                 DeepLinkManager.showWelcomeOne()
                 return

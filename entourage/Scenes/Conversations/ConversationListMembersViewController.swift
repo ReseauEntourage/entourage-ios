@@ -105,7 +105,7 @@ extension ConversationListMembersViewController: UITableViewDataSource, UITableV
         
         let isAuthor = user.uid == userCreatorId
         
-        cell.populateCell(isMe:isMe, username: user.username ?? "-", role: isAuthor ? "Admin".localized : "", imageUrl: user.imageUrl, showBtMessage: true,delegate: self,position: position, reactionType: nil)
+        cell.populateCell(isMe:isMe, username: user.username ?? "-", role: isAuthor ? "Admin".localized : "", imageUrl: user.imageUrl, showBtMessage: true,delegate: self,position: position, reactionType: nil, isConfirmed: user.confirmedAt)
         return cell
     }
     

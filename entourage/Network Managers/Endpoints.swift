@@ -94,6 +94,7 @@ let kAPIDeleteEventPostMessage = "outings/%d/chat_messages/%d?token=%@"
 let kAPIPostReactionEventPost = "outings/%d/chat_messages/%d/reactions?token=%@"
 let kAPIDeleteReactionEventPost = "outings/%d/chat_messages/%d/reactions?token=%@"
 let kAPIGetDetailsReactionEventPost = "outings/%d/chat_messages/%d/reactions/users?token=%@"
+let kAPIConfirmParticipation = "outings/%@/users/confirm?token=%@"
 
 //Actions
 let kAPIGetContrib = "contributions/%@?token=%@"
