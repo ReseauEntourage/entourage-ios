@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,8 +16,61 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rad-HS-ivA" id="QeX-nZ-WjH">
                 <rect key="frame" x="0.0" y="0.0" width="490" height="157"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ku5-G9-opM">
+                        <rect key="frame" x="0.0" y="0.0" width="490" height="157"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q13-Wm-2Ev">
+                                <rect key="frame" x="20" y="54.666666666666657" width="205.66666666666666" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="iyY-jY-lSz"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Configurer plus tard">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJO-20-Ltv">
+                                <rect key="frame" x="264.33333333333331" y="54.666666666666657" width="205.66666666666669" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="CLP-oc-Ege"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Commencer">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="q13-Wm-2Ev" firstAttribute="centerY" secondItem="ku5-G9-opM" secondAttribute="centerY" id="7C6-57-AIw"/>
+                            <constraint firstItem="q13-Wm-2Ev" firstAttribute="width" secondItem="ku5-G9-opM" secondAttribute="width" multiplier="0.42" id="DUI-fW-tq8"/>
+                            <constraint firstItem="dJO-20-Ltv" firstAttribute="width" secondItem="q13-Wm-2Ev" secondAttribute="width" id="IOM-6U-Mk0"/>
+                            <constraint firstItem="dJO-20-Ltv" firstAttribute="centerY" secondItem="ku5-G9-opM" secondAttribute="centerY" id="YNX-Qk-AM1"/>
+                            <constraint firstAttribute="trailing" secondItem="dJO-20-Ltv" secondAttribute="trailing" constant="20" id="eSG-8J-Hs5"/>
+                            <constraint firstItem="q13-Wm-2Ev" firstAttribute="leading" secondItem="ku5-G9-opM" secondAttribute="leading" constant="20" id="p6J-ZE-XUn"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ku5-G9-opM" secondAttribute="trailing" id="6KX-0E-FsS"/>
+                    <constraint firstItem="ku5-G9-opM" firstAttribute="top" secondItem="QeX-nZ-WjH" secondAttribute="top" id="d0U-He-nqb"/>
+                    <constraint firstItem="ku5-G9-opM" firstAttribute="leading" secondItem="QeX-nZ-WjH" secondAttribute="leading" id="qR3-X7-jtX"/>
+                    <constraint firstAttribute="bottom" secondItem="ku5-G9-opM" secondAttribute="bottom" id="vX4-eq-t3g"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="ui_btn_configure_later" destination="q13-Wm-2Ev" id="luo-Dr-PI6"/>
+                <outlet property="ui_btn_next" destination="dJO-20-Ltv" id="c6i-zi-J1K"/>
+            </connections>
             <point key="canvasLocation" x="39.694656488549619" y="59.507042253521128"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

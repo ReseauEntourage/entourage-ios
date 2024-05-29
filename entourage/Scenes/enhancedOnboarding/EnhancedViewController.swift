@@ -9,10 +9,16 @@ import Foundation
 import UIKit
 
  enum EnhancedOnboardingTableDTO {
-    case title
-    case fullSizeCell
+     case title(title:String, subtitle:String)
+     case fullSizeCell(title:String, image:String, isSelected:Bool)
     case collectionViewCell
     case buttonCell
+}
+
+enum EnhancedOnboardingMode {
+    case interest // centre d'intérêt
+    case concern // Entraides
+    case involvement // envie d'agir
 }
 
 class EnhancedViewController: UIViewController {
@@ -22,7 +28,7 @@ class EnhancedViewController: UIViewController {
     
     // Variables
     var tableDTO = [EnhancedOnboardingTableDTO]()
-    
+    var mode:EnhancedOnboardingMode = .involvement
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +43,26 @@ class EnhancedViewController: UIViewController {
     
     private func loadDTO(){
         //Add cell to dto
+        switch self.mode {
+            
+        case .interest:
+            tableDTO.append(.title(title: "", subtitle: ""))
+        case .concern:
+            tableDTO.append(.title(title: "", subtitle: ""))
+        case .involvement:
+            tableDTO.append(.title(title: "", subtitle: ""))
+
+        }
     }
+    
+    func presentViewControllerWithAnimation(identifier: String) {
+            let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? UIViewController {
+                viewController.modalPresentationStyle = .fullScreen
+                viewController.modalTransitionStyle = .coverVertical
+                present(viewController, animated: true, completion: nil)
+            }
+        }
 }
 
 extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
@@ -58,4 +83,16 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
+}
+
+
+extension EnhancedViewController:EnhancedOnboardingButtonDelegate{
+    func onConfigureLaterClick() {
+        
+    }
+    
+    func onNextClick() {
+        
+    }
+    
 }

@@ -468,6 +468,7 @@
 		26BEEECC2C00C32B00169FBA /* EnhancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BEEEC12C00C32B00169FBA /* EnhancedViewController.swift */; };
 		26BEEECD2C00C32B00169FBA /* EnhancedOnboardingIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BEEEC22C00C32B00169FBA /* EnhancedOnboardingIntro.swift */; };
 		26BEEECF2C00CE3800169FBA /* EventLastDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BEEECE2C00CE3800169FBA /* EventLastDayViewController.swift */; };
+		26BEEED12C06180D00169FBA /* congrats_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 26BEEED02C06180D00169FBA /* congrats_animation.json */; };
 		26BFC99E2ACD485600FDA030 /* HomeCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BFC99D2ACD485600FDA030 /* HomeCellAction.swift */; };
 		26BFC9A02ACD4DB400FDA030 /* HomeCellAction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BFC99F2ACD4DB400FDA030 /* HomeCellAction.xib */; };
 		26C1BB662A3AF0D100C81C09 /* WelcomeFourImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB652A3AF0D100C81C09 /* WelcomeFourImageCell.swift */; };
@@ -976,6 +977,7 @@
 		26BEEEC12C00C32B00169FBA /* EnhancedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedViewController.swift; sourceTree = "<group>"; };
 		26BEEEC22C00C32B00169FBA /* EnhancedOnboardingIntro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedOnboardingIntro.swift; sourceTree = "<group>"; };
 		26BEEECE2C00CE3800169FBA /* EventLastDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLastDayViewController.swift; sourceTree = "<group>"; };
+		26BEEED02C06180D00169FBA /* congrats_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congrats_animation.json; sourceTree = "<group>"; };
 		26BFC99D2ACD485600FDA030 /* HomeCellAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellAction.swift; sourceTree = "<group>"; };
 		26BFC99F2ACD4DB400FDA030 /* HomeCellAction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellAction.xib; sourceTree = "<group>"; };
 		26C1BB652A3AF0D100C81C09 /* WelcomeFourImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourImageCell.swift; sourceTree = "<group>"; };
@@ -1332,6 +1334,7 @@
 		025D876C278DF44800909101 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				26BEEED02C06180D00169FBA /* congrats_animation.json */,
 				2636B9632A7BA199007EE1B2 /* anim_rugby.json */,
 				265565F12A3C9DB700CEFB3D /* explosion.json */,
 				020AF5E428607EFE0012AE60 /* congrat_short_anim.json */,
@@ -2353,6 +2356,7 @@
 				02D10D8C2873236500ACC267 /* MJPopupViewController.xib in Resources */,
 				02B7922527F74801003AFFB9 /* Neighborhood_Create.storyboard in Resources */,
 				02E2192328352552002A1FCB /* Neighborhood_Message.storyboard in Resources */,
+				26BEEED12C06180D00169FBA /* congrats_animation.json in Resources */,
 				0236971A296D9F6A00E2CACC /* DetailMessageTopPostImageCell.xib in Resources */,
 				025C92B828340CFC000970D9 /* NeighborhoodPostImageCell.xib in Resources */,
 				025C92C32834149B000970D9 /* NeighborhoodEventsTableviewCell.xib in Resources */,

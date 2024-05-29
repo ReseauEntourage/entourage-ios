@@ -21,5 +21,9 @@ class EnhancedOnboardingTitle:UITableViewCell{
         
     }
     
+    func configure(title:String , subtitle:String){
+        self.ui_title.text = title
+        self.ui_subtitle_label.text = subtitle
+    }
     
 }
