@@ -106,6 +106,7 @@ class HomeV2ViewController:UIViewController{
         self.checkForUpdates()
         self.ifEventLastDay()
         //self.testEventLastDay()
+        //self.sendOnboardingIntro()
     }
     
     //MARK: TODO REMOVE THIS
@@ -125,6 +126,16 @@ class HomeV2ViewController:UIViewController{
             if let _event = event {
                 self.launchEventLastDayVC(with: _event)
             }
+        }
+    }
+    
+    func sendOnboardingIntro(){
+        print("eho")
+        let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
+            viewController.modalPresentationStyle = .fullScreen
+            viewController.modalTransitionStyle = .coverVertical
+            present(viewController, animated: true, completion: nil)
         }
     }
 

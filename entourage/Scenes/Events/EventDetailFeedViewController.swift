@@ -101,6 +101,7 @@ class EventDetailFeedViewController: UIViewController {
         self.ui_scrollview.delegate = self
         self.ui_scrollview.maximumZoomScale = 10
         AnalyticsLoggerManager.logEvent(name: Event_detail_main)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -287,7 +288,6 @@ class EventDetailFeedViewController: UIViewController {
                      
             }
             self.event = event
-            print("eho event id ", event?.uid)
             self.event?.posts?.removeAll()
             self.splitMessages()
             self.getMorePosts()

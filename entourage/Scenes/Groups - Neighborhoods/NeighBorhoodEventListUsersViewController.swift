@@ -271,8 +271,9 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                 position = position + 1
             }
             let isMe = _user.sid == UserDefaults.currentUser?.sid
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
-            cell.populateCell(isMe:isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType, isConfirmed: ((_user.confirmedAt?.isEmpty) == nil))
+            cell.populateCell(isMe:isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType, isConfirmed: _user.confirmedAt != nil)
             cell.hideSeparatorBarIfIsVote(isVote: self.isFromSurvey)
             return cell
         

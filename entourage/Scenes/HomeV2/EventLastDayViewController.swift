@@ -34,7 +34,10 @@ class EventLastDayViewController: UIViewController, MJAlertControllerDelegate {
         guard let event = self.event else { return }
         
         let eventTitle = event.title
-        let eventAddress = event.metadata?.street_address ?? ""
+        var eventAddress = event.metadata?.place_name ?? ""
+        if event.metadata?.place_name == "" {
+            eventAddress = event.metadata?.street_address ?? ""
+        }
         let eventTime = event.startTimeFormatted
         
         let titleText = "🔔 N’oubliez pas : « \(eventTitle) » a lieu demain au \(eventAddress) à \(eventTime) !"
