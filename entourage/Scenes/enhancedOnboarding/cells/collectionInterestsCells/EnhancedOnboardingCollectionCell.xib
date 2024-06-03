@@ -13,17 +13,14 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="225" id="T3X-Ex-Xg9" customClass="EnhancedOnboardingCollectionCell" customModule="Ent_Beta" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="437" height="225"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T3X-Ex-Xg9" id="yTE-gs-UfW">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T3X-Ex-Xg9" id="yTE-gs-UfW">
                 <rect key="frame" x="0.0" y="0.0" width="437" height="225"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Awz-eX-Pw8">
-                        <rect key="frame" x="0.0" y="0.0" width="437" height="200"/>
+                        <rect key="frame" x="10" y="0.0" width="417" height="225"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="200" id="0CI-Sb-2BB"/>
-                        </constraints>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="V3I-GK-E3A">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="5" id="V3I-GK-E3A">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -34,13 +31,12 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Awz-eX-Pw8" secondAttribute="bottom" id="WUB-lP-dKU"/>
                     <constraint firstItem="Awz-eX-Pw8" firstAttribute="top" secondItem="yTE-gs-UfW" secondAttribute="top" id="eBh-y8-ZWq"/>
-                    <constraint firstAttribute="trailing" secondItem="Awz-eX-Pw8" secondAttribute="trailing" id="gII-a0-s2d"/>
-                    <constraint firstItem="Awz-eX-Pw8" firstAttribute="leading" secondItem="yTE-gs-UfW" secondAttribute="leading" id="jq0-6S-uIE"/>
+                    <constraint firstAttribute="trailing" secondItem="Awz-eX-Pw8" secondAttribute="trailing" constant="10" id="gII-a0-s2d"/>
+                    <constraint firstItem="Awz-eX-Pw8" firstAttribute="leading" secondItem="yTE-gs-UfW" secondAttribute="leading" constant="10" id="jq0-6S-uIE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="Awz-eX-Pw8" id="JZf-rQ-hbc"/>
-                <outlet property="collectionViewHeightConstraint" destination="0CI-Sb-2BB" id="Yoe-Jw-Y4c"/>
             </connections>
             <point key="canvasLocation" x="-0.76335877862595414" y="46.126760563380287"/>
         </tableViewCell>

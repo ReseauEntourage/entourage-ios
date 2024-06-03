@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_onboarding_action_wish_discussion.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

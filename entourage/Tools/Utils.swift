@@ -211,6 +211,15 @@ import UIKit
         return dateString
     }
     
+    static func formatEventHour(date: Date?) -> String {
+        guard let date = date else {
+            return ""
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        return dateFormatter.string(from: date)
+    }
+    
     static func formatEventDateName(date:Date?, withDayName:Bool = false) -> String {
         var dateString = ""
         if date != nil {

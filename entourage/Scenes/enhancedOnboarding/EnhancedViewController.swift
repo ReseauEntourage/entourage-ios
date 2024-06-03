@@ -1,18 +1,24 @@
-//
-//  EnhancedViewController.swift
-//  entourage
-//
-//  Created by Clement entourage on 23/05/2024.
-//
-
 import Foundation
 import UIKit
 
- enum EnhancedOnboardingTableDTO {
-     case title(title:String, subtitle:String)
-     case fullSizeCell(title:String, image:String, isSelected:Bool)
-    case collectionViewCell
+class OnboardingChoice {
+    var id: String
+    var img: String
+    var title: String
+
+    init(id: String, img: String, title: String) {
+        self.id = id
+        self.img = img
+        self.title = title
+    }
+}
+
+enum EnhancedOnboardingTableDTO {
+    case title(title: String, subtitle: String)
+    case fullSizeCell(choice: OnboardingChoice, isSelected: Bool)
+    case collectionViewCell(choices: [OnboardingChoice])
     case buttonCell
+    case backArrow
 }
 
 enum EnhancedOnboardingMode {
@@ -28,71 +34,262 @@ class EnhancedViewController: UIViewController {
     
     // Variables
     var tableDTO = [EnhancedOnboardingTableDTO]()
-    var mode:EnhancedOnboardingMode = .involvement
+    var mode: EnhancedOnboardingMode = .involvement
+    var selectedIds = Set<String>()
+    
+    var concernChoices: [OnboardingChoice] = []
+    var involvementChoices: [OnboardingChoice] = []
+    var interestChoices: [OnboardingChoice] = []
+    var returnHome = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Register cell class
-        //ui_tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        // Register cell classes
+        ui_tableview.register(UINib(nibName: "EnhancedOnboardingTitle", bundle: nil), forCellReuseIdentifier: "titleCell")
+        ui_tableview.register(UINib(nibName: "EnhancedFullSizeCell", bundle: nil), forCellReuseIdentifier: "fullSizeCell")
+        ui_tableview.register(UINib(nibName: "EnhancedOnboardingCollectionCell", bundle: nil), forCellReuseIdentifier: "collectionViewCell")
+        ui_tableview.register(UINib(nibName: "EnahancedOnboardingButtonCell", bundle: nil), forCellReuseIdentifier: "buttonCell")
+        ui_tableview.register(UINib(nibName: "EnhancecOnboardingBackCell", bundle: nil), forCellReuseIdentifier: "enhancecOnboardingBackCell")
         
         // Assign delegates
         ui_tableview.delegate = self
         ui_tableview.dataSource = self
+        
+        // Initialize choices
+        initializeChoices()
+        
+        // Load data for the initial mode
+        loadDTO()
     }
     
-    private func loadDTO(){
-        //Add cell to dto
-        switch self.mode {
-            
-        case .interest:
-            tableDTO.append(.title(title: "", subtitle: ""))
-        case .concern:
-            tableDTO.append(.title(title: "", subtitle: ""))
-        case .involvement:
-            tableDTO.append(.title(title: "", subtitle: ""))
-
+    private func initializeChoices() {
+        guard let currentUser = UserDefaults.currentUser else {
+            return
         }
+        // Initialize concern choices
+        concernChoices = [
+            OnboardingChoice(id: "sharing_time", img: "ic_onboarding_entraide_share", title: "Temps de partage"),
+            OnboardingChoice(id: "material_donations", img: "ic_onboarding_entraide_material", title: "Dons matériels"),
+            OnboardingChoice(id: "services", img: "ic_onboarding_entraide_service", title: "Proposition de services")
+        ]
+        
+        // Initialize involvement choices
+        involvementChoices = [
+            OnboardingChoice(id: "outings", img: "ic_onboarding_action_wish_sensibilisation", title: "Apprendre avec des contenus pédagogiques"),
+            OnboardingChoice(id: "both_actions", img: "ic_onboarding_action_wish_convivialite", title: "Participer à des événements de convivialité"),
+            OnboardingChoice(id: "neighborhoods", img: "ic_onboarding_action_wish_coup_de_pouce", title: "Donner ou solliciter un coup de pouce"),
+            OnboardingChoice(id: "resources", img: "ic_onboarding_action_wish_discussion", title: "Rejoindre un groupe de voisins et tisser des liens")
+        ]
+        // Initialize interest choices
+        interestChoices = [
+            OnboardingChoice(id: "sport", img: "interest_jeux", title: "Sport"),
+            OnboardingChoice(id: "animaux", img: "interest_don-materiel", title: "Animaux"),
+            OnboardingChoice(id: "marauding", img: "interest_rencontre-nomade", title: "Rencontres nomades"),
+            OnboardingChoice(id: "cuisine", img: "interest_cuisine", title: "Cuisine"),
+            OnboardingChoice(id: "jeux", img: "interest_jeux", title: "Jeux"),
+            OnboardingChoice(id: "activites", img: "interest_activite-manuelle", title: "Activités manuelles"),
+            OnboardingChoice(id: "bien-etre", img: "interest_bien-etre", title: "Bien-être"),
+            OnboardingChoice(id: "nature", img: "interest_nature", title: "Nature"),
+            OnboardingChoice(id: "culture", img: "interest_moment de partage", title: "Culture"),
+            OnboardingChoice(id: "other", img: "interest_autre", title: "Autre")
+        ]
+        let interests = Set(currentUser.interests ?? [])
+            let concerns = Set(currentUser.concerns ?? [])
+            let involvements = Set(currentUser.involvements ?? [])
+            selectedIds = interests.union(concerns).union(involvements)
+
+    }
+    
+    private func loadDTO() {
+        tableDTO.removeAll()
+        
+        switch self.mode {
+        case .interest:
+            tableDTO.append(.backArrow)
+            tableDTO.append(.title(title: "Mes centres d’intérêts", subtitle: "Pour vous aider à trouver des activités qui vous correspondent, dites-nous ce qui vous intéresse."))
+            tableDTO.append(.collectionViewCell(choices: interestChoices))
+        case .concern:
+            tableDTO.append(.backArrow)
+            tableDTO.append(.title(title: "Mes catégories d’entraide", subtitle: "Sélectionnez les catégories d'entraide que vous souhaitez voir en priorité."))
+            concernChoices.forEach { choice in
+                tableDTO.append(.fullSizeCell(choice: choice, isSelected: selectedIds.contains(choice.id)))
+            }
+        case .involvement:
+            tableDTO.append(.backArrow)
+            tableDTO.append(.title(title: "Comment souhaitez-vous agir au sein de la communauté Entourage ?", subtitle: "Et oui, vous avez le droit de choisir plusieurs options !"))
+            involvementChoices.forEach { choice in
+                tableDTO.append(.fullSizeCell(choice: choice, isSelected: selectedIds.contains(choice.id)))
+            }
+        }
+        
+        tableDTO.append(.buttonCell)
+        ui_tableview.reloadData()
     }
     
     func presentViewControllerWithAnimation(identifier: String) {
-            let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? UIViewController {
-                viewController.modalPresentationStyle = .fullScreen
-                viewController.modalTransitionStyle = .coverVertical
-                present(viewController, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? UIViewController {
+            viewController.modalPresentationStyle = .fullScreen
+            viewController.modalTransitionStyle = .coverVertical
+            present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    func updateUserChoices() {
+        let interests = interestChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
+        let concerns = concernChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
+        let involvements = involvementChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
+        UserService.updateUserChoices(interests: interests, concerns: concerns, involvements: involvements) { user, error in
+            if let error = error {
+                print("Error updating user choices: \(error)")
+                // Handle error
+            } else {
+                print("Successfully updated user choices")
+                if let _user = user {
+                    UserDefaults.updateCurrentUser(newUser: _user)
+                }
+                if self.returnHome {
+                    DispatchQueue.main.async {
+                        AppState.navigateToMainApp()
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingEnd")
+                    }
+                }
+                // Handle success, possibly update UI or proceed to next step
             }
         }
+    }
+    
 }
 
 extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
-
     
-    // Number of rows in the section
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableDTO.count
     }
     
-    // Configure the cell for the row at indexPath
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let dto = tableDTO[indexPath.row]
         
-        return UITableViewCell()
+        switch dto {
+        case .title(let title, let subtitle):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as? EnhancedOnboardingTitle else {
+                return UITableViewCell()
+            }
+            cell.configure(title: title, subtitle: subtitle)
+            cell.selectionStyle = .none
+            return cell
+            
+        case .fullSizeCell(let choice, let isSelected):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "fullSizeCell", for: indexPath) as? EnhancedFullSizeCell else {
+                return UITableViewCell()
+            }
+            cell.configure(choice: choice, isSelected: isSelected)
+            cell.selectionStyle = .none
+            return cell
+            
+        case .collectionViewCell(let choices):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "collectionViewCell", for: indexPath) as? EnhancedOnboardingCollectionCell else {
+                return UITableViewCell()
+            }
+            cell.setItems(choices, selectedIds: selectedIds)
+            cell.delegate = self
+            cell.selectionStyle = .none
+            return cell
+            
+        case .buttonCell:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell", for: indexPath) as? EnahancedOnboardingButtonCell else {
+                return UITableViewCell()
+            }
+            cell.delegate = self
+            cell.selectionStyle = .none
+            cell.configure()
+            return cell
+        case .backArrow:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "enhancecOnboardingBackCell", for: indexPath) as? EnhancecOnboardingBackCell else {
+                return UITableViewCell()
+            }
+            cell.selectionStyle = .none
+            return cell
+        }
     }
     
-    // Handle row selection
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch tableDTO[indexPath.row] {
+        case .title:
+            return UITableView.automaticDimension
+        case .fullSizeCell:
+            return UITableView.automaticDimension
+        case .collectionViewCell:
+            return 900 // Adjust this based on your requirements
+        case .buttonCell:
+            return UITableView.automaticDimension
+        case .backArrow:
+            return UITableView.automaticDimension
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dto = tableDTO[indexPath.row]
         
+        switch dto {
+        case .fullSizeCell(let choice, _):
+            if selectedIds.contains(choice.id) {
+                selectedIds.remove(choice.id)
+            } else {
+                selectedIds.insert(choice.id)
+            }
+            loadDTO() // Reload to update selection state
+        case .backArrow: 
+            switch mode{
+            case .interest:
+                mode = .involvement
+            case .concern:
+                mode = .interest
+            case .involvement:
+                self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingIntro")
+            }
+            self.loadDTO()
+        default:
+            break
+        }
     }
 }
 
-
-extension EnhancedViewController:EnhancedOnboardingButtonDelegate{
+extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
     func onConfigureLaterClick() {
-        
+        self.returnHome = true
+        self.updateUserChoices()
     }
     
     func onNextClick() {
-        
+        switch mode {
+        case .involvement:
+            mode = .interest
+        case .interest:
+            mode = .concern
+        case .concern:
+            self.returnHome = false
+            self.updateUserChoices()
+        }
+        loadDTO()
     }
-    
+}
+
+extension EnhancedViewController: EnhancedOnboardingCollectionCellDelegate {
+    func collectionCell(didSelect choice: OnboardingChoice) {
+        if selectedIds.contains(choice.id) {
+            selectedIds.remove(choice.id)
+        } else {
+            selectedIds.insert(choice.id)
+        }
+        loadDTO() // Reload to update selection state
+    }
 }

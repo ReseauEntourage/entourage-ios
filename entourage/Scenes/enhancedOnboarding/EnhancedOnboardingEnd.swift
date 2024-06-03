@@ -25,6 +25,7 @@ class EnhancedOnboardingEnd:UIViewController{
         let starAnimation = LottieAnimation.named("congrats_animation")
         ui_lottiview.animation = starAnimation
         ui_lottiview.loopMode = .loop
+        ui_lottiview.play()
         ui_title_label.text = "enhanced_onboarding_end_title".localized
         ui_subtitle_label.text = "enhanced_onboarding_end_subtitle".localized
         
@@ -33,13 +34,7 @@ class EnhancedOnboardingEnd:UIViewController{
     }
     
     @objc func onEventClick(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "homeV2vc") as? EnhancedViewController {
-            viewController.modalPresentationStyle = .fullScreen
-            viewController.modalTransitionStyle = .coverVertical
-            //viewController.shouldGoEvent = true
-            present(viewController, animated: true, completion: nil)
-        }
+        AppState.navigateToMainApp()
     }
     
     func configureOrangeButton(_ button: UIButton, withTitle title: String) {

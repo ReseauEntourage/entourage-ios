@@ -137,6 +137,12 @@ struct Event:Codable {
         }
     }
     
+    var startHourFormatted: String {
+        get {
+            return Utils.formatEventHour(date: Utils.getDateFromWSDateString(metadata?.starts_at))
+        }
+    }
+    
     var endTimeFormatted:String {
         get {
             return  Utils.formatEventTime(date: Utils.getDateFromWSDateString(metadata?.ends_at))

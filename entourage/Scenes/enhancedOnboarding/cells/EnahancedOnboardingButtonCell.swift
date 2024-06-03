@@ -44,7 +44,7 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
         button.backgroundColor = UIColor.appOrange
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 25
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
         button.clipsToBounds = true
     }
 
@@ -54,7 +54,8 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
         button.setTitleColor(.black, for: .normal)
         button.layer.borderColor = UIColor.appOrange.cgColor
         button.layer.borderWidth = 1
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
         button.clipsToBounds = true
     }
 }

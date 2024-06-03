@@ -64,6 +64,8 @@ class HomeV2ViewController:UIViewController{
     var pedagoCreateGroup:PedagogicResource?
     var isContributionPreference = false
     var shouldLaunchEventPopup:Int? = nil
+    var shouldGoEvent = false
+    var shouldTestOnboarding = true
     
     override func viewDidLoad() {
         IHProgressHUD.show()
@@ -106,7 +108,15 @@ class HomeV2ViewController:UIViewController{
         self.checkForUpdates()
         self.ifEventLastDay()
         //self.testEventLastDay()
-        //self.sendOnboardingIntro()
+        if shouldTestOnboarding{
+            shouldTestOnboarding = false
+            self.sendOnboardingIntro()
+        }
+        if self.shouldGoEvent {
+            if let _tabbar = self.tabBarController as? MainTabbarViewController {
+                _tabbar.showDiscoverEvents()
+            }
+        }
     }
     
     //MARK: TODO REMOVE THIS
@@ -130,7 +140,6 @@ class HomeV2ViewController:UIViewController{
     }
     
     func sendOnboardingIntro(){
-        print("eho")
         let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
             viewController.modalPresentationStyle = .fullScreen

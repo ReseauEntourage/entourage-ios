@@ -34,6 +34,8 @@ struct User: Codable {
     
     var firebaseProperties:[String:String]? = [String:String]()
     var interests:[String]? = nil
+    var involvements:[String]? = nil
+    var concerns:[String]? = nil
     var unreadCount:Int = 0
     var permissions:UserPermissions? = UserPermissions()
     
@@ -95,6 +97,8 @@ struct User: Codable {
         case roles
         case memberships
         case interests
+        case involvements
+        case concerns
         
         case _firstname = "first_name"
         case _lastname = "last_name"
