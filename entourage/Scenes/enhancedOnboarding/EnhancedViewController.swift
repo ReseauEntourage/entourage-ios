@@ -318,6 +318,7 @@ class EnhancedOnboardingConfiguration {
     var isInterestsFromSetting = false
     var isOnboardingFromSetting = false
     var isFromOnboardingFromNormalWay = false
+    var shouldSendOnboardingFromNormalWay = false
     private init() {}
 
 }

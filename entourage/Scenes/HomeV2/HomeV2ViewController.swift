@@ -97,6 +97,7 @@ class HomeV2ViewController:UIViewController{
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
         self.handleEnhancedOnboardingReturn()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,11 +112,16 @@ class HomeV2ViewController:UIViewController{
     
     func handleEnhancedOnboardingReturn(){
         let config = EnhancedOnboardingConfiguration.shared
+        if config.shouldSendOnboardingFromNormalWay{
+            self.sendOnboardingIntro()
+            return
+        }
         if config.isFromOnboardingFromNormalWay{
             config.isFromOnboardingFromNormalWay = false
             IHProgressHUD.dismiss()
             if let _tabbar = self.tabBarController as? MainTabbarViewController {
                 _tabbar.showDiscoverEvents()
+                return
             }
         }
         if config.isInterestsFromSetting{
@@ -124,6 +130,7 @@ class HomeV2ViewController:UIViewController{
             let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
+            return
         }
         if config.isOnboardingFromSetting{
             config.isOnboardingFromSetting = false
@@ -131,6 +138,7 @@ class HomeV2ViewController:UIViewController{
             let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
+            return
         }
     }
     
@@ -158,7 +166,8 @@ class HomeV2ViewController:UIViewController{
         let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
             let config = EnhancedOnboardingConfiguration.shared
-            config.isFromOnboardingFromNormalWay
+            config.shouldSendOnboardingFromNormalWay = false
+            config.isFromOnboardingFromNormalWay = true
             viewController.modalPresentationStyle = .fullScreen
             viewController.modalTransitionStyle = .coverVertical
             present(viewController, animated: true, completion: nil)
