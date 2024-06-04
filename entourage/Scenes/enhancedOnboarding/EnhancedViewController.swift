@@ -41,6 +41,7 @@ class EnhancedViewController: UIViewController {
     var involvementChoices: [OnboardingChoice] = []
     var interestChoices: [OnboardingChoice] = []
     var returnHome = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,7 +156,13 @@ class EnhancedViewController: UIViewController {
                     }
                 }else{
                     DispatchQueue.main.async {
-                        self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingEnd")
+                        let config = EnhancedOnboardingConfiguration.shared
+                        if config.isInterestsFromSetting {
+                            config.isInterestsFromSetting = false
+                            AppState.navigateToMainApp()
+                        }else{
+                            self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingEnd")
+                        }
                     }
                 }
                 // Handle success, possibly update UI or proceed to next step
@@ -248,15 +255,22 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
             }
             loadDTO() // Reload to update selection state
         case .backArrow: 
-            switch mode{
-            case .interest:
-                mode = .involvement
-            case .concern:
-                mode = .interest
-            case .involvement:
-                self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingIntro")
+            let config = EnhancedOnboardingConfiguration.shared
+            if config.isInterestsFromSetting {
+                self.dismiss(animated: true) {
+                    config.isInterestsFromSetting = false
+                }
+            }else{
+                switch mode{
+                case .interest:
+                    mode = .involvement
+                case .concern:
+                    mode = .interest
+                case .involvement:
+                    self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingIntro")
+                }
+                self.loadDTO()
             }
-            self.loadDTO()
         default:
             break
         }
@@ -292,4 +306,13 @@ extension EnhancedViewController: EnhancedOnboardingCollectionCellDelegate {
         }
         loadDTO() // Reload to update selection state
     }
+}
+
+
+class EnhancedOnboardingConfiguration {
+    static let shared = EnhancedOnboardingConfiguration()
+    var isInterestsFromSetting = false
+    var isOnboardingFromSetting = false
+    private init() {}
+
 }

@@ -24,6 +24,7 @@ class EventListCell: UITableViewCell {
     
     @IBOutlet weak var ui_label_canceled: UILabel!
     @IBOutlet weak var ui_label_admin: UILabel?
+    @IBOutlet weak var ui_subscribed_label: UILabel!
     
     class var identifier: String {
         return String(describing: self)
@@ -60,6 +61,12 @@ class EventListCell: UITableViewCell {
             ui_constraint_left_title.constant = 10
             ui_iv_canceled.isHidden = true
             ui_label_canceled.isHidden = true
+        }
+        
+        if event.isMember ?? false {
+            ui_subscribed_label.isHidden = false
+        }else{
+            ui_subscribed_label.isHidden = true
         }
         
         ui_title.text = event.title

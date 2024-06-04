@@ -65,7 +65,7 @@ class HomeV2ViewController:UIViewController{
     var isContributionPreference = false
     var shouldLaunchEventPopup:Int? = nil
     var shouldGoEvent = false
-    var shouldTestOnboarding = true
+    var shouldTestOnboarding = false
     
     override func viewDidLoad() {
         IHProgressHUD.show()

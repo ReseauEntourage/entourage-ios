@@ -447,6 +447,7 @@
 		26A60E212A3A05AD004849FB /* WelcomeFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */; };
 		26A8DE0B2C0DF32300C34641 /* EnhancecOnboardingBackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8DE0A2C0DF32300C34641 /* EnhancecOnboardingBackCell.swift */; };
 		26A8DE0D2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A8DE0C2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib */; };
+		26A8DE0F2C0E1B9500C34641 /* EditProfileOnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8DE0E2C0E1B9500C34641 /* EditProfileOnboardingCell.swift */; };
 		26AD11962AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD11952AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift */; };
 		26AD11982AEA688800FA7BEC /* ProfileTranslationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD11972AEA688800FA7BEC /* ProfileTranslationViewController.swift */; };
 		26AD119B2AEBEFEA00FA7BEC /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD119A2AEBEFEA00FA7BEC /* LanguageCell.swift */; };
@@ -960,6 +961,7 @@
 		26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourViewController.swift; sourceTree = "<group>"; };
 		26A8DE0A2C0DF32300C34641 /* EnhancecOnboardingBackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancecOnboardingBackCell.swift; sourceTree = "<group>"; };
 		26A8DE0C2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnhancecOnboardingBackCell.xib; sourceTree = "<group>"; };
+		26A8DE0E2C0E1B9500C34641 /* EditProfileOnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileOnboardingCell.swift; sourceTree = "<group>"; };
 		26AD11952AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLanguageChooseViewController.swift; sourceTree = "<group>"; };
 		26AD11972AEA688800FA7BEC /* ProfileTranslationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTranslationViewController.swift; sourceTree = "<group>"; };
 		26AD119A2AEBEFEA00FA7BEC /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
@@ -1781,6 +1783,7 @@
 				26AD119C2AEBF42B00FA7BEC /* LanguageCell.xib */,
 				26AD119E2AEFE30E00FA7BEC /* LangValidateButton.swift */,
 				26AD11A02AEFE33C00FA7BEC /* LangValidateButton.xib */,
+				26A8DE0E2C0E1B9500C34641 /* EditProfileOnboardingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2674,6 +2677,7 @@
 				02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */,
 				0268C253285A2B1400294055 /* FloatyViewController.swift in Sources */,
 				26D13E352BB1EBA500CAD4F7 /* SectionOptionNameCell.swift in Sources */,
+				26A8DE0F2C0E1B9500C34641 /* EditProfileOnboardingCell.swift in Sources */,
 				02A92C262897E6A9000DFF95 /* ActionCreatePhase3ViewController.swift in Sources */,
 				02E0EFA028783900009B2C65 /* EventDetailFeedViewController.swift in Sources */,
 				02B94C37284F9FB3006059EF /* HomeHelpCell.swift in Sources */,
