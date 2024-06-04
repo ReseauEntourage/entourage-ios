@@ -24,6 +24,10 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
     override func awakeFromNib() {
         configureOrangeButton(ui_btn_next, withTitle: "enhanced_onboarding_button_title_next".localized)
         configureWhiteButton(ui_btn_configure_later, withTitle: "enhanced_onboarding_button_title_later".localized)
+        let config = EnhancedOnboardingConfiguration.shared
+        if config.isInterestsFromSetting{
+            configureOrangeButton(ui_btn_next, withTitle: "button_title_for_setting_onboarding".localized)
+        }
     }
     
     func configure(){

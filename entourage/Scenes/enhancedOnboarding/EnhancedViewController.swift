@@ -284,16 +284,21 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
     }
     
     func onNextClick() {
-        switch mode {
-        case .involvement:
-            mode = .interest
-        case .interest:
-            mode = .concern
-        case .concern:
-            self.returnHome = false
+        let config = EnhancedOnboardingConfiguration.shared
+        if config.isInterestsFromSetting {
             self.updateUserChoices()
+        }else{
+            switch mode {
+            case .involvement:
+                mode = .interest
+            case .interest:
+                mode = .concern
+            case .concern:
+                self.returnHome = false
+                self.updateUserChoices()
+            }
+            loadDTO()
         }
-        loadDTO()
     }
 }
 

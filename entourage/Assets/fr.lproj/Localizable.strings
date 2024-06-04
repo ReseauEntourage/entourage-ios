@@ -1519,3 +1519,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_end_subtitle" = "Merci d'avoir partagé vos envies d'agir et vos centres d'intérêts. Nous sommes impatients de vous proposer bientôt des événements sur-mesure qui vous correspondent \nRestez connecté(e) !";
 
 "edit_profile_cell_onboarding" = "Personnaliser mon compte";
+"button_title_for_setting_onboarding" = "Enregistrer";
+"button_title_for_re_onboarding_end" = "Revenir au profil";

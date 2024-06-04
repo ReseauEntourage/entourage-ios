@@ -31,10 +31,21 @@ class EnhancedOnboardingEnd:UIViewController{
         
         configureOrangeButton(ui_btn_go_event, withTitle: "enhanced_onboarding_button_title_event".localized)
         ui_btn_go_event.addTarget(self, action: #selector(onEventClick), for: .touchUpInside)
+        let config = EnhancedOnboardingConfiguration.shared
+        if config.isOnboardingFromSetting{
+            configureOrangeButton(ui_btn_go_event, withTitle: "button_title_for_re_onboarding_end".localized)
+        }
     }
     
     @objc func onEventClick(){
-        AppState.navigateToMainApp()
+        let config = EnhancedOnboardingConfiguration.shared
+        if config.isOnboardingFromSetting{
+            self.dismiss(animated: true) {
+                config.isOnboardingFromSetting = false
+            }
+        }else{
+            AppState.navigateToMainApp()
+        }
     }
     
     func configureOrangeButton(_ button: UIButton, withTitle title: String) {

@@ -30,12 +30,7 @@ class EnhancedOnboardingIntro:UIViewController{
     }
     
     @objc func onConfigureLaterClick(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "homev2vc") as? HomeV2ViewController {
-            viewController.modalPresentationStyle = .fullScreen
-            viewController.modalTransitionStyle = .coverVertical
-            present(viewController, animated: true, completion: nil)
-        }
+        AppState.navigateToMainApp()
     }
 
     @objc func onStartClick(){

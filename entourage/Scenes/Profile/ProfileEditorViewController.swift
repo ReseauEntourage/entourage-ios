@@ -227,7 +227,7 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
             return cell
         }
         if indexPath.row == 3 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterests", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellOnboarding", for: indexPath)
             
             return cell
         }
