@@ -39,13 +39,7 @@ class EnhancedOnboardingEnd:UIViewController{
     
     @objc func onEventClick(){
         let config = EnhancedOnboardingConfiguration.shared
-        if config.isOnboardingFromSetting{
-            self.dismiss(animated: true) {
-                config.isOnboardingFromSetting = false
-            }
-        }else{
-            AppState.navigateToMainApp()
-        }
+        AppState.navigateToMainApp()
     }
     
     func configureOrangeButton(_ button: UIButton, withTitle title: String) {
