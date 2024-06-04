@@ -158,7 +158,6 @@ class EnhancedViewController: UIViewController {
                     DispatchQueue.main.async {
                         let config = EnhancedOnboardingConfiguration.shared
                         if config.isInterestsFromSetting {
-                            config.isInterestsFromSetting = false
                             AppState.navigateToMainApp()
                         }else{
                             self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingEnd")
@@ -318,6 +317,7 @@ class EnhancedOnboardingConfiguration {
     static let shared = EnhancedOnboardingConfiguration()
     var isInterestsFromSetting = false
     var isOnboardingFromSetting = false
+    var isFromOnboardingFromNormalWay = false
     private init() {}
 
 }

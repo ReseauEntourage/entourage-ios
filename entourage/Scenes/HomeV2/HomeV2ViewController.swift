@@ -64,7 +64,6 @@ class HomeV2ViewController:UIViewController{
     var pedagoCreateGroup:PedagogicResource?
     var isContributionPreference = false
     var shouldLaunchEventPopup:Int? = nil
-    var shouldGoEvent = false
     var shouldTestOnboarding = false
     
     override func viewDidLoad() {
@@ -97,7 +96,7 @@ class HomeV2ViewController:UIViewController{
         //CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
-
+        self.handleEnhancedOnboardingReturn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,15 +106,31 @@ class HomeV2ViewController:UIViewController{
         self.initHome()
         self.checkForUpdates()
         self.ifEventLastDay()
-        //self.testEventLastDay()
-        if shouldTestOnboarding{
-            shouldTestOnboarding = false
-            self.sendOnboardingIntro()
-        }
-        if self.shouldGoEvent {
+        
+    }
+    
+    func handleEnhancedOnboardingReturn(){
+        let config = EnhancedOnboardingConfiguration.shared
+        if config.isFromOnboardingFromNormalWay{
+            config.isFromOnboardingFromNormalWay = false
+            IHProgressHUD.dismiss()
             if let _tabbar = self.tabBarController as? MainTabbarViewController {
                 _tabbar.showDiscoverEvents()
             }
+        }
+        if config.isInterestsFromSetting{
+            config.isInterestsFromSetting = false
+            IHProgressHUD.dismiss()
+            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+            navVC.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(navVC, animated: false)
+        }
+        if config.isOnboardingFromSetting{
+            config.isOnboardingFromSetting = false
+            IHProgressHUD.dismiss()
+            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+            navVC.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(navVC, animated: false)
         }
     }
     
@@ -142,6 +157,8 @@ class HomeV2ViewController:UIViewController{
     func sendOnboardingIntro(){
         let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
+            let config = EnhancedOnboardingConfiguration.shared
+            config.isFromOnboardingFromNormalWay
             viewController.modalPresentationStyle = .fullScreen
             viewController.modalTransitionStyle = .coverVertical
             present(viewController, animated: true, completion: nil)

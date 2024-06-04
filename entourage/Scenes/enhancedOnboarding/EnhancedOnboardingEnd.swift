@@ -38,7 +38,6 @@ class EnhancedOnboardingEnd:UIViewController{
     }
     
     @objc func onEventClick(){
-        let config = EnhancedOnboardingConfiguration.shared
         AppState.navigateToMainApp()
     }
     
