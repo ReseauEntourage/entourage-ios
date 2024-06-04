@@ -113,6 +113,7 @@ class HomeV2ViewController:UIViewController{
     func handleEnhancedOnboardingReturn(){
         let config = EnhancedOnboardingConfiguration.shared
         if config.shouldSendOnboardingFromNormalWay{
+            IHProgressHUD.dismiss()
             self.sendOnboardingIntro()
             return
         }
