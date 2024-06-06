@@ -12,7 +12,7 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="enhancecOnboardingBackCell" rowHeight="70" id="dsx-gP-NpR" customClass="EnhancecOnboardingBackCell" customModule="Ent_Beta" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="479" height="70"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dsx-gP-NpR" id="EyC-GE-v1E">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dsx-gP-NpR" id="EyC-GE-v1E">
                 <rect key="frame" x="0.0" y="0.0" width="479" height="70"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -26,7 +26,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="IkB-df-BG7" firstAttribute="top" secondItem="EyC-GE-v1E" secondAttribute="top" constant="20" id="KkP-mo-anh"/>
-                    <constraint firstAttribute="bottom" secondItem="IkB-df-BG7" secondAttribute="bottom" constant="10" id="eBc-1Q-MaJ"/>
+                    <constraint firstAttribute="bottom" secondItem="IkB-df-BG7" secondAttribute="bottom" id="eBc-1Q-MaJ"/>
                     <constraint firstItem="IkB-df-BG7" firstAttribute="leading" secondItem="EyC-GE-v1E" secondAttribute="leading" constant="20" id="qCy-GJ-HuW"/>
                 </constraints>
             </tableViewCellContentView>

@@ -337,3 +337,5 @@ let   Clic_Post_Like = "Clic_Post_Like"
 let   Clic_Post_List_Reactions = "Clic_Post_List_Reactions"
 let   Clic_ListReactions_Contact = "Clic_ListReactions_Contact"
 
+let has_user_activated_notif = "has_user_activated_notif"
+let has_user_disabled_notif = "has_user_disabled_notif"

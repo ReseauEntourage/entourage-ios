@@ -75,13 +75,24 @@ class EnhancedViewController: UIViewController {
             OnboardingChoice(id: "services", img: "ic_onboarding_entraide_service", title: "Proposition de services")
         ]
         
+        
         // Initialize involvement choices
-        involvementChoices = [
-            OnboardingChoice(id: "outings", img: "ic_onboarding_action_wish_sensibilisation", title: "Apprendre avec des contenus pédagogiques"),
-            OnboardingChoice(id: "both_actions", img: "ic_onboarding_action_wish_convivialite", title: "Participer à des événements de convivialité"),
-            OnboardingChoice(id: "neighborhoods", img: "ic_onboarding_action_wish_coup_de_pouce", title: "Donner ou solliciter un coup de pouce"),
-            OnboardingChoice(id: "resources", img: "ic_onboarding_action_wish_discussion", title: "Rejoindre un groupe de voisins et tisser des liens")
-        ]
+        print("config " + EnhancedOnboardingConfiguration.shared.preference)
+        if EnhancedOnboardingConfiguration.shared.preference == "contribution"{
+            involvementChoices = [
+                OnboardingChoice(id: "outings", img: "ic_onboarding_action_wish_convivialite", title: "Participer à des événements de convivialité"),
+                OnboardingChoice(id: "both_actions", img: "ic_onboarding_action_wish_coup_de_pouce", title: "Solliciter un coup de pouce"),
+                OnboardingChoice(id: "neighborhoods", img: "ic_onboarding_action_wish_discussion", title: "Rejoindre un groupe de voisins et tisser des liens"),
+                OnboardingChoice(id: "pois", img: "ic_onboarding_action_wish_discussion", title: "Trouver des structures solidaires à proximité")
+            ]
+        }else{
+            involvementChoices = [
+                OnboardingChoice(id: "resources", img: "ic_onboarding_action_wish_sensibilisation", title: "Apprendre avec des contenus pédagogiques"),
+                OnboardingChoice(id: "outings", img: "ic_onboarding_action_wish_convivialite", title: "Participer à des événements de convivialité"),
+                OnboardingChoice(id: "both_actions", img: "ic_onboarding_action_wish_coup_de_pouce", title: "Donner ou solliciter un coup de pouce"),
+                OnboardingChoice(id: "neighborhoods", img: "ic_onboarding_action_wish_discussion", title: "Rejoindre un groupe de voisins et tisser des liens")
+            ]
+        }
         // Initialize interest choices
         interestChoices = [
             OnboardingChoice(id: "sport", img: "interest_jeux", title: "Sport"),
@@ -92,7 +103,7 @@ class EnhancedViewController: UIViewController {
             OnboardingChoice(id: "activites", img: "interest_activite-manuelle", title: "Activités manuelles"),
             OnboardingChoice(id: "bien-etre", img: "interest_bien-etre", title: "Bien-être"),
             OnboardingChoice(id: "nature", img: "interest_nature", title: "Nature"),
-            OnboardingChoice(id: "culture", img: "interest_moment de partage", title: "Culture"),
+            OnboardingChoice(id: "culture", img: "interest_moment de partage", title: "Art & Culture"),
             OnboardingChoice(id: "other", img: "interest_autre", title: "Autre")
         ]
         let interests = Set(currentUser.interests ?? [])
@@ -118,7 +129,7 @@ class EnhancedViewController: UIViewController {
             }
         case .involvement:
             tableDTO.append(.backArrow)
-            tableDTO.append(.title(title: "Comment souhaitez-vous agir au sein de la communauté Entourage ?", subtitle: "Et oui, vous avez le droit de choisir plusieurs options !"))
+            tableDTO.append(.title(title: "Comment souhaitez-vous agir au sein de la communauté Entourage ?", subtitle: "(Eh oui, vous avez le droit de choisir plusieurs options !)"))
             involvementChoices.forEach { choice in
                 tableDTO.append(.fullSizeCell(choice: choice, isSelected: selectedIds.contains(choice.id)))
             }
@@ -126,6 +137,11 @@ class EnhancedViewController: UIViewController {
         
         tableDTO.append(.buttonCell)
         ui_tableview.reloadData()
+        DispatchQueue.main.async {
+            if self.tableDTO.count > 0 {
+                self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
+        }
     }
     
     func presentViewControllerWithAnimation(identifier: String) {
@@ -319,6 +335,7 @@ class EnhancedOnboardingConfiguration {
     var isOnboardingFromSetting = false
     var isFromOnboardingFromNormalWay = false
     var shouldSendOnboardingFromNormalWay = false
+    var preference:String = ""
     private init() {}
 
 }

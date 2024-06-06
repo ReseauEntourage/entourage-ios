@@ -96,8 +96,9 @@ class HomeV2ViewController:UIViewController{
         //CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
+        self.checkNotificationSettings()
         self.handleEnhancedOnboardingReturn()
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,9 +165,13 @@ class HomeV2ViewController:UIViewController{
     }
     
     func sendOnboardingIntro(){
+        
         let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
             let config = EnhancedOnboardingConfiguration.shared
+            if isContributionPreference {
+                config.preference = "contribution"
+            }
             config.shouldSendOnboardingFromNormalWay = false
             config.isFromOnboardingFromNormalWay = true
             viewController.modalPresentationStyle = .fullScreen
@@ -184,6 +189,18 @@ class HomeV2ViewController:UIViewController{
                self.present(eventLastDayVC, animated: true, completion: nil)
            }
        }
+    
+    func checkNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                if settings.authorizationStatus == .authorized {
+                    AnalyticsLoggerManager.logEvent(name: has_user_activated_notif)
+                } else {
+                    AnalyticsLoggerManager.logEvent(name: has_user_disabled_notif)
+                }
+            }
+        }
+    }
     
     func checkForUpdates() {
         let appStoreURL = URL(string: "http://itunes.apple.com/lookup?bundleId=social.entourage.entourage")!
@@ -592,6 +609,10 @@ extension HomeV2ViewController{
                     self?.isContributionPreference = true
                 }else{
                     self?.isContributionPreference = false
+                }
+                if ((self?.isContributionPreference) != nil) {
+                    let config = EnhancedOnboardingConfiguration.shared
+                    config.preference = "contribution"
                 }
                 
                 if UserDefaults.currentUser?.addressPrimary == nil

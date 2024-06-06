@@ -150,7 +150,7 @@
                                 <rect key="frame" x="0.0" y="748" width="393" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="big-lG-WHQ">
-                                        <rect key="frame" x="20" y="11" width="353" height="48"/>
+                                        <rect key="frame" x="144.66666666666666" y="11" width="104" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="CCx-M5-ESV"/>
                                         </constraints>
@@ -165,7 +165,6 @@
                                 <constraints>
                                     <constraint firstItem="big-lG-WHQ" firstAttribute="centerY" secondItem="2QC-wh-6oe" secondAttribute="centerY" id="1qo-Q0-jDq"/>
                                     <constraint firstAttribute="height" constant="70" id="W5d-w6-lg0"/>
-                                    <constraint firstAttribute="trailing" secondItem="big-lG-WHQ" secondAttribute="trailing" constant="20" id="uPY-zr-Sx1"/>
                                     <constraint firstItem="big-lG-WHQ" firstAttribute="centerX" secondItem="2QC-wh-6oe" secondAttribute="centerX" id="uel-va-eQX"/>
                                 </constraints>
                             </view>

@@ -1510,9 +1510,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "vote_plural" = "votes";
 
 "enhanced_onboarding_start_title" = "%@, faisons connaissance !";
-"enhanced_onboarding_start_subtitle" = "Avant de plonger dans notre application, prenons quelques instants pour mieux te connaître. Tes centres d'intérêts vont nous aider à te suggérer des activités et des contenus qui t'intéressont.";
+"enhanced_onboarding_start_subtitle" = "Avant de plonger dans notre application, prenons quelques instants pour mieux te connaître. Tes centres d'intérêts vont nous aider à te suggérer des activités et des contenus qui t'intéresseront.";
 "enhanced_onboarding_button_title_start" = "Commencer";
-"enhanced_onboarding_button_title_later" = "Configurer plus tard";
+"enhanced_onboarding_button_title_later" = "Terminer plus tard";
+"enhanced_onboarding_button_title_configlater" = "Configurer plus tard";
 "enhanced_onboarding_button_title_next" = "Suivant";
 "enhanced_onboarding_button_title_event" = "Parcourir les évènements";
 "enhanced_onboarding_end_title" = "Votre expérience sur-mesure est (quasi) prête !";

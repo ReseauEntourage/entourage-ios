@@ -8,6 +8,7 @@ class EnhancedFullSizeCell: UITableViewCell {
     @IBOutlet weak var ui_image_check: UIImageView!
     @IBOutlet weak var ui_title_choice_label: UILabel!
     
+    @IBOutlet weak var ui_subtitle: UILabel!
     @IBOutlet weak var ui_view_container: UIView!
     // Variable
     override func awakeFromNib() {
@@ -21,9 +22,15 @@ class EnhancedFullSizeCell: UITableViewCell {
     func configure(choice: OnboardingChoice, isSelected: Bool) {
         self.ui_title_choice_label.text = choice.title
         self.ui_image_choice.image = UIImage(named: choice.img)
+        if choice.title == "Proposition de services"{
+            self.ui_subtitle.isHidden = false
+            self.ui_subtitle.text = "(lessive, impression de documents, aide administrative...)"
+        }else{
+            self.ui_subtitle.isHidden = true
+        }
         if isSelected {
             ui_image_check.image = UIImage(named: "ic_onboarding_checked")
-            ui_view_container.backgroundColor = UIColor(red: 255/255, green: 156/255, blue: 93/255, alpha: 0.5)
+            ui_view_container.backgroundColor = UIColor(red: 255/255, green: 245/255, blue: 235/255, alpha: 0.7)
             self.ui_view_container.layer.borderColor = UIColor.appOrangeLight.cgColor
 
         } else {

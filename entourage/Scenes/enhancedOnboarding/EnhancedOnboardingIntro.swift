@@ -23,7 +23,7 @@ class EnhancedOnboardingIntro:UIViewController{
             ui_title.text = String.init(format: "enhanced_onboarding_start_title".localized, _user.firstname )
             ui_subtitle.text = String.init(format: "enhanced_onboarding_start_subtitle".localized, _user.firstname )
             configureOrangeButton(ui_btn_start, withTitle: "enhanced_onboarding_button_title_start".localized)
-            configureWhiteButton(ui_btn_later, withTitle: "enhanced_onboarding_button_title_later".localized)
+            configureWhiteButton(ui_btn_later, withTitle: "enhanced_onboarding_button_title_configlater".localized)
         }
         self.ui_btn_later.addTarget(self, action: #selector(onConfigureLaterClick), for: .touchUpInside)
         self.ui_btn_start.addTarget(self, action: #selector(onStartClick), for: .touchUpInside)

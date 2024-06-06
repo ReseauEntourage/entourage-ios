@@ -49,7 +49,7 @@ extension EnhancedOnboardingCollectionCell: UICollectionViewDelegateFlowLayout, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding: CGFloat = 10
+        let padding: CGFloat = 7
         let collectionViewSize = collectionView.frame.size.width - padding
         
         return CGSize(width: collectionViewSize / 2, height: 170)
@@ -60,7 +60,7 @@ extension EnhancedOnboardingCollectionCell: UICollectionViewDelegateFlowLayout, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
