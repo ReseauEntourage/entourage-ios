@@ -8,7 +8,7 @@ class EnhancedFullSizeCell: UITableViewCell {
     @IBOutlet weak var ui_image_check: UIImageView!
     @IBOutlet weak var ui_title_choice_label: UILabel!
     
-    @IBOutlet weak var ui_subtitle: UILabel!
+    @IBOutlet weak var ui_contraintbottom: NSLayoutConstraint!
     @IBOutlet weak var ui_view_container: UIView!
     // Variable
     override func awakeFromNib() {
@@ -22,12 +22,21 @@ class EnhancedFullSizeCell: UITableViewCell {
     func configure(choice: OnboardingChoice, isSelected: Bool) {
         self.ui_title_choice_label.text = choice.title
         self.ui_image_choice.image = UIImage(named: choice.img)
-        if choice.title == "Proposition de services"{
-            self.ui_subtitle.isHidden = false
-            self.ui_subtitle.text = "(lessive, impression de documents, aide administrative...)"
-        }else{
-            self.ui_subtitle.isHidden = true
-        }
+        if choice.title == "Proposition de services" {
+                   self.ui_contraintbottom.constant = 45
+                   // Attribuer le texte formaté au label
+                   let attributedString = NSMutableAttributedString(string: "Propositions de services\n", attributes: [
+                       .font: UIFont(name: "Quicksand-Bold", size: 14)!
+                   ])
+                   let detailsString = NSAttributedString(string: "(lessive, impression de documents, aide administrative...)", attributes: [
+                       .font: UIFont(name: "NunitoSans-Regular", size: 14)!
+                   ])
+                   attributedString.append(detailsString)
+                   self.ui_title_choice_label.attributedText = attributedString
+               } else {
+                   self.ui_title_choice_label.text = choice.title
+                   self.ui_contraintbottom.constant = 5
+               }
         if isSelected {
             ui_image_check.image = UIImage(named: "ic_onboarding_checked")
             ui_view_container.backgroundColor = UIColor(red: 255/255, green: 245/255, blue: 235/255, alpha: 0.7)

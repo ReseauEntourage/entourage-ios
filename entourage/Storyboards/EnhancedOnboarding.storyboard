@@ -150,8 +150,9 @@
                                 <rect key="frame" x="0.0" y="748" width="393" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="big-lG-WHQ">
-                                        <rect key="frame" x="144.66666666666666" y="11" width="104" height="48"/>
+                                        <rect key="frame" x="136.66666666666666" y="11" width="119.99999999999997" height="48"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="6QP-f5-G1B"/>
                                             <constraint firstAttribute="height" constant="48" id="CCx-M5-ESV"/>
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>

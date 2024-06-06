@@ -95,15 +95,15 @@ class EnhancedViewController: UIViewController {
         }
         // Initialize interest choices
         interestChoices = [
-            OnboardingChoice(id: "sport", img: "interest_jeux", title: "Sport"),
-            OnboardingChoice(id: "animaux", img: "interest_don-materiel", title: "Animaux"),
+            OnboardingChoice(id: "sport", img: "interest_sport", title: "Sport"),
+            OnboardingChoice(id: "animaux", img: "interest_animaux", title: "Animaux"),
             OnboardingChoice(id: "marauding", img: "interest_rencontre-nomade", title: "Rencontres nomades"),
             OnboardingChoice(id: "cuisine", img: "interest_cuisine", title: "Cuisine"),
             OnboardingChoice(id: "jeux", img: "interest_jeux", title: "Jeux"),
             OnboardingChoice(id: "activites", img: "interest_activite-manuelle", title: "Activités manuelles"),
             OnboardingChoice(id: "bien-etre", img: "interest_bien-etre", title: "Bien-être"),
             OnboardingChoice(id: "nature", img: "interest_nature", title: "Nature"),
-            OnboardingChoice(id: "culture", img: "interest_moment de partage", title: "Art & Culture"),
+            OnboardingChoice(id: "culture", img: "interest_art", title: "Art & Culture"),
             OnboardingChoice(id: "other", img: "interest_autre", title: "Autre")
         ]
         let interests = Set(currentUser.interests ?? [])

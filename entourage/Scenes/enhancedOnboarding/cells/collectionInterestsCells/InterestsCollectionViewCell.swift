@@ -32,7 +32,7 @@ class InterestsCollectionViewCell:UICollectionViewCell{
         if isSelected {
             ui_image_check.image = UIImage(named: "ic_onboarding_checked")
             self.ui_container_view.layer.borderColor = UIColor.appOrangeLight.cgColor
-            self.ui_container_view.backgroundColor = UIColor(red: 255/255, green: 156/255, blue: 93/255, alpha: 0.5)
+            self.ui_container_view.backgroundColor = UIColor(red: 255/255, green: 245/255, blue: 235/255, alpha: 0.5)
         }else{
             ui_image_check.image = UIImage(named: "ic_onboarding_unchecked")
             self.ui_container_view.layer.borderColor = UIColor.appGrey151.cgColor
