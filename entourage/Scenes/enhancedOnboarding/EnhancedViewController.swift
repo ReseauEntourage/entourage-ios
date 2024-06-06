@@ -41,6 +41,7 @@ class EnhancedViewController: UIViewController {
     var involvementChoices: [OnboardingChoice] = []
     var interestChoices: [OnboardingChoice] = []
     var returnHome = false
+    var hasChangedMod = false
 
     
     override func viewDidLoad() {
@@ -140,9 +141,12 @@ class EnhancedViewController: UIViewController {
         
         tableDTO.append(.buttonCell)
         ui_tableview.reloadData()
-        DispatchQueue.main.async {
-            if self.tableDTO.count > 0 {
-                self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        if hasChangedMod {
+            hasChangedMod = false
+            DispatchQueue.main.async {
+                if self.tableDTO.count > 0 {
+                    self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                }
             }
         }
     }
@@ -273,6 +277,7 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
             }
             loadDTO() // Reload to update selection state
         case .backArrow: 
+            hasChangedMod = true
             let config = EnhancedOnboardingConfiguration.shared
             if config.isInterestsFromSetting {
                 self.dismiss(animated: true) {
@@ -310,6 +315,7 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
     }
     
     func onNextClick() {
+        hasChangedMod = true
         switch mode{
         case .interest:
             AnalyticsLoggerManager.logEvent(name: onboarding_interests_next_clic)
