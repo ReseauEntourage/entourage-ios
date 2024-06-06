@@ -610,10 +610,8 @@ extension HomeV2ViewController{
                 }else{
                     self?.isContributionPreference = false
                 }
-                if ((self?.isContributionPreference) != nil) {
-                    let config = EnhancedOnboardingConfiguration.shared
-                    config.preference = "contribution"
-                }
+                let config = EnhancedOnboardingConfiguration.shared
+                config.preference = userHome.preference ?? ""
                 
                 if UserDefaults.currentUser?.addressPrimary == nil
                     || userHome.preference == nil {
