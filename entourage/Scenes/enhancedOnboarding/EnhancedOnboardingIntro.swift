@@ -27,13 +27,17 @@ class EnhancedOnboardingIntro:UIViewController{
         }
         self.ui_btn_later.addTarget(self, action: #selector(onConfigureLaterClick), for: .touchUpInside)
         self.ui_btn_start.addTarget(self, action: #selector(onStartClick), for: .touchUpInside)
+        AnalyticsLoggerManager.logEvent(name: onboarding_welcome_view)
+
     }
     
     @objc func onConfigureLaterClick(){
+        AnalyticsLoggerManager.logEvent(name: onboarding_welcome_config_later_clic)
         AppState.navigateToMainApp()
     }
 
     @objc func onStartClick(){
+        AnalyticsLoggerManager.logEvent(name: onboarding_welcome_next_clic)
         presentViewControllerWithAnimation(identifier: "enhancedOnboarding")
     }
     

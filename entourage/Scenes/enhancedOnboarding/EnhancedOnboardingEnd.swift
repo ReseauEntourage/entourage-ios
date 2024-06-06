@@ -35,9 +35,11 @@ class EnhancedOnboardingEnd:UIViewController{
         if config.isOnboardingFromSetting{
             configureOrangeButton(ui_btn_go_event, withTitle: "button_title_for_re_onboarding_end".localized)
         }
+        AnalyticsLoggerManager.logEvent(name: onboarding_end_view)
     }
     
     @objc func onEventClick(){
+        AnalyticsLoggerManager.logEvent(name: onboarding_end_browse_events_clic)
         AppState.navigateToMainApp()
     }
     

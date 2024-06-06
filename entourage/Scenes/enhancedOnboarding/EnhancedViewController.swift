@@ -118,16 +118,19 @@ class EnhancedViewController: UIViewController {
         
         switch self.mode {
         case .interest:
+            AnalyticsLoggerManager.logEvent(name: onboarding_interests_view)
             tableDTO.append(.backArrow)
             tableDTO.append(.title(title: "Mes centres d’intérêts", subtitle: "Pour vous aider à trouver des activités qui vous correspondent, dites-nous ce qui vous intéresse."))
             tableDTO.append(.collectionViewCell(choices: interestChoices))
         case .concern:
+            AnalyticsLoggerManager.logEvent(name: onboarding_donations_categories_view)
             tableDTO.append(.backArrow)
             tableDTO.append(.title(title: "Mes catégories d’entraide", subtitle: "Sélectionnez les catégories d'entraide que vous souhaitez voir en priorité."))
             concernChoices.forEach { choice in
                 tableDTO.append(.fullSizeCell(choice: choice, isSelected: selectedIds.contains(choice.id)))
             }
         case .involvement:
+            AnalyticsLoggerManager.logEvent(name: onboarding_actions_view)
             tableDTO.append(.backArrow)
             tableDTO.append(.title(title: "Comment souhaitez-vous agir au sein de la communauté Entourage ?", subtitle: "(Eh oui, vous avez le droit de choisir plusieurs options !)"))
             involvementChoices.forEach { choice in
@@ -294,11 +297,28 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
     func onConfigureLaterClick() {
+        switch mode{
+        case .interest:
+            AnalyticsLoggerManager.logEvent(name: onboarding_interests_config_later_clic)
+        case .concern:
+            AnalyticsLoggerManager.logEvent(name: onboarding_donations_categories_config_later_clic)
+        case .involvement:
+            AnalyticsLoggerManager.logEvent(name: onboarding_actions_config_later_clic)
+        }
         self.returnHome = true
         self.updateUserChoices()
     }
     
     func onNextClick() {
+        switch mode{
+        case .interest:
+            AnalyticsLoggerManager.logEvent(name: onboarding_interests_next_clic)
+        case .concern:
+            AnalyticsLoggerManager.logEvent(name: onboarding_donations_categories_next_clic)
+        case .involvement:
+            AnalyticsLoggerManager.logEvent(name: onboarding_actions_next_clic)
+        }
+        
         let config = EnhancedOnboardingConfiguration.shared
         if config.isInterestsFromSetting {
             self.updateUserChoices()
