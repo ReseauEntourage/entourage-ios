@@ -150,12 +150,11 @@
                                 <rect key="frame" x="0.0" y="748" width="393" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="big-lG-WHQ">
-                                        <rect key="frame" x="121.66666666666669" y="11" width="150" height="48"/>
+                                        <rect key="frame" x="134.66666666666666" y="11" width="123.99999999999997" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="6QP-f5-G1B"/>
                                             <constraint firstAttribute="height" constant="48" id="CCx-M5-ESV"/>
                                         </constraints>
-                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Commencer">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
