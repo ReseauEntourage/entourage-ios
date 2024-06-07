@@ -567,7 +567,6 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
-                
                 print("eho identifier : " , identifier)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.neighborhood?.isMember)
