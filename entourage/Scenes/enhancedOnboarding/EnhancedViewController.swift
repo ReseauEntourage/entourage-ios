@@ -71,27 +71,26 @@ class EnhancedViewController: UIViewController {
         }
         // Initialize concern choices
         concernChoices = [
-            OnboardingChoice(id: "sharing_time", img: "ic_onboarding_entraide_share", title: "Temps de partage"),
-            OnboardingChoice(id: "material_donations", img: "ic_onboarding_entraide_material", title: "Dons matériels"),
-            OnboardingChoice(id: "services", img: "ic_onboarding_entraide_service", title: "Proposition de services")
+            OnboardingChoice(id: "sharing_time", img: "img_asset_onboarding_share", title: "Temps de partage"),
+            OnboardingChoice(id: "material_donations", img: "img_asset_onboarding_entraide", title: "Dons matériels"),
+            OnboardingChoice(id: "services", img: "img_asset_onboarding_service", title: "Proposition de services")
         ]
         
         
         // Initialize involvement choices
-        print("config " + EnhancedOnboardingConfiguration.shared.preference)
         if EnhancedOnboardingConfiguration.shared.preference == "contribution"{
             involvementChoices = [
-                OnboardingChoice(id: "outings", img: "ic_onboarding_action_wish_convivialite", title: "Participer à des événements de convivialité"),
-                OnboardingChoice(id: "both_actions", img: "ic_onboarding_action_wish_coup_de_pouce", title: "Solliciter un coup de pouce"),
-                OnboardingChoice(id: "neighborhoods", img: "ic_onboarding_action_wish_discussion", title: "Rejoindre un groupe de voisins et tisser des liens"),
-                OnboardingChoice(id: "pois", img: "ic_onboarding_action_wish_discussion", title: "Trouver des structures solidaires à proximité")
+                OnboardingChoice(id: "outings", img: "img_asset_onboarding_convivialite", title: "Participer à des événements de convivialité"),
+                OnboardingChoice(id: "both_actions", img: "img_asset_onboarding_pouce", title: "Solliciter un coup de pouce"),
+                OnboardingChoice(id: "neighborhoods", img: "img_asset_onboarding_discussion", title: "Rejoindre un groupe de voisins et tisser des liens"),
+                OnboardingChoice(id: "pois", img: "img_asset_onboarding_pois", title: "Trouver des structures solidaires à proximité")
             ]
         }else{
             involvementChoices = [
-                OnboardingChoice(id: "resources", img: "ic_onboarding_action_wish_sensibilisation", title: "Apprendre avec des contenus pédagogiques"),
-                OnboardingChoice(id: "outings", img: "ic_onboarding_action_wish_convivialite", title: "Participer à des événements de convivialité"),
-                OnboardingChoice(id: "both_actions", img: "ic_onboarding_action_wish_coup_de_pouce", title: "Donner ou solliciter un coup de pouce"),
-                OnboardingChoice(id: "neighborhoods", img: "ic_onboarding_action_wish_discussion", title: "Rejoindre un groupe de voisins et tisser des liens")
+                OnboardingChoice(id: "resources", img: "img_asset_onboarding_sensib", title: "Apprendre avec des contenus pédagogiques"),
+                OnboardingChoice(id: "outings", img: "img_asset_onboarding_convivialite", title: "Participer à des événements de convivialité"),
+                OnboardingChoice(id: "both_actions", img: "img_asset_onboarding_pouce", title: "Donner ou solliciter un coup de pouce"),
+                OnboardingChoice(id: "neighborhoods", img: "img_asset_onboarding_discussion", title: "Rejoindre un groupe de voisins et tisser des liens")
             ]
         }
         // Initialize interest choices
