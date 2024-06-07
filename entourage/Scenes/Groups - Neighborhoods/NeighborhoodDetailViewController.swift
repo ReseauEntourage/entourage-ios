@@ -264,33 +264,8 @@ class NeighborhoodDetailViewController: UIViewController {
                 self.neighborhood?.messages?.append(contentsOf: post)
                 self.splitMessages()
 
-                // Mise à jour de la vue table en fonction des scénarios
-                self.ui_tableview.performBatchUpdates({
-                    let currentSections = self.ui_tableview.numberOfSections
-
-                    // Scénario 1: Aucun message
-                    if self.neighborhood?.messages?.isEmpty ?? true {
-
-                    } else {
-                        // Scénario 2: Messages anciens et/ou nouveaux
-                        if self.hasNewAndOldSections {
-                            if currentSections == 1 {
-                                // Ajouter une section pour les nouveaux messages
-                                self.ui_tableview.insertSections(IndexSet(integer: 1), with: .fade)
-                            }
-                            // Recharger la section des messages anciens
-                            self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .fade)
-                        } else if currentSections == 3 {
-                            // Revenir à une seule section si nécessaire
-                            self.ui_tableview.deleteSections(IndexSet(integer: 2), with: .fade)
-                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
-                        } else {
-                            // Recharger la section existante
-                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
-                        }
-                    }
-                }, completion: nil)
-
+                // Recharger la table view
+                self.ui_tableview.reloadData()
                 self.isLoading = false
             }
         }
@@ -307,12 +282,14 @@ class NeighborhoodDetailViewController: UIViewController {
         messagesOld.removeAll()
         
         for post in messages {
-            if post.isRead {
-                messagesOld.append(post)
-            }
-            else {
-                messagesNew.append(post)
-            }
+            messagesOld.append(post)
+//
+//            if post.isRead {
+//                messagesOld.append(post)
+//            }
+//            else {
+//                messagesNew.append(post)
+//            }
         }
         
         hasNewAndOldSections = messagesOld.count > 0 && messagesNew.count > 0

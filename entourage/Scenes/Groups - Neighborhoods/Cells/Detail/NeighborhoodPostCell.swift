@@ -253,33 +253,46 @@ class NeighborhoodPostCell: UITableViewCell {
         }
     }
     
-    func configureSurveyNumberLabel(){
-        if let survey = self.postMessage.survey {
-            let totalVotes = survey.totalVotes // Utilisez l'extension pour obtenir le total des votes
-            let votesText = "\(totalVotes) vote\(totalVotes > 1 ? "s" : "")" // Gère le pluriel
-            if totalVotes == 0 {
-                self.ui_label_nb_votes.isHidden = true
-                return
-            }else{
-                self.ui_label_nb_votes.isHidden = false
-            }
-            // Créer le texte souligné pour les votes
-            let votesAttrString = Utils.formatStringUnderline(textString: votesText, textColor: .black, font: ApplicationTheme.getFontChampInput().font)
-            
-            // Créer le texte final avec le " - " non souligné si commentsCount > 0
-            let finalAttrString = NSMutableAttributedString()
-            finalAttrString.append(votesAttrString)
-            
-            if let commentsCount = self.postMessage.commentsCount, commentsCount > 0 {
-                finalAttrString.append(NSAttributedString(string: " - ", attributes: [NSAttributedString.Key.font: ApplicationTheme.getFontChampInput().font, NSAttributedString.Key.foregroundColor: UIColor.black]))
-            }
-            // Assigner le texte au label
-            ui_label_nb_votes.attributedText = finalAttrString
+    func configureSurveyNumberLabel() {
+        // Vérifiez si postMessage et survey ne sont pas nil
+        guard let postMessage = self.postMessage, let survey = postMessage.survey else {
+            // Log ou gestion du cas où postMessage ou survey est nil
+            print("postMessage ou survey est nil")
+            return
+        }
+        
+        let totalVotes = survey.totalVotes // Utilisez l'extension pour obtenir le total des votes
+        let votesText = "\(totalVotes) vote\(totalVotes > 1 ? "s" : "")" // Gère le pluriel
+
+        if totalVotes == 0 {
+            self.ui_label_nb_votes?.isHidden = true
+            return
         } else {
-            // Gérez le cas où `message.survey` est nul
+            self.ui_label_nb_votes?.isHidden = false
         }
 
+        // Créer le texte souligné pour les votes
+        let votesAttrString = Utils.formatStringUnderline(textString: votesText, textColor: .black, font: ApplicationTheme.getFontChampInput().font)
+
+        // Créer le texte final avec le " - " non souligné si commentsCount > 0
+        let finalAttrString = NSMutableAttributedString()
+        finalAttrString.append(votesAttrString)
+
+        if let commentsCount = postMessage.commentsCount, commentsCount > 0 {
+            finalAttrString.append(NSAttributedString(string: " - ", attributes: [
+                NSAttributedString.Key.font: ApplicationTheme.getFontChampInput().font,
+                NSAttributedString.Key.foregroundColor: UIColor.black
+            ]))
+        }
+
+        // Assigner le texte au label
+        if let label = self.ui_label_nb_votes {
+            label.attributedText = finalAttrString
+        } else {
+            print("ui_label_nb_votes est nil")
+        }
     }
+
 
     class RoundedView: UIView {
         override var bounds: CGRect {
