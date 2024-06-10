@@ -11,7 +11,8 @@ import Foundation
 struct DeepLinkManager {
     
     static func presentAction(notification:NotificationPushData) {
-        print("notification" , notification)
+        
+     //   print("notification" , notification)
         if notification.context == "outing_on_day_before"{
             showHomeUniversalLinkWithParam(notification.instanceId)
             return
@@ -41,6 +42,7 @@ struct DeepLinkManager {
         }
         if notification.context != nil && !notification.context!.isEmpty{
             if notification.context == "h1" {
+                print("condition " , notification.context == "h1")
                 DeepLinkManager.showWelcomeOne()
                 return
             }
@@ -258,6 +260,7 @@ struct DeepLinkManager {
     }
     
     static func showWelcomeOne(){
+        print("eho")
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {

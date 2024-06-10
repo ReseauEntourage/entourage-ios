@@ -126,8 +126,9 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
                 }
             }
         }
-        
-        DeepLinkManager.presentAction(notification: notif.getNotificationPushData())
+        self.dismiss(animated: true) {
+            DeepLinkManager.presentAction(notification: notif.getNotificationPushData())
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
