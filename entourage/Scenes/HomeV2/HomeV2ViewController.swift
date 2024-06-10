@@ -261,6 +261,7 @@ class HomeV2ViewController:UIViewController{
             navVC.modalPresentationStyle = .fullScreen
             if let vc = navVC.topViewController as? NotificationsInAppViewController {
                 vc.hasToShowDot =  notificationCount > 0
+                vc.delegate = self
             }
             self.tabBarController?.present(navVC, animated: true)
         }
@@ -937,5 +938,11 @@ extension HomeV2ViewController:Phase3fromAppDelegate{
                 
             }
         }
+    }
+}
+
+extension HomeV2ViewController:NotificationDelegate{
+    func onEventLastDay(id: Int) {
+        self.getEventAndLaunchPopup(eventId: String(id))
     }
 }
