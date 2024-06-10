@@ -12,7 +12,7 @@ struct DeepLinkManager {
     
     static func presentAction(notification:NotificationPushData) {
         
-        print("notification" , notification)
+     //   print("notification" , notification)
         if notification.context == "outing_on_day_before"{
             showHomeUniversalLinkWithParam(notification.instanceId)
             return
@@ -405,15 +405,24 @@ struct DeepLinkManager {
         }
     }
     static func showHomeUniversalLinkWithParam(_ eventId: Int) {
-        DispatchQueue.main.async {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = sb.instantiateViewController(withIdentifier: "homeVC") as? HomeV2ViewController {
-                vc.shouldLaunchEventPopup = eventId
-                AppState.getTopViewController()?.present(vc, animated: true)
+        if let vc = AppState.getTopViewController() {
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                print("appState " , AppState.getTopViewController())
+                if let homeVC = AppState.getTopViewController() as? HomeV2ViewController {
+                    homeVC.shouldLaunchEventPopup = eventId
+                    _tabbar.showHome()
+                }
+            }
+            else{ 
+                vc.dismiss(animated: true) {
+                    let _currentVc = AppState.getTopViewController()
+                    if let _home = _currentVc as? HomeV2ViewController{
+                        _home.shouldLaunchEventPopup = eventId
+                    }
+                }
             }
         }
     }
-
     
     static func showContribListUniversalLink() {
         if let vc = AppState.getTopViewController() {
