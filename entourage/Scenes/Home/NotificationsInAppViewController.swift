@@ -127,6 +127,7 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
             }
         }
         self.dismiss(animated: true) {
+            print("appstate vc " , AppState.getTopViewController())
             DeepLinkManager.presentAction(notification: notif.getNotificationPushData())
         }
     }

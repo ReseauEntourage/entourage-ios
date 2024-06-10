@@ -405,23 +405,28 @@ struct DeepLinkManager {
         }
     }
     static func showHomeUniversalLinkWithParam(_ eventId: Int) {
-        if let vc = AppState.getTopViewController() {
-            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
-                print("appState " , AppState.getTopViewController())
-                if let homeVC = AppState.getTopViewController() as? HomeV2ViewController {
-                    homeVC.shouldLaunchEventPopup = eventId
-                    _tabbar.showHome()
+        DispatchQueue.main.async {
+            if let vc = AppState.getTopViewController() {
+                if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                    if let homeVC = vc as? HomeV2ViewController {
+                        homeVC.shouldLaunchEventPopup = eventId
+                        _tabbar.showHome()
+                        print("eho")
+                    }
                 }
-            }
-            else{ 
-                vc.dismiss(animated: true) {
-                    let _currentVc = AppState.getTopViewController()
-                    if let _home = _currentVc as? HomeV2ViewController{
-                        _home.shouldLaunchEventPopup = eventId
+                else{
+                    vc.dismiss(animated: true) {
+                        let _currentVc = AppState.getTopViewController()
+                        if let _home = _currentVc as? HomeV2ViewController{
+                            _home.shouldLaunchEventPopup = eventId
+                            print("eho2")
+
+                        }
                     }
                 }
             }
         }
+
     }
     
     static func showContribListUniversalLink() {
