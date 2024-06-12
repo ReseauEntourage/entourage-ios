@@ -22,6 +22,7 @@ class HomeCellEvent:UICollectionViewCell{
     
     @IBOutlet weak var ui_image_interest: UIImageView!
     @IBOutlet weak var ui_label_title: UILabel!
+    @IBOutlet weak var ic_entoutou: UIImageView!
     
     //VARIABLE
     class var identifier: String {
@@ -47,6 +48,18 @@ class HomeCellEvent:UICollectionViewCell{
         }
         else {
             ui_image_event.image = UIImage.init(named: "ic_placeholder_event")
+        }
+        if let _author = event.author {
+            if let _roles = _author.communityRoles{
+                print("eho")
+                if _roles.contains("Équipe Entourage") || _roles.contains("Ambassadeur") {
+                    self.ic_entoutou.isHidden = false
+                }else {
+                    self.ic_entoutou.isHidden = true
+                }
+            }else{
+                self.ic_entoutou.isHidden = true
+            }
         }
         
         ui_label_date.text = event.startDateFormatted

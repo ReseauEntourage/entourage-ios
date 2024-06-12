@@ -97,7 +97,7 @@ class EnhancedViewController: UIViewController {
         interestChoices = [
             OnboardingChoice(id: "sport", img: "interest_sport", title: "Sport"),
             OnboardingChoice(id: "animaux", img: "interest_animaux", title: "Animaux"),
-            OnboardingChoice(id: "marauding", img: "interest_rencontre-nomade", title: "Rencontres nomades"),
+            OnboardingChoice(id: "marauding", img: "interest_rencontre-nomade", title: "Maraudes sociales"),
             OnboardingChoice(id: "cuisine", img: "interest_cuisine", title: "Cuisine"),
             OnboardingChoice(id: "jeux", img: "interest_jeux", title: "Jeux"),
             OnboardingChoice(id: "activites", img: "interest_activite-manuelle", title: "Activités manuelles"),
