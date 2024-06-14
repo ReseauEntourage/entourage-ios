@@ -247,7 +247,7 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
         case .firstHeader:
             return UITableView.automaticDimension
         case .myGroupCell:
-            return 130
+            return 152
         case .secondHeader:
             return UITableView.automaticDimension
         case .discoverGroupCell(_):
