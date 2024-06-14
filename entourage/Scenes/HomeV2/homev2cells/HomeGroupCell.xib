@@ -25,16 +25,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yOs-36-Zwf">
-                        <rect key="frame" x="12" y="12" width="180" height="167"/>
+                        <rect key="frame" x="6" y="12" width="192" height="167"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e5z-oP-k0g">
-                                <rect key="frame" x="0.0" y="0.0" width="180" height="70"/>
+                                <rect key="frame" x="0.0" y="0.0" width="192" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="4dD-fw-OpK"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EoD-YF-Wmm">
-                                <rect key="frame" x="0.0" y="70" width="180" height="97"/>
+                                <rect key="frame" x="0.0" y="70" width="192" height="97"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="14"/>
                                 <color key="textColor" name="grey_dark"/>
@@ -59,7 +59,7 @@
                             <constraint firstAttribute="height" constant="24" id="G7w-Kp-dyC"/>
                             <constraint firstAttribute="width" constant="24" id="yEz-ih-jIT"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -74,9 +74,9 @@
                     <constraint firstItem="Qgv-Sd-9Ku" firstAttribute="top" secondItem="e5z-oP-k0g" secondAttribute="top" constant="-12" id="27L-el-MqR"/>
                     <constraint firstAttribute="bottom" secondItem="yOs-36-Zwf" secondAttribute="bottom" constant="12" id="Btz-KF-l43"/>
                     <constraint firstItem="yOs-36-Zwf" firstAttribute="top" secondItem="JrJ-86-Hc3" secondAttribute="top" constant="12" id="UOJ-pE-u9p"/>
-                    <constraint firstItem="Qgv-Sd-9Ku" firstAttribute="leading" secondItem="e5z-oP-k0g" secondAttribute="trailing" constant="-12" id="gJU-CM-ykl"/>
-                    <constraint firstAttribute="trailing" secondItem="yOs-36-Zwf" secondAttribute="trailing" constant="12" id="vrD-ib-ddZ"/>
-                    <constraint firstItem="yOs-36-Zwf" firstAttribute="leading" secondItem="JrJ-86-Hc3" secondAttribute="leading" constant="12" id="wqt-Hz-yPU"/>
+                    <constraint firstItem="Qgv-Sd-9Ku" firstAttribute="leading" secondItem="e5z-oP-k0g" secondAttribute="trailing" constant="-18" id="gJU-CM-ykl"/>
+                    <constraint firstAttribute="trailing" secondItem="yOs-36-Zwf" secondAttribute="trailing" constant="6" id="vrD-ib-ddZ"/>
+                    <constraint firstItem="yOs-36-Zwf" firstAttribute="leading" secondItem="JrJ-86-Hc3" secondAttribute="leading" constant="6" id="wqt-Hz-yPU"/>
                 </constraints>
             </collectionViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
