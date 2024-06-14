@@ -1522,3 +1522,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "edit_profile_cell_onboarding" = "Personnaliser mon compte";
 "button_title_for_setting_onboarding" = "Enregistrer";
 "button_title_for_re_onboarding_end" = "Revenir au profil";
+
+"notif_demand_title" = "Activez les notifications pour ne rien manquer";
+"notif_demand_subtitle" = "Recevez les entraides près de chez vous, soyez informé des événements locaux, des publications de vos voisins et des messages personnels en temps réel.";
+"notif_demand_btn_accept" = "Activer les notifications";
+"notif_demand_btn_refuse" = "Pas maintenant";

@@ -821,10 +821,10 @@ Contacter l'équipe Entourage.</string>
             </objects>
             <point key="canvasLocation" x="2043" y="800"/>
         </scene>
-        <!--View Controller-->
+        <!--Notification Demand View Controller-->
         <scene sceneID="J0U-pb-pvh">
             <objects>
-                <viewController id="a7y-uo-fFQ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationDemandViewController" id="a7y-uo-fFQ" customClass="NotificationDemandViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6aR-bS-9Um">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -888,6 +888,12 @@ Contacter l'équipe Entourage.</string>
                             <constraint firstItem="6f3-DC-rGn" firstAttribute="trailing" secondItem="J4j-wp-j9a" secondAttribute="trailing" constant="24" id="yjT-yS-oE0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ui_btn_accept_notif" destination="YKu-0p-pWe" id="AlM-nX-ibz"/>
+                        <outlet property="ui_btn_disable_notif" destination="Rob-gZ-Z7M" id="tzp-bS-ofk"/>
+                        <outlet property="ui_subtitle" destination="Hf8-dM-gh5" id="ooL-Ot-G7T"/>
+                        <outlet property="ui_title" destination="fGU-8h-gID" id="sfc-tW-Lyi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOj-ol-eiK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

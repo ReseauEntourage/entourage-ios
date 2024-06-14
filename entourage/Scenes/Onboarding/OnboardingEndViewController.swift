@@ -56,7 +56,12 @@ class OnboardingEndViewController: UIViewController {
                 newUser.phone = user?.phone
                 UserDefaults.currentUser = newUser
             }
-            AppState.navigateToMainApp()
+            DispatchQueue.main.async {
+                let sb = UIStoryboard.init(name: StoryboardName.onboarding, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
         }
     }
 }

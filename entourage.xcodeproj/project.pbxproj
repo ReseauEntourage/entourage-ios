@@ -407,6 +407,7 @@
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
 		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
 		264C1AFC29AF5BED0083F83E /* HeaderReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */; };
+		264C6AB82C19E5F200E3518D /* NotificationDemandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C6AB72C19E5F200E3518D /* NotificationDemandViewController.swift */; };
 		265565F22A3C9DB700CEFB3D /* explosion.json in Resources */ = {isa = PBXBuildFile; fileRef = 265565F12A3C9DB700CEFB3D /* explosion.json */; };
 		26584C482ACC418000ABD401 /* HomeV2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26584C472ACC418000ABD401 /* HomeV2.xcassets */; };
 		26584C4A2ACC48ED00ABD401 /* HomeCellMapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26584C492ACC48ED00ABD401 /* HomeCellMapButton.swift */; };
@@ -921,6 +922,7 @@
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
 		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
 		264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderReportView.swift; sourceTree = "<group>"; };
+		264C6AB72C19E5F200E3518D /* NotificationDemandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDemandViewController.swift; sourceTree = "<group>"; };
 		265565F12A3C9DB700CEFB3D /* explosion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = explosion.json; sourceTree = "<group>"; };
 		26584C472ACC418000ABD401 /* HomeV2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HomeV2.xcassets; sourceTree = "<group>"; };
 		26584C492ACC48ED00ABD401 /* HomeCellMapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellMapButton.swift; sourceTree = "<group>"; };
@@ -1826,6 +1828,7 @@
 				02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */,
 				02A764E02938ADDA00B92B32 /* OnboardingStartCell.swift */,
 				02FE55B42939F6020076F57A /* OnboardingEndCell.swift */,
+				264C6AB72C19E5F200E3518D /* NotificationDemandViewController.swift */,
 			);
 			name = Onboarding;
 			path = entourage/Scenes/Onboarding;
@@ -2746,6 +2749,7 @@
 				026819AA278E00A200A98A4A /* Utils.swift in Sources */,
 				02D10D8B2873236500ACC267 /* MJPopupViewController.swift in Sources */,
 				02E7845F2811A91900177F13 /* NeighborhoodHomeViewController.swift in Sources */,
+				264C6AB82C19E5F200E3518D /* NotificationDemandViewController.swift in Sources */,
 				2609BFA42AC2BE640052111C /* HomeV2CellTitle.swift in Sources */,
 				02F5279A2799A1F300929431 /* GuideModels.swift in Sources */,
 				26BEEEC32C00C32B00169FBA /* EnhancedOnboardingEnd.swift in Sources */,

@@ -124,6 +124,7 @@ class NeighborhoodMessageCell: UITableViewCell {
             }
         }
         if let _status = message.status {
+            print("status ", _status)
             if _status == "deleted" {
                 ui_message.text = "deleted_comment".localized
                 ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
@@ -144,16 +145,20 @@ class NeighborhoodMessageCell: UITableViewCell {
                     ui_message.text = message.content
                     ui_message.textColor = UIColor.black // Changer la couleur du texte
                     ui_view_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
+                    
+                }
+                if let _translation = message.contentTranslations{
+                    if(isTranslated && message.status != "deleted"){
+                        print("message", _translation.translation)
+                        ui_message.text = _translation.translation
+                    }else{
+                        print("message", _translation.translation)
+                        ui_message.text = _translation.original
+                    }
                 }
             }
         }
-        if let _translation = message.contentTranslations{
-            if(isTranslated){
-                ui_message.text = _translation.translation
-            }else{
-                ui_message.text = _translation.original
-            }
-        }
+        
         
         layoutIfNeeded()
     }

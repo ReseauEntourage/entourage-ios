@@ -2316,26 +2316,42 @@
                                                         <constraint firstAttribute="width" constant="88" id="Ttm-l8-fcq"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBq-e5-Boz">
+                                                    <rect key="frame" x="92" y="6" width="24" height="24"/>
+                                                    <color key="backgroundColor" name="orange_app"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="VrU-RQ-b13"/>
+                                                        <constraint firstAttribute="height" constant="24" id="cr8-kh-oxf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                                            <real key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="754" text="Dansons ensemble sous le pont d’Avignon" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tE6-ri-5Om">
-                                                    <rect key="frame" x="114" y="16" width="194" height="37.5"/>
+                                                    <rect key="frame" x="124" y="16" width="194" height="37.5"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEp-aq-Q9W">
-                                                    <rect key="frame" x="114" y="57.5" width="32" height="18"/>
+                                                    <rect key="frame" x="124" y="57.5" width="32" height="18"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                                                     <color key="textColor" name="gris_112"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9m-nz-wfs">
-                                                    <rect key="frame" x="114" y="77.5" width="32" height="18"/>
+                                                    <rect key="frame" x="124" y="77.5" width="32" height="18"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                                                     <color key="textColor" name="gris_112"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8br-eu-UYc">
-                                                    <rect key="frame" x="112" y="99.5" width="0.0" height="0.0"/>
+                                                    <rect key="frame" x="122" y="99.5" width="0.0" height="0.0"/>
                                                     <subviews>
                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_small_sport" translatesAutoresizingMaskIntoConstraints="NO" id="fw5-xW-K1o">
                                                             <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
@@ -2398,14 +2414,16 @@
                                                 <constraint firstAttribute="trailing" secondItem="KkR-5U-fiW" secondAttribute="trailing" id="5KV-hQ-kcI"/>
                                                 <constraint firstItem="cGj-3Z-m8R" firstAttribute="leading" secondItem="0vV-ls-7J7" secondAttribute="leading" constant="16" id="6Fl-6P-a7f"/>
                                                 <constraint firstItem="tE6-ri-5Om" firstAttribute="top" secondItem="cGj-3Z-m8R" secondAttribute="top" constant="-2" id="980-wr-ddQ"/>
+                                                <constraint firstItem="pBq-e5-Boz" firstAttribute="top" secondItem="cGj-3Z-m8R" secondAttribute="top" constant="-12" id="9yv-U8-UXK"/>
                                                 <constraint firstItem="TEp-aq-Q9W" firstAttribute="leading" secondItem="tE6-ri-5Om" secondAttribute="leading" id="Dye-Jx-sL6"/>
-                                                <constraint firstItem="tE6-ri-5Om" firstAttribute="leading" secondItem="cGj-3Z-m8R" secondAttribute="trailing" constant="10" id="PHV-Xh-gvv"/>
+                                                <constraint firstItem="tE6-ri-5Om" firstAttribute="leading" secondItem="cGj-3Z-m8R" secondAttribute="trailing" constant="20" id="PHV-Xh-gvv"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="V9m-nz-wfs" secondAttribute="trailing" constant="16" id="R6q-iz-X4m"/>
                                                 <constraint firstItem="cGj-3Z-m8R" firstAttribute="top" secondItem="0vV-ls-7J7" secondAttribute="top" constant="18" id="RoT-de-o64"/>
                                                 <constraint firstItem="8br-eu-UYc" firstAttribute="leading" secondItem="V9m-nz-wfs" secondAttribute="leading" constant="-2" id="SYY-0V-Erh"/>
                                                 <constraint firstItem="KkR-5U-fiW" firstAttribute="leading" secondItem="0vV-ls-7J7" secondAttribute="leading" id="XxI-57-ngi"/>
                                                 <constraint firstItem="V9m-nz-wfs" firstAttribute="leading" secondItem="TEp-aq-Q9W" secondAttribute="leading" id="ZCV-vl-VGk"/>
                                                 <constraint firstItem="8br-eu-UYc" firstAttribute="top" secondItem="V9m-nz-wfs" secondAttribute="bottom" constant="4" id="aGG-8R-AJJ"/>
+                                                <constraint firstItem="pBq-e5-Boz" firstAttribute="trailing" secondItem="cGj-3Z-m8R" secondAttribute="trailing" constant="12" id="cLQ-wc-aE0"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tE6-ri-5Om" secondAttribute="trailing" constant="16" id="fT5-mL-04T"/>
                                                 <constraint firstItem="TEp-aq-Q9W" firstAttribute="top" secondItem="tE6-ri-5Om" secondAttribute="bottom" constant="4" id="khK-aN-f4V"/>
                                                 <constraint firstItem="V9m-nz-wfs" firstAttribute="top" secondItem="TEp-aq-Q9W" secondAttribute="bottom" constant="2" id="prz-Dl-Obu"/>
@@ -2417,6 +2435,7 @@
                                         <connections>
                                             <outlet property="ui_events" destination="V9m-nz-wfs" id="kQa-02-pHk"/>
                                             <outlet property="ui_image" destination="cGj-3Z-m8R" id="nS4-ez-Jq0"/>
+                                            <outlet property="ui_label_news" destination="pBq-e5-Boz" id="RHr-Cw-3Vl"/>
                                             <outlet property="ui_members" destination="TEp-aq-Q9W" id="TBv-sr-V8e"/>
                                             <outlet property="ui_picto_1" destination="fw5-xW-K1o" id="6gU-fc-nKj"/>
                                             <outlet property="ui_picto_10" destination="m9a-z9-fjp" id="YPu-Pn-awq"/>

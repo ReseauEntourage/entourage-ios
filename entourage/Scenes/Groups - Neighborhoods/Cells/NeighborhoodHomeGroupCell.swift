@@ -24,6 +24,7 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
     @IBOutlet weak var ui_picto_8: UIImageView!
     @IBOutlet weak var ui_picto_9: UIImageView!
     @IBOutlet weak var ui_picto_10: UIImageView!
+    @IBOutlet weak var ui_label_news: UILabel!
     
     @IBOutlet weak var ui_label_admin: UILabel?
     class var identifier: String {
@@ -47,6 +48,22 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
     
     func populateCell(neighborhood:Neighborhood) {
         ui_title.text = neighborhood.name
+        
+        if let _unreadPostCount = neighborhood.unreadPostCount {
+            var numberOfPost = ""
+            if _unreadPostCount > 0 {
+                self.ui_label_news.isHidden = false
+                if _unreadPostCount > 9 {
+                    numberOfPost = "+9"
+                }else{
+                    numberOfPost = String(_unreadPostCount)
+                }
+            }else{
+                self.ui_label_news.isHidden = true
+            }
+        }else{
+            self.ui_label_news.isHidden = true
+        }
         
         if let imageUrl = neighborhood.image_url, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
             ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_photo_group"))
