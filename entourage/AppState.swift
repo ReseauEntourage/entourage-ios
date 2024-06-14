@@ -11,7 +11,7 @@ import SimpleKeychain
 struct AppState {
     
     static func checkNotifcationsAndGoMainScreen() {
-        //MARK: TODO Uncomment this if need to re send notif popup on home
+        //MARK: TODO Uncomment this if need to re send notif popup on home. Please do not remove this code
 //        let center = UNUserNotificationCenter.current()
 //        center.getNotificationSettings { settings in
 //            var status = settings.authorizationStatus
