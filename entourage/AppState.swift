@@ -11,25 +11,26 @@ import SimpleKeychain
 struct AppState {
     
     static func checkNotifcationsAndGoMainScreen() {
-        let center = UNUserNotificationCenter.current()
-        center.getNotificationSettings { settings in
-            var status = settings.authorizationStatus
-            
-            if #available(iOS 12.0, *) {
-                if status == UNAuthorizationStatus.provisional {
-                    status = UNAuthorizationStatus.notDetermined
-                }
-            }
-            
-            DispatchQueue.main.async {
-                if status == UNAuthorizationStatus.notDetermined {
-                    self.showPopNotification { isAccept in}
-                }
-                else {
-                    NotificationManager.promptUserForAuthorizations()
-                }
-            }
-        }
+        //MARK: TODO Uncomment this if need to re send notif popup on home
+//        let center = UNUserNotificationCenter.current()
+//        center.getNotificationSettings { settings in
+//            var status = settings.authorizationStatus
+//            
+//            if #available(iOS 12.0, *) {
+//                if status == UNAuthorizationStatus.provisional {
+//                    status = UNAuthorizationStatus.notDetermined
+//                }
+//            }
+//            
+//            DispatchQueue.main.async {
+//                if status == UNAuthorizationStatus.notDetermined {
+//                    self.showPopNotification { isAccept in}
+//                }
+//                else {
+//                    NotificationManager.promptUserForAuthorizations()
+//                }
+//            }
+//        }
         AppState.navigateToMainApp()
     }
     
