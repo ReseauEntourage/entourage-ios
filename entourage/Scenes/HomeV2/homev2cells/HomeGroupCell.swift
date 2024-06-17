@@ -41,6 +41,7 @@ class HomeGroupCell:UICollectionViewCell {
                     numberOfPost = "+9"
                 }else{
                     numberOfPost = String(_unreadPostCount)
+                    self.ui_label_news.text = numberOfPost
                 }
             }else{
                 self.ui_label_news.isHidden = true
