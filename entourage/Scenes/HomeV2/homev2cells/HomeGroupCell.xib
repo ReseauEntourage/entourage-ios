@@ -53,7 +53,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgv-Sd-9Ku">
-                        <rect key="frame" x="179" y="0.0" width="24" height="24"/>
+                        <rect key="frame" x="179" y="2" width="24" height="24"/>
                         <color key="backgroundColor" name="orange_app"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="G7w-Kp-dyC"/>
@@ -71,7 +71,7 @@
                 </subviews>
                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
-                    <constraint firstItem="Qgv-Sd-9Ku" firstAttribute="top" secondItem="e5z-oP-k0g" secondAttribute="top" constant="-12" id="27L-el-MqR"/>
+                    <constraint firstItem="Qgv-Sd-9Ku" firstAttribute="top" secondItem="e5z-oP-k0g" secondAttribute="top" constant="-10" id="27L-el-MqR"/>
                     <constraint firstAttribute="bottom" secondItem="yOs-36-Zwf" secondAttribute="bottom" id="Btz-KF-l43"/>
                     <constraint firstItem="yOs-36-Zwf" firstAttribute="top" secondItem="JrJ-86-Hc3" secondAttribute="top" constant="12" id="UOJ-pE-u9p"/>
                     <constraint firstItem="Qgv-Sd-9Ku" firstAttribute="leading" secondItem="e5z-oP-k0g" secondAttribute="trailing" constant="-22" id="gJU-CM-ykl"/>
