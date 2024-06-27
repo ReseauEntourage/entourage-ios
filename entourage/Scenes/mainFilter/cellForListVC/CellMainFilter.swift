@@ -40,7 +40,7 @@ class CellMainFilter: UITableViewCell {
     private func setupView() {
         // Ajout de la bordure grise
         ui_view_button.layer.borderWidth = 1
-        ui_view_button.layer.borderColor = UIColor.gray.cgColor
+        ui_view_button.layer.borderColor = UIColor.appGreyOff.cgColor
         updateViewButtonAppearance()
     }
     
