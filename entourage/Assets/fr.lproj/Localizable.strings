@@ -1533,3 +1533,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "btn_main_filter_validate_title" = "Appliquer les filtres";
 "btn_main_filter_cancel_title" = "Réinitialiser";
 "main_filter_radius_cell_title" = "Dans un rayon de";
+"main_filter_cell_group_placeholder" = "Rechercher un groupe";
+"main_filter_cell_event_placeholder" = "Rechercher un événement";
+"main_filter_cell_action_placeholder" = "Rechercher une entraide";

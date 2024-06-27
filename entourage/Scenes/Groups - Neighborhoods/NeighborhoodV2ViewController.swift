@@ -284,7 +284,7 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
             if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "CellMainFilter") as? CellMainFilter{
                 cell.selectionStyle = .none
                 cell.delegate = self
-                cell.configure(selected: numberOfFilter != 0, numberOfFilter: self.numberOfFilter)
+                cell.configure(selected: numberOfFilter != 0, numberOfFilter: self.numberOfFilter, mod: .group )
                 return cell
             }
         }

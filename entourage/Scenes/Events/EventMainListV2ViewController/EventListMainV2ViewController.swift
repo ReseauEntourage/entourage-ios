@@ -299,7 +299,7 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
             if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "CellMainFilter") as? CellMainFilter{
                 cell.selectionStyle = .none
                 cell.delegate = self
-                cell.configure(selected: numberOfFilter != 0, numberOfFilter: self.numberOfFilters)
+                cell.configure(selected: numberOfFilter != 0, numberOfFilter: self.numberOfFilters, mod: .event)
                 return cell
             }
         }

@@ -6,6 +6,12 @@ protocol CellMainFilterDelegate: AnyObject {
     func didClickButton(_ cell: CellMainFilter)
 }
 
+enum CellMainFilterMod{
+    case group
+    case event
+    case action
+}
+
 class CellMainFilter: UITableViewCell {
     
     // Outlet
@@ -23,7 +29,7 @@ class CellMainFilter: UITableViewCell {
         return String(describing: self)
     }
     weak var delegate: CellMainFilterDelegate?
-    
+    var mod:CellMainFilterMod = .group
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,12 +53,22 @@ class CellMainFilter: UITableViewCell {
         }
     }
     
-    func configure(selected: Bool, numberOfFilter:Int) {
+    func configure(selected: Bool, numberOfFilter:Int, mod:CellMainFilterMod) {
+        self.mod = mod
         self.haveFilter = selected
         self.ui_label_number_filter.text = String(numberOfFilter)
         self.ui_label_number_filter.isHidden = false
         if !selected {
             self.ui_label_number_filter.isHidden = true
+        }
+        switch mod{
+            
+        case .group:
+            self.ui_textfield.placeholder = "main_filter_cell_group_placeholder".localized
+        case .event:
+            self.ui_textfield.placeholder = "main_filter_cell_event_placeholder".localized
+        case .action:
+            self.ui_textfield.placeholder = "main_filter_cell_action_placeholder".localized
         }
     }
     
