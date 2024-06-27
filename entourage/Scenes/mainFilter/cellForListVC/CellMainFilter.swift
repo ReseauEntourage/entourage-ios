@@ -60,16 +60,17 @@ class CellMainFilter: UITableViewCell {
         self.ui_label_number_filter.isHidden = false
         if !selected {
             self.ui_label_number_filter.isHidden = true
-        }
-        switch mod{
             
-        case .group:
-            self.ui_textfield.placeholder = "main_filter_cell_group_placeholder".localized
-        case .event:
-            self.ui_textfield.placeholder = "main_filter_cell_event_placeholder".localized
-        case .action:
-            self.ui_textfield.placeholder = "main_filter_cell_action_placeholder".localized
         }
+        let placeholderFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
+        switch mod {
+            case .group:
+                self.ui_textfield.setPlaceholder(text: "main_filter_cell_group_placeholder".localized, font: placeholderFont)
+            case .event:
+                self.ui_textfield.setPlaceholder(text: "main_filter_cell_event_placeholder".localized, font: placeholderFont)
+            case .action:
+                self.ui_textfield.setPlaceholder(text: "main_filter_cell_action_placeholder".localized, font: placeholderFont)
+            }
     }
     
     @IBAction func onTouchFilter(_ sender: Any) {
