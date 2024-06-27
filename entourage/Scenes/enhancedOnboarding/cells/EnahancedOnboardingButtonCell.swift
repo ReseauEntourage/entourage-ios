@@ -35,8 +35,15 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
         ui_btn_next.addTarget(self, action: #selector(onBtnNextClick), for: .touchUpInside)
     }
     
+    func configureForMainFilter(){
+        self.configure()
+        self.ui_btn_next.setTitle("btn_main_filter_validate_title".localized, for: .normal)
+        self.ui_btn_configure_later.setTitle("btn_main_filter_cancel_title".localized, for: .normal)
+    }
+    
     @objc func onConfigureLaterClick(){
         delegate?.onConfigureLaterClick()
+        
     }
     
     @objc func onBtnNextClick(){

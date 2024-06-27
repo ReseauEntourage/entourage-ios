@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 import SDWebImage
 import IHProgressHUD
-
+import MapKit
 
 private enum EventListTableDTO{
+    case filterCell(numberOfFilter:Int)
     case firstHeader
     case myEventCell
     case secondHeader
@@ -47,6 +48,12 @@ class EventListMainV2ViewController:UIViewController{
     var isEndOfDiscoverList = false
     var isEndOfMyEventList = false
     var comeFromDetail = false
+    var numberOfFilters = 0
+    var selectedItemsFilter = [String: Bool]()
+    var selectedAddress:String = ""
+    var selectedRadius:Float = 0
+    var selectedCoordinate:CLLocationCoordinate2D?
+
     
     override func viewDidLoad() {
 
@@ -62,6 +69,8 @@ class EventListMainV2ViewController:UIViewController{
         ui_table_view.register(UINib(nibName: DividerCell.identifier, bundle: nil), forCellReuseIdentifier: DividerCell.identifier)
         ui_table_view.register(UINib(nibName: EventListCollectionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: EventListCollectionTableViewCell.identifier)
         ui_table_view.register(UINib(nibName: EmptyListCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyListCell.identifier)
+        ui_table_view.register(UINib(nibName: CellMainFilter.identifier, bundle: nil), forCellReuseIdentifier: CellMainFilter.identifier)
+
         //Btn filter
         ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: UIColor.appOrange))
         ui_location_filter.text = currentFilter.getFilterButtonString()
@@ -72,7 +81,7 @@ class EventListMainV2ViewController:UIViewController{
         ui_table_view.refreshControl = pullRefreshControl
         expandedfloatingButton.setTitle("event_title_btn_create_event".localized, for: .normal)
         deployButton()
-        
+        configureUserLocationAndRadius()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +100,15 @@ class EventListMainV2ViewController:UIViewController{
     func deployButton() {
         self.floatingButton.isHidden = true
         self.expandedfloatingButton.isHidden = false
+    }
+    
+    func configureUserLocationAndRadius(){
+        if let user = UserDefaults.currentUser {
+            self.selectedRadius = Float(user.radiusDistance ?? 40)
+            self.selectedCoordinate = CLLocationCoordinate2D(latitude: user.addressPrimary?.latitude ?? 0, longitude: user.addressPrimary?.longitude ?? 0)
+            self.selectedAddress = user.addressPrimary?.displayAddress ?? ""
+            
+        }
     }
     
     func loadForInit(){
@@ -140,6 +158,7 @@ class EventListMainV2ViewController:UIViewController{
     
     func configureDTO(){
         tableDTO.removeAll()
+        tableDTO.append(.filterCell(numberOfFilter: self.numberOfFilters))
         if myEvent.count > 0 {
             tableDTO.append(.firstHeader)
             tableDTO.append(.myEventCell)
@@ -188,6 +207,19 @@ class EventListMainV2ViewController:UIViewController{
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
+    }
+    
+    func showFilter(){
+        let sb = UIStoryboard.init(name: StoryboardName.filterMain, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "MainFilter") as? MainFilter {
+            vc.mod = .event
+            vc.delegate = self
+            vc.selectedItems = self.selectedItemsFilter
+            vc.selectedAdressTitle = self.selectedAddress
+            vc.selectedRadius = Int(self.selectedRadius)
+            vc.selectedAdress = self.selectedCoordinate
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
     }
     
 }
@@ -263,6 +295,13 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
                 cell.selectionStyle = .none
                 return cell
             }
+        case .filterCell(let numberOfFilter):
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "CellMainFilter") as? CellMainFilter{
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.configure(selected: numberOfFilter != 0, numberOfFilter: self.numberOfFilters)
+                return cell
+            }
         }
         
         return UITableViewCell()
@@ -292,6 +331,8 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
             return UITableView.automaticDimension
         case .emptyCell:
             return UITableView.automaticDimension
+        case .filterCell(numberOfFilter: let numberOfFilter):
+            return UITableView.automaticDimension
         }
     }
     
@@ -308,6 +349,8 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
             self.showEvent(eventId: event.uid,event: event)
         case .emptyCell:
             return
+        case .filterCell(_):
+            return
         }
     }
 }
@@ -316,33 +359,44 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
 
 extension EventListMainV2ViewController{
     
-    func getDiscoverEvent(){
-        if isEndOfDiscoverList {
-            return
-        }
-        EventService.getAllEventsDiscover(currentPage: currentPageDiscover, per: numberOfItemsForWS, filters: currentFilter.getfiltersForWS()) { events, error in
-            if let _events = events{
-                if _events.count < self.numberOfItemsForWS{
-                    self.isEndOfDiscoverList = true
-                }
-                print("eho event size " , events?.count)
-                
-                // Filtrer les événements pour ne pas ajouter de doublons
-                let uniqueEvents = _events.filter { newEvent in
-                    !self.discoverEvent.contains { existingEvent in
-                        existingEvent.uid == newEvent.uid
-                    }
-                }
-                
-                self.discoverEvent.append(contentsOf: uniqueEvents)
-                self.configureDTO()
-                self.isLoading = false
-            } else if let _error = error {
-                //TODO ERROR Trigger warning
+    func getDiscoverEvent() {
+            if isEndOfDiscoverList {
+                return
             }
-            self.configureDTO()
+
+            // Créer une liste de filtres sélectionnés
+            let selectedItemsList = selectedItemsFilter.filter { $0.value }.map { $0.key }
+
+            EventService.getSuggestFilteredEvents(
+                currentPage: currentPageDiscover,
+                per: numberOfItemsForWS,
+                radius: self.selectedRadius,
+                latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
+                longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
+                selectedItem: selectedItemsList
+            ) { events, error in
+                if let _events = events {
+                    if _events.count < self.numberOfItemsForWS {
+                        self.isEndOfDiscoverList = true
+                    }
+                    print("eho event size ", events?.count)
+                    
+                    // Filtrer les événements pour ne pas ajouter de doublons
+                    let uniqueEvents = _events.filter { newEvent in
+                        !self.discoverEvent.contains { existingEvent in
+                            existingEvent.uid == newEvent.uid
+                        }
+                    }
+                    
+                    self.discoverEvent.append(contentsOf: uniqueEvents)
+                    self.configureDTO()
+                    self.isLoading = false
+                } else if let _error = error {
+                    //TODO ERROR Trigger warning
+                }
+                self.configureDTO()
+            }
         }
-    }
     
     func getMyEvent(){
         if isEndOfMyEventList {
@@ -421,3 +475,39 @@ extension EventListMainV2ViewController:HomeEventHCCDelegate{
         showEvent(eventId: event.uid)
     }
 }
+
+extension EventListMainV2ViewController:CellMainFilterDelegate{
+    func didUpdateText(_ cell: CellMainFilter, text: String) {
+        
+    }
+    
+    func didClickButton(_ cell: CellMainFilter) {
+        self.showFilter()
+    }
+}
+
+extension EventListMainV2ViewController: MainFilterDelegate {
+    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle:String) {
+        // Compter le nombre de filtres sélectionnés (ceux qui sont à true)
+        let selectedCount = selectedItems.values.filter { $0 }.count
+        
+        // Mettre à jour le nombre de filtres
+        self.numberOfFilters = selectedCount
+        self.selectedItemsFilter = selectedItems
+        self.selectedCoordinate = coordinate
+        if selectedCoordinate?.latitude == 0 || selectedCoordinate?.longitude == 0 {
+            self.configureUserLocationAndRadius()
+        }
+        // Mettre à jour le premier élément de tableDTO
+        if !tableDTO.isEmpty {
+            tableDTO[0] = .filterCell(numberOfFilter: selectedCount)
+        }
+        
+        // Recharger uniquement la première cellule de la table
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.ui_table_view.reloadRows(at: [indexPath], with: .automatic)
+        self.loadForFilter()
+    }
+}
+
+

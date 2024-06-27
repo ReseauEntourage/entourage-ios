@@ -1494,3 +1494,6 @@
 "vote_plural" = "votes";
 "button_title_for_setting_onboarding" = "Register";
 "button_title_for_re_onboarding_end" = "Back to profile";
+
+"home_v2_title_initial_pedago" = "Raise Awareness";
+"home_v2_subtitle_initial_pedago" = "Some reading suggestions to get started";

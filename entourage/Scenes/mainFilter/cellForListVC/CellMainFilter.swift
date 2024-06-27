@@ -1,0 +1,73 @@
+import Foundation
+import UIKit
+
+protocol CellMainFilterDelegate: AnyObject {
+    func didUpdateText(_ cell: CellMainFilter, text: String)
+    func didClickButton(_ cell: CellMainFilter)
+}
+
+class CellMainFilter: UITableViewCell {
+    
+    // Outlet
+    @IBOutlet weak var ui_textfield: UITextField!
+    @IBOutlet weak var ui_view_button: UIView!
+    @IBOutlet weak var ui_label_number_filter: UILabel!
+    
+    // Variable
+    var haveFilter = false {
+        didSet {
+            updateViewButtonAppearance()
+        }
+    }
+    class var identifier: String {
+        return String(describing: self)
+    }
+    weak var delegate: CellMainFilterDelegate?
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupView()
+        ui_textfield.delegate = self
+    }
+    
+    private func setupView() {
+        // Ajout de la bordure grise
+        ui_view_button.layer.borderWidth = 1
+        ui_view_button.layer.borderColor = UIColor.gray.cgColor
+        updateViewButtonAppearance()
+    }
+    
+    private func updateViewButtonAppearance() {
+        // Mise à jour de la couleur de fond en fonction de l'état de sélection
+        if haveFilter {
+            ui_view_button.backgroundColor = UIColor.appBeige // Assurez-vous que appColor est défini dans votre Asset Catalog
+        } else {
+            ui_view_button.backgroundColor = UIColor.white
+        }
+    }
+    
+    func configure(selected: Bool, numberOfFilter:Int) {
+        self.haveFilter = selected
+        self.ui_label_number_filter.text = String(numberOfFilter)
+        self.ui_label_number_filter.isHidden = false
+        if !selected {
+            self.ui_label_number_filter.isHidden = true
+        }
+    }
+    
+    @IBAction func onTouchFilter(_ sender: Any) {
+        // Mise à jour de l'état de sélection
+        haveFilter.toggle()
+        delegate?.didClickButton(self)
+    }
+}
+
+// Extension pour gérer le UITextFieldDelegate
+extension CellMainFilter: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text {
+            delegate?.didUpdateText(self, text: text)
+        }
+    }
+}

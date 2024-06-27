@@ -178,6 +178,45 @@ struct EventService:ParsingDataCodable {
         }
     }
     
+    static func getSuggestFilteredEvents(currentPage: Int, per: Int, radius: Float, latitude: Float, longitude: Float, selectedItem: [String], completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
+            
+            guard let token = UserDefaults.token else { return }
+            var stringifiedItems = ""
+            if selectedItem.count != 0 {
+                for itemSelected in selectedItem {
+                    stringifiedItems += itemSelected + ","
+                }
+                if stringifiedItems.last == "," {
+                    stringifiedItems.removeLast()
+                }
+            }
+            
+            var endpoint: String
+            if stringifiedItems.isEmpty {
+                endpoint = kAPIEventGetAllFilteredDiscoverNoInterest
+                endpoint = String.init(format: endpoint, token, currentPage, per, radius, latitude, longitude)
+            } else {
+                endpoint = kAPIEventGetAllFilteredDiscover
+                endpoint = String.init(format: endpoint, token, currentPage, per, radius, latitude, longitude, stringifiedItems)
+            }
+            
+            print("event endpoint", endpoint)
+            getEventsWithEndpoint(endpoint, completion)
+        }
+        
+        fileprivate static func getEventsWithEndpoint(_ endpoint: String, _ completion: @escaping ([Event]?, EntourageNetworkError?) -> Void) {
+            NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+                guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                    DispatchQueue.main.async { completion(nil, error) }
+                    return
+                }
+                
+                let events: [Event]? = self.parseDatas(data: data, key: "outings")
+                DispatchQueue.main.async { completion(events, nil) }
+            }
+        }
+
+    
     static func getEventPostsPaging(id:Int, currentPage:Int, per:Int, completion: @escaping (_ post:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIGetEventPostsMessage

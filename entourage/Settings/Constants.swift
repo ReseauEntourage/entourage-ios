@@ -52,5 +52,6 @@ struct StoryboardName {
     
     static let onboarding = "Onboarding"
     static let language = "LangueStoryboard"
+    static let filterMain = "MainFilter"
     
 }

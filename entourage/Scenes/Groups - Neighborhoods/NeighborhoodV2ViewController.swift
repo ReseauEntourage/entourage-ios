@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 import IHProgressHUD
-
+import MapKit
 
 private enum GroupListTableDTO{
+    case filterCell(numberOfFilter:Int)
     case firstHeader
     case myGroupCell
     case secondHeader
@@ -41,6 +42,12 @@ class NeighborhoodV2ViewController:UIViewController {
     private var currentPageMy = 0
     private var numberOfItemsForWS = 10
     var pullRefreshControl = UIRefreshControl()
+    var numberOfFilter = 0 
+    var selectedItemsFilter = [String: Bool]()
+    var selectedAddress:String = ""
+    var selectedRadius:Float = 0
+    var selectedCoordinate:CLLocationCoordinate2D?
+
 
     
     override func viewDidLoad() {
@@ -56,15 +63,27 @@ class NeighborhoodV2ViewController:UIViewController {
         ui_table_view.register(UINib(nibName: DividerCell.identifier, bundle: nil), forCellReuseIdentifier: DividerCell.identifier)
         ui_table_view.register(UINib(nibName: HomeGroupHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeGroupHorizontalCollectionCell.identifier)
         ui_table_view.register(UINib(nibName: EmptyListCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyListCell.identifier)
+        ui_table_view.register(UINib(nibName: CellMainFilter.identifier, bundle: nil), forCellReuseIdentifier: CellMainFilter.identifier)
+        configureUserLocationAndRadius()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         loadForInit()
 
     }
     
     @objc func refreshDatas() {
         loadForInit()
+    }
+    
+    func configureUserLocationAndRadius(){
+        if let user = UserDefaults.currentUser {
+            self.selectedRadius = Float(user.radiusDistance ?? 40)
+            self.selectedCoordinate = CLLocationCoordinate2D(latitude: user.addressPrimary?.latitude ?? 0, longitude: user.addressPrimary?.longitude ?? 0)
+            self.selectedAddress = user.addressPrimary?.displayAddress ?? ""
+            
+        }
     }
     
     @IBAction func create_group(_ sender: Any) {
@@ -106,14 +125,35 @@ class NeighborhoodV2ViewController:UIViewController {
         })
     }
     
-    func getDiscoverGroup(){
-        NeighborhoodService.getSuggestNeighborhoods(currentPage: currentPageDiscover, per: numberOfItemsForWS) { groups, error in
-            self.pullRefreshControl.endRefreshing()
+    func getDiscoverGroup() {
+        // Filtrer pour obtenir les clés des éléments sélectionnés (ceux qui sont à true)
+        let selectedItemsList = selectedItemsFilter.filter { $0.value }.map { $0.key }
+        
+        NeighborhoodService.getSuggestFilteredNeighborhoods(
+            currentPage: currentPageDiscover,
+            per: numberOfItemsForWS,
+            radius: self.selectedRadius,
+            latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
+            longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
+            selectedItem: selectedItemsList
+        ) { groups, error in
             if let groups = groups {
                 self.groups.append(contentsOf: groups)
                 self.configureDTO()
             }
         }
+    }
+
+    
+    func getFilteredGroup(){
+        self.tableDTO.removeAll()
+        self.groups.removeAll()
+        self.ui_table_view.reloadData()
+        self.currentPageDiscover = 0
+        DispatchQueue.main.async {
+            self.getDiscoverGroup()
+        }
+        
     }
     
     func showNeighborhood(neighborhoodId:Int, isAfterCreation:Bool = false, isShowCreatePost:Bool = false, neighborhood:Neighborhood? = nil) {
@@ -127,6 +167,20 @@ class NeighborhoodV2ViewController:UIViewController {
         }
     }
     
+    func showFilter(){
+        let sb = UIStoryboard.init(name: StoryboardName.filterMain, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "MainFilter") as? MainFilter {
+            vc.mod = .group
+            vc.delegate = self
+            vc.selectedItems = self.selectedItemsFilter
+            vc.selectedAdressTitle = self.selectedAddress
+            vc.selectedRadius = Int(self.selectedRadius)
+            vc.selectedAdress = self.selectedCoordinate
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+    
+    
     func loadForPaginationDiscover(){
         isLoading = true
         self.currentPageDiscover += 1
@@ -135,6 +189,7 @@ class NeighborhoodV2ViewController:UIViewController {
     
     func configureDTO(){
         tableDTO.removeAll()
+        tableDTO.append(.filterCell(numberOfFilter: self.numberOfFilter))
         if myGroups.count > 0 {
             tableDTO.append(.firstHeader)
             tableDTO.append(.myGroupCell)
@@ -225,6 +280,13 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
                 cell.configureForGroup()
                 return cell
             }
+        case .filterCell(let numberOfFilter):
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "CellMainFilter") as? CellMainFilter{
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.configure(selected: numberOfFilter != 0, numberOfFilter: self.numberOfFilter)
+                return cell
+            }
         }
         
         return UITableViewCell()
@@ -254,6 +316,8 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
             return UITableView.automaticDimension
         case .emptyCell:
             return 500
+        case .filterCell(_):
+            return UITableView.automaticDimension
         }
     }
     
@@ -269,6 +333,8 @@ extension NeighborhoodV2ViewController:UITableViewDelegate, UITableViewDataSourc
         case .discoverGroupCell(let group):
             self.showNeighborhood(neighborhoodId: group.uid)
         case .emptyCell:
+            return
+        case .filterCell(_):
             return
         }
     }
@@ -295,4 +361,45 @@ extension NeighborhoodV2ViewController:EventListCollectionTableViewCellDelegate{
 
 extension NeighborhoodV2ViewController:HomeGroupCCDelegate{
     
+}
+
+extension NeighborhoodV2ViewController:CellMainFilterDelegate{
+    func didUpdateText(_ cell: CellMainFilter, text: String) {
+        
+    }
+    
+    func didClickButton(_ cell: CellMainFilter) {
+        self.showFilter()
+    }
+}
+
+extension NeighborhoodV2ViewController: MainFilterDelegate {
+    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle:String) {
+        // Compter le nombre de filtres sélectionnés (ceux qui sont à true)
+        let selectedCount = selectedItems.values.filter { $0 }.count
+        
+        // Mettre à jour le nombre de filtres
+        self.numberOfFilter = selectedCount
+        self.selectedItemsFilter = selectedItems
+        if let _radius = radius{
+            self.selectedRadius = _radius
+        }
+        self.selectedAddress = adressTitle
+        self.selectedCoordinate = coordinate
+        
+        if selectedCoordinate?.latitude == 0 || selectedCoordinate?.longitude == 0 {
+            self.configureUserLocationAndRadius()
+        }
+        
+        // Mettre à jour le premier élément de tableDTO
+        if !tableDTO.isEmpty {
+            tableDTO[0] = .filterCell(numberOfFilter: selectedCount)
+        }
+        
+        // Recharger uniquement la première cellule de la table
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.ui_table_view.reloadRows(at: [indexPath], with: .automatic)
+        self.getFilteredGroup()
+        
+    }
 }

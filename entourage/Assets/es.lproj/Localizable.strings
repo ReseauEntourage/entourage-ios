@@ -2924,3 +2924,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "text_title_i_like" = "Me gusta";
 "text_title_comment" = "Comentar";
 "see_member_react" = "Personas que reaccionaron";
+"home_v2_title_initial_pedago" = "Concienciarse";
+"home_v2_subtitle_initial_pedago" = "Algunas sugerencias de lectura para comenzar";

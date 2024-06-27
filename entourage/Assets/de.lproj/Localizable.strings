@@ -1502,3 +1502,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "text_title_i_like" = "Gefällt mir";
 "text_title_comment" = "Kommentieren";
 "see_member_react" = "Personen, die reagiert haben";
+"home_v2_title_initial_pedago" = "Sensibilisieren";
+"home_v2_subtitle_initial_pedago" = "Einige Lesevorschläge zum Einstieg";

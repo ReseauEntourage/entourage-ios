@@ -403,9 +403,7 @@ class NeighborhoodPostCell: UITableViewCell {
 
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?, isMember:Bool?) {
-        print("eho passed here ? ")
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleTranslationGesture))
-
         if(ui_view_translate != nil){
             ui_view_translate.addGestureRecognizer(tapGesture)
         }

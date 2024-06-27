@@ -30,6 +30,7 @@ enum HomeV2DTO{
     case cellIAmLost(helpType:HomeNeedHelpType)
     case moderator(name:String, imageUrl:String? = nil)
     case cellHZ
+    case cellInitialPedago(pedagos:[PedagogicResource])
 }
 
 class HomeV2ViewController:UIViewController{
@@ -53,6 +54,7 @@ class HomeV2ViewController:UIViewController{
     var allEvents = [Event]()
     var allDemands = [Action]()
     var allPedagos = [PedagogicResource]()
+    var initialPedagos = [PedagogicResource]()
     
     var currentFilter = EventActionLocationFilters()
     var currentLocationFilter = EventActionLocationFilters()
@@ -93,6 +95,8 @@ class HomeV2ViewController:UIViewController{
         ui_table_view.register(UINib(nibName: HomeNeedHelpCell.identifier, bundle: nil), forCellReuseIdentifier: HomeNeedHelpCell.identifier)
         //CELL MODERATOR
         ui_table_view.register(UINib(nibName: HomeModeratorCell.identifier, bundle: nil), forCellReuseIdentifier: HomeModeratorCell.identifier)
+        
+        ui_table_view.register(UINib(nibName: HomeInitialPedagogicHorizontalCell.identifier, bundle: nil), forCellReuseIdentifier: HomeInitialPedagogicHorizontalCell.identifier)
         //CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
@@ -270,6 +274,10 @@ class HomeV2ViewController:UIViewController{
     func configureDTO(){
         self.tableDTO.removeAll()
         self.updateTopView()
+        if initialPedagos.count > 0 {
+            tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
+            tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
+        }
         if(allDemands.count > 0){
             if isContributionPreference {
                 tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
@@ -423,6 +431,13 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
                 cell.delegate = self
                 return cell
             }
+        case .cellInitialPedago(let pedagos):
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeInitialPedagogicHorizontalCell") as? HomeInitialPedagogicHorizontalCell{
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.configure(pedagos: pedagos)
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -487,6 +502,8 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellHZ:
             AnalyticsLoggerManager.logEvent(name: Action_Home_Buffet)
             return
+        case .cellInitialPedago(_):
+            return
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -511,6 +528,8 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
             return UITableView.automaticDimension
         case .cellHZ:
             return UITableView.automaticDimension
+        case .cellInitialPedago(pedagos: let pedagos):
+            return 115
         }
     }
 }
@@ -531,13 +550,38 @@ extension HomeV2ViewController{
                     self.allDemands.removeAll()
                     self.allDemands.append(contentsOf: actions)
                 }
-                self.configureDTO()
+                //TODO
+                self.getInitialPedagos()
             }
         }else{
             ActionsService.getAllActions(isContrib: false, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
                 if let actions = actions {
                     self.allDemands.removeAll()
                     self.allDemands.append(contentsOf: actions)
+                }
+                //TODO
+                self.getInitialPedagos()
+            }
+        }
+    }
+    
+    func getInitialPedagos(){
+        HomeService.getInitialResources { resources, error in
+            HomeService.getResources { resources, error in
+                if let resources = resources {
+                    self.initialPedagos.removeAll()
+                    var pedagoReads = [PedagogicResource]()
+                    for resource in resources {
+                        if resource.isRead == false{
+                            pedagoReads.append(resource)
+                        }
+                    }
+                    for pedagoRead in pedagoReads {
+                        self.initialPedagos.append(pedagoRead)
+                        if self.initialPedagos.count > 1{
+                            break
+                        }
+                    }
                 }
                 self.configureDTO()
             }
@@ -944,5 +988,11 @@ extension HomeV2ViewController:Phase3fromAppDelegate{
 extension HomeV2ViewController:NotificationDelegate{
     func onEventLastDay(id: Int) {
         self.getEventAndLaunchPopup(eventId: String(id))
+    }
+}
+
+extension HomeV2ViewController:HomeInitialPedagoCCDelegate{
+    func goToPedago(pedago: PedagogicResource) {
+        showPedagogic(pedagogic: pedago)
     }
 }

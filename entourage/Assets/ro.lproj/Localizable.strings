@@ -1502,3 +1502,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "text_title_i_like" = "Îmi place";
 "text_title_comment" = "Comentează";
 "see_member_react" = "Persoanele care au reacționat";
+"home_v2_title_initial_pedago" = "Conștientizare";
+"home_v2_subtitle_initial_pedago" = "Câteva sugestii de lectură pentru început";
