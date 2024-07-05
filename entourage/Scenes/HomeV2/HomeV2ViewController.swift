@@ -108,7 +108,6 @@ class HomeV2ViewController:UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         currentFilter.resetToDefault()
         self.loadMetadatas()
-        print("eho shoudllaucnch" , self.shouldLaunchEventPopup)
         self.initHome()
         self.checkForUpdates()
         self.ifEventLastDay()

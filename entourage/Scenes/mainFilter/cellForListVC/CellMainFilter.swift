@@ -84,6 +84,7 @@ class CellMainFilter: UITableViewCell {
 extension CellMainFilter: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let text = textField.text {
+            print("text " , text)
             delegate?.didUpdateText(self, text: text)
         }
     }

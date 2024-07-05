@@ -177,7 +177,6 @@ class NeighborhoodPostCell: UITableViewCell {
     
     func updateReactionIcon() {
         if ui_image_react_btn != nil {
-            print("eho postMessage reactionId " , postMessage.reactionId)
             // Mettre à jour l'icône en fonction de la valeur de reactionId
             if postMessage.reactionId == 0 || postMessage.reactionId == nil  {
                 ui_image_react_btn.image = UIImage(named: "ic_i_like_grey")

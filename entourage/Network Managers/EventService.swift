@@ -581,7 +581,6 @@ struct EventService:ParsingDataCodable {
     static func confirmParticipation(eventId: Int, completion: @escaping (_ success: Bool, _ error: EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
         let endpoint = String(format: kAPIConfirmParticipation, "\(eventId)", token)
-        print("eho endPoint ", endpoint)
         
         NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
             guard error == nil, let response = resp as? HTTPURLResponse else {
@@ -595,6 +594,27 @@ struct EventService:ParsingDataCodable {
                 DispatchQueue.main.async { completion(false, nil) }
             }
         }
+    }
+    static func getFilteredMyEvents(userId: String, currentPage: Int, per: Int, radius: Float, latitude: Float, longitude: Float, selectedItem: [String], completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
+            guard let token = UserDefaults.token else { return }
+            let stringifiedItems = selectedItem.joined(separator: ",")
+            var endpoint = String(format: kAPIGetMyFilteredOutings, userId, token, currentPage, per, radius, latitude, longitude, stringifiedItems)
+            if stringifiedItems.isEmpty {
+                endpoint = String(format: kAPIEventGetAllForUser, token, per, currentPage)
+            }
+            getEventsWithEndpoint(endpoint, completion)
+        }
+
+    static func searchEvents(query: String, currentPage: Int, per: Int, completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPISearchEvents, token, currentPage, per, query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        getEventsWithEndpoint(endpoint, completion)
+    }
+
+    static func searchMyEvents(query: String, currentPage: Int, per: Int, completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPISearchMyEvents, "me", token, currentPage, per, query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        getEventsWithEndpoint(endpoint, completion)
     }
 
 }

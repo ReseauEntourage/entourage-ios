@@ -501,6 +501,30 @@ struct NeighborhoodService:ParsingDataCodable {
             DispatchQueue.main.async { completion(nil) }
         }
     }
+    
+    static func searchNeighborhoods(query: String, currentPage: Int, per: Int, completion: @escaping (_ groups: [Neighborhood]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        var endpoint = kAPINeighborhoodsSearch
+        endpoint = String(format: endpoint, token, currentPage, per, query)
+        getNeighborhoodsWithEndpoint(endpoint, completion)
+    }
 
+    static func searchMyNeighborhoods(userId: String, query: String, currentPage: Int, per: Int, completion: @escaping (_ groups: [Neighborhood]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        var endpoint = kAPIGetMyNeighborhoodsSearch
+        endpoint = String(format: endpoint, userId, token, currentPage, per, query)
+        getNeighborhoodsWithEndpoint(endpoint, completion)
+    }
+
+
+    static func getFilteredMyNeighborhoods(userId: String, currentPage: Int, per: Int, radius: Float, latitude: Float, longitude: Float, selectedItem: [String], completion: @escaping (_ groups: [Neighborhood]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        var stringifiedItems = selectedItem.joined(separator: ",")
+        var endpoint = String(format: kAPIGetMyFilteredNeighborhoods, userId, token, currentPage, per, radius, latitude, longitude, stringifiedItems)
+        if stringifiedItems.isEmpty {
+            endpoint = String(format: kAPIGetSuggestFilteredNoInterestsNeighborhoods, token, currentPage, per, radius, latitude, longitude)
+        }
+        getNeighborhoodsWithEndpoint(endpoint, completion)
+    }
     
 }

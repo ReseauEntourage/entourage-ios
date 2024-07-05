@@ -1,30 +1,22 @@
-//
-//  EventListMainV2ViewController.swift
-//  entourage
-//
-//  Created by Clement entourage on 18/09/2023.
-//
-
 import Foundation
 import UIKit
 import SDWebImage
 import IHProgressHUD
 import MapKit
 
-private enum EventListTableDTO{
-    case filterCell(numberOfFilter:Int)
+private enum EventListTableDTO {
+    case filterCell(numberOfFilter: Int)
     case firstHeader
     case myEventCell
     case secondHeader
-    case discoverEventCell(event:Event)
+    case discoverEventCell(event: Event)
     case emptyCell
 }
 
-class EventListMainV2ViewController:UIViewController{
-    
-    //OUTLET
+class EventListMainV2ViewController: UIViewController {
+
+    // OUTLET
     @IBOutlet weak var ui_btn_filter: UIButton!
-    
     @IBOutlet weak var ui_contraint_title: NSLayoutConstraint!
     @IBOutlet weak var ui_top_contrainst_table_view: NSLayoutConstraint!
     @IBOutlet weak var floatingButton: UIButton!
@@ -32,7 +24,8 @@ class EventListMainV2ViewController:UIViewController{
     @IBOutlet weak var ui_location_filter: UILabel!
     @IBOutlet weak var ui_title_label: UILabel!
     @IBOutlet weak var ui_table_view: UITableView!
-    //VAR
+
+    // VAR
     private var currentPageMy = 0
     private var currentPageDiscover = 0
     private let numberOfItemsForWS = 10
@@ -40,6 +33,7 @@ class EventListMainV2ViewController:UIViewController{
     private var tableDTO = [EventListTableDTO]()
     private var discoverEvent = [Event]()
     private var myEvent = [Event]()
+    private var searchEvent = [Event]()
     private var isFromFilter = false
     private var nbOfItemsBeforePagingReload = 2
     private var isLoading = false
@@ -50,18 +44,26 @@ class EventListMainV2ViewController:UIViewController{
     var comeFromDetail = false
     var numberOfFilters = 0
     var selectedItemsFilter = [String: Bool]()
-    var selectedAddress:String = ""
-    var selectedRadius:Float = 0
-    var selectedCoordinate:CLLocationCoordinate2D?
+    var selectedAddress: String = ""
+    var selectedRadius: Float = 0
+    var selectedCoordinate: CLLocationCoordinate2D?
 
-    
+    enum ViewMode {
+        case normal
+        case filtered
+        case searching
+    }
+    private var mode: ViewMode = .normal
+
     override func viewDidLoad() {
+        super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
 
-        //Title
+        // Title
         self.ui_title_label.text = "tabbar_events".localized
-        //Table View
+
+        // Table View
         self.ui_table_view.delegate = self
         self.ui_table_view.dataSource = self
         ui_table_view.register(UINib(nibName: EventListCell.identifier, bundle: nil), forCellReuseIdentifier: EventListCell.identifier)
@@ -71,27 +73,30 @@ class EventListMainV2ViewController:UIViewController{
         ui_table_view.register(UINib(nibName: EmptyListCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyListCell.identifier)
         ui_table_view.register(UINib(nibName: CellMainFilter.identifier, bundle: nil), forCellReuseIdentifier: CellMainFilter.identifier)
 
-        //Btn filter
+        // Btn filter
         ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: UIColor.appOrange))
         ui_location_filter.text = currentFilter.getFilterButtonString()
-        //Pull to refresh
+
+        // Pull to refresh
         pullRefreshControl.attributedTitle = NSAttributedString(string: "Loading".localized)
         pullRefreshControl.tintColor = .appOrange
         pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)
         ui_table_view.refreshControl = pullRefreshControl
+
         expandedfloatingButton.setTitle("event_title_btn_create_event".localized, for: .normal)
         deployButton()
         configureUserLocationAndRadius()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         AnalyticsLoggerManager.logEvent(name: View__Event__List)
         if !comeFromDetail {
             loadForInit()
         }
         comeFromDetail = false
     }
-    
+
     func retractButton() {
         self.floatingButton.isHidden = false
         self.expandedfloatingButton.isHidden = true
@@ -101,20 +106,19 @@ class EventListMainV2ViewController:UIViewController{
         self.floatingButton.isHidden = true
         self.expandedfloatingButton.isHidden = false
     }
-    
-    func configureUserLocationAndRadius(){
+
+    func configureUserLocationAndRadius() {
         if let user = UserDefaults.currentUser {
             self.selectedRadius = Float(user.radiusDistance ?? 40)
             self.selectedCoordinate = CLLocationCoordinate2D(latitude: user.addressPrimary?.latitude ?? 0, longitude: user.addressPrimary?.longitude ?? 0)
             self.selectedAddress = user.addressPrimary?.displayAddress ?? ""
-            
         }
     }
-    
-    func loadForInit(){
+
+    func loadForInit() {
         isLoading = true
         IHProgressHUD.show()
-        if(!isFromFilter){
+        if !isFromFilter {
             currentFilter = EventActionLocationFilters()
         }
         ui_location_filter.text = currentFilter.getFilterButtonString()
@@ -128,35 +132,37 @@ class EventListMainV2ViewController:UIViewController{
         isFromFilter = false
         self.getMyEvent()
     }
-    
-    func loadForFilter(){
+
+    func loadForFilter() {
         isLoading = true
         isFromFilter = true
         self.isEndOfDiscoverList = false
+        self.isEndOfMyEventList = false
         self.discoverEvent.removeAll()
         self.currentPageDiscover = 0
+        self.myEvent.removeAll() // Ensure myEvent is cleared when filtering
+        self.currentPageMy = 0 // Reset current page for my events
         self.getMyEvent()
     }
-    
-    func loadForPaginationDiscover(){
+
+    func loadForPaginationDiscover() {
         isLoading = true
         self.currentPageDiscover += 1
         self.isOnlyDiscoverPagination = true
         self.getMyEvent()
-
     }
-    
-    func loadForMyEventPagination(){
+
+    func loadForMyEventPagination() {
         isLoading = true
         self.currentPageMy += 1
         self.getMyEvent()
     }
-    
+
     @objc func refreshDatas() {
         loadForInit()
     }
-    
-    func configureDTO(){
+
+    func configureDTO() {
         tableDTO.removeAll()
         tableDTO.append(.filterCell(numberOfFilter: self.numberOfFilters))
         if myEvent.count > 0 {
@@ -165,10 +171,10 @@ class EventListMainV2ViewController:UIViewController{
         }
         if discoverEvent.count > 0 {
             tableDTO.append(.secondHeader)
-            for event in discoverEvent{
+            for event in discoverEvent {
                 tableDTO.append(.discoverEventCell(event: event))
             }
-        }else{
+        } else {
             tableDTO.append(.secondHeader)
             tableDTO.append(.emptyCell)
         }
@@ -177,14 +183,15 @@ class EventListMainV2ViewController:UIViewController{
         isLoading = false
         IHProgressHUD.dismiss()
     }
-    @objc func showNewEvent(_ notification:Notification) {
+
+    @objc func showNewEvent(_ notification: Notification) {
         if let eventId = notification.userInfo?[kNotificationEventShowId] as? Int {
             DispatchQueue.main.async {
                 self.showEvent(eventId: eventId, isAfterCreation: true)
             }
         }
     }
-    
+
     @IBAction func OnFilterClick(_ sender: Any) {
         AnalyticsLoggerManager.logEvent(name: Action__Event__LocationFilter)
         if let vc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
@@ -194,6 +201,7 @@ class EventListMainV2ViewController:UIViewController{
             self.navigationController?.present(vc, animated: true)
         }
     }
+
     @IBAction func OnBtnNewClick(_ sender: Any) {
         AnalyticsLoggerManager.logEvent(name: Action__Event__New)
         let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
@@ -201,6 +209,7 @@ class EventListMainV2ViewController:UIViewController{
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
+
     @IBAction func OnExpandedFloatingButtonClick(_ sender: Any) {
         AnalyticsLoggerManager.logEvent(name: Action__Event__New)
         let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
@@ -208,8 +217,8 @@ class EventListMainV2ViewController:UIViewController{
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
-    
-    func showFilter(){
+
+    func showFilter() {
         let sb = UIStoryboard.init(name: StoryboardName.filterMain, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "MainFilter") as? MainFilter {
             vc.mod = .event
@@ -221,28 +230,22 @@ class EventListMainV2ViewController:UIViewController{
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
-    
 }
 
-//MARK: Tableview delegates
-extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSource{
+// MARK: Tableview delegates
+extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         DispatchQueue.main.async {
             let yOffset = self.ui_table_view.contentOffset.y
             if yOffset > 0 {
                 if yOffset <= 100 {
-                    // Interpolation linéaire pour ajuster la taille de la police en fonction du déplacement
                     let fontSize = 24 - (yOffset / 100) * (24 - 18)
                     self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: fontSize)
                     self.deployButton()
-                    // Ajustez les autres éléments en fonction du déplacement également, si nécessaire
                     self.ui_top_contrainst_table_view.constant = 100 - 0.4 * yOffset
                     self.ui_contraint_title.constant = 20 - 0.1 * yOffset
                     self.view.layoutIfNeeded()
-
                 } else if yOffset > 100 {
-                    // Réglez sur les valeurs minimales si le déplacement dépasse 100
                     self.retractButton()
                     self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 18)
                     self.ui_top_contrainst_table_view.constant = 60
@@ -252,65 +255,56 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableDTO.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableDTO[indexPath.row]{
+        switch tableDTO[indexPath.row] {
         case .firstHeader:
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "DividerCell") as? DividerCell{
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "DividerCell") as? DividerCell {
                 cell.selectionStyle = .none
                 cell.configure(title: "my_event_title".localized)
                 return cell
             }
         case .myEventCell:
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeEventHorizontalCollectionCell") as? HomeEventHorizontalCollectionCell{
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeEventHorizontalCollectionCell") as? HomeEventHorizontalCollectionCell {
                 cell.selectionStyle = .none
                 cell.delegate = self
                 cell.configure(events: self.myEvent)
                 return cell
             }
-//            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "EventListCollectionTableViewCell") as? EventListCollectionTableViewCell{
-//                cell.selectionStyle = .none
-//                cell.delegate = self
-//                cell.configure(events: self.myEvent)
-//                return cell
-//            }
         case .secondHeader:
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "DividerCell") as? DividerCell{
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "DividerCell") as? DividerCell {
                 cell.selectionStyle = .none
                 cell.configure(title: "all_event_title".localized)
                 return cell
             }
         case .discoverEventCell(let event):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "EventListCell") as? EventListCell{
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "EventListCell") as? EventListCell {
                 cell.selectionStyle = .none
                 cell.populateCell(event: event, hideSeparator: true)
                 return cell
             }
         case .emptyCell:
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "EmptyListCell") as? EmptyListCell{
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "EmptyListCell") as? EmptyListCell {
                 cell.selectionStyle = .none
                 return cell
             }
         case .filterCell(let numberOfFilter):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "CellMainFilter") as? CellMainFilter{
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "CellMainFilter") as? CellMainFilter {
                 cell.selectionStyle = .none
                 cell.delegate = self
                 cell.configure(selected: numberOfFilter != 0, numberOfFilter: self.numberOfFilters, mod: .event)
                 return cell
             }
         }
-        
         return UITableViewCell()
     }
-    
-    //MARK: HERE HANDLE PAGINATION
-    
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if isLoading{
+        if isLoading {
             return
         }
         let lastIndex = discoverEvent.count - nbOfItemsBeforePagingReload
@@ -318,9 +312,9 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
             self.loadForPaginationDiscover()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch tableDTO[indexPath.row]{
+        switch tableDTO[indexPath.row] {
         case .firstHeader:
             return UITableView.automaticDimension
         case .myEventCell:
@@ -335,10 +329,9 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
             return UITableView.automaticDimension
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch tableDTO[indexPath.row]{
-            
+        switch tableDTO[indexPath.row] {
         case .firstHeader:
             return
         case .myEventCell:
@@ -346,7 +339,7 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
         case .secondHeader:
             return
         case .discoverEventCell(let event):
-            self.showEvent(eventId: event.uid,event: event)
+            self.showEvent(eventId: event.uid, event: event)
         case .emptyCell:
             return
         case .filterCell(_):
@@ -355,20 +348,50 @@ extension EventListMainV2ViewController:UITableViewDelegate, UITableViewDataSour
     }
 }
 
-
-
-extension EventListMainV2ViewController{
-    
+extension EventListMainV2ViewController {
     func getDiscoverEvent() {
-            if isEndOfDiscoverList {
-                return
+        if isEndOfDiscoverList {
+            return
+        }
+        let selectedItemsList = selectedItemsFilter.filter { $0.value }.map { $0.key }
+        EventService.getSuggestFilteredEvents(
+            currentPage: currentPageDiscover,
+            per: numberOfItemsForWS,
+            radius: self.selectedRadius,
+            latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
+            longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
+            selectedItem: selectedItemsList
+        ) { events, error in
+            if let _events = events {
+                if _events.count < self.numberOfItemsForWS {
+                    self.isEndOfDiscoverList = true
+                }
+                let uniqueEvents = _events.filter { newEvent in
+                    !self.discoverEvent.contains { existingEvent in
+                        existingEvent.uid == newEvent.uid
+                    }
+                }
+                self.discoverEvent.append(contentsOf: uniqueEvents)
+                self.configureDTO()
+                self.isLoading = false
+            } else if let _error = error {
+                // TODO: Handle error
             }
+            self.configureDTO()
+        }
+    }
 
-            // Créer une liste de filtres sélectionnés
+    func getMyEvent() {
+        if isEndOfMyEventList {
+            self.getDiscoverEvent()
+            return
+        }
+        if isFromFilter {
+            let userId = (UserDefaults.currentUser?.sid).map { String(describing: $0) } ?? ""
             let selectedItemsList = selectedItemsFilter.filter { $0.value }.map { $0.key }
-
-            EventService.getSuggestFilteredEvents(
-                currentPage: currentPageDiscover,
+            EventService.getFilteredMyEvents(
+                userId: userId,
+                currentPage: currentPageMy,
                 per: numberOfItemsForWS,
                 radius: self.selectedRadius,
                 latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
@@ -377,71 +400,44 @@ extension EventListMainV2ViewController{
             ) { events, error in
                 if let _events = events {
                     if _events.count < self.numberOfItemsForWS {
-                        self.isEndOfDiscoverList = true
+                        self.isEndOfMyEventList = true
                     }
-                    print("eho event size ", events?.count)
-                    
-                    // Filtrer les événements pour ne pas ajouter de doublons
-                    let uniqueEvents = _events.filter { newEvent in
-                        !self.discoverEvent.contains { existingEvent in
-                            existingEvent.uid == newEvent.uid
-                        }
-                    }
-                    
-                    self.discoverEvent.append(contentsOf: uniqueEvents)
-                    self.configureDTO()
-                    self.isLoading = false
+                    print("events size " , _events.count)
+                    self.myEvent.append(contentsOf: _events)
                 } else if let _error = error {
-                    //TODO ERROR Trigger warning
+                    // TODO: Handle error
                 }
-                self.configureDTO()
-            }
-        }
-    
-    func getMyEvent(){
-        if isEndOfMyEventList {
-            self.getDiscoverEvent()
-            return
-        }
-        EventService.getAllEventsForUser(currentPage: currentPageMy, per: 50) { events, error in
-            
-            if(self.isFromFilter){
-                self.isFromFilter = false
                 self.getDiscoverEvent()
-                return
             }
-            if(self.isOnlyDiscoverPagination){
-                self.isOnlyDiscoverPagination = false
-                self.getDiscoverEvent()
-                return
-            }
-            
-            if let _events = events{
-                if _events.count < self.numberOfItemsForWS{
-                    self.isEndOfMyEventList = true
-                    
+        } else {
+            EventService.getAllEventsForUser(currentPage: currentPageMy, per: numberOfItemsForWS) { events, error in
+                if let _events = events {
+                    if _events.count < self.numberOfItemsForWS {
+                        self.isEndOfMyEventList = true
+                    }
+                    self.myEvent.append(contentsOf: _events)
+                } else if let _error = error {
+                    // TODO: Handle error
                 }
-                self.myEvent.append(contentsOf: _events)
-            }else if let _error = error {
-                //TODO ERROR Trigger warning
+                self.getDiscoverEvent()
             }
-            self.getDiscoverEvent()
         }
-        
     }
+
 }
 
-//MARK: here handle filter return data
-extension EventListMainV2ViewController:EventFiltersDelegate {
+// MARK: Extensions for event filters
+extension EventListMainV2ViewController: EventFiltersDelegate {
     func updateFilters(_ filters: EventActionLocationFilters) {
         self.currentFilter = filters
         ui_location_filter.text = currentFilter.getFilterButtonString()
         self.isFromFilter = true
+        self.loadForFilter()
     }
 }
 
-//MARK: Here handle pagination for collectionview
-extension EventListMainV2ViewController:EventListCollectionTableViewCellDelegate{
+// MARK: Extensions for collection view pagination
+extension EventListMainV2ViewController: EventListCollectionTableViewCellDelegate {
     func goToMyGroup(group: Neighborhood) {
         //Nothing to do
     }
@@ -455,10 +451,10 @@ extension EventListMainV2ViewController:EventListCollectionTableViewCellDelegate
     }
 }
 
-extension EventListMainV2ViewController{
-    func showEvent(eventId:Int, isAfterCreation:Bool = false, event:Event? = nil) {
+extension EventListMainV2ViewController {
+    func showEvent(eventId: Int, isAfterCreation: Bool = false, event: Event? = nil) {
         comeFromDetail = true
-        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController {
             vc.eventId = eventId
             vc.event = event
             vc.isAfterCreation = isAfterCreation
@@ -469,16 +465,15 @@ extension EventListMainV2ViewController{
     }
 }
 
-
-extension EventListMainV2ViewController:HomeEventHCCDelegate{
+extension EventListMainV2ViewController: HomeEventHCCDelegate {
     func goToMyEventHomeCell(event: Event) {
         showEvent(eventId: event.uid)
     }
 }
 
-extension EventListMainV2ViewController:CellMainFilterDelegate{
+extension EventListMainV2ViewController: CellMainFilterDelegate {
     func didUpdateText(_ cell: CellMainFilter, text: String) {
-        
+        // Handle text update if needed
     }
     
     func didClickButton(_ cell: CellMainFilter) {
@@ -487,27 +482,21 @@ extension EventListMainV2ViewController:CellMainFilterDelegate{
 }
 
 extension EventListMainV2ViewController: MainFilterDelegate {
-    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle:String) {
-        // Compter le nombre de filtres sélectionnés (ceux qui sont à true)
+    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String) {
         let selectedCount = selectedItems.values.filter { $0 }.count
-        
-        // Mettre à jour le nombre de filtres
         self.numberOfFilters = selectedCount
         self.selectedItemsFilter = selectedItems
         self.selectedCoordinate = coordinate
+        self.selectedRadius = radius ?? 0
+        self.selectedAddress = adressTitle
         if selectedCoordinate?.latitude == 0 || selectedCoordinate?.longitude == 0 {
             self.configureUserLocationAndRadius()
         }
-        // Mettre à jour le premier élément de tableDTO
         if !tableDTO.isEmpty {
             tableDTO[0] = .filterCell(numberOfFilter: selectedCount)
         }
-        
-        // Recharger uniquement la première cellule de la table
         let indexPath = IndexPath(row: 0, section: 0)
         self.ui_table_view.reloadRows(at: [indexPath], with: .automatic)
         self.loadForFilter()
     }
 }
-
-

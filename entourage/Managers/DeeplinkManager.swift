@@ -260,7 +260,6 @@ struct DeepLinkManager {
     }
     
     static func showWelcomeOne(){
-        print("eho")
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
@@ -411,7 +410,6 @@ struct DeepLinkManager {
                     if let homeVC = vc as? HomeV2ViewController {
                         homeVC.shouldLaunchEventPopup = eventId
                         _tabbar.showHome()
-                        print("eho")
                     }
                 }
                 else{
@@ -419,7 +417,6 @@ struct DeepLinkManager {
                         let _currentVc = AppState.getTopViewController()
                         if let _home = _currentVc as? HomeV2ViewController{
                             _home.shouldLaunchEventPopup = eventId
-                            print("eho2")
 
                         }
                     }

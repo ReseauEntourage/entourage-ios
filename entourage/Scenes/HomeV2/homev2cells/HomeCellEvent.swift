@@ -51,7 +51,6 @@ class HomeCellEvent:UICollectionViewCell{
         }
         if let _author = event.author {
             if let _roles = _author.communityRoles{
-                print("eho")
                 if _roles.contains("Équipe Entourage") || _roles.contains("Ambassadeur") {
                     self.ic_entoutou.isHidden = false
                 }else {

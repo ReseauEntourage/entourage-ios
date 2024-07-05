@@ -28,6 +28,8 @@ class EventLastDayViewController: UIViewController, MJAlertControllerDelegate {
         uiBtnICome.addTarget(self, action: #selector(iComeButtonTapped), for: .touchUpInside)
         uiBtnIDontCome.addTarget(self, action: #selector(iDontComeButtonTapped), for: .touchUpInside)
         uiBtnQuit.addTarget(self, action: #selector(onQuit), for: .touchUpInside)
+        AnalyticsLoggerManager.logEvent(name: popup_event_last_day_view)
+
     }
 
     private func setupEventDetails() {
@@ -88,6 +90,7 @@ class EventLastDayViewController: UIViewController, MJAlertControllerDelegate {
     }
 
     @objc func iComeButtonTapped() {
+        AnalyticsLoggerManager.logEvent(name: popup_event_last_day_accept)
         EventService.confirmParticipation(eventId: self.event?.uid ?? 0) { success, error in
             if success {
                 self.showMessage(title: "Merci !", content: "Merci d'avoir répondu, à bientôt !")
@@ -99,6 +102,7 @@ class EventLastDayViewController: UIViewController, MJAlertControllerDelegate {
     }
 
     @objc func iDontComeButtonTapped() {
+        AnalyticsLoggerManager.logEvent(name: popup_event_last_day_decline)
         EventService.leaveEvent(eventId: self.event?.uid ?? 0, userId:self.user?.sid ?? 0) { event, error in
             if error == nil {
                 self.showMessage(title: "Merci !", content: "Merci d'avoir répondu, à bientôt !")
