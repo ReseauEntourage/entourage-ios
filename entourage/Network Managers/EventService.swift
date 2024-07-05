@@ -611,9 +611,9 @@ struct EventService:ParsingDataCodable {
         getEventsWithEndpoint(endpoint, completion)
     }
 
-    static func searchMyEvents(query: String, currentPage: Int, per: Int, completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
+    static func searchMyEvents(userId:Int, query: String, currentPage: Int, per: Int, completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
-        let endpoint = String(format: kAPISearchMyEvents, "me", token, currentPage, per, query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        let endpoint = String(format: kAPISearchMyEvents, userId, token, currentPage, per, query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
         getEventsWithEndpoint(endpoint, completion)
     }
 

@@ -47,6 +47,8 @@ class EventListMainV2ViewController: UIViewController {
     var selectedAddress: String = ""
     var selectedRadius: Float = 0
     var selectedCoordinate: CLLocationCoordinate2D?
+    private var searchText = ""
+
 
     enum ViewMode {
         case normal
@@ -472,11 +474,17 @@ extension EventListMainV2ViewController: HomeEventHCCDelegate {
 }
 
 extension EventListMainV2ViewController: CellMainFilterDelegate {
-    func didUpdateText(_ cell: CellMainFilter, text: String) {
-        // Handle text update if needed
+    func didUpdateText(text: String) {
+        searchText = text
+        if searchText.isEmpty{
+            mode = .normal
+        }else{
+            mode = .searching
+        }
+        loadForInit()
     }
     
-    func didClickButton(_ cell: CellMainFilter) {
+    func didClickButton() {
         self.showFilter()
     }
 }

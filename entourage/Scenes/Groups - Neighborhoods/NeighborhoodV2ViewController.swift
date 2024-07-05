@@ -427,14 +427,17 @@ extension NeighborhoodV2ViewController: HomeGroupCCDelegate {
 }
 
 extension NeighborhoodV2ViewController: CellMainFilterDelegate {
-    func didUpdateText(_ cell: CellMainFilter, text: String) {
+    func didUpdateText(text: String) {
         searchText = text
-        isSearching = !text.isEmpty
-        displayMode = .searching
+        if searchText.isEmpty{
+            displayMode = .normal
+        }else{
+            displayMode = .searching
+        }
         loadForInit()
     }
     
-    func didClickButton(_ cell: CellMainFilter) {
+    func didClickButton() {
         self.showFilter()
     }
 }

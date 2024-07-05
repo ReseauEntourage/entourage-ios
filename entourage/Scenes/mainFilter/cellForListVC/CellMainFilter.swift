@@ -2,8 +2,8 @@ import Foundation
 import UIKit
 
 protocol CellMainFilterDelegate: AnyObject {
-    func didUpdateText(_ cell: CellMainFilter, text: String)
-    func didClickButton(_ cell: CellMainFilter)
+    func didUpdateText(text: String)
+    func didClickButton()
 }
 
 enum CellMainFilterMod{
@@ -12,7 +12,7 @@ enum CellMainFilterMod{
     case action
 }
 
-class CellMainFilter: UITableViewCell {
+class CellMainFilter: UITableViewCell,UITextFieldDelegate {
     
     // Outlet
     @IBOutlet weak var ui_textfield: UITextField!
@@ -34,14 +34,22 @@ class CellMainFilter: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
-        ui_textfield.delegate = self
     }
     
     private func setupView() {
         // Ajout de la bordure grise
+        ui_textfield.delegate = self
         ui_view_button.layer.borderWidth = 1
         ui_view_button.layer.borderColor = UIColor.appGreyOff.cgColor
         updateViewButtonAppearance()
+        ui_textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+
+    }
+    
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        if let text = textField.text {
+            delegate?.didUpdateText(text: text)
+        }
     }
     
     private func updateViewButtonAppearance() {
@@ -72,20 +80,13 @@ class CellMainFilter: UITableViewCell {
                 self.ui_textfield.setPlaceholder(text: "main_filter_cell_action_placeholder".localized, font: placeholderFont)
             }
     }
+
     
     @IBAction func onTouchFilter(_ sender: Any) {
         // Mise à jour de l'état de sélection
         haveFilter.toggle()
-        delegate?.didClickButton(self)
+        delegate?.didClickButton()
     }
 }
 
 // Extension pour gérer le UITextFieldDelegate
-extension CellMainFilter: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            print("text " , text)
-            delegate?.didUpdateText(self, text: text)
-        }
-    }
-}
