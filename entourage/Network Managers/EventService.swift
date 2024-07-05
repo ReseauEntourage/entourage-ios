@@ -600,7 +600,7 @@ struct EventService:ParsingDataCodable {
             let stringifiedItems = selectedItem.joined(separator: ",")
             var endpoint = String(format: kAPIGetMyFilteredOutings, userId, token, currentPage, per, radius, latitude, longitude, stringifiedItems)
             if stringifiedItems.isEmpty {
-                endpoint = String(format: kAPIEventGetAllForUser, token, per, currentPage)
+                endpoint = String(format: kAPIEventGetAllForUser,userId, token, currentPage, per)
             }
             getEventsWithEndpoint(endpoint, completion)
         }
