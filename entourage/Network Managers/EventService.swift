@@ -595,12 +595,12 @@ struct EventService:ParsingDataCodable {
             }
         }
     }
-    static func getFilteredMyEvents(userId: String, currentPage: Int, per: Int, radius: Float, latitude: Float, longitude: Float, selectedItem: [String], completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
+    static func getFilteredMyEvents(userId: Int, currentPage: Int, per: Int, radius: Float, latitude: Float, longitude: Float, selectedItem: [String], completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
             guard let token = UserDefaults.token else { return }
             let stringifiedItems = selectedItem.joined(separator: ",")
-            var endpoint = String(format: kAPIGetMyFilteredOutings, userId, token, currentPage, per, radius, latitude, longitude, stringifiedItems)
+            var endpoint = String(format: kAPIGetMyFilteredOutings, String(userId), token, currentPage, per, radius, latitude, longitude, stringifiedItems)
             if stringifiedItems.isEmpty {
-                endpoint = String(format: kAPIEventGetAllForUser,userId, token, currentPage, per)
+                endpoint = String(format: kAPIEventGetAllForUser,String(userId), token, currentPage, per)
             }
             getEventsWithEndpoint(endpoint, completion)
         }
@@ -611,7 +611,7 @@ struct EventService:ParsingDataCodable {
         getEventsWithEndpoint(endpoint, completion)
     }
 
-    static func searchMyEvents(userId:Int, query: String, currentPage: Int, per: Int, completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
+    static func searchMyEvents(userId:String, query: String, currentPage: Int, per: Int, completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
         let endpoint = String(format: kAPISearchMyEvents, userId, token, currentPage, per, query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
         getEventsWithEndpoint(endpoint, completion)

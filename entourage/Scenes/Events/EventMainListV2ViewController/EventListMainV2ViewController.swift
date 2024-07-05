@@ -13,6 +13,12 @@ private enum EventListTableDTO {
     case emptyCell
 }
 
+enum ViewMode {
+    case normal
+    case filtered
+    case searching
+}
+
 class EventListMainV2ViewController: UIViewController {
 
     // OUTLET
@@ -48,13 +54,6 @@ class EventListMainV2ViewController: UIViewController {
     var selectedRadius: Float = 0
     var selectedCoordinate: CLLocationCoordinate2D?
     private var searchText = ""
-
-
-    enum ViewMode {
-        case normal
-        case filtered
-        case searching
-    }
     private var mode: ViewMode = .normal
 
     override func viewDidLoad() {
@@ -130,6 +129,7 @@ class EventListMainV2ViewController: UIViewController {
         self.isEndOfMyEventList = false
         self.myEvent.removeAll()
         self.discoverEvent.removeAll()
+        self.searchEvent.removeAll()
         self.isOnlyDiscoverPagination = false
         isFromFilter = false
         self.getMyEvent()
@@ -167,19 +167,32 @@ class EventListMainV2ViewController: UIViewController {
     func configureDTO() {
         tableDTO.removeAll()
         tableDTO.append(.filterCell(numberOfFilter: self.numberOfFilters))
-        if myEvent.count > 0 {
-            tableDTO.append(.firstHeader)
-            tableDTO.append(.myEventCell)
-        }
-        if discoverEvent.count > 0 {
-            tableDTO.append(.secondHeader)
-            for event in discoverEvent {
-                tableDTO.append(.discoverEventCell(event: event))
+        if mode == .searching {
+            searchEvent.append(contentsOf: self.myEvent)
+            searchEvent.append(contentsOf: self.discoverEvent)
+            if searchEvent.count > 0 {
+                for event in searchEvent {
+                    tableDTO.append(.discoverEventCell(event: event))
+                }
+            } else {
+                tableDTO.append(.emptyCell)
             }
         } else {
-            tableDTO.append(.secondHeader)
-            tableDTO.append(.emptyCell)
+            if myEvent.count > 0 {
+                tableDTO.append(.firstHeader)
+                tableDTO.append(.myEventCell)
+            }
+            if discoverEvent.count > 0 {
+                tableDTO.append(.secondHeader)
+                for event in discoverEvent {
+                    tableDTO.append(.discoverEventCell(event: event))
+                }
+            } else {
+                tableDTO.append(.secondHeader)
+                tableDTO.append(.emptyCell)
+            }
         }
+
         self.ui_table_view.reloadData()
         self.pullRefreshControl.endRefreshing()
         isLoading = false
@@ -355,31 +368,23 @@ extension EventListMainV2ViewController {
         if isEndOfDiscoverList {
             return
         }
-        let selectedItemsList = selectedItemsFilter.filter { $0.value }.map { $0.key }
-        EventService.getSuggestFilteredEvents(
-            currentPage: currentPageDiscover,
-            per: numberOfItemsForWS,
-            radius: self.selectedRadius,
-            latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
-            longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
-            selectedItem: selectedItemsList
-        ) { events, error in
-            if let _events = events {
-                if _events.count < self.numberOfItemsForWS {
-                    self.isEndOfDiscoverList = true
-                }
-                let uniqueEvents = _events.filter { newEvent in
-                    !self.discoverEvent.contains { existingEvent in
-                        existingEvent.uid == newEvent.uid
-                    }
-                }
-                self.discoverEvent.append(contentsOf: uniqueEvents)
-                self.configureDTO()
-                self.isLoading = false
-            } else if let _error = error {
-                // TODO: Handle error
+        switch mode {
+        case .normal, .filtered:
+            let selectedItemsList = selectedItemsFilter.filter { $0.value }.map { $0.key }
+            EventService.getSuggestFilteredEvents(
+                currentPage: currentPageDiscover,
+                per: numberOfItemsForWS,
+                radius: self.selectedRadius,
+                latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
+                longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
+                selectedItem: selectedItemsList
+            ) { events, error in
+                self.handleDiscoverEventResponse(events: events, error: error)
             }
-            self.configureDTO()
+        case .searching:
+            EventService.searchEvents(query: searchText, currentPage: currentPageDiscover, per: numberOfItemsForWS) { events, error in
+                self.handleDiscoverEventResponse(events: events, error: error)
+            }
         }
     }
 
@@ -388,8 +393,13 @@ extension EventListMainV2ViewController {
             self.getDiscoverEvent()
             return
         }
-        if isFromFilter {
-            let userId = (UserDefaults.currentUser?.sid).map { String(describing: $0) } ?? ""
+        let userId = UserDefaults.currentUser?.sid ?? 0
+        switch mode {
+        case .normal:
+            EventService.getAllEventsForUser(currentPage: currentPageMy, per: numberOfItemsForWS) { events, error in
+                self.handleMyEventResponse(events: events, error: error)
+            }
+        case .filtered:
             let selectedItemsList = selectedItemsFilter.filter { $0.value }.map { $0.key }
             EventService.getFilteredMyEvents(
                 userId: userId,
@@ -400,32 +410,42 @@ extension EventListMainV2ViewController {
                 longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
                 selectedItem: selectedItemsList
             ) { events, error in
-                if let _events = events {
-                    if _events.count < self.numberOfItemsForWS {
-                        self.isEndOfMyEventList = true
-                    }
-                    print("events size " , _events.count)
-                    self.myEvent.append(contentsOf: _events)
-                } else if let _error = error {
-                    // TODO: Handle error
-                }
-                self.getDiscoverEvent()
+                self.handleMyEventResponse(events: events, error: error)
             }
-        } else {
-            EventService.getAllEventsForUser(currentPage: currentPageMy, per: numberOfItemsForWS) { events, error in
-                if let _events = events {
-                    if _events.count < self.numberOfItemsForWS {
-                        self.isEndOfMyEventList = true
-                    }
-                    self.myEvent.append(contentsOf: _events)
-                } else if let _error = error {
-                    // TODO: Handle error
-                }
-                self.getDiscoverEvent()
-            }
+        case .searching:
+            self.getDiscoverEvent()
         }
     }
 
+    private func handleDiscoverEventResponse(events: [Event]?, error: EntourageNetworkError?) {
+        if let _events = events {
+            if _events.count < self.numberOfItemsForWS {
+                self.isEndOfDiscoverList = true
+            }
+            let uniqueEvents = _events.filter { newEvent in
+                !self.discoverEvent.contains { existingEvent in
+                    existingEvent.uid == newEvent.uid
+                }
+            }
+            self.discoverEvent.append(contentsOf: uniqueEvents)
+        } else if let _error = error {
+            // TODO: Handle error
+        }
+        self.configureDTO()
+        self.isLoading = false
+    }
+
+    private func handleMyEventResponse(events: [Event]?, error: EntourageNetworkError?) {
+        if let _events = events {
+            if _events.count < self.numberOfItemsForWS {
+                self.isEndOfMyEventList = true
+            }
+            self.myEvent.append(contentsOf: _events)
+        } else if let _error = error {
+            // TODO: Handle error
+        }
+        self.getDiscoverEvent()
+    }
 }
 
 // MARK: Extensions for event filters
@@ -476,9 +496,9 @@ extension EventListMainV2ViewController: HomeEventHCCDelegate {
 extension EventListMainV2ViewController: CellMainFilterDelegate {
     func didUpdateText(text: String) {
         searchText = text
-        if searchText.isEmpty{
+        if searchText.isEmpty {
             mode = .normal
-        }else{
+        } else {
             mode = .searching
         }
         loadForInit()
