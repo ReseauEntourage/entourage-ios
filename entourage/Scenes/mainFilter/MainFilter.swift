@@ -39,6 +39,7 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     
     // Outlet
     @IBOutlet weak var ui_tableview: UITableView!
+    @IBOutlet weak var ui_back_btn: UIImageView!
     
     // Variable
     var tableDTO = [MainFilterDTO]()
@@ -63,6 +64,11 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
         ui_tableview.register(UINib(nibName: "MainFilterLocationCell", bundle: nil), forCellReuseIdentifier: "MainFilterLocationCell")
         ui_tableview.register(UINib(nibName: "MainFilterDistanceCell", bundle: nil), forCellReuseIdentifier: "MainFilterDistanceCell")
         self.constructFilter()
+
+        // Add tap gesture to back button
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onBackButtonClick))
+        ui_back_btn.addGestureRecognizer(tapGesture)
+        ui_back_btn.isUserInteractionEnabled = true
     }
     
     func constructFilter() {
@@ -138,6 +144,21 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     func onAddressClick(coordinate: CLLocationCoordinate2D, adressTitle: String) {
         self.selectedAdress = coordinate
         self.selectedAdressTitle = adressTitle
+    }
+    
+    // Method to reset the filter view to its initial state
+    func resetFilters() {
+        self.selectedItems.removeAll()
+        self.selectedItemsAction.removeAll()
+        self.selectedAdress = nil
+        self.selectedRadius = 40
+        self.selectedAdressTitle = ""
+        self.locationCellHeight = 70 // Reset to default height
+        self.constructFilter()
+    }
+
+    @objc func onBackButtonClick() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -252,15 +273,13 @@ extension MainFilter: MainFilterDistanceCellDelegate {
 
 extension MainFilter: EnhancedOnboardingButtonDelegate {
     func onConfigureLaterClick() {
-        self.tableDTO.removeAll()
-        self.ui_tableview.reloadData()
-        self.constructFilter()
+        resetFilters() // Reset filters to initial state
     }
     
     func onNextClick() {
-        print("selected address" , selectedAdress)
-        print("selected address" , selectedAdressTitle)
-        print("selected radius" , selectedRadius)
+        print("selected address", selectedAdress)
+        print("selected address title", selectedAdressTitle)
+        print("selected radius", selectedRadius)
         if mod == .action {
             delegate?.didUpdateFilter(selectedItems: selectedItemsAction, radius: Float(selectedRadius), coordinate: selectedAdress, adressTitle: self.selectedAdressTitle)
         } else {
