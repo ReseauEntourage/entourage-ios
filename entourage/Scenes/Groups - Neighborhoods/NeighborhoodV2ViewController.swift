@@ -12,7 +12,7 @@ private enum GroupListTableDTO {
     case emptyCell
 }
 
-private enum DisplayMode {
+enum DisplayMode {
     case normal
     case filtered
     case searching

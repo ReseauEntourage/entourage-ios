@@ -116,7 +116,13 @@ let kAPIContribUpdate = "contributions/%d?token=%@"
 let kAPISolicitationUpdate = "solicitations/%d?token=%@"
 
 let kAPIActionGetAllContribs = "contributions?token=%@&page=%d&per=%d"
+let kAPIActionGetAllContribsWithFilter = "contributions?token=%@&page=%d&per=%d&travel_distance=%.2f&latitude=%.6f&longitude=%.6f&section_list=%@"
+let kAPIActionGetAllContribsWitherSearch = "contributions?token=%@&page=%d&per=%d&q=%@"
+
 let kAPIActionGetAllSolicitations = "solicitations?token=%@&page=%d&per=%d"
+let kAPIActionGetAllSolicitationsWithFilter = "solicitations?token=%@&page=%d&per=%d&travel_distance=%.2f&latitude=%.6f&longitude=%.6f&section_list=%@"
+let kAPIActionGetAllSolicitationsWithSearch = "solicitations?token=%@&page=%d&per=%d&q=%@"
+
 let kAPIActionGetAllForMe = "users/me/actions?token=%@&page=%d&per=%d"
 
 let kAPIReportContrib = "contributions/%@/report?token=%@"

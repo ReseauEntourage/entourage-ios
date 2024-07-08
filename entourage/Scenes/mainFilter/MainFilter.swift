@@ -18,7 +18,7 @@ enum MainFilterDTO {
     case titleCell(title: String)
     case sectionCell(content: String, numberOfItem: Int)
     case tagCell(choice: MainFilterTagItem)
-    case localisationCell(address:String)
+    case localisationCell(address: String)
     case radiusCell(radius: Int)
     case buttonCell
 }
@@ -30,11 +30,10 @@ enum MainFilterMode {
 }
 
 protocol MainFilterDelegate: AnyObject {
-    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle:String)
+    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String)
 }
 
 class MainFilter: UIViewController, MainFilterLocationCellDelegate {
-    
     
     weak var delegate: MainFilterDelegate?
     
@@ -45,12 +44,12 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     var tableDTO = [MainFilterDTO]()
     var mod: MainFilterMode = .action
     var selectedItems = [String: Bool]()
+    var selectedItemsAction = [String: Bool]()
     var locationCellHeight: CGFloat = 70 // Default height
     var selectedAdress: CLLocationCoordinate2D?
     var selectedRadius: Int = 40
     var selectedAdressTitle: String = ""
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_tableview.delegate = self
@@ -67,6 +66,8 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     }
     
     func constructFilter() {
+        tableDTO.removeAll() // Vider le tableau avant de le remplir à nouveau
+
         switch self.mod {
         case .group, .event:
             let interestChoices = [
@@ -85,7 +86,6 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
             tableDTO.append(.titleCell(title: "Filtres"))
             tableDTO.append(.sectionCell(content: "Par thématique", numberOfItem: selectedItems.values.filter { $0 }.count))
             for interestChoice in interestChoices {
-                // Ne pas écraser les éléments déjà définis dans selectedItems
                 if selectedItems[interestChoice.id] == nil {
                     selectedItems[interestChoice.id] = false
                 }
@@ -99,17 +99,16 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
         case .action:
             let actionChoices = [
                 MainFilterTagItem(id: "services", title: "Service", subtitle: " (lessive, impression de documents...)"),
-                MainFilterTagItem(id: "vetement", title: "Vêtement", subtitle: " (chaussures, manteau...)"),
+                MainFilterTagItem(id: "clothes", title: "Vêtement", subtitle: " (chaussures, manteau...)"),
                 MainFilterTagItem(id: "material_donations", title: "Équipement", subtitle: " (téléphone, duvet...)"),
                 MainFilterTagItem(id: "hygiene", title: "Produit d’hygiène", subtitle: " (savon, protection hygiénique, couches...)"),
                 MainFilterTagItem(id: "sharing_time", title: "Temps de partage", subtitle: " (café, activité...)")
             ]
             tableDTO.append(.titleCell(title: "Filtres"))
-            tableDTO.append(.sectionCell(content: "Par catégorie", numberOfItem: selectedItems.count))
+            tableDTO.append(.sectionCell(content: "Par catégorie", numberOfItem: selectedItemsAction.values.filter { $0 }.count))
             for actionChoice in actionChoices {
-                // Ne pas écraser les éléments déjà définis dans selectedItems
-                if selectedItems[actionChoice.id] == nil {
-                    selectedItems[actionChoice.id] = false
+                if selectedItemsAction[actionChoice.id] == nil {
+                    selectedItemsAction[actionChoice.id] = false
                 }
                 tableDTO.append(.tagCell(choice: actionChoice))
             }
@@ -117,14 +116,12 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
             tableDTO.append(.localisationCell(address: selectedAdressTitle))
             tableDTO.append(.radiusCell(radius: self.selectedRadius))
             tableDTO.append(.buttonCell)
-
         }
         
         loadDTO()
     }
-
     
-    func loadDTO(){
+    func loadDTO() {
         ui_tableview.reloadData()
     }
     
@@ -137,6 +134,7 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
             self.ui_tableview.endUpdates()
         }
     }
+
     func onAddressClick(coordinate: CLLocationCoordinate2D, adressTitle: String) {
         self.selectedAdress = coordinate
         self.selectedAdressTitle = adressTitle
@@ -165,11 +163,16 @@ extension MainFilter: UITableViewDelegate, UITableViewDataSource {
         case .tagCell(let choice):
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "MainFilterTagCell") as? MainFilterTagCell {
                 cell.selectionStyle = .none
-                let isSelected = selectedItems[choice.id] ?? false
+                let isSelected: Bool
+                if mod == .action {
+                    isSelected = selectedItemsAction[choice.id] ?? false
+                } else {
+                    isSelected = selectedItems[choice.id] ?? false
+                }
                 cell.configure(choice: choice, isSelected: isSelected)
                 return cell
             }
-        case .localisationCell(let address) :
+        case .localisationCell(let address):
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "MainFilterLocationCell") as? MainFilterLocationCell {
                 cell.selectionStyle = .none
                 cell.delegate = self
@@ -206,19 +209,35 @@ extension MainFilter: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableDTO[indexPath.row] {
         case .tagCell(let choice):
-            // Mettre à jour l'état de sélection
-            selectedItems[choice.id]?.toggle()
-            // Calculer le nombre de filtres sélectionnés
-            let selectedCount = selectedItems.values.filter { $0 }.count
+            if mod == .action {
+                // Mettre à jour l'état de sélection
+                selectedItemsAction[choice.id]?.toggle()
+                // Calculer le nombre de filtres sélectionnés
+                let selectedCount = selectedItemsAction.values.filter { $0 }.count
 
-            // Mettre à jour la deuxième cellule de section avec le nouveau nombre de filtres sélectionnés
-            if tableDTO.count > 1, case .sectionCell(let content, _) = tableDTO[1] {
-                tableDTO[1] = .sectionCell(content: content, numberOfItem: selectedCount)
-                tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+                // Mettre à jour la deuxième cellule de section avec le nouveau nombre de filtres sélectionnés
+                if tableDTO.count > 1, case .sectionCell(let content, _) = tableDTO[1] {
+                    tableDTO[1] = .sectionCell(content: content, numberOfItem: selectedCount)
+                    tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+                }
+
+                // Recharger la cellule sélectionnée pour refléter le changement
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            } else {
+                // Mettre à jour l'état de sélection
+                selectedItems[choice.id]?.toggle()
+                // Calculer le nombre de filtres sélectionnés
+                let selectedCount = selectedItems.values.filter { $0 }.count
+
+                // Mettre à jour la deuxième cellule de section avec le nouveau nombre de filtres sélectionnés
+                if tableDTO.count > 1, case .sectionCell(let content, _) = tableDTO[1] {
+                    tableDTO[1] = .sectionCell(content: content, numberOfItem: selectedCount)
+                    tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+                }
+
+                // Recharger la cellule sélectionnée pour refléter le changement
+                tableView.reloadRows(at: [indexPath], with: .automatic)
             }
-
-            // Recharger la cellule sélectionnée pour refléter le changement
-            tableView.reloadRows(at: [indexPath], with: .automatic)
         default:
             break
         }
@@ -239,10 +258,14 @@ extension MainFilter: EnhancedOnboardingButtonDelegate {
     }
     
     func onNextClick() {
-        print("selected adress" , selectedAdress)
-        print("selected adress" , selectedAdressTitle)
+        print("selected address" , selectedAdress)
+        print("selected address" , selectedAdressTitle)
         print("selected radius" , selectedRadius)
-        delegate?.didUpdateFilter(selectedItems: selectedItems, radius: Float(selectedRadius), coordinate: selectedAdress, adressTitle: self.selectedAdressTitle)
+        if mod == .action {
+            delegate?.didUpdateFilter(selectedItems: selectedItemsAction, radius: Float(selectedRadius), coordinate: selectedAdress, adressTitle: self.selectedAdressTitle)
+        } else {
+            delegate?.didUpdateFilter(selectedItems: selectedItems, radius: Float(selectedRadius), coordinate: selectedAdress, adressTitle: self.selectedAdressTitle)
+        }
         dismiss(animated: true, completion: nil)
     }
 }

@@ -264,6 +264,11 @@
                                                         <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="12"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                                                <real key="value" value="9"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </label>
                                                 </subviews>
                                             </stackView>
@@ -292,6 +297,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                                <real key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -405,6 +413,14 @@
                                     <constraint firstAttribute="trailing" secondItem="lUo-sf-oJ5" secondAttribute="trailing" constant="10" id="xeM-1b-DqQ"/>
                                 </constraints>
                             </view>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oMq-Dc-AJP">
+                                <rect key="frame" x="22" y="195" width="257.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="nJD-zp-3Cd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="io9-Mg-TeZ">
                                 <rect key="frame" x="4" y="242" width="406" height="540"/>
                                 <subviews>
@@ -546,16 +562,19 @@
                             <constraint firstItem="io9-Mg-TeZ" firstAttribute="top" secondItem="NVL-Dz-byA" secondAttribute="bottom" constant="60" id="Bdk-gR-tHz"/>
                             <constraint firstItem="t3y-mc-lct" firstAttribute="trailing" secondItem="io9-Mg-TeZ" secondAttribute="trailing" constant="4" id="F0c-Nh-aDX"/>
                             <constraint firstItem="2Q1-ML-TDn" firstAttribute="top" secondItem="wDc-VV-5lZ" secondAttribute="top" id="Hpg-cS-RFC"/>
+                            <constraint firstItem="oMq-Dc-AJP" firstAttribute="centerY" secondItem="F8Q-MI-0iU" secondAttribute="centerY" id="O6Q-GB-gza"/>
                             <constraint firstItem="t3y-mc-lct" firstAttribute="trailing" secondItem="Arv-1K-ZzA" secondAttribute="trailing" constant="32" id="ORd-9P-qIg"/>
                             <constraint firstItem="NVL-Dz-byA" firstAttribute="leading" secondItem="t3y-mc-lct" secondAttribute="leading" id="OiT-br-Wgo"/>
                             <constraint firstItem="AuA-rL-O6l" firstAttribute="leading" secondItem="t3y-mc-lct" secondAttribute="leading" constant="4" id="Q8P-7x-OFf"/>
                             <constraint firstItem="AuA-rL-O6l" firstAttribute="top" secondItem="t3y-mc-lct" secondAttribute="top" id="S4F-52-Zkz"/>
+                            <constraint firstItem="F8Q-MI-0iU" firstAttribute="leading" secondItem="oMq-Dc-AJP" secondAttribute="trailing" constant="10" id="TZF-Jt-FfX"/>
                             <constraint firstItem="Efs-97-Fjc" firstAttribute="leading" secondItem="AuA-rL-O6l" secondAttribute="leading" id="URS-WZ-JQl"/>
                             <constraint firstItem="t3y-mc-lct" firstAttribute="trailing" secondItem="erd-wW-zu4" secondAttribute="trailing" constant="4" id="Vwn-Qj-yIh"/>
                             <constraint firstItem="erd-wW-zu4" firstAttribute="top" secondItem="NVL-Dz-byA" secondAttribute="bottom" id="cGR-xy-4Vj"/>
                             <constraint firstAttribute="bottom" secondItem="erd-wW-zu4" secondAttribute="bottom" id="ek2-Hp-ajJ"/>
                             <constraint firstItem="t3y-mc-lct" firstAttribute="trailing" secondItem="AuA-rL-O6l" secondAttribute="trailing" constant="4" id="frU-kb-wyo"/>
                             <constraint firstItem="t3y-mc-lct" firstAttribute="bottom" secondItem="AuA-rL-O6l" secondAttribute="bottom" id="kkS-qz-2CV"/>
+                            <constraint firstItem="oMq-Dc-AJP" firstAttribute="leading" secondItem="t3y-mc-lct" secondAttribute="leading" constant="22" id="mN1-3e-0SW"/>
                             <constraint firstItem="erd-wW-zu4" firstAttribute="leading" secondItem="wDc-VV-5lZ" secondAttribute="leading" constant="4" id="pMq-CL-gDt"/>
                             <constraint firstItem="t3y-mc-lct" firstAttribute="trailing" secondItem="2Q1-ML-TDn" secondAttribute="trailing" id="phT-mc-UXe"/>
                             <constraint firstItem="NVL-Dz-byA" firstAttribute="top" secondItem="t3y-mc-lct" secondAttribute="top" id="qpB-kp-EYY"/>
@@ -581,13 +600,16 @@
                         <outlet property="ui_lbl_empty_subtitle_discover" destination="uIP-v5-g71" id="edj-Vg-4BC"/>
                         <outlet property="ui_lbl_empty_title_discover" destination="Rsa-up-wCK" id="oRC-As-KN2"/>
                         <outlet property="ui_location_filter" destination="Zng-bU-TWZ" id="9a1-Rz-wXm"/>
+                        <outlet property="ui_search_textfield" destination="oMq-Dc-AJP" id="CC7-yP-v6S"/>
                         <outlet property="ui_tableview" destination="AuA-rL-O6l" id="GvF-uK-agO"/>
                         <outlet property="ui_title_bt_clear_filters" destination="D46-ee-igN" id="k1W-Dk-oOW"/>
+                        <outlet property="ui_tv_filter" destination="QRL-Wc-Ms9" id="aLs-qY-aZz"/>
                         <outlet property="ui_view_bt_categories" destination="7Ct-sJ-sVf" id="Hm7-Fj-Zjw"/>
                         <outlet property="ui_view_bt_clear_filters" destination="xKC-Rd-ylL" id="Eg3-09-EGL"/>
                         <outlet property="ui_view_bt_location" destination="qri-pa-3GV" id="gP9-Oq-kMr"/>
                         <outlet property="ui_view_empty" destination="io9-Mg-TeZ" id="Awt-Gz-9dN"/>
                         <outlet property="ui_view_empty_discover" destination="5Ta-tE-Qcd" id="REi-tY-v3U"/>
+                        <outlet property="ui_view_filter" destination="lUo-sf-oJ5" id="hVU-kX-8Ji"/>
                         <outlet property="ui_view_filter_button" destination="Efs-97-Fjc" id="zCF-qT-Xvc"/>
                         <outlet property="ui_view_height_constraint" destination="mxS-UU-2dC" id="nw3-HN-yGD"/>
                         <outlet property="ui_view_indicator_contribs" destination="YSp-xm-sJp" id="kvk-6X-PXi"/>
@@ -2269,7 +2291,7 @@
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="grey_off">
-            <color red="0.79600000381469727" green="0.79600000381469727" blue="0.79600000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gris_112">
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
