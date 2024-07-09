@@ -180,6 +180,62 @@ class ActionsMainHomeViewController: UIViewController {
         ui_view_filter.layer.borderWidth = 1
         ui_view_filter.layer.borderColor = UIColor.appGreyOff.cgColor
         ui_search_textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        setupTextFieldIcons()
+    }
+    
+    private func setupTextFieldIcons() {
+        // Setup left view with arrow button
+        let arrowButton = UIButton(type: .custom)
+        if #available(iOS 13.0, *) {
+            arrowButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
+        arrowButton.tintColor = UIColor.appOrange
+        arrowButton.addTarget(self, action: #selector(closeTextField), for: .touchUpInside)
+        arrowButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
+        // Add padding
+        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
+        leftPaddingView.addSubview(arrowButton)
+        arrowButton.center = leftPaddingView.center
+        ui_search_textfield.leftView = leftPaddingView
+        
+        // Setup right view with cross button
+        let crossButton = UIButton(type: .custom)
+        if #available(iOS 13.0, *) {
+            crossButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
+        crossButton.tintColor = UIColor.appOrange
+        crossButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
+        crossButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
+        // Add padding
+        let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
+        rightPaddingView.addSubview(crossButton)
+        crossButton.center = rightPaddingView.center
+        ui_search_textfield.rightView = rightPaddingView
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        ui_search_textfield.leftViewMode = .always
+        ui_search_textfield.rightViewMode = .always
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        ui_search_textfield.leftViewMode = .never
+        ui_search_textfield.rightViewMode = .never
+    }
+    
+    @objc private func closeTextField() {
+        ui_search_textfield.resignFirstResponder()
+    }
+    
+    @objc private func clearTextField() {
+        ui_search_textfield.text = ""
+        loadDataBasedOnMode()
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {

@@ -44,10 +44,66 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
         ui_view_button.layer.borderColor = UIColor.appGreyOff.cgColor
         updateViewButtonAppearance()
         ui_textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        setupTextFieldIcons()
+    }
+    
+    private func setupTextFieldIcons() {
+        // Setup left view with arrow button
+        let arrowButton = UIButton(type: .custom)
+        if #available(iOS 13.0, *) {
+            arrowButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
+        arrowButton.tintColor = UIColor.appOrange
+        arrowButton.addTarget(self, action: #selector(closeTextField), for: .touchUpInside)
+        arrowButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
+        // Add padding
+        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
+        leftPaddingView.addSubview(arrowButton)
+        arrowButton.center = leftPaddingView.center
+        ui_textfield.leftView = leftPaddingView
+        
+        // Setup right view with cross button
+        let crossButton = UIButton(type: .custom)
+        if #available(iOS 13.0, *) {
+            crossButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
+        crossButton.tintColor = UIColor.appOrange
+        crossButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
+        crossButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        
+        // Add padding
+        let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
+        rightPaddingView.addSubview(crossButton)
+        crossButton.center = rightPaddingView.center
+        ui_textfield.rightView = rightPaddingView
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        ui_textfield.leftViewMode = .always
+        ui_textfield.rightViewMode = .always
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        ui_textfield.leftViewMode = .never
+        ui_textfield.rightViewMode = .never
+    }
+    
+    @objc private func closeTextField() {
+        ui_textfield.resignFirstResponder()
+    }
+    
+    @objc private func clearTextField() {
+        ui_textfield.text = ""
+        delegate?.didUpdateText(text: "")
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        if textField.text == ""{
+        if textField.text == "" {
             delegate?.didUpdateText(text: "")
         }
         textChangeTimer?.invalidate()
