@@ -4,6 +4,7 @@ import UIKit
 protocol CellMainFilterDelegate: AnyObject {
     func didUpdateText(text: String)
     func didClickButton()
+    func didChangeFocus(hasFocus: Bool)
 }
 
 enum CellMainFilterMod {
@@ -19,6 +20,7 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var ui_view_button: UIView!
     @IBOutlet weak var ui_label_number_filter: UILabel!
     
+    @IBOutlet weak var ui_contrainst_width_button: NSLayoutConstraint!
     // Variable
     var haveFilter = false {
         didSet {
@@ -86,11 +88,13 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         ui_textfield.leftViewMode = .always
         ui_textfield.rightViewMode = .always
+        delegate?.didChangeFocus(hasFocus: true) // Notifier le delegate que le focus est pris
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         ui_textfield.leftViewMode = .never
         ui_textfield.rightViewMode = .never
+        delegate?.didChangeFocus(hasFocus: false) // Notifier le delegate que le focus est quitté
     }
     
     @objc private func closeTextField() {

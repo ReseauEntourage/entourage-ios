@@ -28,6 +28,7 @@ class NeighborhoodV2ViewController: UIViewController {
     @IBOutlet weak var ui_bottom_title_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_expanded_btn: UIButton!
     @IBOutlet weak var ui_retracted_btn: UIButton!
+    @IBOutlet weak var contraint_table_view_top: NSLayoutConstraint!
     
     // VARIABLES
     private var allGroups = [Neighborhood]()
@@ -150,7 +151,7 @@ class NeighborhoodV2ViewController: UIViewController {
                 self.pullRefreshControl.endRefreshing()
                 if let groups = groups {
                     self.searchGroups.append(contentsOf: groups)
-                    self.configureDTO()
+                    self.getDiscoverGroup()
                 }
             }
         }
@@ -440,6 +441,17 @@ extension NeighborhoodV2ViewController: CellMainFilterDelegate {
     func didClickButton() {
         self.showFilter()
     }
+    
+    func didChangeFocus(hasFocus: Bool) {
+        if hasFocus {
+            contraint_table_view_top.constant = 20
+        } else {
+            contraint_table_view_top.constant = 100
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
 }
 
 extension NeighborhoodV2ViewController: MainFilterDelegate {
@@ -467,4 +479,5 @@ extension NeighborhoodV2ViewController: MainFilterDelegate {
         self.ui_table_view.reloadRows(at: [indexPath], with: .automatic)
         self.getFilteredGroup()
     }
+    
 }

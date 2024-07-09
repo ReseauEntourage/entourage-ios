@@ -159,6 +159,7 @@
                         <outlet property="ui_contraint_title" destination="86P-qL-ULQ" id="ECS-cf-3Hr"/>
                         <outlet property="ui_location_filter" destination="OcW-j0-b1x" id="Zh0-fc-kyj"/>
                         <outlet property="ui_table_view" destination="NKt-xy-FEu" id="j4O-pG-ytz"/>
+                        <outlet property="ui_tableview_contraint_top" destination="m4N-cx-gLM" id="BxY-j0-nAb"/>
                         <outlet property="ui_title_label" destination="apv-Np-uYM" id="3iR-wL-Ztr"/>
                         <outlet property="ui_top_contrainst_table_view" destination="m4N-cx-gLM" id="lJr-B7-6Fm"/>
                     </connections>

@@ -30,7 +30,8 @@ class EventListMainV2ViewController: UIViewController {
     @IBOutlet weak var ui_location_filter: UILabel!
     @IBOutlet weak var ui_title_label: UILabel!
     @IBOutlet weak var ui_table_view: UITableView!
-
+    @IBOutlet weak var ui_tableview_contraint_top: NSLayoutConstraint!
+    
     // VAR
     private var currentPageMy = 0
     private var currentPageDiscover = 0
@@ -503,9 +504,19 @@ extension EventListMainV2ViewController: CellMainFilterDelegate {
         }
         loadForInit()
     }
-    
     func didClickButton() {
         self.showFilter()
+    }
+    
+    func didChangeFocus(hasFocus: Bool) {
+        if hasFocus {
+            ui_tableview_contraint_top.constant = 20
+        } else {
+            ui_tableview_contraint_top.constant = 100
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
 

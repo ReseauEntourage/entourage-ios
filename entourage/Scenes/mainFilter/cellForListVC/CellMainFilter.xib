@@ -114,6 +114,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ui_contrainst_width_button" destination="hnR-hu-9Cf" id="6yM-Op-dqT"/>
                 <outlet property="ui_label_number_filter" destination="5e6-dc-bk5" id="ABW-h3-ybA"/>
                 <outlet property="ui_textfield" destination="3cs-7a-naF" id="hfR-Uz-GPR"/>
                 <outlet property="ui_view_button" destination="4QN-qU-Z0x" id="Mez-dC-TcT"/>
