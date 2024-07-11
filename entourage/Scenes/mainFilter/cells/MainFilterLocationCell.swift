@@ -43,6 +43,10 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
         self.ui_textfield_location.text = address
     }
     
+    func dismissKeyboard() {
+        self.endEditing(true)
+    }
+    
     // MARK: - UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -85,7 +89,9 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
         searchResults.removeAll()
         ui_tableview.reloadData()
         updateTableViewHeight()
+        dismissKeyboard()
     }
+    
     
     // MARK: - Helper Methods
     

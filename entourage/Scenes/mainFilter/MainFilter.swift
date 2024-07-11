@@ -108,7 +108,7 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
                 MainFilterTagItem(id: "clothes", title: "Vêtement", subtitle: " (chaussures, manteau...)"),
                 MainFilterTagItem(id: "material_donations", title: "Équipement", subtitle: " (téléphone, duvet...)"),
                 MainFilterTagItem(id: "hygiene", title: "Produit d’hygiène", subtitle: " (savon, protection hygiénique, couches...)"),
-                MainFilterTagItem(id: "sharing_time", title: "Temps de partage", subtitle: " (café, activité...)")
+                MainFilterTagItem(id: "social", title: "Temps de partage", subtitle: " (café, activité...)")
             ]
             tableDTO.append(.titleCell(title: "Filtres"))
             tableDTO.append(.sectionCell(content: "Par catégorie", numberOfItem: selectedItemsAction.values.filter { $0 }.count))
@@ -154,6 +154,11 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
         self.selectedRadius = 40
         self.selectedAdressTitle = ""
         self.locationCellHeight = 70 // Reset to default height
+        if let _user = UserDefaults.currentUser {
+            self.selectedAdress = CLLocationCoordinate2D(latitude: _user.addressPrimary?.latitude ?? 0, longitude: _user.addressPrimary?.longitude ?? 0)
+            self.selectedAdressTitle = _user.addressPrimary?.displayAddress ?? ""
+            self.selectedRadius = _user.radiusDistance ?? 0
+        }
         self.constructFilter()
     }
 
@@ -286,5 +291,18 @@ extension MainFilter: EnhancedOnboardingButtonDelegate {
             delegate?.didUpdateFilter(selectedItems: selectedItems, radius: Float(selectedRadius), coordinate: selectedAdress, adressTitle: self.selectedAdressTitle)
         }
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension MainFilter {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 {
+            ui_back_btn.isHidden = true
+        } else {
+            ui_back_btn.isHidden = false
+        }
+    }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+            view.endEditing(true)
     }
 }
