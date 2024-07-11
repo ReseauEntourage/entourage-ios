@@ -556,6 +556,7 @@ extension HomeV2ViewController {
         HomeService.getInitialResources { resources, error in
           if let resources = resources {
             self.initialPedagos.removeAll()
+              print("resource count ", resources.count)
             var pedagoReads = [PedagogicResource]()
             for resource in resources {
               if resource.isRead == false {
@@ -564,9 +565,6 @@ extension HomeV2ViewController {
             }
             for pedagoRead in pedagoReads {
               self.initialPedagos.append(pedagoRead)
-              if self.initialPedagos.count > 1 {
-                break
-              }
             }
           }
           self.configureDTO()
