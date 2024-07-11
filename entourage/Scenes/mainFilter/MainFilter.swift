@@ -280,7 +280,6 @@ extension MainFilter: EnhancedOnboardingButtonDelegate {
     func onConfigureLaterClick() {
         resetFilters() // Reset filters to initial state
     }
-    
     func onNextClick() {
         print("selected address", selectedAdress)
         print("selected address title", selectedAdressTitle)
