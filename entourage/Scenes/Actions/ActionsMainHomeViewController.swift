@@ -418,6 +418,12 @@ class ActionsMainHomeViewController: UIViewController {
     
     @IBAction func action_contribs(_ sender: Any?) {
         currentMode = .contribNormal
+        if self.numberOfFilter != 0 {
+            currentMode = .contribFiltered
+        }
+        self.contribs.removeAll()
+        self.solicitations.removeAll()
+        self.ui_tableview.reloadData()
         isfirstLoadingContrib = true
         
         if contribs.isEmpty {
@@ -438,6 +444,12 @@ class ActionsMainHomeViewController: UIViewController {
     
     @IBAction func action_solicitations(_ sender: Any?) {
         currentMode = .solicitationNormal
+        if self.numberOfFilter != 0 {
+            currentMode = .solicitationFiltered
+        }
+        self.contribs.removeAll()
+        self.solicitations.removeAll()
+        self.ui_tableview.reloadData()
         
         if solicitations.isEmpty {
             currentPageSolicitations = 1
