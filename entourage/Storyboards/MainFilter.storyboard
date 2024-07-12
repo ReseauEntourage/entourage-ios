@@ -21,27 +21,17 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="W5S-Qr-SUZ">
-                                <rect key="frame" x="20" y="20" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="OlW-En-eEk"/>
-                                    <constraint firstAttribute="width" constant="40" id="Wtv-OI-nHY"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="W5S-Qr-SUZ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="20" id="1Xb-hG-W6B"/>
                             <constraint firstItem="Py2-uz-Q6J" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="BKh-Rv-BXP"/>
-                            <constraint firstItem="W5S-Qr-SUZ" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="20" id="Jqs-DX-dt8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Py2-uz-Q6J" secondAttribute="trailing" id="aKd-xi-Hvh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Py2-uz-Q6J" secondAttribute="bottom" id="fNS-Gv-gMu"/>
                             <constraint firstItem="Py2-uz-Q6J" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="utE-Q4-59Z"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ui_back_btn" destination="W5S-Qr-SUZ" id="3Ia-C8-Nnx"/>
                         <outlet property="ui_tableview" destination="Py2-uz-Q6J" id="mLK-5l-6zj"/>
                     </connections>
                 </viewController>
@@ -51,7 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back_arrow" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

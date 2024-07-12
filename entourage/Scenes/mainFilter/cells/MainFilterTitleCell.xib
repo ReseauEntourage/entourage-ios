@@ -14,31 +14,43 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainFilterTitleCell" rowHeight="151" id="hkd-jL-ktO" customClass="MainFilterTitleCell" customModule="Ent_Beta" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="553" height="151"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainFilterTitleCell" rowHeight="101" id="hkd-jL-ktO" customClass="MainFilterTitleCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="553" height="101"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hkd-jL-ktO" id="6SP-BV-qfQ">
-                <rect key="frame" x="0.0" y="0.0" width="553" height="151"/>
+                <rect key="frame" x="0.0" y="0.0" width="553" height="101"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbJ-yA-4dc">
-                        <rect key="frame" x="24" y="16" width="505" height="119"/>
+                        <rect key="frame" x="256.33333333333331" y="16" width="40.333333333333314" height="69"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="67e-Qs-zmp">
+                        <rect key="frame" x="20" y="30.666666666666671" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="P7f-X5-E4k"/>
+                            <constraint firstAttribute="height" constant="40" id="tTw-Ik-ULC"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="bbJ-yA-4dc" firstAttribute="leading" secondItem="6SP-BV-qfQ" secondAttribute="leading" constant="24" id="2Ys-va-kDW"/>
                     <constraint firstAttribute="bottom" secondItem="bbJ-yA-4dc" secondAttribute="bottom" constant="16" id="2ni-kK-8hk"/>
-                    <constraint firstAttribute="trailing" secondItem="bbJ-yA-4dc" secondAttribute="trailing" constant="24" id="EyK-aX-2B8"/>
+                    <constraint firstItem="67e-Qs-zmp" firstAttribute="centerY" secondItem="bbJ-yA-4dc" secondAttribute="centerY" id="VdX-OR-UNb"/>
+                    <constraint firstItem="67e-Qs-zmp" firstAttribute="leading" secondItem="6SP-BV-qfQ" secondAttribute="leading" constant="20" id="l1G-9U-B1Y"/>
+                    <constraint firstItem="bbJ-yA-4dc" firstAttribute="centerX" secondItem="6SP-BV-qfQ" secondAttribute="centerX" id="lav-3e-RXI"/>
                     <constraint firstItem="bbJ-yA-4dc" firstAttribute="top" secondItem="6SP-BV-qfQ" secondAttribute="top" constant="16" id="xgb-1z-0mp"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ib_btn_back" destination="67e-Qs-zmp" id="mEt-np-Px4"/>
                 <outlet property="ui_title_label" destination="bbJ-yA-4dc" id="dsJ-VT-oNu"/>
             </connections>
-            <point key="canvasLocation" x="87.786259541984734" y="57.394366197183103"/>
+            <point key="canvasLocation" x="87.786259541984734" y="39.7887323943662"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="back_arrow" width="40" height="40"/>
+    </resources>
 </document>

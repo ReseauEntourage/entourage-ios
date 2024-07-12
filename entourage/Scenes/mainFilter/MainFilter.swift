@@ -39,7 +39,6 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     
     // Outlet
     @IBOutlet weak var ui_tableview: UITableView!
-    @IBOutlet weak var ui_back_btn: UIImageView!
     
     // Variable
     var tableDTO = [MainFilterDTO]()
@@ -67,8 +66,7 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
 
         // Add tap gesture to back button
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onBackButtonClick))
-        ui_back_btn.addGestureRecognizer(tapGesture)
-        ui_back_btn.isUserInteractionEnabled = true
+
     }
     
     func constructFilter() {
@@ -177,6 +175,7 @@ extension MainFilter: UITableViewDelegate, UITableViewDataSource {
         case .titleCell(let title):
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "MainFilterTitleCell") as? MainFilterTitleCell {
                 cell.selectionStyle = .none
+                cell.delegate = self
                 cell.configure(title: title)
                 return cell
             }
@@ -295,13 +294,17 @@ extension MainFilter: EnhancedOnboardingButtonDelegate {
 
 extension MainFilter {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0 {
-            ui_back_btn.isHidden = true
-        } else {
-            ui_back_btn.isHidden = false
-        }
+
     }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
             view.endEditing(true)
     }
+}
+
+extension MainFilter:MainFilterTitleCellDelegate{
+    func onBackClick() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
