@@ -226,14 +226,28 @@ class ActionsMainHomeViewController: UIViewController {
     
     @objc private func closeTextField() {
         ui_contrainst_textfield_height.constant = 0
+        ui_search_textfield.text = ""
+        self.ui_view_search.isHidden = false
+        self.ui_view_filter.isHidden = false
         ui_search_textfield.resignFirstResponder()
         self.isSearching = false
         self.currentMode = self.isContribSelected ? .contribNormal : .solicitationNormal
         if self.numberOfFilter > 0 {
             self.currentMode = self.isContribSelected ? .contribFiltered : .solicitationFiltered
         }
-        scrollViewDidScroll(self.ui_tableview)
-        gotoTop(isAnimated: false)
+        
+        // Réinitialiser la hauteur de la vue et la taille de la police si en haut
+        if self.ui_tableview.contentOffset.y <= 0 {
+            self.ui_view_height_constraint.constant = self.maxViewHeight
+            self.ui_constraint_bottom_label.constant = self.maxLabelBottomConstraint
+            self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.maxLabelFont)
+        } else {
+            self.ui_view_height_constraint.constant = self.minViewHeight
+            self.ui_constraint_bottom_label.constant = self.minLabelBottomConstraint
+            self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
+        }
+
+        self.view.layoutIfNeeded()
         loadDataBasedOnMode()
     }
     
@@ -263,6 +277,8 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     @objc private func showSearch() {
+        self.ui_view_search.isHidden = true
+        self.ui_view_filter.isHidden = true
         ui_contrainst_textfield_height.constant = 30
         ui_search_textfield.becomeFirstResponder()
         self.isSearching = true
@@ -702,31 +718,26 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         UIView.animate(withDuration: 0) {
             if self.isSearching {
+                // Mode recherche : toujours en taille minimale
                 self.ui_view_height_constraint.constant = self.minViewHeight
                 self.ui_constraint_bottom_label.constant = self.minLabelBottomConstraint
                 self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
-                self.view.layoutIfNeeded()
-                return
-            }
-            
-            let yOffset = scrollView.contentOffset.y
-            let yView = self.viewNormalHeight - (yOffset + self.viewNormalHeight)
-            let heightView = min(max(yView, self.minViewHeight), self.maxViewHeight)
-            self.ui_view_height_constraint.constant = heightView
-            
-            if self.ui_view_height_constraint.constant <= self.minViewHeight {
-                self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
             } else {
-                let yLabel = self.labelNormalConstraintBottom - (yOffset + self.labelNormalConstraintBottom)
-                let heightLabel = min(max(yLabel, self.minLabelBottomConstraint), self.maxLabelBottomConstraint)
-                self.ui_constraint_bottom_label.constant = heightLabel
-                
-                let yLabelFont = self.labelNormalFontHeight - (yOffset + self.labelNormalFontHeight)
-                let heightCalculated = (self.minLabelFont * yLabelFont) / self.minViewHeight
-                let heightLabelFont = min(max(heightCalculated, self.minLabelFont), self.maxLabelFont)
-                self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: heightLabelFont)
+                // Mode normal ou filtré
+                if scrollView.contentOffset.y <= 0 {
+                    // Si le tableview est en haut du scroll
+                    self.ui_view_height_constraint.constant = self.maxViewHeight
+                    self.ui_constraint_bottom_label.constant = self.maxLabelBottomConstraint
+                    self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.maxLabelFont)
+                } else {
+                    // Si le tableview est descendu
+                    self.ui_view_height_constraint.constant = self.minViewHeight
+                    self.ui_constraint_bottom_label.constant = self.minLabelBottomConstraint
+                    self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
+                }
             }
             
+            // Mise à jour de la disposition de la vue
             self.view.layoutIfNeeded()
         }
     }
