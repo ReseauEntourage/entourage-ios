@@ -4,7 +4,7 @@ import UIKit
 protocol CellMainFilterDelegate: AnyObject {
     func didUpdateText(text: String)
     func didClickButton()
-    func didChangeFocus(hasFocus: Bool)
+    func shouldCloseSearch()
 }
 
 enum CellMainFilterMod {
@@ -17,14 +17,12 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     
     // Outlet
     @IBOutlet weak var ui_textfield: UITextField!
-    @IBOutlet weak var ui_view_button: UIView!
-    @IBOutlet weak var ui_label_number_filter: UILabel!
+
     
-    @IBOutlet weak var ui_contrainst_width_button: NSLayoutConstraint!
     // Variable
     var haveFilter = false {
         didSet {
-            updateViewButtonAppearance()
+
         }
     }
     class var identifier: String {
@@ -42,9 +40,6 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     private func setupView() {
         // Ajout de la bordure grise
         ui_textfield.delegate = self
-        ui_view_button.layer.borderWidth = 1
-        ui_view_button.layer.borderColor = UIColor.appGreyOff.cgColor
-        updateViewButtonAppearance()
         ui_textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         setupTextFieldIcons()
     }
@@ -88,22 +83,25 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         ui_textfield.leftViewMode = .always
         ui_textfield.rightViewMode = .always
-        delegate?.didChangeFocus(hasFocus: true) // Notifier le delegate que le focus est pris
+
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         ui_textfield.leftViewMode = .never
         ui_textfield.rightViewMode = .never
-        delegate?.didChangeFocus(hasFocus: false) // Notifier le delegate que le focus est quitté
+        
     }
     
     @objc private func closeTextField() {
-        ui_textfield.resignFirstResponder()
+        ui_textfield.text = ""
+        delegate?.didUpdateText(text: "")
+        delegate?.shouldCloseSearch()
     }
     
     @objc private func clearTextField() {
         ui_textfield.text = ""
         delegate?.didUpdateText(text: "")
+
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
@@ -120,20 +118,10 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
         }
     }
     
-    private func updateViewButtonAppearance() {
-        // Mise à jour de la couleur de fond en fonction de l'état de sélection
-        if haveFilter {
-            ui_view_button.backgroundColor = UIColor.appBeige // Assurez-vous que appColor est défini dans votre Asset Catalog
-        } else {
-            ui_view_button.backgroundColor = UIColor.white
-        }
-    }
     
     func configure(selected: Bool, numberOfFilter: Int, mod: CellMainFilterMod, isSearching: Bool) {
         self.mod = mod
         self.haveFilter = selected
-        self.ui_label_number_filter.text = String(numberOfFilter)
-        self.ui_label_number_filter.isHidden = !selected
 
         let placeholderFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
         switch mod {
@@ -145,12 +133,7 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
             self.ui_textfield.setPlaceholder(text: "main_filter_cell_action_placeholder".localized, font: placeholderFont)
         }
     }
-    
-    @IBAction func onTouchFilter(_ sender: Any) {
-        // Mise à jour de l'état de sélection
-        haveFilter.toggle()
-        delegate?.didClickButton()
-    }
+
 }
 
 // Extension pour gérer le UITextFieldDelegate

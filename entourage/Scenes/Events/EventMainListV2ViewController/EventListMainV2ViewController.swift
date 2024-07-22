@@ -22,16 +22,17 @@ enum ViewMode {
 class EventListMainV2ViewController: UIViewController {
 
     // OUTLET
-    @IBOutlet weak var ui_btn_filter: UIButton!
     @IBOutlet weak var ui_contraint_title: NSLayoutConstraint!
     @IBOutlet weak var ui_top_contrainst_table_view: NSLayoutConstraint!
     @IBOutlet weak var floatingButton: UIButton!
     @IBOutlet weak var expandedfloatingButton: UIButton!
-    @IBOutlet weak var ui_location_filter: UILabel!
     @IBOutlet weak var ui_title_label: UILabel!
     @IBOutlet weak var ui_table_view: UITableView!
     @IBOutlet weak var ui_tableview_contraint_top: NSLayoutConstraint!
     
+    @IBOutlet weak var uiBtnSearch: UIView!
+    @IBOutlet weak var uiBtnFilter: UIView!
+    @IBOutlet weak var ui_tv_number_of_filter: UILabel!
     // VAR
     private var currentPageMy = 0
     private var currentPageDiscover = 0
@@ -56,6 +57,10 @@ class EventListMainV2ViewController: UIViewController {
     var selectedCoordinate: CLLocationCoordinate2D?
     private var searchText = ""
     private var mode: ViewMode = .normal
+    private var isSearching = false
+    private var startSearching = false
+    
+    private var filterCell: CellMainFilter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,10 +80,6 @@ class EventListMainV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: EmptyListCell.identifier, bundle: nil), forCellReuseIdentifier: EmptyListCell.identifier)
         ui_table_view.register(UINib(nibName: CellMainFilter.identifier, bundle: nil), forCellReuseIdentifier: CellMainFilter.identifier)
 
-        // Btn filter
-        ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: UIColor.appOrange))
-        ui_location_filter.text = currentFilter.getFilterButtonString()
-
         // Pull to refresh
         pullRefreshControl.attributedTitle = NSAttributedString(string: "Loading".localized)
         pullRefreshControl.tintColor = .appOrange
@@ -88,6 +89,11 @@ class EventListMainV2ViewController: UIViewController {
         expandedfloatingButton.setTitle("event_title_btn_create_event".localized, for: .normal)
         deployButton()
         configureUserLocationAndRadius()
+        let searchTapGesture = UITapGestureRecognizer(target: self, action: #selector(onSearchClick))
+        uiBtnSearch.addGestureRecognizer(searchTapGesture)
+
+        let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(onFilterClick))
+        uiBtnFilter.addGestureRecognizer(filterTapGesture)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -97,6 +103,35 @@ class EventListMainV2ViewController: UIViewController {
             loadForInit()
         }
         comeFromDetail = false
+    }
+    
+    @objc func onSearchClick() {
+        isSearching = true
+        startSearching = true
+        switchSearchMode()
+    }
+
+    @objc func onFilterClick() {
+        self.showFilter()
+    }
+    
+    func switchSearchMode(){
+        if isSearching {
+            mode = .searching
+            ui_tableview_contraint_top.constant = 20
+        } else {
+            if numberOfFilters == 0 {
+                mode = .normal
+                ui_tableview_contraint_top.constant = 100
+            } else {
+                mode = .filtered
+                ui_tableview_contraint_top.constant = 100
+            }
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+            self.loadForInit()
+        }
     }
 
     func retractButton() {
@@ -123,7 +158,6 @@ class EventListMainV2ViewController: UIViewController {
         if !isFromFilter {
             currentFilter = EventActionLocationFilters()
         }
-        ui_location_filter.text = currentFilter.getFilterButtonString()
         self.currentPageMy = 0
         self.currentPageDiscover = 0
         self.isEndOfDiscoverList = false
@@ -167,18 +201,9 @@ class EventListMainV2ViewController: UIViewController {
 
     func configureDTO() {
         tableDTO.removeAll()
-        tableDTO.append(.filterCell(numberOfFilter: self.numberOfFilters))
-        if mode == .searching {
-            searchEvent.append(contentsOf: self.myEvent)
-            searchEvent.append(contentsOf: self.discoverEvent)
-            if searchEvent.count > 0 {
-                for event in searchEvent {
-                    tableDTO.append(.discoverEventCell(event: event))
-                }
-            } else {
-                tableDTO.append(.emptyCell)
-            }
-        } else {
+        
+        switch mode {
+        case .normal:
             if myEvent.count > 0 {
                 tableDTO.append(.firstHeader)
                 tableDTO.append(.myEventCell)
@@ -192,13 +217,45 @@ class EventListMainV2ViewController: UIViewController {
                 tableDTO.append(.secondHeader)
                 tableDTO.append(.emptyCell)
             }
+        case .filtered:
+            if myEvent.count > 0 {
+                tableDTO.append(.firstHeader)
+                tableDTO.append(.myEventCell)
+            }
+            if discoverEvent.count > 0 {
+                tableDTO.append(.secondHeader)
+                for event in discoverEvent {
+                    tableDTO.append(.discoverEventCell(event: event))
+                }
+            } else {
+                tableDTO.append(.secondHeader)
+                tableDTO.append(.emptyCell)
+            }
+        case .searching:
+            if searchEvent.count > 0 {
+                for event in searchEvent {
+                    tableDTO.append(.discoverEventCell(event: event))
+                }
+            } else {
+                tableDTO.append(.emptyCell)
+            }
+        }
+        
+        if isSearching && startSearching {
+            self.ui_table_view.reloadData()
+            self.startSearching = false
+        } else if isSearching {
+            let sectionToReload = IndexSet(integer: 1)
+            self.ui_table_view.reloadSections(sectionToReload, with: .automatic)
+        } else {
+            self.ui_table_view.reloadData()
         }
 
-        self.ui_table_view.reloadData()
         self.pullRefreshControl.endRefreshing()
         isLoading = false
         IHProgressHUD.dismiss()
     }
+
 
     @objc func showNewEvent(_ notification: Notification) {
         if let eventId = notification.userInfo?[kNotificationEventShowId] as? Int {
@@ -250,33 +307,28 @@ class EventListMainV2ViewController: UIViewController {
 
 // MARK: Tableview delegates
 extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSource {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        DispatchQueue.main.async {
-            let yOffset = self.ui_table_view.contentOffset.y
-            if yOffset > 0 {
-                if yOffset <= 100 {
-                    let fontSize = 24 - (yOffset / 100) * (24 - 18)
-                    self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: fontSize)
-                    self.deployButton()
-                    self.ui_top_contrainst_table_view.constant = 100 - 0.4 * yOffset
-                    self.ui_contraint_title.constant = 20 - 0.1 * yOffset
-                    self.view.layoutIfNeeded()
-                } else if yOffset > 100 {
-                    self.retractButton()
-                    self.ui_title_label.font = ApplicationTheme.getFontQuickSandBold(size: 18)
-                    self.ui_top_contrainst_table_view.constant = 60
-                    self.ui_contraint_title.constant = 10
-                    self.view.layoutIfNeeded()
-                }
-            }
-        }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return isSearching ? 2 : 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearching && section == 0 {
+            return 1
+        }
         return tableDTO.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if isSearching && indexPath.section == 0 {
+            if let cell = filterCell ?? tableView.dequeueReusableCell(withIdentifier: "CellMainFilter") as? CellMainFilter {
+                filterCell = cell
+                cell.selectionStyle = .none
+                cell.delegate = self
+                cell.configure(selected: numberOfFilters != 0, numberOfFilter: self.numberOfFilters, mod: .event, isSearching: self.mode == .searching)
+                return cell
+            }
+        }
+        
         switch tableDTO[indexPath.row] {
         case .firstHeader:
             if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "DividerCell") as? DividerCell {
@@ -330,6 +382,10 @@ extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isSearching && indexPath.section == 0 {
+            return UITableView.automaticDimension
+        }
+        
         switch tableDTO[indexPath.row] {
         case .firstHeader:
             return UITableView.automaticDimension
@@ -347,6 +403,10 @@ extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isSearching && indexPath.section == 0 {
+            return
+        }
+        
         switch tableDTO[indexPath.row] {
         case .firstHeader:
             return
@@ -366,7 +426,7 @@ extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSou
 
 extension EventListMainV2ViewController {
     func getDiscoverEvent() {
-        if isEndOfDiscoverList {
+        if isEndOfDiscoverList && self.mode != .searching {
             return
         }
         switch mode {
@@ -390,7 +450,7 @@ extension EventListMainV2ViewController {
     }
 
     func getMyEvent() {
-        if isEndOfMyEventList {
+        if isEndOfMyEventList && self.mode != .searching {
             self.getDiscoverEvent()
             return
         }
@@ -428,7 +488,15 @@ extension EventListMainV2ViewController {
                     existingEvent.uid == newEvent.uid
                 }
             }
-            self.discoverEvent.append(contentsOf: uniqueEvents)
+            switch self.mode{
+            case .normal:
+                self.discoverEvent.append(contentsOf: uniqueEvents)
+            case .filtered:
+                self.discoverEvent.append(contentsOf: uniqueEvents)
+            case .searching:
+                self.searchEvent.append(contentsOf: _events)
+
+            }
         } else if let _error = error {
             // TODO: Handle error
         }
@@ -453,7 +521,6 @@ extension EventListMainV2ViewController {
 extension EventListMainV2ViewController: EventFiltersDelegate {
     func updateFilters(_ filters: EventActionLocationFilters) {
         self.currentFilter = filters
-        ui_location_filter.text = currentFilter.getFilterButtonString()
         self.isFromFilter = true
         self.loadForFilter()
     }
@@ -495,28 +562,19 @@ extension EventListMainV2ViewController: HomeEventHCCDelegate {
 }
 
 extension EventListMainV2ViewController: CellMainFilterDelegate {
-    func didUpdateText(text: String) {
-        searchText = text
-        if searchText.isEmpty {
-            mode = .normal
-        } else {
-            mode = .searching
-        }
-        loadForInit()
-    }
-    func didClickButton() {
-        self.showFilter()
+    func shouldCloseSearch() {
+        isSearching = false
+        switchSearchMode()
     }
     
-    func didChangeFocus(hasFocus: Bool) {
-        if hasFocus {
-            ui_tableview_contraint_top.constant = 20
-        } else {
-            ui_tableview_contraint_top.constant = 100
-        }
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
+    func didUpdateText(text: String) {
+        searchText = text
+        self.searchEvent.removeAll()
+        self.getMyEvent()  // Met à jour les données en fonction du texte de recherche
+    }
+    
+    func didClickButton() {
+        self.showFilter()
     }
 }
 
@@ -524,6 +582,12 @@ extension EventListMainV2ViewController: MainFilterDelegate {
     func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String) {
         let selectedCount = selectedItems.values.filter { $0 }.count
         self.numberOfFilters = selectedCount
+        if numberOfFilters > 0 {
+            self.ui_tv_number_of_filter.text = String(numberOfFilters)
+            self.ui_tv_number_of_filter.isHidden = false
+        }else{
+            self.ui_tv_number_of_filter.isHidden = true
+        }
         self.selectedItemsFilter = selectedItems
         self.selectedCoordinate = coordinate
         self.selectedRadius = radius ?? 0

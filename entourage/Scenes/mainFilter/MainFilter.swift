@@ -306,5 +306,4 @@ extension MainFilter:MainFilterTitleCellDelegate{
         self.dismiss(animated: true, completion: nil)
     }
     
-    
 }

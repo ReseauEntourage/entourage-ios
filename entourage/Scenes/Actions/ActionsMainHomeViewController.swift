@@ -16,8 +16,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     @IBOutlet weak var ui_view_selector: UIView!
     @IBOutlet weak var ui_image_inside_top_constraint: NSLayoutConstraint!
-    @IBOutlet weak var ui_image_constraint_height: NSLayoutConstraint!
-    @IBOutlet weak var ui_image: UIImageView!
+
     
     @IBOutlet weak var ui_constraint_bottom_label: NSLayoutConstraint!
     
@@ -50,7 +49,6 @@ class ActionsMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_title_bt_clear_filters: UILabel!
     
     @IBOutlet weak var ui_constraint_bt_location_width: NSLayoutConstraint!
-    @IBOutlet weak var ui_label_my_announce_btn: UILabel!
     
     @IBOutlet weak var ui_view_filter: UIView!
     @IBOutlet weak var ui_tv_filter: UILabel!
@@ -565,7 +563,6 @@ class ActionsMainHomeViewController: UIViewController {
         
         ui_view_selector.addRadiusTopOnly(radius: ApplicationTheme.bigCornerRadius)
         
-        maxImageHeight = ui_image_constraint_height.constant
         imageNormalHeight = maxImageHeight
         
         ui_label_title.font = UIFont.systemFont(ofSize: maxLabelFont)
@@ -577,7 +574,6 @@ class ActionsMainHomeViewController: UIViewController {
         ui_view_height_constraint.constant = maxViewHeight
         viewNormalHeight = ui_view_height_constraint.constant
         
-        ui_label_my_announce_btn.text = "actions_my_title".localized
         
         if #available(iOS 13.0, *) {
             let window = UIApplication.shared.windows.first
@@ -726,7 +722,6 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
             let diffImage = (self.maxViewHeight - self.maxImageHeight)
             let heightImage = min(max(yImage - diffImage, self.minImageHeight), self.maxImageHeight)
             
-            self.ui_image.alpha = heightImage / self.maxImageHeight
             
             let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
             let heightView = min(max(yView, self.minViewHeight), self.maxViewHeight)
@@ -737,7 +732,6 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
                 return
             }
             
-            self.ui_image.isHidden = false
             
             let yLabel = self.labelNormalConstraintBottom - (scrollView.contentOffset.y + self.labelNormalConstraintBottom)
             let heightLabel = min(max(yLabel, self.minLabelBottomConstraint), self.maxLabelBottomConstraint)
