@@ -30,16 +30,8 @@ class ActionsMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_label_solicitations: UILabel!
     @IBOutlet weak var ui_view_indicator_solicitations: UIView!
     
-    @IBOutlet weak var ui_location_filter: UILabel!
-    @IBOutlet weak var ui_view_bt_location: UIView!
-    
-    @IBOutlet weak var ui_categories_filter: UILabel!
-    @IBOutlet weak var ui_view_bt_categories: UIView!
-    @IBOutlet weak var ui_label_nb_cat_filter: UILabel!
-    
     @IBOutlet weak var ui_floaty_button: Floaty!
     
-    @IBOutlet weak var ui_view_filter_button: UIView!
     @IBOutlet weak var ui_view_empty: UIView!
     @IBOutlet weak var ui_arrow_show_empty: UIImageView!
     @IBOutlet weak var ui_view_empty_discover: UIView!
@@ -47,12 +39,13 @@ class ActionsMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_subtitle_discover: UILabel!
     @IBOutlet weak var ui_view_bt_clear_filters: UIView!
     @IBOutlet weak var ui_title_bt_clear_filters: UILabel!
-    
-    @IBOutlet weak var ui_constraint_bt_location_width: NSLayoutConstraint!
-    
-    @IBOutlet weak var ui_view_filter: UIView!
-    @IBOutlet weak var ui_tv_filter: UILabel!
+
     @IBOutlet weak var ui_search_textfield: UITextField!
+    @IBOutlet weak var ui_contrainst_textfield_height: NSLayoutConstraint!
+    
+    @IBOutlet weak var ui_view_search: UIView!
+    @IBOutlet weak var ui_view_filter: UIView!
+    @IBOutlet weak var ui_tv_number_filter: UILabel!
     
     var maxViewHeight: CGFloat = 134
     var minViewHeight: CGFloat = 92
@@ -104,6 +97,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_contrainst_textfield_height.constant = 0
         self.currentMode = .solicitationNormal // Set default to solicitations
 
         if let _sections = Metadatas.sharedInstance.tagsSections {
@@ -123,17 +117,22 @@ class ActionsMainHomeViewController: UIViewController {
         
         setupViews()
         
+        let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(ui_view_filterTapped))
+        ui_view_filter.addGestureRecognizer(filterTapGesture)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreate), name: NSNotification.Name(rawValue: kNotificationActionCreateEnd), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(showNewAction(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewAction), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationActionsUpdate), object: nil)
+        
+        let searchTapGesture = UITapGestureRecognizer(target: self, action: #selector(showSearch))
+        ui_view_search.addGestureRecognizer(searchTapGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        changeSectionFiltersCount()
         changeTabSelection()
         
         loadDataBasedOnMode()
@@ -175,8 +174,6 @@ class ActionsMainHomeViewController: UIViewController {
     
     func setCellMainFilter() {
         self.ui_search_textfield.delegate = self
-        ui_view_filter.layer.borderWidth = 1
-        ui_view_filter.layer.borderColor = UIColor.appGreyOff.cgColor
         ui_search_textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         setupTextFieldIcons()
     }
@@ -228,7 +225,16 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     @objc private func closeTextField() {
+        ui_contrainst_textfield_height.constant = 0
         ui_search_textfield.resignFirstResponder()
+        self.isSearching = false
+        self.currentMode = self.isContribSelected ? .contribNormal : .solicitationNormal
+        if self.numberOfFilter > 0 {
+            self.currentMode = self.isContribSelected ? .contribFiltered : .solicitationFiltered
+        }
+        scrollViewDidScroll(self.ui_tableview)
+        gotoTop(isAnimated: false)
+        loadDataBasedOnMode()
     }
     
     @objc private func clearTextField() {
@@ -252,18 +258,32 @@ class ActionsMainHomeViewController: UIViewController {
         }
     }
     
-    func switchCellMainFilter() {
-        if haveFilter {
-            ui_view_filter.backgroundColor = UIColor.appBeige
-            ui_view_filter.layer.borderColor = UIColor.appOrange.cgColor
-            ui_tv_filter.isHidden = false
-        } else {
-            ui_view_filter.backgroundColor = UIColor.white
-            ui_view_filter.layer.borderColor = UIColor.appGreyOff.cgColor
-            ui_tv_filter.isHidden = true
-        }
+    @objc private func ui_view_filterTapped() {
+        showFilter()
     }
     
+    @objc private func showSearch() {
+        ui_contrainst_textfield_height.constant = 30
+        ui_search_textfield.becomeFirstResponder()
+        self.isSearching = true
+        self.currentMode = isContribSelected ? .contribSearch : .solicitationSearch
+        scrollViewDidScroll(self.ui_tableview)
+        gotoTop(isAnimated: false)
+    }
+
+    func showFilter() {
+        let sb = UIStoryboard.init(name: StoryboardName.filterMain, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "MainFilter") as? MainFilter {
+            vc.mod = .action
+            vc.delegate = self
+            vc.selectedItemsAction = self.selectedItemsFilter
+            vc.selectedAdressTitle = self.selectedAddress
+            vc.selectedRadius = Int(self.selectedRadius)
+            vc.selectedAdress = self.selectedCoordinate
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+
     func createAction(isContrib: Bool) {
         let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
@@ -276,10 +296,8 @@ class ActionsMainHomeViewController: UIViewController {
     
     @objc func refreshDatasFromTab() {
         currentLocationFilter.resetToDefault()
-        ui_location_filter.text = currentLocationFilter.getFilterButtonString()
         
         currentSectionsFilter.resetToDefault()
-        changeSectionFiltersCount()
         
         currentPageContribs = 1
         currentPageSolicitations = 1
@@ -489,18 +507,10 @@ class ActionsMainHomeViewController: UIViewController {
     
     @IBAction func action_clear_filters(_ sender: Any) {
         self.currentLocationFilter.resetToDefault()
-        self.ui_location_filter.text = currentLocationFilter.getFilterButtonString()
         
         currentPageContribs = 1
         currentPageSolicitations = 1
         loadDataBasedOnMode()
-    }
-    
-    @IBAction func action_show_my_actions(_ sender: Any) {
-        if let navvc = storyboard?.instantiateViewController(withIdentifier: "action_myNav") {
-            AnalyticsLoggerManager.logEvent(name: Help_view_myactions)
-            self.tabBarController?.present(navvc, animated: true)
-        }
     }
     
     func changeTabSelection() {
@@ -544,19 +554,6 @@ class ActionsMainHomeViewController: UIViewController {
 
     func setupViews() {
         self.setCellMainFilter()
-        self.switchCellMainFilter()
-        ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
-        ui_location_filter.text = currentLocationFilter.getFilterButtonString()
-        
-        ui_categories_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
-        ui_categories_filter.text = "action_filter_category".localized
-        
-        ui_constraint_bt_location_width.constant = view.frame.width / 1.7
-        
-        ui_label_nb_cat_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoBold(size: 12), color: .appOrange))
-        ui_label_nb_cat_filter.layer.cornerRadius = ui_label_nb_cat_filter.frame.height / 2
-        ui_label_nb_cat_filter.isHidden = true
-        
         ui_label_title.text = "actions_main_page_title".localized
         ui_label_contribs.text = "actions_main_page_button_contribs".localized
         ui_label_solicitations.text = "actions_main_page_button_solicitations".localized
@@ -588,10 +585,6 @@ class ActionsMainHomeViewController: UIViewController {
         }
         
         ui_image_inside_top_constraint.constant = ui_image_inside_top_constraint.constant - topSafeAreaInsets
-        
-        ui_tableview.contentInset = UIEdgeInsets(top: viewNormalHeight + ui_view_filter_button.frame.height, left: 0, bottom: 0, right: 0)
-        ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: viewNormalHeight + ui_view_filter_button.frame.height, left: 0, bottom: 0, right: 0)
-        
         changeTabSelection()
         
         pullRefreshControl.attributedTitle = NSAttributedString(string: "Loading".localized)
@@ -599,18 +592,8 @@ class ActionsMainHomeViewController: UIViewController {
         pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)
         ui_tableview.refreshControl = pullRefreshControl
         
-        changeSectionFiltersCount()
     }
-    
-    func changeSectionFiltersCount() {
-        if currentSectionsFilter.getnumberSectionsSelected() > 0 {
-            ui_label_nb_cat_filter.isHidden = false
-            ui_label_nb_cat_filter.text = "\(currentSectionsFilter.getnumberSectionsSelected())"
-            ui_categories_filter.text = currentSectionsFilter.getnumberSectionsSelected() > 1 ? "action_filter_categories".localized : "action_filter_category".localized
-        } else {
-            ui_label_nb_cat_filter.isHidden = true
-        }
-    }
+
     
     func configureUserLocationAndRadius() {
         if let user = UserDefaults.currentUser {
@@ -718,33 +701,36 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         UIView.animate(withDuration: 0) {
-            let yImage = self.imageNormalHeight - (scrollView.contentOffset.y + self.imageNormalHeight)
-            let diffImage = (self.maxViewHeight - self.maxImageHeight)
-            let heightImage = min(max(yImage - diffImage, self.minImageHeight), self.maxImageHeight)
+            if self.isSearching {
+                self.ui_view_height_constraint.constant = self.minViewHeight
+                self.ui_constraint_bottom_label.constant = self.minLabelBottomConstraint
+                self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
+                self.view.layoutIfNeeded()
+                return
+            }
             
-            
-            let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
+            let yOffset = scrollView.contentOffset.y
+            let yView = self.viewNormalHeight - (yOffset + self.viewNormalHeight)
             let heightView = min(max(yView, self.minViewHeight), self.maxViewHeight)
             self.ui_view_height_constraint.constant = heightView
             
             if self.ui_view_height_constraint.constant <= self.minViewHeight {
                 self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
-                return
+            } else {
+                let yLabel = self.labelNormalConstraintBottom - (yOffset + self.labelNormalConstraintBottom)
+                let heightLabel = min(max(yLabel, self.minLabelBottomConstraint), self.maxLabelBottomConstraint)
+                self.ui_constraint_bottom_label.constant = heightLabel
+                
+                let yLabelFont = self.labelNormalFontHeight - (yOffset + self.labelNormalFontHeight)
+                let heightCalculated = (self.minLabelFont * yLabelFont) / self.minViewHeight
+                let heightLabelFont = min(max(heightCalculated, self.minLabelFont), self.maxLabelFont)
+                self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: heightLabelFont)
             }
-            
-            
-            let yLabel = self.labelNormalConstraintBottom - (scrollView.contentOffset.y + self.labelNormalConstraintBottom)
-            let heightLabel = min(max(yLabel, self.minLabelBottomConstraint), self.maxLabelBottomConstraint)
-            self.ui_constraint_bottom_label.constant = heightLabel
-            
-            let yLabelFont = self.labelNormalFontHeight - (scrollView.contentOffset.y + self.labelNormalFontHeight)
-            let heightCalculated = (self.minLabelFont * yLabelFont) / self.minViewHeight
-            let heightLabelFont = min(max(heightCalculated, self.minLabelFont), self.maxLabelFont)
-            self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: heightLabelFont)
             
             self.view.layoutIfNeeded()
         }
     }
+
 }
 
 //MARK: - EventFiltersDelegate -
@@ -752,7 +738,6 @@ extension ActionsMainHomeViewController: EventFiltersDelegate {
     func updateFilters(_ filters: EventActionLocationFilters) {
         self.currentLocationFilter = filters
         
-        ui_location_filter.text = currentLocationFilter.getFilterButtonString()
         
         goReloadAll()
     }
@@ -797,9 +782,7 @@ extension ActionsMainHomeViewController: FloatyDelegate {
 extension ActionsMainHomeViewController: EventSectionFiltersDelegate {
     func updateSectionFilters(_ filters: Sections) {
         self.currentSectionsFilter = filters
-        
-        changeSectionFiltersCount()
-        
+                
         goReloadAll()
     }
 }
@@ -808,14 +791,15 @@ extension ActionsMainHomeViewController: MainFilterDelegate {
     func didUpdateFilter(selectedItems: [String : Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String) {
         let selectedCount = selectedItems.values.filter { $0 }.count
         self.numberOfFilter = selectedCount
-        self.ui_tv_filter.text = String(self.numberOfFilter)
         
         if self.numberOfFilter == 0 {
             haveFilter = false
+            ui_tv_number_filter.isHidden = true
         } else {
             haveFilter = true
+            ui_tv_number_filter.text = "\(self.numberOfFilter)"
+            ui_tv_number_filter.isHidden = false
         }
-        self.switchCellMainFilter()
         self.selectedItemsFilter = selectedItems
         if let _radius = radius {
             self.selectedRadius = _radius
@@ -827,9 +811,9 @@ extension ActionsMainHomeViewController: MainFilterDelegate {
             self.configureUserLocationAndRadius()
         }
         if isContribSelected {
-            currentMode = .contribFiltered
-        }else{
-            currentMode = .solicitationFiltered
+            currentMode = self.numberOfFilter > 0 ? .contribFiltered : .contribNormal
+        } else {
+            currentMode = self.numberOfFilter > 0 ? .solicitationFiltered : .solicitationNormal
         }
         loadDataBasedOnMode()
     }
