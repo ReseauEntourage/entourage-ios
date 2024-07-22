@@ -175,6 +175,11 @@ class EventListMainV2ViewController: UIViewController {
         isFromFilter = true
         self.isEndOfDiscoverList = false
         self.isEndOfMyEventList = false
+        if self.numberOfFilters > 0 {
+            self.mode = .filtered
+        }else{
+            self.mode = .normal
+        }
         self.discoverEvent.removeAll()
         self.currentPageDiscover = 0
         self.myEvent.removeAll() // Ensure myEvent is cleared when filtering
