@@ -19,12 +19,28 @@ class MainFilterTagCell: UITableViewCell {
     
     func configure(choice: MainFilterTagItem, isSelected: Bool) {
         // Creating the attributed string for title and subtitle
-        let titleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.boldSystemFont(ofSize: ui_title_label.font.pointSize)
-        ]
+        let titleAttributes: [NSAttributedString.Key: Any]
         let subtitleAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: ui_title_label.font.pointSize)
         ]
+        
+        if choice.subtitle.isEmpty {
+            // Title only
+            if isSelected {
+                titleAttributes = [
+                    .font: UIFont.boldSystemFont(ofSize: ui_title_label.font.pointSize)
+                ]
+            } else {
+                titleAttributes = [
+                    .font: UIFont.systemFont(ofSize: ui_title_label.font.pointSize)
+                ]
+            }
+        } else {
+            // Title and subtitle
+            titleAttributes = [
+                .font: UIFont.boldSystemFont(ofSize: ui_title_label.font.pointSize)
+            ]
+        }
         
         let attributedText = NSMutableAttributedString(string: choice.title, attributes: titleAttributes)
         if !choice.subtitle.isEmpty {

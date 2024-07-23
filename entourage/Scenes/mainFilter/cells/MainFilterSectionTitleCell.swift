@@ -14,6 +14,7 @@ class MainFilterSectionTitleCell:UITableViewCell {
     
     @IBOutlet weak var ui_label_subtitle: UILabel!
     @IBOutlet weak var ui_label_number_items: UILabel!
+    @IBOutlet weak var constraint_top: NSLayoutConstraint!
     //Variable
     
     override func awakeFromNib() {
@@ -23,6 +24,11 @@ class MainFilterSectionTitleCell:UITableViewCell {
     func configure(content:String, numberOfItem:Int){
         self.ui_label_subtitle.text = content
         self.ui_label_number_items.text = String(numberOfItem)
+        if content.contains("loca") {
+            self.constraint_top.constant = 45
+        }else{
+            self.constraint_top.constant = 16
+        }
         if numberOfItem == 0 {
             self.ui_label_number_items.isHidden = true
         }else{

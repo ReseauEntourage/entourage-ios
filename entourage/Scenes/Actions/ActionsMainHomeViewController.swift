@@ -296,6 +296,7 @@ class ActionsMainHomeViewController: UIViewController {
             vc.selectedAdressTitle = self.selectedAddress
             vc.selectedRadius = Int(self.selectedRadius)
             vc.selectedAdress = self.selectedCoordinate
+            vc.modalPresentationStyle = .fullScreen
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }

@@ -8,9 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="NunitoSans-Regular.ttf">
-            <string>NunitoSans-Regular</string>
-        </array>
         <array key="Quicksand-Bold.ttf">
             <string>Quicksand-Bold</string>
         </array>
@@ -26,13 +23,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfG-7F-dfb">
-                        <rect key="frame" x="20.000000000000004" y="16" width="37.333333333333343" height="20.666666666666671"/>
-                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
+                        <rect key="frame" x="20.000000000000004" y="16" width="40.333333333333343" height="19"/>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTp-IP-wSh">
-                        <rect key="frame" x="67.333333333333329" y="14.333333333333336" width="24" height="24"/>
+                        <rect key="frame" x="70.333333333333329" y="13.666666666666664" width="24" height="24"/>
                         <color key="backgroundColor" name="orange_app"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="2CS-2Z-lN2"/>
@@ -58,6 +55,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="constraint_top" destination="QBD-bM-dQA" id="Frf-NZ-2Fu"/>
                 <outlet property="ui_label_number_items" destination="dTp-IP-wSh" id="EOt-2F-EhV"/>
                 <outlet property="ui_label_subtitle" destination="OfG-7F-dfb" id="3Tj-6s-fVU"/>
             </connections>

@@ -63,10 +63,28 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
         ui_tableview.register(UINib(nibName: "MainFilterLocationCell", bundle: nil), forCellReuseIdentifier: "MainFilterLocationCell")
         ui_tableview.register(UINib(nibName: "MainFilterDistanceCell", bundle: nil), forCellReuseIdentifier: "MainFilterDistanceCell")
         self.constructFilter()
-
+        
+        // Register for keyboard notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         // Add tap gesture to back button
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onBackButtonClick))
         // self.view.addGestureRecognizer(tapGesture) // Cette ligne est commentée car elle ne semble pas correcte
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.height + 100, right: 0) // Ajuster le décalage pour voir plus de suggestions
+        ui_tableview.contentInset = contentInsets
+        ui_tableview.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        ui_tableview.contentInset = .zero
+        ui_tableview.scrollIndicatorInsets = .zero
     }
     
     func constructFilter() {
@@ -130,14 +148,17 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     }
     
     // MainFilterLocationCellDelegate method
+    // MainFilterLocationCellDelegate method
     func onSearchIncreaseSize(size: CGFloat) {
-        self.locationCellHeight = size
+        let minHeight: CGFloat = 70 // Hauteur minimale
+        self.locationCellHeight = max(size, minHeight)
         print("size ", size)
         UIView.animate(withDuration: 0.3) {
             self.ui_tableview.beginUpdates()
             self.ui_tableview.endUpdates()
         }
     }
+
 
     func onAddressClick(coordinate: CLLocationCoordinate2D, adressTitle: String) {
         self.selectedAdress = coordinate
