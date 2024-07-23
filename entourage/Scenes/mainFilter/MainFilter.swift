@@ -66,7 +66,7 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
 
         // Add tap gesture to back button
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onBackButtonClick))
-
+        // self.view.addGestureRecognizer(tapGesture) // Cette ligne est commentée car elle ne semble pas correcte
     }
     
     func constructFilter() {
@@ -142,6 +142,13 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     func onAddressClick(coordinate: CLLocationCoordinate2D, adressTitle: String) {
         self.selectedAdress = coordinate
         self.selectedAdressTitle = adressTitle
+    }
+    
+    func onKeyboardWillShow(for cell: MainFilterLocationCell) {
+        guard let indexPath = ui_tableview.indexPath(for: cell) else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.ui_tableview.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
     }
     
     // Method to reset the filter view to its initial state
@@ -301,9 +308,8 @@ extension MainFilter {
     }
 }
 
-extension MainFilter:MainFilterTitleCellDelegate{
+extension MainFilter: MainFilterTitleCellDelegate {
     func onBackClick() {
         self.dismiss(animated: true, completion: nil)
     }
-    
 }

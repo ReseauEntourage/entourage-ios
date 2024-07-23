@@ -4,7 +4,8 @@ import MapKit
 
 protocol MainFilterLocationCellDelegate {
     func onSearchIncreaseSize(size: CGFloat)
-    func onAddressClick(coordinate: CLLocationCoordinate2D,adressTitle:String)
+    func onAddressClick(coordinate: CLLocationCoordinate2D, adressTitle: String)
+    func onKeyboardWillShow(for cell: MainFilterLocationCell)
 }
 
 class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, MKLocalSearchCompleterDelegate {
@@ -26,6 +27,14 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
         setupSuggestionsTableView()
         
         searchCompleter.delegate = self
+        
+        // Ajouter des notifications pour le clavier
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func setupLocationTextField() {
@@ -39,7 +48,7 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
         ui_tableview.isScrollEnabled = false
     }
     
-    func configure(address:String) {
+    func configure(address: String) {
         self.ui_textfield_location.text = address
     }
     
@@ -48,6 +57,10 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
     }
     
     // MARK: - UITextFieldDelegate
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        delegate?.onKeyboardWillShow(for: self)
+    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let updatedText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
@@ -92,7 +105,6 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
         dismissKeyboard()
     }
     
-    
     // MARK: - Helper Methods
     
     func updateTableViewHeight() {
@@ -113,7 +125,26 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
                 return
             }
             let coordinate = mapItem.placemark.coordinate
-            self.delegate?.onAddressClick(coordinate: coordinate,adressTitle: self.ui_textfield_location.text ?? "" )
+            self.delegate?.onAddressClick(coordinate: coordinate, adressTitle: self.ui_textfield_location.text ?? "")
+        }
+    }
+    
+    // MARK: - Keyboard Notifications
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+            UIView.animate(withDuration: 0.3) {
+                self.ui_tableview.contentInset.bottom = keyboardHeight
+                self.ui_tableview.scrollIndicatorInsets.bottom = keyboardHeight
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.ui_tableview.contentInset.bottom = 0
+            self.ui_tableview.scrollIndicatorInsets.bottom = 0
         }
     }
 }
