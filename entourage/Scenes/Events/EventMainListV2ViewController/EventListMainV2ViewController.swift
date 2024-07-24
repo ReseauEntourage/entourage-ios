@@ -510,12 +510,19 @@ extension EventListMainV2ViewController {
         self.isLoading = false
     }
 
+
     private func handleMyEventResponse(events: [Event]?, error: EntourageNetworkError?) {
         if let _events = events {
             if _events.count < self.numberOfItemsForWS {
                 self.isEndOfMyEventList = true
             }
-            self.myEvent.append(contentsOf: _events)
+
+            // Ajout seulement des événements qui n'existent pas déjà dans la liste
+            for event in _events {
+                if !self.myEvent.contains(where: { $0.uid == event.uid }) {
+                    self.myEvent.append(event)
+                }
+            }
         } else if let _error = error {
             // TODO: Handle error
         }
