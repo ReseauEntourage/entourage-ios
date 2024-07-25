@@ -115,11 +115,17 @@ class EventListMainV2ViewController: UIViewController {
         self.showFilter()
     }
     
-    func switchSearchMode(){
+    func switchSearchMode() {
         if isSearching {
             mode = .searching
             ui_tableview_contraint_top.constant = 20
+            if let tabBarController = self.tabBarController as? MainTabbarViewController {
+                tabBarController.setTabBar(hidden: true, animated: true, duration: 0.3)
+            }
         } else {
+            if let tabBarController = self.tabBarController as? MainTabbarViewController {
+                tabBarController.setTabBar(hidden: false, animated: true, duration: 0.3)
+            }
             if numberOfFilters == 0 {
                 mode = .normal
                 ui_tableview_contraint_top.constant = 100
@@ -427,6 +433,9 @@ extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSou
         case .filterCell(_):
             return
         }
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }
 

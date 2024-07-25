@@ -10,28 +10,24 @@ enum ActionMode {
     case solicitationNormal
     case solicitationFiltered
     case solicitationSearch
+    case myActions
 }
 
 class ActionsMainHomeViewController: UIViewController {
     
     @IBOutlet weak var ui_view_selector: UIView!
     @IBOutlet weak var ui_image_inside_top_constraint: NSLayoutConstraint!
-
-    
     @IBOutlet weak var ui_constraint_bottom_label: NSLayoutConstraint!
-    
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_label_title: UILabel!
-    
     @IBOutlet weak var ui_tableview: UITableView!
-    
     @IBOutlet weak var ui_label_contribs: UILabel!
     @IBOutlet weak var ui_view_indicator_contribs: UIView!
     @IBOutlet weak var ui_label_solicitations: UILabel!
     @IBOutlet weak var ui_view_indicator_solicitations: UIView!
-    
+    @IBOutlet weak var ui_label_myActions: UILabel!
+    @IBOutlet weak var ui_view_indicator_myActions: UIView!
     @IBOutlet weak var ui_floaty_button: Floaty!
-    
     @IBOutlet weak var ui_view_empty: UIView!
     @IBOutlet weak var ui_arrow_show_empty: UIImageView!
     @IBOutlet weak var ui_view_empty_discover: UIView!
@@ -39,10 +35,8 @@ class ActionsMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_subtitle_discover: UILabel!
     @IBOutlet weak var ui_view_bt_clear_filters: UIView!
     @IBOutlet weak var ui_title_bt_clear_filters: UILabel!
-
     @IBOutlet weak var ui_search_textfield: UITextField!
     @IBOutlet weak var ui_contrainst_textfield_height: NSLayoutConstraint!
-    
     @IBOutlet weak var ui_view_search: UIView!
     @IBOutlet weak var ui_view_filter: UIView!
     @IBOutlet weak var ui_tv_number_filter: UILabel!
@@ -74,6 +68,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     var currentPageContribs = 1
     var currentPageSolicitations = 1
+    var currentPageMyActions = 1
     let numberOfItemsForWS = 20
     let nbOfItemsBeforePagingReload = 5
     
@@ -88,9 +83,12 @@ class ActionsMainHomeViewController: UIViewController {
     private var haveFilter = false
     private var textChangeTimer: Timer?
     private var isContribSelected = false
+    private var isTabDemandClicked = false
+    private var isTabContribClicked = false
     
     var contribs = [Action]()
     var solicitations = [Action]()
+    var myActions = [Action]()
     
     var currentLocationFilter = EventActionLocationFilters()
     var currentSectionsFilter: Sections = Sections()
@@ -112,6 +110,7 @@ class ActionsMainHomeViewController: UIViewController {
         
         ui_tableview.register(UINib(nibName: ActionContribDetailHomeCell.identifier, bundle: nil), forCellReuseIdentifier: ActionContribDetailHomeCell.identifier)
         ui_tableview.register(UINib(nibName: ActionSolicitationDetailHomeCell.identifier, bundle: nil), forCellReuseIdentifier: ActionSolicitationDetailHomeCell.identifier)
+        // Vous n'avez pas besoin d'enregistrer ActionMineCell si elle est définie comme prototype dans le storyboard
         setupEmptyViews()
         configureUserLocationAndRadius()
         
@@ -135,7 +134,6 @@ class ActionsMainHomeViewController: UIViewController {
         
         changeTabSelection()
         
-        loadDataBasedOnMode()
         getUserInfo()
     }
     
@@ -249,6 +247,9 @@ class ActionsMainHomeViewController: UIViewController {
 
         self.view.layoutIfNeeded()
         loadDataBasedOnMode()
+
+        // Afficher la barre de tabulation
+        (self.tabBarController as? MainTabbarViewController)?.setTabBar(hidden: false, animated: true, duration: 0.3)
     }
     
     @objc private func clearTextField() {
@@ -258,6 +259,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
         if textField.text == "" {
+            self.searchText = ""
             return
         }
         textChangeTimer?.invalidate()
@@ -285,6 +287,9 @@ class ActionsMainHomeViewController: UIViewController {
         self.currentMode = isContribSelected ? .contribSearch : .solicitationSearch
         scrollViewDidScroll(self.ui_tableview)
         gotoTop(isAnimated: false)
+
+        // Cacher la barre de tabulation
+        (self.tabBarController as? MainTabbarViewController)?.setTabBar(hidden: true, animated: true, duration: 0.3)
     }
 
     func showFilter() {
@@ -318,6 +323,7 @@ class ActionsMainHomeViewController: UIViewController {
         
         currentPageContribs = 1
         currentPageSolicitations = 1
+        currentPageMyActions = 1
         loadDataBasedOnMode()
         getUserInfo()
     }
@@ -330,6 +336,7 @@ class ActionsMainHomeViewController: UIViewController {
     @objc func updateFromCreate() {
         currentPageContribs = 1
         currentPageSolicitations = 1
+        currentPageMyActions = 1
         loadDataBasedOnMode()
     }
     
@@ -368,6 +375,8 @@ class ActionsMainHomeViewController: UIViewController {
             ActionsService.getAllSolicitationsWithFilter(currentPage: currentPageSolicitations, per: numberOfItemsForWS, travelDistance: selectedRadius, latitude: Float(selectedCoordinate?.latitude ?? 0), longitude: Float(selectedCoordinate?.longitude ?? 0), sectionList: selectedFilterIds, completion: handleSolicitationsResponse(isReloadFromTab: isReloadFromTab, reloadOther: reloadOther))
         case .solicitationSearch:
             ActionsService.getAllSolicitationsWithSearch(currentPage: currentPageSolicitations, per: numberOfItemsForWS, searchText: searchText, completion: handleSolicitationsResponse(isReloadFromTab: isReloadFromTab, reloadOther: reloadOther))
+        case .myActions:
+            getMyActions()
         }
     }
     
@@ -439,6 +448,38 @@ class ActionsMainHomeViewController: UIViewController {
         }
     }
     
+    func getMyActions() {
+
+        IHProgressHUD.show()
+        self.isLoading = true
+        ActionsService.getAllMyActions(currentPage: currentPageMyActions, per: numberOfItemsForWS) { actions, error in
+           
+            IHProgressHUD.dismiss()
+            self.isLoading = false
+            
+            if let actions = actions {
+                if self.currentPageMyActions > 1 {
+                    self.myActions.append(contentsOf: actions)
+                } else {
+                    self.myActions = actions
+                }
+                
+                self.ui_tableview.reloadData()
+                if self.myActions.count > 0 && self.currentPageMyActions == 1 {
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    DispatchQueue.main.async {
+                        self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: true)
+                    }
+                }
+            }
+            if self.myActions.count == 0 {
+                self.ui_view_empty.isHidden = false
+            } else {
+                self.ui_view_empty.isHidden = true
+            }
+        }
+    }
+    
     func getUserInfo() {
         guard let _userid = UserDefaults.currentUser?.uuid else { return }
         UserService.getUnreadCountForUser { unreadCount, error in
@@ -450,12 +491,15 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     @IBAction func action_contribs(_ sender: Any?) {
+        isTabContribClicked = true
+        isTabDemandClicked = false
         currentMode = .contribNormal
         if self.numberOfFilter != 0 {
             currentMode = .contribFiltered
         }
         self.contribs.removeAll()
         self.solicitations.removeAll()
+        self.myActions.removeAll()
         self.ui_tableview.reloadData()
         isfirstLoadingContrib = true
         
@@ -474,14 +518,17 @@ class ActionsMainHomeViewController: UIViewController {
         }
         self.ui_tableview.reloadData()
     }
-    
+
     @IBAction func action_solicitations(_ sender: Any?) {
         currentMode = .solicitationNormal
+        isTabContribClicked = false
+        isTabDemandClicked = true
         if self.numberOfFilter != 0 {
             currentMode = .solicitationFiltered
         }
         self.contribs.removeAll()
         self.solicitations.removeAll()
+        self.myActions.removeAll()
         self.ui_tableview.reloadData()
         
         if solicitations.isEmpty {
@@ -497,66 +544,108 @@ class ActionsMainHomeViewController: UIViewController {
             self.gotoTop()
         }
     }
-    
-    @IBAction func action_show_filters_categories(_ sender: Any) {
-        let sb = UIStoryboard.init(name: StoryboardName.filterMain, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "MainFilter") as? MainFilter {
-            vc.mod = .action
-            vc.delegate = self
-            vc.selectedItemsAction = self.selectedItemsFilter
-            vc.selectedAdressTitle = self.selectedAddress
-            vc.selectedRadius = Int(self.selectedRadius)
-            vc.selectedAdress = self.selectedCoordinate
-            AppState.getTopViewController()?.present(vc, animated: true)
+
+    @IBAction func action_myActions(_ sender: Any?) {
+        currentMode = .myActions
+        isTabContribClicked = false
+        isTabDemandClicked = false
+        self.contribs.removeAll()
+        self.solicitations.removeAll()
+        self.myActions.removeAll()
+        self.ui_tableview.reloadData()
+        
+        if myActions.isEmpty {
+            currentPageMyActions = 1
+            self.myActions.removeAll()
+            loadDataBasedOnMode()
+        }
+        isLoading = false
+        changeTabSelection()
+        self.ui_tableview.reloadData()
+        
+        if self.myActions.count > 0 {
+            self.gotoTop()
         }
     }
-    
-    @IBAction func action_show_filters_location(_ sender: Any) {
-        if let vc = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
-            AnalyticsLoggerManager.logEvent(name: Help_action_location)
-            vc.currentFilter = self.currentLocationFilter
-            vc.modalPresentationStyle = .fullScreen
-            vc.delegate = self
-            vc.isAction = true
-            self.navigationController?.present(vc, animated: true)
-        }
-    }
+
     
     @IBAction func action_clear_filters(_ sender: Any) {
         self.currentLocationFilter.resetToDefault()
         
         currentPageContribs = 1
         currentPageSolicitations = 1
+        currentPageMyActions = 1
         loadDataBasedOnMode()
     }
     
     func changeTabSelection() {
-        isContribSelected = !isContribSelected
         ui_view_empty.isHidden = true
         ui_arrow_show_empty.isHidden = true
         self.ui_view_empty_discover.isHidden = true
+        if isTabDemandClicked {
+            isContribSelected = false
+        }
+        if isTabContribClicked {
+            isContribSelected = true
+        }
         
-        if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
+        if currentMode != .myActions{
+            if searchText != "" {
+                currentMode = isContribSelected ? .contribSearch : .solicitationSearch
+            }else if self.numberOfFilter != 0 {
+                currentMode = isContribSelected ? .contribFiltered : .solicitationFiltered
+            }
+            else {
+                currentMode = isContribSelected ? .contribNormal : .solicitationNormal
+            }
+        }
+        
+        
+
+        switch currentMode {
+        case .contribNormal, .contribFiltered, .contribSearch:
             AnalyticsLoggerManager.logEvent(name: Help_view_contrib)
             ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
-            
             ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
-            
+            ui_label_myActions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
+
             ui_view_indicator_contribs.isHidden = false
             ui_view_indicator_solicitations.isHidden = true
-        } else {
+            ui_view_indicator_myActions.isHidden = true
+            self.ui_view_search.isHidden = false
+            self.ui_view_filter.isHidden = false
+
+        case .solicitationNormal, .solicitationFiltered, .solicitationSearch:
             AnalyticsLoggerManager.logEvent(name: Help_view_demand)
             ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
-            
             ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
-            
+            ui_label_myActions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
+
             ui_view_indicator_contribs.isHidden = true
             ui_view_indicator_solicitations.isHidden = false
+            ui_view_indicator_myActions.isHidden = true
+            self.ui_view_search.isHidden = false
+            self.ui_view_filter.isHidden = false
+
+        case .myActions:
+            AnalyticsLoggerManager.logEvent(name: Help_view_myactions)
+            ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
+            ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
+            ui_label_myActions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
+
+            ui_view_indicator_contribs.isHidden = true
+            ui_view_indicator_solicitations.isHidden = true
+            ui_view_indicator_myActions.isHidden = false
+            self.ui_view_search.isHidden = true
+            self.ui_view_filter.isHidden = true
         }
+
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
             self.ui_tableview.reloadData()
+            self.loadDataBasedOnMode()
         })
     }
+
     
     func gotoTop(isAnimated: Bool = true) {
         let section = 0
@@ -574,6 +663,7 @@ class ActionsMainHomeViewController: UIViewController {
         ui_label_title.text = "actions_main_page_title".localized
         ui_label_contribs.text = "actions_main_page_button_contribs".localized
         ui_label_solicitations.text = "actions_main_page_button_solicitations".localized
+        ui_label_myActions.text = "actions_my_title".localized
         
         ui_view_selector.addRadiusTopOnly(radius: ApplicationTheme.bigCornerRadius)
         
@@ -638,9 +728,12 @@ class ActionsMainHomeViewController: UIViewController {
         if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
             ui_lbl_empty_title_discover.text = "action_contrib_empty_title".localized
             ui_lbl_empty_subtitle_discover.text = "action_contrib_empty_subtitle".localized
-        } else {
+        } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
             ui_lbl_empty_title_discover.text = "action_solicitation_empty_title".localized
             ui_lbl_empty_subtitle_discover.text = "action_solicitation_empty_subtitle".localized
+        } else {
+            ui_lbl_empty_title_discover.text = "action_myActions_empty_title".localized
+            ui_lbl_empty_subtitle_discover.text = "action_myActions_empty_subtitle".localized
         }
     }
     
@@ -670,31 +763,50 @@ class ActionsMainHomeViewController: UIViewController {
 //MARK: - Tableview datasource / delegate -
 extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch) && contribs.isEmpty && !isfirstLoadingContrib || (currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch) && solicitations.isEmpty {
+        if (currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch) && contribs.isEmpty && !isfirstLoadingContrib || (currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch) && solicitations.isEmpty || (currentMode == .myActions) && myActions.isEmpty {
             // showEmptyView()
         } else {
             hideEmptyView()
         }
         
-        return currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch ? contribs.count : solicitations.count
+        if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
+            return contribs.count
+        } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
+            return solicitations.count
+        } else {
+            return myActions.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let action = currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch ? contribs[indexPath.row] : solicitations[indexPath.row]
-        
+        let action: Action
         if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
+            action = contribs[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: ActionContribDetailHomeCell.identifier, for: indexPath) as! ActionContribDetailHomeCell
             cell.populateCell(action: action, hideSeparator: false)
             return cell
-        } else {
+        } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
+            action = solicitations[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: ActionSolicitationDetailHomeCell.identifier, for: indexPath) as! ActionSolicitationDetailHomeCell
             cell.populateCell(action: action, hideSeparator: false)
+            return cell
+        } else {
+            action = myActions[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellMy", for: indexPath) as! ActionMineCell
+            cell.populateCell(action: action)
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let action = currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch ? contribs[indexPath.row] : solicitations[indexPath.row]
+        let action: Action
+        if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
+            action = contribs[indexPath.row]
+        } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
+            action = solicitations[indexPath.row]
+        } else {
+            action = myActions[indexPath.row]
+        }
         self.showAction(actionId: action.id, isContrib: currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch, action: action)
     }
     
@@ -707,16 +819,23 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
                 self.currentPageContribs += 1
                 loadDataBasedOnMode()
             }
-        } else {
+        } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
             let lastIndex = solicitations.count - nbOfItemsBeforePagingReload
             if indexPath.row == lastIndex && self.solicitations.count >= numberOfItemsForWS * currentPageSolicitations {
                 self.currentPageSolicitations += 1
+                loadDataBasedOnMode()
+            }
+        } else {
+            let lastIndex = myActions.count - nbOfItemsBeforePagingReload
+            if indexPath.row == lastIndex && self.myActions.count >= numberOfItemsForWS * currentPageMyActions {
+                self.currentPageMyActions += 1
                 loadDataBasedOnMode()
             }
         }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
         UIView.animate(withDuration: 0) {
             if self.isSearching {
                 // Mode recherche : toujours en taille minimale
@@ -757,14 +876,20 @@ extension ActionsMainHomeViewController: EventFiltersDelegate {
     func goReloadAll() {
         currentPageContribs = 1
         currentPageSolicitations = 1
+        currentPageMyActions = 1
         
         if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
             if self.contribs.count > 0 {
                 self.gotoTop(isAnimated: false)
             }
             loadDataBasedOnMode(reloadOther: true)
-        } else {
+        } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
             if self.solicitations.count > 0 {
+                self.gotoTop(isAnimated: false)
+            }
+            loadDataBasedOnMode(reloadOther: true)
+        } else {
+            if self.myActions.count > 0 {
                 self.gotoTop(isAnimated: false)
             }
             loadDataBasedOnMode(reloadOther: true)

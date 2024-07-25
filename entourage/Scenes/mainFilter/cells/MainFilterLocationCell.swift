@@ -26,6 +26,10 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
         setupSuggestionsTableView()
         
         searchCompleter.delegate = self
+        
+        // Définir la région pour limiter les résultats à la France
+        let franceRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.603354, longitude: 1.888334), latitudinalMeters: 500000, longitudinalMeters: 500000)
+        searchCompleter.region = franceRegion
     }
     
     func setupLocationTextField() {
@@ -58,7 +62,10 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
     // MARK: - MKLocalSearchCompleterDelegate
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        searchResults = Array(completer.results.prefix(5)) // Limiter à 5 suggestions
+        searchResults = completer.results.filter { result in
+            return result.subtitle.contains("France")
+        }
+        searchResults = Array(searchResults.prefix(6)) // Limiter à 6 suggestions
         ui_tableview.reloadData()
         updateTableViewHeight()
     }
@@ -96,7 +103,7 @@ class MainFilterLocationCell: UITableViewCell, UITextFieldDelegate, UITableViewD
     
     func updateTableViewHeight() {
         let minHeight: CGFloat = 70 // Hauteur minimale
-        let height = CGFloat(min(searchResults.count, 5) * 44) // Limiter la hauteur à 5 suggestions
+        let height = CGFloat(min(searchResults.count, 6) * 50) // Limiter la hauteur à 6 suggestions
         constraint_bottom.constant = max(height, minHeight)
         delegate?.onSearchIncreaseSize(size: max(height, minHeight))
         UIView.animate(withDuration: 0.3) {

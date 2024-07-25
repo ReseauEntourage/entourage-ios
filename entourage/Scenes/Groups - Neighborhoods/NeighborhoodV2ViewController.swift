@@ -33,6 +33,9 @@ class NeighborhoodV2ViewController: UIViewController {
     @IBOutlet weak var uiBtnSearch: UIView!
     @IBOutlet weak var ui_tv_number_filter: UILabel!
     // VARIABLES
+    private var tabBarCoverView: UIView?
+
+    
     private var allGroups = [Neighborhood]()
     private var myGroups = [Neighborhood]()
     private var filteredAllGroups = [Neighborhood]()
@@ -99,12 +102,19 @@ class NeighborhoodV2ViewController: UIViewController {
     @objc func onFilterClick() {
         self.showFilter()
     }
-    
+
     func switchSearchMode() {
+        print("nav controller ", self.navigationController)
         if isSearching {
             displayMode = .searching
             contraint_table_view_top.constant = 20
+            if let tabBarController = self.tabBarController as? MainTabbarViewController {
+                tabBarController.setTabBar(hidden: true, animated: true, duration: 0.3)
+            }
         } else {
+            if let tabBarController = self.tabBarController as? MainTabbarViewController {
+                tabBarController.setTabBar(hidden: false, animated: true, duration: 0.3)
+            }
             if numberOfFilter == 0 {
                 displayMode = .normal
                 contraint_table_view_top.constant = 100
@@ -118,6 +128,8 @@ class NeighborhoodV2ViewController: UIViewController {
             self.loadForInit()
         }
     }
+
+
 
     func configureUserLocationAndRadius() {
         if let user = UserDefaults.currentUser {
@@ -443,6 +455,9 @@ extension NeighborhoodV2ViewController: UITableViewDelegate, UITableViewDataSour
         case .emptyCell:
             return
         }
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }
 

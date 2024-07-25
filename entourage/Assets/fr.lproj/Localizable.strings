@@ -1405,8 +1405,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";
 "home_v2_btn_more_pedago" = "Consulter tous les articles";
 
-"home_v2_title_initial_pedago" = "Se sensibiliser";
-"home_v2_subtitle_initial_pedago" = "Quelques suggestions de lectures pour commencer";
+
 
 "home_v2_pedago_item_tag_all" = "Tout";
 "home_v2_pedago_item_tag_act" = "Agir";
@@ -1442,6 +1441,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "lang_ro" = " - Roumain";
 "lang_ar" = " - Arabe";
 "lang_pl" = " - Polonais";
+"home_v2_title_initial_pedago" = "Se sensibiliser";
+"home_v2_subtitle_initial_pedago" = "Quelques suggestions de lectures pour commencer";
 
 "onboarding_lang_bienvenue" = "Bienvenue !";
 "onboarding_lang_select" = "Sélectionner la langue";
