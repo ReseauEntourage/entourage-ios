@@ -78,17 +78,17 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
         rightPaddingView.addSubview(crossButton)
         crossButton.center = rightPaddingView.center
         ui_textfield.rightView = rightPaddingView
+        ui_textfield.leftViewMode = .always
+        ui_textfield.rightViewMode = .always
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        ui_textfield.leftViewMode = .always
-        ui_textfield.rightViewMode = .always
+       
 
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        ui_textfield.leftViewMode = .never
-        ui_textfield.rightViewMode = .never
+        
         
     }
     

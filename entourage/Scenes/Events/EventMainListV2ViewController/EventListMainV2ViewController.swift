@@ -59,6 +59,7 @@ class EventListMainV2ViewController: UIViewController {
     private var mode: ViewMode = .normal
     private var isSearching = false
     private var startSearching = false
+    private var isFromSearch = false
     
     private var filterCell: CellMainFilter?
 
@@ -102,6 +103,13 @@ class EventListMainV2ViewController: UIViewController {
         if !comeFromDetail {
             loadForInit()
         }
+        if isFromSearch {
+            isFromSearch = false
+            if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
+                filterCell.ui_textfield.becomeFirstResponder()
+            }
+        }
+        
         comeFromDetail = false
     }
     
@@ -254,7 +262,6 @@ class EventListMainV2ViewController: UIViewController {
         
         if isSearching && startSearching {
             self.ui_table_view.reloadData()
-            self.startSearching = false
         } else if isSearching {
             let sectionToReload = IndexSet(integer: 1)
             self.ui_table_view.reloadSections(sectionToReload, with: .automatic)
@@ -265,6 +272,12 @@ class EventListMainV2ViewController: UIViewController {
         self.pullRefreshControl.endRefreshing()
         isLoading = false
         IHProgressHUD.dismiss()
+        if self.startSearching {
+            self.startSearching = false
+            if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
+                filterCell.ui_textfield.becomeFirstResponder()
+            }
+        }
     }
 
 
@@ -435,7 +448,22 @@ extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSou
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+
+        if self.mode == .searching && scrollView.contentOffset.y <= 0 {
+            if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
+                filterCell.ui_textfield.becomeFirstResponder()
+            }
+        }else{
+            self.view.endEditing(true)
+
+        }
+    }
+
+    private func getFilterCellIndexPath() -> IndexPath? {
+        if isSearching {
+            return IndexPath(row: 0, section: 0)
+        }
+        return nil
     }
 }
 
@@ -566,6 +594,9 @@ extension EventListMainV2ViewController: EventListCollectionTableViewCellDelegat
 extension EventListMainV2ViewController {
     func showEvent(eventId: Int, isAfterCreation: Bool = false, event: Event? = nil) {
         comeFromDetail = true
+        if self.mode == .searching {
+            isFromSearch = true
+        }
         if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController {
             vc.eventId = eventId
             vc.event = event

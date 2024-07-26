@@ -58,6 +58,7 @@ class NeighborhoodV2ViewController: UIViewController {
     private var searchText = ""
     private var displayMode: DisplayMode = .normal
     private var startSearching = false
+    private var isFromSearch = false
     
     private var filterCell: CellMainFilter?
 
@@ -263,7 +264,10 @@ class NeighborhoodV2ViewController: UIViewController {
     
     func configureDTO() {
         tableDTO.removeAll()
-        
+        if isFromSearch {
+            startSearching = true
+            isFromSearch = false
+        }
         switch displayMode {
         case .normal:
             if myGroups.count > 0 {
@@ -304,7 +308,6 @@ class NeighborhoodV2ViewController: UIViewController {
         }
         if isSearching && startSearching {
             self.ui_table_view.reloadData()
-            self.startSearching = false
 
         }else if isSearching {
             let sectionToReload = IndexSet(integer: 1)
@@ -315,9 +318,19 @@ class NeighborhoodV2ViewController: UIViewController {
         self.pullRefreshControl.endRefreshing()
         isLoading = false
         IHProgressHUD.dismiss()
+        if self.startSearching {
+            self.startSearching = false
+            if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
+                print("eho2")
+                filterCell.ui_textfield.becomeFirstResponder()
+            }
+        }
     }
 
     func showNeighborhood(neighborhoodId: Int, isAfterCreation: Bool = false, isShowCreatePost: Bool = false, neighborhood: Neighborhood? = nil) {
+        if self.displayMode == .searching {
+            isFromSearch = true
+        }
         let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
         if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
             vc.isAfterCreation = isAfterCreation
@@ -362,6 +375,7 @@ extension NeighborhoodV2ViewController: UITableViewDelegate, UITableViewDataSour
                 cell.selectionStyle = .none
                 cell.delegate = self
                 cell.configure(selected: numberOfFilter != 0, numberOfFilter: self.numberOfFilter, mod: .group, isSearching: self.displayMode == .searching)
+                
                 return cell
             }
         }
@@ -457,7 +471,25 @@ extension NeighborhoodV2ViewController: UITableViewDelegate, UITableViewDataSour
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+
+        if displayMode == .searching && scrollView.contentOffset.y <= 0 {
+            print("eho1")
+
+            if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
+                print("eho2")
+                filterCell.ui_textfield.becomeFirstResponder()
+            }
+        }else{
+            self.view.endEditing(true)
+
+        }
+    }
+
+    private func getFilterCellIndexPath() -> IndexPath? {
+        if isSearching {
+            return IndexPath(row: 0, section: 0)
+        }
+        return nil
     }
 }
 

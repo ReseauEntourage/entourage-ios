@@ -96,11 +96,13 @@ class ActionsMainHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_contrainst_textfield_height.constant = 0
+        ui_search_textfield.isHidden = true
         self.currentMode = .solicitationNormal // Set default to solicitations
 
         if let _sections = Metadatas.sharedInstance.tagsSections {
             currentSectionsFilter = _sections
         }
+        
         
         IQKeyboardManager.shared.enable = false
         setupFloatingButton()
@@ -127,14 +129,16 @@ class ActionsMainHomeViewController: UIViewController {
         
         let searchTapGesture = UITapGestureRecognizer(target: self, action: #selector(showSearch))
         ui_view_search.addGestureRecognizer(searchTapGesture)
+        changeTabSelection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        changeTabSelection()
-        
         getUserInfo()
+        print("eho mode " , currentMode)
+        if currentMode == .contribSearch || currentMode == .solicitationSearch {
+            self.ui_search_textfield.becomeFirstResponder()
+        }
     }
     
     deinit {
@@ -210,20 +214,22 @@ class ActionsMainHomeViewController: UIViewController {
         rightPaddingView.addSubview(crossButton)
         crossButton.center = rightPaddingView.center
         ui_search_textfield.rightView = rightPaddingView
+        ui_search_textfield.leftViewMode = .always
+        ui_search_textfield.rightViewMode = .always
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        ui_search_textfield.leftViewMode = .always
-        ui_search_textfield.rightViewMode = .always
+
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        ui_search_textfield.leftViewMode = .never
-        ui_search_textfield.rightViewMode = .never
+
     }
     
     @objc private func closeTextField() {
         ui_contrainst_textfield_height.constant = 0
+        ui_search_textfield.isHidden = true
         ui_search_textfield.text = ""
         self.ui_view_search.isHidden = false
         self.ui_view_filter.isHidden = false
@@ -282,11 +288,12 @@ class ActionsMainHomeViewController: UIViewController {
         self.ui_view_search.isHidden = true
         self.ui_view_filter.isHidden = true
         ui_contrainst_textfield_height.constant = 30
-        ui_search_textfield.becomeFirstResponder()
+        ui_search_textfield.isHidden = false
         self.isSearching = true
         self.currentMode = isContribSelected ? .contribSearch : .solicitationSearch
         scrollViewDidScroll(self.ui_tableview)
         gotoTop(isAnimated: false)
+        self.ui_search_textfield.becomeFirstResponder()
 
         // Cacher la barre de tabulation
         (self.tabBarController as? MainTabbarViewController)?.setTabBar(hidden: true, animated: true, duration: 0.3)
@@ -835,9 +842,13 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
         UIView.animate(withDuration: 0) {
             if self.isSearching {
+                if (scrollView.contentOffset.y <= 0 && (self.currentMode == .contribSearch || self.currentMode == .solicitationSearch)){
+                    self.ui_search_textfield.becomeFirstResponder()
+                }else{
+                    self.view.endEditing(true)
+                }
                 // Mode recherche : toujours en taille minimale
                 self.ui_view_height_constraint.constant = self.minViewHeight
                 self.ui_constraint_bottom_label.constant = self.minLabelBottomConstraint
@@ -845,6 +856,7 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
             } else {
                 // Mode normal ou filtré
                 if scrollView.contentOffset.y <= 0 {
+                    
                     // Si le tableview est en haut du scroll
                     self.ui_view_height_constraint.constant = self.maxViewHeight
                     self.ui_constraint_bottom_label.constant = self.maxLabelBottomConstraint
