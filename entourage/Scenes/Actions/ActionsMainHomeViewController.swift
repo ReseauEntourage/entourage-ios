@@ -600,14 +600,14 @@ class ActionsMainHomeViewController: UIViewController {
             }
         }
         
-        
-
+        //getFontCourantBoldOrangeSmall
+        //getFontCourantBoldGreyOffSmall
         switch currentMode {
         case .contribNormal, .contribFiltered, .contribSearch:
             AnalyticsLoggerManager.logEvent(name: Help_view_contrib)
-            ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
-            ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
-            ui_label_myActions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
+            ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeSmall())
+            ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOffSmall())
+            ui_label_myActions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOffSmall())
 
             ui_view_indicator_contribs.isHidden = false
             ui_view_indicator_solicitations.isHidden = true
@@ -617,9 +617,9 @@ class ActionsMainHomeViewController: UIViewController {
 
         case .solicitationNormal, .solicitationFiltered, .solicitationSearch:
             AnalyticsLoggerManager.logEvent(name: Help_view_demand)
-            ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
-            ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
-            ui_label_myActions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
+            ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOffSmall())
+            ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeSmall())
+            ui_label_myActions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOffSmall())
 
             ui_view_indicator_contribs.isHidden = true
             ui_view_indicator_solicitations.isHidden = false
@@ -629,9 +629,9 @@ class ActionsMainHomeViewController: UIViewController {
 
         case .myActions:
             AnalyticsLoggerManager.logEvent(name: Help_view_myactions)
-            ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
-            ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
-            ui_label_myActions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
+            ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOffSmall())
+            ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOffSmall())
+            ui_label_myActions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeSmall())
 
             ui_view_indicator_contribs.isHidden = true
             ui_view_indicator_solicitations.isHidden = true

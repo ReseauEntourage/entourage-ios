@@ -26,19 +26,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="754" text="Dansons ensemble" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzK-Ox-prj">
-                        <rect key="frame" x="28" y="6" width="136" height="19"/>
+                        <rect key="frame" x="22" y="6" width="136" height="19"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWu-25-phf">
-                        <rect key="frame" x="28" y="29" width="32" height="18"/>
+                        <rect key="frame" x="22" y="29" width="32" height="18"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                         <color key="textColor" name="orange_light"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idi-rg-bLL">
-                        <rect key="frame" x="56" y="93.5" width="32" height="18"/>
+                        <rect key="frame" x="50" y="93.5" width="32" height="18"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                         <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
@@ -51,33 +51,33 @@
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_event_list_loc" translatesAutoresizingMaskIntoConstraints="NO" id="hRm-ow-Ifx">
-                        <rect key="frame" x="32.5" y="83" width="11" height="39"/>
+                        <rect key="frame" x="26.5" y="83" width="11" height="39"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_event_list_loc" translatesAutoresizingMaskIntoConstraints="NO" id="7e7-3u-2i5">
-                        <rect key="frame" x="64" y="32" width="12" height="12"/>
+                        <rect key="frame" x="58" y="32" width="12" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="12" id="8R3-yL-ybg"/>
                             <constraint firstAttribute="height" constant="12" id="MKd-ZJ-yO8"/>
                         </constraints>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_event_list_date" translatesAutoresizingMaskIntoConstraints="NO" id="NzG-KC-9Ct">
-                        <rect key="frame" x="32.5" y="132" width="10" height="10"/>
+                        <rect key="frame" x="26.5" y="132" width="10" height="10"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVk-hR-Vo3">
-                        <rect key="frame" x="56" y="128" width="32" height="18"/>
+                        <rect key="frame" x="50" y="128" width="32" height="18"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                         <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bgi-pi-WQk">
-                        <rect key="frame" x="28" y="57" width="20" height="20"/>
+                        <rect key="frame" x="22" y="57" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="AUN-Hm-5Rt"/>
                             <constraint firstAttribute="height" constant="20" id="qJI-pn-fAW"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy8-dt-2CD">
-                        <rect key="frame" x="56" y="58" width="32" height="18"/>
+                        <rect key="frame" x="50" y="58" width="32" height="18"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -90,7 +90,7 @@
                     <constraint firstItem="jVk-hR-Vo3" firstAttribute="leading" secondItem="idi-rg-bLL" secondAttribute="leading" id="0hF-qJ-lpo"/>
                     <constraint firstAttribute="bottom" secondItem="qP7-uU-HyM" secondAttribute="bottom" id="14K-54-mhk"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7e7-3u-2i5" secondAttribute="trailing" constant="8" id="4Ki-bB-7yP"/>
-                    <constraint firstItem="gzK-Ox-prj" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" constant="28" id="9y0-ZP-x0S"/>
+                    <constraint firstItem="gzK-Ox-prj" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" constant="22" id="9y0-ZP-x0S"/>
                     <constraint firstItem="Gy8-dt-2CD" firstAttribute="leading" secondItem="bgi-pi-WQk" secondAttribute="trailing" constant="8" id="Fcx-45-ln7"/>
                     <constraint firstItem="TWu-25-phf" firstAttribute="top" secondItem="gzK-Ox-prj" secondAttribute="bottom" constant="4" id="GTE-f8-8Oa"/>
                     <constraint firstItem="hRm-ow-Ifx" firstAttribute="top" secondItem="bgi-pi-WQk" secondAttribute="bottom" constant="6" id="Jo1-Ki-7AQ"/>
@@ -108,10 +108,10 @@
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="idi-rg-bLL" secondAttribute="trailing" constant="16" id="d0t-10-Co1"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jVk-hR-Vo3" secondAttribute="trailing" constant="8" id="gLU-nM-lCP"/>
                     <constraint firstItem="7e7-3u-2i5" firstAttribute="centerY" secondItem="TWu-25-phf" secondAttribute="centerY" id="gRJ-ET-D0C"/>
-                    <constraint firstItem="TWu-25-phf" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" constant="28" id="grO-8X-hDm"/>
+                    <constraint firstItem="TWu-25-phf" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" constant="22" id="grO-8X-hDm"/>
                     <constraint firstItem="hRm-ow-Ifx" firstAttribute="centerX" secondItem="bgi-pi-WQk" secondAttribute="centerX" id="izS-uQ-QeH"/>
                     <constraint firstItem="bgi-pi-WQk" firstAttribute="top" secondItem="TWu-25-phf" secondAttribute="bottom" constant="10" id="k3A-uf-NcV"/>
-                    <constraint firstItem="bgi-pi-WQk" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" constant="28" id="kNo-vj-u12"/>
+                    <constraint firstItem="bgi-pi-WQk" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" constant="22" id="kNo-vj-u12"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
