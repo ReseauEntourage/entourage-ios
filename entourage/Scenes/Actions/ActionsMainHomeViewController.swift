@@ -676,7 +676,7 @@ class ActionsMainHomeViewController: UIViewController {
         
         imageNormalHeight = maxImageHeight
         
-        ui_label_title.font = UIFont.systemFont(ofSize: maxLabelFont)
+        ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
         labelNormalFontHeight = maxLabelFont
         
         ui_constraint_bottom_label.constant = maxLabelBottomConstraint
