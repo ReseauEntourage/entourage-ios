@@ -241,7 +241,7 @@ class ActionsMainHomeViewController: UIViewController {
         }
         
         // Réinitialiser la hauteur de la vue et la taille de la police si en haut
-        if self.ui_tableview.contentOffset.y <= 0 {
+        if self.ui_tableview.contentOffset.y <= -30 {
             self.ui_view_height_constraint.constant = self.maxViewHeight
             self.ui_constraint_bottom_label.constant = self.maxLabelBottomConstraint
             self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.maxLabelFont)

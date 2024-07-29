@@ -48,6 +48,7 @@ class NeighborhoodV2ViewController: UIViewController {
     private var currentPageDiscover = 0
     private var currentPageMy = 0
     private var numberOfItemsForWS = 10
+    private var isLastPage = false
     var pullRefreshControl = UIRefreshControl()
     var numberOfFilter = 0
     var selectedItemsFilter = [String: Bool]()
@@ -130,8 +131,6 @@ class NeighborhoodV2ViewController: UIViewController {
         }
     }
 
-
-
     func configureUserLocationAndRadius() {
         if let user = UserDefaults.currentUser {
             self.selectedRadius = Float(user.radiusDistance ?? 40)
@@ -158,6 +157,7 @@ class NeighborhoodV2ViewController: UIViewController {
     
     func loadForInit() {
         isLoading = true
+        isLastPage = false
         IHProgressHUD.show()
         self.currentPageMy = 0
         self.currentPageDiscover = 0
@@ -216,9 +216,13 @@ class NeighborhoodV2ViewController: UIViewController {
         case .normal:
             NeighborhoodService.getSuggestNeighborhoods(currentPage: currentPageDiscover, per: numberOfItemsForWS) { groups, error in
                 if let groups = groups {
+                    if groups.count < self.numberOfItemsForWS {
+                        self.isLastPage = true
+                    }
                     self.allGroups.append(contentsOf: groups)
                     self.configureDTO()
                 }
+                self.isLoading = false
             }
         case .filtered:
             NeighborhoodService.getSuggestFilteredNeighborhoods(
@@ -230,16 +234,24 @@ class NeighborhoodV2ViewController: UIViewController {
                 selectedItem: selectedItemsList
             ) { groups, error in
                 if let groups = groups {
+                    if groups.count < self.numberOfItemsForWS {
+                        self.isLastPage = true
+                    }
                     self.filteredAllGroups.append(contentsOf: groups)
                     self.configureDTO()
                 }
+                self.isLoading = false
             }
         case .searching:
             NeighborhoodService.searchNeighborhoods(query: searchText, currentPage: currentPageDiscover, per: numberOfItemsForWS) { groups, error in
                 if let groups = groups {
+                    if groups.count < self.numberOfItemsForWS {
+                        self.isLastPage = true
+                    }
                     self.searchGroups.append(contentsOf: groups)
                     self.configureDTO()
                 }
+                self.isLoading = false
             }
         }
     }
@@ -257,9 +269,11 @@ class NeighborhoodV2ViewController: UIViewController {
     }
     
     func loadForPaginationDiscover() {
-        isLoading = true
-        self.currentPageDiscover += 1
-        getDiscoverGroup()
+        if !isLastPage {
+            isLoading = true
+            self.currentPageDiscover += 1
+            getDiscoverGroup()
+        }
     }
     
     func configureDTO() {
@@ -424,7 +438,7 @@ extension NeighborhoodV2ViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if isLoading {
+        if isLoading || isLastPage {
             return
         }
         let lastIndex = (displayMode == .searching ? searchGroups.count : allGroups.count) - nbOfItemsBeforePagingReload
@@ -472,11 +486,8 @@ extension NeighborhoodV2ViewController: UITableViewDelegate, UITableViewDataSour
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-        if displayMode == .searching && scrollView.contentOffset.y <= 0 {
-            print("eho1")
-
+        if displayMode == .searching && scrollView.contentOffset.y < -30 {
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
-                print("eho2")
                 filterCell.ui_textfield.becomeFirstResponder()
             }
         }else{

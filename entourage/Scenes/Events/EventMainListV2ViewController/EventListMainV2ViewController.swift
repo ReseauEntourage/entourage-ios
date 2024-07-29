@@ -449,7 +449,7 @@ extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSou
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-        if self.mode == .searching && scrollView.contentOffset.y <= 0 {
+        if self.mode == .searching && scrollView.contentOffset.y <= -30 {
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
                 filterCell.ui_textfield.becomeFirstResponder()
             }
