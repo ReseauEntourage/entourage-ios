@@ -17,7 +17,6 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     
     // Outlet
     @IBOutlet weak var ui_textfield: UITextField!
-
     
     // Variable
     var haveFilter = false {
@@ -38,14 +37,15 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     }
     
     private func setupView() {
-        // Ajout de la bordure grise
         ui_textfield.delegate = self
         ui_textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         setupTextFieldIcons()
+        
+        // Configurer le clavier pour afficher le bouton "Rechercher"
+        ui_textfield.returnKeyType = .search
     }
     
     private func setupTextFieldIcons() {
-        // Setup left view with arrow button
         let arrowButton = UIButton(type: .custom)
         if #available(iOS 13.0, *) {
             arrowButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
@@ -56,13 +56,11 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
         arrowButton.addTarget(self, action: #selector(closeTextField), for: .touchUpInside)
         arrowButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
-        // Add padding
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
         leftPaddingView.addSubview(arrowButton)
         arrowButton.center = leftPaddingView.center
         ui_textfield.leftView = leftPaddingView
         
-        // Setup right view with cross button
         let crossButton = UIButton(type: .custom)
         if #available(iOS 13.0, *) {
             crossButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
@@ -73,7 +71,6 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
         crossButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
         crossButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
-        // Add padding
         let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
         rightPaddingView.addSubview(crossButton)
         crossButton.center = rightPaddingView.center
@@ -83,13 +80,11 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-       
-
+        // Code exécuté lorsque l'édition commence
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        
+        // Code exécuté lorsque l'édition se termine
     }
     
     @objc private func closeTextField() {
@@ -101,7 +96,6 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     @objc private func clearTextField() {
         ui_textfield.text = ""
         delegate?.didUpdateText(text: "")
-
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
@@ -118,6 +112,10 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Ferme le clavier
+        return true
+    }
     
     func configure(selected: Bool, numberOfFilter: Int, mod: CellMainFilterMod, isSearching: Bool) {
         self.mod = mod
@@ -135,8 +133,6 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     }
 
 }
-
-// Extension pour gérer le UITextFieldDelegate
 
 extension UITextField {
     func setPlaceholder(text: String, font: UIFont) {
