@@ -522,7 +522,7 @@ struct NeighborhoodService:ParsingDataCodable {
         var stringifiedItems = selectedItem.joined(separator: ",")
         var endpoint = String(format: kAPIGetMyFilteredNeighborhoods, userId, token, currentPage, per, radius, latitude, longitude, stringifiedItems)
         if stringifiedItems.isEmpty {
-            endpoint = String(format: kAPIGetSuggestFilteredNoInterestsNeighborhoods, token, currentPage, per, radius, latitude, longitude)
+            endpoint = String(format: kAPIGetSuggestFilteredNoInterestsMyNeighborhoods,userId, token, currentPage, per, radius, latitude, longitude)
         }
         getNeighborhoodsWithEndpoint(endpoint, completion)
     }

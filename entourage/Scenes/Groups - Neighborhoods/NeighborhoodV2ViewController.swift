@@ -257,15 +257,16 @@ class NeighborhoodV2ViewController: UIViewController {
     }
     
     func getFilteredGroup() {
-        self.tableDTO.removeAll()
-        self.filteredAllGroups.removeAll()
+        self.myGroups.removeAll()
+        self.allGroups.removeAll()
         self.filteredMyGroups.removeAll()
+        self.filteredAllGroups.removeAll()
+        self.searchGroups.removeAll()
+        self.tableDTO.removeAll()
         self.ui_table_view.reloadData()
         self.currentPageDiscover = 0
         self.currentPageMy = 0
-        DispatchQueue.main.async {
-            self.loadForInit()
-        }
+
     }
     
     func loadForPaginationDiscover() {
@@ -335,7 +336,6 @@ class NeighborhoodV2ViewController: UIViewController {
         if self.startSearching {
             self.startSearching = false
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
-                print("eho2")
                 filterCell.ui_textfield.becomeFirstResponder()
             }
         }
@@ -485,7 +485,6 @@ extension NeighborhoodV2ViewController: UITableViewDelegate, UITableViewDataSour
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("scroll " , scrollView.contentOffset.y)
         if displayMode == .searching && scrollView.contentOffset.y < -500 {
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
                 filterCell.ui_textfield.becomeFirstResponder()
@@ -542,7 +541,6 @@ extension NeighborhoodV2ViewController: CellMainFilterDelegate {
 extension NeighborhoodV2ViewController: MainFilterDelegate {
     func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String) {
         let selectedCount = selectedItems.values.filter { $0 }.count
-        print("filter ", selectedItems)
         self.numberOfFilter = selectedCount
         self.selectedItemsFilter = selectedItems
         if let _radius = radius {
