@@ -145,6 +145,15 @@ class ActionsMainHomeViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    func setCellMainFilter() {
+        self.ui_search_textfield.delegate = self
+        ui_search_textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        setupTextFieldIcons()
+
+        // Configurer le clavier pour afficher le bouton "Rechercher"
+        ui_search_textfield.returnKeyType = .search
+    }
+    
     func setSolicitationsFirst() {
         self.currentMode = .solicitationNormal
         AppManager.shared.isContributionPreference = false
@@ -173,12 +182,7 @@ class ActionsMainHomeViewController: UIViewController {
         ui_floaty_button.animationSpeed = 0.3
         ui_floaty_button.fabDelegate = self
     }
-    
-    func setCellMainFilter() {
-        self.ui_search_textfield.delegate = self
-        ui_search_textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        setupTextFieldIcons()
-    }
+
     
     private func setupTextFieldIcons() {
         // Setup left view with arrow button
@@ -975,5 +979,9 @@ extension ActionsMainHomeViewController: UITextFieldDelegate {
             NSAttributedString.Key.font: font
         ]
         self.ui_search_textfield.attributedPlaceholder = NSAttributedString(string: text, attributes: attributes)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Ferme le clavier
+        return true
     }
 }
