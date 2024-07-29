@@ -486,7 +486,7 @@ extension NeighborhoodV2ViewController: UITableViewDelegate, UITableViewDataSour
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         print("scroll " , scrollView.contentOffset.y)
-        if displayMode == .searching && scrollView.contentOffset.y < -100 {
+        if displayMode == .searching && scrollView.contentOffset.y < -500 {
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
                 filterCell.ui_textfield.becomeFirstResponder()
             }
