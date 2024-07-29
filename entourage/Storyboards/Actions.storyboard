@@ -238,7 +238,7 @@
                                                         <rect key="frame" x="254" y="0.0" width="124" height="32"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mes annonces" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yii-5Q-c6W">
-                                                                <rect key="frame" x="0.0" y="0.0" width="104" height="18"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="109" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <color key="textColor" name="orange_app"/>
                                                                 <nil key="highlightedColor"/>
@@ -263,7 +263,7 @@
                                                         <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="crP-GL-CIl" secondAttribute="trailing" id="7Zx-Qd-G0h"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Yii-5Q-c6W" secondAttribute="trailing" constant="20" id="AxC-hp-m9P"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Yii-5Q-c6W" secondAttribute="trailing" constant="15" id="AxC-hp-m9P"/>
                                                             <constraint firstItem="uAi-8Z-G29" firstAttribute="leading" secondItem="Jjx-Ti-xDO" secondAttribute="leading" id="Cnh-oc-f0d"/>
                                                             <constraint firstItem="crP-GL-CIl" firstAttribute="top" secondItem="Yii-5Q-c6W" secondAttribute="bottom" constant="12" id="HwV-ou-bPi"/>
                                                             <constraint firstItem="uAi-8Z-G29" firstAttribute="top" secondItem="Jjx-Ti-xDO" secondAttribute="top" id="Xsh-zG-emz"/>
