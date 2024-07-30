@@ -266,10 +266,11 @@ class NeighborhoodV2ViewController: UIViewController {
         self.ui_table_view.reloadData()
         self.currentPageDiscover = 0
         self.currentPageMy = 0
-
+        self.getMyGroup()
     }
     
     func loadForPaginationDiscover() {
+        print("eho pagination")
         if !isLastPage {
             isLoading = true
             self.currentPageDiscover += 1
@@ -324,10 +325,10 @@ class NeighborhoodV2ViewController: UIViewController {
         if isSearching && startSearching {
             self.ui_table_view.reloadData()
 
-        }else if isSearching {
+        } else if isSearching {
             let sectionToReload = IndexSet(integer: 1)
             self.ui_table_view.reloadSections(sectionToReload, with: .automatic)
-        }else {
+        } else {
             self.ui_table_view.reloadData()
         }
         self.pullRefreshControl.endRefreshing()
@@ -441,7 +442,7 @@ extension NeighborhoodV2ViewController: UITableViewDelegate, UITableViewDataSour
         if isLoading || isLastPage {
             return
         }
-        let lastIndex = (displayMode == .searching ? searchGroups.count : allGroups.count) - nbOfItemsBeforePagingReload
+        let lastIndex = tableDTO.count - nbOfItemsBeforePagingReload
         if indexPath.row == lastIndex {
             self.loadForPaginationDiscover()
         }
@@ -484,14 +485,14 @@ extension NeighborhoodV2ViewController: UITableViewDelegate, UITableViewDataSour
             return
         }
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if displayMode == .searching && scrollView.contentOffset.y < -500 {
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
                 filterCell.ui_textfield.becomeFirstResponder()
             }
-        }else{
+        } else {
             self.view.endEditing(true)
-
         }
     }
 
@@ -549,8 +550,7 @@ extension NeighborhoodV2ViewController: MainFilterDelegate {
         if numberOfFilter > 0 {
             self.ui_tv_number_filter.text = String(numberOfFilter)
             self.ui_tv_number_filter.isHidden = false
-        }
-        else{
+        } else {
             self.ui_tv_number_filter.isHidden = true
         }
         self.selectedAddress = adressTitle
