@@ -617,6 +617,7 @@ extension EventListMainV2ViewController: HomeEventHCCDelegate {
 extension EventListMainV2ViewController: CellMainFilterDelegate {
     func shouldCloseSearch() {
         isSearching = false
+        searchText = ""
         switchSearchMode()
     }
     
