@@ -525,6 +525,7 @@ extension NeighborhoodV2ViewController: HomeGroupCCDelegate {
 extension NeighborhoodV2ViewController: CellMainFilterDelegate {
     func shouldCloseSearch() {
         isSearching = false
+        searchText = ""
         switchSearchMode()
     }
     

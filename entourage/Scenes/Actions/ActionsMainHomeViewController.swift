@@ -238,6 +238,7 @@ class ActionsMainHomeViewController: UIViewController {
         self.ui_view_search.isHidden = false
         self.ui_view_filter.isHidden = false
         ui_search_textfield.resignFirstResponder()
+        searchText = ""
         self.isSearching = false
         self.currentMode = self.isContribSelected ? .contribNormal : .solicitationNormal
         if self.numberOfFilter > 0 {
