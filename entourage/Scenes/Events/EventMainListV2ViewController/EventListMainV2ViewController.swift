@@ -191,7 +191,7 @@ class EventListMainV2ViewController: UIViewController {
         self.isEndOfMyEventList = false
         if self.numberOfFilters > 0 {
             self.mode = .filtered
-        }else{
+        } else {
             self.mode = .normal
         }
         self.discoverEvent.removeAll()
@@ -279,7 +279,6 @@ class EventListMainV2ViewController: UIViewController {
             }
         }
     }
-
 
     @objc func showNewEvent(_ notification: Notification) {
         if let eventId = notification.userInfo?[kNotificationEventShowId] as? Int {
@@ -447,15 +446,14 @@ extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSou
             return
         }
     }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.mode == .searching && scrollView.contentOffset.y <= -500 {
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
                 filterCell.ui_textfield.becomeFirstResponder()
             }
-        }else{
+        } else {
             self.view.endEditing(true)
-
         }
     }
 
@@ -531,14 +529,11 @@ extension EventListMainV2ViewController {
                     existingEvent.uid == newEvent.uid
                 }
             }
-            switch self.mode{
-            case .normal:
-                self.discoverEvent.append(contentsOf: uniqueEvents)
-            case .filtered:
+            switch self.mode {
+            case .normal, .filtered:
                 self.discoverEvent.append(contentsOf: uniqueEvents)
             case .searching:
-                self.searchEvent.append(contentsOf: _events)
-
+                self.searchEvent.append(contentsOf: uniqueEvents)
             }
         } else if let _error = error {
             // TODO: Handle error
@@ -547,19 +542,18 @@ extension EventListMainV2ViewController {
         self.isLoading = false
     }
 
-
     private func handleMyEventResponse(events: [Event]?, error: EntourageNetworkError?) {
         if let _events = events {
             if _events.count < self.numberOfItemsForWS {
                 self.isEndOfMyEventList = true
             }
 
-            // Ajout seulement des événements qui n'existent pas déjà dans la liste
-            for event in _events {
-                if !self.myEvent.contains(where: { $0.uid == event.uid }) {
-                    self.myEvent.append(event)
+            let uniqueEvents = _events.filter { newEvent in
+                !self.myEvent.contains { existingEvent in
+                    existingEvent.uid == newEvent.uid
                 }
             }
+            self.myEvent.append(contentsOf: uniqueEvents)
         } else if let _error = error {
             // TODO: Handle error
         }
@@ -639,7 +633,7 @@ extension EventListMainV2ViewController: MainFilterDelegate {
         if numberOfFilters > 0 {
             self.ui_tv_number_of_filter.text = String(numberOfFilters)
             self.ui_tv_number_of_filter.isHidden = false
-        }else{
+        } else {
             self.ui_tv_number_of_filter.isHidden = true
         }
         self.selectedItemsFilter = selectedItems

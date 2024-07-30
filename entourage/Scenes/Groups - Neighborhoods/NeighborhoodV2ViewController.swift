@@ -34,7 +34,6 @@ class NeighborhoodV2ViewController: UIViewController {
     @IBOutlet weak var ui_tv_number_filter: UILabel!
     // VARIABLES
     private var tabBarCoverView: UIView?
-
     
     private var allGroups = [Neighborhood]()
     private var myGroups = [Neighborhood]()
@@ -177,7 +176,7 @@ class NeighborhoodV2ViewController: UIViewController {
             NeighborhoodService.getNeighborhoodsForUserId(token, currentPage: currentPageMy, per: 50) { groups, error in
                 self.pullRefreshControl.endRefreshing()
                 if let groups = groups {
-                    self.myGroups.append(contentsOf: groups)
+                    self.addGroupsToList(&self.myGroups, newGroups: groups)
                     self.getDiscoverGroup()
                 }
             }
@@ -194,7 +193,7 @@ class NeighborhoodV2ViewController: UIViewController {
             ) { groups, error in
                 self.pullRefreshControl.endRefreshing()
                 if let groups = groups {
-                    self.filteredMyGroups.append(contentsOf: groups)
+                    self.addGroupsToList(&self.filteredMyGroups, newGroups: groups)
                     self.getDiscoverGroup()
                 }
             }
@@ -202,7 +201,7 @@ class NeighborhoodV2ViewController: UIViewController {
             NeighborhoodService.searchMyNeighborhoods(userId: token, query: searchText, currentPage: currentPageMy, per: 50) { groups, error in
                 self.pullRefreshControl.endRefreshing()
                 if let groups = groups {
-                    self.searchGroups.append(contentsOf: groups)
+                    self.addGroupsToList(&self.searchGroups, newGroups: groups)
                     self.getDiscoverGroup()
                 }
             }
@@ -219,7 +218,7 @@ class NeighborhoodV2ViewController: UIViewController {
                     if groups.count < self.numberOfItemsForWS {
                         self.isLastPage = true
                     }
-                    self.allGroups.append(contentsOf: groups)
+                    self.addGroupsToList(&self.allGroups, newGroups: groups)
                     self.configureDTO()
                 }
                 self.isLoading = false
@@ -237,7 +236,7 @@ class NeighborhoodV2ViewController: UIViewController {
                     if groups.count < self.numberOfItemsForWS {
                         self.isLastPage = true
                     }
-                    self.filteredAllGroups.append(contentsOf: groups)
+                    self.addGroupsToList(&self.filteredAllGroups, newGroups: groups)
                     self.configureDTO()
                 }
                 self.isLoading = false
@@ -248,7 +247,7 @@ class NeighborhoodV2ViewController: UIViewController {
                     if groups.count < self.numberOfItemsForWS {
                         self.isLastPage = true
                     }
-                    self.searchGroups.append(contentsOf: groups)
+                    self.addGroupsToList(&self.searchGroups, newGroups: groups)
                     self.configureDTO()
                 }
                 self.isLoading = false
@@ -367,6 +366,14 @@ class NeighborhoodV2ViewController: UIViewController {
             vc.selectedAdress = self.selectedCoordinate
             vc.modalPresentationStyle = .fullScreen
             AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+    
+    private func addGroupsToList(_ list: inout [Neighborhood], newGroups: [Neighborhood]) {
+        for group in newGroups {
+            if !list.contains(where: { $0.uid == group.uid }) {
+                list.append(group)
+            }
         }
     }
 }
