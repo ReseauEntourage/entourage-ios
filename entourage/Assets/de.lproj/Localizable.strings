@@ -1504,3 +1504,96 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "see_member_react" = "Personen, die reagiert haben";
 "home_v2_title_initial_pedago" = "Sensibilisieren";
 "home_v2_subtitle_initial_pedago" = "Einige Lesevorschläge zum Einstieg";
+"onboarding_lang_bienvenue" = "Willkommen!";
+"onboarding_lang_select" = "Sprache auswählen";
+"onboarding_lang_suivant" = "Weiter";
+"translation_bottom_fragment_title" = "Wir übersetzen automatisch Nachrichten, die von App-Benutzern geschrieben wurden.";
+"translation_bottom_fragment_main_title" = "Übersetzung";
+
+"action_social_name" = "Zeit teilen";
+"action_social_subname" = "Kaffee, Aktivität...";
+
+"action_services_name" = "Dienstleistung";
+"action_services_subname" = "Wäsche, Dokumentendruck...";
+
+"action_clothes_name" = "Kleidung";
+"action_clothes_subname" = "Schuhe, Mantel...";
+
+"action_equipment_name" = "Ausrüstung";
+"action_equipment_subname" = "Telefon, Schlafsack...";
+
+"action_hygiene_name" = "Hygiene";
+"action_hygiene_subname" = "Seife, Hygieneartikel...";
+
+"interest_activites" = "Handwerkliche Aktivitäten";
+"interest_animaux" = "Tiere";
+"interest_bien_etre" = "Wohlbefinden";
+"interest_cuisine" = "Kochen";
+"interest_culture" = "Kunst & Kultur";
+"interest_jeux" = "Spiele";
+"interest_nature" = "Natur";
+"interest_sport" = "Sport";
+"interest_marauding" = "Soziales Streifen";
+"interest_other" = "Andere";
+"contact" = "Kontakt";
+
+"report_modal_title_translate" = "Übersetzen";
+"report_modal_subtitle_translate" = "Wir übersetzen automatisch Nachrichten, die von App-Benutzern geschrieben wurden";
+"layout_translate_title_original" = "Originalversion anzeigen";
+"layout_translate_title_translation" = "Übersetzung anzeigen";
+"layout_translate_action_translation_button" = "Klicken Sie hier, um die Originalversion anzuzeigen";
+"layout_translate_title_original_button" = "Übersetzung anzeigen";
+"layout_translate_title_original_title" = "Diese Seite wurde nicht übersetzt.";
+"layout_translate_title_translation_title" = "Einige Informationen wurden automatisch übersetzt.";
+"Category_Food" = "Essen";
+"Category_Accommodation" = "Unterkunft";
+"Category_Health" = "Gesundheit";
+"Category_Refresh" = "Erfrischen";
+"Category_Toilets" = "Toiletten";
+"Category_Fountains" = "Brunnen";
+"Category_Wash" = "Waschen";
+"Category_Laundries" = "Wäschereien";
+"Category_Orient" = "Orientierung";
+"Category_SelfCare" = "Selbstpflege";
+"Category_Clothes" = "Kleidung & Ausrüstung";
+"Category_DonationBox" = "Spendenbox";
+"Category_Reintegration" = "Wiedereingliederung";
+"Category_Partners" = "Partner";
+"Category_Other" = "Andere";
+"create_group_btn_title" = "Gruppe erstellen";
+"friendly_links_title" = "Freundschaftliche und solidarische Links";
+"friendly_links_text" = "Bei Entourage ist das Hauptziel, freundschaftliche und dauerhafte Verbindungen zu fördern. Ich verpflichte mich, dies zu respektieren, indem ich jede romantische oder liebesorientierte Vorgehensweise oder Veröffentlichung vermeide. Auf diese Weise trage ich aktiv dazu bei, ein warmes und fürsorgliches Umfeld für alle zu erhalten.";
+"copied_text" = "In die Zwischenablage kopiert!";
+"copy_the_text" = "Text kopieren";
+"copy_the_text_explanation" = "Der Text wird in die Zwischenablage kopiert";
+"text_title_i_like" = "Gefällt mir";
+"text_title_comment" = "Kommentar";
+"see_member_react" = "Personen, die reagiert haben";
+
+"vote_singular" = "Stimme";
+"vote_plural" = "Stimmen";
+
+"enhanced_onboarding_start_title" = "%@, lassen Sie uns einander kennenlernen!";
+"enhanced_onboarding_start_subtitle" = "Bevor wir in unsere App eintauchen, nehmen wir uns ein paar Momente Zeit, um Sie besser kennenzulernen. Ihre Interessen helfen uns, Ihnen Aktivitäten und Inhalte vorzuschlagen, die Ihnen gefallen könnten.";
+"enhanced_onboarding_button_title_start" = "Starten";
+"enhanced_onboarding_button_title_later" = "Später abschließen";
+"enhanced_onboarding_button_title_configlater" = "Später konfigurieren";
+"enhanced_onboarding_button_title_next" = "Weiter";
+"enhanced_onboarding_button_title_event" = "Veranstaltungen durchsuchen";
+"enhanced_onboarding_end_title" = "Ihre maßgeschneiderte Erfahrung ist (fast) bereit!";
+"enhanced_onboarding_end_subtitle" = "Vielen Dank, dass Sie Ihre Handlungswünsche und Interessen mit uns geteilt haben. Wir freuen uns darauf, Ihnen bald maßgeschneiderte Veranstaltungen anzubieten, die zu Ihnen passen.\nBleiben Sie dran!";
+
+"edit_profile_cell_onboarding" = "Mein Konto personalisieren";
+"button_title_for_setting_onboarding" = "Speichern";
+"button_title_for_re_onboarding_end" = "Zum Profil zurückkehren";
+
+"notif_demand_title" = "Aktivieren Sie Benachrichtigungen, um nichts zu verpassen";
+"notif_demand_subtitle" = "Erhalten Sie Hilfsanfragen in Ihrer Nähe, bleiben Sie über lokale Veranstaltungen, die Beiträge Ihrer Nachbarn und persönliche Nachrichten in Echtzeit informiert.";
+"notif_demand_btn_accept" = "Benachrichtigungen aktivieren";
+"notif_demand_btn_refuse" = "Nicht jetzt";
+"btn_main_filter_validate_title" = "Filter anwenden";
+"btn_main_filter_cancel_title" = "Zurücksetzen";
+"main_filter_radius_cell_title" = "Im Umkreis von";
+"main_filter_cell_group_placeholder" = "Eine Gruppe suchen";
+"main_filter_cell_event_placeholder" = "Eine Veranstaltung suchen";
+"main_filter_cell_action_placeholder" = "Hilfe suchen";

@@ -1505,3 +1505,96 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "see_member_react" = "Люди, які відреагували";
 "home_v2_title_initial_pedago" = "Підвищення обізнаності";
 "home_v2_subtitle_initial_pedago" = "Деякі пропозиції для початку читання";
+"onboarding_lang_bienvenue" = "Ласкаво просимо!";
+"onboarding_lang_select" = "Виберіть мову";
+"onboarding_lang_suivant" = "Далі";
+"translation_bottom_fragment_title" = "Ми автоматично перекладаємо повідомлення, написані користувачами програми.";
+"translation_bottom_fragment_main_title" = "Переклад";
+
+"action_social_name" = "Обмін часом";
+"action_social_subname" = "кава, діяльність...";
+
+"action_services_name" = "Послуга";
+"action_services_subname" = "прання, друк документів...";
+
+"action_clothes_name" = "Одяг";
+"action_clothes_subname" = "взуття, пальто...";
+
+"action_equipment_name" = "Обладнання";
+"action_equipment_subname" = "телефон, спальний мішок...";
+
+"action_hygiene_name" = "Гігієна";
+"action_hygiene_subname" = "мило, санітарний захист...";
+
+"interest_activites" = "Ручні роботи";
+"interest_animaux" = "Тварини";
+"interest_bien_etre" = "Добробут";
+"interest_cuisine" = "Кулінарія";
+"interest_culture" = "Мистецтво та культура";
+"interest_jeux" = "Ігри";
+"interest_nature" = "Природа";
+"interest_sport" = "Спорт";
+"interest_marauding" = "Соціальні рейди";
+"interest_other" = "Інше";
+"contact" = "Контакти";
+
+"report_modal_title_translate" = "Перекласти";
+"report_modal_subtitle_translate" = "Ми автоматично перекладаємо повідомлення, написані користувачами програми";
+"layout_translate_title_original" = "Показати оригінальну версію";
+"layout_translate_title_translation" = "Показати переклад";
+"layout_translate_action_translation_button" = "Натисніть тут, щоб побачити оригінальну версію";
+"layout_translate_title_original_button" = "Показати переклад";
+"layout_translate_title_original_title" = "Ця сторінка не була перекладена.";
+"layout_translate_title_translation_title" = "Деяку інформацію було автоматично перекладено.";
+"Category_Food" = "Їжа";
+"Category_Accommodation" = "Проживання";
+"Category_Health" = "Охорона здоров'я";
+"Category_Refresh" = "Освіжити";
+"Category_Toilets" = "Туалети";
+"Category_Fountains" = "Фонтани";
+"Category_Wash" = "Помитися";
+"Category_Laundries" = "Пральні";
+"Category_Orient" = "Орієнтація";
+"Category_SelfCare" = "Самодогляд";
+"Category_Clothes" = "Одяг та обладнання";
+"Category_DonationBox" = "Коробка для пожертвувань";
+"Category_Reintegration" = "Реінтеграція";
+"Category_Partners" = "Партнери";
+"Category_Other" = "Інше";
+"create_group_btn_title" = "Створити групу";
+"friendly_links_title" = "Дружні та солідарні зв'язки";
+"friendly_links_text" = "У Entourage основною метою є сприяння дружнім і довготривалим зв'язкам. Я зобов'язуюсь поважати це, уникаючи будь-яких романтичних або любовних намірів або публікацій. Таким чином, я активно сприяю підтриманню теплого та турботливого середовища для всіх.";
+"copied_text" = "Скопійовано в буфер обміну!";
+"copy_the_text" = "Скопіювати текст";
+"copy_the_text_explanation" = "Текст буде скопійовано в буфер обміну";
+"text_title_i_like" = "Подобається";
+"text_title_comment" = "Коментар";
+"see_member_react" = "Люди, які відреагували";
+
+"vote_singular" = "голос";
+"vote_plural" = "голоси";
+
+"enhanced_onboarding_start_title" = "%@, давайте познайомимося!";
+"enhanced_onboarding_start_subtitle" = "Перед тим, як поринути у наш додаток, давайте трохи познайомимося з вами. Ваші інтереси допоможуть нам запропонувати вам заходи та контент, який вам сподобається.";
+"enhanced_onboarding_button_title_start" = "Почати";
+"enhanced_onboarding_button_title_later" = "Завершити пізніше";
+"enhanced_onboarding_button_title_configlater" = "Налаштувати пізніше";
+"enhanced_onboarding_button_title_next" = "Далі";
+"enhanced_onboarding_button_title_event" = "Огляд подій";
+"enhanced_onboarding_end_title" = "Ваш персоналізований досвід (майже) готовий!";
+"enhanced_onboarding_end_subtitle" = "Дякуємо, що поділилися своїми бажаннями діяти та своїми інтересами. Ми з нетерпінням чекаємо можливості запропонувати вам заходи, створені спеціально для вас.\nЗалишайтеся на зв'язку!";
+
+"edit_profile_cell_onboarding" = "Налаштувати мій обліковий запис";
+"button_title_for_setting_onboarding" = "Зберегти";
+"button_title_for_re_onboarding_end" = "Повернутися до профілю";
+
+"notif_demand_title" = "Увімкніть сповіщення, щоб нічого не пропустити";
+"notif_demand_subtitle" = "Отримуйте прохання про допомогу поруч з вами, будьте в курсі місцевих подій, публікацій ваших сусідів та особистих повідомлень у режимі реального часу.";
+"notif_demand_btn_accept" = "Увімкнути сповіщення";
+"notif_demand_btn_refuse" = "Не зараз";
+"btn_main_filter_validate_title" = "Застосувати фільтри";
+"btn_main_filter_cancel_title" = "Скинути";
+"main_filter_radius_cell_title" = "У радіусі";
+"main_filter_cell_group_placeholder" = "Шукати групу";
+"main_filter_cell_event_placeholder" = "Шукати подію";
+"main_filter_cell_action_placeholder" = "Шукати допомогу";

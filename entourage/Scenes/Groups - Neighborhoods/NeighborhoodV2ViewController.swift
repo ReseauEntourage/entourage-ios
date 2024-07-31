@@ -265,7 +265,6 @@ class NeighborhoodV2ViewController: UIViewController {
         self.ui_table_view.reloadData()
         self.currentPageDiscover = 0
         self.currentPageMy = 0
-        self.getMyGroup()
     }
     
     func loadForPaginationDiscover() {
