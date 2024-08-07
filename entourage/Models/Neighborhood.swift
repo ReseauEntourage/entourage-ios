@@ -25,6 +25,7 @@ struct Neighborhood:Codable {
     var past_outings_count:Int = 0
     var future_outings_count:Int = 0
     var has_ongoing_outing = false
+    var national:Bool? = false
     
     var image_url:String?
     var neighborhood_image_id:Int? = nil // Use to pass the image info from the gallery
@@ -69,6 +70,7 @@ struct Neighborhood:Codable {
         case aboutGroupTranslations = "description_translations"
         case welcomeMessageTranslations = "welcome_message_translations"
         case unreadPostCount = "unread_posts_count"
+        case national
     }
     
     func dictionaryForWS() -> [String:Any] {

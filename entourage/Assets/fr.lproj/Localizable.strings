@@ -1537,3 +1537,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "main_filter_cell_group_placeholder" = "Rechercher un groupe";
 "main_filter_cell_event_placeholder" = "Rechercher un événement";
 "main_filter_cell_action_placeholder" = "Rechercher une entraide";
+
+"popup_discussion_test_btn_confirm" = "Participer au chat";
+"popup_discussion_test_btn_cancel" = "Je ne suis pas intéressé⸱e";
+"popup_discussion_test_label" = "Nouvelle fonctionnalité";
+"popup_discussion_test_title" = "Rejoignez un groupe de riverains motivés !";
+"popup_discussion_test_text" = "Ensemble, recevez des conseils pour réaliser des actions solidaires, participez à des événements locaux et aidez des personnes en situation de précarité. Tout cela se fera grâce à un chat dédié dans l'application, où vous pourrez échanger et vous motiver mutuellement.";
+"toast_message_participate" = "Nous revenons vers vous prochainement !";

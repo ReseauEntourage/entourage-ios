@@ -100,6 +100,8 @@ class HomeV2ViewController: UIViewController {
         self.checkAndCreateCookieIfNotExists()
         self.checkNotificationSettings()
         self.handleEnhancedOnboardingReturn()
+        self.sendDiscussionSmokeTest()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +111,32 @@ class HomeV2ViewController: UIViewController {
         self.checkForUpdates()
         self.ifEventLastDay()
     }
+    
+    func sendDiscussionSmokeTest() {
+        // Récupérer le compteur actuel depuis UserDefaults
+        let discussionSmokeCount = UserDefaults.standard.integer(forKey: "discussionSmokeCount")
+        
+        // Incrémenter le compteur
+        UserDefaults.standard.set(discussionSmokeCount + 1, forKey: "discussionSmokeCount")
+        
+        // Vérifier si le compteur est supérieur à 2
+        if discussionSmokeCount >= 1 {
+            // Vérifier si les cookies HasDeniedDiscussion ou HasAcceptedDiscussion n'existent pas
+            let hasDeniedDiscussion = UserDefaults.standard.bool(forKey: "HasDeniedDiscussion")
+            let hasAcceptedDiscussion = UserDefaults.standard.bool(forKey: "HasAcceptedDiscussion")
+            
+            if !hasDeniedDiscussion && !hasAcceptedDiscussion {
+                // Charger et présenter la vue DiscussionSmokeTestViewController
+                let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "DiscussionSmokeTestViewController") as? DiscussionSmokeTestViewController {
+                    if let currentVc = AppState.getTopViewController() {
+                        currentVc.present(vc, animated: true)
+                    }
+                }
+            }
+        }
+    }
+
     
     func handleEnhancedOnboardingReturn() {
         let config = EnhancedOnboardingConfiguration.shared
@@ -683,7 +711,7 @@ extension HomeV2ViewController {
                 vc.setContent(content: title)
                 vc.setActionId(actionId: actionId)
                 vc.setActionType(actionType: actionType)
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -693,7 +721,7 @@ extension HomeV2ViewController {
                 vc.setContent(content: title)
                 vc.setActionId(actionId: actionId)
                 vc.setActionType(actionType: actionType)
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -848,7 +876,7 @@ extension HomeV2ViewController: MJAlertControllerDelegate {
                 if actionId != nil {
                     vc.setActionId(id: actionId!)
                 }
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -867,7 +895,7 @@ extension HomeV2ViewController: MJAlertControllerDelegate {
                 if actionType != nil {
                     vc.setActionType(actionType: actionType!)
                 }
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
