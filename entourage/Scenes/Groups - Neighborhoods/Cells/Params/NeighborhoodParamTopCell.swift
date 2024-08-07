@@ -45,7 +45,10 @@ class NeighborhoodParamTopCell: UITableViewCell {
         }
         
         ui_title.text = neighborhood.name
-        let addressName:String = neighborhood.address?.displayAddress ?? "-"
+        var addressName:String = neighborhood.address?.displayAddress ?? "-"
+        if neighborhood.national ?? false {
+            addressName = ""
+        }
         let participants = neighborhood.membersCount == 1 ? "neighborhood_params_participant".localized : "neighborhood_params_participants".localized
         ui_description.text = "\(neighborhood.membersCount) \(participants). \(addressName)"
         
