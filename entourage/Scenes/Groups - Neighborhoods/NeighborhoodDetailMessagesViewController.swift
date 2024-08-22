@@ -173,46 +173,54 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         }
     }
     
-    func sendMessage(message:String, isRetry:Bool, positionForRetry:Int = 0) {
+    func sendMessage(message: String, isRetry: Bool, positionForRetry: Int = 0) {
         self.ui_textview_message.text = nil
         ui_iv_bt_send.image = UIImage.init(named: "ic_send_comment_off")
-        NeighborhoodService.postCommentFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId, message: message) { error in
-
+        
+        NeighborhoodService.postCommentFor(neighborhoodId: self.neighborhoodId, parentPostId: self.parentCommentId, message: message) { error in
             if error == nil {
                 if isRetry {
                     // Ensure positionForRetry is in valid range before removing from array
                     if positionForRetry >= 0 && positionForRetry < self.messagesForRetry.count {
                         self.messagesForRetry.remove(at: positionForRetry)
-                    } else {
-                        print("Error: positionForRetry out of range. Value: \(positionForRetry), Array Count: \(self.messagesForRetry.count)")
                     }
                 }
                 self.getMessages()
-                return
-            }
-            else {
-                //Add custom post message for retry
-                if isRetry { return }
-                var postMsg = PostMessage()
-                postMsg.content = message
-                postMsg.user = UserLightNeighborhood()
-                postMsg.isRetryMsg = true
+            } else {
+                // Handle retry logic as usual
+                if !isRetry {
+                    var postMsg = PostMessage()
+                    postMsg.content = message
+                    postMsg.user = UserLightNeighborhood()
+                    postMsg.isRetryMsg = true
 
-                self.messagesForRetry.append(postMsg)
+                    self.messagesForRetry.append(postMsg)
 
-                self.isStartEditing = false
-                self.ui_view_empty.isHidden = true
-                self.ui_tableview.reloadData()
+                    self.isStartEditing = false
+                    self.ui_view_empty.isHidden = true
+                    self.ui_tableview.reloadData()
 
-                if self.messages.count + self.messagesForRetry.count > 0 {
-                    DispatchQueue.main.async {
-                        let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
-                        self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                    if self.messages.count + self.messagesForRetry.count > 0 {
+                        DispatchQueue.main.async {
+                            let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
+                            self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                        }
                     }
                 }
             }
+
+            // Disable the send button and show the progress indicator for 2 seconds
+            self.ui_iv_bt_send.isUserInteractionEnabled = false
+            IHProgressHUD.show()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                // Re-enable the send button and hide the progress indicator
+                self.ui_iv_bt_send.isUserInteractionEnabled = true
+                IHProgressHUD.dismiss()
+            }
         }
     }
+
 
     
     func getDetailPost() {

@@ -359,52 +359,59 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.isLoading = false
     }
     
-    func sendMessage(messageStr:String, isRetry:Bool, positionForRetry:Int = 0) {
+    func sendMessage(messageStr: String, isRetry: Bool, positionForRetry: Int = 0) {
         self.ui_textview_message.text = nil
         ui_iv_bt_send.image = UIImage.init(named: "ic_send_comment_off")
         
         if self.isLoading { return }
-        if self.messagesExtracted.messages.isEmpty { self.ui_tableview.reloadData() }
-        
-        IHProgressHUD.show()
         
         self.isLoading = true
         
-        MessagingService.postCommentFor(conversationId: conversationId, message: messageStr) { message, error in
-            IHProgressHUD.dismiss()
+        MessagingService.postCommentFor(conversationId: self.conversationId, message: messageStr) { message, error in
+            self.isLoading = false
+
             if let _ = message {
                 if isRetry {
                     self.messagesForRetry.remove(at: positionForRetry)
                 }
-                self.isLoading = false
                 self.currentPage = 1
                 self.getMessages()
-                return
-            }
-            else {
-                //Add custom post message for retry
-                if isRetry { return }
-                var postMsg = PostMessage()
-                postMsg.content = messageStr
-                postMsg.user = UserLightNeighborhood()
-                postMsg.isRetryMsg = true
-                
-                self.messagesForRetry.append(postMsg)
-                
-                self.isStartEditing = false
-                self.ui_view_empty.isHidden = true
-                self.ui_tableview.reloadData()
-                
-                if self.messagesExtracted.messages.count + self.messagesForRetry.count > 0 {
-                    DispatchQueue.main.async {
-                        let indexPath = IndexPath(row: self.messagesExtracted.messages.count + self.messagesForRetry.count - 1, section: 0)
-                        self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            } else {
+                // Handle retry logic as usual
+                if !isRetry {
+                    var postMsg = PostMessage()
+                    postMsg.content = messageStr
+                    postMsg.user = UserLightNeighborhood()
+                    postMsg.isRetryMsg = true
+
+                    self.messagesForRetry.append(postMsg)
+
+                    self.isStartEditing = false
+                    self.ui_view_empty.isHidden = true
+                    self.ui_tableview.reloadData()
+
+                    if self.messagesExtracted.messages.count + self.messagesForRetry.count > 0 {
+                        DispatchQueue.main.async {
+                            let indexPath = IndexPath(row: self.messagesExtracted.messages.count + self.messagesForRetry.count - 1, section: 0)
+                            self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                        }
                     }
+                    self.setLoadingFalse()
                 }
-                self.setLoadingFalse()
+            }
+
+            // Disable the send button and show the progress indicator for 2 seconds
+            self.ui_iv_bt_send.isUserInteractionEnabled = false
+            IHProgressHUD.show()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                // Re-enable the send button and hide the progress indicator
+                self.ui_iv_bt_send.isUserInteractionEnabled = true
+                IHProgressHUD.dismiss()
             }
         }
     }
+
     
     //MARK: - IBActions -
     @IBAction func action_tap_view(_ sender: Any) {
