@@ -116,9 +116,9 @@ class HomeV2ViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         let hasSeenVotePopup = userDefaults.bool(forKey: "hasSeenVotePopup")
 
-        guard !hasSeenVotePopup else {
-            return
-        }
+//        guard !hasSeenVotePopup else {
+//            return
+//        }
 
         userDefaults.set(true, forKey: "hasSeenVotePopup")
 
