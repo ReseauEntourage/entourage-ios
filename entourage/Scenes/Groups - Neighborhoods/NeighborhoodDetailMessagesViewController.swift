@@ -195,7 +195,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                     postMsg.isRetryMsg = true
 
                     self.messagesForRetry.append(postMsg)
-
+                    self.ui_textview_message.text = ""
                     self.isStartEditing = false
                     self.ui_view_empty.isHidden = true
                     self.ui_tableview.reloadData()

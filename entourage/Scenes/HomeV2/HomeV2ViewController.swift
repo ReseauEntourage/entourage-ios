@@ -100,7 +100,7 @@ class HomeV2ViewController: UIViewController {
         self.checkAndCreateCookieIfNotExists()
         self.checkNotificationSettings()
         self.handleEnhancedOnboardingReturn()
-        self.sendDiscussionSmokeTest()
+        self.showVotePopupIfNeeded()
 
     }
     
@@ -111,6 +111,25 @@ class HomeV2ViewController: UIViewController {
         self.checkForUpdates()
         self.ifEventLastDay()
     }
+    
+    func showVotePopupIfNeeded() {
+        let userDefaults = UserDefaults.standard
+        let hasSeenVotePopup = userDefaults.bool(forKey: "hasSeenVotePopup")
+
+        guard !hasSeenVotePopup else {
+            return
+        }
+
+        userDefaults.set(true, forKey: "hasSeenVotePopup")
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let popupVC = storyboard.instantiateViewController(withIdentifier: "popupbiencommun") as? PopupBienCommunViewController {
+            popupVC.delegate = self
+            popupVC.modalPresentationStyle = .overCurrentContext
+            self.present(popupVC, animated: true, completion: nil)
+        }
+    }
+
     
     func sendDiscussionSmokeTest() {
         // Récupérer le compteur actuel depuis UserDefaults
@@ -997,8 +1016,18 @@ extension HomeV2ViewController: NotificationDelegate {
     }
 }
 
+extension HomeV2ViewController: PopupBienCommunViewControllerDelegate {
+    func didVote() {
+        if let url = URL(string: "https://bit.ly/3Z2tOB5") {
+            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
+        }
+    }
+}
+
+
 class AppManager {
     static let shared = AppManager()
     var isContributionPreference: Bool = false
     private init() {}
 }
+
