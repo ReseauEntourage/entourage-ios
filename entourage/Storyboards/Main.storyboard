@@ -2149,7 +2149,7 @@ Ligne 2</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V73-kE-H47">
                                 <rect key="frame" x="16" y="187" width="382" height="536.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_popup_biencommun" translatesAutoresizingMaskIntoConstraints="NO" id="ux5-kK-g29">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_popup_biencommun" translatesAutoresizingMaskIntoConstraints="NO" id="ux5-kK-g29">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="400"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="400" id="2W0-AS-kr4"/>
