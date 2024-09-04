@@ -95,6 +95,8 @@ struct UniversalLinkManager {
                 }else{
                     DeepLinkManager.showRessourceListUniversalLink()
                 }
+            }else if pathComponents.contains("map") {
+                DeepLinkManager.showMap()
             }
         }
     }

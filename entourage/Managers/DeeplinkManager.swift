@@ -527,6 +527,17 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(vc, animated: true)
     }
     
+    static func showMap(){
+        let sb = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "MainGuide") as? MainGuideViewController {
+            vc.isFromDeeplink = true
+            let navVc = UINavigationController()
+            navVc.modalPresentationStyle = .fullScreen
+            navVc.addChild(vc)
+            AppState.getTopViewController()?.present(navVc, animated: true)
+        }
+    }
+    
     static func showConversationUniversalLink(conversationId: String) {
         // Supposons que vous avez récupéré l'ID de l'utilisateur d'une manière ou d'une autre, peut-être stocké dans UserDefaults ou via un gestionnaire d'authentification
         guard let userId = UserDefaults.currentUser?.sid else {
