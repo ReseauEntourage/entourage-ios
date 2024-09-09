@@ -11,6 +11,7 @@ import SafariServices
 import IHProgressHUD
 import CoreLocation
 import GooglePlaces
+import FirebaseMessaging
 
 enum seeAllCellType {
     case seeAllDemand
@@ -100,7 +101,6 @@ class HomeV2ViewController: UIViewController {
         self.checkAndCreateCookieIfNotExists()
         self.checkNotificationSettings()
         self.handleEnhancedOnboardingReturn()
-        self.showVotePopupIfNeeded()
 
     }
     
@@ -110,6 +110,18 @@ class HomeV2ViewController: UIViewController {
         self.initHome()
         self.checkForUpdates()
         self.ifEventLastDay()
+        self.testFirebase()
+    }
+    
+    func testFirebase(){
+        Messaging.messaging().token { token, error in
+            if let _token = token {
+                
+                print("firebase token" , _token )
+            }else{
+                print("firebase token error", error)
+            }
+        }
     }
     
     func showVotePopupIfNeeded() {
