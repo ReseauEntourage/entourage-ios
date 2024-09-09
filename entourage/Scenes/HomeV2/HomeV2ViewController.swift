@@ -110,20 +110,9 @@ class HomeV2ViewController: UIViewController {
         self.initHome()
         self.checkForUpdates()
         self.ifEventLastDay()
-        self.testFirebase()
     }
     
-    func testFirebase(){
-        Messaging.messaging().token { token, error in
-            if let _token = token {
-                
-                print("firebase token" , _token )
-            }else{
-                print("firebase token error", error)
-            }
-        }
-    }
-    
+
     func showVotePopupIfNeeded() {
         let userDefaults = UserDefaults.standard
         let hasSeenVotePopup = userDefaults.bool(forKey: "hasSeenVotePopup")
@@ -693,6 +682,7 @@ extension HomeV2ViewController {
         HomeService.getUserHome { [weak self] userHome, error in
             if let userHome = userHome {
                 self?.userHome = userHome
+                print("user id " , self?.userHome.id)
                 if userHome.preference == "contribution" {
                     self?.isContributionPreference = true
                 } else {
