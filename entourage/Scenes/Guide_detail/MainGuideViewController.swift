@@ -384,15 +384,18 @@ class MainGuideViewController: UIViewController {
     var isAllreadyCall = false
     //MARK: - Network -
     func getPoiList() {
+        self.mapView.removeAnnotations(self.markers) // Suppression des anciennes annotations de la carte
+        self.markers.removeAll() // Vider la liste des marqueurs
         if isAllreadyCall { return }
         isAllreadyCall = true
         IHProgressHUD.show()
+        
         
         let latitude = mapView.centerCoordinate.latitude
         let longitude = mapView.centerCoordinate.longitude
         let distance = getMapHeight()
         let categories = self.solidarityFilter.getActiveFilters()
-        print("categories" , categories)
+        
         
         PoiService.retrieveClustersAndPois(latitude: latitude, longitude: longitude, distance: distance, categoryIDs: categories, partnersFilters: nil) { [weak self] response, error in
             IHProgressHUD.dismiss()
@@ -409,14 +412,9 @@ class MainGuideViewController: UIViewController {
 
                 // Traiter chaque cluster ou poi
                 for cluster in response.clusters {
+                    print("cluster categorie" , cluster.categoryId)
                     if cluster.type == "poi" {
                         let poi = MapPoi(from: cluster)
-                        if poi.name.contains("coute de la rue"){
-                            print("poi wtf  name " , poi.name)
-                            print("poi wtf cat id ", poi.categoryId)
-                            print("poi wtf image ", poi.image)
-                        
-                        }
                         self?.pois.append(poi)
                     } else if cluster.type == "cluster" {
                         let clusterAnnotation = ClusterAnnotation(clusterPoi: cluster)
