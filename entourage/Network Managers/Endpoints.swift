@@ -25,6 +25,8 @@ let kAPIGetAllAssociations = "partners?token=%@"
 let kAPIGetDetailAssociation = "partners/%d?token=%@"
 let kAPIAppInfoPushToken = "applications?token=%@"
 let kAPIPois = "pois"
+let kpiGetCluster = "pois/clusters"
+
 let kAPIMetadatas = "home/metadata?token=%@"
 
 let kAPIUnreadCount = "users/unread?token=%@"

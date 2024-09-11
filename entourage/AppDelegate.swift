@@ -231,7 +231,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     //MARK: - Push -
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("passed here " , deviceToken)
         NotificationManager.didRegisterForRemoteNotificationsWithDeviceToken(token: deviceToken)
     }
     
@@ -249,5 +248,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         Logger.print("***** Messaging receive messaging token ? \(messaging) - \(fcmToken)")
+        
     }
 }

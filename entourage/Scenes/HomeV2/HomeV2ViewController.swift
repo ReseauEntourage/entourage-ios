@@ -110,6 +110,9 @@ class HomeV2ViewController: UIViewController {
         self.initHome()
         self.checkForUpdates()
         self.ifEventLastDay()
+        if let bundleIdentifier = Bundle.main.bundleIdentifier {
+            print("Bundle Identifier: \(bundleIdentifier)")
+        }
     }
     
 

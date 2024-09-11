@@ -38,11 +38,31 @@ class CustomAnnotation : NSObject,MKAnnotation {
     }
     
     func getAnnotationView() -> MKAnnotationView {
+        // Utilise la méthode dequeueReusableAnnotationView pour réutiliser les vues d'annotations
         let annotView = MKAnnotationView(annotation: self, reuseIdentifier: kAnnotIdentifier)
-
+        
         annotView.canShowCallout = false
-        annotView.image = self.poi?.image
+        annotView.image = self.poi?.image  // Utiliser la propriété calculée 'image' du POI
 
         return annotView
+    }
+}
+
+class ClusterAnnotation: NSObject, MKAnnotation {
+    let cluster: ClusterPoi
+    let coordinate: CLLocationCoordinate2D
+    
+    init(clusterPoi: ClusterPoi) {
+        self.cluster = clusterPoi
+        self.coordinate = CLLocationCoordinate2D(latitude: clusterPoi.latitude, longitude: clusterPoi.longitude)
+        super.init()
+    }
+
+    var title: String? {
+        return "Cluster"
+    }
+
+    var subtitle: String? {
+        return "Group of \(cluster.count) POIs"
     }
 }

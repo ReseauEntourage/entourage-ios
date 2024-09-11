@@ -24,7 +24,8 @@ struct MapPoi : Codable {
     var soliguideId:Int? = nil
     var soliguideUrl:String? = nil
     var source:String? = nil
-    
+    var type: String?
+
     var openTimeTxt:String? = nil
     var languageTxt:String? = nil
     var latitude:Double? = nil
@@ -75,5 +76,55 @@ struct MapPoi : Codable {
     
     func isSoliguide() -> Bool {
         return source == "soliguide"
+    }
+}
+
+// Modèle pour ClusterPoi
+struct ClusterPoi: Codable {
+    var id: Int?
+    var uuid: String?
+    var type: String
+    var count: Int
+    var name: String?
+    var categoryId: Int?
+    var latitude: Double
+    var longitude: Double
+
+    // Custom keys for decoding if needed (e.g., snake_case to camelCase)
+    enum CodingKeys: String, CodingKey {
+        case id, uuid, type, count, name
+        case categoryId = "category_id"
+        case latitude, longitude
+    }
+}
+
+// Modèle pour ClusterPoiResponse
+struct ClusterPoiResponse: Codable {
+    var clusters: [ClusterPoi]
+}
+
+extension MapPoi {
+    // Initialiseur pour convertir un ClusterPoi en MapPoi
+    init(from clusterPoi: ClusterPoi) {
+        self.partnerId = nil  // Pas de partnerId dans ClusterPoi, donc on laisse à nil ou une valeur par défaut
+        self.address = nil     // Idem pour l'adresse, téléphone, etc.
+        self.phone = nil
+        self.email = nil
+        self.website = nil
+        self.name = clusterPoi.name ?? ""
+        self.details = nil
+        self.categoryId = clusterPoi.categoryId
+        self.categories_id = nil
+        self.uuid = clusterPoi.uuid
+        self.sid = clusterPoi.id
+        self.audience = nil
+        self.soliguideId = nil
+        self.soliguideUrl = nil
+        self.source = nil
+        self.openTimeTxt = nil
+        self.languageTxt = nil
+        self.latitude = clusterPoi.latitude
+        self.longitude = clusterPoi.longitude
+        self.type = clusterPoi.type
     }
 }

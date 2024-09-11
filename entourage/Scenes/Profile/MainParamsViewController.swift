@@ -36,6 +36,7 @@ class MainParamsViewController: UIViewController {
                 if let _token = token {
                     self.tokenPush = _token
                     self.tokenInfo = "TOKEN Firebase:\n\(_token)"
+                    print("TOKEN INFO ", self.tokenInfo)
                     self.ui_tableview?.reloadData()
                 }
             }

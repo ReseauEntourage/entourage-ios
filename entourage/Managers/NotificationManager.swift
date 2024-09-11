@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseMessaging
 
 struct NotificationManager {
     static func promptUserForAuthorizations() {
