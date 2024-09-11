@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 struct MapPoi : Codable {
+    var id:Int? = 0
     var partnerId:Int? = 0
     var address:String? = nil
     var phone:String? = nil
@@ -106,6 +107,7 @@ struct ClusterPoiResponse: Codable {
 extension MapPoi {
     // Initialiseur pour convertir un ClusterPoi en MapPoi
     init(from clusterPoi: ClusterPoi) {
+        self.id = clusterPoi.id
         self.partnerId = nil  // Pas de partnerId dans ClusterPoi, donc on laisse à nil ou une valeur par défaut
         self.address = nil     // Idem pour l'adresse, téléphone, etc.
         self.phone = nil
