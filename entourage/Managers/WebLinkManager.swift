@@ -22,7 +22,7 @@ struct WebLinkManager {
         if url.absoluteString.contains("action") {
             isOurPattern = false
         }
-        if url.absoluteString.contains("charte-ethique-grand-public"){
+        if url.absoluteString.contains("charte-ethique"){
             isOurPattern = false
         }
         return isOurPattern
