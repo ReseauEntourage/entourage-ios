@@ -384,63 +384,90 @@ class MainGuideViewController: UIViewController {
     var isAllreadyCall = false
     //MARK: - Network -
     func getPoiList() {
-        self.mapView.removeAnnotations(self.markers) // Suppression des anciennes annotations de la carte
-        self.markers.removeAll() // Vider la liste des marqueurs
         if isAllreadyCall { return }
         isAllreadyCall = true
         IHProgressHUD.show()
-        
         
         let latitude = mapView.centerCoordinate.latitude
         let longitude = mapView.centerCoordinate.longitude
         let distance = getMapHeight()
         let categories = self.solidarityFilter.getActiveFilters()
         
-        
         PoiService.retrieveClustersAndPois(latitude: latitude, longitude: longitude, distance: distance, categoryIDs: categories, partnersFilters: nil) { [weak self] response, error in
             IHProgressHUD.dismiss()
+            guard let self = self else { return }
+            self.isAllreadyCall = false
             
-            if let _ = error {
-                self?.isAllreadyCall = false
+            if let error = error {
+                // Gérez l'erreur ici
                 return
             }
             
             if let response = response {
-                self?.pois.removeAll()
-                self?.mapView.removeAnnotations(self!.markers)
-                self?.markers.removeAll()
-
-                // Traiter chaque cluster ou poi
+                var newAnnotations: [MKAnnotation] = []
+                
+                // Traitez chaque cluster ou poi
                 for cluster in response.clusters {
-                    print("cluster categorie" , cluster.categoryId)
                     if cluster.type == "poi" {
                         let poi = MapPoi(from: cluster)
-                        self?.pois.append(poi)
+                        let annot = CustomAnnotation(poi: poi)
+                        newAnnotations.append(annot)
                     } else if cluster.type == "cluster" {
                         let clusterAnnotation = ClusterAnnotation(clusterPoi: cluster)
-                        self?.markers.append(clusterAnnotation)
+                        newAnnotations.append(clusterAnnotation)
                     }
                 }
-                self?.feedMap()
+                
+                self.updateAnnotations(with: newAnnotations)
             }
         }
     }
     
+    func updateAnnotations(with newAnnotations: [MKAnnotation]) {
+        let existingAnnotations = self.mapView.annotations
+        
+        // Trouvez les annotations à ajouter
+        let annotationsToAdd = newAnnotations.filter { newAnnotation in
+            !existingAnnotations.contains { existingAnnotation in
+                return existingAnnotation.coordinate.latitude == newAnnotation.coordinate.latitude &&
+                       existingAnnotation.coordinate.longitude == newAnnotation.coordinate.longitude
+            }
+        }
+        
+        // Trouvez les annotations à supprimer
+        let annotationsToRemove = existingAnnotations.filter { existingAnnotation in
+            if existingAnnotation is MKUserLocation {
+                return false
+            }
+            return !newAnnotations.contains { newAnnotation in
+                return existingAnnotation.coordinate.latitude == newAnnotation.coordinate.latitude &&
+                       existingAnnotation.coordinate.longitude == newAnnotation.coordinate.longitude
+            }
+        }
+        
+        // Mettez à jour les annotations sur la carte
+        self.mapView.removeAnnotations(annotationsToRemove)
+        self.mapView.addAnnotations(annotationsToAdd)
+    }
+
+
+    
     //MARK: - Methods -
     
     func feedMap() {
-        self.mapView.removeAnnotations(self.markers)
-        
+        // Supprimez les annotations existantes si nécessaire
+        // ...
+
         for poi in pois {
             let annot = CustomAnnotation(poi: poi)
-            Logger.print("***** feedMap create poi : \(annot.annotationView)")
-           
+            Logger.print("***** feedMap create poi with title: \(annot.title ?? "Pas de titre")")
             self.markers.append(annot)
         }
-        Logger.print("***** feedMap nb markers : \(markers.count)")
+
         self.mapView.addAnnotations(self.markers)
         isAllreadyCall = false
     }
+
     
     func showMap(animated:Bool) {
         AnalyticsLoggerManager.logEvent(name:Action_guide_showMap)
@@ -637,56 +664,66 @@ extension MainGuideViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: -MKMapViewDelegate-
 extension MainGuideViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let customAnnotation = annotation as? CustomAnnotation {
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: customAnnotation.annotationIdentifier)
-            
-            if annotationView == nil {
-                // Si aucune vue d'annotation n'a été réutilisée, on en crée une nouvelle
-                annotationView = customAnnotation.getAnnotationView()
-            } else {
-                // Réutilise l'annotation et mets à jour l'image
-                annotationView?.annotation = customAnnotation
-            }
-
-            // Assure-toi que l'image est bien mise à jour
-            annotationView?.image = customAnnotation.poi?.image
-
-            return annotationView
-        } else if let clusterAnnotation = annotation as? ClusterAnnotation {
-            let identifier = "ClusterAnnotation"
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKAnnotationView
-            if annotationView == nil {
-                annotationView = MKAnnotationView(annotation: clusterAnnotation, reuseIdentifier: identifier)
-                annotationView?.canShowCallout = false
-            }
-            
-            // Supprimer l'image de l'épingle par défaut pour les clusters
-            annotationView?.image = nil
-            
-            // Dessiner la bulle bleue avec le nombre de POIs pour les clusters
-            let countLabel = UILabel()
-            countLabel.text = "\(clusterAnnotation.cluster.count)"
-            countLabel.textColor = UIColor(red: 255/255, green: 151/255, blue: 57/255, alpha: 1.0)
-            countLabel.font = UIFont.boldSystemFont(ofSize: 14)
-            countLabel.textAlignment = .center
-            countLabel.frame.size = CGSize(width: 40, height: 40)
-            countLabel.backgroundColor = UIColor(red: 255/255, green: 216/255, blue: 181/255, alpha: 1.0)
-            countLabel.layer.cornerRadius = 20
-            countLabel.layer.masksToBounds = true
-
-            // Supprimer les anciennes sous-vues avant d'ajouter une nouvelle pour éviter des doublons
-            annotationView?.subviews.forEach { $0.removeFromSuperview() }
-            
-            // Ajouter la bulle bleue à l'annotation
-            annotationView?.addSubview(countLabel)
-            annotationView?.frame.size = CGSize(width: 40, height: 40)
-            annotationView?.annotation = clusterAnnotation
-            
-            return annotationView
-        }
-        
-        return nil
-    }
+          // Ne pas modifier l'annotation de localisation de l'utilisateur
+          if annotation is MKUserLocation {
+              return nil
+          }
+          
+          // Gestion de CustomAnnotation (POI individuel)
+          if let customAnnotation = annotation as? CustomAnnotation {
+              let identifier = customAnnotation.annotationIdentifier
+              var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+              
+              if annotationView == nil {
+                  // Créer une nouvelle vue d'annotation
+                  annotationView = MKAnnotationView(annotation: customAnnotation, reuseIdentifier: identifier)
+                  annotationView?.canShowCallout = false
+              } else {
+                  // Réutiliser la vue d'annotation existante
+                  annotationView?.annotation = customAnnotation
+              }
+              
+              // Définir l'image pour la vue d'annotation
+              annotationView?.image = customAnnotation.poi?.image
+              return annotationView
+          }
+          
+          // Gestion de ClusterAnnotation
+          if let clusterAnnotation = annotation as? ClusterAnnotation {
+              let identifier = clusterAnnotation.annotationIdentifier
+              var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+              
+              if annotationView == nil {
+                  // Créer une nouvelle vue d'annotation
+                  annotationView = MKAnnotationView(annotation: clusterAnnotation, reuseIdentifier: identifier)
+                  annotationView?.canShowCallout = false
+              } else {
+                  // Réutiliser la vue d'annotation existante
+                  annotationView?.annotation = clusterAnnotation
+              }
+              
+              // Configurer la vue d'annotation pour le cluster
+              // Par exemple, afficher un cercle avec le nombre de POIs
+              let count = clusterAnnotation.cluster.count
+              let countLabel = UILabel()
+              countLabel.text = "\(count)"
+              countLabel.textColor = UIColor.white
+              countLabel.backgroundColor = UIColor(red: 255/255, green: 151/255, blue: 57/255, alpha: 1.0)
+              countLabel.textAlignment = .center
+              countLabel.font = UIFont.boldSystemFont(ofSize: 14)
+              countLabel.frame.size = CGSize(width: 40, height: 40)
+              countLabel.layer.cornerRadius = 20
+              countLabel.layer.masksToBounds = true
+              
+              // Supprimer les sous-vues précédentes pour éviter les doublons
+              annotationView?.subviews.forEach { $0.removeFromSuperview() }
+              annotationView?.addSubview(countLabel)
+              annotationView?.frame.size = CGSize(width: 40, height: 40)
+              return annotationView
+          }
+          
+          return nil
+      }
 
 
 

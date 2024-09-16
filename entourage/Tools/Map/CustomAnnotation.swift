@@ -8,43 +8,38 @@
 import Foundation
 import MapKit
 
-class CustomAnnotation : NSObject,MKAnnotation {
-    let kAnnotIdentifier = "AnnotationIdentifier"
-    var annotationView:MKAnnotationView {
-        get {
-            return getAnnotationView()
-        }
-    }
-    var annotationIdentifier:String {
-        get {return kAnnotIdentifier}
-    }
-    var poi:MapPoi?
+class CustomAnnotation: NSObject, MKAnnotation {
+    var poi: MapPoi?
+    
     var coordinate: CLLocationCoordinate2D {
-        get {
-            if let _pLat = poi?.latitude, let _pLong = poi?.longitude {
-                return CLLocationCoordinate2D(latitude: _pLat, longitude: _pLong)
-            }
-            return CLLocationCoordinate2D(latitude: PARIS_LAT, longitude: PARIS_LON)
+        if let latitude = poi?.latitude, let longitude = poi?.longitude {
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         }
+        return CLLocationCoordinate2D(latitude: PARIS_LAT, longitude: PARIS_LON)
     }
     
-    var title: String? { get { return poi?.name }}
+    var title: String? {
+        return poi?.name
+    }
     
-    var subtitle: String? { get { return poi?.details }}
+    var subtitle: String? {
+        return poi?.details
+    }
     
-    convenience init(poi:MapPoi) {
+    // Identifiant unique pour la réutilisation
+    var annotationIdentifier: String {
+        return "CustomAnnotationIdentifier"
+    }
+    func getAnnotationView() -> MKAnnotationView {
+        let annotView = MKAnnotationView(annotation: self, reuseIdentifier: annotationIdentifier)
+        annotView.canShowCallout = false
+        annotView.image = self.poi?.image
+        return annotView
+    }
+
+    convenience init(poi: MapPoi) {
         self.init()
         self.poi = poi
-    }
-    
-    func getAnnotationView() -> MKAnnotationView {
-        // Utilise la méthode dequeueReusableAnnotationView pour réutiliser les vues d'annotations
-        let annotView = MKAnnotationView(annotation: self, reuseIdentifier: kAnnotIdentifier)
-        
-        annotView.canShowCallout = false
-        annotView.image = self.poi?.image  // Utiliser la propriété calculée 'image' du POI
-
-        return annotView
     }
 }
 
@@ -57,12 +52,17 @@ class ClusterAnnotation: NSObject, MKAnnotation {
         self.coordinate = CLLocationCoordinate2D(latitude: clusterPoi.latitude, longitude: clusterPoi.longitude)
         super.init()
     }
-
+    
     var title: String? {
         return "Cluster"
     }
-
+    
     var subtitle: String? {
-        return "Group of \(cluster.count) POIs"
+        return "Groupe de \(cluster.count) POIs"
+    }
+    
+    // Identifiant unique pour la réutilisation
+    var annotationIdentifier: String {
+        return "ClusterAnnotationIdentifier"
     }
 }
