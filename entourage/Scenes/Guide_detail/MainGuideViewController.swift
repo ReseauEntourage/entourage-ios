@@ -455,9 +455,6 @@ class MainGuideViewController: UIViewController {
     //MARK: - Methods -
     
     func feedMap() {
-        // Supprimez les annotations existantes si nécessaire
-        // ...
-
         for poi in pois {
             let annot = CustomAnnotation(poi: poi)
             Logger.print("***** feedMap create poi with title: \(annot.title ?? "Pas de titre")")
@@ -755,6 +752,14 @@ extension MainGuideViewController: MKMapViewDelegate {
             DispatchQueue.main.async {
                 self.showPoiDetails(_poi)
             }
+        }
+        if let _clusterAnnot = view.annotation as? ClusterAnnotation {
+            let currentRegion = mapView.region
+            let zoomedRegion = MKCoordinateRegion(center: _clusterAnnot.coordinate,
+                                                  span: MKCoordinateSpan(latitudeDelta: currentRegion.span.latitudeDelta / 2,
+                                                                         longitudeDelta: currentRegion.span.longitudeDelta / 2))
+            
+            mapView.setRegion(zoomedRegion, animated: true)
         }
     }
     
