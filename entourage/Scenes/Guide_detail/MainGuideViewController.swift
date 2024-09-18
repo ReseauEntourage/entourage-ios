@@ -341,6 +341,7 @@ class MainGuideViewController: UIViewController {
         guard let currentUser = UserDefaults.currentUser else {
             return
         }
+        
         var mapCenter:CLLocationCoordinate2D
         Logger.print("***** ici configure map on a une Zone ? : \(currentUser.hasActionZoneDefined())")
         
