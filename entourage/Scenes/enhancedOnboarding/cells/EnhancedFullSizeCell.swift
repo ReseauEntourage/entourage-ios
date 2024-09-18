@@ -34,7 +34,7 @@ class EnhancedFullSizeCell: UITableViewCell {
             attributedString.append(detailsString)
             self.ui_title_choice_label.attributedText = attributedString
         } else if choice.title == "Temps de partage" {
-            self.ui_contraintbottom.constant = 45
+            self.ui_contraintbottom.constant = 5
             let attributedString = NSMutableAttributedString(string: "Temps de partage\n", attributes: [
                 .font: UIFont(name: "Quicksand-Bold", size: 14)!
             ])
