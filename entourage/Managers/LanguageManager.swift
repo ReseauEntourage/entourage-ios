@@ -47,8 +47,22 @@ class LanguageManager {
         UserDefaults.standard.set([langCode], forKey: "AppleLanguages")
         UserDefaults.standard.synchronize()
         Bundle.setLanguage(langCode)
-        UIApplication.shared.windows.first?.rootViewController?.setNeedsStatusBarAppearanceUpdate()
+        
+        // Définir l'attribut sémantique du contenu en fonction de la direction de la langue
+        if Locale.characterDirection(forLanguage: langCode) == .rightToLeft {
+            UIView.appearance().semanticContentAttribute = .forceRightToLeft
+        } else {
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+        }
+        
+        // Réinitialiser le contrôleur de vue racine pour appliquer les changements
+        if let window = UIApplication.shared.windows.first {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            window.rootViewController = storyboard.instantiateInitialViewController()
+            window.makeKeyAndVisible()
+        }
     }
+
 
     static func getCurrentDeviceLanguage() -> String {
         return Locale.current.languageCode ?? "en"

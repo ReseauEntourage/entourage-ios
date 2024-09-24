@@ -245,8 +245,34 @@ class HomeV2ViewController: UIViewController {
                     AnalyticsLoggerManager.logEvent(name: has_user_activated_notif)
                 } else {
                     AnalyticsLoggerManager.logEvent(name: has_user_disabled_notif)
+                    
+                    // Incrémenter le nombre de connexions
+                    let connectionCount = self.incrementConnectionCount()
+                    
+                    // Vérifier si c'est la 2ème ou la 10ème connexion
+                    if connectionCount == 2 || connectionCount == 10 {
+                        self.presentNotificationDemandViewController()
+                    }
                 }
             }
+        }
+    }
+    
+    func incrementConnectionCount() -> Int {
+        let defaults = UserDefaults.standard
+        let currentCount = defaults.integer(forKey: "connectionCount")
+        let newCount = currentCount + 1
+        defaults.set(newCount, forKey: "connectionCount")
+        return newCount
+    }
+    
+    func presentNotificationDemandViewController() {
+        let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
+            vc.modalPresentationStyle = .overFullScreen // Optionnel
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            print("ViewController with identifier 'NotificationDemandViewController' not found")
         }
     }
     

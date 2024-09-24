@@ -197,8 +197,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Olu-XF-Wxs">
                                                         <rect key="frame" x="127" y="0.0" width="124" height="32"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demandes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Im2-Kv-C8q">
-                                                                <rect key="frame" x="0.0" y="0.0" width="104" height="18"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demandes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Im2-Kv-C8q">
+                                                                <rect key="frame" x="0.0" y="0.0" width="124" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <color key="textColor" name="orange_app"/>
                                                                 <nil key="highlightedColor"/>
@@ -229,7 +229,7 @@
                                                             <constraint firstItem="2lc-ew-kNd" firstAttribute="top" secondItem="Olu-XF-Wxs" secondAttribute="top" id="e7D-Ef-fDM"/>
                                                             <constraint firstItem="Im2-Kv-C8q" firstAttribute="leading" secondItem="Olu-XF-Wxs" secondAttribute="leading" id="emJ-VE-g6E"/>
                                                             <constraint firstItem="ar5-I9-vAn" firstAttribute="top" secondItem="Im2-Kv-C8q" secondAttribute="bottom" constant="12" id="hLD-S9-gD8"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Im2-Kv-C8q" secondAttribute="trailing" constant="20" id="q0a-YB-nx4"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Im2-Kv-C8q" secondAttribute="trailing" id="q0a-YB-nx4"/>
                                                             <constraint firstItem="ar5-I9-vAn" firstAttribute="leading" secondItem="Olu-XF-Wxs" secondAttribute="leading" id="qI8-vu-nEm"/>
                                                             <constraint firstAttribute="trailing" secondItem="2lc-ew-kNd" secondAttribute="trailing" id="slL-70-DZA"/>
                                                         </constraints>
