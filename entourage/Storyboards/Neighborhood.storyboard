@@ -1774,7 +1774,7 @@
                                     <action selector="action_show_params:" destination="pqB-Ol-icc" eventType="touchUpInside" id="p5Q-VL-2B0"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qVD-wp-3mj" customClass="Floaty" customModule="Ent_Beta" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qVD-wp-3mj" customClass="Floaty" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="324" y="768" width="62" height="62"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="orange_light_a50"/>
@@ -1870,6 +1870,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="qqL-Sc-CGg"/>
                     <connections>
+                        <outlet property="ui_constraint_button" destination="CIh-AY-apW" id="C0V-td-GIA"/>
                         <outlet property="ui_floaty_button" destination="qVD-wp-3mj" id="pg6-nA-okL"/>
                         <outlet property="ui_iv_neighborhood" destination="AeR-wL-oht" id="JpL-bB-2DY"/>
                         <outlet property="ui_iv_neighborhood_mini" destination="TZq-iv-FPM" id="FaU-hJ-iB7"/>
@@ -2017,7 +2018,7 @@
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Rejoindre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTC-Vg-fqi">
-                                                            <rect key="frame" x="20" y="13.5" width="73" height="17.5"/>
+                                                            <rect key="frame" x="20" y="12" width="73" height="20.5"/>
                                                             <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -2052,13 +2053,13 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTC-fT-9Za">
-                                                    <rect key="frame" x="28" y="183" width="350" height="17.5"/>
+                                                    <rect key="frame" x="28" y="183" width="350" height="19"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW0-ZT-oQz" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                    <rect key="frame" x="28" y="204.5" width="350" height="17.5"/>
+                                                    <rect key="frame" x="28" y="206" width="350" height="20.5"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2069,7 +2070,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgx-5d-gDq" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
-                                                    <rect key="frame" x="28" y="246" width="350" height="229"/>
+                                                    <rect key="frame" x="28" y="250.5" width="350" height="224.5"/>
                                                     <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="FDc-Ka-865"/>
@@ -2603,7 +2604,7 @@
     </scenes>
     <designables>
         <designable name="qW0-ZT-oQz">
-            <size key="intrinsicContentSize" width="93.5" height="17.5"/>
+            <size key="intrinsicContentSize" width="90.5" height="20.5"/>
         </designable>
     </designables>
     <resources>

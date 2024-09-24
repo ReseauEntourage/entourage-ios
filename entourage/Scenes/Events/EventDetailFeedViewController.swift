@@ -24,6 +24,7 @@ class EventDetailFeedViewController: UIViewController {
     @IBOutlet weak var ui_label_title_event: UILabel!
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     
+    @IBOutlet weak var ui_constraint_button: NSLayoutConstraint!
     @IBOutlet weak var ui_view_button_back: UIView!
     @IBOutlet weak var ui_view_button_settings: UIView!
     
@@ -1066,6 +1067,22 @@ extension EventDetailFeedViewController:CreateSurveyValidationDelegate{
 extension EventDetailFeedViewController:FloatyDelegate {
     func floatyWillOpen(_ floaty: Floaty) {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Plus)
+        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 170 : 16
+
+        // Animer le changement de contrainte
+        UIView.animate(withDuration: 0.3) {
+            self.ui_constraint_button.constant = newHeight
+            self.view.layoutIfNeeded()
+        }
+    }
+    func floatyClosed(_ floaty: Floaty) {
+        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 16 : 16
+
+        // Animer le changement de contrainte
+        UIView.animate(withDuration: 0.3) {
+            self.ui_constraint_button.constant = newHeight
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func createButtonItem(title:String, iconName:String, handler:@escaping ((FloatyItem) -> Void)) -> FloatyItem {

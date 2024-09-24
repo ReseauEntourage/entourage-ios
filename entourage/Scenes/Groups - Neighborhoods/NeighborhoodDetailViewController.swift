@@ -19,6 +19,7 @@ class NeighborhoodDetailViewController: UIViewController {
     @IBOutlet weak var ui_label_title_neighb: UILabel!
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     
+    @IBOutlet weak var ui_constraint_button: NSLayoutConstraint!
     @IBOutlet weak var ui_floaty_button: Floaty!
     
     @IBOutlet weak var ui_view_full_image: UIView!
@@ -58,7 +59,6 @@ class NeighborhoodDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         ui_top_view.backgroundColor = .clear
         ui_top_view.populateCustom(title: nil, titleFont: nil, titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: false, cornerRadius: nil, isClose: false, marginLeftButton: nil)
         ui_iv_neighborhood.image = UIImage.init(named: "placeholder_photo_group")
@@ -178,7 +178,11 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_floaty_button.sticky = true
         ui_floaty_button.animationSpeed = 0.3
         ui_floaty_button.fabDelegate = self
+
+
     }
+
+
     
     // Actions
     @objc func showNewEvent(_ notification:Notification) {
@@ -943,6 +947,24 @@ extension NeighborhoodDetailViewController:UpdateCommentCountDelegate {
 extension NeighborhoodDetailViewController:FloatyDelegate {
     func floatyWillOpen(_ floaty: Floaty) {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Plus)
+        // Modifier la contrainte en fonction de la direction du texte
+        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 170 : 16
+
+        // Animer le changement de contrainte
+        UIView.animate(withDuration: 0.3) {
+            self.ui_constraint_button.constant = newHeight
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func floatyClosed(_ floaty: Floaty) {
+        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 16 : 16
+
+        // Animer le changement de contrainte
+        UIView.animate(withDuration: 0.3) {
+            self.ui_constraint_button.constant = newHeight
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func createButtonItem(title:String, iconName:String, handler:@escaping ((FloatyItem) -> Void)) -> FloatyItem {
