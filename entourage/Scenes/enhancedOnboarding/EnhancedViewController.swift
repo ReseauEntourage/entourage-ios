@@ -71,46 +71,45 @@ class EnhancedViewController: UIViewController {
         }
         // Initialize concern choices
         concernChoices = [
-            OnboardingChoice(id: "sharing_time", img: "img_asset_onboarding_share", title: "Temps de partage"),
-            OnboardingChoice(id: "material_donations", img: "img_asset_onboarding_entraide", title: "Dons matériels"),
-            OnboardingChoice(id: "services", img: "img_asset_onboarding_service", title: "Proposition de services")
+            OnboardingChoice(id: "sharing_time", img: "img_asset_onboarding_share", title: NSLocalizedString("enhanced_onboarding_sharing_time", comment: "")),
+            OnboardingChoice(id: "material_donations", img: "img_asset_onboarding_entraide", title: NSLocalizedString("enhanced_onboarding_material_donations", comment: "")),
+            OnboardingChoice(id: "services", img: "img_asset_onboarding_service", title: NSLocalizedString("enhanced_onboarding_services", comment: ""))
         ]
-        
         
         // Initialize involvement choices
         if EnhancedOnboardingConfiguration.shared.preference == "contribution"{
             involvementChoices = [
-                OnboardingChoice(id: "outings", img: "img_asset_onboarding_convivialite", title: "Participer à des événements de convivialité"),
-                OnboardingChoice(id: "both_actions", img: "img_asset_onboarding_pouce", title: "Solliciter un coup de pouce"),
-                OnboardingChoice(id: "neighborhoods", img: "img_asset_onboarding_discussion", title: "Rejoindre un groupe de voisins et tisser des liens"),
-                OnboardingChoice(id: "pois", img: "img_asset_onboarding_pois", title: "Trouver des structures solidaires à proximité")
+                OnboardingChoice(id: "outings", img: "img_asset_onboarding_convivialite", title: NSLocalizedString("enhanced_onboarding_participate_events", comment: "")),
+                OnboardingChoice(id: "both_actions", img: "img_asset_onboarding_pouce", title: NSLocalizedString("enhanced_onboarding_solicit_help", comment: "")),
+                OnboardingChoice(id: "neighborhoods", img: "img_asset_onboarding_discussion", title: NSLocalizedString("enhanced_onboarding_join_neighborhoods", comment: "")),
+                OnboardingChoice(id: "pois", img: "img_asset_onboarding_pois", title: NSLocalizedString("enhanced_onboarding_find_structures", comment: ""))
             ]
         }else{
             involvementChoices = [
-                OnboardingChoice(id: "resources", img: "img_asset_onboarding_sensib", title: "Apprendre avec des contenus pédagogiques"),
-                OnboardingChoice(id: "outings", img: "img_asset_onboarding_convivialite", title: "Participer à des événements de convivialité"),
-                OnboardingChoice(id: "both_actions", img: "img_asset_onboarding_pouce", title: "Donner ou solliciter un coup de pouce"),
-                OnboardingChoice(id: "neighborhoods", img: "img_asset_onboarding_discussion", title: "Rejoindre un groupe de voisins et tisser des liens")
+                OnboardingChoice(id: "resources", img: "img_asset_onboarding_sensib", title: NSLocalizedString("enhanced_onboarding_learn_content", comment: "")),
+                OnboardingChoice(id: "outings", img: "img_asset_onboarding_convivialite", title: NSLocalizedString("enhanced_onboarding_participate_events", comment: "")),
+                OnboardingChoice(id: "both_actions", img: "img_asset_onboarding_pouce", title: NSLocalizedString("enhanced_onboarding_give_help", comment: "")),
+                OnboardingChoice(id: "neighborhoods", img: "img_asset_onboarding_discussion", title: NSLocalizedString("enhanced_onboarding_join_neighborhoods", comment: ""))
             ]
         }
         // Initialize interest choices
         interestChoices = [
-            OnboardingChoice(id: "sport", img: "interest_sport", title: "Sport"),
-            OnboardingChoice(id: "animaux", img: "interest_animaux", title: "Animaux"),
-            OnboardingChoice(id: "marauding", img: "interest_rencontre-nomade", title: "Maraudes sociales"),
-            OnboardingChoice(id: "cuisine", img: "interest_cuisine", title: "Cuisine"),
-            OnboardingChoice(id: "jeux", img: "interest_jeux", title: "Jeux"),
-            OnboardingChoice(id: "activites", img: "interest_activite-manuelle", title: "Activités manuelles"),
-            OnboardingChoice(id: "bien-etre", img: "interest_bien-etre", title: "Bien-être"),
-            OnboardingChoice(id: "nature", img: "interest_nature", title: "Nature"),
-            OnboardingChoice(id: "culture", img: "interest_art", title: "Art & Culture"),
-            OnboardingChoice(id: "other", img: "interest_autre", title: "Autre")
+            OnboardingChoice(id: "sport", img: "interest_sport", title: NSLocalizedString("enhanced_onboarding_interest_sport", comment: "")),
+            OnboardingChoice(id: "animaux", img: "interest_animaux", title: NSLocalizedString("enhanced_onboarding_interest_animals", comment: "")),
+            OnboardingChoice(id: "marauding", img: "interest_rencontre-nomade", title: NSLocalizedString("enhanced_onboarding_interest_social_marauding", comment: "")),
+            OnboardingChoice(id: "cuisine", img: "interest_cuisine", title: NSLocalizedString("enhanced_onboarding_interest_cooking", comment: "")),
+            OnboardingChoice(id: "jeux", img: "interest_jeux", title: NSLocalizedString("enhanced_onboarding_interest_games", comment: "")),
+            OnboardingChoice(id: "activites", img: "interest_activite-manuelle", title: NSLocalizedString("enhanced_onboarding_interest_manual_activities", comment: "")),
+            OnboardingChoice(id: "bien-etre", img: "interest_bien-etre", title: NSLocalizedString("enhanced_onboarding_interest_wellbeing", comment: "")),
+            OnboardingChoice(id: "nature", img: "interest_nature", title: NSLocalizedString("enhanced_onboarding_interest_nature", comment: "")),
+            OnboardingChoice(id: "culture", img: "interest_art", title: NSLocalizedString("enhanced_onboarding_interest_art_culture", comment: "")),
+            OnboardingChoice(id: "other", img: "interest_autre", title: NSLocalizedString("enhanced_onboarding_interest_other", comment: ""))
         ]
+        
         let interests = Set(currentUser.interests ?? [])
-            let concerns = Set(currentUser.concerns ?? [])
-            let involvements = Set(currentUser.involvements ?? [])
-            selectedIds = interests.union(concerns).union(involvements)
-
+        let concerns = Set(currentUser.concerns ?? [])
+        let involvements = Set(currentUser.involvements ?? [])
+        selectedIds = interests.union(concerns).union(involvements)
     }
     
     private func loadDTO() {
@@ -120,19 +119,19 @@ class EnhancedViewController: UIViewController {
         case .interest:
             AnalyticsLoggerManager.logEvent(name: onboarding_interests_view)
             tableDTO.append(.backArrow)
-            tableDTO.append(.title(title: "Mes centres d’intérêts", subtitle: "Pour vous aider à trouver des activités qui vous correspondent, dites-nous ce qui vous intéresse."))
+            tableDTO.append(.title(title: NSLocalizedString("enhanced_onboarding_my_interests", comment: ""), subtitle: NSLocalizedString("enhanced_onboarding_find_activities", comment: "")))
             tableDTO.append(.collectionViewCell(choices: interestChoices))
         case .concern:
             AnalyticsLoggerManager.logEvent(name: onboarding_donations_categories_view)
             tableDTO.append(.backArrow)
-            tableDTO.append(.title(title: "Mes catégories d’entraide", subtitle: "Sélectionnez les catégories d'entraide que vous souhaitez voir en priorité."))
+            tableDTO.append(.title(title: NSLocalizedString("enhanced_onboarding_my_concerns", comment: ""), subtitle: NSLocalizedString("enhanced_onboarding_select_concerns", comment: "")))
             concernChoices.forEach { choice in
                 tableDTO.append(.fullSizeCell(choice: choice, isSelected: selectedIds.contains(choice.id)))
             }
         case .involvement:
             AnalyticsLoggerManager.logEvent(name: onboarding_actions_view)
             tableDTO.append(.backArrow)
-            tableDTO.append(.title(title: "Comment souhaitez-vous agir au sein de la communauté Entourage ?", subtitle: "(Eh oui, vous avez le droit de choisir plusieurs options !)"))
+            tableDTO.append(.title(title: NSLocalizedString("enhanced_onboarding_how_to_act", comment: ""), subtitle: NSLocalizedString("enhanced_onboarding_multiple_options", comment: "")))
             involvementChoices.forEach { choice in
                 tableDTO.append(.fullSizeCell(choice: choice, isSelected: selectedIds.contains(choice.id)))
             }
@@ -275,7 +274,7 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
                 selectedIds.insert(choice.id)
             }
             loadDTO() // Reload to update selection state
-        case .backArrow: 
+        case .backArrow:
             hasChangedMod = true
             let config = EnhancedOnboardingConfiguration.shared
             if config.isInterestsFromSetting {

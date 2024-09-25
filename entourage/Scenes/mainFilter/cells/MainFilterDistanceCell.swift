@@ -42,7 +42,15 @@ class MainFilterDistanceCell:UITableViewCell {
     func updateDistanceLabel() {
         delegate?.onRadiusChanged(radius: ui_slider_distance.value)
         let distance = Int(ui_slider_distance.value)
-        ui_label_distance.text = "\(distance) km"
+        
+        // Vérifier si la langue actuelle est l'arabe
+        if Locale.current.languageCode == "ar" {
+            // Si la langue est l'arabe, placez "km" avant le nombre pour correspondre à l'écriture RTL
+            ui_label_distance.text = "كم \(distance)"
+        } else {
+            // Pour les autres langues, utilisez l'ordre habituel
+            ui_label_distance.text = "\(distance) km"
+        }
     }
-    
+
 }

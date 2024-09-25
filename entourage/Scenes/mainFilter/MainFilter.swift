@@ -93,48 +93,48 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
         switch self.mod {
         case .group, .event:
             let interestChoices = [
-                MainFilterTagItem(id: "sport", title: "Sport", subtitle: ""),
-                MainFilterTagItem(id: "animaux", title: "Animaux", subtitle: ""),
-                MainFilterTagItem(id: "marauding", title: "Maraudes sociales", subtitle: ""),
-                MainFilterTagItem(id: "cuisine", title: "Cuisine", subtitle: ""),
-                MainFilterTagItem(id: "jeux", title: "Jeux", subtitle: ""),
-                MainFilterTagItem(id: "activites", title: "Activités manuelles", subtitle: ""),
-                MainFilterTagItem(id: "bien-etre", title: "Bien-être", subtitle: ""),
-                MainFilterTagItem(id: "nature", title: "Nature", subtitle: ""),
-                MainFilterTagItem(id: "culture", title: "Art & Culture", subtitle: ""),
-                MainFilterTagItem(id: "other", title: "Autre", subtitle: "")
+                MainFilterTagItem(id: "sport", title: NSLocalizedString("filter_groupevent_sport", comment: ""), subtitle: ""),
+                MainFilterTagItem(id: "animaux", title: NSLocalizedString("filter_groupevent_animals", comment: ""), subtitle: ""),
+                MainFilterTagItem(id: "marauding", title: NSLocalizedString("filter_groupevent_social_marauding", comment: ""), subtitle: ""),
+                MainFilterTagItem(id: "cuisine", title: NSLocalizedString("filter_groupevent_cooking", comment: ""), subtitle: ""),
+                MainFilterTagItem(id: "jeux", title: NSLocalizedString("filter_groupevent_games", comment: ""), subtitle: ""),
+                MainFilterTagItem(id: "activites", title: NSLocalizedString("filter_groupevent_handicrafts", comment: ""), subtitle: ""),
+                MainFilterTagItem(id: "bien-etre", title: NSLocalizedString("filter_groupevent_wellbeing", comment: ""), subtitle: ""),
+                MainFilterTagItem(id: "nature", title: NSLocalizedString("filter_groupevent_nature", comment: ""), subtitle: ""),
+                MainFilterTagItem(id: "culture", title: NSLocalizedString("filter_groupevent_art_and_culture", comment: ""), subtitle: ""),
+                MainFilterTagItem(id: "other", title: NSLocalizedString("filter_groupevent_other", comment: ""), subtitle: "")
             ]
             
-            tableDTO.append(.titleCell(title: "Filtres"))
-            tableDTO.append(.sectionCell(content: "Par thématique", numberOfItem: selectedItems.values.filter { $0 }.count))
+            tableDTO.append(.titleCell(title: NSLocalizedString("filter_groupevent_filters", comment: "")))
+            tableDTO.append(.sectionCell(content: NSLocalizedString("filter_groupevent_by_theme", comment: ""), numberOfItem: selectedItems.values.filter { $0 }.count))
             for interestChoice in interestChoices {
                 if selectedItems[interestChoice.id] == nil {
                     selectedItems[interestChoice.id] = false
                 }
                 tableDTO.append(.tagCell(choice: interestChoice))
             }
-            tableDTO.append(.sectionCell(content: "Par localisation", numberOfItem: 0))
+            tableDTO.append(.sectionCell(content: NSLocalizedString("filter_groupevent_by_location", comment: ""), numberOfItem: 0))
             tableDTO.append(.localisationCell(address: self.selectedAdressTitle))
             tableDTO.append(.radiusCell(radius: self.selectedRadius))
             tableDTO.append(.buttonCell)
 
         case .action:
             let actionChoices = [
-                MainFilterTagItem(id: "social", title: "Temps de partage", subtitle: " (café, activité...)"),
-                MainFilterTagItem(id: "services", title: "Service", subtitle: " (lessive, impression de documents...)"),
-                MainFilterTagItem(id: "clothes", title: "Vêtement", subtitle: " (chaussures, manteau...)"),
-                MainFilterTagItem(id: "equipment", title: "Équipement", subtitle: " (téléphone, duvet...)"),
-                MainFilterTagItem(id: "hygiene", title: "Produit d’hygiène", subtitle: " (savon, protection hygiénique, couches...)"),
+                MainFilterTagItem(id: "social", title: NSLocalizedString("filter_groupevent_sharing_time", comment: ""), subtitle: " (café, activité...)"),
+                MainFilterTagItem(id: "services", title: NSLocalizedString("filter_groupevent_services", comment: ""), subtitle: " (lessive, impression de documents...)"),
+                MainFilterTagItem(id: "clothes", title: NSLocalizedString("filter_groupevent_clothes", comment: ""), subtitle: " (chaussures, manteau...)"),
+                MainFilterTagItem(id: "equipment", title: NSLocalizedString("filter_groupevent_equipment", comment: ""), subtitle: " (téléphone, duvet...)"),
+                MainFilterTagItem(id: "hygiene", title: NSLocalizedString("filter_groupevent_hygiene_products", comment: ""), subtitle: " (savon, protection hygiénique, couches...)"),
             ]
-            tableDTO.append(.titleCell(title: "Filtres"))
-            tableDTO.append(.sectionCell(content: "Par catégorie", numberOfItem: selectedItemsAction.values.filter { $0 }.count))
+            tableDTO.append(.titleCell(title: NSLocalizedString("filter_groupevent_filters", comment: "")))
+            tableDTO.append(.sectionCell(content: NSLocalizedString("filter_groupevent_by_category", comment: ""), numberOfItem: selectedItemsAction.values.filter { $0 }.count))
             for actionChoice in actionChoices {
                 if selectedItemsAction[actionChoice.id] == nil {
                     selectedItemsAction[actionChoice.id] = false
                 }
                 tableDTO.append(.tagCell(choice: actionChoice))
             }
-            tableDTO.append(.sectionCell(content: "Par localisation", numberOfItem: 0))
+            tableDTO.append(.sectionCell(content: NSLocalizedString("filter_groupevent_by_location", comment: ""), numberOfItem: 0))
             tableDTO.append(.localisationCell(address: selectedAdressTitle))
             tableDTO.append(.radiusCell(radius: self.selectedRadius))
             tableDTO.append(.buttonCell)
@@ -142,6 +142,7 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
         
         loadDTO()
     }
+
     
     func loadDTO() {
         ui_tableview.reloadData()
