@@ -991,7 +991,7 @@
 "event_empty_post_subtitle" = "Pourquoi ne pas lancer la discussion avec vos voisins ?";
 
 "event_users_title" = "Voir les participants";
-"event_userInput_search" = "Rechercher un participant de l'événement";
+"event_userInput_search" = "Chercher un participant";
 
 "event_detail_full_title" = "À propos de l'événement";
 

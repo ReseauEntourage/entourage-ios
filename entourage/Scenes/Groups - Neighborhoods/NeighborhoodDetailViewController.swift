@@ -86,6 +86,8 @@ class NeighborhoodDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreateEvent), name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromLeave), name: NSNotification.Name(rawValue: kNotificationUpdateFromLeave), object: nil)
+        
+        let storyboard = UIStoryboard(name: "Neighborhood", bundle: nil) // Remplace "Main" par le nom de ton Storyboard
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -304,18 +306,28 @@ class NeighborhoodDetailViewController: UIViewController {
         }
         if isAdd {
             IHProgressHUD.show()
-            NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
-                IHProgressHUD.dismiss()
-                if let user = user {
-                    let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
-                    self.neighborhood?.members.append(member)
-                    self.neighborhood?.isMember = true
-                    let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount + 1 : 1
-                    self.isAfterCreation = true
-                    self.neighborhood?.membersCount = count
-                    
-                    self.getNeighborhoodDetail()
-                    self.showWelcomeMessage()
+
+            if (/*(UserDefaults.currentUser?.isAmbassador()) != nil*/ false){
+                if let popupVC = storyboard?.instantiateViewController(withIdentifier: "ambassadorAskNotificationPopup") as? AmbassadorAskNotificationPopup {
+                    popupVC.delegate = self
+                    popupVC.modalPresentationStyle = .overFullScreen // Ajuster le style de présentation si nécessaire
+                    popupVC.modalTransitionStyle = .crossDissolve // Ajuster la transition si nécessaire
+                    present(popupVC, animated: true, completion: nil)
+                }
+
+            }else{
+                NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
+                    IHProgressHUD.dismiss()
+                    if let user = user {
+                        let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
+                        self.neighborhood?.members.append(member)
+                        self.neighborhood?.isMember = true
+                        let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount + 1 : 1
+                        self.isAfterCreation = true
+                        self.neighborhood?.membersCount = count
+                        self.getNeighborhoodDetail()
+                        self.showWelcomeMessage()
+                    }
                 }
             }
         }
@@ -1069,4 +1081,40 @@ extension NeighborhoodDetailViewController:CreateSurveyValidationDelegate{
     func onSurveyCreate() {
         self.getNeighborhoodDetail()
     }
+}
+
+extension NeighborhoodDetailViewController:AmbassadorAskNotificationPopupDelegate{
+    func joinAsOrganizer() {
+        NeighborhoodService.joinNeighborhood(groupId: neighborhood?.uid ?? 0) { user, error in
+            IHProgressHUD.dismiss()
+            if let user = user {
+                let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
+                self.neighborhood?.members.append(member)
+                self.neighborhood?.isMember = true
+                let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount + 1 : 1
+                self.isAfterCreation = true
+                self.neighborhood?.membersCount = count
+                self.getNeighborhoodDetail()
+                self.showWelcomeMessage()
+            }
+        }
+    }
+    
+    func justParticipate() {
+        NeighborhoodService.joinNeighborhood(groupId: neighborhood?.uid ?? 0) { user, error in
+            IHProgressHUD.dismiss()
+            if let user = user {
+                let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
+                self.neighborhood?.members.append(member)
+                self.neighborhood?.isMember = true
+                let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount + 1 : 1
+                self.isAfterCreation = true
+                self.neighborhood?.membersCount = count
+                self.getNeighborhoodDetail()
+                self.showWelcomeMessage()
+            }
+        }
+    }
+    
+    
 }

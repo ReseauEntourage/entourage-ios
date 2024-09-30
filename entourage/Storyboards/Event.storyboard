@@ -1851,6 +1851,113 @@
             </objects>
             <point key="canvasLocation" x="4270" y="59"/>
         </scene>
+        <!--Ambassador Ask Notification Popup-->
+        <scene sceneID="Ai8-2k-gKi">
+            <objects>
+                <viewController storyboardIdentifier="ambassadorAskNotificationPopup" id="o7g-gh-Y2h" customClass="AmbassadorAskNotificationPopup" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="43S-Jg-msW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xe0-Fr-jpl">
+                                <rect key="frame" x="20" y="338" width="374" height="234"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_ambassador_organise_popup" translatesAutoresizingMaskIntoConstraints="NO" id="RKH-fA-JRY">
+                                        <rect key="frame" x="159.5" y="20" width="55" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="Dk7-YW-Duj"/>
+                                            <constraint firstAttribute="width" constant="55" id="aSC-VF-F9m"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5u-k0-t4L">
+                                        <rect key="frame" x="16" y="84" width="342" height="19"/>
+                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
+                                        <color key="textColor" name="orange_light"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uiH-8L-HYg">
+                                        <rect key="frame" x="16" y="119" width="342" height="1"/>
+                                        <color key="backgroundColor" name="grey_off"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="6Lw-M5-BxL"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8m-SQ-Nfc">
+                                        <rect key="frame" x="16" y="136" width="342" height="18"/>
+                                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
+                                        <color key="textColor" name="gris_112"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jL4-tc-tOp">
+                                        <rect key="frame" x="16" y="170" width="168.5" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="TfF-bU-7v4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="12"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Configurer plus tard">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWx-pA-xYK">
+                                        <rect key="frame" x="194.5" y="170" width="168" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="WYt-kV-9fK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="12"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Commencer">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="jL4-tc-tOp" secondAttribute="bottom" constant="16" id="1B9-GR-KHU"/>
+                                    <constraint firstItem="jL4-tc-tOp" firstAttribute="width" secondItem="xWx-pA-xYK" secondAttribute="width" id="2mD-ea-dGP"/>
+                                    <constraint firstItem="o8m-SQ-Nfc" firstAttribute="leading" secondItem="xe0-Fr-jpl" secondAttribute="leading" constant="16" id="7De-Fb-0MB"/>
+                                    <constraint firstAttribute="trailing" secondItem="G5u-k0-t4L" secondAttribute="trailing" constant="16" id="CiR-vY-oXu"/>
+                                    <constraint firstItem="G5u-k0-t4L" firstAttribute="leading" secondItem="xe0-Fr-jpl" secondAttribute="leading" constant="16" id="KDh-rj-CFg"/>
+                                    <constraint firstAttribute="trailing" secondItem="uiH-8L-HYg" secondAttribute="trailing" constant="16" id="ONr-iZ-Y3V"/>
+                                    <constraint firstItem="uiH-8L-HYg" firstAttribute="leading" secondItem="xe0-Fr-jpl" secondAttribute="leading" constant="16" id="T4j-Bh-u4C"/>
+                                    <constraint firstItem="xWx-pA-xYK" firstAttribute="top" secondItem="o8m-SQ-Nfc" secondAttribute="bottom" constant="16" id="TJF-7c-QRf"/>
+                                    <constraint firstItem="RKH-fA-JRY" firstAttribute="top" secondItem="xe0-Fr-jpl" secondAttribute="top" constant="20" id="gW1-kd-vAn"/>
+                                    <constraint firstItem="jL4-tc-tOp" firstAttribute="top" secondItem="o8m-SQ-Nfc" secondAttribute="bottom" constant="16" id="jhg-Fu-BM6"/>
+                                    <constraint firstItem="G5u-k0-t4L" firstAttribute="top" secondItem="RKH-fA-JRY" secondAttribute="bottom" constant="16" id="jvz-wo-xvk"/>
+                                    <constraint firstItem="uiH-8L-HYg" firstAttribute="top" secondItem="G5u-k0-t4L" secondAttribute="bottom" constant="16" id="nLg-nb-2LC"/>
+                                    <constraint firstItem="jL4-tc-tOp" firstAttribute="leading" secondItem="xe0-Fr-jpl" secondAttribute="leading" constant="16" id="qJF-6d-VDf"/>
+                                    <constraint firstItem="o8m-SQ-Nfc" firstAttribute="top" secondItem="uiH-8L-HYg" secondAttribute="bottom" constant="16" id="qrO-az-PuB"/>
+                                    <constraint firstItem="xWx-pA-xYK" firstAttribute="leading" secondItem="jL4-tc-tOp" secondAttribute="trailing" constant="10" id="rRl-BJ-mOb"/>
+                                    <constraint firstAttribute="trailing" secondItem="o8m-SQ-Nfc" secondAttribute="trailing" constant="16" id="sG1-T9-len"/>
+                                    <constraint firstItem="jL4-tc-tOp" firstAttribute="width" secondItem="xe0-Fr-jpl" secondAttribute="width" multiplier="0.45" id="srv-zD-RdU"/>
+                                    <constraint firstItem="RKH-fA-JRY" firstAttribute="centerX" secondItem="xe0-Fr-jpl" secondAttribute="centerX" id="t2Z-Cq-5XA"/>
+                                    <constraint firstAttribute="bottom" secondItem="xWx-pA-xYK" secondAttribute="bottom" constant="16" id="tJU-ll-1fb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="q8r-SM-9uB"/>
+                        <color key="backgroundColor" name="noir_alpha_50"/>
+                        <constraints>
+                            <constraint firstItem="xe0-Fr-jpl" firstAttribute="centerX" secondItem="q8r-SM-9uB" secondAttribute="centerX" id="Let-ej-nPM"/>
+                            <constraint firstItem="xe0-Fr-jpl" firstAttribute="centerY" secondItem="q8r-SM-9uB" secondAttribute="centerY" id="NOJ-hy-h90"/>
+                            <constraint firstItem="xe0-Fr-jpl" firstAttribute="leading" secondItem="q8r-SM-9uB" secondAttribute="leading" constant="20" id="jHg-8I-d4B"/>
+                            <constraint firstItem="q8r-SM-9uB" firstAttribute="trailing" secondItem="xe0-Fr-jpl" secondAttribute="trailing" constant="20" id="qft-3X-Nca"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ui_btn_return" destination="jL4-tc-tOp" id="jPc-eF-vsV"/>
+                        <outlet property="ui_button_start" destination="xWx-pA-xYK" id="sSU-uV-zq2"/>
+                        <outlet property="ui_image" destination="RKH-fA-JRY" id="cja-UD-O7v"/>
+                        <outlet property="ui_label" destination="G5u-k0-t4L" id="P6t-hA-vyE"/>
+                        <outlet property="ui_label_description" destination="o8m-SQ-Nfc" id="fBO-3e-i7c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dpy-ba-iCt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2288" y="46"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="NrA-rm-bvK">
@@ -1860,6 +1967,7 @@
     <resources>
         <image name="big_arrow_show" width="63" height="45"/>
         <image name="header_yellow" width="392" height="416"/>
+        <image name="ic_ambassador_organise_popup" width="54" height="49"/>
         <image name="ic_big_event_empty" width="215" height="106"/>
         <image name="ic_button_close_white_round" width="32" height="32"/>
         <image name="ic_button_plus_fill" width="70" height="70"/>
@@ -1883,6 +1991,15 @@
         </namedColor>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="grey_off">
+            <color red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gris_112">
+            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="noir_alpha_50">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.51999998092651367" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
             <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

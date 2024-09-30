@@ -422,6 +422,7 @@
 		2644F1E62C2ADB7300039A07 /* CellMainFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2644F1E52C2ADB7300039A07 /* CellMainFilter.swift */; };
 		2644F1E82C2ADBB000039A07 /* CellMainFilter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2644F1E72C2ADBB000039A07 /* CellMainFilter.xib */; };
 		2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */; };
+		26471DFD2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26471DFC2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift */; };
 		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
 		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
@@ -957,6 +958,7 @@
 		2644F1E52C2ADB7300039A07 /* CellMainFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMainFilter.swift; sourceTree = "<group>"; };
 		2644F1E72C2ADBB000039A07 /* CellMainFilter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellMainFilter.xib; sourceTree = "<group>"; };
 		2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		26471DFC2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbassadorAskNotificationPopup.swift; sourceTree = "<group>"; };
 		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
 		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
@@ -1699,6 +1701,7 @@
 				0224597227FF31FC00944DE4 /* Cells */,
 				26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */,
 				26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */,
+				26471DFC2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift */,
 			);
 			path = "Groups - Neighborhoods";
 			sourceTree = "<group>";
@@ -2802,6 +2805,7 @@
 				023D89BF27DFA351008C6A58 /* MainParamsViewController.swift in Sources */,
 				02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */,
 				02C6E87228203E1F009D4289 /* ReportGroupPageViewController.swift in Sources */,
+				26471DFD2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift in Sources */,
 				0264C5D828B4FEC1001EA654 /* MessagingService.swift in Sources */,
 				26A60E212A3A05AD004849FB /* WelcomeFourViewController.swift in Sources */,
 				2689F3B62A3B6D3E0009920D /* WelcomeFiveViewController.swift in Sources */,

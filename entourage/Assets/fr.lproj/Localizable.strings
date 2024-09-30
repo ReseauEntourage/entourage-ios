@@ -992,8 +992,8 @@
 "event_empty_post_title" = "Il n'y a pas (encore) de publication sur cet événement";
 "event_empty_post_subtitle" = "Pourquoi ne pas lancer la discussion avec vos voisins ?";
 
-"event_users_title" = "Voir les participants";
-"event_userInput_search" = "Rechercher un participant de l'événement";
+"event_users_title" = "Participants";
+"event_userInput_search" = "Chercher un participant";
 
 "event_detail_full_title" = "À propos de l'événement";
 
@@ -1595,3 +1595,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_how_to_act" = "Comment souhaitez-vous agir au sein de la communauté Entourage ?";
 "enhanced_onboarding_multiple_options" = "(Eh oui, vous avez le droit de choisir plusieurs options !)";
 
+"ambassador_ask_notification_title" = "Participez-vous en tant qu’organisateur ou en tant que participant ?";
+"ambassador_ask_notification_description" = "Si vous êtes organisateur, les participants pourront vous identifier plus facilement";
+"ambassador_ask_notification_button_organizer" = "Organisateur";
+"ambassador_ask_notification_button_participant" = "Participant";
+
+
+"neighborhood_user_role_organizer" = "Organisateur";

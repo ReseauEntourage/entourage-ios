@@ -279,6 +279,36 @@ struct EventService:ParsingDataCodable {
         }
     }
     
+    static func joinEventAsOrganizer(eventId: Int, completion: @escaping (_ user: MemberLight?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        var endpoint = kAPIJoinEvent
+        endpoint = String(format: endpoint, "\(eventId)", token)
+        
+        Logger.print("Endpoint passed to join event as organizer \(endpoint)")
+        
+        // Créer le body avec le dictionnaire
+        let body: [String: Any] = ["role": "organizer"]
+        
+        // Convertir le body en Data pour l'envoyer dans la requête
+        guard let bodyData = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+            Logger.print("Failed to serialize JSON body")
+            return
+        }
+        
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response for joining event as organizer: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error joining event as organizer - \(error)")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let user: MemberLight? = self.parseData(data: data, key: "user")
+            DispatchQueue.main.async { completion(user, nil) }
+        }
+    }
+
+    
     static func leaveEvent(eventId:Int,userId:Int ,completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPILeaveEvent
