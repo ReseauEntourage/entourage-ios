@@ -547,6 +547,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btn_constraint" destination="ORd-9P-qIg" id="JDD-Sk-Pge"/>
                         <outlet property="ui_arrow_show_empty" destination="Lxv-Gl-jHK" id="CtQ-HG-Rbn"/>
                         <outlet property="ui_constraint_bottom_label" destination="3lq-cp-Bmd" id="wJb-tl-ITc"/>
                         <outlet property="ui_contrainst_textfield_height" destination="nJD-zp-3Cd" id="hGz-qV-PWb"/>

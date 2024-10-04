@@ -41,6 +41,7 @@ class ActionsMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_view_filter: UIView!
     @IBOutlet weak var ui_tv_number_filter: UILabel!
     
+    @IBOutlet weak var btn_constraint: NSLayoutConstraint!
     var maxViewHeight: CGFloat = 134
     var minViewHeight: CGFloat = 92
     
@@ -917,7 +918,23 @@ extension ActionsMainHomeViewController: EventFiltersDelegate {
 //MARK: - FloatyDelegate -
 extension ActionsMainHomeViewController: FloatyDelegate {
     func floatyWillOpen(_ floaty: Floaty) {
-        AnalyticsLoggerManager.logEvent(name: Help_action_create)
+        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 150 : 16
+
+        UIView.animate(withDuration: 0.3) {
+            // Assurez-vous que vous modifiez bien la contrainte liée au bouton flottant
+            self.btn_constraint.constant = newHeight
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    func floatyClosed(_ floaty: Floaty) {
+        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 16 : 16
+
+        UIView.animate(withDuration: 0.3) {
+            // Assurez-vous que vous modifiez bien la contrainte liée au bouton flottant
+            self.btn_constraint.constant = newHeight
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func createButtonItem(title: String, iconName: String, handler: @escaping ((FloatyItem) -> Void)) -> FloatyItem {
@@ -933,13 +950,6 @@ extension ActionsMainHomeViewController: FloatyDelegate {
     }
 }
 
-extension ActionsMainHomeViewController: EventSectionFiltersDelegate {
-    func updateSectionFilters(_ filters: Sections) {
-        self.currentSectionsFilter = filters
-                
-        goReloadAll()
-    }
-}
 
 extension ActionsMainHomeViewController: MainFilterDelegate {
     func didUpdateFilter(selectedItems: [String : Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String) {
