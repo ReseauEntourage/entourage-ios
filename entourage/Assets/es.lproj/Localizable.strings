@@ -1395,7 +1395,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "home_v2_title_map" = "Descubra direcciones útiles";
 "home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas";
-"home_v2_button_map" = "Mapa de lugares solidarios cerca de ti";
+"home_v2_button_map" = "Descubrir el mapa";
 
 "home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";
 "home_v2_subtitle_pedago" = "Luchar contra la precariedad es como todo, ¡se aprende!";
@@ -2815,7 +2815,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "home_v2_title_map" = "Descubra direcciones útiles";
 "home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas";
-"home_v2_button_map" = "Mapa de lugares solidarios cerca de ti";
 
 "home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";
 "home_v2_subtitle_pedago" = "Luchar contra la precariedad es como todo, ¡se aprende!";

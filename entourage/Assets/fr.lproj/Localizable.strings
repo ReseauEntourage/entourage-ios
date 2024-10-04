@@ -819,7 +819,7 @@
 "home_help_title" = "Besoin d’aide";
 "home_help_subtitle" = "Votre guide dans l’app";
 "home_cell_pedago" = "Tout savoir pour passer à l'action";
-"home_cell_map" = "Carte des lieux solidaires";
+"home_cell_map" = "Découvrir la carte";
 "home_cell_map_subtitle" = "Accueils de jour, bagageries…";
 
 "home_resources_title" = "Tout le contenu pédagogique";
@@ -1399,7 +1399,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "home_v2_title_map" = "Découvrir des adresses utiles";
 "home_v2_subtitle_map" = "Toutes les structures solidaires à proximité";
-"home_v2_button_map" = "Carte des lieux solidaires près de vous";
+"home_v2_button_map" = "Découvrir la carte";
 
 "home_v2_title_pedago" = "Tout savoir pour passer à l‘action";
 "home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";
