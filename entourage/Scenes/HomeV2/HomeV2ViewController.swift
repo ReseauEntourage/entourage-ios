@@ -250,7 +250,7 @@ class HomeV2ViewController: UIViewController {
                     let connectionCount = self.incrementConnectionCount()
                     
                     // Vérifier si c'est la 2ème ou la 10ème connexion
-                    if connectionCount == 2 || connectionCount == 10 {
+                    if connectionCount == 2 || connectionCount == 5 ||  connectionCount == 10 {
                         self.presentNotificationDemandViewController()
                     }
                 }
