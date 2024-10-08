@@ -148,10 +148,10 @@
 "onboard_phone_title" = "سعيد بلقائك، ٪@!";
 
 "onboard_phase3_title" = "بالإضافة إلى مقابلة الأشخاص، كيف تريد المساهمة في مجتمع Entourage؟";
-"onboard_title_entour" = "محيطي";
-"onboard_subtitle_entour" = "أود أن أقدم الدعم لجيراني الذين يحتاجون إليه.";
-"onboard_title_beentour" = "يجري محاطة";
-"onboard_subtitle_beentour" = "أنا في وضع ضعيف وأبحث عن الدعم.";
+"onboard_title_entour" = "دعم الآخرين";
+"onboard_subtitle_entour" = "أرغب في تقديم الدعم لجيراني المحتاجين.";
+"onboard_title_beentour" = "تلقي الدعم";
+"onboard_subtitle_beentour" = "أنا في موقف ضعف وأبحث عن الدعم.";
 "onboard_place_title_new" = "ما هو حيك؟";
 "onboard_place_desc" = "* العنوان سري ولن يتم الإفصاح عنه أبداً";
 "onboard_place_infos_placeholder" = "العنوان أو المدينة أو القسم";

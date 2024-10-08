@@ -65,20 +65,29 @@ extension MainUserProfileViewController: UITableViewDelegate, UITableViewDataSou
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoTop", for: indexPath) as! MainUserProfileTopCell
-            cell.populateCell(isMe:true ,username: currentUser.displayName, role: currentUser.roles?.first, partner: currentUser.partner, bio: currentUser.about,delegate: self)
+            if currentUser != nil {
+                cell.populateCell(isMe:true ,username: currentUser.displayName, role: currentUser.roles?.first, partner: currentUser.partner, bio: currentUser.about,delegate: self)
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoCats", for: indexPath) as! CategoriesBubblesCell
-            cell.populateCell(interests: currentUser.interests)
+            if currentUser != nil {
+                cell.populateCell(interests: currentUser.interests)
+            }
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoActivities", for: indexPath) as! MainUserActivitiesCell
-            let stats:UserStats = currentUser.stats ?? UserStats()
-            cell.populateCell(isMe:true ,neighborhoodsCount: stats.neighborhoodsCount, outingsCount: stats.outingsCount ?? -1, myDate:currentUser.creationDate)
+            if currentUser != nil {
+                let stats:UserStats = currentUser.stats ?? UserStats()
+                cell.populateCell(isMe:true ,neighborhoodsCount: stats.neighborhoodsCount, outingsCount: stats.outingsCount ?? -1, myDate:currentUser.creationDate)
+            }
+            
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfos", for: indexPath) as! MainUserInfosCell
-            cell.populateCell(user: currentUser)
+            if currentUser != nil {
+                cell.populateCell(user: currentUser)
+            }
             return cell
         default:
             return UITableViewCell()
@@ -87,9 +96,14 @@ extension MainUserProfileViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //To fix heigh categories view if empty
-        if indexPath.row == 1 && currentUser.interests?.count ?? 0 == 0 {
+        if currentUser != nil {
+            if indexPath.row == 1 && currentUser.interests?.count ?? 0 == 0 {
+                return 0
+            }
+        }else{
             return 0
         }
+       
         return UITableView.automaticDimension
     }
 }

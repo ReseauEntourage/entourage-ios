@@ -65,6 +65,7 @@ class EventDetailFeedViewController: UIViewController {
     let IMAGE_POST_CELL_SIZE = 430.0
     
     var pullRefreshControl = UIRefreshControl()
+    var users:[UserLightNeighborhood] = [UserLightNeighborhood]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,8 +114,17 @@ class EventDetailFeedViewController: UIViewController {
         }
         //Notif for updating event infos
         //NotificationCenter.default.addObserver(self, selector: #selector(updateEvent), name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        getEventMembers()
         getEventDetail()
 
+    }
+    
+    func getEventMembers(){
+        EventService.getEventUsers(eventId: self.eventId) { users, error in
+            if let _users = users{
+                self.users = _users
+            }
+        }
     }
     
     func registerCellsNib() {
@@ -617,7 +627,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         if indexPath.section == 0 {
             if (self.event!.isMember ?? false) && !isAfterCreation {
                 let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopLightCell.identifier, for: indexPath) as! EventDetailTopLightCell
-                cell.populateCell(event: self.event, delegate: self,isEntourageEvent: isUserAmbassador)
+                cell.populateCell(event: self.event, delegate: self,isEntourageEvent: isUserAmbassador, members: self.users)
                 return cell
             }
             else {

@@ -81,8 +81,25 @@ class EventDetailTopLightCell: UITableViewCell {
         delegate?.share()
     }
     
-    func populateCell(event:Event?, delegate:EventDetailTopCellDelegate, isEntourageEvent:Bool) {
+    func populateCell(event:Event?, delegate:EventDetailTopCellDelegate, isEntourageEvent:Bool, members:[UserLightNeighborhood]) {
         self.delegate = delegate
+        var numberOfOrga = 0
+        var nameOfOrga = ""
+        for member in members {
+            numberOfOrga += 1
+            if (numberOfOrga < 3){
+                nameOfOrga += "," + member.displayName
+            }
+        }
+        if numberOfOrga > 2 {
+            nameOfOrga = nameOfOrga + String(numberOfOrga)
+        }
+        if nameOfOrga.first == (",") {
+            nameOfOrga.removeFirst()
+        }
+        ui_label_organised_by.text = "event_top_cell_organised_by".localized + nameOfOrga
+        ui_view_organised_by.isHidden = false
+
         ui_img_member_1.isHidden = true
         ui_img_member_2.isHidden = true
         ui_img_member_3.isHidden = true
@@ -181,7 +198,7 @@ class EventDetailTopLightCell: UITableViewCell {
         }
         
         if let _author = event.author {
-            ui_label_organised_by.text = "event_top_cell_organised_by".localized + _author.displayName
+            //ui_label_organised_by.text = "event_top_cell_organised_by".localized + _author.displayName
             ui_view_organised_by.isHidden = false
             if let _asso = _author.partner {
                 ui_view_association.isHidden = false

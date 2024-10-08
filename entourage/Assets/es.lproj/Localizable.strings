@@ -158,10 +158,10 @@
 "onboard_phone_title" = "¡Encantado de conocerte, %@!";
 
 "onboard_phase3_title" = "Además de conocer gente, ¿cómo quieres contribuir a la comunidad Entourage?";
-"onboard_title_entour" = "Rodear";
-"onboard_subtitle_entour" = "Ofrecer ayuda...";
-"onboard_title_beentour" = "Estar rodeado";
-"onboard_subtitle_beentour" = "Pedir ayuda, encontrar las estructuras sociales que me rodean...";
+"onboard_title_entour" = "Apoyar a otros";
+"onboard_subtitle_entour" = "Me gustaría ofrecer apoyo a mis vecinos que lo necesitan.";
+"onboard_title_beentour" = "Recibir apoyo";
+"onboard_subtitle_beentour" = "Estoy en una situación vulnerable y busco apoyo.";
 "onboard_place_title_new" = "¿Cuál es tu barrio?";
 "onboard_place_desc" = "*La dirección es confidencial y nunca será comunicada";
 "onboard_place_infos_placeholder" = "Dirección, ciudad o departamento";
@@ -1585,10 +1585,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboard_phone_title" = "¡Encantado de conocerte, %@!";
 
 "onboard_phase3_title" = "Además de conocer gente, ¿cómo quieres contribuir a la comunidad Entourage?";
-"onboard_title_entour" = "Rodear";
-"onboard_subtitle_entour" = "Ofrecer ayuda...";
-"onboard_title_beentour" = "Estar rodeado";
-"onboard_subtitle_beentour" = "Pedir ayuda, encontrar las estructuras sociales que me rodean...";
+"onboard_title_entour" = "Apoyar a otros";
+"onboard_subtitle_entour" = "Me gustaría ofrecer apoyo a mis vecinos que lo necesitan.";
+"onboard_title_beentour" = "Recibir apoyo";
+"onboard_subtitle_beentour" = "Estoy en una situación vulnerable y busco apoyo.";
 "onboard_place_title_new" = "¿Cuál es tu barrio?";
 "onboard_place_desc" = "*La dirección es confidencial y nunca será comunicada";
 "onboard_place_infos_placeholder" = "Dirección, ciudad o departamento";

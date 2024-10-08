@@ -161,10 +161,10 @@
 "onboard_phone_title" = "Enchantés, %@ !";
 
 "onboard_phase3_title" = "En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ?";
-"onboard_title_entour" = "Entourer";
-"onboard_subtitle_entour" = "Proposer de l’aide …";
-"onboard_title_beentour" = "Être entouré";
-"onboard_subtitle_beentour" = "Demander de l’aide, trouver les structures sociales autour de moi …";
+"onboard_title_entour" = "Wspierać innych";
+"onboard_subtitle_entour" = "Chciałby chciałabym zaoferować wsparcie moim sąsiadom w potrzebie.";
+"onboard_title_beentour" = "Otrzymać wsparcie";
+"onboard_subtitle_beentour" = "Jestem w trudnej sytuacji i szukam wsparcia.";
 "onboard_place_title_new" = "Quel est votre quartier ?";
 "onboard_place_desc" = "* L’adresse est confidentielle et ne sera jamais communiquée ";
 "onboard_place_infos_placeholder" = "Adresse, ville ou département";

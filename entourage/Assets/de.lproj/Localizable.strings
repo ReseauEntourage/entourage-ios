@@ -157,10 +157,10 @@
 "onboard_phone_title" = "Schön, Sie kennenzulernen, %@!";
 
 "onboard_phase3_title" = "Welchen Beitrag möchten Sie neben dem Kennenlernen von Menschen zur Entourage-Community leisten?";
-"onboard_title_entour" = "Umgeben";
-"onboard_subtitle_entour" = "Hilfe anbieten...";
-"onboard_title_beentour" = "Sei umgeben";
-"onboard_subtitle_beentour" = "Bitten Sie um Hilfe, finden Sie die sozialen Strukturen um mich herum ...";
+"onboard_title_entour" = "Unterstützen";
+"onboard_subtitle_entour" = "Ich möchte meinen Nachbarn in Not Unterstützung anbieten.";
+"onboard_title_beentour" = "Unterstützung erhalten";
+"onboard_subtitle_beentour" = "Ich befinde mich in einer verletzlichen Situation und suche Unterstützung.";
 "onboard_place_title_new" = "Was ist deine Nachbarschaft?";
 "onboard_place_desc" = "* Die Adresse ist vertraulich und wird niemals weitergegeben";
 "onboard_place_infos_placeholder" = "Adresse, Stadt oder Abteilung";

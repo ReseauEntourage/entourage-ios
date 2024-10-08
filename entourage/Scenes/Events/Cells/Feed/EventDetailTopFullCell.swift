@@ -107,6 +107,7 @@ class EventDetailTopFullCell: UITableViewCell {
     }
     
     func populateCell(event:Event?, delegate:EventDetailTopCellDelegate , isEntourageEvent:Bool) {
+
         self.delegate = delegate
         ui_img_member_1.isHidden = true
         ui_img_member_2.isHidden = true

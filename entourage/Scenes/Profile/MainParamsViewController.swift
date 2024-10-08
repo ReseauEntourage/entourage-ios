@@ -170,6 +170,7 @@ extension MainParamsViewController: MJAlertControllerDelegate {
                 if let error = error {
                     let errorMessage = String.init(format: "params_account_not_deleted".localized, error.message)
                     IHProgressHUD.showError(withStatus: errorMessage)
+                    
                     return
                 }
                 NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)

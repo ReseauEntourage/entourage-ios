@@ -158,10 +158,10 @@
 "onboard_phone_title" = "Приємно познайомитися, %@!";
 
 "onboard_phase3_title" = "Окрім зустрічей з людьми, як би ви хотіли зробити внесок у спільноту Entourage?";
-"onboard_title_entour" = "Об'ємний";
-"onboard_subtitle_entour" = "Запропонуйте допомогу...";
-"onboard_title_beentour" = "Бути оточеним";
-"onboard_subtitle_beentour" = "Зверніться по допомогу, знайдіть соціальні структури навколо мене...";
+"onboard_title_entour" = "Підтримати";
+"onboard_subtitle_entour" = "інших Я хотів би надати підтримку своїм сусідам, які цього потребують.";
+"onboard_title_beentour" = "Отримати";
+"onboard_subtitle_beentour" = "підтримку Я перебуваю в уразливій ситуації та шукаю підтримки.";
 "onboard_place_title_new" = "Який ваш район?";
 "onboard_place_desc" = "* Адреса є конфіденційною та ніколи не повідомлятиметься";
 "onboard_place_infos_placeholder" = "Адреса, місто або відділ";

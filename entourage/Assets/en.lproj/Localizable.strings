@@ -157,10 +157,10 @@
 "onboard_phone_title" = "Nice to meet you, %@!";
 
 "onboard_phase3_title" = "Beyond meeting new people, how would you like to contribute to the Entourage community?";
-"onboard_title_entour" = "Surround";
-"onboard_subtitle_entour" = "Offer help...";
-"onboard_title_beentour" = "Be surrounded";
-"onboard_subtitle_beentour" = "Ask for help, find the social structures around me...";
+"onboard_title_entour" = "Support other";
+"onboard_subtitle_entour" = "I would like to offer support to my neighbors in need.";
+"onboard_title_beentour" = "Receive support";
+"onboard_subtitle_beentour" = "I am in a vulnerable situation and seeking support.";
 "onboard_place_title_new" = "In which area do you live?";
 "onboard_place_desc" = "* The address is confidential and will never be communicated";
 "onboard_place_infos_placeholder" = "Address, city or department";
@@ -1576,7 +1576,7 @@
 "enhanced_onboarding_end_title" = "Your personalized experience is (almost) ready!";
 "enhanced_onboarding_end_subtitle" = "Thank you for sharing your interests and desires to act. We look forward to soon offering you tailor-made events that suit you.\nStay connected!";
 
-"edit_profile_cell_onboarding" = "Personalize My Account";
+"edit_profile_cell_onboarding" = "Customise my profile";
 "button_title_for_setting_onboarding" = "Save";
 "button_title_for_re_onboarding_end" = "Return to Profile";
 
