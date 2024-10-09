@@ -253,9 +253,9 @@ class HomeV2ViewController: UIViewController {
                     if connectionCount == 3 || connectionCount == 5 || connectionCount == 10 {
                         self.presentNotificationDemandViewController()
                     }else{
-                        let alert = UIAlertController(title: "Connexion", message: "Nombre de connexions: \(connectionCount)", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+//                        let alert = UIAlertController(title: "Connexion", message: "Nombre de connexions: \(connectionCount)", preferredStyle: .alert)
+//                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                        self.present(alert, animated: true, completion: nil)
                     }
                     // Afficher une alerte avec le connectionCount
                     
