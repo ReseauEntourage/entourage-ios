@@ -61,11 +61,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             AppState.checkNotifcationsAndGoMainScreen()
         }
+        incrementConnectionCount()
         return true
     }
     
     private func initEnvironmentConfigManager() {
         environmentConfigManager = EnvironmentConfigurationManager.sharedInstance
+    }
+    
+    func incrementConnectionCount(){
+        let defaults = UserDefaults.standard
+        let currentCount = defaults.integer(forKey: "connectionCount")
+        let newCount = currentCount + 1
+        defaults.set(newCount, forKey: "connectionCount")
+        
     }
     
     private func configureGooglePlace() {

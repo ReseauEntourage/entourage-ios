@@ -248,9 +248,9 @@ class HomeV2ViewController: UIViewController {
                     
                     // Incrémenter le nombre de connexions
                     let connectionCount = self.incrementConnectionCount()
-                    
+                    print("eho connection count : " , connectionCount)
                     // Vérifier si c'est la 2ème ou la 10ème connexion
-                    if connectionCount == 3 || connectionCount == 5 || connectionCount == 10 {
+                    if connectionCount == 2 || connectionCount == 5 || connectionCount == 10 {
                         self.presentNotificationDemandViewController()
                     }else{
 //                        let alert = UIAlertController(title: "Connexion", message: "Nombre de connexions: \(connectionCount)", preferredStyle: .alert)
@@ -268,9 +268,7 @@ class HomeV2ViewController: UIViewController {
     func incrementConnectionCount() -> Int {
         let defaults = UserDefaults.standard
         let currentCount = defaults.integer(forKey: "connectionCount")
-        let newCount = currentCount + 1
-        defaults.set(newCount, forKey: "connectionCount")
-        return newCount
+        return currentCount
     }
     
     func presentNotificationDemandViewController() {
