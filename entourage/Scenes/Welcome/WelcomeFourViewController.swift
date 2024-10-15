@@ -72,7 +72,7 @@ class WelcomeFourViewController:UIViewController {
     @objc func mainTapped() {
         AnalyticsLoggerManager.logEvent(name: Action_WelcomeOfferHelp_Day8)
         self.dismiss(animated: true) {
-            if let _url = URL(string: "https://kahoot.it/challenge/45371e80-fe50-4be5-afec-b37e3d50ede2_1687252158038"){
+            if let _url = URL(string: "https://kahoot.it/challenge/0354666?challenge-id=45371e80-fe50-4be5-afec-b37e3d50ede2_1729004998521"){
                 WebLinkManager.openUrl(url: _url, openInApp: true, presenterViewController: AppState.getTopViewController())
             }
         }
