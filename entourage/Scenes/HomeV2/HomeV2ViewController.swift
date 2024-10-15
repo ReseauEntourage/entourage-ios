@@ -113,6 +113,8 @@ class HomeV2ViewController: UIViewController {
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
+        NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
+
     }
     
 
