@@ -1111,7 +1111,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_create_info_demand_underline" = "дізнайтеся більше тут.";
 
 "action_create_mandatory" = "- ОБОВ'ЯЗКОВО";
-"action_create_phase_1_name" = "Назва дії - обов'язково";
+"action_create_phase_1_name" = "Назва дії • обов'язково";
 "action_create_phase_1_name_placeholder" = "Назвіть свій %@";
 "action_create_phase_1_name_subtitle" = "Дайте коротку та зрозумілу назву своєму %@";
 "action_create_phase_1_name_error" = "Назва %@ має містити принаймні 2 символи.";

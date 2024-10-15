@@ -1096,7 +1096,7 @@
 "action_create_info_demand_underline" = "learn more here.";
 
 "action_create_mandatory" = "- required";
-"action_create_phase_1_name" = "Action title - required";
+"action_create_phase_1_name" = "Action title • required";
 "action_create_phase_1_name_placeholder" = "Name your %@";
 "action_create_phase_1_name_subtitle" = "Give a short and explicit name to your %@";
 "action_create_phase_1_name_error" = "The %@ name must contain at least 2 characters.";
@@ -1643,3 +1643,25 @@
 "enhanced_onboarding_select_concerns" = "Select the help categories you want to prioritize.";
 "enhanced_onboarding_how_to_act" = "How do you want to act within the Entourage community?";
 "enhanced_onboarding_multiple_options" = "(Yes, you can choose multiple options!)";
+
+"demand_social_title" = "Example: Walk in the park";
+"demand_social_description" = "Example: I propose a walk in the park this weekend to chat and relax.";
+"demand_services_title" = "Example: Need to print documents";
+"demand_services_description" = "Example: I need to print a few pages for an appointment. Could someone help me?";
+"demand_clothes_title" = "Example: Looking for a winter coat";
+"demand_clothes_description" = "Example: I am looking for a warm coat in size M for this winter.";
+"demand_equipment_title" = "Example: Need a sleeping bag";
+"demand_equipment_description" = "Example: I am looking for a sleeping bag to sleep outside this winter. If anyone has one to give, it would be a great help.";
+"demand_hygiene_title" = "Example: Need soap";
+"demand_hygiene_description" = "Example: I am looking for soap or shower gel. If anyone has extra, I would be happy to take it.";
+
+"contrib_social_title" = "Example: Coffee and discussion";
+"contrib_social_description" = "Example: I am looking for someone to share a coffee with this week in the neighborhood.";
+"contrib_services_title" = "Example: Help with laundry";
+"contrib_services_description" = "Example: I offer to wash clothes for someone who needs it.";
+"contrib_clothes_title" = "Example: Sports shoes to give away";
+"contrib_clothes_description" = "Example: I am giving away a pair of sports shoes in good condition, size 42.";
+"contrib_equipment_title" = "Example: Mobile phone to give away";
+"contrib_equipment_description" = "Example: I am giving away an old functional mobile phone. Ideal for someone who needs it.";
+"contrib_hygiene_title" = "Example: Hygiene products to give away";
+"contrib_hygiene_description" = "Example: I am giving away several packs of hygiene pads.";

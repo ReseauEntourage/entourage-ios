@@ -33,32 +33,45 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
         ui_error_view.isHidden = true
         self.ui_error_view.setupView(title: "neighborhoodCreateInputErrorMinCharName".localized)
     }
-    
-    func populateCell(delegate:NeighborhoodCreateNameCellDelegate, name:String? = nil, isEvent:Bool, isAction:Bool = false, isContrib:Bool = false) {
+    func populateCell(delegate: NeighborhoodCreateNameCellDelegate, name: String? = nil, isEvent: Bool, isAction: Bool = false, isContrib: Bool = false, placeholder: String? = nil) {
         self.delegate = delegate
-        self.ui_textfield.text = name
+        self.ui_textfield.text = name ?? "" // Le texte entré, sinon vide
         
         if isEvent {
+            // Ancien comportement pour un événement
             let stringAttr = Utils.formatString(messageTxt: "event_create_phase_1_name".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
             ui_title.attributedText = stringAttr
             ui_textfield.placeholder = "event_create_phase_1_name_placeholder".localized
             self.ui_error_view.setupView(title: "event_create_phase_1_name_error".localized)
-        }
-        
-        if isAction {
+            
+        } else if isAction {
+            // Ancien comportement pour une action
             let stringAttr = Utils.formatString(messageTxt: "action_create_phase_1_name".localized, messageTxtHighlight: "action_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
             ui_title.attributedText = stringAttr
             
-            let _placeh = String.init(format: "action_create_phase_1_name_placeholder".localized, isContrib ? "action_contrib".localized : "action_solicitation".localized)
-            ui_textfield.placeholder = _placeh
+            // Utiliser le placeholder passé en paramètre (spécifique aux actions)
+            if let actionPlaceholder = placeholder {
+                ui_textfield.placeholder = actionPlaceholder
+            }
             
+            // Gestion du texte d'erreur
             let _err = String.init(format: "action_create_phase_1_name_error".localized, isContrib ? "action_contrib".localized : "action_solicitation".localized)
             self.ui_error_view.setupView(title: _err)
-            
+
+            // Mise à jour du sous-titre si nécessaire
             let _subt = String.init(format: "action_create_phase_1_name_subtitle".localized, isContrib ? "action_contrib".localized : "action_solicitation".localized)
             ui_subtitle?.text = _subt
+        } else {
+            // Ancien comportement pour les groupes
+            let stringAttr = Utils.formatString(messageTxt: "neighborhoodCreateNameTitle".localized, messageTxtHighlight: "neighborhoodCreateNameSubtitle".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
+            ui_title.attributedText = stringAttr
+            ui_textfield.placeholder = "neighborhoodCreateNamePlaceholderName".localized
+            self.ui_error_view.setupView(title: "neighborhoodCreateInputErrorMinCharName".localized)
         }
     }
+
+
+
     
     func checkErrorInput() -> Bool {
         var returnValidate = true

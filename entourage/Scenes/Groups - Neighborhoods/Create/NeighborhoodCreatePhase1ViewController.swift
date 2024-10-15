@@ -88,7 +88,7 @@ extension NeighborhoodCreatePhase1ViewController: UITableViewDelegate, UITableVi
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
-            cell.populateCell(delegate: self,name: group_name, isEvent: false)
+            cell.populateCell(delegate: self,name: group_name, isEvent: false, placeholder: "")
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionTableViewCell.identifier, for: indexPath) as! AddDescriptionTableViewCell

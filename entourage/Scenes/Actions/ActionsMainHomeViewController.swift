@@ -136,7 +136,6 @@ class ActionsMainHomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getUserInfo()
-        print("eho mode " , currentMode)
         if currentMode == .contribSearch || currentMode == .solicitationSearch {
             self.ui_search_textfield.becomeFirstResponder()
         }

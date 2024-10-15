@@ -20,7 +20,6 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         ui_top_view.backgroundColor = .clear
         ui_top_view.populateCustom(title: "neighborhood_about_group_title".localized, titleFont: ApplicationTheme.getFontCourantBoldNoir().font, titleColor: ApplicationTheme.getFontCourantBoldNoir().color, imageName: nil, backgroundColor: .appBeigeClair, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil)
         
@@ -148,6 +147,10 @@ extension NeighborhoodDetailOnlyViewController: UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! NeighborhoodDetailTopCell
         cell.populateCell(neighborhood: self.neighborhood, isFollowingGroup: self.neighborhood?.isMember ?? false, isFromOnlyDetail: true, delegate: self)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 

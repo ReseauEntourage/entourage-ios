@@ -1106,7 +1106,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_create_info_demand_underline" = "تعلم المزيد هنا.";
 
 "action_create_mandatory" = "- إلزامية";
-"action_create_phase_1_name" = "عنوان الإجراء - مطلوب";
+"action_create_phase_1_name" = "عنوان الإجراء • مطلوب";
 "action_create_phase_1_name_placeholder" = "قم بتسمية %@ الخاص بك";
 "action_create_phase_1_name_subtitle" = "أعط اسمًا قصيرًا وصريحًا لـ %@ الخاص بك";
 "action_create_phase_1_name_error" = "يجب أن يحتوي الاسم %@ على حرفين على الأقل.";
@@ -1583,3 +1583,26 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_select_concerns" = "اختر فئات المساعدة التي ترغب في إعطائها الأولوية.";
 "enhanced_onboarding_how_to_act" = "كيف تريد أن تتصرف داخل مجتمع Entourage؟";
 "enhanced_onboarding_multiple_options" = "(نعم، يمكنك اختيار عدة خيارات!)";
+
+"demand_social_title" = "مثال: نزهة في الحديقة";
+"demand_social_description" = "مثال: أقترح نزهة في الحديقة هذا الأسبوع للتحدث والاسترخاء.";
+"demand_services_title" = "مثال: بحاجة لطباعة مستندات";
+"demand_services_description" = "مثال: أحتاج لطباعة بعض الصفحات لموعد. هل يمكن لأحد مساعدتي؟";
+"demand_clothes_title" = "مثال: أبحث عن معطف شتوي";
+"demand_clothes_description" = "مثال: أبحث عن معطف شتوي دافئ بمقاس M.";
+"demand_equipment_title" = "مثال: بحاجة لكيس نوم";
+"demand_equipment_description" = "مثال: أبحث عن كيس نوم للنوم في الخارج هذا الشتاء. إذا كان لدى أحد كيس يمكن إعطاؤه، سيكون ذلك مفيدًا.";
+"demand_hygiene_title" = "مثال: بحاجة إلى صابون";
+"demand_hygiene_description" = "مثال: أبحث عن صابون أو جل استحمام. إذا كان لدى أحد فائض، سأكون ممتنًا.";
+
+"contrib_social_title" = "مثال: قهوة ودردشة";
+"contrib_social_description" = "مثال: أبحث عن شخص لمشاركة قهوة هذا الأسبوع في الحي.";
+"contrib_services_title" = "مثال: مساعدة في الغسيل";
+"contrib_services_description" = "مثال: أعرض غسل الملابس لشخص بحاجة لذلك.";
+"contrib_clothes_title" = "مثال: حذاء رياضي للتبرع";
+"contrib_clothes_description" = "مثال: أتبرع بحذاء رياضي بحالة جيدة، مقاس 42.";
+"contrib_equipment_title" = "مثال: هاتف محمول للتبرع";
+"contrib_equipment_description" = "مثال: أتبرع بهاتف محمول قديم لكنه يعمل. مثالي لشخص يحتاج إليه.";
+"contrib_hygiene_title" = "مثال: منتجات النظافة للتبرع";
+"contrib_hygiene_description" = "مثال: أتبرع بعدة عبوات من الفوط الصحية.";
+

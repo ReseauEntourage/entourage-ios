@@ -1115,7 +1115,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_create_info_demand_underline" = "en savoir plus par ici.";
 
 "action_create_mandatory" = "- obligatoire";
-"action_create_phase_1_name" = "Titre de l’action - obligatoire";
+"action_create_phase_1_name" = "Titre de l’action • obligatoire";
 "action_create_phase_1_name_placeholder" = "Nommez votre %@";
 "action_create_phase_1_name_subtitle" = "Donnez un nom court et explicite à votre %@";
 "action_create_phase_1_name_error" = "Le nom de la %@ doit contenir au minimum 2 caractères.";
@@ -1602,3 +1602,27 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 
 "neighborhood_user_role_organizer" = "Organisateur";
+
+"demand_social_title" = "Exemple : Balade dans le parc";
+"demand_social_description" = "Exemple : Je propose une balade dans le parc ce week-end pour discuter et se détendre.";
+"demand_services_title" = "Exemple : Besoin d'imprimer des documents";
+"demand_services_description" = "Exemple : Je dois imprimer quelques pages pour un rendez-vous. Quelqu'un pourrait-il m'aider ?";
+"demand_clothes_title" = "Exemple : Cherche manteau d'hiver";
+"demand_clothes_description" = "Exemple : Je suis à la recherche d'un manteau chaud en taille M pour cet hiver.";
+"demand_equipment_title" = "Exemple : Besoin d'un duvet";
+"demand_equipment_description" = "Exemple : Je cherche un duvet pour dormir dehors cet hiver. Si quelqu'un en a un à donner, ce serait d'une grande aide.";
+"demand_hygiene_title" = "Exemple : Besoin de savon";
+"demand_hygiene_description" = "Exemple : Je cherche du savon ou du gel douche. Si quelqu'un en a en surplus, je suis preneur.";
+
+"contrib_social_title" = "Exemple : Café et discussion";
+"contrib_social_description" = "Exemple : Je cherche quelqu'un avec qui partager un café cette semaine dans le quartier.";
+"contrib_services_title" = "Exemple : Aide pour une lessive";
+"contrib_services_description" = "Exemple : Je propose de laver du linge pour quelqu'un qui en aurait besoin.";
+"contrib_clothes_title" = "Exemple : Chaussures de sport à donner";
+"contrib_clothes_description" = "Exemple : Je donne une paire de chaussures de sport en bon état, taille 42.";
+"contrib_equipment_title" = "Exemple : Téléphone portable à donner";
+"contrib_equipment_description" = "Exemple : Je donne un ancien téléphone portable fonctionnel. Idéal pour quelqu'un qui en aurait besoin.";
+"contrib_hygiene_title" = "Exemple : Produits hygiéniques à donner";
+"contrib_hygiene_description" = "Exemple : Je donne plusieurs paquets de protections hygiéniques.";
+
+

@@ -10,8 +10,8 @@ import UIKit
 class ActionCreatePageViewController: UIPageViewController {
     
     
-    var createPhase1VC:ActionCreatePhase1ViewController? = nil
-    var createPhase2VC:ActionCreatePhase2ViewController? = nil
+    var createPhase1VC:ActionCreatePhase2ViewController? = nil
+    var createPhase2VC:ActionCreatePhase1ViewController? = nil
     var createPhase3VC:ActionCreatePhase3ViewController? = nil
     
     weak var parentDelegate:ActionCreateMainDelegate? = nil
@@ -26,7 +26,7 @@ class ActionCreatePageViewController: UIPageViewController {
         
         self.isPagingEnabled = false
         
-        createPhase1VC = viewController(phase: currentPhasePosition) as? ActionCreatePhase1ViewController
+        createPhase1VC = viewController(phase: currentPhasePosition) as? ActionCreatePhase2ViewController
         
         guard let createPhase1VC = createPhase1VC else {
             return
@@ -40,7 +40,7 @@ class ActionCreatePageViewController: UIPageViewController {
         switch phase {
         case 1:
             if createPhase1VC == nil {
-                createPhase1VC = storyboard?.instantiateViewController(withIdentifier: "createPhase1") as? ActionCreatePhase1ViewController
+                createPhase1VC = storyboard?.instantiateViewController(withIdentifier: "createPhase2") as? ActionCreatePhase2ViewController
                 createPhase1VC?.pageDelegate = parentDelegate
             }
             if isContrib {
@@ -52,7 +52,7 @@ class ActionCreatePageViewController: UIPageViewController {
             return createPhase1VC
         case 2:
             if createPhase2VC == nil {
-                createPhase2VC = storyboard?.instantiateViewController(withIdentifier: "createPhase2") as? ActionCreatePhase2ViewController
+                createPhase2VC = storyboard?.instantiateViewController(withIdentifier: "createPhase1") as? ActionCreatePhase1ViewController
                 createPhase2VC?.pageDelegate = parentDelegate
             }
             if isContrib {

@@ -22,6 +22,20 @@ class ActionCreatePhase1ViewController: UIViewController {
     
     var currentAction:Action? = nil
     
+    let placeholders: [String: (title: String, description: String)] = [
+        "demand_social": ("demand_social_title".localized, "demand_social_description".localized),
+        "demand_services": ("demand_services_title".localized, "demand_services_description".localized),
+        "demand_clothes": ("demand_clothes_title".localized, "demand_clothes_description".localized),
+        "demand_equipment": ("demand_equipment_title".localized, "demand_equipment_description".localized),
+        "demand_hygiene": ("demand_hygiene_title".localized, "demand_hygiene_description".localized),
+        "contrib_social": ("contrib_social_title".localized, "contrib_social_description".localized),
+        "contrib_services": ("contrib_services_title".localized, "contrib_services_description".localized),
+        "contrib_clothes": ("contrib_clothes_title".localized, "contrib_clothes_description".localized),
+        "contrib_equipment": ("contrib_equipment_title".localized, "contrib_equipment_description".localized),
+        "contrib_hygiene": ("contrib_hygiene_title".localized, "contrib_hygiene_description".localized)
+    ]
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,28 +96,60 @@ extension ActionCreatePhase1ViewController: UITableViewDataSource, UITableViewDe
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
-            let _title = action_title != nil ? action_title : currentAction?.title
-            cell.populateCell(delegate: self,name: _title, isEvent: false, isAction: true, isContrib: pageDelegate?.isContribution() ?? false)
+            
+            // Récupérer la section sélectionnée et le type d'action
+            guard let selectedSection = ActionCreateStateManager.shared.getSection() else {
+                print("Aucune section sélectionnée")
+                return cell
+            }
+            
+            let isContrib = ActionCreateStateManager.shared.isContrib
+            let sectionKey = isContrib ? "contrib_\(selectedSection)" : "demand_\(selectedSection)"
+            
+            // Récupérer le placeholder pour le titre
+            let placeholdersForSection = placeholders[sectionKey] ?? ("", "")
+            let _titlePlaceholder = placeholdersForSection.title
+            
+            // Utiliser le placeholder uniquement pour les actions
+            let _title = action_title ?? currentAction?.title ?? ""
+            
+            // Appel à la fonction populateCell en passant le placeholder uniquement pour les actions
+            cell.populateCell(delegate: self, name: _title, isEvent: false, isAction: true, isContrib: isContrib, placeholder: _titlePlaceholder)
+            
             return cell
+            
         case 1:
+            // Ton code pour la description
             let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionTableViewCell.identifier, for: indexPath) as! AddDescriptionTableViewCell
             
             let stringAttr = Utils.formatString(messageTxt: "action_create_phase_1_desc".localized, messageTxtHighlight: "action_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
             
-            let _placeh = String.init(format: "action_create_phase_1_desc_placeholder".localized, pageDelegate?.isContribution() ?? false ? "action_contrib".localized : "action_solicitation".localized)
-            let _desc = String.init(format: "action_create_phase_1_desc_subtitle".localized, pageDelegate?.isContribution() ?? false ? "action_contrib".localized : "action_solicitation".localized)
+            // Récupérer la section sélectionnée et le type d'action
+            guard let selectedSection = ActionCreateStateManager.shared.getSection() else {
+                print("Aucune section sélectionnée")
+                return cell
+            }
             
-            let _about = action_description != nil ? action_description : currentAction?.description
-            cell.populateCell(title: "action_create_phase_1_desc".localized,titleAttributted:stringAttr , description: _desc, placeholder: _placeh, delegate: self,about: _about, textInputType:.descriptionAbout, tableview: ui_tableview)
+            let isContrib = ActionCreateStateManager.shared.isContrib
+            let sectionKey = isContrib ? "contrib_\(selectedSection)" : "demand_\(selectedSection)"
+            let placeholdersForSection = placeholders[sectionKey] ?? ("", "")
+            
+            let _placeh = placeholdersForSection.title
+            let _descph = placeholdersForSection.description
+            let _description = String.init(format: "action_create_phase_1_desc_subtitle".localized, pageDelegate?.isContribution() ?? false ? "action_contrib".localized : "action_solicitation".localized)
+            
+            let _about = action_description ?? currentAction?.description
+            cell.populateCell(title: "action_create_phase_1_desc".localized, titleAttributted: stringAttr, description: _description, placeholder: _descph, delegate: self, about: _about, textInputType: .descriptionAbout, tableview: ui_tableview)
+            
             return cell
+            
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! ActionCreatePhotoCell
-            
             cell.populateCell(image: action_image, imageUrl: currentAction?.imageUrl)
             return cell
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
             if let navvc = storyboard?.instantiateViewController(withIdentifier: "addPhotoNav") as? UINavigationController, let vc = navvc.topViewController as? ActionAddPhotoViewController {

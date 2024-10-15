@@ -115,7 +115,8 @@ class ActionCreateMainViewController: UIViewController {
     func createAction() {
         newAction.sectionName = newSection?.key
         IHProgressHUD.show()
-        
+        ActionCreateStateManager.shared.clearSection()
+
         if isContrib {
             if let newImage = newImage {
                 ContribUploadPictureService.prepareUploadWith(image: newImage, action: newAction, isUpdate: false) { action, isOk in
@@ -243,18 +244,16 @@ class ActionCreateMainViewController: UIViewController {
         var message = ""
         
         switch currentPhasePosition {
-        case 1:
-            //Check name / desc
-            if newAction.title?.count ?? 0 >= 2 && newAction.description?.count ?? 0 > 2 {
-                isValid = true
-            }
-            
-            message = "actionCreatePhase1_error".localized
-        case 2: //Check interests
+        case 1: //Check name / desc
             if let _ = newSection {
                 isValid = true
             }
             message = "actionCreatePhase2_error".localized
+        case 2: //Check interests
+            if newAction.title?.count ?? 0 >= 2 && newAction.description?.count ?? 0 > 2 {
+                isValid = true
+            }
+            message = "actionCreatePhase1_error".localized
         case 3: //address
             
             if newAction.location?.latitude ?? 0 != 0 {
@@ -409,4 +408,25 @@ protocol ActionCreateMainDelegate: AnyObject {
     
     func isEdit() -> Bool
     func getCurrentAction() -> Action?
+}
+
+
+class ActionCreateStateManager {
+    static let shared = ActionCreateStateManager()
+    
+    var selectedSectionKey: String?
+    var isContrib: Bool = false // Détermine si c'est une contribution ou une demande
+
+    func storeSection(_ section: String, isContrib: Bool) {
+        UserDefaults.standard.set(section, forKey: "selectedSection")
+        self.isContrib = isContrib
+    }
+
+    func getSection() -> String? {
+        return UserDefaults.standard.string(forKey: "selectedSection")
+    }
+
+    func clearSection() {
+        UserDefaults.standard.removeObject(forKey: "selectedSection")
+    }
 }

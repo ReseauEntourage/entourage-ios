@@ -102,7 +102,7 @@ extension ActionCreatePhase2ViewController: UITableViewDelegate, UITableViewData
         
         let selectedSection = tagsSections.getSections()[indexPath.row]
         tagsSections.setSectionSelected(key:selectedSection.key )
-        
+        ActionCreateStateManager.shared.storeSection(selectedSection.key, isContrib: pageDelegate?.isContribution() ?? false)
         self.pageDelegate?.addInterest(section: selectedSection)
         self.ui_tableview.reloadData()
     }
