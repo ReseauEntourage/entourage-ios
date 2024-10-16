@@ -71,7 +71,7 @@ class AddDescriptionTableViewCell: UITableViewCell {
         
         ui_description.text = "neighborhoodCreateDescriptionSubtitle".localized
         ui_description.textColor = ApplicationTheme.getFontLegend().color
-        ui_description.font = ApplicationTheme.getFontLegend(size: 13).font
+        ui_description.font = ApplicationTheme.getFontLegend(size: 11).font
         
         ui_view_error?.isHidden = true
         self.ui_view_error?.setupView(title: "neighborhoodCreateInputErrorMandatory".localized)

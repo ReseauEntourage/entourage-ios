@@ -36,6 +36,13 @@ class ActionCreatePhase2ViewController: UIViewController {
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         tagsSections = Metadatas.sharedInstance.tagsSections
+        // Vérification et remplissage de selectedSectionKey si vide
+         if ActionCreateStateManager.shared.selectedSectionKey == nil || ActionCreateStateManager.shared.selectedSectionKey!.isEmpty {
+             if let firstSection = tagsSections.getSections().first {
+                 ActionCreateStateManager.shared.selectedSectionKey = firstSection.key
+                 tagsSections.setSectionSelected(key: firstSection.key)
+             }
+         }
         
         if pageDelegate?.isEdit() ?? false {
             currentAction = pageDelegate?.getCurrentAction()

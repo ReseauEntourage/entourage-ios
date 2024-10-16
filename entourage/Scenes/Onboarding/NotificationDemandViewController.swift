@@ -75,7 +75,6 @@ class NotificationDemandViewController: UIViewController {
     @objc func didTapDisableNotif() {
         // Gérer le refus ici si nécessaire
         self.dismiss(animated: true) {
-            self.goHomeMain()
         }
     }
     

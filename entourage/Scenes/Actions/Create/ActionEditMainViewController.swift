@@ -121,9 +121,7 @@ class ActionEditMainViewController: UIViewController {
     }
     
     func updateAction() {
-        
         newAction.sectionName = newSection?.key
-        
         if newAction.dictionaryForWS().count > 0 || newImage != nil || newSection != nil {
             newAction.id = currentAction.id
         }

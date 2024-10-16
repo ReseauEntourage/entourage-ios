@@ -1253,7 +1253,7 @@ ok</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JU2-Se-sQ9" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="414" height="68"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_action" translatesAutoresizingMaskIntoConstraints="NO" id="Ccf-3F-dCc">
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_action" translatesAutoresizingMaskIntoConstraints="NO" id="Ccf-3F-dCc">
                                         <rect key="frame" x="349" y="0.0" width="49" height="68"/>
                                     </imageView>
                                 </subviews>
