@@ -114,7 +114,6 @@ class HomeV2ViewController: UIViewController {
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
-        print("eho home")
         getUserInfo()
     }
     
@@ -252,7 +251,6 @@ class HomeV2ViewController: UIViewController {
                     
                     // Incrémenter le nombre de connexions
                     let connectionCount = self.incrementConnectionCount()
-                    print("eho connection count : " , connectionCount)
                     // Vérifier si c'est la 2ème ou la 10ème connexion
                     if connectionCount == 1 || connectionCount == 4 || connectionCount == 9 {
                         self.presentNotificationDemandViewController()
