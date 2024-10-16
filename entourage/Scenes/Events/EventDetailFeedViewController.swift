@@ -389,14 +389,37 @@ class EventDetailFeedViewController: UIViewController {
         self.ui_tableview.reloadData()
         if isAdd {
             IHProgressHUD.show()
-            if ((UserDefaults.currentUser?.isAmbassador()) != nil){
-                if let popupVC = storyboard?.instantiateViewController(withIdentifier: "ambassadorAskNotificationPopup") as? AmbassadorAskNotificationPopup {
-                    popupVC.delegate = self
-                    popupVC.modalPresentationStyle = .overFullScreen // Ajuster le style de présentation si nécessaire
-                    popupVC.modalTransitionStyle = .crossDissolve // Ajuster la transition si nécessaire
-                    present(popupVC, animated: true, completion: nil)
+            if let _isamba = UserDefaults.currentUser?.isAmbassador(){
+                if _isamba{
+                    if let popupVC = storyboard?.instantiateViewController(withIdentifier: "ambassadorAskNotificationPopup") as? AmbassadorAskNotificationPopup {
+                        popupVC.delegate = self
+                        popupVC.modalPresentationStyle = .overFullScreen // Ajuster le style de présentation si nécessaire
+                        popupVC.modalTransitionStyle = .crossDissolve // Ajuster la transition si nécessaire
+                        present(popupVC, animated: true, completion: nil)
+                    }
+                }else{
+                    EventService.joinEvent(eventId: eventId) { user, error in
+                        IHProgressHUD.dismiss()
+                        if let user = user {
+                            let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
+                            self.event?.members?.append(member)
+                            let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! + 1 : 1
+                            
+                            self.isAfterCreation = true
+                            self.event?.membersCount = count
+                            self.getEventDetail(hasToRefreshLists:true)
+                            
+                            DispatchQueue.main.async {
+                                if self.event?.metadata?.hasPlaceLimit ?? false {
+                                    self.showPopInfoPlaces()
+                                }
+                                else {
+                                    self.addToCalendar()
+                                }
+                            }
+                        }
+                    }
                 }
-
             }else{
                 EventService.joinEvent(eventId: eventId) { user, error in
                     IHProgressHUD.dismiss()
