@@ -538,7 +538,7 @@
 "detail_user_his_interests" = "Centres d’intérêt";
 "detail_user_button_signal" = "Signaler l’utilisateur";
 "report_user_title" = "Signaler le membre";
-"report_user_mandatory" = "- obligatoire";
+"report_user_mandatory" = "• obligatoire";
 "report_user_optional" = "- facultatif";
 "report_user_description" = "Dites-nous la raison de votre signalement";
 "report_user_message_description" = "Dites-nous la raison de votre signalement";
@@ -606,17 +606,17 @@
 "neighborhood_create_title_phase" = "Étape";
 "neighborhood_create_title_phase_nb" = "0%d.";
 
-"neighborhoodCreateNameTitle" = "Nom du groupe - obligatoire";
+"neighborhoodCreateNameTitle" = "Nom du groupe • obligatoire";
 "neighborhoodCreateNamePlaceholderName" = "Les voisins de Paris 18";
-"neighborhoodCreateNameSubtitle" = "- obligatoire";
+"neighborhoodCreateNameSubtitle" = "• obligatoire";
 
 "neighborhoodCreateDescriptionTitle" = "Rédiger un descriptif";
 "neighborhoodCreateDescriptionSubtitle" = "obligatoire (150 caractères max)";
 "neighborhoodCreateTitleDescriptionPlaceholder" = "Pour se rencontrer entre voisins du 18e";
 
 
-"neighborhoodCreatePlaceTitle" = "Ajouter un lieu - obligatoire";
-"neighborhoodCreatePlaceSubtitle" = "- obligatoire";
+"neighborhoodCreatePlaceTitle" = "Ajouter un lieu • obligatoire";
+"neighborhoodCreatePlaceSubtitle" = "• obligatoire";
 "neighborhoodCreatePlaceDescription" = "Entourage ne communique pas cette adresse aux utilisateurs.";
 "neighborhoodCreatePlaceInfos" = "Adresse, ville ou département";
 
@@ -627,8 +627,8 @@
 "neighborhoodCreateInputErrorMandatory" = "Champ à remplir";
 
 //Phase 2
-"neighborhoodCreateCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. - obligatoire";
-"neighborhoodCreateCatMessageMandatory" = "- obligatoire";
+"neighborhoodCreateCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. • obligatoire";
+"neighborhoodCreateCatMessageMandatory" = "• obligatoire";
 "neighborhoodCreateCatOtherTitle" = "Décrivez en un mot la catégorie de votre groupe";
 "neighborhoodCreateCatOtherPlaceholder" = "Veuillez saisir au maximum 80 caractères";
 
@@ -638,8 +638,8 @@
 "addPhotoCreateDescriptionTitle" = "Écrire un message de bienvenue";
 "addPhotoCreateDescriptionSubtitle" = "facultatif (200 caractères max)";
 "addPhotoCreateDescriptionPlaceholder" = "Souhaitez la bienvenue aux nouveaux membres ! Ils liront ce message dès qu’ils rejoindront le groupe.";
-"addPhotoCreateTitle" = "Ajouter une photo - obligatoire";
-"addPhotoCreateTitleHighlight" = "- obligatoire";
+"addPhotoCreateTitle" = "Ajouter une photo • obligatoire";
+"addPhotoCreateTitleHighlight" = "• obligatoire";
 "addPhotoCreateDescription" = " Vous pourrez la changer plus tard";
 "neighborhoodCreatePhase3_error" = "Veuillez sélectionnez une image";
 
@@ -660,8 +660,8 @@
 ***/
 "neighborhood_edit_group_title" = "Modifier le groupe";
 "neighborhoodEditPhotoTitle" = "Modifier la photo";
-"neighborhoodEditCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. - obligatoire";
-"neighborhoodEditCatMessageHighlight" = "- obligatoire";
+"neighborhoodEditCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. • obligatoire";
+"neighborhoodEditCatMessageHighlight" = "• obligatoire";
 "neighborhoodEdit_error" = "Veuillez remplir tous les champs obligatoires";
 "neighborhoodEditValidateTitle" = "Votre groupe à bien été modifié ! PLACEHOLDER";
 
@@ -792,7 +792,7 @@
 "report_conversation_title" = "Signaler la conversation";
 "report_group_message_success" = "Votre demande a bien été envoyée. Elle sera traitée au plus vite par notre équipe.";
 "report_group_description" = "Dites-nous la raison de votre signalement";
-"report_group_mandatory" = "- obligatoire";
+"report_group_mandatory" = "• obligatoire";
 "report_group_next_button" = "Suivant";
 "report_group_signal_error" = "Veuillez choisir au minimum une cause.";
 "report_group_message_description" = "Dites-nous la raison de votre signalement";
@@ -878,25 +878,25 @@
 "event_create_title_phase" = "Étape";
 "event_create_title_phase_nb" = "0%d.";
 
-"event_create_phase_1_name" = "Nom de l’événement - obligatoire";
+"event_create_phase_1_name" = "Nom de l’événement • obligatoire";
 "event_create_phase_1_name_placeholder" = "Donnez un nom explicite à l'événement";
 "event_create_phase_1_name_error" = "Le nom de l'événement doit contenir au minimum 2 caractères.";
-"event_create_phase_1_desc" = "Description - obligatoire";
+"event_create_phase_1_desc" = "Description • obligatoire";
 "event_create_phase_1_desc_placeholder" = "Présentez rapidement ce qu’il va se passer";
 "event_create_phase_1_desc_subtitle" = "(900 caractères max)";
-"event_create_phase_1_photo" = "Photo - obligatoire";
+"event_create_phase_1_photo" = "Photo • obligatoire";
 "event_create_phase_1_photo_desc" = " Vous pourrez la changer plus tard";
 
-"event_create_mandatory" = "- obligatoire";
+"event_create_mandatory" = "• obligatoire";
 
-"event_create_phase2_date" = "Date - obligatoire";
+"event_create_phase2_date" = "Date • obligatoire";
 "event_create_phase2_date_placeholder" = "jj/mm/aaaa";
 "event_create_phase2_time_start" = "Heure de début";
 "event_create_phase2_time_start" = "hh-mm";
 "event_create_phase2_time_end" = "Heure de fin";
 "event_create_phase2_time_end_placeholder" = "hh-mm";
 
-"event_create_phase2_recurrence" = "Récurrence - obligatoire";
+"event_create_phase2_recurrence" = "Récurrence • obligatoire";
 "recurrence_once" = "Juste une fois";
 "recurrence_week" = "Toutes les semaines";
 "recurrence_every2Weeks" = "Une semaine sur deux";
@@ -904,9 +904,9 @@
 "eventCreateInputErrorTimeStart" = "Choisir date avant";
 "eventCreateInputErrorTimeEnd" = "Choisir heure début avant";
 
-"event_create_phase3_title" = "Lieu - obligatoire";
-"event_create_phase3_title_place" = "Ajouter un lieu - obligatoire";
-"event_create_phase3_title_online" = "Ajouter une url - obligatoire";
+"event_create_phase3_title" = "Lieu • obligatoire";
+"event_create_phase3_title_place" = "Ajouter un lieu • obligatoire";
+"event_create_phase3_title_online" = "Ajouter une url • obligatoire";
 
 "event_create_phase3_presentiel" = "En présentiel";
 "event_create_phase3_online" = "En ligne";
@@ -914,16 +914,16 @@
 "event_create_phase3_placeholder_place" = "Adresse, ville ...";
 "event_create_phase3_placeholder_online" = "Adresse web";
 
-"event_create_phase3_title_limit" = "L’événement a-t-il un nombre de places limité ? - obligatoire";
-"event_create_phase3_title_nb_places" = "Nombre de places disponibles - obligatoire";
+"event_create_phase3_title_limit" = "L’événement a-t-il un nombre de places limité ? • obligatoire";
+"event_create_phase3_title_nb_places" = "Nombre de places disponibles • obligatoire";
 "event_create_phase3_title_nb_places_placeholder" = "Nombre de places";
 "event_create_phase3_limit_yes" = "Oui";
 "event_create_phase3_limit_no" = "Non";
 "event_create_phase3_limit_error" = "Champ obligatoire";
 
-"event_create_phase4_title" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de l’événement. - obligatoire";
+"event_create_phase4_title" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de l’événement. • obligatoire";
 
-"event_create_phase5_title" = "Partager l'événement dans vos groupes\n- obligatoire";
+"event_create_phase5_title" = "Partager l'événement dans vos groupes\n• obligatoire";
 "event_share_option" = "Partager l'événement";
 "event_create_phase5_desc" = "Vous ne pouvez partager l’événement seulement aux groupes dont vous êtes membre. Votre événement sera alors visible dans le(s) groupe(s) sélectionné(s) et tous les membres d'un groupe pourront y participer.";
 "createEventNotShare" = "Ne partager dans aucun groupe";
@@ -1114,7 +1114,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
 "action_create_info_demand_underline" = "en savoir plus par ici.";
 
-"action_create_mandatory" = "- obligatoire";
+"action_create_mandatory" = "• obligatoire";
 "action_create_phase_1_name" = "Titre de l’action • obligatoire";
 "action_create_phase_1_name_placeholder" = "Nommez votre %@";
 "action_create_phase_1_name_subtitle" = "Donnez un nom court et explicite à votre %@";
@@ -1122,7 +1122,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "action_add_post_title_image" = "Ajouter une image";
 
-"action_create_phase_1_desc" = "Description - obligatoire";
+"action_create_phase_1_desc" = "Description • obligatoire";
 "action_create_phase_1_desc_placeholder" = "Décrivez votre %@";
 "action_create_phase_1_desc_subtitle" = "Décrivez en détail la %@ que vous proposez";
 
@@ -1131,8 +1131,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_PhotoCreateDescription" = " Vous pourrez la changer plus tard";
 "action_CreatePhase1_error" = "Veuillez sélectionnez une image";
 
-"action_create_title_category" = "Sélectionnez la catégorie qui décrit le mieux votre %@. - obligatoire";
-"action_create_title_category_mandatory" = " - obligatoire";
+"action_create_title_category" = "Sélectionnez la catégorie qui décrit le mieux votre %@. • obligatoire";
+"action_create_title_category_mandatory" = " • obligatoire";
 
 //Edit location page
 "actionCellLocationTitle" = "Localisez votre %@";
