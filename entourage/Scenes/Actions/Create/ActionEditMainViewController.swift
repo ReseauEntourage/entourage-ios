@@ -107,6 +107,7 @@ class ActionEditMainViewController: UIViewController {
         ui_tableview_charte.dataSource = self
         
         _ = checkValidation()
+        newAction = currentAction
     }
     
     //MARK: - Network -
