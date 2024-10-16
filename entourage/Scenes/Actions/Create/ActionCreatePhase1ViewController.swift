@@ -55,6 +55,10 @@ class ActionCreatePhase1ViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.ui_tableview.reloadData()
+    }
+    
     //Use for growing Textview
     @objc func moveFromGrow(notification: NSNotification) {
         guard let isUp = notification.userInfo?[kNotifGrowTextviewKeyISUP] as? Bool else {return}
