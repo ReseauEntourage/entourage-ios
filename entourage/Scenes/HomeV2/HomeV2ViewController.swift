@@ -113,11 +113,12 @@ class HomeV2ViewController: UIViewController {
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
-        NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
-
+        print("eho home")
+        getUserInfo()
     }
     
 
+    
     func showVotePopupIfNeeded() {
         let userDefaults = UserDefaults.standard
         let hasSeenVotePopup = userDefaults.bool(forKey: "hasSeenVotePopup")
@@ -632,6 +633,15 @@ extension HomeV2ViewController {
                     self.allDemands.append(contentsOf: actions)
                 }
                 self.getInitialPedagos()
+            }
+        }
+    }
+    func getUserInfo() {
+        guard let _userid = UserDefaults.currentUser?.uuid else {return}
+        UserService.getUnreadCountForUser { unreadCount, error in
+            if let unreadCount = unreadCount {
+                UserDefaults.badgeCount = unreadCount
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
             }
         }
     }
