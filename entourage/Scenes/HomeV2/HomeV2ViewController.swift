@@ -66,6 +66,7 @@ class HomeV2ViewController: UIViewController {
     var isContributionPreference = false
     var shouldLaunchEventPopup: Int? = nil
     var shouldTestOnboarding = false
+    var havePresentedNotifPopup = false
     
     override func viewDidLoad() {
         IHProgressHUD.show()
@@ -254,7 +255,10 @@ class HomeV2ViewController: UIViewController {
                     print("eho connection count : " , connectionCount)
                     // Vérifier si c'est la 2ème ou la 10ème connexion
                     if connectionCount == 1 || connectionCount == 4 || connectionCount == 9 {
-                        self.presentNotificationDemandViewController()
+                        if !self.havePresentedNotifPopup {
+                            self.presentNotificationDemandViewController()
+                        }
+                        
                     }else{
 //                        let alert = UIAlertController(title: "Connexion", message: "Nombre de connexions: \(connectionCount)", preferredStyle: .alert)
 //                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -275,6 +279,7 @@ class HomeV2ViewController: UIViewController {
     }
     
     func presentNotificationDemandViewController() {
+        havePresentedNotifPopup = true
         let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
             vc.modalPresentationStyle = .overFullScreen // Optionnel
