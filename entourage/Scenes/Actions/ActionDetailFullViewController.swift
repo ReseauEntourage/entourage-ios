@@ -43,7 +43,7 @@ class ActionDetailFullViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("eho ActionDetailsViewController isContrib " , isContrib)
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         

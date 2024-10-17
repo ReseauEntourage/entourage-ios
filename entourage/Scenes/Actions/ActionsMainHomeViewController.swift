@@ -766,6 +766,7 @@ class ActionsMainHomeViewController: UIViewController {
         if let navvc = storyboard?.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navvc.topViewController as? ActionDetailFullViewController {
             vc.actionId = actionId
             vc.action = action
+            print("eho vc isContrib " , isContrib)
             vc.isContrib = isContrib
             self.tabBarController?.present(navvc, animated: true)
         }
@@ -819,7 +820,8 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
         } else {
             action = myActions[indexPath.row]
         }
-        self.showAction(actionId: action.id, isContrib: currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch, action: action)
+        
+        self.showAction(actionId: action.id, isContrib: action.isContrib(), action: action)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
