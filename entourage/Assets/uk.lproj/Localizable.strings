@@ -1644,3 +1644,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_select_concerns" = "Виберіть категорії допомоги, які ви хочете віддавати перевагу.";
 "enhanced_onboarding_how_to_act" = "Як ви хочете діяти в громаді Entourage?";
 "enhanced_onboarding_multiple_options" = "(Так, ви можете вибрати кілька варіантів!)";
+
+"share_request_title" = "Бажаєте поділитися своїм запитом у групі %@?";
+"mandatory_label" = "Обов'язково";
+"share_request_description" = "Ви маєте можливість поділитися своїм запитом у групі сусідів вашого міста для покращення його видимості.";
+

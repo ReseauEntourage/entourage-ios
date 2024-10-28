@@ -477,6 +477,11 @@
 		26AD11A12AEFE33C00FA7BEC /* LangValidateButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26AD11A02AEFE33C00FA7BEC /* LangValidateButton.xib */; };
 		26AD11A32AEFF94F00FA7BEC /* LangueStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26AD11A22AEFF94F00FA7BEC /* LangueStoryboard.storyboard */; };
 		26AD11A62AEFF99900FA7BEC /* OnboardingLanguageStoryBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD11A52AEFF99900FA7BEC /* OnboardingLanguageStoryBoard.swift */; };
+		26BB4D4A2CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB4D492CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift */; };
+		26BB4D4D2CCFC23400A8ACF7 /* CreateAction4HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB4D4C2CCFC23400A8ACF7 /* CreateAction4HeaderCell.swift */; };
+		26BB4D4F2CCFC23F00A8ACF7 /* CreateAction4HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BB4D4E2CCFC23F00A8ACF7 /* CreateAction4HeaderCell.xib */; };
+		26BB4D512CCFC24E00A8ACF7 /* CreateAction4ChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB4D502CCFC24E00A8ACF7 /* CreateAction4ChoiceCell.swift */; };
+		26BB4D532CCFC25900A8ACF7 /* CreateAction4ChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BB4D522CCFC25900A8ACF7 /* CreateAction4ChoiceCell.xib */; };
 		26BC119929C88CD700F204BB /* NeighborhoodPostDeletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */; };
 		26BE84602A67F26000DC2586 /* ActionPassedOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BE845F2A67F26000DC2586 /* ActionPassedOneVC.swift */; };
 		26BE84642A67F50500DC2586 /* ActionPassedTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BE84632A67F50500DC2586 /* ActionPassedTwoVC.swift */; };
@@ -1013,6 +1018,11 @@
 		26AD11A02AEFE33C00FA7BEC /* LangValidateButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LangValidateButton.xib; sourceTree = "<group>"; };
 		26AD11A22AEFF94F00FA7BEC /* LangueStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LangueStoryboard.storyboard; sourceTree = "<group>"; };
 		26AD11A52AEFF99900FA7BEC /* OnboardingLanguageStoryBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLanguageStoryBoard.swift; sourceTree = "<group>"; };
+		26BB4D492CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreatePhase4ViewController.swift; sourceTree = "<group>"; };
+		26BB4D4C2CCFC23400A8ACF7 /* CreateAction4HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAction4HeaderCell.swift; sourceTree = "<group>"; };
+		26BB4D4E2CCFC23F00A8ACF7 /* CreateAction4HeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateAction4HeaderCell.xib; sourceTree = "<group>"; };
+		26BB4D502CCFC24E00A8ACF7 /* CreateAction4ChoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAction4ChoiceCell.swift; sourceTree = "<group>"; };
+		26BB4D522CCFC25900A8ACF7 /* CreateAction4ChoiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateAction4ChoiceCell.xib; sourceTree = "<group>"; };
 		26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostDeletedCell.xib; sourceTree = "<group>"; };
 		26BE845F2A67F26000DC2586 /* ActionPassedOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPassedOneVC.swift; sourceTree = "<group>"; };
 		26BE84632A67F50500DC2586 /* ActionPassedTwoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPassedTwoVC.swift; sourceTree = "<group>"; };
@@ -1576,6 +1586,7 @@
 		026FF208289A71F700640572 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				26BB4D4B2CCFC20E00A8ACF7 /* create4Cell */,
 				02A92C2B2898116B000DFF95 /* ActionCreatePhotoCell.swift */,
 				02A92C3128982D57000DFF95 /* ActionTagInfoCell.swift */,
 			);
@@ -1667,6 +1678,7 @@
 				02A92C2928980FCF000DFF95 /* ActionPicturePreviewResizeViewController.swift */,
 				026FF208289A71F700640572 /* Cells */,
 				02F50E1B28A1608E00011FE6 /* ActionEditMainViewController.swift */,
+				26BB4D492CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -2126,6 +2138,17 @@
 			path = LangueChoose;
 			sourceTree = "<group>";
 		};
+		26BB4D4B2CCFC20E00A8ACF7 /* create4Cell */ = {
+			isa = PBXGroup;
+			children = (
+				26BB4D4C2CCFC23400A8ACF7 /* CreateAction4HeaderCell.swift */,
+				26BB4D4E2CCFC23F00A8ACF7 /* CreateAction4HeaderCell.xib */,
+				26BB4D502CCFC24E00A8ACF7 /* CreateAction4ChoiceCell.swift */,
+				26BB4D522CCFC25900A8ACF7 /* CreateAction4ChoiceCell.xib */,
+			);
+			path = create4Cell;
+			sourceTree = "<group>";
+		};
 		26BE845E2A67F22700DC2586 /* actionpassed */ = {
 			isa = PBXGroup;
 			children = (
@@ -2413,6 +2436,7 @@
 				02FB5449287DC11100E4B9FA /* EventDetailFullGroupCell.xib in Resources */,
 				26AD119D2AEBF42B00FA7BEC /* LanguageCell.xib in Resources */,
 				02CCE67427D78C7100D6976C /* Montserrat-Bold.ttf in Resources */,
+				26BB4D4F2CCFC23F00A8ACF7 /* CreateAction4HeaderCell.xib in Resources */,
 				02CCE67E27D78CAB00D6976C /* NunitoSans-Regular.ttf in Resources */,
 				26A8DE0D2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib in Resources */,
 				029BD4F727EDC45E00AE67AF /* MJNavBackView.xib in Resources */,
@@ -2489,6 +2513,7 @@
 				26D13E242BA35F3A00CAD4F7 /* QuestionCell.xib in Resources */,
 				02F5FEC527E0CB6800A14313 /* MJAlertController.xib in Resources */,
 				02F527782799990F00929431 /* GuideSolidarity.storyboard in Resources */,
+				26BB4D532CCFC25900A8ACF7 /* CreateAction4ChoiceCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2626,6 +2651,7 @@
 				0262997927905FB700D84A6A /* Constants.swift in Sources */,
 				26CC9F7F2A337243005F7408 /* SecondaryTextWelcomeCell.swift in Sources */,
 				0258AFE2282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift in Sources */,
+				26BB4D512CCFC24E00A8ACF7 /* CreateAction4ChoiceCell.swift in Sources */,
 				02A1D2242828FEF3004C3A3D /* MJTabbarCustom.swift in Sources */,
 				0243DCCB28AF8D3300273679 /* ConversationsMainHomeViewController.swift in Sources */,
 				028444CA282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift in Sources */,
@@ -2744,6 +2770,7 @@
 				02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */,
 				022DC3EF2847996D00868760 /* Analytics_Keys.swift in Sources */,
 				26BEEEC62C00C32B00169FBA /* EnhancedFullSizeCell.swift in Sources */,
+				26BB4D4A2CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift in Sources */,
 				029D25332865FA5F00147F77 /* EventDatesCell.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
@@ -2755,6 +2782,7 @@
 				0279680A2852472400311D8E /* PedagogicViewModel.swift in Sources */,
 				0258AFE0282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift in Sources */,
 				26BEEEB02C00989A00169FBA /* EventLastDayViewController.swift in Sources */,
+				26BB4D4D2CCFC23400A8ACF7 /* CreateAction4HeaderCell.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
 				02F5278727999D8400929431 /* PoiCategory.swift in Sources */,
 				02F5277D2799995900929431 /* GuideDetailTableViewCells.swift in Sources */,

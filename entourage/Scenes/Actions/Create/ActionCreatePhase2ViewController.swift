@@ -106,6 +106,11 @@ extension ActionCreatePhase2ViewController: UITableViewDelegate, UITableViewData
         tagsSections.setSectionSelected(key:selectedSection.key )
         ActionCreateStateManager.shared.storeSection(selectedSection.key, isContrib: pageDelegate?.isContribution() ?? false)
         self.pageDelegate?.addInterest(section: selectedSection)
+        if selectedSection.key == "social"{
+            pageDelegate?.setNumberOfPage(numberOfPage: 4)
+        }else{
+            pageDelegate?.setNumberOfPage(numberOfPage: 3)
+        }
         self.ui_tableview.reloadData()
     }
 }

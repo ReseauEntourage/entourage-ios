@@ -42,7 +42,6 @@ class ActionCreateMainViewController: UIViewController {
     var newSection:Section? = nil
     
     var actionTitle = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,6 +108,7 @@ class ActionCreateMainViewController: UIViewController {
         else {
             AnalyticsLoggerManager.logEvent(name: Help_create_demand_chart)
         }
+        
     }
     
     //MARK: - Network -
@@ -119,7 +119,7 @@ class ActionCreateMainViewController: UIViewController {
 
         if isContrib {
             if let newImage = newImage {
-                ContribUploadPictureService.prepareUploadWith(image: newImage, action: newAction, isUpdate: false) { action, isOk in
+                ContribUploadPictureService.prepareUploadWith(image: newImage, action: newAction, isUpdate: false, autoPost: self.pageViewController?.isSharing ?? false) { action, isOk in
                     IHProgressHUD.dismiss()
                     if let action = action {
                         self.goEnd(action: action)
@@ -130,7 +130,7 @@ class ActionCreateMainViewController: UIViewController {
                 }
             }
             else {
-                ActionsService.createAction(isContrib: true, action: newAction) { action, error in
+                ActionsService.createAction(isContrib: true, action: newAction, autoPost: self.pageViewController?.isSharing ?? false) { action, error in
                     IHProgressHUD.dismiss()
                     if let action = action {
                         self.goEnd(action: action)
@@ -142,7 +142,7 @@ class ActionCreateMainViewController: UIViewController {
             }
         }
         else {
-            ActionsService.createAction(isContrib: false, action: newAction) { action, error in
+            ActionsService.createAction(isContrib: false, action: newAction, autoPost: self.pageViewController?.isSharing ?? false) { action, error in
                 IHProgressHUD.dismiss()
                 if let action = action {
                     self.goEnd(action: action)
@@ -167,10 +167,10 @@ class ActionCreateMainViewController: UIViewController {
             goPageNext()
         }
         else {
-            if currentPhasePosition == 4 {
+            if currentPhasePosition == 5 {
                 NotificationCenter.default.post(Notification(name: NSNotification.Name(kNotificationEventCreatePhase4Error), object: nil, userInfo: ["error_message":isValid.message]))
             }
-            else if currentPhasePosition == 5 {
+            else if currentPhasePosition == 6 {
                 NotificationCenter.default.post(Notification(name: NSNotification.Name(kNotificationEventCreatePhase5Error), object: nil, userInfo: ["error_message":isValid.message]))
             }
             else {
@@ -195,6 +195,7 @@ class ActionCreateMainViewController: UIViewController {
             currentPhasePosition = ui_page_control.numberOfPages
             self.createAction()
         }
+        print("eho phase position: " , currentPhasePosition)
         updateViewsForPosition()
     }
     
@@ -203,7 +204,8 @@ class ActionCreateMainViewController: UIViewController {
         if currentPhasePosition < 1 {
             currentPhasePosition = 1
         }
-        
+        print("eho phase position: ", currentPhasePosition)
+
         updateViewsForPosition()
     }
     
@@ -260,10 +262,17 @@ class ActionCreateMainViewController: UIViewController {
                 isValid = true
             }
             message = "actionCreatePhase3_error".localized
-            
+        case 4:
+            if self.pageViewController?.isSharing != nil {
+                isValid = true
+            }else{
+                isValid = false
+                message = "ERREUR SYSTEME"
+            }
         default:
             break
         }
+        
         enableDisableNextButton(isEnable: isValid)
         
         return (isValid,message)
@@ -283,6 +292,14 @@ class ActionCreateMainViewController: UIViewController {
             ui_bt_previous.isHidden = false
             ui_bt_next.isHidden = false
         case 3:
+            ui_bt_previous.isHidden = false
+            ui_bt_next.isHidden = false
+            if self.ui_page_control.numberOfPages == 3 {
+                ui_bt_next.setTitle("action_create_group_bt_create".localized, for: .normal)
+            }else{
+                ui_bt_next.setTitle("action_create_group_bt_next".localized, for: .normal)
+            }
+        case 4:
             ui_bt_previous.isHidden = false
             ui_bt_next.isHidden = false
             ui_bt_next.setTitle("action_create_group_bt_create".localized, for: .normal)
@@ -310,6 +327,17 @@ class ActionCreateMainViewController: UIViewController {
 
 //MARK: - ActionCreateMainDelegate -
 extension ActionCreateMainViewController: ActionCreateMainDelegate {
+    func setShareToGroup(shareToGroup: Bool) {
+        self.pageViewController?.isSharing = shareToGroup
+        self.checkValidation()
+    }
+    
+    func setNumberOfPage(numberOfPage: Int) {
+        self.ui_page_control.numberOfPages = numberOfPage
+        self.ui_page_control.layoutIfNeeded()
+
+    }
+    
     //Phase 1
     func addTitle(_ title:String) {
         newAction.title = title
@@ -408,6 +436,8 @@ protocol ActionCreateMainDelegate: AnyObject {
     
     func isEdit() -> Bool
     func getCurrentAction() -> Action?
+    func setNumberOfPage(numberOfPage:Int)
+    func setShareToGroup(shareToGroup:Bool)
 }
 
 

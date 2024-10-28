@@ -1665,3 +1665,7 @@
 "contrib_equipment_description" = "Example: I am giving away an old functional mobile phone. Ideal for someone who needs it.";
 "contrib_hygiene_title" = "Example: Hygiene products to give away";
 "contrib_hygiene_description" = "Example: I am giving away several packs of hygiene pads.";
+
+"share_request_title" = "Would you like to share your request in your %@ group?";
+"mandatory_label" = "Mandatory";
+"share_request_description" = "You have the option to share your request in your city's neighborhood group to improve its visibility.";

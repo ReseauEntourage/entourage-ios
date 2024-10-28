@@ -1568,3 +1568,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_equipment_description" = "Exemplu: Ofer un telefon mobil vechi, dar funcțional. Ideal pentru cineva care are nevoie.";
 "contrib_hygiene_title" = "Exemplu: Produse de igienă de dat";
 "contrib_hygiene_description" = "Exemplu: Ofer mai multe pachete de produse igienice.";
+
+"share_request_title" = "Doriți să vă partajați cererea în grupul %@?";
+"mandatory_label" = "Obligatoriu";
+"share_request_description" = "Aveți posibilitatea de a vă partaja cererea în grupul de vecini al orașului dvs. pentru a-i îmbunătăți vizibilitatea.";

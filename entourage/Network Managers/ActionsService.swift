@@ -15,17 +15,17 @@ struct ActionsService:ParsingDataCodable {
     fileprivate static let _solicitation = "solicitation"
     fileprivate static let _solicitations = "solicitations"
     
-    static func createAction(isContrib:Bool, action:Action, completion: @escaping (_ action:Action?, _ error:EntourageNetworkError?) -> Void) {
-        guard let token = UserDefaults.token else {return}
+    static func createAction(isContrib: Bool, action: Action, autoPost: Bool?, completion: @escaping (_ action: Action?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
         var endpoint = isContrib ? kAPIContribCreate : kAPISolicitationCreate
-        endpoint = String.init(format: endpoint, token)
-        
-        let parameters = isContrib ? [_contribution : action.dictionaryForWS()] : [_solicitation : action.dictionaryForWS()]
-        
+        let autoPostValue = autoPost != nil ? (autoPost! ? "true" : "false") : ""
+        endpoint = String(format: endpoint, token, autoPostValue)
+
+        let parameters = isContrib ? [_contribution: action.dictionaryForWS()] : [_solicitation: action.dictionaryForWS()]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-        
+
         Logger.print("Datas passed post event \(parameters)")
-        
+
         NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
             Logger.print("Response Post action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
             guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
@@ -34,23 +34,23 @@ struct ActionsService:ParsingDataCodable {
                 return
             }
             let key = isContrib ? _contribution : _solicitation
-            let action:Action? = self.parseData(data: data,key: key)
+            let action: Action? = self.parseData(data: data, key: key)
             Logger.print("***** return create action : \(action)")
             DispatchQueue.main.async { completion(action, nil) }
         }
     }
     
-    static func updateAction(isContrib:Bool, action:Action, completion: @escaping (_ action:Action?, _ error:EntourageNetworkError?) -> Void) {
-        guard let token = UserDefaults.token else {return}
+    static func updateAction(isContrib: Bool, action: Action, autoPost: Bool?, completion: @escaping (_ action: Action?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
         var endpoint = isContrib ? kAPIContribUpdate : kAPISolicitationUpdate
-        endpoint = String.init(format: endpoint, action.id, token)
-        
-        let parameters = isContrib ? [_contribution : action.dictionaryForWS()] : [_solicitation : action.dictionaryForWS()]
-        
+        let autoPostValue = autoPost != nil ? (autoPost! ? "true" : "false") : ""
+        endpoint = String(format: endpoint, action.id, token, autoPostValue)
+
+        let parameters = isContrib ? [_contribution: action.dictionaryForWS()] : [_solicitation: action.dictionaryForWS()]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-        
+
         Logger.print("Datas passed put event \(parameters)")
-        
+
         NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
             Logger.print("Response put action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
             guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
@@ -59,7 +59,7 @@ struct ActionsService:ParsingDataCodable {
                 return
             }
             let key = isContrib ? _contribution : _solicitation
-            let action:Action? = self.parseData(data: data,key: key)
+            let action: Action? = self.parseData(data: data, key: key)
             DispatchQueue.main.async { completion(action, nil) }
         }
     }

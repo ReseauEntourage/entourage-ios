@@ -43,7 +43,7 @@ class ActionEditMainViewController: UIViewController {
     var newAction = Action()
     var newImage:UIImage? = nil
     var newSection:Section? = nil
-    
+
     var actionTitle = ""
     
     override func viewDidLoad() {
@@ -130,7 +130,7 @@ class ActionEditMainViewController: UIViewController {
         IHProgressHUD.show()
         
         if isContrib, let newImage = newImage {
-            ContribUploadPictureService.prepareUploadWith(image: newImage, action: newAction, isUpdate: true) { action, isOk in
+            ContribUploadPictureService.prepareUploadWith(image: newImage, action: newAction, isUpdate: true, autoPost: self.pageViewController?.isSharing ?? false) { action, isOk in
                 IHProgressHUD.dismiss()
                 if let _ = action {
                     self.goEnd()
@@ -142,7 +142,7 @@ class ActionEditMainViewController: UIViewController {
             return
         }
         
-        ActionsService.updateAction(isContrib: isContrib, action: newAction) { action, error in
+        ActionsService.updateAction(isContrib: isContrib, action: newAction, autoPost: self.pageViewController?.isSharing ?? false) { action, error in
             IHProgressHUD.dismiss()
             if let _ = action {
                 self.goEnd()
@@ -249,6 +249,12 @@ class ActionEditMainViewController: UIViewController {
             }
             message = "actionCreatePhase3_error".localized
             
+        case 4:
+            if self.pageViewController?.isSharing != nil {
+                isValid = true
+            }else{
+                isValid = false
+            }
         default:
             break
         }
@@ -261,7 +267,6 @@ class ActionEditMainViewController: UIViewController {
         pageViewController?.goPagePosition(position: currentPhasePosition)
         ui_page_control.currentPage = currentPhasePosition - 1
         ui_title_phase_nb.text = String.init(format: "action_create_title_phase_nb".localized,currentPhasePosition)
-        
         ui_bt_next.setTitle("action_create_group_bt_next".localized, for: .normal)
         switch currentPhasePosition {
         case 1:
@@ -271,6 +276,14 @@ class ActionEditMainViewController: UIViewController {
             ui_bt_previous.isHidden = false
             ui_bt_next.isHidden = false
         case 3:
+            ui_bt_previous.isHidden = false
+            ui_bt_next.isHidden = false
+            if self.ui_page_control.numberOfPages == 3 {
+                ui_bt_next.setTitle("action_create_group_bt_create".localized, for: .normal)
+            }else{
+                ui_bt_next.setTitle("action_create_group_bt_next".localized, for: .normal)
+            }
+        case 4:
             ui_bt_previous.isHidden = false
             ui_bt_next.isHidden = false
             ui_bt_next.setTitle("action_create_group_bt_create".localized, for: .normal)
@@ -298,6 +311,17 @@ class ActionEditMainViewController: UIViewController {
 
 //MARK: - ActionCreateMainDelegate -
 extension ActionEditMainViewController: ActionCreateMainDelegate {
+    func setShareToGroup(shareToGroup: Bool) {
+        self.pageViewController?.isSharing = shareToGroup
+        self.checkValidation()
+
+    }
+    
+    func setNumberOfPage(numberOfPage: Int) {
+        self.ui_page_control.numberOfPages = numberOfPage
+        self.ui_page_control.layoutIfNeeded()
+    }
+    
     //Phase 1
     func addTitle(_ title:String) {
         newAction.title = title

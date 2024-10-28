@@ -13,10 +13,12 @@ class ActionCreatePageViewController: UIPageViewController {
     var createPhase1VC:ActionCreatePhase2ViewController? = nil
     var createPhase2VC:ActionCreatePhase1ViewController? = nil
     var createPhase3VC:ActionCreatePhase3ViewController? = nil
+    var createPhase4VC:ActionCreatePhase4ViewController? = nil
     
     weak var parentDelegate:ActionCreateMainDelegate? = nil
     
     var currentPhasePosition = 1
+    var isSharing:Bool? = nil
     
     var isContrib = false
     
@@ -74,6 +76,12 @@ class ActionCreatePageViewController: UIPageViewController {
                 createPhase3VC?.pageDelegate = parentDelegate
             }
             return createPhase3VC
+        case 4:
+            if createPhase4VC == nil {
+                createPhase4VC = storyboard?.instantiateViewController(withIdentifier: "createPhase4") as? ActionCreatePhase4ViewController
+                createPhase4VC?.pageDelegate = parentDelegate
+            }
+            return createPhase4VC
         default:
             return nil
         }
@@ -90,3 +98,4 @@ class ActionCreatePageViewController: UIPageViewController {
     }
 }
 
+ 
