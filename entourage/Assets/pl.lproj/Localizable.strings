@@ -1647,6 +1647,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_how_to_act" = "Jak chcesz działać w społeczności Entourage?";
 "enhanced_onboarding_multiple_options" = "(Tak, możesz wybrać wiele opcji!)";
 
+"neighborhood_user_role_organizer" = "Organizator";
+"neighborhood_user_role_animator" = "Animator";
+
+
 "demand_social_title" = "Przykład: Spacer w parku";
 "demand_social_description" = "Przykład: Proponuję spacer w parku w ten weekend, aby porozmawiać i odpocząć.";
 "demand_services_title" = "Przykład: Potrzebuję wydrukować dokumenty";

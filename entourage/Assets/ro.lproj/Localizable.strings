@@ -1547,6 +1547,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "popup_biencommun_title" = "Pentru a permite a 60 de persoane aflate în situații precare să se alăture unui club sportiv, este nevoie de un singur clic. A ta!";
 "popup_biencommun_vote" = "Vot";
 
+"neighborhood_user_role_organizer" = "Organizator";
+"neighborhood_user_role_animator" = "Animator";
+
+
 "demand_social_title" = "Exemplu: Plimbare în parc";
 "demand_social_description" = "Exemplu: Propun o plimbare în parc în acest weekend pentru a discuta și a ne relaxa.";
 "demand_services_title" = "Exemplu: Trebuie să imprim documente";

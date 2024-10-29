@@ -49,13 +49,25 @@ class NeighborhoodUserCell: UITableViewCell {
         }
     }
     
-    func populateCell(isMe: Bool, username: String, role: String?, imageUrl: String?, showBtMessage: Bool, delegate: NeighborhoodUserCellDelegate, position: Int, reactionType: ReactionType?, isConfirmed: Bool?, isOrganizer: Bool?) {
+    func populateCell(isMe: Bool, username: String, role: String?, imageUrl: String?, showBtMessage: Bool, delegate: NeighborhoodUserCellDelegate, position: Int, reactionType: ReactionType?, isConfirmed: Bool?, isOrganizer: Bool?, isCreator:Bool?) {
         self.delegate = delegate
         self.position = position
         
         // Configure le nom de l'utilisateur
-        if isOrganizer == true {
+        if isOrganizer == true && isCreator == true {
             // Ajouter "- organisateur" en orange
+            let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+            let organizerText = " - \(NSLocalizedString("neighborhood_user_role_animator", comment: ""))"
+            let organizerAttributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor(named: "appOrange") ?? UIColor.orange
+            ]
+            attributedText.append(NSAttributedString(string: organizerText, attributes: organizerAttributes))
+            
+            ui_username.attributedText = attributedText
+            
+            // Change le fond de la cellule en orange clair
+            self.ui_view_background.backgroundColor = UIColor(named: "lightOrangeBackground") ?? UIColor(red: 254/255, green: 245/255, blue: 235/255, alpha: 1.0)
+        }else if isOrganizer == true && isCreator == false {
             let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
             let organizerText = " - \(NSLocalizedString("neighborhood_user_role_organizer", comment: ""))"
             let organizerAttributes: [NSAttributedString.Key: Any] = [

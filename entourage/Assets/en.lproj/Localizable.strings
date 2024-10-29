@@ -1644,6 +1644,10 @@
 "enhanced_onboarding_how_to_act" = "How do you want to act within the Entourage community?";
 "enhanced_onboarding_multiple_options" = "(Yes, you can choose multiple options!)";
 
+"neighborhood_user_role_organizer" = "Organizer";
+"neighborhood_user_role_animator" = "Animator";
+
+
 "demand_social_title" = "Example: Walk in the park";
 "demand_social_description" = "Example: I propose a walk in the park this weekend to chat and relax.";
 "demand_services_title" = "Example: Need to print documents";

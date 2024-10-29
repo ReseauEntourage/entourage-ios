@@ -1644,6 +1644,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_how_to_act" = "Wie möchten Sie in der Entourage-Community handeln?";
 "enhanced_onboarding_multiple_options" = "(Ja, Sie können mehrere Optionen auswählen!)";
 
+"neighborhood_user_role_organizer" = "Organisator";
+"neighborhood_user_role_animator" = "Moderator";
+
 "demand_social_title" = "Beispiel: Spaziergang im Park";
 "demand_social_description" = "Beispiel: Ich schlage einen Spaziergang im Park am Wochenende vor, um zu plaudern und sich zu entspannen.";
 "demand_services_title" = "Beispiel: Dokumente drucken";

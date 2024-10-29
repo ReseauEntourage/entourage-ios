@@ -1574,6 +1574,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "vote_singular" = "голос";
 "vote_plural" = "голоси";
 
+"neighborhood_user_role_organizer" = "Організатор";
+"neighborhood_user_role_animator" = "Аніматор";
+
 "enhanced_onboarding_start_title" = "%@, давайте познайомимося!";
 "enhanced_onboarding_start_subtitle" = "Перед тим, як поринути у наш додаток, давайте трохи познайомимося з вами. Ваші інтереси допоможуть нам запропонувати вам заходи та контент, який вам сподобається.";
 "enhanced_onboarding_button_title_start" = "Почати";
