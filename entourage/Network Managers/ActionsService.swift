@@ -18,10 +18,16 @@ struct ActionsService:ParsingDataCodable {
     static func createAction(isContrib: Bool, action: Action, autoPost: Bool?, completion: @escaping (_ action: Action?, _ error: EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
         var endpoint = isContrib ? kAPIContribCreate : kAPISolicitationCreate
-        let autoPostValue = autoPost != nil ? (autoPost! ? "true" : "false") : ""
-        endpoint = String(format: endpoint, token, autoPostValue)
+        endpoint = String(format: endpoint, token)
 
-        let parameters = isContrib ? [_contribution: action.dictionaryForWS()] : [_solicitation: action.dictionaryForWS()]
+        // Obtenir le dictionnaire d'action et ajouter auto_post_at_create si nécessaire
+        var actionData = action.dictionaryForWS()
+        if let autoPost = autoPost {
+            actionData["auto_post_at_create"] = autoPost
+        }
+
+        // Créer le paramètre principal en fonction du type d'action
+        let parameters = isContrib ? [_contribution: actionData] : [_solicitation: actionData]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
 
         Logger.print("Datas passed post event \(parameters)")
@@ -39,14 +45,20 @@ struct ActionsService:ParsingDataCodable {
             DispatchQueue.main.async { completion(action, nil) }
         }
     }
-    
+
     static func updateAction(isContrib: Bool, action: Action, autoPost: Bool?, completion: @escaping (_ action: Action?, _ error: EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
         var endpoint = isContrib ? kAPIContribUpdate : kAPISolicitationUpdate
-        let autoPostValue = autoPost != nil ? (autoPost! ? "true" : "false") : ""
-        endpoint = String(format: endpoint, action.id, token, autoPostValue)
+        endpoint = String(format: endpoint, action.id, token)
 
-        let parameters = isContrib ? [_contribution: action.dictionaryForWS()] : [_solicitation: action.dictionaryForWS()]
+        // Obtenir le dictionnaire d'action et ajouter auto_post_at_create si nécessaire
+        var actionData = action.dictionaryForWS()
+        if let autoPost = autoPost {
+            actionData["auto_post_at_create"] = autoPost
+        }
+
+        // Créer le paramètre principal en fonction du type d'action
+        let parameters = isContrib ? [_contribution: actionData] : [_solicitation: actionData]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
 
         Logger.print("Datas passed put event \(parameters)")
@@ -63,6 +75,8 @@ struct ActionsService:ParsingDataCodable {
             DispatchQueue.main.async { completion(action, nil) }
         }
     }
+
+
     
     static func cancelAction(isContrib:Bool, actionId:Int, isClosedOk:Bool, message:String?, completion: @escaping (_ action:Action?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}

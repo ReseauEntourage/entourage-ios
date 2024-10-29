@@ -58,7 +58,7 @@ struct PostMessage:Codable {
     var reactionId:Int? = 0
     var survey: Survey?
     var surveyResponse: [Bool]? = []
-
+    var autoPostFrom: AutoPostFrom? // Champ pour l'auto-post
 
     var isRetryMsg = false
     
@@ -85,6 +85,8 @@ struct PostMessage:Codable {
         case reactionId = "reaction_id"
         case survey
         case surveyResponse = "survey_response"
+        case autoPostFrom = "auto_post_from"
+
     }
     
     //Use to sort messages in days Dicts
@@ -149,5 +151,16 @@ struct Survey: Codable {
 extension Survey {
     var totalVotes: Int {
         return summary.reduce(0, +)
+    }
+}
+
+// MARK: - AutoPostFrom Struct
+struct AutoPostFrom: Codable {
+    var instanceType: String
+    var instanceId: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case instanceType = "instance_type"
+        case instanceId = "instance_id"
     }
 }

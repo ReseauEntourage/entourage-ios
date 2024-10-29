@@ -45,6 +45,10 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_label_i_like: UILabel!
     @IBOutlet weak var ui_stackview_options: UIStackView!
     
+    @IBOutlet weak var ui_contraint_height_sharing_header: NSLayoutConstraint!
+    @IBOutlet weak var ui_label_sharing_header: UILabel!
+    @IBOutlet weak var ui_view_sharing_header: UIView!
+    
     class var identifier: String {
         return String(describing: self)
     }
@@ -62,7 +66,6 @@ class NeighborhoodPostCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
@@ -100,6 +103,14 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_view_btn_i_like.addGestureRecognizer(tapGesture)
         }
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        DispatchQueue.main.async {
+            self.setupRoundedCorners()
+        }
+    }
+    
     @objc func handleLittleTap(gesture: UITapGestureRecognizer) {
         AnalyticsLoggerManager.logEvent(name: Clic_Post_Like)
         if gesture.state == .ended {
@@ -115,6 +126,18 @@ class NeighborhoodPostCell: UITableViewCell {
                     delegate?.deleteReaction(post: self.postMessage, reactionType: existingReactionType)
                 }
             }
+        }
+    }
+    private func setupRoundedCorners() {
+        if ui_view_sharing_header != nil {
+            let path = UIBezierPath(
+                roundedRect: ui_view_sharing_header.bounds,
+                byRoundingCorners: [.topLeft, .topRight],
+                cornerRadii: CGSize(width: 35, height: 35)
+            )
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = path.cgPath
+            ui_view_sharing_header.layer.mask = maskLayer
         }
     }
     func configureWithSurvey(survey: Survey) {
@@ -153,6 +176,8 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         layoutIfNeeded()
     }
+    
+   
 
 
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
@@ -406,7 +431,20 @@ class NeighborhoodPostCell: UITableViewCell {
         if(ui_view_translate != nil){
             ui_view_translate.addGestureRecognizer(tapGesture)
         }
-
+        if self.ui_label_sharing_header != nil {
+            self.ui_label_sharing_header.text = "action_social_name".localized
+            if let autoPost = message.autoPostFrom {
+                self.ui_contraint_height_sharing_header.constant = 50
+                self.ui_view_sharing_header.isHidden = false
+            } else {
+                self.ui_contraint_height_sharing_header.constant = 2
+                self.ui_view_sharing_header.isHidden = true
+            }
+        }
+        // Appliquez les changements d'interface
+        UIView.animate(withDuration: 0) {
+            self.layoutIfNeeded()
+        }
         
         self.postMessage = message
         self.delegate = delegate
