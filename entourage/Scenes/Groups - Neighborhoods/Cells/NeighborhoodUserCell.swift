@@ -45,7 +45,9 @@ class NeighborhoodUserCell: UITableViewCell {
     
     func hideSeparatorBarIfIsVote(isVote:Bool){
         if isVote {
-            ui_view_separator.isHidden = true
+            if ui_view_separator != nil {
+                ui_view_separator.isHidden = true
+            }
         }
     }
     
