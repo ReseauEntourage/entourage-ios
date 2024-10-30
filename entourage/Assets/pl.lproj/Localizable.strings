@@ -1673,6 +1673,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_hygiene_title" = "Przykład: Produkty higieniczne do oddania";
 "contrib_hygiene_description" = "Przykład: Oddaję kilka paczek artykułów higienicznych.";
 
-"share_request_title" = "Czy chcesz udostępnić swoje zapytanie w grupie %@?";
 "mandatory_label" = "Obowiązkowe";
-"share_request_description" = "Masz możliwość udostępnienia swojego zapytania w grupie sąsiedzkiej swojego miasta, aby zwiększyć jego widoczność.";
+"share_request_title" = "Czy chcesz udostępnić swoje %@ w swojej grupie %@?";
+"share_request_description" = "Masz możliwość udostępnienia swojego %@ w grupie sąsiedzkiej swojego miasta, aby zwiększyć jego widoczność";

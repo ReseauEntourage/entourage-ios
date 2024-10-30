@@ -31,7 +31,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OUI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzr-Pf-TWg">
-                        <rect key="frame" x="50" y="16.666666666666671" width="29" height="32"/>
+                        <rect key="frame" x="50" y="16.666666666666671" width="524" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="2AE-Rz-lgI"/>
                         </constraints>
@@ -40,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OUI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzq-6e-8qA">
-                        <rect key="frame" x="50" y="61.666666666666657" width="29" height="32"/>
+                        <rect key="frame" x="50" y="61.666666666666657" width="524" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="vEM-Zs-xTJ"/>
                         </constraints>
@@ -54,8 +54,10 @@
                     <constraint firstItem="mzq-6e-8qA" firstAttribute="leading" secondItem="Xw4-Ib-amE" secondAttribute="trailing" constant="5" id="7D7-YF-NmF"/>
                     <constraint firstItem="Dzr-Pf-TWg" firstAttribute="centerY" secondItem="53R-rZ-eXZ" secondAttribute="centerY" id="ADL-dS-n1s"/>
                     <constraint firstItem="Xw4-Ib-amE" firstAttribute="leading" secondItem="RJX-rf-XAp" secondAttribute="leading" constant="20" id="T82-Rp-acW"/>
+                    <constraint firstAttribute="trailing" secondItem="Dzr-Pf-TWg" secondAttribute="trailing" constant="20" id="Tj5-rO-fOk"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Xw4-Ib-amE" secondAttribute="bottom" constant="10" id="e6S-xV-Aac"/>
                     <constraint firstItem="Xw4-Ib-amE" firstAttribute="top" secondItem="53R-rZ-eXZ" secondAttribute="bottom" constant="20" id="eKh-1W-dvY"/>
+                    <constraint firstAttribute="trailing" secondItem="mzq-6e-8qA" secondAttribute="trailing" constant="20" id="g7T-mH-BLe"/>
                     <constraint firstItem="53R-rZ-eXZ" firstAttribute="leading" secondItem="RJX-rf-XAp" secondAttribute="leading" constant="20" id="kK1-Wb-d9F"/>
                     <constraint firstItem="53R-rZ-eXZ" firstAttribute="top" secondItem="RJX-rf-XAp" secondAttribute="top" constant="20" id="lG1-gw-9Nu"/>
                     <constraint firstItem="mzq-6e-8qA" firstAttribute="centerY" secondItem="Xw4-Ib-amE" secondAttribute="centerY" id="md1-PA-81r"/>

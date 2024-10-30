@@ -25,6 +25,6 @@ class CreateAction4HeaderCell: UITableViewCell {
     // Configure function to set up labels with localized strings
     func configure(cityGroup: String,actionType:String) {
         ui_label_title.text = String(format: "share_request_title".localized,actionType, cityGroup)
-        ui_subtitle_label.text = "share_request_description".localized
+        ui_subtitle_label.text = String(format: "share_request_description".localized,actionType)
     }
 }

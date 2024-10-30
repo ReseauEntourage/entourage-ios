@@ -1668,3 +1668,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_equipment_description" = "Beispiel: Ich verschenke ein altes, aber funktionstüchtiges Handy. Ideal für jemanden, der eines benötigt.";
 "contrib_hygiene_title" = "Beispiel: Hygieneprodukte zu verschenken";
 "contrib_hygiene_description" = "Beispiel: Ich verschenke mehrere Packungen Damenhygieneartikel.";
+"share_request_title" = "Möchten Sie Ihr %@ in Ihrer %@-Gruppe teilen?";
+"share_request_description" = "Sie haben die Möglichkeit, Ihr %@ in der Nachbarschaftsgruppe Ihrer Stadt zu teilen, um dessen Sichtbarkeit zu erhöhen";

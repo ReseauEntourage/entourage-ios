@@ -1626,8 +1626,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_hygiene_title" = "Exemple : Produits hygiéniques à donner";
 "contrib_hygiene_description" = "Exemple : Je donne plusieurs paquets de protections hygiéniques.";
 
+"mandatory_label" = "Obligatoire";
 
 "share_request_title" = "Souhaitez-vous partager votre %@ dans votre groupe %@ ?";
-"mandatory_label" = "Obligatoire";
-"share_request_description" = "Vous avez la possibilité de partager votre demande dans le groupe de voisins de votre ville pour améliorer sa visibilité";
+"share_request_description" = "Vous avez la possibilité de partager votre %@ dans le groupe de voisins de votre ville pour améliorer sa visibilité";
 

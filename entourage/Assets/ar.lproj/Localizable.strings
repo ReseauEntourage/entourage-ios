@@ -1608,7 +1608,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_equipment_description" = "مثال: أتبرع بهاتف محمول قديم لكنه يعمل. مثالي لشخص يحتاج إليه.";
 "contrib_hygiene_title" = "مثال: منتجات النظافة للتبرع";
 "contrib_hygiene_description" = "مثال: أتبرع بعدة عبوات من الفوط الصحية.";
-
-"share_request_title" = "هل ترغب في مشاركة طلبك في مجموعة %@ الخاصة بك؟";
 "mandatory_label" = "إلزامي";
-"share_request_description" = "لديك خيار مشاركة طلبك في مجموعة جيران مدينتك لتحسين ظهوره.";
+
+"share_request_title" = "هل ترغب في مشاركة %@ في مجموعة %@ الخاصة بك؟";
+"share_request_description" = "لديك خيار مشاركة %@ في مجموعة الجيران في مدينتك لتحسين رؤيته";

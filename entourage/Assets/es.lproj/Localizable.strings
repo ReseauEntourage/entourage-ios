@@ -3090,6 +3090,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_hygiene_title" = "Ejemplo: Productos de higiene para regalar";
 "contrib_hygiene_description" = "Ejemplo: Estoy regalando varios paquetes de toallas sanitarias.";
 
-"share_request_title" = "¿Desea compartir su solicitud en su grupo %@?";
 "mandatory_label" = "Obligatorio";
-"share_request_description" = "Tiene la opción de compartir su solicitud en el grupo de vecinos de su ciudad para mejorar su visibilidad.";
+
+"share_request_title" = "¿Te gustaría compartir tu %@ en tu grupo %@?";
+"share_request_description" = "Tienes la opción de compartir tu %@ en el grupo de vecinos de tu ciudad para mejorar su visibilidad";

@@ -64,9 +64,9 @@ extension ActionCreatePhase4ViewController:UITableViewDataSource,UITableViewDele
                 cell.selectionStyle = .none
                 var actionType = ""
                 if isContrib {
-                    actionType = "contribution"
+                    actionType = "action_contrib".localized
                 }else{
-                    actionType = "demande"
+                    actionType = "action_solicitation".localized
                 }
                 cell.configure(cityGroup: cityName, actionType: actionType)
                 return cell
