@@ -47,15 +47,17 @@ class CreateAction4ChoiceCell: UITableViewCell {
         ui_label_choice_no.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 13))
     }
     
-    // Set up gesture recognizers for labels and images
+    // Set up gesture recognizers for each label and image separately
     private func setupGestures() {
-        let tapYes = UITapGestureRecognizer(target: self, action: #selector(didSelectYes))
-        let tapNo = UITapGestureRecognizer(target: self, action: #selector(didSelectNo))
+        let tapYesImage = UITapGestureRecognizer(target: self, action: #selector(didSelectYes))
+        let tapNoImage = UITapGestureRecognizer(target: self, action: #selector(didSelectNo))
+        let tapYesLabel = UITapGestureRecognizer(target: self, action: #selector(didSelectYes))
+        let tapNoLabel = UITapGestureRecognizer(target: self, action: #selector(didSelectNo))
         
-        img_choice_yes.addGestureRecognizer(tapYes)
-        img_choice_no.addGestureRecognizer(tapNo)
-        ui_label_choice_yes.addGestureRecognizer(tapYes)
-        ui_label_choice_no.addGestureRecognizer(tapNo)
+        img_choice_yes.addGestureRecognizer(tapYesImage)
+        img_choice_no.addGestureRecognizer(tapNoImage)
+        ui_label_choice_yes.addGestureRecognizer(tapYesLabel)
+        ui_label_choice_no.addGestureRecognizer(tapNoLabel)
         
         img_choice_yes.isUserInteractionEnabled = true
         img_choice_no.isUserInteractionEnabled = true
