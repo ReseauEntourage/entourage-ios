@@ -79,6 +79,7 @@ class ActionCreatePageViewController: UIPageViewController {
         case 4:
             if createPhase4VC == nil {
                 createPhase4VC = storyboard?.instantiateViewController(withIdentifier: "createPhase4") as? ActionCreatePhase4ViewController
+                createPhase4VC?.isContrib = self.isContrib
                 createPhase4VC?.pageDelegate = parentDelegate
             }
             return createPhase4VC

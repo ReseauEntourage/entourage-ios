@@ -14,7 +14,6 @@ class CreateAction4HeaderCell: UITableViewCell {
     }
     // Outlet
     @IBOutlet weak var ui_label_title: UILabel!
-    @IBOutlet weak var ui_label_mandatory: UILabel!
     @IBOutlet weak var ui_subtitle_label: UILabel!
     
     // Variable
@@ -24,9 +23,8 @@ class CreateAction4HeaderCell: UITableViewCell {
     }
     
     // Configure function to set up labels with localized strings
-    func configure(cityGroup: String) {
-        ui_label_title.text = String(format: "share_request_title".localized, cityGroup)
-        ui_label_mandatory.text = "mandatory_label".localized
+    func configure(cityGroup: String,actionType:String) {
+        ui_label_title.text = String(format: "share_request_title".localized,actionType, cityGroup)
         ui_subtitle_label.text = "share_request_description".localized
     }
 }

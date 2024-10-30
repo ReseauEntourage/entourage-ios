@@ -21,6 +21,7 @@ class ActionCreatePhase4ViewController:UIViewController {
     //VARIABLE
     var tableDTO = [Action4CreateDTO]()
     var cityName = ""
+    var isContrib = false
     weak var pageDelegate:ActionCreateMainDelegate? = nil
 
     override func viewDidLoad() {
@@ -61,7 +62,13 @@ extension ActionCreatePhase4ViewController:UITableViewDataSource,UITableViewDele
         case .header:
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "CreateAction4HeaderCell") as? CreateAction4HeaderCell {
                 cell.selectionStyle = .none
-                cell.configure(cityGroup: cityName)
+                var actionType = ""
+                if isContrib {
+                    actionType = "contribution"
+                }else{
+                    actionType = "demande"
+                }
+                cell.configure(cityGroup: cityName, actionType: actionType)
                 return cell
             }
         case .choice:
