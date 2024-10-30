@@ -40,7 +40,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJ2-0C-9Dr">
-                                <rect key="frame" x="60.999999999999993" y="10.666666666666668" width="74.333333333333314" height="43.666666666666657"/>
+                                <rect key="frame" x="60.999999999999993" y="10.000000000000004" width="74.333333333333314" height="45.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Username" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1h-xC-eW8">
                                         <rect key="frame" x="0.0" y="0.0" width="74.333333333333329" height="19"/>
@@ -49,13 +49,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSf-Dg-Hjf">
-                                        <rect key="frame" x="0.0" y="31.333333333333332" width="74.333333333333329" height="12.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="33" width="74.333333333333329" height="12.333333333333343"/>
                                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" text="Ambassadeur" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79t-Xr-ciT">
-                                        <rect key="frame" x="0.0" y="18.999999999999996" width="74.5" height="12.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="19" width="74.5" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="sFC-94-1ZA"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
                                         <color key="textColor" name="orange_app"/>
                                         <nil key="highlightedColor"/>
@@ -157,6 +160,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="ambassy_height" destination="sFC-94-1ZA" id="pDH-vf-bpO"/>
                 <outlet property="ui_btn_signal_post" destination="U7B-cf-Hxf" id="KkY-p6-QFS"/>
                 <outlet property="ui_comment" destination="4rs-dT-shb" id="wEJ-iX-IBw"/>
                 <outlet property="ui_comments_nb" destination="spL-JO-nrf" id="uXf-jt-tvw"/>

@@ -50,6 +50,9 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Ambassadeur" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mR-hh-flM">
                                         <rect key="frame" x="0.0" y="19" width="74.5" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="2ac-3C-bxO"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="10"/>
                                         <color key="textColor" name="orange_app"/>
                                         <nil key="highlightedColor"/>
@@ -278,6 +281,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="ambassy_height" destination="2ac-3C-bxO" id="TJS-83-APO"/>
                 <outlet property="ui_btn_signal_post" destination="m1C-Y9-g4k" id="nxH-V9-pJC"/>
                 <outlet property="ui_comment" destination="YJs-gC-gEm" id="dW1-WH-PuZ"/>
                 <outlet property="ui_comments_nb" destination="kLZ-kX-Eih" id="Cmy-cG-KCN"/>

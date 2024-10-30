@@ -40,7 +40,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5z-ca-tgX">
-                                <rect key="frame" x="66" y="12.666666666666671" width="74.333333333333314" height="45"/>
+                                <rect key="frame" x="66" y="12.333333333333332" width="74.333333333333314" height="45.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Username" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIi-jI-XGR">
                                         <rect key="frame" x="0.0" y="0.0" width="74.333333333333329" height="19"/>
@@ -49,7 +49,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Ambassadeur" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ov1-Ee-3l4">
-                                        <rect key="frame" x="0.0" y="18.999999999999996" width="74.333333333333329" height="13.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="19.000000000000004" width="74.333333333333329" height="13.999999999999996"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="ct7-OF-5ul"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="10"/>
                                         <color key="textColor" name="orange_app"/>
                                         <nil key="highlightedColor"/>
@@ -319,6 +322,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="ambassy_height" destination="ct7-OF-5ul" id="kql-Qq-s1D"/>
                 <outlet property="ui_btn_signal_post" destination="9cA-QV-fYb" id="a7f-rq-5lH"/>
                 <outlet property="ui_comment" destination="393-Jl-KYn" id="X6t-Af-g0w"/>
                 <outlet property="ui_comments_nb" destination="ahb-7s-SMk" id="OpP-7B-JA5"/>

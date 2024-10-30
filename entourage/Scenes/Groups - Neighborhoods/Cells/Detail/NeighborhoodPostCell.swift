@@ -48,6 +48,7 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_contraint_height_sharing_header: NSLayoutConstraint!
     @IBOutlet weak var ui_label_sharing_header: UILabel!
     @IBOutlet weak var ui_view_sharing_header: UIView!
+    @IBOutlet weak var ambassy_height: NSLayoutConstraint!
     
     class var identifier: String {
         return String(describing: self)
@@ -525,12 +526,14 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         if tagString.isEmpty {
             ui_label_ambassador.isHidden = true
+            ambassy_height.constant = 0
         }else{
             if tagString.last == "•" {
                 tagString.removeLast()
             }
             ui_label_ambassador.isHidden = false
             ui_label_ambassador.text = tagString
+            ambassy_height.constant = 14
         }
         
         displayReactions(for: message)

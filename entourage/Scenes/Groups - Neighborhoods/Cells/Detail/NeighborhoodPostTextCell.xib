@@ -40,7 +40,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AUs-SL-7c2">
-                                <rect key="frame" x="61" y="70.5" width="74.5" height="44"/>
+                                <rect key="frame" x="61" y="70" width="74.5" height="45.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Username" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvS-4j-hdk">
                                         <rect key="frame" x="0.0" y="0.0" width="74.5" height="19"/>
@@ -49,13 +49,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DD4-YG-5Re">
-                                        <rect key="frame" x="0.0" y="31.5" width="74.5" height="12.5"/>
+                                        <rect key="frame" x="0.0" y="33" width="74.5" height="12.5"/>
                                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" text="Ambassadeur" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIX-yH-rSG">
-                                        <rect key="frame" x="0.0" y="19" width="74.5" height="12.5"/>
+                                        <rect key="frame" x="0.0" y="19" width="74.5" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="pCX-1x-dnP"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
                                         <color key="textColor" name="orange_app"/>
                                         <nil key="highlightedColor"/>
@@ -82,7 +85,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cU0-C4-PYr" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="28" y="124.5" width="292" height="87"/>
+                                <rect key="frame" x="28" y="125.5" width="292" height="86"/>
                                 <string key="text">Bienvenue à toi cher danseur !
 Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
@@ -283,6 +286,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="ambassy_height" destination="pCX-1x-dnP" id="LF5-j9-dCL"/>
                 <outlet property="ui_btn_signal_post" destination="Mm9-25-CFc" id="cEI-kY-1Kd"/>
                 <outlet property="ui_comment" destination="cU0-C4-PYr" id="6Vh-Fo-E7Y"/>
                 <outlet property="ui_comments_nb" destination="dwy-yw-Hbe" id="TEU-yM-3Dq"/>
@@ -330,7 +334,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
             <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_semi_transparent">
-            <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
