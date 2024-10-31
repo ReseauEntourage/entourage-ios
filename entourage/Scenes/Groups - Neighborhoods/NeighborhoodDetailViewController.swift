@@ -520,6 +520,18 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         return  messageCount
     }
     
+    func resetView() {
+        DispatchQueue.main.async {
+            // Supprimer toutes les sous-vues et les recharger
+            for subview in self.view.subviews {
+                subview.removeFromSuperview()
+            }
+            self.viewDidLoad()
+            self.viewWillAppear(false)
+            self.viewDidAppear(false)
+        }
+    }
+    
     func countToAdd() -> Int {
         //Is member + new posts
         let countToAdd = (self.neighborhood?.isMember ?? false && self.messagesNew.count > 0) ? 2 : 1 //If not member or only old messages we dont' show new/old post header
@@ -528,6 +540,12 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let neighborhood = self.neighborhood else {
+            return UITableViewCell()
+        }
+
+        if indexPath.section >= numberOfSections(in: tableView) || indexPath.row >= tableView.numberOfRows(inSection: indexPath.section) {
+            resetView()
+            AnalyticsLoggerManager.logEvent(name: crash_from_incorrect_cell_number)
             return UITableViewCell()
         }
 

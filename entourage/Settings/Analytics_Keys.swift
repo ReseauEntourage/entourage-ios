@@ -375,3 +375,7 @@ let popup_event_last_day_view = "popup_event_last_day_view"
 let popup_event_last_day_accept = "popup_event_last_day_accept"
 let popup_event_last_day_decline = "popup_event_last_day_decline"
 
+let crash_from_incorrect_cell_number = "crash_from_incorrect_cell_number"
+
+
+
