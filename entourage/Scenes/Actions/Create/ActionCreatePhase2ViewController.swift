@@ -75,24 +75,32 @@ extension ActionCreatePhase2ViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == tagsSections.getSections().count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellInfos", for: indexPath) as! ActionTagInfoCell
+        if indexPath.row == tagsSections?.getSections().count {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInfos", for: indexPath) as? ActionTagInfoCell else {
+                fatalError("Unable to dequeue cellInfos")
+            }
             
             let title = pageDelegate?.isContribution() ?? false ? "action_create_info_contrib".localized : "action_create_info_demand".localized
             let titleUnderline = pageDelegate?.isContribution() ?? false ? "action_create_info_contrib_underline".localized : "action_create_info_demand_underline".localized
             
-            cell.populateCell(title: title, titleColored: titleUnderline, color:.black,colored:.appOrange, font: ApplicationTheme.getFontNunitoLight(size: 13) )
+            cell.populateCell(title: title, titleColored: titleUnderline, color: .black, colored: .appOrange, font: ApplicationTheme.getFontNunitoLight(size: 13))
             return cell
         }
+
+        guard indexPath.row < tagsSections?.getSections().count ?? 0,
+              let section = tagsSections?.getSections()[indexPath.row] else {
+            fatalError("Invalid indexPath or nil section")
+        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterest", for: indexPath) as! SelectTagCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterest", for: indexPath) as? SelectTagCell else {
+            fatalError("Unable to dequeue cellInterest")
+        }
         
-        let section = tagsSections?.getSections()[indexPath.row]
-        
-        cell.populateCell(title: section?.key ?? "-" , isChecked: section!.isSelected, imageName: section?.getImageName(), subtitle: section?.key, isSingleSelection: true)
+        cell.populateCell(title: section.key ?? "-", isChecked: section.isSelected, imageName: section.getImageName(), subtitle: section.key, isSingleSelection: true)
         
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
