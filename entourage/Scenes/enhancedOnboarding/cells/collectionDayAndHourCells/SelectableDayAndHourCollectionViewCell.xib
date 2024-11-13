@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QMG-nt-5Nf">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="178"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gfE-PW-s9a" customClass="SelectableDayAndHourCollectionViewCell" customModule="Ent_Beta" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="390" height="178"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-UX-Yda">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="178"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" name="Beige"/>
+                <constraints>
+                    <constraint firstItem="eh1-UX-Yda" firstAttribute="leading" secondItem="gfE-PW-s9a" secondAttribute="leading" id="EK7-By-IYp"/>
+                    <constraint firstItem="eh1-UX-Yda" firstAttribute="top" secondItem="gfE-PW-s9a" secondAttribute="top" id="SeP-nh-ZSV"/>
+                    <constraint firstAttribute="trailing" secondItem="eh1-UX-Yda" secondAttribute="trailing" id="WUa-AW-gah"/>
+                    <constraint firstItem="eh1-UX-Yda" firstAttribute="leading" secondItem="gfE-PW-s9a" secondAttribute="leading" id="eqs-RJ-Q1j"/>
+                    <constraint firstAttribute="bottom" secondItem="eh1-UX-Yda" secondAttribute="bottom" id="wn8-k6-Gab"/>
+                </constraints>
+                <connections>
+                    <outlet property="titleLabel" destination="eh1-UX-Yda" id="Q4I-vs-9bF"/>
+                </connections>
+            </collectionViewCellContentView>
+            <size key="customSize" width="390" height="178"/>
+            <point key="canvasLocation" x="209.16030534351145" y="61.971830985915496"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Beige">
+            <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

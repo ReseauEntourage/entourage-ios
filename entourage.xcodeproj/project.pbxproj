@@ -381,6 +381,8 @@
 		260377FC2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */; };
 		26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */; };
 		26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */; };
+		26043D982CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043D972CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift */; };
+		26043D9C2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */; };
 		2609BFA42AC2BE640052111C /* HomeV2CellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */; };
 		2609BFA62AC2C7D00052111C /* HomeV2CellTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */; };
 		2609BFA82AC329120052111C /* HomeSeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA72AC329120052111C /* HomeSeeAllCell.swift */; };
@@ -910,6 +912,8 @@
 		260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionSmokeTestViewController.swift; sourceTree = "<group>"; };
 		26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDayCell.swift; sourceTree = "<group>"; };
 		26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChoiceDayCell.xib; sourceTree = "<group>"; };
+		26043D972CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableDayAndHourCollectionViewCell.swift; sourceTree = "<group>"; };
+		26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableDayAndHourCollectionViewCell.xib; sourceTree = "<group>"; };
 		2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeV2CellTitle.swift; sourceTree = "<group>"; };
 		2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeV2CellTitle.xib; sourceTree = "<group>"; };
 		2609BFA72AC329120052111C /* HomeSeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSeeAllCell.swift; sourceTree = "<group>"; };
@@ -1955,6 +1959,15 @@
 			path = cells;
 			sourceTree = "<group>";
 		};
+		26043D962CE4F65700F4083F /* collectionDayAndHourCells */ = {
+			isa = PBXGroup;
+			children = (
+				26043D972CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift */,
+				26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */,
+			);
+			path = collectionDayAndHourCells;
+			sourceTree = "<group>";
+		};
 		261174FF29A6718D00735E9A /* reportChooseCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -2178,6 +2191,7 @@
 		26BEEEB72C00C32B00169FBA /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				26043D962CE4F65700F4083F /* collectionDayAndHourCells */,
 				26BEEEB82C00C32B00169FBA /* collectionInterestsCells */,
 				26BEEEBB2C00C32B00169FBA /* EnhancedFullSizeCell.swift */,
 				26BEEEBC2C00C32B00169FBA /* EnahancedOnboardingButtonCell.xib */,
@@ -2436,6 +2450,7 @@
 				020AF5E92860B10C0012AE60 /* HomeCongratPopupViewController.xib in Resources */,
 				2609BFAA2AC329440052111C /* HomeSeeAllCell.xib in Resources */,
 				02846CC227ECBC2B00D85ADA /* Interests.xcassets in Resources */,
+				26043D9C2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib in Resources */,
 				02C91A25278F2B4F00305E0B /* Intro.storyboard in Resources */,
 				025C92BC28340F7D000970D9 /* NeighborhoodDetailTopCell.xib in Resources */,
 				2674FEC52ACDA5F00013D674 /* HomeNeedHelpCell.xib in Resources */,
@@ -2746,6 +2761,7 @@
 				02ADAAB3280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift in Sources */,
 				0288A8D727CCD8F5008D7011 /* UserPhotoAddViewController.swift in Sources */,
 				26BE84642A67F50500DC2586 /* ActionPassedTwoVC.swift in Sources */,
+				26043D982CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift in Sources */,
 				0288A8DB27CD00FD008D7011 /* Extensions_UIImage.swift in Sources */,
 				026819BD278E105600A98A4A /* OTLoginV2ViewController.swift in Sources */,
 				026819BE278E105600A98A4A /* OTLoginPlaceViewController.swift in Sources */,

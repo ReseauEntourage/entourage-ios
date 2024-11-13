@@ -353,6 +353,27 @@ extension EnhancedViewController: EnhancedOnboardingCollectionCellDelegate {
     }
 }
 
+extension EnhancedViewController {
+    func generateDaysAndHours() -> (days: [String], hours: [String]) {
+        let days = [
+            "day_monday".localized,
+            "day_tuesday".localized,
+            "day_wednesday".localized,
+            "day_thursday".localized,
+            "day_friday".localized,
+            "day_saturday".localized,
+            "day_sunday".localized
+        ]
+        
+        let hours = [
+            "hour_morning".localized,
+            "hour_afternoon".localized,
+            "hour_evening".localized
+        ]
+        
+        return (days, hours)
+    }
+}
 
 class EnhancedOnboardingConfiguration {
     static let shared = EnhancedOnboardingConfiguration()
@@ -363,4 +384,26 @@ class EnhancedOnboardingConfiguration {
     var preference:String = ""
     private init() {}
 
+}
+
+extension EnhancedViewController {
+    func generateDaysAndHours() -> (days: [String], hours: [String]) {
+        let days = [
+            "day_monday".localized,
+            "day_tuesday".localized,
+            "day_wednesday".localized,
+            "day_thursday".localized,
+            "day_friday".localized,
+            "day_saturday".localized,
+            "day_sunday".localized
+        ]
+        
+        let hours = [
+            "hour_morning".localized,
+            "hour_afternoon".localized,
+            "hour_evening".localized
+        ]
+        
+        return (days, hours)
+    }
 }

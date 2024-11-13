@@ -1656,3 +1656,15 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_start_action_title" = "C’est parti ! Donnez une seconde vie à vos objets";
 "onboarding_start_action_content" = "On vous propose de commencer par donner une seconde vie à un objet, un geste qui renforce la solidarité et crée des liens avec vos voisins.";
 "onboarding_start_action_button" = "Faire ma première action solidaire";
+
+"day_monday" = "Lundi";
+"day_tuesday" = "Mardi";
+"day_wednesday" = "Mercredi";
+"day_thursday" = "Jeudi";
+"day_friday" = "Vendredi";
+"day_saturday" = "Samedi";
+"day_sunday"= "Dimanche";
+
+"hour_morning" = "Matin";
+"hour_afternoon" = "Après-midi";
+"hour_evening" = "Soir";

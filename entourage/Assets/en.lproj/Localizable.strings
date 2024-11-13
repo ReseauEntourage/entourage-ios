@@ -1699,3 +1699,15 @@
 "onboarding_start_action_title" = "Let’s go! Give your items a second life";
 "onboarding_start_action_content" = "We suggest starting by giving a second life to an item—a simple act that strengthens solidarity and builds bonds with your neighbors.";
 "onboarding_start_action_button" = "Do my first act of solidarity";
+
+"day_monday" = "Monday";
+"day_tuesday" = "Tuesday";
+"day_wednesday" = "Wednesday";
+"day_thursday" = "Thursday";
+"day_friday" = "Friday";
+"day_saturday" = "Saturday";
+"day_sunday" = "Sunday";
+
+"hour_morning" = "Morning";
+"hour_afternoon" = "Afternoon";
+"hour_evening" = "Evening";
