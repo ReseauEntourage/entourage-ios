@@ -379,6 +379,8 @@
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
 		260377FC2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */; };
+		26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */; };
+		26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */; };
 		2609BFA42AC2BE640052111C /* HomeV2CellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */; };
 		2609BFA62AC2C7D00052111C /* HomeV2CellTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */; };
 		2609BFA82AC329120052111C /* HomeSeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA72AC329120052111C /* HomeSeeAllCell.swift */; };
@@ -906,6 +908,8 @@
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
 		1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionSmokeTestViewController.swift; sourceTree = "<group>"; };
+		26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDayCell.swift; sourceTree = "<group>"; };
+		26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChoiceDayCell.xib; sourceTree = "<group>"; };
 		2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeV2CellTitle.swift; sourceTree = "<group>"; };
 		2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeV2CellTitle.xib; sourceTree = "<group>"; };
 		2609BFA72AC329120052111C /* HomeSeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSeeAllCell.swift; sourceTree = "<group>"; };
@@ -2183,6 +2187,8 @@
 				26BEEEC02C00C32B00169FBA /* EnahancedOnboardingButtonCell.swift */,
 				26A8DE0A2C0DF32300C34641 /* EnhancecOnboardingBackCell.swift */,
 				26A8DE0C2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib */,
+				26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */,
+				26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -2502,6 +2508,7 @@
 				025C92C32834149B000970D9 /* NeighborhoodEventsTableviewCell.xib in Resources */,
 				023B07CC27D664F6007752AC /* Profile.xcassets in Resources */,
 				2694A74A2ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib in Resources */,
+				26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */,
 				025D8768278DED3C00909101 /* AppConfigurations.plist in Resources */,
 				025C92B028340787000970D9 /* NeighborhoodPostTextCell.xib in Resources */,
 				266B26342AB9E5A500C8EAD8 /* EmptyListCell.xib in Resources */,
@@ -2905,6 +2912,7 @@
 				26AD119B2AEBEFEA00FA7BEC /* LanguageCell.swift in Sources */,
 				02EAB5AA28B908400060557D /* ConversationListMembersViewController.swift in Sources */,
 				0295F2B927E4AE5B006AE255 /* EditProfileInfosCell.swift in Sources */,
+				26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */,
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,
 				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,

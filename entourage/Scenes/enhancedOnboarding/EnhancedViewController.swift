@@ -181,6 +181,7 @@ class EnhancedViewController: UIViewController {
                         if config.isInterestsFromSetting {
                             AppState.navigateToMainApp()
                         }else{
+                            OnboardingEndChoicesManager.shared.updateChoices(interests: interests, concerns: concerns, involvements: involvements)
                             self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingEnd")
                         }
                     }

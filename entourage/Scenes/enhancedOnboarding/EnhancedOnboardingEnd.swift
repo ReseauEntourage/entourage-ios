@@ -19,7 +19,11 @@ class EnhancedOnboardingEnd:UIViewController{
     
     
     //Variable
-    
+    let interests: [String]? = nil
+    let concerns: [String]? = nil
+    let involvements: [String]? = nil
+    var currentFilter = EventActionLocationFilters()
+    var haveEvents = false
     
     override func viewDidLoad() {
         let starAnimation = LottieAnimation.named("congrats_animation")
@@ -36,12 +40,84 @@ class EnhancedOnboardingEnd:UIViewController{
             configureOrangeButton(ui_btn_go_event, withTitle: "button_title_for_re_onboarding_end".localized)
         }
         AnalyticsLoggerManager.logEvent(name: onboarding_end_view)
+        EventService.getAllEventsDiscover(currentPage: 1, per: 10, filters: currentFilter.getfiltersForWS()) { events, error in
+            guard let _events = events else{
+                self.haveEvents = false
+                return
+            }
+            var offLineEvent = [Event]()
+            for _event in _events {
+                if !(_event.isOnline ?? false){
+                    offLineEvent.append(_event)
+                }
+            }
+            if offLineEvent.isEmpty {
+                self.haveEvents = false
+                self.configureOnboardingEndView()
+            }else{
+                self.haveEvents = true
+                self.configureOnboardingEndView()
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     
     @objc func onEventClick(){
         AnalyticsLoggerManager.logEvent(name: onboarding_end_browse_events_clic)
         AppState.navigateToMainApp()
     }
+    
+    func configureOnboardingEndView() {
+         let choicesManager = OnboardingEndChoicesManager.shared
+         var titleKey = "enhanced_onboarding_end_title"
+         var subtitleKey = "enhanced_onboarding_end_subtitle"
+         var buttonTitleKey = "enhanced_onboarding_button_title_event"
+         var category = "default"
+         
+         // Vérification des choix utilisateur
+         if let involvements = choicesManager.involvements {
+             print("eho involvments : " , involvements)
+             if involvements.contains("both_actions") {
+                 titleKey = "onboarding_start_action_title"
+                 subtitleKey = "onboarding_start_action_content"
+                 buttonTitleKey = "onboarding_start_action_button"
+                 category = "both_actions"
+             } else if involvements.contains("outings") {
+                 if(self.haveEvents){
+                     titleKey = "onboarding_experience_event_title"
+                     subtitleKey = "onboarding_experience_event_content"
+                     buttonTitleKey = "onboarding_experience_event_button"
+                     category = "event"
+                 }else{
+                     titleKey = "onboarding_experience_no_event_title"
+                     subtitleKey = "onboarding_experience_no_event_content"
+                     buttonTitleKey = "onboarding_experience_no_event_button"
+                     category = "no_event"
+                 }
+                 
+             } else if involvements.contains("resources") {
+                 titleKey = "onboarding_experience_resource_title"
+                 subtitleKey = "onboarding_experience_resource_content"
+                 buttonTitleKey = "onboarding_experience_resource_button"
+                 category = "resources"
+             } else if involvements.contains("neighborhoods") {
+                 titleKey = "onboarding_ready_action_title"
+                 subtitleKey = "onboarding_ready_action_content"
+                 buttonTitleKey = "onboarding_ready_action_button"
+                 category = "neighborhoods"
+             }
+         }
+         // Affectation des valeurs localisées aux labels et boutons
+         ui_title_label.text = titleKey.localized
+         ui_subtitle_label.text = subtitleKey.localized
+         configureOrangeButton(ui_btn_go_event, withTitle: buttonTitleKey.localized)
+     }
+     
+
+    
     
     func configureOrangeButton(_ button: UIButton, withTitle title: String) {
         button.setTitle(title, for: .normal)
@@ -70,4 +146,31 @@ class EnhancedOnboardingEnd:UIViewController{
                 present(viewController, animated: true, completion: nil)
             }
         }
+}
+
+
+class OnboardingEndChoicesManager {
+    
+    // Singleton partagé
+    static let shared = OnboardingEndChoicesManager()
+    
+    // Variables pour stocker les choix utilisateur
+    var interests: [String]?
+    var concerns: [String]?
+    var involvements: [String]?
+    
+    // Initialiseur privé pour empêcher les autres d'instancier ce singleton
+    private init() {
+        // Initialisation des variables si nécessaire
+        self.interests = nil
+        self.concerns = nil
+        self.involvements = nil
+    }
+    
+    // Méthode pour mettre à jour les choix utilisateur
+    func updateChoices(interests: [String]?, concerns: [String]?, involvements: [String]?) {
+        self.interests = interests
+        self.concerns = concerns
+        self.involvements = involvements
+    }
 }
