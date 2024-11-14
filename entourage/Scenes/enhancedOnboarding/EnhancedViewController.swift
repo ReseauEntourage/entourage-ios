@@ -62,13 +62,10 @@ class EnhancedViewController: UIViewController {
         // Assign delegates
         ui_tableview.delegate = self
         ui_tableview.dataSource = self
-
         // Préconfigurer les jours et les heures en fonction de UserDefaults
         preconfigureAvailability()
-
         // Initialize choices
         initializeChoices()
-
         // Load data for the initial mode
         loadDTO()
     }
