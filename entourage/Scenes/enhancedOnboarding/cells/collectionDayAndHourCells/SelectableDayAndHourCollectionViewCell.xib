@@ -4,46 +4,67 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QMG-nt-5Nf">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SelectableDayAndHourCollectionViewCell" id="QMG-nt-5Nf" customClass="SelectableDayAndHourCollectionViewCell" customModule="Ent_Beta" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="390" height="178"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gfE-PW-s9a" customClass="SelectableDayAndHourCollectionViewCell" customModule="Ent_Beta" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="390" height="178"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-UX-Yda">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GcH-VY-YTw">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="178"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eh1-UX-Yda">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="178"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eh1-UX-Yda" firstAttribute="top" secondItem="GcH-VY-YTw" secondAttribute="top" id="4qa-4N-Vdi"/>
+                            <constraint firstAttribute="bottom" secondItem="eh1-UX-Yda" secondAttribute="bottom" id="Gyt-Lr-cpO"/>
+                            <constraint firstAttribute="trailing" secondItem="eh1-UX-Yda" secondAttribute="trailing" id="rkf-5k-qoB"/>
+                            <constraint firstItem="eh1-UX-Yda" firstAttribute="leading" secondItem="GcH-VY-YTw" secondAttribute="leading" id="xED-2p-Lzo"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                <real key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
-                <color key="backgroundColor" name="Beige"/>
                 <constraints>
-                    <constraint firstItem="eh1-UX-Yda" firstAttribute="leading" secondItem="gfE-PW-s9a" secondAttribute="leading" id="EK7-By-IYp"/>
-                    <constraint firstItem="eh1-UX-Yda" firstAttribute="top" secondItem="gfE-PW-s9a" secondAttribute="top" id="SeP-nh-ZSV"/>
-                    <constraint firstAttribute="trailing" secondItem="eh1-UX-Yda" secondAttribute="trailing" id="WUa-AW-gah"/>
-                    <constraint firstItem="eh1-UX-Yda" firstAttribute="leading" secondItem="gfE-PW-s9a" secondAttribute="leading" id="eqs-RJ-Q1j"/>
-                    <constraint firstAttribute="bottom" secondItem="eh1-UX-Yda" secondAttribute="bottom" id="wn8-k6-Gab"/>
+                    <constraint firstItem="GcH-VY-YTw" firstAttribute="leading" secondItem="gfE-PW-s9a" secondAttribute="leading" id="AKX-fg-z3J"/>
+                    <constraint firstItem="GcH-VY-YTw" firstAttribute="top" secondItem="gfE-PW-s9a" secondAttribute="top" id="B2i-pE-vOm"/>
+                    <constraint firstAttribute="trailing" secondItem="GcH-VY-YTw" secondAttribute="trailing" id="qk3-Ri-S2R"/>
+                    <constraint firstAttribute="bottom" secondItem="GcH-VY-YTw" secondAttribute="bottom" id="rij-tX-rkA"/>
                 </constraints>
-                <connections>
-                    <outlet property="titleLabel" destination="eh1-UX-Yda" id="Q4I-vs-9bF"/>
-                </connections>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                        <real key="value" value="15"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </collectionViewCellContentView>
             <size key="customSize" width="390" height="178"/>
+            <connections>
+                <outlet property="titleLabel" destination="eh1-UX-Yda" id="54A-DK-WWp"/>
+                <outlet property="ui_view" destination="GcH-VY-YTw" id="KBG-7h-cuw"/>
+            </connections>
             <point key="canvasLocation" x="209.16030534351145" y="61.971830985915496"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="Beige">
-            <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

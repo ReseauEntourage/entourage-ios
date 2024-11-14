@@ -1,87 +1,95 @@
-//
-//  ChoiceDayCell.swift
-//  entourage
-//
-//  Created by Clement entourage on 13/11/2024.
-//
-
-import Foundation
 import UIKit
 
-class ChoiceDayCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+protocol ChoiceDayCellDelegate: AnyObject {
+    func choiceDayCell(_ cell: ChoiceDayCell, didUpdateSelectedDays selectedDays: Set<Int>, isDay: Bool)
+}
 
-    // OUTLET
+class ChoiceDayCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
     @IBOutlet weak var ui_title_day: UILabel!
     @IBOutlet weak var ui_collectionview_days: UICollectionView!
-    @IBOutlet weak var ui_title_hours: UILabel!
-    @IBOutlet weak var ui_collectionview_hours: UICollectionView!
-    
-    // VARIABLES
-    class var identifier: String {
-        return String(describing: self)
-    }
-    
+
+    static let identifier = "ChoiceDayCell"
+
     var days: [String] = []
-    var hours: [String] = []
     var selectedDays: Set<Int> = []
-    var selectedHours: Set<Int> = []
+    var isDay = false
+
+    weak var delegate: ChoiceDayCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // Initialisation des collectionViews
         ui_collectionview_days.delegate = self
         ui_collectionview_days.dataSource = self
-        ui_collectionview_days.allowsMultipleSelection = true
-        
-        ui_collectionview_hours.delegate = self
-        ui_collectionview_hours.dataSource = self
-        ui_collectionview_hours.allowsMultipleSelection = true
-        
-        // Enregistrement de la cellule pour la collectionView avec le XIB
+
         let nib = UINib(nibName: "SelectableDayAndHourCollectionViewCell", bundle: nil)
-        ui_collectionview_days.register(nib, forCellWithReuseIdentifier: "SelectableDayAndHourCollectionViewCell")
-        ui_collectionview_hours.register(nib, forCellWithReuseIdentifier: "SelectableDayAndHourCollectionViewCell")
+        ui_collectionview_days.register(nib, forCellWithReuseIdentifier: SelectableDayAndHourCollectionViewCell.identifier)
+        
+        // Ajout du tapGesture pour la gestion manuelle des clics
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCollectionViewTap(_:)))
+        ui_collectionview_days.addGestureRecognizer(tapGesture)
     }
-    
-    func configure(days: [String], hours: [String]) {
+
+    @objc private func handleCollectionViewTap(_ gesture: UITapGestureRecognizer) {
+        let point = gesture.location(in: ui_collectionview_days)
+        
+        if let indexPath = ui_collectionview_days.indexPathForItem(at: point),
+           let cell = ui_collectionview_days.cellForItem(at: indexPath) as? SelectableDayAndHourCollectionViewCell {
+            
+            if selectedDays.contains(indexPath.item) {
+                selectedDays.remove(indexPath.item)
+                cell.updateAppearance(isSelected: false)
+            } else {
+                selectedDays.insert(indexPath.item)
+                cell.updateAppearance(isSelected: true)
+            }
+            print("eho list " , selectedDays)
+            // Appelle le délégué avec les selectedDays mis à jour
+            delegate?.choiceDayCell(self, didUpdateSelectedDays: selectedDays, isDay: self.isDay)
+        }
+    }
+
+
+    func configure(days: [String]) {
         self.days = days
-        self.hours = hours
         ui_collectionview_days.reloadData()
-        ui_collectionview_hours.reloadData()
     }
+
+    // MARK: - UICollectionView DataSource
     
-    // MARK: - UICollectionView DataSource Methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView == ui_collectionview_days ? days.count : hours.count
+        return days.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectableDayAndHourCollectionViewCell", for: indexPath) as! SelectableDayAndHourCollectionViewCell
-        let itemText = collectionView == ui_collectionview_days ? days[indexPath.item] : hours[indexPath.item]
-        let isSelected = collectionView == ui_collectionview_days ? selectedDays.contains(indexPath.item) : selectedHours.contains(indexPath.item)
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: SelectableDayAndHourCollectionViewCell.identifier,
+            for: indexPath
+        ) as? SelectableDayAndHourCollectionViewCell else {
+            fatalError("Could not dequeue cell with identifier: \(SelectableDayAndHourCollectionViewCell.identifier)")
+        }
+
+        let itemText = days[indexPath.item]
+        let isSelected = selectedDays.contains(indexPath.item)
         
-        cell.configure(with: itemText, isSelected: isSelected)
+        // Configure la cellule avec le texte et l'état de sélection
+        cell.configure(text: itemText, isSelected: isSelected)
         
         return cell
     }
-    
-    // MARK: - UICollectionView Delegate Methods
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == ui_collectionview_days {
-            selectedDays.insert(indexPath.item)
-        } else {
-            selectedHours.insert(indexPath.item)
-        }
-        collectionView.reloadItems(at: [indexPath])
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if collectionView == ui_collectionview_days {
-            selectedDays.remove(indexPath.item)
-        } else {
-            selectedHours.remove(indexPath.item)
-        }
-        collectionView.reloadItems(at: [indexPath])
+
+    // MARK: - UICollectionViewDelegateFlowLayout
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let label = UILabel()
+        label.text = days[indexPath.item]
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.sizeToFit()
+        
+        let width = label.frame.width + 24
+        let height: CGFloat = 30
+        
+        return CGSize(width: width, height: height)
     }
 }

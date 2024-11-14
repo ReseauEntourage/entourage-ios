@@ -12,33 +12,68 @@ struct UserService {
     
     //MARK: - Update User Interests
 
-    static func updateUserChoices(interests: [String], concerns: [String], involvements: [String], completion: @escaping (_ user: User?, _ error: EntourageNetworkError?) -> Void) {
-
+    static func updateUserChoices(interests: [String], concerns: [String], involvements: [String], selectedDays: Set<Int>, selectedHours: Set<Int>, completion: @escaping (_ user: User?, _ error: EntourageNetworkError?) -> Void) {
+        
         guard let token = UserDefaults.token else {
             completion(nil, nil)
             return
         }
+        
         let endpoint = String(format: kAPIUpdateUser, token)
-
+        
+        // Mappings pour les jours et les créneaux horaires
+        let dayMapping = [
+            0: "1", // Lundi
+            1: "2", // Mardi
+            2: "3", // Mercredi
+            3: "4", // Jeudi
+            4: "5", // Vendredi
+            5: "6", // Samedi
+            6: "7"  // Dimanche
+        ]
+        
+        let timeSlotMapping = [
+            0: "09:00-12:00", // Matin
+            1: "14:00-18:00", // Après-midi
+            2: "18:00-21:00"  // Soir
+        ]
+        
+        // Construction de la structure de disponibilité
+        var availability: [String: [String]] = [:]
+        for day in selectedDays {
+            if let dayNumber = dayMapping[day] {
+                let timeRanges = selectedHours.compactMap { timeSlotMapping[$0] }
+                if !timeRanges.isEmpty {
+                    availability[dayNumber] = timeRanges
+                }
+            }
+        }
+        
+        // Préparation des paramètres pour la requête
         let parameters: [String: Any] = [
             "user": [
                 "interests": interests,
                 "concerns": concerns,
-                "involvements": involvements
+                "involvements": involvements,
+                "availability": availability // Ajout de la disponibilité
             ]
         ]
+        
+        // Transformation en JSON
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-
+        
+        // Requête PATCH
         NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
             guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 completion(nil, error)
                 return
             }
-
+            
             let userParsed = self.parsingDataUser(data: data).user
             completion(userParsed, nil)
         }
     }
+
 
     
     //MARK: - Update User
