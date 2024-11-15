@@ -52,6 +52,7 @@ class NotificationDemandViewController: UIViewController {
                     self.goHomeMain()
                 case .denied, .notDetermined:
                     // Ne rien faire, l'utilisateur doit choisir
+                    self.goHomeMain()
                     break
                 @unknown default:
                     break

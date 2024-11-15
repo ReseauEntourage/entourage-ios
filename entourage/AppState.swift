@@ -71,6 +71,8 @@ struct AppState {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = tabbar
         appDelegate.window?.makeKeyAndVisible()
+        
+        
     }
     
     

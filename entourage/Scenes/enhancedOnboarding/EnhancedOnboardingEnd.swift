@@ -68,6 +68,7 @@ class EnhancedOnboardingEnd:UIViewController{
     @objc func onEventClick(){
         AnalyticsLoggerManager.logEvent(name: onboarding_end_browse_events_clic)
         AppState.navigateToMainApp()
+        
     }
     
     func configureOnboardingEndView() {
@@ -75,7 +76,6 @@ class EnhancedOnboardingEnd:UIViewController{
          var titleKey = "enhanced_onboarding_end_title"
          var subtitleKey = "enhanced_onboarding_end_subtitle"
          var buttonTitleKey = "enhanced_onboarding_button_title_event"
-         var category = "default"
          
          // Vérification des choix utilisateur
          if let involvements = choicesManager.involvements {
@@ -84,30 +84,30 @@ class EnhancedOnboardingEnd:UIViewController{
                  titleKey = "onboarding_start_action_title"
                  subtitleKey = "onboarding_start_action_content"
                  buttonTitleKey = "onboarding_start_action_button"
-                 category = "both_actions"
+                 OnboardingEndChoicesManager.shared.categoryForButton = "both_actions"
              } else if involvements.contains("outings") {
                  if(self.haveEvents){
                      titleKey = "onboarding_experience_event_title"
                      subtitleKey = "onboarding_experience_event_content"
                      buttonTitleKey = "onboarding_experience_event_button"
-                     category = "event"
+                     OnboardingEndChoicesManager.shared.categoryForButton = "event"
                  }else{
                      titleKey = "onboarding_experience_no_event_title"
                      subtitleKey = "onboarding_experience_no_event_content"
                      buttonTitleKey = "onboarding_experience_no_event_button"
-                     category = "no_event"
+                     OnboardingEndChoicesManager.shared.categoryForButton = "no_event"
                  }
                  
              } else if involvements.contains("resources") {
                  titleKey = "onboarding_experience_resource_title"
                  subtitleKey = "onboarding_experience_resource_content"
                  buttonTitleKey = "onboarding_experience_resource_button"
-                 category = "resources"
+                 OnboardingEndChoicesManager.shared.categoryForButton = "resources"
              } else if involvements.contains("neighborhoods") {
                  titleKey = "onboarding_ready_action_title"
                  subtitleKey = "onboarding_ready_action_content"
                  buttonTitleKey = "onboarding_ready_action_button"
-                 category = "neighborhoods"
+                 OnboardingEndChoicesManager.shared.categoryForButton = "neighborhoods"
              }
          }
          // Affectation des valeurs localisées aux labels et boutons
@@ -158,6 +158,7 @@ class OnboardingEndChoicesManager {
     var interests: [String]?
     var concerns: [String]?
     var involvements: [String]?
+    var categoryForButton:String?
     
     // Initialiseur privé pour empêcher les autres d'instancier ce singleton
     private init() {
