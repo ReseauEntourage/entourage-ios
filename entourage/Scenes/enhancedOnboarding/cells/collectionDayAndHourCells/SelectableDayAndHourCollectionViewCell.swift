@@ -27,9 +27,10 @@ class SelectableDayAndHourCollectionViewCell: UICollectionViewCell {
     
     func updateAppearance(isSelected: Bool) {
         ui_view.layer.borderWidth = 1
-        ui_view.layer.borderColor = isSelected ? UIColor.orange.cgColor : UIColor.lightGray.cgColor
+        ui_view.layer.borderColor = isSelected ? UIColor.orange.cgColor : UIColor.appGrey151.cgColor
         ui_view.backgroundColor = isSelected ? UIColor.orange.withAlphaComponent(0.1) : UIColor.clear
-        titleLabel.textColor = isSelected ? UIColor.orange : UIColor.black
+        titleLabel.textColor = UIColor.black
+        titleLabel.font = isSelected ? ApplicationTheme.getFontQuickSandBold(size: 13) : ApplicationTheme.getFontNunitoRegular(size: 13)
 
     }
     

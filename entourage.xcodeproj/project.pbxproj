@@ -539,6 +539,7 @@
 		26F03C9B2A1B8BAB00450A61 /* WelcomeOneContentLast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C9A2A1B8BAB00450A61 /* WelcomeOneContentLast.xib */; };
 		26F03C9D2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C9C2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift */; };
 		26F03C9F2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C9E2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib */; };
+		26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */; };
 		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
 		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
 /* End PBXBuildFile section */
@@ -1084,6 +1085,7 @@
 		26F03C9A2A1B8BAB00450A61 /* WelcomeOneContentLast.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneContentLast.xib; sourceTree = "<group>"; };
 		26F03C9C2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneWebViewCell.swift; sourceTree = "<group>"; };
 		26F03C9E2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneWebViewCell.xib; sourceTree = "<group>"; };
+		26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightOverlayView.swift; sourceTree = "<group>"; };
 		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
 		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1399,6 +1401,7 @@
 				026819A7278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.h */,
 				026819A6278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m */,
 				26445C4A2BB46AAF0010A8D8 /* SimpleMJAlertDialog.swift */,
+				26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -2770,6 +2773,7 @@
 				021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */,
 				26BEEEC92C00C32B00169FBA /* EnhancedOnboardingTitle.swift in Sources */,
 				26584C4A2ACC48ED00ABD401 /* HomeCellMapButton.swift in Sources */,
+				26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */,
 				2630F6282C245E1B007BAE56 /* MainFilterTitleCell.swift in Sources */,
 				026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */,
 				264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */,

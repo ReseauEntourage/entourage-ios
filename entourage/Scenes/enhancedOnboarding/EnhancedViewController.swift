@@ -145,6 +145,7 @@ class EnhancedViewController: UIViewController {
 
     private func loadDTO() {
         tableDTO.removeAll()
+        self.ui_tableview.reloadData()
 
         switch self.mode {
         case .interest:
@@ -246,10 +247,6 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard indexPath.row < tableDTO.count else {
-            print("Index hors limites : \(indexPath.row), tableDTO.count : \(tableDTO.count)")
-            return UITableViewCell() // Retournez une cellule vide ou gérez l'erreur ici
-        }
         let dto = tableDTO[indexPath.row]
 
         switch dto {

@@ -95,6 +95,9 @@ class EventListMainV2ViewController: UIViewController {
 
         let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(onFilterClick))
         uiBtnFilter.addGestureRecognizer(filterTapGesture)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Cliquez ici pour appliquer des filtres !")
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -649,5 +652,27 @@ extension EventListMainV2ViewController: MainFilterDelegate {
         let indexPath = IndexPath(row: 0, section: 0)
         self.ui_table_view.reloadRows(at: [indexPath], with: .automatic)
         self.loadForFilter()
+    }
+}
+
+extension EventListMainV2ViewController {
+    func showHighlightOverlay(targetView: UIView, withBubbleText text: String) {
+        // Crée l'overlay
+        let overlayView = HighlightOverlayView(targetView: targetView)
+        overlayView.frame = self.view.bounds
+
+        // Ajoute la bulle
+        overlayView.addBubble(with: text, below: targetView)
+
+        // Gérer le clic sur l'overlay pour le retirer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeOverlay(_:)))
+        overlayView.addGestureRecognizer(tapGesture)
+
+        // Ajoute l'overlay à la vue principale
+        self.view.addSubview(overlayView)
+    }
+
+    @objc private func removeOverlay(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
     }
 }
