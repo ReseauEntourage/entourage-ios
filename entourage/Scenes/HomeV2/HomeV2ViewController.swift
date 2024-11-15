@@ -176,49 +176,41 @@ class HomeV2ViewController: UIViewController {
             DispatchQueue.main.async {
                 config.isFromOnboardingFromNormalWay = false
                 IHProgressHUD.dismiss()
-                print("eho")
                 if let _tabbar = self.tabBarController as? MainTabbarViewController {
-                    print("eho 2")
-                    print("eho category" , OnboardingEndChoicesManager.shared.categoryForButton)
-                    switch OnboardingEndChoicesManager.shared.categoryForButton {
-                    case "both_action":
-                        let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
-                        if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
-                            vc.modalPresentationStyle = .fullScreen
-                            vc.isContrib = true
-                            vc.parentController = self
-                            _tabbar.present(vc, animated: true)
-                        }
-                        break
-                    case "event":
-                        _tabbar.showDiscoverEvents()
-                        break
-                    case "no_event":
-                        let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
-                        if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
-                            vc.modalPresentationStyle = .fullScreen
-                            vc.isContrib = true
-                            vc.parentController = self
-                            _tabbar.present(vc, animated: true)
-                        }
-                        break
-                    case "resources":
-                        let urlString = "https://kahoot.it/challenge/0354666?challenge-id=45371e80-fe50-4be5-afec-b37e3d50ede2_1729004998521"
+                    if let _category = OnboardingEndChoicesManager.shared.categoryForButton{
+                        if _category.contains("both_action"){
+                            let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
+                            if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
+                                vc.modalPresentationStyle = .fullScreen
+                                vc.isContrib = true
+                                vc.parentController = self
+                                _tabbar.present(vc, animated: true)
+                            }
+                        }else if _category.contains("event"){
+                            _tabbar.showDiscoverEvents()
 
-                        if let url = URL(string: urlString) {
-                            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
-                        } else {
-                            print("Invalid URL string")
-                        }
-                        break
-                    case "neighborhoods":
-                        DeepLinkManager.showWelcomeTwo()
-                        break
-                    default:
-                        break
+                        }else if _category.contains("no_event"){
+                            let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
+                            if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
+                                vc.modalPresentationStyle = .fullScreen
+                                vc.isContrib = true
+                                vc.parentController = self
+                                _tabbar.present(vc, animated: true)
+                            }
+                        }else if _category.contains("resources"){
+                            let urlString = "https://kahoot.it/challenge/0354666?challenge-id=45371e80-fe50-4be5-afec-b37e3d50ede2_1729004998521"
 
+                            if let url = URL(string: urlString) {
+                                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+                            } else {
+                                print("Invalid URL string")
+                            }
+                        }else if _category.contains("neighborhoods"){
+                            DeepLinkManager.showWelcomeTwo()
+
+                        }
+                        
                     }
-                    return
                 }
             }
         }

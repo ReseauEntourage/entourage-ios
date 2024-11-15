@@ -177,7 +177,6 @@ class EnhancedViewController: UIViewController {
             tableDTO.append(.choiceDayCell(days: days, selectedDays: selectedDays))
             tableDTO.append(.choiceDayCell(days: hours, selectedDays: selectedDays))
         }
-
         tableDTO.append(.buttonCell)
         ui_tableview.reloadData()
         if hasChangedMod {
@@ -224,8 +223,6 @@ class EnhancedViewController: UIViewController {
                             AppState.navigateToMainApp()
                         } else {
                             OnboardingEndChoicesManager.shared.updateChoices(interests: interests, concerns: concerns, involvements: involvements)
-                            print("eho ", self.selectedDays)
-                            print("eho ", self.selectedHours)
                             self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingEnd")
                         }
                     }
@@ -324,10 +321,6 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.row < tableDTO.count else {
-            print("Index hors limites : \(indexPath.row), tableDTO.count : \(tableDTO.count)")
-            return // Retournez une cellule vide ou gérez l'erreur ici
-        }
         let dto = tableDTO[indexPath.row]
         switch dto {
         case .fullSizeCell(let choice, _):
@@ -387,14 +380,17 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
             AnalyticsLoggerManager.logEvent(name: onboarding_interests_next_clic)
             mode = .concern
             self.loadDTO()
+            break
         case .concern:
             AnalyticsLoggerManager.logEvent(name: onboarding_donations_categories_next_clic)
             mode = .choiceDisponibility
             self.loadDTO()
+            break
         case .involvement:
             AnalyticsLoggerManager.logEvent(name: onboarding_actions_next_clic)
             mode = .interest
             self.loadDTO()
+            break
         case .choiceDisponibility:
             AnalyticsLoggerManager.logEvent(name: "onboarding_availability_next_clic")
             self.returnHome = false
