@@ -46,37 +46,83 @@ class HighlightOverlayView: UIView {
 
 extension HighlightOverlayView {
     func addBubble(with text: String, below targetView: UIView) {
+        // Conteneur principal qui inclut l'image et la bulle
+        let containerView = UIView()
+        containerView.backgroundColor = .clear // Transparent
+        self.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+
+        // ImageView (la flèche)
+        let imageView = UIImageView(image: UIImage(named: "img_arrow_tuto_bubble"))
+        imageView.contentMode = .scaleAspectFit
+        containerView.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Bulle blanche
         let bubbleView = UIView()
         bubbleView.backgroundColor = .white
         bubbleView.layer.cornerRadius = 8
         bubbleView.clipsToBounds = true
+        containerView.addSubview(bubbleView)
+        bubbleView.translatesAutoresizingMaskIntoConstraints = false
 
+        // Labels dans la bulle
         let label = UILabel()
         label.text = text
         label.textColor = .black
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.font = ApplicationTheme.getFontQuickSandBold(size: 13)
+        
 
+        let orangeLabel = UILabel()
+        orangeLabel.text = "J’ai compris"
+        orangeLabel.textColor = UIColor.orange
+        orangeLabel.font = ApplicationTheme.getFontNunitoRegular(size: 11)
+        orangeLabel.textAlignment = .center
+
+        // Ajouter les labels à la bulle
         bubbleView.addSubview(label)
+        bubbleView.addSubview(orangeLabel)
+
+        // Contraintes pour le premier label
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 8),
             label.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 8),
-            label.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -8),
-            label.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -8)
+            label.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -8)
         ])
 
-        self.addSubview(bubbleView)
-        bubbleView.translatesAutoresizingMaskIntoConstraints = false
-
-        // Obtenir la position cible
-        let targetFrame = targetView.convert(targetView.bounds, to: self)
-
-        // Positionner la bulle juste en dessous de la vue cible
+        // Contraintes pour le deuxième label
+        orangeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            bubbleView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 80),
-            bubbleView.topAnchor.constraint(equalTo: self.topAnchor, constant: targetFrame.maxY + 20), // Position en dessous
-            bubbleView.widthAnchor.constraint(lessThanOrEqualToConstant: 200)
+            orangeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
+            orangeLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 8),
+            orangeLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -8),
+            orangeLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -8)
+        ])
+
+        // Contraintes pour l'ImageView (flèche)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: -2), // Légère entrée dans la bulle
+            imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10), // Aligné à droite
+            imageView.widthAnchor.constraint(equalToConstant: 30),
+            imageView.heightAnchor.constraint(equalToConstant: 30)
+        ])
+
+        // Contraintes pour la bulle (sous l'image)
+        NSLayoutConstraint.activate([
+            bubbleView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -10), // Légère superposition avec l'image
+            bubbleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            bubbleView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+        ])
+
+        // Contraintes pour le conteneur principal
+        let targetFrame = targetView.convert(targetView.bounds, to: self)
+        NSLayoutConstraint.activate([
+            containerView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 25), // Décalage vers la droite
+            containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: targetFrame.maxY + 10) // Position en dessous de la vue cible
         ])
     }
 }
+

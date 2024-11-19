@@ -40,23 +40,25 @@ class EnhancedOnboardingEnd:UIViewController{
             configureOrangeButton(ui_btn_go_event, withTitle: "button_title_for_re_onboarding_end".localized)
         }
         AnalyticsLoggerManager.logEvent(name: onboarding_end_view)
-        EventService.getAllEventsDiscover(currentPage: 1, per: 10, filters: currentFilter.getfiltersForWS()) { events, error in
-            guard let _events = events else{
-                self.haveEvents = false
-                return
-            }
-            var offLineEvent = [Event]()
-            for _event in _events {
-                if !(_event.isOnline ?? false){
-                    offLineEvent.append(_event)
+        if EnhancedOnboardingConfiguration.shared.preference != "contribution" {
+            EventService.getAllEventsDiscover(currentPage: 1, per: 10, filters: currentFilter.getfiltersForWS()) { events, error in
+                guard let _events = events else{
+                    self.haveEvents = false
+                    return
                 }
-            }
-            if offLineEvent.isEmpty {
-                self.haveEvents = false
-                self.configureOnboardingEndView()
-            }else{
-                self.haveEvents = true
-                self.configureOnboardingEndView()
+                var offLineEvent = [Event]()
+                for _event in _events {
+                    if !(_event.isOnline ?? false){
+                        offLineEvent.append(_event)
+                    }
+                }
+                if offLineEvent.isEmpty {
+                    self.haveEvents = false
+                    self.configureOnboardingEndView()
+                }else{
+                    self.haveEvents = true
+                    self.configureOnboardingEndView()
+                }
             }
         }
     }

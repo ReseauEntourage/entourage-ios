@@ -95,8 +95,11 @@ class EventListMainV2ViewController: UIViewController {
 
         let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(onFilterClick))
         uiBtnFilter.addGestureRecognizer(filterTapGesture)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Cliquez ici pour appliquer des filtres !")
+        if OnboardingEndChoicesManager.shared.categoryForButton == "event" {
+            OnboardingEndChoicesManager.shared.categoryForButton = ""
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Cliquez ici pour appliquer des filtres !")
+            }
         }
     }
 
