@@ -98,7 +98,7 @@ class EventListMainV2ViewController: UIViewController {
         if OnboardingEndChoicesManager.shared.categoryForButton == "event" {
             OnboardingEndChoicesManager.shared.categoryForButton = ""
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Cliquez ici pour appliquer des filtres !")
+                self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Des filtres ont été appliqués en fonction de vos préférences. Cliquez ici pour les modifier.")
             }
         }
     }
