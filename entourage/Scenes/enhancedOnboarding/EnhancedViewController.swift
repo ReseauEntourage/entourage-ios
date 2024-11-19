@@ -20,6 +20,7 @@ enum EnhancedOnboardingTableDTO {
     case choiceDayCell(days: [String], selectedDays: Set<Int>)
     case buttonCell
     case backArrow
+    case espaceCell
 }
 
 enum EnhancedOnboardingMode {
@@ -44,6 +45,7 @@ class EnhancedViewController: UIViewController {
     var interestChoices: [OnboardingChoice] = []
     var returnHome = false
     var hasChangedMod = false
+    var espaceCellHeight: CGFloat = 0
 
     var selectedDays = Set<Int>()
     var selectedHours = Set<Int>()
@@ -70,13 +72,42 @@ class EnhancedViewController: UIViewController {
         loadDTO()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    private func adjustEspaceCellHeight() {
+        ui_tableview.layoutIfNeeded()
+        
+        let tableViewHeight = ui_tableview.frame.height
+        let contentHeight = ui_tableview.contentSize.height
+        
+        let availableHeight = tableViewHeight - contentHeight
+        
+        print("tableViewHeight: \(tableViewHeight)")
+        print("contentHeight: \(contentHeight)")
+        print("availableHeight: \(availableHeight)")
+        
+        espaceCellHeight = availableHeight > 0 ? availableHeight : 0
+        
+        if let espaceCellIndex = tableDTO.firstIndex(where: {
+            if case .espaceCell = $0 { return true } else { return false }
+        }) {
+            UIView.performWithoutAnimation {
+                ui_tableview.reloadRows(at: [IndexPath(row: espaceCellIndex, section: 0)], with: .none)
+            }
+        }
+    }
+
+
+
+    
     private func preconfigureAvailability() {
         if let userAvailability = UserDefaults.currentUser?.availability {
             for (dayKey, timeRanges) in userAvailability {
                 if let dayIndex = Int(dayKey) {
                     selectedDays.insert(dayIndex - 1)  // Soustraction pour correspondre à l'index (0 = Lundi)
                 }
-                
                 for timeRange in timeRanges {
                     let timeSlotIndex: Int? = {
                         switch timeRange {
@@ -94,7 +125,6 @@ class EnhancedViewController: UIViewController {
             }
         }
     }
-
 
     private func initializeChoices() {
         guard let currentUser = UserDefaults.currentUser else {
@@ -176,6 +206,7 @@ class EnhancedViewController: UIViewController {
             
             tableDTO.append(.choiceDayCell(days: days, selectedDays: selectedDays))
             tableDTO.append(.choiceDayCell(days: hours, selectedDays: selectedDays))
+            tableDTO.append(.espaceCell)
         }
         tableDTO.append(.buttonCell)
         ui_tableview.reloadData()
@@ -186,6 +217,10 @@ class EnhancedViewController: UIViewController {
                     self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 }
             }
+        }
+        // Introduire un léger délai avant d'appeler adjustEspaceCellHeight()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            self.adjustEspaceCellHeight()
         }
     }
 
@@ -245,7 +280,6 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dto = tableDTO[indexPath.row]
-
         switch dto {
         case .title(let title, let subtitle):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as? EnhancedOnboardingTitle else {
@@ -293,13 +327,14 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
             
             // Définir isDay en fonction du nombre d'éléments dans days
             cell.isDay = days.count >= 5
-            
             // Prend selectedDays ou selectedHours en fonction de isDay
             cell.selectedDays = cell.isDay ? selectedDays : selectedHours
             cell.configure(days: days)
             cell.delegate = self
             cell.selectionStyle = .none
             return cell
+        case .espaceCell:
+            return UITableViewCell()
         }
     }
 
@@ -317,6 +352,8 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableView.automaticDimension
         case .choiceDayCell:
             return UITableView.automaticDimension // Or specify a fixed height if needed
+        case .espaceCell:
+            return espaceCellHeight
         }
     }
 
@@ -438,8 +475,6 @@ extension EnhancedViewController {
             NSLocalizedString("day_saturday", comment: ""),
             NSLocalizedString("day_sunday", comment: "")
         ]
-
-
         return days
     }
     
