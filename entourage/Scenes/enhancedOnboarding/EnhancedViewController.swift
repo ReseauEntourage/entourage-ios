@@ -198,7 +198,7 @@ class EnhancedViewController: UIViewController {
                 tableDTO.append(.fullSizeCell(choice: choice, isSelected: selectedIds.contains(choice.id)))
             }
         case .choiceDisponibility:
-            AnalyticsLoggerManager.logEvent(name: "onboarding_availability_view")
+            AnalyticsLoggerManager.logEvent(name: "onboarding_disponibility_view")
             tableDTO.append(.backArrow)
             tableDTO.append(.title(title: NSLocalizedString("enhanced_onboarding_my_availability", comment: ""), subtitle: NSLocalizedString("enhanced_onboarding_select_availability", comment: "")))
             let days = generateDaysAnd()

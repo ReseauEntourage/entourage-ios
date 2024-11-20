@@ -370,7 +370,7 @@ let onboarding_end_browse_events_clic = "onboarding_end_browse_events_clic"
 let onboarding_welcome_view = "onboarding_welcome_view"
 let onboarding_actions_view = "onboarding_actions_view"
 let onboarding_interests_view = "onboarding_interests_view"
-let onboarding_availability_view = "onboarding_availability_view"
+let onboarding_disponibility_view = "onboarding_disponibility_view"
 let onboarding_donations_categories_view = "onboarding_donations_categories_view"
 let onboarding_end_view = "onboarding_end_view"
 
