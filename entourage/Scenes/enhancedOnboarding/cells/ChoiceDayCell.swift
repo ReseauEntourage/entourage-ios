@@ -44,7 +44,6 @@ class ChoiceDayCell: UITableViewCell, UICollectionViewDelegate, UICollectionView
                 selectedDays.insert(indexPath.item)
                 cell.updateAppearance(isSelected: true)
             }
-            print("eho list " , selectedDays)
             // Appelle le délégué avec les selectedDays mis à jour
             delegate?.choiceDayCell(self, didUpdateSelectedDays: selectedDays, isDay: self.isDay)
         }
