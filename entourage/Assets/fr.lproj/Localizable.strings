@@ -1668,5 +1668,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "hour_morning" = "Matin";
 "hour_afternoon" = "Après-midi";
 "hour_evening" = "Soir";
-"enhanced_onboarding_select_availability" = "Indiquez vos jours et horaires disponibles";
+"enhanced_onboarding_select_availability" = "Précisez vos disponibilités pour que l'on puisse vous suggérer des événements adaptés.";
 "enhanced_onboarding_my_availability" = "Mes disponibilités";
