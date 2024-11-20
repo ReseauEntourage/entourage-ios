@@ -95,11 +95,10 @@ class EventListMainV2ViewController: UIViewController {
 
         let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(onFilterClick))
         uiBtnFilter.addGestureRecognizer(filterTapGesture)
-        if OnboardingEndChoicesManager.shared.categoryForButton == "event" {
-            OnboardingEndChoicesManager.shared.categoryForButton = ""
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Des filtres ont été appliqués en fonction de vos préférences. Cliquez ici pour les modifier.")
-            }
+        //Confguration Post onboarding
+        configurePostOnboarding()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Des filtres ont été appliqués en fonction de vos préférences. Cliquez ici pour les modifier.")
         }
     }
 
@@ -117,6 +116,25 @@ class EventListMainV2ViewController: UIViewController {
         }
         
         comeFromDetail = false
+    }
+    
+    private func configurePostOnboarding(){
+        if OnboardingEndChoicesManager.shared.categoryForButton == "event" {
+            numberOfFilters = EnhancedOnboardingConfiguration.shared.numberOfFilterForEvent.count
+            EnhancedOnboardingConfiguration.shared.numberOfFilterForEvent.forEach { id in
+                selectedItemsFilter[id] = true
+            }
+            if numberOfFilters > 0 {
+                self.ui_tv_number_of_filter.text = String(numberOfFilters)
+                self.ui_tv_number_of_filter.isHidden = false
+            } else {
+                self.ui_tv_number_of_filter.isHidden = true
+            }
+            OnboardingEndChoicesManager.shared.categoryForButton = ""
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Des filtres ont été appliqués en fonction de vos préférences. Cliquez ici pour les modifier.")
+            }
+        }
     }
     
     @objc func onSearchClick() {

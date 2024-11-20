@@ -444,11 +444,18 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
 }
 
 extension EnhancedViewController: EnhancedOnboardingCollectionCellDelegate {
+
     func collectionCell(didSelect choice: OnboardingChoice) {
         if selectedIds.contains(choice.id) {
             selectedIds.remove(choice.id)
         } else {
             selectedIds.insert(choice.id)
+        }
+        //Add id to confguration for only event filter count
+        if EnhancedOnboardingConfiguration.shared.numberOfFilterForEvent.contains(choice.id) {
+            EnhancedOnboardingConfiguration.shared.numberOfFilterForEvent.remove(choice.id)
+        } else {
+            EnhancedOnboardingConfiguration.shared.numberOfFilterForEvent.insert(choice.id)
         }
         loadDTO() // Reload to update selection state
     }
@@ -495,6 +502,7 @@ class EnhancedOnboardingConfiguration {
     var isOnboardingFromSetting = false
     var isFromOnboardingFromNormalWay = false
     var shouldSendOnboardingFromNormalWay = false
+    var numberOfFilterForEvent = Set<String>()
     var preference: String = ""
     private init() {}
 }
