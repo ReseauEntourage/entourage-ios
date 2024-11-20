@@ -504,5 +504,6 @@ class EnhancedOnboardingConfiguration {
     var shouldSendOnboardingFromNormalWay = false
     var numberOfFilterForEvent = Set<String>()
     var preference: String = ""
+    var shouldNotDisplayCampain = false
     private init() {}
 }

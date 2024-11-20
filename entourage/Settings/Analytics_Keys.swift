@@ -380,5 +380,7 @@ let popup_event_last_day_decline = "popup_event_last_day_decline"
 
 let crash_from_incorrect_cell_number = "crash_from_incorrect_cell_number"
 
+let home_activate_firebase_message = "home_activate_firebase_message"
+
 
 

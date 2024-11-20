@@ -72,6 +72,13 @@ class HomeV2ViewController: UIViewController {
         IHProgressHUD.show()
         currentUser = UserDefaults.currentUser
         AnalyticsLoggerManager.logEvent(name: View__Home)
+        if EnhancedOnboardingConfiguration.shared.shouldNotDisplayCampain == true {
+            //HERE DO NOTHING, AS WE WANT NOT THE CAMPAIN TO BE DISPLAYED IF WE ARE COMING FROM ONBOARDING
+        }else{
+            //HERE IS THE FIREBASE EVENT TO PROC MESSAGING CAMPAIN
+            AnalyticsLoggerManager.logEvent(name: home_activate_firebase_message)
+        }
+        
         prepareUINotifAndAvatar()
         ui_table_view.delegate = self
         ui_table_view.dataSource = self
