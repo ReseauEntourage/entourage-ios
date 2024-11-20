@@ -103,7 +103,6 @@ class EnhancedOnboardingEnd:UIViewController{
          
          // Vérification des choix utilisateur
          if let involvements = choicesManager.involvements {
-             print("eho involvments : " , involvements)
              if involvements.contains("both_actions") {
                  titleKey = "onboarding_start_action_title"
                  subtitleKey = "onboarding_start_action_content"

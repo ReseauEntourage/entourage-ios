@@ -171,19 +171,12 @@ class HomeV2ViewController: UIViewController {
             self.sendOnboardingIntro()
             return
         }
-//        //HERE FORCE TO TEST ON HOME
-//
-//        OnboardingEndChoicesManager.shared.categoryForButton = "neighborhoods"
-//        config.isFromOnboardingFromNormalWay = true
-//        
-//        //END TESTING FORCE
 
         if config.isFromOnboardingFromNormalWay {
             config.isFromOnboardingFromNormalWay = false
             IHProgressHUD.dismiss()
             if let _category = OnboardingEndChoicesManager.shared.categoryForButton {
                 if _category.contains("both_action") || _category.contains("no_event") {
-                    print("eho passed both_action")
                     if let _vc = AppState.getTopViewController() {
                         if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
                             let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
@@ -198,10 +191,8 @@ class HomeV2ViewController: UIViewController {
                     }
                     
                 } else if _category.contains("event") {
-                    print("eho passed event")
                     DeepLinkManager.showOutingListUniversalLink()
                 } else if _category.contains("resources") {
-                    print("eho passed resources")
                     OnboardingEndChoicesManager.shared.categoryForButton = ""
                     let urlString = "https://kahoot.it/challenge/0354666?challenge-id=45371e80-fe50-4be5-afec-b37e3d50ede2_1729004998521"
                     if let url = URL(string: urlString) {
@@ -210,7 +201,6 @@ class HomeV2ViewController: UIViewController {
                         print("Invalid URL string")
                     }
                 } else if _category.contains("neighborhoods") {
-                    print("eho passed neighborhoods")
                     OnboardingEndChoicesManager.shared.categoryForButton = ""
                     DeepLinkManager.showWelcomeTwo()
                 }
