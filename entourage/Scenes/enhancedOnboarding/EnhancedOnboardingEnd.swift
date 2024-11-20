@@ -45,7 +45,6 @@ class EnhancedOnboardingEnd:UIViewController{
         }
         AnalyticsLoggerManager.logEvent(name: onboarding_end_view)
         if EnhancedOnboardingConfiguration.shared.preference != "contribution" {
-            
             EventService.getSuggestFilteredEvents(
                 currentPage: 1,
                 per: 10,
