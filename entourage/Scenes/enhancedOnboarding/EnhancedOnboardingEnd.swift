@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Lottie
+import MapKit
 
 class EnhancedOnboardingEnd:UIViewController{
     
@@ -24,6 +25,9 @@ class EnhancedOnboardingEnd:UIViewController{
     let involvements: [String]? = nil
     var currentFilter = EventActionLocationFilters()
     var haveEvents = false
+    var selectedAddress: String = ""
+    var selectedRadius: Float = 0
+    var selectedCoordinate: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         let starAnimation = LottieAnimation.named("congrats_animation")
@@ -32,7 +36,7 @@ class EnhancedOnboardingEnd:UIViewController{
         ui_lottiview.play()
         ui_title_label.text = "enhanced_onboarding_end_title".localized
         ui_subtitle_label.text = "enhanced_onboarding_end_subtitle".localized
-        
+        configureUserLocationAndRadius()
         configureOrangeButton(ui_btn_go_event, withTitle: "enhanced_onboarding_button_title_event".localized)
         ui_btn_go_event.addTarget(self, action: #selector(onEventClick), for: .touchUpInside)
         let config = EnhancedOnboardingConfiguration.shared
@@ -41,7 +45,15 @@ class EnhancedOnboardingEnd:UIViewController{
         }
         AnalyticsLoggerManager.logEvent(name: onboarding_end_view)
         if EnhancedOnboardingConfiguration.shared.preference != "contribution" {
-            EventService.getAllEventsDiscover(currentPage: 1, per: 10, filters: currentFilter.getfiltersForWS()) { events, error in
+            
+            EventService.getSuggestFilteredEvents(
+                currentPage: 1,
+                per: 10,
+                radius: self.selectedRadius,
+                latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
+                longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
+                selectedItem: Array(EnhancedOnboardingConfiguration.shared.numberOfFilterForEvent)
+            ) { events, error in
                 guard let _events = events else{
                     self.haveEvents = false
                     return
@@ -66,10 +78,20 @@ class EnhancedOnboardingEnd:UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         
     }
+    func configureUserLocationAndRadius() {
+        if let user = UserDefaults.currentUser {
+            self.selectedRadius = Float(user.radiusDistance ?? 40)
+            self.selectedCoordinate = CLLocationCoordinate2D(latitude: user.addressPrimary?.latitude ?? 0, longitude: user.addressPrimary?.longitude ?? 0)
+            self.selectedAddress = user.addressPrimary?.displayAddress ?? ""
+        }
+    }
     
     @objc func onEventClick(){
         AnalyticsLoggerManager.logEvent(name: onboarding_end_browse_events_clic)
+        let config = EnhancedOnboardingConfiguration.shared
+        config.isFromOnboardingFromNormalWay = true
         AppState.navigateToMainApp()
+        
         
     }
     
@@ -94,9 +116,9 @@ class EnhancedOnboardingEnd:UIViewController{
                      buttonTitleKey = "onboarding_experience_event_button"
                      OnboardingEndChoicesManager.shared.categoryForButton = "event"
                  }else{
-                     titleKey = "onboarding_experience_no_event_title"
-                     subtitleKey = "onboarding_experience_no_event_content"
-                     buttonTitleKey = "onboarding_experience_no_event_button"
+                     titleKey = "onboarding_no_event_title"
+                     subtitleKey = "onboarding_no_event_content"
+                     buttonTitleKey = "onboarding_no_event_button"
                      OnboardingEndChoicesManager.shared.categoryForButton = "no_event"
                  }
                  

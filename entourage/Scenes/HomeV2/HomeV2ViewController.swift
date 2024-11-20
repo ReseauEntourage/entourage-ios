@@ -114,7 +114,6 @@ class HomeV2ViewController: UIViewController {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
         getUserInfo()
-        self.handleEnhancedOnboardingReturn()
 
     }
     
@@ -172,13 +171,21 @@ class HomeV2ViewController: UIViewController {
             self.sendOnboardingIntro()
             return
         }
+//        //HERE FORCE TO TEST ON HOME
+//
+//        OnboardingEndChoicesManager.shared.categoryForButton = "neighborhoods"
+//        config.isFromOnboardingFromNormalWay = true
+//        
+//        //END TESTING FORCE
+
         if config.isFromOnboardingFromNormalWay {
-            DispatchQueue.main.async {
-                config.isFromOnboardingFromNormalWay = false
-                IHProgressHUD.dismiss()
-                if let _tabbar = self.tabBarController as? MainTabbarViewController {
-                    if let _category = OnboardingEndChoicesManager.shared.categoryForButton{
-                        if _category.contains("both_action"){
+            config.isFromOnboardingFromNormalWay = false
+            IHProgressHUD.dismiss()
+            if let _category = OnboardingEndChoicesManager.shared.categoryForButton {
+                if _category.contains("both_action") || _category.contains("no_event") {
+                    print("eho passed both_action")
+                    if let _vc = AppState.getTopViewController() {
+                        if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
                             let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
                             if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
                                 OnboardingEndChoicesManager.shared.categoryForButton = ""
@@ -187,37 +194,30 @@ class HomeV2ViewController: UIViewController {
                                 vc.parentController = self
                                 _tabbar.present(vc, animated: true)
                             }
-                        }else if _category.contains("event"){
-                            _tabbar.showDiscoverEvents()
-
-                        }else if _category.contains("no_event"){
-                            OnboardingEndChoicesManager.shared.categoryForButton = ""
-                            let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
-                            if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
-                                vc.modalPresentationStyle = .fullScreen
-                                vc.isContrib = true
-                                vc.parentController = self
-                                _tabbar.present(vc, animated: true)
-                            }
-                        }else if _category.contains("resources"){
-                            OnboardingEndChoicesManager.shared.categoryForButton = ""
-                            let urlString = "https://kahoot.it/challenge/0354666?challenge-id=45371e80-fe50-4be5-afec-b37e3d50ede2_1729004998521"
-
-                            if let url = URL(string: urlString) {
-                                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
-                            } else {
-                                print("Invalid URL string")
-                            }
-                        }else if _category.contains("neighborhoods"){
-                            OnboardingEndChoicesManager.shared.categoryForButton = ""
-                            DeepLinkManager.showWelcomeTwo()
-
                         }
-                        
                     }
+                    
+                } else if _category.contains("event") {
+                    print("eho passed event")
+                    DeepLinkManager.showOutingListUniversalLink()
+                } else if _category.contains("resources") {
+                    print("eho passed resources")
+                    OnboardingEndChoicesManager.shared.categoryForButton = ""
+                    let urlString = "https://kahoot.it/challenge/0354666?challenge-id=45371e80-fe50-4be5-afec-b37e3d50ede2_1729004998521"
+                    if let url = URL(string: urlString) {
+                        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+                    } else {
+                        print("Invalid URL string")
+                    }
+                } else if _category.contains("neighborhoods") {
+                    print("eho passed neighborhoods")
+                    OnboardingEndChoicesManager.shared.categoryForButton = ""
+                    DeepLinkManager.showWelcomeTwo()
                 }
             }
+            
         }
+        
         if config.isInterestsFromSetting {
             config.isInterestsFromSetting = false
             IHProgressHUD.dismiss()
@@ -226,17 +226,17 @@ class HomeV2ViewController: UIViewController {
             self.tabBarController?.present(navVC, animated: false)
             return
         }
+        
         if config.isOnboardingFromSetting {
             config.isOnboardingFromSetting = false
             IHProgressHUD.dismiss()
             let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
             navVC.modalPresentationStyle = .fullScreen
-            
-            
             self.tabBarController?.present(navVC, animated: false)
             return
         }
     }
+
     
     func testEventLastDay() {
         getEventAndLaunchPopup(eventId: "136208")
@@ -447,6 +447,7 @@ class HomeV2ViewController: UIViewController {
             }
         }
         self.ui_table_view.reloadData()
+        self.handleEnhancedOnboardingReturn()
         IHProgressHUD.dismiss()
     }
     
