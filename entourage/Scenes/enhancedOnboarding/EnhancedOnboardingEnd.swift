@@ -30,6 +30,7 @@ class EnhancedOnboardingEnd:UIViewController{
     var selectedCoordinate: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
+        self.view.isHidden = true
         let starAnimation = LottieAnimation.named("congrats_animation")
         ui_lottiview.animation = starAnimation
         ui_lottiview.loopMode = .loop
@@ -39,10 +40,7 @@ class EnhancedOnboardingEnd:UIViewController{
         configureUserLocationAndRadius()
         configureOrangeButton(ui_btn_go_event, withTitle: "enhanced_onboarding_button_title_event".localized)
         ui_btn_go_event.addTarget(self, action: #selector(onEventClick), for: .touchUpInside)
-        let config = EnhancedOnboardingConfiguration.shared
-        if config.isOnboardingFromSetting{
-            configureOrangeButton(ui_btn_go_event, withTitle: "button_title_for_re_onboarding_end".localized)
-        }
+        
         AnalyticsLoggerManager.logEvent(name: onboarding_end_view)
         if EnhancedOnboardingConfiguration.shared.preference != "contribution" {
             EventService.getSuggestFilteredEvents(
@@ -138,6 +136,13 @@ class EnhancedOnboardingEnd:UIViewController{
          ui_title_label.text = titleKey.localized
          ui_subtitle_label.text = subtitleKey.localized
          configureOrangeButton(ui_btn_go_event, withTitle: buttonTitleKey.localized)
+        let config = EnhancedOnboardingConfiguration.shared
+        if config.isOnboardingFromSetting{
+            config.isOnboardingFromSetting = false
+            configureOrangeButton(ui_btn_go_event, withTitle: "button_title_for_re_onboarding_end".localized)
+            OnboardingEndChoicesManager.shared.categoryForButton = ""
+        }
+        self.view.isHidden = false
      }
      
 

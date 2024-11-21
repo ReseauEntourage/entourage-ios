@@ -71,14 +71,14 @@ extension HighlightOverlayView {
         label.text = text
         label.textColor = .black
         label.numberOfLines = 0
-        label.textAlignment = .center
-        label.font = ApplicationTheme.getFontQuickSandBold(size: 13)
+        label.textAlignment = .left
+        label.font = ApplicationTheme.getFontNunitoRegular(size: 13)
 
         let orangeLabel = UILabel()
         orangeLabel.text = "J’ai compris"
         orangeLabel.textColor = UIColor.orange
         orangeLabel.font = ApplicationTheme.getFontNunitoRegular(size: 11)
-        orangeLabel.textAlignment = .center
+        orangeLabel.textAlignment = .left
 
         // Ajouter les labels à la bulle
         bubbleView.addSubview(label)
@@ -112,10 +112,9 @@ extension HighlightOverlayView {
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalToConstant: 30),
             imageView.heightAnchor.constraint(equalToConstant: 30),
-            imageView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: 0), // Décalée légèrement à gauche
-            imageView.bottomAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 8) // Distance ajustée entre l'image et la bulle
+            imageView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -4), // Décalée de 5 pixels à gauche
+            imageView.bottomAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 9) // Distance ajustée pour 1 pixel vers le bas
         ])
-
         // Contraintes pour le conteneur principal
         let targetFrame = targetView.convert(targetView.bounds, to: self)
         NSLayoutConstraint.activate([

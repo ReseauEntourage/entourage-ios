@@ -178,10 +178,11 @@ class HomeV2ViewController: UIViewController {
             self.sendOnboardingIntro()
             return
         }
-
+    
         if config.isFromOnboardingFromNormalWay {
             config.isFromOnboardingFromNormalWay = false
             IHProgressHUD.dismiss()
+            print("eho _category : " , OnboardingEndChoicesManager.shared.categoryForButton)
             if let _category = OnboardingEndChoicesManager.shared.categoryForButton {
                 if _category.contains("both_action") || _category.contains("no_event") {
                     if let _vc = AppState.getTopViewController() {
@@ -203,7 +204,11 @@ class HomeV2ViewController: UIViewController {
                     OnboardingEndChoicesManager.shared.categoryForButton = ""
                     let urlString = "https://kahoot.it/challenge/0354666?challenge-id=45371e80-fe50-4be5-afec-b37e3d50ede2_1729004998521"
                     if let url = URL(string: urlString) {
-                        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+                        if let _vc = AppState.getTopViewController() {
+                            if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
+                                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: _tabbar)
+                            }
+                        }
                     } else {
                         print("Invalid URL string")
                     }
