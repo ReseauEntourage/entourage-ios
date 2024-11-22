@@ -112,10 +112,7 @@ class EventListMainV2ViewController: UIViewController {
                 filterCell.ui_textfield.becomeFirstResponder()
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Des filtres ont été appliqués en fonction de vos préférences. Cliquez ici pour les modifier.")
-        }
-        
+
         comeFromDetail = false
     }
     
