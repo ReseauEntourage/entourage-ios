@@ -84,44 +84,44 @@ extension HighlightOverlayView {
         bubbleView.addSubview(label)
         bubbleView.addSubview(orangeLabel)
 
-        // Contraintes pour le premier label
+        // Contraintes pour le premier label (ajout de 20 au margin top)
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 8),
+            label.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 20), // 8 + 20 = 28
             label.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 8),
-            label.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -8)
+            label.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: 8)
         ])
 
-        // Contraintes pour le deuxième label
+        // Contraintes pour le deuxième label (ajout de 10 au margin top et 20 au margin bottom)
         orangeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            orangeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
+            orangeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10), // 8 + 10 = 18
             orangeLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 8),
-            orangeLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -8),
-            orangeLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -8)
+            orangeLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: 8),
+            orangeLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -20) // -8 - 20 = -28
         ])
 
-        // Contraintes pour la bulle (centrée dans le conteneur)
+        // Contraintes pour la bulle (occupant toute la largeur disponible)
         NSLayoutConstraint.activate([
-            bubbleView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10), // Descendre un peu la bulle
             bubbleView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            bubbleView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            bubbleView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            bubbleView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10)
         ])
 
-        // Contraintes pour l'image (en haut à droite du conteneur, légèrement décalée vers la gauche et chevauchée)
+        // Contraintes pour l'image (en haut à droite de la bulle)
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalToConstant: 30),
             imageView.heightAnchor.constraint(equalToConstant: 30),
-            imageView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -4), // Décalée de 5 pixels à gauche
-            imageView.bottomAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 9) // Distance ajustée pour 1 pixel vers le bas
+            imageView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -10),
+            imageView.bottomAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 10)
         ])
+
         // Contraintes pour le conteneur principal
         let targetFrame = targetView.convert(targetView.bounds, to: self)
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(greaterThanOrEqualTo: self.leadingAnchor, constant: 20), // Marges gauche
-            containerView.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -20), // Marges droite
-            containerView.centerXAnchor.constraint(equalTo: self.centerXAnchor), // Centré horizontalement
-            containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: targetFrame.maxY + 10) // Position en dessous de la vue cible
+            containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 6), // Marges uniformes
+            containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -6),
+            containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: targetFrame.maxY + 12)
         ])
     }
 }
