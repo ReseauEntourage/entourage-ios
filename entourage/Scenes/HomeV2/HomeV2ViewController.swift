@@ -323,6 +323,7 @@ class HomeV2ViewController: UIViewController {
                 self.present(vc, animated: true, completion: nil)
             } else {
                 print("ViewController with identifier 'NotificationDemandViewController' not found")
+            }
         }
     }
     
