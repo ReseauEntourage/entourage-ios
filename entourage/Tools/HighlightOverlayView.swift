@@ -77,8 +77,21 @@ extension HighlightOverlayView {
         let orangeLabel = UILabel()
         orangeLabel.text = "J’ai compris"
         orangeLabel.textColor = UIColor.orange
-        orangeLabel.font = ApplicationTheme.getFontNunitoRegular(size: 11)
+        orangeLabel.numberOfLines = 0
         orangeLabel.textAlignment = .left
+
+        // Appliquer la même police et taille que le texte principal
+        orangeLabel.font = ApplicationTheme.getFontNunitoRegular(size: 13)
+
+        // Ajouter un style souligné au texte orange
+        let attributedText = NSAttributedString(
+            string: orangeLabel.text ?? "",
+            attributes: [
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+                .foregroundColor: UIColor.orange
+            ]
+        )
+        orangeLabel.attributedText = attributedText
 
         // Ajouter les labels à la bulle
         bubbleView.addSubview(label)
@@ -87,18 +100,18 @@ extension HighlightOverlayView {
         // Contraintes pour le premier label (ajout de 20 au margin top)
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 20), // 8 + 20 = 28
+            label.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 20), // Margin top
             label.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 8),
-            label.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: 8)
+            label.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -8)
         ])
 
         // Contraintes pour le deuxième label (ajout de 10 au margin top et 20 au margin bottom)
         orangeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            orangeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10), // 8 + 10 = 18
+            orangeLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10), // Margin top
             orangeLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 8),
-            orangeLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: 8),
-            orangeLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -20) // -8 - 20 = -28
+            orangeLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -8),
+            orangeLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -20) // Margin bottom
         ])
 
         // Contraintes pour la bulle (occupant toute la largeur disponible)
@@ -125,3 +138,4 @@ extension HighlightOverlayView {
         ])
     }
 }
+
