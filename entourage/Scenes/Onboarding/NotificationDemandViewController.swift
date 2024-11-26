@@ -68,7 +68,7 @@ class NotificationDemandViewController: UIViewController {
                     self.goHomeMain()
                 }
             } else {
-                // Gérer le refus ici si nécessaire
+                self.goHomeMain()
             }
         }
     }

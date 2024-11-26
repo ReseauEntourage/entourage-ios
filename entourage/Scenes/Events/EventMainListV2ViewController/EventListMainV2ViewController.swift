@@ -97,9 +97,7 @@ class EventListMainV2ViewController: UIViewController {
         uiBtnFilter.addGestureRecognizer(filterTapGesture)
         //Confguration Post onboarding
         configurePostOnboarding()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Des filtres ont été appliqués en fonction de vos préférences. Cliquez ici pour les modifier.")
-//        }
+
 
     }
 

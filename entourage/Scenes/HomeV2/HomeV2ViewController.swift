@@ -124,8 +124,6 @@ class HomeV2ViewController: UIViewController {
 
     }
     
-
-    
     func showVotePopupIfNeeded() {
         let userDefaults = UserDefaults.standard
         let hasSeenVotePopup = userDefaults.bool(forKey: "hasSeenVotePopup")
