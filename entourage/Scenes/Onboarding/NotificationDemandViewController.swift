@@ -83,3 +83,10 @@ class NotificationDemandViewController: UIViewController {
         AppState.navigateToMainApp()
     }
 }
+
+class NotificationDisplayManager {
+    static let shared = NotificationDisplayManager()
+    var hasBeenDisplayed: Bool = false
+
+    private init() {}
+}

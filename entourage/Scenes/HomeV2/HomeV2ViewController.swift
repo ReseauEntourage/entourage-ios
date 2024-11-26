@@ -315,12 +315,14 @@ class HomeV2ViewController: UIViewController {
     }
     
     func presentNotificationDemandViewController() {
-        let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
-            vc.modalPresentationStyle = .overFullScreen // Optionnel
-            self.present(vc, animated: true, completion: nil)
-        } else {
-            print("ViewController with identifier 'NotificationDemandViewController' not found")
+        if NotificationDisplayManager.shared.hasBeenDisplayed == false {
+            NotificationDisplayManager.shared.hasBeenDisplayed = true
+            let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
+                vc.modalPresentationStyle = .overFullScreen // Optionnel
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                print("ViewController with identifier 'NotificationDemandViewController' not found")
         }
     }
     
