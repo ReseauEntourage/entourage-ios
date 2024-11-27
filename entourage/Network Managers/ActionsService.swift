@@ -78,34 +78,46 @@ struct ActionsService:ParsingDataCodable {
 
 
     
-    static func cancelAction(isContrib:Bool, actionId:Int, isClosedOk:Bool, message:String?, completion: @escaping (_ action:Action?, _ error:EntourageNetworkError?) -> Void) {
-        guard let token = UserDefaults.token else {return}
-        var endpoint = isContrib ? kAPIContribUpdate : kAPISolicitationUpdate
-        endpoint = String.init(format: endpoint, actionId, token)
-        //TODO: a ajouter les 2 params
+    static func cancelAction(isContrib: Bool, actionId: Int, isClosedOk: Bool, message: String?, completion: @escaping (_ action: Action?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {
+            Logger.print("Error: Token is nil")
+            return
+        }
         
-        var parameters: [String:Any] = ["outcome" : isClosedOk]
+        // Conversion de l'ID en String
+        let actionIdString = String(actionId)
+        
+        // Utilisation uniquement de %@ dans le format
+        let endpointFormat = isContrib ? "contributions/%@?token=%@" : "solicitations/%@?token=%@"
+        let endpoint = String(format: endpointFormat, actionIdString, token)
+        
+        var parameters: [String: Any] = ["outcome": isClosedOk]
         if let message = message {
             parameters["close_message"] = message
         }
         
-        let params = isContrib ? [_contribution : parameters] : [_solicitation : parameters]
+        let params = isContrib ? [_contribution: parameters] : [_solicitation: parameters]
         
-        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: [])
-        
-        Logger.print("***** Params delete Action : \(params)")
-        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
-            Logger.print("Response delete action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
-            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
-                Logger.print("***** error delete action - \(error)")
-                DispatchQueue.main.async { completion(nil, error) }
-                return
+        do {
+            let bodyData = try JSONSerialization.data(withJSONObject: params, options: [])
+            Logger.print("***** Params delete Action: \(params)")
+            
+            NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+                Logger.print("Response delete action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode))")
+                guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                    Logger.print("***** Error delete action: \(String(describing: error))")
+                    DispatchQueue.main.async { completion(nil, error) }
+                    return
+                }
+                let key = isContrib ? _contribution : _solicitation
+                let action: Action? = self.parseData(data: data, key: key)
+                DispatchQueue.main.async { completion(action, nil) }
             }
-            let key = isContrib ? _contribution : _solicitation
-            let action:Action? = self.parseData(data: data,key: key)
-            DispatchQueue.main.async { completion(action, nil) }
+        } catch {
+            Logger.print("Error serializing parameters: \(error)")
         }
     }
+
     
     static func reportActionPost(isContrib:Bool, actionId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
