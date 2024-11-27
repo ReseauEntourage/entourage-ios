@@ -79,11 +79,12 @@ class NotificationDemandViewController: UIViewController {
 
     @objc func didTapDisableNotif() {
         // L'utilisateur refuse explicitement les notifications
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            AppState.navigateToMainApp()
+        }
     }
     
     func goHomeMain() {
-        AppState.navigateToMainApp()
     }
 }
 
