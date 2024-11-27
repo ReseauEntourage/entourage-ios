@@ -52,11 +52,15 @@ class NotificationDemandViewController: UIViewController {
                 case .authorized, .provisional:
                     // Notifications déjà autorisées, ferme la vue
                     self?.goHomeMain()
-                case .denied, .notDetermined:
-                    // L'utilisateur doit choisir, ne rien faire
+                case .denied:
+                    // Notifications refusées explicitement
+                    self?.showRefusalAlert()
+                case .notDetermined:
+                    // L'utilisateur doit encore faire un choix
                     break
                 @unknown default:
-                    break
+                    // Cas inattendu
+                    self?.goHomeMain()
                 }
             }
         }
@@ -66,13 +70,12 @@ class NotificationDemandViewController: UIViewController {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, error in
             DispatchQueue.main.async {
                 if granted {
-                    // Autorisation accordée, ferme la vue
+                    // Autorisation accordée
                     UIApplication.shared.registerForRemoteNotifications()
                     self?.goHomeMain()
                 } else {
-                    // Autorisation refusée, reste sur l'écran
-                    print("Notifications denied: \(String(describing: error))")
-                    self?.goHomeMain()
+                    // Autorisation refusée ou erreur
+                    self?.showRefusalAlert()
                 }
             }
         }
@@ -80,15 +83,29 @@ class NotificationDemandViewController: UIViewController {
 
     @objc func didTapDisableNotif() {
         // L'utilisateur refuse explicitement les notifications
+        goHomeMain()
+    }
+    
+    func showRefusalAlert() {
+        // Alerte pour informer l'utilisateur que les notifications sont désactivées
+        let alert = UIAlertController(
+            title: "Notifications désactivées",
+            message: "Pour une meilleure expérience, activez les notifications dans les paramètres.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            self?.goHomeMain()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func goHomeMain() {
+        // Navigation vers la page principale de l'application
         self.dismiss(animated: true) {
             AppState.navigateToMainApp()
         }
     }
-    
-    func goHomeMain() {
-    }
 }
-
 class NotificationDisplayManager {
     static let shared = NotificationDisplayManager()
     var hasBeenDisplayed: Bool = false
