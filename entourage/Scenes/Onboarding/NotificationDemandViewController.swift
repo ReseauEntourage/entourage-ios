@@ -72,6 +72,7 @@ class NotificationDemandViewController: UIViewController {
                 } else {
                     // Autorisation refusée, reste sur l'écran
                     print("Notifications denied: \(String(describing: error))")
+                    self?.goHomeMain()
                 }
             }
         }
