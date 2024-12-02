@@ -180,7 +180,17 @@ class ConversationDetailMessagesViewController: UIViewController {
     //MARK: Use to show/hide view new conversation ;)
     func checkNewConv() {
         if !isOneToOne {return}
-        
+        for message in self.messages{
+            if let _user = message.user{
+                if let _role = _user.roles{
+                    print("roles : " ,_role)
+                    if _role.contains("Équipe Entourage"){
+                        hasToShowFirstMessage = false
+                    }
+                    
+                }
+            }
+        }
         if  hasToShowFirstMessage {
             showViewNew()
         }

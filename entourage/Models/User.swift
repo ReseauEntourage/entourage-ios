@@ -208,6 +208,7 @@ struct UserLightNeighborhood: Codable {
     var partner:Partner? = nil
     var partnerRoleTitle:String? = nil
     var role:String? = nil
+    var roles:[String]? = nil
     var groupRole:String? = nil
     var communityRoles:[String]? = nil
     var status:String? = nil
@@ -230,6 +231,7 @@ struct UserLightNeighborhood: Codable {
         case message
         case partner
         case role
+        case roles
         case groupRole = "group_role"
         case sid = "id"
         case communityRoles = "community_roles"
