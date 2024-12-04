@@ -194,10 +194,9 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dY5-Cv-aJw">
-                        <rect key="frame" x="178" y="118.5" width="130" height="21"/>
+                        <rect key="frame" x="178" y="108" width="140" height="42"/>
                         <color key="backgroundColor" name="orange_medium"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="130" id="9J2-IW-LhM"/>
                             <constraint firstAttribute="height" constant="42" id="VTj-6C-R3P"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
@@ -217,7 +216,6 @@
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
-                    <constraint firstItem="dY5-Cv-aJw" firstAttribute="leading" secondItem="KPl-1r-R8C" secondAttribute="trailing" constant="10" id="1Bl-7O-Gjk"/>
                     <constraint firstItem="NqP-dj-PlY" firstAttribute="top" secondItem="ufu-cQ-0kZ" secondAttribute="bottom" constant="6" id="CdJ-Fn-Xbt"/>
                     <constraint firstItem="NqP-dj-PlY" firstAttribute="leading" secondItem="ufu-cQ-0kZ" secondAttribute="leading" id="DeK-dk-QXa"/>
                     <constraint firstAttribute="bottom" secondItem="WJR-9r-zef" secondAttribute="bottom" constant="28" id="G0N-Dg-pdP"/>
@@ -229,6 +227,7 @@
                     <constraint firstItem="IDe-ts-1MI" firstAttribute="top" secondItem="NqP-dj-PlY" secondAttribute="bottom" constant="20" id="V1R-V0-XBu"/>
                     <constraint firstItem="IDe-ts-1MI" firstAttribute="leading" secondItem="NqP-dj-PlY" secondAttribute="leading" id="Vcr-eH-f5r"/>
                     <constraint firstItem="WJR-9r-zef" firstAttribute="leading" secondItem="N82-O7-OMh" secondAttribute="leading" id="bEF-mz-hOg"/>
+                    <constraint firstItem="dY5-Cv-aJw" firstAttribute="leading" secondItem="Gl5-gY-SZu" secondAttribute="leading" constant="178" id="dws-72-mB4"/>
                     <constraint firstItem="ufu-cQ-0kZ" firstAttribute="leading" secondItem="Gl5-gY-SZu" secondAttribute="leading" constant="28" id="eMD-C0-0Cs"/>
                     <constraint firstAttribute="trailing" secondItem="NqP-dj-PlY" secondAttribute="trailing" constant="28" id="ein-lQ-RFd"/>
                     <constraint firstAttribute="trailing" secondItem="ufu-cQ-0kZ" secondAttribute="trailing" constant="28" id="exL-5C-00d"/>
@@ -236,12 +235,14 @@
                     <constraint firstItem="H48-1Z-fiF" firstAttribute="leading" secondItem="IDe-ts-1MI" secondAttribute="leading" id="qp4-mP-g05"/>
                     <constraint firstAttribute="trailing" secondItem="N82-O7-OMh" secondAttribute="trailing" constant="28" id="qtr-PT-d3G"/>
                     <constraint firstItem="ufu-cQ-0kZ" firstAttribute="top" secondItem="Gl5-gY-SZu" secondAttribute="top" constant="28" id="sFV-c4-WH2"/>
+                    <constraint firstItem="dY5-Cv-aJw" firstAttribute="width" secondItem="KPl-1r-R8C" secondAttribute="width" id="vXV-su-YlA"/>
                     <constraint firstItem="N82-O7-OMh" firstAttribute="top" secondItem="H48-1Z-fiF" secondAttribute="bottom" constant="4" id="xBA-ew-WVS"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="btn_join" destination="KPl-1r-R8C" id="7GS-1n-Mo5"/>
+                <outlet property="contraint_share_left_counstraint" destination="dws-72-mB4" id="kTN-lS-zta"/>
                 <outlet property="ui_btn_share" destination="dY5-Cv-aJw" id="68c-qN-qTt"/>
                 <outlet property="ui_constraint_listview_top_margin" destination="Sc7-FM-Cf0" id="cBZ-Tw-ET8"/>
                 <outlet property="ui_img_bt_join" destination="BAJ-31-kdt" id="2Pd-xd-PAh"/>

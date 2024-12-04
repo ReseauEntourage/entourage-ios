@@ -134,6 +134,7 @@ class NeighborhoodPostAddPhotoViewController: BasePopViewController {
         alertVC.delegate = self
         alertVC.show()
     }
+    
 }
 
 //MARK: - MJAlertControllerDelegate -

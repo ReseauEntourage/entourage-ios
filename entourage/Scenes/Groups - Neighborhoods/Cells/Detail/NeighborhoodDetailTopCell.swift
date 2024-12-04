@@ -25,7 +25,8 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     @IBOutlet weak var ui_taglist_view: TagListView!
     @IBOutlet weak var ui_btn_share: UIButton?
     @IBOutlet weak var btn_join: UIButton!
-
+    @IBOutlet weak var contraint_share_left_counstraint: NSLayoutConstraint!
+    
     weak var delegate: NeighborhoodDetailTopCellDelegate? = nil
 
     let topMarginConstraint: CGFloat = 24
@@ -77,6 +78,7 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
         ui_btn_share?.setTitle("neighborhood_add_post_send_button".localized, for: .normal)
         ui_taglist_view.isHidden = true
+        configureWhiteButton(self.ui_btn_share!, withTitle: "neighborhood_add_post_send_button".localized)
     }
 
     private func truncateAboutGroup(_ text: String) -> NSAttributedString {
@@ -136,11 +138,26 @@ class NeighborhoodDetailTopCell: UITableViewCell {
             }
         }
     }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 21
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
 
     func populateCell(neighborhood: Neighborhood?, isFollowingGroup: Bool, isFromOnlyDetail: Bool, delegate: NeighborhoodDetailTopCellDelegate) {
         if let _isMember = neighborhood?.isMember {
             if _isMember {
-                btn_join.setVisibilityGone()
+                contraint_share_left_counstraint.constant = 28
+                btn_join.isHidden = true
+            }else{
+                contraint_share_left_counstraint.constant = 178
+                btn_join.isHidden = false
             }
         }
         self.delegate = delegate

@@ -100,10 +100,22 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
         //TODO : double the ressource here for event top cell
         ui_btn_share.setTitle("neighborhood_add_post_send_button".localized, for: .normal)
+        configureWhiteButton(self.ui_btn_share, withTitle: "neighborhood_add_post_send_button".localized)
     }
     
     @objc func onShareBtnClick(){
         delegate?.share()
+    }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 21
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     func populateCell(event:Event?, delegate:EventDetailTopCellDelegate , isEntourageEvent:Bool) {
