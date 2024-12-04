@@ -62,6 +62,7 @@ class OnboardingStartViewController: UIViewController {
         ui_bt_previous.setTitleColor(.appOrange, for: .normal)
         ui_bt_previous.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 18)
         ui_bt_previous.setTitle("onboard_bt_back".localized, for: .normal)
+        configureWhiteButton(ui_bt_previous, withTitle: "onboard_bt_back".localized)
         
         ui_bt_next.layer.cornerRadius = ui_bt_next.frame.height / 2
         ui_bt_next.backgroundColor = .appOrangeLight
@@ -91,6 +92,17 @@ class OnboardingStartViewController: UIViewController {
             self.pageViewController = vc
             self.pageViewController?.parentDelegate = self
         }
+    }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 21
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     func countValidate(){

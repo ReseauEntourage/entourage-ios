@@ -108,7 +108,19 @@ class ActionCreateMainViewController: UIViewController {
         else {
             AnalyticsLoggerManager.logEvent(name: Help_create_demand_chart)
         }
-        
+        configureWhiteButton(ui_bt_previous, withTitle: "action_create_group_bt_back".localized)
+
+    }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     //MARK: - Network -
