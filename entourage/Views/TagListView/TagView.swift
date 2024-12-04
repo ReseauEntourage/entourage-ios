@@ -105,6 +105,9 @@ open class TagView: UIButton {
             layer.borderColor = borderColor?.cgColor
             setTitleColor(textColor, for: UIControl.State())
         }
+        backgroundColor = .appBeigeLighter
+        layer.borderColor = borderColor?.cgColor
+        setTitleColor(.appOrange, for: UIControl.State())
     }
     
     override open var isHighlighted: Bool {
