@@ -26,7 +26,11 @@ class ActionCreateValidateViewController: UIViewController {
         
         ui_bt_post.layer.cornerRadius = ui_bt_post.frame.height / 2
         ui_bt_post.backgroundColor = .appOrange
-        ui_bt_post.setTitle("action_create_close_button".localized, for: .normal)
+        if isContrib {
+            ui_bt_post.setTitle("action_create_close_button_contrib".localized, for: .normal)
+        }else{
+            ui_bt_post.setTitle("action_create_close_button_demand".localized, for: .normal)
+        }
         
         ui_bt_post.titleLabel?.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         

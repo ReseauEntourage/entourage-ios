@@ -1142,6 +1142,8 @@
 
 //"//Create action end" = "nan";
 "action_create_close_button" = "Finish";
+"action_create_close_button_demand" = "View my request";
+"action_create_close_button_contrib" = "View my contribution";
 "contribCreateEnd_title" = "Your contribution has been created!";
 "contribCreateEnd_subtitle" = "Congratulations, you have just created a new contribution. To make it more visible, talk about it in your groups!";
 "solicitationCreateEnd_title" = "Your request has been created!";
@@ -1403,7 +1405,7 @@
 "home_v2_action_type_social" = "Social";
 "home_v2_action_type_clothes" = "Clothes";
 "home_v2_action_type_equipment" = "Equipment";
-"home_v2_action_type_hygiène" = "Hygiene";
+"home_v2_action_type_hygiène" = "Produit d'hygiene";
 "home_v2_action_type_services" = "Services";
 "home_v2_action_type_other" = "Others";
 

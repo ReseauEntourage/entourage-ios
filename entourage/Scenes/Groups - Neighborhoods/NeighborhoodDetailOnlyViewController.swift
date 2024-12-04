@@ -156,6 +156,11 @@ extension NeighborhoodDetailOnlyViewController: UITableViewDataSource, UITableVi
 
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailOnlyViewController: NeighborhoodDetailTopCellDelegate {
+    func updateHeightCell() {
+        self.ui_tableview.beginUpdates()
+        self.ui_tableview.endUpdates()
+    }
+    
     func shareGroup() {
         var stringUrl = "https://"
         var title = ""

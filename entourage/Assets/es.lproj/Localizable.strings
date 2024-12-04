@@ -1156,7 +1156,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_5" = "Garantizo que mis acciones no contienen ningún dato personal (apellido, número de teléfono, dirección precisa, etc.) que permita identificar y localizar con precisión a una persona, ni ningún dato sensible (médico, jurídico, etc.).";
 
 //Create action end
-"action_create_close_button" = "Para terminar";
+"action_create_close_button" = "Finalizar";
+"action_create_close_button_demand" = "Ver mi solicitud";
+"action_create_close_button_contrib" = "Ver mi contribución";
 "contribCreateEnd_title" = "¡Tu contribución ha sido creada!";
 "contribCreateEnd_subtitle" = "Felicitaciones, acaba de crear una nueva contribución. Para hacerlo más visible, ¡hablad de ello en vuestros grupos!";
 "solicitationCreateEnd_title" = "¡Tu solicitud ha sido creada!";

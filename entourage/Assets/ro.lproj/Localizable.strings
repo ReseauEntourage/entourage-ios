@@ -1160,7 +1160,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_5" = "Garantez că acțiunile mele nu conțin date personale (nume, număr de telefon, adresă precisă etc.), permițând identificarea și localizarea precisă a unei persoane și nici date sensibile (medicale, juridice etc.).";
 
 //Create action end
-"action_create_close_button" = "Pentru a termina";
+"action_create_close_button" = "Finalizați";
+"action_create_close_button_demand" = "Vezi solicitarea mea";
+"action_create_close_button_contrib" = "Vezi contribuția mea";
 "contribCreateEnd_title" = "Contribuția ta a fost creată!";
 "contribCreateEnd_subtitle" = "Felicitări, tocmai ați creat o nouă contribuție. Pentru a-l face mai vizibil, vorbiți despre el în grupurile voastre!";
 "solicitationCreateEnd_title" = "Solicitarea dvs. a fost creată!";

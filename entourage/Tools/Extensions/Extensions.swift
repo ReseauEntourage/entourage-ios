@@ -338,3 +338,16 @@ extension UIView {
         })
     }
 }
+
+extension String {
+    func localizedStyled(color: UIColor = .appOrange, font: UIFont = UIFont.systemFont(ofSize: 14), underline: Bool = true) -> NSAttributedString {
+        var attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: color,
+            .font: font
+        ]
+        if underline {
+            attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue
+        }
+        return NSAttributedString(string: NSLocalizedString(self, comment: ""), attributes: attributes)
+    }
+}

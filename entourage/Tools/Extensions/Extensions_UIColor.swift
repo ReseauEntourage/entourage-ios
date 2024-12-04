@@ -66,6 +66,9 @@ extension UIColor {
     static var appBeige: UIColor {
         return UIColor(named: "Beige") ?? .red
     }
+    static var appBeigeLighter: UIColor {
+        return UIColor(named: "beige_lighter") ?? .red
+    }
     static var appBleu: UIColor {
         return UIColor(named: "Bleu_2nd") ?? .red
     }

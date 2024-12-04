@@ -1161,9 +1161,11 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 //Create action end
 "action_create_close_button" = "Terminer";
-"contribCreateEnd_title" = "Votre contribution à bien été créée !";
+"action_create_close_button_demand" = "Voir ma demande";
+"action_create_close_button_contrib" = "Voir ma contribution";
+"contribCreateEnd_title" = "Votre contribution a bien été créée !";
 "contribCreateEnd_subtitle" = "Félicitations, vous venez de créer une nouvelle contribution. Pour la rendre plus visible parlez-en sur vos groupes ! ";
-"solicitationCreateEnd_title" = "Votre demande à bien été créée !";
+"solicitationCreateEnd_title" = "Votre demande a bien été créée !";
 "solicitationCreateEnd_subtitle" = "Félicitations, vous venez de créer une nouvelle demande. Pour la rendre plus visible parlez-en sur vos groupes ! ";
 
 
@@ -1425,7 +1427,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_action_type_social" = "Social";
 "home_v2_action_type_clothes" = "Vêtements";
 "home_v2_action_type_equipment" = "Equipement";
-"home_v2_action_type_hygiène" = "Hygiène";
+"home_v2_action_type_hygiène" = "Produit d'hygiène";
 "home_v2_action_type_services" = "Services";
 "home_v2_action_type_other" = "Autres";
 
@@ -1462,7 +1464,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_equipment_name" = "Équipement";
 "action_equipment_subname" = "téléphone, sac de couchage...";
 
-"action_hygiene_name" = "Hygiène";
+"action_hygiene_name" = "Produit d'hygiène";
 "action_hygiene_subname" = "savon, protection sanitaire...";
 
 "interest_activites" = "Activités Manuelles";

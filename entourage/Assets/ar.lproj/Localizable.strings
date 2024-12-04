@@ -1151,7 +1151,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_5" = "أضمن أن أفعالي لا تحتوي على أي بيانات شخصية (الاسم الأخير، رقم الهاتف، العنوان الدقيق، وما إلى ذلك)، مما يسمح بتحديد هوية الشخص وتحديد موقعه بدقة، ولا أي بيانات حساسة (طبية، قانونية، وما إلى ذلك).";
 
 //Create action end
-"action_create_close_button" = "حتى النهاية";
+"action_create_close_button" = "إنهاء";
+"action_create_close_button_demand" = "عرض طلبي";
+"action_create_close_button_contrib" = "عرض مساهمتي";
 "contribCreateEnd_title" = "تم إنشاء مساهمتك!";
 "contribCreateEnd_subtitle" = "تهانينا، لقد قمت للتو بإنشاء مساهمة جديدة. لجعلها أكثر وضوحا، تحدثوا عنها في مجموعاتكم!";
 "solicitationCreateEnd_title" = "تم إنشاء طلبك!";

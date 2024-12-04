@@ -1155,7 +1155,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_5" = "Ich garantiere, dass meine Handlungen keine personenbezogenen Daten (Nachname, Telefonnummer, genaue Adresse usw.) enthalten, die eine genaue Identifizierung und Lokalisierung einer Person ermöglichen, sowie keine sensiblen Daten (medizinische, rechtliche usw.).";
 
 //Create action end
-"action_create_close_button" = "Beenden";
+"action_create_close_button" = "Fertigstellen";
+"action_create_close_button_demand" = "Meine Anfrage anzeigen";
+"action_create_close_button_contrib" = "Meine Beitrag anzeigen";
 "contribCreateEnd_title" = "Ihr Beitrag wurde erstellt!";
 "contribCreateEnd_subtitle" = "Herzlichen Glückwunsch, Sie haben gerade einen neuen Beitrag erstellt. Um es sichtbarer zu machen, sprechen Sie in Ihren Gruppen darüber!";
 "solicitationCreateEnd_title" = "Ihre Anfrage wurde erstellt!";
@@ -1418,7 +1420,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_action_type_social" = "Sozial";
 "home_v2_action_type_clothes" = "Kleidung";
 "home_v2_action_type_equipment" = "Ausrüstung";
-"home_v2_action_type_hygiène" = "Hygiene";
+"home_v2_action_type_hygiène" = "Produit d'hygiène";
 "home_v2_action_type_services" = "Dienstleistungen";
 "home_v2_action_type_other" = "Andere";
 

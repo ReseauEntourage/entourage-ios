@@ -1156,7 +1156,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_5" = "Я гарантую, що мої дії не містять будь-яких персональних даних (прізвища, номера телефону, точної адреси тощо), які дозволяють точно ідентифікувати та знайти особу, а також будь-яких конфіденційних даних (медичних, юридичних тощо).";
 
 //Create action end
-"action_create_close_button" = "До кінця";
+"action_create_close_button" = "Завершити";
+"action_create_close_button_demand" = "Переглянути мою заявку";
+"action_create_close_button_contrib" = "Переглянути мій внесок";
 "contribCreateEnd_title" = "Ваш внесок створено!";
 "contribCreateEnd_subtitle" = "Вітаємо, ви щойно створили новий внесок. Щоб зробити це більш помітним, обговоріть це у своїх групах!";
 "solicitationCreateEnd_title" = "Ваш запит створено!";

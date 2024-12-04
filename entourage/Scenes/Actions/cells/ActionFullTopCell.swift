@@ -50,12 +50,13 @@ class ActionFullTopCell: UITableViewCell {
         
         for _v in ui_view_tags {
             _v.layer.cornerRadius = _v.frame.height / 2
-            _v.layer.borderColor = UIColor.appOrange.cgColor
+            _v.layer.borderColor = UIColor.appBeigeLighter.cgColor
+            _v.backgroundColor = UIColor.appBeigeLighter
             _v.layer.borderWidth = 1
         }
         
         for _t in ui_title_tags {
-            _t.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .appOrange))
+            _t.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontQuickSandBold(size: 13), color: .appOrange))
         }
         
         ui_title_main.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontQuickSandBold(size: 15), color: .black))
@@ -183,25 +184,23 @@ class ActionFullTopCell: UITableViewCell {
             for _t in ui_title_tags {
                 _t.text = nil
             }
-            for _iv in ui_img_tags {
-                _iv.image = nil
-            }
+//            for _iv in ui_img_tags {
+//                _iv.image = nil
+//            }
             return
         }
         ActionCreateStateManager.shared.selectedSectionKey = sectionName
-
-        
         for _t in ui_title_tags {
             _t.text = Metadatas.sharedInstance.getTagSectionName(key: sectionName)?.name
         }
         
-        for _iv in ui_img_tags {
-            if let imgStr = Metadatas.sharedInstance.getTagSectionImageName(key: sectionName) {
-                _iv.image = UIImage.init(named: imgStr)
-            }
-            else {
-                _iv.image = nil
-            }
-        }
+//        for _iv in ui_img_tags {
+//            if let imgStr = Metadatas.sharedInstance.getTagSectionImageName(key: sectionName) {
+//                _iv.image = UIImage.init(named: imgStr)
+//            }
+//            else {
+//                _iv.image = nil
+//            }
+//        }
     }
 }

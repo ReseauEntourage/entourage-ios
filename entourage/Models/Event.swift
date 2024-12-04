@@ -747,15 +747,15 @@ class TagsUtils {
         case "services":
             return NSLocalizedString("action_services_subname".localized, comment: "")
             
-        case "café, activité...":
+        case "Café, activité...":
             return NSLocalizedString("action_social_subname".localized, comment: "")
-        case "lessive, impression de documents...":
+        case "Lessive, impression de documents...":
             return NSLocalizedString("action_services_subname".localized, comment: "")
-        case "chaussures, manteau...":
+        case "Chaussures, manteau...":
             return NSLocalizedString("action_clothes_subname".localized, comment: "")
-        case "téléphone, duvet...":
+        case "Téléphone, duvet...":
             return NSLocalizedString("action_equipment_subname".localized, comment: "")
-        case "savon, protection hygiénique...":
+        case "Savon, protection hygiénique...":
             return NSLocalizedString("action_hygiene_subname".localized, comment: "")
             
         default:

@@ -552,7 +552,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 let isMember = neighborhood.isMember
-                let identifier = isMember ? NeighborhoodDetailTopMemberCell.identifier : NeighborhoodDetailTopCell.identifier
+                let identifier = isMember ? NeighborhoodDetailTopCell.identifier : NeighborhoodDetailTopCell.identifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
                 if isMember, let memberCell = cell as? NeighborhoodDetailTopMemberCell {
                     memberCell.populateCell(neighborhood: neighborhood, isFollowingGroup: true, isFromOnlyDetail: false, delegate: self)
@@ -706,6 +706,11 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
 
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
+    func updateHeightCell() {
+        self.ui_tableview.beginUpdates()
+        self.ui_tableview.endUpdates()
+    }
+    
     func shareGroup() {
         var stringUrl = "https://"
         var title = ""
