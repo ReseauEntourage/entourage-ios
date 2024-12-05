@@ -1151,7 +1151,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_1_title" = "Entraide";
 "action_charte_1" = "L’application permet de créer de nouvelles rencontres entre voisins et de favoriser des temps d’échanges. Les aides à distance (drive, livraison, bon cadeau, cagnotte…) ne sont pas autorisées.";
 "action_charte_2_title" = "Contributions & demandes";
-"action_charte_2" = "Je peux demander ou proposer des biens matériels (équipement, vêtement…), des services (lessive, impression de documents…) et des temps de partage (café, activité…).\nJe ne peux pas demander ou proposer une aide financière, un hébergement ou une aide alimentaire. Mais si c’est mon besoin, je peux contacter le modérateur qui m’orientera.";
+"action_charte_2" = "Je peux demander ou proposer des biens matériels (équipement, vêtement…), des services (Lessive, impression de documents…) et des temps de partage (Café, activité…).\nJe ne peux pas demander ou proposer une aide financière, un hébergement ou une aide alimentaire. Mais si c’est mon besoin, je peux contacter le modérateur qui m’orientera.";
 "action_charte_3_title" = "Consentement";
 "action_charte_3" = "Lorsque je publie une demande pour une tierce personne, je m’assure d’obtenir son accord au préalable. ";
 "action_charte_4_title" = "Non discrimination";
@@ -1224,7 +1224,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_CGU_1_title" = "Entraide";
 "action_CGU_1" = "L’application permet de créer de nouvelles rencontres entre voisins et de favoriser des temps d’échanges. Les aides à distance (drive, livraison, bon cadeau, cagnotte…) ne sont pas autorisées.";
 "action_CGU_2_title" = "Contributions & demandes";
-"action_CGU_2" = "Je peux demander ou proposer des biens matériels (équipement, vêtement…), des services (lessive, impression de documents…) et des temps de partage (café, activité…). Je ne peux pas demander ou proposer une aide financière, un hébergement ou une aide alimentaire. Mais si c’est mon besoin, je peux contacter le modérateur qui m’orientera.";
+"action_CGU_2" = "Je peux demander ou proposer des biens matériels (équipement, vêtement…), des services (Lessive, impression de documents…) et des temps de partage (Café, activité…). Je ne peux pas demander ou proposer une aide financière, un hébergement ou une aide alimentaire. Mais si c’est mon besoin, je peux contacter le modérateur qui m’orientera.";
 "action_CGU_3_title" = "Consentement";
 "action_CGU_3" = "Lorsque je publie une demande pour une tierce personne, je m’assure d’obtenir son accord au préalable. ";
 "action_CGU_4_title" = "Non discrimination";
@@ -1453,19 +1453,19 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "translation_bottom_fragment_main_title" = "Traduction";
 
 "action_social_name" = "Temps de partage";
-"action_social_subname" = "café, activité...";
+"action_social_subname" = "Café, activité...";
 
 "action_services_name" = "Service";
-"action_services_subname" = "lessive, impression de documents...";
+"action_services_subname" = "Lessive, impression de documents...";
 
 "action_clothes_name" = "Vêtements";
-"action_clothes_subname" = "chaussures, manteau...";
+"action_clothes_subname" = "Chaussures, manteau...";
 
 "action_equipment_name" = "Équipement";
-"action_equipment_subname" = "téléphone, sac de couchage...";
+"action_equipment_subname" = "Téléphone, sac de couchage...";
 
 "action_hygiene_name" = "Produit d'hygiène";
-"action_hygiene_subname" = "savon, protection sanitaire...";
+"action_hygiene_subname" = "Savon, protection sanitaire...";
 
 "interest_activites" = "Activités Manuelles";
 "interest_animaux" = "Animaux";
