@@ -925,30 +925,22 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptz-cm-Fcz">
-                                                                    <rect key="frame" x="275" y="12" width="83" height="30"/>
+                                                                    <rect key="frame" x="285" y="12" width="73" height="30"/>
                                                                     <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_action_clothes" translatesAutoresizingMaskIntoConstraints="NO" id="ZWk-eH-Ahh">
-                                                                            <rect key="frame" x="12" y="8" width="14" height="14"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="14" id="nXH-mz-aqo"/>
-                                                                                <constraint firstAttribute="height" constant="14" id="oY7-PJ-I7J"/>
-                                                                            </constraints>
-                                                                        </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRd-Tk-Vmq">
-                                                                            <rect key="frame" x="30" y="6" width="33" height="18"/>
+                                                                            <rect key="frame" x="20" y="6" width="33" height="18"/>
+                                                                            <color key="backgroundColor" name="beige_lighter"/>
                                                                             <fontDescription key="fontDescription" name="NunitoSans-SemiBold" family="Nunito Sans" pointSize="13"/>
-                                                                            <color key="textColor" name="orange_light"/>
+                                                                            <color key="textColor" name="orange_app"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    <color key="backgroundColor" name="beige_lighter"/>
                                                                     <constraints>
                                                                         <constraint firstItem="DRd-Tk-Vmq" firstAttribute="centerY" secondItem="ptz-cm-Fcz" secondAttribute="centerY" id="4xJ-n5-bjm"/>
                                                                         <constraint firstAttribute="height" constant="30" id="8SH-mc-IYf"/>
-                                                                        <constraint firstItem="ZWk-eH-Ahh" firstAttribute="centerY" secondItem="ptz-cm-Fcz" secondAttribute="centerY" id="BXg-tL-iXh"/>
-                                                                        <constraint firstItem="DRd-Tk-Vmq" firstAttribute="leading" secondItem="ZWk-eH-Ahh" secondAttribute="trailing" constant="4" id="BkN-xA-5u5"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="DRd-Tk-Vmq" secondAttribute="trailing" constant="20" id="DRL-VJ-cuk"/>
-                                                                        <constraint firstItem="ZWk-eH-Ahh" firstAttribute="leading" secondItem="ptz-cm-Fcz" secondAttribute="leading" constant="12" id="ua8-9K-2Do"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="DRd-Tk-Vmq" secondAttribute="trailing" constant="20" symbolic="YES" id="JSX-QK-jcc"/>
+                                                                        <constraint firstItem="DRd-Tk-Vmq" firstAttribute="leading" secondItem="ptz-cm-Fcz" secondAttribute="leading" constant="20" symbolic="YES" id="pwU-YX-0cW"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -1040,7 +1032,6 @@
                                             <outletCollection property="ui_view_tags" destination="65b-BG-yr7" collectionClass="NSMutableArray" id="xXy-wc-VJI"/>
                                             <outletCollection property="ui_title_tags" destination="DRd-Tk-Vmq" collectionClass="NSMutableArray" id="ggE-fo-p6F"/>
                                             <outletCollection property="ui_title_tags" destination="iQn-ho-Zel" collectionClass="NSMutableArray" id="HYZ-mC-bB8"/>
-                                            <outletCollection property="ui_img_tags" destination="ZWk-eH-Ahh" collectionClass="NSMutableArray" id="TgE-cS-djA"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellAuthor" rowHeight="190" id="Jsf-HO-cVG" customClass="ActionFullAuthorCell" customModule="Ent_Beta" customModuleProvider="target">
@@ -1070,12 +1061,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aS1-wI-iWa">
-                                                    <rect key="frame" x="28" y="96" width="121" height="30"/>
+                                                    <rect key="frame" x="28" y="96" width="30" height="30"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="754" image="ic_next_orange" translatesAutoresizingMaskIntoConstraints="NO" id="0AM-9w-2gn">
-                                                            <rect key="frame" x="112" y="8.5" width="9" height="13"/>
-                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Charte éthique" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8XF-ew-b1e">
                                                             <rect key="frame" x="0.0" y="5" width="104" height="20.5"/>
                                                             <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
@@ -1083,7 +1070,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAr-34-tOF">
-                                                            <rect key="frame" x="0.0" y="0.0" width="121" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="hek-8L-t6J"/>
                                                             </constraints>
@@ -1099,15 +1086,12 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="0AM-9w-2gn" secondAttribute="trailing" id="6Ad-Pv-VXA"/>
                                                         <constraint firstAttribute="height" constant="30" id="7BD-m5-YIF"/>
                                                         <constraint firstAttribute="trailing" secondItem="rAr-34-tOF" secondAttribute="trailing" id="AcA-XP-jh5"/>
                                                         <constraint firstItem="rAr-34-tOF" firstAttribute="top" secondItem="aS1-wI-iWa" secondAttribute="top" id="FGn-ge-MBc"/>
-                                                        <constraint firstItem="0AM-9w-2gn" firstAttribute="leading" secondItem="8XF-ew-b1e" secondAttribute="trailing" constant="8" id="Kdb-AL-Mza"/>
                                                         <constraint firstItem="8XF-ew-b1e" firstAttribute="centerY" secondItem="aS1-wI-iWa" secondAttribute="centerY" id="MzQ-t8-Esx"/>
                                                         <constraint firstItem="8XF-ew-b1e" firstAttribute="leading" secondItem="aS1-wI-iWa" secondAttribute="leading" id="QeW-PX-dMV"/>
                                                         <constraint firstItem="rAr-34-tOF" firstAttribute="leading" secondItem="aS1-wI-iWa" secondAttribute="leading" id="bIG-wa-Wu1"/>
-                                                        <constraint firstItem="0AM-9w-2gn" firstAttribute="centerY" secondItem="aS1-wI-iWa" secondAttribute="centerY" id="tXb-nO-76r"/>
                                                         <constraint firstAttribute="bottom" secondItem="rAr-34-tOF" secondAttribute="bottom" id="zHU-b5-fK1"/>
                                                     </constraints>
                                                 </view>
@@ -2198,7 +2182,6 @@
         <image name="big_arrow_show" width="63" height="45"/>
         <image name="checkbox_unchecked" width="20" height="20"/>
         <image name="header_orange_light" width="392" height="416"/>
-        <image name="ic_action_clothes" width="34" height="34"/>
         <image name="ic_button_plus_fill" width="70" height="70"/>
         <image name="ic_cancel_action" width="21" height="20"/>
         <image name="ic_cgu_bubble" width="35" height="35"/>
@@ -2211,7 +2194,6 @@
         <image name="ic_event_list_loc" width="11" height="10"/>
         <image name="ic_location" width="20" height="20"/>
         <image name="ic_location_black" width="8" height="8"/>
-        <image name="ic_next_orange" width="9" height="13"/>
         <image name="ic_placeholder_action" width="106" height="106"/>
         <image name="ic_retry" width="22" height="22"/>
         <image name="ic_selector_off" width="20" height="20"/>
@@ -2227,6 +2209,9 @@
         </namedColor>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="beige_lighter">
+            <color red="1" green="0.96078431372549022" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="grey_light">
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

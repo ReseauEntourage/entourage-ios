@@ -1,142 +1,152 @@
 import UIKit
 import ActiveLabel
+import SDWebImage
 
 class NeighborhoodDetailTopCell: UITableViewCell {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var ui_constraint_listview_top_margin: NSLayoutConstraint?
-
     @IBOutlet weak var ui_main_view: UIView!
-
     @IBOutlet weak var ui_title: UILabel!
-
     @IBOutlet weak var ui_lbl_nb_members: UILabel!
     @IBOutlet weak var ui_img_member_1: UIImageView!
     @IBOutlet weak var ui_img_member_2: UIImageView!
     @IBOutlet weak var ui_img_member_3: UIImageView!
     @IBOutlet weak var ui_view_members_more: UIView!
-
     @IBOutlet weak var ui_view_button_join: UIView!
     @IBOutlet weak var ui_img_bt_join: UIImageView!
     @IBOutlet weak var ui_lbl_bt_join: UILabel!
-
     @IBOutlet weak var ui_lbl_about_title: UILabel!
     @IBOutlet weak var ui_lbl_about_desc: ActiveLabel!
-
+    @IBOutlet weak var see_more_button: UIButton!
     @IBOutlet weak var ui_taglist_view: TagListView!
     @IBOutlet weak var ui_btn_share: UIButton?
     @IBOutlet weak var btn_join: UIButton!
     @IBOutlet weak var contraint_share_left_counstraint: NSLayoutConstraint!
     
+    // MARK: - Properties
     weak var delegate: NeighborhoodDetailTopCellDelegate? = nil
-
+    
     let topMarginConstraint: CGFloat = 24
     let cornerRadiusTag: CGFloat = 15
-
+    
     var isFollowingGroup = false
     var isFromOnlyDetail = false
-
+    
     private var isAboutGroupExpanded: Bool = false
     private var fullAboutGroupText: String = ""
-
+    private let truncatedLength: Int = 150
+    
     class var identifier: String { return String(describing: self) }
-
+    
+    // MARK: - Lifecycle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
+        setupUI()
+    }
+    
+    // MARK: - UI Setup
+    private func setupUI() {
+        // Configuration de la vue principale
         ui_main_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-
+        
+        // Configuration des labels
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lbl_nb_members.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_lbl_about_title?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_lbl_about_title?.text = "neighborhood_detail_about_title".localized
         ui_lbl_about_desc?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-
+        
+        // Activation de la copie longue sur le label de description
         if ui_lbl_about_desc != nil {
             ui_lbl_about_desc.enableLongPressCopy()
             ui_lbl_about_desc.isUserInteractionEnabled = true
         }
-
+        
+        // Configuration du bouton de join
         ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_view_button_join.layer.cornerRadius = ui_view_button_join.frame.height / 2
         ui_view_button_join.layer.borderColor = UIColor.appOrange.cgColor
         ui_view_button_join.layer.borderWidth = 1
-
+        
+        // Configuration de la TagListView
         ui_taglist_view?.backgroundColor = .appBeigeClair
         ui_taglist_view?.tagBackgroundColor = ApplicationTheme.getFontCategoryBubble().color
         ui_taglist_view?.cornerRadius = cornerRadiusTag
         ui_taglist_view?.textFont = ApplicationTheme.getFontCategoryBubble().font
         ui_taglist_view?.textColor = .appOrange
         ui_taglist_view?.alignment = .left
-
         ui_taglist_view?.marginY = 12
         ui_taglist_view?.marginX = 12
-
         ui_taglist_view?.paddingX = 15
         ui_taglist_view?.paddingY = 9
-
-        ui_img_member_1.layer.cornerRadius = ui_img_member_1.frame.height / 2
-        ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
-        ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
-        ui_btn_share?.setTitle("neighborhood_add_post_send_button".localized, for: .normal)
         ui_taglist_view.isHidden = true
-        configureWhiteButton(self.ui_btn_share!, withTitle: "neighborhood_add_post_send_button".localized)
-    }
-
-    private func truncateAboutGroup(_ text: String) -> NSAttributedString {
-        let attributedText = NSMutableAttributedString(string: text)
-        if text.count > 150 {
-            let truncatedText = String(text.prefix(150)) + "..."
-            attributedText.mutableString.setString(truncatedText)
+        
+        // Configuration des images des membres
+        [ui_img_member_1, ui_img_member_2, ui_img_member_3].forEach { imageView in
+            imageView?.layer.cornerRadius = imageView?.frame.height ?? 0 / 2
+            imageView?.clipsToBounds = true
         }
-
-        // Ajout du texte "Voir plus" avec style souligné et couleur orange
-        let voirPlusText = NSAttributedString(string: "\nVoir plus", attributes: [
-            .foregroundColor: UIColor.appOrange,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ])
-        attributedText.append(voirPlusText)
-        return attributedText
+        
+        // Configuration du bouton de partage
+        configureWhiteButton(self.ui_btn_share!, withTitle: "neighborhood_add_post_send_button".localized)
+        
+        // Configuration du bouton "Voir plus / Voir moins"
+        configureSeeMoreButton()
     }
-
+    
+    // MARK: - Configure "Voir plus" Button
+    private func configureSeeMoreButton() {
+        // Styliser le bouton avec un texte souligné
+        updateSeeMoreButtonTitle()
+        
+        // Ajouter l'action au bouton
+        see_more_button.addTarget(self, action: #selector(onSeeMoreButtonClicked), for: .touchUpInside)
+    }
+    
+    private func updateSeeMoreButtonTitle() {
+        let title = isAboutGroupExpanded ? "Voir moins" : "Voir plus"
+        let attributedTitle = NSAttributedString(string: title, attributes: [
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .foregroundColor: UIColor.appOrange
+        ])
+        see_more_button.setAttributedTitle(attributedTitle, for: .normal)
+    }
+    
+    // MARK: - Actions
+    @objc func onSeeMoreButtonClicked() {
+        toggleAboutGroupExpansion()
+    }
+    
     @objc func toggleAboutGroupExpansion() {
-        guard let delegate = delegate else { return }
         isAboutGroupExpanded.toggle()
-
         if isAboutGroupExpanded {
-            let fullText = NSMutableAttributedString(string: fullAboutGroupText)
-            // Ajout du texte "Voir moins" avec style souligné et couleur orange
-            let voirMoinsText = NSAttributedString(string: "\nVoir moins", attributes: [
-                .foregroundColor: UIColor.appOrange,
-                .underlineStyle: NSUnderlineStyle.single.rawValue
-            ])
-            fullText.append(voirMoinsText)
-            ui_lbl_about_desc?.attributedText = fullText
-            ui_taglist_view.isHidden = false // Affiche la TagListView
+            ui_lbl_about_desc?.text = fullAboutGroupText
+            ui_constraint_listview_top_margin?.constant = 20
         } else {
             ui_lbl_about_desc?.attributedText = truncateAboutGroup(fullAboutGroupText)
-            ui_taglist_view.isHidden = true // Masque la TagListView
+            ui_constraint_listview_top_margin?.constant = 0
         }
-
-        setupActiveLabel()
-        delegate.updateHeightCell()
+        
+        // Mise à jour du titre du bouton
+        updateSeeMoreButtonTitle()
+        
+        // Afficher ou masquer la TagListView en fonction de l'état
+        ui_taglist_view.isHidden = !isAboutGroupExpanded
+        
+        // Informer le délégué pour mettre à jour la hauteur de la cellule
+        delegate?.updateHeightCell()
     }
-
-    private func setupActiveLabel() {
-        ui_lbl_about_desc?.customize { label in
-            label.enabledTypes = [.custom(pattern: "(Voir plus|Voir moins)")]
-            label.customColor[.custom(pattern: "(Voir plus|Voir moins)")] = UIColor.appOrange
-            label.customSelectedColor[.custom(pattern: "(Voir plus|Voir moins)")] = UIColor.appOrange
-            label.handleCustomTap(for: .custom(pattern: "(Voir plus|Voir moins)")) { _ in
-                self.toggleAboutGroupExpansion()
-            }
-
-            label.configureLinkAttribute = { (type, attributes, isSelected) in
-                var atts = attributes
-                if case .custom = type {
-                    atts[NSAttributedString.Key.underlineStyle] = NSUnderlineStyle.single.rawValue
-                }
-                return atts
-            }
+    
+    // MARK: - Helper Methods
+    private func truncateAboutGroup(_ text: String) -> NSAttributedString {
+        let attributedText = NSMutableAttributedString(string: text)
+        if text.count > truncatedLength {
+            let truncatedText = String(text.prefix(truncatedLength)) + "..."
+            attributedText.mutableString.setString(truncatedText)
         }
+        // Toujours afficher le bouton "Voir plus / Voir moins"
+        return attributedText
     }
     
     func configureWhiteButton(_ button: UIButton, withTitle title: String) {
@@ -149,27 +159,32 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
         button.clipsToBounds = true
     }
-
+    
     func populateCell(neighborhood: Neighborhood?, isFollowingGroup: Bool, isFromOnlyDetail: Bool, delegate: NeighborhoodDetailTopCellDelegate) {
+        // Gestion de la visibilité du bouton de partage et du bouton de join
         if let _isMember = neighborhood?.isMember {
             if _isMember {
                 contraint_share_left_counstraint.constant = 28
                 btn_join.isHidden = true
-            }else{
+            } else {
                 contraint_share_left_counstraint.constant = 178
                 btn_join.isHidden = false
             }
         }
+        
         self.delegate = delegate
         self.isFollowingGroup = isFollowingGroup
         self.isFromOnlyDetail = isFromOnlyDetail
+        
+        // Réinitialiser la visibilité des images des membres
         ui_img_member_1.isHidden = true
         ui_img_member_2.isHidden = true
         ui_img_member_3.isHidden = true
         ui_view_members_more.isHidden = true
-
+        
         guard let neighborhood = neighborhood else { return }
-
+        
+        // Charger les images des membres
         for i in 0..<neighborhood.members.count {
             if i > 2 { break }
             switch i {
@@ -186,26 +201,23 @@ class NeighborhoodDetailTopCell: UITableViewCell {
                 break
             }
         }
-
-        if neighborhood.membersCount > 3 {
-            ui_view_members_more.isHidden = false
-        }
-
-        ui_lbl_nb_members.text = neighborhood.members.count > 1
+        
+        // Afficher le nombre de membres
+        ui_lbl_nb_members.text = neighborhood.membersCount > 1
             ? String(format: "neighborhood_detail_members".localized, neighborhood.membersCount)
             : String(format: "neighborhood_detail_member".localized, neighborhood.membersCount)
-
+        
+        // Configurer le titre du quartier
         ui_title.text = neighborhood.name
-
-        if let aboutGroup = neighborhood.aboutGroup {
+        
+        // Configurer la description du quartier
+        if let aboutGroup = neighborhood.aboutGroup, !aboutGroup.isEmpty {
             fullAboutGroupText = aboutGroup
-            ui_lbl_about_desc?.attributedText = isAboutGroupExpanded
-                ? NSAttributedString(string: fullAboutGroupText)
-                : truncateAboutGroup(fullAboutGroupText)
+            ui_lbl_about_desc?.attributedText = truncateAboutGroup(fullAboutGroupText)
         } else {
             ui_lbl_about_desc?.text = ""
         }
-
+        
         // Gestion des tags
         if let _interests = neighborhood.interests {
             ui_taglist_view?.removeAllTags()
@@ -216,19 +228,24 @@ class NeighborhoodDetailTopCell: UITableViewCell {
                     ui_taglist_view?.addTag(interest)
                 }
             }
-            if _interests.isEmpty {
-                ui_constraint_listview_top_margin?.constant = 0
-            } else {
-                ui_constraint_listview_top_margin?.constant = topMarginConstraint
-            }
+            ui_constraint_listview_top_margin?.constant = _interests.isEmpty ? 0 : topMarginConstraint
         } else {
             ui_constraint_listview_top_margin?.constant = topMarginConstraint
         }
-
-        setupActiveLabel()
+        
+        // Toujours afficher le bouton "Voir plus / Voir moins"
+        see_more_button.isHidden = false
+        
+        // Mettre à jour le titre du bouton "Voir plus / Voir moins"
+        updateSeeMoreButtonTitle()
+        
+        // Masquer ou afficher la TagListView en fonction de l'état initial
+        ui_taglist_view.isHidden = !isAboutGroupExpanded
+        
+        // Ajouter l'action au bouton de partage
         ui_btn_share?.addTarget(self, action: #selector(onBtnShareClicked), for: .touchUpInside)
     }
-
+    
     private func updateImageUrl(image: UIImageView, imageUrl: String?) {
         if let imageUrl = imageUrl, let mainUrl = URL(string: imageUrl) {
             image.sd_setImage(with: mainUrl, placeholderImage: UIImage(named: "placeholder_user"))
@@ -236,15 +253,15 @@ class NeighborhoodDetailTopCell: UITableViewCell {
             image.image = UIImage(named: "placeholder_user")
         }
     }
-
+    
     @objc func onBtnShareClicked() {
         delegate?.shareGroup()
     }
-
+    
     @IBAction func action_show_members(_ sender: Any) {
         delegate?.showMembers()
     }
-
+    
     @IBAction func action_join_leave(_ sender: Any) {
         isFollowingGroup ? delegate?.showDetailFull() : delegate?.joinLeave()
     }
@@ -260,6 +277,7 @@ protocol NeighborhoodDetailTopCellDelegate: AnyObject {
     func updateHeightCell()
 }
 
+// MARK: - Subclass
 class NeighborhoodDetailTopMemberCell: NeighborhoodDetailTopCell {
-
+    // Cette sous-classe peut hériter ou ajouter des fonctionnalités spécifiques si nécessaire
 }

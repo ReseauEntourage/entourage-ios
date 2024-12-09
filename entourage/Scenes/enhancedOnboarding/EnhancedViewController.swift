@@ -404,7 +404,7 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
         case .involvement:
             AnalyticsLoggerManager.logEvent(name: onboarding_actions_config_later_clic)
         case .choiceDisponibility:
-            AnalyticsLoggerManager.logEvent(name: "onboarding_availability_config_later_clic")
+            AnalyticsLoggerManager.logEvent(name: "onboarding_disponibility_config_later_clic")
         }
         self.returnHome = true
         self.updateUserChoices()
@@ -429,7 +429,7 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
             self.loadDTO()
             break
         case .choiceDisponibility:
-            AnalyticsLoggerManager.logEvent(name: "onboarding_availability_next_clic")
+            AnalyticsLoggerManager.logEvent(name: "onboarding_disponibility_next_clic")
             self.returnHome = false
             self.updateUserChoices()
         }

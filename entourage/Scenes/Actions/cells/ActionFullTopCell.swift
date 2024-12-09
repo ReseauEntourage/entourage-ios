@@ -25,7 +25,6 @@ class ActionFullTopCell: UITableViewCell {
     
     @IBOutlet var ui_view_tags: [UIView]!
     @IBOutlet var ui_title_tags: [UILabel]!
-    @IBOutlet var ui_img_tags: [UIImageView]!
     
     @IBOutlet weak var ui_view_translate: UIView!
     @IBOutlet weak var ui_label_translate: UILabel!
@@ -194,13 +193,5 @@ class ActionFullTopCell: UITableViewCell {
             _t.text = Metadatas.sharedInstance.getTagSectionName(key: sectionName)?.name
         }
         
-//        for _iv in ui_img_tags {
-//            if let imgStr = Metadatas.sharedInstance.getTagSectionImageName(key: sectionName) {
-//                _iv.image = UIImage.init(named: imgStr)
-//            }
-//            else {
-//                _iv.image = nil
-//            }
-//        }
     }
 }

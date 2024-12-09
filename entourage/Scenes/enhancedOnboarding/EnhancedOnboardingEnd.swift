@@ -85,7 +85,7 @@ class EnhancedOnboardingEnd:UIViewController{
     
     @objc func onEventClick(){
         AnalyticsLoggerManager.logEvent(name: onboarding_end_browse_events_clic)
-        let eventFirebase = "onboarding_end_congrats_clic_" + (OnboardingEndChoicesManager.shared.categoryForButton ?? "")
+        let eventFirebase = "onboarding_end_congrats_clic_on" + (OnboardingEndChoicesManager.shared.categoryForButton ?? "")
         AnalyticsLoggerManager.logEvent(name: eventFirebase)
         let config = EnhancedOnboardingConfiguration.shared
         config.isFromOnboardingFromNormalWay = true
