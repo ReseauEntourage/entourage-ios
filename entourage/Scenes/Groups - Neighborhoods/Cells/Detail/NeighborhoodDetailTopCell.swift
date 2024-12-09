@@ -77,8 +77,8 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         ui_taglist_view?.textColor = .appOrange
         ui_taglist_view?.alignment = .left
         ui_taglist_view?.marginY = 12
-        ui_taglist_view?.marginX = 12
-        ui_taglist_view?.paddingX = 0
+        ui_taglist_view?.marginX = 15
+        ui_taglist_view?.paddingX = 10
         ui_taglist_view?.paddingY = 9
         ui_taglist_view.isHidden = true
         
