@@ -298,6 +298,7 @@ class EventDetailFeedViewController: UIViewController {
                      
             }
             self.event = event
+            self.eventId = event?.uid ?? 0
             self.event?.posts?.removeAll()
             self.splitMessages()
             self.getMorePosts()
@@ -400,6 +401,7 @@ class EventDetailFeedViewController: UIViewController {
                 }else{
                     EventService.joinEvent(eventId: eventId) { user, error in
                         IHProgressHUD.dismiss()
+                        print("eho error " , error.debugDescription)
                         if let user = user {
                             let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
                             self.event?.members?.append(member)
