@@ -10,8 +10,6 @@ import IHProgressHUD
 import SDWebImage
 import EventKit
 import EventKitUI
-import MessageUI
-
 
 class EventDetailFeedViewController: UIViewController {
     
@@ -826,92 +824,29 @@ extension EventDetailFeedViewController: MJNavBackViewDelegate {
 
 //MARK: - EventDetailTopCellDelegate -
 extension EventDetailFeedViewController:EventDetailTopCellDelegate {
-    func shareViaActivityViewController(items: [Any]) {
-        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        
-        // Exclure certaines options si nécessaire (optionnel)
-        activityVC.excludedActivityTypes = [.addToReadingList, .assignToContact]
-        
-        // Pour iPad : Configurer le popover (éviter les crashs)
-        if let popover = activityVC.popoverPresentationController {
-            popover.sourceView = self.view
-            popover.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-            popover.permittedArrowDirections = []
-        }
-        
-        // Présenter le contrôleur d'activité
-        self.present(activityVC, animated: true, completion: nil)
-    }
-
-    func shareViaMessages(body: String) {
-        // Vérifier si l'appareil peut envoyer des messages
-        guard MFMessageComposeViewController.canSendText() else {
-            let alert = UIAlertController(title: "Erreur", message: "L'envoi de messages n'est pas disponible sur cet appareil.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            return
-        }
-        
-        // Configurer le contrôleur de message
-        let messageVC = MFMessageComposeViewController()
-        messageVC.body = body
-        messageVC.messageComposeDelegate = self
-        
-        // Présenter le contrôleur de message
-        self.present(messageVC, animated: true, completion: nil)
-    }
-
     func share() {
         var stringUrl = "https://"
         var title = ""
-        
-        // Construire l'URL de partage
-        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod") {
-            stringUrl += "preprod.entourage.social/app/"
-        } else {
-            stringUrl += "www.entourage.social/app/"
+        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod"){
+            stringUrl = stringUrl + "preprod.entourage.social/app/"
+        }else{
+            stringUrl = stringUrl + "www.entourage.social/app/"
         }
-        
         if let _event = event {
-            stringUrl += "outings/" + _event.uuid_v2
+            stringUrl = stringUrl + "outings/" + _event.uuid_v2
             title = "share_event".localized + "\n" + _event.title + ": "
+
         }
-        
+        let url = URL(string: stringUrl)!
         let shareText = "\(title)\n\n\(stringUrl)"
         
-        // Créer une Action Sheet pour choisir la méthode de partage
-        let alert = UIAlertController(title: "Partager", message: "Choisissez comment vous souhaitez partager l'événement.", preferredStyle: .actionSheet)
-        
-        // Option 1 : Partager via Messages
-        print(" is possible ? " , MFMessageComposeViewController.canSendText())
-        if MFMessageComposeViewController.canSendText() {
-            alert.addAction(UIAlertAction(title: "Messages", style: .default, handler: { _ in
-                self.shareViaMessages(body: shareText)
-            }))
-        }
-        
-        // Option 2 : Partager via d'autres applications
-        alert.addAction(UIAlertAction(title: "Autres", style: .default, handler: { _ in
-            self.shareViaActivityViewController(items: [shareText])
-        }))
-        
-        // Option : Annuler
-        alert.addAction(UIAlertAction(title: "Annuler", style: .cancel, handler: nil))
-        
-        // Pour iPad : Configurer le popover (éviter les crashs)
-        if let popover = alert.popoverPresentationController {
-            popover.sourceView = self.view
-            popover.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-            popover.permittedArrowDirections = []
-        }
-        
-        // Présenter l'Action Sheet
-        self.present(alert, animated: true, completion: nil)
-        
-        // Logger l'événement de partage
+        let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
+          // Présenter l’UIActivityViewController
+        let viewController = self
+          viewController.present(activityViewController, animated: true, completion: nil)
         AnalyticsLoggerManager.logEvent(name: event_share)
-    }
 
+    }
     
     func showUser() {
         
@@ -1266,23 +1201,4 @@ extension EventDetailFeedViewController : AmbassadorAskNotificationPopupDelegate
     }
     
     
-}
-
-extension EventDetailFeedViewController: MFMessageComposeViewControllerDelegate {
-    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        // Fermer le contrôleur de message
-        controller.dismiss(animated: true, completion: nil)
-        
-        // Optionnel : Gérer les différents résultats de l'envoi du message
-        switch result {
-        case .sent:
-            print("Message envoyé avec succès.")
-        case .failed:
-            print("Échec de l'envoi du message.")
-        case .cancelled:
-            print("Envoi du message annulé.")
-        @unknown default:
-            print("Résultat inconnu.")
-        }
-    }
 }
