@@ -840,7 +840,7 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
         let url = URL(string: stringUrl)!
         let shareText = "\(title)\n\n\(stringUrl)"
         
-        let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [shareText, url], applicationActivities: nil)
           // Présenter l’UIActivityViewController
         let viewController = self
           viewController.present(activityViewController, animated: true, completion: nil)
