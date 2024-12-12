@@ -56,12 +56,14 @@ class NeighborhoodCreateMainViewController: UIViewController {
         ui_bt_previous.setTitleColor(.appOrange, for: .normal)
         ui_bt_previous.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 18)
         ui_bt_previous.setTitle("neighborhood_create_group_bt_back".localized, for: .normal)
+        configureWhiteButton(ui_bt_previous, withTitle: "neighborhood_create_group_bt_back".localized)
         
         ui_bt_next.layer.cornerRadius = ui_bt_next.frame.height / 2
         ui_bt_next.backgroundColor = .appOrangeLight
         ui_bt_next.setTitleColor(.white, for: .normal)
         ui_bt_next.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
         ui_bt_next.setTitle("neighborhood_create_group_bt_next".localized, for: .normal)
+        
         
         enableDisableNextButton(isEnable: false) //TODO: remettre false
         
@@ -82,6 +84,17 @@ class NeighborhoodCreateMainViewController: UIViewController {
     func showError(message:String) {
         ui_error_view.changeTitleAndImage(title: message)
         ui_error_view.show()
+    }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     //MARK: - Navigation -
