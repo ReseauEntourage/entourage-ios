@@ -114,6 +114,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @objc func handleLittleTap(gesture: UITapGestureRecognizer) {
         AnalyticsLoggerManager.logEvent(name: Clic_Post_Like)
+        VibrationUtil.vibrate(style: .light)
         if gesture.state == .ended {
             // Vérifier si l'utilisateur a déjà réagi
             if postMessage.reactionId == 0 || postMessage.reactionId == nil, let firstReactionType = getStoredReactionTypes()?.first {

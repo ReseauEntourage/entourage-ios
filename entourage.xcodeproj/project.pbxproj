@@ -427,6 +427,7 @@
 		2644F1E82C2ADBB000039A07 /* CellMainFilter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2644F1E72C2ADBB000039A07 /* CellMainFilter.xib */; };
 		2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */; };
 		26471DFD2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26471DFC2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift */; };
+		26499C362D0B1CD900AF88DC /* VibrationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26499C352D0B1CC000AF88DC /* VibrationUtil.swift */; };
 		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
 		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
@@ -973,6 +974,7 @@
 		2644F1E72C2ADBB000039A07 /* CellMainFilter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellMainFilter.xib; sourceTree = "<group>"; };
 		2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		26471DFC2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbassadorAskNotificationPopup.swift; sourceTree = "<group>"; };
+		26499C352D0B1CC000AF88DC /* VibrationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationUtil.swift; sourceTree = "<group>"; };
 		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
 		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
@@ -1387,6 +1389,7 @@
 		025D8762278DEB1A00909101 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				26499C352D0B1CC000AF88DC /* VibrationUtil.swift */,
 				268FCA282965E6A000159C34 /* AlertWithImage */,
 				02F5FEC227E0CB6800A14313 /* MJAlertController.swift */,
 				02F5FEC327E0CB6800A14313 /* MJAlertController.xib */,
@@ -2847,6 +2850,7 @@
 				02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */,
 				02C6E86F28203E1F009D4289 /* ReportGroupSendViewController.swift in Sources */,
 				02E77B44282CF9CF00786E27 /* Event.swift in Sources */,
+				26499C362D0B1CD900AF88DC /* VibrationUtil.swift in Sources */,
 				02A92C3028981884000DFF95 /* Action.swift in Sources */,
 				02FB544E287DC14000E4B9FA /* EventDetailFullInterestCell.swift in Sources */,
 				02833F9A2822A9F600000156 /* NeighBorhoodEventListUsersViewController.swift in Sources */,
