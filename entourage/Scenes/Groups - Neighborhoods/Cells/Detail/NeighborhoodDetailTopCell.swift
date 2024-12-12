@@ -23,7 +23,9 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     @IBOutlet weak var ui_btn_share: UIButton?
     @IBOutlet weak var btn_join: UIButton!
     @IBOutlet weak var contraint_share_left_counstraint: NSLayoutConstraint!
+    @IBOutlet weak var contraint_height_tag_list_view: NSLayoutConstraint!
     
+    @IBOutlet weak var contraint_top_button_see_more: NSLayoutConstraint!
     // MARK: - Properties
     weak var delegate: NeighborhoodDetailTopCellDelegate? = nil
     
@@ -93,12 +95,14 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         
         // Configuration du bouton "Voir plus / Voir moins"
         configureSeeMoreButton()
+        delegate?.updateHeightCell()
     }
     
     // MARK: - Configure "Voir plus" Button
     private func configureSeeMoreButton() {
         // Styliser le bouton avec un texte souligné
         updateSeeMoreButtonTitle()
+        
         
         // Ajouter l'action au bouton
         see_more_button.addTarget(self, action: #selector(onSeeMoreButtonClicked), for: .touchUpInside)
@@ -120,12 +124,18 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     
     @objc func toggleAboutGroupExpansion() {
         isAboutGroupExpanded.toggle()
+        contraint_top_button_see_more?.constant = 5
         if isAboutGroupExpanded {
             ui_lbl_about_desc?.text = fullAboutGroupText
             ui_constraint_listview_top_margin?.constant = 20
         } else {
             ui_lbl_about_desc?.attributedText = truncateAboutGroup(fullAboutGroupText)
             ui_constraint_listview_top_margin?.constant = 0
+        }
+        if isAboutGroupExpanded{
+            contraint_height_tag_list_view?.constant = calculateTagListViewHeight()
+        }else{
+            contraint_height_tag_list_view?.constant = 0
         }
         
         // Mise à jour du titre du bouton
@@ -136,6 +146,15 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         
         // Informer le délégué pour mettre à jour la hauteur de la cellule
         delegate?.updateHeightCell()
+    }
+    
+    private func calculateTagListViewHeight() -> CGFloat {
+        // Forcer un layout sur la TagListView pour qu'elle calcule ses dimensions
+        ui_taglist_view?.layoutIfNeeded()
+        
+        // Obtenez la taille intrinsèque du TagListView
+        let tagListViewHeight = ui_taglist_view?.intrinsicContentSize.height ?? 0
+        return tagListViewHeight
     }
     
     // MARK: - Helper Methods
@@ -240,10 +259,11 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         updateSeeMoreButtonTitle()
         
         // Masquer ou afficher la TagListView en fonction de l'état initial
-        ui_taglist_view.isHidden = !isAboutGroupExpanded
         
         // Ajouter l'action au bouton de partage
         ui_btn_share?.addTarget(self, action: #selector(onBtnShareClicked), for: .touchUpInside)
+        contraint_height_tag_list_view?.constant = 0
+        delegate.updateHeightCell()
     }
     
     private func updateImageUrl(image: UIImageView, imageUrl: String?) {

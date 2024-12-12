@@ -22,11 +22,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="528" id="9bU-27-3E6" customClass="NeighborhoodDetailTopCell" customModule="Ent_Beta" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="406" height="528"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="269" id="9bU-27-3E6" customClass="NeighborhoodDetailTopCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="406" height="269"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9bU-27-3E6" id="Gl5-gY-SZu">
-                <rect key="frame" x="0.0" y="0.0" width="406" height="528"/>
+                <rect key="frame" x="0.0" y="0.0" width="406" height="269"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitreE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufu-cQ-0kZ">
@@ -172,11 +172,11 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJR-9r-zef" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
-                        <rect key="frame" x="28" y="213.5" width="350" height="259.5"/>
+                    <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="WJR-9r-zef" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
+                        <rect key="frame" x="28" y="213.5" width="350" height="0.0"/>
                         <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" id="Uj6-9J-JAp"/>
+                            <constraint firstAttribute="height" id="Uj6-9J-JAp"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
@@ -213,8 +213,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eib-b3-LST">
-                        <rect key="frame" x="28" y="478" width="60" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eib-b3-LST">
+                        <rect key="frame" x="28" y="203.5" width="60" height="30"/>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" title="Voir plus">
                             <color key="titleColor" name="orange_app"/>
@@ -226,7 +226,7 @@
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Eib-b3-LST" secondAttribute="bottom" constant="20" id="6bU-O1-Shl"/>
                     <constraint firstItem="NqP-dj-PlY" firstAttribute="top" secondItem="ufu-cQ-0kZ" secondAttribute="bottom" constant="6" id="CdJ-Fn-Xbt"/>
                     <constraint firstItem="NqP-dj-PlY" firstAttribute="leading" secondItem="ufu-cQ-0kZ" secondAttribute="leading" id="DeK-dk-QXa"/>
-                    <constraint firstItem="Eib-b3-LST" firstAttribute="top" secondItem="WJR-9r-zef" secondAttribute="bottom" constant="5" id="Dfb-xV-MNp"/>
+                    <constraint firstItem="Eib-b3-LST" firstAttribute="top" secondItem="WJR-9r-zef" secondAttribute="bottom" constant="-10" id="Dfb-xV-MNp"/>
                     <constraint firstItem="N82-O7-OMh" firstAttribute="leading" secondItem="H48-1Z-fiF" secondAttribute="leading" id="GLg-FS-XxS"/>
                     <constraint firstAttribute="trailing" secondItem="H48-1Z-fiF" secondAttribute="trailing" constant="28" id="RBS-Rf-oN1"/>
                     <constraint firstItem="WJR-9r-zef" firstAttribute="top" secondItem="N82-O7-OMh" secondAttribute="bottom" id="Sc7-FM-Cf0"/>
@@ -251,7 +251,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="btn_join" destination="KPl-1r-R8C" id="7GS-1n-Mo5"/>
+                <outlet property="contraint_height_tag_list_view" destination="Uj6-9J-JAp" id="qkV-fH-xUH"/>
                 <outlet property="contraint_share_left_counstraint" destination="dws-72-mB4" id="kTN-lS-zta"/>
+                <outlet property="contraint_top_button_see_more" destination="Dfb-xV-MNp" id="J9M-ql-pYu"/>
                 <outlet property="see_more_button" destination="Eib-b3-LST" id="8lc-tK-cCa"/>
                 <outlet property="ui_btn_share" destination="dY5-Cv-aJw" id="68c-qN-qTt"/>
                 <outlet property="ui_constraint_listview_top_margin" destination="Sc7-FM-Cf0" id="cBZ-Tw-ET8"/>
@@ -269,7 +271,7 @@
                 <outlet property="ui_view_button_join" destination="IDe-ts-1MI" id="hPU-JE-iHd"/>
                 <outlet property="ui_view_members_more" destination="ama-Wt-iV4" id="fJl-f0-I8f"/>
             </connections>
-            <point key="canvasLocation" x="131.8840579710145" y="83.035714285714278"/>
+            <point key="canvasLocation" x="131.8840579710145" y="-3.683035714285714"/>
         </tableViewCell>
     </objects>
     <resources>
