@@ -388,6 +388,9 @@
 		2609BFA82AC329120052111C /* HomeSeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA72AC329120052111C /* HomeSeeAllCell.swift */; };
 		2609BFAA2AC329440052111C /* HomeSeeAllCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2609BFA92AC329440052111C /* HomeSeeAllCell.xib */; };
 		261174FE29A670CB00735E9A /* ReportGroupChoosePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */; };
+		26192DE82D300C7E00944D32 /* ProfilFullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26192DE72D300C7E00944D32 /* ProfilFullViewController.swift */; };
+		26192DEB2D31107900944D32 /* HeaderProfilFullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26192DEA2D31107900944D32 /* HeaderProfilFullCell.swift */; };
+		26192DED2D31108900944D32 /* HeaderProfilFullCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26192DEC2D31108900944D32 /* HeaderProfilFullCell.xib */; };
 		26195B232C09F52000BEAD84 /* InterestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26195B222C09F52000BEAD84 /* InterestsCollectionViewCell.swift */; };
 		26195B252C09F7E000BEAD84 /* InterestsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26195B242C09F7E000BEAD84 /* InterestsCollectionViewCell.xib */; };
 		2619CCE52AE948AB00276D67 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2619CCE72AE948AB00276D67 /* Localizable.strings */; };
@@ -921,6 +924,9 @@
 		2609BFA72AC329120052111C /* HomeSeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSeeAllCell.swift; sourceTree = "<group>"; };
 		2609BFA92AC329440052111C /* HomeSeeAllCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSeeAllCell.xib; sourceTree = "<group>"; };
 		261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGroupChoosePageViewController.swift; sourceTree = "<group>"; };
+		26192DE72D300C7E00944D32 /* ProfilFullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilFullViewController.swift; sourceTree = "<group>"; };
+		26192DEA2D31107900944D32 /* HeaderProfilFullCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfilFullCell.swift; sourceTree = "<group>"; };
+		26192DEC2D31108900944D32 /* HeaderProfilFullCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderProfilFullCell.xib; sourceTree = "<group>"; };
 		26195B222C09F52000BEAD84 /* InterestsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsCollectionViewCell.swift; sourceTree = "<group>"; };
 		26195B242C09F7E000BEAD84 /* InterestsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestsCollectionViewCell.xib; sourceTree = "<group>"; };
 		2619CCE62AE948AB00276D67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1527,6 +1533,7 @@
 		02681953278DF6E400A98A4A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				26192DE42D300C5400944D32 /* ProfileFull */,
 				2630F6212C24339F007BAE56 /* mainFilter */,
 				26BEEEB52C00C32B00169FBA /* enhancedOnboarding */,
 				26D13E132BA1F95400CAD4F7 /* Survey */,
@@ -1983,6 +1990,24 @@
 				264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */,
 			);
 			path = reportChooseCells;
+			sourceTree = "<group>";
+		};
+		26192DE42D300C5400944D32 /* ProfileFull */ = {
+			isa = PBXGroup;
+			children = (
+				26192DE92D300EE100944D32 /* cells */,
+				26192DE72D300C7E00944D32 /* ProfilFullViewController.swift */,
+			);
+			path = ProfileFull;
+			sourceTree = "<group>";
+		};
+		26192DE92D300EE100944D32 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				26192DEA2D31107900944D32 /* HeaderProfilFullCell.swift */,
+				26192DEC2D31108900944D32 /* HeaderProfilFullCell.xib */,
+			);
+			path = cells;
 			sourceTree = "<group>";
 		};
 		2619E1412A261C78000BD574 /* welcome2cells */ = {
@@ -2486,6 +2511,7 @@
 				02B94C2C284F8F0C006059EF /* HomeActionCell.xib in Resources */,
 				26584C482ACC418000ABD401 /* HomeV2.xcassets in Resources */,
 				2630F61E2C21D376007BAE56 /* HomeInitialPedagoCell.xib in Resources */,
+				26192DED2D31108900944D32 /* HeaderProfilFullCell.xib in Resources */,
 				26BEEEC72C00C32B00169FBA /* EnahancedOnboardingButtonCell.xib in Resources */,
 				02856F6227DA334100988FF7 /* ProfileParams.storyboard in Resources */,
 				02CCE68027D78CAB00D6976C /* NunitoSans-Light.ttf in Resources */,
@@ -2893,9 +2919,11 @@
 				02040CF7288E97F600AB1FBB /* EventParamSignalCell.swift in Sources */,
 				02040CF2288E8C2E00AB1FBB /* EventParamsViewController.swift in Sources */,
 				0258E4FB288AAF47000F107B /* ContribUploadPictureService.swift in Sources */,
+				26192DE82D300C7E00944D32 /* ProfilFullViewController.swift in Sources */,
 				02EFE47E289C056B00D70C68 /* ActionMineCell.swift in Sources */,
 				0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */,
 				0258AFE6282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift in Sources */,
+				26192DEB2D31107900944D32 /* HeaderProfilFullCell.swift in Sources */,
 				0224597D28001B2500944DE4 /* Address.swift in Sources */,
 				26BEEEC52C00C32B00169FBA /* EnhancedOnboardingCollectionCell.swift in Sources */,
 				02C9B4AA27E21BF70026450A /* ParamsAboutViewController.swift in Sources */,

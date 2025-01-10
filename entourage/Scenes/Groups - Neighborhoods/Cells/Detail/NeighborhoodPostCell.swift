@@ -674,75 +674,6 @@ protocol ReactionsPopupViewDelegate: AnyObject {
     func getReactionTypeById(_ id: Int) -> ReactionType?
 }
 
-class ReactionsPopupView: UIView {
-
-    weak var delegate: ReactionsPopupViewDelegate?
-    
-    init(reactions: [ReactionType], frame: CGRect, delegate: ReactionsPopupViewDelegate?) {
-        
-        super.init(frame: frame)
-        self.delegate = delegate
-        self.backgroundColor = .white
-        self.layer.cornerRadius = 25
-        self.layer.masksToBounds = true
-        self.layer.borderColor = UIColor.appGrisReaction.cgColor
-        self.layer.borderWidth = 1
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 10
-        NotificationCenter.default.addObserver(self, selector: #selector(dismiss), name: Notification.Name("FermerReactionsPopup"), object: nil)
-
-
-        for reaction in reactions {
-            let imageView = UIImageView()
-            if let imageUrl = URL(string: reaction.imageUrl ?? "") {
-                imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
-            }
-            imageView.contentMode = .scaleAspectFill
-            imageView.isUserInteractionEnabled = true
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(reactionTapped))
-            imageView.addGestureRecognizer(tapGesture)
-            imageView.tag = reaction.id
-            stackView.addArrangedSubview(imageView)
-            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        }
-
-        self.addSubview(stackView)
-        NSLayoutConstraint.activate([
-                  stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),      // Padding en haut
-                  stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5), // Padding en bas
-                  stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10), // Padding à gauche
-                  stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10) // Padding à droite
-              ])
-    }
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    @objc func dismiss() {
-        self.removeFromSuperview()
-    }
-
-    @objc func reactionTapped(_ sender: UITapGestureRecognizer) {
-        guard let imageView = sender.view as? UIImageView else { return }
-        let reactionId = imageView.tag
-        if let reaction = delegate?.getReactionTypeById(reactionId) {
-            delegate?.reactForPost(reactionType: reaction)
-        }
-        dismiss()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-
-
 
 extension NeighborhoodPostCell: SurveyOptionViewDelegate {
     func didTapVote(surveyOptionView: SurveyOptionView, optionIndex: Int) {
@@ -794,6 +725,103 @@ extension NeighborhoodPostCell: SurveyOptionViewDelegate {
 
         // Appeler le délégué pour effectuer l'action de réseau avec les réponses mises à jour
         delegate?.postSurveyResponse(forPostId: postMessage.uid, withResponses: surveyResponse)
+    }
+}
+
+class ReactionsPopupView: UIView {
+
+    weak var delegate: ReactionsPopupViewDelegate?
+
+    init(reactions: [ReactionType], frame: CGRect, delegate: ReactionsPopupViewDelegate?) {
+        super.init(frame: frame)
+        self.delegate = delegate
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 25
+        self.layer.masksToBounds = true
+        self.layer.borderColor = UIColor.appGrisReaction.cgColor
+        self.layer.borderWidth = 1
+
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 10
+        NotificationCenter.default.addObserver(self, selector: #selector(dismiss), name: Notification.Name("FermerReactionsPopup"), object: nil)
+
+        for (index, reaction) in reactions.enumerated() {
+            let imageView = UIImageView()
+            if let imageUrl = URL(string: reaction.imageUrl ?? "") {
+                imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
+            }
+            imageView.contentMode = .scaleAspectFill
+            imageView.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(reactionTapped))
+            imageView.addGestureRecognizer(tapGesture)
+            imageView.tag = reaction.id
+            imageView.alpha = 0 // Début invisible
+            stackView.addArrangedSubview(imageView)
+
+            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+            // Ajouter l'animation d'apparition avec délai
+            UIView.animate(
+                withDuration: 0.6,
+                delay: 0.1 * Double(index), // Légers décalages pour chaque icône
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 0.7,
+                options: .curveEaseOut,
+                animations: {
+                    imageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2) // Agrandir légèrement
+                    imageView.alpha = 1 // Rendre visible
+                }, completion: { _ in
+                    UIView.animate(withDuration: 0.2) {
+                        imageView.transform = .identity // Retour à l'état normal
+                    }
+                })
+        }
+
+        self.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+        ])
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func dismiss() {
+        self.removeFromSuperview()
+    }
+
+    @objc func reactionTapped(_ sender: UITapGestureRecognizer) {
+        guard let imageView = sender.view as? UIImageView else { return }
+
+        // Animation de grossissement (effet bulle)
+        UIView.animate(withDuration: 0.2,
+                       animations: {
+                           imageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2) // Grossir légèrement
+                       }, completion: { _ in
+                           UIView.animate(withDuration: 0.2, animations: {
+                               imageView.transform = .identity // Revenir à la taille normale
+                           }, completion: { _ in
+                               // Exécuter la logique après l'animation
+                               let reactionId = imageView.tag
+                               if let reaction = self.delegate?.getReactionTypeById(reactionId) {
+                                   self.delegate?.reactForPost(reactionType: reaction)
+                               }
+                               self.dismiss()
+                           })
+                       })
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
