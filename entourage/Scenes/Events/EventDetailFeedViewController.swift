@@ -63,6 +63,7 @@ class EventDetailFeedViewController: UIViewController {
     let DELETED_POST_CELL_SIZE = 165.0
     let TEXT_POST_CELL_SIZE = 220.0
     let IMAGE_POST_CELL_SIZE = 430.0
+    var shouldOpenNativeAgenda = false
     
     var pullRefreshControl = UIRefreshControl()
     var users:[UserLightNeighborhood] = [UserLightNeighborhood]()
@@ -272,6 +273,7 @@ class EventDetailFeedViewController: UIViewController {
                 }
             }
             self.ui_tableview.reloadData()
+
         })
     }
     
@@ -312,7 +314,10 @@ class EventDetailFeedViewController: UIViewController {
             }
             
             self.populateTopView(isAfterLoading: true)
-            
+            if self.shouldOpenNativeAgenda {
+                self.shouldOpenNativeAgenda = false
+                self.showAddCalendar()
+            }
             if hasToRefreshLists {
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventsUpdate), object: nil)
             }

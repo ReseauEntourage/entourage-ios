@@ -496,6 +496,16 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVc, animated: true)
         }
     }
+    static func showOutingUniversalLinkWithAgenda(id:String) {
+        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+            vc.hashedEventId = id
+            vc.event = nil
+            vc.isAfterCreation = false
+            vc.shouldOpenNativeAgenda = true
+            vc.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(navVc, animated: true)
+        }
+    }
     static func showNeighborhoodDetailUniversalLink(id:String) {
         let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
         if let navVC = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodDetailViewController {

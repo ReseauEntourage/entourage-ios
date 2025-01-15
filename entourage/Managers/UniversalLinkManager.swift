@@ -56,7 +56,9 @@ struct UniversalLinkManager {
                 }
 
             }else if pathComponents.contains("outings") {
-                if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
+                if pathComponents.count > 3 + iterator, let _hashId = pathComponents[2+iterator] as? String {
+                    DeepLinkManager.showOutingUniversalLinkWithAgenda(id: _hashId)
+                } else if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
                     DeepLinkManager.showOutingUniversalLink(id: _hashId)
                 }else{
                     DeepLinkManager.showOutingListUniversalLink()
