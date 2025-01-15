@@ -1672,3 +1672,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "hour_evening" = "Soir";
 "enhanced_onboarding_select_availability" = "Précisez vos disponibilités pour que l'on puisse vous suggérer des événements adaptés.";
 "enhanced_onboarding_my_availability" = "Mes disponibilités";
+
+"conversation_notif_text" = "Vos notifications sont désactivées.\nActivez-les pour ne rien manquer";
+"conversation_notif_highlight" = "Activez-les pour ne rien manquer";

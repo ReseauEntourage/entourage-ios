@@ -9,6 +9,9 @@ class NotificationDemandViewController: UIViewController {
     @IBOutlet weak var ui_btn_accept_notif: UIButton!
     @IBOutlet weak var ui_btn_disable_notif: UIButton!
     
+    //Variable
+    var comeFromDiscussion = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,8 +104,13 @@ class NotificationDemandViewController: UIViewController {
     
     func goHomeMain() {
         // Navigation vers la page principale de l'application
-        self.dismiss(animated: true) {
-            AppState.navigateToMainApp()
+        if(comeFromDiscussion){
+            comeFromDiscussion = false
+            self.dismiss(animated: true)
+        }else{
+            self.dismiss(animated: true) {
+                AppState.navigateToMainApp()
+            }
         }
     }
 }

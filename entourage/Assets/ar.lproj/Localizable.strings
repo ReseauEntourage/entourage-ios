@@ -1614,3 +1614,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "share_request_title" = "هل ترغب في مشاركة %@ في مجموعة %@ الخاصة بك؟";
 "share_request_description" = "لديك خيار مشاركة %@ في مجموعة الجيران في مدينتك لتحسين رؤيته";
+"conversation_notif_text" = "تم تعطيل الإشعارات الخاصة بك.\nقم بتفعيلها للبقاء على اطلاع";
+"conversation_notif_highlight" = "قم بتفعيلها للبقاء على اطلاع";

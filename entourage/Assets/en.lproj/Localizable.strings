@@ -1716,3 +1716,6 @@
 "enhanced_onboarding_select_availability" = "Select your available days and times";
 "enhanced_onboarding_my_availability" = "My availability";
 
+"conversation_notif_text" = "Your notifications are disabled.\nEnable them to stay updated";
+"conversation_notif_highlight" = "Enable them to stay updated";
+

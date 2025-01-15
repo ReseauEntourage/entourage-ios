@@ -391,6 +391,7 @@
 		26192DE82D300C7E00944D32 /* ProfilFullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26192DE72D300C7E00944D32 /* ProfilFullViewController.swift */; };
 		26192DEB2D31107900944D32 /* HeaderProfilFullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26192DEA2D31107900944D32 /* HeaderProfilFullCell.swift */; };
 		26192DED2D31108900944D32 /* HeaderProfilFullCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26192DEC2D31108900944D32 /* HeaderProfilFullCell.xib */; };
+		26192DEF2D315ACC00944D32 /* ProfilFullViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26192DEE2D315ACC00944D32 /* ProfilFullViewController.xib */; };
 		26195B232C09F52000BEAD84 /* InterestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26195B222C09F52000BEAD84 /* InterestsCollectionViewCell.swift */; };
 		26195B252C09F7E000BEAD84 /* InterestsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26195B242C09F7E000BEAD84 /* InterestsCollectionViewCell.xib */; };
 		2619CCE52AE948AB00276D67 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2619CCE72AE948AB00276D67 /* Localizable.strings */; };
@@ -441,6 +442,8 @@
 		26584C4A2ACC48ED00ABD401 /* HomeCellMapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26584C492ACC48ED00ABD401 /* HomeCellMapButton.swift */; };
 		26584C4C2ACC492A00ABD401 /* HomeCellMapButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26584C4B2ACC492A00ABD401 /* HomeCellMapButton.xib */; };
 		26584C4E2ACC4B1300ABD401 /* CustomGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26584C4D2ACC4B1300ABD401 /* CustomGradientView.swift */; };
+		266791A92D37A78200BEDB4E /* ConversationNotifAskViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266791A82D37A78200BEDB4E /* ConversationNotifAskViewCell.swift */; };
+		266791AF2D37A7A400BEDB4E /* ConversationNotifAskViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266791AE2D37A7A400BEDB4E /* ConversationNotifAskViewCell.xib */; };
 		266B26212AB8AD5600C8EAD8 /* EventListMainV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B26202AB8AD5600C8EAD8 /* EventListMainV2ViewController.swift */; };
 		266B26282AB8BBA100C8EAD8 /* MyEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B26272AB8BBA100C8EAD8 /* MyEventCollectionViewCell.swift */; };
 		266B262A2AB8BCDD00C8EAD8 /* MyEventCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266B26292AB8BCDD00C8EAD8 /* MyEventCollectionViewCell.xib */; };
@@ -927,6 +930,7 @@
 		26192DE72D300C7E00944D32 /* ProfilFullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilFullViewController.swift; sourceTree = "<group>"; };
 		26192DEA2D31107900944D32 /* HeaderProfilFullCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfilFullCell.swift; sourceTree = "<group>"; };
 		26192DEC2D31108900944D32 /* HeaderProfilFullCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderProfilFullCell.xib; sourceTree = "<group>"; };
+		26192DEE2D315ACC00944D32 /* ProfilFullViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilFullViewController.xib; sourceTree = "<group>"; };
 		26195B222C09F52000BEAD84 /* InterestsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsCollectionViewCell.swift; sourceTree = "<group>"; };
 		26195B242C09F7E000BEAD84 /* InterestsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestsCollectionViewCell.xib; sourceTree = "<group>"; };
 		2619CCE62AE948AB00276D67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -991,6 +995,8 @@
 		26584C492ACC48ED00ABD401 /* HomeCellMapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellMapButton.swift; sourceTree = "<group>"; };
 		26584C4B2ACC492A00ABD401 /* HomeCellMapButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellMapButton.xib; sourceTree = "<group>"; };
 		26584C4D2ACC4B1300ABD401 /* CustomGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGradientView.swift; sourceTree = "<group>"; };
+		266791A82D37A78200BEDB4E /* ConversationNotifAskViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNotifAskViewCell.swift; sourceTree = "<group>"; };
+		266791AE2D37A7A400BEDB4E /* ConversationNotifAskViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationNotifAskViewCell.xib; sourceTree = "<group>"; };
 		266B26202AB8AD5600C8EAD8 /* EventListMainV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListMainV2ViewController.swift; sourceTree = "<group>"; };
 		266B26272AB8BBA100C8EAD8 /* MyEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventCollectionViewCell.swift; sourceTree = "<group>"; };
 		266B26292AB8BCDD00C8EAD8 /* MyEventCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEventCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1307,6 +1313,8 @@
 				02EAB5A528B8F2710060557D /* ConversationParametersViewController.swift */,
 				02EAB5A728B8F7A90060557D /* ConversationParamCell.swift */,
 				02EAB5A928B908400060557D /* ConversationListMembersViewController.swift */,
+				266791A82D37A78200BEDB4E /* ConversationNotifAskViewCell.swift */,
+				266791AE2D37A7A400BEDB4E /* ConversationNotifAskViewCell.xib */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -1996,6 +2004,7 @@
 			isa = PBXGroup;
 			children = (
 				26192DE92D300EE100944D32 /* cells */,
+				26192DEE2D315ACC00944D32 /* ProfilFullViewController.xib */,
 				26192DE72D300C7E00944D32 /* ProfilFullViewController.swift */,
 			);
 			path = ProfileFull;
@@ -2429,6 +2438,7 @@
 				02E2192D2837A16F002A1FCB /* Neighborhood_Report.storyboard in Resources */,
 				02490DC727EA246B00E2577B /* MJErrorInputView.xib in Resources */,
 				0207BF8527F2059400631914 /* UserDetail.storyboard in Resources */,
+				26192DEF2D315ACC00944D32 /* ProfilFullViewController.xib in Resources */,
 				025FFE0B27DBAD5100783E8D /* ApiKeys.plist in Resources */,
 				2609BFA62AC2C7D00052111C /* HomeV2CellTitle.xib in Resources */,
 				26BFC9A02ACD4DB400FDA030 /* HomeCellAction.xib in Resources */,
@@ -2557,6 +2567,7 @@
 				2694A74A2ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib in Resources */,
 				26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */,
 				025D8768278DED3C00909101 /* AppConfigurations.plist in Resources */,
+				266791AF2D37A7A400BEDB4E /* ConversationNotifAskViewCell.xib in Resources */,
 				025C92B028340787000970D9 /* NeighborhoodPostTextCell.xib in Resources */,
 				266B26342AB9E5A500C8EAD8 /* EmptyListCell.xib in Resources */,
 				26BC119929C88CD700F204BB /* NeighborhoodPostDeletedCell.xib in Resources */,
@@ -2854,6 +2865,7 @@
 				02DB43BF2967366B003C4FF8 /* ProfileEditPasswordViewController.swift in Sources */,
 				02CCE68A27D7B51E00D6976C /* CloseButton.swift in Sources */,
 				2630F6392C248520007BAE56 /* MainFilterDistanceCell.swift in Sources */,
+				266791A92D37A78200BEDB4E /* ConversationNotifAskViewCell.swift in Sources */,
 				2644F1E62C2ADB7300039A07 /* CellMainFilter.swift in Sources */,
 				2694A7482ACD6DF10042CFCA /* HomeEventHorizontalCollectionCell.swift in Sources */,
 				2630F62D2C2467FD007BAE56 /* MainFilterSectionTitleCell.swift in Sources */,

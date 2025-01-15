@@ -11,6 +11,10 @@ import UIKit
 class ProfilFullViewController:UIViewController{
     
     //OUTLET
+    @IBOutlet weak var ui_table_view: UITableView!
+    @IBOutlet weak var img_profile: UIImageView!
+    @IBOutlet weak var btn_back: UIImageView!
+    @IBOutlet weak var btn_signal: UIImageView!
     
     //VARIABLE
     

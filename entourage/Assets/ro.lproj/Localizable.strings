@@ -1578,3 +1578,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "mandatory_label" = "Obligatoriu";
 "share_request_title" = "Doriți să partajați %@ în grupul dvs. %@?";
 "share_request_description" = "Aveți posibilitatea de a partaja %@ în grupul de vecini din orașul dvs. pentru a-i îmbunătăți vizibilitatea";
+"conversation_notif_text" = "Notificările tale sunt dezactivate.\nActivează-le pentru a nu rata nimic";
+"conversation_notif_highlight" = "Activează-le pentru a nu rata nimic";

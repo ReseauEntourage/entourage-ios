@@ -1678,3 +1678,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "mandatory_label" = "Obowiązkowe";
 "share_request_title" = "Czy chcesz udostępnić swoje %@ w swojej grupie %@?";
 "share_request_description" = "Masz możliwość udostępnienia swojego %@ w grupie sąsiedzkiej swojego miasta, aby zwiększyć jego widoczność";
+
+"conversation_notif_text" = "Twoje powiadomienia są wyłączone.\nWłącz je, aby być na bieżąco";
+"conversation_notif_highlight" = "Włącz je, aby być na bieżąco";

@@ -1672,3 +1672,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_hygiene_description" = "Beispiel: Ich verschenke mehrere Packungen Damenhygieneartikel.";
 "share_request_title" = "Möchten Sie Ihr %@ in Ihrer %@-Gruppe teilen?";
 "share_request_description" = "Sie haben die Möglichkeit, Ihr %@ in der Nachbarschaftsgruppe Ihrer Stadt zu teilen, um dessen Sichtbarkeit zu erhöhen";
+
+"conversation_notif_text" = "Deine Benachrichtigungen sind deaktiviert.\nAktiviere sie, um nichts zu verpassen";
+"conversation_notif_highlight" = "Aktiviere sie, um nichts zu verpassen";

@@ -1654,3 +1654,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "share_request_title" = "Бажаєте поділитися своїм %@ у своїй групі %@?";
 "share_request_description" = "Ви маєте можливість поділитися своїм %@ у групі сусідів вашого міста, щоб покращити його видимість";
+
+"conversation_notif_text" = "Ваші сповіщення вимкнено.\nУвімкніть їх, щоб нічого не пропустити";
+"conversation_notif_highlight" = "Увімкніть їх, щоб нічого не пропустити";
