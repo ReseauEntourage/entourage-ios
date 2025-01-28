@@ -80,6 +80,30 @@ class ProfilFullViewController: UIViewController {
         }
     }
     
+    func showPopLogout() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "params_logout_pop_logout".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_logout_pop_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        
+        customAlert.configureAlert(alertTitle: "params_logout_pop_title".localized, message: "params_logout_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        
+        customAlert.alertTagName = .Logout
+        customAlert.delegate = self
+        customAlert.show()
+    }
+    
+    func showPopSuppress() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "params_suppress_pop_suppress".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_suppress_pop_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        
+        customAlert.configureAlert(alertTitle: "params_suppress_pop_title".localized, message: "params_suppress_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        
+        customAlert.alertTagName = .Suppress
+        customAlert.delegate = self
+        customAlert.show()
+    }
+    
     /// Charge les lignes du tableau (sans sous-titres, line by line)
     func loadDTO() {
         tableDTO.removeAll()
@@ -263,6 +287,89 @@ extension ProfilFullViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = tableDTO[indexPath.row]
+        
+        switch selectedItem {
+        case .standard(let img, let title, _):
+            switch title {
+            case "settings_language_title".localized:
+                // Navigation vers le choix de langue
+                let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "language") as? ProfileLanguageChooseViewController {
+                    vc.delegate = self
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true, completion: nil)
+                }
+                
+            case "settings_notifications_title".localized:
+                // Navigation vers les paramètres de notifications
+                let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "paramsNotifsVC")
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+                
+            case "settings_help_title".localized:
+                // Navigation vers la section d'aide
+                let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "paramsHelpVC")
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+                
+            case "settings_unblock_contacts_title".localized:
+                // Navigation vers le déblocage de contacts
+                let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "editBlockedVC")
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+                
+            case "settings_feedback_title".localized:
+                // Ouvrir l'URL de suggestion
+                
+                if let url = URL(string: MENU_SUGGEST_URL) {
+                    WebLinkManager.openUrlInApp(url: url, presenterViewController: self)
+                }
+                
+            case "settings_share_title".localized:
+                // Partager l'application
+                let textShare = String(format: "menu_info_text_share".localized, ENTOURAGE_BITLY_LINK)
+                let vc = UIActivityViewController(activityItems: [textShare], applicationActivities: nil)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+                
+            case "settings_password_title".localized:
+                // Navigation vers le changement de mot de passe
+                let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "editpwdNav")
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+                
+            case "logout_button".localized:
+                // Afficher la pop-up de déconnexion
+                showPopLogout()
+                
+            case "delete_account_button".localized:
+                // Afficher la pop-up de suppression de compte
+                showPopSuppress()
+                
+            default:
+                // Gérer les options spécifiques des préférences si besoin
+                if title == "preferences_availability_title".localized ||
+                   title == "preferences_interest_title".localized ||
+                   title == "preferences_action_title".localized ||
+                   title == "preferences_action_categories_title".localized {
+                    print("Action non définie pour: \(title)")
+                }
+                break
+            }
+
+        default:
+            // Aucune action pour les autres types d’éléments (header, section, etc.)
+            break
+        }
+    }
+
 }
 
 // MARK: - UIScrollViewDelegate (réduction photo de profil au scroll)
@@ -292,3 +399,35 @@ extension ProfilFullViewController: UIScrollViewDelegate {
     }
 }
 
+
+extension ProfilFullViewController: MJAlertControllerDelegate {
+    func validateLeftButton(alertTag:MJAlertTAG) {
+
+    }
+    
+    func validateRightButton(alertTag:MJAlertTAG) {
+        switch alertTag {
+        case .Suppress:
+            UserService.deleteUserAccount { error in
+                if let error = error {
+                    let errorMessage = String.init(format: "params_account_not_deleted".localized, error.message)                    
+                    return
+                }
+                NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)
+            }
+        case .Logout:
+            NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)
+        case .None,.AcceptSettings,.AcceptAdd,.welcomeMessage:
+            break
+        }
+    }
+    func closePressed(alertTag:MJAlertTAG) {}
+}
+
+extension ProfilFullViewController:ProfileLanguageCloseDelegate{
+    func onDismiss() {
+        self.dismiss(animated: true) {
+            AppState.navigateToMainApp()
+        }
+    }
+}
