@@ -345,7 +345,7 @@
 <path fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter" stroke="rgb(12.548828%, 51.765442%, 32.940674%)" stroke-opacity="1" stroke-miterlimit="10" d="M 21.660156 1.585938 C 22.378906 3.585938 21.941406 5.816406 20.511719 7.40625 C 19.636719 8.378906 18.457031 9.035156 17.160156 9.265625 L 1.890625 12 L 0 4.226562 L 12.589844 0 " transform="matrix(1, 0, 0, 1, 69, 53)"/>
 <g clip-path="url(#clip-56)">
 <g clip-path="url(#clip-57)">
-<path fill-rule="nonzero" fill="rgb(96.078491%, 37.254333%, 14.117432%)" fill-opacity="1" d="M 28 -1 L 53.421875 -1 L 53.421875 24 L 28 24 Z M 28 -1 "/>
+<path fill-rule="nonzero" fill="rgb(100%, 59.2%, 22.3%)" fill-opacity="1" d="M 28 -1 L 53.421875 -1 L 53.421875 24 L 28 24 Z M 28 -1 "/>
 </g>
 </g>
 <g clip-path="url(#clip-58)">
@@ -356,7 +356,7 @@
 <path fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter" stroke="rgb(100%, 70.588684%, 12.156677%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0 0 L 4.859375 17.707031 L 16 21 " transform="matrix(1, 0, 0, 1, 16, 37)"/>
 <path fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter" stroke="rgb(100%, 70.588684%, 12.156677%)" stroke-opacity="1" stroke-miterlimit="10" d="M 7 2 L 0 0 " transform="matrix(1, 0, 0, 1, 17, 54)"/>
 <path fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter" stroke="rgb(100%, 70.588684%, 12.156677%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0 0 L 5 19 " transform="matrix(1, 0, 0, 1, 6, 46)"/>
-<path fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(96.078491%, 37.254333%, 14.117432%)" stroke-opacity="1" stroke-miterlimit="10" d="M 14 7 L 0 0 " transform="matrix(1, 0, 0, 1, 61, 12)"/>
+<path fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(100%, 59.2%, 22.3%)" stroke-opacity="1" stroke-miterlimit="10" d="M 14 7 L 0 0 " transform="matrix(1, 0, 0, 1, 61, 12)"/>
 <g clip-path="url(#clip-60)">
 <g clip-path="url(#clip-61)">
 <path fill-rule="nonzero" fill="rgb(100%, 78.431702%, 28.627014%)" fill-opacity="1" d="M 19 38 L 28 38 L 28 55 L 19 55 Z M 19 38 "/>
