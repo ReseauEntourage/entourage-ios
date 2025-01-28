@@ -1719,3 +1719,41 @@
 "conversation_notif_text" = "Your notifications are disabled.\nEnable them to stay updated";
 "conversation_notif_highlight" = "Enable them to stay updated";
 
+//Profile full
+"enhanced_onboarding_time_disponibility_title" = "Mes disponibilités";
+"enhanced_onboarding_time_disponibility_description" = "Précisez vos disponibilités pour que l'on puisse vous suggérer des événements adaptés.";
+"enhanced_onboarding_time_disponibility_days_label" = "Mes jours";
+"enhanced_onboarding_time_disponibility_day_monday" = "Lundi";
+"enhanced_onboarding_time_disponibility_day_tuesday" = "Mardi";
+"enhanced_onboarding_time_disponibility_day_wednesday" = "Mercredi";
+"enhanced_onboarding_time_disponibility_day_thursday" = "Jeudi";
+"enhanced_onboarding_time_disponibility_day_friday" = "Vendredi";
+"enhanced_onboarding_time_disponibility_day_saturday" = "Samedi";
+"enhanced_onboarding_time_disponibility_day_sunday" = "Dimanche";
+"enhanced_onboarding_time_disponibility_time_slots_label" = "Mes tranches horaires";
+"enhanced_onboarding_time_disponibility_time_morning" = "Matin";
+"enhanced_onboarding_time_disponibility_time_afternoon" = "Après-midi";
+"enhanced_onboarding_time_disponibility_time_evening" = "Soir";
+"no_data_available" = "Non renseigné";
+"unknown_language" = "Langue non reconnue";
+"logout_button" = "Se déconnecter";
+"delete_account_button" = "Supprimer mon compte";
+"preferences_section_title" = "Mes préférences";
+"preferences_interest_title" = "Mes centres d'intérêt";
+"preferences_action_title" = "Mes envies d'agir";
+"preferences_availability_title" = "Mes disponibilités";
+"preferences_action_categories_title" = "Mes catégories d'entraide";
+"preferences_section_title_others" = "Ses préférences";
+"preferences_interest_title_others" = "Ses centres d'intérêt";
+"preferences_action_title_others" = "Ses envies d'agir";
+"preferences_availability_title_others" = "Ses disponibilités";
+"preferences_action_categories_title_others" = "Ses catégories d'entraide";
+"settings_section_title" = "Paramètres";
+"settings_language_title" = "Langue";
+"settings_notifications_title" = "Notifications";
+"settings_help_title" = "Aide et à propos";
+"settings_unblock_contacts_title" = "Débloquer des contacts";
+"settings_feedback_title" = "Partager une idée";
+"settings_share_title" = "Partager l'application";
+"settings_password_title" = "Changer de mot de passe";
+

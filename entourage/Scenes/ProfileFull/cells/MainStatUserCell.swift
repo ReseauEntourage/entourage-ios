@@ -1,72 +1,48 @@
 //
-//  MainUserActivitiesCell.swift
+//  MainStatUserCell.swift
 //  entourage
 //
-//  Created by Jerome on 09/03/2022.
+//  Created by Clement entourage on 28/01/2025.
 //
 
+import Foundation
 import UIKit
 
-class MainUserActivitiesCell: UITableViewCell {
+class MainStatUserCell:UITableViewCell {
     
-    @IBOutlet weak var ui_title_other_user: UILabel!
+    //OUTLET
     @IBOutlet weak var ui_title: UILabel!
-    @IBOutlet weak var ui_view_groups: UIView!
-    @IBOutlet weak var ui_view_outings: UIView!
     
-    @IBOutlet weak var ui_iv_groups: UIImageView!
     @IBOutlet weak var ui_groups_count: UILabel!
     @IBOutlet weak var ui_groups_title: UILabel!
     
-    @IBOutlet weak var ui_iv_outings: UIImageView!
     @IBOutlet weak var ui_outings_count: UILabel!
     @IBOutlet weak var ui_outings_title: UILabel!
-    
-    @IBOutlet weak var ui_view_member: UIView!
+  
     @IBOutlet weak var ui_member_title: UILabel!
     @IBOutlet weak var ui_member_date: UILabel!
-    
+    //VARIABLE
     class var identifier: String {
         return String(describing: self)
     }
     
+    
+    
     override func awakeFromNib() {
-        super.awakeFromNib()
         
-        addShadowAndRadius(customView: ui_view_member)
-        addShadowAndRadius(customView: ui_view_groups)
-        addShadowAndRadius(customView: ui_view_outings)
+    }
+    
+    func populate(){
         
-        ui_member_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .black))
-        ui_member_date.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
-        ui_member_title.text = "memberSince".localized
-        
-        ui_title?.font = ApplicationTheme.getFontH2Noir().font
-        ui_title?.textColor = ApplicationTheme.getFontH2Noir().color
-        ui_title?.text = "mainUserTitleActivity".localized
-        
-        ui_title_other_user?.font = ApplicationTheme.getFontH2Noir().font
-        ui_title_other_user?.textColor = ApplicationTheme.getFontH2Noir().color
-        ui_title_other_user?.text = "detail_user_his_activity".localized
-        
-        ui_outings_title.text = "mainUserTitleOutings".localized
-        textColor(label: ui_outings_title, isCount: false)
-        
-        ui_groups_title.text = "mainUserTitleGroups".localized
-        textColor(label: ui_groups_title, isCount: false)
-        ui_groups_count.text = "0"
-        textColor(label: ui_groups_count, isCount: true)
-        ui_outings_count.text = "0"
-        textColor(label: ui_outings_count, isCount: true)
     }
     
     func populateCell(isMe:Bool ,neighborhoodsCount:Int,outingsCount:Int,myDate:Date?) {
         
         if isMe {
-            ui_title_other_user?.text = "mainUserTitleActivity".localized
+            ui_title?.text = "mainUserTitleActivity".localized
         }
         else {
-            ui_title_other_user?.text = "detail_user_his_activity".localized
+            ui_title?.text = "detail_user_his_activity".localized
         }
         
         ui_outings_title.text = outingsCount <= 1 ? "mainUserTitleOuting".localized : "mainUserTitleOutings".localized
