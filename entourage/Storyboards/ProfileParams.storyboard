@@ -4271,7 +4271,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_button" translatesAutoresizingMaskIntoConstraints="NO" id="pb9-mv-e8A">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_button_white" translatesAutoresizingMaskIntoConstraints="NO" id="pb9-mv-e8A">
                                 <rect key="frame" x="20" y="50" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="Ioy-Ea-7WW"/>
@@ -4334,7 +4334,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back_button" width="20" height="22"/>
+        <image name="back_button_white" width="21" height="22"/>
         <image name="ic_action_profile" width="20" height="20"/>
         <image name="ic_backgrnd_welcome" width="375" height="376"/>
         <image name="ic_birth" width="20" height="20"/>
