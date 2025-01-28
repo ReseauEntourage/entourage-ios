@@ -686,7 +686,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             if postmessage.survey != nil {
                 identifier = NeighborhoodPostSurveyCell.identifier
             }
-            if postmessage.status == "deleted" {
+            if postmessage.status == "deleted" || postmessage.status == "offensive" || postmessage.status == "offensible" {
                 identifier = NeighborhoodPostDeletedCell.identifier
             }
             if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
@@ -732,7 +732,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         if postmessage.survey != nil {
             identifier = NeighborhoodPostSurveyCell.identifier
         }
-        if postmessage.status == "deleted" {
+        if postmessage.status == "deleted" || postmessage.status == "offensive" || postmessage.status == "offensible" {
             identifier = NeighborhoodPostDeletedCell.identifier
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell

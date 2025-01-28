@@ -1694,3 +1694,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_feedback_title" = "Поділитися ідеєю";
 "settings_share_title" = "Поділитися додатком";
 "settings_password_title" = "Змінити пароль";
+"content_removed" = "Цей вміст було видалено, оскільки він не відповідає нашим правилам.";

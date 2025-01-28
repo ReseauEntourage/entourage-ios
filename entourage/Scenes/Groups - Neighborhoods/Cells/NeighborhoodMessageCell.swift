@@ -125,8 +125,15 @@ class NeighborhoodMessageCell: UITableViewCell {
         }
         if let _status = message.status {
             print("status ", _status)
+
             if _status == "deleted" {
                 ui_message.text = "deleted_comment".localized
+                ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
+                ui_view_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
+                ui_message.superview?.addSubview(deletedImageView!) // Ajouter l'image à la vue parente de ActiveLabel
+                
+            }else if _status == "offensive" || _status == "offensible"  {
+                ui_message.text = "content_removed".localized
                 ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
                 ui_message.superview?.addSubview(deletedImageView!) // Ajouter l'image à la vue parente de ActiveLabel
@@ -148,7 +155,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                     
                 }
                 if let _translation = message.contentTranslations{
-                    if(isTranslated && message.status != "deleted"){
+                    if(isTranslated && message.status != "deleted" || isTranslated && message.status != "offensive" || isTranslated && message.status != "offensible"){
                         print("message", _translation.translation)
                         ui_message.text = _translation.translation
                     }else{
@@ -197,6 +204,11 @@ class NeighborhoodMessageCell: UITableViewCell {
         if let _status = message.status {
             if _status == "deleted" {
                 ui_message.text = "deleted_message".localized
+                ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
+                ui_view_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
+                ui_message.superview?.addSubview(deletedImageView!) // Ajouter l'image à la vue parente de ActiveLabel
+            }else if _status == "offensive" || _status == "offensible"{
+                ui_message.text = "content_removed".localized
                 ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
                 ui_message.superview?.addSubview(deletedImageView!) // Ajouter l'image à la vue parente de ActiveLabel

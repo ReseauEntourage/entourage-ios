@@ -1713,3 +1713,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_feedback_title" = "Partager une idée";
 "settings_share_title" = "Partager l'application";
 "settings_password_title" = "Changer de mot de passe";
+"content_removed" = "Ce contenu a été supprimé car il ne respecte pas notre charte.";
+

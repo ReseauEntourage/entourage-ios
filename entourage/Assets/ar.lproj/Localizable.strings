@@ -1653,3 +1653,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_feedback_title" = "مشاركة فكرة";
 "settings_share_title" = "مشاركة التطبيق";
 "settings_password_title" = "تغيير كلمة المرور";
+"content_removed" = "تمت إزالة هذا المحتوى لأنه لا يمتثل لسياستنا.";

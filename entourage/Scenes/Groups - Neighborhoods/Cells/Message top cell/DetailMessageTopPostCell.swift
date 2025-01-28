@@ -54,8 +54,11 @@ class DetailMessageTopPostCell: UITableViewCell {
         self.postMessage = message
         ui_user.text = "\(message.user?.displayName ?? "-") le \(message.createdDateFormatted)"
         ui_comment.text = message.content
-        if message.status == "deleted"{
+        if message.status == "deleted" {
             ui_comment.text = "deleted_post_text".localized
+        }
+        if message.status == "offensive" || message.status == "offensible"{
+            ui_comment.text = "content_removed"
         }
         postId = message.uid
         

@@ -1712,3 +1712,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_feedback_title" = "Eine Idee teilen";
 "settings_share_title" = "App teilen";
 "settings_password_title" = "Passwort ändern";
+"content_removed" = "Dieser Inhalt wurde entfernt, da er nicht unseren Richtlinien entspricht.";

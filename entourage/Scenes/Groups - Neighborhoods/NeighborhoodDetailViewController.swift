@@ -597,7 +597,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.survey != nil {
                     identifier = NeighborhoodPostSurveyCell.identifier
                 }
-                if postmessage.status == "deleted" {
+                if postmessage.status == "deleted" || postmessage.status == "offensive" || postmessage.status == "offensible" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
@@ -637,7 +637,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.survey != nil {
                     identifier = NeighborhoodPostSurveyCell.identifier
                 }
-                if postmessage.status == "deleted" {
+                if postmessage.status == "deleted" || postmessage.status == "offensive" || postmessage.status == "offensible" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
@@ -661,7 +661,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             if postmessage.survey != nil {
                 identifier = NeighborhoodPostSurveyCell.identifier
             }
-            if postmessage.status == "deleted" {
+            if postmessage.status == "deleted" || postmessage.status == "offensive" || postmessage.status == "offensible" {
                 identifier = NeighborhoodPostDeletedCell.identifier
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell

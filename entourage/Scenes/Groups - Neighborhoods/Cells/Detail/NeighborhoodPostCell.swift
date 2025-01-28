@@ -469,7 +469,11 @@ class NeighborhoodPostCell: UITableViewCell {
                 ui_comment.text = "deleted_post_text".localized
                 ui_comment.textColor = UIColor.appGrey151
                 ui_btn_signal_post.isHidden = true
-            }else{
+            }else if _status == "offensive" || _status == "offensible"{
+                ui_comment.text = "content_removed".localized
+                ui_comment.textColor = UIColor.appGrey151
+                ui_btn_signal_post.isHidden = true
+            } else{
                 ui_comment.textColor = .black
                 ui_btn_signal_post.isHidden = false
                 toggleTranslation()
