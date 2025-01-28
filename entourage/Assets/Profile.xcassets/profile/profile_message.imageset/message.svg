@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21" height="21" viewBox="0 0 21 21">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 6 9 L 8 9 L 8 11 L 6 11 Z M 6 9 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="evenodd" d="M 8 10 C 8 10.550781 7.550781 11 7 11 C 6.449219 11 6 10.550781 6 10 C 6 9.449219 6.449219 9 7 9 C 7.550781 9 8 9.449219 8 10 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="nonzero" d="M 10 9 L 12 9 L 12 11 L 10 11 Z M 10 9 "/>
+</clipPath>
+<clipPath id="clip-3">
+<path clip-rule="evenodd" d="M 12 10 C 12 10.550781 11.550781 11 11 11 C 10.449219 11 10 10.550781 10 10 C 10 9.449219 10.449219 9 11 9 C 11.550781 9 12 9.449219 12 10 "/>
+</clipPath>
+<clipPath id="clip-4">
+<path clip-rule="nonzero" d="M 14 9 L 16 9 L 16 11 L 14 11 Z M 14 9 "/>
+</clipPath>
+<clipPath id="clip-5">
+<path clip-rule="evenodd" d="M 16 10 C 16 10.550781 15.550781 11 15 11 C 14.449219 11 14 10.550781 14 10 C 14 9.449219 14.449219 9 15 9 C 15.550781 9 16 9.449219 16 10 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<g clip-path="url(#clip-1)">
+<path fill-rule="nonzero" fill="rgb(96.078491%, 37.254333%, 14.117432%)" fill-opacity="1" d="M 5 8 L 9 8 L 9 12 L 5 12 Z M 5 8 "/>
+</g>
+</g>
+<g clip-path="url(#clip-2)">
+<g clip-path="url(#clip-3)">
+<path fill-rule="nonzero" fill="rgb(96.078491%, 37.254333%, 14.117432%)" fill-opacity="1" d="M 9 8 L 13 8 L 13 12 L 9 12 Z M 9 8 "/>
+</g>
+</g>
+<g clip-path="url(#clip-4)">
+<g clip-path="url(#clip-5)">
+<path fill-rule="nonzero" fill="rgb(96.078491%, 37.254333%, 14.117432%)" fill-opacity="1" d="M 13 8 L 17 8 L 17 12 L 13 12 Z M 13 8 "/>
+</g>
+</g>
+<path fill="none" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(96.078491%, 37.254333%, 14.117432%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0234375 8.835938 C -0.351562 14.3125 3.921875 18.886719 9.292969 19 L 16.144531 19 C 16.292969 19 16.355469 18.820312 16.246094 18.726562 L 15.019531 17.699219 C 14.871094 17.570312 14.878906 17.335938 15.035156 17.222656 C 15.210938 17.097656 15.375 16.96875 15.539062 16.835938 C 17.652344 15.089844 19 12.457031 19 9.503906 C 19 4.050781 14.414062 -0.324219 8.890625 0.0195312 C 4.183594 0.3125 0.34375 4.128906 0.0234375 8.835938 Z M 0.0234375 8.835938 " transform="matrix(1, 0, 0, 1, 1, 1)"/>
+</svg>

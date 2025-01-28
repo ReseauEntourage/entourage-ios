@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="70" height="70" viewBox="0 0 70 70">
+<defs>
+<filter id="filter-remove-color" x="0%" y="0%" width="100%" height="100%">
+<feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" />
+</filter>
+<filter id="filter-color-to-alpha" x="0%" y="0%" width="100%" height="100%">
+<feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2126 0.7152 0.0722 0 0"/>
+</filter>
+<image id="source-7" x="0" y="0" width="70" height="70" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAAAAABURb1YAAAAAmJLR0QA/4ePzL8AAAQ2SURBVFiFtZjrkuq4DoWXLo4TLuf9n3MI6Ti2pfPDgR26oXegZlxFURXij2XJlmQRXg4CqH3B28d/e/fFcyIQEa0Yd3e4vyI9xTSAkBATEQB3N69mDfZkhj6FMAmriIgwEcHdrdZaa7Hq9mxxPzAEYhbVEDSoCDMDMLNaSy45l1LtCUh/QEgkhK7ruk7Dg5pclmVZlpxr/WHuRwwRsYQuxj7GEFSZebWNmZWSc0pzSkuu9s1E+o2i2sVh6PuuCyLMG0+Z1ZqXZZ6/vtJSyqMefaCwhn4YDkOMQRtkdaU3RV3MsY/d19dMxbYc3VJEu+FwOA59pyLN1XebgcCuGrrYdUHli0rdcHRLCXE4ng6H2Inwkw1FBBZRDRqEOWHD0S2lPxzPxyEGfQZpbwkLi6gwEzYcfaCcz8ehV6FXFADEgYXbdvrD0RuFNR7O59MhanvjNYdAxLcjsnIahkDaDcfT6diFlwu6j7YN3Mw8O/lGDWsYjufTYQ8FIA5wdzPzYgAAaTolDKf/nQ/9LgrWVblZNd9gWPvj+XQcguyitFMD91pXjgAg0m44nU9DpzspABEAq2WDYdb+1Jy0l9I4brVUhwMCEEk8nM/HvYa5gxqmGgAGwBL6PnZPD8AvFJYu9n0Qbhgi7WIfda957xzR2MdOiQAGkWiMsVHfGiwhxqhCBAaIQ4jhbTEAiYYYAq9qNHRh94555ITQBSUCE7FoF96074phCZ0KEzHAElQ/xagGYYBBIvpLoPoLR4OKEJiIRFow+wTDIkJEDGJ5Hnr3cdpkBhHzh2KANrftG7pltfcp62QwEd3Kj084bTJxi9GfQW6C2gn/Fwbjl1Jsx2ilHNjd3dw/BDnc3N0ZcLdPBTnczB3gVgLZp2qscRhu9zTxCaZNZm/Z5jOOm9Va3Z3htZZcPsWUXGp1MGA1l/LRstxqKbkawO5WS6stP8HkpVRzZ7iXvORcP8HUnJdc3MGAW84pl/c5XsuSlmzrvqklpZSrvYuxmpe0lLqq8bKkOb0tx2tJc1pK28WA1TzPaXnTym51SfPcViEACGBRfTOue0nTOE6puq/VFojoXY7XZb5exrm5WNanxMLfCvy/UMp8HccpFb9jCACRCAvv5LiVeRov13lbiQKAEzEz7eO45TSNl+tXrn6v/QBqcYtYdnHc8jKNl3FaVjE3NQTHLV38NU+YlTSNzTDY1MXrf7iDbqX8L1K8lnm6Xi5TKnaL4bL52d2bxt8c5laWeRr/Gaf5ZpgfaqwFaDhegNxKSfN1vIxT2lC2mDW429pG+NkxcLdS8jxdL+N1SmVDecDA3atZNavut9T158pqteYlTdN4uV6/lj92AR5vvg7LbmVZ0o4L9GOGfBT+xnX+Mc9+W//e5sL3LPvDIXtaHT9T9bPr9l8aL8/y/Y42EKFVHdXryzbQf9mUuv+0u0X2f0HU/xCloSDOAAAAAElFTkSuQmCC"/>
+<mask id="mask-0">
+<g filter="url(#filter-remove-color)">
+<use xlink:href="#source-7" filter="url(#filter-color-to-alpha)"/>
+</g>
+</mask>
+<image id="source-6" x="0" y="0" width="70" height="70" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAIAAAD+THXTAAAABmJLR0QA/wD/AP+gvaeTAAAAJUlEQVRoge3BMQEAAADCoPVPbQhfoAAAAAAAAAAAAAAAAAAA+Aw5sgABXev1nAAAAABJRU5ErkJggg=="/>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 4 2 L 66 2 L 66 64 L 4 64 Z M 4 2 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="evenodd" d="M 35 64 C 52.121094 64 66 50.121094 66 33 C 66 15.878906 52.121094 2 35 2 C 17.878906 2 4 15.878906 4 33 C 4 50.121094 17.878906 64 35 64 Z M 35 64 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="nonzero" d="M 26 23 L 45 23 L 45 42 L 26 42 Z M 26 23 "/>
+</clipPath>
+<clipPath id="clip-3">
+<path clip-rule="evenodd" d="M 28.023438 24.019531 L 28.117188 24.105469 L 35.117188 31.105469 L 41.785156 24.441406 C 42.195312 24.03125 42.875 24.046875 43.304688 24.476562 C 43.703125 24.875 43.746094 25.488281 43.421875 25.902344 L 43.34375 25.996094 L 36.675781 32.660156 L 43.675781 39.664062 C 44.105469 40.09375 44.121094 40.773438 43.710938 41.179688 C 43.332031 41.5625 42.71875 41.574219 42.289062 41.230469 L 42.195312 41.144531 L 35.191406 34.144531 L 28.527344 40.8125 C 28.117188 41.21875 27.4375 41.203125 27.007812 40.773438 C 26.609375 40.375 26.566406 39.761719 26.890625 39.347656 L 26.972656 39.253906 L 33.636719 32.585938 L 26.636719 25.585938 C 26.207031 25.15625 26.191406 24.476562 26.601562 24.070312 C 26.980469 23.6875 27.59375 23.675781 28.023438 24.019531 Z M 28.023438 24.019531 "/>
+</clipPath>
+</defs>
+<g mask="url(#mask-0)">
+<use xlink:href="#source-6"/>
+</g>
+<g clip-path="url(#clip-0)">
+<g clip-path="url(#clip-1)">
+<path fill-rule="nonzero" fill="rgb(96.078491%, 37.254333%, 14.117432%)" fill-opacity="1" d="M 3 1 L 67 1 L 67 65 L 3 65 Z M 3 1 "/>
+</g>
+</g>
+<g clip-path="url(#clip-2)">
+<g clip-path="url(#clip-3)">
+<path fill-rule="nonzero" fill="rgb(100%, 98.823547%, 98.039246%)" fill-opacity="1" d="M 25.191406 22.675781 L 45.121094 22.675781 L 45.121094 42.574219 L 25.191406 42.574219 Z M 25.191406 22.675781 "/>
+</g>
+</g>
+</svg>
