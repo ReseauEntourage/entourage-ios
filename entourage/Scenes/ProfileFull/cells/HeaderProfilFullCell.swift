@@ -29,7 +29,11 @@ class HeaderProfilFullCell:UITableViewCell {
     
     override func awakeFromNib() {
         configureOrangeButton(ui_btn_modify, withTitle: "modify".localized)
-
+        ui_label_name.setFontTitle(size: 15)
+        ui_label_city.setFontBody(size: 15)
+        ui_label_description.setFontBody(size: 15)
+        ui_label_phone.setFontBody(size: 15)
+        ui_label_mail.setFontBody(size: 15)
     }
     
     

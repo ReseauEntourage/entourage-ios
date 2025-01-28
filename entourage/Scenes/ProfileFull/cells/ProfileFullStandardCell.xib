@@ -42,14 +42,24 @@
                         <color key="textColor" name="grey_text_deleted"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGF-mp-rfL">
+                        <rect key="frame" x="10" y="57.666666666666664" width="411" height="1"/>
+                        <color key="backgroundColor" name="grey_off"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="5aj-hC-uZ3"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="9dd-Z0-aZU" secondAttribute="bottom" constant="10" id="1Mi-L8-yPV"/>
                     <constraint firstItem="8Oj-pY-6Ne" firstAttribute="top" secondItem="j4j-X0-O3M" secondAttribute="top" constant="10" id="BCP-eD-hNj"/>
+                    <constraint firstAttribute="trailing" secondItem="UGF-mp-rfL" secondAttribute="trailing" constant="20" id="Dye-jE-FEW"/>
                     <constraint firstItem="9dd-Z0-aZU" firstAttribute="top" secondItem="mqj-fL-JGK" secondAttribute="bottom" constant="4" id="Exm-HZ-fm3"/>
                     <constraint firstItem="mqj-fL-JGK" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="trailing" constant="10" id="Geo-5h-IAt"/>
+                    <constraint firstItem="UGF-mp-rfL" firstAttribute="top" secondItem="9dd-Z0-aZU" secondAttribute="bottom" constant="10" id="MMx-TT-q9k"/>
+                    <constraint firstAttribute="bottom" secondItem="UGF-mp-rfL" secondAttribute="bottom" constant="10" id="Pae-BU-HJ8"/>
                     <constraint firstAttribute="trailing" secondItem="mqj-fL-JGK" secondAttribute="trailing" constant="10" id="Riw-TU-tEa"/>
                     <constraint firstItem="8Oj-pY-6Ne" firstAttribute="centerY" secondItem="j4j-X0-O3M" secondAttribute="centerY" id="TNQ-Iv-I8c"/>
+                    <constraint firstItem="UGF-mp-rfL" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="leading" id="bMK-wD-kcM"/>
                     <constraint firstItem="9dd-Z0-aZU" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="trailing" constant="10" id="cHx-DD-dFr"/>
                     <constraint firstItem="mqj-fL-JGK" firstAttribute="top" secondItem="8Oj-pY-6Ne" secondAttribute="top" id="hLU-T8-kjk"/>
                     <constraint firstAttribute="trailing" secondItem="9dd-Z0-aZU" secondAttribute="trailing" constant="10" id="kQ2-Uq-3AI"/>
@@ -68,6 +78,9 @@
     <resources>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="grey_off">
+            <color red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="grey_text_deleted">
             <color red="0.65490196078431373" green="0.6470588235294118" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

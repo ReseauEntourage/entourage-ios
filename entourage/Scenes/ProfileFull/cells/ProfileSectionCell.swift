@@ -20,7 +20,7 @@ class ProfileSectionCell:UITableViewCell {
     
     
     override func awakeFromNib() {
-        
+        ui_title.setFontTitle(size: 15)
     }
     
     func configure(title:String) {

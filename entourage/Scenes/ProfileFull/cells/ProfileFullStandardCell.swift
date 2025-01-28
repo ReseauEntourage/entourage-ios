@@ -22,7 +22,9 @@ class ProfileFullStandardCell:UITableViewCell{
     
     
     override func awakeFromNib() {
-        
+        ui_title.setFontTitle(size: 15)
+        ui_subtitle.setFontBody(size: 15)
+        ui_subtitle.textColor = UIColor.appGreyOff
     }
     
     func configure(image:String, title:String, subtitle:String){
