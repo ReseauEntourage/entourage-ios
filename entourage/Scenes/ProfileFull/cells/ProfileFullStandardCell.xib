@@ -10,11 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileFullStandardCell" rowHeight="71" id="aIF-d1-Wea" customClass="ProfileFullStandardCell" customModule="Ent_Beta" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="441" height="71"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileFullStandardCell" rowHeight="62" id="aIF-d1-Wea" customClass="ProfileFullStandardCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="441" height="62"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aIF-d1-Wea" id="j4j-X0-O3M">
-                <rect key="frame" x="0.0" y="0.0" width="441" height="71"/>
+                <rect key="frame" x="0.0" y="0.0" width="441" height="62"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Oj-pY-6Ne">
@@ -43,7 +43,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGF-mp-rfL">
-                        <rect key="frame" x="10" y="57.666666666666664" width="411" height="1"/>
+                        <rect key="frame" x="10" y="56.666666666666664" width="411" height="1"/>
                         <color key="backgroundColor" name="grey_off"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="5aj-hC-uZ3"/>
@@ -55,16 +55,15 @@
                     <constraint firstAttribute="trailing" secondItem="UGF-mp-rfL" secondAttribute="trailing" constant="20" id="Dye-jE-FEW"/>
                     <constraint firstItem="9dd-Z0-aZU" firstAttribute="top" secondItem="mqj-fL-JGK" secondAttribute="bottom" constant="4" id="Exm-HZ-fm3"/>
                     <constraint firstItem="mqj-fL-JGK" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="trailing" constant="10" id="Geo-5h-IAt"/>
-                    <constraint firstItem="UGF-mp-rfL" firstAttribute="top" secondItem="9dd-Z0-aZU" secondAttribute="bottom" constant="10" id="MMx-TT-q9k"/>
-                    <constraint firstAttribute="bottom" secondItem="UGF-mp-rfL" secondAttribute="bottom" constant="10" id="Pae-BU-HJ8"/>
+                    <constraint firstAttribute="bottom" secondItem="UGF-mp-rfL" secondAttribute="bottom" id="Pae-BU-HJ8"/>
                     <constraint firstAttribute="trailing" secondItem="mqj-fL-JGK" secondAttribute="trailing" constant="10" id="Riw-TU-tEa"/>
                     <constraint firstItem="8Oj-pY-6Ne" firstAttribute="centerY" secondItem="j4j-X0-O3M" secondAttribute="centerY" id="TNQ-Iv-I8c"/>
                     <constraint firstItem="UGF-mp-rfL" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="leading" id="bMK-wD-kcM"/>
                     <constraint firstItem="9dd-Z0-aZU" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="trailing" constant="10" id="cHx-DD-dFr"/>
                     <constraint firstItem="mqj-fL-JGK" firstAttribute="top" secondItem="8Oj-pY-6Ne" secondAttribute="top" id="hLU-T8-kjk"/>
                     <constraint firstAttribute="trailing" secondItem="9dd-Z0-aZU" secondAttribute="trailing" constant="10" id="kQ2-Uq-3AI"/>
+                    <constraint firstAttribute="bottom" secondItem="9dd-Z0-aZU" secondAttribute="bottom" constant="10" id="mCP-Dc-PjW"/>
                     <constraint firstItem="8Oj-pY-6Ne" firstAttribute="leading" secondItem="j4j-X0-O3M" secondAttribute="leading" constant="10" id="r5R-L9-vKu"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8Oj-pY-6Ne" secondAttribute="bottom" constant="10" id="szx-4P-YpC"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -72,7 +71,7 @@
                 <outlet property="ui_subtitle" destination="9dd-Z0-aZU" id="OF5-Vj-Cf0"/>
                 <outlet property="ui_title" destination="mqj-fL-JGK" id="RwP-Cb-msx"/>
             </connections>
-            <point key="canvasLocation" x="228.24427480916029" y="-11.619718309859156"/>
+            <point key="canvasLocation" x="228.24427480916029" y="-14.788732394366198"/>
         </tableViewCell>
     </objects>
     <resources>

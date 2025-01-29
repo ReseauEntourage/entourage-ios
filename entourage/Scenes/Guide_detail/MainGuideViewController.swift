@@ -406,12 +406,13 @@ class MainGuideViewController: UIViewController {
             
             if let response = response {
                 var newAnnotations: [MKAnnotation] = []
-                
+                self.pois.removeAll()
                 // Traitez chaque cluster ou poi
                 for cluster in response.clusters {
                     if cluster.type == "poi" {
                         let poi = MapPoi(from: cluster)
                         let annot = CustomAnnotation(poi: poi)
+                        self.pois.append(poi)
                         newAnnotations.append(annot)
                     } else if cluster.type == "cluster" {
                         let clusterAnnotation = ClusterAnnotation(clusterPoi: cluster)
@@ -420,6 +421,8 @@ class MainGuideViewController: UIViewController {
                 }
                 
                 self.updateAnnotations(with: newAnnotations)
+                self.ui_tableView.reloadData()
+
             }
         }
     }

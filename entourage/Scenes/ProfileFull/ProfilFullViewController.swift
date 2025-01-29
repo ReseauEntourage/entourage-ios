@@ -80,6 +80,22 @@ class ProfilFullViewController: UIViewController {
         }
     }
     
+    private func openEnhancedOnboarding(mode: EnhancedOnboardingMode) {
+        // On configure la variable de configuration pour savoir qu’on vient des settings
+        EnhancedOnboardingConfiguration.shared.isInterestsFromSetting = true
+        
+        // Instancier le storyboard (adaptez le nom s’il est différent)
+        let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "enhancedOnboarding") as? EnhancedViewController {
+            // On spécifie le mode (interest, concern, involvement ou choiceDisponibility)
+            EnhancedOnboardingConfiguration.shared.isInterestsFromSetting = true
+            vc.mode = mode
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
+    }
+
+    
     func showPopLogout() {
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "params_logout_pop_logout".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
@@ -294,6 +310,22 @@ extension ProfilFullViewController: UITableViewDelegate, UITableViewDataSource {
         switch selectedItem {
         case .standard(let img, let title, _):
             switch title {
+                
+            case "preferences_interest_title".localized :
+                // Ouvrir l’onboarding en mode "interest"
+                openEnhancedOnboarding(mode: .interest)
+                    
+            case "preferences_action_title".localized :
+                // Ouvrir l’onboarding en mode "involvement"
+                openEnhancedOnboarding(mode: .involvement)
+                    
+            case "preferences_action_categories_title".localized :
+                // Ouvrir l’onboarding en mode "concern"
+                openEnhancedOnboarding(mode: .concern)
+                    
+            case "preferences_availability_title".localized :
+                // Ouvrir l’onboarding en mode "choiceDisponibility"
+                openEnhancedOnboarding(mode: .choiceDisponibility)
             case "settings_language_title".localized:
                 // Navigation vers le choix de langue
                 let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
