@@ -120,7 +120,6 @@ class ProfilFullViewController: UIViewController {
         customAlert.show()
     }
     
-    /// Charge les lignes du tableau (sans sous-titres, line by line)
     func loadDTO() {
         tableDTO.removeAll()
         
@@ -133,7 +132,70 @@ class ProfilFullViewController: UIViewController {
         tableDTO.append(.mainUserActivity(user: user))
         
         // --------------------------------------------------
-        // SECTION : Préférences
+        // PRÉPARATION DES SOUS-TITRES POUR LES PRÉFÉRENCES
+        // --------------------------------------------------
+        
+        // (A) Centres d’intérêt
+        let userInterests = user.interests ?? []
+        let interestsDisplay: String
+        if userInterests.isEmpty {
+            interestsDisplay = "no_data_available".localized  // "Non renseigné"
+        } else {
+            // Exemple: ["sport", "cuisine"] → "Sport, Cuisine"
+            interestsDisplay = userInterests
+                .map { TagsUtils.showTagTranslated($0) }
+                .joined(separator: ", ")
+        }
+        
+        // (B) Envies d’agir
+        let userInvolvements = user.involvements ?? []
+        let involvementsDisplay: String
+        if userInvolvements.isEmpty {
+            involvementsDisplay = "no_data_available".localized
+        } else {
+            involvementsDisplay = userInvolvements
+                .map { TagsUtils.showTagTranslated($0) }
+                .joined(separator: ", ")
+        }
+        
+        // (C) Catégories d’entraide
+        let userConcerns = user.concerns ?? []
+        let concernsDisplay: String
+        if userConcerns.isEmpty {
+            concernsDisplay = "no_data_available".localized
+        } else {
+            concernsDisplay = userConcerns
+                .map { TagsUtils.showTagTranslated($0) }
+                .joined(separator: ", ")
+        }
+        
+        // (D) Disponibilités
+        let userAvailability = user.availability ?? [:]  // [String: [String]]
+        let availabilityDisplay: String
+        if userAvailability.isEmpty {
+            availabilityDisplay = "no_data_available".localized
+        } else {
+            /*
+             Exemple:
+             userAvailability = [
+               "1": ["09:00-12:00", "14:00-18:00"],
+               "3": ["14:00-18:00"]
+             ]
+             → "Lundi (Matin, Après-midi) • Mercredi (Après-midi)"
+            */
+            var availabilityParts: [String] = []
+            for (dayKey, slots) in userAvailability {
+                let dayLabel = dayName(for: dayKey)
+                let slotLabels = slots
+                    .map { timeSlotName(for: $0) }
+                    .joined(separator: ", ")
+                availabilityParts.append("\(dayLabel) (\(slotLabels))")
+            }
+            availabilityDisplay = availabilityParts.joined(separator: " • ")
+        }
+        
+        // --------------------------------------------------
+        // SECTION : PRÉFÉRENCES
         // --------------------------------------------------
         let preferencesSectionTitle = isMe
             ? "preferences_section_title".localized // "Mes préférences"
@@ -147,7 +209,7 @@ class ProfilFullViewController: UIViewController {
         tableDTO.append(.standard(
             img: "ic_profil_full_interest",
             title: interestsTitle,
-            subtitle: ""
+            subtitle: interestsDisplay
         ))
         
         // b) Envies d’agir
@@ -157,7 +219,7 @@ class ProfilFullViewController: UIViewController {
         tableDTO.append(.standard(
             img: "ic_profil_full_action",
             title: actionTitle,
-            subtitle: ""
+            subtitle: involvementsDisplay
         ))
         
         // c) Catégories d’entraide
@@ -167,7 +229,7 @@ class ProfilFullViewController: UIViewController {
         tableDTO.append(.standard(
             img: "ic_profil_full_action_category",
             title: categoriesTitle,
-            subtitle: ""
+            subtitle: concernsDisplay
         ))
         
         // d) Disponibilités
@@ -177,11 +239,11 @@ class ProfilFullViewController: UIViewController {
         tableDTO.append(.standard(
             img: "ic_profil_full_disponibility",
             title: availabilityTitle,
-            subtitle: ""
+            subtitle: availabilityDisplay
         ))
         
         // --------------------------------------------------
-        // SECTION : Paramètres (si c’est mon profil)
+        // SECTION : PARAMÈTRES (si c’est mon profil)
         // --------------------------------------------------
         if isMe {
             tableDTO.append(.section(title: "settings_section_title".localized)) // "Paramètres"
@@ -215,8 +277,6 @@ class ProfilFullViewController: UIViewController {
             ))
             
             // 5) Partager l'application
-            // ATTENTION : pas d’icône 'ic_profil_full_share' dans la liste fournie,
-            // on peut réutiliser 'ic_profil_full_suggest' ou un autre au besoin.
             tableDTO.append(.standard(
                 img: "ic_profil_full_suggest",
                 title: "settings_share_title".localized, // "Partager l'application"
@@ -245,8 +305,10 @@ class ProfilFullViewController: UIViewController {
             ))
         }
         
+        // On recharge le tableau
         ui_table_view.reloadData()
     }
+
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -460,6 +522,44 @@ extension ProfilFullViewController:ProfileLanguageCloseDelegate{
     func onDismiss() {
         self.dismiss(animated: true) {
             AppState.navigateToMainApp()
+        }
+    }
+}
+
+extension ProfilFullViewController {
+    /// Convertit un code de jour ("1" → Lundi, "2" → Mardi, etc.) en texte localisé
+    func dayName(for dayKey: String) -> String {
+        switch dayKey {
+        case "1":
+            return "enhanced_onboarding_time_disponibility_day_monday".localized
+        case "2":
+            return "enhanced_onboarding_time_disponibility_day_tuesday".localized
+        case "3":
+            return "enhanced_onboarding_time_disponibility_day_wednesday".localized
+        case "4":
+            return "enhanced_onboarding_time_disponibility_day_thursday".localized
+        case "5":
+            return "enhanced_onboarding_time_disponibility_day_friday".localized
+        case "6":
+            return "enhanced_onboarding_time_disponibility_day_saturday".localized
+        case "7":
+            return "enhanced_onboarding_time_disponibility_day_sunday".localized
+        default:
+            return dayKey // ou "no_data_available".localized
+        }
+    }
+    
+    /// Convertit un créneau ("09:00-12:00" → Matin, etc.) en texte localisé
+    func timeSlotName(for slot: String) -> String {
+        switch slot {
+        case "09:00-12:00":
+            return "enhanced_onboarding_time_disponibility_time_morning".localized
+        case "14:00-18:00":
+            return "enhanced_onboarding_time_disponibility_time_afternoon".localized
+        case "18:00-21:00":
+            return "enhanced_onboarding_time_disponibility_time_evening".localized
+        default:
+            return slot
         }
     }
 }
