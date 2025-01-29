@@ -32,6 +32,8 @@ class ProfilFullViewController: UIViewController {
     
     let profileImageMaxHeight: CGFloat = 120
     let profileImageMinHeight: CGFloat = 0
+    let modifyButtonMaxHeight: CGFloat = 30
+
     let tableViewTopMax: CGFloat = 100
     let tableViewTopMin: CGFloat = 60
     
@@ -471,26 +473,32 @@ extension ProfilFullViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
-        let newHeight = max(profileImageMaxHeight - offsetY, profileImageMinHeight)
         
-        // Calcul d'une nouvelle valeur pour la contrainte
+        // -- Image de profil (existant) --
+        let newHeightProfile = max(profileImageMaxHeight - offsetY, profileImageMinHeight)
+        let ratioProfile = newHeightProfile / profileImageMaxHeight
+        
+        img_profile.transform = CGAffineTransform(scaleX: ratioProfile, y: ratioProfile)
+        img_profile.alpha = ratioProfile
+        
+        // -- Bouton "modifier" (NOUVEAU) --
+        // Même logique : on calcule une "nouvelle hauteur" et on en déduit un ratio.
+        // Ex. on part d’un max à 30 (modifyButtonMaxHeight).
+        let newHeightModify = max(modifyButtonMaxHeight - offsetY, 0)
+        let ratioModify = newHeightModify / modifyButtonMaxHeight
+        
+        // Application de la transformation et éventuellement du "fade"
+        image_modify.transform = CGAffineTransform(scaleX: ratioModify, y: ratioModify)
+        image_modify.alpha = ratioModify
+        
+        // -- Ajustement du top de la tableView (existant) --
         let newTopConstraint = max(tableViewTopMin, tableViewTopMax - offsetY)
-        
-        UIView.animate(withDuration: 0.1, animations: {
-            // Réduction de l’image
-            self.img_profile.transform = CGAffineTransform(
-                scaleX: newHeight / self.profileImageMaxHeight,
-                y: newHeight / self.profileImageMaxHeight
-            )
-            self.img_profile.alpha = newHeight / self.profileImageMaxHeight
-            
-            // Mise à jour de la contrainte de la TableView
-            self.constraint_table_view_top.constant = newTopConstraint
-            
-            // Forcer la mise à jour du layout
-            self.view.layoutIfNeeded()
-        })
+        constraint_table_view_top.constant = newTopConstraint
+
+        // Forcer la mise à jour du layout
+        self.view.layoutIfNeeded()
     }
+
 }
 
 
