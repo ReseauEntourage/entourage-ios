@@ -65,6 +65,11 @@ class ProfilFullViewController: UIViewController {
         btn_back.isUserInteractionEnabled = true
         btn_back.addGestureRecognizer(tapGesture)
         
+        //Ajout click image_modify
+        image_modify.isUserInteractionEnabled = true
+        let tapModifyGesture = UITapGestureRecognizer(target: self, action: #selector(modifyImageClick))
+        image_modify.addGestureRecognizer(tapModifyGesture)
+        
     }
     
     @objc func handleBackButtonTap() {
@@ -72,14 +77,36 @@ class ProfilFullViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        loadImage()
-        loadDTO()
+        let user = UserDefaults.currentUser
+        UserService.getDetailsForUser(userId: user?.uuid ?? "") { returnUser, error in
+            if let returnUser = returnUser {
+                self.user = returnUser
+                self.loadImage()
+                self.loadDTO()
+            }
+            
+        }
+       
     }
     
     func loadImage(){
         if let url = URL(string: user?.avatarURL ?? ""){
             img_profile.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_user"))
         }
+    }
+    
+    @objc func modifyImageClick(){
+        AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+        let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav")
+        self.present(navVC, animated: true)
+    }
+    
+    func modifyProfile(){
+        AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+        let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav")
+        self.present(navVC, animated: true)
     }
     
     private func openEnhancedOnboarding(mode: EnhancedOnboardingMode) {
@@ -328,6 +355,7 @@ extension ProfilFullViewController: UITableViewDelegate, UITableViewDataSource {
         case .header(let user):
             if let cell = tableView.dequeueReusableCell(withIdentifier: HeaderProfilFullCell.identifier) as? HeaderProfilFullCell {
                 cell.selectionStyle = .none
+                cell.delegate = self
                 cell.configure(user: user)
                 return cell
             }
@@ -569,5 +597,11 @@ extension ProfilFullViewController {
         default:
             return slot
         }
+    }
+}
+
+extension ProfilFullViewController:HeaderProfilFullCellDelegate{
+    func onModifyClick() {
+        self.modifyProfile()
     }
 }

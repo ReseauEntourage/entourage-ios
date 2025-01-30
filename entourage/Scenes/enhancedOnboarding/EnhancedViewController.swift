@@ -399,7 +399,6 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
     func onConfigureLaterClick() {
         let config = EnhancedOnboardingConfiguration.shared
         if config.isInterestsFromSetting {
-            config.isInterestsFromSetting = false
             self.updateUserChoices()
             return
         }
@@ -421,7 +420,6 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
         hasChangedMod = true
         let config = EnhancedOnboardingConfiguration.shared
         if config.isInterestsFromSetting {
-            config.isInterestsFromSetting = false
             self.updateUserChoices()
             return
         }

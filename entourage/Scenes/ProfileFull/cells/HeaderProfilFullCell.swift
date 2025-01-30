@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 
+protocol HeaderProfilFullCellDelegate {
+    func onModifyClick()
+}
 class HeaderProfilFullCell:UITableViewCell {
     
     //OUTLET
@@ -26,6 +29,7 @@ class HeaderProfilFullCell:UITableViewCell {
     class var identifier: String {
         return String(describing: self)
     }
+    var delegate:HeaderProfilFullCellDelegate?
     
     override func awakeFromNib() {
         configureOrangeButton(ui_btn_modify, withTitle: "modify".localized)
@@ -34,9 +38,13 @@ class HeaderProfilFullCell:UITableViewCell {
         ui_label_description.setFontBody(size: 15)
         ui_label_phone.setFontBody(size: 15)
         ui_label_mail.setFontBody(size: 15)
+        
+        self.ui_btn_modify.addTarget(self, action: #selector(onModifyClick), for: .touchUpInside)
     }
     
-    
+    @objc func onModifyClick(){
+        delegate?.onModifyClick()
+    }
     
     func configure(user: User) {
         // 🔹 Nom d'affichage
