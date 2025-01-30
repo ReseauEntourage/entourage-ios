@@ -31,6 +31,10 @@ class ProfileFullStandardCell:UITableViewCell{
         ui_title.text = title
         ui_subtitle.text = subtitle
         ui_image.image = UIImage(named: image)
+        
+        if title == "logout_button".localized || title == "delete_account_button".localized {
+            ui_title.textColor = UIColor.orange
+        }
     }
     
 }

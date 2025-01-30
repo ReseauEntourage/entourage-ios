@@ -39,8 +39,8 @@ class ProfilFullViewController: UIViewController {
     let profileImageMinHeight: CGFloat = 0
     let modifyButtonMaxHeight: CGFloat = 30
 
-    let tableViewTopMax: CGFloat = 100
-    let tableViewTopMin: CGFloat = 60
+    let tableViewTopMax: CGFloat = 70
+    let tableViewTopMin: CGFloat = 40
     
     override func viewDidLoad() {
         super.viewDidLoad()
