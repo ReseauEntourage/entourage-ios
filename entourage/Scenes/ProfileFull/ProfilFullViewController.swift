@@ -34,6 +34,8 @@ class ProfilFullViewController: UIViewController {
     var tableDTO = [ProfileFullDTO]()
     var user: User?
     var isMe: Bool = true
+    var activated_notif : [String] = []
+    var numberOfBlocked :Int = 0
     
     let profileImageMaxHeight: CGFloat = 120
     let profileImageMinHeight: CGFloat = 0
@@ -88,18 +90,49 @@ class ProfilFullViewController: UIViewController {
         if self.user == nil{
             self.user = UserDefaults.currentUser
         }
-        UserService.getDetailsForUser(userId: user?.uuid ?? "") { returnUser, error in
-            if let returnUser = returnUser {
-                self.user = returnUser
-                self.loadImage()
-                self.loadDTO()
+        loadData()
+
+        
+
+    }
+    
+    func loadData(){
+        HomeService.getNotifsPermissions { notifPerms, error in
+            // Vérifier et afficher les notifications activées
+            if let notifPerms = notifPerms {
+                var activeNotifs: [String] = []
+
+                if notifPerms.chat_message {
+                    activeNotifs.append("message")
+                }
+                if notifPerms.neighborhood {
+                    activeNotifs.append("groupe")
+                }
+                if notifPerms.outing {
+                    activeNotifs.append("événement")
+                }
+                if notifPerms.action {
+                    activeNotifs.append("action")
+                }
+                self.activated_notif = activeNotifs
+                //self.activated_notif = activeNotifs.joined(separator: ", ")
+                MessagingService.getUsersBlocked { blockedUsers, error in
+                    self.numberOfBlocked = blockedUsers?.count ?? 0
+                    UserService.getDetailsForUser(userId: self.user?.uuid ?? "") { returnUser, error in
+                        if let returnUser = returnUser {
+                            self.user = returnUser
+                            self.loadImage()
+                            self.loadDTO()
+                        }
+                    }
+                }
             }
         }
     }
     
     func loadImage(){
         if let url = URL(string: user?.avatarURL ?? ""){
-            img_profile.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_user"))
+            self.img_profile.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_user"))
         }
     }
     
@@ -306,14 +339,14 @@ class ProfilFullViewController: UIViewController {
             tableDTO.append(.standard(
                 img: "ic_profil_full_notif",
                 title: "settings_notifications_title".localized, // "Notifications"
-                subtitle: ""
+                subtitle: "Activé : " + self.activated_notif.joined(separator: ", ")
             ))
             
             // 3) Débloquer des contacts
             tableDTO.append(.standard(
                 img: "ic_profil_full_block_people",
                 title: "settings_unblock_contacts_title".localized, // "Débloquer des contacts"
-                subtitle: ""
+                subtitle: String(self.numberOfBlocked) + "contacts bloqués"
             ))
             
             // 4) Partager une idée
@@ -534,8 +567,8 @@ extension ProfilFullViewController: UIScrollViewDelegate {
         let ratioModify = newHeightModify / modifyButtonMaxHeight
         
         // Application de la transformation et éventuellement du "fade"
-        image_modify.transform = CGAffineTransform(scaleX: ratioModify, y: ratioModify)
-        image_modify.alpha = ratioModify
+        ui_view_image_modify.transform = CGAffineTransform(scaleX: ratioModify, y: ratioModify)
+        ui_view_image_modify.alpha = ratioModify
         
         // -- Ajustement du top de la tableView (existant) --
         let newTopConstraint = max(tableViewTopMin, tableViewTopMax - offsetY)
@@ -627,13 +660,6 @@ extension ProfilFullViewController:HeaderProfilFullCellDelegate{
 
 extension ProfilFullViewController:ImageReUpLoadDelegate{
     func reloadOnImageUpdate() {
-        UserService.getDetailsForUser(userId: self.user?.uuid ?? "") { returnUser, error in
-            if let returnUser = returnUser {
-                self.user = returnUser
-                self.loadImage()
-                self.loadDTO()
-            }
-            
-        }
+        loadData()
     }
 }
