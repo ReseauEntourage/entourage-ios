@@ -22,6 +22,7 @@ class UserPhotoAddViewController: BasePopViewController {
     var pickerViewController:UIImagePickerController? = nil
     var selectedImage:UIImage? = nil
     var currentUserFirstname = ""
+    var pictureSettingDelegate:ImageReUpLoadDelegate?
     
     var isFromProfile = true
     var isFromDeepLink = false
@@ -106,6 +107,7 @@ class UserPhotoAddViewController: BasePopViewController {
     
     func showPhotoResize() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "PictureResizeVC") as? PicturePreviewResizeViewController {
+            vc.pictureSettingDelegate = self.pictureSettingDelegate
             vc.currentImage = self.selectedImage
             vc.delegate = self
             vc.isFromProfile = self.isFromProfile

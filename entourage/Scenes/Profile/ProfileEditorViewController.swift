@@ -25,15 +25,16 @@ class ProfileEditorViewController: UIViewController {
     var birth_date_new:String? = nil
     var email_new:String? = nil
     var radius_new:Int? = nil
-    
+    var profilFullDelegate:ImageReUpLoadDelegate?
     var location_new:CLLocationCoordinate2D? = nil
     var location_name_new:String? = nil
     var location_googlePlace_new:GMSPlace? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        currentUser = UserDefaults.currentUser
+        if currentUser == nil {
+            currentUser = UserDefaults.currentUser
+        }
         ui_top_view.populateView(title: "editUserProfileTitle".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
         
         ui_button_validate.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
@@ -197,6 +198,7 @@ class ProfileEditorViewController: UIViewController {
                 self.ui_tableview.reloadData()
                 return
             }
+            self.profilFullDelegate?.reloadOnImageUpdate()
             self.dismiss(animated: true)
         }
     }

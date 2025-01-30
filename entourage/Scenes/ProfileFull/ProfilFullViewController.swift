@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ImageReUpLoadDelegate{
+    func reloadOnImageUpdate()
+}
+
 enum ProfileFullDTO {
     case header(user: User)
     case mainUserActivity(user: User)
@@ -95,19 +99,28 @@ class ProfilFullViewController: UIViewController {
         }
     }
     
-    @objc func modifyImageClick(){
+    @objc func modifyImageClick() {
         AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
+
         let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "editProfilePhotoNav")
         
-        self.present(vc, animated: true, completion: nil)
+        // Instancier le UINavigationController
+        if let navVC = sb.instantiateViewController(withIdentifier: "editProfilePhotoNav") as? UINavigationController,
+           let editPhotoVC = navVC.topViewController as? UserPhotoAddViewController { // Récupérer le premier VC
+            editPhotoVC.pictureSettingDelegate = self // Assigner le delegate
+            self.present(navVC, animated: true, completion: nil)
+        }
     }
     
     func modifyProfile(){
         AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
-        let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav")
-        self.present(navVC, animated: true)
+        if let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav") as? UINavigationController , let editVC = navVC.topViewController as? ProfileEditorViewController  {
+            editVC.profilFullDelegate = self
+            editVC.currentUser = self.user
+            self.present(navVC, animated: true)
+
+        }
     }
     
     private func openEnhancedOnboarding(mode: EnhancedOnboardingMode) {
@@ -607,8 +620,9 @@ extension ProfilFullViewController:HeaderProfilFullCellDelegate{
     }
 }
 
-extension ProfilFullViewController:TakePhotoDelegate{
-    func updatePhoto(image: UIImage?) {
+
+extension ProfilFullViewController:ImageReUpLoadDelegate{
+    func reloadOnImageUpdate() {
         UserService.getDetailsForUser(userId: self.user?.uuid ?? "") { returnUser, error in
             if let returnUser = returnUser {
                 self.user = returnUser

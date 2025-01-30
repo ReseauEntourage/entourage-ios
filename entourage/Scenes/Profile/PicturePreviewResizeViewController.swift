@@ -9,6 +9,8 @@
 import UIKit
 import IHProgressHUD
 
+
+
 class PicturePreviewResizeViewController: BasePopViewController {
     
     @IBOutlet weak var ui_bt_valide_from_profile: UIButton!
@@ -26,7 +28,8 @@ class PicturePreviewResizeViewController: BasePopViewController {
     
     var isFromProfile = false
     var isFromDeepLink = false
-    
+    var pictureSettingDelegate:ImageReUpLoadDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -106,6 +109,7 @@ class PicturePreviewResizeViewController: BasePopViewController {
             //  OTLogger.logEvent(Action_Profile_Photo_Submit)
             PictureUploadS3Service.prepareUploadWith(image: _image,completion: { [weak self] isOk in
                 if isOk, let self = self {
+                    self.pictureSettingDelegate?.reloadOnImageUpdate()
                     self.popToProfile()
                     return
                 }
@@ -126,6 +130,7 @@ class PicturePreviewResizeViewController: BasePopViewController {
     @IBAction func action_validate(_ sender: Any) {
         if isFromProfile {
             self.updateUserPhoto()
+            
         }
         else {
             delegate?.updatePhoto(image: self.processImage())
