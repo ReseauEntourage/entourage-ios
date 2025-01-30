@@ -27,6 +27,7 @@ class ProfilFullViewController: UIViewController {
     @IBOutlet weak var btn_signal: UIImageView!
     @IBOutlet weak var constraint_table_view_top: NSLayoutConstraint!
     @IBOutlet weak var image_modify: UIImageView!
+    @IBOutlet weak var ui_view_image_modify: UIView!
     
     
     // VARIABLE
@@ -58,11 +59,14 @@ class ProfilFullViewController: UIViewController {
         ui_table_view.register(UINib(nibName: MainStatUserCell.identifier, bundle: nil),
                                forCellReuseIdentifier: MainStatUserCell.identifier)
         
-        // Arrondi et bordure blanche sur l’image de profil
-        img_profile.layer.cornerRadius = img_profile.frame.width / 2
-        img_profile.layer.borderWidth = 1
-        img_profile.layer.borderColor = UIColor.white.cgColor
-        img_profile.clipsToBounds = true
+        
+        // Ajout d’un padding visuel en réduisant légèrement la taille de l’image
+        ui_view_image_modify.layer.cornerRadius = 15 // Arrondi de 1dp
+        ui_view_image_modify.layer.borderWidth = 1 // Bordure blanche de 1dp
+        ui_view_image_modify.layer.borderColor = UIColor.white.cgColor
+        ui_view_image_modify.clipsToBounds = true
+
+        
         
         // Ajout d’un geste pour fermer la vue sur le bouton back
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackButtonTap))
@@ -70,9 +74,9 @@ class ProfilFullViewController: UIViewController {
         btn_back.addGestureRecognizer(tapGesture)
         
         //Ajout click image_modify
-        image_modify.isUserInteractionEnabled = true
+        ui_view_image_modify.isUserInteractionEnabled = true
         let tapModifyGesture = UITapGestureRecognizer(target: self, action: #selector(modifyImageClick))
-        image_modify.addGestureRecognizer(tapModifyGesture)
+        ui_view_image_modify.addGestureRecognizer(tapModifyGesture)
         
     }
     
@@ -81,16 +85,16 @@ class ProfilFullViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let user = UserDefaults.currentUser
+        if self.user == nil{
+            self.user = UserDefaults.currentUser
+        }
         UserService.getDetailsForUser(userId: user?.uuid ?? "") { returnUser, error in
             if let returnUser = returnUser {
                 self.user = returnUser
                 self.loadImage()
                 self.loadDTO()
             }
-            
         }
-       
     }
     
     func loadImage(){

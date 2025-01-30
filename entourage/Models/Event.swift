@@ -729,6 +729,22 @@ class TagsUtils {
 
         case "produit d'hygiène":
             return NSLocalizedString("action_hygiene_name".localized, comment: "")
+            
+        case "resources":
+            return "enhanced_onboarding_sharing_time".localized
+        case "outings":
+            return "enhanced_onboarding_participate_events".localized
+        case "both_actions":
+            return "enhanced_onboarding_solicit_help".localized
+        case "neighborhoods":
+            return "enhanced_onboarding_join_neighborhoods".localized
+            
+        case "sharing_time":
+            return "enhanced_onboarding_sharing_time".localized
+        case "material_donations":
+            return "enhanced_onboarding_material_donations".localized
+        case "Service":
+            return "enhanced_onboarding_services".localized
 
         default:
             return section
