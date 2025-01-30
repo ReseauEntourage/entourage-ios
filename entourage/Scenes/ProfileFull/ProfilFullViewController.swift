@@ -97,9 +97,10 @@ class ProfilFullViewController: UIViewController {
     
     @objc func modifyImageClick(){
         AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
-        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
-        let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav")
-        self.present(navVC, animated: true)
+        let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "editProfilePhotoNav")
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
     func modifyProfile(){
@@ -603,5 +604,18 @@ extension ProfilFullViewController {
 extension ProfilFullViewController:HeaderProfilFullCellDelegate{
     func onModifyClick() {
         self.modifyProfile()
+    }
+}
+
+extension ProfilFullViewController:TakePhotoDelegate{
+    func updatePhoto(image: UIImage?) {
+        UserService.getDetailsForUser(userId: self.user?.uuid ?? "") { returnUser, error in
+            if let returnUser = returnUser {
+                self.user = returnUser
+                self.loadImage()
+                self.loadDTO()
+            }
+            
+        }
     }
 }
