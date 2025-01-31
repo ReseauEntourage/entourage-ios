@@ -1654,3 +1654,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_share_title" = "مشاركة التطبيق";
 "settings_password_title" = "تغيير كلمة المرور";
 "content_removed" = "تمت إزالة هذا المحتوى لأنه لا يمتثل لسياستنا.";
+"settings_notifications_subtitle" = "مُفعّل: %@";
+"settings_notifications_subtitle_none" = "لا توجد إشعارات مفعلة";
+"settings_unblock_contacts_subtitle_none" = "لا توجد جهات اتصال محظورة";
+"settings_unblock_contacts_subtitle" = "%d جهة اتصال محظورة";
+"settings_unblock_contacts_subtitle_plural" = "%d جهات اتصال محظورة";

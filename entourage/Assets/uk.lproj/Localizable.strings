@@ -1695,3 +1695,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_share_title" = "Поділитися додатком";
 "settings_password_title" = "Змінити пароль";
 "content_removed" = "Цей вміст було видалено, оскільки він не відповідає нашим правилам.";
+"settings_notifications_subtitle" = "Увімкнено: %@";
+"settings_notifications_subtitle_none" = "Немає увімкнених сповіщень";
+"settings_unblock_contacts_subtitle_none" = "Немає заблокованих контактів";
+"settings_unblock_contacts_subtitle" = "%d заблокований контакт";
+"settings_unblock_contacts_subtitle_plural" = "%d заблокованих контактів";

@@ -1719,3 +1719,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_share_title" = "Udostępnij aplikację";
 "settings_password_title" = "Zmień hasło";
 "content_removed" = "Ta treść została usunięta, ponieważ nie spełnia naszych zasad.";
+"settings_notifications_subtitle" = "Włączone: %@";
+"settings_notifications_subtitle_none" = "Brak włączonych powiadomień";
+"settings_unblock_contacts_subtitle_none" = "Brak zablokowanych kontaktów";
+"settings_unblock_contacts_subtitle" = "%d zablokowany kontakt";
+"settings_unblock_contacts_subtitle_plural" = "%d zablokowane kontakty";

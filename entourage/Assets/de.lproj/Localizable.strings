@@ -1713,3 +1713,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_share_title" = "App teilen";
 "settings_password_title" = "Passwort ändern";
 "content_removed" = "Dieser Inhalt wurde entfernt, da er nicht unseren Richtlinien entspricht.";
+"settings_notifications_subtitle" = "Aktiviert: %@";
+"settings_notifications_subtitle_none" = "Keine Benachrichtigungen aktiviert";
+"settings_unblock_contacts_subtitle_none" = "Keine blockierten Kontakte";
+"settings_unblock_contacts_subtitle" = "%d blockierter Kontakt";
+"settings_unblock_contacts_subtitle_plural" = "%d blockierte Kontakte";

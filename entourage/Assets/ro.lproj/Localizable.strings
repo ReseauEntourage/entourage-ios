@@ -1618,3 +1618,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_share_title" = "Partajează aplicația";
 "settings_password_title" = "Schimbă parola";
 "content_removed" = "Acest conținut a fost eliminat deoarece nu respectă politica noastră.";
+"settings_notifications_subtitle" = "Activat: %@";
+"settings_notifications_subtitle_none" = "Nicio notificare activată";
+"settings_unblock_contacts_subtitle_none" = "Niciun contact blocat";
+"settings_unblock_contacts_subtitle" = "%d contact blocat";
+"settings_unblock_contacts_subtitle_plural" = "%d contacte blocate";

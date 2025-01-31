@@ -1715,3 +1715,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_password_title" = "Changer de mot de passe";
 "content_removed" = "Ce contenu a été supprimé car il ne respecte pas notre charte.";
 
+"settings_notifications_subtitle" = "Activé : %@";
+"settings_notifications_subtitle_none" = "Aucune notification activée";
+"settings_unblock_contacts_subtitle_none" = "Aucun contact bloqué";
+"settings_unblock_contacts_subtitle" = "%d contact bloqué";
+"settings_unblock_contacts_subtitle_plural" = "%d contacts bloqués";

@@ -335,18 +335,37 @@ class ProfilFullViewController: UIViewController {
                 subtitle: ""
             ))
             
+            // Gestion du sous-titre des notifications
+            let notifSubtitle: String
+            if activated_notif.isEmpty {
+                notifSubtitle = "settings_notifications_subtitle_none".localized
+            } else {
+                notifSubtitle = String(format: "settings_notifications_subtitle".localized, activated_notif.joined(separator: ", "))
+            }
+
+            // Gestion du sous-titre des utilisateurs bloqués
+            let blockedUsersSubtitle: String
+            if numberOfBlocked == 0 {
+                blockedUsersSubtitle = "settings_unblock_contacts_subtitle_none".localized
+            } else {
+                blockedUsersSubtitle = String.localizedStringWithFormat(
+                    numberOfBlocked == 1 ? "settings_unblock_contacts_subtitle".localized : "settings_unblock_contacts_subtitle_plural".localized,
+                    numberOfBlocked
+                )
+            }
+            
             // 2) Notifications
             tableDTO.append(.standard(
                 img: "ic_profil_full_notif",
                 title: "settings_notifications_title".localized, // "Notifications"
-                subtitle: "Activé : " + self.activated_notif.joined(separator: ", ")
+                subtitle: notifSubtitle
             ))
             
             // 3) Débloquer des contacts
             tableDTO.append(.standard(
                 img: "ic_profil_full_block_people",
                 title: "settings_unblock_contacts_title".localized, // "Débloquer des contacts"
-                subtitle: String(self.numberOfBlocked) + "contacts bloqués"
+                subtitle: blockedUsersSubtitle
             ))
             
             // 4) Partager une idée
