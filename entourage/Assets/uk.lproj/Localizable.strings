@@ -1700,3 +1700,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle_none" = "Немає заблокованих контактів";
 "settings_unblock_contacts_subtitle" = "%d заблокований контакт";
 "settings_unblock_contacts_subtitle_plural" = "%d заблокованих контактів";
+"language_change_redirect" = "Вас буде перенаправлено на головну сторінку, щоб змінити мову додатка";

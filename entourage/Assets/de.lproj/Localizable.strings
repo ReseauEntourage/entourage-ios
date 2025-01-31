@@ -1718,3 +1718,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle_none" = "Keine blockierten Kontakte";
 "settings_unblock_contacts_subtitle" = "%d blockierter Kontakt";
 "settings_unblock_contacts_subtitle_plural" = "%d blockierte Kontakte";
+"language_change_redirect" = "Sie werden zur Startseite weitergeleitet, um die Sprache der Anwendung zu ändern";

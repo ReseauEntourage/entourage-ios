@@ -14,6 +14,7 @@ protocol ProfileLanguageCloseDelegate{
 
 enum LanguageTableDTO {
     case languageCell(lang:String, isSelected:Bool)
+    case translationCell
     case validateButton
 }
 
@@ -26,6 +27,8 @@ class ProfileLanguageChooseViewController:UIViewController{
     var tableDTO = [LanguageTableDTO]()
     var lastSelectedIndexPath: IndexPath?
     var delegate:ProfileLanguageCloseDelegate?
+    var fromSettings = false
+    var lang:String = ""
 
     
     override func viewDidLoad() {
@@ -35,11 +38,25 @@ class ProfileLanguageChooseViewController:UIViewController{
         self.ui_table_view.dataSource = self
         ui_table_view.register(UINib(nibName: LanguageCell.identifier, bundle: nil), forCellReuseIdentifier: LanguageCell.identifier)
         ui_table_view.register(UINib(nibName: LangValidateButton.identifier, bundle: nil), forCellReuseIdentifier: LangValidateButton.identifier)
+        ui_table_view.register(UINib(nibName: TranslationCell.identifier, bundle: nil), forCellReuseIdentifier: TranslationCell.identifier)
         fillDTO()
         ui_iv_cross.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCrossClicked))
         ui_iv_cross.addGestureRecognizer(tapGestureRecognizer)
     }
+    
+    func showPopChange() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "ok".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "cancell".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        
+        customAlert.configureAlert(alertTitle: "attention_pop_title".localized, message: "language_change_redirect".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        
+        customAlert.alertTagName = .Suppress
+        customAlert.delegate = self
+        customAlert.show()
+    }
+    
     
     func fillDTO(){
         tableDTO.removeAll()
@@ -52,6 +69,7 @@ class ProfileLanguageChooseViewController:UIViewController{
                 lastSelectedIndexPath = IndexPath(row: tableDTO.count - 1, section: 0)
             }
         }
+        tableDTO.append(.translationCell)
         tableDTO.append(.validateButton)
         ui_table_view.reloadData()
     }
@@ -83,6 +101,11 @@ extension ProfileLanguageChooseViewController:UITableViewDelegate,UITableViewDat
                 cell.configure()
                 return cell
             }
+        case .translationCell:
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "TranslationCell") as? TranslationCell{
+                cell.selectionStyle = .none
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -95,6 +118,8 @@ extension ProfileLanguageChooseViewController:UITableViewDelegate,UITableViewDat
                 return .languageCell(lang: lang, isSelected: false)
             case .validateButton:
                 return .validateButton
+            case .translationCell:
+                return .translationCell
             }
         }
         // Sélectionner la nouvelle langue sans sauvegarde immédiate
@@ -115,11 +140,13 @@ extension ProfileLanguageChooseViewController:UITableViewDelegate,UITableViewDat
                     }
                 case .validateButton:
                     break
+                case .translationCell:
+                    break
                 }
             }
-            dismiss(animated: true) {
-                self.delegate?.onDismiss()
-            }
+            
+        case .translationCell:
+            return
         }
         lastSelectedIndexPath = indexPath
         ui_table_view.reloadData()
@@ -137,19 +164,31 @@ extension ProfileLanguageChooseViewController:OnValidateButtonClickedDelegate{
         if let lastSelectedIndexPath = lastSelectedIndexPath {
             switch tableDTO[lastSelectedIndexPath.row] {
             case .languageCell(let lang, _):
-                LanguageManager.saveLanguageToPreferences(languageCode: lang)
-                LanguageManager.setLocale(langCode: lang)
-                if let _userId = UserDefaults.currentUser?.sid {
-                    UserService.updateLanguage(userId: _userId, lang: lang) { success in
-                        print("changed lang to: ", lang)
-                    }
-                }
+                self.lang = lang
+                self.showPopChange()
             case .validateButton:
+                break
+            case .translationCell:
                 break
             }
         }
-        self.dismiss(animated: true) {
-            self.delegate?.onDismiss()
+    }
+}
+
+extension ProfileLanguageChooseViewController:MJAlertControllerDelegate{
+    func validateLeftButton(alertTag: MJAlertTAG) {
+
+    }
+    
+    func validateRightButton(alertTag: MJAlertTAG) {
+        LanguageManager.saveLanguageToPreferences(languageCode: lang)
+        LanguageManager.setLocale(langCode: lang)
+        if let _userId = UserDefaults.currentUser?.sid {
+            UserService.updateLanguage(userId: _userId, lang: lang) { success in
+                print("changed lang to: ", self.lang)
+            }
         }
     }
+    
+    
 }

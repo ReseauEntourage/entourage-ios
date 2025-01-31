@@ -34,6 +34,9 @@ class ProfileFullStandardCell:UITableViewCell{
         
         if title == "logout_button".localized || title == "delete_account_button".localized {
             ui_title.textColor = UIColor.orange
+        }else{
+            ui_title.textColor = UIColor.black
+
         }
     }
     

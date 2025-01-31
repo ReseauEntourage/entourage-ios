@@ -87,6 +87,8 @@ extension OnboardingLanguageStoryBoard: UITableViewDelegate, UITableViewDataSour
             return UITableViewCell()
         case .validateButton:
             return UITableViewCell() // Pas besoin de bouton dans ce cas
+        case .translationCell:
+            return UITableViewCell()
         }
     }
     
@@ -98,6 +100,8 @@ extension OnboardingLanguageStoryBoard: UITableViewDelegate, UITableViewDataSour
                 return .languageCell(lang: lang, isSelected: false)
             case .validateButton:
                 return .validateButton
+            case .translationCell:
+                return .translationCell
             }
         }
         // Sélectionner la nouvelle langue sans sauvegarder immédiatement
@@ -106,6 +110,8 @@ extension OnboardingLanguageStoryBoard: UITableViewDelegate, UITableViewDataSour
             tableDTO[indexPath.row] = .languageCell(lang: lang, isSelected: true)
             selectedLanguage = lang // Stocker la langue sélectionnée
         case .validateButton:
+            print("never happen")
+        case .translationCell:
             print("never happen")
         }
         configureUI()

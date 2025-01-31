@@ -1623,3 +1623,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle_none" = "Niciun contact blocat";
 "settings_unblock_contacts_subtitle" = "%d contact blocat";
 "settings_unblock_contacts_subtitle_plural" = "%d contacte blocate";
+"language_change_redirect" = "Veți fi redirecționat către pagina principală pentru a schimba limba aplicației";

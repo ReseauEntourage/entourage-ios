@@ -1724,3 +1724,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle_none" = "Brak zablokowanych kontaktów";
 "settings_unblock_contacts_subtitle" = "%d zablokowany kontakt";
 "settings_unblock_contacts_subtitle_plural" = "%d zablokowane kontakty";
+"language_change_redirect" = "Zostaniesz przekierowany na stronę główną, aby zmienić język aplikacji";

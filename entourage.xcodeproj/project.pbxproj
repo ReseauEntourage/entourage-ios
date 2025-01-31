@@ -423,6 +423,8 @@
 		2631DC602AD690130040C120 /* HomeHZCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2631DC5F2AD690130040C120 /* HomeHZCell.xib */; };
 		2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */; };
 		2636B9642A7BA199007EE1B2 /* anim_rugby.json in Resources */ = {isa = PBXBuildFile; fileRef = 2636B9632A7BA199007EE1B2 /* anim_rugby.json */; };
+		263D7D692D4D02E900C4D99E /* TranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263D7D682D4D02E900C4D99E /* TranslationCell.xib */; };
+		263D7D6B2D4D076300C4D99E /* TranslationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263D7D6A2D4D076300C4D99E /* TranslationCell.swift */; };
 		264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */; };
 		264446D22AA1E05B00EA2EED /* ActionPassedOneContrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264446D12AA1E05B00EA2EED /* ActionPassedOneContrib.swift */; };
 		26445C4B2BB46AAF0010A8D8 /* SimpleMJAlertDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26445C4A2BB46AAF0010A8D8 /* SimpleMJAlertDialog.swift */; };
@@ -981,6 +983,8 @@
 		2631DC5F2AD690130040C120 /* HomeHZCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHZCell.xib; sourceTree = "<group>"; };
 		2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RugbySpecialPopUpViewController.swift; sourceTree = "<group>"; };
 		2636B9632A7BA199007EE1B2 /* anim_rugby.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anim_rugby.json; sourceTree = "<group>"; };
+		263D7D682D4D02E900C4D99E /* TranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TranslationCell.xib; sourceTree = "<group>"; };
+		263D7D6A2D4D076300C4D99E /* TranslationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationCell.swift; sourceTree = "<group>"; };
 		264446CF2AA1E04800EA2EED /* ActionPasseOneDemand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPasseOneDemand.swift; sourceTree = "<group>"; };
 		264446D12AA1E05B00EA2EED /* ActionPassedOneContrib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPassedOneContrib.swift; sourceTree = "<group>"; };
 		26445C4A2BB46AAF0010A8D8 /* SimpleMJAlertDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMJAlertDialog.swift; sourceTree = "<group>"; };
@@ -1882,6 +1886,8 @@
 				26AD119E2AEFE30E00FA7BEC /* LangValidateButton.swift */,
 				26AD11A02AEFE33C00FA7BEC /* LangValidateButton.xib */,
 				26A8DE0E2C0E1B9500C34641 /* EditProfileOnboardingCell.swift */,
+				263D7D682D4D02E900C4D99E /* TranslationCell.xib */,
+				263D7D6A2D4D076300C4D99E /* TranslationCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2568,6 +2574,7 @@
 				025C92C528341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib in Resources */,
 				0236971B296D9F6A00E2CACC /* DetailMessageTopPostTextCell.xib in Resources */,
 				02F578CE289AD4060040685C /* ActionContribDetailHomeCell.xib in Resources */,
+				263D7D692D4D02E900C4D99E /* TranslationCell.xib in Resources */,
 				2689F3B42A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib in Resources */,
 				024131C72862019500561FB4 /* Event_Create.storyboard in Resources */,
 				02CCE67627D78C7500D6976C /* Quicksand-Bold.ttf in Resources */,
@@ -2851,6 +2858,7 @@
 				026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */,
 				2674FEC32ACDA5800013D674 /* HomeNeedHelpCell.swift in Sources */,
 				26C1BB662A3AF0D100C81C09 /* WelcomeFourImageCell.swift in Sources */,
+				263D7D6B2D4D076300C4D99E /* TranslationCell.swift in Sources */,
 				26D13E222BA35F1700CAD4F7 /* QcmCell.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
 				02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */,

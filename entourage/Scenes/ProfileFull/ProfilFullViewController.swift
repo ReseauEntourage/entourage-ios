@@ -200,6 +200,21 @@ class ProfilFullViewController: UIViewController {
         customAlert.show()
     }
     
+    
+    func getLocalizedKey(for lang: String) -> String {
+        let languageMapping: [String: String] = [
+            "fr": "lang_fr",
+            "en": "lang_en",
+            "es": "lang_es",
+            "ar": "lang_ar",
+            "uk": "lang_uk",
+            "de": "lang_de",
+            "ro": "lang_ro",
+            "pl": "lang_pl"
+        ]
+        
+        return languageMapping[lang]?.localized ?? "lang_fr".localized // Valeur par défaut : français
+    }
     func loadDTO() {
         tableDTO.removeAll()
         
@@ -329,10 +344,12 @@ class ProfilFullViewController: UIViewController {
             tableDTO.append(.section(title: "settings_section_title".localized)) // "Paramètres"
             
             // 1) Langue
+            let preferredLanguage = LanguageManager.loadLanguageFromPreferences()
+
             tableDTO.append(.standard(
                 img: "ic_profil_full_language",
                 title: "settings_language_title".localized, // "Langue"
-                subtitle: ""
+                subtitle: getLocalizedKey(for: preferredLanguage)
             ))
             
             // Gestion du sous-titre des notifications
@@ -493,6 +510,7 @@ extension ProfilFullViewController: UITableViewDelegate, UITableViewDataSource {
                 let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "language") as? ProfileLanguageChooseViewController {
                     vc.delegate = self
+                    vc.fromSettings = true
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)
                 }
@@ -626,9 +644,7 @@ extension ProfilFullViewController: MJAlertControllerDelegate {
 
 extension ProfilFullViewController:ProfileLanguageCloseDelegate{
     func onDismiss() {
-        self.dismiss(animated: true) {
-            AppState.navigateToMainApp()
-        }
+        self.loadData()
     }
 }
 
