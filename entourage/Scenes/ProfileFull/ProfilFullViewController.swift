@@ -93,8 +93,6 @@ class ProfilFullViewController: UIViewController {
         }
         loadData()
 
-        
-
     }
     
     func loadData(){

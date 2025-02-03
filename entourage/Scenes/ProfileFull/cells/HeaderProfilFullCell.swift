@@ -54,7 +54,9 @@ class HeaderProfilFullCell:UITableViewCell {
 
         // 🔹 Ville (adresse principale)
         let city = user.addressPrimary?.displayAddress ?? ""
-        ui_label_city.text = city
+        let radiusString = String(user.radiusDistance ?? 0)
+        let full_address = city + " - " +  radiusString + " km"
+        ui_label_city.text = full_address
         if city.isEmpty { ui_label_city.setVisibilityGone() }
 
         // 🔹 Description (about)
