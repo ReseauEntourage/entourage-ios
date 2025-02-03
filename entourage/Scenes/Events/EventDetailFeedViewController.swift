@@ -1186,3 +1186,5 @@ extension EventDetailFeedViewController:EventParamDelegate{
         updateEvent()
     }
 }
+
+
