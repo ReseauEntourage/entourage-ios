@@ -1008,12 +1008,12 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
             return
         }
 
-        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                _homeVC.currentUserId = "\(userId)"
-                
-                self.navigationController?.present(navVC, animated: true)
-            }
+        if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+            .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
+            
+            profileVC.userIdToDisplay = "\(userId)"
+            profileVC.modalPresentationStyle = .fullScreen
+            self.present(profileVC, animated: true)
         }
     }
     

@@ -120,9 +120,9 @@ extension ConversationListMembersViewController: UITableViewDataSource, UITableV
             user = self.users[indexPath.row - 1]
         }
         
-        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                _homeVC.currentUserId = "\(user.uid)"
+        if let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull") as? UINavigationController {
+            if let _homeVC = navVC.topViewController as? ProfilFullViewController {
+                _homeVC.userIdToDisplay = "\(user.uid)"
                 
                 self.present(navVC, animated: true)
             }

@@ -96,9 +96,9 @@ class ConversationParametersViewController: BasePopViewController {
             return
         }
         
-        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                _homeVC.currentUserId = "\(userId)"
+        if let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull") as? UINavigationController {
+            if let _homeVC = navVC.topViewController as? ProfilFullViewController {
+                _homeVC.userIdToDisplay = "\(userId)"
                 self.present(navVC, animated: true)
             }
         }

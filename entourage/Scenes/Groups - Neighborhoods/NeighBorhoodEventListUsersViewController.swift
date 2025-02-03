@@ -341,13 +341,15 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                 }
             }
             user = _user
-            if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-                if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                    if let _user = user{
-                        _homeVC.currentUserId = "\(_user.sid)"
-                    }
-                    self.navigationController?.present(navVC, animated: true)
+            if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+                .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
+                
+                if let _user = user {
+                    profileVC.userIdToDisplay = "\(_user.sid)"
                 }
+                
+                profileVC.modalPresentationStyle = .fullScreen
+                self.navigationController?.present(profileVC, animated: true)
             }
         case .surveySection(title: let title, voteCount: let voteCount):
             return

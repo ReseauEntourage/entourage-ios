@@ -36,7 +36,8 @@ class ProfilFullViewController: UIViewController {
     var isMe: Bool = true
     var activated_notif : [String] = []
     var numberOfBlocked :Int = 0
-    
+    var userIdToDisplay: String?
+
     let profileImageMaxHeight: CGFloat = 120
     let profileImageMinHeight: CGFloat = 0
     let modifyButtonMaxHeight: CGFloat = 30
@@ -118,12 +119,25 @@ class ProfilFullViewController: UIViewController {
                 //self.activated_notif = activeNotifs.joined(separator: ", ")
                 MessagingService.getUsersBlocked { blockedUsers, error in
                     self.numberOfBlocked = blockedUsers?.count ?? 0
-                    UserService.getDetailsForUser(userId: self.user?.uuid ?? "") { returnUser, error in
-                        if let returnUser = returnUser {
-                            self.user = returnUser
-                            self.loadImage()
-                            self.loadDTO()
+                    if let _otherUserId = self.userIdToDisplay {
+                        self.isMe = false
+                        UserService.getDetailsForUser(userId: _otherUserId) { returnUser, error in
+                            if let returnUser = returnUser {
+                                self.user = returnUser
+                                self.loadImage()
+                                self.loadDTO()
+                            }
                         }
+
+                    }else{
+                        UserService.getDetailsForUser(userId: self.user?.uuid ?? "") { returnUser, error in
+                            if let returnUser = returnUser {
+                                self.user = returnUser
+                                self.loadImage()
+                                self.loadDTO()
+                            }
+                        }
+
                     }
                 }
             }

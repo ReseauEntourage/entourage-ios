@@ -133,11 +133,11 @@ extension ConversationsMainHomeViewController: ConversationListMainCellDelegate 
         let userId: Int? = messages[position].user?.uid
         guard let userId = userId else { return }
 
-        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                homeVC.currentUserId = "\(userId)"
-                self.present(navVC, animated: true)
-            }
+        if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+            .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
+            profileVC.userIdToDisplay = "\(userId)"
+            profileVC.modalPresentationStyle = .fullScreen
+            self.present(profileVC, animated: true)
         }
     }
 }
