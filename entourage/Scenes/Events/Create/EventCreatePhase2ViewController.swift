@@ -32,6 +32,14 @@ class EventCreatePhase2ViewController: UIViewController {
             currentEvent = pageDelegate?.getCurrentEvent()
             hasCurrentRecurrency = pageDelegate?.hasCurrentRecurrency() ?? false
         }
+        if let _user = UserDefaults.currentUser{
+            if let _role = _user.roles{
+                print("role : ", _role)
+                if _role.isEmpty{
+                    hasCurrentRecurrency = true
+                }
+            }
+        }
     }
 }
 

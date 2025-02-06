@@ -108,6 +108,13 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
         self.checkNotificationSettings()
+        if let _user = UserDefaults.currentUser{
+            UserService.getDetailsForUser(userId: String(_user.sid)) { user, error in
+                if error == nil {
+                    UserDefaults.currentUser = user
+                }
+            }
+        }
 
     }
     
