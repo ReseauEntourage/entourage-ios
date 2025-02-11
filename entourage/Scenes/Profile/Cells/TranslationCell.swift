@@ -17,6 +17,7 @@ class TranslationCell: UITableViewCell {
         
         // Configuration de l'intitulé
         ui_title.text = "translation_bottom_fragment_title".localized
+        ui_title.setFontBody(size: 15)
         
         // Configuration de l'état du switch basé sur UserDefaults
         ui_switch.isOn = getCookieValue()

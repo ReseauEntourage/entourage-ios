@@ -31,13 +31,13 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqj-fL-JGK">
-                        <rect key="frame" x="50" y="20" width="381" height="18"/>
+                        <rect key="frame" x="50" y="26" width="381" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dd-Z0-aZU">
-                        <rect key="frame" x="50" y="42" width="381" height="15.666666666666664"/>
+                        <rect key="frame" x="50" y="48" width="381" height="15.666666666666664"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
@@ -67,11 +67,11 @@
                     <constraint firstItem="UGF-mp-rfL" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="leading" id="bMK-wD-kcM"/>
                     <constraint firstItem="9dd-Z0-aZU" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="trailing" constant="10" id="cHx-DD-dFr"/>
                     <constraint firstAttribute="trailing" secondItem="VWO-jz-twB" secondAttribute="trailing" constant="10" id="gFl-u5-JXg"/>
-                    <constraint firstItem="mqj-fL-JGK" firstAttribute="top" secondItem="8Oj-pY-6Ne" secondAttribute="top" id="hLU-T8-kjk"/>
                     <constraint firstAttribute="trailing" secondItem="9dd-Z0-aZU" secondAttribute="trailing" constant="10" id="kQ2-Uq-3AI"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9dd-Z0-aZU" secondAttribute="bottom" constant="20" id="mCP-Dc-PjW"/>
                     <constraint firstItem="VWO-jz-twB" firstAttribute="centerY" secondItem="8Oj-pY-6Ne" secondAttribute="centerY" id="nkk-yO-5Jc"/>
                     <constraint firstItem="8Oj-pY-6Ne" firstAttribute="leading" secondItem="j4j-X0-O3M" secondAttribute="leading" constant="10" id="r5R-L9-vKu"/>
+                    <constraint firstItem="mqj-fL-JGK" firstAttribute="centerY" secondItem="8Oj-pY-6Ne" secondAttribute="centerY" id="rpS-zi-UZF"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

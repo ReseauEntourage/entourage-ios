@@ -16,6 +16,7 @@ enum ProfileFullDTO {
     case mainUserActivity(user: User)
     case section(title: String)
     case standard(img: String, title: String, subtitle: String)
+    case version(version:String)
 }
 
 class ProfilFullViewController: UIViewController {
@@ -47,7 +48,9 @@ class ProfilFullViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.btn_signal.isHidden = true
+        self.ui_view_image_modify.isHidden = true
+       
         ui_table_view.delegate = self
         ui_table_view.dataSource = self
         user = UserDefaults.currentUser
@@ -61,7 +64,8 @@ class ProfilFullViewController: UIViewController {
                                forCellReuseIdentifier: ProfileSectionCell.identifier)
         ui_table_view.register(UINib(nibName: MainStatUserCell.identifier, bundle: nil),
                                forCellReuseIdentifier: MainStatUserCell.identifier)
-        
+        ui_table_view.register(UINib(nibName: VersionAppCell.identifier, bundle: nil),
+                               forCellReuseIdentifier: VersionAppCell.identifier)
         
         // Ajout d’un padding visuel en réduisant légèrement la taille de l’image
         ui_view_image_modify.layer.cornerRadius = 15 // Arrondi de 1dp
@@ -91,15 +95,37 @@ class ProfilFullViewController: UIViewController {
         if self.user == nil{
             self.user = UserDefaults.currentUser
         }
-        //Distable btn signal if isMe
-        if isMe {
-            self.btn_signal.isHidden = true
-        }else{
-            self.btn_signal.isHidden = false
-        }
         // Service call
         loadData()
 
+    }
+    
+    func configureNotMeView() {
+        if isMe {
+            self.btn_signal.isHidden = true
+            self.ui_view_image_modify.isHidden = false
+            
+        } else {
+            self.btn_signal.isHidden = false
+            self.ui_view_image_modify.isHidden = true
+            
+            // Activation de l'interaction utilisateur pour le bouton de signalement
+            btn_signal.isUserInteractionEnabled = true
+            let tapSignalGesture = UITapGestureRecognizer(target: self, action: #selector(onSignalClick))
+            btn_signal.addGestureRecognizer(tapSignalGesture)
+        }
+    }
+
+    
+    @objc func onSignalClick(){
+        if let vc = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil)
+            .instantiateViewController(withIdentifier: "reportUserMainVC") as? ReportUserMainViewController {
+            vc.user = self.user
+            vc.parentDelegate = self
+            DispatchQueue.main.async {
+                self.present(vc, animated: true)
+            }
+        }
     }
     
     func loadData(){
@@ -193,6 +219,33 @@ class ProfilFullViewController: UIViewController {
             present(vc, animated: true, completion: nil)
         }
     }
+    
+    func sendMessage() {
+        guard let currentUserId = user?.sid.description else { return }
+        MessagingService.createOrGetConversation(userId: currentUserId) { conversation, error in
+            if let conversation = conversation {
+                self.showConversation(conversation: conversation)
+                return
+            }
+            var errorMsg = "message_error_create_conversation".localized
+            if let error = error {
+                errorMsg = error.message
+            }
+        }
+    }
+
+    
+    private func showConversation(conversation:Conversation?) {
+        DispatchQueue.main.async {
+            if let convId = conversation?.uid {
+                let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                    vc.setupFromOtherVC(conversationId: convId, title: self.user?.displayName, isOneToOne: true, conversation: conversation)
+                    self.present(vc, animated: true)
+                }
+            }
+        }
+    }
 
     
     func showPopLogout() {
@@ -205,6 +258,12 @@ class ProfilFullViewController: UIViewController {
         customAlert.alertTagName = .Logout
         customAlert.delegate = self
         customAlert.show()
+    }
+    
+    func getAppVersion() -> String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+        return "Version \(version) (\(build))"
     }
     
     func showPopSuppress() {
@@ -416,7 +475,7 @@ class ProfilFullViewController: UIViewController {
             
             // 5) Partager l'application
             tableDTO.append(.standard(
-                img: "ic_profil_full_suggest",
+                img: "ic_profile_full_share",
                 title: "settings_share_title".localized, // "Partager l'application"
                 subtitle: ""
             ))
@@ -442,7 +501,8 @@ class ProfilFullViewController: UIViewController {
                 subtitle: ""
             ))
         }
-        
+        tableDTO.append(.version(version: getAppVersion()))
+        configureNotMeView()
         // On recharge le tableau
         ui_table_view.reloadData()
     }
@@ -465,7 +525,7 @@ extension ProfilFullViewController: UITableViewDelegate, UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(withIdentifier: HeaderProfilFullCell.identifier) as? HeaderProfilFullCell {
                 cell.selectionStyle = .none
                 cell.delegate = self
-                cell.configure(user: user)
+                cell.configure(user: user, isMe: self.isMe)
                 return cell
             }
             
@@ -474,7 +534,7 @@ extension ProfilFullViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.selectionStyle = .none
                 let stats: UserStats = user.stats ?? UserStats()
                 cell.populateCell(
-                    isMe: true,
+                    isMe: self.isMe,
                     neighborhoodsCount: stats.neighborhoodsCount,
                     outingsCount: stats.outingsCount ?? -1,
                     myDate: user.creationDate
@@ -494,6 +554,12 @@ extension ProfilFullViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.selectionStyle = .none
                 // On laisse subtitle vide, selon la demande
                 cell.configure(image: img, title: title, subtitle: subtitle)
+                return cell
+            }
+        case .version(let version):
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "VersionAppCell") as? VersionAppCell {
+                cell.selectionStyle = .none
+                cell.configure(version: version)
                 return cell
             }
         }
@@ -710,7 +776,11 @@ extension ProfilFullViewController {
 
 extension ProfilFullViewController:HeaderProfilFullCellDelegate{
     func onModifyClick() {
-        self.modifyProfile()
+        if self.isMe {
+            self.modifyProfile()
+        }else{
+            self.sendMessage()
+        }
     }
 }
 
@@ -718,5 +788,12 @@ extension ProfilFullViewController:HeaderProfilFullCellDelegate{
 extension ProfilFullViewController:ImageReUpLoadDelegate{
     func reloadOnImageUpdate() {
         loadData()
+    }
+}
+
+//MARK: - UserProfileDetailDelegate -
+extension ProfilFullViewController:UserProfileDetailDelegate {
+    func showMessage(message: String, imageName: String?) {
+
     }
 }

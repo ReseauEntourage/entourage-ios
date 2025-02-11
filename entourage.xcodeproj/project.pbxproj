@@ -541,6 +541,8 @@
 		26D13E352BB1EBA500CAD4F7 /* SectionOptionNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E342BB1EBA500CAD4F7 /* SectionOptionNameCell.swift */; };
 		26D13E372BB1EBF100CAD4F7 /* SectionOptionNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E362BB1EBF100CAD4F7 /* SectionOptionNameCell.xib */; };
 		26D853462C8740850006C9D8 /* PopupBienCommunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D853452C8740850006C9D8 /* PopupBienCommunViewController.swift */; };
+		26E2579C2D5B839800A8B9C1 /* VersionAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2579B2D5B839800A8B9C1 /* VersionAppCell.swift */; };
+		26E257A02D5B83DA00A8B9C1 /* VersionAppCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E2579F2D5B83DA00A8B9C1 /* VersionAppCell.xib */; };
 		26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */; };
 		26F03C932A1B4E5900450A61 /* WelcomeOneTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */; };
 		26F03C952A1B813C00450A61 /* WelcomeOneContentMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C942A1B813C00450A61 /* WelcomeOneContentMain.swift */; };
@@ -1101,6 +1103,8 @@
 		26D13E342BB1EBA500CAD4F7 /* SectionOptionNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOptionNameCell.swift; sourceTree = "<group>"; };
 		26D13E362BB1EBF100CAD4F7 /* SectionOptionNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionOptionNameCell.xib; sourceTree = "<group>"; };
 		26D853452C8740850006C9D8 /* PopupBienCommunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupBienCommunViewController.swift; sourceTree = "<group>"; };
+		26E2579B2D5B839800A8B9C1 /* VersionAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionAppCell.swift; sourceTree = "<group>"; };
+		26E2579F2D5B83DA00A8B9C1 /* VersionAppCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VersionAppCell.xib; sourceTree = "<group>"; };
 		26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneTitleCell.swift; sourceTree = "<group>"; };
 		26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneTitleCell.xib; sourceTree = "<group>"; };
 		26F03C942A1B813C00450A61 /* WelcomeOneContentMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneContentMain.swift; sourceTree = "<group>"; };
@@ -1365,6 +1369,7 @@
 				025FFE0A27DBAD5100783E8D /* ApiKeys.plist */,
 				025D8767278DED3C00909101 /* AppConfigurations.plist */,
 				025D8718278DD33600909101 /* entourage */,
+				02CCE67027D78C2F00D6976C /* Fonts */,
 				025D8717278DD33600909101 /* Products */,
 				F6FDF12012DBBD73C547B9BA /* Pods */,
 				466EAB21AD4207C796A4EC64 /* Frameworks */,
@@ -1444,7 +1449,6 @@
 				2636B9632A7BA199007EE1B2 /* anim_rugby.json */,
 				265565F12A3C9DB700CEFB3D /* explosion.json */,
 				020AF5E428607EFE0012AE60 /* congrat_short_anim.json */,
-				02CCE67027D78C2F00D6976C /* Fonts */,
 				025D8724278DD33800909101 /* LaunchScreen.storyboard */,
 				025D876A278DF43C00909101 /* Onboarding.xcassets */,
 				025D8722278DD33800909101 /* Assets.xcassets */,
@@ -2036,6 +2040,8 @@
 				26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */,
 				262820D22D49042A00A61C30 /* MainStatUserCell.xib */,
 				262820D42D49069A00A61C30 /* MainStatUserCell.swift */,
+				26E2579B2D5B839800A8B9C1 /* VersionAppCell.swift */,
+				26E2579F2D5B83DA00A8B9C1 /* VersionAppCell.xib */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -2550,6 +2556,7 @@
 				02CCE68027D78CAB00D6976C /* NunitoSans-Light.ttf in Resources */,
 				02E0EFA428787082009B2C65 /* EventDetailTopFullCell.xib in Resources */,
 				023EC27F27FB2D8D003A3051 /* BasePopViewController_Template.xib in Resources */,
+				26E257A02D5B83DA00A8B9C1 /* VersionAppCell.xib in Resources */,
 				02E0EFA82878709D009B2C65 /* EventDetailTopLightCell.xib in Resources */,
 				2619CCE52AE948AB00276D67 /* Localizable.strings in Resources */,
 				26D13E2A2BA35FA600CAD4F7 /* QcmCell.xib in Resources */,
@@ -2996,6 +3003,7 @@
 				02B37829279B072C00B204EF /* ShareEntourageViewController.swift in Sources */,
 				029D25352865FA7B00147F77 /* EventRecurrenceCell.swift in Sources */,
 				02A92C242897E695000DFF95 /* ActionCreatePhase2ViewController.swift in Sources */,
+				26E2579C2D5B839800A8B9C1 /* VersionAppCell.swift in Sources */,
 				0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */,
 				02C91A27278F303100305E0B /* AppState.swift in Sources */,
 				022744762795D1D8005600A1 /* NotificationManager.swift in Sources */,

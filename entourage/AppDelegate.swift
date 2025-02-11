@@ -43,7 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("Notifications denied: \(String(describing: error))")
 //            }
 //        }
-        
+        for family in UIFont.familyNames {
+            print("\(family)")
+            for name in UIFont.fontNames(forFamilyName: family) {
+                print("  \(name)")
+            }
+        }
+
         NotificationCenter.default.addObserver(self, selector: #selector(goLogin), name: NSNotification.Name(notificationLoginError), object: nil)
         
         if UserDefaults.currentUser == nil || A0SimpleKeychain().string(forKey:kKeychainPassword) == nil {

@@ -306,10 +306,30 @@ extension Double {
 
 
 extension UIView {
-    func setVisibilityGone(){
+    func setVisibilityGone() {
+        // Cacher la vue
         self.isHidden = true
-        self.heightAnchor.constraint(equalToConstant: 0).isActive = true
+        
+        // Désactiver toutes les contraintes de hauteur existantes
+        for constraint in self.constraints {
+            if constraint.firstAttribute == .height {
+                constraint.isActive = false
+            }
+        }
+        
+        // Ajouter une contrainte de hauteur à 0
+        let zeroHeightConstraint = self.heightAnchor.constraint(equalToConstant: 0)
+        zeroHeightConstraint.isActive = true
+
+        // Si la vue est dans un stackView, ajuster l'espacement
+        if let stackView = self.superview as? UIStackView {
+            stackView.setCustomSpacing(0, after: self)
+        }
+
+        // Forcer la mise à jour du layout
+        self.superview?.layoutIfNeeded()
     }
+
     func setVisibilityVisible(height:CGFloat) {
         self.isHidden = false
         self.heightAnchor.constraint(equalToConstant: height).isActive = true

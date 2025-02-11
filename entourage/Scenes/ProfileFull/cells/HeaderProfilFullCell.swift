@@ -46,39 +46,47 @@ class HeaderProfilFullCell:UITableViewCell {
         delegate?.onModifyClick()
     }
     
-    func configure(user: User) {
+    func configure(user: User, isMe:Bool) {
         // 🔹 Nom d'affichage
         let displayName = user.displayName.trimmingCharacters(in: .whitespacesAndNewlines)
         ui_label_name.text = displayName.isEmpty ? nil : displayName
-        if displayName.isEmpty { ui_label_name.setVisibilityGone() }
+        if displayName.isEmpty { ui_label_name.text = "no_data_available".localized }
 
         // 🔹 Ville (adresse principale)
         let city = user.addressPrimary?.displayAddress ?? ""
         let radiusString = String(user.radiusDistance ?? 0)
         let full_address = city + " - " +  radiusString + " km"
         ui_label_city.text = full_address
-        if city.isEmpty { ui_label_city.setVisibilityGone() }
+        if city.isEmpty { ui_label_city.text = "no_data_available".localized  }
 
         // 🔹 Description (about)
         let aboutText = user.about?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         ui_label_description.text = aboutText.isEmpty ? nil : aboutText
-        if aboutText.isEmpty { ui_label_description.setVisibilityGone() }
+        if aboutText.isEmpty { ui_label_description.text = "no_data_available".localized }
 
         // 🔹 Téléphone
         let phoneText = user.phone?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         ui_label_phone.text = phoneText.isEmpty ? nil : phoneText
-        if phoneText.isEmpty { ui_label_phone.setVisibilityGone() }
+        if phoneText.isEmpty { ui_label_phone.text = "no_data_available".localized }
 
         // 🔹 Email
         let emailText = user.email?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         ui_label_mail.text = emailText.isEmpty ? nil : emailText
-        if emailText.isEmpty { ui_label_mail.setVisibilityGone() }
+        if emailText.isEmpty { ui_label_mail.text = "no_data_available".localized }
+        
+        if !isMe {
+            ui_label_phone.setVisibilityGone()
+            ui_label_mail.setVisibilityGone()
+            self.ui_btn_modify.setTitle("detail_user_send_message".localized, for: .normal)
+        }else{
+            self.ui_btn_modify.setTitle("modify".localized, for: .normal)
+        }
 
         // 🔹 Partenaire / Organisation
         let partnerText = user.partner?.name.trimmingCharacters(in: .whitespacesAndNewlines) ??
                           user.organization?.name.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         ui_label_partner.text = partnerText.isEmpty ? nil : partnerText
-        if partnerText.isEmpty { ui_label_partner.setVisibilityGone() }
+        if partnerText.isEmpty { ui_label_partner.text = "no_data_available".localized }
 
         // 🔹 Rôles (avec formatage "Admin • Membre")
         let hasRoles = (user.roles?.isEmpty == false)
