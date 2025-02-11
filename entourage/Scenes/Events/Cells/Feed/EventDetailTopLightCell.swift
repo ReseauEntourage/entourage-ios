@@ -89,7 +89,7 @@ class EventDetailTopLightCell: UITableViewCell {
         button.setTitleColor(.black, for: .normal)
         button.layer.borderColor = UIColor.appOrange.cgColor
         button.layer.borderWidth = 1
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 22
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
         button.clipsToBounds = true
     }

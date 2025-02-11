@@ -36,6 +36,7 @@ class ReportGroupViewController: UIViewController {
         ui_button_validate.layer.cornerRadius = ui_button_validate.frame.height / 2
         ui_button_validate.setTitle("report_group_next_button".localized, for: .normal)
         ui_button_validate.backgroundColor = .appOrangeLight_50
+        configureOrangeButton(ui_button_validate, withTitle: "report_group_next_button".localized)
         
         //TODO: on affiche le fond transparent pour l'alerte ou un fond blanc ?
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
@@ -75,6 +76,25 @@ class ReportGroupViewController: UIViewController {
     func showError(message:String, imageName:String? = nil) {
         ui_error_view.changeTitleAndImage(title: message,imageName: imageName)
         ui_error_view.show()
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
 }
 

@@ -57,6 +57,7 @@ class ReportGroupSendViewController: UIViewController {
         ui_bt_send.layer.cornerRadius = ui_bt_send.frame.height / 2
         ui_bt_send.setTitle("report_group_validate_button".localized, for: .normal)
         ui_bt_send.backgroundColor = .appOrange
+        configureOrangeButton(ui_bt_send, withTitle: "report_group_validate_button".localized)
         
         ui_bt_back.titleLabel?.font = ApplicationTheme.getFontBoutonOrange().font
         ui_bt_back.titleLabel?.textColor = ApplicationTheme.getFontBoutonOrange().color
@@ -65,6 +66,8 @@ class ReportGroupSendViewController: UIViewController {
         ui_bt_back.layer.borderWidth = 1
         ui_bt_back.setTitle("report_group_back_button".localized, for: .normal)
         ui_bt_back.backgroundColor = .white
+        configureWhiteButton(ui_bt_back, withTitle: "report_group_back_button".localized)
+
         
         ui_tv_message.placeholderText = placeholderBioTxt
         ui_tv_message.placeholderColor = placeholderBioColor
@@ -73,6 +76,25 @@ class ReportGroupSendViewController: UIViewController {
         let buttonDone = UIBarButtonItem(title: "validate".localized, style: .plain, target: self, action: #selector(closeKb))
         let _width = UIApplication.shared.delegate?.window??.frame.width ?? view.frame.size.width
         ui_tv_message.addToolBar(width: _width, buttonValidate: buttonDone)
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
 
     @objc func closeKb() {

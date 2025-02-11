@@ -63,7 +63,7 @@ class NeighborhoodCreateMainViewController: UIViewController {
         ui_bt_next.setTitleColor(.white, for: .normal)
         ui_bt_next.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
         ui_bt_next.setTitle("neighborhood_create_group_bt_next".localized, for: .normal)
-        
+        configureOrangeButton(ui_bt_next, withTitle: "neighborhood_create_group_bt_next".localized)
         
         enableDisableNextButton(isEnable: false) //TODO: remettre false
         
@@ -86,6 +86,15 @@ class NeighborhoodCreateMainViewController: UIViewController {
         ui_error_view.show()
     }
     
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+
     func configureWhiteButton(_ button: UIButton, withTitle title: String) {
         button.setTitle(title, for: .normal)
         button.backgroundColor = .white

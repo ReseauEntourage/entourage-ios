@@ -27,6 +27,18 @@ class EventCreateValidateViewController: UIViewController {
         
         ui_title.text = "eventCreateEnd_title".localized
         ui_subtitle.text = "eventCreateEnd_subtitle".localized
+        ui_title.setFontTitle(size: 28)
+        ui_subtitle.setFontBody(size: 15)
+        configureOrangeButton(ui_bt_post, withTitle: "eventCreateEnd_button_show".localized)
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     @IBAction func action_show_event(_ sender: Any) {
