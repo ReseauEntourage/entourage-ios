@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgK-Og-Itl">
-                        <rect key="frame" x="10" y="10" width="373" height="65"/>
+                        <rect key="frame" x="10" y="30" width="373" height="45"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -25,7 +25,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="IgK-Og-Itl" firstAttribute="leading" secondItem="tB5-7a-1Fv" secondAttribute="leading" constant="10" id="3Tp-2s-46v"/>
-                    <constraint firstItem="IgK-Og-Itl" firstAttribute="top" secondItem="tB5-7a-1Fv" secondAttribute="top" constant="10" id="ORk-nC-4jK"/>
+                    <constraint firstItem="IgK-Og-Itl" firstAttribute="top" secondItem="tB5-7a-1Fv" secondAttribute="top" constant="30" id="ORk-nC-4jK"/>
                     <constraint firstAttribute="trailing" secondItem="IgK-Og-Itl" secondAttribute="trailing" constant="10" id="anM-zK-Tsv"/>
                     <constraint firstAttribute="bottom" secondItem="IgK-Og-Itl" secondAttribute="bottom" constant="10" id="vPR-yC-aAW"/>
                 </constraints>

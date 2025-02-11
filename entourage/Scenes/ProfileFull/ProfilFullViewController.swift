@@ -42,8 +42,8 @@ class ProfilFullViewController: UIViewController {
     let profileImageMinHeight: CGFloat = 0
     let modifyButtonMaxHeight: CGFloat = 30
 
-    let tableViewTopMax: CGFloat = 70
-    let tableViewTopMin: CGFloat = 40
+    let tableViewTopMax: CGFloat = 100
+    let tableViewTopMin: CGFloat = 60
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +91,13 @@ class ProfilFullViewController: UIViewController {
         if self.user == nil{
             self.user = UserDefaults.currentUser
         }
+        //Distable btn signal if isMe
+        if isMe {
+            self.btn_signal.isHidden = true
+        }else{
+            self.btn_signal.isHidden = false
+        }
+        // Service call
         loadData()
 
     }
@@ -358,10 +365,13 @@ class ProfilFullViewController: UIViewController {
             // 1) Langue
             let preferredLanguage = LanguageManager.loadLanguageFromPreferences()
 
+            let localizedKey = getLocalizedKey(for: preferredLanguage)
+            let modifiedSubtitle = String(localizedKey.dropFirst(3))
+
             tableDTO.append(.standard(
                 img: "ic_profil_full_language",
                 title: "settings_language_title".localized, // "Langue"
-                subtitle: getLocalizedKey(for: preferredLanguage)
+                subtitle: modifiedSubtitle
             ))
             
             // Gestion du sous-titre des notifications

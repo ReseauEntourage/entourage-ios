@@ -39,7 +39,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dd-Z0-aZU">
                         <rect key="frame" x="50" y="42" width="381" height="15.666666666666664"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" name="grey_text_deleted"/>
+                        <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGF-mp-rfL">
@@ -49,6 +49,13 @@
                             <constraint firstAttribute="height" constant="1" id="5aj-hC-uZ3"/>
                         </constraints>
                     </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_profil_right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="VWO-jz-twB">
+                        <rect key="frame" x="415" y="27" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="fni-sP-ICf"/>
+                            <constraint firstAttribute="height" constant="16" id="i2p-VI-yME"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="8Oj-pY-6Ne" firstAttribute="top" secondItem="j4j-X0-O3M" secondAttribute="top" constant="20" id="BCP-eD-hNj"/>
@@ -59,9 +66,11 @@
                     <constraint firstAttribute="trailing" secondItem="mqj-fL-JGK" secondAttribute="trailing" constant="10" id="Riw-TU-tEa"/>
                     <constraint firstItem="UGF-mp-rfL" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="leading" id="bMK-wD-kcM"/>
                     <constraint firstItem="9dd-Z0-aZU" firstAttribute="leading" secondItem="8Oj-pY-6Ne" secondAttribute="trailing" constant="10" id="cHx-DD-dFr"/>
+                    <constraint firstAttribute="trailing" secondItem="VWO-jz-twB" secondAttribute="trailing" constant="10" id="gFl-u5-JXg"/>
                     <constraint firstItem="mqj-fL-JGK" firstAttribute="top" secondItem="8Oj-pY-6Ne" secondAttribute="top" id="hLU-T8-kjk"/>
                     <constraint firstAttribute="trailing" secondItem="9dd-Z0-aZU" secondAttribute="trailing" constant="10" id="kQ2-Uq-3AI"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9dd-Z0-aZU" secondAttribute="bottom" constant="20" id="mCP-Dc-PjW"/>
+                    <constraint firstItem="VWO-jz-twB" firstAttribute="centerY" secondItem="8Oj-pY-6Ne" secondAttribute="centerY" id="nkk-yO-5Jc"/>
                     <constraint firstItem="8Oj-pY-6Ne" firstAttribute="leading" secondItem="j4j-X0-O3M" secondAttribute="leading" constant="10" id="r5R-L9-vKu"/>
                 </constraints>
             </tableViewCellContentView>
@@ -74,14 +83,15 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ic_profil_right_arrow" width="17" height="17"/>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="grey_off">
             <color red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="grey_text_deleted">
-            <color red="0.65490196078431373" green="0.6470588235294118" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="gris_112">
+            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

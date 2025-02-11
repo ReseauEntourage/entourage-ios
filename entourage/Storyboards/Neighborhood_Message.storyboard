@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -300,6 +300,13 @@
                                             <outletCollection property="gestureRecognizers" destination="Iav-2j-R1z" appends="YES" id="cPf-GN-aEU"/>
                                         </connections>
                                     </tableView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="nds-nx-RSP">
+                                        <rect key="frame" x="0.0" y="602" width="414" height="150"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="4sO-fM-XFG"/>
+                                        </constraints>
+                                    </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6f-PY-TWq">
                                         <rect key="frame" x="0.0" y="525" width="414" height="163"/>
                                         <subviews>
@@ -417,6 +424,7 @@
                                     <constraint firstItem="ePm-CU-0cn" firstAttribute="leading" secondItem="o5s-SK-ErZ" secondAttribute="leading" id="0uk-zu-leZ"/>
                                     <constraint firstAttribute="trailing" secondItem="e6f-PY-TWq" secondAttribute="trailing" id="3L9-7y-G9b"/>
                                     <constraint firstItem="vmG-pn-VWc" firstAttribute="top" secondItem="dQM-RZ-lxJ" secondAttribute="top" id="7H7-Ak-3Ip"/>
+                                    <constraint firstItem="o5s-SK-ErZ" firstAttribute="top" secondItem="nds-nx-RSP" secondAttribute="bottom" id="7sd-qg-RCe"/>
                                     <constraint firstItem="ePm-CU-0cn" firstAttribute="bottom" secondItem="o5s-SK-ErZ" secondAttribute="bottom" id="7tQ-XS-eUn"/>
                                     <constraint firstItem="Dgc-Z3-CyI" firstAttribute="centerY" secondItem="vmG-pn-VWc" secondAttribute="centerY" id="8kf-7R-b3G"/>
                                     <constraint firstItem="o5s-SK-ErZ" firstAttribute="top" secondItem="e6f-PY-TWq" secondAttribute="bottom" constant="64" id="9Aj-lZ-dHF"/>
@@ -425,10 +433,12 @@
                                     <constraint firstAttribute="bottomMargin" secondItem="o5s-SK-ErZ" secondAttribute="bottom" id="I4T-Lm-Ou6"/>
                                     <constraint firstItem="JZj-i6-yz3" firstAttribute="leading" secondItem="dQM-RZ-lxJ" secondAttribute="leading" id="JEG-EY-OIL"/>
                                     <constraint firstAttribute="trailing" secondItem="vmG-pn-VWc" secondAttribute="trailing" id="QaE-e4-bhc"/>
+                                    <constraint firstAttribute="trailing" secondItem="nds-nx-RSP" secondAttribute="trailing" id="aN6-fS-hhf"/>
                                     <constraint firstItem="o5s-SK-ErZ" firstAttribute="leading" secondItem="dQM-RZ-lxJ" secondAttribute="leading" id="eal-Mj-Iua"/>
                                     <constraint firstItem="Dgc-Z3-CyI" firstAttribute="trailing" secondItem="vmG-pn-VWc" secondAttribute="trailing" constant="-18" id="iAl-Jh-9Cc"/>
                                     <constraint firstAttribute="trailing" secondItem="o5s-SK-ErZ" secondAttribute="trailing" id="o5P-2J-41h"/>
                                     <constraint firstAttribute="trailing" secondItem="JZj-i6-yz3" secondAttribute="trailing" id="qLM-Rc-2SG"/>
+                                    <constraint firstItem="nds-nx-RSP" firstAttribute="leading" secondItem="dQM-RZ-lxJ" secondAttribute="leading" id="qsC-2r-yei"/>
                                     <constraint firstItem="ePm-CU-0cn" firstAttribute="top" secondItem="o5s-SK-ErZ" secondAttribute="top" id="rjG-Z6-ev3"/>
                                     <constraint firstItem="JZj-i6-yz3" firstAttribute="top" secondItem="vmG-pn-VWc" secondAttribute="bottom" id="vD8-0m-A2O"/>
                                     <constraint firstAttribute="bottom" secondItem="o5s-SK-ErZ" secondAttribute="bottom" constant="42" id="ynC-Jo-DRv"/>
@@ -449,6 +459,7 @@
                         <outlet property="ui_constraint_bottom_view_Tf" destination="ynC-Jo-DRv" id="1bf-4M-RQS"/>
                         <outlet property="ui_iv_bt_send" destination="G8D-vG-DVg" id="SGJ-OU-3hP"/>
                         <outlet property="ui_tableview" destination="JZj-i6-yz3" id="DsH-1Q-Nbv"/>
+                        <outlet property="ui_tableview_mentions" destination="nds-nx-RSP" id="kuK-9f-csh"/>
                         <outlet property="ui_tap_gesture" destination="Iav-2j-R1z" id="zH3-SR-b5j"/>
                         <outlet property="ui_textview_message" destination="BdV-52-4CQ" id="f7w-wM-cXj"/>
                         <outlet property="ui_title_empty" destination="nf3-AY-YZh" id="Zdm-yD-BJI"/>
@@ -990,20 +1001,12 @@ L8</string>
             <point key="canvasLocation" x="1928" y="123"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="b1z-cB-Nh4">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-        <designable name="xzZ-QM-8aX">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-    </designables>
     <resources>
         <image name="ic_button_close_white_round" width="32" height="32"/>
         <image name="ic_button_retry_red" width="10" height="11"/>
         <image name="ic_error_mini" width="9" height="9"/>
         <image name="ic_mini_image_placeholder" width="21" height="20"/>
-        <image name="ic_no_message_neighborhood" width="308" height="144"/>
+        <image name="ic_no_message_neighborhood" width="307.20001220703125" height="144"/>
         <image name="ic_send_comment" width="54" height="54"/>
         <image name="ic_send_white" width="22" height="22"/>
         <image name="ic_signal_post_message" width="23" height="24"/>
@@ -1017,7 +1020,7 @@ L8</string>
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
-            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.59215686274509804" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_light">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1029,7 +1032,7 @@ L8</string>
             <color red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -44,6 +44,7 @@ class MainStatUserCell:UITableViewCell {
         else {
             ui_title?.text = "detail_user_his_activity".localized
         }
+        ui_title.setFontTitle(size: 15)
         
         ui_outings_title.text = outingsCount <= 1 ? "mainUserTitleOuting".localized : "mainUserTitleOutings".localized
         ui_groups_title.text = neighborhoodsCount <= 1 ? "mainUserTitleGroup".localized : "mainUserTitleGroups".localized
@@ -77,6 +78,8 @@ class MainStatUserCell:UITableViewCell {
         }else{
             ui_member_date.text = ""
         }
+        ui_member_date.setFontBody(size: 15)
+        ui_member_date.setFontTitle(size: 15)
     }
     
     private func addShadowAndRadius(customView:UIView) {
