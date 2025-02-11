@@ -35,8 +35,17 @@ class ParamsNotifsViewController: BasePopViewController {
         ui_bt_validate.titleLabel?.textColor = .white
         ui_bt_validate.layer.cornerRadius = ui_bt_validate.frame.height / 2
         ui_bt_validate.setTitle("param_notifs_validate".localized, for: .normal)
-        
+        configureOrangeButton(ui_bt_validate, withTitle: "param_notifs_validate".localized)
         checkSystemNotificationSettings()
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     func checkSystemNotificationSettings() {

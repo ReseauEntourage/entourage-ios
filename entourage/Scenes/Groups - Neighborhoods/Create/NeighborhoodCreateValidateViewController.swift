@@ -34,6 +34,8 @@ class NeighborhoodCreateValidateViewController: UIViewController {
         
         ui_title.text = "neighborhoodCreateValidateTitle".localized
         ui_subtitle.text = "neighborhoodCreateValidateSubtitle".localized
+        ui_title.setFontTitle(size: 28)
+        ui_subtitle.setFontBody(size: 15)
         
         AnalyticsLoggerManager.logEvent(name: View_NewGroup_Confirmation)
     }
