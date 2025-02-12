@@ -194,7 +194,7 @@ class TagInterest: Tag {
 
 fileprivate struct InterestMappingImageHelper {
     static func getInterestImageNameFromKey(key: String) -> String {
-        var imageName = "interest_other"
+        var imageName = "enhanced_onboarding_interest_other"
 
         switch key {
         case "activites":
@@ -216,13 +216,13 @@ fileprivate struct InterestMappingImageHelper {
         case "marauding":
             imageName = "interest_rencontre-nomade"
         default:
-            imageName = "interest_other"
+            imageName = "enhanced_onboarding_interest_other"
         }
         return imageName
     }
     
     static func getInterestSmallImageNameFromKey(key:String) -> String {
-        var imageName = "interest_small_others"
+        var imageName = "enhanced_onboarding_interest_other"
         
         switch key {
         case "activites":
