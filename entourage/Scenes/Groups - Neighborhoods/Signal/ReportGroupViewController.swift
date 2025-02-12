@@ -109,7 +109,7 @@ extension ReportGroupViewController : UITableViewDataSource, UITableViewDelegate
         
         let signal = tagsignals?.getTags()[indexPath.row]
         
-        cell.populateCell(title: tagsignals!.getTagNameFrom(key: signal!.name) , isChecked: signal!.isSelected)
+        cell.populateCell(title: tagsignals!.getTagNameFrom(key: signal!.name) , isChecked: signal!.isSelected, isAction: true)
         
         return cell
     }

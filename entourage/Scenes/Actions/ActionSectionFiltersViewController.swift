@@ -55,7 +55,7 @@ extension ActionSectionFiltersViewController: UITableViewDataSource, UITableView
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterest", for: indexPath) as! SelectTagCell
         
-        cell.populateCell(title: section.name, isChecked: section.isSelected, imageName: section.getImageName(), hideSeparator: false, subtitle: section.subtitle, isSingleSelection: false)
+        cell.populateCell(title: section.name, isChecked: section.isSelected, imageName: section.getImageName(), hideSeparator: false, subtitle: section.subtitle, isSingleSelection: false, isAction: false)
         
         return cell
     }

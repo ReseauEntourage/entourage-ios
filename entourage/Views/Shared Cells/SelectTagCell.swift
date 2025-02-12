@@ -24,7 +24,7 @@ class SelectTagCell: UITableViewCell {
         ui_subtitle?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 11, color: .black))
     }
     
-    func populateCell(title: String, isChecked: Bool, imageName: String? = nil, hideSeparator: Bool = false, subtitle: String? = nil, isSingleSelection: Bool = false, imageUrl: String? = nil, isUser: Bool = false) {
+    func populateCell(title: String, isChecked: Bool, imageName: String? = nil, hideSeparator: Bool = false, subtitle: String? = nil, isSingleSelection: Bool = false, imageUrl: String? = nil, isUser: Bool = false, isAction:Bool) {
         
         ui_title.text = TagsUtils.showTagTranslated(title)
         if let _subtitle = subtitle {
@@ -35,12 +35,21 @@ class SelectTagCell: UITableViewCell {
         } else {
             ui_iv_check.image = isChecked ? UIImage.init(named: "checkbox_checked") : UIImage.init(named: "checkbox_unchecked")
         }
-        
+        if !isAction{
+            ui_picto?.backgroundColor = UIColor.appBeige
+            ui_picto?.layer.cornerRadius = 15
+            ui_picto?.clipsToBounds = true
+        }else{
+            ui_picto?.backgroundColor = UIColor.clear
+            ui_picto?.layer.cornerRadius = 0
+            ui_picto?.clipsToBounds = true
+        }
         if let imageName = imageName {
             ui_picto?.image = UIImage.init(named: imageName)
         } else {
             ui_picto?.image = UIImage.init(named: "others")
         }
+        
         if isUser {
             ui_picto?.layer.cornerRadius = (ui_picto?.frame.height ?? 0) / 2
             let placeholder = UIImage.init(named: "placeholder_user")

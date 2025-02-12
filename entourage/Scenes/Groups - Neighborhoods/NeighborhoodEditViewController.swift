@@ -334,7 +334,7 @@ extension NeighborhoodEditViewController: UITableViewDelegate, UITableViewDataSo
         let interest = tagsInterests?.getTags()[indexPath.row - 2]
         let hideSelector = (indexPath.row - 1) == tagsInterests.getTags().count ? true : false
         
-        cell.populateCell(title: tagsInterests!.getTagNameFrom(key: interest!.name) , isChecked: interest!.isSelected, imageName: (interest! as! TagInterest).tagImageName, hideSeparator: hideSelector)
+        cell.populateCell(title: tagsInterests!.getTagNameFrom(key: interest!.name) , isChecked: interest!.isSelected, imageName: (interest! as! TagInterest).tagImageName, hideSeparator: hideSelector, isAction: false)
         
         return cell
     }

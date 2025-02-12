@@ -150,7 +150,7 @@ extension ProfileEditBlockedUsersViewController : UITableViewDataSource, UITable
         let user = userBlocked[indexPath.row]
         
         
-        cell.populateCell(title: user.blockedUser.displayName ?? "-" , isChecked: user.isChecked, imageUrl: user.blockedUser.avatarUrl, isUser: true)
+        cell.populateCell(title: user.blockedUser.displayName ?? "-" , isChecked: user.isChecked, imageUrl: user.blockedUser.avatarUrl, isUser: true, isAction: false)
         
         return cell
     }

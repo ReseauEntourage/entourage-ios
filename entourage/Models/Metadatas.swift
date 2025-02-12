@@ -193,30 +193,30 @@ class TagInterest: Tag {
 }
 
 fileprivate struct InterestMappingImageHelper {
-    static func getInterestImageNameFromKey(key:String) -> String {
-        var imageName = "interest_others"
-        
+    static func getInterestImageNameFromKey(key: String) -> String {
+        var imageName = "interest_other"
+
         switch key {
         case "activites":
-            imageName = "interest_activities"
+            imageName = "interest_activite-manuelle"
         case "animaux":
-            imageName = "interest_animals"
+            imageName = "interest_animaux"
         case "bien-etre":
-            imageName = "interest_wellness"
+            imageName = "interest_bien-etre"
         case "cuisine":
-            imageName = "interest_cooking"
+            imageName = "interest_cuisine"
         case "culture":
             imageName = "interest_art"
         case "jeux":
-            imageName = "interest_game"
+            imageName = "interest_jeux"
         case "sport":
             imageName = "interest_sport"
         case "nature":
             imageName = "interest_nature"
         case "marauding":
-            imageName = "interest_nomad"
+            imageName = "interest_rencontre-nomade"
         default:
-            imageName = "interest_others"
+            imageName = "interest_other"
         }
         return imageName
     }
