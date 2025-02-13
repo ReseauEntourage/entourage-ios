@@ -84,12 +84,14 @@ class EventEditMainViewController: UIViewController {
         ui_bt_previous.setTitleColor(.appOrange, for: .normal)
         ui_bt_previous.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
         ui_bt_previous.setTitle("event_create_group_bt_back".localized, for: .normal)
+        configureWhiteButton(ui_bt_previous, withTitle: "event_create_group_bt_back".localized)
         
         ui_bt_next.layer.cornerRadius = ui_bt_next.frame.height / 2
         ui_bt_next.backgroundColor = .appOrangeLight
         ui_bt_next.setTitleColor(.white, for: .normal)
         ui_bt_next.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
         ui_bt_next.setTitle("event_create_group_bt_next".localized, for: .normal)
+        configureOrangeButton(ui_bt_next, withTitle: "event_create_group_bt_next".localized)
         
         enableDisableNextButton(isEnable: false) //TODO: remettre false
         
@@ -101,6 +103,25 @@ class EventEditMainViewController: UIViewController {
         
         getEvent()
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? EventCreatePageViewController {

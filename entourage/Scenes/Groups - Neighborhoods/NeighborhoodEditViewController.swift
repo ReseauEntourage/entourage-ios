@@ -64,6 +64,7 @@ class NeighborhoodEditViewController: UIViewController {
         ui_button_validate.layer.cornerRadius = ui_button_validate.frame.height / 2
         ui_button_validate.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
         ui_button_validate.setTitleColor(.white, for: .normal)
+        configureOrangeButton(ui_button_validate, withTitle: "button_title_for_setting_onboarding".localized)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -83,6 +84,25 @@ class NeighborhoodEditViewController: UIViewController {
         }
         AnalyticsLoggerManager.logEvent(name: View_GroupOption_Edition)
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue

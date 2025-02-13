@@ -49,6 +49,7 @@ class NeighborhoodPostPicturePreviewResizeViewController: BasePopViewController 
         ui_bt_valide.backgroundColor = .appOrange
         ui_bt_valide.layer.cornerRadius = ui_bt_valide.frame.height / 2
         ui_bt_valide.setTitle("neighborhood_add_post_image_bt_validate".localized, for: .normal)
+        configureOrangeButton(ui_bt_valide, withTitle: "neighborhood_add_post_image_bt_validate".localized)
         
         ui_bt_cancel.titleLabel?.font = ApplicationTheme.getFontBoutonOrange().font
         ui_bt_cancel.setTitleColor(.appOrange, for: .normal)
@@ -56,7 +57,27 @@ class NeighborhoodPostPicturePreviewResizeViewController: BasePopViewController 
         ui_bt_cancel.backgroundColor = .appOrangeLight_50
         ui_bt_cancel.layer.cornerRadius = ui_bt_cancel.frame.height / 2
         ui_bt_cancel.setTitle("neighborhood_add_post_image_bt_cancel".localized, for: .normal)
+        configureWhiteButton(ui_bt_cancel, withTitle: "neighborhood_add_post_image_bt_cancel".localized)
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     //MARK: - Methods Images -
     func processImage() -> UIImage? {

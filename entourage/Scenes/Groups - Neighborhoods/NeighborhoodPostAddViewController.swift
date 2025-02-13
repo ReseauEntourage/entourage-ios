@@ -53,7 +53,7 @@ class NeighborhoodPostAddViewController: UIViewController {
         ui_lb_photo.text = "neighborhood_add_post_image_title".localized
         ui_lb_photo_dsc.text = "neighborhood_add_post_image_subtitle".localized
         ui_title_button_validate.text = "neighborhood_add_post_send_button".localized
-        
+        ui_title_button_validate.setFontBody(size: 15)
         ui_tv_message.placeholderText = "neighborhood_add_post_message_placeholder".localized
         ui_tv_message.placeholderColor = .lightGray
         
@@ -68,7 +68,6 @@ class NeighborhoodPostAddViewController: UIViewController {
         
         ui_title_button_validate.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_view_button_validate.layer.cornerRadius = ui_view_button_validate.frame.height / 2
-        
         ui_image.layer.cornerRadius = cornerRadiusImage
         ui_view_error.isHidden = true
         ui_tv_error.text = "neighborhood_add_post_error".localized
@@ -80,6 +79,16 @@ class NeighborhoodPostAddViewController: UIViewController {
             AnalyticsLoggerManager.logEvent(name: View_GroupFeed_NewPost_Screen)
         }
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+
     
     @objc func closeKb() {
         let _ = ui_tv_message.resignFirstResponder()

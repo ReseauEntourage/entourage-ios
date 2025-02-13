@@ -60,7 +60,7 @@ class ReportGroupSendViewController: UIViewController {
         configureOrangeButton(ui_bt_send, withTitle: "report_group_validate_button".localized)
         
         ui_bt_back.titleLabel?.font = ApplicationTheme.getFontBoutonOrange().font
-        ui_bt_back.titleLabel?.textColor = ApplicationTheme.getFontBoutonOrange().color
+        ui_bt_back.titleLabel?.textColor = UIColor.black
         ui_bt_back.layer.cornerRadius = ui_bt_back.frame.height / 2
         ui_bt_back.layer.borderColor = UIColor.appOrange.cgColor
         ui_bt_back.layer.borderWidth = 1
