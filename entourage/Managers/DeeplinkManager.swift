@@ -171,11 +171,12 @@ struct DeepLinkManager {
     
     //MARK: - Navigation Actions -
     static func showUser(userId:Int) {
-        if let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? ProfilFullViewController {
-                _homeVC.userIdToDisplay = "\(userId)"
-                AppState.getTopViewController()?.present(navVC, animated: true)
-            }
+        if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+            .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
+            profileVC.userIdToDisplay = "\(userId)"
+            profileVC.isMe = false
+            profileVC.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(profileVC, animated: true)
         }
     }
     

@@ -309,7 +309,6 @@ extension ActionDetailFullViewController: UITableViewDataSource, UITableViewDele
                 .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
                 guard let userId = action?.author?.uid else { return }
                 profileVC.userIdToDisplay = "\(userId)"
-                
                 profileVC.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(profileVC, animated: true)
             }
