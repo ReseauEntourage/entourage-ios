@@ -23,7 +23,7 @@ class ProfileEditPasswordViewController: UIViewController {
     @IBOutlet weak var ui_tf_new: UITextField!
     @IBOutlet weak var ui_tf_confirm: UITextField!
     
-    @IBOutlet weak var ui_bt_validate: UIButton!
+    @IBOutlet weak var btn_validate: UIButton!
     
     let MIN_PASSWORD_LENGTH = 6
     
@@ -33,10 +33,6 @@ class ProfileEditPasswordViewController: UIViewController {
         
         
         self.modalPresentationStyle = .fullScreen
-        
-        ui_bt_validate.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
-        ui_bt_validate.setTitle("validate".localized, for: .normal)
-        ui_bt_validate.layer.cornerRadius = ui_bt_validate.frame.height / 2
         
         ui_title_old.text = "oldCode".localized
         ui_title_new.text = "newCode".localized
@@ -52,18 +48,39 @@ class ProfileEditPasswordViewController: UIViewController {
         
         ui_title_old.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange(size: 13))
         ui_title_new.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange(size: 13))
-        ui_title_confirm.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange(size: 13))
+        //ui_title_confirm.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange(size: 13))
         
         ui_tf_old.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 13))
         ui_tf_new.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 13))
-        ui_tf_confirm.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 13))
+        //ui_tf_confirm.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 13))
         
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         
-        
+        configureOrangeButton(btn_validate, withTitle: "validate".localized)
+
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
         ui_error_view.hide()
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+      button.setTitle(title, for: .normal)
+      button.backgroundColor = .white
+      button.setTitleColor(.black, for: .normal)
+      button.layer.borderColor = UIColor.appOrange.cgColor
+      button.layer.borderWidth = 1
+      button.layer.cornerRadius = 25
+      button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+      button.clipsToBounds = true
     }
     
     deinit {

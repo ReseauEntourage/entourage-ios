@@ -83,7 +83,7 @@ class IntroCarouselViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.layer.borderColor = UIColor.appOrange.cgColor
         button.layer.borderWidth = 1
-        button.layer.cornerRadius = 21
+        button.layer.cornerRadius = 25
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
         button.clipsToBounds = true
     }

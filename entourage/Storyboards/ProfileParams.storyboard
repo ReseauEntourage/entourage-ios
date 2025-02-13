@@ -3923,42 +3923,27 @@
                                             <constraint firstAttribute="height" constant="100" id="xDF-yf-MQz"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ssv-G3-prO">
-                                        <rect key="frame" x="132" y="429" width="150" height="50"/>
-                                        <color key="backgroundColor" name="orange_app"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Zyq-vp-kdC"/>
-                                            <constraint firstAttribute="width" constant="150" id="hmL-rY-hvW"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
-                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Valider">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <buttonConfiguration key="configuration" style="plain" title="Valider">
-                                            <fontDescription key="titleFontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
-                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="action_validate:" destination="XCK-UJ-fFH" eventType="touchUpInside" id="nOh-IC-v0u"/>
-                                            <action selector="action_validate:" destination="XeY-YC-32X" eventType="touchUpInside" id="t4l-J6-31J"/>
-                                            <action selector="action_validate:" destination="d5M-ud-tor" eventType="touchUpInside" id="tVk-1W-q6m"/>
-                                        </connections>
-                                    </button>
-                                    <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhp-Ii-v9A" customClass="MJErrorInputView" customModule="Ent_Beta" customModuleProvider="target">
+                                    <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qhp-Ii-v9A" customClass="MJErrorInputView" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="487" width="414" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="JOc-Ux-20P"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uax-2Q-B9v">
+                                        <rect key="frame" x="147" y="429" width="120" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Tdp-h5-Up6"/>
+                                            <constraint firstAttribute="width" constant="120" id="yjO-jC-4kn"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="BeigeClair"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="eYE-Dk-4Dc" firstAttribute="leading" secondItem="Gg3-fb-GcO" secondAttribute="leading" constant="28" id="0jc-uq-4IQ"/>
-                                    <constraint firstItem="Ssv-G3-prO" firstAttribute="centerX" secondItem="Gg3-fb-GcO" secondAttribute="centerX" id="0nv-bF-I29"/>
                                     <constraint firstItem="s4v-KA-GBT" firstAttribute="centerX" secondItem="Gg3-fb-GcO" secondAttribute="centerX" id="3Cf-WN-YEd"/>
                                     <constraint firstAttribute="trailing" secondItem="qhp-Ii-v9A" secondAttribute="trailing" id="5hr-Q5-m0d"/>
                                     <constraint firstAttribute="trailing" secondItem="eYE-Dk-4Dc" secondAttribute="trailing" constant="28" id="DWB-ew-CGR"/>
@@ -3966,10 +3951,10 @@
                                     <constraint firstItem="eYE-Dk-4Dc" firstAttribute="top" secondItem="s4v-KA-GBT" secondAttribute="bottom" constant="16" id="LvW-Wd-jbi"/>
                                     <constraint firstAttribute="trailing" secondItem="sX0-6a-DhG" secondAttribute="trailing" id="Ulv-RQ-AI3"/>
                                     <constraint firstItem="s4v-KA-GBT" firstAttribute="top" secondItem="sX0-6a-DhG" secondAttribute="bottom" constant="16" id="Zq0-CQ-uIi"/>
-                                    <constraint firstItem="qhp-Ii-v9A" firstAttribute="top" secondItem="Ssv-G3-prO" secondAttribute="bottom" constant="8" id="d4e-Q0-2Mh"/>
+                                    <constraint firstItem="uax-2Q-B9v" firstAttribute="top" secondItem="eYE-Dk-4Dc" secondAttribute="bottom" constant="16" id="ayj-XV-ukM"/>
                                     <constraint firstItem="qhp-Ii-v9A" firstAttribute="leading" secondItem="Gg3-fb-GcO" secondAttribute="leading" id="jWd-rg-40T"/>
                                     <constraint firstItem="sX0-6a-DhG" firstAttribute="leading" secondItem="Gg3-fb-GcO" secondAttribute="leading" id="kfm-Oq-jkW"/>
-                                    <constraint firstItem="Ssv-G3-prO" firstAttribute="top" secondItem="eYE-Dk-4Dc" secondAttribute="bottom" constant="16" id="qeC-WN-OzP"/>
+                                    <constraint firstItem="uax-2Q-B9v" firstAttribute="centerX" secondItem="Gg3-fb-GcO" secondAttribute="centerX" id="v7W-HW-h6A"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="ly0-QS-9f8" appends="YES" id="kU9-Xo-9sF"/>
@@ -3987,7 +3972,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="O3h-NI-R8h"/>
                     <connections>
-                        <outlet property="ui_bt_validate" destination="Ssv-G3-prO" id="8Ux-s1-bPp"/>
+                        <outlet property="btn_validate" destination="uax-2Q-B9v" id="ZdJ-3E-RJ6"/>
                         <outlet property="ui_error_view" destination="qhp-Ii-v9A" id="kKA-H2-Beq"/>
                         <outlet property="ui_tf_confirm" destination="Xe8-TY-zub" id="vcH-2K-vCl"/>
                         <outlet property="ui_tf_new" destination="CWd-aC-xBS" id="PIf-HI-bgv"/>
