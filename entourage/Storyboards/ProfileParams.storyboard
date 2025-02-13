@@ -3455,7 +3455,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Cf-QI-yLc">
-                                        <rect key="frame" x="85" y="410" width="244.5" height="50"/>
+                                        <rect key="frame" x="76.5" y="410" width="261" height="50"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="pah-De-39E"/>
@@ -3466,10 +3466,6 @@
                                         <state key="normal" title="Appliquer les modifications">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <buttonConfiguration key="configuration" style="plain" title="Appliquer les modifications">
-                                            <fontDescription key="titleFontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
-                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="action_validate:" destination="d5M-ud-tor" eventType="touchUpInside" id="8Ha-e4-SB7"/>
                                             <action selector="action_validate:" destination="XCK-UJ-fFH" eventType="touchUpInside" id="PIX-1Z-HVX"/>
