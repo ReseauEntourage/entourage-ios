@@ -34,7 +34,7 @@ class OnboardingLanguageStoryBoard: UIViewController {
         self.ui_label_select_language.text = "onboarding_lang_select".localized
         self.ui_button_next.setTitle("onboarding_lang_suivant".localized, for: .normal)
         self.ui_button_next.addTarget(self, action: #selector(onNextClicked), for: .touchUpInside)
-        configureOrangeButton(ui_button_next, withTitle: "onboarding_lang_suivant")
+        configureOrangeButton(ui_button_next, withTitle: "onboarding_lang_suivant".localized)
 
     }
     
