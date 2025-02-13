@@ -33,6 +33,7 @@ class ProfileEditBlockedUsersViewController: BasePopViewController {
         ui_button_validate.titleLabel?.textColor = .white
         ui_button_validate.layer.cornerRadius = ui_button_validate.frame.height / 2
         ui_button_validate.setTitle("settingsUnblockBT".localized, for: .normal)
+        configureWhiteButton(ui_button_validate, withTitle: "settingsUnblockBT".localized)
         
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
         ui_error_view.hide()
@@ -40,6 +41,7 @@ class ProfileEditBlockedUsersViewController: BasePopViewController {
         ui_title_empty.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_title_empty.text = "param_empty_blocked_user".localized
         ui_view_empty.isHidden = true
+        
         
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
@@ -69,6 +71,25 @@ class ProfileEditBlockedUsersViewController: BasePopViewController {
             }
         }
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     func sendUnblockUsers() {
         let datas = getNameAndIds()
