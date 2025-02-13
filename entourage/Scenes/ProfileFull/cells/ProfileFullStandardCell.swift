@@ -32,7 +32,7 @@ class ProfileFullStandardCell:UITableViewCell{
         ui_title.text = title
         ui_subtitle.text = subtitle
         ui_image.image = UIImage(named: image)
-        if isMe {
+        if !isMe {
             ui_img_chevron.isHidden = true
         }else{
             ui_img_chevron.isHidden = false
