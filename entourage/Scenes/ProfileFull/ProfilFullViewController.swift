@@ -553,7 +553,7 @@ extension ProfilFullViewController: UITableViewDelegate, UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileFullStandardCell") as? ProfileFullStandardCell {
                 cell.selectionStyle = .none
                 // On laisse subtitle vide, selon la demande
-                cell.configure(image: img, title: title, subtitle: subtitle)
+                cell.configure(image: img, title: title, subtitle: subtitle, isMe: self.isMe)
                 return cell
             }
         case .version(let version):

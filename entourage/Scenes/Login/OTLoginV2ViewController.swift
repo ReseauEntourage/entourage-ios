@@ -86,6 +86,15 @@ class OTLoginV2ViewController: UIViewController {
         stopTimer()
     }
     
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+    
     deinit {
         IQKeyboardManager.shared.enable = false
         IQKeyboardManager.shared.enableAutoToolbar = false
@@ -109,7 +118,7 @@ class OTLoginV2ViewController: UIViewController {
         ui_tf_phone.placeholder =  "login_phone_placeholder".localized
         ui_tf_code.placeholder =  "login_placeholder_code".localized
         ui_bt_validate.setTitle( "login_button_connect".localized, for: .normal)
-        
+        configureOrangeButton(ui_bt_validate, withTitle: "login_button_connect".localized)
         ui_bt_demand_code.setAttributedTitle(Utils.formatStringUnderline(textString: "login_button_resend_code".localized, textColor: .appOrange,font: ApplicationTheme.getFontNunitoRegular(size: 14)), for: .normal)
 
         ui_label_country.text =  "login_label_country".localized

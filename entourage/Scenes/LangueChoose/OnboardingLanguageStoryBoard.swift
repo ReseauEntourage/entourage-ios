@@ -34,6 +34,17 @@ class OnboardingLanguageStoryBoard: UIViewController {
         self.ui_label_select_language.text = "onboarding_lang_select".localized
         self.ui_button_next.setTitle("onboarding_lang_suivant".localized, for: .normal)
         self.ui_button_next.addTarget(self, action: #selector(onNextClicked), for: .touchUpInside)
+        configureOrangeButton(ui_button_next, withTitle: "onboarding_lang_suivant")
+
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     func fillDTO() {

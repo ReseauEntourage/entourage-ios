@@ -14,6 +14,7 @@ class ProfileFullStandardCell:UITableViewCell{
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_subtitle: UILabel!
+    @IBOutlet weak var ui_img_chevron: UIImageView!
     
     //VARIABLE
     class var identifier: String {
@@ -27,16 +28,19 @@ class ProfileFullStandardCell:UITableViewCell{
         ui_subtitle.textColor = UIColor.appGreyOff
     }
     
-    func configure(image:String, title:String, subtitle:String){
+    func configure(image:String, title:String, subtitle:String, isMe:Bool){
         ui_title.text = title
         ui_subtitle.text = subtitle
         ui_image.image = UIImage(named: image)
-        
+        if isMe {
+            ui_img_chevron.isHidden = true
+        }else{
+            ui_img_chevron.isHidden = false
+        }
         if title == "logout_button".localized || title == "delete_account_button".localized {
             ui_title.textColor = UIColor.orange
         }else{
             ui_title.textColor = UIColor.black
-
         }
     }
     

@@ -47,7 +47,7 @@ class SelectTagCell: UITableViewCell {
         if let imageName = imageName {
             ui_picto?.image = UIImage.init(named: imageName)
         } else {
-            ui_picto?.image = UIImage.init(named: "others")
+            ui_picto?.image = UIImage.init(named: "enhanced_onboarding_interest_other")
         }
         
         if isUser {

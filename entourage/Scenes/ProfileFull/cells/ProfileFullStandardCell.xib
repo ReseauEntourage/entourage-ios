@@ -76,6 +76,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="ui_image" destination="8Oj-pY-6Ne" id="1oW-NQ-aPm"/>
+                <outlet property="ui_img_chevron" destination="VWO-jz-twB" id="WGN-y5-oWu"/>
                 <outlet property="ui_subtitle" destination="9dd-Z0-aZU" id="OF5-Vj-Cf0"/>
                 <outlet property="ui_title" destination="mqj-fL-JGK" id="RwP-Cb-msx"/>
             </connections>

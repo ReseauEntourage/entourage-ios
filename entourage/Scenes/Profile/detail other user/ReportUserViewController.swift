@@ -37,6 +37,7 @@ class ReportUserViewController: UIViewController {
         ui_button_validate.layer.cornerRadius = ui_button_validate.frame.height / 2
         ui_button_validate.setTitle("report_user_next_button".localized, for: .normal)
         ui_button_validate.backgroundColor = .appOrangeLight
+        configureOrangeButton(ui_button_validate, withTitle: "report_user_next_button".localized)
         
         //TODO: on affiche le fond transparent pour l'alerte ou un fond blanc ?
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
@@ -53,6 +54,26 @@ class ReportUserViewController: UIViewController {
         }
         
         super.viewWillAppear(animated)
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     @IBAction func action_validate(_ sender: Any) {

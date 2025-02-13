@@ -37,6 +37,7 @@ class OnboardingPhase3ViewController: UIViewController {
     override func viewDidLoad() {
         self.ui_next_btn.isOpaque = true
         self.ui_next_btn.addTarget(self, action: #selector(onNextClick), for: .touchUpInside)
+        configureOrangeButton(self.ui_next_btn, withTitle: "next".localized)
     }
     
     @objc func onNextClick(){
@@ -48,6 +49,15 @@ class OnboardingPhase3ViewController: UIViewController {
         self.ui_next_btn.isOpaque = true
         
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
 }
 

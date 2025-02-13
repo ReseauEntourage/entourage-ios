@@ -66,8 +66,17 @@ class OTLoginChangePhoneViewController: UIViewController {
         ui_tf_email.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
         
         ui_button_validate.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc(size: 15))
-
+        configureOrangeButton(ui_button_validate, withTitle: "login_change_phone_bt_validate".localized)
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     func checkAndSend() {
         var isPhoneOK = true

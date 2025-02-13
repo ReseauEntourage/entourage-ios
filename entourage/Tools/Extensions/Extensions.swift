@@ -371,3 +371,4 @@ extension String {
         return NSAttributedString(string: NSLocalizedString(self, comment: ""), attributes: attributes)
     }
 }
+

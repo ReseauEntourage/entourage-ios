@@ -322,17 +322,9 @@ extension NeighborhoodEditViewController: UITableViewDelegate, UITableViewDataSo
         }
         
         if showEditOther && indexPath.row == tagsInterests.getTags().count + 2 {
-//            let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellOther", for: indexPath) as! NeighborhoodCreateAddOtherCell
-//            
-//            cell.populateCell(currentWord:messageOther , delegate: self)
-//            
-//            return cell
-            let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellInterest", for: indexPath) as! SelectTagCell
+            let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellOther", for: indexPath) as! NeighborhoodCreateAddOtherCell
             
-            let interest = tagsInterests?.getTags()[indexPath.row - 2]
-            let hideSelector = (indexPath.row - 1) == tagsInterests.getTags().count ? true : false
-            
-            cell.populateCell(title: tagsInterests!.getTagNameFrom(key: interest!.name) , isChecked: interest!.isSelected, imageName: (interest! as! TagInterest).tagImageName, hideSeparator: hideSelector, isAction: false)
+            cell.populateCell(currentWord:messageOther , delegate: self)
             
             return cell
         }
