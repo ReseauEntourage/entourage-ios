@@ -25,7 +25,7 @@ class GuideFiltersViewController: UIViewController, ClosePopDelegate {
         if let _delegate = filterDelegate {
             filters = _delegate.getSolidarityFilter()
         }
-        configureOrangeButton(ui_bt_validate, withTitle: "validate")
+        configureOrangeButton(ui_bt_validate, withTitle: "validate".localized)
         
         self.title = "filters".uppercased()
         

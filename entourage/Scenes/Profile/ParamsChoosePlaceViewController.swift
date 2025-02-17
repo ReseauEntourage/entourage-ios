@@ -85,7 +85,7 @@ class ParamsChoosePlaceViewController: BasePopViewController {
         ui_bt_validate.setTitle("validate".localized, for: .normal)
         ui_bt_validate.titleLabel?.font = ApplicationTheme.getFontCourantRegularNoir(size: 18).font
         ui_bt_validate.titleLabel?.textColor = ApplicationTheme.getFontCourantRegularNoir().color
-        configureOrangeButton(ui_bt_validate, withTitle: "validate")
+        configureOrangeButton(ui_bt_validate, withTitle: "validate".localized)
         ui_view_error.hide()
         
         
