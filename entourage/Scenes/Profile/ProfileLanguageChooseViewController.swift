@@ -13,6 +13,8 @@ protocol ProfileLanguageCloseDelegate{
 }
 
 enum LanguageTableDTO {
+    case backArrow
+    case title(title:String)
     case languageCell(lang:String, isSelected:Bool)
     case translationCell
     case validateButton
@@ -20,8 +22,6 @@ enum LanguageTableDTO {
 
 class ProfileLanguageChooseViewController:UIViewController{
     
-    @IBOutlet weak var ui_label_title: UILabel!
-    @IBOutlet weak var ui_iv_cross: UIImageView!
     @IBOutlet weak var ui_table_view: UITableView!
     
     var tableDTO = [LanguageTableDTO]()
@@ -33,16 +33,15 @@ class ProfileLanguageChooseViewController:UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.ui_label_title.text = "onboarding_lang_select".localized
         self.ui_table_view.delegate = self
         self.ui_table_view.dataSource = self
         ui_table_view.register(UINib(nibName: LanguageCell.identifier, bundle: nil), forCellReuseIdentifier: LanguageCell.identifier)
         ui_table_view.register(UINib(nibName: LangValidateButton.identifier, bundle: nil), forCellReuseIdentifier: LangValidateButton.identifier)
         ui_table_view.register(UINib(nibName: TranslationCell.identifier, bundle: nil), forCellReuseIdentifier: TranslationCell.identifier)
+        ui_table_view.register(UINib(nibName: "EnhancedOnboardingTitle", bundle: nil), forCellReuseIdentifier: "titleCell")
+        ui_table_view.register(UINib(nibName: "EnhancecOnboardingBackCell", bundle: nil), forCellReuseIdentifier: "enhancecOnboardingBackCell")
         fillDTO()
-        ui_iv_cross.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCrossClicked))
-        ui_iv_cross.addGestureRecognizer(tapGestureRecognizer)
+
     }
     
     func showPopChange() {
@@ -51,7 +50,7 @@ class ProfileLanguageChooseViewController:UIViewController{
         let buttonCancel = MJAlertButtonType(title: "cancell".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         
         customAlert.configureAlert(alertTitle: "attention_pop_title".localized, message: "language_change_redirect".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
-        
+
         customAlert.alertTagName = .Suppress
         customAlert.delegate = self
         customAlert.show()
@@ -60,6 +59,8 @@ class ProfileLanguageChooseViewController:UIViewController{
     
     func fillDTO(){
         tableDTO.removeAll()
+        tableDTO.append(.backArrow)
+        tableDTO.append(.title(title: "Choix de la langue"))
         let preferredLanguage = LanguageManager.loadLanguageFromPreferences()
         let languages = ["fr", "en", "uk", "es", "de", "ro", "pl","ar"]
         for lang in languages {
@@ -69,6 +70,7 @@ class ProfileLanguageChooseViewController:UIViewController{
                 lastSelectedIndexPath = IndexPath(row: tableDTO.count - 1, section: 0)
             }
         }
+        tableDTO.append(.title(title: "Traduction"))
         tableDTO.append(.translationCell)
         tableDTO.append(.validateButton)
         ui_table_view.reloadData()
@@ -106,6 +108,20 @@ extension ProfileLanguageChooseViewController:UITableViewDelegate,UITableViewDat
                 cell.selectionStyle = .none
                 return cell
             }
+        case .backArrow:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "enhancecOnboardingBackCell", for: indexPath) as? EnhancecOnboardingBackCell else {
+                return UITableViewCell()
+            }
+            cell.configure(isFromSettings: EnhancedOnboardingConfiguration.shared.isInterestsFromSetting)
+            cell.selectionStyle = .none
+            return cell
+        case .title(let title):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath) as? EnhancedOnboardingTitle else {
+                return UITableViewCell()
+            }
+            cell.configure(title: title, subtitle: "")
+            cell.selectionStyle = .none
+            return cell
         }
         return UITableViewCell()
     }
@@ -120,6 +136,10 @@ extension ProfileLanguageChooseViewController:UITableViewDelegate,UITableViewDat
                 return .validateButton
             case .translationCell:
                 return .translationCell
+            case .backArrow:
+                return .backArrow
+            case .title(let title):
+                return .title(title:title)
             }
         }
         // Sélectionner la nouvelle langue sans sauvegarde immédiate
@@ -142,15 +162,23 @@ extension ProfileLanguageChooseViewController:UITableViewDelegate,UITableViewDat
                     break
                 case .translationCell:
                     break
+                case .backArrow:
+                    break
+                case .title(title: let title):
+                    break
                 }
             }
             
         case .translationCell:
             return
+        case .backArrow:
+            self.dismiss(animated: true) {
+            }
+        case .title(title: let title):
+            break
         }
         lastSelectedIndexPath = indexPath
         ui_table_view.reloadData()
-        self.ui_label_title.text = "onboarding_lang_select".localized
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -159,6 +187,12 @@ extension ProfileLanguageChooseViewController:UITableViewDelegate,UITableViewDat
 }
 
 extension ProfileLanguageChooseViewController:OnValidateButtonClickedDelegate{
+    func onCancel() {
+        self.dismiss(animated: true){
+            
+        }
+    }
+    
     func onClickedValidate() {
         // Sauvegarder la langue sélectionnée lors du clic sur le bouton de validation
         if let lastSelectedIndexPath = lastSelectedIndexPath {
@@ -169,6 +203,10 @@ extension ProfileLanguageChooseViewController:OnValidateButtonClickedDelegate{
             case .validateButton:
                 break
             case .translationCell:
+                break
+            case .backArrow:
+                break
+            case .title(title: let title):
                 break
             }
         }

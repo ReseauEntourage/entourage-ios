@@ -24,6 +24,7 @@ class HeaderProfilFullCell:UITableViewCell {
     @IBOutlet weak var ui_label_partner: UILabel!
     @IBOutlet weak var ui_label_role: UILabel!
     @IBOutlet weak var ui_stack_view: UIStackView!
+    @IBOutlet weak var ui_img_asso: UIImageView!
     
     //VARIABLE
     class var identifier: String {
@@ -64,11 +65,12 @@ class HeaderProfilFullCell:UITableViewCell {
         ui_label_description.text = aboutText.isEmpty ? nil : aboutText
         if aboutText.isEmpty { ui_label_description.text = "no_data_available".localized }
 
-        // 🔹 Téléphone
-        let phoneText = user.phone?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        ui_label_phone.text = phoneText.isEmpty ? nil : phoneText
-        if phoneText.isEmpty { ui_label_phone.text = "no_data_available".localized }
-
+        // 🔹 Téléphone avec conversion +33 → 06
+        if let phoneText = user.phone?.trimmingCharacters(in: .whitespacesAndNewlines), !phoneText.isEmpty {
+            ui_label_phone.text = convertPhoneNumber(from: phoneText)
+        } else {
+            ui_label_phone.text = "no_data_available".localized
+        }
         // 🔹 Email
         let emailText = user.email?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         ui_label_mail.text = emailText.isEmpty ? nil : emailText
@@ -88,6 +90,9 @@ class HeaderProfilFullCell:UITableViewCell {
         ui_label_partner.text = partnerText.isEmpty ? nil : partnerText
         if partnerText.isEmpty { ui_label_partner.text = "no_data_available".localized }
 
+        if let _url = user.partner?.smallLogoUrl, let url = URL(string: _url) {
+            ui_img_asso.sd_setImage(with: url, placeholderImage:UIImage.init(named: "logo_entourage")) //TODO: avoir un placeholder pour les assos ?
+        }
         // 🔹 Rôles (avec formatage "Admin • Membre")
         let hasRoles = (user.roles?.isEmpty == false)
         ui_label_role.text = hasRoles ? user.roles!.joined(separator: " • ") : nil
@@ -104,6 +109,30 @@ class HeaderProfilFullCell:UITableViewCell {
             }
         }
     }
+    
+    func convertPhoneNumber(from number: String) -> String {
+        var formattedNumber = number
+        
+        // Transformation du +33 en 0
+        if number.hasPrefix("+33") {
+            formattedNumber = "0" + number.dropFirst(3)
+        }
+        
+        // Suppression des espaces et formatage en groupes de 2 chiffres
+        let digitsOnly = formattedNumber.replacingOccurrences(of: "\\D", with: "", options: .regularExpression)
+        
+        // Vérification de la longueur du numéro pour éviter les erreurs
+        guard digitsOnly.count == 10 else { return number }
+        
+        return stride(from: 0, to: digitsOnly.count, by: 2)
+            .map { index -> String in
+                let start = digitsOnly.index(digitsOnly.startIndex, offsetBy: index)
+                let end = digitsOnly.index(start, offsetBy: 2, limitedBy: digitsOnly.endIndex) ?? digitsOnly.endIndex
+                return String(digitsOnly[start..<end])
+            }
+            .joined(separator: " ")
+    }
+
 
 
     

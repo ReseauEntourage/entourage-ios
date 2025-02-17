@@ -26,6 +26,8 @@ class OnboardingLanguageStoryBoard: UIViewController {
         self.ui_table_view.dataSource = self
         ui_table_view.register(UINib(nibName: LanguageCell.identifier, bundle: nil), forCellReuseIdentifier: LanguageCell.identifier)
         ui_table_view.register(UINib(nibName: LangValidateButton.identifier, bundle: nil), forCellReuseIdentifier: LangValidateButton.identifier)
+        ui_table_view.register(UINib(nibName: "EnhancedOnboardingTitle", bundle: nil), forCellReuseIdentifier: "titleCell")
+        ui_table_view.register(UINib(nibName: "EnhancecOnboardingBackCell", bundle: nil), forCellReuseIdentifier: "enhancecOnboardingBackCell")
         fillDTO()
     }
 
@@ -100,6 +102,10 @@ extension OnboardingLanguageStoryBoard: UITableViewDelegate, UITableViewDataSour
             return UITableViewCell() // Pas besoin de bouton dans ce cas
         case .translationCell:
             return UITableViewCell()
+        case .backArrow:
+            return UITableViewCell()
+        case .title(title: let title):
+            return UITableViewCell()
         }
     }
     
@@ -113,6 +119,10 @@ extension OnboardingLanguageStoryBoard: UITableViewDelegate, UITableViewDataSour
                 return .validateButton
             case .translationCell:
                 return .translationCell
+            case .backArrow:
+                return .backArrow
+            case .title(let title):
+                return .title(title: title)
             }
         }
         // Sélectionner la nouvelle langue sans sauvegarder immédiatement
@@ -123,6 +133,10 @@ extension OnboardingLanguageStoryBoard: UITableViewDelegate, UITableViewDataSour
         case .validateButton:
             print("never happen")
         case .translationCell:
+            print("never happen")
+        case .backArrow:
+            print("never happen")
+        case .title(let title):
             print("never happen")
         }
         configureUI()

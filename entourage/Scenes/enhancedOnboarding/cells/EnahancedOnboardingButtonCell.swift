@@ -38,7 +38,7 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
     func configureForMainFilter(){
         self.configure()
         self.ui_btn_next.setTitle("btn_main_filter_validate_title".localized, for: .normal)
-        self.ui_btn_configure_later.setTitle("btn_main_filter_cancel_title".localized, for: .normal)
+        self.ui_btn_configure_later.setTitle("cancel".localized, for: .normal)
     }
     
     @objc func onConfigureLaterClick(){

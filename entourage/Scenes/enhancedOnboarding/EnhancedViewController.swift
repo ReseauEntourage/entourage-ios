@@ -314,11 +314,15 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.selectionStyle = .none
             cell.configure()
+            if EnhancedOnboardingConfiguration.shared.isInterestsFromSetting {
+                cell.configureForMainFilter()
+            }
             return cell
         case .backArrow:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "enhancecOnboardingBackCell", for: indexPath) as? EnhancecOnboardingBackCell else {
                 return UITableViewCell()
             }
+            cell.configure(isFromSettings: EnhancedOnboardingConfiguration.shared.isInterestsFromSetting)
             cell.selectionStyle = .none
             return cell
         case .choiceDayCell(let days, _):

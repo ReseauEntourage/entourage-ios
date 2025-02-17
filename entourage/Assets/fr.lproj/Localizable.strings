@@ -1721,3 +1721,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle" = "%d contact bloqué";
 "settings_unblock_contacts_subtitle_plural" = "%d contacts bloqués";
 "language_change_redirect" = "Vous allez être redirigé sur la page d'accueil pour changer la langue de l'application";
+"settings_back_subtitle" = "Retour aux paramètres";
