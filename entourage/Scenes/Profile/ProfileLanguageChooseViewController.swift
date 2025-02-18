@@ -112,7 +112,7 @@ extension ProfileLanguageChooseViewController:UITableViewDelegate,UITableViewDat
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "enhancecOnboardingBackCell", for: indexPath) as? EnhancecOnboardingBackCell else {
                 return UITableViewCell()
             }
-            cell.configure(isFromSettings: EnhancedOnboardingConfiguration.shared.isInterestsFromSetting)
+            cell.configure(isFromSettings: true)
             cell.selectionStyle = .none
             return cell
         case .title(let title):

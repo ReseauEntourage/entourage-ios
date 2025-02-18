@@ -32,6 +32,8 @@ class ProfileFullStandardCell:UITableViewCell{
         ui_title.text = title
         ui_subtitle.text = subtitle
         ui_image.image = UIImage(named: image)
+        ui_img_chevron.image = ui_img_chevron.image?.withRenderingMode(.alwaysTemplate)
+
         if !isMe {
             ui_img_chevron.isHidden = true
         }else{
@@ -39,8 +41,10 @@ class ProfileFullStandardCell:UITableViewCell{
         }
         if title == "logout_button".localized || title == "delete_account_button".localized {
             ui_title.textColor = UIColor.orange
+            ui_img_chevron.tintColor = UIColor.appOrange
         }else{
             ui_title.textColor = UIColor.black
+            ui_img_chevron.tintColor = UIColor.black
         }
     }
     
