@@ -47,11 +47,7 @@ class HeaderProfilFullCell: UITableViewCell {
         
         self.ui_btn_modify.addTarget(self, action: #selector(onModifyClick), for: .touchUpInside)
         
-        // Limiter la largeur du bouton à 150
-        ui_btn_modify.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            ui_btn_modify.widthAnchor.constraint(lessThanOrEqualToConstant: 150)
-        ])
+
         ui_btn_modify.setContentHuggingPriority(.required, for: .horizontal)
         ui_btn_modify.setContentCompressionResistancePriority(.required, for: .horizontal)
         
