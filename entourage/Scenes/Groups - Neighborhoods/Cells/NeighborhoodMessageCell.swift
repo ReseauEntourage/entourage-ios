@@ -127,6 +127,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         }
     }
     
+    // MARK: - Populate Cell (Messages classiques de groupe)
     func populateCell(isMe: Bool,
                       message: PostMessage,
                       isRetry: Bool,
@@ -159,6 +160,7 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_image_user.image = UIImage(named: "placeholder_user")
         }
         
+        // Gestion retry
         if isRetry {
             ui_view_error?.isHidden = false
             ui_username.text = ""
@@ -169,6 +171,7 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_username.text = isMe ? "" : message.user?.displayName
         }
         
+        // Gestion status
         if let status = message.status {
             if status == "deleted" {
                 ui_message.text = "deleted_comment".localized
@@ -178,7 +181,8 @@ class NeighborhoodMessageCell: UITableViewCell {
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
                     ui_message.superview?.addSubview(deletedImageView)
                 }
-            } else if status == "offensive" || status == "offensible" {
+            }
+            else if status == "offensive" || status == "offensible" {
                 ui_message.text = "content_removed".localized
                 ui_message.textColor = UIColor.appGreyTextDeleted
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
@@ -186,11 +190,14 @@ class NeighborhoodMessageCell: UITableViewCell {
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
                     ui_message.superview?.addSubview(deletedImageView)
                 }
-            } else {
+            }
+            else {
+                // Message “normal”
                 if let deletedImageView = deletedImageView,
                    ui_message.superview?.subviews.contains(deletedImageView) == true {
                     deletedImageView.removeFromSuperview()
                 }
+                // Geste pour signaler (long press)
                 if isMe {
                     let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
                     ui_message.addGestureRecognizer(longPressGesture)
@@ -199,6 +206,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 ui_view_message.backgroundColor = isMe ? UIColor.appOrangeLight_50 : UIColor.appBeige
             }
         } else {
+            // Pas de status => message “normal”
             ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: isTranslated)
             ui_message.textColor = UIColor.black
         }
@@ -206,6 +214,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         layoutIfNeeded()
     }
     
+    // MARK: - Populate Cell (Messages conversation One2One)
     func populateCellConversation(isMe: Bool,
                                   message: PostMessage,
                                   isRetry: Bool,
@@ -226,16 +235,19 @@ class NeighborhoodMessageCell: UITableViewCell {
         self.messageForRetry = message.content ?? ""
         self.positionForRetry = positionRetry
         
+        // Couleurs (on peut ajuster si besoin)
         ui_date.textColor = .appOrangeLight
         ui_username.textColor = .appOrangeLight
         ui_view_message.backgroundColor = isMe ? .appOrangeLight_50 : .appBeige
         
+        // Avatar
         if let avatarURL = message.user?.avatarURL, let url = URL(string: avatarURL) {
             ui_image_user.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
         } else {
             ui_image_user.image = UIImage(named: "placeholder_user")
         }
         
+        // Gestion status
         if let status = message.status {
             if status == "deleted" {
                 ui_message.text = "deleted_message".localized
@@ -245,7 +257,8 @@ class NeighborhoodMessageCell: UITableViewCell {
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
                     ui_message.superview?.addSubview(deletedImageView)
                 }
-            } else if status == "offensive" || status == "offensible" {
+            }
+            else if status == "offensive" || status == "offensible" {
                 ui_message.text = "content_removed".localized
                 ui_message.textColor = UIColor.appGreyTextDeleted
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
@@ -253,25 +266,38 @@ class NeighborhoodMessageCell: UITableViewCell {
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
                     ui_message.superview?.addSubview(deletedImageView)
                 }
-            } else {
+            }
+            else {
+                // Message “normal” dans la conversation
                 if let deletedImageView = deletedImageView,
                    ui_message.superview?.subviews.contains(deletedImageView) == true {
                     deletedImageView.removeFromSuperview()
                 }
+                
+                // S’il s’agit du message de l’utilisateur courant, on peut ajouter un Long Press
+                // pour le signalement par ex.
                 if isMe {
                     let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
                     ui_message.addGestureRecognizer(longPressGesture)
-                    ui_message.text = message.content ?? ""
-                    ui_message.textColor = UIColor.black
-                    ui_view_message.backgroundColor = UIColor.appOrangeLight_50
-                } else {
-                    ui_message.text = message.content ?? ""
-                    ui_message.textColor = UIColor.black
-                    ui_view_message.backgroundColor = UIColor.appBeige
                 }
+                
+                // ICI => on remplace le simple "ui_message.text = content" par la logique d'attribution HTML
+                // On ne gère pas forcément la traduction dans one2one => on met isTranslated: false,
+                // ou on ajoute un param si nécessaire.
+                ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: false)
+                
+                // Couleur d’arrière-plan
+                ui_view_message.backgroundColor = isMe ? UIColor.appOrangeLight_50 : UIColor.appBeige
+                ui_message.textColor = UIColor.black
             }
         }
+        else {
+            // Pas de status => message “normal”
+            ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: false)
+            ui_message.textColor = UIColor.black
+        }
         
+        // Gestion Retry
         if isRetry {
             ui_view_error?.isHidden = false
             ui_username.text = ""
@@ -323,9 +349,10 @@ class NeighborhoodMessageCell: UITableViewCell {
     }
 }
 
+// MARK: - Extension avec les fonctions d’aide
 extension NeighborhoodMessageCell {
-    // Regroupons les fonctions d'aide dans une extension privée afin de ne pas polluer l'espace global.
     
+    /// Construit un NSAttributedString à partir d'une chaîne HTML + police de base.
     private func attributedString(fromHTML html: String, withBaseFont font: UIFont) -> NSAttributedString {
         guard let data = html.data(using: .utf8) else {
             return NSAttributedString(string: html, attributes: [.font: font])
@@ -337,7 +364,11 @@ extension NeighborhoodMessageCell {
         do {
             let attrString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
             let fullRange = NSRange(location: 0, length: attrString.length)
+            
+            // Applique la police de base sur l'ensemble du texte
             attrString.addAttribute(.font, value: font, range: fullRange)
+            
+            // Parcourt les attributs .link pour ajuster la couleur + soulignement
             attrString.enumerateAttribute(.link, in: fullRange, options: []) { (value, range, _) in
                 guard range.location != NSNotFound, range.location + range.length <= attrString.length else { return }
                 if value != nil {
@@ -347,6 +378,8 @@ extension NeighborhoodMessageCell {
                     attrString.addAttribute(.foregroundColor, value: UIColor.black, range: range)
                 }
             }
+            
+            // Supprime les sauts de ligne ou espaces de fin
             while attrString.string.hasSuffix("\n") || attrString.string.hasSuffix(" ") {
                 attrString.deleteCharacters(in: NSRange(location: attrString.length - 1, length: 1))
             }
@@ -356,11 +389,13 @@ extension NeighborhoodMessageCell {
         }
     }
     
+    /// Construit un NSAttributedString « brut » à partir de texte simple.
     private func plainAttributedString(from text: String, withBaseFont font: UIFont) -> NSAttributedString {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         return NSAttributedString(string: trimmed, attributes: [.font: font, .foregroundColor: UIColor.black])
     }
     
+    /// Essaie d'extraire une URL (dans un <a href=...> ou brute) depuis une chaîne HTML
     private func extractUrl(from input: String) -> URL? {
         // 1️⃣ Vérifie d'abord s'il y a une URL dans une balise <a>
         let linkPattern = "<a\\s+(?:[^>]*?\\s+)?href=[\"']([^\"']+)[\"']"
@@ -377,6 +412,7 @@ extension NeighborhoodMessageCell {
         return nil
     }
 
+    /// Utilitaire pour extraire la première capture d'une regex
     private func extractFirstMatch(from input: String, using pattern: String) -> String? {
         guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
             return nil
@@ -389,8 +425,12 @@ extension NeighborhoodMessageCell {
         
         return nil
     }
+    
+    /// Récupère l'AttributedString final (HTML ou texte simple), en tenant compte d'une éventuelle traduction.
     private func getAttributedDisplayText(for message: PostMessage, isTranslated: Bool) -> NSAttributedString {
+        // 1) Si le message est marqué "traduit"
         if isTranslated {
+            // Priorité au HTML traduit
             if let translationsHtml = message.contentTranslationsHtml {
                 if let translationHtml = translationsHtml.translation, !translationHtml.isEmpty {
                     return attributedString(fromHTML: translationHtml, withBaseFont: NeighborhoodMessageCell.baseFont)
@@ -399,6 +439,7 @@ extension NeighborhoodMessageCell {
                     return attributedString(fromHTML: originalHtml, withBaseFont: NeighborhoodMessageCell.baseFont)
                 }
             }
+            // Sinon on regarde la traduction "texte brut"
             if let translations = message.contentTranslations {
                 if let translation = translations.translation, !translation.isEmpty {
                     return plainAttributedString(from: translation, withBaseFont: NeighborhoodMessageCell.baseFont)
@@ -407,7 +448,9 @@ extension NeighborhoodMessageCell {
                     return plainAttributedString(from: original, withBaseFont: NeighborhoodMessageCell.baseFont)
                 }
             }
-        } else {
+        }
+        else {
+            // 2) Pas de traduction => affiche le contentHtml, sinon le content
             if let contentHtml = message.contentHtml, !contentHtml.isEmpty {
                 return attributedString(fromHTML: contentHtml, withBaseFont: NeighborhoodMessageCell.baseFont)
             }
@@ -415,10 +458,13 @@ extension NeighborhoodMessageCell {
                 return plainAttributedString(from: content, withBaseFont: NeighborhoodMessageCell.baseFont)
             }
         }
+        
+        // 3) Par défaut, si rien n'est dispo
         return NSAttributedString(string: "", attributes: [.font: NeighborhoodMessageCell.baseFont])
     }
 }
 
+// MARK: - Protocole de délégation pour la cellule
 protocol MessageCellSignalDelegate: AnyObject {
     func signalMessage(messageId: Int, userId: Int, textString: String)
     func retrySend(message: String, positionForRetry: Int)

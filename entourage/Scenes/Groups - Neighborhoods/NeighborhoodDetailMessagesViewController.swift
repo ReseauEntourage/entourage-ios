@@ -6,7 +6,8 @@
 //  Mis à jour pour intégrer la fonctionnalité de mention avec insertion d’un lien cliquable,
 //  conversion de l'attributedText en HTML pour l'envoi, empêcher le UITapGestureRecognizer
 //  d'intercepter les touches sur la table view des suggestions,
-//  et réinitialiser correctement le UITextView après l'envoi (suppression du style URL).
+//  réinitialiser correctement le UITextView après l'envoi (suppression du style URL),
+//  et appliquer à nouveau une police de base après l'envoi (ex: getFontRegular13Orange).
 //
 
 import UIKit
@@ -235,9 +236,11 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                     return
                 }
                 
-                if self.messages.count + self.messagesForRetry.count > 0 {
-                    DispatchQueue.main.async {
-                        let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
+                let lastSection = self.ui_tableview.numberOfSections - 1
+                if lastSection >= 0 {
+                    let lastRow = self.ui_tableview.numberOfRows(inSection: lastSection) - 1
+                    if lastRow >= 0 {
+                        let indexPath = IndexPath(row: lastRow, section: lastSection)
                         self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
                     }
                 }
@@ -258,7 +261,11 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                 if isRetry, positionForRetry >= 0, positionForRetry < self.messagesForRetry.count {
                     self.messagesForRetry.remove(at: positionForRetry)
                 }
-                self.getMessages()
+                
+                // On attend 1 seconde avant de rafraîchir (si c'est votre besoin)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.getMessages()
+                }
             } else {
                 if !isRetry {
                     var postMsg = PostMessage()
@@ -292,7 +299,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     
     func getDetailPost() {
         NeighborhoodService.getDetailPostMessage(neighborhoodId: neighborhoodId,
-                                                   parentPostId: parentCommentId) { message, error in
+                                                 parentPostId: parentCommentId) { message, error in
             self.postMessage = message
             self.ui_tableview.reloadData()
             if self.messages.count + self.messagesForRetry.count > 0 {
@@ -397,9 +404,17 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         }
         _ = ui_textview_message.resignFirstResponder()
         hideMentionSuggestions()
+        
         // Réinitialisation complète du UITextView pour supprimer toute mise en forme
         ui_textview_message.text = ""
         ui_textview_message.attributedText = NSAttributedString(string: "")
+        
+        // ⬇️ Remettre la police d'origine après l'envoi
+        let styleReset = ApplicationTheme.getFontRegular13Orange()
+        ui_textview_message.typingAttributes = [
+            .font: styleReset.font,
+            .foregroundColor: styleReset.color
+        ]
     }
 }
 
@@ -478,8 +493,8 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
 extension NeighborhoodDetailMessagesViewController: MJNavBackViewDelegate {
     func goBack() {
         parentDelegate?.updateCommentCount(parentCommentId: parentCommentId,
-                                             nbComments: messages.count,
-                                             currentIndexPathSelected: selectedIndexPath)
+                                           nbComments: messages.count,
+                                           currentIndexPathSelected: selectedIndexPath)
         dismiss(animated: true)
         navigationController?.dismiss(animated: true)
     }
