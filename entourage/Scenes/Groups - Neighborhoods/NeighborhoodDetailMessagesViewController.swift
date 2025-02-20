@@ -367,7 +367,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         let atRange = fullTextNSString.range(of: "@", options: .backwards, range: searchRange)
         if atRange.location != NSNotFound {
             let replaceRange = NSRange(location: atRange.location, length: cursorLocation - atRange.location)
-            let linkURLString = "https://preprod.entourage.social/app/user/\(user.sid)"
+            let linkURLString = "https://preprod.entourage.social/app/users/\(user.sid)"
             guard let linkURL = URL(string: linkURLString) else { return }
             let linkAttributes: [NSAttributedString.Key: Any] = [
                 .link: linkURL,
@@ -381,8 +381,14 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             ui_textview_message.selectedRange = NSRange(location: newCursorPosition, length: 0)
         }
         hideMentionSuggestions()
+        
+        let style = ApplicationTheme.getFontCourantRegularNoir()
+        ui_textview_message.typingAttributes = [
+            .font: style.font,
+            .foregroundColor: style.color
+        ]
     }
-    
+
     // MARK: - Action de fermeture du clavier et envoi (conversion en HTML)
     @objc func closeKb(_ sender: UIBarButtonItem?) {
         // Conversion de l'attributedText en HTML (extraction du contenu <body>)
@@ -458,6 +464,7 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Clic détecté dans la table view")
+        
         if tableView == ui_tableview_mentions {
             print("Cellule de mention sélectionnée à l’index \(indexPath.row)")
             let selectedUser = mentionSuggestions[indexPath.row]
