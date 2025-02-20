@@ -362,23 +362,29 @@ extension NeighborhoodMessageCell {
     }
     
     private func extractUrl(from input: String) -> URL? {
-        // Vérifie d'abord si l'entrée est une URL valide
-        if let directUrl = URL(string: input), directUrl.scheme?.hasPrefix("https") == true {
-            return directUrl
+        // 1️⃣ Vérifie d'abord s'il y a une URL dans une balise <a>
+        let linkPattern = "<a\\s+(?:[^>]*?\\s+)?href=[\"']([^\"']+)[\"']"
+        if let linkUrl = extractFirstMatch(from: input, using: linkPattern) {
+            return URL(string: linkUrl)
         }
         
-        // Sinon, essaie d'extraire une URL depuis du HTML
-        let pattern = "<a\\s+(?:[^>]*?\\s+)?href=[\"']([^\"']+)[\"']"
+        // 2️⃣ Si aucune balise <a>, cherche une URL brute dans le texte
+        let urlPattern = #"(https?:\/\/[^\s\"'<>]+)"#
+        if let foundUrl = extractFirstMatch(from: input, using: urlPattern) {
+            return URL(string: foundUrl)
+        }
+        
+        return nil
+    }
+
+    private func extractFirstMatch(from input: String, using pattern: String) -> String? {
         guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
             return nil
         }
         
         let nsString = input as NSString
-        let results = regex.matches(in: input, options: [], range: NSRange(location: 0, length: nsString.length))
-        
-        if let match = results.first, match.numberOfRanges > 1 {
-            let urlString = nsString.substring(with: match.range(at: 1))
-            return URL(string: urlString)
+        if let match = regex.firstMatch(in: input, options: [], range: NSRange(location: 0, length: nsString.length)) {
+            return nsString.substring(with: match.range(at: 1))
         }
         
         return nil
