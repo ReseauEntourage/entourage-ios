@@ -434,6 +434,7 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
             let cell = tableView.dequeueReusableCell(withIdentifier: "MentionCell", for: indexPath)
             let user = mentionSuggestions[indexPath.row]
             cell.textLabel?.text = user.displayName
+            cell.backgroundColor = UIColor.appBeige
             return cell
         }
         
