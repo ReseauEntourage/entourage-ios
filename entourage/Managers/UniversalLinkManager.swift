@@ -101,7 +101,7 @@ struct UniversalLinkManager {
                 }
             }else if pathComponents.contains("map") {
                 DeepLinkManager.showMap()
-            }else if pathComponents.contains("users") {
+            }else if pathComponents.contains("users") || pathComponents.contains("user") {
                 // Vérifie que le tableau contient bien l'ID de l'utilisateur après "users"
                 if pathComponents.count > 2 + iterator {
                     let userSID = pathComponents[2 + iterator]

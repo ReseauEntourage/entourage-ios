@@ -3,55 +3,27 @@
 //  entourage
 //
 //  Created by Jerome on 16/05/2022.
-//  Version modifiée pour afficher les liens en bleu si le contenu est du HTML
-//  et appliquer la police "NunitoSans-Regular" en taille 13
+//  Version modifiée pour :
+//  - Afficher les liens en bleu si le contenu est du HTML,
+//  - Appliquer la police "NunitoSans-Regular" en taille 13,
+//  - Supprimer les sauts de ligne/espaces en fin de texte,
+//  - Configurer ActiveLabel pour détecter URL et mentions en utilisant une couleur unifiée,
+//  - Gérer le tap simple pour ouvrir l’URL extraite (qu'elle soit présente dans le HTML ou en texte brut).
 //
 
 import UIKit
 import CloudKit
 import ActiveLabel
 
-// Définir la police de base
-private let baseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+// Définir la couleur bleue unifiée (exemple : system blue)
+private let unifiedBlue = UIColor(red: 0.0, green: 122/255.0, blue: 1.0, alpha: 1.0)
 
-// Fonction pour convertir une chaîne HTML en NSAttributedString en appliquant la police de base
-private func attributedString(fromHTML html: String, withBaseFont font: UIFont) -> NSAttributedString {
-    guard let data = html.data(using: .utf8) else {
-        return NSAttributedString(string: html, attributes: [.font: font])
-    }
-    let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-        .documentType: NSAttributedString.DocumentType.html,
-        .characterEncoding: String.Encoding.utf8.rawValue
-    ]
-    do {
-        let attrString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
-        let fullRange = NSRange(location: 0, length: attrString.length)
-        // Appliquer la police de base sur l'ensemble du texte
-        attrString.addAttribute(.font, value: font, range: fullRange)
-        // Mettre en forme les liens : couleur bleue et soulignement
-        attrString.enumerateAttribute(.link, in: fullRange, options: []) { (value, range, _) in
-            if value != nil {
-                attrString.addAttribute(.foregroundColor, value: UIColor.blue, range: range)
-                attrString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
-            } else {
-                attrString.addAttribute(.foregroundColor, value: UIColor.black, range: range)
-            }
-        }
-        return attrString
-    } catch {
-        return NSAttributedString(string: html, attributes: [.font: font, .foregroundColor: UIColor.black])
-    }
-}
-
-// Fonction utilitaire pour créer un NSAttributedString à partir d'un texte non-HTML en appliquant la police de base
-private func plainAttributedString(from text: String, withBaseFont font: UIFont) -> NSAttributedString {
-    return NSAttributedString(string: text, attributes: [.font: font, .foregroundColor: UIColor.black])
-}
+// Définir la police de base (au niveau du fichier ou dans la classe)
+private let globalBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
 
 class NeighborhoodMessageCell: UITableViewCell {
 
     @IBOutlet weak var ui_image_user: UIImageView!
-    
     @IBOutlet weak var ui_view_message: UIView!
     @IBOutlet weak var ui_message: ActiveLabel!
     @IBOutlet weak var ui_date: UILabel!
@@ -64,32 +36,59 @@ class NeighborhoodMessageCell: UITableViewCell {
     @IBOutlet weak var ui_view_error: UIView!
     
     let radius: CGFloat = 22
+    
+    // Propriétés liées au message
     var messageId: Int = 0
     var messageForRetry = ""
     var positionForRetry = 0
     var userId: Int? = nil
-    var deletedImage: UIImage? = nil
-    var deletedImageView: UIImageView? = nil
     var innerPostMessage: PostMessage? = nil
     var innerString: String = ""
     
+    // Pour les messages supprimés
+    var deletedImage: UIImage? = nil
+    var deletedImageView: UIImageView? = nil
+    
     weak var delegate: MessageCellSignalDelegate? = nil
+    
+    // Changez "private" en "fileprivate" pour que ce membre soit accessible dans l'extension
+    fileprivate static let baseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         ui_image_user.layer.cornerRadius = ui_image_user.frame.height / 2
         ui_view_message.layer.cornerRadius = radius
-        // Ces configurations de font peuvent être redéfinies par l'attributedText
+        
         ui_message.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        ui_date.setupFontAndColor(style: MJTextFontColorStyle(font: baseFont, color: .black))
-        ui_username.setupFontAndColor(style: MJTextFontColorStyle(font: baseFont, color: .black))
+        ui_date.setupFontAndColor(style: MJTextFontColorStyle(font: NeighborhoodMessageCell.baseFont, color: .black))
+        ui_username.setupFontAndColor(style: MJTextFontColorStyle(font: NeighborhoodMessageCell.baseFont, color: .black))
         
         let alertTheme = MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegularItalic(size: 11), color: .red)
         ui_lb_error?.setupFontAndColor(style: alertTheme)
         ui_lb_error?.text = "neighborhood_error_messageSend".localized
         
-        // On désactive l'interaction d'ActiveLabel pour ce cas précis
+        // ActiveLabel : activer la détection d'URL et de mentions
+        ui_message.enabledTypes = [.url, .mention]
+        ui_message.URLColor = unifiedBlue
+        ui_message.mentionColor = unifiedBlue
+        ui_message.URLSelectedColor = unifiedBlue
+        ui_message.mentionSelectedColor = unifiedBlue
+        ui_message.handleURLTap { [weak self] url in
+            WebLinkManager.openUrl(url: url,
+                                   openInApp: true,
+                                   presenterViewController: AppState.getTopViewController())
+        }
+        ui_message.handleMentionTap { mention in
+            // Action sur la mention, par exemple :
+            print("Tap mention: \(mention)")
+        }
+        
+        // Ajouter un tap gesture pour gérer le clic sur le label (pour extraire l'URL)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnMessage(_:)))
+        ui_message.isUserInteractionEnabled = true
+        ui_message.addGestureRecognizer(tapGesture)
+        
         ui_message.enableLongPressCopy()
         
         deletedImage = UIImage(named: "ic_deleted_comment")
@@ -98,46 +97,43 @@ class NeighborhoodMessageCell: UITableViewCell {
         deletedImageView?.tintColor = UIColor.gray
     }
     
+    @objc func handleTapOnMessage(_ sender: UITapGestureRecognizer) {
+        guard let html = innerPostMessage?.contentHtml, !html.isEmpty else { return }
+        
+        // Première tentative : extraction via balise <a href="...">
+        if let url = extractUrl(from: html) {
+            WebLinkManager.openUrl(url: url,
+                                   openInApp: true,
+                                   presenterViewController: AppState.getTopViewController())
+            return
+        }
+        
+        // Deuxième tentative : si le texte est un lien brut
+        let trimmedText = html.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let url = URL(string: trimmedText), UIApplication.shared.canOpenURL(url) {
+            WebLinkManager.openUrl(url: url,
+                                   openInApp: true,
+                                   presenterViewController: AppState.getTopViewController())
+        }
+    }
+    
     @objc func handleLongPressGesture(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        if gestureRecognizer.state == .began, let userId = userId, let innerPostMessage = innerPostMessage {
-            delegate?.signalMessage(messageId: messageId, userId: userId, textString: innerPostMessage.content ?? "")
+        if gestureRecognizer.state == .began,
+           let userId = userId,
+           let innerPostMessage = innerPostMessage {
+            delegate?.signalMessage(messageId: messageId,
+                                    userId: userId,
+                                    textString: innerPostMessage.content ?? "")
         }
     }
     
-    /// Retourne un NSAttributedString à afficher en fonction des données disponibles.
-    /// Si isTranslated est vrai, on privilégie le contenu HTML de la traduction (contentTranslationsHtml) puis le plain text,
-    /// sinon on utilise d'abord contentHtml, puis content.
-    private func getAttributedDisplayText(for message: PostMessage, isTranslated: Bool) -> NSAttributedString {
-        if isTranslated {
-            if let translationsHtml = message.contentTranslationsHtml {
-                if let translationHtml = translationsHtml.translation, !translationHtml.isEmpty {
-                    return attributedString(fromHTML: translationHtml, withBaseFont: baseFont)
-                }
-                if let originalHtml = translationsHtml.original, !originalHtml.isEmpty {
-                    return attributedString(fromHTML: originalHtml, withBaseFont: baseFont)
-                }
-            }
-            if let translations = message.contentTranslations {
-                if let translation = translations.translation, !translation.isEmpty {
-                    return plainAttributedString(from: translation, withBaseFont: baseFont)
-                }
-                if let original = translations.original, !original.isEmpty {
-                    return plainAttributedString(from: original, withBaseFont: baseFont)
-                }
-            }
-        } else {
-            if let contentHtml = message.contentHtml, !contentHtml.isEmpty {
-                return attributedString(fromHTML: contentHtml, withBaseFont: baseFont)
-            }
-            if let content = message.content, !content.isEmpty {
-                return plainAttributedString(from: content, withBaseFont: baseFont)
-            }
-        }
-        return NSAttributedString(string: "", attributes: [.font: baseFont])
-    }
-    
-    /// Configure la cellule pour une discussion (chat) en utilisant le contenu approprié (HTML ou plain text)
-    func populateCell(isMe: Bool, message: PostMessage, isRetry: Bool, positionRetry: Int = 0, delegate: MessageCellSignalDelegate, isTranslated: Bool) {
+    func populateCell(isMe: Bool,
+                      message: PostMessage,
+                      isRetry: Bool,
+                      positionRetry: Int = 0,
+                      delegate: MessageCellSignalDelegate,
+                      isTranslated: Bool) {
+        
         innerPostMessage = message
         messageId = message.uid
         userId = message.user?.sid
@@ -199,7 +195,6 @@ class NeighborhoodMessageCell: UITableViewCell {
                     let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
                     ui_message.addGestureRecognizer(longPressGesture)
                 }
-                // Afficher le contenu avec NSAttributedString en conservant la police
                 ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: isTranslated)
                 ui_view_message.backgroundColor = isMe ? UIColor.appOrangeLight_50 : UIColor.appBeige
             }
@@ -211,8 +206,13 @@ class NeighborhoodMessageCell: UITableViewCell {
         layoutIfNeeded()
     }
     
-    /// Configure la cellule pour une conversation (one-to-one ou groupe)
-    func populateCellConversation(isMe: Bool, message: PostMessage, isRetry: Bool, positionRetry: Int = 0, isOne2One: Bool, delegate: MessageCellSignalDelegate) {
+    func populateCellConversation(isMe: Bool,
+                                  message: PostMessage,
+                                  isRetry: Bool,
+                                  positionRetry: Int = 0,
+                                  isOne2One: Bool,
+                                  delegate: MessageCellSignalDelegate) {
+        
         self.innerPostMessage = message
         messageId = message.uid
         userId = message.user?.sid
@@ -228,7 +228,6 @@ class NeighborhoodMessageCell: UITableViewCell {
         
         ui_date.textColor = .appOrangeLight
         ui_username.textColor = .appOrangeLight
-        
         ui_view_message.backgroundColor = isMe ? .appOrangeLight_50 : .appBeige
         
         if let avatarURL = message.user?.avatarURL, let url = URL(string: avatarURL) {
@@ -297,14 +296,20 @@ class NeighborhoodMessageCell: UITableViewCell {
     }
     
     @objc func action_signal_conversation() {
-        if let userId = userId, let innerPostMessage = innerPostMessage {
-            delegate?.signalMessage(messageId: messageId, userId: userId, textString: innerPostMessage.content ?? "")
+        if let userId = userId,
+           let innerPostMessage = innerPostMessage {
+            delegate?.signalMessage(messageId: messageId,
+                                    userId: userId,
+                                    textString: innerPostMessage.content ?? "")
         }
     }
     
     @IBAction func action_signal_message(_ sender: Any) {
-        if let userId = userId, let innerPostMessage = innerPostMessage {
-            delegate?.signalMessage(messageId: messageId, userId: userId, textString: innerPostMessage.content ?? "")
+        if let userId = userId,
+           let innerPostMessage = innerPostMessage {
+            delegate?.signalMessage(messageId: messageId,
+                                    userId: userId,
+                                    textString: innerPostMessage.content ?? "")
         }
     }
     
@@ -315,6 +320,96 @@ class NeighborhoodMessageCell: UITableViewCell {
     @IBAction func action_show_user(_ sender: Any) {
         Logger.print("***** action show : \(String(describing: userId))")
         delegate?.showUser(userId: userId)
+    }
+}
+
+extension NeighborhoodMessageCell {
+    // Regroupons les fonctions d'aide dans une extension privée afin de ne pas polluer l'espace global.
+    
+    private func attributedString(fromHTML html: String, withBaseFont font: UIFont) -> NSAttributedString {
+        guard let data = html.data(using: .utf8) else {
+            return NSAttributedString(string: html, attributes: [.font: font])
+        }
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        do {
+            let attrString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
+            let fullRange = NSRange(location: 0, length: attrString.length)
+            attrString.addAttribute(.font, value: font, range: fullRange)
+            attrString.enumerateAttribute(.link, in: fullRange, options: []) { (value, range, _) in
+                guard range.location != NSNotFound, range.location + range.length <= attrString.length else { return }
+                if value != nil {
+                    attrString.addAttribute(.foregroundColor, value: unifiedBlue, range: range)
+                    attrString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+                } else {
+                    attrString.addAttribute(.foregroundColor, value: UIColor.black, range: range)
+                }
+            }
+            while attrString.string.hasSuffix("\n") || attrString.string.hasSuffix(" ") {
+                attrString.deleteCharacters(in: NSRange(location: attrString.length - 1, length: 1))
+            }
+            return attrString
+        } catch {
+            return NSAttributedString(string: html, attributes: [.font: font, .foregroundColor: UIColor.black])
+        }
+    }
+    
+    private func plainAttributedString(from text: String, withBaseFont font: UIFont) -> NSAttributedString {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        return NSAttributedString(string: trimmed, attributes: [.font: font, .foregroundColor: UIColor.black])
+    }
+    
+    private func extractUrl(from input: String) -> URL? {
+        // Vérifie d'abord si l'entrée est une URL valide
+        if let directUrl = URL(string: input), directUrl.scheme?.hasPrefix("https") == true {
+            return directUrl
+        }
+        
+        // Sinon, essaie d'extraire une URL depuis du HTML
+        let pattern = "<a\\s+(?:[^>]*?\\s+)?href=[\"']([^\"']+)[\"']"
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
+            return nil
+        }
+        
+        let nsString = input as NSString
+        let results = regex.matches(in: input, options: [], range: NSRange(location: 0, length: nsString.length))
+        
+        if let match = results.first, match.numberOfRanges > 1 {
+            let urlString = nsString.substring(with: match.range(at: 1))
+            return URL(string: urlString)
+        }
+        
+        return nil
+    }
+    private func getAttributedDisplayText(for message: PostMessage, isTranslated: Bool) -> NSAttributedString {
+        if isTranslated {
+            if let translationsHtml = message.contentTranslationsHtml {
+                if let translationHtml = translationsHtml.translation, !translationHtml.isEmpty {
+                    return attributedString(fromHTML: translationHtml, withBaseFont: NeighborhoodMessageCell.baseFont)
+                }
+                if let originalHtml = translationsHtml.original, !originalHtml.isEmpty {
+                    return attributedString(fromHTML: originalHtml, withBaseFont: NeighborhoodMessageCell.baseFont)
+                }
+            }
+            if let translations = message.contentTranslations {
+                if let translation = translations.translation, !translation.isEmpty {
+                    return plainAttributedString(from: translation, withBaseFont: NeighborhoodMessageCell.baseFont)
+                }
+                if let original = translations.original, !original.isEmpty {
+                    return plainAttributedString(from: original, withBaseFont: NeighborhoodMessageCell.baseFont)
+                }
+            }
+        } else {
+            if let contentHtml = message.contentHtml, !contentHtml.isEmpty {
+                return attributedString(fromHTML: contentHtml, withBaseFont: NeighborhoodMessageCell.baseFont)
+            }
+            if let content = message.content, !content.isEmpty {
+                return plainAttributedString(from: content, withBaseFont: NeighborhoodMessageCell.baseFont)
+            }
+        }
+        return NSAttributedString(string: "", attributes: [.font: NeighborhoodMessageCell.baseFont])
     }
 }
 
