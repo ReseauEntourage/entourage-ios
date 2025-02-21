@@ -471,6 +471,8 @@
 		2689F3B62A3B6D3E0009920D /* WelcomeFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */; };
 		268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FCA292967281100159C34 /* MJAlertWithImageController.swift */; };
 		268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */; };
+		2693F8A62D68CE6F002726FD /* MentionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2693F8A52D68CE6F002726FD /* MentionCell.swift */; };
+		2693F8A82D68CF35002726FD /* MentionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2693F8A72D68CF35002726FD /* MentionCell.xib */; };
 		2694A7442ACD671B0042CFCA /* HomeCellEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694A7432ACD671B0042CFCA /* HomeCellEvent.swift */; };
 		2694A7462ACD68070042CFCA /* HomeCellEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2694A7452ACD68070042CFCA /* HomeCellEvent.xib */; };
 		2694A7482ACD6DF10042CFCA /* HomeEventHorizontalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694A7472ACD6DF10042CFCA /* HomeEventHorizontalCollectionCell.swift */; };
@@ -1033,6 +1035,8 @@
 		2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFiveViewController.swift; sourceTree = "<group>"; };
 		268FCA292967281100159C34 /* MJAlertWithImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertWithImageController.swift; sourceTree = "<group>"; };
 		268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertWithImageController.xib; sourceTree = "<group>"; };
+		2693F8A52D68CE6F002726FD /* MentionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionCell.swift; sourceTree = "<group>"; };
+		2693F8A72D68CF35002726FD /* MentionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MentionCell.xib; sourceTree = "<group>"; };
 		2694A7432ACD671B0042CFCA /* HomeCellEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellEvent.swift; sourceTree = "<group>"; };
 		2694A7452ACD68070042CFCA /* HomeCellEvent.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellEvent.xib; sourceTree = "<group>"; };
 		2694A7472ACD6DF10042CFCA /* HomeEventHorizontalCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEventHorizontalCollectionCell.swift; sourceTree = "<group>"; };
@@ -1333,6 +1337,8 @@
 				02EAB5A928B908400060557D /* ConversationListMembersViewController.swift */,
 				266791A82D37A78200BEDB4E /* ConversationNotifAskViewCell.swift */,
 				266791AE2D37A7A400BEDB4E /* ConversationNotifAskViewCell.xib */,
+				2693F8A52D68CE6F002726FD /* MentionCell.swift */,
+				2693F8A72D68CF35002726FD /* MentionCell.xib */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -2463,6 +2469,7 @@
 				02CCE67F27D78CAB00D6976C /* NunitoSans-Italic.ttf in Resources */,
 				02B94C34284F92AD006059EF /* HomeActionTeachCell.xib in Resources */,
 				02E2192D2837A16F002A1FCB /* Neighborhood_Report.storyboard in Resources */,
+				2693F8A82D68CF35002726FD /* MentionCell.xib in Resources */,
 				02490DC727EA246B00E2577B /* MJErrorInputView.xib in Resources */,
 				0207BF8527F2059400631914 /* UserDetail.storyboard in Resources */,
 				025FFE0B27DBAD5100783E8D /* ApiKeys.plist in Resources */,
@@ -2714,6 +2721,7 @@
 				0227446F2795BE6F005600A1 /* AssociationService.swift in Sources */,
 				0268C250285A2B1400294055 /* FloatyManager.swift in Sources */,
 				024131D62862030A00561FB4 /* EventCreatePhase4ViewController.swift in Sources */,
+				2693F8A62D68CE6F002726FD /* MentionCell.swift in Sources */,
 				02C3ABF4279AB55D00817B82 /* Extensions_UIViewController.swift in Sources */,
 				0295F2B727E497D0006AE255 /* ProfileEditorViewController.swift in Sources */,
 				02490DC927EA461700E2577B /* Extensions_UIDevice.swift in Sources */,

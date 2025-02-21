@@ -8,6 +8,8 @@
 //  empêcher le UITapGestureRecognizer d'intercepter les touches sur la table view des suggestions,
 //  réinitialiser correctement le UITextView après l'envoi (suppression du style URL),
 //  et appliquer à nouveau une police de base après l'envoi (ex: getFontRegular13Orange()).
+//  Désormais, on appelle l’API même si query est vide pour afficher 3 résultats max dès “@”.
+//  La hauteur de la table de mentions s’adapte dynamiquement au nombre de résultats (max 3).
 //
 
 import UIKit
@@ -29,7 +31,10 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     @IBOutlet weak var ui_view_empty: UIView!
     @IBOutlet weak var ui_title_empty: UILabel!
     @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
-
+    
+    // Nouvelle contrainte pour la hauteur de la table de mentions
+    @IBOutlet weak var table_view_mention_height: NSLayoutConstraint!
+    
     // MARK: - Nouvel outlet pour la liste de suggestions de mention
     @IBOutlet weak var ui_tableview_mentions: UITableView!
 
@@ -54,8 +59,11 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     var postMessage: PostMessage? = nil
 
     // MARK: - Propriétés pour la fonctionnalité de mention
-    /// Liste filtrée affichée dans le tableau des suggestions (obtenue via le nouvel appel serveur)
+    /// Liste filtrée affichée dans le tableau des suggestions (obtenue via l’appel serveur)
     var mentionSuggestions: [UserLightNeighborhood] = []
+    
+    /// Hauteur d’une cellule “MentionCell” (à adapter selon ta maquette)
+    private let mentionCellHeight: CGFloat = 44.0
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -63,7 +71,6 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
 
         // Désactivation du gestionnaire clavier par défaut
         ui_tap_gesture.cancelsTouchesInView = false
-        // On assigne le délégué du gesture pour filtrer les touches destinées aux autres vues
         ui_tap_gesture.delegate = self
         IQKeyboardManager.shared.enable = false
 
@@ -140,8 +147,11 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         // Configuration du tableau des suggestions de mention
         ui_tableview_mentions.delegate = self
         ui_tableview_mentions.dataSource = self
-        ui_tableview_mentions.register(UITableViewCell.self, forCellReuseIdentifier: "MentionCell")
+        ui_tableview_mentions.register(UINib(nibName: MentionCell.identifier, bundle: nil), forCellReuseIdentifier: MentionCell.identifier)
         ui_tableview_mentions.isHidden = true
+        
+        // On met la hauteur à 0 au départ
+        table_view_mention_height.constant = 0
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -350,38 +360,52 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     }
 
     // MARK: - Méthodes pour la fonctionnalité de mention
-    /// Met à jour la liste des suggestions en appelant le back-end en temps réel.
+    /// Met à jour la liste des suggestions en appelant le back-end, même si query est vide,
+    /// et limite l'affichage à 3 utilisateurs maximum.
     func updateMentionSuggestions(query: String) {
-        // Si la query est vide, on cache tout
-        if query.isEmpty {
-            hideMentionSuggestions()
-            return
-        }
-
-        // On utilise le nouvel appel : getNeighborhoodUsersWithQuery
+        // Pas de test "if query.isEmpty" => on appelle toujours l'API
         NeighborhoodService.getNeighborhoodUsersWithQuery(
             neighborhoodId: neighborhoodId,
             query: query
         ) { [weak self] users, error in
             guard let self = self else { return }
             if let users = users, !users.isEmpty {
-                self.mentionSuggestions = users
+                // On limite à 3
+                let limitedUsers = Array(users.prefix(3))
+                self.mentionSuggestions = limitedUsers
+                
+                // On calcule la hauteur qu'on veut afficher
+                let rowCount = self.mentionSuggestions.count
+                // Ajuste la contrainte en fonction du rowCount
+                UIView.animate(withDuration: 0.2) {
+                    self.table_view_mention_height.constant = self.mentionCellHeight * CGFloat(rowCount)
+                    self.view.layoutIfNeeded()
+                }
+                
                 self.ui_tableview_mentions.reloadData()
-                self.ui_tableview_mentions.isHidden = false
+                self.animateShowTableViewMentions()
             } else {
                 self.hideMentionSuggestions()
             }
         }
     }
 
-    /// Masque le tableau des suggestions de mention
+    /// Masque le tableau des suggestions de mention (avec animation)
     func hideMentionSuggestions() {
         mentionSuggestions = []
-        ui_tableview_mentions.isHidden = true
         ui_tableview_mentions.reloadData()
+
+        // On ramène la hauteur à 0 (avec légère animation)
+        UIView.animate(withDuration: 0.2) {
+            self.table_view_mention_height.constant = 0
+            self.view.layoutIfNeeded()
+        }
+        
+        animateHideTableViewMentions() // Remplace ui_tableview_mentions.isHidden = true
     }
 
-    /// Insère dans le UITextView, sans quitter le mode édition, un NSAttributedString avec un lien cliquable vers le profil
+    /// Insère dans le UITextView, sans quitter le mode édition, un NSAttributedString
+    /// avec un lien cliquable vers le profil
     func insertMention(user: UserLightNeighborhood) {
         let currentAttributedText: NSMutableAttributedString
         if let attributed = ui_textview_message.attributedText, attributed.length > 0 {
@@ -441,6 +465,41 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             .foregroundColor: styleReset.color
         ]
     }
+
+    // MARK: - Animations pour la tableview des mentions
+    private func animateShowTableViewMentions() {
+        // Préparation de la vue pour l'animation
+        ui_tableview_mentions.transform = CGAffineTransform(translationX: 0, y: 20)
+        ui_tableview_mentions.alpha = 0
+        ui_tableview_mentions.isHidden = false
+
+        // Animation d’apparition
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: .curveEaseOut,
+            animations: {
+                self.ui_tableview_mentions.transform = .identity
+                self.ui_tableview_mentions.alpha = 1
+            },
+            completion: nil
+        )
+    }
+
+    private func animateHideTableViewMentions() {
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: .curveEaseIn,
+            animations: {
+                self.ui_tableview_mentions.transform = CGAffineTransform(translationX: 0, y: 20)
+                self.ui_tableview_mentions.alpha = 0
+            },
+            completion: { _ in
+                self.ui_tableview_mentions.isHidden = true
+            }
+        )
+    }
 }
 
 // MARK: - UITableViewDataSource & UITableViewDelegate
@@ -458,15 +517,15 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
 
         // TableView des mentions
         if tableView == ui_tableview_mentions {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MentionCell", for: indexPath)
             let user = mentionSuggestions[indexPath.row]
-            cell.textLabel?.text = user.displayName
-            // Par exemple, petite mise en forme
-            cell.backgroundColor = .appBeige
-            return cell
+            if let cell = ui_tableview_mentions.dequeueReusableCell(withIdentifier: "MentionCell") as? MentionCell {
+                cell.selectionStyle = .none
+                cell.configure(igm: user.avatarURL ?? "placeholder_user", name: user.displayName)
+                return cell
+            }
         }
 
-        // TableView principal
+        // TableView principal (messages)
         if indexPath.row == 0, let post = postMessage {
             let identifier = post.isPostImage
                 ? DetailMessageTopPostImageCell.identifier
@@ -519,10 +578,7 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Clic détecté dans la table view")
-
         if tableView == ui_tableview_mentions {
-            print("Cellule de mention sélectionnée à l’index \(indexPath.row)")
             let selectedUser = mentionSuggestions[indexPath.row]
             insertMention(user: selectedUser)
             tableView.deselectRow(at: indexPath, animated: true)
@@ -565,7 +621,7 @@ extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
         let textNSString = textView.text as NSString
         let textUpToCursor = textNSString.substring(to: cursorPosition)
 
-        // Recherche de la dernière occurrence de "@" pour détecter une mention
+        // Recherche de la dernière occurrence de "@"
         if let atIndex = textUpToCursor.lastIndex(of: "@") {
             // Vérifie si c’est un nouvel @ (début ou précédé d’un espace)
             if atIndex == textUpToCursor.startIndex
@@ -575,6 +631,7 @@ extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
                     hideMentionSuggestions()
                 } else {
                     let query = String(mentionSubstring.dropFirst())
+                    // On appelle la fonction => limite 3
                     updateMentionSuggestions(query: query)
                 }
             } else {

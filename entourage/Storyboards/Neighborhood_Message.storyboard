@@ -456,6 +456,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="a7b-vC-Jad"/>
                     <connections>
+                        <outlet property="table_view_mention_height" destination="4sO-fM-XFG" id="OK7-Lx-yXr"/>
                         <outlet property="ui_constraint_bottom_view_Tf" destination="ynC-Jo-DRv" id="1bf-4M-RQS"/>
                         <outlet property="ui_iv_bt_send" destination="G8D-vG-DVg" id="SGJ-OU-3hP"/>
                         <outlet property="ui_tableview" destination="JZj-i6-yz3" id="DsH-1Q-Nbv"/>
