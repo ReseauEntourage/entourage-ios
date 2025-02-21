@@ -4,11 +4,11 @@
 //
 //  Created by Jerome on 28/07/2022.
 //
-//  Mise à jour pour intégrer la fonctionnalité de mention avec insertion d’un lien cliquable,
-//  conversion de l'attributedText en HTML pour l'envoi, empêcher le UITapGestureRecognizer
-//  d'intercepter les touches sur la table view des suggestions,
+//  Mise à jour pour intégrer la fonctionnalité de mention avec un appel API dynamique (query),
+//  insertion d’un lien cliquable, conversion de l'attributedText en HTML pour l'envoi,
+//  empêcher le UITapGestureRecognizer d'intercepter les touches sur la table view des suggestions,
 //  réinitialiser correctement le UITextView après l'envoi (suppression du style URL),
-//  et appliquer à nouveau une police de base après l'envoi (ex: getFontRegular13Orange).
+//  et appliquer à nouveau une police de base après l'envoi (ex: getFontRegular13Orange()).
 //
 
 import UIKit
@@ -54,19 +54,16 @@ class EventDetailMessagesViewController: UIViewController {
     var postMessage: PostMessage? = nil
 
     // MARK: - Propriétés pour la fonctionnalité de mention
-    /// Liste complète des membres à mentionner (récupérée via l’API)
-    var allMentionUsers: [UserLightNeighborhood] = []
-    /// Liste filtrée affichée dans le tableau des suggestions
+    /// Liste filtrée affichée dans le tableau des suggestions (obtenue via l’appel query)
     var mentionSuggestions: [UserLightNeighborhood] = []
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Pour que le tapGesture n’intercepte pas les touches sur d’autres vues
-        ui_tap_gesture.cancelsTouchesInView = false
-        ui_tap_gesture.delegate = self
 
         // Désactiver IQKeyboardManager sur cette vue
+        ui_tap_gesture.cancelsTouchesInView = false
+        ui_tap_gesture.delegate = self
         IQKeyboardManager.shared.enable = false
 
         // Configuration de la barre de navigation
@@ -147,15 +144,8 @@ class EventDetailMessagesViewController: UIViewController {
         ui_tableview_mentions.register(UITableViewCell.self, forCellReuseIdentifier: "MentionCell")
         ui_tableview_mentions.isHidden = true
 
-        // Récupération des membres (participants) de l’événement pour la mention
-        if isGroupMember {
-            EventService.getEventUsers(eventId: eventId) { [weak self] users, error in
-                guard let self = self, let users = users else { return }
-                self.allMentionUsers = users
-                self.mentionSuggestions = users
-                self.ui_tableview_mentions.reloadData()
-            }
-        }
+        // NB: On ne fait plus "EventService.getEventUsers(eventId:)" pour charger tous les users
+        //    On va plutôt appeler getEventUsersWithQuery(...) dans updateMentionSuggestions.
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -262,7 +252,10 @@ class EventDetailMessagesViewController: UIViewController {
 
                 if self.messages.count + self.messagesForRetry.count > 0 {
                     DispatchQueue.main.async {
-                        let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
+                        let indexPath = IndexPath(
+                            row: self.messages.count + self.messagesForRetry.count - 1,
+                            section: 0
+                        )
                         self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
                     }
                 }
@@ -277,7 +270,10 @@ class EventDetailMessagesViewController: UIViewController {
 
             if self.messages.count + self.messagesForRetry.count > 0 {
                 DispatchQueue.main.async {
-                    let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
+                    let indexPath = IndexPath(
+                        row: self.messages.count + self.messagesForRetry.count - 1,
+                        section: 0
+                    )
                     self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
                 }
             }
@@ -311,7 +307,10 @@ class EventDetailMessagesViewController: UIViewController {
 
                     if self.messages.count + self.messagesForRetry.count > 0 {
                         DispatchQueue.main.async {
-                            let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
+                            let indexPath = IndexPath(
+                                row: self.messages.count + self.messagesForRetry.count - 1,
+                                section: 0
+                            )
                             self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
                         }
                     }
@@ -343,21 +342,25 @@ class EventDetailMessagesViewController: UIViewController {
         }
     }
 
-    // MARK: - Méthodes pour la fonctionnalité de mention
+    // MARK: - Méthodes pour la fonctionnalité de mention (Appel dynamique)
+    /// Met à jour la liste des suggestions en utilisant un appel réseau avec 'query'
     func updateMentionSuggestions(query: String) {
-        guard !allMentionUsers.isEmpty else {
+        // Si la query est vide, on nettoie tout
+        if query.isEmpty {
             hideMentionSuggestions()
             return
         }
-        if query.isEmpty {
-            mentionSuggestions = allMentionUsers
-        } else {
-            mentionSuggestions = allMentionUsers.filter { user in
-                return user.displayName.range(of: query, options: .caseInsensitive) != nil
+        // Appel dynamique: getEventUsersWithQuery
+        EventService.getEventUsersWithQuery(eventId: eventId, query: query) { [weak self] users, error in
+            guard let self = self else { return }
+            if let users = users, !users.isEmpty {
+                self.mentionSuggestions = users
+                self.ui_tableview_mentions.reloadData()
+                self.ui_tableview_mentions.isHidden = false
+            } else {
+                self.hideMentionSuggestions()
             }
         }
-        ui_tableview_mentions.reloadData()
-        ui_tableview_mentions.isHidden = mentionSuggestions.isEmpty
     }
 
     func hideMentionSuggestions() {
@@ -388,7 +391,10 @@ class EventDetailMessagesViewController: UIViewController {
                 .foregroundColor: UIColor.blue,
                 .underlineStyle: NSUnderlineStyle.single.rawValue
             ]
-            let mentionAttributedString = NSAttributedString(string: "@\(user.displayName)", attributes: linkAttributes)
+            let mentionAttributedString = NSAttributedString(
+                string: "@\(user.displayName)",
+                attributes: linkAttributes
+            )
             currentAttributedText.replaceCharacters(in: replaceRange, with: mentionAttributedString)
             ui_textview_message.attributedText = currentAttributedText
 
@@ -416,7 +422,7 @@ class EventDetailMessagesViewController: UIViewController {
         // Réinitialisation complète du UITextView pour supprimer toute mise en forme
         ui_textview_message.text = ""
         ui_textview_message.attributedText = NSAttributedString(string: "")
-        
+
         // ⬇️ Remettre la police d'origine après l'envoi
         let styleReset = ApplicationTheme.getFontRegular13Orange()
         ui_textview_message.typingAttributes = [
@@ -449,8 +455,11 @@ extension EventDetailMessagesViewController: UITableViewDataSource, UITableViewD
 
         // TableView principal (messages)
         if indexPath.row == 0, let post = postMessage {
-            let identifier = post.isPostImage ? DetailMessageTopPostImageCell.identifier : DetailMessageTopPostTextCell.identifier
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! DetailMessageTopPostCell
+            let identifier = post.isPostImage
+                ? DetailMessageTopPostImageCell.identifier
+                : DetailMessageTopPostTextCell.identifier
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+                as! DetailMessageTopPostCell
             cell.populateCell(message: post)
             cell.delegate = self
             return cell
@@ -460,7 +469,8 @@ extension EventDetailMessagesViewController: UITableViewDataSource, UITableViewD
 
         if messagesForRetry.count > 0, realIndex >= messages.count {
             let message = messagesForRetry[realIndex - messages.count]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe", for: indexPath) as! NeighborhoodMessageCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe", for: indexPath)
+                as! NeighborhoodMessageCell
             let isTranslated = translatedMessageIDs.contains(message.uid)
             cell.populateCell(
                 isMe: true,
@@ -480,7 +490,8 @@ extension EventDetailMessagesViewController: UITableViewDataSource, UITableViewD
             cellId = "cellMe"
             isMe = true
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NeighborhoodMessageCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+            as! NeighborhoodMessageCell
         let isTranslated = translatedMessageIDs.contains(message.uid)
         cell.populateCell(
             isMe: isMe,
@@ -517,7 +528,9 @@ extension EventDetailMessagesViewController: MJNavBackViewDelegate {
 
 // MARK: - UITextViewDelegate
 extension EventDetailMessagesViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView,
+                  shouldChangeTextIn range: NSRange,
+                  replacementText text: String) -> Bool {
         // Activation / désactivation du bouton en fonction de la présence de texte
         let newLength = (textView.text as NSString).replacingCharacters(in: range, with: text).count
         ui_iv_bt_send.image = (newLength > 0)
@@ -541,6 +554,7 @@ extension EventDetailMessagesViewController: UITextViewDelegate {
                     hideMentionSuggestions()
                 } else {
                     let query = String(mentionSubstring.dropFirst())
+                    // On appelle la fonction dynamique
                     updateMentionSuggestions(query: query)
                 }
             } else {
