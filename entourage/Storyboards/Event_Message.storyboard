@@ -450,6 +450,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="jPr-7B-Nva"/>
                     <connections>
+                        <outlet property="table_view_mention_height" destination="2dd-bQ-SOy" id="Ebn-kW-35h"/>
                         <outlet property="ui_constraint_bottom_view_Tf" destination="OQk-mF-zxr" id="uyx-e5-RZR"/>
                         <outlet property="ui_iv_bt_send" destination="cy7-Y5-i54" id="9vp-gM-126"/>
                         <outlet property="ui_tableview" destination="Qhr-gf-0fZ" id="oeu-Hh-8q5"/>

@@ -394,15 +394,22 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     func hideMentionSuggestions() {
         mentionSuggestions = []
         ui_tableview_mentions.reloadData()
-
-        // On ramène la hauteur à 0 (avec légère animation)
-        UIView.animate(withDuration: 0.2) {
-            self.table_view_mention_height.constant = 0
-            self.view.layoutIfNeeded()
-        }
         
-        animateHideTableViewMentions() // Remplace ui_tableview_mentions.isHidden = true
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            // On ramène la hauteur à 0
+            self.table_view_mention_height.constant = 0
+            // On déplace et fait disparaître la tableview
+            self.ui_tableview_mentions.transform = CGAffineTransform(translationX: 0, y: 20)
+            self.ui_tableview_mentions.alpha = 0
+            
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.ui_tableview_mentions.isHidden = true
+            // Réinitialiser la transformation pour la prochaine apparition
+            self.ui_tableview_mentions.transform = .identity
+        })
     }
+
 
     /// Insère dans le UITextView, sans quitter le mode édition, un NSAttributedString
     /// avec un lien cliquable vers le profil
@@ -579,9 +586,25 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == ui_tableview_mentions {
-            let selectedUser = mentionSuggestions[indexPath.row]
-            insertMention(user: selectedUser)
-            tableView.deselectRow(at: indexPath, animated: true)
+            // Récupérer la cellule sélectionnée
+            if let cell = tableView.cellForRow(at: indexPath) as? MentionCell {
+                // Animation: changement de background en orange
+                UIView.animate(withDuration: 0.2, animations: {
+                    cell.contentView.backgroundColor = UIColor.appBeige
+                }, completion: { _ in
+                    // Une fois l'animation terminée, on insère la mention
+                    let selectedUser = self.mentionSuggestions[indexPath.row]
+                    self.insertMention(user: selectedUser)
+                    
+                    // Optionnel: réinitialiser la couleur de fond pour que la cellule redevienne normale
+                    UIView.animate(withDuration: 0.2) {
+                        cell.contentView.backgroundColor = UIColor.appBeigeClair2
+                    }
+                    
+                    // Désélectionner la cellule
+                    tableView.deselectRow(at: indexPath, animated: true)
+                })
+            }
         }
     }
 }
