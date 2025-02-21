@@ -77,7 +77,8 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         ui_comment.addGestureRecognizer(customTapGesture)
 
-        
+        ui_comment.URLColor = .blue
+
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
