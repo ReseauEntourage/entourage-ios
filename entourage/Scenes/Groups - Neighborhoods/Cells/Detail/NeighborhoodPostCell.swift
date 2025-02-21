@@ -67,6 +67,17 @@ class NeighborhoodPostCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        let customTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCustomCommentTap))
+        customTapGesture.cancelsTouchesInView = false
+        // Faire en sorte que notre geste attende l'échec des autres gestes (par exemple ceux gérés par ActiveLabel)
+        if let gestures = ui_comment.gestureRecognizers {
+            for gesture in gestures where gesture is UITapGestureRecognizer && gesture !== customTapGesture {
+                customTapGesture.require(toFail: gesture)
+            }
+        }
+        ui_comment.addGestureRecognizer(customTapGesture)
+
+        
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
@@ -103,6 +114,31 @@ class NeighborhoodPostCell: UITableViewCell {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLittleTap))
             ui_view_btn_i_like.addGestureRecognizer(tapGesture)
         }
+    }
+    
+    @objc func handleCustomCommentTap() {
+        guard let html = postMessage.contentHtml else { return }
+        if let url = extractFirstLink(from: html) {
+            // Appeler une méthode du delegate ou exécuter une action sur le lien extrait
+            WebLinkManager.openUrl(url: url,
+                                   openInApp: true,
+                                   presenterViewController: AppState.getTopViewController())
+        } else {
+            print("Aucun lien trouvé dans le contenu HTML")
+        }
+    }
+
+    /// Extrait le premier lien trouvé dans une chaîne HTML via une regex
+    func extractFirstLink(from html: String) -> URL? {
+        let pattern = "(https?://[^\\s\"'>]+)"
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else { return nil }
+        let range = NSRange(location: 0, length: html.utf16.count)
+        if let match = regex.firstMatch(in: html, options: [], range: range),
+           let matchRange = Range(match.range, in: html) {
+            let urlString = String(html[matchRange])
+            return URL(string: urlString)
+        }
+        return nil
     }
     
     override func layoutSubviews() {
@@ -231,12 +267,12 @@ class NeighborhoodPostCell: UITableViewCell {
         
         // Mise à jour de ui_comment
         if isTranslated {
-            if let _translation = postMessage.contentTranslations{
-                ui_comment.text = _translation.translation
+            if let _translation = postMessage.contentTranslationsHtml{
+                updateCommentAttributedText()
             }
         } else {
-            if let _translation = postMessage.contentTranslations {
-                ui_comment.text = _translation.original
+            if let _translation = postMessage.contentTranslationsHtml {
+                updateCommentAttributedText()
             }
         }
     }
@@ -426,6 +462,39 @@ class NeighborhoodPostCell: UITableViewCell {
         updateReactionIcon()
         displayReactions(for: postMessage)
     }
+    
+    func updateCommentAttributedText() {
+        // Choisir la chaîne HTML à afficher : traduction ou contenu original
+        var htmlContent: String?
+        if let translations = postMessage.contentTranslationsHtml {
+            // Si on est en mode traduit, on affiche la traduction, sinon l'original
+            htmlContent = isTranslated ? translations.translation : translations.original
+        } else {
+            htmlContent = postMessage.contentHtml
+        }
+        
+        // Si aucune chaîne n'est disponible, on vide le label
+        guard let htmlContent = htmlContent, let data = htmlContent.data(using: .utf8) else {
+            ui_comment.text = ""
+            return
+        }
+        
+        do {
+            // Conversion du HTML en NSAttributedString pour un rendu riche
+            let attributedString = try NSAttributedString(data: data,
+                                                          options: [
+                                                            .documentType: NSAttributedString.DocumentType.html,
+                                                            .characterEncoding: String.Encoding.utf8.rawValue
+                                                          ],
+                                                          documentAttributes: nil)
+            ui_comment.attributedText = attributedString
+        } catch {
+            print("Erreur lors de la conversion du HTML : \(error)")
+            ui_comment.text = htmlContent
+        }
+        ui_comment.setFontBody(size: 15)
+    }
+
 
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?, isMember:Bool?) {
@@ -460,8 +529,8 @@ class NeighborhoodPostCell: UITableViewCell {
             // Ouvrez le lien dans Safari, par exemple
             delegate.showWebviewUrl(url: url)
         }
-        if postMessage.contentTranslations == nil {
-            ui_comment.text = postMessage.content
+        if postMessage.contentTranslationsHtml == nil {
+            updateCommentAttributedText()
         }
         
         if let _status = message.status {
