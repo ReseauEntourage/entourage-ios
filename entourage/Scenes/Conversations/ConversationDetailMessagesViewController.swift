@@ -5,6 +5,7 @@
 //  Created by Jerome on 23/08/2022.
 //  Adapté pour intégrer la fonctionnalité de mention (liste de suggestions, insertion AttributedString, etc.)
 //  Le filtrage des mentions se fait localement sur la liste de members de la Conversation.
+//  Si le query est vide, on affiche 3 membres par défaut.
 //
 
 import UIKit
@@ -66,8 +67,8 @@ class ConversationDetailMessagesViewController: UIViewController {
 
     // MARK: - Pagination
     var currentPage = 1
-    let numberOfItemsForWS = 50 // Arbitrary nb of items used for paging
-    let nbOfItemsBeforePagingReload = 5 // Arbitrary nb of items from the top to send new call
+    let numberOfItemsForWS = 50
+    let nbOfItemsBeforePagingReload = 5
     var isLoading = false
 
     var paramVC: UIViewController? = nil
@@ -84,7 +85,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // -- Ajout important pour laisser les interactions sur la tableView des mentions --
+        // GESTION DU TAP GESTURE (pour éviter de masquer la mentionView quand on tape dessus)
         ui_tap_gesture.cancelsTouchesInView = false
         ui_tap_gesture.delegate = self
 
@@ -164,13 +165,14 @@ class ConversationDetailMessagesViewController: UIViewController {
         )
         bottomConstraint = ui_constraint_bottom_view_Tf.constant
 
-        // Vue "nouvelle conversation"
+        // Vue “nouvelle conversation”
         ui_title_new_conv.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
         ui_subtitle_new_conv.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_title_new_conv.text = "message_title_new_conv".localized
         ui_subtitle_new_conv.text = "message_subtitle_new_conv".localized
         hideViewNew()
 
+        // Observateurs
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(closeFromParams),
@@ -197,8 +199,6 @@ class ConversationDetailMessagesViewController: UIViewController {
             forCellReuseIdentifier: MentionCell.identifier
         )
         ui_tableview_mentions.isHidden = true
-
-        // On met la hauteur à 0 au départ
         table_view_mention_height.constant = 0
     }
 
@@ -210,9 +210,9 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
     }
 
-    // -- Ajout pour s'assurer que la tableView des mentions passe bien devant la tableView principale
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        // S'assure que la table des mentions est bien devant
         self.view.bringSubviewToFront(ui_tableview_mentions)
     }
 
@@ -303,7 +303,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
-        // Hide empty view to prevent weird layout
+        // hide empty view
         if messagesExtracted.messages.count == 0 {
             ui_view_empty.isHidden = true
         }
@@ -543,30 +543,38 @@ class ConversationDetailMessagesViewController: UIViewController {
 
     // MARK: - Méthodes pour la fonctionnalité de mention (pas d'appel API, simple filtre local sur members)
     func updateMentionSuggestions(query: String) {
-        // On filtre localement les members de la conversation
         guard let members = currentConversation?.members, !members.isEmpty else {
             hideMentionSuggestions()
             return
         }
+
+        // On différencie le cas : query vide ou non
         let q = query.lowercased()
 
-        // Filtrage du displayName (username)
-        var filtered = members.filter {
-            let nameLC = $0.username?.lowercased() ?? ""
-            return nameLC.contains(q) && $0.uid != meId
+        // Filtre local
+        let filtered: [MemberLight]
+        if q.isEmpty {
+            // Si query est vide, on affiche 3 membres (hors moi)
+            filtered = members.filter { $0.uid != meId }
+        } else {
+            // Sinon, on filtre par username contenant le query
+            filtered = members.filter {
+                let nameLC = $0.username?.lowercased() ?? ""
+                return nameLC.contains(q) && $0.uid != meId
+            }
         }
 
         // On limite à 3
-        filtered = Array(filtered.prefix(3))
+        let limited = Array(filtered.prefix(3))
 
-        // S'il n'y a aucun résultat => on cache la table
-        if filtered.isEmpty {
+        // Si pas de résultat => on masque
+        if limited.isEmpty {
             hideMentionSuggestions()
             return
         }
 
-        // On convertit ces MemberLight en "UserLightNeighborhood" (ou structure équivalente)
-        mentionSuggestions = filtered.map { member -> UserLightNeighborhood in
+        // Conversion en UserLightNeighborhood
+        mentionSuggestions = limited.map { member -> UserLightNeighborhood in
             var user = UserLightNeighborhood()
             user.sid = member.uid
             user.displayName = member.username ?? ""
@@ -574,13 +582,12 @@ class ConversationDetailMessagesViewController: UIViewController {
             return user
         }
 
-        // Ajuste la contrainte de hauteur
+        // Ajustement de la contrainte
         UIView.animate(withDuration: 0.2) {
             self.table_view_mention_height.constant = self.mentionCellHeight * CGFloat(self.mentionSuggestions.count)
             self.view.layoutIfNeeded()
         }
 
-        // Reload & animation d’apparition
         ui_tableview_mentions.reloadData()
         animateShowTableViewMentions()
     }
@@ -589,7 +596,6 @@ class ConversationDetailMessagesViewController: UIViewController {
         mentionSuggestions = []
         ui_tableview_mentions.reloadData()
 
-        // Ramène la hauteur à 0
         UIView.animate(withDuration: 0.2) {
             self.table_view_mention_height.constant = 0
             self.view.layoutIfNeeded()
@@ -624,12 +630,13 @@ class ConversationDetailMessagesViewController: UIViewController {
             )
             currentAttributedText.replaceCharacters(in: replaceRange, with: mentionAttributedString)
             ui_textview_message.attributedText = currentAttributedText
+
             let newCursorPosition = atRange.location + mentionAttributedString.length
             ui_textview_message.selectedRange = NSRange(location: newCursorPosition, length: 0)
         }
         hideMentionSuggestions()
 
-        // On remet la police de base
+        // Remet la police de base
         let style = ApplicationTheme.getFontCourantRegularNoir()
         ui_textview_message.typingAttributes = [
             .font: style.font,
@@ -800,7 +807,6 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
         else {
             ui_iv_bt_send.image = UIImage(named: "ic_send_comment_off")
         }
-
         return true
     }
 
@@ -818,7 +824,8 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
                 if mentionSubstring.contains(" ") {
                     hideMentionSuggestions()
                 } else {
-                    let query = String(mentionSubstring.dropFirst()) // retire le "@"
+                    // On retire le "@" pour faire la query
+                    let query = String(mentionSubstring.dropFirst())
                     updateMentionSuggestions(query: query)
                 }
             } else {
@@ -873,7 +880,6 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
     }
 
     func showWebUrl(url: URL) {
-        // Gère la logique d'ouverture (interne/externe)
         if WebLinkManager.isOurPatternURL(url) {
             self.dismiss(animated: true) {
                 WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
@@ -884,12 +890,12 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
     }
 }
 
-// MARK: - UpdateUnreadCountDelegate (si besoin)
+// MARK: - UpdateUnreadCountDelegate
 protocol UpdateUnreadCountDelegate: AnyObject {
     func updateUnreadCount(conversationId: Int, currentIndexPathSelected: IndexPath?)
 }
 
-// MARK: - GroupDetailDelegate (signalement)
+// MARK: - GroupDetailDelegate
 extension ConversationDetailMessagesViewController: GroupDetailDelegate {
     func translateItem(id: Int) {
         // TODO: Gérer la traduction si nécessaire
@@ -932,7 +938,7 @@ extension ConversationDetailMessagesViewController: GroupDetailDelegate {
 // MARK: - UIGestureRecognizerDelegate
 extension ConversationDetailMessagesViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        // Si le toucher est sur la table view des suggestions, on ne ferme pas le clavier
+        // Si on clique sur la tableView des mentions, on ne veut pas fermer la mentionView
         if let view = touch.view, view.isDescendant(of: ui_tableview_mentions) {
             return false
         }
