@@ -679,14 +679,24 @@ L8</string>
                                             <constraint firstItem="qT2-PA-aFF" firstAttribute="leading" secondItem="CuG-Ja-TKW" secondAttribute="leading" id="a7e-Xm-ces"/>
                                         </constraints>
                                     </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Q24-n9-ZVG">
+                                        <rect key="frame" x="0.0" y="300" width="414" height="150"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="mh8-X2-6Wz"/>
+                                        </constraints>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" name="BeigeClair"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="CuG-Ja-TKW" firstAttribute="top" secondItem="X8I-Yq-J1N" secondAttribute="bottom" id="2LY-OC-ZFU"/>
                                     <constraint firstItem="TAf-33-WDB" firstAttribute="leading" secondItem="BKo-zr-HHt" secondAttribute="leading" id="A38-UR-Tkc"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4Wm-bs-FdB" secondAttribute="bottom" id="Acv-4R-bRn"/>
                                     <constraint firstItem="5Oo-Yg-gJN" firstAttribute="top" secondItem="TAf-33-WDB" secondAttribute="bottom" constant="28" id="BFA-zK-B9y"/>
                                     <constraint firstItem="4Wm-bs-FdB" firstAttribute="centerX" secondItem="BKo-zr-HHt" secondAttribute="centerX" id="Ceq-ak-r5A"/>
+                                    <constraint firstItem="Q24-n9-ZVG" firstAttribute="leading" secondItem="BKo-zr-HHt" secondAttribute="leading" id="Cry-i8-JvS"/>
+                                    <constraint firstItem="Q24-n9-ZVG" firstAttribute="top" secondItem="5Oo-Yg-gJN" secondAttribute="bottom" constant="10" id="Lgl-Ea-HGo"/>
                                     <constraint firstItem="CuG-Ja-TKW" firstAttribute="centerX" secondItem="BKo-zr-HHt" secondAttribute="centerX" id="Qtx-6V-dNA"/>
                                     <constraint firstItem="5Oo-Yg-gJN" firstAttribute="leading" secondItem="BKo-zr-HHt" secondAttribute="leading" id="REx-Qq-hTq"/>
                                     <constraint firstAttribute="trailing" secondItem="5Oo-Yg-gJN" secondAttribute="trailing" id="VCq-gg-nOv"/>
@@ -696,8 +706,12 @@ L8</string>
                                     <constraint firstItem="X8I-Yq-J1N" firstAttribute="top" secondItem="5Oo-Yg-gJN" secondAttribute="bottom" constant="30" id="fST-FP-gUQ"/>
                                     <constraint firstAttribute="trailing" secondItem="TAf-33-WDB" secondAttribute="trailing" id="oIw-tF-CqP"/>
                                     <constraint firstItem="X8I-Yq-J1N" firstAttribute="leading" secondItem="BKo-zr-HHt" secondAttribute="leading" id="wZu-N0-5NQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q24-n9-ZVG" secondAttribute="trailing" id="yRy-nY-yaF"/>
                                     <constraint firstItem="X8I-Yq-J1N" firstAttribute="centerX" secondItem="BKo-zr-HHt" secondAttribute="centerX" id="zti-Fz-fGD"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Jbd-lY-cF6" appends="YES" id="Kvb-M7-k2x"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TJ8-nc-dOy"/>
@@ -711,6 +725,7 @@ L8</string>
                     </view>
                     <navigationItem key="navigationItem" id="fIn-xd-z7r"/>
                     <connections>
+                        <outlet property="table_view_mention_height" destination="mh8-X2-6Wz" id="BA7-aZ-vJv"/>
                         <outlet property="ui_image" destination="LVs-Fc-keM" id="Nby-Hc-ap8"/>
                         <outlet property="ui_image_placeholder" destination="BOX-XS-0iI" id="CF9-yo-3LX"/>
                         <outlet property="ui_iv_bt_add_remove" destination="14o-3O-ctt" id="5j0-P9-iZC"/>
@@ -718,6 +733,8 @@ L8</string>
                         <outlet property="ui_lb_message_dsc" destination="QnP-mX-NEr" id="kam-W8-yIs"/>
                         <outlet property="ui_lb_photo" destination="T8d-QZ-h4N" id="LUt-OF-h6N"/>
                         <outlet property="ui_lb_photo_dsc" destination="iV2-Uq-rBi" id="Fld-Ni-bdM"/>
+                        <outlet property="ui_tableview_mentions" destination="Q24-n9-ZVG" id="3fk-X7-5wM"/>
+                        <outlet property="ui_tap_gesture" destination="Jbd-lY-cF6" id="R3I-gx-jSH"/>
                         <outlet property="ui_title_button_validate" destination="eEB-fL-PoS" id="Owx-jH-oxf"/>
                         <outlet property="ui_top_view" destination="TAf-33-WDB" id="bG8-X9-ozS"/>
                         <outlet property="ui_tv_error" destination="x7A-Ht-Yix" id="ysG-a4-tKe"/>
@@ -727,6 +744,7 @@ L8</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AAs-8g-2Ww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Jbd-lY-cF6"/>
             </objects>
             <point key="canvasLocation" x="3369.5652173913045" y="-599.33035714285711"/>
         </scene>
