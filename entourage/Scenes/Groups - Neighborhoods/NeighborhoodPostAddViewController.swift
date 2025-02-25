@@ -271,8 +271,11 @@ class NeighborhoodPostAddViewController: UIViewController {
         if isNeighborhood {
             NeighborhoodService.getNeighborhoodUsersWithQuery(neighborhoodId: neighborhoodId, query: query) { [weak self] users, error in
                 guard let self = self else { return }
-                if let users = users, !users.isEmpty {
-                    let limitedUsers = Array(users.prefix(3))
+                // Filtrer les utilisateurs pour exclure l'utilisateur courant
+                let filteredUsers = users?.filter { $0.sid != UserDefaults.currentUser?.sid } ?? []
+                
+                if !filteredUsers.isEmpty {
+                    let limitedUsers = Array(filteredUsers.prefix(3))
                     self.mentionSuggestions = limitedUsers
                     let rowCount = self.mentionSuggestions.count
                     UIView.animate(withDuration: 0.2) {
@@ -288,8 +291,11 @@ class NeighborhoodPostAddViewController: UIViewController {
         } else {
             EventService.getEventUsersWithQuery(eventId: eventId, query: query) { [weak self] users, error in
                 guard let self = self else { return }
-                if let users = users, !users.isEmpty {
-                    let limitedUsers = Array(users.prefix(3))
+                // Filtrer les utilisateurs pour exclure l'utilisateur courant
+                let filteredUsers = users?.filter { $0.sid != UserDefaults.currentUser?.sid } ?? []
+                
+                if !filteredUsers.isEmpty {
+                    let limitedUsers = Array(filteredUsers.prefix(3))
                     self.mentionSuggestions = limitedUsers
                     let rowCount = self.mentionSuggestions.count
                     UIView.animate(withDuration: 0.2) {
@@ -304,6 +310,7 @@ class NeighborhoodPostAddViewController: UIViewController {
             }
         }
     }
+
     
     /// Masquage des suggestions de mention avec animation
     func hideMentionSuggestions() {
@@ -348,11 +355,17 @@ class NeighborhoodPostAddViewController: UIViewController {
         let atRange = fullTextNSString.range(of: "@", options: .backwards, range: searchRange)
         if atRange.location != NSNotFound {
             let replaceRange = NSRange(location: atRange.location, length: cursorLocation - atRange.location)
+            let baseUrl: String
+            if NetworkManager.sharedInstance.getBaseUrl().contains("preprod") {
+                baseUrl = "https://preprod.entourage.social/app/"
+            } else {
+                baseUrl = "https://www.entourage.social/app/"
+            }
             let linkURLString: String
             if isNeighborhood {
-                linkURLString = "https://preprod.entourage.social/app/users/\(user.sid)"
+                linkURLString = baseUrl + "users/\(user.sid)"
             } else {
-                linkURLString = "https://preprod.entourage.social/app/event/users/\(user.sid)"
+                linkURLString = baseUrl + "event/users/\(user.sid)"
             }
             guard let linkURL = URL(string: linkURLString) else { return }
             let linkAttributes: [NSAttributedString.Key: Any] = [

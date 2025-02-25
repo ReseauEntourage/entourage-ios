@@ -492,8 +492,12 @@ extension NeighborhoodMessageCell {
             }
         }
         
+        var _message = message.contentHtml
+        if _message == "" || _message ==  nil {
+            _message = message.content
+        }
         // 3) Par défaut, si rien n'est dispo
-        return attributedString(fromHTML: message.contentHtml ?? "Erreur de chargement", withBaseFont: NeighborhoodMessageCell.baseFont)
+        return attributedString(fromHTML: _message ?? "Erreur de chargement", withBaseFont: NeighborhoodMessageCell.baseFont)
     }
 }
 

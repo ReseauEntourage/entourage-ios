@@ -547,32 +547,30 @@ class ConversationDetailMessagesViewController: UIViewController {
             hideMentionSuggestions()
             return
         }
-
-        // On différencie le cas : query vide ou non
+        
         let q = query.lowercased()
-
-        // Filtre local
+        
+        // Filtrer les membres pour exclure l'utilisateur courant
         let filtered: [MemberLight]
         if q.isEmpty {
-            // Si query est vide, on affiche 3 membres (hors moi)
+            // Si query est vide, on affiche 3 membres hors de moi
             filtered = members.filter { $0.uid != meId }
         } else {
-            // Sinon, on filtre par username contenant le query
+            // Sinon, on filtre par username contenant la query et hors de moi
             filtered = members.filter {
                 let nameLC = $0.username?.lowercased() ?? ""
                 return nameLC.contains(q) && $0.uid != meId
             }
         }
-
-        // On limite à 3
+        
+        // Limiter à 3 suggestions
         let limited = Array(filtered.prefix(3))
-
-        // Si pas de résultat => on masque
+        
         if limited.isEmpty {
             hideMentionSuggestions()
             return
         }
-
+        
         // Conversion en UserLightNeighborhood
         mentionSuggestions = limited.map { member -> UserLightNeighborhood in
             var user = UserLightNeighborhood()
@@ -581,16 +579,17 @@ class ConversationDetailMessagesViewController: UIViewController {
             user.avatarURL = member.imageUrl
             return user
         }
-
-        // Ajustement de la contrainte
+        
+        // Ajustement de la contrainte d'affichage
         UIView.animate(withDuration: 0.2) {
             self.table_view_mention_height.constant = self.mentionCellHeight * CGFloat(self.mentionSuggestions.count)
             self.view.layoutIfNeeded()
         }
-
+        
         ui_tableview_mentions.reloadData()
         animateShowTableViewMentions()
     }
+
 
     func hideMentionSuggestions() {
         mentionSuggestions = []

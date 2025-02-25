@@ -369,14 +369,16 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             query: query
         ) { [weak self] users, error in
             guard let self = self else { return }
-            if let users = users, !users.isEmpty {
-                // On limite à 3
-                let limitedUsers = Array(users.prefix(3))
+            // Filtrer les utilisateurs pour exclure l'utilisateur courant
+            let filteredUsers = users?.filter { $0.sid != UserDefaults.currentUser?.sid } ?? []
+            
+            if !filteredUsers.isEmpty {
+                // On limite à 3 suggestions
+                let limitedUsers = Array(filteredUsers.prefix(3))
                 self.mentionSuggestions = limitedUsers
                 
-                // On calcule la hauteur qu'on veut afficher
+                // Calcul de la hauteur à afficher en fonction du nombre de suggestions
                 let rowCount = self.mentionSuggestions.count
-                // Ajuste la contrainte en fonction du rowCount
                 UIView.animate(withDuration: 0.2) {
                     self.table_view_mention_height.constant = self.mentionCellHeight * CGFloat(rowCount)
                     self.view.layoutIfNeeded()
@@ -389,6 +391,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             }
         }
     }
+
 
     /// Masque le tableau des suggestions de mention (avec animation)
     func hideMentionSuggestions() {
@@ -427,7 +430,14 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         let atRange = fullTextNSString.range(of: "@", options: .backwards, range: searchRange)
         if atRange.location != NSNotFound {
             let replaceRange = NSRange(location: atRange.location, length: cursorLocation - atRange.location)
-            let linkURLString = "https://preprod.entourage.social/app/users/\(user.sid)"
+            let baseUrl: String
+            if NetworkManager.sharedInstance.getBaseUrl().contains("preprod") {
+                baseUrl = "https://preprod.entourage.social/app/"
+            } else {
+                baseUrl = "https://www.entourage.social/app/"
+            }
+            let linkURLString: String
+            linkURLString = baseUrl + "users/\(user.sid)"
             guard let linkURL = URL(string: linkURLString) else { return }
             let linkAttributes: [NSAttributedString.Key: Any] = [
                 .link: linkURL,

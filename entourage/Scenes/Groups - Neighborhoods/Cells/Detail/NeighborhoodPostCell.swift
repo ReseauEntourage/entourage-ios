@@ -476,7 +476,7 @@ class NeighborhoodPostCell: UITableViewCell {
         
         // Si aucune chaîne n'est disponible, on vide le label
         guard let htmlContent = htmlContent, let data = htmlContent.data(using: .utf8) else {
-            ui_comment.text = ""
+            ui_comment.text = postMessage.content
             return
         }
         
