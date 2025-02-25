@@ -97,7 +97,11 @@ class NotificationDemandViewController: UIViewController {
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
-            self?.goHomeMain()
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                if UIApplication.shared.canOpenURL(settingsURL) {
+                    UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                }
+            }
         }))
         self.present(alert, animated: true, completion: nil)
     }

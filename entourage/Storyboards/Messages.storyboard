@@ -208,7 +208,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTZ-7t-qL7">
-                                        <rect key="frame" x="32" y="44" width="64.5" height="30"/>
+                                        <rect key="frame" x="20" y="32" width="64.5" height="30"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -231,12 +231,12 @@
                                 <constraints>
                                     <constraint firstItem="cRZ-PA-DJe" firstAttribute="top" secondItem="LA3-Gj-VqA" secondAttribute="top" constant="8" id="0Ik-km-YdA"/>
                                     <constraint firstAttribute="trailing" secondItem="cRZ-PA-DJe" secondAttribute="trailing" constant="16" id="2du-Qn-NtN"/>
-                                    <constraint firstItem="6Rf-5V-aAC" firstAttribute="top" secondItem="kTZ-7t-qL7" secondAttribute="bottom" constant="8" id="6rN-8y-LCP"/>
+                                    <constraint firstItem="6Rf-5V-aAC" firstAttribute="top" secondItem="kTZ-7t-qL7" secondAttribute="bottom" constant="20" id="6rN-8y-LCP"/>
                                     <constraint firstAttribute="height" constant="109" id="7nb-uA-6wa"/>
                                     <constraint firstAttribute="bottom" secondItem="6Rf-5V-aAC" secondAttribute="bottom" constant="-25" id="FRi-Wr-0xU"/>
                                     <constraint firstItem="kTZ-7t-qL7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LA3-Gj-VqA" secondAttribute="top" constant="8" id="PI5-zv-eXp"/>
                                     <constraint firstAttribute="trailing" secondItem="DIY-PJ-gYy" secondAttribute="trailing" id="Wcr-b8-4X3"/>
-                                    <constraint firstItem="kTZ-7t-qL7" firstAttribute="leading" secondItem="LA3-Gj-VqA" secondAttribute="leading" constant="32" id="apK-Qg-YB4"/>
+                                    <constraint firstItem="kTZ-7t-qL7" firstAttribute="leading" secondItem="LA3-Gj-VqA" secondAttribute="leading" constant="20" id="apK-Qg-YB4"/>
                                     <constraint firstAttribute="trailing" secondItem="6Rf-5V-aAC" secondAttribute="trailing" constant="3" id="dll-t5-uQz"/>
                                     <constraint firstItem="DIY-PJ-gYy" firstAttribute="leading" secondItem="LA3-Gj-VqA" secondAttribute="leading" id="h4T-0q-O60"/>
                                     <constraint firstItem="DIY-PJ-gYy" firstAttribute="top" secondItem="LA3-Gj-VqA" secondAttribute="top" id="haF-q3-TpP"/>
@@ -1369,7 +1369,7 @@ L2</string>
         <image name="ic_button_retry_red" width="10" height="11"/>
         <image name="ic_close_orange_v8" width="20" height="20"/>
         <image name="ic_messages_top" width="75" height="66"/>
-        <image name="ic_no_message_neighborhood" width="307.20001220703125" height="144"/>
+        <image name="ic_no_message_neighborhood" width="308" height="144"/>
         <image name="ic_quit_action" width="20" height="20"/>
         <image name="ic_send_comment" width="54" height="54"/>
         <image name="ic_send_msg" width="18" height="19"/>
