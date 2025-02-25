@@ -86,7 +86,7 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         
         // Configuration des images des membres
         [ui_img_member_1, ui_img_member_2, ui_img_member_3].forEach { imageView in
-            imageView?.layer.cornerRadius = imageView?.frame.height ?? 0 / 2
+            imageView?.layer.cornerRadius = (imageView?.frame.height ?? 0) / 2
             imageView?.clipsToBounds = true
         }
         

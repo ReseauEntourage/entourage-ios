@@ -36,9 +36,13 @@ class ConversationsMainHomeViewController: UIViewController {
     }
 
     func checkNotificationStatus() {
-        // Vérification de l'état des notifications (mock ou logique réelle)
-        notificationsDisabled = !UIApplication.shared.isRegisteredForRemoteNotifications
-        print("eho " , notificationsDisabled)
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                let notificationsDisabled = settings.authorizationStatus != .authorized
+                print("Notifications disabled: ", notificationsDisabled)
+                self.notificationsDisabled = notificationsDisabled
+            }
+        }
     }
 
     func reloadWithoutNotificationCell() {

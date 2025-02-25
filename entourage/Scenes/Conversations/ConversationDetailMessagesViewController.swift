@@ -693,8 +693,16 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         _ = ui_textview_message.resignFirstResponder()
         hideMentionSuggestions()
-    }
-}
+        
+        // Réinitialisation complète du UITextView
+        ui_textview_message.text = ""
+        ui_textview_message.attributedText = NSAttributedString(string: "")
+        let styleReset = ApplicationTheme.getFontCourantRegularNoir()  // Utiliser le style initial
+        ui_textview_message.typingAttributes = [
+            .font: styleReset.font,
+            .foregroundColor: styleReset.color
+        ]
+    }}
 
 // MARK: - TableView (Messages & Mentions)
 extension ConversationDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {

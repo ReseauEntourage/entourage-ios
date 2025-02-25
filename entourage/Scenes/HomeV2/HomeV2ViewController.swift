@@ -478,7 +478,7 @@ class HomeV2ViewController: UIViewController {
             self.ui_view_notif.backgroundColor = UIColor.white
         } else {
             self.ui_image_notif.image = UIImage(named: "ic_notif_on")
-            self.ui_view_notif.backgroundColor = UIColor.appOrange
+            self.ui_view_notif.backgroundColor = UIColor.appOrangeDark
         }
         prepareUINotifAndAvatar()
     }

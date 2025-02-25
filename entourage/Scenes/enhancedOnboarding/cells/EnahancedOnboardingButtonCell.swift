@@ -32,6 +32,8 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
     
     func configure(){
         ui_btn_configure_later.addTarget(self, action: #selector(onConfigureLaterClick), for: .touchUpInside)
+        self.ui_btn_next.setTitle("validate".localized, for: .normal)
+        self.ui_btn_configure_later.setTitle("cancel".localized, for: .normal)
         ui_btn_next.addTarget(self, action: #selector(onBtnNextClick), for: .touchUpInside)
     }
     

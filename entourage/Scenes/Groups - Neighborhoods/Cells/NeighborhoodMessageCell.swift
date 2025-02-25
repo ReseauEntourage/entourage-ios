@@ -461,6 +461,8 @@ extension NeighborhoodMessageCell {
     
     /// Récupère l'AttributedString final (HTML ou texte simple), en tenant compte d'une éventuelle traduction.
     private func getAttributedDisplayText(for message: PostMessage, isTranslated: Bool) -> NSAttributedString {
+        
+        print("eho " , message.contentHtml)
         // 1) Si le message est marqué "traduit"
         if isTranslated {
             // Priorité au HTML traduit

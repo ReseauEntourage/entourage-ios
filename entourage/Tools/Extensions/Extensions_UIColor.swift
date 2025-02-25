@@ -81,6 +81,10 @@ extension UIColor {
     static var appOrange: UIColor {
         return UIColor(named: "orange_app") ?? .red
     }
+    static var appOrangeDark: UIColor {
+        return UIColor(named: "orange_dark") ?? .red
+    }
+    
     static var appOrangeLight: UIColor {
         return UIColor(named: "orange_light") ?? .red
     }
