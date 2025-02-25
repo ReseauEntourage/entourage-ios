@@ -174,7 +174,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         // Gestion status
         if let status = message.status {
             if status == "deleted" {
-                let padding = NSAttributedString(string: "   ") // 3 espaces pour du padding
+                let padding = NSAttributedString(string: "  ") // 3 espaces pour du padding
                 let messageText = NSAttributedString(string: "deleted_comment".localized, attributes: [
                     .foregroundColor: UIColor.appGreyTextDeleted
                 ])
@@ -191,7 +191,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 }
             }
             else if status == "offensive" || status == "offensible" {
-                let padding = NSAttributedString(string: "   ") // 3 espaces pour du padding
+                let padding = NSAttributedString(string: "        ") // 3 espaces pour du padding
                 let messageText = NSAttributedString(string: "content_removed".localized, attributes: [
                     .foregroundColor: UIColor.appGreyTextDeleted
                 ])
@@ -268,7 +268,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         if let status = message.status {
             if status == "deleted" {
                 ui_message.text = "deleted_message".localized
-                let padding = NSAttributedString(string: "") // 3 espaces pour du padding
+                let padding = NSAttributedString(string: "   ") // 3 espaces pour du padding
                 let messageText = NSAttributedString(string: "deleted_comment".localized, attributes: [
                     .foregroundColor: UIColor.appGreyTextDeleted
                 ])
@@ -284,7 +284,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 }
             }
             else if status == "offensive" || status == "offensible" {
-                let padding = NSAttributedString(string: "      ") // 3 espaces pour du padding
+                let padding = NSAttributedString(string: "        ") // 3 espaces pour du padding
                 let messageText = NSAttributedString(string: "content_removed".localized, attributes: [
                     .foregroundColor: UIColor.appGreyTextDeleted
                 ])
