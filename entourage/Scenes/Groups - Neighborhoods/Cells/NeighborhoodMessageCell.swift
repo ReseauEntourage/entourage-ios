@@ -52,7 +52,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     weak var delegate: MessageCellSignalDelegate? = nil
     
     // Changez "private" en "fileprivate" pour que ce membre soit accessible dans l'extension
-    fileprivate static let baseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+    fileprivate static let baseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 28)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -174,17 +174,34 @@ class NeighborhoodMessageCell: UITableViewCell {
         // Gestion status
         if let status = message.status {
             if status == "deleted" {
-                ui_message.text = "deleted_comment".localized
-                ui_message.textColor = UIColor.appGreyTextDeleted
+                let padding = NSAttributedString(string: "   ") // 3 espaces pour du padding
+                let messageText = NSAttributedString(string: "deleted_comment".localized, attributes: [
+                    .foregroundColor: UIColor.appGreyTextDeleted
+                ])
+
+                let finalText = NSMutableAttributedString()
+                finalText.append(padding) // Ajoute du padding gauche
+                finalText.append(messageText) // Ajoute le vrai message
+                ui_message.attributedText = finalText
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
                 if let deletedImageView = deletedImageView,
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
                     ui_message.superview?.addSubview(deletedImageView)
+                    
                 }
             }
             else if status == "offensive" || status == "offensible" {
-                ui_message.text = "content_removed".localized
-                ui_message.textColor = UIColor.appGreyTextDeleted
+                let padding = NSAttributedString(string: "   ") // 3 espaces pour du padding
+                let messageText = NSAttributedString(string: "content_removed".localized, attributes: [
+                    .foregroundColor: UIColor.appGreyTextDeleted
+                ])
+
+                let finalText = NSMutableAttributedString()
+                finalText.append(padding) // Ajoute du padding gauche
+                finalText.append(messageText) // Ajoute le vrai message
+
+                ui_message.attributedText = finalText
+                
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
                 if let deletedImageView = deletedImageView,
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
@@ -210,7 +227,7 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: isTranslated)
             ui_message.textColor = UIColor.black
         }
-        
+        ui_message.setFontBody(size: 13)
         layoutIfNeeded()
     }
     
@@ -251,7 +268,15 @@ class NeighborhoodMessageCell: UITableViewCell {
         if let status = message.status {
             if status == "deleted" {
                 ui_message.text = "deleted_message".localized
-                ui_message.textColor = UIColor.appGreyTextDeleted
+                let padding = NSAttributedString(string: "") // 3 espaces pour du padding
+                let messageText = NSAttributedString(string: "deleted_comment".localized, attributes: [
+                    .foregroundColor: UIColor.appGreyTextDeleted
+                ])
+
+                let finalText = NSMutableAttributedString()
+                finalText.append(padding) // Ajoute du padding gauche
+                finalText.append(messageText) // Ajoute le vrai message
+                ui_message.attributedText = finalText
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
                 if let deletedImageView = deletedImageView,
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
@@ -259,8 +284,16 @@ class NeighborhoodMessageCell: UITableViewCell {
                 }
             }
             else if status == "offensive" || status == "offensible" {
-                ui_message.text = "content_removed".localized
-                ui_message.textColor = UIColor.appGreyTextDeleted
+                let padding = NSAttributedString(string: "      ") // 3 espaces pour du padding
+                let messageText = NSAttributedString(string: "content_removed".localized, attributes: [
+                    .foregroundColor: UIColor.appGreyTextDeleted
+                ])
+
+                let finalText = NSMutableAttributedString()
+                finalText.append(padding) // Ajoute du padding gauche
+                finalText.append(messageText) // Ajoute le vrai message
+
+                ui_message.attributedText = finalText
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
                 if let deletedImageView = deletedImageView,
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
@@ -317,7 +350,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 }
             }
         }
-        
+        ui_message.setFontBody(size: 13)
         layoutIfNeeded()
     }
     

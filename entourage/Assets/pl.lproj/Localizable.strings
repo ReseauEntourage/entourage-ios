@@ -585,8 +585,8 @@
 "suppress_message_cell_subtitle" = "";
 "suppress_comment_cell_subtitle" = "";
 
-"deleted_message" = "      Ce message a été supprimé";
-"deleted_comment" = "      Ce commentaire a été supprimé";
+"deleted_message" = "Ce message a été supprimé";
+"deleted_comment" = "Ce commentaire a été supprimé";
 
 /********
  GROUP
