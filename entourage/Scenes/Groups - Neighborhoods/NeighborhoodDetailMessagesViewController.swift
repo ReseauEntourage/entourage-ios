@@ -306,12 +306,12 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                     }
                 }
             }
-
-            self.ui_iv_bt_send.isUserInteractionEnabled = false
             IHProgressHUD.show()
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.ui_iv_bt_send.isUserInteractionEnabled = false
+            self.ui_view_txtview.isUserInteractionEnabled = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.ui_iv_bt_send.isUserInteractionEnabled = true
+                self.ui_view_txtview.isUserInteractionEnabled = true
                 IHProgressHUD.dismiss()
             }
         }

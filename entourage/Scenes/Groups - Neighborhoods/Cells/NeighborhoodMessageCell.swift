@@ -460,7 +460,7 @@ extension NeighborhoodMessageCell {
         }
         
         // 3) Par défaut, si rien n'est dispo
-        return NSAttributedString(string: "", attributes: [.font: NeighborhoodMessageCell.baseFont])
+        return attributedString(fromHTML: message.contentHtml ?? "Erreur de chargement", withBaseFont: NeighborhoodMessageCell.baseFont)
     }
 }
 

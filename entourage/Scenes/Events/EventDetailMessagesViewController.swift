@@ -11,6 +11,7 @@
 //  Désormais, on limite à 3 suggestions max et on affiche déjà des suggestions quand query est vide.
 import UIKit
 import IQKeyboardManagerSwift
+import IHProgressHUD
 
 class EventDetailMessagesViewController: UIViewController {
 
@@ -66,7 +67,8 @@ class EventDetailMessagesViewController: UIViewController {
         // Pour que le tapGesture n’intercepte pas les touches destinées à d’autres vues
         ui_tap_gesture.cancelsTouchesInView = false
         ui_tap_gesture.delegate = self
-        
+        IHProgressHUD.show()
+
         // Désactiver IQKeyboardManager sur cette vue
         IQKeyboardManager.shared.enable = false
         
@@ -239,6 +241,8 @@ class EventDetailMessagesViewController: UIViewController {
         EventService.getCommentsFor(eventId: _eventId, parentPostId: _postId) { messages, error in
             if let messages = messages {
                 self.messages = messages
+                print("eho message last " , messages.last?.content)
+                print("eho message last " , messages.last?.contentHtml)
                 self.ui_view_empty.isHidden = (self.messages.count > 0)
                 self.setItemsTranslated(messages: messages)
                 self.ui_tableview.reloadData()
@@ -247,11 +251,16 @@ class EventDetailMessagesViewController: UIViewController {
                     self.getDetailPost()
                     return
                 }
-                
+
                 if self.messages.count + self.messagesForRetry.count > 0 {
                     DispatchQueue.main.async {
-                        let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
-                        self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                        let lastRow = self.ui_tableview.numberOfRows(inSection: 0) - 1
+                        if lastRow >= 0 {
+                            let indexPath = IndexPath(row: lastRow, section: 0)
+                            self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                            IHProgressHUD.dismiss()
+
+                        }
                     }
                 }
             }
@@ -282,7 +291,10 @@ class EventDetailMessagesViewController: UIViewController {
                 if isRetry, positionForRetry >= 0, positionForRetry < self.messagesForRetry.count {
                     self.messagesForRetry.remove(at: positionForRetry)
                 }
-                self.getMessages()
+                IHProgressHUD.show()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.getMessages()
+                }
             } else {
                 if !isRetry {
                     var postMsg = PostMessage()
@@ -304,8 +316,11 @@ class EventDetailMessagesViewController: UIViewController {
             }
             // Ici, à défaut d'un HUD, on peut désactiver temporairement l'interaction sur le bouton
             self.ui_iv_bt_send.isUserInteractionEnabled = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.ui_view_txtview.isUserInteractionEnabled = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.ui_iv_bt_send.isUserInteractionEnabled = true
+                self.ui_view_txtview.isUserInteractionEnabled = true
+
             }
         }
     }
