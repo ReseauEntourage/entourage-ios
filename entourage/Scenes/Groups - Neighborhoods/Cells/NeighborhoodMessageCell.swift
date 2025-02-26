@@ -105,12 +105,17 @@ class NeighborhoodMessageCell: UITableViewCell {
         deletedImageView?.frame = CGRect(x: 16, y: 16, width: 15, height: 15)
         deletedImageView?.tintColor = UIColor.gray
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        // RESET COMPLET des styles et de l'état de la cellule avant réutilisation
         ui_message.attributedText = nil
-        ui_message.textColor = UIColor.black
+        ui_message.text = nil
+        ui_image_user.image = UIImage(named: "placeholder_user")
+        ui_view_message.backgroundColor = .clear
     }
+
     
      func handleTapOnMessage(_ sender: UITapGestureRecognizer) {
         guard let html = innerPostMessage?.contentHtml, !html.isEmpty else { return }
@@ -149,7 +154,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                       positionRetry: Int = 0,
                       delegate: MessageCellSignalDelegate,
                       isTranslated: Bool) {
-        
+        ui_message.attributedText = nil
         print("contentHtml ", message.contentHtml)
         
         innerPostMessage = message
@@ -416,29 +421,35 @@ extension NeighborhoodMessageCell {
         do {
             let attrString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
             let fullRange = NSRange(location: 0, length: attrString.length)
+
+            // 🔄 RESET COMPLET DES ATTRIBUTS HÉRITÉS D’UNE CELLULE RÉUTILISÉE
+            attrString.removeAttribute(.foregroundColor, range: fullRange)
+            attrString.removeAttribute(.underlineStyle, range: fullRange)
+            attrString.removeAttribute(.link, range: fullRange)
             
-            // Applique la police de base sur l'ensemble du texte
+            // ✅ Applique la police et la couleur de base
             attrString.addAttribute(.font, value: font, range: fullRange)
-            // Réinitialise toute la couleur à noir
             attrString.addAttribute(.foregroundColor, value: UIColor.black, range: fullRange)
-            
-            // Parcourt les attributs .link pour ajuster la couleur en bleu et ajouter le soulignement
+
+            // 🔗 Applique le style spécifique aux liens détectés
             attrString.enumerateAttribute(.link, in: fullRange, options: []) { (value, range, _) in
                 if value != nil {
                     attrString.addAttribute(.foregroundColor, value: unifiedBlue, range: range)
                     attrString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
                 }
             }
-            
-            // Supprime les sauts de ligne ou espaces de fin
+
+            // 🧹 Supprime les espaces et sauts de ligne en fin de texte pour éviter les artefacts
             while attrString.string.hasSuffix("\n") || attrString.string.hasSuffix(" ") {
                 attrString.deleteCharacters(in: NSRange(location: attrString.length - 1, length: 1))
             }
+
             return attrString
         } catch {
             return NSAttributedString(string: html, attributes: [.font: font, .foregroundColor: UIColor.black])
         }
     }
+
 
     
     /// Construit un NSAttributedString « brut » à partir de texte simple.
