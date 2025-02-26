@@ -67,15 +67,29 @@ class NeighborhoodPostCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let customTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCustomCommentTap))
-        customTapGesture.cancelsTouchesInView = false
-        // Faire en sorte que notre geste attende l'échec des autres gestes (par exemple ceux gérés par ActiveLabel)
-        if let gestures = ui_comment.gestureRecognizers {
-            for gesture in gestures where gesture is UITapGestureRecognizer && gesture !== customTapGesture {
-                customTapGesture.require(toFail: gesture)
+        let customMentionType = ActiveType.custom(pattern: "(@[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\\s+[A-Za-zÀ-ÖØ-öø-ÿ]+)?)")
+            
+            // Activez les types URL et le type personnalisé pour les mentions
+            ui_comment.enabledTypes = [.url, customMentionType]
+            
+            ui_comment.customize { label in
+                label.URLColor = .blue
+                label.customColor[customMentionType] = .blue
+                label.URLSelectedColor = .blue
+                label.customSelectedColor[customMentionType] = .blue
+                
+                // Gérer le tap sur une URL
+                label.handleURLTap { url in
+                    // Par exemple, ouvrir dans Safari
+                    self.delegate?.showWebviewUrl(url: url)
+                }
+                
+                // Gérer le tap sur une mention
+                label.handleCustomTap(for: customMentionType) { [weak self] mention in
+                    print("Tap mention: \(mention)")
+                    self?.openUrlForMentionInComment(mention: mention)
+                }
             }
-        }
-        ui_comment.addGestureRecognizer(customTapGesture)
 
         ui_comment.URLColor = .blue
 
@@ -215,6 +229,61 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         layoutIfNeeded()
     }
+    
+    private func stripHTMLTags(from string: String) -> String {
+        guard let data = string.data(using: .utf8) else { return string }
+        if let attributed = try? NSAttributedString(data: data,
+                                                    options: [.documentType: NSAttributedString.DocumentType.html,
+                                                              .characterEncoding: String.Encoding.utf8.rawValue],
+                                                    documentAttributes: nil) {
+            return attributed.string
+        }
+        return string
+    }
+
+    private func cleanedMention(_ mention: String) -> String {
+        // Supprime les espaces et ponctuations en fin (et début si nécessaire)
+        return mention.trimmingCharacters(in: .whitespacesAndNewlines)
+                      .trimmingCharacters(in: CharacterSet.punctuationCharacters)
+    }
+
+    private func extractUrlForMention(from html: String, mention: String) -> URL? {
+        // Expression régulière pour extraire l'URL et le contenu de la balise <a>
+        let pattern = "<a\\s+[^>]*href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>"
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
+            return nil
+        }
+        
+        let nsString = html as NSString
+        let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: nsString.length))
+        
+        for match in matches {
+            if match.numberOfRanges >= 3 {
+                let urlString = nsString.substring(with: match.range(at: 1))
+                let rawLinkText = nsString.substring(with: match.range(at: 2)).trimmingCharacters(in: .whitespacesAndNewlines)
+                let linkText = stripHTMLTags(from: rawLinkText)
+                
+                // Comparez les mentions nettoyées
+                if cleanedMention(linkText) == cleanedMention(mention) {
+                    return URL(string: urlString)
+                }
+            }
+        }
+        return nil
+    }
+
+
+    private func openUrlForMentionInComment(mention: String) {
+        guard let html = postMessage.contentHtml, !html.isEmpty else { return }
+        if let url = extractUrlForMention(from: html, mention: mention) {
+            WebLinkManager.openUrl(url: url,
+                                   openInApp: true,
+                                   presenterViewController: AppState.getTopViewController())
+        } else {
+            print("Aucun lien trouvé pour la mention: \(mention)")
+        }
+    }
+
     
    
 
@@ -465,37 +534,23 @@ class NeighborhoodPostCell: UITableViewCell {
     }
     
     func updateCommentAttributedText() {
-        // Choisir la chaîne HTML à afficher : traduction ou contenu original
         var htmlContent: String?
         if let translations = postMessage.contentTranslationsHtml {
-            // Si on est en mode traduit, on affiche la traduction, sinon l'original
             htmlContent = isTranslated ? translations.translation : translations.original
         } else {
             htmlContent = postMessage.contentHtml
         }
         
-        // Si aucune chaîne n'est disponible, on vide le label
-        guard let htmlContent = htmlContent, let data = htmlContent.data(using: .utf8) else {
+        guard let htmlContent = htmlContent else {
             ui_comment.text = postMessage.content
             return
         }
         
-        do {
-            // Conversion du HTML en NSAttributedString pour un rendu riche
-            let attributedString = try NSAttributedString(data: data,
-                                                          options: [
-                                                            .documentType: NSAttributedString.DocumentType.html,
-                                                            .characterEncoding: String.Encoding.utf8.rawValue
-                                                          ],
-                                                          documentAttributes: nil)
-            ui_comment.attributedText = attributedString
-        } catch {
-            print("Erreur lors de la conversion du HTML : \(error)")
-            ui_comment.text = htmlContent
-        }
+        // Utilise stripHTMLTags pour obtenir le texte brut complet
+        let plainText = stripHTMLTags(from: htmlContent)
+        ui_comment.text = plainText
         ui_comment.setFontBody(size: 15)
     }
-
 
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?, isMember:Bool?) {
@@ -503,6 +558,7 @@ class NeighborhoodPostCell: UITableViewCell {
         if(ui_view_translate != nil){
             ui_view_translate.addGestureRecognizer(tapGesture)
         }
+        print("content html " , message.contentHtml)
         if self.ui_label_sharing_header != nil {
             self.ui_label_sharing_header.text = "action_social_name".localized
             if let autoPost = message.autoPostFrom {

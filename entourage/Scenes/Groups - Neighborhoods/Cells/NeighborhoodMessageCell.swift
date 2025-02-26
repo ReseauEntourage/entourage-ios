@@ -57,9 +57,10 @@ class NeighborhoodMessageCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        // Configuration habituelle de l'interface
         ui_image_user.layer.cornerRadius = ui_image_user.frame.height / 2
         ui_view_message.layer.cornerRadius = radius
-        
+
         ui_message.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_date.setupFontAndColor(style: MJTextFontColorStyle(font: NeighborhoodMessageCell.baseFont, color: .black))
         ui_username.setupFontAndColor(style: MJTextFontColorStyle(font: NeighborhoodMessageCell.baseFont, color: .black))
@@ -67,27 +68,35 @@ class NeighborhoodMessageCell: UITableViewCell {
         let alertTheme = MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegularItalic(size: 11), color: .red)
         ui_lb_error?.setupFontAndColor(style: alertTheme)
         ui_lb_error?.text = "neighborhood_error_messageSend".localized
+
+        // Définissez un type actif personnalisé pour la mention.
+        // Cette regex autorise "@", suivi d'au moins une lettre (avec accents possibles)
+        // puis éventuellement un espace suivi d'une lettre et d'un point.
+        let customMentionType = ActiveType.custom(pattern: "(@[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\\s+[A-Za-zÀ-ÖØ-öø-ÿ]\\.)?)")
         
-        // ActiveLabel : activer la détection d'URL et de mentions
-        ui_message.enabledTypes = [.url, .mention]
-        ui_message.URLColor = unifiedBlue
-        ui_message.mentionColor = unifiedBlue
-        ui_message.URLSelectedColor = unifiedBlue
-        ui_message.mentionSelectedColor = unifiedBlue
-        ui_message.handleURLTap { [weak self] url in
-            WebLinkManager.openUrl(url: url,
-                                   openInApp: true,
-                                   presenterViewController: AppState.getTopViewController())
-        }
-        ui_message.handleMentionTap { mention in
-            // Action sur la mention, par exemple :
-            print("Tap mention: \(mention)")
-        }
+        // Activez les types URL et votre type personnalisé pour les mentions.
+        ui_message.enabledTypes = [.url, customMentionType]
         
-        // Ajouter un tap gesture pour gérer le clic sur le label (pour extraire l'URL)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnMessage(_:)))
-        ui_message.isUserInteractionEnabled = true
-        ui_message.addGestureRecognizer(tapGesture)
+        // Configurez ActiveLabel dans un bloc customize
+        ui_message.customize { label in
+            label.URLColor = unifiedBlue
+            // Associez la couleur personnalisée à votre type de mention.
+            label.customColor[customMentionType] = unifiedBlue
+            label.URLSelectedColor = unifiedBlue
+            label.customSelectedColor[customMentionType] = unifiedBlue
+
+            // Gère le tap sur une URL
+            label.handleURLTap { [weak self] url in
+                WebLinkManager.openUrl(url: url,
+                                       openInApp: true,
+                                       presenterViewController: AppState.getTopViewController())
+            }
+            // Gère le tap sur une mention (utilise votre type personnalisé)
+            label.handleCustomTap(for: customMentionType) { [weak self] mention in
+                print("Tap mention: \(mention)")
+                self?.openUrlForMention(mention: mention)
+            }
+        }
         
         ui_message.enableLongPressCopy()
         
@@ -96,8 +105,9 @@ class NeighborhoodMessageCell: UITableViewCell {
         deletedImageView?.frame = CGRect(x: 16, y: 16, width: 15, height: 15)
         deletedImageView?.tintColor = UIColor.gray
     }
+
     
-    @objc func handleTapOnMessage(_ sender: UITapGestureRecognizer) {
+     func handleTapOnMessage(_ sender: UITapGestureRecognizer) {
         guard let html = innerPostMessage?.contentHtml, !html.isEmpty else { return }
         
         // Première tentative : extraction via balise <a href="...">
@@ -134,6 +144,8 @@ class NeighborhoodMessageCell: UITableViewCell {
                       positionRetry: Int = 0,
                       delegate: MessageCellSignalDelegate,
                       isTranslated: Bool) {
+        
+        print("contentHtml ", message.contentHtml)
         
         innerPostMessage = message
         messageId = message.uid
@@ -427,6 +439,56 @@ extension NeighborhoodMessageCell {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         return NSAttributedString(string: trimmed, attributes: [.font: font, .foregroundColor: UIColor.black])
     }
+    
+    private func extractUrlForMention(from html: String, mention: String) -> URL? {
+        let pattern = "<a\\s+[^>]*href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>"
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
+            return nil
+        }
+        
+        let nsString = html as NSString
+        let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: nsString.length))
+        
+        for match in matches {
+            if match.numberOfRanges >= 3 {
+                let urlString = nsString.substring(with: match.range(at: 1))
+                let rawLinkText = nsString.substring(with: match.range(at: 2))
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                // Nettoie le texte pour retirer les balises HTML éventuelles
+                let linkText = stripHTMLTags(from: rawLinkText)
+                
+                // Compare directement le texte nettoyé avec la mention (ex: "@Nicolas E.")
+                if linkText == mention {
+                    return URL(string: urlString)
+                }
+            }
+        }
+        return nil
+    }
+
+
+    private func openUrlForMention(mention: String) {
+        guard let html = innerPostMessage?.contentHtml, !html.isEmpty else { return }
+        if let url = extractUrlForMention(from: html, mention: mention) {
+            WebLinkManager.openUrl(url: url,
+                                   openInApp: true,
+                                   presenterViewController: AppState.getTopViewController())
+        } else {
+            print("Aucun lien trouvé pour la mention: \(mention)")
+        }
+    }
+
+    private func stripHTMLTags(from string: String) -> String {
+        guard let data = string.data(using: .utf8) else { return string }
+        if let attributedString = try? NSAttributedString(data: data,
+                                                          options: [.documentType: NSAttributedString.DocumentType.html,
+                                                                    .characterEncoding: String.Encoding.utf8.rawValue],
+                                                          documentAttributes: nil) {
+            return attributedString.string
+        }
+        return string
+    }
+
     
     /// Essaie d'extraire une URL (dans un <a href=...> ou brute) depuis une chaîne HTML
     private func extractUrl(from input: String) -> URL? {
