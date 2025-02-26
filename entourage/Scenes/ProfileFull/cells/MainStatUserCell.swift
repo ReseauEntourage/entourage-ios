@@ -78,7 +78,7 @@ class MainStatUserCell:UITableViewCell {
         }else{
             ui_member_date.text = ""
         }
-        ui_member_date.setFontBody(size: 15)
+        ui_member_title.setFontBody(size: 15)
         ui_member_date.setFontTitle(size: 15)
     }
     

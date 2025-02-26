@@ -501,7 +501,9 @@ class ProfilFullViewController: UIViewController {
                 subtitle: ""
             ))
         }
-        tableDTO.append(.version(version: getAppVersion()))
+        if(isMe){
+            tableDTO.append(.version(version: getAppVersion()))
+        }
         configureNotMeView()
         // On recharge le tableau
         ui_table_view.reloadData()
