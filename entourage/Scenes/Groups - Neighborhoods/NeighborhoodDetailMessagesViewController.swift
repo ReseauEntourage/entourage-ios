@@ -481,6 +481,8 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             .font: styleReset.font,
             .foregroundColor: styleReset.color
         ]
+        ui_textview_message.textColor = UIColor.appOrange
+
     }
 
     // MARK: - Animations pour la tableview des mentions

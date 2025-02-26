@@ -105,7 +105,12 @@ class NeighborhoodMessageCell: UITableViewCell {
         deletedImageView?.frame = CGRect(x: 16, y: 16, width: 15, height: 15)
         deletedImageView?.tintColor = UIColor.gray
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        ui_message.attributedText = nil
+        ui_message.textColor = UIColor.black
+    }
     
      func handleTapOnMessage(_ sender: UITapGestureRecognizer) {
         guard let html = innerPostMessage?.contentHtml, !html.isEmpty else { return }
@@ -400,27 +405,28 @@ extension NeighborhoodMessageCell {
     /// Construit un NSAttributedString à partir d'une chaîne HTML + police de base.
     private func attributedString(fromHTML html: String, withBaseFont font: UIFont) -> NSAttributedString {
         guard let data = html.data(using: .utf8) else {
-            return NSAttributedString(string: html, attributes: [.font: font])
+            return NSAttributedString(string: html, attributes: [.font: font, .foregroundColor: UIColor.black])
         }
+        
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
+        
         do {
             let attrString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
             let fullRange = NSRange(location: 0, length: attrString.length)
             
             // Applique la police de base sur l'ensemble du texte
             attrString.addAttribute(.font, value: font, range: fullRange)
+            // Réinitialise toute la couleur à noir
+            attrString.addAttribute(.foregroundColor, value: UIColor.black, range: fullRange)
             
-            // Parcourt les attributs .link pour ajuster la couleur + soulignement
+            // Parcourt les attributs .link pour ajuster la couleur en bleu et ajouter le soulignement
             attrString.enumerateAttribute(.link, in: fullRange, options: []) { (value, range, _) in
-                guard range.location != NSNotFound, range.location + range.length <= attrString.length else { return }
                 if value != nil {
                     attrString.addAttribute(.foregroundColor, value: unifiedBlue, range: range)
                     attrString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
-                } else {
-                    attrString.addAttribute(.foregroundColor, value: UIColor.black, range: range)
                 }
             }
             
@@ -433,6 +439,7 @@ extension NeighborhoodMessageCell {
             return NSAttributedString(string: html, attributes: [.font: font, .foregroundColor: UIColor.black])
         }
     }
+
     
     /// Construit un NSAttributedString « brut » à partir de texte simple.
     private func plainAttributedString(from text: String, withBaseFont font: UIFont) -> NSAttributedString {
