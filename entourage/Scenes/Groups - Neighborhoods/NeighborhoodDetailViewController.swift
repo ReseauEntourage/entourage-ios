@@ -218,63 +218,77 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     //MARK: - Network -
-    func getNeighborhoodDetail(hasToRefreshLists:Bool = false) {
-
+    func getNeighborhoodDetail(hasToRefreshLists: Bool = false) {
         self.currentPagingPage = 1
         self.isLoading = true
-        var _groupId = ""
+        var groupId = ""
         if neighborhoodId != 0 {
-            _groupId = String(neighborhoodId)
-        }else if hashedNeighborhoodId != "" {
-            _groupId = hashedNeighborhoodId
+            groupId = String(neighborhoodId)
+        } else if !hashedNeighborhoodId.isEmpty {
+            groupId = hashedNeighborhoodId
         }
         
-        NeighborhoodService.getNeighborhoodDetail(id: _groupId) { group, error in
-            self.pullRefreshControl.endRefreshing()
-            
-            if let _ = error {
-                self.goBack()
-            }
-            if group == nil {
-                let alertController = UIAlertController(title: "Attention", message: "Ce groupe a été supprimé", preferredStyle: .alert)
-                let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
-                alertController.addAction(closeAction)
-                self.present(alertController, animated: true, completion: nil)
+        NeighborhoodService.getNeighborhoodDetail(id: groupId) { [weak self] group, error in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.pullRefreshControl.endRefreshing()
                 
-            }
-            self.neighborhood = group
-            self.splitMessages()
-            self.ui_tableview.reloadData()
-            self.isLoading = false
-            self.populateTopView()
-            self.neighborhood?.messages?.removeAll()
-            self.getMorePosts()
-            if hasToRefreshLists {
-                NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
+                if error != nil {
+                    self.goBack()
+                    return
+                }
+                
+                guard let group = group else {
+                    let alert = UIAlertController(title: "Attention",
+                                                  message: "Ce groupe a été supprimé",
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Fermer", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                // Mise à jour de la data source
+                self.neighborhood = group
+                // Met à jour le header et les vues associées
+                self.populateTopView()
+                // Réinitialise le tableau des messages et les tableaux auxiliaires
+                self.neighborhood?.messages = []
+                self.splitMessages()
+                
+                // Récupère les posts et recharge la table view une fois terminé
+                self.getMorePosts {
+                    // Ici, getMorePosts appelle déjà reloadData()
+                }
+                
+                if hasToRefreshLists {
+                    NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
+                }
             }
         }
     }
-    
-    func getMorePosts() {
+
+    func getMorePosts(completion: @escaping () -> Void = {}) {
         self.isLoading = true
-        NeighborhoodService.getNeighborhoodPostsPaging(id: neighborhoodId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
-            guard let post = post, error == nil else {
-                // Gérer l'erreur ici si nécessaire
-                self.isLoading = false
-                return
-            }
-
+        NeighborhoodService.getNeighborhoodPostsPaging(id: neighborhoodId, currentPage: currentPagingPage, per: itemsPerPage) { [weak self] posts, error in
             DispatchQueue.main.async {
-                // Mettre à jour les données
-                self.neighborhood?.messages?.append(contentsOf: post)
+                guard let self = self else { return }
+                
+                guard let posts = posts, error == nil else {
+                    self.isLoading = false
+                    completion()
+                    return
+                }
+                
+                // Ajoute les nouveaux posts à la data source
+                self.neighborhood?.messages?.append(contentsOf: posts)
                 self.splitMessages()
-
-                // Recharger la table view
                 self.ui_tableview.reloadData()
                 self.isLoading = false
+                completion()
             }
         }
     }
+
 
 
     
@@ -288,16 +302,10 @@ class NeighborhoodDetailViewController: UIViewController {
         
         for post in messages {
             messagesOld.append(post)
-//
-//            if post.isRead {
-//                messagesOld.append(post)
-//            }
-//            else {
-//                messagesNew.append(post)
-//            }
+
         }
         
-        hasNewAndOldSections = messagesOld.count > 0 && messagesNew.count > 0
+        hasNewAndOldSections = false
     }
     
     func addRemoveMember(isAdd:Bool) {
@@ -497,25 +505,12 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     func numberOfSections(in tableView: UITableView) -> Int {
         
         let minimum = self.neighborhood != nil ? 2 : 0
-        let added = hasNewAndOldSections ? 1 : 0
-
-
+        let added = 0
         return minimum + added
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 { return 2 }
-        if hasNewAndOldSections {
-            var count = 0
-            if section == 1 {
-                count = messagesNew.count + 2
-            }
-            else {
-                count = messagesOld.count + 1
-            }
-            return count
-        }
-        
         let messageCount:Int = (self.neighborhood?.messages?.count ?? 0) > 0 ? self.neighborhood!.messages!.count + countToAdd() : 1
         return  messageCount
     }
@@ -534,7 +529,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     
     func countToAdd() -> Int {
         //Is member + new posts
-        let countToAdd = (self.neighborhood?.isMember ?? false && self.messagesNew.count > 0) ? 2 : 1 //If not member or only old messages we dont' show new/old post header
+        let countToAdd =  1 //If not member or only old messages we dont' show new/old post header
         return countToAdd
     }
     
