@@ -500,7 +500,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Oo-Yg-gJN">
-                                        <rect key="frame" x="0.0" y="96" width="414" height="194"/>
+                                        <rect key="frame" x="0.0" y="96" width="414" height="94"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="252" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="752" text="Rédiger un descriptif" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QK7-wL-hNt">
                                                 <rect key="frame" x="28" y="0.0" width="152" height="19"/>
@@ -515,10 +515,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="755" verticalCompressionResistancePriority="755" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QgK-R3-p3Y" customClass="MJTextViewPlaceholder" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="28" y="49" width="358" height="140"/>
+                                                <rect key="frame" x="28" y="49" width="358" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="140" id="ghr-O1-0JN"/>
-                                                    <constraint firstAttribute="height" priority="250" constant="80" id="mbc-SR-LYA"/>
+                                                    <constraint firstAttribute="height" priority="250" constant="40" id="mbc-SR-LYA"/>
                                                 </constraints>
                                                 <string key="text">L1
 L2
@@ -533,7 +532,7 @@ L8</string>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="FKc-J6-AD5">
-                                                <rect key="frame" x="28" y="193" width="358" height="1"/>
+                                                <rect key="frame" x="28" y="93" width="358" height="1"/>
                                                 <color key="backgroundColor" name="orange_light_a50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="5gz-6e-2aj"/>
@@ -557,7 +556,7 @@ L8</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8I-Yq-J1N">
-                                        <rect key="frame" x="0.0" y="320" width="414" height="211"/>
+                                        <rect key="frame" x="0.0" y="220" width="414" height="211"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="252" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="752" text="Rédiger un descriptif" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8d-QZ-h4N">
                                                 <rect key="frame" x="28" y="0.0" width="152" height="19"/>
@@ -614,7 +613,7 @@ L8</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Wm-bs-FdB">
-                                        <rect key="frame" x="137" y="564.5" width="140" height="44"/>
+                                        <rect key="frame" x="137" y="464.5" width="140" height="44"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="754" image="ic_send_white" translatesAutoresizingMaskIntoConstraints="NO" id="eTx-sf-APK">
                                                 <rect key="frame" x="98" y="11" width="22" height="22"/>
@@ -657,7 +656,7 @@ L8</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CuG-Ja-TKW">
-                                        <rect key="frame" x="99.5" y="531" width="215" height="21.5"/>
+                                        <rect key="frame" x="99.5" y="431" width="215" height="21.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Erreur de publication, veuillez réessayer " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7A-Ht-Yix">
                                                 <rect key="frame" x="17" y="3" width="198" height="15.5"/>
@@ -680,7 +679,7 @@ L8</string>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Q24-n9-ZVG">
-                                        <rect key="frame" x="0.0" y="300" width="414" height="150"/>
+                                        <rect key="frame" x="0.0" y="200" width="414" height="150"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="mh8-X2-6Wz"/>
@@ -726,6 +725,7 @@ L8</string>
                     <navigationItem key="navigationItem" id="fIn-xd-z7r"/>
                     <connections>
                         <outlet property="table_view_mention_height" destination="mh8-X2-6Wz" id="BA7-aZ-vJv"/>
+                        <outlet property="textViewHeightConstraint" destination="mbc-SR-LYA" id="rkd-50-cRM"/>
                         <outlet property="ui_image" destination="LVs-Fc-keM" id="Nby-Hc-ap8"/>
                         <outlet property="ui_image_placeholder" destination="BOX-XS-0iI" id="CF9-yo-3LX"/>
                         <outlet property="ui_iv_bt_add_remove" destination="14o-3O-ctt" id="5j0-P9-iZC"/>
@@ -1025,7 +1025,7 @@ L8</string>
         <image name="ic_button_retry_red" width="10" height="11"/>
         <image name="ic_error_mini" width="9" height="9"/>
         <image name="ic_mini_image_placeholder" width="21" height="20"/>
-        <image name="ic_no_message_neighborhood" width="307.20001220703125" height="144"/>
+        <image name="ic_no_message_neighborhood" width="308" height="144"/>
         <image name="ic_send_comment" width="54" height="54"/>
         <image name="ic_send_white" width="22" height="22"/>
         <image name="ic_signal_post_message" width="23" height="24"/>

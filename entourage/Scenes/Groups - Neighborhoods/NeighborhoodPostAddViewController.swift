@@ -36,6 +36,7 @@ class NeighborhoodPostAddViewController: UIViewController {
     @IBOutlet weak var table_view_mention_height: NSLayoutConstraint!
     
     @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Propriétés existantes
     var currentImage: UIImage? = nil
@@ -407,6 +408,12 @@ extension NeighborhoodPostAddViewController: UITextViewDelegate {
             }
         } else {
             hideMentionSuggestions()
+        }
+        let size = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+        // Mettre à jour la contrainte de hauteur du UITextView
+        self.textViewHeightConstraint.constant = size.height
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
         }
     }
 }
