@@ -695,9 +695,9 @@ class ConversationDetailMessagesViewController: UIViewController {
         hideMentionSuggestions()
         
         // Réinitialisation complète du UITextView
-        ui_textview_message.text = ""
-        ui_textview_message.attributedText = NSAttributedString(string: "")
-        let styleReset = ApplicationTheme.getFontCourantRegularNoir()  // Utiliser le style initial
+        ui_textview_message.text = placeholderTxt
+        ui_textview_message.attributedText = NSAttributedString(string: placeholderTxt)
+        let styleReset = ApplicationTheme.getFontRegular13Orange()  // Utiliser le style initial
         ui_textview_message.typingAttributes = [
             .font: styleReset.font,
             .foregroundColor: styleReset.color

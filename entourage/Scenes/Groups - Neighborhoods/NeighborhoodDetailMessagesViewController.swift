@@ -472,8 +472,8 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         hideMentionSuggestions()
 
         // Réinitialisation complète du UITextView pour supprimer toute mise en forme
-        ui_textview_message.text = ""
-        ui_textview_message.attributedText = NSAttributedString(string: "")
+        ui_textview_message.text = placeholderTxt
+        ui_textview_message.attributedText = NSAttributedString(string: placeholderTxt)
 
         // ⬇️ Remettre la police d'origine après l'envoi
         let styleReset = ApplicationTheme.getFontRegular13Orange()

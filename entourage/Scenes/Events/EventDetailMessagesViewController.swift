@@ -446,8 +446,8 @@ class EventDetailMessagesViewController: UIViewController {
         _ = ui_textview_message.resignFirstResponder()
         hideMentionSuggestions()
         
-        ui_textview_message.text = ""
-        ui_textview_message.attributedText = NSAttributedString(string: "")
+        ui_textview_message.text = placeholderTxt
+        ui_textview_message.attributedText = NSAttributedString(string: placeholderTxt)
         
         let styleReset = ApplicationTheme.getFontRegular13Orange()
         ui_textview_message.typingAttributes = [
