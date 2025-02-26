@@ -424,7 +424,8 @@ class EventDetailMessagesViewController: UIViewController {
                 .foregroundColor: UIColor.blue,
                 .underlineStyle: NSUnderlineStyle.single.rawValue
             ]
-            let mentionAttributedString = NSAttributedString(string: "@\(user.displayName)", attributes: linkAttributes)
+            let cleanedDisplayName = user.displayName.cleanedForMention()
+            let mentionAttributedString = NSAttributedString(string: "@\(cleanedDisplayName)", attributes: linkAttributes)
             currentAttributedText.replaceCharacters(in: replaceRange, with: mentionAttributedString)
             ui_textview_message.attributedText = currentAttributedText
             let newCursorPosition = atRange.location + mentionAttributedString.length

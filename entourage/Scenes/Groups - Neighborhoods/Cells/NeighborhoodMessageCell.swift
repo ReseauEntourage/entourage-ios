@@ -467,6 +467,11 @@ extension NeighborhoodMessageCell {
         let nsString = html as NSString
         let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: nsString.length))
         
+        // Normalisation de la mention pour retirer espaces et ponctuation
+        let normalizedMention = mention
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .trimmingCharacters(in: .punctuationCharacters)
+        
         for match in matches {
             if match.numberOfRanges >= 3 {
                 let urlString = nsString.substring(with: match.range(at: 1))
@@ -474,15 +479,20 @@ extension NeighborhoodMessageCell {
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 // Nettoie le texte pour retirer les balises HTML éventuelles
                 let linkText = stripHTMLTags(from: rawLinkText)
+                // Normalisation du texte du lien
+                let normalizedLinkText = linkText
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .trimmingCharacters(in: .punctuationCharacters)
                 
-                // Compare directement le texte nettoyé avec la mention (ex: "@Nicolas E.")
-                if linkText == mention {
+                // Compare le texte normalisé avec la mention normalisée
+                if normalizedLinkText == normalizedMention {
                     return URL(string: urlString)
                 }
             }
         }
         return nil
     }
+
 
 
     private func openUrlForMention(mention: String) {

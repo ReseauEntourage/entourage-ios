@@ -444,8 +444,9 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                 .foregroundColor: UIColor.blue,
                 .underlineStyle: NSUnderlineStyle.single.rawValue
             ]
+            let cleanedDisplayName = user.displayName.cleanedForMention()
             let mentionAttributedString = NSAttributedString(
-                string: "@\(user.displayName)",
+                string: "@\(cleanedDisplayName)",
                 attributes: linkAttributes
             )
             currentAttributedText.replaceCharacters(in: replaceRange, with: mentionAttributedString)

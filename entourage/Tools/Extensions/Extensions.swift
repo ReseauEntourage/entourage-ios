@@ -214,6 +214,15 @@ extension UILabel {
 }
 
 extension String {
+    /// Retourne une version de la chaîne en ne gardant que les caractères alphanumériques et les espaces.
+    func cleanedForMention() -> String {
+        let allowedCharacters = CharacterSet.letters.union(CharacterSet.decimalDigits)
+        let filteredScalars = self.unicodeScalars.filter { allowedCharacters.contains($0) }
+        return String(String.UnicodeScalarView(filteredScalars)) + ". "
+    }
+}
+
+extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
