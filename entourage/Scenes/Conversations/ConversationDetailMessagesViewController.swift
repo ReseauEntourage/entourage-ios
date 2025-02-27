@@ -625,7 +625,14 @@ class ConversationDetailMessagesViewController: UIViewController {
         let atRange = fullTextNSString.range(of: "@", options: .backwards, range: searchRange)
         if atRange.location != NSNotFound {
             let replaceRange = NSRange(location: atRange.location, length: cursorLocation - atRange.location)
-            let linkURLString = "https://myapp.entourage.social/app/users/\(user.sid)"
+            let baseUrl: String
+            if NetworkManager.sharedInstance.getBaseUrl().contains("preprod") {
+                baseUrl = "https://preprod.entourage.social/app/"
+            } else {
+                baseUrl = "https://www.entourage.social/app/"
+            }
+            let linkURLString: String
+            linkURLString = baseUrl + "users/\(user.sid)"
             guard let linkURL = URL(string: linkURLString) else { return }
             let linkAttributes: [NSAttributedString.Key: Any] = [
                 .link: linkURL,
