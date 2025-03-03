@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Jerome on 23/08/2022.
-//  Adapté pour intégrer la fonctionnalité de mention (liste de suggestions, insertion AttributedString, etc.)
+//  Adapté pour intégrer la fonctionnalité de mention (liste de suggestions, insertion d’AttributedString, etc.)
 //  Le filtrage des mentions se fait localement sur la liste de members de la Conversation.
 //  Si le query est vide, on affiche 3 membres par défaut.
 //
@@ -43,7 +43,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     @IBOutlet weak var ui_title_block: UILabel!
     
     // MARK: - Outlets pour la fonctionnalité de mention
-    @IBOutlet weak var ui_tableview_mentions: UITableView!            // TableView des suggestions
+    @IBOutlet weak var ui_tableview_mentions: UITableView! // TableView des suggestions
     @IBOutlet weak var table_view_mention_height: NSLayoutConstraint!
     
     // MARK: - Variables principales
@@ -75,10 +75,10 @@ class ConversationDetailMessagesViewController: UIViewController {
     var currentConversation: Conversation? = nil
 
     // MARK: - Propriétés pour la fonctionnalité de mention
-    /// Liste filtrée affichée dans le tableau des suggestions
+    /// Liste filtrée affichée dans le tableau des suggestions (on filtre sur `members`)
     var mentionSuggestions: [UserLightNeighborhood] = []
 
-    /// Hauteur d’une cellule “MentionCell” (à adapter selon ta maquette)
+    /// Hauteur d’une cellule “MentionCell”
     private let mentionCellHeight: CGFloat = 44.0
 
     // MARK: - View Lifecycle
@@ -103,7 +103,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             doubleRightMargin: true
         )
 
-        // Vue vide
+        // Vue "vide"
         ui_title_empty.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_title_empty.text = "messaging_message_no_message".localized
         ui_view_empty.isHidden = true
@@ -303,7 +303,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
-        // hide empty view
+        // Masquer la vue vide
         if messagesExtracted.messages.count == 0 {
             ui_view_empty.isHidden = true
         }
@@ -355,7 +355,8 @@ class ConversationDetailMessagesViewController: UIViewController {
                 self.ui_view_empty.isHidden = self.messagesExtracted.messages.count > 0
                 self.ui_tableview.reloadData()
 
-                if self.currentPage == 1 && self.messagesExtracted.messages.count + self.messagesForRetry.count > 0 {
+                if self.currentPage == 1
+                    && self.messagesExtracted.messages.count + self.messagesForRetry.count > 0 {
                     DispatchQueue.main.async {
                         let indexPath = IndexPath(
                             row: self.messagesExtracted.messages.count + self.messagesForRetry.count - 1,
@@ -541,7 +542,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.hideViewNew()
     }
 
-    // MARK: - Méthodes pour la fonctionnalité de mention (pas d'appel API, simple filtre local sur members)
+    // MARK: - Méthodes pour la fonctionnalité de mention
     func updateMentionSuggestions(query: String) {
         guard let members = currentConversation?.members, !members.isEmpty else {
             hideMentionSuggestions()
@@ -553,7 +554,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         // Filtrer les membres pour exclure l'utilisateur courant
         let filtered: [MemberLight]
         if q.isEmpty {
-            // Si query est vide, on affiche 3 membres hors de moi
+            // Si query est vide, on affiche 3 membres hors moi
             filtered = members.filter { $0.uid != meId }
         } else {
             // Sinon, on filtre par username contenant la query et hors de moi
@@ -590,6 +591,23 @@ class ConversationDetailMessagesViewController: UIViewController {
         animateShowTableViewMentions()
     }
 
+    /// Affiche la tableView des mentions avec animation
+    private func animateShowTableViewMentions() {
+        ui_tableview_mentions.transform = CGAffineTransform(translationX: 0, y: 20)
+        ui_tableview_mentions.alpha = 0
+        ui_tableview_mentions.isHidden = false
+        
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: .curveEaseOut,
+            animations: {
+                self.ui_tableview_mentions.transform = .identity
+                self.ui_tableview_mentions.alpha = 1
+            },
+            completion: nil
+        )
+    }
 
     func hideMentionSuggestions() {
         mentionSuggestions = []
@@ -610,7 +628,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         })
     }
 
-
+    /// Insère la mention dans le TextView, sous forme d’un NSAttributedString cliquable
     func insertMention(user: UserLightNeighborhood) {
         let currentAttributedText: NSMutableAttributedString
         if let attributed = ui_textview_message.attributedText, attributed.length > 0 {
@@ -661,58 +679,53 @@ class ConversationDetailMessagesViewController: UIViewController {
         ]
     }
 
-    // MARK: - Animations tableView Mentions
-    private func animateShowTableViewMentions() {
-        ui_tableview_mentions.transform = CGAffineTransform(translationX: 0, y: 20)
-        ui_tableview_mentions.alpha = 0
-        ui_tableview_mentions.isHidden = false
-        UIView.animate(
-            withDuration: 0.3,
-            delay: 0,
-            options: .curveEaseOut,
-            animations: {
-                self.ui_tableview_mentions.transform = .identity
-                self.ui_tableview_mentions.alpha = 1
-            },
-            completion: nil
-        )
-    }
-
-    private func animateHideTableViewMentions() {
-        UIView.animate(
-            withDuration: 0.3,
-            delay: 0,
-            options: .curveEaseIn,
-            animations: {
-                self.ui_tableview_mentions.transform = CGAffineTransform(translationX: 0, y: 20)
-                self.ui_tableview_mentions.alpha = 0
-            },
-            completion: { _ in
-                self.ui_tableview_mentions.isHidden = true
+    // MARK: - Conversion en HTML
+    /// Convertit l'attributedText du UITextView en une chaîne HTML et en extrait le contenu du <body>.
+    func getHTMLMessage() -> String? {
+        guard let attributedText = ui_textview_message.attributedText else { return nil }
+        do {
+            let htmlData = try attributedText.data(
+                from: NSRange(location: 0, length: attributedText.length),
+                documentAttributes: [.documentType: NSAttributedString.DocumentType.html]
+            )
+            if var htmlString = String(data: htmlData, encoding: .utf8) {
+                // Extraction du contenu entre <body> et </body>
+                if let bodyStartRange = htmlString.range(of: "<body>"),
+                   let bodyEndRange = htmlString.range(of: "</body>") {
+                    htmlString = String(htmlString[bodyStartRange.upperBound..<bodyEndRange.lowerBound])
+                }
+                return htmlString.trimmingCharacters(in: .whitespacesAndNewlines)
             }
-        )
+        } catch {
+            print("Erreur lors de la conversion en HTML: \(error)")
+        }
+        return nil
     }
 
     // MARK: - Tools
     @objc func closeKb(_ sender: UIBarButtonItem?) {
-        if let txt = ui_textview_message.text,
-           txt != placeholderTxt,
-           !txt.isEmpty {
-            self.sendMessage(messageStr: txt, isRetry: false)
+        // 1) On récupère le HTML de l'attributedText
+        if let htmlMessage = getHTMLMessage(),
+           !htmlMessage.isEmpty,
+           htmlMessage != placeholderTxt {
+           
+            // 2) On envoie ce HTML plutôt que textView.text
+            self.sendMessage(messageStr: htmlMessage, isRetry: false)
         }
         _ = ui_textview_message.resignFirstResponder()
         hideMentionSuggestions()
         
-        // Réinitialisation complète du UITextView
+        // Réinitialisation complète du UITextView (placeholder, style, etc.)
         ui_textview_message.text = placeholderTxt
         ui_textview_message.attributedText = NSAttributedString(string: placeholderTxt)
-        let styleReset = ApplicationTheme.getFontRegular13Orange()  // Utiliser le style initial
+        let styleReset = ApplicationTheme.getFontRegular13Orange()  // Style initial
         ui_textview_message.typingAttributes = [
             .font: styleReset.font,
             .foregroundColor: styleReset.color
         ]
         ui_textview_message.textColor = UIColor.appOrange
-    }}
+    }
+}
 
 // MARK: - TableView (Messages & Mentions)
 extension ConversationDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {
@@ -798,7 +811,7 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
                     let selectedUser = self.mentionSuggestions[indexPath.row]
                     self.insertMention(user: selectedUser)
                     
-                    // Optionnel: réinitialiser la couleur de fond pour que la cellule redevienne normale
+                    // Optionnel: réinitialiser la couleur de fond
                     UIView.animate(withDuration: 0.2) {
                         cell.contentView.backgroundColor = UIColor.appBeigeClair2
                     }
@@ -815,6 +828,7 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
         if isLoading { return }
         if tableView == ui_tableview_mentions { return }
 
+        // On relance un getMessages si on atteint le nbOfItemsBeforePagingReload
         if indexPath.row == nbOfItemsBeforePagingReload
            && self.messages.count >= numberOfItemsForWS * currentPage {
             self.currentPage += 1
@@ -826,7 +840,10 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
 // MARK: - MJNavBackViewDelegate
 extension ConversationDetailMessagesViewController: MJNavBackViewDelegate {
     func goBack() {
-        self.parentDelegate?.updateUnreadCount(conversationId: conversationId, currentIndexPathSelected: selectedIndexPath)
+        self.parentDelegate?.updateUnreadCount(
+            conversationId: conversationId,
+            currentIndexPathSelected: selectedIndexPath
+        )
         self.dismiss(animated: true)
         self.navigationController?.dismiss(animated: true)
     }
@@ -837,6 +854,7 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView,
                   shouldChangeTextIn range: NSRange,
                   replacementText text: String) -> Bool {
+        // Gestion de l’icône "envoyer"
         if textView.text.count == 0 && text.count == 1 {
             ui_iv_bt_send.image = UIImage(named: "ic_send_comment")
         }
@@ -922,6 +940,7 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
     }
 
     func showWebUrl(url: URL) {
+        // Si c’est une URL Entourage, on ferme avant d’ouvrir
         if WebLinkManager.isOurPatternURL(url) {
             self.dismiss(animated: true) {
                 WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
@@ -951,7 +970,9 @@ extension ConversationDetailMessagesViewController: GroupDetailDelegate {
             bgColor: .appOrange,
             cornerRadius: -1
         )
-        let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
+        let title = (signalType == .comment)
+            ? "report_comment_title".localized
+            : "report_publication_title".localized
 
         alertVC.configureAlert(
             alertTitle: title,
