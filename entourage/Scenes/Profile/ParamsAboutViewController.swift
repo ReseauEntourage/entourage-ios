@@ -89,6 +89,7 @@ extension ParamsAboutViewController: UITableViewDataSource, UITableViewDelegate 
         else if let _urlStr = item.url {
             webUrl = URL(string: _urlStr)
         }
+        print("_url " , webUrl)
         WebLinkManager.openUrlInApp(url: webUrl, presenterViewController: self)
     }
     
