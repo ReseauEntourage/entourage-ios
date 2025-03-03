@@ -241,8 +241,6 @@ class EventDetailMessagesViewController: UIViewController {
         EventService.getCommentsFor(eventId: _eventId, parentPostId: _postId) { messages, error in
             if let messages = messages {
                 self.messages = messages
-                print("eho message last " , messages.last?.content)
-                print("eho message last " , messages.last?.contentHtml)
                 self.ui_view_empty.isHidden = (self.messages.count > 0)
                 self.setItemsTranslated(messages: messages)
                 self.ui_tableview.reloadData()

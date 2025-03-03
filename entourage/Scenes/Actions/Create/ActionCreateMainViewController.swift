@@ -212,7 +212,6 @@ class ActionCreateMainViewController: UIViewController {
             currentPhasePosition = ui_page_control.numberOfPages
             self.createAction()
         }
-        print("eho phase position: " , currentPhasePosition)
         updateViewsForPosition()
     }
     
@@ -221,7 +220,6 @@ class ActionCreateMainViewController: UIViewController {
         if currentPhasePosition < 1 {
             currentPhasePosition = 1
         }
-        print("eho phase position: ", currentPhasePosition)
 
         updateViewsForPosition()
     }

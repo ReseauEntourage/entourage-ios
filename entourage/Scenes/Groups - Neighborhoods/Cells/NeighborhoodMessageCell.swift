@@ -155,7 +155,6 @@ class NeighborhoodMessageCell: UITableViewCell {
                       delegate: MessageCellSignalDelegate,
                       isTranslated: Bool) {
         ui_message.attributedText = nil
-        print("contentHtml ", message.contentHtml)
         
         innerPostMessage = message
         messageId = message.uid
@@ -222,6 +221,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 finalText.append(padding) // Ajoute du padding gauche
                 finalText.append(messageText) // Ajoute le vrai message
 
+                
                 ui_message.attributedText = finalText
                 
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
@@ -409,52 +409,65 @@ extension NeighborhoodMessageCell {
     
     /// Construit un NSAttributedString à partir d'une chaîne HTML + police de base.
     private func attributedString(fromHTML html: String, withBaseFont font: UIFont) -> NSAttributedString {
-        guard let data = html.data(using: .utf8) else {
-            return NSAttributedString(string: html, attributes: [.font: font, .foregroundColor: UIColor.black])
+        // 1) Remplace tous les \n par <br> pour forcer les sauts de ligne
+        let replacedHtml = html.replacingOccurrences(of: "\n", with: "<br>")
+
+        // 2) Convertir la chaîne (désormais avec <br>) en Data
+        guard let data = replacedHtml.data(using: .utf8) else {
+            // Fallback : si la conversion échoue, on renvoie simplement le texte brut
+            return NSAttributedString(string: html,
+                                      attributes: [.font: font, .foregroundColor: UIColor.black])
         }
         
+        // 3) Options pour la lecture HTML
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
         
         do {
-            let attrString = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
+            // 4) Parse en NSMutableAttributedString
+            let attrString = try NSMutableAttributedString(data: data,
+                                                           options: options,
+                                                           documentAttributes: nil)
             let fullRange = NSRange(location: 0, length: attrString.length)
 
-            // 🔄 RESET COMPLET DES ATTRIBUTS HÉRITÉS D’UNE CELLULE RÉUTILISÉE
+            // 4a) Supprime les attributs existants (couleurs, liens, etc.) hérités du HTML
             attrString.removeAttribute(.foregroundColor, range: fullRange)
             attrString.removeAttribute(.underlineStyle, range: fullRange)
             attrString.removeAttribute(.link, range: fullRange)
-            
-            // ✅ Applique la police et la couleur de base
+
+            // 4b) Applique police et couleur de base
             attrString.addAttribute(.font, value: font, range: fullRange)
             attrString.addAttribute(.foregroundColor, value: UIColor.black, range: fullRange)
 
-            // 🔗 Applique le style spécifique aux liens détectés
+            // 4c) Style éventuel pour les liens (détectés comme .link à la base)
             attrString.enumerateAttribute(.link, in: fullRange, options: []) { (value, range, _) in
                 if value != nil {
                     attrString.addAttribute(.foregroundColor, value: unifiedBlue, range: range)
                     attrString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
                 }
             }
-
-            // 🧹 Supprime les espaces et sauts de ligne en fin de texte pour éviter les artefacts
+            
+            // 4d) Nettoyage final : supprime les espaces ou \n en fin de chaîne
             while attrString.string.hasSuffix("\n") || attrString.string.hasSuffix(" ") {
                 attrString.deleteCharacters(in: NSRange(location: attrString.length - 1, length: 1))
             }
-
+            
+            // 5) Renvoie l'AttributedString final
             return attrString
+            
         } catch {
-            return NSAttributedString(string: html, attributes: [.font: font, .foregroundColor: UIColor.black])
+            // En cas d’erreur de parsing, renvoie le texte brut
+            return NSAttributedString(string: html,
+                                      attributes: [.font: font, .foregroundColor: UIColor.black])
         }
     }
-
-
     
     /// Construit un NSAttributedString « brut » à partir de texte simple.
     private func plainAttributedString(from text: String, withBaseFont font: UIFont) -> NSAttributedString {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        print("eho content " , text)
         return NSAttributedString(string: trimmed, attributes: [.font: font, .foregroundColor: UIColor.black])
     }
     
@@ -552,7 +565,6 @@ extension NeighborhoodMessageCell {
     /// Récupère l'AttributedString final (HTML ou texte simple), en tenant compte d'une éventuelle traduction.
     private func getAttributedDisplayText(for message: PostMessage, isTranslated: Bool) -> NSAttributedString {
         
-        print("eho " , message.contentHtml)
         // 1) Si le message est marqué "traduit"
         if isTranslated {
             // Priorité au HTML traduit
@@ -580,6 +592,7 @@ extension NeighborhoodMessageCell {
                 return attributedString(fromHTML: contentHtml, withBaseFont: NeighborhoodMessageCell.baseFont)
             }
             if let content = message.content, !content.isEmpty {
+
                 return plainAttributedString(from: content, withBaseFont: NeighborhoodMessageCell.baseFont)
             }
         }
