@@ -74,6 +74,13 @@ extension ParamsAboutViewController: UITableViewDataSource, UITableViewDelegate 
         
         var webUrl:URL?
         
+        if(item.slug == MENU_ABOUT_CHILD_RULES ){
+            if let _webUrl = URL(string: "https://www.entourage.social/normes-de-protection-des-enfants"){
+                WebLinkManager.openUrlInApp(url: _webUrl, presenterViewController: self)
+                return
+            }
+        }
+        
         if let _slug = item.slug, let token = UserDefaults.currentUser?.token {
             let relativeUrlStr = String.init(format: BASE_MENU_ABOUT, _slug,token)
             let _urlStr = "\(NetworkManager.sharedInstance.getBaseUrl())\(relativeUrlStr)"
