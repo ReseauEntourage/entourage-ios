@@ -479,7 +479,11 @@ class ProfilFullViewController: UIViewController {
                 title: "settings_share_title".localized, // "Partager l'application"
                 subtitle: ""
             ))
-            
+            tableDTO.append(.standard(
+                img: "ic_profile_help",
+                title: "settings_help_title".localized, // "Partager l'application"
+                subtitle: ""
+            ))
             // 6) Changer de mot de passe
             tableDTO.append(.standard(
                 img: "ic_profil_full_mdp",

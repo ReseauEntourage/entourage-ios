@@ -25,6 +25,7 @@ class ParamsAboutViewController: BasePopViewController {
         MenuItemInfos(title:"params_about_rate_app",url:APPSTORE_URL, openInApp: false),
         MenuItemInfos(title:"params_about_cgu",slug:MENU_ABOUT_SLUG_CGU),
         MenuItemInfos(title: "params_about_privacy",slug: MENU_ABOUT_SLUG_PRIVACY),
+        MenuItemInfos(title: "params_about_child_rule",slug: MENU_ABOUT_CHILD_RULES),
         MenuItemInfos(title:"params_about_licences",url:MENU_LICENSES_URL, openInApp: false)
         
         

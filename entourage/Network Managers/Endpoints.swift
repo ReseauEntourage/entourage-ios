@@ -177,6 +177,7 @@ let MENU_ABOUT_SLUG_FAQ = "faq"
 let MENU_ABOUT_SLUG_GIFT = "donation"
 let MENU_ABOUT_SLUG_CGU = "terms"
 let MENU_ABOUT_SLUG_PRIVACY = "privacy-policy"
+let MENU_ABOUT_CHILD_RULES = "normes-de-protection-des-enfants"
 
 //Notifs in app
 let kAPINotifsGetCount = "inapp_notifications/count?token=%@"
