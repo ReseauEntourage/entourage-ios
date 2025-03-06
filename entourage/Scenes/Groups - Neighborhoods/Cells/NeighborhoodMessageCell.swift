@@ -467,7 +467,6 @@ extension NeighborhoodMessageCell {
     /// Construit un NSAttributedString « brut » à partir de texte simple.
     private func plainAttributedString(from text: String, withBaseFont font: UIFont) -> NSAttributedString {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        print("eho content " , text)
         return NSAttributedString(string: trimmed, attributes: [.font: font, .foregroundColor: UIColor.black])
     }
     
