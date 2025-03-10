@@ -151,7 +151,22 @@ extension ConversationsMainHomeViewController: UpdateUnreadCountDelegate {
     func updateUnreadCount(conversationId: Int, currentIndexPathSelected: IndexPath?) {
         guard let currentIndexPathSelected = currentIndexPathSelected else { return }
 
-        messages[currentIndexPathSelected.row].numberUnreadMessages = 0
-        self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
+        let adjustedIndex = notificationsDisabled ? currentIndexPathSelected.row - 1 : currentIndexPathSelected.row
+
+        // Vérifie que adjustedIndex est valide
+        guard adjustedIndex >= 0 && adjustedIndex < messages.count else {
+            print("⚠️ Tentative de mise à jour d'une cellule invalide : \(adjustedIndex)")
+            return
+        }
+
+        messages[adjustedIndex].numberUnreadMessages = 0
+
+        // Vérifie que l'indexPath existe encore dans la tableview actuelle
+        if ui_tableview.numberOfRows(inSection: currentIndexPathSelected.section) > currentIndexPathSelected.row {
+            self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
+        } else {
+            // Fallback sécurisé
+            self.ui_tableview.reloadData()
+        }
     }
 }
