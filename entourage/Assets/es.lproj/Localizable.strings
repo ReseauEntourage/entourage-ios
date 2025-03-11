@@ -3144,3 +3144,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle" = "%d contacto bloqueado";
 "settings_unblock_contacts_subtitle_plural" = "%d contactos bloqueados";
 "language_change_redirect" = "Serás redirigido a la página de inicio para cambiar el idioma de la aplicación";
+"event_conversation" = "Ver conversación del evento";
+"event_conv_filter_all" = "Todo";
+"event_conv_filter_discussions" = "Discusiones";
+"event_conv_filter_events" = "Eventos";
+"event_discut_title" = "Encuentra toda la información del evento aquí";
+"event_button_add_calendar" = "Añadir al calendario";

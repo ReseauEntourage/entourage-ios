@@ -1,8 +1,15 @@
 import UIKit
 import IHProgressHUD
 
-class ConversationsMainHomeViewController: UIViewController {
+enum ConversationMainDTO {
+    case notificationRequest
+    case conversation(conversation: Conversation)
+    case filter(filter: String)
+}
 
+class ConversationsMainHomeViewController: UIViewController {
+    
+    // MARK: - UI Outlets
     @IBOutlet weak var ui_image_inside_top_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_image_constraint_height: NSLayoutConstraint!
     @IBOutlet weak var ui_image: UIImageView!
@@ -12,78 +19,110 @@ class ConversationsMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_view_selector: UIView!
 
+    // MARK: - Properties
+    var dataSource = [ConversationMainDTO]()
+    var notificationsDisabled: Bool = false
+    var selectedFilter: String = "event_conv_filter_all".localized
+    
+    var currentPage = 1
+    var isFetching = false
+    let perPage = 25
+    
     var maxViewHeight: CGFloat = 109
     var minViewHeight: CGFloat = 70
     var messages = [Conversation]()
-    var notificationsDisabled: Bool = false // Indicateur pour l'état des notifications
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
 
-        // Enregistrer la cellule personnalisée
         ui_tableview.register(UINib(nibName: "ConversationNotifAskViewCell", bundle: nil), forCellReuseIdentifier: "ConversationNotifAskViewCell")
+        ui_tableview.register(UINib(nibName: "FilterDiscussionCell", bundle: nil), forCellReuseIdentifier: "FilterDiscussionCell")
 
         setupViews()
         checkNotificationStatus()
-        getMessages()
+        loadConversations(reset: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getMessages()
+        super.viewWillAppear(animated)
+        loadConversations(reset: true)
+    }
+    
+    func setupViews() {
+        ui_tableview.contentInset = UIEdgeInsets(top: maxViewHeight, left: 0, bottom: 0, right: 0)
+        ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: maxViewHeight, left: 0, bottom: 0, right: 0)
+
+        ui_view_selector.layer.cornerRadius = ApplicationTheme.bigCornerRadius
+        ui_view_selector.layer.maskedCorners = CACornerMask.radiusTopOnly()
+
+        ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 23)
+        ui_label_title.text = "Messages_title".localized
     }
 
     func checkNotificationStatus() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
-                let notificationsDisabled = settings.authorizationStatus != .authorized
-                print("Notifications disabled: ", notificationsDisabled)
-                self.notificationsDisabled = notificationsDisabled
+                self.notificationsDisabled = settings.authorizationStatus != .authorized
+                self.loadDTO(conversations: [], reset: true)
             }
         }
     }
-
-    func reloadWithoutNotificationCell() {
-        notificationsDisabled = false
-        ui_tableview.reloadData()
-    }
-
-    func openNotificationDemandViewController() {
-        let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
-            vc.modalPresentationStyle = .overFullScreen // Optionnel
-            vc.comeFromDiscussion = true
-            self.present(vc, animated: true, completion: nil)
-        } else {
-            print("ViewController with identifier 'NotificationDemandViewController' not found")
+    
+    func loadConversations(reset: Bool) {
+        if isFetching { return }
+        isFetching = true
+        
+        if reset {
+            currentPage = 1
         }
-    }
 
-    func setupViews() {
-        ui_view_selector.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-        ui_view_selector.layer.maskedCorners = CACornerMask.radiusTopOnly()
-
-        maxViewHeight = ui_view_height_constraint.constant
-
-        self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 23)
-        self.ui_label_title.text = "Messages_title".localized
-
-        ui_tableview.contentInset = UIEdgeInsets(top: maxViewHeight, left: 0, bottom: 0, right: 0)
-        ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: maxViewHeight, left: 0, bottom: 0, right: 0)
-    }
-
-    func getMessages() {
-        if IHProgressHUD.isVisible() { return }
+        let fetchMethod: (Int, Int, @escaping ([Conversation]?, EntourageNetworkError?) -> Void) -> Void
+        
+        switch selectedFilter {
+        case "event_conv_filter_discussions".localized:
+            fetchMethod = MessagingService.getPrivateConversations
+        case "event_conv_filter_events".localized:
+            fetchMethod = MessagingService.getOutingConversations
+        default:
+            fetchMethod = MessagingService.getAllConversations
+        }
+        
         IHProgressHUD.show()
-
-        MessagingService.getAllConversations(currentPage: 1, per: 25) { messages, error in
+        
+        fetchMethod(currentPage, perPage) { conversations, error in
             IHProgressHUD.dismiss()
-            if let messages = messages {
-                self.messages = messages
+            self.isFetching = false
+            guard let conversations = conversations else { return }
+            
+            self.loadDTO(conversations: conversations, reset: reset)
+            self.currentPage += 1
+        }
+    }
+    
+    func loadDTO(conversations: [Conversation], reset: Bool) {
+        if reset {
+            dataSource.removeAll()
+            dataSource.append(.filter(filter: ""))
+            if notificationsDisabled {
+                dataSource.append(.notificationRequest)
             }
-            self.ui_tableview.reloadData()
+        }
+        
+        let startIndex = dataSource.count
+        let newItems = conversations.map { ConversationMainDTO.conversation(conversation: $0) }
+        dataSource.append(contentsOf: newItems)
+        
+        DispatchQueue.main.async {
+            if reset {
+                self.ui_tableview.reloadData()
+            } else {
+                let indexPaths = (startIndex..<self.dataSource.count).map { IndexPath(row: $0, section: 0) }
+                self.ui_tableview.insertRows(at: indexPaths, with: .fade)
+            }
         }
     }
 }
@@ -91,38 +130,65 @@ class ConversationsMainHomeViewController: UIViewController {
 // MARK: - Table View Data Source & Delegate
 extension ConversationsMainHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count + (notificationsDisabled ? 1 : 0)
+        return dataSource.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if notificationsDisabled && indexPath.row == 0 {
-            // Charger la cellule personnalisée
+        let dto = dataSource[indexPath.row]
+        
+        switch dto {
+        case .notificationRequest:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationNotifAskViewCell", for: indexPath) as! ConversationNotifAskViewCell
             cell.configureText()
             cell.selectionStyle = .none
             return cell
+        
+        case .conversation(let conversation):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
+            cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
+            return cell
+
+        case .filter(_):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FilterDiscussionCell", for: indexPath) as! FilterDiscussionCell
+            let filters = [
+                "event_conv_filter_all".localized,
+                "event_conv_filter_discussions".localized,
+                "event_conv_filter_events".localized,
+            ]
+            cell.configure(filters: filters, selectedFilter: selectedFilter)
+            cell.delegate = self
+            cell.selectionStyle = .none
+
+            return cell
         }
-
-        // Charger une cellule classique
-        let adjustedIndex = notificationsDisabled ? indexPath.row - 1 : indexPath.row
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
-        let message = messages[adjustedIndex]
-        cell.populateCell(message: message, delegate: self, position: adjustedIndex)
-        return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if notificationsDisabled && indexPath.row == 0 {
-            reloadWithoutNotificationCell()
-            openNotificationDemandViewController()
+        let dto = dataSource[indexPath.row]
+        
+        switch dto {
+        case .notificationRequest:
+            return
+        
+        case .conversation(let conversation):
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                vc.type = conversation.type ?? ""
+                vc.setupFromOtherVC(conversationId: conversation.uid, title: conversation.title, isOneToOne: conversation.isOneToOne(), conversation: conversation, delegate: self, selectedIndexPath: indexPath)
+                present(vc, animated: true)
+            }
+            
+        case .filter(_):
             return
         }
-
-        let adjustedIndex = notificationsDisabled ? indexPath.row - 1 : indexPath.row
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-            let conv = messages[adjustedIndex]
-            vc.setupFromOtherVC(conversationId: conv.uid, title: conv.title, isOneToOne: conv.isOneToOne(), conversation: conv, delegate: self, selectedIndexPath: indexPath)
-            present(vc, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - frameHeight - 100 {
+            loadConversations(reset: false)
         }
     }
 }
@@ -134,14 +200,16 @@ extension ConversationsMainHomeViewController: ConversationListMainCellDelegate 
     }
 
     func showUserDetail(_ position: Int) {
-        let userId: Int? = messages[position].user?.uid
-        guard let userId = userId else { return }
+        if case let .conversation(conversation) = dataSource[position] {
+            let userId: Int? = conversation.user?.uid
+            guard let userId = userId else { return }
 
-        if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-            .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-            profileVC.userIdToDisplay = "\(userId)"
-            profileVC.modalPresentationStyle = .fullScreen
-            self.present(profileVC, animated: true)
+            if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+                .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
+                profileVC.userIdToDisplay = "\(userId)"
+                profileVC.modalPresentationStyle = .fullScreen
+                self.present(profileVC, animated: true)
+            }
         }
     }
 }
@@ -150,23 +218,26 @@ extension ConversationsMainHomeViewController: ConversationListMainCellDelegate 
 extension ConversationsMainHomeViewController: UpdateUnreadCountDelegate {
     func updateUnreadCount(conversationId: Int, currentIndexPathSelected: IndexPath?) {
         guard let currentIndexPathSelected = currentIndexPathSelected else { return }
-
-        let adjustedIndex = notificationsDisabled ? currentIndexPathSelected.row - 1 : currentIndexPathSelected.row
-
-        // Vérifie que adjustedIndex est valide
-        guard adjustedIndex >= 0 && adjustedIndex < messages.count else {
-            print("⚠️ Tentative de mise à jour d'une cellule invalide : \(adjustedIndex)")
-            return
+        
+        if case var .conversation(conversation) = dataSource[currentIndexPathSelected.row] {
+            conversation.numberUnreadMessages = 0
+            dataSource[currentIndexPathSelected.row] = .conversation(conversation: conversation)
         }
 
-        messages[adjustedIndex].numberUnreadMessages = 0
-
-        // Vérifie que l'indexPath existe encore dans la tableview actuelle
-        if ui_tableview.numberOfRows(inSection: currentIndexPathSelected.section) > currentIndexPathSelected.row {
-            self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
-        } else {
-            // Fallback sécurisé
-            self.ui_tableview.reloadData()
+        DispatchQueue.main.async {
+            if self.ui_tableview.numberOfRows(inSection: currentIndexPathSelected.section) > currentIndexPathSelected.row {
+                self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
+            } else {
+                self.ui_tableview.reloadData()
+            }
         }
+    }
+}
+
+// MARK: - Filter Selection
+extension ConversationsMainHomeViewController: FilterDiscussionCellDelegate {
+    func onFilterClick(filter: String) {
+        self.selectedFilter = filter
+        loadConversations(reset: true)
     }
 }

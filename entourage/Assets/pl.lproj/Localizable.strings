@@ -1726,3 +1726,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle" = "%d zablokowany kontakt";
 "settings_unblock_contacts_subtitle_plural" = "%d zablokowane kontakty";
 "language_change_redirect" = "Zostaniesz przekierowany na stronę główną, aby zmienić język aplikacji";
+"event_conversation" = "Zobacz rozmowę wydarzenia";
+"event_conv_filter_all" = "Wszystko";
+"event_conv_filter_discussions" = "Dyskusje";
+"event_conv_filter_events" = "Wydarzenia";
+"event_discut_title" = "Znajdź wszystkie informacje o wydarzeniu tutaj";
+"event_button_add_calendar" = "Dodaj do kalendarza";

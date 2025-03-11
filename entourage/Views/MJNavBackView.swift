@@ -28,6 +28,10 @@ class MJNavBackView: UIView {
     @IBOutlet private weak var ui_constraint_left_button_back: NSLayoutConstraint!
     @IBOutlet private weak var ui_constraint_left_button_back_sub: NSLayoutConstraint!
     
+    @IBOutlet weak var ui_view_event: UIView!
+    @IBOutlet weak var iv_event: UIImageView!
+    @IBOutlet weak var ui_label_title_event: UILabel!
+    @IBOutlet weak var ui_label_event_date: UILabel!
     
     @IBOutlet var ui_constraint_title_right_margins: [NSLayoutConstraint]!
     
@@ -79,9 +83,40 @@ class MJNavBackView: UIView {
         }
     }
     
-    func populateView(title:String,titleFont:UIFont, titleColor:UIColor,delegate:MJNavBackViewDelegate,showSeparator:Bool = true,backgroundColor:UIColor? = nil,cornerRadius:CGFloat? = nil, isClose:Bool = false, doubleRightMargin:Bool = false) {
+    func formatEventDate(_ isoDate: String?) -> String {
+        guard let isoDate = isoDate else { return "" }
+        
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "fr_FR") // Français
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX" // Format correspondant à ta date exacte
+
+        if let date = formatter.date(from: isoDate) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "EEEE d MMMM yyyy"
+            displayFormatter.locale = Locale(identifier: "fr_FR") // Assurer le bon format français
+            return displayFormatter.string(from: date)
+        }
+        
+        return "Date invalide"
+    }
+
+    
+    func populateView(title:String,titleFont:UIFont, titleColor:UIColor,delegate:MJNavBackViewDelegate,showSeparator:Bool = true,backgroundColor:UIColor? = nil,cornerRadius:CGFloat? = nil, isClose:Bool = false, doubleRightMargin:Bool = false, event:Event? = nil) {
+        self.ui_label_title_event.setFontTitle(size: 15)
+        self.ui_label_event_date.setFontBody(size: 13)
         self.semanticContentAttribute = .unspecified // ou .forceRightToLeft si nécessaire
         self.populateCustom(title: title, titleFont: titleFont, titleColor: titleColor, imageName: nil, backgroundColor: backgroundColor, delegate: delegate, showSeparator: showSeparator, cornerRadius: cornerRadius, isClose: isClose,doubleRightMargin: doubleRightMargin)
+        if event == nil {
+            ui_view_event.isHidden = true
+        }else {
+            ui_view_event.isHidden = false
+            ui_label_title_event.text = event?.title
+            ui_label_event_date.text = formatEventDate(event?.metadata?.starts_at)
+            if let _url = URL(string: event?.metadata?.portrait_url ?? "") {
+                iv_event.sd_setImage(with: _url, placeholderImage: UIImage.init(named: "ic_placeholder_my_event"))
+            }
+
+        }
         
     }
     

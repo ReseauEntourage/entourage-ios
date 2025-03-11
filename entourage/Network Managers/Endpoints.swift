@@ -144,6 +144,9 @@ let kAPIConversationReportConversation = "conversations/%@/report?token=%@"
 let kAPIConversationQuitConversation = "conversations/%@/users?token=%@"
 let kAPIConversationGetDetailConversation = "conversations/%@?token=%@"
 let kAPIAddUserToConversation = "conversations/%@/users?token=%@"
+// Conversations filtrées
+let kAPIConversationGetOutingConversations = "conversations/outings?token=%@&page=%d&per=%d"
+let kAPIConversationGetPrivateConversations = "conversations/privates?token=%@&page=%d&per=%d"
 
 
 //Chat message

@@ -1723,3 +1723,11 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle_plural" = "%d contacts bloqués";
 "language_change_redirect" = "Vous allez être redirigé sur la page d'accueil pour changer la langue de l'application";
 "settings_back_subtitle" = "Retour aux paramètres";
+"event_conversation" = "Voir la conversation de l'événement";
+
+"event_conv_filter_all" = "Toutes";
+"event_conv_filter_discussions" = "Discussions";
+"event_conv_filter_events" = "Événements";
+
+"event_discut_title" = "Retrouvez toutes les informations de l’événement Ici";
+"event_button_add_calendar" = "Ajoutez à l'agenda";

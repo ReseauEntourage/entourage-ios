@@ -435,6 +435,10 @@
 		2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */; };
 		26471DFD2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26471DFC2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift */; };
 		26499C362D0B1CD900AF88DC /* VibrationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26499C352D0B1CC000AF88DC /* VibrationUtil.swift */; };
+		2649A4B42D7F57F200FD100E /* FilterDiscussionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649A4B32D7F57F200FD100E /* FilterDiscussionCell.swift */; };
+		2649A4B62D7F586800FD100E /* FilterDiscussionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2649A4B52D7F586800FD100E /* FilterDiscussionCell.xib */; };
+		2649A4B82D7F94E200FD100E /* DiscussionEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649A4B72D7F94E200FD100E /* DiscussionEventCell.swift */; };
+		2649A4BA2D7F963E00FD100E /* DiscussionEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2649A4B92D7F963E00FD100E /* DiscussionEventCell.xib */; };
 		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
 		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
@@ -999,6 +1003,10 @@
 		2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		26471DFC2CA5A71F00292882 /* AmbassadorAskNotificationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbassadorAskNotificationPopup.swift; sourceTree = "<group>"; };
 		26499C352D0B1CC000AF88DC /* VibrationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationUtil.swift; sourceTree = "<group>"; };
+		2649A4B32D7F57F200FD100E /* FilterDiscussionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDiscussionCell.swift; sourceTree = "<group>"; };
+		2649A4B52D7F586800FD100E /* FilterDiscussionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDiscussionCell.xib; sourceTree = "<group>"; };
+		2649A4B72D7F94E200FD100E /* DiscussionEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionEventCell.swift; sourceTree = "<group>"; };
+		2649A4B92D7F963E00FD100E /* DiscussionEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscussionEventCell.xib; sourceTree = "<group>"; };
 		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
 		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
@@ -1329,6 +1337,7 @@
 		0243DCC928AF8D0800273679 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
+				2649A4B22D7F57DB00FD100E /* cells */,
 				0243DCCA28AF8D3300273679 /* ConversationsMainHomeViewController.swift */,
 				026DAC4E28B37D67007517F6 /* ConversationListMainCell.swift */,
 				0264C5D928B5154E001EA654 /* ConversationDetailMessagesViewController.swift */,
@@ -2138,6 +2147,17 @@
 			path = welcomecells;
 			sourceTree = "<group>";
 		};
+		2649A4B22D7F57DB00FD100E /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				2649A4B72D7F94E200FD100E /* DiscussionEventCell.swift */,
+				2649A4B32D7F57F200FD100E /* FilterDiscussionCell.swift */,
+				2649A4B52D7F586800FD100E /* FilterDiscussionCell.xib */,
+				2649A4B92D7F963E00FD100E /* DiscussionEventCell.xib */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
 		266B261F2AB8AD2400C8EAD8 /* EventMainListV2ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2487,6 +2507,7 @@
 				2630F61A2C21CCE6007BAE56 /* HomeInitialPedagogicHorizontalCell.xib in Resources */,
 				029E307C27DB5EF300B12357 /* GoogleService-Info.plist in Resources */,
 				26AD11A12AEFE33C00FA7BEC /* LangValidateButton.xib in Resources */,
+				2649A4B62D7F586800FD100E /* FilterDiscussionCell.xib in Resources */,
 				26C1BB682A3AF13F00C81C09 /* WelcomeFourImageCell.xib in Resources */,
 				2619E1472A262AD8000BD574 /* WelcomeTwoGroupExampleCell.xib in Resources */,
 				2630F6202C2431BE007BAE56 /* MainFilter.storyboard in Resources */,
@@ -2616,6 +2637,7 @@
 				26D13E242BA35F3A00CAD4F7 /* QuestionCell.xib in Resources */,
 				02F5FEC527E0CB6800A14313 /* MJAlertController.xib in Resources */,
 				02F527782799990F00929431 /* GuideSolidarity.storyboard in Resources */,
+				2649A4BA2D7F963E00FD100E /* DiscussionEventCell.xib in Resources */,
 				26BB4D532CCFC25900A8ACF7 /* CreateAction4ChoiceCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2678,6 +2700,7 @@
 				0288A8D927CCDA5C008D7011 /* PictureUploadS3Service.swift in Sources */,
 				02A92C1B2897D2C2000DFF95 /* ActionsMainHomeViewController.swift in Sources */,
 				02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */,
+				2649A4B42D7F57F200FD100E /* FilterDiscussionCell.swift in Sources */,
 				0241FE0C286DDB700065E560 /* EventEditMainViewController.swift in Sources */,
 				021FD96D2876F12E00D3AA54 /* EventListSectionCell.swift in Sources */,
 				266B26362AB9E5FD00C8EAD8 /* EmptyListCell.swift in Sources */,
@@ -2694,6 +2717,7 @@
 				025E917427F3619300D4A7A8 /* ReportUserViewController.swift in Sources */,
 				02E854522865CA090012D941 /* EventChoosePictureViewController.swift in Sources */,
 				0208B0CD289D6F28009A7A58 /* ActionParamsCGUViewController.swift in Sources */,
+				2649A4B82D7F94E200FD100E /* DiscussionEventCell.swift in Sources */,
 				0208B0C9289D2E9D009A7A58 /* ActionFullTopCell.swift in Sources */,
 				0229376D27A434F500206201 /* ApplicationTheme.swift in Sources */,
 				02B94C21284F5838006059EF /* HomeMainViewController.swift in Sources */,

@@ -101,6 +101,13 @@ class ConversationListMainCell: UITableViewCell {
             ui_detail_message.text = "message_user_blocked_by_me_list".localized
             ui_detail_message.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13, color: .rougeErreur))
         }
+        if message.type == "outing" {
+            self.ui_image.layer.cornerRadius = 0
+            if let _url = URL(string: message.imageUrl ?? "") {
+                ui_image.sd_setImage(with: _url, placeholderImage: UIImage.init(named: "ic_placeholder_my_event"))
+            }
+            self.ui_username.text = message.title
+        }
     }
     
     @IBAction func action_send_message(_ sender: Any) {

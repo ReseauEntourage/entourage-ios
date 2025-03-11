@@ -257,7 +257,7 @@ class NeighborhoodDetailViewController: UIViewController {
                 
                 // Récupère les posts et recharge la table view une fois terminé
                 self.getMorePosts {
-                    // Ici, getMorePosts appelle déjà reloadData()
+                
                 }
                 
                 if hasToRefreshLists {
@@ -306,6 +306,7 @@ class NeighborhoodDetailViewController: UIViewController {
         }
         
         hasNewAndOldSections = false
+        self.ui_tableview.reloadData()
     }
     
     func addRemoveMember(isAdd:Bool) {

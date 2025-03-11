@@ -1625,3 +1625,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle" = "%d contact blocat";
 "settings_unblock_contacts_subtitle_plural" = "%d contacte blocate";
 "language_change_redirect" = "Veți fi redirecționat către pagina principală pentru a schimba limba aplicației";
+"event_conversation" = "Vezi conversația evenimentului";
+"event_conv_filter_all" = "Toate";
+"event_conv_filter_discussions" = "Discuții";
+"event_conv_filter_events" = "Evenimente";
+"event_discut_title" = "Găsiți toate informațiile despre eveniment aici";
+"event_button_add_calendar" = "Adaugă în calendar";

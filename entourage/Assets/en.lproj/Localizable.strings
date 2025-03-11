@@ -1767,3 +1767,10 @@
 "settings_unblock_contacts_subtitle" = "%d contact blocked";
 "settings_unblock_contacts_subtitle_plural" = "%d contacts blocked";
 "language_change_redirect" = "You will be redirected to the home page to change the application language";
+"event_conversation" = "View event conversation";
+
+"event_conv_filter_all" = "All";
+"event_conv_filter_discussions" = "Discussions";
+"event_conv_filter_events" = "Events";
+"event_discut_title" = "Find all the event information here";
+"event_button_add_calendar" = "Add to calendar";

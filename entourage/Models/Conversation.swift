@@ -13,6 +13,7 @@ struct Conversation:Codable {
     var uuid:String? = nil
     var type:String? = nil
     var title:String? = nil
+    var imageUrl:String? = nil
     private var lastMessage:LastMessage? = nil
     var numberUnreadMessages:Int? = 0
     var section:String? = nil
@@ -125,6 +126,7 @@ struct Conversation:Codable {
         case uid = "id"
         case uuid
         case title = "name"
+        case imageUrl = "image_url"
         case type
         case lastMessage = "last_message"
         case numberUnreadMessages = "number_of_unread_messages"

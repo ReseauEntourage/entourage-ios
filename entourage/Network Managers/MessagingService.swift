@@ -283,6 +283,40 @@ struct MessagingService:ParsingDataCodable {
         }
     }
 
+    static func getOutingConversations(currentPage: Int, per: Int, completion: @escaping (_ conversations: [Conversation]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        
+        let endpoint = String(format: kAPIConversationGetOutingConversations, token, currentPage, per)
+        
+        Logger.print("***** getAll outing messages : \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let conversations: [Conversation]? = self.parseDatas(data: data, key: "conversations")
+            DispatchQueue.main.async { completion(conversations, nil) }
+        }
+    }
 
+    static func getPrivateConversations(currentPage: Int, per: Int, completion: @escaping (_ conversations: [Conversation]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        
+        let endpoint = String(format: kAPIConversationGetPrivateConversations, token, currentPage, per)
+        
+        Logger.print("***** getAll private messages : \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let conversations: [Conversation]? = self.parseDatas(data: data, key: "conversations")
+            DispatchQueue.main.async { completion(conversations, nil) }
+        }
+    }
     
 }

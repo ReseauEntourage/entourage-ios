@@ -81,6 +81,12 @@ extension UIColor {
     static var appOrange: UIColor {
         return UIColor(named: "orange_app") ?? .red
     }
+    static var appOrangeConversationEventClicked: UIColor {
+        return UIColor(named: "orange_app_conv_event_clicked") ?? .red
+    }
+    static var appOrangeConversationEventUnClicked: UIColor {
+        return UIColor(named: "orange_app_conv_event_unclicked") ?? .red
+    }
     static var appOrangeDark: UIColor {
         return UIColor(named: "orange_dark") ?? .red
     }
