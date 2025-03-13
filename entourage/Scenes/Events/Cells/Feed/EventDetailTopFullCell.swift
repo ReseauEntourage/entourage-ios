@@ -150,6 +150,11 @@ class EventDetailTopFullCell: UITableViewCell {
     func populateCell(event: Event?, delegate: EventDetailTopCellDelegate, isEntourageEvent: Bool) {
         
         self.delegate = delegate
+        if event?.isMember ?? false {
+            ui_btn_i_participate.isHidden = false
+        }else{
+            ui_btn_i_participate.isHidden = true
+        }
         
         ui_img_member_1.isHidden = true
         ui_img_member_2.isHidden = true
