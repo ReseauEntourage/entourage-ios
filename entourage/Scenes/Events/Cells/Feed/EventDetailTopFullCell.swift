@@ -45,6 +45,7 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_btn_agenda: UIButton!
     // **Nouvelle IBOutlet** pour la carte
     @IBOutlet weak var ui_mapview: MKMapView!
+    @IBOutlet weak var ui_btn_i_participate: UIButton!
     
     weak var delegate: EventDetailTopCellDelegate? = nil
     
@@ -101,6 +102,8 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_mapview.delegate = self
         ui_mapview.layer.cornerRadius = 20
         ui_mapview.isHidden = true // on la masquera si c'est un event en ligne
+        ui_btn_i_participate.semanticContentAttribute = .forceRightToLeft
+
     }
     
     @objc func onShareBtnClick() {
@@ -137,6 +140,11 @@ class EventDetailTopFullCell: UITableViewCell {
         button.layer.cornerRadius = 25
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 13)
         button.clipsToBounds = true
+        if let image = button.imageView?.image {
+            let tintedImage = image.withRenderingMode(.alwaysTemplate)
+            button.setImage(tintedImage, for: .normal)
+            button.tintColor = .white // Force l'icône en noir
+        }
     }
     
     func populateCell(event: Event?, delegate: EventDetailTopCellDelegate, isEntourageEvent: Bool) {

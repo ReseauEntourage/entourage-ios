@@ -615,38 +615,6 @@
                                     <action selector="action_show_params:" destination="1Sc-VH-DcS" eventType="touchUpInside" id="2mn-Sb-9N8"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDV-QZ-aDe" customClass="Floaty" customModule="Ent_Beta" customModuleProvider="target">
-                                <rect key="frame" x="324" y="768" width="62" height="62"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" name="orange_light_a50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="63w-Bk-txs"/>
-                                    <constraint firstAttribute="width" constant="62" id="gsa-xa-Q0K"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="ic_button_plus_fill"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rotationDegrees">
-                                        <real key="value" value="135"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="itemSize">
-                                        <real key="value" value="62"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="buttonShadowColor">
-                                        <color key="value" name="orange_light_a50"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
-                                        <color key="value" name="orange_light_a50"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autoCloseOnTap" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="itemSpace">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasShadow" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="itemButtonColor">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0g5-JR-O6f">
                                 <rect key="frame" x="137" y="778" width="140" height="44"/>
                                 <subviews>
@@ -726,25 +694,46 @@
                                     <constraint firstItem="wpq-TL-rnB" firstAttribute="leading" secondItem="96a-eR-4eP" secondAttribute="leading" id="fBb-9z-BSc"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ai2-pO-Sc8">
+                                <rect key="frame" x="20" y="822" width="374" height="44"/>
+                                <color key="backgroundColor" name="orange_medium"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Dnz-c7-1fx"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="h9B-qk-HdW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                                <color key="tintColor" name="orange_app"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Partager" image="ic_share">
+                                    <color key="titleColor" name="orange_app"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h8q-3a-IrB"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="tG7-Gh-1Qg" firstAttribute="trailing" secondItem="keO-la-aOU" secondAttribute="trailing" constant="-32" id="7aL-Dj-2Gi"/>
                             <constraint firstItem="WNs-CT-aUo" firstAttribute="trailing" secondItem="h8q-3a-IrB" secondAttribute="trailing" id="7ls-5s-mwR"/>
-                            <constraint firstItem="h8q-3a-IrB" firstAttribute="bottom" secondItem="ZDV-QZ-aDe" secondAttribute="bottom" constant="32" id="9N9-vX-CR2"/>
                             <constraint firstAttribute="trailing" secondItem="96a-eR-4eP" secondAttribute="trailing" id="AKM-9r-Tm6"/>
                             <constraint firstItem="0En-it-5CA" firstAttribute="top" secondItem="2TO-pb-TzV" secondAttribute="top" id="B6F-ni-lEg"/>
                             <constraint firstItem="s64-Vk-nq7" firstAttribute="trailing" secondItem="tG7-Gh-1Qg" secondAttribute="trailing" id="C2W-id-OO3"/>
                             <constraint firstItem="tG7-Gh-1Qg" firstAttribute="centerY" secondItem="keO-la-aOU" secondAttribute="centerY" id="D5P-dE-LrY"/>
                             <constraint firstItem="WNs-CT-aUo" firstAttribute="leading" secondItem="h8q-3a-IrB" secondAttribute="leading" id="DeH-qn-zWG"/>
-                            <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="ZDV-QZ-aDe" secondAttribute="trailing" constant="28" id="EWF-AE-3sp"/>
                             <constraint firstItem="0En-it-5CA" firstAttribute="leading" secondItem="2TO-pb-TzV" secondAttribute="leading" id="FxK-Ch-rEi"/>
                             <constraint firstItem="vYp-09-kV0" firstAttribute="leading" secondItem="h8q-3a-IrB" secondAttribute="leading" constant="4" id="H4x-HG-KxT"/>
+                            <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="ai2-pO-Sc8" secondAttribute="trailing" constant="20" id="Icl-7w-a6G"/>
                             <constraint firstItem="zD4-yh-EWb" firstAttribute="leading" secondItem="h8q-3a-IrB" secondAttribute="leading" constant="12" id="IeA-fu-KOJ"/>
                             <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="vYp-09-kV0" secondAttribute="trailing" constant="4" id="K8q-fv-P3z"/>
                             <constraint firstItem="keO-la-aOU" firstAttribute="top" secondItem="h8q-3a-IrB" secondAttribute="top" id="RRc-gM-NYG"/>
                             <constraint firstItem="s64-Vk-nq7" firstAttribute="bottom" secondItem="tG7-Gh-1Qg" secondAttribute="bottom" id="UPK-1g-gcY"/>
+                            <constraint firstItem="ai2-pO-Sc8" firstAttribute="bottom" secondItem="njp-Cx-lM0" secondAttribute="bottom" constant="-30" id="VDV-tO-HTS"/>
                             <constraint firstItem="zD4-yh-EWb" firstAttribute="top" secondItem="h8q-3a-IrB" secondAttribute="top" constant="70" id="VhQ-Vb-CtI"/>
                             <constraint firstItem="h8q-3a-IrB" firstAttribute="bottom" secondItem="0g5-JR-O6f" secondAttribute="bottom" constant="40" id="WJE-V1-T0K"/>
                             <constraint firstItem="b8a-81-v78" firstAttribute="leading" secondItem="2TO-pb-TzV" secondAttribute="leading" constant="21" id="WrQ-ua-Bzj"/>
@@ -762,6 +751,7 @@
                             <constraint firstAttribute="trailing" secondItem="0En-it-5CA" secondAttribute="trailing" id="oyk-oX-5n6"/>
                             <constraint firstItem="keO-la-aOU" firstAttribute="leading" secondItem="2TO-pb-TzV" secondAttribute="leading" id="rP1-qd-4j6"/>
                             <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="keO-la-aOU" secondAttribute="trailing" id="s2f-lo-Api"/>
+                            <constraint firstItem="ai2-pO-Sc8" firstAttribute="leading" secondItem="h8q-3a-IrB" secondAttribute="leading" constant="20" id="skU-yB-aMD"/>
                             <constraint firstItem="cq7-SG-lLc" firstAttribute="centerY" secondItem="keO-la-aOU" secondAttribute="centerY" id="uja-PY-jvx"/>
                             <constraint firstItem="ndW-m2-Mjh" firstAttribute="top" secondItem="h8q-3a-IrB" secondAttribute="top" constant="16" id="xOj-xQ-01W"/>
                         </constraints>
@@ -769,8 +759,7 @@
                     <navigationItem key="navigationItem" id="kgh-xa-f0g"/>
                     <connections>
                         <outlet property="ui_bt_floating_join" destination="0g5-JR-O6f" id="xp6-EQ-Cft"/>
-                        <outlet property="ui_constraint_button" destination="EWF-AE-3sp" id="qTB-9e-Rvz"/>
-                        <outlet property="ui_floaty_bouton" destination="ZDV-QZ-aDe" id="085-nr-dGV"/>
+                        <outlet property="ui_btn_participate_and_see_conv" destination="ai2-pO-Sc8" id="iV1-JL-zsC"/>
                         <outlet property="ui_iv_event" destination="CUf-aQ-xDD" id="y0o-sI-jB0"/>
                         <outlet property="ui_iv_event2" destination="WNs-CT-aUo" id="pq6-8v-dIN"/>
                         <outlet property="ui_iv_event_mini" destination="cq7-SG-lLc" id="6ne-7u-nzz"/>
@@ -1983,6 +1972,7 @@
         <image name="ic_selector_off" width="20" height="20"/>
         <image name="ic_selector_on" width="20" height="20"/>
         <image name="ic_setting_mini" width="14" height="15"/>
+        <image name="ic_share" width="20" height="20"/>
         <image name="img_neighb_valid_group" width="23" height="19"/>
         <image name="params_next" width="9" height="13"/>
         <image name="placeholder_user" width="124" height="124"/>

@@ -24,16 +24,15 @@ class EventDetailFeedViewController: UIViewController {
     @IBOutlet weak var ui_label_title_event: UILabel!
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     
-    @IBOutlet weak var ui_constraint_button: NSLayoutConstraint!
     @IBOutlet weak var ui_view_button_back: UIView!
     @IBOutlet weak var ui_view_button_settings: UIView!
     
-    @IBOutlet weak var ui_floaty_bouton: Floaty!
     
     @IBOutlet weak var ui_view_full_image: UIView!
     @IBOutlet weak var ui_scrollview: UIScrollView!
     @IBOutlet weak var ui_iv_preview: UIImageView!
     
+    @IBOutlet weak var ui_btn_participate_and_see_conv: UIButton!
     // Pour afficher/cacher le bouton « Participer » lors du scroll
     @IBOutlet weak var ui_title_bt_join: UILabel!
     @IBOutlet weak var ui_bt_floating_join: UIView!
@@ -72,7 +71,7 @@ class EventDetailFeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         
@@ -81,7 +80,6 @@ class EventDetailFeedViewController: UIViewController {
         if !ApplicationTheme.iPhoneHasNotch() {
             maxViewHeight -= 20
         }
-        setupFloatingButton()
         
         addShadowAndRadius(customView: ui_view_button_settings)
         addShadowAndRadius(customView: ui_view_button_back)
@@ -106,8 +104,6 @@ class EventDetailFeedViewController: UIViewController {
         
         populateTopView(isAfterLoading: false)
         
-        ui_floaty_bouton.isHidden = true
-        ui_bt_floating_join.isHidden = true
         
         ui_view_canceled.isHidden = true
         
@@ -117,6 +113,8 @@ class EventDetailFeedViewController: UIViewController {
         
         // Tracking analytique
         AnalyticsLoggerManager.logEvent(name: Event_detail_main)
+        configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_conversation".localized)
+        ui_btn_participate_and_see_conv.addTarget(self, action: #selector(button_join_leave_see), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -133,34 +131,27 @@ class EventDetailFeedViewController: UIViewController {
         getEventDetail()
     }
     
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 13)
+        button.clipsToBounds = true
+        if let image = button.imageView?.image {
+            let tintedImage = image.withRenderingMode(.alwaysTemplate)
+            button.setImage(tintedImage, for: .normal)
+            button.tintColor = .white // Force l'icône en noir
+        }
+    }
+    
+    
     // MARK: - Setup
     
     func registerCellsNib() {
         // On ne garde que la FullCell
         ui_tableview.register(UINib(nibName: EventDetailTopFullCell.identifier, bundle: nil),
                               forCellReuseIdentifier: EventDetailTopFullCell.identifier)
-    }
-    
-    func setupFloatingButton() {
-        let floatItem2 = createButtonItem(title: "neighborhood_menu_post_survey".localized,
-                                          iconName: "ic_survey_creation") { _ in
-            self.showCreateSurvey()
-        }
-        
-        let floatItem3 = createButtonItem(title: "neighborhood_menu_post_post".localized,
-                                          iconName: "ic_menu_button_create_post") { _ in
-            AnalyticsLoggerManager.logEvent(name: Event_detail_action_post)
-            self.showCreatePost()
-        }
-        
-        ui_floaty_bouton.overlayColor = .white.withAlphaComponent(0.10)
-        ui_floaty_bouton.addBlurOverlay = true
-        ui_floaty_bouton.itemSpace = 24
-        ui_floaty_bouton.addItem(item: floatItem3)
-        ui_floaty_bouton.addItem(item: floatItem2)
-        ui_floaty_bouton.sticky = true
-        ui_floaty_bouton.animationSpeed = 0.3
-        ui_floaty_bouton.fabDelegate = self
     }
     
     private func addShadowAndRadius(customView: UIView) {
@@ -240,11 +231,6 @@ class EventDetailFeedViewController: UIViewController {
         }
         
         self.ui_label_title_event.text = self.event?.title
-        
-        // Le floaty est visible uniquement si l’utilisateur est membre
-        self.ui_floaty_bouton?.isHidden = !(self.event?.isMember ?? false)
-        
-        // Le bouton "participer" du bas reste caché par défaut (sera géré au scroll)
         self.ui_bt_floating_join.isHidden = true
     }
     
@@ -366,6 +352,7 @@ class EventDetailFeedViewController: UIViewController {
                         let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                             vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: true, conversation: conversation)
+                            vc.type = "outing"
 
                             if let presentedVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController,
                                presentedVC is ConversationDetailMessagesViewController {
@@ -437,6 +424,11 @@ class EventDetailFeedViewController: UIViewController {
                 return
             }
         }
+    }
+    
+    @objc func button_join_leave_see(){
+        AnalyticsLoggerManager.logEvent(name: Event_detail_action_participate)
+        joinLeaveEvent()
     }
     
     @IBAction func action_join(_ sender: Any) {
@@ -793,36 +785,7 @@ extension EventDetailFeedViewController: CreateSurveyValidationDelegate {
     }
 }
 
-// MARK: - FloatyDelegate
-extension EventDetailFeedViewController: FloatyDelegate {
-    func floatyWillOpen(_ floaty: Floaty) {
-        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Plus)
-        UIView.animate(withDuration: 0.3) {
-            self.ui_constraint_button.constant = 16
-            self.view.layoutIfNeeded()
-        }
-    }
-    func floatyClosed(_ floaty: Floaty) {
-        UIView.animate(withDuration: 0.3) {
-            self.ui_constraint_button.constant = 16
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    private func createButtonItem(title: String,
-                                  iconName: String,
-                                  handler: @escaping ((FloatyItem) -> Void)) -> FloatyItem {
-        let floatyItem = FloatyItem()
-        floatyItem.buttonColor = .clear
-        floatyItem.icon = UIImage(named: iconName)
-        floatyItem.titleLabel.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
-        floatyItem.titleShadowColor = .clear
-        floatyItem.title = title
-        floatyItem.imageSize = CGSize(width: 62, height: 62)
-        floatyItem.handler = handler
-        return floatyItem
-    }
-}
+
 
 // MARK: - AmbassadorAskNotificationPopupDelegate
 extension EventDetailFeedViewController: AmbassadorAskNotificationPopupDelegate {
