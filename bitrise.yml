@@ -117,6 +117,9 @@ workflows:
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
     - cache-push: {}
+    meta:
+      bitrise.io:
+        stack: osx-xcode-16.2.x
   Entourage-TestFlight:
     before_run:
     - Prepare
