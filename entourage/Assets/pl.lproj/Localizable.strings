@@ -1241,7 +1241,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_placeholder_discut" = "Nouveau message";
 "messaging_message_title" = "Conversation";
 "messaging_message_send" = "Envoyer";
-"messaging_message_no_message" = "0encore de message";
+"messaging_message_no_message" = "Pas encore de message";
 
 "message_title_new_conv" = "Nouvelle conversation";
 "message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la conversation dans les paramètres.";

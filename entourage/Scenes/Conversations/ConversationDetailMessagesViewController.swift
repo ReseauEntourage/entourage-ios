@@ -486,7 +486,9 @@ class ConversationDetailMessagesViewController: UIViewController {
                         .username
                     if conversation.members_count ?? 0 > 2 {
                         let count = (conversation.members_count ?? 1) - 1
-                        self.currentMessageTitle = (self.currentMessageTitle ?? "") + " + " + String(count) + " membres"
+                        if let memberNameOne = conversation.members?[0].username, let memberNameTwo = conversation.members?[1].username{
+                            self.currentMessageTitle = memberNameOne + ", " + memberNameTwo + "..."
+                        }
                     }
                     let _title = self.currentMessageTitle ?? "messaging_message_title".localized
                     self.ui_top_view.setTitlesOneLine()
@@ -497,6 +499,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
                 // Si on a le type “outing”, on cherche le titre exact de l’événement
                 if self.type == "outing" {
+                    self.ui_view_empty.isHidden = true
                     EventService.getEventWithId(self.currentConversation?.uuid ?? "") { event, error in
                         let _title = event?.title ?? "messaging_message_title".localized
                         self.ui_top_view.populateView(
