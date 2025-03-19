@@ -128,14 +128,11 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         // Configuration label "event_discut"
         ui_label_event_discut.text = "event_discut_title".localized
-        ui_label_event_discut.setFontBody(size: 15)
+        ui_label_event_discut.setFontTitle(size: 15)
         
         IQKeyboardManager.shared.enable = false
         ui_bt_title_user.isHidden = !isOneToOne
        
-        // Si vous utilisez DiscussionEventCell, vous l’avez peut-être laissé dans votre code
-        // (mais ici, vous avez explicitement dit que vous ajoutez la vue direct => la cell n’est pas forcément utilisée).
-        // On conserve l’enregistrement (au cas où vous en avez besoin dans le code).
         ui_tableview.register(UINib(nibName: DiscussionEventCell.identifier, bundle: nil),
                               forCellReuseIdentifier: DiscussionEventCell.identifier)
 

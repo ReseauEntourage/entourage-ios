@@ -23,7 +23,8 @@ class ConversationsMainHomeViewController: UIViewController {
     var dataSource = [ConversationMainDTO]()
     var notificationsDisabled: Bool = false
     var selectedFilter: String = "event_conv_filter_all".localized
-    
+    var isLastPage = false
+
     var currentPage = 1
     var isFetching = false
     let perPage = 25
@@ -76,8 +77,10 @@ class ConversationsMainHomeViewController: UIViewController {
         if isFetching { return }
         isFetching = true
         
+        
         if reset {
             currentPage = 1
+            isLastPage = false
         }
 
         let fetchMethod: (Int, Int, @escaping ([Conversation]?, EntourageNetworkError?) -> Void) -> Void
@@ -98,6 +101,11 @@ class ConversationsMainHomeViewController: UIViewController {
             self.isFetching = false
             guard let conversations = conversations else { return }
             
+            if conversations.count < self.perPage {
+                self.isLastPage = true
+            } else {
+                self.isLastPage = false
+            }
             self.loadDTO(conversations: conversations, reset: reset)
             self.currentPage += 1
         }
@@ -187,7 +195,7 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.size.height
         
-        if offsetY > contentHeight - frameHeight - 100 {
+        if offsetY > contentHeight - frameHeight - 100 && !isLastPage {
             loadConversations(reset: false)
         }
     }

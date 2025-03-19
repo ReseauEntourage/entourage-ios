@@ -25,6 +25,7 @@ class DiscussionEventCell:UITableViewCell {
     
     override func awakeFromNib() {
         ui_label.text = "event_discut_title".localized
+        ui_label.setFontBody(size: 15)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleViewTap))
         ui_view.addGestureRecognizer(tapGesture)
         ui_view.isUserInteractionEnabled = true

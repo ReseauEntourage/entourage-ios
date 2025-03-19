@@ -104,11 +104,19 @@ class ConversationListMainCell: UITableViewCell {
             ui_detail_message.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13, color: .rougeErreur))
         }
         if message.type == "outing" {
-            self.ui_image.layer.cornerRadius = 0
+            self.ui_image.layer.cornerRadius = 5
             if let _url = URL(string: message.imageUrl ?? "") {
                 ui_image.sd_setImage(with: _url, placeholderImage: UIImage.init(named: "ic_placeholder_my_event"))
             }
             self.ui_username.text = message.title
+        }else {
+            self.ui_image.layer.cornerRadius = ui_image.frame.height / 2
+            if let urlImg = message.user?.imageUrl, !urlImg.isEmpty, let mainUrl = URL(string: urlImg) {
+                ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
+            }
+            else {
+                ui_image.image = UIImage.init(named: "placeholder_user")
+            }
         }
     }
     

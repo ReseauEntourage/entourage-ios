@@ -351,7 +351,7 @@ class EventDetailFeedViewController: UIViewController {
                     if let convId = conversation?.uid {
                         let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-                            vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: true, conversation: conversation)
+                            vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: false, conversation: conversation)
                             vc.type = "outing"
 
                             if let presentedVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController,

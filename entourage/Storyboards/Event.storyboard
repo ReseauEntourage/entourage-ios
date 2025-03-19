@@ -695,10 +695,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ai2-pO-Sc8">
-                                <rect key="frame" x="20" y="822" width="374" height="44"/>
+                                <rect key="frame" x="20" y="818" width="374" height="48"/>
                                 <color key="backgroundColor" name="orange_medium"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Dnz-c7-1fx"/>
+                                    <constraint firstAttribute="height" constant="48" id="Dnz-c7-1fx"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="h9B-qk-HdW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
@@ -706,12 +706,12 @@
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Partager" image="ic_share">
+                                <state key="normal" title="Partager">
                                     <color key="titleColor" name="orange_app"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                        <real key="value" value="20"/>
+                                        <real key="value" value="24"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
@@ -1972,7 +1972,6 @@
         <image name="ic_selector_off" width="20" height="20"/>
         <image name="ic_selector_on" width="20" height="20"/>
         <image name="ic_setting_mini" width="14" height="15"/>
-        <image name="ic_share" width="20" height="20"/>
         <image name="img_neighb_valid_group" width="23" height="19"/>
         <image name="params_next" width="9" height="13"/>
         <image name="placeholder_user" width="124" height="124"/>

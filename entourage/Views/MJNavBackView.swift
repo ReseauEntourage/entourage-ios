@@ -114,6 +114,7 @@ class MJNavBackView: UIView {
             ui_label_event_date.text = formatEventDate(event?.metadata?.starts_at)
             if let _url = URL(string: event?.metadata?.portrait_url ?? "") {
                 iv_event.sd_setImage(with: _url, placeholderImage: UIImage.init(named: "ic_placeholder_my_event"))
+                iv_event.layer.cornerRadius = 5
             }
 
         }
