@@ -18,6 +18,7 @@ class ConversationParametersViewController: BasePopViewController {
     var isCreator = false
     var username:String = ""
     var isSeveral = false
+    var isEvent = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -201,6 +202,9 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             cell.populateCell(title: isOneToOne ? "conv_param_title_signal".localized : "conv_param_title_signal_action".localized, subtitle: isOneToOne ? "conv_param_subtitle_signal".localized : "conv_param_subtitle_signal_action".localized, isTitleOrange: true, pictoStr: "ic_signal_orange")
             return cell
         case 2:
+            if isEvent {
+                return UITableViewCell() // Retourne une cellule vide pour ne pas l'afficher
+            }
             if isOneToOne && !isSeveral {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
                 let subtitle = String.init(format: "conv_param_subtitle_block".localized, username)

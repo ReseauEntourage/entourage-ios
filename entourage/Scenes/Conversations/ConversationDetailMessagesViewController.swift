@@ -476,6 +476,9 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation {
+                if conversation.members_count ?? 0 > 2 {
+                    self.isOneToOne = false
+                }
                 // Mise à jour du titre si oneToOne
                 if self.isOneToOne {
                     self.currentMessageTitle = conversation.members?
@@ -656,6 +659,11 @@ class ConversationDetailMessagesViewController: UIViewController {
             AnalyticsLoggerManager.logEvent(name: Message_action_param)
             vc.modalPresentationStyle = .fullScreen
             vc.userId = currentUserId
+            if currentConversation?.type == "outing"{
+                vc.isEvent = true
+            }else{
+                vc.isEvent = false
+            }
             vc.conversationId = conversationId
             vc.isOneToOne = isOneToOne
             if let _members = self.currentConversation?.members {
