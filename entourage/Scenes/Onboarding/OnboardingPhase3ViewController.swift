@@ -91,6 +91,37 @@ class OnboardingPhase3ViewController: UIViewController {
         button.clipsToBounds = true
       }
     
+    func updateUserType() {
+        EnhancedOnboardingConfiguration.shared.shouldNotDisplayCampain = true
+        if(isBeEntour){
+            EnhancedOnboardingConfiguration.shared.preference = "contribution"
+        }
+        var userType = UserType.none
+        if isBeEntour {
+            userType = .alone
+        }
+        else if isEntour {
+            userType = .neighbour
+        }
+        
+        if(isBoth){
+            userType = .both
+        }
+       
+        if isAsso {
+            userType = .assos
+        }
+        if let fromAppDelegate{
+            fromAppDelegate.updatePreference(userType: userType)
+        }else{
+            pageDelegate?.addInfos(userType: userType)
+
+        }
+        if (isBeEntour || isAsso || isEntour) && location_name_new != nil {
+            self.ui_next_btn.isOpaque = true
+        }
+    }
+    
 }
 
 extension OnboardingPhase3ViewController : UITableViewDataSource, UITableViewDelegate {
@@ -149,6 +180,7 @@ extension OnboardingPhase3ViewController : UITableViewDataSource, UITableViewDel
             default:
                 break
             }
+            self.updateUserType()
             self.loadDTO()
         case .adressCell:
             let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
