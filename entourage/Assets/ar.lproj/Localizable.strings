@@ -1667,3 +1667,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conv_filter_events" = "الفعاليات";
 "event_discut_title" = "ابحث عن جميع معلومات الحدث هنا";
 "event_button_add_calendar" = "أضف إلى التقويم";
+"onboarding_phase_three_question_contribution" = "بالإضافة إلى لقاء الأشخاص، كيف ترغب في المساهمة في مجتمع Entourage؟";
+"onboarding_phase_three_option_entourer" = "الدعم";
+"onboarding_phase_three_option_entourer_description" = "أرغب في تقديم الدعم لجيراني المحتاجين.";
+"onboarding_phase_three_option_etre_entoure" = "تلقي الدعم";
+"onboarding_phase_three_option_etre_entoure_description" = "أنا في وضع ضعيف وأبحث عن الدعم.";
+"onboarding_phase_three_option_les_deux" = "كلاهما";
+"onboarding_phase_three_option_les_deux_description" = "تقديم الدعم وتلقيه.";
+"onboarding_phase_three_question_quartier" = "ما هو حيّك؟";
+"onboarding_phase_three_placeholder_quartier" = "عنوان المدينة أو المقاطعة";

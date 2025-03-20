@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.8.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 74 66" style="enable-background:new 0 0 74 66;" xml:space="preserve">
+<style type="text/css">
+	.st0{filter:url(#Adobe_OpacityMaskFilter);}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	
+		.st2{mask:url(#m51bllx66b_00000060019431769166468410000016089963702133060023_);fill-rule:evenodd;clip-rule:evenodd;fill:#FF9739;}
+	.st3{fill-rule:evenodd;clip-rule:evenodd;fill:#FF9739;}
+	.st4{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFCFA;}
+</style>
+<g>
+	<g transform="translate(0 4.605)">
+		<defs>
+			<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0.2" y="0" width="52.2" height="52.2">
+				<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+			</filter>
+		</defs>
+		
+			<mask maskUnits="userSpaceOnUse" x="0.2" y="0" width="52.2" height="52.2" id="m51bllx66b_00000060019431769166468410000016089963702133060023_">
+			<g class="st0">
+				<path id="i8rui6xp3a_00000078734469460479641620000015967469054066680212_" class="st1" d="M0.2,0h52.2v52.2H0.2V0z"/>
+			</g>
+		</mask>
+		<path class="st2" d="M52.3,24.3c1,15-10.7,27.6-25.5,27.9H8c-0.2,0-0.4-0.2-0.4-0.4c0-0.1,0.1-0.2,0.2-0.3l3.4-2.8
+			c0.4-0.3,0.4-0.8,0.1-1.2c0-0.1-0.1-0.1-0.1-0.1c-0.5-0.3-0.9-0.7-1.4-1.1c-5.8-4.8-9.5-12-9.5-20.1c0-15,12.6-27,27.8-26
+			C40.9,0.9,51.4,11.3,52.3,24.3"/>
+	</g>
+	<path class="st1" d="M51.9,62.9h15.5c0.3,0,0.5-0.4,0.2-0.6L64.8,60c-0.3-0.2-0.3-0.7-0.1-1c0,0,0.1-0.1,0.1-0.1
+		c0.4-0.3,0.8-0.6,1.1-0.9c4.8-3.9,7.8-9.9,7.8-16.6C73.8,29.1,63.5,19.2,51,20c-10.6,0.7-19.3,9.3-20.1,19.9
+		C30.1,52.3,39.7,62.7,51.9,62.9L51.9,62.9z"/>
+	<g>
+		<path class="st3" d="M53.9,41.4c0,0.8-0.6,1.6-1.5,1.6c-0.8,0-1.6-0.6-1.6-1.5c0,0,0-0.1,0-0.1c0-0.8,0.7-1.5,1.5-1.5
+			C53.2,39.9,53.9,40.6,53.9,41.4 M47.7,41.4c0,0.8-0.7,1.5-1.5,1.5s-1.5-0.7-1.5-1.5c0,0,0,0,0,0c0-0.8,0.7-1.5,1.5-1.5
+			C47.1,39.9,47.7,40.6,47.7,41.4 M60,41.4c0,0.8-0.7,1.5-1.5,1.5S57,42.3,57,41.4c0,0,0,0,0,0c0-0.8,0.7-1.5,1.5-1.5
+			C59.3,39.9,60,40.6,60,41.4"/>
+	</g>
+	<g>
+		<path class="st4" d="M26.3,30.7c0,0.8-0.7,1.5-1.5,1.5c-0.8,0-1.5-0.7-1.5-1.5c0,0,0,0,0,0c0-0.8,0.7-1.5,1.5-1.5
+			C25.6,29.2,26.3,29.9,26.3,30.7 M20.1,30.7c0,0.8-0.7,1.5-1.5,1.5c-0.8,0-1.5-0.7-1.5-1.5c0,0,0,0,0,0c0-0.8,0.7-1.5,1.5-1.5
+			C19.4,29.2,20.1,29.9,20.1,30.7 M32.4,30.7c0,0.8-0.7,1.5-1.5,1.5c-0.8,0-1.5-0.7-1.5-1.5c0,0,0,0,0,0c0-0.8,0.7-1.5,1.5-1.5
+			C31.7,29.2,32.4,29.9,32.4,30.7"/>
+	</g>
+</g>
+</svg>

@@ -3150,3 +3150,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conv_filter_events" = "Eventos";
 "event_discut_title" = "Encuentra toda la información del evento aquí";
 "event_button_add_calendar" = "Añadir al calendario";
+"onboarding_phase_three_question_contribution" = "Además de conocer gente, ¿cómo le gustaría contribuir a la Comunidad Entourage?";
+"onboarding_phase_three_option_entourer" = "Apoyar";
+"onboarding_phase_three_option_entourer_description" = "Quiero ofrecer apoyo a mis vecinos que lo necesiten.";
+"onboarding_phase_three_option_etre_entoure" = "Ser apoyado";
+"onboarding_phase_three_option_etre_entoure_description" = "Estoy en una situación vulnerable y busco apoyo.";
+"onboarding_phase_three_option_les_deux" = "Ambos";
+"onboarding_phase_three_option_les_deux_description" = "Ofrecer apoyo y recibirlo.";
+"onboarding_phase_three_question_quartier" = "¿Cuál es tu barrio?";
+"onboarding_phase_three_placeholder_quartier" = "Dirección de ciudad o departamento";

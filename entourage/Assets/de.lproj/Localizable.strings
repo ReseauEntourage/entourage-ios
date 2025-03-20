@@ -1727,3 +1727,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conv_filter_events" = "Veranstaltungen";
 "event_discut_title" = "Finden Sie hier alle Informationen zum Event";
 "event_button_add_calendar" = "Zum Kalender hinzufügen";
+"onboarding_phase_three_question_contribution" = "Zusätzlich zu menschlichen Begegnungen, wie möchten Sie zur Entourage-Community beitragen?";
+"onboarding_phase_three_option_entourer" = "Unterstützen";
+"onboarding_phase_three_option_entourer_description" = "Ich möchte meinen Nachbarn in Not Unterstützung anbieten.";
+"onboarding_phase_three_option_etre_entoure" = "Unterstützt werden";
+"onboarding_phase_three_option_etre_entoure_description" = "Ich befinde mich in einer schwierigen Situation und suche Unterstützung.";
+"onboarding_phase_three_option_les_deux" = "Beides";
+"onboarding_phase_three_option_les_deux_description" = "Unterstützung anbieten und erhalten.";
+"onboarding_phase_three_question_quartier" = "In welchem Viertel wohnen Sie?";
+"onboarding_phase_three_placeholder_quartier" = "Stadt oder Bezirksadresse";

@@ -1732,3 +1732,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conv_filter_events" = "Wydarzenia";
 "event_discut_title" = "Znajdź wszystkie informacje o wydarzeniu tutaj";
 "event_button_add_calendar" = "Dodaj do kalendarza";
+"onboarding_phase_three_question_contribution" = "Oprócz spotkań z ludźmi, w jaki sposób chcesz wspierać społeczność Entourage?";
+"onboarding_phase_three_option_entourer" = "Wspierać";
+"onboarding_phase_three_option_entourer_description" = "Chcę oferować wsparcie sąsiadom, którzy tego potrzebują.";
+"onboarding_phase_three_option_etre_entoure" = "Być wspieranym";
+"onboarding_phase_three_option_etre_entoure_description" = "Jestem w trudnej sytuacji i szukam wsparcia.";
+"onboarding_phase_three_option_les_deux" = "Oba";
+"onboarding_phase_three_option_les_deux_description" = "Oferować wsparcie i je otrzymywać.";
+"onboarding_phase_three_question_quartier" = "Jaka jest twoja dzielnica?";
+"onboarding_phase_three_placeholder_quartier" = "Adres miasta lub regionu";

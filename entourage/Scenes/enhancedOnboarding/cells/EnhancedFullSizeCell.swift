@@ -7,10 +7,18 @@ class EnhancedFullSizeCell: UITableViewCell {
     @IBOutlet weak var ui_image_choice: UIImageView!
     @IBOutlet weak var ui_image_check: UIImageView!
     @IBOutlet weak var ui_title_choice_label: UILabel!
+    @IBOutlet weak var ui_label_title_phase_3: UILabel!
     
     @IBOutlet weak var ui_contraintbottom: NSLayoutConstraint!
     @IBOutlet weak var ui_view_container: UIView!
+    @IBOutlet weak var ui_label_desc_phase_3: UILabel!
     // Variable
+    class var identifier: String {
+        return String(describing: self)
+    }
+
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.ui_image_choice.backgroundColor = UIColor.appBeige
@@ -57,6 +65,19 @@ class EnhancedFullSizeCell: UITableViewCell {
             ui_view_container.backgroundColor = .clear
             self.ui_view_container.layer.borderColor = UIColor.appGrey151.cgColor
         }
+    }
+    
+    func configureAComment(title:String, comment:String){
+        ui_title_choice_label.isHidden = true
+        
+        ui_label_title_phase_3.isHidden = false
+        ui_label_title_phase_3.setFontTitle(size: 15)
+        ui_label_title_phase_3.text = title
+        
+        ui_label_desc_phase_3.isHidden = false
+        ui_label_desc_phase_3.setFontBody(size: 13)
+        ui_label_desc_phase_3.text = comment
+    
     }
 
 }
