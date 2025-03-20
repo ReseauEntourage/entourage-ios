@@ -247,7 +247,6 @@ class ConversationDetailMessagesViewController: UIViewController {
             // Cacher la vue event_discut
             ui_view_event_discut.isHidden = false
             ui_view_new_conversation.backgroundColor = UIColor.white
-            ui_title_new_conv
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleEventViewTap))
             ui_view_event_discut.addGestureRecognizer(tapGesture)
             ui_view_event_discut.isUserInteractionEnabled = true
@@ -476,11 +475,12 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation {
-                if conversation.members_count ?? 0 > 2 {
-                    self.isOneToOne = false
-                }
+                
                 // Mise à jour du titre si oneToOne
                 if self.isOneToOne {
+                    if conversation.members_count ?? 0 > 2 {
+                        self.isOneToOne = false
+                    }
                     self.currentMessageTitle = conversation.members?
                         .first(where: { $0.uid != self.meId })?
                         .username
@@ -680,7 +680,15 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
 
     @IBAction func action_show_user(_ sender: Any) {
-        showUser(userId: currentUserId)
+        if isOneToOne{
+            showUser(userId: currentUserId)
+        }else{
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
+                vc.conversationId = self.currentConversation?.uid
+                vc.modalPresentationStyle = .currentContext
+                self.present(vc, animated: true)
+            }
+        }
     }
 
     @IBAction func action_close_new_view(_ sender: Any) {
