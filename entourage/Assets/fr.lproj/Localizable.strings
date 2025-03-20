@@ -1724,6 +1724,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "language_change_redirect" = "Vous allez être redirigé sur la page d'accueil pour changer la langue de l'application";
 "settings_back_subtitle" = "Retour aux paramètres";
 "event_conversation" = "Voir la conversation";
+"go_to_event_conversation" = "Participer et rejoindre la conversation";
 
 "event_conv_filter_all" = "Toutes";
 "event_conv_filter_discussions" = "Discussions";

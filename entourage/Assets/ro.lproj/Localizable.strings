@@ -1632,6 +1632,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_discut_title" = "Găsiți toate informațiile despre eveniment aici";
 "event_button_add_calendar" = "Adaugă în calendar";
 "onboarding_phase_three_question_contribution" = "Pe lângă întâlnirile umane, cum doriți să contribuiți la Comunitatea Entourage?";
+"go_to_event_conversation" = "Participă și alătură-te conversației";
 "onboarding_phase_three_option_entourer" = "Oferi sprijin";
 "onboarding_phase_three_option_entourer_description" = "Doresc să ofer sprijin vecinilor mei care au nevoie.";
 "onboarding_phase_three_option_etre_entoure" = "A fi sprijinit";

@@ -1733,6 +1733,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_discut_title" = "Znajdź wszystkie informacje o wydarzeniu tutaj";
 "event_button_add_calendar" = "Dodaj do kalendarza";
 "onboarding_phase_three_question_contribution" = "Oprócz spotkań z ludźmi, w jaki sposób chcesz wspierać społeczność Entourage?";
+"go_to_event_conversation" = "Dołącz i weź udział w rozmowie";
 "onboarding_phase_three_option_entourer" = "Wspierać";
 "onboarding_phase_three_option_entourer_description" = "Chcę oferować wsparcie sąsiadom, którzy tego potrzebują.";
 "onboarding_phase_three_option_etre_entoure" = "Być wspieranym";

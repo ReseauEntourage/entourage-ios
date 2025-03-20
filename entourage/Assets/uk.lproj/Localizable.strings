@@ -1707,6 +1707,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conv_filter_discussions" = "Дискусії";
 "event_conv_filter_events" = "Події";
 "event_discut_title" = "Знайдіть всю інформацію про подію тут";
+"go_to_event_conversation" = "Приєднатися та взяти участь у розмові";
 "event_button_add_calendar" = "Додати до календаря";
 "onboarding_phase_three_question_contribution" = "Окрім зустрічей з людьми, як ви хочете допомогти спільноті Entourage?";
 "onboarding_phase_three_option_entourer" = "Підтримувати";

@@ -63,7 +63,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_main_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
-        ui_lbl_nb_members.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_lbl_nb_members.setFontBody(size: 13)
         ui_lbl_about_title?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_lbl_about_title?.text = "event_detail_about_title".localized
         ui_lbl_about_desc?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
@@ -151,9 +151,11 @@ class EventDetailTopFullCell: UITableViewCell {
         
         self.delegate = delegate
         if event?.isMember ?? false {
-            ui_btn_i_participate.isHidden = false
+            self.ui_btn_i_participate.isHidden = false
+            self.ui_btn_agenda.isHidden = false
         }else{
-            ui_btn_i_participate.isHidden = true
+            self.ui_btn_i_participate.isHidden = true
+            self.ui_btn_agenda.isHidden = true
         }
         
         ui_img_member_1.isHidden = true

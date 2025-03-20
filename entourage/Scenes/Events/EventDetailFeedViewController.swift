@@ -165,10 +165,9 @@ class EventDetailFeedViewController: UIViewController {
     
     func setupViews() {
         maxImageHeight = ui_iv_event.frame.height
-        
         ui_view_height_constraint.constant = maxViewHeight
         viewNormalHeight = ui_view_height_constraint.constant
-        
+
         let topPadding = ApplicationTheme.getTopIPhonePadding()
         let inset = UIEdgeInsets(top: viewNormalHeight - topPadding, left: 0, bottom: 0, right: 0)
         minViewHeight += topPadding - 20
@@ -293,7 +292,11 @@ class EventDetailFeedViewController: UIViewController {
             
             self.event = event
             self.eventId = event?.uid ?? 0
-            
+            if event?.isMember ?? false {
+                self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_conversation".localized)
+            }else{
+                self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "go_to_event_conversation".localized)
+            }
             // Si l’événement est annulé => on affiche le bandeau
             if event?.isCanceled() ?? false {
                 self.ui_view_canceled.isHidden = false

@@ -1666,6 +1666,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conv_filter_discussions" = "المناقشات";
 "event_conv_filter_events" = "الفعاليات";
 "event_discut_title" = "ابحث عن جميع معلومات الحدث هنا";
+"go_to_event_conversation" = "انضم وشارك في المحادثة";
 "event_button_add_calendar" = "أضف إلى التقويم";
 "onboarding_phase_three_question_contribution" = "بالإضافة إلى لقاء الأشخاص، كيف ترغب في المساهمة في مجتمع Entourage؟";
 "onboarding_phase_three_option_entourer" = "الدعم";
