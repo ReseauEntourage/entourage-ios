@@ -190,6 +190,10 @@ extension OnboardingPhase3ViewController:OnboardingEndCellDelegate {
         else if isEntour {
             userType = .neighbour
         }
+        
+        if(isBoth){
+            userType = .both
+        }
        
         if isAsso {
             userType = .assos
@@ -233,6 +237,7 @@ enum UserType:Int {
     case neighbour = 1
     case alone = 2
     case assos = 3
+    case both = 4
     case none = 0
     
     func getGoalString() -> String {
@@ -243,8 +248,11 @@ enum UserType:Int {
             return "offer_help"
         case .assos:
             return "organization"
+        case .both:
+            return "offer_and_ask_help"
         case .none:
             return ""
+
         }
     }
 }
