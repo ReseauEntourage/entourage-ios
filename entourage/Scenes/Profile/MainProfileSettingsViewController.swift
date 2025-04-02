@@ -216,4 +216,7 @@ extension MainProfileSettingsViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }

@@ -208,6 +208,10 @@ extension NeighborhoodParamsGroupViewController: GroupDetailDelegate {
 
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodParamsGroupViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet 
+    }
+    
     func goBack() {
         self.dismissDelegate?.onDismiss()
         self.navigationController?.dismiss(animated: true)

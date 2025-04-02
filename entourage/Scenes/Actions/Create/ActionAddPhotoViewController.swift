@@ -160,6 +160,11 @@ extension ActionAddPhotoViewController: UIImagePickerControllerDelegate,UINaviga
 
 //MARK: - MJNavBackViewDelegate -
 extension ActionAddPhotoViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+
+    }
+    
     func goBack() {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }

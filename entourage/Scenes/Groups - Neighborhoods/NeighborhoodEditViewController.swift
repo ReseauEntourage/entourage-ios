@@ -461,6 +461,11 @@ extension NeighborhoodEditViewController: PlaceViewControllerDelegate {
 
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodEditViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+
+    }
+    
     func goBack() { //TODO: on affiche la pop de warning ?
         self.dismiss(animated: true)
         //        let alertVC = MJAlertController()

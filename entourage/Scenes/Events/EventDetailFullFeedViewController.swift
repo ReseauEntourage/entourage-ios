@@ -270,6 +270,9 @@ extension EventDetailFullFeedViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 //MARK: - EKEVENT Delegate -

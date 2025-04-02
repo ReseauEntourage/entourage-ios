@@ -148,4 +148,7 @@ extension NeighborhoodPostPicturePreviewResizeViewController: MJNavBackViewDeleg
     func goBack() {
         self.navigationController?.popViewController(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }

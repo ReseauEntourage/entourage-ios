@@ -429,6 +429,9 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
 
 //MARK: - MJNavBackViewDelegate -
 extension EventCreateMainViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+    }
     func goBack() {
         
         if hasNoInput() {

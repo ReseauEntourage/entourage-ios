@@ -153,6 +153,11 @@ class ParamsNotifsViewController: BasePopViewController {
 
 // MARK: - MainUserProfileTopCellDelegate -
 extension ParamsNotifsViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+
+    }
+    
     func goBack() {
         self.dismiss(animated: true)
     }

@@ -140,6 +140,10 @@ extension EventEditRecurrencyViewController: EventCreateDateCellDelegate {
 
 //MARK: - MJNavBackViewDelegate -
 extension EventEditRecurrencyViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //NOthing yet
+    }
+    
     func goBack() {
         self.dismiss(animated: true)
     }

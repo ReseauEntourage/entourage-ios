@@ -400,6 +400,9 @@ extension OTLoginV2ViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.popViewController(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 extension OTLoginV2ViewController:MJAlertControllerDelegate{

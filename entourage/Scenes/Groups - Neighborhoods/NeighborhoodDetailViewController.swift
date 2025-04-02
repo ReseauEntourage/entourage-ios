@@ -1013,6 +1013,9 @@ extension NeighborhoodDetailViewController: MJNavBackViewDelegate {
         self.navigationController?.dismiss(animated: true)
         
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 extension NeighborhoodDetailViewController:NeighborhoodDetailViewControllerDelegate {

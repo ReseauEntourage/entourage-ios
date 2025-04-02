@@ -45,12 +45,18 @@ class ConversationListMainCell: UITableViewCell {
     
     func populateCell(message:Conversation, delegate:ConversationListMainCellDelegate, position:Int) {
         ui_username.text = message.title
-        if let _messageTitle = message.title, let _count = message.members_count {
-            if _count > 2 {
-                if let memberNameOne = message.members?[0].username, let memberNameTwo = message.members?[1].username{
-                    ui_username.text = memberNameOne + ", " + memberNameTwo + "..."
+        if let count = message.members_count, count > 2, let members = message.members {
+            let trimmedNames = members
+                .prefix(5) // max 3 premiers
+                .compactMap { $0.username } // éviter les nil
+                .map { username -> String in
+                    let end = username.index(username.endIndex, offsetBy: -2, limitedBy: username.startIndex) ?? username.startIndex
+                    return String(username[..<end]) // enlève les 2 derniers caractères
                 }
-            }
+
+            ui_username.text = trimmedNames.joined(separator: ",")
+        } else {
+            ui_username.text = message.title
         }
         ui_role.text = message.getRolesWithPartnerFormated()
         if let _message = message.getLastMessage {
@@ -104,7 +110,7 @@ class ConversationListMainCell: UITableViewCell {
             ui_detail_message.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13, color: .rougeErreur))
         }
         if message.type == "outing" {
-            self.ui_image.layer.cornerRadius = 5
+            self.ui_image.layer.cornerRadius = 10
             if let _url = URL(string: message.imageUrl ?? "") {
                 ui_image.sd_setImage(with: _url, placeholderImage: UIImage.init(named: "ic_placeholder_my_event"))
             }

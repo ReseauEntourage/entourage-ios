@@ -271,6 +271,10 @@ extension ConversationParametersViewController: GroupDetailDelegate {
 
 //MARK: - MJNavBackViewDelegate -
 extension ConversationParametersViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+    }
+    
     func goBack() {
         self.navigationController?.dismiss(animated: true)
     }

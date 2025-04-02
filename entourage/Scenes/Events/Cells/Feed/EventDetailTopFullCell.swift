@@ -22,7 +22,6 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_img_member_1: UIImageView!
     @IBOutlet weak var ui_img_member_2: UIImageView!
     @IBOutlet weak var ui_img_member_3: UIImageView!
-    @IBOutlet weak var ui_view_members_more: UIView!
     @IBOutlet weak var ui_lbl_about_title: UILabel!
     @IBOutlet weak var ui_lbl_about_desc: ActiveLabel!
     @IBOutlet weak var ui_taglist_view: TagListView!
@@ -63,7 +62,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_main_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
-        ui_lbl_nb_members.setFontBody(size: 13)
+        ui_lbl_nb_members.setFontBody(size: 15)
         ui_lbl_about_title?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_lbl_about_title?.text = "event_detail_about_title".localized
         ui_lbl_about_desc?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
@@ -87,7 +86,6 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
         
         ui_view_place_limit.isHidden = true
-        ui_view_members_more.isHidden = true
         
         ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
         configureWhiteButton(self.ui_btn_share, withTitle: "neighborhood_add_post_send_button".localized)
@@ -124,7 +122,7 @@ class EventDetailTopFullCell: UITableViewCell {
         button.layer.borderColor = UIColor.appOrange.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 21
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 13)
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         button.clipsToBounds = true
         if let image = button.imageView?.image {
             let tintedImage = image.withRenderingMode(.alwaysTemplate)
@@ -138,7 +136,7 @@ class EventDetailTopFullCell: UITableViewCell {
         button.backgroundColor = UIColor.appOrange
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 25
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 13)
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         button.clipsToBounds = true
         if let image = button.imageView?.image {
             let tintedImage = image.withRenderingMode(.alwaysTemplate)
@@ -164,7 +162,6 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_img_member_1.image = nil
         ui_img_member_2.image = nil
         ui_img_member_3.image = nil
-        ui_view_members_more.isHidden = true
         
         guard let event = event else {
             return
@@ -191,10 +188,7 @@ class EventDetailTopFullCell: UITableViewCell {
         }
         
         let _membersCount: Int = event.membersCount ?? 0
-        if _membersCount > 3 {
-            ui_view_members_more.isHidden = false
-        }
-        
+
         ui_lbl_nb_members.text = ""
         var membersCount = ""
         if _membersCount > 1 {

@@ -131,6 +131,10 @@ extension ActionsMyListViewController: UITableViewDataSource, UITableViewDelegat
 
 //MARK: - MJNavBackViewDelegate -
 extension ActionsMyListViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yey
+    }
+    
     func goBack() {
         self.navigationController?.dismiss(animated: true)
     }

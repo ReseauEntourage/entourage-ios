@@ -111,14 +111,20 @@ class MJNavBackView: UIView {
         }else {
             ui_view_event.isHidden = false
             ui_label_title_event.text = event?.title
-            ui_label_event_date.text = formatEventDate(event?.metadata?.starts_at)
+            ui_label_event_date.text = formatEventDate(event?.metadata?.starts_at).capitalizingFirstLetter()
             if let _url = URL(string: event?.metadata?.portrait_url ?? "") {
                 iv_event.sd_setImage(with: _url, placeholderImage: UIImage.init(named: "ic_placeholder_my_event"))
                 iv_event.layer.cornerRadius = 5
             }
-
         }
-        
+        let tapEventGesture = UITapGestureRecognizer(target: self, action: #selector(eventTapped))
+        ui_view_event.addGestureRecognizer(tapEventGesture)
+        ui_view_event.isUserInteractionEnabled = true
+
+    }
+    
+    @objc private func eventTapped() {
+        delegate?.didTapEvent()
     }
     
     func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil, isClose:Bool = false, marginLeftButton:CGFloat? = nil, subtitle:String? = nil, doubleRightMargin:Bool = false) {
@@ -199,4 +205,6 @@ class MJNavBackView: UIView {
 //MARK: - Protocol -
 protocol MJNavBackViewDelegate: AnyObject {
     func goBack()
+    func didTapEvent()
+
 }

@@ -215,6 +215,9 @@ extension PartnerDetailViewController: MJNavBackViewDelegate {
     func goBack() {
         self.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 //MARK: - MJAlertControllerDelegate -

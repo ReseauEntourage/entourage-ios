@@ -470,6 +470,9 @@ extension NeighborhoodPostAddViewController: MJNavBackViewDelegate {
             self.dismiss(animated: true)
         }
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 

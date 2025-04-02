@@ -128,4 +128,7 @@ extension ProfileEditInterestsViewController: MJNavBackViewDelegate {
     func goBack() {
         self.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }

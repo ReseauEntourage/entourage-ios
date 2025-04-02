@@ -205,4 +205,7 @@ extension OTLoginChangePhoneViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.popViewController(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }

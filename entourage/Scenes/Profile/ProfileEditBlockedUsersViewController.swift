@@ -187,6 +187,11 @@ extension ProfileEditBlockedUsersViewController : UITableViewDataSource, UITable
 
 //MARK: - MJNavBackViewDelegate -
 extension ProfileEditBlockedUsersViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+
+    }
+    
     func goBack() {
         self.dismiss(animated: true)
     }

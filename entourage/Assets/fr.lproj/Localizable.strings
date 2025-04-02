@@ -1730,8 +1730,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conv_filter_discussions" = "Discussions";
 "event_conv_filter_events" = "Événements";
 
-"event_discut_title" = "retrouvez toutes les informations de l’événement ici";
-"event_button_add_calendar" = "Ajoutez à l'agenda";
+"event_discut_title" = "Retrouvez toutes les informations de l’événement ici";
+"event_button_add_calendar" = "Ajouter à l'agenda";
 "onboarding_phase_three_question_contribution" = "En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ?";
 "onboarding_phase_three_option_entourer" = "Entourer";
 "onboarding_phase_three_option_entourer_description" = "Je souhaite proposer du soutien à mes voisin(e)s qui en ont besoin.";

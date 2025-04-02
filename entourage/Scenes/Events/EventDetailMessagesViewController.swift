@@ -535,6 +535,9 @@ extension EventDetailMessagesViewController: MJNavBackViewDelegate {
         dismiss(animated: true)
         navigationController?.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 // MARK: - UITextViewDelegate

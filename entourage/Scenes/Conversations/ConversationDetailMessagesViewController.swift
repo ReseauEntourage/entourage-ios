@@ -128,7 +128,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         // Configuration label "event_discut"
         ui_label_event_discut.text = "event_discut_title".localized
-        ui_label_event_discut.setFontTitle(size: 15)
+        ui_label_event_discut.setFontBody(size: 15)
         
         IQKeyboardManager.shared.enable = false
         ui_bt_title_user.isHidden = !isOneToOne
@@ -286,6 +286,7 @@ class ConversationDetailMessagesViewController: UIViewController {
                 self.present(navVc, animated: true, completion: nil)
             }
         }
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -994,6 +995,18 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
 
 // MARK: - MJNavBackViewDelegate
 extension ConversationDetailMessagesViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        if type == "outing" {
+            handleEventViewTap()
+        } else {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
+                vc.conversationId = self.currentConversation?.uid
+                vc.modalPresentationStyle = .currentContext
+                self.present(vc, animated: true)
+            }
+        }
+    }
+    
     func goBack() {
         self.parentDelegate?.updateUnreadCount(
             conversationId: conversationId,

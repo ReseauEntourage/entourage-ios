@@ -153,6 +153,9 @@ extension EventChoosePictureViewController: MJNavBackViewDelegate {
         AnalyticsLoggerManager.logEvent(name: Action_NewGroup_Step3_PicGallery_Close)
         self.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 //MARK: - Protocol PlaceViewControllerDelegate -
