@@ -44,19 +44,24 @@ class ConversationListMembersViewController: BasePopViewController {
             self.goBack()
             return
         }
-        var _convId = ""
-        if self.conversationId != 0 {
-            _convId = String(conversationId)
-        }
-        MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
-            if let conversation = conversation,let members = conversation.members {
-                self.users = members
+
+        let idAsString = String(conversationId)
+
+        MessagingService.getDetailConversation(conversationId: idAsString) { conversation, error in
+            if let conversation = conversation {
                 self.userCreatorId = conversation.author?.id
             }
-            
-            self.ui_tableview.reloadData()
+
+            // On appelle ensuite les users de cette conversation
+            MessagingService.getUsersForConversation(conversationId: conversationId) { users, error in
+                if let users = users {
+                    self.users = users
+                }
+                self.ui_tableview.reloadData()
+            }
         }
     }
+
     
     func searchUser(text:String) {
         usersSearch.removeAll()

@@ -319,4 +319,23 @@ struct MessagingService:ParsingDataCodable {
         }
     }
     
+    static func getUsersForConversation(conversationId: Int, completion: @escaping (_ users: [MemberLight]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        
+        let endpoint = String(format: kAPIConversationUsersList, "\(conversationId)", token)
+        Logger.print("***** get users for conversation: \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data, error == nil,
+                  let httpResp = resp as? HTTPURLResponse, httpResp.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let users: [MemberLight]? = self.parseDatas(data: data, key: "users")
+            DispatchQueue.main.async { completion(users, nil) }
+        }
+    }
+
 }
