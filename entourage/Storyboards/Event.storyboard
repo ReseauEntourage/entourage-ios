@@ -695,16 +695,14 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ai2-pO-Sc8">
-                                <rect key="frame" x="137" y="818" width="140" height="48"/>
+                                <rect key="frame" x="166.5" y="818" width="81" height="48"/>
                                 <color key="backgroundColor" name="orange_medium"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Dnz-c7-1fx"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="h9B-qk-HdW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                 <color key="tintColor" name="orange_app"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Partager">
                                     <color key="titleColor" name="orange_app"/>

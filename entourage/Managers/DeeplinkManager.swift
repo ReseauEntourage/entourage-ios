@@ -64,6 +64,10 @@ struct DeepLinkManager {
             }
             
         }
+        if notification.tracking == "outing_message"{
+            showConversation(conversationId: notification.instanceId)
+            return
+        }
         switch notification.instanceType {
         case .users:
             showUser(userId: notification.instanceId)
@@ -97,10 +101,16 @@ struct DeepLinkManager {
             }
         case .none:
             break
+        case .outing_message:
+            showConversation(conversationId: notification.instanceId)
         }
     }
     
     static func presentActionFromDeeplink(notification:NotificationPushData) {
+        if notification.tracking == "outing_message"{
+            showConversation(conversationId: notification.instanceId)
+            return
+        }
         switch notification.instanceType {
         case .users:
             showUser(userId: notification.instanceId)
@@ -134,6 +144,9 @@ struct DeepLinkManager {
             }
         case .none:
             break
+        case .outing_message:
+            showConversation(conversationId: notification.instanceId)
+
         }
     }
     
@@ -163,6 +176,9 @@ struct DeepLinkManager {
             return "placeholder_user"
         case .none:
             return "ic_notif_placeholder"
+        case .outing_message:
+            return "placeholder_user"
+
         }
     }
     

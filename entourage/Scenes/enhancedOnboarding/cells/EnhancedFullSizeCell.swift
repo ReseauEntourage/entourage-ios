@@ -63,7 +63,7 @@ class EnhancedFullSizeCell: UITableViewCell {
         } else {
             ui_image_check.image = UIImage(named: "ic_onboarding_unchecked")
             ui_view_container.backgroundColor = .clear
-            self.ui_view_container.layer.borderColor = UIColor.appGrey151.cgColor
+            self.ui_view_container.layer.borderColor = UIColor.appGreyOff.cgColor
         }
     }
     

@@ -136,8 +136,8 @@ class EventDetailFeedViewController: UIViewController {
         button.backgroundColor = UIColor.appOrange
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 25
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 13)
-        button.clipsToBounds = true
         if let image = button.imageView?.image {
             let tintedImage = image.withRenderingMode(.alwaysTemplate)
             button.setImage(tintedImage, for: .normal)

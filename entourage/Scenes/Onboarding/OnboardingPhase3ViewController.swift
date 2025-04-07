@@ -174,8 +174,8 @@ extension OnboardingPhase3ViewController : UITableViewDataSource, UITableViewDel
                 break
             case "both":
                 self.isBoth = !self.isBoth
-                self.isEntour = self.isBoth
-                self.isBeEntour = self.isBoth
+                self.isEntour = false
+                self.isBeEntour = false
                 break
             default:
                 break
@@ -207,10 +207,7 @@ extension OnboardingPhase3ViewController:OnboardingEndCellDelegate {
         self.isEntour = isEntour
         self.isBeEntour = isBeEntour
         self.isAsso = isAsso
-        if(isBoth == true){
-            self.isEntour = true
-            self.isBeEntour = true
-        }
+
         EnhancedOnboardingConfiguration.shared.shouldNotDisplayCampain = true
         if(isBeEntour){
             EnhancedOnboardingConfiguration.shared.preference = "contribution"
