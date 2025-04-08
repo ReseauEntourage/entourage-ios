@@ -46,7 +46,13 @@ workflows:
         - fdu_fabric_location: ./firebase_tools/upload-symbols
         - fdu_logging: "yes"
         - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
+    - dsym-upload-to-crashlytics--no-cocoapods:  
+        is_always_run: true
+        inputs:
+        - google_plist_path: ./entourage/Settings/Environment/GoogleService-Info.plist
+        - dsym_location: $BITRISE_DSYM_PATH
     - ruby-script:
+        is_always_run: true
         inputs:
         - ruby_content: |-
             PROJECT_KEY = 'EN'
@@ -94,12 +100,14 @@ workflows:
             end
         - gemfile_content: ""
     - post-jira-comment-with-build-details:
+        is_always_run: true
         inputs:
         - base_url: $JIRA_BASE_URL
         - api_token: $JIRA_API_TOKEN
         - user_name: $JIRA_USER_EMAIL
         - issue_keys: $JIRA_ISSUE_KEYS
     - slack:
+        is_always_run: true
         inputs:
         - channel: '#iosdev'
         - from_username: Entourage-Beta
@@ -148,6 +156,10 @@ workflows:
         - fdu_fabric_location: ./firebase_tools/upload-symbols
         - fdu_logging: "yes"
         - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
+    - dsym-upload-to-crashlytics--no-cocoapods:  
+        inputs:
+        - google_plist_path: ./entourage/Settings/Environment/GoogleService-Info.plist
+        - dsym_location: $BITRISE_DSYM_PATH
     - cache-push:
         is_always_run: true
     - xcode-build-version:
@@ -181,9 +193,10 @@ workflows:
         - set_java_version: "17"
     - activate-ssh-key:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@6:
+    - git-clone@8:
         inputs:
         - commit: ""
+        - clone_depth: "-1"
         - tag: ""
     - cache-pull: {}
     - cocoapods-install:
