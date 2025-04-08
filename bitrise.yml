@@ -41,11 +41,6 @@ workflows:
         inputs:
         - notify_user_groups: none
         - deploy_path: $BITRISE_DSYM_PATH
-    - firebase-dsym-upload:
-        inputs:
-        - fdu_fabric_location: ./firebase_tools/upload-symbols
-        - fdu_logging: "yes"
-        - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
     - dsym-upload-to-crashlytics--no-cocoapods:  
         is_always_run: true
         inputs:
@@ -151,11 +146,6 @@ workflows:
         inputs:
         - password: $APPLESTORE_PASSWORD
         - itunescon_user: $APPLE_ID
-    - firebase-dsym-upload:
-        inputs:
-        - fdu_fabric_location: ./firebase_tools/upload-symbols
-        - fdu_logging: "yes"
-        - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
     - dsym-upload-to-crashlytics--no-cocoapods:  
         inputs:
         - google_plist_path: ./entourage/Settings/Environment/GoogleService-Info.plist
