@@ -5,7 +5,7 @@
 //  Created by Jerome on 16/05/2022.
 //  Version modifiée pour :
 //  - Afficher les liens en bleu si le contenu est du HTML,
-//  - Appliquer la police "NunitoSans-Regular" en taille 13,
+//  - Appliquer la police "NunitoSans-Regular" en taille 15,
 //  - Supprimer les sauts de ligne/espaces en fin de texte,
 //  - Configurer ActiveLabel pour détecter URL et mentions en utilisant une couleur unifiée,
 //  - Gérer le tap simple pour ouvrir l’URL extraite (qu'elle soit présente dans le HTML ou en texte brut).
@@ -19,7 +19,7 @@ import ActiveLabel
 private let unifiedBlue = UIColor(red: 0.0, green: 122/255.0, blue: 1.0, alpha: 1.0)
 
 // Définir la police de base (au niveau du fichier ou dans la classe)
-private let globalBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+private let globalBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
 
 class NeighborhoodMessageCell: UITableViewCell {
 
@@ -52,7 +52,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     weak var delegate: MessageCellSignalDelegate? = nil
     
     // Changez "private" en "fileprivate" pour que ce membre soit accessible dans l'extension
-    fileprivate static let baseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 28)
+    fileprivate static let baseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 28)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -204,6 +204,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 finalText.append(padding) // Ajoute du padding gauche
                 finalText.append(messageText) // Ajoute le vrai message
                 ui_message.attributedText = finalText
+                ui_message.font = NeighborhoodMessageCell.baseFont
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
                 if let deletedImageView = deletedImageView,
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
@@ -223,7 +224,8 @@ class NeighborhoodMessageCell: UITableViewCell {
 
                 
                 ui_message.attributedText = finalText
-                
+                ui_message.font = NeighborhoodMessageCell.baseFont
+
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
                 if let deletedImageView = deletedImageView,
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
@@ -242,14 +244,16 @@ class NeighborhoodMessageCell: UITableViewCell {
                     ui_message.addGestureRecognizer(longPressGesture)
                 }
                 ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: isTranslated)
+                ui_message.font = NeighborhoodMessageCell.baseFont
                 ui_view_message.backgroundColor = isMe ? UIColor.appOrangeLight_50 : UIColor.appBeige
             }
         } else {
             // Pas de status => message “normal”
             ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: isTranslated)
+            ui_message.font = NeighborhoodMessageCell.baseFont
             ui_message.textColor = UIColor.black
         }
-        ui_message.setFontBody(size: 13)
+        ui_message.setFontBody(size: 15)
         layoutIfNeeded()
     }
     
@@ -299,6 +303,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 finalText.append(padding) // Ajoute du padding gauche
                 finalText.append(messageText) // Ajoute le vrai message
                 ui_message.attributedText = finalText
+                ui_message.font = NeighborhoodMessageCell.baseFont
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
                 if let deletedImageView = deletedImageView,
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
@@ -316,6 +321,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 finalText.append(messageText) // Ajoute le vrai message
 
                 ui_message.attributedText = finalText
+                ui_message.font = NeighborhoodMessageCell.baseFont
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted
                 if let deletedImageView = deletedImageView,
                    !(ui_message.superview?.subviews.contains(deletedImageView) ?? false) {
@@ -340,7 +346,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 // On ne gère pas forcément la traduction dans one2one => on met isTranslated: false,
                 // ou on ajoute un param si nécessaire.
                 ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: false)
-                
+                ui_message.font = NeighborhoodMessageCell.baseFont
                 // Couleur d’arrière-plan
                 ui_view_message.backgroundColor = isMe ? UIColor.appOrangeLight_50 : UIColor.appBeige
                 ui_message.textColor = UIColor.black
@@ -349,6 +355,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         else {
             // Pas de status => message “normal”
             ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: false)
+            ui_message.font = NeighborhoodMessageCell.baseFont
             ui_message.textColor = UIColor.black
         }
         
@@ -372,7 +379,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 }
             }
         }
-        ui_message.setFontBody(size: 13)
+        ui_message.setFontBody(size: 15)
         layoutIfNeeded()
     }
     

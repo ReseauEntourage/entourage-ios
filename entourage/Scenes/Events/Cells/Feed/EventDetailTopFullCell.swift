@@ -101,6 +101,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_mapview.layer.cornerRadius = 20
         ui_mapview.isHidden = true // on la masquera si c'est un event en ligne
         ui_btn_i_participate.semanticContentAttribute = .forceRightToLeft
+        ui_btn_i_participate.titleLabel?.setFontTitle(size: 15)
 
     }
     

@@ -158,7 +158,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         ui_view_block.layer.borderWidth = 1
         ui_view_block.layer.borderColor = UIColor.appGris112.cgColor
         ui_view_block.layer.cornerRadius = ui_view_block.frame.height / 2
-        ui_title_block.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14, color: .appGris112))
+        ui_title_block.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .appGris112))
         ui_view_block.isHidden = true
 
         // Toolbar sur textView
@@ -263,6 +263,10 @@ class ConversationDetailMessagesViewController: UIViewController {
             ui_title_new_conv.text = "message_title_new_conv".localized
             ui_subtitle_new_conv.text = "message_subtitle_new_conv".localized
         }
+        ui_textview_message.typingAttributes = [
+            .font: UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
     }
     
     @objc private func handleEventViewTap() {
@@ -476,7 +480,6 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation {
-                
                 // Mise à jour du titre si oneToOne
                 if self.isOneToOne {
                     if conversation.members_count ?? 0 > 2 {
@@ -485,11 +488,18 @@ class ConversationDetailMessagesViewController: UIViewController {
                     self.currentMessageTitle = conversation.members?
                         .first(where: { $0.uid != self.meId })?
                         .username
-                    if conversation.members_count ?? 0 > 2 {
-                        let count = (conversation.members_count ?? 1) - 1
-                        if let memberNameOne = conversation.members?[0].username, let memberNameTwo = conversation.members?[1].username{
-                            self.currentMessageTitle = memberNameOne + ", " + memberNameTwo + "..."
-                        }
+                    print("eho name " , conversation.members_count)
+                    if let members = conversation.members, members.count > 2 {
+                        print("eho name " , members.count)
+                        let displayNames = members
+                            .filter { $0.uid != self.meId }
+                            .prefix(5)
+                            .compactMap { $0.username }
+                            .map { name -> String in
+                                let endIndex = name.index(name.endIndex, offsetBy: -2, limitedBy: name.startIndex) ?? name.startIndex
+                                return String(name[..<endIndex])
+                            }
+                        self.currentMessageTitle = displayNames.joined(separator: ", ")
                     }
                     let _title = self.currentMessageTitle ?? "messaging_message_title".localized
                     self.ui_top_view.setTitlesOneLine()
@@ -1039,6 +1049,7 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
     }
 
     func textViewDidChange(_ textView: UITextView) {
+        // -- Logique existante pour la détection du "@" et l'affichage des suggestions --
         let cursorPosition = textView.selectedRange.location
         let textNSString = textView.text as NSString
         let textUpToCursor = textNSString.substring(to: cursorPosition)
@@ -1048,11 +1059,12 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
             // Vérifie si c’est un nouvel @ (début ou précédé d’un espace)
             if atIndex == textUpToCursor.startIndex
                || textUpToCursor[textUpToCursor.index(before: atIndex)] == " " {
+                
                 let mentionSubstring = textUpToCursor[atIndex...]
                 if mentionSubstring.contains(" ") {
                     hideMentionSuggestions()
                 } else {
-                    // On retire le "@" pour faire la query
+                    // On retire le "@" pour construire la query
                     let query = String(mentionSubstring.dropFirst())
                     updateMentionSuggestions(query: query)
                 }
@@ -1062,7 +1074,41 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
         } else {
             hideMentionSuggestions()
         }
+
+        // -------------------------------------------------------------------------
+        // AJOUT : Nettoyage des attributs de lien si l’utilisateur a partiellement
+        // effacé une mention (pour éviter le "full bleu souligné" après backspace).
+        // -------------------------------------------------------------------------
+        let mutableAttrText = NSMutableAttributedString(attributedString: textView.attributedText)
+        let fullRange = NSRange(location: 0, length: mutableAttrText.length)
+
+        // On inspecte tous les attributs
+        mutableAttrText.enumerateAttributes(in: fullRange, options: []) { attrs, range, _ in
+            // Vérifie s’il existe un attribut .link sur ce segment
+            if let _ = attrs[.link] {
+                // Récupère la portion de texte
+                let substring = mutableAttrText.string as NSString
+                let mentionText = substring.substring(with: range)
+
+                // Si le texte ne commence plus par "@" ou est trop court, ce n’est plus une mention valide
+                if mentionText.count < 2 || !mentionText.hasPrefix("@") {
+                    // Supprime l'attribut lien et le soulignement
+                    mutableAttrText.removeAttribute(.link, range: range)
+                    mutableAttrText.removeAttribute(.underlineStyle, range: range)
+
+                    // Remet la couleur et la police par défaut (ex. NunitoSans 15, noir)
+                    mutableAttrText.addAttribute(.foregroundColor, value: UIColor.black, range: range)
+                    if let font = UIFont(name: "NunitoSans-Regular", size: 15) {
+                        mutableAttrText.addAttribute(.font, value: font, range: range)
+                    }
+                }
+            }
+        }
+        
+        // Réassigne le texte éventuellement nettoyé
+        textView.attributedText = mutableAttrText
     }
+
 
     // Intercepte le clic sur un lien dans le UITextView
     func textView(_ textView: UITextView,
