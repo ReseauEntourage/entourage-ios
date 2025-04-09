@@ -696,7 +696,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         }else{
             if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
                 vc.conversationId = self.currentConversation?.uid
-                vc.modalPresentationStyle = .currentContext
+                vc.modalPresentationStyle = .overCurrentContext
                 self.present(vc, animated: true)
             }
         }

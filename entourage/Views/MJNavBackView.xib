@@ -112,7 +112,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNG-wP-8YF">
-                            <rect key="frame" x="0.0" y="0.0" width="61" height="67"/>
+                            <rect key="frame" x="0.0" y="0.0" width="61" height="62"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="61" id="Hjq-3Z-NeY"/>
                             </constraints>
@@ -126,7 +126,7 @@
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASw-eC-AtQ">
-                            <rect key="frame" x="32" y="67" width="350" height="1"/>
+                            <rect key="frame" x="32" y="62" width="350" height="1"/>
                             <color key="backgroundColor" name="orange_app"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="8Ph-8G-Tcc"/>
@@ -149,7 +149,7 @@
                         <constraint firstItem="hAl-Jb-X6C" firstAttribute="leading" secondItem="Fjg-oT-Srm" secondAttribute="trailing" constant="14" id="MDp-Y3-FOm"/>
                         <constraint firstItem="LNG-wP-8YF" firstAttribute="leading" secondItem="ryC-hl-R29" secondAttribute="leading" id="SSK-bj-ZJW"/>
                         <constraint firstItem="ASw-eC-AtQ" firstAttribute="leading" secondItem="ryC-hl-R29" secondAttribute="leading" constant="32" id="dLm-B9-Ge3"/>
-                        <constraint firstAttribute="bottom" secondItem="ASw-eC-AtQ" secondAttribute="bottom" id="kM5-pi-AoI"/>
+                        <constraint firstAttribute="bottom" secondItem="ASw-eC-AtQ" secondAttribute="bottom" constant="5" id="kM5-pi-AoI"/>
                         <constraint firstAttribute="trailing" secondItem="hAl-Jb-X6C" secondAttribute="trailing" constant="32" id="lij-jY-NOm"/>
                         <constraint firstItem="Fjg-oT-Srm" firstAttribute="leading" secondItem="ryC-hl-R29" secondAttribute="leading" constant="32" id="oCj-aD-Z9W"/>
                         <constraint firstItem="LNG-wP-8YF" firstAttribute="top" secondItem="ryC-hl-R29" secondAttribute="top" id="uIV-Yt-227"/>
