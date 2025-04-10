@@ -123,6 +123,7 @@ class EventDetailTopFullCell: UITableViewCell {
         button.layer.borderColor = UIColor.appOrange.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 21
+        
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         button.clipsToBounds = true
         if let image = button.imageView?.image {
@@ -139,6 +140,7 @@ class EventDetailTopFullCell: UITableViewCell {
         button.layer.cornerRadius = 25
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         button.clipsToBounds = true
+        
         if let image = button.imageView?.image {
             let tintedImage = image.withRenderingMode(.alwaysTemplate)
             button.setImage(tintedImage, for: .normal)

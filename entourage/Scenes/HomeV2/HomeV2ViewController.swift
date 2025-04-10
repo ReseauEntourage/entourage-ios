@@ -793,6 +793,7 @@ extension HomeV2ViewController {
                     if let onboardingPageVC = storyboard.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
                         onboardingPageVC.currentPhasePosition = 3
                         onboardingPageVC.shouldLaunchThird = true
+                        
                         if let _user = UserDefaults.currentUser {
                             onboardingPageVC.temporaryUser = _user
                         }

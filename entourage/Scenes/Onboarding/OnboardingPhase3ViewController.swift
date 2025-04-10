@@ -77,6 +77,7 @@ class OnboardingPhase3ViewController: UIViewController {
     
     @objc func onNextClick(){
         self.dismiss(animated: false) {
+            self.pageDelegate?.addInfos(userType: self.userTypeSelected)
             self.fromAppDelegate?.sendOnboardingEnd()
         }
     }
@@ -175,22 +176,29 @@ extension OnboardingPhase3ViewController : UITableViewDataSource, UITableViewDel
                 self.isEntour = !self.isEntour
                 self.isBeEntour = false
                 self.isBoth = false
+                self.updateUserType()
+                self.loadDTO()
                 break
             case "been_entour":
                 self.isEntour = false
                 self.isBeEntour = !self.isBeEntour
                 self.isBoth = false
+                self.updateUserType()
+                self.loadDTO()
                 break
             case "both":
                 self.isBoth = !self.isBoth
                 self.isEntour = false
                 self.isBeEntour = false
+                self.updateUserType()
+                self.loadDTO()
                 break
             default:
+                self.updateUserType()
+                self.loadDTO()
                 break
             }
-            self.updateUserType()
-            self.loadDTO()
+
         case .adressCell:
             let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
@@ -206,50 +214,6 @@ extension OnboardingPhase3ViewController : UITableViewDataSource, UITableViewDel
     }
 }
 
-extension OnboardingPhase3ViewController:OnboardingEndCellDelegate {
-    func showSelectLocation() {
-        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
-            vc.placeVCDelegate = self
-            self.present(vc, animated: true)
-        }
-    }
-    
-    func updateEntour(isEntour:Bool, isBeEntour:Bool,isAsso:Bool) {
-        self.isEntour = isEntour
-        self.isBeEntour = isBeEntour
-        self.isAsso = isAsso
-
-        EnhancedOnboardingConfiguration.shared.shouldNotDisplayCampain = true
-        if(isBeEntour){
-            EnhancedOnboardingConfiguration.shared.preference = "contribution"
-        }
-        var userType = UserType.none
-        if isBeEntour {
-            userType = .alone
-        }
-        else if isEntour {
-            userType = .neighbour
-        }
-        
-        if(isBoth){
-            userType = .both
-        }
-       
-        if isAsso {
-            userType = .assos
-        }
-        if let fromAppDelegate{
-            fromAppDelegate.updatePreference(userType: userType)
-        }else{
-            pageDelegate?.addInfos(userType: userType)
-
-        }
-        if (isBeEntour || isAsso || isEntour) && location_name_new != nil {
-            self.ui_next_btn.isOpaque = true
-        }
-    }
-}
 
 //MARK: - PlaceViewControllerDelegate -
 extension OnboardingPhase3ViewController: PlaceViewControllerDelegate {
