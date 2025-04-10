@@ -45,16 +45,21 @@ class ConversationListMainCell: UITableViewCell {
     
     func populateCell(message:Conversation, delegate:ConversationListMainCellDelegate, position:Int) {
         ui_username.text = message.title
+
         if let count = message.members_count, count > 2, let members = message.members {
+            let currentUsername = UserDefaults.currentUser?.displayName
+
             let trimmedNames = members
-                .prefix(5) // max 3 premiers
-                .compactMap { $0.username } // éviter les nil
+                .compactMap { $0.username }
+                .filter { $0 != currentUsername } // Enlève l'utilisateur courant
+                .prefix(5)
                 .map { username -> String in
                     let end = username.index(username.endIndex, offsetBy: -2, limitedBy: username.startIndex) ?? username.startIndex
-                    return String(username[..<end]) // enlève les 2 derniers caractères
+                    let trimmed = String(username[..<end]).trimmingCharacters(in: .whitespaces)
+                    return trimmed
                 }
 
-            ui_username.text = trimmedNames.joined(separator: ",")
+            ui_username.text = trimmedNames.joined(separator: ", ")
         } else {
             ui_username.text = message.title
         }
