@@ -490,14 +490,13 @@ class ConversationDetailMessagesViewController: UIViewController {
                         .username
                     print("eho name " , conversation.members_count)
                     if let members = conversation.members, members.count > 2 {
-                        print("eho name " , members.count)
                         let displayNames = members
                             .filter { $0.uid != self.meId }
                             .prefix(5)
                             .compactMap { $0.username }
                             .map { name -> String in
                                 let endIndex = name.index(name.endIndex, offsetBy: -2, limitedBy: name.startIndex) ?? name.startIndex
-                                return String(name[..<endIndex])
+                                return String(name[..<endIndex]).trimmingCharacters(in: .whitespaces)
                             }
                         self.currentMessageTitle = displayNames.joined(separator: ", ")
                     }
