@@ -76,7 +76,7 @@ class EventDetailFeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        IHProgressHUD.show()
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         
