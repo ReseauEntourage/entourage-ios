@@ -18,6 +18,7 @@ protocol Phase3fromAppDelegate{
 enum OnboardingPhase3DTO {
     case titleCell
     case userTypeCell(choice: OnboardingChoice, isSelected:Bool, subtitle:String)
+    case assoCell(userIsAsso:Bool)
     case adressCell
 }
 
@@ -53,6 +54,7 @@ class OnboardingPhase3ViewController: UIViewController {
         
         ui_tableview.register(UINib(nibName: OnboardingPhase3TitleCell.identifier, bundle: nil), forCellReuseIdentifier: OnboardingPhase3TitleCell.identifier)
         ui_tableview.register(UINib(nibName: OnboardingPhase3MapCell.identifier, bundle: nil), forCellReuseIdentifier: OnboardingPhase3MapCell.identifier)
+        ui_tableview.register(UINib(nibName: OnboardingPhase3Asso.identifier, bundle: nil), forCellReuseIdentifier: OnboardingPhase3Asso.identifier)
         ui_tableview.register(UINib(nibName: "EnhancedFullSizeCell", bundle: nil), forCellReuseIdentifier: "fullSizeCell")
         loadDTO()
     }
@@ -68,7 +70,8 @@ class OnboardingPhase3ViewController: UIViewController {
         tableDTO.append(.userTypeCell(choice: choice2, isSelected: self.isBeEntour, subtitle: "onboarding_phase_three_option_etre_entoure_description".localized))
         tableDTO.append(.userTypeCell(choice: choice3, isSelected: self.isBoth, subtitle: "onboarding_phase_three_option_les_deux_description".localized))
         tableDTO.append(.adressCell)
-        
+        tableDTO.append(.assoCell(userIsAsso: self.isAsso))
+
         self.ui_tableview.reloadData()
     }
     
@@ -151,6 +154,12 @@ extension OnboardingPhase3ViewController : UITableViewDataSource, UITableViewDel
             cell.configureAComment(title: choice.title, comment: subtitle)
             cell.selectionStyle = .none
             return cell
+        case .assoCell(let userIsAsso):
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "OnboardingPhase3Asso") as? OnboardingPhase3Asso {
+                cell.selectionStyle = .none
+                cell.configure(isAsso: userIsAsso)
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -189,6 +198,10 @@ extension OnboardingPhase3ViewController : UITableViewDataSource, UITableViewDel
                 self.present(vc, animated: true)
             }
             break
+        case .assoCell(userIsAsso: let userIsAsso):
+            self.isAsso = !self.isAsso
+            self.updateUserType()
+            self.loadDTO()
         }
     }
 }
@@ -196,7 +209,6 @@ extension OnboardingPhase3ViewController : UITableViewDataSource, UITableViewDel
 extension OnboardingPhase3ViewController:OnboardingEndCellDelegate {
     func showSelectLocation() {
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
-        
         if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
             vc.placeVCDelegate = self
             self.present(vc, animated: true)

@@ -531,6 +531,8 @@
 		26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */; };
 		26C70B402B2B46B1005C8846 /* NeighborhoodV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */; };
 		26C70B422B2B5D6F005C8846 /* CellGroupV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */; };
+		26CBF27A2DA6BECC004829E7 /* OnboardingPhase3Asso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBF2792DA6BECC004829E7 /* OnboardingPhase3Asso.swift */; };
+		26CBF27C2DA6BF03004829E7 /* OnboardingPhase3Asso.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CBF27B2DA6BF03004829E7 /* OnboardingPhase3Asso.xib */; };
 		26CC9F7A2A331CF5005F7408 /* WelcomeThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */; };
 		26CC9F7D2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */; };
 		26CC9F7F2A337243005F7408 /* SecondaryTextWelcomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */; };
@@ -1103,6 +1105,8 @@
 		26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeDemandExampleCell.swift; sourceTree = "<group>"; };
 		26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodV2ViewController.swift; sourceTree = "<group>"; };
 		26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellGroupV2.xib; sourceTree = "<group>"; };
+		26CBF2792DA6BECC004829E7 /* OnboardingPhase3Asso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPhase3Asso.swift; sourceTree = "<group>"; };
+		26CBF27B2DA6BF03004829E7 /* OnboardingPhase3Asso.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingPhase3Asso.xib; sourceTree = "<group>"; };
 		26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeViewController.swift; sourceTree = "<group>"; };
 		26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryTextWelcomeCell.xib; sourceTree = "<group>"; };
 		26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTextWelcomeCell.swift; sourceTree = "<group>"; };
@@ -2264,6 +2268,8 @@
 				26B58C832D8C5D9A00D77FAB /* OnboardingPhase3MapCell.swift */,
 				26B58C852D8C5ECC00D77FAB /* OnboardingPhase3MapCell.xib */,
 				26B58C872D8C6CE100D77FAB /* OnboardingPhase3TitleCell.xib */,
+				26CBF2792DA6BECC004829E7 /* OnboardingPhase3Asso.swift */,
+				26CBF27B2DA6BF03004829E7 /* OnboardingPhase3Asso.xib */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -2542,6 +2548,7 @@
 				26BEEECA2C00C32B00169FBA /* EnhancedOnboardingTitle.xib in Resources */,
 				021FD96E2876F12E00D3AA54 /* EventListSectionCell.xib in Resources */,
 				0243DCC828AF832D00273679 /* Messages.storyboard in Resources */,
+				26CBF27C2DA6BF03004829E7 /* OnboardingPhase3Asso.xib in Resources */,
 				265565F22A3C9DB700CEFB3D /* explosion.json in Resources */,
 				2630F6372C247D7D007BAE56 /* MainFilterLocationCell.xib in Resources */,
 				021FD96128743EFF00D3AA54 /* EventListCell.xib in Resources */,
@@ -2901,6 +2908,7 @@
 				26BEEEC92C00C32B00169FBA /* EnhancedOnboardingTitle.swift in Sources */,
 				26584C4A2ACC48ED00ABD401 /* HomeCellMapButton.swift in Sources */,
 				26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */,
+				26CBF27A2DA6BECC004829E7 /* OnboardingPhase3Asso.swift in Sources */,
 				2630F6282C245E1B007BAE56 /* MainFilterTitleCell.swift in Sources */,
 				026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */,
 				264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */,

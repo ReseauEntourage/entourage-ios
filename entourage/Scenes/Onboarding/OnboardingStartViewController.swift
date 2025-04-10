@@ -205,7 +205,7 @@ class OnboardingStartViewController: UIViewController {
             ui_top_view.hideButtonBackForUnboarding(hide: true)
             ui_bt_previous.isHidden = true
             ui_bt_next.isHidden = false
-            ui_bt_next.setTitle("onboard_bt_create".localized, for: .normal)
+            ui_bt_next.setTitle("onboard_bt_next".localized, for: .normal)
             if shouldLaunchThird{
                 ui_bt_next.setTitle("onboard_bt_next".localized, for: .normal)
             }
