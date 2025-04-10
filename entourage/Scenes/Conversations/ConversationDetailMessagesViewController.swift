@@ -128,7 +128,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         // Configuration label "event_discut"
         ui_label_event_discut.text = "event_discut_title".localized
-        ui_label_event_discut.setFontBody(size: 15)
+        ui_label_event_discut.setFontTitle(size: 15)
         
         IQKeyboardManager.shared.enable = false
         ui_bt_title_user.isHidden = !isOneToOne
