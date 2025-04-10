@@ -69,6 +69,11 @@ class EventDetailFeedViewController: UIViewController {
     // Stocke la liste des utilisateurs participants
     var users: [UserLightNeighborhood] = []
     
+    override func loadView(){
+        super.loadView()
+        ui_btn_participate_and_see_conv.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -294,8 +299,10 @@ class EventDetailFeedViewController: UIViewController {
             self.eventId = event?.uid ?? 0
             if event?.isMember ?? false {
                 self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_conversation".localized)
+                self.ui_btn_participate_and_see_conv.isHidden = false
             }else{
                 self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "go_to_event_conversation".localized)
+                self.ui_btn_participate_and_see_conv.isHidden = false
             }
             // Si l’événement est annulé => on affiche le bandeau
             if event?.isCanceled() ?? false {
