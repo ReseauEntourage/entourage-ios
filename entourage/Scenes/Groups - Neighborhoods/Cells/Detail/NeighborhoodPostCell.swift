@@ -129,6 +129,13 @@ class NeighborhoodPostCell: UITableViewCell {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLittleTap))
             ui_view_btn_i_like.addGestureRecognizer(tapGesture)
         }
+
+    }
+    
+    @objc func onUserImageTapped() {
+        print("eho clicked")
+        guard let userId = self.userId else { return }
+        delegate?.showUser(userId: userId)
     }
     
     @objc func handleCustomCommentTap() {
