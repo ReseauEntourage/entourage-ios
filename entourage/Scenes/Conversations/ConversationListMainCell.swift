@@ -78,7 +78,7 @@ class ConversationListMainCell: UITableViewCell {
         
         if !message.isOneToOne() {
             ui_bt_user.isHidden = true
-            ui_picto_cat.isHidden = false
+            ui_picto_cat.isHidden = true
             ui_image.image = UIImage()
             ui_image.backgroundColor = UIColor.appBeige
             //TODO: load picto
@@ -122,7 +122,7 @@ class ConversationListMainCell: UITableViewCell {
             }
             self.ui_username.text = message.title
         }else {
-            self.ui_image.contentMode = .redraw
+            self.ui_image.contentMode = .scaleAspectFit
             self.ui_image.layer.cornerRadius = ui_image.frame.height / 2
             if let urlImg = message.user?.imageUrl, !urlImg.isEmpty, let mainUrl = URL(string: urlImg) {
                 ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))

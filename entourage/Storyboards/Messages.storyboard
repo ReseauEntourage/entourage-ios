@@ -81,7 +81,7 @@
                                                                 <constraint firstAttribute="height" constant="50" id="z0I-eB-ddB"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_game" translatesAutoresizingMaskIntoConstraints="NO" id="3os-WI-k5h">
+                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_game" translatesAutoresizingMaskIntoConstraints="NO" id="3os-WI-k5h">
                                                             <rect key="frame" x="39" y="27" width="28" height="28"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="28" id="RKK-Na-3Uh"/>
