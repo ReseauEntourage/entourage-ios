@@ -254,7 +254,7 @@ enum UserType:Int {
         case .assos:
             return "organization"
         case .both:
-            return "offer_and_ask_help"
+            return "ask_and_offer_help"
         case .none:
             return ""
 
