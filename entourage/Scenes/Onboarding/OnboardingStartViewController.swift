@@ -195,12 +195,7 @@ class OnboardingStartViewController: UIViewController {
     }
     
     func enableDisableNextButton(isEnable:Bool) {
-        if isEnable {
-            ui_bt_next.alpha = 1.0
-        }
-        else {
-            ui_bt_next.alpha = 0.4
-        }
+       
     }
     
     func checkValidation() -> (isValid:Bool,message:String) {

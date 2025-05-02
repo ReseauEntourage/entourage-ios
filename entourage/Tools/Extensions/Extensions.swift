@@ -244,6 +244,20 @@ extension UILabel {
     }
 }
 
+extension UILabel {
+
+    @IBInspectable var localizationKey: String? {
+        get {
+            return nil // Les @IBInspectable ne supportent pas directement les getters personnalisés
+        }
+        set(key) {
+            if let key = key {
+                self.text = NSLocalizedString(key, comment: "")
+            }
+        }
+    }
+}
+
 extension UITextField {
     func setupFontAndColor(style:MJTextFontColorStyle) {
         font = style.font

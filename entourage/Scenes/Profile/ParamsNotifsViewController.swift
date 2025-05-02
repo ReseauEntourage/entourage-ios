@@ -42,7 +42,7 @@ class ParamsNotifsViewController: BasePopViewController {
     func checkSystemNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             DispatchQueue.main.async {
-                if settings.authorizationStatus == .authorized {
+                if settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional {
                     self.getNotifsInfos()
                 } else {
                     self.updateSwitchs(notifPermissions: nil)
@@ -86,18 +86,27 @@ class ParamsNotifsViewController: BasePopViewController {
         if sender.isOn {
             UNUserNotificationCenter.current().getNotificationSettings { (settings) in
                 DispatchQueue.main.async {
-                    if settings.authorizationStatus == .denied {
-                        // Redirige vers les paramètres de l'application
-                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(appSettings)
+                    if settings.authorizationStatus == .denied || settings.authorizationStatus == .notDetermined {
+                        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                            DispatchQueue.main.async {
+                                if granted {
+                                    self.setAllSwitch(isOn: true)
+                                    self.updateServerWithCurrentSettings()
+                                } else {
+                                    sender.setOn(false, animated: true)
+                                    self.setAllSwitch(isOn: false)
+                                }
+                            }
                         }
                     } else {
                         self.setAllSwitch(isOn: true)
+                        self.updateServerWithCurrentSettings()
                     }
                 }
             }
         } else {
             setAllSwitch(isOn: false)
+            updateServerWithCurrentSettings()
         }
     }
     
@@ -108,9 +117,21 @@ class ParamsNotifsViewController: BasePopViewController {
         notifPermissions.outing = ui_switch_events.isOn
         notifPermissions.chat_message = ui_switch_messages.isOn
         
-        // Met à jour l'état du switch général (OR au lieu d'AND)
         let isAnySwitchOn = notifPermissions.action || notifPermissions.neighborhood || notifPermissions.outing || notifPermissions.chat_message
         ui_switch_notifs.setOn(isAnySwitchOn, animated: true)
+        updateServerWithCurrentSettings()
+    }
+    
+    func updateServerWithCurrentSettings() {
+        var notifPermissions = NotifInAppPermission()
+        notifPermissions.action = ui_switch_actions.isOn
+        notifPermissions.neighborhood = ui_switch_groups.isOn
+        notifPermissions.outing = ui_switch_events.isOn
+        notifPermissions.chat_message = ui_switch_messages.isOn
+
+        HomeService.updateNotifsPermissions(notifPerms: notifPermissions) { error in
+            // Handle errors if needed
+        }
     }
     
     func setAllSwitch(isOn: Bool) {

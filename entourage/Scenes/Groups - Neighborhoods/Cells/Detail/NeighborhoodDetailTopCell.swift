@@ -125,7 +125,10 @@ class NeighborhoodDetailTopCell: UITableViewCell {
             membersCount = String.init(format: "neighborhood_detail_member".localized, neighborhood.membersCount)
         }
         
-        let addressName:String = neighborhood.address?.displayAddress ?? "-"
+        var addressName:String = neighborhood.address?.displayAddress ?? "-"
+        if neighborhood.national ?? false {
+            addressName = ""
+        }
         //TODO : temporary test : remove if member needed
         //membersCount = "\(membersCount) . \(addressName)"
         membersCount = addressName

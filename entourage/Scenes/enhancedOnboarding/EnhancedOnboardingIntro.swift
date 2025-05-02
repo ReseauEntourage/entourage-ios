@@ -33,6 +33,8 @@ class EnhancedOnboardingIntro:UIViewController{
     
     @objc func onConfigureLaterClick(){
         AnalyticsLoggerManager.logEvent(name: onboarding_welcome_config_later_clic)
+        let config = EnhancedOnboardingConfiguration.shared
+        config.isFromOnboardingFromNormalWay = false
         AppState.navigateToMainApp()
     }
 

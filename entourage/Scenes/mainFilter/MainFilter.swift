@@ -123,7 +123,7 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
                 MainFilterTagItem(id: "social", title: "Temps de partage", subtitle: " (café, activité...)"),
                 MainFilterTagItem(id: "services", title: "Service", subtitle: " (lessive, impression de documents...)"),
                 MainFilterTagItem(id: "clothes", title: "Vêtement", subtitle: " (chaussures, manteau...)"),
-                MainFilterTagItem(id: "material_donations", title: "Équipement", subtitle: " (téléphone, duvet...)"),
+                MainFilterTagItem(id: "equipment", title: "Équipement", subtitle: " (téléphone, duvet...)"),
                 MainFilterTagItem(id: "hygiene", title: "Produit d’hygiène", subtitle: " (savon, protection hygiénique, couches...)"),
             ]
             tableDTO.append(.titleCell(title: "Filtres"))
