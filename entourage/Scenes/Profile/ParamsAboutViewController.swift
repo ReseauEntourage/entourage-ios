@@ -25,6 +25,7 @@ class ParamsAboutViewController: BasePopViewController {
         MenuItemInfos(title:"params_about_rate_app",url:APPSTORE_URL, openInApp: false),
         MenuItemInfos(title:"params_about_cgu",slug:MENU_ABOUT_SLUG_CGU),
         MenuItemInfos(title: "params_about_privacy",slug: MENU_ABOUT_SLUG_PRIVACY),
+        MenuItemInfos(title: "params_about_child_rule",slug: MENU_ABOUT_CHILD_RULES),
         MenuItemInfos(title:"params_about_licences",url:MENU_LICENSES_URL, openInApp: false)
         
         
@@ -73,6 +74,13 @@ extension ParamsAboutViewController: UITableViewDataSource, UITableViewDelegate 
         
         var webUrl:URL?
         
+        if(item.slug == MENU_ABOUT_CHILD_RULES ){
+            if let _webUrl = URL(string: "https://www.entourage.social/normes-de-protection-des-enfants"){
+                WebLinkManager.openUrlInApp(url: _webUrl, presenterViewController: self)
+                return
+            }
+        }
+        
         if let _slug = item.slug, let token = UserDefaults.currentUser?.token {
             let relativeUrlStr = String.init(format: BASE_MENU_ABOUT, _slug,token)
             let _urlStr = "\(NetworkManager.sharedInstance.getBaseUrl())\(relativeUrlStr)"
@@ -81,6 +89,7 @@ extension ParamsAboutViewController: UITableViewDataSource, UITableViewDelegate 
         else if let _urlStr = item.url {
             webUrl = URL(string: _urlStr)
         }
+        print("_url " , webUrl)
         WebLinkManager.openUrlInApp(url: webUrl, presenterViewController: self)
     }
     

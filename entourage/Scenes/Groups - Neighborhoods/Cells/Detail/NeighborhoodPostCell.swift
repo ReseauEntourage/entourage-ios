@@ -534,23 +534,39 @@ class NeighborhoodPostCell: UITableViewCell {
     }
     
     func updateCommentAttributedText() {
-        var htmlContent: String?
-        if let translations = postMessage.contentTranslationsHtml {
-            htmlContent = isTranslated ? translations.translation : translations.original
-        } else {
+        // 1) Récupérer le HTML (ou pseudo-HTML) original
+        var htmlContent = isTranslated ? postMessage.contentTranslationsHtml?.translation
+                                       : postMessage.contentTranslationsHtml?.original
+        if htmlContent == nil {
             htmlContent = postMessage.contentHtml
         }
-        
-        guard let htmlContent = htmlContent else {
+        // 2) Si c’est nil ou vide, fallback
+        guard let html = htmlContent, !html.isEmpty else {
             ui_comment.text = postMessage.content
             return
         }
-        
-        // Utilise stripHTMLTags pour obtenir le texte brut complet
-        let plainText = stripHTMLTags(from: htmlContent)
-        ui_comment.text = plainText
+        // 3) Si tu veux t'assurer que les \n deviennent de vrais sauts de ligne en HTML
+        let replacedHtml = html.replacingOccurrences(of: "\n", with: "<br>")
+        // 4) Convertir en NSAttributedString
+        if let data = replacedHtml.data(using: .utf8),
+           let attributed = try? NSAttributedString(
+               data: data,
+               options: [
+                 .documentType: NSAttributedString.DocumentType.html,
+                 .characterEncoding: String.Encoding.utf8.rawValue
+               ],
+               documentAttributes: nil
+           ) {
+            ui_comment.text = attributed.string // On récupère la version brute.
+        } else {
+            // fallback
+            ui_comment.text = postMessage.content
+        }
+        ui_comment.numberOfLines = 0
+        ui_comment.lineBreakMode = .byWordWrapping
         ui_comment.setFontBody(size: 15)
     }
+
 
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?, isMember:Bool?) {
