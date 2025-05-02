@@ -286,6 +286,9 @@ extension CreateSurveyViewController: MJNavBackViewDelegate {
     func goBack() {
         self.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 extension CreateSurveyViewController:MJAlertControllerDelegate{

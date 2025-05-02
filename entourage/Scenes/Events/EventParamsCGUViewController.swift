@@ -53,4 +53,7 @@ extension EventParamsCGUViewController: MJNavBackViewDelegate {
         self.dismiss(animated: true)
         self.navigationController?.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }

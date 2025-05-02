@@ -11,7 +11,7 @@ app:
       is_expand: false
 meta:
   bitrise.io:
-    stack: osx-xcode-15.3.x
+    stack: osx-xcode-16.2.x
     machine_type_id: g2-m1.4core
 trigger_map:
 - push_branch: develop
@@ -41,12 +41,13 @@ workflows:
         inputs:
         - notify_user_groups: none
         - deploy_path: $BITRISE_DSYM_PATH
-    - firebase-dsym-upload:
+    - dsym-upload-to-crashlytics--no-cocoapods:  
+        is_always_run: true
         inputs:
-        - fdu_fabric_location: ./firebase_tools/upload-symbols
-        - fdu_logging: "yes"
-        - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
+        - google_plist_path: ./entourage/Settings/Environment/GoogleService-Info.plist
+        - dsym_location: $BITRISE_DSYM_PATH
     - ruby-script:
+        is_always_run: true
         inputs:
         - ruby_content: |-
             PROJECT_KEY = 'EN'
@@ -94,12 +95,14 @@ workflows:
             end
         - gemfile_content: ""
     - post-jira-comment-with-build-details:
+        is_always_run: true
         inputs:
         - base_url: $JIRA_BASE_URL
         - api_token: $JIRA_API_TOKEN
         - user_name: $JIRA_USER_EMAIL
         - issue_keys: $JIRA_ISSUE_KEYS
     - slack:
+        is_always_run: true
         inputs:
         - channel: '#iosdev'
         - from_username: Entourage-Beta
@@ -117,6 +120,9 @@ workflows:
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
     - cache-push: {}
+    meta:
+      bitrise.io:
+        stack: osx-xcode-16.2.x
   Entourage-TestFlight:
     before_run:
     - Prepare
@@ -140,11 +146,10 @@ workflows:
         inputs:
         - password: $APPLESTORE_PASSWORD
         - itunescon_user: $APPLE_ID
-    - firebase-dsym-upload:
+    - dsym-upload-to-crashlytics--no-cocoapods:  
         inputs:
-        - fdu_fabric_location: ./firebase_tools/upload-symbols
-        - fdu_logging: "yes"
-        - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
+        - google_plist_path: ./entourage/Settings/Environment/GoogleService-Info.plist
+        - dsym_location: $BITRISE_DSYM_PATH
     - cache-push:
         is_always_run: true
     - xcode-build-version:
@@ -178,9 +183,10 @@ workflows:
         - set_java_version: "17"
     - activate-ssh-key:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@6:
+    - git-clone@8:
         inputs:
         - commit: ""
+        - clone_depth: "-1"
         - tag: ""
     - cache-pull: {}
     - cocoapods-install:
@@ -197,7 +203,5 @@ workflows:
             #!/usr/bin/env bash
             # fail if any commands fails
             set -ex
-
-            chmod +x ./firebase_tools/upload-symbols
 
             ./Scripts/count_commit.sh

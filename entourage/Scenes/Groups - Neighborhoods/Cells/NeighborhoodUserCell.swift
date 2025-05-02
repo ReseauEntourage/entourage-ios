@@ -32,14 +32,16 @@ class NeighborhoodUserCell: UITableViewCell {
         ui_role.font = ApplicationTheme.getFontNunitoRegular(size: 11)
         ui_role.textColor = .appOrangeLight
         // Configuration de l'arrondi pour ui_view
-        ui_view.layer.cornerRadius = ui_view.frame.height / 2
-        ui_view.clipsToBounds = true // Ceci est nécessaire pour appliquer l'arrondi
         
-        // Configuration du bord
-        ui_view.layer.borderWidth = 1 // Définit la largeur du bord
-        ui_view.layer.borderColor = UIColor(named: "grey_reaction")?.cgColor
-        
-        
+        if ui_view != nil {
+            ui_view.layer.cornerRadius = ui_view.frame.height / 2
+            ui_view.clipsToBounds = true // Ceci est nécessaire pour appliquer l'arrondi
+            // Configuration du bord
+            ui_view.layer.borderWidth = 1 // Définit la largeur du bord
+            ui_view.layer.borderColor = UIColor(named: "grey_reaction")?.cgColor
+            
+        }
+
         
     }
     
@@ -68,7 +70,9 @@ class NeighborhoodUserCell: UITableViewCell {
             ui_username.attributedText = attributedText
             
             // Change le fond de la cellule en orange clair
-            self.ui_view_background.backgroundColor = UIColor(named: "lightOrangeBackground") ?? UIColor(red: 254/255, green: 245/255, blue: 235/255, alpha: 1.0)
+            if self.ui_view_background != nil {
+                self.ui_view_background.backgroundColor = UIColor(named: "lightOrangeBackground") ?? UIColor(red: 254/255, green: 245/255, blue: 235/255, alpha: 1.0)
+            }
         }else if isOrganizer == true && isCreator == false {
             let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
             let organizerText = " - \(NSLocalizedString("neighborhood_user_role_organizer", comment: ""))"
@@ -80,11 +84,15 @@ class NeighborhoodUserCell: UITableViewCell {
             ui_username.attributedText = attributedText
             
             // Change le fond de la cellule en orange clair
-            self.ui_view_background.backgroundColor = UIColor(named: "lightOrangeBackground") ?? UIColor(red: 254/255, green: 245/255, blue: 235/255, alpha: 1.0)
+            if self.ui_view_background != nil {
+                self.ui_view_background.backgroundColor = UIColor(named: "lightOrangeBackground") ?? UIColor(red: 254/255, green: 245/255, blue: 235/255, alpha: 1.0)
+            }
         } else {
             // Si ce n'est pas un organisateur, réinitialise le texte et la couleur de fond par défaut
             ui_username.text = username
-            self.ui_view_background.backgroundColor = .clear
+            if self.ui_view_background != nil {
+                self.ui_view_background.backgroundColor = .clear
+            }
         }
         
         // Configurer le rôle de l'utilisateur
@@ -110,16 +118,18 @@ class NeighborhoodUserCell: UITableViewCell {
         ui_picto_message.isHidden = isMe
         
         // Configurer l'image de réaction
-        if let reactionId = reactionType?.id,
-           let completeReactionType = getStoredReactionTypes()?.first(where: { $0.id == reactionId }),
-           let imageUrl = URL(string: completeReactionType.imageUrl ?? "") {
-            ic_image_reaction.isHidden = false
-            ui_view.isHidden = false
-            ic_image_reaction.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
-        } else {
-            // Gérer le cas où l'URL de l'image n'est pas disponible
-            ic_image_reaction.isHidden = true
-            ui_view.isHidden = true
+        if ic_image_reaction != nil {
+            if let reactionId = reactionType?.id,
+               let completeReactionType = getStoredReactionTypes()?.first(where: { $0.id == reactionId }),
+               let imageUrl = URL(string: completeReactionType.imageUrl ?? "") {
+                ic_image_reaction.isHidden = false
+                ui_view.isHidden = false
+                ic_image_reaction.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
+            } else {
+                // Gérer le cas où l'URL de l'image n'est pas disponible
+                ic_image_reaction.isHidden = true
+                ui_view.isHidden = true
+            }
         }
     }
 

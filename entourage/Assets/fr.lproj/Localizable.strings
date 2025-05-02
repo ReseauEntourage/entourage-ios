@@ -1243,7 +1243,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_placeholder_discut" = "Nouveau message";
 "messaging_message_title" = "Conversation";
 "messaging_message_send" = "Envoyer";
-"messaging_message_no_message" = "0encore de message";
+"messaging_message_no_message" = "Pas encore de message";
 
 "message_title_new_conv" = "Nouvelle conversation";
 "message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la conversation dans les paramètres.";
@@ -1723,3 +1723,21 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle_plural" = "%d contacts bloqués";
 "language_change_redirect" = "Vous allez être redirigé sur la page d'accueil pour changer la langue de l'application";
 "settings_back_subtitle" = "Retour aux paramètres";
+"event_conversation" = "Voir la conversation";
+"go_to_event_conversation" = "Participer et rejoindre la conversation";
+
+"event_conv_filter_all" = "Toutes";
+"event_conv_filter_discussions" = "Discussions";
+"event_conv_filter_events" = "Événements";
+
+"event_discut_title" = "Retrouvez toutes les informations de l’événement ici";
+"event_button_add_calendar" = "Ajouter à l'agenda";
+"onboarding_phase_three_question_contribution" = "En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ?";
+"onboarding_phase_three_option_entourer" = "Entourer";
+"onboarding_phase_three_option_entourer_description" = "Je souhaite proposer du soutien à mes voisin(e)s qui en ont besoin.";
+"onboarding_phase_three_option_etre_entoure" = "Être entouré";
+"onboarding_phase_three_option_etre_entoure_description" = "Je suis en situation de vulnérabilité et recherche du soutien.";
+"onboarding_phase_three_option_les_deux" = "Les deux";
+"onboarding_phase_three_option_les_deux_description" = "Proposer du soutien et en recevoir";
+"onboarding_phase_three_question_quartier" = "Quel est votre quartier ?";
+"onboarding_phase_three_placeholder_quartier" = "Adresse ville ou département";

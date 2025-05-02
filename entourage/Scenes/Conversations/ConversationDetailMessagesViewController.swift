@@ -12,10 +12,29 @@ import UIKit
 import IQKeyboardManagerSwift
 import IHProgressHUD
 
-// Use to transform messages to section date with messages
+// MARK: - Struct et Enums
+
+/// Use to transform messages to section date with messages
+/// (la structure d’origine pour gérer la transformation des messages en sections de dates)
 struct MessagesSorted {
     var messages = [Any]()
     var datesSections = 0
+}
+
+/// Enum représentant les types de cellules de la tableView principale (les messages).
+/// On veut regrouper au même endroit :
+/// - Les cellules “date”
+/// - Les cellules “message” standard
+/// - Les cellules “message en échec / retry”
+private enum ConversationCellDTO {
+    case dateString(title:String)
+    case message(message:PostMessage)
+    case retryMessage(message:PostMessage, positionRetry: Int)
+}
+
+/// Enum représentant les types de cellules de la tableView des mentions.
+private enum MentionCellDTO {
+    case mention(UserLightNeighborhood)
 }
 
 class ConversationDetailMessagesViewController: UIViewController {
@@ -42,6 +61,10 @@ class ConversationDetailMessagesViewController: UIViewController {
     @IBOutlet weak var ui_view_block: UIView!
     @IBOutlet weak var ui_title_block: UILabel!
     
+    // >>>> Ajoutées dans votre code <<<<
+    @IBOutlet weak var ui_label_event_discut: UILabel!
+    @IBOutlet weak var ui_view_event_discut: UIView!
+    
     // MARK: - Outlets pour la fonctionnalité de mention
     @IBOutlet weak var ui_tableview_mentions: UITableView! // TableView des suggestions
     @IBOutlet weak var table_view_mention_height: NSLayoutConstraint!
@@ -55,13 +78,21 @@ class ConversationDetailMessagesViewController: UIViewController {
     private var isOneToOne = true
     private var selectedIndexPath: IndexPath? = nil
     private weak var parentDelegate: UpdateUnreadCountDelegate? = nil
+    var type:String = ""
 
+    /// Liste brute de messages issus de l’API
     var messages = [PostMessage]()
+    /// Structure “MessagesSorted” qui contient la liste triée (sections date + messages)
     var messagesExtracted = MessagesSorted()
+    /// Identifiant de l’utilisateur courant
     var meId: Int = 0
+    /// Liste des messages à retenter (ceux qui ont échoué à l’envoi)
     var messagesForRetry = [PostMessage]()
 
+    /// Placeholder par défaut de la zone de texte
     let placeholderTxt = "messaging_message_placeholder_discut".localized
+
+    /// Contrainte de base avant l’ouverture du clavier
     var bottomConstraint: CGFloat = 0
     var isStartEditing = false
 
@@ -75,11 +106,17 @@ class ConversationDetailMessagesViewController: UIViewController {
     var currentConversation: Conversation? = nil
 
     // MARK: - Propriétés pour la fonctionnalité de mention
-    /// Liste filtrée affichée dans le tableau des suggestions (on filtre sur `members`)
-    var mentionSuggestions: [UserLightNeighborhood] = []
+    /// (Auparavant on utilisait un tableau de `[UserLightNeighborhood]`. On va maintenant
+    ///  stocker un tableau de `MentionCellDTO` pour la tableView des mentions.)
+    private var mentionCellDTOs: [MentionCellDTO] = []
 
     /// Hauteur d’une cellule “MentionCell”
     private let mentionCellHeight: CGFloat = 44.0
+
+    // MARK: - Nouveau : tableau enum pour la tableView principale
+    /// On remplace `messagesExtracted.messages + messagesForRetry` par un tableau unique
+    /// de ConversationCellDTO
+    private var conversationCellDTOs: [ConversationCellDTO] = []
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -89,19 +126,15 @@ class ConversationDetailMessagesViewController: UIViewController {
         ui_tap_gesture.cancelsTouchesInView = false
         ui_tap_gesture.delegate = self
 
+        // Configuration label "event_discut"
+        ui_label_event_discut.text = "event_discut_title".localized
+        ui_label_event_discut.setFontTitle(size: 13)
+        
         IQKeyboardManager.shared.enable = false
         ui_bt_title_user.isHidden = !isOneToOne
-
-        let _title = currentMessageTitle ?? "messaging_message_title".localized
-        ui_top_view.populateView(
-            title: _title,
-            titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
-            titleColor: .black,
-            delegate: self,
-            backgroundColor: .appBeigeClair,
-            isClose: false,
-            doubleRightMargin: true
-        )
+       
+        ui_tableview.register(UINib(nibName: DiscussionEventCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: DiscussionEventCell.identifier)
 
         // Vue "vide"
         ui_title_empty.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
@@ -125,7 +158,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         ui_view_block.layer.borderWidth = 1
         ui_view_block.layer.borderColor = UIColor.appGris112.cgColor
         ui_view_block.layer.cornerRadius = ui_view_block.frame.height / 2
-        ui_title_block.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14, color: .appGris112))
+        ui_title_block.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .appGris112))
         ui_view_block.isHidden = true
 
         // Toolbar sur textView
@@ -200,6 +233,64 @@ class ConversationDetailMessagesViewController: UIViewController {
         )
         ui_tableview_mentions.isHidden = true
         table_view_mention_height.constant = 0
+        
+        // >>>> NOUVELLES CONDITIONS D’AFICHAGE <<<<
+        // => On applique la logique demandée :
+        //    - Décaler la tableview de 80 si type == "outing"
+        //    - Cacher la vue nouvelle discussion si type == "outing"
+        //    - Si type == "outing", alors ui_view_event_discut.isHidden = true, sinon false
+        if type == "outing" {
+            // Décalage
+            ui_constraint_tableview_top_margin.constant = 90
+            // Cacher la vue “nouvelle discussion”
+            ui_view_new_conversation.isHidden = false
+            // Cacher la vue event_discut
+            ui_view_event_discut.isHidden = false
+            ui_view_new_conversation.backgroundColor = UIColor.white
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleEventViewTap))
+            ui_view_event_discut.addGestureRecognizer(tapGesture)
+            ui_view_event_discut.isUserInteractionEnabled = true
+            ui_title_new_conv.text = ""
+            ui_subtitle_new_conv.text = ""
+        } else {
+            // Par défaut : offset = 0
+            ui_constraint_tableview_top_margin.constant = 0
+            // On veut afficher la vue event_discut
+            ui_view_event_discut.isHidden = true
+            ui_view_new_conversation.backgroundColor = UIColor.appBeige
+            ui_title_new_conv.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
+            ui_subtitle_new_conv.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+            ui_title_new_conv.text = "message_title_new_conv".localized
+            ui_subtitle_new_conv.text = "message_subtitle_new_conv".localized
+        }
+        ui_textview_message.typingAttributes = [
+            .font: UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
+            .foregroundColor: UIColor.black
+        ]
+    }
+    
+    @objc private func handleEventViewTap() {
+        EventService.getEventWithId(self.currentConversation?.uuid ?? "") { event, error in
+            if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController,
+               let vc = navVc.topViewController as? EventDetailFeedViewController {
+                
+                vc.eventId = event?.uid ?? 0
+                vc.event = event
+                vc.modalPresentationStyle = .fullScreen
+
+                if let presentedVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController,
+                   presentedVC is UINavigationController {
+                    // Si l'écran événement est déjà affiché, on le remet au premier plan
+                    presentedVC.dismiss(animated: false) {
+                        UIApplication.shared.keyWindow?.rootViewController?.present(navVc, animated: true)
+                    }
+                    return
+                }
+
+                self.present(navVc, animated: true, completion: nil)
+            }
+        }
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -216,6 +307,10 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.view.bringSubviewToFront(ui_tableview_mentions)
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     //MARK: - Setup & Navigation
     func setupFromOtherVC(
         conversationId: Int,
@@ -230,7 +325,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.conversationId = conversationId
         self.currentMessageTitle = title
         self.isOneToOne = isOneToOne
-        self.hasToShowFirstMessage = conversation?.hasToShowFirstMessage() ?? false
+        self.hasToShowFirstMessage = conversation?.hasToShowFirstMessage() ?? true
         self.currentUserId = conversation?.user?.uid ?? 0
     }
 
@@ -247,7 +342,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.hashedConversationId = conversationId
         self.currentMessageTitle = title
         self.isOneToOne = isOneToOne
-        self.hasToShowFirstMessage = conversation?.hasToShowFirstMessage() ?? false
+        self.hasToShowFirstMessage = conversation?.hasToShowFirstMessage() ?? true
         self.currentUserId = conversation?.user?.uid ?? 0
     }
 
@@ -278,11 +373,13 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
 
     func showViewNew() {
-        self.ui_constraint_tableview_top_top.priority = .defaultLow
-        self.ui_constraint_tableview_top_margin.priority = .required
-        self.ui_constraint_tableview_top_margin.constant = ui_view_new_conversation.frame.height
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+        if self.currentConversation?.type != "outing"{
+            self.ui_constraint_tableview_top_top.priority = .defaultLow
+            self.ui_constraint_tableview_top_margin.priority = .required
+            self.ui_constraint_tableview_top_margin.constant = ui_view_new_conversation.frame.height
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
         }
     }
 
@@ -304,26 +401,24 @@ class ConversationDetailMessagesViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
         // Masquer la vue vide
-        if messagesExtracted.messages.count == 0 {
+        if conversationCellDTOs.isEmpty {
             ui_view_empty.isHidden = true
         }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
         ui_constraint_bottom_view_Tf.constant = bottomConstraint
-        if messagesExtracted.messages.count == 0 {
+        if conversationCellDTOs.isEmpty {
             ui_view_empty.isHidden = false
         }
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Network
     func getMessages() {
         if self.isLoading { return }
-        if self.messagesExtracted.messages.isEmpty {
+
+        // Au premier appel, on vide la table
+        if conversationCellDTOs.isEmpty {
             self.ui_tableview.reloadData()
         }
 
@@ -336,7 +431,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             _convId = hashedConversationId
         }
         self.isLoading = true
-
+        
         MessagingService.getMessagesFor(
             conversationId: _convId,
             currentPage: currentPage,
@@ -349,22 +444,24 @@ class ConversationDetailMessagesViewController: UIViewController {
                 } else {
                     self.messages = messages
                 }
+                
                 self.checkNewConv()
-                self.extractDict()
+                // On met à jour le tableau conversationCellDTOs
+                self.buildConversationCellDTOs()
 
-                self.ui_view_empty.isHidden = self.messagesExtracted.messages.count > 0
+                // On gère la vue vide (si pas de messages)
+                self.ui_view_empty.isHidden = !self.conversationCellDTOs.isEmpty
                 self.ui_tableview.reloadData()
 
-                if self.currentPage == 1
-                    && self.messagesExtracted.messages.count + self.messagesForRetry.count > 0 {
+                // Scroll vers le bas si c’est la première page
+                if self.currentPage == 1 && !self.conversationCellDTOs.isEmpty {
                     DispatchQueue.main.async {
-                        let indexPath = IndexPath(
-                            row: self.messagesExtracted.messages.count + self.messagesForRetry.count - 1,
-                            section: 0
-                        )
+                        let lastIndex = self.conversationCellDTOs.count - 1
+                        let indexPath = IndexPath(row: lastIndex, section: 0)
                         self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: false)
                     }
                 }
+                // On avertit le parent pour mettre à jour le badge “non lus”
                 self.parentDelegate?.updateUnreadCount(
                     conversationId: self.conversationId,
                     currentIndexPathSelected: self.selectedIndexPath
@@ -383,25 +480,67 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation {
+                // Mise à jour du titre si oneToOne
                 if self.isOneToOne {
-                    // Mise à jour du titre
+                    if conversation.members_count ?? 0 > 2 {
+                        self.isOneToOne = false
+                    }
                     self.currentMessageTitle = conversation.members?
                         .first(where: { $0.uid != self.meId })?
                         .username
-                    if conversation.members_count ?? 0 > 2 {
-                        let count = (conversation.members_count ?? 1) - 1
-                        self.currentMessageTitle = (self.currentMessageTitle ?? "") + " + " + String(count) + " membres"
+                    print("eho name " , conversation.members_count)
+                    if let members = conversation.members, members.count > 2 {
+                        let displayNames = members
+                            .filter { $0.uid != self.meId }
+                            .prefix(5)
+                            .compactMap { $0.username }
+                            .map { name -> String in
+                                let endIndex = name.index(name.endIndex, offsetBy: -2, limitedBy: name.startIndex) ?? name.startIndex
+                                return String(name[..<endIndex]).trimmingCharacters(in: .whitespaces)
+                            }
+                        self.currentMessageTitle = displayNames.joined(separator: ", ")
                     }
                     let _title = self.currentMessageTitle ?? "messaging_message_title".localized
                     self.ui_top_view.setTitlesOneLine()
                     self.ui_top_view.updateTitle(title: _title)
                 }
+                
                 self.currentConversation = conversation
+
+                // Si on a le type “outing”, on cherche le titre exact de l’événement
+                if self.type == "outing" {
+                    self.ui_view_empty.isHidden = true
+                    EventService.getEventWithId(self.currentConversation?.uuid ?? "") { event, error in
+                        let _title = event?.title ?? "messaging_message_title".localized
+                        self.ui_top_view.populateView(
+                            title: _title,
+                            titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
+                            titleColor: .black,
+                            delegate: self,
+                            backgroundColor: .appBeigeClair,
+                            isClose: false,
+                            doubleRightMargin: true,
+                            event: event
+                        )
+                    }
+                } else {
+                    let _title = self.currentMessageTitle ?? "messaging_message_title".localized
+                    self.ui_top_view.populateView(
+                        title: _title,
+                        titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
+                        titleColor: .black,
+                        delegate: self,
+                        backgroundColor: .appBeigeClair,
+                        isClose: false,
+                        doubleRightMargin: true
+                    )
+                }
                 self.updateInputInfos()
             }
         }
     }
 
+    /// Gère l’affichage ou non du bloc de blocage
     func updateInputInfos() {
         if currentConversation?.hasBlocker() ?? false {
             ui_view_block.isHidden = false
@@ -416,19 +555,27 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
     }
 
-    /// Transforme la liste de messages bruts en sections de dates
-    func extractDict() {
+    /// Reconstitue le tableau `conversationCellDTOs` à partir de `messages` et `messagesForRetry`.
+    private func buildConversationCellDTOs() {
+        // 1) On trie d’abord les messages "normaux" pour les regrouper par date
         let newMessagessSorted = PostMessage.getArrayOfDateSorted(messages: messages, isAscendant: true)
-        var newMessages = [Any]()
-        for (k,v) in newMessagessSorted {
-            newMessages.append(k.dateString)
-            for _msg in v {
-                newMessages.append(_msg)
+        var newDTOs: [ConversationCellDTO] = []
+
+        for (k, v) in newMessagessSorted {
+            // k: date + dateString
+            newDTOs.append(.dateString(title: k.dateString))
+            for msg in v {
+                newDTOs.append(.message(message: msg))
             }
         }
-        let messagesSorted = MessagesSorted(messages: newMessages, datesSections: newMessagessSorted.count)
-        self.messagesExtracted.messages.removeAll()
-        self.messagesExtracted = messagesSorted
+
+        // 2) On ajoute les messages en “retry”
+        for (idx, retryMsg) in messagesForRetry.enumerated() {
+            newDTOs.append(.retryMessage(message: retryMsg, positionRetry: idx))
+        }
+
+        // 3) On affecte le tableau final
+        self.conversationCellDTOs = newDTOs
     }
 
     private func setLoadingFalse() {
@@ -462,13 +609,15 @@ class ConversationDetailMessagesViewController: UIViewController {
             self.isLoading = false
 
             if let _ = message {
+                // Si c’est un retry, on enlève l’élément de `messagesForRetry`
                 if isRetry {
                     self.messagesForRetry.remove(at: positionForRetry)
                 }
+                // On recharge tout (repasse la page à 1)
                 self.currentPage = 1
                 self.getMessages()
             } else {
-                // Échec => on stocke un message en retry
+                // Échec => on stocke un message dans messagesForRetry
                 if !isRetry {
                     var postMsg = PostMessage()
                     postMsg.content = messageStr
@@ -478,14 +627,15 @@ class ConversationDetailMessagesViewController: UIViewController {
 
                     self.isStartEditing = false
                     self.ui_view_empty.isHidden = true
+                    // On reconstruit le tableau
+                    self.buildConversationCellDTOs()
                     self.ui_tableview.reloadData()
 
-                    if self.messagesExtracted.messages.count + self.messagesForRetry.count > 0 {
+                    // Scroll tout en bas
+                    if !self.conversationCellDTOs.isEmpty {
                         DispatchQueue.main.async {
-                            let indexPath = IndexPath(
-                                row: self.messagesExtracted.messages.count + self.messagesForRetry.count - 1,
-                                section: 0
-                            )
+                            let lastIndex = self.conversationCellDTOs.count - 1
+                            let indexPath = IndexPath(row: lastIndex, section: 0)
                             self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
                         }
                     }
@@ -493,7 +643,7 @@ class ConversationDetailMessagesViewController: UIViewController {
                 }
             }
 
-            // Petit “loading”
+            // Petit “loading” sur l’icône
             self.ui_iv_bt_send.isUserInteractionEnabled = false
             IHProgressHUD.show()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -519,6 +669,11 @@ class ConversationDetailMessagesViewController: UIViewController {
             AnalyticsLoggerManager.logEvent(name: Message_action_param)
             vc.modalPresentationStyle = .fullScreen
             vc.userId = currentUserId
+            if currentConversation?.type == "outing"{
+                vc.isEvent = true
+            }else{
+                vc.isEvent = false
+            }
             vc.conversationId = conversationId
             vc.isOneToOne = isOneToOne
             if let _members = self.currentConversation?.members {
@@ -535,7 +690,15 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
 
     @IBAction func action_show_user(_ sender: Any) {
-        showUser(userId: currentUserId)
+        if isOneToOne{
+            showUser(userId: currentUserId)
+        }else{
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
+                vc.conversationId = self.currentConversation?.uid
+                vc.modalPresentationStyle = .overCurrentContext
+                self.present(vc, animated: true)
+            }
+        }
     }
 
     @IBAction func action_close_new_view(_ sender: Any) {
@@ -543,6 +706,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
 
     // MARK: - Méthodes pour la fonctionnalité de mention
+    /// Met à jour la liste de suggestions en fonction du query (après un "@...").
     func updateMentionSuggestions(query: String) {
         guard let members = currentConversation?.members, !members.isEmpty else {
             hideMentionSuggestions()
@@ -551,20 +715,19 @@ class ConversationDetailMessagesViewController: UIViewController {
         
         let q = query.lowercased()
         
-        // Filtrer les membres pour exclure l'utilisateur courant
+        // Filtre : on exclut l’utilisateur courant
         let filtered: [MemberLight]
         if q.isEmpty {
-            // Si query est vide, on affiche 3 membres hors moi
+            // Si query est vide, on affiche 3 membres (hors moi) par défaut
             filtered = members.filter { $0.uid != meId }
         } else {
-            // Sinon, on filtre par username contenant la query et hors de moi
             filtered = members.filter {
                 let nameLC = $0.username?.lowercased() ?? ""
                 return nameLC.contains(q) && $0.uid != meId
             }
         }
         
-        // Limiter à 3 suggestions
+        // Limitation à 3 suggestions
         let limited = Array(filtered.prefix(3))
         
         if limited.isEmpty {
@@ -572,18 +735,18 @@ class ConversationDetailMessagesViewController: UIViewController {
             return
         }
         
-        // Conversion en UserLightNeighborhood
-        mentionSuggestions = limited.map { member -> UserLightNeighborhood in
+        // On convertit en MentionCellDTO
+        mentionCellDTOs = limited.map { member in
             var user = UserLightNeighborhood()
             user.sid = member.uid
             user.displayName = member.username ?? ""
             user.avatarURL = member.imageUrl
-            return user
+            return .mention(user)
         }
         
-        // Ajustement de la contrainte d'affichage
+        // Ajustement de la contrainte d'affichage en hauteur
         UIView.animate(withDuration: 0.2) {
-            self.table_view_mention_height.constant = self.mentionCellHeight * CGFloat(self.mentionSuggestions.count)
+            self.table_view_mention_height.constant = self.mentionCellHeight * CGFloat(self.mentionCellDTOs.count)
             self.view.layoutIfNeeded()
         }
         
@@ -610,7 +773,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
 
     func hideMentionSuggestions() {
-        mentionSuggestions = []
+        mentionCellDTOs.removeAll()
         ui_tableview_mentions.reloadData()
         
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
@@ -649,8 +812,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             } else {
                 baseUrl = "https://www.entourage.social/app/"
             }
-            let linkURLString: String
-            linkURLString = baseUrl + "users/\(user.sid)"
+            let linkURLString = baseUrl + "users/\(user.sid)"
             guard let linkURL = URL(string: linkURLString) else { return }
             let linkAttributes: [NSAttributedString.Key: Any] = [
                 .link: linkURL,
@@ -727,98 +889,102 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
 }
 
-// MARK: - TableView (Messages & Mentions)
+// MARK: - TableView DataSource & Delegate
 extension ConversationDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {
 
-    //---- TABLE PRINCIPALE (messages) ---
+    //---- TABLE DE MENTIONS ou TABLE DE MESSAGES ? ----
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ui_tableview_mentions {
-            return mentionSuggestions.count
+            // TableView des mentions
+            return mentionCellDTOs.count
+        } else {
+            // TableView principale (messages)
+            return conversationCellDTOs.count
         }
-        return messagesExtracted.messages.count + messagesForRetry.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         // == TableView des mentions ==
         if tableView == ui_tableview_mentions {
-            let user = mentionSuggestions[indexPath.row]
-            if let cell = ui_tableview_mentions.dequeueReusableCell(withIdentifier: "MentionCell") as? MentionCell {
-                cell.selectionStyle = .none
-                cell.configure(igm: user.avatarURL ?? "placeholder_user", name: user.displayName)
-                return cell
+            let dto = mentionCellDTOs[indexPath.row]
+            switch dto {
+            case .mention(let user):
+                if let cell = ui_tableview_mentions.dequeueReusableCell(withIdentifier: MentionCell.identifier) as? MentionCell {
+                    cell.selectionStyle = .none
+                    cell.configure(igm: user.avatarURL ?? "placeholder_user", name: user.displayName)
+                    return cell
+                }
             }
+            return UITableViewCell()
         }
 
-        // == TableView principal (messages)
-        if messagesForRetry.count > 0 {
-            if indexPath.row >= messagesExtracted.messages.count {
-                let message = messagesForRetry[indexPath.row - messagesExtracted.messages.count]
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe", for: indexPath) as! NeighborhoodMessageCell
+        // == TableView principal (messages) ==
+        let dto = conversationCellDTOs[indexPath.row]
+        switch dto {
+        case .dateString(let txt):
+            // Cellule “Date”
+            if let cell = tableView.dequeueReusableCell(
+                withIdentifier: EventListSectionCell.identifier
+            ) as? EventListSectionCell {
+                cell.populateMessageSectionCell(title: txt)
+                return cell
+            }
+            return UITableViewCell()
+
+        case .message(let message):
+            // Cellule “Message standard”
+            let isMe = (message.user?.sid == self.meId)
+            let cellId = isMe ? "cellMe" : "cellOther"
+            if let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? NeighborhoodMessageCell {
+                cell.populateCellConversation(
+                    isMe: isMe,
+                    message: message,
+                    isRetry: false,
+                    isOne2One: self.isOneToOne,
+                    delegate: self
+                )
+                return cell
+            }
+            return UITableViewCell()
+
+        case .retryMessage(let message, let positionRetry):
+            // Cellule “Message en retry”
+            // Toujours isMe = true car c’est nous qui avons échoué l’envoi
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe") as? NeighborhoodMessageCell {
                 cell.populateCell(
                     isMe: true,
                     message: message,
                     isRetry: true,
-                    positionRetry: indexPath.row - messagesExtracted.messages.count,
+                    positionRetry: positionRetry,
                     delegate: self,
                     isTranslated: false
                 )
                 return cell
             }
+            return UITableViewCell()
         }
-
-        // Récupération d’un item dans messagesExtracted
-        let messageExtracted = messagesExtracted.messages[indexPath.row]
-
-        // Si c’est un String => c’est une "date" => cell de section
-        if let txt = messageExtracted as? String {
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: EventListSectionCell.identifier,
-                for: indexPath
-            ) as! EventListSectionCell
-            cell.populateMessageSectionCell(title: txt)
-            return cell
-        }
-
-        // Sinon c’est un PostMessage
-        let message = messageExtracted as! PostMessage
-        var cellId = "cellOther"
-        var isMe = false
-        if message.user?.sid == self.meId {
-            cellId = "cellMe"
-            isMe = true
-        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NeighborhoodMessageCell
-        cell.populateCellConversation(
-            isMe: isMe,
-            message: message,
-            isRetry: false,
-            isOne2One: self.isOneToOne,
-            delegate: self
-        )
-        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == ui_tableview_mentions {
-            // Récupérer la cellule sélectionnée
-            if let cell = tableView.cellForRow(at: indexPath) as? MentionCell {
-                // Animation: changement de background en orange
-                UIView.animate(withDuration: 0.2, animations: {
-                    cell.contentView.backgroundColor = UIColor.appBeige
-                }, completion: { _ in
-                    // Une fois l'animation terminée, on insère la mention
-                    let selectedUser = self.mentionSuggestions[indexPath.row]
-                    self.insertMention(user: selectedUser)
-                    
-                    // Optionnel: réinitialiser la couleur de fond
-                    UIView.animate(withDuration: 0.2) {
-                        cell.contentView.backgroundColor = UIColor.appBeigeClair2
-                    }
-                    
-                    // Désélectionner la cellule
-                    tableView.deselectRow(at: indexPath, animated: true)
-                })
+            let dto = mentionCellDTOs[indexPath.row]
+            switch dto {
+            case .mention(let selectedUser):
+                // Animation sur la cellule
+                if let cell = tableView.cellForRow(at: indexPath) as? MentionCell {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        cell.contentView.backgroundColor = UIColor.appBeige
+                    }, completion: { _ in
+                        // On insère la mention
+                        self.insertMention(user: selectedUser)
+                        // Optionnel: réinitialiser la couleur
+                        UIView.animate(withDuration: 0.2) {
+                            cell.contentView.backgroundColor = UIColor.appBeigeClair2
+                        }
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    })
+                }
             }
         }
     }
@@ -829,8 +995,7 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
         if tableView == ui_tableview_mentions { return }
 
         // On relance un getMessages si on atteint le nbOfItemsBeforePagingReload
-        if indexPath.row == nbOfItemsBeforePagingReload
-           && self.messages.count >= numberOfItemsForWS * currentPage {
+        if indexPath.row == nbOfItemsBeforePagingReload && messages.count >= numberOfItemsForWS * currentPage {
             self.currentPage += 1
             self.getMessages()
         }
@@ -839,6 +1004,18 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
 
 // MARK: - MJNavBackViewDelegate
 extension ConversationDetailMessagesViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        if type == "outing" {
+            handleEventViewTap()
+        } else {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
+                vc.conversationId = self.currentConversation?.uid
+                vc.modalPresentationStyle = .currentContext
+                self.present(vc, animated: true)
+            }
+        }
+    }
+    
     func goBack() {
         self.parentDelegate?.updateUnreadCount(
             conversationId: conversationId,
@@ -871,6 +1048,7 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
     }
 
     func textViewDidChange(_ textView: UITextView) {
+        // -- Logique existante pour la détection du "@" et l'affichage des suggestions --
         let cursorPosition = textView.selectedRange.location
         let textNSString = textView.text as NSString
         let textUpToCursor = textNSString.substring(to: cursorPosition)
@@ -880,11 +1058,12 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
             // Vérifie si c’est un nouvel @ (début ou précédé d’un espace)
             if atIndex == textUpToCursor.startIndex
                || textUpToCursor[textUpToCursor.index(before: atIndex)] == " " {
+                
                 let mentionSubstring = textUpToCursor[atIndex...]
                 if mentionSubstring.contains(" ") {
                     hideMentionSuggestions()
                 } else {
-                    // On retire le "@" pour faire la query
+                    // On retire le "@" pour construire la query
                     let query = String(mentionSubstring.dropFirst())
                     updateMentionSuggestions(query: query)
                 }
@@ -894,7 +1073,41 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
         } else {
             hideMentionSuggestions()
         }
+
+        // -------------------------------------------------------------------------
+        // AJOUT : Nettoyage des attributs de lien si l’utilisateur a partiellement
+        // effacé une mention (pour éviter le "full bleu souligné" après backspace).
+        // -------------------------------------------------------------------------
+        let mutableAttrText = NSMutableAttributedString(attributedString: textView.attributedText)
+        let fullRange = NSRange(location: 0, length: mutableAttrText.length)
+
+        // On inspecte tous les attributs
+        mutableAttrText.enumerateAttributes(in: fullRange, options: []) { attrs, range, _ in
+            // Vérifie s’il existe un attribut .link sur ce segment
+            if let _ = attrs[.link] {
+                // Récupère la portion de texte
+                let substring = mutableAttrText.string as NSString
+                let mentionText = substring.substring(with: range)
+
+                // Si le texte ne commence plus par "@" ou est trop court, ce n’est plus une mention valide
+                if mentionText.count < 2 || !mentionText.hasPrefix("@") {
+                    // Supprime l'attribut lien et le soulignement
+                    mutableAttrText.removeAttribute(.link, range: range)
+                    mutableAttrText.removeAttribute(.underlineStyle, range: range)
+
+                    // Remet la couleur et la police par défaut (ex. NunitoSans 15, noir)
+                    mutableAttrText.addAttribute(.foregroundColor, value: UIColor.black, range: range)
+                    if let font = UIFont(name: "NunitoSans-Regular", size: 15) {
+                        mutableAttrText.addAttribute(.font, value: font, range: range)
+                    }
+                }
+            }
+        }
+        
+        // Réassigne le texte éventuellement nettoyé
+        textView.attributedText = mutableAttrText
     }
+
 
     // Intercepte le clic sur un lien dans le UITextView
     func textView(_ textView: UITextView,

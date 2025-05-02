@@ -319,6 +319,9 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
 
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodCreateMainViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+    }
     func goBack() {
         AnalyticsLoggerManager.logEvent(name: Action_NewGroup_BackArrow)
         

@@ -257,7 +257,7 @@ class NeighborhoodDetailViewController: UIViewController {
                 
                 // Récupère les posts et recharge la table view une fois terminé
                 self.getMorePosts {
-                    // Ici, getMorePosts appelle déjà reloadData()
+                
                 }
                 
                 if hasToRefreshLists {
@@ -306,6 +306,7 @@ class NeighborhoodDetailViewController: UIViewController {
         }
         
         hasNewAndOldSections = false
+        self.ui_tableview.reloadData()
     }
     
     func addRemoveMember(isAdd:Bool) {
@@ -907,17 +908,21 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
     }
     
     func showUser(userId:Int?) {
-        guard let userId = userId else {
-            return
-        }
-        if let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? ProfilFullViewController {
-                _homeVC.userIdToDisplay = "\(userId)"
-                self.navigationController?.present(navVC, animated: true)
-            }
+        guard let userId = userId else { return }
+        
+        // Instancier le storyboard et le ProfilFullViewController directement
+        let storyboard = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+        
+        if let profileVC = storyboard.instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
+            
+            // Passer l'ID utilisateur à ProfilFullViewController
+            profileVC.userIdToDisplay = "\(userId)"
+            
+            // Présenter la vue modale directement
+            profileVC.modalPresentationStyle = .fullScreen  // Plein écran pour un effet plus fluide
+            self.present(profileVC, animated: true, completion: nil)
         }
     }
-    
 }
 
 //MARK: - NeighborhoodEventsTableviewCellDelegate -
@@ -1011,6 +1016,9 @@ extension NeighborhoodDetailViewController: MJNavBackViewDelegate {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_BackArrow)
         self.navigationController?.dismiss(animated: true)
         
+    }
+    func didTapEvent() {
+        //Nothing yet
     }
 }
 

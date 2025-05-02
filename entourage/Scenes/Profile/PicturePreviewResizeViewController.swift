@@ -148,6 +148,10 @@ extension PicturePreviewResizeViewController: UIScrollViewDelegate {
 
 //MARK: - MJNavBackViewDelegate -
 extension PicturePreviewResizeViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+    }
+    
     func goBack() {
         self.navigationController?.popViewController(animated: true)
     }

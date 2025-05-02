@@ -323,6 +323,9 @@ extension EventParamsViewController: MJNavBackViewDelegate {
             self.delegate?.reloadView()
         })
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 //MARK: - NeighborhoodParamCellDelegate -

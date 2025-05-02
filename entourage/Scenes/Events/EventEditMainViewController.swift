@@ -506,6 +506,9 @@ extension EventEditMainViewController: EventCreateMainDelegate {
 
 //MARK: - MJNavBackViewDelegate -
 extension EventEditMainViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+    }
     func goBack() {
         
         if hasNoInput() {

@@ -84,6 +84,7 @@ class ProfilFullViewController: UIViewController {
         ui_view_image_modify.isUserInteractionEnabled = true
         let tapModifyGesture = UITapGestureRecognizer(target: self, action: #selector(modifyImageClick))
         ui_view_image_modify.addGestureRecognizer(tapModifyGesture)
+
         
     }
     

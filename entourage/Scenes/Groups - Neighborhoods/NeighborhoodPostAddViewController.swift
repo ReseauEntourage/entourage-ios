@@ -470,13 +470,26 @@ extension NeighborhoodPostAddViewController: MJNavBackViewDelegate {
             self.dismiss(animated: true)
         }
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
+
+// MARK: - TakePhotoDelegate -
 extension NeighborhoodPostAddViewController: TakePhotoDelegate {
     func updatePhoto(image: UIImage?) {
         if image == nil {
             self.ui_image.backgroundColor = .appBeige
             self.ui_image_placeholder.isHidden = false
+        } else {
+            self.ui_image.backgroundColor = .clear
+            self.ui_image_placeholder.isHidden = true
         }
+        
+        self.currentImage = image
+        self.ui_image.image = self.currentImage
+        self.showButton(isAdd: image == nil)
+        changeButtonShare()
     }
 }

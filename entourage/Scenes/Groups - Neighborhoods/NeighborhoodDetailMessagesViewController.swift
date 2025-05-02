@@ -624,6 +624,11 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
 
 // MARK: - MJNavBackViewDelegate
 extension NeighborhoodDetailMessagesViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+
+    }
+    
     func goBack() {
         parentDelegate?.updateCommentCount(
             parentCommentId: parentCommentId,

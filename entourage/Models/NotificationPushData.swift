@@ -17,6 +17,7 @@ struct NotificationPushData {
     var url: String? = nil
     var stage:String? = nil
     var context:String? = nil
+    var tracking:String? = nil 
     
     init(instanceName:String, instanceId:Int, postId:Int?, context:String? = nil) {
         self.instanceType = InstanceType.getFromString(key: instanceName)
@@ -32,6 +33,7 @@ enum InstanceType:String {
     case neighborhoods
     case resources
     case outings
+    case outing_message
     case contributions
     case solicitations
     case conversations
@@ -49,6 +51,7 @@ enum InstanceType:String {
         case "neighborhood_post": return .neighborhood_post
         case "resources": return .resources
         case "outings","outing": return .outings
+        case "outing_message": return .outing_message
         case "outing_post": return .outing_post
         case "contributions","contribution": return .contributions
         case "solicitations", "solicitation": return .solicitations

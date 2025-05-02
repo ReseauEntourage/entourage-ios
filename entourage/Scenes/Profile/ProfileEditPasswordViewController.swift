@@ -156,6 +156,10 @@ extension ProfileEditPasswordViewController:UITextFieldDelegate {
 
 //MARK: - MJNavBackViewDelegate -
 extension ProfileEditPasswordViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+    }
+    
     func goBack() {
         self.dismiss(animated: true)
     }

@@ -1767,3 +1767,20 @@
 "settings_unblock_contacts_subtitle" = "%d contact blocked";
 "settings_unblock_contacts_subtitle_plural" = "%d contacts blocked";
 "language_change_redirect" = "You will be redirected to the home page to change the application language";
+"event_conversation" = "View event conversation";
+"go_to_event_conversation" = "Join and participate in the conversation";
+
+"event_conv_filter_all" = "All";
+"event_conv_filter_discussions" = "Discussions";
+"event_conv_filter_events" = "Events";
+"event_discut_title" = "find all the event information here";
+"event_button_add_calendar" = "Add to calendar";
+"onboarding_phase_three_question_contribution" = "In addition to meeting people, how would you like to contribute to the Entourage Community?";
+"onboarding_phase_three_option_entourer" = "Support";
+"onboarding_phase_three_option_entourer_description" = "I want to offer support to my neighbors in need.";
+"onboarding_phase_three_option_etre_entoure" = "Be supported";
+"onboarding_phase_three_option_etre_entoure_description" = "I am in a vulnerable situation and looking for support.";
+"onboarding_phase_three_option_les_deux" = "Both";
+"onboarding_phase_three_option_les_deux_description" = "Offer support and receive it.";
+"onboarding_phase_three_question_quartier" = "What is your neighborhood?";
+"onboarding_phase_three_placeholder_quartier" = "City or department address";

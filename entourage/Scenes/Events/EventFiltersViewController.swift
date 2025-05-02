@@ -315,6 +315,9 @@ extension EventFiltersViewController: MJNavBackViewDelegate {
     func goBack() {
         self.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 //MARK: - GMSAutocompleteViewControllerDelegate -

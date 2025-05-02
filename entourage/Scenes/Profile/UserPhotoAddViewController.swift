@@ -244,6 +244,9 @@ extension UserPhotoAddViewController: MJNavBackViewDelegate {
     func goBack() {
         self.close()
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 //MARK: - TakePhoto Delegate -

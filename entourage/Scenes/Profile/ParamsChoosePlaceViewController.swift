@@ -230,6 +230,9 @@ extension ParamsChoosePlaceViewController: MJNavBackViewDelegate {
         AnalyticsLoggerManager.logEvent(name: Action_NewGroup_AddLocation_Close)
         self.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 //MARK: - Protocol PlaceViewControllerDelegate -

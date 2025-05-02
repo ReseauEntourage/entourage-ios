@@ -436,6 +436,9 @@ extension NeighBorhoodEventListUsersViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true)
     }
+    func didTapEvent() {
+        //Nothing yet
+    }
 }
 
 extension Collection {

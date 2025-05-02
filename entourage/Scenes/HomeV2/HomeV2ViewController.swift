@@ -207,7 +207,7 @@ class HomeV2ViewController: UIViewController {
                     DeepLinkManager.showOutingListUniversalLink()
                 } else if _category.contains("resources") {
                     OnboardingEndChoicesManager.shared.categoryForButton = ""
-                    let urlString = "https://kahoot.it/challenge/0354666?challenge-id=45371e80-fe50-4be5-afec-b37e3d50ede2_1729004998521"
+                    let urlString = "https://kahoot.it/challenge/45371e80-fe50-4be5-afec-b37e3d50ede2_1733228323615"
                     if let url = URL(string: urlString) {
                         if let _vc = AppState.getTopViewController() {
                             if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
@@ -793,6 +793,7 @@ extension HomeV2ViewController {
                     if let onboardingPageVC = storyboard.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
                         onboardingPageVC.currentPhasePosition = 3
                         onboardingPageVC.shouldLaunchThird = true
+                        
                         if let _user = UserDefaults.currentUser {
                             onboardingPageVC.temporaryUser = _user
                         }

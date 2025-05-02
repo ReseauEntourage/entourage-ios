@@ -191,6 +191,10 @@ extension NeighborhoodPostAddPhotoViewController: UIImagePickerControllerDelegat
 
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodPostAddPhotoViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //Nothing yet
+    }
+    
     func goBack() {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }

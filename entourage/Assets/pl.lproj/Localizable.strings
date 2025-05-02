@@ -1241,7 +1241,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_placeholder_discut" = "Nouveau message";
 "messaging_message_title" = "Conversation";
 "messaging_message_send" = "Envoyer";
-"messaging_message_no_message" = "0encore de message";
+"messaging_message_no_message" = "Pas encore de message";
 
 "message_title_new_conv" = "Nouvelle conversation";
 "message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la conversation dans les paramètres.";
@@ -1726,3 +1726,19 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle" = "%d zablokowany kontakt";
 "settings_unblock_contacts_subtitle_plural" = "%d zablokowane kontakty";
 "language_change_redirect" = "Zostaniesz przekierowany na stronę główną, aby zmienić język aplikacji";
+"event_conversation" = "Zobacz rozmowę wydarzenia";
+"event_conv_filter_all" = "Wszystko";
+"event_conv_filter_discussions" = "Dyskusje";
+"event_conv_filter_events" = "Wydarzenia";
+"event_discut_title" = "Znajdź wszystkie informacje o wydarzeniu tutaj";
+"event_button_add_calendar" = "Dodaj do kalendarza";
+"onboarding_phase_three_question_contribution" = "Oprócz spotkań z ludźmi, w jaki sposób chcesz wspierać społeczność Entourage?";
+"go_to_event_conversation" = "Dołącz i weź udział w rozmowie";
+"onboarding_phase_three_option_entourer" = "Wspierać";
+"onboarding_phase_three_option_entourer_description" = "Chcę oferować wsparcie sąsiadom, którzy tego potrzebują.";
+"onboarding_phase_three_option_etre_entoure" = "Być wspieranym";
+"onboarding_phase_three_option_etre_entoure_description" = "Jestem w trudnej sytuacji i szukam wsparcia.";
+"onboarding_phase_three_option_les_deux" = "Oba";
+"onboarding_phase_three_option_les_deux_description" = "Oferować wsparcie i je otrzymywać.";
+"onboarding_phase_three_question_quartier" = "Jaka jest twoja dzielnica?";
+"onboarding_phase_three_placeholder_quartier" = "Adres miasta lub regionu";

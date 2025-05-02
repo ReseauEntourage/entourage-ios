@@ -935,7 +935,7 @@ Contacter l'équipe Entourage.</string>
                                                             <rect key="frame" x="0.0" y="0.0" width="276" height="150"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ? " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dr2-sy-MPQ">
-                                                                    <rect key="frame" x="0.0" y="18" width="276" height="132"/>
+                                                                    <rect key="frame" x="0.0" y="25" width="276" height="125"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -945,7 +945,7 @@ Contacter l'équipe Entourage.</string>
                                                             <constraints>
                                                                 <constraint firstAttribute="bottom" secondItem="Dr2-sy-MPQ" secondAttribute="bottom" id="4ZM-dY-mzz"/>
                                                                 <constraint firstItem="Dr2-sy-MPQ" firstAttribute="leading" secondItem="f3Y-KF-Hwh" secondAttribute="leading" id="DWM-Vw-O4e"/>
-                                                                <constraint firstItem="Dr2-sy-MPQ" firstAttribute="top" secondItem="f3Y-KF-Hwh" secondAttribute="top" constant="18" id="Wlm-Wv-85I"/>
+                                                                <constraint firstItem="Dr2-sy-MPQ" firstAttribute="top" secondItem="f3Y-KF-Hwh" secondAttribute="top" constant="25" id="Wlm-Wv-85I"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Dr2-sy-MPQ" secondAttribute="trailing" id="h8K-PR-KJL"/>
                                                                 <constraint firstAttribute="height" constant="150" id="pWH-uF-G5m"/>
                                                             </constraints>

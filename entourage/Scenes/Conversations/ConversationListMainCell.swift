@@ -45,10 +45,23 @@ class ConversationListMainCell: UITableViewCell {
     
     func populateCell(message:Conversation, delegate:ConversationListMainCellDelegate, position:Int) {
         ui_username.text = message.title
-        if let _messageTitle = message.title, let _count = message.members_count {
-            if _count > 2 {
-                ui_username.text = _messageTitle + " + " + String(_count - 1) + " membres"
-            }
+
+        if let count = message.members_count, count > 2, let members = message.members {
+            let currentUsername = UserDefaults.currentUser?.displayName
+
+            let trimmedNames = members
+                .compactMap { $0.username }
+                .filter { $0 != currentUsername } // Enlève l'utilisateur courant
+                .prefix(5)
+                .map { username -> String in
+                    let end = username.index(username.endIndex, offsetBy: -2, limitedBy: username.startIndex) ?? username.startIndex
+                    let trimmed = String(username[..<end]).trimmingCharacters(in: .whitespaces)
+                    return trimmed
+                }
+
+            ui_username.text = trimmedNames.joined(separator: ", ")
+        } else {
+            ui_username.text = message.title
         }
         ui_role.text = message.getRolesWithPartnerFormated()
         if let _message = message.getLastMessage {
@@ -65,7 +78,7 @@ class ConversationListMainCell: UITableViewCell {
         
         if !message.isOneToOne() {
             ui_bt_user.isHidden = true
-            ui_picto_cat.isHidden = false
+            ui_picto_cat.isHidden = true
             ui_image.image = UIImage()
             ui_image.backgroundColor = UIColor.appBeige
             //TODO: load picto
@@ -100,6 +113,23 @@ class ConversationListMainCell: UITableViewCell {
         if message.imBlocker() {
             ui_detail_message.text = "message_user_blocked_by_me_list".localized
             ui_detail_message.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13, color: .rougeErreur))
+        }
+        if message.type == "outing" {
+            self.ui_image.layer.cornerRadius = 10
+            self.ui_image.contentMode = .center
+            if let _url = URL(string: message.imageUrl ?? "") {
+                ui_image.sd_setImage(with: _url, placeholderImage: UIImage.init(named: "ic_placeholder_my_event"))
+            }
+            self.ui_username.text = message.title
+        }else {
+            self.ui_image.contentMode = .scaleAspectFit
+            self.ui_image.layer.cornerRadius = ui_image.frame.height / 2
+            if let urlImg = message.user?.imageUrl, !urlImg.isEmpty, let mainUrl = URL(string: urlImg) {
+                ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
+            }
+            else {
+                ui_image.image = UIImage.init(named: "placeholder_user")
+            }
         }
     }
     

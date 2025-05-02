@@ -28,6 +28,10 @@ class ReportUserMainViewController: BasePopViewController {
 
 //MARK: - MJNavBackViewDelegate -
 extension ReportUserMainViewController: MJNavBackViewDelegate {
+    func didTapEvent() {
+        //nothing yet
+    }
+    
     func goBack() {
         self.dismiss(animated: true)
     }
