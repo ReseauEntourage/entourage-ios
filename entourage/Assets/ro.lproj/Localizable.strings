@@ -1547,6 +1547,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "popup_biencommun_title" = "Pentru a permite a 60 de persoane aflate în situații precare să se alăture unui club sportiv, este nevoie de un singur clic. A ta!";
 "popup_biencommun_vote" = "Vot";
 
+"neighborhood_user_role_organizer" = "Organizator";
+"neighborhood_user_role_animator" = "Animator";
+
+
 "demand_social_title" = "Exemplu: Plimbare în parc";
 "demand_social_description" = "Exemplu: Propun o plimbare în parc în acest weekend pentru a discuta și a ne relaxa.";
 "demand_services_title" = "Exemplu: Trebuie să imprim documente";
@@ -1568,3 +1572,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_equipment_description" = "Exemplu: Ofer un telefon mobil vechi, dar funcțional. Ideal pentru cineva care are nevoie.";
 "contrib_hygiene_title" = "Exemplu: Produse de igienă de dat";
 "contrib_hygiene_description" = "Exemplu: Ofer mai multe pachete de produse igienice.";
+
+"mandatory_label" = "Obligatoriu";
+"share_request_title" = "Doriți să partajați %@ în grupul dvs. %@?";
+"share_request_description" = "Aveți posibilitatea de a partaja %@ în grupul de vecini din orașul dvs. pentru a-i îmbunătăți vizibilitatea";

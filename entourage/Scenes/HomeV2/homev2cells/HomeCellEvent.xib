@@ -39,18 +39,18 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Jp-Rr-gO8">
-                        <rect key="frame" x="15.999999999999996" y="110" width="54.666666666666657" height="25"/>
+                        <rect key="frame" x="15.999999999999996" y="110" width="39.666666666666657" height="25"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_animals" translatesAutoresizingMaskIntoConstraints="NO" id="glI-Qu-s4R">
-                                <rect key="frame" x="5" y="6.6666666666666714" width="10" height="12"/>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_animals" translatesAutoresizingMaskIntoConstraints="NO" id="glI-Qu-s4R">
+                                <rect key="frame" x="0.0" y="6.6666666666666714" width="0.0" height="12"/>
                                 <color key="tintColor" name="orange_app"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="10" id="r7a-qi-Epb"/>
+                                    <constraint firstAttribute="width" id="KaZ-bV-QfR"/>
                                     <constraint firstAttribute="height" constant="12" id="zUD-E8-8Ue"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGB-jU-vCm">
-                                <rect key="frame" x="20" y="5" width="29.666666666666671" height="15"/>
+                                <rect key="frame" x="5" y="5" width="29.666666666666671" height="15"/>
                                 <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="11"/>
                                 <color key="textColor" name="orange_app"/>
                                 <nil key="highlightedColor"/>
@@ -62,7 +62,7 @@
                             <constraint firstAttribute="bottom" secondItem="rGB-jU-vCm" secondAttribute="bottom" constant="5" id="Pa1-ac-bRL"/>
                             <constraint firstAttribute="height" constant="25" id="d02-mU-jmn"/>
                             <constraint firstItem="rGB-jU-vCm" firstAttribute="top" secondItem="5Jp-Rr-gO8" secondAttribute="top" constant="5" id="fBJ-xV-YX9"/>
-                            <constraint firstItem="glI-Qu-s4R" firstAttribute="leading" secondItem="5Jp-Rr-gO8" secondAttribute="leading" constant="5" id="gPC-KC-WRE"/>
+                            <constraint firstItem="glI-Qu-s4R" firstAttribute="leading" secondItem="5Jp-Rr-gO8" secondAttribute="leading" id="gPC-KC-WRE"/>
                             <constraint firstAttribute="trailing" secondItem="rGB-jU-vCm" secondAttribute="trailing" constant="5" id="h6p-Jf-MTG"/>
                             <constraint firstItem="rGB-jU-vCm" firstAttribute="leading" secondItem="glI-Qu-s4R" secondAttribute="trailing" constant="5" id="ieM-Fx-fs0"/>
                         </constraints>

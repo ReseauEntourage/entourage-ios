@@ -1584,6 +1584,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_how_to_act" = "كيف تريد أن تتصرف داخل مجتمع Entourage؟";
 "enhanced_onboarding_multiple_options" = "(نعم، يمكنك اختيار عدة خيارات!)";
 
+"neighborhood_user_role_organizer" = "منظم";
+"neighborhood_user_role_animator" = "منشط";
+
 "demand_social_title" = "مثال: نزهة في الحديقة";
 "demand_social_description" = "مثال: أقترح نزهة في الحديقة هذا الأسبوع للتحدث والاسترخاء.";
 "demand_services_title" = "مثال: بحاجة لطباعة مستندات";
@@ -1605,4 +1608,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_equipment_description" = "مثال: أتبرع بهاتف محمول قديم لكنه يعمل. مثالي لشخص يحتاج إليه.";
 "contrib_hygiene_title" = "مثال: منتجات النظافة للتبرع";
 "contrib_hygiene_description" = "مثال: أتبرع بعدة عبوات من الفوط الصحية.";
+"mandatory_label" = "إلزامي";
 
+"share_request_title" = "هل ترغب في مشاركة %@ في مجموعة %@ الخاصة بك؟";
+"share_request_description" = "لديك خيار مشاركة %@ في مجموعة الجيران في مدينتك لتحسين رؤيته";

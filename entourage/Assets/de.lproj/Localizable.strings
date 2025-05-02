@@ -1644,6 +1644,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_how_to_act" = "Wie möchten Sie in der Entourage-Community handeln?";
 "enhanced_onboarding_multiple_options" = "(Ja, Sie können mehrere Optionen auswählen!)";
 
+"neighborhood_user_role_organizer" = "Organisator";
+"neighborhood_user_role_animator" = "Moderator";
+
 "demand_social_title" = "Beispiel: Spaziergang im Park";
 "demand_social_description" = "Beispiel: Ich schlage einen Spaziergang im Park am Wochenende vor, um zu plaudern und sich zu entspannen.";
 "demand_services_title" = "Beispiel: Dokumente drucken";
@@ -1665,3 +1668,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_equipment_description" = "Beispiel: Ich verschenke ein altes, aber funktionstüchtiges Handy. Ideal für jemanden, der eines benötigt.";
 "contrib_hygiene_title" = "Beispiel: Hygieneprodukte zu verschenken";
 "contrib_hygiene_description" = "Beispiel: Ich verschenke mehrere Packungen Damenhygieneartikel.";
+"share_request_title" = "Möchten Sie Ihr %@ in Ihrer %@-Gruppe teilen?";
+"share_request_description" = "Sie haben die Möglichkeit, Ihr %@ in der Nachbarschaftsgruppe Ihrer Stadt zu teilen, um dessen Sichtbarkeit zu erhöhen";

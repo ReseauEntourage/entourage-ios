@@ -6,41 +6,44 @@
 //
 
 import Foundation
-struct Neighborhood:Codable {
-    var uid:Int = 0
-    var uuid_v2:String = ""
-    var name:String = ""
+
+// MARK: - Neighborhood Struct
+struct Neighborhood: Codable {
+    var uid: Int = 0
+    var uuid_v2: String = ""
+    var name: String = ""
     
-    var aboutGroup:String?
-    var welcomeMessage:String?
-    var membersCount:Int = 0
+    var aboutGroup: String?
+    var welcomeMessage: String?
+    var membersCount: Int = 0
     
-    var address:Address? = nil
-    var interests:[String]? = nil
-    var members:[MemberLight] = [MemberLight]()
+    var address: Address? = nil
+    var interests: [String]? = nil
+    var members: [MemberLight] = [MemberLight]()
     
-    var creator:MemberLight = MemberLight(uid: 0)
+    var creator: MemberLight = MemberLight(uid: 0)
     
-    var aboutEthics:String? = nil
-    var past_outings_count:Int = 0
-    var future_outings_count:Int = 0
+    var aboutEthics: String? = nil
+    var past_outings_count: Int = 0
+    var future_outings_count: Int = 0
     var has_ongoing_outing = false
-    var national:Bool? = false
+    var national: Bool? = false
     
-    var image_url:String?
-    var neighborhood_image_id:Int? = nil // Use to pass the image info from the gallery
-    var tagOtherMessage:String? = nil
+    var image_url: String?
+    var neighborhood_image_id: Int? = nil // Utilisé pour passer l'info image depuis la galerie
+    var tagOtherMessage: String? = nil
     
-    var futureEvents:[Event]?
-    var messages:[PostMessage]? = nil
+    var futureEvents: [Event]?
+    var messages: [PostMessage]? = nil
     var isMember = false
-    var unreadPostCount:Int? = 0
+    var unreadPostCount: Int? = 0
     
     var isSelected = false
     
     var nameTranslations: Translations? = nil
     var aboutGroupTranslations: Translations? = nil
     var welcomeMessageTranslations: Translations? = nil
+
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"
@@ -53,16 +56,12 @@ struct Neighborhood:Codable {
         case aboutEthics = "ethics"
         
         case creator = "user"
-        
         case address
-        
         case interests
         case members
-        
         case past_outings_count
         case future_outings_count
         case has_ongoing_outing
-        
         case isMember = "member"
         case messages = "posts"
         case futureEvents = "future_outings"
@@ -73,44 +72,43 @@ struct Neighborhood:Codable {
         case national
     }
     
-    func dictionaryForWS() -> [String:Any] {
-        var dict = [String:Any]()
+    func dictionaryForWS() -> [String: Any] {
+        var dict = [String: Any]()
         
         if name.count > 0 {
             dict["name"] = name
         }
         
-        //TODO: avec la nouvelle version du WS de nico
-        if address?.displayAddress?.count ?? 0 > 0 {
-            dict["place_name"] = address!.displayAddress!
+        if let displayAddress = address?.displayAddress, !displayAddress.isEmpty {
+            dict["place_name"] = displayAddress
         }
-        if address?.latitude ?? 0 != 0 {
-            dict["latitude"] = address!.latitude
+        if let latitude = address?.latitude, latitude != 0 {
+            dict["latitude"] = latitude
         }
-        if address?.longitude ?? 0 != 0 {
-            dict["longitude"] = address!.longitude
+        if let longitude = address?.longitude, longitude != 0 {
+            dict["longitude"] = longitude
         }
-        if address?.google_place_id?.count ?? 0 > 0 {
-            dict["google_place_id"] = address!.google_place_id!
-        }
-        
-        if !(aboutGroup?.isEmpty ?? true) {
-            dict["description"] = aboutGroup!
+        if let googlePlaceID = address?.google_place_id, !googlePlaceID.isEmpty {
+            dict["google_place_id"] = googlePlaceID
         }
         
-        if !(aboutEthics?.isEmpty ?? true) {
-            dict["ethics"] = aboutEthics!
-        }
-        if !(welcomeMessage?.isEmpty ?? true) {
-            dict["welcome_message"] = welcomeMessage!
+        if let aboutGroup = aboutGroup, !aboutGroup.isEmpty {
+            dict["description"] = aboutGroup
         }
         
-        if let interests = interests, interests.count > 0 {
+        if let aboutEthics = aboutEthics, !aboutEthics.isEmpty {
+            dict["ethics"] = aboutEthics
+        }
+        if let welcomeMessage = welcomeMessage, !welcomeMessage.isEmpty {
+            dict["welcome_message"] = welcomeMessage
+        }
+        
+        if let interests = interests, !interests.isEmpty {
             dict["interests"] = interests
         }
-       
-        if !(image_url?.isEmpty ?? true) {
-            dict["image_url"] = image_url!
+        
+        if let image_url = image_url, !image_url.isEmpty {
+            dict["image_url"] = image_url
         }
         
         if let neighborhood_image_id = neighborhood_image_id {
@@ -125,11 +123,13 @@ struct Neighborhood:Codable {
     }
 }
 
-//MARK: - NeighborhoodImage -
-struct NeighborhoodImage:Codable {
-    var uid:Int
-    var title:String?
-    var imageUrl:String
+
+
+// MARK: - NeighborhoodImage Struct
+struct NeighborhoodImage: Codable {
+    var uid: Int
+    var title: String?
+    var imageUrl: String
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"

@@ -40,7 +40,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uD3-Vh-xhb">
-                                <rect key="frame" x="60.999999999999993" y="10.666666666666668" width="74.333333333333314" height="43.666666666666657"/>
+                                <rect key="frame" x="60.999999999999993" y="10.000000000000004" width="74.333333333333314" height="45.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Username" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F12-Un-hW0">
                                         <rect key="frame" x="0.0" y="0.0" width="74.333333333333329" height="19"/>
@@ -49,13 +49,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X78-fu-wU7">
-                                        <rect key="frame" x="0.0" y="31.333333333333332" width="74.333333333333329" height="12.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="33" width="74.333333333333329" height="12.333333333333343"/>
                                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" text="Ambassadeur" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ND8-4r-ciN">
-                                        <rect key="frame" x="0.0" y="18.999999999999996" width="74.5" height="12.333333333333332"/>
+                                        <rect key="frame" x="0.0" y="19" width="74.5" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="cgD-ps-aPq"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
                                         <color key="textColor" name="orange_app"/>
                                         <nil key="highlightedColor"/>
@@ -79,7 +82,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOa-hG-CYT" customClass="ActiveLabel" customModule="ActiveLabel">
-                                <rect key="frame" x="28" y="64.333333333333329" width="291.66666666666669" height="41"/>
+                                <rect key="frame" x="28" y="65.333333333333329" width="291.66666666666669" height="41"/>
                                 <string key="text">Bienvenue à toi cher danseur !
 Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
@@ -202,10 +205,10 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="lSB-mN-f1m">
-                                <rect key="frame" x="28" y="156.33333333333337" width="584" height="143.66666666666663"/>
+                                <rect key="frame" x="28" y="157.33333333333337" width="584" height="142.66666666666663"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sélectionnez une option" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrX-Xx-AKe">
-                                <rect key="frame" x="28" y="125.33333333333334" width="584" height="21"/>
+                                <rect key="frame" x="28" y="126.33333333333334" width="584" height="21"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                 <color key="textColor" name="grey_text_deleted"/>
                                 <nil key="highlightedColor"/>
@@ -269,6 +272,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ambassy_height" destination="cgD-ps-aPq" id="KGo-KQ-7Su"/>
                 <outlet property="ui_btn_signal_post" destination="qmL-Of-6XE" id="cds-nD-yCt"/>
                 <outlet property="ui_comment" destination="EOa-hG-CYT" id="qnT-p7-Y21"/>
                 <outlet property="ui_comments_nb" destination="Lto-PU-oVf" id="eWZ-pb-fiZ"/>

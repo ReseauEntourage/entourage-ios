@@ -766,7 +766,6 @@ class ActionsMainHomeViewController: UIViewController {
         if let navvc = storyboard?.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navvc.topViewController as? ActionDetailFullViewController {
             vc.actionId = actionId
             vc.action = action
-            print("eho vc isContrib " , isContrib)
             vc.isContrib = isContrib
             self.tabBarController?.present(navvc, animated: true)
         }

@@ -27,6 +27,25 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
+    // MARK: - Get Default Neighborhood
+    static func getDefaultGroup(completion: @escaping (_ group: Neighborhood?, _ error: EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else { return }
+        var endpoint = kAPIGetDefaultNeighborhoods
+        endpoint = String(format: endpoint, token)
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let group: Neighborhood? = self.parseData(data: data, key: "neighborhood")
+            DispatchQueue.main.async { completion(group, nil) }
+        }
+    }
+    
     static func getNeighborhoodImages( completion: @escaping (_ images:[NeighborhoodImage]?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}

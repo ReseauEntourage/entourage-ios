@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>10.4.buildNumberNotSet</string>
+	<string>10.5.buildNumberNotSet</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

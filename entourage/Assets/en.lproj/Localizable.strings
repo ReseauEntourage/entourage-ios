@@ -1644,6 +1644,10 @@
 "enhanced_onboarding_how_to_act" = "How do you want to act within the Entourage community?";
 "enhanced_onboarding_multiple_options" = "(Yes, you can choose multiple options!)";
 
+"neighborhood_user_role_organizer" = "Organizer";
+"neighborhood_user_role_animator" = "Animator";
+
+
 "demand_social_title" = "Example: Walk in the park";
 "demand_social_description" = "Example: I propose a walk in the park this weekend to chat and relax.";
 "demand_services_title" = "Example: Need to print documents";
@@ -1665,3 +1669,7 @@
 "contrib_equipment_description" = "Example: I am giving away an old functional mobile phone. Ideal for someone who needs it.";
 "contrib_hygiene_title" = "Example: Hygiene products to give away";
 "contrib_hygiene_description" = "Example: I am giving away several packs of hygiene pads.";
+
+"mandatory_label" = "Mandatory";
+"share_request_title" = "Would you like to share your %@ in your %@ group?";
+"share_request_description" = "You have the option to share your %@ in the neighborhood group of your city to improve its visibility";

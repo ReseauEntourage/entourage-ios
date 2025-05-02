@@ -1595,13 +1595,14 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_how_to_act" = "Comment souhaitez-vous agir au sein de la communauté Entourage ?";
 "enhanced_onboarding_multiple_options" = "(Eh oui, vous avez le droit de choisir plusieurs options !)";
 
-"ambassador_ask_notification_title" = "Participez-vous en tant qu’organisateur ou en tant que participant ?";
-"ambassador_ask_notification_description" = "Si vous êtes organisateur, les participants pourront vous identifier plus facilement";
-"ambassador_ask_notification_button_organizer" = "Organisateur";
+"ambassador_ask_notification_title" = "Participez-vous en tant qu’animateur ou en tant que participant ?";
+"ambassador_ask_notification_description" = "Si vous êtes animateur, les participants pourront vous identifier plus facilement";
+"ambassador_ask_notification_button_organizer" = "Animateur";
 "ambassador_ask_notification_button_participant" = "Participant";
 
 
 "neighborhood_user_role_organizer" = "Organisateur";
+"neighborhood_user_role_animator" = "Animateur";
 
 "demand_social_title" = "Exemple : Balade dans le parc";
 "demand_social_description" = "Exemple : Je propose une balade dans le parc ce week-end pour discuter et se détendre.";
@@ -1625,4 +1626,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_hygiene_title" = "Exemple : Produits hygiéniques à donner";
 "contrib_hygiene_description" = "Exemple : Je donne plusieurs paquets de protections hygiéniques.";
 
+"mandatory_label" = "Obligatoire";
+
+"share_request_title" = "Souhaitez-vous partager votre %@ dans votre groupe %@ ?";
+"share_request_description" = "Vous avez la possibilité de partager votre %@ dans le groupe de voisins de votre ville pour améliorer sa visibilité";
 

@@ -9,7 +9,7 @@ import Foundation
 struct ContribUploadPictureService {
     
     //First step Prepare
-    static func prepareUploadWith(image:UIImage, action:Action, isUpdate:Bool , completion: @escaping (_ action:Action?, _ isOk: Bool)->()) {
+    static func prepareUploadWith(image:UIImage, action:Action, isUpdate:Bool ,autoPost:Bool, completion: @escaping (_ action:Action?, _ isOk: Bool)->()) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD
@@ -23,7 +23,7 @@ struct ContribUploadPictureService {
             
             uploadtoS3(urlS3: _presigneUrl, image: image, completion: {isOk in
                 if isOk {
-                    postWithImageAndText(imageKey: _uploadKey,action: action,isUpadte: isUpdate, completion: { action, isOk in
+                    postWithImageAndText(imageKey: _uploadKey,action: action,isUpadte: isUpdate, autoPost: autoPost, completion: { action, isOk in
                         completion(action, isOk)
                     })
                 }
@@ -63,12 +63,12 @@ struct ContribUploadPictureService {
     }
     
     //3nd step create contrib with key
-    private static func postWithImageAndText(imageKey:String, action:Action,isUpadte:Bool, completion: @escaping (_ action:Action?,_ isOk: Bool)->()) {
+    private static func postWithImageAndText(imageKey:String, action:Action,isUpadte:Bool,autoPost:Bool, completion: @escaping (_ action:Action?,_ isOk: Bool)->()) {
         Logger.print("***** image key ? \(imageKey)")
         var newAction = action
         newAction.keyImage = imageKey
         if isUpadte {
-            ActionsService.updateAction(isContrib: true, action: newAction) { action, error in
+            ActionsService.updateAction(isContrib: true, action: newAction, autoPost: autoPost) { action, error in
                 if error != nil {
                     completion(nil,false)
                     return
@@ -77,7 +77,7 @@ struct ContribUploadPictureService {
             }
         }
         else {
-            ActionsService.createAction(isContrib: true, action: newAction) { action, error in
+            ActionsService.createAction(isContrib: true, action: newAction, autoPost: autoPost) { action, error in
                 if error != nil {
                     completion(nil,false)
                     return

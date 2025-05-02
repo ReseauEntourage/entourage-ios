@@ -116,10 +116,10 @@ struct ApplicationTheme {
         return MJTextFontColorStyle(font: getFontNunitoLight(size: size), color: .rougeErreur)
     }
     
-    static func getFontLegend(size:CGFloat = 11) -> MJTextFontColorStyle {
+    static func getFontLegend(size:CGFloat = 13) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: .black)
     }
-    static func getFontLegendGris(size:CGFloat = 11) -> MJTextFontColorStyle {
+    static func getFontLegendGris(size:CGFloat = 13) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: .appGris112)
     }
     
