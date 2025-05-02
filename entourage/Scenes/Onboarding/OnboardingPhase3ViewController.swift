@@ -9,12 +9,20 @@ import UIKit
 import CoreLocation
 import GooglePlaces
 
+protocol Phase3fromAppDelegate{
+    func updatePreference(userType:UserType)
+    func updateLoc(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?)
+    func sendOnboardingEnd()
+}
+
 class OnboardingPhase3ViewController: UIViewController {
 
     @IBOutlet weak var ui_tableview: UITableView!
     
+    @IBOutlet weak var ui_next_btn: UIButton!
     
     weak var pageDelegate:OnboardingDelegate? = nil
+    var fromAppDelegate:Phase3fromAppDelegate? = nil
     
     var location_new:CLLocationCoordinate2D? = nil
     var location_name_new:String? = nil
@@ -25,6 +33,21 @@ class OnboardingPhase3ViewController: UIViewController {
     var isAsso = false
     
     var userTypeSelected = UserType.none
+    
+    override func viewDidLoad() {
+        if fromAppDelegate != nil {
+            self.ui_next_btn.isHidden = false
+        }else{
+            self.ui_next_btn.isHidden = true
+        }
+        self.ui_next_btn.addTarget(self, action: #selector(onNextClick), for: .touchUpInside)
+    }
+    
+    @objc func onNextClick(){
+        self.dismiss(animated: false) {
+            self.fromAppDelegate?.sendOnboardingEnd()
+        }
+    }
     
 }
 
@@ -79,8 +102,12 @@ extension OnboardingPhase3ViewController:OnboardingEndCellDelegate {
         if isAsso {
             userType = .assos
         }
-        
-        pageDelegate?.addInfos(userType: userType)
+        if let fromAppDelegate{
+            fromAppDelegate.updatePreference(userType: userType)
+        }else{
+            pageDelegate?.addInfos(userType: userType)
+
+        }
     }
 }
 
@@ -90,10 +117,15 @@ extension OnboardingPhase3ViewController: PlaceViewControllerDelegate {
         self.location_name_new = currentLocationName
         self.location_new = currentlocation
         self.location_googlePlace_new = googlePlace
-        
-       pageDelegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
-        DispatchQueue.main.async {
-            self.ui_tableview.reloadData()
+        if let fromAppDelegate{
+            fromAppDelegate.updateLoc(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
+             DispatchQueue.main.async {
+             }
+        }else{
+            pageDelegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
+             DispatchQueue.main.async {
+                 self.ui_tableview.reloadData()
+             }
         }
     }
 }

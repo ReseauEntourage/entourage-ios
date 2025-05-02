@@ -38,6 +38,8 @@ class ParamsChoosePlaceViewController: BasePopViewController {
         if UIDevice.current.deviceTypeScreen == .small {
             ui_constraint_add_place_top.constant = 40
         }
+        ui_label_info.isHidden = true
+        ui_title_add_place.setVisibilityGone()
         
         //                OTLogger.logEvent(View_Profile_Action_Zone)//TODO:  Analytics
         

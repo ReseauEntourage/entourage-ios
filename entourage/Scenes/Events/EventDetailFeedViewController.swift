@@ -833,7 +833,9 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
             vc.isFromSurvey = true
             vc.eventId = eventId
             vc.isFromReact = false
+            vc.questionTitle = post.content
             self.navigationController?.present(navVC, animated: true)
+            
         }
     }
     func joinLeave() {

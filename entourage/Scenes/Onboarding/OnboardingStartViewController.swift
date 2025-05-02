@@ -25,6 +25,8 @@ class OnboardingStartViewController: UIViewController {
     var pageViewController:OnboardingPageViewController? = nil
     
     var currentPhasePosition = 1
+    // MARK: HERE IS A BOOLEAN TO LAUNCH THIS VC FROM HOME: SOME CONFIGURATION NEEDED TO ADAPT THE VC
+    var shouldLaunchThird = false
     
     let minimumCharacters = 2
     let minimumPhoneCharacters = 9
@@ -40,6 +42,8 @@ class OnboardingStartViewController: UIViewController {
     var temporaryGooglePlace:GMSPlace? = nil
     var temporaryLocation:CLLocationCoordinate2D? = nil
     var temporaryAddressName:String? = nil
+    var isLocOk = false
+    var isTypeOk = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +76,10 @@ class OnboardingStartViewController: UIViewController {
         self.modalPresentationStyle = .fullScreen
         
         ui_top_view.populateCustom(title: "onboard_welcome_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
+        if shouldLaunchThird {
+            self.updateViewsForPosition()
+            self.ui_page_control.isHidden = true
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -82,6 +90,14 @@ class OnboardingStartViewController: UIViewController {
         if let vc = segue.destination as? OnboardingPageViewController {
             self.pageViewController = vc
             self.pageViewController?.parentDelegate = self
+        }
+    }
+    
+    func countValidate(){
+        if isLocOk && isTypeOk {
+            enableDisableNextButton(isEnable: true)
+        }else{
+            enableDisableNextButton(isEnable: false)
         }
     }
     
@@ -169,6 +185,9 @@ class OnboardingStartViewController: UIViewController {
             ui_bt_previous.isHidden = true
             ui_bt_next.isHidden = false
             ui_bt_next.setTitle("onboard_bt_create".localized, for: .normal)
+            if shouldLaunchThird{
+                ui_bt_next.setTitle("onboard_bt_next".localized, for: .normal)
+            }
         default:
             break
         }
@@ -190,32 +209,35 @@ class OnboardingStartViewController: UIViewController {
         if currentPhasePosition == 1 {
             if temporaryUser.firstname.count < minimumCharacters {
                 isValid = false
-                message = "onboard_error_firstname".localized
+                message = "onboard_error_general".localized
             }
             else if temporaryUser.lastname.count < minimumCharacters {
                 isValid = false
-                message = "onboard_error_lastname".localized
+                message = "onboard_error_general".localized
             }
             else if phone?.count ?? 0 < minimumPhoneCharacters {
                 isValid = false
-                message = "onboard_error_phone".localized
+                message = "onboard_error_general".localized
             }
 
             else if email?.count ?? 0 > 0 && (email?.isValidEmail ?? false) == false {
                 isValid = false
-                message = "oonboard_error_email".localized
+                message = "onboard_error_general".localized
             }
         }
         if currentPhasePosition == 3 {
             if userTypeSelected == .none {
                 isValid = false
-                message = "onboard_error_Usertype".localized
+                message = "onboard_error_general".localized
             }
             else if temporaryLocation == nil && temporaryGooglePlace == nil {
                 isValid = false
-                message = "onboard_error_place".localized
+                message = "onboard_error_general".localized
             }
             
+        }
+        if isValid {
+            enableDisableNextButton(isEnable: true)
         }
         return (isValid,message)
     }
@@ -357,8 +379,14 @@ class OnboardingStartViewController: UIViewController {
         
         let sb = UIStoryboard.init(name: StoryboardName.onboarding, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "OnboardingEndViewController") as! OnboardingEndViewController
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+        if shouldLaunchThird{
+            if let window = UIApplication.shared.windows.first {
+                window.rootViewController = vc
+                window.makeKeyAndVisible()
+            }
+        }else{
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
@@ -384,11 +412,26 @@ extension OnboardingStartViewController: OnboardingDelegate {
     
     func addInfos(userType:UserType) {
         self.userTypeSelected = userType
+        if shouldLaunchThird && userType != .none{
+            self.isTypeOk = true
+            self.countValidate()
+        }else{
+            self.isTypeOk = false
+            self.countValidate()
+        }
+
     }
     func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         self.temporaryGooglePlace = googlePlace
         self.temporaryLocation = currentlocation
         self.temporaryAddressName = currentLocationName
+        if shouldLaunchThird && googlePlace != nil {
+            self.isLocOk = true
+            self.countValidate()
+        }else{
+            self.isLocOk = false
+            self.countValidate()
+        }
     }
     
     func goMain() {

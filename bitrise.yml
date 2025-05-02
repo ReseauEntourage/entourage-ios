@@ -16,8 +16,6 @@ meta:
 trigger_map:
 - push_branch: develop
   workflow: Entourage-Preprod
-- push_branch: xcode15
-  workflow: Entourage-Preprod-xcode15
 workflows:
   Entourage-Preprod:
     before_run:
@@ -27,6 +25,7 @@ workflows:
       opts:
         is_expand: false
     steps:
+    - manage-ios-code-signing@2: {}
     - xcode-archive:
         inputs:
         - register_test_devices: "yes"
@@ -122,6 +121,7 @@ workflows:
     before_run:
     - Prepare
     steps:
+    - manage-ios-code-signing@2: {}
     - xcode-archive:
         inputs:
         - automatic_code_signing: api-key
@@ -171,42 +171,6 @@ workflows:
             App|${BITRISE_APP_TITLE}
             Branch|${BITRISE_GIT_BRANCH}
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
-  Entourage-Preprod-xcode15:
-    before_run:
-    - Prepare
-    envs:
-    - BITRISE_SCHEME: EntourageBeta
-      opts:
-        is_expand: false
-    steps:
-    - xcode-archive:
-        inputs:
-        - register_test_devices: "yes"
-        - automatic_code_signing: api-key
-        - upload_bitcode: "no"
-        - compile_bitcode: "no"
-        - distribution_method: ad-hoc
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_user_groups: none
-        - deploy_path: $BITRISE_IPA_PATH
-    - cache-push: {}
-  Entourage-TestFlight-xcode15:
-    before_run:
-    - Prepare
-    steps:
-    - xcode-archive:
-        inputs:
-        - automatic_code_signing: api-key
-        - upload_bitcode: "no"
-        - compile_bitcode: "no"
-        - distribution_method: app-store
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_user_groups: none
-        - deploy_path: $BITRISE_IPA_PATH
-    - cache-push:
-        is_always_run: true
   Prepare:
     steps:
     - set-java-version@1:

@@ -158,9 +158,9 @@
 
 "onboard_phase3_title" = "En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ?";
 "onboard_title_entour" = "Entourer";
-"onboard_subtitle_entour" = "Proposer de l’aide …";
+"onboard_subtitle_entour" = "Je souhaite proposer du soutien à mes voisin(e)s qui en ont besoin.";
 "onboard_title_beentour" = "Être entouré";
-"onboard_subtitle_beentour" = "Demander de l’aide, trouver les structures sociales autour de moi …";
+"onboard_subtitle_beentour" = "Je suis en situation de vulnérabilité et recherche du soutien.";
 "onboard_place_title_new" = "Quel est votre quartier ?";
 "onboard_place_desc" = "* L’adresse est confidentielle et ne sera jamais communiquée ";
 "onboard_place_infos_placeholder" = "Adresse, ville ou département";
@@ -178,6 +178,7 @@
 "onboard_error_lastname" = "Le nom doit comporter au moins 2 lettres.";
 "onboard_error_email" = "L’adresse email est invalide.";
 "onboard_error_phone" = "Le numéro doit comporter 9 ou 10 chiffres.";
+"onboard_error_general" = "Veuillez renseigner tous les champs obligatoires";
 //A supp
 "onboard_button_pass" = "Passer";
 
@@ -463,7 +464,7 @@
 "interest_other_name" = "Autre";
 //profile edit location
 "profileEditLocationTitle" = "Où souhaitez-vous agir ?";
-"profileEditLocationDescription" = "Entourage est un réseau social !\nDécouvrez les initiatives de votre quartier et tissez des liens avec vos voisins.";
+"profileEditLocationDescription" = "Nous vous demandons votre localité afin de vous proposer des contenus adaptés à votre localité. Soyez assuré(e) que vos informations resteront confidentielles et ne seront jamais partagées avec des tiers.";
 "profileEditLocationLegend*" = "Ajouter un lieu *";
 "profileEditLocationLegend_" = "Ajouter un lieu";
 "profileEditLocationPlaceholder" = "Ville ou département";

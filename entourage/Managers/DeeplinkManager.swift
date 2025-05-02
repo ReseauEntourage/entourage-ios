@@ -516,6 +516,7 @@ struct DeepLinkManager {
                 return
             }
 
+            
             DispatchQueue.main.async {
                 if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.setupFromOtherVCWithHash(conversationId: conversationId, title: nil, isOneToOne: true)

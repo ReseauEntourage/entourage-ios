@@ -87,61 +87,53 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     }
     
     func loadSurveyData() {
-        guard let _postId = self.postId, let survey = self.survey else {
-            print("Les informations de sondage ou le postId sont manquants.")
+        guard let postId = self.postId, let survey = self.survey else {
+            print("Survey information or postId is missing.")
             return
         }
 
         let completion: (SurveyResponsesListWrapper?, EntourageNetworkError?) -> Void = { [weak self] surveyResponsesListWrapper, error in
-            guard let self = self else { return }
+            guard let self = self else {
+                print("Self was deallocated.")
+                return
+            }
             DispatchQueue.main.async {
                 if let error = error {
-                    // Utilise le type d'erreur spécifique pour traiter ou afficher l'erreur
-                    print("Erreur lors de la récupération des réponses de sondage: \(error)")
+                    print("Error retrieving survey responses: \(error)")
                     return
                 }
-                guard let surveyResponsesList = surveyResponsesListWrapper?.responses else {
-                    print("Aucune réponse de sondage n'a été trouvée.")
+                guard let surveyResponsesList = surveyResponsesListWrapper?.responses, !surveyResponsesList.isEmpty else {
+                    print("No survey responses were found or the response list is empty.")
                     return
                 }
 
-                // Itérer sur chaque choix de la survey pour construire les sections
-                self.tableData.append(.questionCell(title: self.questionTitle!))
+                self.tableData.append(.questionCell(title: self.questionTitle ?? "Default Title"))
                 for (index, choice) in survey.choices.enumerated() {
-                    let voteCount = survey.summary[index] // Utiliser summary pour obtenir le nombre de votes pour chaque choix
+                    guard let voteCount = survey.summary[safe: index],
+                          let usersForChoice = surveyResponsesList[safe: index] else {
+                        print("Index \(index) is out of bounds.")
+                        continue
+                    }
                     self.tableData.append(.surveySection(title: choice, voteCount: voteCount))
-
-                    // Ajouter les utilisateurs qui ont répondu à ce choix
-                    let usersForChoice = surveyResponsesList[index]
                     self.tableData += usersForChoice.map { surveyUser in
-                        // Créer une instance vide de UserLightNeighborhood
                         var userLight = UserLightNeighborhood()
                         userLight.sid = surveyUser.id
                         userLight.displayName = surveyUser.displayName
                         userLight.avatarURL = surveyUser.avatarUrl
-
                         userLight.communityRoles = surveyUser.communityRoles
-
                         return TableDTO.userCell(user: userLight, reactionType: nil)
                     }
                 }
-
-                // Recharger les données de la tableView
                 self.ui_tableview.reloadData()
             }
         }
 
-        // Appel au service pour obtenir les réponses de sondage basé sur eventId ou groupId
         if let eventId = self.eventId {
-            SurveyService.getSurveyResponsesForEvent(eventId: eventId, postId: _postId, completion: completion)
+            SurveyService.getSurveyResponsesForEvent(eventId: eventId, postId: postId, completion: completion)
         } else if let groupId = self.groupId {
-            SurveyService.getSurveyResponsesForGroup(groupId: groupId, postId: _postId, completion: completion)
+            SurveyService.getSurveyResponsesForGroup(groupId: groupId, postId: postId, completion: completion)
         }
-    }
-
-
-
-    
+    }    
     
     func getNeighborhoodUsers() {
         guard let neighborhood = neighborhood else { return }

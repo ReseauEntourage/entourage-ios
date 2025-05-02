@@ -94,9 +94,7 @@ class HomeV2ViewController:UIViewController{
         //CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
-        if currentUser?.addressPrimary == nil {
-            self.showSimpleAlertDialogForLocation()
-        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -195,6 +193,13 @@ class HomeV2ViewController:UIViewController{
             tableDTO.append(.cellEvent(events: allEvents))
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
         }
+        if allPedagos.count > 0 {
+            tableDTO.append(.cellTitle(title: "home_v2_title_pedago".localized, subtitle: "home_v2_subtitle_pedago".localized))
+            for pedago in allPedagos {
+                tableDTO.append(.cellPedago(pedago: pedago))
+            }
+            tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
+        }
         if allGroups.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
             tableDTO.append(.cellGroup(groups: allGroups))
@@ -204,13 +209,7 @@ class HomeV2ViewController:UIViewController{
         tableDTO.append(.cellTitle(title: "home_v2_title_map".localized, subtitle: "home_v2_subtitle_map".localized))
         tableDTO.append(.cellMap)
         
-        if allPedagos.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_pedago".localized, subtitle: "home_v2_subtitle_pedago".localized))
-            for pedago in allPedagos {
-                tableDTO.append(.cellPedago(pedago: pedago))
-            }
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
-        }
+
         var _offlineEvents = [Event]()
         for event in allEvents{
             if event.isOnline == false {
@@ -221,8 +220,8 @@ class HomeV2ViewController:UIViewController{
             tableDTO.append(.cellHZ)
         }
         tableDTO.append(.cellTitle(title: "home_v2_title_help".localized, subtitle: "home_v2_subtitle_help".localized))
-        tableDTO.append(.cellIAmLost(helpType: .createGroup))
-        tableDTO.append(.cellIAmLost(helpType: .createEvent))
+        //tableDTO.append(.cellIAmLost(helpType: .createGroup))
+        //tableDTO.append(.cellIAmLost(helpType: .createEvent))
         if let _moderator = userHome.moderator{
             if let _name = _moderator.displayName{
                 tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
@@ -234,6 +233,7 @@ class HomeV2ViewController:UIViewController{
     func initHome(){
         self.ui_label_subtitle.text = "home_v2_title".localized
         self.getNotif()
+        
     }
     func updateTopView() {
         
@@ -252,16 +252,6 @@ class HomeV2ViewController:UIViewController{
             self.ui_view_notif.backgroundColor = UIColor.appOrange // Utilisez la couleur orange que vous avez ajoutée précédemment.
         }
         prepareUINotifAndAvatar()
-    }
-    
-    func showSimpleAlertDialogForLocation() {
-        let alertController = SimpleAlertDialog(title: "Améliorez votre expérience !", message: "Pour connaître les actions et événements solidaires autour de chez vous, veuillez prendre un moment pour ajouter votre localité à votre profil.", btnTitle: "Ajouter ma localité")
-        alertController.delegate = self
-        self.present(alertController, animated: true)
-    }
-    func showSimpleAlertDialogtoThankLocation() {
-        let alertController = SimpleAlertDialog(title: "Localisation enregistrée !", message: "Nous vous remercions pour votre aide !", btnTitle: "Retour")
-        self.present(alertController, animated: true)
     }
     
     
@@ -524,6 +514,26 @@ extension HomeV2ViewController{
                 }else{
                     self?.isContributionPreference = false
                 }
+                
+                if UserDefaults.currentUser?.addressPrimary == nil
+                    || userHome.preference == nil {
+                    // Obtenir la storyboard nommée "Onboarding"
+                    let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+                    
+                    // Instancier le OnboardingPageViewController à partir de la storyboard
+                    if let onboardingPageVC = storyboard.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
+                        onboardingPageVC.currentPhasePosition = 3
+                        onboardingPageVC.shouldLaunchThird = true
+                        if let _user = UserDefaults.currentUser {
+                            onboardingPageVC.temporaryUser = _user
+                        }
+                        if let window = UIApplication.shared.windows.first {
+                            window.rootViewController = onboardingPageVC
+                            window.makeKeyAndVisible()
+                        }
+                    }
+                }
+                
                 AppManager.shared.isContributionPreference = self?.isContributionPreference ?? false
 
                 if  userHome.unclosedAction != nil {
@@ -787,8 +797,6 @@ extension HomeV2ViewController: PlaceViewControllerDelegate {
             UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { error in
                 if error?.error == nil {
                     //Clean pour afficher l'adresse retournée depuis le WS on garde ?
-                    self.showSimpleAlertDialogtoThankLocation()
-                    
                 }
             }
         }
@@ -800,6 +808,36 @@ extension HomeV2ViewController:SimpleAlertClick{
         if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
             vc.placeVCDelegate = self
             self.navigationController?.present(vc, animated: true)
+        }
+    }
+}
+
+extension HomeV2ViewController:Phase3fromAppDelegate{
+    func sendOnboardingEnd() {
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        // Instancier le OnboardingStartViewController à partir de la storyboard
+        if let onboardingVC = storyboard.instantiateViewController(withIdentifier: "OnboardingEndViewController") as? OnboardingEndViewController {
+            self.present(onboardingVC, animated: true, completion: nil)
+        }
+    }
+    
+    func updatePreference(userType: UserType) {
+        var _user = currentUser
+        _user?.goal = userType.getGoalString()
+        UserService.updateUser(user: _user) { [weak self] user, error in
+            IHProgressHUD.dismiss()
+            if let user = user {
+                self?.currentUser = user
+            }
+        }
+    }
+    
+    func updateLoc(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
+        if let _place = googlePlace, let placeId = _place.placeID{
+            UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { [weak self] error in
+                IHProgressHUD.dismiss()
+                
+            }
         }
     }
 }
