@@ -11,7 +11,8 @@ import Foundation
 struct DeepLinkManager {
     
     static func presentAction(notification:NotificationPushData) {
-        print("notification" , notification)
+        
+     //   print("notification" , notification)
         if notification.context == "outing_on_day_before"{
             showHomeUniversalLinkWithParam(notification.instanceId)
             return
@@ -41,6 +42,7 @@ struct DeepLinkManager {
         }
         if notification.context != nil && !notification.context!.isEmpty{
             if notification.context == "h1" {
+                print("condition " , notification.context == "h1")
                 DeepLinkManager.showWelcomeOne()
                 return
             }
@@ -258,6 +260,7 @@ struct DeepLinkManager {
     }
     
     static func showWelcomeOne(){
+        print("eho")
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
@@ -402,22 +405,28 @@ struct DeepLinkManager {
         }
     }
     static func showHomeUniversalLinkWithParam(_ eventId: Int) {
-        if let vc = AppState.getTopViewController() {
-            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
-                if let homeVC = _tabbar.viewControllers?.first(where: { $0 is HomeV2ViewController }) as? HomeV2ViewController {
-                    homeVC.shouldLaunchEventPopup = eventId
-                    _tabbar.showHome()
+        DispatchQueue.main.async {
+            if let vc = AppState.getTopViewController() {
+                if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                    if let homeVC = vc as? HomeV2ViewController {
+                        homeVC.shouldLaunchEventPopup = eventId
+                        _tabbar.showHome()
+                        print("eho")
+                    }
                 }
-            }
-            else{ 
-                vc.dismiss(animated: true) {
-                    let _currentVc = AppState.getTopViewController()
-                    if let _home = _currentVc as? HomeV2ViewController{
-                        _home.shouldLaunchEventPopup = eventId
+                else{
+                    vc.dismiss(animated: true) {
+                        let _currentVc = AppState.getTopViewController()
+                        if let _home = _currentVc as? HomeV2ViewController{
+                            _home.shouldLaunchEventPopup = eventId
+                            print("eho2")
+
+                        }
                     }
                 }
             }
         }
+
     }
     
     static func showContribListUniversalLink() {

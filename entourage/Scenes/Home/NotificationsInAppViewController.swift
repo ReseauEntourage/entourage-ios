@@ -7,6 +7,9 @@
 
 import UIKit
 
+protocol NotificationDelegate {
+    func onEventLastDay(id:Int)
+}
 class NotificationsInAppViewController: UIViewController {
 
     @IBOutlet weak var ic_notif_bell: UIImageView!
@@ -14,6 +17,7 @@ class NotificationsInAppViewController: UIViewController {
     @IBOutlet weak var ui_tableview: UITableView!
     
     var pullRefreshControl = UIRefreshControl()
+    var delegate:NotificationDelegate?
     
     var notifications = [NotifInApp]()
     var currentPage = 1
@@ -126,8 +130,16 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
                 }
             }
         }
+        let _content = notif.getNotificationPushData()
+        if _content.context == "outing_on_day_before"{
+            delegate?.onEventLastDay(id: _content.instanceId)
+            self.dismiss(animated: true)
+            return
+        }
         
-        DeepLinkManager.presentAction(notification: notif.getNotificationPushData())
+        self.dismiss(animated: true) {
+            DeepLinkManager.presentAction(notification: notif.getNotificationPushData())
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
