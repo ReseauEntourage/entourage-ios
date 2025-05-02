@@ -33,6 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initEnvironmentConfigManager()
         configureGooglePlace()
         configureFirebase()
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if granted {
+                print("Notifications granted")
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            } else {
+                print("Notifications denied: \(String(describing: error))")
+            }
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(goLogin), name: NSNotification.Name(notificationLoginError), object: nil)
         
@@ -221,6 +231,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     //MARK: - Push -
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("passed here " , deviceToken)
         NotificationManager.didRegisterForRemoteNotificationsWithDeviceToken(token: deviceToken)
     }
     

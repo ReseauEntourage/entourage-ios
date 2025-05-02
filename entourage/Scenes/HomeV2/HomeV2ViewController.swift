@@ -11,6 +11,7 @@ import SafariServices
 import IHProgressHUD
 import CoreLocation
 import GooglePlaces
+import FirebaseMessaging
 
 enum seeAllCellType {
     case seeAllDemand
@@ -100,7 +101,6 @@ class HomeV2ViewController: UIViewController {
         self.checkAndCreateCookieIfNotExists()
         self.checkNotificationSettings()
         self.handleEnhancedOnboardingReturn()
-        self.showVotePopupIfNeeded()
 
     }
     
@@ -112,6 +112,7 @@ class HomeV2ViewController: UIViewController {
         self.ifEventLastDay()
     }
     
+
     func showVotePopupIfNeeded() {
         let userDefaults = UserDefaults.standard
         let hasSeenVotePopup = userDefaults.bool(forKey: "hasSeenVotePopup")
@@ -681,6 +682,7 @@ extension HomeV2ViewController {
         HomeService.getUserHome { [weak self] userHome, error in
             if let userHome = userHome {
                 self?.userHome = userHome
+                print("user id " , self?.userHome.id)
                 if userHome.preference == "contribution" {
                     self?.isContributionPreference = true
                 } else {
