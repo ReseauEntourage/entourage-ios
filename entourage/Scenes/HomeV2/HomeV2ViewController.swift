@@ -66,6 +66,7 @@ class HomeV2ViewController: UIViewController {
     var isContributionPreference = false
     var shouldLaunchEventPopup: Int? = nil
     var shouldTestOnboarding = false
+
     
     override func viewDidLoad() {
         IHProgressHUD.show()
@@ -113,9 +114,11 @@ class HomeV2ViewController: UIViewController {
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
+        getUserInfo()
     }
     
 
+    
     func showVotePopupIfNeeded() {
         let userDefaults = UserDefaults.standard
         let hasSeenVotePopup = userDefaults.bool(forKey: "hasSeenVotePopup")
@@ -248,7 +251,6 @@ class HomeV2ViewController: UIViewController {
                     
                     // Incrémenter le nombre de connexions
                     let connectionCount = self.incrementConnectionCount()
-                    print("eho connection count : " , connectionCount)
                     // Vérifier si c'est la 2ème ou la 10ème connexion
                     if connectionCount == 1 || connectionCount == 4 || connectionCount == 9 {
                         self.presentNotificationDemandViewController()
@@ -630,6 +632,15 @@ extension HomeV2ViewController {
                     self.allDemands.append(contentsOf: actions)
                 }
                 self.getInitialPedagos()
+            }
+        }
+    }
+    func getUserInfo() {
+        guard let _userid = UserDefaults.currentUser?.uuid else {return}
+        UserService.getUnreadCountForUser { unreadCount, error in
+            if let unreadCount = unreadCount {
+                UserDefaults.badgeCount = unreadCount
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
             }
         }
     }

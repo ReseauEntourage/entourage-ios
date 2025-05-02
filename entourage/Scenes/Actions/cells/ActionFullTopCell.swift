@@ -179,6 +179,7 @@ class ActionFullTopCell: UITableViewCell {
         }
         
         guard let sectionName = action.sectionName else {
+
             for _t in ui_title_tags {
                 _t.text = nil
             }
@@ -187,6 +188,8 @@ class ActionFullTopCell: UITableViewCell {
             }
             return
         }
+        ActionCreateStateManager.shared.selectedSectionKey = sectionName
+
         
         for _t in ui_title_tags {
             _t.text = Metadatas.sharedInstance.getTagSectionName(key: sectionName)?.name

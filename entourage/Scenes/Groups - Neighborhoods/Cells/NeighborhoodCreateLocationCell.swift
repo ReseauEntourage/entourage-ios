@@ -24,8 +24,8 @@ class NeighborhoodCreateLocationCell: UITableViewCell {
         ui_title.attributedText = stringAttr
         
         ui_description.text = "neighborhoodCreatePlaceDescription".localized
-        ui_description.font = ApplicationTheme.getFontLegend(size: 13).font
-        ui_description.textColor = ApplicationTheme.getFontLegend(size: 13).color
+        ui_description.font = ApplicationTheme.getFontLegend(size: 11).font
+        ui_description.textColor = ApplicationTheme.getFontLegend(size: 11).color
         
         ui_info.text = "neighborhoodCreatePlaceInfos".localized
         ui_info.font = ApplicationTheme.getFontChampDefault(size: 13).font

@@ -49,7 +49,7 @@ class AddDescriptionTableViewCell: UITableViewCell {
             ui_tv_growing.placeholder = placeholderTxt
             ui_tv_growing.placeholderColor = ApplicationTheme.getFontChampDefault().color
             ui_tv_growing.addToolBar(width: _width, buttonValidate: buttonDone)
-            
+            ui_tv_growing.minHeight = 70
             ui_tv_growing.maxHeight = 140
             
         }
@@ -71,13 +71,13 @@ class AddDescriptionTableViewCell: UITableViewCell {
         
         ui_description.text = "neighborhoodCreateDescriptionSubtitle".localized
         ui_description.textColor = ApplicationTheme.getFontLegend().color
-        ui_description.font = ApplicationTheme.getFontLegend(size: 13).font
+        ui_description.font = ApplicationTheme.getFontLegend(size: 11).font
         
         ui_view_error?.isHidden = true
         self.ui_view_error?.setupView(title: "neighborhoodCreateInputErrorMandatory".localized)
     }
     
-    func populateCell(title:String,titleAttributted:NSAttributedString? = nil, description:String, placeholder:String, delegate:AddDescriptionCellDelegate, about:String? = nil, textInputType:TextInputType, charMaxLimit:Int = ApplicationTheme.maxCharsDescription, showError:Bool = true, tableview:UITableView? = nil) {
+    func populateCell(title: String, titleAttributted: NSAttributedString? = nil, description: String, placeholder: String, delegate: AddDescriptionCellDelegate, about: String? = nil, textInputType: TextInputType, charMaxLimit: Int = ApplicationTheme.maxCharsDescription, showError: Bool = true, tableview: UITableView? = nil) {
         self.maxCharsLimit = charMaxLimit
         self.textInputType = textInputType
         let _about = about?.count ?? 0 > 0 ? about! : ""
@@ -91,16 +91,16 @@ class AddDescriptionTableViewCell: UITableViewCell {
         
         if let titleAttributted = titleAttributted {
             ui_title.attributedText = titleAttributted
-        }
-        else {
+        } else {
             ui_title.text = title
         }
+        
         ui_description.text = description
-        placeholderTxt = placeholder
-        ui_tv_edit?.placeholderText = placeholderTxt
+        placeholderTxt = placeholder.isEmpty ? "Placeholder manquant" : placeholder
         ui_tv_growing?.placeholder = placeholderTxt
         self.tableView = tableview
     }
+
     
     @objc func closeKb(_ sender:UIBarButtonItem?) {
         if let txtBio = ui_tv_edit?.text {

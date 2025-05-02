@@ -268,7 +268,6 @@ class NeighborhoodV2ViewController: UIViewController {
     }
     
     func loadForPaginationDiscover() {
-        print("eho pagination")
         if !isLastPage {
             isLoading = true
             self.currentPageDiscover += 1

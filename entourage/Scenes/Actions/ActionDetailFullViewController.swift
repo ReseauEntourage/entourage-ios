@@ -43,7 +43,7 @@ class ActionDetailFullViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("eho ActionDetailsViewController isContrib " , isContrib)
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         
@@ -61,7 +61,7 @@ class ActionDetailFullViewController: UIViewController {
         ui_view_contact.isHidden = true
         ui_view_my.isHidden = true
         
-        
+
         //Notif for updating action infos
         NotificationCenter.default.addObserver(self, selector: #selector(updateAction), name: NSNotification.Name(rawValue: kNotificationActionUpdate), object: nil)
     }
@@ -213,7 +213,8 @@ class ActionDetailFullViewController: UIViewController {
         guard let action = action else {
             return
         }
-        
+        ActionCreateStateManager.shared.storeSection(self.action?.sectionName ?? "services", isContrib: self.isContrib)
+
         let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "actionEditVCMain") as? ActionEditMainViewController {
             vc.modalPresentationStyle = .fullScreen

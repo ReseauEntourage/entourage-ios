@@ -1110,7 +1110,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_create_info_demand_underline" = "Erfahren Sie hier mehr.";
 
 "action_create_mandatory" = "- OBLIGATORISCH";
-"action_create_phase_1_name" = "Aktionstitel – erforderlich";
+"action_create_phase_1_name" = "Aktionstitel • erforderlich";
 "action_create_phase_1_name_placeholder" = "Benennen Sie Ihren %@";
 "action_create_phase_1_name_subtitle" = "Geben Sie Ihrem %@ einen kurzen und eindeutigen Namen";
 "action_create_phase_1_name_error" = "Der %@-Name muss mindestens 2 Zeichen enthalten.";
@@ -1644,3 +1644,24 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_how_to_act" = "Wie möchten Sie in der Entourage-Community handeln?";
 "enhanced_onboarding_multiple_options" = "(Ja, Sie können mehrere Optionen auswählen!)";
 
+"demand_social_title" = "Beispiel: Spaziergang im Park";
+"demand_social_description" = "Beispiel: Ich schlage einen Spaziergang im Park am Wochenende vor, um zu plaudern und sich zu entspannen.";
+"demand_services_title" = "Beispiel: Dokumente drucken";
+"demand_services_description" = "Beispiel: Ich muss einige Seiten für einen Termin drucken. Kann mir jemand helfen?";
+"demand_clothes_title" = "Beispiel: Suche Wintermantel";
+"demand_clothes_description" = "Beispiel: Ich suche einen warmen Wintermantel in Größe M.";
+"demand_equipment_title" = "Beispiel: Benötige einen Schlafsack";
+"demand_equipment_description" = "Beispiel: Ich suche einen Schlafsack, um diesen Winter draußen zu schlafen. Wenn jemand einen übrig hat, wäre das eine große Hilfe.";
+"demand_hygiene_title" = "Beispiel: Benötige Seife";
+"demand_hygiene_description" = "Beispiel: Ich suche Seife oder Duschgel. Wenn jemand etwas übrig hat, wäre ich dankbar.";
+
+"contrib_social_title" = "Beispiel: Kaffee und Gespräch";
+"contrib_social_description" = "Beispiel: Ich suche jemanden, mit dem ich diese Woche in der Nachbarschaft einen Kaffee teilen kann.";
+"contrib_services_title" = "Beispiel: Hilfe bei der Wäsche";
+"contrib_services_description" = "Beispiel: Ich biete an, die Wäsche für jemanden zu waschen, der es braucht.";
+"contrib_clothes_title" = "Beispiel: Sportschuhe zu verschenken";
+"contrib_clothes_description" = "Beispiel: Ich verschenke ein Paar Sportschuhe in gutem Zustand, Größe 42.";
+"contrib_equipment_title" = "Beispiel: Handy zu verschenken";
+"contrib_equipment_description" = "Beispiel: Ich verschenke ein altes, aber funktionstüchtiges Handy. Ideal für jemanden, der eines benötigt.";
+"contrib_hygiene_title" = "Beispiel: Hygieneprodukte zu verschenken";
+"contrib_hygiene_description" = "Beispiel: Ich verschenke mehrere Packungen Damenhygieneartikel.";

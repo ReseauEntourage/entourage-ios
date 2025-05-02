@@ -99,7 +99,7 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
             let title = event_title != nil ? event_title : self.currentEvent?.title
-            cell.populateCell(delegate: self,name: title, isEvent: true)
+            cell.populateCell(delegate: self,name: title, isEvent: true, placeholder: "")
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionTableViewCell.identifier, for: indexPath) as! AddDescriptionTableViewCell

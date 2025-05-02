@@ -268,7 +268,7 @@ extension NeighborhoodEditViewController: UITableViewDelegate, UITableViewDataSo
         case 1:
             let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
             let _name = neighborhoodName == nil ? currentNeighborhood?.name : neighborhoodName
-            cell.populateCell(delegate: self, name: _name, isEvent: false)
+            cell.populateCell(delegate: self, name: _name, isEvent: false, placeholder: "")
             return cell
         case 2:
             let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: AddDescriptionFixedTableViewCell.identifier, for: indexPath) as! AddDescriptionFixedTableViewCell

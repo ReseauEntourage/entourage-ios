@@ -1115,7 +1115,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_create_info_demand_underline" = "afla mai multe aici.";
 
 "action_create_mandatory" = "- OBLIGATORIU";
-"action_create_phase_1_name" = "Titlul acțiunii - obligatoriu";
+"action_create_phase_1_name" = "Titlul acțiunii • obligatoriu";
 "action_create_phase_1_name_placeholder" = "Denumiți-vă %@";
 "action_create_phase_1_name_subtitle" = "Dați un nume scurt și explicit %@ dvs.";
 "action_create_phase_1_name_error" = "Numele %@ trebuie să conțină cel puțin 2 caractere.";
@@ -1546,3 +1546,25 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "toast_message_participate" = "Vom reveni la tine în curând!";
 "popup_biencommun_title" = "Pentru a permite a 60 de persoane aflate în situații precare să se alăture unui club sportiv, este nevoie de un singur clic. A ta!";
 "popup_biencommun_vote" = "Vot";
+
+"demand_social_title" = "Exemplu: Plimbare în parc";
+"demand_social_description" = "Exemplu: Propun o plimbare în parc în acest weekend pentru a discuta și a ne relaxa.";
+"demand_services_title" = "Exemplu: Trebuie să imprim documente";
+"demand_services_description" = "Exemplu: Trebuie să imprim câteva pagini pentru o întâlnire. Mă poate ajuta cineva?";
+"demand_clothes_title" = "Exemplu: Caut o haină de iarnă";
+"demand_clothes_description" = "Exemplu: Caut o haină călduroasă de iarnă, mărimea M.";
+"demand_equipment_title" = "Exemplu: Am nevoie de un sac de dormit";
+"demand_equipment_description" = "Exemplu: Caut un sac de dormit pentru a dormi în aer liber în această iarnă. Dacă cineva are unul de dat, ar fi de mare ajutor.";
+"demand_hygiene_title" = "Exemplu: Am nevoie de săpun";
+"demand_hygiene_description" = "Exemplu: Caut săpun sau gel de duș. Dacă cineva are în plus, aș fi recunoscător.";
+
+"contrib_social_title" = "Exemplu: Cafea și discuții";
+"contrib_social_description" = "Exemplu: Caut pe cineva cu care să împart o cafea săptămâna aceasta în cartier.";
+"contrib_services_title" = "Exemplu: Ajutor la spălat";
+"contrib_services_description" = "Exemplu: Ofer ajutor la spălat rufele pentru cineva care are nevoie.";
+"contrib_clothes_title" = "Exemplu: Încălțăminte sport de dat";
+"contrib_clothes_description" = "Exemplu: Ofer o pereche de încălțăminte sport în stare bună, mărimea 42.";
+"contrib_equipment_title" = "Exemplu: Telefon mobil de dat";
+"contrib_equipment_description" = "Exemplu: Ofer un telefon mobil vechi, dar funcțional. Ideal pentru cineva care are nevoie.";
+"contrib_hygiene_title" = "Exemplu: Produse de igienă de dat";
+"contrib_hygiene_description" = "Exemplu: Ofer mai multe pachete de produse igienice.";

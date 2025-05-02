@@ -1111,7 +1111,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_create_info_demand_underline" = "Aprende más aquí.";
 
 "action_create_mandatory" = "- OBLIGATORIO";
-"action_create_phase_1_name" = "Título de la acción: obligatorio";
+"action_create_phase_1_name" = "Título de la acción • obligatorio";
 "action_create_phase_1_name_placeholder" = "Nombra tu %@";
 "action_create_phase_1_name_subtitle" = "Dale un nombre corto y explícito a tu %@";
 "action_create_phase_1_name_error" = "El nombre %@ debe contener al menos 2 caracteres.";
@@ -2531,7 +2531,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_create_info_demand_underline" = "Aprende más aquí.";
 
 "action_create_mandatory" = "- OBLIGATORIO";
-"action_create_phase_1_name" = "Título de la acción: obligatorio";
+"action_create_phase_1_name" = "Título de la acción • obligatorio";
 "action_create_phase_1_name_placeholder" = "Nombra tu %@";
 "action_create_phase_1_name_subtitle" = "Dale un nombre corto y explícito a tu %@";
 "action_create_phase_1_name_error" = "El nombre %@ debe contener al menos 2 caracteres.";
@@ -3064,3 +3064,25 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "enhanced_onboarding_select_concerns" = "Selecciona las categorías de ayuda que deseas priorizar.";
 "enhanced_onboarding_how_to_act" = "¿Cómo deseas actuar dentro de la comunidad de Entourage?";
 "enhanced_onboarding_multiple_options" = "(¡Sí, puedes elegir varias opciones!)";
+
+"demand_social_title" = "Ejemplo: Paseo en el parque";
+"demand_social_description" = "Ejemplo: Propongo un paseo por el parque este fin de semana para charlar y relajarse.";
+"demand_services_title" = "Ejemplo: Necesito imprimir documentos";
+"demand_services_description" = "Ejemplo: Necesito imprimir algunas páginas para una cita. ¿Alguien podría ayudarme?";
+"demand_clothes_title" = "Ejemplo: Busco un abrigo de invierno";
+"demand_clothes_description" = "Ejemplo: Estoy buscando un abrigo de invierno cálido en talla M.";
+"demand_equipment_title" = "Ejemplo: Necesito un saco de dormir";
+"demand_equipment_description" = "Ejemplo: Estoy buscando un saco de dormir para dormir al aire libre este invierno. Si alguien tiene uno para regalar, sería de gran ayuda.";
+"demand_hygiene_title" = "Ejemplo: Necesito jabón";
+"demand_hygiene_description" = "Ejemplo: Estoy buscando jabón o gel de ducha. Si alguien tiene de sobra, lo agradecería.";
+
+"contrib_social_title" = "Ejemplo: Café y charla";
+"contrib_social_description" = "Ejemplo: Estoy buscando a alguien con quien compartir un café en el barrio esta semana.";
+"contrib_services_title" = "Ejemplo: Ayuda con la colada";
+"contrib_services_description" = "Ejemplo: Ofrezco lavar la ropa de alguien que lo necesite.";
+"contrib_clothes_title" = "Ejemplo: Zapatillas deportivas para regalar";
+"contrib_clothes_description" = "Ejemplo: Estoy regalando un par de zapatillas deportivas en buen estado, talla 42.";
+"contrib_equipment_title" = "Ejemplo: Teléfono móvil para regalar";
+"contrib_equipment_description" = "Ejemplo: Estoy regalando un teléfono móvil antiguo pero funcional. Ideal para alguien que lo necesite.";
+"contrib_hygiene_title" = "Ejemplo: Productos de higiene para regalar";
+"contrib_hygiene_description" = "Ejemplo: Estoy regalando varios paquetes de toallas sanitarias.";

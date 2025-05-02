@@ -70,7 +70,7 @@ class NeighborhoodUserCell: UITableViewCell {
         } else {
             // Si ce n'est pas un organisateur, réinitialise le texte et la couleur de fond par défaut
             ui_username.text = username
-            self.backgroundColor = .white
+            self.ui_view_background.backgroundColor = .clear
         }
         
         // Configurer le rôle de l'utilisateur

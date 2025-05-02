@@ -107,6 +107,7 @@ class ActionEditMainViewController: UIViewController {
         ui_tableview_charte.dataSource = self
         
         _ = checkValidation()
+        newAction = currentAction
     }
     
     //MARK: - Network -
@@ -121,9 +122,7 @@ class ActionEditMainViewController: UIViewController {
     }
     
     func updateAction() {
-        
         newAction.sectionName = newSection?.key
-        
         if newAction.dictionaryForWS().count > 0 || newImage != nil || newSection != nil {
             newAction.id = currentAction.id
         }
