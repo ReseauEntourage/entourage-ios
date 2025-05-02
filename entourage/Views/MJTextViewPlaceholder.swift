@@ -45,7 +45,18 @@ import UIKit
         if showingPlaceholder {
             hidePlaceholder()
         }
-        return super.becomeFirstResponder()
+        let result = super.becomeFirstResponder()
+        if result {
+            DispatchQueue.main.async {
+                if #available(iOS 13.0, *) {
+                    UIMenuController.shared.showMenu(from: self, rect: self.bounds)
+                } else {
+                    UIMenuController.shared.setTargetRect(self.bounds, in: self)
+                    UIMenuController.shared.setMenuVisible(true, animated: true)
+                }
+            }
+        }
+        return result
     }
     
     override func resignFirstResponder() -> Bool {
