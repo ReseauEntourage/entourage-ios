@@ -69,12 +69,7 @@ class ActionCreateMainViewController: UIViewController {
         ui_bt_previous.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
         ui_bt_previous.setTitle("action_create_group_bt_back".localized, for: .normal)
         
-        ui_bt_next.layer.cornerRadius = ui_bt_next.frame.height / 2
-        ui_bt_next.backgroundColor = .appOrangeLight
-        ui_bt_next.setTitleColor(.appOrange, for: .normal)
-        ui_bt_next.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
-        ui_bt_next.setTitle("action_create_group_bt_next".localized, for: .normal)
-        
+       
         enableDisableNextButton(isEnable: false)
         
         ui_main_container_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
@@ -108,7 +103,29 @@ class ActionCreateMainViewController: UIViewController {
         else {
             AnalyticsLoggerManager.logEvent(name: Help_create_demand_chart)
         }
-        
+        configureWhiteButton(ui_bt_previous, withTitle: "action_create_group_bt_back".localized)
+        configureOrangeButton(ui_bt_next, withTitle: "action_create_group_bt_next".localized)
+        configureOrangeButton(ui_button_validate_charte, withTitle: "accept_charte".localized)
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     //MARK: - Network -
@@ -311,11 +328,11 @@ class ActionCreateMainViewController: UIViewController {
     
     private func enableDisableNextButton(isEnable:Bool) {
         if isEnable {
-            ui_bt_next.backgroundColor = .appOrangeLight.withAlphaComponent(0.5)
+            ui_bt_next.backgroundColor = .appOrange
             ui_bt_next.alpha = 1.0
         }
         else {
-            ui_bt_next.backgroundColor = .appOrangeLight
+            ui_bt_next.backgroundColor = .appOrange
             ui_bt_next.alpha = 0.4
         }
     }

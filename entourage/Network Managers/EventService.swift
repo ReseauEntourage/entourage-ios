@@ -235,6 +235,37 @@ struct EventService:ParsingDataCodable {
         }
     }
     
+    static func getEventUsersWithQuery(eventId: Int,
+                                       query: String,
+                                       completion: @escaping ([UserLightNeighborhood]?, EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        
+        var endpoint = kAPIGetEventUsersQuery
+        endpoint = String(format: endpoint, "\(eventId)", token, query)
+        
+        Logger.print("***** url get event users with query : \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            Logger.print("***** return get event users with query : \(String(describing: error))")
+            
+            guard let data = data,
+                  error == nil,
+                  let httpResponse = resp as? HTTPURLResponse,
+                  httpResponse.statusCode < 300
+            else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let users: [UserLightNeighborhood]? = self.parseDatas(data: data, key: "users")
+            DispatchQueue.main.async {
+                completion(users, nil)
+            }
+        }
+    }
+
+    
     static func getEventUsers(eventId:Int, completion: @escaping (_ users:[UserLightNeighborhood]?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}

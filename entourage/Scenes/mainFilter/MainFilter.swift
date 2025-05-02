@@ -120,11 +120,11 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
 
         case .action:
             let actionChoices = [
-                MainFilterTagItem(id: "social", title: NSLocalizedString("filter_groupevent_sharing_time", comment: ""), subtitle: " (café, activité...)"),
-                MainFilterTagItem(id: "services", title: NSLocalizedString("filter_groupevent_services", comment: ""), subtitle: " (lessive, impression de documents...)"),
-                MainFilterTagItem(id: "clothes", title: NSLocalizedString("filter_groupevent_clothes", comment: ""), subtitle: " (chaussures, manteau...)"),
-                MainFilterTagItem(id: "equipment", title: NSLocalizedString("filter_groupevent_equipment", comment: ""), subtitle: " (téléphone, duvet...)"),
-                MainFilterTagItem(id: "hygiene", title: NSLocalizedString("filter_groupevent_hygiene_products", comment: ""), subtitle: " (savon, protection hygiénique, couches...)"),
+                MainFilterTagItem(id: "social", title: NSLocalizedString("filter_groupevent_sharing_time", comment: ""), subtitle: " (Café, activité...)"),
+                MainFilterTagItem(id: "services", title: NSLocalizedString("filter_groupevent_services", comment: ""), subtitle: " (Lessive, impression de documents...)"),
+                MainFilterTagItem(id: "clothes", title: NSLocalizedString("filter_groupevent_clothes", comment: ""), subtitle: " (Chaussures, manteau...)"),
+                MainFilterTagItem(id: "equipment", title: NSLocalizedString("filter_groupevent_equipment", comment: ""), subtitle: " (Téléphone, duvet...)"),
+                MainFilterTagItem(id: "hygiene", title: NSLocalizedString("filter_groupevent_hygiene_products", comment: ""), subtitle: " (Savon, protection hygiénique, couches...)"),
             ]
             tableDTO.append(.titleCell(title: NSLocalizedString("filter_groupevent_filters", comment: "")))
             tableDTO.append(.sectionCell(content: NSLocalizedString("filter_groupevent_by_category", comment: ""), numberOfItem: selectedItemsAction.values.filter { $0 }.count))

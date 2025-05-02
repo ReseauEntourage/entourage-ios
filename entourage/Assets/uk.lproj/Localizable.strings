@@ -1156,7 +1156,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_5" = "Я гарантую, що мої дії не містять будь-яких персональних даних (прізвища, номера телефону, точної адреси тощо), які дозволяють точно ідентифікувати та знайти особу, а також будь-яких конфіденційних даних (медичних, юридичних тощо).";
 
 //Create action end
-"action_create_close_button" = "До кінця";
+"action_create_close_button" = "Завершити";
+"action_create_close_button_demand" = "Переглянути мою заявку";
+"action_create_close_button_contrib" = "Переглянути мій внесок";
 "contribCreateEnd_title" = "Ваш внесок створено!";
 "contribCreateEnd_subtitle" = "Вітаємо, ви щойно створили новий внесок. Щоб зробити це більш помітним, обговоріть це у своїх групах!";
 "solicitationCreateEnd_title" = "Ваш запит створено!";
@@ -1652,3 +1654,50 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "share_request_title" = "Бажаєте поділитися своїм %@ у своїй групі %@?";
 "share_request_description" = "Ви маєте можливість поділитися своїм %@ у групі сусідів вашого міста, щоб покращити його видимість";
+
+"conversation_notif_text" = "Ваші сповіщення вимкнено.\nУвімкніть їх, щоб нічого не пропустити";
+"conversation_notif_highlight" = "Увімкніть їх, щоб нічого не пропустити";
+
+"enhanced_onboarding_time_disponibility_title" = "Моя доступність";
+"enhanced_onboarding_time_disponibility_description" = "Вкажіть свою доступність, щоб ми могли запропонувати вам відповідні події.";
+"enhanced_onboarding_time_disponibility_days_label" = "Мої дні";
+"enhanced_onboarding_time_disponibility_day_monday" = "Понеділок";
+"enhanced_onboarding_time_disponibility_day_tuesday" = "Вівторок";
+"enhanced_onboarding_time_disponibility_day_wednesday" = "Середа";
+"enhanced_onboarding_time_disponibility_day_thursday" = "Четвер";
+"enhanced_onboarding_time_disponibility_day_friday" = "П’ятниця";
+"enhanced_onboarding_time_disponibility_day_saturday" = "Субота";
+"enhanced_onboarding_time_disponibility_day_sunday" = "Неділя";
+"enhanced_onboarding_time_disponibility_time_slots_label" = "Мої часові проміжки";
+"enhanced_onboarding_time_disponibility_time_morning" = "Ранок";
+"enhanced_onboarding_time_disponibility_time_afternoon" = "День";
+"enhanced_onboarding_time_disponibility_time_evening" = "Вечір";
+"no_data_available" = "Не вказано";
+"unknown_language" = "Невідома мова";
+"logout_button" = "Вийти";
+"delete_account_button" = "Видалити мій акаунт";
+"preferences_section_title" = "Мої налаштування";
+"preferences_interest_title" = "Мої інтереси";
+"preferences_action_title" = "Моя готовність діяти";
+"preferences_availability_title" = "Моя доступність";
+"preferences_action_categories_title" = "Мої категорії взаємодопомоги";
+"preferences_section_title_others" = "Їхні налаштування";
+"preferences_interest_title_others" = "Їхні інтереси";
+"preferences_action_title_others" = "Їхня готовність діяти";
+"preferences_availability_title_others" = "Їхня доступність";
+"preferences_action_categories_title_others" = "Їхні категорії взаємодопомоги";
+"settings_section_title" = "Налаштування";
+"settings_language_title" = "Мова";
+"settings_notifications_title" = "Сповіщення";
+"settings_help_title" = "Допомога та про нас";
+"settings_unblock_contacts_title" = "Розблокувати контакти";
+"settings_feedback_title" = "Поділитися ідеєю";
+"settings_share_title" = "Поділитися додатком";
+"settings_password_title" = "Змінити пароль";
+"content_removed" = "Цей вміст було видалено, оскільки він не відповідає нашим правилам.";
+"settings_notifications_subtitle" = "Увімкнено: %@";
+"settings_notifications_subtitle_none" = "Немає увімкнених сповіщень";
+"settings_unblock_contacts_subtitle_none" = "Немає заблокованих контактів";
+"settings_unblock_contacts_subtitle" = "%d заблокований контакт";
+"settings_unblock_contacts_subtitle_plural" = "%d заблокованих контактів";
+"language_change_redirect" = "Вас буде перенаправлено на головну сторінку, щоб змінити мову додатка";

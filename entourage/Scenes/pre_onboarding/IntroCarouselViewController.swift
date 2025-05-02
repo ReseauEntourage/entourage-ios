@@ -51,6 +51,8 @@ class IntroCarouselViewController: UIViewController {
         
         ui_button_next.layer.cornerRadius = ui_button_next.frame.height / 2
         ui_button_previous.layer.cornerRadius = ui_button_previous.frame.height / 2
+        configureWhiteButton(ui_button_previous, withTitle: "previous".localized)
+        configureOrangeButton(ui_button_next, withTitle: "next".localized)
         
         self.ui_bt_connect.setTitle( "bt_pass".localized, for: .normal)
         
@@ -64,6 +66,26 @@ class IntroCarouselViewController: UIViewController {
             }
             self.view.layoutIfNeeded()
         }
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     func updateViewsAtPosition() {

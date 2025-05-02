@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -384,6 +385,13 @@
                                             <constraint firstAttribute="height" constant="54" id="uNK-2d-Yaz"/>
                                         </constraints>
                                     </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QdB-4Q-8Ra">
+                                        <rect key="frame" x="0.0" y="592" width="414" height="150"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="2dd-bQ-SOy"/>
+                                        </constraints>
+                                    </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Dm-8d-1zY">
                                         <rect key="frame" x="0.0" y="752" width="414" height="54"/>
                                         <subviews>
@@ -405,6 +413,7 @@
                                 <color key="backgroundColor" name="BeigeClair"/>
                                 <constraints>
                                     <constraint firstItem="U5j-RF-83Z" firstAttribute="top" secondItem="Qhr-gf-0fZ" secondAttribute="bottom" constant="18" id="1Qa-Wc-mc1"/>
+                                    <constraint firstItem="QdB-4Q-8Ra" firstAttribute="leading" secondItem="99n-gN-Aeo" secondAttribute="leading" id="2bS-f8-Ljj"/>
                                     <constraint firstItem="Qhr-gf-0fZ" firstAttribute="top" secondItem="VW0-1h-Cdi" secondAttribute="bottom" id="2ll-rd-bqc"/>
                                     <constraint firstItem="wcl-Jv-5Qk" firstAttribute="trailing" secondItem="VW0-1h-Cdi" secondAttribute="trailing" constant="-18" id="3QD-Gf-uRl"/>
                                     <constraint firstAttribute="trailing" secondItem="U5j-RF-83Z" secondAttribute="trailing" id="6db-W1-VMM"/>
@@ -417,10 +426,12 @@
                                     <constraint firstAttribute="bottom" secondItem="U5j-RF-83Z" secondAttribute="bottom" constant="42" id="OQk-mF-zxr"/>
                                     <constraint firstItem="1Dm-8d-1zY" firstAttribute="bottom" secondItem="U5j-RF-83Z" secondAttribute="bottom" id="QMi-j4-6IX"/>
                                     <constraint firstItem="1Dm-8d-1zY" firstAttribute="trailing" secondItem="U5j-RF-83Z" secondAttribute="trailing" id="Qtz-hq-2tv"/>
+                                    <constraint firstItem="Rh3-wL-zrn" firstAttribute="top" secondItem="QdB-4Q-8Ra" secondAttribute="bottom" constant="10" id="VZA-kQ-k7w"/>
                                     <constraint firstItem="1Dm-8d-1zY" firstAttribute="leading" secondItem="U5j-RF-83Z" secondAttribute="leading" id="ZjF-Ht-Oge"/>
                                     <constraint firstItem="yuY-am-eXk" firstAttribute="leading" secondItem="99n-gN-Aeo" secondAttribute="leading" id="ere-3F-vLH"/>
                                     <constraint firstItem="U5j-RF-83Z" firstAttribute="leading" secondItem="99n-gN-Aeo" secondAttribute="leading" id="glt-Rh-HY8"/>
                                     <constraint firstAttribute="trailing" secondItem="Qhr-gf-0fZ" secondAttribute="trailing" id="mWz-d5-c5M"/>
+                                    <constraint firstAttribute="trailing" secondItem="QdB-4Q-8Ra" secondAttribute="trailing" id="moz-kh-DTP"/>
                                     <constraint firstItem="yuY-am-eXk" firstAttribute="centerX" secondItem="99n-gN-Aeo" secondAttribute="centerX" id="o23-6x-Wsl"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="U5j-RF-83Z" secondAttribute="bottom" id="qx2-Nj-DwC"/>
                                     <constraint firstAttribute="trailing" secondItem="yuY-am-eXk" secondAttribute="trailing" id="r7W-9x-ebh"/>
@@ -439,9 +450,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="jPr-7B-Nva"/>
                     <connections>
+                        <outlet property="table_view_mention_height" destination="2dd-bQ-SOy" id="Ebn-kW-35h"/>
                         <outlet property="ui_constraint_bottom_view_Tf" destination="OQk-mF-zxr" id="uyx-e5-RZR"/>
                         <outlet property="ui_iv_bt_send" destination="cy7-Y5-i54" id="9vp-gM-126"/>
                         <outlet property="ui_tableview" destination="Qhr-gf-0fZ" id="oeu-Hh-8q5"/>
+                        <outlet property="ui_tableview_mentions" destination="QdB-4Q-8Ra" id="PZR-WD-YzG"/>
                         <outlet property="ui_tap_gesture" destination="ykj-O1-LI0" id="ne5-mF-OP2"/>
                         <outlet property="ui_textview_message" destination="Rnu-BU-8n8" id="YqW-gZ-CPC"/>
                         <outlet property="ui_title_empty" destination="mIK-NY-O02" id="cVR-uc-Tw8"/>
@@ -463,17 +476,9 @@
             <point key="canvasLocation" x="1927.5362318840582" y="-599.33035714285711"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="Pha-k5-t49">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-        <designable name="agu-kz-8j8">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-    </designables>
     <resources>
         <image name="ic_button_retry_red" width="10" height="11"/>
-        <image name="ic_no_message_neighborhood" width="308" height="144"/>
+        <image name="ic_no_message_neighborhood" width="307.20001220703125" height="144"/>
         <image name="ic_send_comment" width="54" height="54"/>
         <image name="ic_signal_post_message" width="23" height="24"/>
         <namedColor name="Beige">
@@ -486,7 +491,7 @@
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
-            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.59215686274509804" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_light">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -497,5 +502,8 @@
         <namedColor name="rouge_erreur">
             <color red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

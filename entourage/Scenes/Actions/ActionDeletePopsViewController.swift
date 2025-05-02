@@ -72,6 +72,8 @@ class ActionDeletePopsViewController: UIViewController {
         ui_bt_yes.setTitle("params_cancel_action_pop_bt_yes".localized, for: .normal)
         ui_bt_no.setTitle("params_cancel_action_pop_bt_no".localized, for: .normal)
         ui_bt_send.setTitle("params_cancel_action_pop_bt_valid".localized, for: .normal)
+        configureOrangeButton(ui_bt_yes, withTitle: "params_cancel_action_pop_bt_yes".localized)
+        configureWhiteButton(ui_bt_no, withTitle: "params_cancel_action_pop_bt_no".localized)
         
         ui_bt_yes.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_bt_no.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
@@ -84,6 +86,25 @@ class ActionDeletePopsViewController: UIViewController {
         let _attr = Utils.formatString(messageTxt: "params_cancel_action_pop_comment".localized, messageTxtHighlight: "action_optional".localized, fontColorType: ApplicationTheme.getFontCourantRegularNoir(), fontColorTypeHighlight: ApplicationTheme.getFontLegend())
         ui_subtitle_comment.attributedText = _attr
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     func configureCongrat(parentVC:UIViewController?, isContrib:Bool, actionId:Int, delegate:ActionDeletePopDelegate) {
         self.parentVC = parentVC

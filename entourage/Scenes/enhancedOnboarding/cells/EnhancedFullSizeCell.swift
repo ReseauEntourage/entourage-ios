@@ -28,7 +28,7 @@ class EnhancedFullSizeCell: UITableViewCell {
             let attributedString = NSMutableAttributedString(string: "Propositions de services\n", attributes: [
                 .font: UIFont(name: "Quicksand-Bold", size: 14)!
             ])
-            let detailsString = NSAttributedString(string: "(lessive, impression de documents, aide administrative...)", attributes: [
+            let detailsString = NSAttributedString(string: "(Lessive, impression de documents, aide administrative...)", attributes: [
                 .font: UIFont(name: "NunitoSans-Regular", size: 14)!
             ])
             attributedString.append(detailsString)
@@ -38,7 +38,7 @@ class EnhancedFullSizeCell: UITableViewCell {
             let attributedString = NSMutableAttributedString(string: "Temps de partage\n", attributes: [
                 .font: UIFont(name: "Quicksand-Bold", size: 14)!
             ])
-            let detailsString = NSAttributedString(string: "(café, activité, rencontre…)", attributes: [
+            let detailsString = NSAttributedString(string: "(Café, activité, rencontre…)", attributes: [
                 .font: UIFont(name: "NunitoSans-Regular", size: 14)!
             ])
             attributedString.append(detailsString)

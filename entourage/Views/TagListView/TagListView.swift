@@ -261,7 +261,7 @@ open class TagListView: UIView {
         var currentRowView: UIView!
         var currentRowTagCount = 0
         var currentRowWidth: CGFloat = 0
-        let frameWidth = UIScreen.main.bounds.width - ApplicationTheme.marginDefault * 2
+        let frameWidth = UIScreen.main.bounds.width
         
         let directionTransform = isRtl
             ? CGAffineTransform(scaleX: -1.0, y: 1.0)

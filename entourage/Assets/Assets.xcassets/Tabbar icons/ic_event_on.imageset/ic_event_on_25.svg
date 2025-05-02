@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 25 25">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0 10 L 25 10 L 25 23 L 0 23 Z M 0 10 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="evenodd" d="M 24.296875 10.292969 L 24.296875 16.5 C 24.296875 19.976562 21.699219 22.792969 18.5 22.792969 L 5.832031 22.792969 C 2.628906 22.792969 0.0351562 19.976562 0.0351562 16.5 L 0.0351562 10.292969 Z M 24.296875 10.292969 "/>
+</clipPath>
+</defs>
+<path fill-rule="evenodd" fill="rgb(100%, 59.2%, 22.3%)" fill-opacity="1" d="M 0.0351562 8.824219 C 0.15625 5.964844 2.703125 3.675781 5.828125 3.675781 L 18.503906 3.675781 C 21.625 3.675781 24.175781 5.964844 24.296875 8.824219 Z M 0.0351562 8.824219 "/>
+<g clip-path="url(#clip-0)">
+<g clip-path="url(#clip-1)">
+<path fill-rule="evenodd" fill="rgb(100%, 59.2%, 22.3%)" fill-opacity="1" d="M 0.0351562 22.792969 L 24.296875 22.792969 L 24.296875 10.292969 L 0.0351562 10.292969 Z M 0.0351562 22.792969 "/>
+</g>
+</g>
+<path fill="none" stroke-width="1.4706" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(94.509888%, 37.254333%, 14.117432%)" stroke-opacity="1" stroke-miterlimit="10" d="M 5.179688 20.589844 L 5.179688 22.792969 " transform="matrix(1, 0, 0, -1, 0, 25)"/>
+<path fill="none" stroke-width="1.4706" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(94.509888%, 37.254333%, 14.117432%)" stroke-opacity="1" stroke-miterlimit="10" d="M 19.886719 20.589844 L 19.886719 22.792969 " transform="matrix(1, 0, 0, -1, 0, 25)"/>
+</svg>

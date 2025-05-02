@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="evenodd" d="M 10 0 C 15.523438 0 20 4.476562 20 10 C 20 15.523438 15.523438 20 10 20 C 4.476562 20 0 15.523438 0 10 C 0 4.476562 4.476562 0 10 0 Z M 10 0 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 0 0 L 20 0 L 20 20 L 0 20 Z M 0 0 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="evenodd" d="M 10 0 C 15.523438 0 20 4.476562 20 10 C 20 15.523438 15.523438 20 10 20 C 4.476562 20 0 15.523438 0 10 C 0 4.476562 4.476562 0 10 0 Z M 10 0 "/>
+</clipPath>
+<clipPath id="clip-3">
+<rect x="0" y="0" width="20" height="20"/>
+</clipPath>
+<g id="source-5" clip-path="url(#clip-3)">
+<g clip-path="url(#clip-1)">
+<g clip-path="url(#clip-2)">
+<rect x="-4.4" y="-4.4" width="28.8" height="28.8" fill="rgb(100%, 59.2%, 22.3%)" fill-opacity="1"/>
+<path fill="none" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 59.2%, 22.3%)" stroke-opacity="1" stroke-miterlimit="5" d="M 10 0 C 15.523438 0 20 4.476562 20 10 C 20 15.523438 15.523438 20 10 20 C 4.476562 20 0 15.523438 0 10 C 0 4.476562 4.476562 0 10 0 Z M 10 0 "/>
+</g>
+</g>
+</g>
+<clipPath id="clip-4">
+<path clip-rule="nonzero" d="M 6 6 L 14 6 L 14 14 L 6 14 Z M 6 6 "/>
+</clipPath>
+<clipPath id="clip-5">
+<path clip-rule="evenodd" d="M 10 6 C 12.210938 6 14 7.789062 14 10 C 14 12.210938 12.210938 14 10 14 C 7.789062 14 6 12.210938 6 10 C 6 7.789062 7.789062 6 10 6 Z M 10 6 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<use xlink:href="#source-5"/>
+</g>
+<g clip-path="url(#clip-4)">
+<g clip-path="url(#clip-5)">
+<path fill-rule="nonzero" fill="rgb(100%, 100%, 100%)" fill-opacity="1" d="M 5 5 L 15 5 L 15 15 L 5 15 Z M 5 5 "/>
+</g>
+</g>
+</svg>

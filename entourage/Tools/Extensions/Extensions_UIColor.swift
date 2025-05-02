@@ -63,8 +63,14 @@ extension UIColor {
     static var appBeigeClair: UIColor {
         return UIColor(named: "BeigeClair") ?? .red
     }
+    static var appBeigeClair2: UIColor {
+        return UIColor(named: "BeigeClair2") ?? .red
+    }
     static var appBeige: UIColor {
         return UIColor(named: "Beige") ?? .red
+    }
+    static var appBeigeLighter: UIColor {
+        return UIColor(named: "beige_lighter") ?? .red
     }
     static var appBleu: UIColor {
         return UIColor(named: "Bleu_2nd") ?? .red
@@ -75,6 +81,10 @@ extension UIColor {
     static var appOrange: UIColor {
         return UIColor(named: "orange_app") ?? .red
     }
+    static var appOrangeDark: UIColor {
+        return UIColor(named: "orange_dark") ?? .red
+    }
+    
     static var appOrangeLight: UIColor {
         return UIColor(named: "orange_light") ?? .red
     }

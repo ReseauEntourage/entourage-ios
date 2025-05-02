@@ -79,6 +79,8 @@ class NetworkManager {
                 else if resp.statusCode == 401 {
                     //TODO: Call Ask new token ?
                     completionHandler(nil,resp,nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: nil)
+
                     return
                 }
                 else {

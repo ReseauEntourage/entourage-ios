@@ -1156,7 +1156,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_5" = "Garantizo que mis acciones no contienen ningún dato personal (apellido, número de teléfono, dirección precisa, etc.) que permita identificar y localizar con precisión a una persona, ni ningún dato sensible (médico, jurídico, etc.).";
 
 //Create action end
-"action_create_close_button" = "Para terminar";
+"action_create_close_button" = "Finalizar";
+"action_create_close_button_demand" = "Ver mi solicitud";
+"action_create_close_button_contrib" = "Ver mi contribución";
 "contribCreateEnd_title" = "¡Tu contribución ha sido creada!";
 "contribCreateEnd_subtitle" = "Felicitaciones, acaba de crear una nueva contribución. Para hacerlo más visible, ¡hablad de ello en vuestros grupos!";
 "solicitationCreateEnd_title" = "¡Tu solicitud ha sido creada!";
@@ -3094,3 +3096,50 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "share_request_title" = "¿Te gustaría compartir tu %@ en tu grupo %@?";
 "share_request_description" = "Tienes la opción de compartir tu %@ en el grupo de vecinos de tu ciudad para mejorar su visibilidad";
+
+"conversation_notif_text" = "Tus notificaciones están desactivadas.\nActívalas para no perder nada";
+"conversation_notif_highlight" = "Actívalas para no perder nada";
+
+"enhanced_onboarding_time_disponibility_title" = "Mis disponibilidades";
+"enhanced_onboarding_time_disponibility_description" = "Especifique sus disponibilidades para que podamos sugerirle eventos adecuados.";
+"enhanced_onboarding_time_disponibility_days_label" = "Mis días";
+"enhanced_onboarding_time_disponibility_day_monday" = "Lunes";
+"enhanced_onboarding_time_disponibility_day_tuesday" = "Martes";
+"enhanced_onboarding_time_disponibility_day_wednesday" = "Miércoles";
+"enhanced_onboarding_time_disponibility_day_thursday" = "Jueves";
+"enhanced_onboarding_time_disponibility_day_friday" = "Viernes";
+"enhanced_onboarding_time_disponibility_day_saturday" = "Sábado";
+"enhanced_onboarding_time_disponibility_day_sunday" = "Domingo";
+"enhanced_onboarding_time_disponibility_time_slots_label" = "Mis franjas horarias";
+"enhanced_onboarding_time_disponibility_time_morning" = "Mañana";
+"enhanced_onboarding_time_disponibility_time_afternoon" = "Tarde";
+"enhanced_onboarding_time_disponibility_time_evening" = "Noche";
+"no_data_available" = "No proporcionado";
+"unknown_language" = "Idioma desconocido";
+"logout_button" = "Cerrar sesión";
+"delete_account_button" = "Eliminar mi cuenta";
+"preferences_section_title" = "Mis preferencias";
+"preferences_interest_title" = "Mis intereses";
+"preferences_action_title" = "Mis ganas de actuar";
+"preferences_availability_title" = "Mis disponibilidades";
+"preferences_action_categories_title" = "Mis categorías de ayuda mutua";
+"preferences_section_title_others" = "Sus preferencias";
+"preferences_interest_title_others" = "Sus intereses";
+"preferences_action_title_others" = "Sus ganas de actuar";
+"preferences_availability_title_others" = "Sus disponibilidades";
+"preferences_action_categories_title_others" = "Sus categorías de ayuda mutua";
+"settings_section_title" = "Configuración";
+"settings_language_title" = "Idioma";
+"settings_notifications_title" = "Notificaciones";
+"settings_help_title" = "Ayuda y acerca de";
+"settings_unblock_contacts_title" = "Desbloquear contactos";
+"settings_feedback_title" = "Compartir una idea";
+"settings_share_title" = "Compartir la aplicación";
+"settings_password_title" = "Cambiar contraseña";
+"content_removed" = "Este contenido ha sido eliminado porque no cumple con nuestra normativa.";
+"settings_notifications_subtitle" = "Activado: %@";
+"settings_notifications_subtitle_none" = "Ninguna notificación activada";
+"settings_unblock_contacts_subtitle_none" = "Ningún contacto bloqueado";
+"settings_unblock_contacts_subtitle" = "%d contacto bloqueado";
+"settings_unblock_contacts_subtitle_plural" = "%d contactos bloqueados";
+"language_change_redirect" = "Serás redirigido a la página de inicio para cambiar el idioma de la aplicación";

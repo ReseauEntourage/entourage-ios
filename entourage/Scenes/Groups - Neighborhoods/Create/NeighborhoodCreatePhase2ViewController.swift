@@ -138,7 +138,7 @@ extension NeighborhoodCreatePhase2ViewController : UITableViewDataSource, UITabl
         
         let interest = tagsInterests?.getTags()[indexPath.row]
         
-        cell.populateCell(title: tagsInterests!.getTagNameFrom(key: interest!.name) , isChecked: interest!.isSelected, imageName: (interest! as! TagInterest).tagImageName)
+        cell.populateCell(title: tagsInterests!.getTagNameFrom(key: interest!.name) , isChecked: interest!.isSelected, imageName: (interest! as! TagInterest).tagImageName, isAction: false)
         
         return cell
     }

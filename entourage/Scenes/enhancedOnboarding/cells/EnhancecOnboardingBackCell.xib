@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,13 +23,25 @@
                             <constraint firstAttribute="width" constant="40" id="OKr-Ph-t9e"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifo-4a-0Ej">
+                        <rect key="frame" x="70" y="40" width="399" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ifo-4a-0Ej" secondAttribute="trailing" constant="10" id="3rw-2Y-Oip"/>
+                    <constraint firstItem="ifo-4a-0Ej" firstAttribute="leading" secondItem="IkB-df-BG7" secondAttribute="trailing" constant="10" id="9hI-gD-ZGo"/>
                     <constraint firstItem="IkB-df-BG7" firstAttribute="top" secondItem="EyC-GE-v1E" secondAttribute="top" constant="20" id="KkP-mo-anh"/>
                     <constraint firstAttribute="bottom" secondItem="IkB-df-BG7" secondAttribute="bottom" id="eBc-1Q-MaJ"/>
+                    <constraint firstItem="ifo-4a-0Ej" firstAttribute="centerY" secondItem="IkB-df-BG7" secondAttribute="centerY" id="mB6-It-Nh8"/>
                     <constraint firstItem="IkB-df-BG7" firstAttribute="leading" secondItem="EyC-GE-v1E" secondAttribute="leading" constant="20" id="qCy-GJ-HuW"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="ui_label" destination="ifo-4a-0Ej" id="2xX-as-goF"/>
+            </connections>
             <point key="canvasLocation" x="29.770992366412212" y="38.732394366197184"/>
         </tableViewCell>
     </objects>

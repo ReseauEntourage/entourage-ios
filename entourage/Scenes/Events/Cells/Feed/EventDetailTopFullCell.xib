@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,13 +29,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitreE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klB-o1-C0m">
-                        <rect key="frame" x="28" y="28" width="350" height="104.5"/>
+                        <rect key="frame" x="28" y="28" width="350" height="29"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfw-W1-dO7">
-                        <rect key="frame" x="28" y="138.5" width="350" height="25"/>
+                        <rect key="frame" x="28" y="63" width="350" height="25"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="CF5-px-Uga">
                                 <rect key="frame" x="0.0" y="0.0" width="81" height="25"/>
@@ -109,7 +109,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxR-dy-Owz">
-                        <rect key="frame" x="28" y="179.5" width="350" height="136"/>
+                        <rect key="frame" x="28" y="104" width="350" height="136"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="abz-tt-vMF">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="136"/>
@@ -330,7 +330,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGK-wr-qH0">
-                        <rect key="frame" x="28" y="331.5" width="134.5" height="44"/>
+                        <rect key="frame" x="28" y="256" width="134.5" height="44"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="754" image="ic_plus_white" translatesAutoresizingMaskIntoConstraints="NO" id="2TX-DT-6v1">
                                 <rect key="frame" x="95.5" y="12.5" width="19" height="19"/>
@@ -376,13 +376,13 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXs-ZL-Ra7">
-                        <rect key="frame" x="28" y="395.5" width="350" height="19"/>
+                        <rect key="frame" x="28" y="320" width="350" height="19"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-kO-usD" customClass="ActiveLabel" customModule="ActiveLabel">
-                        <rect key="frame" x="28" y="418.5" width="350" height="20.5"/>
+                        <rect key="frame" x="28" y="343" width="350" height="20.5"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -393,7 +393,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="fuU-Rj-r2w" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
-                        <rect key="frame" x="28" y="463" width="350" height="12"/>
+                        <rect key="frame" x="28" y="387.5" width="350" height="87.5"/>
                         <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" id="Vug-5H-gmT"/>
@@ -414,10 +414,10 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgR-Y6-WWf">
-                        <rect key="frame" x="238" y="331.5" width="140" height="44"/>
+                        <rect key="frame" x="218" y="256" width="160" height="44"/>
                         <color key="backgroundColor" name="orange_medium"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="2Dh-bO-hHl"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="2Dh-bO-hHl"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                         <color key="tintColor" name="orange_app"/>
@@ -499,14 +499,6 @@
             <point key="canvasLocation" x="124.6376811594203" y="68.638392857142847"/>
         </tableViewCell>
     </objects>
-    <designables>
-        <designable name="CsR-kO-usD">
-            <size key="intrinsicContentSize" width="90.5" height="20.5"/>
-        </designable>
-        <designable name="fuU-Rj-r2w">
-            <size key="intrinsicContentSize" width="350" height="12"/>
-        </designable>
-    </designables>
     <resources>
         <image name="ic_desc" width="20" height="20"/>
         <image name="ic_event_date" width="20" height="20"/>
@@ -519,7 +511,7 @@
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
-            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.59215686274509804" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_light_a50">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>

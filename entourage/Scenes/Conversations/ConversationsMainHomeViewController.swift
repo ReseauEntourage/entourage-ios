@@ -1,283 +1,156 @@
-//
-//  ConversationsMainHomeViewController.swift
-//  entourage
-//
-//  Created by Jerome on 19/08/2022.
-//
-
 import UIKit
 import IHProgressHUD
 
 class ConversationsMainHomeViewController: UIViewController {
-    
+
     @IBOutlet weak var ui_image_inside_top_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_image_constraint_height: NSLayoutConstraint!
     @IBOutlet weak var ui_image: UIImageView!
-    
     @IBOutlet weak var ui_constraint_bottom_label: NSLayoutConstraint!
-    
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_label_title: UILabel!
-    
     @IBOutlet weak var ui_tableview: UITableView!
-    
     @IBOutlet weak var ui_view_selector: UIView!
-    
-    var maxViewHeight:CGFloat = 109 //134
-    var minViewHeight:CGFloat = 70//83//108
-    
-    var minLabelBottomConstraint:CGFloat = 9
-    var maxLabelBottomConstraint:CGFloat = 16
-    
-    var minLabelFont:CGFloat = 16
-    var maxLabelFont:CGFloat = 23
-    
-    var minImageHeight:CGFloat = 0
-    var maxImageHeight:CGFloat = 66
-    
-    var viewNormalHeight:CGFloat = 0
-    var labelNormalConstraintBottom:CGFloat = 0
-    var labelNormalFontHeight:CGFloat = 0
-    var imageNormalHeight:CGFloat = 0
-    
-    var topSafeAreaInsets:CGFloat = 0
-    
-    var pullRefreshControl = UIRefreshControl()
-    
-    var currentPage = 1
-    let numberOfItemsForWS = 25 // Arbitrary nb of items used for pagging
-    let nbOfItemsBeforePagingReload = 10 // Arbitrary nb of items from the end of the list to send new call
-    var isLoading = false
-    
+
+    var maxViewHeight: CGFloat = 109
+    var minViewHeight: CGFloat = 70
     var messages = [Conversation]()
-    
+    var notificationsDisabled: Bool = false // Indicateur pour l'état des notifications
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
-        
+
+        // Enregistrer la cellule personnalisée
+        ui_tableview.register(UINib(nibName: "ConversationNotifAskViewCell", bundle: nil), forCellReuseIdentifier: "ConversationNotifAskViewCell")
+
         setupViews()
+        checkNotificationStatus()
         getMessages()
-        
-        //Notif for updating messages after tabbar selected
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationMessagesUpdate), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getUserInfo()
-        AnalyticsLoggerManager.logEvent(name: Message_view)
-    }
-    
-    //MARK: - Call from Notifications -
-    @objc func refreshDatasFromTab() {
-        if self.messages.count > 0 {
-            self.gotoTop(isAnimated:false)
-        }
-        refreshDatas()
-    }
-    
-    @objc func refreshDatas() {
-        currentPage = 1
         getMessages()
     }
-    
+
+    func checkNotificationStatus() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                let notificationsDisabled = settings.authorizationStatus != .authorized
+                print("Notifications disabled: ", notificationsDisabled)
+                self.notificationsDisabled = notificationsDisabled
+            }
+        }
+    }
+
+    func reloadWithoutNotificationCell() {
+        notificationsDisabled = false
+        ui_tableview.reloadData()
+    }
+
+    func openNotificationDemandViewController() {
+        let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
+            vc.modalPresentationStyle = .overFullScreen // Optionnel
+            vc.comeFromDiscussion = true
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            print("ViewController with identifier 'NotificationDemandViewController' not found")
+        }
+    }
+
     func setupViews() {
-        
         ui_view_selector.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_view_selector.layer.maskedCorners = CACornerMask.radiusTopOnly()
-        
-        maxImageHeight = ui_image_constraint_height.constant
-        imageNormalHeight = maxImageHeight
-        
-        self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: maxLabelFont)
+
+        maxViewHeight = ui_view_height_constraint.constant
+
+        self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 23)
         self.ui_label_title.text = "Messages_title".localized
-        
-        labelNormalFontHeight = maxLabelFont
-        
-        ui_constraint_bottom_label.constant = maxLabelBottomConstraint
-        labelNormalConstraintBottom = ui_constraint_bottom_label.constant
-        
-        ui_view_height_constraint.constant = maxViewHeight
-        viewNormalHeight = ui_view_height_constraint.constant
-        
-        if #available(iOS 13.0, *) {
-            let window = UIApplication.shared.windows.first
-            if let topPadding = window?.safeAreaInsets.top {
-                topSafeAreaInsets = topPadding
-            }
-        }
-        else {
-            let window = UIApplication.shared.keyWindow
-            if let topPadding = window?.safeAreaInsets.top {
-                topSafeAreaInsets = topPadding
-            }
-        }
-        
-        ui_image_inside_top_constraint.constant = ui_image_inside_top_constraint.constant - topSafeAreaInsets
-        
-        ui_tableview.contentInset = UIEdgeInsets(top: viewNormalHeight ,left: 0,bottom: 0,right: 0)
-        ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: viewNormalHeight ,left: 0,bottom: 0,right: 0)
-        
-        pullRefreshControl.attributedTitle = NSAttributedString(string: "Loading".localized)
-        pullRefreshControl.tintColor = .appOrange
-        pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)
-        ui_tableview.refreshControl = pullRefreshControl
+
+        ui_tableview.contentInset = UIEdgeInsets(top: maxViewHeight, left: 0, bottom: 0, right: 0)
+        ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: maxViewHeight, left: 0, bottom: 0, right: 0)
     }
-    
-    //MARK: - Network
+
     func getMessages() {
-        if self.isLoading { return }
-        if self.messages.isEmpty { self.ui_tableview.reloadData() }
-        
+        if IHProgressHUD.isVisible() { return }
         IHProgressHUD.show()
-        
-        self.isLoading = true
-        
-        MessagingService.getAllConversations(currentPage: currentPage, per: numberOfItemsForWS) { messages, error in
+
+        MessagingService.getAllConversations(currentPage: 1, per: 25) { messages, error in
             IHProgressHUD.dismiss()
-            self.pullRefreshControl.endRefreshing()
             if let messages = messages {
-                if self.currentPage > 1 {
-                    self.messages.append(contentsOf: messages)
-                }
-                else {
-                    self.messages = messages
-                }
+                self.messages = messages
             }
-            self.isLoading = false
             self.ui_tableview.reloadData()
-            self.getUserInfo()
-        }
-    }
-    
-    func getUserInfo() {
-        guard let _userid = UserDefaults.currentUser?.uuid else {return}
-        UserService.getUnreadCountForUser { unreadCount, error in
-            if let unreadCount = unreadCount {
-                UserDefaults.badgeCount = unreadCount
-                NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
-            }
-        }
-    }
-    
-    func gotoTop(isAnimated:Bool = true) {
-        if messages.count == 0 { return }
-        let indexPath = IndexPath(row: 0, section: 0)
-        DispatchQueue.main.async {
-            self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: isAnimated)
         }
     }
 }
 
-//MARK: - Tableview datasource / delegate -
+// MARK: - Table View Data Source & Delegate
 extension ConversationsMainHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        return messages.count + (notificationsDisabled ? 1 : 0)
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        if notificationsDisabled && indexPath.row == 0 {
+            // Charger la cellule personnalisée
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationNotifAskViewCell", for: indexPath) as! ConversationNotifAskViewCell
+            cell.configureText()
+            cell.selectionStyle = .none
+            return cell
+        }
+
+        // Charger une cellule classique
+        let adjustedIndex = notificationsDisabled ? indexPath.row - 1 : indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
-        
-        let message = messages[indexPath.row]
-        
-        cell.populateCell(message: message, delegate: self, position: indexPath.row)
-        
+        let message = messages[adjustedIndex]
+        cell.populateCell(message: message, delegate: self, position: adjustedIndex)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if notificationsDisabled && indexPath.row == 0 {
+            reloadWithoutNotificationCell()
+            openNotificationDemandViewController()
+            return
+        }
+
+        let adjustedIndex = notificationsDisabled ? indexPath.row - 1 : indexPath.row
         if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-            let conv = messages[indexPath.row]
-            vc.setupFromOtherVC(conversationId: conv.uid, title: conv.title, isOneToOne: conv.isOneToOne(), conversation: conv, delegate: self,selectedIndexPath: indexPath)
-            
-            self.present(vc, animated: true)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if isLoading { return }
-        
-        let lastIndex = messages.count - nbOfItemsBeforePagingReload
-        if indexPath.row == lastIndex && self.messages.count >= numberOfItemsForWS * currentPage {
-            self.currentPage = self.currentPage + 1
-            self.getMessages()
-        }
-    }
-    
-    func scrollViewDidScroll( _ scrollView: UIScrollView) {
-        UIView.animate(withDuration: 0) {
-            
-            let yImage = self.imageNormalHeight - (scrollView.contentOffset.y+self.imageNormalHeight)
-            let diffImage = (self.maxViewHeight - self.maxImageHeight)
-            let heightImage = min(max (yImage -  diffImage,self.minImageHeight),self.maxImageHeight)
-            
-            self.ui_image.alpha = heightImage / self.maxImageHeight
-            
-            let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
-            let heightView = min(max (yView,self.minViewHeight),self.maxViewHeight)
-            self.ui_view_height_constraint.constant = heightView
-            
-            //On évite de calculer et repositionner les vues inutiliement.
-            if self.ui_view_height_constraint.constant <= self.minViewHeight {
-                self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
-                return
-            }
-            
-            self.ui_image.isHidden = false
-            
-            let yLabel = self.labelNormalConstraintBottom - (scrollView.contentOffset.y + self.labelNormalConstraintBottom)
-            let heightLabel = min(max (yLabel,self.minLabelBottomConstraint),self.maxLabelBottomConstraint)
-            
-            self.ui_constraint_bottom_label.constant = heightLabel
-            
-            let yLabelFont = self.labelNormalFontHeight - (scrollView.contentOffset.y + self.labelNormalFontHeight)
-            var heightCalculated = (self.minLabelFont * yLabelFont) / self.minViewHeight
-            if yLabelFont >= self.maxViewHeight - 2 {
-                heightCalculated = self.maxLabelFont
-            }
-            let heightLabelFont = min(max (heightCalculated,self.minLabelFont),self.maxLabelFont)
-            
-            self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: heightLabelFont)
-            
-            self.view.layoutIfNeeded()
+            let conv = messages[adjustedIndex]
+            vc.setupFromOtherVC(conversationId: conv.uid, title: conv.title, isOneToOne: conv.isOneToOne(), conversation: conv, delegate: self, selectedIndexPath: indexPath)
+            present(vc, animated: true)
         }
     }
 }
 
-//MARK: - ConversationListMainCellDelegate -
+// MARK: - ConversationListMainCellDelegate
 extension ConversationsMainHomeViewController: ConversationListMainCellDelegate {
     func showWebUrl(url: URL) {
         WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }
-    
+
     func showUserDetail(_ position: Int) {
-        //TODO: not use actually ;)
-        
-        let userId:Int? = messages[position].user?.uid
-        guard let userId = userId else {
-            return
-        }
-        
-        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                _homeVC.currentUserId = "\(userId)"
-                
-                self.present(navVC, animated: true)
-            }
+        let userId: Int? = messages[position].user?.uid
+        guard let userId = userId else { return }
+
+        if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+            .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
+            profileVC.userIdToDisplay = "\(userId)"
+            profileVC.modalPresentationStyle = .fullScreen
+            self.present(profileVC, animated: true)
         }
     }
 }
 
-//MARK: - UpdateUnreadCountDelegate -
-extension ConversationsMainHomeViewController:UpdateUnreadCountDelegate {
+// MARK: - UpdateUnreadCountDelegate
+extension ConversationsMainHomeViewController: UpdateUnreadCountDelegate {
     func updateUnreadCount(conversationId: Int, currentIndexPathSelected: IndexPath?) {
-        guard let currentIndexPathSelected = currentIndexPathSelected else {
-            return
-        }
-        
+        guard let currentIndexPathSelected = currentIndexPathSelected else { return }
+
         messages[currentIndexPathSelected.row].numberUnreadMessages = 0
         self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
     }

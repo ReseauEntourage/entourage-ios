@@ -62,13 +62,14 @@ class OnboardingStartViewController: UIViewController {
         ui_bt_previous.setTitleColor(.appOrange, for: .normal)
         ui_bt_previous.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 18)
         ui_bt_previous.setTitle("onboard_bt_back".localized, for: .normal)
+        configureWhiteButton(ui_bt_previous, withTitle: "onboard_bt_back".localized)
         
         ui_bt_next.layer.cornerRadius = ui_bt_next.frame.height / 2
         ui_bt_next.backgroundColor = .appOrangeLight
         ui_bt_next.setTitleColor(.white, for: .normal)
         ui_bt_next.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
         ui_bt_next.setTitle("onboard_bt_next".localized, for: .normal)
-        
+        configureOrangeButton(ui_bt_next, withTitle: "onboard_bt_next".localized)
         enableDisableNextButton(isEnable: false)
         
         ui_main_container_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
@@ -91,6 +92,26 @@ class OnboardingStartViewController: UIViewController {
             self.pageViewController = vc
             self.pageViewController?.parentDelegate = self
         }
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 21
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     func countValidate(){

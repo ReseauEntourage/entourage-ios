@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -207,7 +208,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTZ-7t-qL7">
-                                        <rect key="frame" x="32" y="44" width="64.5" height="30"/>
+                                        <rect key="frame" x="20" y="32" width="64.5" height="30"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -230,12 +231,12 @@
                                 <constraints>
                                     <constraint firstItem="cRZ-PA-DJe" firstAttribute="top" secondItem="LA3-Gj-VqA" secondAttribute="top" constant="8" id="0Ik-km-YdA"/>
                                     <constraint firstAttribute="trailing" secondItem="cRZ-PA-DJe" secondAttribute="trailing" constant="16" id="2du-Qn-NtN"/>
-                                    <constraint firstItem="6Rf-5V-aAC" firstAttribute="top" secondItem="kTZ-7t-qL7" secondAttribute="bottom" constant="8" id="6rN-8y-LCP"/>
+                                    <constraint firstItem="6Rf-5V-aAC" firstAttribute="top" secondItem="kTZ-7t-qL7" secondAttribute="bottom" constant="20" id="6rN-8y-LCP"/>
                                     <constraint firstAttribute="height" constant="109" id="7nb-uA-6wa"/>
                                     <constraint firstAttribute="bottom" secondItem="6Rf-5V-aAC" secondAttribute="bottom" constant="-25" id="FRi-Wr-0xU"/>
                                     <constraint firstItem="kTZ-7t-qL7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LA3-Gj-VqA" secondAttribute="top" constant="8" id="PI5-zv-eXp"/>
                                     <constraint firstAttribute="trailing" secondItem="DIY-PJ-gYy" secondAttribute="trailing" id="Wcr-b8-4X3"/>
-                                    <constraint firstItem="kTZ-7t-qL7" firstAttribute="leading" secondItem="LA3-Gj-VqA" secondAttribute="leading" constant="32" id="apK-Qg-YB4"/>
+                                    <constraint firstItem="kTZ-7t-qL7" firstAttribute="leading" secondItem="LA3-Gj-VqA" secondAttribute="leading" constant="20" id="apK-Qg-YB4"/>
                                     <constraint firstAttribute="trailing" secondItem="6Rf-5V-aAC" secondAttribute="trailing" constant="3" id="dll-t5-uQz"/>
                                     <constraint firstItem="DIY-PJ-gYy" firstAttribute="leading" secondItem="LA3-Gj-VqA" secondAttribute="leading" id="h4T-0q-O60"/>
                                     <constraint firstItem="DIY-PJ-gYy" firstAttribute="top" secondItem="LA3-Gj-VqA" secondAttribute="top" id="haF-q3-TpP"/>
@@ -636,6 +637,13 @@
                                             <constraint firstItem="6DS-8Y-tn4" firstAttribute="centerX" secondItem="gxf-PD-bKd" secondAttribute="centerX" id="vzL-kV-HJU"/>
                                         </constraints>
                                     </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DEp-YO-HRI">
+                                        <rect key="frame" x="0.0" y="592" width="414" height="150"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="hwh-F7-FJi"/>
+                                        </constraints>
+                                    </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezL-qH-Mp6">
                                         <rect key="frame" x="0.0" y="752" width="414" height="54"/>
                                         <subviews>
@@ -748,10 +756,13 @@ L2</string>
                                     <constraint firstItem="Jpq-Gp-ntZ" firstAttribute="leading" secondItem="4TP-kv-PK9" secondAttribute="leading" id="c6J-hZ-wIT"/>
                                     <constraint firstItem="Tp1-wD-wOr" firstAttribute="top" secondItem="8wX-KB-efG" secondAttribute="bottom" id="fpK-5S-7AD"/>
                                     <constraint firstItem="ezL-qH-Mp6" firstAttribute="leading" secondItem="4TP-kv-PK9" secondAttribute="leading" id="k81-xT-KAY"/>
+                                    <constraint firstItem="DEp-YO-HRI" firstAttribute="leading" secondItem="4TP-kv-PK9" secondAttribute="leading" id="kVv-DF-OUb"/>
+                                    <constraint firstItem="tZh-2J-cpU" firstAttribute="top" secondItem="DEp-YO-HRI" secondAttribute="bottom" constant="10" id="kqn-XM-MLZ"/>
                                     <constraint firstItem="ft8-DI-A89" firstAttribute="trailing" secondItem="Jpq-Gp-ntZ" secondAttribute="trailing" constant="-18" id="lL8-BC-Pat"/>
                                     <constraint firstItem="ezL-qH-Mp6" firstAttribute="top" secondItem="Tp1-wD-wOr" secondAttribute="bottom" constant="18" id="nJU-f4-gGS"/>
                                     <constraint firstItem="gxf-PD-bKd" firstAttribute="centerX" secondItem="4TP-kv-PK9" secondAttribute="centerX" id="niL-8d-alD"/>
                                     <constraint firstAttribute="trailing" secondItem="ezL-qH-Mp6" secondAttribute="trailing" id="oap-eT-PEv"/>
+                                    <constraint firstAttribute="trailing" secondItem="DEp-YO-HRI" secondAttribute="trailing" id="tTQ-TE-9yi"/>
                                     <constraint firstItem="Jpq-Gp-ntZ" firstAttribute="top" secondItem="4TP-kv-PK9" secondAttribute="top" id="z8C-QW-YRV"/>
                                 </constraints>
                             </view>
@@ -767,6 +778,7 @@ L2</string>
                     </view>
                     <navigationItem key="navigationItem" id="iAe-jX-eYP"/>
                     <connections>
+                        <outlet property="table_view_mention_height" destination="hwh-F7-FJi" id="sDU-9X-7g4"/>
                         <outlet property="ui_bt_title_user" destination="mMd-0r-8DI" id="glO-SD-L0R"/>
                         <outlet property="ui_constraint_bottom_view_Tf" destination="IwX-vu-rvA" id="5Id-t4-Sa6"/>
                         <outlet property="ui_constraint_tableview_top_margin" destination="Ten-nN-dXR" id="AIH-t3-Ias"/>
@@ -774,6 +786,7 @@ L2</string>
                         <outlet property="ui_iv_bt_send" destination="lHk-Qc-MrX" id="RWh-i9-mWj"/>
                         <outlet property="ui_subtitle_new_conv" destination="y0I-Ty-OBM" id="8YZ-VP-cjW"/>
                         <outlet property="ui_tableview" destination="Tp1-wD-wOr" id="ggU-e3-Xgb"/>
+                        <outlet property="ui_tableview_mentions" destination="DEp-YO-HRI" id="tGw-lr-v0r"/>
                         <outlet property="ui_tap_gesture" destination="syN-cf-Pc4" id="QOP-Rn-Hog"/>
                         <outlet property="ui_textview_message" destination="hqO-Ak-Xvp" id="X9f-VN-UM7"/>
                         <outlet property="ui_title_block" destination="rBF-Oy-8Js" id="f0P-Qy-shR"/>
@@ -1351,17 +1364,6 @@ L2</string>
             <point key="canvasLocation" x="2119" y="727"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="JBu-XG-9jm">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-        <designable name="Q0i-xf-RJX">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
-        </designable>
-        <designable name="VSX-1z-7hS">
-            <size key="intrinsicContentSize" width="37" height="16"/>
-        </designable>
-    </designables>
     <resources>
         <image name="header_orange_light" width="392" height="416"/>
         <image name="ic_button_retry_red" width="10" height="11"/>
@@ -1393,7 +1395,7 @@ L2</string>
             <color red="0.20392156862745098" green="0.23529411764705882" blue="0.34509803921568627" alpha="0.40000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
-            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.59215686274509804" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_light">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1404,5 +1406,8 @@ L2</string>
         <namedColor name="rouge_erreur">
             <color red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

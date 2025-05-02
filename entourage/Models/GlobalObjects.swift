@@ -12,6 +12,7 @@ import Foundation
 struct PostMessage:Codable {
     var uid:Int = 0
     var content:String? = ""
+    var contentHtml:String? = ""
     
     var createdDate: Date? {
         get {
@@ -54,6 +55,7 @@ struct PostMessage:Codable {
     var messageImageUrl:String? = nil
     var status:String? = nil
     var contentTranslations:Translations? = nil
+    var contentTranslationsHtml:Translations? = nil
     var reactions: [Reaction]?
     var reactionId:Int? = 0
     var survey: Survey?
@@ -72,6 +74,7 @@ struct PostMessage:Codable {
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case content
+        case contentHtml = "content_html"
         case user
         case createdDateString = "created_at"
         case parentPostId = "post_id"
@@ -82,6 +85,7 @@ struct PostMessage:Codable {
         case status
         case reactions
         case contentTranslations = "content_translations"
+        case contentTranslationsHtml = "content_translations_html"
         case reactionId = "reaction_id"
         case survey
         case surveyResponse = "survey_response"

@@ -41,6 +41,14 @@ class EnvironmentConfigurationManager {
     private let stagingEnvironmentName: String = "staging"
     private let prodEnvironmentName: String = "prod"
     
+    var baseURL: String {
+        if runsOnProduction {
+            return "https://www.entourage.social"
+        } else {
+            return "https://preprod.entourage.social"
+        }
+    }
+    
     var configCopy: NSDictionary? {
         get { return config }
     }

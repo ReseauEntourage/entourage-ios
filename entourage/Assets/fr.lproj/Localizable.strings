@@ -1151,7 +1151,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_1_title" = "Entraide";
 "action_charte_1" = "L’application permet de créer de nouvelles rencontres entre voisins et de favoriser des temps d’échanges. Les aides à distance (drive, livraison, bon cadeau, cagnotte…) ne sont pas autorisées.";
 "action_charte_2_title" = "Contributions & demandes";
-"action_charte_2" = "Je peux demander ou proposer des biens matériels (équipement, vêtement…), des services (lessive, impression de documents…) et des temps de partage (café, activité…).\nJe ne peux pas demander ou proposer une aide financière, un hébergement ou une aide alimentaire. Mais si c’est mon besoin, je peux contacter le modérateur qui m’orientera.";
+"action_charte_2" = "Je peux demander ou proposer des biens matériels (équipement, vêtement…), des services (Lessive, impression de documents…) et des temps de partage (Café, activité…).\nJe ne peux pas demander ou proposer une aide financière, un hébergement ou une aide alimentaire. Mais si c’est mon besoin, je peux contacter le modérateur qui m’orientera.";
 "action_charte_3_title" = "Consentement";
 "action_charte_3" = "Lorsque je publie une demande pour une tierce personne, je m’assure d’obtenir son accord au préalable. ";
 "action_charte_4_title" = "Non discrimination";
@@ -1161,9 +1161,11 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 //Create action end
 "action_create_close_button" = "Terminer";
-"contribCreateEnd_title" = "Votre contribution à bien été créée !";
+"action_create_close_button_demand" = "Voir ma demande";
+"action_create_close_button_contrib" = "Voir ma contribution";
+"contribCreateEnd_title" = "Votre contribution a bien été créée !";
 "contribCreateEnd_subtitle" = "Félicitations, vous venez de créer une nouvelle contribution. Pour la rendre plus visible parlez-en sur vos groupes ! ";
-"solicitationCreateEnd_title" = "Votre demande à bien été créée !";
+"solicitationCreateEnd_title" = "Votre demande a bien été créée !";
 "solicitationCreateEnd_subtitle" = "Félicitations, vous venez de créer une nouvelle demande. Pour la rendre plus visible parlez-en sur vos groupes ! ";
 
 
@@ -1222,7 +1224,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_CGU_1_title" = "Entraide";
 "action_CGU_1" = "L’application permet de créer de nouvelles rencontres entre voisins et de favoriser des temps d’échanges. Les aides à distance (drive, livraison, bon cadeau, cagnotte…) ne sont pas autorisées.";
 "action_CGU_2_title" = "Contributions & demandes";
-"action_CGU_2" = "Je peux demander ou proposer des biens matériels (équipement, vêtement…), des services (lessive, impression de documents…) et des temps de partage (café, activité…). Je ne peux pas demander ou proposer une aide financière, un hébergement ou une aide alimentaire. Mais si c’est mon besoin, je peux contacter le modérateur qui m’orientera.";
+"action_CGU_2" = "Je peux demander ou proposer des biens matériels (équipement, vêtement…), des services (Lessive, impression de documents…) et des temps de partage (Café, activité…). Je ne peux pas demander ou proposer une aide financière, un hébergement ou une aide alimentaire. Mais si c’est mon besoin, je peux contacter le modérateur qui m’orientera.";
 "action_CGU_3_title" = "Consentement";
 "action_CGU_3" = "Lorsque je publie une demande pour une tierce personne, je m’assure d’obtenir son accord au préalable. ";
 "action_CGU_4_title" = "Non discrimination";
@@ -1425,7 +1427,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_action_type_social" = "Social";
 "home_v2_action_type_clothes" = "Vêtements";
 "home_v2_action_type_equipment" = "Equipement";
-"home_v2_action_type_hygiène" = "Hygiène";
+"home_v2_action_type_hygiène" = "Produit d'hygiène";
 "home_v2_action_type_services" = "Services";
 "home_v2_action_type_other" = "Autres";
 
@@ -1451,19 +1453,19 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "translation_bottom_fragment_main_title" = "Traduction";
 
 "action_social_name" = "Temps de partage";
-"action_social_subname" = "café, activité...";
+"action_social_subname" = "Café, activité...";
 
 "action_services_name" = "Service";
-"action_services_subname" = "lessive, impression de documents...";
+"action_services_subname" = "Lessive, impression de documents...";
 
 "action_clothes_name" = "Vêtements";
-"action_clothes_subname" = "chaussures, manteau...";
+"action_clothes_subname" = "Chaussures, manteau...";
 
 "action_equipment_name" = "Équipement";
-"action_equipment_subname" = "téléphone, sac de couchage...";
+"action_equipment_subname" = "Téléphone, sac de couchage...";
 
-"action_hygiene_name" = "Hygiène";
-"action_hygiene_subname" = "savon, protection sanitaire...";
+"action_hygiene_name" = "Produit d'hygiène";
+"action_hygiene_subname" = "Savon, protection sanitaire...";
 
 "interest_activites" = "Activités Manuelles";
 "interest_animaux" = "Animaux";
@@ -1670,3 +1672,53 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "hour_evening" = "Soir";
 "enhanced_onboarding_select_availability" = "Précisez vos disponibilités pour que l'on puisse vous suggérer des événements adaptés.";
 "enhanced_onboarding_my_availability" = "Mes disponibilités";
+
+"conversation_notif_text" = "Vos notifications sont désactivées.\nActivez-les pour ne rien manquer";
+"conversation_notif_highlight" = "Activez-les pour ne rien manquer";
+
+
+"enhanced_onboarding_time_disponibility_title" = "Mes disponibilités";
+"enhanced_onboarding_time_disponibility_description" = "Précisez vos disponibilités pour que l'on puisse vous suggérer des événements adaptés.";
+"enhanced_onboarding_time_disponibility_days_label" = "Mes jours";
+"enhanced_onboarding_time_disponibility_day_monday" = "Lundi";
+"enhanced_onboarding_time_disponibility_day_tuesday" = "Mardi";
+"enhanced_onboarding_time_disponibility_day_wednesday" = "Mercredi";
+"enhanced_onboarding_time_disponibility_day_thursday" = "Jeudi";
+"enhanced_onboarding_time_disponibility_day_friday" = "Vendredi";
+"enhanced_onboarding_time_disponibility_day_saturday" = "Samedi";
+"enhanced_onboarding_time_disponibility_day_sunday" = "Dimanche";
+"enhanced_onboarding_time_disponibility_time_slots_label" = "Mes tranches horaires";
+"enhanced_onboarding_time_disponibility_time_morning" = "Matin";
+"enhanced_onboarding_time_disponibility_time_afternoon" = "Après-midi";
+"enhanced_onboarding_time_disponibility_time_evening" = "Soir";
+"no_data_available" = "Non renseigné";
+"unknown_language" = "Langue non reconnue";
+"logout_button" = "Se déconnecter";
+"delete_account_button" = "Supprimer mon compte";
+"preferences_section_title" = "Mes préférences";
+"preferences_interest_title" = "Mes centres d'intérêt";
+"preferences_action_title" = "Mes envies d'agir";
+"preferences_availability_title" = "Mes disponibilités";
+"preferences_action_categories_title" = "Mes catégories d'entraide";
+"preferences_section_title_others" = "Ses préférences";
+"preferences_interest_title_others" = "Ses centres d'intérêt";
+"preferences_action_title_others" = "Ses envies d'agir";
+"preferences_availability_title_others" = "Ses disponibilités";
+"preferences_action_categories_title_others" = "Ses catégories d'entraide";
+"settings_section_title" = "Paramètres";
+"settings_language_title" = "Langue";
+"settings_notifications_title" = "Notifications";
+"settings_help_title" = "Aide et à propos";
+"settings_unblock_contacts_title" = "Débloquer des contacts";
+"settings_feedback_title" = "Partager une idée";
+"settings_share_title" = "Partager l'application";
+"settings_password_title" = "Changer de mot de passe";
+"content_removed" = "Ce contenu a été supprimé car il ne respecte pas notre charte.";
+
+"settings_notifications_subtitle" = "Activé : %@";
+"settings_notifications_subtitle_none" = "Aucune notification activée";
+"settings_unblock_contacts_subtitle_none" = "Aucun contact bloqué";
+"settings_unblock_contacts_subtitle" = "%d contact bloqué";
+"settings_unblock_contacts_subtitle_plural" = "%d contacts bloqués";
+"language_change_redirect" = "Vous allez être redirigé sur la page d'accueil pour changer la langue de l'application";
+"settings_back_subtitle" = "Retour aux paramètres";

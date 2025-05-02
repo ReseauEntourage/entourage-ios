@@ -43,6 +43,8 @@ class NeighborhoodPostAddPhotoViewController: BasePopViewController {
         
         ui_iv_post.layer.cornerRadius = cornerRadiusImage
         ui_iv_post.layer.borderWidth = 0
+        configureOrangeButton(ui_bt_import_gallery, withTitle: "take_gallery".localized)
+        configureWhiteButton(ui_bt_take_photo, withTitle: "take_photo".localized)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +53,25 @@ class NeighborhoodPostAddPhotoViewController: BasePopViewController {
     }
     
     //MARK: - Methods -
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     func showPicker(sourceType: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
@@ -134,6 +155,7 @@ class NeighborhoodPostAddPhotoViewController: BasePopViewController {
         alertVC.delegate = self
         alertVC.show()
     }
+    
 }
 
 //MARK: - MJAlertControllerDelegate -

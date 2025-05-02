@@ -214,6 +214,15 @@ extension UILabel {
 }
 
 extension String {
+    /// Retourne une version de la chaîne en ne gardant que les caractères alphanumériques et les espaces.
+    func cleanedForMention() -> String {
+        let allowedCharacters = CharacterSet.letters.union(CharacterSet.decimalDigits)
+        let filteredScalars = self.unicodeScalars.filter { allowedCharacters.contains($0) }
+        return String(String.UnicodeScalarView(filteredScalars)) + ". "
+    }
+}
+
+extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
@@ -306,10 +315,30 @@ extension Double {
 
 
 extension UIView {
-    func setVisibilityGone(){
+    func setVisibilityGone() {
+        // Cacher la vue
         self.isHidden = true
-        self.heightAnchor.constraint(equalToConstant: 0).isActive = true
+        
+        // Désactiver toutes les contraintes de hauteur existantes
+        for constraint in self.constraints {
+            if constraint.firstAttribute == .height {
+                constraint.isActive = false
+            }
+        }
+        
+        // Ajouter une contrainte de hauteur à 0
+        let zeroHeightConstraint = self.heightAnchor.constraint(equalToConstant: 0)
+        zeroHeightConstraint.isActive = true
+
+        // Si la vue est dans un stackView, ajuster l'espacement
+        if let stackView = self.superview as? UIStackView {
+            stackView.setCustomSpacing(0, after: self)
+        }
+
+        // Forcer la mise à jour du layout
+        self.superview?.layoutIfNeeded()
     }
+
     func setVisibilityVisible(height:CGFloat) {
         self.isHidden = false
         self.heightAnchor.constraint(equalToConstant: height).isActive = true
@@ -338,3 +367,17 @@ extension UIView {
         })
     }
 }
+
+extension String {
+    func localizedStyled(color: UIColor = .appOrange, font: UIFont = UIFont.systemFont(ofSize: 14), underline: Bool = true) -> NSAttributedString {
+        var attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: color,
+            .font: font
+        ]
+        if underline {
+            attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue
+        }
+        return NSAttributedString(string: NSLocalizedString(self, comment: ""), attributes: attributes)
+    }
+}
+

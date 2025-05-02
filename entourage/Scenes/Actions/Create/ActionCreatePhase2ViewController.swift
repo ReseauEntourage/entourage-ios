@@ -96,7 +96,7 @@ extension ActionCreatePhase2ViewController: UITableViewDelegate, UITableViewData
             fatalError("Unable to dequeue cellInterest")
         }
         
-        cell.populateCell(title: section.key ?? "-", isChecked: section.isSelected, imageName: section.getImageName(), subtitle: section.key, isSingleSelection: true)
+        cell.populateCell(title: section.key ?? "-", isChecked: section.isSelected, imageName: section.getImageName(), subtitle: section.key, isSingleSelection: true, isAction: true)
         
         return cell
     }

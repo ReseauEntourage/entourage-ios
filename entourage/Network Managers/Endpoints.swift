@@ -61,6 +61,7 @@ let kAPIDeleteNeigborhoodPostMessage = "neighborhoods/%d/chat_messages/%d?token=
 let kAPIPostReactionGroupPost = "neighborhoods/%d/chat_messages/%d/reactions?token=%@"
 let kAPIDeleteReactionGroupPost = "neighborhoods/%d/chat_messages/%d/reactions?token=%@"
 let kAPIGetDetailsReactionGroupPost = "neighborhoods/%d/chat_messages/%d/reactions/users?token=%@"
+let kAPIGetNeighborhoodUsersQuery = "neighborhoods/%@/users?token=%@&query=%@"
 
 
 //Amazon S3
@@ -110,6 +111,8 @@ let kAPIDeleteReactionEventPost = "outings/%d/chat_messages/%d/reactions?token=%
 let kAPIGetDetailsReactionEventPost = "outings/%d/chat_messages/%d/reactions/users?token=%@"
 let kAPIConfirmParticipation = "outings/%@/users/confirm?token=%@"
 let kAPIGetMyFilteredOutings = "users/%@/outings?token=%@&page=%d&per=%d&travel_distance=%.2f&latitude=%.6f&longitude=%.6f&interest_list=%@"
+let kAPIGetEventUsersQuery = "outings/%@/users?token=%@&query=%@"
+
 
 //Actions
 let kAPIGetContrib = "contributions/%@?token=%@"

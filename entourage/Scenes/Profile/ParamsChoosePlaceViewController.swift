@@ -85,13 +85,24 @@ class ParamsChoosePlaceViewController: BasePopViewController {
         ui_bt_validate.setTitle("validate".localized, for: .normal)
         ui_bt_validate.titleLabel?.font = ApplicationTheme.getFontCourantRegularNoir(size: 18).font
         ui_bt_validate.titleLabel?.textColor = ApplicationTheme.getFontCourantRegularNoir().color
-        
+        configureOrangeButton(ui_bt_validate, withTitle: "validate".localized)
         ui_view_error.hide()
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(updatePosition), name: NSNotification.Name(rawValue: kNotificationLocationUpdated), object: nil)
         setupGooglePlaceViewController()
     }
+    
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+    
     
     private func validateAddress() {
         if let _ = selectedPlace {

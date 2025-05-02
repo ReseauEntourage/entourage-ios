@@ -218,63 +218,77 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     //MARK: - Network -
-    func getNeighborhoodDetail(hasToRefreshLists:Bool = false) {
-
+    func getNeighborhoodDetail(hasToRefreshLists: Bool = false) {
         self.currentPagingPage = 1
         self.isLoading = true
-        var _groupId = ""
+        var groupId = ""
         if neighborhoodId != 0 {
-            _groupId = String(neighborhoodId)
-        }else if hashedNeighborhoodId != "" {
-            _groupId = hashedNeighborhoodId
+            groupId = String(neighborhoodId)
+        } else if !hashedNeighborhoodId.isEmpty {
+            groupId = hashedNeighborhoodId
         }
         
-        NeighborhoodService.getNeighborhoodDetail(id: _groupId) { group, error in
-            self.pullRefreshControl.endRefreshing()
-            
-            if let _ = error {
-                self.goBack()
-            }
-            if group == nil {
-                let alertController = UIAlertController(title: "Attention", message: "Ce groupe a été supprimé", preferredStyle: .alert)
-                let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
-                alertController.addAction(closeAction)
-                self.present(alertController, animated: true, completion: nil)
+        NeighborhoodService.getNeighborhoodDetail(id: groupId) { [weak self] group, error in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.pullRefreshControl.endRefreshing()
                 
-            }
-            self.neighborhood = group
-            self.splitMessages()
-            self.ui_tableview.reloadData()
-            self.isLoading = false
-            self.populateTopView()
-            self.neighborhood?.messages?.removeAll()
-            self.getMorePosts()
-            if hasToRefreshLists {
-                NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
+                if error != nil {
+                    self.goBack()
+                    return
+                }
+                
+                guard let group = group else {
+                    let alert = UIAlertController(title: "Attention",
+                                                  message: "Ce groupe a été supprimé",
+                                                  preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Fermer", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                // Mise à jour de la data source
+                self.neighborhood = group
+                // Met à jour le header et les vues associées
+                self.populateTopView()
+                // Réinitialise le tableau des messages et les tableaux auxiliaires
+                self.neighborhood?.messages = []
+                self.splitMessages()
+                
+                // Récupère les posts et recharge la table view une fois terminé
+                self.getMorePosts {
+                    // Ici, getMorePosts appelle déjà reloadData()
+                }
+                
+                if hasToRefreshLists {
+                    NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
+                }
             }
         }
     }
-    
-    func getMorePosts() {
+
+    func getMorePosts(completion: @escaping () -> Void = {}) {
         self.isLoading = true
-        NeighborhoodService.getNeighborhoodPostsPaging(id: neighborhoodId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
-            guard let post = post, error == nil else {
-                // Gérer l'erreur ici si nécessaire
-                self.isLoading = false
-                return
-            }
-
+        NeighborhoodService.getNeighborhoodPostsPaging(id: neighborhoodId, currentPage: currentPagingPage, per: itemsPerPage) { [weak self] posts, error in
             DispatchQueue.main.async {
-                // Mettre à jour les données
-                self.neighborhood?.messages?.append(contentsOf: post)
+                guard let self = self else { return }
+                
+                guard let posts = posts, error == nil else {
+                    self.isLoading = false
+                    completion()
+                    return
+                }
+                
+                // Ajoute les nouveaux posts à la data source
+                self.neighborhood?.messages?.append(contentsOf: posts)
                 self.splitMessages()
-
-                // Recharger la table view
                 self.ui_tableview.reloadData()
                 self.isLoading = false
+                completion()
             }
         }
     }
+
 
 
     
@@ -288,16 +302,10 @@ class NeighborhoodDetailViewController: UIViewController {
         
         for post in messages {
             messagesOld.append(post)
-//
-//            if post.isRead {
-//                messagesOld.append(post)
-//            }
-//            else {
-//                messagesNew.append(post)
-//            }
+
         }
         
-        hasNewAndOldSections = messagesOld.count > 0 && messagesNew.count > 0
+        hasNewAndOldSections = false
     }
     
     func addRemoveMember(isAdd:Bool) {
@@ -497,25 +505,12 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     func numberOfSections(in tableView: UITableView) -> Int {
         
         let minimum = self.neighborhood != nil ? 2 : 0
-        let added = hasNewAndOldSections ? 1 : 0
-
-
+        let added = 0
         return minimum + added
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 { return 2 }
-        if hasNewAndOldSections {
-            var count = 0
-            if section == 1 {
-                count = messagesNew.count + 2
-            }
-            else {
-                count = messagesOld.count + 1
-            }
-            return count
-        }
-        
         let messageCount:Int = (self.neighborhood?.messages?.count ?? 0) > 0 ? self.neighborhood!.messages!.count + countToAdd() : 1
         return  messageCount
     }
@@ -534,25 +529,30 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     
     func countToAdd() -> Int {
         //Is member + new posts
-        let countToAdd = (self.neighborhood?.isMember ?? false && self.messagesNew.count > 0) ? 2 : 1 //If not member or only old messages we dont' show new/old post header
+        let countToAdd =  1 //If not member or only old messages we dont' show new/old post header
         return countToAdd
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Vérifier que la propriété neighborhood est disponible
         guard let neighborhood = self.neighborhood else {
             return UITableViewCell()
         }
-
-        if indexPath.section >= numberOfSections(in: tableView) || indexPath.row >= tableView.numberOfRows(inSection: indexPath.section) {
-            resetView()
+        
+        // Vérifier que l'indexPath est dans les bornes déclarées par la data source
+        guard indexPath.section < numberOfSections(in: tableView),
+              indexPath.row < tableView.numberOfRows(inSection: indexPath.section) else {
             AnalyticsLoggerManager.logEvent(name: crash_from_incorrect_cell_number)
             return UITableViewCell()
         }
-
+        
+        // SECTION 0 : Header et éventuels événements
         if indexPath.section == 0 {
             if indexPath.row == 0 {
+                // Cellule de header
                 let isMember = neighborhood.isMember
-                let identifier = isMember ? NeighborhoodDetailTopMemberCell.identifier : NeighborhoodDetailTopCell.identifier
+                // Même identifiant utilisé pour les deux cas, mais on va tenter de caster la cellule selon le cas
+                let identifier = NeighborhoodDetailTopCell.identifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
                 if isMember, let memberCell = cell as? NeighborhoodDetailTopMemberCell {
                     memberCell.populateCell(neighborhood: neighborhood, isFollowingGroup: true, isFromOnlyDetail: false, delegate: self)
@@ -561,6 +561,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 }
                 return cell
             } else {
+                // Cellule pour afficher les événements futurs (si présents)
                 let events = neighborhood.futureEvents ?? []
                 let identifier = events.count > 0 ? NeighborhoodEventsTableviewCell.identifier : NeighborhoodEmptyEventCell.identifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
@@ -570,107 +571,97 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 return cell
             }
         }
-
-        if neighborhood.messages?.count ?? 0 == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEmptyPostCell.identifier, for: indexPath)
-            return cell
+        
+        // Si aucun message n'est disponible, retourner la cellule vide dédiée
+        if (neighborhood.messages?.count ?? 0) == 0 {
+            return tableView.dequeueReusableCell(withIdentifier: NeighborhoodEmptyPostCell.identifier, for: indexPath)
         }
-
+        
+        // SECTION 2 : Si l'on utilise la séparation "messages nouveaux / anciens"
         if hasNewAndOldSections && indexPath.section == 2 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
                 cell.populateCell(title: "neighborhood_post_group_section_old_posts_title".localized, isTopHeader: false)
                 return cell
             }
-            
             if indexPath.row - 1 < messagesOld.count {
                 let postmessage = messagesOld[indexPath.row - 1]
-                var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-                
-                if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
-                    identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
-                }
-                
-                if(postmessage.contentTranslations == nil){
-                    identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-                }
-                if postmessage.survey != nil {
-                    identifier = NeighborhoodPostSurveyCell.identifier
-                }
-                if postmessage.status == "deleted" {
-                    identifier = NeighborhoodPostDeletedCell.identifier
-                }
+                let identifier = cellIdentifier(for: postmessage)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-                cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.neighborhood?.isMember)
+                cell.populateCell(message: postmessage, delegate: self, currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: neighborhood.isMember)
                 return cell
-            } else {
-                return UITableViewCell()
             }
+            return UITableViewCell()
         }
-
+        
+        // Pour les autres sections, la première ligne est réservée à un header
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier, for: indexPath) as! EventListSectionCell
             cell.populateCell(title: "neighborhood_post_group_section_title".localized, isTopHeader: true)
             return cell
         }
-
+        
+        // On détermine le nombre de lignes "à ajouter" (header pour new/old, etc.)
         let countToAdd = countToAdd()
         if countToAdd == 2 && indexPath.row == 1 {
-            let titleSection = hasNewAndOldSections || self.messagesOld.count == 0 ? "neighborhood_post_group_section_new_posts_title".localized : "neighborhood_post_group_section_old_posts_title".localized
-
+            let titleSection = (hasNewAndOldSections || messagesOld.count == 0)
+                ? "neighborhood_post_group_section_new_posts_title".localized
+                : "neighborhood_post_group_section_old_posts_title".localized
             let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
-            cell.populateCell(title: titleSection , isTopHeader: false)
+            cell.populateCell(title: titleSection, isTopHeader: false)
             return cell
         }
-
+        
+        // Si nous utilisons la séparation en new/old messages, traiter la section des messages "nouveaux"
         if hasNewAndOldSections {
-            if indexPath.row - countToAdd < self.messagesNew.count {
-                let postmessage = self.messagesNew[indexPath.row - countToAdd]
-                var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-                
-                if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
-                    identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
-                }
-                if(postmessage.contentTranslations == nil){
-                    identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-                }
-                if postmessage.survey != nil {
-                    identifier = NeighborhoodPostSurveyCell.identifier
-                }
-                if postmessage.status == "deleted" {
-                    identifier = NeighborhoodPostDeletedCell.identifier
-                }
+            let newMessageIndex = indexPath.row - countToAdd
+            if newMessageIndex < self.messagesNew.count {
+                let postmessage = self.messagesNew[newMessageIndex]
+                let identifier = cellIdentifier(for: postmessage)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-                cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.neighborhood?.isMember)
+                cell.populateCell(message: postmessage, delegate: self, currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: neighborhood.isMember)
                 return cell
-            } else {
-                return UITableViewCell()
             }
+            return UITableViewCell()
         }
-
+        
+        // Sinon, traiter l'ensemble des messages disponibles
         if let messages = neighborhood.messages, indexPath.row - countToAdd < messages.count {
             let postmessage = messages[indexPath.row - countToAdd]
-            var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-           
-            if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
-                identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
-            }
-            if(postmessage.contentTranslations == nil){
-                identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-            }
-            if postmessage.survey != nil {
-                identifier = NeighborhoodPostSurveyCell.identifier
-            }
-            if postmessage.status == "deleted" {
-                identifier = NeighborhoodPostDeletedCell.identifier
-            }
+            let identifier = cellIdentifier(for: postmessage)
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.neighborhood?.isMember)
+            cell.populateCell(message: postmessage, delegate: self, currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: neighborhood.isMember)
             return cell
         }
-
+        
         return UITableViewCell()
     }
+
+    /// Helper pour déterminer l'identifiant de cellule en fonction du postmessage
+    func cellIdentifier(for postmessage: PostMessage) -> String {
+        var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        
+        if let translations = postmessage.contentTranslations,
+           translations.from_lang != LanguageManager.getCurrentDeviceLanguage(),
+           UserDefaults.currentUser?.sid != postmessage.user?.sid {
+            identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
+        }
+        
+        if postmessage.contentTranslations == nil {
+            identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        }
+        
+        if postmessage.survey != nil {
+            identifier = NeighborhoodPostSurveyCell.identifier
+        }
+        
+        if postmessage.status == "deleted" || postmessage.status == "offensive" || postmessage.status == "offensible" {
+            identifier = NeighborhoodPostDeletedCell.identifier
+        }
+        
+        return identifier
+    }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Vérifie si la cellule est HomeEventHorizontalCollectionCell
@@ -706,6 +697,11 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
 
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
+    func updateHeightCell() {
+        self.ui_tableview.beginUpdates()
+        self.ui_tableview.endUpdates()
+    }
+    
     func shareGroup() {
         var stringUrl = "https://"
         var title = ""
@@ -914,10 +910,9 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
         guard let userId = userId else {
             return
         }
-        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                _homeVC.currentUserId = "\(userId)"
-                
+        if let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull") as? UINavigationController {
+            if let _homeVC = navVC.topViewController as? ProfilFullViewController {
+                _homeVC.userIdToDisplay = "\(userId)"
                 self.navigationController?.present(navVC, animated: true)
             }
         }

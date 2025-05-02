@@ -9,6 +9,9 @@ class NotificationDemandViewController: UIViewController {
     @IBOutlet weak var ui_btn_accept_notif: UIButton!
     @IBOutlet weak var ui_btn_disable_notif: UIButton!
     
+    //Variable
+    var comeFromDiscussion = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,15 +97,24 @@ class NotificationDemandViewController: UIViewController {
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
-            self?.goHomeMain()
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                if UIApplication.shared.canOpenURL(settingsURL) {
+                    UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                }
+            }
         }))
         self.present(alert, animated: true, completion: nil)
     }
     
     func goHomeMain() {
         // Navigation vers la page principale de l'application
-        self.dismiss(animated: true) {
-            AppState.navigateToMainApp()
+        if(comeFromDiscussion){
+            comeFromDiscussion = false
+            self.dismiss(animated: true)
+        }else{
+            self.dismiss(animated: true) {
+                AppState.navigateToMainApp()
+            }
         }
     }
 }

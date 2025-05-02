@@ -1155,7 +1155,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_charte_5" = "Ich garantiere, dass meine Handlungen keine personenbezogenen Daten (Nachname, Telefonnummer, genaue Adresse usw.) enthalten, die eine genaue Identifizierung und Lokalisierung einer Person ermöglichen, sowie keine sensiblen Daten (medizinische, rechtliche usw.).";
 
 //Create action end
-"action_create_close_button" = "Beenden";
+"action_create_close_button" = "Fertigstellen";
+"action_create_close_button_demand" = "Meine Anfrage anzeigen";
+"action_create_close_button_contrib" = "Meine Beitrag anzeigen";
 "contribCreateEnd_title" = "Ihr Beitrag wurde erstellt!";
 "contribCreateEnd_subtitle" = "Herzlichen Glückwunsch, Sie haben gerade einen neuen Beitrag erstellt. Um es sichtbarer zu machen, sprechen Sie in Ihren Gruppen darüber!";
 "solicitationCreateEnd_title" = "Ihre Anfrage wurde erstellt!";
@@ -1418,7 +1420,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_action_type_social" = "Sozial";
 "home_v2_action_type_clothes" = "Kleidung";
 "home_v2_action_type_equipment" = "Ausrüstung";
-"home_v2_action_type_hygiène" = "Hygiene";
+"home_v2_action_type_hygiène" = "Produit d'hygiène";
 "home_v2_action_type_services" = "Dienstleistungen";
 "home_v2_action_type_other" = "Andere";
 
@@ -1670,3 +1672,50 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "contrib_hygiene_description" = "Beispiel: Ich verschenke mehrere Packungen Damenhygieneartikel.";
 "share_request_title" = "Möchten Sie Ihr %@ in Ihrer %@-Gruppe teilen?";
 "share_request_description" = "Sie haben die Möglichkeit, Ihr %@ in der Nachbarschaftsgruppe Ihrer Stadt zu teilen, um dessen Sichtbarkeit zu erhöhen";
+
+"conversation_notif_text" = "Deine Benachrichtigungen sind deaktiviert.\nAktiviere sie, um nichts zu verpassen";
+"conversation_notif_highlight" = "Aktiviere sie, um nichts zu verpassen";
+
+"enhanced_onboarding_time_disponibility_title" = "Meine Verfügbarkeit";
+"enhanced_onboarding_time_disponibility_description" = "Geben Sie Ihre Verfügbarkeit an, damit wir Ihnen passende Veranstaltungen vorschlagen können.";
+"enhanced_onboarding_time_disponibility_days_label" = "Meine Tage";
+"enhanced_onboarding_time_disponibility_day_monday" = "Montag";
+"enhanced_onboarding_time_disponibility_day_tuesday" = "Dienstag";
+"enhanced_onboarding_time_disponibility_day_wednesday" = "Mittwoch";
+"enhanced_onboarding_time_disponibility_day_thursday" = "Donnerstag";
+"enhanced_onboarding_time_disponibility_day_friday" = "Freitag";
+"enhanced_onboarding_time_disponibility_day_saturday" = "Samstag";
+"enhanced_onboarding_time_disponibility_day_sunday" = "Sonntag";
+"enhanced_onboarding_time_disponibility_time_slots_label" = "Meine Zeitfenster";
+"enhanced_onboarding_time_disponibility_time_morning" = "Morgen";
+"enhanced_onboarding_time_disponibility_time_afternoon" = "Nachmittag";
+"enhanced_onboarding_time_disponibility_time_evening" = "Abend";
+"no_data_available" = "Nicht angegeben";
+"unknown_language" = "Unbekannte Sprache";
+"logout_button" = "Abmelden";
+"delete_account_button" = "Mein Konto löschen";
+"preferences_section_title" = "Meine Präferenzen";
+"preferences_interest_title" = "Meine Interessen";
+"preferences_action_title" = "Mein Wunsch zu handeln";
+"preferences_availability_title" = "Meine Verfügbarkeit";
+"preferences_action_categories_title" = "Meine Kategorien der gegenseitigen Hilfe";
+"preferences_section_title_others" = "Ihre Präferenzen";
+"preferences_interest_title_others" = "Ihre Interessen";
+"preferences_action_title_others" = "Ihr Wunsch zu handeln";
+"preferences_availability_title_others" = "Ihre Verfügbarkeit";
+"preferences_action_categories_title_others" = "Ihre Kategorien der gegenseitigen Hilfe";
+"settings_section_title" = "Einstellungen";
+"settings_language_title" = "Sprache";
+"settings_notifications_title" = "Benachrichtigungen";
+"settings_help_title" = "Hilfe & Über";
+"settings_unblock_contacts_title" = "Kontakte entsperren";
+"settings_feedback_title" = "Eine Idee teilen";
+"settings_share_title" = "App teilen";
+"settings_password_title" = "Passwort ändern";
+"content_removed" = "Dieser Inhalt wurde entfernt, da er nicht unseren Richtlinien entspricht.";
+"settings_notifications_subtitle" = "Aktiviert: %@";
+"settings_notifications_subtitle_none" = "Keine Benachrichtigungen aktiviert";
+"settings_unblock_contacts_subtitle_none" = "Keine blockierten Kontakte";
+"settings_unblock_contacts_subtitle" = "%d blockierter Kontakt";
+"settings_unblock_contacts_subtitle_plural" = "%d blockierte Kontakte";
+"language_change_redirect" = "Sie werden zur Startseite weitergeleitet, um die Sprache der Anwendung zu ändern";

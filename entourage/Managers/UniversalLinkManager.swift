@@ -35,6 +35,8 @@ struct UniversalLinkManager {
                 iterator = 1
             }
             
+            
+            
             if pathComponents.contains("actions"){
                 if let url = components.url {
                     WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
@@ -56,7 +58,9 @@ struct UniversalLinkManager {
                 }
 
             }else if pathComponents.contains("outings") {
-                if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
+                if pathComponents.count > 3 + iterator, let _hashId = pathComponents[2+iterator] as? String {
+                    DeepLinkManager.showOutingUniversalLinkWithAgenda(id: _hashId)
+                } else if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
                     DeepLinkManager.showOutingUniversalLink(id: _hashId)
                 }else{
                     DeepLinkManager.showOutingListUniversalLink()
@@ -97,6 +101,17 @@ struct UniversalLinkManager {
                 }
             }else if pathComponents.contains("map") {
                 DeepLinkManager.showMap()
+            }else if pathComponents.contains("users") || pathComponents.contains("user") {
+                // Vérifie que le tableau contient bien l'ID de l'utilisateur après "users"
+                if pathComponents.count > 2 + iterator {
+                    let userSID = pathComponents[2 + iterator]
+                    // Appel d'une fonction dédiée pour afficher le profil utilisateur
+                    if let userIdInt = Int(userSID) {
+                        DeepLinkManager.showUser(userId: userIdInt)
+                    } else {
+                        // Gérer le cas où la conversion échoue
+                    }
+                }
             }
         }
     }

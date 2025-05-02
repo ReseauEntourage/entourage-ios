@@ -26,6 +26,10 @@ class MainUserActivitiesCell: UITableViewCell {
     @IBOutlet weak var ui_member_title: UILabel!
     @IBOutlet weak var ui_member_date: UILabel!
     
+    class var identifier: String {
+        return String(describing: self)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

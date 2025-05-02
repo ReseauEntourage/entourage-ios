@@ -25,6 +25,7 @@ class GuideFiltersViewController: UIViewController, ClosePopDelegate {
         if let _delegate = filterDelegate {
             filters = _delegate.getSolidarityFilter()
         }
+        configureOrangeButton(ui_bt_validate, withTitle: "validate".localized)
         
         self.title = "filters".uppercased()
         
@@ -41,6 +42,25 @@ class GuideFiltersViewController: UIViewController, ClosePopDelegate {
         
         checkFilters()
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     func checkFilters() {
         if filters.isDefaultFiltersNew() {

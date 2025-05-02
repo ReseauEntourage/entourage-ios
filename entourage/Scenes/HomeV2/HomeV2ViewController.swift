@@ -108,6 +108,13 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
         self.checkNotificationSettings()
+        if let _user = UserDefaults.currentUser{
+            UserService.getDetailsForUser(userId: String(_user.sid)) { user, error in
+                if error == nil {
+                    UserDefaults.currentUser = user
+                }
+            }
+        }
 
     }
     
@@ -374,7 +381,7 @@ class HomeV2ViewController: UIViewController {
     
     @objc func onAvatarClick() {
         AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
-        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
@@ -471,7 +478,7 @@ class HomeV2ViewController: UIViewController {
             self.ui_view_notif.backgroundColor = UIColor.white
         } else {
             self.ui_image_notif.image = UIImage(named: "ic_notif_on")
-            self.ui_view_notif.backgroundColor = UIColor.appOrange
+            self.ui_view_notif.backgroundColor = UIColor.appOrangeDark
         }
         prepareUINotifAndAvatar()
     }

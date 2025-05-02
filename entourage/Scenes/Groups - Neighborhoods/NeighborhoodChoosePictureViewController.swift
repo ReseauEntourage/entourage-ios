@@ -30,6 +30,7 @@ class NeighborhoodChoosePictureViewController: BasePopViewController {
         ui_bt_validate.setTitleColor(.white, for: .normal)
         ui_bt_validate.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
         ui_bt_validate.setTitle("neighborhood_choosephoto_validate".localized, for: .normal)
+        configureOrangeButton(ui_bt_validate, withTitle: "neighborhood_choosephoto_validate".localized)
         
         ui_view_error.populateView(backgroundColor: .white.withAlphaComponent(0.6))
         ui_view_error.changeTitleAndImage(title: "neighborhood_choosephoto_error".localized)
@@ -46,6 +47,25 @@ class NeighborhoodChoosePictureViewController: BasePopViewController {
         changeButtonSelection()
         AnalyticsLoggerManager.logEvent(name: View_NewGroup_Step3_PicGallery)
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     func setupFlowLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()

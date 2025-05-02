@@ -39,7 +39,8 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
         
         ui_bt_signup.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc(size: 15))
         ui_bt_login.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange(size: 15))
-        
+        configureWhiteButton(self.ui_bt_login, withTitle: "preOnboard_choice_login".localized)
+        configureOrangeButton(self.ui_bt_signup, withTitle: "preOnboard_choice_signup".localized)
         ui_bt_link.setAttributedTitle(Utils.formatStringUnderline(textString: "preOnboard_choice_weblink".localized, textColor: .appOrange, font: ApplicationTheme.getFontNunitoBold(size: 15)), for: .normal)
         
         if view.frame.height <= 568 {
@@ -77,6 +78,26 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.presentTransparentNavigationBar()
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+
     
     //MARK: - IBActions
     @IBAction func action_show_weblink(_ sender: Any) {

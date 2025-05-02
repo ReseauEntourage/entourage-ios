@@ -183,6 +183,7 @@ class MJAlertController: UIViewController {
         }
         
         initButton(button: ui_button_right, butttonType: buttonRightType)
+        configureWhiteButton(self.ui_button_left, withTitle: choice2 ?? "cancel".localized)
     }
     
     private func initButton(button:UIButton, butttonType:MJAlertButtonType) {
@@ -213,6 +214,17 @@ class MJAlertController: UIViewController {
     @IBAction func action_select_choice(_ sender: UIButton) {
         delegate?.selectedChoice(position: sender.tag)
         changeChoiceView(position: sender.tag)
+    }
+    
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     func changeChoiceView(position:Int) {

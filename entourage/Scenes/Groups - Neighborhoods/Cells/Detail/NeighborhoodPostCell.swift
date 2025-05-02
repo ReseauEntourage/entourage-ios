@@ -67,6 +67,32 @@ class NeighborhoodPostCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        let customMentionType = ActiveType.custom(pattern: "(@[A-Za-zÀ-ÖØ-öø-ÿ]+(?:\\s+[A-Za-zÀ-ÖØ-öø-ÿ]+)?)")
+            
+            // Activez les types URL et le type personnalisé pour les mentions
+            ui_comment.enabledTypes = [.url, customMentionType]
+            
+            ui_comment.customize { label in
+                label.URLColor = .blue
+                label.customColor[customMentionType] = .blue
+                label.URLSelectedColor = .blue
+                label.customSelectedColor[customMentionType] = .blue
+                
+                // Gérer le tap sur une URL
+                label.handleURLTap { url in
+                    // Par exemple, ouvrir dans Safari
+                    self.delegate?.showWebviewUrl(url: url)
+                }
+                
+                // Gérer le tap sur une mention
+                label.handleCustomTap(for: customMentionType) { [weak self] mention in
+                    print("Tap mention: \(mention)")
+                    self?.openUrlForMentionInComment(mention: mention)
+                }
+            }
+
+        ui_comment.URLColor = .blue
+
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
@@ -105,6 +131,31 @@ class NeighborhoodPostCell: UITableViewCell {
         }
     }
     
+    @objc func handleCustomCommentTap() {
+        guard let html = postMessage.contentHtml else { return }
+        if let url = extractFirstLink(from: html) {
+            // Appeler une méthode du delegate ou exécuter une action sur le lien extrait
+            WebLinkManager.openUrl(url: url,
+                                   openInApp: true,
+                                   presenterViewController: AppState.getTopViewController())
+        } else {
+            print("Aucun lien trouvé dans le contenu HTML")
+        }
+    }
+
+    /// Extrait le premier lien trouvé dans une chaîne HTML via une regex
+    func extractFirstLink(from html: String) -> URL? {
+        let pattern = "(https?://[^\\s\"'>]+)"
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else { return nil }
+        let range = NSRange(location: 0, length: html.utf16.count)
+        if let match = regex.firstMatch(in: html, options: [], range: range),
+           let matchRange = Range(match.range, in: html) {
+            let urlString = String(html[matchRange])
+            return URL(string: urlString)
+        }
+        return nil
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         DispatchQueue.main.async {
@@ -114,6 +165,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @objc func handleLittleTap(gesture: UITapGestureRecognizer) {
         AnalyticsLoggerManager.logEvent(name: Clic_Post_Like)
+        VibrationUtil.vibrate(style: .light)
         if gesture.state == .ended {
             // Vérifier si l'utilisateur a déjà réagi
             if postMessage.reactionId == 0 || postMessage.reactionId == nil, let firstReactionType = getStoredReactionTypes()?.first {
@@ -178,6 +230,61 @@ class NeighborhoodPostCell: UITableViewCell {
         layoutIfNeeded()
     }
     
+    private func stripHTMLTags(from string: String) -> String {
+        guard let data = string.data(using: .utf8) else { return string }
+        if let attributed = try? NSAttributedString(data: data,
+                                                    options: [.documentType: NSAttributedString.DocumentType.html,
+                                                              .characterEncoding: String.Encoding.utf8.rawValue],
+                                                    documentAttributes: nil) {
+            return attributed.string
+        }
+        return string
+    }
+
+    private func cleanedMention(_ mention: String) -> String {
+        // Supprime les espaces et ponctuations en fin (et début si nécessaire)
+        return mention.trimmingCharacters(in: .whitespacesAndNewlines)
+                      .trimmingCharacters(in: CharacterSet.punctuationCharacters)
+    }
+
+    private func extractUrlForMention(from html: String, mention: String) -> URL? {
+        // Expression régulière pour extraire l'URL et le contenu de la balise <a>
+        let pattern = "<a\\s+[^>]*href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>"
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
+            return nil
+        }
+        
+        let nsString = html as NSString
+        let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: nsString.length))
+        
+        for match in matches {
+            if match.numberOfRanges >= 3 {
+                let urlString = nsString.substring(with: match.range(at: 1))
+                let rawLinkText = nsString.substring(with: match.range(at: 2)).trimmingCharacters(in: .whitespacesAndNewlines)
+                let linkText = stripHTMLTags(from: rawLinkText)
+                
+                // Comparez les mentions nettoyées
+                if cleanedMention(linkText) == cleanedMention(mention) {
+                    return URL(string: urlString)
+                }
+            }
+        }
+        return nil
+    }
+
+
+    private func openUrlForMentionInComment(mention: String) {
+        guard let html = postMessage.contentHtml, !html.isEmpty else { return }
+        if let url = extractUrlForMention(from: html, mention: mention) {
+            WebLinkManager.openUrl(url: url,
+                                   openInApp: true,
+                                   presenterViewController: AppState.getTopViewController())
+        } else {
+            print("Aucun lien trouvé pour la mention: \(mention)")
+        }
+    }
+
+    
    
 
 
@@ -230,12 +337,12 @@ class NeighborhoodPostCell: UITableViewCell {
         
         // Mise à jour de ui_comment
         if isTranslated {
-            if let _translation = postMessage.contentTranslations{
-                ui_comment.text = _translation.translation
+            if let _translation = postMessage.contentTranslationsHtml{
+                updateCommentAttributedText()
             }
         } else {
-            if let _translation = postMessage.contentTranslations {
-                ui_comment.text = _translation.original
+            if let _translation = postMessage.contentTranslationsHtml {
+                updateCommentAttributedText()
             }
         }
     }
@@ -425,6 +532,25 @@ class NeighborhoodPostCell: UITableViewCell {
         updateReactionIcon()
         displayReactions(for: postMessage)
     }
+    
+    func updateCommentAttributedText() {
+        var htmlContent: String?
+        if let translations = postMessage.contentTranslationsHtml {
+            htmlContent = isTranslated ? translations.translation : translations.original
+        } else {
+            htmlContent = postMessage.contentHtml
+        }
+        
+        guard let htmlContent = htmlContent else {
+            ui_comment.text = postMessage.content
+            return
+        }
+        
+        // Utilise stripHTMLTags pour obtenir le texte brut complet
+        let plainText = stripHTMLTags(from: htmlContent)
+        ui_comment.text = plainText
+        ui_comment.setFontBody(size: 15)
+    }
 
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?, isMember:Bool?) {
@@ -432,6 +558,7 @@ class NeighborhoodPostCell: UITableViewCell {
         if(ui_view_translate != nil){
             ui_view_translate.addGestureRecognizer(tapGesture)
         }
+        print("content html " , message.contentHtml)
         if self.ui_label_sharing_header != nil {
             self.ui_label_sharing_header.text = "action_social_name".localized
             if let autoPost = message.autoPostFrom {
@@ -459,8 +586,8 @@ class NeighborhoodPostCell: UITableViewCell {
             // Ouvrez le lien dans Safari, par exemple
             delegate.showWebviewUrl(url: url)
         }
-        if postMessage.contentTranslations == nil {
-            ui_comment.text = postMessage.content
+        if postMessage.contentTranslationsHtml == nil {
+            updateCommentAttributedText()
         }
         
         if let _status = message.status {
@@ -468,7 +595,11 @@ class NeighborhoodPostCell: UITableViewCell {
                 ui_comment.text = "deleted_post_text".localized
                 ui_comment.textColor = UIColor.appGrey151
                 ui_btn_signal_post.isHidden = true
-            }else{
+            }else if _status == "offensive" || _status == "offensible"{
+                ui_comment.text = "content_removed".localized
+                ui_comment.textColor = UIColor.appGrey151
+                ui_btn_signal_post.isHidden = true
+            } else{
                 ui_comment.textColor = .black
                 ui_btn_signal_post.isHidden = false
                 toggleTranslation()
@@ -673,75 +804,6 @@ protocol ReactionsPopupViewDelegate: AnyObject {
     func getReactionTypeById(_ id: Int) -> ReactionType?
 }
 
-class ReactionsPopupView: UIView {
-
-    weak var delegate: ReactionsPopupViewDelegate?
-    
-    init(reactions: [ReactionType], frame: CGRect, delegate: ReactionsPopupViewDelegate?) {
-        
-        super.init(frame: frame)
-        self.delegate = delegate
-        self.backgroundColor = .white
-        self.layer.cornerRadius = 25
-        self.layer.masksToBounds = true
-        self.layer.borderColor = UIColor.appGrisReaction.cgColor
-        self.layer.borderWidth = 1
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 10
-        NotificationCenter.default.addObserver(self, selector: #selector(dismiss), name: Notification.Name("FermerReactionsPopup"), object: nil)
-
-
-        for reaction in reactions {
-            let imageView = UIImageView()
-            if let imageUrl = URL(string: reaction.imageUrl ?? "") {
-                imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
-            }
-            imageView.contentMode = .scaleAspectFill
-            imageView.isUserInteractionEnabled = true
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(reactionTapped))
-            imageView.addGestureRecognizer(tapGesture)
-            imageView.tag = reaction.id
-            stackView.addArrangedSubview(imageView)
-            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        }
-
-        self.addSubview(stackView)
-        NSLayoutConstraint.activate([
-                  stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),      // Padding en haut
-                  stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5), // Padding en bas
-                  stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10), // Padding à gauche
-                  stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10) // Padding à droite
-              ])
-    }
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    @objc func dismiss() {
-        self.removeFromSuperview()
-    }
-
-    @objc func reactionTapped(_ sender: UITapGestureRecognizer) {
-        guard let imageView = sender.view as? UIImageView else { return }
-        let reactionId = imageView.tag
-        if let reaction = delegate?.getReactionTypeById(reactionId) {
-            delegate?.reactForPost(reactionType: reaction)
-        }
-        dismiss()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-
-
 
 extension NeighborhoodPostCell: SurveyOptionViewDelegate {
     func didTapVote(surveyOptionView: SurveyOptionView, optionIndex: Int) {
@@ -793,6 +855,103 @@ extension NeighborhoodPostCell: SurveyOptionViewDelegate {
 
         // Appeler le délégué pour effectuer l'action de réseau avec les réponses mises à jour
         delegate?.postSurveyResponse(forPostId: postMessage.uid, withResponses: surveyResponse)
+    }
+}
+
+class ReactionsPopupView: UIView {
+
+    weak var delegate: ReactionsPopupViewDelegate?
+
+    init(reactions: [ReactionType], frame: CGRect, delegate: ReactionsPopupViewDelegate?) {
+        super.init(frame: frame)
+        self.delegate = delegate
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 25
+        self.layer.masksToBounds = true
+        self.layer.borderColor = UIColor.appGrisReaction.cgColor
+        self.layer.borderWidth = 1
+
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 10
+        NotificationCenter.default.addObserver(self, selector: #selector(dismiss), name: Notification.Name("FermerReactionsPopup"), object: nil)
+
+        for (index, reaction) in reactions.enumerated() {
+            let imageView = UIImageView()
+            if let imageUrl = URL(string: reaction.imageUrl ?? "") {
+                imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
+            }
+            imageView.contentMode = .scaleAspectFill
+            imageView.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(reactionTapped))
+            imageView.addGestureRecognizer(tapGesture)
+            imageView.tag = reaction.id
+            imageView.alpha = 0 // Début invisible
+            stackView.addArrangedSubview(imageView)
+
+            imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+            // Ajouter l'animation d'apparition avec délai
+            UIView.animate(
+                withDuration: 0.6,
+                delay: 0.1 * Double(index), // Légers décalages pour chaque icône
+                usingSpringWithDamping: 0.5,
+                initialSpringVelocity: 0.7,
+                options: .curveEaseOut,
+                animations: {
+                    imageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2) // Agrandir légèrement
+                    imageView.alpha = 1 // Rendre visible
+                }, completion: { _ in
+                    UIView.animate(withDuration: 0.2) {
+                        imageView.transform = .identity // Retour à l'état normal
+                    }
+                })
+        }
+
+        self.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+        ])
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func dismiss() {
+        self.removeFromSuperview()
+    }
+
+    @objc func reactionTapped(_ sender: UITapGestureRecognizer) {
+        guard let imageView = sender.view as? UIImageView else { return }
+
+        // Animation de grossissement (effet bulle)
+        UIView.animate(withDuration: 0.2,
+                       animations: {
+                           imageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2) // Grossir légèrement
+                       }, completion: { _ in
+                           UIView.animate(withDuration: 0.2, animations: {
+                               imageView.transform = .identity // Revenir à la taille normale
+                           }, completion: { _ in
+                               // Exécuter la logique après l'animation
+                               let reactionId = imageView.tag
+                               if let reaction = self.delegate?.getReactionTypeById(reactionId) {
+                                   self.delegate?.reactForPost(reactionType: reaction)
+                               }
+                               self.dismiss()
+                           })
+                       })
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

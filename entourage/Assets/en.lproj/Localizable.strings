@@ -1142,6 +1142,8 @@
 
 //"//Create action end" = "nan";
 "action_create_close_button" = "Finish";
+"action_create_close_button_demand" = "View my request";
+"action_create_close_button_contrib" = "View my contribution";
 "contribCreateEnd_title" = "Your contribution has been created!";
 "contribCreateEnd_subtitle" = "Congratulations, you have just created a new contribution. To make it more visible, talk about it in your groups!";
 "solicitationCreateEnd_title" = "Your request has been created!";
@@ -1403,7 +1405,7 @@
 "home_v2_action_type_social" = "Social";
 "home_v2_action_type_clothes" = "Clothes";
 "home_v2_action_type_equipment" = "Equipment";
-"home_v2_action_type_hygiène" = "Hygiene";
+"home_v2_action_type_hygiène" = "Produit d'hygiene";
 "home_v2_action_type_services" = "Services";
 "home_v2_action_type_other" = "Others";
 
@@ -1714,3 +1716,53 @@
 "enhanced_onboarding_select_availability" = "Select your available days and times";
 "enhanced_onboarding_my_availability" = "My availability";
 
+"conversation_notif_text" = "Your notifications are disabled.\nEnable them to stay updated";
+"conversation_notif_highlight" = "Enable them to stay updated";
+
+// Profile full
+"enhanced_onboarding_time_disponibility_title" = "My availability";
+"enhanced_onboarding_time_disponibility_description" = "Specify your availability so we can suggest suitable events.";
+"enhanced_onboarding_time_disponibility_days_label" = "My days";
+"enhanced_onboarding_time_disponibility_day_monday" = "Monday";
+"enhanced_onboarding_time_disponibility_day_tuesday" = "Tuesday";
+"enhanced_onboarding_time_disponibility_day_wednesday" = "Wednesday";
+"enhanced_onboarding_time_disponibility_day_thursday" = "Thursday";
+"enhanced_onboarding_time_disponibility_day_friday" = "Friday";
+"enhanced_onboarding_time_disponibility_day_saturday" = "Saturday";
+"enhanced_onboarding_time_disponibility_day_sunday" = "Sunday";
+"enhanced_onboarding_time_disponibility_time_slots_label" = "My time slots";
+"enhanced_onboarding_time_disponibility_time_morning" = "Morning";
+"enhanced_onboarding_time_disponibility_time_afternoon" = "Afternoon";
+"enhanced_onboarding_time_disponibility_time_evening" = "Evening";
+"no_data_available" = "Not provided";
+"unknown_language" = "Unknown language";
+"logout_button" = "Log out";
+"delete_account_button" = "Delete my account";
+"preferences_section_title" = "My preferences";
+"preferences_interest_title" = "My interests";
+"preferences_action_title" = "My goals to take action";
+"preferences_availability_title" = "My availability";
+"preferences_action_categories_title" = "My support categories";
+"preferences_section_title_others" = "Their preferences";
+"preferences_interest_title_others" = "Their interests";
+"preferences_action_title_others" = "Their goals to take action";
+"preferences_availability_title_others" = "Their availability";
+"preferences_action_categories_title_others" = "Their support categories";
+"settings_section_title" = "Settings";
+"settings_language_title" = "Language";
+"settings_notifications_title" = "Notifications";
+"settings_help_title" = "Help and About";
+"settings_unblock_contacts_title" = "Unblock contacts";
+"settings_feedback_title" = "Share an idea";
+"settings_share_title" = "Share the app";
+"settings_password_title" = "Change password";
+
+
+"content_removed" = "This content has been removed because it does not comply with our policy.";
+
+"settings_notifications_subtitle" = "Enabled: %@";
+"settings_notifications_subtitle_none" = "No notifications enabled";
+"settings_unblock_contacts_subtitle_none" = "No contacts blocked";
+"settings_unblock_contacts_subtitle" = "%d contact blocked";
+"settings_unblock_contacts_subtitle_plural" = "%d contacts blocked";
+"language_change_redirect" = "You will be redirected to the home page to change the application language";

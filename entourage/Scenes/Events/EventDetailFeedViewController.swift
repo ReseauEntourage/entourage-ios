@@ -34,38 +34,44 @@ class EventDetailFeedViewController: UIViewController {
     @IBOutlet weak var ui_scrollview: UIScrollView!
     @IBOutlet weak var ui_iv_preview: UIImageView!
     
-    //To show/hide button join on scroll
+    // Pour afficher/cacher le bouton « Participer » lors du scroll
     @IBOutlet weak var ui_title_bt_join: UILabel!
     @IBOutlet weak var ui_bt_floating_join: UIView!
-    let addHeight:CGFloat = ApplicationTheme.iPhoneHasNotch() ? 0 : 20
-    var minTopScrollHeight:CGFloat = 120
     
-    //Use to strech header
-    var maxViewHeight:CGFloat = 150
-    var minViewHeight:CGFloat = 80//70 + 19
-    var maxImageHeight:CGFloat = 73
-    var minImageHeight:CGFloat = 0
-    var viewNormalHeight:CGFloat = 0
+    let addHeight: CGFloat = ApplicationTheme.iPhoneHasNotch() ? 0 : 20
+    var minTopScrollHeight: CGFloat = 120
+    
+    // Utilisé pour étirer l'en-tête
+    var maxViewHeight: CGFloat = 150
+    var minViewHeight: CGFloat = 80 // 70 + 19
+    var maxImageHeight: CGFloat = 73
+    var minImageHeight: CGFloat = 0
+    var viewNormalHeight: CGFloat = 0
     
     var messagesNew = [PostMessage]()
     var messagesOld = [PostMessage]()
-    var eventId:Int = 0
-    var hashedEventId:String = ""
-    var event:Event? = nil
+    var eventId: Int = 0
+    var hashedEventId: String = ""
+    var event: Event? = nil
     var isUserAmbassador = false
     var hasNewAndOldSections = false
-    var currentPagingPage = 1 //Default WS
-    let itemsPerPage = 25 //Default WS
+    var currentPagingPage = 1
+    let itemsPerPage = 25
     let nbOfItemsBeforePagingReload = 5
     var isLoading = false
+    
+    /// Sert uniquement à votre condition :
+    /// `if (event.isMember) && !isAfterCreation => LightCell`
     var isAfterCreation = false
+    
     var isShowCreatePost = false
     let DELETED_POST_CELL_SIZE = 165.0
     let TEXT_POST_CELL_SIZE = 220.0
     let IMAGE_POST_CELL_SIZE = 430.0
+    var shouldOpenNativeAgenda = false
     
     var pullRefreshControl = UIRefreshControl()
-    var users:[UserLightNeighborhood] = [UserLightNeighborhood]()
+    var users: [UserLightNeighborhood] = [UserLightNeighborhood]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,19 +79,28 @@ class EventDetailFeedViewController: UIViewController {
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         
-        minTopScrollHeight = minTopScrollHeight + addHeight
+        minTopScrollHeight += addHeight
         
         if !ApplicationTheme.iPhoneHasNotch() {
-            maxViewHeight = maxViewHeight - 20
+            maxViewHeight -= 20
         }
         setupFloatingButton()
-
         
-        self.addShadowAndRadius(customView: ui_view_button_settings)
-        self.addShadowAndRadius(customView: ui_view_button_back)
+        addShadowAndRadius(customView: ui_view_button_settings)
+        addShadowAndRadius(customView: ui_view_button_back)
         
         ui_top_view.backgroundColor = .clear
-        ui_top_view.populateCustom(title: nil, titleFont: nil, titleColor: nil, imageName: "ic_return_mini", backgroundColor: .clear, delegate: self, showSeparator: false, cornerRadius: nil, isClose: false, marginLeftButton: nil)
+        ui_top_view.populateCustom(title: nil,
+                                   titleFont: nil,
+                                   titleColor: nil,
+                                   imageName: "ic_return_mini",
+                                   backgroundColor: .clear,
+                                   delegate: self,
+                                   showSeparator: false,
+                                   cornerRadius: nil,
+                                   isClose: false,
+                                   marginLeftButton: nil)
+        
         ui_view_top_bg.alpha = 1
         ui_iv_event.alpha = 0
         registerCellsNib()
@@ -99,56 +114,68 @@ class EventDetailFeedViewController: UIViewController {
         
         ui_view_canceled.isHidden = true
         
-        self.ui_view_full_image.isHidden = true
-        self.ui_scrollview.delegate = self
-        self.ui_scrollview.maximumZoomScale = 10
-        AnalyticsLoggerManager.logEvent(name: Event_detail_main)
+        ui_view_full_image.isHidden = true
+        ui_scrollview.delegate = self
+        ui_scrollview.maximumZoomScale = 10
         
+        AnalyticsLoggerManager.logEvent(name: Event_detail_main)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         if isShowCreatePost {
             showCreatePost()
             isShowCreatePost = false
         }
-        //Notif for updating event infos
-        //NotificationCenter.default.addObserver(self, selector: #selector(updateEvent), name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        
+        // Récupérer quelques infos depuis le serveur
         getEventMembers()
         getEventDetail()
-
     }
     
-    func getEventMembers(){
+    func getEventMembers() {
         EventService.getEventUsers(eventId: self.eventId) { users, error in
-            if let _users = users{
+            if let _users = users {
                 self.users = _users
             }
         }
     }
     
     func registerCellsNib() {
-        ui_tableview.register(UINib(nibName: NeighborhoodPostTextCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTextCell.identifier)
-        ui_tableview.register(UINib(nibName: NeighborhoodPostImageCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageCell.identifier)
-        ui_tableview.register(UINib(nibName: NeighborhoodPostDeletedCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostDeletedCell.identifier)
-        ui_tableview.register(UINib(nibName: EventDetailTopFullCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopFullCell.identifier)
-        ui_tableview.register(UINib(nibName: EventDetailTopLightCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopLightCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostTextCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: NeighborhoodPostTextCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostImageCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: NeighborhoodPostImageCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostDeletedCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: NeighborhoodPostDeletedCell.identifier)
+        ui_tableview.register(UINib(nibName: EventDetailTopFullCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: EventDetailTopFullCell.identifier)
+        ui_tableview.register(UINib(nibName: EventDetailTopLightCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: EventDetailTopLightCell.identifier)
         
-        ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
-        ui_tableview.register(UINib(nibName: NeighborhoodPostTranslationCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTranslationCell.identifier)
-        ui_tableview.register(UINib(nibName: NeighborhoodPostImageTranslationCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageTranslationCell.identifier)
-        ui_tableview.register(UINib(nibName: NeighborhoodPostSurveyCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostSurveyCell.identifier)
-        ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
-        ui_tableview.register(UINib(nibName: EventListSectionCell.neighborhoodHeaderIdentifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostTranslationCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: NeighborhoodPostTranslationCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostImageTranslationCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: NeighborhoodPostImageTranslationCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostSurveyCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: NeighborhoodPostSurveyCell.identifier)
+        ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil),
+                              forCellReuseIdentifier: EventListSectionCell.identifier)
+        ui_tableview.register(UINib(nibName: EventListSectionCell.neighborhoodHeaderIdentifier, bundle: nil),
+                              forCellReuseIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier)
     }
     
     func setupFloatingButton() {
-
-        let floatItem2 = createButtonItem(title: "neighborhood_menu_post_survey".localized, iconName: "ic_survey_creation") { item in
+        let floatItem2 = createButtonItem(title: "neighborhood_menu_post_survey".localized,
+                                          iconName: "ic_survey_creation") { item in
             self.showCreateSurvey()
         }
         
-        let floatItem3 = createButtonItem(title: "neighborhood_menu_post_post".localized, iconName: "ic_menu_button_create_post") { item in
+        let floatItem3 = createButtonItem(title: "neighborhood_menu_post_post".localized,
+                                          iconName: "ic_menu_button_create_post") { item in
             AnalyticsLoggerManager.logEvent(name: Event_detail_action_post)
             self.showCreatePost()
         }
@@ -163,13 +190,12 @@ class EventDetailFeedViewController: UIViewController {
         ui_floaty_bouton.fabDelegate = self
     }
     
-    
-    private func addShadowAndRadius(customView:UIView) {
+    private func addShadowAndRadius(customView: UIView) {
         customView.clipsToBounds = false
         customView.layer.cornerRadius = customView.frame.height / 2
         customView.layer.shadowColor = UIColor.appOrangeLight.withAlphaComponent(0.5).cgColor
         customView.layer.shadowOpacity = 1
-        customView.layer.shadowOffset = CGSize.init(width: 4, height: 4)
+        customView.layer.shadowOffset = CGSize(width: 4, height: 4)
         customView.layer.shadowRadius = 4
     }
     
@@ -180,8 +206,8 @@ class EventDetailFeedViewController: UIViewController {
         viewNormalHeight = ui_view_height_constraint.constant
         
         let topPadding = ApplicationTheme.getTopIPhonePadding()
-        let inset = UIEdgeInsets(top: viewNormalHeight - topPadding,left: 0,bottom: 0,right: 0)
-        minViewHeight = minViewHeight + topPadding - 20
+        let inset = UIEdgeInsets(top: viewNormalHeight - topPadding, left: 0, bottom: 0, right: 0)
+        minViewHeight += topPadding - 20
         
         ui_tableview.contentInset = inset
         ui_tableview.scrollIndicatorInsets = inset
@@ -205,40 +231,46 @@ class EventDetailFeedViewController: UIViewController {
         ui_lbl_canceled.text = "event_canceled".localized.uppercased()
     }
     
-    func populateTopView(isAfterLoading:Bool) {
+    func populateTopView(isAfterLoading: Bool) {
         let imageName = "placeholder_photo_group"
-        if let _url = self.event?.metadata?.landscape_url, let url = URL(string: _url) {
-            self.ui_iv_event.sd_setImage(with: url, placeholderImage: nil, completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
-                if error != nil {
-                    self?.ui_iv_event.image = UIImage.init(named: imageName)
-                }
-            })
+        if let _url = self.event?.metadata?.landscape_url,
+           let url = URL(string: _url) {
             
-            self.ui_iv_event_mini.sd_setImage(with: url, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+            self.ui_iv_event.sd_setImage(with: url, placeholderImage: nil) { [weak self] image, error, _, _ in
                 if error != nil {
-                    self?.ui_iv_event_mini.image = UIImage.init(named: imageName)
+                    self?.ui_iv_event.image = UIImage(named: imageName)
                 }
-            })
-            self.ui_iv_event2.sd_setImage(with: url, placeholderImage: nil, completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+            }
+            
+            self.ui_iv_event_mini.sd_setImage(with: url,
+                                              placeholderImage: nil,
+                                              options: .progressiveLoad) { [weak self] image, error, _, _ in
                 if error != nil {
-                    self?.ui_iv_event2.image = UIImage.init(named: imageName)
+                    self?.ui_iv_event_mini.image = UIImage(named: imageName)
                 }
-            })
+            }
+            
+            self.ui_iv_event2.sd_setImage(with: url, placeholderImage: nil) { [weak self] image, error, _, _ in
+                if error != nil {
+                    self?.ui_iv_event2.image = UIImage(named: imageName)
+                }
+            }
         }
         else if isAfterLoading {
-            self.ui_iv_event.image = UIImage.init(named: imageName)
-            self.ui_iv_event_mini.image = UIImage.init(named: imageName)
-            self.ui_iv_event2.image = UIImage.init(named: imageName)
+            self.ui_iv_event.image = UIImage(named: imageName)
+            self.ui_iv_event_mini.image = UIImage(named: imageName)
+            self.ui_iv_event2.image = UIImage(named: imageName)
         }
         
         self.ui_label_title_event.text = self.event?.title
-        self.ui_floaty_bouton?.isHidden = self.event?.isMember ?? false ? false : true
+        // On affiche le bouton + seulement si l’event nous considère comme membre
+        self.ui_floaty_bouton?.isHidden = !(self.event?.isMember ?? false)
         
+        // Le bouton "participer" du bas est caché de base
         self.ui_bt_floating_join.isHidden = true
     }
     
-    
-    // Actions
+    // MARK: - Actions
     
     @objc private func refreshEvent() {
         updateEvent()
@@ -248,56 +280,49 @@ class EventDetailFeedViewController: UIViewController {
         getEventDetail(hasToRefreshLists: true)
     }
     
+    func sendLeaveGroup() {
+        IHProgressHUD.show()
+        EventService.leaveEvent(eventId: eventId, userId: UserDefaults.currentUser!.sid) { event, error in
+            IHProgressHUD.dismiss()
+            // On ne change plus rien immédiatement dans l’UI,
+            // car on a déjà forcé le mode "Participer" localement.
+            self.getEventDetail(hasToRefreshLists: true)
+        }
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    func getEventusers() {
-        guard let event = event else {
-            return
-        }
-        
-        EventService.getEventUsers(eventId: event.uid, completion: { users, error in
-            if let _ = error {
-                self.goBack()
-            }
-            if let _users = users {
-                for _user in _users {
-                    if _user.sid == event.author?.uid{
-                        if let _roles = _user.communityRoles{
-                            if _roles.contains("Équipe Entourage") || _roles.contains("Ambassadeur"){
-                                self.isUserAmbassador = true
-                            }
-                        }
-                    }
-                }
-            }
-            self.ui_tableview.reloadData()
-        })
-    }
     
-    //MARK: -Network
-    @objc func getEventDetail(hasToRefreshLists:Bool = false) {
+    // MARK: - Récupération Event
+    
+    @objc func getEventDetail(hasToRefreshLists: Bool = false) {
         self.currentPagingPage = 1
         self.isLoading = true
+        
         var _eventId = ""
         if eventId != 0 {
             _eventId = String(eventId)
-        }else if hashedEventId != "" {
+        } else if !hashedEventId.isEmpty {
             _eventId = hashedEventId
         }
+        
         EventService.getEventWithId(_eventId) { event, error in
             self.pullRefreshControl.endRefreshing()
             if let _ = error {
                 self.goBack()
             }
             if event == nil {
-                    let alertController = UIAlertController(title: "Attention", message: "Cet événement a été supprimé", preferredStyle: .alert)
-                    let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
-                    alertController.addAction(closeAction)
-                    self.present(alertController, animated: true, completion: nil)
-                     
+                let alertController = UIAlertController(title: "Attention",
+                                                        message: "Cet événement a été supprimé",
+                                                        preferredStyle: .alert)
+                let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
+                alertController.addAction(closeAction)
+                self.present(alertController, animated: true, completion: nil)
             }
+            
             self.event = event
+            self.eventId = event?.uid ?? 0
             self.event?.posts?.removeAll()
             self.splitMessages()
             self.getMorePosts()
@@ -312,59 +337,79 @@ class EventDetailFeedViewController: UIViewController {
             
             self.populateTopView(isAfterLoading: true)
             
+            if self.shouldOpenNativeAgenda {
+                self.shouldOpenNativeAgenda = false
+                self.showAddCalendar()
+            }
             if hasToRefreshLists {
-                NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventsUpdate), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventsUpdate),
+                                                object: nil)
             }
             self.ui_tableview.reloadData()
         }
         getEventusers()
     }
     
+    func getEventusers() {
+        guard let event = event else { return }
+        EventService.getEventUsers(eventId: event.uid) { users, error in
+            if let _ = error {
+                self.goBack()
+            }
+            if let _users = users {
+                for _user in _users {
+                    if _user.sid == event.author?.uid {
+                        if let _roles = _user.communityRoles {
+                            if _roles.contains("Équipe Entourage") ||
+                               _roles.contains("Ambassadeur") {
+                                self.isUserAmbassador = true
+                            }
+                        }
+                    }
+                }
+            }
+            self.ui_tableview.reloadData()
+        }
+    }
+    
     func getMorePosts() {
         self.isLoading = true
-        EventService.getEventPostsPaging(id: eventId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
+        EventService.getEventPostsPaging(id: eventId,
+                                         currentPage: currentPagingPage,
+                                         per: itemsPerPage) { post, error in
             guard let post = post, error == nil else {
-                // Gérer l'erreur ici si nécessaire
                 self.isLoading = false
                 return
             }
-
             DispatchQueue.main.async {
-                // Mettre à jour les données
                 self.event?.posts?.append(contentsOf: post)
                 self.splitMessages()
-
-                // Mise à jour de la vue table en fonction des scénarios
+                
                 self.ui_tableview.performBatchUpdates({
                     let currentSections = self.ui_tableview.numberOfSections
-                    // Scénario 1: Aucun message
                     if self.event?.posts?.isEmpty ?? true {
-                        
+                        // Aucune publication
                     } else {
-                        // Scénario 2: Messages anciens et/ou nouveaux
                         if self.hasNewAndOldSections {
                             if currentSections == 1 {
-                                // Ajouter une section pour les nouveaux messages
                                 self.ui_tableview.insertSections(IndexSet(integer: 1), with: .fade)
                             }
-                            // Recharger la section des messages anciens
                             self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .fade)
-                        } else if currentSections == 3 {
-                            // Revenir à une seule section si nécessaire
+                        }
+                        else if currentSections == 3 {
                             self.ui_tableview.deleteSections(IndexSet(integer: 2), with: .fade)
                             self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
-                        } else {
-                            // Recharger la section existante
+                        }
+                        else {
                             self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
                         }
                     }
                 }, completion: nil)
-
+                
                 self.isLoading = false
             }
         }
     }
-
     
     func splitMessages() {
         guard let messages = event?.posts else {
@@ -381,123 +426,65 @@ class EventDetailFeedViewController: UIViewController {
                 messagesNew.append(post)
             }
         }
-
-        hasNewAndOldSections = messagesOld.count > 0 && messagesNew.count > 0
+        hasNewAndOldSections = !messagesOld.isEmpty && !messagesNew.isEmpty
     }
     
-    func addRemoveMember(isAdd:Bool) {
-        self.ui_tableview.reloadData()
+    // MARK: - Joindre / Quitter (uniquement action manuelle)
+    
+    /// Sans dépendre du retour du serveur : on modifie localement `event?.isMember`
+    /// et on recharge la tableView pour mettre à jour la cell du haut.
+    func addRemoveMember(isAdd: Bool) {
         if isAdd {
+            // On veut participer → on force localement la logique
+            event?.isMember = true
+            isAfterCreation = false
+            ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
+            
             IHProgressHUD.show()
-            if let _isamba = UserDefaults.currentUser?.isAmbassador(){
-                if _isamba{
-                    if let popupVC = storyboard?.instantiateViewController(withIdentifier: "ambassadorAskNotificationPopup") as? AmbassadorAskNotificationPopup {
-                        popupVC.delegate = self
-                        popupVC.modalPresentationStyle = .overFullScreen // Ajuster le style de présentation si nécessaire
-                        popupVC.modalTransitionStyle = .crossDissolve // Ajuster la transition si nécessaire
-                        present(popupVC, animated: true, completion: nil)
-                    }
-                }else{
-                    EventService.joinEvent(eventId: eventId) { user, error in
-                        IHProgressHUD.dismiss()
-                        if let user = user {
-                            let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
-                            self.event?.members?.append(member)
-                            let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! + 1 : 1
-                            
-                            self.isAfterCreation = true
-                            self.event?.membersCount = count
-                            self.getEventDetail(hasToRefreshLists:true)
-                            
-                            DispatchQueue.main.async {
-                                if self.event?.metadata?.hasPlaceLimit ?? false {
-                                    self.showPopInfoPlaces()
-                                }
-                                else {
-                                    self.addToCalendar()
-                                }
-                            }
-                        }
-                    }
-                }
-            }else{
-                EventService.joinEvent(eventId: eventId) { user, error in
-                    IHProgressHUD.dismiss()
-                    if let user = user {
-                        let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
-                        self.event?.members?.append(member)
-                        let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! + 1 : 1
-                        
-                        self.isAfterCreation = true
-                        self.event?.membersCount = count
-                        self.getEventDetail(hasToRefreshLists:true)
-                        
-                        DispatchQueue.main.async {
-                            if self.event?.metadata?.hasPlaceLimit ?? false {
-                                self.showPopInfoPlaces()
-                            }
-                            else {
-                                self.addToCalendar()
-                            }
-                        }
-                    }
-                }
+            EventService.joinEvent(eventId: eventId) { user, error in
+                IHProgressHUD.dismiss()
+                // Pas de MAJ UI supplémentaire
             }
-
         }
         else {
-            showPopLeave()
-        }
-    }
-    
-    func showPopLeave() {
-        let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
-        
-        customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
-        
-        customAlert.alertTagName = .None
-        customAlert.delegate = self
-        customAlert.show()
-    }
-    
-    func sendLeaveGroup() {
-        IHProgressHUD.show()
-        EventService.leaveEvent(eventId: eventId, userId: UserDefaults.currentUser!.sid) { event, error in
-            IHProgressHUD.dismiss()
-            if error == nil {
-                self.event?.members?.removeAll(where: {$0.uid == UserDefaults.currentUser!.sid})
-                let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! - 1 : 0
-                
-                self.event?.membersCount = count
-                
-                self.ui_tableview.reloadData()
-                self.getEventDetail(hasToRefreshLists:true)
+            // On quitte l’événement
+            event?.isMember = false
+            ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
+            
+            IHProgressHUD.show()
+            EventService.leaveEvent(eventId: eventId,
+                                    userId: UserDefaults.currentUser!.sid) { event, error in
+                IHProgressHUD.dismiss()
             }
         }
     }
     
+    /// Appelée lors du clic sur le bouton “Participer/Quitter”
     func joinLeaveEvent() {
         let currentUserId = UserDefaults.currentUser?.sid
-        if event?.author?.uid == currentUserId { return }
-        
-        if let _ = event?.members?.first(where: {$0.uid == currentUserId}) {
-            addRemoveMember(isAdd: false)
+        if event?.author?.uid == currentUserId {
+            return
         }
-        else {
+        
+        if let _ = event?.members?.first(where: { $0.uid == currentUserId }) {
+            addRemoveMember(isAdd: false)
+        } else {
             addRemoveMember(isAdd: true)
         }
     }
     
-    //MARK: - IBAction -
+    // MARK: - IBAction
+    
     @IBAction func action_show_params(_ sender: Any) {
         if let _event = event {
-            if let navvc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "params_eventNav") as? UINavigationController, let vc = navvc.topViewController as? EventParamsViewController {
+            if let navvc = UIStoryboard(name: StoryboardName.event, bundle: nil)
+                .instantiateViewController(withIdentifier: "params_eventNav") as? UINavigationController,
+               let vc = navvc.topViewController as? EventParamsViewController {
                 AnalyticsLoggerManager.logEvent(name: Event_detail_action_param)
                 vc.event = _event
+                vc.delegate = self
                 vc.modalPresentationStyle = .fullScreen
-                self.present(navvc, animated: true, completion: nil)
+                present(navvc, animated: true, completion: nil)
                 return
             }
         }
@@ -508,45 +495,57 @@ class EventDetailFeedViewController: UIViewController {
         joinLeaveEvent()
     }
     
-
     @IBAction func action_tap_close_full_image(_ sender: Any) {
         ui_view_full_image.isHidden = true
     }
     
-    //MARK: - Nav VCs-
+    // MARK: - Autres
+    
     func showCreatePost() {
-        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController  {
+        let sb = UIStoryboard(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController {
             vc.eventId = self.eventId
             vc.isNeighborhood = false
             self.navigationController?.present(vc, animated: true)
         }
     }
+    
     func showCreateSurvey() {
-        let sb = UIStoryboard.init(name: StoryboardName.survey, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "create_survey") as? CreateSurveyViewController  {
+        let sb = UIStoryboard(name: StoryboardName.survey, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "create_survey") as? CreateSurveyViewController {
             vc.eventId = self.eventId
             vc.delegate = self
             vc.modalPresentationStyle = .fullScreen
             self.navigationController?.present(vc, animated: true)
         }
     }
+    
     func showPopInfoPlaces() {
         let customAlert = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized,
+                                             titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
+                                             bgColor: .appOrange,
+                                             cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "event_add_contact_places_title".localized, message: "event_add_contact_places_description".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        customAlert.configureAlert(alertTitle: "event_add_contact_places_title".localized,
+                                   message: "event_add_contact_places_description".localized,
+                                   buttonrightType: buttonCancel,
+                                   buttonLeftType: nil,
+                                   titleStyle: ApplicationTheme.getFontCourantBoldOrange(),
+                                   messageStyle: ApplicationTheme.getFontCourantRegularNoir(),
+                                   mainviewBGColor: .white,
+                                   mainviewRadius: 35)
         
         customAlert.alertTagName = .Suppress
         customAlert.delegate = self
         customAlert.show()
-        
     }
     
-    //MARK: - Agenda -
+    // MARK: - Agenda
+    
     func addToCalendar() {
         let store = EKEventStore()
-        store.requestAccess(to: .event, completion: {(granted,error) in
+        store.requestAccess(to: .event) { granted, error in
             if granted && error == nil {
                 self.showPopCalendar()
             }
@@ -554,26 +553,53 @@ class EventDetailFeedViewController: UIViewController {
                 DispatchQueue.main.async {
                     let alertVC = MJAlertController()
                     alertVC.alertTagName = .AcceptSettings
-                    let buttonCancel = MJAlertButtonType(title: "event_add_contact_refuse".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
-                    let buttonValidate = MJAlertButtonType(title: "event_add_contact_activate".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-                    alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "event_add_contact_error".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+                    let buttonCancel = MJAlertButtonType(title: "event_add_contact_refuse".localized,
+                                                         titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
+                                                         bgColor: .appOrangeLight,
+                                                         cornerRadius: -1)
+                    let buttonValidate = MJAlertButtonType(title: "event_add_contact_activate".localized,
+                                                           titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
+                                                           bgColor: .appOrange,
+                                                           cornerRadius: -1)
+                    
+                    alertVC.configureAlert(alertTitle: "errorSettings".localized,
+                                           message: "event_add_contact_error".localized,
+                                           buttonrightType: buttonValidate,
+                                           buttonLeftType: buttonCancel,
+                                           titleStyle: ApplicationTheme.getFontCourantBoldOrange(),
+                                           messageStyle: ApplicationTheme.getFontCourantRegularNoir(),
+                                           mainviewBGColor: .white,
+                                           mainviewRadius: 35,
+                                           isButtonCloseHidden: true)
                     
                     alertVC.delegate = self
                     alertVC.show()
                 }
             }
-        })
+        }
     }
     
     func showPopCalendar() {
         DispatchQueue.main.async {
             let alertVC = MJAlertController()
             alertVC.alertTagName = .AcceptAdd
-            let buttonCancel = MJAlertButtonType(title: "event_add_contact_no".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
-            
-            
-            let buttonValidate = MJAlertButtonType(title: "event_add_contact_yes".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-            alertVC.configureAlert(alertTitle: "event_add_contact_title".localized, message: "event_add_contact_description".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+            let buttonCancel = MJAlertButtonType(title: "event_add_contact_no".localized,
+                                                 titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
+                                                 bgColor: .appOrangeLight,
+                                                 cornerRadius: -1)
+            let buttonValidate = MJAlertButtonType(title: "event_add_contact_yes".localized,
+                                                   titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
+                                                   bgColor: .appOrange,
+                                                   cornerRadius: -1)
+            alertVC.configureAlert(alertTitle: "event_add_contact_title".localized,
+                                   message: "event_add_contact_description".localized,
+                                   buttonrightType: buttonValidate,
+                                   buttonLeftType: buttonCancel,
+                                   titleStyle: ApplicationTheme.getFontCourantBoldOrange(),
+                                   messageStyle: ApplicationTheme.getFontCourantRegularNoir(),
+                                   mainviewBGColor: .white,
+                                   mainviewRadius: 35,
+                                   isButtonCloseHidden: true)
             
             alertVC.delegate = self
             alertVC.show()
@@ -582,21 +608,23 @@ class EventDetailFeedViewController: UIViewController {
     
     func showAddCalendar() {
         let store = EKEventStore()
-        store.requestAccess(to: .event, completion: {(granted,error) in
+        store.requestAccess(to: .event) { granted, error in
             if granted && error == nil {
                 let ekEvent = EKEvent(eventStore: store)
                 ekEvent.title = self.event?.title
                 ekEvent.startDate = self.event?.getMetadateStartDate()
                 ekEvent.endDate = self.event?.getMetadateEndDate()
                 
-                if let _url = self.event?.onlineEventUrl, let url = URL.init(string: _url) {
+                if let _url = self.event?.onlineEventUrl,
+                   let url = URL(string: _url) {
                     ekEvent.url = url
                 }
-                else if let _lat = self.event?.location?.latitude, let _long = self.event?.location?.longitude {
-                    let _structLovation = EKStructuredLocation()
-                    _structLovation.geoLocation = CLLocation(latitude: _lat, longitude: _long)
-                    _structLovation.title = self.event?.addressName
-                    ekEvent.structuredLocation = _structLovation
+                else if let _lat = self.event?.location?.latitude,
+                        let _long = self.event?.location?.longitude {
+                    let _structLocation = EKStructuredLocation()
+                    _structLocation.geoLocation = CLLocation(latitude: _lat, longitude: _long)
+                    _structLocation.title = self.event?.addressName
+                    ekEvent.structuredLocation = _structLocation
                     ekEvent.location = self.event?.addressName
                 }
                 
@@ -608,16 +636,15 @@ class EventDetailFeedViewController: UIViewController {
                     self.present(vc, animated: true, completion: nil)
                 }
             }
-        })
+        }
     }
 }
 
-//MARK: - UITableViewDataSource / Delegate -
+// MARK: - UITableViewDataSource / Delegate
 extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-        let minimum = self.event != nil ? 2 : 0
+        let minimum = (self.event != nil) ? 2 : 0
         let added = hasNewAndOldSections ? 1 : 0
         return minimum + added
     }
@@ -626,145 +653,147 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         if section == 0 { return 1 }
         
         if hasNewAndOldSections {
-            var count = 0
             if section == 1 {
-                count = messagesNew.count + 2
+                return messagesNew.count + 2
+            } else {
+                return messagesOld.count + 1
             }
-            else {
-                count = messagesOld.count + 1
-            }
-            return count
         }
         
-        let messageCount:Int = (self.event?.posts?.count ?? 0) > 0 ? self.event!.posts!.count + countToAdd() : 1
-        return  messageCount
+        let messageCount = (self.event?.posts?.count ?? 0)
+        if messageCount == 0 {
+            return 1
+        }
+        return messageCount + countToAdd()
     }
     
     func countToAdd() -> Int {
-        //Is member + new posts
-        let countToAdd = (self.event?.isMember ?? false && self.messagesNew.count > 0) ? 2 : 1 //If not member or only old messages we dont' show new/old post header
-        return countToAdd
+        return (self.event?.isMember ?? false) && !messagesNew.isEmpty ? 2 : 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.section == 0 {
-            if (self.event!.isMember ?? false) && !isAfterCreation {
-                let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopLightCell.identifier, for: indexPath) as! EventDetailTopLightCell
-                cell.populateCell(event: self.event, delegate: self,isEntourageEvent: isUserAmbassador, members: self.users)
+            if (self.event?.isMember ?? false) && (!isAfterCreation) {
+                let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopLightCell.identifier,
+                                                         for: indexPath) as! EventDetailTopLightCell
+                cell.populateCell(event: self.event,
+                                  delegate: self,
+                                  isEntourageEvent: isUserAmbassador,
+                                  members: self.users)
                 return cell
             }
             else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopFullCell.identifier, for: indexPath) as! EventDetailTopFullCell
-                cell.populateCell(event: self.event, delegate: self, isEntourageEvent: isUserAmbassador)
+                let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopFullCell.identifier,
+                                                         for: indexPath) as! EventDetailTopFullCell
+                cell.populateCell(event: self.event,
+                                  delegate: self,
+                                  isEntourageEvent: isUserAmbassador)
                 return cell
             }
         }
         
-        if self.event?.posts?.count ?? 0 == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEmptyPostCell.identifier, for: indexPath) as! NeighborhoodEmptyPostCell
+        if self.event?.posts?.isEmpty ?? true {
+            let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEmptyPostCell.identifier,
+                                                     for: indexPath) as! NeighborhoodEmptyPostCell
             cell.populateCell(isEvent: true)
             return cell
         }
         
         if hasNewAndOldSections && indexPath.section == 2 {
             if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
-                
-                cell.populateCell(title: "event_detail_post_section_old_posts_title".localized, isTopHeader: false)
+                let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier,
+                                                         for: indexPath) as! EventListSectionCell
+                cell.populateCell(title: "event_detail_post_section_old_posts_title".localized,
+                                  isTopHeader: false)
                 return cell
             }
-            
-            let postmessage:PostMessage = messagesOld[indexPath.row - 1]
-            var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-            if postmessage.survey != nil {
-                identifier = NeighborhoodPostSurveyCell.identifier
-            }
-            if postmessage.status == "deleted" {
-                identifier = NeighborhoodPostDeletedCell.identifier
-            }
-            if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
-                identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
-            }
-            if(postmessage.contentTranslations == nil){
-                identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-            }
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.event?.isMember)
-            return cell
+            let postmessage = messagesOld[indexPath.row - 1]
+            return makePostCell(post: postmessage, indexPath: indexPath)
         }
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier, for: indexPath) as! EventListSectionCell
-            cell.populateCell(title: "event_detail_post_section_title".localized, isTopHeader: true)
+            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier,
+                                                     for: indexPath) as! EventListSectionCell
+            cell.populateCell(title: "event_detail_post_section_title".localized,
+                              isTopHeader: true)
             return cell
         }
         
-        //If not member we dont' show new/old post header
-        let countToAdd = countToAdd()
-        if countToAdd == 2 {
-            if indexPath.row == 1 {
-                let titleSection = hasNewAndOldSections || self.messagesOld.count == 0 ? "event_detail_post_section_new_posts_title".localized : "event_detail_post_section_old_posts_title".localized
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
-                cell.populateCell(title: titleSection , isTopHeader: false)
-                return cell
-            }
+        let cta = countToAdd()
+        if cta == 2, indexPath.row == 1 {
+            let titleSection = (hasNewAndOldSections || messagesOld.isEmpty)
+                ? "event_detail_post_section_new_posts_title".localized
+                : "event_detail_post_section_old_posts_title".localized
+            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier,
+                                                     for: indexPath) as! EventListSectionCell
+            cell.populateCell(title: titleSection, isTopHeader: false)
+            return cell
         }
         
-        let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - countToAdd] : self.event!.posts![indexPath.row - countToAdd]
-        
-        var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-        
-      
-        if !(postmessage.contentTranslations?.from_lang == LanguageManager.getCurrentDeviceLanguage() || UserDefaults.currentUser?.sid == postmessage.user?.sid) {
-            identifier = postmessage.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
+        let postmessage: PostMessage
+        if hasNewAndOldSections {
+            postmessage = messagesNew[indexPath.row - cta]
+        } else {
+            postmessage = event!.posts![indexPath.row - cta]
         }
-        if(postmessage.contentTranslations == nil){
-            identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-        }
-        if postmessage.survey != nil {
+        
+        return makePostCell(post: postmessage, indexPath: indexPath)
+    }
+    
+    private func makePostCell(post: PostMessage, indexPath: IndexPath) -> UITableViewCell {
+        var identifier = post.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        
+        if post.survey != nil {
             identifier = NeighborhoodPostSurveyCell.identifier
         }
-        if postmessage.status == "deleted" {
+        if post.status == "deleted" || post.status == "offensive" || post.status == "offensible" {
             identifier = NeighborhoodPostDeletedCell.identifier
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.event?.isMember)
+        if let fromLang = post.contentTranslations?.from_lang,
+           fromLang != LanguageManager.getCurrentDeviceLanguage(),
+           UserDefaults.currentUser?.sid != post.user?.sid {
+            identifier = post.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
+        }
+        if post.contentTranslations == nil {
+            identifier = post.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        }
+        
+        let cell = ui_tableview.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
+        cell.populateCell(message: post,
+                          delegate: self,
+                          currentIndexPath: indexPath,
+                          userId: post.user?.sid,
+                          isMember: self.event?.isMember)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
-    //Use to paging tableview ;)
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   willDisplay cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath) {
         if isLoading { return }
-        
-        var realIndex:Int
-        
-        if hasNewAndOldSections {
-            realIndex = indexPath.row - 1
-        }
-        else {
-            realIndex = indexPath.row - 2
-        }
-        
-        let messageCount:Int = event?.posts?.count ?? 0
-        
+        var realIndex: Int = hasNewAndOldSections ? indexPath.row - 1 : indexPath.row - 2
+        let messageCount = event?.posts?.count ?? 0
         let lastIndex = messageCount - nbOfItemsBeforePagingReload
         if realIndex == lastIndex && messageCount >= itemsPerPage * currentPagingPage {
-            self.currentPagingPage = self.currentPagingPage + 1
-            self.getMorePosts()
+            currentPagingPage += 1
+            getMorePosts()
         }
     }
     
-    //MARK: - Method uiscrollview delegate -
-    func scrollViewDidScroll( _ scrollView: UIScrollView) {
+    // MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         UIView.animate(withDuration: 0) {
-            let yImage = self.maxImageHeight - (scrollView.contentOffset.y+self.maxImageHeight)
-            let diffImage = (self.maxViewHeight - self.maxImageHeight)
-            let heightImage = min(max (yImage -  diffImage,self.minImageHeight),self.maxImageHeight)
+            let yImage = self.maxImageHeight - (scrollView.contentOffset.y + self.maxImageHeight)
+            let diffImage = self.maxViewHeight - self.maxImageHeight
+            let heightImage = min(max(yImage - diffImage, self.minImageHeight), self.maxImageHeight)
             
             self.ui_view_button_settings.alpha = heightImage / self.maxImageHeight
             self.ui_view_button_back.alpha = heightImage / self.maxImageHeight
@@ -773,81 +802,76 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             self.ui_iv_event_mini.alpha = 1 - (heightImage / self.maxImageHeight)
             self.ui_label_title_event.alpha = 1 - (heightImage / self.maxImageHeight)
             self.ui_view_canceled.alpha = heightImage / self.maxImageHeight
+            
             let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
-            let heightView = min(max (yView,self.minViewHeight),self.maxViewHeight)
+            let heightView = min(max(yView, self.minViewHeight), self.maxViewHeight)
             self.ui_view_height_constraint.constant = heightView
             
-            //To show/hide button join on scroll
             if !(self.event?.isMember ?? false) {
-                if scrollView.contentOffset.y >= self.minTopScrollHeight {
-                    self.ui_bt_floating_join.isHidden = false
-                }
-                else {
-                    self.ui_bt_floating_join.isHidden = true
-                }
+                self.ui_bt_floating_join.isHidden = scrollView.contentOffset.y < self.minTopScrollHeight
             }
-            
             self.view.layoutIfNeeded()
         }
     }
 }
 
-//MARK: - MJAlertControllerDelegate -
+// MARK: - MJAlertControllerDelegate
 extension EventDetailFeedViewController: MJAlertControllerDelegate {
-    func validateLeftButton(alertTag:MJAlertTAG) {}
-    
-    func validateRightButton(alertTag:MJAlertTAG) {
+    func validateLeftButton(alertTag: MJAlertTAG) {}
+    func validateRightButton(alertTag: MJAlertTAG) {
         if alertTag == .None {
+            self.event?.isMember = false
+            self.isAfterCreation = false
+            self.ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
             self.sendLeaveGroup()
         }
         
         if alertTag == .AcceptSettings {
             if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url, options: [:],completionHandler:nil)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
+        
         if alertTag == .AcceptAdd {
             self.showAddCalendar()
         }
     }
-    func closePressed(alertTag:MJAlertTAG) {}
+    
+    func closePressed(alertTag: MJAlertTAG) {}
 }
 
-//MARK: - MJNavBackViewDelegate -
+// MARK: - MJNavBackViewDelegate
 extension EventDetailFeedViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true)
     }
 }
 
-//MARK: - EventDetailTopCellDelegate -
-extension EventDetailFeedViewController:EventDetailTopCellDelegate {
+// MARK: - EventDetailTopCellDelegate
+extension EventDetailFeedViewController: EventDetailTopCellDelegate {
     func share() {
         var stringUrl = "https://"
         var title = ""
-        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod"){
-            stringUrl = stringUrl + "preprod.entourage.social/app/"
-        }else{
-            stringUrl = stringUrl + "www.entourage.social/app/"
+        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod") {
+            stringUrl += "preprod.entourage.social/app/"
+        } else {
+            stringUrl += "www.entourage.social/app/"
         }
         if let _event = event {
-            stringUrl = stringUrl + "outings/" + _event.uuid_v2
+            stringUrl += "outings/" + _event.uuid_v2
             title = "share_event".localized + "\n" + _event.title + ": "
-
         }
         let url = URL(string: stringUrl)!
         let shareText = "\(title)\n\n\(stringUrl)"
         
-        let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
-          // Présenter l’UIActivityViewController
-        let viewController = self
-          viewController.present(activityViewController, animated: true, completion: nil)
+        let activityViewController = UIActivityViewController(activityItems: [shareText, url],
+                                                              applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
         AnalyticsLoggerManager.logEvent(name: event_share)
-
     }
     
     func showUser() {
-        
+        // Implémentation éventuelle
     }
     
     func showWebUrl(url: URL) {
@@ -855,14 +879,19 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
     }
     
     func showMembers() {
-        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+        if let navVC = UIStoryboard(name: StoryboardName.neighborhood, bundle: nil)
+            .instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController,
+           let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
             vc.event = event
             vc.isEvent = true
-            self.navigationController?.present(navVC, animated: true)
+            present(navVC, animated: true)
         }
     }
-    func showMemberReact(postId:Int){
-        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+    
+    func showMemberReact(postId: Int) {
+        if let navVC = UIStoryboard(name: StoryboardName.neighborhood, bundle: nil)
+            .instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController,
+           let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
             vc.event = event
             vc.postId = postId
             vc.eventId = eventId
@@ -870,8 +899,11 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
             self.navigationController?.present(navVC, animated: true)
         }
     }
-    func showVote(post:PostMessage){
-        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+    
+    func showVote(post: PostMessage) {
+        if let navVC = UIStoryboard(name: StoryboardName.neighborhood, bundle: nil)
+            .instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController,
+           let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
             vc.event = event
             vc.survey = post.survey
             vc.postId = post.uid
@@ -880,14 +912,17 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
             vc.isFromReact = false
             vc.questionTitle = post.content
             self.navigationController?.present(navVC, animated: true)
-            
         }
     }
+    
     func joinLeave() {
         joinLeaveEvent()
     }
+    
     func showDetailFull() {
-        if let navVC = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailFullNav") as? UINavigationController, let vc = navVC.topViewController as? EventDetailFullFeedViewController {
+        if let navVC = UIStoryboard(name: StoryboardName.event, bundle: nil)
+            .instantiateViewController(withIdentifier: "eventDetailFullNav") as? UINavigationController,
+           let vc = navVC.topViewController as? EventDetailFullFeedViewController {
             vc.eventId = eventId
             vc.event = event
             vc.isEntourageEvent = isUserAmbassador
@@ -897,28 +932,27 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
     
     func showPlace() {
         if event?.isCanceled() ?? false { return }
-        
-        if event?.isOnline ?? false, let urlStr = event?.onlineEventUrl {
+        if event?.isOnline ?? false,
+           let urlStr = event?.onlineEventUrl {
             WebLinkManager.openUrl(url: URL(string: urlStr), openInApp: false, presenterViewController: self)
         }
         else {
             if let _address = event?.metadata?.display_address?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-                let mapString = String.init(format: "https://maps.apple.com/?address=%@", _address)
+                let mapString = String(format: "https://maps.apple.com/?address=%@", _address)
                 WebLinkManager.openUrl(url: URL(string: mapString), openInApp: false, presenterViewController: self)
             }
         }
     }
 }
 
-//MARK: - NeighborhoodPostCellDelegate -
-extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
+// MARK: - NeighborhoodPostCellDelegate
+extension EventDetailFeedViewController: NeighborhoodPostCellDelegate {
     func sendVoteView(post: PostMessage) {
         self.showVote(post: post)
     }
     
     func postSurveyResponse(forPostId postId: Int, withResponses responses: [Bool]) {
         let groupId = self.eventId
-        
         SurveyService.postSurveyResponseEvent(eventId: groupId, postId: postId, responses: responses) { isSuccess in
             if isSuccess {
                 print("Réponse au sondage postée avec succès.")
@@ -927,20 +961,14 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
             }
         }
     }
-
     
     func ifNotMemberWarnUser() {
-        let alertController = UIAlertController(title: "Attention", message: "Vous devez rejoindre le groupe pour effectuer cette action.", preferredStyle: .alert)
-                
-                let okAction = UIAlertAction(title: "OK", style: .default) { action in
-                    // Code à exécuter lorsque l'utilisateur touche le bouton OK
-                    // Tu peux le laisser vide si tu ne veux rien faire de spécial
-                }
-                
-                alertController.addAction(okAction)
-                
-                // Présenter l'alerte à l'utilisateur
-                present(alertController, animated: true, completion: nil)
+        let alertController = UIAlertController(title: "Attention",
+                                                message: "Vous devez rejoindre le groupe pour effectuer cette action.",
+                                                preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     func onReactClickSeeMember(post: PostMessage) {
@@ -951,12 +979,13 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
         var reactionWrapper = ReactionWrapper()
         reactionWrapper.reactionId = reactionType.id
         EventService.postReactionToEventPost(eventId: self.eventId, postId: post.uid, reactionWrapper: reactionWrapper) { error in
-
+            // Gestion éventuelle d'erreur
         }
     }
     
     func deleteReaction(post: PostMessage, reactionType: ReactionType) {
         EventService.deleteReactionToEventPost(eventId: self.eventId, postId: post.uid) { error in
+            // Gestion éventuelle d'erreur
         }
     }
     
@@ -965,23 +994,28 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
     }
     
     func showImage(imageUrl: URL?, postId: Int) {
-        self.getDetailPost(eventId: self.eventId, parentPostId: postId)
+        getDetailPost(eventId: self.eventId, parentPostId: postId)
     }
     
-    func signalPost(postId: Int, userId:Int, textString: String) {
-        if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
+    func signalPost(postId: Int, userId: Int, textString: String) {
+        if let navVC = UIStoryboard(name: StoryboardName.neighborhoodReport, bundle: nil)
+            .instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController,
+           let vc = navVC.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
             vc.postId = postId
             vc.parentDelegate = self
             vc.userId = userId
             vc.signalType = .publication
             vc.textString = textString
-            self.present(navvc, animated: true)
+            self.present(navVC, animated: true)
         }
     }
     
-    func showMessages(addComment:Bool, postId:Int, indexPathSelected: IndexPath?,postMessage:PostMessage?) {
-        let sb = UIStoryboard.init(name: StoryboardName.eventMessage, bundle: nil)
+    func showMessages(addComment: Bool,
+                      postId: Int,
+                      indexPathSelected: IndexPath?,
+                      postMessage: PostMessage?) {
+        let sb = UIStoryboard(name: StoryboardName.eventMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? EventDetailMessagesViewController {
             vc.modalPresentationStyle = .fullScreen
             vc.parentCommentId = postId
@@ -1000,136 +1034,134 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
         guard let userId = userId else {
             return
         }
-
-        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                _homeVC.currentUserId = "\(userId)"
-                
+        if let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull") as? UINavigationController {
+            if let _homeVC = navVC.topViewController as? ProfilFullViewController {
+                _homeVC.userIdToDisplay = "\(userId)"
                 self.navigationController?.present(navVC, animated: true)
             }
         }
     }
-    
 }
 
-//MARK: - UpdateEventCommentDelegate -
-extension EventDetailFeedViewController:UpdateCommentCountDelegate {
-    func updateCommentCount(parentCommentId: Int, nbComments: Int, currentIndexPathSelected:IndexPath?) {
-        guard let _ = event?.posts else {return}
-        var i = 0
-        for _post in event!.posts! {
-            if _post.uid == parentCommentId {
-                event!.posts![i].commentsCount = nbComments
-                break
-            }
-            i = i + 1
+// MARK: - UpdateEventCommentDelegate
+extension EventDetailFeedViewController: UpdateCommentCountDelegate {
+    func updateCommentCount(parentCommentId: Int,
+                            nbComments: Int,
+                            currentIndexPathSelected: IndexPath?) {
+        guard let posts = event?.posts else { return }
+        if let index = posts.firstIndex(where: { $0.uid == parentCommentId }) {
+            event?.posts?[index].commentsCount = nbComments
         }
-        self.splitMessages()
-        if let currentIndexPathSelected = currentIndexPathSelected {
-            self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
+        splitMessages()
+        if let idx = currentIndexPathSelected {
+            ui_tableview.reloadRows(at: [idx], with: .none)
         } else {
-            self.ui_tableview.reloadData()
+            ui_tableview.reloadData()
         }
     }
 }
 
-//MARK: - EKEVENT Delegate -
+// MARK: - EKEventEditViewDelegate
 extension EventDetailFeedViewController: EKEventEditViewDelegate {
-    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+    func eventEditViewController(_ controller: EKEventEditViewController,
+                                 didCompleteWith action: EKEventEditViewAction) {
         controller.dismiss(animated: true, completion: nil)
     }
 }
 
-//MARK: - UIScrollViewDelegate -
+// MARK: - UIScrollViewDelegate (pour zoom)
 extension EventDetailFeedViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.ui_iv_preview
+        return ui_iv_preview
     }
 }
 
-extension EventDetailFeedViewController:GroupDetailDelegate{
+// MARK: - GroupDetailDelegate
+extension EventDetailFeedViewController: GroupDetailDelegate {
     func translateItem(id: Int) {
-        //TODO TRANSLATE
+        // Implémenter la traduction si nécessaire
     }
     
     func publicationDeleted() {
         getEventDetail()
-        self.ui_tableview.reloadData()
+        ui_tableview.reloadData()
     }
     
-    func showMessage(signalType:GroupDetailSignalType) {
+    func showMessage(signalType: GroupDetailSignalType) {
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "OK".localized,
+                                             titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
+                                             bgColor: .appOrange,
+                                             cornerRadius: -1)
         let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
         
-        alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        alertVC.configureAlert(alertTitle: title,
+                               message: "report_group_message_success".localized,
+                               buttonrightType: buttonCancel,
+                               buttonLeftType: nil,
+                               titleStyle: ApplicationTheme.getFontCourantBoldOrange(),
+                               messageStyle: ApplicationTheme.getFontCourantRegularNoir(),
+                               mainviewBGColor: .white,
+                               mainviewRadius: 35,
+                               isButtonCloseHidden: true)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
             alertVC.show()
         }
     }
-    
 }
 
-//MARK: Extension for getPostDetail to get a better quality for photozoom
-extension EventDetailFeedViewController{
-    func getDetailPost(eventId:Int, parentPostId:Int){
+// MARK: - Zoom sur image HQ
+extension EventDetailFeedViewController {
+    func getDetailPost(eventId: Int, parentPostId: Int) {
         EventService.getDetailPostMessage(eventId: eventId, parentPostId: parentPostId) { message, error in
-            if let _message = message {
-                self.setImageForView(message: _message)
+            if let msg = message {
+                self.setImageForView(message: msg)
             }
         }
     }
-    func setImageForView(message:PostMessage){
-        guard let urlString = message.messageImageUrl else {
+    
+    func setImageForView(message: PostMessage) {
+        guard let urlString = message.messageImageUrl,
+              let imageUrl = URL(string: urlString) else {
             return
         }
-        guard let imageUrl = URL(string: urlString) else {
-            return
-        }
-        
         ui_scrollview.zoomScale = 1.0
         
-        ui_iv_preview.sd_setImage(with: imageUrl, placeholderImage: nil, options: .refreshCached) { _image, _error, _type, _ur in
-            if _error != nil {
-                self.ui_view_full_image.isHidden = true
-            }
-            else {
-                self.ui_view_full_image.isHidden = false
-            }
+        ui_iv_preview.sd_setImage(with: imageUrl, placeholderImage: nil, options: .refreshCached) { _image, _error, _, _ in
+            self.ui_view_full_image.isHidden = (_error != nil)
         }
     }
 }
 
-extension EventDetailFeedViewController:CreateSurveyValidationDelegate{
+// MARK: - CreateSurveyValidationDelegate
+extension EventDetailFeedViewController: CreateSurveyValidationDelegate {
     func onSurveyCreate() {
         self.getEventDetail()
     }
 }
 
-//MARK: - FloatyDelegate -
-extension EventDetailFeedViewController:FloatyDelegate {
+// MARK: - FloatyDelegate
+extension EventDetailFeedViewController: FloatyDelegate {
     func floatyWillOpen(_ floaty: Floaty) {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Plus)
-        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 170 : 16
-
-        // Animer le changement de contrainte
+        let newHeight: CGFloat = 16
         UIView.animate(withDuration: 0.3) {
             self.ui_constraint_button.constant = newHeight
             self.view.layoutIfNeeded()
         }
     }
     func floatyClosed(_ floaty: Floaty) {
-        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 16 : 16
-
-        // Animer le changement de contrainte
+        let newHeight: CGFloat = 16
         UIView.animate(withDuration: 0.3) {
             self.ui_constraint_button.constant = newHeight
             self.view.layoutIfNeeded()
         }
     }
     
-    private func createButtonItem(title:String, iconName:String, handler:@escaping ((FloatyItem) -> Void)) -> FloatyItem {
+    private func createButtonItem(title: String,
+                                  iconName: String,
+                                  handler: @escaping ((FloatyItem) -> Void)) -> FloatyItem {
         let floatyItem = FloatyItem()
         floatyItem.buttonColor = .clear
         floatyItem.icon = UIImage(named: iconName)
@@ -1142,61 +1174,34 @@ extension EventDetailFeedViewController:FloatyDelegate {
     }
 }
 
-enum TableIsOldAndNewPost {
-    case onlyOld
-    case newAndOld
-    case onlyNew
-}
-
-extension EventDetailFeedViewController : AmbassadorAskNotificationPopupDelegate{
+// MARK: - AmbassadorAskNotificationPopupDelegate
+extension EventDetailFeedViewController: AmbassadorAskNotificationPopupDelegate {
     func joinAsOrganizer() {
+        event?.isMember = true
+        isAfterCreation = false
+        ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
         
+        IHProgressHUD.show()
         EventService.joinEventAsOrganizer(eventId: eventId) { user, error in
             IHProgressHUD.dismiss()
-            if let user = user {
-                let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
-                self.event?.members?.append(member)
-                let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! + 1 : 1
-                
-                self.isAfterCreation = true
-                self.event?.membersCount = count
-                self.getEventDetail(hasToRefreshLists:true)
-                
-                DispatchQueue.main.async {
-                    if self.event?.metadata?.hasPlaceLimit ?? false {
-                        self.showPopInfoPlaces()
-                    }
-                    else {
-                        self.addToCalendar()
-                    }
-                }
-            }
+            // Pas de mise à jour UI supplémentaire
         }
     }
     
     func justParticipate() {
+        event?.isMember = true
+        isAfterCreation = false
+        ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
+        
+        IHProgressHUD.show()
         EventService.joinEvent(eventId: eventId) { user, error in
             IHProgressHUD.dismiss()
-            if let user = user {
-                let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
-                self.event?.members?.append(member)
-                let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! + 1 : 1
-                
-                self.isAfterCreation = true
-                self.event?.membersCount = count
-                self.getEventDetail(hasToRefreshLists:true)
-                
-                DispatchQueue.main.async {
-                    if self.event?.metadata?.hasPlaceLimit ?? false {
-                        self.showPopInfoPlaces()
-                    }
-                    else {
-                        self.addToCalendar()
-                    }
-                }
-            }
         }
     }
-    
-    
+}
+
+extension EventDetailFeedViewController: EventParamDelegate {
+    func reloadView() {
+        updateEvent()
+    }
 }

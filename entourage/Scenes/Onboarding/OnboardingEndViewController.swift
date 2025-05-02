@@ -27,12 +27,22 @@ class OnboardingEndViewController: UIViewController {
         ui_title.text = "onboard_end_title".localized
         ui_desc.text = "onboard_end_subtitle".localized
         ui_bt_go.setTitle("onboard_end_button".localized, for: .normal)
+        configureOrangeButton(ui_bt_go, withTitle: "onboard_end_button".localized)
         AnalyticsLoggerManager.logEvent(name: Onboard_end)
     }
     
     override func viewWillLayoutSubviews() {
         self.navigationController?.isNavigationBarHidden = true
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     func showPopNotification() {
         AppState.showPopNotification { [weak self] isAccept in

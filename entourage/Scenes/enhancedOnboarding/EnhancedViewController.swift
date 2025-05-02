@@ -255,7 +255,8 @@ class EnhancedViewController: UIViewController {
                     DispatchQueue.main.async {
                         let config = EnhancedOnboardingConfiguration.shared
                         if config.isInterestsFromSetting {
-                            AppState.navigateToMainApp()
+                            config.isInterestsFromSetting = false
+                            self.dismiss(animated: true)
                         } else {
                             OnboardingEndChoicesManager.shared.updateChoices(interests: interests, concerns: concerns, involvements: involvements)
                             self.presentViewControllerWithAnimation(identifier: "enhancedOnboardingEnd")
@@ -313,11 +314,15 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             cell.selectionStyle = .none
             cell.configure()
+            if EnhancedOnboardingConfiguration.shared.isInterestsFromSetting {
+                cell.configureForMainFilter()
+            }
             return cell
         case .backArrow:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "enhancecOnboardingBackCell", for: indexPath) as? EnhancecOnboardingBackCell else {
                 return UITableViewCell()
             }
+            cell.configure(isFromSettings: EnhancedOnboardingConfiguration.shared.isInterestsFromSetting)
             cell.selectionStyle = .none
             return cell
         case .choiceDayCell(let days, _):
@@ -396,6 +401,11 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
     func onConfigureLaterClick() {
+        let config = EnhancedOnboardingConfiguration.shared
+        if config.isInterestsFromSetting {
+            self.updateUserChoices()
+            return
+        }
         switch mode {
         case .interest:
             AnalyticsLoggerManager.logEvent(name: onboarding_interests_config_later_clic)
@@ -404,7 +414,7 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
         case .involvement:
             AnalyticsLoggerManager.logEvent(name: onboarding_actions_config_later_clic)
         case .choiceDisponibility:
-            AnalyticsLoggerManager.logEvent(name: "onboarding_availability_config_later_clic")
+            AnalyticsLoggerManager.logEvent(name: "onboarding_disponibility_config_later_clic")
         }
         self.returnHome = true
         self.updateUserChoices()
@@ -412,6 +422,11 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
 
     func onNextClick() {
         hasChangedMod = true
+        let config = EnhancedOnboardingConfiguration.shared
+        if config.isInterestsFromSetting {
+            self.updateUserChoices()
+            return
+        }
         switch mode {
         case .interest:
             AnalyticsLoggerManager.logEvent(name: onboarding_interests_next_clic)
@@ -429,16 +444,9 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
             self.loadDTO()
             break
         case .choiceDisponibility:
-            AnalyticsLoggerManager.logEvent(name: "onboarding_availability_next_clic")
+            AnalyticsLoggerManager.logEvent(name: "onboarding_disponibility_next_clic")
             self.returnHome = false
             self.updateUserChoices()
-        }
-
-        let config = EnhancedOnboardingConfiguration.shared
-        if config.isInterestsFromSetting {
-            self.updateUserChoices()
-        } else {
-
         }
     }
 }

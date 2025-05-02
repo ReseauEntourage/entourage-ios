@@ -49,7 +49,9 @@ class MainGuideViewController: UIViewController {
         setup()
         setupButtons()
         fillCategories()
-        
+        configureOrangeButton(ui_button_filters, withTitle: "home_button_filters".localized)
+        configureOrangeButton(ui_button_map_list, withTitle: "home_button_list".localized)
+      
         NotificationCenter.default.addObserver(self, selector: #selector(showCurrentLocation), name: NSNotification.Name(rawValue:  kNotificationShowFeedsMapCurrentLocation), object: nil)
     }
     
@@ -91,6 +93,25 @@ class MainGuideViewController: UIViewController {
             showMap(animated: false)
         }
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 15
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
+      func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 15
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+      }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -406,12 +427,13 @@ class MainGuideViewController: UIViewController {
             
             if let response = response {
                 var newAnnotations: [MKAnnotation] = []
-                
+                self.pois.removeAll()
                 // Traitez chaque cluster ou poi
                 for cluster in response.clusters {
                     if cluster.type == "poi" {
                         let poi = MapPoi(from: cluster)
                         let annot = CustomAnnotation(poi: poi)
+                        self.pois.append(poi)
                         newAnnotations.append(annot)
                     } else if cluster.type == "cluster" {
                         let clusterAnnotation = ClusterAnnotation(clusterPoi: cluster)
@@ -420,6 +442,8 @@ class MainGuideViewController: UIViewController {
                 }
                 
                 self.updateAnnotations(with: newAnnotations)
+                self.ui_tableView.reloadData()
+
             }
         }
     }

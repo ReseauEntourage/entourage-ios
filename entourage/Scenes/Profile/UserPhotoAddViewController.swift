@@ -22,6 +22,7 @@ class UserPhotoAddViewController: BasePopViewController {
     var pickerViewController:UIImagePickerController? = nil
     var selectedImage:UIImage? = nil
     var currentUserFirstname = ""
+    var pictureSettingDelegate:ImageReUpLoadDelegate?
     
     var isFromProfile = true
     var isFromDeepLink = false
@@ -77,6 +78,8 @@ class UserPhotoAddViewController: BasePopViewController {
         
         ui_bt_take_photo.setTitle("take_photo".localized, for: .normal)
         ui_bt_import_gallery.setTitle("take_gallery".localized, for: .normal)
+        configureOrangeButton(ui_bt_import_gallery, withTitle: "take_gallery".localized)
+        configureWhiteButton(ui_bt_take_photo, withTitle: "take_photo".localized)
         
         ui_iv_profile.layer.cornerRadius = ui_iv_profile.frame.width / 2
         ui_iv_profile.layer.borderColor = UIColor.lightGray.cgColor
@@ -106,6 +109,7 @@ class UserPhotoAddViewController: BasePopViewController {
     
     func showPhotoResize() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "PictureResizeVC") as? PicturePreviewResizeViewController {
+            vc.pictureSettingDelegate = self.pictureSettingDelegate
             vc.currentImage = self.selectedImage
             vc.delegate = self
             vc.isFromProfile = self.isFromProfile
@@ -136,6 +140,25 @@ class UserPhotoAddViewController: BasePopViewController {
             AnalyticsLoggerManager.logEvent(name: Action_Profile_Take_Photo)
         }
         checkCameraAccess()
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     func checkCameraAccess() {

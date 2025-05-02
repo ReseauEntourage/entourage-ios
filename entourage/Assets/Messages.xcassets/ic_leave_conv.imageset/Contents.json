@@ -1,17 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "ic_leave_conversation.pdf",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "ic_leave_conversation.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

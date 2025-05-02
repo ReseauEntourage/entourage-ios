@@ -26,6 +26,8 @@ class OnboardingLanguageStoryBoard: UIViewController {
         self.ui_table_view.dataSource = self
         ui_table_view.register(UINib(nibName: LanguageCell.identifier, bundle: nil), forCellReuseIdentifier: LanguageCell.identifier)
         ui_table_view.register(UINib(nibName: LangValidateButton.identifier, bundle: nil), forCellReuseIdentifier: LangValidateButton.identifier)
+        ui_table_view.register(UINib(nibName: "EnhancedOnboardingTitle", bundle: nil), forCellReuseIdentifier: "titleCell")
+        ui_table_view.register(UINib(nibName: "EnhancecOnboardingBackCell", bundle: nil), forCellReuseIdentifier: "enhancecOnboardingBackCell")
         fillDTO()
     }
 
@@ -34,6 +36,17 @@ class OnboardingLanguageStoryBoard: UIViewController {
         self.ui_label_select_language.text = "onboarding_lang_select".localized
         self.ui_button_next.setTitle("onboarding_lang_suivant".localized, for: .normal)
         self.ui_button_next.addTarget(self, action: #selector(onNextClicked), for: .touchUpInside)
+        configureOrangeButton(ui_button_next, withTitle: "onboarding_lang_suivant".localized)
+
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
     
     func fillDTO() {
@@ -87,6 +100,12 @@ extension OnboardingLanguageStoryBoard: UITableViewDelegate, UITableViewDataSour
             return UITableViewCell()
         case .validateButton:
             return UITableViewCell() // Pas besoin de bouton dans ce cas
+        case .translationCell:
+            return UITableViewCell()
+        case .backArrow:
+            return UITableViewCell()
+        case .title(title: let title):
+            return UITableViewCell()
         }
     }
     
@@ -98,6 +117,12 @@ extension OnboardingLanguageStoryBoard: UITableViewDelegate, UITableViewDataSour
                 return .languageCell(lang: lang, isSelected: false)
             case .validateButton:
                 return .validateButton
+            case .translationCell:
+                return .translationCell
+            case .backArrow:
+                return .backArrow
+            case .title(let title):
+                return .title(title: title)
             }
         }
         // Sélectionner la nouvelle langue sans sauvegarder immédiatement
@@ -106,6 +131,12 @@ extension OnboardingLanguageStoryBoard: UITableViewDelegate, UITableViewDataSour
             tableDTO[indexPath.row] = .languageCell(lang: lang, isSelected: true)
             selectedLanguage = lang // Stocker la langue sélectionnée
         case .validateButton:
+            print("never happen")
+        case .translationCell:
+            print("never happen")
+        case .backArrow:
+            print("never happen")
+        case .title(let title):
             print("never happen")
         }
         configureUI()

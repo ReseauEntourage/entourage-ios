@@ -86,3 +86,14 @@ extension String {
         return nil
     }
 }
+
+
+extension UILabel {
+    func setFontTitle(size: CGFloat) {
+        self.font = UIFont(name: "Quicksand-Bold", size: size) ?? UIFont.boldSystemFont(ofSize: size)
+    }
+    
+    func setFontBody(size: CGFloat) {
+        self.font = UIFont(name: "NunitoSans-Regular", size: size) ?? UIFont.systemFont(ofSize: size)
+    }
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="evenodd" d="M 10 0 C 15.523438 0 20 4.476562 20 10 C 20 15.523438 15.523438 20 10 20 C 4.476562 20 0 15.523438 0 10 C 0 4.476562 4.476562 0 10 0 Z M 10 2 C 5.582031 2 2 5.582031 2 10 C 2 14.417969 5.582031 18 10 18 C 14.417969 18 18 14.417969 18 10 C 18 5.582031 14.417969 2 10 2 Z M 10 2 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 8 3 L 16 3 L 16 11 L 8 11 Z M 8 3 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="evenodd" d="M 9.601562 3 C 10.148438 3 10.597656 3.410156 10.660156 3.941406 L 10.667969 4.066406 L 10.667969 8.867188 L 14.933594 8.867188 C 15.523438 8.867188 16 9.34375 16 9.933594 C 16 10.480469 15.589844 10.929688 15.058594 10.992188 L 14.933594 11 L 9.601562 11 C 9.011719 11 8.535156 10.523438 8.535156 9.933594 C 8.535156 9.871094 8.535156 9.695312 8.535156 9.398438 L 8.535156 4.066406 C 8.535156 3.476562 9.011719 3 9.601562 3 Z M 9.601562 3 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<rect x="-2" y="-2" width="24" height="24" fill="rgb(100%, 59.2%, 22.3%)" fill-opacity="1"/>
+</g>
+<g clip-path="url(#clip-1)">
+<g clip-path="url(#clip-2)">
+<path fill-rule="nonzero" fill="rgb(100%, 59.2%, 22.3%)" fill-opacity="1" d="M 7.535156 2 L 17 2 L 17 12 L 7.535156 12 Z M 7.535156 2 "/>
+</g>
+</g>
+</svg>

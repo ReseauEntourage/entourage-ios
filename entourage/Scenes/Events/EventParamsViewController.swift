@@ -7,6 +7,9 @@
 
 import UIKit
 
+protocol EventParamDelegate {
+    func reloadView()
+}
 class EventParamsViewController: BasePopViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
@@ -19,7 +22,7 @@ class EventParamsViewController: BasePopViewController {
     
     var isCanceled = false
     var isRealAuthor = false
-    
+    var delegate:EventParamDelegate?
     var selectedRecurrencyPosition = 0
     
     override func viewDidLoad() {
@@ -315,7 +318,10 @@ extension EventParamsViewController: GroupDetailDelegate {
 //MARK: - MJNavBackViewDelegate -
 extension EventParamsViewController: MJNavBackViewDelegate {
     func goBack() {
-        self.navigationController?.dismiss(animated: true)
+        
+        self.navigationController?.dismiss(animated: true, completion: {
+            self.delegate?.reloadView()
+        })
     }
 }
 

@@ -585,8 +585,8 @@
 "suppress_message_cell_subtitle" = "";
 "suppress_comment_cell_subtitle" = "";
 
-"deleted_message" = "      Ce message a été supprimé";
-"deleted_comment" = "      Ce commentaire a été supprimé";
+"deleted_message" = "Ce message a été supprimé";
+"deleted_comment" = "Ce commentaire a été supprimé";
 
 /********
  GROUP
@@ -1159,9 +1159,11 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 //Create action end
 "action_create_close_button" = "Terminer";
-"contribCreateEnd_title" = "Votre contribution à bien été créée !";
+"action_create_close_button_demand" = "Voir ma demande";
+"action_create_close_button_contrib" = "Voir ma contribution";
+"contribCreateEnd_title" = "Votre contribution a bien été créée !";
 "contribCreateEnd_subtitle" = "Félicitations, vous venez de créer une nouvelle contribution. Pour la rendre plus visible parlez-en sur vos groupes ! ";
-"solicitationCreateEnd_title" = "Votre demande à bien été créée !";
+"solicitationCreateEnd_title" = "Votre demande a bien été créée !";
 "solicitationCreateEnd_subtitle" = "Félicitations, vous venez de créer une nouvelle demande. Pour la rendre plus visible parlez-en sur vos groupes ! ";
 
 
@@ -1421,7 +1423,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_action_type_social" = "Social";
 "home_v2_action_type_clothes" = "Vêtements";
 "home_v2_action_type_equipment" = "Equipement";
-"home_v2_action_type_hygiène" = "Hygiène";
+"home_v2_action_type_hygiène" = "Produit d'hygiène";
 "home_v2_action_type_services" = "Services";
 "home_v2_action_type_other" = "Autres";
 
@@ -1676,3 +1678,50 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "mandatory_label" = "Obowiązkowe";
 "share_request_title" = "Czy chcesz udostępnić swoje %@ w swojej grupie %@?";
 "share_request_description" = "Masz możliwość udostępnienia swojego %@ w grupie sąsiedzkiej swojego miasta, aby zwiększyć jego widoczność";
+
+"conversation_notif_text" = "Twoje powiadomienia są wyłączone.\nWłącz je, aby być na bieżąco";
+"conversation_notif_highlight" = "Włącz je, aby być na bieżąco";
+
+"enhanced_onboarding_time_disponibility_title" = "Moja dostępność";
+"enhanced_onboarding_time_disponibility_description" = "Określ swoją dostępność, abyśmy mogli zaproponować odpowiednie wydarzenia.";
+"enhanced_onboarding_time_disponibility_days_label" = "Moje dni";
+"enhanced_onboarding_time_disponibility_day_monday" = "Poniedziałek";
+"enhanced_onboarding_time_disponibility_day_tuesday" = "Wtorek";
+"enhanced_onboarding_time_disponibility_day_wednesday" = "Środa";
+"enhanced_onboarding_time_disponibility_day_thursday" = "Czwartek";
+"enhanced_onboarding_time_disponibility_day_friday" = "Piątek";
+"enhanced_onboarding_time_disponibility_day_saturday" = "Sobota";
+"enhanced_onboarding_time_disponibility_day_sunday" = "Niedziela";
+"enhanced_onboarding_time_disponibility_time_slots_label" = "Moje przedziały czasowe";
+"enhanced_onboarding_time_disponibility_time_morning" = "Rano";
+"enhanced_onboarding_time_disponibility_time_afternoon" = "Popołudnie";
+"enhanced_onboarding_time_disponibility_time_evening" = "Wieczór";
+"no_data_available" = "Nie podano";
+"unknown_language" = "Nieznany język";
+"logout_button" = "Wyloguj się";
+"delete_account_button" = "Usuń moje konto";
+"preferences_section_title" = "Moje preferencje";
+"preferences_interest_title" = "Moje zainteresowania";
+"preferences_action_title" = "Moja chęć działania";
+"preferences_availability_title" = "Moja dostępność";
+"preferences_action_categories_title" = "Moje kategorie pomocy wzajemnej";
+"preferences_section_title_others" = "Ich preferencje";
+"preferences_interest_title_others" = "Ich zainteresowania";
+"preferences_action_title_others" = "Ich chęć działania";
+"preferences_availability_title_others" = "Ich dostępność";
+"preferences_action_categories_title_others" = "Ich kategorie pomocy wzajemnej";
+"settings_section_title" = "Ustawienia";
+"settings_language_title" = "Język";
+"settings_notifications_title" = "Powiadomienia";
+"settings_help_title" = "Pomoc i o nas";
+"settings_unblock_contacts_title" = "Odblokuj kontakty";
+"settings_feedback_title" = "Podziel się pomysłem";
+"settings_share_title" = "Udostępnij aplikację";
+"settings_password_title" = "Zmień hasło";
+"content_removed" = "Ta treść została usunięta, ponieważ nie spełnia naszych zasad.";
+"settings_notifications_subtitle" = "Włączone: %@";
+"settings_notifications_subtitle_none" = "Brak włączonych powiadomień";
+"settings_unblock_contacts_subtitle_none" = "Brak zablokowanych kontaktów";
+"settings_unblock_contacts_subtitle" = "%d zablokowany kontakt";
+"settings_unblock_contacts_subtitle_plural" = "%d zablokowane kontakty";
+"language_change_redirect" = "Zostaniesz przekierowany na stronę główną, aby zmienić język aplikacji";

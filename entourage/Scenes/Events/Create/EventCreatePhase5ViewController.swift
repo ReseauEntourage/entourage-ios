@@ -130,7 +130,7 @@ extension EventCreatePhase5ViewController: UITableViewDelegate, UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroup", for: indexPath) as! SelectTagCell
         
         let group = groups[indexPath.row]
-        cell.populateCell(title: group.name, isChecked: group.isSelected)
+        cell.populateCell(title: group.name, isChecked: group.isSelected, isAction: false)
         
         return cell
     }

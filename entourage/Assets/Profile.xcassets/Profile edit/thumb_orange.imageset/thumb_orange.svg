@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 28 28">
+<defs>
+<filter id="filter-remove-color" x="0%" y="0%" width="100%" height="100%">
+<feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" />
+</filter>
+<filter id="filter-color-to-alpha" x="0%" y="0%" width="100%" height="100%">
+<feColorMatrix color-interpolation-filters="sRGB" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.2126 0.7152 0.0722 0 0"/>
+</filter>
+<image id="source-7" x="0" y="0" width="28" height="28" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAAAmJLR0QA/4ePzL8AAAF+SURBVCiRjZPbjtswDESHFGU79iabRf//G5Ou4fgikdMHx9u0QC98ETAHBCjqSPAsgUAAEAS/sv0QEVURkBEk+QJVNJmlJKB7rR4MADAAIppy07Y5K6KUdd2Kg3xCtebUD6cuJ3hZ5ukxbzV2qGrtcL6chyecxs80oSJgEEnN8P5xvfStKaKuQ5cVJIUGUTudP75d37qcBPSuzQnhHqSJpLa/XK+XPicR0MwUXrbiIQaxdjhf3vrGBIBABVGWedkqVNSa09B3OR37SLnrh1NjKgpNTde1OemxSE257bomKVQk5Zzt6Nt7LeecRBQimpLKKzwSxV9KQe6X+pl9JUp6KaX6K/RaSnFSEb4ty1o8DhZe1mXZPGCMus3T0Jo8Z6KX5THNWw0mEVE1M91HY9TyGO+379PqTBBARFUAMsLL+hjvt/s412DCLhXJ8FrLukzj/Xb7fBQnDKRvE6IsL489TpuTMCBQQd/m3zSJ3SFGZZTlF8GC/1LzP6T+w3f4ARCIEfF8dsXwAAAAAElFTkSuQmCC"/>
+<mask id="mask-0">
+<g filter="url(#filter-remove-color)">
+<use xlink:href="#source-7" filter="url(#filter-color-to-alpha)"/>
+</g>
+</mask>
+<image id="source-6" x="0" y="0" width="28" height="28" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAIAAAD9b0jDAAAABmJLR0QA/wD/AP+gvaeTAAAAGUlEQVRIie3BMQEAAADCoPVPbQdvoAAAeA0JTAABiuYvbwAAAABJRU5ErkJggg=="/>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 4 2 L 24 2 L 24 22 L 4 22 Z M 4 2 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="evenodd" d="M 14 22 C 19.523438 22 24 17.523438 24 12 C 24 6.476562 19.523438 2 14 2 C 8.476562 2 4 6.476562 4 12 C 4 17.523438 8.476562 22 14 22 Z M 14 22 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="nonzero" d="M 0 0 L 20 0 L 20 20 L 0 20 Z M 0 0 "/>
+</clipPath>
+<clipPath id="clip-3">
+<path clip-rule="evenodd" d="M 10 20 C 15.523438 20 20 15.523438 20 10 C 20 4.476562 15.523438 0 10 0 C 4.476562 0 0 4.476562 0 10 C 0 15.523438 4.476562 20 10 20 Z M 10 20 "/>
+</clipPath>
+<clipPath id="clip-4">
+<rect x="0" y="0" width="20" height="20"/>
+</clipPath>
+<g id="source-11" clip-path="url(#clip-4)">
+<g clip-path="url(#clip-2)">
+<g clip-path="url(#clip-3)">
+<rect x="-10.16" y="-8.16" width="40.32" height="40.32" fill="rgb(100%, 59.2%, 22.3%)" fill-opacity="1"/>
+<path fill="none" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="5" d="M 10 20 C 15.523438 20 20 15.523438 20 10 C 20 4.476562 15.523438 0 10 0 C 4.476562 0 0 4.476562 0 10 C 0 15.523438 4.476562 20 10 20 Z M 10 20 "/>
+</g>
+</g>
+</g>
+</defs>
+<g mask="url(#mask-0)">
+<use xlink:href="#source-6"/>
+</g>
+<g clip-path="url(#clip-0)">
+<g clip-path="url(#clip-1)">
+<use xlink:href="#source-11" transform="matrix(1, 0, 0, 1, 4, 2)"/>
+</g>
+</g>
+</svg>

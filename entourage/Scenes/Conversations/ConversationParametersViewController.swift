@@ -92,17 +92,23 @@ class ConversationParametersViewController: BasePopViewController {
     }
     
     func showUser() {
-        guard let userId = userId else {
-            return
-        }
+        guard let userId = userId else { return }
         
-        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                _homeVC.currentUserId = "\(userId)"
-                self.present(navVC, animated: true)
-            }
+        // Instancier le storyboard et le ProfilFullViewController directement
+        let storyboard = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+        
+        if let profileVC = storyboard.instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
+            
+            // Passer l'ID utilisateur à ProfilFullViewController
+            profileVC.userIdToDisplay = "\(userId)"
+            
+            // Présenter la vue modale directement
+            profileVC.modalPresentationStyle = .fullScreen  // Plein écran pour un effet plus fluide
+            self.present(profileVC, animated: true, completion: nil)
         }
     }
+
+    
     func showMembers() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
             vc.conversationId = conversationId
