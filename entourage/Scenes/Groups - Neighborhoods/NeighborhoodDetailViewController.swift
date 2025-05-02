@@ -226,7 +226,6 @@ class NeighborhoodDetailViewController: UIViewController {
         NeighborhoodService.getNeighborhoodDetail(id: _groupId) { group, error in
             self.pullRefreshControl.endRefreshing()
             
-            print("eho group " , group)
             if let _ = error {
                 self.goBack()
             }
@@ -567,7 +566,6 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
-                print("eho identifier : " , identifier)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.neighborhood?.isMember)
                 return cell
@@ -608,7 +606,6 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                 if postmessage.status == "deleted" {
                     identifier = NeighborhoodPostDeletedCell.identifier
                 }
-                print("eho identifier : " , identifier)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
                 cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.neighborhood?.isMember)
                 return cell
@@ -633,7 +630,6 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
             }
-            print("eho identifier : " , identifier)
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid, isMember: self.neighborhood?.isMember)
             return cell

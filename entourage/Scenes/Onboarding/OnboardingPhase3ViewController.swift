@@ -40,6 +40,7 @@ class OnboardingPhase3ViewController: UIViewController {
         }else{
             self.ui_next_btn.isHidden = true
         }
+        self.ui_next_btn.isOpaque = false
         self.ui_next_btn.addTarget(self, action: #selector(onNextClick), for: .touchUpInside)
     }
     
@@ -47,6 +48,10 @@ class OnboardingPhase3ViewController: UIViewController {
         self.dismiss(animated: false) {
             self.fromAppDelegate?.sendOnboardingEnd()
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.ui_next_btn.isOpaque = true
+        
     }
     
 }
@@ -109,6 +114,9 @@ extension OnboardingPhase3ViewController:OnboardingEndCellDelegate {
             pageDelegate?.addInfos(userType: userType)
 
         }
+        if (isBeEntour || isAsso || isEntour) && location_name_new != nil {
+            self.ui_next_btn.isOpaque = true
+        }
     }
 }
 
@@ -127,6 +135,9 @@ extension OnboardingPhase3ViewController: PlaceViewControllerDelegate {
              DispatchQueue.main.async {
                  self.ui_tableview.reloadData()
              }
+        }
+        if (isBeEntour || isAsso || isEntour) && location_new != nil {
+            self.ui_next_btn.isOpaque = true
         }
     }
 }

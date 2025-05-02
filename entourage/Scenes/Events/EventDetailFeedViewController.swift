@@ -266,7 +266,6 @@ class EventDetailFeedViewController: UIViewController {
     
     //MARK: -Network
     @objc func getEventDetail(hasToRefreshLists:Bool = false) {
-        print("eho event id ", self.eventId)
         self.currentPagingPage = 1
         self.isLoading = true
         var _eventId = ""

@@ -199,4 +199,69 @@ struct ActionsService:ParsingDataCodable {
             DispatchQueue.main.async { completion(action, nil) }
         }
     }
+    
+    //MARK: CONTRIB WITH FILTER
+    static func getAllContribsWithFilter(currentPage: Int, per: Int,travelDistance:Float, latitude:Float, longitude:Float, sectionList: String, completion: @escaping (_ actions: [Action]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIActionGetAllContribsWithFilter, token, currentPage, per,travelDistance,latitude,longitude, sectionList)
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let actions: [Action]? = self.parseDatas(data: data, key: _contributions)
+            DispatchQueue.main.async { completion(actions, nil) }
+        }
+    }
+    
+    //MARK: CONTRIB WITH SEARCH
+    static func getAllContribsWithSearch(currentPage: Int, per: Int, searchText: String, completion: @escaping (_ actions: [Action]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIActionGetAllContribsWitherSearch, token, currentPage, per, searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let actions: [Action]? = self.parseDatas(data: data, key: _contributions)
+            DispatchQueue.main.async { completion(actions, nil) }
+        }
+    }
+    
+    //MARK: SOLICITATION WITH FILTER
+    static func getAllSolicitationsWithFilter(currentPage: Int, per: Int, travelDistance:Float, latitude:Float, longitude:Float,  sectionList: String, completion: @escaping (_ actions: [Action]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIActionGetAllSolicitationsWithFilter, token, currentPage, per,travelDistance,latitude,longitude, sectionList)
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let actions: [Action]? = self.parseDatas(data: data, key: _solicitations)
+            DispatchQueue.main.async { completion(actions, nil) }
+        }
+    }
+    
+    //MARK: SOLICITATION WITH SEARCH
+    static func getAllSolicitationsWithSearch(currentPage: Int, per: Int, searchText: String, completion: @escaping (_ actions: [Action]?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIActionGetAllSolicitationsWithSearch, token, currentPage, per, searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let actions: [Action]? = self.parseDatas(data: data, key: _solicitations)
+            DispatchQueue.main.async { completion(actions, nil) }
+        }
+    }
+
 }

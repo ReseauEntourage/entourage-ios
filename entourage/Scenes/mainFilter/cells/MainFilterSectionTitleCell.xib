@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Quicksand-Bold.ttf">
+            <string>Quicksand-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainFilterSectionTitleCell" rowHeight="81" id="9Ow-hr-BW8" customClass="MainFilterSectionTitleCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="497" height="81"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Ow-hr-BW8" id="bYu-T6-GGM">
+                <rect key="frame" x="0.0" y="0.0" width="497" height="81"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfG-7F-dfb">
+                        <rect key="frame" x="20.000000000000004" y="16" width="40.333333333333343" height="19"/>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTp-IP-wSh">
+                        <rect key="frame" x="70.333333333333329" y="13.666666666666664" width="24" height="24"/>
+                        <color key="backgroundColor" name="orange_app"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="2CS-2Z-lN2"/>
+                            <constraint firstAttribute="height" constant="24" id="ZMn-7x-Cxh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="12"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OfG-7F-dfb" firstAttribute="leading" secondItem="bYu-T6-GGM" secondAttribute="leading" constant="20" id="1Pf-Zn-sIg"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="OfG-7F-dfb" secondAttribute="bottom" constant="5" id="A7w-H5-uw1"/>
+                    <constraint firstItem="dTp-IP-wSh" firstAttribute="leading" secondItem="OfG-7F-dfb" secondAttribute="trailing" constant="10" id="C16-4B-nFa"/>
+                    <constraint firstItem="dTp-IP-wSh" firstAttribute="centerY" secondItem="OfG-7F-dfb" secondAttribute="centerY" id="K5m-M1-uoE"/>
+                    <constraint firstItem="OfG-7F-dfb" firstAttribute="top" secondItem="bYu-T6-GGM" secondAttribute="top" constant="16" id="QBD-bM-dQA"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dTp-IP-wSh" secondAttribute="trailing" constant="10" id="rH2-NR-GWY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="constraint_top" destination="QBD-bM-dQA" id="Frf-NZ-2Fu"/>
+                <outlet property="ui_label_number_items" destination="dTp-IP-wSh" id="EOt-2F-EhV"/>
+                <outlet property="ui_label_subtitle" destination="OfG-7F-dfb" id="3Tj-6s-fVU"/>
+            </connections>
+            <point key="canvasLocation" x="45.038167938931295" y="32.74647887323944"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="orange_app">
+            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

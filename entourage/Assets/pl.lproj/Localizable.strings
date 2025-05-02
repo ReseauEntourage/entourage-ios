@@ -92,7 +92,7 @@
 "login_resend_code_button_yes" = "Demander";
 "login_resend_code_button_no" = "Annuler";
 "login_resend_code_title" = "Redemander un code";
-"login_resend_code_message" = "Voulez-vous redemander un codep pour votre numéro de téléphone : ";
+"login_resend_code_message" = "Voulez-vous redemander un code pour votre numéro de téléphone : ";
 "login_label_country" = "Pays";
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
@@ -1505,3 +1505,98 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "text_title_i_like" = "Lubię to";
 "text_title_comment" = "Komentarz";
 "see_member_react" = "Osoby, które zareagowały";
+"home_v2_title_initial_pedago" = "Zwiększanie świadomości";
+"home_v2_subtitle_initial_pedago" = "Kilka sugestii do czytania na początek";
+"onboarding_lang_bienvenue" = "Witamy!";
+"onboarding_lang_select" = "Wybierz język";
+"onboarding_lang_suivant" = "Dalej";
+"translation_bottom_fragment_title" = "Automatycznie tłumaczymy wiadomości napisane przez użytkowników aplikacji.";
+"translation_bottom_fragment_main_title" = "Tłumaczenie";
+
+"action_social_name" = "Dzielenie się czasem";
+"action_social_subname" = "kawa, aktywność...";
+
+"action_services_name" = "Usługa";
+"action_services_subname" = "pranie, drukowanie dokumentów...";
+
+"action_clothes_name" = "Odzież";
+"action_clothes_subname" = "buty, płaszcz...";
+
+"action_equipment_name" = "Sprzęt";
+"action_equipment_subname" = "telefon, śpiwór...";
+
+"action_hygiene_name" = "Higiena";
+"action_hygiene_subname" = "mydło, ochrona sanitarna...";
+
+"interest_activites" = "Rękodzieło";
+"interest_animaux" = "Zwierzęta";
+"interest_bien_etre" = "Dobrostan";
+"interest_cuisine" = "Gotowanie";
+"interest_culture" = "Sztuka i kultura";
+"interest_jeux" = "Gry";
+"interest_nature" = "Przyroda";
+"interest_sport" = "Sport";
+"interest_marauding" = "Patrole społeczne";
+"interest_other" = "Inne";
+"contact" = "Kontakt";
+
+"report_modal_title_translate" = "Przetłumacz";
+"report_modal_subtitle_translate" = "Automatycznie tłumaczymy wiadomości napisane przez użytkowników aplikacji";
+"layout_translate_title_original" = "Wyświetl wersję oryginalną";
+"layout_translate_title_translation" = "Wyświetl tłumaczenie";
+"layout_translate_action_translation_button" = "Kliknij tutaj, aby wyświetlić wersję oryginalną";
+"layout_translate_title_original_button" = "Wyświetl tłumaczenie";
+"layout_translate_title_original_title" = "Ta strona nie została przetłumaczona.";
+"layout_translate_title_translation_title" = "Niektóre informacje zostały przetłumaczone automatycznie.";
+"Category_Food" = "Jedzenie";
+"Category_Accommodation" = "Zakwaterowanie";
+"Category_Health" = "Zdrowie";
+"Category_Refresh" = "Odświeżenie";
+"Category_Toilets" = "Toalety";
+"Category_Fountains" = "Fontanny";
+"Category_Wash" = "Mycie";
+"Category_Laundries" = "Pralnie";
+"Category_Orient" = "Orientacja";
+"Category_SelfCare" = "Troska o siebie";
+"Category_Clothes" = "Odzież i sprzęt";
+"Category_DonationBox" = "Skrzynka darowizn";
+"Category_Reintegration" = "Reintegracja";
+"Category_Partners" = "Partnerzy";
+"Category_Other" = "Inne";
+"create_group_btn_title" = "Utwórz grupę";
+"friendly_links_title" = "Przyjazne i solidarne linki";
+"friendly_links_text" = "W Entourage głównym celem jest wspieranie przyjaznych i trwałych relacji. Zobowiązuję się do przestrzegania tego, unikając wszelkich romantycznych lub miłosnych podejść lub publikacji. W ten sposób aktywnie przyczyniam się do utrzymania ciepłego i troskliwego środowiska dla wszystkich.";
+"copied_text" = "Skopiowano do schowka!";
+"copy_the_text" = "Skopiuj tekst";
+"copy_the_text_explanation" = "Tekst zostanie skopiowany do schowka";
+"text_title_i_like" = "Lubię";
+"text_title_comment" = "Komentarz";
+"see_member_react" = "Osoby, które zareagowały";
+
+"vote_singular" = "głos";
+"vote_plural" = "głosy";
+
+"enhanced_onboarding_start_title" = "%@, poznajmy się!";
+"enhanced_onboarding_start_subtitle" = "Zanim zanurzymy się w naszej aplikacji, poświęćmy chwilę na lepsze poznanie Ciebie. Twoje zainteresowania pomogą nam zasugerować Ci aktywności i treści, które mogą Ci się spodobać.";
+"enhanced_onboarding_button_title_start" = "Rozpocznij";
+"enhanced_onboarding_button_title_later" = "Zakończ później";
+"enhanced_onboarding_button_title_configlater" = "Skonfiguruj później";
+"enhanced_onboarding_button_title_next" = "Dalej";
+"enhanced_onboarding_button_title_event" = "Przeglądaj wydarzenia";
+"enhanced_onboarding_end_title" = "Twoje spersonalizowane doświadczenie jest (prawie) gotowe!";
+"enhanced_onboarding_end_subtitle" = "Dziękujemy za podzielenie się swoimi chęciami do działania i zainteresowaniami. Z niecierpliwością czekamy, aby wkrótce zaproponować Ci wydarzenia dostosowane do Twoich potrzeb.\nBądź na bieżąco!";
+
+"edit_profile_cell_onboarding" = "Spersonalizuj moje konto";
+"button_title_for_setting_onboarding" = "Zapisz";
+"button_title_for_re_onboarding_end" = "Wróć do profilu";
+
+"notif_demand_title" = "Włącz powiadomienia, aby niczego nie przegapić";
+"notif_demand_subtitle" = "Otrzymuj prośby o pomoc w pobliżu, bądź na bieżąco z lokalnymi wydarzeniami, postami sąsiadów i wiadomościami osobistymi w czasie rzeczywistym.";
+"notif_demand_btn_accept" = "Włącz powiadomienia";
+"notif_demand_btn_refuse" = "Nie teraz";
+"btn_main_filter_validate_title" = "Zastosuj filtry";
+"btn_main_filter_cancel_title" = "Resetuj";
+"main_filter_radius_cell_title" = "W promieniu";
+"main_filter_cell_group_placeholder" = "Szukaj grupy";
+"main_filter_cell_event_placeholder" = "Szukaj wydarzenia";
+"main_filter_cell_action_placeholder" = "Szukaj pomocy";

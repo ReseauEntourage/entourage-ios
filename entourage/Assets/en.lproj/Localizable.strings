@@ -1494,3 +1494,99 @@
 "vote_plural" = "votes";
 "button_title_for_setting_onboarding" = "Register";
 "button_title_for_re_onboarding_end" = "Back to profile";
+
+"home_v2_title_initial_pedago" = "Raise Awareness";
+"home_v2_subtitle_initial_pedago" = "Some reading suggestions to get started";
+"onboarding_lang_bienvenue" = "Welcome!";
+"onboarding_lang_select" = "Select Language";
+"onboarding_lang_suivant" = "Next";
+"translation_bottom_fragment_title" = "We automatically translate messages written by app users.";
+"translation_bottom_fragment_main_title" = "Translation";
+
+"action_social_name" = "Time Sharing";
+"action_social_subname" = "coffee, activity...";
+
+"action_services_name" = "Service";
+"action_services_subname" = "laundry, document printing...";
+
+"action_clothes_name" = "Clothes";
+"action_clothes_subname" = "shoes, coat...";
+
+"action_equipment_name" = "Equipment";
+"action_equipment_subname" = "phone, sleeping bag...";
+
+"action_hygiene_name" = "Hygiene";
+"action_hygiene_subname" = "soap, sanitary protection...";
+
+"interest_activites" = "Manual Activities";
+"interest_animaux" = "Animals";
+"interest_bien_etre" = "Well-being";
+"interest_cuisine" = "Cooking";
+"interest_culture" = "Art & Culture";
+"interest_jeux" = "Games";
+"interest_nature" = "Nature";
+"interest_sport" = "Sports";
+"interest_marauding" = "Social Marauding";
+"interest_other" = "Other";
+"contact" = "Contact";
+
+"report_modal_title_translate" = "Translate";
+"report_modal_subtitle_translate" = "We automatically translate messages written by app users";
+"layout_translate_title_original" = "View Original Version";
+"layout_translate_title_translation" = "View Translation";
+"layout_translate_action_translation_button" = "Click here to view the original version";
+"layout_translate_title_original_button" = "View Translation";
+"layout_translate_title_original_title" = "This page has not been translated.";
+"layout_translate_title_translation_title" = "Some information has been automatically translated.";
+"Category_Food" = "Food";
+"Category_Accommodation" = "Accommodation";
+"Category_Health" = "Health";
+"Category_Refresh" = "Refresh";
+"Category_Toilets" = "Toilets";
+"Category_Fountains" = "Fountains";
+"Category_Wash" = "Wash";
+"Category_Laundries" = "Laundries";
+"Category_Orient" = "Orientation";
+"Category_SelfCare" = "Self-Care";
+"Category_Clothes" = "Clothes & Equipment";
+"Category_DonationBox" = "Donation Box";
+"Category_Reintegration" = "Reintegration";
+"Category_Partners" = "Partners";
+"Category_Other" = "Other";
+"create_group_btn_title" = "Create a Group";
+"friendly_links_title" = "Friendly and Solidarity Links";
+"friendly_links_text" = "At Entourage, the main goal is to foster friendly and lasting connections. I commit to respecting this by avoiding any romantic or love-oriented approaches or publications. Thus, I actively contribute to maintaining a warm and caring environment for everyone.";
+"copied_text" = "Copied to clipboard!";
+"copy_the_text" = "Copy Text";
+"copy_the_text_explanation" = "The text will be copied to the clipboard";
+"text_title_i_like" = "Like";
+"text_title_comment" = "Comment";
+"see_member_react" = "People who reacted";
+
+"vote_singular" = "vote";
+"vote_plural" = "votes";
+
+"enhanced_onboarding_start_title" = "%@, let's get to know each other!";
+"enhanced_onboarding_start_subtitle" = "Before diving into our app, let's take a few moments to get to know you better. Your interests will help us suggest activities and content that you’ll like.";
+"enhanced_onboarding_button_title_start" = "Start";
+"enhanced_onboarding_button_title_later" = "Finish Later";
+"enhanced_onboarding_button_title_configlater" = "Configure Later";
+"enhanced_onboarding_button_title_next" = "Next";
+"enhanced_onboarding_button_title_event" = "Browse Events";
+"enhanced_onboarding_end_title" = "Your personalized experience is (almost) ready!";
+"enhanced_onboarding_end_subtitle" = "Thank you for sharing your interests and desires to act. We look forward to soon offering you tailor-made events that suit you.\nStay connected!";
+
+"edit_profile_cell_onboarding" = "Personalize My Account";
+"button_title_for_setting_onboarding" = "Save";
+"button_title_for_re_onboarding_end" = "Return to Profile";
+
+"notif_demand_title" = "Enable Notifications to Stay Updated";
+"notif_demand_subtitle" = "Receive help requests near you, stay informed about local events, your neighbors’ posts, and personal messages in real time.";
+"notif_demand_btn_accept" = "Enable Notifications";
+"notif_demand_btn_refuse" = "Not Now";
+"btn_main_filter_validate_title" = "Apply Filters";
+"btn_main_filter_cancel_title" = "Reset";
+"main_filter_radius_cell_title" = "Within a Radius of";
+"main_filter_cell_group_placeholder" = "Search a Group";
+"main_filter_cell_event_placeholder" = "Search an Event";
+"main_filter_cell_action_placeholder" = "Search for Help";

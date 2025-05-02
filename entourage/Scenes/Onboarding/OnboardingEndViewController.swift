@@ -59,9 +59,12 @@ class OnboardingEndViewController: UIViewController {
             DispatchQueue.main.async {
                 let sb = UIStoryboard.init(name: StoryboardName.onboarding, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.present(vc, animated: true, completion: nil)
+                } else {
+                    print("ViewController with identifier 'NotificationDemandViewController' not found")
                 }
             }
         }
     }
+
 }

@@ -242,3 +242,19 @@ extension MainTabbarViewController: UITabBarControllerDelegate {
         }
     }
 }
+
+extension MainTabbarViewController {
+    func setTabBar(hidden: Bool, animated: Bool, duration: TimeInterval) {
+        let tabBarHeight = tabBar.frame.size.height
+        let offsetY = hidden ? tabBarHeight : -tabBarHeight
+        let endFrame = tabBar.frame.offsetBy(dx: 0, dy: offsetY)
+
+        UIView.animate(withDuration: animated ? duration : 0.0, animations: {
+            self.tabBar.frame = endFrame
+        }, completion: { finished in
+            if finished {
+                self.tabBar.isHidden = hidden
+            }
+        })
+    }
+}

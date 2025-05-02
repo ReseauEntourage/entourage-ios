@@ -371,3 +371,7 @@ let onboarding_interests_view = "onboarding_interests_view"
 let onboarding_donations_categories_view = "onboarding_donations_categories_view"
 let onboarding_end_view = "onboarding_end_view"
 
+let popup_event_last_day_view = "popup_event_last_day_view"
+let popup_event_last_day_accept = "popup_event_last_day_accept"
+let popup_event_last_day_decline = "popup_event_last_day_decline"
+

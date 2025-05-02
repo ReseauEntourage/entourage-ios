@@ -39,3 +39,15 @@ extension UITextView {
         self.inputAccessoryView = toolbar
     }
 }
+
+extension UITextField {
+    func setPlaceholder(text: String, font: UIFont, color: UIColor = .lightGray) {
+        self.attributedPlaceholder = NSAttributedString(
+            string: text,
+            attributes: [
+                .font: font,
+                .foregroundColor: color
+            ]
+        )
+    }
+}
