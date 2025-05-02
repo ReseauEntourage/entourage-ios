@@ -27,7 +27,7 @@ class SimpleAlertDialog: UIViewController {
         let label = UILabel()
         label.textColor = UIColor.appOrangeLight // Assure-toi que cette couleur est bien définie quelque part.
         label.font = ApplicationTheme.getFontNunitoRegular(size: 15)
-        label.textAlignment = .left
+        label.textAlignment = .natural
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -37,7 +37,7 @@ class SimpleAlertDialog: UIViewController {
         let label = UILabel()
         label.textColor = .black
         label.font = ApplicationTheme.getFontNunitoRegular(size: 15)
-        label.textAlignment = .left
+        label.textAlignment = .natural
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

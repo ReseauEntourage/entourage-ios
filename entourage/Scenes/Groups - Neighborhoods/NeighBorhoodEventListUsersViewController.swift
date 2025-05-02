@@ -257,6 +257,17 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
         return tableData.count
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Masquer les séparateurs pour les premières lignes, par exemple pour les lignes 0 à 2
+        if indexPath.row < 1 {
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: cell.bounds.width)
+        } else {
+            // Ajouter le séparateur par défaut ou personnalisé pour les autres lignes
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        }
+    }
+
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableData[indexPath.row]{
             
@@ -266,14 +277,15 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             cell.populateCell(delegate: self, isSearch:isSearch,placeceholder:title, isCellUserSearch: true)
             return cell
         case .userCell(let _user,let _reactionType):
+            print("user group role " , _user.groupRole)
             var position = indexPath.row - 1
             if isFromReact || isFromSurvey {
                 position = position + 1
             }
             let isMe = _user.sid == UserDefaults.currentUser?.sid
-            
+            let isOrganiser = _user.groupRole == "organizer"
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
-            cell.populateCell(isMe:isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType, isConfirmed: _user.confirmedAt != nil)
+            cell.populateCell(isMe:isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType, isConfirmed: _user.confirmedAt != nil, isOrganizer: isOrganiser)
             cell.hideSeparatorBarIfIsVote(isVote: self.isFromSurvey)
             return cell
         
@@ -299,6 +311,10 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

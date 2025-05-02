@@ -80,17 +80,19 @@ class MJNavBackView: UIView {
     }
     
     func populateView(title:String,titleFont:UIFont, titleColor:UIColor,delegate:MJNavBackViewDelegate,showSeparator:Bool = true,backgroundColor:UIColor? = nil,cornerRadius:CGFloat? = nil, isClose:Bool = false, doubleRightMargin:Bool = false) {
-             
+        self.semanticContentAttribute = .unspecified // ou .forceRightToLeft si nécessaire
         self.populateCustom(title: title, titleFont: titleFont, titleColor: titleColor, imageName: nil, backgroundColor: backgroundColor, delegate: delegate, showSeparator: showSeparator, cornerRadius: cornerRadius, isClose: isClose,doubleRightMargin: doubleRightMargin)
+        
     }
     
     func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil, isClose:Bool = false, marginLeftButton:CGFloat? = nil, subtitle:String? = nil, doubleRightMargin:Bool = false) {
-        
+        self.semanticContentAttribute = .unspecified // ou .forceRightToLeft si nécessaire
         if doubleRightMargin {
             for _constraint in ui_constraint_title_right_margins {
                 _constraint.constant = _constraint.constant * 2
             }
         }
+        
         
         ui_view_close.isHidden = !isClose
         ui_view_back.isHidden = isClose

@@ -35,6 +35,7 @@ struct GuideFilters {
     init() {
         initArrayFilters()
     }
+
     
     private mutating func initArrayFilters() {
         
@@ -211,8 +212,20 @@ struct GuideFilters {
         var activeStr = ""
         for filter in self.arrayFilters {
             if filter.active {
-                activeStr = activeStr + "_\(filter.key.rawValue)"
+                activeStr = activeStr + "\(filter.key.rawValue)" + ","
             }
+        }
+        if activeStr.last == ","{
+            activeStr.removeLast()
+        }
+        var isAllActive = true
+        for filter in arrayFilters {
+            if filter.active == false {
+                isAllActive = false
+            }
+        }
+        if isAllActive == true {
+            activeStr = ""
         }
         
         return activeStr

@@ -128,7 +128,9 @@ class MainProfileSettingsViewController: UIViewController {
         }
         //To force update profile mainuserprofileVC when show main page
         (profileVC as? MainUserProfileViewController)?.updateUser()
-        ui_username.text = currentUser.displayName
+        if currentUser != nil {
+            ui_username.text = currentUser.displayName
+        }
     }
     
     //MARK: - IBActions -

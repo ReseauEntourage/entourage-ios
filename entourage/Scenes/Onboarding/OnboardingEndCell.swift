@@ -60,6 +60,7 @@ class OnboardingEndCell: UITableViewCell {
         ui_view_beentour.layer.borderWidth = 1
         ui_view_beentour.layer.borderColor = UIColor.appOrange.cgColor
         ui_view_beentour.layer.cornerRadius = 20
+        ui_description.text = "onboard_phase3_title".localized
         
         ui_desc_place.text = "onboard_phase3_title".localized
         ui_title_entour.text = "onboard_title_entour".localized

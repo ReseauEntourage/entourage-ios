@@ -61,11 +61,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             AppState.checkNotifcationsAndGoMainScreen()
         }
+        incrementConnectionCount()
         return true
     }
     
     private func initEnvironmentConfigManager() {
         environmentConfigManager = EnvironmentConfigurationManager.sharedInstance
+    }
+    
+    func incrementConnectionCount(){
+        let defaults = UserDefaults.standard
+        let currentCount = defaults.integer(forKey: "connectionCount")
+        let newCount = currentCount + 1
+        defaults.set(newCount, forKey: "connectionCount")
+        
     }
     
     private func configureGooglePlace() {
@@ -231,7 +240,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     //MARK: - Push -
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("passed here " , deviceToken)
         NotificationManager.didRegisterForRemoteNotificationsWithDeviceToken(token: deviceToken)
     }
     
@@ -249,5 +257,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         Logger.print("***** Messaging receive messaging token ? \(messaging) - \(fcmToken)")
+        
     }
 }

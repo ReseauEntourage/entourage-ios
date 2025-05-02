@@ -110,6 +110,9 @@ class HomeV2ViewController: UIViewController {
         self.initHome()
         self.checkForUpdates()
         self.ifEventLastDay()
+        if let bundleIdentifier = Bundle.main.bundleIdentifier {
+            print("Bundle Identifier: \(bundleIdentifier)")
+        }
     }
     
 
@@ -242,8 +245,39 @@ class HomeV2ViewController: UIViewController {
                     AnalyticsLoggerManager.logEvent(name: has_user_activated_notif)
                 } else {
                     AnalyticsLoggerManager.logEvent(name: has_user_disabled_notif)
+                    
+                    // Incrémenter le nombre de connexions
+                    let connectionCount = self.incrementConnectionCount()
+                    print("eho connection count : " , connectionCount)
+                    // Vérifier si c'est la 2ème ou la 10ème connexion
+                    if connectionCount == 1 || connectionCount == 4 || connectionCount == 9 {
+                        self.presentNotificationDemandViewController()
+                    }else{
+//                        let alert = UIAlertController(title: "Connexion", message: "Nombre de connexions: \(connectionCount)", preferredStyle: .alert)
+//                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                        self.present(alert, animated: true, completion: nil)
+                    }
+                    // Afficher une alerte avec le connectionCount
+                    
                 }
             }
+        }
+    }
+
+    
+    func incrementConnectionCount() -> Int {
+        let defaults = UserDefaults.standard
+        let currentCount = defaults.integer(forKey: "connectionCount")
+        return currentCount
+    }
+    
+    func presentNotificationDemandViewController() {
+        let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
+            vc.modalPresentationStyle = .overFullScreen // Optionnel
+            self.present(vc, animated: true, completion: nil)
+        } else {
+            print("ViewController with identifier 'NotificationDemandViewController' not found")
         }
     }
     

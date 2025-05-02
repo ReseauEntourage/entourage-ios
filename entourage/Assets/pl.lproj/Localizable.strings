@@ -161,10 +161,10 @@
 "onboard_phone_title" = "Enchantés, %@ !";
 
 "onboard_phase3_title" = "En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ?";
-"onboard_title_entour" = "Entourer";
-"onboard_subtitle_entour" = "Proposer de l’aide …";
-"onboard_title_beentour" = "Être entouré";
-"onboard_subtitle_beentour" = "Demander de l’aide, trouver les structures sociales autour de moi …";
+"onboard_title_entour" = "Wspierać innych";
+"onboard_subtitle_entour" = "Chciałby chciałabym zaoferować wsparcie moim sąsiadom w potrzebie.";
+"onboard_title_beentour" = "Otrzymać wsparcie";
+"onboard_subtitle_beentour" = "Jestem w trudnej sytuacji i szukam wsparcia.";
 "onboard_place_title_new" = "Quel est votre quartier ?";
 "onboard_place_desc" = "* L’adresse est confidentielle et ne sera jamais communiquée ";
 "onboard_place_infos_placeholder" = "Adresse, ville ou département";
@@ -817,7 +817,7 @@
 "home_help_title" = "Besoin d’aide";
 "home_help_subtitle" = "Votre guide dans l’app";
 "home_cell_pedago" = "Tout savoir pour passer à l'action";
-"home_cell_map" = "Carte des lieux solidaires";
+"home_cell_map" = "Découvrir la carte";
 "home_cell_map_subtitle" = "Accueils de jour, bagageries…";
 
 "home_resources_title" = "Tout le contenu pédagogique";
@@ -991,7 +991,7 @@
 "event_empty_post_subtitle" = "Pourquoi ne pas lancer la discussion avec vos voisins ?";
 
 "event_users_title" = "Voir les participants";
-"event_userInput_search" = "Rechercher un participant de l'événement";
+"event_userInput_search" = "Chercher un participant";
 
 "event_detail_full_title" = "À propos de l'événement";
 
@@ -1397,7 +1397,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "home_v2_title_map" = "Découvrir des adresses utiles";
 "home_v2_subtitle_map" = "Toutes les structures solidaires à proximité";
-"home_v2_button_map" = "Carte des lieux solidaires près de vous";
+"home_v2_button_map" = "Mapa miejsc solidarności";
 
 "home_v2_title_pedago" = "Tout savoir pour passer à l‘action";
 "home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";
@@ -1600,3 +1600,49 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "main_filter_cell_group_placeholder" = "Szukaj grupy";
 "main_filter_cell_event_placeholder" = "Szukaj wydarzenia";
 "main_filter_cell_action_placeholder" = "Szukaj pomocy";
+
+"filter_groupevent_filters" = "Filtry";
+"filter_groupevent_by_theme" = "Według tematu";
+"filter_groupevent_by_location" = "Według lokalizacji";
+"filter_groupevent_by_category" = "Według kategorii";
+"filter_groupevent_sport" = "Sport";
+"filter_groupevent_animals" = "Zwierzęta";
+"filter_groupevent_social_marauding" = "Maraudowanie społeczne";
+"filter_groupevent_cooking" = "Gotowanie";
+"filter_groupevent_games" = "Gry";
+"filter_groupevent_handicrafts" = "Rękodzieło";
+"filter_groupevent_wellbeing" = "Dobre samopoczucie";
+"filter_groupevent_nature" = "Natura";
+"filter_groupevent_art_and_culture" = "Sztuka i Kultura";
+"filter_groupevent_other" = "Inne";
+"filter_groupevent_sharing_time" = "Czas dzielenia się";
+"filter_groupevent_services" = "Usługi";
+"filter_groupevent_clothes" = "Odzież";
+"filter_groupevent_equipment" = "Sprzęt";
+"filter_groupevent_hygiene_products" = "Produkty higieniczne";
+
+"enhanced_onboarding_sharing_time" = "Czas na dzielenie się";
+"enhanced_onboarding_material_donations" = "Darowizny rzeczowe";
+"enhanced_onboarding_services" = "Oferta usług";
+"enhanced_onboarding_participate_events" = "Uczestniczyć w wydarzeniach towarzyskich";
+"enhanced_onboarding_solicit_help" = "Poprosić o pomoc";
+"enhanced_onboarding_join_neighborhoods" = "Dołączyć do grupy sąsiedzkiej i nawiązywać kontakty";
+"enhanced_onboarding_find_structures" = "Znajdź struktury solidarności w pobliżu";
+"enhanced_onboarding_learn_content" = "Uczyć się z materiałów edukacyjnych";
+"enhanced_onboarding_give_help" = "Dawać lub prosić o pomoc";
+"enhanced_onboarding_interest_sport" = "Sport";
+"enhanced_onboarding_interest_animals" = "Zwierzęta";
+"enhanced_onboarding_interest_social_marauding" = "Społeczna wędrówka";
+"enhanced_onboarding_interest_cooking" = "Gotowanie";
+"enhanced_onboarding_interest_games" = "Gry";
+"enhanced_onboarding_interest_manual_activities" = "Rękodzieło";
+"enhanced_onboarding_interest_wellbeing" = "Dobrostan";
+"enhanced_onboarding_interest_nature" = "Natura";
+"enhanced_onboarding_interest_art_culture" = "Sztuka i kultura";
+"enhanced_onboarding_interest_other" = "Inne";
+"enhanced_onboarding_my_interests" = "Moje zainteresowania";
+"enhanced_onboarding_find_activities" = "Aby pomóc Ci znaleźć odpowiednie zajęcia, powiedz nam, co Cię interesuje.";
+"enhanced_onboarding_my_concerns" = "Moje kategorie pomocy";
+"enhanced_onboarding_select_concerns" = "Wybierz kategorie pomocy, które chcesz priorytetować.";
+"enhanced_onboarding_how_to_act" = "Jak chcesz działać w społeczności Entourage?";
+"enhanced_onboarding_multiple_options" = "(Tak, możesz wybrać wiele opcji!)";

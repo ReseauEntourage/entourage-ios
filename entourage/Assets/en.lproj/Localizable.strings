@@ -157,10 +157,10 @@
 "onboard_phone_title" = "Nice to meet you, %@!";
 
 "onboard_phase3_title" = "Beyond meeting new people, how would you like to contribute to the Entourage community?";
-"onboard_title_entour" = "Surround";
-"onboard_subtitle_entour" = "Offer help...";
-"onboard_title_beentour" = "Be surrounded";
-"onboard_subtitle_beentour" = "Ask for help, find the social structures around me...";
+"onboard_title_entour" = "Support other";
+"onboard_subtitle_entour" = "I would like to offer support to my neighbors in need.";
+"onboard_title_beentour" = "Receive support";
+"onboard_subtitle_beentour" = "I am in a vulnerable situation and seeking support.";
 "onboard_place_title_new" = "In which area do you live?";
 "onboard_place_desc" = "* The address is confidential and will never be communicated";
 "onboard_place_infos_placeholder" = "Address, city or department";
@@ -1379,7 +1379,7 @@
 
 "home_v2_title_map" = "Discover useful addresses";
 "home_v2_subtitle_map" = "All solidarity structures nearby";
-"home_v2_button_map" = "Map of solidarity places near you";
+"home_v2_button_map" = "Map of solidarity places";
 
 "home_v2_title_pedago" = "Everything you need to know";
 "home_v2_subtitle_pedago" = "Fighting precarity, like everything else, can be learned!";
@@ -1576,7 +1576,7 @@
 "enhanced_onboarding_end_title" = "Your personalized experience is (almost) ready!";
 "enhanced_onboarding_end_subtitle" = "Thank you for sharing your interests and desires to act. We look forward to soon offering you tailor-made events that suit you.\nStay connected!";
 
-"edit_profile_cell_onboarding" = "Personalize My Account";
+"edit_profile_cell_onboarding" = "Customise my profile";
 "button_title_for_setting_onboarding" = "Save";
 "button_title_for_re_onboarding_end" = "Return to Profile";
 
@@ -1597,3 +1597,49 @@
 "popup_discussion_test_title" = "Join a group of motivated locals!";
 "popup_discussion_test_text" = "Together, receive tips for taking solidarity actions, participate in local events, and help people in need. All of this will be facilitated through a dedicated chat in the app, where you can exchange ideas and motivate each other.";
 "toast_message_participate" = "Great! We will get back to you soon!";
+
+"filter_groupevent_filters" = "Filters";
+"filter_groupevent_by_theme" = "By theme";
+"filter_groupevent_by_location" = "By location";
+"filter_groupevent_by_category" = "By category";
+"filter_groupevent_sport" = "Sport";
+"filter_groupevent_animals" = "Animals";
+"filter_groupevent_social_marauding" = "Social marauding";
+"filter_groupevent_cooking" = "Cooking";
+"filter_groupevent_games" = "Games";
+"filter_groupevent_handicrafts" = "Handicrafts";
+"filter_groupevent_wellbeing" = "Well-being";
+"filter_groupevent_nature" = "Nature";
+"filter_groupevent_art_and_culture" = "Art & Culture";
+"filter_groupevent_other" = "Other";
+"filter_groupevent_sharing_time" = "Sharing time";
+"filter_groupevent_services" = "Services";
+"filter_groupevent_clothes" = "Clothes";
+"filter_groupevent_equipment" = "Equipment";
+"filter_groupevent_hygiene_products" = "Hygiene products";
+
+"enhanced_onboarding_sharing_time" = "Sharing time";
+"enhanced_onboarding_material_donations" = "Material donations";
+"enhanced_onboarding_services" = "Service offering";
+"enhanced_onboarding_participate_events" = "Participate in convivial events";
+"enhanced_onboarding_solicit_help" = "Ask for a helping hand";
+"enhanced_onboarding_join_neighborhoods" = "Join a neighborhood group and make connections";
+"enhanced_onboarding_find_structures" = "Find solidarity structures nearby";
+"enhanced_onboarding_learn_content" = "Learn with educational content";
+"enhanced_onboarding_give_help" = "Give or ask for a helping hand";
+"enhanced_onboarding_interest_sport" = "Sport";
+"enhanced_onboarding_interest_animals" = "Animals";
+"enhanced_onboarding_interest_social_marauding" = "Social marauding";
+"enhanced_onboarding_interest_cooking" = "Cooking";
+"enhanced_onboarding_interest_games" = "Games";
+"enhanced_onboarding_interest_manual_activities" = "Manual activities";
+"enhanced_onboarding_interest_wellbeing" = "Well-being";
+"enhanced_onboarding_interest_nature" = "Nature";
+"enhanced_onboarding_interest_art_culture" = "Art & Culture";
+"enhanced_onboarding_interest_other" = "Other";
+"enhanced_onboarding_my_interests" = "My interests";
+"enhanced_onboarding_find_activities" = "To help you find activities that suit you, tell us what interests you.";
+"enhanced_onboarding_my_concerns" = "My help categories";
+"enhanced_onboarding_select_concerns" = "Select the help categories you want to prioritize.";
+"enhanced_onboarding_how_to_act" = "How do you want to act within the Entourage community?";
+"enhanced_onboarding_multiple_options" = "(Yes, you can choose multiple options!)";

@@ -819,7 +819,7 @@
 "home_help_title" = "Besoin d’aide";
 "home_help_subtitle" = "Votre guide dans l’app";
 "home_cell_pedago" = "Tout savoir pour passer à l'action";
-"home_cell_map" = "Carte des lieux solidaires";
+"home_cell_map" = "Découvrir la carte";
 "home_cell_map_subtitle" = "Accueils de jour, bagageries…";
 
 "home_resources_title" = "Tout le contenu pédagogique";
@@ -992,8 +992,8 @@
 "event_empty_post_title" = "Il n'y a pas (encore) de publication sur cet événement";
 "event_empty_post_subtitle" = "Pourquoi ne pas lancer la discussion avec vos voisins ?";
 
-"event_users_title" = "Voir les participants";
-"event_userInput_search" = "Rechercher un participant de l'événement";
+"event_users_title" = "Participants";
+"event_userInput_search" = "Chercher un participant";
 
 "event_detail_full_title" = "À propos de l'événement";
 
@@ -1399,7 +1399,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "home_v2_title_map" = "Découvrir des adresses utiles";
 "home_v2_subtitle_map" = "Toutes les structures solidaires à proximité";
-"home_v2_button_map" = "Carte des lieux solidaires près de vous";
+"home_v2_button_map" = "Carte des lieux solidaires";
 
 "home_v2_title_pedago" = "Tout savoir pour passer à l‘action";
 "home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";
@@ -1546,3 +1546,59 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "toast_message_participate" = "Nous revenons vers vous prochainement !";
 "popup_biencommun_title" = "Pour permettre à 60 personnes en précarité d'intégrer un club de sport, il suffit d'un clic. Le vôtre !";
 "popup_biencommun_vote" = "Voter";
+
+// filter group event
+"filter_groupevent_filters" = "Filtres";
+"filter_groupevent_by_theme" = "Par thématique";
+"filter_groupevent_by_location" = "Par localisation";
+"filter_groupevent_by_category" = "Par catégorie";
+"filter_groupevent_sport" = "Sport";
+"filter_groupevent_animals" = "Animaux";
+"filter_groupevent_social_marauding" = "Maraudes sociales";
+"filter_groupevent_cooking" = "Cuisine";
+"filter_groupevent_games" = "Jeux";
+"filter_groupevent_handicrafts" = "Activités manuelles";
+"filter_groupevent_wellbeing" = "Bien-être";
+"filter_groupevent_nature" = "Nature";
+"filter_groupevent_art_and_culture" = "Art & Culture";
+"filter_groupevent_other" = "Autre";
+"filter_groupevent_sharing_time" = "Temps de partage";
+"filter_groupevent_services" = "Service";
+"filter_groupevent_clothes" = "Vêtement";
+"filter_groupevent_equipment" = "Équipement";
+"filter_groupevent_hygiene_products" = "Produit d’hygiène";
+
+//enhanced onboarding
+"enhanced_onboarding_sharing_time" = "Temps de partage";
+"enhanced_onboarding_material_donations" = "Dons matériels";
+"enhanced_onboarding_services" = "Proposition de services";
+"enhanced_onboarding_participate_events" = "Participer à des événements de convivialité";
+"enhanced_onboarding_solicit_help" = "Solliciter un coup de pouce";
+"enhanced_onboarding_join_neighborhoods" = "Rejoindre un groupe de voisins et tisser des liens";
+"enhanced_onboarding_find_structures" = "Trouver des structures solidaires à proximité";
+"enhanced_onboarding_learn_content" = "Apprendre avec des contenus pédagogiques";
+"enhanced_onboarding_give_help" = "Donner ou solliciter un coup de pouce";
+"enhanced_onboarding_interest_sport" = "Sport";
+"enhanced_onboarding_interest_animals" = "Animaux";
+"enhanced_onboarding_interest_social_marauding" = "Maraudes sociales";
+"enhanced_onboarding_interest_cooking" = "Cuisine";
+"enhanced_onboarding_interest_games" = "Jeux";
+"enhanced_onboarding_interest_manual_activities" = "Activités manuelles";
+"enhanced_onboarding_interest_wellbeing" = "Bien-être";
+"enhanced_onboarding_interest_nature" = "Nature";
+"enhanced_onboarding_interest_art_culture" = "Art & Culture";
+"enhanced_onboarding_interest_other" = "Autre";
+"enhanced_onboarding_my_interests" = "Mes centres d’intérêts";
+"enhanced_onboarding_find_activities" = "Pour vous aider à trouver des activités qui vous correspondent, dites-nous ce qui vous intéresse.";
+"enhanced_onboarding_my_concerns" = "Mes catégories d’entraide";
+"enhanced_onboarding_select_concerns" = "Sélectionnez les catégories d'entraide que vous souhaitez voir en priorité.";
+"enhanced_onboarding_how_to_act" = "Comment souhaitez-vous agir au sein de la communauté Entourage ?";
+"enhanced_onboarding_multiple_options" = "(Eh oui, vous avez le droit de choisir plusieurs options !)";
+
+"ambassador_ask_notification_title" = "Participez-vous en tant qu’organisateur ou en tant que participant ?";
+"ambassador_ask_notification_description" = "Si vous êtes organisateur, les participants pourront vous identifier plus facilement";
+"ambassador_ask_notification_button_organizer" = "Organisateur";
+"ambassador_ask_notification_button_participant" = "Participant";
+
+
+"neighborhood_user_role_organizer" = "Organisateur";

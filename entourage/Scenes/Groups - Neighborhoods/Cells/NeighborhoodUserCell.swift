@@ -13,6 +13,7 @@ class NeighborhoodUserCell: UITableViewCell {
     @IBOutlet weak var ui_username: UILabel!
     @IBOutlet weak var ui_role: UILabel!
     @IBOutlet weak var ui_view_separator: UIView!
+    @IBOutlet weak var ui_view_background: UIView!
     
     @IBOutlet weak var ic_image_reaction: UIImageView!
     @IBOutlet weak var ui_bt_message: UIButton!
@@ -48,29 +49,53 @@ class NeighborhoodUserCell: UITableViewCell {
         }
     }
     
-    func populateCell(isMe:Bool, username:String, role:String?, imageUrl:String?, showBtMessage:Bool,delegate:NeighborhoodUserCellDelegate, position:Int, reactionType:ReactionType?, isConfirmed:Bool?) {
-        ui_username.text = username
-        ui_role.text = role
-        if isConfirmed ?? false{
-            ui_username.text = username + " - Participation confirmée"
-        }
-        
+    func populateCell(isMe: Bool, username: String, role: String?, imageUrl: String?, showBtMessage: Bool, delegate: NeighborhoodUserCellDelegate, position: Int, reactionType: ReactionType?, isConfirmed: Bool?, isOrganizer: Bool?) {
         self.delegate = delegate
         self.position = position
-        print("position " , position)
+        
+        // Configure le nom de l'utilisateur
+        if isOrganizer == true {
+            // Ajouter "- organisateur" en orange
+            let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+            let organizerText = " - \(NSLocalizedString("neighborhood_user_role_organizer", comment: ""))"
+            let organizerAttributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor(named: "appOrange") ?? UIColor.orange
+            ]
+            attributedText.append(NSAttributedString(string: organizerText, attributes: organizerAttributes))
+            
+            ui_username.attributedText = attributedText
+            
+            // Change le fond de la cellule en orange clair
+            self.ui_view_background.backgroundColor = UIColor(named: "lightOrangeBackground") ?? UIColor(red: 254/255, green: 245/255, blue: 235/255, alpha: 1.0)
+        } else {
+            // Si ce n'est pas un organisateur, réinitialise le texte et la couleur de fond par défaut
+            ui_username.text = username
+            self.backgroundColor = .white
+        }
+        
+        // Configurer le rôle de l'utilisateur
+        ui_role.text = role
+        
+        if isConfirmed ?? false {
+            ui_username.text = "\(username) - Participation confirmée"
+        }
+        
+        print("position ", position)
         ui_bt_message.isHidden = !showBtMessage
         ui_picto_message.isHidden = !showBtMessage
         
+        // Configurer l'image de l'utilisateur
         if let imageUrl = imageUrl, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
-            ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
-        }
-        else {
-            ui_image.image = UIImage.init(named: "placeholder_user")
+            ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage(named: "placeholder_user"))
+        } else {
+            ui_image.image = UIImage(named: "placeholder_user")
         }
         
+        // Masquer les boutons si c'est l'utilisateur lui-même
         ui_bt_message.isHidden = isMe
         ui_picto_message.isHidden = isMe
-        // Supposons que reactionType.id contient l'ID de la réaction que tu veux afficher
+        
+        // Configurer l'image de réaction
         if let reactionId = reactionType?.id,
            let completeReactionType = getStoredReactionTypes()?.first(where: { $0.id == reactionId }),
            let imageUrl = URL(string: completeReactionType.imageUrl ?? "") {
@@ -82,8 +107,8 @@ class NeighborhoodUserCell: UITableViewCell {
             ic_image_reaction.isHidden = true
             ui_view.isHidden = true
         }
-        
     }
+
     
     func getStoredReactionTypes() -> [ReactionType]? {
         guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }

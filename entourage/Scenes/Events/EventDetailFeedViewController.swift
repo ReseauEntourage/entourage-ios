@@ -24,6 +24,7 @@ class EventDetailFeedViewController: UIViewController {
     @IBOutlet weak var ui_label_title_event: UILabel!
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     
+    @IBOutlet weak var ui_constraint_button: NSLayoutConstraint!
     @IBOutlet weak var ui_view_button_back: UIView!
     @IBOutlet weak var ui_view_button_settings: UIView!
     
@@ -64,6 +65,7 @@ class EventDetailFeedViewController: UIViewController {
     let IMAGE_POST_CELL_SIZE = 430.0
     
     var pullRefreshControl = UIRefreshControl()
+    var users:[UserLightNeighborhood] = [UserLightNeighborhood]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,8 +114,17 @@ class EventDetailFeedViewController: UIViewController {
         }
         //Notif for updating event infos
         //NotificationCenter.default.addObserver(self, selector: #selector(updateEvent), name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        getEventMembers()
         getEventDetail()
 
+    }
+    
+    func getEventMembers(){
+        EventService.getEventUsers(eventId: self.eventId) { users, error in
+            if let _users = users{
+                self.users = _users
+            }
+        }
     }
     
     func registerCellsNib() {
@@ -378,27 +389,38 @@ class EventDetailFeedViewController: UIViewController {
         self.ui_tableview.reloadData()
         if isAdd {
             IHProgressHUD.show()
-            EventService.joinEvent(eventId: eventId) { user, error in
-                IHProgressHUD.dismiss()
-                if let user = user {
-                    let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
-                    self.event?.members?.append(member)
-                    let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! + 1 : 1
-                    
-                    self.isAfterCreation = true
-                    self.event?.membersCount = count
-                    self.getEventDetail(hasToRefreshLists:true)
-                    
-                    DispatchQueue.main.async {
-                        if self.event?.metadata?.hasPlaceLimit ?? false {
-                            self.showPopInfoPlaces()
-                        }
-                        else {
-                            self.addToCalendar()
+            if ((UserDefaults.currentUser?.isAmbassador()) != nil){
+                if let popupVC = storyboard?.instantiateViewController(withIdentifier: "ambassadorAskNotificationPopup") as? AmbassadorAskNotificationPopup {
+                    popupVC.delegate = self
+                    popupVC.modalPresentationStyle = .overFullScreen // Ajuster le style de présentation si nécessaire
+                    popupVC.modalTransitionStyle = .crossDissolve // Ajuster la transition si nécessaire
+                    present(popupVC, animated: true, completion: nil)
+                }
+
+            }else{
+                EventService.joinEvent(eventId: eventId) { user, error in
+                    IHProgressHUD.dismiss()
+                    if let user = user {
+                        let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
+                        self.event?.members?.append(member)
+                        let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! + 1 : 1
+                        
+                        self.isAfterCreation = true
+                        self.event?.membersCount = count
+                        self.getEventDetail(hasToRefreshLists:true)
+                        
+                        DispatchQueue.main.async {
+                            if self.event?.metadata?.hasPlaceLimit ?? false {
+                                self.showPopInfoPlaces()
+                            }
+                            else {
+                                self.addToCalendar()
+                            }
                         }
                     }
                 }
             }
+
         }
         else {
             showPopLeave()
@@ -605,7 +627,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         if indexPath.section == 0 {
             if (self.event!.isMember ?? false) && !isAfterCreation {
                 let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopLightCell.identifier, for: indexPath) as! EventDetailTopLightCell
-                cell.populateCell(event: self.event, delegate: self,isEntourageEvent: isUserAmbassador)
+                cell.populateCell(event: self.event, delegate: self,isEntourageEvent: isUserAmbassador, members: self.users)
                 return cell
             }
             else {
@@ -1066,6 +1088,22 @@ extension EventDetailFeedViewController:CreateSurveyValidationDelegate{
 extension EventDetailFeedViewController:FloatyDelegate {
     func floatyWillOpen(_ floaty: Floaty) {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Plus)
+        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 170 : 16
+
+        // Animer le changement de contrainte
+        UIView.animate(withDuration: 0.3) {
+            self.ui_constraint_button.constant = newHeight
+            self.view.layoutIfNeeded()
+        }
+    }
+    func floatyClosed(_ floaty: Floaty) {
+        let newHeight: CGFloat = UIView.userInterfaceLayoutDirection(for: self.view.semanticContentAttribute) == .rightToLeft ? 16 : 16
+
+        // Animer le changement de contrainte
+        UIView.animate(withDuration: 0.3) {
+            self.ui_constraint_button.constant = newHeight
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func createButtonItem(title:String, iconName:String, handler:@escaping ((FloatyItem) -> Void)) -> FloatyItem {
@@ -1087,4 +1125,55 @@ enum TableIsOldAndNewPost {
     case onlyNew
 }
 
-
+extension EventDetailFeedViewController : AmbassadorAskNotificationPopupDelegate{
+    func joinAsOrganizer() {
+        
+        EventService.joinEventAsOrganizer(eventId: eventId) { user, error in
+            IHProgressHUD.dismiss()
+            if let user = user {
+                let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
+                self.event?.members?.append(member)
+                let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! + 1 : 1
+                
+                self.isAfterCreation = true
+                self.event?.membersCount = count
+                self.getEventDetail(hasToRefreshLists:true)
+                
+                DispatchQueue.main.async {
+                    if self.event?.metadata?.hasPlaceLimit ?? false {
+                        self.showPopInfoPlaces()
+                    }
+                    else {
+                        self.addToCalendar()
+                    }
+                }
+            }
+        }
+    }
+    
+    func justParticipate() {
+        EventService.joinEvent(eventId: eventId) { user, error in
+            IHProgressHUD.dismiss()
+            if let user = user {
+                let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
+                self.event?.members?.append(member)
+                let count:Int = self.event?.membersCount != nil ? self.event!.membersCount! + 1 : 1
+                
+                self.isAfterCreation = true
+                self.event?.membersCount = count
+                self.getEventDetail(hasToRefreshLists:true)
+                
+                DispatchQueue.main.async {
+                    if self.event?.metadata?.hasPlaceLimit ?? false {
+                        self.showPopInfoPlaces()
+                    }
+                    else {
+                        self.addToCalendar()
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}

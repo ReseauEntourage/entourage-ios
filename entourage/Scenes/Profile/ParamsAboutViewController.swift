@@ -33,7 +33,6 @@ class ParamsAboutViewController: BasePopViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_top_view.populateView(title: "params_about_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
-        
         self.ui_tableview.dataSource = self
         self.ui_tableview.delegate = self
     }
@@ -56,6 +55,7 @@ extension ParamsAboutViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ParamsAboutCell
         
         let isLast = indexPath.row == arrayMenuItems.count - 1
+        
         cell.populateCell(title: item.title.localized, isSeparatorHidden: isLast)
         
         

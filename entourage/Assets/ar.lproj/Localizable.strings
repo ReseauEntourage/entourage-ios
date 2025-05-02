@@ -1,93 +1,1585 @@
-"onboarding_lang_bienvenue" = "مرحبًا!";
+"attention_pop_title" = "انتباه";
+"close" = "يغلق";
+"error" = "خطأ";
+"generic_error" = "لقد حدث خطأ. تحقق من اتصال الشبكة وحاول مرة أخرى.";
+"connection_error" = "فشل تسجيل الدخول";
+"connection_imposible" = "غير قادر على الاتصال";
+"tryAgain" = "يرجى المحاولة مرة أخرى";
+"tryAgain_short" = "حاول ثانية";
+"ok" = "تمام";
+"OK" = "تمام";
+"validate" = "للتحقق من صحة";
+"create" = "يخلق";
+"edit" = "يحرر";
+"modify" = "للتعديل";
+"showAll" = "شاهد الكل";
+"searchForAddress" = "ابحث عن عنوان";
+"cancel" = "يلغي";
+"refuseAlert" = "رفض";
+"activate" = "يُمكَِن";
+"km" = "كم";
+"Yes" = "نعم";
+"No" = "لا";
+"yes" = "نعم";
+"no" = "لا";
+"about_email_notavailable" = "لم يتم العثور على البريد الإلكتروني";
+"Loading" = "تحميل";
+"Admin" = "مسؤل";
+//TABBAR
+"tabbar_home" = "مرحباً";
+"tabbar_gifts" = "المساعدات المتبادلة";
+"tabbar_messages" = "المناقشات";
+"tabbar_groups" = "المجموعات";
+"tabbar_events" = "الأحداث";
+
+"errorSettings" = "الترخيص مطلوب";
+"toSettings" = "إعدادات";
+"authCameraSettings" = "يرجى السماح بالوصول إلى الكاميرا.";
+"authGpsSettings" = "يرجى السماح بالوصول إلى نظام تحديد المواقع العالمي (GPS).";
+
+"WIP" = "قريباً";
+"notImplemented" = "قريباً ؛)";
+"today" = "اليوم";
+"yesterday" = "أمس";
+"Today" = "اليوم";
+"Yesterday" = "أمس";
+"the" = "ال";
+"The" = "ال";
+//PreOnboarding
+"next" = "التالي";
+"connectMe" = "تسجيل الدخول";
+"previous" = "سابق";
+"bt_pass" = "يمر";
+
+"intro_title_1" = "الشبكة الاجتماعية، الاجتماعية حقا.";
+"intro_subtitle_1" = "مهمتنا: تعبئة المواطنين وتجهيزهم لدعم الفئات الأكثر استبعاداً.";
+"intro_title_2" = "على تطبيق Entourage:";
+"intro_subtitle_2" = "قابل جيرانًا مثلك خلال الأحداث وناقش معهم أعمال التضامن.";
+"intro_title_3" = "حاشية معك!";
+"intro_subtitle_3" = "تقوم فرق Entourage من السفراء والمتطوعين والمشرفين بدعمك وتوجيهك بشكل يومي.";
+
+"preOnboard_choice_description" = "الشبكة الاجتماعية، الاجتماعية حقا.";
+"preOnboard_choice_signup" = "أنا أسجل";
+"preOnboard_choice_login" = "لدي حساب بالفعل";
+"preOnboard_choice_weblink" = "من هي جمعية حاشية؟";
+
+//Login
+"error_login_phone_length" = "يجب أن يتكون رقم الهاتف من %d رقم على الأقل";
+"error_login_code_lenght" = "يجب أن يتكون الرمز من 6 أرقام";
+"error_login_resendCode_unknow" = "رقم الهاتف غير معروف، يرجى المحاولة مرة أخرى.";
+"error_login_phoneNumberOrCode" = "رقم الهاتف ورمز الوصول هذا غير متطابقين.";
+"error_login_phoneNumberFormat" = "خطأ في الاتصال. يجب أن يكون هاتفك بالتنسيق:\n+33 أو 06 أو 07";
+
+"login_title" = "اتصال";
+"login_phone_placeholder" = "رقم التليفون";
+"login_placeholder_code" = "أدخل الرمز الخاص بك";
+"login_button_connect" = "قمت بتسجيل الدخول";
+"login_button_resend_code" = "اطلب الرمز مرة أخرى";
+"login_resend_code_title" = "اطلب الرمز مرة أخرى";
+"login_resend_code_button_yes" = "بسأل";
+"login_resend_code_button_no" = "يلغي";
+"login_resend_code_title" = "اطلب الرمز مرة أخرى";
+"login_resend_code_message" = "هل تريد طلب رمز لرقم هاتفك مرة أخرى:";
+"login_label_country" = "دولة";
+"login_label_phone" = "هاتف";
+"login_label_code" = "شفرة";
+"login_button_change_phone" = "لقد غيرت رقم هاتفي";
+
+"login_change_phone_title" = "رقم جديد";
+"login_change_phone_old_number" = "قضية قديمة";
+"login_change_phone_new_number" = "رقم جديد";
+"login_change_phone_email" = "البريد الإلكتروني (اختياري)";
+"login_change_phone_bt_validate" = "يرسل";
+"login_change_phone_old_number_placeholder" = "قضية قديمة";
+"login_change_phone_new_number_placeholder" = "رقم جديد";
+"login_change_phone_email_placeholder" = "بريد إلكتروني";
+"login_change_send_ok" = "تم إرسال طلبك.\n\n\nسيبلغك دعم Entourage عند اكتمال تغيير الرقم.";
+"login_change_bt_return" = "خلف";
+
+"login_change_warning_title" = "انتباه";
+"login_change_error_phone" = "يرجى التحقق من أرقام الهواتف الخاصة بك";
+"login_change_error_mail" = "يرجى التحقق من عنوان البريد الإلكتروني الخاص بك";
+
+"login_change_error_return" = "خطأ";
+
+"login_change_error_not_found" = "الرقم القديم غير معروف.\nيرجى التأكد.";
+"login_change_error_deleted" = "تمت إزالة المشكلة القديمة.\nيرجى التحقق.";
+"login_change_error_blocked" = "لقد تم حظر الرقم القديم.\nيرجى التأكد.";
+"login_change_error_identical" = "كلا الرقمين متماثلان.\nالرجاء التحقق من الرقم الجديد.";
+"login_change_error_generic" = "الرقم القديم غير معروف أو محذوف.\nالرجاء التحقق من الأرقام.";
+
+//Login next
+"login_info_pop_action" = "من ملفك الشخصي، يمكنك تخصيص موجز الأخبار الخاص بك والتوصيات التي تلقيتها. اختر بسرية تامة إذا كنت حاليًا: جار داعم، شخص محتاج، جمعية.";
+"login_pop_information" = "جديد ! تكيف Entourage مع رغباتك واحتياجاتك!";
+"login_info_pop_validate" = "مفهوم!";
+"pop_info_entourage_custom_yes" = "إضفاء الطابع الشخصي";
+"pop_info_entourage_custom_no" = "لاحقاً";
+"pop_info_entourage_custom_no_more" = "لا تظهر لي بعد الآن";
+"login_email_pwd_title" = "طيب عظيم!";
+"login_email_pwd_description" = "الآن، دعونا ننتهي من إنشاء حسابك!";
+
+//Onboarding
+"onboard_bt_create" = "يخلق";
+"onboard_bt_back" = "سابق";
+"onboard_bt_next" = "التالي";
+//Phase 1
+"onboard_welcome_title" = "مرحباً !";
+"onboard_welcome_info" = "سيكون الحرف الأول فقط مرئيًا.";
+"onboard_welcome_firstname" = "الاسم الأول*";
+"onboard_welcome_placeholder_firstname" = "اسمك الأول";
+"onboard_welcome_lastname" = "اسم*";
+"onboard_welcome_placeholder_lastname" = "اسمك";
+"onboard_welcome_country" = "دولة*";
+"onboard_welcome_phone" = "هاتف*";
+"onboard_welcome_mail" = "بريد إلكتروني";
+"onboard_welcome_placeholder_mail" = "youraddress@mail.com";
+"onboard_welcome_consent" = "أرغب في الحصول على معلومات ونصائح من Entourage";
+"onboard_welcome_info_mandatory" = "* الحقول المطلوبة. ستبقى معلوماتك سرية ولن يتم نقلها إلى أطراف ثالثة أبدًا.";
+
+//Phase2
+"onboard_sms_title" = "أدخل الرمز الذي تلقيته عبر الرسائل القصيرة";
+"onboard_sms_sub" = "لقد تم إرسال رسالة نصية قصيرة إليك للتو على:";
+"onboard_sms_modify" = "- للتعديل";
+"onboard_sms_no_code" = "لا يوجد رمز؟ حاول مرة أخرى خلال دقيقة واحدة";
+"onboard_sms_wait_retry" = "لا يوجد رمز؟ حاول مرة أخرى في %@";
+"onboard_sms_wait_retry_end" = "اطلب الرمز مرة أخرى";
+
+//Phase 3
+"onboard_phone_title" = "سعيد بلقائك، ٪@!";
+
+"onboard_phase3_title" = "بالإضافة إلى مقابلة الأشخاص، كيف تريد المساهمة في مجتمع Entourage؟";
+"onboard_title_entour" = "دعم الآخرين";
+"onboard_subtitle_entour" = "أرغب في تقديم الدعم لجيراني المحتاجين.";
+"onboard_title_beentour" = "تلقي الدعم";
+"onboard_subtitle_beentour" = "أنا في موقف ضعف وأبحث عن الدعم.";
+"onboard_place_title_new" = "ما هو حيك؟";
+"onboard_place_desc" = "* العنوان سري ولن يتم الإفصاح عنه أبداً";
+"onboard_place_infos_placeholder" = "العنوان أو المدينة أو القسم";
+"onboard_info_asso" = "أنا جمعية";
+
+//Phase End
+"onboard_end_title" = "مرحبًا بك في مجتمع Entourage";
+"onboard_end_subtitle" = "تهانينا، أنت على استعداد لجلب التضامن إلى الحياة من حولك.";
+"onboard_end_button" = "ابدأ المغامرة البشرية";
+
+//Onboard errors
+"onboard_error_Usertype" = "الرجاء تحديد مساهمة واحدة على الأقل";
+"onboard_error_place" = "الرجاء اختيار عنوان";
+"onboard_error_firstname" = "يجب أن يحتوي الاسم الأول على حرفين على الأقل.";
+"onboard_error_lastname" = "يجب أن يتكون الاسم من حرفين على الأقل.";
+"onboard_error_email" = "عنوان البريد الإلكتروني غير صالح.";
+"onboard_error_phone" = "يجب أن يتكون الرقم من 9 أو 10 أرقام.";
+"onboard_error_general" = "يرجى إكمال كافة الحقول المطلوبة";
+//A supp
+"onboard_button_pass" = "يمر";
+
+"onboard_welcome_sub" = "أولاً...\nما اسمك؟";
+
+
+
+"onboard_phone_sub" = "ما هو رقم هاتفك؟";
+"onboard_phone_info" = "ستبقى هذه المعلومات سرية. نريد فقط التحقق من أنك لست روبوتًا، بل إنسانًا ذو قلب كبير!";
+"onboard_phone_placeholder_phone" = "هاتف";
+
+"onboard_sms_no_pwd" = "يرجى ملء كلمة المرور";
+"attention_pop_title" = "انتباه";
+"onboard_sms_pop_alert" = "الرجاء الانتظار %d ثانية أخرى قبل تكرار الطلب.";
+"onboard_type_title" = "سعيد بلقائك، ٪@.";
+"onboard_type_sub" = "كيف تريد تخصيص التطبيق؟";
+"onboard_type_description" = "يطرح عليك Entourage هذه الأسئلة القليلة للترحيب بك ودعمك بأفضل ما يمكن!\n(لن تكون هذه المعلومات مرئية للأعضاء الآخرين في الشبكة).";
+"onboard_type_description_italic" = "(هذه المعلومات لن تكون مرئية للأعضاء الآخرين في الشبكة).";
+"onboard_type_choice1" = "لمساعدة المشردين وإقامة اتصالات في منطقتك.";
+"onboard_type_choice2" = "لطلب المساعدة واكتشاف أماكن التضامن.";
+"onboard_type_choice3" = "للتحدث نيابة عن الهيكل الخاص بك.";
+"onboard_type_choice_title1" = "الجارة المتضامنة";
+"onboard_type_choice_title2" = "شخص منعزل أو غير مستقر";
+"onboard_type_choice_title3" = "جمعية أو خدمة عامة";
+"onboard_place_title" = "ما هو حيك؟";
+"onboard_place_description" = "سوف تكون قادرًا على الاستجابة لطلبات الأشخاص الذين يواجهون صعوبات ومن الجمعيات في منطقتك، وستكون قادرًا بنفسك على تقديم التبرعات بوقتك أو موادك.";
+"onboard_place_title_sdf" = "في أي حي تعيش عادة؟";
+"onboard_place_description_sdf" = "ستتمكن من طلب المساعدة من جيرانك والتعرف على أشخاص جدد خلال أحداث الشبكة الودية.";
+"onboard_place_info" = "Entourage لا يتصل بهذا العنوان.";
+"onboard_place_placeholder" = "مثلا: 35000";
+"onboard_email_pwd_title" = "طيب عظيم!";
+"onboard_email_pwd_email_info" = "اترك لنا بريدك الإلكتروني لتلقي المعلومات والمشورة من Entourage!";
+"onboard_email_pwd_email_info2" = "Entourage لا يشارك عنوان بريدك الإلكتروني.";
+"onboard_email_pwd_description" = "الآن، دعونا ننتهي من إنشاء حسابك!";
+"onboard_email_pwd_info_length" = "تضمين 8 أحرف على الأقل.";
+"onboard_email_pwd_placeholder_email" = "بريد إلكتروني";
+"onboard_email_pwd_placeholder_pwd" = "كلمة المرور";
+"onboard_email_pwd_placeholder_confirm_pwd" = "قم بتأكيد كلمة المرور الخاصة بك";
+"onboard_email_pwd_error_email" = "عنوان البريد الإلكتروني غير صالح";
+"onboard_email_pwd_error_pwd_match" = "كلمتا المرور غير متطابقتين";
+"onboard_photo_title" = "شكرًا، ٪@ !";
+"onboard_photo_description" = "اللمسة الأخيرة: يمكنك إضافة صورتك. لا يستطيع أعضاء الوفد المرافق في منطقتك الانتظار لمقابلتك!";
+
+
+"onboard_email_pwd_placeholder_confirm_pwd" = "قم بتأكيد كلمة المرور الخاصة بك";
+"onboard_email_pwd_placeholder_email" = "بريد إلكتروني";
+"onboard_email_pwd_placeholder_pwd" = "كلمة المرور";
+"onboard_email_pwd_description" = "الآن، دعونا ننتهي من إنشاء حسابك!";
+"onboard_email_pwd_info_length" = "تضمين 8 أحرف على الأقل.";
+"onboard_email_pwd_title" = "طيب عظيم!";
+"onboard_email_pwd_email_info" = "اترك لنا بريدك الإلكتروني لتلقي المعلومات والمشورة من Entourage!";
+"onboard_email_pwd_email_info2" = "Entourage لا يشارك عنوان بريدك الإلكتروني.";
+"onboard_email_pwd_description" = "الآن، دعونا ننتهي من إنشاء حسابك!";
+//Fin supp
+
+
+//Onboarding Assos
+"onboard_asso_start_title" = "هذا جيد!";
+"onboard_asso_start_description" = "حاشية هي جمعية تخدم أنشطتك.";
+"onboard_asso_start_description_bold" = "محيط";
+"onboard_asso_start_description2" = "بعض القصص الرائعة التي تظهر قيمة مجتمع Entourage.";
+"onboard_asso_info_title" = "بشكل ملموس، في التطبيق، الميزات مخصصة لك";
+"onboard_asso_info_description" = "كن معروفًا جيدًا على الشبكة وأشرك مجتمعك";
+"onboard_asso_info_1" = "ملف تعريف تم التحقق منه لكل عضو من أعضائك: ضمان ثقة جيرانك";
+"onboard_asso_info_1_bold" = "ملف شخصي تم التحقق منه";
+"onboard_asso_info_2" = "صفحة للهيكل الخاص بك: لإبلاغ محليًا عن أنشطتك واحتياجاتك.";
+"onboard_asso_info_2_bold" = "صفحة للهيكل الخاص بك";
+"onboard_asso_info_3" = "إرسال الإخطارات في منطقتك وخارجها لأفراد المجتمع.";
+"onboard_asso_info_3_bold" = "إرسال الإخطارات";
+"onboard_asso_fill_title" = "أخبرنا عن الهيكل الخاص بك";
+"onboard_asso_fill_description" = "أخبرنا المزيد عن جمعيتك، وسوف نتصل بك للتحقق من ملفك الشخصي وإنشاء صفحة جمعية لك!";
+"onboard_asso_fill_name_placeholder" = "اسم جمعيتي";
+"onboard_asso_fill_cp_placeholder" = "الرمز البريدي لجمعيتي";
+"onboard_asso_fill_function_placeholder" = "وظيفتي";
+"onboard_asso_fill_error" = "الرجاء إكمال كافة الحقول.\nشكرًا لك";
+"onboard_asso_search_creation" = "إنشاء: %@";
+"onboard_asso_activity_title" = "%@، ما هو عملك الأساسي؟";
+"onboard_asso_activity_description" = "حدد قطاع (قطاعات) نشاط الهيكل الخاص بك، وهذا سيسمح لنا أن نقدم لك أفضل طريقة لاستخدام التطبيق وتعبئة مجتمع Entourage.";
+"onboard_asso_activity_error" = "الرجاء إدخال مركز اهتمام واحد على الأقل.\nشكرًا لك";
+"onboard_asso_activity_choice_1" = "مساعدة للناس";
+"onboard_asso_activity_choice_2" = "المبادرات الثقافية\الرياضية الصافية";
+"onboard_asso_activity_choice_3" = "الخدمة العامة";
+"onboard_asso_activity_choice_4" = "آحرون ؟";
+"onboard_asso_search" = "بحث";
+
+//Onboarding Sdf
+"onboard_sdf_activity_title" = "٪@، ما الذي تبحث عنه ؟";
+"onboard_sdf_activity_description" = "العديد من الخيارات الممكنة.\nهناك آلاف الطرق للحصول على الدعم والمساعدة.";
+"onboard_sdf_activity_error" = "الرجاء إدخال مركز اهتمام واحد على الأقل.\nشكرًا لك";
+"onboard_sdf_activity_choice_1" = "اصنع دائرة من الأصدقاء";
+"onboard_sdf_activity_choice_2" = "المشاركة في\nالأحداث";
+"onboard_sdf_activity_choice_3" = "اطرح\nالأسئلة";
+"onboard_sdf_activity_choice_4" = "اطلب المساعدة";
+"onboard_sdf_activity_choice_5" = "توجيه نفسي";
+"onboard_sdf_activity_choice_6" = "البحث عن الجمعيات";
+
+//Onboarding Neighbour
+"onboard_neighbour_activity_title" = "%@، ماذا تريد أن تفعل في منطقتك؟";
+"onboard_neighbour_activity_description" = "هناك عدة خيارات ممكنة.\nسنقدم لك المقترحات المناسبة.";
+"onboard_sneighbour_activity_error" = "الرجاء إدخال مركز اهتمام واحد على الأقل.\nشكرًا لك";
+"onboard_neighbour_activity_choice_1" = "أبلغني";
+"onboard_neighbour_activity_choice_2" = "المشاركة في\nالأحداث";
+"onboard_neighbour_activity_choice_3" = "تحيط بشخص معزول";
+"onboard_neighbour_activity_choice_4" = "تقديم التبرعات المادية";
+"onboard_neighbour_activity_choice_5" = "شارك في الجمعية";
+
+
+//Onboarding Place tunnel SDF / Voisins
+"onboard_place_title2_sdf" = "عظيم !";
+"onboard_place_description2_sdf" = "هل ترغب بإضافة منطقة أخرى؟";
+"onboard_place_title2" = "عظيم !";
+"onboard_place_description2" = "لقد انضممت للتو إلى أعضاء منطقتك. هل تريد إضافة منطقة أخرى للعمل فيها؟";
+
+//Pop inform notifications
+"pop_notification_title" = "لا تفوت أي شيء!";
+"pop_notification_description" = "في Entourage، ستقوم بإنشاء روابط بين الجيران الداعمين.\nقم بتنشيط الإشعارات ليتم تنبيهك برسائلك الجديدة.";
+"pop_notification_bt_activate" = "يُمكَِن";
+"pop_notification_bt_cancel" = "يلغي";
+
+//Errors Onboarding
+"onboarding_error_firstname" = "يجب أن يحتوي الاسم الأول على حرفين على الأقل.";
+"onboarding_error_lastname" = "يجب أن يتكون الاسم من حرفين على الأقل.";
+"onboarding_error_email" = "عنوان البريد الإلكتروني غير صالح.";
+"onboarding_error_phone" = "يجب أن يتكون الرقم من 9 أو 10 أرقام.";
+"onboarding_help_label" = "هل تحتاج إلى مساعدة؟\nاتصل بفريق Entourage.";
+"invalidCode" = "رمز التحقق غير صالح";
+"invalidPhoneNumber" = "رقم الهاتف غير صالح";
+"invalidPhoneNumberOrCode" = "رقم الهاتف ورمز الوصول هذا غير متطابقين.";
+"mustAddCode" = "الرجاء إدخال رمز التحقق";
+"invalidPhoneNumberFormat" = "خطأ في الاتصال. يجب أن يكون هاتفك بالتنسيق:\n+33 أو 06 أو 07";
+"requestSent" = "تم إرسال الطلب";
+"requestNotSent" = "لم يتم إرسال الطلب";
+"alreadyRegisteredMessage" = "تم تسجيل الرقم بالفعل. من المفترض أن تكون قد استلمت الرمز عبر رسالة نصية قصيرة.";
+"alreadyRegistereMessageGoBack" = "الرقم مسجل بالفعل، وسوف نقوم بإعادة توجيهك إلى صفحة تسجيل الدخول.";
+"onboarding_error_email" = "عنوان البريد الإلكتروني غير صالح.";
+
+/*******
+ Guide Map
+ */
+"info_share_sms_poi" = "صباح الخير ! هذا هو عنوان %@ الذي قد يثير اهتمامك.\n%@\n%@\nلمزيد من المعلومات حول هذا المكان، ولإنشاء روابط بين الجيران الداعمين، سأحدد لك موعدًا على شبكة Entourage %@";
+"title_new_gds" = "أماكن التضامن";
+"home_button_map" = "رسم خريطة";
+"home_button_list" = "قائمة";
+"home_button_filters" = "المرشحات";
+"home_button_filters_on" = "تم تمكين عوامل التصفية";
+//Solidarity Guide
+"button_reset_filters" = "إلغاء عوامل التصفية";
+"filter_solidarity_guide_categories" = "فئات";
+"guide_display_feed" = "إطعام نفسك";
+"guide_display_housing" = "إقامة";
+"guide_display_heal" = "علاج نفسك";
+"guide_display_refresh" = "ترطيب";
+"guide_display_orientation" = "توجيه نفسك";
+"guide_display_caring" = "الرفاه والأنشطة";
+"guide_display_reinsertion" = "إعادة التكامل";
+"guide_display_partners" = "الجمعيات والخدمات النشطة على Entourage";
+"partners_entourage" = "منظمة نشطة على Entourage";
+"guide_display_donate" = "أبحث عن التبرعات";
+"guide_display_volunteer" = "أبحث عن متطوعين";
+"guide_display_info_mutli" = "الأماكن التي تقدم خدمات من عدة فئات";
+
+"guide_display_toilettes" = "حمام";
+"guide_display_fontaines" = "نوافير";
+"guide_display_laver" = "الاستحمام";
+"guide_display_laverie" = "المغاسل";
+
+"guide_display_vetements" = "الملابس والمواد";
+"guide_display_boite" = "صناديق التبرعات والقراءة";
+"guide_display_bagageries" = "تخزين الأمتعة";
+
+"DetailPoiContact" = "اتصال";
+"DetailPoiPublic" = "جمهور";
+"DetailPoiLanguage" = "اللغات المنطوقة";
+"DetailPoiOpenTime" = "الجداول الزمنية";
+
+"info_soliguide_1" = "يتم توفير المعلومات حول هذا الموقع من خلال Soliguide، رسم الخرائط التضامنية.";
+"info_soliguide_2" = "لمزيد من المعلومات الكاملة المتوفرة بعدة لغات";
+"info_button_soliguide_consult" = "للتشاور";
+"guideTitle" = "دليل التضامن";
+
+/*******
+//Partner detail
+****/
+"title_association" = "منظمة";
+"title_asso_donation" = "قبول التبرعات";
+"title_asso_volunteer" = "أبحث عن متطوعين";
+"title_asso_information" = "اتصال";
+"title_asso_needs" = "الاحتياجات";
+"title_asso_accept_needs" = "يقبل التبرعات";
+"title_asso_accept_volunteers" = "أبحث عن متطوعين";
+"title_asso_contact" = "اتصال";
+"title_asso_phone" = "رقم التليفون";
+"title_asso_phone_light" = "هاتف";
+"title_asso_website" = "موقع إلكتروني";
+"title_asso_address" = "عنوان";
+"title_asso_address_big" = "العنوان البريدي";
+"title_asso_email_light" = "بريد إلكتروني";
+
+//Pop follow/unfollow partner
+"buttonFollowOnPartner" = "المشترك";
+"buttonFollowOffPartner" = "يشترك";
+"partner_pop_unfollow_title" = "هل تريد إلغاء الاشتراك؟";
+"partner_pop_unfollow_message" = "من خلال إلغاء الاشتراك، لن تتلقى بعد الآن الإخطارات والأخبار والأحداث الجديدة من هذه الجمعية.";
+
+/**********
+ Profile
+ */
+"myProfileButton" = "ملفي الشخصي";
+"myParamsButton" = "إعدادات";
+"profile_title" = "حساب تعريفي";
+"mainUserTitleActivity" = "نشاطي";
+"mainUserTitleActions" = "المساهمات";
+"mainUserTitleEvents" = "الأحداث";
+"all_event_title" = "جميع الأحداث";
+"my_event_title" = "أحداثي";
+"mainUserTitleEvents" = "الأحداث";
+"all_group_title" = "جميع المجموعات";
+"my_group_title" = "مجموعاتي";
+"mainTitleGroup" = "المجموعات";
+
+
+"mainUserTitleGroup" = "مجموعة من الجيران";
+"mainUserTitleGroups" = "المجموعات المجاورة";
+"mainUserTitleOuting" = "الحدث\n";
+"mainUserTitleOutings" = "الأحداث\n";
+
+"mainUserBioPlaceholder" = "العنصر النائب للعضوية؟";
+"mainUserBirthPlaceholder" = "01-03";
+"mainUserEmailPlaceholder" = "email@gmail.com";
+
+"mainUserTitleInfos" = "معلوماتي";
+"mainUserTitleBirth" = "عيد ميلاد";
+"mainUserTitlePhone" = "هاتف";
+"mainUserTitleEmail" = "بريد إلكتروني";
+"mainUserTitleCity" = "المدينة ومنطقة العمل *";
+
+"mainUserTitleRadius" = "ضمن دائرة نصف قطرها *";
+"mainUserDescRadius" = "* تتيح لك منطقة العمل الخاصة بك تحديد المدى الذي يمكنك التصرف فيه والتحرك";
+
+"mainUserCityRadius" = "داخل دائرة نصف قطرها %d كم";
+"mainUserCityRadiusBold" = "%dkm";
+
+"memberSince" = "عضو الوفد المرافق منذ ذلك الحين";
+
+/*******
+//Profile Edit
+ */
+"editUserProfileTitle" = "تحرير المعلومات الخاصة بي";
+"editUserBioPlaceholder" = "العنصر النائب للعضوية؟";
+"editUserModPhoto" = "تحرير صورتي";
+"editUserTitleFirstname" = "الاسم الأول";
+"editUserTitleLastname" = "اسم";
+"editUserTitleBio" = "الوصف (200 حرف كحد أقصى)";
+"editUserTitleBirthday" = "عيد ميلاد";
+"editUserTitlePhone" = "هاتف";
+"editUserTitleEmail" = "بريد إلكتروني";
+"editUserTitleCity" = "المدينة ومنطقة العمل *";
+"editUserTitleRadius" = "ضمن دائرة نصف قطرها *";
+"editUserDescRadius" = "* تتيح لك منطقة العمل الخاصة بك تحديد المدى الذي يمكنك التصرف فيه والتحرك";
+"editProfileInterest_title" = "اهتماماتي";
+
+"editUserPlaceholderFirstname" = "صخر";
+"editUserPlaceholderLastname" = "دوبونت";
+"editUserPlaceholderBirthday" = "01-03";
+"editUserPlaceholderEMail" = "بيير@gmail.com";
+"editUserPlaceholderBio" = "بيير، 42 عامًا، أتطلع إلى مقابلتك :)";
+
+"editUserProfileValidate" = "تطبيق التغييرات";
+
+//Profile Edit error
+"editUser_error_firstname" = "يجب أن يحتوي الاسم الأول على حرفين على الأقل.";
+"editUser_error_lastname" = "يجب أن يتكون الاسم من حرفين على الأقل.";
+"editUser_error_bio" = "يجب أن تحتوي السيرة الذاتية على حرفين على الأقل.";
+"editUser_error_email" = "بريد إلكتروني غير صالح.";
+"editUser_error_birthday" = "تاريخ ميلاد غير صالح.";
+"editUser_error_profile" = "حدث خطأ أثناء تحرير الملف الشخصي.";
+
+//Profile edit interests
+"editUserInterestsTitle" = "تغيير اهتماماتي";
+"editUserInterestsInfo" = "اختر واحدة أو أكثر من الفئات التي تهمك.";
+"editUserInterestsValidate" = "تطبيق التغييرات";
+"editUserInterests_error" = "الرجاء اختيار فئة واحدة على الأقل";
+"interest_other_name" = "آخر";
+//profile edit location
+"profileEditLocationTitle" = "أين تريد أن تتصرف؟";
+"profileEditLocationDescription" = "نطلب منك تحديد موقعك لنقدم لك محتوى يتناسب مع موقعك. يرجى التأكد من أن معلوماتك ستبقى سرية ولن تتم مشاركتها مع أطراف ثالثة أبدًا.";
+"profileEditLocationLegend*" = "إضافة موقع *";
+"profileEditLocationLegend_" = "أضف موقعًا";
+"profileEditLocationPlaceholder" = "المدينة أو القسم";
+"profileEditLocationLegend" = "* Entourage لا يتصل بهذا العنوان.";
+"profileEditLocationErrorAddress" = "عنوان غير صالح.";
+
+
+// take photo profile
+"take_photo_title" = "إضافة صورة؟";
+"take_photo_description" = "مع الصورة، يصبح الأمر أجمل على الفور. أظهر لنا ابتسامتك الدافئة.";
+"take_photo" = "التقط صورة";
+"take_gallery" = "استيراد من المعرض";
+"description_move_photo" = "قم بالتحريك والتكبير/التصغير لضبط صورة الملف الشخصي.";
+
+
+//Location
+"ask_permission_location_recenter_map" = "لإعادة التركيز من حولك، يجب عليك تفعيل تحديد الموقع الجغرافي";
+"no_location_recenter_map" = "واجه تحديد الموقع الجغرافي خطأ.";
+
+/*******
+//Settings
+ */
+"params_translation" = "ترجمة";
+"params_language" = "لغة";
+"params_notifs" = "إشعارات";
+"params_help" = "مساعدة وحول";
+"params_unlock" = "إلغاء حظر جهات الاتصال";
+"params_share" = "مشاركة التطبيق";
+"params_logout" = "تسجيل الخروج";
+"params_suppress" = "حذف حسابي";
+"params_logout_pop_title" = "قطع الاتصال";
+"params_logout_pop_message" = "هل تريد تسجيل الخروج؟";
+"params_suppress_pop_title" = "حذف الحساب";
+"params_suppress_pop_message" = "هل تريد حذف حسابك؟";
+"params_suppress_pop_suppress" = "يمسح";
+"params_suppress_pop_cancel" = "يلغي";
+"params_account_not_deleted" = "لم يتم حذف الحساب.\nالخطأ: %@";
+"params_account_deleted" = "لقد تم حذف حسابك.";
+"params_logout_pop_logout" = "قطع الاتصال";
+"params_logout_pop_cancel" = "يلغي";
+"params_suggest" = "اقتراح على التطبيق؟";
+"menu_info_text_share" = "صباح الخير ! بفضل شبكة Entourage، أشارك في أعمال التضامن بين الجيران الذين لديهم منازل والذين ليس لديهم منازل. انضم إلي: %@";
+//Settings about menu
+"params_about_charte" = "حاشية الميثاق الأخلاقي";
+"params_about_rate_app" = "قيم التطبيق";
+"params_about_faq" = "الأسئلة المتداولة";
+"params_about_gift" = "تبرع للحاشية";
+"params_about_ambassador" = "كن سفيرًا متطوعًا";
+"params_about_cgu" = "الشروط العامة للاستخدام";
+"params_about_privacy" = "سياسة الخصوصية";
+"params_about_email" = "اتصل بالحاشية";
+"params_about_licences" = "ترخيص مفتوح المصدر";
+"params_about_partner" = "رعاتنا وشركاؤنا";
+"params_about_title" = "مساعدة وحول";
+
+//Settings Notifs
+"params_notifs_title" = "إدارة الإخطارات";
+"param_notifs_switch_notifs" = "إشعارات";
+"param_notifs_switch_messages" = "إشعارات الرسائل";
+"param_notifs_switch_groups" = "إشعارات المجموعة";
+"param_notifs_switch_events" = "إشعارات الأحداث";
+"param_notifs_switch_actions" = "إشعارات التبرعات والخدمات";
+"param_notifs_validate" = "تطبيق التغييرات";
+
+//NOTIF
+"notif_contrib_title" = "أحد الجيران يقدم مساعدة جديدة. ربما هذا قد يثير اهتمامك؟";
+"notif_solicitation_title" = "أحد الجيران يبحث عن المعدات. ربما يمكنك مساعدته؟";
+//Detail user profile
+"detail_user_send_message" = "اكتب رسالة";
+"detail_user_his_activity" = "نشاطه";
+"detail_user_his_interests" = "مراكز الاهتمام";
+"detail_user_button_signal" = "الإبلاغ عن المستخدم";
+"report_user_title" = "تقرير العضو";
+"report_user_mandatory" = "- إلزامية";
+"report_user_optional" = "- خياري";
+"report_user_description" = "أخبرنا عن سبب بلاغك";
+"report_user_message_description" = "أخبرنا عن سبب بلاغك";
+"report_user_next_button" = "التالي";
+"report_user_validate_button" = "يرسل";
+"report_user_back_button" = "خلف";
+"report_user_placeholder" = "قم بوصف موضوع تقريرك بسرعة.";
+"report_user_signal_error" = "الرجاء اختيار سبب واحد على الأقل.";
+"report_user_message_error" = "الرجاء إدخال رسالتك. شكرًا";
+"report_user_message_success" = "أبلغ المستخدم";
+"parameter_publication" = "إعدادات المشاركة";
+"parameter_message" = "إعدادات الرسالة";
+"parameter_action" = "الإبلاغ عن مشكلة";
+"parameter_comment" = "إعدادات التعليق";
+"supress_button_title" = "يمسح";
+"supress_alert_title_publi" = "حذف المشاركة";
+"supress_alert_text_publi" = "هل ترغب في حذف هذه المشاركة؟";
+
+"supress_alert_title_message" = "حذف الرسالة";
+"supress_alert_text_message" = "هل ترغب في إزالة هذه الرسالة من المحادثة؟";
+
+"supress_alert_title_comment" = "حذف التعليق";
+"supress_alert_text_comment" = "هل ترغب في حذف هذا التعليق؟";
+
+
+"deleted_post_text" = "تم حذف هذه المشاركة";
+
+//REPORT AND SUPPRESS POPUP
+"report_post_cell_title" = "تقرير";
+"suppress_post_cell_title" = "حذف مشاركتي";
+"report_post_cell_subtitle" = "قم بالإبلاغ عن هذا المنشور إلى فريق Entourage";
+"report_action_cell_subtitle" = "قم بالإبلاغ عن هذه المساعدة إلى فريق Entourage";
+
+"report_comment_cell_title" = "تقرير";
+"suppress_comment_cell_title" = "احذف تعليقي";
+"report_comment_cell_subtitle" = "أبلغ عن هذا التعليق إلى فريق Entourage";
+
+"report_message_cell_title" = "تقرير";
+"suppress_message_cell_title" = "احذف رسالتي";
+"report_message_cell_subtitle" = "أبلغ عن هذه الرسالة إلى فريق Entourage";
+
+
+"suppress_post_cell_subtitle" = "";
+"suppress_message_cell_subtitle" = "";
+"suppress_comment_cell_subtitle" = "";
+
+"deleted_message" = "لقد تم حذف هذه الرسالة";
+"deleted_comment" = "تم حذف هذا التعليق";
+
+/********
+ GROUP
+ */
+
+//Create group
+"neighborhoodCreatePopCloseBackTitle" = "انتباه";
+"neighborhoodCreatePopCloseBackMessage" = "إذا قمت بالخروج من نموذج إنشاء المجموعة، فسيتم فقدان جميع المعلومات التي تم إدخالها.";
+"neighborhoodCreatePopCloseBackQuit" = "للمغادرة";
+"neighborhoodCreatePopCloseBackCancel" = "يلغي";
+
+"neighborhood_create_group_bt_back" = "سابق";
+"neighborhood_create_group_bt_next" = "التالي";
+"neighborhood_create_group_bt_create" = "يخلق";
+
+"neighborhood_create_group_title" = "مجموعة جديدة";
+"neighborhood_create_title_phase" = "منصة";
+"neighborhood_create_title_phase_nb" = "0% د.";
+
+"neighborhoodCreateNameTitle" = "اسم المجموعة - مطلوب";
+"neighborhoodCreateNamePlaceholderName" = "جيران باريس 18";
+"neighborhoodCreateNameSubtitle" = "- إلزامية";
+
+"neighborhoodCreateDescriptionTitle" = "اكتب وصفًا";
+"neighborhoodCreateDescriptionSubtitle" = "مطلوب (150 حرفًا كحد أقصى)";
+"neighborhoodCreateTitleDescriptionPlaceholder" = "للقاء الجيران من 18";
+
+
+"neighborhoodCreatePlaceTitle" = "إضافة موقع - مطلوب";
+"neighborhoodCreatePlaceSubtitle" = "- إلزامية";
+"neighborhoodCreatePlaceDescription" = "لا يقوم Entourage بتوصيل هذا العنوان للمستخدمين.";
+"neighborhoodCreatePlaceInfos" = "العنوان أو المدينة أو القسم";
+
+//Error create group
+"neighborhoodCreateInputErrorMinCharName" = "يجب أن يحتوي اسم المجموعة على حرفين على الأقل.";
+"neighborhoodCreatePhase1_error" = "يرجى إكمال كافة الحقول المطلوبة";
+"neighborhoodCreatePhase2_error" = "يجب تحديد فئة.";
+"neighborhoodCreateInputErrorMandatory" = "الحقل المراد ملؤه";
+
+//Phase 2
+"neighborhoodCreateCatMessage" = "حدد الفئة (الفئات) التي تصف موضوع مناقشة المجموعة بشكل أفضل. - إلزامية";
+"neighborhoodCreateCatMessageMandatory" = "- إلزامية";
+"neighborhoodCreateCatOtherTitle" = "صف فئة مجموعتك بكلمة واحدة";
+"neighborhoodCreateCatOtherPlaceholder" = "الرجاء إدخال 80 حرفًا كحد أقصى";
+
+"neighborhoodCreatePhase2_others_error" = "يرجى تحديد فئة متنوعة";
+
+//Phase 3
+"addPhotoCreateDescriptionTitle" = "اكتب رسالة ترحيب";
+"addPhotoCreateDescriptionSubtitle" = "اختياري (200 حرف كحد أقصى)";
+"addPhotoCreateDescriptionPlaceholder" = "نرحب بالأعضاء الجدد! سوف يقرأون هذه الرسالة بمجرد انضمامهم إلى المجموعة.";
+"addPhotoCreateTitle" = "إضافة صورة - مطلوب";
+"addPhotoCreateTitleHighlight" = "- إلزامية";
+"addPhotoCreateDescription" = "يمكنك تغييره لاحقا";
+"neighborhoodCreatePhase3_error" = "الرجاء اختيار صورة";
+
+//Phase completed
+"neighborhoodCreateValidateTitle" = "مجموعتك على الانترنت!";
+"neighborhoodCreateValidateSubtitle" = "تهانينا، لقد قمت للتو بإنشاء مجموعة جديدة. لجعله أكثر نشاطا، قم بإنشاء المشاركة الأولى.";
+
+"neighborhoodCreateValidatePostMessage" = "انشر رسالة";
+"neighborhoodCreateValidatePass" = "يمر";
+
+//Select Photo group
+"neighborhood_choosephoto_title" = "حدد صورة";
+"neighborhood_choosephoto_validate" = "للتحقق من صحة";
+"neighborhood_choosephoto_error" = "الرجاء اختيار صورة";
+
+/***
+* Edit group
+***/
+"neighborhood_edit_group_title" = "تحرير المجموعة";
+"neighborhoodEditPhotoTitle" = "تحرير الصورة";
+"neighborhoodEditCatMessage" = "حدد الفئة (الفئات) التي تصف موضوع مناقشة المجموعة بشكل أفضل. - إلزامية";
+"neighborhoodEditCatMessageHighlight" = "- إلزامية";
+"neighborhoodEdit_error" = "يرجى إكمال كافة الحقول المطلوبة";
+"neighborhoodEditValidateTitle" = "تم تعديل مجموعتك! عنصر نائب";
+
+/***
+ * Create Post group
+ */
+"neighborhood_menu_post_event" = "إنشاء حدث على المجموعة";
+"neighborhood_menu_post_post" = "إنشاء مشاركة";
+"neighborhood_menu_post_survey" = "إنشاء استطلاع";
+
+
+"neighborhood_add_post_title" = "إنشاء مشاركة";
+"neighborhood_add_post_message_title" = "اكتب رسالتك";
+"neighborhood_add_post_message_subtitle" = "";
+"neighborhood_add_post_message_placeholder" = "اكتب رسالتك...";
+"neighborhood_add_post_image_title" = "أضف صورة";
+"neighborhood_add_post_image_subtitle" = "- خياري";
+"neighborhood_add_post_send_button" = "يشارك";
+"neighborhood_add_post_title_image" = "أضف صورة";
+"neighborhood_add_post_image_info_move" = "قم بالتحريك والتكبير/التصغير لضبط الصورة.";
+"neighborhood_add_post_image_bt_validate" = "للتحقق من صحة";
+"neighborhood_add_post_image_bt_cancel" = "يمسح";
+"neighborhood_add_post_error" = "خطأ في النشر، يرجى المحاولة مرة أخرى";
+/******
+ * Group / communauté
+ */
+"neighborhood_main_page_title" = "المجموعات";
+"neighborhood_main_page_button_myGroups" = "مجموعاتي";
+"neighborhood_main_page_button_discover" = "اكتشفت";
+"neighborhoodInputSearch" = "ابحث عن مجموعة";
+"neighborhood_main_page_members" = "%d عضو";
+"neighborhood_main_page_member" = "%d عضو";
+"neighborhood_main_page_events_future_single" = "%d حدث مخطط له";
+"neighborhood_main_page_events_future_plural" = "%d حدث مخطط له";
+
+"neighborhood_group_my_empty_title" = "لم تنضم إلى المجموعة بعد.";
+"neighborhood_group_my_empty_button" = "اكتشف المجموعات";
+"neighborhood_group_search_empty_title" = "عفوًا، لا توجد نتائج تطابق بحثك.";
+"neighborhood_group_search_empty_subtitle" = "إذا لم تكن هناك مجموعة حول هذا الموضوع، قم بإنشاء واحدة!";
+"neighborhood_group_discover_empty_title" = "عفوًا، لا توجد مجموعات أخرى حولك حتى الآن.";
+"neighborhood_group_discover_empty_subtitle" = "لا تتردد في إنشاء مجموعات جديدة من الجيران!";
+/*************
+ * Group detail
+ */
+"title_is_ambassador" = "Ambassadeur •" ;
+"title_is_admin" = "Administrateur •" ;
+
+"neighborhood_detail_button_join_member" = "عضو";
+"neighborhood_detail_button_join_join" = "ينضم";
+"welcome_message_placeholder" = "لا تتردد في إرسال الرسالة الأولى للتعريف بنفسك.";
+"welcome_message_title" = "تهانينا، أنت عضو في المجموعة!";
+"welcome_message_btn_title" = "أقدم نفسي";
+
+"neighborhood_detail_members" = "%d عضو";
+"neighborhood_detail_member" = "%d عضو";
+"neighborhood_detail_about_title" = "حول المجموعة";
+"neighborhood_detail_event_title" = "الأحداث";
+"neighborhood_detail_button_more" = "يتعلم أكثر";
+
+"neighborhood_event_group_section_title_more" = "شاهد المزيد";
+"neighborhood_event_group_section_title" = "أحداث المجموعة";
+"neighborhood_post_group_section_title" = "تغذية الأخبار";
+"neighborhood_post_group_section_new_posts_title" = "منشورات جديدة";
+"neighborhood_post_group_section_old_posts_title" = "منشورات قديمة";
+"neighborhood_empty_event_title" = "لم يتم التخطيط لأي أحداث في هذه المجموعة حتى الآن";
+"neighborhood_empty_event_subtitle" = "انقر فوق  لإنشاء واحدة";
+"neighborhood_empty_post_title" = "لا توجد مشاركات (حتى الآن) في هذه المجموعة";
+"neighborhood_empty_post_subtitle" = "يا! هذه هي الفرصة لمشاركة الأخبار الأولى لبدء المناقشة!";
+"neighborhood_about_group_title" = "حول المجموعة";
+
+"neighborhood_post_noComment" = "لا تعليقات";
+"neighborhood_post_1Comment" = "%d تعليق";
+"neighborhood_post_XComments" = "%d تعليق";
+
+"neighborhood_comments_title" = "نشر التعليقات";
+"neighborhood_comments_placeholder_discut" = "يناقش...";
+"neighborhood_comments_send" = "يرسل";
+"neighborhood_no_messageComment" = "لا توجد تعليقات حتى الآن";
+"neighborhood_messageComment_notAuth" = "للتعليق على هذا المنشور، انضم إلى المجموعة %@!";
+
+"neighborhood_error_messageSend" = "خطأ في النشر، حاول مرة أخرى";
+"comment_post" = "تعليق...";
+//Params
+"neighborhood_params_title" = "إعدادات المجموعة";
+"neighborhood_params_cgu" = "قواعد المجموعة";
+"neighborhood_params_share" = "مشاركة المجموعة";
+"neighborhood_params_edit" = "تحرير معلومات المجموعة";
+"neighborhood_params_signal" = "الإبلاغ عن مشكلة";
+"neighborhood_params_cgu_title" = "اللوائح";
+"neighborhood_params_cgu_description" = "قواعد المجموعة، اقرأها بعناية.";
+"neighborhood_params_participant" = "مشارك";
+"neighborhood_params_participants" = "مشاركون";
+"neighborhood_params_quit" = "اترك المجموعة";
+
+"neighborhood_params_notif_title" = "أعلمني بها";
+"neighborhood_params_notif_all" = "جميع الأنشطة الجماعية";
+"neighborhood_params_notif_new_events" = "أحداث جديدة";
+"neighborhood_params_notif_new_messages" = "رسائل جديدة";
+"neighborhood_params_notif_new_members" = "وصول الأعضاء الجدد";
+
+"neighborhood_users_title" = "مشاهدة الأعضاء";
+"neighborhood_userInput_search" = "البحث عن عضو المجموعة";
+
+//Pop leave group
+"params_leave_group_pop_title" = "اترك المجموعة";
+"params_leave_group_pop_message" = "هل تريد مغادرة المجموعة؟";
+"params_leave_group_pop_bt_quit" = "للمغادرة";
+"params_leave_group_pop_bt_cancel" = "يلغي";
+//CGU
+"neighborhood_CGU_1_title" = "سلوك";
+"neighborhood_CGU_1" = "يجب أن تتم عمليات التبادل في المجموعات في جو من الاحترام والثقة والمساعدة المتبادلة بين الأعضاء حتى يشعر الجميع بالأمان وفي بيئة دافئة. ولذلك لا يجوز الإدلاء بتعليقات مهينة أو عدوانية أو مهينة أو تمييزية أو ملحة أو غير متسامحة أو تشهيرية.";
+"neighborhood_CGU_2_title" = "تجارة";
+"neighborhood_CGU_2" = "المجموعات عبارة عن مساحات للتبادل والمساعدة المتبادلة بين الجيران، وبالتالي يُحظر الإعلان عنها، وكذلك عروض الشراء أو البيع أو الإيجار.";
+"neighborhood_CGU_3_title" = "الفوز بالجائزة الكبرى";
+"neighborhood_CGU_3" = "بشكل عام، لا توجد علاقة مالية بين أعضاء المجموعات، ومجموع الجوائز محظور.";
+"neighborhood_CGU_4_title" = "المواضيع";
+"neighborhood_CGU_4" = "حرية التعبير الخيري هي القاعدة على المجموعات. ومع ذلك، لاحترام الطبيعة غير السياسية والعلمانية لـ Entourage ومن أجل حماية الأشخاص، لا يُسمح بالمواضيع المتعلقة بالسياسة أو الدين أو الطب أو الحياة الجنسية.";
+"neighborhood_CGU_5_title" = "حماية الناس";
+"neighborhood_CGU_5" = "لا يمكن أن تحتوي المنشورات على أي بيانات شخصية تسمح بالتعرف على الشخص وتحديد مكانه بدقة ولا أي بيانات حساسة عن الأشخاص (بيانات طبية أو قانونية أو أصل أخلاقي أو بيانات التوجه الجنسي أو السياسي، وما إلى ذلك).";
+
+//Report Group / comment / publication
+"report_event_title" = "الإبلاغ عن الحدث";
+"report_group_title" = "الإبلاغ عن مشكلة";
+"report_publication_title" = "الإبلاغ عن مشاركة";
+"report_comment_title" = "الإبلاغ عن التعليق";
+"report_contrib_title" = "تقرير المساهمة";
+"report_solicitation_title" = "طلب التقرير";
+"report_conversation_title" = "الإبلاغ عن المحادثة";
+"report_group_message_success" = "لقد تم إرسال طلبك. سيتم معالجتها في أسرع وقت ممكن من قبل فريقنا.";
+"report_group_description" = "أخبرنا عن سبب بلاغك";
+"report_group_mandatory" = "- إلزامية";
+"report_group_next_button" = "التالي";
+"report_group_signal_error" = "الرجاء اختيار سبب واحد على الأقل.";
+"report_group_message_description" = "أخبرنا عن سبب بلاغك";
+"report_group_optional" = "- خياري";
+"report_group_validate_button" = "يرسل";
+"report_group_back_button" = "خلف";
+"report_group_placeholder" = "قم بوصف موضوع تقريرك بسرعة.";
+
+/** Home*/
+"home_title_welcome" = "مرحباً ٪@ !";
+"home_contrib_title" = "تصرفاتي داخل الشبكة";
+"home_meeting_title" = "لقاءات جميلة حاشية";
+"home_no_meeting_title" = "لا توجد اجتماعات Entourage حتى الآن";
+"home_messages_title" = "الرسائل المرسلة";
+"home_events_title" = "الأحداث\n";
+"home_groups_title" = "مجموعات الجيران";
+"home_event_title" = "المشاركة في حدث ما";
+"home_group_title" = "مجموعة من الجيران";
+"home_no_message_title" = "لم يتم إرسال أي رسائل حتى الآن";
+"home_no_event_title" = "حضور الحدث الأول الخاص بك";
+"home_no_group_title" = "لا تنتظر أكثر من ذلك للانضمام إلى مجموعة من الجيران!";
+
+"home_actions_title" = "لقد بدأت للتو";
+"home_help_title" = "بحاجة الى مساعدة";
+"home_help_subtitle" = "دليلك في التطبيق";
+"home_cell_pedago" = "كل ما تحتاج إلى معرفته لاتخاذ الإجراءات اللازمة";
+"home_cell_map" = "خريطة أماكن التضامن";
+"home_cell_map_subtitle" = "حفلات الاستقبال النهارية، تخزين الأمتعة…";
+
+"home_resources_title" = "جميع المحتويات التعليمية";
+"home_resource_title" = "المحتوى التعليمي";
+"pedagogic_read" = "يقرأ!";
+"resource_all" = "الجميع";
+"resource_understand" = "لفهم";
+"resource_act" = "يمثل";
+"resource_inspire" = "احصل على الإلهام";
+
+"resource_title_understand" = "لفهم";
+"resource_title_act" = "يمثل";
+"resource_title_inspire" = "احصل على الإلهام";
+
+/** Home popup congratulation */
+"home_congrat_title_single" = "أحسنت ! لقد أكملت %d إجراء جديد!";
+"home_congrat_title_plural" = "أحسنت ! لقد أكملت %d من الإجراءات الجديدة!";
+"home_congrat_title_next" = "عظيم، هناك شيء جديد في الاستقبال!";
+
+//Home popup info encouters
+"home_info_encounter_pop_title" = "لخلق لقاء عظيم، لا شيء يمكن أن يكون أبسط!";
+"home_info_encounter_pop_subtitle" = "يزداد عدادك مع كل مشاركة في حدث ما ومع كل مساهمة أو طلب جديد يتم تقديمه.";
+
+/** Events*/
+"passed_event" = "الأحداث الماضية";
+
+
+//EVENT TOP Cell
+"event_top_cell_organised_by" = "نظمتها";
+"event_top_cell_asso" = "Événement %@" ;
+
+
+//SHARE
+"share_solicitation" = "Cette demande pourrait vous intéresser." ;
+"share_contribution" = "Cette contribution pourrait vous intéresser." ;
+"share_event" = "Cet événement Entourage pourrait vous intéresser." ;
+"share_group" = "Ce groupe de voisins Entourage pourrait vous intéresser." ;
+
+
+
+//Create
+
+"eventCreatePopCloseBackTitle" = "انتباه";
+"eventCreatePopCloseBackMessage" = "إذا قمت بالخروج من نموذج إنشاء الحدث، فسيتم فقدان كافة المعلومات التي تم إدخالها.";
+"eventCreatePopCloseBackQuit" = "للمغادرة";
+"eventCreatePopCloseBackCancel" = "يلغي";
+
+"event_create_group_bt_back" = "سابق";
+"event_create_group_bt_next" = "التالي";
+"event_create_group_bt_create" = "للتحقق من صحة";
+"eventCreateInputErrorMandatory" = "الحقل المراد ملؤه";
+"event_mod_group_bt_mod" = "للتعديل";
+
+"event_mod_title" = "تحرير الحدث الخاص بي";
+"event_create_title" = "حدث جديد";
+"event_create_title_phase" = "منصة";
+"event_create_title_phase_nb" = "0% د.";
+
+"event_create_phase_1_name" = "اسم الحدث - مطلوب";
+"event_create_phase_1_name_placeholder" = "إعطاء اسم واضح للحدث";
+"event_create_phase_1_name_error" = "يجب أن يحتوي اسم الحدث على حرفين على الأقل.";
+"event_create_phase_1_desc" = "الوصف - مطلوب";
+"event_create_phase_1_desc_placeholder" = "اعرض بسرعة ما سيحدث";
+"event_create_phase_1_desc_subtitle" = "(900 حرفًا كحد أقصى)";
+"event_create_phase_1_photo" = "الصورة - مطلوبة";
+"event_create_phase_1_photo_desc" = "يمكنك تغييره لاحقا";
+
+"event_create_mandatory" = "- إلزامية";
+
+"event_create_phase2_date" = "التاريخ - مطلوب";
+"event_create_phase2_date_placeholder" = "ي ي/ش ش/س س س س";
+"event_create_phase2_time_start" = "وقت البدء";
+"event_create_phase2_time_start" = "سمومم";
+"event_create_phase2_time_end" = "وقت الانتهاء";
+"event_create_phase2_time_end_placeholder" = "سمومم";
+
+"event_create_phase2_recurrence" = "التكرار - مطلوب";
+"recurrence_once" = "مرة واحدة فقط";
+"recurrence_week" = "كل أسبوع";
+"recurrence_every2Weeks" = "كل اسبوعين";
+"recurrence_month" = "مرة واحدة في الشهر";
+"eventCreateInputErrorTimeStart" = "اختر التاريخ قبل";
+"eventCreateInputErrorTimeEnd" = "اختر وقت البدء قبل ذلك";
+
+"event_create_phase3_title" = "الموقع - مطلوب";
+"event_create_phase3_title_place" = "إضافة موقع - مطلوب";
+"event_create_phase3_title_online" = "أضف عنوان URL - مطلوب";
+
+"event_create_phase3_presentiel" = "شخصيا";
+"event_create_phase3_online" = "متصل";
+"event_create_phase3_online_error" = "حقل إلزامي";
+"event_create_phase3_placeholder_place" = "العنوان .. المدينة ...";
+"event_create_phase3_placeholder_online" = "عنوان الموقع";
+
+"event_create_phase3_title_limit" = "هل الحدث له عدد محدود من الأماكن؟ - إلزامية";
+"event_create_phase3_title_nb_places" = "عدد الأماكن المتاحة - إلزامي";
+"event_create_phase3_title_nb_places_placeholder" = "عدد الأماكن";
+"event_create_phase3_limit_yes" = "نعم";
+"event_create_phase3_limit_no" = "لا";
+"event_create_phase3_limit_error" = "حقل إلزامي";
+
+"event_create_phase4_title" = "حدد الفئة (الفئات) التي تصف موضوع الحدث بشكل أفضل. - إلزامية";
+
+"event_create_phase5_title" = "مشاركة الحدث في مجموعاتك - مطلوب";
+"event_share_option" = "مشاركة الحدث";
+"event_create_phase5_desc" = "لا يمكنك مشاركة الحدث إلا مع المجموعات التي أنت عضو فيها. سيكون الحدث الخاص بك مرئيًا بعد ذلك في المجموعة (المجموعات) المحددة وسيتمكن جميع أعضاء المجموعة من المشاركة.";
+"createEventNotShare" = "لا تشارك في أي مجموعة";
+"createEventShare" = "المشاركة في مجموعة واحدة أو أكثر";
+
+"eventCreateEnd_button_show" = "عرض الحدث الخاص بي";
+"eventCreateEnd_title" = "الحدث الخاص بك على الانترنت!";
+"eventCreateEnd_subtitle" = "Félicitations, vous venez de créer un nouvel événement. Pour le rendre plus actif, parlez-en sur vos groupes !
+";
+
+"eventCreatePhase1_error" = "يرجى إكمال كافة الحقول المطلوبة";
+"eventCreatePhase2_error" = "يرجى إكمال كافة الحقول المطلوبة";
+"eventCreatePhase3_error" = "يرجى إكمال كافة الحقول المطلوبة";
+"eventCreatePhase4_error" = "يجب تحديد فئة.";
+"eventCreatePhase5_error" = "يجب اختيار مجموعة واحدة على الأقل.";
+
+"eventModPopCloseBackTitle" = "انتباه";
+"eventModPopCloseBackMessage" = "إذا قمت بالخروج من نموذج تحرير الحدث، فسيتم فقدان كافة المعلومات التي تم إدخالها.";
+"eventModPopCloseBackQuit" = "للمغادرة";
+"eventModPopCloseBackCancel" = "يلغي";
+
+//Event group list
+"event_members_cell_list" = "%d من المشاركين";
+"event_member_cell_list" = "%d مشارك";
+"event_group_title_list" = "كما تنظم المجموعة:";
+"event_places_detail" = "%d مكان";
+"event_places_distance" = "٪@ لديه ٪@";
+
+
+
+//Event pop choose location
+"event_location_title" = "حدد موقع الحدث الخاص بك";
+"event_location_detail" = "سيتم إضافة العنوان إلى الوصف التفصيلي للحدث الخاص بك.";
+
+/* Home Event*/
+"event_main_page_title" = "الأحداث";
+"event_main_page_button_myEvents" = "أنا أشارك";
+"event_main_page_button_discover" = "اكتشفت";
+"event_event_my_empty_title" = "لم تنضم إلى الحدث بعد";
+"event_event_my_empty_subtitle" = "هذه هي الفرصة لمعرفة ما يحدث بالقرب منك، أو لإنشاء حدث جديد!";
+"event_event_discover_empty_title" = "عفوًا، لا توجد أحداث من حولك";
+"event_event_discover_empty_subtitle" = "إذا لم تكن هناك أحداث بالقرب منك، يمكنك توسيع منطقة البحث الخاصة بك.";
+"event_no_event_but_discover" = "هذه فرصة لمعرفة ما يحدث بالقرب منا، أو لإنشاء حدث جديد!";
+"event_no_event_go_create" = "لا توجد أحداث من حولك. لا تتردد في إنشاء واحدة!";
+"event_event_discover_clear_filters" = "إعادة تعيين المرشحات";
+"event_title_btn_discover_event" = "اكتشف الأحداث";
+"event_title_btn_create_event" = "إنشاء حدث";
+"event_event_discover_empty_search_title" = "اللعنة، لا توجد نتائج تطابق بحثك!";
+"event_event_discover_empty_search_subtitle" = "لا يمكن العثور على الحدث الذي أحلامك؟ لا تنتظر أكثر من ذلك لإنشائه أو توسيع منطقة البحث الخاصة بك.";
+"event_detail_button_more" = "يتعلم أكثر";
+
+"event_detail_button_participe_ON" = "يشارك";
+"event_detail_button_participe_OFF" = "يشارك";
+"event_detail_about_title" = "وهي";
+"event_detail_post_section_title" = "تغذية الأخبار";
+"event_detail_post_section_new_posts_title" = "منشورات جديدة";
+"event_detail_post_section_old_posts_title" = "منشورات قديمة";
+
+"event_time_detail_full" = "من %@ إلى %@";
+"event_places_detail_full" = "عدد الأماكن محدود: %d";
+"event_created_full" = "تم الإنشاء في %@";
+"event_updated_full" = "تم التعديل في %@";
+"event_canceled_full" = "تم الإلغاء في %@";
+"event_cancel_alone" = "تم الإلغاء";
+
+"event_empty_post_title" = "لا يوجد منشور (حتى الآن) حول هذا الحدث";
+"event_empty_post_subtitle" = "لماذا لا تبدأ المناقشة مع جيرانك؟";
+
+"event_users_title" = "عرض المشاركين";
+"event_userInput_search" = "ابحث عن أحد الحاضرين في الحدث";
+
+"event_detail_full_title" = "حول الحدث";
+
+"event_detail_groups_title" = "المجموعات المرتبطة:";
+"event_detail_group_title" = "المجموعة المرتبطة:";
+"event_detail_cats_title" = "فئات:";
+"event_detail_cat_title" = "فئة :";
+"event_cancel_list" = "تم الإلغاء";
+"event_canceled" = "تم إلغاء الحدث";
+
+//Event filters
+"event_filter_title" = "الأحداث - مرشحات البحث";
+"event_filter_profile" = "إلى العنوان المذكور في ملفي الشخصي";
+"event_filter_google" = "في عنوان جديد";
+"event_filter_gps" = "حول موقعي الحالي";
+"event_filter_search" = "للبحث:";
+"event_filter_radius_radius" = "داخل دائرة نصف قطرها:";
+"event_filter_error_place" = "الرجاء تحديد عنوان";
+"event_filter_google_placeholder" = "اختر عنوانا";
+"event_filter_position_placeholder" = "موقعي";
+
+//Pop leave/cancel event
+"params_leave_event_pop_title" = "اترك الحدث";
+"params_leave_event_pop_message" = "هل تريد مغادرة الحدث؟";
+"params_leave_event_pop_bt_quit" = "للمغادرة";
+"params_leave_event_pop_bt_cancel" = "يلغي";
+
+"params_cancel_event_pop_bt_delete" = "يلغي";
+"params_cancel_event_pop_bt_cancel" = "خلف";
+"params_cancel_event_pop_title" = "إلغاء الحدث";
+"params_cancel_event_pop_message" = "هل تريد إلغاء الحدث؟ سيتم إخطار جميع المشاركين بالإلغاء.";
+"params_cancel_event_recurrency_title" = "إلغاء حدث متكرر";
+"params_cancel_event_recurrency_choice1" = "هذا الحدث";
+"params_cancel_event_recurrency_choice2" = "هذا الحدث وكل الأحداث اللاحقة";
+
+"event_mod_pop_title" = "تحرير حدث متكرر";
+"event_mod_pop_validate_bt" = "للتحقق من صحة";
+"event_mod_ok" = "تم تغيير العنصر النائب للحدث";
+"event_mod_nok" = "خطأ في تحرير الحدث. عنصر نائب";
+"event_create_ok" = "حدث خطأ أثناء إنشاء الحدث. عنصر نائب";
+//Contacts pop add
+"event_add_contact_accept" = "يضيف";
+"event_add_contact_cancel" = "يلغي";
+"event_add_contact_yes" = "نعم";
+"event_add_contact_no" = "لا";
+"event_add_contact_title" = "يتم أخذ تسجيلك بعين الاعتبار!";
+"event_add_contact_description" = "هل تريد إضافة هذا الحدث إلى التقويم الشخصي الخاص بك؟";
+
+"event_add_contact_places_title" = "حدث الأماكن محدودة";
+"event_add_contact_places_description" = "يرجى ملاحظة أن هذا الحدث له أماكن محدودة، وتسجيلك غير مضمون. سيعود إليك مسؤول الحدث لتأكيد حجز مكانك.";
+"event_add_contact_error" = "لإضافة الحدث إلى التقويم الخاص بك، يجب عليك تمكين الوصول إلى التقويم";
+"event_add_contact_refuse" = "رفض";
+"event_add_contact_activate" = "يُمكَِن";
+
+//Event settings
+"event_params_title" = "إعدادات الحدث";
+"event_params_cgu" = "ميثاق الأحداث";
+"event_params_edit" = "تحرير الحدث";
+"event_params_recurrency" = "تحرير التكرار";
+"event_params_signal" = "الإبلاغ عن الحدث";
+"event_params_cgu_title" = "ميثاق الأحداث";
+"event_params_cgu_description" = "ميثاق الأحداث، إقرأه بعناية.";
+"event_params_participant" = "مشارك";
+"event_params_participants" = "مشاركون";
+"event_params_quit" = "اترك الحدث";
+"event_params_cancel" = "إلغاء الحدث";
+
+"event_params_notif_title" = "أعلمني بها";
+"event_params_notif_all" = "جميع أنشطة الحدث";
+"event_params_notif_new_publications" = "منشورات جديدة";
+"event_params_notif_new_members" = "وصول المشاركين الجدد";
+
+"event_edit_recurrency_title" = "تكرار";
+"event_edit_recurrency_date" = "تاريخ الحدث";
+"event_edit_recurrency_back" = "يلغي";
+"event_edit_recurrency_next" = "للتحقق من صحة";
+
+//Event MEssages
+"event_comments_title" = "نشر التعليقات";
+"event_comments_placeholder_discut" = "يناقش...";
+"event_comments_send" = "يرسل";
+"event_no_messageComment" = "لا توجد تعليقات حتى الآن";
+"event_messageComment_notAuth" = "للتعليق على هذا المنشور، انضم إلى الحدث %@!";
+//CGU
+"event_CGU_1_title" = "كن لطيفا";
+"event_CGU_1" = "أستخدم التطبيق لأغراض المساعدة المتبادلة للأشخاص الذين يعيشون في مواقف محفوفة بالمخاطر أو مستبعدة للغاية.";
+"event_CGU_2_title" = "جمع الاتفاق";
+"event_CGU_2" = "أضمن موافقة الأشخاص المعنيين قبل إنشاء أي إجراء.";
+"event_CGU_3_title" = "ضمان حماية الناس";
+"event_CGU_3" = "أضمن عدم إرسال بيانات شخصية حساسة (طبية أو قانونية أو ما إلى ذلك)، أو السماح بالتعرف الدقيق على الأشخاص أو مواقعهم.";
+"event_CGU_4_title" = "كونوا متحدين دون تمييز";
+"event_CGU_4" = "أتعهد بعدم التمييز على أساس العرق أو اللون أو الجنس أو اللغة أو الدين أو الرأي السياسي أو الملكية أو المولد أو أي وضع آخر.";
+
+//MARK: - Actions -
+"action_menu_demand" = "إنشاء طلب";
+"action_menu_contrib" = "إنشاء مساهمة";
+"action_create_title_phase" = "منصة";
+"action_create_title_phase_nb" = "0% د.";
+"action_create_group_bt_back" = "سابق";
+"action_create_group_bt_next" = "التالي";
+"action_create_group_bt_create" = "للتحقق من صحة";
+
+"actionCreatePopCloseBackTitle" = "انتباه";
+"actionCreatePopCloseBackMessage" = "إذا قمت بالخروج من نموذج الإنشاء %@، فسيتم فقدان كافة المعلومات التي تم إدخالها.";
+"actionCreatePopCloseBackQuit" = "للمغادرة";
+"actionCreatePopCloseBackCancel" = "يلغي";
+
+"action_solicitation" = "طلب";
+"action_contrib" = "مساهمة";
+
+"action_create_title_contrib" = "مساهمة جديدة";
+"action_create_title_solicitation" = "طلب جديد";
+"action_charte_title" = "ميثاق الأخلاق";
+"action_create_info_contrib" = "Vous cherchez à proposer une contribution qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_contrib_underline" = "تعلم المزيد هنا.";
+"action_create_info_demand" = "Vous cherchez à proposer une demande qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_demand_underline" = "تعلم المزيد هنا.";
+
+"action_create_mandatory" = "- إلزامية";
+"action_create_phase_1_name" = "عنوان الإجراء - مطلوب";
+"action_create_phase_1_name_placeholder" = "قم بتسمية %@ الخاص بك";
+"action_create_phase_1_name_subtitle" = "أعط اسمًا قصيرًا وصريحًا لـ %@ الخاص بك";
+"action_create_phase_1_name_error" = "يجب أن يحتوي الاسم %@ على حرفين على الأقل.";
+
+"action_add_post_title_image" = "أضف صورة";
+
+"action_create_phase_1_desc" = "الوصف - مطلوب";
+"action_create_phase_1_desc_placeholder" = "قم بوصف %@ الخاص بك";
+"action_create_phase_1_desc_subtitle" = "صف بالتفصيل %@ الذي تقترحه";
+
+"action_PhotoCreateTitle" = "أضف صورة - اختياري";
+"action_PhotoCreateTitleHighlight" = "- خياري";
+"action_PhotoCreateDescription" = "يمكنك تغييره لاحقا";
+"action_CreatePhase1_error" = "الرجاء اختيار صورة";
+
+"action_create_title_category" = "حدد الفئة التي تصف %@ الخاص بك بشكل أفضل. - إلزامية";
+"action_create_title_category_mandatory" = "- إلزامية";
+
+//Edit location page
+"actionCellLocationTitle" = "حدد موقع %@ الخاص بك";
+"actionCellLocationDescription" = "لن تتم مشاركة موقعك الدقيق، يمكنك وضع موقع آخر غير منطقة العمل في ملفك الشخصي.";
+
+"actionEditLocationTitle" = "حدد موقع %@ الخاص بك";
+"actionEditLocationDescription" = "لن تتم مشاركة موقعك الدقيق، يمكنك وضع موقع آخر غير منطقة العمل في ملفك الشخصي.";
+"actionEditLocationLegend" = "أضف موقعًا";
+
+"actionCreatePhase1_error" = "يرجى إكمال كافة الحقول المطلوبة.";
+"actionCreatePhase2_error" = "يجب تحديد فئة.";
+"actionCreatePhase3_error" = "الرجاء تحديد عنوان.";
+"action_create_nok" = "حدث خطأ أثناء إنشاء %@. عنصر نائب";
+//Charte Actions
+"accept_charte" = "يقبل";
+"action_charte_1_title" = "المساعدات المتبادلة";
+"action_charte_1" = "يتيح لك التطبيق إنشاء لقاءات جديدة بين الجيران وتشجيع أوقات التبادل. المساعدة عن بعد (القيادة، التوصيل، قسيمة الهدايا، مجموع الجوائز، وما إلى ذلك) غير مسموح بها.";
+"action_charte_2_title" = "المساهمات والطلبات";
+"action_charte_2" = "يمكنني طلب أو عرض السلع المادية (المعدات والملابس وما إلى ذلك) والخدمات (الغسيل وطباعة المستندات وما إلى ذلك) وأوقات المشاركة (القهوة والأنشطة وما إلى ذلك).\nلا يمكنني طلب أو عرض المساعدة المالية أو الإقامة أو المساعدات الغذائية. ولكن إذا كنت في حاجة إليها، يمكنني الاتصال بالمشرف الذي سيرشدني.";
+"action_charte_3_title" = "موافقة";
+"action_charte_3" = "عندما أنشر طلبًا لطرف ثالث، أتأكد من الحصول على موافقته مسبقًا.";
+"action_charte_4_title" = "عدم التمييز";
+"action_charte_4" = "أتعهد بالدخول في علاقات مع الناس دون تمييز (العرق، الدين، التوجه الجنسي، الرأي السياسي، إلخ).";
+"action_charte_5_title" = "حماية الناس";
+"action_charte_5" = "أضمن أن أفعالي لا تحتوي على أي بيانات شخصية (الاسم الأخير، رقم الهاتف، العنوان الدقيق، وما إلى ذلك)، مما يسمح بتحديد هوية الشخص وتحديد موقعه بدقة، ولا أي بيانات حساسة (طبية، قانونية، وما إلى ذلك).";
+
+//Create action end
+"action_create_close_button" = "حتى النهاية";
+"contribCreateEnd_title" = "تم إنشاء مساهمتك!";
+"contribCreateEnd_subtitle" = "تهانينا، لقد قمت للتو بإنشاء مساهمة جديدة. لجعلها أكثر وضوحا، تحدثوا عنها في مجموعاتكم!";
+"solicitationCreateEnd_title" = "تم إنشاء طلبك!";
+"solicitationCreateEnd_subtitle" = "تهانينا، لقد قمت للتو بإنشاء طلب جديد. لجعلها أكثر وضوحا، تحدثوا عنها في مجموعاتكم!";
+
+
+//Home Actions
+"actions_main_page_title" = "المساعدات المتبادلة";
+"actions_main_page_button_contribs" = "المساهمات";
+"actions_main_page_button_solicitations" = "الطلبات";
+"action_contrib_empty_title" = "لا توجد مساهمات تطابق منطقة البحث الخاصة بك";
+"action_contrib_empty_subtitle" = "يمكنك توسيع مجال البحث الخاص بك أو إنشاء مساهمة";
+"action_solicitation_empty_title" = "لا توجد طلبات تطابق منطقة البحث الخاصة بك";
+"action_solicitation_empty_subtitle" = "يمكنك توسيع حقل البحث الخاص بك أو إنشاء طلب";
+"action_filter_category" = "فئة";
+"action_filter_categories" = "فئات";
+"action_filter_title" = "تصفية حسب الفئات";
+"action_filter_location_title" = "التصفية حسب الموقع";
+//detail my actions
+"action_your" = "عملك";
+"actions_my_title" = "إعلاناتي";
+"action_detail_title_location" = "موقع";
+"atKm" = "%4 جرام كيلومتر مني";
+"AtKm" = "على بعد %.4 جرام مني";
+"Atm" = "في %.4g م مني";
+"atm" = "في %.4g م مني";
+"Contrib" = "مساهمة";
+"Demand" = "طلب";
+
+"action_created_at" = "تم الإنشاء %@ بواسطة";
+"action_member_since" = "عضو منذ %@";
+"action_cancel" = "تمت إزالة الإعلان";
+
+"params_cancel_action_pop_bt_delete" = "يلغي";
+"params_cancel_action_pop_bt_cancel" = "خلف";
+"params_cancel_action_pop_title" = "إلغاء الإجراء";
+"params_cancel_action_pop_message" = "هل تريد إلغاء الإجراء؟";
+
+"params_cancel_action_pop_bt_yes" = "نعم";
+"params_cancel_action_pop_bt_no" = "لا";
+"params_cancel_action_pop_bt_valid" = "يرسل";
+"params_cancel_action_pop_title" = "احذف %@";
+"params_cancel_action_pop_subtitle" = "هل كان %@ ناجحا؟";
+
+"params_cancel_action_pop_comment" = "أخبرنا المزيد عن تجربتك - اختياري";
+"action_optional" = "- خياري";
+"params_cancel_action_pop_comment_placeholder" = "أخبرنا عن تجربتك!";
+
+"action_view_canceled_title" = "تم حذف الإعلان...";
+"action_view_canceled_contrib_subtitle" = "يمكنك البحث عن المساهمات الأخرى التي قد تهمك أو نشر إعلان.";
+"action_view_canceled_demand_subtitle" = "يمكنك البحث عن طلبات أخرى قد تهمك أو نشر إعلان.";
+"action_view_canceled_demand_button" = "قائمة الطلبات";
+"action_view_canceled_contrib_button" = "قائمة المساهمات";
+
+
+//CGU
+"action_params_cgu_title" = "ميثاق الأخلاق";
+"action_params_cgu_description" = "";
+"action_CGU_1_title" = "المساعدات المتبادلة";
+"action_CGU_1" = "يتيح لك التطبيق إنشاء لقاءات جديدة بين الجيران وتشجيع أوقات التبادل. المساعدة عن بعد (القيادة، التوصيل، قسيمة الهدايا، مجموع الجوائز، وما إلى ذلك) غير مسموح بها.";
+"action_CGU_2_title" = "المساهمات والطلبات";
+"action_CGU_2" = "يمكنني أن أطلب أو أعرض السلع المادية (المعدات والملابس وما إلى ذلك)، والخدمات (الغسيل، وطباعة المستندات، وما إلى ذلك) وأوقات المشاركة (القهوة، والنشاط، وما إلى ذلك). لا أستطيع أن أطلب أو أعرض المساعدة المالية أو الإقامة أو المساعدة الغذائية. ولكن إذا كنت في حاجة إليها، يمكنني الاتصال بالمشرف الذي سيرشدني.";
+"action_CGU_3_title" = "موافقة";
+"action_CGU_3" = "عندما أنشر طلبًا لطرف ثالث، أتأكد من الحصول على موافقته مسبقًا.";
+"action_CGU_4_title" = "عدم التمييز";
+"action_CGU_4" = "أتعهد بالدخول في علاقات مع الناس دون تمييز (العرق، الدين، التوجه الجنسي، الرأي السياسي، إلخ).";
+"action_CGU_5_title" = "حماية الناس";
+"action_CGU_5" = "أضمن أن أفعالي لا تحتوي على أي بيانات شخصية (الاسم الأخير، رقم الهاتف، العنوان الدقيق، وما إلى ذلك)، مما يسمح بتحديد هوية الشخص وتحديد موقعه بدقة، ولا أي بيانات حساسة (طبية، قانونية، وما إلى ذلك).";
+
+"edit_edit_contrib_title" = "تحرير\nالمساهمة";
+"edit_edit_solicitation_title" = "تحرير\nالطلب";
+
+/*
+ Messages
+ */
+"Messages_title" = "المناقشات";
+"messaging_message_placeholder_discut" = "رسالة جديدة";
+"messaging_message_title" = "محادثة";
+"messaging_message_send" = "يرسل";
+"messaging_message_no_message" = "0 المزيد من الرسائل";
+
+"message_title_new_conv" = "محادثة جديدة";
+"message_subtitle_new_conv" = "لم تتفاعل بعد مع هذا المستخدم. إذا كانت هناك مشكلة، يمكنك الإبلاغ عن المحادثة في الإعدادات.";
+"message_error_create_conversation" = "حدث خطأ أثناء إنشاء المحادثة";
+
+"conversation_params_title" = "إعدادات الدردشة";
+"conv_param_title_profil" = "عرض الملف الشخصي";
+"conv_param_title_signal" = "تقرير";
+"conv_param_subtitle_signal" = "أبلغ عن هذه المحادثة إلى فريق Entourage.";
+"conv_param_title_members" = "أعضاء المحادثة";
+"conv_param_title_signal_action" = "تقرير";
+"conv_param_subtitle_signal_action" = "أبلغ عن هذه المحادثة إلى فريق Entourage.";
+"conv_param_qui_action" = "اترك المحادثة";
+"conv_param_title_block" = "لمنع";
+"conv_param_subtitle_block" = "لن يتمكن %@ من الكتابة إليك بعد الآن.";
+
+//Pop leave conversation
+"params_leave_conv_pop_title" = "اترك المحادثة";
+"params_leave_conv_pop_message" = "هل تريد ترك المحادثة؟";
+"params_leave_conv_pop_bt_quit" = "للمغادرة";
+"params_leave_conv_pop_bt_cancel" = "يلغي";
+
+//Pop block user inside conversation
+"params_block_user_conv_pop_title" = "حظر المستخدم";
+"params_block_user_conv_pop_message" = "هل ترغب في حظر %@؟\nلن يتمكن هذا المستخدم من إرسال رسائل إليك بعد الآن. يمكنك إلغاء حظر المستخدم في أي وقت من إعدادات ملفك الشخصي.";
+"params_block_user_conv_pop_bt_quit" = "لمنع";
+"params_block_user_conv_pop_bt_cancel" = "يلغي";
+
+"params_block_user_conv_pop_validate_title" = "لحظر %@";
+"params_block_user_conv_pop_validate_subtitle" = "لقد تم حظر جهة الاتصال هذه.";
+"params_block_user_conv_pop_validate_bt" = "تمام";
+
+"message_user_blocked_by_me_list" = "لقد قمت بحظر جهة الاتصال هذه";
+"message_user_blocked_by_me" = "لقد قمت بحظر %@ . لم يعد بإمكانك إرسال رسالة له.";
+"message_user_blocked_by_other" = "لم يعد بإمكانك إرسال رسائل إلى %@ . لقد تم حظر هذه المحادثة.";
+
+"settingsUnblockUserInfo" = "حدد جهة اتصال واحدة أو أكثر لإلغاء حظرها.";
+"settingsUnblockBT" = "إلغاء الحظر";
+"settingsUnblockUser_error" = "الرجاء اختيار جهة اتصال واحدة على الأقل";
+
+"params_unblock_user_pop_title" = "إلغاء حظر جهة الاتصال";
+"params_unblock_users_pop_title" = "إلغاء حظر جهات الاتصال";
+"params_unblock_user_pop_message" = "هل ترغب في رفع الحظر عن %@؟\nسيكون بإمكانكم إرسال الرسائل لبعضكم البعض مرة أخرى.";
+"params_unblock_user_pop_bt_unblock" = "إلغاء الحظر";
+"params_unblock_user_pop_bt_cancel" = "يلغي";
+
+"params_unblock_user_pop_validate_title" = "رفع الحظر %@";
+"params_unblock_user_pop_validate_subtitle" = "لقد تم إلغاء حظر جهة الاتصال هذه للتو، يمكنكم الكتابة لبعضكم البعض مرة أخرى.";
+"params_unblock_users_pop_validate_subtitle" = "لقد تم إلغاء حظر جهات الاتصال هذه للتو، ويمكنك الكتابة لبعضكم البعض مرة أخرى.";
+"params_unblock_user_pop_validate_bt" = "تمام";
+
+"param_empty_blocked_user" = "لم تقم بحظر أي جهات اتصال.";
+
+"conversation_users_title" = "أعضاء المحادثة";
+"conversation_userInput_search" = "البحث عن عضو الدردشة";
+"conversation_search_empty_title" = "عفوًا، لا توجد نتائج تطابق بحثك!";
+
+"notifs_title" = "إشعارات";
+"duration_month" = "%d شهر";
+"duration_weeks" = "%d أسبوع";
+"duration_days" = "%d ي";
+"duration_hours" = "%د ح";
+"duration_minutes" = "%dmin";
+"duration_secondes" = "الآن";
+
+
+//Pwd change
+"param_title_change_pwd" = "تغيير كلمة المرور";
+"param_change_pwd_title" = "كلمة المرور";
+"placeholder_changePwd" = "أدخل الرمز";
+"oldCode" = "رمز الوصول القديم";
+"newCode" = "رمز الوصول الجديد";
+"confirmCode" = "تأكيد الرمز";
+"pwdError" = "كلمة مرور غير صحيحة";
+"pwdShort" = "كلمة المرور الجديدة قصيرة جدًا";
+"pwdDiff" = "كلمات المرور غير متطابقة";
+"pwdUpdated" = "تحديث كلمة المرور";
+"pwdUpdatedErr" = "خطأ في التحديث";
+
+
+//WELCOME STRINGS
+
+"welcomeone_title" = "مرحبا بكم في الشبكة الاجتماعية الاجتماعية حقا";
+"welcomeone_content_main" = "بالنسبة للكثيرين، يعد الشارع مكانًا للعبور.\nبالنسبة للبعض، يعد الشارع بمثابة حياة يومية.\nللبدء، التقِ بأولئك الذين يعيشونه كل يوم.";
+"welcomeone_content" = "ابحث عن محتوى التوعية الخاص بنا هنا";
+
+"welcome_three_title_event" = "قام 6000 شخص بتكوين صداقات جديدة في حدث Entourage";
+"welcome_three_title_demand" = "امنح جيرانك يد العون";
+"welcome_three_title_contrib" = "لا يوجد دعم من حولك؟ اصنعها!";
+
+"welcome_two_no_group" = "قدم نفسك لمجموعة جيرانك";
+
+"welcome_three_maintext_event" = "ابحث عن الحدث الذي يثير اهتمامك وتعال واستمتع بلحظة ودية";
+"welcome_three_maintext_demand" = "ألق نظرة على الطلبات المنشورة بالقرب منك:";
+"welcome_three_maintext_contrib" = "من الطرق الجيدة لإنشاء اتصالات بين الجيران مشاركة اهتماماتك وعواطفك أو مجرد تناول القهوة للتعرف على بعضكما البعض.";
+
+"welcome_three_mainbutton_event" = "Découvrir les événements" ;
+"welcome_three_mainbutton_demand" = "Découvrir les demandes" ;
+"welcome_three_mainbutton_contrib" = "Créer une contribution" ;
+
+"welcome_three_contrib_example_one_title" = "الدردشة أثناء تناول القهوة";
+"welcome_three_contrib_example_one_distance" = "10 م مني";
+"welcome_three_contrib_example_one_loca" = "باريس (75010)";
+"welcome_three_contrib_example_one_date" = "21 يونيو 2022 الساعة 12 ظهرًا";
+
+"welcome_three_contrib_example_two_title" = "التبرع بالملابس النسائية";
+"welcome_three_contrib_example_two_distance" = "10 م مني";
+"welcome_three_contrib_example_two_loca" = "باريس (75010)";
+"welcome_three_contrib_example_two_date" = "21 يونيو 2022 الساعة 12 ظهرًا";
+
+"welcome_four_main_button_title" = "ابدأ الاختبار";
+"welcome_four_title" = "متروك لكم";
+"welcome_four_main_text" = "ماذا عن اختبار صغير لتفكيك الأحكام المسبقة حول عالم الشارع؟";
+"welcome_four_second_text" = "في رأيك ما هي نسبة المشردين الذين لديهم هاتف محمول؟";
+
+"welcome_five_title" = "لقد مرت 10 أيام: مرحبًا بك في العائلة!";
+"welcome_five_main_text_title" = "من الجنون أن يمر الوقت سريعًا عندما تكون بصحبة جيدة.\n\nالآن، ساعدنا على تنمية شبكة Entourage: أحضر شبكتك!";
+"welcome_five_main_button_title" = "مشاركة التطبيق";
+
+"custom_dialog_action_title_one_contrib" = "أين مساهمتك؟";
+"custom_dialog_action_title_one_demand" = "أين طلبك؟";
+"custom_dialog_action_title_two" = "شكرا لصبرك";
+"custom_dialog_action_title_three" = "أخبار جيدة!";
+
+"custom_dialog_action_content_one_contrib" = "هل اكتمل الإجراء \"%@\" الخاص بك؟";
+"custom_dialog_action_content_one_demande" = "%@\n\nهل وجدت ما كنت تبحث عنه؟";
+"custom_dialog_action_content_two_contrib" = "نصيحة: انظر إلى المساهمات. قد يعرض عليك أحد الجيران ما تبحث عنه";
+"custom_dialog_action_content_two_demande" = "نصيحة: انظر إلى الطلبات القريبة منك. قد يكون أحد الجيران مهتمًا";
+"custom_dialog_action_content_three_contrib" = "شكرا جزيلا لالتزامكم. سنكون قادرين على حذف مساهمتك.";
+"custom_dialog_action_content_three_demande" = "شكرا جزيلا لالتزامكم. سنكون قادرين على حذف طلبك.";
+"custom_dialog_action_two_button_contrib" = "عرض المساهمات";
+"custom_dialog_action_two_button_demand" = "عرض الطلبات";
+
+"pop_up_rugby_france_title" = "دعونا نختبر كأس العالم للرجبي معًا";
+"pop_up_rugby_france_content" = "أفضل اللقاءات لا تحدث بالضرورة في الملعب! انضم إلى مجموعة \"دعونا نمارس الرياضة معًا\"";
+
+
+/* New Home string */
+"home_v2_title" = "التطبيق الذي يعيد إنشاء الروابط بين الجيران";
+
+"home_v2_title_action" = "تقديم يد المساعدة";
+"home_v2_subtitle_action" = "جيرانك بحاجة إليك!";
+"home_v2_btn_more_action" = "رؤية جميع الطلبات";
+
+"home_v2_title_action_contrib" = "هل تحتاج إلى يد المساعدة؟";
+"home_v2_subtitle_action_contrib" = "اكتشف ما يقدمه جيرانك!";
+"home_v2_btn_more_action_contrib" = "رؤية جميع المساهمات";
+
+"home_v2_title_event" = "المشاركة في حدث تضامني";
+"home_v2_subtitle_event" = "الكثير من التضامن في مكان قريب";
+"home_v2_btn_more_event" = "رؤية جميع الأحداث";
+
+"home_v2_title_group" = "مجموعات جيرانك";
+"home_v2_subtitle_group" = "تبادل مع جيرانك من جميع مناحي الحياة";
+"home_v2_btn_more_group" = "رؤية كافة المجموعات";
+
+"home_v2_title_map" = "اكتشف عناوين مفيدة";
+"home_v2_subtitle_map" = "جميع الهياكل التضامنية في مكان قريب";
+"home_v2_button_map" = "خريطة الأماكن التضامنية";
+
+"home_v2_title_pedago" = "كل ما تحتاج إلى معرفته لاتخاذ الإجراءات اللازمة";
+"home_v2_subtitle_pedago" = "محاربة عدم الاستقرار مثل كل شيء، يمكن تعلمه!";
+"home_v2_btn_more_pedago" = "عرض جميع المقالات";
+
+
+
+"home_v2_pedago_item_tag_all" = "الجميع";
+"home_v2_pedago_item_tag_act" = "يمثل";
+"home_v2_pedago_item_tag_inspire" = "يلهم";
+"home_v2_pedago_item_tag_understand" = "لفهم";
+
+"home_v2_title_help" = "هل أنت ضائع؟";
+"home_v2_subtitle_help" = "لا داعي للذعر، ابدأ خطوة بخطوة!";
+"home_v2_btn_more_help" = "عرض جميع المقالات";
+
+"home_v2_help_title_one" = "كيفية إنشاء مجموعة؟";
+"home_v2_help_title_two" = "كيفية إنشاء حدث؟";
+"home_v2_help_title_three" = "هل لديك سؤال؟\nاتصل";
+
+"home_v2_pedag_item_lenght_title" = "قراءة %d دقيقة";
+
+"home_v2_action_type_social" = "اجتماعي";
+"home_v2_action_type_clothes" = "ملابس";
+"home_v2_action_type_equipment" = "معدات";
+"home_v2_action_type_hygiène" = "صحة";
+"home_v2_action_type_services" = "خدمات";
+"home_v2_action_type_other" = "آحرون";
+
+"home_v2_hz_item_title" = "مرحبًا، يبدو الوضع هادئًا بعض الشيء هنا...";
+"home_v2_hz_item_subtitle" = "ماذا لو جلبت القليل من التضامن إلى مدينتك؟ Entourage يمنحك المفاتيح للبدء!";
+"home_v2_hz_item_button" = "يتعلم أكثر";
+
+"lang_fr" = "- فرنسي";
+"lang_en" = "- إنجليزي";
+"lang_de" = "- الألمانية";
+"lang_uk" = "- الأوكرانية";
+"lang_es" = "- الاسبانية";
+"lang_ro" = "- الرومانية";
+"lang_ar" = "- عربي";
+"lang_pl" = "- البولندية";
+"home_v2_title_initial_pedago" = "كن على علم";
+"home_v2_subtitle_initial_pedago" = "بعض اقتراحات القراءة للبدء";
+
+"onboarding_lang_bienvenue" = "مرحباً !";
 "onboarding_lang_select" = "اختر اللغة";
 "onboarding_lang_suivant" = "التالي";
-"translation_bottom_fragment_title" = "نحن نترجم تلقائيًا الرسائل التي يكتبها مستخدمو التطبيق.";
+"translation_bottom_fragment_title" = "نقوم تلقائيًا بترجمة الرسائل التي يكتبها مستخدمو التطبيق.";
 "translation_bottom_fragment_main_title" = "ترجمة";
 
 "action_social_name" = "مشاركة الوقت";
-"action_social_subname" = "قهوة، نشاط...";
+"action_social_subname" = "قهوة .. نشاط ..";
 
 "action_services_name" = "خدمة";
-"action_services_subname" = "غسيل، طباعة المستندات...";
+"action_services_subname" = "غسيل الملابس وطباعة المستندات ...";
 
 "action_clothes_name" = "ملابس";
-"action_clothes_subname" = "أحذية، معطف...";
+"action_clothes_subname" = "حذاء، معطف...";
 
 "action_equipment_name" = "معدات";
-"action_equipment_subname" = "هاتف، كيس نوم...";
+"action_equipment_subname" = "هاتف، كيس نوم..";
 
-"action_hygiene_name" = "النظافة";
-"action_hygiene_subname" = "صابون، حماية صحية...";
+"action_hygiene_name" = "صحة";
+"action_hygiene_subname" = "الصابون.. حماية صحية..";
 
-"interest_activites" = "أنشطة يدوية";
+"interest_activites" = "الأنشطة اليدوية";
 "interest_animaux" = "الحيوانات";
 "interest_bien_etre" = "الرفاهية";
-"interest_cuisine" = "الطبخ";
+"interest_cuisine" = "مطبخ";
 "interest_culture" = "الفن والثقافة";
 "interest_jeux" = "ألعاب";
-"interest_nature" = "الطبيعة";
-"interest_sport" = "رياضة";
-"interest_marauding" = "جولات اجتماعية";
-"interest_other" = "أخرى";
-"contact" = "اتصل";
+"interest_nature" = "طبيعة";
+"interest_sport" = "الرياضة";
+"interest_marauding" = "الغارات الاجتماعية";
+"interest_other" = "آخر";
+"contact" = "اتصال";
 
-"report_modal_title_translate" = "ترجمة";
-"report_modal_subtitle_translate" = "نحن نترجم تلقائيًا الرسائل التي يكتبها مستخدمو التطبيق";
+"report_modal_title_translate" = "يترجم";
+"report_modal_subtitle_translate" = "نقوم تلقائيًا بترجمة الرسائل التي يكتبها مستخدمو التطبيق";
 "layout_translate_title_original" = "عرض النسخة الأصلية";
 "layout_translate_title_translation" = "عرض الترجمة";
 "layout_translate_action_translation_button" = "انقر هنا لعرض النسخة الأصلية";
 "layout_translate_title_original_button" = "عرض الترجمة";
-"layout_translate_title_original_title" = "لم تتم ترجمة هذه الصفحة.";
-"layout_translate_title_translation_title" = "تم ترجمة بعض المعلومات تلقائيًا.";
-"Category_Food" = "الغذاء";
-"Category_Accommodation" = "الإقامة";
-"Category_Health" = "الصحة";
-"Category_Refresh" = "تحديث";
-"Category_Toilets" = "الحمامات";
-"Category_Fountains" = "النوافير";
-"Category_Wash" = "الغسيل";
+"layout_translate_title_original_title" = "هذه الصفحة لم تتم ترجمتها.";
+"layout_translate_title_translation_title" = "تمت ترجمة بعض المعلومات تلقائيًا.";
+"Category_Food" = "إطعام نفسك";
+"Category_Accommodation" = "إقامة";
+"Category_Health" = "علاج نفسك";
+"Category_Refresh" = "ترطيب";
+"Category_Toilets" = "حمام";
+"Category_Fountains" = "نوافير";
+"Category_Wash" = "غسل";
 "Category_Laundries" = "المغاسل";
-"Category_Orient" = "التوجيه";
-"Category_SelfCare" = "العناية بالنفس";
-"Category_Clothes" = "الملابس والمعدات";
-"Category_DonationBox" = "صندوق التبرعات";
-"Category_Reintegration" = "إعادة الاندماج";
+"Category_Orient" = "توجيه نفسك";
+"Category_SelfCare" = "اعتنِ بنفسك";
+"Category_Clothes" = "الملابس والمواد";
+"Category_DonationBox" = "صندوق التبرعات/إقرأ";
+"Category_Reintegration" = "إعادة التكامل";
 "Category_Partners" = "الشركاء";
-"Category_Other" = "أخرى";
+"Category_Other" = "آخر";
 "create_group_btn_title" = "إنشاء مجموعة";
-"friendly_links_title" = "روابط ودية وتضامنية";
-"friendly_links_text" = "في Entourage، الهدف الرئيسي هو تعزيز الروابط الودية والدائمة. أتعهد بالاحترام لهذه السياسة من خلال تجنب أي خطوات أو منشورات ذات طابع رومانسي أو عاطفي. وبالتالي، أساهم بنشاط في الحفاظ على بيئة دافئة ومرحبة للجميع.";
-"copied_text" = "تم النسخ إلى الحافظة!";
-"copy_the_text" = "انسخ النص";
+"friendly_links_title" = "علاقات ودية وداعمة";
+"friendly_links_text" = "في Entourage، الهدف الرئيسي هو تعزيز العلاقات الودية والدائمة. وأتعهد باحترام هذا التوجه بتجنب أي مقاربة أو نشر ذي طابع رومانسي أو رومانسي. وهكذا، فإنني أساهم بفعالية في الحفاظ على بيئة دافئة ورعاية للجميع.";
+"copied_text" = "نسخ إلى الحافظة!";
+"copy_the_text" = "نسخ النص";
 "copy_the_text_explanation" = "سيتم نسخ النص إلى الحافظة";
-"text_title_i_like" = "أعجبني";
+"text_title_i_like" = "لمثل";
 "text_title_comment" = "تعليق";
-"see_member_react" = "الأشخاص الذين تفاعلوا";
+"see_member_react" = "الناس الذين تفاعلوا";
 
 "vote_singular" = "تصويت";
-"vote_plural" = "تصويتات";
+"vote_plural" = "الأصوات";
 
 "enhanced_onboarding_start_title" = "%@، دعونا نتعرف على بعضنا البعض!";
-"enhanced_onboarding_start_subtitle" = "قبل الغوص في تطبيقنا، لنأخذ بعض اللحظات للتعرف عليك بشكل أفضل. ستساعدنا اهتماماتك في اقتراح الأنشطة والمحتوى الذي قد يعجبك.";
-"enhanced_onboarding_button_title_start" = "ابدأ";
-"enhanced_onboarding_button_title_later" = "إنهاء لاحقًا";
-"enhanced_onboarding_button_title_configlater" = "إعداد لاحقًا";
+"enhanced_onboarding_start_subtitle" = "قبل الغوص في تطبيقنا، دعنا نتوقف لحظة للتعرف على نفسك بشكل أفضل. ستساعدنا اهتماماتك في اقتراح الأنشطة والمحتوى الذي قد يثير اهتمامك.";
+"enhanced_onboarding_button_title_start" = "للبدء";
+"enhanced_onboarding_button_title_later" = "أكمل لاحقًا";
+"enhanced_onboarding_button_title_configlater" = "قم بالتكوين لاحقًا";
 "enhanced_onboarding_button_title_next" = "التالي";
-"enhanced_onboarding_button_title_event" = "استعراض الأحداث";
-"enhanced_onboarding_end_title" = "تجربتك المخصصة جاهزة تقريبًا!";
-"enhanced_onboarding_end_subtitle" = "شكرًا لمشاركتك رغباتك في العمل واهتماماتك. نتطلع إلى تقديم أحداث مخصصة تناسبك قريبًا.\nابقَ متصلاً!";
+"enhanced_onboarding_button_title_event" = "تصفح الأحداث";
+"enhanced_onboarding_end_title" = "تجربتك المصممة خصيصًا جاهزة (تقريبًا)!";
+"enhanced_onboarding_end_subtitle" = "شكرًا لك على مشاركتك رغبتك في العمل واهتماماتك. نحن نتطلع إلى أن نقدم لك قريبًا فعاليات مخصصة تناسبك\nابق على اتصال!";
 
 "edit_profile_cell_onboarding" = "تخصيص حسابي";
-"button_title_for_setting_onboarding" = "حفظ";
+"button_title_for_setting_onboarding" = "يحفظ";
 "button_title_for_re_onboarding_end" = "العودة إلى الملف الشخصي";
 
-"notif_demand_title" = "قم بتمكين الإشعارات حتى لا تفوتك أي شيء";
-"notif_demand_subtitle" = "تلقَّ طلبات المساعدة بالقرب منك، وتعرَّف على الأحداث المحلية، ومنشورات جيرانك والرسائل الشخصية في الوقت الفعلي.";
-"notif_demand_btn_accept" = "تفعيل الإشعارات";
+"notif_demand_title" = "قم بتفعيل الإشعارات حتى لا يفوتك أي شيء";
+"notif_demand_subtitle" = "احصل على المساعدة المتبادلة بالقرب منك، وكن على علم بالأحداث المحلية والمنشورات من جيرانك والرسائل الشخصية في الوقت الحقيقي.";
+"notif_demand_btn_accept" = "تمكين الإخطارات";
 "notif_demand_btn_refuse" = "ليس الآن";
-"btn_main_filter_validate_title" = "تطبيق الفلاتر";
-"btn_main_filter_cancel_title" = "إعادة تعيين";
-"main_filter_radius_cell_title" = "في دائرة نصف قطرها";
+"btn_main_filter_validate_title" = "تطبيق المرشحات";
+"btn_main_filter_cancel_title" = "إعادة ضبط";
+"main_filter_radius_cell_title" = "داخل دائرة نصف قطرها";
 "main_filter_cell_group_placeholder" = "ابحث عن مجموعة";
-"main_filter_cell_event_placeholder" = "ابحث عن حدث";
-"main_filter_cell_action_placeholder" = "ابحث عن مساعدة";
+"main_filter_cell_event_placeholder" = "البحث عن حدث";
+"main_filter_cell_action_placeholder" = "اطلب الدعم";
+
+"popup_discussion_test_btn_confirm" = "المشاركة في الدردشة";
+"popup_discussion_test_btn_cancel" = "أنا لست مهتم";
+"popup_discussion_test_label" = "ميزة جديدة";
+"popup_discussion_test_title" = "انضم إلى مجموعة من السكان المحليين المتحمسين!";
+"popup_discussion_test_text" = "احصلوا معًا على النصائح لتنفيذ أعمال التضامن والمشاركة في الأحداث المحلية ومساعدة الأشخاص الذين يعيشون في أوضاع محفوفة بالمخاطر. كل هذا سيتم من خلال دردشة مخصصة في التطبيق، حيث يمكنكم تبادل وتحفيز بعضكم البعض.";
+"toast_message_participate" = "سوف نعود اليكم قريبا!";
+"popup_biencommun_title" = "لتمكين 60 شخصًا في أوضاع غير مستقرة من الانضمام إلى نادٍ رياضي، كل ما يتطلبه الأمر هو نقرة واحدة. لك!";
+"popup_biencommun_vote" = "تصويت";
+
+"filter_groupevent_filters" = "فلاتر";
+"filter_groupevent_by_theme" = "حسب الموضوع";
+"filter_groupevent_by_location" = "حسب الموقع";
+"filter_groupevent_by_category" = "حسب الفئة";
+"filter_groupevent_sport" = "رياضة";
+"filter_groupevent_animals" = "حيوانات";
+"filter_groupevent_social_marauding" = "التجوال الاجتماعي";
+"filter_groupevent_cooking" = "طبخ";
+"filter_groupevent_games" = "ألعاب";
+"filter_groupevent_handicrafts" = "أشغال يدوية";
+"filter_groupevent_wellbeing" = "رفاهية";
+"filter_groupevent_nature" = "طبيعة";
+"filter_groupevent_art_and_culture" = "فن وثقافة";
+"filter_groupevent_other" = "أخرى";
+"filter_groupevent_sharing_time" = "وقت المشاركة";
+"filter_groupevent_services" = "خدمات";
+"filter_groupevent_clothes" = "ملابس";
+"filter_groupevent_equipment" = "معدات";
+"filter_groupevent_hygiene_products" = "منتجات النظافة";
+
+"enhanced_onboarding_sharing_time" = "وقت المشاركة";
+"enhanced_onboarding_material_donations" = "التبرعات المادية";
+"enhanced_onboarding_services" = "عرض الخدمات";
+"enhanced_onboarding_participate_events" = "المشاركة في الفعاليات الاجتماعية";
+"enhanced_onboarding_solicit_help" = "طلب المساعدة";
+"enhanced_onboarding_join_neighborhoods" = "الانضمام إلى مجموعة جيران وإقامة روابط";
+"enhanced_onboarding_find_structures" = "ابحث عن هياكل التضامن القريبة";
+"enhanced_onboarding_learn_content" = "التعلم من المحتويات التعليمية";
+"enhanced_onboarding_give_help" = "تقديم أو طلب المساعدة";
+"enhanced_onboarding_interest_sport" = "الرياضة";
+"enhanced_onboarding_interest_animals" = "الحيوانات";
+"enhanced_onboarding_interest_social_marauding" = "التطوع الاجتماعي";
+"enhanced_onboarding_interest_cooking" = "الطهي";
+"enhanced_onboarding_interest_games" = "الألعاب";
+"enhanced_onboarding_interest_manual_activities" = "الأنشطة اليدوية";
+"enhanced_onboarding_interest_wellbeing" = "الرفاهية";
+"enhanced_onboarding_interest_nature" = "الطبيعة";
+"enhanced_onboarding_interest_art_culture" = "الفن والثقافة";
+"enhanced_onboarding_interest_other" = "آخر";
+"enhanced_onboarding_my_interests" = "اهتماماتي";
+"enhanced_onboarding_find_activities" = "لمساعدتك في العثور على الأنشطة التي تناسبك، أخبرنا بما يثير اهتمامك.";
+"enhanced_onboarding_my_concerns" = "فئات المساعدة الخاصة بي";
+"enhanced_onboarding_select_concerns" = "اختر فئات المساعدة التي ترغب في إعطائها الأولوية.";
+"enhanced_onboarding_how_to_act" = "كيف تريد أن تتصرف داخل مجتمع Entourage؟";
+"enhanced_onboarding_multiple_options" = "(نعم، يمكنك اختيار عدة خيارات!)";

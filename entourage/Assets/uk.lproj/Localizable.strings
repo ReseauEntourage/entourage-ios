@@ -158,10 +158,10 @@
 "onboard_phone_title" = "Приємно познайомитися, %@!";
 
 "onboard_phase3_title" = "Окрім зустрічей з людьми, як би ви хотіли зробити внесок у спільноту Entourage?";
-"onboard_title_entour" = "Об'ємний";
-"onboard_subtitle_entour" = "Запропонуйте допомогу...";
-"onboard_title_beentour" = "Бути оточеним";
-"onboard_subtitle_beentour" = "Зверніться по допомогу, знайдіть соціальні структури навколо мене...";
+"onboard_title_entour" = "Підтримати";
+"onboard_subtitle_entour" = "інших Я хотів би надати підтримку своїм сусідам, які цього потребують.";
+"onboard_title_beentour" = "Отримати";
+"onboard_subtitle_beentour" = "підтримку Я перебуваю в уразливій ситуації та шукаю підтримки.";
 "onboard_place_title_new" = "Який ваш район?";
 "onboard_place_desc" = "* Адреса є конфіденційною та ніколи не повідомлятиметься";
 "onboard_place_infos_placeholder" = "Адреса, місто або відділ";
@@ -1395,7 +1395,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "home_v2_title_map" = "Відкрийте для себе корисні адреси";
 "home_v2_subtitle_map" = "Всі споруди солідарності поруч";
-"home_v2_button_map" = "Карта місць солідарності поблизу вас";
+"home_v2_button_map" = "Карта місць солідарності";
 
 "home_v2_title_pedago" = "Усе, що вам потрібно знати, щоб діяти";
 "home_v2_subtitle_pedago" = "Боротьба з нестабільністю – це як усе, цьому можна навчитися!";
@@ -1598,3 +1598,49 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "main_filter_cell_group_placeholder" = "Шукати групу";
 "main_filter_cell_event_placeholder" = "Шукати подію";
 "main_filter_cell_action_placeholder" = "Шукати допомогу";
+
+"filter_groupevent_filters" = "Фільтри";
+"filter_groupevent_by_theme" = "За темою";
+"filter_groupevent_by_location" = "За місцем";
+"filter_groupevent_by_category" = "За категорією";
+"filter_groupevent_sport" = "Спорт";
+"filter_groupevent_animals" = "Тварини";
+"filter_groupevent_social_marauding" = "Соціальне мародерство";
+"filter_groupevent_cooking" = "Кулінарія";
+"filter_groupevent_games" = "Ігри";
+"filter_groupevent_handicrafts" = "Ремесла";
+"filter_groupevent_wellbeing" = "Добробут";
+"filter_groupevent_nature" = "Природа";
+"filter_groupevent_art_and_culture" = "Мистецтво та Культура";
+"filter_groupevent_other" = "Інше";
+"filter_groupevent_sharing_time" = "Час для спілкування";
+"filter_groupevent_services" = "Послуги";
+"filter_groupevent_clothes" = "Одяг";
+"filter_groupevent_equipment" = "Обладнання";
+"filter_groupevent_hygiene_products" = "Гігієнічні засоби";
+
+"enhanced_onboarding_sharing_time" = "Час для обміну";
+"enhanced_onboarding_material_donations" = "Матеріальні пожертви";
+"enhanced_onboarding_services" = "Пропозиція послуг";
+"enhanced_onboarding_participate_events" = "Участь у дружніх заходах";
+"enhanced_onboarding_solicit_help" = "Попросити про допомогу";
+"enhanced_onboarding_join_neighborhoods" = "Приєднатися до сусідської групи та налагодити зв'язки";
+"enhanced_onboarding_find_structures" = "Знайти структури солідарності поруч";
+"enhanced_onboarding_learn_content" = "Навчатися за допомогою освітнього контенту";
+"enhanced_onboarding_give_help" = "Надавати або отримувати допомогу";
+"enhanced_onboarding_interest_sport" = "Спорт";
+"enhanced_onboarding_interest_animals" = "Тварини";
+"enhanced_onboarding_interest_social_marauding" = "Соціальна допомога";
+"enhanced_onboarding_interest_cooking" = "Кулінарія";
+"enhanced_onboarding_interest_games" = "Ігри";
+"enhanced_onboarding_interest_manual_activities" = "Ручна праця";
+"enhanced_onboarding_interest_wellbeing" = "Добробут";
+"enhanced_onboarding_interest_nature" = "Природа";
+"enhanced_onboarding_interest_art_culture" = "Мистецтво та культура";
+"enhanced_onboarding_interest_other" = "Інше";
+"enhanced_onboarding_my_interests" = "Мої інтереси";
+"enhanced_onboarding_find_activities" = "Щоб допомогти вам знайти відповідні заходи, розкажіть, що вас цікавить.";
+"enhanced_onboarding_my_concerns" = "Мої категорії допомоги";
+"enhanced_onboarding_select_concerns" = "Виберіть категорії допомоги, які ви хочете віддавати перевагу.";
+"enhanced_onboarding_how_to_act" = "Як ви хочете діяти в громаді Entourage?";
+"enhanced_onboarding_multiple_options" = "(Так, ви можете вибрати кілька варіантів!)";

@@ -36,6 +36,7 @@ class MainParamsViewController: UIViewController {
                 if let _token = token {
                     self.tokenPush = _token
                     self.tokenInfo = "TOKEN Firebase:\n\(_token)"
+                    print("TOKEN INFO ", self.tokenInfo)
                     self.ui_tableview?.reloadData()
                 }
             }
@@ -169,6 +170,7 @@ extension MainParamsViewController: MJAlertControllerDelegate {
                 if let error = error {
                     let errorMessage = String.init(format: "params_account_not_deleted".localized, error.message)
                     IHProgressHUD.showError(withStatus: errorMessage)
+                    
                     return
                 }
                 NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)

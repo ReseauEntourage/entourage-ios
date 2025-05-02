@@ -157,10 +157,10 @@
 "onboard_phone_title" = "Schön, Sie kennenzulernen, %@!";
 
 "onboard_phase3_title" = "Welchen Beitrag möchten Sie neben dem Kennenlernen von Menschen zur Entourage-Community leisten?";
-"onboard_title_entour" = "Umgeben";
-"onboard_subtitle_entour" = "Hilfe anbieten...";
-"onboard_title_beentour" = "Sei umgeben";
-"onboard_subtitle_beentour" = "Bitten Sie um Hilfe, finden Sie die sozialen Strukturen um mich herum ...";
+"onboard_title_entour" = "Unterstützen";
+"onboard_subtitle_entour" = "Ich möchte meinen Nachbarn in Not Unterstützung anbieten.";
+"onboard_title_beentour" = "Unterstützung erhalten";
+"onboard_subtitle_beentour" = "Ich befinde mich in einer verletzlichen Situation und suche Unterstützung.";
 "onboard_place_title_new" = "Was ist deine Nachbarschaft?";
 "onboard_place_desc" = "* Die Adresse ist vertraulich und wird niemals weitergegeben";
 "onboard_place_infos_placeholder" = "Adresse, Stadt oder Abteilung";
@@ -1394,7 +1394,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "home_v2_title_map" = "Entdecken Sie nützliche Adressen";
 "home_v2_subtitle_map" = "Alle Solidaritätsstrukturen in der Nähe";
-"home_v2_button_map" = "Karte der Solidaritätsorte in Ihrer Nähe";
+"home_v2_button_map" = "Karte der solidarischen Orte";
 
 "home_v2_title_pedago" = "Alles, was Sie wissen müssen, um Maßnahmen zu ergreifen";
 "home_v2_subtitle_pedago" = "Prekarität zu bekämpfen ist wie alles, man kann es lernen!";
@@ -1597,3 +1597,50 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "main_filter_cell_group_placeholder" = "Eine Gruppe suchen";
 "main_filter_cell_event_placeholder" = "Eine Veranstaltung suchen";
 "main_filter_cell_action_placeholder" = "Hilfe suchen";
+
+"filter_groupevent_filters" = "Filter";
+"filter_groupevent_by_theme" = "Nach Thema";
+"filter_groupevent_by_location" = "Nach Standort";
+"filter_groupevent_by_category" = "Nach Kategorie";
+"filter_groupevent_sport" = "Sport";
+"filter_groupevent_animals" = "Tiere";
+"filter_groupevent_social_marauding" = "Soziales Durchstreifen";
+"filter_groupevent_cooking" = "Kochen";
+"filter_groupevent_games" = "Spiele";
+"filter_groupevent_handicrafts" = "Handarbeiten";
+"filter_groupevent_wellbeing" = "Wohlbefinden";
+"filter_groupevent_nature" = "Natur";
+"filter_groupevent_art_and_culture" = "Kunst & Kultur";
+"filter_groupevent_other" = "Andere";
+"filter_groupevent_sharing_time" = "Gemeinsame Zeit";
+"filter_groupevent_services" = "Dienstleistungen";
+"filter_groupevent_clothes" = "Kleidung";
+"filter_groupevent_equipment" = "Ausrüstung";
+"filter_groupevent_hygiene_products" = "Hygieneprodukte";
+
+"enhanced_onboarding_sharing_time" = "Zeit zum Teilen";
+"enhanced_onboarding_material_donations" = "Sachspenden";
+"enhanced_onboarding_services" = "Dienstleistungsangebot";
+"enhanced_onboarding_participate_events" = "An geselligen Veranstaltungen teilnehmen";
+"enhanced_onboarding_solicit_help" = "Um Hilfe bitten";
+"enhanced_onboarding_join_neighborhoods" = "Einer Nachbarschaftsgruppe beitreten und Kontakte knüpfen";
+"enhanced_onboarding_find_structures" = "Solidaritätsstrukturen in der Nähe finden";
+"enhanced_onboarding_learn_content" = "Mit Lerninhalten lernen";
+"enhanced_onboarding_give_help" = "Hilfe geben oder annehmen";
+"enhanced_onboarding_interest_sport" = "Sport";
+"enhanced_onboarding_interest_animals" = "Tiere";
+"enhanced_onboarding_interest_social_marauding" = "Soziales Engagement";
+"enhanced_onboarding_interest_cooking" = "Kochen";
+"enhanced_onboarding_interest_games" = "Spiele";
+"enhanced_onboarding_interest_manual_activities" = "Handarbeit";
+"enhanced_onboarding_interest_wellbeing" = "Wohlbefinden";
+"enhanced_onboarding_interest_nature" = "Natur";
+"enhanced_onboarding_interest_art_culture" = "Kunst & Kultur";
+"enhanced_onboarding_interest_other" = "Sonstiges";
+"enhanced_onboarding_my_interests" = "Meine Interessen";
+"enhanced_onboarding_find_activities" = "Um Ihnen zu helfen, passende Aktivitäten zu finden, teilen Sie uns bitte mit, was Sie interessiert.";
+"enhanced_onboarding_my_concerns" = "Meine Hilfekategorien";
+"enhanced_onboarding_select_concerns" = "Wählen Sie die Hilfekategorien aus, die Sie priorisieren möchten.";
+"enhanced_onboarding_how_to_act" = "Wie möchten Sie in der Entourage-Community handeln?";
+"enhanced_onboarding_multiple_options" = "(Ja, Sie können mehrere Optionen auswählen!)";
+
