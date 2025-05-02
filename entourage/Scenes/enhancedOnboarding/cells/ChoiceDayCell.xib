@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Quicksand-Bold.ttf">
+            <string>Quicksand-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChoiceDayCell" rowHeight="119" id="1PC-gh-MzN" customClass="ChoiceDayCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="588" height="119"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1PC-gh-MzN" id="bYy-eW-z59">
+                <rect key="frame" x="0.0" y="0.0" width="588" height="119"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mes jours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mN-Mf-ZLU">
+                        <rect key="frame" x="23.999999999999996" y="9.9999999999999982" width="59.666666666666657" height="16.333333333333329"/>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nJF-TR-Cci">
+                        <rect key="frame" x="24" y="36.333333333333343" width="544" height="70"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="ubq-hW-9G3"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mwn-6l-plT">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4mN-Mf-ZLU" firstAttribute="leading" secondItem="bYy-eW-z59" secondAttribute="leading" constant="24" id="8ut-u0-Ad4"/>
+                    <constraint firstItem="nJF-TR-Cci" firstAttribute="leading" secondItem="bYy-eW-z59" secondAttribute="leading" constant="24" id="BvQ-is-gEO"/>
+                    <constraint firstAttribute="trailing" secondItem="nJF-TR-Cci" secondAttribute="trailing" constant="20" symbolic="YES" id="LdY-D3-qGw"/>
+                    <constraint firstItem="nJF-TR-Cci" firstAttribute="top" secondItem="4mN-Mf-ZLU" secondAttribute="bottom" constant="10" id="WOm-1R-tIv"/>
+                    <constraint firstItem="4mN-Mf-ZLU" firstAttribute="top" secondItem="bYy-eW-z59" secondAttribute="top" constant="10" id="dS9-tE-6cI"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nJF-TR-Cci" secondAttribute="bottom" constant="10" id="hlV-Iz-9Es"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ui_collectionview_days" destination="nJF-TR-Cci" id="S0m-Je-ase"/>
+                <outlet property="ui_title_day" destination="4mN-Mf-ZLU" id="9lr-Fa-ePm"/>
+            </connections>
+            <point key="canvasLocation" x="219.84732824427479" y="45.422535211267608"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

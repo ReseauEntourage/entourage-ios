@@ -1631,3 +1631,42 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "share_request_title" = "Souhaitez-vous partager votre %@ dans votre groupe %@ ?";
 "share_request_description" = "Vous avez la possibilité de partager votre %@ dans le groupe de voisins de votre ville pour améliorer sa visibilité";
 
+"onboarding_congrats_title" = "Votre expérience sur-mesure est prête !";
+"onboarding_congrats_content" = "À partir de vos préférences et disponibilités, nous vous avons préparé une sélection d’événements à votre image. C’est le moment de passer à l’action !";
+"onboarding_congrats_leave" = "Parcourir les événements";
+"onboarding_congrats_temporary_title" = "Votre expérience sur-mesure est (quasi) prête !";
+"onboarding_congrats_temporary_content" = "Merci d'avoir partagé vos envies d'agir et vos centres d'intérêts. Nous sommes impatients de vous proposer bientôt des événements sur-mesure qui vous correspondent. \nRestez connecté(e) !";
+
+"onboarding_experience_resource_title" = "Vous êtes maintenant prêt(e) à vous engager !";
+"onboarding_experience_resource_content" = "On vous propose un défi rapide pour balayer les idées reçues sur les personnes en situation de précarité.";
+"onboarding_experience_resource_button" = "Démarrer le quiz";
+
+"onboarding_experience_event_title" = "Votre expérience sur-mesure est prête !";
+"onboarding_experience_event_content" = "Nous avons sélectionné des événements qui correspondent aux critères que vous nous avez indiqués.";
+"onboarding_experience_event_button" = "Voir les événements";
+
+"onboarding_no_event_title" = "Pas d’événements près de chez vous ? Créez le vôtre !";
+"onboarding_no_event_content" = "Aucun événement est prévu près de chez vous pour l’instant, mais vous pouvez proposer un moment de partage et inviter vos voisins à participer.";
+"onboarding_no_event_button" = "Proposer un temps de partage";
+
+"onboarding_ready_action_title" = "C'est parti ! Présentez-vous à vos voisins";
+"onboarding_ready_action_content" = "On vous propose de commencer par une présentation dans votre groupe de voisins solidaires.";
+"onboarding_ready_action_button" = "Savoir comment me présenter";
+
+"onboarding_start_action_title" = "C’est parti ! Donnez une seconde vie à vos objets";
+"onboarding_start_action_content" = "On vous propose de commencer par donner une seconde vie à un objet, un geste qui renforce la solidarité et crée des liens avec vos voisins.";
+"onboarding_start_action_button" = "Faire ma première action solidaire";
+
+"day_monday" = "Lundi";
+"day_tuesday" = "Mardi";
+"day_wednesday" = "Mercredi";
+"day_thursday" = "Jeudi";
+"day_friday" = "Vendredi";
+"day_saturday" = "Samedi";
+"day_sunday"= "Dimanche";
+
+"hour_morning" = "Matin";
+"hour_afternoon" = "Après-midi";
+"hour_evening" = "Soir";
+"enhanced_onboarding_select_availability" = "Précisez vos disponibilités pour que l'on puisse vous suggérer des événements adaptés.";
+"enhanced_onboarding_my_availability" = "Mes disponibilités";

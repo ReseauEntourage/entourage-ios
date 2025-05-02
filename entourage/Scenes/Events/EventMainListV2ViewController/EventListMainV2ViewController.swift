@@ -95,6 +95,10 @@ class EventListMainV2ViewController: UIViewController {
 
         let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(onFilterClick))
         uiBtnFilter.addGestureRecognizer(filterTapGesture)
+        //Confguration Post onboarding
+        configurePostOnboarding()
+
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -109,8 +113,27 @@ class EventListMainV2ViewController: UIViewController {
                 filterCell.ui_textfield.becomeFirstResponder()
             }
         }
-        
+
         comeFromDetail = false
+    }
+    
+    private func configurePostOnboarding(){
+        if OnboardingEndChoicesManager.shared.categoryForButton == "event" {
+            numberOfFilters = EnhancedOnboardingConfiguration.shared.numberOfFilterForEvent.count
+            EnhancedOnboardingConfiguration.shared.numberOfFilterForEvent.forEach { id in
+                selectedItemsFilter[id] = true
+            }
+            if numberOfFilters > 0 {
+                self.ui_tv_number_of_filter.text = String(numberOfFilters)
+                self.ui_tv_number_of_filter.isHidden = false
+            } else {
+                self.ui_tv_number_of_filter.isHidden = true
+            }
+            OnboardingEndChoicesManager.shared.categoryForButton = ""
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showHighlightOverlay(targetView: self.uiBtnFilter, withBubbleText: "Des filtres ont été appliqués en fonction de vos préférences. Cliquez ici pour les modifier.")
+            }
+        }
     }
     
     @objc func onSearchClick() {
@@ -649,5 +672,27 @@ extension EventListMainV2ViewController: MainFilterDelegate {
         let indexPath = IndexPath(row: 0, section: 0)
         self.ui_table_view.reloadRows(at: [indexPath], with: .automatic)
         self.loadForFilter()
+    }
+}
+
+extension EventListMainV2ViewController {
+    func showHighlightOverlay(targetView: UIView, withBubbleText text: String) {
+        // Crée l'overlay
+        let overlayView = HighlightOverlayView(targetView: targetView)
+        overlayView.frame = self.view.bounds
+
+        // Ajoute la bulle
+        overlayView.addBubble(with: text, below: targetView)
+
+        // Gérer le clic sur l'overlay pour le retirer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeOverlay(_:)))
+        overlayView.addGestureRecognizer(tapGesture)
+
+        // Ajoute l'overlay à la vue principale
+        self.view.addSubview(overlayView)
+    }
+
+    @objc private func removeOverlay(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
     }
 }

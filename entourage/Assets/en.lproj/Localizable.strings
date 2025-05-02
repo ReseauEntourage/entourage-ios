@@ -1673,3 +1673,44 @@
 "mandatory_label" = "Mandatory";
 "share_request_title" = "Would you like to share your %@ in your %@ group?";
 "share_request_description" = "You have the option to share your %@ in the neighborhood group of your city to improve its visibility";
+
+"onboarding_congrats_title" = "Your personalized experience is ready!";
+"onboarding_congrats_content" = "Based on your preferences and availability, we've crafted a selection of events tailored to you. It's time to take action!";
+"onboarding_congrats_leave" = "Browse events";
+"onboarding_congrats_temporary_title" = "Your personalized experience is (almost) ready!";
+"onboarding_congrats_temporary_content" = "Thank you for sharing your interests and desire to take action. We’re excited to soon offer you tailored events that suit you. \nStay tuned!";
+
+"onboarding_experience_resource_title" = "You're now ready to get involved!";
+"onboarding_experience_resource_content" = "We’re offering a quick challenge to clear up some common misconceptions about people facing hardship.";
+"onboarding_experience_resource_button" = "Start the quiz";
+
+"onboarding_experience_event_title" = "Your personalized experience is ready!";
+"onboarding_experience_event_content" = "We’ve selected events that match the criteria you provided us.";
+"onboarding_experience_event_button" = "See events";
+
+"onboarding_no_event_title" = "No events near you? Create your own!";
+"onboarding_no_event_content" = "No events are planned near you at the moment, but you can suggest a gathering and invite your neighbors to join.";
+"onboarding_no_event_button" = "Suggest a gathering";
+
+"onboarding_ready_action_title" = "Let's go! Introduce yourself to your neighbors";
+"onboarding_ready_action_content" = "We suggest starting with a quick introduction in your supportive neighbors group.";
+"onboarding_ready_action_button" = "Learn how to introduce myself";
+
+"onboarding_start_action_title" = "Let’s go! Give your items a second life";
+"onboarding_start_action_content" = "We suggest starting by giving a second life to an item—a simple act that strengthens solidarity and builds bonds with your neighbors.";
+"onboarding_start_action_button" = "Do my first act of solidarity";
+
+"day_monday" = "Monday";
+"day_tuesday" = "Tuesday";
+"day_wednesday" = "Wednesday";
+"day_thursday" = "Thursday";
+"day_friday" = "Friday";
+"day_saturday" = "Saturday";
+"day_sunday" = "Sunday";
+
+"hour_morning" = "Morning";
+"hour_afternoon" = "Afternoon";
+"hour_evening" = "Evening";
+"enhanced_onboarding_select_availability" = "Select your available days and times";
+"enhanced_onboarding_my_availability" = "My availability";
+

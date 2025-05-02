@@ -10,7 +10,7 @@ import Foundation
 struct NotifInApp:Codable {
     var uid:Int = 0
     var instanceId:Int? = nil
-    private var instanceString:String
+    private var instanceString:String? = nil
     var content:String? = nil
     var title:String? = nil
     var imageUrl:String? = nil
@@ -24,13 +24,13 @@ struct NotifInApp:Codable {
     
     var type: HomeActionType {
         get {
-            return getTypeFromKey(instanceString)
+            return getTypeFromKey(instanceString ?? "")
         }
     }
     
     
     func getNotificationPushData() -> NotificationPushData {
-        return NotificationPushData(instanceName: instanceString, instanceId: instanceId ?? 0, postId:postId, context: context)
+        return NotificationPushData(instanceName: instanceString ?? "", instanceId: instanceId ?? 0, postId:postId, context: context)
     }
     
     

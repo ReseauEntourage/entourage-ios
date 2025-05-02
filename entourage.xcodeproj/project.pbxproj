@@ -379,6 +379,10 @@
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
 		260377FC2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */; };
+		26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */; };
+		26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */; };
+		26043D982CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043D972CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift */; };
+		26043D9C2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */; };
 		2609BFA42AC2BE640052111C /* HomeV2CellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */; };
 		2609BFA62AC2C7D00052111C /* HomeV2CellTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */; };
 		2609BFA82AC329120052111C /* HomeSeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA72AC329120052111C /* HomeSeeAllCell.swift */; };
@@ -535,6 +539,7 @@
 		26F03C9B2A1B8BAB00450A61 /* WelcomeOneContentLast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C9A2A1B8BAB00450A61 /* WelcomeOneContentLast.xib */; };
 		26F03C9D2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C9C2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift */; };
 		26F03C9F2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C9E2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib */; };
+		26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */; };
 		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
 		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
 /* End PBXBuildFile section */
@@ -906,6 +911,10 @@
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
 		1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionSmokeTestViewController.swift; sourceTree = "<group>"; };
+		26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDayCell.swift; sourceTree = "<group>"; };
+		26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChoiceDayCell.xib; sourceTree = "<group>"; };
+		26043D972CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableDayAndHourCollectionViewCell.swift; sourceTree = "<group>"; };
+		26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableDayAndHourCollectionViewCell.xib; sourceTree = "<group>"; };
 		2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeV2CellTitle.swift; sourceTree = "<group>"; };
 		2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeV2CellTitle.xib; sourceTree = "<group>"; };
 		2609BFA72AC329120052111C /* HomeSeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSeeAllCell.swift; sourceTree = "<group>"; };
@@ -1076,6 +1085,7 @@
 		26F03C9A2A1B8BAB00450A61 /* WelcomeOneContentLast.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneContentLast.xib; sourceTree = "<group>"; };
 		26F03C9C2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneWebViewCell.swift; sourceTree = "<group>"; };
 		26F03C9E2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneWebViewCell.xib; sourceTree = "<group>"; };
+		26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightOverlayView.swift; sourceTree = "<group>"; };
 		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
 		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1391,6 +1401,7 @@
 				026819A7278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.h */,
 				026819A6278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m */,
 				26445C4A2BB46AAF0010A8D8 /* SimpleMJAlertDialog.swift */,
+				26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1951,6 +1962,15 @@
 			path = cells;
 			sourceTree = "<group>";
 		};
+		26043D962CE4F65700F4083F /* collectionDayAndHourCells */ = {
+			isa = PBXGroup;
+			children = (
+				26043D972CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift */,
+				26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */,
+			);
+			path = collectionDayAndHourCells;
+			sourceTree = "<group>";
+		};
 		261174FF29A6718D00735E9A /* reportChooseCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -2174,6 +2194,7 @@
 		26BEEEB72C00C32B00169FBA /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				26043D962CE4F65700F4083F /* collectionDayAndHourCells */,
 				26BEEEB82C00C32B00169FBA /* collectionInterestsCells */,
 				26BEEEBB2C00C32B00169FBA /* EnhancedFullSizeCell.swift */,
 				26BEEEBC2C00C32B00169FBA /* EnahancedOnboardingButtonCell.xib */,
@@ -2183,6 +2204,8 @@
 				26BEEEC02C00C32B00169FBA /* EnahancedOnboardingButtonCell.swift */,
 				26A8DE0A2C0DF32300C34641 /* EnhancecOnboardingBackCell.swift */,
 				26A8DE0C2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib */,
+				26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */,
+				26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -2430,6 +2453,7 @@
 				020AF5E92860B10C0012AE60 /* HomeCongratPopupViewController.xib in Resources */,
 				2609BFAA2AC329440052111C /* HomeSeeAllCell.xib in Resources */,
 				02846CC227ECBC2B00D85ADA /* Interests.xcassets in Resources */,
+				26043D9C2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib in Resources */,
 				02C91A25278F2B4F00305E0B /* Intro.storyboard in Resources */,
 				025C92BC28340F7D000970D9 /* NeighborhoodDetailTopCell.xib in Resources */,
 				2674FEC52ACDA5F00013D674 /* HomeNeedHelpCell.xib in Resources */,
@@ -2502,6 +2526,7 @@
 				025C92C32834149B000970D9 /* NeighborhoodEventsTableviewCell.xib in Resources */,
 				023B07CC27D664F6007752AC /* Profile.xcassets in Resources */,
 				2694A74A2ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib in Resources */,
+				26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */,
 				025D8768278DED3C00909101 /* AppConfigurations.plist in Resources */,
 				025C92B028340787000970D9 /* NeighborhoodPostTextCell.xib in Resources */,
 				266B26342AB9E5A500C8EAD8 /* EmptyListCell.xib in Resources */,
@@ -2739,6 +2764,7 @@
 				02ADAAB3280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift in Sources */,
 				0288A8D727CCD8F5008D7011 /* UserPhotoAddViewController.swift in Sources */,
 				26BE84642A67F50500DC2586 /* ActionPassedTwoVC.swift in Sources */,
+				26043D982CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift in Sources */,
 				0288A8DB27CD00FD008D7011 /* Extensions_UIImage.swift in Sources */,
 				026819BD278E105600A98A4A /* OTLoginV2ViewController.swift in Sources */,
 				026819BE278E105600A98A4A /* OTLoginPlaceViewController.swift in Sources */,
@@ -2747,6 +2773,7 @@
 				021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */,
 				26BEEEC92C00C32B00169FBA /* EnhancedOnboardingTitle.swift in Sources */,
 				26584C4A2ACC48ED00ABD401 /* HomeCellMapButton.swift in Sources */,
+				26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */,
 				2630F6282C245E1B007BAE56 /* MainFilterTitleCell.swift in Sources */,
 				026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */,
 				264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */,
@@ -2905,6 +2932,7 @@
 				26AD119B2AEBEFEA00FA7BEC /* LanguageCell.swift in Sources */,
 				02EAB5AA28B908400060557D /* ConversationListMembersViewController.swift in Sources */,
 				0295F2B927E4AE5B006AE255 /* EditProfileInfosCell.swift in Sources */,
+				26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */,
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,
 				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,

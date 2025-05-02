@@ -72,6 +72,13 @@ class HomeV2ViewController: UIViewController {
         IHProgressHUD.show()
         currentUser = UserDefaults.currentUser
         AnalyticsLoggerManager.logEvent(name: View__Home)
+        if EnhancedOnboardingConfiguration.shared.shouldNotDisplayCampain == true {
+            //HERE DO NOTHING, AS WE WANT NOT THE CAMPAIN TO BE DISPLAYED IF WE ARE COMING FROM ONBOARDING
+        }else{
+            //HERE IS THE FIREBASE EVENT TO PROC MESSAGING CAMPAIN
+            AnalyticsLoggerManager.logEvent(name: home_activate_firebase_message)
+        }
+        
         prepareUINotifAndAvatar()
         ui_table_view.delegate = self
         ui_table_view.dataSource = self
@@ -101,7 +108,6 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
         self.checkNotificationSettings()
-        self.handleEnhancedOnboardingReturn()
 
     }
     
@@ -115,9 +121,8 @@ class HomeV2ViewController: UIViewController {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
         getUserInfo()
-    }
-    
 
+    }
     
     func showVotePopupIfNeeded() {
         let userDefaults = UserDefaults.standard
@@ -171,14 +176,48 @@ class HomeV2ViewController: UIViewController {
             self.sendOnboardingIntro()
             return
         }
+    
         if config.isFromOnboardingFromNormalWay {
             config.isFromOnboardingFromNormalWay = false
             IHProgressHUD.dismiss()
-            if let _tabbar = self.tabBarController as? MainTabbarViewController {
-                _tabbar.showDiscoverEvents()
-                return
+            print("eho _category : " , OnboardingEndChoicesManager.shared.categoryForButton)
+            if let _category = OnboardingEndChoicesManager.shared.categoryForButton {
+                if _category.contains("both_action") || _category.contains("no_event") {
+                    if let _vc = AppState.getTopViewController() {
+                        if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
+                            let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
+                            if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
+                                OnboardingEndChoicesManager.shared.categoryForButton = ""
+                                vc.modalPresentationStyle = .fullScreen
+                                vc.isContrib = true
+                                vc.parentController = self
+                                _tabbar.present(vc, animated: true)
+                            }
+                        }
+                    }
+                    
+                } else if _category.contains("event") {
+                    DeepLinkManager.showOutingListUniversalLink()
+                } else if _category.contains("resources") {
+                    OnboardingEndChoicesManager.shared.categoryForButton = ""
+                    let urlString = "https://kahoot.it/challenge/0354666?challenge-id=45371e80-fe50-4be5-afec-b37e3d50ede2_1729004998521"
+                    if let url = URL(string: urlString) {
+                        if let _vc = AppState.getTopViewController() {
+                            if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
+                                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: _tabbar)
+                            }
+                        }
+                    } else {
+                        print("Invalid URL string")
+                    }
+                } else if _category.contains("neighborhoods") {
+                    OnboardingEndChoicesManager.shared.categoryForButton = ""
+                    DeepLinkManager.showWelcomeTwo()
+                }
             }
+            
         }
+        
         if config.isInterestsFromSetting {
             config.isInterestsFromSetting = false
             IHProgressHUD.dismiss()
@@ -187,6 +226,7 @@ class HomeV2ViewController: UIViewController {
             self.tabBarController?.present(navVC, animated: false)
             return
         }
+        
         if config.isOnboardingFromSetting {
             config.isOnboardingFromSetting = false
             IHProgressHUD.dismiss()
@@ -196,6 +236,7 @@ class HomeV2ViewController: UIViewController {
             return
         }
     }
+
     
     func testEventLastDay() {
         getEventAndLaunchPopup(eventId: "136208")
@@ -274,12 +315,15 @@ class HomeV2ViewController: UIViewController {
     }
     
     func presentNotificationDemandViewController() {
-        let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
-            vc.modalPresentationStyle = .overFullScreen // Optionnel
-            self.present(vc, animated: true, completion: nil)
-        } else {
-            print("ViewController with identifier 'NotificationDemandViewController' not found")
+        if NotificationDisplayManager.shared.hasBeenDisplayed == false {
+            NotificationDisplayManager.shared.hasBeenDisplayed = true
+            let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
+                vc.modalPresentationStyle = .overFullScreen // Optionnel
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                print("ViewController with identifier 'NotificationDemandViewController' not found")
+            }
         }
     }
     
@@ -406,6 +450,7 @@ class HomeV2ViewController: UIViewController {
             }
         }
         self.ui_table_view.reloadData()
+        self.handleEnhancedOnboardingReturn()
         IHProgressHUD.dismiss()
     }
     

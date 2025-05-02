@@ -31,7 +31,8 @@ struct User: Codable {
     var roles:[String]? = nil
     var memberships:[String]? = nil
     var confirmedAt:String? = nil
-    
+    var availability: [String: [String]]? = nil
+
     var firebaseProperties:[String:String]? = [String:String]()
     var interests:[String]? = nil
     var involvements:[String]? = nil
@@ -90,7 +91,7 @@ struct User: Codable {
         case about
         case permissions
         case goal
-        
+        case availability
         case organization
         case partner
         //case conversation
@@ -134,6 +135,9 @@ struct User: Codable {
         }
         if let email = email, email.count > 0 {
             dict["email"] = email
+        }
+        if let availability = availability, availability.count > 0 {
+            dict["availability"] = availability
         }
         if let password = password, password.count > 0 {
             dict["sms_code"] = password

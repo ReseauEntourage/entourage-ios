@@ -138,6 +138,7 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
         }
         
         self.dismiss(animated: true) {
+            print("eho notif " , notif.getNotificationPushData())
             DeepLinkManager.presentAction(notification: notif.getNotificationPushData())
         }
     }

@@ -328,6 +328,44 @@ class ActionsMainHomeViewController: UIViewController {
         }
     }
     
+    func resetViewToInitialState() {
+        // Réinitialiser les données
+        contribs.removeAll()
+        solicitations.removeAll()
+        myActions.removeAll()
+        currentMode = .solicitationNormal // Mode par défaut
+        isContribSelected = false
+        isTabDemandClicked = false
+        isTabContribClicked = false
+        numberOfFilter = 0
+        selectedItemsFilter.removeAll()
+        selectedAddress = ""
+        selectedRadius = 0
+        selectedCoordinate = nil
+        searchText = ""
+        isSearching = false
+
+        // Réinitialiser les vues
+        ui_search_textfield.text = ""
+        ui_search_textfield.isHidden = true
+        ui_contrainst_textfield_height.constant = 0
+        ui_view_empty.isHidden = true
+        ui_arrow_show_empty.isHidden = true
+        ui_view_empty_discover.isHidden = true
+        ui_tv_number_filter.isHidden = true
+
+        // Réinitialiser les contraintes
+        ui_view_height_constraint.constant = maxViewHeight
+        ui_constraint_bottom_label.constant = maxLabelBottomConstraint
+        ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: maxLabelFont)
+
+        // Recharger les données utilisateur et les paramètres
+        configureUserLocationAndRadius()
+        changeTabSelection()
+        loadDataBasedOnMode()
+    }
+
+    
     @objc func refreshDatasFromTab() {
         currentLocationFilter.resetToDefault()
         
@@ -791,6 +829,11 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard indexPath.row < contribs.count || indexPath.row < solicitations.count || indexPath.row < myActions.count else {
+            print("Incohérence détectée, réinitialisation de la vue.")
+            resetViewToInitialState()
+            return UITableViewCell() // Renvoie une cellule vide pour éviter un crash immédiat
+        }
         let action: Action
         if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
             action = contribs[indexPath.row]

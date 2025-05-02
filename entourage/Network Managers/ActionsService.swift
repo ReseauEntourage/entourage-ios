@@ -16,96 +16,132 @@ struct ActionsService:ParsingDataCodable {
     fileprivate static let _solicitations = "solicitations"
     
     static func createAction(isContrib: Bool, action: Action, autoPost: Bool?, completion: @escaping (_ action: Action?, _ error: EntourageNetworkError?) -> Void) {
-        guard let token = UserDefaults.token else { return }
-        var endpoint = isContrib ? kAPIContribCreate : kAPISolicitationCreate
-        endpoint = String(format: endpoint, token)
-
-        // Obtenir le dictionnaire d'action et ajouter auto_post_at_create si nécessaire
-        var actionData = action.dictionaryForWS()
-        if let autoPost = autoPost {
-            actionData["auto_post_at_create"] = autoPost
+        guard let token = UserDefaults.token else {
+            Logger.print("Erreur : Token utilisateur manquant")
+            return
         }
-
-        // Créer le paramètre principal en fonction du type d'action
+        
+        // Conversion explicite de autoPost
+        let autoPostValue = autoPost == true ? "true" : "false"
+        var endpoint = isContrib ? kAPIContribCreate : kAPISolicitationCreate
+        endpoint = String(format: endpoint, token, autoPostValue)
+        
+        Logger.print("Endpoint généré : \(endpoint)")
+        
+        // Préparer les données pour la requête
+        var actionData = action.dictionaryForWS()
+        actionData["auto_post_at_create"] = autoPost // Le serveur gère "true"/"false" correctement
         let parameters = isContrib ? [_contribution: actionData] : [_solicitation: actionData]
-        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-
-        Logger.print("Datas passed post event \(parameters)")
-
-        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
-            Logger.print("Response Post action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
-            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
-                Logger.print("***** error Post action - \(error)")
-                DispatchQueue.main.async { completion(nil, error) }
-                return
+        
+        do {
+            let bodyData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            Logger.print("Données passées : \(parameters)")
+            
+            // Effectuer la requête
+            NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+                Logger.print("Réponse Post action : \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+                guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                    Logger.print("Erreur Post action : \(error)")
+                    DispatchQueue.main.async { completion(nil, error) }
+                    return
+                }
+                let key = isContrib ? _contribution : _solicitation
+                let action: Action? = self.parseData(data: data, key: key)
+                Logger.print("Action créée : \(action)")
+                DispatchQueue.main.async { completion(action, nil) }
             }
-            let key = isContrib ? _contribution : _solicitation
-            let action: Action? = self.parseData(data: data, key: key)
-            Logger.print("***** return create action : \(action)")
-            DispatchQueue.main.async { completion(action, nil) }
+        } catch {
+            Logger.print("Erreur de sérialisation JSON : \(error)")
         }
     }
 
     static func updateAction(isContrib: Bool, action: Action, autoPost: Bool?, completion: @escaping (_ action: Action?, _ error: EntourageNetworkError?) -> Void) {
-        guard let token = UserDefaults.token else { return }
-        var endpoint = isContrib ? kAPIContribUpdate : kAPISolicitationUpdate
-        endpoint = String(format: endpoint, action.id, token)
-
-        // Obtenir le dictionnaire d'action et ajouter auto_post_at_create si nécessaire
-        var actionData = action.dictionaryForWS()
-        if let autoPost = autoPost {
-            actionData["auto_post_at_create"] = autoPost
+        guard let token = UserDefaults.token else {
+            Logger.print("Erreur : Token utilisateur manquant")
+            return
         }
 
-        // Créer le paramètre principal en fonction du type d'action
+        // Conversion explicite de `autoPost` en chaîne
+        let autoPostValue = autoPost == true ? "true" : "false"
+        
+        // Construire l'endpoint avec tous les arguments nécessaires
+        var endpoint = isContrib ? kAPIContribUpdate : kAPISolicitationUpdate
+        endpoint = String(format: endpoint, "\(action.id)", token, autoPostValue)
+        
+        Logger.print("Endpoint généré : \(endpoint)")
+        
+        // Préparer les données pour la requête
+        var actionData = action.dictionaryForWS()
+        actionData["auto_post_at_create"] = autoPost // Inclure auto_post dans le dictionnaire
+        
         let parameters = isContrib ? [_contribution: actionData] : [_solicitation: actionData]
-        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-
-        Logger.print("Datas passed put event \(parameters)")
-
-        NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
-            Logger.print("Response put action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
-            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
-                Logger.print("***** error put action - \(error)")
-                DispatchQueue.main.async { completion(nil, error) }
-                return
+        
+        do {
+            let bodyData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            Logger.print("Données passées : \(parameters)")
+            
+            // Effectuer la requête PUT
+            NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+                Logger.print("Réponse PUT action : \(String(describing: (resp as? HTTPURLResponse)?.statusCode))")
+                
+                guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                    Logger.print("Erreur PUT action : \(error)")
+                    DispatchQueue.main.async { completion(nil, error) }
+                    return
+                }
+                
+                let key = isContrib ? _contribution : _solicitation
+                let action: Action? = self.parseData(data: data, key: key)
+                DispatchQueue.main.async { completion(action, nil) }
             }
-            let key = isContrib ? _contribution : _solicitation
-            let action: Action? = self.parseData(data: data, key: key)
-            DispatchQueue.main.async { completion(action, nil) }
+        } catch {
+            Logger.print("Erreur de sérialisation JSON : \(error)")
         }
     }
 
 
+
     
-    static func cancelAction(isContrib:Bool, actionId:Int, isClosedOk:Bool, message:String?, completion: @escaping (_ action:Action?, _ error:EntourageNetworkError?) -> Void) {
-        guard let token = UserDefaults.token else {return}
-        var endpoint = isContrib ? kAPIContribUpdate : kAPISolicitationUpdate
-        endpoint = String.init(format: endpoint, actionId, token)
-        //TODO: a ajouter les 2 params
+    static func cancelAction(isContrib: Bool, actionId: Int, isClosedOk: Bool, message: String?, completion: @escaping (_ action: Action?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {
+            Logger.print("Error: Token is nil")
+            return
+        }
         
-        var parameters: [String:Any] = ["outcome" : isClosedOk]
+        // Conversion de l'ID en String
+        let actionIdString = String(actionId)
+        
+        // Utilisation uniquement de %@ dans le format
+        let endpointFormat = isContrib ? "contributions/%@?token=%@" : "solicitations/%@?token=%@"
+        let endpoint = String(format: endpointFormat, actionIdString, token)
+        
+        var parameters: [String: Any] = ["outcome": isClosedOk]
         if let message = message {
             parameters["close_message"] = message
         }
         
-        let params = isContrib ? [_contribution : parameters] : [_solicitation : parameters]
+        let params = isContrib ? [_contribution: parameters] : [_solicitation: parameters]
         
-        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: [])
-        
-        Logger.print("***** Params delete Action : \(params)")
-        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
-            Logger.print("Response delete action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
-            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
-                Logger.print("***** error delete action - \(error)")
-                DispatchQueue.main.async { completion(nil, error) }
-                return
+        do {
+            let bodyData = try JSONSerialization.data(withJSONObject: params, options: [])
+            Logger.print("***** Params delete Action: \(params)")
+            
+            NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+                Logger.print("Response delete action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode))")
+                guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                    Logger.print("***** Error delete action: \(String(describing: error))")
+                    DispatchQueue.main.async { completion(nil, error) }
+                    return
+                }
+                let key = isContrib ? _contribution : _solicitation
+                let action: Action? = self.parseData(data: data, key: key)
+                DispatchQueue.main.async { completion(action, nil) }
             }
-            let key = isContrib ? _contribution : _solicitation
-            let action:Action? = self.parseData(data: data,key: key)
-            DispatchQueue.main.async { completion(action, nil) }
+        } catch {
+            Logger.print("Error serializing parameters: \(error)")
         }
     }
+
     
     static func reportActionPost(isContrib:Bool, actionId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}

@@ -352,6 +352,8 @@ let onboarding_welcome_next_clic = "onboarding_welcome_next_clic"
 // Écran envies d'agir
 let onboarding_actions_config_later_clic = "onboarding_actions_config_later_clic"
 let onboarding_actions_next_clic = "onboarding_actions_next_clic"
+let onboarding_availability_next_clic = "onboarding_availability_next_clic"
+let onboarding_availability_config_later_clic = "onboarding_availability_config_later_clic"
 
 // Écran centres d'intérêts
 let onboarding_interests_config_later_clic = "onboarding_interests_config_later_clic"
@@ -368,6 +370,7 @@ let onboarding_end_browse_events_clic = "onboarding_end_browse_events_clic"
 let onboarding_welcome_view = "onboarding_welcome_view"
 let onboarding_actions_view = "onboarding_actions_view"
 let onboarding_interests_view = "onboarding_interests_view"
+let onboarding_disponibility_view = "onboarding_disponibility_view"
 let onboarding_donations_categories_view = "onboarding_donations_categories_view"
 let onboarding_end_view = "onboarding_end_view"
 
@@ -376,6 +379,8 @@ let popup_event_last_day_accept = "popup_event_last_day_accept"
 let popup_event_last_day_decline = "popup_event_last_day_decline"
 
 let crash_from_incorrect_cell_number = "crash_from_incorrect_cell_number"
+
+let home_activate_firebase_message = "home_activate_firebase_message"
 
 
 
