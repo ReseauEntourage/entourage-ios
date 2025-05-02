@@ -67,7 +67,7 @@ extension HomeGroupHorizontalCollectionCell:UICollectionViewDelegate, UICollecti
         return UICollectionViewCell()
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 160, height: 130)
+        return CGSize(width: 172, height: 152)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

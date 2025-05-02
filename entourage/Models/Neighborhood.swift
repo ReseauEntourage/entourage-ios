@@ -33,6 +33,7 @@ struct Neighborhood:Codable {
     var futureEvents:[Event]?
     var messages:[PostMessage]? = nil
     var isMember = false
+    var unreadPostCount:Int? = 0
     
     var isSelected = false
     
@@ -67,6 +68,7 @@ struct Neighborhood:Codable {
         case nameTranslations = "name_translations"
         case aboutGroupTranslations = "description_translations"
         case welcomeMessageTranslations = "welcome_message_translations"
+        case unreadPostCount = "unread_posts_count"
     }
     
     func dictionaryForWS() -> [String:Any] {

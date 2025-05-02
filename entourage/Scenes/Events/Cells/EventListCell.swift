@@ -22,6 +22,7 @@ class EventListCell: UITableViewCell {
     @IBOutlet weak var ui_view_separator: UIView!
     @IBOutlet weak var ui_alpha_view: UIView!
     
+    @IBOutlet weak var ic_entoutou: UIImageView!
     @IBOutlet weak var ui_label_canceled: UILabel!
     @IBOutlet weak var ui_label_admin: UILabel?
     @IBOutlet weak var ui_subscribed_label: UILabel!
@@ -61,6 +62,19 @@ class EventListCell: UITableViewCell {
             ui_constraint_left_title.constant = 10
             ui_iv_canceled.isHidden = true
             ui_label_canceled.isHidden = true
+        }
+        
+        if let _author = event.author {
+            if let _roles = _author.communityRoles{
+                if _roles.contains("Équipe Entourage") || _roles.contains("Ambassadeur") {
+                    
+                    self.ic_entoutou.isHidden = false
+                }else {
+                    self.ic_entoutou.isHidden = true
+                }
+            }else{
+                self.ic_entoutou.isHidden = true
+            }
         }
         
         if event.isMember ?? false {

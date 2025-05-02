@@ -417,13 +417,14 @@ struct EventMetadata:Codable {
     }
 }
 
-struct EventAuthor:Codable {
-    var uid:Int
-    private var _displayName:String? = nil
-    var avatarURL:String? = nil
-    var partner:Partner? = nil
+struct EventAuthor: Codable {
+    var uid: Int
+    private var _displayName: String? = nil
+    var avatarURL: String? = nil
+    var partner: Partner? = nil
+    var communityRoles: [String]? = nil
     
-    var displayName:String {
+    var displayName: String {
         get {
             return _displayName ?? "-"
         }
@@ -432,7 +433,7 @@ struct EventAuthor:Codable {
         }
     }
     
-    private var createdAt:String? = nil
+    private var createdAt: String? = nil
     var creationDate: Date? {
         get {
             return Utils.getDateFromWSDateString(createdAt)
@@ -445,8 +446,10 @@ struct EventAuthor:Codable {
         case avatarURL = "avatar_url"
         case partner
         case createdAt = "created_at"
+        case communityRoles = "community_roles"
     }
 }
+
 
 //MARK: - EventImage -
 struct EventImage:Codable {

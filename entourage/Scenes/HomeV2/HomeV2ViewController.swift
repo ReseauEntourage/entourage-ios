@@ -500,7 +500,7 @@ extension HomeV2ViewController:UITableViewDelegate, UITableViewDataSource{
         case .cellEvent(_):
             return 215
         case .cellGroup(_):
-            return 130
+            return 152
         case .cellPedago(_):
             return UITableView.automaticDimension
         case .cellMap:

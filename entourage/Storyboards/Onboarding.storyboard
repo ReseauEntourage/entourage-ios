@@ -821,6 +821,84 @@ Contacter l'équipe Entourage.</string>
             </objects>
             <point key="canvasLocation" x="2043" y="800"/>
         </scene>
+        <!--Notification Demand View Controller-->
+        <scene sceneID="J0U-pb-pvh">
+            <objects>
+                <viewController storyboardIdentifier="NotificationDemandViewController" id="a7y-uo-fFQ" customClass="NotificationDemandViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6aR-bS-9Um">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Titre" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGU-8h-gID">
+                                <rect key="frame" x="24" y="40" width="272" height="26.5"/>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hf8-dM-gh5">
+                                <rect key="frame" x="24" y="86.5" width="272" height="20.5"/>
+                                <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_notif_demand" translatesAutoresizingMaskIntoConstraints="NO" id="J4j-wp-j9a">
+                                <rect key="frame" x="24" y="157" width="272" height="235"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKu-0p-pWe">
+                                <rect key="frame" x="40" y="442" width="240" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="N5h-m1-9Wd"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Commencer">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rob-gZ-Z7M">
+                                <rect key="frame" x="40" y="500" width="240" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="M67-lk-Vdd"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Commencer">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6f3-DC-rGn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Hf8-dM-gh5" firstAttribute="leading" secondItem="6aR-bS-9Um" secondAttribute="leading" constant="24" id="0iG-fM-EKu"/>
+                            <constraint firstItem="6f3-DC-rGn" firstAttribute="trailing" secondItem="YKu-0p-pWe" secondAttribute="trailing" constant="40" id="2W8-62-smd"/>
+                            <constraint firstItem="Rob-gZ-Z7M" firstAttribute="top" secondItem="YKu-0p-pWe" secondAttribute="bottom" constant="10" id="2tX-Ui-MFL"/>
+                            <constraint firstItem="fGU-8h-gID" firstAttribute="leading" secondItem="6aR-bS-9Um" secondAttribute="leading" constant="24" id="8eC-CT-Isq"/>
+                            <constraint firstItem="fGU-8h-gID" firstAttribute="top" secondItem="6f3-DC-rGn" secondAttribute="top" constant="20" id="963-Ga-IUo"/>
+                            <constraint firstItem="Hf8-dM-gh5" firstAttribute="top" secondItem="fGU-8h-gID" secondAttribute="bottom" constant="20" id="JQW-yM-DUf"/>
+                            <constraint firstItem="YKu-0p-pWe" firstAttribute="leading" secondItem="6f3-DC-rGn" secondAttribute="leading" constant="40" id="NRk-6s-Q7w"/>
+                            <constraint firstItem="Rob-gZ-Z7M" firstAttribute="leading" secondItem="6f3-DC-rGn" secondAttribute="leading" constant="40" id="THu-mq-arL"/>
+                            <constraint firstItem="J4j-wp-j9a" firstAttribute="top" secondItem="Hf8-dM-gh5" secondAttribute="bottom" constant="50" id="ZsS-vr-bAL"/>
+                            <constraint firstItem="6f3-DC-rGn" firstAttribute="trailing" secondItem="Rob-gZ-Z7M" secondAttribute="trailing" constant="40" id="b3W-G6-Bts"/>
+                            <constraint firstItem="6f3-DC-rGn" firstAttribute="trailing" secondItem="fGU-8h-gID" secondAttribute="trailing" constant="24" id="bp4-EH-NYL"/>
+                            <constraint firstItem="6f3-DC-rGn" firstAttribute="bottom" secondItem="Rob-gZ-Z7M" secondAttribute="bottom" constant="20" id="mwN-pA-LHh"/>
+                            <constraint firstItem="6f3-DC-rGn" firstAttribute="trailing" secondItem="Hf8-dM-gh5" secondAttribute="trailing" constant="24" id="ndZ-oG-2WH"/>
+                            <constraint firstItem="YKu-0p-pWe" firstAttribute="top" secondItem="J4j-wp-j9a" secondAttribute="bottom" constant="50" id="qez-ay-kAu"/>
+                            <constraint firstItem="J4j-wp-j9a" firstAttribute="leading" secondItem="6f3-DC-rGn" secondAttribute="leading" constant="24" id="yWk-8P-Jpw"/>
+                            <constraint firstItem="6f3-DC-rGn" firstAttribute="trailing" secondItem="J4j-wp-j9a" secondAttribute="trailing" constant="24" id="yjT-yS-oE0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ui_btn_accept_notif" destination="YKu-0p-pWe" id="AlM-nX-ibz"/>
+                        <outlet property="ui_btn_disable_notif" destination="Rob-gZ-Z7M" id="tzp-bS-ofk"/>
+                        <outlet property="ui_subtitle" destination="Hf8-dM-gh5" id="ooL-Ot-G7T"/>
+                        <outlet property="ui_title" destination="fGU-8h-gID" id="sfc-tW-Lyi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vOj-ol-eiK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2747" y="800"/>
+        </scene>
         <!--Onboarding Phase3 View Controller-->
         <scene sceneID="InO-ai-OKQ">
             <objects>
@@ -1217,6 +1295,7 @@ si posiible</string>
         <image name="ic_mail_2" width="20" height="20"/>
         <image name="ic_neighborhood_dot_selected" width="12" height="12"/>
         <image name="ic_neighborhood_dot_unselected" width="12" height="12"/>
+        <image name="ic_notif_demand" width="341" height="340"/>
         <image name="ic_phone" width="20" height="20"/>
         <image name="ic_selection_off" width="20" height="20"/>
         <image name="inscription_ok" width="390.33334350585938" height="348"/>
