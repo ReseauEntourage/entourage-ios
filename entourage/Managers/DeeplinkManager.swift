@@ -11,6 +11,11 @@ import Foundation
 struct DeepLinkManager {
     
     static func presentAction(notification:NotificationPushData) {
+        print("notification" , notification)
+        if notification.context == "outing_on_day_before"{
+            showHomeUniversalLinkWithParam(notification.instanceId)
+            return
+        }
         if notification.stage != nil && !notification.stage!.isEmpty{
             if notification.stage == "h1" {
                 DeepLinkManager.showWelcomeOne()
@@ -393,6 +398,24 @@ struct DeepLinkManager {
         if let vc = AppState.getTopViewController() {
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
                 _tabbar.showHome()
+            }
+        }
+    }
+    static func showHomeUniversalLinkWithParam(_ eventId: Int) {
+        if let vc = AppState.getTopViewController() {
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                if let homeVC = _tabbar.viewControllers?.first(where: { $0 is HomeV2ViewController }) as? HomeV2ViewController {
+                    homeVC.shouldLaunchEventPopup = eventId
+                    _tabbar.showHome()
+                }
+            }
+            else{ 
+                vc.dismiss(animated: true) {
+                    let _currentVc = AppState.getTopViewController()
+                    if let _home = _currentVc as? HomeV2ViewController{
+                        _home.shouldLaunchEventPopup = eventId
+                    }
+                }
             }
         }
     }

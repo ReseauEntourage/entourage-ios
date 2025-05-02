@@ -43,6 +43,8 @@ class OnboardingEndViewController: UIViewController {
     }
     
     @IBAction func action_go(_ sender: Any) {
+        let config = EnhancedOnboardingConfiguration.shared
+        config.shouldSendOnboardingFromNormalWay = true
         goHomeMain()
     }
     

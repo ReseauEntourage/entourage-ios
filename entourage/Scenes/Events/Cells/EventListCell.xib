@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -90,14 +90,31 @@
                         <rect key="frame" x="16" y="7" width="94" height="96"/>
                         <color key="backgroundColor" name="noir_alpha_50"/>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Inscrit.e  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIb-yx-Sqw">
+                        <rect key="frame" x="41" y="72" width="59" height="20"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Mqr-Ja-eOG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="12"/>
+                        <color key="textColor" name="orange_app"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
                     <constraint firstItem="wHr-6A-1Ud" firstAttribute="centerY" secondItem="VxJ-kc-bBP" secondAttribute="centerY" id="02b-Fw-172"/>
+                    <constraint firstItem="QIb-yx-Sqw" firstAttribute="bottom" secondItem="VxJ-kc-bBP" secondAttribute="bottom" constant="-10" id="0t1-Bg-vaN"/>
                     <constraint firstItem="xft-PW-a9b" firstAttribute="leading" secondItem="VxJ-kc-bBP" secondAttribute="trailing" constant="10" id="2NI-HV-4zE"/>
                     <constraint firstItem="cMP-w6-HKs" firstAttribute="top" secondItem="AEp-eM-B3w" secondAttribute="bottom" constant="10" id="2gq-MB-JZa"/>
                     <constraint firstItem="wHr-6A-1Ud" firstAttribute="width" secondItem="VxJ-kc-bBP" secondAttribute="width" id="3a8-cE-c04"/>
                     <constraint firstItem="wHr-6A-1Ud" firstAttribute="height" secondItem="VxJ-kc-bBP" secondAttribute="height" multiplier="1.02128" id="4hQ-rE-gMq"/>
+                    <constraint firstItem="QIb-yx-Sqw" firstAttribute="trailing" secondItem="VxJ-kc-bBP" secondAttribute="trailing" constant="-10" id="6sF-YE-WHq"/>
                     <constraint firstAttribute="bottom" secondItem="V4x-sb-dCg" secondAttribute="bottom" id="7Lg-G6-aPB"/>
                     <constraint firstItem="VxJ-kc-bBP" firstAttribute="leading" secondItem="q6g-Fy-0d4" secondAttribute="leading" constant="16" id="8VA-bP-f8R"/>
                     <constraint firstItem="GXp-iK-TW2" firstAttribute="top" secondItem="VxJ-kc-bBP" secondAttribute="top" constant="-3" id="9xS-Ze-KwW"/>
@@ -138,6 +155,7 @@
                 <outlet property="ui_label_canceled" destination="Xts-IW-R3I" id="8Bk-Pe-9YV"/>
                 <outlet property="ui_location" destination="h1L-Fy-qUf" id="3YU-IA-INS"/>
                 <outlet property="ui_members" destination="19i-WM-5eN" id="N2D-eE-Cgc"/>
+                <outlet property="ui_subscribed_label" destination="QIb-yx-Sqw" id="7ek-bM-rch"/>
                 <outlet property="ui_title" destination="xft-PW-a9b" id="ESW-IL-XdU"/>
                 <outlet property="ui_view_separator" destination="V4x-sb-dCg" id="fuU-W0-jYf"/>
             </connections>
@@ -160,7 +178,10 @@
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="noir_alpha_50">
-            <color red="0.0" green="0.0" blue="0.0" alpha="0.52000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.51999998092651367" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_app">
+            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -10,6 +10,37 @@ import SimpleKeychain
 
 struct UserService {
     
+    //MARK: - Update User Interests
+
+    static func updateUserChoices(interests: [String], concerns: [String], involvements: [String], completion: @escaping (_ user: User?, _ error: EntourageNetworkError?) -> Void) {
+
+        guard let token = UserDefaults.token else {
+            completion(nil, nil)
+            return
+        }
+        let endpoint = String(format: kAPIUpdateUser, token)
+
+        let parameters: [String: Any] = [
+            "user": [
+                "interests": interests,
+                "concerns": concerns,
+                "involvements": involvements
+            ]
+        ]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                completion(nil, error)
+                return
+            }
+
+            let userParsed = self.parsingDataUser(data: data).user
+            completion(userParsed, nil)
+        }
+    }
+
+    
     //MARK: - Update User
     static func updateUser(user:User?, isOnboarding:Bool = true, completion: @escaping (_ user:User?, _ error:EntourageNetworkError?) -> Void) {
         
@@ -38,6 +69,8 @@ struct UserService {
             DispatchQueue.main.async { completion(userParsed,nil) }
         }
     }
+    
+    
     
     static func updateLanguage(userId: Int, lang: String, completion: @escaping (_ success: Bool) -> Void) {
         

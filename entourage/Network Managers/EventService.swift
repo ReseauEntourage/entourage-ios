@@ -538,5 +538,24 @@ struct EventService:ParsingDataCodable {
             }
         }
     }
+    
+    static func confirmParticipation(eventId: Int, completion: @escaping (_ success: Bool, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIConfirmParticipation, "\(eventId)", token)
+        print("eho endPoint ", endpoint)
+        
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+            guard error == nil, let response = resp as? HTTPURLResponse else {
+                DispatchQueue.main.async { completion(false, error) }
+                return
+            }
+            
+            if response.statusCode < 300 {
+                DispatchQueue.main.async { completion(true, nil) }
+            } else {
+                DispatchQueue.main.async { completion(false, nil) }
+            }
+        }
+    }
 
 }

@@ -210,7 +210,7 @@ class ProfileEditorViewController: UIViewController {
 //MARK: - Tableview Datasource / Delegate -
 extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -223,6 +223,11 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
         
         if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterests", for: indexPath)
+            
+            return cell
+        }
+        if indexPath.row == 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellOnboarding", for: indexPath)
             
             return cell
         }
@@ -244,9 +249,24 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            if let vc = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "editProfileInterestsVC") as? ProfileEditInterestsViewController, Metadatas.sharedInstance.tagsInterest?.getTags().count ?? 0 > 0 {
-                vc.tagsInterests = Metadatas.sharedInstance.tagsInterest
-                self.navigationController?.present(vc, animated: true)
+            let config = EnhancedOnboardingConfiguration.shared
+            config.isInterestsFromSetting = true
+            let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(withIdentifier: "enhancedOnboarding") as? EnhancedViewController {
+                viewController.modalPresentationStyle = .fullScreen
+                viewController.mode = .interest
+                viewController.modalTransitionStyle = .coverVertical
+                present(viewController, animated: true, completion: nil)
+            }
+        }
+        if indexPath.row == 3 {
+            let config = EnhancedOnboardingConfiguration.shared
+            config.isOnboardingFromSetting = true
+            let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
+                viewController.modalPresentationStyle = .fullScreen
+                viewController.modalTransitionStyle = .coverVertical
+                present(viewController, animated: true, completion: nil)
             }
         }
     }

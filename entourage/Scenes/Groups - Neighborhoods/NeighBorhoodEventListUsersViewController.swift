@@ -167,8 +167,8 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     self.goBack()
                     return
                 }
-                
                 if let users = users {
+                    print("users " , users)
                     self.users = users
                     // Mise à jour de tableData pour refléter les nouveaux utilisateurs
                     self.tableData = [.searchCell] // Inclure la cellule de recherche si nécessaire
@@ -273,7 +273,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             let isMe = _user.sid == UserDefaults.currentUser?.sid
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
-            cell.populateCell(isMe:isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType)
+            cell.populateCell(isMe:isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true,delegate: self,position: position, reactionType: _reactionType, isConfirmed: _user.confirmedAt != nil)
             cell.hideSeparatorBarIfIsVote(isVote: self.isFromSurvey)
             return cell
         

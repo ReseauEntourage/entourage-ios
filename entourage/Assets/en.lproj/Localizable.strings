@@ -1492,3 +1492,5 @@
 
 "vote_singular" = "vote";
 "vote_plural" = "votes";
+"button_title_for_setting_onboarding" = "Register";
+"button_title_for_re_onboarding_end" = "Back to profile";

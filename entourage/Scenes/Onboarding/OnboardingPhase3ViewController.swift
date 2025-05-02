@@ -89,9 +89,10 @@ extension OnboardingPhase3ViewController:OnboardingEndCellDelegate {
         self.isEntour = isEntour
         self.isBeEntour = isBeEntour
         self.isAsso = isAsso
-        
+        if(isBeEntour){
+            EnhancedOnboardingConfiguration.shared.preference = "contribution"
+        }
         var userType = UserType.none
-        
         if isBeEntour {
             userType = .alone
         }

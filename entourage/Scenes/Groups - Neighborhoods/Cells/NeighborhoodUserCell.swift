@@ -48,10 +48,12 @@ class NeighborhoodUserCell: UITableViewCell {
         }
     }
     
-    func populateCell(isMe:Bool, username:String, role:String?, imageUrl:String?, showBtMessage:Bool,delegate:NeighborhoodUserCellDelegate, position:Int, reactionType:ReactionType?) {
+    func populateCell(isMe:Bool, username:String, role:String?, imageUrl:String?, showBtMessage:Bool,delegate:NeighborhoodUserCellDelegate, position:Int, reactionType:ReactionType?, isConfirmed:Bool?) {
         ui_username.text = username
         ui_role.text = role
-        
+        if isConfirmed ?? false{
+            ui_username.text = username + " - Participation confirmée"
+        }
         
         self.delegate = delegate
         self.position = position

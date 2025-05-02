@@ -15,6 +15,7 @@ struct NotifInApp:Codable {
     var title:String? = nil
     var imageUrl:String? = nil
     var postId:Int? = nil
+    var context:String? = nil
     
     private var createdAt:String? = nil
     var completedAt:String? = nil
@@ -29,7 +30,7 @@ struct NotifInApp:Codable {
     
     
     func getNotificationPushData() -> NotificationPushData {
-        return NotificationPushData(instanceName: instanceString, instanceId: instanceId ?? 0, postId:postId)
+        return NotificationPushData(instanceName: instanceString, instanceId: instanceId ?? 0, postId:postId, context: context)
     }
     
     
@@ -43,6 +44,7 @@ struct NotifInApp:Codable {
         case createdAt = "created_at"
         case completedAt = "completed_at"
         case imageUrl = "image_url"
+        case context
     }
     
     private func getTypeFromKey(_ key:String) -> HomeActionType {

@@ -30,9 +30,12 @@ struct User: Codable {
    // var conversation:Conversation? = nil
     var roles:[String]? = nil
     var memberships:[String]? = nil
+    var confirmedAt:String? = nil
     
     var firebaseProperties:[String:String]? = [String:String]()
     var interests:[String]? = nil
+    var involvements:[String]? = nil
+    var concerns:[String]? = nil
     var unreadCount:Int = 0
     var permissions:UserPermissions? = UserPermissions()
     
@@ -94,6 +97,8 @@ struct User: Codable {
         case roles
         case memberships
         case interests
+        case involvements
+        case concerns
         
         case _firstname = "first_name"
         case _lastname = "last_name"
@@ -112,6 +117,7 @@ struct User: Codable {
         case radiusDistance = "travel_distance"
         case birthday
         case creationDateString = "created_at"
+        case confirmedAt = "confirmed_at"
     }
     
     func dictionaryForWS() -> [String:Any] {
@@ -202,6 +208,7 @@ struct UserLightNeighborhood: Codable {
     var communityRoles:[String]? = nil
     var status:String? = nil
     var message:String? = nil
+    var confirmedAt:String? = nil
     
     var displayName:String {
         get {
@@ -222,7 +229,7 @@ struct UserLightNeighborhood: Codable {
         case groupRole = "group_role"
         case sid = "id"
         case communityRoles = "community_roles"
-        
+        case confirmedAt = "confirmed_at"
         case _displayName = "display_name"
         case avatarURL = "avatar_url"
     }

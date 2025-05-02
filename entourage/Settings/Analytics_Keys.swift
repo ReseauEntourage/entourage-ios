@@ -337,3 +337,37 @@ let   Clic_Post_Like = "Clic_Post_Like"
 let   Clic_Post_List_Reactions = "Clic_Post_List_Reactions"
 let   Clic_ListReactions_Contact = "Clic_ListReactions_Contact"
 
+let has_user_activated_notif = "has_user_activated_notif"
+let has_user_disabled_notif = "has_user_disabled_notif"
+
+
+let   clic_update_version_validate = "clic_update_version_validate"
+let   clic_update_version_cancel = "clic_update_version_cancel"
+
+
+// Écran de bienvenue
+let onboarding_welcome_config_later_clic = "onboarding_welcome_config_later_clic"
+let onboarding_welcome_next_clic = "onboarding_welcome_next_clic"
+
+// Écran envies d'agir
+let onboarding_actions_config_later_clic = "onboarding_actions_config_later_clic"
+let onboarding_actions_next_clic = "onboarding_actions_next_clic"
+
+// Écran centres d'intérêts
+let onboarding_interests_config_later_clic = "onboarding_interests_config_later_clic"
+let onboarding_interests_next_clic = "onboarding_interests_next_clic"
+
+// Écran catégories d'entraide
+let onboarding_donations_categories_config_later_clic = "onboarding_donations_categories_config_later_clic"
+let onboarding_donations_categories_next_clic = "onboarding_donations_categories_next_clic"
+
+// Écran de fin
+let onboarding_end_browse_events_clic = "onboarding_end_browse_events_clic"
+
+
+let onboarding_welcome_view = "onboarding_welcome_view"
+let onboarding_actions_view = "onboarding_actions_view"
+let onboarding_interests_view = "onboarding_interests_view"
+let onboarding_donations_categories_view = "onboarding_donations_categories_view"
+let onboarding_end_view = "onboarding_end_view"
+

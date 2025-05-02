@@ -440,7 +440,7 @@
 "editUserTitleCity" = "Ville et zone d’action *";
 "editUserTitleRadius" = "Dans un rayon de *";
 "editUserDescRadius" = "* Votre zone d’action permet de définir à quelle distance vous pouvez agir et vous déplacer";
-"editProfileInterest_title" = "Mes centres d’intérêt";
+"editProfileInterest_title" = "Mes centres d’intérêts";
 
 "editUserPlaceholderFirstname" = "Pierre";
 "editUserPlaceholderLastname" = "Dupont";

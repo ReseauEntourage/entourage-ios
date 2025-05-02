@@ -63,6 +63,8 @@ class HomeV2ViewController:UIViewController{
     var pedagoCreateEvent:PedagogicResource?
     var pedagoCreateGroup:PedagogicResource?
     var isContributionPreference = false
+    var shouldLaunchEventPopup:Int? = nil
+    var shouldTestOnboarding = false
     
     override func viewDidLoad() {
         IHProgressHUD.show()
@@ -94,6 +96,8 @@ class HomeV2ViewController:UIViewController{
         //CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         self.checkAndCreateCookieIfNotExists()
+        self.checkNotificationSettings()
+        self.handleEnhancedOnboardingReturn()
 
     }
     
@@ -103,7 +107,99 @@ class HomeV2ViewController:UIViewController{
 
         self.initHome()
         self.checkForUpdates()
+        self.ifEventLastDay()
         
+    }
+    
+    func handleEnhancedOnboardingReturn(){
+        let config = EnhancedOnboardingConfiguration.shared
+        if config.shouldSendOnboardingFromNormalWay{
+            IHProgressHUD.dismiss()
+            self.sendOnboardingIntro()
+            return
+        }
+        if config.isFromOnboardingFromNormalWay{
+            config.isFromOnboardingFromNormalWay = false
+            IHProgressHUD.dismiss()
+            if let _tabbar = self.tabBarController as? MainTabbarViewController {
+                _tabbar.showDiscoverEvents()
+                return
+            }
+        }
+        if config.isInterestsFromSetting{
+            config.isInterestsFromSetting = false
+            IHProgressHUD.dismiss()
+            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+            navVC.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(navVC, animated: false)
+            return
+        }
+        if config.isOnboardingFromSetting{
+            config.isOnboardingFromSetting = false
+            IHProgressHUD.dismiss()
+            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+            navVC.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(navVC, animated: false)
+            return
+        }
+    }
+    
+    //MARK: TODO REMOVE THIS
+    func testEventLastDay(){
+        getEventAndLaunchPopup(eventId: "136208")
+    }
+    
+    func ifEventLastDay(){
+        if let _eventId = shouldLaunchEventPopup{
+            self.getEventAndLaunchPopup(eventId: String(_eventId))
+            shouldLaunchEventPopup = nil
+        }
+    }
+    
+    func getEventAndLaunchPopup(eventId:String){
+        EventService.getEventWithId(eventId) { event, error in
+            if let _event = event {
+                self.launchEventLastDayVC(with: _event)
+            }
+        }
+    }
+    
+    func sendOnboardingIntro(){
+        
+        let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
+            let config = EnhancedOnboardingConfiguration.shared
+            if isContributionPreference {
+                config.preference = "contribution"
+            }
+            config.shouldSendOnboardingFromNormalWay = false
+            config.isFromOnboardingFromNormalWay = true
+            viewController.modalPresentationStyle = .fullScreen
+            viewController.modalTransitionStyle = .coverVertical
+            present(viewController, animated: true, completion: nil)
+        }
+    }
+
+    private func launchEventLastDayVC(with event: Event) {
+           let storyboard = UIStoryboard(name: "Main", bundle: nil) // Remplacez "Main" par le nom de votre storyboard si nécessaire
+           if let eventLastDayVC = storyboard.instantiateViewController(withIdentifier: "eventLastDay") as? EventLastDayViewController {
+               eventLastDayVC.event = event
+               eventLastDayVC.user = currentUser
+               eventLastDayVC.modalPresentationStyle = .overCurrentContext
+               self.present(eventLastDayVC, animated: true, completion: nil)
+           }
+       }
+    
+    func checkNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                if settings.authorizationStatus == .authorized {
+                    AnalyticsLoggerManager.logEvent(name: has_user_activated_notif)
+                } else {
+                    AnalyticsLoggerManager.logEvent(name: has_user_disabled_notif)
+                }
+            }
+        }
     }
     
     func checkForUpdates() {
@@ -514,6 +610,8 @@ extension HomeV2ViewController{
                 }else{
                     self?.isContributionPreference = false
                 }
+                let config = EnhancedOnboardingConfiguration.shared
+                config.preference = userHome.preference ?? ""
                 
                 if UserDefaults.currentUser?.addressPrimary == nil
                     || userHome.preference == nil {
