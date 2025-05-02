@@ -191,7 +191,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
-           
             
             if stage == "h1" {
                 DeepLinkManager.showWelcomeOne()

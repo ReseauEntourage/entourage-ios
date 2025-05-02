@@ -34,43 +34,52 @@ class EventDetailFeedViewController: UIViewController {
     @IBOutlet weak var ui_scrollview: UIScrollView!
     @IBOutlet weak var ui_iv_preview: UIImageView!
     
-    // Pour afficher/cacher le bouton « Participer » lors du scroll
+    // Pour afficher/cacher le bouton « Participer » lors du scroll
     @IBOutlet weak var ui_title_bt_join: UILabel!
     @IBOutlet weak var ui_bt_floating_join: UIView!
     
     let addHeight: CGFloat = ApplicationTheme.iPhoneHasNotch() ? 0 : 20
     var minTopScrollHeight: CGFloat = 120
     
-    // Utilisé pour étirer l'en-tête
+    // Utilisé pour étirer l’en-tête
     var maxViewHeight: CGFloat = 150
     var minViewHeight: CGFloat = 80 // 70 + 19
     var maxImageHeight: CGFloat = 73
     var minImageHeight: CGFloat = 0
     var viewNormalHeight: CGFloat = 0
     
-    var messagesNew = [PostMessage]()
-    var messagesOld = [PostMessage]()
+    // -- SUPPRESSION du tableau "messagesNew" et "messagesOld"
+    // var messagesNew = [PostMessage]()
+    // var messagesOld = [PostMessage]()
+    
     var eventId: Int = 0
     var hashedEventId: String = ""
     var event: Event? = nil
     var isUserAmbassador = false
-    var hasNewAndOldSections = false
+    
+    // -- On n’a plus besoin de hasNewAndOldSections
+    // var hasNewAndOldSections = false
+    
     var currentPagingPage = 1
     let itemsPerPage = 25
     let nbOfItemsBeforePagingReload = 5
     var isLoading = false
     
-    /// Sert uniquement à votre condition :
-    /// `if (event.isMember) && !isAfterCreation => LightCell`
+    /// Sert uniquement à votre condition d’affichage "LightCell" vs "FullCell":
+    ///  (event.isMember) && !isAfterCreation => LightCell
     var isAfterCreation = false
     
     var isShowCreatePost = false
+    
     let DELETED_POST_CELL_SIZE = 165.0
     let TEXT_POST_CELL_SIZE = 220.0
     let IMAGE_POST_CELL_SIZE = 430.0
+    
     var shouldOpenNativeAgenda = false
     
     var pullRefreshControl = UIRefreshControl()
+    
+    // stocke la liste des utilisateurs participants
     var users: [UserLightNeighborhood] = [UserLightNeighborhood]()
     
     override func viewDidLoad() {
@@ -280,12 +289,12 @@ class EventDetailFeedViewController: UIViewController {
         getEventDetail(hasToRefreshLists: true)
     }
     
+    /// Méthode qui gère le “leave event” manuellement
     func sendLeaveGroup() {
         IHProgressHUD.show()
         EventService.leaveEvent(eventId: eventId, userId: UserDefaults.currentUser!.sid) { event, error in
             IHProgressHUD.dismiss()
-            // On ne change plus rien immédiatement dans l’UI,
-            // car on a déjà forcé le mode "Participer" localement.
+            // On ne fait pas de reload direct ici car on fait un getEventDetail plus bas
             self.getEventDetail(hasToRefreshLists: true)
         }
     }
@@ -324,8 +333,11 @@ class EventDetailFeedViewController: UIViewController {
             self.event = event
             self.eventId = event?.uid ?? 0
             self.event?.posts?.removeAll()
-            self.splitMessages()
+            
+            // --- On n’a plus de split "messagesNew" et "messagesOld"
+            // On va directement charger la liste globale via pagination
             self.getMorePosts()
+            
             self.isLoading = false
             
             if event?.isCanceled() ?? false {
@@ -345,6 +357,8 @@ class EventDetailFeedViewController: UIViewController {
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventsUpdate),
                                                 object: nil)
             }
+            
+            // On recharge la table pour montrer la topCell + éventuellement "empty cell"
             self.ui_tableview.reloadData()
         }
         getEventusers()
@@ -372,94 +386,52 @@ class EventDetailFeedViewController: UIViewController {
         }
     }
     
+    /// Récupération de la pagination : on ajoute directement à event.posts
     func getMorePosts() {
         self.isLoading = true
         EventService.getEventPostsPaging(id: eventId,
                                          currentPage: currentPagingPage,
-                                         per: itemsPerPage) { post, error in
-            guard let post = post, error == nil else {
+                                         per: itemsPerPage) { posts, error in
+            guard let posts = posts, error == nil else {
                 self.isLoading = false
                 return
             }
             DispatchQueue.main.async {
-                self.event?.posts?.append(contentsOf: post)
-                self.splitMessages()
-                
-                self.ui_tableview.performBatchUpdates({
-                    let currentSections = self.ui_tableview.numberOfSections
-                    if self.event?.posts?.isEmpty ?? true {
-                        // Aucune publication
-                    } else {
-                        if self.hasNewAndOldSections {
-                            if currentSections == 1 {
-                                self.ui_tableview.insertSections(IndexSet(integer: 1), with: .fade)
-                            }
-                            self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .fade)
-                        }
-                        else if currentSections == 3 {
-                            self.ui_tableview.deleteSections(IndexSet(integer: 2), with: .fade)
-                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
-                        }
-                        else {
-                            self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .fade)
-                        }
-                    }
-                }, completion: nil)
-                
+                self.event?.posts?.append(contentsOf: posts)
+                self.ui_tableview.reloadData()
                 self.isLoading = false
             }
         }
     }
     
-    func splitMessages() {
-        guard let messages = event?.posts else {
-            return
-        }
-        messagesNew.removeAll()
-        messagesOld.removeAll()
-        
-        for post in messages {
-            if post.isRead {
-                messagesOld.append(post)
-            }
-            else {
-                messagesNew.append(post)
-            }
-        }
-        hasNewAndOldSections = !messagesOld.isEmpty && !messagesNew.isEmpty
-    }
+    // MARK: - Joindre / Quitter (action manuelle)
     
-    // MARK: - Joindre / Quitter (uniquement action manuelle)
-    
-    /// Sans dépendre du retour du serveur : on modifie localement `event?.isMember`
-    /// et on recharge la tableView pour mettre à jour la cell du haut.
+    /// Au clic sur le bouton “Participer/Quitter”
     func addRemoveMember(isAdd: Bool) {
+        // On “blinde” : on met tout ce qu’il faut pour éviter le crash de tableView
+        event?.isMember = isAdd
+        isAfterCreation = false
+        // On fait un reloadData complet pour éviter les reload partiels qui causent l’incohérence
+        ui_tableview.reloadData()
+        
+        // Appels asynchrones
+        IHProgressHUD.show()
         if isAdd {
-            // On veut participer → on force localement la logique
-            event?.isMember = true
-            isAfterCreation = false
-            ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
-            
-            IHProgressHUD.show()
+            // On veut participer
             EventService.joinEvent(eventId: eventId) { user, error in
                 IHProgressHUD.dismiss()
-                // Pas de MAJ UI supplémentaire
+                // On peut rafraîchir si besoin. Ex : self.getEventDetail()
+                // Sinon on se fie au reloadData déjà fait.
             }
-        }
-        else {
-            // On quitte l’événement
-            event?.isMember = false
-            ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
-            
-            IHProgressHUD.show()
-            EventService.leaveEvent(eventId: eventId,
-                                    userId: UserDefaults.currentUser!.sid) { event, error in
+        } else {
+            // On veut quitter
+            EventService.leaveEvent(eventId: eventId, userId: UserDefaults.currentUser!.sid) { event, error in
                 IHProgressHUD.dismiss()
+                // Idem, on peut relancer un getEventDetail() ou pas
             }
         }
     }
     
-    /// Appelée lors du clic sur le bouton “Participer/Quitter”
     func joinLeaveEvent() {
         let currentUserId = UserDefaults.currentUser?.sid
         if event?.author?.uid == currentUserId {
@@ -467,8 +439,10 @@ class EventDetailFeedViewController: UIViewController {
         }
         
         if let _ = event?.members?.first(where: { $0.uid == currentUserId }) {
+            // L'utilisateur est déjà membre => on quitte
             addRemoveMember(isAdd: false)
         } else {
+            // L'utilisateur n'est pas encore membre => on rejoint
             addRemoveMember(isAdd: true)
         }
     }
@@ -643,39 +617,40 @@ class EventDetailFeedViewController: UIViewController {
 // MARK: - UITableViewDataSource / Delegate
 extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDelegate {
     
+    /// On n’a plus qu’une logique simple : 2 sections maximum
+    ///   - section 0 => la top cell (EventDetailTopFullCell ou LightCell)
+    ///   - section 1 => la liste des posts (ou bien 1 row si c’est vide => NeighborhoodEmptyPostCell)
     func numberOfSections(in tableView: UITableView) -> Int {
-        let minimum = (self.event != nil) ? 2 : 0
-        let added = hasNewAndOldSections ? 1 : 0
-        return minimum + added
+        // On veut toujours 2 sections : 0 pour la topCell, 1 pour le feed
+        // Si l’event n’est pas encore chargé, on peut renvoyer 1 => la topCell
+        // Mais en général c’est 2 sections une fois que l’event est non-nil.
+        guard self.event != nil else {
+            return 1
+        }
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 { return 1 }
-        
-        if hasNewAndOldSections {
-            if section == 1 {
-                return messagesNew.count + 2
-            } else {
-                return messagesOld.count + 1
-            }
-        }
-        
-        let messageCount = (self.event?.posts?.count ?? 0)
-        if messageCount == 0 {
+        // Section 0 => 1 row (la top cell)
+        if section == 0 {
             return 1
         }
-        return messageCount + countToAdd()
-    }
-    
-    func countToAdd() -> Int {
-        return (self.event?.isMember ?? false) && !messagesNew.isEmpty ? 2 : 1
+        
+        // Section 1 => la liste "posts" ou 1 row si c’est vide
+        let messageCount = event?.posts?.count ?? 0
+        if messageCount == 0 {
+            return 1 // Cellule vide
+        }
+        return messageCount
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        // Section 0 => top cell
         if indexPath.section == 0 {
             if (self.event?.isMember ?? false) && (!isAfterCreation) {
+                // top light cell
                 let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopLightCell.identifier,
                                                          for: indexPath) as! EventDetailTopLightCell
                 cell.populateCell(event: self.event,
@@ -683,8 +658,8 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
                                   isEntourageEvent: isUserAmbassador,
                                   members: self.users)
                 return cell
-            }
-            else {
+            } else {
+                // top full cell
                 let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopFullCell.identifier,
                                                          for: indexPath) as! EventDetailTopFullCell
                 cell.populateCell(event: self.event,
@@ -694,55 +669,20 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             }
         }
         
-        if self.event?.posts?.isEmpty ?? true {
+        // Section 1 => posts
+        let posts = self.event?.posts ?? []
+        if posts.isEmpty {
+            // Cellule “Aucun post” si vide
             let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEmptyPostCell.identifier,
                                                      for: indexPath) as! NeighborhoodEmptyPostCell
             cell.populateCell(isEvent: true)
             return cell
         }
         
-        if hasNewAndOldSections && indexPath.section == 2 {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier,
-                                                         for: indexPath) as! EventListSectionCell
-                cell.populateCell(title: "event_detail_post_section_old_posts_title".localized,
-                                  isTopHeader: false)
-                return cell
-            }
-            let postmessage = messagesOld[indexPath.row - 1]
-            return makePostCell(post: postmessage, indexPath: indexPath)
-        }
+        // Récupération du post
+        let post = posts[indexPath.row]
         
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier,
-                                                     for: indexPath) as! EventListSectionCell
-            cell.populateCell(title: "event_detail_post_section_title".localized,
-                              isTopHeader: true)
-            return cell
-        }
-        
-        let cta = countToAdd()
-        if cta == 2, indexPath.row == 1 {
-            let titleSection = (hasNewAndOldSections || messagesOld.isEmpty)
-                ? "event_detail_post_section_new_posts_title".localized
-                : "event_detail_post_section_old_posts_title".localized
-            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier,
-                                                     for: indexPath) as! EventListSectionCell
-            cell.populateCell(title: titleSection, isTopHeader: false)
-            return cell
-        }
-        
-        let postmessage: PostMessage
-        if hasNewAndOldSections {
-            postmessage = messagesNew[indexPath.row - cta]
-        } else {
-            postmessage = event!.posts![indexPath.row - cta]
-        }
-        
-        return makePostCell(post: postmessage, indexPath: indexPath)
-    }
-    
-    private func makePostCell(post: PostMessage, indexPath: IndexPath) -> UITableViewCell {
+        // Détermine quel identifier utiliser (post text, image, sondage, etc.)
         var identifier = post.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         
         if post.survey != nil {
@@ -754,6 +694,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         if let fromLang = post.contentTranslations?.from_lang,
            fromLang != LanguageManager.getCurrentDeviceLanguage(),
            UserDefaults.currentUser?.sid != post.user?.sid {
+            // version “translation cell”
             identifier = post.isPostImage ? NeighborhoodPostImageTranslationCell.identifier : NeighborhoodPostTranslationCell.identifier
         }
         if post.contentTranslations == nil {
@@ -766,6 +707,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
                           currentIndexPath: indexPath,
                           userId: post.user?.sid,
                           isMember: self.event?.isMember)
+        
         return cell
     }
     
@@ -777,13 +719,15 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView,
                    willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath) {
-        if isLoading { return }
-        var realIndex: Int = hasNewAndOldSections ? indexPath.row - 1 : indexPath.row - 2
-        let messageCount = event?.posts?.count ?? 0
-        let lastIndex = messageCount - nbOfItemsBeforePagingReload
-        if realIndex == lastIndex && messageCount >= itemsPerPage * currentPagingPage {
-            currentPagingPage += 1
-            getMorePosts()
+        // Pagination
+        if indexPath.section == 1, !isLoading {
+            let postsCount = self.event?.posts?.count ?? 0
+            let lastIndex = postsCount - nbOfItemsBeforePagingReload
+            // si on approche la fin de la liste
+            if indexPath.row == lastIndex && postsCount >= itemsPerPage * currentPagingPage {
+                currentPagingPage += 1
+                getMorePosts()
+            }
         }
     }
     
@@ -807,6 +751,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             let heightView = min(max(yView, self.minViewHeight), self.maxViewHeight)
             self.ui_view_height_constraint.constant = heightView
             
+            // Gère l’affichage du bouton “participer” en bas (flottant)
             if !(self.event?.isMember ?? false) {
                 self.ui_bt_floating_join.isHidden = scrollView.contentOffset.y < self.minTopScrollHeight
             }
@@ -822,7 +767,7 @@ extension EventDetailFeedViewController: MJAlertControllerDelegate {
         if alertTag == .None {
             self.event?.isMember = false
             self.isAfterCreation = false
-            self.ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
+            self.ui_tableview.reloadData()
             self.sendLeaveGroup()
         }
         
@@ -952,8 +897,7 @@ extension EventDetailFeedViewController: NeighborhoodPostCellDelegate {
     }
     
     func postSurveyResponse(forPostId postId: Int, withResponses responses: [Bool]) {
-        let groupId = self.eventId
-        SurveyService.postSurveyResponseEvent(eventId: groupId, postId: postId, responses: responses) { isSuccess in
+        SurveyService.postSurveyResponseEvent(eventId: eventId, postId: postId, responses: responses) { isSuccess in
             if isSuccess {
                 print("Réponse au sondage postée avec succès.")
             } else {
@@ -1043,7 +987,7 @@ extension EventDetailFeedViewController: NeighborhoodPostCellDelegate {
     }
 }
 
-// MARK: - UpdateEventCommentDelegate
+// MARK: - UpdateCommentCountDelegate
 extension EventDetailFeedViewController: UpdateCommentCountDelegate {
     func updateCommentCount(parentCommentId: Int,
                             nbComments: Int,
@@ -1052,7 +996,7 @@ extension EventDetailFeedViewController: UpdateCommentCountDelegate {
         if let index = posts.firstIndex(where: { $0.uid == parentCommentId }) {
             event?.posts?[index].commentsCount = nbComments
         }
-        splitMessages()
+        // Rechargement complet ou partiel
         if let idx = currentIndexPathSelected {
             ui_tableview.reloadRows(at: [idx], with: .none)
         } else {
@@ -1179,19 +1123,18 @@ extension EventDetailFeedViewController: AmbassadorAskNotificationPopupDelegate 
     func joinAsOrganizer() {
         event?.isMember = true
         isAfterCreation = false
-        ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
+        ui_tableview.reloadData()
         
         IHProgressHUD.show()
         EventService.joinEventAsOrganizer(eventId: eventId) { user, error in
             IHProgressHUD.dismiss()
-            // Pas de mise à jour UI supplémentaire
         }
     }
     
     func justParticipate() {
         event?.isMember = true
         isAfterCreation = false
-        ui_tableview.reloadSections(IndexSet(integer: 0), with: .automatic)
+        ui_tableview.reloadData()
         
         IHProgressHUD.show()
         EventService.joinEvent(eventId: eventId) { user, error in
