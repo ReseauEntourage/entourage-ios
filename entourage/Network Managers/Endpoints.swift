@@ -202,3 +202,16 @@ let kAPIGetSurveyResponsesForEvent = "outings/%d/chat_messages/%d/survey_respons
 let kAPIDeleteSurveyResponseForEvent = "outings/%d/chat_messages/%d/survey_responses?token=%@"
 let kAPICreateSurveyInEvent = "outings/%d/chat_messages?token=%@"
 
+//Smalltalk
+let kAPIUserSmallTalkRequests              = "user_smalltalks"
+let kAPIUserSmallTalkRequestDetail        = "user_smalltalks/%@"
+let kAPIUserSmallTalkRequestMatch         = "user_smalltalks/%@/match"
+let kAPIUserSmallTalkRequestAlmostMatches = "user_smalltalks/%@/almost_matches"
+
+let kAPISmallTalkList                     = "smalltalks"
+let kAPISmallTalkDetail                   = "smalltalks/%@"
+let kAPISmallTalkUsers                    = "smalltalks/%@/users"
+let kAPISmallTalkLeave                    = "smalltalks/%@/users"
+let kAPISmallTalkMessages                 = "smalltalks/%@/chat_messages"
+let kAPISmallTalkMessageDetail            = "smalltalks/%@/chat_messages/%@"
+

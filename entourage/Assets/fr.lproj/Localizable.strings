@@ -1741,3 +1741,119 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_phase_three_option_les_deux_description" = "Proposer du soutien et en recevoir";
 "onboarding_phase_three_question_quartier" = "Quel est votre quartier ?";
 "onboarding_phase_three_placeholder_quartier" = "Adresse ville ou département";
+
+
+/* Section Papotages Smalltalks */
+"home_smalltalk_title" = "Partager des “Bonnes ondes“ !";
+"onboarding_title" = "Prêts pour intégrer une bande solidaire ?";
+"home_button_start" = "Discuter";
+
+
+"onboarding_title" = "Prêts pour intégrer une bande solidaire ?";
+"onboarding_start_button" = "Je commence";
+"onboarding_intro_html" = "<p>Les <b>Bandes solidaires</b> vous connectent rapidement avec un ou plusieurs membres...</p><p><b>• Vous répondez à quelques questions</b> : sur vous, vos centres d’intérêts</p><p><b>• On vous trouve des personnes compatibles</b> : grâce à votre localisation et vos réponses</p><p><b>• Une conversation de groupe s’ouvre dans l’app</b> : pour faire connaissance pendant quelques jours</p><p><b>• Vous décidez ensemble d’un moment pour vous rencontrer</b> : en visio ou en vrai, comme vous préférez</p>";
+
+/* Step 1: Format de discussion */
+"small_talk_step_title_1" = "Quel format de discussion te convient le mieux ?";
+"small_talk_step_subtitle_1" = "Vous pouvez choisir de papoter à deux ou en petit groupe...";
+"small_talk_step1_item1_title" = "En duo";
+"small_talk_step1_item1_subtitle" = "Pour un échange simple et intimiste";
+"small_talk_step1_item2_title" = "En petit groupe";
+"small_talk_step1_item2_subtitle" = "Pour discuter à plusieurs, dans une ambiance conviviale";
+"smalltalk_intro_limit" = "Impossible de générer une nouvelle demande, veuillez quitter l'une de vos bandes";
+
+/* Step 2: Proximité */
+"small_talk_step_title_2" = "Avec qui aimeriez-vous échanger ?";
+"small_talk_step_subtitle_2" = "Des personnes de votre région ou de toute la France...";
+"small_talk_step2_item1_title" = "Des personnes proches de chez moi";
+"small_talk_step2_item1_subtitle" = "Pour des échanges locaux et des rencontres en vrai, près de chez vous";
+"small_talk_step2_item2_title" = "Des personnes de toute la France";
+"small_talk_step2_item2_subtitle" = "Pour échanger avec des profils variés, découvrir d’autres horizons";
+
+/* Step 3: Genre */
+"small_talk_step_title_3" = "Quel genre vous correspond le mieux ?";
+"small_talk_step_subtitle_3" = "Cette info nous aide à personnaliser vos rencontres";
+"small_talk_step3_item1_title" = "Homme";
+"small_talk_step3_item2_title" = "Femme";
+"small_talk_step3_item3_title" = "Non binaire";
+
+/* Step 4: Confort selon le genre */
+"small_talk_step_title_4" = "Avec qui vous sentez-vous le plus à l’aise pour échanger ?";
+"small_talk_step_subtitle_4" = "Cette question concerne uniquement le genre : hommes, femmes, non binaires. Toutes les bandes sont socialement mixtes.";
+"small_talk_step4_item1_title" = "Peu importe";
+"small_talk_step4_item1_subtitle" = "Je suis à l’aise pour échanger avec tout le monde, quel que soit le genre";
+"small_talk_step4_item2_title" = "Avec des personnes du même genre";
+"small_talk_step4_item2_subtitle" = "Je préfère échanger avec des personnes qui partagent le même genre que moi";
+
+/* small talk searching activity */
+"small_talk_searching_title" = "On te trouve une bande qui te correspond";
+"small_talk_searching_intro" = "On vous prépare une belle rencontre… juste le temps de trouver les bons partenaires. Encore un petit instant, ça arrive !";
+"small_talk_searching_step_1" = "On regarde où se trouvent les membres disponibles…";
+"small_talk_searching_step_2" = "On cherche des personnes qui partagent vos centres d’intérêt…";
+"small_talk_searching_step_3" = "On prend en compte vos préférences pour former un groupe où chacun se sent à l’aise.";
+"small_talk_searching_step_4" = "On vérifie que tout colle bien…";
+
+/* small talk other bands activity */
+"small_talk_other_band_title" = "Nous n’avons pas trouvé de bande avec vos critères";
+"small_talk_other_band_subtitle" = "Vous pouvez choisir de rejoindre une bande proche de vos critères ou attendre qu’une bande vous soit proposée…";
+"small_talk_other_band_different_location" = "Cette bande ne correspond pas à votre choix de proximité géographique";
+"small_talk_other_band_different_interests" = "Cette bande regroupe des personnes aux centres d’intérêt différents";
+"small_talk_other_band_duo" = "Cette bande fonctionne en binôme";
+"small_talk_other_band_group" = "Cette bande est composée de 3 personnes ou plus";
+"small_talk_other_band_with" = "Avec %@";
+"small_talk_other_band_join" = "Rejoindre";
+"small_talk_other_band_wait" = "Je préfère attendre";
+
+/* small talk no band activity */
+"small_talk_no_band_title" = "Aucune bande n’est disponible pour le moment";
+"small_talk_no_band_subtitle" = "Vous recevrez une notification dès que nous aurons trouvé une bande";
+"small_talk_no_band_button_title" = "Revenir à la page d’accueil";
+"small_talk_no_band_card_title" = "Événement à ne pas manquer";
+"small_talk_no_band_card_subtitle" = "Les papotages solidaires : un moment sympa en visio pour échanger et rencontrer de nouvelles personnes (pendant 15min ou plus) tous les jeudis soirs à 18h";
+"small_talk_no_band_card_button" = "Voir l’événement";
+
+/* small talk found band activity */
+"small_talk_group_found_name_default" = "Marie";
+"small_talk_group_found_button" = "Discuter";
+"small_talk_group_found_title" = "Nous vous avons trouvé une bande !";
+"small_talk_group_found_subtitle" = "Découvrez les personnes de votre bande";
+
+/* small talk home activity */
+"home_v2_title_small_talk" = "Discuter simplement";
+"small_talk_subtitle_match" = "Découvrez un nouveau moyen de discuter et de créer des liens qui durent dans le temps !";
+"small_talk_button_match" = "Discuter";
+"small_talk_title_waiting" = "Bientôt de nouvelles rencontres";
+"small_talk_subtitle_waiting" = "On vous prévient dès qu’on a trouvé des gens qui sont sur la même longueur d’onde ;) ";
+"small_talk_title_conversation" = "Discuter avec votre bande";
+
+/* small talk guidelines */
+"small_talk_what_it_is_1" = "Un échange convivial et bienveillant";
+"small_talk_what_it_is_2" = "Une rencontre authentique entre deux personnes";
+"small_talk_what_it_is_3" = "Une occasion de briser l’isolement";
+"small_talk_what_it_is_not_1" = "Un accompagnement social ou une aide formelle";
+"small_talk_what_it_is_not_2" = "Une conversation à sens unique ou un débat";
+"small_talk_what_it_is_not_3" = "Une discussion intrusive sur des sujets sensibles";
+"small_talk_step_1" = "Bande solidaire – étape 1 – présentation";
+"small_talk_guidelines_title" = "Guide et charte des bandes solidaires";
+"small_talk_guidelines_intro" = "Les <b>Bandes solidaires</b> vous connectent régulièrement avec un ou plusieurs membres pour discuter et créer du lien, simplement et sans pression.";
+"small_talk_what_it_is_title" = "Ce que c’est";
+"small_talk_what_it_is_item_1" = "Un échange convivial et bienveillant";
+"small_talk_what_it_is_item_2" = "Une rencontre authentique entre des personnes";
+"small_talk_what_it_is_item_3" = "Une occasion de briser l’isolement";
+"small_talk_what_it_is_not_title" = "Ce que ce n’est pas";
+"small_talk_what_it_is_not_item_1" = "Un accompagnement social ou une aide formelle";
+"small_talk_what_it_is_not_item_2" = "Une conversation à sens unique ou un débat";
+"small_talk_what_it_is_not_item_3" = "Une discussion intrusive sur des sujets sensibles";
+"small_talk_ethics_title" = "La charte éthique Entourage";
+"small_talk_ethics_1_title" = "🧡 Bienveillance";
+"small_talk_ethics_1_desc" = "Nous participons à cet échange avec une intention positive et respectueuse.";
+"small_talk_ethics_2_title" = "🗣️ Consentement";
+"small_talk_ethics_2_desc" = "Nous respectons les limites et les souhaits de notre interlocuteur.";
+"small_talk_ethics_3_title" = "🔒 Confidentialité";
+"small_talk_ethics_3_desc" = "Nous ne partageons pas d’informations personnelles (nom, adresse, numéro de téléphone...).";
+"small_talk_ethics_4_title" = "🌍 Ouverture et non discrimination";
+"small_talk_ethics_4_desc" = "Nous accueillons toutes les personnes sans distinction de genre, d’origine, de croyance ou de parcours de vie.";
+
+/* Boutons */
+"small_talk_btn_close" = "Fermer";
+"small_talk_btn_charte" = "Retrouvez la charte et les bonnes pratiques → ici";

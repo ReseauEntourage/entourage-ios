@@ -54,62 +54,10 @@ class HomeMainViewController: UIViewController {
             isLoadingFromNotif = false
             getUserInfo()
         }
-        
         AnalyticsLoggerManager.logEvent(name: Home_view_home)
-        //TODO here reconnect
-        //showPopUpAction(actionType: "contribution", title: "my contrib")
-        //showPopUpAction(actionType: "solicitation", title: "my demand")
         
     }
     
-//    func checkDateAndShowPopUp() {
-//        let userDefaults = UserDefaults.standard
-//
-//        if userDefaults.bool(forKey: "isPopupShown") {
-//            // Popup already shown, return
-//            return
-//        }
-//
-//        let currentDate = Date()
-//        var calendar = Calendar.current
-//        calendar.timeZone = TimeZone(abbreviation: "UTC")!
-//
-//        // Date de début (27 août à 17h)
-//        var startComponents = DateComponents()
-//        startComponents.year = 2023
-//        startComponents.month = 8
-//        startComponents.day = 27
-//        startComponents.hour = 17
-//        guard let startDate = calendar.date(from: startComponents) else {
-//            return
-//
-//        }
-//
-//        // Date de fin (28 août à 17h)
-//        var endComponents = DateComponents()
-//        endComponents.year = 2023
-//        endComponents.month = 8
-//        endComponents.day = 28
-//        endComponents.hour = 17
-//        guard let endDate = calendar.date(from: endComponents) else {
-//            return
-//
-//        }
-//
-//        // Vérifier si la date actuelle est entre la date de début et la date de fin
-//
-//        let condition = currentDate >= startDate && currentDate <= endDate
-//        if currentDate >= startDate && currentDate <= endDate {
-//            //Call to participate
-//            NeighborhoodService.joinNeighborhood(groupId: 44) { user, error in
-//                if let rugbySpecialPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "RugbySpecialPopUpVC") {
-//                    rugbySpecialPopUpVC.modalPresentationStyle = .overCurrentContext
-//                    self.present(rugbySpecialPopUpVC, animated: true, completion: nil)
-//                    userDefaults.set(true, forKey: "isPopupShown")
-//                }
-//            }
-//        }
-//    }
     
     func extrctURLComponent(urlString:String) -> URLComponents{
         let urlString = EntourageLink.HOME.rawValue

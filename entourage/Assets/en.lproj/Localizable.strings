@@ -1784,3 +1784,115 @@
 "onboarding_phase_three_option_les_deux_description" = "Offer support and receive it.";
 "onboarding_phase_three_question_quartier" = "What is your neighborhood?";
 "onboarding_phase_three_placeholder_quartier" = "City or department address";
+
+/* SmallTalk Section */
+"onboarding_title" = "Ready to join a Solidarity Group?";
+"onboarding_start_button" = "Let's start";
+"onboarding_intro_html" = "<p><b>Solidarity Groups</b> quickly connect you with one or more members...</p><p><b>• Answer a few questions</b> about yourself and your interests</p><p><b>• We match you with compatible people</b> based on your location and answers</p><p><b>• A group chat opens in the app</b> so you can get to know each other over a few days</p><p><b>• You choose together when to meet</b> – by video or in person, as you prefer</p>";
+
+/* Step 1: Chat format */
+"small_talk_step_title_1" = "What chat format suits you best?";
+"small_talk_step_subtitle_1" = "You can choose to chat one-on-one or in a small group...";
+"small_talk_step1_item1_title" = "One-on-one";
+"small_talk_step1_item1_subtitle" = "For a simple and intimate conversation";
+"small_talk_step1_item2_title" = "Small group";
+"small_talk_step1_item2_subtitle" = "To chat with several people in a friendly setting";
+"smalltalk_intro_limit" = "You can't create a new request. Please leave one of your groups first.";
+
+/* Step 2: Proximity */
+"small_talk_step_title_2" = "Who would you like to talk to?";
+"small_talk_step_subtitle_2" = "People nearby or from anywhere in France...";
+"small_talk_step2_item1_title" = "People near me";
+"small_talk_step2_item1_subtitle" = "For local conversations and real-life meetups";
+"small_talk_step2_item2_title" = "People from all over France";
+"small_talk_step2_item2_subtitle" = "To meet a variety of profiles and discover new perspectives";
+
+/* Step 3: Gender */
+"small_talk_step_title_3" = "Which gender do you identify with?";
+"small_talk_step_subtitle_3" = "This helps us personalize your matches";
+"small_talk_step3_item1_title" = "Man";
+"small_talk_step3_item2_title" = "Woman";
+"small_talk_step3_item3_title" = "Non-binary";
+
+/* Step 4: Gender comfort */
+"small_talk_step_title_4" = "Who do you feel most comfortable talking to?";
+"small_talk_step_subtitle_4" = "This question only concerns gender. All groups are socially inclusive.";
+"small_talk_step4_item1_title" = "No preference";
+"small_talk_step4_item1_subtitle" = "I'm comfortable chatting with anyone, regardless of gender";
+"small_talk_step4_item2_title" = "People of the same gender";
+"small_talk_step4_item2_subtitle" = "I prefer talking with people who share my gender";
+
+/* Searching */
+"small_talk_searching_title" = "We’re finding a group that fits you";
+"small_talk_searching_intro" = "We're getting a great match ready... just a moment!";
+"small_talk_searching_step_1" = "We're checking where available members are...";
+"small_talk_searching_step_2" = "We're looking for people with similar interests...";
+"small_talk_searching_step_3" = "We're factoring in your preferences for a comfortable group...";
+"small_talk_searching_step_4" = "We're making sure everything fits...";
+
+/* No perfect match → other groups */
+"small_talk_other_band_title" = "No perfect match found for now";
+"small_talk_other_band_subtitle" = "You can join a close match or wait for a better one...";
+"small_talk_other_band_different_location" = "This group doesn’t match your location preference";
+"small_talk_other_band_different_interests" = "This group has different interests";
+"small_talk_other_band_duo" = "This group is a one-on-one match";
+"small_talk_other_band_group" = "This group has 3 or more people";
+"small_talk_other_band_with" = "With %@";
+"small_talk_other_band_join" = "Join";
+"small_talk_other_band_wait" = "I’d rather wait";
+
+/* No available group */
+"small_talk_no_band_title" = "No group available at the moment";
+"small_talk_no_band_subtitle" = "You’ll get a notification as soon as a group is ready for you";
+"small_talk_no_band_button_title" = "Back to home";
+"small_talk_no_band_card_title" = "Don't miss this event";
+"small_talk_no_band_card_subtitle" = "Solidarity Chats: a casual online meetup every Thursday at 6pm – connect and share (15 min or more)";
+"small_talk_no_band_card_button" = "View event";
+
+/* Found a group */
+"small_talk_group_found_name_default" = "Marie";
+"small_talk_group_found_button" = "Join the chat";
+"small_talk_group_found_title" = "We've found your group!";
+"small_talk_group_found_subtitle" = "Meet the people in your group";
+
+/* Home section */
+"home_v2_title_small_talk" = "Easy conversations";
+"small_talk_subtitle_match" = "We connect you with other members – a simple way to (re)build social ties.";
+"small_talk_button_match" = "Chat";
+"small_talk_title_waiting" = "Waiting";
+"small_talk_subtitle_waiting" = "You’ll get a message as soon as a group is ready";
+"small_talk_title_conversation" = "Chat with your group";
+
+/* Guidelines */
+"small_talk_what_it_is_1" = "A kind and friendly conversation";
+"small_talk_what_it_is_2" = "A genuine encounter between people";
+"small_talk_what_it_is_3" = "A way to break isolation";
+"small_talk_what_it_is_not_1" = "A formal social service or support program";
+"small_talk_what_it_is_not_2" = "A one-sided conversation or debate";
+"small_talk_what_it_is_not_3" = "A probing or intrusive discussion on sensitive topics";
+"small_talk_step_1" = "Solidarity Group – Step 1 – Introduction";
+
+"small_talk_guidelines_title" = "Guide and charter for Solidarity Groups";
+"small_talk_guidelines_intro" = "<b>Solidarity Groups</b> connect you with others for casual, no-pressure conversations.";
+"small_talk_what_it_is_title" = "What it is";
+"small_talk_what_it_is_item_1" = "A kind and friendly conversation";
+"small_talk_what_it_is_item_2" = "A genuine encounter between people";
+"small_talk_what_it_is_item_3" = "A way to break isolation";
+"small_talk_what_it_is_not_title" = "What it’s not";
+"small_talk_what_it_is_not_item_1" = "A formal social service or support program";
+"small_talk_what_it_is_not_item_2" = "A one-sided conversation or debate";
+"small_talk_what_it_is_not_item_3" = "A probing or intrusive discussion on sensitive topics";
+
+"small_talk_ethics_title" = "Entourage's Ethical Charter";
+"small_talk_ethics_1_title" = "🧡 Kindness";
+"small_talk_ethics_1_desc" = "We join these conversations with a positive and respectful mindset.";
+"small_talk_ethics_2_title" = "🗣️ Consent";
+"small_talk_ethics_2_desc" = "We respect each other’s boundaries and wishes.";
+"small_talk_ethics_3_title" = "🔒 Privacy";
+"small_talk_ethics_3_desc" = "We do not share personal details (name, address, phone…).";
+"small_talk_ethics_4_title" = "🌍 Openness and non-discrimination";
+"small_talk_ethics_4_desc" = "We welcome everyone regardless of gender, origin, beliefs, or life journey.";
+
+/* Buttons */
+"small_talk_btn_close" = "Close";
+"small_talk_btn_charte" = "Read the charter and best practices → here";
