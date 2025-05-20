@@ -193,6 +193,68 @@
             </objects>
             <point key="canvasLocation" x="814.50381679389307" y="3.5211267605633805"/>
         </scene>
+        <!--Small Talk Serching View Controller-->
+        <scene sceneID="Ewp-DC-APy">
+            <objects>
+                <viewController id="2rQ-IQ-x24" customClass="SmallTalkSerchingViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MgV-Q7-ZKn">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9o1-AY-T7c">
+                                <rect key="frame" x="20" y="69" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXd-Gt-RkY">
+                                <rect key="frame" x="20" y="110" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mlh-zr-6Pd">
+                                <rect key="frame" x="56" y="298" width="281" height="281"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Mlh-zr-6Pd" secondAttribute="height" multiplier="1:1" id="JXQ-Wt-NTi"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Sd-ew-vJG">
+                                <rect key="frame" x="20" y="599" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BFS-mG-Dje"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="9o1-AY-T7c" firstAttribute="leading" secondItem="BFS-mG-Dje" secondAttribute="leading" constant="20" id="06t-0e-daG"/>
+                            <constraint firstItem="Mlh-zr-6Pd" firstAttribute="height" secondItem="MgV-Q7-ZKn" secondAttribute="height" multiplier="0.33" id="3sq-IU-etV"/>
+                            <constraint firstItem="6Sd-ew-vJG" firstAttribute="top" secondItem="Mlh-zr-6Pd" secondAttribute="bottom" constant="20" id="7MA-qx-lWC"/>
+                            <constraint firstItem="BFS-mG-Dje" firstAttribute="trailing" secondItem="9o1-AY-T7c" secondAttribute="trailing" constant="20" id="8O3-2K-eOe"/>
+                            <constraint firstItem="6Sd-ew-vJG" firstAttribute="leading" secondItem="BFS-mG-Dje" secondAttribute="leading" constant="20" id="DXf-03-P9P"/>
+                            <constraint firstItem="RXd-Gt-RkY" firstAttribute="leading" secondItem="BFS-mG-Dje" secondAttribute="leading" constant="20" id="EdI-0n-X55"/>
+                            <constraint firstItem="9o1-AY-T7c" firstAttribute="top" secondItem="BFS-mG-Dje" secondAttribute="top" constant="10" id="I6o-0M-1KU"/>
+                            <constraint firstItem="Mlh-zr-6Pd" firstAttribute="centerY" secondItem="BFS-mG-Dje" secondAttribute="centerY" id="Mfx-ND-Ow8"/>
+                            <constraint firstItem="BFS-mG-Dje" firstAttribute="trailing" secondItem="6Sd-ew-vJG" secondAttribute="trailing" constant="20" id="PVS-Sm-Lbq"/>
+                            <constraint firstItem="BFS-mG-Dje" firstAttribute="trailing" secondItem="RXd-Gt-RkY" secondAttribute="trailing" constant="20" id="gcg-xx-qr7"/>
+                            <constraint firstItem="RXd-Gt-RkY" firstAttribute="top" secondItem="9o1-AY-T7c" secondAttribute="bottom" constant="20" id="obM-rt-ayg"/>
+                            <constraint firstItem="Mlh-zr-6Pd" firstAttribute="centerX" secondItem="BFS-mG-Dje" secondAttribute="centerX" id="p36-iV-niZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lottie_container" destination="Mlh-zr-6Pd" id="i9H-92-GxQ"/>
+                        <outlet property="ui_defiling_label" destination="6Sd-ew-vJG" id="wSX-I7-5ni"/>
+                        <outlet property="ui_label_subtitle" destination="RXd-Gt-RkY" id="s24-Hl-QtK"/>
+                        <outlet property="ui_label_title" destination="9o1-AY-T7c" id="TXU-kY-nr3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Na-Tf-CVk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1740" y="4"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ic_puzzle_trio" width="122" height="122"/>
