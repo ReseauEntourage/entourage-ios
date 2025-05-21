@@ -1729,6 +1729,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conversation" = "Zobacz rozmowę wydarzenia";
 "event_conv_filter_all" = "Wszystko";
 "event_conv_filter_discussions" = "Dyskusje";
+"event_conv_filter_smalltalks" = "Dobra energia";
 "event_conv_filter_events" = "Wydarzenia";
 "event_discut_title" = "Znajdź wszystkie informacje o wydarzeniu tutaj";
 "event_button_add_calendar" = "Dodaj do kalendarza";

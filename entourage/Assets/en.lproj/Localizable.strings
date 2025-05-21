@@ -1773,6 +1773,7 @@
 "event_conv_filter_all" = "All";
 "event_conv_filter_discussions" = "Discussions";
 "event_conv_filter_events" = "Events";
+"event_conv_filter_smalltalks" = "Good vibes";
 "event_discut_title" = "find all the event information here";
 "event_button_add_calendar" = "Add to calendar";
 "onboarding_phase_three_question_contribution" = "In addition to meeting people, how would you like to contribute to the Entourage Community?";

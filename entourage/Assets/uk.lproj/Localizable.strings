@@ -1705,6 +1705,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conversation" = "Переглянути розмову події";
 "event_conv_filter_all" = "Усі";
 "event_conv_filter_discussions" = "Дискусії";
+"event_conv_filter_smalltalks" = "Гарний настрій";
 "event_conv_filter_events" = "Події";
 "event_discut_title" = "Знайдіть всю інформацію про подію тут";
 "go_to_event_conversation" = "Приєднатися та взяти участь у розмові";

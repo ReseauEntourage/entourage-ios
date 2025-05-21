@@ -3147,6 +3147,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conversation" = "Ver conversación del evento";
 "event_conv_filter_all" = "Todo";
 "event_conv_filter_discussions" = "Discusiones";
+"event_conv_filter_smalltalks" = "Buenas vibras";
 "event_conv_filter_events" = "Eventos";
 "event_discut_title" = "Encuentra toda la información del evento aquí";
 "go_to_event_conversation" = "Participar y unirse a la conversación";

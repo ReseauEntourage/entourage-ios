@@ -38,7 +38,7 @@ struct SmallTalk: Codable {
     let subname: String?
     let image_url: String?
     let members_count: Int?
-    let last_message: String?
+    let last_message:LastMessage? = nil
     let number_of_unread_messages: Int?
     let has_personal_post: Bool?
     let members: [UserProfile]

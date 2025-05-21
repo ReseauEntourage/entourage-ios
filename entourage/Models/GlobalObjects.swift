@@ -124,18 +124,21 @@ struct DayMonthYearKey:Hashable {
     var dateString:String = ""
 }
 
-//MARK: -MemberLight use on feed -> Event/neighborhood -
-struct MemberLight:Codable {
-    var uid:Int
-    var username:String?
-    var imageUrl:String?
-    var confirmedAt:Bool?
-    
+struct MemberLight: Codable {
+    var uid: Int
+    var username: String?
+    var imageUrl: String?
+    var confirmedAt: Bool?
+    var roles: [String]?
+    var partner: Partner?
+
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case username = "display_name"
         case imageUrl = "avatar_url"
         case confirmedAt = "confirmed_at"
+        case roles
+        case partner
     }
 }
 

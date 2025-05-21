@@ -79,6 +79,16 @@ struct SmallTalkService: ParsingDataCodable {
             completion(error == nil && (response as? HTTPURLResponse)?.statusCode ?? 500 < 300)
         }
     }
+    
+    static func leaveSmallTalk(id: String, completion: @escaping (Bool) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = "smalltalks/\(id)/users?token=\(token)"
+
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { _, response, error in
+            let isSuccess = error == nil && (response as? HTTPURLResponse)?.statusCode ?? 500 < 300
+            completion(isSuccess)
+        }
+    }
 
     // MARK: - Lister tous les SmallTalks (ouverts)
     static func listSmallTalks(completion: @escaping ([SmallTalk]?, EntourageNetworkError?) -> Void) {

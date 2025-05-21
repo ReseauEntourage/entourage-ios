@@ -1664,6 +1664,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conversation" = "عرض محادثة الحدث";
 "event_conv_filter_all" = "الكل";
 "event_conv_filter_discussions" = "المناقشات";
+"event_conv_filter_smalltalks" = "أجواء طيبة";
 "event_conv_filter_events" = "الفعاليات";
 "event_discut_title" = "ابحث عن جميع معلومات الحدث هنا";
 "go_to_event_conversation" = "انضم وشارك في المحادثة";

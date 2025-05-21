@@ -53,7 +53,7 @@ final class SmallTalkNoBandFoundViewController: UIViewController {
 
     // MARK: - API
     private func fetchSuggestedEvent() {
-        EventsService.getSmallTalkSuggestedEvent { [weak self] event in
+        EventService.getSuggestedSmallTalkEvent { [weak self] event in
             guard let self = self, let event = event else {
                 DispatchQueue.main.async {
                     self?.ui_event_card.isHidden = true
@@ -61,7 +61,7 @@ final class SmallTalkNoBandFoundViewController: UIViewController {
                 return
             }
 
-            self.suggestedEventId = event.id
+            self.suggestedEventId = event.uid
             DispatchQueue.main.async {
                 self.ui_event_card.isHidden = false
             }
@@ -71,10 +71,11 @@ final class SmallTalkNoBandFoundViewController: UIViewController {
     // MARK: - Navigation
     @objc private func openSuggestedEvent() {
         guard let eventId = suggestedEventId else { return }
-
         if let vc = UIStoryboard(name: "Events", bundle: nil)
-            .instantiateViewController(withIdentifier: "EventFeedViewController") as? EventFeedViewController {
-            vc.configure(with: eventId)
+            .instantiateViewController(withIdentifier: "eventDetailNav") as? EventDetailFeedViewController {
+            vc.eventId = eventId
+            vc.event = nil
+            vc.isAfterCreation = false
             navigationController?.pushViewController(vc, animated: true)
         }
     }
