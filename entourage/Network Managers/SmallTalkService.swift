@@ -166,6 +166,21 @@ struct SmallTalkService: ParsingDataCodable {
             completion(error == nil && (response as? HTTPURLResponse)?.statusCode ?? 500 < 300)
         }
     }
+    
+    static func forceMatch(id: String, completion: @escaping (SmallTalkMatchResponse?, EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = "user_smalltalks/\(id)/match?token=\(token)"
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { data, _, error in
+            guard let data = data, error == nil else {
+                completion(nil, error)
+                return
+            }
+            let response = try? JSONDecoder().decode(SmallTalkMatchResponse.self, from: data)
+            completion(response, nil)
+        }
+    }
+    
 }
 
 // MARK: - Dictionnaire utilisé lors des appels POST/PATCH

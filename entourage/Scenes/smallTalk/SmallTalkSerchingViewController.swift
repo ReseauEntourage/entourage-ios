@@ -114,9 +114,9 @@ class SmallTalkSearchingViewController: UIViewController {
 
         // ✅ Transition vers l’étape suivante
         if let response = matchResponse {
-            let nextVC = SmallTalkGroupFoundViewController() // Remplace par ton VC réel
-            nextVC.configure(with: response)
-            self.navigationController?.pushViewController(nextVC, animated: true)
+//            let nextVC = SmallTalkGroupFoundViewController() // Remplace par ton VC réel
+//            nextVC.configure(with: response)
+//            self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
 

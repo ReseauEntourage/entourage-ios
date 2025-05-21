@@ -280,7 +280,7 @@ private extension SmallTalkViewController {
         guard let selected = selectedIdsByStep[currentStepIndex], !selected.isEmpty else { return }
 
         // Utilise l'identifiant UUID v2 comme recommandé par la spec API
-        guard let userRequestId = userRequest.uuid_v2 else {
+        guard let userRequestId = userRequest?.uuid_v2 else {
             let alert = UIAlertController(title: "Erreur", message: "Impossible de poursuivre : identifiant de la demande introuvable.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)

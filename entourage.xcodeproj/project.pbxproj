@@ -545,6 +545,15 @@
 		26C2C9012DDB2CE300C8F320 /* SmallTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */; };
 		26C2C9032DDC715400C8F320 /* SmallTalkSerchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9022DDC715400C8F320 /* SmallTalkSerchingViewController.swift */; };
 		26C2C9052DDC764000C8F320 /* puzzle_mount.json in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C9042DDC764000C8F320 /* puzzle_mount.json */; };
+		26C2C9082DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */; };
+		26C2C90C2DDCA3EF00C8F320 /* UserProfilCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */; };
+		26C2C90E2DDCA40300C8F320 /* UserProfilCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */; };
+		26C2C9102DDCD30F00C8F320 /* SmallTalkInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C90F2DDCD30F00C8F320 /* SmallTalkInterestCell.swift */; };
+		26C2C9122DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9112DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		26C2C9142DDDEBBB00C8F320 /* CellAlmostMatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9132DDDEBBB00C8F320 /* CellAlmostMatching.swift */; };
+		26C2C9162DDDED6A00C8F320 /* CellAlmostMatching.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C9152DDDED6A00C8F320 /* CellAlmostMatching.xib */; };
+		26C2C9182DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9172DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift */; };
+		26C2C91A2DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9192DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift */; };
 		26C70B402B2B46B1005C8846 /* NeighborhoodV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */; };
 		26C70B422B2B5D6F005C8846 /* CellGroupV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */; };
 		26CBF27A2DA6BECC004829E7 /* OnboardingPhase3Asso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBF2792DA6BECC004829E7 /* OnboardingPhase3Asso.swift */; };
@@ -1135,6 +1144,15 @@
 		26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkViewController.swift; sourceTree = "<group>"; };
 		26C2C9022DDC715400C8F320 /* SmallTalkSerchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkSerchingViewController.swift; sourceTree = "<group>"; };
 		26C2C9042DDC764000C8F320 /* puzzle_mount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = puzzle_mount.json; sourceTree = "<group>"; };
+		26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkGroupFoundViewController.swift; sourceTree = "<group>"; };
+		26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilCell.swift; sourceTree = "<group>"; };
+		26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfilCell.xib; sourceTree = "<group>"; };
+		26C2C90F2DDCD30F00C8F320 /* SmallTalkInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkInterestCell.swift; sourceTree = "<group>"; };
+		26C2C9112DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		26C2C9132DDDEBBB00C8F320 /* CellAlmostMatching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellAlmostMatching.swift; sourceTree = "<group>"; };
+		26C2C9152DDDED6A00C8F320 /* CellAlmostMatching.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellAlmostMatching.xib; sourceTree = "<group>"; };
+		26C2C9172DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkAlmostMatchingViewController.swift; sourceTree = "<group>"; };
+		26C2C9192DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkNoBandFoundViewController.swift; sourceTree = "<group>"; };
 		26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodV2ViewController.swift; sourceTree = "<group>"; };
 		26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellGroupV2.xib; sourceTree = "<group>"; };
 		26CBF2792DA6BECC004829E7 /* OnboardingPhase3Asso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPhase3Asso.swift; sourceTree = "<group>"; };
@@ -2288,6 +2306,7 @@
 		268ADBC12DD3681500031C6F /* smallTalk */ = {
 			isa = PBXGroup;
 			children = (
+				26C2C9062DDC9F1600C8F320 /* cellSmallTalkGroupFound */,
 				268ADBC92DD3702200031C6F /* cellSmalTalkAlmostMatch */,
 				268ADBC82DD3701200031C6F /* cellSmallTalkSearching */,
 				268ADBC72DD3700900031C6F /* cellSmallTalk */,
@@ -2295,6 +2314,9 @@
 				268ADBC62DD36FF900031C6F /* cellSmallTalkIntro */,
 				26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */,
 				26C2C9022DDC715400C8F320 /* SmallTalkSerchingViewController.swift */,
+				26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */,
+				26C2C9172DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift */,
+				26C2C9192DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift */,
 			);
 			path = smallTalk;
 			sourceTree = "<group>";
@@ -2323,6 +2345,8 @@
 		268ADBC92DD3702200031C6F /* cellSmalTalkAlmostMatch */ = {
 			isa = PBXGroup;
 			children = (
+				26C2C9132DDDEBBB00C8F320 /* CellAlmostMatching.swift */,
+				26C2C9152DDDED6A00C8F320 /* CellAlmostMatching.xib */,
 			);
 			path = cellSmalTalkAlmostMatch;
 			sourceTree = "<group>";
@@ -2440,6 +2464,17 @@
 				26C1BB672A3AF13F00C81C09 /* WelcomeFourImageCell.xib */,
 			);
 			path = welcome4cell;
+			sourceTree = "<group>";
+		};
+		26C2C9062DDC9F1600C8F320 /* cellSmallTalkGroupFound */ = {
+			isa = PBXGroup;
+			children = (
+				26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */,
+				26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */,
+				26C2C90F2DDCD30F00C8F320 /* SmallTalkInterestCell.swift */,
+				26C2C9112DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift */,
+			);
+			path = cellSmallTalkGroupFound;
 			sourceTree = "<group>";
 		};
 		26CC9F7B2A3371DF005F7408 /* welcome3cells */ = {
@@ -2676,6 +2711,7 @@
 				02C91A25278F2B4F00305E0B /* Intro.storyboard in Resources */,
 				025C92BC28340F7D000970D9 /* NeighborhoodDetailTopCell.xib in Resources */,
 				2674FEC52ACDA5F00013D674 /* HomeNeedHelpCell.xib in Resources */,
+				26C2C90E2DDCA40300C8F320 /* UserProfilCell.xib in Resources */,
 				02FB5449287DC11100E4B9FA /* EventDetailFullGroupCell.xib in Resources */,
 				26AD119D2AEBF42B00FA7BEC /* LanguageCell.xib in Resources */,
 				02CCE67427D78C7100D6976C /* Montserrat-Bold.ttf in Resources */,
@@ -2714,6 +2750,7 @@
 				26E257A02D5B83DA00A8B9C1 /* VersionAppCell.xib in Resources */,
 				02E0EFA82878709D009B2C65 /* EventDetailTopLightCell.xib in Resources */,
 				2619CCE52AE948AB00276D67 /* Localizable.strings in Resources */,
+				26C2C9162DDDED6A00C8F320 /* CellAlmostMatching.xib in Resources */,
 				26D13E2A2BA35FA600CAD4F7 /* QcmCell.xib in Resources */,
 				024131DB2862126B00561FB4 /* Events.xcassets in Resources */,
 				26F03C9F2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib in Resources */,
@@ -2870,6 +2907,7 @@
 				02FB543F287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift in Sources */,
 				26D13E2E2BA43F9900CAD4F7 /* Survey.swift in Sources */,
 				02040CF5288E97E000AB1FBB /* EventParamTopCell.swift in Sources */,
+				26C2C9182DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift in Sources */,
 				024131CF2862026500561FB4 /* EventCreatePhase1ViewController.swift in Sources */,
 				2674FEC72ACDB6AC0013D674 /* HomeModeratorCell.swift in Sources */,
 				0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */,
@@ -2918,18 +2956,22 @@
 				0243DCCB28AF8D3300273679 /* ConversationsMainHomeViewController.swift in Sources */,
 				028444CA282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift in Sources */,
 				0220580727FB003700531720 /* BasePopViewController.swift in Sources */,
+				26C2C9142DDDEBBB00C8F320 /* CellAlmostMatching.swift in Sources */,
 				0224597A27FF454A00944DE4 /* Extensions_UITextField.swift in Sources */,
 				2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */,
 				2694A7442ACD671B0042CFCA /* HomeCellEvent.swift in Sources */,
 				02B94C4528521F82006059EF /* PedagogicResource.swift in Sources */,
 				02B57D9A27FC433F005A567B /* ReportUserSendViewController.swift in Sources */,
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
+				26C2C9082DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
 				0282637C282160B700B354F9 /* NeighborhoodCguCell.swift in Sources */,
+				26C2C9102DDCD30F00C8F320 /* SmallTalkInterestCell.swift in Sources */,
 				264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */,
 				26AD11982AEA688800FA7BEC /* ProfileTranslationViewController.swift in Sources */,
 				0224597827FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift in Sources */,
 				26D13E202BA35EE900CAD4F7 /* OptionCell.swift in Sources */,
+				26C2C90C2DDCA3EF00C8F320 /* UserProfilCell.swift in Sources */,
 				268ADBBE2DD1D80100031C6F /* SmallTalksModels.swift in Sources */,
 				02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */,
 				2674FEB92ACD96BE0013D674 /* HomeGroupHorizontalCollectionCell.swift in Sources */,
@@ -3002,6 +3044,7 @@
 				0268C255285A2B1400294055 /* FloatyDelegate.swift in Sources */,
 				02B57D9827FC4329005A567B /* ReportUserPageViewController.swift in Sources */,
 				026819C3278E10DA00A98A4A /* User.swift in Sources */,
+				26C2C91A2DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift in Sources */,
 				02ADAAB3280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift in Sources */,
 				0288A8D727CCD8F5008D7011 /* UserPhotoAddViewController.swift in Sources */,
 				26BE84642A67F50500DC2586 /* ActionPassedTwoVC.swift in Sources */,
@@ -3028,6 +3071,7 @@
 				0227EC51292D05FB0049168E /* NotificationsInAppViewController.swift in Sources */,
 				022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */,
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
+				26C2C9122DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				029638F12869E76600E10EFB /* EventPlaceLimitCell.swift in Sources */,
 				02040CF9288E980C00AB1FBB /* EventParamEditShow.swift in Sources */,
 				021FD963287442C700D3AA54 /* NeighborhoodListEventsViewController.swift in Sources */,
