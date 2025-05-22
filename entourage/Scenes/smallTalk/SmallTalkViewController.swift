@@ -262,11 +262,7 @@ private extension SmallTalkViewController {
                    let editPhotoVC = navVC.topViewController as? UserPhotoAddViewController {
 
                     // Passer la request à la vue suivante si nécessaire
-                    editPhotoVC.pictureSettingDelegate = self as? ImageReUpLoadDelegate // Optionnel si tu veux faire quelque chose avec ça
-
-                    // Tu peux aussi lui passer une propriété si besoin comme :
-                    // editPhotoVC.userRequest = self.userRequest
-
+                    editPhotoVC.pictureSettingDelegate = self as? ImageReUpLoadDelegate
                     self.present(navVC, animated: true)
                 }
                 return
