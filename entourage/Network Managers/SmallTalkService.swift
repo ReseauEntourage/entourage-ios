@@ -55,10 +55,20 @@ struct SmallTalkService: ParsingDataCodable {
 
 
     // MARK: - Mettre à jour une requête SmallTalk
-    static func updateUserSmallTalkRequest(id: String, updates: [String: Any], completion: @escaping (UserSmallTalkRequest?, EntourageNetworkError?) -> Void) {
+    static func updateUserSmallTalkRequest(
+        id: String,
+        fields: UserSmallTalkFields,
+        completion: @escaping (UserSmallTalkRequest?, EntourageNetworkError?) -> Void
+    ) {
         guard let token = UserDefaults.token else { return }
         let endpoint = "user_smalltalks/\(id)?token=\(token)"
-        let body = try! JSONSerialization.data(withJSONObject: updates, options: [])
+
+        let wrapper = UserSmallTalkRequestWrapper(user_smalltalk: fields)
+
+        guard let body = try? JSONEncoder().encode(wrapper) else {
+            completion(nil, EntourageNetworkError())
+            return
+        }
 
         NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: body) { data, _, error in
             guard let data = data, error == nil else {
@@ -69,6 +79,8 @@ struct SmallTalkService: ParsingDataCodable {
             completion(request, nil)
         }
     }
+
+
 
     // MARK: - Demander un match
     static func matchRequest(id: String, completion: @escaping (SmallTalkMatchResponse?, EntourageNetworkError?) -> Void) {

@@ -81,6 +81,17 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
             let item = data[indexPath.item]
 
             switch item {
+            
+            case .talking(let userRequest):
+                // Charger le storyboard
+                let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
+                guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkGroupFoundViewController") as? SmallTalkGroupFoundViewController else {
+                    return
+                }
+                // Présentation plein écran
+                vc.modalPresentationStyle = .fullScreen
+                parentViewController?.present(vc, animated: true)
+                
             case .create:
                 // 👉 Charger le storyboard
                 let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)

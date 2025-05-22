@@ -59,6 +59,18 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
         ui_tableview.separatorStyle = .none
         ui_tableview.register(UINib(nibName: "CellAlmostMatching", bundle: nil), forCellReuseIdentifier: "CellAlmostMatching")
     }
+    
+    func configure(
+        with requestId: String,
+        group: String,
+        gender: Bool,
+        locality: Bool
+    ) {
+        self.matchingGroup = group
+        self.matchingGender = gender
+        self.matchingLocality = locality
+    }
+
 
     // MARK: - Load Data
     private func fetchAlmostMatches() {

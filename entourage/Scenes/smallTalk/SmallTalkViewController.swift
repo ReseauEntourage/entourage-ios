@@ -90,11 +90,11 @@ private extension SmallTalkViewController {
                 title: NSLocalizedString("small_talk_step_title_1", comment: ""),
                 subtitle: NSLocalizedString("small_talk_step_subtitle_1", comment: ""),
                 choices: [
-                    SmallTalkChoice(id: "duo",
+                    SmallTalkChoice(id: "one",
                                     title: NSLocalizedString("small_talk_step1_item1_title", comment: ""),
                                     subtitle: NSLocalizedString("small_talk_step1_item1_subtitle", comment: ""),
                                     imageName: "ic_duo"),
-                    SmallTalkChoice(id: "group",
+                    SmallTalkChoice(id: "many",
                                     title: NSLocalizedString("small_talk_step1_item2_title", comment: ""),
                                     subtitle: NSLocalizedString("small_talk_step1_item2_subtitle", comment: ""),
                                     imageName: "ic_quator")
@@ -216,7 +216,7 @@ private extension SmallTalkViewController {
         }
 
         // Progression
-        let progress = Float(currentStepIndex + 1) / Float(steps.count)
+        let progress = Float(currentStepIndex + 1) / Float(steps.count + 1)
         animated ? ui_progress.setProgress(progress, animated: true)
                  : (ui_progress.progress = progress)
 
@@ -263,6 +263,9 @@ private extension SmallTalkViewController {
 
                     // Passer la request à la vue suivante si nécessaire
                     editPhotoVC.pictureSettingDelegate = self as? ImageReUpLoadDelegate
+                    editPhotoVC.isSmallTalkMode = true
+                    editPhotoVC.userRequest = self.userRequest
+                    navVC.modalPresentationStyle = .fullScreen // ⬅️ AJOUT ICI
                     self.present(navVC, animated: true)
                 }
                 return
@@ -300,10 +303,8 @@ private extension SmallTalkViewController {
 
     @objc func goToNext() {
         guard let selected = selectedIdsByStep[currentStepIndex], !selected.isEmpty else { return }
-
-        // Utilise l'identifiant UUID v2 comme recommandé par la spec API
         guard let userRequestId = userRequest?.uuid_v2 else {
-            let alert = UIAlertController(title: "Erreur", message: "Impossible de poursuivre : identifiant de la demande introuvable.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Erreur", message: "Identifiant de la demande introuvable.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
             return
@@ -311,42 +312,40 @@ private extension SmallTalkViewController {
 
         switch currentStepIndex {
         case 0:
-            // Étape 1 : Format ("duo" ou "group")
-            if let id = selected.first {
-                let updates = ["match_format": id]
-                SmallTalkService.updateUserSmallTalkRequest(id: userRequestId, updates: updates) { [weak self] updated, error in
-                    self?.advanceOrShowError(updated, error)
-                }
+            // match_format : "one" ou "many"
+            let field = UserSmallTalkFields(match_format: selected.first, match_locality: nil, match_gender: nil, user_gender: nil)
+            SmallTalkService.updateUserSmallTalkRequest(id: userRequestId, fields: field) { [weak self] updated, error in
+                self?.advanceOrShowError(updated, error)
             }
 
         case 1:
-            // Étape 2 : Localité (true si "local", false sinon)
+            // match_locality : Bool
             let isLocal = selected.contains("local")
-            let updates = ["match_locality": isLocal]
-            SmallTalkService.updateUserSmallTalkRequest(id: userRequestId, updates: updates) { [weak self] updated, error in
+            let field = UserSmallTalkFields(match_format: nil, match_locality: isLocal, match_gender: nil, user_gender: nil)
+            SmallTalkService.updateUserSmallTalkRequest(id: userRequestId, fields: field) { [weak self] updated, error in
                 self?.advanceOrShowError(updated, error)
             }
 
         case 2:
-            // Étape 3 : Genre utilisateur → à stocker côté profil (dans le champ `gender`)
+            // user_gender → via UserService
             if let gender = selected.first {
                 var updatedUser = UserDefaults.currentUser
-                updatedUser?.gender = gender // ✅ Remplace l'ancien `about = gender`
+                updatedUser?.gender = gender
                 UserService.updateUser(user: updatedUser) { [weak self] _, error in
                     self?.advanceOrShowError(nil, error)
                 }
             }
 
         case 3:
-            // Étape 4 : Confort (true si préférence "même genre")
+            // match_gender : Bool
             let isSame = selected.contains("same")
-            let updates = ["match_gender": isSame]
-            SmallTalkService.updateUserSmallTalkRequest(id: userRequestId, updates: updates) { [weak self] updated, error in
+            let field = UserSmallTalkFields(match_format: nil, match_locality: nil, match_gender: isSame, user_gender: nil)
+            SmallTalkService.updateUserSmallTalkRequest(id: userRequestId, fields: field) { [weak self] updated, error in
                 self?.advanceOrShowError(updated, error)
             }
 
         case 4:
-            // Étape 5 : Intérêts utilisateur → UserService (pas SmallTalk)
+            // intérêts → UserService
             let interests = Array(selected)
             UserService.updateUserInterests(interests: interests) { [weak self] _, error in
                 self?.advanceOrShowError(nil, error)
@@ -356,9 +355,6 @@ private extension SmallTalkViewController {
             break
         }
     }
-
-
-
 
 }
 

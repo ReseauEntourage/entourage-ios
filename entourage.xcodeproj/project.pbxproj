@@ -543,7 +543,7 @@
 		26C1BB682A3AF13F00C81C09 /* WelcomeFourImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C1BB672A3AF13F00C81C09 /* WelcomeFourImageCell.xib */; };
 		26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */; };
 		26C2C9012DDB2CE300C8F320 /* SmallTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */; };
-		26C2C9032DDC715400C8F320 /* SmallTalkSerchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9022DDC715400C8F320 /* SmallTalkSerchingViewController.swift */; };
+		26C2C9032DDC715400C8F320 /* SmallTalkSearchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9022DDC715400C8F320 /* SmallTalkSearchingViewController.swift */; };
 		26C2C9082DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */; };
 		26C2C90C2DDCA3EF00C8F320 /* UserProfilCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */; };
 		26C2C90E2DDCA40300C8F320 /* UserProfilCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */; };
@@ -1142,7 +1142,7 @@
 		26C1BB672A3AF13F00C81C09 /* WelcomeFourImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFourImageCell.xib; sourceTree = "<group>"; };
 		26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeDemandExampleCell.swift; sourceTree = "<group>"; };
 		26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkViewController.swift; sourceTree = "<group>"; };
-		26C2C9022DDC715400C8F320 /* SmallTalkSerchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkSerchingViewController.swift; sourceTree = "<group>"; };
+		26C2C9022DDC715400C8F320 /* SmallTalkSearchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkSearchingViewController.swift; sourceTree = "<group>"; };
 		26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkGroupFoundViewController.swift; sourceTree = "<group>"; };
 		26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilCell.swift; sourceTree = "<group>"; };
 		26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfilCell.xib; sourceTree = "<group>"; };
@@ -2313,7 +2313,7 @@
 				268ADBC42DD3684000031C6F /* SmallTalkIntro.swift */,
 				268ADBC62DD36FF900031C6F /* cellSmallTalkIntro */,
 				26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */,
-				26C2C9022DDC715400C8F320 /* SmallTalkSerchingViewController.swift */,
+				26C2C9022DDC715400C8F320 /* SmallTalkSearchingViewController.swift */,
 				26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */,
 				26C2C9172DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift */,
 				26C2C9192DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift */,
@@ -3000,7 +3000,7 @@
 				2619E1432A261C93000BD574 /* WelcomeTwoViewController.swift in Sources */,
 				26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */,
 				264446D22AA1E05B00EA2EED /* ActionPassedOneContrib.swift in Sources */,
-				26C2C9032DDC715400C8F320 /* SmallTalkSerchingViewController.swift in Sources */,
+				26C2C9032DDC715400C8F320 /* SmallTalkSearchingViewController.swift in Sources */,
 				26AD119F2AEFE30E00FA7BEC /* LangValidateButton.swift in Sources */,
 				02E0EFA328787082009B2C65 /* EventDetailTopFullCell.swift in Sources */,
 				02A92C222897E68B000DFF95 /* ActionCreatePhase1ViewController.swift in Sources */,

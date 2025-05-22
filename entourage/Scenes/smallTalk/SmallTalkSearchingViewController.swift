@@ -9,7 +9,6 @@ class SmallTalkSearchingViewController: UIViewController {
     @IBOutlet weak var lottie_container: UIView!
     @IBOutlet weak var ui_defiling_label: UILabel!
 
-
     // Variables
     private var animationView: LottieAnimationView?
     private var steps: [String] = []
@@ -21,12 +20,15 @@ class SmallTalkSearchingViewController: UIViewController {
     private var matchResponseReceived = false
     private var animationPlayedOnce = false
     private var allStepsShown = false
+    private var userRequest: UserSmallTalkRequest?
 
     // MARK: - Configuration externe
-    func configure(with id: String) {
-        self.smallTalkRequestId = id
+    func configure(with request: UserSmallTalkRequest) {
+        self.userRequest = request
+        self.smallTalkRequestId = request.uuid_v2
     }
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,6 +55,7 @@ class SmallTalkSearchingViewController: UIViewController {
         callMatchRequestIfNeeded()
     }
 
+    // MARK: - Animations & Loop
     private func startTextLoop() {
         timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
@@ -61,14 +64,13 @@ class SmallTalkSearchingViewController: UIViewController {
             if self.currentStepIndex >= self.steps.count {
                 self.allStepsShown = true
                 self.timer?.invalidate()
+                self.checkAndProceed() // ✅ appel ajouté ici
             }
 
             let nextText = self.steps[self.currentStepIndex % self.steps.count]
             UIView.transition(with: self.ui_defiling_label, duration: 0.3, options: .transitionCrossDissolve, animations: {
                 self.ui_defiling_label.text = nextText
             }, completion: nil)
-
-            self.checkAndProceed()
         }
     }
 
@@ -79,16 +81,15 @@ class SmallTalkSearchingViewController: UIViewController {
             animationView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             animationView.contentMode = .scaleAspectFit
             animationView.loopMode = .loop
+            animationView.play()
 
-            animationView.play { [weak self] _ in
-                self?.animationPlayedOnce = true
-                self?.checkAndProceed()
-            }
-
+            self.animationPlayedOnce = true // ✅ déclenché immédiatement après lancement
+            self.checkAndProceed()
             lottie_container.addSubview(animationView)
         }
     }
 
+    // MARK: - Appel Réseau
     private func callMatchRequestIfNeeded() {
         guard let id = smallTalkRequestId else { return }
 
@@ -101,26 +102,49 @@ class SmallTalkSearchingViewController: UIViewController {
                 self.checkAndProceed()
             } else {
                 print("Erreur réseau matchRequest : \(error?.message ?? "inconnue")")
-                // TODO: Ajouter gestion erreur (alerte, retry...)
+                // TODO: Ajouter gestion erreur (alerte, retry…)
             }
         }
     }
 
+    // MARK: - Synchronisation finale
     private func checkAndProceed() {
         guard animationPlayedOnce, allStepsShown, matchResponseReceived else { return }
 
-        // 🔁 Stop animations
         animationView?.stop()
         timer?.invalidate()
 
-        // ✅ Transition vers l’étape suivante
-        if let response = matchResponse {
-//            let nextVC = SmallTalkGroupFoundViewController() // Remplace par ton VC réel
-//            nextVC.configure(with: response)
-//            self.navigationController?.pushViewController(nextVC, animated: true)
+        guard let response = matchResponse else { return }
+
+        let sb = UIStoryboard(name: "SmallTalk", bundle: nil)
+
+        if response.match {
+            if let nextVC = sb.instantiateViewController(withIdentifier: "SmallTalkGroupFoundViewController") as? SmallTalkGroupFoundViewController {
+                nextVC.configure(with: response)
+                nextVC.modalPresentationStyle = .fullScreen
+                self.present(nextVC, animated: true)
+            }
+        } else {
+            if let nextVC = sb.instantiateViewController(withIdentifier: "SmallTalkAlmostMatchingViewController") as? SmallTalkAlmostMatchingViewController,
+               let userRequest = self.userRequest {
+
+                let group = userRequest.match_format ?? "one"
+                let gender = userRequest.match_gender ?? false
+                let locality = userRequest.match_locality ?? false
+
+                nextVC.configure(
+                    with: userRequest.uuid_v2 ?? "",
+                    group: group,
+                    gender: gender,
+                    locality: locality
+                )
+                nextVC.modalPresentationStyle = .fullScreen
+                self.present(nextVC, animated: true)
+            }
         }
     }
 
+    // MARK: - Cleanup
     deinit {
         timer?.invalidate()
     }

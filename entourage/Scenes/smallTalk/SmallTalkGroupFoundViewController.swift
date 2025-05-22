@@ -23,7 +23,8 @@ class SmallTalkGroupFoundViewController: UIViewController {
         configureCollectionView()
         configurePageControl()
 
-        SmallTalkService.getSmallTalk(id: "\(smallTalkId)") { smallTalk, _ in
+       // SmallTalkService.getSmallTalk(id: "\(smallTalkId)") { smallTalk, _ in
+        SmallTalkService.getSmallTalk(id: "22") { smallTalk, _ in
             guard let currentUserId = UserDefaults.currentUser?.sid,
                   let members = smallTalk?.members else { return }
             self.users = members
@@ -43,6 +44,12 @@ class SmallTalkGroupFoundViewController: UIViewController {
         }
 
         buttonStart.addTarget(self, action: #selector(startTapped), for: .touchUpInside)
+    }
+    
+    func configure(with response: SmallTalkMatchResponse) {
+        if let id = response.smalltalk_id {
+            self.smallTalkId = id
+        }
     }
 
     private func configureCollectionView() {
