@@ -9,6 +9,7 @@ class EnhancedFullSizeCell: UITableViewCell {
     @IBOutlet weak var ui_title_choice_label: UILabel!
     @IBOutlet weak var ui_label_title_phase_3: UILabel!
     
+    @IBOutlet weak var ui_constraint_image_width: NSLayoutConstraint!
     @IBOutlet weak var ui_contraintbottom: NSLayoutConstraint!
     @IBOutlet weak var ui_view_container: UIView!
     @IBOutlet weak var ui_label_desc_phase_3: UILabel!
@@ -30,6 +31,11 @@ class EnhancedFullSizeCell: UITableViewCell {
     func configure(choice: OnboardingChoice, isSelected: Bool) {
         self.ui_title_choice_label.text = choice.title
         self.ui_image_choice.image = UIImage(named: choice.img)
+        if choice.img == "" {
+            self.ui_constraint_image_width.constant = 0
+        }else{
+            self.ui_constraint_image_width.constant = 60
+        }
         
         if choice.title == "Proposition de services" {
             self.ui_contraintbottom.constant = 45

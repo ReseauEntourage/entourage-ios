@@ -38,6 +38,7 @@ struct User: Codable {
     var involvements:[String]? = nil
     var concerns:[String]? = nil
     var unreadCount:Int = 0
+    var gender:String? = ""
     var permissions:UserPermissions? = UserPermissions()
     
     var birthday:String? = nil
@@ -94,6 +95,7 @@ struct User: Codable {
         case availability
         case organization
         case partner
+        case gender = "gender"
         //case conversation
         case roles
         case memberships

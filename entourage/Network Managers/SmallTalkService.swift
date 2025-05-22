@@ -24,20 +24,35 @@ struct SmallTalkService: ParsingDataCodable {
     // MARK: - Créer une requête SmallTalk
     static func createUserSmallTalkRequest(completion: @escaping (UserSmallTalkRequest?, EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
-        let endpoint = String(format: kAPIUserSmallTalkRequests + "?token=%@", token)
+        let endpoint = "\(kAPIUserSmallTalkRequests)?token=\(token)"
 
-        let body = ["user_smalltalk": [:]]
-        let bodyData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        let payload = UserSmallTalkFields(
+            match_format: "many",
+            match_locality: false,
+            match_gender: false,
+            user_gender: "male"
+        )
+
+        let wrapper = UserSmallTalkRequestWrapper(user_smalltalk: payload)
+
+        guard let bodyData = try? JSONEncoder().encode(wrapper) else {
+            print("❌ Erreur encodage JSON")
+            return
+        }
+
+        print("📦 Payload JSON : \(String(data: bodyData, encoding: .utf8) ?? "-")")
 
         NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { data, _, error in
             guard let data = data, error == nil else {
                 completion(nil, error)
                 return
             }
+
             let request: UserSmallTalkRequest? = self.parseData(data: data, key: "user_smalltalk")
             completion(request, nil)
         }
     }
+
 
     // MARK: - Mettre à jour une requête SmallTalk
     static func updateUserSmallTalkRequest(id: String, updates: [String: Any], completion: @escaping (UserSmallTalkRequest?, EntourageNetworkError?) -> Void) {

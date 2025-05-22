@@ -544,7 +544,6 @@
 		26C1BB6A2A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */; };
 		26C2C9012DDB2CE300C8F320 /* SmallTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */; };
 		26C2C9032DDC715400C8F320 /* SmallTalkSerchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9022DDC715400C8F320 /* SmallTalkSerchingViewController.swift */; };
-		26C2C9052DDC764000C8F320 /* puzzle_mount.json in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C9042DDC764000C8F320 /* puzzle_mount.json */; };
 		26C2C9082DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */; };
 		26C2C90C2DDCA3EF00C8F320 /* UserProfilCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */; };
 		26C2C90E2DDCA40300C8F320 /* UserProfilCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */; };
@@ -554,6 +553,7 @@
 		26C2C9162DDDED6A00C8F320 /* CellAlmostMatching.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C9152DDDED6A00C8F320 /* CellAlmostMatching.xib */; };
 		26C2C9182DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9172DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift */; };
 		26C2C91A2DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9192DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift */; };
+		26C2C91C2DDF21D100C8F320 /* puzzle_mount.json in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C91B2DDF21D100C8F320 /* puzzle_mount.json */; };
 		26C70B402B2B46B1005C8846 /* NeighborhoodV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */; };
 		26C70B422B2B5D6F005C8846 /* CellGroupV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */; };
 		26CBF27A2DA6BECC004829E7 /* OnboardingPhase3Asso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CBF2792DA6BECC004829E7 /* OnboardingPhase3Asso.swift */; };
@@ -1143,7 +1143,6 @@
 		26C1BB692A3B3C6400C81C09 /* WelcomeThreeDemandExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeDemandExampleCell.swift; sourceTree = "<group>"; };
 		26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkViewController.swift; sourceTree = "<group>"; };
 		26C2C9022DDC715400C8F320 /* SmallTalkSerchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkSerchingViewController.swift; sourceTree = "<group>"; };
-		26C2C9042DDC764000C8F320 /* puzzle_mount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = puzzle_mount.json; sourceTree = "<group>"; };
 		26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkGroupFoundViewController.swift; sourceTree = "<group>"; };
 		26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilCell.swift; sourceTree = "<group>"; };
 		26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfilCell.xib; sourceTree = "<group>"; };
@@ -1153,6 +1152,7 @@
 		26C2C9152DDDED6A00C8F320 /* CellAlmostMatching.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellAlmostMatching.xib; sourceTree = "<group>"; };
 		26C2C9172DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkAlmostMatchingViewController.swift; sourceTree = "<group>"; };
 		26C2C9192DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkNoBandFoundViewController.swift; sourceTree = "<group>"; };
+		26C2C91B2DDF21D100C8F320 /* puzzle_mount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = puzzle_mount.json; sourceTree = "<group>"; };
 		26C70B3F2B2B46B1005C8846 /* NeighborhoodV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodV2ViewController.swift; sourceTree = "<group>"; };
 		26C70B412B2B5D6F005C8846 /* CellGroupV2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellGroupV2.xib; sourceTree = "<group>"; };
 		26CBF2792DA6BECC004829E7 /* OnboardingPhase3Asso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPhase3Asso.swift; sourceTree = "<group>"; };
@@ -1523,7 +1523,6 @@
 		025D876C278DF44800909101 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				26C2C9042DDC764000C8F320 /* puzzle_mount.json */,
 				26BEEED02C06180D00169FBA /* congrats_animation.json */,
 				2636B9632A7BA199007EE1B2 /* anim_rugby.json */,
 				265565F12A3C9DB700CEFB3D /* explosion.json */,
@@ -1542,6 +1541,7 @@
 				2619CCE72AE948AB00276D67 /* Localizable.strings */,
 				26584C472ACC418000ABD401 /* HomeV2.xcassets */,
 				268ADBCE2DD3757700031C6F /* SmallTalk.xcassets */,
+				26C2C91B2DDF21D100C8F320 /* puzzle_mount.json */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -2717,6 +2717,7 @@
 				02CCE67427D78C7100D6976C /* Montserrat-Bold.ttf in Resources */,
 				26BB4D4F2CCFC23F00A8ACF7 /* CreateAction4HeaderCell.xib in Resources */,
 				02CCE67E27D78CAB00D6976C /* NunitoSans-Regular.ttf in Resources */,
+				26C2C91C2DDF21D100C8F320 /* puzzle_mount.json in Resources */,
 				26A8DE0D2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib in Resources */,
 				029BD4F727EDC45E00AE67AF /* MJNavBackView.xib in Resources */,
 				2630F6332C2472D9007BAE56 /* MainFilterTagCell.xib in Resources */,
@@ -2804,7 +2805,6 @@
 				02CCE67D27D78CAB00D6976C /* NunitoSans-Bold.ttf in Resources */,
 				26D13E242BA35F3A00CAD4F7 /* QuestionCell.xib in Resources */,
 				02F5FEC527E0CB6800A14313 /* MJAlertController.xib in Resources */,
-				26C2C9052DDC764000C8F320 /* puzzle_mount.json in Resources */,
 				02F527782799990F00929431 /* GuideSolidarity.storyboard in Resources */,
 				2649A4BA2D7F963E00FD100E /* DiscussionEventCell.xib in Resources */,
 				26BB4D532CCFC25900A8ACF7 /* CreateAction4ChoiceCell.xib in Resources */,

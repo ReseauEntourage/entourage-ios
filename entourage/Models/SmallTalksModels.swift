@@ -23,6 +23,17 @@ struct UserSmallTalkRequest: Codable {
     let smalltalk: SmallTalk?
 }
 
+struct UserSmallTalkRequestWrapper: Codable {
+    let user_smalltalk: UserSmallTalkFields
+}
+
+struct UserSmallTalkFields: Codable {
+    let match_format: String?
+    let match_locality: Bool?
+    let match_gender: Bool?
+    let user_gender: String?
+}
+
 struct UserProfile: Codable {
     let id: Int
     let display_name: String

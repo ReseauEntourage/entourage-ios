@@ -93,6 +93,11 @@
                             <constraint firstItem="yFg-Oy-05T" firstAttribute="leading" secondItem="QHa-aw-m1i" secondAttribute="trailing" constant="50" id="sMa-uE-5xH"/>
                             <constraint firstItem="TxM-u6-HcV" firstAttribute="leading" secondItem="h8f-uG-J5Y" secondAttribute="trailing" constant="-10" id="u5o-cQ-9VN"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>

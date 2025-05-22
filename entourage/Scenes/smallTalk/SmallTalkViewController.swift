@@ -52,16 +52,29 @@ final class SmallTalkViewController: UIViewController {
     // MARK: Life-cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureSteps()
+
+        // Pré-remplir les intérêts de l'utilisateur pour l'étape 5
+        if let interests = UserDefaults.currentUser?.interests, !interests.isEmpty {
+            selectedIdsByStep[4] = Set(interests)
+        }
+
         configureTable()
         configureOrangeButton(ui_btn_next, withTitle: "action_create_group_bt_next".localized)
         configureOrangeButton(ui_btn_previous, withTitle: "previous".localized)
         rebuildRows(animated: false)
+        
+        ui_titleLabel.setFontTitle(size: 18)
+        ui_subtitleLabel.setFontBody(size: 15)
+        
         ui_btn_next.addTarget(self, action: #selector(goToNext), for: .touchUpInside)
         ui_btn_previous.addTarget(self, action: #selector(goToPrevious), for: .touchUpInside)
-        ui_progress.progressTintColor = UIColor(red: 0.67, green: 0.87, blue: 0.64, alpha: 1.0) // couleur proche de #ACDFA3
+        
+        ui_progress.progressTintColor = UIColor(red: 0.67, green: 0.87, blue: 0.64, alpha: 1.0) // proche de #ACDFA3
         ui_progress.trackTintColor = UIColor(white: 0.9, alpha: 1.0)
     }
+
     
     func configure(with request: UserSmallTalkRequest) {
         self.userRequest = request
@@ -84,7 +97,7 @@ private extension SmallTalkViewController {
                     SmallTalkChoice(id: "group",
                                     title: NSLocalizedString("small_talk_step1_item2_title", comment: ""),
                                     subtitle: NSLocalizedString("small_talk_step1_item2_subtitle", comment: ""),
-                                    imageName: "ic_group")
+                                    imageName: "ic_quator")
                 ],
                 allowsMultipleSelection: false),
 
@@ -96,11 +109,11 @@ private extension SmallTalkViewController {
                     SmallTalkChoice(id: "local",
                                     title: NSLocalizedString("small_talk_step2_item1_title", comment: ""),
                                     subtitle: NSLocalizedString("small_talk_step2_item1_subtitle", comment: ""),
-                                    imageName: "ic_pin"),
+                                    imageName: "ic_local"),
                     SmallTalkChoice(id: "france",
                                     title: NSLocalizedString("small_talk_step2_item2_title", comment: ""),
                                     subtitle: NSLocalizedString("small_talk_step2_item2_subtitle", comment: ""),
-                                    imageName: "ic_map")
+                                    imageName: "ic_global")
                 ],
                 allowsMultipleSelection: false),
 
@@ -109,20 +122,21 @@ private extension SmallTalkViewController {
                 title: NSLocalizedString("small_talk_step_title_3", comment: ""),
                 subtitle: NSLocalizedString("small_talk_step_subtitle_3", comment: ""),
                 choices: [
-                    SmallTalkChoice(id: "man",
+                    SmallTalkChoice(id: "male", // ⬅️ adapté au backend
                                     title: NSLocalizedString("small_talk_step3_item1_title", comment: ""),
                                     subtitle: nil,
-                                    imageName: "ic_male"),
-                    SmallTalkChoice(id: "woman",
+                                    imageName: ""),
+                    SmallTalkChoice(id: "female",
                                     title: NSLocalizedString("small_talk_step3_item2_title", comment: ""),
                                     subtitle: nil,
-                                    imageName: "ic_female"),
-                    SmallTalkChoice(id: "nonbinary",
+                                    imageName: ""),
+                    SmallTalkChoice(id: "non_binary",
                                     title: NSLocalizedString("small_talk_step3_item3_title", comment: ""),
                                     subtitle: nil,
-                                    imageName: "ic_nb")
+                                    imageName: "")
                 ],
                 allowsMultipleSelection: false),
+
 
             // Étape 4 : Confort
             SmallTalkStep(
@@ -132,18 +146,18 @@ private extension SmallTalkViewController {
                     SmallTalkChoice(id: "all",
                                     title: NSLocalizedString("small_talk_step4_item1_title", comment: ""),
                                     subtitle: NSLocalizedString("small_talk_step4_item1_subtitle", comment: ""),
-                                    imageName: "ic_any"),
+                                    imageName: ""),
                     SmallTalkChoice(id: "same",
                                     title: NSLocalizedString("small_talk_step4_item2_title", comment: ""),
                                     subtitle: NSLocalizedString("small_talk_step4_item2_subtitle", comment: ""),
-                                    imageName: "ic_same")
+                                    imageName: "")
                 ],
                 allowsMultipleSelection: false),
 
             // Étape 5 : Intérêts
             SmallTalkStep(
-                title: NSLocalizedString("interests_title", comment: ""),
-                subtitle: NSLocalizedString("interests_subtitle", comment: ""),
+                title: NSLocalizedString("small_talk_step_interest_title", comment: ""),
+                subtitle: NSLocalizedString("small_talk_step_interest_subtitle", comment: ""),
                 choices: loadInterests(),
                 allowsMultipleSelection: true)
         ]
@@ -243,7 +257,19 @@ private extension SmallTalkViewController {
             let isLast = self.currentStepIndex == self.steps.count - 1
             if isLast {
                 print("🎯 Fin du flow")
-                // TODO: transition vers écran suivant
+                let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+                if let navVC = sb.instantiateViewController(withIdentifier: "editProfilePhotoNav") as? UINavigationController,
+                   let editPhotoVC = navVC.topViewController as? UserPhotoAddViewController {
+
+                    // Passer la request à la vue suivante si nécessaire
+                    editPhotoVC.pictureSettingDelegate = self as? ImageReUpLoadDelegate // Optionnel si tu veux faire quelque chose avec ça
+
+                    // Tu peux aussi lui passer une propriété si besoin comme :
+                    // editPhotoVC.userRequest = self.userRequest
+
+                    self.present(navVC, animated: true)
+                }
+                return
             } else {
                 self.currentStepIndex += 1
                 self.rebuildRows(animated: true)
@@ -306,10 +332,10 @@ private extension SmallTalkViewController {
             }
 
         case 2:
-            // Étape 3 : Genre utilisateur → à stocker côté profil (pas dans la request SmallTalk)
+            // Étape 3 : Genre utilisateur → à stocker côté profil (dans le champ `gender`)
             if let gender = selected.first {
                 var updatedUser = UserDefaults.currentUser
-                updatedUser?.about = gender // remplace par `gender = gender` si ton modèle le permet
+                updatedUser?.gender = gender // ✅ Remplace l'ancien `about = gender`
                 UserService.updateUser(user: updatedUser) { [weak self] _, error in
                     self?.advanceOrShowError(nil, error)
                 }

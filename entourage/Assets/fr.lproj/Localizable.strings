@@ -1786,6 +1786,11 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "small_talk_step4_item2_title" = "Avec des personnes du même genre";
 "small_talk_step4_item2_subtitle" = "Je préfère échanger avec des personnes qui partagent le même genre que moi";
 
+/* Step 4: interest */
+"small_talk_step_interest_title" = "Quels sont vos centres d'intérêts";
+"small_talk_step_interest_subtitle" = "Sélectionnez les sujets qui vous passionnent pour trouver des personnes qui partagent vos goûts.";
+
+
 /* small talk searching activity */
 "small_talk_searching_title" = "On te trouve une bande qui te correspond";
 "small_talk_searching_intro" = "On vous prépare une belle rencontre… juste le temps de trouver les bons partenaires. Encore un petit instant, ça arrive !";

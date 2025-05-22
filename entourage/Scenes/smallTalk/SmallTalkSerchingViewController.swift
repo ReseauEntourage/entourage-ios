@@ -9,6 +9,7 @@ class SmallTalkSearchingViewController: UIViewController {
     @IBOutlet weak var lottie_container: UIView!
     @IBOutlet weak var ui_defiling_label: UILabel!
 
+
     // Variables
     private var animationView: LottieAnimationView?
     private var steps: [String] = []

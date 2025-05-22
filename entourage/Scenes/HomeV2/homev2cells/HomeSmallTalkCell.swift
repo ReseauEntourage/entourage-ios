@@ -91,6 +91,41 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
                 // 👉 Toujours présenter en plein écran, pas de push
                 vc.modalPresentationStyle = .fullScreen
                 parentViewController?.present(vc, animated: true)
+                
+            case .waiting:
+                let alert = UIAlertController(
+                    title: "Annuler la demande ?",
+                    message: "Souhaitez-vous supprimer votre demande SmallTalk en attente ?",
+                    preferredStyle: .alert
+                )
+
+                alert.addAction(UIAlertAction(title: "Annuler", style: .cancel))
+
+                alert.addAction(UIAlertAction(title: "Supprimer", style: .destructive, handler: { [weak self] _ in
+                    SmallTalkService.deleteRequest { success in
+                        DispatchQueue.main.async {
+                            if success {
+                                // Optionnel : mettre à jour l’UI immédiatement
+                                self?.data.removeAll(where: {
+                                    if case .waiting = $0 { return true }
+                                    return false
+                                })
+                                self?.ui_collection_view.reloadData()
+                            } else {
+                                let errorAlert = UIAlertController(
+                                    title: "Erreur",
+                                    message: "Impossible de supprimer la demande.",
+                                    preferredStyle: .alert
+                                )
+                                errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                                self?.parentViewController?.present(errorAlert, animated: true)
+                            }
+                        }
+                    }
+                }))
+
+                parentViewController?.present(alert, animated: true)
+                return
 
             default:
                 break // Les autres types ne déclenchent rien ici

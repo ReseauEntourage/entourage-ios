@@ -198,7 +198,7 @@
         <!--Small Talk Serching View Controller-->
         <scene sceneID="Ewp-DC-APy">
             <objects>
-                <viewController id="2rQ-IQ-x24" customClass="SmallTalkSerchingViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SmallTalkSearchingViewController" id="2rQ-IQ-x24" customClass="SmallTalkSerchingViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MgV-Q7-ZKn">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,7 +260,7 @@
         <!--Small Talk Group Found View Controller-->
         <scene sceneID="HiU-sQ-RMX">
             <objects>
-                <viewController id="Yd7-Hi-0zX" customClass="SmallTalkGroupFoundViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SmallTalkGroupFoundViewController" id="Yd7-Hi-0zX" customClass="SmallTalkGroupFoundViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VsT-Na-lrz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

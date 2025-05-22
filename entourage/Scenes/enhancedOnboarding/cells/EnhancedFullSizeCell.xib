@@ -91,6 +91,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ui_constraint_image_width" destination="vQB-OW-nLE" id="tqa-eg-yCA"/>
                 <outlet property="ui_contraintbottom" destination="csn-uO-IDc" id="7Sx-SY-c2v"/>
                 <outlet property="ui_image_check" destination="00x-2v-FDT" id="PA1-sr-pPY"/>
                 <outlet property="ui_image_choice" destination="GO2-Kg-zWW" id="tGN-wB-6KV"/>
