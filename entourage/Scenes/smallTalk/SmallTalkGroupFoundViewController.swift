@@ -22,12 +22,14 @@ class SmallTalkGroupFoundViewController: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         configurePageControl()
-
+        ui_label_title.setFontTitle(size: 20)
+        ui_label_subtitle.setFontBody(size: 15)
        // SmallTalkService.getSmallTalk(id: "\(smallTalkId)") { smallTalk, _ in
-        SmallTalkService.getSmallTalk(id: "22") { smallTalk, _ in
+        SmallTalkService.getSmallTalk(id: "28") { smallTalk, _ in
             guard let currentUserId = UserDefaults.currentUser?.sid,
                   let members = smallTalk?.members else { return }
-            self.users = members
+
+            let filteredMembers = members
                 .filter { $0.id != currentUserId }
                 .map { profile in
                     var user = User()
@@ -37,8 +39,13 @@ class SmallTalkGroupFoundViewController: UIViewController {
                     user.roles = profile.community_roles
                     return user
                 }
+
+            self.users = filteredMembers + filteredMembers + filteredMembers
+
             DispatchQueue.main.async {
                 self.pageControl.numberOfPages = self.users.count
+                self.ui_label_title.text = "small_talk_group_found_title".localized
+                self.ui_label_subtitle.text = "small_talk_group_found_subtitle".localized
                 self.collectionView.reloadData()
             }
         }
@@ -110,7 +117,7 @@ class ZoomFlowLayout: UICollectionViewFlowLayout {
         super.init()
         scrollDirection = .horizontal
         minimumLineSpacing = 20
-        itemSize = CGSize(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.55)
+        itemSize = CGSize(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.75)
         sectionInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
     }
 

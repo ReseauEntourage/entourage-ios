@@ -4,7 +4,7 @@ class UserProfileCell: UICollectionViewCell {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var interestsCollectionView: UICollectionView!
-
+    @IBOutlet weak var heightCollectionView: NSLayoutConstraint!
     private var interests: [String] = []
 
     override func awakeFromNib() {
@@ -14,7 +14,7 @@ class UserProfileCell: UICollectionViewCell {
         layout.estimatedItemSize = CGSize(width: 100, height: 30)
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
-
+        nameLabel.setFontTitle(size: 24)
         interestsCollectionView.collectionViewLayout = layout
         interestsCollectionView.delegate = self
         interestsCollectionView.dataSource = self

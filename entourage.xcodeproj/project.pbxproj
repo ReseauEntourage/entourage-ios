@@ -545,8 +545,8 @@
 		26C2C9012DDB2CE300C8F320 /* SmallTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */; };
 		26C2C9032DDC715400C8F320 /* SmallTalkSearchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9022DDC715400C8F320 /* SmallTalkSearchingViewController.swift */; };
 		26C2C9082DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */; };
-		26C2C90C2DDCA3EF00C8F320 /* UserProfilCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */; };
-		26C2C90E2DDCA40300C8F320 /* UserProfilCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */; };
+		26C2C90C2DDCA3EF00C8F320 /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C90B2DDCA3EF00C8F320 /* UserProfileCell.swift */; };
+		26C2C90E2DDCA40300C8F320 /* UserProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C2C90D2DDCA40300C8F320 /* UserProfileCell.xib */; };
 		26C2C9102DDCD30F00C8F320 /* SmallTalkInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C90F2DDCD30F00C8F320 /* SmallTalkInterestCell.swift */; };
 		26C2C9122DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9112DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		26C2C9142DDDEBBB00C8F320 /* CellAlmostMatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2C9132DDDEBBB00C8F320 /* CellAlmostMatching.swift */; };
@@ -1144,8 +1144,8 @@
 		26C2C9002DDB2CE300C8F320 /* SmallTalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkViewController.swift; sourceTree = "<group>"; };
 		26C2C9022DDC715400C8F320 /* SmallTalkSearchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkSearchingViewController.swift; sourceTree = "<group>"; };
 		26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkGroupFoundViewController.swift; sourceTree = "<group>"; };
-		26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilCell.swift; sourceTree = "<group>"; };
-		26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfilCell.xib; sourceTree = "<group>"; };
+		26C2C90B2DDCA3EF00C8F320 /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
+		26C2C90D2DDCA40300C8F320 /* UserProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileCell.xib; sourceTree = "<group>"; };
 		26C2C90F2DDCD30F00C8F320 /* SmallTalkInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkInterestCell.swift; sourceTree = "<group>"; };
 		26C2C9112DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		26C2C9132DDDEBBB00C8F320 /* CellAlmostMatching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellAlmostMatching.swift; sourceTree = "<group>"; };
@@ -2469,8 +2469,8 @@
 		26C2C9062DDC9F1600C8F320 /* cellSmallTalkGroupFound */ = {
 			isa = PBXGroup;
 			children = (
-				26C2C90B2DDCA3EF00C8F320 /* UserProfilCell.swift */,
-				26C2C90D2DDCA40300C8F320 /* UserProfilCell.xib */,
+				26C2C90B2DDCA3EF00C8F320 /* UserProfileCell.swift */,
+				26C2C90D2DDCA40300C8F320 /* UserProfileCell.xib */,
 				26C2C90F2DDCD30F00C8F320 /* SmallTalkInterestCell.swift */,
 				26C2C9112DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift */,
 			);
@@ -2711,7 +2711,7 @@
 				02C91A25278F2B4F00305E0B /* Intro.storyboard in Resources */,
 				025C92BC28340F7D000970D9 /* NeighborhoodDetailTopCell.xib in Resources */,
 				2674FEC52ACDA5F00013D674 /* HomeNeedHelpCell.xib in Resources */,
-				26C2C90E2DDCA40300C8F320 /* UserProfilCell.xib in Resources */,
+				26C2C90E2DDCA40300C8F320 /* UserProfileCell.xib in Resources */,
 				02FB5449287DC11100E4B9FA /* EventDetailFullGroupCell.xib in Resources */,
 				26AD119D2AEBF42B00FA7BEC /* LanguageCell.xib in Resources */,
 				02CCE67427D78C7100D6976C /* Montserrat-Bold.ttf in Resources */,
@@ -2971,7 +2971,7 @@
 				26AD11982AEA688800FA7BEC /* ProfileTranslationViewController.swift in Sources */,
 				0224597827FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift in Sources */,
 				26D13E202BA35EE900CAD4F7 /* OptionCell.swift in Sources */,
-				26C2C90C2DDCA3EF00C8F320 /* UserProfilCell.swift in Sources */,
+				26C2C90C2DDCA3EF00C8F320 /* UserProfileCell.swift in Sources */,
 				268ADBBE2DD1D80100031C6F /* SmallTalksModels.swift in Sources */,
 				02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */,
 				2674FEB92ACD96BE0013D674 /* HomeGroupHorizontalCollectionCell.swift in Sources */,

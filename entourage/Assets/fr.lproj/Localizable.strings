@@ -1821,8 +1821,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 /* small talk found band activity */
 "small_talk_group_found_name_default" = "Marie";
 "small_talk_group_found_button" = "Discuter";
-"small_talk_group_found_title" = "Nous vous avons trouvé une bande !";
-"small_talk_group_found_subtitle" = "Découvrez les personnes de votre bande";
+"small_talk_group_found_title" = "Vous êtes sur la même longueur d’onde ! ";
+"small_talk_group_found_subtitle" = "Découvrez les personnes de votre groupe.";
 
 /* small talk home activity */
 "home_v2_title_small_talk" = "Discuter simplement";
