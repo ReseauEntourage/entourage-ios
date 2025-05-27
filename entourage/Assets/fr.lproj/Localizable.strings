@@ -1749,7 +1749,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_title" = "Prêts à partager des Bonnes ondes ?";
 "onboarding_start_button" = "Je commence";
 "onboarding_end_button" = "Annuler";
-"onboarding_intro_html" = "<p>Avec les <b>Bonnes ondes</b>, rencontrez des personnes qui vous ressemblent, échangez en toute simplicité et créez des liens qui font du bien !</p><p>1. Vous répondez à quelques questions : pour mieux vous connaître</p><p>2. On vous met en relation avec des personnes : qui vous correspondent</p><p>3. Une conversation de groupe se crée automatiquement dans l'application : pour échanger et tisser des liens</p><p>4. Si vous le souhaitez, vous choisissez un moment pour vous rencontrer : en visio ou dans la vraie vie, c'est vous qui voyez !</p>";
+"onboarding_intro_html" = "<p>Avec les <b>Bonnes ondes</b>, rencontrez des personnes qui vous ressemblent, échangez en toute simplicité et créez des liens qui font du bien !</p><p>1. Vous répondez à quelques questions pour mieux vous connaître</p><p>2. On vous met en relation avec des personnes qui vous correspondent</p><p>3. Une conversation de groupe se crée automatiquement dans l’application pour échanger et tisser des liens</p><p>4. Si vous le souhaitez, vous choisissez un moment pour vous rencontrer : en visio ou dans la vraie vie, c’est vous qui voyez !</p>";
 
 /* Step 1: Format de discussion */
 "small_talk_step_title_1" = "Quel format de discussion vous convient le mieux ?";
@@ -1758,7 +1758,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "small_talk_step1_item1_subtitle" = "Pour un échange privilégié entre deux personnes";
 "small_talk_step1_item2_title" = "En petit groupe";
 "small_talk_step1_item2_subtitle" = "Pour discuter à plusieurs, dans une ambiance conviviale";
-"smalltalk_intro_limit" = "Impossible de générer une nouvelle demande, veuillez quitter l'une de vos bandes";
+"smalltalk_intro_limit" = "Impossible de générer une nouvelle demande, veuillez quitter l’un de vos groupes";
 
 /* Step 2: Proximité */
 "small_talk_step_title_2" = "Avec qui aimeriez-vous échanger ?";
@@ -1766,7 +1766,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "small_talk_step2_item1_title" = "Des personnes proches de chez moi";
 "small_talk_step2_item1_subtitle" = "Pour des échanges locaux et des rencontres en vrai, près de chez vous";
 "small_talk_step2_item2_title" = "Des personnes de toute la France";
-"small_talk_step2_item2_subtitle" = "Pour échanger avec des profils variés, découvrir d'autres horizons";
+"small_talk_step2_item2_subtitle" = "Pour échanger avec des profils variés, découvrir d’autres horizons";
 
 /* Step 3: Genre */
 "small_talk_step_title_3" = "Quel genre vous correspond le mieux ?";
@@ -1784,13 +1784,13 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "small_talk_step4_item2_subtitle" = "Je préfère échanger avec des personnes qui partagent le même genre que moi";
 
 /* Step 5: Intérêts */
-"small_talk_step_interest_title" = "Quels sont vos centres d'intérêt ?";
+"small_talk_step_interest_title" = "Quels sont vos centres d’intérêt ?";
 "small_talk_step_interest_subtitle" = "Sélectionnez les sujets qui vous passionnent pour trouver des personnes qui partagent vos goûts.";
 
 /* Recherche de groupe */
 "small_talk_searching_title" = "Bonnes Ondes en cours de création !";
 "small_talk_searching_intro" = "Une belle rencontre se prépare… On trouve les bonnes personnes pour vous, encore un petit instant.";
-"small_talk_searching_step_1" = "D'abord, on regarde les personnes disponibles qui correspondent à vos critères...";
+"small_talk_searching_step_1" = "D’abord, on regarde les personnes disponibles qui correspondent à vos critères...";
 "small_talk_searching_step_2" = "Ensuite, on regarde qui partage vos centres d’intérêt...";
 "small_talk_searching_step_3" = "On prend en compte vos préférences pour former un groupe où chacun se sente bien...";
 "small_talk_searching_step_4" = "Et enfin, on s’assure que tout est prêt pour vous accueillir !";
