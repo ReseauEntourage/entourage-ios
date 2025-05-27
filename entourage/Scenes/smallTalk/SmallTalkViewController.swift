@@ -62,7 +62,7 @@ final class SmallTalkViewController: UIViewController {
 
         configureTable()
         configureOrangeButton(ui_btn_next, withTitle: "action_create_group_bt_next".localized)
-        configureOrangeButton(ui_btn_previous, withTitle: "previous".localized)
+        configureWhiteButton(ui_btn_previous, withTitle: "previous".localized)
         rebuildRows(animated: false)
         
         ui_titleLabel.setFontTitle(size: 18)
@@ -370,7 +370,9 @@ extension SmallTalkViewController: UITableViewDataSource, UITableViewDelegate {
         case let .fullSize(choice):
             let cell = tv.dequeueReusableCell(withIdentifier: "fullSizeCell", for: idx) as! EnhancedFullSizeCell
             let ob = OnboardingChoice(id: choice.id, img: choice.imageName, title: choice.title)
-            cell.configure(choice: ob, isSelected: isSelected(id: choice.id))
+            cell.configure(choice: ob,
+                           isSelected: isSelected(id: choice.id),
+                           subtitleProvider: { choice.subtitle })
             return cell
 
         case let .grid(choices):

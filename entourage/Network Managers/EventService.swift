@@ -679,14 +679,15 @@ struct EventService:ParsingDataCodable {
     }
 
     static func getSuggestedSmallTalkEvent(completion: @escaping (Event?) -> Void) {
-        let endpoint = "events/smalltalk?token=\(UserDefaults.token ?? "")"
+        let endpoint = "outings/smalltalk?token=\(UserDefaults.token ?? "")"
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, _ in
             guard let data = data else {
                 completion(nil)
                 return
             }
-            let event = try? JSONDecoder().decode(Event.self, from: data)
-            completion(event)
+
+            let wrapper = try? JSONDecoder().decode(OutingWrapper.self, from: data)
+            completion(wrapper?.outing)
         }
     }
 }

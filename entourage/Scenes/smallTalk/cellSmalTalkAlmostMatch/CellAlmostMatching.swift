@@ -1,10 +1,3 @@
-//
-//  CellAlmostMatching.swift
-//  entourage
-//
-//  Created by Clement entourage on 21/05/2025.
-//
-
 import UIKit
 import SDWebImage
 
@@ -16,12 +9,12 @@ class CellAlmostMatching: UITableViewCell {
     @IBOutlet weak var avatar3: UIImageView!
     @IBOutlet weak var avatar4: UIImageView!
     @IBOutlet weak var avatar5: UIImageView!
-    @IBOutlet weak var avatar6: UIImageView! // au cas où tu veuilles en ajouter un 6e
+    @IBOutlet weak var avatar6: UIImageView!
     @IBOutlet weak var ui_title_cell: UILabel!
     @IBOutlet weak var ui_list_name: UILabel!
     @IBOutlet weak var ui_btn_join: UIButton!
 
-    // MARK: - Variables
+    // MARK: - Callback
     var onJoinTapped: (() -> Void)?
 
     // MARK: - Lifecycle
@@ -32,31 +25,18 @@ class CellAlmostMatching: UITableViewCell {
     }
 
     // MARK: - Configure
-    func configure(with request: UserSmallTalkRequest,
-                   matchingLocality: Bool,
-                   matchingGender: Bool,
-                   matchingGroup: String) {
-
-        // Avatars à afficher
-        let avatarURLs: [String] = request.smalltalk?.members.compactMap { $0.avatar_url } ??
-            (request.user != nil ? [request.user!.avatar_url].compactMap { $0 } : [])
-
+    func configure(with request: UserSmallTalkRequestWithMatchData) {
+        // Avatars
+        let avatarURLs: [String] = request.users.compactMap { $0.avatar_url }
         renderAvatars(urls: avatarURLs)
 
-        // Noms à afficher
-        let names: [String] = request.smalltalk?.members.compactMap { $0.display_name } ??
-            (request.user != nil ? [request.user!.display_name] : [])
-
+        // Noms
+        let names: [String] = request.users.map { $0.display_name }
         let namesFormatted = names.joined(separator: " et ")
         ui_title_cell.text = String(format: NSLocalizedString("small_talk_other_band_with", comment: ""), namesFormatted)
 
-        // Type de différence
-        ui_list_name.text = determineMismatchText(
-            request: request,
-            matchingLocality: matchingLocality,
-            matchingGender: matchingGender,
-            matchingGroup: matchingGroup
-        )
+        // Texte d’incompatibilité
+        ui_list_name.text = mismatchText(for: request)
     }
 
     // MARK: - Actions
@@ -66,8 +46,7 @@ class CellAlmostMatching: UITableViewCell {
 
     // MARK: - Helpers
     private func renderAvatars(urls: [String]) {
-        let imageViews = [avatar1, avatar2, avatar3, avatar4, avatar5]
-
+        let imageViews = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6]
         imageViews.forEach { $0?.isHidden = true }
 
         for (index, url) in urls.prefix(imageViews.count).enumerated() {
@@ -84,18 +63,18 @@ class CellAlmostMatching: UITableViewCell {
         }
     }
 
-    private func determineMismatchText(request: UserSmallTalkRequest,
-                                       matchingLocality: Bool,
-                                       matchingGender: Bool,
-                                       matchingGroup: String) -> String {
-        if matchingLocality && request.match_locality == false {
+    private func mismatchText(for request: UserSmallTalkRequestWithMatchData) -> String {
+        if !request.hasMatchedLocality {
             return NSLocalizedString("small_talk_other_band_different_location", comment: "")
         }
-        if matchingGender && request.match_gender == false {
+        if !request.hasMatchedInterest {
             return NSLocalizedString("small_talk_other_band_different_interests", comment: "")
         }
-        if matchingGroup == "one" && request.match_format != "one" {
-            return NSLocalizedString("small_talk_other_band_duo", comment: "")
+        if !request.hasMatchedGender {
+            return NSLocalizedString("small_talk_other_band_different_gender", comment: "")
+        }
+        if !request.hasMatchedFormat {
+            return NSLocalizedString("small_talk_other_band_different_format", comment: "")
         }
         return NSLocalizedString("small_talk_other_band_group", comment: "")
     }

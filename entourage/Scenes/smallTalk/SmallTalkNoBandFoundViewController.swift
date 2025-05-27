@@ -31,9 +31,14 @@ final class SmallTalkNoBandFoundViewController: UIViewController {
 
     // MARK: - UI Setup
     private func setupUI() {
+        ui_title.setFontTitle(size: 20)
+        ui_subtitle.setFontBody(size: 15)
         ui_title.text = "small_talk_no_band_title".localized
         ui_subtitle.text = "small_talk_no_band_subtitle".localized
-        ui_image.image = UIImage(named: "ic_no_band_puzzle")
+        
+        ui_event_title.setFontTitle(size: 15)
+        ui_event_subtitle.setFontBody(size: 15)
+        ui_event_button.setFontTitle(size: 15)
 
         ui_event_title.text = "small_talk_no_band_card_title".localized
         ui_event_subtitle.text = "small_talk_no_band_card_subtitle".localized
@@ -49,6 +54,7 @@ final class SmallTalkNoBandFoundViewController: UIViewController {
 
         ui_button_wait.setTitle("small_talk_no_band_button_title".localized, for: .normal)
         ui_button_wait.addTarget(self, action: #selector(handleReturnToHome), for: .touchUpInside)
+        configureOrangeButton(ui_button_wait, withTitle: "small_talk_no_band_button_title".localized)
     }
 
     // MARK: - API
@@ -60,27 +66,39 @@ final class SmallTalkNoBandFoundViewController: UIViewController {
                 }
                 return
             }
-
             self.suggestedEventId = event.uid
             DispatchQueue.main.async {
                 self.ui_event_card.isHidden = false
             }
         }
     }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+
 
     // MARK: - Navigation
     @objc private func openSuggestedEvent() {
         guard let eventId = suggestedEventId else { return }
-        if let vc = UIStoryboard(name: "Events", bundle: nil)
-            .instantiateViewController(withIdentifier: "eventDetailNav") as? EventDetailFeedViewController {
-            vc.eventId = eventId
-            vc.event = nil
-            vc.isAfterCreation = false
-            navigationController?.pushViewController(vc, animated: true)
+
+        let storyboard = UIStoryboard(name: StoryboardName.event, bundle: nil)
+        guard let navVc = storyboard.instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController,
+              let vc = navVc.topViewController as? EventDetailFeedViewController else {
+            assertionFailure("❌ Impossible de charger le VC eventDetailNav")
+            return
         }
+        vc.eventId = eventId
+        navVc.modalPresentationStyle = .fullScreen
+        present(navVc, animated: true)
     }
 
     @objc private func handleReturnToHome() {
-        navigationController?.popToRootViewController(animated: true)
+        AppState.navigateToMainApp()
     }
 }

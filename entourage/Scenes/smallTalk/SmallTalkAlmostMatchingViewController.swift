@@ -1,12 +1,3 @@
-//
-//  SmallTalkAlmostMatchingViewController.swift
-//  entourage
-//
-//  Created by Clement entourage on 21/05/2025.
-//
-
-import UIKit
-
 final class SmallTalkAlmostMatchingViewController: UIViewController {
 
     // MARK: - Outlets
@@ -15,19 +6,23 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
     @IBOutlet weak var ui_btn_leave: UIButton!
     @IBOutlet weak var ui_tableview: UITableView!
 
-    // MARK: - Config
-    var matchingLocality: Bool = false
-    var matchingGender: Bool = true
-    var matchingGroup: String = "one"
+    // MARK: - Données
+    private var rows: [UserSmallTalkRequestWithMatchData] = []
 
-    // MARK: - Rows
-    private enum Row {
-        case almostMatching(UserSmallTalkRequest)
+    // Champs configurables
+    private var matchingGroup: String = "one"
+    private var matchingGender: Bool = false
+    private var matchingLocality: Bool = false
+    private var userRequestId: String?
+
+    // MARK: - Public (appelé avant .present)
+    func configure(with requestId: String, group: String, gender: Bool, locality: Bool) {
+        self.userRequestId = requestId
+        self.matchingGroup = group
+        self.matchingGender = gender
+        self.matchingLocality = locality
     }
 
-    private var rows: [Row] = []
-
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -35,11 +30,12 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
         fetchAlmostMatches()
     }
 
-    // MARK: - UI Setup
     private func setupUI() {
-        ui_label_title.text = NSLocalizedString("small_talk_other_band_title", comment: "")
-        ui_label_subtitle.text = NSLocalizedString("small_talk_other_band_subtitle", comment: "")
-        configureOrangeButton(ui_btn_leave, withTitle: NSLocalizedString("small_talk_other_band_wait", comment: ""))
+        ui_label_title.text = "small_talk_other_band_title".localized
+        ui_label_title.setFontTitle(size: 20)
+        ui_label_subtitle.setFontBody(size: 15)
+        ui_label_subtitle.text = NSLocalizedString("small_talk_other_band_subtitle".localized, comment: "")
+        configureOrangeButton(ui_btn_leave, withTitle: NSLocalizedString("small_talk_other_band_wait".localized, comment: ""))
         ui_btn_leave.addTarget(self, action: #selector(handleLeaveTapped), for: .touchUpInside)
     }
 
@@ -52,48 +48,46 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
         button.clipsToBounds = true
     }
 
-    // MARK: - Table
     private func configureTable() {
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         ui_tableview.separatorStyle = .none
+        ui_tableview.backgroundColor = .clear
+        ui_tableview.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         ui_tableview.register(UINib(nibName: "CellAlmostMatching", bundle: nil), forCellReuseIdentifier: "CellAlmostMatching")
     }
-    
-    func configure(
-        with requestId: String,
-        group: String,
-        gender: Bool,
-        locality: Bool
-    ) {
-        self.matchingGroup = group
-        self.matchingGender = gender
-        self.matchingLocality = locality
-    }
 
-
-    // MARK: - Load Data
     private func fetchAlmostMatches() {
-        SmallTalkService.listUserSmallTalkRequests { [weak self] requests, _ in
+        SmallTalkService.listAlmostMatches { [weak self] matches, _ in
             guard let self = self else { return }
 
-            let matches = (requests ?? []).filter { $0.smalltalk_id != nil }
-            if matches.isEmpty {
-                self.redirectToNoMatch()
-                return
-            }
+            let safeMatches = matches ?? []
 
-            self.rows = matches.map { .almostMatching($0) }
-            DispatchQueue.main.async {
-                self.ui_tableview.reloadData()
+            if safeMatches.isEmpty {
+                DispatchQueue.main.async {
+                    self.redirectToNoMatch()
+                }
+            } else {
+                self.rows = safeMatches
+                DispatchQueue.main.async {
+                    self.ui_tableview.reloadData()
+                }
             }
         }
     }
 
-    // MARK: - Navigation
     private func redirectToNoMatch() {
-//        let vc = SmallTalkNoBandFoundViewController() // à créer
-//        navigationController?.setViewControllers([vc], animated: true)
+        let sb = UIStoryboard(name: "SmallTalk", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "SmallTalkNoBandFoundViewController") as? SmallTalkNoBandFoundViewController {
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+    }
+
+    @objc private func handleLeaveTapped() {
+        self.dismiss(animated: true) {
+            AppState.navigateToMainApp()
+        }
     }
 
     private func openConversation(for conversationId: Int) {
@@ -103,61 +97,53 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
-
-
-    // MARK: - Actions
-    @objc private func handleLeaveTapped() {
-        self.dismiss(animated: true)
-    }
 }
 
-// MARK: - UITableViewDataSource & Delegate
+// MARK: - TableView
+
 extension SmallTalkAlmostMatchingViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        rows.count
+        return rows.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = rows[indexPath.row]
 
-        switch rows[indexPath.row] {
-        case .almostMatching(let request):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellAlmostMatching", for: indexPath) as? CellAlmostMatching else {
-                return UITableViewCell()
-            }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CellAlmostMatching", for: indexPath) as? CellAlmostMatching else {
+            return UITableViewCell()
+        }
 
-            cell.configure(
-                with: request,
-                matchingLocality: matchingLocality,
-                matchingGender: matchingGender,
-                matchingGroup: matchingGroup
-            )
+        cell.configure(with: data)
 
-            cell.onJoinTapped = { [weak self] in
-                guard let self = self else { return }
-                guard let uuid = request.uuid_v2 else { return }
-
-                SmallTalkService.forceMatch(id: uuid) { response, error in
-                    guard let smallTalkId = response?.smalltalk_id, response?.match == true else {
-                        DispatchQueue.main.async {
-                            let alert = UIAlertController(title: "Erreur", message: "Impossible de rejoindre ce groupe.", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: .default))
-                            self.present(alert, animated: true)
-                        }
-                        return
-                    }
-
+        cell.onJoinTapped = { [weak self] in
+            guard let self = self else { return }
+            SmallTalkService.forceMatch(id: data.userSmallTalkId) { response, _ in
+                guard let smallTalkId = response?.smalltalk_id, response?.match == true else {
                     DispatchQueue.main.async {
-                        self.openConversation(for: smallTalkId)
+                        let alert = UIAlertController(title: "Erreur", message: "Impossible de rejoindre ce groupe.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
                     }
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    self.openConversation(for: smallTalkId)
                 }
             }
-
-            return cell
         }
+
+        return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.cornerRadius = 20
+        cell.contentView.layer.masksToBounds = true
+        cell.contentView.layoutMargins = UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16)
     }
 }

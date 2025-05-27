@@ -641,6 +641,10 @@ struct EventEditing {
     }
 }
 
+struct OutingWrapper: Codable {
+    let outing: Event
+}
+
 
 struct EventMetadataEditing {
     var starts_at:String? = nil

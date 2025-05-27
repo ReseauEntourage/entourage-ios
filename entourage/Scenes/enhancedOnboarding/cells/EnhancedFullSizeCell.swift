@@ -28,15 +28,20 @@ class EnhancedFullSizeCell: UITableViewCell {
         
     }
     
-    func configure(choice: OnboardingChoice, isSelected: Bool) {
+    func configure(choice: OnboardingChoice,
+                   isSelected: Bool,
+                   subtitleProvider: (() -> String?)? = nil)
+    {
         self.ui_title_choice_label.text = choice.title
         self.ui_image_choice.image = UIImage(named: choice.img)
+
         if choice.img == "" {
             self.ui_constraint_image_width.constant = 0
-        }else{
+        } else {
             self.ui_constraint_image_width.constant = 60
         }
-        
+
+        // Cas spéciaux
         if choice.title == "Proposition de services" {
             self.ui_contraintbottom.constant = 45
             let attributedString = NSMutableAttributedString(string: "Propositions de services\n", attributes: [
@@ -47,6 +52,7 @@ class EnhancedFullSizeCell: UITableViewCell {
             ])
             attributedString.append(detailsString)
             self.ui_title_choice_label.attributedText = attributedString
+            self.ui_label_desc_phase_3.isHidden = true
         } else if choice.title == "Temps de partage" {
             self.ui_contraintbottom.constant = 5
             let attributedString = NSMutableAttributedString(string: "Temps de partage\n", attributes: [
@@ -57,11 +63,20 @@ class EnhancedFullSizeCell: UITableViewCell {
             ])
             attributedString.append(detailsString)
             self.ui_title_choice_label.attributedText = attributedString
+            self.ui_label_desc_phase_3.isHidden = true
         } else {
-            self.ui_title_choice_label.text = choice.title
             self.ui_contraintbottom.constant = 5
+            self.ui_title_choice_label.text = choice.title
+
+            if let subtitle = subtitleProvider?(), !subtitle.isEmpty {
+                self.ui_label_desc_phase_3.text = subtitle
+                self.ui_label_desc_phase_3.isHidden = false
+                self.ui_label_desc_phase_3.setFontBody(size: 13)
+            } else {
+                self.ui_label_desc_phase_3.isHidden = true
+            }
         }
-        
+
         if isSelected {
             ui_image_check.image = UIImage(named: "ic_onboarding_checked")
             ui_view_container.backgroundColor = UIColor(red: 255/255, green: 245/255, blue: 235/255, alpha: 0.7)
@@ -72,6 +87,7 @@ class EnhancedFullSizeCell: UITableViewCell {
             self.ui_view_container.layer.borderColor = UIColor.appGreyOff.cgColor
         }
     }
+
     
     func configureAComment(title:String, comment:String){
         ui_title_choice_label.isHidden = true

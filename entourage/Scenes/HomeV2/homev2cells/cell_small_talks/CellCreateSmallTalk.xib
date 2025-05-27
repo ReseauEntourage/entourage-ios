@@ -39,7 +39,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnA-Xe-wpR">
-                                <rect key="frame" x="128.66666666666666" y="65.666666666666671" width="114" height="30"/>
+                                <rect key="frame" x="128.66666666666666" y="75.666666666666671" width="114" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Fu3-kZ-RNK"/>
                                 </constraints>
@@ -57,7 +57,7 @@
                             <constraint firstAttribute="trailing" secondItem="W27-Dc-a2R" secondAttribute="trailing" constant="10" id="P9x-kr-0Wy"/>
                             <constraint firstItem="W27-Dc-a2R" firstAttribute="leading" secondItem="ThL-Ar-wbM" secondAttribute="trailing" constant="10" id="Tds-yN-WMa"/>
                             <constraint firstItem="ThL-Ar-wbM" firstAttribute="height" secondItem="Wof-Yx-i0V" secondAttribute="height" multiplier="0.5" id="VAG-Hz-LDC"/>
-                            <constraint firstItem="lnA-Xe-wpR" firstAttribute="top" secondItem="W27-Dc-a2R" secondAttribute="bottom" constant="10" id="dtY-Ym-oAz"/>
+                            <constraint firstItem="lnA-Xe-wpR" firstAttribute="top" secondItem="W27-Dc-a2R" secondAttribute="bottom" constant="20" id="dtY-Ym-oAz"/>
                             <constraint firstItem="ThL-Ar-wbM" firstAttribute="centerY" secondItem="Wof-Yx-i0V" secondAttribute="centerY" id="udv-ia-ZUu"/>
                             <constraint firstItem="W27-Dc-a2R" firstAttribute="top" secondItem="Wof-Yx-i0V" secondAttribute="top" constant="20" id="wSt-iO-yr6"/>
                             <constraint firstItem="ThL-Ar-wbM" firstAttribute="leading" secondItem="Wof-Yx-i0V" secondAttribute="leading" constant="10" id="zzs-YZ-Awo"/>

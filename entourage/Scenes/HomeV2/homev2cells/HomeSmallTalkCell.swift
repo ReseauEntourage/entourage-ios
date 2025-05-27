@@ -12,7 +12,7 @@ class HomeSmallTalkCell: UITableViewCell {
     class var identifier: String {
         return String(describing: self)
     }
-    
+
     // MARK: - Outlets
     @IBOutlet weak var ui_collection_view: UICollectionView!
 
@@ -34,15 +34,17 @@ class HomeSmallTalkCell: UITableViewCell {
         ui_collection_view.delegate = self
         ui_collection_view.dataSource = self
 
-        // Register all 3 cells
+        ui_collection_view.decelerationRate = .fast
+        ui_collection_view.showsHorizontalScrollIndicator = false
+
+        // Register cells
         ui_collection_view.register(UINib(nibName: "CellCreateSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellCreateSmallTalk")
         ui_collection_view.register(UINib(nibName: "CellWaitingSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellWaitingSmallTalk")
         ui_collection_view.register(UINib(nibName: "CellDiscussionSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellDiscussionSmallTalk")
 
-        // Layout: full width
         if let layout = ui_collection_view.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 16
+            layout.minimumLineSpacing = 8
             layout.minimumInteritemSpacing = 0
         }
     }
@@ -56,13 +58,12 @@ extension HomeSmallTalkCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = data[indexPath.item]
+
         switch item {
         case .create:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellCreateSmallTalk", for: indexPath)
-            return cell
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "CellCreateSmallTalk", for: indexPath)
         case .waiting:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellWaitingSmallTalk", for: indexPath)
-            return cell
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "CellWaitingSmallTalk", for: indexPath)
         case .talking(let request):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellDiscussionSmallTalk", for: indexPath) as! CellDiscussionSmallTalk
             cell.configure(with: request)
@@ -74,72 +75,64 @@ extension HomeSmallTalkCell: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // La cell prend toute la largeur de la tableViewCell
-        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+        let width = collectionView.bounds.width * 0.85
+        let height = collectionView.bounds.height
+        return CGSize(width: width, height: height)
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+    }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let item = data[indexPath.item]
+        let item = data[indexPath.item]
 
-            switch item {
-            
-            case .talking(let userRequest):
-                // Charger le storyboard
-                let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-                guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkGroupFoundViewController") as? SmallTalkGroupFoundViewController else {
-                    return
-                }
-                // Présentation plein écran
-                vc.modalPresentationStyle = .fullScreen
-                parentViewController?.present(vc, animated: true)
-                
-            case .create:
-                // 👉 Charger le storyboard
-                let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-                guard let vc = storyboard.instantiateInitialViewController() else {
-                    return
-                }
+        switch item {
+        case .talking(let userRequest):
+            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
+            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkGroupFoundViewController") as? SmallTalkGroupFoundViewController else { return }
+            vc.modalPresentationStyle = .fullScreen
+            parentViewController?.present(vc, animated: true)
 
-                // 👉 Toujours présenter en plein écran, pas de push
-                vc.modalPresentationStyle = .fullScreen
-                parentViewController?.present(vc, animated: true)
-                
-            case .waiting:
-                let alert = UIAlertController(
-                    title: "Annuler la demande ?",
-                    message: "Souhaitez-vous supprimer votre demande SmallTalk en attente ?",
-                    preferredStyle: .alert
-                )
+        case .create:
+            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
+            guard let vc = storyboard.instantiateInitialViewController() else { return }
+            vc.modalPresentationStyle = .fullScreen
+            parentViewController?.present(vc, animated: true)
 
-                alert.addAction(UIAlertAction(title: "Annuler", style: .cancel))
+        case .waiting:
+            let alert = UIAlertController(
+                title: "Annuler la demande ?",
+                message: "Souhaitez-vous supprimer votre demande SmallTalk en attente ?",
+                preferredStyle: .alert
+            )
 
-                alert.addAction(UIAlertAction(title: "Supprimer", style: .destructive, handler: { [weak self] _ in
-                    SmallTalkService.deleteRequest { success in
-                        DispatchQueue.main.async {
-                            if success {
-                                // Optionnel : mettre à jour l’UI immédiatement
-                                self?.data.removeAll(where: {
-                                    if case .waiting = $0 { return true }
-                                    return false
-                                })
-                                self?.ui_collection_view.reloadData()
-                            } else {
-                                let errorAlert = UIAlertController(
-                                    title: "Erreur",
-                                    message: "Impossible de supprimer la demande.",
-                                    preferredStyle: .alert
-                                )
-                                errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
-                                self?.parentViewController?.present(errorAlert, animated: true)
-                            }
+            alert.addAction(UIAlertAction(title: "Annuler", style: .cancel))
+
+            alert.addAction(UIAlertAction(title: "Supprimer", style: .destructive, handler: { [weak self] _ in
+                SmallTalkService.deleteRequest { success in
+                    DispatchQueue.main.async {
+                        guard let self = self else { return }
+                        if success {
+                            self.data.removeAll(where: {
+                                if case .waiting = $0 { return true }
+                                return false
+                            })
+                            self.ui_collection_view.reloadData()
+                        } else {
+                            let errorAlert = UIAlertController(
+                                title: "Erreur",
+                                message: "Impossible de supprimer la demande.",
+                                preferredStyle: .alert
+                            )
+                            errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.parentViewController?.present(errorAlert, animated: true)
                         }
                     }
-                }))
+                }
+            }))
 
-                parentViewController?.present(alert, animated: true)
-                return
-
-            default:
-                break // Les autres types ne déclenchent rien ici
-            }
+            parentViewController?.present(alert, animated: true)
         }
+    }
 }

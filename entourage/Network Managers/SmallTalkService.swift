@@ -176,6 +176,25 @@ struct SmallTalkService: ParsingDataCodable {
             completion(messages, nil)
         }
     }
+    
+    static func listAlmostMatches(completion: @escaping ([UserSmallTalkRequestWithMatchData]?, EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = "user_smalltalks/almost_matches?token=\(token)"
+
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, error in
+            guard let data = data, error == nil else {
+                completion(nil, error)
+                return
+            }
+            do {
+                let decoded = try JSONDecoder().decode(AlmostMatchesWrapper.self, from: data)
+                completion(decoded.user_smalltalks, nil)
+            } catch {
+                print("Decode error:", error)
+                completion(nil, nil)
+            }
+        }
+    }
 
     // MARK: - Créer un message dans un SmallTalk
     static func createMessage(id: String, content: String, completion: @escaping (PostMessage?, EntourageNetworkError?) -> Void) {
@@ -204,17 +223,23 @@ struct SmallTalkService: ParsingDataCodable {
         }
     }
     
-    static func forceMatch(id: String, completion: @escaping (SmallTalkMatchResponse?, EntourageNetworkError?) -> Void) {
+    static func forceMatch(id: Int, completion: @escaping (SmallTalkMatchResponse?, EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
-        let endpoint = "user_smalltalks/\(id)/match?token=\(token)"
+        let endpoint = "user_smalltalks/force_match?token=\(token)&user_smalltalk_id=\(id)"
 
         NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { data, _, error in
             guard let data = data, error == nil else {
                 completion(nil, error)
                 return
             }
-            let response = try? JSONDecoder().decode(SmallTalkMatchResponse.self, from: data)
-            completion(response, nil)
+
+            do {
+                let response = try JSONDecoder().decode(SmallTalkMatchResponse.self, from: data)
+                completion(response, nil)
+            } catch {
+                print("❌ JSON decode error in forceMatch:", error)
+                completion(nil, nil)
+            }
         }
     }
     

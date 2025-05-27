@@ -73,3 +73,32 @@ extension UserSmallTalkRequest {
         )
     }
 }
+
+
+struct UserSmallTalkRequestWithMatchData: Codable {
+    let userSmallTalkId: Int
+    let smallTalkId: Int?
+    let users: [UserProfile]
+    let hasMatchedFormat: Bool
+    let hasMatchedGender: Bool
+    let hasMatchedLocality: Bool
+    let hasMatchedInterest: Bool
+    let hasMatchedProfile: Bool
+    let unmatchCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case userSmallTalkId = "user_smalltalk_id"
+        case smallTalkId = "smalltalk_id"
+        case users
+        case hasMatchedFormat = "has_matched_format"
+        case hasMatchedGender = "has_matched_gender"
+        case hasMatchedLocality = "has_matched_locality"
+        case hasMatchedInterest = "has_matched_interest"
+        case hasMatchedProfile = "has_matched_profile"
+        case unmatchCount = "unmatch_count"
+    }
+}
+
+struct AlmostMatchesWrapper: Codable {
+    let user_smalltalks: [UserSmallTalkRequestWithMatchData]
+}

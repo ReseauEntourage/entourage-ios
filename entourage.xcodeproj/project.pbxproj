@@ -561,6 +561,7 @@
 		26CC9F7A2A331CF5005F7408 /* WelcomeThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */; };
 		26CC9F7D2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */; };
 		26CC9F7F2A337243005F7408 /* SecondaryTextWelcomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */; };
+		26D0B75D2DE4B1BA0066F461 /* GoodPracticesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0B75C2DE4B1BA0066F461 /* GoodPracticesViewController.swift */; };
 		26D13E152BA1FC8900CAD4F7 /* Survey.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E142BA1FC8900CAD4F7 /* Survey.storyboard */; };
 		26D13E172BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E162BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift */; };
 		26D13E1C2BA35DA700CAD4F7 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E1B2BA35DA700CAD4F7 /* QuestionCell.swift */; };
@@ -1160,6 +1161,7 @@
 		26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeViewController.swift; sourceTree = "<group>"; };
 		26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryTextWelcomeCell.xib; sourceTree = "<group>"; };
 		26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTextWelcomeCell.swift; sourceTree = "<group>"; };
+		26D0B75C2DE4B1BA0066F461 /* GoodPracticesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodPracticesViewController.swift; sourceTree = "<group>"; };
 		26D13E142BA1FC8900CAD4F7 /* Survey.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Survey.storyboard; sourceTree = "<group>"; };
 		26D13E162BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSurveyViewController.swift; sourceTree = "<group>"; };
 		26D13E1B2BA35DA700CAD4F7 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
@@ -2317,6 +2319,7 @@
 				26C2C9072DDC9F4900C8F320 /* SmallTalkGroupFoundViewController.swift */,
 				26C2C9172DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift */,
 				26C2C9192DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift */,
+				26D0B75C2DE4B1BA0066F461 /* GoodPracticesViewController.swift */,
 			);
 			path = smallTalk;
 			sourceTree = "<group>";
@@ -3238,6 +3241,7 @@
 				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,
 				020429B5282E81B00030B035 /* NeighborhoodPostCell.swift in Sources */,
+				26D0B75D2DE4B1BA0066F461 /* GoodPracticesViewController.swift in Sources */,
 				024273EE283291C2009A4EB8 /* NeighborhoodMessageCell.swift in Sources */,
 				024273EC283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift in Sources */,
 				020AF5E82860B10C0012AE60 /* HomeCongratPopupViewController.swift in Sources */,
