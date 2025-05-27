@@ -293,9 +293,7 @@ private extension SmallTalkViewController {
         currentStepIndex -= 1
         rebuildRows(animated: true)
         if(currentStepIndex == 0){
-            self.dismiss(animated: true) {
-                
-            }
+            AppState.navigateToMainApp()
         }else{
             print("eho current step ", currentStepIndex)
         }

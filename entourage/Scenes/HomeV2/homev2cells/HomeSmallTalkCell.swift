@@ -44,7 +44,7 @@ class HomeSmallTalkCell: UITableViewCell {
 
         if let layout = ui_collection_view.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 8
+            layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
         }
     }

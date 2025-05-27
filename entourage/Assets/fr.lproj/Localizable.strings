@@ -1745,106 +1745,96 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 
 /* Section Papotages Smalltalks */
-"home_smalltalk_title" = "Partager des « Bonnes ondes » !";
-"onboarding_title" = "Prêts pour intégrer une bande solidaire ?";
-"home_button_start" = "Discuter";
-
-
-"onboarding_title" = "Prêts pour intégrer une bande solidaire ?";
+"home_smalltalk_title" = "Partager des « Bonnes Ondes » !";
+"onboarding_title" = "Prêts à partager des Bonnes ondes ?";
 "onboarding_start_button" = "Je commence";
-"onboarding_intro_html" = "<p>Les <b>Bandes solidaires</b> vous connectent rapidement avec un ou plusieurs membres...</p><p><b>• Vous répondez à quelques questions</b> : sur vous, vos centres d’intérêts</p><p><b>• On vous trouve des personnes compatibles</b> : grâce à votre localisation et vos réponses</p><p><b>• Une conversation de groupe s’ouvre dans l’app</b> : pour faire connaissance pendant quelques jours</p><p><b>• Vous décidez ensemble d’un moment pour vous rencontrer</b> : en visio ou en vrai, comme vous préférez</p>";
+"onboarding_end_button" = "Annuler";
+"onboarding_intro_html" = "<p>Avec les <b>Bonnes ondes</b>, rencontrez des personnes qui vous ressemblent, échangez en toute simplicité et créez des liens qui font du bien !</p><p>1. Vous répondez à quelques questions : pour mieux vous connaître</p><p>2. On vous met en relation avec des personnes : qui vous correspondent</p><p>3. Une conversation de groupe se crée automatiquement dans l'application : pour échanger et tisser des liens</p><p>4. Si vous le souhaitez, vous choisissez un moment pour vous rencontrer : en visio ou dans la vraie vie, c'est vous qui voyez !</p>";
 
 /* Step 1: Format de discussion */
-"small_talk_step_title_1" = "Quel format de discussion te convient le mieux ?";
-"small_talk_step_subtitle_1" = "Vous pouvez choisir de papoter à deux ou en petit groupe...";
+"small_talk_step_title_1" = "Quel format de discussion vous convient le mieux ?";
+"small_talk_step_subtitle_1" = "Vous pouvez choisir de papoter à deux ou en petit groupe (3 à 5 personnes), selon ce qui vous met le plus à l’aise.";
 "small_talk_step1_item1_title" = "En duo";
-"small_talk_step1_item1_subtitle" = "Pour un échange simple et intimiste";
+"small_talk_step1_item1_subtitle" = "Pour un échange privilégié entre deux personnes";
 "small_talk_step1_item2_title" = "En petit groupe";
 "small_talk_step1_item2_subtitle" = "Pour discuter à plusieurs, dans une ambiance conviviale";
 "smalltalk_intro_limit" = "Impossible de générer une nouvelle demande, veuillez quitter l'une de vos bandes";
 
 /* Step 2: Proximité */
 "small_talk_step_title_2" = "Avec qui aimeriez-vous échanger ?";
-"small_talk_step_subtitle_2" = "Des personnes de votre région ou de toute la France...";
+"small_talk_step_subtitle_2" = "Vous pouvez choisir d’échanger avec des personnes de votre région ou de toute la France.";
 "small_talk_step2_item1_title" = "Des personnes proches de chez moi";
 "small_talk_step2_item1_subtitle" = "Pour des échanges locaux et des rencontres en vrai, près de chez vous";
 "small_talk_step2_item2_title" = "Des personnes de toute la France";
-"small_talk_step2_item2_subtitle" = "Pour échanger avec des profils variés, découvrir d’autres horizons";
+"small_talk_step2_item2_subtitle" = "Pour échanger avec des profils variés, découvrir d'autres horizons";
 
 /* Step 3: Genre */
 "small_talk_step_title_3" = "Quel genre vous correspond le mieux ?";
-"small_talk_step_subtitle_3" = "Cette info nous aide à personnaliser vos rencontres";
+"small_talk_step_subtitle_3" = "Cette information nous aide à personnaliser vos mises en relation. Vous pourrez choisir la mixité ou pas de votre groupe à l’étape suivante.";
 "small_talk_step3_item1_title" = "Homme";
 "small_talk_step3_item2_title" = "Femme";
 "small_talk_step3_item3_title" = "Non binaire";
 
 /* Step 4: Confort selon le genre */
 "small_talk_step_title_4" = "Avec qui vous sentez-vous le plus à l’aise pour échanger ?";
-"small_talk_step_subtitle_4" = "Cette question concerne uniquement le genre : hommes, femmes, non binaires. Toutes les bandes sont socialement mixtes.";
+"small_talk_step_subtitle_4" = "Cette question concerne uniquement le genre : hommes, femmes, non binaires. Tous les groupes sont socialement mixtes.";
 "small_talk_step4_item1_title" = "Peu importe";
 "small_talk_step4_item1_subtitle" = "Je suis à l’aise pour échanger avec tout le monde, quel que soit le genre";
 "small_talk_step4_item2_title" = "Avec des personnes du même genre";
 "small_talk_step4_item2_subtitle" = "Je préfère échanger avec des personnes qui partagent le même genre que moi";
 
-/* Step 4: interest */
-"small_talk_step_interest_title" = "Quels sont vos centres d'intérêts";
+/* Step 5: Intérêts */
+"small_talk_step_interest_title" = "Quels sont vos centres d'intérêt ?";
 "small_talk_step_interest_subtitle" = "Sélectionnez les sujets qui vous passionnent pour trouver des personnes qui partagent vos goûts.";
 
+/* Recherche de groupe */
+"small_talk_searching_title" = "Bonnes Ondes en cours de création !";
+"small_talk_searching_intro" = "Une belle rencontre se prépare… On trouve les bonnes personnes pour vous, encore un petit instant.";
+"small_talk_searching_step_1" = "D'abord, on regarde les personnes disponibles qui correspondent à vos critères...";
+"small_talk_searching_step_2" = "Ensuite, on regarde qui partage vos centres d’intérêt...";
+"small_talk_searching_step_3" = "On prend en compte vos préférences pour former un groupe où chacun se sente bien...";
+"small_talk_searching_step_4" = "Et enfin, on s’assure que tout est prêt pour vous accueillir !";
 
-/* small talk searching activity */
-"small_talk_searching_title" = "On te trouve une bande qui te correspond";
-"small_talk_searching_intro" = "On vous prépare une belle rencontre… juste le temps de trouver les bons partenaires. Encore un petit instant, ça arrive !";
-"small_talk_searching_step_1" = "On regarde où se trouvent les membres disponibles…";
-"small_talk_searching_step_2" = "On cherche des personnes qui partagent vos centres d’intérêt…";
-"small_talk_searching_step_3" = "On prend en compte vos préférences pour former un groupe où chacun se sent à l’aise.";
-"small_talk_searching_step_4" = "On vérifie que tout colle bien…";
-
-/* small talk other bands activity */
-"small_talk_other_band_title" = "Nous n’avons pas trouvé de bande avec vos critères";
-"small_talk_other_band_subtitle" = "Vous pouvez choisir de rejoindre une bande proche de vos critères ou attendre qu’une bande vous soit proposée…";
-"small_talk_other_band_different_location" = "Cette bande ne correspond pas à votre choix de proximité géographique";
-"small_talk_other_band_different_interests" = "Cette bande regroupe des personnes aux centres d’intérêt différents";
-"small_talk_other_band_duo" = "Cette bande fonctionne en binôme";
-"small_talk_other_band_group" = "Cette bande est composée de 3 personnes ou plus";
+/* Autres groupes proposés */
+"small_talk_other_band_title" = "Nous n’avons pas (encore) trouvé de groupe avec vos critères";
+"small_talk_other_band_subtitle" = "Vous pouvez choisir de rejoindre un groupe proche de vos critères ou attendre qu’un nouveau groupe vous soit proposé.";
+"small_talk_other_band_different_location" = "Ce groupe ne correspond pas à votre choix de proximité géographique";
+"small_talk_other_band_different_interests" = "Ce groupe regroupe des personnes aux centres d’intérêt différents";
+"small_talk_other_band_different_mixity" = "Ce groupe regroupe des personnes de genre différent";
+"small_talk_other_band_duo" = "Ce groupe fonctionne en binôme";
+"small_talk_other_band_group" = "Ce groupe est composé de 3 personnes ou plus";
 "small_talk_other_band_with" = "Avec %@";
 "small_talk_other_band_join" = "Rejoindre";
 "small_talk_other_band_wait" = "Je préfère attendre";
 
-/* small talk no band activity */
-"small_talk_no_band_title" = "Aucune bande n’est disponible pour le moment";
-"small_talk_no_band_subtitle" = "Vous recevrez une notification dès que nous aurons trouvé une bande";
+/* Aucun groupe trouvé */
+"small_talk_no_band_title" = "Toujours en recherche de Bonnes Ondes !";
+"small_talk_no_band_subtitle" = "On n’a pas encore trouvé de groupe qui vous correspond, mais on y travaille ! Vous recevrez une notification dès que ce sera le cas. Merci pour votre patience !";
 "small_talk_no_band_button_title" = "Revenir à la page d’accueil";
-"small_talk_no_band_card_title" = "Événement à ne pas manquer";
-"small_talk_no_band_card_subtitle" = "Les papotages solidaires : un moment sympa en visio pour échanger et rencontrer de nouvelles personnes (pendant 15min ou plus) tous les jeudis soirs à 18h";
-"small_talk_no_band_card_button" = "Voir l’événement";
+"small_talk_no_band_card_title" = "En attendant, voici une belle occasion de papoter...";
+"small_talk_no_band_card_subtitle" = "Rejoignez un papotage solidaire en visio chaque jeudi à 18h pour échanger librement pendant 15min (ou plus) !";
+"small_talk_no_band_card_button" = "Je découvre l’événement";
 
-/* small talk found band activity */
+/* Groupe trouvé */
 "small_talk_group_found_name_default" = "Marie";
 "small_talk_group_found_button" = "Discuter";
-"small_talk_group_found_title" = "Vous êtes sur la même longueur d’onde ! ";
+"small_talk_group_found_title" = "Vous êtes sur la même longueur d’onde !";
 "small_talk_group_found_subtitle" = "Découvrez les personnes de votre groupe.";
 
-/* small talk home activity */
-"home_v2_title_small_talk" = "Discuter simplement";
+/* Accueil SmallTalk */
+"home_v2_title_small_talk" = "Partager des « Bonnes Ondes » !";
 "small_talk_subtitle_match" = "Découvrez un nouveau moyen de discuter et de créer des liens qui durent dans le temps !";
 "small_talk_button_match" = "Discuter";
 "small_talk_title_waiting" = "Bientôt de nouvelles rencontres";
-"small_talk_subtitle_waiting" = "On vous prévient dès qu’on a trouvé des gens qui sont sur la même longueur d’onde ;) ";
-"small_talk_title_conversation" = "Discuter avec votre bande";
+"small_talk_subtitle_waiting" = "On vous prévient dès qu’on a trouvé des gens qui sont sur la même longueur d’onde ;)";
+"small_talk_title_conversation" = "Discuter avec votre groupe";
 
-/* small talk guidelines */
-"small_talk_what_it_is_1" = "Un échange convivial et bienveillant";
-"small_talk_what_it_is_2" = "Une rencontre authentique entre deux personnes";
-"small_talk_what_it_is_3" = "Une occasion de briser l’isolement";
-"small_talk_what_it_is_not_1" = "Un accompagnement social ou une aide formelle";
-"small_talk_what_it_is_not_2" = "Une conversation à sens unique ou un débat";
-"small_talk_what_it_is_not_3" = "Une discussion intrusive sur des sujets sensibles";
-"small_talk_step_1" = "Bande solidaire – étape 1 – présentation";
-"small_talk_guidelines_title" = "Guide et charte des bandes solidaires";
-"small_talk_guidelines_intro" = "Les <b>Bandes solidaires</b> vous connectent régulièrement avec un ou plusieurs membres pour discuter et créer du lien, simplement et sans pression.";
+/* Guide et charte */
+"small_talk_guidelines_title" = "Des bonnes pratiques pour des Bonnes Ondes";
+"small_talk_guidelines_intro" = "Les <b>Bonnes Ondes</b> vous connectent rapidement avec une ou plusieurs personnes pour discuter et créer du lien, simplement et sans pression.";
 "small_talk_what_it_is_title" = "Ce que c’est";
 "small_talk_what_it_is_item_1" = "Un échange convivial et bienveillant";
-"small_talk_what_it_is_item_2" = "Une rencontre authentique entre des personnes";
+"small_talk_what_it_is_item_2" = "Une rencontre authentique entre plusieurs personnes";
 "small_talk_what_it_is_item_3" = "Une occasion de briser l’isolement";
 "small_talk_what_it_is_not_title" = "Ce que ce n’est pas";
 "small_talk_what_it_is_not_item_1" = "Un accompagnement social ou une aide formelle";
@@ -1862,4 +1852,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 /* Boutons */
 "small_talk_btn_close" = "Fermer";
-"small_talk_btn_charte" = "Retrouvez la charte et les bonnes pratiques → ici";
+"small_talk_btn_charte" = "Retrouvez la charte et les bonnes pratiques en cliquant <b>ici</b>";

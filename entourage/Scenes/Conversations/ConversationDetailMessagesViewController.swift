@@ -81,6 +81,9 @@ class ConversationDetailMessagesViewController: UIViewController {
     var type:String = ""
     var isSmallTalkMode = false
     var smallTalkId: String = ""
+    private var autoRefreshTimer: Timer?
+    private let autoRefreshInterval: TimeInterval = 5
+    private var isSilentRefresh = false
 
     /// Liste brute de messages issus de l’API
     var messages = [PostMessage]()
@@ -128,6 +131,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         // GESTION DU TAP GESTURE
         ui_tap_gesture.cancelsTouchesInView = false
         ui_tap_gesture.delegate = self
+        ui_tableview.prefetchDataSource = nil   // désactive le prefetch
 
         // Configuration label "event_discut"
         ui_label_event_discut.text = "event_discut_title".localized
@@ -267,6 +271,19 @@ class ConversationDetailMessagesViewController: UIViewController {
             isStartEditing = false
             _ = ui_textview_message.becomeFirstResponder()
         }
+        
+        startAutoRefresh()
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopAutoRefresh()             // 🆕
+    }
+        
+    deinit {
+        stopAutoRefresh()             // 🆕 sécurise en cas de fuite
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLayoutSubviews() {
@@ -275,9 +292,54 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.view.bringSubviewToFront(ui_tableview_mentions)
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+    private func startAutoRefresh() {
+        stopAutoRefresh()
+        autoRefreshTimer = Timer.scheduledTimer(withTimeInterval: autoRefreshInterval,
+                                                repeats: true) { [weak self] _ in
+            self?.autoRefreshMessages()
+        }
     }
+    
+    private func autoRefreshMessages() {                    // 🆕
+        guard !isLoading, !isSmallTalkMode else { return }
+        
+        // 1. Mémorise la position avant reload
+        let wasAtBottom            = isTableViewAtBottom()
+        let previousContentHeight  = ui_tableview.contentSize.height
+        let previousOffset         = ui_tableview.contentOffset
+        
+        // 2. Recharge la page 1 (les derniers messages)
+        currentPage = 1
+        isSilentRefresh = true          // 🆕  désactive le scroll auto
+
+        getMessages()
+        
+        // 3. Après le reload (quasi-immédiat côté UI), on rétablit l’offset si besoin
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            if !wasAtBottom {
+                let newContentHeight = self.ui_tableview.contentSize.height
+                let delta            = newContentHeight - previousContentHeight
+                let newOffset        = CGPoint(x: previousOffset.x,
+                                               y: previousOffset.y + delta)
+                self.ui_tableview.setContentOffset(newOffset, animated: false)
+            }
+        }
+    }
+
+
+    private func stopAutoRefresh() {
+        autoRefreshTimer?.invalidate()
+        autoRefreshTimer = nil
+    }
+    
+    private func isTableViewAtBottom() -> Bool {      // 🆕
+        let contentHeight = ui_tableview.contentSize.height
+        let tableHeight   = ui_tableview.bounds.height
+        let offsetY       = ui_tableview.contentOffset.y
+        return offsetY >= contentHeight - tableHeight - 1
+    }
+    
+    
     
     func setupFromSmallTalk(smallTalkId: Int, title: String?, delegate: UpdateUnreadCountDelegate? = nil) {
         self.isSmallTalkMode = true
@@ -436,65 +498,97 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
     }
 
-    // MARK: - Network
+    // MARK: - Network – chargement des messages
     func getMessages() {
-        if isSmallTalkMode { return } // Ne rien faire si mode smalltalk
 
-        if self.isLoading { return }
+        // 0. Mode SmallTalk ? → on ne charge rien
+        if isSmallTalkMode { return }
 
-        // Au premier appel, on vide la table
+        // 1. Déjà en cours ? → on sort
+        if isLoading { return }
+
+        // 2. Première ouverture ? → on vide visuellement pour éviter le flash
         if conversationCellDTOs.isEmpty {
-            self.ui_tableview.reloadData()
+            ui_tableview.reloadData()
         }
 
-        IHProgressHUD.show()
-
-        var _convId = ""
-        if self.conversationId != 0 {
-            _convId = String(conversationId)
-        } else if hashedConversationId != "" {
-            _convId = hashedConversationId
+        // 3. HUD uniquement si ce n’est PAS un refresh silencieux
+        if !isSilentRefresh {
+            IHProgressHUD.show()
         }
-        self.isLoading = true
-        
+
+        // 4. Identifiant de la conversation (id ou hash)
+        let convIdStr: String = {
+            if conversationId != 0        { return String(conversationId) }
+            if !hashedConversationId.isEmpty { return hashedConversationId }
+            return ""
+        }()
+
+        isLoading = true
+
+        // 5. Appel réseau
         MessagingService.getMessagesFor(
-            conversationId: _convId,
+            conversationId: convIdStr,
             currentPage: currentPage,
             per: numberOfItemsForWS
-        ) { messages, error in
-            IHProgressHUD.dismiss()
-            if let messages = messages {
-                if self.currentPage > 1 {
-                    self.messages.append(contentsOf: messages)
-                } else {
-                    self.messages = messages
-                }
-                
-                self.checkNewConv()
-                // On met à jour le tableau conversationCellDTOs
-                self.buildConversationCellDTOs()
+        ) { [weak self] messages, error in
+            guard let self = self else { return }
 
-                // On gère la vue vide (si pas de messages)
-                self.ui_view_empty.isHidden = !self.conversationCellDTOs.isEmpty
-                self.ui_tableview.reloadData()
-
-                // Scroll vers le bas si c’est la première page
-                if self.currentPage == 1 && !self.conversationCellDTOs.isEmpty {
-                    DispatchQueue.main.async {
-                        let lastIndex = self.conversationCellDTOs.count - 1
-                        let indexPath = IndexPath(row: lastIndex, section: 0)
-                        self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: false)
-                    }
-                }
-                // On avertit le parent pour mettre à jour le badge “non lus”
-                self.parentDelegate?.updateUnreadCount(
-                    conversationId: self.conversationId,
-                    currentIndexPathSelected: self.selectedIndexPath
-                )
+            //------------------------------------------------------------
+            // 6. Always : HUD OFF & états réinitialisés
+            //------------------------------------------------------------
+            if !self.isSilentRefresh      { IHProgressHUD.dismiss() }
+            defer {
+                self.isSilentRefresh = false          // réactive le scroll pour les appels normaux
+                self.setLoadingFalse()                // libère le verrou isLoading (timer 1 s)
             }
-            self.setLoadingFalse()
+
+            //------------------------------------------------------------
+            // 7. Erreur ? On quitte proprement
+            //------------------------------------------------------------
+            guard let messages = messages else { return }
+
+            //------------------------------------------------------------
+            // 8. Mise à jour des sources
+            //------------------------------------------------------------
+            if self.currentPage > 1 {
+                self.messages.append(contentsOf: messages)
+            } else {
+                self.messages = messages
+            }
+
+            //------------------------------------------------------------
+            // 9. Vue « nouvelle conversation », DTOs, reload
+            //------------------------------------------------------------
+            self.checkNewConv()
+            self.buildConversationCellDTOs()
+            self.ui_view_empty.isHidden = !self.conversationCellDTOs.isEmpty
+            self.ui_tableview.reloadData()
+
+            //------------------------------------------------------------
+            // 10. Scroll AUTO uniquement si ce n’est PAS un silent refresh
+            //------------------------------------------------------------
+            if self.currentPage == 1,
+               !self.conversationCellDTOs.isEmpty,
+               !self.isSilentRefresh {
+
+                DispatchQueue.main.async {
+                    let lastRow = self.conversationCellDTOs.count - 1
+                    let ip      = IndexPath(row: lastRow, section: 0)
+                    self.ui_tableview.scrollToRow(at: ip, at: .bottom, animated: false)
+                }
+            }
+
+            //------------------------------------------------------------
+            // 11. Badge « non lus » sur l’écran précédent
+            //------------------------------------------------------------
+            self.parentDelegate?.updateUnreadCount(
+                conversationId: self.conversationId,
+                currentIndexPathSelected: self.selectedIndexPath
+            )
         }
     }
+
 
     func getDetailConversation() {
         var _convId = ""
@@ -1092,67 +1186,90 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
         }
         return true
     }
-
-    func textViewDidChange(_ textView: UITextView) {
-        // -- Logique existante pour la détection du "@" et l'affichage des suggestions --
-        let cursorPosition = textView.selectedRange.location
-        let textNSString = textView.text as NSString
-        let textUpToCursor = textNSString.substring(to: cursorPosition)
-
-        // Recherche de la dernière occurrence de "@"
-        if let atIndex = textUpToCursor.lastIndex(of: "@") {
-            // Vérifie si c’est un nouvel @ (début ou précédé d’un espace)
-            if atIndex == textUpToCursor.startIndex
-               || textUpToCursor[textUpToCursor.index(before: atIndex)] == " " {
-                
-                let mentionSubstring = textUpToCursor[atIndex...]
-                if mentionSubstring.contains(" ") {
-                    hideMentionSuggestions()
-                } else {
-                    // On retire le "@" pour construire la query
-                    let query = String(mentionSubstring.dropFirst())
-                    updateMentionSuggestions(query: query)
-                }
-            } else {
-                hideMentionSuggestions()
-            }
-        } else {
-            hideMentionSuggestions()
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        // Si on arrive depuis le placeholder orange, on l’efface
+        if textView.textColor == .appOrange || textView.text == placeholderTxt {
+            textView.text = ""
         }
-
-        // -------------------------------------------------------------------------
-        // AJOUT : Nettoyage des attributs de lien si l’utilisateur a partiellement
-        // effacé une mention (pour éviter le "full bleu souligné" après backspace).
-        // -------------------------------------------------------------------------
-        let mutableAttrText = NSMutableAttributedString(attributedString: textView.attributedText)
-        let fullRange = NSRange(location: 0, length: mutableAttrText.length)
-
-        // On inspecte tous les attributs
-        mutableAttrText.enumerateAttributes(in: fullRange, options: []) { attrs, range, _ in
-            // Vérifie s’il existe un attribut .link sur ce segment
-            if let _ = attrs[.link] {
-                // Récupère la portion de texte
-                let substring = mutableAttrText.string as NSString
-                let mentionText = substring.substring(with: range)
-
-                // Si le texte ne commence plus par "@" ou est trop court, ce n’est plus une mention valide
-                if mentionText.count < 2 || !mentionText.hasPrefix("@") {
-                    // Supprime l'attribut lien et le soulignement
-                    mutableAttrText.removeAttribute(.link, range: range)
-                    mutableAttrText.removeAttribute(.underlineStyle, range: range)
-
-                    // Remet la couleur et la police par défaut (ex. NunitoSans 15, noir)
-                    mutableAttrText.addAttribute(.foregroundColor, value: UIColor.black, range: range)
-                    if let font = UIFont(name: "NunitoSans-Regular", size: 15) {
-                        mutableAttrText.addAttribute(.font, value: font, range: range)
-                    }
-                }
-            }
-        }
-        
-        // Réassigne le texte éventuellement nettoyé
-        textView.attributedText = mutableAttrText
+        // Rétablit la couleur & la police de saisie par défaut
+        let style = ApplicationTheme.getFontCourantRegularNoir()
+        textView.typingAttributes = [
+            .font: style.font,
+            .foregroundColor: style.color
+        ]
+        textView.textColor = style.color
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+
+           //------------------------------------------------------------
+           // 0. Icône « envoyer » ON / OFF
+           //------------------------------------------------------------
+           if textView.text.isEmpty {
+               ui_iv_bt_send.image = UIImage(named: "ic_send_comment_off")
+           } else {
+               ui_iv_bt_send.image = UIImage(named: "ic_send_comment")
+           }
+
+           //------------------------------------------------------------
+           // 1. Détection du “@” et affichage des suggestions
+           //------------------------------------------------------------
+           let fullText = textView.text ?? ""
+           let cursor   = textView.selectedRange.location
+
+           // ► Slicing SAFE : ne dépasse jamais la longueur
+           guard !fullText.isEmpty, cursor <= fullText.count else {
+               hideMentionSuggestions()
+               return
+           }
+
+           let textUpToCursor = String(fullText.prefix(cursor))
+
+           if let atIndex = textUpToCursor.lastIndex(of: "@") {
+               // Nouveau « @ » = au début OU précédé d’un espace
+               let isNewAt = (atIndex == textUpToCursor.startIndex) ||
+                             (textUpToCursor[textUpToCursor.index(before: atIndex)] == " ")
+
+               if isNewAt {
+                   let mentionSubstring = textUpToCursor[atIndex...]
+                   if mentionSubstring.contains(" ") {
+                       hideMentionSuggestions()
+                   } else {
+                       // ► On enlève le @ pour construire la query
+                       let query = String(mentionSubstring.dropFirst())
+                       updateMentionSuggestions(query: query)
+                   }
+               } else {
+                   hideMentionSuggestions()
+               }
+           } else {
+               hideMentionSuggestions()
+           }
+
+           //------------------------------------------------------------
+           // 2. Nettoyage des attributs de lien si mention incomplète
+           //------------------------------------------------------------
+           let mutableAttrText = NSMutableAttributedString(attributedString: textView.attributedText)
+           let fullRange       = NSRange(location: 0, length: mutableAttrText.length)
+
+           mutableAttrText.enumerateAttributes(in: fullRange, options: []) { attrs, range, _ in
+               guard attrs[.link] != nil else { return }
+
+               let mentionText = (mutableAttrText.string as NSString).substring(with: range)
+
+               // Mention invalide → on retire le lien + souligné
+               if mentionText.count < 2 || !mentionText.hasPrefix("@") {
+                   mutableAttrText.removeAttribute(.link,            range: range)
+                   mutableAttrText.removeAttribute(.underlineStyle,  range: range)
+                   mutableAttrText.addAttribute(.foregroundColor, value: UIColor.black, range: range)
+                   if let font = UIFont(name: "NunitoSans-Regular", size: 15) {
+                       mutableAttrText.addAttribute(.font, value: font, range: range)
+                   }
+               }
+           }
+
+           textView.attributedText = mutableAttrText
+       }
 
 
     // Intercepte le clic sur un lien dans le UITextView
