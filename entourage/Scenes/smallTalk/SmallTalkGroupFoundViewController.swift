@@ -77,10 +77,13 @@ class SmallTalkGroupFoundViewController: UIViewController {
     }
 
     @objc private func startTapped() {
-        let vc = DetailConversationViewController() // Assure-toi que ce VC est bien configuré
-        vc.smallTalkId = "\(smallTalkId)"
-        vc.isSmallTalkMode = true
-        self.navigationController?.pushViewController(vc, animated: true)
+        let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+            vc.setupFromOtherVC(conversationId: self.smallTalkId, title: "Bonnes ondes", isOneToOne: true, conversation: nil)
+            vc.isSmallTalkMode = true
+            vc.smallTalkId = String(self.smallTalkId)
+            self.present(vc, animated: true)
+        }
     }
 }
 
