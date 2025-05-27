@@ -40,7 +40,7 @@ class SmallTalkGroupFoundViewController: UIViewController {
                     return user
                 }
 
-            self.users = filteredMembers + filteredMembers + filteredMembers
+            self.users = filteredMembers
 
             DispatchQueue.main.async {
                 self.pageControl.numberOfPages = self.users.count
@@ -77,10 +77,10 @@ class SmallTalkGroupFoundViewController: UIViewController {
     }
 
     @objc private func startTapped() {
-//        let vc = DetailConversationViewController() // Assure-toi que ce VC est bien configuré
-//        vc.smallTalkId = "\(smallTalkId)"
-//        vc.isSmallTalkMode = true
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = DetailConversationViewController() // Assure-toi que ce VC est bien configuré
+        vc.smallTalkId = "\(smallTalkId)"
+        vc.isSmallTalkMode = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
