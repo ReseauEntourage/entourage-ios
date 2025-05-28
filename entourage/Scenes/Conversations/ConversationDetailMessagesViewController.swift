@@ -83,6 +83,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     var isSmallTalkMode = false
     var smallTalkId: String = ""
     var meetUrl:String = ""
+    var uuidv2:String = ""
     private var autoRefreshTimer: Timer?
     private let autoRefreshInterval: TimeInterval = 5
     private var isSilentRefresh = false
@@ -342,13 +343,27 @@ class ConversationDetailMessagesViewController: UIViewController {
         return offsetY >= contentHeight - tableHeight - 1
     }
     
-    @objc private func didTapCameraButton() {
-        print("📸 Bouton caméra cliqué " , self.meetUrl)
-        if let url = URL(string: self.meetUrl) {
-            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
-        }
+    func generateJitsiURL(displayName: String, roomName: String = "Bonnes ondes ") -> URL? {
+        let uniqueRoomName = roomName + self.uuidv2
+        let baseURL = "https://meet.jit.si/\(uniqueRoomName)"
+        let encodedName = displayName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Invité"
+        let fragment = "#userInfo.displayName=%22\(encodedName)%22&config.startWithAudioMuted=false&config.startWithVideoMuted=false"
+        let fullURLString = baseURL + fragment
+        return URL(string: fullURLString)
     }
     
+    
+    @objc private func didTapCameraButton() {
+        let displayName = "Invité Mystère"
+        let roomName = "Bonnes ondes " + self.uuidv2
+
+        if let url = generateJitsiURL(displayName: displayName, roomName: roomName) {
+            print("📸 Ouverture Jitsi URL :", url.absoluteString)
+            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+        } else {
+            print("❌ URL invalide pour displayName: \(displayName)")
+        }
+    }
     
     
     func setupFromSmallTalk(smallTalkId: Int, title: String?, delegate: UpdateUnreadCountDelegate? = nil) {
@@ -371,6 +386,7 @@ class ConversationDetailMessagesViewController: UIViewController {
                 return
             }
             self.meetUrl = smallTalk.meeting_url ?? ""
+            self.uuidv2 = smallTalk.uuid_v2
             DispatchQueue.main.async {
                 if self.meetUrl == "" {
                     self.ui_btn_camera.isHidden = true
