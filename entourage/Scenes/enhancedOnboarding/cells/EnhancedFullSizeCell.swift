@@ -74,6 +74,7 @@ class EnhancedFullSizeCell: UITableViewCell {
                 self.ui_label_desc_phase_3.setFontBody(size: 13)
             } else {
                 self.ui_label_desc_phase_3.isHidden = true
+                
             }
         }
 

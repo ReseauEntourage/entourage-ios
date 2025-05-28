@@ -47,6 +47,7 @@ struct SmallTalk: Codable {
     let type: String?
     let name: String?
     let subname: String?
+    let meeting_url:String?
     let image_url: String?
     let members_count: Int?
     let last_message:LastMessage? = nil

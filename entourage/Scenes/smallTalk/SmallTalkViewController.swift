@@ -232,7 +232,7 @@ private extension SmallTalkViewController {
                            || steps[currentStepIndex].allowsMultipleSelection
         ui_btn_next.isEnabled = hasSelection
         ui_btn_next.setTitle(isLastStep
-                             ? "action_create_close_button".localized
+                             ? "enhanced_onboarding_button_title_next".localized
                              : "enhanced_onboarding_button_title_next".localized,
                              for: .normal)
     }

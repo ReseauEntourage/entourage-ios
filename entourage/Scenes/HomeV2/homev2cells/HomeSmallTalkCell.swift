@@ -89,10 +89,16 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
 
         switch item {
         case .talking(let userRequest):
-            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkGroupFoundViewController") as? SmallTalkGroupFoundViewController else { return }
-            vc.modalPresentationStyle = .fullScreen
-            parentViewController?.present(vc, animated: true)
+            let sb = UIStoryboard(name: StoryboardName.messages, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController,
+               let smalltalkId = userRequest.smalltalk_id {
+                
+                let smalltalkIdString = String(smalltalkId)
+                vc.setupFromOtherVC(conversationId: smalltalkId, title: "Bonnes ondes", isOneToOne: true, conversation: nil)
+                vc.isSmallTalkMode = true
+                vc.smallTalkId = smalltalkIdString
+                parentViewController?.present(vc, animated: true)
+            }
 
         case .create:
             let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)

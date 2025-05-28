@@ -474,7 +474,7 @@
 
 // take photo profile
 "take_photo_title" = "Ajouter une photo ?";
-"take_photo_description" = "Avec une photo, c’est tout de suite plus sympa. Montrez-nous votre sourire le plus chaleureux.";
+"take_photo_description" = "On se sent toujours plus à l’aise quand on voit à qui on s’adresse. Ajoutez votre photo pour faciliter les rencontres !";
 "take_photo" = "Prendre une photo";
 "take_gallery" = "Importer depuis la galerie";
 "description_move_photo" = "Déplacer et zoomer pour ajuster la photo de profil.";
@@ -1853,3 +1853,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 /* Boutons */
 "small_talk_btn_close" = "Fermer";
 "small_talk_btn_charte" = "Retrouvez la charte et les bonnes pratiques en cliquant <b>ici</b>";
+"home_button_start" = "Discuter";

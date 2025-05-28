@@ -117,7 +117,7 @@ class UserPhotoAddViewController: BasePopViewController {
     }
     
     @objc func onContinueClick() {
-        guard let requestId = userRequest?.uuid_v2 else {
+        guard let userRequest = self.userRequest else {
             let alert = UIAlertController(title: "Erreur", message: "Identifiant introuvable", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)
@@ -125,18 +125,27 @@ class UserPhotoAddViewController: BasePopViewController {
         }
 
         let sb = UIStoryboard(name: "SmallTalk", bundle: nil)
-        if let userRequest = self.userRequest {
-            let sb = UIStoryboard(name: "SmallTalk", bundle: nil)
-            if let nextVC = sb.instantiateViewController(withIdentifier: "SmallTalkSearchingViewController") as? SmallTalkSearchingViewController {
-                nextVC.configure(with: userRequest)
-                nextVC.modalPresentationStyle = .fullScreen
+        if let nextVC = sb.instantiateViewController(withIdentifier: "SmallTalkSearchingViewController") as? SmallTalkSearchingViewController {
+            nextVC.configure(with: userRequest)
+            nextVC.modalPresentationStyle = .fullScreen
+
+            // ✅ on remplace totalement la navigation
+            if let window = UIApplication.shared.windows.first {
+                window.rootViewController = nextVC
+                window.makeKeyAndVisible()
+            } else {
                 self.present(nextVC, animated: true)
             }
         }
     }
+
     
     @objc func onPreviousClick() {
-        self.dismiss(animated: true)
+        if isSmallTalkMode {
+            self.dismiss(animated: true) // on ferme seulement cette vue
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     func configureOrangeButton(_ button: UIButton, withTitle title: String) {
@@ -179,6 +188,7 @@ class UserPhotoAddViewController: BasePopViewController {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "PictureResizeVC") as? PicturePreviewResizeViewController {
             vc.pictureSettingDelegate = self.pictureSettingDelegate
             vc.currentImage = self.selectedImage
+            vc.isSmallTalkMode = self.isSmallTalkMode
             vc.delegate = self
             vc.isFromProfile = self.isFromProfile
             vc.isFromDeepLink = self.isFromDeepLink

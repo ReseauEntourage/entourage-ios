@@ -25,7 +25,8 @@ class PicturePreviewResizeViewController: BasePopViewController {
     var currentImage:UIImage? = nil
     weak var delegate:TakePhotoDelegate? = nil
     let MaxImageSize:CGFloat = 300
-    
+    var isSmallTalkMode: Bool = false
+
     var isFromProfile = false
     var isFromDeepLink = false
     var pictureSettingDelegate:ImageReUpLoadDelegate?
@@ -128,14 +129,11 @@ class PicturePreviewResizeViewController: BasePopViewController {
     
     //MARK: - IBActions -
     @IBAction func action_validate(_ sender: Any) {
-        if isFromProfile {
-            self.updateUserPhoto()
-            
-        }
-        else {
-            delegate?.updatePhoto(image: self.processImage())
-            self.navigationController?.popViewController(animated: true)
-        }
+        guard let processedImage = self.processImage() else { return }
+
+        delegate?.updatePhoto(image: processedImage)
+
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

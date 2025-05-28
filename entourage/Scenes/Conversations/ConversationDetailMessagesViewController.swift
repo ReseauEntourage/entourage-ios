@@ -64,6 +64,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     // >>>> Ajoutées dans votre code <<<<
     @IBOutlet weak var ui_label_event_discut: UILabel!
     @IBOutlet weak var ui_view_event_discut: UIView!
+    @IBOutlet weak var ui_btn_camera: UIButton!
     
     // MARK: - Outlets pour la fonctionnalité de mention
     @IBOutlet weak var ui_tableview_mentions: UITableView! // TableView des suggestions
@@ -81,6 +82,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     var type:String = ""
     var isSmallTalkMode = false
     var smallTalkId: String = ""
+    var meetUrl:String = ""
     private var autoRefreshTimer: Timer?
     private let autoRefreshInterval: TimeInterval = 5
     private var isSilentRefresh = false
@@ -238,6 +240,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             getMessages()
             getDetailConversation()
         }
+        ui_btn_camera.addTarget(self, action: #selector(didTapCameraButton), for: .touchUpInside)
     }
 
     
@@ -339,6 +342,13 @@ class ConversationDetailMessagesViewController: UIViewController {
         return offsetY >= contentHeight - tableHeight - 1
     }
     
+    @objc private func didTapCameraButton() {
+        print("📸 Bouton caméra cliqué " , self.meetUrl)
+        if let url = URL(string: self.meetUrl) {
+            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+        }
+    }
+    
     
     
     func setupFromSmallTalk(smallTalkId: Int, title: String?, delegate: UpdateUnreadCountDelegate? = nil) {
@@ -353,14 +363,20 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
 
         SmallTalkService.getSmallTalk(id: smallTalkId) { smallTalk, error in
+            
             guard let smallTalk = smallTalk else {
                 DispatchQueue.main.async {
                     IHProgressHUD.dismiss()
                 }
                 return
             }
-
+            self.meetUrl = smallTalk.meeting_url ?? ""
             DispatchQueue.main.async {
+                if self.meetUrl == "" {
+                    self.ui_btn_camera.isHidden = true
+                }else{
+                    self.ui_btn_camera.isHidden = false
+                }
                 self.currentConversation = Conversation(from: smallTalk)
                 self.currentMessageTitle = self.currentConversation?.title
                 self.currentUserId = UserDefaults.currentUser?.sid ?? 0
