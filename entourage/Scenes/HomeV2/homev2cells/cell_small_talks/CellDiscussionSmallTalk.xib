@@ -124,10 +124,10 @@
             <size key="customSize" width="532" height="150"/>
             <connections>
                 <outlet property="ui_contraint_start_title" destination="sMa-uE-5xH" id="cvP-a8-DmQ"/>
-                <outlet property="ui_img_avatar_2" destination="h8f-uG-J5Y" id="Ymn-n8-fou"/>
-                <outlet property="ui_img_avatar_3" destination="QHa-aw-m1i" id="NVy-pX-Pjx"/>
-                <outlet property="ui_img_avatar_4" destination="cNR-bJ-60b" id="ZQE-E3-l7G"/>
-                <outlet property="ui_img_avatar_one" destination="TxM-u6-HcV" id="XzS-ZF-Pyi"/>
+                <outlet property="ui_img_avatar_2" destination="h8f-uG-J5Y" id="oDb-SP-Tjt"/>
+                <outlet property="ui_img_avatar_3" destination="TxM-u6-HcV" id="fbA-sH-ZQ1"/>
+                <outlet property="ui_img_avatar_4" destination="cNR-bJ-60b" id="NDR-YX-gl3"/>
+                <outlet property="ui_img_avatar_one" destination="QHa-aw-m1i" id="2d0-34-BPa"/>
                 <outlet property="ui_label_subtitle" destination="gws-W2-H1Z" id="m52-3p-wGe"/>
                 <outlet property="ui_label_title" destination="yFg-Oy-05T" id="4Rx-6B-dJR"/>
             </connections>

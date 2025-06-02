@@ -39,23 +39,23 @@ class CellDiscussionSmallTalk:UICollectionViewCell {
         ui_img_avatar_4.isHidden = true
 
         if avatars.indices.contains(0) {
-            ui_img_avatar_4.isHidden = false
-            ui_img_avatar_4.sd_setImage(with: URL(string: avatars[0]), placeholderImage: UIImage(named: "placeholder_avatar"))
+            ui_img_avatar_one.isHidden = false
+            ui_img_avatar_one.sd_setImage(with: URL(string: avatars[0]), placeholderImage: UIImage(named: "placeholder_avatar"))
             ui_contraint_start_title.constant = 10
         }
         if avatars.indices.contains(1) {
-            ui_img_avatar_3.isHidden = false
-            ui_img_avatar_3.sd_setImage(with: URL(string: avatars[1]), placeholderImage: UIImage(named: "placeholder_avatar"))
+            ui_img_avatar_2.isHidden = false
+            ui_img_avatar_2.sd_setImage(with: URL(string: avatars[1]), placeholderImage: UIImage(named: "placeholder_avatar"))
             ui_contraint_start_title.constant = 30
         }
         if avatars.indices.contains(2) {
-            ui_img_avatar_2.isHidden = false
-            ui_img_avatar_2.sd_setImage(with: URL(string: avatars[2]), placeholderImage: UIImage(named: "placeholder_avatar"))
+            ui_img_avatar_3.isHidden = false
+            ui_img_avatar_3.sd_setImage(with: URL(string: avatars[2]), placeholderImage: UIImage(named: "placeholder_avatar"))
             ui_contraint_start_title.constant = 50
         }
         if avatars.indices.contains(3) {
-            ui_img_avatar_one.isHidden = false
-            ui_img_avatar_one.sd_setImage(with: URL(string: avatars[3]), placeholderImage: UIImage(named: "placeholder_avatar"))
+            ui_img_avatar_4.isHidden = false
+            ui_img_avatar_4.sd_setImage(with: URL(string: avatars[3]), placeholderImage: UIImage(named: "placeholder_avatar"))
             ui_contraint_start_title.constant = 70
         }
     }
