@@ -227,7 +227,15 @@ struct SmallTalkService: ParsingDataCodable {
         guard let token = UserDefaults.token else { return }
         let endpoint = "user_smalltalks/force_match?token=\(token)&user_smalltalk_id=\(id)"
 
-        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { data, _, error in
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 400,httpResponse.statusCode == 401 || httpResponse.statusCode == 403  {
+                var err = EntourageNetworkError()
+                err.code = "400"
+                err.message = "Groupe non disponible."
+                completion(nil, err)
+                return
+            }
+
             guard let data = data, error == nil else {
                 completion(nil, error)
                 return
@@ -238,10 +246,14 @@ struct SmallTalkService: ParsingDataCodable {
                 completion(response, nil)
             } catch {
                 print("❌ JSON decode error in forceMatch:", error)
-                completion(nil, nil)
+                var err = EntourageNetworkError()
+                err.code = "500"
+                err.message = "Erreur de décodage JSON"
+                completion(nil, err)
             }
         }
     }
+
     
 }
 

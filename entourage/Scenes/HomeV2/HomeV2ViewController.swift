@@ -576,13 +576,24 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
 
                 let matchedRequests = userRequests.filter { $0.smalltalk != nil }
                 let pendingRequests = userRequests.filter { $0.smalltalk == nil }
+
+                // Ajouter les matched
                 for req in matchedRequests {
                     dto.append(.talking(req))
                 }
-                if !pendingRequests.isEmpty {
+
+                // Ajouter waiting s'il y en a
+                let hasWaiting = !pendingRequests.isEmpty
+                if hasWaiting {
                     dto.append(.waiting)
                 }
-                dto.append(.create) // bouton de création toujours à la fin
+
+                // Conditions d'affichage du bouton create
+                let shouldAddCreate = matchedRequests.count < 3 && !hasWaiting
+                if shouldAddCreate {
+                    dto.append(.create)
+                }
+
                 cell.data = dto
                 return cell
             }

@@ -27,8 +27,8 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         configureTable()
-        //fetchAlmostMatches()
-        configureTest()
+        fetchAlmostMatches()
+        //configureTest()
     }
     
     func configureTest() {
@@ -164,18 +164,23 @@ extension SmallTalkAlmostMatchingViewController: UITableViewDataSource, UITableV
 
         cell.onJoinTapped = { [weak self] in
             guard let self = self else { return }
-            SmallTalkService.forceMatch(id: data.userSmallTalkId) { response, _ in
-                guard let smallTalkId = response?.smalltalk_id, response?.match == true else {
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Erreur", message: "Impossible de rejoindre ce groupe.", preferredStyle: .alert)
+
+            SmallTalkService.forceMatch(id: data.userSmallTalkId) { response, error in
+                DispatchQueue.main.async {
+                    if let response = response, response.match == true, let smallTalkId = response.smalltalk_id {
+                        self.openConversation(for: smallTalkId)
+                    } else {
+                        let message: String
+                        if let err = error, err.code == "400" {
+                            message = err.message ?? "Ce groupe n'est plus disponible."
+                        } else {
+                            message = "Impossible de rejoindre ce groupe."
+                        }
+
+                        let alert = UIAlertController(title: "Erreur", message: message, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default))
                         self.present(alert, animated: true)
                     }
-                    return
-                }
-
-                DispatchQueue.main.async {
-                    self.openConversation(for: smallTalkId)
                 }
             }
         }

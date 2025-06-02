@@ -101,30 +101,30 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
                 parentViewController?.present(vc, animated: true)
             }
 
-//        case .create:
-//            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-//            guard let vc = storyboard.instantiateInitialViewController() else { return }
-//            vc.modalPresentationStyle = .fullScreen
-//            parentViewController?.present(vc, animated: true)
         case .create:
             let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-
-            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkAlmostMatchingViewController") as? SmallTalkAlmostMatchingViewController else { return }
-
-            // 👉 Configuration de test ici (tu peux garder les vraies valeurs si tu les as)
-            vc.configure(
-                with: "fake_request_id",
-                group: "one",
-                gender: true,
-                locality: true
-            )
-
-            // 👉 Ajoute configureTest si tu veux injecter des données factices :
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                vc.configureTest()
-            }
+            guard let vc = storyboard.instantiateInitialViewController() else { return }
             vc.modalPresentationStyle = .fullScreen
             parentViewController?.present(vc, animated: true)
+//        case .create:
+//            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
+//
+//            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkAlmostMatchingViewController") as? SmallTalkAlmostMatchingViewController else { return }
+//
+//            // 👉 Configuration de test ici (tu peux garder les vraies valeurs si tu les as)
+//            vc.configure(
+//                with: "fake_request_id",
+//                group: "one",
+//                gender: true,
+//                locality: true
+//            )
+//
+//            // 👉 Ajoute configureTest si tu veux injecter des données factices :
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                vc.configureTest()
+//            }
+//            vc.modalPresentationStyle = .fullScreen
+//            parentViewController?.present(vc, animated: true)
 
         case .waiting:
             let alert = UIAlertController(
