@@ -71,7 +71,6 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
             hasMatchedProfile: true,
             unmatchCount: 0
         )
-
         // Injection
         self.rows = [fakeRequest1, fakeRequest2]
         self.ui_tableview.reloadData()
