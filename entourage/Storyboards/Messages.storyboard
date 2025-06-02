@@ -832,6 +832,7 @@ L2</string>
                         <outlet property="ui_constraint_tableview_top_margin" destination="Ten-nN-dXR" id="AIH-t3-Ias"/>
                         <outlet property="ui_constraint_tableview_top_top" destination="fpK-5S-7AD" id="jun-mN-ZNG"/>
                         <outlet property="ui_iv_bt_send" destination="lHk-Qc-MrX" id="RWh-i9-mWj"/>
+                        <outlet property="ui_iv_event" destination="Glz-SJ-tXd" id="5fX-ip-rs6"/>
                         <outlet property="ui_label_event_discut" destination="G1n-dZ-oJv" id="1Jq-TW-DKm"/>
                         <outlet property="ui_subtitle_new_conv" destination="y0I-Ty-OBM" id="8YZ-VP-cjW"/>
                         <outlet property="ui_tableview" destination="Tp1-wD-wOr" id="ggU-e3-Xgb"/>

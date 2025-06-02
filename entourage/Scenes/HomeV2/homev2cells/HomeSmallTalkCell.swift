@@ -106,7 +106,9 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
             guard let vc = storyboard.instantiateInitialViewController() else { return }
             vc.modalPresentationStyle = .fullScreen
             parentViewController?.present(vc, animated: true)
-//        case .create:
+            
+            
+//        case .create: //Testing the almostMatching
 //            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
 //
 //            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkAlmostMatchingViewController") as? SmallTalkAlmostMatchingViewController else { return }

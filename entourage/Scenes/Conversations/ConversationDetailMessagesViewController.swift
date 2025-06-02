@@ -62,6 +62,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     @IBOutlet weak var ui_title_block: UILabel!
     
     // >>>> Ajoutées dans votre code <<<<
+    @IBOutlet weak var ui_iv_event: UIImageView!
     @IBOutlet weak var ui_label_event_discut: UILabel!
     @IBOutlet weak var ui_view_event_discut: UIView!
     @IBOutlet weak var ui_btn_camera: UIButton!
@@ -211,20 +212,33 @@ class ConversationDetailMessagesViewController: UIViewController {
             ui_view_new_conversation.isHidden = false
             ui_view_event_discut.isHidden = false
             ui_view_new_conversation.backgroundColor = UIColor.white
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleEventViewTap))
-            ui_view_event_discut.addGestureRecognizer(tapGesture)
-            ui_view_event_discut.isUserInteractionEnabled = true
             ui_title_new_conv.text = ""
             ui_subtitle_new_conv.text = ""
         } else {
             ui_constraint_tableview_top_margin.constant = 0
-            ui_view_event_discut.isHidden = true
             ui_view_new_conversation.backgroundColor = UIColor.appBeige
             ui_title_new_conv.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             ui_subtitle_new_conv.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
             ui_title_new_conv.text = "message_title_new_conv".localized
             ui_subtitle_new_conv.text = "message_subtitle_new_conv".localized
+
+            // ➕ Active aussi la vue en SmallTalk
+            if isSmallTalkMode {
+                showViewNew()
+                ui_view_event_discut.isHidden = false
+                ui_view_new_conversation.isHidden = false
+                ui_view_new_conversation.backgroundColor = UIColor.clear
+                ui_title_new_conv.text = ""
+                ui_subtitle_new_conv.text = ""
+                ui_label_event_discut.text = "small_talk_btn_charte".localized
+                ui_iv_event.image = UIImage(named: "ic_charte")
+            } else {
+                ui_view_event_discut.isHidden = true
+            }
         }
+        let tapCharte = UITapGestureRecognizer(target: self, action: #selector(handleCharteTapped))
+        ui_view_event_discut.addGestureRecognizer(tapCharte)
+        ui_view_event_discut.isUserInteractionEnabled = true
 
         ui_textview_message.typingAttributes = [
             .font: UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
@@ -242,6 +256,12 @@ class ConversationDetailMessagesViewController: UIViewController {
             getDetailConversation()
         }
         ui_btn_camera.addTarget(self, action: #selector(didTapCameraButton), for: .touchUpInside)
+    }
+    
+    @objc private func handleCharteTapped() {
+        let vc = GoodPracticesViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
     }
 
     
@@ -354,14 +374,10 @@ class ConversationDetailMessagesViewController: UIViewController {
     
     
     @objc private func didTapCameraButton() {
-        let displayName = "Invité Mystère"
-        let roomName = "Bonnes ondes " + self.uuidv2
-
-        if let url = generateJitsiURL(displayName: displayName, roomName: roomName) {
-            print("📸 Ouverture Jitsi URL :", url.absoluteString)
+        if let url = URL(string: self.meetUrl), !self.meetUrl.isEmpty {
             WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
         } else {
-            print("❌ URL invalide pour displayName: \(displayName)")
+            print("❌ URL invalide ou vide :", self.meetUrl)
         }
     }
     
@@ -511,7 +527,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
 
     func showViewNew() {
-        if self.currentConversation?.type != "outing"{
+        if self.currentConversation?.type != "outing" || !isSmallTalkMode {
             self.ui_constraint_tableview_top_top.priority = .defaultLow
             self.ui_constraint_tableview_top_margin.priority = .required
             self.ui_constraint_tableview_top_margin.constant = ui_view_new_conversation.frame.height

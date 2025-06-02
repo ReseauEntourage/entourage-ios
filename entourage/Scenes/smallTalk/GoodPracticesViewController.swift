@@ -1,22 +1,10 @@
-//
-//  GoodPracticesViewController.swift
-//  entourage
-//
-//  Created by Clement entourage on 26/05/2025.
-//
-
-import Foundation
 import UIKit
 
 class GoodPracticesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) {
-            view.backgroundColor = .systemBackground
-        } else {
-            // Fallback on earlier versions
-        }
+        view.backgroundColor = .clear
         setupScrollView()
     }
 
@@ -32,62 +20,119 @@ class GoodPracticesViewController: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
 
-        let contentView = UIStackView()
-        contentView.axis = .vertical
-        contentView.spacing = 20
-        contentView.alignment = .fill
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(contentView)
+        let mainStackView = UIStackView()
+        mainStackView.axis = .vertical
+        mainStackView.spacing = 0
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(mainStackView)
 
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -40)
+            mainStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            mainStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
 
-        contentView.addArrangedSubview(titleLabel("Des bonnes pratiques pour des Bonnes Ondes"))
-        contentView.addArrangedSubview(descriptionLabel("Les Bonnes ondes vous connectent rapidement avec une ou plusieurs personnes pour discuter et créer du lien, simplement et sans pression."))
+        // MARK: - BEIGE BLOCK
+        let beigeContainer = UIView()
+        beigeContainer.backgroundColor = UIColor.appBeigeClair2
+        beigeContainer.translatesAutoresizingMaskIntoConstraints = false
 
-        contentView.addArrangedSubview(sectionBox(
-            title: "✅ Ce que c'est",
+        let beigeStack = UIStackView()
+        beigeStack.axis = .vertical
+        beigeStack.spacing = 20
+        beigeStack.alignment = .fill
+        beigeStack.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        beigeStack.isLayoutMarginsRelativeArrangement = true
+        beigeStack.translatesAutoresizingMaskIntoConstraints = false
+        beigeContainer.addSubview(beigeStack)
+
+        NSLayoutConstraint.activate([
+            beigeStack.topAnchor.constraint(equalTo: beigeContainer.topAnchor),
+            beigeStack.bottomAnchor.constraint(equalTo: beigeContainer.bottomAnchor),
+            beigeStack.leadingAnchor.constraint(equalTo: beigeContainer.leadingAnchor),
+            beigeStack.trailingAnchor.constraint(equalTo: beigeContainer.trailingAnchor)
+        ])
+
+        let title = titleLabel("small_talk_guidelines_title".localized)
+        title.setFontTitle(size: 24)
+        beigeStack.addArrangedSubview(title)
+
+        let imageView = UIImageView(image: UIImage(named: "ic_puzzle_trio"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 120),
+            imageView.widthAnchor.constraint(equalToConstant: 120)
+        ])
+        beigeStack.addArrangedSubview(imageView)
+
+        beigeStack.addArrangedSubview(descriptionLabel("small_talk_guidelines_intro".localized))
+
+        beigeStack.addArrangedSubview(sectionBox(
+            title: "small_talk_what_it_is_title".localized,
             items: [
-                "Un échange convivial et bienveillant",
-                "Une rencontre authentique entre plusieurs personnes",
-                "Une occasion de briser l’isolement"
-            ]
+                "small_talk_what_it_is_item_1".localized,
+                "small_talk_what_it_is_item_2".localized,
+                "small_talk_what_it_is_item_3".localized
+            ],
+            icon: "✅"
         ))
 
-        contentView.addArrangedSubview(sectionBox(
-            title: "❌ Ce que ce n'est pas",
+        beigeStack.addArrangedSubview(sectionBox(
+            title: "small_talk_what_it_is_not_title".localized,
             items: [
-                "Un accompagnement social ou une aide formelle",
-                "Une conversation à sens unique ou un débat",
-                "Une discussion intrusive sur des sujets sensibles"
-            ]
+                "small_talk_what_it_is_not_item_1".localized,
+                "small_talk_what_it_is_not_item_2".localized,
+                "small_talk_what_it_is_not_item_3".localized
+            ],
+            icon: "❌"
         ))
 
-        contentView.addArrangedSubview(titleLabel("La charte éthique Entourage"))
+        mainStackView.addArrangedSubview(beigeContainer)
 
-        contentView.addArrangedSubview(ethicBox(
-            icon: "🤝", title: "Bienveillance",
-            text: "Nous participons à cet échange avec une intention positive et respectueuse."
+        // MARK: - WHITE BLOCK
+        let whiteContainer = UIView()
+        whiteContainer.backgroundColor = .white
+        whiteContainer.translatesAutoresizingMaskIntoConstraints = false
+
+        let whiteStack = UIStackView()
+        whiteStack.axis = .vertical
+        whiteStack.spacing = 20
+        whiteStack.alignment = .fill
+        whiteStack.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 40, right: 20)
+        whiteStack.isLayoutMarginsRelativeArrangement = true
+        whiteStack.translatesAutoresizingMaskIntoConstraints = false
+        whiteContainer.addSubview(whiteStack)
+
+        NSLayoutConstraint.activate([
+            whiteStack.topAnchor.constraint(equalTo: whiteContainer.topAnchor),
+            whiteStack.bottomAnchor.constraint(equalTo: whiteContainer.bottomAnchor),
+            whiteStack.leadingAnchor.constraint(equalTo: whiteContainer.leadingAnchor),
+            whiteStack.trailingAnchor.constraint(equalTo: whiteContainer.trailingAnchor)
+        ])
+
+        whiteStack.addArrangedSubview(titleLabel("small_talk_ethics_title".localized))
+
+        whiteStack.addArrangedSubview(ethicBox(
+            title: "small_talk_ethics_1_title".localized,
+            text: "small_talk_ethics_1_desc".localized
         ))
 
-        contentView.addArrangedSubview(ethicBox(
-            icon: "🗣️", title: "Consentement",
-            text: "Nous respectons les limites et les souhaits de notre interlocuteur."
+        whiteStack.addArrangedSubview(ethicBox(
+            title: "small_talk_ethics_2_title".localized,
+            text: "small_talk_ethics_2_desc".localized
         ))
 
-        contentView.addArrangedSubview(ethicBox(
-            icon: "🔒", title: "Confidentialité",
-            text: "Nous ne partageons pas d’informations personnelles (nom, adresse, numéro de téléphone...)."
+        whiteStack.addArrangedSubview(ethicBox(
+            title: "small_talk_ethics_3_title".localized,
+            text: "small_talk_ethics_3_desc".localized
         ))
 
-        contentView.addArrangedSubview(ethicBox(
-            icon: "🌍", title: "Ouverture et non discrimination",
-            text: "Nous accueillons toutes les personnes sans distinction de genre, d'origine, de croyance ou de parcours de vie."
+        whiteStack.addArrangedSubview(ethicBox(
+            title: "small_talk_ethics_4_title".localized,
+            text: "small_talk_ethics_4_desc".localized
         ))
 
         let closeButton = UIButton(type: .system)
@@ -97,45 +142,47 @@ class GoodPracticesViewController: UIViewController {
         closeButton.layer.cornerRadius = 8
         closeButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
-        contentView.addArrangedSubview(closeButton)
+        whiteStack.addArrangedSubview(closeButton)
+
+        mainStackView.addArrangedSubview(whiteContainer)
     }
 
     private func titleLabel(_ text: String) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.setFontTitle(size: 20)
         label.numberOfLines = 0
         return label
     }
 
     private func descriptionLabel(_ text: String) -> UILabel {
         let label = UILabel()
-        label.text = text
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.attributedText = htmlToAttributedString(text)
+        label.setFontBody(size: 15)
         label.textColor = .darkGray
         label.numberOfLines = 0
         return label
     }
 
-    private func sectionBox(title: String, items: [String]) -> UIView {
+    private func sectionBox(title: String, items: [String], icon: String) -> UIView {
         let box = UIStackView()
         box.axis = .vertical
         box.spacing = 10
         box.alignment = .leading
         box.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         box.isLayoutMarginsRelativeArrangement = true
-        box.backgroundColor = UIColor.appGrey151
+        box.backgroundColor = .white
         box.layer.cornerRadius = 12
 
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.setFontTitle(size: 16)
         box.addArrangedSubview(titleLabel)
 
         for item in items {
             let itemLabel = UILabel()
-            itemLabel.text = item
-            itemLabel.font = UIFont.systemFont(ofSize: 15)
+            itemLabel.text = "\(icon) \(item)"
+            itemLabel.setFontBody(size: 15)
             itemLabel.numberOfLines = 0
             box.addArrangedSubview(itemLabel)
         }
@@ -143,7 +190,7 @@ class GoodPracticesViewController: UIViewController {
         return box
     }
 
-    private func ethicBox(icon: String, title: String, text: String) -> UIView {
+    private func ethicBox(title: String, text: String) -> UIView {
         let box = UIStackView()
         box.axis = .vertical
         box.spacing = 5
@@ -154,17 +201,28 @@ class GoodPracticesViewController: UIViewController {
         box.layer.cornerRadius = 12
 
         let titleLabel = UILabel()
-        titleLabel.text = "\(icon) \(title)"
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        titleLabel.text = title
+        titleLabel.setFontTitle(size: 16)
         box.addArrangedSubview(titleLabel)
 
         let bodyLabel = UILabel()
         bodyLabel.text = text
-        bodyLabel.font = UIFont.systemFont(ofSize: 15)
+        bodyLabel.setFontBody(size: 15)
         bodyLabel.numberOfLines = 0
         box.addArrangedSubview(bodyLabel)
 
         return box
+    }
+
+    private func htmlToAttributedString(_ html: String) -> NSAttributedString {
+        let data = Data(html.utf8)
+        if let attributed = try? NSAttributedString(data: data,
+                                                    options: [.documentType: NSAttributedString.DocumentType.html,
+                                                              .characterEncoding: String.Encoding.utf8.rawValue],
+                                                    documentAttributes: nil) {
+            return attributed
+        }
+        return NSAttributedString(string: html)
     }
 
     @objc private func closeTapped() {
