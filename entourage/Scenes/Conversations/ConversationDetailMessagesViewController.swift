@@ -387,7 +387,31 @@ class ConversationDetailMessagesViewController: UIViewController {
             }
             self.meetUrl = smallTalk.meeting_url ?? ""
             self.uuidv2 = smallTalk.uuid_v2
+            self.ui_top_view.populateCustom(
+                title: self.currentMessageTitle ?? "",
+                titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
+                titleColor: .black,
+                imageName: nil,
+                backgroundColor: .appBeigeClair,
+                delegate: self, // ✅ obligatoire pour que le bouton marche
+                showSeparator: true,
+                cornerRadius: nil,
+                isClose: false,
+                marginLeftButton: nil
+            )
             DispatchQueue.main.async {
+                self.ui_top_view.populateCustom(
+                    title: self.currentMessageTitle ?? "",
+                    titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
+                    titleColor: .black,
+                    imageName: nil,
+                    backgroundColor: .appBeigeClair,
+                    delegate: self, // ✅ obligatoire pour que le bouton marche
+                    showSeparator: true,
+                    cornerRadius: nil,
+                    isClose: false,
+                    marginLeftButton: nil
+                )
                 if self.meetUrl == "" {
                     self.ui_btn_camera.isHidden = true
                 }else{
@@ -397,6 +421,7 @@ class ConversationDetailMessagesViewController: UIViewController {
                 self.currentMessageTitle = self.currentConversation?.title
                 self.currentUserId = UserDefaults.currentUser?.sid ?? 0
                 self.isOneToOne = false
+
                 self.ui_top_view.updateTitle(title: self.currentMessageTitle ?? "SmallTalk")
                 self.updateInputInfos()
             }
@@ -1189,12 +1214,16 @@ extension ConversationDetailMessagesViewController: MJNavBackViewDelegate {
     }
     
     func goBack() {
+        print("eho")
         self.parentDelegate?.updateUnreadCount(
             conversationId: conversationId,
             currentIndexPathSelected: selectedIndexPath
         )
-        self.dismiss(animated: true)
-        self.navigationController?.dismiss(animated: true)
+        if self.navigationController?.viewControllers.count ?? 0 > 1 {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true)
+        }
     }
 }
 

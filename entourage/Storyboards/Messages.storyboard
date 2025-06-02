@@ -297,7 +297,7 @@
                                         </constraints>
                                     </view>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiX-Wb-u2e">
-                                        <rect key="frame" x="286" y="14" width="40" height="40"/>
+                                        <rect key="frame" x="306" y="14" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="9uY-Mu-oCe"/>
                                             <constraint firstAttribute="width" constant="40" id="bhz-g1-Qvs"/>
@@ -788,7 +788,7 @@ L2</string>
                                     <constraint firstItem="8wX-KB-efG" firstAttribute="leading" secondItem="4TP-kv-PK9" secondAttribute="leading" id="8rB-eG-JeC"/>
                                     <constraint firstAttribute="trailing" secondItem="Jpq-Gp-ntZ" secondAttribute="trailing" id="9c1-wA-G8x"/>
                                     <constraint firstItem="TiX-Wb-u2e" firstAttribute="top" secondItem="ft8-DI-A89" secondAttribute="top" id="BRt-di-5GM"/>
-                                    <constraint firstItem="ft8-DI-A89" firstAttribute="leading" secondItem="TiX-Wb-u2e" secondAttribute="trailing" constant="30" id="EgS-8a-P6g"/>
+                                    <constraint firstItem="ft8-DI-A89" firstAttribute="leading" secondItem="TiX-Wb-u2e" secondAttribute="trailing" constant="10" id="EgS-8a-P6g"/>
                                     <constraint firstAttribute="bottom" secondItem="ezL-qH-Mp6" secondAttribute="bottom" constant="20" id="IwX-vu-rvA"/>
                                     <constraint firstItem="ft8-DI-A89" firstAttribute="centerY" secondItem="Jpq-Gp-ntZ" secondAttribute="centerY" id="Kbd-Bq-6Ge"/>
                                     <constraint firstItem="Tp1-wD-wOr" firstAttribute="leading" secondItem="4TP-kv-PK9" secondAttribute="leading" id="PbA-tE-ITT"/>

@@ -87,7 +87,6 @@ class SmallTalkGroupFoundViewController: UIViewController {
     }
 }
 
-
 extension SmallTalkGroupFoundViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return users.count

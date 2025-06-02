@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="473" height="237"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wof-Yx-i0V">
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wof-Yx-i0V">
                         <rect key="frame" x="10" y="20" width="453" height="197"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_puzzle_home" translatesAutoresizingMaskIntoConstraints="NO" id="ThL-Ar-wbM">

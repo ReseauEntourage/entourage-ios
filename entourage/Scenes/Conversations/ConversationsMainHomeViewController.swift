@@ -84,6 +84,7 @@ class ConversationsMainHomeViewController: UIViewController {
         IHProgressHUD.show()
 
         if selectedFilter == "event_conv_filter_smalltalks".localized {
+            self.isLastPage = true
             SmallTalkService.listSmallTalks { smallTalks, error in
                 IHProgressHUD.dismiss()
                 self.isFetching = false
@@ -184,7 +185,9 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
 
         case .smalltalk(let smallTalk):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
-            let conversation = Conversation(from: smallTalk)
+            var conversation = Conversation(from: smallTalk)
+            let memberNames = conversation.members?.compactMap { $0.username }.joined(separator: " • ") ?? ""
+            conversation.title = memberNames
             cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
             return cell
 

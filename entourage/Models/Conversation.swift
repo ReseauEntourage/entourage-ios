@@ -239,4 +239,4 @@ extension Conversation {
 
         self.members_count = smallTalk.members_count
     }
-}
+} 

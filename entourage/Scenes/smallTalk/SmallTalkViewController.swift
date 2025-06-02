@@ -124,16 +124,16 @@ private extension SmallTalkViewController {
                 choices: [
                     SmallTalkChoice(id: "male", // ⬅️ adapté au backend
                                     title: NSLocalizedString("small_talk_step3_item1_title", comment: ""),
-                                    subtitle: nil,
-                                    imageName: ""),
+                                    subtitle: "small_talk_step3_item1_subtitle".localized,
+                                    imageName: "ic_male"),
                     SmallTalkChoice(id: "female",
                                     title: NSLocalizedString("small_talk_step3_item2_title", comment: ""),
-                                    subtitle: nil,
-                                    imageName: ""),
+                                    subtitle: "small_talk_step3_item2_subtitle".localized,
+                                    imageName: "ic_female"),
                     SmallTalkChoice(id: "non_binary",
                                     title: NSLocalizedString("small_talk_step3_item3_title", comment: ""),
-                                    subtitle: nil,
-                                    imageName: "")
+                                    subtitle: "small_talk_step3_item3_subtitle".localized,
+                                    imageName: "ic_non_binary")
                 ],
                 allowsMultipleSelection: false),
 
@@ -225,7 +225,7 @@ private extension SmallTalkViewController {
     }
 
     func updateNavButtons() {
-        ui_btn_previous.isEnabled = currentStepIndex > 0
+        //ui_btn_previous.isEnabled = currentStepIndex > 0
 
         let isLastStep = currentStepIndex == steps.count - 1
         let hasSelection = !(selectedIdsByStep[currentStepIndex]?.isEmpty ?? true)
@@ -289,15 +289,16 @@ private extension SmallTalkViewController {
     }
 
     @objc func goToPrevious() {
-        guard currentStepIndex > 0 else { return }
-        currentStepIndex -= 1
-        rebuildRows(animated: true)
-        if(currentStepIndex == 0){
+        if currentStepIndex == 0 {
+            // On est déjà à la première étape → retour à la home
+            print("eho return home")
             AppState.navigateToMainApp()
-        }else{
-            print("eho current step ", currentStepIndex)
+        } else {
+            currentStepIndex -= 1
+            rebuildRows(animated: true)
         }
     }
+
 
     @objc func goToNext() {
         guard let selected = selectedIdsByStep[currentStepIndex], !selected.isEmpty else { return }

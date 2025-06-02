@@ -61,6 +61,7 @@ extension HomeSmallTalkCell: UICollectionViewDataSource {
 
         switch item {
         case .create:
+            
             return collectionView.dequeueReusableCell(withReuseIdentifier: "CellCreateSmallTalk", for: indexPath)
         case .waiting:
             return collectionView.dequeueReusableCell(withReuseIdentifier: "CellWaitingSmallTalk", for: indexPath)

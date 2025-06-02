@@ -1772,8 +1772,11 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "small_talk_step_title_3" = "Quel genre vous correspond le mieux ?";
 "small_talk_step_subtitle_3" = "Cette information nous aide à personnaliser vos mises en relation. Vous pourrez choisir la mixité ou pas de votre groupe à l’étape suivante.";
 "small_talk_step3_item1_title" = "Homme";
+"small_talk_step3_item1_subtitle" = "Vous vous identifiez principalement comme un homme";
 "small_talk_step3_item2_title" = "Femme";
+"small_talk_step3_item2_subtitle" = "Vous vous identifiez principalement comme une femme";
 "small_talk_step3_item3_title" = "Non binaire";
+"small_talk_step3_item3_subtitle" = "Votre genre ne correspond pas exclusivement aux catégories 'femme' ou 'homme' ";
 
 /* Step 4: Confort selon le genre */
 "small_talk_step_title_4" = "Avec qui vous sentez-vous le plus à l’aise pour échanger ?";
