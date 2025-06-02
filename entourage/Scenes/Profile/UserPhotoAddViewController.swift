@@ -171,17 +171,7 @@ class UserPhotoAddViewController: BasePopViewController {
     //MARK: - Methods -
     
     @objc func close() {
-        guard let processedImage = self.processImage() else { return }
-
-        if isFromProfile {
-            // On propague l’image vers le delegate (UserPhotoAddViewController)
-            delegate?.updatePhoto(image: processedImage)
-        } else {
-            // Cas onboarding / smalltalk classique
-            delegate?.updatePhoto(image: processedImage)
-        }
-
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
 
     }
     

@@ -131,9 +131,23 @@ class PicturePreviewResizeViewController: BasePopViewController {
     @IBAction func action_validate(_ sender: Any) {
         guard let processedImage = self.processImage() else { return }
 
+        // 🔸 Toujours notifier immédiatement (optimiste)
         delegate?.updatePhoto(image: processedImage)
 
-        self.navigationController?.popViewController(animated: true)
+        // 🔸 Upload async, mais on a déjà prévenu le delegate
+        IHProgressHUD.show()
+        PictureUploadS3Service.prepareUploadWith(image: processedImage) { [weak self] isOk in
+            guard let self = self else { return }
+
+            if isOk {
+                self.pictureSettingDelegate?.reloadOnImageUpdate()
+                self.navigationController?.popViewController(animated: true)
+                IHProgressHUD.dismiss()
+            } else {
+                IHProgressHUD.showError(withStatus: "user_photo_change_error".localized)
+            }
+        }
+        
     }
 }
 
