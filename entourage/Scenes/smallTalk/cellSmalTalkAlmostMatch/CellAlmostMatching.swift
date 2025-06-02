@@ -8,8 +8,6 @@ class CellAlmostMatching: UITableViewCell {
     @IBOutlet weak var avatar2: UIImageView!
     @IBOutlet weak var avatar3: UIImageView!
     @IBOutlet weak var avatar4: UIImageView!
-    @IBOutlet weak var avatar5: UIImageView!
-    @IBOutlet weak var avatar6: UIImageView!
     @IBOutlet weak var ui_title_cell: UILabel!
     @IBOutlet weak var ui_list_name: UILabel!
     @IBOutlet weak var ui_btn_join: UIButton!
@@ -26,6 +24,8 @@ class CellAlmostMatching: UITableViewCell {
 
     // MARK: - Configure
     func configure(with request: UserSmallTalkRequestWithMatchData) {
+        ui_title_cell.setFontTitle(size: 15)
+        ui_list_name.setFontBody(size: 15)
         // Avatars
         let avatarURLs: [String] = request.users.compactMap { $0.avatar_url }
         renderAvatars(urls: avatarURLs)
@@ -46,7 +46,7 @@ class CellAlmostMatching: UITableViewCell {
 
     // MARK: - Helpers
     private func renderAvatars(urls: [String]) {
-        let imageViews = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6]
+        let imageViews = [avatar1, avatar2, avatar3, avatar4]
         imageViews.forEach { $0?.isHidden = true }
 
         for (index, url) in urls.prefix(imageViews.count).enumerated() {
@@ -71,17 +71,17 @@ class CellAlmostMatching: UITableViewCell {
             return NSLocalizedString("small_talk_other_band_different_interests", comment: "")
         }
         if !request.hasMatchedGender {
-            return NSLocalizedString("small_talk_other_band_different_gender", comment: "")
+            return NSLocalizedString("small_talk_other_band_different_mixity", comment: "")
         }
         if !request.hasMatchedFormat {
-            return NSLocalizedString("small_talk_other_band_different_format", comment: "")
+            return NSLocalizedString("small_talk_other_band_duo", comment: "")
         }
         return NSLocalizedString("small_talk_other_band_group", comment: "")
     }
 
     private func configureWhiteButton(_ button: UIButton, withTitle title: String) {
         button.setTitle(title, for: .normal)
-        button.backgroundColor = .white
+        button.backgroundColor = .clear
         button.setTitleColor(.black, for: .normal)
         button.layer.borderColor = UIColor.appOrange.cgColor
         button.layer.borderWidth = 1

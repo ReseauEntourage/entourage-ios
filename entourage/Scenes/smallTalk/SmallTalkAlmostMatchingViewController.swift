@@ -27,12 +27,59 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         configureTable()
-        fetchAlmostMatches()
+        //fetchAlmostMatches()
+        configureTest()
+    }
+    
+    func configureTest() {
+        // 🔹 Premier user request avec 1 seul user
+        let soloUser = UserProfile(
+            id: 101,
+            display_name: "Alice Dupont",
+            avatar_url: "https://picsum.photos/200/300",
+            community_roles: []
+        )
+
+        let fakeRequest1 = UserSmallTalkRequestWithMatchData(
+            userSmallTalkId: 1001,
+            smallTalkId: nil,
+            users: [soloUser],
+            hasMatchedFormat: true,
+            hasMatchedGender: true,
+            hasMatchedLocality: false,
+            hasMatchedInterest: true,
+            hasMatchedProfile: false,
+            unmatchCount: 2
+        )
+
+        // 🔹 Deuxième user request avec 5 users
+        let usersGroup = [
+            UserProfile(id: 201, display_name: "Bob Martin", avatar_url: "https://picsum.photos/200/300", community_roles: []),
+            UserProfile(id: 202, display_name: "Chloé Bernard", avatar_url: "https://picsum.photos/200/300", community_roles: []),
+            UserProfile(id: 203, display_name: "David Lefevre", avatar_url: "https://picsum.photos/200/300", community_roles: []),
+            UserProfile(id: 204, display_name: "Emma Petit", avatar_url: "https://picsum.photos/200/300", community_roles: []),
+        ]
+
+        let fakeRequest2 = UserSmallTalkRequestWithMatchData(
+            userSmallTalkId: 1002,
+            smallTalkId: nil,
+            users: usersGroup,
+            hasMatchedFormat: false,
+            hasMatchedGender: false,
+            hasMatchedLocality: true,
+            hasMatchedInterest: true,
+            hasMatchedProfile: true,
+            unmatchCount: 0
+        )
+
+        // Injection
+        self.rows = [fakeRequest1, fakeRequest2]
+        self.ui_tableview.reloadData()
     }
 
     private func setupUI() {
         ui_label_title.text = "small_talk_other_band_title".localized
-        ui_label_title.setFontTitle(size: 20)
+        ui_label_title.setFontTitle(size: 24)
         ui_label_subtitle.setFontBody(size: 15)
         ui_label_subtitle.text = NSLocalizedString("small_talk_other_band_subtitle".localized, comment: "")
         configureOrangeButton(ui_btn_leave, withTitle: NSLocalizedString("small_talk_other_band_wait".localized, comment: ""))
