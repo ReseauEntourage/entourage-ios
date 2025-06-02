@@ -45,14 +45,32 @@ class ConversationParametersViewController: BasePopViewController {
     //MARK: - Network
     
     func getConversation() {
+        if isSmallTalkMode {
+            SmallTalkService.getSmallTalk(id: smallTalkId) { smallTalk, error in
+                guard let smallTalk = smallTalk else {
+                    self.goBack()
+                    return
+                }
+                if let meId = UserDefaults.currentUser?.sid {
+                    self.isCreator = smallTalk.members.contains(where: { $0.id == meId && $0.community_roles.contains("creator") })
+                }
+                DispatchQueue.main.async {
+                    self.ui_tableview.reloadData()
+                }
+            }
+            return
+        }
+
         guard let conversationId = conversationId else {
             self.goBack()
             return
         }
+
         var _convId = ""
-        if self.conversationId != 0 {
+        if conversationId != 0 {
             _convId = String(conversationId)
         }
+
         MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation, let isCreator = conversation.isCreator {
                 self.isCreator = isCreator
@@ -60,6 +78,7 @@ class ConversationParametersViewController: BasePopViewController {
             self.ui_tableview.reloadData()
         }
     }
+
     
     func sendLeaveConversation() {
         if isSmallTalkMode {
@@ -120,7 +139,11 @@ class ConversationParametersViewController: BasePopViewController {
 
     func showMembers() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
-            vc.conversationId = conversationId
+            if isSmallTalkMode {
+                vc.setupFromSmallTalk(smallTalkId: smallTalkId)
+            } else {
+                vc.conversationId = conversationId
+            }
             vc.modalPresentationStyle = .currentContext
             self.navigationController?.present(vc, animated: true)
         }

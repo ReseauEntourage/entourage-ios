@@ -365,6 +365,16 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
     }
     
+    private func generateSmallTalkTitle(from members: [UserProfile]) -> String {
+        let currentUserId = UserDefaults.currentUser?.sid ?? 0
+        let others = members
+            .filter { $0.id != currentUserId }
+            .prefix(5)
+            .map { $0.display_name }
+
+        return others.joined(separator: ", ")
+    }
+    
     
     func setupFromSmallTalk(smallTalkId: Int, title: String?, delegate: UpdateUnreadCountDelegate? = nil) {
         self.isSmallTalkMode = true
@@ -387,26 +397,17 @@ class ConversationDetailMessagesViewController: UIViewController {
             }
             self.meetUrl = smallTalk.meeting_url ?? ""
             self.uuidv2 = smallTalk.uuid_v2
-            self.ui_top_view.populateCustom(
-                title: self.currentMessageTitle ?? "",
-                titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
-                titleColor: .black,
-                imageName: nil,
-                backgroundColor: .appBeigeClair,
-                delegate: self, // ✅ obligatoire pour que le bouton marche
-                showSeparator: true,
-                cornerRadius: nil,
-                isClose: false,
-                marginLeftButton: nil
-            )
+
             DispatchQueue.main.async {
+                let displayTitle = self.generateSmallTalkTitle(from: smallTalk.members)
+                self.currentMessageTitle = displayTitle // si tu veux le stocker
                 self.ui_top_view.populateCustom(
-                    title: self.currentMessageTitle ?? "",
+                    title: displayTitle,
                     titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
                     titleColor: .black,
                     imageName: nil,
                     backgroundColor: .appBeigeClair,
-                    delegate: self, // ✅ obligatoire pour que le bouton marche
+                    delegate: self,
                     showSeparator: true,
                     cornerRadius: nil,
                     isClose: false,
@@ -418,11 +419,8 @@ class ConversationDetailMessagesViewController: UIViewController {
                     self.ui_btn_camera.isHidden = false
                 }
                 self.currentConversation = Conversation(from: smallTalk)
-                self.currentMessageTitle = self.currentConversation?.title
                 self.currentUserId = UserDefaults.currentUser?.sid ?? 0
                 self.isOneToOne = false
-
-                self.ui_top_view.updateTitle(title: self.currentMessageTitle ?? "SmallTalk")
                 self.updateInputInfos()
             }
 
@@ -450,8 +448,6 @@ class ConversationDetailMessagesViewController: UIViewController {
             }
         }
     }
-    
-    
 
     //MARK: - Setup & Navigation
     func setupFromOtherVC(

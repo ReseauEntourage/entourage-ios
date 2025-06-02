@@ -1250,6 +1250,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "message_error_create_conversation" = "Erreur lors de la création de la conversation";
 
 "conversation_params_title" = "Paramètres de la conversation";
+"small_talk_params_title" = "Paramètres de la conversation";
 "conv_param_title_profil" = "Voir le profil";
 "conv_param_title_signal" = "Signaler";
 "conv_param_subtitle_signal" = "Signalez cette conversation à l'équipe Entourage.";

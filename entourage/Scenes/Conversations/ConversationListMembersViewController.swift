@@ -47,31 +47,34 @@ class ConversationListMembersViewController: BasePopViewController {
     }
 
     func getConversation() {
+        IHProgressHUD.show()
+
         if isSmallTalkMode {
-            IHProgressHUD.show()
-            SmallTalkService.getSmallTalk(id: smallTalkId) { smallTalk, error in
+            SmallTalkService.listParticipants(id: smallTalkId) { participants, error in
                 IHProgressHUD.dismiss()
-                guard let smallTalk = smallTalk else {
+
+                guard let participants = participants else {
                     self.goBack()
                     return
                 }
 
-                self.users = smallTalk.members.map { member in
+                self.users = participants.map { user in
                     MemberLight(
-                        uid: member.id,
-                        username: member.display_name,
-                        imageUrl: member.avatar_url,
+                        uid: user.sid,
+                        username: user.displayName,
+                        imageUrl: user.avatarURL,
                         confirmedAt: nil
                     )
                 }
-
-                self.userCreatorId = smallTalk.members.first?.id
-                self.ui_tableview.reloadData()
+                DispatchQueue.main.async {
+                    self.ui_tableview.reloadData()
+                }
             }
             return
         }
 
         guard let conversationId = conversationId else {
+            IHProgressHUD.dismiss()
             self.goBack()
             return
         }
@@ -84,6 +87,7 @@ class ConversationListMembersViewController: BasePopViewController {
             }
 
             MessagingService.getUsersForConversation(conversationId: conversationId) { users, error in
+                IHProgressHUD.dismiss()
                 if let users = users {
                     self.users = users
                 }
