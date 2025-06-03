@@ -101,8 +101,8 @@ class SmallTalkGroupFoundViewController: UIViewController {
 
         self.users = fakeUsers
           self.pageControl.numberOfPages = self.users.count - 1
-          self.ui_label_title.text = "Groupe trouvé !"
-          self.ui_label_subtitle.text = "Voici les personnes avec qui vous avez été mis en relation."
+          self.ui_label_title.text = "small_talk_group_found_title".localized
+          self.ui_label_subtitle.text = "small_talk_group_found_subtitle".localized
           self.collectionView.reloadData()
         
     }
