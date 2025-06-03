@@ -111,39 +111,39 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
 //            
             
             //TESTING GROUP FOUND
-        case .create: //Testing the almostMatching
-            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-
-            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkGroupFoundViewController") as? SmallTalkGroupFoundViewController else { return }
-
-            // 👉 Ajoute configureTest si tu veux injecter des données factices :
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                vc.configureForTest()
-            }
-            vc.modalPresentationStyle = .fullScreen
-            parentViewController?.present(vc, animated: true)
-            
-            
-            //CONFIGURE ALMOST
 //        case .create: //Testing the almostMatching
 //            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
 //
-//            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkAlmostMatchingViewController") as? SmallTalkAlmostMatchingViewController else { return }
-//
-//            // 👉 Configuration de test ici (tu peux garder les vraies valeurs si tu les as)
-//            vc.configure(
-//                with: "fake_request_id",
-//                group: "one",
-//                gender: true,
-//                locality: true
-//            )
+//            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkGroupFoundViewController") as? SmallTalkGroupFoundViewController else { return }
 //
 //            // 👉 Ajoute configureTest si tu veux injecter des données factices :
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                vc.configureTest()
+//                vc.configureForTest()
 //            }
 //            vc.modalPresentationStyle = .fullScreen
 //            parentViewController?.present(vc, animated: true)
+            
+            
+            //CONFIGURE ALMOST
+        case .create: //Testing the almostMatching
+            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
+
+            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkAlmostMatchingViewController") as? SmallTalkAlmostMatchingViewController else { return }
+
+            // 👉 Configuration de test ici (tu peux garder les vraies valeurs si tu les as)
+            vc.configure(
+                with: "fake_request_id",
+                group: "one",
+                gender: true,
+                locality: true
+            )
+
+            // 👉 Ajoute configureTest si tu veux injecter des données factices :
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                vc.configureTest()
+            }
+            vc.modalPresentationStyle = .fullScreen
+            parentViewController?.present(vc, animated: true)
 
         case .waiting:
             print("nothing to do")

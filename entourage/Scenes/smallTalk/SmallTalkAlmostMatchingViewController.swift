@@ -28,8 +28,8 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
         AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Suggestions)
         setupUI()
         configureTable()
-        fetchAlmostMatches()
-        //configureTest()
+        //fetchAlmostMatches()
+        configureTest()
     }
     
     func configureTest() {

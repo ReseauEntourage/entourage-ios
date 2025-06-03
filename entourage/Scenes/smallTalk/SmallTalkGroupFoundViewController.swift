@@ -29,8 +29,8 @@ class SmallTalkGroupFoundViewController: UIViewController {
         ui_label_subtitle.setFontBody(size: 15)
         
         
-        configureForTest()
-        //fetchData()
+        //configureForTest()
+        fetchData()
         buttonStart.addTarget(self, action: #selector(startTapped), for: .touchUpInside)
     }
     
