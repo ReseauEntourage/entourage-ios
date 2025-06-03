@@ -103,7 +103,7 @@ struct DeepLinkManager {
             break
         case .outing_message:
             showConversation(conversationId: notification.instanceId)
-        case .small_talk:
+        case .smalltalk:
             showSmallTalk(conversationId: notification.instanceId)
         }
     }
@@ -148,7 +148,7 @@ struct DeepLinkManager {
             break
         case .outing_message:
             showConversation(conversationId: notification.instanceId)
-        case .small_talk:
+        case .smalltalk:
             showSmallTalk(conversationId: notification.instanceId)
         }
     }
@@ -181,14 +181,10 @@ struct DeepLinkManager {
             return "ic_notif_placeholder"
         case .outing_message:
             return "placeholder_user"
-
-        case .small_talk:
+        case .smalltalk:
             return "placeholder_user"
         }
     }
-    
-    
-    
     
     //MARK: - Navigation Actions -
     static func showUser(userId:Int) {

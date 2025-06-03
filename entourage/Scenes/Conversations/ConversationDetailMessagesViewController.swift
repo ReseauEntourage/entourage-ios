@@ -1103,6 +1103,12 @@ class ConversationDetailMessagesViewController: UIViewController {
 // MARK: - TableView DataSource & Delegate
 extension ConversationDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Cache la vue "nouvelle conversation" dès qu'un scroll commence
+        if !ui_view_new_conversation.isHidden {
+            hideViewNew()
+        }
+    }
     //---- TABLE DE MENTIONS ou TABLE DE MESSAGES ? ----
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ui_tableview_mentions {

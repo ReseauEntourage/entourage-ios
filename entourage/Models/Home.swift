@@ -172,6 +172,7 @@ enum HomeActionType {
     case outingPost
     case contribution
     case solicitation
+    case smallTalk
     case conversation
     case resource
     case webview
