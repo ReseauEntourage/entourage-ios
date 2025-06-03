@@ -79,6 +79,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     private var hasToShowFirstMessage = false
     private var isOneToOne = true
     private var selectedIndexPath: IndexPath? = nil
+    var isFromMatching = false
     private weak var parentDelegate: UpdateUnreadCountDelegate? = nil
     var type:String = ""
     var isSmallTalkMode = false
@@ -1228,14 +1229,19 @@ extension ConversationDetailMessagesViewController: MJNavBackViewDelegate {
     
     func goBack() {
         print("eho")
-        self.parentDelegate?.updateUnreadCount(
-            conversationId: conversationId,
-            currentIndexPathSelected: selectedIndexPath
-        )
-        if self.navigationController?.viewControllers.count ?? 0 > 1 {
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true)
+        if isFromMatching {
+            isFromMatching = false
+            AppState.navigateToMainApp()
+        }else{
+            self.parentDelegate?.updateUnreadCount(
+                conversationId: conversationId,
+                currentIndexPathSelected: selectedIndexPath
+            )
+            if self.navigationController?.viewControllers.count ?? 0 > 1 {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                self.dismiss(animated: true)
+            }
         }
     }
 }

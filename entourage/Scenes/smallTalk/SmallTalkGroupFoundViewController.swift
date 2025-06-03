@@ -119,6 +119,7 @@ class SmallTalkGroupFoundViewController: UIViewController {
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
             vc.setupFromOtherVC(conversationId: self.smallTalkId, title: "Bonnes ondes", isOneToOne: true, conversation: nil)
             vc.isSmallTalkMode = true
+            vc.isFromMatching = true
             vc.smallTalkId = String(self.smallTalkId)
             self.present(vc, animated: true)
         }

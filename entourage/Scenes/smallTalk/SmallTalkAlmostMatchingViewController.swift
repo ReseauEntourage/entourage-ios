@@ -144,6 +144,7 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
         if let vc = storyboard.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
             vc.setupFromOtherVC(conversationId: conversationId, title: "Bonnes ondes", isOneToOne: true, conversation: nil)
             vc.isSmallTalkMode = true
+            vc.isFromMatching = true
             vc.smallTalkId = String(conversationId)
             AppState.getTopViewController()?.present(vc, animated: true)
         }
