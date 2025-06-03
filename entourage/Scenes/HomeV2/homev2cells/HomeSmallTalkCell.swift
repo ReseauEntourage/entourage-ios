@@ -129,7 +129,7 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
 //            parentViewController?.present(vc, animated: true)
 
         case .waiting:
-            //NOTHING
+            print("nothing to do")
         }
     }
 }
