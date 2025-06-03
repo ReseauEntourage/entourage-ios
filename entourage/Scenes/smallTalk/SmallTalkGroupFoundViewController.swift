@@ -23,9 +23,18 @@ class SmallTalkGroupFoundViewController: UIViewController {
         AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Match)
 
         configureCollectionView()
+        configureOrangeButton(self.buttonStart, withTitle: "home_button_start".localized)
         configurePageControl()
         ui_label_title.setFontTitle(size: 20)
         ui_label_subtitle.setFontBody(size: 15)
+        
+        
+        configureForTest()
+        //fetchData()
+        buttonStart.addTarget(self, action: #selector(startTapped), for: .touchUpInside)
+    }
+    
+    func fetchData(){
         SmallTalkService.getSmallTalk(id: "\(smallTalkId)") { smallTalk, _ in
             guard let currentUserId = UserDefaults.currentUser?.sid,
                   let members = smallTalk?.members else { return }
@@ -50,8 +59,6 @@ class SmallTalkGroupFoundViewController: UIViewController {
                 self.collectionView.reloadData()
             }
         }
-
-        buttonStart.addTarget(self, action: #selector(startTapped), for: .touchUpInside)
     }
     
     func configure(with response: SmallTalkMatchResponse) {
@@ -60,6 +67,15 @@ class SmallTalkGroupFoundViewController: UIViewController {
         }
     }
 
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+    
     private func configureCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -69,6 +85,26 @@ class SmallTalkGroupFoundViewController: UIViewController {
         let layout = ZoomFlowLayout()
         collectionView.collectionViewLayout = layout
         collectionView.register(UINib(nibName: "UserProfileCell", bundle: nil), forCellWithReuseIdentifier: "UserProfileCell")
+    }
+    
+    func configureForTest() {
+        var fakeUsers: [User] = []
+
+        for i in 1...5 {
+            var user = User()
+            user.sid = i
+            user.displayName = "Testeur \(i)"
+            user.avatarURL = "https://picsum.photos/800/600"
+            user.roles = (i % 2 == 0) ? ["ambassador"] : ["member"]
+            fakeUsers.append(user)
+        }
+
+        self.users = fakeUsers
+          self.pageControl.numberOfPages = self.users.count - 1
+          self.ui_label_title.text = "Groupe trouvé !"
+          self.ui_label_subtitle.text = "Voici les personnes avec qui vous avez été mis en relation."
+          self.collectionView.reloadData()
+        
     }
 
     private func configurePageControl() {
@@ -120,8 +156,8 @@ class ZoomFlowLayout: UICollectionViewFlowLayout {
     override init() {
         super.init()
         scrollDirection = .horizontal
-        minimumLineSpacing = 20
-        itemSize = CGSize(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.75)
+        minimumLineSpacing = 10
+        itemSize = CGSize(width: UIScreen.main.bounds.width * 0.85, height: UIScreen.main.bounds.height * 0.75)
         sectionInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
     }
 

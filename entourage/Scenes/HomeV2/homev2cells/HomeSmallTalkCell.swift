@@ -101,13 +101,30 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
                 parentViewController?.present(vc, animated: true)
             }
 
-        case .create:
+            //COMPORTEMENT REEL
+//        case .create:
+//
+//            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
+//            guard let vc = storyboard.instantiateInitialViewController() else { return }
+//            vc.modalPresentationStyle = .fullScreen
+//            parentViewController?.present(vc, animated: true)
+//            
+            
+            //TESTING GROUP FOUND
+        case .create: //Testing the almostMatching
             let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-            guard let vc = storyboard.instantiateInitialViewController() else { return }
+
+            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkGroupFoundViewController") as? SmallTalkGroupFoundViewController else { return }
+
+            // 👉 Ajoute configureTest si tu veux injecter des données factices :
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                vc.configureForTest()
+            }
             vc.modalPresentationStyle = .fullScreen
             parentViewController?.present(vc, animated: true)
             
             
+            //CONFIGURE ALMOST
 //        case .create: //Testing the almostMatching
 //            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
 //
