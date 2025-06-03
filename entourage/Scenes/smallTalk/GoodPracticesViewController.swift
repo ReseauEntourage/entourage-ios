@@ -4,6 +4,7 @@ class GoodPracticesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Charter)
         view.backgroundColor = .clear
         setupScrollView()
     }

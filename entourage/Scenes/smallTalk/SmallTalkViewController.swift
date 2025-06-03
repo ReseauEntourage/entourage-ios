@@ -54,6 +54,7 @@ final class SmallTalkViewController: UIViewController {
         super.viewDidLoad()
         
         configureSteps()
+        AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Format)
 
         // Pré-remplir les intérêts de l'utilisateur pour l'étape 5
         if let interests = UserDefaults.currentUser?.interests, !interests.isEmpty {
@@ -312,6 +313,7 @@ private extension SmallTalkViewController {
         switch currentStepIndex {
         case 0:
             // match_format : "one" ou "many"
+            AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Locality)
             let field = UserSmallTalkFields(match_format: selected.first, match_locality: nil, match_gender: nil, user_gender: nil)
             SmallTalkService.updateUserSmallTalkRequest(id: userRequestId, fields: field) { [weak self] updated, error in
                 self?.advanceOrShowError(updated, error)
@@ -319,6 +321,7 @@ private extension SmallTalkViewController {
 
         case 1:
             // match_locality : Bool
+            AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Gender)
             let isLocal = selected.contains("local")
             let field = UserSmallTalkFields(match_format: nil, match_locality: isLocal, match_gender: nil, user_gender: nil)
             SmallTalkService.updateUserSmallTalkRequest(id: userRequestId, fields: field) { [weak self] updated, error in
@@ -327,6 +330,7 @@ private extension SmallTalkViewController {
 
         case 2:
             // user_gender → via UserService
+            AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Mixite)
             if let gender = selected.first {
                 var updatedUser = UserDefaults.currentUser
                 updatedUser?.gender = gender
@@ -337,6 +341,7 @@ private extension SmallTalkViewController {
 
         case 3:
             // match_gender : Bool
+            AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Interests)
             let isSame = selected.contains("same")
             let field = UserSmallTalkFields(match_format: nil, match_locality: nil, match_gender: isSame, user_gender: nil)
             SmallTalkService.updateUserSmallTalkRequest(id: userRequestId, fields: field) { [weak self] updated, error in
@@ -345,6 +350,7 @@ private extension SmallTalkViewController {
 
         case 4:
             // intérêts → UserService
+            AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Photo)
             let interests = Array(selected)
             UserService.updateUserInterests(interests: interests) { [weak self] _, error in
                 self?.advanceOrShowError(nil, error)

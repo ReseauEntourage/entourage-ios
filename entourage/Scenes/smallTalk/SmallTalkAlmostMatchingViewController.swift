@@ -25,6 +25,7 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Suggestions)
         setupUI()
         configureTable()
         fetchAlmostMatches()
@@ -131,12 +132,14 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
     }
 
     @objc private func handleLeaveTapped() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Suggestions_Wait)
         self.dismiss(animated: true) {
             AppState.navigateToMainApp()
         }
     }
 
     private func openConversation(for conversationId: Int) {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Suggestions_Join)
         let storyboard = UIStoryboard(name: StoryboardName.messages, bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
             vc.setupFromOtherVC(conversationId: conversationId, title: "Bonnes ondes", isOneToOne: true, conversation: nil)

@@ -25,6 +25,7 @@ final class SmallTalkNoBandFoundViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        AnalyticsLoggerManager.logEvent(name: View_SmallTalk_NoSuggestions)
         setupUI()
         fetchSuggestedEvent()
     }
@@ -85,6 +86,8 @@ final class SmallTalkNoBandFoundViewController: UIViewController {
 
     // MARK: - Navigation
     @objc private func openSuggestedEvent() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_NoSuggestions_Event)
+
         guard let eventId = suggestedEventId else { return }
 
         let storyboard = UIStoryboard(name: StoryboardName.event, bundle: nil)
@@ -99,6 +102,7 @@ final class SmallTalkNoBandFoundViewController: UIViewController {
     }
 
     @objc private func handleReturnToHome() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_NoSuggestions_Home)
         AppState.navigateToMainApp()
     }
 }

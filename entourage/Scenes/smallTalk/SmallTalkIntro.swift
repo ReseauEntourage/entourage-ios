@@ -34,6 +34,8 @@ class SmallTalkIntro: UIViewController {
 
         ui_btn_previous.addTarget(self, action: #selector(onNextClick), for: .touchUpInside)
         ui_btn_next.addTarget(self, action: #selector(onCancelClick), for: .touchUpInside)
+        AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Presentation)
+
     }
 
     // MARK: - HTML Styling
@@ -76,6 +78,8 @@ class SmallTalkIntro: UIViewController {
 
     // MARK: - Actions
     @objc private func onNextClick() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Presentation_Start)
+
         SmallTalkService.createUserSmallTalkRequest { [weak self] request, error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
@@ -114,6 +118,8 @@ class SmallTalkIntro: UIViewController {
 
 
     @objc private func onCancelClick() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Presentation_Cancel)
+
         dismiss(animated: true)
     }
 

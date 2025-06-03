@@ -374,6 +374,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     
     
     @objc private func didTapCameraButton() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Visio_Icon)
         if let url = URL(string: self.meetUrl), !self.meetUrl.isEmpty {
             WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
         } else {

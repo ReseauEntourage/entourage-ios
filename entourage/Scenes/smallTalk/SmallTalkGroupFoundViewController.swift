@@ -20,6 +20,8 @@ class SmallTalkGroupFoundViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Match)
+
         configureCollectionView()
         configurePageControl()
         ui_label_title.setFontTitle(size: 20)
@@ -77,6 +79,7 @@ class SmallTalkGroupFoundViewController: UIViewController {
     }
 
     @objc private func startTapped() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Match_Chat)
         let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
             vc.setupFromOtherVC(conversationId: self.smallTalkId, title: "Bonnes ondes", isOneToOne: true, conversation: nil)

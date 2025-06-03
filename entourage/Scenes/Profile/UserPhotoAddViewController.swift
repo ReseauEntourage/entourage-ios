@@ -117,6 +117,7 @@ class UserPhotoAddViewController: BasePopViewController {
     }
     
     @objc func onContinueClick() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Photo_Finish)
         guard let userRequest = self.userRequest else {
             let alert = UIAlertController(title: "Erreur", message: "Identifiant introuvable", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -141,6 +142,7 @@ class UserPhotoAddViewController: BasePopViewController {
 
     
     @objc func onPreviousClick() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Photo_Previous)
         if isSmallTalkMode {
             self.dismiss(animated: true) // on ferme seulement cette vue
         } else {
