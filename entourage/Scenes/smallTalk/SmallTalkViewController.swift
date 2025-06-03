@@ -292,8 +292,11 @@ private extension SmallTalkViewController {
     @objc func goToPrevious() {
         if currentStepIndex == 0 {
             // On est déjà à la première étape → retour à la home
-            print("eho return home")
-            AppState.navigateToMainApp()
+            SmallTalkService.deleteRequest { isDeleted in
+                DispatchQueue.main.async {
+                    AppState.navigateToMainApp()
+                }
+            }
         } else {
             currentStepIndex -= 1
             rebuildRows(animated: true)
