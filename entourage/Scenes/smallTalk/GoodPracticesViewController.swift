@@ -142,7 +142,6 @@ class GoodPracticesViewController: UIViewController {
 
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         whiteStack.addArrangedSubview(closeButton)
-
         mainStackView.addArrangedSubview(whiteContainer)
     }
     
