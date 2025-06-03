@@ -55,10 +55,10 @@ final class SmallTalkAlmostMatchingViewController: UIViewController {
 
         // 🔹 Deuxième user request avec 5 users
         let usersGroup = [
-            UserProfile(id: 201, display_name: "Bob Martin", avatar_url: "https://picsum.photos/200/300", community_roles: []),
-            UserProfile(id: 202, display_name: "Chloé Bernard", avatar_url: "https://picsum.photos/200/300", community_roles: []),
-            UserProfile(id: 203, display_name: "David Lefevre", avatar_url: "https://picsum.photos/200/300", community_roles: []),
-            UserProfile(id: 204, display_name: "Emma Petit", avatar_url: "https://picsum.photos/200/300", community_roles: []),
+            UserProfile(id: 201, display_name: "Bob Martin", avatar_url: "https://picsum.photos/800/600", community_roles: []),
+            UserProfile(id: 202, display_name: "Chloé Bernard", avatar_url: "https://picsum.photos/800/600", community_roles: []),
+            UserProfile(id: 203, display_name: "David Lefevre", avatar_url: "https://picsum.photos/800/600", community_roles: []),
+            UserProfile(id: 204, display_name: "Emma Petit", avatar_url: "https://picsum.photos/800/600", community_roles: []),
         ]
 
         let fakeRequest2 = UserSmallTalkRequestWithMatchData(
