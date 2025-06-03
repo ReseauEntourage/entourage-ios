@@ -384,3 +384,51 @@ let home_activate_firebase_message = "home_activate_firebase_message"
 
 
 
+// MARK: - SmallTalk
+
+// Présentation
+let View_SmallTalk_Presentation = "View__SmallTalk__Presentation"
+let Action_SmallTalk_Presentation_Start = "Action__SmallTalk__Presentation_Start"
+let Action_SmallTalk_Presentation_Cancel = "Action__SmallTalk__Presentation_Cancel"
+
+// Format
+let View_SmallTalk_Format = "View__SmallTalk__Format"
+let Action_SmallTalk_Format_Next = "Action__SmallTalk__Format_Next"
+let Action_SmallTalk_Format_Previous = "Action__SmallTalk__Format_Previous"
+
+// Localité
+let View_SmallTalk_Locality = "View__SmallTalk__Locality"
+
+// Genre
+let View_SmallTalk_Gender = "View__SmallTalk__Gender"
+
+// Mixité
+let View_SmallTalk_Mixite = "View__SmallTalk__Mixite"
+
+// Intérêts
+let View_SmallTalk_Interests = "View__SmallTalk__Interests"
+
+// Photo
+let View_SmallTalk_Photo = "View__SmallTalk__Photo"
+let Action_SmallTalk_Photo_Finish = "Action__SmallTalk__Photo_Finish"
+let Action_SmallTalk_Photo_Previous = "Action__SmallTalk__Photo_Previous"
+
+// Match
+let View_SmallTalk_Match = "View__SmallTalk__Match"
+let Action_SmallTalk_Match_Chat = "Action__SmallTalk__Match_Chat"
+
+// Suggestions
+let View_SmallTalk_Suggestions = "View__SmallTalk__Suggestions"
+let Action_SmallTalk_Suggestions_Wait = "Action__SmallTalk__Suggestions_Wait"
+let Action_SmallTalk_Suggestions_Join = "Action__SmallTalk__Suggestions_Join"
+
+// No Suggestions
+let View_SmallTalk_NoSuggestions = "View__SmallTalk__NoSuggestions"
+let Action_SmallTalk_NoSuggestions_Event = "Action__SmallTalk__NoSuggestions_Event"
+let Action_SmallTalk_NoSuggestions_Home = "Action__SmallTalk__NoSuggestions_Home"
+
+// Charte
+let View_SmallTalk_Charter = "View__SmallTalk__Charter"
+
+// Visio
+let Action_SmallTalk_Visio_Icon = "Action__SmallTalk__Visio_Icon"

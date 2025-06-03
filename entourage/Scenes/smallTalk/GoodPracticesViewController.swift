@@ -136,15 +136,23 @@ class GoodPracticesViewController: UIViewController {
         ))
 
         let closeButton = UIButton(type: .system)
-        closeButton.setTitle("Fermer", for: .normal)
-        closeButton.backgroundColor = UIColor.systemOrange
-        closeButton.setTitleColor(.white, for: .normal)
-        closeButton.layer.cornerRadius = 8
-        closeButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        configureOrangeButton(closeButton, withTitle: "Fermer")
+        closeButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         whiteStack.addArrangedSubview(closeButton)
 
         mainStackView.addArrangedSubview(whiteContainer)
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
 
     private func titleLabel(_ text: String) -> UILabel {
@@ -177,14 +185,32 @@ class GoodPracticesViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.setFontTitle(size: 16)
+        titleLabel.numberOfLines = 0
         box.addArrangedSubview(titleLabel)
 
+        let iconName = (icon == "✅") ? "ic_validate_green" : "ic_cross_red"
+
         for item in items {
+            let row = UIStackView()
+            row.axis = .horizontal
+            row.alignment = .center
+            row.spacing = 8
+
+            let iconImage = UIImageView(image: UIImage(named: iconName))
+            iconImage.translatesAutoresizingMaskIntoConstraints = false
+            iconImage.contentMode = .scaleAspectFit
+            iconImage.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            iconImage.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
             let itemLabel = UILabel()
-            itemLabel.text = "\(icon) \(item)"
+            itemLabel.text = item
             itemLabel.setFontBody(size: 15)
             itemLabel.numberOfLines = 0
-            box.addArrangedSubview(itemLabel)
+
+            row.addArrangedSubview(iconImage)
+            row.addArrangedSubview(itemLabel)
+
+            box.addArrangedSubview(row)
         }
 
         return box
