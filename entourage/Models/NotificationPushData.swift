@@ -40,6 +40,7 @@ enum InstanceType:String {
     case partners
     case neighborhood_post
     case outing_post
+    case small_talk
     case none
 
     

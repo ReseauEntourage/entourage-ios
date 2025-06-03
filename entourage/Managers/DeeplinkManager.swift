@@ -103,6 +103,8 @@ struct DeepLinkManager {
             break
         case .outing_message:
             showConversation(conversationId: notification.instanceId)
+        case .small_talk:
+            showSmallTalk(conversationId: notification.instanceId)
         }
     }
     
@@ -146,7 +148,8 @@ struct DeepLinkManager {
             break
         case .outing_message:
             showConversation(conversationId: notification.instanceId)
-
+        case .small_talk:
+            showSmallTalk(conversationId: notification.instanceId)
         }
     }
     
@@ -179,6 +182,8 @@ struct DeepLinkManager {
         case .outing_message:
             return "placeholder_user"
 
+        case .small_talk:
+            return "placeholder_user"
         }
     }
     
@@ -208,6 +213,15 @@ struct DeepLinkManager {
     static func showConversation(conversationId:Int) {
         if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
             vc.setupFromOtherVC(conversationId: conversationId, title: nil, isOneToOne: true)
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+    
+    static func showSmallTalk(conversationId:Int) {
+        if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+            vc.setupFromOtherVC(conversationId: conversationId, title: nil, isOneToOne: true)
+            vc.isSmallTalkMode = true
+            vc.smallTalkId = String(conversationId)
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
