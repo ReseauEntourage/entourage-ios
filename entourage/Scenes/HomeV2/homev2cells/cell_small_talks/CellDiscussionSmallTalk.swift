@@ -37,7 +37,7 @@ class CellDiscussionSmallTalk:UICollectionViewCell {
             .map { $0.display_name }
             .joined(separator: ", ")
         ui_label_subtitle.setFontBody(size: 15)
-        let avatars = request.smalltalk?.members.compactMap { $0.avatar_url }.filter { !$0.isEmpty } ?? []
+        let avatars = members.compactMap { $0.avatar_url }.filter { !$0.isEmpty } ?? []
 
         ui_img_avatar_one.isHidden = true
         ui_img_avatar_2.isHidden = true
