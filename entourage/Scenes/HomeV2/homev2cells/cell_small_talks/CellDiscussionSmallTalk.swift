@@ -27,7 +27,13 @@ class CellDiscussionSmallTalk:UICollectionViewCell {
     
     func configure(with request: UserSmallTalkRequest) {
         ui_label_title.text = "small_talk_title_conversation".localized
-        ui_label_subtitle.text = request.smalltalk?.members
+        var members = request.smalltalk?.members ?? []
+        if let currentSid = UserDefaults.currentUser?.sid {
+            if let index = members.firstIndex(where: { $0.id == currentSid }) {
+                members.remove(at: index)
+            }
+        }
+        ui_label_subtitle.text = members
             .map { $0.display_name }
             .joined(separator: ", ")
         ui_label_subtitle.setFontBody(size: 15)
