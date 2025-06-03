@@ -86,6 +86,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     var smallTalkId: String = ""
     var meetUrl:String = ""
     var uuidv2:String = ""
+    private var isScrollDetectionEnabled = false
     private var autoRefreshTimer: Timer?
     private let autoRefreshInterval: TimeInterval = 5
     private var isSilentRefresh = false
@@ -226,6 +227,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             // ➕ Active aussi la vue en SmallTalk
             if isSmallTalkMode {
                 showViewNew()
+                ui_constraint_tableview_top_margin.constant = 70
                 ui_view_event_discut.isHidden = false
                 ui_view_new_conversation.isHidden = false
                 ui_view_new_conversation.backgroundColor = UIColor.clear
@@ -463,6 +465,7 @@ class ConversationDetailMessagesViewController: UIViewController {
                 let lastIndex = self.conversationCellDTOs.count - 1
                 let indexPath = IndexPath(row: lastIndex, section: 0)
                 self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                self.isScrollDetectionEnabled = true
             }
         }
     }
@@ -1103,12 +1106,6 @@ class ConversationDetailMessagesViewController: UIViewController {
 // MARK: - TableView DataSource & Delegate
 extension ConversationDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // Cache la vue "nouvelle conversation" dès qu'un scroll commence
-        if !ui_view_new_conversation.isHidden {
-            hideViewNew()
-        }
-    }
     //---- TABLE DE MENTIONS ou TABLE DE MESSAGES ? ----
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ui_tableview_mentions {
