@@ -186,8 +186,13 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
         case .smalltalk(let smallTalk):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
             var conversation = Conversation(from: smallTalk)
-            let memberNames = conversation.members?.compactMap { $0.username }.joined(separator: " • ") ?? ""
+
+            let currentUserId = UserDefaults.currentUser?.sid
+            let filteredMembers = conversation.members?.filter { $0.uid != currentUserId } ?? []
+
+            let memberNames = filteredMembers.compactMap { $0.username }.joined(separator: " • ")
             conversation.title = memberNames
+
             cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
             return cell
 
