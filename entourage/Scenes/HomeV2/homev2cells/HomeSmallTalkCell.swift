@@ -103,7 +103,6 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
 
             //COMPORTEMENT REEL
         case .create:
-
             let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
             guard let vc = storyboard.instantiateInitialViewController() else { return }
             vc.modalPresentationStyle = .fullScreen

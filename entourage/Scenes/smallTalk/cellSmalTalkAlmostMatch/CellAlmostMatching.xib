@@ -81,12 +81,13 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBu-eZ-X8V">
-                                <rect key="frame" x="75" y="80.666666666666671" width="75" height="48.000000000000014"/>
+                                <rect key="frame" x="75" y="80.666666666666671" width="66" height="48.000000000000014"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="o0m-Pr-V7a"/>
                                 </constraints>
+                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" name="BeigeClair2"/>
