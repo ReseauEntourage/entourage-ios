@@ -329,14 +329,25 @@ private extension SmallTalkViewController {
             }
 
         case 2:
-            // user_gender → via UserService
+            // Étape 3 : Choix du genre (user_gender), envoi via UserService avec isOnboarding: false
             AnalyticsLoggerManager.logEvent(name: View_SmallTalk_Mixite)
-            if let gender = selected.first {
-                var updatedUser = UserDefaults.currentUser
-                updatedUser?.gender = gender
-                UserService.updateUser(user: updatedUser) { [weak self] _, error in
-                    self?.advanceOrShowError(nil, error)
+            guard let gender = selected.first else {
+                let alert = UIAlertController(title: "Erreur", message: "Veuillez choisir votre genre.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
+                return
+            }
+            Logger.print("👤 Envoi du genre : \(gender)")
+            // Mise à jour du user avec le genre sélectionné
+            var updatedUser = UserDefaults.currentUser
+            updatedUser?.gender = gender
+
+            UserService.updateUser(user: updatedUser, isOnboarding: false) { [weak self] user, error in
+                if let user = user {
+                    // Met à jour l'utilisateur local après succès
+                    UserDefaults.updateCurrentUser(newUser: user)
                 }
+                self?.advanceOrShowError(nil, error)
             }
 
         case 3:

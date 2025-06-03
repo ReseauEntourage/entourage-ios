@@ -169,6 +169,9 @@ struct User: Codable {
         if let about = about, about.count >= 0 {
             dict["about"] = about
         }
+        if let gender = gender, gender.count >= 0 {
+            dict["gender"] = gender
+        }
         if let email = email, email.count > 0 {
             dict["email"] = email
         }
