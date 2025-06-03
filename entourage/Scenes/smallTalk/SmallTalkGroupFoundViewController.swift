@@ -26,8 +26,7 @@ class SmallTalkGroupFoundViewController: UIViewController {
         configurePageControl()
         ui_label_title.setFontTitle(size: 20)
         ui_label_subtitle.setFontBody(size: 15)
-       // SmallTalkService.getSmallTalk(id: "\(smallTalkId)") { smallTalk, _ in
-        SmallTalkService.getSmallTalk(id: "28") { smallTalk, _ in
+        SmallTalkService.getSmallTalk(id: "\(smallTalkId)") { smallTalk, _ in
             guard let currentUserId = UserDefaults.currentUser?.sid,
                   let members = smallTalk?.members else { return }
 
