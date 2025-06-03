@@ -131,7 +131,7 @@ private extension SmallTalkViewController {
                                     title: NSLocalizedString("small_talk_step3_item2_title", comment: ""),
                                     subtitle: "small_talk_step3_item2_subtitle".localized,
                                     imageName: "ic_female"),
-                    SmallTalkChoice(id: "non_binary",
+                    SmallTalkChoice(id: "not_binary",
                                     title: NSLocalizedString("small_talk_step3_item3_title", comment: ""),
                                     subtitle: "small_talk_step3_item3_subtitle".localized,
                                     imageName: "ic_non_binary")
