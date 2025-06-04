@@ -128,6 +128,7 @@ struct SmallTalkService: ParsingDataCodable {
                 return
             }
             let talks: [SmallTalk]? = self.parseDatas(data: data, key: "smalltalks")
+            
             completion(talks, nil)
         }
     }

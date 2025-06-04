@@ -223,7 +223,7 @@ extension Conversation {
         self.author = nil
 
         // Remplissage lastMessage simplifié
-        self.lastMessage = nil
+        self.lastMessage = smallTalk.last_message
 
         // Mapping des membres
         self.members = smallTalk.members.map {
