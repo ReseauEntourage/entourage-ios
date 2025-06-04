@@ -38,7 +38,7 @@ class UserProfileCell: UICollectionViewCell {
         if let urlString = user.avatarURL, let url = URL(string: urlString) {
             loadImage(from: url, into: avatar)
         } else {
-            avatar.image = UIImage(named: "place_holder_large")
+            avatar.image = UIImage(named: "place_holder_clear")
         }
 
         self.interests = user.interests ?? []
