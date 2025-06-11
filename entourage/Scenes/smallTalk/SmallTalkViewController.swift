@@ -232,6 +232,7 @@ private extension SmallTalkViewController {
         let hasSelection = !(selectedIdsByStep[currentStepIndex]?.isEmpty ?? true)
                            || steps[currentStepIndex].allowsMultipleSelection
         ui_btn_next.isEnabled = hasSelection
+        ui_btn_next.alpha = ui_btn_next.isEnabled ? 1.0 : 0.4
         ui_btn_next.setTitle(isLastStep
                              ? "enhanced_onboarding_button_title_next".localized
                              : "enhanced_onboarding_button_title_next".localized,

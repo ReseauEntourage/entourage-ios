@@ -190,6 +190,9 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_view_error?.isHidden = true
             ui_date.text = "le \(message.createdDateTimeFormatted)"
             ui_username.text = isMe ? "" : message.user?.displayName
+            if (message.messageType == "auto"){
+                ui_username.text = "message_auto".localized
+            }
         }
         
         // Gestion status
@@ -282,6 +285,9 @@ class NeighborhoodMessageCell: UITableViewCell {
         ui_date.textColor = .appOrangeLight
         ui_username.textColor = .appOrangeLight
         ui_view_message.backgroundColor = isMe ? .appOrangeLight_50 : .appBeige
+        if message.messageType == "auto"{
+            ui_view_message.backgroundColor = .appBleuAuto
+        }
         
         // Avatar
         if let avatarURL = message.user?.avatarURL, let url = URL(string: avatarURL) {
@@ -349,6 +355,9 @@ class NeighborhoodMessageCell: UITableViewCell {
                 ui_message.font = NeighborhoodMessageCell.baseFont
                 // Couleur d’arrière-plan
                 ui_view_message.backgroundColor = isMe ? UIColor.appOrangeLight_50 : UIColor.appBeige
+                if message.messageType == "auto"{
+                    ui_view_message.backgroundColor = .appBleuAuto
+                }
                 ui_message.textColor = UIColor.black
             }
         }
@@ -369,13 +378,22 @@ class NeighborhoodMessageCell: UITableViewCell {
             if isOne2One {
                 ui_date.text = "\(message.createdTimeFormatted)"
                 ui_username.text = message.user?.displayName ?? ""
+                if (message.messageType == "auto"){
+                    ui_username.text = "message_auto".localized
+                }
             } else {
                 if isMe {
                     ui_date.text = "\(message.createdTimeFormatted)"
                     ui_username.text = ""
+                    if (message.messageType == "auto"){
+                        ui_username.text = "message_auto".localized
+                    }
                 } else {
                     ui_date.text = " à \(message.createdTimeFormatted)"
                     ui_username.text = message.user?.displayName ?? "- !"
+                    if (message.messageType == "auto"){
+                        ui_username.text = "message_auto".localized
+                    }
                 }
             }
         }

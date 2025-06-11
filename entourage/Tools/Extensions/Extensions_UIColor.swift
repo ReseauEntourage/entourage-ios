@@ -75,6 +75,9 @@ extension UIColor {
     static var appBleu: UIColor {
         return UIColor(named: "Bleu_2nd") ?? .red
     }
+    static var appBleuAuto: UIColor {
+        return UIColor(named: "blue_message_auto") ?? .red
+    }
     static var appJaune: UIColor {
         return UIColor(named: "Jaune_2nd") ?? .red
     }

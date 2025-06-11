@@ -1858,3 +1858,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "small_talk_btn_close" = "Fermer";
 "small_talk_btn_charte" = "Retrouvez la charte et les bonnes pratiques en cliquant ici";
 "home_button_start" = "Discuter";
+"message_auto" = "Message automatique - ";
