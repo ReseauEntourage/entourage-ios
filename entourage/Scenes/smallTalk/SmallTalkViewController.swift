@@ -220,7 +220,6 @@ private extension SmallTalkViewController {
         let progress = Float(currentStepIndex + 1) / Float(steps.count + 1)
         animated ? ui_progress.setProgress(progress, animated: true)
                  : (ui_progress.progress = progress)
-
         ui_tableView.reloadData()
         updateNavButtons()
     }
