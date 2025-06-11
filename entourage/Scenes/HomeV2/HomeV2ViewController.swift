@@ -439,11 +439,11 @@ class HomeV2ViewController: UIViewController {
             }
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
         }
-        if allGroups.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
-            tableDTO.append(.cellGroup(groups: allGroups))
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
-        }
+//        if allGroups.count > 0 {
+//            tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
+//            tableDTO.append(.cellGroup(groups: allGroups))
+//            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
+//        }
         
         tableDTO.append(.cellTitle(title: "home_v2_title_map".localized, subtitle: "home_v2_subtitle_map".localized))
         tableDTO.append(.cellMap)
