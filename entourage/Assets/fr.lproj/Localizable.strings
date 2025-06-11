@@ -1835,10 +1835,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 /* Guide et charte */
 "small_talk_guidelines_title" = "Des bonnes pratiques pour des Bonnes Ondes";
-"small_talk_guidelines_intro" = "Les <b>Bonnes Ondes</b> vous connectent rapidement avec une ou plusieurs personnes pour discuter et créer du lien, simplement et sans pression.";
+"small_talk_guidelines_intro" = "Les <b>Bonnes Ondes</b> vous connectent rapidement avec une ou plusieurs personnes pour discuter et créer des liens d'amitié, simplement et sans pression.";
 "small_talk_what_it_is_title" = "Ce que c’est";
 "small_talk_what_it_is_item_1" = "Un échange convivial et bienveillant";
-"small_talk_what_it_is_item_2" = "Une rencontre authentique entre plusieurs personnes";
+"small_talk_what_it_is_item_2" = "Une rencontre authentique et amicale entre plusieurs personnes";
 "small_talk_what_it_is_item_3" = "Une occasion de briser l’isolement";
 "small_talk_what_it_is_not_title" = "Ce que ce n’est pas";
 "small_talk_what_it_is_not_item_1" = "Un accompagnement social ou une aide formelle";
