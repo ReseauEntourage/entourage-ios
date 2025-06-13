@@ -216,6 +216,9 @@ class ConversationDetailMessagesViewController: UIViewController {
             ui_view_new_conversation.backgroundColor = UIColor.white
             ui_title_new_conv.text = ""
             ui_subtitle_new_conv.text = ""
+            let tapCharte = UITapGestureRecognizer(target: self, action: #selector(handleEventViewTap))
+            ui_view_event_discut.addGestureRecognizer(tapCharte)
+            ui_view_event_discut.isUserInteractionEnabled = true
         } else {
             ui_constraint_tableview_top_margin.constant = 0
             ui_view_new_conversation.backgroundColor = UIColor.appBeige
@@ -235,13 +238,14 @@ class ConversationDetailMessagesViewController: UIViewController {
                 ui_subtitle_new_conv.text = ""
                 ui_label_event_discut.text = "small_talk_btn_charte".localized
                 ui_iv_event.image = UIImage(named: "ic_charte")
+                let tapCharte = UITapGestureRecognizer(target: self, action: #selector(handleCharteTapped))
+                ui_view_event_discut.addGestureRecognizer(tapCharte)
+                ui_view_event_discut.isUserInteractionEnabled = true
+
             } else {
                 ui_view_event_discut.isHidden = true
             }
         }
-        let tapCharte = UITapGestureRecognizer(target: self, action: #selector(handleCharteTapped))
-        ui_view_event_discut.addGestureRecognizer(tapCharte)
-        ui_view_event_discut.isUserInteractionEnabled = true
 
         ui_textview_message.typingAttributes = [
             .font: UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
