@@ -912,7 +912,11 @@ class ConversationDetailMessagesViewController: UIViewController {
             showUser(userId: currentUserId)
         }else{
             if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
-                vc.conversationId = self.currentConversation?.uid
+                if(isSmallTalkMode){
+                    vc.setupFromSmallTalk(smallTalkId: smallTalkId)
+                }else{
+                    vc.conversationId = self.currentConversation?.uid
+                }
                 vc.modalPresentationStyle = .overCurrentContext
                 self.present(vc, animated: true)
             }
@@ -1226,12 +1230,19 @@ extension ConversationDetailMessagesViewController: MJNavBackViewDelegate {
         if type == "outing" {
             handleEventViewTap()
         } else {
+            
             if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
-                vc.conversationId = self.currentConversation?.uid
+                if(isSmallTalkMode){
+                    vc.setupFromSmallTalk(smallTalkId: smallTalkId)
+                }else{
+                    vc.conversationId = self.currentConversation?.uid
+                }
                 vc.modalPresentationStyle = .currentContext
                 self.present(vc, animated: true)
             }
         }
+        
+        
     }
     
     func goBack() {
