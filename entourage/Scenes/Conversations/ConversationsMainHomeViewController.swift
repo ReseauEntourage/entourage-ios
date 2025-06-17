@@ -228,7 +228,6 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
                         // Navigation vers l'écran de réglages de notifications dans l'app
                         let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
                         let vc = sb.instantiateViewController(withIdentifier: "paramsNotifsVC")
-                        vc.modalPresentationStyle = .fullScreen
                         self.present(vc, animated: true, completion: nil)
                     }
                 }
