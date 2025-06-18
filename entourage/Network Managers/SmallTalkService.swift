@@ -163,10 +163,14 @@ struct SmallTalkService: ParsingDataCodable {
         }
     }
 
-    // MARK: - Lister les messages du SmallTalk
-    static func listMessages(id: String, completion: @escaping ([PostMessage]?, EntourageNetworkError?) -> Void) {
+    static func listMessages(
+        id: String,
+        page: Int = 1,
+        per: Int = 50,
+        completion: @escaping ([PostMessage]?, EntourageNetworkError?) -> Void
+    ) {
         guard let token = UserDefaults.token else { return }
-        let endpoint = "smalltalks/\(id)/chat_messages?token=\(token)"
+        let endpoint = "smalltalks/\(id)/chat_messages?page=\(page)&per=\(per)&token=\(token)"
 
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, error in
             guard let data = data, error == nil else {
