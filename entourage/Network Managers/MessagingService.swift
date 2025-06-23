@@ -319,22 +319,28 @@ struct MessagingService:ParsingDataCodable {
         }
     }
     
-    static func getUsersForConversation(conversationId: Int, completion: @escaping (_ users: [MemberLight]?, _ error: EntourageNetworkError?) -> Void) {
+    static func getUsersForConversation(
+        conversationId: Int,
+        page: Int = 1,
+        per: Int = 20,
+        completion: @escaping ([MemberLight]?, Int?, EntourageNetworkError?) -> Void
+    ) {
         guard let token = UserDefaults.token else { return }
+        // on ajoute les params page & per après la constante de base
+        let base = String(format: kAPIConversationUsersList, "\(conversationId)", token)
+        let endpoint = "\(base)&page=\(page)&per=\(per)"
         
-        let endpoint = String(format: kAPIConversationUsersList, "\(conversationId)", token)
-        Logger.print("***** get users for conversation: \(endpoint)")
-        
+        Logger.print("***** get users for conversation page \(page): \(endpoint)")
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
-            
             guard let data = data, error == nil,
                   let httpResp = resp as? HTTPURLResponse, httpResp.statusCode < 300 else {
-                DispatchQueue.main.async { completion(nil, error) }
+                DispatchQueue.main.async { completion(nil, nil, error) }
                 return
             }
-            
             let users: [MemberLight]? = self.parseDatas(data: data, key: "users")
-            DispatchQueue.main.async { completion(users, nil) }
+            let count = users?.count ?? 0
+            let nextPage: Int? = (count == per) ? page + 1 : nil
+            DispatchQueue.main.async { completion(users, nextPage, nil) }
         }
     }
 

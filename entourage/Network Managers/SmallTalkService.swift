@@ -149,17 +149,25 @@ struct SmallTalkService: ParsingDataCodable {
     }
 
     // MARK: - Lister les participants d’un SmallTalk
-    static func listParticipants(id: String, completion: @escaping ([UserLightNeighborhood]?, EntourageNetworkError?) -> Void) {
+    static func listParticipants(
+        id: String,
+        page: Int = 1,
+        per: Int = 20,
+        completion: @escaping ([UserLightNeighborhood]?, Int?, EntourageNetworkError?) -> Void
+    ) {
         guard let token = UserDefaults.token else { return }
-        let endpoint = "smalltalks/\(id)/users?token=\(token)"
-
+        let endpoint = "smalltalks/\(id)/users?page=\(page)&per=\(per)&token=\(token)"
+        
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, error in
             guard let data = data, error == nil else {
-                completion(nil, error)
+                completion(nil, nil, error)
                 return
             }
             let users: [UserLightNeighborhood]? = self.parseDatas(data: data, key: "users")
-            completion(users, nil)
+            let count = users?.count ?? 0
+            // s’il y a autant d’éléments que ‘per’, on suppose qu’il reste une page suivante
+            let nextPage: Int? = (count == per) ? page + 1 : nil
+            completion(users, nextPage, nil)
         }
     }
 

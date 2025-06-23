@@ -333,8 +333,8 @@ class EventDetailFeedViewController: UIViewController {
     }
     
     func getEventMembers() {
-        // Charge la liste des membres (participants)
-        EventService.getEventUsers(eventId: self.eventId) { users, _ in
+        // Charge la liste des membres (participants) avec un nombre fixe d'utilisateurs
+        EventService.getEventUsers(eventId: self.eventId, page: 1, per: 10) { users, _, _ in
             if let _users = users {
                 self.users = _users
             }
