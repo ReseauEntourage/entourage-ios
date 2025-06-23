@@ -410,7 +410,7 @@ struct UserService {
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] {
                 if let _jsonUser = json["user"] as? [String:AnyObject], let dataUser = try? JSONSerialization.data(withJSONObject: _jsonUser) {
                     unreadCount = _jsonUser["unread_count"] as! Int
-                    unreadCounGroup = _jsonUser["unread_conversations_count"] as! Int
+                    unreadCounGroup = _jsonUser["unread_neighborhoods_count"] as! Int
                 }
             }
         }
