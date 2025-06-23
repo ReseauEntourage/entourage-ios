@@ -129,11 +129,9 @@ class MainTabbarViewController: UITabBarController {
         if let badge = UserDefaults.groupBadgeCount, badge > 0 {
             let newValue = badge > 9 ? "9+" : "\(badge)"
             groupVC.tabBarItem.badgeValue = newValue
-            UIApplication.shared.applicationIconBadgeNumber = badge
         }
         else {
             groupVC.tabBarItem.badgeValue = nil
-            UIApplication.shared.applicationIconBadgeNumber = 0
         }
     }
     
