@@ -105,6 +105,8 @@ struct DeepLinkManager {
             showConversation(conversationId: notification.instanceId)
         case .smalltalk:
             showSmallTalk(conversationId: notification.instanceId)
+        case .almost_matches:
+            showAlmostMatch()
         }
     }
     
@@ -150,6 +152,8 @@ struct DeepLinkManager {
             showConversation(conversationId: notification.instanceId)
         case .smalltalk:
             showSmallTalk(conversationId: notification.instanceId)
+        case .almost_matches:
+            showAlmostMatch()
         }
     }
     
@@ -182,6 +186,8 @@ struct DeepLinkManager {
         case .outing_message:
             return "placeholder_user"
         case .smalltalk:
+            return "placeholder_user"
+        case .almost_matches:
             return "placeholder_user"
         }
     }
@@ -222,7 +228,11 @@ struct DeepLinkManager {
         }
     }
     
-
+    static func showAlmostMatch() {
+        if let vc = UIStoryboard.init(name: "SmallTalk", bundle: nil).instantiateViewController(withIdentifier: "SmallTalkAlmostMatchingViewController") as? SmallTalkAlmostMatchingViewController {
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
     
     static func showResource(id:Int) {
         if let vc = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {

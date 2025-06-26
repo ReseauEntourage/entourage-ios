@@ -41,6 +41,7 @@ enum InstanceType:String {
     case neighborhood_post
     case outing_post
     case smalltalk
+    case almost_matches
     case none
 
     
@@ -59,6 +60,7 @@ enum InstanceType:String {
         case "conversations","conversation": return .conversations
         case "smalltalk": return .smalltalk
         case "partners": return .partners
+        case "almost_matches": return .almost_matches
         default: return .none
         }
     }
