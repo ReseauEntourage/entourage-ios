@@ -268,7 +268,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
 
         // Pagination: Load more data when the user is near the end of the list
         let threshold = 5 // Number of cells from the bottom to trigger loading more
-        if !isFromReact && indexPath.row >= tableData.count - threshold && hasMorePages && !isLoading {
+        if !isFromReact && !isFromSurvey && indexPath.row >= tableData.count - threshold && hasMorePages && !isLoading {
             if isEvent {
                 getEventusers()
             } else {
