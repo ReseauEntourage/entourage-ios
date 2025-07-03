@@ -215,6 +215,11 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                 if let userReactions = response?.userReactions {
                     self.users = userReactions.map { $0.user }
                     self.reactionTypeList = userReactions.map { ReactionType(id: $0.reactionId, key: nil, imageUrl: nil) }
+
+                    // ✅ Clear les données existantes avant de peupler
+                    self.tableData.removeAll()
+                    self.tableData = [.searchCell]
+
                     self.tableData += self.users.enumerated().map { index, user in
                         .userCell(user: user, reactionType: self.reactionTypeList[safe: index])
                     }
@@ -263,7 +268,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
 
         // Pagination: Load more data when the user is near the end of the list
         let threshold = 5 // Number of cells from the bottom to trigger loading more
-        if indexPath.row >= tableData.count - threshold && hasMorePages && !isLoading {
+        if !isFromReact && indexPath.row >= tableData.count - threshold && hasMorePages && !isLoading {
             if isEvent {
                 getEventusers()
             } else {
