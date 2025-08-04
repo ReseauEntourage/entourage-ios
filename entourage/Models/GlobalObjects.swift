@@ -62,7 +62,6 @@ struct PostMessage:Codable {
     var messageType:String? = ""
     var surveyResponse: [Bool]? = []
     var autoPostFrom: AutoPostFrom? // Champ pour l'auto-post
-
     var isRetryMsg = false
     
     private var read:Bool? = nil

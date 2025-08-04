@@ -492,6 +492,9 @@
 		2694A74A2ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */; };
 		2694A74C2ACD90D70042CFCA /* HomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */; };
 		2694A74E2ACD92510042CFCA /* HomeGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */; };
+		2698D2A72E40B36800B1A422 /* cellMeWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2698D2A62E40B36800B1A422 /* cellMeWithImage.xib */; };
+		2698D2A92E40D84100B1A422 /* cellOtherWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2698D2A82E40D84100B1A422 /* cellOtherWithImage.xib */; };
+		2698D2AB2E40EF9800B1A422 /* ConversationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2698D2AA2E40EF9800B1A422 /* ConversationViewCell.swift */; };
 		26A06BB12B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */; };
 		26A06E582B1E23B500AC323A /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A06E572B1E23B500AC323A /* Translations.swift */; };
 		26A60E212A3A05AD004849FB /* WelcomeFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */; };
@@ -1092,6 +1095,9 @@
 		2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeEventHorizontalCollectionCell.xib; sourceTree = "<group>"; };
 		2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGroupCell.swift; sourceTree = "<group>"; };
 		2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeGroupCell.xib; sourceTree = "<group>"; };
+		2698D2A62E40B36800B1A422 /* cellMeWithImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellMeWithImage.xib; sourceTree = "<group>"; };
+		2698D2A82E40D84100B1A422 /* cellOtherWithImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellOtherWithImage.xib; sourceTree = "<group>"; };
+		2698D2AA2E40EF9800B1A422 /* ConversationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewCell.swift; sourceTree = "<group>"; };
 		26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostImageTranslationCell.xib; sourceTree = "<group>"; };
 		26A06E572B1E23B500AC323A /* Translations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translations.swift; sourceTree = "<group>"; };
 		26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourViewController.swift; sourceTree = "<group>"; };
@@ -1402,6 +1408,7 @@
 		0243DCC928AF8D0800273679 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
+				2698D2A52E40B34600B1A422 /* cellConversation */,
 				2649A4B22D7F57DB00FD100E /* cells */,
 				0243DCCA28AF8D3300273679 /* ConversationsMainHomeViewController.swift */,
 				026DAC4E28B37D67007517F6 /* ConversationListMainCell.swift */,
@@ -2376,6 +2383,16 @@
 			path = AlertWithImage;
 			sourceTree = "<group>";
 		};
+		2698D2A52E40B34600B1A422 /* cellConversation */ = {
+			isa = PBXGroup;
+			children = (
+				2698D2A62E40B36800B1A422 /* cellMeWithImage.xib */,
+				2698D2A82E40D84100B1A422 /* cellOtherWithImage.xib */,
+				2698D2AA2E40EF9800B1A422 /* ConversationViewCell.swift */,
+			);
+			path = cellConversation;
+			sourceTree = "<group>";
+		};
 		26AD11A42AEFF96200FA7BEC /* LangueChoose */ = {
 			isa = PBXGroup;
 			children = (
@@ -2709,6 +2726,7 @@
 				0208267C28A67E90004B1222 /* larochelle.gpx in Resources */,
 				020AF5E92860B10C0012AE60 /* HomeCongratPopupViewController.xib in Resources */,
 				2609BFAA2AC329440052111C /* HomeSeeAllCell.xib in Resources */,
+				2698D2A72E40B36800B1A422 /* cellMeWithImage.xib in Resources */,
 				02846CC227ECBC2B00D85ADA /* Interests.xcassets in Resources */,
 				26043D9C2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib in Resources */,
 				02C91A25278F2B4F00305E0B /* Intro.storyboard in Resources */,
@@ -2754,6 +2772,7 @@
 				26E257A02D5B83DA00A8B9C1 /* VersionAppCell.xib in Resources */,
 				02E0EFA82878709D009B2C65 /* EventDetailTopLightCell.xib in Resources */,
 				2619CCE52AE948AB00276D67 /* Localizable.strings in Resources */,
+				2698D2A92E40D84100B1A422 /* cellOtherWithImage.xib in Resources */,
 				26C2C9162DDDED6A00C8F320 /* CellAlmostMatching.xib in Resources */,
 				26D13E2A2BA35FA600CAD4F7 /* QcmCell.xib in Resources */,
 				024131DB2862126B00561FB4 /* Events.xcassets in Resources */,
@@ -2825,9 +2844,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-entourage/Pods-entourage-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-entourage/Pods-entourage-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2911,6 +2934,7 @@
 				26D13E2E2BA43F9900CAD4F7 /* Survey.swift in Sources */,
 				02040CF5288E97E000AB1FBB /* EventParamTopCell.swift in Sources */,
 				26C2C9182DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift in Sources */,
+				2698D2AB2E40EF9800B1A422 /* ConversationViewCell.swift in Sources */,
 				024131CF2862026500561FB4 /* EventCreatePhase1ViewController.swift in Sources */,
 				2674FEC72ACDB6AC0013D674 /* HomeModeratorCell.swift in Sources */,
 				0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */,

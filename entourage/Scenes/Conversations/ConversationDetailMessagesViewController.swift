@@ -11,6 +11,8 @@
 import UIKit
 import IQKeyboardManagerSwift
 import IHProgressHUD
+import Photos
+import AVFoundation
 
 // MARK: - Struct et Enums
 
@@ -70,6 +72,14 @@ class ConversationDetailMessagesViewController: UIViewController {
     // MARK: - Outlets pour la fonctionnalité de mention
     @IBOutlet weak var ui_tableview_mentions: UITableView! // TableView des suggestions
     @IBOutlet weak var table_view_mention_height: NSLayoutConstraint!
+    @IBOutlet weak var ui_bouton_plus: UIImageView!
+    
+    @IBOutlet weak var ui_constraint_bottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var ui_btn_photo: UIImageView!
+    @IBOutlet weak var ui_btn_galery: UIImageView!
+    private var imagePreviewOverlay: UIView?
+
     
     // MARK: - Variables principales
     private var conversationId: Int = 0
@@ -90,6 +100,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     private var autoRefreshTimer: Timer?
     private let autoRefreshInterval: TimeInterval = 5
     private var isSilentRefresh = false
+    private var isOptionViewVisible = false
 
     /// Liste brute de messages issus de l’API
     var messages = [PostMessage]()
@@ -192,6 +203,14 @@ class ConversationDetailMessagesViewController: UIViewController {
         ui_tableview_mentions.register(UINib(nibName: MentionCell.identifier, bundle: nil), forCellReuseIdentifier: MentionCell.identifier)
         ui_tableview_mentions.isHidden = true
         table_view_mention_height.constant = 0
+        ui_tableview.register(
+          UINib(nibName: "cellMeWithImage", bundle: nil),
+          forCellReuseIdentifier: ConversationMeCell.identifier
+        )
+        ui_tableview.register(
+          UINib(nibName: "cellOtherWithImage", bundle: nil),
+          forCellReuseIdentifier: ConversationOtherCell.identifier
+        )
 
         // NOTIFS
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -263,6 +282,110 @@ class ConversationDetailMessagesViewController: UIViewController {
             getDetailConversation()
         }
         ui_btn_camera.addTarget(self, action: #selector(didTapCameraButton), for: .touchUpInside)
+        ui_bouton_plus.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(didTapOptionButton))
+        tapGesture.numberOfTapsRequired = 1
+        ui_bouton_plus.addGestureRecognizer(tapGesture)
+        
+        // → Photo
+        ui_btn_photo.isUserInteractionEnabled = true
+        let tapPhoto = UITapGestureRecognizer(target: self, action: #selector(didTapPhotoButton))
+        tapPhoto.numberOfTapsRequired = 1
+        ui_btn_photo.addGestureRecognizer(tapPhoto)
+
+        // → Galerie
+        ui_btn_galery.isUserInteractionEnabled = true
+        let tapGallery = UITapGestureRecognizer(target: self, action: #selector(didTapGalleryButton))
+        tapGallery.numberOfTapsRequired = 1
+        ui_btn_galery.addGestureRecognizer(tapGallery)
+        
+    }
+    
+    
+    @objc func didTapPhotoButton() {
+        print("eho photo ")
+        checkCameraPermissionAndPresentPicker(sourceType: .camera)
+    }
+    
+    @objc func didTapGalleryButton() {
+        print("eho galery ")
+        checkPhotoLibraryPermissionAndPresentPicker(sourceType: .photoLibrary)
+    }
+    
+    @objc private func didTapOptionButton() {
+        toggleOptionViewVisibility()
+    }
+    
+    func showImagePreview(_ image: UIImage) {
+        // 1. Créer la vue overlay
+        let overlay = UIView()
+        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(overlay)
+        self.imagePreviewOverlay = overlay
+
+        // 2. Contraintes : top → safeArea.top, bottom → ui_view_txtview.top
+        NSLayoutConstraint.activate([
+            overlay.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            overlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            overlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            overlay.bottomAnchor.constraint(equalTo: ui_view_txtview.topAnchor)
+        ])
+
+        // 3. UIImageView au centre, fitXY (scaleToFill)
+        let iv = UIImageView(image: image)
+        iv.contentMode = .scaleToFill
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        overlay.addSubview(iv)
+        NSLayoutConstraint.activate([
+            iv.topAnchor.constraint(equalTo: overlay.topAnchor),
+            iv.leadingAnchor.constraint(equalTo: overlay.leadingAnchor),
+            iv.trailingAnchor.constraint(equalTo: overlay.trailingAnchor),
+            iv.bottomAnchor.constraint(equalTo: overlay.bottomAnchor)
+        ])
+
+        // 4. Bouton “fermer” en haut à droite
+        let closeButton = UIButton(type: .system)
+        if #available(iOS 13.0, *) {
+            closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
+        closeButton.tintColor = .white
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.addTarget(self, action: #selector(dismissImagePreview), for: .touchUpInside)
+        overlay.addSubview(closeButton)
+        NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalTo: overlay.safeAreaLayoutGuide.topAnchor, constant: 8),
+            closeButton.trailingAnchor.constraint(equalTo: overlay.trailingAnchor, constant: -8),
+            closeButton.widthAnchor.constraint(equalToConstant: 32),
+            closeButton.heightAnchor.constraint(equalToConstant: 32)
+        ])
+    }
+
+    /// Ferme la vue d’aperçu si elle est affichée
+    @objc private func dismissImagePreview() {
+        imagePreviewOverlay?.removeFromSuperview()
+        imagePreviewOverlay = nil
+    }
+    
+    private func toggleOptionViewVisibility() {
+        isOptionViewVisible.toggle()
+
+        let newHeight: CGFloat = isOptionViewVisible ? 70.0 : 0.0
+
+
+        UIView.animate(withDuration: 0.3) {
+            self.ui_constraint_bottom.constant = newHeight
+            self.view.layoutIfNeeded()
+        }
+
+        // (Facultatif) Rotation du bouton + en X
+        let angle: CGFloat = isOptionViewVisible ? .pi / 4 : 0
+        UIView.animate(withDuration: 0.3) {
+            self.ui_bouton_plus.transform = CGAffineTransform(rotationAngle: angle)
+        }
     }
     
     @objc private func handleCharteTapped() {
@@ -340,14 +463,14 @@ class ConversationDetailMessagesViewController: UIViewController {
         let previousOffset         = ui_tableview.contentOffset
         
         // 2. Recharge la page 1 (les derniers messages)
-        currentPage = 1
+        let savedPage = currentPage
         isSilentRefresh = true          // 🆕  désactive le scroll auto
-
         getMessages()
         
         // 3. Après le reload (quasi-immédiat côté UI), on rétablit l’offset si besoin
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
             if !wasAtBottom {
+                self.currentPage = savedPage
                 let newContentHeight = self.ui_tableview.contentSize.height
                 let delta            = newContentHeight - previousContentHeight
                 let newOffset        = CGPoint(x: previousOffset.x,
@@ -1132,69 +1255,72 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
         }
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        // == TableView des mentions ==
+        // ───────────────────────────────────────────────────────────────────────
+        // 1) TableView des suggestions de mentions
+        // ───────────────────────────────────────────────────────────────────────
         if tableView == ui_tableview_mentions {
             let dto = mentionCellDTOs[indexPath.row]
             switch dto {
             case .mention(let user):
-                if let cell = ui_tableview_mentions.dequeueReusableCell(withIdentifier: MentionCell.identifier) as? MentionCell {
-                    cell.selectionStyle = .none
-                    cell.configure(igm: user.avatarURL ?? "placeholder_user", name: user.displayName)
-                    return cell
-                }
+                guard let cell = tableView
+                        .dequeueReusableCell(withIdentifier: MentionCell.identifier,
+                                             for: indexPath) as? MentionCell
+                else { return UITableViewCell() }
+                cell.selectionStyle = .none
+                cell.configure(igm: user.avatarURL ?? "placeholder_user",
+                               name: user.displayName)
+                return cell
             }
-            return UITableViewCell()
         }
 
-        // == TableView principal (messages) ==
+        // ───────────────────────────────────────────────────────────────────────
+        // 2) TableView principale (messages + dates + retry)
+        // ───────────────────────────────────────────────────────────────────────
         let dto = conversationCellDTOs[indexPath.row]
         switch dto {
-        case .dateString(let txt):
-            // Cellule “Date”
-            if let cell = tableView.dequeueReusableCell(
-                withIdentifier: EventListSectionCell.identifier
-            ) as? EventListSectionCell {
-                cell.populateMessageSectionCell(title: txt)
-                return cell
-            }
-            return UITableViewCell()
 
+        // MARK: – Date section
+        case .dateString(let title):
+            guard let cell = tableView
+                    .dequeueReusableCell(withIdentifier: EventListSectionCell.identifier,
+                                         for: indexPath) as? EventListSectionCell
+            else { return UITableViewCell() }
+            cell.populateMessageSectionCell(title: title)
+            return cell
+
+        // MARK: – Message « normal »
         case .message(let message):
-            // Cellule “Message standard”
             let isMe = (message.user?.sid == self.meId)
-            let cellId = isMe ? "cellMe" : "cellOther"
-            if let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as? NeighborhoodMessageCell {
-                cell.populateCellConversation(
-                    isMe: isMe,
-                    message: message,
-                    isRetry: false,
-                    isOne2One: self.isOneToOne,
-                    delegate: self
-                )
-                return cell
-            }
-            return UITableViewCell()
+            let reuseId = isMe
+                ? ConversationMeCell.identifier
+                : ConversationOtherCell.identifier
 
-        case .retryMessage(let message, let positionRetry):
-            // Cellule “Message en retry”
-            // Toujours isMe = true car c’est nous qui avons échoué l’envoi
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe") as? NeighborhoodMessageCell {
-                cell.populateCell(
-                    isMe: true,
-                    message: message,
-                    isRetry: true,
-                    positionRetry: positionRetry,
-                    delegate: self,
-                    isTranslated: false
-                )
-                return cell
-            }
-            return UITableViewCell()
+            guard let cell = tableView
+                    .dequeueReusableCell(withIdentifier: reuseId,
+                                         for: indexPath) as? ConversationViewCell
+            else { return UITableViewCell() }
+
+            // Configure selon le contenu
+            cell.configure(with: message, isMe: isMe)
+            return cell
+
+        // MARK: – Message en échec (retry)
+        case .retryMessage(let message, _):
+            // Toujours « me » pour les retry
+            guard let cell = tableView
+                    .dequeueReusableCell(withIdentifier: ConversationMeCell.identifier,
+                                         for: indexPath) as? ConversationViewCell
+            else { return UITableViewCell() }
+
+            // On affiche le message dans l’état « retry »
+            cell.configure(with: message, isMe: true)
+            return cell
         }
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == ui_tableview_mentions {
             let dto = mentionCellDTOs[indexPath.row]
@@ -1490,5 +1616,80 @@ extension ConversationDetailMessagesViewController: UIGestureRecognizerDelegate 
             return false
         }
         return true
+    }
+}
+
+
+// MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
+extension ConversationDetailMessagesViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    private func checkCameraPermissionAndPresentPicker(sourceType: UIImagePickerController.SourceType) {
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+            DispatchQueue.main.async {
+                if granted {
+                    self.presentImagePicker(sourceType: sourceType)
+                } else {
+                    self.showAlert(title: "Permission requise", message: "L'accès à la caméra est nécessaire.")
+                }
+            }
+        }
+    }
+    
+    private func checkPhotoLibraryPermissionAndPresentPicker(sourceType: UIImagePickerController.SourceType) {
+        let status = PHPhotoLibrary.authorizationStatus()
+        if #available(iOS 14, *) {
+            if status == .authorized || status == .limited {
+                self.presentImagePicker(sourceType: sourceType)
+            } else if status == .notDetermined {
+                PHPhotoLibrary.requestAuthorization { newStatus in
+                    DispatchQueue.main.async {
+                        if newStatus == .authorized || newStatus == .limited {
+                            self.presentImagePicker(sourceType: sourceType)
+                        } else {
+                            self.showAlert(title: "Permission requise", message: "L'accès à la galerie est nécessaire.")
+                        }
+                    }
+                }
+            } else {
+                self.showAlert(title: "Permission refusée", message: "Merci d'autoriser l'accès dans les Réglages.")
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    private func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
+        guard UIImagePickerController.isSourceTypeAvailable(sourceType) else {
+            showAlert(title: "Erreur", message: "Source non disponible")
+            return
+        }
+        let picker = UIImagePickerController()
+        picker.sourceType = sourceType
+        picker.delegate = self
+        picker.allowsEditing = false
+        self.present(picker, animated: true)
+    }
+    
+    // Gère le retour avec une photo
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+
+        if let image = info[.originalImage] as? UIImage {
+            // ⚠️ Ici tu dois appeler ta logique d’upload d’image pour la discussion
+            print("✅ Image sélectionnée : \(image.size)")
+            showImagePreview(image)
+
+            // Exemple : uploadImage(image)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }
