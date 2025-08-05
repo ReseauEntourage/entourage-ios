@@ -79,6 +79,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     @IBOutlet weak var ui_btn_photo: UIImageView!
     @IBOutlet weak var ui_btn_galery: UIImageView!
     private var imagePreviewOverlay: UIView?
+    private var selectedImage: UIImage? = nil
 
     
     // MARK: - Variables principales
@@ -318,41 +319,47 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
     
     func showImagePreview(_ image: UIImage) {
+        // Stocker l'image sélectionnée
+        self.selectedImage = image
+
         // 1. Créer la vue overlay
+        toggleOptionViewVisibility()
         let overlay = UIView()
         overlay.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         overlay.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlay)
         self.imagePreviewOverlay = overlay
-
-        // 2. Contraintes : top → safeArea.top, bottom → ui_view_txtview.top
         NSLayoutConstraint.activate([
             overlay.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             overlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             overlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             overlay.bottomAnchor.constraint(equalTo: ui_view_txtview.topAnchor)
         ])
-
-        // 3. UIImageView au centre, fitXY (scaleToFill)
+        // 2. UIImageView centré en carré
         let iv = UIImageView(image: image)
-        iv.contentMode = .scaleToFill
+        iv.contentMode = .scaleAspectFit
         iv.translatesAutoresizingMaskIntoConstraints = false
         overlay.addSubview(iv)
         NSLayoutConstraint.activate([
-            iv.topAnchor.constraint(equalTo: overlay.topAnchor),
-            iv.leadingAnchor.constraint(equalTo: overlay.leadingAnchor),
-            iv.trailingAnchor.constraint(equalTo: overlay.trailingAnchor),
-            iv.bottomAnchor.constraint(equalTo: overlay.bottomAnchor)
+            iv.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
+            iv.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
+            iv.widthAnchor.constraint(equalTo: overlay.widthAnchor, multiplier: 0.8),
+            iv.heightAnchor.constraint(equalTo: iv.widthAnchor)
         ])
-
-        // 4. Bouton “fermer” en haut à droite
-        let closeButton = UIButton(type: .system)
+        // 3. Bouton “fermer” en cercle blanc
+        let closeButton = UIButton(type: .custom)
         if #available(iOS 13.0, *) {
-            closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+            let img = UIImage(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
+            closeButton.setImage(img, for: .normal)
         } else {
-            // Fallback on earlier versions
+            let img = UIImage(named: "close")?.withRenderingMode(.alwaysTemplate)
+            closeButton.setImage(img, for: .normal)
         }
-        closeButton.tintColor = .white
+        closeButton.tintColor = .black
+        closeButton.backgroundColor = .white
+        closeButton.layer.cornerRadius = 16
+        closeButton.layer.masksToBounds = true
+        closeButton.contentEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.addTarget(self, action: #selector(dismissImagePreview), for: .touchUpInside)
         overlay.addSubview(closeButton)
@@ -363,6 +370,8 @@ class ConversationDetailMessagesViewController: UIViewController {
             closeButton.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
+
+
 
     /// Ferme la vue d’aperçu si elle est affichée
     @objc private func dismissImagePreview() {
@@ -975,24 +984,34 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.isLoading = true
 
         if isSmallTalkMode {
-            SmallTalkService.createMessage(id: smallTalkId, content: messageStr) { message, error in
-                self.handleMessageSent(
-                    message: message,
-                    error: error,
-                    isRetry: isRetry,
-                    messageStr: messageStr,
-                    positionForRetry: positionForRetry
-                )
+            if let selectedImage = self.selectedImage {
+                SmallTalkService.prepareUploadWith(smallTalkId: smallTalkId, image: selectedImage, message: messageStr) { success in
+                    if success {
+                        self.selectedImage = nil
+                        self.fetchSmallTalkData()
+                    } else {
+                        self.handleMessageSent(message: nil, error: EntourageNetworkError(), isRetry: isRetry, messageStr: messageStr, positionForRetry: positionForRetry)
+                    }
+                }
+            } else {
+                SmallTalkService.createMessage(id: smallTalkId, content: messageStr) { message, error in
+                    self.handleMessageSent(message: message, error: error, isRetry: isRetry, messageStr: messageStr, positionForRetry: positionForRetry)
+                }
             }
         } else {
-            MessagingService.postCommentFor(conversationId: self.conversationId, message: messageStr) { message, error in
-                self.handleMessageSent(
-                    message: message,
-                    error: error,
-                    isRetry: isRetry,
-                    messageStr: messageStr,
-                    positionForRetry: positionForRetry
-                )
+            if let selectedImage = self.selectedImage {
+                MessagingService.prepareUploadWith(conversationId: self.conversationId, image: selectedImage, message: messageStr) { success in
+                    if success {
+                        self.selectedImage = nil
+                        self.getMessages()
+                    } else {
+                        self.handleMessageSent(message: nil, error: EntourageNetworkError(), isRetry: isRetry, messageStr: messageStr, positionForRetry: positionForRetry)
+                    }
+                }
+            } else {
+                MessagingService.postCommentFor(conversationId: self.conversationId, message: messageStr) { message, error in
+                    self.handleMessageSent(message: message, error: error, isRetry: isRetry, messageStr: messageStr, positionForRetry: positionForRetry)
+                }
             }
         }
     }

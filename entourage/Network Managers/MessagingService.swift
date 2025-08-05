@@ -343,5 +343,91 @@ struct MessagingService:ParsingDataCodable {
             DispatchQueue.main.async { completion(users, nextPage, nil) }
         }
     }
+    
+    // First step: Prepare the upload
+       static func prepareUploadWith(conversationId: Int, image: UIImage, message: String?, completion: @escaping (_ result: Bool) -> Void) {
+           guard let token = UserDefaults.token else {
+               completion(false)
+               return
+           }
+
+           let endpoint = String(format: API_URL_CONVERSATION_PREPARE_IMAGE_POST_UPLOAD, "\(conversationId)", token)
+
+           AuthService.prepareUploadPhotoS3(endpoint: endpoint) { json, error in
+               guard let presignedUrl = json?["presigned_url"] as? String,
+                     let uploadKey = json?["upload_key"] as? String else {
+                   completion(false)
+                   return
+               }
+
+               self.uploadToS3(urlS3: presignedUrl, image: image) { isOk in
+                   if isOk {
+                       self.postWithImageAndText(imageKey: uploadKey, conversationId: conversationId, message: message, completion: completion)
+                   } else {
+                       completion(false)
+                   }
+               }
+           }
+       }
+
+       // Second step: Upload to Amazon S3
+       private static func uploadToS3(urlS3: String, image: UIImage, completion: @escaping (_ result: Bool) -> Void) {
+           guard let url = URL(string: urlS3), let data = image.jpegData(compressionQuality: 0.8) else {
+               completion(false)
+               return
+           }
+
+           let sessionConfig = URLSessionConfiguration.default
+           let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "PUT"
+           request.addValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+
+           let task = session.uploadTask(with: request, from: data) { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+               if error == nil {
+                   completion(true)
+               } else {
+                   Logger.print("URL Session Task Failed: \(error!.localizedDescription)")
+                   completion(false)
+               }
+           }
+
+           task.resume()
+           session.finishTasksAndInvalidate()
+       }
+
+       // Third step: Post the message with the image URL
+       private static func postWithImageAndText(imageKey: String, conversationId: Int, message: String?, completion: @escaping (_ result: Bool) -> Void) {
+           guard let token = UserDefaults.token else {
+               completion(false)
+               return
+           }
+
+           let endpoint = String(format: kAPIPostConversationMessage, "\(conversationId)", token)
+
+           var chatMessage: [String: Any] = [:]
+           if let message = message {
+               chatMessage["content"] = message
+           }
+           chatMessage["image_url"] = imageKey
+
+           let parameters = ["chat_message": chatMessage]
+           let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+           NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { _, resp, error in
+               if let error = error {
+                   Logger.print("Error posting message: \(error)")
+                   completion(false)
+                   return
+               }
+
+               if let httpResponse = resp as? HTTPURLResponse, httpResponse.statusCode < 300 {
+                   completion(true)
+               } else {
+                   completion(false)
+               }
+           }
+       }
 
 }

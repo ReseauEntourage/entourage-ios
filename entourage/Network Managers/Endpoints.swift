@@ -67,6 +67,8 @@ let kAPIGetNeighborhoodUsersQuery = "neighborhoods/%@/users?token=%@&query=%@"
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
 let API_URL_NEIGHBORHOOD_PREPARE_IMAGE_POST_UPLOAD = "neighborhoods/%@/chat_messages/presigned_upload?token=%@"
+let API_URL_CONVERSATION_PREPARE_IMAGE_POST_UPLOAD = "conversations/%@/chat_messages/presigned_upload?token=%@"
+let API_URL_SMALLTALK_PREPARE_IMAGE_POST_UPLOAD = "smalltalks/%@/chat_messages/presigned_upload?token=%@"
 let API_URL_EVENT_PREPARE_IMAGE_POST_UPLOAD = "outings/%@/chat_messages/presigned_upload?token=%@"
 let API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD = "contributions/presigned_upload?token=%@"
 

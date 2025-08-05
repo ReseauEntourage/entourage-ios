@@ -3,13 +3,16 @@ import SDWebImage
 
 // Couleur bleue pour les liens
 private let unifiedBlue = UIColor(red: 0.0, green: 122/255.0, blue: 1.0, alpha: 1.0)
+
 // Police de base pour les messages
 private let conversationBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
+
 // Couleurs pour statut supprimé/offensif
 private let deletedBackgroundColor = UIColor(named: "appGreyCellDeleted") ?? UIColor.lightGray
 private let deletedTextColor = UIColor(named: "appGreyTextDeleted") ?? UIColor.darkGray
 
 class ConversationViewCell: UITableViewCell {
+
     // MARK: - Outlets
     @IBOutlet weak var ui_image_avatar: UIImageView!
     @IBOutlet weak var ui_image_comment: UIImageView!
@@ -17,8 +20,9 @@ class ConversationViewCell: UITableViewCell {
     @IBOutlet weak var ui_label_comment: UILabel!
     @IBOutlet weak var ui_label_date: UILabel!
     @IBOutlet weak var ui_view_label: UIView!
+    @IBOutlet weak var ui_label_min_width: NSLayoutConstraint!
 
-    // Image de status pour deleted/offensive
+    // Image de statut pour deleted/offensive
     private var deletedImageView: UIImageView?
 
     override func awakeFromNib() {
@@ -28,7 +32,7 @@ class ConversationViewCell: UITableViewCell {
         ui_image_comment.contentMode = .scaleAspectFill
         ui_image_comment.clipsToBounds = true
         self.ui_label_date.setFontBody(size: 12)
-        
+
         self.ui_label_comment.setFontBody(size: 15)
         if let img = UIImage(named: "ic_deleted_comment") {
             let imageView = UIImageView(image: img.withRenderingMode(.alwaysTemplate))
@@ -54,10 +58,8 @@ class ConversationViewCell: UITableViewCell {
 
     func configure(with message: PostMessage, isMe: Bool) {
         // Avatar
-        if let urlStr = message.user?.avatarURL,
-           let url = URL(string: urlStr) {
-            ui_image_avatar.sd_setImage(with: url,
-                                        placeholderImage: UIImage(named: "placeholder_user"))
+        if let urlStr = message.user?.avatarURL, let url = URL(string: urlStr) {
+            ui_image_avatar.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
         } else {
             ui_image_avatar.image = UIImage(named: "placeholder_user")
         }
@@ -80,13 +82,16 @@ class ConversationViewCell: UITableViewCell {
         ui_label_date.text = message.createdDateTimeFormatted
 
         // Image jointe
-        if let imgUrl = message.messageImageUrl,
-           let url = URL(string: imgUrl) {
+        if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
             ui_constraint_image_height.constant = 120
+            // Ajoutez la contrainte de largeur minimale du label égale à la moitié de l'écran
+            ui_label_min_width.constant = UIScreen.main.bounds.width / 2
         } else {
             ui_image_comment.image = nil
             ui_constraint_image_height.constant = 0
+            // Désactivez la contrainte de largeur minimale du label
+            ui_label_min_width.constant = 0
         }
 
         layoutIfNeeded()
@@ -98,7 +103,6 @@ class ConversationViewCell: UITableViewCell {
         ui_label_comment.text = "  " + text
         ui_label_comment.font = conversationBaseFont
         ui_label_comment.textColor = deletedTextColor
-
         if let icon = deletedImageView {
             ui_view_label.addSubview(icon)
             NSLayoutConstraint.activate([
@@ -127,23 +131,18 @@ class ConversationViewCell: UITableViewCell {
     private func attributedString(fromHTML html: String) -> NSAttributedString {
         let replaced = html.replacingOccurrences(of: "\n", with: "<br>")
         guard let data = replaced.data(using: .utf8) else {
-            return NSAttributedString(string: html,
-                                      attributes: [.font: conversationBaseFont,
-                                                   .foregroundColor: UIColor.black])
+            return NSAttributedString(string: html, attributes: [.font: conversationBaseFont, .foregroundColor: UIColor.black])
         }
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
         do {
-            let attr = try NSMutableAttributedString(data: data,
-                                                     options: options,
-                                                     documentAttributes: nil)
+            let attr = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
             let full = NSRange(location: 0, length: attr.length)
             attr.removeAttribute(.foregroundColor, range: full)
             attr.removeAttribute(.underlineStyle, range: full)
-            attr.addAttributes([.font: conversationBaseFont,
-                                .foregroundColor: UIColor.black], range: full)
+            attr.addAttributes([.font: conversationBaseFont, .foregroundColor: UIColor.black], range: full)
             attr.enumerateAttribute(.link, in: full, options: []) { value, range, _ in
                 if value != nil {
                     attr.addAttributes([
@@ -157,9 +156,7 @@ class ConversationViewCell: UITableViewCell {
             }
             return attr
         } catch {
-            return NSAttributedString(string: html,
-                                      attributes: [.font: conversationBaseFont,
-                                                   .foregroundColor: UIColor.black])
+            return NSAttributedString(string: html, attributes: [.font: conversationBaseFont, .foregroundColor: UIColor.black])
         }
     }
 }
