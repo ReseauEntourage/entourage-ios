@@ -78,7 +78,7 @@
                     <constraint firstItem="ydE-Ks-121" firstAttribute="top" secondItem="yKV-p1-6s6" secondAttribute="bottom" constant="5" id="dDd-EI-IKZ"/>
                     <constraint firstItem="yKV-p1-6s6" firstAttribute="top" secondItem="dsB-TC-RCl" secondAttribute="top" constant="10" id="e65-xG-kRN"/>
                     <constraint firstItem="ydE-Ks-121" firstAttribute="leading" secondItem="yKV-p1-6s6" secondAttribute="leading" constant="10" id="gdA-9V-Anz"/>
-                    <constraint firstItem="rxt-zI-ajQ" firstAttribute="width" relation="greaterThanOrEqual" secondItem="dsB-TC-RCl" secondAttribute="width" multiplier="0.0710195" id="uX0-CX-GA4"/>
+                    <constraint firstItem="rxt-zI-ajQ" firstAttribute="width" secondItem="dsB-TC-RCl" secondAttribute="width" multiplier="0.0710195" id="uX0-CX-GA4"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

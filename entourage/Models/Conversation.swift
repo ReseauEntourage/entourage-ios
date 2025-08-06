@@ -14,7 +14,7 @@ struct Conversation:Codable {
     var type:String? = nil
     var title:String? = nil
     var imageUrl:String? = nil
-    private var lastMessage:LastMessage? = nil
+    var lastMessage:LastMessage? = nil
     var numberUnreadMessages:Int? = 0
     var section:String? = nil
     var user:MemberConversation? = nil
@@ -240,3 +240,33 @@ extension Conversation {
         self.members_count = smallTalk.members_count
     }
 } 
+
+
+struct ConversationMembership: Decodable {
+    let status: String?
+    let joinableStatus: String?
+    let name: String?
+    let joinableType: String?
+    let joinableId: Int?
+    let numberOfPeople: Int?
+    let numberOfRootMessages: Int?
+    let numberOfUnreadMessages: Int?
+    let lastChatMessageText: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case status
+        case joinableStatus      = "joinable_status"
+        case name
+        case joinableType        = "joinable_type"
+        case joinableId          = "joinable_id"
+        case numberOfPeople      = "number_of_people"
+        case numberOfRootMessages = "number_of_root_chat_messages"
+        case numberOfUnreadMessages = "number_of_unread_messages"
+        case lastChatMessageText = "last_chat_message"
+    }
+}
+
+struct ConversationMembershipsWrapper: Decodable {
+    let memberships: [ConversationMembership]
+}
+

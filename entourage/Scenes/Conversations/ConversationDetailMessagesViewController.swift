@@ -1324,6 +1324,9 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
 
             // Configure selon le contenu
             cell.configure(with: message, isMe: isMe)
+            cell.selectionStyle = .none
+            cell.delegate = self
+
             return cell
 
         // MARK: – Message en échec (retry)

@@ -71,9 +71,22 @@ class ConversationsMainHomeViewController: UIViewController {
             }
         }
     }
+    
+    private func membershipTypeParam() -> String? {
+        switch selectedFilter {
+        case "event_conv_filter_discussions".localized:
+            return "Conversation"
+        case "event_conv_filter_events".localized:
+            return "Outing"
+        case "event_conv_filter_smalltalks".localized:
+            return "Smalltalk"
+        default:
+            return nil
+        }
+    }
 
     func loadConversations(reset: Bool) {
-        if isFetching { return }
+        guard !isFetching else { return }
         isFetching = true
 
         if reset {
@@ -83,36 +96,59 @@ class ConversationsMainHomeViewController: UIViewController {
 
         IHProgressHUD.show()
 
+        // 1️⃣ Si on est sur “Smalltalk”, on utilise l’ancien service
         if selectedFilter == "event_conv_filter_smalltalks".localized {
-            self.isLastPage = true
             SmallTalkService.listSmallTalks { smallTalks, error in
                 IHProgressHUD.dismiss()
                 self.isFetching = false
                 guard let smallTalks = smallTalks else { return }
+                // On retourne en DTO .smalltalk pour que cellForRowAt et didSelectRowAt
+                // passent bien par la case .smalltalk
                 self.loadDTO(smallTalks: smallTalks, reset: reset)
             }
-        } else {
-            let fetchMethod: (Int, Int, @escaping ([Conversation]?, EntourageNetworkError?) -> Void) -> Void
-
-            switch selectedFilter {
-            case "event_conv_filter_discussions".localized:
-                fetchMethod = MessagingService.getPrivateConversations
-            case "event_conv_filter_events".localized:
-                fetchMethod = MessagingService.getOutingConversations
-            default:
-                fetchMethod = MessagingService.getAllConversations
-            }
-
-            fetchMethod(currentPage, perPage) { conversations, error in
-                IHProgressHUD.dismiss()
-                self.isFetching = false
-                guard let conversations = conversations else { return }
-
-                self.isLastPage = conversations.count < self.perPage
-                self.loadDTO(conversations: conversations, reset: reset)
-                self.currentPage += 1
-            }
+            return
         }
+
+        // 2️⃣ Sinon, on utilise le nouvel endpoint memberships
+        let typeParam = membershipTypeParam()
+        MessagingService.getConversationMemberships(type: typeParam,
+                                                   page: currentPage,
+                                                   per: perPage) { memberships, error in
+            IHProgressHUD.dismiss()
+            self.isFetching = false
+            guard let memberships = memberships else { return }
+
+            // pagination
+            self.isLastPage = memberships.count < self.perPage
+
+            // map en Conversation
+            let conversations = memberships.map { self.conversation(from: $0) }
+            // et on recharge via le DTO conversation
+            self.loadDTO(conversations: conversations, reset: reset)
+            self.currentPage += 1
+        }
+    }
+
+    private func conversation(from membership: ConversationMembership) -> Conversation {
+        var conv = Conversation()
+        conv.uid = membership.joinableId ?? 0
+
+        // Si ton cell code base les icônes sur `type == "event"`, mets “event” ici :
+        conv.type = {
+            switch membership.joinableType?.lowercased() {
+            case "outing":      return "outing"      // <- ici !
+            case "conversation":return "private"
+            default:            return "group"
+            }
+        }()
+
+        conv.title = membership.name
+        if let text = membership.lastChatMessageText {
+            conv.lastMessage = LastMessage(text: text, dateStr: nil)
+        }
+        conv.numberUnreadMessages = membership.numberOfUnreadMessages
+        conv.members_count = membership.numberOfPeople
+        return conv
     }
 
     func loadDTO(conversations: [Conversation], reset: Bool) {

@@ -120,16 +120,18 @@ class ConversationListMainCell: UITableViewCell {
             if let _url = URL(string: message.imageUrl ?? "") {
                 ui_image.sd_setImage(with: _url, placeholderImage: UIImage.init(named: "ic_placeholder_my_event"))
             }
+            ui_image.image = UIImage(named: "ic_placeholder_my_event")
             self.ui_username.text = message.title
         }else {
+            ui_image.image = UIImage(named: "placeholder_user")
             self.ui_image.contentMode = .scaleAspectFit
             self.ui_image.layer.cornerRadius = ui_image.frame.height / 2
-            if let urlImg = message.user?.imageUrl, !urlImg.isEmpty, let mainUrl = URL(string: urlImg) {
-                ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
-            }
-            else {
-                ui_image.image = UIImage.init(named: "placeholder_user")
-            }
+//            if let urlImg = message.user?.imageUrl, !urlImg.isEmpty, let mainUrl = URL(string: urlImg) {
+//                ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
+//            }
+//            else {
+//                ui_image.image = UIImage.init(named: "placeholder_user")
+//            }
         }
     }
     

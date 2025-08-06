@@ -429,5 +429,43 @@ struct MessagingService:ParsingDataCodable {
                }
            }
        }
+    
+    static func getConversationMemberships(
+            type: String?,
+            page: Int,
+            per: Int,
+            completion: @escaping (_ memberships: [ConversationMembership]?, _ error: EntourageNetworkError?) -> Void
+        ) {
+            guard let token = UserDefaults.token else { return }
+
+            // Construire la partie "&type=…" si besoin
+            let typeQuery = (type != nil && !type!.isEmpty) ? "&type=\(type!)" : ""
+            let endpoint = String(
+                format: kAPIConversationMemberships,
+                token,
+                page,
+                per,
+                typeQuery
+            )
+            Logger.print("***** getConversationMemberships: \(endpoint)")
+
+            NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+                guard let data = data,
+                      error == nil,
+                      let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+                    DispatchQueue.main.async { completion(nil, error) }
+                    return
+                }
+
+                do {
+                    let wrapper = try JSONDecoder().decode(ConversationMembershipsWrapper.self, from: data)
+                    DispatchQueue.main.async { completion(wrapper.memberships, nil) }
+                } catch {
+                    DispatchQueue.main.async {
+                        print("error getting membership")
+                    }
+                }
+            }
+        }
 
 }
