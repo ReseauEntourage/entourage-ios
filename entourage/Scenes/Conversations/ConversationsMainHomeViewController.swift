@@ -133,12 +133,16 @@ class ConversationsMainHomeViewController: UIViewController {
         var conv = Conversation()
         conv.uid = membership.joinableId ?? 0
 
-        // Si ton cell code base les icônes sur `type == "event"`, mets “event” ici :
         conv.type = {
             switch membership.joinableType?.lowercased() {
-            case "outing":      return "outing"      // <- ici !
-            case "conversation":return "private"
-            default:            return "group"
+            case "outing":
+                return "outing"
+            case "conversation":
+                return "private"
+            case "smalltalk":      // ← on gère maintenant explicitement les Smalltalk
+                return "small_talk"
+            default:
+                return "group"
             }
         }()
 
@@ -271,12 +275,37 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             return
 
         case .conversation(let conversation):
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-                vc.type = conversation.type ?? ""
-                vc.setupFromOtherVC(conversationId: conversation.uid, title: conversation.title, isOneToOne: conversation.isOneToOne(), conversation: conversation, delegate: self, selectedIndexPath: indexPath)
-                present(vc, animated: true)
+            // si small_talk, on appelle la bonne méthode
+            if conversation.type == "small_talk" {
+                if let vc = storyboard?
+                    .instantiateViewController(withIdentifier: "detailMessagesVC")
+                    as? ConversationDetailMessagesViewController {
+                    vc.type = "small_talk"
+                    vc.setupFromSmallTalk(
+                        smallTalkId: conversation.uid,
+                        title: conversation.title,
+                        delegate: self
+                    )
+                    present(vc, animated: true)
+                }
             }
-
+            else {
+                // comportement « historique » pour events/discussions
+                if let vc = storyboard?
+                    .instantiateViewController(withIdentifier: "detailMessagesVC")
+                    as? ConversationDetailMessagesViewController {
+                    vc.type = conversation.type ?? ""
+                    vc.setupFromOtherVC(
+                        conversationId: conversation.uid,
+                        title: conversation.title,
+                        isOneToOne: conversation.isOneToOne(),
+                        conversation: conversation,
+                        delegate: self,
+                        selectedIndexPath: indexPath
+                    )
+                    present(vc, animated: true)
+                }
+            }
         case .smalltalk(let smallTalk):
             if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                 vc.type = "small_talk"
