@@ -62,8 +62,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydE-Ks-121">
-                        <rect key="frame" x="470.66666666666669" y="175.33333333333334" width="42.000000000000057" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydE-Ks-121">
+                        <rect key="frame" x="470.66666666666669" y="175.33333333333334" width="41.333333333333314" height="20.333333333333343"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" name="orange_app"/>
                         <nil key="highlightedColor"/>
@@ -71,6 +71,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="xe2-LJ-dg0" firstAttribute="top" secondItem="dsB-TC-RCl" secondAttribute="top" constant="10" id="5fT-dN-z7b"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ydE-Ks-121" secondAttribute="trailing" constant="20" id="64h-j4-ejd"/>
                     <constraint firstItem="xe2-LJ-dg0" firstAttribute="leading" secondItem="yKV-p1-6s6" secondAttribute="trailing" constant="20" id="EdA-e0-kOZ"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ydE-Ks-121" secondAttribute="bottom" constant="10" id="aDj-BK-t3F"/>
                     <constraint firstItem="yKV-p1-6s6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dsB-TC-RCl" secondAttribute="leading" constant="20" id="aqZ-ZQ-Hjq"/>

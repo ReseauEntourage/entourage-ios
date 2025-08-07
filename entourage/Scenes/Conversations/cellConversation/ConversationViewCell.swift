@@ -108,7 +108,7 @@ class ConversationViewCell: UITableViewCell {
         }
 
         // Date
-        ui_label_date.text = message.createdDateTimeFormatted
+        ui_label_date.text = (message.user?.displayName ?? "") + " " +  message.createdDateTimeFormatted
 
         // Attached image
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
@@ -158,7 +158,11 @@ class ConversationViewCell: UITableViewCell {
     }
 
     private func applyNormalContent(message: PostMessage, isMe: Bool) {
-        ui_view_label.backgroundColor = isMe ? UIColor.appBeige : UIColor.appBeigeClair
+        ui_view_label.backgroundColor = isMe ? UIColor.appBeige : UIColor.orangeMedium
+        if message.messageType == "auto" {
+            ui_view_label.backgroundColor = UIColor.appBleuAuto
+
+        }
         if let html = message.contentHtml, !html.isEmpty {
             ui_label_comment.attributedText = attributedString(fromHTML: html)
         } else if let content = message.content, !content.isEmpty {
