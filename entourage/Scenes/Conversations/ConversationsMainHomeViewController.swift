@@ -139,14 +139,30 @@ class ConversationsMainHomeViewController: UIViewController {
                 return "outing"
             case "conversation":
                 return "private"
-            case "smalltalk":      // ← on gère maintenant explicitement les Smalltalk
+            case "smalltalk":
                 return "small_talk"
             default:
                 return "group"
             }
         }()
 
-        conv.title = membership.name
+        // Formatage de la date ISO (si c'est bien une date)
+        let formattedDate: String? = {
+            guard let subname = membership.subname else { return nil }
+            let isoFormatter = ISO8601DateFormatter()
+            isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+            if let date = isoFormatter.date(from: subname) {
+                let outputFormatter = DateFormatter()
+                outputFormatter.dateFormat = "dd/MM/yyyy"
+                outputFormatter.locale = Locale(identifier: "fr_FR")
+                return outputFormatter.string(from: date)
+            }
+            return subname // si ce n'est pas une date, on retourne tel quel
+        }()
+
+        conv.title = (membership.name ?? "") + (formattedDate != nil ? " \(formattedDate!)" : "")
+        
         if let text = membership.lastChatMessageText {
             conv.lastMessage = LastMessage(text: text, dateStr: nil)
         }
