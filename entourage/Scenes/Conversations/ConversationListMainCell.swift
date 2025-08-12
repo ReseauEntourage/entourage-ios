@@ -71,7 +71,7 @@ class ConversationListMainCell: UITableViewCell {
             }
         }
         ui_detail_message.text = message.getLastMessage
-        ui_date.text = message.createdDateFormatted
+        ui_date.text = message.subname
         
         self.delegate = delegate
         self.position = position

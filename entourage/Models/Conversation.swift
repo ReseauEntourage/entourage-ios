@@ -13,6 +13,7 @@ struct Conversation:Codable {
     var uuid:String? = nil
     var type:String? = nil
     var title:String? = nil
+    var subname:String? = nil
     var imageUrl:String? = nil
     var lastMessage:LastMessage? = nil
     var numberUnreadMessages:Int? = 0

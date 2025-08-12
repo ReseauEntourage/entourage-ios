@@ -161,8 +161,8 @@ class ConversationsMainHomeViewController: UIViewController {
             return subname // si ce n'est pas une date, on retourne tel quel
         }()
 
-        conv.title = (membership.name ?? "") + (formattedDate != nil ? " \(formattedDate!)" : "")
-        
+        conv.title = membership.name ?? ""
+        conv.subname = formattedDate
         if let text = membership.lastChatMessageText {
             conv.lastMessage = LastMessage(text: text, dateStr: nil)
         }
