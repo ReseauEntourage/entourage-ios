@@ -130,6 +130,7 @@ struct MemberLight: Codable {
     var username: String?
     var imageUrl: String?
     var confirmedAt: Bool?
+    var participateAt: Bool?
     var roles: [String]?
     var partner: Partner?
 
@@ -138,6 +139,7 @@ struct MemberLight: Codable {
         case username = "display_name"
         case imageUrl = "avatar_url"
         case confirmedAt = "confirmed_at"
+        case participateAt = "participate_at"
         case roles
         case partner
     }

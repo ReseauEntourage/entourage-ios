@@ -1899,3 +1899,7 @@
 "small_talk_btn_charte" = "Read the charter and best practices → here";
 "home_button_start" = "Discuss";
 "message_auto" = "automatic messagr - ";
+"photo_consent_title" = "Do you agree to the use of your image under the terms below?";
+"photo_consent_decline" = "I don’t agree";
+"photo_consent_accept"  = "I agree";
+"photo_consent_body" = "In accordance with image rights provisions, I authorize Entourage and its technical providers to take photographs, videos or digital recordings during Entourage association events for an unlimited duration, until I withdraw my consent.\n\nThe images may be used and exploited by the organization, in any form and on any media, worldwide, without time limitation, in full or as excerpts, including but not limited to: press, books, digital media, exhibitions, advertising, public screenings, contests, website and social networks.\n\nThe beneficiary of this authorization expressly agrees not to use the photographs in a manner that could infringe privacy or reputation, and not to use the photographs, videos or recordings in any harmful context or medium.\n\nI acknowledge that my rights are fully respected and I shall not claim any remuneration for the use covered herein.\n\nI warrant that neither I nor, where applicable, the person I represent is bound by an exclusive contract concerning the use of my image or my name.\n\nAny dispute arising from the interpretation or performance hereof shall be subject to the exclusive jurisdiction of French courts.";

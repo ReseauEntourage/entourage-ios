@@ -1303,6 +1303,14 @@ L2</string>
                                                                         <action selector="action_send_message:" destination="VsV-Fd-gVS" eventType="touchUpInside" id="tSZ-TG-aYd"/>
                                                                     </connections>
                                                                 </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="836-Tc-1Vi" customClass="Checkbox" customModule="Ent_Beta" customModuleProvider="target">
+                                                                    <rect key="frame" x="312" y="21" width="40" height="40"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="40" id="bd8-pQ-qX6"/>
+                                                                        <constraint firstAttribute="height" constant="40" id="rjI-OY-aAL"/>
+                                                                    </constraints>
+                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                </button>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7H-lC-0QD">
                                                                     <rect key="frame" x="32" y="81" width="350" height="1"/>
                                                                     <color key="backgroundColor" name="orange_light_a50"/>
@@ -1327,6 +1335,7 @@ L2</string>
                                                                 <constraint firstAttribute="bottom" secondItem="t7H-lC-0QD" secondAttribute="bottom" id="DGl-Kd-mJP"/>
                                                                 <constraint firstItem="ccy-if-Xx8" firstAttribute="leading" secondItem="Gyk-8K-Xhc" secondAttribute="trailing" constant="8" id="MZP-7Z-9Iv"/>
                                                                 <constraint firstItem="WqO-cW-XjH" firstAttribute="top" secondItem="Gyk-8K-Xhc" secondAttribute="bottom" id="Nti-5t-eb8"/>
+                                                                <constraint firstItem="F0R-KR-UuD" firstAttribute="leading" secondItem="836-Tc-1Vi" secondAttribute="trailing" id="O1S-vB-EpG"/>
                                                                 <constraint firstItem="WqO-cW-XjH" firstAttribute="leading" secondItem="Gyk-8K-Xhc" secondAttribute="leading" id="U4d-sQ-P93"/>
                                                                 <constraint firstItem="Ae4-gQ-ZVI" firstAttribute="leading" secondItem="uU0-6A-ebk" secondAttribute="leading" constant="32" id="eAf-JP-HdI"/>
                                                                 <constraint firstItem="F0R-KR-UuD" firstAttribute="centerX" secondItem="ccy-if-Xx8" secondAttribute="centerX" id="eM3-3f-6Ao"/>
@@ -1335,6 +1344,7 @@ L2</string>
                                                                 <constraint firstItem="t7H-lC-0QD" firstAttribute="leading" secondItem="uU0-6A-ebk" secondAttribute="leading" constant="32" id="pWo-bj-q9w"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ccy-if-Xx8" secondAttribute="trailing" constant="32" id="pZN-sW-267"/>
                                                                 <constraint firstItem="Ae4-gQ-ZVI" firstAttribute="centerY" secondItem="uU0-6A-ebk" secondAttribute="centerY" id="pyJ-Id-Sve"/>
+                                                                <constraint firstItem="836-Tc-1Vi" firstAttribute="top" secondItem="F0R-KR-UuD" secondAttribute="top" id="pz7-mb-iaD"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -1346,6 +1356,7 @@ L2</string>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="checkbox" destination="836-Tc-1Vi" id="wWP-Mu-Z2s"/>
                                                     <outlet property="ui_bt_message" destination="F0R-KR-UuD" id="EcT-f2-1qm"/>
                                                     <outlet property="ui_image" destination="Ae4-gQ-ZVI" id="xTd-Lg-ovA"/>
                                                     <outlet property="ui_picto_message" destination="ccy-if-Xx8" id="gf1-fz-4TJ"/>
@@ -1360,7 +1371,7 @@ L2</string>
                                             <outlet property="delegate" destination="AwG-Rf-xDn" id="6nE-re-mBM"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ije-dr-3xn">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ije-dr-3xn">
                                         <rect key="frame" x="0.0" y="260.5" width="414" height="279"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oups, aucun résultat ne correspond à votre recherche ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCi-n7-4gG">

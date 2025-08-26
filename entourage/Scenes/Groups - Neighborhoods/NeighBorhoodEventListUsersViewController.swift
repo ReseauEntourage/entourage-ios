@@ -47,6 +47,12 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     private var isLoading = false
     private var hasMorePages = true
 
+    // MARK: - Viewer capabilities
+    /// Le viewer peut voir/utiliser les checkboxes s'il a au moins un rôle (non nul / non vide)
+    private var viewerCanUseCheckboxes: Bool {
+        return !(UserDefaults.currentUser?.roles?.isEmpty ?? true)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_tableview.register(UINib(nibName: SectionOptionNameCell.identifier, bundle: nil), forCellReuseIdentifier: SectionOptionNameCell.identifier)
@@ -284,23 +290,40 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             let title = isEvent ? "event_userInput_search".localized : "neighborhood_userInput_search".localized
             cell.populateCell(delegate: self, isSearch: isSearch, placeceholder: title, isCellUserSearch: true)
             return cell
+
         case .userCell(let _user, let _reactionType):
             var position = indexPath.row - 1
             if isFromReact || isFromSurvey {
                 position = position + 1
             }
             let isMe = _user.sid == UserDefaults.currentUser?.sid
-            let isOrganiser = _user.groupRole == "organizer"
+            let isParticipating = (_user.participateAt != nil) || (_user.confirmedAt != nil)
+
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
-            cell.populateCell(isMe: isMe, username: _user.displayName, role: _user.getCommunityRoleWithPartnerFormated(), imageUrl: _user.avatarURL, showBtMessage: true, delegate: self, position: position, reactionType: _reactionType, isConfirmed: _user.confirmedAt != nil, isOrganizer: isOrganiser, isCreator: isMe)
+            // ⬇️ Ici, on passe le droit d’afficher la checkbox selon le rôle du viewer
+            cell.populateCell(
+                isMe: isMe,
+                username: _user.displayName,
+                role: _user.getCommunityRoleWithPartnerFormated(),
+                imageUrl: _user.avatarURL,
+                showBtMessage: true,
+                delegate: self,
+                position: position,
+                reactionType: _reactionType,
+                isConfirmed: isParticipating,
+                isOrganizer: viewerCanUseCheckboxes, // ← clé : basé sur le user courant
+                isCreator: isMe
+            )
             cell.hideSeparatorBarIfIsVote(isVote: self.isFromSurvey)
             return cell
+
         case .surveySection(let title, let voteCount):
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "SectionOptionNameCell") as? SectionOptionNameCell {
                 cell.selectionStyle = .none
                 cell.configure(title: title, countVote: voteCount)
                 return cell
             }
+
         case .questionCell(let title):
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "QuestionSurveyVoteCell") as? QuestionSurveyVoteCell {
                 cell.selectionStyle = .none
@@ -388,6 +411,66 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
 
 // MARK: - NeighborhoodUserCellDelegate
 extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate {
+    func neighborhoodUserCell(_ cell: NeighborhoodUserCell,
+                              didToggleAt position: Int,
+                              isChecked: Bool,
+                              completion: @escaping (Bool) -> Void) {
+        // On ne gère que pour les événements
+        guard isEvent,
+              let eventId = event?.uid,
+              position < tableData.count
+        else {
+            completion(false)
+            return
+        }
+
+        // Récupérer l'utilisateur ciblé depuis tableData
+        guard case let .userCell(user, _) = tableData[position] else {
+            completion(false)
+            return
+        }
+        let userId = user.sid
+
+        if isChecked {
+            // → POPUP de consentement photo, puis double appel
+            PhotoConsentPopupViewController.present(over: self, onAccept: { [weak self] in
+                guard let self = self else { return }
+                IHProgressHUD.show()
+
+                // 1) enregistrer le consentement photo
+                EventService.acceptPhotoForUser(eventId: eventId, userId: userId) { successPhoto, _ in
+                    // 2) participer (même si acceptPhoto échoue, on peut décider de tenter quand même)
+                    EventService.participateForUser(eventId: eventId, userId: userId) { member, error in
+                        IHProgressHUD.dismiss()
+
+                        if let _ = member {
+                            completion(true) // on garde coché
+                        } else {
+                            // échec → on rétablit décoché et affiche une erreur
+                            IHProgressHUD.showError(withStatus: error?.message ?? "Une erreur est survenue.")
+                            completion(false)
+                        }
+                    }
+                }
+            }, onDecline: {
+                // L’utilisateur refuse le consentement → on re-décoche
+                completion(false)
+            })
+        } else {
+            // → annuler la participation
+            IHProgressHUD.show()
+            EventService.cancelParticipationForUser(eventId: eventId, userId: userId) { success, error in
+                IHProgressHUD.dismiss()
+                if success {
+                    completion(true) // on garde décoché
+                } else {
+                    IHProgressHUD.showError(withStatus: error?.message ?? "Impossible d’annuler la participation.")
+                    completion(false) // on rétablit coché
+                }
+            }
+        }
+    }
+    
     func showSendMessageToUserForPosition(_ position: Int) {
         guard position < tableData.count else { return }
 

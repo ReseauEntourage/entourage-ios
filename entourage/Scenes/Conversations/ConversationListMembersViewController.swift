@@ -33,6 +33,13 @@ class ConversationListMembersViewController: BasePopViewController {
     private var nextPage: Int? = 1
     private var isLoading = false
 
+    // MARK: - Viewer capabilities
+    /// Le viewer peut voir/utiliser les checkboxes s'il a au moins un rôle (non nul / non vide)
+    private var viewerCanUseCheckboxes: Bool {
+        // Adapte si tu as une autre source (ex: role de groupe / organisateur local, etc.)
+        return !(UserDefaults.currentUser?.roles?.isEmpty ?? true)
+    }
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,12 +206,14 @@ extension ConversationListMembersViewController: UITableViewDataSource {
         let user = isSearch ? usersSearch[position] : users[position]
         let isMe = user.uid == UserDefaults.currentUser?.sid
         let isAuthor = user.uid == userCreatorId
+        let isParticipating = (user.participateAt != nil) || (user.confirmedAt != nil)
 
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "cell_user",
             for: indexPath
         ) as! NeighborhoodUserCell
 
+        // ⬇️ Ici, on passe le droit d’afficher la checkbox selon le rôle du viewer
         cell.populateCell(
             isMe: isMe,
             username: user.username ?? "-",
@@ -214,8 +223,8 @@ extension ConversationListMembersViewController: UITableViewDataSource {
             delegate: self,
             position: position,
             reactionType: nil,
-            isConfirmed: user.confirmedAt,
-            isOrganizer: false,
+            isConfirmed: isParticipating,
+            isOrganizer: viewerCanUseCheckboxes, // ← clé : basé sur le user courant
             isCreator: isAuthor
         )
         return cell
@@ -280,6 +289,61 @@ extension ConversationListMembersViewController: NeighborhoodHomeSearchDelegate 
 
 // MARK: - NeighborhoodUserCellDelegate
 extension ConversationListMembersViewController: NeighborhoodUserCellDelegate {
+    func neighborhoodUserCell(_ cell: NeighborhoodUserCell,
+                                  didToggleAt position: Int,
+                                  isChecked: Bool,
+                                  completion: @escaping (Bool) -> Void) {
+
+            // On utilise conversationId comme eventId
+            guard let eid = conversationId else {
+                completion(false)
+                return
+            }
+
+            // Récup de l'utilisateur ciblé (safe index)
+            let candidate = isSearch ? usersSearch[safe: position] : users[safe: position]
+            guard let target = candidate else {
+                completion(false)
+                return
+            }
+            let userId = target.uid  // <- non optionnel, pas de 'guard let'
+
+            if isChecked {
+                // Popup consentement, puis acceptPhoto -> participate
+                PhotoConsentPopupViewController.present(over: self, onAccept: { [weak self] in
+                    guard let self = self else { return }
+                    IHProgressHUD.show()
+
+                    EventService.acceptPhotoForUser(eventId: eid, userId: userId) { _, _ in
+                        EventService.participateForUser(eventId: eid, userId: userId) { member, error in
+                            IHProgressHUD.dismiss()
+                            if member != nil {
+                                completion(true) // garder coché
+                            } else {
+                                IHProgressHUD.showError(withStatus: error?.message ?? "Une erreur est survenue.")
+                                completion(false) // rétablir décoché
+                            }
+                        }
+                    }
+                }, onDecline: {
+                    completion(false) // refus -> on re-décoche
+                })
+
+            } else {
+                // Annuler la participation
+                IHProgressHUD.show()
+                EventService.cancelParticipationForUser(eventId: eid, userId: userId) { success, error in
+                    IHProgressHUD.dismiss()
+                    if success {
+                        completion(true) // garder décoché
+                    } else {
+                        IHProgressHUD.showError(withStatus: error?.message ?? "Impossible d’annuler la participation.")
+                        completion(false) // rétablir coché
+                    }
+                }
+            }
+        }
+    
     func showSendMessageToUserForPosition(_ position: Int) {
         let user = isSearch ? usersSearch[position] : users[position]
         IHProgressHUD.show()

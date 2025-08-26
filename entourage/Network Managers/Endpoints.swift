@@ -114,6 +114,9 @@ let kAPIGetDetailsReactionEventPost = "outings/%d/chat_messages/%d/reactions/use
 let kAPIConfirmParticipation = "outings/%@/users/confirm?token=%@"
 let kAPIGetMyFilteredOutings = "users/%@/outings?token=%@&page=%d&per=%d&travel_distance=%.2f&latitude=%.6f&longitude=%.6f&interest_list=%@"
 let kAPIGetEventUsersQuery = "outings/%@/users?token=%@&query=%@"
+let kAPIParticipateForUser           = "outings/%@/users/%@/participate?token=%@"
+let kAPIAcceptPhotoForUser           = "outings/%@/users/%@/photo_acceptance?token=%@"
+let kAPICancelParticipationForUser   = "outings/%@/users/%@/cancel_participation?token=%@"
 
 
 //Actions

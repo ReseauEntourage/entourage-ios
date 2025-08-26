@@ -694,4 +694,68 @@ struct EventService:ParsingDataCodable {
             completion(wrapper?.outing)
         }
     }
+    // MARK: - Admin actions on members (participate / cancel / photo acceptance)
+
+    static func participateForUser(eventId: Int,
+                                   userId: Int,
+                                   completion: @escaping (_ user: MemberLight?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        var endpoint = kAPIParticipateForUser
+        endpoint = String(format: endpoint, "\(eventId)", "\(userId)", token)
+
+        Logger.print("Endpoint participateForUser: \(endpoint)")
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
+            let status = (resp as? HTTPURLResponse)?.statusCode
+            Logger.print("Response participateForUser: \(String(describing: status))")
+
+            guard let data = data,
+                  error == nil,
+                  let http = resp as? HTTPURLResponse,
+                  http.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+
+            // Android renvoie EntourageUserResponse{ user: ... }
+            // On reste cohérent iOS: on parse "user" -> MemberLight
+            let user: MemberLight? = self.parseData(data: data, key: "user")
+            DispatchQueue.main.async { completion(user, nil) }
+        }
+    }
+
+    static func acceptPhotoForUser(eventId: Int,
+                                   userId: Int,
+                                   completion: @escaping (_ success: Bool, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        var endpoint = kAPIAcceptPhotoForUser
+        endpoint = String(format: endpoint, "\(eventId)", "\(userId)", token)
+
+        Logger.print("Endpoint acceptPhotoForUser: \(endpoint)")
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { _, resp, error in
+            let http = resp as? HTTPURLResponse
+            let ok = (error == nil) && ((http?.statusCode ?? 500) < 300)
+            Logger.print("Response acceptPhotoForUser: \(String(describing: http?.statusCode))")
+            DispatchQueue.main.async { completion(ok, ok ? nil : error) }
+        }
+    }
+
+    static func cancelParticipationForUser(eventId: Int,
+                                           userId: Int,
+                                           completion: @escaping (_ success: Bool, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        var endpoint = kAPICancelParticipationForUser
+        endpoint = String(format: endpoint, "\(eventId)", "\(userId)", token)
+
+        Logger.print("Endpoint cancelParticipationForUser: \(endpoint)")
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { _, resp, error in
+            let http = resp as? HTTPURLResponse
+            let ok = (error == nil) && ((http?.statusCode ?? 500) < 300)
+            Logger.print("Response cancelParticipationForUser: \(String(describing: http?.statusCode))")
+            DispatchQueue.main.async { completion(ok, ok ? nil : error) }
+        }
+    }
+
 }

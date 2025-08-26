@@ -219,6 +219,7 @@ struct UserLightNeighborhood: Codable {
     var status:String? = nil
     var message:String? = nil
     var confirmedAt:String? = nil
+    var participateAt:String? = nil
     
     var displayName:String {
         get {
@@ -241,6 +242,7 @@ struct UserLightNeighborhood: Codable {
         case sid = "id"
         case communityRoles = "community_roles"
         case confirmedAt = "confirmed_at"
+        case participateAt = "participate_at"
         case _displayName = "display_name"
         case avatarURL = "avatar_url"
     }
