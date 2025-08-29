@@ -99,9 +99,10 @@ class ConversationDetailMessagesViewController: UIViewController {
     var uuidv2:String = ""
     private var isScrollDetectionEnabled = false
     private var autoRefreshTimer: Timer?
-    private let autoRefreshInterval: TimeInterval = 5
+    private let autoRefreshInterval: TimeInterval = 3
     private var isSilentRefresh = false
     private var isOptionViewVisible = false
+    private var shouldScrollToBottomAfterReload = false
 
     /// Liste brute de messages issus de l’API
     var messages = [PostMessage]()
@@ -176,6 +177,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         ui_view_button_send.backgroundColor = .clear
         ui_iv_bt_send.image = UIImage(named: "ic_send_comment_off")
+        ui_view_button_send.isUserInteractionEnabled = false // 🆕 init désactivé
 
         // Blocage
         ui_view_block.layer.borderWidth = 1
@@ -301,6 +303,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         tapGallery.numberOfTapsRequired = 1
         ui_btn_galery.addGestureRecognizer(tapGallery)
         
+        updateSendAffordance() // 🆕 init
     }
     
     
@@ -317,6 +320,34 @@ class ConversationDetailMessagesViewController: UIViewController {
     @objc private func didTapOptionButton() {
         toggleOptionViewVisibility()
     }
+    
+    private func updateSendAffordance() {
+        let hasText = !effectivePlainText().isEmpty
+        let hasImage = (selectedImage != nil)
+        let enabled = hasText || hasImage
+        ui_iv_bt_send.image = UIImage(named: enabled ? "ic_send_comment" : "ic_send_comment_off")
+        ui_view_button_send.isUserInteractionEnabled = enabled
+    }
+
+
+    private func hideOptionsPanel() {
+        if isOptionViewVisible { toggleOptionViewVisibility() }
+    }
+    
+    private func effectivePlainText() -> String {
+        let placeholder = placeholderTxt
+
+        if let attr = ui_textview_message.attributedText, attr.length > 0 {
+            let s = attr.string.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !s.isEmpty && s != placeholder { return s }
+        }
+
+        let t = (ui_textview_message.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        if !t.isEmpty && t != placeholder { return t }
+
+        return ""
+    }
+
     
     func showImagePreview(_ image: UIImage) {
         // Stocker l'image sélectionnée
@@ -369,6 +400,40 @@ class ConversationDetailMessagesViewController: UIViewController {
             closeButton.widthAnchor.constraint(equalToConstant: 32),
             closeButton.heightAnchor.constraint(equalToConstant: 32)
         ])
+        
+        // 🆕 Bouton Envoyer
+        let sendButton = UIButton(type: .system)
+        sendButton.setTitle("Envoyer", for: .normal)
+        sendButton.setTitleColor(.white, for: .normal)
+        sendButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        sendButton.backgroundColor = .appOrange
+        sendButton.layer.cornerRadius = 20
+        sendButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 18, bottom: 10, right: 18)
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.addTarget(self, action: #selector(sendCurrentSelection), for: .touchUpInside)
+        overlay.addSubview(sendButton)
+
+        // 🆕 Bouton Retirer
+        let removeButton = UIButton(type: .system)
+        removeButton.setTitle("Retirer", for: .normal)
+        removeButton.setTitleColor(.white, for: .normal)
+        removeButton.layer.cornerRadius = 20
+        removeButton.layer.borderWidth = 1
+        removeButton.layer.borderColor = UIColor.white.cgColor
+        removeButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 18, bottom: 10, right: 18)
+        removeButton.translatesAutoresizingMaskIntoConstraints = false
+        removeButton.addTarget(self, action: #selector(removeSelectedImage), for: .touchUpInside)
+        overlay.addSubview(removeButton)
+
+        NSLayoutConstraint.activate([
+            sendButton.bottomAnchor.constraint(equalTo: overlay.bottomAnchor, constant: -16),
+            sendButton.centerXAnchor.constraint(equalTo: overlay.centerXAnchor, constant: 60),
+
+            removeButton.bottomAnchor.constraint(equalTo: overlay.bottomAnchor, constant: -16),
+            removeButton.centerXAnchor.constraint(equalTo: overlay.centerXAnchor, constant: -60),
+        ])
+        
+        updateSendAffordance() // 🆕
     }
 
 
@@ -377,6 +442,22 @@ class ConversationDetailMessagesViewController: UIViewController {
     @objc private func dismissImagePreview() {
         imagePreviewOverlay?.removeFromSuperview()
         imagePreviewOverlay = nil
+        updateSendAffordance() // 🆕
+    }
+    
+    @objc private func sendCurrentSelection() {
+        hideOptionsPanel()                 // 🆕 replie les options
+        let text = (getHTMLMessage() ?? "")
+        let safe = (text == placeholderTxt) ? "" : text
+        self.sendMessage(messageStr: safe, isRetry: false)
+        dismissImagePreview()              // 🆕 ferme l’aperçu
+    }
+
+    
+    @objc private func removeSelectedImage() { // 🆕 retirer la sélection
+        self.selectedImage = nil
+        dismissImagePreview()
+        updateSendAffordance()
     }
     
     private func toggleOptionViewVisibility() {
@@ -463,27 +544,33 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
     }
     
-    private func autoRefreshMessages() {                    // 🆕
+    private func autoRefreshMessages() {
         guard !isLoading, !isSmallTalkMode else { return }
-        
-        // 1. Mémorise la position avant reload
-        let wasAtBottom            = isTableViewAtBottom()
-        let previousContentHeight  = ui_tableview.contentSize.height
-        let previousOffset         = ui_tableview.contentOffset
-        
-        // 2. Recharge la page 1 (les derniers messages)
+
+        // Mémorise la position avant reload
+        let wasAtBottom           = isTableViewAtBottom()
+        let previousContentHeight = ui_tableview.contentSize.height
+        let previousOffset        = ui_tableview.contentOffset
+
         let savedPage = currentPage
-        isSilentRefresh = true          // 🆕  désactive le scroll auto
+        isSilentRefresh = true
         getMessages()
-        
-        // 3. Après le reload (quasi-immédiat côté UI), on rétablit l’offset si besoin
+
+        // Après le reload, on ajuste le scroll selon la position précédente
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
-            if !wasAtBottom {
+            if wasAtBottom {
+                // Coller au bas si l’utilisateur y était déjà
+                if !self.conversationCellDTOs.isEmpty {
+                    let last = self.conversationCellDTOs.count - 1
+                    let ip = IndexPath(row: last, section: 0)
+                    self.ui_tableview.scrollToRow(at: ip, at: .bottom, animated: false)
+                }
+            } else {
+                // Conserver l’offset relatif (pour la pagination vers le haut)
                 self.currentPage = savedPage
                 let newContentHeight = self.ui_tableview.contentSize.height
-                let delta            = newContentHeight - previousContentHeight
-                let newOffset        = CGPoint(x: previousOffset.x,
-                                               y: previousOffset.y + delta)
+                let delta = newContentHeight - previousContentHeight
+                let newOffset = CGPoint(x: previousOffset.x, y: previousOffset.y + delta)
                 self.ui_tableview.setContentOffset(newOffset, animated: false)
             }
         }
@@ -716,9 +803,10 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
 
     // MARK: - Network – chargement des messages
+    // MARK: - Network – chargement des messages
     func getMessages() {
 
-        // 0. Mode SmallTalk ? → on ne charge rien
+        // 0. Mode SmallTalk ? → on ne charge rien ici
         if isSmallTalkMode { return }
 
         // 1. Déjà en cours ? → on sort
@@ -726,7 +814,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         // 2. Première ouverture ? → on vide visuellement pour éviter le flash
         if conversationCellDTOs.isEmpty {
-            ui_tableview.reloadData()
+            DispatchQueue.main.async { self.ui_tableview.reloadData() }
         }
 
         // 3. HUD uniquement si ce n’est PAS un refresh silencieux
@@ -736,7 +824,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         // 4. Identifiant de la conversation (id ou hash)
         let convIdStr: String = {
-            if conversationId != 0        { return String(conversationId) }
+            if conversationId != 0 { return String(conversationId) }
             if !hashedConversationId.isEmpty { return hashedConversationId }
             return ""
         }()
@@ -751,60 +839,53 @@ class ConversationDetailMessagesViewController: UIViewController {
         ) { [weak self] messages, error in
             guard let self = self else { return }
 
-            //------------------------------------------------------------
-            // 6. Always : HUD OFF & états réinitialisés
-            //------------------------------------------------------------
-            if !self.isSilentRefresh      { IHProgressHUD.dismiss() }
+            // 6. États de fin de chargement
+            if !self.isSilentRefresh { IHProgressHUD.dismiss() }
             defer {
-                self.isSilentRefresh = false          // réactive le scroll pour les appels normaux
-                self.setLoadingFalse()                // libère le verrou isLoading (timer 1 s)
+                self.isSilentRefresh = false
+                self.setLoadingFalse()
             }
 
-            //------------------------------------------------------------
-            // 7. Erreur ? On quitte proprement
-            //------------------------------------------------------------
+            // 7. Erreur => on quitte
             guard let messages = messages else { return }
 
-            //------------------------------------------------------------
-            // 8. Mise à jour des sources
-            //------------------------------------------------------------
+            // 8. MAJ des données (thread actuel OK), l’UI après sur main
             if self.currentPage > 1 {
                 self.messages.append(contentsOf: messages)
             } else {
                 self.messages = messages
             }
 
-            //------------------------------------------------------------
-            // 9. Vue « nouvelle conversation », DTOs, reload
-            //------------------------------------------------------------
-            self.checkNewConv()
-            self.buildConversationCellDTOs()
-            self.ui_view_empty.isHidden = !self.conversationCellDTOs.isEmpty
-            self.ui_tableview.reloadData()
+            // 9. Tout ce qui touche l’UI passe sur le main thread
+            DispatchQueue.main.async {
+                self.checkNewConv()
+                self.buildConversationCellDTOs()
+                self.ui_view_empty.isHidden = !self.conversationCellDTOs.isEmpty
+                self.ui_tableview.reloadData()
 
-            //------------------------------------------------------------
-            // 10. Scroll AUTO uniquement si ce n’est PAS un silent refresh
-            //------------------------------------------------------------
-            if self.currentPage == 1,
-               !self.conversationCellDTOs.isEmpty,
-               !self.isSilentRefresh {
-
-                DispatchQueue.main.async {
-                    let lastRow = self.conversationCellDTOs.count - 1
-                    let ip      = IndexPath(row: lastRow, section: 0)
-                    self.ui_tableview.scrollToRow(at: ip, at: .bottom, animated: false)
+                // 10. Auto-scroll en bas :
+                //     - après envoi (flag shouldScrollToBottomAfterReload)
+                //     - ou si reload normal (non-silencieux)
+                if self.currentPage == 1, !self.conversationCellDTOs.isEmpty {
+                    if self.shouldScrollToBottomAfterReload || !self.isSilentRefresh {
+                        let lastRow = self.conversationCellDTOs.count - 1
+                        let ip = IndexPath(row: lastRow, section: 0)
+                        self.ui_tableview.scrollToRow(at: ip, at: .bottom, animated: false)
+                    }
                 }
-            }
 
-            //------------------------------------------------------------
-            // 11. Badge « non lus » sur l’écran précédent
-            //------------------------------------------------------------
-            self.parentDelegate?.updateUnreadCount(
-                conversationId: self.conversationId,
-                currentIndexPathSelected: self.selectedIndexPath
-            )
+                // 11. Reset du flag « scroll après reload »
+                self.shouldScrollToBottomAfterReload = false
+
+                // 12. Badge « non lus » sur l’écran précédent
+                self.parentDelegate?.updateUnreadCount(
+                    conversationId: self.conversationId,
+                    currentIndexPathSelected: self.selectedIndexPath
+                )
+            }
         }
     }
+
 
 
     func getDetailConversation() {
@@ -934,21 +1015,27 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.isLoading = false
     }
     
-    private func handleMessageSent(message: PostMessage?, error: EntourageNetworkError?, isRetry: Bool, messageStr: String, positionForRetry: Int) {
-        self.isLoading = false
-
+    private func handleMessageSent(message: PostMessage?,
+                                   error: EntourageNetworkError?,
+                                   isRetry: Bool,
+                                   messageStr: String,
+                                   positionForRetry: Int) {
+        self.isLoading = false  // 🔑 Toujours réinitialiser
         DispatchQueue.main.async {
             if let _ = message {
+                // Succès
                 if isRetry {
                     self.messagesForRetry.remove(at: positionForRetry)
                 }
                 self.currentPage = 1
+                self.shouldScrollToBottomAfterReload = true
                 if self.isSmallTalkMode {
                     self.fetchSmallTalkData()
                 } else {
                     self.getMessages()
                 }
             } else if !isRetry {
+                // Échec initial → on place en retry visuel
                 var postMsg = PostMessage()
                 postMsg.content = messageStr
                 postMsg.user = UserLightNeighborhood()
@@ -959,62 +1046,123 @@ class ConversationDetailMessagesViewController: UIViewController {
                 self.buildConversationCellDTOs()
                 self.ui_tableview.reloadData()
                 self.scrollToBottomIfNeeded()
-                self.setLoadingFalse()
             }
-
-            self.ui_iv_bt_send.isUserInteractionEnabled = false
-            IHProgressHUD.show()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.ui_iv_bt_send.isUserInteractionEnabled = true
-                IHProgressHUD.dismiss()
-            }
+            // ✅ Toujours mettre à jour l'affordance
+            self.updateSendAffordance()
         }
     }
 
 
 
+    
     // MARK: - Envoi d'un message
     func sendMessage(messageStr: String, isRetry: Bool, positionForRetry: Int = 0) {
+        dismissImagePreview()
+        hideOptionsPanel()
+
+        // Réinitialise toujours l'UI avant l'envoi
         DispatchQueue.main.async {
             self.ui_textview_message.text = nil
-            self.ui_iv_bt_send.image = UIImage(named: "ic_send_comment_off")
+            self.ui_textview_message.attributedText = nil
+            self.updateSendAffordance()
         }
 
+        // Si déjà en cours, on sort
         if self.isLoading { return }
         self.isLoading = true
 
+        // Texte optionnel (si vide => image seule)
+        let trimmed = messageStr.trimmingCharacters(in: .whitespacesAndNewlines)
+        let messageForUpload: String? = trimmed.isEmpty ? nil : trimmed
+
+        // Logique d'envoi (SmallTalk ou Messaging)
         if isSmallTalkMode {
             if let selectedImage = self.selectedImage {
-                SmallTalkService.prepareUploadWith(smallTalkId: smallTalkId, image: selectedImage, message: messageStr) { success in
-                    if success {
-                        self.selectedImage = nil
-                        self.fetchSmallTalkData()
-                    } else {
-                        self.handleMessageSent(message: nil, error: EntourageNetworkError(), isRetry: isRetry, messageStr: messageStr, positionForRetry: positionForRetry)
+                SmallTalkService.prepareUploadWith(
+                    smallTalkId: smallTalkId,
+                    image: selectedImage,
+                    message: messageForUpload
+                ) { success in
+                    DispatchQueue.main.async {
+                        self.isLoading = false  // 🔑 Toujours réinitialiser
+                        if success {
+                            self.selectedImage = nil
+                            self.currentPage = 1
+                            self.shouldScrollToBottomAfterReload = true
+                            self.fetchSmallTalkData()
+                        }
+                        self.updateSendAffordance()  // 🔑 Mise à jour UI
+                    }
+                    if !success {
+                        self.handleMessageSent(message: nil,
+                                               error: EntourageNetworkError(),
+                                               isRetry: isRetry,
+                                               messageStr: trimmed,
+                                               positionForRetry: positionForRetry)
                     }
                 }
-            } else {
-                SmallTalkService.createMessage(id: smallTalkId, content: messageStr) { message, error in
-                    self.handleMessageSent(message: message, error: error, isRetry: isRetry, messageStr: messageStr, positionForRetry: positionForRetry)
+            } else if let msg = messageForUpload {
+                SmallTalkService.createMessage(id: smallTalkId, content: msg) { message, error in
+                    self.isLoading = false  // 🔑 Toujours réinitialiser
+                    self.shouldScrollToBottomAfterReload = true
+                    self.handleMessageSent(message: message,
+                                           error: error,
+                                           isRetry: isRetry,
+                                           messageStr: msg,
+                                           positionForRetry: positionForRetry)
                 }
+            } else {
+                // Rien à envoyer
+                self.isLoading = false
+                DispatchQueue.main.async { self.updateSendAffordance() }
+                return
             }
         } else {
+            // Logique MessagingService (même principe)
             if let selectedImage = self.selectedImage {
-                MessagingService.prepareUploadWith(conversationId: self.conversationId, image: selectedImage, message: messageStr) { success in
-                    if success {
-                        self.selectedImage = nil
-                        self.getMessages()
-                    } else {
-                        self.handleMessageSent(message: nil, error: EntourageNetworkError(), isRetry: isRetry, messageStr: messageStr, positionForRetry: positionForRetry)
+                MessagingService.prepareUploadWith(
+                    conversationId: self.conversationId,
+                    image: selectedImage,
+                    message: messageForUpload
+                ) { success in
+                    DispatchQueue.main.async {
+                        self.isLoading = false  // 🔑 Toujours réinitialiser
+                        if success {
+                            self.selectedImage = nil
+                            self.currentPage = 1
+                            self.shouldScrollToBottomAfterReload = true
+                            self.getMessages()
+                        }
+                        self.updateSendAffordance()  // 🔑 Mise à jour UI
+                    }
+                    if !success {
+                        self.handleMessageSent(message: nil,
+                                               error: EntourageNetworkError(),
+                                               isRetry: isRetry,
+                                               messageStr: trimmed,
+                                               positionForRetry: positionForRetry)
                     }
                 }
-            } else {
-                MessagingService.postCommentFor(conversationId: self.conversationId, message: messageStr) { message, error in
-                    self.handleMessageSent(message: message, error: error, isRetry: isRetry, messageStr: messageStr, positionForRetry: positionForRetry)
+            } else if let msg = messageForUpload {
+                MessagingService.postCommentFor(conversationId: self.conversationId, message: msg) { message, error in
+                    self.isLoading = false  // 🔑 Toujours réinitialiser
+                    self.shouldScrollToBottomAfterReload = true
+                    self.handleMessageSent(message: message,
+                                           error: error,
+                                           isRetry: isRetry,
+                                           messageStr: msg,
+                                           positionForRetry: positionForRetry)
                 }
+            } else {
+                // Rien à envoyer
+                self.isLoading = false
+                DispatchQueue.main.async { self.updateSendAffordance() }
+                return
             }
         }
     }
+
+
 
 
 
@@ -1237,26 +1385,35 @@ class ConversationDetailMessagesViewController: UIViewController {
 
     // MARK: - Tools
     @objc func closeKb(_ sender: UIBarButtonItem?) {
-        // 1) On récupère le HTML de l'attributedText
-        if let htmlMessage = getHTMLMessage(),
-           !htmlMessage.isEmpty,
-           htmlMessage != placeholderTxt {
-           
-            // 2) On envoie ce HTML plutôt que textView.text
-            self.sendMessage(messageStr: htmlMessage, isRetry: false)
+        // 🆕 Ferme l’aperçu image et replie le tiroir d’options si ouvert
+        dismissImagePreview()
+        if isOptionViewVisible { toggleOptionViewVisibility() }
+
+        // Récupère le HTML (mentions cliquables conservées)
+        let htmlMessage = getHTMLMessage()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let hasText = !htmlMessage.isEmpty && htmlMessage != placeholderTxt
+        let hasImage = (selectedImage != nil) // autorise envoi image seule
+
+        if hasText || hasImage {
+            self.sendMessage(messageStr: hasText ? htmlMessage : "", isRetry: false)
         }
+
+        // Ferme le clavier & la liste des mentions
         _ = ui_textview_message.resignFirstResponder()
         hideMentionSuggestions()
-        
-        // Réinitialisation complète du UITextView (placeholder, style, etc.)
+
+        // Réinitialise le champ (placeholder + style initial)
         ui_textview_message.text = placeholderTxt
         ui_textview_message.attributedText = NSAttributedString(string: placeholderTxt)
-        let styleReset = ApplicationTheme.getFontRegular13Orange()  // Style initial
+        let styleReset = ApplicationTheme.getFontRegular13Orange()
         ui_textview_message.typingAttributes = [
             .font: styleReset.font,
             .foregroundColor: styleReset.color
         ]
         ui_textview_message.textColor = UIColor.appOrange
+
+        // Met à jour l’état du bouton envoyer
+        updateSendAffordance()
     }
 }
 
@@ -1427,18 +1584,9 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView,
                   shouldChangeTextIn range: NSRange,
                   replacementText text: String) -> Bool {
-        // Gestion de l’icône "envoyer"
-        if textView.text.count == 0 && text.count == 1 {
-            ui_iv_bt_send.image = UIImage(named: "ic_send_comment")
-        }
-        else if textView.text.count == 1 && text.count == 0 {
-            ui_iv_bt_send.image = UIImage(named: "ic_send_comment_off")
-        }
-        else if textView.text.count > 0 {
-            ui_iv_bt_send.image = UIImage(named: "ic_send_comment")
-        }
-        else {
-            ui_iv_bt_send.image = UIImage(named: "ic_send_comment_off")
+        // 🔄 On laisse iOS mettre à jour, puis on refresh l’affordance
+        DispatchQueue.main.async { [weak self] in
+            self?.updateSendAffordance()
         }
         return true
     }
@@ -1461,11 +1609,7 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
            //------------------------------------------------------------
            // 0. Icône « envoyer » ON / OFF
            //------------------------------------------------------------
-           if textView.text.isEmpty {
-               ui_iv_bt_send.image = UIImage(named: "ic_send_comment_off")
-           } else {
-               ui_iv_bt_send.image = UIImage(named: "ic_send_comment")
-           }
+           updateSendAffordance() // 🆕
 
            //------------------------------------------------------------
            // 1. Détection du “@” et affichage des suggestions
@@ -1700,8 +1844,7 @@ extension ConversationDetailMessagesViewController: UIImagePickerControllerDeleg
             // ⚠️ Ici tu dois appeler ta logique d’upload d’image pour la discussion
             print("✅ Image sélectionnée : \(image.size)")
             showImagePreview(image)
-
-            // Exemple : uploadImage(image)
+            updateSendAffordance() // 🆕
         }
     }
     

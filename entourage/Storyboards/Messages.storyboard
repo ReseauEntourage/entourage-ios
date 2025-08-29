@@ -708,10 +708,10 @@
                                         <rect key="frame" x="0.0" y="726" width="414" height="54"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZh-2J-cpU">
-                                                <rect key="frame" x="20" y="0.0" width="304" height="54"/>
+                                                <rect key="frame" x="80" y="0.0" width="244" height="54"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Discuter ..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hqO-Ak-Xvp" customClass="MJTextViewPlaceholder" customModule="Ent_Beta" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="0.0" width="288" height="54"/>
+                                                        <rect key="frame" x="8" y="0.0" width="228" height="54"/>
                                                         <color key="backgroundColor" name="BeigeClair"/>
                                                         <color key="textColor" name="orange_app"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -779,9 +779,9 @@ L2</string>
                                                 </constraints>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_plus" translatesAutoresizingMaskIntoConstraints="NO" id="NIO-fs-Ycq">
-                                                <rect key="frame" x="0.0" y="3" width="0.0" height="48"/>
+                                                <rect key="frame" x="20" y="3" width="40" height="48"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" id="Baj-ye-DU6"/>
+                                                    <constraint firstAttribute="width" constant="40" id="Baj-ye-DU6"/>
                                                     <constraint firstAttribute="height" constant="48" id="vGY-ii-PT9"/>
                                                 </constraints>
                                             </imageView>
@@ -790,7 +790,7 @@ L2</string>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="hFd-P4-m3G" secondAttribute="bottom" id="3zM-7R-URd"/>
                                             <constraint firstItem="Zfu-ix-F9E" firstAttribute="centerY" secondItem="ezL-qH-Mp6" secondAttribute="centerY" id="Lx1-Qe-0RS"/>
-                                            <constraint firstItem="NIO-fs-Ycq" firstAttribute="leading" secondItem="ezL-qH-Mp6" secondAttribute="leading" id="SXe-zZ-2SG"/>
+                                            <constraint firstItem="NIO-fs-Ycq" firstAttribute="leading" secondItem="ezL-qH-Mp6" secondAttribute="leading" constant="20" id="SXe-zZ-2SG"/>
                                             <constraint firstItem="NIO-fs-Ycq" firstAttribute="centerY" secondItem="ezL-qH-Mp6" secondAttribute="centerY" id="TP5-JL-u5Y"/>
                                             <constraint firstItem="Zfu-ix-F9E" firstAttribute="leading" secondItem="tZh-2J-cpU" secondAttribute="trailing" constant="8" id="TvZ-cA-VsH"/>
                                             <constraint firstAttribute="trailing" secondItem="hFd-P4-m3G" secondAttribute="trailing" constant="28" id="Wlb-1a-rce"/>
