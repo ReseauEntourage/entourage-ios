@@ -446,12 +446,13 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
     
     @objc private func sendCurrentSelection() {
-        hideOptionsPanel()                 // 🆕 replie les options
-        let text = (getHTMLMessage() ?? "")
-        let safe = (text == placeholderTxt) ? "" : text
-        self.sendMessage(messageStr: safe, isRetry: false)
-        dismissImagePreview()              // 🆕 ferme l’aperçu
+        hideOptionsPanel()
+        let text = (getHTMLMessage() ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        let safeText = (text == placeholderTxt) ? "" : text
+        self.sendMessage(messageStr: safeText, isRetry: false)
+        dismissImagePreview()
     }
+
 
     
     @objc private func removeSelectedImage() { // 🆕 retirer la sélection
@@ -1015,18 +1016,33 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.isLoading = false
     }
     
-    private func handleMessageSent(message: PostMessage?,
-                                   error: EntourageNetworkError?,
-                                   isRetry: Bool,
-                                   messageStr: String,
-                                   positionForRetry: Int) {
-        self.isLoading = false  // 🔑 Toujours réinitialiser
-        DispatchQueue.main.async {
+    private func handleMessageSent(
+        message: PostMessage?,
+        error: EntourageNetworkError?,
+        isRetry: Bool,
+        messageStr: String,
+        positionForRetry: Int
+    ) {
+        self.isLoading = false
+
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
             if let _ = message {
-                // Succès
+                // ✅ Réinitialisation systématique du champ après envoi réussi
+                self.ui_textview_message.text = self.placeholderTxt
+                self.ui_textview_message.attributedText = NSAttributedString(string: self.placeholderTxt)
+                self.ui_textview_message.textColor = .appOrange
+                let styleReset = ApplicationTheme.getFontRegular13Orange()
+                self.ui_textview_message.typingAttributes = [
+                    .font: styleReset.font,
+                    .foregroundColor: styleReset.color
+                ]
+
                 if isRetry {
                     self.messagesForRetry.remove(at: positionForRetry)
                 }
+
                 self.currentPage = 1
                 self.shouldScrollToBottomAfterReload = true
                 if self.isSmallTalkMode {
@@ -1035,7 +1051,7 @@ class ConversationDetailMessagesViewController: UIViewController {
                     self.getMessages()
                 }
             } else if !isRetry {
-                // Échec initial → on place en retry visuel
+                // En cas d'échec, on ne touche pas au champ
                 var postMsg = PostMessage()
                 postMsg.content = messageStr
                 postMsg.user = UserLightNeighborhood()
@@ -1047,7 +1063,7 @@ class ConversationDetailMessagesViewController: UIViewController {
                 self.ui_tableview.reloadData()
                 self.scrollToBottomIfNeeded()
             }
-            // ✅ Toujours mettre à jour l'affordance
+
             self.updateSendAffordance()
         }
     }
@@ -1060,38 +1076,43 @@ class ConversationDetailMessagesViewController: UIViewController {
         dismissImagePreview()
         hideOptionsPanel()
 
-        // Réinitialise toujours l'UI avant l'envoi
+        // Désactive temporairement le bouton pendant l'envoi
         DispatchQueue.main.async {
-            self.ui_textview_message.text = nil
-            self.ui_textview_message.attributedText = nil
-            self.updateSendAffordance()
+            self.ui_view_button_send.isUserInteractionEnabled = false
         }
 
-        // Si déjà en cours, on sort
         if self.isLoading { return }
         self.isLoading = true
 
-        // Texte optionnel (si vide => image seule)
         let trimmed = messageStr.trimmingCharacters(in: .whitespacesAndNewlines)
         let messageForUpload: String? = trimmed.isEmpty ? nil : trimmed
 
-        // Logique d'envoi (SmallTalk ou Messaging)
         if isSmallTalkMode {
             if let selectedImage = self.selectedImage {
                 SmallTalkService.prepareUploadWith(
                     smallTalkId: smallTalkId,
                     image: selectedImage,
                     message: messageForUpload
-                ) { success in
+                ) { [weak self] success in
+                    guard let self = self else { return }
                     DispatchQueue.main.async {
-                        self.isLoading = false  // 🔑 Toujours réinitialiser
+                        self.isLoading = false
                         if success {
+                            // ✅ Réinitialisation du champ après envoi réussi
+                            self.ui_textview_message.text = self.placeholderTxt
+                            self.ui_textview_message.attributedText = NSAttributedString(string: self.placeholderTxt)
+                            self.ui_textview_message.textColor = .appOrange
+                            let styleReset = ApplicationTheme.getFontRegular13Orange()
+                            self.ui_textview_message.typingAttributes = [
+                                .font: styleReset.font,
+                                .foregroundColor: styleReset.color
+                            ]
                             self.selectedImage = nil
                             self.currentPage = 1
                             self.shouldScrollToBottomAfterReload = true
                             self.fetchSmallTalkData()
                         }
-                        self.updateSendAffordance()  // 🔑 Mise à jour UI
+                        self.updateSendAffordance()
                     }
                     if !success {
                         self.handleMessageSent(message: nil,
@@ -1102,8 +1123,9 @@ class ConversationDetailMessagesViewController: UIViewController {
                     }
                 }
             } else if let msg = messageForUpload {
-                SmallTalkService.createMessage(id: smallTalkId, content: msg) { message, error in
-                    self.isLoading = false  // 🔑 Toujours réinitialiser
+                SmallTalkService.createMessage(id: smallTalkId, content: msg) { [weak self] message, error in
+                    guard let self = self else { return }
+                    self.isLoading = false
                     self.shouldScrollToBottomAfterReload = true
                     self.handleMessageSent(message: message,
                                            error: error,
@@ -1111,29 +1133,34 @@ class ConversationDetailMessagesViewController: UIViewController {
                                            messageStr: msg,
                                            positionForRetry: positionForRetry)
                 }
-            } else {
-                // Rien à envoyer
-                self.isLoading = false
-                DispatchQueue.main.async { self.updateSendAffordance() }
-                return
             }
         } else {
-            // Logique MessagingService (même principe)
+            // Logique pour MessagingService (même principe)
             if let selectedImage = self.selectedImage {
                 MessagingService.prepareUploadWith(
                     conversationId: self.conversationId,
                     image: selectedImage,
                     message: messageForUpload
-                ) { success in
+                ) { [weak self] success in
+                    guard let self = self else { return }
                     DispatchQueue.main.async {
-                        self.isLoading = false  // 🔑 Toujours réinitialiser
+                        self.isLoading = false
                         if success {
+                            // ✅ Réinitialisation du champ après envoi réussi
+                            self.ui_textview_message.text = self.placeholderTxt
+                            self.ui_textview_message.attributedText = NSAttributedString(string: self.placeholderTxt)
+                            self.ui_textview_message.textColor = .appOrange
+                            let styleReset = ApplicationTheme.getFontRegular13Orange()
+                            self.ui_textview_message.typingAttributes = [
+                                .font: styleReset.font,
+                                .foregroundColor: styleReset.color
+                            ]
                             self.selectedImage = nil
                             self.currentPage = 1
                             self.shouldScrollToBottomAfterReload = true
                             self.getMessages()
                         }
-                        self.updateSendAffordance()  // 🔑 Mise à jour UI
+                        self.updateSendAffordance()
                     }
                     if !success {
                         self.handleMessageSent(message: nil,
@@ -1144,8 +1171,9 @@ class ConversationDetailMessagesViewController: UIViewController {
                     }
                 }
             } else if let msg = messageForUpload {
-                MessagingService.postCommentFor(conversationId: self.conversationId, message: msg) { message, error in
-                    self.isLoading = false  // 🔑 Toujours réinitialiser
+                MessagingService.postCommentFor(conversationId: self.conversationId, message: msg) { [weak self] message, error in
+                    guard let self = self else { return }
+                    self.isLoading = false
                     self.shouldScrollToBottomAfterReload = true
                     self.handleMessageSent(message: message,
                                            error: error,
@@ -1153,11 +1181,6 @@ class ConversationDetailMessagesViewController: UIViewController {
                                            messageStr: msg,
                                            positionForRetry: positionForRetry)
                 }
-            } else {
-                // Rien à envoyer
-                self.isLoading = false
-                DispatchQueue.main.async { self.updateSendAffordance() }
-                return
             }
         }
     }
@@ -1385,36 +1408,34 @@ class ConversationDetailMessagesViewController: UIViewController {
 
     // MARK: - Tools
     @objc func closeKb(_ sender: UIBarButtonItem?) {
-        // 🆕 Ferme l’aperçu image et replie le tiroir d’options si ouvert
         dismissImagePreview()
         if isOptionViewVisible { toggleOptionViewVisibility() }
 
-        // Récupère le HTML (mentions cliquables conservées)
-        let htmlMessage = getHTMLMessage()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let hasText = !htmlMessage.isEmpty && htmlMessage != placeholderTxt
-        let hasImage = (selectedImage != nil) // autorise envoi image seule
+        let currentText = ui_textview_message.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let hasText = !currentText.isEmpty && currentText != placeholderTxt
+        let hasImage = (selectedImage != nil)
 
         if hasText || hasImage {
-            self.sendMessage(messageStr: hasText ? htmlMessage : "", isRetry: false)
+            let htmlMessage = getHTMLMessage()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let finalMessage = hasText ? htmlMessage : ""
+            self.sendMessage(messageStr: finalMessage, isRetry: false)
         }
 
-        // Ferme le clavier & la liste des mentions
-        _ = ui_textview_message.resignFirstResponder()
-        hideMentionSuggestions()
-
-        // Réinitialise le champ (placeholder + style initial)
+        // ✅ Toujours réinitialiser le champ après envoi
         ui_textview_message.text = placeholderTxt
         ui_textview_message.attributedText = NSAttributedString(string: placeholderTxt)
+        ui_textview_message.textColor = .appOrange
         let styleReset = ApplicationTheme.getFontRegular13Orange()
         ui_textview_message.typingAttributes = [
             .font: styleReset.font,
             .foregroundColor: styleReset.color
         ]
-        ui_textview_message.textColor = UIColor.appOrange
 
-        // Met à jour l’état du bouton envoyer
+        _ = ui_textview_message.resignFirstResponder()
+        hideMentionSuggestions()
         updateSendAffordance()
     }
+
 }
 
 // MARK: - TableView DataSource & Delegate
