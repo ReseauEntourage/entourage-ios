@@ -12,8 +12,8 @@ app:
       is_expand: false
 meta:
   bitrise.io:
-    stack: osx-xcode-16.2.x
-    machine_type_id: g2-m1.4core
+    stack: osx-xcode-16.4.x
+    machine_type_id: g2-mac.large
 trigger_map:
 - push_branch: develop
   workflow: Entourage-Preprod
@@ -124,7 +124,7 @@ workflows:
     - save-spm-cache@1: {}
     meta:
       bitrise.io:
-        stack: osx-xcode-16.2.x
+        stack: osx-xcode-16.4.x
   Entourage-TestFlight:
     before_run:
     - Prepare
