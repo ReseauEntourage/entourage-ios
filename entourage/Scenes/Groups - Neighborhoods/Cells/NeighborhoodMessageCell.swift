@@ -636,4 +636,6 @@ protocol MessageCellSignalDelegate: AnyObject {
     func retrySend(message: String, positionForRetry: Int)
     func showUser(userId: Int?)
     func showWebUrl(url: URL)
+    func showFullScreenImage(_ image: UIImage) // 🆕 Ajoute cette méthode
+
 }

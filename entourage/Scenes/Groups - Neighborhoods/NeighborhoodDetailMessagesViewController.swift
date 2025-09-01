@@ -695,6 +695,35 @@ extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
 
 // MARK: - MessageCellSignalDelegate
 extension NeighborhoodDetailMessagesViewController: MessageCellSignalDelegate {
+    func showFullScreenImage(_ image: UIImage) {
+        let overlay = UIView()
+        overlay.backgroundColor = .black
+        overlay.alpha = 0
+        overlay.frame = view.bounds
+        overlay.isUserInteractionEnabled = true
+        view.addSubview(overlay)
+
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = view.bounds
+        imageView.isUserInteractionEnabled = true
+        overlay.addSubview(imageView)
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissFullScreenImage(_:)))
+        overlay.addGestureRecognizer(tapGesture)
+
+        UIView.animate(withDuration: 0.3) {
+            overlay.alpha = 1
+        }
+    }
+
+    @objc private func dismissFullScreenImage(_ sender: UITapGestureRecognizer) {
+        UIView.animate(withDuration: 0.3, animations: {
+            sender.view?.alpha = 0
+        }) { _ in
+            sender.view?.removeFromSuperview()
+        }
+    }
     func signalMessage(messageId: Int, userId: Int, textString: String) {
         if let navVC = UIStoryboard(name: StoryboardName.neighborhoodReport, bundle: nil)
             .instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController,

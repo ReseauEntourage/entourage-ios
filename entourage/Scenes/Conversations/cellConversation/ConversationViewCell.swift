@@ -1,16 +1,11 @@
 import UIKit
 import SDWebImage
 
-// Couleur bleue pour les liens
+// Couleurs et polices existantes
 private let unifiedBlue = UIColor(red: 0.0, green: 122/255.0, blue: 1.0, alpha: 1.0)
-
-// Police de base pour les messages
 private let conversationBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
-
-// Couleurs pour statut supprimé/offensif
 private let deletedBackgroundColor = UIColor.appPaleGrey
 private let deletedTextColor = UIColor(named: "appGreyTextDeleted") ?? UIColor.darkGray
-
 
 class ConversationViewCell: UITableViewCell {
 
@@ -25,14 +20,14 @@ class ConversationViewCell: UITableViewCell {
 
     // Status icon
     private var deletedImageView: UIImageView?
-
-    // For reporting via long press
     weak var delegate: MessageCellSignalDelegate?
     private var currentMessage: PostMessage?
     private var currentPositionForRetry: Int = 0
 
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Avatar styling
         ui_image_avatar.layer.cornerRadius = ui_image_avatar.frame.height / 2
         ui_image_avatar.clipsToBounds = true
@@ -40,6 +35,8 @@ class ConversationViewCell: UITableViewCell {
         // Image content mode
         ui_image_comment.contentMode = .scaleAspectFill
         ui_image_comment.clipsToBounds = true
+        ui_image_comment.translatesAutoresizingMaskIntoConstraints = false
+        ui_image_comment.isUserInteractionEnabled = true
 
         // Fonts
         ui_label_date.setFontBody(size: 12)
@@ -58,9 +55,13 @@ class ConversationViewCell: UITableViewCell {
 
         // Add long-press for reporting on the message container
         ui_view_label.isUserInteractionEnabled = true
-        let lp = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        lp.minimumPressDuration = 0.5
-        ui_view_label.addGestureRecognizer(lp)
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPressGesture.minimumPressDuration = 0.5
+        ui_view_label.addGestureRecognizer(longPressGesture)
+
+        // Add tap gesture for image preview
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:)))
+        ui_image_comment.addGestureRecognizer(tapGesture)
     }
 
     override func prepareForReuse() {
@@ -81,7 +82,7 @@ class ConversationViewCell: UITableViewCell {
         currentPositionForRetry = 0
     }
 
-    /// Configure cell with message, and inform delegate on long press
+    // MARK: - Configuration
     func configure(with message: PostMessage, isMe: Bool, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
@@ -108,13 +109,16 @@ class ConversationViewCell: UITableViewCell {
         }
 
         // Date
-        ui_label_date.text = (message.user?.displayName ?? "") + " " +  message.createdDateTimeFormatted
+        ui_label_date.text = (message.user?.displayName ?? "") + " " + message.createdDateTimeFormatted
 
         // Attached image
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
-            ui_constraint_image_height.constant = 120
-            ui_label_min_width?.constant = UIScreen.main.bounds.width / 2
+            let maxImageSize = UIScreen.main.bounds.width / 2
+            ui_constraint_image_height.constant = maxImageSize
+            ui_image_comment.widthAnchor.constraint(equalToConstant: maxImageSize).isActive = true
+            ui_image_comment.heightAnchor.constraint(equalTo: ui_image_comment.widthAnchor).isActive = true
+            ui_label_min_width?.constant = maxImageSize
             ui_label_min_width?.isActive = true
         } else {
             ui_image_comment.image = nil
@@ -125,13 +129,9 @@ class ConversationViewCell: UITableViewCell {
         layoutIfNeeded()
     }
 
-    // MARK: - Long Press Handler
-
+    // MARK: - Gesture Handlers
     @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        guard gesture.state == .began,
-              let msg = currentMessage else { return }
-
-        // Delegate the signal action
+        guard gesture.state == .began, let msg = currentMessage else { return }
         delegate?.signalMessage(
             messageId: msg.uid,
             userId: msg.user?.sid ?? 0,
@@ -139,8 +139,22 @@ class ConversationViewCell: UITableViewCell {
         )
     }
 
-    // MARK: - Styles
+    @objc private func handleImageTap(_ gesture: UITapGestureRecognizer) {
+        guard let imageURL = currentMessage?.messageImageUrl,
+              let url = URL(string: imageURL) else { return }
 
+        SDWebImageManager.shared.loadImage(
+            with: url,
+            options: .continueInBackground,
+            progress: nil
+        ) { [weak self] (image, _, _, _, _, _) in
+            guard let self = self, let image = image else { return }
+            self.delegate?.showFullScreenImage(image) // 🆕 Appelle le delegate
+        }
+    }
+
+
+    // MARK: - Styles
     private func applyDeletedStyle(text: String) {
         ui_view_label.backgroundColor = deletedBackgroundColor
         ui_label_comment.text = "  " + text
@@ -161,7 +175,6 @@ class ConversationViewCell: UITableViewCell {
         ui_view_label.backgroundColor = isMe ? UIColor.appBeige : UIColor.orangeMedium
         if message.messageType == "auto" {
             ui_view_label.backgroundColor = UIColor.appBleuAuto
-
         }
         if let html = message.contentHtml, !html.isEmpty {
             ui_label_comment.attributedText = attributedString(fromHTML: html)
@@ -175,7 +188,6 @@ class ConversationViewCell: UITableViewCell {
     }
 
     // MARK: - HTML to AttributedString
-
     private func attributedString(fromHTML html: String) -> NSAttributedString {
         let replaced = html.replacingOccurrences(of: "\n", with: "<br>")
         guard let data = replaced.data(using: .utf8) else {
