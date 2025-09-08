@@ -9,6 +9,42 @@ import Foundation
 
 struct MessagingService:ParsingDataCodable {
     
+    static func searchUsersInConversation(
+        conversationId: String,
+        query: String,
+        page: Int,
+        per: Int,
+        completion: @escaping ([MemberLight]?, EntourageNetworkError?) -> Void
+    ) {
+        guard let token = UserDefaults.token else {
+            completion(nil, nil)
+            return
+        }
+
+        // On part de l'endpoint existant et on ajoute le paramètre `query`
+        let baseEndpoint = String(format: kAPIConversationUsersList, conversationId, token)
+        let endpoint = "\(baseEndpoint)&page=\(page)&per=\(per)&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+
+        Logger.print("***** search users in conversation: \(endpoint)")
+
+        NetworkManager.sharedInstance.requestGet(
+            endPoint: endpoint,
+            headers: nil,
+            params: nil
+        ) { data, resp, error in
+            guard let data = data, error == nil,
+                  let httpResp = resp as? HTTPURLResponse, httpResp.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+
+            let users: [MemberLight]? = self.parseDatas(data: data, key: "users")
+            DispatchQueue.main.async { completion(users, nil) }
+        }
+    }
+
+
+    
     static func getAllConversations(currentPage:Int, per:Int, completion: @escaping (_ actions:[Conversation]?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         

@@ -129,8 +129,8 @@ struct MemberLight: Codable {
     var uid: Int
     var username: String?
     var imageUrl: String?
-    var confirmedAt: Bool?
-    var participateAt: Bool?
+    var confirmedAt: String?
+    var participateAt: String?
     var roles: [String]?
     var partner: Partner?
 

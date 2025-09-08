@@ -145,6 +145,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     /// On remplace `messagesExtracted.messages + messagesForRetry` par un tableau unique
     /// de ConversationCellDTO
     private var conversationCellDTOs: [ConversationCellDTO] = []
+    private var mentionSearchTimer: Timer?
 
     // MARK: - View Lifecycle
     
@@ -893,7 +894,24 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
     }
 
+    private func loadAllMembers() {
+        guard !isSmallTalkMode, !isLoading else { return }
+        let convIdStr: String = {
+            if conversationId != 0 { return String(conversationId) }
+            if !hashedConversationId.isEmpty { return hashedConversationId }
+            return ""
+        }()
+        if convIdStr.isEmpty { return }
 
+        MessagingService.getUsersForConversation(conversationId: conversationId, page: 1, per: 100) { [weak self] members, _, _ in
+            guard let self = self, let members = members else { return }
+            DispatchQueue.main.async {
+                // Mise à jour de la conversation avec tous les membres
+                self.currentConversation?.members = members
+                print("✅ Membres chargés pour les mentions : \(members.count)")
+            }
+        }
+    }
 
     func getDetailConversation() {
         var _convId = ""
@@ -904,6 +922,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         MessagingService.getDetailConversation(conversationId: _convId) { conversation, error in
             if let conversation = conversation {
+                self.loadAllMembers()
                 // Mise à jour du titre si oneToOne
                 if self.isOneToOne {
                     if conversation.members_count ?? 0 > 2 {
@@ -1256,48 +1275,100 @@ class ConversationDetailMessagesViewController: UIViewController {
     // MARK: - Méthodes pour la fonctionnalité de mention
     /// Met à jour la liste de suggestions en fonction du query (après un "@...").
     func updateMentionSuggestions(query: String) {
+        mentionSearchTimer?.invalidate()
+
+        guard !isSmallTalkMode else {
+            updateMentionSuggestionsLocal(query: query)
+            return
+        }
+
+        if query.isEmpty {
+            updateMentionSuggestionsLocal(query: query)
+            return
+        }
+
+        let convIdStr: String = {
+            if conversationId != 0 { return String(conversationId) }
+            if !hashedConversationId.isEmpty { return hashedConversationId }
+            return ""
+        }()
+
+        guard !convIdStr.isEmpty else {
+            hideMentionSuggestions()
+            return
+        }
+
+        mentionSearchTimer = Timer.scheduledTimer(
+            withTimeInterval: 0.3,
+            repeats: false
+        ) { [weak self] _ in
+            MessagingService.searchUsersInConversation(
+                conversationId: convIdStr,
+                query: query,
+                page: 1,
+                per: 10
+            ) { [weak self] members, error in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    if let members = members, !members.isEmpty {
+                        self.mentionCellDTOs = members.map { member in
+                            var user = UserLightNeighborhood()
+                            user.sid = member.uid
+                            user.displayName = member.username ?? ""
+                            user.avatarURL = member.imageUrl
+                            return .mention(user)
+                        }
+                        UIView.animate(withDuration: 0.2) {
+                            self.table_view_mention_height.constant = self.mentionCellHeight * CGFloat(self.mentionCellDTOs.count)
+                            self.view.layoutIfNeeded()
+                        }
+                        self.ui_tableview_mentions.reloadData()
+                        self.animateShowTableViewMentions()
+                    } else {
+                        self.hideMentionSuggestions()
+                    }
+                }
+            }
+        }
+    }
+    private func updateMentionSuggestionsLocal(query: String) {
         guard let members = currentConversation?.members, !members.isEmpty else {
             hideMentionSuggestions()
             return
         }
-        
+
         let q = query.lowercased()
-        
-        // Filtre : on exclut l’utilisateur courant
         let filtered: [MemberLight]
         if q.isEmpty {
             // Si query est vide, on affiche 3 membres (hors moi) par défaut
-            filtered = members.filter { $0.uid != meId }
+            filtered = Array(members.filter { $0.uid != meId }.prefix(3))
         } else {
             filtered = members.filter {
                 let nameLC = $0.username?.lowercased() ?? ""
                 return nameLC.contains(q) && $0.uid != meId
             }
         }
-        
-        // Limitation à 3 suggestions
-        let limited = Array(filtered.prefix(1000))
-        
-        if limited.isEmpty {
+
+        if filtered.isEmpty {
             hideMentionSuggestions()
             return
         }
-        
+
         // On convertit en MentionCellDTO
-        mentionCellDTOs = limited.map { member in
+        mentionCellDTOs = filtered.map { member in
             var user = UserLightNeighborhood()
             user.sid = member.uid
             user.displayName = member.username ?? ""
             user.avatarURL = member.imageUrl
             return .mention(user)
         }
-        
+
         // Ajustement de la contrainte d'affichage en hauteur
         UIView.animate(withDuration: 0.2) {
             self.table_view_mention_height.constant = self.mentionCellHeight * CGFloat(self.mentionCellDTOs.count)
             self.view.layoutIfNeeded()
         }
-        
+
         ui_tableview_mentions.reloadData()
         animateShowTableViewMentions()
     }
