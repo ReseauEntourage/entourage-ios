@@ -352,7 +352,7 @@ class EventDetailMessagesViewController: UIViewController {
             let filteredUsers = users?.filter { $0.sid != UserDefaults.currentUser?.sid } ?? []
             
             if !filteredUsers.isEmpty {
-                let limitedUsers = Array(filteredUsers.prefix(3))
+                let limitedUsers = Array(filteredUsers.prefix(1000))
                 self.mentionSuggestions = limitedUsers
                 
                 let rowCount = self.mentionSuggestions.count

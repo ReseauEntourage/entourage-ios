@@ -287,14 +287,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_photo" translatesAutoresizingMaskIntoConstraints="NO" id="9br-7n-WCW">
-                                <rect key="frame" x="20" y="828" width="48" height="48"/>
+                                <rect key="frame" x="20" y="798" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="4TW-9T-QbW"/>
                                     <constraint firstAttribute="width" constant="48" id="XhW-Eb-OMF"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_galery" translatesAutoresizingMaskIntoConstraints="NO" id="KXz-fy-faF">
-                                <rect key="frame" x="88" y="828" width="48" height="48"/>
+                                <rect key="frame" x="88" y="798" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="3Vg-GV-w09"/>
                                     <constraint firstAttribute="width" constant="48" id="a6k-7c-GUN"/>
@@ -841,10 +841,10 @@ L2</string>
                         <color key="backgroundColor" name="BeigeClair"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="4TP-kv-PK9" secondAttribute="trailing" id="2Dv-YB-MCp"/>
-                            <constraint firstAttribute="bottom" secondItem="KXz-fy-faF" secondAttribute="bottom" constant="20" id="4Fe-xU-VaL"/>
+                            <constraint firstAttribute="bottom" secondItem="KXz-fy-faF" secondAttribute="bottom" constant="50" id="4Fe-xU-VaL"/>
                             <constraint firstAttribute="bottom" secondItem="4TP-kv-PK9" secondAttribute="bottom" id="9QR-kQ-WDb"/>
                             <constraint firstItem="4TP-kv-PK9" firstAttribute="top" secondItem="q4o-fK-EQL" secondAttribute="top" id="AB3-nA-bzd"/>
-                            <constraint firstAttribute="bottom" secondItem="9br-7n-WCW" secondAttribute="bottom" constant="20" id="Ij6-N5-brE"/>
+                            <constraint firstAttribute="bottom" secondItem="9br-7n-WCW" secondAttribute="bottom" constant="50" id="Ij6-N5-brE"/>
                             <constraint firstItem="KXz-fy-faF" firstAttribute="leading" secondItem="9br-7n-WCW" secondAttribute="trailing" constant="20" id="Sur-bw-qmY"/>
                             <constraint firstItem="4TP-kv-PK9" firstAttribute="leading" secondItem="JhG-TF-e1b" secondAttribute="leading" id="VZr-fy-Y2j"/>
                             <constraint firstItem="9br-7n-WCW" firstAttribute="leading" secondItem="q4o-fK-EQL" secondAttribute="leading" constant="20" id="g50-lz-6Vk"/>
@@ -880,6 +880,7 @@ L2</string>
                         <outlet property="ui_view_event_discut" destination="SWr-mR-IhW" id="hnw-H1-0cE"/>
                         <outlet property="ui_view_new_conversation" destination="8wX-KB-efG" id="y6b-nu-jAY"/>
                         <outlet property="ui_view_txtview" destination="tZh-2J-cpU" id="ZbT-Pw-byk"/>
+                        <outlet property="ui_width_btn" destination="Baj-ye-DU6" id="NcQ-p8-4Ex"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oV2-eg-gjB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

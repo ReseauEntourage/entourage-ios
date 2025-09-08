@@ -374,7 +374,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             
             if !filteredUsers.isEmpty {
                 // On limite à 3 suggestions
-                let limitedUsers = Array(filteredUsers.prefix(3))
+                let limitedUsers = Array(filteredUsers.prefix(1000))
                 self.mentionSuggestions = limitedUsers
                 
                 // Calcul de la hauteur à afficher en fonction du nombre de suggestions

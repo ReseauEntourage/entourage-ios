@@ -1,7 +1,6 @@
 import UIKit
 import SDWebImage
 
-// Couleurs et polices existantes
 private let unifiedBlue = UIColor(red: 0.0, green: 122/255.0, blue: 1.0, alpha: 1.0)
 private let conversationBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
 private let deletedBackgroundColor = UIColor.appPaleGrey
@@ -9,7 +8,7 @@ private let deletedTextColor = UIColor(named: "appGreyTextDeleted") ?? UIColor.d
 
 class ConversationViewCell: UITableViewCell {
 
-    // MARK: - Outlets
+    // MARK: - IBOutlets
     @IBOutlet weak var ui_image_avatar: UIImageView!
     @IBOutlet weak var ui_image_comment: UIImageView!
     @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint!
@@ -18,7 +17,7 @@ class ConversationViewCell: UITableViewCell {
     @IBOutlet weak var ui_view_label: UIView!
     @IBOutlet weak var ui_label_min_width: NSLayoutConstraint?
 
-    // Status icon
+    // MARK: - Properties
     private var deletedImageView: UIImageView?
     weak var delegate: MessageCellSignalDelegate?
     private var currentMessage: PostMessage?
@@ -27,21 +26,17 @@ class ConversationViewCell: UITableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-
         // Avatar styling
         ui_image_avatar.layer.cornerRadius = ui_image_avatar.frame.height / 2
         ui_image_avatar.clipsToBounds = true
-
         // Image content mode
         ui_image_comment.contentMode = .scaleAspectFill
         ui_image_comment.clipsToBounds = true
         ui_image_comment.translatesAutoresizingMaskIntoConstraints = false
         ui_image_comment.isUserInteractionEnabled = true
-
         // Fonts
         ui_label_date.setFontBody(size: 12)
         ui_label_comment.setFontBody(size: 15)
-
         // Deleted icon template
         if let img = UIImage(named: "ic_deleted_comment") {
             let iv = UIImageView(image: img.withRenderingMode(.alwaysTemplate))
@@ -49,17 +44,20 @@ class ConversationViewCell: UITableViewCell {
             iv.translatesAutoresizingMaskIntoConstraints = false
             deletedImageView = iv
         }
-
         // By default, no min-width
         ui_label_min_width?.isActive = false
-
-        // Add long-press for reporting on the message container
+        // Force la largeur du label à la moitié de l'écran
+        let screenWidth = UIScreen.main.bounds.width
+        let halfWidth = (screenWidth / 2) - 30 // 30 = marges latérales (15 de chaque côté)
+        ui_view_label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            ui_view_label.widthAnchor.constraint(equalToConstant: halfWidth)
+        ])
+        // Gestures
         ui_view_label.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         ui_view_label.addGestureRecognizer(longPressGesture)
-
-        // Add tap gesture for image preview
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:)))
         ui_image_comment.addGestureRecognizer(tapGesture)
     }
@@ -86,14 +84,12 @@ class ConversationViewCell: UITableViewCell {
     func configure(with message: PostMessage, isMe: Bool, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
-
         // Avatar
         if let urlStr = message.user?.avatarURL, let url = URL(string: urlStr) {
             ui_image_avatar.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
         } else {
             ui_image_avatar.image = UIImage(named: "placeholder_user")
         }
-
         // Content or status
         if let status = message.status?.lowercased() {
             switch status {
@@ -107,14 +103,12 @@ class ConversationViewCell: UITableViewCell {
         } else {
             applyNormalContent(message: message, isMe: isMe)
         }
-
         // Date
         ui_label_date.text = (message.user?.displayName ?? "") + " " + message.createdDateTimeFormatted
-
         // Attached image
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
-            let maxImageSize = UIScreen.main.bounds.width / 2
+            let maxImageSize = (UIScreen.main.bounds.width / 2) - 40 // 40 = marges + padding
             ui_constraint_image_height.constant = maxImageSize
             ui_image_comment.widthAnchor.constraint(equalToConstant: maxImageSize).isActive = true
             ui_image_comment.heightAnchor.constraint(equalTo: ui_image_comment.widthAnchor).isActive = true
@@ -125,7 +119,6 @@ class ConversationViewCell: UITableViewCell {
             ui_constraint_image_height.constant = 0
             ui_label_min_width?.isActive = false
         }
-
         layoutIfNeeded()
     }
 
@@ -142,17 +135,15 @@ class ConversationViewCell: UITableViewCell {
     @objc private func handleImageTap(_ gesture: UITapGestureRecognizer) {
         guard let imageURL = currentMessage?.messageImageUrl,
               let url = URL(string: imageURL) else { return }
-
         SDWebImageManager.shared.loadImage(
             with: url,
             options: .continueInBackground,
             progress: nil
         ) { [weak self] (image, _, _, _, _, _) in
             guard let self = self, let image = image else { return }
-            self.delegate?.showFullScreenImage(image) // 🆕 Appelle le delegate
+            self.delegate?.showFullScreenImage(image)
         }
     }
-
 
     // MARK: - Styles
     private func applyDeletedStyle(text: String) {
@@ -230,6 +221,7 @@ class ConversationViewCell: UITableViewCell {
     }
 }
 
+// MARK: - Subclasses
 class ConversationMeCell: ConversationViewCell {
     static let identifier = "cellMeWithImage"
 }

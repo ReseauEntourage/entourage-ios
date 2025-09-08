@@ -356,14 +356,14 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                     AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
                 }
                 if indexPath.row < usersSearch.count {
-                    user = self.usersSearch[indexPath.row]
+                    user = self.usersSearch[indexPath.row - 1]
                 }
             } else {
                 if !isEvent {
                     AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
                 }
                 if indexPath.row < users.count {
-                    user = self.users[indexPath.row]
+                    user = self.users[indexPath.row - 1]
                 }
             }
             if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)

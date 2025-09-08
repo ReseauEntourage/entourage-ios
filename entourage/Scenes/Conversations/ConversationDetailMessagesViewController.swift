@@ -78,9 +78,13 @@ class ConversationDetailMessagesViewController: UIViewController {
     
     @IBOutlet weak var ui_btn_photo: UIImageView!
     @IBOutlet weak var ui_btn_galery: UIImageView!
+    
+    @IBOutlet weak var ui_width_btn: NSLayoutConstraint!
+    
     private var imagePreviewOverlay: UIView?
     private var selectedImage: UIImage? = nil
-
+    private var labelCamera: UILabel!
+    private var labelGalery: UILabel!
     
     // MARK: - Variables principales
     private var conversationId: Int = 0
@@ -99,7 +103,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     var uuidv2:String = ""
     private var isScrollDetectionEnabled = false
     private var autoRefreshTimer: Timer?
-    private let autoRefreshInterval: TimeInterval = 3
+    private let autoRefreshInterval: TimeInterval = 1.5
     private var isSilentRefresh = false
     private var isOptionViewVisible = false
     private var shouldScrollToBottomAfterReload = false
@@ -232,6 +236,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         // CONFIG TYPE (outing/smalltalk/other)
         if type == "outing" {
+            ui_width_btn.constant = 40
             ui_constraint_tableview_top_margin.constant = 90
             ui_view_new_conversation.isHidden = false
             ui_view_event_discut.isHidden = false
@@ -242,6 +247,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             ui_view_event_discut.addGestureRecognizer(tapCharte)
             ui_view_event_discut.isUserInteractionEnabled = true
         } else {
+            ui_width_btn.constant = 0
             ui_constraint_tableview_top_margin.constant = 0
             ui_view_new_conversation.backgroundColor = UIColor.appBeige
             ui_title_new_conv.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
@@ -304,6 +310,36 @@ class ConversationDetailMessagesViewController: UIViewController {
         ui_btn_galery.addGestureRecognizer(tapGallery)
         
         updateSendAffordance() // 🆕 init
+        
+        // Création du label "Caméra"
+        labelCamera = UILabel()
+        labelCamera.text = "Caméra"
+        labelCamera.textAlignment = .center
+        labelCamera.textColor = .black
+        labelCamera.translatesAutoresizingMaskIntoConstraints = false
+        labelCamera.isHidden = true
+        ui_view_txtview.addSubview(labelCamera)
+
+        // Création du label "Galerie"
+        labelGalery = UILabel()
+        labelGalery.text = "Galerie"
+        labelGalery.textAlignment = .center
+        labelGalery.textColor = .black
+        labelGalery.translatesAutoresizingMaskIntoConstraints = false
+        labelGalery.isHidden = true
+        ui_view_txtview.addSubview(labelGalery)
+        
+        // Contraintes pour le label "Caméra"
+        NSLayoutConstraint.activate([
+            labelCamera.centerXAnchor.constraint(equalTo: ui_btn_photo.centerXAnchor),
+            labelCamera.topAnchor.constraint(equalTo: ui_btn_photo.bottomAnchor, constant: 4),
+        ])
+
+        // Contraintes pour le label "Galerie"
+        NSLayoutConstraint.activate([
+            labelGalery.centerXAnchor.constraint(equalTo: ui_btn_galery.centerXAnchor),
+            labelGalery.topAnchor.constraint(equalTo: ui_btn_galery.bottomAnchor, constant: 4),
+        ])
     }
     
     
@@ -401,38 +437,6 @@ class ConversationDetailMessagesViewController: UIViewController {
             closeButton.heightAnchor.constraint(equalToConstant: 32)
         ])
         
-        // 🆕 Bouton Envoyer
-        let sendButton = UIButton(type: .system)
-        sendButton.setTitle("Envoyer", for: .normal)
-        sendButton.setTitleColor(.white, for: .normal)
-        sendButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        sendButton.backgroundColor = .appOrange
-        sendButton.layer.cornerRadius = 20
-        sendButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 18, bottom: 10, right: 18)
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.addTarget(self, action: #selector(sendCurrentSelection), for: .touchUpInside)
-        overlay.addSubview(sendButton)
-
-        // 🆕 Bouton Retirer
-        let removeButton = UIButton(type: .system)
-        removeButton.setTitle("Retirer", for: .normal)
-        removeButton.setTitleColor(.white, for: .normal)
-        removeButton.layer.cornerRadius = 20
-        removeButton.layer.borderWidth = 1
-        removeButton.layer.borderColor = UIColor.white.cgColor
-        removeButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 18, bottom: 10, right: 18)
-        removeButton.translatesAutoresizingMaskIntoConstraints = false
-        removeButton.addTarget(self, action: #selector(removeSelectedImage), for: .touchUpInside)
-        overlay.addSubview(removeButton)
-
-        NSLayoutConstraint.activate([
-            sendButton.bottomAnchor.constraint(equalTo: overlay.bottomAnchor, constant: -16),
-            sendButton.centerXAnchor.constraint(equalTo: overlay.centerXAnchor, constant: 60),
-
-            removeButton.bottomAnchor.constraint(equalTo: overlay.bottomAnchor, constant: -16),
-            removeButton.centerXAnchor.constraint(equalTo: overlay.centerXAnchor, constant: -60),
-        ])
-        
         updateSendAffordance() // 🆕
     }
 
@@ -463,21 +467,23 @@ class ConversationDetailMessagesViewController: UIViewController {
     
     private func toggleOptionViewVisibility() {
         isOptionViewVisible.toggle()
-
-        let newHeight: CGFloat = isOptionViewVisible ? 70.0 : 0.0
-
-
+        let newHeight: CGFloat = isOptionViewVisible ? 100.0 : 0.0
         UIView.animate(withDuration: 0.3) {
             self.ui_constraint_bottom.constant = newHeight
             self.view.layoutIfNeeded()
         }
 
-        // (Facultatif) Rotation du bouton + en X
+        // Afficher/masquer les labels
+        labelCamera.isHidden = !isOptionViewVisible
+        labelGalery.isHidden = !isOptionViewVisible
+
+        // Rotation du bouton +
         let angle: CGFloat = isOptionViewVisible ? .pi / 4 : 0
         UIView.animate(withDuration: 0.3) {
             self.ui_bouton_plus.transform = CGAffineTransform(rotationAngle: angle)
         }
     }
+
     
     @objc private func handleCharteTapped() {
         let vc = GoodPracticesViewController()
@@ -1270,7 +1276,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         }
         
         // Limitation à 3 suggestions
-        let limited = Array(filtered.prefix(3))
+        let limited = Array(filtered.prefix(1000))
         
         if limited.isEmpty {
             hideMentionSuggestions()
