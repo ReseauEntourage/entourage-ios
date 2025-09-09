@@ -954,6 +954,9 @@ class ConversationDetailMessagesViewController: UIViewController {
                 if self.type == "outing" {
                     self.ui_view_empty.isHidden = true
                     EventService.getEventWithId(self.currentConversation?.uuid ?? "") { event, error in
+                        if event != nil {
+                            AppSignableManager.shared.updateFromEvent(event: event!)
+                        }
                         let _title = event?.title ?? "messaging_message_title".localized
                         self.ui_top_view.populateView(
                             title: _title,

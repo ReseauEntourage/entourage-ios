@@ -1617,7 +1617,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1l-yv-ZWU">
-                                                                            <rect key="frame" x="76" y="14.5" width="262" height="18"/>
+                                                                            <rect key="frame" x="76" y="14.5" width="250" height="18"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -1648,7 +1648,7 @@
                                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         </button>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rôle" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5W-Oe-KGs">
-                                                                            <rect key="frame" x="76" y="32.5" width="290" height="15.5"/>
+                                                                            <rect key="frame" x="76" y="32.5" width="256" height="15.5"/>
                                                                             <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="11"/>
                                                                             <color key="textColor" name="orange_app"/>
                                                                             <nil key="highlightedColor"/>
@@ -1698,8 +1698,8 @@
                                                                         <constraint firstItem="8Ok-v6-i9S" firstAttribute="leading" secondItem="NRF-V6-vdJ" secondAttribute="trailing" id="dvn-1E-iaq"/>
                                                                         <constraint firstItem="8Ok-v6-i9S" firstAttribute="centerX" secondItem="l2F-Y7-HhE" secondAttribute="centerX" id="gDd-6l-jdC"/>
                                                                         <constraint firstItem="c1l-yv-ZWU" firstAttribute="centerY" secondItem="Ltd-wR-Hs6" secondAttribute="centerY" id="h9H-ti-B13"/>
-                                                                        <constraint firstItem="l2F-Y7-HhE" firstAttribute="leading" secondItem="c1l-yv-ZWU" secondAttribute="trailing" constant="8" id="jwr-Pv-1Mk"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="X5W-Oe-KGs" secondAttribute="trailing" constant="16" id="oee-Bw-G6q"/>
+                                                                        <constraint firstItem="l2F-Y7-HhE" firstAttribute="leading" secondItem="c1l-yv-ZWU" secondAttribute="trailing" constant="20" id="jwr-Pv-1Mk"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="X5W-Oe-KGs" secondAttribute="trailing" constant="50" id="oee-Bw-G6q"/>
                                                                         <constraint firstItem="NRF-V6-vdJ" firstAttribute="top" secondItem="8Ok-v6-i9S" secondAttribute="top" id="pNL-kz-Dsg"/>
                                                                         <constraint firstItem="y0G-Tw-1yh" firstAttribute="leading" secondItem="Ltd-wR-Hs6" secondAttribute="leading" constant="16" id="vqG-g3-uoZ"/>
                                                                         <constraint firstItem="X5W-Oe-KGs" firstAttribute="leading" secondItem="c1l-yv-ZWU" secondAttribute="leading" id="xHb-OJ-KVG"/>
@@ -1746,8 +1746,8 @@
                                             <outlet property="delegate" destination="ohl-4a-PzQ" id="kIE-m2-WQU"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9h-vF-R4Q">
-                                        <rect key="frame" x="0.0" y="260.5" width="414" height="279"/>
+                                    <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T9h-vF-R4Q">
+                                        <rect key="frame" x="1" y="261.5" width="414" height="279"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oups, aucun résultat ne correspond à votre recherche ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUu-JM-Yek">
                                                 <rect key="frame" x="32" y="189" width="350" height="90"/>

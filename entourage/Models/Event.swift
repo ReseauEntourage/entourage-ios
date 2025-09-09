@@ -43,6 +43,7 @@ struct Event:Codable {
     var descriptionTranslations: Translations? = nil
     
     var status = ""
+    var signable:Bool? = nil
     private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
     private var updatedAt:String? = nil
@@ -223,6 +224,7 @@ struct Event:Codable {
         case statusChangedAt = "status_changed_at"
         case titleTranslations = "title_translations"
         case descriptionTranslations = "description_translations"
+        case signable
     }
     
     func dictionaryForWS() -> [String:Any] {

@@ -1282,7 +1282,7 @@ L2</string>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyk-8K-Xhc">
-                                                                    <rect key="frame" x="114" y="32" width="240" height="18"/>
+                                                                    <rect key="frame" x="114" y="32" width="238" height="18"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1334,7 +1334,7 @@ L2</string>
                                                                 <constraint firstItem="Gyk-8K-Xhc" firstAttribute="centerY" secondItem="uU0-6A-ebk" secondAttribute="centerY" id="AMj-lA-fiJ"/>
                                                                 <constraint firstAttribute="height" constant="82" id="DE0-Ng-YBB"/>
                                                                 <constraint firstAttribute="bottom" secondItem="t7H-lC-0QD" secondAttribute="bottom" id="DGl-Kd-mJP"/>
-                                                                <constraint firstItem="ccy-if-Xx8" firstAttribute="leading" secondItem="Gyk-8K-Xhc" secondAttribute="trailing" constant="8" id="MZP-7Z-9Iv"/>
+                                                                <constraint firstItem="ccy-if-Xx8" firstAttribute="leading" secondItem="Gyk-8K-Xhc" secondAttribute="trailing" constant="10" id="MZP-7Z-9Iv"/>
                                                                 <constraint firstItem="WqO-cW-XjH" firstAttribute="top" secondItem="Gyk-8K-Xhc" secondAttribute="bottom" id="Nti-5t-eb8"/>
                                                                 <constraint firstItem="F0R-KR-UuD" firstAttribute="leading" secondItem="836-Tc-1Vi" secondAttribute="trailing" id="O1S-vB-EpG"/>
                                                                 <constraint firstItem="WqO-cW-XjH" firstAttribute="leading" secondItem="Gyk-8K-Xhc" secondAttribute="leading" id="U4d-sQ-P93"/>

@@ -585,6 +585,7 @@
 		26D853462C8740850006C9D8 /* PopupBienCommunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D853452C8740850006C9D8 /* PopupBienCommunViewController.swift */; };
 		26E2579C2D5B839800A8B9C1 /* VersionAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2579B2D5B839800A8B9C1 /* VersionAppCell.swift */; };
 		26E257A02D5B83DA00A8B9C1 /* VersionAppCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E2579F2D5B83DA00A8B9C1 /* VersionAppCell.xib */; };
+		26E66F122E7044B900E65BFB /* AppSignableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E66F112E7044B900E65BFB /* AppSignableManager.swift */; };
 		26EA54F12E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA54F02E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift */; };
 		26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */; };
 		26F03C932A1B4E5900450A61 /* WelcomeOneTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */; };
@@ -1190,6 +1191,7 @@
 		26D853452C8740850006C9D8 /* PopupBienCommunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupBienCommunViewController.swift; sourceTree = "<group>"; };
 		26E2579B2D5B839800A8B9C1 /* VersionAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionAppCell.swift; sourceTree = "<group>"; };
 		26E2579F2D5B83DA00A8B9C1 /* VersionAppCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VersionAppCell.xib; sourceTree = "<group>"; };
+		26E66F112E7044B900E65BFB /* AppSignableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSignableManager.swift; sourceTree = "<group>"; };
 		26EA54F02E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoConsentPopupViewController.swift; sourceTree = "<group>"; };
 		26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneTitleCell.swift; sourceTree = "<group>"; };
 		26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneTitleCell.xib; sourceTree = "<group>"; };
@@ -1530,6 +1532,7 @@
 				026819A6278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m */,
 				26445C4A2BB46AAF0010A8D8 /* SimpleMJAlertDialog.swift */,
 				26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */,
+				26E66F112E7044B900E65BFB /* AppSignableManager.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -2952,6 +2955,7 @@
 				024131D62862030A00561FB4 /* EventCreatePhase4ViewController.swift in Sources */,
 				2693F8A62D68CE6F002726FD /* MentionCell.swift in Sources */,
 				02C3ABF4279AB55D00817B82 /* Extensions_UIViewController.swift in Sources */,
+				26E66F122E7044B900E65BFB /* AppSignableManager.swift in Sources */,
 				0295F2B727E497D0006AE255 /* ProfileEditorViewController.swift in Sources */,
 				02490DC927EA461700E2577B /* Extensions_UIDevice.swift in Sources */,
 				26BFC99E2ACD485600FDA030 /* HomeCellAction.swift in Sources */,

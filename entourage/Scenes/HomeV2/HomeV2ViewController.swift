@@ -833,7 +833,7 @@ extension HomeV2ViewController {
         HomeService.getUserHome { [weak self] userHome, error in
             if let userHome = userHome {
                 self?.userHome = userHome
-                print("user id " , self?.userHome.id)
+                AppSignableManager.shared.updateFromHome(userHome: userHome)
                 if userHome.preference == "contribution" {
                     self?.isContributionPreference = true
                 } else {
