@@ -181,9 +181,8 @@ class ConversationDetailMessagesViewController: UIViewController {
         ui_textview_message.hasToCenterTextVerticaly = true
 
         ui_view_button_send.backgroundColor = .clear
-        ui_iv_bt_send.image = UIImage(named: "ic_send_comment_off")
-        ui_view_button_send.isUserInteractionEnabled = false // 🆕 init désactivé
-
+        ui_iv_bt_send.image = UIImage(named: "ic_send_comment")
+        
         // Blocage
         ui_view_block.layer.borderWidth = 1
         ui_view_block.layer.borderColor = UIColor.appGris112.cgColor
@@ -344,6 +343,14 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
     
     
+    @IBAction func btnSend(_ sender: Any) {
+        dismissImagePreview()
+        if isOptionViewVisible { toggleOptionViewVisibility() }
+        sendCurrentMessage()
+        _ = ui_textview_message.resignFirstResponder()
+        hideMentionSuggestions()
+    }
+    
     @objc func didTapPhotoButton() {
         print("eho photo ")
         checkCameraPermissionAndPresentPicker(sourceType: .camera)
@@ -359,12 +366,103 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
     
     private func updateSendAffordance() {
-        let hasText = !effectivePlainText().isEmpty
-        let hasImage = (selectedImage != nil)
-        let enabled = hasText || hasImage
-        ui_iv_bt_send.image = UIImage(named: enabled ? "ic_send_comment" : "ic_send_comment_off")
-        ui_view_button_send.isUserInteractionEnabled = enabled
+        // Le bouton est toujours actif
+        ui_iv_bt_send.image = UIImage(named: "ic_send_comment")
     }
+    
+    @objc private func sendCurrentMessage() {
+        hideOptionsPanel()
+        dismissImagePreview()
+
+        let text = getHTMLMessage()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        var safeText = (text == placeholderTxt) ? "" : text
+        if isSmallTalkMode {
+            sendSmallTalkMessage(text: safeText)
+        } else {
+            sendRegularMessage(text: safeText)
+        }
+    }
+
+    
+    private func sendRegularMessage(text: String) {
+        if let selectedImage = selectedImage {
+            // Envoi avec image
+            MessagingService.prepareUploadWith(
+                conversationId: conversationId,
+                image: selectedImage,
+                message: text.isEmpty ? nil : text
+            ) { [weak self] success in
+                self?.handleSendCompletion(success: success, isRetry: false, text: text)
+            }
+        } else if !text.isEmpty {
+            // Envoi texte seul
+            MessagingService.postCommentFor(conversationId: conversationId, message: text) { [weak self] message, error in
+                self?.handleSendCompletion(success: message != nil, isRetry: false, text: text)
+            }
+        }
+    }
+
+    
+    private func handleSendCompletion(success: Bool, isRetry: Bool, text: String, positionForRetry: Int = 0) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            if success {
+                // Réinitialisation de l'UI
+                self.ui_textview_message.text = self.placeholderTxt
+                self.ui_textview_message.attributedText = NSAttributedString(string: self.placeholderTxt)
+                self.ui_textview_message.textColor = .appOrange
+                self.selectedImage = nil
+                self.currentPage = 1
+                self.shouldScrollToBottomAfterReload = true
+
+                // Supprime le message de la liste des retries si c'est un retry
+                if isRetry {
+                    self.messagesForRetry.remove(at: positionForRetry)
+                }
+
+                // Recharge les messages
+                if self.isSmallTalkMode {
+                    self.fetchSmallTalkData()
+                } else {
+                    self.getMessages()
+                }
+            } else if !isRetry {
+                // Gestion de l'échec (ajoute à la liste des messages à retenter)
+                var postMsg = PostMessage()
+                postMsg.content = text
+                postMsg.user = UserLightNeighborhood()
+                postMsg.isRetryMsg = true
+                self.messagesForRetry.append(postMsg)
+                self.buildConversationCellDTOs()
+                self.ui_tableview.reloadData()
+                self.scrollToBottomIfNeeded()
+            }
+
+            // Réactive le bouton
+            self.updateSendAffordance()
+        }
+    }
+    
+    private func sendSmallTalkMessage(text: String) {
+        if let selectedImage = selectedImage {
+            // Envoi avec image
+            SmallTalkService.prepareUploadWith(
+                smallTalkId: smallTalkId,
+                image: selectedImage,
+                message: text.isEmpty ? nil : text
+            ) { [weak self] success in
+                self?.handleSendCompletion(success: success, isRetry: false, text: text)
+            }
+        } else if !text.isEmpty {
+            // Envoi texte seul
+            SmallTalkService.createMessage(id: smallTalkId, content: text) { [weak self] message, error in
+                self?.handleSendCompletion(success: message != nil, isRetry: false, text: text)
+            }
+        }
+    }
+
+
 
 
     private func hideOptionsPanel() {
@@ -449,15 +547,6 @@ class ConversationDetailMessagesViewController: UIViewController {
         imagePreviewOverlay = nil
         updateSendAffordance() // 🆕
     }
-    
-    @objc private func sendCurrentSelection() {
-        hideOptionsPanel()
-        let text = (getHTMLMessage() ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-        let safeText = (text == placeholderTxt) ? "" : text
-        self.sendMessage(messageStr: safeText, isRetry: false)
-        dismissImagePreview()
-    }
-
 
     
     @objc private func removeSelectedImage() { // 🆕 retirer la sélection
@@ -1044,178 +1133,6 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.isLoading = false
     }
     
-    private func handleMessageSent(
-        message: PostMessage?,
-        error: EntourageNetworkError?,
-        isRetry: Bool,
-        messageStr: String,
-        positionForRetry: Int
-    ) {
-        self.isLoading = false
-
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-
-            if let _ = message {
-                // ✅ Réinitialisation systématique du champ après envoi réussi
-                self.ui_textview_message.text = self.placeholderTxt
-                self.ui_textview_message.attributedText = NSAttributedString(string: self.placeholderTxt)
-                self.ui_textview_message.textColor = .appOrange
-                let styleReset = ApplicationTheme.getFontRegular13Orange()
-                self.ui_textview_message.typingAttributes = [
-                    .font: styleReset.font,
-                    .foregroundColor: styleReset.color
-                ]
-
-                if isRetry {
-                    self.messagesForRetry.remove(at: positionForRetry)
-                }
-
-                self.currentPage = 1
-                self.shouldScrollToBottomAfterReload = true
-                if self.isSmallTalkMode {
-                    self.fetchSmallTalkData()
-                } else {
-                    self.getMessages()
-                }
-            } else if !isRetry {
-                // En cas d'échec, on ne touche pas au champ
-                var postMsg = PostMessage()
-                postMsg.content = messageStr
-                postMsg.user = UserLightNeighborhood()
-                postMsg.isRetryMsg = true
-                self.messagesForRetry.append(postMsg)
-                self.isStartEditing = false
-                self.ui_view_empty.isHidden = true
-                self.buildConversationCellDTOs()
-                self.ui_tableview.reloadData()
-                self.scrollToBottomIfNeeded()
-            }
-
-            self.updateSendAffordance()
-        }
-    }
-
-
-
-    
-    // MARK: - Envoi d'un message
-    func sendMessage(messageStr: String, isRetry: Bool, positionForRetry: Int = 0) {
-        dismissImagePreview()
-        hideOptionsPanel()
-
-        // Désactive temporairement le bouton pendant l'envoi
-        DispatchQueue.main.async {
-            self.ui_view_button_send.isUserInteractionEnabled = false
-        }
-
-        if self.isLoading { return }
-        self.isLoading = true
-
-        let trimmed = messageStr.trimmingCharacters(in: .whitespacesAndNewlines)
-        let messageForUpload: String? = trimmed.isEmpty ? nil : trimmed
-
-        if isSmallTalkMode {
-            if let selectedImage = self.selectedImage {
-                SmallTalkService.prepareUploadWith(
-                    smallTalkId: smallTalkId,
-                    image: selectedImage,
-                    message: messageForUpload
-                ) { [weak self] success in
-                    guard let self = self else { return }
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                        if success {
-                            // ✅ Réinitialisation du champ après envoi réussi
-                            self.ui_textview_message.text = self.placeholderTxt
-                            self.ui_textview_message.attributedText = NSAttributedString(string: self.placeholderTxt)
-                            self.ui_textview_message.textColor = .appOrange
-                            let styleReset = ApplicationTheme.getFontRegular13Orange()
-                            self.ui_textview_message.typingAttributes = [
-                                .font: styleReset.font,
-                                .foregroundColor: styleReset.color
-                            ]
-                            self.selectedImage = nil
-                            self.currentPage = 1
-                            self.shouldScrollToBottomAfterReload = true
-                            self.fetchSmallTalkData()
-                        }
-                        self.updateSendAffordance()
-                    }
-                    if !success {
-                        self.handleMessageSent(message: nil,
-                                               error: EntourageNetworkError(),
-                                               isRetry: isRetry,
-                                               messageStr: trimmed,
-                                               positionForRetry: positionForRetry)
-                    }
-                }
-            } else if let msg = messageForUpload {
-                SmallTalkService.createMessage(id: smallTalkId, content: msg) { [weak self] message, error in
-                    guard let self = self else { return }
-                    self.isLoading = false
-                    self.shouldScrollToBottomAfterReload = true
-                    self.handleMessageSent(message: message,
-                                           error: error,
-                                           isRetry: isRetry,
-                                           messageStr: msg,
-                                           positionForRetry: positionForRetry)
-                }
-            }
-        } else {
-            // Logique pour MessagingService (même principe)
-            if let selectedImage = self.selectedImage {
-                MessagingService.prepareUploadWith(
-                    conversationId: self.conversationId,
-                    image: selectedImage,
-                    message: messageForUpload
-                ) { [weak self] success in
-                    guard let self = self else { return }
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                        if success {
-                            // ✅ Réinitialisation du champ après envoi réussi
-                            self.ui_textview_message.text = self.placeholderTxt
-                            self.ui_textview_message.attributedText = NSAttributedString(string: self.placeholderTxt)
-                            self.ui_textview_message.textColor = .appOrange
-                            let styleReset = ApplicationTheme.getFontRegular13Orange()
-                            self.ui_textview_message.typingAttributes = [
-                                .font: styleReset.font,
-                                .foregroundColor: styleReset.color
-                            ]
-                            self.selectedImage = nil
-                            self.currentPage = 1
-                            self.shouldScrollToBottomAfterReload = true
-                            self.getMessages()
-                        }
-                        self.updateSendAffordance()
-                    }
-                    if !success {
-                        self.handleMessageSent(message: nil,
-                                               error: EntourageNetworkError(),
-                                               isRetry: isRetry,
-                                               messageStr: trimmed,
-                                               positionForRetry: positionForRetry)
-                    }
-                }
-            } else if let msg = messageForUpload {
-                MessagingService.postCommentFor(conversationId: self.conversationId, message: msg) { [weak self] message, error in
-                    guard let self = self else { return }
-                    self.isLoading = false
-                    self.shouldScrollToBottomAfterReload = true
-                    self.handleMessageSent(message: message,
-                                           error: error,
-                                           isRetry: isRetry,
-                                           messageStr: msg,
-                                           positionForRetry: positionForRetry)
-                }
-            }
-        }
-    }
-
-
-
-
 
     // MARK: - Actions
     @IBAction func action_tap_view(_ sender: Any) {
@@ -1223,9 +1140,6 @@ class ConversationDetailMessagesViewController: UIViewController {
         hideMentionSuggestions()
     }
 
-    @IBAction func action_send_message(_ sender: Any) {
-        self.closeKb(nil)
-    }
 
     @IBAction func action_show_params(_ sender: Any) {
         if let navvc = storyboard?.instantiateViewController(withIdentifier: "params_nav") as? UINavigationController,
@@ -1490,30 +1404,9 @@ class ConversationDetailMessagesViewController: UIViewController {
     @objc func closeKb(_ sender: UIBarButtonItem?) {
         dismissImagePreview()
         if isOptionViewVisible { toggleOptionViewVisibility() }
-
-        let currentText = ui_textview_message.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let hasText = !currentText.isEmpty && currentText != placeholderTxt
-        let hasImage = (selectedImage != nil)
-
-        if hasText || hasImage {
-            let htmlMessage = getHTMLMessage()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-            let finalMessage = hasText ? htmlMessage : ""
-            self.sendMessage(messageStr: finalMessage, isRetry: false)
-        }
-
-        // ✅ Toujours réinitialiser le champ après envoi
-        ui_textview_message.text = placeholderTxt
-        ui_textview_message.attributedText = NSAttributedString(string: placeholderTxt)
-        ui_textview_message.textColor = .appOrange
-        let styleReset = ApplicationTheme.getFontRegular13Orange()
-        ui_textview_message.typingAttributes = [
-            .font: styleReset.font,
-            .foregroundColor: styleReset.color
-        ]
-
+        sendCurrentMessage()
         _ = ui_textview_message.resignFirstResponder()
         hideMentionSuggestions()
-        updateSendAffordance()
     }
 
 }
@@ -1785,6 +1678,21 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
 
 // MARK: - MessageCellSignalDelegate
 extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
+    func retrySend(message: String, positionForRetry: Int) {
+        dismissImagePreview()
+        hideOptionsPanel()
+
+        if isSmallTalkMode {
+            SmallTalkService.createMessage(id: smallTalkId, content: message) { [weak self] msg, error in
+                self?.handleSendCompletion(success: msg != nil, isRetry: true, text: message, positionForRetry: positionForRetry)
+            }
+        } else {
+            MessagingService.postCommentFor(conversationId: conversationId, message: message) { [weak self] msg, error in
+                self?.handleSendCompletion(success: msg != nil, isRetry: true, text: message, positionForRetry: positionForRetry)
+            }
+        }
+    }
+    
     
     func showFullScreenImage(_ image: UIImage) {
         let overlay = UIView()
@@ -1829,10 +1737,6 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
             vc.textString = textString
             self.present(navvc, animated: true)
         }
-    }
-
-    func retrySend(message: String, positionForRetry: Int) {
-        self.sendMessage(messageStr: message, isRetry: true, positionForRetry: positionForRetry)
     }
 
     func showUser(userId: Int?) {

@@ -736,7 +736,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <connections>
-                                                            <action selector="action_send_message:" destination="l3V-U8-gfv" eventType="touchUpInside" id="BO0-PY-z2j"/>
+                                                            <action selector="btnSend:" destination="l3V-U8-gfv" eventType="touchUpInside" id="fSQ-LT-kCM"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
