@@ -146,6 +146,8 @@ class ConversationDetailMessagesViewController: UIViewController {
     /// de ConversationCellDTO
     private var conversationCellDTOs: [ConversationCellDTO] = []
     private var mentionSearchTimer: Timer?
+    private var hasMoved = false
+
 
     // MARK: - View Lifecycle
     
@@ -166,7 +168,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         ui_tableview.register(UINib(nibName: DiscussionEventCell.identifier, bundle: nil),
                               forCellReuseIdentifier: DiscussionEventCell.identifier)
-
+        ui_tableview.delegate = self
         // Vue "vide"
         ui_title_empty.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_title_empty.text = "messaging_message_no_message".localized
@@ -406,29 +408,25 @@ class ConversationDetailMessagesViewController: UIViewController {
     private func handleSendCompletion(success: Bool, isRetry: Bool, text: String, positionForRetry: Int = 0) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-
             if success {
-                // Réinitialisation de l'UI
                 self.ui_textview_message.text = self.placeholderTxt
                 self.ui_textview_message.attributedText = NSAttributedString(string: self.placeholderTxt)
                 self.ui_textview_message.textColor = .appOrange
                 self.selectedImage = nil
                 self.currentPage = 1
+                self.hasMoved = false // Réinitialise hasMoved
                 self.shouldScrollToBottomAfterReload = true
 
-                // Supprime le message de la liste des retries si c'est un retry
                 if isRetry {
                     self.messagesForRetry.remove(at: positionForRetry)
                 }
 
-                // Recharge les messages
                 if self.isSmallTalkMode {
                     self.fetchSmallTalkData()
                 } else {
                     self.getMessages()
                 }
             } else if !isRetry {
-                // Gestion de l'échec (ajoute à la liste des messages à retenter)
                 var postMsg = PostMessage()
                 postMsg.content = text
                 postMsg.user = UserLightNeighborhood()
@@ -438,11 +436,10 @@ class ConversationDetailMessagesViewController: UIViewController {
                 self.ui_tableview.reloadData()
                 self.scrollToBottomIfNeeded()
             }
-
-            // Réactive le bouton
             self.updateSendAffordance()
         }
     }
+
     
     private func sendSmallTalkMessage(text: String) {
         if let selectedImage = selectedImage {
@@ -644,31 +641,18 @@ class ConversationDetailMessagesViewController: UIViewController {
     private func autoRefreshMessages() {
         guard !isLoading, !isSmallTalkMode else { return }
 
-        // Mémorise la position avant reload
-        let wasAtBottom           = isTableViewAtBottom()
-        let previousContentHeight = ui_tableview.contentSize.height
-        let previousOffset        = ui_tableview.contentOffset
-
-        let savedPage = currentPage
         isSilentRefresh = true
         getMessages()
 
-        // Après le reload, on ajuste le scroll selon la position précédente
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
-            if wasAtBottom {
-                // Coller au bas si l’utilisateur y était déjà
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) { [weak self] in
+            guard let self = self else { return }
+
+            if !self.hasMoved {
                 if !self.conversationCellDTOs.isEmpty {
-                    let last = self.conversationCellDTOs.count - 1
-                    let ip = IndexPath(row: last, section: 0)
+                    let lastRow = self.conversationCellDTOs.count - 1
+                    let ip = IndexPath(row: lastRow, section: 0)
                     self.ui_tableview.scrollToRow(at: ip, at: .bottom, animated: false)
                 }
-            } else {
-                // Conserver l’offset relatif (pour la pagination vers le haut)
-                self.currentPage = savedPage
-                let newContentHeight = self.ui_tableview.contentSize.height
-                let delta = newContentHeight - previousContentHeight
-                let newOffset = CGPoint(x: previousOffset.x, y: previousOffset.y + delta)
-                self.ui_tableview.setContentOffset(newOffset, animated: false)
             }
         }
     }
@@ -679,12 +663,13 @@ class ConversationDetailMessagesViewController: UIViewController {
         autoRefreshTimer = nil
     }
     
-    private func isTableViewAtBottom() -> Bool {      // 🆕
+    private func isTableViewAtBottom() -> Bool {
         let contentHeight = ui_tableview.contentSize.height
-        let tableHeight   = ui_tableview.bounds.height
-        let offsetY       = ui_tableview.contentOffset.y
+        let tableHeight = ui_tableview.bounds.height
+        let offsetY = ui_tableview.contentOffset.y
         return offsetY >= contentHeight - tableHeight - 1
     }
+
     
     func generateJitsiURL(displayName: String, roomName: String = "Bonnes ondes ") -> URL? {
         let uniqueRoomName = roomName + self.uuidv2
@@ -787,7 +772,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
 
     private func scrollToBottomIfNeeded() {
-        if !conversationCellDTOs.isEmpty {
+        if !conversationCellDTOs.isEmpty && !hasMoved {
             DispatchQueue.main.async {
                 let lastIndex = self.conversationCellDTOs.count - 1
                 let indexPath = IndexPath(row: lastIndex, section: 0)
@@ -964,7 +949,7 @@ class ConversationDetailMessagesViewController: UIViewController {
                 //     - après envoi (flag shouldScrollToBottomAfterReload)
                 //     - ou si reload normal (non-silencieux)
                 if self.currentPage == 1, !self.conversationCellDTOs.isEmpty {
-                    if self.shouldScrollToBottomAfterReload || !self.isSilentRefresh {
+                    if !self.hasMoved {
                         let lastRow = self.conversationCellDTOs.count - 1
                         let ip = IndexPath(row: lastRow, section: 0)
                         self.ui_tableview.scrollToRow(at: ip, at: .bottom, animated: false)
@@ -1412,7 +1397,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 }
 
 // MARK: - TableView DataSource & Delegate
-extension ConversationDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {
+extension ConversationDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
 
     //---- TABLE DE MENTIONS ou TABLE DE MESSAGES ? ----
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1531,6 +1516,16 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
             }
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == ui_tableview {
+            let isAtBottom = isTableViewAtBottom()
+            if !isAtBottom {
+                hasMoved = true
+            }
+        }
+    }
+
 }
 
 // MARK: - MJNavBackViewDelegate
