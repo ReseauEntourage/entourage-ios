@@ -37,6 +37,21 @@ class OnboardingStartCell: UITableViewCell {
     
     @IBOutlet weak var ui_label_mandatory: UILabel!
     
+    //NEW FIELD
+    @IBOutlet weak var ui_label_gender_title: UILabel!
+    @IBOutlet weak var ui_gender_pickerview: UIPickerView!
+    @IBOutlet weak var ui_label_birthday_title: UILabel!
+    @IBOutlet weak var ui_textfiled_birthday: UITextField!
+    @IBOutlet weak var ui_label_how_we_met_title: UILabel!
+    @IBOutlet weak var ui_how_we_met_pickerview: UIPickerView!
+    @IBOutlet weak var ui_label_compagny_title: UILabel!
+    @IBOutlet weak var ui_compagny_pickerview: UIPickerView!
+    @IBOutlet weak var ui_label_event_title: UILabel!
+    @IBOutlet weak var ui_event_pickerview: UIPickerView!
+    @IBOutlet weak var ui_view_compagny: UIView!
+    @IBOutlet weak var ui_view_event: UIView!
+    
+    
     weak var delegate:OnboardingStartDelegate? = nil
     let minimumCharacters = 2
     

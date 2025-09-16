@@ -2027,6 +2027,7 @@
 		02E069CB279184B3006DB1B6 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				26E66F132E74565800E65BFB /* cellOnboardingOne */,
 				26B032F72D8C28C900203CAD /* cell */,
 				028D4F4F2937955200A0BDD3 /* OnboardingStartViewController.swift */,
 				028D4F53293796C400A0BDD3 /* OnboardingPageViewController.swift */,
@@ -2552,6 +2553,13 @@
 				26445C4E2BB571700010A8D8 /* QuestionSurveyVoteCell.xib */,
 			);
 			path = voteMembersCells;
+			sourceTree = "<group>";
+		};
+		26E66F132E74565800E65BFB /* cellOnboardingOne */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = cellOnboardingOne;
 			sourceTree = "<group>";
 		};
 		466EAB21AD4207C796A4EC64 /* Frameworks */ = {

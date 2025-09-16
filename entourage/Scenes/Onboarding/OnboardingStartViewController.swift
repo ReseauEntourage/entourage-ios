@@ -20,6 +20,9 @@ class OnboardingStartViewController: UIViewController {
     @IBOutlet weak var ui_bt_next: UIButton!
     @IBOutlet weak var ui_top_view: MJNavBackView!
     
+    // NEW field
+    
+    
     weak var parentDelegate:OTPreOnboardingV2ChoiceViewController? = nil
     
     var pageViewController:OnboardingPageViewController? = nil

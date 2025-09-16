@@ -486,31 +486,42 @@ class ConversationDetailMessagesViewController: UIViewController {
     func showImagePreview(_ image: UIImage) {
         // Stocker l'image sélectionnée
         self.selectedImage = image
-        // 1. Créer la vue overlay
+
+        // 1. Créer la vue overlay (fond blanc, sous la zone de texte)
         toggleOptionViewVisibility()
         let overlay = UIView()
         overlay.backgroundColor = UIColor.white
         overlay.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlay)
         self.imagePreviewOverlay = overlay
+
+        // Contraintes de l'overlay : du haut de la safe area jusqu'au-dessus de la zone de texte
         NSLayoutConstraint.activate([
             overlay.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             overlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             overlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             overlay.bottomAnchor.constraint(equalTo: ui_view_txtview.topAnchor)
         ])
-        // 2. UIImageView centré, toute la largeur
+
+        // 2. UIImageView : largeur = 100% de l'overlay, hauteur = moitié de l'écran, collée en haut
         let iv = UIImageView(image: image)
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill  // Remplit toute la zone en respectant le ratio (avec recadrage si nécessaire)
+        iv.clipsToBounds = true             // Active le recadrage pour éviter les débordements
         iv.translatesAutoresizingMaskIntoConstraints = false
         overlay.addSubview(iv)
+
+        // Contraintes pour l'image :
+        // - Largeur = 100% de l'overlay
+        // - Hauteur = moitié de la hauteur de l'écran
+        // - Collée en haut
         NSLayoutConstraint.activate([
-            iv.leadingAnchor.constraint(equalTo: overlay.leadingAnchor, constant: 0),
-            iv.trailingAnchor.constraint(equalTo: overlay.trailingAnchor, constant: 0),
-            iv.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
-            iv.heightAnchor.constraint(equalTo: iv.widthAnchor, multiplier: image.size.height / image.size.width)
+            iv.leadingAnchor.constraint(equalTo: overlay.leadingAnchor),
+            iv.trailingAnchor.constraint(equalTo: overlay.trailingAnchor),
+            iv.topAnchor.constraint(equalTo: overlay.topAnchor),
+            iv.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
         ])
-        // 3. Bouton “fermer” en cercle blanc
+
+        // 3. Bouton "fermer" (en haut à droite)
         let closeButton = UIButton(type: .custom)
         if #available(iOS 13.0, *) {
             let img = UIImage(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
@@ -527,12 +538,14 @@ class ConversationDetailMessagesViewController: UIViewController {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.addTarget(self, action: #selector(dismissImagePreview), for: .touchUpInside)
         overlay.addSubview(closeButton)
+
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: overlay.safeAreaLayoutGuide.topAnchor, constant: 8),
             closeButton.trailingAnchor.constraint(equalTo: overlay.trailingAnchor, constant: -8),
             closeButton.widthAnchor.constraint(equalToConstant: 32),
             closeButton.heightAnchor.constraint(equalToConstant: 32)
         ])
+
         updateSendAffordance()
     }
 

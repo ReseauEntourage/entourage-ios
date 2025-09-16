@@ -399,7 +399,8 @@ struct MessagingService:ParsingDataCodable {
                self.uploadToS3(urlS3: presignedUrl, image: image) { isOk in
                    if isOk {
                        var textMessage = message
-                       if message ==  "messaging_message_placeholder_discut".localized {
+                       print("eho message ", message)
+                       if ((message?.contains("messaging_message_placeholder_discut".localized )) != nil)  {
                            textMessage = " "
                        }
                        self.postWithImageAndText(imageKey: uploadKey, conversationId: conversationId, message: textMessage, completion: completion)
