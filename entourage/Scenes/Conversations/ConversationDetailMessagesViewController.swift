@@ -487,7 +487,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         // 1. Créer la vue overlay
         toggleOptionViewVisibility()
         let overlay = UIView()
-        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        overlay.backgroundColor = UIColor.white
         overlay.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlay)
         self.imagePreviewOverlay = overlay
