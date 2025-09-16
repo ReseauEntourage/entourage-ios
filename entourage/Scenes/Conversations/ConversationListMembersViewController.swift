@@ -290,8 +290,8 @@ extension ConversationListMembersViewController: NeighborhoodHomeSearchDelegate 
 // MARK: - NeighborhoodUserCellDelegate
 extension ConversationListMembersViewController: NeighborhoodUserCellDelegate {
     func neighborhoodUserCell(_ cell: NeighborhoodUserCell,
-                                  didToggleAt position: Int,
-                                  isChecked: Bool,
+                              didRequestToggleAt position: Int,
+                              intendedChecked isChecked: Bool,
                                   completion: @escaping (Bool) -> Void) {
 
             // On utilise conversationId comme eventId

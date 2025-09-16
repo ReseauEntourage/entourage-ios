@@ -212,6 +212,7 @@ struct UserLightNeighborhood: Codable {
     var avatarURL:String? = nil
     var partner:Partner? = nil
     var partnerRoleTitle:String? = nil
+    var photoAcceptance:Bool? = nil
     var role:String? = nil
     var roles:[String]? = nil
     var groupRole:String? = nil
@@ -243,6 +244,7 @@ struct UserLightNeighborhood: Codable {
         case communityRoles = "community_roles"
         case confirmedAt = "confirmed_at"
         case participateAt = "participate_at"
+        case photoAcceptance = "photo_acceptance"
         case _displayName = "display_name"
         case avatarURL = "avatar_url"
     }

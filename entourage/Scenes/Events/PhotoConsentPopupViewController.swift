@@ -226,3 +226,27 @@ final class PhotoConsentPopupViewController: UIViewController {
         }, completion: nil)
     }
 }
+extension PhotoConsentPopupViewController {
+    static func present(over presenter: UIViewController,
+                        title: String? = nil,
+                        message: String? = nil,
+                        onAccept: (() -> Void)? = nil,
+                        onDecline: (() -> Void)? = nil) -> PhotoConsentPopupViewController {
+        let vc = PhotoConsentPopupViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        vc.onAccept = onAccept
+        vc.onDecline = onDecline
+
+        // Personnalisation du titre et du message si fourni
+        if let title = title {
+            vc.titleLabel.text = title
+        }
+        if let message = message {
+            vc.bodyLabel.text = message
+        }
+
+        presenter.present(vc, animated: true)
+        return vc
+    }
+}

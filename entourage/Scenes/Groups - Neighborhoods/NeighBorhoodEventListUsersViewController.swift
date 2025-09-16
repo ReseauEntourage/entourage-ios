@@ -3,8 +3,8 @@
 //  entourage
 //
 //  Created by Jerome on 04/05/2022.
+//  Fixed: checkbox flow (read real state), debounce, no event loops.
 //
-
 import UIKit
 import IHProgressHUD
 
@@ -27,6 +27,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
     var users = [UserLightNeighborhood]()
     var usersSearch = [UserLightNeighborhood]()
+
     var isAlreadyClearRows = false
     var isSearch = false
 
@@ -34,45 +35,55 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     var groupId: Int? = nil
     var postId: Int? = nil
     var isFromReact = false
+
     var eventId: Int? = nil
+
+    // Survey
     var survey: Survey? = nil
     var questionTitle: String? = nil
     var isFromSurvey = false
+
     var reactionTypeList = [ReactionType]()
+
+    // Data model used by the table
     private var tableData: [TableDTO] = []
 
-    // Pagination variables
+    // Pagination
     private var currentPage = 1
     private let perPage = 20
     private var isLoading = false
     private var hasMorePages = true
 
+    // Debounce to prevent repeated toggles
+    private var pendingToggles = Set<Int>() // indexes in tableData
+
     // MARK: - Viewer capabilities
-    /// Le viewer peut voir/utiliser les checkboxes s'il a au moins un rôle (non nul / non vide)
     private var viewerCanUseCheckboxes: Bool {
         return !(UserDefaults.currentUser?.roles?.isEmpty ?? true)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         ui_tableview.register(UINib(nibName: SectionOptionNameCell.identifier, bundle: nil), forCellReuseIdentifier: SectionOptionNameCell.identifier)
         ui_tableview.register(UINib(nibName: QuestionSurveyVoteCell.identifier, bundle: nil), forCellReuseIdentifier: QuestionSurveyVoteCell.identifier)
 
         var title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
-        if isFromReact {
-            title = "see_member_react".localized
-        }
-        if isFromSurvey {
-            title = "Réponses au sondage"
-        }
+        if isFromReact { title = "see_member_react".localized }
+        if isFromSurvey { title = "Réponses au sondage" }
+
         let txtSearch = "neighborhood_group_search_empty_title".localized
+
         loadStoredReactionTypes()
 
         ui_top_view.populateView(title: title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
-
         ui_lb_no_result.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lb_no_result.text = txtSearch
         ui_view_no_result.isHidden = true
+
+        ui_tableview.dataSource = self
+        ui_tableview.delegate = self
+        ui_tableview.tableFooterView = UIView()
 
         if isFromSurvey {
             loadSurveyData()
@@ -93,6 +104,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         self.navigationController?.hideTransparentNavigationBar()
     }
 
+    // MARK: - Survey
     func loadSurveyData() {
         guard let postId = self.postId, let survey = self.survey else {
             print("Survey information or postId is missing.")
@@ -100,10 +112,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         }
 
         let completion: (SurveyResponsesListWrapper?, EntourageNetworkError?) -> Void = { [weak self] surveyResponsesListWrapper, error in
-            guard let self = self else {
-                print("Self was deallocated.")
-                return
-            }
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 if let error = error {
                     print("Error retrieving survey responses: \(error)")
@@ -114,14 +123,18 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     return
                 }
 
+                self.tableData.removeAll()
                 self.tableData.append(.questionCell(title: self.questionTitle ?? "Default Title"))
+
                 for (index, choice) in survey.choices.enumerated() {
                     guard let voteCount = survey.summary[safe: index],
                           let usersForChoice = surveyResponsesList[safe: index] else {
                         print("Index \(index) is out of bounds.")
                         continue
                     }
+
                     self.tableData.append(.surveySection(title: choice, voteCount: voteCount))
+
                     self.tableData += usersForChoice.map { surveyUser in
                         var userLight = UserLightNeighborhood()
                         userLight.sid = surveyUser.id
@@ -131,6 +144,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                         return TableDTO.userCell(user: userLight, reactionType: nil)
                     }
                 }
+
                 self.ui_tableview.reloadData()
             }
         }
@@ -142,10 +156,11 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         }
     }
 
+    // MARK: - Neighborhood / Event users
     func getNeighborhoodUsers() {
         guard let neighborhood = neighborhood else { return }
-
         isLoading = true
+
         NeighborhoodService.getNeighborhoodUsers(neighborhoodId: neighborhood.uid, page: currentPage, per: perPage) { [weak self] users, nextPage, error in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -156,8 +171,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     } else {
                         self.users.append(contentsOf: users)
                     }
-                    self.tableData = [.searchCell] + self.users.map { .userCell(user: $0, reactionType: nil) }
-                    self.ui_tableview.reloadData()
+                    self.rebuildTableDataFromUsers()
                     self.currentPage = nextPage ?? self.currentPage
                     self.hasMorePages = nextPage != nil
                 } else if let error = error {
@@ -169,8 +183,8 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
     func getEventusers() {
         guard let event = event else { return }
-
         isLoading = true
+
         EventService.getEventUsers(eventId: event.uid, page: currentPage, per: perPage) { [weak self] users, nextPage, error in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -186,8 +200,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     } else {
                         self.users.append(contentsOf: users)
                     }
-                    self.tableData = [.searchCell] + self.users.map { .userCell(user: $0, reactionType: nil) }
-                    self.ui_tableview.reloadData()
+                    self.rebuildTableDataFromUsers()
                     self.currentPage = nextPage ?? self.currentPage
                     self.hasMorePages = nextPage != nil
                     self.ui_view_no_result.isHidden = !users.isEmpty
@@ -196,6 +209,12 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         }
     }
 
+    private func rebuildTableDataFromUsers() {
+        tableData = [.searchCell] + users.map { .userCell(user: $0, reactionType: nil) }
+        ui_tableview.reloadData()
+    }
+
+    // MARK: - Search
     func searchUser(text: String) {
         usersSearch.removeAll()
         let searchedUsers = users.filter { $0.displayName.lowercased().contains(text.lowercased()) }
@@ -208,10 +227,10 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
             ui_view_no_result.isHidden = true
             tableData += searchedUsers.map { .userCell(user: $0, reactionType: nil) }
         }
-
         ui_tableview.reloadData()
     }
 
+    // MARK: - Reactions (details)
     func fetchReactionsDetails() {
         guard let postId = self.postId else { return }
 
@@ -222,12 +241,10 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     self.users = userReactions.map { $0.user }
                     self.reactionTypeList = userReactions.map { ReactionType(id: $0.reactionId, key: nil, imageUrl: nil) }
 
-                    // ✅ Clear les données existantes avant de peupler
                     self.tableData.removeAll()
                     self.tableData = [.searchCell]
-
-                    self.tableData += self.users.enumerated().map { index, user in
-                        .userCell(user: user, reactionType: self.reactionTypeList[safe: index])
+                    for (idx, user) in self.users.enumerated() {
+                        self.tableData.append(.userCell(user: user, reactionType: self.reactionTypeList[safe: idx]))
                     }
                     self.ui_tableview.reloadData()
                 } else if let error = error {
@@ -243,24 +260,24 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         }
     }
 
+    // Stored reactions sprites
     func getStoredReactionTypes() -> [ReactionType]? {
         guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
         do {
-            let reactions = try JSONDecoder().decode([ReactionType].self, from: reactionsData)
-            return reactions
+            return try JSONDecoder().decode([ReactionType].self, from: reactionsData)
         } catch {
             print("Erreur de décodage des réactions : \(error)")
             return nil
         }
     }
-
     func loadStoredReactionTypes() {
         reactionsTypes = getStoredReactionTypes() ?? []
     }
 }
 
-// MARK: - Tableview Datasource/delegate
+// MARK: - UITableViewDataSource / UITableViewDelegate
 extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
@@ -272,110 +289,88 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         }
 
-        // Pagination: Load more data when the user is near the end of the list
-        let threshold = 5 // Number of cells from the bottom to trigger loading more
+        let threshold = 5
         if !isFromReact && !isFromSurvey && indexPath.row >= tableData.count - threshold && hasMorePages && !isLoading {
-            if isEvent {
-                getEventusers()
-            } else {
-                getNeighborhoodUsers()
-            }
+            if isEvent { getEventusers() } else { getNeighborhoodUsers() }
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         switch tableData[indexPath.row] {
+
         case .searchCell:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_search", for: indexPath) as! NeighborhoodHomeSearchCell
             let title = isEvent ? "event_userInput_search".localized : "neighborhood_userInput_search".localized
             cell.populateCell(delegate: self, isSearch: isSearch, placeceholder: title, isCellUserSearch: true)
             return cell
 
-        case .userCell(let _user, let _reactionType):
-            var position = indexPath.row - 1
-            if isFromReact || isFromSurvey {
-                position = position + 1
-            }
-            let isMe = _user.sid == UserDefaults.currentUser?.sid
-            let isParticipating = (_user.participateAt != nil) || (_user.confirmedAt != nil)
-
+        case .userCell(let user, let reactionType):
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
-            // ⬇️ Ici, on passe le droit d’afficher la checkbox selon le rôle du viewer
+
+            let isMe = user.sid == UserDefaults.currentUser?.sid
+            let isParticipating = (user.participateAt != nil) || (user.confirmedAt != nil)
+
             cell.populateCell(
                 isMe: isMe,
-                username: _user.displayName,
-                role: _user.getCommunityRoleWithPartnerFormated(),
-                imageUrl: _user.avatarURL,
+                username: user.displayName,
+                role: user.getCommunityRoleWithPartnerFormated(),
+                imageUrl: user.avatarURL,
                 showBtMessage: true,
                 delegate: self,
-                position: position,
-                reactionType: _reactionType,
+                position: indexPath.row,              // exact index in tableData
+                reactionType: reactionType,
                 isConfirmed: isParticipating,
-                isOrganizer: viewerCanUseCheckboxes, // ← clé : basé sur le user courant
+                isOrganizer: viewerCanUseCheckboxes,
                 isCreator: isMe
             )
             cell.hideSeparatorBarIfIsVote(isVote: self.isFromSurvey)
             return cell
 
         case .surveySection(let title, let voteCount):
-            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "SectionOptionNameCell") as? SectionOptionNameCell {
-                cell.selectionStyle = .none
-                cell.configure(title: title, countVote: voteCount)
-                return cell
-            }
+            let cell = ui_tableview.dequeueReusableCell(withIdentifier: SectionOptionNameCell.identifier) as! SectionOptionNameCell
+            cell.selectionStyle = .none
+            cell.configure(title: title, countVote: voteCount)
+            return cell
 
         case .questionCell(let title):
-            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "QuestionSurveyVoteCell") as? QuestionSurveyVoteCell {
-                cell.selectionStyle = .none
-                cell.configure(title: title)
-                return cell
-            }
-        }
-
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_search", for: indexPath) as! NeighborhoodHomeSearchCell
-            let title = isEvent ? "event_userInput_search".localized : "neighborhood_userInput_search".localized
-            cell.populateCell(delegate: self, isSearch: isSearch, placeceholder: title, isCellUserSearch: true)
+            let cell = ui_tableview.dequeueReusableCell(withIdentifier: QuestionSurveyVoteCell.identifier) as! QuestionSurveyVoteCell
+            cell.selectionStyle = .none
+            cell.configure(title: title)
             return cell
         }
-        return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableData[indexPath.row] {
-        case .searchCell:
+        case .searchCell, .surveySection, .questionCell:
             return
-        case .userCell(let _user, _):
-            var user: UserLightNeighborhood?
+
+        case .userCell(_, _):
+            var tappedUser: UserLightNeighborhood?
+
             if isSearch {
-                if !isEvent {
-                    AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
-                }
-                if indexPath.row < usersSearch.count {
-                    user = self.usersSearch[indexPath.row - 1]
+                if !isEvent { AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult) }
+                if indexPath.row - 1 < usersSearch.count {
+                    tappedUser = usersSearch[indexPath.row - 1]
                 }
             } else {
-                if !isEvent {
-                    AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
-                }
-                if indexPath.row < users.count {
-                    user = self.users[indexPath.row - 1]
+                if !isEvent { AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member) }
+                if indexPath.row - 1 < users.count {
+                    tappedUser = users[indexPath.row - 1]
                 }
             }
+
             if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
                 .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-                if let _user = user {
-                    profileVC.userIdToDisplay = "\(_user.sid)"
-                }
+                if let u = tappedUser { profileVC.userIdToDisplay = "\(u.sid)" }
                 profileVC.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(profileVC, animated: true)
             }
-        case .surveySection, .questionCell:
-            return
         }
     }
 }
@@ -384,9 +379,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
 extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelegate {
     func goSearch(_ text: String?) {
         if let text = text, !text.isEmpty {
-            if !isEvent {
-                AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_Validate)
-            }
+            if !isEvent { AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_Validate) }
             self.searchUser(text: text)
         } else {
             self.usersSearch.removeAll()
@@ -409,88 +402,143 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
     }
 }
 
-// MARK: - NeighborhoodUserCellDelegate
+// MARK: - NeighborhoodUserCellDelegate (checkbox flow FIX)
 extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate {
+
     func neighborhoodUserCell(_ cell: NeighborhoodUserCell,
-                              didToggleAt position: Int,
-                              isChecked: Bool,
-                              completion: @escaping (Bool) -> Void) {
-        // On ne gère que pour les événements
-        guard isEvent,
-              let eventId = event?.uid,
-              position < tableData.count
-        else {
-            completion(false)
+                              didRequestToggleAt tablePosition: Int,
+                              intendedChecked: Bool,
+                              completion: @escaping (_ finalChecked: Bool) -> Void) {
+
+        guard isEvent, let eventId = event?.uid, tablePosition < tableData.count else {
+            completion(!intendedChecked) // revert
+            return
+        }
+        guard case var .userCell(user, reaction) = tableData[tablePosition] else {
+            completion(!intendedChecked)
             return
         }
 
-        // Récupérer l'utilisateur ciblé depuis tableData
-        guard case let .userCell(user, _) = tableData[position] else {
-            completion(false)
+        // Debounce repeated valueChanged while we are processing
+        if pendingToggles.contains(tablePosition) {
+            completion(!intendedChecked) // keep current UI
             return
         }
-        let userId = user.sid
+        pendingToggles.insert(tablePosition)
 
-        if isChecked {
-            // → POPUP de consentement photo, puis double appel
-            PhotoConsentPopupViewController.present(over: self, onAccept: { [weak self] in
+        cell.isUserInteractionEnabled = false
+        IHProgressHUD.show()
+
+        if intendedChecked {
+            // CHECK ⇒ participate then maybe ask for photo consent
+            EventService.participateForUser(eventId: eventId, userId: user.sid) { [weak self] member, error in
                 guard let self = self else { return }
-                IHProgressHUD.show()
+                if let member = member {
+                    user.participateAt = member.participateAt ?? ISO8601DateFormatter().string(from: Date())
+                    user.confirmedAt = member.confirmedAt
 
-                // 1) enregistrer le consentement photo
-                EventService.acceptPhotoForUser(eventId: eventId, userId: userId) { successPhoto, _ in
-                    // 2) participer (même si acceptPhoto échoue, on peut décider de tenter quand même)
-                    EventService.participateForUser(eventId: eventId, userId: userId) { member, error in
+                    if user.photoAcceptance == nil {
                         IHProgressHUD.dismiss()
-
-                        if let _ = member {
-                            completion(true) // on garde coché
-                        } else {
-                            // échec → on rétablit décoché et affiche une erreur
-                            IHProgressHUD.showError(withStatus: error?.message ?? "Une erreur est survenue.")
-                            completion(false)
+                        self.presentPhotoConsent(for: user, eventId: eventId, tablePosition: tablePosition, reaction: reaction) { finalUser in
+                            self.updateUserAndReload(user: finalUser, positionInTableData: tablePosition, reaction: reaction)
+                            self.pendingToggles.remove(tablePosition)
+                            completion(true)
+                            cell.isUserInteractionEnabled = true
                         }
+                    } else {
+                        self.updateUserAndReload(user: user, positionInTableData: tablePosition, reaction: reaction)
+                        IHProgressHUD.dismiss()
+                        self.pendingToggles.remove(tablePosition)
+                        completion(true)
+                        cell.isUserInteractionEnabled = true
                     }
-                }
-            }, onDecline: {
-                // L’utilisateur refuse le consentement → on re-décoche
-                completion(false)
-            })
-        } else {
-            // → annuler la participation
-            IHProgressHUD.show()
-            EventService.cancelParticipationForUser(eventId: eventId, userId: userId) { success, error in
-                IHProgressHUD.dismiss()
-                if success {
-                    completion(true) // on garde décoché
                 } else {
-                    IHProgressHUD.showError(withStatus: error?.message ?? "Impossible d’annuler la participation.")
-                    completion(false) // on rétablit coché
+                    IHProgressHUD.dismiss()
+                    self.pendingToggles.remove(tablePosition)
+                    IHProgressHUD.showError(withStatus: error?.message ?? "Erreur lors de la confirmation.")
+                    completion(false) // revert
+                    cell.isUserInteractionEnabled = true
                 }
+            }
+        } else {
+            // UNCHECK ⇒ cancel participation (do not touch photo consent)
+            EventService.cancelParticipationForUser(eventId: eventId, userId: user.sid) { [weak self] success, error in
+                guard let self = self else { return }
+                IHProgressHUD.dismiss()
+                self.pendingToggles.remove(tablePosition)
+                if success {
+                    user.participateAt = nil
+                    user.confirmedAt = nil
+                    self.updateUserAndReload(user: user, positionInTableData: tablePosition, reaction: reaction)
+                    completion(false)
+                } else {
+                    IHProgressHUD.showError(withStatus: error?.message ?? "Erreur lors de l'annulation.")
+                    completion(true) // revert
+                }
+                cell.isUserInteractionEnabled = true
             }
         }
     }
-    
-    func showSendMessageToUserForPosition(_ position: Int) {
-        guard position < tableData.count else { return }
 
-        if case let .userCell(user, _) = tableData[position] {
-            if !isEvent {
-                AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member)
+    private func presentPhotoConsent(for user: UserLightNeighborhood,
+                                     eventId: Int,
+                                     tablePosition: Int,
+                                     reaction: ReactionType?,
+                                     completion: @escaping (UserLightNeighborhood) -> Void) {
+
+        PhotoConsentPopupViewController.present(
+            over: self,
+            onAccept: { [weak self] in
+                guard let self = self else { return }
+                IHProgressHUD.show()
+                EventService.acceptPhotoForUser(eventId: eventId, userId: user.sid) { ok, _ in
+                    IHProgressHUD.dismiss()
+                    var updated = user
+                    updated.photoAcceptance = true
+                    completion(updated)
+                }
+            },
+            onDecline: { [weak self] in
+                guard let self = self else { return }
+                IHProgressHUD.show()
+                EventService.cancelPhotoForUser(eventId: eventId, userId: user.sid) { _, _ in
+                    IHProgressHUD.dismiss()
+                    var updated = user
+                    updated.photoAcceptance = false
+                    completion(updated)
+                }
             }
+        )
+    }
 
+    private func updateUserAndReload(user: UserLightNeighborhood,
+                                     positionInTableData: Int,
+                                     reaction: ReactionType?) {
+        tableData[positionInTableData] = .userCell(user: user, reactionType: reaction)
+        let indexPath = IndexPath(row: positionInTableData, section: 0)
+        ui_tableview.reloadRows(at: [indexPath], with: .automatic)
+
+        if !isFromReact && !isFromSurvey && !isSearch {
+            let userIndexInUsers = positionInTableData - 1 // account for search cell at 0
+            if users.indices.contains(userIndexInUsers) {
+                users[userIndexInUsers] = user
+            }
+        }
+    }
+
+    func showSendMessageToUserForPosition(_ tablePosition: Int) {
+        guard tablePosition < tableData.count else { return }
+        if case let .userCell(user, _) = tableData[tablePosition] {
+            if !isEvent { AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member) }
             IHProgressHUD.show()
             MessagingService.createOrGetConversation(userId: "\(user.sid)") { conversation, error in
                 IHProgressHUD.dismiss()
-
                 if let conversation = conversation {
                     self.showConversation(conversation: conversation, username: user.displayName)
                     return
                 }
                 var errorMsg = "message_error_create_conversation".localized
-                if let error = error {
-                    errorMsg = error.message
-                }
+                if let error = error { errorMsg = error.message }
                 IHProgressHUD.showError(withStatus: errorMsg)
             }
         }
@@ -514,12 +562,10 @@ extension NeighBorhoodEventListUsersViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true)
     }
-
-    func didTapEvent() {
-        // Nothing yet
-    }
+    func didTapEvent() { /* no-op */ }
 }
 
+// MARK: - Safe subscript
 extension Collection {
     subscript(safe index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil

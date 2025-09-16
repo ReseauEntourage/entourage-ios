@@ -116,6 +116,7 @@ let kAPIGetMyFilteredOutings = "users/%@/outings?token=%@&page=%d&per=%d&travel_
 let kAPIGetEventUsersQuery = "outings/%@/users?token=%@&query=%@"
 let kAPIParticipateForUser           = "outings/%@/users/%@/participate?token=%@"
 let kAPIAcceptPhotoForUser           = "outings/%@/users/%@/photo_acceptance?token=%@"
+let kAPICancelPhotoForUser           = "outings/%@/users/%@/cancel_photo_acceptance?token=%@"
 let kAPICancelParticipationForUser   = "outings/%@/users/%@/cancel_participation?token=%@"
 
 

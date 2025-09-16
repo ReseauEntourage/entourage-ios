@@ -740,6 +740,22 @@ struct EventService:ParsingDataCodable {
             DispatchQueue.main.async { completion(ok, ok ? nil : error) }
         }
     }
+    static func cancelPhotoForUser(eventId: Int,
+                                   userId: Int,
+                                   completion: @escaping (_ success: Bool, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        var endpoint = kAPICancelPhotoForUser
+        endpoint = String(format: endpoint, "\(eventId)", "\(userId)", token)
+
+        Logger.print("Endpoint acceptPhotoForUser: \(endpoint)")
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { _, resp, error in
+            let http = resp as? HTTPURLResponse
+            let ok = (error == nil) && ((http?.statusCode ?? 500) < 300)
+            Logger.print("Response acceptPhotoForUser: \(String(describing: http?.statusCode))")
+            DispatchQueue.main.async { completion(ok, ok ? nil : error) }
+        }
+    }
 
     static func cancelParticipationForUser(eventId: Int,
                                            userId: Int,
