@@ -176,7 +176,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         // Zone texte
         ui_view_txtview.layer.borderWidth = 1
-        ui_view_txtview.layer.borderColor = UIColor.appOrange.cgColor
+        ui_view_txtview.layer.borderColor = UIColor.appGreyOff.cgColor
         ui_view_txtview.layer.cornerRadius = ui_view_txtview.frame.height / 2
 
         ui_textview_message.delegate = self
@@ -187,7 +187,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         
         // Blocage
         ui_view_block.layer.borderWidth = 1
-        ui_view_block.layer.borderColor = UIColor.appGris112.cgColor
+        ui_view_block.layer.borderColor = UIColor.appGreyOff.cgColor
         ui_view_block.layer.cornerRadius = ui_view_block.frame.height / 2
         ui_title_block.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .appGris112))
         ui_view_block.isHidden = true
@@ -198,7 +198,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         ui_textview_message.addToolBar(width: _width, buttonValidate: buttonDone)
         ui_textview_message.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_textview_message.placeholderText = placeholderTxt
-        ui_textview_message.placeholderColor = .appOrange
+        ui_textview_message.placeholderColor = .appGreyOff
 
         // Current user
         guard let me = UserDefaults.currentUser else {
@@ -316,8 +316,9 @@ class ConversationDetailMessagesViewController: UIViewController {
         // Création du label "Caméra"
         labelCamera = UILabel()
         labelCamera.text = "Caméra"
+        labelCamera.setFontBody(size: 15)
         labelCamera.textAlignment = .center
-        labelCamera.textColor = .black
+        labelCamera.textColor = UIColor.appGris112
         labelCamera.translatesAutoresizingMaskIntoConstraints = false
         labelCamera.isHidden = true
         ui_view_txtview.addSubview(labelCamera)
@@ -325,8 +326,9 @@ class ConversationDetailMessagesViewController: UIViewController {
         // Création du label "Galerie"
         labelGalery = UILabel()
         labelGalery.text = "Galerie"
+        labelGalery.setFontBody(size: 15)
         labelGalery.textAlignment = .center
-        labelGalery.textColor = .black
+        labelGalery.textColor = UIColor.appGris112
         labelGalery.translatesAutoresizingMaskIntoConstraints = false
         labelGalery.isHidden = true
         ui_view_txtview.addSubview(labelGalery)
@@ -411,7 +413,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             if success {
                 self.ui_textview_message.text = self.placeholderTxt
                 self.ui_textview_message.attributedText = NSAttributedString(string: self.placeholderTxt)
-                self.ui_textview_message.textColor = .appOrange
+                self.ui_textview_message.textColor = .appGreyOff
                 self.selectedImage = nil
                 self.currentPage = 1
                 self.hasMoved = false // Réinitialise hasMoved

@@ -1240,7 +1240,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
  Messages
  */
 "Messages_title" = "Discussions";
-"messaging_message_placeholder_discut" = "Nouveau message";
+"messaging_message_placeholder_discut" = "Écrire un message...";
 "messaging_message_title" = "Conversation";
 "messaging_message_send" = "Envoyer";
 "messaging_message_no_message" = "Pas encore de message";

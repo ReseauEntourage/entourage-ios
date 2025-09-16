@@ -685,7 +685,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="BeigeClair"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="tSu-Nl-TXZ" firstAttribute="leading" secondItem="gxf-PD-bKd" secondAttribute="leading" constant="32" id="49U-pw-SYx"/>
                                             <constraint firstItem="6DS-8Y-tn4" firstAttribute="leading" secondItem="gxf-PD-bKd" secondAttribute="leading" constant="32" id="BMA-kD-JGY"/>
@@ -712,13 +712,13 @@
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Discuter ..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hqO-Ak-Xvp" customClass="MJTextViewPlaceholder" customModule="Ent_Beta" customModuleProvider="target">
                                                         <rect key="frame" x="8" y="0.0" width="228" height="54"/>
-                                                        <color key="backgroundColor" name="BeigeClair"/>
-                                                        <color key="textColor" name="orange_app"/>
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                 </subviews>
-                                                <color key="backgroundColor" name="BeigeClair"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstItem="hqO-Ak-Xvp" firstAttribute="top" secondItem="tZh-2J-cpU" secondAttribute="top" id="CT7-6m-ohO"/>
                                                     <constraint firstItem="hqO-Ak-Xvp" firstAttribute="leading" secondItem="tZh-2J-cpU" secondAttribute="leading" constant="8" id="QiP-RG-13l"/>
@@ -770,7 +770,6 @@ L2</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" name="BeigeClair"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="rBF-Oy-8Js" secondAttribute="trailing" constant="8" id="8dO-is-EhV"/>
                                                     <constraint firstItem="rBF-Oy-8Js" firstAttribute="leading" secondItem="hFd-P4-m3G" secondAttribute="leading" constant="8" id="ZhD-Wt-S8u"/>
@@ -786,7 +785,7 @@ L2</string>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="hFd-P4-m3G" secondAttribute="bottom" id="3zM-7R-URd"/>
                                             <constraint firstItem="Zfu-ix-F9E" firstAttribute="centerY" secondItem="ezL-qH-Mp6" secondAttribute="centerY" id="Lx1-Qe-0RS"/>
@@ -804,7 +803,7 @@ L2</string>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" name="BeigeClair"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="8wX-KB-efG" secondAttribute="trailing" id="7q7-2D-xH4"/>
                                     <constraint firstItem="8wX-KB-efG" firstAttribute="top" secondItem="Jpq-Gp-ntZ" secondAttribute="bottom" id="7zi-wI-boD"/>
@@ -838,7 +837,7 @@ L2</string>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="q4o-fK-EQL"/>
-                        <color key="backgroundColor" name="BeigeClair"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="4TP-kv-PK9" secondAttribute="trailing" id="2Dv-YB-MCp"/>
                             <constraint firstAttribute="bottom" secondItem="KXz-fy-faF" secondAttribute="bottom" constant="50" id="4Fe-xU-VaL"/>
