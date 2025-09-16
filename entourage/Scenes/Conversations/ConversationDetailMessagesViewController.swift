@@ -517,8 +517,8 @@ class ConversationDetailMessagesViewController: UIViewController {
             let img = UIImage(named: "close")?.withRenderingMode(.alwaysTemplate)
             closeButton.setImage(img, for: .normal)
         }
-        closeButton.tintColor = .black
-        closeButton.backgroundColor = .white
+        closeButton.tintColor = UIColor.appOrange
+        closeButton.backgroundColor = UIColor.appBeige
         closeButton.layer.cornerRadius = 16
         closeButton.layer.masksToBounds = true
         closeButton.contentEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
