@@ -377,7 +377,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         dismissImagePreview()
 
         let text = getHTMLMessage()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        var safeText = (text == placeholderTxt) ? "" : text
+        var safeText = (text == "messaging_message_placeholder_discut".localized) ? "" : text
         if isSmallTalkMode {
             sendSmallTalkMessage(text: safeText)
         } else {
@@ -484,7 +484,6 @@ class ConversationDetailMessagesViewController: UIViewController {
     func showImagePreview(_ image: UIImage) {
         // Stocker l'image sélectionnée
         self.selectedImage = image
-
         // 1. Créer la vue overlay
         toggleOptionViewVisibility()
         let overlay = UIView()
@@ -498,16 +497,16 @@ class ConversationDetailMessagesViewController: UIViewController {
             overlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             overlay.bottomAnchor.constraint(equalTo: ui_view_txtview.topAnchor)
         ])
-        // 2. UIImageView centré en carré
+        // 2. UIImageView centré, toute la largeur
         let iv = UIImageView(image: image)
         iv.contentMode = .scaleAspectFit
         iv.translatesAutoresizingMaskIntoConstraints = false
         overlay.addSubview(iv)
         NSLayoutConstraint.activate([
-            iv.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
+            iv.leadingAnchor.constraint(equalTo: overlay.leadingAnchor, constant: 0),
+            iv.trailingAnchor.constraint(equalTo: overlay.trailingAnchor, constant: 0),
             iv.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
-            iv.widthAnchor.constraint(equalTo: overlay.widthAnchor, multiplier: 0.8),
-            iv.heightAnchor.constraint(equalTo: iv.widthAnchor)
+            iv.heightAnchor.constraint(equalTo: iv.widthAnchor, multiplier: image.size.height / image.size.width)
         ])
         // 3. Bouton “fermer” en cercle blanc
         let closeButton = UIButton(type: .custom)
@@ -532,8 +531,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             closeButton.widthAnchor.constraint(equalToConstant: 32),
             closeButton.heightAnchor.constraint(equalToConstant: 32)
         ])
-        
-        updateSendAffordance() // 🆕
+        updateSendAffordance()
     }
 
 

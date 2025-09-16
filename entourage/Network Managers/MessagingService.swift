@@ -449,6 +449,9 @@ struct MessagingService:ParsingDataCodable {
            var chatMessage: [String: Any] = [:]
            if let message = message {
                chatMessage["content"] = message
+               if message.contains("messaging_message_placeholder_discut".localized){
+                   chatMessage["content"] = " "
+               }
            }
            chatMessage["image_url"] = imageKey
 
