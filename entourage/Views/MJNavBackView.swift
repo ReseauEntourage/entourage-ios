@@ -189,6 +189,7 @@ class MJNavBackView: UIView {
     }
     
     @objc private func goBack() {
+        print("eho " , delegate)
         delegate?.goBack()
     }
     

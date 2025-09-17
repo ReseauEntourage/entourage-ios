@@ -205,3 +205,38 @@ struct ConversationAuthor:Codable {
         case username = "display_name"
     }
 }
+
+extension Conversation {
+    init(from smallTalk: SmallTalk) {
+        self.uid = smallTalk.id
+        self.uuid = smallTalk.uuid_v2
+        self.type = "small_talk"
+        self.title = smallTalk.name
+        self.imageUrl = smallTalk.image_url
+        self.numberUnreadMessages = smallTalk.number_of_unread_messages
+        self.section = nil
+        self.user = nil
+        self.isCreator = nil
+        self.blockers = nil
+        self.messages = nil
+        self.hasPersonalPost = smallTalk.has_personal_post
+        self.author = nil
+
+        // Remplissage lastMessage simplifié
+        self.lastMessage = smallTalk.last_message
+
+        // Mapping des membres
+        self.members = smallTalk.members.map {
+            MemberLight(
+                uid: $0.id,
+                username: $0.display_name,
+                imageUrl: $0.avatar_url,
+                confirmedAt: nil,
+                roles: $0.community_roles,
+                partner: nil // à remplir si l’API te fournit un `partner`
+            )
+        }
+
+        self.members_count = smallTalk.members_count
+    }
+} 

@@ -38,6 +38,7 @@ struct User: Codable {
     var involvements:[String]? = nil
     var concerns:[String]? = nil
     var unreadCount:Int = 0
+    var gender:String? = ""
     var permissions:UserPermissions? = UserPermissions()
     
     var birthday:String? = nil
@@ -94,6 +95,7 @@ struct User: Codable {
         case availability
         case organization
         case partner
+        case gender = "gender"
         //case conversation
         case roles
         case memberships
@@ -166,6 +168,9 @@ struct User: Codable {
         }
         if let about = about, about.count >= 0 {
             dict["about"] = about
+        }
+        if let gender = gender, gender.count >= 0 {
+            dict["gender"] = gender
         }
         if let email = email, email.count > 0 {
             dict["email"] = email

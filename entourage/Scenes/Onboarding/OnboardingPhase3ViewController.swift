@@ -68,7 +68,7 @@ class OnboardingPhase3ViewController: UIViewController {
         tableDTO.append(.titleCell)
         tableDTO.append(.userTypeCell(choice: choice1, isSelected: self.isEntour, subtitle: "onboarding_phase_three_option_entourer_description".localized))
         tableDTO.append(.userTypeCell(choice: choice2, isSelected: self.isBeEntour, subtitle: "onboarding_phase_three_option_etre_entoure_description".localized))
-        tableDTO.append(.userTypeCell(choice: choice3, isSelected: self.isBoth, subtitle: "onboarding_phase_three_option_les_deux_description".localized))
+        //tableDTO.append(.userTypeCell(choice: choice3, isSelected: self.isBoth, subtitle: "onboarding_phase_three_option_les_deux_description".localized))
         tableDTO.append(.adressCell)
         tableDTO.append(.assoCell(userIsAsso: self.isAsso))
 

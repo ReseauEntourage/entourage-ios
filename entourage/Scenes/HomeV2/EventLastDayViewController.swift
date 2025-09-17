@@ -30,7 +30,7 @@ class EventLastDayViewController: UIViewController, MJAlertControllerDelegate {
         uiBtnQuit.addTarget(self, action: #selector(onQuit), for: .touchUpInside)
         AnalyticsLoggerManager.logEvent(name: popup_event_last_day_view)
         configureOrangeButton(uiBtnICome, withTitle: "Je viens ")
-        configureWhiteButton(uiBtnICome, withTitle: "Je ne viens pas")
+        configureWhiteButton(uiBtnIDontCome, withTitle: "Je ne viens pas")
     }
 
     private func setupEventDetails() {

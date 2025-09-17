@@ -15,6 +15,10 @@ class UserPhotoAddViewController: BasePopViewController {
     @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_description: UILabel!
     @IBOutlet weak var ui_iv_profile: UIImageView!
+    //special smalltalk
+    @IBOutlet weak var ui_progress_view: UIProgressView!
+    @IBOutlet weak var ui_btn_smalltalk_continu: UIButton!
+    @IBOutlet weak var ui_btn_smalltalk_previous: UIButton!
     
     @IBOutlet weak var ui_bt_take_photo: UIButton!
     @IBOutlet weak var ui_bt_import_gallery: UIButton!
@@ -26,10 +30,31 @@ class UserPhotoAddViewController: BasePopViewController {
     
     var isFromProfile = true
     var isFromDeepLink = false
+    var isSmallTalkMode = false
+    var userRequest:UserSmallTalkRequest? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_progress_view.progressTintColor = UIColor(red: 0.67, green: 0.87, blue: 0.64, alpha: 1.0) // proche de #ACDFA3
+        ui_progress_view.trackTintColor = UIColor(white: 0.9, alpha: 1.0)
         
+        configureOrangeButton(ui_btn_smalltalk_continu, withTitle: "action_create_close_button".localized)
+        configureOrangeButton(ui_bt_take_photo, withTitle: "take_photo".localized)
+        configureWhiteButton(ui_btn_smalltalk_previous, withTitle: "previous".localized)
+        configureWhiteButton(ui_bt_import_gallery, withTitle: "take_gallery".localized)
+        
+        ui_btn_smalltalk_continu.addTarget(self, action: #selector(onContinueClick), for: .touchUpInside)
+        ui_btn_smalltalk_previous.addTarget(self, action: #selector(onPreviousClick), for: .touchUpInside)
+        
+        if (!isSmallTalkMode) {
+            ui_progress_view.isHidden = true
+            ui_btn_smalltalk_continu.isHidden = true
+            ui_btn_smalltalk_previous.isHidden = true
+        }else{
+            ui_top_view.isHidden = true
+            ui_constraint_title_top.constant = 0
+
+        }
         if isFromProfile {
             AnalyticsLoggerManager.logEvent(name: View_Profile_Choose_Photo)
             ui_constraint_title_top.constant = 0
@@ -91,10 +116,65 @@ class UserPhotoAddViewController: BasePopViewController {
         self.navigationController?.hideTransparentNavigationBar()
     }
     
+    @objc func onContinueClick() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Photo_Finish)
+        guard let userRequest = self.userRequest else {
+            let alert = UIAlertController(title: "Erreur", message: "Identifiant introuvable", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+            return
+        }
+
+        let sb = UIStoryboard(name: "SmallTalk", bundle: nil)
+        if let nextVC = sb.instantiateViewController(withIdentifier: "SmallTalkSearchingViewController") as? SmallTalkSearchingViewController {
+            nextVC.configure(with: userRequest)
+            nextVC.modalPresentationStyle = .fullScreen
+
+            // ✅ on remplace totalement la navigation
+            if let window = UIApplication.shared.windows.first {
+                window.rootViewController = nextVC
+                window.makeKeyAndVisible()
+            } else {
+                self.present(nextVC, animated: true)
+            }
+        }
+    }
+
+    
+    @objc func onPreviousClick() {
+        AnalyticsLoggerManager.logEvent(name: Action_SmallTalk_Photo_Previous)
+        if isSmallTalkMode {
+            self.dismiss(animated: true) // on ferme seulement cette vue
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+
+    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+    
     //MARK: - Methods -
     
     @objc func close() {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true)
+
     }
     
     func showPicker(sourceType:UIImagePickerController.SourceType) {
@@ -111,6 +191,7 @@ class UserPhotoAddViewController: BasePopViewController {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "PictureResizeVC") as? PicturePreviewResizeViewController {
             vc.pictureSettingDelegate = self.pictureSettingDelegate
             vc.currentImage = self.selectedImage
+            vc.isSmallTalkMode = self.isSmallTalkMode
             vc.delegate = self
             vc.isFromProfile = self.isFromProfile
             vc.isFromDeepLink = self.isFromDeepLink
@@ -140,25 +221,6 @@ class UserPhotoAddViewController: BasePopViewController {
             AnalyticsLoggerManager.logEvent(name: Action_Profile_Take_Photo)
         }
         checkCameraAccess()
-    }
-    
-    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
-        button.setTitle(title, for: .normal)
-        button.backgroundColor = UIColor.appOrange
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 25
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
-        button.clipsToBounds = true
-    }
-
-    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
-        button.setTitle(title, for: .normal)
-        button.backgroundColor = .white
-        button.setTitleColor(.black, for: .normal)
-        button.layer.borderColor = UIColor.appOrange.cgColor
-        button.layer.borderWidth = 1
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
-        button.clipsToBounds = true
     }
     
     func checkCameraAccess() {

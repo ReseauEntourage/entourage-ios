@@ -32,6 +32,7 @@ enum HomeV2DTO {
     case moderator(name: String, imageUrl: String? = nil)
     case cellHZ
     case cellInitialPedago(pedagos: [PedagogicResource])
+    case cellSmallTalk(userRequests:[UserSmallTalkRequest])
 }
 
 class HomeV2ViewController: UIViewController {
@@ -66,6 +67,7 @@ class HomeV2ViewController: UIViewController {
     var isContributionPreference = false
     var shouldLaunchEventPopup: Int? = nil
     var shouldTestOnboarding = false
+    var userSmallTalkRequests: [UserSmallTalkRequest] = []
 
     
     override func viewDidLoad() {
@@ -106,6 +108,8 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeInitialPedagogicHorizontalCell.identifier, bundle: nil), forCellReuseIdentifier: HomeInitialPedagogicHorizontalCell.identifier)
         // CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
+        ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
+
         self.checkAndCreateCookieIfNotExists()
         self.checkNotificationSettings()
         if let _user = UserDefaults.currentUser{
@@ -405,6 +409,9 @@ class HomeV2ViewController: UIViewController {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
             tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
         }
+        //add condition
+        tableDTO.append(.cellTitle(title: "home_smalltalk_title".localized, subtitle: ""))
+        tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
         if (allDemands.count > 0) {
             if isContributionPreference {
                 tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
@@ -561,6 +568,35 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.configure(pedagos: pedagos)
                 return cell
             }
+        case .cellSmallTalk(let userRequests):
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "HomeSmallTalkCell") as? HomeSmallTalkCell {
+                cell.selectionStyle = .none
+                cell.parentViewController = self
+                var dto: [CollectionDTO] = []
+
+                let matchedRequests = userRequests.filter { $0.smalltalk != nil }
+                let pendingRequests = userRequests.filter { $0.smalltalk == nil }
+
+                // Ajouter les matched
+                for req in matchedRequests {
+                    dto.append(.talking(req))
+                }
+
+                // Ajouter waiting s'il y en a
+                let hasWaiting = !pendingRequests.isEmpty
+                if hasWaiting {
+                    dto.append(.waiting)
+                }
+
+                // Conditions d'affichage du bouton create
+                let shouldAddCreate = matchedRequests.count < 3 && !hasWaiting
+                if shouldAddCreate {
+                    dto.append(.create)
+                }
+
+                cell.data = dto
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -628,6 +664,8 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             return
         case .cellInitialPedago(_):
             return
+        case .cellSmallTalk(let userRequests): break
+            return
         }
     }
     
@@ -655,6 +693,8 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableView.automaticDimension
         case .cellInitialPedago(pedagos: let pedagos):
             return 115
+        case .cellSmallTalk(let userRequests):
+            return 200
         }
     }
 }
@@ -665,6 +705,19 @@ extension HomeV2ViewController {
         HomeService.getNotificationsCount { count, error in
             self.notificationCount = count ?? 0
             self.getMyGroups()
+        }
+    }
+    
+    func getUserSmallTalkRequests() {
+        SmallTalkService.listUserSmallTalkRequests { requests, error in
+            if let requests = requests {
+                self.userSmallTalkRequests = requests
+            } else {
+                self.userSmallTalkRequests = []
+            }
+            DispatchQueue.main.async {
+                self.configureDTO()
+            }
         }
     }
     
@@ -712,7 +765,7 @@ extension HomeV2ViewController {
               self.initialPedagos.append(pedagoRead)
             }
           }
-          self.configureDTO()
+            self.getUserSmallTalkRequests()
         }
       }
     

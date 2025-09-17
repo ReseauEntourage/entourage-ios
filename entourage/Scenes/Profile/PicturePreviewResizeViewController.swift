@@ -25,7 +25,8 @@ class PicturePreviewResizeViewController: BasePopViewController {
     var currentImage:UIImage? = nil
     weak var delegate:TakePhotoDelegate? = nil
     let MaxImageSize:CGFloat = 300
-    
+    var isSmallTalkMode: Bool = false
+
     var isFromProfile = false
     var isFromDeepLink = false
     var pictureSettingDelegate:ImageReUpLoadDelegate?
@@ -128,14 +129,25 @@ class PicturePreviewResizeViewController: BasePopViewController {
     
     //MARK: - IBActions -
     @IBAction func action_validate(_ sender: Any) {
-        if isFromProfile {
-            self.updateUserPhoto()
-            
+        guard let processedImage = self.processImage() else { return }
+
+        // 🔸 Toujours notifier immédiatement (optimiste)
+        delegate?.updatePhoto(image: processedImage)
+
+        // 🔸 Upload async, mais on a déjà prévenu le delegate
+        IHProgressHUD.show()
+        PictureUploadS3Service.prepareUploadWith(image: processedImage) { [weak self] isOk in
+            guard let self = self else { return }
+
+            if isOk {
+                self.pictureSettingDelegate?.reloadOnImageUpdate()
+                self.navigationController?.popViewController(animated: true)
+                IHProgressHUD.dismiss()
+            } else {
+                IHProgressHUD.showError(withStatus: "user_photo_change_error".localized)
+            }
         }
-        else {
-            delegate?.updatePhoto(image: self.processImage())
-            self.navigationController?.popViewController(animated: true)
-        }
+        
     }
 }
 

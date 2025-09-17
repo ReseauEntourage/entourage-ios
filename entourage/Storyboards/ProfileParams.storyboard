@@ -3027,23 +3027,52 @@
                                             <constraint firstItem="uoc-hq-wxu" firstAttribute="top" secondItem="pJK-vW-xqc" secondAttribute="bottom" constant="10" id="suR-fx-kZN"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rv2-Jx-G3f">
+                                        <rect key="frame" x="20" y="768" width="86" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="JpP-Xz-HV9"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIW-7y-h6Q">
+                                        <rect key="frame" x="308" y="768" width="86" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Md2-Nx-pgk"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="ecP-iS-JTN">
+                                        <rect key="frame" x="20" y="68" width="374" height="4"/>
+                                        <color key="tintColor" name="green_logout"/>
+                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="8Le-rZ-G7H" firstAttribute="leading" secondItem="fh7-cq-kU1" secondAttribute="leading" constant="45" id="2oY-lx-Rhy"/>
                                     <constraint firstItem="k8O-nR-Nwi" firstAttribute="centerX" secondItem="fh7-cq-kU1" secondAttribute="centerX" id="9Qv-hc-BAx"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rv2-Jx-G3f" secondAttribute="bottom" constant="30" id="Bys-Wi-neq"/>
                                     <constraint firstItem="k8O-nR-Nwi" firstAttribute="top" secondItem="KAK-KB-Vsh" secondAttribute="bottom" constant="50" id="EtO-oC-Sro"/>
                                     <constraint firstItem="8Le-rZ-G7H" firstAttribute="top" secondItem="k8O-nR-Nwi" secondAttribute="bottom" constant="50" id="GSo-od-nJx"/>
+                                    <constraint firstAttribute="trailing" secondItem="JIW-7y-h6Q" secondAttribute="trailing" constant="20" id="KsV-dD-Cmy"/>
                                     <constraint firstAttribute="trailing" secondItem="qJ4-nq-N9c" secondAttribute="trailing" constant="32" id="M0G-kD-Ftg"/>
+                                    <constraint firstItem="ecP-iS-JTN" firstAttribute="leading" secondItem="fh7-cq-kU1" secondAttribute="leading" constant="20" id="Tji-Xg-Hzm"/>
                                     <constraint firstAttribute="trailing" secondItem="TfL-Ny-vvl" secondAttribute="trailing" id="UFJ-Ro-RHr"/>
+                                    <constraint firstAttribute="trailing" secondItem="ecP-iS-JTN" secondAttribute="trailing" constant="20" id="eNU-YE-IgC"/>
                                     <constraint firstItem="qJ4-nq-N9c" firstAttribute="leading" secondItem="fh7-cq-kU1" secondAttribute="leading" constant="32" id="fkx-J0-ip4"/>
                                     <constraint firstItem="KAK-KB-Vsh" firstAttribute="top" secondItem="qJ4-nq-N9c" secondAttribute="bottom" constant="15" id="hOE-RE-R6D"/>
                                     <constraint firstItem="qJ4-nq-N9c" firstAttribute="top" secondItem="TfL-Ny-vvl" secondAttribute="bottom" constant="32" id="heZ-jp-Gp4"/>
+                                    <constraint firstAttribute="bottom" secondItem="JIW-7y-h6Q" secondAttribute="bottom" constant="30" id="k9g-yK-HFV"/>
                                     <constraint firstItem="TfL-Ny-vvl" firstAttribute="leading" secondItem="fh7-cq-kU1" secondAttribute="leading" id="nba-B9-XUi"/>
                                     <constraint firstAttribute="trailing" secondItem="8Le-rZ-G7H" secondAttribute="trailing" constant="45" id="oMM-lt-9XR"/>
                                     <constraint firstItem="KAK-KB-Vsh" firstAttribute="leading" secondItem="qJ4-nq-N9c" secondAttribute="leading" id="qf7-BL-e0I"/>
                                     <constraint firstItem="KAK-KB-Vsh" firstAttribute="trailing" secondItem="qJ4-nq-N9c" secondAttribute="trailing" id="qs6-jK-EWA"/>
                                     <constraint firstItem="TfL-Ny-vvl" firstAttribute="top" secondItem="fh7-cq-kU1" secondAttribute="top" id="r5M-cZ-OBx"/>
+                                    <constraint firstItem="ecP-iS-JTN" firstAttribute="top" secondItem="TfL-Ny-vvl" secondAttribute="bottom" id="sk2-4K-WGn"/>
+                                    <constraint firstItem="Rv2-Jx-G3f" firstAttribute="leading" secondItem="fh7-cq-kU1" secondAttribute="leading" constant="20" id="x2z-sG-hvQ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -3060,11 +3089,14 @@
                     <connections>
                         <outlet property="ui_bt_import_gallery" destination="pJK-vW-xqc" id="tEG-fs-tTE"/>
                         <outlet property="ui_bt_take_photo" destination="uoc-hq-wxu" id="Uhw-80-jov"/>
+                        <outlet property="ui_btn_smalltalk_continu" destination="JIW-7y-h6Q" id="D2k-Sn-DOO"/>
+                        <outlet property="ui_btn_smalltalk_previous" destination="Rv2-Jx-G3f" id="Nbw-Qh-a34"/>
                         <outlet property="ui_constraint_main_view_top" destination="kHp-Vg-voK" id="oNk-UL-jFU"/>
                         <outlet property="ui_constraint_title_top" destination="heZ-jp-Gp4" id="fgA-FN-HxS"/>
                         <outlet property="ui_iv_profile" destination="k8O-nR-Nwi" id="bgH-He-FdR"/>
                         <outlet property="ui_label_description" destination="KAK-KB-Vsh" id="G9g-VN-zF5"/>
                         <outlet property="ui_label_title" destination="qJ4-nq-N9c" id="jJ7-Ib-MHg"/>
+                        <outlet property="ui_progress_view" destination="ecP-iS-JTN" id="kPU-cC-eQG"/>
                         <outlet property="ui_top_view" destination="TfL-Ny-vvl" id="jHT-U9-yNU"/>
                         <outlet property="ui_view_container" destination="fh7-cq-kU1" id="UZc-kN-eZd"/>
                     </connections>
@@ -4340,6 +4372,9 @@
         </namedColor>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="green_logout">
+            <color red="0.16862745098039217" green="0.72941176470588232" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="grey_light">
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

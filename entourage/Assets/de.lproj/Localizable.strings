@@ -1724,6 +1724,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_conversation" = "Veranstaltungsgespräch anzeigen";
 "event_conv_filter_all" = "Alle";
 "event_conv_filter_discussions" = "Diskussionen";
+"event_conv_filter_smalltalks" = "Gute Stimmung";
+
 "event_conv_filter_events" = "Veranstaltungen";
 "event_discut_title" = "Finden Sie hier alle Informationen zum Event";
 "event_button_add_calendar" = "Zum Kalender hinzufügen";

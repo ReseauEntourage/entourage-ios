@@ -381,3 +381,21 @@ extension String {
     }
 }
 
+
+extension UIView {
+    func parentCollectionView() -> UICollectionView? {
+        var view = self.superview
+        while view != nil {
+            if let collectionView = view as? UICollectionView {
+                return collectionView
+            }
+            view = view?.superview
+        }
+        return nil
+    }
+
+    func indexPathInCollectionView() -> IndexPath? {
+        guard let collectionView = parentCollectionView() else { return nil }
+        return collectionView.indexPath(for: self as! UICollectionViewCell)
+    }
+}

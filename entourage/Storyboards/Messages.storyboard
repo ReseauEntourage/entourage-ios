@@ -296,6 +296,15 @@
                                             <constraint firstAttribute="height" constant="68" id="Th1-jG-T9b"/>
                                         </constraints>
                                     </view>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiX-Wb-u2e">
+                                        <rect key="frame" x="306" y="14" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="9uY-Mu-oCe"/>
+                                            <constraint firstAttribute="width" constant="40" id="bhz-g1-Qvs"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="ic_camera"/>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ft8-DI-A89">
                                         <rect key="frame" x="356" y="14" width="40" height="40"/>
                                         <constraints>
@@ -309,7 +318,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMd-0r-8DI">
-                                        <rect key="frame" x="60" y="19" width="294" height="30"/>
+                                        <rect key="frame" x="60" y="19" width="214" height="30"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <connections>
                                             <action selector="action_show_user:" destination="l3V-U8-gfv" eventType="touchUpInside" id="DTu-l8-N5l"/>
@@ -778,6 +787,8 @@ L2</string>
                                     <constraint firstItem="8wX-KB-efG" firstAttribute="top" secondItem="Jpq-Gp-ntZ" secondAttribute="bottom" id="7zi-wI-boD"/>
                                     <constraint firstItem="8wX-KB-efG" firstAttribute="leading" secondItem="4TP-kv-PK9" secondAttribute="leading" id="8rB-eG-JeC"/>
                                     <constraint firstAttribute="trailing" secondItem="Jpq-Gp-ntZ" secondAttribute="trailing" id="9c1-wA-G8x"/>
+                                    <constraint firstItem="TiX-Wb-u2e" firstAttribute="top" secondItem="ft8-DI-A89" secondAttribute="top" id="BRt-di-5GM"/>
+                                    <constraint firstItem="ft8-DI-A89" firstAttribute="leading" secondItem="TiX-Wb-u2e" secondAttribute="trailing" constant="10" id="EgS-8a-P6g"/>
                                     <constraint firstAttribute="bottom" secondItem="ezL-qH-Mp6" secondAttribute="bottom" constant="20" id="IwX-vu-rvA"/>
                                     <constraint firstItem="ft8-DI-A89" firstAttribute="centerY" secondItem="Jpq-Gp-ntZ" secondAttribute="centerY" id="Kbd-Bq-6Ge"/>
                                     <constraint firstItem="Tp1-wD-wOr" firstAttribute="leading" secondItem="4TP-kv-PK9" secondAttribute="leading" id="PbA-tE-ITT"/>
@@ -788,7 +799,7 @@ L2</string>
                                     <constraint firstItem="gxf-PD-bKd" firstAttribute="centerY" secondItem="4TP-kv-PK9" secondAttribute="centerY" id="Ttg-xS-R4v"/>
                                     <constraint firstAttribute="trailing" secondItem="Tp1-wD-wOr" secondAttribute="trailing" id="WiY-mb-5G9"/>
                                     <constraint firstItem="mMd-0r-8DI" firstAttribute="centerY" secondItem="Jpq-Gp-ntZ" secondAttribute="centerY" id="avi-YP-F2f"/>
-                                    <constraint firstItem="mMd-0r-8DI" firstAttribute="trailing" secondItem="Jpq-Gp-ntZ" secondAttribute="trailing" constant="-60" id="bTF-Wg-T0P"/>
+                                    <constraint firstItem="mMd-0r-8DI" firstAttribute="trailing" secondItem="Jpq-Gp-ntZ" secondAttribute="trailing" constant="-140" id="bTF-Wg-T0P"/>
                                     <constraint firstItem="Jpq-Gp-ntZ" firstAttribute="leading" secondItem="4TP-kv-PK9" secondAttribute="leading" id="c6J-hZ-wIT"/>
                                     <constraint firstItem="Tp1-wD-wOr" firstAttribute="top" secondItem="8wX-KB-efG" secondAttribute="bottom" id="fpK-5S-7AD"/>
                                     <constraint firstItem="ezL-qH-Mp6" firstAttribute="leading" secondItem="4TP-kv-PK9" secondAttribute="leading" id="k81-xT-KAY"/>
@@ -816,10 +827,12 @@ L2</string>
                     <connections>
                         <outlet property="table_view_mention_height" destination="hwh-F7-FJi" id="sDU-9X-7g4"/>
                         <outlet property="ui_bt_title_user" destination="mMd-0r-8DI" id="glO-SD-L0R"/>
+                        <outlet property="ui_btn_camera" destination="TiX-Wb-u2e" id="et3-Cf-4q6"/>
                         <outlet property="ui_constraint_bottom_view_Tf" destination="IwX-vu-rvA" id="5Id-t4-Sa6"/>
                         <outlet property="ui_constraint_tableview_top_margin" destination="Ten-nN-dXR" id="AIH-t3-Ias"/>
                         <outlet property="ui_constraint_tableview_top_top" destination="fpK-5S-7AD" id="jun-mN-ZNG"/>
                         <outlet property="ui_iv_bt_send" destination="lHk-Qc-MrX" id="RWh-i9-mWj"/>
+                        <outlet property="ui_iv_event" destination="Glz-SJ-tXd" id="5fX-ip-rs6"/>
                         <outlet property="ui_label_event_discut" destination="G1n-dZ-oJv" id="1Jq-TW-DKm"/>
                         <outlet property="ui_subtitle_new_conv" destination="y0I-Ty-OBM" id="8YZ-VP-cjW"/>
                         <outlet property="ui_tableview" destination="Tp1-wD-wOr" id="ggU-e3-Xgb"/>
@@ -1406,6 +1419,7 @@ L2</string>
         <image name="header_orange_light" width="392" height="416"/>
         <image name="ic_button_retry_red" width="10" height="11"/>
         <image name="ic_calendar_light" width="14" height="14"/>
+        <image name="ic_camera" width="25" height="24"/>
         <image name="ic_close_orange_v8" width="20" height="20"/>
         <image name="ic_messages_top" width="75" height="66"/>
         <image name="ic_no_message_neighborhood" width="308" height="144"/>

@@ -67,6 +67,8 @@ struct NotifInApp:Codable {
             return .contribution
         case "solicitation":
             return .solicitation
+        case "smalltalk":
+            return .smallTalk
         case "poi":
             return .poi
         case "webview":

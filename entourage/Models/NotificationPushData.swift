@@ -40,6 +40,7 @@ enum InstanceType:String {
     case partners
     case neighborhood_post
     case outing_post
+    case smalltalk
     case none
 
     
@@ -56,6 +57,7 @@ enum InstanceType:String {
         case "contributions","contribution": return .contributions
         case "solicitations", "solicitation": return .solicitations
         case "conversations","conversation": return .conversations
+        case "smalltalk": return .smalltalk
         case "partners": return .partners
         default: return .none
         }

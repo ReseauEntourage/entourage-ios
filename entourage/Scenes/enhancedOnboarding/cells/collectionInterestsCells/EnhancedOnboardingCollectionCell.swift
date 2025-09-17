@@ -26,6 +26,7 @@ class EnhancedOnboardingCollectionCell: UITableViewCell {
         collectionView.register(UINib(nibName: "InterestsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "InterestsCollectionViewCell")
     }
     
+    
     func setItems(_ items: [OnboardingChoice], selectedIds: Set<String>) {
         self.items = items
         self.selectedIds = selectedIds
