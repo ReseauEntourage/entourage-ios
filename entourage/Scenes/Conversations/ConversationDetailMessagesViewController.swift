@@ -216,6 +216,9 @@ class ConversationDetailMessagesViewController: UIViewController {
             ui_view_new_conversation.backgroundColor = UIColor.white
             ui_title_new_conv.text = ""
             ui_subtitle_new_conv.text = ""
+            let tapCharte = UITapGestureRecognizer(target: self, action: #selector(handleEventViewTap))
+            ui_view_event_discut.addGestureRecognizer(tapCharte)
+            ui_view_event_discut.isUserInteractionEnabled = true
         } else {
             ui_constraint_tableview_top_margin.constant = 0
             ui_view_new_conversation.backgroundColor = UIColor.appBeige
@@ -235,13 +238,14 @@ class ConversationDetailMessagesViewController: UIViewController {
                 ui_subtitle_new_conv.text = ""
                 ui_label_event_discut.text = "small_talk_btn_charte".localized
                 ui_iv_event.image = UIImage(named: "ic_charte")
+                let tapCharte = UITapGestureRecognizer(target: self, action: #selector(handleCharteTapped))
+                ui_view_event_discut.addGestureRecognizer(tapCharte)
+                ui_view_event_discut.isUserInteractionEnabled = true
+
             } else {
                 ui_view_event_discut.isHidden = true
             }
         }
-        let tapCharte = UITapGestureRecognizer(target: self, action: #selector(handleCharteTapped))
-        ui_view_event_discut.addGestureRecognizer(tapCharte)
-        ui_view_event_discut.isUserInteractionEnabled = true
 
         ui_textview_message.typingAttributes = [
             .font: UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15),
@@ -403,24 +407,23 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.parentDelegate = delegate
     }
     private func fetchSmallTalkData() {
-        DispatchQueue.main.async {
-            IHProgressHUD.show()
-        }
+        if isLoading { return }
+        isLoading = true
+
+        DispatchQueue.main.async { IHProgressHUD.show() }
 
         SmallTalkService.getSmallTalk(id: smallTalkId) { smallTalk, error in
-            
             guard let smallTalk = smallTalk else {
-                DispatchQueue.main.async {
-                    IHProgressHUD.dismiss()
-                }
+                DispatchQueue.main.async { IHProgressHUD.dismiss() }
+                self.isLoading = false
                 return
             }
-            self.meetUrl = smallTalk.meeting_url ?? ""
-            self.uuidv2 = smallTalk.uuid_v2
 
             DispatchQueue.main.async {
+                self.meetUrl = smallTalk.meeting_url ?? ""
+                self.uuidv2 = smallTalk.uuid_v2
                 let displayTitle = self.generateSmallTalkTitle(from: smallTalk.members)
-                self.currentMessageTitle = displayTitle // si tu veux le stocker
+                self.currentMessageTitle = displayTitle
                 self.ui_top_view.populateCustom(
                     title: displayTitle,
                     titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
@@ -433,30 +436,38 @@ class ConversationDetailMessagesViewController: UIViewController {
                     isClose: false,
                     marginLeftButton: nil
                 )
-                if self.meetUrl == "" {
-                    self.ui_btn_camera.isHidden = true
-                }else{
-                    self.ui_btn_camera.isHidden = false
-                }
+                self.ui_btn_camera.isHidden = self.meetUrl.isEmpty
                 self.currentConversation = Conversation(from: smallTalk)
                 self.currentUserId = UserDefaults.currentUser?.sid ?? 0
                 self.isOneToOne = false
                 self.updateInputInfos()
             }
 
-            SmallTalkService.listMessages(id: self.smallTalkId) { messages, error in
+            SmallTalkService.listMessages(id: self.smallTalkId, page: self.currentPage, per: self.numberOfItemsForWS) { messages, _ in
                 DispatchQueue.main.async {
                     IHProgressHUD.dismiss()
+                    self.isLoading = false
+
                     guard let messages = messages else { return }
-                    self.messages = messages
+
+                    if self.currentPage > 1 {
+                        self.messages.append(contentsOf: messages)
+                    } else {
+                        self.messages = messages
+                    }
+
                     self.buildConversationCellDTOs()
                     self.ui_view_empty.isHidden = !self.conversationCellDTOs.isEmpty
                     self.ui_tableview.reloadData()
-                    self.scrollToBottomIfNeeded()
+
+                    if self.currentPage == 1 {
+                        self.scrollToBottomIfNeeded()
+                    }
                 }
             }
         }
     }
+
 
 
     private func scrollToBottomIfNeeded() {
@@ -908,7 +919,11 @@ class ConversationDetailMessagesViewController: UIViewController {
             showUser(userId: currentUserId)
         }else{
             if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
-                vc.conversationId = self.currentConversation?.uid
+                if(isSmallTalkMode){
+                    vc.setupFromSmallTalk(smallTalkId: smallTalkId)
+                }else{
+                    vc.conversationId = self.currentConversation?.uid
+                }
                 vc.modalPresentationStyle = .overCurrentContext
                 self.present(vc, animated: true)
             }
@@ -1208,10 +1223,13 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
         if isLoading { return }
         if tableView == ui_tableview_mentions { return }
 
-        // On relance un getMessages si on atteint le nbOfItemsBeforePagingReload
         if indexPath.row == nbOfItemsBeforePagingReload && messages.count >= numberOfItemsForWS * currentPage {
             self.currentPage += 1
-            self.getMessages()
+            if isSmallTalkMode {
+                self.fetchSmallTalkData()
+            } else {
+                self.getMessages()
+            }
         }
     }
 }
@@ -1222,12 +1240,19 @@ extension ConversationDetailMessagesViewController: MJNavBackViewDelegate {
         if type == "outing" {
             handleEventViewTap()
         } else {
+            
             if let vc = storyboard?.instantiateViewController(withIdentifier: "list_membersVC") as? ConversationListMembersViewController {
-                vc.conversationId = self.currentConversation?.uid
+                if(isSmallTalkMode){
+                    vc.setupFromSmallTalk(smallTalkId: smallTalkId)
+                }else{
+                    vc.conversationId = self.currentConversation?.uid
+                }
                 vc.modalPresentationStyle = .currentContext
                 self.present(vc, animated: true)
             }
         }
+        
+        
     }
     
     func goBack() {

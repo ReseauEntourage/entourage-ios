@@ -149,24 +149,36 @@ struct SmallTalkService: ParsingDataCodable {
     }
 
     // MARK: - Lister les participants d’un SmallTalk
-    static func listParticipants(id: String, completion: @escaping ([UserLightNeighborhood]?, EntourageNetworkError?) -> Void) {
+    static func listParticipants(
+        id: String,
+        page: Int = 1,
+        per: Int = 20,
+        completion: @escaping ([UserLightNeighborhood]?, Int?, EntourageNetworkError?) -> Void
+    ) {
         guard let token = UserDefaults.token else { return }
-        let endpoint = "smalltalks/\(id)/users?token=\(token)"
-
+        let endpoint = "smalltalks/\(id)/users?page=\(page)&per=\(per)&token=\(token)"
+        
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, error in
             guard let data = data, error == nil else {
-                completion(nil, error)
+                completion(nil, nil, error)
                 return
             }
             let users: [UserLightNeighborhood]? = self.parseDatas(data: data, key: "users")
-            completion(users, nil)
+            let count = users?.count ?? 0
+            // s’il y a autant d’éléments que ‘per’, on suppose qu’il reste une page suivante
+            let nextPage: Int? = (count == per) ? page + 1 : nil
+            completion(users, nextPage, nil)
         }
     }
 
-    // MARK: - Lister les messages du SmallTalk
-    static func listMessages(id: String, completion: @escaping ([PostMessage]?, EntourageNetworkError?) -> Void) {
+    static func listMessages(
+        id: String,
+        page: Int = 1,
+        per: Int = 50,
+        completion: @escaping ([PostMessage]?, EntourageNetworkError?) -> Void
+    ) {
         guard let token = UserDefaults.token else { return }
-        let endpoint = "smalltalks/\(id)/chat_messages?token=\(token)"
+        let endpoint = "smalltalks/\(id)/chat_messages?page=\(page)&per=\(per)&token=\(token)"
 
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, error in
             guard let data = data, error == nil else {
@@ -224,36 +236,55 @@ struct SmallTalkService: ParsingDataCodable {
         }
     }
     
-    static func forceMatch(id: Int, completion: @escaping (SmallTalkMatchResponse?, EntourageNetworkError?) -> Void) {
-        guard let token = UserDefaults.token else { return }
-        let endpoint = "user_smalltalks/force_match?token=\(token)&user_smalltalk_id=\(id)"
+    /// Force la création du match, avec option d'envoyer un paramètre `unmatch`
+       static func forceMatch(
+           id: Int,
+           unmatch: String?,
+           completion: @escaping (SmallTalkMatchResponse?, EntourageNetworkError?) -> Void
+       ) {
+           guard let token = UserDefaults.token else { return }
 
-        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { data, response, error in
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 400,httpResponse.statusCode == 401 || httpResponse.statusCode == 403  {
-                var err = EntourageNetworkError()
-                err.code = "400"
-                err.message = "Groupe non disponible."
-                completion(nil, err)
-                return
-            }
+           // Construire l'URL avec token, id et éventuellement unmatch
+           var endpoint = "user_smalltalks/force_match?token=\(token)&user_smalltalk_id=\(id)"
+           if let u = unmatch, !u.isEmpty {
+               endpoint += "&unmatch=\(u)"
+           }
 
-            guard let data = data, error == nil else {
-                completion(nil, error)
-                return
-            }
+           NetworkManager.sharedInstance.requestPost(
+               endPoint: endpoint,
+               headers: nil,
+               body: nil
+           ) { data, response, error in
 
-            do {
-                let response = try JSONDecoder().decode(SmallTalkMatchResponse.self, from: data)
-                completion(response, nil)
-            } catch {
-                print("❌ JSON decode error in forceMatch:", error)
-                var err = EntourageNetworkError()
-                err.code = "500"
-                err.message = "Erreur de décodage JSON"
-                completion(nil, err)
-            }
-        }
-    }
+               // Gestion des statuts 400 / 401 / 403
+               if let http = response as? HTTPURLResponse,
+                  (http.statusCode == 400 || http.statusCode == 401 || http.statusCode == 403) {
+                   var err = EntourageNetworkError()
+                   err.code = "400"
+                   err.message = "Groupe non disponible."
+                   completion(nil, err)
+                   return
+               }
+
+               // Erreur réseau ou pas de data
+               guard let data = data, error == nil else {
+                   completion(nil, error)
+                   return
+               }
+
+               // Décodage JSON
+               do {
+                   let resp = try JSONDecoder().decode(SmallTalkMatchResponse.self, from: data)
+                   completion(resp, nil)
+               } catch {
+                   print("❌ JSON decode error in forceMatch:", error)
+                   var err = EntourageNetworkError()
+                   err.code = "500"
+                   err.message = "Erreur de décodage JSON"
+                   completion(nil, err)
+               }
+           }
+       }
 
     
 }

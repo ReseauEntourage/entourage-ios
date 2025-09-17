@@ -22,6 +22,7 @@ extension UserDefaults {
         static let currentUser = "currentUser"
         static let pushToken = "pushToken"
         static let badge = "badge"
+        static let groupBadge = "groupBadge"
     }
     
     class var temporaryUser: User? {
@@ -78,6 +79,14 @@ extension UserDefaults {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.badge)
+        }
+    }
+    class var groupBadgeCount:Int? {
+        get {
+            return UserDefaults.standard.integer(forKey: Keys.groupBadge)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.groupBadge)
         }
     }
 }

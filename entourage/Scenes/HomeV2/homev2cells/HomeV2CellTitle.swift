@@ -14,6 +14,8 @@ class HomeV2CellTitle:UITableViewCell{
     @IBOutlet weak var ui_label_title: UILabel!
     
     @IBOutlet weak var ui_label_subtitle: UILabel!
+    @IBOutlet weak var height_subtitle: NSLayoutConstraint!
+    //NOTE : if you want to reset the subtitle , just remove the height here and in xib
     //VARIABLE
     class var identifier: String {
         return String(describing: self)

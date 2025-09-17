@@ -215,7 +215,23 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
         let dto = dataSource[indexPath.row]
 
         switch dto {
-        case .notificationRequest, .filter(_):
+        case .filter(_):
+            return
+            
+        case .notificationRequest:
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                DispatchQueue.main.async {
+                    if granted {
+                        self.notificationsDisabled = false
+                        self.loadConversations(reset: true)
+                    } else {
+                        // Navigation vers l'écran de réglages de notifications dans l'app
+                        let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+                        let vc = sb.instantiateViewController(withIdentifier: "paramsNotifsVC")
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            }
             return
 
         case .conversation(let conversation):

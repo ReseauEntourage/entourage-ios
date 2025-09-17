@@ -145,7 +145,8 @@ class HomeMainViewController: UIViewController {
         guard let _userid = UserDefaults.currentUser?.uuid else {return}
         UserService.getUnreadCountForUser { unreadCount, error in
             if let unreadCount = unreadCount {
-                UserDefaults.badgeCount = unreadCount
+                UserDefaults.badgeCount = unreadCount.0
+                UserDefaults.groupBadgeCount = unreadCount.1
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
             }
         }

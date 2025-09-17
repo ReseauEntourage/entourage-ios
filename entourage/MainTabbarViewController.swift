@@ -126,6 +126,13 @@ class MainTabbarViewController: UITabBarController {
             messagesVC.tabBarItem.badgeValue = nil
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
+        if let badge = UserDefaults.groupBadgeCount, badge > 0 {
+            let newValue = badge > 9 ? "9+" : "\(badge)"
+            groupVC.tabBarItem.badgeValue = newValue
+        }
+        else {
+            groupVC.tabBarItem.badgeValue = nil
+        }
     }
     
     func setupVCs() {
@@ -154,8 +161,7 @@ class MainTabbarViewController: UITabBarController {
         messagesVC.tabBarItem.image = UIImage.init(named: "ic_message_off")?.withRenderingMode(.alwaysOriginal)
         messagesVC.tabBarItem.selectedImage = UIImage.init(named: "ic_message_on")
         messagesVC.tabBarItem.tag = 2
-        messagesVC.tabBarItem.badgeColor = .appOrangeLight
-        
+        //messagesVC.tabBarItem.badgeColor = .appOrangeLight
         
         let _groupVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "home_new_group_vc")
         groupVC = UINavigationController.init(rootViewController: _groupVC)

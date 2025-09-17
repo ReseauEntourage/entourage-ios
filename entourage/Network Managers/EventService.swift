@@ -266,25 +266,29 @@ struct EventService:ParsingDataCodable {
     }
 
     
-    static func getEventUsers(eventId:Int, completion: @escaping (_ users:[UserLightNeighborhood]?, _ error:EntourageNetworkError?) -> Void) {
-        
-        guard let token = UserDefaults.token else {return}
-        var endpoint = kAPIGetEventUsers
-        endpoint = String.init(format: endpoint,"\(eventId)", token)
-        
-        Logger.print("***** url get group event users : \(endpoint)")
+    static func getEventUsers(
+        eventId: Int,
+        page: Int = 1,
+        per: Int = 20,
+        completion: @escaping (_ users: [UserLightNeighborhood]?, _ nextPage: Int?, _ error: EntourageNetworkError?) -> Void
+    ) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = "\(String(format: kAPIGetEventUsers, "\(eventId)", token))&page=\(page)&per=\(per)"
+        Logger.print("***** getEventUsers page \(page): \(endpoint)")
         
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
-            
-            Logger.print("***** return get group event users : \(error)")
-            
-            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
-                DispatchQueue.main.async { completion(nil,  error) }
+            guard let data = data,
+                  error == nil,
+                  let http = resp as? HTTPURLResponse,
+                  http.statusCode < 300
+            else {
+                DispatchQueue.main.async { completion(nil, nil, error) }
                 return
             }
-            Logger.print("***** return get group event users : \(data)")
-            let users:[UserLightNeighborhood]? = self.parseDatas(data: data,key: "users")
-            DispatchQueue.main.async { completion(users,nil) }
+            let list: [UserLightNeighborhood]? = parseDatas(data: data, key: "users")
+            let count = list?.count ?? 0
+            let next = (count == per) ? page + 1 : nil
+            DispatchQueue.main.async { completion(list, next, nil) }
         }
     }
     

@@ -168,22 +168,42 @@ extension SmallTalkAlmostMatchingViewController: UITableViewDataSource, UITableV
 
         cell.configure(with: data)
 
+        // 👉 On calcule ici tous les critères non-matchés
         cell.onJoinTapped = { [weak self] in
             guard let self = self else { return }
 
-            SmallTalkService.forceMatch(id: data.userSmallTalkId) { response, error in
+            // ➊ Construction de la liste des "unmatches"
+            var unmatches = [String]()
+            if !data.hasMatchedFormat    { unmatches.append("match_format")  }
+            if !data.hasMatchedGender    { unmatches.append("match_gender")  }
+            if !data.hasMatchedLocality  { unmatches.append("match_locality")}
+
+            // ➋ Chaîne finale ou nil si tout match
+            let unmatchParam = unmatches.isEmpty ? nil : unmatches.joined(separator: ",")
+
+            // ➌ Appel réseau avec le paramètre unmatch
+            SmallTalkService.forceMatch(
+                id: data.userSmallTalkId,
+                unmatch: unmatchParam
+            ) { response, error in
                 DispatchQueue.main.async {
-                    if let response = response, response.match == true, let smallTalkId = response.smalltalk_id {
+                    if let response = response,
+                       response.match == true,
+                       let smallTalkId = response.smalltalk_id {
                         self.openConversation(for: smallTalkId)
                     } else {
+                        // Gestion des erreurs HTTP / réseau / JSON
                         let message: String
                         if let err = error, err.code == "400" {
                             message = err.message ?? "Ce groupe n'est plus disponible."
                         } else {
                             message = "Impossible de rejoindre ce groupe."
                         }
-
-                        let alert = UIAlertController(title: "Erreur", message: message, preferredStyle: .alert)
+                        let alert = UIAlertController(
+                            title: "Erreur",
+                            message: message,
+                            preferredStyle: .alert
+                        )
                         alert.addAction(UIAlertAction(title: "OK", style: .default))
                         self.present(alert, animated: true)
                     }

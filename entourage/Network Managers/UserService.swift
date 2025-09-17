@@ -381,7 +381,7 @@ struct UserService {
         }
     }
     
-    static func getUnreadCountForUser(completion: @escaping (_ unreadCount:Int?, _ error:EntourageNetworkError?) -> Void) {
+    static func getUnreadCountForUser(completion: @escaping (_ unreadCount:(Int,Int)?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIUnreadCount
@@ -402,20 +402,22 @@ struct UserService {
         }
     }
     
-    static func parsingUnreadCount(data:Data) -> (Int) {
+    static func parsingUnreadCount(data:Data) -> (Int,Int) {
         var unreadCount = 0
+        var unreadCounGroup = 0
         
         do {
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] {
                 if let _jsonUser = json["user"] as? [String:AnyObject], let dataUser = try? JSONSerialization.data(withJSONObject: _jsonUser) {
                     unreadCount = _jsonUser["unread_count"] as! Int
+                    unreadCounGroup = _jsonUser["unread_neighborhoods_count"] as! Int
                 }
             }
         }
         catch {
             Logger.print("Error parsing \(error)")
         }
-        return (unreadCount)
+        return (unreadCount,unreadCounGroup)
     }
     
     //MARK: - Parsing -

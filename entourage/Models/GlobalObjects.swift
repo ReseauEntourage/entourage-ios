@@ -59,6 +59,7 @@ struct PostMessage:Codable {
     var reactions: [Reaction]?
     var reactionId:Int? = 0
     var survey: Survey?
+    var messageType:String? = ""
     var surveyResponse: [Bool]? = []
     var autoPostFrom: AutoPostFrom? // Champ pour l'auto-post
 
@@ -90,6 +91,7 @@ struct PostMessage:Codable {
         case survey
         case surveyResponse = "survey_response"
         case autoPostFrom = "auto_post_from"
+        case messageType = "message_type"
 
     }
     

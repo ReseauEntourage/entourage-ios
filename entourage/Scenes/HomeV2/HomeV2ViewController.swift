@@ -439,11 +439,11 @@ class HomeV2ViewController: UIViewController {
             }
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
         }
-        if allGroups.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
-            tableDTO.append(.cellGroup(groups: allGroups))
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
-        }
+//        if allGroups.count > 0 {
+//            tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
+//            tableDTO.append(.cellGroup(groups: allGroups))
+//            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
+//        }
         
         tableDTO.append(.cellTitle(title: "home_v2_title_map".localized, subtitle: "home_v2_subtitle_map".localized))
         tableDTO.append(.cellMap)
@@ -744,7 +744,8 @@ extension HomeV2ViewController {
         guard let _userid = UserDefaults.currentUser?.uuid else {return}
         UserService.getUnreadCountForUser { unreadCount, error in
             if let unreadCount = unreadCount {
-                UserDefaults.badgeCount = unreadCount
+                UserDefaults.badgeCount = unreadCount.0
+                UserDefaults.groupBadgeCount = unreadCount.1
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
             }
         }
