@@ -97,3 +97,9 @@ extension UILabel {
         self.font = UIFont(name: "NunitoSans-Regular", size: size) ?? UIFont.systemFont(ofSize: size)
     }
 }
+
+extension UITextField {
+    func setFontBody(size: CGFloat) {
+        self.font = UIFont(name: "NunitoSans-Regular", size: size) ?? UIFont.systemFont(ofSize: size)
+    }
+}

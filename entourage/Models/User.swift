@@ -40,7 +40,9 @@ struct User: Codable {
     var unreadCount:Int = 0
     var gender:String? = ""
     var permissions:UserPermissions? = UserPermissions()
-    
+    var discoverySource: String? = nil
+    var company: String? = nil
+    var event: String? = nil
     var birthday:String? = nil
     var radiusDistance:Int? = 0
     

@@ -11,31 +11,57 @@ import SimpleKeychain
 struct AuthService: ParsingDataCodable {
     //MARK: - Create user account -
     
-    static func createAccountWith(user:User,completion: @escaping (_ phone:String?, _ error:EntourageNetworkError?) -> Void) {
-        
-        let parameters = ["user" : ["phone": user.phone , "first_name": user.firstname, "last_name": user.lastname]]
+    static func createAccountWith(user: User, completion: @escaping (_ phone: String?, _ error: EntourageNetworkError?) -> Void) {
+        // Déclarer le sous-dictionnaire "user" explicitement
+        var userParameters: [String: Any] = [
+            "phone": user.phone ?? "",
+            "first_name": user.firstname,
+            "last_name": user.lastname,
+            "email": user.email ?? "",
+            "newsletter_subscription": user.hasConsent
+        ]
+
+        if let gender = user.gender {
+            userParameters["gender"] = gender
+        }
+
+        if let birthday = user.birthday {
+            userParameters["birthday"] = birthday
+        }
+
+        if let discoverySource = user.discoverySource {
+            userParameters["discovery_source"] = discoverySource
+        }
+
+        if user.discoverySource == "Sensibilisation entreprise" {
+            if let company = user.company {
+                userParameters["company"] = company
+            }
+            if let event = user.event {
+                userParameters["event"] = event
+            }
+        }
+
+        let parameters: [String: Any] = ["user": userParameters]
+
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-        
         Logger.print("Datas passed \(parameters)")
-        
-        Logger.print("Json Post create user")
-        
+
         NetworkManager.sharedInstance.requestPost(endPoint: kAPICreateAccount, headers: nil, body: bodyData) { data, resp, error in
-            
             Logger.print("Response Post update User: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
-            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 Logger.print("***** error update address with placeid - \(String(describing: error))")
                 DispatchQueue.main.async { completion(nil, error) }
                 return
             }
-            
-            let userLight:[String:String]? = self.parseData(data: data, key: "user")
-            let phone:String? = userLight?["phone"] as? String
-            
-            DispatchQueue.main.async { completion(phone,nil) }
+
+            let userLight: [String: String]? = self.parseData(data: data, key: "user")
+            let phone: String? = userLight?["phone"]
+            DispatchQueue.main.async { completion(phone, nil) }
         }
-        
     }
+
+
     
     //MARK: - Login -
     static func postLogin(phone:String,password:String, completion: @escaping (_ user:User?, _ error:EntourageNetworkError?,_ isFirstLogin:Bool) -> Void) {
