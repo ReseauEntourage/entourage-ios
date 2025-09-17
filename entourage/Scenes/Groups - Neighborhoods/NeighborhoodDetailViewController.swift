@@ -74,6 +74,7 @@ class NeighborhoodDetailViewController: UIViewController {
         self.ui_view_full_image.isHidden = true
         self.ui_scrollview.delegate = self
         self.ui_scrollview.maximumZoomScale = 10
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,12 +83,15 @@ class NeighborhoodDetailViewController: UIViewController {
             showCreatePost()
             isShowCreatePost = false
         }
-        self.getNeighborhoodDetail(hasToRefreshLists:true)
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreateEvent), name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromLeave), name: NSNotification.Name(rawValue: kNotificationUpdateFromLeave), object: nil)
         
         let storyboard = UIStoryboard(name: "Neighborhood", bundle: nil) // Remplace "Main" par le nom de ton Storyboard
+        if !isAfterCreation {
+            isAfterCreation = true
+            self.getNeighborhoodDetail(hasToRefreshLists:true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -454,6 +458,7 @@ class NeighborhoodDetailViewController: UIViewController {
     func showCreatePost() {
         let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController  {
+            isAfterCreation = false
             vc.neighborhoodId = self.neighborhoodId
             self.navigationController?.present(vc, animated: true)
         }
