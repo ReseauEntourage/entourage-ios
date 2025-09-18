@@ -168,6 +168,7 @@ class ConversationsMainHomeViewController: UIViewController {
         }
         conv.numberUnreadMessages = membership.numberOfUnreadMessages
         conv.members_count = membership.numberOfPeople
+        conv.imageUrl = membership.imageUrl
         return conv
     }
 

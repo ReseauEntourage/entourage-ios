@@ -112,6 +112,8 @@ struct UniversalLinkManager {
                         // Gérer le cas où la conversion échoue
                     }
                 }
+            }else if pathComponents.contains("chart-event"){
+                
             }
         }
     }

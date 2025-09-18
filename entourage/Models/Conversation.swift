@@ -248,6 +248,7 @@ struct ConversationMembership: Decodable {
     let joinableStatus: String?
     let name: String?
     let subname: String?
+    let imageUrl:String?
     let joinableType: String?
     let joinableId: Int?
     let numberOfPeople: Int?
@@ -260,6 +261,7 @@ struct ConversationMembership: Decodable {
         case joinableStatus      = "joinable_status"
         case name
         case subname
+        case imageUrl            = "image_url"
         case joinableType        = "joinable_type"
         case joinableId          = "joinable_id"
         case numberOfPeople      = "number_of_people"
