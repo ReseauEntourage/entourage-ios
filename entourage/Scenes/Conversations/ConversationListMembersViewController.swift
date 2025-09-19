@@ -208,11 +208,10 @@ extension ConversationListMembersViewController: UITableViewDataSource {
         let isAuthor = user.uid == userCreatorId
         let isParticipating = (user.participateAt != nil) || (user.confirmedAt != nil)
 
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "cell_user",
-            for: indexPath
-        ) as! NeighborhoodUserCell
-
+        let any = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath)
+        print("Dequeued:", type(of: any))
+        guard let cell = any as? NeighborhoodUserCell else { fatalError("Wrong class") }
+        
         // ⬇️ Ici, on passe le droit d’afficher la checkbox selon le rôle du viewer
         cell.populateCell(
             isMe: isMe,

@@ -118,7 +118,7 @@ class NeighborhoodUserCell: UITableViewCell {
             ui_view.isHidden = true
         }
 
-        let canShowCheckbox = (isOrganizer ?? false) && !isMe
+        let canShowCheckbox = ((isOrganizer ?? false) && !isMe) && AppSignableManager.shared.signableEvent && AppSignableManager.shared.signablePermission
         let messageVisible = !canShowCheckbox && showBtMessage && !isMe
 
         checkbox.isHidden = !canShowCheckbox
