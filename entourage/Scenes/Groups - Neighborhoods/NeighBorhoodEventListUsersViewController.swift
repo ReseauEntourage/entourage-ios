@@ -309,8 +309,8 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
 
             let isMe = user.sid == UserDefaults.currentUser?.sid
-            let isParticipating = (user.participateAt != nil) || (user.confirmedAt != nil)
-
+            let isParticipating = (user.participateAt != nil)
+            let isConfirmed = (user.confirmedAt != nil)
             cell.populateCell(
                 isMe: isMe,
                 username: user.displayName,
@@ -320,9 +320,10 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                 delegate: self,
                 position: indexPath.row,              // exact index in tableData
                 reactionType: reactionType,
-                isConfirmed: isParticipating,
-                isOrganizer: viewerCanUseCheckboxes,
-                isCreator: isMe
+                isParticipating: isParticipating,
+                isOrganizer: isConfirmed,
+                isCreator: viewerCanUseCheckboxes,
+                isConfirmed: isConfirmed
             )
             cell.hideSeparatorBarIfIsVote(isVote: self.isFromSurvey)
             return cell

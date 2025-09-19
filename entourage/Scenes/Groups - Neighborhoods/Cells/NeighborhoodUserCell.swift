@@ -27,7 +27,7 @@ class NeighborhoodUserCell: UITableViewCell {
     private(set) var tablePosition: Int = 0
     weak var delegate: NeighborhoodUserCellDelegate?
 
-    // empêche les .valueChanged lors des set programmatiques
+    // Empêche les .valueChanged lors des set programmatiques
     private var suppressChange = false
 
     override func awakeFromNib() {
@@ -37,7 +37,7 @@ class NeighborhoodUserCell: UITableViewCell {
         ui_role.font = ApplicationTheme.getFontNunitoRegular(size: 11)
         ui_role.textColor = .appOrangeLight
 
-        // ⚠️ Tolérance au nil : certaines variantes de prototype peuvent ne pas câbler ui_view / checkbox
+        // Tolérance au nil si la vue n'est pas câblée dans une variante
         ui_view?.clipsToBounds = true
         ui_view?.layer.borderWidth = 1
         ui_view?.layer.borderColor = UIColor(named: "grey_reaction")?.cgColor
@@ -80,6 +80,9 @@ class NeighborhoodUserCell: UITableViewCell {
         ui_view_separator?.isHidden = isVote
     }
 
+    /// - Parameters:
+    ///   - isParticipating: reflète participate_at (checkbox)
+    ///   - isConfirmed: reflète confirmed_at (libellé "Participation confirmée")
     func populateCell(isMe: Bool,
                       username: String,
                       role: String?,
@@ -88,14 +91,20 @@ class NeighborhoodUserCell: UITableViewCell {
                       delegate: NeighborhoodUserCellDelegate,
                       position: Int,
                       reactionType: ReactionType?,
-                      isConfirmed: Bool?,
+                      isParticipating: Bool?,
                       isOrganizer: Bool?,
-                      isCreator: Bool?) {
+                      isCreator: Bool?,
+                      isConfirmed: Bool?) {
 
         self.delegate = delegate
         self.tablePosition = position
 
-        ui_username.text = (isConfirmed ?? false) ? "\(username) - Participation confirmée" : username
+        // Libellé uniquement si confirmed_at != nil
+        if isConfirmed ?? false {
+            ui_username.text = "\(username) - Participation confirmée"
+        } else {
+            ui_username.text = username
+        }
 
         if let r = role, !r.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             ui_role.text = r
@@ -123,6 +132,7 @@ class NeighborhoodUserCell: UITableViewCell {
             ui_view?.isHidden = true
         }
 
+        // La visibilité de la checkbox dépend du rôle + règles signable
         let canShowCheckbox = ((isOrganizer ?? false) && !isMe)
             && AppSignableManager.shared.signableEvent
             && AppSignableManager.shared.signablePermission
@@ -130,9 +140,9 @@ class NeighborhoodUserCell: UITableViewCell {
 
         checkbox?.isHidden = !canShowCheckbox
 
-        // désactive l’événement pendant la mise à jour UI
+        // L'état de la checkbox suit participate_at (et pas confirmed_at)
         suppressChange = true
-        checkbox?.isChecked = isConfirmed ?? false
+        checkbox?.isChecked = isParticipating ?? false
         suppressChange = false
 
         ui_bt_message.isHidden = !messageVisible
