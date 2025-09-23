@@ -248,7 +248,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(
                     title: "neighborhood_users_title".localized,
-                    imageName: "ic_members",
+                    imageName: "ic_user_conv",
                     showArrow: true,
                     showSeparator: true,
                     delegate: self,
@@ -259,7 +259,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(
                     title: "event_params_edit".localized,
-                    imageName: "ic_edit_group",
+                    imageName: "ic_charte",
                     showArrow: true,
                     showSeparator: true,
                     delegate: self,
@@ -282,7 +282,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                     cell.populateCell(
                         title: "event_params_cgu".localized,
-                        imageName: "ic_cgu_group",
+                        imageName: "ic_charte",
                         showArrow: true,
                         showSeparator: true,
                         delegate: self,
@@ -295,7 +295,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                     cell.populateCell(
                         title: "event_params_cgu".localized,
-                        imageName: "ic_cgu_group",
+                        imageName: "ic_charte",
                         showArrow: true,
                         showSeparator: true,
                         delegate: self,
@@ -360,7 +360,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(
                     title: "neighborhood_users_title".localized,
-                    imageName: "ic_members",
+                    imageName: "ic_user_conv",
                     showArrow: true,
                     showSeparator: true,
                     delegate: self,
@@ -371,7 +371,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(
                     title: "event_params_cgu".localized,
-                    imageName: "ic_cgu_group",
+                    imageName: "ic_charte",
                     showArrow: true,
                     showSeparator: true,
                     delegate: self,
@@ -415,7 +415,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(
                     title: "neighborhood_users_title".localized,
-                    imageName: "ic_members",
+                    imageName: "ic_user_conv",
                     showArrow: true,
                     showSeparator: true,
                     delegate: self,
@@ -426,7 +426,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(
                     title: "event_params_cgu".localized,
-                    imageName: "ic_cgu_group",
+                    imageName: "ic_charte",
                     showArrow: true,
                     showSeparator: true,
                     delegate: self,

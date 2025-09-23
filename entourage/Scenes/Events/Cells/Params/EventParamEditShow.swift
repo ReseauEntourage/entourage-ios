@@ -33,13 +33,10 @@ class EventParamEditShow: UITableViewCell {
     ) {
         self.delegate = delegate
         self.cellType = type
-
-        if cellType == .share {
-            ui_image.tintColor = UIColor.appOrange
-        }
-
+        
+        ui_image.tintColor = UIColor.black
         ui_title.text = title
-
+        
         if let imageName = imageName {
             ui_image.image = UIImage(named: imageName)
         }
