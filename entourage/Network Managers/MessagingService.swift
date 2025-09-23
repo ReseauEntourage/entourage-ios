@@ -381,35 +381,35 @@ struct MessagingService:ParsingDataCodable {
     }
     
     // First step: Prepare the upload
-       static func prepareUploadWith(conversationId: Int, image: UIImage, message: String?, completion: @escaping (_ result: Bool) -> Void) {
-           guard let token = UserDefaults.token else {
-               completion(false)
-               return
-           }
+    static func prepareUploadWith(conversationId: Int, image: UIImage, message: String?, completion: @escaping (_ result: Bool) -> Void) {
+        guard let token = UserDefaults.token else {
+            completion(false); return
+        }
 
-           let endpoint = String(format: API_URL_CONVERSATION_PREPARE_IMAGE_POST_UPLOAD, "\(conversationId)", token)
+        let endpoint = String(format: API_URL_CONVERSATION_PREPARE_IMAGE_POST_UPLOAD, "\(conversationId)", token)
 
-           AuthService.prepareUploadPhotoS3(endpoint: endpoint) { json, error in
-               guard let presignedUrl = json?["presigned_url"] as? String,
-                     let uploadKey = json?["upload_key"] as? String else {
-                   completion(false)
-                   return
-               }
+        AuthService.prepareUploadPhotoS3(endpoint: endpoint) { json, error in
+            guard let presignedUrl = json?["presigned_url"] as? String,
+                  let uploadKey = json?["upload_key"] as? String else {
+                completion(false); return
+            }
 
-               self.uploadToS3(urlS3: presignedUrl, image: image) { isOk in
-                   if isOk {
-                       var textMessage = message
-                       print("eho message ", message)
-                       if ((message?.contains("messaging_message_placeholder_discut".localized )) != nil)  {
-                           textMessage = " "
-                       }
-                       self.postWithImageAndText(imageKey: uploadKey, conversationId: conversationId, message: textMessage, completion: completion)
-                   } else {
-                       completion(false)
-                   }
-               }
-           }
-       }
+            self.uploadToS3(urlS3: presignedUrl, image: image) { isOk in
+                if isOk {
+                    let trimmed = message?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                    let placeholder = "messaging_message_placeholder_discut".localized
+                    let safeMessage: String? = (trimmed.isEmpty || trimmed == placeholder) ? nil : trimmed
+
+                    self.postWithImageAndText(imageKey: uploadKey,
+                                              conversationId: conversationId,
+                                              message: safeMessage,
+                                              completion: completion)
+                } else {
+                    completion(false)
+                }
+            }
+        }
+    }
 
        // Second step: Upload to Amazon S3
        private static func uploadToS3(urlS3: String, image: UIImage, completion: @escaping (_ result: Bool) -> Void) {
@@ -439,41 +439,39 @@ struct MessagingService:ParsingDataCodable {
        }
 
        // Third step: Post the message with the image URL
-       private static func postWithImageAndText(imageKey: String, conversationId: Int, message: String?, completion: @escaping (_ result: Bool) -> Void) {
-           guard let token = UserDefaults.token else {
-               completion(false)
-               return
-           }
+    private static func postWithImageAndText(
+        imageKey: String,
+        conversationId: Int,
+        message: String?,
+        completion: @escaping (_ result: Bool) -> Void
+    ) {
+        guard let token = UserDefaults.token else {
+            completion(false); return
+        }
 
-           let endpoint = String(format: kAPIPostConversationMessage, "\(conversationId)", token)
+        let endpoint = String(format: kAPIPostConversationMessage, "\(conversationId)", token)
+        var chatMessage: [String: Any] = ["image_url": imageKey]
 
-           var chatMessage: [String: Any] = [:]
-           if let message = message {
-               chatMessage["content"] = message
-               if message.contains("messaging_message_placeholder_discut".localized){
-                   chatMessage["content"] = " "
-               }
-           }
-           chatMessage["image_url"] = imageKey
+        if let m = message?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !m.isEmpty,
+           !m.contains("messaging_message_placeholder_discut".localized) {
+            // ici seulement si pas vide ET ne contient pas le placeholder
+            chatMessage["content"] = m
+        }
 
-           let parameters = ["chat_message": chatMessage]
-           let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        let parameters = ["chat_message": chatMessage]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
 
-           NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { _, resp, error in
-               if let error = error {
-                   Logger.print("Error posting message: \(error)")
-                   completion(false)
-                   return
-               }
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { _, resp, error in
+            if let http = resp as? HTTPURLResponse, error == nil, http.statusCode < 300 {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
 
-               if let httpResponse = resp as? HTTPURLResponse, httpResponse.statusCode < 300 {
-                   completion(true)
-               } else {
-                   completion(false)
-               }
-           }
-       }
-    
+
     static func getConversationMemberships(
             type: String?,
             page: Int,
