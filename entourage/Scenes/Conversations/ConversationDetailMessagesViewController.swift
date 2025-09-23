@@ -518,7 +518,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             iv.leadingAnchor.constraint(equalTo: overlay.leadingAnchor),
             iv.trailingAnchor.constraint(equalTo: overlay.trailingAnchor),
             iv.topAnchor.constraint(equalTo: overlay.topAnchor),
-            iv.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5)
+            iv.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4)
         ])
 
         // 3. Bouton "fermer" (en haut à droite)
