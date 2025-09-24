@@ -12,45 +12,79 @@ struct AuthService: ParsingDataCodable {
     //MARK: - Create user account -
     
     static func createAccountWith(user: User, completion: @escaping (_ phone: String?, _ error: EntourageNetworkError?) -> Void) {
-        // Déclarer le sous-dictionnaire "user" explicitement
+
+        // Helpers
+        func nonEmpty(_ s: String?) -> String? {
+            guard let t = s?.trimmingCharacters(in: .whitespacesAndNewlines), !t.isEmpty else { return nil }
+            return t
+        }
+        func mapGender(_ g: String?) -> String? {
+            guard let g = nonEmpty(g) else { return nil }
+            // Adapte ces mappings si ton backend attend autre chose
+            switch g.lowercased() {
+            case "homme": return "male"
+            case "femme": return "female"
+            case "Autre", "secret", "non_binary": return "secret"
+            default: return nil // si inconnu, n'envoie pas
+            }
+        }
+
+        // Champs obligatoires (jamais vides ici grâce à ta validation UI)
         var userParameters: [String: Any] = [
             "phone": user.phone ?? "",
             "first_name": user.firstname,
-            "last_name": user.lastname,
-            "email": user.email ?? "",
-            "newsletter_subscription": user.hasConsent
+            "last_name": user.lastname
         ]
 
-        if let gender = user.gender {
+        // Email facultatif : seulement si non vide
+        if let email = nonEmpty(user.email) {
+            userParameters["email"] = email
+        }
+
+        // Consent facultatif : n’envoie pas la clé si nil, sinon true/false explicite
+        if let hasConsent = user.hasConsent {
+            userParameters["newsletter_subscription"] = hasConsent
+        }
+
+        // Gender facultatif + mappé
+        if let gender = mapGender(user.gender) {
             userParameters["gender"] = gender
         }
 
-        if let birthday = user.birthday {
+        // Anniversaire facultatif (n’envoie que si non vide)
+        if let birthday = nonEmpty(user.birthday) {
             userParameters["birthday"] = birthday
         }
 
-        if let discoverySource = user.discoverySource {
-            userParameters["discovery_source"] = discoverySource
-        }
+        // Discovery source facultatif
+        if let source = nonEmpty(user.discoverySource) {
+            userParameters["discovery_source"] = source
 
-        if user.discoverySource == "Sensibilisation entreprise" {
-            if let company = user.company {
-                userParameters["company"] = company
-            }
-            if let event = user.event {
-                userParameters["event"] = event
+            // Company / Event uniquement si source == "Sensibilisation entreprise"
+            if source == "Sensibilisation entreprise" {
+                if let company = nonEmpty(user.company) {
+                    userParameters["company"] = company
+                }
+                if let event = nonEmpty(user.event) {
+                    userParameters["event"] = event
+                }
             }
         }
 
         let parameters: [String: Any] = ["user": userParameters]
-
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         Logger.print("Datas passed \(parameters)")
 
         NetworkManager.sharedInstance.requestPost(endPoint: kAPICreateAccount, headers: nil, body: bodyData) { data, resp, error in
             Logger.print("Response Post update User: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
-            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
-                Logger.print("***** error update address with placeid - \(String(describing: error))")
+
+            // Log le body d’erreur pour debug côté backend
+            if let data = data, let s = String(data: data, encoding: .utf8) {
+                Logger.print("Create user response body: \(s)")
+            }
+
+            guard let data = data, error == nil, let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+                Logger.print("***** error create user - \(String(describing: error))")
                 DispatchQueue.main.async { completion(nil, error) }
                 return
             }

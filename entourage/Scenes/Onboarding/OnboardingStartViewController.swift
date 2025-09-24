@@ -236,22 +236,32 @@ class OnboardingStartViewController: UIViewController {
         var isValid = true
         var message = ""
 
+        // Étape 1 : seules ces trois infos sont obligatoires
         if currentPhasePosition == 1 {
+            // Prénom requis
             if temporaryUser.firstname.count < minimumCharacters {
                 isValid = false
                 message = "onboard_error_general".localized
-            } else if temporaryUser.lastname.count < minimumCharacters {
-                isValid = false
-                message = "onboard_error_general".localized
-            } else if phone?.count ?? 0 < minimumPhoneCharacters {
-                isValid = false
-                message = "onboard_error_general".localized
-            } else if (email?.count ?? 0) > 0 && !(email?.isValidEmail ?? false) {
+            }
+            // Nom requis
+            else if temporaryUser.lastname.count < minimumCharacters {
                 isValid = false
                 message = "onboard_error_general".localized
             }
+            // Téléphone requis (longueur minimale)
+            else if (phone?.count ?? 0) < minimumPhoneCharacters {
+                isValid = false
+                message = "onboard_error_general".localized
+            }
+            // E-mail facultatif : ne vérifie le format que s’il est renseigné
+            else if let mail = email, !mail.isEmpty, !mail.isValidEmail {
+                isValid = false
+                message = "onboard_error_general".localized
+            }
+            // NB: gender / howWeMet / company / event -> facultatifs (pas de contrôle ici)
         }
 
+        // Étape 3 : on garde tes contrôles existants (type + localisation)
         if currentPhasePosition == 3 {
             if userTypeSelected == .none {
                 isValid = false
@@ -262,12 +272,11 @@ class OnboardingStartViewController: UIViewController {
             }
         }
 
-        if isValid {
-            enableDisableNextButton(isEnable: true)
-        }
-
+        // Active/désactive le bouton "Suivant"
+        enableDisableNextButton(isEnable: isValid)
         return (isValid, message)
     }
+
 
     // MARK: - Network
     func sendPhone() {
@@ -439,26 +448,18 @@ extension OnboardingStartViewController: OnboardingDelegate {
 
     func addInfos(userType: UserType) {
         self.userTypeSelected = userType
-        if shouldLaunchThird && userType != .none {
-            self.isTypeOk = true
-            self.countValidate()
-        } else {
-            self.isTypeOk = false
-            self.countValidate()
-        }
+        // On s'aligne sur checkValidation() pour activer/désactiver le bouton
+        let result = checkValidation()
+        enableDisableNextButton(isEnable: result.isValid)
     }
 
     func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         self.temporaryGooglePlace = googlePlace
         self.temporaryLocation = currentlocation
         self.temporaryAddressName = currentLocationName
-        if shouldLaunchThird && googlePlace != nil {
-            self.isLocOk = true
-            self.countValidate()
-        } else {
-            self.isLocOk = false
-            self.countValidate()
-        }
+        // Idem : on recalcul la validité avec ta logique centrale
+        let result = checkValidation()
+        enableDisableNextButton(isEnable: result.isValid)
     }
 
     func goMain() {

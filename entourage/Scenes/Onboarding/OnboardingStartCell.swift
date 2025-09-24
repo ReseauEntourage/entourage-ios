@@ -27,6 +27,9 @@ class OnboardingStartCell: UITableViewCell {
     @IBOutlet weak var ui_label_title_birthday: UILabel!
     @IBOutlet weak var ui_textfield_birthday: UITextField!
 
+    @IBOutlet weak var ui_view_birthday: UIView!
+    
+    
     // MARK: - Properties
     weak var delegate: OnboardingStartDelegate? = nil
     let minimumCharacters = 2
@@ -80,7 +83,9 @@ class OnboardingStartCell: UITableViewCell {
         setupTitles()
         setupPickerViews()
         setupTextFields()
-        setupNewFields()
+        //setupNewFields()
+        ui_view_birthday.isHidden = true
+        
     }
 
     // MARK: - Setup

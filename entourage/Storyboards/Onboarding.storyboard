@@ -596,6 +596,7 @@
                                             <outlet property="ui_title_firstname" destination="qxU-qG-SRl" id="Yc9-FS-Izl"/>
                                             <outlet property="ui_title_lastname" destination="bbr-Ae-Do5" id="b5B-RF-TPV"/>
                                             <outlet property="ui_title_phone" destination="XqO-eG-f7u" id="1KO-e4-mLH"/>
+                                            <outlet property="ui_view_birthday" destination="Shz-mt-sG1" id="EpN-pe-x5f"/>
                                             <outlet property="ui_view_info_mandatory" destination="Pm7-90-zQw" id="ar8-1O-H1a"/>
                                         </connections>
                                     </tableViewCell>
