@@ -1,4 +1,30 @@
+//
+//  OnboardingStartCell.swift
+//  entourage
+//
+//  Created by You on 30/11/2022.
+//
+
 import UIKit
+
+// MARK: - OnboardingStartDelegate
+protocol OnboardingStartDelegate: AnyObject {
+    func validateFirstLastname(firstName: String?, lastname: String?)
+    func validatePhoneNumber(prefix: CountryCode, phoneNumber: String?)
+    func validateEmail(email: String?)
+    func validateConsent(isChecked: Bool)
+    func validateGender(gender: String?)
+    func validateHowWeMet(howWeMet: String?)
+    func validateCompany(company: String?)
+    func validateEvent(event: String?)
+}
+
+// MARK: - CountryCode
+struct CountryCode {
+    var country = ""
+    var code = ""
+    var flag = ""
+}
 
 class OnboardingStartCell: UITableViewCell {
 
@@ -26,10 +52,8 @@ class OnboardingStartCell: UITableViewCell {
     @IBOutlet weak var ui_stackview: UIStackView!
     @IBOutlet weak var ui_label_title_birthday: UILabel!
     @IBOutlet weak var ui_textfield_birthday: UITextField!
-
     @IBOutlet weak var ui_view_birthday: UIView!
-    
-    
+
     // MARK: - Properties
     weak var delegate: OnboardingStartDelegate? = nil
     let minimumCharacters = 2
@@ -37,24 +61,27 @@ class OnboardingStartCell: UITableViewCell {
     var countryCode: CountryCode = defaultCountryCode
     var tempPhone = ""
 
-    // Data for PickerViews
+    // Data for country picker (déjà en dur chez toi)
     let pickerDatas: [CountryCode] = [
-        CountryCode(country: "France", code: "+33", flag: "🇫🇷"),
+        CountryCode(country: "France",   code: "+33", flag: "🇫🇷"),
         CountryCode(country: "Belgique", code: "+32", flag: "🇧🇪")
     ]
 
-    let genderOptions = ["Homme", "Femme", "Non binaire"]
+    // --- Dynamic data (depuis l'API) ---
+    // /home/metadata
+    private var gendersMap: [String:String] = [:]              // backendKey -> label FR
+    private var genderOptions: [String] = []                   // labels FR pour le picker
+    private var discoverySourcesMap: [String:String] = [:]     // backendKey -> label FR
+    private var howWeMetOptions: [String] = []                 // labels FR pour le picker
 
-    let howWeMetOptions = [
-        "Bouche à oreille",
-        "Internet",
-        "Télévision / média",
-        "Réseaux sociaux",
-        "Sensibilisation entreprise"
-    ]
+    // /salesforce/entreprises
+    private var enterprises: [SalesforceEnterprise] = []
+    private var enterpriseOptions: [String] = []               // noms pour le picker
+    private var selectedEnterpriseIndex: Int? = nil
 
-    let companyOptions = ["Entreprise A", "Entreprise B", "Entreprise C"]
-    let eventOptions = ["Atelier 1", "Atelier 2", "Atelier 3"]
+    // /salesforce/entreprises/{id}/outings
+    private var eventsForSelectedEnterprise: [SalesforceEvent] = []
+    private var eventOptions: [String] = []
 
     var isChecked = false
 
@@ -83,9 +110,110 @@ class OnboardingStartCell: UITableViewCell {
         setupTitles()
         setupPickerViews()
         setupTextFields()
-        //setupNewFields()
-        ui_view_birthday.isHidden = true
-        
+        setupNewFields()
+
+        // Charge les données distantes pour alimenter les pickers
+        loadMetadata()
+        loadEnterprises()
+    }
+
+    // MARK: - Remote data loaders
+    private func loadMetadata() {
+        // placeholders pendant le chargement (optionnel)
+        genderTextField.placeholder = "Chargement..."
+        howWeMetTextField.placeholder = "Chargement..."
+
+        PreOnboardingService.shared.loadMetadata { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let meta):
+                self.gendersMap = meta.user?.genders ?? [:]
+                self.genderOptions = self.gendersMap.values.sorted {
+                    $0.localizedCaseInsensitiveCompare($1) == .orderedAscending
+                }
+
+                self.discoverySourcesMap = meta.user?.discoverySources ?? [:]
+                self.howWeMetOptions = self.discoverySourcesMap.values.sorted {
+                    $0.localizedCaseInsensitiveCompare($1) == .orderedAscending
+                }
+
+                self.genderPickerView?.reloadAllComponents()
+                self.howWeMetPickerView?.reloadAllComponents()
+
+                // restore placeholder
+                if self.genderTextField.text?.isEmpty ?? true {
+                    self.genderTextField.placeholder = "Sélectionner dans la liste"
+                }
+                if self.howWeMetTextField.text?.isEmpty ?? true {
+                    self.howWeMetTextField.placeholder = "Sélectionner dans la liste"
+                }
+
+            case .failure:
+                // Fallback : liste vide (tu peux mettre des valeurs par défaut si besoin)
+                self.genderOptions = []
+                self.howWeMetOptions = []
+                self.genderPickerView?.reloadAllComponents()
+                self.howWeMetPickerView?.reloadAllComponents()
+                self.genderTextField.placeholder = "Sélectionner dans la liste"
+                self.howWeMetTextField.placeholder = "Sélectionner dans la liste"
+            }
+        }
+    }
+
+    private func loadEnterprises() {
+        // placeholder pendant le chargement
+        companyTextField.placeholder = "Chargement..."
+
+        PreOnboardingService.shared.enterprisesDisplayList { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let list):
+                self.enterprises = list
+                self.enterpriseOptions = list.compactMap { $0.name }
+                self.companyPickerView?.reloadAllComponents()
+
+                if self.companyTextField.text?.isEmpty ?? true {
+                    self.companyTextField.placeholder = "Sélectionner une entreprise"
+                }
+            case .failure:
+                self.enterprises = []
+                self.enterpriseOptions = []
+                self.companyPickerView?.reloadAllComponents()
+                self.companyTextField.placeholder = "Sélectionner une entreprise"
+            }
+        }
+    }
+
+    private func loadEvents(forEnterpriseAt index: Int) {
+        guard enterprises.indices.contains(index), let enterpriseId = enterprises[index].id else {
+            self.eventsForSelectedEnterprise = []
+            self.eventOptions = []
+            self.eventPickerView?.reloadAllComponents()
+            return
+        }
+
+        // reset UI event
+        eventTextField.text = nil
+        eventTextField.placeholder = "Chargement..."
+        delegate?.validateEvent(event: nil)
+
+        PreOnboardingService.shared.eventsDisplayList(for: enterpriseId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let events):
+                self.eventsForSelectedEnterprise = events
+                self.eventOptions = events.compactMap { $0.name }
+                self.eventPickerView?.reloadAllComponents()
+                if self.eventTextField.text?.isEmpty ?? true {
+                    self.eventTextField.placeholder = "Sélectionner un événement"
+                }
+            case .failure:
+                self.eventsForSelectedEnterprise = []
+                self.eventOptions = []
+                self.eventPickerView?.reloadAllComponents()
+                self.eventTextField.placeholder = "Sélectionner un événement"
+            }
+        }
     }
 
     // MARK: - Setup
@@ -94,6 +222,7 @@ class OnboardingStartCell: UITableViewCell {
         ui_title_lastname.setFontTitle(size: 17)
         ui_title_country.setFontTitle(size: 17)
         ui_title_phone.setFontTitle(size: 17)
+        ui_title_email.setFontTitle(size: 17)
         ui_info_mailing.font = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
         ui_info_lastname.font = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
         ui_label_mandatory.font = UIFont(name: "NunitoSans-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
@@ -199,23 +328,18 @@ class OnboardingStartCell: UITableViewCell {
         eventContainer.addArrangedSubview(eventTextField)
 
         // --- Placement dans la stack ---
-        // 1) "Je suis" en tout premier
         ui_stackview.insertArrangedSubview(genderContainer, at: 0)
-
-        // 2) "Comment vous nous avez connu ?" à sa position prévue (index 5 si dispo)
         ui_stackview.insertArrangedSubview(howWeMetContainer, at: min(5, ui_stackview.arrangedSubviews.count))
 
-        // 3) Entreprise + Événement juste APRÈS "Comment vous nous avez connu ?"
         if let howIdx = ui_stackview.arrangedSubviews.firstIndex(of: howWeMetContainer) {
             ui_stackview.insertArrangedSubview(companyContainer, at: howIdx + 1)
             ui_stackview.insertArrangedSubview(eventContainer,   at: howIdx + 2)
         } else {
-            // Fallback si jamais l'index n'est pas trouvé (rare)
             ui_stackview.addArrangedSubview(companyContainer)
             ui_stackview.addArrangedSubview(eventContainer)
         }
 
-        // Masqués par défaut (on togglera via isHidden + begin/endUpdates)
+        // Masqués par défaut
         companyContainer.isHidden = true
         eventContainer.isHidden = true
 
@@ -277,11 +401,9 @@ class OnboardingStartCell: UITableViewCell {
     }
 
     private func updateCompanyAndEventVisibility(show: Bool) {
-        // >>> Correction: on MASQUE/affiche, on ne supprime PLUS du stack
         companyContainer.isHidden = !show
         eventContainer.isHidden = !show
 
-        // Force layout + recalcul hauteur cellule
         if let table = enclosingTableView() {
             UIView.performWithoutAnimation {
                 table.beginUpdates()
@@ -291,7 +413,6 @@ class OnboardingStartCell: UITableViewCell {
             self.contentView.setNeedsLayout()
             self.contentView.layoutIfNeeded()
         }
-        // <<<
     }
 
     @objc private func dateChanged() {
@@ -328,8 +449,6 @@ class OnboardingStartCell: UITableViewCell {
         for i in 0..<pickerDatas.count {
             if pickerDatas[i].code == countryCode.code {
                 ui_pickerView.selectRow(i, inComponent: 0, animated: false)
-                // optionnel: rafraîchir le champ visuel du code pays
-                // ui_tf_country.text = pickerDatas[i].flag
                 break
             }
         }
@@ -469,59 +588,59 @@ extension OnboardingStartCell: UITextFieldDelegate {
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
-        case 1:
-            return genderOptions.count
-        case 2:
-            return howWeMetOptions.count
-        case 3:
-            return companyOptions.count
-        case 4:
-            return eventOptions.count
-        default:
-            return pickerDatas.count
+        case 1: return genderOptions.count
+        case 2: return howWeMetOptions.count
+        case 3: return enterpriseOptions.count
+        case 4: return eventOptions.count
+        default: return pickerDatas.count
         }
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
-        case 1:
-            return genderOptions[row]
-        case 2:
-            return howWeMetOptions[row]
-        case 3:
-            return companyOptions[row]
-        case 4:
-            return eventOptions[row]
-        default:
-            return "\(pickerDatas[row].flag) \(pickerDatas[row].country)"
+        case 1: return genderOptions[safe: row]
+        case 2: return howWeMetOptions[safe: row]
+        case 3: return enterpriseOptions[safe: row]
+        case 4: return eventOptions[safe: row]
+        default: return "\(pickerDatas[row].flag) \(pickerDatas[row].country)"
         }
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch pickerView.tag {
         case 1:
-            genderTextField.text = genderOptions[row]
-            delegate?.validateGender(gender: genderOptions[row])
-        case 2:
-            howWeMetTextField.text = howWeMetOptions[row]
-            delegate?.validateHowWeMet(howWeMet: howWeMetOptions[row])
+            let label = genderOptions[safe: row]
+            genderTextField.text = label
+            delegate?.validateGender(gender: label)
 
-            let shouldShowCompanyAndEvent = howWeMetOptions[row] == "Sensibilisation entreprise"
+        case 2:
+            let label = howWeMetOptions[safe: row]
+            howWeMetTextField.text = label
+            delegate?.validateHowWeMet(howWeMet: label)
+
+            // Affiche/masque entreprise + event si "Sensibilisation entreprise"
+            let shouldShowCompanyAndEvent = (label == "Sensibilisation entreprise")
             updateCompanyAndEventVisibility(show: shouldShowCompanyAndEvent)
 
         case 3:
-            companyTextField.text = companyOptions[row]
-            delegate?.validateCompany(company: companyOptions[row])
+            // Entreprise
+            companyTextField.text = enterpriseOptions[safe: row]
+            delegate?.validateCompany(company: enterpriseOptions[safe: row])
+            selectedEnterpriseIndex = row
+            // Charge les events liés
+            loadEvents(forEnterpriseAt: row)
+
         case 4:
-            eventTextField.text = eventOptions[row]
-            delegate?.validateEvent(event: eventOptions[row])
+            // Event
+            eventTextField.text = eventOptions[safe: row]
+            delegate?.validateEvent(event: eventOptions[safe: row])
+
         default:
+            // Pays
             ui_tf_country.text = pickerDatas[row].flag
             countryCode = pickerDatas[row]
             _ = checkAndValidatePhone()
@@ -530,21 +649,4 @@ extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
-// MARK: - OnboardingStartDelegate
-protocol OnboardingStartDelegate: AnyObject {
-    func validateFirstLastname(firstName: String?, lastname: String?)
-    func validatePhoneNumber(prefix: CountryCode, phoneNumber: String?)
-    func validateEmail(email: String?)
-    func validateConsent(isChecked: Bool)
-    func validateGender(gender: String?)
-    func validateHowWeMet(howWeMet: String?)
-    func validateCompany(company: String?)
-    func validateEvent(event: String?)
-}
 
-// MARK: - CountryCode
-struct CountryCode {
-    var country = ""
-    var code = ""
-    var flag = ""
-}

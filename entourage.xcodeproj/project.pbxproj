@@ -450,6 +450,9 @@
 		26584C4A2ACC48ED00ABD401 /* HomeCellMapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26584C492ACC48ED00ABD401 /* HomeCellMapButton.swift */; };
 		26584C4C2ACC492A00ABD401 /* HomeCellMapButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26584C4B2ACC492A00ABD401 /* HomeCellMapButton.xib */; };
 		26584C4E2ACC4B1300ABD401 /* CustomGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26584C4D2ACC4B1300ABD401 /* CustomGradientView.swift */; };
+		2667575D2E856F8F0039FF88 /* PreOnboardingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2667575C2E856F8F0039FF88 /* PreOnboardingAPI.swift */; };
+		2667575F2E856FCC0039FF88 /* PreOnboardingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2667575E2E856FCC0039FF88 /* PreOnboardingModels.swift */; };
+		266757612E8570120039FF88 /* PreOnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266757602E8570120039FF88 /* PreOnboardingService.swift */; };
 		266791A92D37A78200BEDB4E /* ConversationNotifAskViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266791A82D37A78200BEDB4E /* ConversationNotifAskViewCell.swift */; };
 		266791AF2D37A7A400BEDB4E /* ConversationNotifAskViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266791AE2D37A7A400BEDB4E /* ConversationNotifAskViewCell.xib */; };
 		266B26212AB8AD5600C8EAD8 /* EventListMainV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B26202AB8AD5600C8EAD8 /* EventListMainV2ViewController.swift */; };
@@ -1056,6 +1059,9 @@
 		26584C492ACC48ED00ABD401 /* HomeCellMapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellMapButton.swift; sourceTree = "<group>"; };
 		26584C4B2ACC492A00ABD401 /* HomeCellMapButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellMapButton.xib; sourceTree = "<group>"; };
 		26584C4D2ACC4B1300ABD401 /* CustomGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGradientView.swift; sourceTree = "<group>"; };
+		2667575C2E856F8F0039FF88 /* PreOnboardingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreOnboardingAPI.swift; sourceTree = "<group>"; };
+		2667575E2E856FCC0039FF88 /* PreOnboardingModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreOnboardingModels.swift; sourceTree = "<group>"; };
+		266757602E8570120039FF88 /* PreOnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreOnboardingService.swift; sourceTree = "<group>"; };
 		266791A82D37A78200BEDB4E /* ConversationNotifAskViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNotifAskViewCell.swift; sourceTree = "<group>"; };
 		266791AE2D37A7A400BEDB4E /* ConversationNotifAskViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationNotifAskViewCell.xib; sourceTree = "<group>"; };
 		266B26202AB8AD5600C8EAD8 /* EventListMainV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListMainV2ViewController.swift; sourceTree = "<group>"; };
@@ -1335,6 +1341,7 @@
 				2685FFE12B68EA1D0083F683 /* Reaction.swift */,
 				26D13E2D2BA43F9900CAD4F7 /* Survey.swift */,
 				268ADBBD2DD1D80100031C6F /* SmallTalksModels.swift */,
+				2667575E2E856FCC0039FF88 /* PreOnboardingModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1931,6 +1938,8 @@
 				02B57DA127FCB652005A567B /* ParsingDataCodable.swift */,
 				26D13E2B2BA43E8A00CAD4F7 /* SurveyService.swift */,
 				268ADBBF2DD1D85A00031C6F /* SmallTalkService.swift */,
+				2667575C2E856F8F0039FF88 /* PreOnboardingAPI.swift */,
+				266757602E8570120039FF88 /* PreOnboardingService.swift */,
 			);
 			path = "Network Managers";
 			sourceTree = "<group>";
@@ -3095,6 +3104,7 @@
 				0288A8D727CCD8F5008D7011 /* UserPhotoAddViewController.swift in Sources */,
 				26BE84642A67F50500DC2586 /* ActionPassedTwoVC.swift in Sources */,
 				26043D982CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift in Sources */,
+				266757612E8570120039FF88 /* PreOnboardingService.swift in Sources */,
 				0288A8DB27CD00FD008D7011 /* Extensions_UIImage.swift in Sources */,
 				268ADBD62DD4913400031C6F /* CellCreateSmallTalk.swift in Sources */,
 				026819BD278E105600A98A4A /* OTLoginV2ViewController.swift in Sources */,
@@ -3111,6 +3121,7 @@
 				2630F6282C245E1B007BAE56 /* MainFilterTitleCell.swift in Sources */,
 				026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */,
 				264446D02AA1E04800EA2EED /* ActionPasseOneDemand.swift in Sources */,
+				2667575F2E856FCC0039FF88 /* PreOnboardingModels.swift in Sources */,
 				02FB5444287DC01200E4B9FA /* EventDetailFullCell.swift in Sources */,
 				025D8766278DEC2100909101 /* Extensions.swift in Sources */,
 				028D4F562937970500A0BDD3 /* OnboardingPhase1ViewController.swift in Sources */,
@@ -3173,6 +3184,7 @@
 				2684542C29DAC63700C944EA /* UniversalLinkManager.swift in Sources */,
 				0224597427FF323600944DE4 /* NeighborhoodCreateNameCell.swift in Sources */,
 				02F5278527999B8F00929431 /* SolidarityGuideCell.swift in Sources */,
+				2667575D2E856F8F0039FF88 /* PreOnboardingAPI.swift in Sources */,
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
 				02B94C33284F92AD006059EF /* HomeActionTeachCell.swift in Sources */,
 				02A92C2C2898116B000DFF95 /* ActionCreatePhotoCell.swift in Sources */,

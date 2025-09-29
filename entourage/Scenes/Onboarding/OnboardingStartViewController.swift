@@ -277,7 +277,6 @@ class OnboardingStartViewController: UIViewController {
         return (isValid, message)
     }
 
-
     // MARK: - Network
     func sendPhone() {
         IHProgressHUD.show()
@@ -289,7 +288,6 @@ class OnboardingStartViewController: UIViewController {
                 if error.code == "INVALID_PHONE_FORMAT" {
                     let alertVC = UIAlertController(title: nil, message: "invalidPhoneNumberFormat".localized, preferredStyle: .alert)
                     let action = UIAlertAction(title: "close".localized, style: .default, handler: nil)
-
                     alertVC.addAction(action)
 
                     self?.navigationController?.present(alertVC, animated: true, completion: nil)
@@ -356,7 +354,7 @@ class OnboardingStartViewController: UIViewController {
 
                 self?.navigationController?.present(alertvc, animated: true, completion: nil)
             } else {
-                
+
             }
         }
     }
