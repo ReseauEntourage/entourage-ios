@@ -103,8 +103,9 @@ class ConversationViewCell: UITableViewCell {
         } else {
             applyNormalContent(message: message, isMe: isMe)
         }
-        // Date
-        ui_label_date.text = (message.user?.displayName ?? "") + " " + message.createdDateTimeFormatted
+        // Nom uniquement (plus de date)
+        ui_label_date.text = message.user?.displayName ?? ""
+
         // Attached image
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
