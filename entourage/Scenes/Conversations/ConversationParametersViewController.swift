@@ -19,17 +19,35 @@ class ConversationParametersViewController: BasePopViewController {
     var username: String = ""
     var isSeveral = false
     var isEvent = false
-    var isSmallTalkMode = false // ✅ Ajout SmallTalk
+    var isSmallTalkMode = false // ✅ SmallTalk
     var smallTalkId = ""
+    
+    // MARK: - Rows model
+    private enum Row {
+        case profileOrMembers
+        case signal
+        case blockUser
+        case leave
+        case viewGallery // ✅ Nouveau
+    }
+    private var rows: [Row] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_top_view.delegate = self
 
         let title = isSmallTalkMode ? "small_talk_params_title".localized : "conversation_params_title".localized
-        ui_top_view.populateView(title: title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, backgroundColor: .appBeigeClair, isClose: true)
+        ui_top_view.populateView(title: title,
+                                 titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
+                                 titleColor: .black,
+                                 delegate: self,
+                                 backgroundColor: .appBeigeClair,
+                                 isClose: true)
         
         if !isOneToOne {
             getConversation()
+        } else {
+            buildRows()
         }
     }
     
@@ -42,7 +60,38 @@ class ConversationParametersViewController: BasePopViewController {
         self.navigationController?.hideTransparentNavigationBar()
     }
     
-    //MARK: - Network
+    // MARK: - Build rows once we know the context
+    private func buildRows() {
+        var result: [Row] = []
+        
+        // 1) Profile/Members
+        result.append(.profileOrMembers)
+        
+        // 2) Signal
+        result.append(.signal)
+        
+        // 3) Block or Leave depending on context
+        if isOneToOne && !isSeveral {
+            if !imBlocker {
+                result.append(.blockUser)
+            } else {
+                // si imBlocker == true, on retire la cellule "Block"
+                // (on laisse juste signal + profil)
+            }
+        } else {
+            result.append(.leave)
+        }
+        
+        // 4) ✅ Ajout “Voir la galerie” si OUTING (isEvent = true)
+        if isEvent {
+            result.append(.viewGallery)
+        }
+        
+        rows = result
+        ui_tableview.reloadData()
+    }
+    
+    // MARK: - Network
     
     func getConversation() {
         if isSmallTalkMode {
@@ -55,7 +104,7 @@ class ConversationParametersViewController: BasePopViewController {
                     self.isCreator = smallTalk.members.contains(where: { $0.id == meId && $0.community_roles.contains("creator") })
                 }
                 DispatchQueue.main.async {
-                    self.ui_tableview.reloadData()
+                    self.buildRows()
                 }
             }
             return
@@ -75,10 +124,13 @@ class ConversationParametersViewController: BasePopViewController {
             if let conversation = conversation, let isCreator = conversation.isCreator {
                 self.isCreator = isCreator
             }
-            self.ui_tableview.reloadData()
+            DispatchQueue.main.async {
+                self.buildRows()
+            }
         }
     }
 
+    // MARK: - Actions
     
     func sendLeaveConversation() {
         if isSmallTalkMode {
@@ -103,8 +155,6 @@ class ConversationParametersViewController: BasePopViewController {
         }
     }
 
-
-    
     func sendBlockUser() {
         guard let userId = userId else { return }
         MessagingService.blockUser(userId: userId) { error in
@@ -114,6 +164,8 @@ class ConversationParametersViewController: BasePopViewController {
             self.showPopValideBlock()
         }
     }
+    
+    // MARK: - UI Pops
     
     func showPopLeave() {
         let customAlert = MJAlertController()
@@ -182,6 +234,19 @@ class ConversationParametersViewController: BasePopViewController {
         customAlert.alertTagName = .None
         customAlert.show()
     }
+    
+    // MARK: - Navigation (✅ Galerie)
+    private func showGallery() {
+        guard let convId = conversationId, convId != 0 else { return }
+        let vc = ImageListViewController()
+        vc.conversationId = convId
+        // On pousse si on a un nav, sinon on présente
+        if let nav = navigationController {
+            nav.pushViewController(vc, animated: true)
+        } else {
+            present(vc, animated: true)
+        }
+    }
 }
 
 //MARK: - MJAlertControllerDelegate
@@ -204,56 +269,71 @@ extension ConversationParametersViewController: MJAlertControllerDelegate {
 //MARK: - TableView DataSource / Delegate
 extension ConversationParametersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isOneToOne {
-            return imBlocker ? 2 : 3 - (isSeveral ? 1 : 0)
-        } else {
-            return isCreator ? 2 : 3
-        }
+        rows.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = indexPath.row
-        let isBlockCellRemoved = isOneToOne && isSeveral
-        let adjustedRow = isBlockCellRemoved && row >= 2 ? row + 1 : row
-
-        switch adjustedRow {
-        case 0:
+        switch rows[indexPath.row] {
+        case .profileOrMembers:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_arrow", for: indexPath) as! ConversationParamCell
-            cell.populateCell(title: isOneToOne ? "conv_param_title_profil".localized : "conv_param_title_members".localized, subtitle: nil, isTitleOrange: false, pictoStr: "ic_user_conv")
+            cell.populateCell(title: isOneToOne ? "conv_param_title_profil".localized
+                                               : "conv_param_title_members".localized,
+                              subtitle: nil,
+                              isTitleOrange: false,
+                              pictoStr: "ic_user_conv")
             return cell
-        case 1:
+            
+        case .signal:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
-            cell.populateCell(title: isOneToOne ? "conv_param_title_signal".localized : "conv_param_title_signal_action".localized, subtitle: isOneToOne ? "conv_param_subtitle_signal".localized : "conv_param_subtitle_signal_action".localized, isTitleOrange: true, pictoStr: "ic_signal_orange")
+            cell.populateCell(title: isOneToOne ? "conv_param_title_signal".localized
+                                               : "conv_param_title_signal_action".localized,
+                              subtitle: isOneToOne ? "conv_param_subtitle_signal".localized
+                                                   : "conv_param_subtitle_signal_action".localized,
+                              isTitleOrange: true,
+                              pictoStr: "ic_signal_orange")
             return cell
-        case 2:
-            if isEvent {
-                return UITableViewCell()
-            }
-            if isOneToOne && !isSeveral {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
-                let subtitle = String(format: "conv_param_subtitle_block".localized, username)
-                cell.populateCell(title: "conv_param_title_block".localized, subtitle: subtitle, isTitleOrange: true, pictoStr: "ic_user_block")
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-                cell.populateCell(title: "conv_param_qui_action".localized, subtitle: nil, isTitleOrange: true, pictoStr: "ic_leave_conv", hideSeparator: true)
-                return cell
-            }
-        default:
+            
+        case .blockUser:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
+            let subtitle = String(format: "conv_param_subtitle_block".localized, username)
+            cell.populateCell(title: "conv_param_title_block".localized,
+                              subtitle: subtitle,
+                              isTitleOrange: true,
+                              pictoStr: "ic_user_block")
+            return cell
+            
+        case .leave:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-            cell.populateCell(title: "conv_param_qui_action".localized, subtitle: nil, isTitleOrange: true, pictoStr: "ic_leave_conv", hideSeparator: true)
+            cell.populateCell(title: "conv_param_qui_action".localized,
+                              subtitle: nil,
+                              isTitleOrange: true,
+                              pictoStr: "ic_leave_conv",
+                              hideSeparator: true)
+            return cell
+            
+        case .viewGallery:
+            // ✅ “Voir la galerie”
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_arrow", for: indexPath) as! ConversationParamCell
+            cell.populateCell(title: "Voir la galerie",
+                              subtitle: nil,
+                              isTitleOrange: false,
+                              pictoStr: "ic_gallery") // mets une icône adaptée si dispo
             return cell
         }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
+        switch rows[indexPath.row] {
+        case .profileOrMembers:
             isOneToOne ? self.showUser() : self.showMembers()
-        case 1:
+        case .signal:
             self.signalConversation()
-        default:
-            isOneToOne ? self.showPopBlockUser() : self.showPopLeave()
+        case .blockUser:
+            self.showPopBlockUser()
+        case .leave:
+            self.showPopLeave()
+        case .viewGallery:
+            self.showGallery() // ✅
         }
     }
 }
@@ -272,7 +352,15 @@ extension ConversationParametersViewController: GroupDetailDelegate {
     func showMessage(signalType: GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: "report_conversation_title".localized, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        alertVC.configureAlert(alertTitle: "report_conversation_title".localized,
+                               message: "report_group_message_success".localized,
+                               buttonrightType: buttonCancel,
+                               buttonLeftType: nil,
+                               titleStyle: ApplicationTheme.getFontCourantBoldOrange(),
+                               messageStyle: ApplicationTheme.getFontCourantRegularNoir(),
+                               mainviewBGColor: .white,
+                               mainviewRadius: 35,
+                               isButtonCloseHidden: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             alertVC.show()
         }

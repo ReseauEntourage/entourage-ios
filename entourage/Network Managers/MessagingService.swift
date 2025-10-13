@@ -509,5 +509,48 @@ struct MessagingService:ParsingDataCodable {
                 }
             }
         }
+    
+    static func getConversationImages(
+            conversationId: Int,
+            completion: @escaping (_ images: [ConversationImage]?, _ error: EntourageNetworkError?) -> Void
+        ) {
+            guard let token = UserDefaults.token else { completion(nil, nil); return }
+            var endpoint = kAPIConversationImages
+            endpoint = String(format: endpoint, "\(conversationId)", token)
+            
+            Logger.print("***** get conversation images : \(endpoint)")
+            NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+                guard let data = data,
+                      error == nil,
+                      let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+                    DispatchQueue.main.async { completion(nil, error) }
+                    return
+                }
+                let images: [ConversationImage]? = self.parseDatas(data: data, key: "images")
+                DispatchQueue.main.async { completion(images, nil) }
+            }
+        }
+        
+        static func getConversationImage(
+            conversationId: Int,
+            chatMessageId: Int,
+            completion: @escaping (_ image: ConversationImage?, _ error: EntourageNetworkError?) -> Void
+        ) {
+            guard let token = UserDefaults.token else { completion(nil, nil); return }
+            var endpoint = kAPIConversationImageSingle
+            endpoint = String(format: endpoint, "\(conversationId)", "\(chatMessageId)", token)
+            
+            Logger.print("***** get conversation image single : \(endpoint)")
+            NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+                guard let data = data,
+                      error == nil,
+                      let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+                    DispatchQueue.main.async { completion(nil, error) }
+                    return
+                }
+                let image: ConversationImage? = self.parseData(data: data, key: "image")
+                DispatchQueue.main.async { completion(image, nil) }
+            }
+        }
 
 }

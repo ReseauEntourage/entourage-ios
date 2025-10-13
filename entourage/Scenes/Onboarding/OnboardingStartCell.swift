@@ -623,7 +623,7 @@ extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
             delegate?.validateHowWeMet(howWeMet: label)
 
             // Affiche/masque entreprise + event si "Sensibilisation entreprise"
-            let shouldShowCompanyAndEvent = (label == "Sensibilisation entreprise")
+            let shouldShowCompanyAndEvent = (label?.contains("entreprise")) ?? false
             updateCompanyAndEventVisibility(show: shouldShowCompanyAndEvent)
 
         case 3:

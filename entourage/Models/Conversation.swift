@@ -275,3 +275,12 @@ struct ConversationMembershipsWrapper: Decodable {
     let memberships: [ConversationMembership]
 }
 
+struct ConversationImage: Codable, Hashable {
+    let chatMessageId: Int?
+    let url: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case chatMessageId = "chat_message_id"
+        case url
+    }
+}
