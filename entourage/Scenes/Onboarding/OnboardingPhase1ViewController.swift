@@ -4,7 +4,7 @@ import CoreLocation
 import GooglePlaces
 
 // MARK: - Notification (écoutée par le StartController si besoin)
- extension Notification.Name {
+extension Notification.Name {
     static let onboardingPhase1CanProceedChanged = Notification.Name("onboardingPhase1CanProceedChanged")
 }
 
@@ -289,7 +289,7 @@ struct OnboardingPhase1View: View {
     }
 }
 
-// MARK: - Sections
+// MARK: - Sections (headers removed + icons orange)
 private struct IdentitySection: View {
     @ObservedObject var vm: OnboardingPhase1VM
     @Binding var showDateSheet: Bool
@@ -299,7 +299,6 @@ private struct IdentitySection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Identité").font(.entourageTitle(15))
 
             // Je suis
             SelectorRowButton(
@@ -317,10 +316,8 @@ private struct IdentitySection: View {
             }
 
             FloatingField(title: "Prénom*", placeholder: "Ex. : Marie", text: $vm.firstname)
-            HelperErrorRow(isValid: vm.isFirstnameValid, message: "2 caractères minimum")
 
             FloatingField(title: "Nom*", placeholder: "Ex. : Dupont", text: $vm.lastname)
-            HelperErrorRow(isValid: vm.isLastnameValid, message: "2 caractères minimum")
 
             DateRowButton(
                 title: "Date d’anniversaire",
@@ -340,7 +337,6 @@ private struct ContactSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Contact").font(.entourageTitle(15))
 
             HStack(spacing: 12) {
                 // Picker roue masqué avec label custom
@@ -352,6 +348,7 @@ private struct ContactSection: View {
                         Spacer()
                         Image(systemName: "chevron.up.chevron.down")
                             .font(.entourageBody(15))
+                            .foregroundColor(Color(UIColor.appOrange))
                             .padding(.trailing, 12)
                     }
                     .allowsHitTesting(false)
@@ -381,12 +378,9 @@ private struct ContactSection: View {
                     .textContentType(.telephoneNumber)
             }
 
-            HelperErrorRow(isValid: vm.isPhoneValid, message: "Au moins 9 chiffres")
-
             FloatingField(title: "E-mail", placeholder: "Ex. : marie.dupont@email.com", text: $vm.email)
                 .keyboardType(.emailAddress)
                 .textContentType(.emailAddress)
-            HelperErrorRow(isValid: vm.isEmailValid, message: "E-mail invalide")
         }
     }
 }
@@ -400,7 +394,6 @@ private struct ProfileSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Profil & Découverte").font(.entourageTitle(15))
 
             // Comment vous nous avez connus ?
             SelectorRowButton(
@@ -420,15 +413,15 @@ private struct ProfileSection: View {
             if #available(iOS 15.0, *) {
                 Toggle(isOn: $vm.consent) {
                     Text("Je souhaite recevoir des informations et des conseils de l’équipe Entourage")
-                        .font(.entourageBody(11)) // opt-in en body 11
+                        .font(.entourageBody(11))
                 }
-                .tint(.orange)
+                .tint(Color(UIColor.appOrange))
             } else {
                 Toggle(isOn: $vm.consent) {
                     Text("Je souhaite recevoir des informations et des conseils de l’équipe Entourage")
                         .font(.entourageBody(11))
                 }
-                .accentColor(.orange)
+                .accentColor(Color(UIColor.appOrange))
             }
 
             if vm.showCompanyAndEvent {
@@ -532,6 +525,7 @@ private struct SelectorRowButton: View {
                     Spacer()
                     Image(systemName: "chevron.up.chevron.down")
                         .font(.entourageBody(15))
+                        .foregroundColor(Color(UIColor.appOrange))
                 }
                 .padding(.horizontal, 12)
                 .frame(height: 44)
@@ -567,6 +561,7 @@ private struct DateRowButton: View {
                     Spacer()
                     Image(systemName: "calendar")
                         .font(.entourageBody(15))
+                        .foregroundColor(Color(UIColor.appOrange))
                 }
                 .padding(.horizontal, 12)
                 .frame(height: 44)
@@ -601,22 +596,6 @@ private struct DateSheet: View {
             }
             .padding()
         }
-    }
-}
-
-private struct HelperErrorRow: View {
-    var isValid: Bool
-    var message: String
-    var body: some View {
-        Group {
-            if !isValid {
-                Text(message)
-                    .font(.entourageBody(13))
-                    .foregroundColor(.red)
-                    .padding(.leading, 2)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
