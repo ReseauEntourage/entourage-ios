@@ -19,12 +19,6 @@ protocol OnboardingStartDelegate: AnyObject {
     func validateEvent(event: String?)
 }
 
-// MARK: - CountryCode
-struct CountryCode {
-    var country = ""
-    var code = ""
-    var flag = ""
-}
 
 class OnboardingStartCell: UITableViewCell {
 
@@ -610,43 +604,6 @@ extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
         }
     }
 
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch pickerView.tag {
-        case 1:
-            let label = genderOptions[safe: row]
-            genderTextField.text = label
-            delegate?.validateGender(gender: label)
-
-        case 2:
-            let label = howWeMetOptions[safe: row]
-            howWeMetTextField.text = label
-            delegate?.validateHowWeMet(howWeMet: label)
-
-            // Affiche/masque entreprise + event si "Sensibilisation entreprise"
-            let shouldShowCompanyAndEvent = (label?.contains("entreprise")) ?? false
-            updateCompanyAndEventVisibility(show: shouldShowCompanyAndEvent)
-
-        case 3:
-            // Entreprise
-            companyTextField.text = enterpriseOptions[safe: row]
-            delegate?.validateCompany(company: enterpriseOptions[safe: row])
-            selectedEnterpriseIndex = row
-            // Charge les events liés
-            loadEvents(forEnterpriseAt: row)
-
-        case 4:
-            // Event
-            eventTextField.text = eventOptions[safe: row]
-            delegate?.validateEvent(event: eventOptions[safe: row])
-
-        default:
-            // Pays
-            ui_tf_country.text = pickerDatas[row].flag
-            countryCode = pickerDatas[row]
-            _ = checkAndValidatePhone()
-            delegate?.validatePhoneNumber(prefix: countryCode, phoneNumber: ui_tf_phone.text)
-        }
-    }
 }
 
 
