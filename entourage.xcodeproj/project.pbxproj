@@ -594,6 +594,7 @@
 		26E25F012E8EB5CE0073B46A /* ImagePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E25F002E8EB5CE0073B46A /* ImagePreviewController.swift */; };
 		26E2877B2E9D59370045A9FA /* EventRuleSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2877A2E9D59370045A9FA /* EventRuleSectionTitle.swift */; };
 		26E2877F2E9E51C20045A9FA /* CountryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2877E2E9E51C20045A9FA /* CountryCode.swift */; };
+		26E287812E9E8CBE0045A9FA /* OnboardingShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E287802E9E8CBE0045A9FA /* OnboardingShared.swift */; };
 		26E66F122E7044B900E65BFB /* AppSignableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E66F112E7044B900E65BFB /* AppSignableManager.swift */; };
 		26EA54F12E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA54F02E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift */; };
 		26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */; };
@@ -1209,6 +1210,7 @@
 		26E25F002E8EB5CE0073B46A /* ImagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewController.swift; sourceTree = "<group>"; };
 		26E2877A2E9D59370045A9FA /* EventRuleSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRuleSectionTitle.swift; sourceTree = "<group>"; };
 		26E2877E2E9E51C20045A9FA /* CountryCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCode.swift; sourceTree = "<group>"; };
+		26E287802E9E8CBE0045A9FA /* OnboardingShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingShared.swift; sourceTree = "<group>"; };
 		26E66F112E7044B900E65BFB /* AppSignableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSignableManager.swift; sourceTree = "<group>"; };
 		26EA54F02E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoConsentPopupViewController.swift; sourceTree = "<group>"; };
 		26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneTitleCell.swift; sourceTree = "<group>"; };
@@ -2062,6 +2064,7 @@
 				02A764E02938ADDA00B92B32 /* OnboardingStartCell.swift */,
 				02FE55B42939F6020076F57A /* OnboardingEndCell.swift */,
 				264C6AB72C19E5F200E3518D /* NotificationDemandViewController.swift */,
+				26E287802E9E8CBE0045A9FA /* OnboardingShared.swift */,
 			);
 			name = Onboarding;
 			path = entourage/Scenes/Onboarding;
@@ -3137,6 +3140,7 @@
 				0288A8DB27CD00FD008D7011 /* Extensions_UIImage.swift in Sources */,
 				268ADBD62DD4913400031C6F /* CellCreateSmallTalk.swift in Sources */,
 				026819BD278E105600A98A4A /* OTLoginV2ViewController.swift in Sources */,
+				26E287812E9E8CBE0045A9FA /* OnboardingShared.swift in Sources */,
 				26EA54F12E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift in Sources */,
 				026819BE278E105600A98A4A /* OTLoginPlaceViewController.swift in Sources */,
 				024131D9286207D100561FB4 /* EventMainHomeViewController.swift in Sources */,
