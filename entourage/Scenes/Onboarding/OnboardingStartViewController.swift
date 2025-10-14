@@ -2,15 +2,13 @@
 //  OnboardingStartViewController.swift
 //  entourage
 //
-//  Created by You on 30/11/2022.
-//
 
 import UIKit
 import IHProgressHUD
 import CoreLocation
 import GooglePlaces
 
-class OnboardingStartViewController: UIViewController {
+final class OnboardingStartViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var ui_page_control: MJCustomPageControl!
@@ -92,10 +90,22 @@ class OnboardingStartViewController: UIViewController {
             showSeparator: false
         )
 
+        // 🔗 Observe VM "canProceed" to drive the Next button LIVE on phase 1
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handlePhase1CanProceed(_:)),
+            name: .onboardingPhase1CanProceedChanged,
+            object: nil
+        )
+
         if shouldLaunchThird {
             self.updateViewsForPosition()
             self.ui_page_control.isHidden = true
         }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .onboardingPhase1CanProceedChanged, object: nil)
     }
 
     override func viewWillLayoutSubviews() {
@@ -107,6 +117,14 @@ class OnboardingStartViewController: UIViewController {
             self.pageViewController = vc
             self.pageViewController?.parentDelegate = self
         }
+    }
+
+    // MARK: - Observer
+    @objc private func handlePhase1CanProceed(_ notif: Notification) {
+        // On ne pilote que la phase 1 avec ce flux (les autres phases gardent ta logique existante)
+        guard currentPhasePosition == 1 else { return }
+        let enabled = (notif.userInfo?["enabled"] as? Bool) ?? false
+        enableDisableNextButton(isEnable: enabled)
     }
 
     // MARK: - UI Configuration
@@ -149,7 +167,6 @@ class OnboardingStartViewController: UIViewController {
             self?.parentDelegate?.isFromOnboarding = true
             self?.navigationController?.popViewController(animated: true)
         }
-
         alertVC.addAction(action)
         self.navigationController?.present(alertVC, animated: true, completion: nil)
     }
@@ -157,7 +174,6 @@ class OnboardingStartViewController: UIViewController {
     // MARK: - Navigation
     @IBAction func action_next(_ sender: Any) {
         let isValid = checkValidation()
-
         if isValid.isValid {
             goPageNext()
         } else {
@@ -191,7 +207,6 @@ class OnboardingStartViewController: UIViewController {
         if currentPhasePosition < 1 {
             currentPhasePosition = 1
         }
-
         updateViewsForPosition()
     }
 
@@ -206,11 +221,14 @@ class OnboardingStartViewController: UIViewController {
             ui_top_view.updateTitle(title: "onboard_welcome_title".localized)
             ui_bt_previous.isHidden = true
             ui_bt_next.isHidden = false
+            // (Le bouton sera piloté par la notif live)
         case 2:
             ui_top_view.updateTitle(title: "onboard_sms_title".localized)
             ui_bt_previous.isHidden = false
             ui_bt_next.isHidden = false
             pageViewController?.createPhase2VC?.tempPhone = phone ?? "-"
+            // Phase 2/3 : on garde ta logique locale
+            _ = checkValidation()
         case 3:
             let _title = String(format: "onboard_phone_title".localized, temporaryUser.firstname)
             ui_top_view.updateTitle(title: _title)
@@ -221,10 +239,10 @@ class OnboardingStartViewController: UIViewController {
             if shouldLaunchThird {
                 ui_bt_next.setTitle("onboard_bt_next".localized, for: .normal)
             }
+            _ = checkValidation()
         default:
             break
         }
-        _ = checkValidation()
     }
 
     func enableDisableNextButton(isEnable: Bool) {
@@ -236,43 +254,31 @@ class OnboardingStartViewController: UIViewController {
         var isValid = true
         var message = ""
 
-        // Étape 1 : seules ces trois infos sont obligatoires
+        // Étape 1 : Nom + Prénom + Téléphone uniquement
         if currentPhasePosition == 1 {
-            // Prénom requis
             if temporaryUser.firstname.count < minimumCharacters {
-                isValid = false
-                message = "onboard_error_general".localized
+                isValid = false; message = "onboard_error_general".localized
+            } else if temporaryUser.lastname.count < minimumCharacters {
+                isValid = false; message = "onboard_error_general".localized
+            } else if (phone?.count ?? 0) < minimumPhoneCharacters {
+                isValid = false; message = "onboard_error_general".localized
+            } else if let mail = email, !mail.isEmpty, !mail.isValidEmail {
+                isValid = false; message = "onboard_error_general".localized
             }
-            // Nom requis
-            else if temporaryUser.lastname.count < minimumCharacters {
-                isValid = false
-                message = "onboard_error_general".localized
-            }
-            // Téléphone requis (longueur minimale)
-            else if (phone?.count ?? 0) < minimumPhoneCharacters {
-                isValid = false
-                message = "onboard_error_general".localized
-            }
-            // E-mail facultatif : ne vérifie le format que s’il est renseigné
-            else if let mail = email, !mail.isEmpty, !mail.isValidEmail {
-                isValid = false
-                message = "onboard_error_general".localized
-            }
-            // NB: gender / howWeMet / company / event -> facultatifs (pas de contrôle ici)
+            // Dans tous les cas on renvoie l’état dans l’UI
+            enableDisableNextButton(isEnable: isValid)
+            return (isValid, message)
         }
 
-        // Étape 3 : on garde tes contrôles existants (type + localisation)
+        // Étape 3 : type + localisation
         if currentPhasePosition == 3 {
             if userTypeSelected == .none {
-                isValid = false
-                message = "onboard_error_general".localized
+                isValid = false; message = "onboard_error_general".localized
             } else if temporaryLocation == nil && temporaryGooglePlace == nil {
-                isValid = false
-                message = "onboard_error_general".localized
+                isValid = false; message = "onboard_error_general".localized
             }
         }
 
-        // Active/désactive le bouton "Suivant"
         enableDisableNextButton(isEnable: isValid)
         return (isValid, message)
     }
@@ -289,7 +295,6 @@ class OnboardingStartViewController: UIViewController {
                     let alertVC = UIAlertController(title: nil, message: "invalidPhoneNumberFormat".localized, preferredStyle: .alert)
                     let action = UIAlertAction(title: "close".localized, style: .default, handler: nil)
                     alertVC.addAction(action)
-
                     self?.navigationController?.present(alertVC, animated: true, completion: nil)
                     showErrorHud = false
                 } else if error.code == "PHONE_ALREADY_EXIST" {
@@ -313,9 +318,7 @@ class OnboardingStartViewController: UIViewController {
     }
 
     func createUser() {
-        guard let tempPwd = temporaryPasscode else {
-            return
-        }
+        guard let tempPwd = temporaryPasscode else { return }
 
         IHProgressHUD.show()
         AuthService.postLogin(phone: self.temporaryUser.phone!, password: tempPwd) { [weak self] user, error, isFirstLogin in
@@ -323,10 +326,8 @@ class OnboardingStartViewController: UIViewController {
 
             if error != nil {
                 let alertvc = UIAlertController(title: "tryAgain".localized, message: "invalidPhoneNumberOrCode".localized, preferredStyle: .alert)
-
                 let action = UIAlertAction(title: "tryAgain_short".localized, style: .default, handler: nil)
                 alertvc.addAction(action)
-
                 self?.navigationController?.present(alertvc, animated: true, completion: nil)
             } else if let user = user {
                 var newUser = user
@@ -351,10 +352,7 @@ class OnboardingStartViewController: UIViewController {
                 let alertvc = UIAlertController(title: "error".localized, message: "requestNotSent".localized, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
                 alertvc.addAction(action)
-
                 self?.navigationController?.present(alertvc, animated: true, completion: nil)
-            } else {
-
             }
         }
     }
@@ -363,9 +361,7 @@ class OnboardingStartViewController: UIViewController {
         IHProgressHUD.show()
         var _currentUser = UserDefaults.currentUser
         _currentUser?.goal = userTypeSelected.getGoalString()
-        if let email = email {
-            _currentUser?.email = email
-        }
+        if let email = email { _currentUser?.email = email }
         _currentUser?.hasConsent = hasConsent
         _currentUser?.gender = gender
         _currentUser?.discoverySource = howWeMet
@@ -374,7 +370,7 @@ class OnboardingStartViewController: UIViewController {
             _currentUser?.event = self.event
         }
 
-        UserService.updateUser(user: _currentUser) { [weak self] user, error in
+        UserService.updateUser(user: _currentUser) { [weak self] user, _ in
             IHProgressHUD.dismiss()
             if let user = user {
                 var newUser = user
@@ -388,15 +384,14 @@ class OnboardingStartViewController: UIViewController {
     func updateAddress() {
         if let _place = temporaryGooglePlace, let placeId = _place.placeID {
             IHProgressHUD.show()
-            UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { [weak self] error in
+            UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { [weak self] _ in
                 IHProgressHUD.dismiss()
                 self?.goEnd()
             }
         } else if let _lat = self.temporaryLocation?.latitude, let _long = self.temporaryLocation?.longitude {
             IHProgressHUD.show()
             let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
-
-            UserService.updateUserAddressWith(name: addressName, latitude: _lat, longitude: _long, isSecondaryAddress: false) { [weak self] error in
+            UserService.updateUserAddressWith(name: addressName, latitude: _lat, longitude: _long, isSecondaryAddress: false) { [weak self] _ in
                 IHProgressHUD.dismiss()
                 self?.goEnd()
             }
@@ -436,6 +431,7 @@ extension OnboardingStartViewController: OnboardingDelegate {
         self.company = company
         self.event = event
 
+        // On garde ta logique : on recalcul pour phases 2/3 (et on ne gêne pas la notif pour phase 1)
         let validate = checkValidation()
         enableDisableNextButton(isEnable: validate.isValid)
     }
@@ -446,7 +442,6 @@ extension OnboardingStartViewController: OnboardingDelegate {
 
     func addInfos(userType: UserType) {
         self.userTypeSelected = userType
-        // On s'aligne sur checkValidation() pour activer/désactiver le bouton
         let result = checkValidation()
         enableDisableNextButton(isEnable: result.isValid)
     }
@@ -455,7 +450,6 @@ extension OnboardingStartViewController: OnboardingDelegate {
         self.temporaryGooglePlace = googlePlace
         self.temporaryLocation = currentlocation
         self.temporaryAddressName = currentLocationName
-        // Idem : on recalcul la validité avec ta logique centrale
         let result = checkValidation()
         enableDisableNextButton(isEnable: result.isValid)
     }
@@ -475,7 +469,5 @@ extension OnboardingStartViewController: MJNavBackViewDelegate {
         self.navigationController?.popViewController(animated: true)
     }
 
-    func didTapEvent() {
-        // Nothing yet
-    }
+    func didTapEvent() { }
 }

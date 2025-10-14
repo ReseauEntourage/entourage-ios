@@ -7,74 +7,93 @@ import UIKit
 import GooglePlaces
 import CoreLocation
 
-class OnboardingPageViewController: UIPageViewController {
-    
+final class OnboardingPageViewController: UIPageViewController {
+
+    // MARK: - Child controllers
     var createPhase1VC: OnboardingPhase1ViewController? = nil
     var createPhase2VC: OnboardingPhase2ViewController? = nil
     var createPhase3VC: OnboardingPhase3ViewController? = nil
-    
-    weak var parentDelegate: OnboardingDelegate? = nil
-    
+
+    // ⚠️ Quand parentDelegate est assigné APRÈS la création de phase 1,
+    // on le propage immédiatement aux enfants déjà créés.
+    weak var parentDelegate: OnboardingDelegate? = nil {
+        didSet { propagateDelegateToChildren() }
+    }
+
     var currentPhasePosition = 1
-    
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addRadiusBottomOnly(radius: ApplicationTheme.bigCornerRadius)
-        
+
         // Phase 1 en full code (SwiftUI hosté)
         if createPhase1VC == nil {
             let vc = OnboardingPhase1ViewController()
-            vc.pageDelegate = parentDelegate            // compat API inchangée
-            // Si tu as des valeurs déjà connues, tu peux les pousser ici :
-            // vc.userFirstname = ...
-            // vc.userLastname  = ...
-            // vc.countryCode   = defaultCountryCode
-            // vc.phone         = ...
-            // vc.email         = ...
-            // vc.hasConsent    = ...
+            vc.pageDelegate = parentDelegate // peut être nil ici si pas encore injecté
             createPhase1VC = vc
         }
-        
-        guard let first = createPhase1VC else { return }
-        setViewControllers([first], direction: .forward, animated: true)
+
+        if let first = createPhase1VC {
+            setViewControllers([first], direction: .forward, animated: true)
+        }
     }
-    
+
+    // MARK: - Delegate propagation
+    private func propagateDelegateToChildren() {
+        createPhase1VC?.pageDelegate = parentDelegate
+        createPhase2VC?.pageDelegate = parentDelegate
+        createPhase3VC?.pageDelegate = parentDelegate
+    }
+
+    // MARK: - Factory
     func viewController(phase: Int) -> UIViewController? {
         switch phase {
         case 1:
-            // PLUS de storyboard ici : on réutilise l’instance programmatique
             if createPhase1VC == nil {
                 let vc = OnboardingPhase1ViewController()
                 vc.pageDelegate = parentDelegate
                 createPhase1VC = vc
+            } else {
+                // Au cas où le délégué arrive tard
+                createPhase1VC?.pageDelegate = parentDelegate
             }
             AnalyticsLoggerManager.logEvent(name: Onboard_name)
             return createPhase1VC
-            
+
         case 2:
-            // Tu peux garder storyboard pour la phase 2 pour l’instant
             if createPhase2VC == nil {
-                createPhase2VC = storyboard?.instantiateViewController(withIdentifier: "onboardPhase2") as? OnboardingPhase2ViewController
+                createPhase2VC = storyboard?
+                    .instantiateViewController(withIdentifier: "onboardPhase2")
+                    as? OnboardingPhase2ViewController
+                createPhase2VC?.pageDelegate = parentDelegate
+            } else {
                 createPhase2VC?.pageDelegate = parentDelegate
             }
             AnalyticsLoggerManager.logEvent(name: Onboard_code)
             return createPhase2VC
-            
+
         case 3:
             if createPhase3VC == nil {
-                createPhase3VC = storyboard?.instantiateViewController(withIdentifier: "onboardPhase3") as? OnboardingPhase3ViewController
+                createPhase3VC = storyboard?
+                    .instantiateViewController(withIdentifier: "onboardPhase3")
+                    as? OnboardingPhase3ViewController
+                createPhase3VC?.pageDelegate = parentDelegate
+            } else {
                 createPhase3VC?.pageDelegate = parentDelegate
             }
             AnalyticsLoggerManager.logEvent(name: Onboard_profile)
             return createPhase3VC
-            
+
         default:
             return nil
         }
     }
-    
+
+    // MARK: - Public
     func goPagePosition(position: Int) {
-        let direction: UIPageViewController.NavigationDirection = (currentPhasePosition > position) ? .reverse : .forward
+        let direction: UIPageViewController.NavigationDirection =
+            (currentPhasePosition > position) ? .reverse : .forward
         currentPhasePosition = position
         guard let vc = viewController(phase: currentPhasePosition) else { return }
         setViewControllers([vc], direction: direction, animated: true)

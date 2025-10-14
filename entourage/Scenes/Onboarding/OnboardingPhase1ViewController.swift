@@ -3,9 +3,12 @@ import Combine
 import CoreLocation
 import GooglePlaces
 
+// MARK: - Notification (écoutée par le StartController si besoin)
+ extension Notification.Name {
+    static let onboardingPhase1CanProceedChanged = Notification.Name("onboardingPhase1CanProceedChanged")
+}
 
 // MARK: - Fonts SwiftUI (Quicksand-Bold & NunitoSans-Regular)
-
 private extension Font {
     static func entourageTitle(_ size: CGFloat = 15) -> Font {
         .custom("Quicksand-Bold", size: size)
@@ -16,7 +19,6 @@ private extension Font {
 }
 
 // MARK: - ViewModel
-
 final class OnboardingPhase1VM: ObservableObject {
     // Inputs
     @Published var firstname: String = ""
@@ -45,12 +47,15 @@ final class OnboardingPhase1VM: ObservableObject {
     @Published var events: [SalesforceEvent] = []
     @Published var selectedEventIndex: Int? = nil
 
+    // Pilotage du bouton "Suivant"
+    @Published var canProceed: Bool = false
+
     weak var pageDelegate: OnboardingDelegate?
 
     private var cancellables = Set<AnyCancellable>()
 
     init() {
-        // Push délégué à chaque changement utile
+        // Push + recompute à chaque changement utile
         var triggers: [AnyPublisher<Void, Never>] = []
         triggers.append($firstname.dropFirst().map { _ in () }.eraseToAnyPublisher())
         triggers.append($lastname.dropFirst().map { _ in () }.eraseToAnyPublisher())
@@ -66,11 +71,15 @@ final class OnboardingPhase1VM: ObservableObject {
 
         Publishers.MergeMany(triggers)
             .debounce(for: .milliseconds(60), scheduler: RunLoop.main)
-            .sink { [weak self] _ in self?.pushToDelegate() }
+            .sink { [weak self] _ in
+                self?.pushToDelegate()
+                self?.recomputeCanProceed()
+            }
             .store(in: &cancellables)
 
-        // Premier push pour que "Suivant" ait toujours un état
+        // Boot
         pushToDelegate()
+        recomputeCanProceed()
     }
 
     // Affiche Entreprise/Événement si la réponse contient "entreprise"
@@ -90,19 +99,37 @@ final class OnboardingPhase1VM: ObservableObject {
     }
 
     // MARK: - Validation
-
     var isFirstnameValid: Bool { firstname.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2 }
     var isLastnameValid:   Bool { lastname.trimmingCharacters(in: .whitespacesAndNewlines).count  >= 2 }
-    var isPhoneValid:      Bool { phone.filter(\.isNumber).count >= 9 }
+    var isPhoneValid:      Bool { phone.filter(\.isNumber).count >= 9 } // 9 mini (international)
     var isEmailValid:      Bool {
         let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed.isEmpty { return true }
+        if trimmed.isEmpty { return true } // email facultatif
         let pattern = #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#
         return trimmed.range(of: pattern, options: [.regularExpression, .caseInsensitive]) != nil
     }
 
-    // MARK: - Networking (services existants)
+    // MARK: - Proceed logic
+    func recomputeCanProceed() {
+        let baseOK = isFirstnameValid && isLastnameValid && isPhoneValid
+        let companyOK: Bool
+        if showCompanyAndEvent {
+            companyOK = (selectedEnterpriseIndex != nil) && (selectedEventIndex != nil)
+        } else {
+            companyOK = true
+        }
+        let next = baseOK && companyOK
+        if canProceed != next {
+            canProceed = next
+            NotificationCenter.default.post(
+                name: .onboardingPhase1CanProceedChanged,
+                object: nil,
+                userInfo: ["enabled": next]
+            )
+        }
+    }
 
+    // MARK: - Networking (services existants)
     func loadMetadata() {
         PreOnboardingService.shared.loadMetadata { [weak self] result in
             DispatchQueue.main.async {
@@ -141,6 +168,8 @@ final class OnboardingPhase1VM: ObservableObject {
                     self.genderOptions = ["Homme", "Femme", "Non binaire"]
                     self.howWeMetOptions = []
                 }
+                // Après chargement, recalcule
+                self.recomputeCanProceed()
             }
         }
     }
@@ -153,6 +182,7 @@ final class OnboardingPhase1VM: ObservableObject {
                 case .success(let list): self.enterprises = list
                 case .failure:           self.enterprises = []
                 }
+                self.recomputeCanProceed()
             }
         }
     }
@@ -162,6 +192,7 @@ final class OnboardingPhase1VM: ObservableObject {
               enterprises.indices.contains(idx),
               let enterpriseId = enterprises[idx].id else {
             events = []; selectedEventIndex = nil
+            recomputeCanProceed()
             return
         }
         events = []; selectedEventIndex = nil
@@ -171,12 +202,12 @@ final class OnboardingPhase1VM: ObservableObject {
                 case .success(let list): self?.events = list
                 case .failure:           self?.events = []
                 }
+                self?.recomputeCanProceed()
             }
         }
     }
 
     // MARK: - Delegate bridge
-
     func pushToDelegate() {
         let trimmedFirst = firstname.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedLast  = lastname.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -199,7 +230,6 @@ final class OnboardingPhase1VM: ObservableObject {
 }
 
 // MARK: - SwiftUI View
-
 struct OnboardingPhase1View: View {
     @ObservedObject var vm: OnboardingPhase1VM
 
@@ -239,11 +269,12 @@ struct OnboardingPhase1View: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 40)
         }
-        .background(Color.white) // tout blanc
+        .background(Color.white) // tout blanc (le host est transparent)
         .onAppear {
             vm.loadMetadata()
             vm.loadEnterprises()
-            vm.pushToDelegate() // push initial garanti
+            vm.pushToDelegate()          // push initial
+            vm.recomputeCanProceed()     // et état initial du bouton "Suivant"
         }
         .navigationBarTitle("Informations", displayMode: .inline)
         .sheet(isPresented: $showDateSheet) {
@@ -259,7 +290,6 @@ struct OnboardingPhase1View: View {
 }
 
 // MARK: - Sections
-
 private struct IdentitySection: View {
     @ObservedObject var vm: OnboardingPhase1VM
     @Binding var showDateSheet: Bool
@@ -394,7 +424,11 @@ private struct ProfileSection: View {
                 }
                 .tint(.orange)
             } else {
-                // Fallback on earlier versions
+                Toggle(isOn: $vm.consent) {
+                    Text("Je souhaite recevoir des informations et des conseils de l’équipe Entourage")
+                        .font(.entourageBody(11))
+                }
+                .accentColor(.orange)
             }
 
             if vm.showCompanyAndEvent {
@@ -448,7 +482,6 @@ private struct ProfileSection: View {
 }
 
 // MARK: - Card container (blanc)
-
 private struct CardContainer<Content: View>: View {
     @ViewBuilder var content: Content
     var body: some View {
@@ -460,7 +493,6 @@ private struct CardContainer<Content: View>: View {
 }
 
 // MARK: - Components
-
 private struct FloatingField: View {
     var title: String
     var placeholder: String
@@ -548,7 +580,6 @@ private struct DateRowButton: View {
 }
 
 // MARK: - Sheet Date (iOS 13 OK)
-
 private struct DateSheet: View {
     @Binding var tempDate: Date
     var onClear: () -> Void
@@ -589,11 +620,13 @@ private struct HelperErrorRow: View {
     }
 }
 
-// MARK: - UIKit bridge
-
+// MARK: - UIKit bridge (FIX: une seule VM partagée)
 final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1View> {
-    private let vm = OnboardingPhase1VM()
 
+    // Une seule instance, partagée entre le VC et la View SwiftUI
+    let vm: OnboardingPhase1VM
+
+    // Déférencement vers l'extérieur (propagé vers la VM)
     weak var pageDelegateBridge: OnboardingDelegate? {
         didSet { vm.pageDelegate = pageDelegateBridge }
     }
@@ -612,19 +645,23 @@ final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1
     var company:  String?
     var eventName: String?
 
+    // Init programmatique
     init() {
-        let vm = OnboardingPhase1VM()
-        let view = OnboardingPhase1View(vm: vm)
-        super.init(rootView: view)
-        self.vm.pageDelegate = nil
-        self.view.backgroundColor = .white
+        let sharedVM = OnboardingPhase1VM()
+        self.vm = sharedVM
+        super.init(rootView: OnboardingPhase1View(vm: sharedVM))
+        // Important : transparent pour ne pas bloquer les taps sur le bouton “Suivant”
+        view.isOpaque = false
+        view.backgroundColor = .clear
     }
 
+    // Init via storyboard
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
-        let vm = OnboardingPhase1VM()
-        super.init(coder: aDecoder, rootView: OnboardingPhase1View(vm: vm))
-        self.vm.pageDelegate = nil
-        self.view.backgroundColor = .white
+        let sharedVM = OnboardingPhase1VM()
+        self.vm = sharedVM
+        super.init(coder: aDecoder, rootView: OnboardingPhase1View(vm: sharedVM))
+        view.isOpaque = false
+        view.backgroundColor = .clear
     }
 
     override func viewDidLoad() {
