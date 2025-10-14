@@ -7,20 +7,22 @@
 
 import UIKit
 
-class NeighborhoodCguCell: UITableViewCell {
+final class NeighborhoodCguCell: UITableViewCell {
 
     @IBOutlet weak var ui_description: UILabel!
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_separator: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        ui_description.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_title?.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
+        ui_description?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        selectionStyle = .none
     }
-    
-    func populateCell(title:String,description:String) {
-        ui_title.text = title
-        ui_description.text = description
+
+    func populateCell(title: String, description: String) {
+        ui_title?.text = title
+        ui_description?.text = description
+        ui_separator?.isHidden = false
     }
 }

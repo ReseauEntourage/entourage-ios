@@ -1754,14 +1754,8 @@
                                             <constraint firstAttribute="height" constant="68" id="Izk-lb-Rh6"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Règlement du groupe, à lire attentivement.    " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h96-QZ-03M">
-                                        <rect key="frame" x="32" y="84" width="350" height="18"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <color key="textColor" name="orange_app"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Jzw-b4-sby">
-                                        <rect key="frame" x="0.0" y="118" width="414" height="682"/>
+                                        <rect key="frame" x="0.0" y="78" width="414" height="722"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_cgu" rowHeight="93" id="InL-R9-rFD" customClass="NeighborhoodCguCell" customModule="Ent_Beta" customModuleProvider="target">
@@ -1840,16 +1834,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="h96-QZ-03M" firstAttribute="leading" secondItem="TCl-BI-eOi" secondAttribute="leading" constant="32" id="3bU-HW-TSZ"/>
                                     <constraint firstAttribute="trailing" secondItem="Jzw-b4-sby" secondAttribute="trailing" id="4Kw-HW-0g5"/>
                                     <constraint firstItem="Jzw-b4-sby" firstAttribute="leading" secondItem="At3-Jf-q9d" secondAttribute="leading" id="F0N-A1-vcJ"/>
                                     <constraint firstItem="TCl-BI-eOi" firstAttribute="top" secondItem="At3-Jf-q9d" secondAttribute="top" id="GWI-zU-FgB"/>
                                     <constraint firstItem="TCl-BI-eOi" firstAttribute="leading" secondItem="At3-Jf-q9d" secondAttribute="leading" id="WqR-Wk-ub0"/>
-                                    <constraint firstItem="h96-QZ-03M" firstAttribute="trailing" secondItem="TCl-BI-eOi" secondAttribute="trailing" constant="-32" id="gNB-BC-O53"/>
                                     <constraint firstAttribute="bottom" secondItem="Jzw-b4-sby" secondAttribute="bottom" id="iI0-zW-Heh"/>
-                                    <constraint firstItem="h96-QZ-03M" firstAttribute="top" secondItem="TCl-BI-eOi" secondAttribute="bottom" constant="16" id="iag-So-0V2"/>
+                                    <constraint firstItem="Jzw-b4-sby" firstAttribute="top" secondItem="TCl-BI-eOi" secondAttribute="bottom" constant="10" id="oGR-oP-A7H"/>
                                     <constraint firstAttribute="trailing" secondItem="TCl-BI-eOi" secondAttribute="trailing" id="qDp-Q6-Hyy"/>
-                                    <constraint firstItem="Jzw-b4-sby" firstAttribute="top" secondItem="h96-QZ-03M" secondAttribute="bottom" constant="16" id="zP9-DW-ylZ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1865,7 +1856,6 @@
                     <navigationItem key="navigationItem" id="iAi-xr-UiL"/>
                     <connections>
                         <outlet property="ui_tableview" destination="Jzw-b4-sby" id="JyD-MZ-FzU"/>
-                        <outlet property="ui_title" destination="h96-QZ-03M" id="duJ-XT-Hzy"/>
                         <outlet property="ui_view_top" destination="TCl-BI-eOi" id="vXL-2W-wA8"/>
                     </connections>
                 </viewController>

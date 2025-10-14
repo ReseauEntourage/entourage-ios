@@ -592,6 +592,7 @@
 		26E25EFB2E8EB1540073B46A /* ImageGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E25EFA2E8EB1540073B46A /* ImageGridCell.swift */; };
 		26E25EFD2E8EB57A0073B46A /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E25EFC2E8EB57A0073B46A /* ImageCache.swift */; };
 		26E25F012E8EB5CE0073B46A /* ImagePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E25F002E8EB5CE0073B46A /* ImagePreviewController.swift */; };
+		26E2877B2E9D59370045A9FA /* EventRuleSectionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E2877A2E9D59370045A9FA /* EventRuleSectionTitle.swift */; };
 		26E66F122E7044B900E65BFB /* AppSignableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E66F112E7044B900E65BFB /* AppSignableManager.swift */; };
 		26EA54F12E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA54F02E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift */; };
 		26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */; };
@@ -1205,6 +1206,7 @@
 		26E25EFA2E8EB1540073B46A /* ImageGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridCell.swift; sourceTree = "<group>"; };
 		26E25EFC2E8EB57A0073B46A /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		26E25F002E8EB5CE0073B46A /* ImagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewController.swift; sourceTree = "<group>"; };
+		26E2877A2E9D59370045A9FA /* EventRuleSectionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRuleSectionTitle.swift; sourceTree = "<group>"; };
 		26E66F112E7044B900E65BFB /* AppSignableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSignableManager.swift; sourceTree = "<group>"; };
 		26EA54F02E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoConsentPopupViewController.swift; sourceTree = "<group>"; };
 		26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneTitleCell.swift; sourceTree = "<group>"; };
@@ -1287,6 +1289,7 @@
 				021FD96C2876F12E00D3AA54 /* EventListSectionCell.xib */,
 				02040CF3288E97B700AB1FBB /* Params */,
 				02E0EFA9287870CA009B2C65 /* Feed */,
+				26E2877A2E9D59370045A9FA /* EventRuleSectionTitle.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2971,6 +2974,7 @@
 				2619E1492A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift in Sources */,
 				0223E5142864A4B200E7556E /* AddDescriptionTableViewCell.swift in Sources */,
 				26F03C9D2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift in Sources */,
+				26E2877B2E9D59370045A9FA /* EventRuleSectionTitle.swift in Sources */,
 				02C6E86528203127009D4289 /* NeighborhoodParamSignalCell.swift in Sources */,
 				26A7AA892DD4B3DB00374DDB /* CellWaitingSmallTalk.swift in Sources */,
 				26AD11962AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift in Sources */,
