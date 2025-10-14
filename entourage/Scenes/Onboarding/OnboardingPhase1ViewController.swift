@@ -1,9 +1,23 @@
 import SwiftUI
 import Combine
+import CoreLocation
+import GooglePlaces
+
+
+// MARK: - Fonts SwiftUI (Quicksand-Bold & NunitoSans-Regular)
+
+private extension Font {
+    static func entourageTitle(_ size: CGFloat = 15) -> Font {
+        .custom("Quicksand-Bold", size: size)
+    }
+    static func entourageBody(_ size: CGFloat = 15) -> Font {
+        .custom("NunitoSans-Regular", size: size)
+    }
+}
 
 // MARK: - ViewModel
 
-final class OnboardingPhase1ViewModel: ObservableObject {
+final class OnboardingPhase1VM: ObservableObject {
     // Inputs
     @Published var firstname: String = ""
     @Published var lastname: String = ""
@@ -54,9 +68,12 @@ final class OnboardingPhase1ViewModel: ObservableObject {
             .debounce(for: .milliseconds(60), scheduler: RunLoop.main)
             .sink { [weak self] _ in self?.pushToDelegate() }
             .store(in: &cancellables)
+
+        // Premier push pour que "Suivant" ait toujours un état
+        pushToDelegate()
     }
 
-    // 🔎 Affiche les champs Entreprise/Événement si la réponse CONTIENT "entreprise"
+    // Affiche Entreprise/Événement si la réponse contient "entreprise"
     var showCompanyAndEvent: Bool {
         let label = howWeMetLabel.folding(options: .diacriticInsensitive, locale: .current).lowercased()
         return label.contains("entreprise")
@@ -72,7 +89,7 @@ final class OnboardingPhase1ViewModel: ObservableObject {
         return events[i].name
     }
 
-    // MARK: Validation
+    // MARK: - Validation
 
     var isFirstnameValid: Bool { firstname.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2 }
     var isLastnameValid:   Bool { lastname.trimmingCharacters(in: .whitespacesAndNewlines).count  >= 2 }
@@ -84,7 +101,7 @@ final class OnboardingPhase1ViewModel: ObservableObject {
         return trimmed.range(of: pattern, options: [.regularExpression, .caseInsensitive]) != nil
     }
 
-    // MARK: Networking
+    // MARK: - Networking (services existants)
 
     func loadMetadata() {
         PreOnboardingService.shared.loadMetadata { [weak self] result in
@@ -101,7 +118,7 @@ final class OnboardingPhase1ViewModel: ObservableObject {
                         ? ["Homme", "Femme", "Non binaire"]
                         : labelsG.sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
 
-                    // How we met: ordre demandé si présent
+                    // How we met : ordre demandé si disponible
                     let wanted = ["Bouche à oreille",
                                   "Internet",
                                   "Télévision / média",
@@ -158,7 +175,7 @@ final class OnboardingPhase1ViewModel: ObservableObject {
         }
     }
 
-    // MARK: Delegate bridge
+    // MARK: - Delegate bridge
 
     func pushToDelegate() {
         let trimmedFirst = firstname.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -184,9 +201,8 @@ final class OnboardingPhase1ViewModel: ObservableObject {
 // MARK: - SwiftUI View
 
 struct OnboardingPhase1View: View {
-    @ObservedObject var vm: OnboardingPhase1ViewModel
+    @ObservedObject var vm: OnboardingPhase1VM
 
-    // Liste pays
     private let countries: [CountryCode] = [
         CountryCode(country: "France",   code: "+33", flag: "🇫🇷"),
         CountryCode(country: "Belgique", code: "+32", flag: "🇧🇪"),
@@ -194,14 +210,12 @@ struct OnboardingPhase1View: View {
         CountryCode(country: "Canada",   code: "+1",  flag: "🇨🇦")
     ]
 
-    // Date sheet
     @State private var showDateSheet = false
     @State private var tempDate = Date()
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-
                 CardContainer {
                     IdentitySection(vm: vm,
                                     showDateSheet: $showDateSheet,
@@ -217,7 +231,7 @@ struct OnboardingPhase1View: View {
                 }
 
                 Text("(*) champs obligatoires")
-                    .font(.footnote)
+                    .font(.entourageBody(15))
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 6)
@@ -225,12 +239,13 @@ struct OnboardingPhase1View: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 40)
         }
+        .background(Color.white) // tout blanc
         .onAppear {
             vm.loadMetadata()
             vm.loadEnterprises()
+            vm.pushToDelegate() // push initial garanti
         }
         .navigationBarTitle("Informations", displayMode: .inline)
-        .background(Color(UIColor.systemGroupedBackground))
         .sheet(isPresented: $showDateSheet) {
             DateSheet(tempDate: $tempDate) {
                 vm.birthday = nil
@@ -246,19 +261,17 @@ struct OnboardingPhase1View: View {
 // MARK: - Sections
 
 private struct IdentitySection: View {
-    @ObservedObject var vm: OnboardingPhase1ViewModel
+    @ObservedObject var vm: OnboardingPhase1VM
     @Binding var showDateSheet: Bool
     @Binding var tempDate: Date
 
-    // ActionSheet "Je suis"
     @State private var showGenderAS = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Identité")
-                .font(.system(size: 22, weight: .semibold))
+            Text("Identité").font(.entourageTitle(15))
 
-            // Je suis (en haut, action sheet compacte)
+            // Je suis
             SelectorRowButton(
                 title: "Je suis",
                 placeholder: "Sélectionner dans la liste",
@@ -292,23 +305,23 @@ private struct IdentitySection: View {
 }
 
 private struct ContactSection: View {
-    @ObservedObject var vm: OnboardingPhase1ViewModel
+    @ObservedObject var vm: OnboardingPhase1VM
     let countries: [CountryCode]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Contact")
-                .font(.system(size: 22, weight: .semibold))
+            Text("Contact").font(.entourageTitle(15))
 
             HStack(spacing: 12) {
-                // iOS 13: Picker roue avec label custom cliquable
+                // Picker roue masqué avec label custom
                 ZStack(alignment: .leading) {
                     HStack {
                         Text("\(vm.selectedCountry.flag) \(vm.selectedCountry.country) \(vm.selectedCountry.code)")
+                            .font(.entourageBody(15))
                             .padding(.leading, 12)
                         Spacer()
                         Image(systemName: "chevron.up.chevron.down")
-                            .font(.footnote)
+                            .font(.entourageBody(15))
                             .padding(.trailing, 12)
                     }
                     .allowsHitTesting(false)
@@ -321,7 +334,9 @@ private struct ContactSection: View {
                             }
                         })) {
                             ForEach(countries, id: \.code) { c in
-                                Text("\(c.flag) \(c.country) \(c.code)").tag(c.code)
+                                Text("\(c.flag) \(c.country) \(c.code)")
+                                    .font(.entourageBody(15))
+                                    .tag(c.code)
                             }
                         }
                         .labelsHidden()
@@ -347,19 +362,17 @@ private struct ContactSection: View {
 }
 
 private struct ProfileSection: View {
-    @ObservedObject var vm: OnboardingPhase1ViewModel
+    @ObservedObject var vm: OnboardingPhase1VM
 
-    // ActionSheets
     @State private var showHowAS = false
     @State private var showEnterpriseAS = false
     @State private var showEventAS = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Profil & Découverte")
-                .font(.system(size: 22, weight: .semibold))
+            Text("Profil & Découverte").font(.entourageTitle(15))
 
-            // Comment vous nous avez connus ? (action sheet compacte)
+            // Comment vous nous avez connus ?
             SelectorRowButton(
                 title: "Comment vous nous avez connus ?",
                 placeholder: "Sélectionner dans la liste",
@@ -374,16 +387,20 @@ private struct ProfileSection: View {
                 return ActionSheet(title: Text("Comment vous nous avez connus ?"), buttons: buttons)
             }
 
-            Toggle(isOn: $vm.consent) {
-                Text("Je souhaite recevoir des informations et des conseils de l’équipe Entourage")
+            if #available(iOS 15.0, *) {
+                Toggle(isOn: $vm.consent) {
+                    Text("Je souhaite recevoir des informations et des conseils de l’équipe Entourage")
+                        .font(.entourageBody(11)) // opt-in en body 11
+                }
+                .tint(.orange)
+            } else {
+                // Fallback on earlier versions
             }
-            .accentColor(.orange)
 
-            // Champs conditionnels obligatoires
             if vm.showCompanyAndEvent {
                 Divider().padding(.vertical, 4)
 
-                // Entreprise (action sheet)
+                // Entreprise
                 SelectorRowButton(
                     title: "Nom de votre entreprise",
                     placeholder: vm.enterprises.isEmpty ? "Chargement..." : "Sélectionner dans la liste",
@@ -399,12 +416,16 @@ private struct ProfileSection: View {
                                 vm.loadEventsForSelectedEnterprise()
                             }
                         }
-                    buttons.append(.destructive(Text("Effacer")) { vm.selectedEnterpriseIndex = nil; vm.events = []; vm.selectedEventIndex = nil })
+                    buttons.append(.destructive(Text("Effacer")) {
+                        vm.selectedEnterpriseIndex = nil
+                        vm.events = []
+                        vm.selectedEventIndex = nil
+                    })
                     buttons.append(.cancel())
                     return ActionSheet(title: Text("Nom de votre entreprise"), buttons: buttons)
                 }
 
-                // Événement (action sheet)
+                // Événement
                 SelectorRowButton(
                     title: "Événement auquel vous participez",
                     placeholder: vm.events.isEmpty ? "Sélectionner une entreprise d’abord" : "Sélectionner dans la liste",
@@ -417,7 +438,6 @@ private struct ProfileSection: View {
                         vm.events.enumerated().map { i, ev in
                             .default(Text(ev.name ?? "")) { vm.selectedEventIndex = i }
                         }
-                    // Effacer
                     buttons.append(.destructive(Text("Effacer")) { vm.selectedEventIndex = nil })
                     buttons.append(.cancel())
                     return ActionSheet(title: Text("Événement auquel vous participez"), buttons: buttons)
@@ -427,7 +447,7 @@ private struct ProfileSection: View {
     }
 }
 
-// MARK: - Card container
+// MARK: - Card container (blanc)
 
 private struct CardContainer<Content: View>: View {
     @ViewBuilder var content: Content
@@ -436,7 +456,6 @@ private struct CardContainer<Content: View>: View {
             .padding(16)
             .background(Color.white)
             .cornerRadius(20)
-            .shadow(color: Color.black.opacity(0.06), radius: 12, x: 0, y: 6)
     }
 }
 
@@ -449,8 +468,9 @@ private struct FloatingField: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(title).font(.subheadline).fontWeight(.semibold)
+            Text(title).font(.entourageTitle(15))
             TextField(placeholder, text: $text)
+                .font(.entourageBody(15))
                 .autocapitalization(.none)
                 .padding(.horizontal, 12)
                 .frame(height: 44)
@@ -470,13 +490,16 @@ private struct SelectorRowButton: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(title).font(.subheadline).fontWeight(.semibold)
+            Text(title).font(.entourageTitle(15))
             Button(action: onTap) {
                 HStack {
                     Text(value.isEmpty ? placeholder : value)
+                        .font(.entourageBody(15))
+                        .lineLimit(1)
                         .foregroundColor(value.isEmpty ? .secondary : .primary)
                     Spacer()
                     Image(systemName: "chevron.up.chevron.down")
+                        .font(.entourageBody(15))
                 }
                 .padding(.horizontal, 12)
                 .frame(height: 44)
@@ -503,13 +526,15 @@ private struct DateRowButton: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(title).font(.subheadline).fontWeight(.semibold)
+            Text(title).font(.entourageTitle(15))
             Button(action: onTap) {
                 HStack {
                     Text(formatted.isEmpty ? placeholder : formatted)
+                        .font(.entourageBody(15))
                         .foregroundColor(formatted.isEmpty ? .secondary : .primary)
                     Spacer()
                     Image(systemName: "calendar")
+                        .font(.entourageBody(15))
                 }
                 .padding(.horizontal, 12)
                 .frame(height: 44)
@@ -522,7 +547,7 @@ private struct DateRowButton: View {
     }
 }
 
-// MARK: - Sheets (date uniquement)
+// MARK: - Sheet Date (iOS 13 OK)
 
 private struct DateSheet: View {
     @Binding var tempDate: Date
@@ -531,7 +556,7 @@ private struct DateSheet: View {
     var body: some View {
         VStack(spacing: 12) {
             Text("Sélectionner une date")
-                .font(.headline)
+                .font(.entourageTitle(15))
                 .padding(.top, 12)
             DatePicker("", selection: $tempDate, in: ...Date(), displayedComponents: .date)
                 .labelsHidden()
@@ -541,7 +566,7 @@ private struct DateSheet: View {
                 Button("Effacer", action: onClear)
                 Spacer()
                 Button("Valider", action: onValidate)
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.entourageTitle(15))
             }
             .padding()
         }
@@ -555,7 +580,7 @@ private struct HelperErrorRow: View {
         Group {
             if !isValid {
                 Text(message)
-                    .font(.footnote)
+                    .font(.entourageBody(13))
                     .foregroundColor(.red)
                     .padding(.leading, 2)
             }
@@ -567,7 +592,7 @@ private struct HelperErrorRow: View {
 // MARK: - UIKit bridge
 
 final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1View> {
-    private let vm = OnboardingPhase1ViewModel()
+    private let vm = OnboardingPhase1VM()
 
     weak var pageDelegateBridge: OnboardingDelegate? {
         didSet { vm.pageDelegate = pageDelegateBridge }
@@ -588,18 +613,18 @@ final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1
     var eventName: String?
 
     init() {
-        let vm = OnboardingPhase1ViewModel()
+        let vm = OnboardingPhase1VM()
         let view = OnboardingPhase1View(vm: vm)
         super.init(rootView: view)
         self.vm.pageDelegate = nil
-        self.view.backgroundColor = .systemGroupedBackground
+        self.view.backgroundColor = .white
     }
 
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
-        let vm = OnboardingPhase1ViewModel()
+        let vm = OnboardingPhase1VM()
         super.init(coder: aDecoder, rootView: OnboardingPhase1View(vm: vm))
         self.vm.pageDelegate = nil
-        self.view.backgroundColor = .systemGroupedBackground
+        self.view.backgroundColor = .white
     }
 
     override func viewDidLoad() {
