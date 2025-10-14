@@ -23,6 +23,4 @@ public let defaultCountryCode = CountryCode(country: "France", code: "+33", flag
 public let allCountryCodes: [CountryCode] = [
     CountryCode(country: "France",   code: "+33", flag: "🇫🇷"),
     CountryCode(country: "Belgique", code: "+32", flag: "🇧🇪"),
-    CountryCode(country: "Suisse",   code: "+41", flag: "🇨🇭"),
-    CountryCode(country: "Canada",   code: "+1",  flag: "🇨🇦")
 ]

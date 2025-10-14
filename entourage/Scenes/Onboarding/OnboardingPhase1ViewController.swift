@@ -274,7 +274,7 @@ struct OnboardingPhase1View: View {
             vm.loadMetadata()
             vm.loadEnterprises()
             vm.pushToDelegate()          // push initial
-            vm.recomputeCanProceed()     // et état initial du bouton "Suivant"
+            vm.recomputeCanProceed()     // état initial du bouton "Suivant"
         }
         .navigationBarTitle("Informations", displayMode: .inline)
         .sheet(isPresented: $showDateSheet) {
@@ -289,7 +289,7 @@ struct OnboardingPhase1View: View {
     }
 }
 
-// MARK: - Sections (headers removed + icons orange)
+// MARK: - Sections (headers enlevés + icônes orange)
 private struct IdentitySection: View {
     @ObservedObject var vm: OnboardingPhase1VM
     @Binding var showDateSheet: Bool
@@ -316,7 +316,6 @@ private struct IdentitySection: View {
             }
 
             FloatingField(title: "Prénom*", placeholder: "Ex. : Marie", text: $vm.firstname)
-
             FloatingField(title: "Nom*", placeholder: "Ex. : Dupont", text: $vm.lastname)
 
             DateRowButton(
@@ -339,18 +338,20 @@ private struct ContactSection: View {
         VStack(alignment: .leading, spacing: 16) {
 
             HStack(spacing: 12) {
-                // Picker roue masqué avec label custom
+                // ——— Indicatif : flag only, comfy spacing ———
                 ZStack(alignment: .leading) {
                     HStack {
-                        Text("\(vm.selectedCountry.flag) \(vm.selectedCountry.country) \(vm.selectedCountry.code)")
-                            .font(.entourageBody(15))
-                            .padding(.leading, 12)
+                        Text(vm.selectedCountry.flag)
+                            .font(.system(size: 28))
+                            .frame(width: 44, height: 44, alignment: .center)
+                            .padding(.leading, 10)
                         Spacer()
                         Image(systemName: "chevron.up.chevron.down")
                             .font(.entourageBody(15))
                             .foregroundColor(Color(UIColor.appOrange))
-                            .padding(.trailing, 12)
+                            .padding(.trailing, 10)
                     }
+                    .contentShape(Rectangle())
                     .allowsHitTesting(false)
 
                     Picker("", selection: Binding<String>(
@@ -360,18 +361,19 @@ private struct ContactSection: View {
                                 vm.selectedCountry = found
                             }
                         })) {
+                            // Dans la liste aussi : uniquement le drapeau
                             ForEach(countries, id: \.code) { c in
-                                Text("\(c.flag) \(c.country) \(c.code)")
-                                    .font(.entourageBody(15))
-                                    .tag(c.code)
+                                Text(c.flag).tag(c.code)
                             }
                         }
                         .labelsHidden()
                         .opacity(0.02)
                 }
-                .frame(height: 44)
-                .background(RoundedRectangle(cornerRadius: 12).stroke(Color.secondary.opacity(0.25)))
-                .frame(maxWidth: 220)
+                .frame(height: 52)
+                .frame(width: 100, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: 12).stroke(Color.secondary.opacity(0.25))
+                )
 
                 FloatingField(title: "Téléphone*", placeholder: "06 XX XX XX XX", text: $vm.phone)
                     .keyboardType(.numberPad)
@@ -574,32 +576,7 @@ private struct DateRowButton: View {
     }
 }
 
-// MARK: - Sheet Date (iOS 13 OK)
-private struct DateSheet: View {
-    @Binding var tempDate: Date
-    var onClear: () -> Void
-    var onValidate: () -> Void
-    var body: some View {
-        VStack(spacing: 12) {
-            Text("Sélectionner une date")
-                .font(.entourageTitle(15))
-                .padding(.top, 12)
-            DatePicker("", selection: $tempDate, in: ...Date(), displayedComponents: .date)
-                .labelsHidden()
-                .datePickerStyle(WheelDatePickerStyle())
-                .frame(maxWidth: .infinity)
-            HStack {
-                Button("Effacer", action: onClear)
-                Spacer()
-                Button("Valider", action: onValidate)
-                    .font(.entourageTitle(15))
-            }
-            .padding()
-        }
-    }
-}
-
-// MARK: - UIKit bridge (FIX: une seule VM partagée)
+// MARK: - UIKit bridge (une seule VM partagée)
 final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1View> {
 
     // Une seule instance, partagée entre le VC et la View SwiftUI
@@ -652,5 +629,47 @@ final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1
     var pageDelegate: OnboardingDelegate? {
         get { pageDelegateBridge }
         set { pageDelegateBridge = newValue }
+    }
+}
+
+// MARK: - Sheet Date (compatible iOS 13+)
+private struct DateSheet: View {
+    @Binding var tempDate: Date
+    var onClear: () -> Void
+    var onValidate: () -> Void
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Text("Sélectionner une date")
+                .font(.entourageTitle(15))
+                .padding(.top, 12)
+
+            Group {
+                if #available(iOS 14.0, *) {
+                    DatePicker("",
+                               selection: $tempDate,
+                               in: ...Date(),
+                               displayedComponents: .date)
+                        .labelsHidden()
+                        .datePickerStyle(WheelDatePickerStyle())
+                } else {
+                    DatePicker("",
+                               selection: $tempDate,
+                               in: ...Date(),
+                               displayedComponents: .date)
+                        .labelsHidden()
+                    // Pas de style explicite < iOS 14
+                }
+            }
+            .frame(maxWidth: .infinity)
+
+            HStack {
+                Button("Effacer", action: onClear)
+                Spacer()
+                Button("Valider", action: onValidate)
+                    .font(.entourageTitle(15))
+            }
+            .padding()
+        }
     }
 }
