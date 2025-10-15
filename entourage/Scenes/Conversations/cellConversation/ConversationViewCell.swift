@@ -6,16 +6,20 @@ private let conversationBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", si
 private let deletedBackgroundColor = UIColor.appPaleGrey
 private let deletedTextColor = UIColor(named: "appGreyTextDeleted") ?? UIColor.darkGray
 
+
 class ConversationViewCell: UITableViewCell, UITextViewDelegate {
 
     // MARK: - IBOutlets
     @IBOutlet weak var ui_image_avatar: UIImageView!
     @IBOutlet weak var ui_image_comment: UIImageView!
-    @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint!
-    @IBOutlet weak var ui_label_comment: UILabel!            // conservé, mais masqué (compat storyboard)
-    @IBOutlet weak var ui_label_date: UILabel!               // affiche "Nom • HH:mm"
-    @IBOutlet weak var ui_view_label: UIView!                // bulle contenant le texte
+    @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint!   // contrainte IB déjà en place
+    @IBOutlet weak var ui_label_comment: UILabel!                        // conservé, masqué
+    @IBOutlet weak var ui_label_date: UILabel!
+    @IBOutlet weak var ui_view_label: UIView!                            // bulle texte
     @IBOutlet weak var ui_label_min_width: NSLayoutConstraint?
+
+    /// 🔴 Branche cette contrainte IB: Top de la bulle vers contentView (celle qui te “bloquait”)
+    @IBOutlet weak var ui_label_top_to_content: NSLayoutConstraint!
 
     // MARK: - Properties
     private var deletedImageView: UIImageView?
@@ -24,10 +28,15 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
     private var currentPositionForRetry: Int = 0
 
     private var fixedLabelWidthConstraint: NSLayoutConstraint?
-    private var imageWidthConstraint: NSLayoutConstraint?
-    private var imageAspectConstraint: NSLayoutConstraint?
+    private var imageWidthConstraint: NSLayoutConstraint?        // on garde largeur fixe (demi écran)
 
-    // Nouveau : textView interactif pour liens
+    // Contraintes ajoutées en code
+    private var imageTopToContent: NSLayoutConstraint?           // image.top = content.top
+    private var labelTopToImage: NSLayoutConstraint?             // label.top = image.bottom
+    private var cellBottomToLabel: NSLayoutConstraint?           // content.bottom = label.bottom
+    private var cellBottomToImage: NSLayoutConstraint?           // content.bottom = image.bottom (rarement utile)
+
+    // TextView pour contenu avec liens
     private let linkTextView: UITextView = {
         let tv = UITextView()
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +46,7 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         tv.backgroundColor = .clear
         tv.textContainerInset = .zero
         tv.textContainer.lineFragmentPadding = 0
-        tv.dataDetectorTypes = [.link, .phoneNumber] // auto-détection sur texte brut
+        tv.dataDetectorTypes = [.link, .phoneNumber]
         return tv
     }()
 
@@ -45,22 +54,21 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        // Avatar styling
+        // Avatar
         ui_image_avatar.layer.masksToBounds = true
         ui_image_avatar.clipsToBounds = true
 
-        // Message image
+        // Image
         ui_image_comment.contentMode = .scaleAspectFill
         ui_image_comment.clipsToBounds = true
-        ui_image_comment.translatesAutoresizingMaskIntoConstraints = false
         ui_image_comment.isUserInteractionEnabled = true
 
         // Fonts
         ui_label_date.setFontBody(size: 12)
         ui_label_comment.setFontBody(size: 15)
-        ui_label_comment.isHidden = true // on n'utilise plus le UILabel pour le contenu
+        ui_label_comment.isHidden = true
 
-        // Deleted icon template
+        // Icône "supprimé"
         if let img = UIImage(named: "ic_deleted_comment") {
             let iv = UIImageView(image: img.withRenderingMode(.alwaysTemplate))
             iv.tintColor = deletedTextColor
@@ -68,29 +76,26 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
             deletedImageView = iv
         }
 
-        // No min width by default
-        ui_label_min_width?.isActive = false
-
-        // largeur fixe de la bulle texte ≈ moitié écran
+        // Largeur fixe de la bulle ≈ moitié d’écran
         ui_view_label.translatesAutoresizingMaskIntoConstraints = false
         if fixedLabelWidthConstraint == nil {
             let screenWidth = UIScreen.main.bounds.width
-            let halfWidth = (screenWidth / 2) - 30 // marges latérales
+            let halfWidth = (screenWidth / 2) - 30
             fixedLabelWidthConstraint = ui_view_label.widthAnchor.constraint(equalToConstant: halfWidth)
             fixedLabelWidthConstraint?.isActive = true
         }
 
-        // Gestures sur la bulle (long press)
+        // Long press sur la bulle
         ui_view_label.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         ui_view_label.addGestureRecognizer(longPressGesture)
 
-        // Tap sur image
+        // Tap sur l'image
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:)))
         ui_image_comment.addGestureRecognizer(tapGesture)
 
-        // Ajout du textView dans la bulle
+        // TextView dans la bulle
         ui_view_label.addSubview(linkTextView)
         NSLayoutConstraint.activate([
             linkTextView.topAnchor.constraint(equalTo: ui_view_label.topAnchor, constant: 8),
@@ -103,6 +108,19 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
             .foregroundColor: unifiedBlue,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
+
+        // Contraintes “scénario image”
+        imageTopToContent = ui_image_comment.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8)
+        labelTopToImage    = ui_view_label.topAnchor.constraint(equalTo: ui_image_comment.bottomAnchor, constant: 8)
+        cellBottomToLabel  = contentView.bottomAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 8)
+        cellBottomToImage  = contentView.bottomAnchor.constraint(equalTo: ui_image_comment.bottomAnchor, constant: 8)
+
+        // État par défaut = SANS image
+        imageTopToContent?.isActive = false
+        labelTopToImage?.isActive   = false
+        ui_label_top_to_content?.isActive = true
+        cellBottomToImage?.isActive = false
+        cellBottomToLabel?.isActive = true
     }
 
     override func layoutSubviews() {
@@ -112,13 +130,25 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+
         ui_image_avatar.image = UIImage(named: "placeholder_user")
         ui_image_comment.image = nil
+
+        // reset image sizing
         ui_constraint_image_height.constant = 0
+        imageWidthConstraint?.isActive = false
+        imageWidthConstraint = nil
+
+        // reset texte
         ui_label_comment.text = nil
         ui_label_comment.attributedText = nil
         ui_label_comment.textColor = .black
         ui_label_comment.font = conversationBaseFont
+        linkTextView.attributedText = nil
+        linkTextView.text = nil
+        linkTextView.isSelectable = true
+
+        // reset divers
         ui_label_date.text = nil
         ui_view_label.backgroundColor = .clear
         deletedImageView?.removeFromSuperview()
@@ -127,15 +157,12 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         currentMessage = nil
         currentPositionForRetry = 0
 
-        imageWidthConstraint?.isActive = false
-        imageAspectConstraint?.isActive = false
-        imageWidthConstraint = nil
-        imageAspectConstraint = nil
-
-        // reset textView
-        linkTextView.attributedText = nil
-        linkTextView.text = nil
-        linkTextView.isSelectable = true
+        // 🔁 Revenir au scénario “sans image”
+        imageTopToContent?.isActive = false
+        labelTopToImage?.isActive   = false
+        ui_label_top_to_content?.isActive = true
+        cellBottomToImage?.isActive = false
+        cellBottomToLabel?.isActive = true
     }
 
     // MARK: - Configuration
@@ -150,7 +177,7 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
             ui_image_avatar.image = UIImage(named: "placeholder_user")
         }
 
-        // Contenu / statut
+        // Contenu
         if let status = message.status?.lowercased() {
             switch status {
             case "deleted":
@@ -164,45 +191,59 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
             applyNormalContent(message: message, isMe: isMe)
         }
 
-        // Nom + heure (ex: "Marine • 14:21")
+        // Nom + heure
         ui_label_date.text = formattedNameAndTime(from: message)
 
-        // Image attachée
+        // ----- Image attachée -----
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
 
-            let maxImageSize = (UIScreen.main.bounds.width / 2) - 40 // marges + padding
+            // Taille (carré ~ moitié d’écran)
+            let maxImageSize = (UIScreen.main.bounds.width / 2) - 40
             ui_constraint_image_height.constant = maxImageSize
 
             imageWidthConstraint = ui_image_comment.widthAnchor.constraint(equalToConstant: maxImageSize)
-            imageAspectConstraint = ui_image_comment.heightAnchor.constraint(equalTo: ui_image_comment.widthAnchor)
-
             imageWidthConstraint?.isActive = true
-            imageAspectConstraint?.isActive = true
 
             ui_label_min_width?.constant = maxImageSize
             ui_label_min_width?.isActive = true
+
+            // 🔁 Bascule contraintes : image au top, bulle sous l’image
+            ui_label_top_to_content?.isActive = false
+            imageTopToContent?.isActive = true
+            labelTopToImage?.isActive = true
+
+            cellBottomToImage?.isActive = false
+            cellBottomToLabel?.isActive = true
         } else {
+            // Pas d’image → bulle en haut
             ui_image_comment.image = nil
             ui_constraint_image_height.constant = 0
-            ui_label_min_width?.isActive = false
 
             imageWidthConstraint?.isActive = false
-            imageAspectConstraint?.isActive = false
             imageWidthConstraint = nil
-            imageAspectConstraint = nil
+
+            ui_label_min_width?.isActive = false
+
+            // 🔁 Contraintes “sans image”
+            imageTopToContent?.isActive = false
+            labelTopToImage?.isActive   = false
+            ui_label_top_to_content?.isActive = true
+
+            cellBottomToImage?.isActive = false
+            cellBottomToLabel?.isActive = true
         }
 
         layoutIfNeeded()
     }
 
-    // MARK: - Gesture Handlers
+    // MARK: - Gestures
     @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .began, let msg = currentMessage else { return }
         delegate?.signalMessage(
             messageId: msg.uid,
             userId: msg.user?.sid ?? 0,
-            textString: msg.content ?? ""
+            textString: (msg.contentHtml?.isEmpty == false ? msg.contentHtml : msg.content) ?? ""
         )
     }
 
@@ -222,8 +263,6 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
     // MARK: - Styles
     private func applyDeletedStyle(text: String) {
         ui_view_label.backgroundColor = deletedBackgroundColor
-
-        // pas de liens/clics pour un contenu supprimé
         linkTextView.isSelectable = false
         linkTextView.attributedText = NSAttributedString(
             string: "  " + text,
@@ -231,8 +270,6 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
                 .font: conversationBaseFont,
                 .foregroundColor: deletedTextColor
             ])
-
-        // icône supprimé
         if let icon = deletedImageView {
             ui_view_label.addSubview(icon)
             NSLayoutConstraint.activate([
@@ -249,21 +286,18 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         if message.messageType == "auto" {
             ui_view_label.backgroundColor = UIColor.appBleuAuto
         }
-
-        // re-active la sélection pour les liens
         linkTextView.isSelectable = true
 
         if let html = message.contentHtml, !html.isEmpty {
             linkTextView.attributedText = attributedString(fromHTML: html)
         } else if let content = message.content, !content.isEmpty {
-            // Texte brut → on détecte les liens
             linkTextView.attributedText = detectLinks(in: content.trimmingCharacters(in: .whitespacesAndNewlines))
         } else {
             linkTextView.text = ""
         }
     }
 
-    // MARK: - Name + Time (sans createdAt/createdAtDate)
+    // MARK: - Name + Time
     private func formattedNameAndTime(from message: PostMessage) -> String {
         let nameOpt: String? = message.user?.displayName
         let trimmedName = nameOpt?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -273,13 +307,11 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
             if let n = trimmedName, !n.isEmpty { return "\(n) • \(time)" }
             return time
         }
-
         let fallbackTime = message.createdTimeFormatted.trimmingCharacters(in: .whitespacesAndNewlines)
         if !fallbackTime.isEmpty {
             if let n = trimmedName, !n.isEmpty { return "\(n) • \(fallbackTime)" }
             return fallbackTime
         }
-
         let raw = message.createdDateString
         if !raw.isEmpty {
             if let n = trimmedName, !n.isEmpty { return "\(n) • \(raw)" }
@@ -288,7 +320,7 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         return trimmedName ?? ""
     }
 
-    // MARK: - HTML to AttributedString
+    // MARK: - HTML ➜ Attributed
     private func attributedString(fromHTML html: String) -> NSAttributedString {
         let replaced = html.replacingOccurrences(of: "\n", with: "<br>")
         guard let data = replaced.data(using: .utf8) else {
@@ -304,15 +336,12 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         do {
             let attr = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
             let full = NSRange(location: 0, length: attr.length)
-            // Nettoyage couleurs/soulignés hérités
             attr.removeAttribute(.foregroundColor, range: full)
             attr.removeAttribute(.underlineStyle, range: full)
-            // Style base
             attr.addAttributes([
                 .font: conversationBaseFont,
                 .foregroundColor: UIColor.black
             ], range: full)
-            // Re-style liens
             attr.enumerateAttribute(.link, in: full, options: []) { value, range, _ in
                 if value != nil {
                     attr.addAttributes([
@@ -321,7 +350,6 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
                     ], range: range)
                 }
             }
-            // Trim fin
             while attr.string.hasSuffix("\n") || attr.string.hasSuffix(" ") {
                 attr.deleteCharacters(in: NSRange(location: attr.length - 1, length: 1))
             }
@@ -334,7 +362,7 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         }
     }
 
-    // MARK: - Détection d’URL sur texte brut
+    // MARK: - Détection d’URL
     private func detectLinks(in text: String) -> NSAttributedString {
         let attr = NSMutableAttributedString(string: text, attributes: [
             .font: conversationBaseFont,
@@ -354,7 +382,7 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         return attr
     }
 
-    // MARK: - UITextViewDelegate (tap sur liens)
+    // MARK: - UITextViewDelegate
     func textView(_ textView: UITextView,
                   shouldInteractWith url: URL,
                   in characterRange: NSRange,
@@ -363,7 +391,7 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         return false
     }
 
-    // MARK: - Formatters
+    // MARK: - Formatter
     private lazy var hourFormatter: DateFormatter = {
         let f = DateFormatter()
         f.dateFormat = "HH:mm"
@@ -377,7 +405,6 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
 class ConversationMeCell: ConversationViewCell {
     static let identifier = "cellMeWithImage"
 }
-
 class ConversationOtherCell: ConversationViewCell {
     static let identifier = "cellOtherWithImage"
 }

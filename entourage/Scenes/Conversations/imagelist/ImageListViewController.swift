@@ -1,16 +1,30 @@
 import UIKit
 
+// MARK: - Fallback si setFontTitle(_:) n'existe pas dans ton projet
+extension UILabel {
+    @objc func setFontTitle(_ size: CGFloat) {
+        // Remplace par ta font projet si dispo (ex: ApplicationTheme.getFontQuickSandBold(size:))
+        self.font = UIFont.boldSystemFont(ofSize: size)
+    }
+}
+
+// MARK: - ImageListViewController
+
 final class ImageListViewController: UIViewController {
     var conversationId: Int = 0
 
+    // Top bar
+    private let topBar = UIView()
     private let backButton = UIImageView()
+    private let titleLabel = UILabel()
+
     private var collectionView: UICollectionView!
     private var images: [ConversationImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupBackButton()
+        setupTopBar()
         setupCollection()
         fetchImages()
     }
@@ -35,16 +49,23 @@ final class ImageListViewController: UIViewController {
         }
     }
 
-    // MARK: - Setup
+    // MARK: - Setup TopBar (Back + Title)
 
-    private func setupBackButton() {
-        // 1) Image: asset prioritaire
+    private func setupTopBar() {
+        // Container
+        view.addSubview(topBar)
+        topBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+
+        // Back image : asset prioritaire, sinon SF Symbol
         var img = UIImage(named: "back_arrow")
-
-        // 2) Si pas d’asset, tenter SF Symbol (iOS 13+), sinon on reste nil
         if img == nil {
             if #available(iOS 13.0, *) {
-                img = UIImage(named: "back_arrow")
+                img = UIImage(systemName: "chevron.left")
             }
         }
 
@@ -53,26 +74,49 @@ final class ImageListViewController: UIViewController {
         backButton.isUserInteractionEnabled = true
         backButton.accessibilityLabel = "Retour"
         backButton.accessibilityTraits = UIAccessibilityTraits.button
-
-        // Couleur compatible < iOS 13
         if #available(iOS 13.0, *) {
             backButton.tintColor = .label
         } else {
             backButton.tintColor = .black
         }
 
-        view.addSubview(backButton)
-        backButton.translatesAutoresizingMaskIntoConstraints = false
+        // Title label
+        titleLabel.text = "Photos de la conversation"
+        titleLabel.numberOfLines = 1
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.8
+        titleLabel.setFontTitle(15)
+        if #available(iOS 13.0, *) {
+            titleLabel.textColor = .label
+        } else {
+            titleLabel.textColor = .black
+        }
 
+        // Add subviews
+        topBar.addSubview(backButton)
+        topBar.addSubview(titleLabel)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        // Layout: bouton à gauche, titre à droite, bar auto-height
+        let verticalPadding: CGFloat = 8
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            backButton.topAnchor.constraint(equalTo: topBar.topAnchor, constant: verticalPadding),
+            backButton.leadingAnchor.constraint(equalTo: topBar.leadingAnchor, constant: 16),
             backButton.widthAnchor.constraint(equalToConstant: 28),
-            backButton.heightAnchor.constraint(equalToConstant: 28)
+            backButton.heightAnchor.constraint(equalToConstant: 28),
+
+            titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: topBar.trailingAnchor, constant: -16),
+
+            backButton.bottomAnchor.constraint(equalTo: topBar.bottomAnchor, constant: -verticalPadding)
         ])
 
         backButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapBack)))
     }
+
+    // MARK: - Collection
 
     private func setupCollection() {
         let layout = UICollectionViewFlowLayout()
@@ -97,14 +141,11 @@ final class ImageListViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 8),
+            collectionView.topAnchor.constraint(equalTo: topBar.bottomAnchor, constant: 8),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
-        // S’assurer que le bouton est au-dessus
-        view.bringSubviewToFront(backButton)
     }
 
     // MARK: - Actions
@@ -166,3 +207,5 @@ extension ImageListViewController: UICollectionViewDataSource, UICollectionViewD
         present(vc, animated: true)
     }
 }
+
+

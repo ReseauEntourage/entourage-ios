@@ -278,7 +278,7 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
 
         case .viewGallery:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_arrow", for: indexPath) as! ConversationParamCell
-            cell.populateCell(title: "Voir la galerie",
+            cell.populateCell(title: "Photos de la conversation",
                               subtitle: nil,
                               isTitleOrange: false,
                               pictoStr: "ic_param_gallery")
