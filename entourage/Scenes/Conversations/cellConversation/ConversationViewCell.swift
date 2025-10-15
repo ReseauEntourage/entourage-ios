@@ -6,15 +6,15 @@ private let conversationBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", si
 private let deletedBackgroundColor = UIColor.appPaleGrey
 private let deletedTextColor = UIColor(named: "appGreyTextDeleted") ?? UIColor.darkGray
 
-class ConversationViewCell: UITableViewCell {
+class ConversationViewCell: UITableViewCell, UITextViewDelegate {
 
     // MARK: - IBOutlets
     @IBOutlet weak var ui_image_avatar: UIImageView!
     @IBOutlet weak var ui_image_comment: UIImageView!
     @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint!
-    @IBOutlet weak var ui_label_comment: UILabel!
-    @IBOutlet weak var ui_label_date: UILabel!     // -> contiendra "Nom • HH:mm"
-    @IBOutlet weak var ui_view_label: UIView!
+    @IBOutlet weak var ui_label_comment: UILabel!            // conservé, mais masqué (compat storyboard)
+    @IBOutlet weak var ui_label_date: UILabel!               // affiche "Nom • HH:mm"
+    @IBOutlet weak var ui_view_label: UIView!                // bulle contenant le texte
     @IBOutlet weak var ui_label_min_width: NSLayoutConstraint?
 
     // MARK: - Properties
@@ -26,6 +26,20 @@ class ConversationViewCell: UITableViewCell {
     private var fixedLabelWidthConstraint: NSLayoutConstraint?
     private var imageWidthConstraint: NSLayoutConstraint?
     private var imageAspectConstraint: NSLayoutConstraint?
+
+    // Nouveau : textView interactif pour liens
+    private let linkTextView: UITextView = {
+        let tv = UITextView()
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.isSelectable = true
+        tv.backgroundColor = .clear
+        tv.textContainerInset = .zero
+        tv.textContainer.lineFragmentPadding = 0
+        tv.dataDetectorTypes = [.link, .phoneNumber] // auto-détection sur texte brut
+        return tv
+    }()
 
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -44,6 +58,7 @@ class ConversationViewCell: UITableViewCell {
         // Fonts
         ui_label_date.setFontBody(size: 12)
         ui_label_comment.setFontBody(size: 15)
+        ui_label_comment.isHidden = true // on n'utilise plus le UILabel pour le contenu
 
         // Deleted icon template
         if let img = UIImage(named: "ic_deleted_comment") {
@@ -56,7 +71,7 @@ class ConversationViewCell: UITableViewCell {
         // No min width by default
         ui_label_min_width?.isActive = false
 
-        // Fixe la largeur de la vue de texte à ~ la moitié de l’écran
+        // largeur fixe de la bulle texte ≈ moitié écran
         ui_view_label.translatesAutoresizingMaskIntoConstraints = false
         if fixedLabelWidthConstraint == nil {
             let screenWidth = UIScreen.main.bounds.width
@@ -65,14 +80,29 @@ class ConversationViewCell: UITableViewCell {
             fixedLabelWidthConstraint?.isActive = true
         }
 
-        // Gestures
+        // Gestures sur la bulle (long press)
         ui_view_label.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         ui_view_label.addGestureRecognizer(longPressGesture)
 
+        // Tap sur image
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:)))
         ui_image_comment.addGestureRecognizer(tapGesture)
+
+        // Ajout du textView dans la bulle
+        ui_view_label.addSubview(linkTextView)
+        NSLayoutConstraint.activate([
+            linkTextView.topAnchor.constraint(equalTo: ui_view_label.topAnchor, constant: 8),
+            linkTextView.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor, constant: 12),
+            linkTextView.trailingAnchor.constraint(equalTo: ui_view_label.trailingAnchor, constant: -12),
+            linkTextView.bottomAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: -8)
+        ])
+        linkTextView.delegate = self
+        linkTextView.linkTextAttributes = [
+            .foregroundColor: unifiedBlue,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
     }
 
     override func layoutSubviews() {
@@ -101,6 +131,11 @@ class ConversationViewCell: UITableViewCell {
         imageAspectConstraint?.isActive = false
         imageWidthConstraint = nil
         imageAspectConstraint = nil
+
+        // reset textView
+        linkTextView.attributedText = nil
+        linkTextView.text = nil
+        linkTextView.isSelectable = true
     }
 
     // MARK: - Configuration
@@ -137,7 +172,6 @@ class ConversationViewCell: UITableViewCell {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
 
             let maxImageSize = (UIScreen.main.bounds.width / 2) - 40 // marges + padding
-
             ui_constraint_image_height.constant = maxImageSize
 
             imageWidthConstraint = ui_image_comment.widthAnchor.constraint(equalToConstant: maxImageSize)
@@ -188,9 +222,17 @@ class ConversationViewCell: UITableViewCell {
     // MARK: - Styles
     private func applyDeletedStyle(text: String) {
         ui_view_label.backgroundColor = deletedBackgroundColor
-        ui_label_comment.text = "  " + text
-        ui_label_comment.font = conversationBaseFont
-        ui_label_comment.textColor = deletedTextColor
+
+        // pas de liens/clics pour un contenu supprimé
+        linkTextView.isSelectable = false
+        linkTextView.attributedText = NSAttributedString(
+            string: "  " + text,
+            attributes: [
+                .font: conversationBaseFont,
+                .foregroundColor: deletedTextColor
+            ])
+
+        // icône supprimé
         if let icon = deletedImageView {
             ui_view_label.addSubview(icon)
             NSLayoutConstraint.activate([
@@ -208,53 +250,41 @@ class ConversationViewCell: UITableViewCell {
             ui_view_label.backgroundColor = UIColor.appBleuAuto
         }
 
+        // re-active la sélection pour les liens
+        linkTextView.isSelectable = true
+
         if let html = message.contentHtml, !html.isEmpty {
-            ui_label_comment.attributedText = attributedString(fromHTML: html)
+            linkTextView.attributedText = attributedString(fromHTML: html)
         } else if let content = message.content, !content.isEmpty {
-            ui_label_comment.text = content.trimmingCharacters(in: .whitespacesAndNewlines)
-            ui_label_comment.font = conversationBaseFont
-            ui_label_comment.textColor = .black
+            // Texte brut → on détecte les liens
+            linkTextView.attributedText = detectLinks(in: content.trimmingCharacters(in: .whitespacesAndNewlines))
         } else {
-            ui_label_comment.text = ""
+            linkTextView.text = ""
         }
     }
 
     // MARK: - Name + Time (sans createdAt/createdAtDate)
     private func formattedNameAndTime(from message: PostMessage) -> String {
-        // user?.displayName est possiblement non-optionnel dans le type -> ne mets PAS "?."
         let nameOpt: String? = message.user?.displayName
         let trimmedName = nameOpt?.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        // 1) On tente le Date directement
         if let d = message.createdDate {
             let time = hourFormatter.string(from: d)
-            switch (trimmedName?.isEmpty == false) {
-            case true:  return "\(trimmedName!) • \(time)"
-            case false: return time
-            }
+            if let n = trimmedName, !n.isEmpty { return "\(n) • \(time)" }
+            return time
         }
 
-        // 2) Fallback: formatage déjà fourni par le modèle
         let fallbackTime = message.createdTimeFormatted.trimmingCharacters(in: .whitespacesAndNewlines)
         if !fallbackTime.isEmpty {
-            if let n = trimmedName, !n.isEmpty {
-                return "\(n) • \(fallbackTime)"
-            } else {
-                return fallbackTime
-            }
+            if let n = trimmedName, !n.isEmpty { return "\(n) • \(fallbackTime)" }
+            return fallbackTime
         }
 
-        // 3) Dernier recours : createdDateString (texte brut du backend)
         let raw = message.createdDateString
         if !raw.isEmpty {
-            if let n = trimmedName, !n.isEmpty {
-                return "\(n) • \(raw)"
-            } else {
-                return raw
-            }
+            if let n = trimmedName, !n.isEmpty { return "\(n) • \(raw)" }
+            return raw
         }
-
-        // Rien
         return trimmedName ?? ""
     }
 
@@ -274,12 +304,15 @@ class ConversationViewCell: UITableViewCell {
         do {
             let attr = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
             let full = NSRange(location: 0, length: attr.length)
+            // Nettoyage couleurs/soulignés hérités
             attr.removeAttribute(.foregroundColor, range: full)
             attr.removeAttribute(.underlineStyle, range: full)
+            // Style base
             attr.addAttributes([
                 .font: conversationBaseFont,
                 .foregroundColor: UIColor.black
             ], range: full)
+            // Re-style liens
             attr.enumerateAttribute(.link, in: full, options: []) { value, range, _ in
                 if value != nil {
                     attr.addAttributes([
@@ -288,6 +321,7 @@ class ConversationViewCell: UITableViewCell {
                     ], range: range)
                 }
             }
+            // Trim fin
             while attr.string.hasSuffix("\n") || attr.string.hasSuffix(" ") {
                 attr.deleteCharacters(in: NSRange(location: attr.length - 1, length: 1))
             }
@@ -300,12 +334,41 @@ class ConversationViewCell: UITableViewCell {
         }
     }
 
+    // MARK: - Détection d’URL sur texte brut
+    private func detectLinks(in text: String) -> NSAttributedString {
+        let attr = NSMutableAttributedString(string: text, attributes: [
+            .font: conversationBaseFont,
+            .foregroundColor: UIColor.black
+        ])
+        if let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) {
+            let range = NSRange(location: 0, length: (text as NSString).length)
+            detector.matches(in: text, options: [], range: range).forEach { match in
+                guard let url = match.url else { return }
+                attr.addAttributes([
+                    .link: url,
+                    .foregroundColor: unifiedBlue,
+                    .underlineStyle: NSUnderlineStyle.single.rawValue
+                ], range: match.range)
+            }
+        }
+        return attr
+    }
+
+    // MARK: - UITextViewDelegate (tap sur liens)
+    func textView(_ textView: UITextView,
+                  shouldInteractWith url: URL,
+                  in characterRange: NSRange,
+                  interaction: UITextItemInteraction) -> Bool {
+        delegate?.showWebUrl(url: url)
+        return false
+    }
+
     // MARK: - Formatters
     private lazy var hourFormatter: DateFormatter = {
         let f = DateFormatter()
         f.dateFormat = "HH:mm"
         f.locale = Locale.current
-        f.timeZone = .current // Europe/Paris
+        f.timeZone = .current
         return f
     }()
 }
