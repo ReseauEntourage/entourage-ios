@@ -33,24 +33,34 @@ final class OnboardingPhase1VM: ObservableObject {
     @Published var consent: Bool = false
 
     // Dynamic pickers (depuis API)
-    @Published var gendersMap: [String: String] = [:]
-    @Published var genderOptions: [String] = []
-    @Published var genderLabel: String = ""
+    @Published var gendersMap: [String: String] = [:]               // key -> label
+    @Published var genderOptions: [String] = []                      // labels à afficher
+    @Published var genderLabel: String = ""                          // label choisi
 
-    @Published var discoverySourcesMap: [String: String] = [:]
-    @Published var howWeMetOptions: [String] = []
-    @Published var howWeMetLabel: String = ""
+    @Published var discoverySourcesMap: [String: String] = [:]       // key -> label
+    @Published var howWeMetOptions: [String] = []                    // labels à afficher
+    @Published var howWeMetLabel: String = ""                        // label choisi (UI)
 
-    @Published var enterprises: [SalesforceEnterprise] = []
+    @Published var enterprises: [SalesforceEnterprise] = []          // contient .id / .name
     @Published var selectedEnterpriseIndex: Int? = nil
 
-    @Published var events: [SalesforceEvent] = []
+    @Published var events: [SalesforceEvent] = []                    // contient .id / .name
     @Published var selectedEventIndex: Int? = nil
 
     // Pilotage du bouton "Suivant"
     @Published var canProceed: Bool = false
 
     weak var pageDelegate: OnboardingDelegate?
+
+    // Birthday au format ISO (yyyy-MM-dd)
+    private var birthdayISO: String? {
+        guard let d = birthday else { return nil }
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "en_US_POSIX")
+        df.timeZone = TimeZone(secondsFromGMT: 0)
+        df.dateFormat = "yyyy-MM-dd"
+        return df.string(from: d)
+    }
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -82,18 +92,36 @@ final class OnboardingPhase1VM: ObservableObject {
         recomputeCanProceed()
     }
 
-    // Affiche Entreprise/Événement si la réponse contient "entreprise"
+    // Affiche Entreprise/Événement si la réponse (LABEL affiché) contient "entreprise"
     var showCompanyAndEvent: Bool {
         let label = howWeMetLabel.folding(options: .diacriticInsensitive, locale: .current).lowercased()
         return label.contains("entreprise")
     }
 
-    var selectedEnterpriseName: String? {
+    // MARK: - IDs & KEYS à transmettre
+    /// Clé de discovery source (à partir du label choisi)
+    private var discoverySourceKey: String? {
+        discoverySourcesMap.first(where: { $0.value == howWeMetLabel })?.key
+    }
+    /// ID Entreprise sélectionnée (string attendu par l’API)
+    private var selectedEnterpriseId: String? {
+        guard let i = selectedEnterpriseIndex,
+              enterprises.indices.contains(i) else { return nil }
+        return enterprises[i].id
+    }
+    /// ID Événement sélectionné (string attendu par l’API)
+    private var selectedEventId: String? {
+        guard let i = selectedEventIndex,
+              events.indices.contains(i) else { return nil }
+        return events[i].id
+    }
+    /// Nom Entreprise (pour l’affichage uniquement)
+    private var selectedEnterpriseName: String? {
         guard let i = selectedEnterpriseIndex, enterprises.indices.contains(i) else { return nil }
         return enterprises[i].name
     }
-
-    var selectedEventName: String? {
+    /// Nom Événement (pour l’affichage uniquement)
+    private var selectedEventName: String? {
         guard let i = selectedEventIndex, events.indices.contains(i) else { return nil }
         return events[i].name
     }
@@ -168,7 +196,6 @@ final class OnboardingPhase1VM: ObservableObject {
                     self.genderOptions = ["Homme", "Femme", "Non binaire"]
                     self.howWeMetOptions = []
                 }
-                // Après chargement, recalcule
                 self.recomputeCanProceed()
             }
         }
@@ -214,6 +241,11 @@ final class OnboardingPhase1VM: ObservableObject {
         let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
         let digitsPhone  = phone.filter(\.isNumber)
 
+        // IMPORTANT : on envoie les **clés/IDs**
+        let howWeMetKey = discoverySourceKey
+        let companyId   = showCompanyAndEvent ? selectedEnterpriseId : nil
+        let eventId     = showCompanyAndEvent ? selectedEventId     : nil
+
         pageDelegate?.addUserInfos(
             firstname: isFirstnameValid ? trimmedFirst : nil,
             lastname:  isLastnameValid  ? trimmedLast  : nil,
@@ -221,10 +253,11 @@ final class OnboardingPhase1VM: ObservableObject {
             phone:     isPhoneValid ? digitsPhone : nil,
             email:     isEmailValid ? trimmedEmail : nil,
             consentEmail: consent,
-            gender:    genderLabel.isEmpty ? nil : genderLabel,
-            howWeMet:  howWeMetLabel.isEmpty ? nil : howWeMetLabel,
-            company:   showCompanyAndEvent ? (selectedEnterpriseName ?? "") : nil,
-            event:     showCompanyAndEvent ? (selectedEventName ?? "") : nil
+            gender:    genderLabel.isEmpty ? nil : genderLabel, // mapping côté service si besoin
+            howWeMet:  howWeMetKey,                              // ✅ clé (pas le label)
+            birthdate: birthdayISO,                              // ✅ yyyy-MM-dd
+            company:   companyId,                                // ✅ ID entreprise
+            event:     eventId                                   // ✅ ID event
         )
     }
 }
@@ -287,7 +320,7 @@ struct OnboardingPhase1View: View {
     }
 }
 
-// MARK: - Sections (headers enlevés + icônes orange)
+// MARK: - Sections
 private struct IdentitySection: View {
     @ObservedObject var vm: OnboardingPhase1VM
     @Binding var showDateSheet: Bool
@@ -297,8 +330,6 @@ private struct IdentitySection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-
-            // Je suis
             SelectorRowButton(
                 title: "Je suis",
                 placeholder: "Sélectionner dans la liste",
@@ -334,13 +365,11 @@ private struct ContactSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-
-            // Titre au-dessus du HStack => alignement parfait
             Text("Téléphone*")
                 .font(.entourageTitle(15))
 
             HStack(spacing: 12) {
-                // ——— Indicatif : flag only, comfy spacing ———
+                // ---- Boîte drapeau (52) ----
                 ZStack(alignment: .leading) {
                     HStack {
                         Text(vm.selectedCountry.flag)
@@ -376,11 +405,10 @@ private struct ContactSection: View {
                     RoundedRectangle(cornerRadius: 12).stroke(Color.secondary.opacity(0.25))
                 )
 
-                // Champ numéro sans label -> même hauteur que le sélecteur
-                PlainInputField(placeholder: "06 XX XX XX XX", text: $vm.phone)
+                // ---- Boîte numéro (52) — même style EXACT ----
+                BoxedTextField(placeholder: "06 XX XX XX XX", text: $vm.phone)
                     .keyboardType(.numberPad)
                     .textContentType(.telephoneNumber)
-                    .frame(height: 52)
             }
 
             FloatingField(title: "E-mail", placeholder: "Ex. : marie.dupont@email.com", text: $vm.email)
@@ -400,9 +428,8 @@ private struct ProfileSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
 
-            // Comment vous nous avez connus ?
             SelectorRowButton(
-                title: "Comment vous nous avez connus ?",
+                title: "Comment nous avez-vous connus ?",
                 placeholder: "Sélectionner dans la liste",
                 value: vm.howWeMetLabel
             ) { showHowAS = true }
@@ -412,7 +439,7 @@ private struct ProfileSection: View {
                 }
                 buttons.append(.destructive(Text("Effacer")) { vm.howWeMetLabel = "" })
                 buttons.append(.cancel())
-                return ActionSheet(title: Text("Comment vous nous avez connus ?"), buttons: buttons)
+                return ActionSheet(title: Text("Comment nous avez-vous connus ?"), buttons: buttons)
             }
 
             if #available(iOS 15.0, *) {
@@ -432,7 +459,7 @@ private struct ProfileSection: View {
             if vm.showCompanyAndEvent {
                 Divider().padding(.vertical, 4)
 
-                // Entreprise
+                // Entreprise (affichage = nom, envoi = ID)
                 SelectorRowButton(
                     title: "Nom de votre entreprise",
                     placeholder: vm.enterprises.isEmpty ? "Chargement..." : "Sélectionner dans la liste",
@@ -457,7 +484,7 @@ private struct ProfileSection: View {
                     return ActionSheet(title: Text("Nom de votre entreprise"), buttons: buttons)
                 }
 
-                // Événement
+                // Événement (affichage = nom, envoi = ID)
                 SelectorRowButton(
                     title: "Événement auquel vous participez",
                     placeholder: vm.events.isEmpty ? "Sélectionner une entreprise d’abord" : "Sélectionner dans la liste",
@@ -512,20 +539,25 @@ private struct FloatingField: View {
     }
 }
 
-// Champ sans titre (même style), utile pour le numéro de téléphone
-private struct PlainInputField: View {
+/// Champ encadré de **hauteur fixe 52** pour matcher la boîte du drapeau
+private struct BoxedTextField: View {
     var placeholder: String
     @Binding var text: String
 
+    private let height: CGFloat = 52
+    private let corner: CGFloat = 12
+
     var body: some View {
-        TextField(placeholder, text: $text)
-            .font(.entourageBody(15))
-            .autocapitalization(.none)
-            .padding(.horizontal, 12)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.secondary.opacity(0.25))
-            )
+        ZStack {
+            RoundedRectangle(cornerRadius: corner)
+                .stroke(Color.secondary.opacity(0.25))
+            TextField(placeholder, text: $text)
+                .font(.entourageBody(15))
+                .autocapitalization(.none)
+                .padding(.horizontal, 12)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        }
+        .frame(height: height)
     }
 }
 
@@ -617,7 +649,7 @@ final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1
 
     // Nouveaux champs
     var gender:   String? { didSet { vm.genderLabel = gender ?? "" } }
-    var howWeMet: String? { didSet { vm.howWeMetLabel = howWeMet ?? "" } }
+    var howWeMet: String? { didSet { vm.howWeMetLabel = howWeMet ?? "" } } // UI label only; clé est dérivée dans la VM
     var company:  String?
     var eventName: String?
 
@@ -626,7 +658,6 @@ final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1
         let sharedVM = OnboardingPhase1VM()
         self.vm = sharedVM
         super.init(rootView: OnboardingPhase1View(vm: sharedVM))
-        // Important : transparent pour ne pas bloquer les taps sur le bouton “Suivant”
         view.isOpaque = false
         view.backgroundColor = .clear
     }

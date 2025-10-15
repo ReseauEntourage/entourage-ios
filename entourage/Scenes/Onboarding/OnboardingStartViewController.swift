@@ -410,10 +410,20 @@ final class OnboardingStartViewController: UIViewController {
 
 // MARK: - OnboardingDelegate
 extension OnboardingStartViewController: OnboardingDelegate {
-    func addUserInfos(firstname: String?, lastname: String?, countryCode: CountryCode, phone: String?, email: String?, consentEmail: Bool, gender: String?, howWeMet: String?, company: String?, event: String?) {
-        temporaryUser.firstname = firstname ?? ""
-        temporaryUser.lastname = lastname ?? ""
-        temporaryUser.phone = Utils.validatePhoneFormat(countryCode: countryCode.code, phone: phone ?? "")
+    func addUserInfos(
+        firstname: String?,
+        lastname: String?,
+        countryCode: CountryCode,
+        phone: String?,
+        email: String?,
+        consentEmail: Bool,
+        gender: String?,
+        howWeMet howWeMet: String?,
+        birthdate birthdate: String?,
+        company: String?,
+        event: String?
+    ) {
+        // UI storage
         self.phone = phone
         self.countryCode = countryCode
         self.email = email
@@ -423,34 +433,36 @@ extension OnboardingStartViewController: OnboardingDelegate {
         self.company = company
         self.event = event
 
-        // Phases 2/3: on conserve la logique locale
+        // Build the user object used for the create call
+        temporaryUser.firstname = firstname ?? ""
+        temporaryUser.lastname  = lastname  ?? ""
+        temporaryUser.phone     = Utils.validatePhoneFormat(countryCode: countryCode.code, phone: phone ?? "")
+
+        // ↓ These were missing: copy the optional fields
+        temporaryUser.email          = email
+        temporaryUser.hasConsent     = consentEmail
+        temporaryUser.gender         = gender
+        temporaryUser.birthday       = birthdate           // "yyyy-MM-dd"
+        temporaryUser.discoverySource = howWeMet
+        temporaryUser.company        = company
+        temporaryUser.event          = event
+
+        // Phase button state
         let validate = checkValidation()
         enableDisableNextButton(isEnable: validate.isValid)
     }
 
-    func sendCode(code: String) {
-        self.temporaryPasscode = code
-        // À l’étape 2 le bouton reste actif, pas d’update ici
-    }
-
-    func addInfos(userType: UserType) {
-        self.userTypeSelected = userType
-        let result = checkValidation()
-        enableDisableNextButton(isEnable: result.isValid)
-    }
-
+    func sendCode(code: String) { self.temporaryPasscode = code }
+    func addInfos(userType: UserType) { self.userTypeSelected = userType; enableDisableNextButton(isEnable: checkValidation().isValid) }
     func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         self.temporaryGooglePlace = googlePlace
         self.temporaryLocation = currentlocation
         self.temporaryAddressName = currentLocationName
-        let result = checkValidation()
-        enableDisableNextButton(isEnable: result.isValid)
+        enableDisableNextButton(isEnable: checkValidation().isValid)
     }
-
     func goMain() { self.goPageBack() }
     func requestNewcode() { self.resendCode() }
 }
-
 // MARK: - MJNavBackViewDelegate
 extension OnboardingStartViewController: MJNavBackViewDelegate {
     func goBack() { self.navigationController?.popViewController(animated: true) }

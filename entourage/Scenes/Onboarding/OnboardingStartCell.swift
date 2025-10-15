@@ -293,7 +293,7 @@ class OnboardingStartCell: UITableViewCell {
 
         // --- How We Met ---
         let howWeMetContainer = createContainerView()
-        howWeMetLabel = createLabel(text: "Comment vous nous avez connu ?".localized)
+        howWeMetLabel = createLabel(text: "Comment nous avez-vous connu ?".localized)
         howWeMetTextField = createTextField(placeholder: "Sélectionner dans la liste")
         howWeMetPickerView = createPickerView(tag: 2)
         howWeMetTextField.inputView = howWeMetPickerView

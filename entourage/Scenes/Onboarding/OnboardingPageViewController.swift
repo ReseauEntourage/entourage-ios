@@ -114,6 +114,7 @@ protocol OnboardingDelegate: AnyObject {
         consentEmail: Bool,
         gender: String?,
         howWeMet: String?,
+        birthdate: String?,
         company: String?,
         event: String?
     )
