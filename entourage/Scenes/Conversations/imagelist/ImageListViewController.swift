@@ -18,14 +18,21 @@ final class ImageListViewController: UIViewController {
     private let backButton = UIImageView()
     private let titleLabel = UILabel()
 
+    // Content
     private var collectionView: UICollectionView!
     private var images: [ConversationImage] = []
+
+    // Empty state
+    private let emptyStateView = UIView()
+    private let emptyIcon = UIImageView()
+    private let emptyLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupTopBar()
         setupCollection()
+        setupEmptyState()
         fetchImages()
     }
 
@@ -52,7 +59,6 @@ final class ImageListViewController: UIViewController {
     // MARK: - Setup TopBar (Back + Title)
 
     private func setupTopBar() {
-        // Container
         view.addSubview(topBar)
         topBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -61,7 +67,6 @@ final class ImageListViewController: UIViewController {
             topBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
 
-        // Back image : asset prioritaire, sinon SF Symbol
         var img = UIImage(named: "back_arrow")
         if img == nil {
             if #available(iOS 13.0, *) {
@@ -80,7 +85,6 @@ final class ImageListViewController: UIViewController {
             backButton.tintColor = .black
         }
 
-        // Title label
         titleLabel.text = "Photos de la conversation"
         titleLabel.numberOfLines = 1
         titleLabel.adjustsFontSizeToFitWidth = true
@@ -92,13 +96,11 @@ final class ImageListViewController: UIViewController {
             titleLabel.textColor = .black
         }
 
-        // Add subviews
         topBar.addSubview(backButton)
         topBar.addSubview(titleLabel)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        // Layout: bouton à gauche, titre à droite, bar auto-height
         let verticalPadding: CGFloat = 8
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: topBar.topAnchor, constant: verticalPadding),
@@ -148,6 +150,56 @@ final class ImageListViewController: UIViewController {
         ])
     }
 
+    // MARK: - Empty State
+
+    private func setupEmptyState() {
+        view.addSubview(emptyStateView)
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptyStateView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyStateView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+
+        emptyIcon.translatesAutoresizingMaskIntoConstraints = false
+        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
+        emptyStateView.addSubview(emptyIcon)
+        emptyStateView.addSubview(emptyLabel)
+
+        if #available(iOS 13.0, *) {
+            emptyIcon.image = UIImage(systemName: "photo.on.rectangle.angled")
+            emptyIcon.tintColor = .systemGray3
+        } else {
+            emptyIcon.image = UIImage(named: "placeholder") ?? UIImage()
+            emptyIcon.tintColor = .lightGray
+        }
+
+        emptyLabel.text = "Aucune image partagée pour le moment"
+        emptyLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        emptyLabel.textColor = .lightGray
+        emptyLabel.textAlignment = .center
+        emptyLabel.numberOfLines = 2
+
+        NSLayoutConstraint.activate([
+            emptyIcon.topAnchor.constraint(equalTo: emptyStateView.topAnchor),
+            emptyIcon.centerXAnchor.constraint(equalTo: emptyStateView.centerXAnchor),
+            emptyIcon.widthAnchor.constraint(equalToConstant: 50),
+            emptyIcon.heightAnchor.constraint(equalToConstant: 50),
+
+            emptyLabel.topAnchor.constraint(equalTo: emptyIcon.bottomAnchor, constant: 10),
+            emptyLabel.leadingAnchor.constraint(equalTo: emptyStateView.leadingAnchor, constant: 8),
+            emptyLabel.trailingAnchor.constraint(equalTo: emptyStateView.trailingAnchor, constant: -8),
+            emptyLabel.bottomAnchor.constraint(equalTo: emptyStateView.bottomAnchor)
+        ])
+
+        emptyStateView.isHidden = true
+    }
+
+    private func updateEmptyState() {
+        let isEmpty = images.isEmpty
+        emptyStateView.isHidden = !isEmpty
+        collectionView.isHidden = isEmpty
+    }
+
     // MARK: - Actions
 
     @objc private func tapBack() {
@@ -166,6 +218,7 @@ final class ImageListViewController: UIViewController {
             DispatchQueue.main.async {
                 self.images = imgs ?? []
                 self.collectionView.reloadData()
+                self.updateEmptyState()
             }
         }
     }
@@ -207,5 +260,3 @@ extension ImageListViewController: UICollectionViewDataSource, UICollectionViewD
         present(vc, animated: true)
     }
 }
-
-
