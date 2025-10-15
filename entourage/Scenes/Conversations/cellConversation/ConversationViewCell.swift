@@ -1,25 +1,22 @@
 import UIKit
 import SDWebImage
+import ActiveLabel
 
 private let unifiedBlue = UIColor(red: 0.0, green: 122/255.0, blue: 1.0, alpha: 1.0)
 private let conversationBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
 private let deletedBackgroundColor = UIColor.appPaleGrey
 private let deletedTextColor = UIColor(named: "appGreyTextDeleted") ?? UIColor.darkGray
 
-
-class ConversationViewCell: UITableViewCell, UITextViewDelegate {
+class ConversationViewCell: UITableViewCell {
 
     // MARK: - IBOutlets
     @IBOutlet weak var ui_image_avatar: UIImageView!
     @IBOutlet weak var ui_image_comment: UIImageView!
-    @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint!   // contrainte IB déjà en place
-    @IBOutlet weak var ui_label_comment: UILabel!                        // conservé, masqué
-    @IBOutlet weak var ui_label_date: UILabel!
-    @IBOutlet weak var ui_view_label: UIView!                            // bulle texte
+    @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint!
+    @IBOutlet weak var ui_label_comment: ActiveLabel!   // ActiveLabel au lieu de UILabel
+    @IBOutlet weak var ui_label_date: UILabel!          // "Nom • HH:mm"
+    @IBOutlet weak var ui_view_label: UIView!           // bulle
     @IBOutlet weak var ui_label_min_width: NSLayoutConstraint?
-
-    /// 🔴 Branche cette contrainte IB: Top de la bulle vers contentView (celle qui te “bloquait”)
-    @IBOutlet weak var ui_label_top_to_content: NSLayoutConstraint!
 
     // MARK: - Properties
     private var deletedImageView: UIImageView?
@@ -28,27 +25,14 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
     private var currentPositionForRetry: Int = 0
 
     private var fixedLabelWidthConstraint: NSLayoutConstraint?
-    private var imageWidthConstraint: NSLayoutConstraint?        // on garde largeur fixe (demi écran)
+    private var imageWidthConstraint: NSLayoutConstraint?
+    private var imageAspectConstraint: NSLayoutConstraint?
 
-    // Contraintes ajoutées en code
-    private var imageTopToContent: NSLayoutConstraint?           // image.top = content.top
-    private var labelTopToImage: NSLayoutConstraint?             // label.top = image.bottom
-    private var cellBottomToLabel: NSLayoutConstraint?           // content.bottom = label.bottom
-    private var cellBottomToImage: NSLayoutConstraint?           // content.bottom = image.bottom (rarement utile)
+    /// Map des mentions (sans @, normalisées) -> URL de profil (issue du HTML)
+    private var mentionLinkMap: [String: URL] = [:]
 
-    // TextView pour contenu avec liens
-    private let linkTextView: UITextView = {
-        let tv = UITextView()
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.isEditable = false
-        tv.isScrollEnabled = false
-        tv.isSelectable = true
-        tv.backgroundColor = .clear
-        tv.textContainerInset = .zero
-        tv.textContainer.lineFragmentPadding = 0
-        tv.dataDetectorTypes = [.link, .phoneNumber]
-        return tv
-    }()
+    // Détection custom des numéros de tel
+    private let phoneType = ActiveType.custom(pattern: "\\+?\\d[\\d .-]{6,}\\d")
 
     // MARK: - Lifecycle
     override func awakeFromNib() {
@@ -62,11 +46,45 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         ui_image_comment.contentMode = .scaleAspectFill
         ui_image_comment.clipsToBounds = true
         ui_image_comment.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:)))
+        ui_image_comment.addGestureRecognizer(tapGesture)
 
-        // Fonts
+        // Date
         ui_label_date.setFontBody(size: 12)
-        ui_label_comment.setFontBody(size: 15)
-        ui_label_comment.isHidden = true
+
+        // ActiveLabel config
+        ui_label_comment.numberOfLines = 0
+        ui_label_comment.font = conversationBaseFont
+        ui_label_comment.textColor = .black
+        ui_label_comment.enabledTypes = [.url, .mention, .hashtag, phoneType]
+        ui_label_comment.URLColor = unifiedBlue
+        ui_label_comment.hashtagColor = unifiedBlue
+        ui_label_comment.mentionColor = unifiedBlue
+        ui_label_comment.lineBreakMode = .byWordWrapping
+
+        // Liens soulignés
+        ui_label_comment.configureLinkAttribute = { (_, attributes, _) in
+            var attrs = attributes
+            attrs[.underlineStyle] = NSUnderlineStyle.single.rawValue
+            return attrs
+        }
+
+        // Taps
+        ui_label_comment.handleURLTap { [weak self] url in
+            self?.delegate?.showWebUrl(url: url)
+        }
+        ui_label_comment.handleCustomTap(for: phoneType) { _ in
+            // Optionnel: appeler/coller/… selon ton besoin
+        }
+        ui_label_comment.handleMentionTap { [weak self] mention in
+            guard let self else { return }
+            let key = self.normalizeMention(mention)
+            if let url = self.mentionLinkMap[key] {
+                self.delegate?.showWebUrl(url: url)
+            } else {
+                // Pas d’URL connue pour cette mention (texte brut) -> rien ou fallback si tu en veux un
+            }
+        }
 
         // Icône "supprimé"
         if let img = UIImage(named: "ic_deleted_comment") {
@@ -80,47 +98,16 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         ui_view_label.translatesAutoresizingMaskIntoConstraints = false
         if fixedLabelWidthConstraint == nil {
             let screenWidth = UIScreen.main.bounds.width
-            let halfWidth = (screenWidth / 2) - 30
+            let halfWidth = (screenWidth / 2) - 30 // marges latérales
             fixedLabelWidthConstraint = ui_view_label.widthAnchor.constraint(equalToConstant: halfWidth)
             fixedLabelWidthConstraint?.isActive = true
         }
 
-        // Long press sur la bulle
+        // Long press → signaler
         ui_view_label.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         ui_view_label.addGestureRecognizer(longPressGesture)
-
-        // Tap sur l'image
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:)))
-        ui_image_comment.addGestureRecognizer(tapGesture)
-
-        // TextView dans la bulle
-        ui_view_label.addSubview(linkTextView)
-        NSLayoutConstraint.activate([
-            linkTextView.topAnchor.constraint(equalTo: ui_view_label.topAnchor, constant: 8),
-            linkTextView.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor, constant: 12),
-            linkTextView.trailingAnchor.constraint(equalTo: ui_view_label.trailingAnchor, constant: -12),
-            linkTextView.bottomAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: -8)
-        ])
-        linkTextView.delegate = self
-        linkTextView.linkTextAttributes = [
-            .foregroundColor: unifiedBlue,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
-        ]
-
-        // Contraintes “scénario image”
-        imageTopToContent = ui_image_comment.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8)
-        labelTopToImage    = ui_view_label.topAnchor.constraint(equalTo: ui_image_comment.bottomAnchor, constant: 8)
-        cellBottomToLabel  = contentView.bottomAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 8)
-        cellBottomToImage  = contentView.bottomAnchor.constraint(equalTo: ui_image_comment.bottomAnchor, constant: 8)
-
-        // État par défaut = SANS image
-        imageTopToContent?.isActive = false
-        labelTopToImage?.isActive   = false
-        ui_label_top_to_content?.isActive = true
-        cellBottomToImage?.isActive = false
-        cellBottomToLabel?.isActive = true
     }
 
     override func layoutSubviews() {
@@ -131,44 +118,38 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
     override func prepareForReuse() {
         super.prepareForReuse()
 
+        // Reset images
         ui_image_avatar.image = UIImage(named: "placeholder_user")
         ui_image_comment.image = nil
 
-        // reset image sizing
+        // Reset image sizing
         ui_constraint_image_height.constant = 0
         imageWidthConstraint?.isActive = false
+        imageAspectConstraint?.isActive = false
         imageWidthConstraint = nil
+        imageAspectConstraint = nil
 
-        // reset texte
+        // Reset texte
         ui_label_comment.text = nil
-        ui_label_comment.attributedText = nil
-        ui_label_comment.textColor = .black
-        ui_label_comment.font = conversationBaseFont
-        linkTextView.attributedText = nil
-        linkTextView.text = nil
-        linkTextView.isSelectable = true
-
-        // reset divers
         ui_label_date.text = nil
+        mentionLinkMap.removeAll()
+
+        // Reset styles
         ui_view_label.backgroundColor = .clear
         deletedImageView?.removeFromSuperview()
         ui_label_min_width?.isActive = false
+
+        // Reset divers
         delegate = nil
         currentMessage = nil
         currentPositionForRetry = 0
-
-        // 🔁 Revenir au scénario “sans image”
-        imageTopToContent?.isActive = false
-        labelTopToImage?.isActive   = false
-        ui_label_top_to_content?.isActive = true
-        cellBottomToImage?.isActive = false
-        cellBottomToLabel?.isActive = true
     }
 
     // MARK: - Configuration
     func configure(with message: PostMessage, isMe: Bool, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
+        mentionLinkMap.removeAll()
 
         // Avatar
         if let urlStr = message.user?.avatarURL, let url = URL(string: urlStr) {
@@ -177,7 +158,7 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
             ui_image_avatar.image = UIImage(named: "placeholder_user")
         }
 
-        // Contenu
+        // Contenu / statut
         if let status = message.status?.lowercased() {
             switch status {
             case "deleted":
@@ -191,47 +172,38 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
             applyNormalContent(message: message, isMe: isMe)
         }
 
-        // Nom + heure
+        // Nom + heure (HH:mm uniquement)
         ui_label_date.text = formattedNameAndTime(from: message)
 
         // ----- Image attachée -----
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
 
-            // Taille (carré ~ moitié d’écran)
+            // carré ~ moitié d’écran
             let maxImageSize = (UIScreen.main.bounds.width / 2) - 40
             ui_constraint_image_height.constant = maxImageSize
 
+            imageWidthConstraint?.isActive = false
+            imageAspectConstraint?.isActive = false
             imageWidthConstraint = ui_image_comment.widthAnchor.constraint(equalToConstant: maxImageSize)
+            imageAspectConstraint = ui_image_comment.heightAnchor.constraint(equalTo: ui_image_comment.widthAnchor)
             imageWidthConstraint?.isActive = true
+            imageAspectConstraint?.isActive = true
 
+            // aligne la bulle avec la largeur image (optionnel)
             ui_label_min_width?.constant = maxImageSize
             ui_label_min_width?.isActive = true
-
-            // 🔁 Bascule contraintes : image au top, bulle sous l’image
-            ui_label_top_to_content?.isActive = false
-            imageTopToContent?.isActive = true
-            labelTopToImage?.isActive = true
-
-            cellBottomToImage?.isActive = false
-            cellBottomToLabel?.isActive = true
         } else {
-            // Pas d’image → bulle en haut
+            // Pas d’image
             ui_image_comment.image = nil
             ui_constraint_image_height.constant = 0
 
             imageWidthConstraint?.isActive = false
+            imageAspectConstraint?.isActive = false
             imageWidthConstraint = nil
+            imageAspectConstraint = nil
 
             ui_label_min_width?.isActive = false
-
-            // 🔁 Contraintes “sans image”
-            imageTopToContent?.isActive = false
-            labelTopToImage?.isActive   = false
-            ui_label_top_to_content?.isActive = true
-
-            cellBottomToImage?.isActive = false
-            cellBottomToLabel?.isActive = true
         }
 
         layoutIfNeeded()
@@ -263,13 +235,10 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
     // MARK: - Styles
     private func applyDeletedStyle(text: String) {
         ui_view_label.backgroundColor = deletedBackgroundColor
-        linkTextView.isSelectable = false
-        linkTextView.attributedText = NSAttributedString(
-            string: "  " + text,
-            attributes: [
-                .font: conversationBaseFont,
-                .foregroundColor: deletedTextColor
-            ])
+        ui_label_comment.text = "  " + text
+        ui_label_comment.textColor = deletedTextColor
+        ui_label_comment.enabledTypes = [] // pas de liens cliquables
+
         if let icon = deletedImageView {
             ui_view_label.addSubview(icon)
             NSLayoutConstraint.activate([
@@ -286,18 +255,22 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         if message.messageType == "auto" {
             ui_view_label.backgroundColor = UIColor.appBleuAuto
         }
-        linkTextView.isSelectable = true
+
+        ui_label_comment.textColor = .black
+        ui_label_comment.enabledTypes = [.url, .mention, .hashtag, phoneType]
 
         if let html = message.contentHtml, !html.isEmpty {
-            linkTextView.attributedText = attributedString(fromHTML: html)
+            // Convertit le HTML en texte brut, conserve les URLs visibles,
+            // et remplit mentionLinkMap pour gérer les @mentions cliquables
+            ui_label_comment.text = htmlToPlainWithLinksAndMentionMap(html)
         } else if let content = message.content, !content.isEmpty {
-            linkTextView.attributedText = detectLinks(in: content.trimmingCharacters(in: .whitespacesAndNewlines))
+            ui_label_comment.text = content.trimmingCharacters(in: .whitespacesAndNewlines)
         } else {
-            linkTextView.text = ""
+            ui_label_comment.text = ""
         }
     }
 
-    // MARK: - Name + Time
+    // MARK: - Name + Time (HH:mm)
     private func formattedNameAndTime(from message: PostMessage) -> String {
         let nameOpt: String? = message.user?.displayName
         let trimmedName = nameOpt?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -320,75 +293,67 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
         return trimmedName ?? ""
     }
 
-    // MARK: - HTML ➜ Attributed
-    private func attributedString(fromHTML html: String) -> NSAttributedString {
-        let replaced = html.replacingOccurrences(of: "\n", with: "<br>")
-        guard let data = replaced.data(using: .utf8) else {
-            return NSAttributedString(string: html, attributes: [
-                .font: conversationBaseFont,
-                .foregroundColor: UIColor.black
-            ])
-        }
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-        do {
-            let attr = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
-            let full = NSRange(location: 0, length: attr.length)
-            attr.removeAttribute(.foregroundColor, range: full)
-            attr.removeAttribute(.underlineStyle, range: full)
-            attr.addAttributes([
-                .font: conversationBaseFont,
-                .foregroundColor: UIColor.black
-            ], range: full)
-            attr.enumerateAttribute(.link, in: full, options: []) { value, range, _ in
-                if value != nil {
-                    attr.addAttributes([
-                        .foregroundColor: unifiedBlue,
-                        .underlineStyle: NSUnderlineStyle.single.rawValue
-                    ], range: range)
+    // MARK: - Helpers (HTML ➜ texte + map des mentions)
+    /// Remplace:
+    ///  - <a href="...">@Nico</a>  -> "@Nico" (et mappe la mention vers l’URL)
+    ///  - <a href="...">Texte</a> -> "Texte (url)" (ainsi l’URL reste cliquable)
+    /// Puis nettoie les balises restantes et <br>.
+    private func htmlToPlainWithLinksAndMentionMap(_ html: String) -> String {
+        var s = html
+        let pattern = #"<a\s+[^>]*href="([^"]+)"[^>]*>(.*?)</a>"#
+        if let re = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive, .dotMatchesLineSeparators]) {
+            let ns = s as NSString
+            let matches = re.matches(in: s, options: [], range: NSRange(location: 0, length: ns.length))
+
+            for match in matches.reversed() {
+                guard match.numberOfRanges >= 3 else { continue }
+                let href = (s as NSString).substring(with: match.range(at: 1))
+                let rawText = (s as NSString).substring(with: match.range(at: 2))
+
+                let cleanText = rawText
+                    .replacingOccurrences(of: "<br ?/?>", with: "\n", options: .regularExpression)
+                    .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+
+                if cleanText.hasPrefix("@"), let url = URL(string: href) {
+                    // Mention : on garde le @texte et on mémorise le lien pour le tap
+                    let key = normalizeMention(cleanText)
+                    mentionLinkMap[key] = url
+                    s = (s as NSString).replacingCharacters(in: match.range, with: cleanText)
+                } else {
+                    // Lien normal : garder l’info visible pour que .url soit détecté
+                    // Si le texte contient déjà une URL, on la laisse ; sinon on ajoute (url)
+                    if looksLikeURL(cleanText) {
+                        s = (s as NSString).replacingCharacters(in: match.range, with: cleanText)
+                    } else {
+                        let replacement = cleanText.isEmpty ? href : "\(cleanText) (\(href))"
+                        s = (s as NSString).replacingCharacters(in: match.range, with: replacement)
+                    }
                 }
             }
-            while attr.string.hasSuffix("\n") || attr.string.hasSuffix(" ") {
-                attr.deleteCharacters(in: NSRange(location: attr.length - 1, length: 1))
-            }
-            return attr
-        } catch {
-            return NSAttributedString(string: html, attributes: [
-                .font: conversationBaseFont,
-                .foregroundColor: UIColor.black
-            ])
         }
+
+        // Nettoyage global
+        s = s.replacingOccurrences(of: "<br ?/?>", with: "\n", options: .regularExpression)
+             .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+             .replacingOccurrences(of: "&nbsp;", with: " ")
+             .trimmingCharacters(in: .whitespacesAndNewlines)
+        return s
     }
 
-    // MARK: - Détection d’URL
-    private func detectLinks(in text: String) -> NSAttributedString {
-        let attr = NSMutableAttributedString(string: text, attributes: [
-            .font: conversationBaseFont,
-            .foregroundColor: UIColor.black
-        ])
-        if let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) {
-            let range = NSRange(location: 0, length: (text as NSString).length)
-            detector.matches(in: text, options: [], range: range).forEach { match in
-                guard let url = match.url else { return }
-                attr.addAttributes([
-                    .link: url,
-                    .foregroundColor: unifiedBlue,
-                    .underlineStyle: NSUnderlineStyle.single.rawValue
-                ], range: match.range)
-            }
-        }
-        return attr
+    /// Normalise une mention ("@NicolasE." -> "nicolase")
+    private func normalizeMention(_ mention: String) -> String {
+        var m = mention
+        if m.hasPrefix("@") { m.removeFirst() }
+        // Retire ponctuation/eSpaces en fin
+        m = m.trimmingCharacters(in: CharacterSet(charactersIn: " .,:;!?)»»”’\""))
+        return m.lowercased()
     }
 
-    // MARK: - UITextViewDelegate
-    func textView(_ textView: UITextView,
-                  shouldInteractWith url: URL,
-                  in characterRange: NSRange,
-                  interaction: UITextItemInteraction) -> Bool {
-        delegate?.showWebUrl(url: url)
-        return false
+    /// Détecte si une chaîne ressemble à une URL brute
+    private func looksLikeURL(_ text: String) -> Bool {
+        let pattern = #"(?i)\bhttps?://[^\s]+"#
+        return text.range(of: pattern, options: .regularExpression) != nil
     }
 
     // MARK: - Formatter
@@ -405,6 +370,7 @@ class ConversationViewCell: UITableViewCell, UITextViewDelegate {
 class ConversationMeCell: ConversationViewCell {
     static let identifier = "cellMeWithImage"
 }
+
 class ConversationOtherCell: ConversationViewCell {
     static let identifier = "cellOtherWithImage"
 }
