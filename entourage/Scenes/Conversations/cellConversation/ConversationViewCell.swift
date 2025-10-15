@@ -13,7 +13,7 @@ class ConversationViewCell: UITableViewCell {
     @IBOutlet weak var ui_image_comment: UIImageView!
     @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint!
     @IBOutlet weak var ui_label_comment: UILabel!
-    @IBOutlet weak var ui_label_date: UILabel!
+    @IBOutlet weak var ui_label_date: UILabel!     // -> contiendra "Nom • HH:mm"
     @IBOutlet weak var ui_view_label: UIView!
     @IBOutlet weak var ui_label_min_width: NSLayoutConstraint?
 
@@ -23,20 +23,28 @@ class ConversationViewCell: UITableViewCell {
     private var currentMessage: PostMessage?
     private var currentPositionForRetry: Int = 0
 
+    private var fixedLabelWidthConstraint: NSLayoutConstraint?
+    private var imageWidthConstraint: NSLayoutConstraint?
+    private var imageAspectConstraint: NSLayoutConstraint?
+
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Avatar styling
-        ui_image_avatar.layer.cornerRadius = ui_image_avatar.frame.height / 2
+        ui_image_avatar.layer.masksToBounds = true
         ui_image_avatar.clipsToBounds = true
-        // Image content mode
+
+        // Message image
         ui_image_comment.contentMode = .scaleAspectFill
         ui_image_comment.clipsToBounds = true
         ui_image_comment.translatesAutoresizingMaskIntoConstraints = false
         ui_image_comment.isUserInteractionEnabled = true
+
         // Fonts
         ui_label_date.setFontBody(size: 12)
         ui_label_comment.setFontBody(size: 15)
+
         // Deleted icon template
         if let img = UIImage(named: "ic_deleted_comment") {
             let iv = UIImageView(image: img.withRenderingMode(.alwaysTemplate))
@@ -44,22 +52,32 @@ class ConversationViewCell: UITableViewCell {
             iv.translatesAutoresizingMaskIntoConstraints = false
             deletedImageView = iv
         }
-        // By default, no min-width
+
+        // No min width by default
         ui_label_min_width?.isActive = false
-        // Force la largeur du label à la moitié de l'écran
-        let screenWidth = UIScreen.main.bounds.width
-        let halfWidth = (screenWidth / 2) - 30 // 30 = marges latérales (15 de chaque côté)
+
+        // Fixe la largeur de la vue de texte à ~ la moitié de l’écran
         ui_view_label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            ui_view_label.widthAnchor.constraint(equalToConstant: halfWidth)
-        ])
+        if fixedLabelWidthConstraint == nil {
+            let screenWidth = UIScreen.main.bounds.width
+            let halfWidth = (screenWidth / 2) - 30 // marges latérales
+            fixedLabelWidthConstraint = ui_view_label.widthAnchor.constraint(equalToConstant: halfWidth)
+            fixedLabelWidthConstraint?.isActive = true
+        }
+
         // Gestures
         ui_view_label.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         ui_view_label.addGestureRecognizer(longPressGesture)
+
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:)))
         ui_image_comment.addGestureRecognizer(tapGesture)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        ui_image_avatar.layer.cornerRadius = ui_image_avatar.bounds.height / 2
     }
 
     override func prepareForReuse() {
@@ -78,19 +96,26 @@ class ConversationViewCell: UITableViewCell {
         delegate = nil
         currentMessage = nil
         currentPositionForRetry = 0
+
+        imageWidthConstraint?.isActive = false
+        imageAspectConstraint?.isActive = false
+        imageWidthConstraint = nil
+        imageAspectConstraint = nil
     }
 
     // MARK: - Configuration
     func configure(with message: PostMessage, isMe: Bool, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
+
         // Avatar
         if let urlStr = message.user?.avatarURL, let url = URL(string: urlStr) {
             ui_image_avatar.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
         } else {
             ui_image_avatar.image = UIImage(named: "placeholder_user")
         }
-        // Content or status
+
+        // Contenu / statut
         if let status = message.status?.lowercased() {
             switch status {
             case "deleted":
@@ -103,23 +128,37 @@ class ConversationViewCell: UITableViewCell {
         } else {
             applyNormalContent(message: message, isMe: isMe)
         }
-        // Nom uniquement (plus de date)
-        ui_label_date.text = message.user?.displayName ?? ""
 
-        // Attached image
+        // Nom + heure (ex: "Marine • 14:21")
+        ui_label_date.text = formattedNameAndTime(from: message)
+
+        // Image attachée
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
-            let maxImageSize = (UIScreen.main.bounds.width / 2) - 40 // 40 = marges + padding
+
+            let maxImageSize = (UIScreen.main.bounds.width / 2) - 40 // marges + padding
+
             ui_constraint_image_height.constant = maxImageSize
-            ui_image_comment.widthAnchor.constraint(equalToConstant: maxImageSize).isActive = true
-            ui_image_comment.heightAnchor.constraint(equalTo: ui_image_comment.widthAnchor).isActive = true
+
+            imageWidthConstraint = ui_image_comment.widthAnchor.constraint(equalToConstant: maxImageSize)
+            imageAspectConstraint = ui_image_comment.heightAnchor.constraint(equalTo: ui_image_comment.widthAnchor)
+
+            imageWidthConstraint?.isActive = true
+            imageAspectConstraint?.isActive = true
+
             ui_label_min_width?.constant = maxImageSize
             ui_label_min_width?.isActive = true
         } else {
             ui_image_comment.image = nil
             ui_constraint_image_height.constant = 0
             ui_label_min_width?.isActive = false
+
+            imageWidthConstraint?.isActive = false
+            imageAspectConstraint?.isActive = false
+            imageWidthConstraint = nil
+            imageAspectConstraint = nil
         }
+
         layoutIfNeeded()
     }
 
@@ -168,6 +207,7 @@ class ConversationViewCell: UITableViewCell {
         if message.messageType == "auto" {
             ui_view_label.backgroundColor = UIColor.appBleuAuto
         }
+
         if let html = message.contentHtml, !html.isEmpty {
             ui_label_comment.attributedText = attributedString(fromHTML: html)
         } else if let content = message.content, !content.isEmpty {
@@ -177,6 +217,45 @@ class ConversationViewCell: UITableViewCell {
         } else {
             ui_label_comment.text = ""
         }
+    }
+
+    // MARK: - Name + Time (sans createdAt/createdAtDate)
+    private func formattedNameAndTime(from message: PostMessage) -> String {
+        // user?.displayName est possiblement non-optionnel dans le type -> ne mets PAS "?."
+        let nameOpt: String? = message.user?.displayName
+        let trimmedName = nameOpt?.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        // 1) On tente le Date directement
+        if let d = message.createdDate {
+            let time = hourFormatter.string(from: d)
+            switch (trimmedName?.isEmpty == false) {
+            case true:  return "\(trimmedName!) • \(time)"
+            case false: return time
+            }
+        }
+
+        // 2) Fallback: formatage déjà fourni par le modèle
+        let fallbackTime = message.createdTimeFormatted.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !fallbackTime.isEmpty {
+            if let n = trimmedName, !n.isEmpty {
+                return "\(n) • \(fallbackTime)"
+            } else {
+                return fallbackTime
+            }
+        }
+
+        // 3) Dernier recours : createdDateString (texte brut du backend)
+        let raw = message.createdDateString
+        if !raw.isEmpty {
+            if let n = trimmedName, !n.isEmpty {
+                return "\(n) • \(raw)"
+            } else {
+                return raw
+            }
+        }
+
+        // Rien
+        return trimmedName ?? ""
     }
 
     // MARK: - HTML to AttributedString
@@ -220,6 +299,15 @@ class ConversationViewCell: UITableViewCell {
             ])
         }
     }
+
+    // MARK: - Formatters
+    private lazy var hourFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "HH:mm"
+        f.locale = Locale.current
+        f.timeZone = .current // Europe/Paris
+        return f
+    }()
 }
 
 // MARK: - Subclasses

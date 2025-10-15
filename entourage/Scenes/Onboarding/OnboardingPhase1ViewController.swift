@@ -236,8 +236,6 @@ struct OnboardingPhase1View: View {
     private let countries: [CountryCode] = [
         CountryCode(country: "France",   code: "+33", flag: "🇫🇷"),
         CountryCode(country: "Belgique", code: "+32", flag: "🇧🇪"),
-        CountryCode(country: "Suisse",   code: "+41", flag: "🇨🇭"),
-        CountryCode(country: "Canada",   code: "+1",  flag: "🇨🇦")
     ]
 
     @State private var showDateSheet = false
@@ -269,12 +267,12 @@ struct OnboardingPhase1View: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 40)
         }
-        .background(Color.white) // tout blanc (le host est transparent)
+        .background(Color.white)
         .onAppear {
             vm.loadMetadata()
             vm.loadEnterprises()
-            vm.pushToDelegate()          // push initial
-            vm.recomputeCanProceed()     // état initial du bouton "Suivant"
+            vm.pushToDelegate()
+            vm.recomputeCanProceed()
         }
         .navigationBarTitle("Informations", displayMode: .inline)
         .sheet(isPresented: $showDateSheet) {
@@ -335,7 +333,11 @@ private struct ContactSection: View {
     let countries: [CountryCode]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 12) {
+
+            // Titre au-dessus du HStack => alignement parfait
+            Text("Téléphone*")
+                .font(.entourageTitle(15))
 
             HStack(spacing: 12) {
                 // ——— Indicatif : flag only, comfy spacing ———
@@ -343,7 +345,7 @@ private struct ContactSection: View {
                     HStack {
                         Text(vm.selectedCountry.flag)
                             .font(.system(size: 28))
-                            .frame(width: 44, height: 44, alignment: .center)
+                            .frame(width: 44, height: 52, alignment: .center)
                             .padding(.leading, 10)
                         Spacer()
                         Image(systemName: "chevron.up.chevron.down")
@@ -361,7 +363,6 @@ private struct ContactSection: View {
                                 vm.selectedCountry = found
                             }
                         })) {
-                            // Dans la liste aussi : uniquement le drapeau
                             ForEach(countries, id: \.code) { c in
                                 Text(c.flag).tag(c.code)
                             }
@@ -375,9 +376,11 @@ private struct ContactSection: View {
                     RoundedRectangle(cornerRadius: 12).stroke(Color.secondary.opacity(0.25))
                 )
 
-                FloatingField(title: "Téléphone*", placeholder: "06 XX XX XX XX", text: $vm.phone)
+                // Champ numéro sans label -> même hauteur que le sélecteur
+                PlainInputField(placeholder: "06 XX XX XX XX", text: $vm.phone)
                     .keyboardType(.numberPad)
                     .textContentType(.telephoneNumber)
+                    .frame(height: 52)
             }
 
             FloatingField(title: "E-mail", placeholder: "Ex. : marie.dupont@email.com", text: $vm.email)
@@ -506,6 +509,23 @@ private struct FloatingField: View {
                         .stroke(Color.secondary.opacity(0.25))
                 )
         }
+    }
+}
+
+// Champ sans titre (même style), utile pour le numéro de téléphone
+private struct PlainInputField: View {
+    var placeholder: String
+    @Binding var text: String
+
+    var body: some View {
+        TextField(placeholder, text: $text)
+            .font(.entourageBody(15))
+            .autocapitalization(.none)
+            .padding(.horizontal, 12)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.secondary.opacity(0.25))
+            )
     }
 }
 
@@ -658,7 +678,6 @@ private struct DateSheet: View {
                                in: ...Date(),
                                displayedComponents: .date)
                         .labelsHidden()
-                    // Pas de style explicite < iOS 14
                 }
             }
             .frame(maxWidth: .infinity)
