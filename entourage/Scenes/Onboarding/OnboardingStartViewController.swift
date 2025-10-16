@@ -89,7 +89,7 @@ final class OnboardingStartViewController: UIViewController {
             showSeparator: false
         )
 
-        // Pilotage du bouton par la VM de la phase 1 uniquement
+        // Phase 1 pilotée par la VM
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handlePhase1CanProceed(_:)),
@@ -147,7 +147,10 @@ final class OnboardingStartViewController: UIViewController {
     }
 
     func countValidate() {
-        enableDisableNextButton(isEnable: isLocOk && isTypeOk)
+        // Pilotage interne (hors phase 1)
+        if currentPhasePosition != 1 {
+            enableDisableNextButton(isEnable: isLocOk && isTypeOk)
+        }
     }
 
     func showError(message: String) {
@@ -226,7 +229,7 @@ final class OnboardingStartViewController: UIViewController {
             ui_top_view.updateTitle(title: "onboard_welcome_title".localized)
             ui_bt_previous.isHidden = true
             ui_bt_next.isHidden = false
-            // Le bouton sera piloté live par la notif de la phase 1
+            // ⚠️ Le bouton est piloté UNIQUEMENT par la notif de la VM en phase 1
 
         case 2:
             ui_top_view.updateTitle(title: "onboard_sms_title".localized)
@@ -244,7 +247,10 @@ final class OnboardingStartViewController: UIViewController {
             ui_bt_next.isHidden = false
             ui_bt_next.setTitle("onboard_bt_create".localized, for: .normal)
             if shouldLaunchThird { ui_bt_next.setTitle("onboard_bt_next".localized, for: .normal) }
-            _ = checkValidation()
+
+            // Phase 3 : on pilote localement
+            let v = checkValidation()
+            enableDisableNextButton(isEnable: v.isValid)
 
         default:
             break
@@ -270,7 +276,8 @@ final class OnboardingStartViewController: UIViewController {
             } else if let mail = email, !mail.isEmpty, !mail.isValidEmail {
                 isValid = false; message = "onboard_error_general".localized
             }
-            enableDisableNextButton(isEnable: isValid)
+
+            // ⚠️ Ne PAS piloter le bouton ici : la VM gère via NotificationCenter en phase 1.
             return (isValid, message)
         }
 
@@ -282,7 +289,10 @@ final class OnboardingStartViewController: UIViewController {
             }
         }
 
-        enableDisableNextButton(isEnable: isValid)
+        // Phases ≠ 1 : on peut piloter localement
+        if currentPhasePosition != 1 {
+            enableDisableNextButton(isEnable: isValid)
+        }
         return (isValid, message)
     }
 
@@ -357,10 +367,10 @@ final class OnboardingStartViewController: UIViewController {
         _currentUser?.hasConsent = hasConsent
         _currentUser?.gender = gender
         _currentUser?.discoverySource = howWeMet
-        if howWeMet == "Sensibilisation entreprise" {
-            _currentUser?.company = company
-            _currentUser?.event = self.event
-        }
+
+        // Renseigne entreprise/évènement si fournis (ne dépend pas d’un libellé spécifique)
+        if let company = company, !company.isEmpty { _currentUser?.company = company }
+        if let event = self.event, !event.isEmpty { _currentUser?.event = event }
 
         UserService.updateUser(user: _currentUser) { [weak self] user, _ in
             IHProgressHUD.dismiss()
@@ -438,31 +448,44 @@ extension OnboardingStartViewController: OnboardingDelegate {
         temporaryUser.lastname  = lastname  ?? ""
         temporaryUser.phone     = Utils.validatePhoneFormat(countryCode: countryCode.code, phone: phone ?? "")
 
-        // ↓ These were missing: copy the optional fields
-        temporaryUser.email          = email
-        temporaryUser.hasConsent     = consentEmail
-        temporaryUser.gender         = gender
-        temporaryUser.birthday       = birthdate           // "yyyy-MM-dd"
+        // Champs optionnels
+        temporaryUser.email           = email
+        temporaryUser.hasConsent      = consentEmail
+        temporaryUser.gender          = gender
+        temporaryUser.birthday        = birthdate           // "yyyy-MM-dd"
         temporaryUser.discoverySource = howWeMet
-        temporaryUser.company        = company
-        temporaryUser.event          = event
+        temporaryUser.company         = company
+        temporaryUser.event           = event
 
-        // Phase button state
-        let validate = checkValidation()
-        enableDisableNextButton(isEnable: validate.isValid)
+        // Phase button state : ne JAMAIS piloter le bouton en phase 1
+        let v = checkValidation()
+        if currentPhasePosition != 1 {
+            enableDisableNextButton(isEnable: v.isValid)
+        }
     }
 
     func sendCode(code: String) { self.temporaryPasscode = code }
-    func addInfos(userType: UserType) { self.userTypeSelected = userType; enableDisableNextButton(isEnable: checkValidation().isValid) }
+
+    func addInfos(userType: UserType) {
+        self.userTypeSelected = userType
+        if currentPhasePosition != 1 {
+            enableDisableNextButton(isEnable: checkValidation().isValid)
+        }
+    }
+
     func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         self.temporaryGooglePlace = googlePlace
         self.temporaryLocation = currentlocation
         self.temporaryAddressName = currentLocationName
-        enableDisableNextButton(isEnable: checkValidation().isValid)
+        if currentPhasePosition != 1 {
+            enableDisableNextButton(isEnable: checkValidation().isValid)
+        }
     }
+
     func goMain() { self.goPageBack() }
     func requestNewcode() { self.resendCode() }
 }
+
 // MARK: - MJNavBackViewDelegate
 extension OnboardingStartViewController: MJNavBackViewDelegate {
     func goBack() { self.navigationController?.popViewController(animated: true) }

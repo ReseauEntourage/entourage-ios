@@ -242,16 +242,22 @@ final class OnboardingPhase1VM: ObservableObject {
         return trimmed.range(of: pattern, options: [.regularExpression, .caseInsensitive]) != nil
     }
 
-    // MARK: - Proceed logic
     func recomputeCanProceed() {
         let baseOK = isFirstnameValid && isLastnameValid && isPhoneValid
-        let companyOK: Bool
-        if showCompanyAndEvent {
-            companyOK = (selectedEnterpriseIndex != nil) && (selectedEventIndex != nil)
+
+        // Besoins spécifiques au cas "entreprise"
+        let needsCompany = showCompanyAndEvent
+        let hasCompany   = selectedEnterpriseIndex != nil
+        let hasEvent     = selectedEventIndex != nil
+
+        let next: Bool
+        if needsCompany {
+            // On exige les deux sélections
+            next = baseOK && hasCompany && hasEvent
         } else {
-            companyOK = true
+            next = baseOK
         }
-        let next = baseOK && companyOK
+
         if canProceed != next {
             canProceed = next
             NotificationCenter.default.post(
@@ -261,6 +267,8 @@ final class OnboardingPhase1VM: ObservableObject {
             )
         }
     }
+
+
 
     // MARK: - Networking (services existants)
     func loadMetadata() {
