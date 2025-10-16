@@ -429,7 +429,7 @@ private struct ProfileSection: View {
         VStack(alignment: .leading, spacing: 16) {
 
             SelectorRowButton(
-                title: "Comment nous avez-vous connus ?",
+                title: "Comment nous avez-vous connu ?",
                 placeholder: "Sélectionner dans la liste",
                 value: vm.howWeMetLabel
             ) { showHowAS = true }
@@ -439,7 +439,7 @@ private struct ProfileSection: View {
                 }
                 buttons.append(.destructive(Text("Effacer")) { vm.howWeMetLabel = "" })
                 buttons.append(.cancel())
-                return ActionSheet(title: Text("Comment nous avez-vous connus ?"), buttons: buttons)
+                return ActionSheet(title: Text("Comment nous avez-vous connu ?"), buttons: buttons)
             }
 
             if #available(iOS 15.0, *) {
