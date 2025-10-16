@@ -113,7 +113,7 @@ struct UniversalLinkManager {
                     }
                 }
             }else if pathComponents.contains("chart-event"){
-                
+                DeepLinkManager.showCGU()
             }
         }
     }
