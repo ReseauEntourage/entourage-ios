@@ -2,6 +2,7 @@ import SwiftUI
 import Combine
 import CoreLocation
 import GooglePlaces
+import UIKit
 
 // MARK: - Notification (écoutée par le StartController si besoin)
 extension Notification.Name {
@@ -15,6 +16,95 @@ private extension Font {
     }
     static func entourageBody(_ size: CGFloat = 15) -> Font {
         .custom("NunitoSans-Regular", size: size)
+    }
+}
+
+// MARK: - UIKit helpers (fermeture clavier globale iOS 13+)
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+// MARK: - UITextField wrapper avec barre “Terminer” (iOS 13+)
+private struct AccessoryTextField: UIViewRepresentable {
+    final class Coordinator: NSObject, UITextFieldDelegate {
+        var parent: AccessoryTextField
+        weak var textField: UITextField?
+
+        init(_ parent: AccessoryTextField) { self.parent = parent }
+
+        func textFieldDidChangeSelection(_ textField: UITextField) {
+            parent.text.wrappedValue = textField.text ?? ""
+        }
+
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            if parent.returnKeyCloses {
+                textField.resignFirstResponder()
+                parent.onDone?()
+                return false
+            }
+            return true
+        }
+
+        @objc func doneTapped(_ sender: UIBarButtonItem) {
+            textField?.resignFirstResponder()
+            parent.onDone?()
+            UIApplication.shared.endEditing()
+        }
+    }
+
+    // Bindings & params
+    var placeholder: String
+    var text: Binding<String>
+
+    var keyboardType: UIKeyboardType = .default
+    var textContentType: UITextContentType? = nil
+    var autocapitalizationType: UITextAutocapitalizationType = .none
+    var isSecureTextEntry: Bool = false
+    var returnKeyCloses: Bool = true
+    var onDone: (() -> Void)? = nil
+
+    func makeCoordinator() -> Coordinator { Coordinator(self) }
+
+    func makeUIView(context: Context) -> UITextField {
+        let tf = UITextField(frame: .zero)
+        tf.borderStyle = .none
+        tf.placeholder = placeholder
+        tf.text = text.wrappedValue
+        tf.delegate = context.coordinator
+        tf.keyboardType = keyboardType
+        tf.autocapitalizationType = autocapitalizationType
+        tf.isSecureTextEntry = isSecureTextEntry
+        tf.clearButtonMode = .whileEditing
+        tf.textContentType = textContentType
+
+        // Toolbar “Terminer”
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done = UIBarButtonItem(
+            title: "Terminer",
+            style: .done,
+            target: context.coordinator,
+            action: #selector(AccessoryTextField.Coordinator.doneTapped(_:))
+        )
+        toolbar.items = [flex, done]
+        tf.inputAccessoryView = toolbar
+
+        context.coordinator.textField = tf
+        return tf
+    }
+
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        if uiView.text != text.wrappedValue {
+            uiView.text = text.wrappedValue
+        }
+        uiView.keyboardType = keyboardType
+        uiView.autocapitalizationType = autocapitalizationType
+        uiView.isSecureTextEntry = isSecureTextEntry
+        uiView.textContentType = textContentType
+        context.coordinator.textField = uiView
     }
 }
 
@@ -64,6 +154,20 @@ final class OnboardingPhase1VM: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
+    // Helpers ordre forcé (Femme → Homme → Autre → reste)
+    private func normalized(_ s: String) -> String {
+        s.folding(options: .diacriticInsensitive, locale: .current)
+         .trimmingCharacters(in: .whitespacesAndNewlines)
+         .lowercased()
+    }
+    private func genderPriority(_ label: String) -> Int {
+        let n = normalized(label)
+        if n.contains("femme") { return 0 }
+        if n.contains("homme") { return 1 }
+        if n.contains("autre") || n.contains("non binaire") || n.contains("non-binaire") || n.contains("autres") { return 2 }
+        return 3
+    }
+
     init() {
         // Push + recompute à chaque changement utile
         var triggers: [AnyPublisher<Void, Never>] = []
@@ -98,29 +202,30 @@ final class OnboardingPhase1VM: ObservableObject {
         return label.contains("entreprise")
     }
 
+    // Exposé pour l'UI (validation locale)
+    var isEnterpriseRequired: Bool { showCompanyAndEvent }
+    var isEventRequired: Bool { showCompanyAndEvent }
+    var isEnterpriseSelected: Bool { selectedEnterpriseIndex != nil }
+    var isEventSelected: Bool { selectedEventIndex != nil }
+
     // MARK: - IDs & KEYS à transmettre
-    /// Clé de discovery source (à partir du label choisi)
     private var discoverySourceKey: String? {
         discoverySourcesMap.first(where: { $0.value == howWeMetLabel })?.key
     }
-    /// ID Entreprise sélectionnée (string attendu par l’API)
     private var selectedEnterpriseId: String? {
         guard let i = selectedEnterpriseIndex,
               enterprises.indices.contains(i) else { return nil }
         return enterprises[i].id
     }
-    /// ID Événement sélectionné (string attendu par l’API)
     private var selectedEventId: String? {
         guard let i = selectedEventIndex,
               events.indices.contains(i) else { return nil }
         return events[i].id
     }
-    /// Nom Entreprise (pour l’affichage uniquement)
     private var selectedEnterpriseName: String? {
         guard let i = selectedEnterpriseIndex, enterprises.indices.contains(i) else { return nil }
         return enterprises[i].name
     }
-    /// Nom Événement (pour l’affichage uniquement)
     private var selectedEventName: String? {
         guard let i = selectedEventIndex, events.indices.contains(i) else { return nil }
         return events[i].name
@@ -129,7 +234,7 @@ final class OnboardingPhase1VM: ObservableObject {
     // MARK: - Validation
     var isFirstnameValid: Bool { firstname.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2 }
     var isLastnameValid:   Bool { lastname.trimmingCharacters(in: .whitespacesAndNewlines).count  >= 2 }
-    var isPhoneValid:      Bool { phone.filter(\.isNumber).count >= 9 } // 9 mini (international)
+    var isPhoneValid:      Bool { phone.filter(\.isNumber).count >= 9 }
     var isEmailValid:      Bool {
         let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.isEmpty { return true } // email facultatif
@@ -167,11 +272,18 @@ final class OnboardingPhase1VM: ObservableObject {
                     self.gendersMap = meta.user?.genders ?? [:]
                     self.discoverySourcesMap = meta.user?.discoverySources ?? [:]
 
-                    // Genders: fallback si API vide
+                    // Genders: ordre forcé Femme > Homme > Autre, puis le reste
                     let labelsG = Array(self.gendersMap.values)
-                    self.genderOptions = labelsG.isEmpty
-                        ? ["Homme", "Femme", "Non binaire"]
-                        : labelsG.sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
+                    if labelsG.isEmpty {
+                        self.genderOptions = ["Femme", "Homme", "Autre"]
+                    } else {
+                        self.genderOptions = labelsG.sorted { a, b in
+                            let pa = self.genderPriority(a)
+                            let pb = self.genderPriority(b)
+                            if pa != pb { return pa < pb }
+                            return a.localizedCaseInsensitiveCompare(b) == .orderedAscending
+                        }
+                    }
 
                     // How we met : ordre demandé si disponible
                     let wanted = ["Bouche à oreille",
@@ -193,7 +305,7 @@ final class OnboardingPhase1VM: ObservableObject {
                 case .failure:
                     self.gendersMap = [:]
                     self.discoverySourcesMap = [:]
-                    self.genderOptions = ["Homme", "Femme", "Non binaire"]
+                    self.genderOptions = ["Femme", "Homme", "Autre"]
                     self.howWeMetOptions = []
                 }
                 self.recomputeCanProceed()
@@ -301,6 +413,8 @@ struct OnboardingPhase1View: View {
             .padding(.bottom, 40)
         }
         .background(Color.white)
+        // Tap à côté => fermer le clavier (iOS 13+)
+        .simultaneousGesture(TapGesture().onEnded { UIApplication.shared.endEditing() })
         .onAppear {
             vm.loadMetadata()
             vm.loadEnterprises()
@@ -345,6 +459,7 @@ private struct IdentitySection: View {
             }
 
             FloatingField(title: "Prénom*", placeholder: "Ex. : Marie", text: $vm.firstname)
+
             FloatingField(title: "Nom*", placeholder: "Ex. : Dupont", text: $vm.lastname)
 
             DateRowButton(
@@ -397,7 +512,7 @@ private struct ContactSection: View {
                             }
                         }
                         .labelsHidden()
-                        .opacity(0.02)
+                        .opacity(0.02) // capte le tap mais invisible
                 }
                 .frame(height: 52)
                 .frame(width: 100, alignment: .leading)
@@ -407,13 +522,13 @@ private struct ContactSection: View {
 
                 // ---- Boîte numéro (52) — même style EXACT ----
                 BoxedTextField(placeholder: "06 XX XX XX XX", text: $vm.phone)
-                    .keyboardType(.numberPad)
-                    .textContentType(.telephoneNumber)
             }
 
-            FloatingField(title: "E-mail", placeholder: "Ex. : marie.dupont@email.com", text: $vm.email)
-                .keyboardType(.emailAddress)
-                .textContentType(.emailAddress)
+            FloatingField(title: "E-mail",
+                          placeholder: "Ex. : marie.dupont@email.com",
+                          text: $vm.email,
+                          keyboard: .emailAddress,
+                          contentType: .emailAddress)
         }
     }
 }
@@ -465,7 +580,10 @@ private struct ProfileSection: View {
                     placeholder: vm.enterprises.isEmpty ? "Chargement..." : "Sélectionner dans la liste",
                     value: (vm.selectedEnterpriseIndex.flatMap { idx in
                         vm.enterprises.indices.contains(idx) ? (vm.enterprises[idx].name ?? "") : ""
-                    }) ?? ""
+                    }) ?? "",
+                    isRequired: vm.isEnterpriseRequired,
+                    showError: vm.isEnterpriseRequired && !vm.isEnterpriseSelected,
+                    errorText: "Champ requis"
                 ) { showEnterpriseAS = true }
                 .actionSheet(isPresented: $showEnterpriseAS) {
                     var buttons: [ActionSheet.Button] =
@@ -490,7 +608,10 @@ private struct ProfileSection: View {
                     placeholder: vm.events.isEmpty ? "Sélectionner une entreprise d’abord" : "Sélectionner dans la liste",
                     value: (vm.selectedEventIndex.flatMap { idx in
                         vm.events.indices.contains(idx) ? (vm.events[idx].name ?? "") : ""
-                    }) ?? ""
+                    }) ?? "",
+                    isRequired: vm.isEventRequired,
+                    showError: vm.isEventRequired && !vm.isEventSelected,
+                    errorText: "Champ requis"
                 ) { showEventAS = true }
                 .actionSheet(isPresented: $showEventAS) {
                     var buttons: [ActionSheet.Button] =
@@ -523,18 +644,33 @@ private struct FloatingField: View {
     var placeholder: String
     @Binding var text: String
 
+    // Params clavier
+    var keyboard: UIKeyboardType = .default
+    var contentType: UITextContentType? = nil
+    var autocap: UITextAutocapitalizationType = .none
+    var secure: Bool = false
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(title).font(.entourageTitle(15))
-            TextField(placeholder, text: $text)
-                .font(.entourageBody(15))
-                .autocapitalization(.none)
+
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.secondary.opacity(0.25))
+
+                AccessoryTextField(
+                    placeholder: placeholder,
+                    text: $text,
+                    keyboardType: keyboard,
+                    textContentType: contentType,
+                    autocapitalizationType: autocap,
+                    isSecureTextEntry: secure,
+                    returnKeyCloses: true,
+                    onDone: { UIApplication.shared.endEditing() }
+                )
                 .padding(.horizontal, 12)
                 .frame(height: 44)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.secondary.opacity(0.25))
-                )
+            }
         }
     }
 }
@@ -551,11 +687,19 @@ private struct BoxedTextField: View {
         ZStack {
             RoundedRectangle(cornerRadius: corner)
                 .stroke(Color.secondary.opacity(0.25))
-            TextField(placeholder, text: $text)
-                .font(.entourageBody(15))
-                .autocapitalization(.none)
-                .padding(.horizontal, 12)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+
+            AccessoryTextField(
+                placeholder: placeholder,
+                text: $text,
+                keyboardType: .numberPad,
+                textContentType: .telephoneNumber,
+                autocapitalizationType: .none,
+                isSecureTextEntry: false,
+                returnKeyCloses: true,
+                onDone: { UIApplication.shared.endEditing() }
+            )
+            .padding(.horizontal, 12)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
         .frame(height: height)
     }
@@ -565,11 +709,20 @@ private struct SelectorRowButton: View {
     var title: String
     var placeholder: String
     var value: String
+    var isRequired: Bool = false
+    var showError: Bool = false
+    var errorText: String? = nil
     var onTap: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(title).font(.entourageTitle(15))
+            HStack(spacing: 4) {
+                Text(title).font(.entourageTitle(15))
+                if isRequired {
+                    Text("*").font(.entourageTitle(15)).foregroundColor(.red)
+                }
+            }
+
             Button(action: onTap) {
                 HStack {
                     Text(value.isEmpty ? placeholder : value)
@@ -585,8 +738,14 @@ private struct SelectorRowButton: View {
                 .frame(height: 44)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.secondary.opacity(0.25))
+                        .stroke(showError ? Color.red.opacity(0.7) : Color.secondary.opacity(0.25))
                 )
+            }
+
+            if showError, let errorText {
+                Text(errorText)
+                    .font(.entourageBody(12))
+                    .foregroundColor(.red)
             }
         }
     }
