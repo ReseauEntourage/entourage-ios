@@ -158,6 +158,7 @@ let kAPIConversationGetPrivateConversations = "conversations/privates?token=%@&p
 let kAPIConversationUsersList = "conversations/%@/users?token=%@"
 //Images
 let kAPIConversationImages = "conversations/%@/images?token=%@"
+let kAPIConversationImagesPaged = "conversations/%@/images?token=%@&page=%d&per=%d"
 let kAPIConversationImageSingle = "conversations/%@/images/%@?token=%@"
 
 //Chat message

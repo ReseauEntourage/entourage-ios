@@ -511,25 +511,34 @@ struct MessagingService:ParsingDataCodable {
         }
     
     static func getConversationImages(
-            conversationId: Int,
-            completion: @escaping (_ images: [ConversationImage]?, _ error: EntourageNetworkError?) -> Void
-        ) {
-            guard let token = UserDefaults.token else { completion(nil, nil); return }
-            var endpoint = kAPIConversationImages
-            endpoint = String(format: endpoint, "\(conversationId)", token)
-            
-            Logger.print("***** get conversation images : \(endpoint)")
-            NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
-                guard let data = data,
-                      error == nil,
-                      let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
-                    DispatchQueue.main.async { completion(nil, error) }
-                    return
-                }
-                let images: [ConversationImage]? = self.parseDatas(data: data, key: "images")
-                DispatchQueue.main.async { completion(images, nil) }
-            }
+        conversationId: Int,
+        page: Int,
+        per: Int,
+        completion: @escaping (_ images: [ConversationImage]?, _ nextPage: Int?, _ error: EntourageNetworkError?) -> Void
+    ) {
+        guard let token = UserDefaults.token else {
+            completion(nil, nil, nil)
+            return
         }
+        // Utilise l'endpoint paginé (voir constantes plus bas)
+        let endpoint = String(format: kAPIConversationImagesPaged, "\(conversationId)", token, page, per)
+
+        Logger.print("***** get conversation images (page \(page), per \(per)) : \(endpoint)")
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data,
+                  error == nil,
+                  let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, nil, error) }
+                return
+            }
+            let imgs: [ConversationImage]? = self.parseDatas(data: data, key: "images")
+
+            // S'il y a exactement "per" images, on suppose qu'il y a une page suivante.
+            let count = imgs?.count ?? 0
+            let next = (count == per) ? page + 1 : nil
+            DispatchQueue.main.async { completion(imgs, next, nil) }
+        }
+    }
         
         static func getConversationImage(
             conversationId: Int,
