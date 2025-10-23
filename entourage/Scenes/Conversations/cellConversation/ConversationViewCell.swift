@@ -235,19 +235,41 @@ class ConversationViewCell: UITableViewCell {
     // MARK: - Styles
     private func applyDeletedStyle(text: String) {
         ui_view_label.backgroundColor = deletedBackgroundColor
-        ui_label_comment.text = "  " + text
         ui_label_comment.textColor = deletedTextColor
         ui_label_comment.enabledTypes = [] // pas de liens cliquables
 
-        if let icon = deletedImageView {
-            ui_view_label.addSubview(icon)
-            NSLayoutConstraint.activate([
-                icon.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor, constant: 8),
-                icon.centerYAnchor.constraint(equalTo: ui_view_label.centerYAnchor),
-                icon.widthAnchor.constraint(equalToConstant: 16),
-                icon.heightAnchor.constraint(equalToConstant: 16)
-            ])
+        // Icône en attachment (taille calée sur la capHeight de la font)
+        let font = conversationBaseFont
+        let attachment = NSTextAttachment()
+        if let baseImage = UIImage(named: "ic_deleted_comment")?.withRenderingMode(.alwaysTemplate) {
+            // teinte l’icône
+            let tinted = baseImage.withTintColor(deletedTextColor)
+            attachment.image = tinted
+            // hauteur ≈ hauteur de la police
+            let height = font.capHeight
+            let ratio = tinted.size.width / max(tinted.size.height, 1)
+            attachment.bounds = CGRect(x: 0, y: (font.descender/2), width: height * ratio, height: height)
         }
+
+        // Espace fin insécable après l’icône
+        let spacer = NSAttributedString(string: "  ") // NBSP
+
+        let iconAttr = NSAttributedString(attachment: attachment)
+        let textAttr = NSAttributedString(
+            string: text,
+            attributes: [.font: font, .foregroundColor: deletedTextColor]
+        )
+
+        let final = NSMutableAttributedString()
+        final.append(iconAttr)
+        final.append(spacer)
+        final.append(textAttr)
+
+        ui_label_comment.attributedText = final
+
+        // Optionnel: assure un minimum de padding visuel via contentInset si tu wraps le label
+        // (ActiveLabel n'a pas d'insets natifs, donc on gère via la bulle/container)
+        ui_label_min_width?.isActive = false // évite d'imposer une largeur qui casse le wrap
     }
 
     private func applyNormalContent(message: PostMessage, isMe: Bool) {

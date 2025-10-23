@@ -18,6 +18,7 @@ struct UserSmallTalkRequest: Codable {
     let created_at: String?
     let matched_at: String?
     let deleted_at: String?
+    let number_of_unread_messages: Int?
 
     let user: UserProfile?
     let smalltalk: SmallTalk?
@@ -69,6 +70,7 @@ extension UserSmallTalkRequest {
             created_at: nil,
             matched_at: nil,
             deleted_at: nil,
+            number_of_unread_messages: 0,
             user: nil,
             smalltalk: nil
         )
