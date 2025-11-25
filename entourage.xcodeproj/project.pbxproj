@@ -383,6 +383,7 @@
 		26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */; };
 		26043D982CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043D972CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift */; };
 		26043D9C2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */; };
+		2605FE6C2EBB859500C04C64 /* ZoneChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605FE6B2EBB859500C04C64 /* ZoneChoiceViewController.swift */; };
 		2608F2312E4E0D7600C3C254 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608F2302E4E0D7600C3C254 /* Checkbox.swift */; };
 		2609BFA42AC2BE640052111C /* HomeV2CellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */; };
 		2609BFA62AC2C7D00052111C /* HomeV2CellTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */; };
@@ -568,6 +569,9 @@
 		26CC9F7A2A331CF5005F7408 /* WelcomeThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */; };
 		26CC9F7D2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */; };
 		26CC9F7F2A337243005F7408 /* SecondaryTextWelcomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */; };
+		26D040942ECB356C008DFC97 /* OnboardingSMSViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D040932ECB356C008DFC97 /* OnboardingSMSViewModel.swift */; };
+		26D040962ECB6548008DFC97 /* OnboardingSMSCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D040952ECB6548008DFC97 /* OnboardingSMSCodeView.swift */; };
+		26D040982ECB6635008DFC97 /* OnboardingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D040972ECB6635008DFC97 /* OnboardingDelegate.swift */; };
 		26D0B75D2DE4B1BA0066F461 /* GoodPracticesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0B75C2DE4B1BA0066F461 /* GoodPracticesViewController.swift */; };
 		26D13E152BA1FC8900CAD4F7 /* Survey.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26D13E142BA1FC8900CAD4F7 /* Survey.storyboard */; };
 		26D13E172BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D13E162BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift */; };
@@ -985,6 +989,7 @@
 		26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChoiceDayCell.xib; sourceTree = "<group>"; };
 		26043D972CE4F66A00F4083F /* SelectableDayAndHourCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableDayAndHourCollectionViewCell.swift; sourceTree = "<group>"; };
 		26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableDayAndHourCollectionViewCell.xib; sourceTree = "<group>"; };
+		2605FE6B2EBB859500C04C64 /* ZoneChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneChoiceViewController.swift; sourceTree = "<group>"; };
 		2608F2302E4E0D7600C3C254 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeV2CellTitle.swift; sourceTree = "<group>"; };
 		2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeV2CellTitle.xib; sourceTree = "<group>"; };
@@ -1184,6 +1189,9 @@
 		26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeViewController.swift; sourceTree = "<group>"; };
 		26CC9F7C2A3371FC005F7408 /* SecondaryTextWelcomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryTextWelcomeCell.xib; sourceTree = "<group>"; };
 		26CC9F7E2A337243005F7408 /* SecondaryTextWelcomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTextWelcomeCell.swift; sourceTree = "<group>"; };
+		26D040932ECB356C008DFC97 /* OnboardingSMSViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSMSViewModel.swift; sourceTree = "<group>"; };
+		26D040952ECB6548008DFC97 /* OnboardingSMSCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSMSCodeView.swift; sourceTree = "<group>"; };
+		26D040972ECB6635008DFC97 /* OnboardingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDelegate.swift; sourceTree = "<group>"; };
 		26D0B75C2DE4B1BA0066F461 /* GoodPracticesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodPracticesViewController.swift; sourceTree = "<group>"; };
 		26D13E142BA1FC8900CAD4F7 /* Survey.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Survey.storyboard; sourceTree = "<group>"; };
 		26D13E162BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSurveyViewController.swift; sourceTree = "<group>"; };
@@ -2065,6 +2073,10 @@
 				02FE55B42939F6020076F57A /* OnboardingEndCell.swift */,
 				264C6AB72C19E5F200E3518D /* NotificationDemandViewController.swift */,
 				26E287802E9E8CBE0045A9FA /* OnboardingShared.swift */,
+				2605FE6B2EBB859500C04C64 /* ZoneChoiceViewController.swift */,
+				26D040932ECB356C008DFC97 /* OnboardingSMSViewModel.swift */,
+				26D040952ECB6548008DFC97 /* OnboardingSMSCodeView.swift */,
+				26D040972ECB6635008DFC97 /* OnboardingDelegate.swift */,
 			);
 			name = Onboarding;
 			path = entourage/Scenes/Onboarding;
@@ -3062,6 +3074,7 @@
 				268ADBBE2DD1D80100031C6F /* SmallTalksModels.swift in Sources */,
 				02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */,
 				2674FEB92ACD96BE0013D674 /* HomeGroupHorizontalCollectionCell.swift in Sources */,
+				26D040942ECB356C008DFC97 /* OnboardingSMSViewModel.swift in Sources */,
 				024131D42862030A00561FB4 /* EventCreatePhase2ViewController.swift in Sources */,
 				02FCC3152812DD9200578407 /* NeighborhoodHomeSearchCell.swift in Sources */,
 				026DAC4F28B37D67007517F6 /* ConversationListMainCell.swift in Sources */,
@@ -3149,6 +3162,7 @@
 				26BEEEC92C00C32B00169FBA /* EnhancedOnboardingTitle.swift in Sources */,
 				26584C4A2ACC48ED00ABD401 /* HomeCellMapButton.swift in Sources */,
 				26C2C9012DDB2CE300C8F320 /* SmallTalkViewController.swift in Sources */,
+				26D040982ECB6635008DFC97 /* OnboardingDelegate.swift in Sources */,
 				26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */,
 				26CBF27A2DA6BECC004829E7 /* OnboardingPhase3Asso.swift in Sources */,
 				2630F6282C245E1B007BAE56 /* MainFilterTitleCell.swift in Sources */,
@@ -3178,6 +3192,7 @@
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
 				02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */,
 				022DC3EF2847996D00868760 /* Analytics_Keys.swift in Sources */,
+				26D040962ECB6548008DFC97 /* OnboardingSMSCodeView.swift in Sources */,
 				26BEEEC62C00C32B00169FBA /* EnhancedFullSizeCell.swift in Sources */,
 				26BB4D4A2CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift in Sources */,
 				262820D52D49069A00A61C30 /* MainStatUserCell.swift in Sources */,
@@ -3308,6 +3323,7 @@
 				264C6AB82C19E5F200E3518D /* NotificationDemandViewController.swift in Sources */,
 				2609BFA42AC2BE640052111C /* HomeV2CellTitle.swift in Sources */,
 				02F5279A2799A1F300929431 /* GuideModels.swift in Sources */,
+				2605FE6C2EBB859500C04C64 /* ZoneChoiceViewController.swift in Sources */,
 				26BEEEC32C00C32B00169FBA /* EnhancedOnboardingEnd.swift in Sources */,
 				028D4F5A2937971300A0BDD3 /* OnboardingPhase3ViewController.swift in Sources */,
 				02E0EFA72878709D009B2C65 /* EventDetailTopLightCell.swift in Sources */,
@@ -3494,7 +3510,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3601,7 +3617,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3715,7 +3731,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

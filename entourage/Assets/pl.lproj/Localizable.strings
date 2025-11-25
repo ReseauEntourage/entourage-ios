@@ -160,7 +160,7 @@
 //Phase 3
 "onboard_phone_title" = "Enchantés, %@ !";
 
-"onboard_phase3_title" = "En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ?";
+"onboard_phase3_title" = "Choisissez votre profil";
 "onboard_title_entour" = "Wspierać innych";
 "onboard_subtitle_entour" = "Chciałby chciałabym zaoferować wsparcie moim sąsiadom w potrzebie.";
 "onboard_title_beentour" = "Otrzymać wsparcie";

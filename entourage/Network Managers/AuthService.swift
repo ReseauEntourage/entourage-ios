@@ -7,6 +7,8 @@
 
 import Foundation
 import SimpleKeychain
+import CoreLocation
+
 
 struct AuthService: ParsingDataCodable {
     //MARK: - Create user account -
@@ -165,6 +167,102 @@ struct AuthService: ParsingDataCodable {
             catch{}
             
             completion(nil,error)
+        }
+    }
+}
+
+
+// MARK: - Onboarding zone (distance + adresse primaire)
+
+extension AuthService {
+
+    /// Met à jour le rayon de déplacement (travel_distance) via kAPIUpdateUser
+    static func updateTravelDistance(_ distanceKm: Int,
+                                     completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {
+            completion(EntourageNetworkError())
+            return
+        }
+
+        let endpoint = String(format: kAPIUpdateUser, token)
+
+        let userParameters: [String: Any] = [
+            "travel_distance": distanceKm
+        ]
+
+        let parameters: [String: Any] = ["user": userParameters]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        Logger.print("[AuthService] updateTravelDistance params: \(parameters)")
+
+        NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
+            let status = (resp as? HTTPURLResponse)?.statusCode ?? -1
+            Logger.print("[AuthService] updateTravelDistance status: \(status)")
+
+            if let data = data, let s = String(data: data, encoding: .utf8) {
+                Logger.print("[AuthService] updateTravelDistance body: \(s)")
+            }
+
+            guard error == nil, let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+    /// Met à jour l'adresse primaire (users/me/addresses/1) :
+    /// - si googlePlaceId non nul -> google_place_id
+    /// - sinon latitude / longitude / place_name
+    static func updatePrimaryAddress(googlePlaceId: String?,
+                                     coordinate: CLLocationCoordinate2D?,
+                                     label: String?,
+                                     completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {
+            completion(EntourageNetworkError())
+            return
+        }
+
+        var endpoint = kAPIUpdateAddressPrimary
+        endpoint = String(format: endpoint, token)
+
+        var addressParams: [String: Any] = [:]
+
+        if let placeId = googlePlaceId, !placeId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            // Cas Android : google_place_id uniquement
+            addressParams["google_place_id"] = placeId
+        } else if let coord = coordinate {
+            addressParams["latitude"] = coord.latitude
+            addressParams["longitude"] = coord.longitude
+            if let label = label, !label.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                addressParams["place_name"] = label
+            }
+        } else {
+            // Pas assez d'infos pour envoyer une adresse
+            completion(EntourageNetworkError())
+            return
+        }
+
+        let parameters: [String: Any] = ["address": addressParams]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        Logger.print("[AuthService] updatePrimaryAddress params: \(parameters)")
+
+        NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
+            let status = (resp as? HTTPURLResponse)?.statusCode ?? -1
+            Logger.print("[AuthService] updatePrimaryAddress status: \(status)")
+
+            if let data = data, let s = String(data: data, encoding: .utf8) {
+                Logger.print("[AuthService] updatePrimaryAddress body: \(s)")
+            }
+
+            guard error == nil, let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+
+            DispatchQueue.main.async { completion(nil) }
         }
     }
 }

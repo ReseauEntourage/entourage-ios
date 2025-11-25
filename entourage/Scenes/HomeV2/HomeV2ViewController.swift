@@ -132,6 +132,8 @@ class HomeV2ViewController: UIViewController {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
         getUserInfo()
+        //presentOnboardingMode2IfNeeded()
+
 
     }
     
@@ -1185,3 +1187,26 @@ class AppManager {
     private init() {}
 }
 
+
+extension HomeV2ViewController {
+    func presentOnboardingMode2IfNeeded() {
+
+            let initialCoordinate: CLLocationCoordinate2D? = nil
+            let initialLabel: String? = nil
+            let initialRadiusKm = 20
+
+            presentZoneChoiceSwiftUI(
+                initialCoordinate: initialCoordinate,
+                initialLabel: initialLabel,
+                initialRadiusKm: initialRadiusKm,
+                onConfirm: { [weak self] result in
+
+                    self?.dismiss(animated: true)
+                },
+                onCancel: { [weak self] in
+                    // L’utilisateur a annulé → on ferme simplement
+                    self?.dismiss(animated: true)
+                }
+            )
+        }
+}

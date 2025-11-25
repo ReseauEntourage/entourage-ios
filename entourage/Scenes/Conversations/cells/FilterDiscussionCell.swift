@@ -81,7 +81,7 @@ class FilterDiscussionCell: UITableViewCell {
     private func configureFilterButton(_ button: UIButton, withTitle title: String) {
         button.setTitle(title, for: .normal)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 13)
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         button.clipsToBounds = true
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true

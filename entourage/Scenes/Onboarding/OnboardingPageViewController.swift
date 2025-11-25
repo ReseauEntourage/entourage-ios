@@ -6,6 +6,7 @@
 import UIKit
 import GooglePlaces
 import CoreLocation
+import SwiftUI
 
 final class OnboardingPageViewController: UIPageViewController {
 
@@ -14,8 +15,8 @@ final class OnboardingPageViewController: UIPageViewController {
     var createPhase2VC: OnboardingPhase2ViewController? = nil
     var createPhase3VC: OnboardingPhase3ViewController? = nil
 
-    // ⚠️ Quand parentDelegate est assigné APRÈS la création de phase 1,
-    // on le propage immédiatement aux enfants déjà créés.
+    // Quand parentDelegate est assigné APRÈS la création des phases,
+    // on le propage immédiatement aux enfants UIKit (1, 2 et 3).
     weak var parentDelegate: OnboardingDelegate? = nil {
         didSet { propagateDelegateToChildren() }
     }
@@ -27,10 +28,10 @@ final class OnboardingPageViewController: UIPageViewController {
         super.viewDidLoad()
         view.addRadiusBottomOnly(radius: ApplicationTheme.bigCornerRadius)
 
-        // Phase 1 en full code (SwiftUI hosté)
+        // Phase 1 en full code (UIViewController qui hoste déjà SwiftUI chez toi)
         if createPhase1VC == nil {
             let vc = OnboardingPhase1ViewController()
-            vc.pageDelegate = parentDelegate // peut être nil ici si pas encore injecté
+            vc.pageDelegate = parentDelegate
             createPhase1VC = vc
         }
 
@@ -55,7 +56,6 @@ final class OnboardingPageViewController: UIPageViewController {
                 vc.pageDelegate = parentDelegate
                 createPhase1VC = vc
             } else {
-                // Au cas où le délégué arrive tard
                 createPhase1VC?.pageDelegate = parentDelegate
             }
             AnalyticsLoggerManager.logEvent(name: Onboard_name)
@@ -63,10 +63,9 @@ final class OnboardingPageViewController: UIPageViewController {
 
         case 2:
             if createPhase2VC == nil {
-                createPhase2VC = storyboard?
-                    .instantiateViewController(withIdentifier: "onboardPhase2")
-                    as? OnboardingPhase2ViewController
-                createPhase2VC?.pageDelegate = parentDelegate
+                let vc = OnboardingPhase2ViewController()
+                vc.pageDelegate = parentDelegate
+                createPhase2VC = vc
             } else {
                 createPhase2VC?.pageDelegate = parentDelegate
             }
@@ -98,29 +97,4 @@ final class OnboardingPageViewController: UIPageViewController {
         guard let vc = viewController(phase: currentPhasePosition) else { return }
         setViewControllers([vc], direction: direction, animated: true)
     }
-}
-
-// ⚠️ Si tu as déjà `defaultCountryCode` défini avec la nouvelle vue SwiftUI,
-// enlève la redéclaration suivante pour éviter un conflit de symboles.
-// let defaultCountryCode = CountryCode(country: "France", code: "+33", flag: "🇫🇷")
-
-protocol OnboardingDelegate: AnyObject {
-    func addUserInfos(
-        firstname: String?,
-        lastname: String?,
-        countryCode: CountryCode,
-        phone: String?,
-        email: String?,
-        consentEmail: Bool,
-        gender: String?,
-        howWeMet: String?,
-        birthdate: String?,
-        company: String?,
-        event: String?
-    )
-    func sendCode(code: String)
-    func addInfos(userType: UserType)
-    func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?)
-    func goMain()
-    func requestNewcode()
 }

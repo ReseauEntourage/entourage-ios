@@ -116,6 +116,10 @@ final class OnboardingStartViewController: UIViewController {
             self.pageViewController = vc
             self.pageViewController?.parentDelegate = self
         }
+        //TODO MAYBE DISMISS THIS
+        DispatchQueue.main.async { [weak self] in
+            self?.updateViewsForPosition()
+        }
     }
 
     // MARK: - Observer
@@ -202,7 +206,10 @@ final class OnboardingStartViewController: UIViewController {
             // géré dans action_next (pour l’alerte code manquant)
             return
         } else if currentPhasePosition == 3 {
-            updateUser()
+            // ⬇️ Nouveau : d’abord maj user, puis on ouvre la vue ZoneChoice
+            updateUser { [weak self] in
+                self?.presentZoneChoice()
+            }
             return
         }
         updateViewsForPosition()
@@ -245,10 +252,9 @@ final class OnboardingStartViewController: UIViewController {
             ui_top_view.hideButtonBackForUnboarding(hide: true)
             ui_bt_previous.isHidden = true
             ui_bt_next.isHidden = false
-            ui_bt_next.setTitle("onboard_bt_create".localized, for: .normal)
-            if shouldLaunchThird { ui_bt_next.setTitle("onboard_bt_next".localized, for: .normal) }
+            ui_bt_next.setTitle("onboard_bt_next".localized, for: .normal)
 
-            // Phase 3 : on pilote localement
+            // ⬇️ Validation sans localisation (seul le type requis)
             let v = checkValidation()
             enableDisableNextButton(isEnable: v.isValid)
 
@@ -282,9 +288,8 @@ final class OnboardingStartViewController: UIViewController {
         }
 
         if currentPhasePosition == 3 {
+            // ⬇️ localisation SUPPRIMÉE de la validation
             if userTypeSelected == .none {
-                isValid = false; message = "onboard_error_general".localized
-            } else if temporaryLocation == nil && temporaryGooglePlace == nil {
                 isValid = false; message = "onboard_error_general".localized
             }
         }
@@ -359,7 +364,8 @@ final class OnboardingStartViewController: UIViewController {
         }
     }
 
-    func updateUser() {
+    /// ⚠️ Modifié : accepte un `completion` (ZoneChoice)
+    func updateUser(completion: (() -> Void)? = nil) {
         IHProgressHUD.show()
         var _currentUser = UserDefaults.currentUser
         _currentUser?.goal = userTypeSelected.getGoalString()
@@ -379,7 +385,12 @@ final class OnboardingStartViewController: UIViewController {
                 newUser.phone = _currentUser?.phone
                 UserDefaults.currentUser = newUser
             }
-            self?.updateAddress()
+            if let completion = completion {
+                completion()
+            } else {
+                // Compat ancien flux
+                self?.updateAddress()
+            }
         }
     }
 
@@ -397,8 +408,28 @@ final class OnboardingStartViewController: UIViewController {
                 IHProgressHUD.dismiss()
                 self?.goEnd()
             }
+        } else {
+            // Pas d’adresse choisie → on termine quand même
+            self.goEnd()
         }
     }
+
+    // MARK: - ZoneChoice flow
+    private func presentZoneChoice() {
+        presentZoneChoiceSwiftUI(initialCoordinate: temporaryLocation,
+                                 initialLabel: temporaryAddressName,
+                                 initialRadiusKm: 20,
+                                 onConfirm: { [weak self] result in
+                                     self?.temporaryGooglePlace = result.place
+                                     self?.temporaryLocation = result.coordinate
+                                     self?.temporaryAddressName = result.label
+                                     self?.updateAddress()
+                                 },
+                                 onCancel: { [weak self] in
+                                     self?.goEnd()
+                                 })
+    }
+    
 
     func goEnd() {
         UserDefaults.standard.set(userTypeSelected.rawValue, forKey: "userType")
@@ -486,8 +517,20 @@ extension OnboardingStartViewController: OnboardingDelegate {
     func requestNewcode() { self.resendCode() }
 }
 
+
 // MARK: - MJNavBackViewDelegate
 extension OnboardingStartViewController: MJNavBackViewDelegate {
     func goBack() { self.navigationController?.popViewController(animated: true) }
     func didTapEvent() { }
+}
+
+extension OnboardingStartViewController {
+    /// Permet de forcer le démarrage à une phase donnée (1, 2 ou 3)
+    func startAtPhase(_ phase: Int) {
+        currentPhasePosition = phase
+        // Si la vue est déjà chargée, on applique tout de suite
+        if isViewLoaded {
+            updateViewsForPosition()
+        }
+    }
 }
