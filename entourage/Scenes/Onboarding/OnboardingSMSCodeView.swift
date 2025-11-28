@@ -3,6 +3,9 @@ import UIKit
 
 struct OnboardingSMSCodeView: View {
     let phone: String
+    let timeRemaining: Int      // secondes restantes avant retry
+    let canRetry: Bool          // vrai quand on peut redemander un code
+
     let onCodeFilled: (String) -> Void
     let onRequestNewCode: () -> Void
     let onModifyPhone: () -> Void // encore là même si plus utilisé, ce n’est pas grave
@@ -29,6 +32,26 @@ struct OnboardingSMSCodeView: View {
         return limited.chunked(size: 2).joined(separator: " ")
     }
 
+    // 00:05, 00:27, etc.
+    private var formattedCountdown: String {
+        String(format: "00:%02d", max(timeRemaining, 0))
+    }
+
+    /// Texte au-dessus du lien "Renvoyer le code"
+    /// → à adapter avec tes Localizable.strings :
+    ///   - "onboard_sms_view_wait_countdown" = "Vous pourrez demander un nouveau code dans %@";
+    ///   - "onboard_sms_view_wait_ready" = "Vous pouvez demander un nouveau code.";
+    private var retryTitle: String {
+        if canRetry {
+            return NSLocalizedString("onboard_sms_view_wait_ready",
+                                     comment: "Texte quand on peut redemander un code")
+        } else {
+            let template = NSLocalizedString("onboard_sms_view_wait_countdown",
+                                             comment: "Texte avec compte à rebours")
+            return String(format: template, formattedCountdown)
+        }
+    }
+
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
@@ -48,6 +71,8 @@ struct OnboardingSMSCodeView: View {
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(Color(UIColor.appBlack30))
                         // 👉 plus de bouton "Modifier", juste le numéro
+                        // si un jour tu veux le remettre :
+                        // Button(action: { onModifyPhone() }) { Text("onboard_sms_view_edit") ... }
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -59,20 +84,26 @@ struct OnboardingSMSCodeView: View {
                     .padding(.horizontal, 16)
                     .padding(.top, 8)
 
-                // --- Bloc “Vous n’avez pas reçu votre code ?” ---
+                // --- Bloc “Vous n’avez pas reçu votre code ?” avec timer ---
                 VStack(spacing: 8) {
-                    Text("onboard_sms_view_wait_title")
+                    Text(retryTitle)
                         .font(.system(size: 15))
                         .foregroundColor(Color(UIColor.appGrey151))
                         .multilineTextAlignment(.center)
 
-                    Button(action: { onRequestNewCode() }) {
+                    Button(action: {
+                        if canRetry {
+                            onRequestNewCode()
+                        }
+                    }) {
                         Text("onboard_retry_view_link")
                             .font(.system(size: 15))
                             .foregroundColor(Color(UIColor.appOrange))
-                            .underline()
+                            .underline(canRetry, color: Color(UIColor.appOrange))
                             .multilineTextAlignment(.center)
+                            .opacity(canRetry ? 1.0 : 0.4)
                     }
+                    .disabled(!canRetry)
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 12)
@@ -190,6 +221,7 @@ private struct HiddenOTPTextField: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.text = text
         if isFirstResponder && !uiView.isFirstResponder {
             uiView.becomeFirstResponder()
         }

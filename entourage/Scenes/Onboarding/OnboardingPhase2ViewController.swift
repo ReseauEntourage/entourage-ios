@@ -10,14 +10,21 @@ final class OnboardingPhase2ViewController: UIViewController {
 
     // MARK: - Legacy properties conservées
     var tempCode: String? = nil
+
     var tempPhone: String = "" {
         didSet {
             reloadSwiftUIView()
         }
     }
-    let timeoutInfo = 60
-    var timeOut = 60
-    var countDownTimer: Timer? = nil
+
+    /// Durée avant de pouvoir redemander un code (en secondes)
+    let timeoutInfo: Int = 60
+
+    /// Compte à rebours courant
+    private(set) var timeOut: Int = 60
+
+    /// Timer iOS qui décrémente `timeOut`
+    private var countDownTimer: Timer? = nil
 
     weak var pageDelegate: OnboardingDelegate? {
         didSet {
@@ -28,35 +35,115 @@ final class OnboardingPhase2ViewController: UIViewController {
     // MARK: - SwiftUI hosting
     private var hostingController: UIHostingController<OnboardingSMSCodeView>?
 
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        timeOut = timeoutInfo
         setupSwiftUIView()
+        startTimerIfNeeded()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Au cas où on revient sur l’écran
+        startTimerIfNeeded()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        cancelTimer()
+    }
+
+    deinit {
+        cancelTimer()
+    }
+
+    // MARK: - Timer
+
+    /// Démarre le timer si nécessaire
+    private func startTimerIfNeeded() {
+        // Déjà en cours
+        guard countDownTimer == nil else { return }
+
+        // Si déjà à zéro, on ne relance pas
+        if timeOut <= 0 {
+            timeOut = 0
+            reloadSwiftUIView()
+            return
+        }
+
+        // Normalisation de la valeur
+        if timeOut > timeoutInfo || timeOut <= 0 {
+            timeOut = timeoutInfo
+        }
+
+        reloadSwiftUIView()
+
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] t in
+            guard let self = self else {
+                t.invalidate()
+                return
+            }
+
+            self.timeOut -= 1
+
+            if self.timeOut <= 0 {
+                self.timeOut = 0
+                t.invalidate()
+                self.countDownTimer = nil
+            }
+
+            self.reloadSwiftUIView()
+        }
+
+        // Pour que le timer continue pendant les interactions
+        RunLoop.main.add(timer, forMode: .common)
+        countDownTimer = timer
+    }
+
+    /// Redémarre le timer depuis timeoutInfo
+    private func restartTimer() {
+        cancelTimer()
+        timeOut = timeoutInfo
+        startTimerIfNeeded()
+    }
+
+    /// Arrête le timer
+    private func cancelTimer() {
         countDownTimer?.invalidate()
         countDownTimer = nil
     }
 
     // MARK: - Setup SwiftUI
+
     private func makeRootView() -> OnboardingSMSCodeView {
         let phone = tempPhone
-        weak var delegate = pageDelegate
+        let remaining = max(timeOut, 0)
+        let canRetry = (remaining == 0)
 
         let view = OnboardingSMSCodeView(
             phone: phone,
-            onCodeFilled: { code in
-                delegate?.sendCode(code: code)
+            timeRemaining: remaining,
+            canRetry: canRetry,
+            onCodeFilled: { [weak self] code in
+                self?.pageDelegate?.sendCode(code: code)
             },
-            onRequestNewCode: {
-                delegate?.requestNewcode()
+            onRequestNewCode: { [weak self] in
+                guard let self = self else { return }
+
+                // On ne laisse pas la vue déclencher si ce n’est pas permis
+                guard self.timeOut == 0 else { return }
+
+                self.pageDelegate?.requestNewcode()
+                self.restartTimer()
             },
-            onModifyPhone: {
-                delegate?.goMain()
+            onModifyPhone: { [weak self] in
+                self?.pageDelegate?.goMain()
             }
         )
+
         return view
     }
 
