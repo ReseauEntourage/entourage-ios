@@ -441,6 +441,7 @@
 		2649A4B62D7F586800FD100E /* FilterDiscussionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2649A4B52D7F586800FD100E /* FilterDiscussionCell.xib */; };
 		2649A4B82D7F94E200FD100E /* DiscussionEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649A4B72D7F94E200FD100E /* DiscussionEventCell.swift */; };
 		2649A4BA2D7F963E00FD100E /* DiscussionEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2649A4B92D7F963E00FD100E /* DiscussionEventCell.xib */; };
+		264BD9172EDDE06E004EAD10 /* AssociationOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BD9162EDDE06E004EAD10 /* AssociationOnboardingView.swift */; };
 		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
 		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
@@ -1061,6 +1062,7 @@
 		2649A4B52D7F586800FD100E /* FilterDiscussionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDiscussionCell.xib; sourceTree = "<group>"; };
 		2649A4B72D7F94E200FD100E /* DiscussionEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionEventCell.swift; sourceTree = "<group>"; };
 		2649A4B92D7F963E00FD100E /* DiscussionEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscussionEventCell.xib; sourceTree = "<group>"; };
+		264BD9162EDDE06E004EAD10 /* AssociationOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationOnboardingView.swift; sourceTree = "<group>"; };
 		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
 		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
@@ -2077,6 +2079,7 @@
 				26D040932ECB356C008DFC97 /* OnboardingSMSViewModel.swift */,
 				26D040952ECB6548008DFC97 /* OnboardingSMSCodeView.swift */,
 				26D040972ECB6635008DFC97 /* OnboardingDelegate.swift */,
+				264BD9162EDDE06E004EAD10 /* AssociationOnboardingView.swift */,
 			);
 			name = Onboarding;
 			path = entourage/Scenes/Onboarding;
@@ -3188,6 +3191,7 @@
 				26C1BB662A3AF0D100C81C09 /* WelcomeFourImageCell.swift in Sources */,
 				268ADBC02DD1D85A00031C6F /* SmallTalkService.swift in Sources */,
 				263D7D6B2D4D076300C4D99E /* TranslationCell.swift in Sources */,
+				264BD9172EDDE06E004EAD10 /* AssociationOnboardingView.swift in Sources */,
 				26D13E222BA35F1700CAD4F7 /* QcmCell.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
 				02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */,

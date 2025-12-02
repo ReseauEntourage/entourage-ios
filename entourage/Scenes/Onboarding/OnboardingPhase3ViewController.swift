@@ -2,20 +2,38 @@
 //  OnboardingPhase3ViewController.swift
 //  entourage
 //
-//  Remplace l’ancienne implémentation :
-//  - plus de bloc “adresse”/carte ici
-//  - bouton “Suivant” activé dès qu’un type est choisi
-//  - UI basée sur EnhancedFullSizeCell
-//
 
 import UIKit
 import CoreLocation
 import GooglePlaces
 
+// MARK: - Phase3fromAppDelegate
+
+/// Protocole utilisé ailleurs (HomeV2, AppDelegate…) pour piloter la fin
+/// de l’onboarding et la mise à jour du profil / de la localisation.
+protocol Phase3fromAppDelegate: AnyObject {
+    /// Affiche l’écran de fin d’onboarding.
+    func sendOnboardingEnd()
+
+    /// Met à jour la préférence / le type d’utilisateur choisi à la phase 3.
+    func updatePreference(userType: UserType)
+
+    /// Met à jour l’adresse choisie pendant l’onboarding.
+    func updateLoc(
+        currentlocation: CLLocationCoordinate2D?,
+        currentLocationName: String?,
+        googlePlace: GMSPlace?
+    )
+}
+
+// MARK: - Rows
+
 enum OnboardingPhase3Row {
     case title
     case userType(choice: OnboardingChoice, isSelected: Bool, subtitle: String)
 }
+
+// MARK: - ViewController
 
 final class OnboardingPhase3ViewController: UIViewController {
 
@@ -24,6 +42,7 @@ final class OnboardingPhase3ViewController: UIViewController {
     @IBOutlet private weak var ui_next_btn: UIButton!
 
     // MARK: - Wiring
+    /// Géré par OnboardingStartViewController (ou autre container)
     weak var pageDelegate: OnboardingDelegate?
 
     // MARK: - State
@@ -36,14 +55,19 @@ final class OnboardingPhase3ViewController: UIViewController {
     private(set) var userTypeSelected: UserType = .none
 
     // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Register cells
-        ui_tableview.register(UINib(nibName: OnboardingPhase3TitleCell.identifier, bundle: nil),
-                              forCellReuseIdentifier: OnboardingPhase3TitleCell.identifier)
-        ui_tableview.register(UINib(nibName: "EnhancedFullSizeCell", bundle: nil),
-                              forCellReuseIdentifier: "fullSizeCell")
+        ui_tableview.register(
+            UINib(nibName: OnboardingPhase3TitleCell.identifier, bundle: nil),
+            forCellReuseIdentifier: OnboardingPhase3TitleCell.identifier
+        )
+        ui_tableview.register(
+            UINib(nibName: "EnhancedFullSizeCell", bundle: nil),
+            forCellReuseIdentifier: "fullSizeCell"
+        )
 
         ui_tableview.delegate = self
         ui_tableview.dataSource = self
@@ -61,6 +85,7 @@ final class OnboardingPhase3ViewController: UIViewController {
     }
 
     // MARK: - UI helpers
+
     private func configureOrange(button: UIButton, title: String) {
         button.setTitle(title, for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -81,13 +106,7 @@ final class OnboardingPhase3ViewController: UIViewController {
         // Titre
         rows.append(.title)
 
-        // ⚙️ Choix — alignés avec Android :
-        //
-        // Android :
-        // - BE_ENTOUR   -> option_surround / option_surround_desc / ic_been_entoured_onboarding
-        // - ENTOUR      -> option_supported / option_supported_desc / onboarding_entour
-        // - ASSO        -> onboard_phase3_asso_title / onboard_phase3_asso_desc / onboarding_asso
-
+        // Choix alignés avec Android
         let choiceBeEntour = OnboardingChoice(
             id: "been_entour",
             img: "ic_role_been_entour",
@@ -102,34 +121,41 @@ final class OnboardingPhase3ViewController: UIViewController {
 
         let choiceAsso = OnboardingChoice(
             id: "asso",
-            img: "ic_role_asso", // même nom logique que sur Android
+            img: "ic_role_asso",
             title: NSLocalizedString("onboard_phase3_asso_title", comment: "")
         )
 
-        rows.append(.userType(
-            choice: choiceBeEntour,
-            isSelected: isBeEntour,
-            subtitle: "onboarding_phase_three_option_etre_entoure_description".localized)
+        rows.append(
+            .userType(
+                choice: choiceBeEntour,
+                isSelected: isBeEntour,
+                subtitle: "onboarding_phase_three_option_etre_entoure_description".localized
+            )
         )
 
-        rows.append(.userType(
-            choice: choiceEntour,
-            isSelected: isEntour,
-            subtitle: "onboarding_phase_three_option_entourer_description".localized)
+        rows.append(
+            .userType(
+                choice: choiceEntour,
+                isSelected: isEntour,
+                subtitle: "onboarding_phase_three_option_entourer_description".localized
+            )
         )
 
-        rows.append(.userType(
-            choice: choiceAsso,
-            isSelected: isAsso,
-            subtitle: "onboard_phase3_asso_desc".localized)
+        rows.append(
+            .userType(
+                choice: choiceAsso,
+                isSelected: isAsso,
+                subtitle: "onboard_phase3_asso_desc".localized
+            )
         )
 
         ui_tableview.reloadData()
     }
 
     // MARK: - Selection logic
+
     private func applySelection(choiceId: String) {
-        // 👉 Comportement Android : un seul choix sélectionné à la fois
+        // Un seul choix sélectionné à la fois
         switch choiceId {
         case "entour":
             isEntour = true
@@ -153,45 +179,91 @@ final class OnboardingPhase3ViewController: UIViewController {
 
     private func propagateUserType() {
         EnhancedOnboardingConfiguration.shared.shouldNotDisplayCampain = true
+
         if isBeEntour {
             // Même logique qu’avant : être entouré -> contribution
             EnhancedOnboardingConfiguration.shared.preference = "contribution"
         }
 
         var userType: UserType = .none
-        if isBeEntour { userType = .alone }
-        else if isEntour { userType = .neighbour }
-        if isAsso { userType = .assos }
+        if isBeEntour {
+            userType = .alone
+        } else if isEntour {
+            userType = .neighbour
+        }
+        if isAsso {
+            userType = .assos
+        }
 
         userTypeSelected = userType
+
+        // On laisse aussi le container mettre à jour ses infos si besoin
         pageDelegate?.addInfos(userType: userType)
+
         updateNextButton()
     }
 
     // MARK: - Actions
-    @objc private func onNext() {
-        // Ici, aucune localisation – on laisse OnboardingStart pousser la vue ZoneChoice ensuite
-        dismissKeyboard()
-        // Rien d’autre à faire : OnboardingStartViewController gère le “Next” global
-    }
 
-    private func dismissKeyboard() { view.endEditing(true) }
+    @objc private func onNext() {
+        dismissKeyboard()
+
+        // Si rien n’est sélectionné, on ne fait rien
+        guard userTypeSelected != .none else { return }
+
+        // Pour ce flux-là, on laisse Phase3 pousser ZoneChoice directement.
+        // Si asso -> flow association, sinon -> fin d’onboarding classique.
+        let nextStep: ZoneChoiceNextStep = isAsso
+            ? .associationOnboarding
+            : .onboardingEnd
+
+        let zoneVC = ZoneChoiceViewController(
+            initialCoordinate: nil,
+            initialLabel: nil,
+            initialRadiusKm: 20,
+            delegate: nil,
+            nextStep: nextStep,
+            onConfirm: { _ in },
+            onCancel: { }
+        )
+
+        if let nav = navigationController {
+            nav.pushViewController(zoneVC, animated: true)
+        } else {
+            zoneVC.modalPresentationStyle = .fullScreen
+            present(zoneVC, animated: true)
+        }
+    }
+    private func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - Table
+
 extension OnboardingPhase3ViewController: UITableViewDataSource, UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { rows.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        rows.count
+    }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         switch rows[indexPath.row] {
         case .title:
-            let cell = tableView.dequeueReusableCell(withIdentifier: OnboardingPhase3TitleCell.identifier, for: indexPath) as! OnboardingPhase3TitleCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: OnboardingPhase3TitleCell.identifier,
+                for: indexPath
+            ) as! OnboardingPhase3TitleCell
             cell.selectionStyle = .none
             return cell
 
         case .userType(let choice, let isSelected, let subtitle):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "fullSizeCell", for: indexPath) as! EnhancedFullSizeCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "fullSizeCell",
+                for: indexPath
+            ) as! EnhancedFullSizeCell
             cell.selectionStyle = .none
             cell.configure(choice: choice, isSelected: isSelected) { subtitle }
             return cell
@@ -207,26 +279,8 @@ extension OnboardingPhase3ViewController: UITableViewDataSource, UITableViewDele
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch rows[indexPath.row] {
-        case .title: return UITableView.automaticDimension
-        case .userType: return UITableView.automaticDimension
-        }
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
     }
-}
-
-protocol Phase3fromAppDelegate: AnyObject {
-
-    /// Affiche l’écran de fin d’onboarding.
-    func sendOnboardingEnd()
-
-    /// Met à jour la préférence / le type d’utilisateur choisi à la phase 3.
-    func updatePreference(userType: UserType)
-
-    /// Met à jour l’adresse de l’utilisateur choisie pendant l’onboarding.
-    func updateLoc(
-        currentlocation: CLLocationCoordinate2D?,
-        currentLocationName: String?,
-        googlePlace: GMSPlace?
-    )
 }

@@ -112,9 +112,8 @@ class NotificationDemandViewController: UIViewController {
             comeFromDiscussion = false
             self.dismiss(animated: true)
         }else{
-            self.dismiss(animated: true) {
-                AppState.navigateToMainApp()
-            }
+            AppState.navigateToMainApp()
+            
         }
     }
 }

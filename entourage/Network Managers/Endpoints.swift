@@ -225,4 +225,5 @@ let kAPISmallTalkUsers                    = "smalltalks/%@/users"
 let kAPISmallTalkLeave                    = "smalltalks/%@/users"
 let kAPISmallTalkMessages                 = "smalltalks/%@/chat_messages"
 let kAPISmallTalkMessageDetail            = "smalltalks/%@/chat_messages/%@"
+let kAPICreateAssociation                 = "partners?token=%@"
 

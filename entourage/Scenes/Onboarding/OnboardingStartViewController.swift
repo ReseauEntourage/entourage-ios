@@ -20,6 +20,7 @@ final class OnboardingStartViewController: UIViewController {
     @IBOutlet weak var ui_top_view: MJNavBackView!
 
     // MARK: - Properties
+
     weak var parentDelegate: OTPreOnboardingV2ChoiceViewController? = nil
     var pageViewController: OnboardingPageViewController? = nil
     var currentPhasePosition = 1
@@ -49,6 +50,7 @@ final class OnboardingStartViewController: UIViewController {
     var isTypeOk = false
 
     // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -104,7 +106,11 @@ final class OnboardingStartViewController: UIViewController {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .onboardingPhase1CanProceedChanged, object: nil)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .onboardingPhase1CanProceedChanged,
+            object: nil
+        )
     }
 
     override func viewWillLayoutSubviews() {
@@ -116,20 +122,22 @@ final class OnboardingStartViewController: UIViewController {
             self.pageViewController = vc
             self.pageViewController?.parentDelegate = self
         }
-        //TODO MAYBE DISMISS THIS
         DispatchQueue.main.async { [weak self] in
             self?.updateViewsForPosition()
         }
     }
 
     // MARK: - Observer
+
     @objc private func handlePhase1CanProceed(_ notif: Notification) {
         guard currentPhasePosition == 1 else { return }
         let enabled = (notif.userInfo?["enabled"] as? Bool) ?? false
+        // Phase 1 : bouton uniquement piloté par la VM
         enableDisableNextButton(isEnable: enabled)
     }
 
     // MARK: - UI Configuration
+
     func configureOrangeButton(_ button: UIButton, withTitle title: String) {
         button.setTitle(title, for: .normal)
         button.backgroundColor = UIColor.appOrange
@@ -163,7 +171,11 @@ final class OnboardingStartViewController: UIViewController {
     }
 
     func showPopAlreadySigned() {
-        let alertVC = UIAlertController(title: nil, message: "alreadyRegistereMessageGoBack".localized, preferredStyle: .alert)
+        let alertVC = UIAlertController(
+            title: nil,
+            message: "alreadyRegistereMessageGoBack".localized,
+            preferredStyle: .alert
+        )
         let action = UIAlertAction(title: "OK".localized, style: .default) { [weak self] _ in
             self?.parentDelegate?.isFromOnboarding = true
             self?.navigationController?.popViewController(animated: true)
@@ -172,12 +184,18 @@ final class OnboardingStartViewController: UIViewController {
         self.navigationController?.present(alertVC, animated: true, completion: nil)
     }
 
-    // MARK: - Navigation
+    // MARK: - Navigation actions
+
     @IBAction func action_next(_ sender: Any) {
         // Étape 2 : forcer la présence du code avant de lancer la requête
         if currentPhasePosition == 2 {
-            guard let code = temporaryPasscode, !code.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-                let alertVC = UIAlertController(title: nil, message: "Merci de renseigner le code reçu par SMS.", preferredStyle: .alert)
+            guard let code = temporaryPasscode,
+                  !code.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                let alertVC = UIAlertController(
+                    title: nil,
+                    message: "Merci de renseigner le code reçu par SMS.",
+                    preferredStyle: .alert
+                )
                 alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alertVC, animated: true, completion: nil)
                 return
@@ -198,6 +216,8 @@ final class OnboardingStartViewController: UIViewController {
     @IBAction func action_back(_ sender: Any) {
         goPageBack()
     }
+
+    // MARK: - Navigation interne (phases)
 
     func goPageNext() {
         if currentPhasePosition == 1 {
@@ -247,14 +267,17 @@ final class OnboardingStartViewController: UIViewController {
             enableDisableNextButton(isEnable: true)
 
         case 3:
-            let _title = String(format: "onboard_phone_title".localized, temporaryUser.firstname)
+            let _title = String(
+                format: "onboard_phone_title".localized,
+                temporaryUser.firstname
+            )
             ui_top_view.updateTitle(title: _title)
             ui_top_view.hideButtonBackForUnboarding(hide: true)
             ui_bt_previous.isHidden = true
             ui_bt_next.isHidden = false
             ui_bt_next.setTitle("onboard_bt_next".localized, for: .normal)
 
-            // ⬇️ Validation sans localisation (seul le type requis)
+            // localisation retirée de la validation : seul le type est requis
             let v = checkValidation()
             enableDisableNextButton(isEnable: v.isValid)
 
@@ -288,7 +311,7 @@ final class OnboardingStartViewController: UIViewController {
         }
 
         if currentPhasePosition == 3 {
-            // ⬇️ localisation SUPPRIMÉE de la validation
+            // localisation SUPPRIMÉE de la validation
             if userTypeSelected == .none {
                 isValid = false; message = "onboard_error_general".localized
             }
@@ -302,6 +325,7 @@ final class OnboardingStartViewController: UIViewController {
     }
 
     // MARK: - Network
+
     func sendPhone() {
         IHProgressHUD.show()
         AuthService.createAccountWith(user: self.temporaryUser) { [weak self] phone, error in
@@ -309,8 +333,18 @@ final class OnboardingStartViewController: UIViewController {
             if let error = error {
                 var showErrorHud = true
                 if error.code == "INVALID_PHONE_FORMAT" {
-                    let alertVC = UIAlertController(title: nil, message: "invalidPhoneNumberFormat".localized, preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "close".localized, style: .default, handler: nil))
+                    let alertVC = UIAlertController(
+                        title: nil,
+                        message: "invalidPhoneNumberFormat".localized,
+                        preferredStyle: .alert
+                    )
+                    alertVC.addAction(
+                        UIAlertAction(
+                            title: "close".localized,
+                            style: .default,
+                            handler: nil
+                        )
+                    )
                     self?.navigationController?.present(alertVC, animated: true, completion: nil)
                     showErrorHud = false
                 } else if error.code == "PHONE_ALREADY_EXIST" {
@@ -334,11 +368,24 @@ final class OnboardingStartViewController: UIViewController {
     func createUser() {
         guard let tempPwd = temporaryPasscode, !tempPwd.isEmpty else { return }
         IHProgressHUD.show()
-        AuthService.postLogin(phone: self.temporaryUser.phone!, password: tempPwd) { [weak self] user, error, isFirstLogin in
+        AuthService.postLogin(
+            phone: self.temporaryUser.phone!,
+            password: tempPwd
+        ) { [weak self] user, error, isFirstLogin in
             IHProgressHUD.dismiss()
             if error != nil {
-                let alertvc = UIAlertController(title: "tryAgain".localized, message: "invalidPhoneNumberOrCode".localized, preferredStyle: .alert)
-                alertvc.addAction(UIAlertAction(title: "tryAgain_short".localized, style: .default, handler: nil))
+                let alertvc = UIAlertController(
+                    title: "tryAgain".localized,
+                    message: "invalidPhoneNumberOrCode".localized,
+                    preferredStyle: .alert
+                )
+                alertvc.addAction(
+                    UIAlertAction(
+                        title: "tryAgain_short".localized,
+                        style: .default,
+                        handler: nil
+                    )
+                )
                 self?.navigationController?.present(alertvc, animated: true, completion: nil)
             } else if let user = user {
                 var newUser = user
@@ -357,14 +404,24 @@ final class OnboardingStartViewController: UIViewController {
         AuthService.regenerateSecretCode(phone: self.temporaryUser.phone!) { [weak self] error in
             IHProgressHUD.dismiss()
             if error != nil {
-                let alertvc = UIAlertController(title: "error".localized, message: "requestNotSent".localized, preferredStyle: .alert)
-                alertvc.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
+                let alertvc = UIAlertController(
+                    title: "error".localized,
+                    message: "requestNotSent".localized,
+                    preferredStyle: .alert
+                )
+                alertvc.addAction(
+                    UIAlertAction(
+                        title: "OK".localized,
+                        style: .default,
+                        handler: nil
+                    )
+                )
                 self?.navigationController?.present(alertvc, animated: true, completion: nil)
             }
         }
     }
 
-    /// ⚠️ Modifié : accepte un `completion` (ZoneChoice)
+    /// Met à jour l'utilisateur côté API, puis exécute la completion (ZoneChoice).
     func updateUser(completion: (() -> Void)? = nil) {
         IHProgressHUD.show()
         var _currentUser = UserDefaults.currentUser
@@ -374,7 +431,7 @@ final class OnboardingStartViewController: UIViewController {
         _currentUser?.gender = gender
         _currentUser?.discoverySource = howWeMet
 
-        // Renseigne entreprise/évènement si fournis (ne dépend pas d’un libellé spécifique)
+        // Renseigne entreprise/évènement si fournis
         if let company = company, !company.isEmpty { _currentUser?.company = company }
         if let event = self.event, !event.isEmpty { _currentUser?.event = event }
 
@@ -397,14 +454,25 @@ final class OnboardingStartViewController: UIViewController {
     func updateAddress() {
         if let _place = temporaryGooglePlace, let placeId = _place.placeID {
             IHProgressHUD.show()
-            UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { [weak self] _ in
+            UserService.updateUserAddressWith(
+                placeId: placeId,
+                isSecondaryAddress: false
+            ) { [weak self] _ in
                 IHProgressHUD.dismiss()
                 self?.goEnd()
             }
-        } else if let _lat = self.temporaryLocation?.latitude, let _long = self.temporaryLocation?.longitude {
+        } else if let _lat = self.temporaryLocation?.latitude,
+                  let _long = self.temporaryLocation?.longitude {
             IHProgressHUD.show()
-            let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
-            UserService.updateUserAddressWith(name: addressName, latitude: _lat, longitude: _long, isSecondaryAddress: false) { [weak self] _ in
+            let addressName = temporaryAddressName == nil
+                ? "default"
+                : temporaryAddressName!
+            UserService.updateUserAddressWith(
+                name: addressName,
+                latitude: _lat,
+                longitude: _long,
+                isSecondaryAddress: false
+            ) { [weak self] _ in
                 IHProgressHUD.dismiss()
                 self?.goEnd()
             }
@@ -415,21 +483,32 @@ final class OnboardingStartViewController: UIViewController {
     }
 
     // MARK: - ZoneChoice flow
+
     private func presentZoneChoice() {
-        presentZoneChoiceSwiftUI(initialCoordinate: temporaryLocation,
-                                 initialLabel: temporaryAddressName,
-                                 initialRadiusKm: 20,
-                                 onConfirm: { [weak self] result in
-                                     self?.temporaryGooglePlace = result.place
-                                     self?.temporaryLocation = result.coordinate
-                                     self?.temporaryAddressName = result.label
-                                     self?.updateAddress()
-                                 },
-                                 onCancel: { [weak self] in
-                                     self?.goEnd()
-                                 })
+        // Si l'utilisateur a choisi "asso" à la phase 3,
+        // le nextStep doit être associationOnboarding.
+        let nextStep: ZoneChoiceNextStep = (userTypeSelected == .assos)
+            ? .associationOnboarding
+            : .onboardingEnd
+
+        presentZoneChoiceSwiftUI(
+            initialCoordinate: temporaryLocation,
+            initialLabel: temporaryAddressName,
+            initialRadiusKm: 20,
+            nextStep: nextStep,
+            onConfirm: { [weak self] result in
+                // On garde les infos localement si nécessaire,
+                // mais la navigation est gérée par ZoneChoice lui-même.
+                self?.temporaryGooglePlace = result.place
+                self?.temporaryLocation = result.coordinate
+                self?.temporaryAddressName = result.label
+            },
+            onCancel: { [weak self] in
+                // Si l’utilisateur annule, on termine l’onboarding classique.
+                self?.goEnd()
+            }
+        )
     }
-    
 
     func goEnd() {
         UserDefaults.standard.set(userTypeSelected.rawValue, forKey: "userType")
@@ -437,7 +516,9 @@ final class OnboardingStartViewController: UIViewController {
         UserDefaults.standard.set(false, forKey: "checkAfterLogin")
 
         let sb = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "OnboardingEndViewController") as! OnboardingEndViewController
+        let vc = sb.instantiateViewController(
+            withIdentifier: "OnboardingEndViewController"
+        ) as! OnboardingEndViewController
         if shouldLaunchThird {
             if let window = UIApplication.shared.windows.first {
                 window.rootViewController = vc
@@ -450,6 +531,7 @@ final class OnboardingStartViewController: UIViewController {
 }
 
 // MARK: - OnboardingDelegate
+
 extension OnboardingStartViewController: OnboardingDelegate {
     func addUserInfos(
         firstname: String?,
@@ -477,7 +559,10 @@ extension OnboardingStartViewController: OnboardingDelegate {
         // Build the user object used for the create call
         temporaryUser.firstname = firstname ?? ""
         temporaryUser.lastname  = lastname  ?? ""
-        temporaryUser.phone     = Utils.validatePhoneFormat(countryCode: countryCode.code, phone: phone ?? "")
+        temporaryUser.phone     = Utils.validatePhoneFormat(
+            countryCode: countryCode.code,
+            phone: phone ?? ""
+        )
 
         // Champs optionnels
         temporaryUser.email           = email
@@ -504,7 +589,11 @@ extension OnboardingStartViewController: OnboardingDelegate {
         }
     }
 
-    func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
+    func addPlace(
+        currentlocation: CLLocationCoordinate2D?,
+        currentLocationName: String?,
+        googlePlace: GMSPlace?
+    ) {
         self.temporaryGooglePlace = googlePlace
         self.temporaryLocation = currentlocation
         self.temporaryAddressName = currentLocationName
@@ -517,18 +606,19 @@ extension OnboardingStartViewController: OnboardingDelegate {
     func requestNewcode() { self.resendCode() }
 }
 
-
 // MARK: - MJNavBackViewDelegate
+
 extension OnboardingStartViewController: MJNavBackViewDelegate {
     func goBack() { self.navigationController?.popViewController(animated: true) }
     func didTapEvent() { }
 }
 
+// MARK: - Phase helper
+
 extension OnboardingStartViewController {
     /// Permet de forcer le démarrage à une phase donnée (1, 2 ou 3)
     func startAtPhase(_ phase: Int) {
         currentPhasePosition = phase
-        // Si la vue est déjà chargée, on applique tout de suite
         if isViewLoaded {
             updateViewsForPosition()
         }

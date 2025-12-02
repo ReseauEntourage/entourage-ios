@@ -1901,3 +1901,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_confidential" = "L’adresse est confidentielle et ne sera pas communiquée";
 "onboard_sms_view_wait_countdown" = "Vous pourrez demander un nouveau code dans %@";
 "onboard_sms_view_wait_ready" = "Vous pouvez demander un nouveau code.";
+
+"onboard_asso_title" = "Sélectionnez votre association";
+"onboard_asso_subtitle" = "Nom de votre association";
+"onboard_asso_dropdown_hint" = "Sélectionner dans la liste";
+"onboard_asso_info" = "Votre association ne figure pas dans la liste.\nCréez-en une nouvelle";
+"onboard_asso_other_label" = "Nom de votre association";
+"onboard_asso_other_placeholder" = "Ex. : Utopia 56 ou Femmes solidaires";
+"onboard_asso_other_required" = "Merci d’indiquer le nom de votre association.";
+"onboard_asso_pick_first" = "Veuillez sélectionner une association.";

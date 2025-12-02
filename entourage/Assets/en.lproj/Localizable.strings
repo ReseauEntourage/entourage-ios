@@ -1918,3 +1918,11 @@
 "photo_consent_body" = "In accordance with image rights provisions, I authorize Entourage and its technical providers to take photographs, videos or digital recordings during Entourage association events for an unlimited duration, until I withdraw my consent.\n\nThe images may be used and exploited by the organization, in any form and on any media, worldwide, without time limitation, in full or as excerpts, including but not limited to: press, books, digital media, exhibitions, advertising, public screenings, contests, website and social networks.\n\nThe beneficiary of this authorization expressly agrees not to use the photographs in a manner that could infringe privacy or reputation, and not to use the photographs, videos or recordings in any harmful context or medium.\n\nI acknowledge that my rights are fully respected and I shall not claim any remuneration for the use covered herein.\n\nI warrant that neither I nor, where applicable, the person I represent is bound by an exclusive contract concerning the use of my image or my name.\n\nAny dispute arising from the interpretation or performance hereof shall be subject to the exclusive jurisdiction of French courts.";
 "onboarding_zone_city_title" = "City";
 "onboarding_zone_confidential" = "this adress will not be communicated";
+"onboard_asso_title" = "Select your association";
+"onboard_asso_subtitle" = "Name of your association";
+"onboard_asso_dropdown_hint" = "Select from the list";
+"onboard_asso_info" = "Your association does not appear in the list.\nCreate a new one.";
+"onboard_asso_other_label" = "Name of your association";
+"onboard_asso_other_placeholder" = "e.g. Utopia 56 or Women Solidarity";
+"onboard_asso_other_required" = "Please enter your association name.";
+"onboard_asso_pick_first" = "Please select an association.";

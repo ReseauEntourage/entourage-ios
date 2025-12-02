@@ -1,3 +1,8 @@
+//
+//  ZoneChoiceViewController.swift
+//  entourage
+//
+
 import UIKit
 import MapKit
 import GooglePlaces
@@ -5,11 +10,18 @@ import CoreLocation
 
 // MARK: - Result
 
-public struct ZoneChoiceResult {
-    public let place: GMSPlace?
-    public let coordinate: CLLocationCoordinate2D?
-    public let label: String?
-    public let radiusKm: Int
+struct ZoneChoiceResult {
+    let place: GMSPlace?
+    let coordinate: CLLocationCoordinate2D?
+    let label: String?
+    let radiusKm: Int
+}
+
+// MARK: - Next Step
+
+enum ZoneChoiceNextStep {
+    case onboardingEnd
+    case associationOnboarding
 }
 
 // MARK: - Delegate
@@ -31,13 +43,18 @@ final class ZoneChoiceViewController: UIViewController {
 
     weak var delegate: ZoneChoiceViewControllerDelegate?
 
+    /// Indique ce qui doit se passer après la sauvegarde de la zone.
+    private let nextStep: ZoneChoiceNextStep
+
     // callbacks optionnels (pour l’API par closures)
     private var onConfirmClosure: ((ZoneChoiceResult) -> Void)?
     private var onCancelClosure: (() -> Void)?
 
     // MARK: - UI
 
-    private let cardView = UIView()
+    private let contentContainerView = UIView()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
 
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
@@ -53,6 +70,7 @@ final class ZoneChoiceViewController: UIViewController {
     private let mapContainerView = UIView()
     private let mapView = MKMapView()
 
+    private let bottomBar = UIView()
     private let bottomSeparator = UIView()
     private let previousButton = UIButton(type: .system)
     private let nextButton = UIButton(type: .system)
@@ -61,6 +79,7 @@ final class ZoneChoiceViewController: UIViewController {
 
     private var selectedCoord: CLLocationCoordinate2D?
     private var selectedPlace: GMSPlace?
+    private var selectedLabel: String?
     private var currentRadiusKm: Int = 20
 
     // MARK: - Init
@@ -69,6 +88,7 @@ final class ZoneChoiceViewController: UIViewController {
          initialLabel: String? = nil,
          initialRadiusKm: Int = 20,
          delegate: ZoneChoiceViewControllerDelegate? = nil,
+         nextStep: ZoneChoiceNextStep = .onboardingEnd,
          onConfirm: ((ZoneChoiceResult) -> Void)? = nil,
          onCancel: (() -> Void)? = nil) {
 
@@ -76,6 +96,7 @@ final class ZoneChoiceViewController: UIViewController {
         self.initialLabel = initialLabel
         self.initialRadiusKm = initialRadiusKm
         self.delegate = delegate
+        self.nextStep = nextStep
         self.onConfirmClosure = onConfirm
         self.onCancelClosure = onCancel
         self.currentRadiusKm = initialRadiusKm
@@ -93,9 +114,10 @@ final class ZoneChoiceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(white: 0.15, alpha: 1.0)
 
-        setupCard()
+        view.backgroundColor = .systemBackground
+
+        setupLayout()
         setupHeader()
         setupCitySection()
         setupRadiusSection()
@@ -106,18 +128,49 @@ final class ZoneChoiceViewController: UIViewController {
 
     // MARK: - Setup UI
 
-    private func setupCard() {
-        view.addSubview(cardView)
-        cardView.translatesAutoresizingMaskIntoConstraints = false
-        cardView.backgroundColor = .white
-        cardView.layer.cornerRadius = 4
-        cardView.layer.masksToBounds = true
+    private func setupLayout() {
+        view.addSubview(contentContainerView)
+        view.addSubview(bottomBar)
+
+        contentContainerView.translatesAutoresizingMaskIntoConstraints = false
+        bottomBar.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            cardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-            cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            cardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24)
+            // Bottom bar collée en bas
+            bottomBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+
+            // Contenu au-dessus de la bottom bar
+            contentContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            contentContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentContainerView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor)
+        ])
+
+        bottomBar.backgroundColor = .systemBackground
+
+        // Scroll dans le container
+        contentContainerView.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.alwaysBounceVertical = true
+
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: contentContainerView.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+
+        scrollView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
     }
 
@@ -128,22 +181,24 @@ final class ZoneChoiceViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.textColor = UIColor(white: 0.1, alpha: 1.0)
 
-        subtitleLabel.text = NSLocalizedString("onboarding_zone_subtitle",
-                                               comment: "Cette information nous permet d’affiner les actions proches de chez vous.")
+        subtitleLabel.text = NSLocalizedString(
+            "onboarding_zone_subtitle",
+            comment: "Cette information nous permet d’affiner les actions proches de chez vous."
+        )
         subtitleLabel.setFontBody(size: 14)
         subtitleLabel.textColor = .secondaryLabel
         subtitleLabel.numberOfLines = 0
 
-        cardView.addSubview(titleLabel)
-        cardView.addSubview(subtitleLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(subtitleLabel)
 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 24),
-            titleLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 24),
-            titleLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -24),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
 
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
@@ -157,9 +212,11 @@ final class ZoneChoiceViewController: UIViewController {
         cityTitleLabel.setFontBody(size: 14)
         cityTitleLabel.textColor = UIColor(white: 0.2, alpha: 1.0)
 
-        cityButton.setTitle(initialLabel ?? NSLocalizedString("onboarding_zone_choose_city",
-                                                              comment: "Choisir une ville"),
-                            for: .normal)
+        let cityTitle = initialLabel ?? NSLocalizedString(
+            "onboarding_zone_choose_city",
+            comment: "Choisir une ville"
+        )
+        cityButton.setTitle(cityTitle, for: .normal)
         cityButton.setTitleColor(.label, for: .normal)
         cityButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         cityButton.tintColor = UIColor(white: 0.7, alpha: 1.0)
@@ -167,23 +224,25 @@ final class ZoneChoiceViewController: UIViewController {
         cityButton.contentVerticalAlignment = .center
         cityButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         cityButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-        cityButton.backgroundColor = UIColor(white: 0.97, alpha: 1.0) // #F8F8F8
+        cityButton.backgroundColor = UIColor(white: 0.97, alpha: 1.0)
         cityButton.layer.cornerRadius = 10
         cityButton.layer.borderWidth = 1
-        cityButton.layer.borderColor = UIColor(white: 0.92, alpha: 1.0).cgColor // #EAEAEA
+        cityButton.layer.borderColor = UIColor(white: 0.92, alpha: 1.0).cgColor
         cityButton.setFontBody(size: 16)
-        cityButton.addTarget(self, action: #selector(openAutocomplete), for: .touchUpInside)
         cityButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        cityButton.addTarget(self, action: #selector(openAutocomplete), for: .touchUpInside)
 
-        cityConfidentialLabel.text = NSLocalizedString("onboarding_zone_confidential",
-                                                       comment: "L’adresse est confidentielle et ne sera pas communiquée")
+        cityConfidentialLabel.text = NSLocalizedString(
+            "onboarding_zone_confidential",
+            comment: "L’adresse est confidentielle et ne sera pas communiquée"
+        )
         cityConfidentialLabel.setFontBody(size: 12)
         cityConfidentialLabel.textColor = .secondaryLabel
         cityConfidentialLabel.numberOfLines = 0
 
-        cardView.addSubview(cityTitleLabel)
-        cardView.addSubview(cityButton)
-        cardView.addSubview(cityConfidentialLabel)
+        contentView.addSubview(cityTitleLabel)
+        contentView.addSubview(cityButton)
+        contentView.addSubview(cityConfidentialLabel)
 
         cityTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         cityButton.translatesAutoresizingMaskIntoConstraints = false
@@ -218,7 +277,7 @@ final class ZoneChoiceViewController: UIViewController {
         slider.maximumValue = 100
         slider.value = Float(initialRadiusKm)
         slider.minimumTrackTintColor = UIColor.appOrange
-        slider.maximumTrackTintColor = UIColor(white: 0.85, alpha: 1.0) // #D8D8D8
+        slider.maximumTrackTintColor = UIColor(white: 0.85, alpha: 1.0)
         slider.thumbTintColor = .white
         slider.layer.shadowColor = UIColor.black.cgColor
         slider.layer.shadowOpacity = 0.15
@@ -226,9 +285,9 @@ final class ZoneChoiceViewController: UIViewController {
         slider.layer.shadowOffset = CGSize(width: 0, height: 1)
         slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
 
-        cardView.addSubview(radiusTitleLabel)
-        cardView.addSubview(radiusValueLabel)
-        cardView.addSubview(slider)
+        contentView.addSubview(radiusTitleLabel)
+        contentView.addSubview(radiusValueLabel)
+        contentView.addSubview(slider)
 
         radiusTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         radiusValueLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -258,7 +317,7 @@ final class ZoneChoiceViewController: UIViewController {
         mapView.isRotateEnabled = false
         mapView.isPitchEnabled = false
 
-        cardView.addSubview(mapContainerView)
+        contentView.addSubview(mapContainerView)
         mapContainerView.addSubview(mapView)
 
         mapContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -273,17 +332,20 @@ final class ZoneChoiceViewController: UIViewController {
             mapView.topAnchor.constraint(equalTo: mapContainerView.topAnchor),
             mapView.leadingAnchor.constraint(equalTo: mapContainerView.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: mapContainerView.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor)
+            mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor),
+
+            // Important pour que le scroll sache où s’arrêter
+            mapContainerView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -24)
         ])
     }
 
     private func setupBottomBar() {
-        bottomSeparator.backgroundColor = UIColor(white: 0.92, alpha: 1.0)
-        cardView.addSubview(bottomSeparator)
+        bottomBar.addSubview(bottomSeparator)
         bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
+        bottomSeparator.backgroundColor = UIColor(white: 0.92, alpha: 1.0)
 
         previousButton.setTitle(NSLocalizedString("onboard_bt_back", comment: "Précédent"), for: .normal)
-        previousButton.setTitleColor(.black, for: .normal) // ✅ TEXTE NOIR
+        previousButton.setTitleColor(.black, for: .normal)
         previousButton.setFontBody(size: 16)
         previousButton.layer.cornerRadius = 22
         previousButton.layer.borderWidth = 1
@@ -297,30 +359,31 @@ final class ZoneChoiceViewController: UIViewController {
         nextButton.layer.cornerRadius = 22
         nextButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
 
-        cardView.addSubview(previousButton)
-        cardView.addSubview(nextButton)
+        bottomBar.addSubview(previousButton)
+        bottomBar.addSubview(nextButton)
 
         previousButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            bottomSeparator.topAnchor.constraint(equalTo: mapContainerView.bottomAnchor, constant: 24),
-            bottomSeparator.leadingAnchor.constraint(equalTo: cardView.leadingAnchor),
-            bottomSeparator.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
+            bottomSeparator.topAnchor.constraint(equalTo: bottomBar.topAnchor),
+            bottomSeparator.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor),
+            bottomSeparator.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor),
             bottomSeparator.heightAnchor.constraint(equalToConstant: 1),
 
-            previousButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 24),
-            previousButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -24),
+            previousButton.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor, constant: 24),
+            previousButton.topAnchor.constraint(equalTo: bottomSeparator.bottomAnchor, constant: 16),
             previousButton.heightAnchor.constraint(equalToConstant: 44),
 
-            nextButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -24),
-            nextButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -24),
+            nextButton.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor, constant: -24),
+            nextButton.centerYAnchor.constraint(equalTo: previousButton.centerYAnchor),
             nextButton.heightAnchor.constraint(equalToConstant: 44),
 
-            previousButton.trailingAnchor.constraint(equalTo: cardView.centerXAnchor, constant: -8),
-            nextButton.leadingAnchor.constraint(equalTo: cardView.centerXAnchor, constant: 8),
+            previousButton.trailingAnchor.constraint(equalTo: bottomBar.centerXAnchor, constant: -8),
+            nextButton.leadingAnchor.constraint(equalTo: bottomBar.centerXAnchor, constant: 8),
 
-            bottomSeparator.bottomAnchor.constraint(equalTo: previousButton.topAnchor, constant: -12)
+            // marge bas pour coller au safe area
+            nextButton.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -16)
         ])
     }
 
@@ -330,11 +393,15 @@ final class ZoneChoiceViewController: UIViewController {
 
         if let c = initialCoordinate {
             selectedCoord = c
+            selectedLabel = initialLabel
+            if let label = initialLabel {
+                cityButton.setTitle(label, for: .normal)
+            }
             centerMap()
             drawCircle()
             updateNextButtonEnabled(true)
         } else {
-            // vue globale France par défaut, zoom raisonnable
+            // Vue initiale centrée sur la France
             let franceCenter = CLLocationCoordinate2D(latitude: 46.5, longitude: 2.2)
             let region = MKCoordinateRegion(center: franceCenter,
                                             span: MKCoordinateSpan(latitudeDelta: 6.0,
@@ -362,6 +429,7 @@ final class ZoneChoiceViewController: UIViewController {
     private func updateNextButtonEnabled(_ enabled: Bool) {
         nextButton.isEnabled = enabled
         nextButton.alpha = enabled ? 1.0 : 0.5
+        nextButton.backgroundColor = enabled ? .appOrange : .appOrange.withAlphaComponent(0.5)
     }
 
     @objc private func openAutocomplete() {
@@ -373,7 +441,12 @@ final class ZoneChoiceViewController: UIViewController {
     @objc private func cancelTapped() {
         delegate?.zoneChoiceCancelled()
         onCancelClosure?()
-        dismiss(animated: true)
+
+        if let nav = navigationController {
+            nav.popViewController(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
     }
 
     @objc private func confirmTapped() {
@@ -385,17 +458,17 @@ final class ZoneChoiceViewController: UIViewController {
         let result = ZoneChoiceResult(
             place: selectedPlace,
             coordinate: coord,
-            label: initialLabel,
+            label: selectedLabel ?? initialLabel,
             radiusKm: currentRadiusKm
         )
 
-        // Pour ceux qui utilisent le delegate / closure
+        // on informe tout le monde AVANT le réseau
         delegate?.zoneChoiceConfirmed(result: result)
         onConfirmClosure?(result)
 
         updateNextButtonEnabled(false)
 
-        // 1) travel_distance (users/me.json?token=%@)
+        // 1) travel_distance
         AuthService.updateTravelDistance(currentRadiusKm) { [weak self] error in
             guard let self = self else { return }
 
@@ -405,11 +478,13 @@ final class ZoneChoiceViewController: UIViewController {
                 return
             }
 
-            // 2) adresse primaire (users/me/addresses/1?token=%@)
+            // 2) adresse primaire
             let googlePlaceId = self.selectedPlace?.placeID
-            AuthService.updatePrimaryAddress(googlePlaceId: googlePlaceId,
-                                             coordinate: coord,
-                                             label: self.initialLabel) { [weak self] error2 in
+            AuthService.updatePrimaryAddress(
+                googlePlaceId: googlePlaceId,
+                coordinate: coord,
+                label: self.selectedLabel ?? self.initialLabel
+            ) { [weak self] error2 in
                 guard let self = self else { return }
 
                 self.updateNextButtonEnabled(true)
@@ -419,8 +494,13 @@ final class ZoneChoiceViewController: UIViewController {
                     return
                 }
 
-                // 3) on enchaîne sur l’écran de fin d’onboarding
-                self.goToOnboardingEnd()
+                // 3) Navigation interne selon nextStep
+                switch self.nextStep {
+                case .onboardingEnd:
+                    self.goToOnboardingEnd()
+                case .associationOnboarding:
+                    self.goToAssociationOnboarding()
+                }
             }
         }
     }
@@ -429,9 +509,13 @@ final class ZoneChoiceViewController: UIViewController {
         let message = NSLocalizedString(messageKey,
                                         comment: "Erreur lors de l’envoi de la zone")
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "OK"),
-                                      style: .default,
-                                      handler: nil))
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("OK", comment: "OK"),
+                style: .default,
+                handler: nil
+            )
+        )
         present(alert, animated: true, completion: nil)
     }
 
@@ -439,9 +523,25 @@ final class ZoneChoiceViewController: UIViewController {
 
     private func goToOnboardingEnd() {
         let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
-        if let endVC = storyboard.instantiateViewController(withIdentifier: "OnboardingEndViewController") as? OnboardingEndViewController {
-            endVC.modalPresentationStyle = .fullScreen
-            self.present(endVC, animated: true, completion: nil)
+        if let endVC = storyboard.instantiateViewController(
+            withIdentifier: "OnboardingEndViewController"
+        ) as? OnboardingEndViewController {
+            if let nav = navigationController {
+                nav.pushViewController(endVC, animated: true)
+            } else {
+                endVC.modalPresentationStyle = .fullScreen
+                present(endVC, animated: true, completion: nil)
+            }
+        }
+    }
+
+    private func goToAssociationOnboarding() {
+        let associationVC = AssociationOnboardingViewController()
+        if let nav = navigationController {
+            nav.pushViewController(associationVC, animated: true)
+        } else {
+            associationVC.modalPresentationStyle = .fullScreen
+            present(associationVC, animated: true, completion: nil)
         }
     }
 
@@ -450,9 +550,11 @@ final class ZoneChoiceViewController: UIViewController {
     private func centerMap() {
         guard let c = selectedCoord else { return }
 
-        let region = MKCoordinateRegion(center: c,
-                                        latitudinalMeters: Double(currentRadiusKm) * 2200,
-                                        longitudinalMeters: Double(currentRadiusKm) * 2200)
+        let region = MKCoordinateRegion(
+            center: c,
+            latitudinalMeters: Double(currentRadiusKm) * 2200,
+            longitudinalMeters: Double(currentRadiusKm) * 2200
+        )
         mapView.setRegion(region, animated: true)
     }
 
@@ -468,7 +570,8 @@ final class ZoneChoiceViewController: UIViewController {
 // MARK: - MKMapViewDelegate
 
 extension ZoneChoiceViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    func mapView(_ mapView: MKMapView,
+                 rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let circle = overlay as? MKCircle else {
             return MKOverlayRenderer(overlay: overlay)
         }
@@ -487,9 +590,12 @@ extension ZoneChoiceViewController: GMSAutocompleteViewControllerDelegate {
                         didAutocompleteWith place: GMSPlace) {
         selectedPlace = place
         selectedCoord = place.coordinate
-        initialLabel = place.name ?? place.formattedAddress ?? ""
 
-        cityButton.setTitle(initialLabel, for: .normal)
+        let label = place.name ?? place.formattedAddress ?? ""
+        selectedLabel = label
+        initialLabel = label
+
+        cityButton.setTitle(label, for: .normal)
         centerMap()
         drawCircle()
         updateNextButtonEnabled(true)
@@ -517,10 +623,11 @@ private extension UIButton {
 
 // MARK: - UIViewController helper (compat avec ton code existant)
 
-public extension UIViewController {
+extension UIViewController {
     func presentZoneChoiceSwiftUI(initialCoordinate: CLLocationCoordinate2D? = nil,
                                   initialLabel: String? = nil,
                                   initialRadiusKm: Int = 20,
+                                  nextStep: ZoneChoiceNextStep = .onboardingEnd,
                                   onConfirm: @escaping (ZoneChoiceResult) -> Void,
                                   onCancel: @escaping () -> Void) {
 
@@ -529,10 +636,16 @@ public extension UIViewController {
             initialLabel: initialLabel,
             initialRadiusKm: initialRadiusKm,
             delegate: nil,
+            nextStep: nextStep,
             onConfirm: onConfirm,
             onCancel: onCancel
         )
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+
+        if let nav = navigationController {
+            nav.pushViewController(vc, animated: true)
+        } else {
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        }
     }
 }
