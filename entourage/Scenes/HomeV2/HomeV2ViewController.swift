@@ -843,22 +843,22 @@ extension HomeV2ViewController {
                 }
                 let config = EnhancedOnboardingConfiguration.shared
                 config.preference = userHome.preference ?? ""
-                
-                if UserDefaults.currentUser?.addressPrimary == nil || userHome.preference == nil {
-                    let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-                    if let onboardingPageVC = storyboard.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
-                        onboardingPageVC.currentPhasePosition = 3
-                        onboardingPageVC.shouldLaunchThird = true
-                        
-                        if let _user = UserDefaults.currentUser {
-                            onboardingPageVC.temporaryUser = _user
-                        }
-                        if let window = UIApplication.shared.windows.first {
-                            window.rootViewController = onboardingPageVC
-                            window.makeKeyAndVisible()
-                        }
-                    }
-                }
+//              TODO uncomment this when ok 
+//                if UserDefaults.currentUser?.addressPrimary == nil || userHome.preference == nil {
+//                    let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+//                    if let onboardingPageVC = storyboard.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
+//                        onboardingPageVC.currentPhasePosition = 3
+//                        onboardingPageVC.shouldLaunchThird = true
+//                        
+//                        if let _user = UserDefaults.currentUser {
+//                            onboardingPageVC.temporaryUser = _user
+//                        }
+//                        if let window = UIApplication.shared.windows.first {
+//                            window.rootViewController = onboardingPageVC
+//                            window.makeKeyAndVisible()
+//                        }
+//                    }
+//                }
                 
                 AppManager.shared.isContributionPreference = self?.isContributionPreference ?? false
                 

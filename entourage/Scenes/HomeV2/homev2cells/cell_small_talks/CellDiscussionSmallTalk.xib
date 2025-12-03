@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -89,6 +89,22 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AV-3s-NtF">
+                                <rect key="frame" x="478" y="10" width="24" height="24"/>
+                                <color key="backgroundColor" name="rouge_erreur"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="WoK-FW-nrx"/>
+                                    <constraint firstAttribute="width" constant="24" id="em9-bO-gWc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" name="BeigeClair2"/>
                         <constraints>
@@ -98,10 +114,12 @@
                             <constraint firstItem="gws-W2-H1Z" firstAttribute="leading" secondItem="QHa-aw-m1i" secondAttribute="leading" id="F8E-dk-zGM"/>
                             <constraint firstItem="h8f-uG-J5Y" firstAttribute="leading" secondItem="QHa-aw-m1i" secondAttribute="trailing" constant="-10" id="Ngv-G8-mCj"/>
                             <constraint firstAttribute="trailing" secondItem="yFg-Oy-05T" secondAttribute="trailing" constant="10" id="XDd-Wi-VRG"/>
+                            <constraint firstAttribute="trailing" secondItem="7AV-3s-NtF" secondAttribute="trailing" constant="10" id="Y9M-yB-52J"/>
                             <constraint firstItem="gws-W2-H1Z" firstAttribute="top" secondItem="QHa-aw-m1i" secondAttribute="bottom" constant="10" id="czZ-mg-46U"/>
                             <constraint firstItem="QHa-aw-m1i" firstAttribute="top" secondItem="xtQ-pZ-4WE" secondAttribute="top" constant="20" id="eUz-eJ-efI"/>
                             <constraint firstItem="cNR-bJ-60b" firstAttribute="centerY" secondItem="QHa-aw-m1i" secondAttribute="centerY" id="jes-El-7aM"/>
                             <constraint firstItem="h8f-uG-J5Y" firstAttribute="centerY" secondItem="QHa-aw-m1i" secondAttribute="centerY" id="lC1-F9-N8k"/>
+                            <constraint firstItem="7AV-3s-NtF" firstAttribute="top" secondItem="xtQ-pZ-4WE" secondAttribute="top" constant="10" id="n9b-0j-KYc"/>
                             <constraint firstItem="yFg-Oy-05T" firstAttribute="centerY" secondItem="QHa-aw-m1i" secondAttribute="centerY" id="rq7-qu-VHD"/>
                             <constraint firstItem="yFg-Oy-05T" firstAttribute="leading" secondItem="QHa-aw-m1i" secondAttribute="trailing" constant="70" id="sMa-uE-5xH"/>
                             <constraint firstItem="TxM-u6-HcV" firstAttribute="leading" secondItem="h8f-uG-J5Y" secondAttribute="trailing" constant="-10" id="u5o-cQ-9VN"/>
@@ -128,6 +146,7 @@
                 <outlet property="ui_img_avatar_3" destination="TxM-u6-HcV" id="fbA-sH-ZQ1"/>
                 <outlet property="ui_img_avatar_4" destination="cNR-bJ-60b" id="NDR-YX-gl3"/>
                 <outlet property="ui_img_avatar_one" destination="QHa-aw-m1i" id="2d0-34-BPa"/>
+                <outlet property="ui_label_message" destination="7AV-3s-NtF" id="2yr-z2-p2p"/>
                 <outlet property="ui_label_subtitle" destination="gws-W2-H1Z" id="m52-3p-wGe"/>
                 <outlet property="ui_label_title" destination="yFg-Oy-05T" id="4Rx-6B-dJR"/>
             </connections>
@@ -137,6 +156,9 @@
     <resources>
         <namedColor name="BeigeClair2">
             <color red="0.99607843137254903" green="0.96078431372549022" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="rouge_erreur">
+            <color red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
