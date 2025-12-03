@@ -2,10 +2,14 @@ import UIKit
 import SDWebImage
 import ActiveLabel
 
+// MARK: - Constants
+
 private let unifiedBlue = UIColor(red: 0.0, green: 122/255.0, blue: 1.0, alpha: 1.0)
 private let conversationBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
 private let deletedBackgroundColor = UIColor.appPaleGrey
 private let deletedTextColor = UIColor(named: "appGreyTextDeleted") ?? UIColor.darkGray
+
+// MARK: - Base Cell
 
 class ConversationViewCell: UITableViewCell {
 
@@ -42,7 +46,7 @@ class ConversationViewCell: UITableViewCell {
         ui_image_avatar.layer.masksToBounds = true
         ui_image_avatar.clipsToBounds = true
 
-        // Image
+        // Image de message
         ui_image_comment.contentMode = .scaleAspectFill
         ui_image_comment.clipsToBounds = true
         ui_image_comment.isUserInteractionEnabled = true
@@ -74,7 +78,7 @@ class ConversationViewCell: UITableViewCell {
             self?.delegate?.showWebUrl(url: url)
         }
         ui_label_comment.handleCustomTap(for: phoneType) { _ in
-            // Optionnel: appeler/coller/… selon ton besoin
+            // Optionnel: ouvrir le dialer, proposer de copier, etc.
         }
         ui_label_comment.handleMentionTap { [weak self] mention in
             guard let self else { return }
@@ -82,7 +86,7 @@ class ConversationViewCell: UITableViewCell {
             if let url = self.mentionLinkMap[key] {
                 self.delegate?.showWebUrl(url: url)
             } else {
-                // Pas d’URL connue pour cette mention (texte brut) -> rien ou fallback si tu en veux un
+                // Pas d’URL connue pour cette mention (texte brut)
             }
         }
 
@@ -94,13 +98,18 @@ class ConversationViewCell: UITableViewCell {
             deletedImageView = iv
         }
 
-        // Largeur fixe de la bulle ≈ moitié d’écran
+        // Largeur MAX de la bulle ≈ 80% de l’écran (moins un padding pour les marges internes)
         ui_view_label.translatesAutoresizingMaskIntoConstraints = false
         if fixedLabelWidthConstraint == nil {
             let screenWidth = UIScreen.main.bounds.width
-            let halfWidth = (screenWidth / 2) - 30 // marges latérales
-            fixedLabelWidthConstraint = ui_view_label.widthAnchor.constraint(equalToConstant: halfWidth)
+            let horizontalPadding: CGFloat = 40   // marge interne (leading/trailing de la bulle)
+            let maxWidth = screenWidth * 0.8 - horizontalPadding
+
+            fixedLabelWidthConstraint = ui_view_label.widthAnchor.constraint(lessThanOrEqualToConstant: maxWidth)
             fixedLabelWidthConstraint?.isActive = true
+
+            ui_view_label.setContentHuggingPriority(.required, for: .horizontal)
+            ui_view_label.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
 
         // Long press → signaler
@@ -131,6 +140,7 @@ class ConversationViewCell: UITableViewCell {
 
         // Reset texte
         ui_label_comment.text = nil
+        ui_label_comment.attributedText = nil
         ui_label_date.text = nil
         mentionLinkMap.removeAll()
 
@@ -179,8 +189,11 @@ class ConversationViewCell: UITableViewCell {
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
 
-            // carré ~ moitié d’écran
-            let maxImageSize = (UIScreen.main.bounds.width / 2) - 40
+            let screenWidth = UIScreen.main.bounds.width
+            let horizontalPadding: CGFloat = 40
+            // Image carrée ≈ 80% de la largeur écran
+            let maxImageSize = screenWidth * 0.8 - horizontalPadding
+
             ui_constraint_image_height.constant = maxImageSize
 
             imageWidthConstraint?.isActive = false
@@ -190,7 +203,7 @@ class ConversationViewCell: UITableViewCell {
             imageWidthConstraint?.isActive = true
             imageAspectConstraint?.isActive = true
 
-            // aligne la bulle avec la largeur image (optionnel)
+            // aligne la bulle avec la largeur image
             ui_label_min_width?.constant = maxImageSize
             ui_label_min_width?.isActive = true
         } else {
@@ -242,17 +255,14 @@ class ConversationViewCell: UITableViewCell {
         let font = conversationBaseFont
         let attachment = NSTextAttachment()
         if let baseImage = UIImage(named: "ic_deleted_comment")?.withRenderingMode(.alwaysTemplate) {
-            // teinte l’icône
             let tinted = baseImage.withTintColor(deletedTextColor)
             attachment.image = tinted
-            // hauteur ≈ hauteur de la police
             let height = font.capHeight
             let ratio = tinted.size.width / max(tinted.size.height, 1)
-            attachment.bounds = CGRect(x: 0, y: (font.descender/2), width: height * ratio, height: height)
+            attachment.bounds = CGRect(x: 0, y: (font.descender / 2), width: height * ratio, height: height)
         }
 
-        // Espace fin insécable après l’icône
-        let spacer = NSAttributedString(string: "  ") // NBSP
+        let spacer = NSAttributedString(string: "  ")
 
         let iconAttr = NSAttributedString(attachment: attachment)
         let textAttr = NSAttributedString(
@@ -266,10 +276,7 @@ class ConversationViewCell: UITableViewCell {
         final.append(textAttr)
 
         ui_label_comment.attributedText = final
-
-        // Optionnel: assure un minimum de padding visuel via contentInset si tu wraps le label
-        // (ActiveLabel n'a pas d'insets natifs, donc on gère via la bulle/container)
-        ui_label_min_width?.isActive = false // évite d'imposer une largeur qui casse le wrap
+        ui_label_min_width?.isActive = false
     }
 
     private func applyNormalContent(message: PostMessage, isMe: Bool) {
@@ -282,8 +289,6 @@ class ConversationViewCell: UITableViewCell {
         ui_label_comment.enabledTypes = [.url, .mention, .hashtag, phoneType]
 
         if let html = message.contentHtml, !html.isEmpty {
-            // Convertit le HTML en texte brut, conserve les URLs visibles,
-            // et remplit mentionLinkMap pour gérer les @mentions cliquables
             ui_label_comment.text = htmlToPlainWithLinksAndMentionMap(html)
         } else if let content = message.content, !content.isEmpty {
             ui_label_comment.text = content.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -316,10 +321,6 @@ class ConversationViewCell: UITableViewCell {
     }
 
     // MARK: - Helpers (HTML ➜ texte + map des mentions)
-    /// Remplace:
-    ///  - <a href="...">@Nico</a>  -> "@Nico" (et mappe la mention vers l’URL)
-    ///  - <a href="...">Texte</a> -> "Texte (url)" (ainsi l’URL reste cliquable)
-    /// Puis nettoie les balises restantes et <br>.
     private func htmlToPlainWithLinksAndMentionMap(_ html: String) -> String {
         var s = html
         let pattern = #"<a\s+[^>]*href="([^"]+)"[^>]*>(.*?)</a>"#
@@ -338,13 +339,10 @@ class ConversationViewCell: UITableViewCell {
                     .trimmingCharacters(in: .whitespacesAndNewlines)
 
                 if cleanText.hasPrefix("@"), let url = URL(string: href) {
-                    // Mention : on garde le @texte et on mémorise le lien pour le tap
                     let key = normalizeMention(cleanText)
                     mentionLinkMap[key] = url
                     s = (s as NSString).replacingCharacters(in: match.range, with: cleanText)
                 } else {
-                    // Lien normal : garder l’info visible pour que .url soit détecté
-                    // Si le texte contient déjà une URL, on la laisse ; sinon on ajoute (url)
                     if looksLikeURL(cleanText) {
                         s = (s as NSString).replacingCharacters(in: match.range, with: cleanText)
                     } else {
@@ -355,7 +353,6 @@ class ConversationViewCell: UITableViewCell {
             }
         }
 
-        // Nettoyage global
         s = s.replacingOccurrences(of: "<br ?/?>", with: "\n", options: .regularExpression)
              .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
              .replacingOccurrences(of: "&nbsp;", with: " ")
@@ -363,16 +360,13 @@ class ConversationViewCell: UITableViewCell {
         return s
     }
 
-    /// Normalise une mention ("@NicolasE." -> "nicolase")
     private func normalizeMention(_ mention: String) -> String {
         var m = mention
         if m.hasPrefix("@") { m.removeFirst() }
-        // Retire ponctuation/eSpaces en fin
         m = m.trimmingCharacters(in: CharacterSet(charactersIn: " .,:;!?)»»”’\""))
         return m.lowercased()
     }
 
-    /// Détecte si une chaîne ressemble à une URL brute
     private func looksLikeURL(_ text: String) -> Bool {
         let pattern = #"(?i)\bhttps?://[^\s]+"#
         return text.range(of: pattern, options: .regularExpression) != nil
@@ -389,6 +383,7 @@ class ConversationViewCell: UITableViewCell {
 }
 
 // MARK: - Subclasses
+
 class ConversationMeCell: ConversationViewCell {
     static let identifier = "cellMeWithImage"
 }
