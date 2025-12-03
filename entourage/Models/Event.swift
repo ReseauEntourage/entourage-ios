@@ -44,6 +44,7 @@ struct Event:Codable {
     
     var status = ""
     var signable:Bool? = nil
+    var manageableByCurrentUser:Bool? = false
     private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
     private var updatedAt:String? = nil
@@ -208,6 +209,7 @@ struct Event:Codable {
         case author
         case location
         case metadata
+        case manageableByCurrentUser = "manageable_by_current_user"
         
         case interests
         case neighborhoods
