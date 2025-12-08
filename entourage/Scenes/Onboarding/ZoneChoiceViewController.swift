@@ -33,7 +33,7 @@ protocol ZoneChoiceViewControllerDelegate: AnyObject {
 
 // MARK: - ViewController
 
-final class ZoneChoiceViewController: UIViewController {
+final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewControllerDelegate {
 
     // MARK: - Public API
 
@@ -211,7 +211,7 @@ final class ZoneChoiceViewController: UIViewController {
         cityTitleLabel.text = ""
         cityTitleLabel.isHidden = true
 
-        // Placeholder : exemple si aucune ville sélectionnée
+        // Placeholder si aucune ville sélectionnée
         let cityTitle: String
         if let label = initialLabel, !label.isEmpty {
             cityTitle = label
@@ -227,7 +227,7 @@ final class ZoneChoiceViewController: UIViewController {
         cityButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         cityButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
 
-        // Fond blanc (vs gris), bordure légère
+        // Fond blanc, bordure légère
         cityButton.backgroundColor = .white
         cityButton.layer.cornerRadius = 10
         cityButton.layer.borderWidth = 1
@@ -336,7 +336,8 @@ final class ZoneChoiceViewController: UIViewController {
             mapView.trailingAnchor.constraint(equalTo: mapContainerView.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor),
 
-            mapContainerView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -24)
+            // Important pour que le scroll ait une hauteur complète
+            mapContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
         ])
     }
 
@@ -344,12 +345,12 @@ final class ZoneChoiceViewController: UIViewController {
         bottomBar.addSubview(bottomSeparator)
         bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
         bottomSeparator.backgroundColor = UIColor(white: 0.92, alpha: 1.0)
-        // Ligne horizontale masquée
+        // Ligne masquée selon ta nouvelle UI
         bottomSeparator.isHidden = true
 
         previousButton.setTitle(NSLocalizedString("onboard_bt_back", comment: "Précédent"), for: .normal)
         previousButton.setTitleColor(.black, for: .normal)
-        previousButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // texte en bold
+        previousButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         previousButton.layer.cornerRadius = 22
         previousButton.layer.borderWidth = 1
         previousButton.layer.borderColor = UIColor.appOrange.cgColor
@@ -357,7 +358,7 @@ final class ZoneChoiceViewController: UIViewController {
 
         nextButton.setTitle(NSLocalizedString("onboard_bt_next", comment: "Suivant"), for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
-        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // texte en bold
+        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         nextButton.backgroundColor = .appOrange
         nextButton.layer.cornerRadius = 22
         nextButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
@@ -437,11 +438,8 @@ final class ZoneChoiceViewController: UIViewController {
     @objc private func openAutocomplete() {
         let ac = GMSAutocompleteViewController()
         ac.delegate = self
-        // On demande explicitement les infos nécessaires
+        // On demande explicitement les champs utiles
         ac.placeFields = [.name, .formattedAddress, .coordinate, .placeID]
-        if #available(iOS 13.0, *) {
-            ac.overrideUserInterfaceStyle = .light
-        }
         present(ac, animated: true)
     }
 
@@ -572,6 +570,37 @@ final class ZoneChoiceViewController: UIViewController {
         let circle = MKCircle(center: c, radius: Double(currentRadiusKm) * 1000)
         mapView.addOverlay(circle)
     }
+
+    // MARK: - GMSAutocompleteViewControllerDelegate
+
+    func viewController(_ viewController: GMSAutocompleteViewController,
+                        didAutocompleteWith place: GMSPlace) {
+        print("✅ didAutocompleteWith place:", place.name ?? "nil", place.coordinate)
+        selectedPlace = place
+        selectedCoord = place.coordinate
+
+        let label = place.name ?? place.formattedAddress ?? ""
+        selectedLabel = label
+        initialLabel = label
+
+        cityButton.setTitle(label, for: .normal)
+        centerMap()
+        drawCircle()
+        updateNextButtonEnabled(true)
+
+        viewController.dismiss(animated: true)
+    }
+
+    func viewController(_ viewController: GMSAutocompleteViewController,
+                        didFailAutocompleteWithError error: Error) {
+        print("❌ didFailAutocompleteWithError:", error.localizedDescription)
+        viewController.dismiss(animated: true)
+    }
+
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        print("ℹ️ Autocomplete wasCancelled")
+        viewController.dismiss(animated: true)
+    }
 }
 
 // MARK: - MKMapViewDelegate
@@ -587,37 +616,6 @@ extension ZoneChoiceViewController: MKMapViewDelegate {
         renderer.fillColor = UIColor.appOrange.withAlphaComponent(0.25)
         renderer.lineWidth = 1
         return renderer
-    }
-}
-
-// MARK: - GMSAutocompleteViewControllerDelegate
-
-extension ZoneChoiceViewController: GMSAutocompleteViewControllerDelegate {
-    func viewController(_ viewController: GMSAutocompleteViewController,
-                        didAutocompleteWith place: GMSPlace) {
-        // On récupère bien les coordonnées + label
-        selectedPlace = place
-        selectedCoord = place.coordinate
-
-        let label = place.name ?? place.formattedAddress ?? ""
-        selectedLabel = label
-        initialLabel = label
-
-        cityButton.setTitle(label, for: .normal)
-        centerMap()
-        drawCircle()
-        updateNextButtonEnabled(true)
-
-        dismiss(animated: true)
-    }
-
-    func viewController(_ viewController: GMSAutocompleteViewController,
-                        didFailAutocompleteWithError error: Error) {
-        dismiss(animated: true)
-    }
-
-    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        dismiss(animated: true)
     }
 }
 
