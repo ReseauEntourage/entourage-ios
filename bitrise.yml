@@ -4,7 +4,7 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ''
 app:
   envs:
-  - BITRISE_PROJECT_PATH: entourage.xcworkspace
+  - BITRISE_PROJECT_PATH: entourage.xcodeproj
     opts:
       is_expand: false
   - BITRISE_SCHEME: Entourage-ios
@@ -120,7 +120,7 @@ workflows:
             Branch|${BITRISE_GIT_BRANCH}
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
-    - save-cocoapods-cache@1: {}
+
     - save-spm-cache@1: {}
     meta:
       bitrise.io:
@@ -190,11 +190,9 @@ workflows:
         - commit: ''
         - clone_depth: "-1"
         - tag: ''
-    - restore-cocoapods-cache@2: {}
+
     - restore-spm-cache@2: {}
-    - cocoapods-install:
-        inputs:
-        - verbose: 'false'
+
     - file-downloader@1:
         inputs:
         - source: "$BITRISEIO_APPCONFIGURATIONS_URL"

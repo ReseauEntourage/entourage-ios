@@ -52,6 +52,17 @@ private struct AccessoryTextField: UIViewRepresentable {
             parent.onDone?()
             UIApplication.shared.endEditing()
         }
+
+        /// Intercepte l’appui sur la croix d’effacement pour empêcher la fermeture du clavier.
+        /// Sans cette implémentation, iOS efface le texte et ferme parfois le clavier,
+        /// ce qui n’est pas le comportement désiré dans l’onboarding.
+        func textFieldShouldClear(_ textField: UITextField) -> Bool {
+            // On met à jour le binding manuellement
+            parent.text.wrappedValue = ""
+            // On retourne false pour indiquer à UIKit que l’on gère l’effacement
+            // et pour laisser le clavier affiché
+            return false
+        }
     }
 
     // Bindings & params
@@ -397,17 +408,23 @@ struct OnboardingPhase1View: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
+                // Titre principal pour la section « Informations personnelles »
+                Text("Vos informations personnelles")
+                    .font(.entourageTitle(20))
+                    .padding(.bottom, 8)
+
                 CardContainer {
+                    // Section identité
                     IdentitySection(vm: vm,
                                     showDateSheet: $showDateSheet,
                                     tempDate: $tempDate)
 
-                    Divider().padding(.vertical, 4)
+                    // Les séparateurs visuels entre sections ont été retirés suite aux retours PO
+                    // afin d’alléger l’interface.
 
                     ContactSection(vm: vm, countries: countries)
 
-                    Divider().padding(.vertical, 4)
-
+                    // Pas de ligne avant « Comment nous avez‑vous connu »
                     ProfileSection(vm: vm)
                 }
 

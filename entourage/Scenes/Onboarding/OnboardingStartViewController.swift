@@ -61,6 +61,11 @@ final class OnboardingStartViewController: UIViewController {
         ui_page_control.numberOfPages = 3
         ui_page_control.currentPage = 0
 
+        // Suite aux retours utilisateurs, on masque définitivement l’indicateur de pages
+        // (les « trois points » au bas de l’écran). Cela permet aussi de réduire
+        // visuellement la hauteur du footer.
+        ui_page_control.isHidden = true
+
         ui_bt_previous.layer.cornerRadius = ui_bt_previous.frame.height / 2
         ui_bt_previous.layer.borderColor = UIColor.appOrange.cgColor
         ui_bt_previous.layer.borderWidth = 1
@@ -260,7 +265,10 @@ final class OnboardingStartViewController: UIViewController {
 
         case 2:
             ui_top_view.updateTitle(title: "onboard_sms_title".localized)
-            ui_bt_previous.isHidden = false
+            // À l’étape 2 (validation du code SMS), le bouton « Précédent »
+            // est masqué conformément aux retours PO. L’utilisateur n’a pas
+            // besoin de revenir sur l’écran précédent depuis cette étape.
+            ui_bt_previous.isHidden = true
             ui_bt_next.isHidden = false
             pageViewController?.createPhase2VC?.tempPhone = phone ?? "-"
             // À l’étape 2, on laisse le bouton actif (le serveur valide le code)

@@ -123,6 +123,16 @@ struct OnboardingSMSCodeView: View {
                 }
                 .padding(.top, 28)
 
+                // --- CGU / Politique de confidentialité ---
+                // On affiche une phrase récapitulant l’acceptation des conditions
+                // générales d’utilisation et de la politique de confidentialité.
+                // Ce texte est centré et de petite taille pour ne pas surcharger l’interface.
+                Text("En continuant, vous acceptez les Conditions Générales d’Utilisation et la politique de confidentialité.")
+                    .font(.system(size: 12))
+                    .foregroundColor(Color(UIColor.appGrey151))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 16)
+
                 Spacer()
             }
             .padding(.bottom, 32)
@@ -170,12 +180,19 @@ struct OnboardingSMSCodeView: View {
     }
 
     private func digitText(at index: Int) -> String {
+        // Retourne le caractère à afficher pour chaque case du code.
+        // Si la case correspond à un chiffre saisi, on retourne ce chiffre.
         if index < code.count {
             let idx = code.index(code.startIndex, offsetBy: index)
             return String(code[idx])
-        } else {
-            return "0"
         }
+        // Si aucune saisie pour cette case et qu’elle est la prochaine à saisir,
+        // on affiche un curseur simple pour indiquer le focus.
+        if index == code.count && isEditing && code.count < 6 {
+            return "|"
+        }
+        // Sinon on laisse la case vide
+        return ""
     }
 
     private func digitColor(at index: Int) -> Color {

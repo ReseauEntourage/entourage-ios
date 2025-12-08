@@ -107,16 +107,18 @@ final class OnboardingPhase3ViewController: UIViewController {
         rows.append(.title)
 
         // Choix alignés avec Android
+        // Les intitulés ont été mis à jour pour s’aligner avec la version Android
+        // où les profils sont nommés « Précaires » et « Riverain·e ».
         let choiceBeEntour = OnboardingChoice(
             id: "been_entour",
             img: "ic_role_been_entour",
-            title: NSLocalizedString("onboarding_phase_three_option_etre_entoure", comment: "")
+            title: "Précaires"
         )
 
         let choiceEntour = OnboardingChoice(
             id: "entour",
             img: "ic_role_entour",
-            title: NSLocalizedString("onboarding_phase_three_option_entourer", comment: "")
+            title: "Riverain·e"
         )
 
         let choiceAsso = OnboardingChoice(

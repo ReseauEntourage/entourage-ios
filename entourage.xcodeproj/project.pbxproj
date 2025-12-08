@@ -616,7 +616,6 @@
 		26F14CE12D3E8B7C004C4524 /* ProfileSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */; };
 		26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */; };
 		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
-		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -984,7 +983,6 @@
 		02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodHomeGroupCell.swift; sourceTree = "<group>"; };
 		02FE55B42939F6020076F57A /* OnboardingEndCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndCell.swift; sourceTree = "<group>"; };
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
-		1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionSmokeTestViewController.swift; sourceTree = "<group>"; };
 		26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDayCell.swift; sourceTree = "<group>"; };
 		26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChoiceDayCell.xib; sourceTree = "<group>"; };
@@ -1237,9 +1235,6 @@
 		26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileSectionCell.xib; sourceTree = "<group>"; };
 		26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightOverlayView.swift; sourceTree = "<group>"; };
 		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
-		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
-		BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
-		EF9863871BD660A314749193 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1259,7 +1254,6 @@
 				02E0099227E37B1100BB23CA /* FirebaseRemoteConfig in Frameworks */,
 				02B94C402850D4A2006059EF /* IQKeyboardManagerSwift in Frameworks */,
 				02E9D6C22970124900F9625D /* ActiveLabel in Frameworks */,
-				7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */,
 				020AF5DE286064AC0012AE60 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1499,7 +1493,6 @@
 				02CCE67027D78C2F00D6976C /* Fonts */,
 				025D8717278DD33600909101 /* Products */,
 				F6FDF12012DBBD73C547B9BA /* Pods */,
-				466EAB21AD4207C796A4EC64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2615,20 +2608,9 @@
 			path = cellOnboardingOne;
 			sourceTree = "<group>";
 		};
-		466EAB21AD4207C796A4EC64 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		F6FDF12012DBBD73C547B9BA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */,
-				EF9863871BD660A314749193 /* Pods-entourage.beta.xcconfig */,
-				6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2640,11 +2622,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 025D872A278DD33800909101 /* Build configuration list for PBXNativeTarget "entourage" */;
 			buildPhases = (
-				96CAC90545D8DAA290C1AC28 /* [CP] Check Pods Manifest.lock */,
 				025D8714278DD33600909101 /* Resources */,
 				025D8712278DD33600909101 /* Sources */,
 				025D8713278DD33600909101 /* Frameworks */,
-				3E287E1D4E95D9B4538E1F4F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2665,6 +2645,7 @@
 				020AF5DD286064AC0012AE60 /* Lottie */,
 				02F827702967287B000CA150 /* SimpleKeychain */,
 				02E9D6C12970124900F9625D /* ActiveLabel */,
+				250F348F3267754AC4BF77CD /* GooglePlaces */,
 			);
 			productName = entourageios;
 			productReference = 025D8716278DD33600909101 /* Ent-Beta.app */;
@@ -2704,14 +2685,15 @@
 			mainGroup = 025D870D278DD33600909101;
 			packageReferences = (
 				02DB3BC627A14DFC004732C9 /* XCRemoteSwiftPackageReference "Nantes" */,
-				0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */,
+				0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */,
+				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */,
 				029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02E0098A27E37B1100BB23CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */,
+				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */,
 				02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
-				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */,
+				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */,
+				07D073F4B75D5470C000D4A2 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 			);
 			productRefGroup = 025D8717278DD33600909101 /* Products */;
 			projectDirPath = "";
@@ -2904,52 +2886,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		3E287E1D4E95D9B4538E1F4F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-entourage/Pods-entourage-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-entourage/Pods-entourage-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-entourage/Pods-entourage-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		96CAC90545D8DAA290C1AC28 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-entourage-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		025D8712278DD33600909101 /* Sources */ = {
@@ -3482,7 +3418,6 @@
 		};
 		025D872B278DD33800909101 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */;
 			buildSettings = {
 				APP_URL_SCHEME = "api-preprod.entourage.social";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug;
@@ -3589,7 +3524,6 @@
 		};
 		025D8739278DD89A00909101 /* Store */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */;
 			buildSettings = {
 				APP_URL_SCHEME = entourage;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3701,7 +3635,6 @@
 		};
 		025D873B278DD9A600909101 /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF9863871BD660A314749193 /* Pods-entourage.beta.xcconfig */;
 			buildSettings = {
 				APP_URL_SCHEME = "entourage-staging";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug;
@@ -3778,7 +3711,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+		020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -3786,7 +3719,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */ = {
+		0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swiftify-Corp/IHProgressHUD.git";
 			requirement = {
@@ -3794,7 +3727,7 @@
 				minimumVersion = 0.1.8;
 			};
 		};
-		0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -3810,7 +3743,7 @@
 				version = 10.26.0;
 			};
 		};
-		02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -3834,7 +3767,7 @@
 				version = 10.26.0;
 			};
 		};
-		02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */ = {
+		02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/optonaut/ActiveLabel.swift.git";
 			requirement = {
@@ -3850,27 +3783,35 @@
 				version = 0.12.5;
 			};
 		};
+		07D073F4B75D5470C000D4A2 /* XCRemoteSwiftPackageReference "ios-places-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-places-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		020AF5DD286064AC0012AE60 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			package = 020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */;
 			productName = Lottie;
 		};
 		0246604C27D8A49E00FE1EF8 /* IHProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */;
+			package = 0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */;
 			productName = IHProgressHUD;
 		};
 		0288A8E327CD11E9008D7011 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */;
 			productName = SDWebImage;
 		};
 		0288A8E527CD11E9008D7011 /* SDWebImageMapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */;
 			productName = SDWebImageMapKit;
 		};
 		029E307E27DB60D300B12357 /* FirebaseAnalytics */ = {
@@ -3880,7 +3821,7 @@
 		};
 		02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = 02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */;
 			productName = IQKeyboardManagerSwift;
 		};
 		02DB3BC727A14DFC004732C9 /* Nantes */ = {
@@ -3910,13 +3851,18 @@
 		};
 		02E9D6C12970124900F9625D /* ActiveLabel */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */;
+			package = 02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */;
 			productName = ActiveLabel;
 		};
 		02F827702967287B000CA150 /* SimpleKeychain */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */;
 			productName = SimpleKeychain;
+		};
+		250F348F3267754AC4BF77CD /* GooglePlaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07D073F4B75D5470C000D4A2 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
+			productName = GooglePlaces;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

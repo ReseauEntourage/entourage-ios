@@ -212,8 +212,12 @@ class EventFiltersViewController: UIViewController {
         self.googleplaceVC?.setup(filterType: filterType)
         self.googleplaceVC?.delegate = self
         
-        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.formattedAddress.rawValue) |
-                                                  UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.addressComponents.rawValue) | UInt(GMSPlaceField.coordinate.rawValue))
+        var fieldsValue = UInt(GMSPlaceField.formattedAddress.rawValue)
+        fieldsValue |= UInt(GMSPlaceField.placeID.rawValue)
+        fieldsValue |= UInt(GMSPlaceField.addressComponents.rawValue)
+        fieldsValue |= UInt(GMSPlaceField.coordinate.rawValue)
+        
+        let fields = GMSPlaceField(rawValue: UInt64(fieldsValue))
         self.googleplaceVC?.placeFields = fields
     }
     

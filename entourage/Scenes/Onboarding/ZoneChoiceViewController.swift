@@ -207,15 +207,17 @@ final class ZoneChoiceViewController: UIViewController {
     }
 
     private func setupCitySection() {
-        cityTitleLabel.text = NSLocalizedString("onboarding_zone_city_title",
-                                                comment: "Ville")
-        cityTitleLabel.setFontBody(size: 14)
-        cityTitleLabel.textColor = UIColor(white: 0.2, alpha: 1.0)
+        // Le label « Ville » n’est plus affiché afin d’alléger la vue.
+        cityTitleLabel.text = ""
+        cityTitleLabel.isHidden = true
 
-        let cityTitle = initialLabel ?? NSLocalizedString(
-            "onboarding_zone_choose_city",
-            comment: "Choisir une ville"
-        )
+        // Placeholder : si aucune ville n’est sélectionnée, on affiche un exemple.
+        let cityTitle: String
+        if let label = initialLabel, !label.isEmpty {
+            cityTitle = label
+        } else {
+            cityTitle = "Ex. : Valence"
+        }
         cityButton.setTitle(cityTitle, for: .normal)
         cityButton.setTitleColor(.label, for: .normal)
         cityButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
@@ -224,7 +226,8 @@ final class ZoneChoiceViewController: UIViewController {
         cityButton.contentVerticalAlignment = .center
         cityButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         cityButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-        cityButton.backgroundColor = UIColor(white: 0.97, alpha: 1.0)
+        // Fond blanc et bordure légère pour se rapprocher des autres écrans
+        cityButton.backgroundColor = .white
         cityButton.layer.cornerRadius = 10
         cityButton.layer.borderWidth = 1
         cityButton.layer.borderColor = UIColor(white: 0.92, alpha: 1.0).cgColor
@@ -232,13 +235,9 @@ final class ZoneChoiceViewController: UIViewController {
         cityButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         cityButton.addTarget(self, action: #selector(openAutocomplete), for: .touchUpInside)
 
-        cityConfidentialLabel.text = NSLocalizedString(
-            "onboarding_zone_confidential",
-            comment: "L’adresse est confidentielle et ne sera pas communiquée"
-        )
-        cityConfidentialLabel.setFontBody(size: 12)
-        cityConfidentialLabel.textColor = .secondaryLabel
-        cityConfidentialLabel.numberOfLines = 0
+        // On retire l’avertissement de confidentialité sous le champ de ville
+        cityConfidentialLabel.text = ""
+        cityConfidentialLabel.isHidden = true
 
         contentView.addSubview(cityTitleLabel)
         contentView.addSubview(cityButton)
@@ -266,7 +265,9 @@ final class ZoneChoiceViewController: UIViewController {
     private func setupRadiusSection() {
         radiusTitleLabel.text = NSLocalizedString("onboarding_zone_radius_title",
                                                   comment: "Dans un rayon de")
-        radiusTitleLabel.textColor = UIColor.systemBlue
+        // La couleur bleue d’origine a été remplacée par une teinte grise afin
+        // d’harmoniser l’interface avec le reste de l’onboarding.
+        radiusTitleLabel.textColor = UIColor.secondaryLabel
         radiusTitleLabel.setFontBody(size: 14)
 
         radiusValueLabel.setFontBody(size: 14)
@@ -343,10 +344,14 @@ final class ZoneChoiceViewController: UIViewController {
         bottomBar.addSubview(bottomSeparator)
         bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
         bottomSeparator.backgroundColor = UIColor(white: 0.92, alpha: 1.0)
+        // Suite aux retours utilisateurs, la ligne séparatrice est masquée pour
+        // une apparence plus épurée.
+        bottomSeparator.isHidden = true
 
         previousButton.setTitle(NSLocalizedString("onboard_bt_back", comment: "Précédent"), for: .normal)
         previousButton.setTitleColor(.black, for: .normal)
-        previousButton.setFontBody(size: 16)
+        // Mise en gras du libellé pour correspondre aux spécifications
+        previousButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         previousButton.layer.cornerRadius = 22
         previousButton.layer.borderWidth = 1
         previousButton.layer.borderColor = UIColor.appOrange.cgColor
@@ -354,7 +359,8 @@ final class ZoneChoiceViewController: UIViewController {
 
         nextButton.setTitle(NSLocalizedString("onboard_bt_next", comment: "Suivant"), for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
-        nextButton.setFontBody(size: 16)
+        // Mise en gras du libellé pour correspondre aux spécifications
+        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         nextButton.backgroundColor = .appOrange
         nextButton.layer.cornerRadius = 22
         nextButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
