@@ -106,32 +106,30 @@ final class OnboardingPhase3ViewController: UIViewController {
         // Titre
         rows.append(.title)
 
-        // Choix alignés avec Android
-        // Les intitulés ont été mis à jour pour s’aligner avec la version Android
-        // où les profils sont nommés « Précaires » et « Riverain·e ».
+        // Choix alignés avec la maquette (titres + sous-titres localisés)
         let choiceBeEntour = OnboardingChoice(
             id: "been_entour",
             img: "ic_role_been_entour",
-            title: "Précaires"
+            title: "onboard_phase3_beentour_title".localized
         )
 
         let choiceEntour = OnboardingChoice(
             id: "entour",
             img: "ic_role_entour",
-            title: "Riverain·e"
+            title: "onboard_phase3_entour_title".localized
         )
 
         let choiceAsso = OnboardingChoice(
             id: "asso",
             img: "ic_role_asso",
-            title: NSLocalizedString("onboard_phase3_asso_title", comment: "")
+            title: "onboard_phase3_asso_title".localized
         )
 
         rows.append(
             .userType(
                 choice: choiceBeEntour,
                 isSelected: isBeEntour,
-                subtitle: "onboarding_phase_three_option_etre_entoure_description".localized
+                subtitle: "onboard_phase3_beentour_sub".localized
             )
         )
 
@@ -139,7 +137,7 @@ final class OnboardingPhase3ViewController: UIViewController {
             .userType(
                 choice: choiceEntour,
                 isSelected: isEntour,
-                subtitle: "onboarding_phase_three_option_entourer_description".localized
+                subtitle: "onboard_phase3_entour_sub".localized
             )
         )
 
@@ -236,6 +234,7 @@ final class OnboardingPhase3ViewController: UIViewController {
             present(zoneVC, animated: true)
         }
     }
+
     private func dismissKeyboard() {
         view.endEditing(true)
     }

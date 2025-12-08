@@ -46,7 +46,7 @@ final class ZoneChoiceViewController: UIViewController {
     /// Indique ce qui doit se passer après la sauvegarde de la zone.
     private let nextStep: ZoneChoiceNextStep
 
-    // callbacks optionnels (pour l’API par closures)
+    // callbacks optionnels (API par closures)
     private var onConfirmClosure: ((ZoneChoiceResult) -> Void)?
     private var onCancelClosure: (() -> Void)?
 
@@ -159,7 +159,7 @@ final class ZoneChoiceViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: contentContainerView.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            scrollView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor)
         ])
 
         scrollView.addSubview(contentView)
@@ -177,7 +177,7 @@ final class ZoneChoiceViewController: UIViewController {
     private func setupHeader() {
         titleLabel.text = NSLocalizedString("onboarding_zone_title",
                                             comment: "Votre localisation")
-        titleLabel.setFontTitle(size: 24)
+        titleLabel.setFontTitle(size: 24) // même taille que les autres steps
         titleLabel.numberOfLines = 0
         titleLabel.textColor = UIColor(white: 0.1, alpha: 1.0)
 
@@ -207,16 +207,16 @@ final class ZoneChoiceViewController: UIViewController {
     }
 
     private func setupCitySection() {
-        // Le label « Ville » n’est plus affiché afin d’alléger la vue.
+        // Label "Ville" supprimé
         cityTitleLabel.text = ""
         cityTitleLabel.isHidden = true
 
-        // Placeholder : si aucune ville n’est sélectionnée, on affiche un exemple.
+        // Placeholder : exemple si aucune ville sélectionnée
         let cityTitle: String
         if let label = initialLabel, !label.isEmpty {
             cityTitle = label
         } else {
-            cityTitle = "Ex. : Valence"
+            cityTitle = "Ex. : Valence"
         }
         cityButton.setTitle(cityTitle, for: .normal)
         cityButton.setTitleColor(.label, for: .normal)
@@ -226,16 +226,18 @@ final class ZoneChoiceViewController: UIViewController {
         cityButton.contentVerticalAlignment = .center
         cityButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         cityButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-        // Fond blanc et bordure légère pour se rapprocher des autres écrans
+
+        // Fond blanc (vs gris), bordure légère
         cityButton.backgroundColor = .white
         cityButton.layer.cornerRadius = 10
         cityButton.layer.borderWidth = 1
         cityButton.layer.borderColor = UIColor(white: 0.92, alpha: 1.0).cgColor
+
         cityButton.setFontBody(size: 16)
         cityButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         cityButton.addTarget(self, action: #selector(openAutocomplete), for: .touchUpInside)
 
-        // On retire l’avertissement de confidentialité sous le champ de ville
+        // Texte "L'adresse est confidentielle..." supprimé
         cityConfidentialLabel.text = ""
         cityConfidentialLabel.isHidden = true
 
@@ -265,9 +267,8 @@ final class ZoneChoiceViewController: UIViewController {
     private func setupRadiusSection() {
         radiusTitleLabel.text = NSLocalizedString("onboarding_zone_radius_title",
                                                   comment: "Dans un rayon de")
-        // La couleur bleue d’origine a été remplacée par une teinte grise afin
-        // d’harmoniser l’interface avec le reste de l’onboarding.
-        radiusTitleLabel.textColor = UIColor.secondaryLabel
+        // Texte en gris (vs bleu)
+        radiusTitleLabel.textColor = .secondaryLabel
         radiusTitleLabel.setFontBody(size: 14)
 
         radiusValueLabel.setFontBody(size: 14)
@@ -335,7 +336,6 @@ final class ZoneChoiceViewController: UIViewController {
             mapView.trailingAnchor.constraint(equalTo: mapContainerView.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor),
 
-            // Important pour que le scroll sache où s’arrêter
             mapContainerView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -24)
         ])
     }
@@ -344,14 +344,12 @@ final class ZoneChoiceViewController: UIViewController {
         bottomBar.addSubview(bottomSeparator)
         bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
         bottomSeparator.backgroundColor = UIColor(white: 0.92, alpha: 1.0)
-        // Suite aux retours utilisateurs, la ligne séparatrice est masquée pour
-        // une apparence plus épurée.
+        // Ligne horizontale masquée
         bottomSeparator.isHidden = true
 
         previousButton.setTitle(NSLocalizedString("onboard_bt_back", comment: "Précédent"), for: .normal)
         previousButton.setTitleColor(.black, for: .normal)
-        // Mise en gras du libellé pour correspondre aux spécifications
-        previousButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        previousButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // texte en bold
         previousButton.layer.cornerRadius = 22
         previousButton.layer.borderWidth = 1
         previousButton.layer.borderColor = UIColor.appOrange.cgColor
@@ -359,8 +357,7 @@ final class ZoneChoiceViewController: UIViewController {
 
         nextButton.setTitle(NSLocalizedString("onboard_bt_next", comment: "Suivant"), for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
-        // Mise en gras du libellé pour correspondre aux spécifications
-        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // texte en bold
         nextButton.backgroundColor = .appOrange
         nextButton.layer.cornerRadius = 22
         nextButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
@@ -388,7 +385,6 @@ final class ZoneChoiceViewController: UIViewController {
             previousButton.trailingAnchor.constraint(equalTo: bottomBar.centerXAnchor, constant: -8),
             nextButton.leadingAnchor.constraint(equalTo: bottomBar.centerXAnchor, constant: 8),
 
-            // marge bas pour coller au safe area
             nextButton.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -16)
         ])
     }
@@ -407,7 +403,7 @@ final class ZoneChoiceViewController: UIViewController {
             drawCircle()
             updateNextButtonEnabled(true)
         } else {
-            // Vue initiale centrée sur la France
+            // Carte initiale : France
             let franceCenter = CLLocationCoordinate2D(latitude: 46.5, longitude: 2.2)
             let region = MKCoordinateRegion(center: franceCenter,
                                             span: MKCoordinateSpan(latitudeDelta: 6.0,
@@ -441,6 +437,11 @@ final class ZoneChoiceViewController: UIViewController {
     @objc private func openAutocomplete() {
         let ac = GMSAutocompleteViewController()
         ac.delegate = self
+        // On demande explicitement les infos nécessaires
+        ac.placeFields = [.name, .formattedAddress, .coordinate, .placeID]
+        if #available(iOS 13.0, *) {
+            ac.overrideUserInterfaceStyle = .light
+        }
         present(ac, animated: true)
     }
 
@@ -468,7 +469,7 @@ final class ZoneChoiceViewController: UIViewController {
             radiusKm: currentRadiusKm
         )
 
-        // on informe tout le monde AVANT le réseau
+        // On remonte le choix avant le réseau
         delegate?.zoneChoiceConfirmed(result: result)
         onConfirmClosure?(result)
 
@@ -594,6 +595,7 @@ extension ZoneChoiceViewController: MKMapViewDelegate {
 extension ZoneChoiceViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController,
                         didAutocompleteWith place: GMSPlace) {
+        // On récupère bien les coordonnées + label
         selectedPlace = place
         selectedCoord = place.coordinate
 
@@ -627,7 +629,7 @@ private extension UIButton {
     }
 }
 
-// MARK: - UIViewController helper (compat avec ton code existant)
+// MARK: - Helper pour présenter depuis l’onboarding
 
 extension UIViewController {
     func presentZoneChoiceSwiftUI(initialCoordinate: CLLocationCoordinate2D? = nil,

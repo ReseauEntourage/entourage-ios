@@ -194,19 +194,28 @@ final class OnboardingStartViewController: UIViewController {
     @IBAction func action_next(_ sender: Any) {
         // Étape 2 : forcer la présence du code avant de lancer la requête
         if currentPhasePosition == 2 {
+            // Étape 2 : on exige la saisie d'un code avant de procéder
             guard let code = temporaryPasscode,
                   !code.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                // On affiche une alerte localisable lorsque le code est manquant
                 let alertVC = UIAlertController(
                     title: nil,
-                    message: "Merci de renseigner le code reçu par SMS.",
+                    message: "onboard_sms_missing_code_message".localized,
                     preferredStyle: .alert
                 )
-                alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                alertVC.addAction(
+                    UIAlertAction(
+                        title: "OK".localized,
+                        style: .default,
+                        handler: nil
+                    )
+                )
                 self.present(alertVC, animated: true, completion: nil)
                 return
             }
-            createUser()      // l’étape suivante est déclenchée au succès réseau
-            return            // ne pas rafraîchir l’UI ici
+            // On envoie la requête de création de compte ; la suite est gérée en callback réseau
+            createUser()
+            return
         }
 
         // Étapes 1 et 3 : logique existante
@@ -489,9 +498,7 @@ final class OnboardingStartViewController: UIViewController {
             self.goEnd()
         }
     }
-
     // MARK: - ZoneChoice flow
-
     private func presentZoneChoice() {
         // Si l'utilisateur a choisi "asso" à la phase 3,
         // le nextStep doit être associationOnboarding.
@@ -512,11 +519,17 @@ final class OnboardingStartViewController: UIViewController {
                 self?.temporaryAddressName = result.label
             },
             onCancel: { [weak self] in
-                // Si l’utilisateur annule, on termine l’onboarding classique.
-                self?.goEnd()
+                // Annulation = simple retour à l’écran précédent.
+                // On ne termine plus l’onboarding ici.
+                // L’animation de retour est gérée par ZoneChoice (pop/dismiss).
+                // Si tu veux en plus forcer un retour à la phase 3 :
+                // self?.currentPhasePosition = 3
+                // self?.updateViewsForPosition()
+                _ = self // juste pour garder [weak self] utile si tu veux ajouter qqch
             }
         )
     }
+
 
     func goEnd() {
         UserDefaults.standard.set(userTypeSelected.rawValue, forKey: "userType")

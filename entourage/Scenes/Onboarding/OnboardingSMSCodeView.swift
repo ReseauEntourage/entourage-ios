@@ -2,18 +2,24 @@ import SwiftUI
 import UIKit
 
 struct OnboardingSMSCodeView: View {
+    // MARK: - Inputs
+
     let phone: String
     let timeRemaining: Int      // secondes restantes avant retry
     let canRetry: Bool          // vrai quand on peut redemander un code
 
     let onCodeFilled: (String) -> Void
     let onRequestNewCode: () -> Void
-    let onModifyPhone: () -> Void // encore là même si plus utilisé, ce n’est pas grave
+    let onModifyPhone: () -> Void // encore là même si plus utilisé
+
+    // MARK: - State
 
     @State private var code: String = ""
     @State private var isEditing: Bool = false
 
-    // Format façon Android : 0X XX XX XX XX
+    // MARK: - Phone formatting
+
+    /// Format façon Android : 0X XX XX XX XX
     private var formattedPhone: String {
         let digits = phone.filter { $0.isNumber }
         let normalized: String
@@ -38,9 +44,10 @@ struct OnboardingSMSCodeView: View {
     }
 
     /// Texte au-dessus du lien "Renvoyer le code"
-    /// → à adapter avec tes Localizable.strings :
-    ///   - "onboard_sms_view_wait_countdown" = "Vous pourrez demander un nouveau code dans %@";
-    ///   - "onboard_sms_view_wait_ready" = "Vous pouvez demander un nouveau code.";
+    ///
+    /// Localizable attendus :
+    ///  - "onboard_sms_view_wait_countdown" = "Vous pourrez demander un nouveau code dans %@";
+    ///  - "onboard_sms_view_wait_ready" = "Vous pouvez demander un nouveau code.";
     private var retryTitle: String {
         if canRetry {
             return NSLocalizedString("onboard_sms_view_wait_ready",
@@ -51,6 +58,8 @@ struct OnboardingSMSCodeView: View {
             return String(format: template, formattedCountdown)
         }
     }
+
+    // MARK: - Body
 
     var body: some View {
         ScrollView {
@@ -70,9 +79,7 @@ struct OnboardingSMSCodeView: View {
                         Text(formattedPhone)
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(Color(UIColor.appBlack30))
-                        // 👉 plus de bouton "Modifier", juste le numéro
-                        // si un jour tu veux le remettre :
-                        // Button(action: { onModifyPhone() }) { Text("onboard_sms_view_edit") ... }
+                        // Si un jour tu veux remettre "Modifier", on a encore onModifyPhone()
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -124,10 +131,8 @@ struct OnboardingSMSCodeView: View {
                 .padding(.top, 28)
 
                 // --- CGU / Politique de confidentialité ---
-                // On affiche une phrase récapitulant l’acceptation des conditions
-                // générales d’utilisation et de la politique de confidentialité.
-                // Ce texte est centré et de petite taille pour ne pas surcharger l’interface.
-                Text("En continuant, vous acceptez les Conditions Générales d’Utilisation et la politique de confidentialité.")
+                // PO : il manquait la phrase → on passe par une clé localisable
+                Text("terms_and_conditions")
                     .font(.system(size: 12))
                     .foregroundColor(Color(UIColor.appGrey151))
                     .multilineTextAlignment(.center)
@@ -168,6 +173,7 @@ struct OnboardingSMSCodeView: View {
         }
         .contentShape(Rectangle())
         .onTapGesture {
+            // Tap sur la rangée → on met le focus
             isEditing = true
         }
         .onChange(of: code) { newValue in
@@ -180,18 +186,16 @@ struct OnboardingSMSCodeView: View {
     }
 
     private func digitText(at index: Int) -> String {
-        // Retourne le caractère à afficher pour chaque case du code.
-        // Si la case correspond à un chiffre saisi, on retourne ce chiffre.
+        // Si un chiffre est saisi pour cette case → on l’affiche
         if index < code.count {
             let idx = code.index(code.startIndex, offsetBy: index)
             return String(code[idx])
         }
-        // Si aucune saisie pour cette case et qu’elle est la prochaine à saisir,
-        // on affiche un curseur simple pour indiquer le focus.
+        // Curseur visuel dans la case active
         if index == code.count && isEditing && code.count < 6 {
             return "|"
         }
-        // Sinon on laisse la case vide
+        // Sinon la case reste vide
         return ""
     }
 

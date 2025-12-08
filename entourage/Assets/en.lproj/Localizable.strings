@@ -1926,3 +1926,12 @@
 "onboard_asso_other_placeholder" = "e.g. Utopia 56 or Women Solidarity";
 "onboard_asso_other_required" = "Please enter your association name.";
 "onboard_asso_pick_first" = "Please select an association.";
+
+"onboard_phase3_beentour_title" = "I want to be supported";
+"onboard_phase3_beentour_sub" = "I am going through a difficult time (job search, uncertainty, precarious situation…) and I would like to meet people who can support me.";
+
+"onboard_phase3_entour_title" = "I want to help in my neighbourhood";
+"onboard_phase3_entour_sub" = "I would like to get involved and support people who live near me.";
+
+"onboard_phase3_asso_title" = "I work within an association";
+"onboard_phase3_asso_desc" = "I would like to collaborate with Entourage, organise events and guide beneficiaries.";

@@ -1910,3 +1910,12 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboard_asso_other_placeholder" = "Ex. : Utopia 56 ou Femmes solidaires";
 "onboard_asso_other_required" = "Merci d’indiquer le nom de votre association.";
 "onboard_asso_pick_first" = "Veuillez sélectionner une association.";
+
+"onboard_phase3_beentour_title" = "Je souhaite être entouré";
+"onboard_phase3_beentour_sub" = "Je traverse une période difficile (recherche d’emploi, période de doute, situation précaire…) et j’aimerais rencontrer des personnes pour me soutenir.";
+
+"onboard_phase3_entour_title" = "Je souhaite aider près de chez moi";
+"onboard_phase3_entour_sub" = "J’aimerais pouvoir m’investir et soutenir des personnes proches de mon lieu de vie.";
+
+"onboard_phase3_asso_title" = "Je travaille au sein d’une association";
+"onboard_phase3_asso_desc" = "Je souhaite collaborer avec Entourage, créer des événements et orienter des bénéficiaires.";
