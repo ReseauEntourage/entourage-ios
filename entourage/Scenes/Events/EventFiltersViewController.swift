@@ -207,19 +207,20 @@ class EventFiltersViewController: UIViewController {
     //MARK: - Methods -
     func setupGooglePlaceViewController() {
         let filterType: GMSPlacesAutocompleteTypeFilter = GMSPlacesAutocompleteTypeFilter.geocode
-        
+
         self.googleplaceVC = GMSAutoCompleteVC()
         self.googleplaceVC?.setup(filterType: filterType)
         self.googleplaceVC?.delegate = self
-        
+
         var fieldsValue = UInt(GMSPlaceField.formattedAddress.rawValue)
         fieldsValue |= UInt(GMSPlaceField.placeID.rawValue)
         fieldsValue |= UInt(GMSPlaceField.addressComponents.rawValue)
         fieldsValue |= UInt(GMSPlaceField.coordinate.rawValue)
-        
+
         let fields = GMSPlaceField(rawValue: UInt64(fieldsValue))
         self.googleplaceVC?.placeFields = fields
     }
+
     
     private func changeSelection(isFromStart:Bool = false) {
         var i = 1
