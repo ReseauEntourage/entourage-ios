@@ -169,8 +169,15 @@ class ConversationsMainHomeViewController: UIViewController {
         conv.numberUnreadMessages = membership.numberOfUnreadMessages
         conv.members_count = membership.numberOfPeople
         conv.imageUrl = membership.imageUrl
+
+        // 🔥 RÈGLE : s'il n'y a qu'UNE personne dans la conv -> c'est toi seul => "Vous"
+        if (membership.numberOfPeople ?? 0) <= 1 {
+            conv.title = "Vous"
+        }
+
         return conv
     }
+
 
     func loadDTO(conversations: [Conversation], reset: Bool) {
         if reset {
@@ -247,8 +254,13 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             let currentUserId = UserDefaults.currentUser?.sid
             let filteredMembers = conversation.members?.filter { $0.uid != currentUserId } ?? []
 
-            let memberNames = filteredMembers.compactMap { $0.username }.joined(separator: " • ")
-            conversation.title = memberNames
+            if filteredMembers.isEmpty {
+                // 👇 Aucun autre membre que moi
+                conversation.title = "Vous"
+            } else {
+                let memberNames = filteredMembers.compactMap { $0.username }.joined(separator: " • ")
+                conversation.title = memberNames
+            }
 
             cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
             return cell
