@@ -52,16 +52,13 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
     // MARK: - UI
 
-    private let contentContainerView = UIView()
     private let scrollView = UIScrollView()
     private let contentView = UIView()
 
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
 
-    private let cityTitleLabel = UILabel()
     private let cityButton = UIButton(type: .system)
-    private let cityConfidentialLabel = UILabel()
 
     private let radiusTitleLabel = UILabel()
     private let radiusValueLabel = UILabel()
@@ -71,7 +68,6 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private let mapView = MKMapView()
 
     private let bottomBar = UIView()
-    private let bottomSeparator = UIView()
     private let previousButton = UIButton(type: .system)
     private let nextButton = UIButton(type: .system)
 
@@ -116,7 +112,6 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
-
         setupLayout()
         setupHeader()
         setupCitySection()
@@ -126,41 +121,40 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         setupInitialState()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Pour que l’écran soit vraiment plein écran (comme les autres steps)
+        navigationController?.isNavigationBarHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // On laisse la responsabilité aux autres écrans de recacher la navbar si besoin
+        navigationController?.isNavigationBarHidden = false
+    }
+
     // MARK: - Setup UI
 
     private func setupLayout() {
-        view.addSubview(contentContainerView)
+        // Scroll principal
+        view.addSubview(scrollView)
         view.addSubview(bottomBar)
 
-        contentContainerView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         bottomBar.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            // Bottom bar collée en bas
             bottomBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
 
-            // Contenu au-dessus de la bottom bar
-            contentContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            contentContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentContainerView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor)
         ])
 
-        bottomBar.backgroundColor = .systemBackground
-
-        // Scroll dans le container
-        contentContainerView.addSubview(scrollView)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.alwaysBounceVertical = true
-
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: contentContainerView.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor)
-        ])
 
         scrollView.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -177,7 +171,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private func setupHeader() {
         titleLabel.text = NSLocalizedString("onboarding_zone_title",
                                             comment: "Votre localisation")
-        titleLabel.setFontTitle(size: 24) // même taille que les autres steps
+        // Aligné avec les autres steps (≈ 20)
+        titleLabel.setFontTitle(size: 20)
         titleLabel.numberOfLines = 0
         titleLabel.textColor = UIColor(white: 0.1, alpha: 1.0)
 
@@ -207,67 +202,60 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     }
 
     private func setupCitySection() {
-        // Label "Ville" supprimé
-        cityTitleLabel.text = ""
-        cityTitleLabel.isHidden = true
+        // On supprime le label "Ville" → uniquement le champ
+        let buttonTitle: String
+        let isPlaceholder: Bool
 
-        // Placeholder si aucune ville sélectionnée
-        let cityTitle: String
         if let label = initialLabel, !label.isEmpty {
-            cityTitle = label
+            buttonTitle = label
+            isPlaceholder = false
         } else {
-            cityTitle = "Ex. : Valence"
+            buttonTitle = "Ex. : Valence"
+            isPlaceholder = true
         }
-        cityButton.setTitle(cityTitle, for: .normal)
-        cityButton.setTitleColor(.label, for: .normal)
-        cityButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        cityButton.tintColor = UIColor(white: 0.7, alpha: 1.0)
+
+        cityButton.setTitle(buttonTitle, for: .normal)
+        cityButton.setFontBody(size: 16)
         cityButton.contentHorizontalAlignment = .left
         cityButton.contentVerticalAlignment = .center
         cityButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         cityButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
 
-        // Fond blanc, bordure légère
+        // Placeholder : texte gris, valeur réelle : texte normal
+        if isPlaceholder {
+            cityButton.setTitleColor(.secondaryLabel, for: .normal)
+        } else {
+            cityButton.setTitleColor(.label, for: .normal)
+        }
+
+        cityButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        cityButton.tintColor = UIColor(white: 0.7, alpha: 1.0)
+
+        // Fond BLANC + bordure légère (vs fond gris)
         cityButton.backgroundColor = .white
         cityButton.layer.cornerRadius = 10
         cityButton.layer.borderWidth = 1
         cityButton.layer.borderColor = UIColor(white: 0.92, alpha: 1.0).cgColor
 
-        cityButton.setFontBody(size: 16)
         cityButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         cityButton.addTarget(self, action: #selector(openAutocomplete), for: .touchUpInside)
 
-        // Texte "L'adresse est confidentielle..." supprimé
-        cityConfidentialLabel.text = ""
-        cityConfidentialLabel.isHidden = true
-
-        contentView.addSubview(cityTitleLabel)
         contentView.addSubview(cityButton)
-        contentView.addSubview(cityConfidentialLabel)
-
-        cityTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         cityButton.translatesAutoresizingMaskIntoConstraints = false
-        cityConfidentialLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            cityTitleLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 20),
-            cityTitleLabel.leadingAnchor.constraint(equalTo: subtitleLabel.leadingAnchor),
-            cityTitleLabel.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor),
-
-            cityButton.topAnchor.constraint(equalTo: cityTitleLabel.bottomAnchor, constant: 8),
-            cityButton.leadingAnchor.constraint(equalTo: cityTitleLabel.leadingAnchor),
-            cityButton.trailingAnchor.constraint(equalTo: cityTitleLabel.trailingAnchor),
-
-            cityConfidentialLabel.topAnchor.constraint(equalTo: cityButton.bottomAnchor, constant: 6),
-            cityConfidentialLabel.leadingAnchor.constraint(equalTo: cityTitleLabel.leadingAnchor),
-            cityConfidentialLabel.trailingAnchor.constraint(equalTo: cityTitleLabel.trailingAnchor)
+            cityButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 20),
+            cityButton.leadingAnchor.constraint(equalTo: subtitleLabel.leadingAnchor),
+            cityButton.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor)
         ])
+
+        // Texte "L'adresse est confidentielle..." supprimé
     }
 
     private func setupRadiusSection() {
         radiusTitleLabel.text = NSLocalizedString("onboarding_zone_radius_title",
                                                   comment: "Dans un rayon de")
-        // Texte en gris (vs bleu)
+        // Texte en GRIS (vs bleu)
         radiusTitleLabel.textColor = .secondaryLabel
         radiusTitleLabel.setFontBody(size: 14)
 
@@ -296,11 +284,11 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         slider.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            radiusTitleLabel.topAnchor.constraint(equalTo: cityConfidentialLabel.bottomAnchor, constant: 20),
-            radiusTitleLabel.leadingAnchor.constraint(equalTo: cityConfidentialLabel.leadingAnchor),
+            radiusTitleLabel.topAnchor.constraint(equalTo: cityButton.bottomAnchor, constant: 20),
+            radiusTitleLabel.leadingAnchor.constraint(equalTo: cityButton.leadingAnchor),
 
             radiusValueLabel.centerYAnchor.constraint(equalTo: radiusTitleLabel.centerYAnchor),
-            radiusValueLabel.trailingAnchor.constraint(equalTo: cityConfidentialLabel.trailingAnchor),
+            radiusValueLabel.trailingAnchor.constraint(equalTo: cityButton.trailingAnchor),
 
             slider.topAnchor.constraint(equalTo: radiusTitleLabel.bottomAnchor, constant: 12),
             slider.leadingAnchor.constraint(equalTo: radiusTitleLabel.leadingAnchor),
@@ -336,29 +324,30 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             mapView.trailingAnchor.constraint(equalTo: mapContainerView.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor),
 
-            // Important pour que le scroll ait une hauteur complète
             mapContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
         ])
     }
 
     private func setupBottomBar() {
-        bottomBar.addSubview(bottomSeparator)
-        bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
-        bottomSeparator.backgroundColor = UIColor(white: 0.92, alpha: 1.0)
-        // Ligne masquée selon ta nouvelle UI
-        bottomSeparator.isHidden = true
+        bottomBar.backgroundColor = .systemBackground
 
+        // Pas de ligne horizontale (supprimée)
+        // → pas de separator view
+
+        // Bouton précédent
         previousButton.setTitle(NSLocalizedString("onboard_bt_back", comment: "Précédent"), for: .normal)
         previousButton.setTitleColor(.black, for: .normal)
-        previousButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        previousButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // texte en BOLD
         previousButton.layer.cornerRadius = 22
         previousButton.layer.borderWidth = 1
         previousButton.layer.borderColor = UIColor.appOrange.cgColor
+        previousButton.backgroundColor = .white
         previousButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
 
+        // Bouton suivant
         nextButton.setTitle(NSLocalizedString("onboard_bt_next", comment: "Suivant"), for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
-        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // texte en BOLD
         nextButton.backgroundColor = .appOrange
         nextButton.layer.cornerRadius = 22
         nextButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
@@ -370,13 +359,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         nextButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            bottomSeparator.topAnchor.constraint(equalTo: bottomBar.topAnchor),
-            bottomSeparator.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor),
-            bottomSeparator.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor),
-            bottomSeparator.heightAnchor.constraint(equalToConstant: 1),
-
             previousButton.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor, constant: 24),
-            previousButton.topAnchor.constraint(equalTo: bottomSeparator.bottomAnchor, constant: 16),
+            previousButton.topAnchor.constraint(equalTo: bottomBar.topAnchor, constant: 12),
             previousButton.heightAnchor.constraint(equalToConstant: 44),
 
             nextButton.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor, constant: -24),
@@ -386,7 +370,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             previousButton.trailingAnchor.constraint(equalTo: bottomBar.centerXAnchor, constant: -8),
             nextButton.leadingAnchor.constraint(equalTo: bottomBar.centerXAnchor, constant: 8),
 
-            nextButton.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -16)
+            nextButton.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -12)
         ])
     }
 
@@ -399,6 +383,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             selectedLabel = initialLabel
             if let label = initialLabel {
                 cityButton.setTitle(label, for: .normal)
+                cityButton.setTitleColor(.label, for: .normal)
             }
             centerMap()
             drawCircle()
@@ -438,12 +423,12 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     @objc private func openAutocomplete() {
         let ac = GMSAutocompleteViewController()
         ac.delegate = self
-        // On demande explicitement les champs utiles
         ac.placeFields = [.name, .formattedAddress, .coordinate, .placeID]
         present(ac, animated: true)
     }
 
     @objc private func cancelTapped() {
+        // Annulation : on remonte l’info puis on revient simplement à l’écran précédent.
         delegate?.zoneChoiceCancelled()
         onCancelClosure?()
 
@@ -584,6 +569,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         initialLabel = label
 
         cityButton.setTitle(label, for: .normal)
+        cityButton.setTitleColor(.label, for: .normal)
+
         centerMap()
         drawCircle()
         updateNextButtonEnabled(true)
@@ -647,10 +634,11 @@ extension UIViewController {
             onCancel: onCancel
         )
 
+        // On affiche toujours en plein écran (sans barre de navigation visible)
+        vc.modalPresentationStyle = .fullScreen
         if let nav = navigationController {
             nav.pushViewController(vc, animated: true)
         } else {
-            vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }
     }

@@ -402,6 +402,9 @@
 		2619E1472A262AD8000BD574 /* WelcomeTwoGroupExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619E1462A262AD8000BD574 /* WelcomeTwoGroupExampleCell.xib */; };
 		2619E1492A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619E1482A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift */; };
 		2619E14B2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619E14A2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift */; };
+		262337592EE81493007EA8ED /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 250F348F3267754AC4BF77CD /* GooglePlaces */; };
+		2623375B2EE8229E007EA8ED /* AppCheckTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2623375A2EE8229E007EA8ED /* AppCheckTokenProvider.swift */; };
+		2623375E2EE82704007EA8ED /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 2623375D2EE82704007EA8ED /* FirebaseAppCheck */; };
 		262820D32D49042A00A61C30 /* MainStatUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262820D22D49042A00A61C30 /* MainStatUserCell.xib */; };
 		262820D52D49069A00A61C30 /* MainStatUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262820D42D49069A00A61C30 /* MainStatUserCell.swift */; };
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
@@ -1021,6 +1024,7 @@
 		2619E1462A262AD8000BD574 /* WelcomeTwoGroupExampleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeTwoGroupExampleCell.xib; sourceTree = "<group>"; };
 		2619E1482A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTwoGroupExampleCell.swift; sourceTree = "<group>"; };
 		2619E14A2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTwoDescribingCell.swift; sourceTree = "<group>"; };
+		2623375A2EE8229E007EA8ED /* AppCheckTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCheckTokenProvider.swift; sourceTree = "<group>"; };
 		262820D22D49042A00A61C30 /* MainStatUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainStatUserCell.xib; sourceTree = "<group>"; };
 		262820D42D49069A00A61C30 /* MainStatUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStatUserCell.swift; sourceTree = "<group>"; };
 		2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UILabel.swift; sourceTree = "<group>"; };
@@ -1242,6 +1246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				262337592EE81493007EA8ED /* GooglePlaces in Frameworks */,
 				02E0099027E37B1100BB23CA /* FirebaseMessaging in Frameworks */,
 				02E0098C27E37B1100BB23CA /* FirebaseAnalytics in Frameworks */,
 				0288A8E427CD11E9008D7011 /* SDWebImage in Frameworks */,
@@ -1254,6 +1259,7 @@
 				02E0099227E37B1100BB23CA /* FirebaseRemoteConfig in Frameworks */,
 				02B94C402850D4A2006059EF /* IQKeyboardManagerSwift in Frameworks */,
 				02E9D6C22970124900F9625D /* ActiveLabel in Frameworks */,
+				2623375E2EE82704007EA8ED /* FirebaseAppCheck in Frameworks */,
 				020AF5DE286064AC0012AE60 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1493,6 +1499,7 @@
 				02CCE67027D78C2F00D6976C /* Fonts */,
 				025D8717278DD33600909101 /* Products */,
 				F6FDF12012DBBD73C547B9BA /* Pods */,
+				2623375C2EE82704007EA8ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1521,6 +1528,7 @@
 				025D872F278DD43200909101 /* Settings */,
 				025D876D278DF45300909101 /* Storyboards */,
 				025D876C278DF44800909101 /* Assets */,
+				2623375A2EE8229E007EA8ED /* AppCheckTokenProvider.swift */,
 			);
 			path = entourage;
 			sourceTree = "<group>";
@@ -2195,6 +2203,13 @@
 			path = welcome2cells;
 			sourceTree = "<group>";
 		};
+		2623375C2EE82704007EA8ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2630F6212C24339F007BAE56 /* mainFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -2646,6 +2661,7 @@
 				02F827702967287B000CA150 /* SimpleKeychain */,
 				02E9D6C12970124900F9625D /* ActiveLabel */,
 				250F348F3267754AC4BF77CD /* GooglePlaces */,
+				2623375D2EE82704007EA8ED /* FirebaseAppCheck */,
 			);
 			productName = entourageios;
 			productReference = 025D8716278DD33600909101 /* Ent-Beta.app */;
@@ -2685,14 +2701,14 @@
 			mainGroup = 025D870D278DD33600909101;
 			packageReferences = (
 				02DB3BC627A14DFC004732C9 /* XCRemoteSwiftPackageReference "Nantes" */,
-				0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */,
-				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */,
+				0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */,
 				029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02E0098A27E37B1100BB23CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */,
-				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */,
+				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
-				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */,
+				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */,
 				07D073F4B75D5470C000D4A2 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 			);
 			productRefGroup = 025D8717278DD33600909101 /* Products */;
@@ -3173,6 +3189,7 @@
 				2684542C29DAC63700C944EA /* UniversalLinkManager.swift in Sources */,
 				0224597427FF323600944DE4 /* NeighborhoodCreateNameCell.swift in Sources */,
 				02F5278527999B8F00929431 /* SolidarityGuideCell.swift in Sources */,
+				2623375B2EE8229E007EA8ED /* AppCheckTokenProvider.swift in Sources */,
 				2667575D2E856F8F0039FF88 /* PreOnboardingAPI.swift in Sources */,
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
 				02B94C33284F92AD006059EF /* HomeActionTeachCell.swift in Sources */,
@@ -3711,7 +3728,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */ = {
+		020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -3719,7 +3736,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */ = {
+		0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swiftify-Corp/IHProgressHUD.git";
 			requirement = {
@@ -3727,7 +3744,7 @@
 				minimumVersion = 0.1.8;
 			};
 		};
-		0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */ = {
+		0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -3743,7 +3760,7 @@
 				version = 10.26.0;
 			};
 		};
-		02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */ = {
+		02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -3767,7 +3784,7 @@
 				version = 10.26.0;
 			};
 		};
-		02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */ = {
+		02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/optonaut/ActiveLabel.swift.git";
 			requirement = {
@@ -3796,22 +3813,22 @@
 /* Begin XCSwiftPackageProductDependency section */
 		020AF5DD286064AC0012AE60 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */;
+			package = 020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
 		0246604C27D8A49E00FE1EF8 /* IHProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */;
+			package = 0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */;
 			productName = IHProgressHUD;
 		};
 		0288A8E327CD11E9008D7011 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */;
+			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
 		0288A8E527CD11E9008D7011 /* SDWebImageMapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */;
+			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
 		};
 		029E307E27DB60D300B12357 /* FirebaseAnalytics */ = {
@@ -3821,7 +3838,7 @@
 		};
 		02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */;
+			package = 02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
 		};
 		02DB3BC727A14DFC004732C9 /* Nantes */ = {
@@ -3851,7 +3868,7 @@
 		};
 		02E9D6C12970124900F9625D /* ActiveLabel */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */;
+			package = 02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */;
 			productName = ActiveLabel;
 		};
 		02F827702967287B000CA150 /* SimpleKeychain */ = {
@@ -3863,6 +3880,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 07D073F4B75D5470C000D4A2 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
 			productName = GooglePlaces;
+		};
+		2623375D2EE82704007EA8ED /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
