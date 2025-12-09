@@ -251,33 +251,50 @@ class ConversationViewCell: UITableViewCell {
         ui_label_comment.textColor = deletedTextColor
         ui_label_comment.enabledTypes = [] // pas de liens cliquables
 
-        // Icône en attachment (taille calée sur la capHeight de la font)
+        // ----- Icône supprimé avec taille FIXE (plus grande qu’avant) -----
         let font = conversationBaseFont
         let attachment = NSTextAttachment()
+
         if let baseImage = UIImage(named: "ic_deleted_comment")?.withRenderingMode(.alwaysTemplate) {
             let tinted = baseImage.withTintColor(deletedTextColor)
             attachment.image = tinted
-            let height = font.capHeight
+
+            // 👉 Taille du picto (ADAPTE ici si tu veux plus grand)
+            let iconSize: CGFloat = 18 
+
             let ratio = tinted.size.width / max(tinted.size.height, 1)
-            attachment.bounds = CGRect(x: 0, y: (font.descender / 2), width: height * ratio, height: height)
+            attachment.bounds = CGRect(
+                x: 0,
+                y: (font.descender / 2), // alignement vertical propre
+                width: iconSize * ratio,
+                height: iconSize
+            )
         }
 
+        // Petit espace entre le picto et le texte
         let spacer = NSAttributedString(string: "  ")
 
-        let iconAttr = NSAttributedString(attachment: attachment)
+        // Attribut texte supprimé
         let textAttr = NSAttributedString(
             string: text,
-            attributes: [.font: font, .foregroundColor: deletedTextColor]
+            attributes: [
+                .font: font,
+                .foregroundColor: deletedTextColor
+            ]
         )
 
+        // Final : icône + espace + texte
         let final = NSMutableAttributedString()
-        final.append(iconAttr)
+        final.append(NSAttributedString(attachment: attachment))
         final.append(spacer)
         final.append(textAttr)
 
         ui_label_comment.attributedText = final
+
+        // Pas besoin de min width dans ce mode
         ui_label_min_width?.isActive = false
     }
+
 
     private func applyNormalContent(message: PostMessage, isMe: Bool) {
         ui_view_label.backgroundColor = isMe ? UIColor.appBeige : UIColor.orangeMedium
