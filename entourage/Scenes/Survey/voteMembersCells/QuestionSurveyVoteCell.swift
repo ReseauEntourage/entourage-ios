@@ -24,5 +24,6 @@ class QuestionSurveyVoteCell:UITableViewCell{
     
     func configure(title:String){
         self.ui_question_label.text = title
+        self.ui_question_label.numberOfLines = 0
     }
 }
