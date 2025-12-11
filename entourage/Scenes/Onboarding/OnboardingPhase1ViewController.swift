@@ -411,6 +411,7 @@ struct OnboardingPhase1View: View {
                 // Titre principal pour la section « Informations personnelles »
                 Text("Vos informations personnelles")
                     .font(.entourageTitle(20))
+                    .padding(.leading, 16)
                     .padding(.bottom, 8)
 
                 CardContainer {

@@ -91,7 +91,7 @@ struct OnboardingSMSCodeView: View {
                     .padding(.horizontal, 16)
                     .padding(.top, 8)
 
-                // --- Bloc “Vous n’avez pas reçu votre code ?” avec timer ---
+                // --- Bloc "Vous n'avez pas reçu votre code ?" avec timer ---
                 VStack(spacing: 8) {
                     Text(retryTitle)
                         .font(.system(size: 15))
@@ -131,11 +131,7 @@ struct OnboardingSMSCodeView: View {
                 .padding(.top, 28)
 
                 // --- CGU / Politique de confidentialité ---
-                // PO : il manquait la phrase → on passe par une clé localisable
-                Text("terms_and_conditions")
-                    .font(.system(size: 12))
-                    .foregroundColor(Color(UIColor.appGrey151))
-                    .multilineTextAlignment(.center)
+                termsAndConditionsView
                     .padding(.horizontal, 16)
 
                 Spacer()
@@ -186,7 +182,7 @@ struct OnboardingSMSCodeView: View {
     }
 
     private func digitText(at index: Int) -> String {
-        // Si un chiffre est saisi pour cette case → on l’affiche
+        // Si un chiffre est saisi pour cette case → on l'affiche
         if index < code.count {
             let idx = code.index(code.startIndex, offsetBy: index)
             return String(code[idx])
@@ -207,11 +203,67 @@ struct OnboardingSMSCodeView: View {
         }
     }
 
+    // MARK: - Terms and Conditions View
+
+    private var termsAndConditionsView: some View {
+        VStack(spacing: 4) {
+            (Text("En vous inscrivant, vous acceptez nos ")
+                .foregroundColor(Color(UIColor.appGrey151))
+             +
+             Text("Conditions Générales d'Utilisation")
+                .foregroundColor(Color(UIColor.appOrange))
+                .underline()
+             +
+             Text(" et notre ")
+                .foregroundColor(Color(UIColor.appGrey151))
+             +
+             Text("Politique de confidentialité")
+                .foregroundColor(Color(UIColor.appOrange))
+                .underline()
+             +
+             Text(".")
+                .foregroundColor(Color(UIColor.appGrey151))
+            )
+            .font(.system(size: 12))
+            .multilineTextAlignment(.center)
+            .onTapGesture {
+                // Pour détecter où l'utilisateur a tapé, on ouvre un menu
+                showTermsActionSheet()
+            }
+        }
+    }
+    
+    private func showTermsActionSheet() {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = scene.windows.first,
+              let rootVC = window.rootViewController else { return }
+        
+        let alert = UIAlertController(title: "Ouvrir", message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Conditions Générales d'Utilisation", style: .default) { _ in
+            openURL("https://www.entourage.social/conditions-generales-dutilisation")
+        })
+        
+        alert.addAction(UIAlertAction(title: "Politique de confidentialité", style: .default) { _ in
+            openURL("https://www.entourage.social/politique-de-confidentialite")
+        })
+        
+        alert.addAction(UIAlertAction(title: "Annuler", style: .cancel))
+        
+        rootVC.present(alert, animated: true)
+    }
+
     // MARK: - Actions auxiliaires
 
     private func openHelpEmail() {
         let email = "contact@entourage.social"
         if let url = URL(string: "mailto:\(email)") {
+            UIApplication.shared.open(url)
+        }
+    }
+
+    private func openURL(_ urlString: String) {
+        if let url = URL(string: urlString) {
             UIApplication.shared.open(url)
         }
     }
