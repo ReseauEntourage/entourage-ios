@@ -55,10 +55,10 @@ struct AuthService: ParsingDataCodable {
             userParameters["discovery_source"] = source
         }
         if let company = nonEmpty(user.company) {
-            userParameters["company"] = company
+            userParameters["sf_entreprise_id"] = company
         }
         if let event = nonEmpty(user.event) {
-            userParameters["event"] = event
+            userParameters["sf_campaign_id"] = event
         }
 
         let parameters: [String: Any] = ["user": userParameters]
