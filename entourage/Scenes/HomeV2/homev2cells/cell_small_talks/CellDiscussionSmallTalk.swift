@@ -78,7 +78,12 @@ class CellDiscussionSmallTalk: UICollectionViewCell {
         if number > 0 {
             self.ui_label_new_message.isHidden = false
             self.round_new_message.isHidden = false
-            self.ui_label_new_message.text = String(number) + "title_new_message".localized
+            if number == 1 {
+                self.ui_label_new_message.text = String(number) + " " + "title_new_message".localized
+
+            }else{
+                self.ui_label_new_message.text = String(number) + " " + "title_new_message_plural".localized
+            }
         }else{
             self.ui_label_new_message.isHidden = true
             self.round_new_message.isHidden = true
