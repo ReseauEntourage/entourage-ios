@@ -103,9 +103,13 @@ struct AssociationService: ParsingDataCodable {
         }
     }
 
-    static func createAssociation(name: String,
-                                  completion: @escaping (_ association: Partner?, _ error: EntourageNetworkError?) -> Void) {
-
+    static func createAssociation(
+        name: String,
+        address: String?,
+        latitude: Double?,
+        longitude: Double?,
+        completion: @escaping (_ association: Partner?, _ error: EntourageNetworkError?) -> Void
+    ) {
         guard let token = UserDefaults.token else {
             completion(nil, nil)
             return
@@ -114,10 +118,21 @@ struct AssociationService: ParsingDataCodable {
         var endpoint = kAPICreateAssociation
         endpoint = String(format: endpoint, token)
 
-        let partnerPayload: [String: Any] = [
+        var partnerPayload: [String: Any] = [
             "name": name,
             "description": name
         ]
+
+        let trimmedAddress = (address ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmedAddress.isEmpty {
+            partnerPayload["address"] = trimmedAddress
+        }
+        if let latitude = latitude {
+            partnerPayload["latitude"] = latitude
+        }
+        if let longitude = longitude {
+            partnerPayload["longitude"] = longitude
+        }
 
         let params: [String: Any] = [
             "partner": partnerPayload
@@ -141,4 +156,5 @@ struct AssociationService: ParsingDataCodable {
             DispatchQueue.main.async { completion(association, nil) }
         }
     }
+
 }

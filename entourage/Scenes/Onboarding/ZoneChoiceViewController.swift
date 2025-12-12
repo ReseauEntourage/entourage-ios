@@ -457,7 +457,11 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     }
 
     private func goToAssociationOnboarding() {
-        let associationVC = AssociationOnboardingViewController()
+        let associationVC = AssociationOnboardingViewController(
+            initialAddress: selectedLabel ?? initialLabel,
+            initialCoordinate: selectedCoord
+        )
+
         if let nav = navigationController {
             nav.pushViewController(associationVC, animated: true)
         } else {

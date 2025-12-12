@@ -1,27 +1,14 @@
-//
-//  AssociationOnboardingView.swift
-//  entourage
-//
-//  Created by Clement entourage on 01/12/2025.
-//
-
 import UIKit
 import SwiftUI
-
-// MARK: - Selection result from SwiftUI view
+import CoreLocation
 
 enum AssociationOnboardingSelection {
     case existing(name: String)
     case other(name: String)
 }
 
-/// Vue SwiftUI calquée sur le comportement Android:
-/// - Titre / sous-titre
-/// - Menu déroulant avec liste d'associations (premier élément = "Autre")
-/// - Si "Autre" est choisi : bulle orange + TextField
-/// - Validation avec contrôle (obligatoire de choisir, et texte requis si "Autre")
 struct AssociationOnboardingView: View {
-    let associations: [String]               // ex: ["Autre", "Croix Rouge", ...]
+    let associations: [String]
     let onBack: () -> Void
     let onValidate: (AssociationOnboardingSelection) -> Void
 
@@ -38,16 +25,13 @@ struct AssociationOnboardingView: View {
     }
 
     private var canValidate: Bool {
-        guard let picked = selectedAssociation, !picked.isEmpty else {
-            return false
-        }
+        guard let picked = selectedAssociation, !picked.isEmpty else { return false }
         if isOtherSelected {
             return !otherName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         }
         return true
     }
 
-    /// Nom final (pour "Autre" = texte saisie, sinon = nom de l'asso)
     private var finalAssociationName: String? {
         guard let picked = selectedAssociation, !picked.isEmpty else { return nil }
         if isOtherSelected {
@@ -62,22 +46,17 @@ struct AssociationOnboardingView: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-
-                    // Titre
                     Text(NSLocalizedString("onboard_asso_title", comment: ""))
                         .font(.system(size: 22, weight: .bold))
                         .foregroundColor(.black)
                         .padding(.top, 24)
 
-                    // Sous-titre
                     Text(NSLocalizedString("onboard_asso_subtitle", comment: ""))
                         .font(.system(size: 14))
                         .foregroundColor(Color(UIColor.secondaryLabel))
 
-                    // Dropdown
                     dropdownSection
 
-                    // Bulle "Autre"
                     if isOtherSelected {
                         otherAssociationCard
                             .transition(.opacity.combined(with: .move(edge: .top)))
@@ -88,7 +67,6 @@ struct AssociationOnboardingView: View {
                 .padding(.horizontal, 22)
             }
 
-            // Erreur éventuelle
             if let error = errorMessage {
                 Text(error)
                     .font(.system(size: 13))
@@ -97,14 +75,11 @@ struct AssociationOnboardingView: View {
                     .padding(.bottom, 4)
             }
 
-            // Bottom bar boutons
             bottomBar
         }
         .background(Color(UIColor.systemBackground))
         .ignoresSafeArea(edges: .bottom)
     }
-
-    // MARK: - Dropdown
 
     private var dropdownSection: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -146,27 +121,24 @@ struct AssociationOnboardingView: View {
         .padding(.top, 18)
     }
 
-    // MARK: - Card "Autre"
-
     private var otherAssociationCard: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .top, spacing: 10) {
                 Image(systemName: "info.circle.fill")
                     .font(.system(size: 18))
-                    .foregroundColor(Color(red: 0.85, green: 0.45, blue: 0)) // proche orange
+                    .foregroundColor(Color(red: 0.85, green: 0.45, blue: 0))
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(NSLocalizedString("onboard_asso_info", comment: ""))
                         .font(.system(size: 13))
-                        .foregroundColor(Color(red: 0.42, green: 0.23, blue: 0)) // #6B3B00
+                        .foregroundColor(Color(red: 0.42, green: 0.23, blue: 0))
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text(NSLocalizedString("onboard_asso_other_label", comment: ""))
                             .font(.system(size: 12))
                             .foregroundColor(.gray)
 
-                        TextField(NSLocalizedString("onboard_asso_other_placeholder", comment: ""),
-                                  text: $otherName)
+                        TextField(NSLocalizedString("onboard_asso_other_placeholder", comment: ""), text: $otherName)
                             .textFieldStyle(PlainTextFieldStyle())
                             .padding(.horizontal, 8)
                             .frame(height: 40)
@@ -182,16 +154,14 @@ struct AssociationOnboardingView: View {
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(red: 1.0, green: 0.95, blue: 0.9)) // #FFF3E5
+                .fill(Color(red: 1.0, green: 0.95, blue: 0.9))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color(red: 1.0, green: 0.78, blue: 0.54), lineWidth: 1) // #FFC68A
+                .stroke(Color(red: 1.0, green: 0.78, blue: 0.54), lineWidth: 1)
         )
         .padding(.top, 14)
     }
-
-    // MARK: - Bottom bar
 
     private var bottomBar: some View {
         HStack(spacing: 8) {
@@ -226,8 +196,6 @@ struct AssociationOnboardingView: View {
         .padding(.bottom, 20)
     }
 
-    // MARK: - Validate
-
     private func validateTapped() {
         guard let finalName = finalAssociationName else {
             if isOtherSelected {
@@ -248,22 +216,31 @@ struct AssociationOnboardingView: View {
     }
 }
 
-// MARK: - UIViewController hosting SwiftUI
-
-/// UIViewController qui héberge la vue SwiftUI et gère la navigation + appels backend.
 final class AssociationOnboardingViewController: UIViewController {
 
     private var hostingController: UIHostingController<AssociationOnboardingView>?
     private var partners: [Partner] = []
 
+    private let initialAddress: String?
+    private let initialCoordinate: CLLocationCoordinate2D?
+
+    init(initialAddress: String? = nil, initialCoordinate: CLLocationCoordinate2D? = nil) {
+        self.initialAddress = initialAddress
+        self.initialCoordinate = initialCoordinate
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        self.initialAddress = nil
+        self.initialCoordinate = nil
+        super.init(coder: coder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-
         loadAssociations()
     }
-
-    // MARK: - Load associations from API
 
     private func loadAssociations() {
         AssociationService.getAllAssociations { [weak self] associations, _ in
@@ -271,8 +248,6 @@ final class AssociationOnboardingViewController: UIViewController {
 
             self.partners = associations ?? []
 
-            // On construit la liste de noms pour la vue.
-            // Premier élément : "Autre" (comme sur Android / maquette)
             var names: [String] = ["Autre"]
             names.append(contentsOf: self.partners.map { $0.name })
 
@@ -307,10 +282,7 @@ final class AssociationOnboardingViewController: UIViewController {
         hostingController = host
     }
 
-    // MARK: - Navigation
-
     private func handleBack() {
-        // On revient à la zone (push navigation)
         if let nav = navigationController {
             nav.popViewController(animated: true)
         } else {
@@ -318,38 +290,34 @@ final class AssociationOnboardingViewController: UIViewController {
         }
     }
 
-    // MARK: - Validate selection (join or create)
-
     private func handleValidate(selection: AssociationOnboardingSelection) {
         switch selection {
         case .existing(let name):
-            // On retrouve le Partner correspondant
             guard let partner = partners.first(where: { $0.name == name }),
                   let partnerId = partner.aid else {
-                // Si pas trouvé, on finit l’onboarding quand même (ou afficher une alerte selon ton choix)
                 goToOnboardingEnd()
                 return
             }
 
-            AssociationService.joinAssociation(partnerId: partnerId,
-                                               postalCode: partner.postalCode,
-                                               userRoleTitle: partner.userRoleTitle) { [weak self] error in
-                guard let self = self else { return }
-
-                if error != nil {
-                    // TODO: afficher une alerte si tu veux gérer l’erreur réseau
-                    self.goToOnboardingEnd()
-                } else {
-                    self.goToOnboardingEnd()
-                }
+            AssociationService.joinAssociation(
+                partnerId: partnerId,
+                postalCode: partner.postalCode,
+                userRoleTitle: partner.userRoleTitle
+            ) { [weak self] _ in
+                self?.goToOnboardingEnd()
             }
 
         case .other(let customName):
-            AssociationService.createAssociation(name: customName) { [weak self] _, _ in
-                guard let self = self else { return }
-                // On pourrait éventuellement rejoindre automatiquement cette asso,
-                // mais côté backend ça peut déjà être le cas.
-                self.goToOnboardingEnd()
+            let lat = initialCoordinate?.latitude
+            let lon = initialCoordinate?.longitude
+
+            AssociationService.createAssociation(
+                name: customName,
+                address: initialAddress,
+                latitude: lat,
+                longitude: lon
+            ) { [weak self] _, _ in
+                self?.goToOnboardingEnd()
             }
         }
     }
@@ -360,7 +328,7 @@ final class AssociationOnboardingViewController: UIViewController {
             if let nav = navigationController {
                 nav.pushViewController(endVC, animated: true)
             } else {
-                endVC.modalPresentationStyle = .fullScreen
+                endVC.modalPresentationStyle = UIModalPresentationStyle.fullScreen
                 present(endVC, animated: true, completion: nil)
             }
         }
