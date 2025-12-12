@@ -75,6 +75,7 @@ final class OnboardingPhase3ViewController: UIViewController {
 
         ui_next_btn.addTarget(self, action: #selector(onNext), for: .touchUpInside)
         configureOrange(button: ui_next_btn, title: "next".localized)
+        ui_next_btn.isEnabled = false
         updateNextButton()
 
         // Alignement avec Android : on désactive la campagne dès qu’on arrive sur cette phase
@@ -97,8 +98,18 @@ final class OnboardingPhase3ViewController: UIViewController {
     private func updateNextButton() {
         let enabled = (userTypeSelected != .none)
         ui_next_btn.isEnabled = enabled
-        ui_next_btn.backgroundColor = enabled ? .appOrange : .appOrangeLight
+        
+        if enabled {
+            // État actif : orange plein
+            ui_next_btn.backgroundColor = .appOrange
+            ui_next_btn.setTitleColor(.white, for: .normal)
+        } else {
+            // État désactivé : orange clair (comme dans OnboardingStartViewController)
+            ui_next_btn.backgroundColor = .appOrangeLight_50
+            ui_next_btn.setTitleColor(.white, for: .normal)
+        }
     }
+
 
     private func rebuildRows() {
         rows.removeAll()
@@ -275,6 +286,7 @@ extension OnboardingPhase3ViewController: UITableViewDataSource, UITableViewDele
         switch rows[indexPath.row] {
         case .userType(let choice, _, _):
             applySelection(choiceId: choice.id)
+            ui_next_btn.isEnabled = true
         case .title:
             break
         }

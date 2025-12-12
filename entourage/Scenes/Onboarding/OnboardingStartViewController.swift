@@ -329,15 +329,18 @@ final class OnboardingStartViewController: UIViewController {
 
         if currentPhasePosition == 3 {
             // localisation SUPPRIMÉE de la validation
+            // → désactiver le CTA si aucun type n’est sélectionné
             if userTypeSelected == .none {
-                isValid = false; message = "onboard_error_general".localized
+                isValid = false
+                message = "onboard_error_general".localized
             }
         }
 
-        // Phases ≠ 1 : on peut piloter localement
+        // Phases ≠ 1 : on peut piloter localement le CTA
         if currentPhasePosition != 1 {
             enableDisableNextButton(isEnable: isValid)
         }
+
         return (isValid, message)
     }
 
