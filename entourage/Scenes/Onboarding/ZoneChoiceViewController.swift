@@ -3,10 +3,6 @@ import MapKit
 import GooglePlaces
 import CoreLocation
 
-// MARK: - Result
-
-/// Représente le résultat d’un choix de zone : un lieu (facultatif), un
-/// point GPS, un libellé et un rayon en kilomètres.
 struct ZoneChoiceResult {
     let place: GMSPlace?
     let coordinate: CLLocationCoordinate2D?
@@ -14,30 +10,17 @@ struct ZoneChoiceResult {
     let radiusKm: Int
 }
 
-// MARK: - Next Step
-
 enum ZoneChoiceNextStep {
     case onboardingEnd
     case associationOnboarding
 }
-
-// MARK: - Delegate
 
 protocol ZoneChoiceViewControllerDelegate: AnyObject {
     func zoneChoiceConfirmed(result: ZoneChoiceResult)
     func zoneChoiceCancelled()
 }
 
-// MARK: - ViewController
-
-/// Contrôleur de choix de zone. Il permet à l’utilisateur de sélectionner
-/// une ville ou une adresse, de définir un rayon et de visualiser la zone
-/// choisie sur une carte. Les marges latérales sont de 20 points et les
-/// espacements verticaux principaux sont harmonisés pour s’aligner avec les
-/// autres écrans de l’onboarding.
 final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewControllerDelegate {
-
-    // MARK: - Public API
 
     var initialCoordinate: CLLocationCoordinate2D?
     var initialLabel: String?
@@ -45,14 +28,9 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
     weak var delegate: ZoneChoiceViewControllerDelegate?
 
-    /// Indique ce qui doit se passer après la sauvegarde de la zone.
     private let nextStep: ZoneChoiceNextStep
-
-    // callbacks optionnels (API par closures)
     private var onConfirmClosure: ((ZoneChoiceResult) -> Void)?
     private var onCancelClosure: (() -> Void)?
-
-    // MARK: - UI
 
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -69,27 +47,22 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private let mapContainerView = UIView()
     private let mapView = MKMapView()
 
-    private let bottomBar = UIView()
-    private let previousButton = UIButton(type: .system)
     private let nextButton = UIButton(type: .system)
-
-    // MARK: - State
 
     private var selectedCoord: CLLocationCoordinate2D?
     private var selectedPlace: GMSPlace?
     private var selectedLabel: String?
     private var currentRadiusKm: Int = 20
 
-    // MARK: - Init
-
-    init(initialCoordinate: CLLocationCoordinate2D? = nil,
-         initialLabel: String? = nil,
-         initialRadiusKm: Int = 20,
-         delegate: ZoneChoiceViewControllerDelegate? = nil,
-         nextStep: ZoneChoiceNextStep = .onboardingEnd,
-         onConfirm: ((ZoneChoiceResult) -> Void)? = nil,
-         onCancel: (() -> Void)? = nil) {
-
+    init(
+        initialCoordinate: CLLocationCoordinate2D? = nil,
+        initialLabel: String? = nil,
+        initialRadiusKm: Int = 20,
+        delegate: ZoneChoiceViewControllerDelegate? = nil,
+        nextStep: ZoneChoiceNextStep = .onboardingEnd,
+        onConfirm: ((ZoneChoiceResult) -> Void)? = nil,
+        onCancel: (() -> Void)? = nil
+    ) {
         self.initialCoordinate = initialCoordinate
         self.initialLabel = initialLabel
         self.initialRadiusKm = initialRadiusKm
@@ -98,62 +71,51 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         self.onConfirmClosure = onConfirm
         self.onCancelClosure = onCancel
         self.currentRadiusKm = initialRadiusKm
-
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .fullScreen
     }
 
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - Lifecycle
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
         setupLayout()
         setupHeader()
-        setupCitySection()
-        setupRadiusSection()
+        setupCityField()
+        setupRadius()
         setupMap()
-        setupBottomBar()
+        setupCTA()
         setupInitialState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Pour que l’écran soit vraiment plein écran (comme les autres steps)
         navigationController?.isNavigationBarHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // On laisse la responsabilité aux autres écrans de recacher la navbar si besoin
         navigationController?.isNavigationBarHidden = false
     }
 
-    // MARK: - Setup UI
-
     private func setupLayout() {
-        // Scroll principal
         view.addSubview(scrollView)
-        view.addSubview(bottomBar)
+        view.addSubview(nextButton)
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        bottomBar.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            bottomBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor)
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            nextButton.heightAnchor.constraint(equalToConstant: 56)
         ])
 
         scrollView.alwaysBounceVertical = true
@@ -171,17 +133,12 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     }
 
     private func setupHeader() {
-        titleLabel.text = NSLocalizedString("onboarding_zone_title",
-                                            comment: "Votre localisation")
-        // Aligné avec les autres steps
-        titleLabel.font = UIFont(name: "Quicksand-Bold", size: 20)
+        titleLabel.text = NSLocalizedString("onboarding_zone_title", comment: "")
+        titleLabel.font = UIFont(name: "Quicksand-Bold", size: 24)
+        titleLabel.textColor = .black
         titleLabel.numberOfLines = 0
-        titleLabel.textColor = UIColor(white: 0.1, alpha: 1.0)
 
-        subtitleLabel.text = NSLocalizedString(
-            "onboarding_zone_subtitle",
-            comment: "Cette information nous permet d’affiner les actions proches de chez vous."
-        )
+        subtitleLabel.text = NSLocalizedString("onboarding_zone_subtitle", comment: "")
         subtitleLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
         subtitleLabel.textColor = .secondaryLabel
         subtitleLabel.numberOfLines = 0
@@ -203,39 +160,23 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         ])
     }
 
-    private func setupCitySection() {
-        // On supprime le label "Ville" → uniquement le champ
-        let buttonTitle: String
-        let isPlaceholder: Bool
+    private func setupCityField() {
+        let isPlaceholder = (initialLabel?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
+        let title = isPlaceholder ? "Ex. : Valence" : (initialLabel ?? "Ex. : Valence")
 
-        if let label = initialLabel, !label.isEmpty {
-            buttonTitle = label
-            isPlaceholder = false
-        } else {
-            buttonTitle = "Ex. : Valence"
-            isPlaceholder = true
-        }
-
-        cityButton.setTitle(buttonTitle, for: .normal)
-        cityButton.titleLabel?.font = UIFont(name: "NunitoSans-Regular", size: 16)
+        cityButton.setTitle(title, for: .normal)
+        cityButton.titleLabel?.font = UIFont(name: "NunitoSans-Regular", size: 15)
         cityButton.contentHorizontalAlignment = .left
-        cityButton.contentVerticalAlignment = .center
-        cityButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         cityButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        cityButton.setTitleColor(isPlaceholder ? .secondaryLabel : .label, for: .normal)
 
-        // Placeholder : texte gris, valeur réelle : texte normal
-        if isPlaceholder {
-            cityButton.setTitleColor(.secondaryLabel, for: .normal)
-        } else {
-            cityButton.setTitleColor(.label, for: .normal)
-        }
-
-        cityButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        let icon = UIImage(systemName: "magnifyingglass")
+        cityButton.setImage(icon, for: .normal)
         cityButton.tintColor = UIColor(white: 0.7, alpha: 1.0)
+        cityButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
 
-        // Fond BLANC + bordure légère (vs fond gris)
         cityButton.backgroundColor = .white
-        cityButton.layer.cornerRadius = 10
+        cityButton.layer.cornerRadius = 12
         cityButton.layer.borderWidth = 1
         cityButton.layer.borderColor = UIColor(white: 0.92, alpha: 1.0).cgColor
 
@@ -252,11 +193,10 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         ])
     }
 
-    private func setupRadiusSection() {
-        radiusTitleLabel.text = NSLocalizedString("onboarding_zone_radius_title",
-                                                  comment: "Dans un rayon de")
-        radiusTitleLabel.textColor = .secondaryLabel
+    private func setupRadius() {
+        radiusTitleLabel.text = NSLocalizedString("onboarding_zone_radius_title", comment: "")
         radiusTitleLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
+        radiusTitleLabel.textColor = .secondaryLabel
 
         radiusValueLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
         radiusValueLabel.textAlignment = .right
@@ -265,7 +205,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         slider.minimumValue = 1
         slider.maximumValue = 100
         slider.value = Float(initialRadiusKm)
-        slider.minimumTrackTintColor = UIColor.appOrange
+        slider.minimumTrackTintColor = .appOrange
         slider.maximumTrackTintColor = UIColor(white: 0.85, alpha: 1.0)
         slider.thumbTintColor = .white
         slider.layer.shadowColor = UIColor.black.cgColor
@@ -290,8 +230,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             radiusValueLabel.trailingAnchor.constraint(equalTo: cityButton.trailingAnchor),
 
             slider.topAnchor.constraint(equalTo: radiusTitleLabel.bottomAnchor, constant: 20),
-            slider.leadingAnchor.constraint(equalTo: radiusTitleLabel.leadingAnchor),
-            slider.trailingAnchor.constraint(equalTo: radiusValueLabel.trailingAnchor)
+            slider.leadingAnchor.constraint(equalTo: cityButton.leadingAnchor),
+            slider.trailingAnchor.constraint(equalTo: cityButton.trailingAnchor)
         ])
     }
 
@@ -323,29 +263,19 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             mapView.trailingAnchor.constraint(equalTo: mapContainerView.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor),
 
-            mapContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            mapContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120)
         ])
     }
 
-        private func setupBottomBar() {
-        // CTA unique (comme les autres steps) : un seul bouton "Suivant" en bas à droite.
-        view.addSubview(nextButton)
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            nextButton.heightAnchor.constraint(equalToConstant: 56)
-        ])
-
-        // Style "pill"
+    private func setupCTA() {
         nextButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
         nextButton.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 18)
         nextButton.layer.cornerRadius = 28
         nextButton.layer.masksToBounds = true
-
-        nextButton.addTarget(self, action: #selector(nextTapped), for: .touchUpInside)
-        updateNextEnabled()
+        nextButton.setTitle(NSLocalizedString("Continuer", comment: ""), for: .normal)
+        nextButton.setTitleColor(.white, for: .normal)
+        nextButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
+        updateNextButtonEnabled(false)
     }
 
     private func setupInitialState() {
@@ -355,25 +285,23 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         if let c = initialCoordinate {
             selectedCoord = c
             selectedLabel = initialLabel
-            if let label = initialLabel {
+
+            if let label = initialLabel, !label.isEmpty {
                 cityButton.setTitle(label, for: .normal)
                 cityButton.setTitleColor(.label, for: .normal)
             }
+
             centerMap()
             drawCircle()
             updateNextButtonEnabled(true)
         } else {
-            // Carte initiale : France
             let franceCenter = CLLocationCoordinate2D(latitude: 46.5, longitude: 2.2)
             let region = MKCoordinateRegion(center: franceCenter,
-                                            span: MKCoordinateSpan(latitudeDelta: 6.0,
-                                                                   longitudeDelta: 6.0))
+                                            span: MKCoordinateSpan(latitudeDelta: 6.0, longitudeDelta: 6.0))
             mapView.setRegion(region, animated: false)
             updateNextButtonEnabled(false)
         }
     }
-
-    // MARK: - Actions
 
     @objc private func sliderChanged() {
         currentRadiusKm = Int(slider.value.rounded())
@@ -402,7 +330,6 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     }
 
     @objc private func cancelTapped() {
-        // Annulation : on remonte l’info puis on revient simplement à l’écran précédent.
         delegate?.zoneChoiceCancelled()
         onCancelClosure?()
 
@@ -426,13 +353,11 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             radiusKm: currentRadiusKm
         )
 
-        // On remonte le choix avant le réseau
         delegate?.zoneChoiceConfirmed(result: result)
         onConfirmClosure?(result)
 
         updateNextButtonEnabled(false)
 
-        // 1) travel_distance
         AuthService.updateTravelDistance(currentRadiusKm) { [weak self] error in
             guard let self = self else { return }
 
@@ -442,7 +367,6 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
                 return
             }
 
-            // 2) adresse primaire
             let googlePlaceId = self.selectedPlace?.placeID
             AuthService.updatePrimaryAddress(
                 googlePlaceId: googlePlaceId,
@@ -458,7 +382,6 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
                     return
                 }
 
-                // 3) Navigation interne selon nextStep
                 switch self.nextStep {
                 case .onboardingEnd:
                     self.goToOnboardingEnd()
@@ -470,31 +393,20 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     }
 
     private func showZoneError(messageKey: String = "user_action_zone_send_failed") {
-        let message = NSLocalizedString(messageKey,
-                                        comment: "Erreur lors de l’envoi de la zone")
+        let message = NSLocalizedString(messageKey, comment: "")
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alert.addAction(
-            UIAlertAction(
-                title: NSLocalizedString("OK", comment: "OK"),
-                style: .default,
-                handler: nil
-            )
-        )
-        present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        present(alert, animated: true)
     }
-
-    // MARK: - Navigation
 
     private func goToOnboardingEnd() {
         let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
-        if let endVC = storyboard.instantiateViewController(
-            withIdentifier: "OnboardingEndViewController"
-        ) as? OnboardingEndViewController {
+        if let endVC = storyboard.instantiateViewController(withIdentifier: "OnboardingEndViewController") as? OnboardingEndViewController {
             if let nav = navigationController {
                 nav.pushViewController(endVC, animated: true)
             } else {
                 endVC.modalPresentationStyle = .fullScreen
-                present(endVC, animated: true, completion: nil)
+                present(endVC, animated: true)
             }
         }
     }
@@ -505,11 +417,9 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             nav.pushViewController(associationVC, animated: true)
         } else {
             associationVC.modalPresentationStyle = .fullScreen
-            present(associationVC, animated: true, completion: nil)
+            present(associationVC, animated: true)
         }
     }
-
-    // MARK: - Map helpers
 
     private func centerMap() {
         guard let c = selectedCoord else { return }
@@ -525,16 +435,11 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private func drawCircle() {
         mapView.removeOverlays(mapView.overlays)
         guard let c = selectedCoord else { return }
-
         let circle = MKCircle(center: c, radius: Double(currentRadiusKm) * 1000)
         mapView.addOverlay(circle)
     }
 
-    // MARK: - GMSAutocompleteViewControllerDelegate
-
-    func viewController(_ viewController: GMSAutocompleteViewController,
-                        didAutocompleteWith place: GMSPlace) {
-        print("✅ didAutocompleteWith place:", place.name ?? "nil", place.coordinate)
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         selectedPlace = place
         selectedCoord = place.coordinate
 
@@ -552,23 +457,17 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         viewController.dismiss(animated: true)
     }
 
-    func viewController(_ viewController: GMSAutocompleteViewController,
-                        didFailAutocompleteWithError error: Error) {
-        print("❌ didFailAutocompleteWithError:", error.localizedDescription)
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         viewController.dismiss(animated: true)
     }
 
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        print("ℹ️ Autocomplete wasCancelled")
         viewController.dismiss(animated: true)
     }
 }
 
-// MARK: - MKMapViewDelegate
-
 extension ZoneChoiceViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView,
-                 rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let circle = overlay as? MKCircle else {
             return MKOverlayRenderer(overlay: overlay)
         }
@@ -580,24 +479,15 @@ extension ZoneChoiceViewController: MKMapViewDelegate {
     }
 }
 
-// MARK: - UIButton font helper
-
-private extension UIButton {
-    func setFontBody(size: CGFloat) {
-        titleLabel?.font = UIFont(name: "NunitoSans-Regular", size: size)
-    }
-}
-
-// MARK: - Helper pour présenter depuis l’onboarding
-
 extension UIViewController {
-    func presentZoneChoiceSwiftUI(initialCoordinate: CLLocationCoordinate2D? = nil,
-                                  initialLabel: String? = nil,
-                                  initialRadiusKm: Int = 20,
-                                  nextStep: ZoneChoiceNextStep = .onboardingEnd,
-                                  onConfirm: @escaping (ZoneChoiceResult) -> Void,
-                                  onCancel: @escaping () -> Void) {
-
+    func presentZoneChoiceSwiftUI(
+        initialCoordinate: CLLocationCoordinate2D? = nil,
+        initialLabel: String? = nil,
+        initialRadiusKm: Int = 20,
+        nextStep: ZoneChoiceNextStep = .onboardingEnd,
+        onConfirm: @escaping (ZoneChoiceResult) -> Void,
+        onCancel: @escaping () -> Void
+    ) {
         let vc = ZoneChoiceViewController(
             initialCoordinate: initialCoordinate,
             initialLabel: initialLabel,
@@ -608,7 +498,6 @@ extension UIViewController {
             onCancel: onCancel
         )
 
-        // On affiche toujours en plein écran (sans barre de navigation visible)
         vc.modalPresentationStyle = .fullScreen
         if let nav = navigationController {
             nav.pushViewController(vc, animated: true)
