@@ -90,7 +90,7 @@ struct OnboardingSMSCodeView: View {
                 // --- Titre + numéro ---
                 VStack(alignment: .leading, spacing: 8) {
                     Text("onboard_sms_view_title")
-                        .font(.entourageTitle(24))
+                        .font(.entourageTitle(20))
                         .foregroundColor(.black)
 
                     Text("onboard_sms_view_sub")

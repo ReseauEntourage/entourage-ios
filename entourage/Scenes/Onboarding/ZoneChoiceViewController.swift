@@ -47,7 +47,10 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private let mapContainerView = UIView()
     private let mapView = MKMapView()
 
+    private let bottomBar = UIView()
+    private let previousButton = UIButton(type: .system)
     private let nextButton = UIButton(type: .system)
+    private let buttonsStack = UIStackView()
 
     private var selectedCoord: CLLocationCoordinate2D?
     private var selectedPlace: GMSPlace?
@@ -83,10 +86,10 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         view.backgroundColor = .systemBackground
         setupLayout()
         setupHeader()
-        setupCityField()
-        setupRadius()
+        setupCitySection()
+        setupRadiusSection()
         setupMap()
-        setupCTA()
+        setupBottomBar()
         setupInitialState()
     }
 
@@ -102,20 +105,20 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
     private func setupLayout() {
         view.addSubview(scrollView)
-        view.addSubview(nextButton)
+        view.addSubview(bottomBar)
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        bottomBar.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
+            bottomBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-            nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            nextButton.heightAnchor.constraint(equalToConstant: 56)
+            scrollView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor)
         ])
 
         scrollView.alwaysBounceVertical = true
@@ -134,9 +137,9 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
     private func setupHeader() {
         titleLabel.text = NSLocalizedString("onboarding_zone_title", comment: "")
-        titleLabel.font = UIFont(name: "Quicksand-Bold", size: 24)
-        titleLabel.textColor = .black
+        titleLabel.font = UIFont(name: "Quicksand-Bold", size: 20)
         titleLabel.numberOfLines = 0
+        titleLabel.textColor = UIColor(white: 0.1, alpha: 1.0)
 
         subtitleLabel.text = NSLocalizedString("onboarding_zone_subtitle", comment: "")
         subtitleLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
@@ -160,20 +163,21 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         ])
     }
 
-    private func setupCityField() {
-        let isPlaceholder = (initialLabel?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
-        let title = isPlaceholder ? "Ex. : Valence" : (initialLabel ?? "Ex. : Valence")
+    private func setupCitySection() {
+        let label = (initialLabel ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        let isPlaceholder = label.isEmpty
+        let buttonTitle = isPlaceholder ? "Ex. : Valence" : label
 
-        cityButton.setTitle(title, for: .normal)
+        cityButton.setTitle(buttonTitle, for: .normal)
+        cityButton.setTitleColor(isPlaceholder ? .secondaryLabel : .label, for: .normal)
         cityButton.titleLabel?.font = UIFont(name: "NunitoSans-Regular", size: 15)
         cityButton.contentHorizontalAlignment = .left
+        cityButton.contentVerticalAlignment = .center
         cityButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-        cityButton.setTitleColor(isPlaceholder ? .secondaryLabel : .label, for: .normal)
+        cityButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
 
-        let icon = UIImage(systemName: "magnifyingglass")
-        cityButton.setImage(icon, for: .normal)
+        cityButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         cityButton.tintColor = UIColor(white: 0.7, alpha: 1.0)
-        cityButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
 
         cityButton.backgroundColor = .white
         cityButton.layer.cornerRadius = 12
@@ -193,10 +197,10 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         ])
     }
 
-    private func setupRadius() {
+    private func setupRadiusSection() {
         radiusTitleLabel.text = NSLocalizedString("onboarding_zone_radius_title", comment: "")
-        radiusTitleLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
         radiusTitleLabel.textColor = .secondaryLabel
+        radiusTitleLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
 
         radiusValueLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
         radiusValueLabel.textAlignment = .right
@@ -205,7 +209,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         slider.minimumValue = 1
         slider.maximumValue = 100
         slider.value = Float(initialRadiusKm)
-        slider.minimumTrackTintColor = .appOrange
+        slider.minimumTrackTintColor = UIColor.appOrange
         slider.maximumTrackTintColor = UIColor(white: 0.85, alpha: 1.0)
         slider.thumbTintColor = .white
         slider.layer.shadowColor = UIColor.black.cgColor
@@ -263,41 +267,82 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             mapView.trailingAnchor.constraint(equalTo: mapContainerView.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor),
 
-            mapContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120)
+            mapContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
 
-    private func setupCTA() {
-        nextButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
-        nextButton.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 18)
-        nextButton.layer.cornerRadius = 28
-        nextButton.layer.masksToBounds = true
-        nextButton.setTitle(NSLocalizedString("Continuer", comment: ""), for: .normal)
-        nextButton.setTitleColor(.white, for: .normal)
+    private func setupBottomBar() {
+        bottomBar.backgroundColor = .clear
+
+        buttonsStack.axis = .horizontal
+        buttonsStack.alignment = .fill
+        buttonsStack.distribution = .fillEqually
+        buttonsStack.spacing = 12
+
+        bottomBar.addSubview(buttonsStack)
+        buttonsStack.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            buttonsStack.topAnchor.constraint(equalTo: bottomBar.topAnchor, constant: 12),
+            buttonsStack.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor, constant: 20),
+            buttonsStack.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor, constant: -20),
+            buttonsStack.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -12),
+            bottomBar.heightAnchor.constraint(greaterThanOrEqualToConstant: 74)
+        ])
+
+        configureWhiteButton(previousButton, withTitle: "previous".localized)
+        configureOrangeButton(nextButton, withTitle: "next".localized)
+
+        previousButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        previousButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
+
+        buttonsStack.addArrangedSubview(previousButton)
+        buttonsStack.addArrangedSubview(nextButton)
+
         updateNextButtonEnabled(false)
+    }
+
+    private func configureOrangeButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = UIColor.appOrange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
+    }
+
+    private func configureWhiteButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.appOrange.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        button.clipsToBounds = true
     }
 
     private func setupInitialState() {
         currentRadiusKm = initialRadiusKm
+        slider.value = Float(initialRadiusKm)
         updateRadiusValueLabel()
 
         if let c = initialCoordinate {
             selectedCoord = c
             selectedLabel = initialLabel
-
             if let label = initialLabel, !label.isEmpty {
                 cityButton.setTitle(label, for: .normal)
                 cityButton.setTitleColor(.label, for: .normal)
             }
-
             centerMap()
             drawCircle()
             updateNextButtonEnabled(true)
         } else {
             let franceCenter = CLLocationCoordinate2D(latitude: 46.5, longitude: 2.2)
-            let region = MKCoordinateRegion(center: franceCenter,
-                                            span: MKCoordinateSpan(latitudeDelta: 6.0, longitudeDelta: 6.0))
+            let region = MKCoordinateRegion(center: franceCenter, span: MKCoordinateSpan(latitudeDelta: 6.0, longitudeDelta: 6.0))
             mapView.setRegion(region, animated: false)
             updateNextButtonEnabled(false)
         }

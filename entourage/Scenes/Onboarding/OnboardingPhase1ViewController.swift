@@ -427,7 +427,7 @@ struct OnboardingPhase1View: View {
             VStack(alignment: .leading, spacing: 20) {
                 // Titre principal pour la section « Informations personnelles »
                 Text("Vos informations personnelles")
-                    .font(.entourageTitle(24))
+                    .font(.entourageTitle(20))
                     .padding(.leading, 0)
                     .padding(.top, 20)
 
