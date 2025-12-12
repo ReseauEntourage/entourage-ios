@@ -33,22 +33,22 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ecH-Vc-eaj">
-                                        <rect key="frame" x="20" y="106.33333333333333" width="345" height="725.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="106.3333333333333" width="385" height="745.66666666666674"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="ecH-Vc-eaj" firstAttribute="top" secondItem="1OJ-iG-Y3p" secondAttribute="bottom" constant="20" id="5YB-W5-pdc"/>
-                                    <constraint firstItem="ecH-Vc-eaj" firstAttribute="leading" secondItem="OUD-Nn-7Xp" secondAttribute="leading" constant="20" id="TKn-c3-E65"/>
+                                    <constraint firstItem="ecH-Vc-eaj" firstAttribute="leading" secondItem="OUD-Nn-7Xp" secondAttribute="leading" id="TKn-c3-E65"/>
                                     <constraint firstItem="1OJ-iG-Y3p" firstAttribute="leading" secondItem="OUD-Nn-7Xp" secondAttribute="leading" constant="20" id="Tim-gO-ior"/>
-                                    <constraint firstAttribute="bottom" secondItem="ecH-Vc-eaj" secondAttribute="bottom" constant="20" id="Vnw-WM-FgX"/>
+                                    <constraint firstAttribute="bottom" secondItem="ecH-Vc-eaj" secondAttribute="bottom" id="Vnw-WM-FgX"/>
                                     <constraint firstItem="1OJ-iG-Y3p" firstAttribute="top" secondItem="OUD-Nn-7Xp" secondAttribute="top" constant="60" id="jnj-Fd-2mg"/>
-                                    <constraint firstAttribute="trailing" secondItem="ecH-Vc-eaj" secondAttribute="trailing" constant="20" id="wpI-pc-qbV"/>
+                                    <constraint firstAttribute="trailing" secondItem="ecH-Vc-eaj" secondAttribute="trailing" id="wpI-pc-qbV"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                        <real key="value" value="35"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>

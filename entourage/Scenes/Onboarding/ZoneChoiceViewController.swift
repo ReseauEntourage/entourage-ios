@@ -1,8 +1,3 @@
-//
-//  ZoneChoiceViewController.swift
-//  entourage
-//
-
 import UIKit
 import MapKit
 import GooglePlaces
@@ -10,6 +5,8 @@ import CoreLocation
 
 // MARK: - Result
 
+/// Représente le résultat d’un choix de zone : un lieu (facultatif), un
+/// point GPS, un libellé et un rayon en kilomètres.
 struct ZoneChoiceResult {
     let place: GMSPlace?
     let coordinate: CLLocationCoordinate2D?
@@ -33,6 +30,11 @@ protocol ZoneChoiceViewControllerDelegate: AnyObject {
 
 // MARK: - ViewController
 
+/// Contrôleur de choix de zone. Il permet à l’utilisateur de sélectionner
+/// une ville ou une adresse, de définir un rayon et de visualiser la zone
+/// choisie sur une carte. Les marges latérales sont de 20 points et les
+/// espacements verticaux principaux sont harmonisés pour s’aligner avec les
+/// autres écrans de l’onboarding.
 final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewControllerDelegate {
 
     // MARK: - Public API
@@ -171,8 +173,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private func setupHeader() {
         titleLabel.text = NSLocalizedString("onboarding_zone_title",
                                             comment: "Votre localisation")
-        // Aligné avec les autres steps (≈ 20)
-        titleLabel.setFontTitle(size: 20)
+        // Aligné avec les autres steps
+        titleLabel.font = UIFont(name: "Quicksand-Bold", size: 20)
         titleLabel.numberOfLines = 0
         titleLabel.textColor = UIColor(white: 0.1, alpha: 1.0)
 
@@ -180,7 +182,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             "onboarding_zone_subtitle",
             comment: "Cette information nous permet d’affiner les actions proches de chez vous."
         )
-        subtitleLabel.setFontBody(size: 14)
+        subtitleLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
         subtitleLabel.textColor = .secondaryLabel
         subtitleLabel.numberOfLines = 0
 
@@ -191,9 +193,9 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
 
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
@@ -215,7 +217,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         }
 
         cityButton.setTitle(buttonTitle, for: .normal)
-        cityButton.setFontBody(size: 16)
+        cityButton.titleLabel?.font = UIFont(name: "NunitoSans-Regular", size: 16)
         cityButton.contentHorizontalAlignment = .left
         cityButton.contentVerticalAlignment = .center
         cityButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
@@ -248,18 +250,15 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             cityButton.leadingAnchor.constraint(equalTo: subtitleLabel.leadingAnchor),
             cityButton.trailingAnchor.constraint(equalTo: subtitleLabel.trailingAnchor)
         ])
-
-        // Texte "L'adresse est confidentielle..." supprimé
     }
 
     private func setupRadiusSection() {
         radiusTitleLabel.text = NSLocalizedString("onboarding_zone_radius_title",
                                                   comment: "Dans un rayon de")
-        // Texte en GRIS (vs bleu)
         radiusTitleLabel.textColor = .secondaryLabel
-        radiusTitleLabel.setFontBody(size: 14)
+        radiusTitleLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
 
-        radiusValueLabel.setFontBody(size: 14)
+        radiusValueLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
         radiusValueLabel.textAlignment = .right
         radiusValueLabel.textColor = UIColor(white: 0.2, alpha: 1.0)
 
@@ -290,7 +289,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             radiusValueLabel.centerYAnchor.constraint(equalTo: radiusTitleLabel.centerYAnchor),
             radiusValueLabel.trailingAnchor.constraint(equalTo: cityButton.trailingAnchor),
 
-            slider.topAnchor.constraint(equalTo: radiusTitleLabel.bottomAnchor, constant: 12),
+            slider.topAnchor.constraint(equalTo: radiusTitleLabel.bottomAnchor, constant: 20),
             slider.leadingAnchor.constraint(equalTo: radiusTitleLabel.leadingAnchor),
             slider.trailingAnchor.constraint(equalTo: radiusValueLabel.trailingAnchor)
         ])
@@ -324,54 +323,29 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             mapView.trailingAnchor.constraint(equalTo: mapContainerView.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor),
 
-            mapContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
+            mapContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
 
-    private func setupBottomBar() {
-        bottomBar.backgroundColor = .systemBackground
-
-        // Pas de ligne horizontale (supprimée)
-        // → pas de separator view
-
-        // Bouton précédent
-        previousButton.setTitle(NSLocalizedString("onboard_bt_back", comment: "Précédent"), for: .normal)
-        previousButton.setTitleColor(.black, for: .normal)
-        previousButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // texte en BOLD
-        previousButton.layer.cornerRadius = 22
-        previousButton.layer.borderWidth = 1
-        previousButton.layer.borderColor = UIColor.appOrange.cgColor
-        previousButton.backgroundColor = .white
-        previousButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
-
-        // Bouton suivant
-        nextButton.setTitle(NSLocalizedString("onboard_bt_next", comment: "Suivant"), for: .normal)
-        nextButton.setTitleColor(.white, for: .normal)
-        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16) // texte en BOLD
-        nextButton.backgroundColor = .appOrange
-        nextButton.layer.cornerRadius = 22
-        nextButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
-
-        bottomBar.addSubview(previousButton)
-        bottomBar.addSubview(nextButton)
-
-        previousButton.translatesAutoresizingMaskIntoConstraints = false
+        private func setupBottomBar() {
+        // CTA unique (comme les autres steps) : un seul bouton "Suivant" en bas à droite.
+        view.addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            previousButton.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor, constant: 24),
-            previousButton.topAnchor.constraint(equalTo: bottomBar.topAnchor, constant: 12),
-            previousButton.heightAnchor.constraint(equalToConstant: 44),
-
-            nextButton.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor, constant: -24),
-            nextButton.centerYAnchor.constraint(equalTo: previousButton.centerYAnchor),
-            nextButton.heightAnchor.constraint(equalToConstant: 44),
-
-            previousButton.trailingAnchor.constraint(equalTo: bottomBar.centerXAnchor, constant: -8),
-            nextButton.leadingAnchor.constraint(equalTo: bottomBar.centerXAnchor, constant: 8),
-
-            nextButton.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -12)
+            nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            nextButton.heightAnchor.constraint(equalToConstant: 56)
         ])
+
+        // Style "pill"
+        nextButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
+        nextButton.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 18)
+        nextButton.layer.cornerRadius = 28
+        nextButton.layer.masksToBounds = true
+
+        nextButton.addTarget(self, action: #selector(nextTapped), for: .touchUpInside)
+        updateNextEnabled()
     }
 
     private func setupInitialState() {
@@ -610,7 +584,7 @@ extension ZoneChoiceViewController: MKMapViewDelegate {
 
 private extension UIButton {
     func setFontBody(size: CGFloat) {
-        titleLabel?.setFontBody(size: size)
+        titleLabel?.font = UIFont(name: "NunitoSans-Regular", size: size)
     }
 }
 

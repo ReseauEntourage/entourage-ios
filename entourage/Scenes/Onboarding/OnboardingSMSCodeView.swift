@@ -1,6 +1,28 @@
 import SwiftUI
 import UIKit
 
+// MARK: - Fonts SwiftUI (Quicksand‑Bold & NunitoSans‑Regular)
+//
+// Définition des polices utilisées dans cette vue. Comme dans les autres
+// écrans de l’onboarding, les titres utilisent Quicksand‑Bold taille 20
+// et le corps utilise NunitoSans‑Regular taille 15.
+private extension Font {
+    static func entourageTitle(_ size: CGFloat = 20) -> Font {
+        .custom("Quicksand-Bold", size: size)
+    }
+    static func entourageBody(_ size: CGFloat = 15) -> Font {
+        .custom("NunitoSans-Regular", size: size)
+    }
+}
+
+/// Écran de saisie du code SMS. Ce composant est présenté après la
+/// validation du numéro de téléphone. Il affiche un rappel du numéro
+/// formaté, permet à l’utilisateur de saisir un code à six chiffres,
+/// indique un compte à rebours avant de pouvoir redemander un code et
+/// propose des liens vers l’aide et les conditions d’utilisation. Les
+/// marges latérales sont fixées à 20 points et les espaces verticaux
+/// principaux à 20 points afin de s’accorder avec le reste de
+/// l’onboarding.
 struct OnboardingSMSCodeView: View {
     // MARK: - Inputs
 
@@ -45,7 +67,7 @@ struct OnboardingSMSCodeView: View {
 
     /// Texte au-dessus du lien "Renvoyer le code"
     ///
-    /// Localizable attendus :
+    /// Localisable attendu :
     ///  - "onboard_sms_view_wait_countdown" = "Vous pourrez demander un nouveau code dans %@";
     ///  - "onboard_sms_view_wait_ready" = "Vous pouvez demander un nouveau code.";
     private var retryTitle: String {
@@ -63,38 +85,40 @@ struct OnboardingSMSCodeView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 24) {
+            VStack(spacing: 20) {
 
                 // --- Titre + numéro ---
                 VStack(alignment: .leading, spacing: 8) {
                     Text("onboard_sms_view_title")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(Color(UIColor.appBlack30))
+                        .font(.entourageTitle(24))
+                        .foregroundColor(.black)
 
                     Text("onboard_sms_view_sub")
-                        .font(.system(size: 15))
+                        .font(.entourageBody(15))
                         .foregroundColor(Color(UIColor.appGrey151))
 
                     HStack(spacing: 8) {
                         Text(formattedPhone)
                             .font(.system(size: 17, weight: .semibold))
-                            .foregroundColor(Color(UIColor.appBlack30))
+                            .foregroundColor(.black)
                         // Si un jour tu veux remettre "Modifier", on a encore onModifyPhone()
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 16)
-                .padding(.top, 8)
+                .padding(.horizontal, 20)
+                // top à 60 comme demandé / Phase1-like
+                .padding(.top, 20)
+                .padding(.bottom, 8)
 
                 // --- OTP : 6 cases séparées ---
                 otpRow
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 20)
                     .padding(.top, 8)
 
                 // --- Bloc "Vous n'avez pas reçu votre code ?" avec timer ---
                 VStack(spacing: 8) {
                     Text(retryTitle)
-                        .font(.system(size: 15))
+                        .font(.entourageBody(15))
                         .foregroundColor(Color(UIColor.appGrey151))
                         .multilineTextAlignment(.center)
 
@@ -104,7 +128,7 @@ struct OnboardingSMSCodeView: View {
                         }
                     }) {
                         Text("onboard_retry_view_link")
-                            .font(.system(size: 15))
+                            .font(.entourageBody(15))
                             .foregroundColor(Color(UIColor.appOrange))
                             .underline(canRetry, color: Color(UIColor.appOrange))
                             .multilineTextAlignment(.center)
@@ -112,7 +136,7 @@ struct OnboardingSMSCodeView: View {
                     }
                     .disabled(!canRetry)
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, 20)
                 .padding(.top, 12)
 
                 // --- Bloc aide ---
@@ -123,16 +147,16 @@ struct OnboardingSMSCodeView: View {
 
                     Button(action: { openHelpEmail() }) {
                         Text("onboard_help_view_link")
-                            .font(.system(size: 15))
+                            .font(.entourageBody(15))
                             .foregroundColor(.black)
                             .underline()
                     }
                 }
-                .padding(.top, 28)
+                .padding(.top, 20)
 
                 // --- CGU / Politique de confidentialité ---
                 termsAndConditionsView
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 20)
 
                 Spacer()
             }
@@ -232,24 +256,24 @@ struct OnboardingSMSCodeView: View {
             }
         }
     }
-    
+
     private func showTermsActionSheet() {
         guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = scene.windows.first,
               let rootVC = window.rootViewController else { return }
-        
+
         let alert = UIAlertController(title: "Ouvrir", message: nil, preferredStyle: .actionSheet)
-        
+
         alert.addAction(UIAlertAction(title: "Conditions Générales d'Utilisation", style: .default) { _ in
             openURL("https://www.entourage.social/conditions-generales-dutilisation")
         })
-        
+
         alert.addAction(UIAlertAction(title: "Politique de confidentialité", style: .default) { _ in
             openURL("https://www.entourage.social/politique-de-confidentialite")
         })
-        
+
         alert.addAction(UIAlertAction(title: "Annuler", style: .cancel))
-        
+
         rootVC.present(alert, animated: true)
     }
 

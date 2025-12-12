@@ -105,7 +105,7 @@ final class OnboardingPhase3ViewController: UIViewController {
             ui_next_btn.setTitleColor(.white, for: .normal)
         } else {
             // État désactivé : orange clair (comme dans OnboardingStartViewController)
-            ui_next_btn.backgroundColor = .appOrangeLight_50
+            ui_next_btn.backgroundColor = .appBeigeClair
             ui_next_btn.setTitleColor(.white, for: .normal)
         }
     }
