@@ -218,20 +218,31 @@ final class OnboardingPhase3ViewController: UIViewController {
 
     @objc private func onNext() {
         dismissKeyboard()
-
-        // Si rien n’est sélectionné, on ne fait rien
         guard userTypeSelected != .none else { return }
 
-        // Pour ce flux-là, on laisse Phase3 pousser ZoneChoice directement.
-        // Si asso -> flow association, sinon -> fin d’onboarding classique.
-        let nextStep: ZoneChoiceNextStep = isAsso
-            ? .associationOnboarding
-            : .onboardingEnd
+        let nextStep: ZoneChoiceNextStep = isAsso ? .associationOnboarding : .onboardingEnd
+
+        let user = UserDefaults.currentUser
+        let radius = max(1, user?.radiusDistance ?? 20)
+
+        var coord: CLLocationCoordinate2D? = nil
+        var label: String? = nil
+
+        if let addr = user?.addressPrimary {
+            if let lat = addr.latitude, let lon = addr.longitude {
+                coord = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            }
+
+            if let l = addr.displayAddress,
+               !l.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty {
+                label = l
+            }
+        }
 
         let zoneVC = ZoneChoiceViewController(
-            initialCoordinate: nil,
-            initialLabel: nil,
-            initialRadiusKm: 20,
+            initialCoordinate: coord,
+            initialLabel: label,
+            initialRadiusKm: radius,
             delegate: nil,
             nextStep: nextStep,
             onConfirm: { _ in },
@@ -245,6 +256,7 @@ final class OnboardingPhase3ViewController: UIViewController {
             present(zoneVC, animated: true)
         }
     }
+
 
     private func dismissKeyboard() {
         view.endEditing(true)

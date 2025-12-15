@@ -337,7 +337,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
                 cityButton.setTitle(label, for: .normal)
                 cityButton.setTitleColor(.label, for: .normal)
             }
-            centerMap()
+            centerMap(animated: false)
             drawCircle()
             updateNextButtonEnabled(true)
         } else {
@@ -354,7 +354,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         slider.value = Float(currentRadiusKm)
         updateRadiusValueLabel()
         drawCircle()
-        centerMap()
+        centerMap(animated: true)
     }
 
     private func updateRadiusValueLabel() {
@@ -377,12 +377,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     @objc private func cancelTapped() {
         delegate?.zoneChoiceCancelled()
         onCancelClosure?()
-
-        if let nav = navigationController {
-            nav.popViewController(animated: true)
-        } else {
-            dismiss(animated: true)
-        }
+        dismiss(animated: true)
     }
 
     @objc private func confirmTapped() {
@@ -403,6 +398,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
         updateNextButtonEnabled(false)
 
+        let googlePlaceId = selectedPlace?.placeID
+
         AuthService.updateTravelDistance(currentRadiusKm) { [weak self] error in
             guard let self = self else { return }
 
@@ -412,7 +409,6 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
                 return
             }
 
-            let googlePlaceId = self.selectedPlace?.placeID
             AuthService.updatePrimaryAddress(
                 googlePlaceId: googlePlaceId,
                 coordinate: coord,
@@ -420,20 +416,38 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             ) { [weak self] error2 in
                 guard let self = self else { return }
 
-                self.updateNextButtonEnabled(true)
-
                 guard error2 == nil else {
+                    self.updateNextButtonEnabled(true)
                     self.showZoneError()
                     return
                 }
 
-                switch self.nextStep {
-                case .onboardingEnd:
-                    self.goToOnboardingEnd()
-                case .associationOnboarding:
-                    self.goToAssociationOnboarding()
+                guard let sid = UserDefaults.currentUser?.sid else {
+                    self.updateNextButtonEnabled(true)
+                    self.routeNextStep()
+                    return
+                }
+
+                UserService.getDetailsForUser(userId: String(sid)) { [weak self] user, _ in
+                    guard let self = self else { return }
+
+                    if let user = user {
+                        UserDefaults.currentUser = user
+                    }
+
+                    self.updateNextButtonEnabled(true)
+                    self.routeNextStep()
                 }
             }
+        }
+    }
+
+    private func routeNextStep() {
+        switch nextStep {
+        case .onboardingEnd:
+            goToOnboardingEnd()
+        case .associationOnboarding:
+            goToAssociationOnboarding()
         }
     }
 
@@ -446,13 +460,12 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
     private func goToOnboardingEnd() {
         let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
-        if let endVC = storyboard.instantiateViewController(withIdentifier: "OnboardingEndViewController") as? OnboardingEndViewController {
-            if let nav = navigationController {
-                nav.pushViewController(endVC, animated: true)
-            } else {
-                endVC.modalPresentationStyle = .fullScreen
-                present(endVC, animated: true)
-            }
+        let endVC = storyboard.instantiateViewController(withIdentifier: "OnboardingEndViewController")
+        if let nav = navigationController {
+            nav.pushViewController(endVC, animated: true)
+        } else {
+            endVC.modalPresentationStyle = .fullScreen
+            present(endVC, animated: true)
         }
     }
 
@@ -470,7 +483,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         }
     }
 
-    private func centerMap() {
+    private func centerMap(animated: Bool) {
         guard let c = selectedCoord else { return }
 
         let region = MKCoordinateRegion(
@@ -478,7 +491,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             latitudinalMeters: Double(currentRadiusKm) * 2200,
             longitudinalMeters: Double(currentRadiusKm) * 2200
         )
-        mapView.setRegion(region, animated: true)
+        mapView.setRegion(region, animated: animated)
     }
 
     private func drawCircle() {
@@ -499,7 +512,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         cityButton.setTitle(label, for: .normal)
         cityButton.setTitleColor(.label, for: .normal)
 
-        centerMap()
+        centerMap(animated: true)
         drawCircle()
         updateNextButtonEnabled(true)
 
@@ -547,11 +560,50 @@ extension UIViewController {
             onCancel: onCancel
         )
 
-        vc.modalPresentationStyle = .fullScreen
-        if let nav = navigationController {
-            nav.pushViewController(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
+}
+
+private func logRequest(tag: String,
+                               method: String,
+                               endpoint: String,
+                               headers: [String: String]?,
+                               body: Data?) {
+    Logger.print("[\(tag)] \(method) \(endpoint)")
+    if let headers = headers, !headers.isEmpty {
+        Logger.print("[\(tag)] headers: \(headers)")
+    } else {
+        Logger.print("[\(tag)] headers: nil")
+    }
+    if let body = body {
+        if let obj = try? JSONSerialization.jsonObject(with: body, options: []),
+           let pretty = try? JSONSerialization.data(withJSONObject: obj, options: [.prettyPrinted]),
+           let s = String(data: pretty, encoding: .utf8) {
+            Logger.print("[\(tag)] body:\n\(s)")
+        } else if let s = String(data: body, encoding: .utf8) {
+            Logger.print("[\(tag)] body(raw):\n\(s)")
         } else {
-            present(vc, animated: true)
+            Logger.print("[\(tag)] body: <\(body.count) bytes>")
         }
+    } else {
+        Logger.print("[\(tag)] body: nil")
+    }
+}
+
+private func logResponse(tag: String,
+                                resp: URLResponse?,
+                                data: Data?,
+                                error: EntourageNetworkError?) {
+    let status = (resp as? HTTPURLResponse)?.statusCode ?? -1
+    Logger.print("[\(tag)] status: \(status)")
+    if let data = data, let s = String(data: data, encoding: .utf8) {
+        Logger.print("[\(tag)] response body:\n\(s)")
+    }
+    if let error = error {
+        Logger.print("[\(tag)] error: \(String(describing: error.message))")
+    } else {
+        Logger.print("[\(tag)] error: nil")
     }
 }

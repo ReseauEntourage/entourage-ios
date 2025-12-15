@@ -215,11 +215,16 @@ extension AuthService {
     /// Met à jour l'adresse primaire (users/me/addresses/1) :
     /// - si googlePlaceId non nul -> google_place_id
     /// - sinon latitude / longitude / place_name
-    static func updatePrimaryAddress(googlePlaceId: String?,
-                                     coordinate: CLLocationCoordinate2D?,
-                                     label: String?,
-                                     completion: @escaping (EntourageNetworkError?) -> Void) {
+    static func updatePrimaryAddress(
+        googlePlaceId: String?,
+        coordinate: CLLocationCoordinate2D?,
+        label: String?,
+        completion: @escaping (EntourageNetworkError?) -> Void
+    ) {
+        let tag = "[debug address]"
+
         guard let token = UserDefaults.token else {
+            Logger.print("\(tag) ❌ missing token")
             completion(EntourageNetworkError())
             return
         }
@@ -229,17 +234,18 @@ extension AuthService {
 
         var addressParams: [String: Any] = [:]
 
-        if let placeId = googlePlaceId, !placeId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            // Cas Android : google_place_id uniquement
+        if let placeId = googlePlaceId,
+           !placeId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             addressParams["google_place_id"] = placeId
         } else if let coord = coordinate {
             addressParams["latitude"] = coord.latitude
             addressParams["longitude"] = coord.longitude
-            if let label = label, !label.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if let label = label,
+               !label.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 addressParams["place_name"] = label
             }
         } else {
-            // Pas assez d'infos pour envoyer une adresse
+            Logger.print("\(tag) ❌ no address data to send")
             completion(EntourageNetworkError())
             return
         }
@@ -247,22 +253,92 @@ extension AuthService {
         let parameters: [String: Any] = ["address": addressParams]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
 
-        Logger.print("[AuthService] updatePrimaryAddress params: \(parameters)")
+        // -------- REQUEST LOG --------
+        Logger.print("\(tag) ▶️ REQUEST")
+        Logger.print("\(tag) URL: \(endpoint)")
+        Logger.print("\(tag) METHOD: PUT")
 
-        NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
-            let status = (resp as? HTTPURLResponse)?.statusCode ?? -1
-            Logger.print("[AuthService] updatePrimaryAddress status: \(status)")
+        if let json = String(data: bodyData, encoding: .utf8) {
+            Logger.print("\(tag) BODY: \(json)")
+        } else {
+            Logger.print("\(tag) BODY: <unreadable>")
+        }
 
-            if let data = data, let s = String(data: data, encoding: .utf8) {
-                Logger.print("[AuthService] updatePrimaryAddress body: \(s)")
+        NetworkManager.sharedInstance.requestPost(
+            endPoint: endpoint,
+            headers: nil,
+            body: bodyData
+        ) { data, resp, error in
+
+            let statusCode = (resp as? HTTPURLResponse)?.statusCode ?? -1
+
+            // -------- RESPONSE LOG --------
+            Logger.print("\(tag) ◀️ RESPONSE")
+            Logger.print("\(tag) STATUS CODE: \(statusCode)")
+
+            if let data = data, let body = String(data: data, encoding: .utf8) {
+                Logger.print("\(tag) RESPONSE BODY: \(body)")
+            } else {
+                Logger.print("\(tag) RESPONSE BODY: <empty>")
             }
 
-            guard error == nil, let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+            if let error = error {
+                Logger.print("\(tag) ERROR OBJECT: \(error)")
+                Logger.print("\(tag) ERROR MESSAGE: \(error.message ?? "nil")")
+            } else {
+                Logger.print("\(tag) ERROR OBJECT: nil")
+            }
+
+            guard error == nil, statusCode < 300 else {
                 DispatchQueue.main.async { completion(error) }
                 return
             }
 
             DispatchQueue.main.async { completion(nil) }
         }
+    }
+
+
+}
+
+private func logRequest(tag: String,
+                               method: String,
+                               endpoint: String,
+                               headers: [String: String]?,
+                               body: Data?) {
+    Logger.print("[\(tag)] \(method) \(endpoint)")
+    if let headers = headers, !headers.isEmpty {
+        Logger.print("[\(tag)] headers: \(headers)")
+    } else {
+        Logger.print("[\(tag)] headers: nil")
+    }
+    if let body = body {
+        if let obj = try? JSONSerialization.jsonObject(with: body, options: []),
+           let pretty = try? JSONSerialization.data(withJSONObject: obj, options: [.prettyPrinted]),
+           let s = String(data: pretty, encoding: .utf8) {
+            Logger.print("[\(tag)] body:\n\(s)")
+        } else if let s = String(data: body, encoding: .utf8) {
+            Logger.print("[\(tag)] body(raw):\n\(s)")
+        } else {
+            Logger.print("[\(tag)] body: <\(body.count) bytes>")
+        }
+    } else {
+        Logger.print("[\(tag)] body: nil")
+    }
+}
+
+private func logResponse(tag: String,
+                                resp: URLResponse?,
+                                data: Data?,
+                                error: EntourageNetworkError?) {
+    let status = (resp as? HTTPURLResponse)?.statusCode ?? -1
+    Logger.print("[\(tag)] status: \(status)")
+    if let data = data, let s = String(data: data, encoding: .utf8) {
+        Logger.print("[\(tag)] response body:\n\(s)")
+    }
+    if let error = error {
+        Logger.print("[\(tag)] error: \(String(describing: error.message))")
+    } else {
+        Logger.print("[\(tag)] error: nil")
     }
 }

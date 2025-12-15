@@ -21,7 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var environmentConfigManager:EnvironmentConfigurationManager?
-    
+    var homeEntryGatingDidPresentCriticalThisSession = false
+    var homeEntryGatingDidPresentNotifThisSession = false
+    var homeEntryGatingDidPresentEnhancedThisSession = false
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
