@@ -47,12 +47,12 @@ struct AssociationOnboardingView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text(NSLocalizedString("onboard_asso_title", comment: ""))
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(.black)
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(Color(UIColor.label))
                         .padding(.top, 24)
 
                     Text(NSLocalizedString("onboard_asso_subtitle", comment: ""))
-                        .font(.system(size: 14))
+                        .font(.system(size: 14, weight: .regular))
                         .foregroundColor(Color(UIColor.secondaryLabel))
 
                     dropdownSection
@@ -69,7 +69,7 @@ struct AssociationOnboardingView: View {
 
             if let error = errorMessage {
                 Text(error)
-                    .font(.system(size: 13))
+                    .font(.system(size: 13, weight: .regular))
                     .foregroundColor(.red)
                     .padding(.horizontal, 22)
                     .padding(.bottom, 4)
@@ -82,11 +82,7 @@ struct AssociationOnboardingView: View {
     }
 
     private var dropdownSection: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(NSLocalizedString("onboard_asso_dropdown_hint", comment: ""))
-                .font(.system(size: 13))
-                .foregroundColor(.gray)
-
+        VStack(alignment: .leading, spacing: 0) {
             Menu {
                 ForEach(associations, id: \.self) { assoc in
                     Button(assoc) {
@@ -98,23 +94,23 @@ struct AssociationOnboardingView: View {
                     }
                 }
             } label: {
-                HStack {
-                    Text(selectedAssociation ?? NSLocalizedString("onboard_asso_dropdown_hint", comment: ""))
-                        .foregroundColor(selectedAssociation == nil ? .gray : .black)
-                        .font(.system(size: 15))
+                HStack(spacing: 10) {
+                    Text(selectedAssociation ?? NSLocalizedString("onboard_asso_dropdown_placeholder", comment: ""))
+                        .foregroundColor(selectedAssociation == nil ? Color(UIColor.secondaryLabel) : Color(UIColor.label))
+                        .font(.system(size: 15, weight: .regular))
+                        .lineLimit(1)
 
-                    Spacer()
+                    Spacer(minLength: 0)
 
                     Image(systemName: "chevron.down")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Color(UIColor.tertiaryLabel))
+                        .font(.system(size: 14, weight: .semibold))
                 }
-                .padding(.horizontal, 12)
-                .frame(height: 44)
+                .padding(.horizontal, 14)
+                .frame(height: 48)
                 .background(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color(UIColor.lightGray), lineWidth: 1)
-                        .background(Color.white.cornerRadius(8))
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color(UIColor.secondarySystemBackground))
                 )
             }
         }
@@ -122,43 +118,43 @@ struct AssociationOnboardingView: View {
     }
 
     private var otherAssociationCard: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .top, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top, spacing: 12) {
                 Image(systemName: "info.circle.fill")
-                    .font(.system(size: 18))
-                    .foregroundColor(Color(red: 0.85, green: 0.45, blue: 0))
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(Color(UIColor.appOrange ?? .orange))
+                    .frame(width: 20, alignment: .leading)
 
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: 12) {
                     Text(NSLocalizedString("onboard_asso_info", comment: ""))
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(red: 0.42, green: 0.23, blue: 0))
+                        .font(.system(size: 13, weight: .regular))
+                        .foregroundColor(Color(UIColor.label))
+                        .fixedSize(horizontal: false, vertical: true)
 
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text(NSLocalizedString("onboard_asso_other_label", comment: ""))
-                            .font(.system(size: 12))
-                            .foregroundColor(.gray)
+                            .font(.system(size: 13, weight: .regular))
+                            .foregroundColor(Color(UIColor.label))
 
                         TextField(NSLocalizedString("onboard_asso_other_placeholder", comment: ""), text: $otherName)
+                            .font(.system(size: 13, weight: .regular))
+                            .foregroundColor(Color(UIColor.label))
                             .textFieldStyle(PlainTextFieldStyle())
-                            .padding(.horizontal, 8)
-                            .frame(height: 40)
-                            .background(Color.white)
+                            .padding(.horizontal, 12)
+                            .frame(height: 44)
+                            .background(Color(UIColor.systemBackground))
                             .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(Color(UIColor.lightGray), lineWidth: 1)
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color(UIColor.separator), lineWidth: 1)
                             )
                     }
                 }
             }
         }
-        .padding(12)
+        .padding(16)
         .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(red: 1.0, green: 0.95, blue: 0.9))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(Color(red: 1.0, green: 0.78, blue: 0.54), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 14)
+                .fill(Color(UIColor.secondarySystemBackground))
         )
         .padding(.top, 14)
     }
@@ -168,7 +164,7 @@ struct AssociationOnboardingView: View {
             Button(action: onBack) {
                 Text(NSLocalizedString("previous", comment: "Précédent"))
                     .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(.black)
+                    .foregroundColor(Color(UIColor.label))
                     .frame(maxWidth: .infinity)
                     .frame(height: 47)
                     .background(
@@ -223,6 +219,7 @@ final class AssociationOnboardingViewController: UIViewController {
 
     private let initialAddress: String?
     private let initialCoordinate: CLLocationCoordinate2D?
+    private var wasNavBarHidden: Bool = false
 
     init(initialAddress: String? = nil, initialCoordinate: CLLocationCoordinate2D? = nil) {
         self.initialAddress = initialAddress
@@ -240,6 +237,17 @@ final class AssociationOnboardingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         loadAssociations()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        wasNavBarHidden = navigationController?.isNavigationBarHidden ?? false
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(wasNavBarHidden, animated: false)
     }
 
     private func loadAssociations() {
