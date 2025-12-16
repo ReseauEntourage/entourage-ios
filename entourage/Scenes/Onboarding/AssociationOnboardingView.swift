@@ -51,18 +51,24 @@ struct AssociationOnboardingView: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
+                    // Titre aligné à gauche
                     Text(NSLocalizedString("onboard_asso_title", comment: ""))
                         .font(.entourageTitle(20))
                         .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 20)
 
+                    // Sous-titre aligné à gauche, 20 points en dessous du titre
                     Text(NSLocalizedString("onboard_asso_subtitle", comment: ""))
                         .font(.entourageBody(15))
                         .foregroundColor(Color(UIColor.appGrey151))
-                        .padding(.top, 20) // 20 points entre le titre et le sous-titre
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 20)
 
+                    // Sélecteur aligné à gauche, 5 points en dessous du sous-titre
                     dropdownSection
-                        .padding(.top, 5) // 5 points entre le sous-titre et le sélecteur
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 5)
 
                     if isOtherSelected {
                         otherAssociationCard
@@ -143,6 +149,7 @@ struct AssociationOnboardingView: View {
                         .textFieldStyle(PlainTextFieldStyle())
                         .padding(.horizontal, 8)
                         .frame(height: 40)
+                        .font(.entourageBody(15))
                         .background(Color.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 6)
