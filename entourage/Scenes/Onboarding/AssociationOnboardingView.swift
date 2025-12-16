@@ -124,7 +124,7 @@ struct AssociationOnboardingView: View {
     }
 
     private var otherAssociationCard: some View {
-        HStack(alignment: .top, spacing: 20) {
+        HStack(alignment: .top, spacing: 10) {
             Image(systemName: "info.circle.fill")
                 .font(.system(size: 18))
                 .foregroundColor(Color(UIColor.appOrange))
@@ -156,7 +156,7 @@ struct AssociationOnboardingView: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color(red: 1.0, green: 0.95, blue: 0.9))
         )
-        .padding(.top, 14)
+        .padding(.top, 20)
     }
 
     private var bottomBar: some View {
