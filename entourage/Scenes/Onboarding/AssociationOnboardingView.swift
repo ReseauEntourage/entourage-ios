@@ -82,7 +82,7 @@ struct AssociationOnboardingView: View {
 
             if let error = errorMessage {
                 Text(error)
-                    .font(.entourageBody(13))
+                    .font(.entourageBody(15))
                     .foregroundColor(.red)
                     .padding(.horizontal, 20)
                     .padding(.bottom, 4)
@@ -137,12 +137,12 @@ struct AssociationOnboardingView: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(NSLocalizedString("onboard_asso_info", comment: ""))
-                    .font(.entourageBody(13))
+                    .font(.entourageBody(15))
                     .foregroundColor(.black)
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(NSLocalizedString("onboard_asso_other_label", comment: ""))
-                        .font(.entourageBody(12))
+                        .font(.entourageBody(15))
                         .foregroundColor(.black)
 
                     TextField(NSLocalizedString("onboard_asso_other_placeholder", comment: ""), text: $otherName)
@@ -170,7 +170,7 @@ struct AssociationOnboardingView: View {
         HStack(spacing: 8) {
             Button(action: onBack) {
                 Text(NSLocalizedString("previous", comment: ""))
-                    .font(.entourageBody(14))
+                    .font(.entourageBody(15))
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
@@ -184,7 +184,7 @@ struct AssociationOnboardingView: View {
 
             Button(action: validateTapped) {
                 Text(NSLocalizedString("next", comment: ""))
-                    .font(.entourageBody(14))
+                    .font(.entourageBody(15))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
