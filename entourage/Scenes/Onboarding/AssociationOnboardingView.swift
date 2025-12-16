@@ -1,4 +1,4 @@
-import UIKit
+// AssociationOnboardingView.swift
 import SwiftUI
 import CoreLocation
 
@@ -213,6 +213,10 @@ struct AssociationOnboardingView: View {
     }
 }
 
+// AssociationOnboardingViewController.swift
+import UIKit
+import SwiftUI
+
 final class AssociationOnboardingViewController: UIViewController {
 
     private var hostingController: UIHostingController<AssociationOnboardingView>?
@@ -236,7 +240,18 @@ final class AssociationOnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        navigationItem.hidesBackButton = true
         loadAssociations()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     private func loadAssociations() {
