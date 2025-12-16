@@ -97,7 +97,7 @@ class UserProfileDetailViewController: UIViewController {
 //MARK: - UserProfileDetailDelegate -
 extension UserProfileDetailViewController:UserProfileDetailDelegate {
     func showMessage(message: String, imageName: String?) {
-        IHProgressHUD.showSuccesswithStatus(message)
+        SVProgressHUD.show(withStatus:message)
         //TODO: on garde cet affichage de message ?
 //        ui_error_view.changeTitleAndImage(title: message,imageName: imageName)
 //        ui_error_view.show()
@@ -167,7 +167,7 @@ extension UserProfileDetailViewController: MainUserProfileTopCellDelegate {
             if let error = error {
                 errorMsg = error.message
             }
-            IHProgressHUD.showError(withStatus: errorMsg)
+           SVProgressHUD.show(withStatus: errorMsg)
         }
     }
     

@@ -129,7 +129,7 @@ import MessageUI
     @IBAction func action_mail(_ sender: Any) {
         guard let poi = poi else { return  }
         if !MFMailComposeViewController.canSendMail() {
-            IHProgressHUD.showError(withStatus: "about_email_notavailable".localized)
+           SVProgressHUD.show(withStatus: "about_email_notavailable".localized)
             return
         }
 //
@@ -171,7 +171,7 @@ import MessageUI
     @IBAction func action_send_update_poi(_ sender: Any) {
         guard let poi = poi else { return  }
         if !MFMailComposeViewController.canSendMail() {
-            IHProgressHUD.showError(withStatus: "about_email_notavailable".localized)
+           SVProgressHUD.show(withStatus: "about_email_notavailable".localized)
             return
         }
 

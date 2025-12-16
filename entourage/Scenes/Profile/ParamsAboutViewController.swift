@@ -105,7 +105,7 @@ extension ParamsAboutViewController: UITableViewDataSource, UITableViewDelegate 
             self.present(composeVC, animated: true, completion: nil)
         }
         else {
-            IHProgressHUD.showError(withStatus:  "about_email_notavailable".localized)
+           SVProgressHUD.show(withStatus:  "about_email_notavailable".localized)
         }
     }
 }

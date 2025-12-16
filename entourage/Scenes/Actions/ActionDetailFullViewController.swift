@@ -246,7 +246,7 @@ class ActionDetailFullViewController: UIViewController {
             if let error = error {
                 errorMsg = error.message
             }
-            IHProgressHUD.showError(withStatus: errorMsg)
+            SVProgressHUD.show(withStatus: errorMsg)
         }
     }
     

@@ -174,7 +174,7 @@ class ActionCreateMainViewController: UIViewController {
     private func showError() {
         let _type:String = self.isContrib ? "action_contrib".localized : "action_solicitation".localized
         let error = String.init(format: "action_create_contrib_nok".localized, _type)
-        IHProgressHUD.showError(withStatus: error)
+       SVProgressHUD.show(withStatus: error)
     }
     
     //MARK: - IBActions -

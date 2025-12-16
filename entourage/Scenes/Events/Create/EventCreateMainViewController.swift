@@ -203,7 +203,7 @@ class EventCreateMainViewController: UIViewController {
             if event != nil {
                 self.goEnd(event: event!)
             }else {
-                IHProgressHUD.showError(withStatus: "event_create_ok".localized)
+               SVProgressHUD.show(withStatus: "event_create_ok".localized)
             }
         }
     }

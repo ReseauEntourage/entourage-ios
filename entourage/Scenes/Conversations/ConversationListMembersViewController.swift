@@ -320,7 +320,7 @@ extension ConversationListMembersViewController: NeighborhoodUserCellDelegate {
                             if member != nil {
                                 completion(true) // garder coché
                             } else {
-                                IHProgressHUD.showError(withStatus: error?.message ?? "Une erreur est survenue.")
+                               SVProgressHUD.show(withStatus: error?.message ?? "Une erreur est survenue.")
                                 completion(false) // rétablir décoché
                             }
                         }
@@ -337,7 +337,7 @@ extension ConversationListMembersViewController: NeighborhoodUserCellDelegate {
                     if success {
                         completion(true) // garder décoché
                     } else {
-                        IHProgressHUD.showError(withStatus: error?.message ?? "Impossible d’annuler la participation.")
+                       SVProgressHUD.show(withStatus: error?.message ?? "Impossible d’annuler la participation.")
                         completion(false) // rétablir coché
                     }
                 }
@@ -363,10 +363,7 @@ extension ConversationListMembersViewController: NeighborhoodUserCellDelegate {
             MessagingService.createOrGetConversation(userId: "\(user.uid)") { [weak self] conversation, error in
                 SVProgressHUD.dismiss()
                 guard let self = self, let conv = conversation else {
-                    IHProgressHUD.showError(
-                        withStatus: error?.message
-                            ?? "message_error_create_conversation".localized
-                    )
+
                     return
                 }
                 self.presentConversation(conv, username: user.username)

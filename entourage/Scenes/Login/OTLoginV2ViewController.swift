@@ -327,7 +327,7 @@ class OTLoginV2ViewController: UIViewController {
             }
             else {
                 SVProgressHUD.dismiss()
-                IHProgressHUD.showSuccesswithStatus( "requestSent".localized)
+                SVProgressHUD.show(withStatus: "requestSent".localized)
                 self?.startTimer()
             }
         }

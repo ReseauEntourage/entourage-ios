@@ -97,7 +97,7 @@ class NeighborhoodCreatePhase2ViewController: UIViewController {
 //        UserService.updateUserInterests(interests: tagsInterests.getTagsForWS()) { user, error in
 //            Logger.print("Return update Interests : \(user)")
 //            if let err = error?.error {
-//                IHProgressHUD.showError(withStatus: err.localizedDescription)
+//               SVProgressHUD.show(withStatus: err.localizedDescription)
 //                
 //                return
 //            }

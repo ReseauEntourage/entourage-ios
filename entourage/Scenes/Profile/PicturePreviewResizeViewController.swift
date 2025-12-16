@@ -114,7 +114,7 @@ class PicturePreviewResizeViewController: BasePopViewController {
                     self.popToProfile()
                     return
                 }
-                IHProgressHUD.showError(withStatus: "user_photo_change_error".localized)
+                SVProgressHUD.showError(withStatus: "user_photo_change_error".localized)
             })
             return
         }
@@ -144,7 +144,7 @@ class PicturePreviewResizeViewController: BasePopViewController {
                 self.navigationController?.popViewController(animated: true)
                 SVProgressHUD.dismiss()
             } else {
-                IHProgressHUD.showError(withStatus: "user_photo_change_error".localized)
+                SVProgressHUD.showError(withStatus: "user_photo_change_error".localized)
             }
         }
         

@@ -198,7 +198,6 @@
 		029D253728660C4500147F77 /* MJTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D253628660C4500147F77 /* MJTimePickerView.swift */; };
 		029E307B27DB5EF300B12357 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029E307927DB5EF300B12357 /* GoogleService-Info-social.entourage.ios.beta.plist */; };
 		029E307C27DB5EF300B12357 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029E307A27DB5EF300B12357 /* GoogleService-Info.plist */; };
-		029E307F27DB60D300B12357 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
 		029F690E27D905F5003D1E39 /* MainUserInfosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F690D27D905F5003D1E39 /* MainUserInfosCell.swift */; };
 		02A1D2242828FEF3004C3A3D /* MJTabbarCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1D2232828FEF3004C3A3D /* MJTabbarCustom.swift */; };
 		02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD2E27FD92600060EC2E /* MJDayMonthPicker.swift */; };
@@ -1250,7 +1249,6 @@
 				02E0099027E37B1100BB23CA /* FirebaseMessaging in Frameworks */,
 				02E0098C27E37B1100BB23CA /* FirebaseAnalytics in Frameworks */,
 				0288A8E427CD11E9008D7011 /* SDWebImage in Frameworks */,
-				029E307F27DB60D300B12357 /* FirebaseAnalytics in Frameworks */,
 				02E0098E27E37B1100BB23CA /* FirebaseCrashlytics in Frameworks */,
 				0288A8E627CD11E9008D7011 /* SDWebImageMapKit in Frameworks */,
 				02F827712967287B000CA150 /* SimpleKeychain in Frameworks */,
@@ -3429,9 +3427,9 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ent-Beta";
@@ -3536,8 +3534,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
 				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ent-Beta";
@@ -3648,9 +3647,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
 				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ent-Beta";

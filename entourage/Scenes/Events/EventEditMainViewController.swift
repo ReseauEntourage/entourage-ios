@@ -233,7 +233,7 @@ class EventEditMainViewController: UIViewController {
     
     private func createEvent(applyToAll:Bool = false) {
         if hasNoInput() {
-            IHProgressHUD.showSuccesswithStatus("event_mod_ok".localized)
+            SVProgressHUD.show(withStatus:"event_mod_ok".localized)
             self.goEnd()
             return
         }
@@ -244,7 +244,7 @@ class EventEditMainViewController: UIViewController {
         EventService.updateEvent(event: newEvent,isWithRecurrency: applyToAll) { event, error in
             SVProgressHUD.dismiss()
             if error != nil {
-                IHProgressHUD.showError(withStatus: "event_mod_nok".localized)
+               SVProgressHUD.show(withStatus: "event_mod_nok".localized)
             }
             else {
                 self.goEnd()

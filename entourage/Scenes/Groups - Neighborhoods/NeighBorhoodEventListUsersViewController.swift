@@ -456,7 +456,7 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
                 } else {
                     SVProgressHUD.dismiss()
                     self.pendingToggles.remove(tablePosition)
-                    IHProgressHUD.showError(withStatus: error?.message ?? "Erreur lors de la confirmation.")
+                   SVProgressHUD.show(withStatus: error?.message ?? "Erreur lors de la confirmation.")
                     completion(false) // revert
                     cell.isUserInteractionEnabled = true
                 }
@@ -473,7 +473,7 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
                     self.updateUserAndReload(user: user, positionInTableData: tablePosition, reaction: reaction)
                     completion(false)
                 } else {
-                    IHProgressHUD.showError(withStatus: error?.message ?? "Erreur lors de l'annulation.")
+                   SVProgressHUD.show(withStatus: error?.message ?? "Erreur lors de l'annulation.")
                     completion(true) // revert
                 }
                 cell.isUserInteractionEnabled = true
@@ -540,7 +540,7 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
                 }
                 var errorMsg = "message_error_create_conversation".localized
                 if let error = error { errorMsg = error.message }
-                IHProgressHUD.showError(withStatus: errorMsg)
+               SVProgressHUD.show(withStatus: errorMsg)
             }
         }
     }

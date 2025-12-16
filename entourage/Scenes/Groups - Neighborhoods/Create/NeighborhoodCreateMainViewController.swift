@@ -191,7 +191,7 @@ class NeighborhoodCreateMainViewController: UIViewController {
                 self.goEnd(neighborhood: group!)
             }
             else {
-                IHProgressHUD.showError(withStatus: "Erreur lors de la création du groupe. PLACEHOLDER")
+               SVProgressHUD.show(withStatus: "Erreur lors de la création du groupe. PLACEHOLDER")
             }
         }
     }

@@ -225,7 +225,7 @@ class NeighborhoodEditViewController: UIViewController {
     func updateNeighborhood(_ newNeighborhood:Neighborhood) {
         NeighborhoodService.updateNeighborhood(group: newNeighborhood) { group, error in
             //TODO: on fait quoi après on ferme la page ?
-            IHProgressHUD.showSuccesswithStatus("neighborhoodEditValidateTitle".localized)
+            SVProgressHUD.show(withStatus:"neighborhoodEditValidateTitle".localized)
             if let group = group {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil, userInfo: ["neighborhood":group])
             }

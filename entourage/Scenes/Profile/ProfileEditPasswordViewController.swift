@@ -126,10 +126,10 @@ class ProfileEditPasswordViewController: UIViewController {
         UserService.updateUserPassword(pwd: newPwd!) { user, error in
             Logger.print("***** Mot reurn \(user) - Error  :\(error)")
             if error == nil {
-                IHProgressHUD.showSuccesswithStatus("pwdUpdated".localized)
+                SVProgressHUD.show(withStatus: "pwdUpdated".localized)
             }
             else {
-                IHProgressHUD.showError(withStatus: "pwdUpdatedErr".localized)
+                SVProgressHUD.showError(withStatus: "pwdUpdatedErr".localized)
             }
             
             DispatchQueue.main.asyncAfter(deadline:  DispatchTime.now() + 0.5, execute: {

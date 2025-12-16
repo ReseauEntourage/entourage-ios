@@ -372,9 +372,9 @@ final class OnboardingStartViewController: UIViewController {
                     return
                 }
                 if error.message.count > 0 {
-                    if showErrorHud { IHProgressHUD.showError(withStatus: error.message) }
+                    if showErrorHud {SVProgressHUD.show(withStatus: error.message) }
                 } else {
-                    IHProgressHUD.showError(withStatus: "alreadyRegisteredMessage".localized)
+                   SVProgressHUD.show(withStatus: "alreadyRegisteredMessage".localized)
                 }
             } else {
                 var newUser = User()
