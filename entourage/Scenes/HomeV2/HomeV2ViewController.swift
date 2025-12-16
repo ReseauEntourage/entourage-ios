@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import SafariServices
-import IHProgressHUD
+import SVProgressHUD
 import CoreLocation
 import GooglePlaces
 import FirebaseMessaging
@@ -75,7 +75,7 @@ class HomeV2ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         currentUser = UserDefaults.currentUser
         AnalyticsLoggerManager.logEvent(name: View__Home)
         if EnhancedOnboardingConfiguration.shared.shouldNotDisplayCampain == true {
@@ -112,7 +112,7 @@ class HomeV2ViewController: UIViewController {
         }
         
         runHomeEntryGatingIfNeeded()
-        IHProgressHUD.dismiss()
+        SVProgressHUD.dismiss()
 
     }
 
@@ -179,14 +179,14 @@ class HomeV2ViewController: UIViewController {
     func handleEnhancedOnboardingReturn() {
         let config = EnhancedOnboardingConfiguration.shared
         if config.shouldSendOnboardingFromNormalWay {
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.sendOnboardingIntro()
             return
         }
     
         if config.isFromOnboardingFromNormalWay {
             config.isFromOnboardingFromNormalWay = false
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             print("eho _category : " , OnboardingEndChoicesManager.shared.categoryForButton)
             if let _category = OnboardingEndChoicesManager.shared.categoryForButton {
                 if _category.contains("both_action") || _category.contains("no_event") {
@@ -227,7 +227,7 @@ class HomeV2ViewController: UIViewController {
         
         if config.isInterestsFromSetting {
             config.isInterestsFromSetting = false
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
@@ -236,7 +236,7 @@ class HomeV2ViewController: UIViewController {
         
         if config.isOnboardingFromSetting {
             config.isOnboardingFromSetting = false
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
@@ -461,7 +461,7 @@ class HomeV2ViewController: UIViewController {
         }
         self.ui_table_view.reloadData()
         self.handleEnhancedOnboardingReturn()
-        IHProgressHUD.dismiss()
+        SVProgressHUD.dismiss()
     }
     
     func initHome() {
@@ -1143,7 +1143,7 @@ extension HomeV2ViewController: Phase3fromAppDelegate {
         var _user = currentUser
         _user?.goal = userType.getGoalString()
         UserService.updateUser(user: _user) { [weak self] user, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let user = user {
                 self?.currentUser = user
             }
@@ -1153,7 +1153,7 @@ extension HomeV2ViewController: Phase3fromAppDelegate {
     func updateLoc(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         if let _place = googlePlace, let placeId = _place.placeID {
             UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { [weak self] error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
             }
         }
     }

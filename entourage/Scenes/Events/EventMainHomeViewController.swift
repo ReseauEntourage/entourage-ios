@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import IQKeyboardManagerSwift
 
 //Use to transform events to section date with events
@@ -210,13 +210,13 @@ class EventMainHomeViewController: UIViewController {
         if self.myEventsExtracted.events.isEmpty { self.ui_tableview.reloadData() }
         
         if !isReloadFromTab {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
         }
         
         self.isLoading = true
         
         EventService.getAllEventsForUser(currentPage: currentPageMy, per: numberOfItemsForWS) { events, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             self.isfirstLoadingMyEvents = false
             
@@ -258,7 +258,7 @@ class EventMainHomeViewController: UIViewController {
     func getEventsDiscoveredForMyEvent(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
         
         EventService.getAllEventsDiscover(currentPage: currentPageDiscover, per: numberOfItemsForWS, filters: currentFilter.getfiltersForWS()) { events, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             
             DispatchQueue.main.async {
@@ -286,13 +286,13 @@ class EventMainHomeViewController: UIViewController {
         if self.isLoading { return }
         
         if !isReloadFromTab {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
         }
         
         self.isLoading = true
         
         EventService.getAllEventsDiscover(currentPage: currentPageDiscover, per: numberOfItemsForWS, filters: currentFilter.getfiltersForWS()) { events, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             
             if let events = events {

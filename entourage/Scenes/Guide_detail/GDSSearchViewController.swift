@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import IQKeyboardManagerSwift
 import CoreLocation
 
@@ -59,7 +59,7 @@ class GDSSearchViewController: UIViewController {
         
         isAllreadyCall = true
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         
         let newDict =  ["latitude":"\(_location.latitude)",
                         "longitude":"\(_location.longitude)",
@@ -70,7 +70,7 @@ class GDSSearchViewController: UIViewController {
         
         PoiService.getPois(params: newDict) { [weak self] pois, error in
             AnalyticsLoggerManager.logEvent(name: Action_guide_searchResults)
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let _pois = pois {
                 self?.pois = _pois
                 self?.isFromSearch = true

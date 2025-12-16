@@ -4,7 +4,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import CoreLocation
 import GooglePlaces
 
@@ -347,9 +347,9 @@ final class OnboardingStartViewController: UIViewController {
     // MARK: - Network
 
     func sendPhone() {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         AuthService.createAccountWith(user: self.temporaryUser) { [weak self] phone, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let error = error {
                 var showErrorHud = true
                 if error.code == "INVALID_PHONE_FORMAT" {
@@ -387,12 +387,12 @@ final class OnboardingStartViewController: UIViewController {
 
     func createUser() {
         guard let tempPwd = temporaryPasscode, !tempPwd.isEmpty else { return }
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         AuthService.postLogin(
             phone: self.temporaryUser.phone!,
             password: tempPwd
         ) { [weak self] user, error, isFirstLogin in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if error != nil {
                 let alertvc = UIAlertController(
                     title: "tryAgain".localized,
@@ -420,9 +420,9 @@ final class OnboardingStartViewController: UIViewController {
     }
 
     func resendCode() {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         AuthService.regenerateSecretCode(phone: self.temporaryUser.phone!) { [weak self] error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if error != nil {
                 let alertvc = UIAlertController(
                     title: "error".localized,
@@ -443,7 +443,7 @@ final class OnboardingStartViewController: UIViewController {
 
     /// Met à jour l'utilisateur côté API, puis exécute la completion (ZoneChoice).
     func updateUser(completion: (() -> Void)? = nil) {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         var _currentUser = UserDefaults.currentUser
         _currentUser?.goal = userTypeSelected.getGoalString()
         if let email = email { _currentUser?.email = email }
@@ -456,7 +456,7 @@ final class OnboardingStartViewController: UIViewController {
         if let event = self.event, !event.isEmpty { _currentUser?.event = event }
 
         UserService.updateUser(user: _currentUser) { [weak self] user, _ in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let user = user {
                 var newUser = user
                 newUser.phone = _currentUser?.phone
@@ -473,17 +473,17 @@ final class OnboardingStartViewController: UIViewController {
 
     func updateAddress() {
         if let _place = temporaryGooglePlace, let placeId = _place.placeID {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
             UserService.updateUserAddressWith(
                 placeId: placeId,
                 isSecondaryAddress: false
             ) { [weak self] _ in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 self?.goEnd()
             }
         } else if let _lat = self.temporaryLocation?.latitude,
                   let _long = self.temporaryLocation?.longitude {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
             let addressName = temporaryAddressName == nil
                 ? "default"
                 : temporaryAddressName!
@@ -493,7 +493,7 @@ final class OnboardingStartViewController: UIViewController {
                 longitude: _long,
                 isSecondaryAddress: false
             ) { [weak self] _ in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 self?.goEnd()
             }
         } else {

@@ -7,7 +7,7 @@
 
 import UIKit
 import MessageUI
-import IHProgressHUD
+import SVProgressHUD
 import Lottie
 
 class ParamsAboutViewController: BasePopViewController {

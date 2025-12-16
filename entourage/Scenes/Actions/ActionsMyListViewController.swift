@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class ActionsMyListViewController: UIViewController {
     
@@ -58,11 +58,11 @@ class ActionsMyListViewController: UIViewController {
     
     func getMyActions() {
         if self.isLoading { return }
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         self.isLoading = true
         ActionsService.getAllMyActions(currentPage: currentPage, per: numberOfItemsForWS) { actions, error in
            
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.isLoading = false
             
             if let actions = actions {

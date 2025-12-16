@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import MessageUI
 
 @objc class GuideDetailPoiViewController: UIViewController {

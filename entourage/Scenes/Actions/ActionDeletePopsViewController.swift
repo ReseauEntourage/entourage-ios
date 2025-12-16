@@ -7,7 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-import IHProgressHUD
+import SVProgressHUD
 
 class ActionDeletePopsViewController: UIViewController {
     
@@ -139,9 +139,9 @@ class ActionDeletePopsViewController: UIViewController {
     
     //MARK: - Network -
     func sendCancelAction() {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         ActionsService.cancelAction(isContrib: isContrib, actionId: actionId, isClosedOk: isClosedOk, message: ui_tv_comment.text) { action, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.dismiss(animated: true)
             self.delegate?.canceledAction(isCancel: error == nil)
         }

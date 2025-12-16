@@ -7,7 +7,7 @@
 
 import UIKit
 import FirebaseMessaging
-import IHProgressHUD
+import SVProgressHUD
 
 class MainParamsViewController: UIViewController {
     

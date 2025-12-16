@@ -1,6 +1,6 @@
 import UIKit
 import IQKeyboardManagerSwift
-import IHProgressHUD
+import SVProgressHUD
 import MapKit
 
 enum ActionMode {
@@ -405,7 +405,7 @@ class ActionsMainHomeViewController: UIViewController {
         if self.contribs.isEmpty { self.ui_tableview.reloadData() }
         
         if !isReloadFromTab {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
         }
         
         self.isLoading = true
@@ -432,7 +432,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     func handleActionsResponse(isReloadFromTab: Bool, reloadOther: Bool) -> ([Action]?, EntourageNetworkError?) -> Void {
         return { actions, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.isfirstLoadingContrib = false
             self.pullRefreshControl.endRefreshing()
             if let actions = actions {
@@ -468,7 +468,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     func handleSolicitationsResponse(isReloadFromTab: Bool, reloadOther: Bool) -> ([Action]?, EntourageNetworkError?) -> Void {
         return { actions, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             
             if let actions = actions {
@@ -500,11 +500,11 @@ class ActionsMainHomeViewController: UIViewController {
     
     func getMyActions() {
 
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         self.isLoading = true
         ActionsService.getAllMyActions(currentPage: currentPageMyActions, per: numberOfItemsForWS) { actions, error in
            
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.isLoading = false
             
             if let actions = actions {

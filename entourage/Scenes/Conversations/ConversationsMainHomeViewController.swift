@@ -1,5 +1,5 @@
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 enum ConversationMainDTO {
     case notificationRequest
@@ -94,12 +94,12 @@ class ConversationsMainHomeViewController: UIViewController {
             isLastPage = false
         }
 
-        IHProgressHUD.show()
+        SVProgressHUD.show()
 
         // 1️⃣ Si on est sur “Smalltalk”, on utilise l’ancien service
         if selectedFilter == "event_conv_filter_smalltalks".localized {
             SmallTalkService.listSmallTalks { smallTalks, error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 self.isFetching = false
                 guard let smallTalks = smallTalks else { return }
                 // On retourne en DTO .smalltalk pour que cellForRowAt et didSelectRowAt
@@ -114,7 +114,7 @@ class ConversationsMainHomeViewController: UIViewController {
         MessagingService.getConversationMemberships(type: typeParam,
                                                    page: currentPage,
                                                    per: perPage) { memberships, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.isFetching = false
             guard let memberships = memberships else { return }
 

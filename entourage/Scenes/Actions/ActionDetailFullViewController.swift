@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class ActionDetailFullViewController: UIViewController {
     
@@ -234,9 +234,9 @@ class ActionDetailFullViewController: UIViewController {
             AnalyticsLoggerManager.logEvent(name: Help_action_demand_contact)
         }
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         MessagingService.createOrGetConversation(userId: "\(user.uid)") { conversation, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             
             if let conversation = conversation {
                 self.showConversation(conversation: conversation, username: user.displayName)

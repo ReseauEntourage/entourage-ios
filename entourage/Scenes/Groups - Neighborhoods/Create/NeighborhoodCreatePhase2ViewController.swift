@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class NeighborhoodCreatePhase2ViewController: UIViewController {
     

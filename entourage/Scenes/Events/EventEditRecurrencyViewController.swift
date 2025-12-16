@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class EventEditRecurrencyViewController: UIViewController {
     
@@ -77,9 +77,9 @@ class EventEditRecurrencyViewController: UIViewController {
             _recurrency = 31
         }
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         EventService.updateEventRecurrency(eventId: event.uid, recurrency: _recurrency) { event, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if error != nil {
                 IHProgressHUD.showError(withStatus: "event_mod_nok".localized)
             }

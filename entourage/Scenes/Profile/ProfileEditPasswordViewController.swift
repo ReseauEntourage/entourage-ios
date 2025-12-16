@@ -8,7 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import SimpleKeychain
-import IHProgressHUD
+import SVProgressHUD
 
 class ProfileEditPasswordViewController: UIViewController {
     
@@ -137,7 +137,7 @@ class ProfileEditPasswordViewController: UIViewController {
             })
             
             DispatchQueue.main.asyncAfter(deadline:  DispatchTime.now() + 1.5, execute: {
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
             })
         }
     }

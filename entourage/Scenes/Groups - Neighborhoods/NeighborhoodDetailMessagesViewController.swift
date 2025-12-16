@@ -13,7 +13,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import IQKeyboardManagerSwift
 
 class NeighborhoodDetailMessagesViewController: UIViewController {
@@ -306,13 +306,13 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                     }
                 }
             }
-            IHProgressHUD.show()
+            SVProgressHUD.show()
             self.ui_iv_bt_send.isUserInteractionEnabled = false
             self.ui_view_txtview.isUserInteractionEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.ui_iv_bt_send.isUserInteractionEnabled = true
                 self.ui_view_txtview.isUserInteractionEnabled = true
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
             }
         }
     }

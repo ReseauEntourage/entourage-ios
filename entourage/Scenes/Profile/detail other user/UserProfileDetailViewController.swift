@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class UserProfileDetailViewController: UIViewController {
     
@@ -155,9 +155,9 @@ extension UserProfileDetailViewController: UITableViewDataSource,UITableViewDele
 extension UserProfileDetailViewController: MainUserProfileTopCellDelegate {
     func sendMessage() {
         guard let currentUserId = currentUserId else {return}
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         MessagingService.createOrGetConversation(userId: currentUserId) { conversation, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             
             if let conversation = conversation {
                 self.showConversation(conversation: conversation)

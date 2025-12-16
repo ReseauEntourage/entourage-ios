@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 
 
@@ -106,7 +106,7 @@ class PicturePreviewResizeViewController: BasePopViewController {
     //MARK: - Network -
     func updateUserPhoto() {
         if let _image = self.processImage() {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
             //  OTLogger.logEvent(Action_Profile_Photo_Submit)
             PictureUploadS3Service.prepareUploadWith(image: _image,completion: { [weak self] isOk in
                 if isOk, let self = self {
@@ -121,7 +121,7 @@ class PicturePreviewResizeViewController: BasePopViewController {
     }
     
     func popToProfile() {
-        IHProgressHUD.dismiss()
+        SVProgressHUD.dismiss()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationProfilePictureUpdated), object: self)
         
         self.navigationController?.dismiss(animated: true, completion: nil)
@@ -135,14 +135,14 @@ class PicturePreviewResizeViewController: BasePopViewController {
         delegate?.updatePhoto(image: processedImage)
 
         // 🔸 Upload async, mais on a déjà prévenu le delegate
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         PictureUploadS3Service.prepareUploadWith(image: processedImage) { [weak self] isOk in
             guard let self = self else { return }
 
             if isOk {
                 self.pictureSettingDelegate?.reloadOnImageUpdate()
                 self.navigationController?.popViewController(animated: true)
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
             } else {
                 IHProgressHUD.showError(withStatus: "user_photo_change_error".localized)
             }

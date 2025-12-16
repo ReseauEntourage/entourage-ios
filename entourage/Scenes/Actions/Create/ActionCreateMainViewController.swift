@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
-import IHProgressHUD
+import SVProgressHUD
 
 class ActionCreateMainViewController: UIViewController {
     
@@ -131,13 +131,13 @@ class ActionCreateMainViewController: UIViewController {
     //MARK: - Network -
     func createAction() {
         newAction.sectionName = newSection?.key
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         ActionCreateStateManager.shared.clearSection()
 
         if isContrib {
             if let newImage = newImage {
                 ContribUploadPictureService.prepareUploadWith(image: newImage, action: newAction, isUpdate: false, autoPost: self.pageViewController?.isSharing ?? false) { action, isOk in
-                    IHProgressHUD.dismiss()
+                    SVProgressHUD.dismiss()
                     if let action = action {
                         self.goEnd(action: action)
                     }
@@ -148,7 +148,7 @@ class ActionCreateMainViewController: UIViewController {
             }
             else {
                 ActionsService.createAction(isContrib: true, action: newAction, autoPost: self.pageViewController?.isSharing ?? false) { action, error in
-                    IHProgressHUD.dismiss()
+                    SVProgressHUD.dismiss()
                     if let action = action {
                         self.goEnd(action: action)
                     }
@@ -160,7 +160,7 @@ class ActionCreateMainViewController: UIViewController {
         }
         else {
             ActionsService.createAction(isContrib: false, action: newAction, autoPost: self.pageViewController?.isSharing ?? false) { action, error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 if let action = action {
                     self.goEnd(action: action)
                 }

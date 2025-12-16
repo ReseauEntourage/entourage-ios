@@ -11,7 +11,7 @@
 //  Désormais, on limite à 3 suggestions max et on affiche déjà des suggestions quand query est vide.
 import UIKit
 import IQKeyboardManagerSwift
-import IHProgressHUD
+import SVProgressHUD
 
 class EventDetailMessagesViewController: UIViewController {
 
@@ -67,7 +67,7 @@ class EventDetailMessagesViewController: UIViewController {
         // Pour que le tapGesture n’intercepte pas les touches destinées à d’autres vues
         ui_tap_gesture.cancelsTouchesInView = false
         ui_tap_gesture.delegate = self
-        IHProgressHUD.show()
+        SVProgressHUD.show()
 
         // Désactiver IQKeyboardManager sur cette vue
         IQKeyboardManager.shared.enable = false
@@ -256,7 +256,7 @@ class EventDetailMessagesViewController: UIViewController {
                         if lastRow >= 0 {
                             let indexPath = IndexPath(row: lastRow, section: 0)
                             self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
-                            IHProgressHUD.dismiss()
+                            SVProgressHUD.dismiss()
 
                         }
                     }
@@ -289,7 +289,7 @@ class EventDetailMessagesViewController: UIViewController {
                 if isRetry, positionForRetry >= 0, positionForRetry < self.messagesForRetry.count {
                     self.messagesForRetry.remove(at: positionForRetry)
                 }
-                IHProgressHUD.show()
+                SVProgressHUD.show()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.getMessages()
                 }

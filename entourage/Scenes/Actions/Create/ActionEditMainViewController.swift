@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import GooglePlaces
 import CoreLocation
 
@@ -112,9 +112,9 @@ class ActionEditMainViewController: UIViewController {
     
     //MARK: - Network -
     func getAction() {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         ActionsService.getDetailAction(isContrib: isContrib, actionId: String(currentAction.id)) { action, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let action = action {
                 self.currentAction = action
             }
@@ -127,11 +127,11 @@ class ActionEditMainViewController: UIViewController {
             newAction.id = currentAction.id
         }
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         
         if isContrib, let newImage = newImage {
             ContribUploadPictureService.prepareUploadWith(image: newImage, action: newAction, isUpdate: true, autoPost: self.pageViewController?.isSharing ?? false) { action, isOk in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 if let _ = action {
                     self.goEnd()
                 }
@@ -143,7 +143,7 @@ class ActionEditMainViewController: UIViewController {
         }
         
         ActionsService.updateAction(isContrib: isContrib, action: newAction, autoPost: self.pageViewController?.isSharing ?? false) { action, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let _ = action {
                 self.goEnd()
             }

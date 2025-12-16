@@ -1,5 +1,5 @@
 {
-  "originHash" : "16952ad6e9a9f89c298815f850e50554caca9dcb53ecffce692b86c12fda7e27",
+  "originHash" : "6a2ebf7fbf323fb7bf2c0b48b6ff3338d23a1b82f54ad8ce9b248a2f55d9b8ae",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -80,15 +80,6 @@
       "state" : {
         "revision" : "a2ab612cb980066ee56d90d60d8462992c07f24b",
         "version" : "3.5.0"
-      }
-    },
-    {
-      "identity" : "ihprogresshud",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Swiftify-Corp/IHProgressHUD.git",
-      "state" : {
-        "revision" : "c3e0cf90ba1b310073e841de7dc6ef0a2d4899e2",
-        "version" : "0.1.8"
       }
     },
     {
@@ -179,6 +170,15 @@
       "state" : {
         "revision" : "b355c569efcd409e252ccbb500d9fc2713b4d64d",
         "version" : "0.12.5"
+      }
+    },
+    {
+      "identity" : "svprogresshud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SVProgressHUD/SVProgressHUD",
+      "state" : {
+        "revision" : "c33f7c775ba7feea6047a1fc3257f2e5863b44f7",
+        "version" : "2.3.1"
       }
     },
     {

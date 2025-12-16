@@ -100,7 +100,6 @@
 		0243DCCD28AF8DEF00273679 /* Messages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0243DCCC28AF8DEF00273679 /* Messages.xcassets */; };
 		0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */; };
 		0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */; };
-		0246604D27D8A49E00FE1EF8 /* IHProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 0246604C27D8A49E00FE1EF8 /* IHProgressHUD */; };
 		0247AD002819348E008F915B /* NeighborhoodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ACFF2819348E008F915B /* NeighborhoodDetailViewController.swift */; };
 		0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247AD0128193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift */; };
 		02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC427EA245E00E2577B /* MJErrorInputView.swift */; };
@@ -378,6 +377,7 @@
 		02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */; };
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
+		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
 		260377FC2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */; };
 		26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */; };
 		26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */; };
@@ -1251,13 +1251,13 @@
 				02E0098C27E37B1100BB23CA /* FirebaseAnalytics in Frameworks */,
 				0288A8E427CD11E9008D7011 /* SDWebImage in Frameworks */,
 				029E307F27DB60D300B12357 /* FirebaseAnalytics in Frameworks */,
-				0246604D27D8A49E00FE1EF8 /* IHProgressHUD in Frameworks */,
 				02E0098E27E37B1100BB23CA /* FirebaseCrashlytics in Frameworks */,
 				0288A8E627CD11E9008D7011 /* SDWebImageMapKit in Frameworks */,
 				02F827712967287B000CA150 /* SimpleKeychain in Frameworks */,
 				02DB3BC827A14DFC004732C9 /* Nantes in Frameworks */,
 				02E0099227E37B1100BB23CA /* FirebaseRemoteConfig in Frameworks */,
 				02B94C402850D4A2006059EF /* IQKeyboardManagerSwift in Frameworks */,
+				24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */,
 				02E9D6C22970124900F9625D /* ActiveLabel in Frameworks */,
 				2623375E2EE82704007EA8ED /* FirebaseAppCheck in Frameworks */,
 				020AF5DE286064AC0012AE60 /* Lottie in Frameworks */,
@@ -1498,7 +1498,6 @@
 				025D8718278DD33600909101 /* entourage */,
 				02CCE67027D78C2F00D6976C /* Fonts */,
 				025D8717278DD33600909101 /* Products */,
-				F6FDF12012DBBD73C547B9BA /* Pods */,
 				2623375C2EE82704007EA8ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -2064,7 +2063,6 @@
 		02E069CB279184B3006DB1B6 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				26E66F132E74565800E65BFB /* cellOnboardingOne */,
 				26B032F72D8C28C900203CAD /* cell */,
 				028D4F4F2937955200A0BDD3 /* OnboardingStartViewController.swift */,
 				028D4F53293796C400A0BDD3 /* OnboardingPageViewController.swift */,
@@ -2616,20 +2614,6 @@
 			path = imagelist;
 			sourceTree = "<group>";
 		};
-		26E66F132E74565800E65BFB /* cellOnboardingOne */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = cellOnboardingOne;
-			sourceTree = "<group>";
-		};
-		F6FDF12012DBBD73C547B9BA /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2650,7 +2634,6 @@
 				02DB3BC727A14DFC004732C9 /* Nantes */,
 				0288A8E327CD11E9008D7011 /* SDWebImage */,
 				0288A8E527CD11E9008D7011 /* SDWebImageMapKit */,
-				0246604C27D8A49E00FE1EF8 /* IHProgressHUD */,
 				029E307E27DB60D300B12357 /* FirebaseAnalytics */,
 				02E0098B27E37B1100BB23CA /* FirebaseAnalytics */,
 				02E0098D27E37B1100BB23CA /* FirebaseCrashlytics */,
@@ -2662,6 +2645,7 @@
 				02E9D6C12970124900F9625D /* ActiveLabel */,
 				250F348F3267754AC4BF77CD /* GooglePlaces */,
 				2623375D2EE82704007EA8ED /* FirebaseAppCheck */,
+				24CFFF392EF1828D0003509F /* SVProgressHUD */,
 			);
 			productName = entourageios;
 			productReference = 025D8716278DD33600909101 /* Ent-Beta.app */;
@@ -2702,7 +2686,6 @@
 			packageReferences = (
 				02DB3BC627A14DFC004732C9 /* XCRemoteSwiftPackageReference "Nantes" */,
 				0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */,
 				029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02E0098A27E37B1100BB23CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
@@ -2710,6 +2693,7 @@
 				02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
 				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */,
 				07D073F4B75D5470C000D4A2 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
+				24CFFF382EF1828D0003509F /* XCRemoteSwiftPackageReference "SVProgressHUD" */,
 			);
 			productRefGroup = 025D8717278DD33600909101 /* Products */;
 			projectDirPath = "";
@@ -3447,7 +3431,7 @@
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ent-Beta";
@@ -3553,7 +3537,7 @@
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ent-Beta";
@@ -3666,7 +3650,7 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ent-Beta";
@@ -3736,14 +3720,6 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Swiftify-Corp/IHProgressHUD.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.8;
-			};
-		};
 		0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -3808,6 +3784,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		24CFFF382EF1828D0003509F /* XCRemoteSwiftPackageReference "SVProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SVProgressHUD/SVProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3815,11 +3799,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		0246604C27D8A49E00FE1EF8 /* IHProgressHUD */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */;
-			productName = IHProgressHUD;
 		};
 		0288A8E327CD11E9008D7011 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -3875,6 +3854,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */;
 			productName = SimpleKeychain;
+		};
+		24CFFF392EF1828D0003509F /* SVProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 24CFFF382EF1828D0003509F /* XCRemoteSwiftPackageReference "SVProgressHUD" */;
+			productName = SVProgressHUD;
 		};
 		250F348F3267754AC4BF77CD /* GooglePlaces */ = {
 			isa = XCSwiftPackageProductDependency;

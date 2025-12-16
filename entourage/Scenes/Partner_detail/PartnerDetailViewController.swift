@@ -6,7 +6,7 @@
 //
 
 import MessageUI
-import IHProgressHUD
+import SVProgressHUD
 
 class PartnerDetailViewController: UIViewController {
     

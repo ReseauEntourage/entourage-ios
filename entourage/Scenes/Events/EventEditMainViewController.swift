@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
-import IHProgressHUD
+import SVProgressHUD
 
 class EventEditMainViewController: UIViewController {
     
@@ -239,10 +239,10 @@ class EventEditMainViewController: UIViewController {
         }
         
         let newEvent = populateNewEvent()
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         Logger.print("***** createEvent \(newEvent.dictionaryForWS())")
         EventService.updateEvent(event: newEvent,isWithRecurrency: applyToAll) { event, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if error != nil {
                 IHProgressHUD.showError(withStatus: "event_mod_nok".localized)
             }

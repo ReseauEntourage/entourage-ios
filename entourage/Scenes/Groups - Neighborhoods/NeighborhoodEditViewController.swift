@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
-import IHProgressHUD
+import SVProgressHUD
 
 class NeighborhoodEditViewController: UIViewController {
     
