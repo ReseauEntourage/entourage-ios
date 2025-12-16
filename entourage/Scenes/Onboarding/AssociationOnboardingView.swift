@@ -50,7 +50,7 @@ struct AssociationOnboardingView: View {
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 0) {
                     Text(NSLocalizedString("onboard_asso_title", comment: ""))
                         .font(.entourageTitle(20))
                         .foregroundColor(.black)
@@ -59,8 +59,10 @@ struct AssociationOnboardingView: View {
                     Text(NSLocalizedString("onboard_asso_subtitle", comment: ""))
                         .font(.entourageBody(15))
                         .foregroundColor(Color(UIColor.appGrey151))
+                        .padding(.top, 20) // 20 points entre le titre et le sous-titre
 
                     dropdownSection
+                        .padding(.top, 5) // 5 points entre le sous-titre et le sélecteur
 
                     if isOtherSelected {
                         otherAssociationCard
@@ -119,11 +121,10 @@ struct AssociationOnboardingView: View {
                 )
             }
         }
-        .padding(.top, 18)
     }
 
     private var otherAssociationCard: some View {
-        HStack(alignment: .top, spacing: 10) {
+        HStack(alignment: .top, spacing: 20) {
             Image(systemName: "info.circle.fill")
                 .font(.system(size: 18))
                 .foregroundColor(Color(UIColor.appOrange))
