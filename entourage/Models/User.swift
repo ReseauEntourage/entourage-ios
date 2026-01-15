@@ -32,7 +32,6 @@ struct User: Codable {
     var memberships:[String]? = nil
     var confirmedAt:String? = nil
     var availability: [String: [String]]? = nil
-
     var firebaseProperties:[String:String]? = [String:String]()
     var interests:[String]? = nil
     var involvements:[String]? = nil

@@ -271,8 +271,11 @@ class HomeV2ViewController: UIViewController {
             if isContributionPreference {
                 config.preference = "contribution"
             }
+            print("eho self.userHome.association ", self.userHome.association)
+
             config.shouldSendOnboardingFromNormalWay = false
             config.isFromOnboardingFromNormalWay = true
+            viewController.isAssociationGoal = self.userHome.association ?? false
             viewController.modalPresentationStyle = .fullScreen
             viewController.modalTransitionStyle = .coverVertical
             present(viewController, animated: true, completion: nil)
@@ -830,6 +833,7 @@ extension HomeV2ViewController {
             if let userHome = userHome {
                 self?.userHome = userHome
                 AppSignableManager.shared.updateFromHome(userHome: userHome)
+                //self?.sendOnboardingIntro()
                 if userHome.preference == "contribution" {
                     self?.isContributionPreference = true
                 } else {

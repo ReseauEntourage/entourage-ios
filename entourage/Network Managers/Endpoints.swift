@@ -27,6 +27,9 @@ let kAPIAppInfoPushToken = "applications?token=%@"
 let kAPIPois = "pois"
 let kpiGetCluster = "pois/clusters"
 
+let kAPIPartnerUpdate = "partners/%d?token=%@" // PUT
+let kAPIPartnerPresignedUpload = "partners/presigned_upload?token=%@" // POST
+
 let kAPIMetadatas = "home/metadata?token=%@"
 
 let kAPIUnreadCount = "users/unread?token=%@"

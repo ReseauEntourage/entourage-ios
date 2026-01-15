@@ -67,11 +67,13 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
         }
         
         if hasKeychainInfos {
-            hasKeychainInfos = false
-            let vc = UIStoryboard(name: StoryboardName.intro, bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC") as! OTLoginV2ViewController
-            vc.hasKeychain = true
-            self.navigationController?.pushViewController(vc, animated: true)
+                    hasKeychainInfos = false
+                    // CORRECTION ICI : Instanciation programmatique
+                    let vc = OTLoginV2ViewController()
+                    vc.hasKeychain = true
+                    self.navigationController?.pushViewController(vc, animated: true)
         }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -115,8 +117,9 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     }
     
     @IBAction func action_login(_ sender: Any?) {
-        AnalyticsLoggerManager.logEvent(name: PreOnboard_action_signin)
-        let vc = UIStoryboard(name: StoryboardName.intro, bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC")
-        self.navigationController?.pushViewController(vc, animated: true)
+            AnalyticsLoggerManager.logEvent(name: PreOnboard_action_signin)
+            // CORRECTION ICI : Instanciation programmatique
+            let vc = OTLoginV2ViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
     }
 }
