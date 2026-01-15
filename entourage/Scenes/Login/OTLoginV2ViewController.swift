@@ -374,7 +374,7 @@ struct LoginView: View {
             // --------------------------------------------------------
             HStack(spacing: 16) {
                 Button(action: { vm.onBack?() }) {
-                    Image("back_button") // ou "back_arrow" / "back_button_white"
+                    Image("back_arrow") // ou "back_arrow" / "back_button_white"
                         .renderingMode(.template)
                         .foregroundColor(.black)
                         .padding(.vertical, 12)
