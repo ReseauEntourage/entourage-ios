@@ -3,7 +3,6 @@ import Combine
 import UIKit
 import SVProgressHUD
 import SimpleKeychain
-// import IQKeyboardManagerSwift // Plus nécessaire car géré par le wrapper SwiftUI
 
 // MARK: - Extensions & Helpers (Style & Utils)
 
@@ -183,7 +182,10 @@ final class LoginViewModel: ObservableObject {
     @Published var selectedCountry: CountryCode
     @Published var isPasswordSecured: Bool = true
     
-    // Logic State
+    // UI Logic
+    @Published var showCountrySheet: Bool = false // Gère l'ActionSheet du pays
+    
+    // Network Logic State
     @Published var isLoading: Bool = false
     @Published var timeOut: Int = 0
     private let timeOutLength = 60
@@ -192,7 +194,6 @@ final class LoginViewModel: ObservableObject {
     // Alerts
     @Published var alertMessage: String? = nil
     @Published var showAlert: Bool = false
-    
     @Published var showResendConfirmation: Bool = false
     
     // Constants
@@ -202,7 +203,7 @@ final class LoginViewModel: ObservableObject {
     ]
     private let minimumCharacters = 9
     
-    // External delegates
+    // External delegates (Navigation callbacks)
     var onSuccess: (() -> Void)?
     var onBack: (() -> Void)?
     var onChangePhone: (() -> Void)?
@@ -389,38 +390,39 @@ struct LoginView: View {
                             .font(.entourageTitle(15))
                         
                         HStack(spacing: 12) {
-                            // Picker Pays
-                            ZStack(alignment: .leading) {
-                                HStack {
-                                    Text(vm.selectedCountry.flag)
-                                        .font(.system(size: 28))
-                                        .frame(width: 44, height: 52, alignment: .center)
-                                        .padding(.leading, 10)
-                                    Spacer()
-                                    Image(systemName: "chevron.up.chevron.down")
-                                        .font(.entourageBody(15))
-                                        .foregroundColor(Color(UIColor.appOrange))
-                                        .padding(.trailing, 10)
-                                }
-                                Picker("", selection: Binding<String>(
-                                    get: { vm.selectedCountry.code },
-                                    set: { newCode in
-                                        if let found = vm.countries.first(where: { $0.code == newCode }) {
-                                            vm.selectedCountry = found
-                                        }
-                                    })) {
-                                    ForEach(vm.countries, id: \.code) { c in
-                                        Text(c.flag).tag(c.code)
+                            // Sélecteur Pays (Bouton + ActionSheet)
+                            Button(action: {
+                                vm.showCountrySheet = true
+                            }) {
+                                ZStack(alignment: .leading) {
+                                    HStack {
+                                        Text(vm.selectedCountry.flag)
+                                            .font(.system(size: 28))
+                                            .frame(width: 44, height: 52, alignment: .center)
+                                            .padding(.leading, 10)
+                                        Spacer()
+                                        Image(systemName: "chevron.up.chevron.down")
+                                            .font(.entourageBody(15))
+                                            .foregroundColor(Color(UIColor.appOrange))
+                                            .padding(.trailing, 10)
                                     }
                                 }
-                                .labelsHidden()
-                                .opacity(0.02)
+                                .frame(height: 52)
+                                .frame(width: 100)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12).stroke(Color.secondary.opacity(0.25))
+                                )
                             }
-                            .frame(height: 52)
-                            .frame(width: 100)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12).stroke(Color.secondary.opacity(0.25))
-                            )
+                            .actionSheet(isPresented: $vm.showCountrySheet) {
+                                ActionSheet(
+                                    title: Text("Sélectionnez un pays"),
+                                    buttons: vm.countries.map { country in
+                                        .default(Text("\(country.flag) \(country.country)")) {
+                                            vm.selectedCountry = country
+                                        }
+                                    } + [.cancel(Text("Annuler"))]
+                                )
+                            }
                             
                             // Champ numéro
                             BoxedTextField(placeholder: "login_phone_placeholder".localized, text: $vm.phone)
@@ -489,11 +491,9 @@ struct LoginView: View {
                 dismissButton: .default(Text("close".localized))
             )
         }
-        // Alert Confirmation Renvoi (dans un bloc ZStack ou séparé, mais ici en modificateur distinct)
-        // Note: SwiftUI peut parfois être capricieux avec deux .alert, mais sur les versions récentes cela passe si les booléens sont distincts.
-        // Si cela pose problème, fusionner la logique d'alerte dans le ViewModel.
+        // Alert Confirmation Renvoi
         .background(
-             EmptyView().alert(isPresented: $vm.showResendConfirmation) {
+            EmptyView().alert(isPresented: $vm.showResendConfirmation) {
                 let phoneFull = "\(vm.selectedCountry.code) \(vm.phone)"
                 return Alert(
                     title: Text("login_resend_code_title".localized),
@@ -562,9 +562,11 @@ final class OTLoginV2ViewController: UIHostingController<LoginView> {
         // Navigation Change Phone
         vm.onChangePhone = { [weak self] in
             guard let self = self else { return }
-            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChangePhoneVC") {
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            
+            // CORRECTION : On charge explicitement le Storyboard "Intro"
+            let sb = UIStoryboard(name: "Intro", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "ChangePhoneVC")
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         // Logic Success Login
