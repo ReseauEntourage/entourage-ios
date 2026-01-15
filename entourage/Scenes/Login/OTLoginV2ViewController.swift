@@ -16,6 +16,7 @@ private extension Font {
 }
 
 
+
 // MARK: - Components
 
 /// Wrapper UITextField pour SwiftUI avec Toolbar "Terminer"
@@ -106,7 +107,7 @@ private struct FloatingField: View {
                     .stroke(Color.secondary.opacity(0.25))
                 AccessoryTextField(placeholder: placeholder, text: $text, keyboardType: keyboard, onDone: { UIApplication.shared.endEditing() })
                     .padding(.horizontal, 12)
-                    .frame(height: 44)
+                    .frame(height: 52)
             }
         }
     }
@@ -124,7 +125,8 @@ private struct PasswordFloatingField: View {
             Text(title).font(.entourageTitle(15))
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.secondary.opacity(0.25))
+                    // Bordure orange si actif (simulé ici par non vide) ou gris sinon, pour matcher l'image
+                    .stroke(text.isEmpty ? Color.secondary.opacity(0.25) : Color(UIColor.appOrange).opacity(0.8))
                 
                 HStack {
                     AccessoryTextField(
@@ -144,7 +146,7 @@ private struct PasswordFloatingField: View {
                     }
                 }
                 .padding(.horizontal, 12)
-                .frame(height: 44)
+                .frame(height: 52)
             }
         }
     }
@@ -365,32 +367,45 @@ struct LoginView: View {
     @ObservedObject var vm: LoginViewModel
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
+        VStack(spacing: 0) {
             
-            // Header Custom Back Button
-            Button(action: { vm.onBack?() }) {
-                Image("back_button") // ou "back_button_white" selon le thème
-                    .renderingMode(.template)
-                    .foregroundColor(.black)
-                    .padding()
+            // --------------------------------------------------------
+            // 1. Header Align (Titre + Back)
+            // --------------------------------------------------------
+            HStack(spacing: 16) {
+                Button(action: { vm.onBack?() }) {
+                    Image("back_button") // ou "back_arrow" / "back_button_white"
+                        .renderingMode(.template)
+                        .foregroundColor(.black)
+                        .padding(.vertical, 12)
+                }
+                
+                Text("login_title".localized) // "Connexion"
+                    .font(.entourageTitle(24))
+                    .lineLimit(1)
+                
+                Spacer()
             }
-            .zIndex(10)
+            .padding(.horizontal, 20)
+            .padding(.top, 10)
+            .padding(.bottom, 20)
             
+            // --------------------------------------------------------
+            // 2. ScrollView (Inputs + Bloc Resend Code)
+            // --------------------------------------------------------
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     
-                    // Titre
-                    Text("login_title".localized)
-                        .font(.entourageTitle(24))
-                        .padding(.top, 60) // Espace pour le back button
-                    
-                    // Section Téléphone
+                    // --- A. Section Téléphone ---
                     VStack(alignment: .leading, spacing: 6) {
+                        // Titre du champ téléphne (optionnel, selon le design exact, l'image montre un label flottant ou placeholder)
+                        // L'image montre "Téléphone*" en label au dessus ou dans le cadre.
+                        // On garde le style "FloatingField" actuel qui met le titre au dessus.
                         Text("login_label_phone".localized)
                             .font(.entourageTitle(15))
                         
                         HStack(spacing: 12) {
-                            // Sélecteur Pays (Bouton + ActionSheet)
+                            // Sélecteur Pays
                             Button(action: {
                                 vm.showCountrySheet = true
                             }) {
@@ -429,58 +444,85 @@ struct LoginView: View {
                         }
                     }
                     
-                    // Section Code (Mot de passe)
-                    PasswordFloatingField(
-                        title: "login_label_code".localized,
-                        placeholder: "login_placeholder_code".localized,
-                        text: $vm.password,
-                        isSecured: $vm.isPasswordSecured
+                    // --- B. Section Code ---
+                    VStack(alignment: .leading, spacing: 6) {
+                        PasswordFloatingField(
+                            title: "login_label_code".localized, // "Saisir votre code"
+                            placeholder: "Ex : 123456",
+                            text: $vm.password,
+                            isSecured: $vm.isPasswordSecured
+                        )
+                    }
+                    
+                    // --- C. Bloc "Code Oublié" (Encadré) ---
+                    // C'est ici que ça change par rapport au code précédent
+                    VStack(spacing: 8) {
+                        Text("login_forgot_code_title".localized) // "Vous avez oublié votre code ?"
+                            .font(.entourageBody(15))
+                            .foregroundColor(.black)
+                        
+                        Button(action: {
+                            vm.tapResendCode()
+                        }) {
+                            Text("login_button_resend_code".localized) // "Recevoir un nouveau code par sms"
+                                .font(.entourageTitle(15)) // Style gras/orange
+                                .foregroundColor(Color(UIColor.appOrange))
+                                .underline()
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 20)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.secondary.opacity(0.25))
                     )
-                    
-                    // Bouton Login
-                    Button(action: {
-                        vm.validateAndLogin()
-                        UIApplication.shared.endEditing()
-                    }) {
-                        Text("login_button_connect".localized)
-                            .font(.custom("Quicksand-Bold", size: 15))
-                            .foregroundColor(.white)
-                            .frame(height: 50)
-                            .frame(maxWidth: .infinity)
-                            .background(Color(UIColor.appOrange))
-                            .cornerRadius(25)
-                    }
                     .padding(.top, 10)
-                    
-                    // Bouton Renvoyer code
-                    Button(action: {
-                        vm.tapResendCode()
-                    }) {
-                        Text("login_button_resend_code".localized)
-                            .font(.custom("NunitoSans-Regular", size: 14))
-                            .foregroundColor(Color(UIColor.appOrange))
-                            .underline()
-                    }
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    Spacer().frame(height: 20)
-                    
-                    // Footer : Changer de téléphone
-                    Button(action: {
-                        vm.onChangePhone?()
-                    }) {
-                        Text("login_button_change_phone".localized)
-                            .font(.custom("NunitoSans-Regular", size: 14))
-                            .foregroundColor(.gray)
-                            .underline()
-                    }
-                    .frame(maxWidth: .infinity, alignment: .center)
                     
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, 40)
+                .padding(.top, 10)
             }
             .simultaneousGesture(TapGesture().onEnded { UIApplication.shared.endEditing() })
+            
+            // --------------------------------------------------------
+            // 3. Footer (Changement numéro + Gros Bouton Connect)
+            // --------------------------------------------------------
+            VStack(spacing: 20) {
+                
+                // Texte + Lien "Changer de numéro"
+                VStack(spacing: 4) {
+                    Text("login_label_change_phone_question".localized) // "Vous avez changé de numéro de téléphone?"
+                        .font(.entourageTitle(16)) // Un peu plus gras comme sur la maquette
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                    
+                    Button(action: {
+                        vm.onChangePhone?()
+                    }) {
+                        Text("login_button_change_phone".localized) // "Changer mon numéro"
+                            .font(.custom("NunitoSans-Regular", size: 15))
+                            .foregroundColor(.black)
+                            .underline()
+                    }
+                }
+                
+                // Bouton Login Principal
+                Button(action: {
+                    vm.validateAndLogin()
+                    UIApplication.shared.endEditing()
+                }) {
+                    Text("login_button_connect".localized) // "Je me connecte"
+                        .font(.custom("Quicksand-Bold", size: 18))
+                        .foregroundColor(.white)
+                        .frame(height: 54) // Un peu plus haut
+                        .frame(maxWidth: .infinity)
+                        .background(Color(UIColor.appOrange))
+                        .cornerRadius(27)
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+            .padding(.bottom, 20) // Marge du bas
         }
         .background(Color.white)
         // Alert Standard
@@ -563,7 +605,7 @@ final class OTLoginV2ViewController: UIHostingController<LoginView> {
         vm.onChangePhone = { [weak self] in
             guard let self = self else { return }
             
-            // CORRECTION : On charge explicitement le Storyboard "Intro"
+            // Charge explicitement le Storyboard "Intro"
             let sb = UIStoryboard(name: "Intro", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "ChangePhoneVC")
             self.navigationController?.pushViewController(vc, animated: true)

@@ -155,10 +155,15 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         ]
 
         if isAssociationGoal {
+            // Mapping ID et Icons basés sur la logique Android (Action Wishes / Orientations)
+            // share -> "resources" icon (Android) -> img_asset_onboarding_sensib
+            // guide -> "outings" icon (Android) -> img_asset_onboarding_convivialite
+            // both_actions -> "actions" icon (Android) -> img_asset_onboarding_pouce
+            
             involvementChoices = [
-                OnboardingChoice(id: "relay_events", img: "img_asset_onboarding_convivialite", title: "Relayer vos événements de convivialité sur l'application"),
-                OnboardingChoice(id: "orient_beneficiaries", img: "img_asset_onboarding_convivialite", title: "Orienter vos bénéficiaires aux événements de convivialité"),
-                OnboardingChoice(id: "help", img: "img_asset_onboarding_pouce", title: "Donner ou solliciter un coup de pouce")
+                OnboardingChoice(id: "share", img: "img_asset_onboarding_sensib", title: "Relayer vos événements de convivialité sur l'application"),
+                OnboardingChoice(id: "guide", img: "img_asset_onboarding_convivialite", title: "Orienter vos bénéficiaires aux événements de convivialité"),
+                OnboardingChoice(id: "both_actions", img: "img_asset_onboarding_pouce", title: "Donner ou solliciter un coup de pouce")
             ]
         } else {
             let pref = EnhancedOnboardingConfiguration.shared.preference
@@ -191,7 +196,13 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         let interests = Set(currentUser.interests ?? [])
         let concerns = Set(currentUser.concerns ?? [])
         let involvements = Set(currentUser.involvements ?? [])
-        selectedIds = interests.union(concerns).union(involvements)
+        let orientations = Set(currentUser.orientations ?? [])
+        
+        if isAssociationGoal {
+            selectedIds = interests.union(concerns).union(orientations)
+        } else {
+            selectedIds = interests.union(concerns).union(involvements)
+        }
     }
 
     private func loadDTO() {
@@ -230,7 +241,7 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
             
             // Chargement des données si nécessaire
             if associationDescription == nil && associationLogoImage == nil, let pid = currentPartnerId {
-                 associationPresenter.getPartnerDetails(partnerId: pid)
+                associationPresenter.getPartnerDetails(partnerId: pid)
             }
             
             tableDTO.append(.associationPresentation)
@@ -257,9 +268,13 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
     func updateUserChoices(shouldQuit: Bool = true, completion: (() -> Void)? = nil) {
         let interests = interestChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
         let concerns = concernChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
-        let involvements = involvementChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
+        
+        // Séparation logique: Involvements pour user standard, Orientations pour Association
+        let selectedInvolvementItems = involvementChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
+        let involvements = isAssociationGoal ? [] : selectedInvolvementItems
+        let orientations = isAssociationGoal ? selectedInvolvementItems : nil
 
-        UserService.updateUserChoices(interests: interests, concerns: concerns, involvements: involvements, selectedDays: self.selectedDays, selectedHours: self.selectedHours) { user, error in
+        UserService.updateUserChoices(interests: interests, concerns: concerns, involvements: involvements, orientations: orientations, selectedDays: self.selectedDays, selectedHours: self.selectedHours) { user, error in
             if let error = error {
                 print("Error updating user choices: \(error)")
                 // Même en cas d'erreur, on peut vouloir continuer si completion est présent

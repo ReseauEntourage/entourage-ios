@@ -35,6 +35,7 @@ struct User: Codable {
     var firebaseProperties:[String:String]? = [String:String]()
     var interests:[String]? = nil
     var involvements:[String]? = nil
+    var orientations:[String]? = nil
     var concerns:[String]? = nil
     var unreadCount:Int = 0
     var gender:String? = ""
@@ -102,12 +103,13 @@ struct User: Codable {
         case memberships
         case interests
         case involvements
+        case orientations
         case concerns
-        
+       
         case _firstname = "first_name"
         case _lastname = "last_name"
         case sid = "id"
-        
+       
         case type = "user_type"
         case _displayName = "display_name"
         case password = "sms_code"
@@ -126,7 +128,7 @@ struct User: Codable {
     
     func dictionaryForWS() -> [String:Any] {
         var dict = [String:Any]()
-        
+       
         if firstname.count > 0 {
             dict["first_name"] = firstname
         }
@@ -151,7 +153,7 @@ struct User: Codable {
         if let goal = goal, goal.count > 0 {
             dict["goal"] = goal
         }
-        
+       
         if let hasConsent = hasConsent {
             dict["newsletter_subscription"] = hasConsent
         }
@@ -160,7 +162,7 @@ struct User: Codable {
     
     func dictionaryUserUpdateForWS() -> [String:Any] {
         var dict = [String:Any]()
-        
+       
         if firstname.count > 0 {
             dict["first_name"] = firstname
         }
@@ -188,7 +190,7 @@ struct User: Codable {
         if radiusDistance ?? 0 >= 0 {
             dict["travel_distance"] = radiusDistance
         }
-        
+       
         return dict
     }
     
@@ -233,7 +235,7 @@ struct UserLightNeighborhood: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-       
+        
         case partnerRoleTitle = "partner_role_title"
         case status
         case message
@@ -248,6 +250,7 @@ struct UserLightNeighborhood: Codable {
         case photoAcceptance = "photo_acceptance"
         case _displayName = "display_name"
         case avatarURL = "avatar_url"
+        
     }
     
     func getCommunityRolesFormated() -> String? {
@@ -260,19 +263,19 @@ struct UserLightNeighborhood: Codable {
             }
             return roleStr
         }
-        
+       
         return nil
     }
     
     func getCommunityRoleWithPartnerFormated() -> String? {
         if let communityRoles = communityRoles {
-            
+           
             var roleStr = ""
-            
+           
             if isAdmin() {
                 roleStr = "Admin".localized
             }
-            
+           
             for role in communityRoles {
                 if roleStr.count > 0 {
                     roleStr = "\(roleStr) • \(role)"
@@ -280,7 +283,7 @@ struct UserLightNeighborhood: Codable {
                 else {
                     roleStr = role
                 }
-                
+               
                 break
             }
             if let name = partner?.name {
@@ -293,7 +296,7 @@ struct UserLightNeighborhood: Codable {
             }
             return roleStr
         }
-        
+       
         return nil
     }
     

@@ -109,6 +109,16 @@
 "login_change_send_ok" = "Votre demande a bien été envoyée.\n\n\nLe support Entourage vous informera lorsque le changement de numéro sera réalisé.";
 "login_change_bt_return" = "Retour";
 
+"login_title" = "Connexion";
+
+"login_forgot_code_title" = "Vous avez oublié votre code ?";
+"login_button_resend_code" = "Recevoir un nouveau code par sms";
+
+"login_label_change_phone_question" = "Vous avez changé de numéro de téléphone ?";
+"login_button_change_phone" = "Changer mon numéro";
+
+"login_button_connect" = "Je me connecte";
+
 "login_change_warning_title" = "Attention";
 "login_change_error_phone" = "Veuillez verifier vos numéros de téléphone";
 "login_change_error_mail" = "Veuillez vérifier votre adresse Email";

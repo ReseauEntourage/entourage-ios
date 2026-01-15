@@ -93,6 +93,14 @@
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
 "login_button_change_phone" = "J’ai changé de numéro de téléphone";
+"login_title" = "Connexion";
+
+"login_forgot_code_title" = "Vous avez oublié votre code ?";
+"login_button_resend_code" = "Recevoir un nouveau code par sms";
+
+"login_label_change_phone_question" = "Vous avez changé de numéro de téléphone ?";
+"login_button_change_phone" = "Changer mon numéro";
+"login_button_connect" = "Je me connecte";
 
 "login_change_phone_title" = "Nouveau numéro";
 "login_change_phone_old_number" = "Ancien numéro";
