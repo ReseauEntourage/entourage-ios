@@ -122,9 +122,6 @@ workflows:
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
 
     - save-spm-cache@1: {}
-    meta:
-      bitrise.io:
-        stack: osx-xcode-16.2.x
   Entourage-TestFlight:
     before_run:
     - Prepare
