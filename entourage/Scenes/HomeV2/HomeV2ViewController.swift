@@ -201,7 +201,6 @@ class HomeV2ViewController: UIViewController {
                             }
                         }
                     }
-                    
                 } else if _category.contains("event") {
                     DeepLinkManager.showOutingListUniversalLink()
                 } else if _category.contains("resources") {
@@ -831,7 +830,6 @@ extension HomeV2ViewController {
             if let userHome = userHome {
                 self?.userHome = userHome
                 AppSignableManager.shared.updateFromHome(userHome: userHome)
-                self?.sendOnboardingIntro()
                 if userHome.preference == "contribution" {
                     self?.isContributionPreference = true
                 } else {

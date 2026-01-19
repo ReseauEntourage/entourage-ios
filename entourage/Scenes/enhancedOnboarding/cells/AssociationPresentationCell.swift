@@ -28,50 +28,61 @@ class AssociationPresentationCell: UITableViewCell, UITextViewDelegate {
         return iv
     }()
 
-    // CORRECTION ICI : Bouton d'édition (30x30)
-    private let editIconView: UIImageView = {
-        let iv = UIImageView()
-        iv.backgroundColor = .white // Fond blanc
+    // --- MODIFICATION 1 : Le Conteneur (Rond Orange) ---
+    private let editContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .orange // Fond Orange
+        view.layer.cornerRadius = 17   // 34 / 2
+        view.clipsToBounds = true
         
-        // On essaie de charger l'image nommée, sinon on met un crayon système pour tester
+        // Bordure légère
+        view.layer.borderColor = UIColor.systemGray5.cgColor
+        view.layer.borderWidth = 1
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true // Important pour capter le clic
+        return view
+    }()
+
+    // --- MODIFICATION 2 : L'icône Crayon (Blanc) ---
+    private let editIconImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.backgroundColor = .clear // Transparent
+        
+        // Image du crayon
         if let customImage = UIImage(named: "ic_profil_full_pen") {
-            iv.image = customImage
+            iv.image = customImage.withRenderingMode(.alwaysTemplate)
         } else {
-            // Fallback système si l'asset n'est pas trouvé
-            iv.image = UIImage(systemName: "pencil")
+            iv.image = UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate)
         }
         
-        iv.contentMode = .scaleAspectFit // Important pour voir l'image entière
-        iv.tintColor = UIColor.orange // Force la couleur si c'est une image template
-        
-        iv.layer.cornerRadius = 15 // 30 / 2
-        iv.clipsToBounds = true
-        
-        // Bordure légère pour le détacher du fond si l'image est blanche
-        iv.layer.borderColor = UIColor.systemGray5.cgColor
-        iv.layer.borderWidth = 1
-        
+        iv.contentMode = .scaleAspectFit
+        iv.tintColor = .white // Blanc (pour contraster avec le fond orange)
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.isUserInteractionEnabled = true
+        iv.isUserInteractionEnabled = false // Le clic est géré par le container
         return iv
     }()
 
     // Label Description
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Description de votre association"
+        label.text = NSLocalizedString("description_association_label", value: "Description de votre association", comment: "")
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    // Zone de texte editable
+    // Zone de texte editable (Hauteur agrandie)
     private let descriptionTextView: UITextView = {
         let tv = UITextView()
         tv.layer.borderColor = UIColor.lightGray.cgColor
         tv.layer.borderWidth = 1.0
         tv.layer.cornerRadius = 4.0
+        
+        // Padding interne du texte pour qu'il ne colle pas aux bords
+        tv.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+        
         tv.font = UIFont.systemFont(ofSize: 15)
         tv.textColor = UIColor.lightGray
         tv.text = "Ex. : Association de quartier œuvrant pour le lien social via des événements ouverts à tous."
@@ -98,7 +109,11 @@ class AssociationPresentationCell: UITableViewCell, UITextViewDelegate {
         contentView.backgroundColor = .white
 
         contentView.addSubview(logoImageView)
-        contentView.addSubview(editIconView)
+        
+        // On ajoute le conteneur PUIS l'image dedans
+        contentView.addSubview(editContainerView)
+        editContainerView.addSubview(editIconImageView)
+        
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(descriptionTextView)
 
@@ -108,8 +123,9 @@ class AssociationPresentationCell: UITableViewCell, UITextViewDelegate {
         let tapLogo = UITapGestureRecognizer(target: self, action: #selector(uploadLogoTapped))
         logoImageView.addGestureRecognizer(tapLogo)
         
+        // On met le geste sur le conteneur orange
         let tapEdit = UITapGestureRecognizer(target: self, action: #selector(uploadLogoTapped))
-        editIconView.addGestureRecognizer(tapEdit)
+        editContainerView.addGestureRecognizer(tapEdit)
 
         NSLayoutConstraint.activate([
             // 1. Logo Centré (120x120)
@@ -118,24 +134,29 @@ class AssociationPresentationCell: UITableViewCell, UITextViewDelegate {
             logoImageView.widthAnchor.constraint(equalToConstant: 120),
             logoImageView.heightAnchor.constraint(equalToConstant: 120),
 
-            // 2. Icone Crayon (30x30)
-            // On le place en haut à droite, légèrement chevauché
-            editIconView.topAnchor.constraint(equalTo: logoImageView.topAnchor, constant: 0),
-            editIconView.trailingAnchor.constraint(equalTo: logoImageView.trailingAnchor, constant: 0),
-            editIconView.widthAnchor.constraint(equalToConstant: 34), // Un poil plus grand pour la zone de touche
-            editIconView.heightAnchor.constraint(equalToConstant: 34),
+            // 2. Conteneur (Rond Orange de 34x34)
+            editContainerView.topAnchor.constraint(equalTo: logoImageView.topAnchor),
+            editContainerView.trailingAnchor.constraint(equalTo: logoImageView.trailingAnchor),
+            editContainerView.widthAnchor.constraint(equalToConstant: 34),
+            editContainerView.heightAnchor.constraint(equalToConstant: 34),
+            
+            // 3. Icône Crayon avec PADDING
+            // On fixe les bords de l'image à 8 points des bords du conteneur
+            editIconImageView.topAnchor.constraint(equalTo: editContainerView.topAnchor, constant: 8),
+            editIconImageView.bottomAnchor.constraint(equalTo: editContainerView.bottomAnchor, constant: -8),
+            editIconImageView.leadingAnchor.constraint(equalTo: editContainerView.leadingAnchor, constant: 8),
+            editIconImageView.trailingAnchor.constraint(equalTo: editContainerView.trailingAnchor, constant: -8),
 
-            // 3. Label
+            // 4. Label
             descriptionLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 24),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
 
-            // 4. Text Input
+            // 5. Text Input (Hauteur fixe 250)
             descriptionTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12),
             descriptionTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             descriptionTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            descriptionTextView.heightAnchor.constraint(equalToConstant: 120),
-            
+            descriptionTextView.heightAnchor.constraint(equalToConstant: 250),
             descriptionTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }

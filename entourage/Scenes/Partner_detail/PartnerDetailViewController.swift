@@ -75,7 +75,7 @@ class PartnerDetailViewController: UIViewController {
     }
     
     func updatePartner() {
-        if let _url = partner?.largeLogoUrl, let mainUrl = URL(string: _url) {
+        if let _url = partner?.imageUrl, let mainUrl = URL(string: _url) {
             ui_image_partner.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_asso"))
         }
         

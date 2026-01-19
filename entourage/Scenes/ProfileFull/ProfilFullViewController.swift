@@ -782,6 +782,23 @@ extension ProfilFullViewController {
 }
 
 extension ProfilFullViewController:HeaderProfilFullCellDelegate{
+    func onPartnerClick() {
+        guard let currentPartner = self.user?.partner else { return }
+        if let navVc = UIStoryboard(name: StoryboardName.partnerDetails, bundle: nil).instantiateInitialViewController() as? UINavigationController,
+           let vc = navVc.topViewController as? PartnerDetailViewController {
+                            if let id = currentPartner.aid {
+                vc.partnerId = id
+            } else {
+                vc.partner = currentPartner
+            }
+            
+            // On présente le NavigationController
+            DispatchQueue.main.async {
+                self.present(navVc, animated: true)
+            }
+        }
+    }
+    
     func onModifyClick() {
         if self.isMe {
             self.modifyProfile()
