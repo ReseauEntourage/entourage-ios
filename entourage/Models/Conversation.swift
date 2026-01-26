@@ -28,6 +28,7 @@ struct Conversation:Codable {
     private var hasPersonalPost:Bool? = nil
     
     var author:ConversationAuthor? = nil
+    var lastChatMessageImageUrl:String? = nil
     
     func isOneToOne() -> Bool {
         return type == "private"
@@ -255,6 +256,7 @@ struct ConversationMembership: Decodable {
     let numberOfRootMessages: Int?
     let numberOfUnreadMessages: Int?
     let lastChatMessageText: String?
+    let lastChatMessageImageUrl: String?
 
     private enum CodingKeys: String, CodingKey {
         case status
@@ -268,6 +270,7 @@ struct ConversationMembership: Decodable {
         case numberOfRootMessages = "number_of_root_chat_messages"
         case numberOfUnreadMessages = "number_of_unread_messages"
         case lastChatMessageText = "last_chat_message"
+        case lastChatMessageImageUrl = "last_chat_message_image_url"
     }
 }
 
