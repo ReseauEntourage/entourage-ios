@@ -46,6 +46,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
     private let mapContainerView = UIView()
     private let mapView = MKMapView()
+    private let potentialEventsLabel = UILabel()
 
     private let bottomBar = UIView()
     private let previousButton = UIButton(type: .system)
@@ -56,6 +57,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private var selectedPlace: GMSPlace?
     private var selectedLabel: String?
     private var currentRadiusKm: Int = 20
+    private var searchTimer: Timer?
 
     init(
         initialCoordinate: CLLocationCoordinate2D? = nil,
@@ -89,6 +91,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         setupCitySection()
         setupRadiusSection()
         setupMap()
+        setupPotentialEventsLabel()
         setupBottomBar()
         setupInitialState()
     }
@@ -265,10 +268,47 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             mapView.topAnchor.constraint(equalTo: mapContainerView.topAnchor),
             mapView.leadingAnchor.constraint(equalTo: mapContainerView.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: mapContainerView.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor),
-
-            mapContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            mapView.bottomAnchor.constraint(equalTo: mapContainerView.bottomAnchor)
         ])
+    }
+
+    private func setupPotentialEventsLabel() {
+        potentialEventsLabel.font = UIFont(name: "Quicksand-Bold", size: 15)
+        potentialEventsLabel.textColor = UIColor.appOrange
+        potentialEventsLabel.textAlignment = .center
+        potentialEventsLabel.numberOfLines = 0
+        potentialEventsLabel.isHidden = true
+
+        contentView.addSubview(potentialEventsLabel)
+        potentialEventsLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            potentialEventsLabel.topAnchor.constraint(equalTo: mapContainerView.bottomAnchor, constant: 20),
+            potentialEventsLabel.leadingAnchor.constraint(equalTo: cityButton.leadingAnchor),
+            potentialEventsLabel.trailingAnchor.constraint(equalTo: cityButton.trailingAnchor),
+            potentialEventsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+        ])
+    }
+
+    private func fetchWeekAverage() {
+        guard let coord = selectedCoord else { return }
+        let radius = Double(currentRadiusKm)
+
+        UserService.getOutingsWeekAverage(latitude: coord.latitude, longitude: coord.longitude, travelDistance: radius) { [weak self] average, error in
+            guard let self = self else { return }
+
+            if let avg = average, avg > 0 {
+                let rounded = Int(avg.rounded())
+                if rounded > 0 {
+                    self.potentialEventsLabel.isHidden = false
+                    self.potentialEventsLabel.animateCount(to: rounded, prefix: "événements potentiels : ")
+                } else {
+                    self.potentialEventsLabel.isHidden = true
+                }
+            } else {
+                self.potentialEventsLabel.isHidden = true
+            }
+        }
     }
 
     private func setupBottomBar() {
@@ -340,6 +380,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             centerMap(animated: false)
             drawCircle()
             updateNextButtonEnabled(true)
+            fetchWeekAverage()
         } else {
             let franceCenter = CLLocationCoordinate2D(latitude: 46.5, longitude: 2.2)
             let region = MKCoordinateRegion(center: franceCenter, span: MKCoordinateSpan(latitudeDelta: 6.0, longitudeDelta: 6.0))
@@ -355,6 +396,11 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         updateRadiusValueLabel()
         drawCircle()
         centerMap(animated: true)
+
+        searchTimer?.invalidate()
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
+            self?.fetchWeekAverage()
+        }
     }
 
     private func updateRadiusValueLabel() {
@@ -515,6 +561,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         centerMap(animated: true)
         drawCircle()
         updateNextButtonEnabled(true)
+        fetchWeekAverage()
 
         viewController.dismiss(animated: true)
     }

@@ -122,6 +122,8 @@ let kAPIAcceptPhotoForUser           = "outings/%@/users/%@/photo_acceptance?tok
 let kAPICancelPhotoForUser           = "outings/%@/users/%@/cancel_photo_acceptance?token=%@"
 let kAPICancelParticipationForUser   = "outings/%@/users/%@/cancel_participation?token=%@"
 
+let kAPIOutingsCount = "outings/count?token=%@&within_days=%d&travel_distance=%.2f&latitude=%.6f&longitude=%.6f"
+let kAPIOutingsWeekAverage = "outings/week_average?token=%@&travel_distance=%.2f&latitude=%.6f&longitude=%.6f"
 
 //Actions
 let kAPIGetContrib = "contributions/%@?token=%@"
