@@ -25,6 +25,7 @@ class ProfileEditorViewController: UIViewController {
     var birth_date_new:String? = nil
     var email_new:String? = nil
     var radius_new:Int? = nil
+    var gender_new:String? = nil
     var profilFullDelegate:ImageReUpLoadDelegate?
     var location_new:CLLocationCoordinate2D? = nil
     var location_name_new:String? = nil
@@ -185,6 +186,10 @@ class ProfileEditorViewController: UIViewController {
             newUser?.radiusDistance = radius_new
         }
         
+        if let gender_new = gender_new {
+            newUser?.gender = gender_new
+        }
+
         //TODO: la location à la validation ou lors du choix de l'adresse ?
         //check google place
         if let gplace = location_googlePlace_new, let placeId = gplace.placeID {
@@ -334,6 +339,10 @@ extension ProfileEditorViewController:CellTextDelegate {
     
     func updateRadius(radius:Int) {
         self.radius_new = radius
+    }
+
+    func updateGender(gender: String?) {
+        self.gender_new = gender
     }
 }
 
