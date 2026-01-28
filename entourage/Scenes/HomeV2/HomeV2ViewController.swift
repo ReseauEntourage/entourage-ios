@@ -1339,6 +1339,9 @@ extension HomeV2ViewController {
     private func presentEnhancedOnboardingIntro() {
         let sb = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
         if let intro = sb.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
+            if let _ = UserDefaults.currentUser?.partner {
+                intro.isAssociationGoal = true
+            }
             intro.modalPresentationStyle = .fullScreen
             if presentedViewController != nil {
                 dismiss(animated: false)
