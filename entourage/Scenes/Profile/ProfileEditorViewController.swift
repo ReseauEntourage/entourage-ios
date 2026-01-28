@@ -171,15 +171,15 @@ class ProfileEditorViewController: UIViewController {
         
         if birth_date_new?.count ?? 0 > 0 {
             if let birth_date_new = birth_date_new, birth_date_new.matchesRegEx("^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])")  {
-                newUser?.birthday = birth_date_new
+                newUser?.birthdate = birth_date_new
             }
             else {
                 showError(message: "editUser_error_birthday".localized)
                 return
             }
         }
-        else if !(currentUser?.birthday?.count ?? 0 > 0) {
-            newUser?.birthday = ""
+        else if !(currentUser?.birthdate?.count ?? 0 > 0) {
+            newUser?.birthdate = ""
         }
         
         if let radius_new = radius_new {
@@ -269,7 +269,7 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
             cityName = _gplace
         }
         
-        cell.populateCell(firstname: currentUser?.firstname, lastname: currentUser?.lastname , bio: currentUser?.about, birthdate: currentUser?.birthday, email: currentUser?.email,phone: currentUser?.phone, cityName: cityName, radius: currentUser?.radiusDistance, gender: currentUser?.gender, delegate: self)
+        cell.populateCell(firstname: currentUser?.firstname, lastname: currentUser?.lastname , bio: currentUser?.about, birthdate: currentUser?.birthdate, email: currentUser?.email,phone: currentUser?.phone, cityName: cityName, radius: currentUser?.radiusDistance, delegate: self)
         
         return cell
     }

@@ -65,8 +65,8 @@ class MainUserInfosCell: UITableViewCell {
     func populateCell(user:User) {
         
         //Set placholder if !birthday
-        if let _birthday = user.birthday {
-            ui_birth_info.text = _birthday
+        if let _birthdate = user.birthdate {
+            ui_birth_info.text = _birthdate
         }else{
             ui_birth_info.text = "mainUserBirthPlaceholder".localized
             ui_birth_info.textColor = ApplicationTheme.getFontCourantRegularGris().color
