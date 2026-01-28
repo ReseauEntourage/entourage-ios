@@ -70,7 +70,13 @@ class ConversationListMainCell: UITableViewCell {
                 delegate.showWebUrl(url: url)
             }
         }
-        ui_detail_message.text = message.getLastMessage
+
+        if let _imgUrl = message.lastChatMessageImageUrl, !_imgUrl.isEmpty {
+            ui_detail_message.text = "📷 " + "photo".localized
+        }
+        else {
+            ui_detail_message.text = message.getLastMessage
+        }
         ui_date.text = message.subname
         
         self.delegate = delegate
