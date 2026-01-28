@@ -410,6 +410,62 @@ struct UserService {
         }
     }
     
+    //MARK: - Events Stats
+
+    static func getOutingsCount(withinDays: Int = 30, latitude: Double, longitude: Double, travelDistance: Double, completion: @escaping (_ count: Int?, _ error: EntourageNetworkError?) -> Void) {
+
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIOutingsCount, token, withinDays, travelDistance, latitude, longitude)
+
+        Logger.print("***** get outings count: \(endpoint)")
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error get outings count - \(String(describing: error))")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+
+            var count: Int?
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let _count = json["count"] as? Int {
+                    count = _count
+                }
+            } catch {
+                Logger.print("Error parsing outings count \(error)")
+            }
+
+            DispatchQueue.main.async { completion(count, nil) }
+        }
+    }
+
+    static func getOutingsWeekAverage(latitude: Double, longitude: Double, travelDistance: Double, completion: @escaping (_ average: Double?, _ error: EntourageNetworkError?) -> Void) {
+
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIOutingsWeekAverage, token, travelDistance, latitude, longitude)
+
+        Logger.print("***** get outings week average: \(endpoint)")
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error get outings week average - \(String(describing: error))")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+
+            var average: Double?
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let _average = json["average"] as? Double {
+                    average = _average
+                }
+            } catch {
+                Logger.print("Error parsing outings week average \(error)")
+            }
+
+            DispatchQueue.main.async { completion(average, nil) }
+        }
+    }
+
     static func parsingUnreadCount(data:Data) -> (Int,Int) {
         var unreadCount = 0
         var unreadCounGroup = 0
