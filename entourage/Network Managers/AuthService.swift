@@ -48,7 +48,7 @@ struct AuthService: ParsingDataCodable {
         if let g = mapGender(user.gender) {
             userParameters["gender"] = g
         }
-        if let birth = nonEmpty(user.birthday) {
+        if let birth = nonEmpty(user.birthdate) {
             userParameters["birthdate"] = birth
         }
         if let source = nonEmpty(user.discoverySource) {
