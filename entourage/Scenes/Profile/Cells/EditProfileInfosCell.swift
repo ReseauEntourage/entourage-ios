@@ -65,6 +65,12 @@ class EditProfileInfosCell: UITableViewCell {
     var hasNoErrorLastname = false
     var hasNoErrorEmail = false
     
+    // Gender properties
+    var ui_view_gender: UIView?
+    var ui_tf_gender: UITextField?
+    var pickerGender = UIPickerView()
+    let genderOptions = ["Femme", "Homme", "Autre"]
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -139,6 +145,8 @@ class EditProfileInfosCell: UITableViewCell {
         ui_phone.textColor = .appGrisSombre40
         ui_city_cp.font = ApplicationTheme.getFontNunitoRegular(size: 13)
         ui_city_cp.textColor = .black
+
+        setupGenderView()
     }
     
     private func setupTitleStyle(_ label:UILabel) {
@@ -151,6 +159,100 @@ class EditProfileInfosCell: UITableViewCell {
         textfield.textColor = .black
     }
     
+    private func setupGenderView() {
+        guard let stackView = ui_view_firstname.superview as? UIStackView else { return }
+
+        let genderView = UIView()
+        genderView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Icon
+        let icon = UIImageView(image: UIImage(named: "ic_desc"))
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.contentMode = .scaleAspectFit
+        genderView.addSubview(icon)
+
+        // Label
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "editUserTitleGender".localized
+        setupTitleStyle(label)
+        genderView.addSubview(label)
+
+        // TextField
+        let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.placeholder = "editUserPlaceholderGender".localized
+        setupTextFieldStyle(tf)
+        genderView.addSubview(tf)
+        self.ui_tf_gender = tf
+
+        // Separator
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor = UIColor(named: "orange_light_a50")
+        genderView.addSubview(separator)
+
+        // Constraints
+        NSLayoutConstraint.activate([
+            genderView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80),
+
+            icon.leadingAnchor.constraint(equalTo: genderView.leadingAnchor, constant: 4),
+            icon.centerYAnchor.constraint(equalTo: genderView.centerYAnchor),
+            icon.widthAnchor.constraint(equalToConstant: 19),
+            icon.heightAnchor.constraint(equalToConstant: 20),
+
+            label.topAnchor.constraint(equalTo: genderView.topAnchor, constant: 18),
+            label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 35), // 58 - 4 - 19 = 35 spacing? No, in storyboard 58 is absolute from leading. icon is at 4. 58 - 4 = 54. 54 - 19 = 35.
+            label.trailingAnchor.constraint(equalTo: genderView.trailingAnchor),
+
+            tf.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 4),
+            tf.leadingAnchor.constraint(equalTo: label.leadingAnchor),
+            tf.trailingAnchor.constraint(equalTo: genderView.trailingAnchor),
+            tf.heightAnchor.constraint(equalToConstant: 24),
+
+            separator.topAnchor.constraint(equalTo: tf.bottomAnchor),
+            separator.leadingAnchor.constraint(equalTo: label.leadingAnchor),
+            separator.trailingAnchor.constraint(equalTo: genderView.trailingAnchor),
+            separator.heightAnchor.constraint(equalToConstant: 1)
+        ])
+
+        self.ui_view_gender = genderView
+        stackView.insertArrangedSubview(genderView, at: 0)
+
+        // Picker Setup
+        pickerGender.delegate = self
+        pickerGender.dataSource = self
+
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "validate".localized, style: .plain, target: self, action: #selector(doneGenderPicker))
+        doneButton.tintColor = .appOrange
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(cancelGenderPicker))
+        cancelButton.tintColor = .appOrangeLight
+
+        toolbar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+        toolbar.backgroundColor = .appWhite246
+
+        tf.inputAccessoryView = toolbar
+        tf.inputView = pickerGender
+        tf.tintColor = .clear // Hide cursor
+    }
+
+    @objc func doneGenderPicker() {
+        let row = pickerGender.selectedRow(inComponent: 0)
+        if row < genderOptions.count {
+            let selected = genderOptions[row]
+            ui_tf_gender?.text = selected
+            delegate?.updateGender(gender: selected)
+        }
+        self.endEditing(true)
+    }
+
+    @objc func cancelGenderPicker() {
+        self.endEditing(true)
+    }
+
     @objc func closeKb(_ sender:UIBarButtonItem!) {
         let tag = sender.tag
         if tag == ui_tv_edit_bio.hashValue {
@@ -162,7 +264,7 @@ class EditProfileInfosCell: UITableViewCell {
         }
     }
     
-    func populateCell(firstname:String?,lastname:String?, bio:String?,birthdate:String?, email:String?,phone:String?, cityName:String?, radius:Int! = 0,  delegate:CellTextDelegate) {
+    func populateCell(firstname:String?,lastname:String?, bio:String?,birthdate:String?, email:String?,phone:String?, cityName:String?, radius:Int! = 0, gender: String?, delegate:CellTextDelegate) {
         self.delegate = delegate
         
         ui_tf_firstname.text = firstname
@@ -171,6 +273,7 @@ class EditProfileInfosCell: UITableViewCell {
         ui_tf_birthday.text = birthdate
         ui_city_cp.text = cityName
         ui_phone.text = phone
+        ui_tf_gender?.text = gender
         
         ui_tv_edit_bio.text = bio
         
@@ -237,6 +340,28 @@ class EditProfileInfosCell: UITableViewCell {
     }
 }
 
+//MARK: - UIPickerViewDelegate & DataSource -
+extension EditProfileInfosCell: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genderOptions.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return genderOptions[row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // Optional: Update text field immediately or wait for Done button
+        // let selected = genderOptions[row]
+        // ui_tf_gender?.text = selected
+        // delegate?.updateGender(gender: selected)
+    }
+}
+
 //MARK: - MJCustomSliderDelegate -
 extension EditProfileInfosCell: MJCustomSliderDelegate {
     func updateLabel() {
@@ -298,4 +423,5 @@ protocol CellTextDelegate:AnyObject {
     func updateBio(bio:String?)
     func showSelectLocation()
     func updateRadius(radius:Int)
+    func updateGender(gender: String?)
 }

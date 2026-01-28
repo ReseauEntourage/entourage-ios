@@ -1930,4 +1930,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "title_new_message" = "nouveau message";
 "title_new_message_plural" = "nouveaux messages";
 "you" = "Vous";
-"photo" = "Photo";
+"editUserTitleGender" = "Je suis";
+"editUserPlaceholderGender" = "Sélectionner dans la liste";

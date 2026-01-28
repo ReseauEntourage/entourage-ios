@@ -592,7 +592,7 @@ extension OnboardingStartViewController: OnboardingDelegate {
         temporaryUser.email           = email
         temporaryUser.hasConsent      = consentEmail
         temporaryUser.gender          = gender
-        temporaryUser.birthday        = birthdate           // "yyyy-MM-dd"
+        temporaryUser.birthdate        = birthdate           // "yyyy-MM-dd"
         temporaryUser.discoverySource = howWeMet
         temporaryUser.company         = company
         temporaryUser.event           = event

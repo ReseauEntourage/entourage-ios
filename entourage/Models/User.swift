@@ -43,7 +43,8 @@ struct User: Codable {
     var discoverySource: String? = nil
     var company: String? = nil
     var event: String? = nil
-    var birthday:String? = nil
+    var birthdate:String? = nil
+    var birthday:Bool? = nil
     var radiusDistance:Int? = 0
     
     var isEngaged:Bool = false
@@ -184,8 +185,8 @@ struct User: Codable {
         if let avatarKey = avatarKey, avatarKey.count > 0 {
             dict["avatar_key"] = avatarKey
         }
-        if let birthday = birthday, birthday.count >= 0 {
-            dict["birthday"] = birthday
+        if let birthdate = birthdate, birthdate.count >= 0 {
+            dict["birthdate"] = birthdate
         }
         if radiusDistance ?? 0 >= 0 {
             dict["travel_distance"] = radiusDistance
