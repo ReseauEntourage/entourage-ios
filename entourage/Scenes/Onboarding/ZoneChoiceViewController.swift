@@ -301,8 +301,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
                 let rounded = Int(avg.rounded())
                 if rounded > 0 {
                     self.potentialEventsLabel.isHidden = false
-                    self.potentialEventsLabel.animateCount(to: rounded, prefix: "événements potentiels : ")
-                } else {
+                    self.potentialEventsLabel.animateCount(to: rounded, prefix: "événements potentiels : ")                } else {
                     self.potentialEventsLabel.isHidden = true
                 }
             } else {

@@ -268,8 +268,9 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
         else if let _gplace = self.location_googlePlace_new?.formattedAddress { //TODO: quel formattage d'adresse ?
             cityName = _gplace
         }
+        var _gender = currentUser?.gender
         
-        cell.populateCell(firstname: currentUser?.firstname, lastname: currentUser?.lastname , bio: currentUser?.about, birthdate: currentUser?.birthdate, email: currentUser?.email,phone: currentUser?.phone, cityName: cityName, radius: currentUser?.radiusDistance, delegate: self)
+        cell.populateCell(firstname: currentUser?.firstname, lastname: currentUser?.lastname , bio: currentUser?.about, birthdate: currentUser?.birthdate, email: currentUser?.email,phone: currentUser?.phone, cityName: cityName, radius: currentUser?.radiusDistance, gender: _gender, delegate: self)
         
         return cell
     }

@@ -377,6 +377,7 @@
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
 		244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244715252F15307400F8BFD1 /* AssociationPresenter.swift */; };
+		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
 		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
 		24EAAA8A2F0BB94B002F2A41 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
 		24EAAA8C2F0E4FC0002F2A41 /* AssociationPresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */; };
@@ -989,6 +990,7 @@
 		02FE55B42939F6020076F57A /* OnboardingEndCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndCell.swift; sourceTree = "<group>"; };
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
 		244715252F15307400F8BFD1 /* AssociationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresenter.swift; sourceTree = "<group>"; };
+		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
 		260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionSmokeTestViewController.swift; sourceTree = "<group>"; };
 		26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDayCell.swift; sourceTree = "<group>"; };
@@ -1293,6 +1295,7 @@
 				0288A8DA27CD00FD008D7011 /* Extensions_UIImage.swift */,
 				0224597927FF454A00944DE4 /* Extensions_UITextField.swift */,
 				2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */,
+				248360292F2A483300CAD0C7 /* UILabel+Animation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3142,6 +3145,7 @@
 				26D040962ECB6548008DFC97 /* OnboardingSMSCodeView.swift in Sources */,
 				26BEEEC62C00C32B00169FBA /* EnhancedFullSizeCell.swift in Sources */,
 				26BB4D4A2CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift in Sources */,
+				2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */,
 				262820D52D49069A00A61C30 /* MainStatUserCell.swift in Sources */,
 				029D25332865FA5F00147F77 /* EventDatesCell.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
