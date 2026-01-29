@@ -703,7 +703,7 @@
 /*************
  * Group detail
  */
-"title_is_ambassador" = "Посол •";
+"title_is_ambassador" = "Animateur Entourage •";
 "title_is_admin" = "Адміністратор •";
 
 "neighborhood_detail_button_join_member" = "Член";

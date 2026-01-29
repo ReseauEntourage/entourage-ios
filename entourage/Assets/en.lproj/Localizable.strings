@@ -691,7 +691,7 @@
 "neighborhood_group_discover_empty_title" = "Oops, there are no other groups around you yet.";
 "neighborhood_group_discover_empty_subtitle" = "Don’t hesitate to create new groups of neighbors!";
 
-"title_is_ambassador" = "Ambassador •";
+"title_is_ambassador" = "Animateur Entourage •";
 "title_is_admin" = "Administrator •";
 
 "neighborhood_detail_button_join_member" = "Member";

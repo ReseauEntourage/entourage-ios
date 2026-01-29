@@ -715,7 +715,7 @@
 /*************
  * Group detail
  */
-"title_is_ambassador" = "Ambassadeur •" ;
+"title_is_ambassador" = "Animateur Entourage •" ;
 "title_is_admin" = "Administrateur •" ;
 
 "neighborhood_detail_button_join_member" = "Membre";

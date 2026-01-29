@@ -703,7 +703,7 @@
 /*************
  * Group detail
  */
-"title_is_ambassador" = "Embajador •";
+"title_is_ambassador" = "Animateur Entourage •";
 "title_is_admin" = "Administrador •";
 
 "neighborhood_detail_button_join_member" = "Miembro";
@@ -2128,7 +2128,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 /*************
  * Group detail
  */
-"title_is_ambassador" = "Embajador •";
+"title_is_ambassador" = "Animateur Entourage •";
 "title_is_admin" = "Administrador •";
 
 "neighborhood_detail_button_join_member" = "Miembro";
