@@ -277,22 +277,46 @@ struct UserLightNeighborhood: Codable {
                 roleStr = "Admin".localized
             }
            
-            for role in communityRoles {
-                if roleStr.count > 0 {
-                    roleStr = "\(roleStr) • \(role)"
+            var currentRole: String? = nil
+            if let firstRole = communityRoles.first {
+                currentRole = firstRole
+                if currentRole == "Ambassadeur" {
+                    currentRole = "Animateur Entourage"
+                } else if currentRole == "Équipe Entourage" {
+                    currentRole = "Équipe"
                 }
-                else {
-                    roleStr = role
-                }
-               
-                break
             }
+
             if let name = partner?.name {
+                var showRole = true
+                if let role = currentRole {
+                    if name.lowercased().contains(role.lowercased()) {
+                        showRole = false
+                    }
+                }
+
+                if showRole, let role = currentRole {
+                    if roleStr.count > 0 {
+                        roleStr = "\(roleStr) • \(role)"
+                    } else {
+                        roleStr = role
+                    }
+                }
+
                 if roleStr.count > 0 {
                     roleStr = "\(roleStr) • \(name)"
-                }
-                else {
+                } else {
                     roleStr = name
+                }
+            }
+            else {
+                if let role = currentRole {
+                    if roleStr.count > 0 {
+                        roleStr = "\(roleStr) • \(role)"
+                    }
+                    else {
+                        roleStr = role
+                    }
                 }
             }
             return roleStr
