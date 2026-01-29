@@ -3,6 +3,8 @@ import MapKit
 import GooglePlaces
 import CoreLocation
 
+// MARK: - Structures & Enums
+
 struct ZoneChoiceResult {
     let place: GMSPlace?
     let coordinate: CLLocationCoordinate2D?
@@ -20,8 +22,12 @@ protocol ZoneChoiceViewControllerDelegate: AnyObject {
     func zoneChoiceCancelled()
 }
 
+// MARK: - View Controller
+
 final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewControllerDelegate {
 
+    // MARK: - Properties
+    
     var initialCoordinate: CLLocationCoordinate2D?
     var initialLabel: String?
     var initialRadiusKm: Int = 20
@@ -32,6 +38,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private var onConfirmClosure: ((ZoneChoiceResult) -> Void)?
     private var onCancelClosure: (() -> Void)?
 
+    // MARK: - UI Elements
+    
     private let scrollView = UIScrollView()
     private let contentView = UIView()
 
@@ -46,18 +54,38 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
     private let mapContainerView = UIView()
     private let mapView = MKMapView()
-    private let potentialEventsLabel = UILabel()
+
+    // --- NOUVEAUX ÉLÉMENTS UI (Structure imbriquée pour le bimatière) ---
+    // Stack Principale (Horizontale) : [Icone] | [Bloc Texte Vertical]
+    private let eventsMainStackView = UIStackView()
+    private let eventIconView = UIImageView()
+    
+    // Bloc Texte (Vertical) : [Ligne Orange] \n [Ligne Noire]
+    private let textVerticalStackView = UIStackView()
+    
+    // Ligne Orange (Horizontale) : [Chiffre] [Suffixe]
+    private let orangeLineStackView = UIStackView()
+    private let eventsCountLabel = UILabel()         // "3" (Animé)
+    private let eventsOrangeSuffixLabel = UILabel()  // " événements potentiels par semaine,"
+    
+    // Ligne Noire
+    private let eventsBlackLabel = UILabel()         // "dans ce périmètre."
+    // ---------------------------------------------------------------------
 
     private let bottomBar = UIView()
     private let previousButton = UIButton(type: .system)
     private let nextButton = UIButton(type: .system)
     private let buttonsStack = UIStackView()
 
+    // MARK: - Data Variables
+    
     private var selectedCoord: CLLocationCoordinate2D?
     private var selectedPlace: GMSPlace?
     private var selectedLabel: String?
     private var currentRadiusKm: Int = 20
     private var searchTimer: Timer?
+
+    // MARK: - Init
 
     init(
         initialCoordinate: CLLocationCoordinate2D? = nil,
@@ -83,6 +111,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     @available(*, unavailable)
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -91,7 +121,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         setupCitySection()
         setupRadiusSection()
         setupMap()
-        setupPotentialEventsLabel()
+        setupPotentialEventsUI() // Mise à jour de l'UI ici
         setupBottomBar()
         setupInitialState()
     }
@@ -105,6 +135,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
     }
+
+    // MARK: - UI Setup
 
     private func setupLayout() {
         view.addSubview(scrollView)
@@ -272,23 +304,74 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         ])
     }
 
-    private func setupPotentialEventsLabel() {
-        potentialEventsLabel.font = UIFont(name: "Quicksand-Bold", size: 15)
-        potentialEventsLabel.textColor = UIColor.appOrange
-        potentialEventsLabel.textAlignment = .center
-        potentialEventsLabel.numberOfLines = 0
-        potentialEventsLabel.isHidden = true
-
-        contentView.addSubview(potentialEventsLabel)
-        potentialEventsLabel.translatesAutoresizingMaskIntoConstraints = false
-
+    // --- MISE À JOUR : STRUCTURE BIMATIÈRE (Orange & Bold / Black & Regular) ---
+    private func setupPotentialEventsUI() {
+        // 1. Stack Principale (Icone + Bloc Texte)
+        eventsMainStackView.axis = .horizontal
+        eventsMainStackView.alignment = .top
+        eventsMainStackView.distribution = .fill
+        eventsMainStackView.spacing = 8
+        eventsMainStackView.isHidden = true // Caché par défaut
+        
+        // 2. Icone
+        eventIconView.image = UIImage(named: "ic_calendar_zone") // Assure-toi que l'image existe
+        eventIconView.tintColor = UIColor.appOrange
+        eventIconView.contentMode = .scaleAspectFit
+        eventIconView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            potentialEventsLabel.topAnchor.constraint(equalTo: mapContainerView.bottomAnchor, constant: 20),
-            potentialEventsLabel.leadingAnchor.constraint(equalTo: cityButton.leadingAnchor),
-            potentialEventsLabel.trailingAnchor.constraint(equalTo: cityButton.trailingAnchor),
-            potentialEventsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            eventIconView.widthAnchor.constraint(equalToConstant: 20),
+            eventIconView.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        // 3. Bloc Texte Vertical (Ligne Orange \n Ligne Noire)
+        textVerticalStackView.axis = .vertical
+        textVerticalStackView.alignment = .leading
+        textVerticalStackView.spacing = 2
+        
+        // --- LIGNE ORANGE (Chiffre + Suffixe) ---
+        orangeLineStackView.axis = .horizontal
+        orangeLineStackView.alignment = .firstBaseline // Aligne le texte sur la ligne de base
+        orangeLineStackView.spacing = 4
+        
+        // Label Chiffre (Celui qui s'anime) -> ORANGE + BOLD
+        eventsCountLabel.font = UIFont(name: "Quicksand-Bold", size: 15)
+        eventsCountLabel.textColor = UIColor.appOrange
+        eventsCountLabel.text = "0"
+        
+        // Label Suffixe (" événements potentiels par semaine,") -> ORANGE + BOLD
+        eventsOrangeSuffixLabel.font = UIFont(name: "Quicksand-Bold", size: 15)
+        eventsOrangeSuffixLabel.textColor = UIColor.appOrange
+        eventsOrangeSuffixLabel.text = "événements potentiels par semaine,"
+        
+        orangeLineStackView.addArrangedSubview(eventsCountLabel)
+        orangeLineStackView.addArrangedSubview(eventsOrangeSuffixLabel)
+        
+        // --- LIGNE NOIRE ("dans ce périmètre.") ---
+        // -> BLACK + REGULAR
+        eventsBlackLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
+        eventsBlackLabel.textColor = UIColor(white: 0.1, alpha: 1.0)
+        eventsBlackLabel.numberOfLines = 0
+        eventsBlackLabel.text = "dans ce périmètre."
+        
+        // Assemblage
+        textVerticalStackView.addArrangedSubview(orangeLineStackView)
+        textVerticalStackView.addArrangedSubview(eventsBlackLabel)
+        
+        eventsMainStackView.addArrangedSubview(eventIconView)
+        eventsMainStackView.addArrangedSubview(textVerticalStackView)
+        
+        contentView.addSubview(eventsMainStackView)
+        eventsMainStackView.translatesAutoresizingMaskIntoConstraints = false
+
+        // Contraintes (Alignement avec la Map)
+        NSLayoutConstraint.activate([
+            eventsMainStackView.topAnchor.constraint(equalTo: mapContainerView.bottomAnchor, constant: 16),
+            eventsMainStackView.leadingAnchor.constraint(equalTo: mapContainerView.leadingAnchor),
+            eventsMainStackView.trailingAnchor.constraint(lessThanOrEqualTo: mapContainerView.trailingAnchor),
+            eventsMainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
+    // -----------------------------------------------------
 
     private func fetchWeekAverage() {
         guard let coord = selectedCoord else { return }
@@ -300,12 +383,14 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             if let avg = average, avg > 0 {
                 let rounded = Int(avg.rounded())
                 if rounded > 0 {
-                    self.potentialEventsLabel.isHidden = false
-                    self.potentialEventsLabel.animateCount(to: rounded, prefix: "événements potentiels : ")                } else {
-                    self.potentialEventsLabel.isHidden = true
+                    self.eventsMainStackView.isHidden = false // On affiche la stack principale
+                    // L'animation ne touche que le chiffre, le reste est statique dans les autres labels
+                    self.eventsCountLabel.animateCount(to: rounded, prefix: "")
+                } else {
+                    self.eventsMainStackView.isHidden = true
                 }
             } else {
-                self.potentialEventsLabel.isHidden = true
+                self.eventsMainStackView.isHidden = true
             }
         }
     }
@@ -387,6 +472,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             updateNextButtonEnabled(false)
         }
     }
+
+    // MARK: - Actions
 
     @objc private func sliderChanged() {
         currentRadiusKm = Int(slider.value.rounded())
@@ -487,6 +574,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         }
     }
 
+    // MARK: - Navigation & Errors
+
     private func routeNextStep() {
         switch nextStep {
         case .onboardingEnd:
@@ -528,6 +617,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         }
     }
 
+    // MARK: - Map Helpers
+
     private func centerMap(animated: Bool) {
         guard let c = selectedCoord else { return }
 
@@ -545,6 +636,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         let circle = MKCircle(center: c, radius: Double(currentRadiusKm) * 1000)
         mapView.addOverlay(circle)
     }
+
+    // MARK: - GMSAutocomplete Delegate
 
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         selectedPlace = place
@@ -574,6 +667,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     }
 }
 
+// MARK: - MapView Delegate
+
 extension ZoneChoiceViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let circle = overlay as? MKCircle else {
@@ -586,6 +681,8 @@ extension ZoneChoiceViewController: MKMapViewDelegate {
         return renderer
     }
 }
+
+// MARK: - Presenter Helper
 
 extension UIViewController {
     func presentZoneChoiceSwiftUI(
@@ -611,6 +708,8 @@ extension UIViewController {
         present(nav, animated: true)
     }
 }
+
+// MARK: - Logging Helpers
 
 private func logRequest(tag: String,
                                method: String,
