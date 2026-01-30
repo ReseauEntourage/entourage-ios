@@ -237,7 +237,7 @@ class ProfileEditorViewController: UIViewController {
 //MARK: - Tableview Datasource / Delegate -
 extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -250,7 +250,7 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
         
         if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterests", for: indexPath)
-            
+            cell.contentView.isHidden = true
             return cell
         }
         if indexPath.row == 3 {
