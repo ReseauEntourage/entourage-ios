@@ -401,7 +401,13 @@ class HomeV2ViewController: UIViewController {
     func configureDTO() {
         self.tableDTO.removeAll()
         self.updateTopView()
-        if initialPedagos.count > 0 {
+
+        var showInitialPedago = false
+        if let user = UserDefaults.currentUser, let involvements = user.involvements, involvements.contains("resources") {
+            showInitialPedago = true
+        }
+
+        if showInitialPedago && initialPedagos.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
             tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
         }
