@@ -69,7 +69,12 @@ class EditProfileInfosCell: UITableViewCell {
     var ui_view_gender: UIView?
     var ui_tf_gender: UITextField?
     var pickerGender = UIPickerView()
-    let genderOptions = ["Femme", "Homme", "Autre"]
+    // Modified to store display string and technical value
+    let genderOptions: [(display: String, value: String)] = [
+        ("editUser_gender_female".localized, "female"),
+        ("editUser_gender_male".localized, "male"),
+        ("editUser_gender_secret".localized, "secret")
+    ]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -243,8 +248,8 @@ class EditProfileInfosCell: UITableViewCell {
         let row = pickerGender.selectedRow(inComponent: 0)
         if row < genderOptions.count {
             let selected = genderOptions[row]
-            ui_tf_gender?.text = selected
-            delegate?.updateGender(gender: selected)
+            ui_tf_gender?.text = selected.display // Show display name
+            delegate?.updateGender(gender: selected.value) // Send internal value
         }
         self.endEditing(true)
     }
@@ -273,7 +278,13 @@ class EditProfileInfosCell: UITableViewCell {
         ui_tf_birthday.text = birthdate
         ui_city_cp.text = cityName
         ui_phone.text = phone
-        ui_tf_gender?.text = gender
+
+        // Find matching display string for current gender value
+        if let currentGender = gender, let match = genderOptions.first(where: { $0.value == currentGender }) {
+            ui_tf_gender?.text = match.display
+        } else {
+            ui_tf_gender?.text = ""
+        }
         
         ui_tv_edit_bio.text = bio
         
@@ -351,14 +362,14 @@ extension EditProfileInfosCell: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return genderOptions[row]
+        return genderOptions[row].display
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // Optional: Update text field immediately or wait for Done button
         // let selected = genderOptions[row]
-        // ui_tf_gender?.text = selected
-        // delegate?.updateGender(gender: selected)
+        // ui_tf_gender?.text = selected.display
+        // delegate?.updateGender(gender: selected.value)
     }
 }
 

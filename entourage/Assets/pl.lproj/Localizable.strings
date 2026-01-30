@@ -1754,3 +1754,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_phase_three_question_quartier" = "Jaka jest twoja dzielnica?";
 "onboarding_phase_three_placeholder_quartier" = "Adres miasta lub regionu";
 "photo" = "Zdjęcie";
+
+"editUser_gender_male" = "Mężczyzna";
+"editUser_gender_female" = "Kobieta";
+"editUser_gender_secret" = "Nie podano";
