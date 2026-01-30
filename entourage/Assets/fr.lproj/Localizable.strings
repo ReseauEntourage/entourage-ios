@@ -1933,3 +1933,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "editUserTitleGender" = "Je suis";
 "editUserPlaceholderGender" = "Sélectionner dans la liste";
 "photo" = "Photo";
+
+"editUser_gender_male" = "Homme";
+"editUser_gender_female" = "Femme";
+"editUser_gender_secret" = "Non renseigné";

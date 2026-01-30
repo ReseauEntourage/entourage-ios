@@ -201,6 +201,7 @@ class ProfilFullViewController: UIViewController {
         if let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav") as? UINavigationController , let editVC = navVC.topViewController as? ProfileEditorViewController  {
             editVC.profilFullDelegate = self
             editVC.currentUser = self.user
+            navVC.modalPresentationStyle = .fullScreen
             self.present(navVC, animated: true)
 
         }

@@ -1643,3 +1643,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_phase_three_question_quartier" = "Care este cartierul tău?";
 "onboarding_phase_three_placeholder_quartier" = "Adresă oraș sau județ";
 "photo" = "Fotografie";
+
+"editUser_gender_male" = "Bărbat";
+"editUser_gender_female" = "Femeie";
+"editUser_gender_secret" = "Nespecificat";

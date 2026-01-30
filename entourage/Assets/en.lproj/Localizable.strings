@@ -1940,3 +1940,7 @@
 "editUserTitleGender" = "I am";
 "editUserPlaceholderGender" = "Select from the list";
 "photo" = "Photo";
+
+"editUser_gender_male" = "Man";
+"editUser_gender_female" = "Woman";
+"editUser_gender_secret" = "Not specified";
