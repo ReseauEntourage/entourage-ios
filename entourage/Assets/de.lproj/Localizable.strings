@@ -1740,3 +1740,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_phase_three_question_quartier" = "In welchem Viertel wohnen Sie?";
 "onboarding_phase_three_placeholder_quartier" = "Stadt oder Bezirksadresse";
 "photo" = "Foto";
+
+"editUser_gender_male" = "Mann";
+"editUser_gender_female" = "Frau";
+"editUser_gender_secret" = "Keine Angabe";
