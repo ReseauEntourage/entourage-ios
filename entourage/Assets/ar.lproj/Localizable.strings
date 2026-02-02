@@ -1686,3 +1686,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "orientation_share" = "Relayer vos événements de convivialité sur l'application";
 "orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
 "orientation_both_actions" = "Donner ou solliciter un coup de pouce";
+"onboarding_zone_potential_event_singular" = "حدث محتمل في الأسبوع،";
+"onboarding_zone_potential_event_plural" = "أحداث محتملة في الأسبوع،";
