@@ -1937,5 +1937,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "editUser_gender_male" = "Homme";
 "editUser_gender_female" = "Femme";
 "editUser_gender_secret" = "Non renseigné";
-"onboarding_zone_potential_event_singular" = "événement potentiel par semaine,";
-"onboarding_zone_potential_event_plural" = "événements potentiels par semaine,";
+"orientation_share" = "Relayer vos événements de convivialité sur l'application";
+"orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
+"orientation_both_actions" = "Donner ou solliciter un coup de pouce";

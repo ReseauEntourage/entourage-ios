@@ -1758,5 +1758,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "editUser_gender_male" = "Mężczyzna";
 "editUser_gender_female" = "Kobieta";
 "editUser_gender_secret" = "Nie podano";
-"onboarding_zone_potential_event_singular" = "potencjalne wydarzenie w tygodniu,";
-"onboarding_zone_potential_event_plural" = "potencjalnych wydarzeń w tygodniu,";
+"orientation_share" = "Relayer vos événements de convivialité sur l'application";
+"orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
+"orientation_both_actions" = "Donner ou solliciter un coup de pouce";

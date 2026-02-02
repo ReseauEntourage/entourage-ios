@@ -217,6 +217,7 @@ class ProfilFullViewController: UIViewController {
             // On spécifie le mode (interest, concern, involvement ou choiceDisponibility)
             EnhancedOnboardingConfiguration.shared.isInterestsFromSetting = true
             vc.mode = mode
+            vc.isAssociationGoal = (self.user?.partner != nil)
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }
@@ -299,6 +300,7 @@ class ProfilFullViewController: UIViewController {
         tableDTO.removeAll()
         
         guard let user = user else { return }
+        let isAssociation = user.partner != nil
         
         // 1) Header
         tableDTO.append(.header(user: user))
@@ -323,13 +325,19 @@ class ProfilFullViewController: UIViewController {
         }
         
         // (B) Envies d’agir
-        let userInvolvements = user.involvements ?? []
+        let userInvolvements = isAssociation ? (user.orientations ?? []) : (user.involvements ?? [])
         let involvementsDisplay: String
         if userInvolvements.isEmpty {
             involvementsDisplay = "no_data_available".localized
         } else {
             involvementsDisplay = userInvolvements
-                .map { TagsUtils.showTagTranslated($0) }
+                .map {
+                    if isAssociation {
+                        return TagsUtils.showOrientationTranslated($0)
+                    } else {
+                        return TagsUtils.showTagTranslated($0)
+                    }
+                }
                 .joined(separator: ", ")
         }
         
@@ -397,25 +405,27 @@ class ProfilFullViewController: UIViewController {
             subtitle: involvementsDisplay
         ))
         
-        // c) Catégories d’entraide
-        let categoriesTitle = isMe
+        if !isAssociation {
+            // c) Catégories d’entraide
+            let categoriesTitle = isMe
             ? "preferences_action_categories_title".localized
             : "preferences_action_categories_title_others".localized
-        tableDTO.append(.standard(
-            img: "ic_profil_full_action_category",
-            title: categoriesTitle,
-            subtitle: concernsDisplay
-        ))
-        
-        // d) Disponibilités
-        let availabilityTitle = isMe
+            tableDTO.append(.standard(
+                img: "ic_profil_full_action_category",
+                title: categoriesTitle,
+                subtitle: concernsDisplay
+            ))
+
+            // d) Disponibilités
+            let availabilityTitle = isMe
             ? "preferences_availability_title".localized
             : "preferences_availability_title_others".localized
-        tableDTO.append(.standard(
-            img: "ic_profil_full_disponibility",
-            title: availabilityTitle,
-            subtitle: availabilityDisplay
-        ))
+            tableDTO.append(.standard(
+                img: "ic_profil_full_disponibility",
+                title: availabilityTitle,
+                subtitle: availabilityDisplay
+            ))
+        }
         
         // --------------------------------------------------
         // SECTION : PARAMÈTRES (si c’est mon profil)

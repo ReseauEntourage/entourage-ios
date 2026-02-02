@@ -1724,5 +1724,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "editUser_gender_male" = "Чоловік";
 "editUser_gender_female" = "Жінка";
 "editUser_gender_secret" = "Не вказано";
-"onboarding_zone_potential_event_singular" = "потенційна подія на тиждень,";
-"onboarding_zone_potential_event_plural" = "потенційних подій на тиждень,";
+"orientation_share" = "Relayer vos événements de convivialité sur l'application";
+"orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
+"orientation_both_actions" = "Donner ou solliciter un coup de pouce";

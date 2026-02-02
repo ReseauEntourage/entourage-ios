@@ -1944,5 +1944,6 @@
 "editUser_gender_male" = "Man";
 "editUser_gender_female" = "Woman";
 "editUser_gender_secret" = "Not specified";
-"onboarding_zone_potential_event_singular" = "potential event per week,";
-"onboarding_zone_potential_event_plural" = "potential events per week,";
+"orientation_share" = "Relayer vos événements de convivialité sur l'application";
+"orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
+"orientation_both_actions" = "Donner ou solliciter un coup de pouce";
