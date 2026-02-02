@@ -163,7 +163,7 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
             involvementChoices = [
                 OnboardingChoice(id: "share", img: "img_asset_onboarding_sensib", title: "Relayer vos événements de convivialité sur l'application"),
                 OnboardingChoice(id: "guide", img: "img_asset_onboarding_convivialite", title: "Orienter vos bénéficiaires aux événements de convivialité"),
-                OnboardingChoice(id: "both_actions", img: "img_asset_onboarding_pouce", title: "Donner ou solliciter un coup de pouce")
+                OnboardingChoice(id: "help", img: "img_asset_onboarding_pouce", title: "Donner ou solliciter un coup de pouce")
             ]
         } else {
             let pref = EnhancedOnboardingConfiguration.shared.preference

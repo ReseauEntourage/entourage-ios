@@ -795,6 +795,8 @@ class TagsUtils {
             return "orientation_guide".localized
         case "both_actions":
             return "orientation_both_actions".localized
+        case "help":
+            return "orientation_both_actions".localized
         default:
             return showTagTranslated(section)
         }
