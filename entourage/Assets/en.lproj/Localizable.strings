@@ -1944,3 +1944,8 @@
 "editUser_gender_male" = "Man";
 "editUser_gender_female" = "Woman";
 "editUser_gender_secret" = "Not specified";
+
+"error_settings_notifs_disabled_title" = "Notifications disabled";
+"error_settings_notifs_disabled_message" = "To receive notifications, you must enable them in your phone settings.";
+"error_settings_notifs_disabled_button_settings" = "Settings";
+"error_settings_notifs_disabled_button_cancel" = "Cancel";

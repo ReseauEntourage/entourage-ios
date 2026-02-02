@@ -1683,3 +1683,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "editUser_gender_male" = "رجل";
 "editUser_gender_female" = "امرأة";
 "editUser_gender_secret" = "غير محدد";
+
+"error_settings_notifs_disabled_title" = "Notifications disabled";
+"error_settings_notifs_disabled_message" = "To receive notifications, you must enable them in your phone settings.";
+"error_settings_notifs_disabled_button_settings" = "Settings";
+"error_settings_notifs_disabled_button_cancel" = "Cancel";
