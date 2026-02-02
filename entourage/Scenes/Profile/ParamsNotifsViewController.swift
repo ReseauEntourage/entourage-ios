@@ -95,7 +95,11 @@ class ParamsNotifsViewController: BasePopViewController {
         if sender.isOn {
             UNUserNotificationCenter.current().getNotificationSettings { (settings) in
                 DispatchQueue.main.async {
-                    if settings.authorizationStatus == .denied || settings.authorizationStatus == .notDetermined {
+                    if settings.authorizationStatus == .denied {
+                        self.showSettingsAlert(sender: sender)
+                        return
+                    }
+                    if settings.authorizationStatus == .notDetermined {
                         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
                             DispatchQueue.main.async {
                                 if granted {
@@ -119,6 +123,34 @@ class ParamsNotifsViewController: BasePopViewController {
         }
     }
     
+    func showSettingsAlert(sender: UISwitch) {
+        let alert = UIAlertController(
+            title: "error_settings_notifs_disabled_title".localized,
+            message: "error_settings_notifs_disabled_message".localized,
+            preferredStyle: .alert
+        )
+
+        let settingsAction = UIAlertAction(title: "error_settings_notifs_disabled_button_settings".localized, style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+            sender.setOn(false, animated: true)
+            self.setAllSwitch(isOn: false)
+        }
+
+        let cancelAction = UIAlertAction(title: "error_settings_notifs_disabled_button_cancel".localized, style: .cancel) { _ in
+            sender.setOn(false, animated: true)
+            self.setAllSwitch(isOn: false)
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(settingsAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
     @IBAction func action_switch(_ sender: Any) {
         var notifPermissions = NotifInAppPermission()
         notifPermissions.action = ui_switch_actions.isOn

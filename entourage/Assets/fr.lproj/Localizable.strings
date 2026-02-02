@@ -1937,6 +1937,11 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "editUser_gender_male" = "Homme";
 "editUser_gender_female" = "Femme";
 "editUser_gender_secret" = "Non renseigné";
+
+"error_settings_notifs_disabled_title" = "Notifications désactivées";
+"error_settings_notifs_disabled_message" = "Pour recevoir les notifications, vous devez les autoriser dans les paramètres de votre téléphone.";
+"error_settings_notifs_disabled_button_settings" = "Paramètres";
+"error_settings_notifs_disabled_button_cancel" = "Annuler";
 "orientation_share" = "Relayer vos événements de convivialité sur l'application";
 "orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
 "orientation_both_actions" = "Donner ou solliciter un coup de pouce";
