@@ -1744,3 +1744,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "editUser_gender_male" = "Mann";
 "editUser_gender_female" = "Frau";
 "editUser_gender_secret" = "Keine Angabe";
+"onboarding_zone_potential_event_singular" = "mögliches Event pro Woche,";
+"onboarding_zone_potential_event_plural" = "mögliche Events pro Woche,";

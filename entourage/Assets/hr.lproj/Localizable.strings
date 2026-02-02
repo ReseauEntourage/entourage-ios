@@ -1425,3 +1425,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "editUser_gender_male" = "Muškarac";
 "editUser_gender_female" = "Žena";
 "editUser_gender_secret" = "Nije navedeno";
+"onboarding_zone_potential_event_singular" = "potencijalni događaj tjedno,";
+"onboarding_zone_potential_event_plural" = "potencijalnih događaja tjedno,";

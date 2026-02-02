@@ -1944,3 +1944,5 @@
 "editUser_gender_male" = "Man";
 "editUser_gender_female" = "Woman";
 "editUser_gender_secret" = "Not specified";
+"onboarding_zone_potential_event_singular" = "potential event per week,";
+"onboarding_zone_potential_event_plural" = "potential events per week,";
