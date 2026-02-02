@@ -368,8 +368,11 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableDTO[indexPath.row] {
-        case .collectionViewCell:
-            return 600
+        case .collectionViewCell(let choices):
+            let count = Double(choices.count)
+            let rows = ceil(count / 2.0)
+            let height = (rows * 170.0) + (max(0.0, rows - 1.0) * 5.0)
+            return CGFloat(height)
         default:
             return UITableView.automaticDimension
         }
