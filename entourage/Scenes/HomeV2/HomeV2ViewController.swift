@@ -226,7 +226,7 @@ class HomeV2ViewController: UIViewController {
         if config.isInterestsFromSetting {
             config.isInterestsFromSetting = false
             SVProgressHUD.dismiss()
-            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
             return
@@ -235,7 +235,7 @@ class HomeV2ViewController: UIViewController {
         if config.isOnboardingFromSetting {
             config.isOnboardingFromSetting = false
             SVProgressHUD.dismiss()
-            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
             return
