@@ -122,8 +122,14 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
             buttonView.heightAnchor.constraint(equalToConstant: height)
         ])
         
-        ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: height, right: 0)
-        ui_tableview.scrollIndicatorInsets = ui_tableview.contentInset
+        if let existingConstraint = self.view.constraints.first(where: {
+            ($0.firstItem as? NSObject == ui_tableview && $0.firstAttribute == .bottom) ||
+            ($0.secondItem as? NSObject == ui_tableview && $0.secondAttribute == .bottom)
+        }) {
+            self.view.removeConstraint(existingConstraint)
+        }
+
+        ui_tableview.bottomAnchor.constraint(equalTo: buttonView.topAnchor).isActive = true
     }
 
     private func preconfigureAvailability() {
