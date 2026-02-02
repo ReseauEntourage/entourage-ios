@@ -1729,3 +1729,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "error_settings_notifs_disabled_message" = "To receive notifications, you must enable them in your phone settings.";
 "error_settings_notifs_disabled_button_settings" = "Settings";
 "error_settings_notifs_disabled_button_cancel" = "Cancel";
+"orientation_share" = "Relayer vos événements de convivialité sur l'application";
+"orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
+"orientation_both_actions" = "Donner ou solliciter un coup de pouce";
+"onboarding_zone_potential_event_singular" = "потенційна подія на тиждень,";
+"onboarding_zone_potential_event_plural" = "потенційних подій на тиждень,";
