@@ -341,7 +341,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         // Label Suffixe (" événements potentiels par semaine,") -> ORANGE + BOLD
         eventsOrangeSuffixLabel.font = UIFont(name: "Quicksand-Bold", size: 15)
         eventsOrangeSuffixLabel.textColor = UIColor.appOrange
-        eventsOrangeSuffixLabel.text = "événements potentiels par semaine,"
+        eventsOrangeSuffixLabel.text = NSLocalizedString("onboarding_zone_potential_event_plural", comment: "")
         
         orangeLineStackView.addArrangedSubview(eventsCountLabel)
         orangeLineStackView.addArrangedSubview(eventsOrangeSuffixLabel)
@@ -386,6 +386,12 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
                     self.eventsMainStackView.isHidden = false // On affiche la stack principale
                     // L'animation ne touche que le chiffre, le reste est statique dans les autres labels
                     self.eventsCountLabel.animateCount(to: rounded, prefix: "")
+
+                    if rounded == 1 {
+                        self.eventsOrangeSuffixLabel.text = NSLocalizedString("onboarding_zone_potential_event_singular", comment: "")
+                    } else {
+                        self.eventsOrangeSuffixLabel.text = NSLocalizedString("onboarding_zone_potential_event_plural", comment: "")
+                    }
                 } else {
                     self.eventsMainStackView.isHidden = true
                 }
