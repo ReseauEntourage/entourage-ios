@@ -209,7 +209,7 @@ class HomeMainViewController: UIViewController {
     
     @IBAction func action_show_profile(_ sender: Any) {
         AnalyticsLoggerManager.logEvent(name: Home_action_profile)
-        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
