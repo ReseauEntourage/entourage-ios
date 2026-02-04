@@ -1734,3 +1734,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "orientation_both_actions" = "Donner ou solliciter un coup de pouce";
 "onboarding_zone_potential_event_singular" = "потенційна подія на тиждень,";
 "onboarding_zone_potential_event_plural" = "потенційних подій на тиждень,";
+"guide_help_orientation" = "Допомога та орієнтація";
