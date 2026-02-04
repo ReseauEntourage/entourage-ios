@@ -577,7 +577,7 @@ class MainGuideViewController: UIViewController {
         let envConfigManager = EnvironmentConfigurationManager.sharedInstance
         let url = envConfigManager.runsOnProduction ? "https://www.entourage.social/app/resources/eOB7jU8NNODY" : "https://preprod.entourage.social/app/resources/eyck8DuIn3cI"
         if let _url = URL(string: url) {
-            SafariWebManager.launchUrlInApp(url: _url, viewController: self.navigationController)
+            WebLinkManager.openUrl(url: _url, openInApp: true, presenterViewController: self.navigationController)
         }
     }
     
