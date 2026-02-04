@@ -1206,16 +1206,16 @@ un autre mot-clé ?</string>
                                 </connections>
                             </button>
                             <button clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4M-Ln-Qsh">
-                                <rect key="frame" x="307" y="507" width="58" height="58"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="207" y="521" width="148" height="30"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="ZcV-xc-e0X"/>
-                                    <constraint firstAttribute="width" constant="58" id="o45-yF-Ee7"/>
+                                    <constraint firstAttribute="height" constant="30" id="ZcV-xc-e0X"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="+" image="icn_plus_map_solidarity">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" title="Aide &amp; orientation">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <state key="selected">
@@ -1376,6 +1376,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                     <connections>
                         <outlet property="ui_button_filters" destination="B1J-ug-DMZ" id="W5o-8U-jsL"/>
                         <outlet property="ui_button_map_list" destination="di5-3y-k7k" id="Ieu-Wf-V4W"/>
+                        <outlet property="ui_button_plus" destination="H4M-Ln-Qsh" id="Qv4-Lz-P7H"/>
                         <outlet property="ui_constraint_height_view_topinfo" destination="fMb-5p-Hys" id="IAF-KE-bBi"/>
                         <outlet property="ui_label_info_web_gds" destination="PNq-RW-ZBO" id="Tay-lb-GR3"/>
                         <outlet property="ui_tableView" destination="Md1-ka-TuR" id="lJO-3y-clC"/>

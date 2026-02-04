@@ -1954,3 +1954,4 @@
 "orientation_both_actions" = "Donner ou solliciter un coup de pouce";
 "onboarding_zone_potential_event_singular" = "potential event per week,";
 "onboarding_zone_potential_event_plural" = "potential events per week,";
+"guide_help_orientation" = "Help & orientation";
