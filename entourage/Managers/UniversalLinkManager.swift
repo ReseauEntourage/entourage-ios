@@ -47,6 +47,16 @@ struct UniversalLinkManager {
                 if pathComponents.count > 3 + iterator , let _eventhashId = pathComponents[2+iterator] as? String, let _posthashId = pathComponents[3+iterator] as? String {
                     DeepLinkManager.showEventDetailMessageUniversalLink(instanceId: _eventhashId, postId: _posthashId)
                 }
+            }else if pathComponents.contains("outings") && pathComponents.contains("smalltalk") {
+                DeepLinkManager.showSuggestedSmallTalkEvent()
+            }else if pathComponents.contains("outings") && pathComponents.contains("webinar") {
+                DeepLinkManager.showWelcomeWebinar()
+            }else if pathComponents.contains("outings") && pathComponents.contains("create") {
+                DeepLinkManager.showEventCreation()
+            }else if pathComponents.contains("create-outing") {
+                DeepLinkManager.showEventCreation()
+            }else if pathComponents.contains("smalltalk") {
+                DeepLinkManager.showSmallTalkIntro()
             }else if pathComponents.contains("neighborhoods") && pathComponents.contains("chat_messages"){
                 if pathComponents.count > 3+iterator , let _grouphashId = pathComponents[2+iterator] as? String, let _posthashId = pathComponents[3+iterator] as? String {
                     DeepLinkManager.showNeighborhoodDetailMessageUniversalLink(instanceId: _grouphashId, postId: _posthashId)
