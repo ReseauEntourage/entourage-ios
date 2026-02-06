@@ -649,7 +649,18 @@ struct DeepLinkManager {
     }
 
     static func showWelcomeWebinar() {
-        // Not implemented yet
+        EventService.getWebinarEvent { event in
+            guard let event = event else { return }
+            DispatchQueue.main.async {
+                if let navVc = UIStoryboard(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+                    vc.eventId = event.uid
+                    vc.event = event
+                    vc.isAfterCreation = false
+                    vc.modalPresentationStyle = .fullScreen
+                    AppState.getTopViewController()?.present(navVc, animated: true)
+                }
+            }
+        }
     }
     
 }
