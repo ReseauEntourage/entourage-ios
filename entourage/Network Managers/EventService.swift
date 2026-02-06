@@ -696,7 +696,8 @@ struct EventService:ParsingDataCodable {
     }
 
     static func getWebinarEvent(completion: @escaping (Event?) -> Void) {
-        let endpoint = "outings/sensibilisation?token=\(UserDefaults.token ?? "")"
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String.init(format: kAPIEventSensibilisation, token)
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, _ in
             guard let data = data else {
                 completion(nil)
