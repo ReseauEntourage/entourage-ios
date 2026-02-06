@@ -66,7 +66,7 @@ class EventListCell: UITableViewCell {
         
         if let _author = event.author {
             if let _roles = _author.communityRoles{
-                if _roles.contains("Équipe Entourage") || _roles.contains("Ambassadeur") {
+                if _roles.contains("Équipe Entourage") || _roles.contains("Animateur") {
                     
                     self.ic_entoutou.isHidden = false
                 }else {
