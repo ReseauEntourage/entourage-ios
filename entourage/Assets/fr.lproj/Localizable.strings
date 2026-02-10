@@ -1769,7 +1769,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 
 /* Section Papotages Smalltalks */
-"home_smalltalk_title" = "Partager des « Bonnes Ondes » !";
+"home_smalltalk_title" = "Rejoindre une discussion solidaire";
 "onboarding_title" = "Prêts à partager des Bonnes ondes ?";
 "onboarding_start_button" = "Je commence";
 "onboarding_end_button" = "Annuler";
@@ -1849,8 +1849,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "small_talk_group_found_subtitle" = "Découvrez les personnes de votre groupe.";
 
 /* Accueil SmallTalk */
-"home_v2_title_small_talk" = "Partager des « Bonnes Ondes » !";
-"small_talk_subtitle_match" = "Découvrez un nouveau moyen de discuter et de créer des liens qui durent dans le temps !";
+"home_v2_title_small_talk" = "Rejoindre une discussion solidaire";
+"small_talk_subtitle_match" = "On vous met en relation avec un petit groupe de personnes qui partagent vos centres d’intérêt, partout en France.";
 "small_talk_button_match" = "Discuter";
 "small_talk_title_waiting" = "Bientôt de nouvelles rencontres";
 "small_talk_subtitle_waiting" = "On vous prévient dès qu’on a trouvé des gens qui sont sur la même longueur d’onde ;)";
