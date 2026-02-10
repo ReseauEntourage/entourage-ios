@@ -1870,8 +1870,8 @@
 "small_talk_group_found_subtitle" = "Meet the people in your group";
 
 /* Home section */
-"home_v2_title_small_talk" = "Join a solidarity discussion";
-"small_talk_subtitle_match" = "We connect you with a small group of people who share your interests, anywhere in France.";
+"home_v2_title_small_talk" = "Easy conversations";
+"small_talk_subtitle_match" = "We connect you with other members – a simple way to (re)build social ties.";
 "small_talk_button_match" = "Chat";
 "small_talk_title_waiting" = "Waiting";
 "small_talk_subtitle_waiting" = "You’ll get a message as soon as a group is ready";
@@ -1955,6 +1955,3 @@
 "onboarding_zone_potential_event_singular" = "potential event per week,";
 "onboarding_zone_potential_event_plural" = "potential events per week,";
 "guide_help_orientation" = "Help & orientation";
-
-// Added or updated automatically
-"home_smalltalk_title" = "Join a solidarity discussion";
