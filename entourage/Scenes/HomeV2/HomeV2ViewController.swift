@@ -412,7 +412,7 @@ class HomeV2ViewController: UIViewController {
             tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
         }
         //add condition
-        tableDTO.append(.cellTitle(title: "home_smalltalk_title".localized, subtitle: ""))
+        tableDTO.append(.cellTitle(title: "home_v2_title_small_talk".localized, subtitle: ""))
         tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
         if (allDemands.count > 0) {
             if isContributionPreference {
@@ -696,7 +696,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(pedagos: let pedagos):
             return 115
         case .cellSmallTalk(let userRequests):
-            return 200
+            return 250
         }
     }
 }

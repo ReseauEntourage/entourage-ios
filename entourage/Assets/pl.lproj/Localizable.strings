@@ -1769,3 +1769,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_potential_event_singular" = "potencjalne wydarzenie w tygodniu,";
 "onboarding_zone_potential_event_plural" = "potencjalnych wydarzeń w tygodniu,";
 "guide_help_orientation" = "Pomoc i orientacja";
+"home_v2_title_small_talk" = "Dołącz do dyskusji solidarnościowej";
+"small_talk_subtitle_match" = "Łączymy Cię z małą grupą osób o podobnych zainteresowaniach, w całej Francji.";
