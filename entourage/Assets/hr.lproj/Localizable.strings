@@ -1434,3 +1434,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
 "orientation_both_actions" = "Donner ou solliciter un coup de pouce";
 "guide_help_orientation" = "Pomoć i orijentacija";
+
+// Added or updated automatically
+"home_smalltalk_title" = "Pridružite se solidarnoj raspravi";
+"small_talk_subtitle_match" = "Povezujemo vas s malom grupom ljudi koji dijele vaše interese, bilo gdje u Francuskoj.";
+"home_v2_title_small_talk" = "Pridružite se solidarnoj raspravi";
