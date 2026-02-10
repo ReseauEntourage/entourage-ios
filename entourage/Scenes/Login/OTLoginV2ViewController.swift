@@ -448,7 +448,7 @@ struct LoginView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         PasswordFloatingField(
                             title: "login_label_code".localized, // "Saisir votre code"
-                            placeholder: "Ex : 123456",
+                            placeholder: "login_code_placeholder".localized,
                             text: $vm.password,
                             isSecured: $vm.isPasswordSecured
                         )
@@ -514,7 +514,7 @@ struct LoginView: View {
                     Text("login_button_connect".localized) // "Je me connecte"
                         .font(.custom("Quicksand-Bold", size: 18))
                         .foregroundColor(.white)
-                        .frame(height: 54) // Un peu plus haut
+                        .frame(height: 48) // Un peu plus haut
                         .frame(maxWidth: .infinity)
                         .background(Color(UIColor.appOrange))
                         .cornerRadius(27)
@@ -547,6 +547,7 @@ struct LoginView: View {
                 )
             }
         )
+        .ignoreKeyboardForFooter()
         .onDisappear {
             vm.stopTimer()
         }
@@ -622,6 +623,18 @@ final class OTLoginV2ViewController: UIHostingController<LoginView> {
                 // OTDeepLinkService.init().handleDeepLink(link) // Décommenter si le service est dispo
                 self.deeplink = nil
             }
+        }
+    }
+}
+
+// MARK: - Safe Area Helper
+private extension View {
+    @ViewBuilder
+    func ignoreKeyboardForFooter() -> some View {
+        if #available(iOS 15.0, *) {
+            self.ignoresSafeArea(.keyboard)
+        } else {
+            self.ignoresSafeArea(.all, edges: .bottom)
         }
     }
 }

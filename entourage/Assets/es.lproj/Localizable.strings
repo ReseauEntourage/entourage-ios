@@ -3178,3 +3178,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_potential_event_singular" = "evento potencial por semana,";
 "onboarding_zone_potential_event_plural" = "eventos potenciales por semana,";
 "guide_help_orientation" = "Ayuda y orientación";
+"login_code_placeholder" = "Enter your code";

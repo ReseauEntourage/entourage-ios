@@ -1658,3 +1658,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_potential_event_singular" = "eveniment potențial pe săptămână,";
 "onboarding_zone_potential_event_plural" = "evenimente potențiale pe săptămână,";
 "guide_help_orientation" = "Ajutor și orientare";
+"login_code_placeholder" = "Enter your code";

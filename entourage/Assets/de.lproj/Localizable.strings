@@ -1755,3 +1755,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_potential_event_singular" = "mögliches Event pro Woche,";
 "onboarding_zone_potential_event_plural" = "mögliche Events pro Woche,";
 "guide_help_orientation" = "Hilfe & Orientierung";
+"login_code_placeholder" = "Enter your code";

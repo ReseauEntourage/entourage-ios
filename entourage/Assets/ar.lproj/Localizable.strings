@@ -1694,3 +1694,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_potential_event_singular" = "حدث محتمل في الأسبوع،";
 "onboarding_zone_potential_event_plural" = "أحداث محتملة في الأسبوع،";
 "guide_help_orientation" = "المساعدة والتوجيه";
+"login_code_placeholder" = "Enter your code";
