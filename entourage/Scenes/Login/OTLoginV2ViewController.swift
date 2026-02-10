@@ -448,7 +448,7 @@ struct LoginView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         PasswordFloatingField(
                             title: "login_label_code".localized, // "Saisir votre code"
-                            placeholder: "Ex : 123456",
+                            placeholder: "login_placeholder_code".localized,
                             text: $vm.password,
                             isSecured: $vm.isPasswordSecured
                         )
@@ -514,10 +514,10 @@ struct LoginView: View {
                     Text("login_button_connect".localized) // "Je me connecte"
                         .font(.custom("Quicksand-Bold", size: 18))
                         .foregroundColor(.white)
-                        .frame(height: 54) // Un peu plus haut
+                        .frame(height: 48) // Un peu plus haut
                         .frame(maxWidth: .infinity)
                         .background(Color(UIColor.appOrange))
-                        .cornerRadius(27)
+                        .cornerRadius(24)
                 }
             }
             .padding(.horizontal, 20)
@@ -550,6 +550,7 @@ struct LoginView: View {
         .onDisappear {
             vm.stopTimer()
         }
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 

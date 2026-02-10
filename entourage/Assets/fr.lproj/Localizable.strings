@@ -96,7 +96,6 @@
 "login_title" = "Connexion";
 
 "login_forgot_code_title" = "Vous avez oublié votre code ?";
-"login_button_resend_code" = "Recevoir un nouveau code par sms";
 
 "login_label_change_phone_question" = "Vous avez changé de numéro de téléphone ?";
 "login_button_change_phone" = "Changer mon numéro";
