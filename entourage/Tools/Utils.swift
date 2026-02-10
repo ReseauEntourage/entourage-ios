@@ -291,6 +291,47 @@ import UIKit
         
         return dateString
     }
+    static func formatEventDateShort(date: Date?) -> String {
+        guard let date = date else { return "-" }
+        let dayFormatter = DateFormatter()
+        dayFormatter.locale = Locale.getPreferredLocale()
+        dayFormatter.dateFormat = "E"
+
+        let monthFormatter = DateFormatter()
+        monthFormatter.locale = Locale.getPreferredLocale()
+        monthFormatter.dateFormat = "MMM"
+
+        let dayNumFormatter = DateFormatter()
+        dayNumFormatter.locale = Locale.getPreferredLocale()
+        dayNumFormatter.dateFormat = "d"
+
+        let dayStr = dayFormatter.string(from: date).capitalized.replacingOccurrences(of: ".", with: "")
+        let monthStr = monthFormatter.string(from: date).capitalized
+        let dayNum = dayNumFormatter.string(from: date)
+
+        return "\(dayStr). \(dayNum) \(monthStr)"
+    }
+
+    static func formatEventDateLong(date: Date?) -> String {
+        guard let date = date else { return "-" }
+        let dayFormatter = DateFormatter()
+        dayFormatter.locale = Locale.getPreferredLocale()
+        dayFormatter.dateFormat = "EEEE"
+
+        let monthFormatter = DateFormatter()
+        monthFormatter.locale = Locale.getPreferredLocale()
+        monthFormatter.dateFormat = "MMMM"
+
+        let dayNumFormatter = DateFormatter()
+        dayNumFormatter.locale = Locale.getPreferredLocale()
+        dayNumFormatter.dateFormat = "d"
+
+        let dayStr = dayFormatter.string(from: date).capitalized
+        let monthStr = monthFormatter.string(from: date).capitalized
+        let dayNum = dayNumFormatter.string(from: date)
+
+        return "\(dayStr) \(dayNum) \(monthStr)"
+    }
 }
 
 class ImageLoaderSwift {

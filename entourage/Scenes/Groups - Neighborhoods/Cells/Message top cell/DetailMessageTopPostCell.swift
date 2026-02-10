@@ -52,7 +52,7 @@ class DetailMessageTopPostCell: UITableViewCell {
     
     func populateCell(message:PostMessage) {
         self.postMessage = message
-        ui_user.text = "\(message.user?.displayName ?? "-") le \(message.createdDateFormatted)"
+        ui_user.text = "\(message.user?.displayName ?? "-") le \(message.createdDateLongFormatted)"
         ui_comment.text = message.content
         if message.status == "deleted" {
             ui_comment.text = "deleted_post_text".localized

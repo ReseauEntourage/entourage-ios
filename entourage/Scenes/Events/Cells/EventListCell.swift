@@ -97,7 +97,7 @@ class EventListCell: UITableViewCell {
     
         ui_view_separator.isHidden = hideSeparator
         
-        ui_date.text = event.startDateTimeFormatted
+        ui_date.text = event.startDateFormatted
         ui_location.text = event.addressName
         ui_members?.text = event.membersCount ?? 0 > 1 ? String.init(format: "event_members_cell_list".localized, event.membersCount!) : String.init(format: "event_member_cell_list".localized, event.membersCount!)
     }

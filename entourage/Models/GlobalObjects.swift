@@ -29,6 +29,12 @@ struct PostMessage:Codable {
         }
     }
     
+    var createdDateLongFormatted:String {
+        get {
+            return Utils.formatEventDateLong(date:createdDate)
+        }
+    }
+
     var createdDateTimeFormatted:String {
         get {
             return Utils.formatEventDateTime(date:createdDate)
