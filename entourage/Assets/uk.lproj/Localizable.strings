@@ -1735,8 +1735,3 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_potential_event_singular" = "потенційна подія на тиждень,";
 "onboarding_zone_potential_event_plural" = "потенційних подій на тиждень,";
 "guide_help_orientation" = "Допомога та орієнтація";
-
-// Added or updated automatically
-"home_smalltalk_title" = "Приєднатися до солідарної дискусії";
-"small_talk_subtitle_match" = "Ми з'єднуємо вас з невеликою групою людей, які поділяють ваші інтереси, в будь-якій точці Франції.";
-"home_v2_title_small_talk" = "Приєднатися до солідарної дискусії";

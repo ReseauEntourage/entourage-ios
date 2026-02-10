@@ -3178,8 +3178,3 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_potential_event_singular" = "evento potencial por semana,";
 "onboarding_zone_potential_event_plural" = "eventos potenciales por semana,";
 "guide_help_orientation" = "Ayuda y orientación";
-
-// Added or updated automatically
-"home_smalltalk_title" = "Unirse a una discusión solidaria";
-"small_talk_subtitle_match" = "Te ponemos en contacto con un pequeño grupo de personas que comparten tus intereses, en cualquier parte de Francia.";
-"home_v2_title_small_talk" = "Unirse a una discusión solidaria";
