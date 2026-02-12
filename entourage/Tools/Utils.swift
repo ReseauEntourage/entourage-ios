@@ -229,11 +229,11 @@ import UIKit
                 let dfName = DateFormatter()
                 dfName.locale = Locale.getPreferredLocale()
                 dfName.dateFormat = "EEEE"
-                dateFormat.dateFormat = "dd MMMM YYYY"
+                dateFormat.dateFormat = "d MMMM"
                 dateString =  "\(dfName.string(from: date!).capitalized) \(dateFormat.string(from: date!))"
             }
             else {
-                dateFormat.dateFormat = "dd MMMM YYYY"
+                dateFormat.dateFormat = "d MMMM"
                 dateString =  dateFormat.string(from: date!)
             }
             
@@ -291,18 +291,53 @@ import UIKit
         
         return dateString
     }
+    // Helper for French short months
+    private static let frenchShortMonths = [
+        1: "Jan.", 2: "Fév.", 3: "Mars", 4: "Avr.", 5: "Mai", 6: "Juin",
+        7: "Juil.", 8: "Août", 9: "Sept.", 10: "Oct.", 11: "Nov.", 12: "Déc."
+    ]
+
+    // Helper for French short days
+    private static let frenchShortDays = [
+        1: "Dim.", 2: "Lun.", 3: "Mar.", 4: "Mer.", 5: "Jeu.", 6: "Ven.", 7: "Sam."
+    ]
+
     static func formatEventDateShort(date: Date?) -> String {
         guard let date = date else { return "-" }
+
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            return "Today".localized
+        }
+        if calendar.isDateInTomorrow(date) {
+            return "Tomorrow".localized
+        }
+
+        let locale = Locale.getPreferredLocale()
+        let isFrench = locale.languageCode == "fr"
+
+        if isFrench {
+            let gregorian = Calendar(identifier: .gregorian)
+            let dayIndex = gregorian.component(.weekday, from: date)
+            let monthIndex = gregorian.component(.month, from: date)
+            let dayNum = gregorian.component(.day, from: date)
+
+            let dayStr = frenchShortDays[dayIndex] ?? ""
+            let monthStr = frenchShortMonths[monthIndex] ?? ""
+
+            return "\(dayStr) \(dayNum) \(monthStr)"
+        }
+
         let dayFormatter = DateFormatter()
-        dayFormatter.locale = Locale.getPreferredLocale()
+        dayFormatter.locale = locale
         dayFormatter.dateFormat = "E"
 
         let monthFormatter = DateFormatter()
-        monthFormatter.locale = Locale.getPreferredLocale()
+        monthFormatter.locale = locale
         monthFormatter.dateFormat = "MMM"
 
         let dayNumFormatter = DateFormatter()
-        dayNumFormatter.locale = Locale.getPreferredLocale()
+        dayNumFormatter.locale = locale
         dayNumFormatter.dateFormat = "d"
 
         let dayStr = dayFormatter.string(from: date).capitalized.replacingOccurrences(of: ".", with: "")
@@ -314,6 +349,15 @@ import UIKit
 
     static func formatEventDateLong(date: Date?) -> String {
         guard let date = date else { return "-" }
+
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            return "Today".localized
+        }
+        if calendar.isDateInTomorrow(date) {
+            return "Tomorrow".localized
+        }
+
         let dayFormatter = DateFormatter()
         dayFormatter.locale = Locale.getPreferredLocale()
         dayFormatter.dateFormat = "EEEE"
