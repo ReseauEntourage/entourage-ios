@@ -10,13 +10,13 @@ import UIKit
 
 class MainTabbarViewController: UITabBarController {
 
-    var homeVC:UINavigationController!
-    var actionsVC:UINavigationController!
-    var messagesVC:UINavigationController!
-    var groupVC:UINavigationController!
-    var eventsVC:UINavigationController!
+    var homeVC: UINavigationController!
+    var actionsVC: UINavigationController!
+    var messagesVC: UINavigationController!
+    var groupVC: UINavigationController!
+    var eventsVC: UINavigationController!
     
-    var temporaryNavPop:UIViewController? = nil
+    var temporaryNavPop: UIViewController? = nil
     
     var isAskForHelp = false
     var addEditEvent = false
@@ -26,14 +26,30 @@ class MainTabbarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        UITabBar.appearance().tintColor = UIColor.appOrange
-        UITabBar.appearance().barTintColor = UIColor.white
-        UITabBar.appearance().isTranslucent = false
+        
+        // --- FIX POUR IPHONE 17 / iOS 15+ (Fond blanc & Layout) ---
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.white
+            appearance.shadowColor = UIColor.clear // Optionnel : supprime la ligne grise fine si besoin
+            
+            // On applique la configuration aux états "standard" et "scrollEdge" (quand on scroll en bas)
+            self.tabBar.standardAppearance = appearance
+            self.tabBar.scrollEdgeAppearance = appearance
+            self.tabBar.tintColor = UIColor.appOrange
+        } else {
+            // Fallback pour les anciennes versions
+            view.backgroundColor = UIColor.white
+            UITabBar.appearance().tintColor = UIColor.appOrange
+            UITabBar.appearance().barTintColor = UIColor.white
+            UITabBar.appearance().isTranslucent = false
+        }
+        // ---------------------------------------------------------
         
         delegate = self
         
-       setupVCs()
+        setupVCs()
         
         AnalyticsLoggerManager.updateAnalyticsWitUser()
         
@@ -61,6 +77,7 @@ class MainTabbarViewController: UITabBarController {
         self.boldSelectedItem()
         Logger.print("***** discover group : \(groupVC.topViewController)")
     }
+    
     @objc func showMyNeighborhoods() {
         if let vc = groupVC.topViewController as? NeighborhoodHomeViewController {
             vc.setDiscoverFirst()
@@ -69,9 +86,6 @@ class MainTabbarViewController: UITabBarController {
         self.boldSelectedItem()
         Logger.print("***** My group : \(groupVC.topViewController)")
     }
-    
-
-    
     
     @objc func showDiscoverEvents() {
         if let vc = eventsVC.topViewController as? EventListMainV2ViewController {
@@ -96,6 +110,7 @@ class MainTabbarViewController: UITabBarController {
         self.selectedIndex = 1
         self.boldSelectedItem()
     }
+    
     @objc func showActionsDemand() {
         if let vc = actionsVC.topViewController as? ActionsMainHomeViewController {
             vc.setSolicitationsFirst()
@@ -103,6 +118,7 @@ class MainTabbarViewController: UITabBarController {
         self.selectedIndex = 1
         self.boldSelectedItem()
     }
+    
     @objc func showHome() {
         self.selectedIndex = 0
         self.boldSelectedItem()
@@ -116,7 +132,7 @@ class MainTabbarViewController: UITabBarController {
         self.boldSelectedItem()
     }
     
-    @objc func updateBadgeCount(_ notification:Notification) {
+    @objc func updateBadgeCount(_ notification: Notification) {
         if let badge = UserDefaults.badgeCount, badge > 0 {
             let newValue = badge > 9 ? "9+" : "\(badge)"
             messagesVC.tabBarItem.badgeValue = newValue
@@ -145,6 +161,7 @@ class MainTabbarViewController: UITabBarController {
         homeVC.tabBarItem.tag = 0 //
         homeVC.tabBarItem.image = UIImage.init(named: "ic_home_off")?.withRenderingMode(.alwaysOriginal)
         homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_home_on")
+        
         let _giftsVC = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "home_actions_vc")
         actionsVC = UINavigationController.init(rootViewController: _giftsVC)
         actionsVC.isNavigationBarHidden = true
@@ -152,7 +169,6 @@ class MainTabbarViewController: UITabBarController {
         actionsVC.tabBarItem.image = UIImage.init(named: "ic_gifts_off")?.withRenderingMode(.alwaysOriginal)
         actionsVC.tabBarItem.selectedImage = UIImage.init(named: "ic_gifts_on")
         actionsVC.tabBarItem.tag = 1
-        
         
         let  _msgVC = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "home_messages_vc")
         messagesVC = UINavigationController.init(rootViewController: _msgVC)
@@ -171,7 +187,6 @@ class MainTabbarViewController: UITabBarController {
         groupVC.tabBarItem.selectedImage = UIImage.init(named: "ic_group_on")
         groupVC.tabBarItem.tag = 3
         
-        
         let _eventsVC = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "home_new_events_vc")
         eventsVC = UINavigationController.init(rootViewController: _eventsVC)
         eventsVC.isNavigationBarHidden = true
@@ -179,24 +194,32 @@ class MainTabbarViewController: UITabBarController {
         eventsVC.tabBarItem.image = UIImage.init(named: "ic_event_off")?.withRenderingMode(.alwaysOriginal)
         eventsVC.tabBarItem.selectedImage = UIImage.init(named: "ic_event_on")
         eventsVC.tabBarItem.tag = 4
-        viewControllers = [homeVC,actionsVC,messagesVC,groupVC,eventsVC]
-        boldSelectedItem()
+        
+        viewControllers = [homeVC, actionsVC, messagesVC, groupVC, eventsVC]
+        
+        // FIX: On attend que le cycle de layout initial soit terminé pour appliquer le style
+        // Cela règle le problème des icones qui s'empilent à gauche au démarrage
+        DispatchQueue.main.async {
+            self.boldSelectedItem()
+        }
     }
     
     @objc func boldSelectedItem() {
         let regularFont = ApplicationTheme.getFontNunitoLight(size: 13)
-        let regularTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.appGris112,NSAttributedString.Key.font:regularFont]
+        let regularTextAttr: [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor: UIColor.appGris112, NSAttributedString.Key.font: regularFont]
         
-        for item in tabBar.items! {
-            item.setTitleTextAttributes(regularTextAttr as [NSAttributedString.Key : Any], for: .normal)
+        if let items = tabBar.items {
+            for item in items {
+                item.setTitleTextAttributes(regularTextAttr, for: .normal)
+            }
         }
         
-        let selectedFont = ApplicationTheme.getFontNunitoLight(size: 13)
-        let selectionTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.appOrange,NSAttributedString.Key.font:selectedFont]
+        let selectedFont = ApplicationTheme.getFontNunitoLight(size: 13) // Si tu as une font Bold, mets la ici
+        let selectionTextAttr: [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor: UIColor.appOrange, NSAttributedString.Key.font: selectedFont]
         
-        tabBar.selectedItem?.setTitleTextAttributes(selectionTextAttr as [NSAttributedString.Key : Any], for: .normal)
+        tabBar.selectedItem?.setTitleTextAttributes(selectionTextAttr, for: .normal)
         
-       
+        
         //Analytics
         if oldItemSelected == currentItemSelected {
             return
@@ -231,7 +254,6 @@ extension MainTabbarViewController: UITabBarControllerDelegate {
         oldItemSelected = currentItemSelected
         currentItemSelected = item.tag
         boldSelectedItem()
-        
         
         switch item.tag {
         case 0://Home
