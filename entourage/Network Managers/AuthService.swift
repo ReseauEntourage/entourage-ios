@@ -24,7 +24,7 @@ struct AuthService: ParsingDataCodable {
             switch g.lowercased() {
             case "homme", "male":   return "male"
             case "femme", "female": return "female"
-            case "non binaire", "non-binaire", "non_binary", "autre", "other", "secret":
+            case "non binaire", "non-binaire", "non_binary", "autre", "other", "secret", "non renseigné", "non renseigne":
                 return "secret"
             default:
                 return nil // inconnu → on n’envoie pas

@@ -22,25 +22,37 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
     var delegate:EnhancedOnboardingButtonDelegate?
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+        // Default configuration
         configureOrangeButton(ui_btn_next, withTitle: "enhanced_onboarding_button_title_next".localized)
         configureWhiteButton(ui_btn_configure_later, withTitle: "enhanced_onboarding_button_title_later".localized)
-        let config = EnhancedOnboardingConfiguration.shared
-        if config.isInterestsFromSetting{
-            configureOrangeButton(ui_btn_next, withTitle: "button_title_for_setting_onboarding".localized)
+    }
+    
+    func configure(isSettings: Bool, isLastStep: Bool) {
+        ui_btn_configure_later.addTarget(self, action: #selector(onConfigureLaterClick), for: .touchUpInside)
+        ui_btn_next.addTarget(self, action: #selector(onBtnNextClick), for: .touchUpInside)
+
+        if isSettings {
+            // Settings: Annuler / Valider
+            configureOrangeButton(ui_btn_next, withTitle: "validate".localized)
+            configureWhiteButton(ui_btn_configure_later, withTitle: "cancel".localized)
+        } else {
+            // Onboarding
+            let nextTitle = isLastStep ? "action_create_close_button".localized : "enhanced_onboarding_button_title_next".localized
+            let laterTitle = "enhanced_onboarding_button_title_later".localized
+
+            configureOrangeButton(ui_btn_next, withTitle: nextTitle)
+            configureWhiteButton(ui_btn_configure_later, withTitle: laterTitle)
         }
     }
-    
-    func configure(){
-        ui_btn_configure_later.addTarget(self, action: #selector(onConfigureLaterClick), for: .touchUpInside)
-        self.ui_btn_next.setTitle("validate".localized, for: .normal)
-        self.ui_btn_configure_later.setTitle("cancel".localized, for: .normal)
-        ui_btn_next.addTarget(self, action: #selector(onBtnNextClick), for: .touchUpInside)
+
+    func configure() {
+        // Fallback for compatibility if needed, though we should prefer the explicit method
+        configure(isSettings: false, isLastStep: false)
     }
     
-    func configureForMainFilter(){
-        self.configure()
-        self.ui_btn_next.setTitle("validate".localized, for: .normal)
-        self.ui_btn_configure_later.setTitle("cancel".localized, for: .normal)
+    func configureForMainFilter() {
+        configure(isSettings: true, isLastStep: false)
     }
     
     @objc func onConfigureLaterClick(){

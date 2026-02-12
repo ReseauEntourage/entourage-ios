@@ -187,7 +187,7 @@ final class OnboardingPhase1VM: ObservableObject {
         let n = normalized(label)
         if n.contains("femme") { return 0 }
         if n.contains("homme") { return 1 }
-        if n.contains("autre") || n.contains("non binaire") || n.contains("non-binaire") || n.contains("autres") { return 2 }
+        if n.contains("autre") || n.contains("non binaire") || n.contains("non-binaire") || n.contains("autres") || n.contains("non renseigné") || n.contains("non renseigne") { return 2 }
         return 3
     }
 
@@ -302,9 +302,17 @@ final class OnboardingPhase1VM: ObservableObject {
                     self.discoverySourcesMap = meta.user?.discoverySources ?? [:]
 
                     // Genders: ordre forcé Femme > Homme > Autre, puis le reste
-                    let labelsG = Array(self.gendersMap.values)
+                    var labelsG = Array(self.gendersMap.values)
+
+                    // On remplace "Autre" par "Non renseigné" pour l'affichage
+                    for (i, val) in labelsG.enumerated() {
+                        if val.caseInsensitiveCompare("autre") == .orderedSame {
+                            labelsG[i] = "Non renseigné"
+                        }
+                    }
+
                     if labelsG.isEmpty {
-                        self.genderOptions = ["Femme", "Homme", "Autre"]
+                        self.genderOptions = ["Femme", "Homme", "Non renseigné"]
                     } else {
                         self.genderOptions = labelsG.sorted { a, b in
                             let pa = self.genderPriority(a)
@@ -334,7 +342,7 @@ final class OnboardingPhase1VM: ObservableObject {
                 case .failure:
                     self.gendersMap = [:]
                     self.discoverySourcesMap = [:]
-                    self.genderOptions = ["Femme", "Homme", "Autre"]
+                    self.genderOptions = ["Femme", "Homme", "Non renseigné"]
                     self.howWeMetOptions = []
                 }
                 self.recomputeCanProceed()

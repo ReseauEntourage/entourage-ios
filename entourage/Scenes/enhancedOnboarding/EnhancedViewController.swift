@@ -113,7 +113,7 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         self.stickyButtonView = buttonView
         
-        let height: CGFloat = 130
+        let height: CGFloat = 90
         
         NSLayoutConstraint.activate([
             buttonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -243,7 +243,7 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         case .associationPresentation:
             AnalyticsLoggerManager.logEvent(name: "onboarding_association_view")
             tableDTO.append(.backArrow)
-            tableDTO.append(.title(title: "Présentez votre association", subtitle: "Ajoutez votre logo et une courte description."))
+            tableDTO.append(.title(title: "Présentez votre association à la communauté", subtitle: "Ajoutez votre logo et une courte description pour que les membres de la communauté sachent qui vous êtes et ce que vous faites."))
             
             // Chargement des données si nécessaire
             if associationDescription == nil && associationLogoImage == nil, let pid = currentPartnerId {
@@ -254,11 +254,26 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         
         ui_tableview.reloadData()
+        updateStickyFooter()
         
         if hasChangedMod {
             hasChangedMod = false
             ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
+    }
+
+    private func updateStickyFooter() {
+        guard let buttonView = stickyButtonView else { return }
+        let isSettings = EnhancedOnboardingConfiguration.shared.isInterestsFromSetting
+
+        var isLastStep = false
+        if isAssociationGoal {
+            isLastStep = (mode == .associationPresentation)
+        } else {
+            isLastStep = (mode == .choiceDisponibility)
+        }
+
+        buttonView.configure(isSettings: isSettings, isLastStep: isLastStep)
     }
 
     func presentViewControllerWithAnimation(identifier: String) {
