@@ -206,7 +206,7 @@ struct User: Codable {
         guard let roles = roles else {
             return false
         }
-        return roles.contains("ambassador") || roles.contains("Animateur")
+        return roles.contains("ambassador") || roles.contains("Animateur Entourage")
     }
 }
 
@@ -280,7 +280,7 @@ struct UserLightNeighborhood: Codable {
             var currentRole: String? = nil
             if let firstRole = communityRoles.first {
                 currentRole = firstRole
-                if currentRole == "Animateur" {
+                if currentRole == "Animateur Entourage" {
                     currentRole = "Animateur Entourage"
                 } else if currentRole == "Équipe Entourage" {
                     currentRole = "Équipe"
@@ -336,7 +336,7 @@ struct UserLightNeighborhood: Codable {
         guard let role = role else {
             return false
         }
-        return role.contains("ambassador") || role.contains("Animateur")
+        return role.contains("ambassador") || role.contains("Animateur Entourage")
     }
 }
 
