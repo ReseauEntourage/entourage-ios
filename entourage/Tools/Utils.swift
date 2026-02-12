@@ -293,6 +293,14 @@ import UIKit
     }
     static func formatEventDateShort(date: Date?) -> String {
         guard let date = date else { return "-" }
+
+        if Calendar.current.isDateInToday(date) {
+            return "Today".localized
+        }
+        else if Calendar.current.isDateInTomorrow(date) {
+            return "Tomorrow".localized
+        }
+
         let dayFormatter = DateFormatter()
         dayFormatter.locale = Locale.getPreferredLocale()
         dayFormatter.dateFormat = "E"
@@ -314,6 +322,14 @@ import UIKit
 
     static func formatEventDateLong(date: Date?) -> String {
         guard let date = date else { return "-" }
+
+        if Calendar.current.isDateInToday(date) {
+            return "Today".localized
+        }
+        else if Calendar.current.isDateInTomorrow(date) {
+            return "Tomorrow".localized
+        }
+
         let dayFormatter = DateFormatter()
         dayFormatter.locale = Locale.getPreferredLocale()
         dayFormatter.dateFormat = "EEEE"

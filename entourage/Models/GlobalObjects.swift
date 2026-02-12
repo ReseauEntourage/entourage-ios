@@ -110,12 +110,23 @@ struct PostMessage:Codable {
             let month = components.month ?? 0
             let year = components.year ?? 0
 
-            let df = DateFormatter()
-            df.locale = Locale.getPreferredLocale()
-            let monthLiterral = df.standaloneMonthSymbols[month - 1]
-            let dayLitteral:String = date.dayNameOfWeek()?.localizedCapitalized ?? "-"
+            var dateTitle = ""
 
-            return DayMonthYearKey(dayId: day, monthId: month, date: date, dateString: "\(dayLitteral) \(day) \(monthLiterral) \(year)")
+            if Calendar.current.isDateInToday(date) {
+                dateTitle = "Today".localized
+            }
+            else if Calendar.current.isDateInTomorrow(date) {
+                dateTitle = "Tomorrow".localized
+            }
+            else {
+                let df = DateFormatter()
+                df.locale = Locale.getPreferredLocale()
+                let monthLiterral = df.standaloneMonthSymbols[month - 1]
+                let dayLitteral:String = date.dayNameOfWeek()?.localizedCapitalized ?? "-"
+                dateTitle = "\(dayLitteral) \(day) \(monthLiterral) \(year)"
+            }
+
+            return DayMonthYearKey(dayId: day, monthId: month, date: date, dateString: dateTitle)
         }
         
         let sortedDict = isAscendant ? dict.sorted { $0.key.date ?? Date() < $1.key.date ?? Date() } : dict.sorted { $0.key.date ?? Date() > $1.key.date ?? Date() }
