@@ -153,10 +153,7 @@ class ConversationsMainHomeViewController: UIViewController {
             isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 
             if let date = isoFormatter.date(from: subname) {
-                let outputFormatter = DateFormatter()
-                outputFormatter.dateFormat = "dd/MM/yyyy"
-                outputFormatter.locale = Locale(identifier: "fr_FR")
-                return outputFormatter.string(from: date)
+                return Utils.formatEventDateShort(date: date)
             }
             return subname // si ce n'est pas une date, on retourne tel quel
         }()
