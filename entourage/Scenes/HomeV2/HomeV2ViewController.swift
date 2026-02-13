@@ -696,7 +696,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(pedagos: let pedagos):
             return 115
         case .cellSmallTalk(let userRequests):
-            return 250
+            return 200
         }
     }
 }
