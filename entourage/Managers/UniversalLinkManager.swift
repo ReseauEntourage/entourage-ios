@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct UniversalLinkManager {
     static let prodURL = "app.entourage.social"
@@ -13,120 +14,164 @@ struct UniversalLinkManager {
     static let stagingURL = "entourage-webapp-preprod.herokuapp.com"
     static let stagingURL2 = "preprod.entourage.social"
 
-    
-    static func handleUniversalLink(components:URLComponents){
-        let pathComponents = components.path.components(separatedBy: "/")
-        // check if the incoming URL matches any of the URLs you want to handle
-        if components.host == stagingURL || components.host == prodURL || components.host == prodURL2 || components.host == stagingURL2  {
-            if pathComponents.count ==  1 {
-                DeepLinkManager.showHomeUniversalLink()
-                return
+    static func handleUniversalLink(components: URLComponents) {
+        // 1. Validation de l'hôte
+        let validHosts = [stagingURL, stagingURL2, prodURL, prodURL2]
+        guard let host = components.host, validHosts.contains(host) else { return }
+
+        // 2. Nettoyage du path (Équivalent du uri.pathSegments d'Android)
+        var pathElements = components.path.components(separatedBy: "/").filter { !$0.isEmpty }
+        
+        // On enlève "app" si c'est le premier élément pour stabiliser les index
+        // (Ça évite les crashs que tu pourrais avoir sur Android si le lien n'a pas "/app/")
+        if pathElements.first == "app" {
+            pathElements.removeFirst()
+        }
+
+        if pathElements.isEmpty {
+            DeepLinkManager.showHomeUniversalLink()
+            return
+        }
+
+        let mainEntity = pathElements[0]
+
+        switch mainEntity {
+        
+        // --- 1. Bonnes ondes ---
+        case "good-waves":
+            // Android: SmallTalkIntroActivity
+            DeepLinkManager.showSmallTalkIntro()
+            
+        // --- 2. Charte éthique ---
+        case "charte-ethique-entourage":
+            // Android: Intent.ACTION_VIEW disclaimer_link_public
+            if let url = URL(string: "https://www.entourage.social/charte-ethique-grand-public") {
+                UIApplication.shared.open(url)
             }
             
-            if pathComponents[0] == "" && pathComponents[1] == "" {
-                DeepLinkManager.showHomeUniversalLink()
-            }
-            if pathComponents.count == 2 && pathComponents[1] == "app"{
-                DeepLinkManager.showHomeUniversalLink()
-            }
-            
-            var iterator = 0
-            if components.host != stagingURL {
-                iterator = 1
-            }
-            
-            
-            
-            if pathComponents.contains("actions"){
-                if let url = components.url {
-                    WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
-                }
-            }
+        // --- 3. Outings (Événements) ---
+        case "outings":
+            if pathElements.count > 1 {
+                let subEntity = pathElements[1]
                 
-            if pathComponents.contains("outings") && pathComponents.contains("chat_messages"){
-                if pathComponents.count > 3 + iterator , let _eventhashId = pathComponents[2+iterator] as? String, let _posthashId = pathComponents[3+iterator] as? String {
-                    DeepLinkManager.showEventDetailMessageUniversalLink(instanceId: _eventhashId, postId: _posthashId)
-                }
-            }else if pathComponents.contains("outings") && pathComponents.contains("good-waves") {
-                DeepLinkManager.showSuggestedSmallTalkEvent()
-            }else if pathComponents.contains("outings") && pathComponents.contains("webinar") {
-                DeepLinkManager.showWelcomeWebinar()
-            }else if pathComponents.contains("outings") && pathComponents.contains("create") {
-                DeepLinkManager.showEventCreation()
-            }else if pathComponents.contains("create-outing") {
-                DeepLinkManager.showEventCreation()
-            }else if pathComponents.contains("smalltalk") {
-                DeepLinkManager.showSmallTalkIntro()
-            }else if pathComponents.contains("neighborhoods") && pathComponents.contains("chat_messages"){
-                if pathComponents.count > 3+iterator , let _grouphashId = pathComponents[2+iterator] as? String, let _posthashId = pathComponents[3+iterator] as? String {
-                    DeepLinkManager.showNeighborhoodDetailMessageUniversalLink(instanceId: _grouphashId, postId: _posthashId)
-                }
-
-            }else if pathComponents.contains("conversations"){
-                if let _convId = pathComponents[2+iterator] as? String {
-                    DeepLinkManager.showConversationUniversalLink(conversationId: _convId)
-                }
-
-            }else if pathComponents.contains("outings") {
-                if pathComponents.count > 3 + iterator, let _hashId = pathComponents[2+iterator] as? String {
-                    DeepLinkManager.showOutingUniversalLinkWithAgenda(id: _hashId)
-                } else if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
-                    DeepLinkManager.showOutingUniversalLink(id: _hashId)
-                }else{
-                    DeepLinkManager.showOutingListUniversalLink()
-                }
-            }else if pathComponents.contains("neighborhoods") || pathComponents.contains("groups") {
-                if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
-                    DeepLinkManager.showNeighborhoodDetailUniversalLink(id: _hashId)
-                }else{
-                    DeepLinkManager.showNeiborhoodListUniversalLink()
-                }
-
-            }else if pathComponents.contains("conversations") || pathComponents.contains("messages") {
-                DeepLinkManager.showConversationUniversalLink(conversationId: "AAAAA")
-
-            }else if pathComponents.contains("solicitations") {
-                if pathComponents.contains("new"){
-                    DeepLinkManager.showActionNewUniversalLink(isContrib: false)
-                }else  if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
-                    DeepLinkManager.showActionUniversalLink(id: _hashId, isContrib: false)
-                }else{
-                    DeepLinkManager.showSolicitationListUniversalLink()
-                }
-                
-            }else if pathComponents.contains("contributions") {
-                if pathComponents.contains("new"){
-                    DeepLinkManager.showActionNewUniversalLink(isContrib: true)
-                }else  if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
-                    DeepLinkManager.showActionUniversalLink(id: _hashId, isContrib: true)
-                }else{
-                    DeepLinkManager.showContribListUniversalLink()
-                }
-                
-            }else if pathComponents.contains("resources") {
-                if pathComponents.count > 2+iterator , let _hashId = pathComponents[2+iterator] as? String{
-                    DeepLinkManager.showResourceUniversalLink(id: _hashId)
-                }else{
-                    DeepLinkManager.showRessourceListUniversalLink()
-                }
-            }else if pathComponents.contains("map") {
-                DeepLinkManager.showMap()
-            }else if pathComponents.contains("users") || pathComponents.contains("user") {
-                // Vérifie que le tableau contient bien l'ID de l'utilisateur après "users"
-                if pathComponents.count > 2 + iterator {
-                    let userSID = pathComponents[2 + iterator]
-                    // Appel d'une fonction dédiée pour afficher le profil utilisateur
-                    if let userIdInt = Int(userSID) {
-                        DeepLinkManager.showUser(userId: userIdInt)
+                switch subEntity {
+                case "papotages":
+                    // Android: presenter.getEventSmallTalk()
+                    DeepLinkManager.showSuggestedSmallTalkEvent()
+                    
+                case "new", "create":
+                    // Android: CreateEventActivity
+                    DeepLinkManager.showEventCreation()
+                    
+                case "webinar":
+                    // Android: presenter.getEventSensibilisation()
+                    DeepLinkManager.showWelcomeWebinar()
+                    
+                case "chat_messages": // Format: /app/outings/chat_messages/ID_EVENT/ID_POST
+                    if pathElements.count > 3 {
+                        let eventId = pathElements[2]
+                        let postId = pathElements[3]
+                        DeepLinkManager.showEventDetailMessageUniversalLink(instanceId: eventId, postId: postId)
+                    }
+                    
+                default:
+                    // Si size > 3 sur Android = Agenda à true
+                    if pathElements.count > 2 {
+                        DeepLinkManager.showOutingUniversalLinkWithAgenda(id: subEntity)
                     } else {
-                        // Gérer le cas où la conversion échoue
+                        DeepLinkManager.showOutingUniversalLink(id: subEntity)
                     }
                 }
-            }else if pathComponents.contains("chart-event"){
-                DeepLinkManager.showCGU()
+            } else {
+                DeepLinkManager.showOutingListUniversalLink()
+            }
+            
+        // --- Actions ---
+        case "actions":
+            if let url = components.url {
+                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
+            }
+            
+        // --- Créations génériques ---
+        case "create-outing":
+            DeepLinkManager.showEventCreation()
+            
+        case "smalltalk":
+            DeepLinkManager.showSmallTalkIntro()
+            
+        // --- Groupes & Voisinages ---
+        case "neighborhoods", "groups":
+            if pathElements.count > 1 {
+                let subEntity = pathElements[1]
+                
+                if subEntity == "chat_messages" && pathElements.count > 3 {
+                    DeepLinkManager.showNeighborhoodDetailMessageUniversalLink(instanceId: pathElements[2], postId: pathElements[3])
+                } else {
+                    DeepLinkManager.showNeighborhoodDetailUniversalLink(id: subEntity)
+                }
+            } else {
+                DeepLinkManager.showNeiborhoodListUniversalLink()
+            }
+            
+        // --- Conversations ---
+        case "conversations", "messages":
+            if pathElements.count > 1 {
+                DeepLinkManager.showConversationUniversalLink(conversationId: pathElements[1])
+            } else {
+                DeepLinkManager.showConversationUniversalLink(conversationId: "AAAAA")
+            }
+            
+        // --- Solicitations & Contributions ---
+        case "solicitations":
+            handleContributionOrSolicitation(elements: pathElements, isContrib: false)
+            
+        case "contributions":
+            handleContributionOrSolicitation(elements: pathElements, isContrib: true)
+            
+        // --- Ressources ---
+        case "resources":
+            if pathElements.count > 1 {
+                DeepLinkManager.showResourceUniversalLink(id: pathElements[1])
+            } else {
+                DeepLinkManager.showRessourceListUniversalLink()
+            }
+            
+        // --- Map ---
+        case "map":
+            DeepLinkManager.showMap()
+            
+        // --- Utilisateurs ---
+        case "users", "user":
+            if pathElements.count > 1, let userIdInt = Int(pathElements[1]) {
+                DeepLinkManager.showUser(userId: userIdInt)
+            }
+            
+        // --- CGU / Charte ---
+        case "chart-event":
+            DeepLinkManager.showCGU()
+            
+        // --- Fallback ---
+        default:
+            DeepLinkManager.showHomeUniversalLink()
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    private static func handleContributionOrSolicitation(elements: [String], isContrib: Bool) {
+        if elements.count > 1 {
+            let subEntity = elements[1]
+            if subEntity == "new" {
+                DeepLinkManager.showActionNewUniversalLink(isContrib: isContrib)
+            } else {
+                DeepLinkManager.showActionUniversalLink(id: subEntity, isContrib: isContrib)
+            }
+        } else {
+            if isContrib {
+                DeepLinkManager.showContribListUniversalLink()
+            } else {
+                DeepLinkManager.showSolicitationListUniversalLink()
             }
         }
     }
 }
-
-
