@@ -42,11 +42,13 @@ enum InstanceType:String {
     case outing_post
     case smalltalk
     case almost_matches
+    case birthday
     case none
 
     
     static func getFromString(key:String) -> InstanceType {
         switch key {
+        case "birthday": return .birthday
         case "pois": return .pois
         case "users","user": return .users
         case "neighborhoods","neighborhood": return .neighborhoods

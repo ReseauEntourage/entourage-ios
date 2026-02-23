@@ -1956,3 +1956,7 @@
 "onboarding_zone_potential_event_plural" = "potential events per week,";
 "guide_help_orientation" = "Help & orientation";
 "Tomorrow" = "Tomorrow";
+
+"birthday_title" = "It's your birthday!";
+"birthday_subtitle" = "The entire Entourage team wishes you a happy birthday!";
+"birthday_button" = "Thank you!";

@@ -107,6 +107,8 @@ struct DeepLinkManager {
             showSmallTalk(conversationId: notification.instanceId)
         case .almost_matches:
             showAlmostMatch()
+        case .birthday:
+            showBirthday()
         }
     }
     
@@ -154,6 +156,8 @@ struct DeepLinkManager {
             showSmallTalk(conversationId: notification.instanceId)
         case .almost_matches:
             showAlmostMatch()
+        case .birthday:
+            showBirthday()
         }
     }
     
@@ -189,6 +193,8 @@ struct DeepLinkManager {
             return "placeholder_user"
         case .almost_matches:
             return "placeholder_user"
+        case .birthday:
+            return "ic_notif_placeholder" // Or appropriate icon
         }
     }
     
@@ -234,6 +240,12 @@ struct DeepLinkManager {
         }
     }
     
+    static func showBirthday() {
+        let vc = BirthdayViewController()
+        vc.modalPresentationStyle = .fullScreen
+        AppState.getTopViewController()?.present(vc, animated: true)
+    }
+
     static func showResource(id:Int) {
         if let vc = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {
             vc.resourceId = id
