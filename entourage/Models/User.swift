@@ -44,7 +44,7 @@ struct User: Codable {
     var company: String? = nil
     var event: String? = nil
     var birthdate:String? = nil
-    var birthday:Bool? = nil
+    var isBirthday:Bool? = nil
     var radiusDistance:Int? = 0
     
     var isEngaged:Bool = false
@@ -122,7 +122,7 @@ struct User: Codable {
         case isEngaged = "engaged"
         case unreadCount = "unread_count"
         case radiusDistance = "travel_distance"
-        case birthday
+        case isBirthday = "is_birthday"
         case creationDateString = "created_at"
         case confirmedAt = "confirmed_at"
     }
@@ -225,6 +225,7 @@ struct UserLightNeighborhood: Codable {
     var message:String? = nil
     var confirmedAt:String? = nil
     var participateAt:String? = nil
+    var isBirthday:Bool? = nil
     
     var displayName:String {
         get {
@@ -251,7 +252,7 @@ struct UserLightNeighborhood: Codable {
         case photoAcceptance = "photo_acceptance"
         case _displayName = "display_name"
         case avatarURL = "avatar_url"
-        
+        case isBirthday = "is_birthday"
     }
     
     func getCommunityRolesFormated() -> String? {

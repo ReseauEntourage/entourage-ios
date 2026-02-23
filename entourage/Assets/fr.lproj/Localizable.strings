@@ -1947,3 +1947,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_potential_event_plural" = "événements potentiels par semaine,";
 "guide_help_orientation" = "Aide & orientation";
 "Tomorrow" = "Demain";
+
+"birthday_title" = "C'est votre anniversaire !";
+"birthday_subtitle" = "Toute l'équipe Entourage vous souhaite un joyeux anniversaire !";
+"birthday_button" = "Merci !";
