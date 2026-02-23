@@ -170,8 +170,18 @@ class ProfileEditorViewController: UIViewController {
         }
         
         if birth_date_new?.count ?? 0 > 0 {
-            if let birth_date_new = birth_date_new, birth_date_new.matchesRegEx("^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])")  {
-                newUser?.birthdate = birth_date_new
+            if let birth_date_new = birth_date_new, birth_date_new.matchesRegEx("^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$")  {
+                let dateFormat = DateFormatter()
+                dateFormat.locale = Locale.init(identifier: "fr_FR")
+                dateFormat.dateFormat = "dd/MM/yyyy"
+                if let _date = dateFormat.date(from: birth_date_new) {
+                    dateFormat.dateFormat = "yyyy-MM-dd"
+                    newUser?.birthdate = dateFormat.string(from: _date)
+                }
+                else {
+                    showError(message: "editUser_error_birthday".localized)
+                    return
+                }
             }
             else {
                 showError(message: "editUser_error_birthday".localized)
