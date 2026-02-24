@@ -23,6 +23,7 @@ class EventListCell: UITableViewCell {
     @IBOutlet weak var ui_alpha_view: UIView!
     
     @IBOutlet weak var ic_entoutou: UIImageView!
+    @IBOutlet weak var ic_entoutou_woman: UIImageView!
     @IBOutlet weak var ui_label_canceled: UILabel!
     @IBOutlet weak var ui_label_admin: UILabel?
     @IBOutlet weak var ui_subscribed_label: UILabel!
@@ -64,19 +65,44 @@ class EventListCell: UITableViewCell {
             ui_label_canceled.isHidden = true
         }
         
+        var isAmbassador = false
         if let _author = event.author {
             if let _roles = _author.communityRoles{
                 if _roles.contains("Équipe Entourage") || _roles.contains("Animateur Entourage") {
-                    
-                    self.ic_entoutou.isHidden = false
-                }else {
-                    self.ic_entoutou.isHidden = true
+                    isAmbassador = true
                 }
-            }else{
-                self.ic_entoutou.isHidden = true
             }
         }
         
+        self.ic_entoutou.isHidden = !isAmbassador
+
+        if let reservedFemale = event.reservedFemale, reservedFemale {
+            self.ic_entoutou_woman.isHidden = false
+
+            if !isAmbassador {
+                 self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
+                 self.ic_entoutou_woman.image = UIImage(named: "ic_entoutou_logo_woman")
+
+                 if !isAmbassador {
+                     self.ic_entoutou.isHidden = true
+
+                     self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_woman")
+                     self.ic_entoutou.isHidden = false
+                     self.ic_entoutou_woman.isHidden = true
+                 } else {
+                     self.ic_entoutou.isHidden = false
+                     self.ic_entoutou_woman.isHidden = false
+                 }
+            } else {
+                self.ic_entoutou_woman.isHidden = false
+                self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
+            }
+        } else {
+            self.ic_entoutou_woman.isHidden = true
+            self.ic_entoutou.isHidden = !isAmbassador
+            self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
+        }
+
         if event.isMember ?? false {
             ui_subscribed_label.isHidden = false
         }else{

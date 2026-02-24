@@ -48,6 +48,7 @@ struct Event:Codable {
     private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
     private var updatedAt:String? = nil
+    var reservedFemale:Bool? = false
     
     func getChangedStatusDate() -> Date? {
         return statusChangedAt == nil ? nil : Utils.getDateFromWSDateString(statusChangedAt)
@@ -227,6 +228,7 @@ struct Event:Codable {
         case titleTranslations = "title_translations"
         case descriptionTranslations = "description_translations"
         case signable
+        case reservedFemale = "reserved_female"
     }
     
     func dictionaryForWS() -> [String:Any] {
@@ -347,6 +349,10 @@ struct Event:Codable {
 
         dict["metadata"] = metadatas
         
+        if let reservedFemale = reservedFemale {
+            dict["reserved_female"] = reservedFemale
+        }
+
         return dict
     }
     
@@ -525,6 +531,7 @@ struct EventEditing {
     var neighborhoods:[EventNeighborhood]? = nil
     
     var recurrence:EventRecurrence? = nil
+    var reservedFemale:Bool? = nil
     
     private var _startDate:Date? = nil
     var startDate:Date? {
@@ -616,6 +623,10 @@ struct EventEditing {
             }
         }
         
+        if let reservedFemale = reservedFemale {
+            dict["reserved_female"] = reservedFemale
+        }
+
         var metadatas = [String:Any]()
         if let newStartDate = metadata?.starts_at {
             metadatas["starts_at"] = newStartDate
