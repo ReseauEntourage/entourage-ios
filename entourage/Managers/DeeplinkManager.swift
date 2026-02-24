@@ -64,6 +64,14 @@ struct DeepLinkManager {
             }
             
         }
+        if notification.stage == "birthday"{
+            showBirthday()
+            return
+        }
+        if notification.context == "birthday"{
+            showBirthday()
+            return
+        }
         if notification.tracking == "outing_message"{
             showConversation(conversationId: notification.instanceId)
             return
@@ -117,6 +125,7 @@ struct DeepLinkManager {
             showConversation(conversationId: notification.instanceId)
             return
         }
+        
         switch notification.instanceType {
         case .users:
             showUser(userId: notification.instanceId)

@@ -1948,6 +1948,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "guide_help_orientation" = "Aide & orientation";
 "Tomorrow" = "Demain";
 
-"birthday_title" = "C'est votre anniversaire !";
-"birthday_subtitle" = "Toute l'équipe Entourage vous souhaite un joyeux anniversaire !";
-"birthday_button" = "Merci !";
+"birthday_title" = "Joyeux anniversaire !";
+"birthday_subtitle" = "Aujourd’hui, c’est votre jour.\nOn est heureux de vous compter parmi nous. Que cette journée soit pleine de chaleur humaine, d’échanges et de joie ✨";
+"birthday_button" = "Revenir à la page d'accueil";
