@@ -22,6 +22,7 @@ class HeaderProfilFullCell: UITableViewCell {
     @IBOutlet weak var ui_btn_modify: UIButton!
     @IBOutlet weak var ui_label_phone: UILabel!
     @IBOutlet weak var ui_label_mail: UILabel!
+    @IBOutlet weak var ui_label_birthdate: UILabel!
     @IBOutlet weak var ui_label_partner: UILabel!
     @IBOutlet weak var ui_label_role: UILabel!
     @IBOutlet weak var ui_stack_view: UIStackView!        // Contient les vues pour les rôles & le partenaire
@@ -129,10 +130,31 @@ class HeaderProfilFullCell: UITableViewCell {
             ui_label_mail.text = emailText
         }
         
+        // 🔹 Birthdate
+        if let birthdate = user.birthdate, !birthdate.isEmpty, let date = Utils.getDateFromWSDateString(birthdate) {
+            let birthdateText = Utils.formatEventDate(date: date)
+            ui_label_birthdate.text = birthdateText
+            ui_label_birthdate.isHidden = false
+        } else if let birthdate = user.birthdate, !birthdate.isEmpty {
+            // Fallback parsing for yyyy-MM-dd
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            if let date = formatter.date(from: birthdate) {
+                formatter.dateFormat = "dd/MM/yyyy"
+                ui_label_birthdate.text = formatter.string(from: date)
+                ui_label_birthdate.isHidden = false
+            } else {
+                ui_label_birthdate.isHidden = true
+            }
+        } else {
+            ui_label_birthdate.isHidden = true
+        }
+
         // Pour les profils autres que "moi", on masque téléphone et mail et on change le titre du bouton
         if !isMe {
             ui_label_phone.isHidden = true
             ui_label_mail.isHidden = true
+            ui_label_birthdate.isHidden = true
             self.ui_btn_modify.setTitle("detail_user_send_message".localized, for: .normal)
         } else {
             self.ui_btn_modify.setTitle("modify".localized, for: .normal)

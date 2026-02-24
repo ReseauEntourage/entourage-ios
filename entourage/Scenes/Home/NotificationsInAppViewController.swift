@@ -139,7 +139,9 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
         
         self.dismiss(animated: true) {
             print("eho notif " , notif.getNotificationPushData())
-            DeepLinkManager.presentAction(notification: notif.getNotificationPushData())
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                DeepLinkManager.presentAction(notification: notif.getNotificationPushData())
+            }
         }
     }
     
