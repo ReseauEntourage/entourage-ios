@@ -378,6 +378,8 @@
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
 		2421081A2F4C97EB004D74E2 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108192F4C97EB004D74E2 /* BirthdayViewController.swift */; };
 		2421081C2F4CA9C8004D74E2 /* birthday_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 2421081B2F4CA9C8004D74E2 /* birthday_animation.json */; };
+		2421081F2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421081D2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift */; };
+		242108202F4DE5BB004D74E2 /* EventReservedFemaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */; };
 		244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244715252F15307400F8BFD1 /* AssociationPresenter.swift */; };
 		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
 		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
@@ -993,6 +995,8 @@
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
 		242108192F4C97EB004D74E2 /* BirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
 		2421081B2F4CA9C8004D74E2 /* birthday_animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = birthday_animation.json; sourceTree = "<group>"; };
+		2421081D2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventReservedFemaleCell.swift; sourceTree = "<group>"; };
+		2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventReservedFemaleCell.xib; sourceTree = "<group>"; };
 		244715252F15307400F8BFD1 /* AssociationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresenter.swift; sourceTree = "<group>"; };
 		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
@@ -1824,6 +1828,8 @@
 		029D25312865FA3F00147F77 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				2421081D2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift */,
+				2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */,
 				029D25322865FA5F00147F77 /* EventDatesCell.swift */,
 				029638EE2869E71500E10EFB /* EventPlaceCell.swift */,
 				029D25342865FA7B00147F77 /* EventRecurrenceCell.swift */,
@@ -2858,6 +2864,7 @@
 				02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */,
 				266B262A2AB8BCDD00C8EAD8 /* MyEventCollectionViewCell.xib in Resources */,
 				020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */,
+				242108202F4DE5BB004D74E2 /* EventReservedFemaleCell.xib in Resources */,
 				268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */,
 				02B94C28284F63AB006059EF /* HomeContribCell.xib in Resources */,
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
@@ -2917,6 +2924,7 @@
 				02A92C3228982D57000DFF95 /* ActionTagInfoCell.swift in Sources */,
 				0288A8D927CCDA5C008D7011 /* PictureUploadS3Service.swift in Sources */,
 				02A92C1B2897D2C2000DFF95 /* ActionsMainHomeViewController.swift in Sources */,
+				2421081F2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift in Sources */,
 				02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */,
 				2649A4B42D7F57F200FD100E /* FilterDiscussionCell.swift in Sources */,
 				0241FE0C286DDB700065E560 /* EventEditMainViewController.swift in Sources */,

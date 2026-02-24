@@ -302,6 +302,10 @@ class EventEditMainViewController: UIViewController {
 
 //MARK: - EventCreateMainDelegate -
 extension EventEditMainViewController: EventCreateMainDelegate {
+    func addReservedFemale(reserved: Bool) {
+        //
+    }
+    
     //Phase 1
     func addTitle(_ title: String) {
         newTitle = title
