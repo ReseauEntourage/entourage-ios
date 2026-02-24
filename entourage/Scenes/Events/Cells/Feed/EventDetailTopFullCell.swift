@@ -48,6 +48,7 @@ class EventDetailTopFullCell: UITableViewCell {
     
     @IBOutlet weak var ui_view_reserved_female: UIView!
     @IBOutlet weak var ui_constraint_height_reserved_female: NSLayoutConstraint!
+    @IBOutlet weak var ui_lbl_reserved_female: UILabel!
 
     weak var delegate: EventDetailTopCellDelegate? = nil
     
@@ -90,6 +91,7 @@ class EventDetailTopFullCell: UITableViewCell {
         
         ui_view_reserved_female.layer.cornerRadius = 16
         ui_view_reserved_female.backgroundColor = UIColor.appViolet
+        ui_lbl_reserved_female?.text = "event_detail_reserved_female_label".localized
 
         ui_view_place_limit.isHidden = true
         

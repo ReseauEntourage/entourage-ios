@@ -14,6 +14,8 @@ class EventReservedFemaleCell: UITableViewCell {
 
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_switch: UISwitch!
+    @IBOutlet weak var ui_view_info: UIView!
+    @IBOutlet weak var ui_lbl_info: UILabel!
 
     weak var delegate: EventReservedFemaleCellDelegate?
 
@@ -21,15 +23,24 @@ class EventReservedFemaleCell: UITableViewCell {
         super.awakeFromNib()
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_title.text = "event_create_reserved_female_title".localized
+
+        ui_lbl_info.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_lbl_info.text = "event_create_reserved_female_info".localized
+
+        ui_view_info.layer.cornerRadius = 16
+        ui_view_info.backgroundColor = .appOrangeLight.withAlphaComponent(0.2) // Adjust color as needed to match screenshot
+
         ui_switch.onTintColor = .appOrange
     }
 
     func populateCell(isReserved: Bool, delegate: EventReservedFemaleCellDelegate) {
         self.delegate = delegate
         ui_switch.isOn = isReserved
+        ui_view_info.isHidden = !isReserved
     }
 
     @IBAction func action_switch(_ sender: UISwitch) {
+        ui_view_info.isHidden = !sender.isOn
         delegate?.updateReservedFemale(isReserved: sender.isOn)
     }
 }

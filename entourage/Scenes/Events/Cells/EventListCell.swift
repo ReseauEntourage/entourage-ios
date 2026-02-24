@@ -74,33 +74,28 @@ class EventListCell: UITableViewCell {
             }
         }
         
-        self.ic_entoutou.isHidden = !isAmbassador
+        let isReservedFemale = event.reservedFemale ?? false
 
-        if let reservedFemale = event.reservedFemale, reservedFemale {
-            self.ic_entoutou_woman.isHidden = false
-
-            if !isAmbassador {
-                 self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
-                 self.ic_entoutou_woman.image = UIImage(named: "ic_entoutou_logo_woman")
-
-                 if !isAmbassador {
-                     self.ic_entoutou.isHidden = true
-
-                     self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_woman")
-                     self.ic_entoutou.isHidden = false
-                     self.ic_entoutou_woman.isHidden = true
-                 } else {
-                     self.ic_entoutou.isHidden = false
-                     self.ic_entoutou_woman.isHidden = false
-                 }
-            } else {
-                self.ic_entoutou_woman.isHidden = false
-                self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
-            }
-        } else {
-            self.ic_entoutou_woman.isHidden = true
-            self.ic_entoutou.isHidden = !isAmbassador
+        if isAmbassador && isReservedFemale {
+            self.ic_entoutou.isHidden = false
             self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
+
+            self.ic_entoutou_woman.isHidden = false
+            self.ic_entoutou_woman.image = UIImage(named: "ic_entoutou_logo_woman")
+        }
+        else if isAmbassador {
+            self.ic_entoutou.isHidden = false
+            self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
+            self.ic_entoutou_woman.isHidden = true
+        }
+        else if isReservedFemale {
+            self.ic_entoutou.isHidden = false
+            self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_woman")
+            self.ic_entoutou_woman.isHidden = true
+        }
+        else {
+            self.ic_entoutou.isHidden = true
+            self.ic_entoutou_woman.isHidden = true
         }
 
         if event.isMember ?? false {

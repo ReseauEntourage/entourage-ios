@@ -508,6 +508,7 @@
                 <outlet property="adress_view_top_constraint" destination="yX0-kE-283" id="tad-Gm-gRd"/>
                 <outlet property="ui_btn_agenda" destination="G9W-bu-4QC" id="BSR-SG-7Es"/>
                 <outlet property="ui_view_reserved_female" destination="abc-female-banner" id="out-view-reserved"/>
+                <outlet property="ui_lbl_reserved_female" destination="def-female-label" id="out-lbl-reserved"/>
                 <outlet property="ui_constraint_height_reserved_female" destination="hij-height-constraint" id="out-constraint-height"/>
                 <outlet property="ui_btn_i_participate" destination="IR4-sb-IgC" id="2Bw-Ef-4tt"/>
                 <outlet property="ui_btn_participate" destination="1xV-ay-YP1" id="H26-cy-lt3"/>
