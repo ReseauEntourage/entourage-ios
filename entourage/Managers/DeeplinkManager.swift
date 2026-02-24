@@ -10,7 +10,7 @@ import Foundation
 
 struct DeepLinkManager {
     
-    static func presentAction(notification:NotificationPushData) {
+    static func presentAction(notification:NotificationPushData, presenter:UIViewController? = nil) {
         
      //   print("notification" , notification)
         if notification.context == "outing_on_day_before"{
@@ -108,7 +108,7 @@ struct DeepLinkManager {
         case .almost_matches:
             showAlmostMatch()
         case .birthday:
-            showBirthday()
+            showBirthday(presenter: presenter)
         }
     }
     
@@ -240,10 +240,15 @@ struct DeepLinkManager {
         }
     }
     
-    static func showBirthday() {
+    static func showBirthday(presenter:UIViewController? = nil) {
         let vc = BirthdayViewController()
         vc.modalPresentationStyle = .fullScreen
-        AppState.getTopViewController()?.present(vc, animated: true)
+        if let presenter = presenter {
+            presenter.present(vc, animated: true)
+        }
+        else {
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
     }
 
     static func showResource(id:Int) {
