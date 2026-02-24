@@ -1951,3 +1951,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "birthday_title" = "Joyeux anniversaire !";
 "birthday_subtitle" = "Aujourd’hui, c’est votre jour.\nOn est heureux de vous compter parmi nous. Que cette journée soit pleine de chaleur humaine, d’échanges et de joie ✨";
 "birthday_button" = "Revenir à la page d'accueil";
+
+"event_create_reserved_female_title" = "Cet événement est-il réservé aux femmes ?";
+"event_detail_reserved_female_label" = "Cet événement est réservé aux femmes";

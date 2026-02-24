@@ -261,6 +261,11 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
         _ = checkValidation()
     }
     
+    func addReservedFemale(reserved: Bool) {
+        newEvent.reservedFemale = reserved
+        _ = checkValidation()
+    }
+
     //Phase 3
     func addPlaceType(isOnline:Bool) {
         newEvent.isOnline = isOnline
@@ -470,6 +475,7 @@ protocol EventCreateMainDelegate: AnyObject {
     func addDateStart(dateStart:Date?)
     func addDateEnd(dateEnd:Date?)
     func addRecurrence(recurrence:EventRecurrence)
+    func addReservedFemale(reserved: Bool)
     func setDateChanged()
     
     //Phase 3
