@@ -46,6 +46,9 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_mapview: MKMapView!
     @IBOutlet weak var ui_btn_i_participate: UIButton!
     
+    @IBOutlet weak var ui_view_reserved_female: UIView!
+    @IBOutlet weak var ui_constraint_height_reserved_female: NSLayoutConstraint!
+
     weak var delegate: EventDetailTopCellDelegate? = nil
     
     let topMarginConstraint: CGFloat = 24
@@ -85,6 +88,9 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
         
+        ui_view_reserved_female.layer.cornerRadius = 16
+        ui_view_reserved_female.backgroundColor = UIColor.appViolet
+
         ui_view_place_limit.isHidden = true
         
         ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
@@ -210,6 +216,14 @@ class EventDetailTopFullCell: UITableViewCell {
             })
         }
         
+        if let reservedFemale = event.reservedFemale, reservedFemale {
+            ui_view_reserved_female.isHidden = false
+            ui_constraint_height_reserved_female.constant = 32
+        } else {
+            ui_view_reserved_female.isHidden = true
+            ui_constraint_height_reserved_female.constant = 0
+        }
+
         // --- PLACES LIMIT ---
         if let placeLimit = event.metadata?.place_limit, placeLimit > 0 {
             ui_view_place_limit.isHidden = false

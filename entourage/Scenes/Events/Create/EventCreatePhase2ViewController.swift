@@ -28,6 +28,8 @@ class EventCreatePhase2ViewController: UIViewController {
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
         
+        ui_tableview.register(UINib(nibName: "EventReservedFemaleCell", bundle: nil), forCellReuseIdentifier: "EventReservedFemaleCell")
+
         if pageDelegate?.isEdit() ?? false {
             currentEvent = pageDelegate?.getCurrentEvent()
             hasCurrentRecurrency = pageDelegate?.hasCurrentRecurrency() ?? false
@@ -46,7 +48,7 @@ class EventCreatePhase2ViewController: UIViewController {
 //MARK: - UITableView datasource / Delegate -
 extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hasCurrentRecurrency ? 1 : 2
+        return hasCurrentRecurrency ? 2 : 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,12 +62,24 @@ extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDele
             
             return cell
         }
+        else if indexPath.row == 1 && !hasCurrentRecurrency {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellSelector", for: indexPath) as! EventRecurrenceCell
+            let recur = currentEvent != nil ? currentEvent!.recurrence : recurrenceSelected
+
+            cell.populateCell(recurrence:recur, delegate: self)
+            return cell
+        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellSelector", for: indexPath) as! EventRecurrenceCell
-        let recur = currentEvent != nil ? currentEvent!.recurrence : recurrenceSelected
-        
-        cell.populateCell(recurrence:recur, delegate: self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventReservedFemaleCell", for: indexPath) as! EventReservedFemaleCell
+        let isReserved = currentEvent?.reservedFemale ?? false
+        cell.populateCell(isReserved: isReserved, delegate: self)
         return cell
+    }
+}
+
+extension EventCreatePhase2ViewController: EventReservedFemaleCellDelegate {
+    func updateReservedFemale(isReserved: Bool) {
+        pageDelegate?.addReservedFemale(reserved: isReserved)
     }
 }
 

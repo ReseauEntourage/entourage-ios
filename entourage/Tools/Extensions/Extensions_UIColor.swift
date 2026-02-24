@@ -126,6 +126,10 @@ extension UIColor {
         return UIColor(named: "grey_text_deleted") ?? .red
     }
     
+    static var appViolet: UIColor {
+        return UIColor(red: 125/255, green: 0, blue: 246/255, alpha: 1)
+    }
+
     static var rougeErreur: UIColor {
         return UIColor(named: "rouge_erreur") ?? .red
     }
