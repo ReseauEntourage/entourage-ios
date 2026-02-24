@@ -80,6 +80,9 @@ extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDele
 extension EventCreatePhase2ViewController: EventReservedFemaleCellDelegate {
     func updateReservedFemale(isReserved: Bool) {
         pageDelegate?.addReservedFemale(reserved: isReserved)
+        //Force resize cell
+        ui_tableview.beginUpdates()
+        ui_tableview.endUpdates()
     }
 }
 

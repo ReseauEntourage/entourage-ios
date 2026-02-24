@@ -31,12 +31,21 @@ class EventReservedFemaleCell: UITableViewCell {
         ui_view_info.backgroundColor = .appOrangeLight.withAlphaComponent(0.2) // Adjust color as needed to match screenshot
 
         ui_switch.onTintColor = .appOrange
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(toggleSwitch))
+        ui_title.superview?.addGestureRecognizer(tap)
+        ui_title.superview?.isUserInteractionEnabled = true
     }
 
     func populateCell(isReserved: Bool, delegate: EventReservedFemaleCellDelegate) {
         self.delegate = delegate
         ui_switch.isOn = isReserved
         ui_view_info.isHidden = !isReserved
+    }
+
+    @objc func toggleSwitch() {
+        ui_switch.setOn(!ui_switch.isOn, animated: true)
+        action_switch(ui_switch)
     }
 
     @IBAction func action_switch(_ sender: UISwitch) {
