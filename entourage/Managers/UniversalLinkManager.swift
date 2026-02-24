@@ -66,6 +66,9 @@ struct UniversalLinkManager {
                 case "webinar":
                     // Android: presenter.getEventSensibilisation()
                     DeepLinkManager.showWelcomeWebinar()
+
+                case "welcome":
+                    DeepLinkManager.showWelcomeEvent()
                     
                 case "chat_messages": // Format: /app/outings/chat_messages/ID_EVENT/ID_POST
                     if pathElements.count > 3 {
