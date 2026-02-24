@@ -323,7 +323,8 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                 isParticipating: isParticipating,
                 isOrganizer: isConfirmed,
                 isCreator: viewerCanUseCheckboxes,
-                isConfirmed: isConfirmed
+                isConfirmed: isConfirmed,
+                isBirthday: user.isBirthday
             )
             cell.hideSeparatorBarIfIsVote(isVote: self.isFromSurvey)
             return cell

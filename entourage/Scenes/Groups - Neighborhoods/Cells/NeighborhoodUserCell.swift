@@ -94,16 +94,22 @@ class NeighborhoodUserCell: UITableViewCell {
                       isParticipating: Bool?,
                       isOrganizer: Bool?,
                       isCreator: Bool?,
-                      isConfirmed: Bool?) {
+                      isConfirmed: Bool?,
+                      isBirthday: Bool? = nil) {
 
         self.delegate = delegate
         self.tablePosition = position
 
+        var nameToDisplay = username
+        if isBirthday == true {
+            nameToDisplay += " 🎂"
+        }
+
         // Libellé uniquement si confirmed_at != nil
         if isConfirmed ?? false {
-            ui_username.text = "\(username) - Participation confirmée"
+            ui_username.text = "\(nameToDisplay) - Participation confirmée"
         } else {
-            ui_username.text = username
+            ui_username.text = nameToDisplay
         }
 
         if let r = role, !r.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
