@@ -1960,3 +1960,7 @@
 "birthday_title" = "It's your birthday!";
 "birthday_subtitle" = "The entire Entourage team wishes you a happy birthday!";
 "birthday_button" = "Thank you!";
+
+"event_create_reserved_female_title" = "Is this event reserved for women?";
+"event_create_reserved_female_info" = "The event will only be visible to female users of the application.";
+"event_detail_reserved_female_label" = "This event is reserved for women";

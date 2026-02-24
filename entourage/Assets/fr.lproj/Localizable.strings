@@ -1953,4 +1953,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "birthday_button" = "Revenir à la page d'accueil";
 
 "event_create_reserved_female_title" = "Cet événement est-il réservé aux femmes ?";
+"event_create_reserved_female_info" = "L'événement sera uniquement visible par les utilisatrices de l'application.";
 "event_detail_reserved_female_label" = "Cet événement est réservé aux femmes";
