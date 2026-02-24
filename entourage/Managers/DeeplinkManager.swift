@@ -339,6 +339,21 @@ struct DeepLinkManager {
             }
         }
     }
+
+    static func showWelcomeEvent() {
+        EventService.getWelcomeEvent { event in
+            guard let event = event else { return }
+            DispatchQueue.main.async {
+                if let navVc = UIStoryboard(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+                    vc.eventId = event.uid
+                    vc.event = event
+                    vc.isAfterCreation = false
+                    vc.modalPresentationStyle = .fullScreen
+                    AppState.getTopViewController()?.present(navVc, animated: true)
+                }
+            }
+        }
+    }
     static func showWelcomeTwo(){
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
