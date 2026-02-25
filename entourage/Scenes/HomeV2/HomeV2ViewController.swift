@@ -413,11 +413,6 @@ class HomeV2ViewController: UIViewController {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
             tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
         }
-        //add condition
-        tableDTO.append(.cellTitle(title: "home_v2_title_small_talk".localized, subtitle: ""))
-        tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
-
-        tableDTO.append(.cellSolidarityTools)
 
         if (allDemands.count > 0) {
             if isContributionPreference {
@@ -439,8 +434,24 @@ class HomeV2ViewController: UIViewController {
             tableDTO.append(.cellEvent(events: allEvents))
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
         }
+
+        var _offlineEvents = [Event]()
+        for event in allEvents {
+            if event.isOnline == false {
+                _offlineEvents.append(event)
+            }
+        }
+        if _offlineEvents.count == 0 && allDemands.count == 0 && !isContributionPreference {
+            tableDTO.append(.cellHZ)
+        }
+
+        //add condition
+        tableDTO.append(.cellTitle(title: "home_v2_title_small_talk".localized, subtitle: ""))
+        tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
+
+        tableDTO.append(.cellSolidarityTools)
+
         if allPedagos.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_pedago".localized, subtitle: "home_v2_subtitle_pedago".localized))
             for pedago in allPedagos {
                 tableDTO.append(.cellPedago(pedago: pedago))
             }
@@ -451,15 +462,6 @@ class HomeV2ViewController: UIViewController {
 //            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
 //        }
         
-        var _offlineEvents = [Event]()
-        for event in allEvents {
-            if event.isOnline == false {
-                _offlineEvents.append(event)
-            }
-        }
-        if _offlineEvents.count == 0 && allDemands.count == 0 && !isContributionPreference {
-            tableDTO.append(.cellHZ)
-        }
         tableDTO.append(.cellTitle(title: "home_v2_title_help".localized, subtitle: "home_v2_subtitle_help".localized))
         if let _moderator = userHome.moderator {
             if let _name = _moderator.displayName {
