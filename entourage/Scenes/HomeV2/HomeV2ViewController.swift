@@ -705,7 +705,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(pedagos: let pedagos):
             return 115
         case .cellSmallTalk(let userRequests):
-            return 200
+            return 230
         case .cellSolidarityTools:
             return UITableView.automaticDimension
         }

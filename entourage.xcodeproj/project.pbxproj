@@ -380,6 +380,8 @@
 		2421081C2F4CA9C8004D74E2 /* birthday_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 2421081B2F4CA9C8004D74E2 /* birthday_animation.json */; };
 		2421081F2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421081D2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift */; };
 		242108202F4DE5BB004D74E2 /* EventReservedFemaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */; };
+		242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */; };
+		242108242F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */; };
 		244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244715252F15307400F8BFD1 /* AssociationPresenter.swift */; };
 		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
 		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
@@ -997,6 +999,8 @@
 		2421081B2F4CA9C8004D74E2 /* birthday_animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = birthday_animation.json; sourceTree = "<group>"; };
 		2421081D2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventReservedFemaleCell.swift; sourceTree = "<group>"; };
 		2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventReservedFemaleCell.xib; sourceTree = "<group>"; };
+		242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSolidarityToolsCell.swift; sourceTree = "<group>"; };
+		242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSolidarityToolsCell.xib; sourceTree = "<group>"; };
 		244715252F15307400F8BFD1 /* AssociationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresenter.swift; sourceTree = "<group>"; };
 		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
@@ -2352,6 +2356,8 @@
 		266B263A2ABB17A600C8EAD8 /* homev2cells */ = {
 			isa = PBXGroup;
 			children = (
+				242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */,
+				242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */,
 				268ADBD02DD48C1700031C6F /* HomeSmallTalkCell.swift */,
 				268ADBD22DD48F5900031C6F /* HomeSmallTalkCell.xib */,
 				268ADBD42DD4910900031C6F /* cell_small_talks */,
@@ -2884,6 +2890,7 @@
 				02B7922527F74801003AFFB9 /* Neighborhood_Create.storyboard in Resources */,
 				02E2192328352552002A1FCB /* Neighborhood_Message.storyboard in Resources */,
 				26BEEED12C06180D00169FBA /* congrats_animation.json in Resources */,
+				242108242F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib in Resources */,
 				0236971A296D9F6A00E2CACC /* DetailMessageTopPostImageCell.xib in Resources */,
 				26195B252C09F7E000BEAD84 /* InterestsCollectionViewCell.xib in Resources */,
 				025C92B828340CFC000970D9 /* NeighborhoodPostImageCell.xib in Resources */,
@@ -3313,6 +3320,7 @@
 				0295F2B927E4AE5B006AE255 /* EditProfileInfosCell.swift in Sources */,
 				26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */,
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
+				242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */,
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,
 				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,
