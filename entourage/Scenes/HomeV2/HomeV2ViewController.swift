@@ -33,6 +33,7 @@ enum HomeV2DTO {
     case cellHZ
     case cellInitialPedago(pedagos: [PedagogicResource])
     case cellSmallTalk(userRequests:[UserSmallTalkRequest])
+    case cellSolidarityTools
 }
 
 class HomeV2ViewController: UIViewController {
@@ -100,6 +101,7 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeInitialPedagogicHorizontalCell.identifier, bundle: nil), forCellReuseIdentifier: HomeInitialPedagogicHorizontalCell.identifier)
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
+        ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
 
         self.checkAndCreateCookieIfNotExists()
         //self.checkNotificationSettings()
@@ -414,6 +416,9 @@ class HomeV2ViewController: UIViewController {
         //add condition
         tableDTO.append(.cellTitle(title: "home_v2_title_small_talk".localized, subtitle: ""))
         tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
+
+        tableDTO.append(.cellSolidarityTools)
+
         if (allDemands.count > 0) {
             if isContributionPreference {
                 tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
@@ -439,16 +444,12 @@ class HomeV2ViewController: UIViewController {
             for pedago in allPedagos {
                 tableDTO.append(.cellPedago(pedago: pedago))
             }
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
         }
 //        if allGroups.count > 0 {
 //            tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
 //            tableDTO.append(.cellGroup(groups: allGroups))
 //            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
 //        }
-        
-        tableDTO.append(.cellTitle(title: "home_v2_title_map".localized, subtitle: "home_v2_subtitle_map".localized))
-        tableDTO.append(.cellMap)
         
         var _offlineEvents = [Event]()
         for event in allEvents {
@@ -599,6 +600,12 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.data = dto
                 return cell
             }
+        case .cellSolidarityTools:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: HomeSolidarityToolsCell.identifier) as? HomeSolidarityToolsCell {
+                cell.selectionStyle = .none
+                cell.delegate = self
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -668,6 +675,8 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             return
         case .cellSmallTalk(let userRequests): break
             return
+        case .cellSolidarityTools:
+            return
         }
     }
     
@@ -697,6 +706,8 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             return 115
         case .cellSmallTalk(let userRequests):
             return 200
+        case .cellSolidarityTools:
+            return UITableView.automaticDimension
         }
     }
 }
@@ -805,7 +816,7 @@ extension HomeV2ViewController {
                 }
                 for pedagoRead in pedagoReads {
                     self.allPedagos.append(pedagoRead)
-                    if self.allPedagos.count > 1 {
+                    if self.allPedagos.count >= 3 {
                         break
                     }
                 }
@@ -900,6 +911,25 @@ extension HomeV2ViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
+        }
+    }
+}
+
+// MARK: - HomeSolidarityToolsCellDelegate
+extension HomeV2ViewController: HomeSolidarityToolsCellDelegate {
+    func onMapTapped() {
+        AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
+        self.showAllPois()
+    }
+
+    func onPedagoTapped() {
+        AnalyticsLoggerManager.logEvent(name: Action__Home__Pedago)
+        DeepLinkManager.showRessourceListUniversalLink()
+    }
+
+    func onEthicsTapped() {
+        if let url = URL(string: "https://www.entourage.social/charte-ethique-grand-public") {
+            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
         }
     }
 }

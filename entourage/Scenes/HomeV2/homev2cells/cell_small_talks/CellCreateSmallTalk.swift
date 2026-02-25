@@ -18,12 +18,31 @@ class CellCreateSmallTalk:UICollectionViewCell{
     //VARIABLE
     
     override func awakeFromNib() {
-        ui_label_title.text = "small_talk_subtitle_match".localized
-        ui_label_title.setFontBody(size: 15)
-        configureOrangeButton(ui_btn, withTitle: "home_button_start".localized)
+        super.awakeFromNib()
+        setupUI()
         ui_btn.addTarget(self, action: #selector(onBtnClick), for: .touchUpInside)
     }
     
+    func setupUI() {
+        let titleText = "home_v2_small_talk_card_title".localized
+        let subtitleText = "home_v2_small_talk_card_subtitle".localized
+
+        let attributedString = NSMutableAttributedString(string: titleText + "\n", attributes: [
+            .font: ApplicationTheme.getFontQuickSandBold(size: 15),
+            .foregroundColor: UIColor.black
+        ])
+
+        attributedString.append(NSAttributedString(string: subtitleText, attributes: [
+            .font: ApplicationTheme.getFontNunitoRegular(size: 13),
+            .foregroundColor: UIColor.black
+        ]))
+
+        ui_label_title.attributedText = attributedString
+        ui_label_title.numberOfLines = 0
+
+        configureOrangeButton(ui_btn, withTitle: "home_v2_small_talk_card_button".localized)
+    }
+
     func configureOrangeButton(_ button: UIButton, withTitle title: String) {
         button.setTitle(title, for: .normal)
         button.backgroundColor = UIColor.appOrange

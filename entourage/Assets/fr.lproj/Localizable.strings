@@ -1955,3 +1955,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_create_reserved_female_title" = "Cet événement est-il réservé aux femmes ?";
 "event_create_reserved_female_info" = "L'événement sera uniquement visible par les utilisatrices de l'application.";
 "event_detail_reserved_female_label" = "Cet événement est réservé aux femmes";
+"home_v2_small_talk_card_title" = "Rejoindre une discussion solidaire";
+"home_v2_small_talk_card_subtitle" = "On vous met en relation avec un petit groupe qui partage vos centres d'intérêt, partout en France";
+"home_v2_small_talk_card_button" = "Discuter";
+"home_v2_solidarity_tools_title" = "Tes outils solidaires";
+"home_v2_tool_card_map" = "Carte des lieux solidaires";
+"home_v2_tool_card_pedago" = "Contenus pour apprendre et agir";
+"home_v2_tool_card_ethics" = "Charte éthique Entourage";

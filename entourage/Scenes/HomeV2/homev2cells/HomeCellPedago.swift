@@ -25,11 +25,32 @@ class HomeCellPedago:UITableViewCell{
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.contentView.backgroundColor = UIColor(named: "white_orange_home")
         containerView.layer.cornerRadius = 15
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.appBeige.cgColor
         containerView.clipsToBounds = true
+
+        repositionDurationLabel()
+    }
+
+    private func repositionDurationLabel() {
+        guard let tagContainer = ui_label_pedago.superview else { return }
+
+        // Remove existing constraints on ui_label_duration
+        // It's a direct child of containerView, so constraints are held by containerView
+        let constraintsToRemove = containerView.constraints.filter { constraint in
+            return (constraint.firstItem as? UIView == ui_label_duration && (constraint.firstAttribute == .bottom || constraint.firstAttribute == .leading)) ||
+                   (constraint.secondItem as? UIView == ui_label_duration && (constraint.secondAttribute == .bottom || constraint.secondAttribute == .leading))
+        }
+        containerView.removeConstraints(constraintsToRemove)
+
+        ui_label_duration.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            ui_label_duration.leadingAnchor.constraint(equalTo: tagContainer.trailingAnchor, constant: 10),
+            ui_label_duration.centerYAnchor.constraint(equalTo: tagContainer.centerYAnchor)
+        ])
     }
     
     func configure(pedago:PedagogicResource){
@@ -52,15 +73,22 @@ class HomeCellPedago:UITableViewCell{
         case .None:
             ui_label_title.text = "Autre"
         }
-        if let _duration = pedago.duration{
-            if _duration > 0 {
-                ui_label_duration.text = String(format: "home_v2_pedag_item_lenght_title".localized, _duration)
-            }else{
-                ui_label_duration.isHidden = true
-            }
-        }else{
-            ui_label_duration.isHidden = true
 
+        if let _duration = pedago.duration, _duration > 0 {
+            ui_label_duration.isHidden = false
+            let durationText = String(format: "home_v2_pedag_item_lenght_title".localized, _duration)
+
+            // Add clock icon using NSTextAttachment
+            let attachment = NSTextAttachment()
+            if let image = UIImage(systemName: "clock")?.withTintColor(.black, renderingMode: .alwaysOriginal) {
+                attachment.image = image
+                attachment.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
+            }
+            let completeText = NSMutableAttributedString(attachment: attachment)
+            completeText.append(NSAttributedString(string: " " + durationText))
+            ui_label_duration.attributedText = completeText
+        } else {
+            ui_label_duration.isHidden = true
         }
     }
 }
