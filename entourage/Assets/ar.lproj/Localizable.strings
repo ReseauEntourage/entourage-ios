@@ -1697,3 +1697,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "انضم إلى مناقشة تضامنية";
 "small_talk_subtitle_match" = "نربطك بمجموعة صغيرة من الأشخاص الذين يشاركونك اهتماماتك، في أي مكان في فرنسا.";
 "Tomorrow" = "غدا";
+"home_v2_moderator_title_format" = "%@، جهة اتصالك المميزة";
+"home_v2_moderator_subtitle" = "أنا جزء من فريق Entourage وأنا هنا لمرافقتك. لا تتردد إذا كان لديك أي أسئلة! 🤗";

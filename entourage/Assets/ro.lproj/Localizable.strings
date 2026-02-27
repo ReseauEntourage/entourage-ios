@@ -1661,3 +1661,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "Alătură-te unei discuții solidare";
 "small_talk_subtitle_match" = "Te conectăm cu un grup mic de oameni care îți împărtășesc interesele, oriunde în Franța.";
 "Tomorrow" = "Mâine";
+"home_v2_moderator_title_format" = "%@, contactul tău privilegiat";
+"home_v2_moderator_subtitle" = "Fac parte din echipa Entourage și sunt aici să te însoțesc. Nu ezita dacă ai întrebări! 🤗";

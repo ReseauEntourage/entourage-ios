@@ -435,6 +435,12 @@ class HomeV2ViewController: UIViewController {
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
         }
 
+        if let _moderator = userHome.moderator {
+            if let _name = _moderator.displayName {
+                tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
+            }
+        }
+
         var _offlineEvents = [Event]()
         for event in allEvents {
             if event.isOnline == false {
@@ -462,12 +468,6 @@ class HomeV2ViewController: UIViewController {
 //            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
 //        }
         
-        tableDTO.append(.cellTitle(title: "home_v2_title_help".localized, subtitle: "home_v2_subtitle_help".localized))
-        if let _moderator = userHome.moderator {
-            if let _name = _moderator.displayName {
-                tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
-            }
-        }
         self.ui_table_view.reloadData()
         self.handleEnhancedOnboardingReturn()
         SVProgressHUD.dismiss()
@@ -667,7 +667,11 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             if let _moderator = self.userHome.moderator {
                 AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
                 if let _id = _moderator.id {
-                    showUserProfile(id: _id)
+                    MessagingService.createOrGetConversation(userId: String(_id)) { conversation, error in
+                        if let conversation = conversation {
+                            DeepLinkManager.showConversation(conversationId: conversation.uid)
+                        }
+                    }
                 }
             }
         case .cellHZ:

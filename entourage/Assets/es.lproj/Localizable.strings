@@ -3181,3 +3181,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "Únete a una discusión solidaria";
 "small_talk_subtitle_match" = "Te conectamos con un pequeño grupo de personas que comparten tus intereses, en cualquier lugar de Francia.";
 "Tomorrow" = "Mañana";
+"home_v2_moderator_title_format" = "%@, tu contacto privilegiado";
+"home_v2_moderator_subtitle" = "Formo parte del equipo de Entourage y estoy aquí para acompañarte. ¡No dudes en preguntar si tienes alguna duda! 🤗";

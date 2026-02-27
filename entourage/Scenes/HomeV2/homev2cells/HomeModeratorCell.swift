@@ -15,6 +15,7 @@ class HomeModeratorCell:UITableViewCell{
     @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var ui_label_title: UILabel!
+    @IBOutlet weak var ui_label_description: UILabel!
     @IBOutlet weak var ui_image: UIImageView!
     //VARIABLE
     class var identifier: String {
@@ -22,23 +23,32 @@ class HomeModeratorCell:UITableViewCell{
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.contentView.backgroundColor = UIColor(named: "white_orange_home")
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = containerView.bounds
 
-        // Convertir les valeurs hexadécimales en UIColor
-        let color1 = UIColor(hexString: "#F55F24")
-        let color2 = UIColor(hexString: "#FF9C5D")
+        // Remove old gradient layer
+        containerView.layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
 
-        gradientLayer.colors = [color1.cgColor, color2.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        containerView.layer.insertSublayer(gradientLayer, at: 0)
+        // Apply shadow/card style
+        containerView.backgroundColor = .white
+        containerView.layer.cornerRadius = 15
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.1
+        containerView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        containerView.layer.shadowRadius = 4
 
+        ui_label_title.font = UIFont(name: "Quicksand-Bold", size: 15)
+        ui_label_title.textColor = UIColor(named: "black_app")
+
+        ui_label_description.font = UIFont(name: "Quicksand-Regular", size: 13)
+        ui_label_description.textColor = UIColor(named: "black_app")
     }
     
     func configure(title:String, imageUrl:String? = nil){
-        self.ui_label_title.text = "home_v2_help_title_three".localized + " " + title
+        let titleFormat = "home_v2_moderator_title_format".localized
+        self.ui_label_title.text = String(format: titleFormat, title)
+        self.ui_label_description.text = "home_v2_moderator_subtitle".localized
+
         if let _urlImageString = imageUrl{
             if let mainUrl = URL(string: _urlImageString) {
                 self.updateImage(mainUrl: mainUrl)
