@@ -22,7 +22,7 @@ enum seeAllCellType {
 
 enum HomeV2DTO {
     case cellTitle(title: String, subtitle: String)
-    case cellAction(action: Action)
+    case cellAction(actions: [Action])
     case cellSeeAll(seeAllType: seeAllCellType)
     case cellEvent(events: [Event])
     case cellGroup(groups: [Neighborhood])
@@ -93,6 +93,7 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeSeeAllCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSeeAllCell.identifier)
         ui_table_view.register(UINib(nibName: HomeCellMapButton.identifier, bundle: nil), forCellReuseIdentifier: HomeCellMapButton.identifier)
         ui_table_view.register(UINib(nibName: HomeCellAction.identifier, bundle: nil), forCellReuseIdentifier: HomeCellAction.identifier)
+        ui_table_view.register(UINib(nibName: HomeActionHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeActionHorizontalCollectionCell.identifier)
         ui_table_view.register(UINib(nibName: HomeEventHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeEventHorizontalCollectionCell.identifier)
         ui_table_view.register(UINib(nibName: HomeGroupHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeGroupHorizontalCollectionCell.identifier)
         ui_table_view.register(UINib(nibName: HomeCellPedago.identifier, bundle: nil), forCellReuseIdentifier: HomeCellPedago.identifier)
@@ -417,15 +418,11 @@ class HomeV2ViewController: UIViewController {
         if (allDemands.count > 0) {
             if isContributionPreference {
                 tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
-                for demand in allDemands {
-                    tableDTO.append(.cellAction(action: demand))
-                }
+                tableDTO.append(.cellAction(actions: allDemands))
                 tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
             } else {
                 tableDTO.append(.cellTitle(title: "home_v2_title_action".localized, subtitle: "home_v2_subtitle_action".localized))
-                for demand in allDemands {
-                    tableDTO.append(.cellAction(action: demand))
-                }
+                tableDTO.append(.cellAction(actions: allDemands))
                 tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
             }
         }
@@ -510,10 +507,11 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.configure(title: title, subtitle: subtitle)
                 return cell
             }
-        case .cellAction(let action):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeCellAction") as? HomeCellAction {
+        case .cellAction(let actions):
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: HomeActionHorizontalCollectionCell.identifier) as? HomeActionHorizontalCollectionCell {
                 cell.selectionStyle = .none
-                cell.configure(action: action)
+                cell.delegate = self
+                cell.configure(actions: actions)
                 return cell
             }
         case .cellSeeAll(let seeAllType):
@@ -617,13 +615,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellTitle(_, _):
             return
         case .cellAction(let action):
-            if isContributionPreference {
-                AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_Detail)
-                self.showAction(actionId: action.id, isContrib: true, action: action)
-            } else {
-                AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
-                self.showAction(actionId: action.id, isContrib: false, action: action)
-            }
+            return
         case .cellSeeAll(let seeAllType):
             switch seeAllType {
             case .seeAllDemand:
@@ -691,7 +683,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellTitle(_, _):
             return UITableView.automaticDimension
         case .cellAction(_):
-            return UITableView.automaticDimension
+            return 215
         case .cellSeeAll(_):
             return UITableView.automaticDimension
         case .cellEvent(_):
@@ -1520,4 +1512,15 @@ extension HomeV2ViewController {
     }
 }
 
-
+// MARK: - HomeActionHCCDelegate
+extension HomeV2ViewController: HomeActionHCCDelegate {
+    func goToMyActionHomeCell(action: Action) {
+        if isContributionPreference {
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_Detail)
+            self.showAction(actionId: action.id, isContrib: true, action: action)
+        } else {
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
+            self.showAction(actionId: action.id, isContrib: false, action: action)
+        }
+    }
+}
