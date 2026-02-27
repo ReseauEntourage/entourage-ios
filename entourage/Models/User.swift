@@ -123,6 +123,7 @@ struct User: Codable {
         case unreadCount = "unread_count"
         case radiusDistance = "travel_distance"
         case isBirthday = "birthday_today"
+        case birthdate
         case creationDateString = "created_at"
         case confirmedAt = "confirmed_at"
     }
