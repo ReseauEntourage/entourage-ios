@@ -111,6 +111,7 @@ Label</string>
                 <outlet property="ui_label_duration" destination="EUc-UL-CfJ" id="pWY-xi-RMx"/>
                 <outlet property="ui_label_pedago" destination="WBt-j9-VNQ" id="oRq-qX-zRk"/>
                 <outlet property="ui_label_title" destination="paw-8t-e1g" id="OHF-Bc-Iku"/>
+                <outlet property="ui_view_tag_container" destination="pnT-2M-wbY" id="ABC-12-XYZ"/>
             </connections>
             <point key="canvasLocation" x="150" y="-22"/>
         </tableViewCell>
