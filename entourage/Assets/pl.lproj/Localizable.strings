@@ -1772,3 +1772,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "Dołącz do dyskusji solidarnościowej";
 "small_talk_subtitle_match" = "Łączymy Cię z małą grupą osób o podobnych zainteresowaniach, w całej Francji.";
 "Tomorrow" = "Jutro";
+"home_v2_moderator_title_format" = "%@, twój uprzywilejowany kontakt";
+"home_v2_moderator_subtitle" = "Jestem częścią zespołu Entourage i jestem tutaj, aby ci towarzyszyć. Nie wahaj się, jeśli masz pytania! 🤗";

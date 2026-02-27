@@ -1964,3 +1964,5 @@
 "event_create_reserved_female_title" = "Is this event reserved for women?";
 "event_create_reserved_female_info" = "The event will only be visible to female users of the application.";
 "event_detail_reserved_female_label" = "This event is reserved for women";
+"home_v2_moderator_title_format" = "%@, your privileged contact";
+"home_v2_moderator_subtitle" = "I am part of the Entourage team and I am here to support you. Do not hesitate if you have any questions! 🤗";
