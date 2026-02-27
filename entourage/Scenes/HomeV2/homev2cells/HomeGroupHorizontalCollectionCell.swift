@@ -77,4 +77,8 @@ extension HomeGroupHorizontalCollectionCell:UICollectionViewDelegate, UICollecti
             delegate?.goToMyGroup(group: group)
         }
     }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        AnimationUtils.animateCell(cell, index: indexPath.row)
+    }
 }
