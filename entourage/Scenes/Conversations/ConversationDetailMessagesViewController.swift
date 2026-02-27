@@ -1902,3 +1902,33 @@ extension ConversationDetailMessagesViewController: UIImagePickerControllerDeleg
         self.present(alert, animated: true)
     }
 }
+
+// MARK: - Extension String pour Conversion HTML
+extension String {
+    /// Convertit le texte contenant des balises HTML en `NSMutableAttributedString`
+    /// tout en appliquant la police et la couleur voulues par défaut.
+    func htmlToAttributedString(font: UIFont, color: UIColor) -> NSMutableAttributedString? {
+        guard let data = self.data(using: .utf8) else { return nil }
+        
+        do {
+            let attributedString = try NSMutableAttributedString(
+                data: data,
+                options: [
+                    .documentType: NSAttributedString.DocumentType.html,
+                    .characterEncoding: String.Encoding.utf8.rawValue
+                ],
+                documentAttributes: nil
+            )
+            
+            // On force la police et la couleur par défaut pour ne pas casser le design
+            let fullRange = NSRange(location: 0, length: attributedString.length)
+            attributedString.addAttribute(.font, value: font, range: fullRange)
+            attributedString.addAttribute(.foregroundColor, value: color, range: fullRange)
+            
+            return attributedString
+        } catch {
+            print("Erreur de parsing HTML: \(error)")
+            return nil
+        }
+    }
+}
