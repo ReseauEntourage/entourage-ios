@@ -14,6 +14,7 @@ class HomeCellPedago:UITableViewCell{
     //OUTLET
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var ui_image: UIImageView!
+    @IBOutlet weak var ui_view_tag_container: UIView!
     @IBOutlet weak var ui_label_pedago: UILabel!
     @IBOutlet weak var ui_label_title: UILabel!
     
@@ -36,7 +37,7 @@ class HomeCellPedago:UITableViewCell{
     }
 
     private func repositionDurationLabel() {
-        guard let tagContainer = ui_label_pedago.superview else { return }
+        guard let tagContainer = ui_view_tag_container else { return }
 
         // Remove existing constraints on ui_label_duration
         // It's a direct child of containerView, so constraints are held by containerView
@@ -61,17 +62,28 @@ class HomeCellPedago:UITableViewCell{
         else {
             ui_image.image = UIImage(named: "placeholder_action")
         }
-        switch pedago.tag{
+
+        switch pedago.tag {
         case .All:
             ui_label_pedago.text = "home_v2_pedago_item_tag_all".localized
+            ui_label_pedago.textColor = UIColor.orange_light
+            ui_view_tag_container.backgroundColor = UIColor.appBeigeLighter
         case .Understand:
             ui_label_pedago.text = "home_v2_pedago_item_tag_understand".localized
+            ui_label_pedago.textColor = UIColor.appTagUnderstand
+            ui_view_tag_container.backgroundColor = UIColor.appTagUnderstandBackground
         case .Act:
             ui_label_pedago.text = "home_v2_pedago_item_tag_act".localized
+            ui_label_pedago.textColor = UIColor.appTagAct
+            ui_view_tag_container.backgroundColor = UIColor.appTagActBackground
         case .Inspire:
             ui_label_pedago.text = "home_v2_pedago_item_tag_inspire".localized
+            ui_label_pedago.textColor = UIColor.appTagInspire
+            ui_view_tag_container.backgroundColor = UIColor.appTagInspireBackground
         case .None:
             ui_label_title.text = "Autre"
+            ui_label_pedago.textColor = UIColor.orange_light
+            ui_view_tag_container.backgroundColor = UIColor.appBeigeLighter
         }
 
         if let _duration = pedago.duration, _duration > 0 {

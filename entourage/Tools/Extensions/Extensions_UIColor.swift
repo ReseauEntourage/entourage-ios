@@ -139,6 +139,15 @@ extension UIColor {
     static var appGreyOff: UIColor {
         return UIColor(named: "grey_off") ?? .red
     }
+
+    //MARK: - Tag colors -
+    static var appTagInspire: UIColor { return UIColor(hexString: "#D4A000") }
+    static var appTagInspireBackground: UIColor { return UIColor(hexString: "#FFF8DE") }
+    static var appTagAct: UIColor { return UIColor(hexString: "#4DA865") }
+    static var appTagActBackground: UIColor { return UIColor(hexString: "#E5F6E8") }
+    static var appTagUnderstand: UIColor { return UIColor(hexString: "#3F6AD7") }
+    static var appTagUnderstandBackground: UIColor { return UIColor(hexString: "#E3EBFF") }
+
     convenience init(hexString: String) {
         let scanner = Scanner(string: hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
         var hexNumber: UInt64 = 0
