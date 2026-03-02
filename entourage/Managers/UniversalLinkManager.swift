@@ -44,9 +44,9 @@ struct UniversalLinkManager {
             
         // --- 2. Charte éthique ---
         case "charte-ethique-entourage":
-            // Android: Intent.ACTION_VIEW disclaimer_link_public
-            if let url = URL(string: "https://www.entourage.social/charte-ethique-grand-public") {
-                UIApplication.shared.open(url)
+            let urlString = EnvironmentConfigurationManager.sharedInstance.runsOnProduction ? "https://www.entourage.social/app/resources/eMU_InNSSJbE" : "https://preprod.entourage.social/app/resources/87203debda8b"
+            if let url = URL(string: urlString) {
+                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
             }
             
         // --- 3. Outings (Événements) ---
