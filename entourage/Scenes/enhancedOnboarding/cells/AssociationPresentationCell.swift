@@ -67,7 +67,7 @@ class AssociationPresentationCell: UITableViewCell, UITextViewDelegate {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("description_association_label", value: "Description de votre association", comment: "")
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = ApplicationTheme.getFontQuickSandBold(size: 16)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
