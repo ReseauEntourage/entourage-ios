@@ -22,9 +22,23 @@ class EventPlaceLimitCell: UITableViewCell {
     
     weak var delegate:EventCreateLocationCellDelegate? = nil
     
+    var bottomConstraint: NSLayoutConstraint?
+    var topConstraint: NSLayoutConstraint?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        if let superview = ui_view_limit.superview {
+            for constraint in superview.constraints {
+                if constraint.firstAttribute == .bottom && constraint.secondItem as? UIView == ui_view_limit {
+                    bottomConstraint = constraint
+                }
+                if constraint.firstItem as? UIView == ui_view_limit && constraint.firstAttribute == .top {
+                    topConstraint = constraint
+                }
+            }
+        }
+
         let stringAttr = Utils.formatString(messageTxt: "event_create_phase3_title_limit".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
         let stringAttrLimit = Utils.formatString(messageTxt: "event_create_phase3_title_nb_places".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
         
@@ -101,9 +115,13 @@ class EventPlaceLimitCell: UITableViewCell {
         if selectedItem == 1 {
             ui_limit_tf.text = ""
             ui_view_limit.isHidden = false
+            bottomConstraint?.constant = 32
+            topConstraint?.constant = 32
         }
         else {
             ui_view_limit.isHidden = true
+            bottomConstraint?.constant = 0
+            topConstraint?.constant = 0
         }
     }
     
