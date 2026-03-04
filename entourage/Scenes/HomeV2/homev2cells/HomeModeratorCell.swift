@@ -32,16 +32,21 @@ class HomeModeratorCell:UITableViewCell{
         // Apply shadow/card style
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 15
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 0.1
-        containerView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        containerView.layer.shadowRadius = 4
+        containerView.layer.borderColor = UIColor.appBeige.cgColor
+        containerView.layer.borderWidth = 1
+        containerView.layer.shadowColor = UIColor.clear.cgColor
+        containerView.layer.shadowOpacity = 0
 
-        ui_label_title.font = UIFont(name: "Quicksand-Bold", size: 15)
+        ui_label_title.font = UIFont(name: "Quicksand-Bold", size: 14)
         ui_label_title.textColor = UIColor(named: "black_app")
 
         ui_label_description.font = UIFont(name: "Quicksand-Regular", size: 13)
         ui_label_description.textColor = UIColor(named: "black_app")
+
+        ui_image.layer.borderColor = UIColor.appOrangeLight.cgColor
+        ui_image.layer.borderWidth = 1
+        ui_image.layer.cornerRadius = 23
+        ui_image.clipsToBounds = true
     }
     
     func configure(title:String, imageUrl:String? = nil){

@@ -432,12 +432,6 @@ class HomeV2ViewController: UIViewController {
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
         }
 
-        if let _moderator = userHome.moderator {
-            if let _name = _moderator.displayName {
-                tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
-            }
-        }
-
         var _offlineEvents = [Event]()
         for event in allEvents {
             if event.isOnline == false {
@@ -448,8 +442,13 @@ class HomeV2ViewController: UIViewController {
             tableDTO.append(.cellHZ)
         }
 
+        if let _moderator = userHome.moderator {
+            if let _name = _moderator.displayName {
+                tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
+            }
+        }
+
         //add condition
-        tableDTO.append(.cellTitle(title: "home_v2_title_small_talk".localized, subtitle: ""))
         tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
 
         tableDTO.append(.cellSolidarityTools)
@@ -926,9 +925,10 @@ extension HomeV2ViewController: HomeSolidarityToolsCellDelegate {
     }
 
     func onEthicsTapped() {
-        let urlString = EnvironmentConfigurationManager.sharedInstance.runsOnProduction ? "https://www.entourage.social/app/resources/eMU_InNSSJbE" : "https://preprod.entourage.social/app/resources/87203debda8b"
+        let isProd = EnvironmentConfigurationManager.sharedInstance.runsOnProduction
+        let urlString = isProd ? "https://www.entourage.social/app/resources/eMU_InNSSJbE" : "https://preprod.entourage.social/app/resources/87203debda8b"
         if let url = URL(string: urlString) {
-            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 }
