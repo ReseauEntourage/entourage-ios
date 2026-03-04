@@ -74,23 +74,16 @@ class EventListCell: UITableViewCell {
             }
         }
         
-        let isReservedFemale = event.reservedFemale ?? false
+        let isReservedFemale = event.metadata?.reservedFemale ?? false
 
-        if isAmbassador && isReservedFemale {
+        if isReservedFemale {
             self.ic_entoutou.isHidden = false
-            self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
-
-            self.ic_entoutou_woman.isHidden = false
-            self.ic_entoutou_woman.image = UIImage(named: "ic_entoutou_logo_woman")
+            self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_woman")
+            self.ic_entoutou_woman.isHidden = true
         }
         else if isAmbassador {
             self.ic_entoutou.isHidden = false
             self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
-            self.ic_entoutou_woman.isHidden = true
-        }
-        else if isReservedFemale {
-            self.ic_entoutou.isHidden = false
-            self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_woman")
             self.ic_entoutou_woman.isHidden = true
         }
         else {

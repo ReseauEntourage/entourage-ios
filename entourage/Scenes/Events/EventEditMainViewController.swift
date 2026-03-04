@@ -282,6 +282,7 @@ class EventEditMainViewController: UIViewController {
         newEvent.imageId = newImageId
         
         newEvent.recurrence = newRecurrence
+        newEvent.metadata?.reservedFemale = eventEditing.metadata?.reservedFemale
         newEvent.isOnline = newIsOnline
         newEvent.onlineEventUrl = newOnlineEventUrl
         newEvent.location = newLocation
@@ -303,7 +304,11 @@ class EventEditMainViewController: UIViewController {
 //MARK: - EventCreateMainDelegate -
 extension EventEditMainViewController: EventCreateMainDelegate {
     func addReservedFemale(reserved: Bool) {
-        //
+        if eventEditing.metadata == nil {
+            eventEditing.metadata = EventMetadataEditing()
+        }
+        eventEditing.metadata?.reservedFemale = reserved
+        _ = checkValidation()
     }
     
     //Phase 1
