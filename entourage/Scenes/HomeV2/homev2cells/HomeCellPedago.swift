@@ -66,7 +66,7 @@ class HomeCellPedago:UITableViewCell{
         switch pedago.tag {
         case .All:
             ui_label_pedago.text = "home_v2_pedago_item_tag_all".localized
-            ui_label_pedago.textColor = UIColor.orange_light
+            ui_label_pedago.textColor = UIColor.appOrangeLight
             ui_view_tag_container.backgroundColor = UIColor.appBeigeLighter
         case .Understand:
             ui_label_pedago.text = "home_v2_pedago_item_tag_understand".localized
@@ -82,7 +82,7 @@ class HomeCellPedago:UITableViewCell{
             ui_view_tag_container.backgroundColor = UIColor.appTagInspireBackground
         case .None:
             ui_label_title.text = "Autre"
-            ui_label_pedago.textColor = UIColor.orange_light
+            ui_label_pedago.textColor = UIColor.appOrangeLight
             ui_view_tag_container.backgroundColor = UIColor.appBeigeLighter
         }
 
