@@ -44,9 +44,10 @@ struct UniversalLinkManager {
             
         // --- 2. Charte éthique ---
         case "charte-ethique-entourage":
-            let urlString = EnvironmentConfigurationManager.sharedInstance.runsOnProduction ? "https://www.entourage.social/app/resources/eMU_InNSSJbE" : "https://preprod.entourage.social/app/resources/87203debda8b"
+            let isProd = EnvironmentConfigurationManager.sharedInstance.runsOnProduction
+            let urlString = isProd ? "https://www.entourage.social/app/resources/eMU_InNSSJbE" : "https://preprod.entourage.social/app/resources/87203debda8b"
             if let url = URL(string: urlString) {
-                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
             
         // --- 3. Outings (Événements) ---

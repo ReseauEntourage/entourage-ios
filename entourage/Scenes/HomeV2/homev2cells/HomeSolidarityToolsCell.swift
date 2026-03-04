@@ -49,18 +49,18 @@ class HomeSolidarityToolsCell: UITableViewCell {
         ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         ui_label_title.textColor = .black
 
-        setupCard(view: ui_view_map, label: ui_lbl_map, image: ui_iv_map, title: "home_v2_tool_card_map".localized, iconName: "illu_map", systemIcon: "map.fill")
-        setupCard(view: ui_view_pedago, label: ui_lbl_pedago, image: ui_iv_pedago, title: "home_v2_tool_card_pedago".localized, iconName: "ic_book", systemIcon: "book.fill")
-        setupCard(view: ui_view_ethics, label: ui_lbl_ethics, image: ui_iv_ethics, title: "home_v2_tool_card_ethics".localized, iconName: "ic_handshake", systemIcon: "hand.raised.fill")
+        setupCard(view: ui_view_map, label: ui_lbl_map, image: ui_iv_map, title: "home_v2_tool_card_map".localized, iconName: "ic_card_map", systemIcon: "map.fill")
+        setupCard(view: ui_view_pedago, label: ui_lbl_pedago, image: ui_iv_pedago, title: "home_v2_tool_card_pedago".localized, iconName: "ic_card_pedago", systemIcon: "book.fill")
+        setupCard(view: ui_view_ethics, label: ui_lbl_ethics, image: ui_iv_ethics, title: "home_v2_tool_card_ethics".localized, iconName: "ic_card_charte", systemIcon: "hand.raised.fill")
     }
 
     private func setupCard(view: UIView, label: UILabel, image: UIImageView, title: String, iconName: String, systemIcon: String) {
         view.layer.cornerRadius = 14
         view.backgroundColor = .white
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowOffset = CGSize(width: 0, height: 2)
-        view.layer.shadowRadius = 4
+        view.layer.borderColor = UIColor.appBeige.cgColor
+        view.layer.borderWidth = 1
+        view.layer.shadowColor = UIColor.clear.cgColor
+        view.layer.shadowOpacity = 0
 
         label.text = title
         label.font = ApplicationTheme.getFontNunitoBold(size: 12)
@@ -74,7 +74,11 @@ class HomeSolidarityToolsCell: UITableViewCell {
             image.image = UIImage(systemName: systemIcon)
             image.tintColor = .appOrange
         }
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .center
+
+        image.backgroundColor = UIColor.appBeige
+        image.layer.cornerRadius = 25
+        image.clipsToBounds = true
     }
 
     private func setupTapGestures() {
