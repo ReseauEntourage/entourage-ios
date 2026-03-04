@@ -177,7 +177,7 @@ final class OnboardingPhase1VM: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    // Helpers ordre forcé (Femme → Homme → Autre → reste)
+    // Helpers ordre forcé (Femme → Homme → Non renseigné → reste)
     private func normalized(_ s: String) -> String {
         s.folding(options: .diacriticInsensitive, locale: .current)
          .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -187,7 +187,7 @@ final class OnboardingPhase1VM: ObservableObject {
         let n = normalized(label)
         if n.contains("femme") { return 0 }
         if n.contains("homme") { return 1 }
-        if n.contains("autre") || n.contains("non binaire") || n.contains("non-binaire") || n.contains("autres") { return 2 }
+        if n.contains("non renseigne") || n.contains("non renseigné") || n.contains("autre") || n.contains("non binaire") || n.contains("non-binaire") || n.contains("autres") { return 2 }
         return 3
     }
 
@@ -301,10 +301,10 @@ final class OnboardingPhase1VM: ObservableObject {
                     self.gendersMap = meta.user?.genders ?? [:]
                     self.discoverySourcesMap = meta.user?.discoverySources ?? [:]
 
-                    // Genders: ordre forcé Femme > Homme > Autre, puis le reste
+                    // Genders: ordre forcé Femme > Homme > Non renseigné, puis le reste
                     let labelsG = Array(self.gendersMap.values)
                     if labelsG.isEmpty {
-                        self.genderOptions = ["Femme", "Homme", "Autre"]
+                        self.genderOptions = ["Femme", "Homme", "Non renseigné"]
                     } else {
                         self.genderOptions = labelsG.sorted { a, b in
                             let pa = self.genderPriority(a)
@@ -334,7 +334,7 @@ final class OnboardingPhase1VM: ObservableObject {
                 case .failure:
                     self.gendersMap = [:]
                     self.discoverySourcesMap = [:]
-                    self.genderOptions = ["Femme", "Homme", "Autre"]
+                    self.genderOptions = ["Femme", "Homme", "Non renseigné"]
                     self.howWeMetOptions = []
                 }
                 self.recomputeCanProceed()

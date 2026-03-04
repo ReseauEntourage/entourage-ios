@@ -113,12 +113,12 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         self.stickyButtonView = buttonView
         
-        let height: CGFloat = 130
+        let height: CGFloat = 85
         
         NSLayoutConstraint.activate([
             buttonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             buttonView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            buttonView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            buttonView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             buttonView.heightAnchor.constraint(equalToConstant: height)
         ])
         
@@ -243,7 +243,7 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         case .associationPresentation:
             AnalyticsLoggerManager.logEvent(name: "onboarding_association_view")
             tableDTO.append(.backArrow)
-            tableDTO.append(.title(title: "Présentez votre association", subtitle: "Ajoutez votre logo et une courte description."))
+            tableDTO.append(.title(title: "Présentez votre association à la communauté", subtitle: "Ajoutez votre logo et une courte description pour que les membres de la communauté sachent qui vous êtes et ce que vous faites."))
             
             // Chargement des données si nécessaire
             if associationDescription == nil && associationLogoImage == nil, let pid = currentPartnerId {
@@ -258,6 +258,24 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         if hasChangedMod {
             hasChangedMod = false
             ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
+
+        updateStickyFooter()
+    }
+
+    private func updateStickyFooter() {
+        guard let buttonView = self.stickyButtonView else { return }
+
+        if EnhancedOnboardingConfiguration.shared.isInterestsFromSetting {
+            return // Already handled in configureForMainFilter (only validate)
+        }
+
+        let isLastStep = isAssociationGoal ? (self.mode == .associationPresentation) : (self.mode == .choiceDisponibility)
+
+        if isLastStep {
+            buttonView.ui_btn_next.setTitle("action_create_close_button".localized, for: .normal)
+        } else {
+            buttonView.ui_btn_next.setTitle("enhanced_onboarding_button_title_next".localized, for: .normal)
         }
     }
 
