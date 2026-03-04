@@ -79,4 +79,8 @@ extension HomeEventHorizontalCollectionCell:UICollectionViewDelegate, UICollecti
             delegate?.goToMyEventHomeCell(event: event)
         }
     }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        AnimationUtils.animateCell(cell, index: indexPath.row)
+    }
 }
