@@ -386,6 +386,7 @@
 		2432FE532F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2432FE512F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib */; };
 		2432FE562F5825450033E711 /* HomeCellActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE542F5825450033E711 /* HomeCellActionCollectionViewCell.swift */; };
 		2432FE572F5825450033E711 /* HomeCellActionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */; };
+		2432FE592F5831A00033E711 /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE582F5831A00033E711 /* AnimationUtils.swift */; };
 		244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244715252F15307400F8BFD1 /* AssociationPresenter.swift */; };
 		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
 		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
@@ -1009,6 +1010,7 @@
 		2432FE512F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeActionHorizontalCollectionCell.xib; sourceTree = "<group>"; };
 		2432FE542F5825450033E711 /* HomeCellActionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellActionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellActionCollectionViewCell.xib; sourceTree = "<group>"; };
+		2432FE582F5831A00033E711 /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
 		244715252F15307400F8BFD1 /* AssociationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresenter.swift; sourceTree = "<group>"; };
 		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
@@ -1576,6 +1578,7 @@
 		025D8762278DEB1A00909101 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				2432FE582F5831A00033E711 /* AnimationUtils.swift */,
 				26499C352D0B1CC000AF88DC /* VibrationUtil.swift */,
 				268FCA282965E6A000159C34 /* AlertWithImage */,
 				02F5FEC227E0CB6800A14313 /* MJAlertController.swift */,
@@ -3113,6 +3116,7 @@
 				0247AD002819348E008F915B /* NeighborhoodDetailViewController.swift in Sources */,
 				2432FE562F5825450033E711 /* HomeCellActionCollectionViewCell.swift in Sources */,
 				02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */,
+				2432FE592F5831A00033E711 /* AnimationUtils.swift in Sources */,
 				02D64F4D2799D5E000F6C4BD /* InviteSourceViewController.swift in Sources */,
 				02C91A29278F335000305E0B /* MainTabbarViewController.swift in Sources */,
 				02040CFD288ED75100AB1FBB /* EventParamsCGUViewController.swift in Sources */,
