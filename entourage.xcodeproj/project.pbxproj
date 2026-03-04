@@ -382,6 +382,10 @@
 		242108202F4DE5BB004D74E2 /* EventReservedFemaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */; };
 		242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */; };
 		242108242F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */; };
+		2432FE522F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE502F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift */; };
+		2432FE532F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2432FE512F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib */; };
+		2432FE562F5825450033E711 /* HomeCellActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE542F5825450033E711 /* HomeCellActionCollectionViewCell.swift */; };
+		2432FE572F5825450033E711 /* HomeCellActionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */; };
 		244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244715252F15307400F8BFD1 /* AssociationPresenter.swift */; };
 		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
 		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
@@ -1001,6 +1005,10 @@
 		2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventReservedFemaleCell.xib; sourceTree = "<group>"; };
 		242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSolidarityToolsCell.swift; sourceTree = "<group>"; };
 		242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSolidarityToolsCell.xib; sourceTree = "<group>"; };
+		2432FE502F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActionHorizontalCollectionCell.swift; sourceTree = "<group>"; };
+		2432FE512F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeActionHorizontalCollectionCell.xib; sourceTree = "<group>"; };
+		2432FE542F5825450033E711 /* HomeCellActionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellActionCollectionViewCell.swift; sourceTree = "<group>"; };
+		2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellActionCollectionViewCell.xib; sourceTree = "<group>"; };
 		244715252F15307400F8BFD1 /* AssociationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresenter.swift; sourceTree = "<group>"; };
 		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
@@ -2391,6 +2399,10 @@
 				2630F6192C21CCE6007BAE56 /* HomeInitialPedagogicHorizontalCell.xib */,
 				2630F61B2C21D320007BAE56 /* HomeInitialPedagoCell.swift */,
 				2630F61D2C21D376007BAE56 /* HomeInitialPedagoCell.xib */,
+				2432FE502F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift */,
+				2432FE512F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib */,
+				2432FE542F5825450033E711 /* HomeCellActionCollectionViewCell.swift */,
+				2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */,
 			);
 			path = homev2cells;
 			sourceTree = "<group>";
@@ -2853,6 +2865,7 @@
 				02E0EFA82878709D009B2C65 /* EventDetailTopLightCell.xib in Resources */,
 				2619CCE52AE948AB00276D67 /* Localizable.strings in Resources */,
 				2698D2A92E40D84100B1A422 /* cellOtherWithImage.xib in Resources */,
+				2432FE572F5825450033E711 /* HomeCellActionCollectionViewCell.xib in Resources */,
 				26C2C9162DDDED6A00C8F320 /* CellAlmostMatching.xib in Resources */,
 				26D13E2A2BA35FA600CAD4F7 /* QcmCell.xib in Resources */,
 				024131DB2862126B00561FB4 /* Events.xcassets in Resources */,
@@ -2861,6 +2874,7 @@
 				025D8723278DD33800909101 /* Assets.xcassets in Resources */,
 				26A06BB12B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib in Resources */,
 				26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */,
+				2432FE532F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib in Resources */,
 				02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */,
 				0208268028A68447004B1222 /* ActionDeletePopsViewController.xib in Resources */,
 				264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */,
@@ -3097,6 +3111,7 @@
 				0285AD832806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift in Sources */,
 				0227EC53292D20070049168E /* NotifInAppCell.swift in Sources */,
 				0247AD002819348E008F915B /* NeighborhoodDetailViewController.swift in Sources */,
+				2432FE562F5825450033E711 /* HomeCellActionCollectionViewCell.swift in Sources */,
 				02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */,
 				02D64F4D2799D5E000F6C4BD /* InviteSourceViewController.swift in Sources */,
 				02C91A29278F335000305E0B /* MainTabbarViewController.swift in Sources */,
@@ -3326,6 +3341,7 @@
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,
 				020429B5282E81B00030B035 /* NeighborhoodPostCell.swift in Sources */,
 				26D0B75D2DE4B1BA0066F461 /* GoodPracticesViewController.swift in Sources */,
+				2432FE522F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift in Sources */,
 				024273EE283291C2009A4EB8 /* NeighborhoodMessageCell.swift in Sources */,
 				024273EC283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift in Sources */,
 				020AF5E82860B10C0012AE60 /* HomeCongratPopupViewController.swift in Sources */,
