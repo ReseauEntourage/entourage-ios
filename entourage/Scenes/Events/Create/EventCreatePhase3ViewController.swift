@@ -35,6 +35,8 @@ class EventCreatePhase3ViewController: UIViewController {
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
 
+        ui_tableview.register(UINib(nibName: "EventReservedFemaleCell", bundle: nil), forCellReuseIdentifier: "EventReservedFemaleCell")
+
         if pageDelegate?.isEdit() ?? false {
             currentEvent = pageDelegate?.getCurrentEvent()
         }
@@ -43,7 +45,7 @@ class EventCreatePhase3ViewController: UIViewController {
 //MARK: - UITableView datasource / Delegate -
 extension EventCreatePhase3ViewController:UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,14 +75,29 @@ extension EventCreatePhase3ViewController:UITableViewDataSource, UITableViewDele
             
             return cell
         }
+        else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellLimit", for: indexPath) as! EventPlaceLimitCell
+
+            let _hasplaceLimit = currentEvent?.metadata?.hasPlaceLimit != nil ? currentEvent!.metadata!.hasPlaceLimit! : hasplaceLimit
+            let _nbplaceLimit = currentEvent?.metadata?.place_limit != nil ? currentEvent!.metadata!.place_limit! : nbPlaceLimit
+
+            cell.populateCell(delegate: self,hasPlaceLimit: _hasplaceLimit, limitNb: _nbplaceLimit)
+            return cell
+        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellLimit", for: indexPath) as! EventPlaceLimitCell
-        
-        let _hasplaceLimit = currentEvent?.metadata?.hasPlaceLimit != nil ? currentEvent!.metadata!.hasPlaceLimit! : hasplaceLimit
-        let _nbplaceLimit = currentEvent?.metadata?.place_limit != nil ? currentEvent!.metadata!.place_limit! : nbPlaceLimit
-        
-        cell.populateCell(delegate: self,hasPlaceLimit: _hasplaceLimit, limitNb: _nbplaceLimit)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventReservedFemaleCell", for: indexPath) as! EventReservedFemaleCell
+        let isReserved = currentEvent?.metadata?.reservedFemale ?? false
+        cell.populateCell(isReserved: isReserved, delegate: self)
         return cell
+    }
+}
+
+extension EventCreatePhase3ViewController: EventReservedFemaleCellDelegate {
+    func updateReservedFemale(isReserved: Bool) {
+        pageDelegate?.addReservedFemale(reserved: isReserved)
+        //Force resize cell
+        ui_tableview.beginUpdates()
+        ui_tableview.endUpdates()
     }
 }
 
