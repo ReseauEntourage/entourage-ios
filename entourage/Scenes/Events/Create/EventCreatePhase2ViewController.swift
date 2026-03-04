@@ -27,8 +27,6 @@ class EventCreatePhase2ViewController: UIViewController {
         ui_tableview.delegate = self
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
-        
-        ui_tableview.register(UINib(nibName: "EventReservedFemaleCell", bundle: nil), forCellReuseIdentifier: "EventReservedFemaleCell")
 
         if pageDelegate?.isEdit() ?? false {
             currentEvent = pageDelegate?.getCurrentEvent()
@@ -48,7 +46,7 @@ class EventCreatePhase2ViewController: UIViewController {
 //MARK: - UITableView datasource / Delegate -
 extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hasCurrentRecurrency ? 2 : 3
+        return hasCurrentRecurrency ? 1 : 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,34 +60,12 @@ extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDele
             
             return cell
         }
-        else if indexPath.row == 1 {
-            if !hasCurrentRecurrency {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellSelector", for: indexPath) as! EventRecurrenceCell
-                let recur = currentEvent != nil ? currentEvent!.recurrence : recurrenceSelected
-
-                cell.populateCell(recurrence:recur, delegate: self)
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "EventReservedFemaleCell", for: indexPath) as! EventReservedFemaleCell
-                let isReserved = currentEvent?.metadata?.reservedFemale ?? false
-                cell.populateCell(isReserved: isReserved, delegate: self)
-                return cell
-            }
-        }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EventReservedFemaleCell", for: indexPath) as! EventReservedFemaleCell
-        let isReserved = currentEvent?.metadata?.reservedFemale ?? false
-        cell.populateCell(isReserved: isReserved, delegate: self)
-        return cell
-    }
-}
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellSelector", for: indexPath) as! EventRecurrenceCell
+        let recur = currentEvent != nil ? currentEvent!.recurrence : recurrenceSelected
 
-extension EventCreatePhase2ViewController: EventReservedFemaleCellDelegate {
-    func updateReservedFemale(isReserved: Bool) {
-        pageDelegate?.addReservedFemale(reserved: isReserved)
-        //Force resize cell
-        ui_tableview.beginUpdates()
-        ui_tableview.endUpdates()
+        cell.populateCell(recurrence:recur, delegate: self)
+        return cell
     }
 }
 

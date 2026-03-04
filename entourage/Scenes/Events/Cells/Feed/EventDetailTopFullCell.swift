@@ -89,10 +89,10 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
         
-        ui_view_reserved_female.layer.cornerRadius = 16
+        ui_view_reserved_female.layer.cornerRadius = 12
         ui_view_reserved_female.backgroundColor = UIColor.appViolet
         ui_lbl_reserved_female?.text = "event_detail_reserved_female_label".localized
-        ui_lbl_reserved_female.setFontTitle(size: 13)
+        ui_lbl_reserved_female.setFontTitle(size: 11)
 
         ui_view_place_limit.isHidden = true
         
@@ -221,7 +221,7 @@ class EventDetailTopFullCell: UITableViewCell {
         
         if let reservedFemale = event.metadata?.reservedFemale, reservedFemale {
             ui_view_reserved_female.isHidden = false
-            ui_constraint_height_reserved_female.constant = 32
+            ui_constraint_height_reserved_female.constant = 24
         } else {
             ui_view_reserved_female.isHidden = true
             ui_constraint_height_reserved_female.constant = 0
