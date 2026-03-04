@@ -164,5 +164,8 @@ extension EventCreatePhase3ViewController:PlaceViewControllerDelegate, EventCrea
         self.nbPlaceLimit = limitNb
         Logger.print("***** add Limit : \(hasPlaceLimit) - \(limitNb)")
         pageDelegate?.addPlaceLimit(hasLimit: hasPlaceLimit,nbPlaces: limitNb)
+
+        ui_tableview.beginUpdates()
+        ui_tableview.endUpdates()
     }
 }
