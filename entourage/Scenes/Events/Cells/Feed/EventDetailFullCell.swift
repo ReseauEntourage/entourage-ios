@@ -291,6 +291,7 @@ class EventDetailFullCell: UITableViewCell {
             ui_view_organised_by.isHidden = true
             ui_view_association.isHidden = true
         }
+
         if isEntourageEvent {
             ui_label_association.text = String(format: "event_top_cell_asso".localized, "Entourage")
             ui_view_association.isHidden = false

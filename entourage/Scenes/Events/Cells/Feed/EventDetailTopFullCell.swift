@@ -218,7 +218,7 @@ class EventDetailTopFullCell: UITableViewCell {
             })
         }
         
-        if let reservedFemale = event.reservedFemale, reservedFemale {
+        if let reservedFemale = event.metadata?.reservedFemale, reservedFemale {
             ui_view_reserved_female.isHidden = false
             ui_constraint_height_reserved_female.constant = 32
         } else {

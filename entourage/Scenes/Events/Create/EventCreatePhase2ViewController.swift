@@ -62,16 +62,23 @@ extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDele
             
             return cell
         }
-        else if indexPath.row == 1 && !hasCurrentRecurrency {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellSelector", for: indexPath) as! EventRecurrenceCell
-            let recur = currentEvent != nil ? currentEvent!.recurrence : recurrenceSelected
+        else if indexPath.row == 1 {
+            if !hasCurrentRecurrency {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellSelector", for: indexPath) as! EventRecurrenceCell
+                let recur = currentEvent != nil ? currentEvent!.recurrence : recurrenceSelected
 
-            cell.populateCell(recurrence:recur, delegate: self)
-            return cell
+                cell.populateCell(recurrence:recur, delegate: self)
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "EventReservedFemaleCell", for: indexPath) as! EventReservedFemaleCell
+                let isReserved = currentEvent?.metadata?.reservedFemale ?? false
+                cell.populateCell(isReserved: isReserved, delegate: self)
+                return cell
+            }
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventReservedFemaleCell", for: indexPath) as! EventReservedFemaleCell
-        let isReserved = currentEvent?.reservedFemale ?? false
+        let isReserved = currentEvent?.metadata?.reservedFemale ?? false
         cell.populateCell(isReserved: isReserved, delegate: self)
         return cell
     }

@@ -48,7 +48,6 @@ struct Event:Codable {
     private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
     private var updatedAt:String? = nil
-    var reservedFemale:Bool? = false
     
     func getChangedStatusDate() -> Date? {
         return statusChangedAt == nil ? nil : Utils.getDateFromWSDateString(statusChangedAt)
@@ -228,7 +227,6 @@ struct Event:Codable {
         case titleTranslations = "title_translations"
         case descriptionTranslations = "description_translations"
         case signable
-        case reservedFemale = "reserved_female"
     }
     
     func dictionaryForWS() -> [String:Any] {
@@ -346,12 +344,12 @@ struct Event:Codable {
         if let place = metadata?.place_limit , place > 0 {
             metadatas["place_limit"] = place
         }
+        
+        if let reservedFemale = metadata?.reservedFemale {
+            metadatas["reserved_female"] = reservedFemale
+        }
 
         dict["metadata"] = metadatas
-        
-        if let reservedFemale = reservedFemale {
-            dict["reserved_female"] = reservedFemale
-        }
 
         return dict
     }
@@ -404,6 +402,7 @@ struct EventMetadata:Codable {
     var place_limit:Int? = 0
     var portrait_url:String? = nil
     var landscape_url:String? = nil
+    var reservedFemale:Bool? = false
     
     var hasPlaceLimit:Bool? {
         get {
@@ -424,6 +423,7 @@ struct EventMetadata:Codable {
         case place_limit
         case portrait_url
         case landscape_url
+        case reservedFemale = "reserved_female"
     }
 }
 
@@ -531,7 +531,6 @@ struct EventEditing {
     var neighborhoods:[EventNeighborhood]? = nil
     
     var recurrence:EventRecurrence? = nil
-    var reservedFemale:Bool? = nil
     
     private var _startDate:Date? = nil
     var startDate:Date? {
@@ -622,10 +621,6 @@ struct EventEditing {
                 dict["recurrency"] = 31
             }
         }
-        
-        if let reservedFemale = reservedFemale {
-            dict["reserved_female"] = reservedFemale
-        }
 
         var metadatas = [String:Any]()
         if let newStartDate = metadata?.starts_at {
@@ -647,6 +642,10 @@ struct EventEditing {
         if let place = metadata?.place_limit  {
             metadatas["place_limit"] = place
         }
+
+        if let reservedFemale = metadata?.reservedFemale {
+            metadatas["reserved_female"] = reservedFemale
+        }
        
         if metadatas.count > 0 {
             dict["metadata"] = metadatas
@@ -667,6 +666,7 @@ struct EventMetadataEditing {
     var place_name:String? = nil
     var google_place_id:String? = nil
     var place_limit:Int? = 0
+    var reservedFemale:Bool? = nil
     var hasPlaceLimit:Bool? {
         get {
             if place_limit == nil {
