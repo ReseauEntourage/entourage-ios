@@ -92,6 +92,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_view_reserved_female.layer.cornerRadius = 16
         ui_view_reserved_female.backgroundColor = UIColor.appViolet
         ui_lbl_reserved_female?.text = "event_detail_reserved_female_label".localized
+        ui_lbl_reserved_female.setFontTitle(size: 13)
 
         ui_view_place_limit.isHidden = true
         

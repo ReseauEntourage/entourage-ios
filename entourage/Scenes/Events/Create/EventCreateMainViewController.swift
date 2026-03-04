@@ -263,7 +263,7 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
     
     func addReservedFemale(reserved: Bool) {
         if newEvent.metadata == nil {
-            newEvent.metadata = EventMetadataEditing()
+            newEvent.metadata = EventMetadata() // ✅ La correction
         }
         newEvent.metadata?.reservedFemale = reserved
         _ = checkValidation()

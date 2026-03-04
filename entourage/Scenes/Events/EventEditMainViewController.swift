@@ -58,6 +58,7 @@ class EventEditMainViewController: UIViewController {
     
     var hasRecurrency = false
     var selectedRecurrencyPosition = 0
+    var newReservedFemale: Bool? = nil
     
     weak var parentController:UIViewController? = nil // Use to open the ending screen
     
@@ -282,7 +283,7 @@ class EventEditMainViewController: UIViewController {
         newEvent.imageId = newImageId
         
         newEvent.recurrence = newRecurrence
-        newEvent.metadata?.reservedFemale = eventEditing.metadata?.reservedFemale
+        newEvent.metadata?.reservedFemale = newReservedFemale
         newEvent.isOnline = newIsOnline
         newEvent.onlineEventUrl = newOnlineEventUrl
         newEvent.location = newLocation
@@ -304,10 +305,7 @@ class EventEditMainViewController: UIViewController {
 //MARK: - EventCreateMainDelegate -
 extension EventEditMainViewController: EventCreateMainDelegate {
     func addReservedFemale(reserved: Bool) {
-        if eventEditing.metadata == nil {
-            eventEditing.metadata = EventMetadataEditing()
-        }
-        eventEditing.metadata?.reservedFemale = reserved
+        newReservedFemale = reserved // ✅ Simple et efficace
         _ = checkValidation()
     }
     
