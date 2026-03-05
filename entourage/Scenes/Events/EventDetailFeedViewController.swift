@@ -759,6 +759,30 @@ extension EventDetailFeedViewController: EventDetailTopCellDelegate {
         }
     }
     
+    func showDiscussion() {
+        SVProgressHUD.show()
+        MessagingService.getDetailConversation(conversationId: self.event?.uuid_v2 ?? "") { conversation, error in
+            SVProgressHUD.dismiss()
+            if let convId = conversation?.uid {
+                let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                    vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: false, conversation: conversation)
+
+                    if let presentedVC = self.presentedViewController {
+                        if presentedVC is ConversationDetailMessagesViewController { return }
+                        presentedVC.dismiss(animated: true) {
+                            self.present(vc, animated: true, completion: nil)
+                        }
+                    } else {
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            } else {
+                SVProgressHUD.showError(withStatus: "Une erreur est survenue")
+            }
+        }
+    }
+
     func showPlace() {
         // Si l’événement est annulé => on ne fait rien
         if event?.isCanceled() ?? false {
