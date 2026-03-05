@@ -26,6 +26,8 @@ class EventDetailFeedViewController: UIViewController {
     
     @IBOutlet weak var ui_view_button_back: UIView!
     @IBOutlet weak var ui_view_button_settings: UIView!
+    @IBOutlet weak var ui_view_button_share: UIView!
+    @IBOutlet weak var ui_button_share: UIButton!
     
     
     @IBOutlet weak var ui_view_full_image: UIView!
@@ -88,6 +90,7 @@ class EventDetailFeedViewController: UIViewController {
         
         addShadowAndRadius(customView: ui_view_button_settings)
         addShadowAndRadius(customView: ui_view_button_back)
+        addShadowAndRadius(customView: ui_view_button_share)
         
         ui_top_view.backgroundColor = .clear
         ui_top_view.populateCustom(title: nil,
@@ -118,7 +121,7 @@ class EventDetailFeedViewController: UIViewController {
         
         // Tracking analytique
         AnalyticsLoggerManager.logEvent(name: Event_detail_main)
-        configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_conversation".localized)
+        configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_join".localized)
         ui_btn_participate_and_see_conv.addTarget(self, action: #selector(button_join_leave_see), for: .touchUpInside)
     }
     
@@ -299,10 +302,15 @@ class EventDetailFeedViewController: UIViewController {
             AppSignableManager.shared.updateFromEvent(event: event!)
             self.eventId = event?.uid ?? 0
             if event?.isMember ?? false {
-                self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_conversation".localized)
+                let currentUserId = UserDefaults.currentUser?.sid ?? 0
+                if event?.author?.uid == currentUserId {
+                    self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_cancel".localized)
+                } else {
+                    self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_leave".localized)
+                }
                 self.ui_btn_participate_and_see_conv.isHidden = false
-            }else{
-                self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "go_to_event_conversation".localized)
+            } else {
+                self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_join".localized)
                 self.ui_btn_participate_and_see_conv.isHidden = false
             }
             // Si l’événement est annulé => on affiche le bandeau
@@ -357,42 +365,13 @@ class EventDetailFeedViewController: UIViewController {
             // On rejoint l’événement
             EventService.joinEvent(eventId: eventId) { _, _ in
                 SVProgressHUD.dismiss()
-                MessagingService.getDetailConversation(conversationId: self.event?.uuid_v2 ?? "") { conversation, error in
-                    print("eho " , error)
-                    if let convId = conversation?.uid {
-                        let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
-                        if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-                            vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: false, conversation: conversation)
-                            vc.type = "outing"
-
-                            if let presentedVC = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController,
-                               presentedVC is ConversationDetailMessagesViewController {
-                                // Si l'écran est déjà affiché, on ne le recrée pas
-                                presentedVC.dismiss(animated: false) {
-                                    UIApplication.shared.keyWindow?.rootViewController?.present(vc, animated: true)
-                                }
-                                return
-                            }
-
-                            self.present(vc, animated: true)
-                        }
-                    }
-                }
+                self.getEventDetail()
             }
         } else {
             // On quitte l’événement
             EventService.leaveEvent(eventId: eventId, userId: UserDefaults.currentUser!.sid) { _, _ in
                 SVProgressHUD.dismiss()
-                MessagingService.getDetailConversation(conversationId: self.event?.uuid_v2 ?? "") { conversation, error in
-                    print("eho " , error)
-                    if let convId = conversation?.uid {
-                        let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
-                        if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-                            vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: true, conversation: conversation)
-                            self.present(vc, animated: true)
-                        }
-                    }
-                }
+                self.getEventDetail()
             }
         }
     }
@@ -402,14 +381,13 @@ class EventDetailFeedViewController: UIViewController {
         
         // On empêche l’auteur de quitter son propre événement
         if event?.author?.uid == currentUserId {
-            MessagingService.getDetailConversation(conversationId: self.event?.uuid_v2 ?? "") { conversation, error in
-                print("eho " , error)
-                if let convId = conversation?.uid {
-                    let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
-                    if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-                        vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: true, conversation: conversation)
-                        self.present(vc, animated: true)
-                    }
+            // Cancel event
+            if let _event = event {
+                let sb = UIStoryboard.init(name: StoryboardName.event, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "params_cancel_eventVC") as? EventParamsCancelViewController {
+                    vc.event = _event
+                    vc.delegate = self
+                    self.present(vc, animated: true)
                 }
             }
             return
@@ -422,6 +400,23 @@ class EventDetailFeedViewController: UIViewController {
     
     // MARK: - IBAction
     
+    @IBAction func action_share(_ sender: Any) {
+        var stringUrl = "https://app.entourage.social/actions/"
+        if let _event = event {
+            stringUrl = "https://app.entourage.social/app/outings/\(_event.uuid_v2)"
+            let shareText = String.init(format: "share_event_text".localized, _event.title)
+
+            let activityViewController = UIActivityViewController(activityItems: [shareText, stringUrl], applicationActivities: nil)
+            let topVC = AppState.getTopViewController()
+            if let popoverController = activityViewController.popoverPresentationController {
+                popoverController.sourceView = topVC?.view
+                popoverController.sourceRect = CGRect(x: topVC?.view.bounds.midX ?? 0, y: topVC?.view.bounds.midY ?? 0, width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+            }
+            topVC?.present(activityViewController, animated: true, completion: nil)
+        }
+    }
+
     @IBAction func action_show_params(_ sender: Any) {
         if let _event = event {
             if let navvc = UIStoryboard(name: StoryboardName.event, bundle: nil)
@@ -633,6 +628,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             let heightImage = min(max(yImage - diffImage, self.minImageHeight), self.maxImageHeight)
             
             self.ui_view_button_settings.alpha = heightImage / self.maxImageHeight
+            self.ui_view_button_share.alpha = heightImage / self.maxImageHeight
             self.ui_view_button_back.alpha = heightImage / self.maxImageHeight
             self.ui_iv_event2.alpha = heightImage / self.maxImageHeight
             self.ui_view_top_bg.alpha = 1 - (heightImage / self.maxImageHeight)
@@ -695,6 +691,21 @@ extension EventDetailFeedViewController: MJNavBackViewDelegate {
 
 // MARK: - EventDetailTopCellDelegate
 extension EventDetailFeedViewController: EventDetailTopCellDelegate {
+    func showDiscussion() {
+        AnalyticsLoggerManager.logEvent(name: Event_detail_action_participate)
+
+        MessagingService.getDetailConversation(conversationId: self.event?.uuid_v2 ?? "") { conversation, error in
+            if let convId = conversation?.uid {
+                let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                    vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: false, conversation: conversation)
+                    vc.type = "outing"
+                    self.present(vc, animated: true)
+                }
+            }
+        }
+    }
+
     func showAgenda() {
         self.addToCalendar()
     }

@@ -1774,3 +1774,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Tomorrow" = "Jutro";
 "home_v2_moderator_title_format" = "%@, twój uprzywilejowany kontakt";
 "home_v2_moderator_subtitle" = "Jestem częścią zespołu Entourage i jestem tutaj, aby ci towarzyszyć. Nie wahaj się, jeśli masz pytania! 🤗";
+"event_discussion_desc" = "Możesz zadawać pytania i rozmawiać z organizatorem i uczestnikami wydarzenia";
+"event_cancel" = "Odwołaj wydarzenie";
+"event_leave" = "Opuść wydarzenie";
+"event_join" = "Dołącz do wydarzenia";

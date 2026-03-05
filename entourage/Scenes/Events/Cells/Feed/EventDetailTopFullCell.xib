@@ -438,34 +438,73 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </button>
-                    <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1V4-oV-Dh3">
+
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hidden-participate-btn">
+                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="0" id="h-part-w"/>
+                                    <constraint firstAttribute="height" constant="0" id="h-part-h"/>
+                                </constraints>
+                            </button>
+<mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1V4-oV-Dh3">
                         <rect key="frame" x="20" y="585" width="366" height="180"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="height" constant="180" id="RMI-gf-7rR"/>
                         </constraints>
                     </mapView>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-ay-YP1">
-                        <rect key="frame" x="20" y="785" width="366" height="0.0"/>
-                        <color key="backgroundColor" name="orange_medium"/>
+
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="new-discussion-container">
+                        <rect key="frame" x="20" y="785" width="366" height="150"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_hub_2" translatesAutoresizingMaskIntoConstraints="NO" id="discussion-icon">
+                                <rect key="frame" x="20" y="20" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="disc-icon-w"/>
+                                    <constraint firstAttribute="height" constant="40" id="disc-icon-h"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous pouvez poser vos questions et échanger avec l'organisateur et les participants de l'événement" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="discussion-label">
+                                <rect key="frame" x="80" y="20" width="266" height="60"/>
+                                <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-ay-YP1">
+                                <rect key="frame" x="53" y="90" width="260" height="40"/>
+                                <color key="backgroundColor" name="orange_app"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="disc-btn-h"/>
+                                    <constraint firstAttribute="width" constant="260" id="disc-btn-w"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                                <state key="normal" title="Discussion de l'événement">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99215686274509807" green="0.96078431372549022" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="PyF-3s-UYK"/>
-                            <constraint firstAttribute="height" id="de9-KG-C33"/>
+                            <constraint firstItem="discussion-icon" firstAttribute="leading" secondItem="new-discussion-container" secondAttribute="leading" constant="20" id="c1-disc-icon-lead"/>
+                            <constraint firstItem="discussion-icon" firstAttribute="top" secondItem="new-discussion-container" secondAttribute="top" constant="20" id="c2-disc-icon-top"/>
+                            <constraint firstItem="discussion-label" firstAttribute="leading" secondItem="discussion-icon" secondAttribute="trailing" constant="20" id="c3-disc-lbl-lead"/>
+                            <constraint firstItem="discussion-label" firstAttribute="top" secondItem="new-discussion-container" secondAttribute="top" constant="20" id="c4-disc-lbl-top"/>
+                            <constraint firstAttribute="trailing" secondItem="discussion-label" secondAttribute="trailing" constant="20" id="c5-disc-lbl-trail"/>
+                            <constraint firstItem="1xV-ay-YP1" firstAttribute="top" secondItem="discussion-label" secondAttribute="bottom" constant="10" id="c6-disc-btn-top"/>
+                            <constraint firstItem="1xV-ay-YP1" firstAttribute="centerX" secondItem="new-discussion-container" secondAttribute="centerX" id="c7-disc-btn-cx"/>
+                            <constraint firstAttribute="bottom" secondItem="1xV-ay-YP1" secondAttribute="bottom" constant="20" id="c8-disc-btn-bot"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
-                        <color key="tintColor" name="orange_app"/>
-                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <state key="normal" title="Partager" image="ic_share">
-                            <color key="titleColor" name="orange_app"/>
-                        </state>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                <real key="value" value="20"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="15"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                    </button>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
@@ -474,7 +513,7 @@
                     <constraint firstAttribute="trailing" secondItem="Nfw-W1-dO7" secondAttribute="trailing" constant="10" id="5jS-dB-laQ"/>
                     <constraint firstItem="G9W-bu-4QC" firstAttribute="centerY" secondItem="lgR-Y6-WWf" secondAttribute="centerY" id="A8G-fg-LMj"/>
                     <constraint firstItem="fuU-Rj-r2w" firstAttribute="top" secondItem="CsR-kO-usD" secondAttribute="bottom" constant="24" id="At5-0v-xFn"/>
-                    <constraint firstItem="1xV-ay-YP1" firstAttribute="top" secondItem="1V4-oV-Dh3" secondAttribute="bottom" constant="20" id="FLo-2B-sZ1"/>
+                    <constraint firstItem="new-discussion-container" firstAttribute="top" secondItem="1V4-oV-Dh3" secondAttribute="bottom" constant="20" id="FLo-2B-sZ1"/>
                     <constraint firstItem="fuU-Rj-r2w" firstAttribute="leading" secondItem="CsR-kO-usD" secondAttribute="leading" id="FRM-kF-rtM"/>
                     <constraint firstItem="GxR-dy-Owz" firstAttribute="top" secondItem="Nfw-W1-dO7" secondAttribute="bottom" id="Ggf-Ol-fWh"/>
                     <constraint firstItem="Nfw-W1-dO7" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="H0K-5a-a4q"/>
@@ -485,12 +524,12 @@
                     <constraint firstItem="klB-o1-C0m" firstAttribute="leading" secondItem="3q6-vS-dBw" secondAttribute="leading" constant="20" id="R9N-C9-cmG"/>
                     <constraint firstAttribute="trailing" secondItem="fuU-Rj-r2w" secondAttribute="trailing" constant="20" id="RgV-tb-QmG"/>
                     <constraint firstItem="UXs-ZL-Ra7" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="UYw-0d-rgq"/>
-                    <constraint firstItem="1xV-ay-YP1" firstAttribute="trailing" secondItem="1V4-oV-Dh3" secondAttribute="trailing" id="Ujl-4M-eMB"/>
+                    <constraint firstItem="new-discussion-container" firstAttribute="trailing" secondItem="1V4-oV-Dh3" secondAttribute="trailing" id="Ujl-4M-eMB"/>
                             <constraint firstItem="abc-female-banner" firstAttribute="top" secondItem="klB-o1-C0m" secondAttribute="bottom" constant="5" id="tuv-banner-top"/>
                             <constraint firstItem="abc-female-banner" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="wxy-banner-leading"/>
                             <constraint firstItem="abc-female-banner" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="klB-o1-C0m" secondAttribute="trailing" id="xyz-banner-trailing"/>
                             <constraint firstItem="Nfw-W1-dO7" firstAttribute="top" secondItem="abc-female-banner" secondAttribute="bottom" constant="10" id="VQC-kR-A9p"/>
-                    <constraint firstAttribute="bottom" secondItem="1xV-ay-YP1" secondAttribute="bottom" constant="20" id="Vpw-kr-Z8k"/>
+                    <constraint firstAttribute="bottom" secondItem="new-discussion-container" secondAttribute="bottom" constant="20" id="Vpw-kr-Z8k"/>
                     <constraint firstItem="lgR-Y6-WWf" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="Y0c-Lv-hqK"/>
                     <constraint firstItem="CsR-kO-usD" firstAttribute="leading" secondItem="UXs-ZL-Ra7" secondAttribute="leading" id="aoe-s2-pzF"/>
                     <constraint firstAttribute="trailing" secondItem="klB-o1-C0m" secondAttribute="trailing" constant="20" id="hwX-yn-nXS"/>
@@ -498,7 +537,7 @@
                     <constraint firstItem="UXs-ZL-Ra7" firstAttribute="top" secondItem="lgR-Y6-WWf" secondAttribute="bottom" constant="20" id="j3o-v2-zLf"/>
                     <constraint firstItem="1V4-oV-Dh3" firstAttribute="top" secondItem="fuU-Rj-r2w" secondAttribute="bottom" constant="20" id="kIP-Dp-8gQ"/>
                     <constraint firstAttribute="trailing" secondItem="CsR-kO-usD" secondAttribute="trailing" constant="28" id="n7J-Wl-s1L"/>
-                    <constraint firstItem="1xV-ay-YP1" firstAttribute="leading" secondItem="1V4-oV-Dh3" secondAttribute="leading" id="qy7-A3-TNT"/>
+                    <constraint firstItem="new-discussion-container" firstAttribute="leading" secondItem="1V4-oV-Dh3" secondAttribute="leading" id="qy7-A3-TNT"/>
                     <constraint firstItem="klB-o1-C0m" firstAttribute="top" secondItem="3q6-vS-dBw" secondAttribute="top" constant="28" id="yC2-ZV-76o"/>
                     <constraint firstAttribute="trailing" secondItem="UXs-ZL-Ra7" secondAttribute="trailing" constant="28" id="yGN-4g-yQG"/>
                 </constraints>
@@ -511,9 +550,11 @@
                 <outlet property="ui_lbl_reserved_female" destination="def-female-label" id="out-lbl-reserved"/>
                 <outlet property="ui_constraint_height_reserved_female" destination="hij-height-constraint" id="out-constraint-height"/>
                 <outlet property="ui_btn_i_participate" destination="IR4-sb-IgC" id="2Bw-Ef-4tt"/>
-                <outlet property="ui_btn_participate" destination="1xV-ay-YP1" id="H26-cy-lt3"/>
+                <outlet property="ui_btn_participate" destination="hidden-participate-btn" id="H26-cy-lt3"/>
                 <outlet property="ui_btn_share" destination="lgR-Y6-WWf" id="Lqp-Ta-LcQ"/>
                 <outlet property="ui_button_go_to_discussion" destination="1xV-ay-YP1" id="Q8G-5Z-zcy"/>
+                <outlet property="ui_label_discussion_desc" destination="discussion-label" id="new-disc-desc-out"/>
+                <outlet property="ui_view_discussion_container" destination="new-discussion-container" id="new-disc-cont-out"/>
                 <outlet property="ui_constraint_listview_top_margin" destination="At5-0v-xFn" id="CGo-JX-gSb"/>
                 <outlet property="ui_height_map_view" destination="RMI-gf-7rR" id="iKr-JI-BjL"/>
                 <outlet property="ui_img_member_1" destination="2x2-3v-72B" id="SOR-qC-Iu0"/>

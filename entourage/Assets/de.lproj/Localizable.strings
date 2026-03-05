@@ -1760,3 +1760,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Tomorrow" = "Morgen";
 "home_v2_moderator_title_format" = "%@, Ihr privilegierter Kontakt";
 "home_v2_moderator_subtitle" = "Ich gehöre zum Entourage-Team und bin hier, um Sie zu unterstützen. Zögern Sie nicht, wenn Sie Fragen haben! 🤗";
+"event_discussion_desc" = "Sie können Fragen stellen und mit dem Organisator und den Teilnehmern der Veranstaltung diskutieren";
+"event_cancel" = "Die Veranstaltung absagen";
+"event_leave" = "Die Veranstaltung verlassen";
+"event_join" = "An der Veranstaltung teilnehmen";

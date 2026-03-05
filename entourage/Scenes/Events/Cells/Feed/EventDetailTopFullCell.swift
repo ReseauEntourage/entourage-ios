@@ -39,6 +39,8 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_btn_share: UIButton!
     @IBOutlet weak var ui_btn_participate: UIButton!
     @IBOutlet weak var ui_button_go_to_discussion: UIButton!
+    @IBOutlet weak var ui_view_discussion_container: UIView!
+    @IBOutlet weak var ui_label_discussion_desc: UILabel!
     @IBOutlet weak var ui_height_map_view: NSLayoutConstraint!
     
     @IBOutlet weak var ui_btn_agenda: UIButton!
@@ -100,10 +102,30 @@ class EventDetailTopFullCell: UITableViewCell {
         configureWhiteButton(self.ui_btn_share, withTitle: "neighborhood_add_post_send_button".localized)
         configureWhiteButton(self.ui_btn_participate, withTitle: "event_detail_button_participe_ON".localized)
         configureWhiteButton(self.ui_btn_agenda, withTitle: "event_button_add_calendar".localized)
-        configureOrangeButton(self.ui_button_go_to_discussion, withTitle: "event_conversation".localized)
+
+        self.ui_btn_agenda.isHidden = true
+        self.ui_btn_share.isHidden = true
+        self.ui_btn_participate.isHidden = true
+
+        self.ui_button_go_to_discussion.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
+        self.ui_button_go_to_discussion.setTitle("event_conversation".localized, for: .normal)
+        self.ui_label_discussion_desc.text = "event_discussion_desc".localized
+        self.ui_label_discussion_desc.font = ApplicationTheme.getFontCourantRegularNoir(size: 15)
+        self.ui_label_discussion_desc.textColor = .appGris112
+        self.ui_view_discussion_container.backgroundColor = .appBeigeClair
+        self.ui_view_discussion_container.layer.cornerRadius = 20
         
         self.ui_btn_agenda.addTarget(self, action: #selector(onAgendaClick), for: .touchUpInside)
         self.ui_btn_participate.addTarget(self, action: #selector(onParticipateClick), for: .touchUpInside)
+        self.ui_button_go_to_discussion.addTarget(self, action: #selector(onGoToDiscussionClick), for: .touchUpInside)
+
+        let tapDate = UITapGestureRecognizer(target: self, action: #selector(onAgendaClick))
+        self.ui_start_date.isUserInteractionEnabled = true
+        self.ui_start_date.addGestureRecognizer(tapDate)
+
+        let tapTime = UITapGestureRecognizer(target: self, action: #selector(onAgendaClick))
+        self.ui_start_time.isUserInteractionEnabled = true
+        self.ui_start_time.addGestureRecognizer(tapTime)
         
         // **Initialisation de la carte**
         ui_mapview.delegate = self
@@ -118,9 +140,15 @@ class EventDetailTopFullCell: UITableViewCell {
         delegate?.share()
     }
     
+
     @objc func onParticipateClick() {
         delegate?.joinLeave()
     }
+
+    @objc func onGoToDiscussionClick() {
+        delegate?.showDiscussion()
+    }
+
     @objc func onAgendaClick() {
         delegate?.showAgenda()
     }

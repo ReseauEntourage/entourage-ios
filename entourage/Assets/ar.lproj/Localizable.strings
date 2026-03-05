@@ -1699,3 +1699,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Tomorrow" = "غدا";
 "home_v2_moderator_title_format" = "%@، جهة اتصالك المميزة";
 "home_v2_moderator_subtitle" = "أنا جزء من فريق Entourage وأنا هنا لمرافقتك. لا تتردد إذا كان لديك أي أسئلة! 🤗";
+"event_discussion_desc" = "يمكنك طرح الأسئلة والتحدث مع المنظم والمشاركين في الحدث";
+"event_cancel" = "إلغاء الحدث";
+"event_leave" = "مغادرة الحدث";
+"event_join" = "الانضمام إلى الحدث";
