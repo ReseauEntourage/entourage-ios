@@ -385,6 +385,10 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBAction func action_show_place(_ sender: Any) {
         delegate?.showPlace()
     }
+
+    @IBAction func action_go_to_discussion(_ sender: Any) {
+        delegate?.showDiscussion()
+    }
 }
 
 // MARK: - MKMapViewDelegate
@@ -433,6 +437,7 @@ protocol EventDetailTopCellDelegate: AnyObject {
     func showMembers()
     func joinLeave()
     func showDetailFull()
+    func showDiscussion()
     func showPlace()
     func showWebUrl(url: URL)
     func showUser()
