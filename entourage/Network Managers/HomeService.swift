@@ -151,7 +151,7 @@ struct HomeService:ParsingDataCodable {
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
             Logger.print("***** return getNotifications  : \(error)")
-            
+            print("eho " , data)
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 DispatchQueue.main.async { completion(nil,  error) }
                 return

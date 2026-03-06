@@ -448,7 +448,7 @@ struct LoginView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         PasswordFloatingField(
                             title: "login_label_code".localized, // "Saisir votre code"
-                            placeholder: "Ex : 123456",
+                            placeholder: "login_placeholder_code".localized,
                             text: $vm.password,
                             isSecured: $vm.isPasswordSecured
                         )
@@ -511,13 +511,14 @@ struct LoginView: View {
                     vm.validateAndLogin()
                     UIApplication.shared.endEditing()
                 }) {
-                    Text("login_button_connect".localized) // "Je me connecte"
-                        .font(.custom("Quicksand-Bold", size: 18))
+                    Text("login_button_connect".localized)
+                        .font(.custom("Quicksand-Bold", size: 15))
                         .foregroundColor(.white)
-                        .frame(height: 54) // Un peu plus haut
-                        .frame(maxWidth: .infinity)
+                        .padding(10) // 1. Ajoute de l'espace autour du texte
+                        .frame(height: 48) // Tu peux garder ou supprimer ceci selon le look voulu
+                        // .frame(maxWidth: .infinity) // 2. SUPPRIMÉ pour le "wrap content"
                         .background(Color(UIColor.appOrange))
-                        .cornerRadius(27)
+                        .cornerRadius(24) // Ou .clipShape(Capsule()) pour un arrondi parfait
                 }
             }
             .padding(.horizontal, 20)
@@ -550,6 +551,7 @@ struct LoginView: View {
         .onDisappear {
             vm.stopTimer()
         }
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 

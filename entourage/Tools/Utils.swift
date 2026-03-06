@@ -291,6 +291,68 @@ import UIKit
         
         return dateString
     }
+    static func formatEventDateShort(date: Date?) -> String {
+        guard let date = date else { return "-" }
+
+        let timeFormatter = DateFormatter()
+        timeFormatter.locale = Locale.getPreferredLocale()
+        timeFormatter.dateFormat = "HH:mm"
+        let timeStr = timeFormatter.string(from: date)
+
+        if Calendar.current.isDateInToday(date) {
+            return "\("Today".localized), \(timeStr)"
+        }
+        else if Calendar.current.isDateInTomorrow(date) {
+            return "\("Tomorrow".localized), \(timeStr)"
+        }
+
+        let dayFormatter = DateFormatter()
+        dayFormatter.locale = Locale.getPreferredLocale()
+        dayFormatter.dateFormat = "E"
+
+        let monthFormatter = DateFormatter()
+        monthFormatter.locale = Locale.getPreferredLocale()
+        monthFormatter.dateFormat = "MMM"
+
+        let dayNumFormatter = DateFormatter()
+        dayNumFormatter.locale = Locale.getPreferredLocale()
+        dayNumFormatter.dateFormat = "d"
+
+        let dayStr = dayFormatter.string(from: date).capitalized.replacingOccurrences(of: ".", with: "")
+        let monthStr = monthFormatter.string(from: date).capitalized
+        let dayNum = dayNumFormatter.string(from: date)
+
+        return "\(dayStr). \(dayNum) \(monthStr), \(timeStr)"
+    }
+
+    static func formatEventDateLong(date: Date?) -> String {
+        guard let date = date else { return "-" }
+
+        if Calendar.current.isDateInToday(date) {
+            return "Today".localized
+        }
+        else if Calendar.current.isDateInTomorrow(date) {
+            return "Tomorrow".localized
+        }
+
+        let dayFormatter = DateFormatter()
+        dayFormatter.locale = Locale.getPreferredLocale()
+        dayFormatter.dateFormat = "EEEE"
+
+        let monthFormatter = DateFormatter()
+        monthFormatter.locale = Locale.getPreferredLocale()
+        monthFormatter.dateFormat = "MMMM"
+
+        let dayNumFormatter = DateFormatter()
+        dayNumFormatter.locale = Locale.getPreferredLocale()
+        dayNumFormatter.dateFormat = "d"
+
+        let dayStr = dayFormatter.string(from: date).capitalized
+        let monthStr = monthFormatter.string(from: date).capitalized
+        let dayNum = dayNumFormatter.string(from: date)
+
+        return "\(dayStr) \(dayNum) \(monthStr)"
+    }
 }
 
 class ImageLoaderSwift {

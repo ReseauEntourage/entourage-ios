@@ -66,7 +66,7 @@ class EventListCell: UITableViewCell {
         
         if let _author = event.author {
             if let _roles = _author.communityRoles{
-                if _roles.contains("Équipe Entourage") || _roles.contains("Ambassadeur") {
+                if _roles.contains("Équipe Entourage") || _roles.contains("Animateur Entourage") {
                     
                     self.ic_entoutou.isHidden = false
                 }else {
@@ -97,7 +97,7 @@ class EventListCell: UITableViewCell {
     
         ui_view_separator.isHidden = hideSeparator
         
-        ui_date.text = event.startDateTimeFormatted
+        ui_date.text = event.startDateFormatted
         ui_location.text = event.addressName
         ui_members?.text = event.membersCount ?? 0 > 1 ? String.init(format: "event_members_cell_list".localized, event.membersCount!) : String.init(format: "event_member_cell_list".localized, event.membersCount!)
     }

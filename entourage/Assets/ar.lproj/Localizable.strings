@@ -1693,3 +1693,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "orientation_both_actions" = "Donner ou solliciter un coup de pouce";
 "onboarding_zone_potential_event_singular" = "حدث محتمل في الأسبوع،";
 "onboarding_zone_potential_event_plural" = "أحداث محتملة في الأسبوع،";
+"guide_help_orientation" = "المساعدة والتوجيه";
+"home_v2_title_small_talk" = "انضم إلى مناقشة تضامنية";
+"small_talk_subtitle_match" = "نربطك بمجموعة صغيرة من الأشخاص الذين يشاركونك اهتماماتك، في أي مكان في فرنسا.";
+"Tomorrow" = "غدا";

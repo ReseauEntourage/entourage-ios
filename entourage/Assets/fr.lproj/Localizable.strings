@@ -96,7 +96,6 @@
 "login_title" = "Connexion";
 
 "login_forgot_code_title" = "Vous avez oublié votre code ?";
-"login_button_resend_code" = "Recevoir un nouveau code par sms";
 
 "login_label_change_phone_question" = "Vous avez changé de numéro de téléphone ?";
 "login_button_change_phone" = "Changer mon numéro";
@@ -1769,7 +1768,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 
 /* Section Papotages Smalltalks */
-"home_smalltalk_title" = "Partager des « Bonnes Ondes » !";
 "onboarding_title" = "Prêts à partager des Bonnes ondes ?";
 "onboarding_start_button" = "Je commence";
 "onboarding_end_button" = "Annuler";
@@ -1947,3 +1945,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "orientation_both_actions" = "Donner ou solliciter un coup de pouce";
 "onboarding_zone_potential_event_singular" = "événement potentiel par semaine,";
 "onboarding_zone_potential_event_plural" = "événements potentiels par semaine,";
+"guide_help_orientation" = "Aide & orientation";
+"Tomorrow" = "Demain";

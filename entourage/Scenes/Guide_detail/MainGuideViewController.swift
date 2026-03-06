@@ -20,6 +20,7 @@ class MainGuideViewController: UIViewController {
     @IBOutlet weak var ui_tableView: UITableView!
     @IBOutlet weak var ui_button_filters: UIButton!
     @IBOutlet weak var ui_button_map_list: UIButton!
+    @IBOutlet weak var ui_button_plus: UIButton!
     @IBOutlet weak var ui_view_top_info_gds: UIView!
     @IBOutlet weak var ui_label_info_web_gds: UILabel!
     @IBOutlet weak var ui_constraint_height_view_topinfo: NSLayoutConstraint!
@@ -51,7 +52,8 @@ class MainGuideViewController: UIViewController {
         fillCategories()
         configureOrangeButton(ui_button_filters, withTitle: "home_button_filters".localized)
         configureOrangeButton(ui_button_map_list, withTitle: "home_button_list".localized)
-      
+        configureOrangeButton(ui_button_plus, withTitle: "guide_help_orientation".localized)
+
         NotificationCenter.default.addObserver(self, selector: #selector(showCurrentLocation), name: NSNotification.Name(rawValue:  kNotificationShowFeedsMapCurrentLocation), object: nil)
     }
     
@@ -323,6 +325,7 @@ class MainGuideViewController: UIViewController {
     func setupButtons() {
         addEffectToButton(customButton:  self.ui_button_filters)
         addEffectToButton(customButton: self.ui_button_map_list)
+        addEffectToButton(customButton: self.ui_button_plus)
     }
     
     func addEffectToButton(customButton:UIView) {
@@ -571,13 +574,10 @@ class MainGuideViewController: UIViewController {
     }
     
     @IBAction func showProposalPoi(_ sender:Any) {
-        if let token = UserDefaults.currentUser?.token {
-            let _BaseUrl = NetworkManager.sharedInstance.getBaseUrl()
-            let url = String.init(format: PROPOSE_STRUCTURE_URL, _BaseUrl,token)
-
-            if let _url = URL(string: url) {
-                SafariWebManager.launchUrlInApp(url: _url, viewController: self.navigationController)
-            }
+        let envConfigManager = EnvironmentConfigurationManager.sharedInstance
+        let url = envConfigManager.runsOnProduction ? "https://www.entourage.social/app/resources/eOB7jU8NNODY" : "https://preprod.entourage.social/app/resources/eyck8DuIn3cI"
+        if let _url = URL(string: url) {
+            WebLinkManager.openUrl(url: _url, openInApp: true, presenterViewController: self.navigationController)
         }
     }
     

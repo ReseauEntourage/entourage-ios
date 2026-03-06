@@ -117,13 +117,13 @@ struct Event:Codable {
     
     var startDateFormatted:String {
         get {
-            return Utils.formatEventDate(date:Utils.getDateFromWSDateString(metadata?.starts_at))
+            return Utils.formatEventDateShort(date:Utils.getDateFromWSDateString(metadata?.starts_at))
         }
     }
     
     var startDateNameFormatted:String {
         get {
-            return Utils.formatEventDateName(date:Utils.getDateFromWSDateString(metadata?.starts_at))
+            return Utils.formatEventDateLong(date:Utils.getDateFromWSDateString(metadata?.starts_at))
         }
     }
     

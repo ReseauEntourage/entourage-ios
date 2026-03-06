@@ -617,6 +617,51 @@ struct DeepLinkManager {
             }
         }
     }
+
+    static func showSmallTalkIntro() {
+        if let vc = UIStoryboard(name: "SmallTalk", bundle: nil).instantiateInitialViewController() {
+             vc.modalPresentationStyle = .fullScreen
+             AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+
+    static func showEventCreation() {
+        let sb = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "eventCreateVCMain") as? EventCreateMainViewController {
+            vc.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+
+    static func showSuggestedSmallTalkEvent() {
+        EventService.getSuggestedSmallTalkEvent { event in
+            guard let event = event else { return }
+            DispatchQueue.main.async {
+                if let navVc = UIStoryboard(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+                    vc.eventId = event.uid
+                    vc.event = event
+                    vc.isAfterCreation = false
+                    vc.modalPresentationStyle = .fullScreen
+                    AppState.getTopViewController()?.present(navVc, animated: true)
+                }
+            }
+        }
+    }
+
+    static func showWelcomeWebinar() {
+        EventService.getWebinarEvent { event in
+            guard let event = event else { return }
+            DispatchQueue.main.async {
+                if let navVc = UIStoryboard(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+                    vc.eventId = event.uid
+                    vc.event = event
+                    vc.isAfterCreation = false
+                    vc.modalPresentationStyle = .fullScreen
+                    AppState.getTopViewController()?.present(navVc, animated: true)
+                }
+            }
+        }
+    }
     
 }
 
