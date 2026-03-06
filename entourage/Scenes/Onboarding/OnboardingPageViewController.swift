@@ -76,7 +76,18 @@ class OnboardingPageViewController: UIPageViewController {
 let defaultCountryCode = CountryCode(country: "France",code: "+33",flag: "🇫🇷")
 
 protocol OnboardingDelegate:AnyObject {
-    func addUserInfos(firstname:String?, lastname:String?,countryCode:CountryCode, phone:String?, email:String?, consentEmail:Bool)
+    func addUserInfos(
+        firstname: String?,
+        lastname: String?,
+        countryCode: CountryCode,
+        phone: String?,
+        email: String?,
+        consentEmail: Bool,
+        gender: String?,
+        howWeMet: String?,
+        company: String?,
+        event: String?
+    )
     func sendCode(code:String)
     func addInfos(userType:UserType)
     func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?)

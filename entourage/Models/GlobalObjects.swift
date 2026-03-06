@@ -62,7 +62,6 @@ struct PostMessage:Codable {
     var messageType:String? = ""
     var surveyResponse: [Bool]? = []
     var autoPostFrom: AutoPostFrom? // Champ pour l'auto-post
-
     var isRetryMsg = false
     
     private var read:Bool? = nil
@@ -130,7 +129,9 @@ struct MemberLight: Codable {
     var uid: Int
     var username: String?
     var imageUrl: String?
-    var confirmedAt: Bool?
+    var confirmedAt: String?
+    var participateAt: String?
+    var photoAcceptance: Bool?
     var roles: [String]?
     var partner: Partner?
 
@@ -139,6 +140,9 @@ struct MemberLight: Codable {
         case username = "display_name"
         case imageUrl = "avatar_url"
         case confirmedAt = "confirmed_at"
+        case participateAt = "participate_at"
+        case photoAcceptance = "photo_acceptance"
+
         case roles
         case partner
     }

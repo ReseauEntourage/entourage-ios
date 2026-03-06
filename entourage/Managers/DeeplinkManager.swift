@@ -241,12 +241,18 @@ struct DeepLinkManager {
         }
     }
 
-    
     static func showPartner(partnerId:Int) {
         if let navVc = UIStoryboard.init(name:StoryboardName.partnerDetails, bundle: nil).instantiateInitialViewController() as? UINavigationController, let vc = navVc.topViewController as? PartnerDetailViewController {
             vc.partnerId = partnerId
             
             AppState.getTopViewController()?.present(navVc, animated: true)
+        }
+    }
+    
+    static func showCGU() {
+        if let  vc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "params_CGU_VC") as? EventParamsCGUViewController {
+            vc.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
     

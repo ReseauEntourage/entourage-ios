@@ -67,6 +67,8 @@ let kAPIGetNeighborhoodUsersQuery = "neighborhoods/%@/users?token=%@&query=%@"
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
 let API_URL_NEIGHBORHOOD_PREPARE_IMAGE_POST_UPLOAD = "neighborhoods/%@/chat_messages/presigned_upload?token=%@"
+let API_URL_CONVERSATION_PREPARE_IMAGE_POST_UPLOAD = "conversations/%@/chat_messages/presigned_upload?token=%@"
+let API_URL_SMALLTALK_PREPARE_IMAGE_POST_UPLOAD = "smalltalks/%@/chat_messages/presigned_upload?token=%@"
 let API_URL_EVENT_PREPARE_IMAGE_POST_UPLOAD = "outings/%@/chat_messages/presigned_upload?token=%@"
 let API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD = "contributions/presigned_upload?token=%@"
 
@@ -112,6 +114,10 @@ let kAPIGetDetailsReactionEventPost = "outings/%d/chat_messages/%d/reactions/use
 let kAPIConfirmParticipation = "outings/%@/users/confirm?token=%@"
 let kAPIGetMyFilteredOutings = "users/%@/outings?token=%@&page=%d&per=%d&travel_distance=%.2f&latitude=%.6f&longitude=%.6f&interest_list=%@"
 let kAPIGetEventUsersQuery = "outings/%@/users?token=%@&query=%@"
+let kAPIParticipateForUser           = "outings/%@/users/%@/participate?token=%@"
+let kAPIAcceptPhotoForUser           = "outings/%@/users/%@/photo_acceptance?token=%@"
+let kAPICancelPhotoForUser           = "outings/%@/users/%@/cancel_photo_acceptance?token=%@"
+let kAPICancelParticipationForUser   = "outings/%@/users/%@/cancel_participation?token=%@"
 
 
 //Actions
@@ -143,6 +149,8 @@ let kAPIConversationPostCreateConversation = "conversations?token=%@"
 let kAPIConversationReportConversation = "conversations/%@/report?token=%@"
 let kAPIConversationQuitConversation = "conversations/%@/users?token=%@"
 let kAPIConversationGetDetailConversation = "conversations/%@?token=%@"
+let kAPIConversationGetDetailConversationMembership = "conversations/%@?token=%@"
+let kAPIConversationMemberships = "conversations/memberships?token=%@&page=%d&per=%d%@"
 let kAPIAddUserToConversation = "conversations/%@/users?token=%@"
 // Conversations filtrées
 let kAPIConversationGetOutingConversations = "conversations/outings?token=%@&page=%d&per=%d"

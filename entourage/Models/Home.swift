@@ -20,6 +20,7 @@ struct UserHome:Codable {
     var moderator:HomeModerator? = nil
     var unclosedAction:SummaryAction? = nil
     var preference:String? = nil
+    var signablePermission:Bool? = nil
     
     
     var congratulations = HomeActions()
@@ -46,6 +47,7 @@ struct UserHome:Codable {
         case congratulations
         case unclosedAction = "unclosed_action"
         case preference = "preference"
+        case signablePermission = "signable_permission"
     }
 }
 

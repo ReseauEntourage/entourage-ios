@@ -9,6 +9,42 @@ import Foundation
 
 struct MessagingService:ParsingDataCodable {
     
+    static func searchUsersInConversation(
+        conversationId: String,
+        query: String,
+        page: Int,
+        per: Int,
+        completion: @escaping ([MemberLight]?, EntourageNetworkError?) -> Void
+    ) {
+        guard let token = UserDefaults.token else {
+            completion(nil, nil)
+            return
+        }
+
+        // On part de l'endpoint existant et on ajoute le paramètre `query`
+        let baseEndpoint = String(format: kAPIConversationUsersList, conversationId, token)
+        let endpoint = "\(baseEndpoint)&page=\(page)&per=\(per)&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+
+        Logger.print("***** search users in conversation: \(endpoint)")
+
+        NetworkManager.sharedInstance.requestGet(
+            endPoint: endpoint,
+            headers: nil,
+            params: nil
+        ) { data, resp, error in
+            guard let data = data, error == nil,
+                  let httpResp = resp as? HTTPURLResponse, httpResp.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+
+            let users: [MemberLight]? = self.parseDatas(data: data, key: "users")
+            DispatchQueue.main.async { completion(users, nil) }
+        }
+    }
+
+
+    
     static func getAllConversations(currentPage:Int, per:Int, completion: @escaping (_ actions:[Conversation]?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         
@@ -343,5 +379,135 @@ struct MessagingService:ParsingDataCodable {
             DispatchQueue.main.async { completion(users, nextPage, nil) }
         }
     }
+    
+    // First step: Prepare the upload
+    static func prepareUploadWith(conversationId: Int, image: UIImage, message: String?, completion: @escaping (_ result: Bool) -> Void) {
+        guard let token = UserDefaults.token else {
+            completion(false); return
+        }
+
+        let endpoint = String(format: API_URL_CONVERSATION_PREPARE_IMAGE_POST_UPLOAD, "\(conversationId)", token)
+
+        AuthService.prepareUploadPhotoS3(endpoint: endpoint) { json, error in
+            guard let presignedUrl = json?["presigned_url"] as? String,
+                  let uploadKey = json?["upload_key"] as? String else {
+                completion(false); return
+            }
+
+            self.uploadToS3(urlS3: presignedUrl, image: image) { isOk in
+                if isOk {
+                    let trimmed = message?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                    let placeholder = "messaging_message_placeholder_discut".localized
+                    let safeMessage: String? = (trimmed.isEmpty || trimmed == placeholder) ? nil : trimmed
+
+                    self.postWithImageAndText(imageKey: uploadKey,
+                                              conversationId: conversationId,
+                                              message: safeMessage,
+                                              completion: completion)
+                } else {
+                    completion(false)
+                }
+            }
+        }
+    }
+
+       // Second step: Upload to Amazon S3
+       private static func uploadToS3(urlS3: String, image: UIImage, completion: @escaping (_ result: Bool) -> Void) {
+           guard let url = URL(string: urlS3), let data = image.jpegData(compressionQuality: 0.8) else {
+               completion(false)
+               return
+           }
+
+           let sessionConfig = URLSessionConfiguration.default
+           let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "PUT"
+           request.addValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+
+           let task = session.uploadTask(with: request, from: data) { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+               if error == nil {
+                   completion(true)
+               } else {
+                   Logger.print("URL Session Task Failed: \(error!.localizedDescription)")
+                   completion(false)
+               }
+           }
+
+           task.resume()
+           session.finishTasksAndInvalidate()
+       }
+
+       // Third step: Post the message with the image URL
+    private static func postWithImageAndText(
+        imageKey: String,
+        conversationId: Int,
+        message: String?,
+        completion: @escaping (_ result: Bool) -> Void
+    ) {
+        guard let token = UserDefaults.token else {
+            completion(false); return
+        }
+
+        let endpoint = String(format: kAPIPostConversationMessage, "\(conversationId)", token)
+        var chatMessage: [String: Any] = ["image_url": imageKey]
+
+        if let m = message?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !m.isEmpty,
+           !m.contains("messaging_message_placeholder_discut".localized) {
+            // ici seulement si pas vide ET ne contient pas le placeholder
+            chatMessage["content"] = m
+        }
+
+        let parameters = ["chat_message": chatMessage]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { _, resp, error in
+            if let http = resp as? HTTPURLResponse, error == nil, http.statusCode < 300 {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+
+
+    static func getConversationMemberships(
+            type: String?,
+            page: Int,
+            per: Int,
+            completion: @escaping (_ memberships: [ConversationMembership]?, _ error: EntourageNetworkError?) -> Void
+        ) {
+            guard let token = UserDefaults.token else { return }
+
+            // Construire la partie "&type=…" si besoin
+            let typeQuery = (type != nil && !type!.isEmpty) ? "&type=\(type!)" : ""
+            let endpoint = String(
+                format: kAPIConversationMemberships,
+                token,
+                page,
+                per,
+                typeQuery
+            )
+            Logger.print("***** getConversationMemberships: \(endpoint)")
+
+            NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+                guard let data = data,
+                      error == nil,
+                      let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+                    DispatchQueue.main.async { completion(nil, error) }
+                    return
+                }
+
+                do {
+                    let wrapper = try JSONDecoder().decode(ConversationMembershipsWrapper.self, from: data)
+                    DispatchQueue.main.async { completion(wrapper.memberships, nil) }
+                } catch {
+                    DispatchQueue.main.async {
+                        print("error getting membership")
+                    }
+                }
+            }
+        }
 
 }

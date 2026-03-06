@@ -33,20 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initEnvironmentConfigManager()
         configureGooglePlace()
         configureFirebase()
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-//            if granted {
-//                print("Notifications granted")
-//                DispatchQueue.main.async {
-//                    application.registerForRemoteNotifications()
-//                }
-//            } else {
-//                print("Notifications denied: \(String(describing: error))")
-//            }
-//        }
-        for family in UIFont.familyNames {
-            print("\(family)")
-            for name in UIFont.fontNames(forFamilyName: family) {
-                print("  \(name)")
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if granted {
+                print("Notifications granted")
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            } else {
+                print("Notifications denied: \(String(describing: error))")
             }
         }
 

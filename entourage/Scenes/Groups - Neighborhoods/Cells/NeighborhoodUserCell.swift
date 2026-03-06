@@ -1,156 +1,185 @@
-//
-//  NeighborhoodUserCell.swift
-//  entourage
-//
-//  Created by Jerome on 04/05/2022.
-//
-
 import UIKit
+import SDWebImage
+
+protocol NeighborhoodUserCellDelegate: AnyObject {
+    func neighborhoodUserCell(_ cell: NeighborhoodUserCell,
+                              didRequestToggleAt tablePosition: Int,
+                              intendedChecked: Bool,
+                              completion: @escaping (_ finalChecked: Bool) -> Void)
+
+    func showSendMessageToUserForPosition(_ tablePosition: Int)
+}
 
 class NeighborhoodUserCell: UITableViewCell {
-    
+
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_username: UILabel!
     @IBOutlet weak var ui_role: UILabel!
     @IBOutlet weak var ui_view_separator: UIView!
     @IBOutlet weak var ui_view_background: UIView!
-    
+    @IBOutlet weak var checkbox: Checkbox!
+    @IBOutlet weak var ui_sending_button_width: NSLayoutConstraint!
     @IBOutlet weak var ic_image_reaction: UIImageView!
     @IBOutlet weak var ui_bt_message: UIButton!
     @IBOutlet weak var ui_picto_message: UIImageView!
     @IBOutlet weak var ui_view: UIView!
-    
-    var position = 0
-    weak var delegate: NeighborhoodUserCellDelegate? = nil
-    
+
+    private(set) var tablePosition: Int = 0
+    weak var delegate: NeighborhoodUserCellDelegate?
+
+    // Empêche les .valueChanged lors des set programmatiques
+    private var suppressChange = false
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        ui_image.layer.cornerRadius = ui_image.frame.height / 2
-        
+        ui_image.layer.masksToBounds = true
         ui_username.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_role.font = ApplicationTheme.getFontNunitoRegular(size: 11)
         ui_role.textColor = .appOrangeLight
-        // Configuration de l'arrondi pour ui_view
-        
-        if ui_view != nil {
-            ui_view.layer.cornerRadius = ui_view.frame.height / 2
-            ui_view.clipsToBounds = true // Ceci est nécessaire pour appliquer l'arrondi
-            // Configuration du bord
-            ui_view.layer.borderWidth = 1 // Définit la largeur du bord
-            ui_view.layer.borderColor = UIColor(named: "grey_reaction")?.cgColor
-            
-        }
 
-        
+        // Tolérance au nil si la vue n'est pas câblée dans une variante
+        ui_view?.clipsToBounds = true
+        ui_view?.layer.borderWidth = 1
+        ui_view?.layer.borderColor = UIColor(named: "grey_reaction")?.cgColor
+
+        // Lire l'état réel (après bascule)
+        checkbox?.addTarget(self, action: #selector(onCheckboxChanged), for: .valueChanged)
     }
-    
-    func hideSeparatorBarIfIsVote(isVote:Bool){
-        if isVote {
-            if ui_view_separator != nil {
-                ui_view_separator.isHidden = true
-            }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        ui_image.layer.cornerRadius = ui_image.frame.height / 2
+        if let v = ui_view {
+            v.layer.cornerRadius = v.frame.height / 2
         }
     }
-    
-    func populateCell(isMe: Bool, username: String, role: String?, imageUrl: String?, showBtMessage: Bool, delegate: NeighborhoodUserCellDelegate, position: Int, reactionType: ReactionType?, isConfirmed: Bool?, isOrganizer: Bool?, isCreator:Bool?) {
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        ui_username.text = nil
+        ui_username.attributedText = nil
+        ui_role.text = nil
+        ui_role.isHidden = false
+        ui_view_background?.backgroundColor = .clear
+        ic_image_reaction?.isHidden = true
+        ui_view?.isHidden = true
+
+        suppressChange = true
+        checkbox?.isHidden = true
+        checkbox?.isChecked = false
+        suppressChange = false
+
+        ui_bt_message.isHidden = true
+        ui_picto_message.isHidden = true
+        ui_sending_button_width?.constant = 0
+        ui_image.image = UIImage(named: "placeholder_user")
+        isUserInteractionEnabled = true
+    }
+
+    func hideSeparatorBarIfIsVote(isVote: Bool) {
+        ui_view_separator?.isHidden = isVote
+    }
+
+    /// - Parameters:
+    ///   - isParticipating: reflète participate_at (checkbox)
+    ///   - isConfirmed: reflète confirmed_at (libellé "Participation confirmée")
+    func populateCell(isMe: Bool,
+                      username: String,
+                      role: String?,
+                      imageUrl: String?,
+                      showBtMessage: Bool,
+                      delegate: NeighborhoodUserCellDelegate,
+                      position: Int,
+                      reactionType: ReactionType?,
+                      isParticipating: Bool?,
+                      isOrganizer: Bool?,
+                      isCreator: Bool?,
+                      isConfirmed: Bool?) {
+
         self.delegate = delegate
-        self.position = position
-        
-        // Configure le nom de l'utilisateur
-        if isOrganizer == true && isCreator == true {
-            // Ajouter "- organisateur" en orange
-            let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-            let organizerText = " - \(NSLocalizedString("neighborhood_user_role_animator", comment: ""))"
-            let organizerAttributes: [NSAttributedString.Key: Any] = [
-                .foregroundColor: UIColor(named: "appOrange") ?? UIColor.orange
-            ]
-            attributedText.append(NSAttributedString(string: organizerText, attributes: organizerAttributes))
-            
-            ui_username.attributedText = attributedText
-            
-            // Change le fond de la cellule en orange clair
-            if self.ui_view_background != nil {
-                self.ui_view_background.backgroundColor = UIColor(named: "lightOrangeBackground") ?? UIColor(red: 254/255, green: 245/255, blue: 235/255, alpha: 1.0)
-            }
-        }else if isOrganizer == true && isCreator == false {
-            let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-            let organizerText = " - \(NSLocalizedString("neighborhood_user_role_organizer", comment: ""))"
-            let organizerAttributes: [NSAttributedString.Key: Any] = [
-                .foregroundColor: UIColor(named: "appOrange") ?? UIColor.orange
-            ]
-            attributedText.append(NSAttributedString(string: organizerText, attributes: organizerAttributes))
-            
-            ui_username.attributedText = attributedText
-            
-            // Change le fond de la cellule en orange clair
-            if self.ui_view_background != nil {
-                self.ui_view_background.backgroundColor = UIColor(named: "lightOrangeBackground") ?? UIColor(red: 254/255, green: 245/255, blue: 235/255, alpha: 1.0)
-            }
-        } else {
-            // Si ce n'est pas un organisateur, réinitialise le texte et la couleur de fond par défaut
-            ui_username.text = username
-            if self.ui_view_background != nil {
-                self.ui_view_background.backgroundColor = .clear
-            }
-        }
-        
-        // Configurer le rôle de l'utilisateur
-        ui_role.text = role
-        
+        self.tablePosition = position
+
+        // Libellé uniquement si confirmed_at != nil
         if isConfirmed ?? false {
             ui_username.text = "\(username) - Participation confirmée"
+        } else {
+            ui_username.text = username
         }
-        
-        print("position ", position)
-        ui_bt_message.isHidden = !showBtMessage
-        ui_picto_message.isHidden = !showBtMessage
-        
-        // Configurer l'image de l'utilisateur
-        if let imageUrl = imageUrl, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
-            ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage(named: "placeholder_user"))
+
+        if let r = role, !r.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            ui_role.text = r
+            ui_role.isHidden = false
+        } else {
+            ui_role.text = nil
+            ui_role.isHidden = true
+        }
+
+        if let urlStr = imageUrl, let url = URL(string: urlStr) {
+            ui_image.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
         } else {
             ui_image.image = UIImage(named: "placeholder_user")
         }
-        
-        // Masquer les boutons si c'est l'utilisateur lui-même
-        ui_bt_message.isHidden = isMe
-        ui_picto_message.isHidden = isMe
-        
-        // Configurer l'image de réaction
-        if ic_image_reaction != nil {
-            if let reactionId = reactionType?.id,
-               let completeReactionType = getStoredReactionTypes()?.first(where: { $0.id == reactionId }),
-               let imageUrl = URL(string: completeReactionType.imageUrl ?? "") {
-                ic_image_reaction.isHidden = false
-                ui_view.isHidden = false
-                ic_image_reaction.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "ic_i_like"))
-            } else {
-                // Gérer le cas où l'URL de l'image n'est pas disponible
-                ic_image_reaction.isHidden = true
-                ui_view.isHidden = true
-            }
+
+        if let reactionId = reactionType?.id,
+           let completeReaction = getStoredReactionTypes()?.first(where: { $0.id == reactionId }),
+           let imgUrl = completeReaction.imageUrl,
+           let url = URL(string: imgUrl) {
+            ic_image_reaction?.isHidden = false
+            ui_view?.isHidden = false
+            ic_image_reaction?.sd_setImage(with: url, placeholderImage: UIImage(named: "ic_i_like"))
+        } else {
+            ic_image_reaction?.isHidden = true
+            ui_view?.isHidden = true
         }
+
+        // La visibilité de la checkbox dépend du rôle + règles signable
+        let canShowCheckbox = !isMe
+            && AppSignableManager.shared.signableEvent
+            && AppSignableManager.shared.signablePermission
+        print("eho signable : " , AppSignableManager.shared.signableEvent)
+        print("eho signable permission : " , AppSignableManager.shared.signablePermission)
+        let messageVisible = !canShowCheckbox && showBtMessage && !isMe
+
+        checkbox?.isHidden = !canShowCheckbox
+
+        // L'état de la checkbox suit participate_at (et pas confirmed_at)
+        suppressChange = true
+        checkbox?.isChecked = isParticipating ?? false
+        suppressChange = false
+
+        ui_bt_message.isHidden = !messageVisible
+        ui_picto_message.isHidden = !messageVisible
+        ui_sending_button_width?.constant = messageVisible ? 40 : 0
+
+        contentView.layoutIfNeeded()
     }
 
-    
-    func getStoredReactionTypes() -> [ReactionType]? {
-        guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
-        do {
-            let reactions = try JSONDecoder().decode([ReactionType].self, from: reactionsData)
-            return reactions
-        } catch {
-            print("Erreur de décodage des réactions : \(error)")
-            return nil
-        }
+    @objc private func onCheckboxChanged(_ sender: Checkbox) {
+        if suppressChange { return }
+        // état réel après le tap :
+        let intended = sender.isChecked
+
+        // bloque l’UI ; le VC réactivera via completion
+        isUserInteractionEnabled = false
+
+        delegate?.neighborhoodUserCell(self,
+                                       didRequestToggleAt: tablePosition,
+                                       intendedChecked: intended,
+                                       completion: { [weak self] finalChecked in
+            guard let self = self else { return }
+            self.suppressChange = true
+            self.checkbox?.isChecked = finalChecked
+            self.suppressChange = false
+            self.isUserInteractionEnabled = true
+        })
     }
-    
+
     @IBAction func action_send_message(_ sender: Any) {
-        delegate?.showSendMessageToUserForPosition(position)
+        delegate?.showSendMessageToUserForPosition(tablePosition)
     }
-}
 
-//MARK: - Protocol  -
-protocol NeighborhoodUserCellDelegate:AnyObject {
-    func showSendMessageToUserForPosition(_ position:Int)
+    private func getStoredReactionTypes() -> [ReactionType]? {
+        guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
+        return try? JSONDecoder().decode([ReactionType].self, from: reactionsData)
+    }
 }

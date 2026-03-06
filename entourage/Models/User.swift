@@ -40,7 +40,9 @@ struct User: Codable {
     var unreadCount:Int = 0
     var gender:String? = ""
     var permissions:UserPermissions? = UserPermissions()
-    
+    var discoverySource: String? = nil
+    var company: String? = nil
+    var event: String? = nil
     var birthday:String? = nil
     var radiusDistance:Int? = 0
     
@@ -212,6 +214,7 @@ struct UserLightNeighborhood: Codable {
     var avatarURL:String? = nil
     var partner:Partner? = nil
     var partnerRoleTitle:String? = nil
+    var photoAcceptance:Bool? = nil
     var role:String? = nil
     var roles:[String]? = nil
     var groupRole:String? = nil
@@ -219,6 +222,7 @@ struct UserLightNeighborhood: Codable {
     var status:String? = nil
     var message:String? = nil
     var confirmedAt:String? = nil
+    var participateAt:String? = nil
     
     var displayName:String {
         get {
@@ -241,6 +245,8 @@ struct UserLightNeighborhood: Codable {
         case sid = "id"
         case communityRoles = "community_roles"
         case confirmedAt = "confirmed_at"
+        case participateAt = "participate_at"
+        case photoAcceptance = "photo_acceptance"
         case _displayName = "display_name"
         case avatarURL = "avatar_url"
     }

@@ -296,6 +296,7 @@ class EventDetailFeedViewController: UIViewController {
             }
             
             self.event = event
+            AppSignableManager.shared.updateFromEvent(event: event!)
             self.eventId = event?.uid ?? 0
             if event?.isMember ?? false {
                 self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_conversation".localized)
