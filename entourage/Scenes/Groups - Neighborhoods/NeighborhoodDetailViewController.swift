@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class NeighborhoodDetailViewController: UIViewController {
 
@@ -318,7 +318,7 @@ class NeighborhoodDetailViewController: UIViewController {
             return
         }
         if isAdd {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
 
             if (/*(UserDefaults.currentUser?.isAmbassador()) != nil*/ false){
                 if let popupVC = storyboard?.instantiateViewController(withIdentifier: "ambassadorAskNotificationPopup") as? AmbassadorAskNotificationPopup {
@@ -330,7 +330,7 @@ class NeighborhoodDetailViewController: UIViewController {
 
             }else{
                 NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
-                    IHProgressHUD.dismiss()
+                    SVProgressHUD.dismiss()
                     if let user = user {
                         let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
                         self.neighborhood?.members.append(member)
@@ -391,9 +391,9 @@ class NeighborhoodDetailViewController: UIViewController {
         guard let neighborhood = neighborhood else {
             return
         }
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         NeighborhoodService.leaveNeighborhood(groupId: neighborhood.uid, userId: UserDefaults.currentUser!.sid) { group, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if error == nil {
                 self.neighborhood?.members.removeAll(where: {$0.uid == UserDefaults.currentUser!.sid})
                 let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount - 1 : 0
@@ -1112,7 +1112,7 @@ extension NeighborhoodDetailViewController:CreateSurveyValidationDelegate{
 extension NeighborhoodDetailViewController:AmbassadorAskNotificationPopupDelegate{
     func joinAsOrganizer() {
         NeighborhoodService.joinNeighborhood(groupId: neighborhood?.uid ?? 0) { user, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let user = user {
                 let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
                 self.neighborhood?.members.append(member)
@@ -1128,7 +1128,7 @@ extension NeighborhoodDetailViewController:AmbassadorAskNotificationPopupDelegat
     
     func justParticipate() {
         NeighborhoodService.joinNeighborhood(groupId: neighborhood?.uid ?? 0) { user, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let user = user {
                 let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
                 self.neighborhood?.members.append(member)

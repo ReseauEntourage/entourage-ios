@@ -1,12 +1,6 @@
 import UIKit
 
 // MARK: - Fallback si setFontTitle(_:) n'existe pas dans ton projet
-extension UILabel {
-    @objc func setFontTitle(_ size: CGFloat) {
-        // Remplace par ta font projet si dispo (ex: ApplicationTheme.getFontQuickSandBold(size:))
-        self.font = UIFont.boldSystemFont(ofSize: size)
-    }
-}
 
 // MARK: - ImageListViewController
 
@@ -27,13 +21,24 @@ final class ImageListViewController: UIViewController {
     private let emptyIcon = UIImageView()
     private let emptyLabel = UILabel()
 
+    // Pagination state
+    private let perPage: Int = 40
+    private var currentPage: Int = 1
+    private var isLoading: Bool = false
+    private var hasMore: Bool = true
+
+    // Footer loading (spinner en bas)
+    private let loadingMoreContainer = UIView()
+    private let loadingMoreSpinner = UIActivityIndicatorView(style: .medium)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupTopBar()
         setupCollection()
         setupEmptyState()
-        fetchImages()
+        setupLoadingMore()
+        fetchFirstPage()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +94,7 @@ final class ImageListViewController: UIViewController {
         titleLabel.numberOfLines = 1
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.8
-        titleLabel.setFontTitle(15)
+        titleLabel.setFontTitle(size: 15)
         if #available(iOS 13.0, *) {
             titleLabel.textColor = .label
         } else {
@@ -200,6 +205,40 @@ final class ImageListViewController: UIViewController {
         collectionView.isHidden = isEmpty
     }
 
+    // MARK: - Footer "loading more"
+
+    private func setupLoadingMore() {
+        view.addSubview(loadingMoreContainer)
+        loadingMoreContainer.translatesAutoresizingMaskIntoConstraints = false
+        loadingMoreContainer.isHidden = true
+
+        loadingMoreContainer.addSubview(loadingMoreSpinner)
+        loadingMoreSpinner.translatesAutoresizingMaskIntoConstraints = false
+        loadingMoreSpinner.hidesWhenStopped = true
+
+        NSLayoutConstraint.activate([
+            loadingMoreContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingMoreContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loadingMoreContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            loadingMoreContainer.heightAnchor.constraint(equalToConstant: 44),
+
+            loadingMoreSpinner.centerXAnchor.constraint(equalTo: loadingMoreContainer.centerXAnchor),
+            loadingMoreSpinner.centerYAnchor.constraint(equalTo: loadingMoreContainer.centerYAnchor)
+        ])
+    }
+
+    private func setLoadingMore(_ loading: Bool) {
+        loadingMoreContainer.isHidden = !loading
+        if loading {
+            loadingMoreSpinner.startAnimating()
+            // petit inset bas pour ne pas masquer la dernière rangée
+            collectionView.contentInset.bottom = 44
+        } else {
+            loadingMoreSpinner.stopAnimating()
+            collectionView.contentInset.bottom = 0
+        }
+    }
+
     // MARK: - Actions
 
     @objc private func tapBack() {
@@ -210,15 +249,69 @@ final class ImageListViewController: UIViewController {
         }
     }
 
-    // MARK: - Data
+    // MARK: - Data & Pagination
 
-    private func fetchImages() {
-        MessagingService.getConversationImages(conversationId: conversationId) { [weak self] imgs, _ in
+    private func fetchFirstPage() {
+        currentPage = 1
+        hasMore = true
+        isLoading = true
+        setLoadingMore(true)
+        MessagingService.getConversationImages(
+            conversationId: conversationId,
+            page: currentPage,
+            per: perPage
+        ) { [weak self] imgs, nextPage, _ in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.images = imgs ?? []
-                self.collectionView.reloadData()
-                self.updateEmptyState()
+            self.isLoading = false
+            self.setLoadingMore(false)
+            self.images = imgs ?? []
+            self.collectionView.reloadData()
+            self.updateEmptyState()
+            if let np = nextPage {
+                self.currentPage = np
+                self.hasMore = true
+            } else {
+                self.hasMore = false
+            }
+        }
+    }
+
+    private func loadMoreIfNeeded(for indexPath: IndexPath) {
+        // Déclenchement quand on approche de la fin (ex: derniers 6 items)
+        let threshold = 6
+        guard hasMore, !isLoading, indexPath.item >= images.count - threshold else { return }
+
+        isLoading = true
+        setLoadingMore(true)
+        MessagingService.getConversationImages(
+            conversationId: conversationId,
+            page: currentPage,
+            per: perPage
+        ) { [weak self] imgs, nextPage, _ in
+            guard let self = self else { return }
+            self.isLoading = false
+            self.setLoadingMore(false)
+
+            let newItems = imgs ?? []
+            if newItems.isEmpty {
+                self.hasMore = false
+                return
+            }
+
+            let start = self.images.count
+            self.images.append(contentsOf: newItems)
+
+            // Insertions performantes
+            let indexPaths = (start..<(start + newItems.count)).map { IndexPath(item: $0, section: 0) }
+            self.collectionView.performBatchUpdates({
+                self.collectionView.insertItems(at: indexPaths)
+            }, completion: nil)
+
+            if let np = nextPage {
+                self.currentPage = np
+                self.hasMore = true
+            } else {
+                self.hasMore = false
             }
         }
     }
@@ -258,5 +351,10 @@ extension ImageListViewController: UICollectionViewDataSource, UICollectionViewD
         guard let id = images[indexPath.item].chatMessageId else { return }
         let vc = ImagePreviewController(conversationId: conversationId, chatMessageId: id)
         present(vc, animated: true)
+    }
+
+    // Détection d’approche du bas de liste
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        loadMoreIfNeeded(for: indexPath)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import SafariServices
-import IHProgressHUD
+import SVProgressHUD
 import CoreLocation
 import GooglePlaces
 import FirebaseMessaging
@@ -68,60 +68,54 @@ class HomeV2ViewController: UIViewController {
     var shouldLaunchEventPopup: Int? = nil
     var shouldTestOnboarding = false
     var userSmallTalkRequests: [UserSmallTalkRequest] = []
+    private var hasRunEntryGating = false
+
 
     
     override func viewDidLoad() {
-        IHProgressHUD.show()
+        super.viewDidLoad()
+
+        SVProgressHUD.show()
         currentUser = UserDefaults.currentUser
         AnalyticsLoggerManager.logEvent(name: View__Home)
         if EnhancedOnboardingConfiguration.shared.shouldNotDisplayCampain == true {
-            //HERE DO NOTHING, AS WE WANT NOT THE CAMPAIN TO BE DISPLAYED IF WE ARE COMING FROM ONBOARDING
-        }else{
-            //HERE IS THE FIREBASE EVENT TO PROC MESSAGING CAMPAIN
+        } else {
             AnalyticsLoggerManager.logEvent(name: home_activate_firebase_message)
         }
-        
+
         prepareUINotifAndAvatar()
         ui_table_view.delegate = self
         ui_table_view.dataSource = self
         ui_table_view.backgroundColor = UIColor(named: "white_orange_home")
-        // Register cells
-        // CELL TITLE
+
         ui_table_view.register(UINib(nibName: HomeV2CellTitle.identifier, bundle: nil), forCellReuseIdentifier: HomeV2CellTitle.identifier)
-        // CELL SEE ALL
         ui_table_view.register(UINib(nibName: HomeSeeAllCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSeeAllCell.identifier)
-        // CELL MAP BUTTON
         ui_table_view.register(UINib(nibName: HomeCellMapButton.identifier, bundle: nil), forCellReuseIdentifier: HomeCellMapButton.identifier)
-        // CELL ACTION
         ui_table_view.register(UINib(nibName: HomeCellAction.identifier, bundle: nil), forCellReuseIdentifier: HomeCellAction.identifier)
-        // CELL EVENT
         ui_table_view.register(UINib(nibName: HomeEventHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeEventHorizontalCollectionCell.identifier)
-        // CELL GROUP
         ui_table_view.register(UINib(nibName: HomeGroupHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeGroupHorizontalCollectionCell.identifier)
-        // CELL PEDAGO
         ui_table_view.register(UINib(nibName: HomeCellPedago.identifier, bundle: nil), forCellReuseIdentifier: HomeCellPedago.identifier)
-        // CELL HELP
         ui_table_view.register(UINib(nibName: HomeNeedHelpCell.identifier, bundle: nil), forCellReuseIdentifier: HomeNeedHelpCell.identifier)
-        // CELL MODERATOR
         ui_table_view.register(UINib(nibName: HomeModeratorCell.identifier, bundle: nil), forCellReuseIdentifier: HomeModeratorCell.identifier)
-        
         ui_table_view.register(UINib(nibName: HomeInitialPedagogicHorizontalCell.identifier, bundle: nil), forCellReuseIdentifier: HomeInitialPedagogicHorizontalCell.identifier)
-        // CELL HZ
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
 
         self.checkAndCreateCookieIfNotExists()
-        self.checkNotificationSettings()
-        if let _user = UserDefaults.currentUser{
+        //self.checkNotificationSettings()
+        if let _user = UserDefaults.currentUser {
             UserService.getDetailsForUser(userId: String(_user.sid)) { user, error in
                 if error == nil {
                     UserDefaults.currentUser = user
                 }
             }
         }
+        
+        runHomeEntryGatingIfNeeded()
+        SVProgressHUD.dismiss()
 
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         currentFilter.resetToDefault()
         self.loadMetadatas()
@@ -132,6 +126,8 @@ class HomeV2ViewController: UIViewController {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
         getUserInfo()
+        //presentOnboardingMode2IfNeeded()
+
 
     }
     
@@ -183,14 +179,14 @@ class HomeV2ViewController: UIViewController {
     func handleEnhancedOnboardingReturn() {
         let config = EnhancedOnboardingConfiguration.shared
         if config.shouldSendOnboardingFromNormalWay {
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.sendOnboardingIntro()
             return
         }
     
         if config.isFromOnboardingFromNormalWay {
             config.isFromOnboardingFromNormalWay = false
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             print("eho _category : " , OnboardingEndChoicesManager.shared.categoryForButton)
             if let _category = OnboardingEndChoicesManager.shared.categoryForButton {
                 if _category.contains("both_action") || _category.contains("no_event") {
@@ -231,7 +227,7 @@ class HomeV2ViewController: UIViewController {
         
         if config.isInterestsFromSetting {
             config.isInterestsFromSetting = false
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
@@ -240,7 +236,7 @@ class HomeV2ViewController: UIViewController {
         
         if config.isOnboardingFromSetting {
             config.isOnboardingFromSetting = false
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
@@ -465,7 +461,7 @@ class HomeV2ViewController: UIViewController {
         }
         self.ui_table_view.reloadData()
         self.handleEnhancedOnboardingReturn()
-        IHProgressHUD.dismiss()
+        SVProgressHUD.dismiss()
     }
     
     func initHome() {
@@ -841,22 +837,22 @@ extension HomeV2ViewController {
                 }
                 let config = EnhancedOnboardingConfiguration.shared
                 config.preference = userHome.preference ?? ""
-                
-                if UserDefaults.currentUser?.addressPrimary == nil || userHome.preference == nil {
-                    let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-                    if let onboardingPageVC = storyboard.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
-                        onboardingPageVC.currentPhasePosition = 3
-                        onboardingPageVC.shouldLaunchThird = true
-                        
-                        if let _user = UserDefaults.currentUser {
-                            onboardingPageVC.temporaryUser = _user
-                        }
-                        if let window = UIApplication.shared.windows.first {
-                            window.rootViewController = onboardingPageVC
-                            window.makeKeyAndVisible()
-                        }
-                    }
-                }
+//              TODO uncomment this when ok 
+//                if UserDefaults.currentUser?.addressPrimary == nil || userHome.preference == nil {
+//                    let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+//                    if let onboardingPageVC = storyboard.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
+//                        onboardingPageVC.currentPhasePosition = 3
+//                        onboardingPageVC.shouldLaunchThird = true
+//                        
+//                        if let _user = UserDefaults.currentUser {
+//                            onboardingPageVC.temporaryUser = _user
+//                        }
+//                        if let window = UIApplication.shared.windows.first {
+//                            window.rootViewController = onboardingPageVC
+//                            window.makeKeyAndVisible()
+//                        }
+//                    }
+//                }
                 
                 AppManager.shared.isContributionPreference = self?.isContributionPreference ?? false
                 
@@ -1147,7 +1143,7 @@ extension HomeV2ViewController: Phase3fromAppDelegate {
         var _user = currentUser
         _user?.goal = userType.getGoalString()
         UserService.updateUser(user: _user) { [weak self] user, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let user = user {
                 self?.currentUser = user
             }
@@ -1157,7 +1153,7 @@ extension HomeV2ViewController: Phase3fromAppDelegate {
     func updateLoc(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         if let _place = googlePlace, let placeId = _place.placeID {
             UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { [weak self] error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
             }
         }
     }
@@ -1184,4 +1180,265 @@ class AppManager {
     var isContributionPreference: Bool = false
     private init() {}
 }
+
+
+extension HomeV2ViewController {
+    func presentOnboardingMode2IfNeeded() {
+
+            let initialCoordinate: CLLocationCoordinate2D? = nil
+            let initialLabel: String? = nil
+            let initialRadiusKm = 20
+
+            presentZoneChoiceSwiftUI(
+                initialCoordinate: initialCoordinate,
+                initialLabel: initialLabel,
+                initialRadiusKm: initialRadiusKm,
+                onConfirm: { [weak self] result in
+
+                    self?.dismiss(animated: true)
+                },
+                onCancel: { [weak self] in
+                    // L’utilisateur a annulé → on ferme simplement
+                    self?.dismiss(animated: true)
+                }
+            )
+        }
+}
+
+//Extension for filling mission infiormation in profile
+extension HomeV2ViewController {
+
+    private struct ZonePrefill {
+        let coordinate: CLLocationCoordinate2D?
+        let label: String?
+        let radiusKm: Int
+    }
+
+    private var appDelegate: AppDelegate? {
+        UIApplication.shared.delegate as? AppDelegate
+    }
+
+    private func logEntryGating(_ message: String) {
+        print("[HomeEntryGating] \(message)")
+    }
+
+    private func describeUserForGating(_ user: User) -> String {
+        let goal = (user.goal ?? "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let hasRole = !goal.isEmpty
+
+        let hasZone = (user.addressPrimary != nil)
+        let addrLabel = user.addressPrimary?.displayAddress ?? "nil"
+        let lat = user.addressPrimary?.latitude
+        let lon = user.addressPrimary?.longitude
+
+        let latStr = lat != nil ? String(lat!) : "nil"
+        let lonStr = lon != nil ? String(lon!) : "nil"
+
+        let radius = user.radiusDistance ?? -1
+        let interestsCount = user.interests?.count ?? 0
+        let involvementsCount = user.involvements?.count ?? 0
+        let concernsCount = user.concerns?.count ?? 0
+
+        return "uuid=\(user.uuid ?? "nil") sid=\(user.sid) goal='\(goal)' hasRole=\(hasRole) hasZone=\(hasZone) addr='\(addrLabel)' lat=\(latStr) lon=\(lonStr) radius=\(radius) interests=\(interestsCount) involvements=\(involvementsCount) concerns=\(concernsCount)"
+    }
+
+    private func makeZonePrefillFromCurrentUser() -> ZonePrefill {
+        guard let user = UserDefaults.currentUser else {
+            return ZonePrefill(coordinate: nil, label: nil, radiusKm: 20)
+        }
+
+        let radius = max(1, user.radiusDistance ?? 20)
+
+        var coord: CLLocationCoordinate2D? = nil
+        var label: String? = nil
+
+        if let addr = user.addressPrimary {
+            if let lat = addr.latitude, let lon = addr.longitude {
+                coord = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            }
+            if let l = addr.displayAddress, !l.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty {
+                label = l
+            }
+        }
+
+        return ZonePrefill(coordinate: coord, label: label, radiusKm: radius)
+    }
+
+    private func userHasRole(_ user: User) -> Bool {
+        let g = (user.goal ?? "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        return !g.isEmpty
+    }
+
+    private func userHasZone(_ user: User) -> Bool {
+        user.addressPrimary != nil
+    }
+
+    private func userNeedsEnhancedOnboarding(_ user: User) -> Bool {
+        let interestsEmpty = (user.interests?.isEmpty ?? true)
+        let involvementsEmpty = (user.involvements?.isEmpty ?? true)
+        let concernsEmpty = (user.concerns?.isEmpty ?? true)
+        return interestsEmpty || involvementsEmpty || concernsEmpty
+    }
+
+    private func hasLaunchedEnhancedOnboarding() -> Bool {
+        UserDefaults.standard.bool(forKey: "hasLaunchedEnhancedOnboarding")
+    }
+
+    private func markEnhancedOnboardingLaunched() {
+        UserDefaults.standard.set(true, forKey: "hasLaunchedEnhancedOnboarding")
+    }
+
+    private func presentPhase3Onboarding() {
+        let sb = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
+        if let onboardingStart = sb.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
+            onboardingStart.currentPhasePosition = 3
+            onboardingStart.shouldLaunchThird = true
+            if let u = UserDefaults.currentUser {
+                onboardingStart.temporaryUser = u
+            }
+            onboardingStart.modalPresentationStyle = .fullScreen
+            if presentedViewController != nil {
+                dismiss(animated: false)
+            }
+            if let window = UIApplication.shared.windows.first {
+                window.rootViewController = onboardingStart
+                window.makeKeyAndVisible()
+            } else {
+                present(onboardingStart, animated: true)
+            }
+        } else {
+            let fallback = sb.instantiateViewController(withIdentifier: "onboardingStart")
+            fallback.modalPresentationStyle = .fullScreen
+            if presentedViewController != nil {
+                dismiss(animated: false)
+            }
+            if let window = UIApplication.shared.windows.first {
+                window.rootViewController = fallback
+                window.makeKeyAndVisible()
+            } else {
+                present(fallback, animated: true)
+            }
+        }
+    }
+
+    private func presentZoneChoice(prefill: ZonePrefill) {
+        presentZoneChoiceSwiftUI(
+            initialCoordinate: prefill.coordinate,
+            initialLabel: prefill.label,
+            initialRadiusKm: prefill.radiusKm,
+            nextStep: .onboardingEnd,
+            onConfirm: { [weak self] result in
+                self?.logEntryGating("ZoneChoice confirm label='\(result.label ?? "nil")' coord=\(result.coordinate.map { "\($0.latitude),\($0.longitude)" } ?? "nil") radius=\(result.radiusKm)")
+            },
+            onCancel: { [weak self] in
+                self?.logEntryGating("ZoneChoice cancel")
+            }
+        )
+    }
+
+    private func presentEnhancedOnboardingIntro() {
+        let sb = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
+        if let intro = sb.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
+            intro.modalPresentationStyle = .fullScreen
+            if presentedViewController != nil {
+                dismiss(animated: false)
+            }
+            present(intro, animated: true)
+        } else {
+            let fallback = sb.instantiateViewController(withIdentifier: "enhancedOnboardingIntro")
+            fallback.modalPresentationStyle = .fullScreen
+            if presentedViewController != nil {
+                dismiss(animated: false)
+            }
+            present(fallback, animated: true)
+        }
+    }
+
+    private func shouldSkipBecauseAlreadyPresentedThisSession() -> Bool {
+        guard let ad = appDelegate else { return false }
+        if ad.homeEntryGatingDidPresentCriticalThisSession { return true }
+        if ad.homeEntryGatingDidPresentNotifThisSession { return true }
+        if ad.homeEntryGatingDidPresentEnhancedThisSession { return true }
+        return false
+    }
+
+    func runHomeEntryGatingIfNeeded() {
+        logEntryGating("runHomeEntryGatingIfNeeded() called. hasRunEntryGating=\(hasRunEntryGating)")
+
+        guard !hasRunEntryGating else {
+            logEntryGating("SKIP: already ran for this Home instance")
+            return
+        }
+        hasRunEntryGating = true
+
+        if shouldSkipBecauseAlreadyPresentedThisSession() {
+            logEntryGating("SKIP: already presented something this session via AppDelegate")
+            return
+        }
+
+        guard let user = UserDefaults.currentUser else {
+            logEntryGating("STOP: UserDefaults.currentUser is nil")
+            return
+        }
+
+        logEntryGating("User snapshot: \(describeUserForGating(user))")
+
+        let prefill = makeZonePrefillFromCurrentUser()
+        logEntryGating("Zone prefill: label='\(prefill.label ?? "nil")' coord=\(prefill.coordinate.map { "\($0.latitude),\($0.longitude)" } ?? "nil") radius=\(prefill.radiusKm)")
+
+        let missingRole = !userHasRole(user)
+        let missingZone = !userHasZone(user)
+
+        if missingRole || missingZone {
+            if missingRole {
+                logEntryGating("DECISION: missing role/goal -> presentPhase3Onboarding()")
+                appDelegate?.homeEntryGatingDidPresentCriticalThisSession = true
+                presentPhase3Onboarding()
+                return
+            }
+
+            if missingZone {
+                logEntryGating("DECISION: missing zone -> presentZoneChoice(prefill:)")
+                appDelegate?.homeEntryGatingDidPresentCriticalThisSession = true
+                presentZoneChoice(prefill: prefill)
+                return
+            }
+        }
+
+        UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+
+                if self.shouldSkipBecauseAlreadyPresentedThisSession() {
+                    self.logEntryGating("SKIP: already presented something this session (post notif check)")
+                    return
+                }
+
+                self.logEntryGating("Notif status rawValue=\(settings.authorizationStatus.rawValue)")
+
+                if settings.authorizationStatus != .authorized && settings.authorizationStatus != .provisional {
+                    self.logEntryGating("DECISION: notif not allowed -> presentNotificationDemandViewController()")
+                    self.appDelegate?.homeEntryGatingDidPresentNotifThisSession = true
+                    self.presentNotificationDemandViewController()
+                    return
+                }
+
+                let needsEO = self.userNeedsEnhancedOnboarding(user)
+                let hasEO = self.hasLaunchedEnhancedOnboarding()
+                self.logEntryGating("Enhanced onboarding: needs=\(needsEO) hasLaunched=\(hasEO)")
+
+                if !hasEO && needsEO {
+                    self.logEntryGating("DECISION: launch enhanced onboarding -> presentEnhancedOnboardingIntro()")
+                    self.appDelegate?.homeEntryGatingDidPresentEnhancedThisSession = true
+                    self.markEnhancedOnboardingLaunched()
+                    self.presentEnhancedOnboardingIntro()
+                    return
+                }
+
+                self.logEntryGating("DECISION: nothing to do")
+            }
+        }
+    }
+}
+
 

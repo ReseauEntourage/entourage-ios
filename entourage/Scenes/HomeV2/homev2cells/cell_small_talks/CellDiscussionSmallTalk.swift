@@ -18,7 +18,9 @@ class CellDiscussionSmallTalk: UICollectionViewCell {
     @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_subtitle: UILabel!
     @IBOutlet weak var ui_contraint_start_title: NSLayoutConstraint!
-
+    @IBOutlet weak var ui_label_new_message: UILabel!
+    @IBOutlet weak var round_new_message: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -67,6 +69,24 @@ class CellDiscussionSmallTalk: UICollectionViewCell {
             let avatarUrl = avatars.count > 3 ? avatars[3] : nil
             ui_img_avatar_4.sd_setImage(with: avatarUrl != nil ? URL(string: avatarUrl!) : nil, placeholderImage: UIImage(named: "placeholder_user"))
             ui_contraint_start_title.constant = 70
+        }
+        guard let number = request.number_of_unread_messages else{
+            self.ui_label_new_message.isHidden = true
+            return
+        }
+        self.ui_label_new_message.setFontBody(size: 13)
+        if number > 0 {
+            self.ui_label_new_message.isHidden = false
+            self.round_new_message.isHidden = false
+            if number == 1 {
+                self.ui_label_new_message.text = String(number) + " " + "title_new_message".localized
+
+            }else{
+                self.ui_label_new_message.text = String(number) + " " + "title_new_message_plural".localized
+            }
+        }else{
+            self.ui_label_new_message.isHidden = true
+            self.round_new_message.isHidden = true
         }
     }
 }

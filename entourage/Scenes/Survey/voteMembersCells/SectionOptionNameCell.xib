@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,8 +25,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="573" height="82"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y92-cN-VUI">
-                        <rect key="frame" x="28.000000000000004" y="20" width="40.333333333333343" height="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y92-cN-VUI">
+                        <rect key="frame" x="28" y="20" width="525" height="14"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -38,8 +38,8 @@
                             <constraint firstAttribute="width" constant="20" id="oDX-Kk-JoH"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnZ-4K-JSc">
-                        <rect key="frame" x="56" y="43" width="33" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnZ-4K-JSc">
+                        <rect key="frame" x="56" y="43" width="32.333333333333343" height="18"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Italic" family="Nunito Sans" pointSize="13"/>
                         <color key="textColor" name="grey_text_deleted"/>
                         <nil key="highlightedColor"/>
@@ -51,6 +51,7 @@
                     <constraint firstItem="8eP-hc-Gdc" firstAttribute="top" secondItem="Y92-cN-VUI" secondAttribute="bottom" constant="8" symbolic="YES" id="Ba0-Pn-qXj"/>
                     <constraint firstItem="JnZ-4K-JSc" firstAttribute="leading" secondItem="8eP-hc-Gdc" secondAttribute="trailing" constant="8" symbolic="YES" id="FZ2-Gu-uW7"/>
                     <constraint firstItem="Y92-cN-VUI" firstAttribute="leading" secondItem="Mna-v1-i69" secondAttribute="leading" constant="28" id="SwC-Ie-bfJ"/>
+                    <constraint firstAttribute="trailing" secondItem="Y92-cN-VUI" secondAttribute="trailing" constant="20" id="eDP-Bl-3ZS"/>
                     <constraint firstItem="JnZ-4K-JSc" firstAttribute="centerY" secondItem="8eP-hc-Gdc" secondAttribute="centerY" id="inR-hT-0jK"/>
                     <constraint firstItem="8eP-hc-Gdc" firstAttribute="leading" secondItem="Mna-v1-i69" secondAttribute="leading" constant="28" id="vVf-8t-TAs"/>
                 </constraints>

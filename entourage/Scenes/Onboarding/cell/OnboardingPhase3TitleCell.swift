@@ -20,7 +20,7 @@ class OnboardingPhase3TitleCell:UITableViewCell {
     
     override func awakeFromNib() {
         self.ui_label_title.text = "onboarding_phase_three_question_contribution".localized
-        self.ui_label_title.setFontBody(size: 15)
+        self.ui_label_title.setFontTitle(size: 20)
     }
     
 }

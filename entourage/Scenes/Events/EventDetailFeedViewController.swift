@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import SDWebImage
 import EventKit
 import EventKitUI
@@ -76,7 +76,7 @@ class EventDetailFeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         
@@ -250,9 +250,9 @@ class EventDetailFeedViewController: UIViewController {
     
     /// Quitter l’event (appel direct, ex. si organisateur)
     func sendLeaveGroup() {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         EventService.leaveEvent(eventId: eventId, userId: UserDefaults.currentUser!.sid) { _, _ in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             // Après avoir quitté, on recharge l’événement
             self.getEventDetail(hasToRefreshLists: true)
         }
@@ -275,9 +275,9 @@ class EventDetailFeedViewController: UIViewController {
             _eventId = hashedEventId
         }
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         EventService.getEventWithId(_eventId) { event, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             
             if let _ = error {
                 // En cas d’erreur, on ferme l’écran
@@ -352,11 +352,11 @@ class EventDetailFeedViewController: UIViewController {
         isAfterCreation = false
         ui_tableview.reloadData()
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         if isAdd {
             // On rejoint l’événement
             EventService.joinEvent(eventId: eventId) { _, _ in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 MessagingService.getDetailConversation(conversationId: self.event?.uuid_v2 ?? "") { conversation, error in
                     print("eho " , error)
                     if let convId = conversation?.uid {
@@ -382,7 +382,7 @@ class EventDetailFeedViewController: UIViewController {
         } else {
             // On quitte l’événement
             EventService.leaveEvent(eventId: eventId, userId: UserDefaults.currentUser!.sid) { _, _ in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 MessagingService.getDetailConversation(conversationId: self.event?.uuid_v2 ?? "") { conversation, error in
                     print("eho " , error)
                     if let convId = conversation?.uid {
@@ -809,9 +809,9 @@ extension EventDetailFeedViewController: AmbassadorAskNotificationPopupDelegate 
         isAfterCreation = false
         ui_tableview.reloadData()
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         EventService.joinEventAsOrganizer(eventId: eventId) { _, _ in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
         }
     }
     
@@ -820,9 +820,9 @@ extension EventDetailFeedViewController: AmbassadorAskNotificationPopupDelegate 
         isAfterCreation = false
         ui_tableview.reloadData()
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         EventService.joinEvent(eventId: eventId) { _, _ in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
         }
     }
 }

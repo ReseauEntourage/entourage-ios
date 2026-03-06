@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import EventKit
 import EventKitUI
 
@@ -63,9 +63,9 @@ class EventDetailFullFeedViewController: UIViewController {
     }
     
     func sendLeaveGroup() {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         EventService.leaveEvent(eventId: eventId, userId: UserDefaults.currentUser!.sid) { event, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if error == nil {
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventUpdate), object: nil)
                 self.goBack()

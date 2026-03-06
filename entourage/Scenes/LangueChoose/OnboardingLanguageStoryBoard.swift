@@ -10,7 +10,6 @@ import UIKit
 
 class OnboardingLanguageStoryBoard: UIViewController {
     
-    @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_table_view: UITableView!
     @IBOutlet weak var ui_label_select_language: UILabel!
     @IBOutlet weak var ui_button_next: UIButton!
@@ -32,7 +31,6 @@ class OnboardingLanguageStoryBoard: UIViewController {
     }
 
     func configureUI() {
-        self.ui_label_title.text = "onboarding_lang_bienvenue".localized
         self.ui_label_select_language.text = "onboarding_lang_select".localized
         self.ui_button_next.setTitle("onboarding_lang_suivant".localized, for: .normal)
         self.ui_button_next.addTarget(self, action: #selector(onNextClicked), for: .touchUpInside)

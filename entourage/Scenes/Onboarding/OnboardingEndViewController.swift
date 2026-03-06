@@ -54,7 +54,7 @@ class OnboardingEndViewController: UIViewController {
     
     @IBAction func action_go(_ sender: Any) {
         let config = EnhancedOnboardingConfiguration.shared
-        config.shouldSendOnboardingFromNormalWay = true
+        config.shouldSendOnboardingFromNormalWay = false
         goHomeMain()
     }
     
@@ -66,14 +66,7 @@ class OnboardingEndViewController: UIViewController {
                 newUser.phone = user?.phone
                 UserDefaults.currentUser = newUser
             }
-            DispatchQueue.main.async {
-                let sb = UIStoryboard.init(name: StoryboardName.onboarding, bundle: nil)
-                if let vc = sb.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
-                    self.present(vc, animated: true, completion: nil)
-                } else {
-                    print("ViewController with identifier 'NotificationDemandViewController' not found")
-                }
-            }
+            AppState.navigateToMainApp()
         }
     }
 

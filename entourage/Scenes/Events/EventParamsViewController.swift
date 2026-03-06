@@ -35,7 +35,14 @@ class EventParamsViewController: BasePopViewController {
         isCanceled = event?.isCanceled() ?? false
         isRealAuthor = event?.author?.uid == currentUserId
 
-        if isRealAuthor && !isCanceled {
+        // ----------------------------------------------------------
+        // Si l’événement est manageable par l’utilisateur courant,
+        // on lui donne les droits "Creator" (bouton Modifier, etc.)
+        // ----------------------------------------------------------
+        if event?.manageableByCurrentUser == true && !isCanceled {
+            eventUserType = .Creator
+        }
+        else if isRealAuthor && !isCanceled {
             eventUserType = .Creator
         } else {
             if let event = event, event.isMember ?? false {
@@ -44,6 +51,7 @@ class EventParamsViewController: BasePopViewController {
                 eventUserType = .Viewer
             }
         }
+        // ----------------------------------------------------------
 
         ui_top_view.populateView(
             title: "event_params_title".localized,
@@ -212,6 +220,7 @@ class EventParamsViewController: BasePopViewController {
 
 // MARK: - UITableViewDataSource / UITableViewDelegate
 extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch eventUserType {
         case .Creator:
@@ -223,7 +232,9 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
         }
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_info", for: indexPath) as! EventParamTopCell
             cell.populateCell(event: event)
@@ -231,6 +242,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
         }
 
         switch eventUserType {
+
         case .Creator:
             switch indexPath.row {
             case 1:
@@ -244,6 +256,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     type: .share
                 )
                 return cell
+
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(
@@ -255,7 +268,8 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     type: .showMembers
                 )
                 return cell
-            case 3:
+
+            case 3: // bouton Modifier l’événement
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(
                     title: "event_params_edit".localized,
@@ -266,6 +280,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     type: .EditEvent
                 )
                 return cell
+
             case 4:
                 if hasRecurrency {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
@@ -290,6 +305,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     )
                     return cell
                 }
+
             case 5:
                 if hasRecurrency {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
@@ -312,6 +328,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     )
                     return cell
                 }
+
             case 6:
                 if hasRecurrency {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! EventParamSignalCell
@@ -332,6 +349,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     )
                     return cell
                 }
+
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! EventParamSignalCell
                 cell.populateCell(
@@ -509,6 +527,18 @@ extension EventParamsViewController: GroupDetailDelegate {
     }
 }
 
+// MARK: - Protocole EventParamCellDelegate
+protocol EventParamCellDelegate: AnyObject {
+    func signalEvent()
+    func quitEvent()
+    func showCGU()
+    func editEvent()
+    func editRecurrency()
+    func editNotif(notifType: EventUserNotifType, isOn: Bool)
+    func share()
+    func showMembers()
+}
+
 // MARK: - MJNavBackViewDelegate
 extension EventParamsViewController: MJNavBackViewDelegate {
     func goBack() {
@@ -524,6 +554,7 @@ extension EventParamsViewController: MJNavBackViewDelegate {
 
 // MARK: - EventParamCellDelegate
 extension EventParamsViewController: EventParamCellDelegate {
+
     func share() {
         var stringUrl = "https://"
         var title = ""
@@ -539,8 +570,6 @@ extension EventParamsViewController: EventParamCellDelegate {
         }
 
         let url = URL(string: stringUrl)!
-        let shareText = "\(title)\n\n\(stringUrl)"
-
         let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
         self.present(activityViewController, animated: true, completion: nil)
         AnalyticsLoggerManager.logEvent(name: event_option_share)
@@ -612,18 +641,6 @@ extension EventParamsViewController: EventParamCellDelegate {
             self.present(navVC, animated: true, completion: nil)
         }
     }
-}
-
-// MARK: - Protocole EventParamCellDelegate
-protocol EventParamCellDelegate: AnyObject {
-    func signalEvent()
-    func quitEvent()
-    func showCGU()
-    func editEvent()
-    func editRecurrency()
-    func editNotif(notifType: EventUserNotifType, isOn: Bool)
-    func share()
-    func showMembers()
 }
 
 // MARK: - Enums

@@ -26,7 +26,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="kAf-MG-rYQ">
+                            <imageView hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="kAf-MG-rYQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="339.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="kAf-MG-rYQ" secondAttribute="height" multiplier="392:416" id="KKi-w8-erU"/>
@@ -42,11 +42,11 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5c-Bq-G2S">
-                                <rect key="frame" x="8" y="88" width="304" height="382"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="450"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1U-nE-qCq">
-                                        <rect key="frame" x="0.0" y="0.0" width="304" height="382"/>
-                                        <color key="backgroundColor" name="BeigeClair"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="450"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="35"/>
@@ -57,9 +57,9 @@
                                         </connections>
                                     </containerView>
                                 </subviews>
-                                <color key="backgroundColor" name="BeigeClair"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="O1U-nE-qCq" firstAttribute="top" secondItem="c5c-Bq-G2S" secondAttribute="top" id="3fd-vB-mCO"/>
+                                    <constraint firstItem="O1U-nE-qCq" firstAttribute="top" secondItem="c5c-Bq-G2S" secondAttribute="top" id="FTY-iX-JJ7"/>
                                     <constraint firstAttribute="trailing" secondItem="O1U-nE-qCq" secondAttribute="trailing" id="Nze-qE-8rd"/>
                                     <constraint firstAttribute="bottom" secondItem="O1U-nE-qCq" secondAttribute="bottom" id="lcX-0A-OeH"/>
                                     <constraint firstItem="O1U-nE-qCq" firstAttribute="leading" secondItem="c5c-Bq-G2S" secondAttribute="leading" id="qS1-iz-ACX"/>
@@ -130,11 +130,11 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ggS-nn-d7d"/>
-                        <color key="backgroundColor" name="Beige"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ejq-ki-BO2" firstAttribute="leading" secondItem="G9y-Rn-C33" secondAttribute="leading" id="9VX-u7-BtA"/>
                             <constraint firstItem="ggS-nn-d7d" firstAttribute="trailing" secondItem="l1i-8Z-SNs" secondAttribute="trailing" constant="32" id="9xw-8D-tLM"/>
-                            <constraint firstItem="c5c-Bq-G2S" firstAttribute="top" secondItem="ggS-nn-d7d" secondAttribute="top" constant="68" id="BVN-G3-Cnv"/>
+                            <constraint firstItem="c5c-Bq-G2S" firstAttribute="top" secondItem="ggS-nn-d7d" secondAttribute="top" id="BVN-G3-Cnv"/>
                             <constraint firstItem="kAf-MG-rYQ" firstAttribute="leading" secondItem="G9y-Rn-C33" secondAttribute="leading" id="Cep-Cr-F56"/>
                             <constraint firstAttribute="trailing" secondItem="Ejq-ki-BO2" secondAttribute="trailing" id="E6q-SD-250"/>
                             <constraint firstItem="d2a-ib-pdc" firstAttribute="top" secondItem="c5c-Bq-G2S" secondAttribute="bottom" constant="24" id="EHB-eh-fDH"/>
@@ -144,11 +144,11 @@
                             <constraint firstItem="d2a-ib-pdc" firstAttribute="leading" secondItem="ggS-nn-d7d" secondAttribute="leading" constant="32" id="dRb-8X-Tx6"/>
                             <constraint firstItem="ZYo-js-t7H" firstAttribute="top" secondItem="c5c-Bq-G2S" secondAttribute="bottom" constant="12" id="kSn-Mp-WcS"/>
                             <constraint firstItem="adf-dQ-fqP" firstAttribute="bottom" secondItem="c5c-Bq-G2S" secondAttribute="bottom" id="mJp-nk-WAx"/>
-                            <constraint firstItem="c5c-Bq-G2S" firstAttribute="leading" secondItem="ggS-nn-d7d" secondAttribute="leading" constant="8" id="pdY-mY-d9k"/>
+                            <constraint firstItem="c5c-Bq-G2S" firstAttribute="leading" secondItem="ggS-nn-d7d" secondAttribute="leading" id="pdY-mY-d9k"/>
                             <constraint firstItem="l1i-8Z-SNs" firstAttribute="top" secondItem="d2a-ib-pdc" secondAttribute="top" id="qrJ-Br-dyC"/>
                             <constraint firstItem="ggS-nn-d7d" firstAttribute="trailing" secondItem="kAf-MG-rYQ" secondAttribute="trailing" id="ska-qy-N9B"/>
                             <constraint firstItem="adf-dQ-fqP" firstAttribute="leading" secondItem="ggS-nn-d7d" secondAttribute="leading" id="ve9-N1-x5d"/>
-                            <constraint firstItem="ggS-nn-d7d" firstAttribute="trailing" secondItem="c5c-Bq-G2S" secondAttribute="trailing" constant="8" id="wAU-ZL-yGp"/>
+                            <constraint firstItem="ggS-nn-d7d" firstAttribute="trailing" secondItem="c5c-Bq-G2S" secondAttribute="trailing" id="wAU-ZL-yGp"/>
                             <constraint firstItem="ggS-nn-d7d" firstAttribute="bottom" secondItem="d2a-ib-pdc" secondAttribute="bottom" constant="24" id="wmN-OR-XAA"/>
                             <constraint firstItem="Ejq-ki-BO2" firstAttribute="top" secondItem="ggS-nn-d7d" secondAttribute="top" id="x6z-rR-kHH"/>
                         </constraints>
@@ -166,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d4k-5A-jC2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892.30769230769226" y="59.004739336492889"/>
+            <point key="canvasLocation" x="890.625" y="58.098591549295776"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HBt-x5-Aha">
@@ -938,7 +938,7 @@ Contacter l'équipe Entourage.</string>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kTA-LT-lvR">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" name="BeigeClair"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="540" id="qz3-17-a58" customClass="OnboardingEndCell" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="320" height="540"/>
@@ -1004,7 +1004,7 @@ si posiible</string>
                                                                             </constraints>
                                                                         </imageView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" name="BeigeClair"/>
+                                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <constraints>
                                                                         <constraint firstItem="LW8-If-wdB" firstAttribute="leading" secondItem="3Co-q1-sf5" secondAttribute="leading" constant="28" id="4PQ-zZ-wzY"/>
                                                                         <constraint firstItem="Ifc-m8-MWH" firstAttribute="centerY" secondItem="LW8-If-wdB" secondAttribute="centerY" id="4kJ-ic-a9g"/>
@@ -1072,7 +1072,7 @@ si posiible</string>
                                                                             </constraints>
                                                                         </imageView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" name="BeigeClair"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstItem="c97-KY-tsG" firstAttribute="centerY" secondItem="rfN-f4-3gO" secondAttribute="centerY" id="5Il-8j-Srs"/>
                                                                         <constraint firstItem="rfN-f4-3gO" firstAttribute="leading" secondItem="TdD-rg-KJa" secondAttribute="leading" constant="28" id="IEq-Qh-GYm"/>
@@ -1162,7 +1162,7 @@ si posiible</string>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" name="BeigeClair"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstItem="sm8-qB-Zdt" firstAttribute="leading" secondItem="ysa-am-mnR" secondAttribute="trailing" id="1nw-p8-Z0f"/>
                                                                 <constraint firstAttribute="bottom" secondItem="XN3-gq-t2N" secondAttribute="bottom" constant="5" id="2EL-mY-Goc"/>
@@ -1204,7 +1204,7 @@ si posiible</string>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" name="BeigeClair"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="5dM-Vw-cnL"/>
                                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="evy-CC-dPB" secondAttribute="trailing" constant="28" id="O8F-py-daZ"/>
@@ -1236,8 +1236,10 @@ si posiible</string>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="ZG5-YS-WW2" firstAttribute="top" secondItem="4bU-N7-HwT" secondAttribute="top" id="VIe-Y1-MOP"/>
                                                 <constraint firstItem="ZG5-YS-WW2" firstAttribute="leading" secondItem="4bU-N7-HwT" secondAttribute="leading" constant="22" id="ZoK-B9-iMv"/>
@@ -1293,7 +1295,7 @@ si posiible</string>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lmy-A3-n82"/>
-                        <color key="backgroundColor" name="BeigeClair"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="lmy-A3-n82" firstAttribute="bottom" secondItem="kTA-LT-lvR" secondAttribute="bottom" id="CLA-Z5-2u9"/>
                             <constraint firstItem="kTA-LT-lvR" firstAttribute="leading" secondItem="IhX-46-ubK" secondAttribute="leading" id="Fr0-fP-Z6K"/>

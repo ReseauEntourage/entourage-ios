@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class ShareEntourageViewController: UIViewController {
     
@@ -78,14 +78,14 @@ class ShareEntourageViewController: UIViewController {
     }
     
     @IBAction func action_validate(_ sender: Any) {
-       // IHProgressHUD.show()
+       // SVProgressHUD.show()
        
         //TODO: a faire ?
 //        let _id = isSharePoi ? "\(poiId)" : feedItem!.uuid!
 //        OTShareEntourageService.postAddShare(entourageId: arraySharings[selectedIndex].uuid, uuid: _id,isPoi: isSharePoi) { (isOk) in
 //
 //            DispatchQueue.main.async {
-//                IHProgressHUD.dismiss()
+//                SVProgressHUD.dismiss()
 //
 //                SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "sendShare"))
 //                self.dismiss(animated: true, completion: nil)

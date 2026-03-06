@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
-import IHProgressHUD
+import SVProgressHUD
 
 class NeighborhoodCreateMainViewController: UIViewController {
     @IBOutlet weak var ui_page_control: MJCustomPageControl!
@@ -183,15 +183,15 @@ class NeighborhoodCreateMainViewController: UIViewController {
     
     //MARK: - Network -
     func createGroup() {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         NeighborhoodService.createNeighborhood(group: newNeighborhood) { group, error in
             Logger.print("***** groupe crée ? \(group) error: ? \(error)")
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if group != nil {
                 self.goEnd(neighborhood: group!)
             }
             else {
-                IHProgressHUD.showError(withStatus: "Erreur lors de la création du groupe. PLACEHOLDER")
+               SVProgressHUD.show(withStatus: "Erreur lors de la création du groupe. PLACEHOLDER")
             }
         }
     }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import IQKeyboardManagerSwift
 
 class NeighborhoodHomeViewController: UIViewController {
@@ -208,13 +208,13 @@ class NeighborhoodHomeViewController: UIViewController {
         if self.myNeighborhoods.isEmpty { self.ui_tableview.reloadData() }
         
         if !isReloadFromTab {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
         }
             
         self.isSearch = false
         self.isLoading = true
         NeighborhoodService.getNeighborhoodsForUserId(token,currentPage: currentPageMy, per: numberOfItemsForWS, completion: { groups, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             self.isfirstLoadingMyGroup = false
             if let groups = groups {
@@ -252,13 +252,13 @@ class NeighborhoodHomeViewController: UIViewController {
         if self.isLoading { return }
         
         if !isReloadFromTab {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
         }
         
         self.isSearch = false
         self.isLoading = true
         NeighborhoodService.getSuggestNeighborhoods(currentPage: currentPageDiscover, per: numberOfItemsForWS) { groups, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             if let groups = groups {
                 if self.currentPageDiscover > 1 {
@@ -291,7 +291,7 @@ class NeighborhoodHomeViewController: UIViewController {
     
     func getNeighborhoodsSearch(text:String) {
         if self.isLoading { return }
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         
         self.neighborhoodsSearch.removeAll()
         self.ui_tableview.reloadData()
@@ -300,7 +300,7 @@ class NeighborhoodHomeViewController: UIViewController {
         self.isLoading = true
         let encodedString = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         NeighborhoodService.getSearchNeighborhoods(text: encodedString, completion: { groups, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             self.isSearch = true
             self.isLoading = false

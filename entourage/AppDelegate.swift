@@ -13,14 +13,18 @@ import Firebase
 import FirebaseMessaging
 import IQKeyboardManagerSwift
 import SimpleKeychain
-
+import FirebaseAppCheck
+import GooglePlaces
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var environmentConfigManager:EnvironmentConfigurationManager?
-    
+    var homeEntryGatingDidPresentCriticalThisSession = false
+    var homeEntryGatingDidPresentNotifThisSession = false
+    var homeEntryGatingDidPresentEnhancedThisSession = false
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -31,8 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         
         initEnvironmentConfigManager()
-        configureGooglePlace()
         configureFirebase()
+        configureGooglePlace()
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
             if granted {
                 print("Notifications granted")
@@ -79,8 +83,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func configureGooglePlace() {
         guard let environmentConfigManager = environmentConfigManager else { return }
+
+        // 1. INITIALISER Places IMMÉDIATEMENT (sinon crash ailleurs)
         GMSPlacesClient.provideAPIKey(environmentConfigManager.GooglePlaceApiKey as String)
+
+        // 2. Configurer App Check provider factory
+        #if targetEnvironment(simulator)
+        let providerFactory = AppCheckDebugProviderFactory()
+        #else
+        let providerFactory = DeviceCheckProviderFactory()
+        #endif
+        AppCheck.setAppCheckProviderFactory(providerFactory)
+
+        // 3. Enregistrer AppCheckTokenProvider pour Google Places
+        if #available(iOS 13.0, *) {
+            GMSPlacesClient.setAppCheckTokenProvider(AppCheckTokenProvider())
+        }
     }
+
+
+
     
     private func configureFirebase() {
         guard let environmentConfigManager = environmentConfigManager else { return }
@@ -90,6 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseConfiguration.init().setLoggerLevel(.min)
         FirebaseApp.configure(options: firebaseOptions)
+       
         Analytics.setUserProperty(kUserAuthenticationLevelAuthenticated, forName: "AuthenticationLevel")
         
         FirebaseMessaging.Messaging.messaging().delegate = self

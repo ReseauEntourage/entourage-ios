@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class UserProfileDetailViewController: UIViewController {
     
@@ -97,7 +97,7 @@ class UserProfileDetailViewController: UIViewController {
 //MARK: - UserProfileDetailDelegate -
 extension UserProfileDetailViewController:UserProfileDetailDelegate {
     func showMessage(message: String, imageName: String?) {
-        IHProgressHUD.showSuccesswithStatus(message)
+        SVProgressHUD.show(withStatus:message)
         //TODO: on garde cet affichage de message ?
 //        ui_error_view.changeTitleAndImage(title: message,imageName: imageName)
 //        ui_error_view.show()
@@ -155,9 +155,9 @@ extension UserProfileDetailViewController: UITableViewDataSource,UITableViewDele
 extension UserProfileDetailViewController: MainUserProfileTopCellDelegate {
     func sendMessage() {
         guard let currentUserId = currentUserId else {return}
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         MessagingService.createOrGetConversation(userId: currentUserId) { conversation, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             
             if let conversation = conversation {
                 self.showConversation(conversation: conversation)
@@ -167,7 +167,7 @@ extension UserProfileDetailViewController: MainUserProfileTopCellDelegate {
             if let error = error {
                 errorMsg = error.message
             }
-            IHProgressHUD.showError(withStatus: errorMsg)
+           SVProgressHUD.show(withStatus: errorMsg)
         }
     }
     

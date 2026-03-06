@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 import SDWebImage
-import IHProgressHUD
+import SVProgressHUD
 import MapKit
 
 private enum EventListTableDTO {
@@ -191,7 +191,7 @@ class EventListMainV2ViewController: UIViewController {
 
     func loadForInit() {
         isLoading = true
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         if !isFromFilter {
             currentFilter = EventActionLocationFilters()
         }
@@ -294,7 +294,7 @@ class EventListMainV2ViewController: UIViewController {
 
         self.pullRefreshControl.endRefreshing()
         isLoading = false
-        IHProgressHUD.dismiss()
+        SVProgressHUD.dismiss()
         if self.startSearching {
             self.startSearching = false
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {

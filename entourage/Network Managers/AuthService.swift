@@ -7,6 +7,8 @@
 
 import Foundation
 import SimpleKeychain
+import CoreLocation
+
 
 struct AuthService: ParsingDataCodable {
     //MARK: - Create user account -
@@ -53,10 +55,10 @@ struct AuthService: ParsingDataCodable {
             userParameters["discovery_source"] = source
         }
         if let company = nonEmpty(user.company) {
-            userParameters["company"] = company
+            userParameters["sf_entreprise_id"] = company
         }
         if let event = nonEmpty(user.event) {
-            userParameters["event"] = event
+            userParameters["sf_campaign_id"] = event
         }
 
         let parameters: [String: Any] = ["user": userParameters]
@@ -166,5 +168,177 @@ struct AuthService: ParsingDataCodable {
             
             completion(nil,error)
         }
+    }
+}
+
+
+// MARK: - Onboarding zone (distance + adresse primaire)
+
+extension AuthService {
+
+    /// Met à jour le rayon de déplacement (travel_distance) via kAPIUpdateUser
+    static func updateTravelDistance(_ distanceKm: Int,
+                                     completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {
+            completion(EntourageNetworkError())
+            return
+        }
+
+        let endpoint = String(format: kAPIUpdateUser, token)
+
+        let userParameters: [String: Any] = [
+            "travel_distance": distanceKm
+        ]
+
+        let parameters: [String: Any] = ["user": userParameters]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        Logger.print("[AuthService] updateTravelDistance params: \(parameters)")
+
+        NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
+            let status = (resp as? HTTPURLResponse)?.statusCode ?? -1
+            Logger.print("[AuthService] updateTravelDistance status: \(status)")
+
+            if let data = data, let s = String(data: data, encoding: .utf8) {
+                Logger.print("[AuthService] updateTravelDistance body: \(s)")
+            }
+
+            guard error == nil, let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+    /// Met à jour l'adresse primaire (users/me/addresses/1) :
+    /// - si googlePlaceId non nul -> google_place_id
+    /// - sinon latitude / longitude / place_name
+    static func updatePrimaryAddress(
+        googlePlaceId: String?,
+        coordinate: CLLocationCoordinate2D?,
+        label: String?,
+        completion: @escaping (EntourageNetworkError?) -> Void
+    ) {
+        let tag = "[debug address]"
+
+        guard let token = UserDefaults.token else {
+            Logger.print("\(tag) ❌ missing token")
+            completion(EntourageNetworkError())
+            return
+        }
+
+        var endpoint = kAPIUpdateAddressPrimary
+        endpoint = String(format: endpoint, token)
+
+        var addressParams: [String: Any] = [:]
+
+        if let placeId = googlePlaceId,
+           !placeId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            addressParams["google_place_id"] = placeId
+        } else if let coord = coordinate {
+            addressParams["latitude"] = coord.latitude
+            addressParams["longitude"] = coord.longitude
+            if let label = label,
+               !label.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                addressParams["place_name"] = label
+            }
+        } else {
+            Logger.print("\(tag) ❌ no address data to send")
+            completion(EntourageNetworkError())
+            return
+        }
+
+        let parameters: [String: Any] = ["address": addressParams]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        // -------- REQUEST LOG --------
+        Logger.print("\(tag) ▶️ REQUEST")
+        Logger.print("\(tag) URL: \(endpoint)")
+        Logger.print("\(tag) METHOD: PUT")
+
+        if let json = String(data: bodyData, encoding: .utf8) {
+            Logger.print("\(tag) BODY: \(json)")
+        } else {
+            Logger.print("\(tag) BODY: <unreadable>")
+        }
+
+        NetworkManager.sharedInstance.requestPost(
+            endPoint: endpoint,
+            headers: nil,
+            body: bodyData
+        ) { data, resp, error in
+
+            let statusCode = (resp as? HTTPURLResponse)?.statusCode ?? -1
+
+            // -------- RESPONSE LOG --------
+            Logger.print("\(tag) ◀️ RESPONSE")
+            Logger.print("\(tag) STATUS CODE: \(statusCode)")
+
+            if let data = data, let body = String(data: data, encoding: .utf8) {
+                Logger.print("\(tag) RESPONSE BODY: \(body)")
+            } else {
+                Logger.print("\(tag) RESPONSE BODY: <empty>")
+            }
+
+            if let error = error {
+                Logger.print("\(tag) ERROR OBJECT: \(error)")
+                Logger.print("\(tag) ERROR MESSAGE: \(error.message ?? "nil")")
+            } else {
+                Logger.print("\(tag) ERROR OBJECT: nil")
+            }
+
+            guard error == nil, statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+
+}
+
+private func logRequest(tag: String,
+                               method: String,
+                               endpoint: String,
+                               headers: [String: String]?,
+                               body: Data?) {
+    Logger.print("[\(tag)] \(method) \(endpoint)")
+    if let headers = headers, !headers.isEmpty {
+        Logger.print("[\(tag)] headers: \(headers)")
+    } else {
+        Logger.print("[\(tag)] headers: nil")
+    }
+    if let body = body {
+        if let obj = try? JSONSerialization.jsonObject(with: body, options: []),
+           let pretty = try? JSONSerialization.data(withJSONObject: obj, options: [.prettyPrinted]),
+           let s = String(data: pretty, encoding: .utf8) {
+            Logger.print("[\(tag)] body:\n\(s)")
+        } else if let s = String(data: body, encoding: .utf8) {
+            Logger.print("[\(tag)] body(raw):\n\(s)")
+        } else {
+            Logger.print("[\(tag)] body: <\(body.count) bytes>")
+        }
+    } else {
+        Logger.print("[\(tag)] body: nil")
+    }
+}
+
+private func logResponse(tag: String,
+                                resp: URLResponse?,
+                                data: Data?,
+                                error: EntourageNetworkError?) {
+    let status = (resp as? HTTPURLResponse)?.statusCode ?? -1
+    Logger.print("[\(tag)] status: \(status)")
+    if let data = data, let s = String(data: data, encoding: .utf8) {
+        Logger.print("[\(tag)] response body:\n\(s)")
+    }
+    if let error = error {
+        Logger.print("[\(tag)] error: \(String(describing: error.message))")
+    } else {
+        Logger.print("[\(tag)] error: nil")
     }
 }

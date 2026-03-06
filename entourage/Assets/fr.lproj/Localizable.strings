@@ -156,7 +156,7 @@
 //Phase 3
 "onboard_phone_title" = "Enchantés, %@ !";
 
-"onboard_phase3_title" = "En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ?";
+"onboard_phase3_title" = "Choisssez votre profil";
 "onboard_title_entour" = "Entourer";
 "onboard_subtitle_entour" = "Je souhaite proposer du soutien à mes voisin(e)s qui en ont besoin.";
 "onboard_title_beentour" = "Être entouré";
@@ -586,8 +586,8 @@
 "suppress_message_cell_subtitle" = "";
 "suppress_comment_cell_subtitle" = "";
 
-"deleted_message" = "      Ce message a été supprimé";
-"deleted_comment" = "      Ce commentaire a été supprimé";
+"deleted_message" = "Ce message a été supprimé";
+"deleted_comment" = "Ce message a été supprimé";
 
 /********
  GROUP
@@ -1749,7 +1749,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "event_discut_title" = "Retrouvez toutes les informations de l’événement ici";
 "event_button_add_calendar" = "Ajouter à l'agenda";
-"onboarding_phase_three_question_contribution" = "En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ?";
+"onboarding_phase_three_question_contribution" = "Choisissez votre profil";
 "onboarding_phase_three_option_entourer" = "Entourer";
 "onboarding_phase_three_option_entourer_description" = "Je souhaite proposer du soutien à mes voisin(e)s qui en ont besoin.";
 "onboarding_phase_three_option_etre_entoure" = "Être entouré";
@@ -1878,3 +1878,47 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "photo_consent_decline" = "Je n’accepte pas";
 "photo_consent_accept"  = "J’accepte";
 "photo_consent_body" = "Conformément aux dispositions relatives au droit à l’image, j’autorise Entourage et ses prestataires techniques à réaliser des prises de vue photographiques, des vidéos ou des captations numériques lors des évènements de l'association Entourage pendant une durée illimitée, jusqu'à ce que je rétracte mon consentement.\n\nLes images pourront être exploitées et utilisées directement par la structure sous toute forme et tous supports, pour un territoire illimité, sans limitation de durée, intégralement ou par extraits et notamment : presse, livre, supports numériques, exposition, publicité, projection publique, concours, site internet, réseaux sociaux.\n\nLe bénéficiaire de l’autorisation s’interdit expressément de procéder à une exploitation des photographies susceptible de porter atteinte à la vie privée ou à la réputation, et d’utiliser les photographies, vidéos ou captations numériques de la présente, dans tout support ou toute exploitation préjudiciable.\n\nJe reconnais être entièrement rempli de mes droits et je ne pourrai prétendre à aucune rémunération pour l’exploitation des droits visés aux présentes.\n\nJe garantis que ni moi, ni le cas échéant la personne que je représente, n’est lié par un contrat exclusif relatif à l’utilisation de mon image ou de mon nom.\n\nPour tout litige né de l'interprétation ou de l’exécution des présentes, il est fait attribution expresse de juridiction aux tribunaux français.";
+
+"onboarding_zone_title" = "Votre localisation";
+"onboarding_zone_subtitle" = "Cette information nous permet d’affiner les actions qui vous seront proposées près de chez vous.";
+"onboarding_zone_choose_city" = "Choisir une ville";
+"onboarding_zone_radius_title" = "Dans un rayon de";
+
+
+"onboard_sms_view_title" = "Entrez le code reçu par SMS";
+"onboard_sms_view_sub" = "Un SMS vient de vous être envoyé au :";
+"onboard_sms_view_modify" = "Modifier";
+"onboard_sms_view_wait_countdown" = "Vous pourrez demander un nouveau code dans %@";
+"onboard_sms_view_wait_title" = "Vous n’avez pas reçu votre code ?";
+"onboard_retry_view_link" = "Recevoir un nouveau code par SMS";
+"onboard_help_view_title" = "Besoin d’aide ?";
+"onboard_help_view_link" = "Contacter l’équipe Entourage";
+"terms_and_conditions" = "En cliquant sur suivant vous acceptez les <a href='https://...'>Conditions générales d’utilisation</a> et la <a href='https://...'>Politique de confidentialité</a>";
+
+"onboard_phase3_asso_title" = "Je travaille au sein d’une association";
+"onboard_phase3_asso_desc" = "Je souhaite collaborer avec Entourage, créer des événements et orienter des bénéficiaires.";
+"onboarding_zone_city_title" = "Ville";
+"onboarding_zone_confidential" = "L’adresse est confidentielle et ne sera pas communiquée";
+"onboard_sms_view_wait_countdown" = "Vous pourrez demander un nouveau code dans %@";
+"onboard_sms_view_wait_ready" = "Vous pouvez demander un nouveau code.";
+
+"onboard_asso_title" = "Sélectionnez votre association";
+"onboard_asso_subtitle" = "Nom de votre association";
+"onboard_asso_dropdown_hint" = "Sélectionner dans la liste";
+"onboard_asso_info" = "Votre association ne figure pas dans la liste.\nCréez-en une nouvelle";
+"onboard_asso_other_label" = "Nom de votre association";
+"onboard_asso_other_placeholder" = "Ex. : Utopia 56 ou Femmes solidaires";
+"onboard_asso_other_required" = "Merci d’indiquer le nom de votre association.";
+"onboard_asso_pick_first" = "Veuillez sélectionner une association.";
+
+"onboard_phase3_beentour_title" = "Je souhaite être entouré";
+"onboard_phase3_beentour_sub" = "Je traverse une période difficile (recherche d’emploi, période de doute, situation précaire…) et j’aimerais rencontrer des personnes pour me soutenir.";
+
+"onboard_phase3_entour_title" = "Je souhaite aider près de chez moi";
+"onboard_phase3_entour_sub" = "J’aimerais pouvoir m’investir et soutenir des personnes proches de mon lieu de vie.";
+
+"onboard_phase3_asso_title" = "Je travaille au sein d’une association";
+"onboard_phase3_asso_desc" = "Je souhaite collaborer avec Entourage, créer des événements et orienter des bénéficiaires.";
+"title_new_message" = "nouveau message";
+"title_new_message_plural" = "nouveaux messages";
+"you" = "Vous";

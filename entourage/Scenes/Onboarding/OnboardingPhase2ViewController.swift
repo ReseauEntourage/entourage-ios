@@ -2,173 +2,172 @@
 //  OnboardingPhase2ViewController.swift
 //  entourage
 //
-//  Created by You on 30/11/2022.
-//
 
 import UIKit
-import MessageUI
-import IHProgressHUD
+import SwiftUI
 
-class OnboardingPhase2ViewController: UIViewController {
+final class OnboardingPhase2ViewController: UIViewController {
 
-    @IBOutlet weak var ui_label_description: UILabel!
-    
-    @IBOutlet weak var ui_tf_code: OTCustomTextfield!
-    @IBOutlet weak var ui_bt_nocode: UIButton!
-    @IBOutlet weak var ui_label_phoneNb: UILabel!
-    @IBOutlet weak var ui_label_countdown: UILabel!
-    @IBOutlet weak var ui_bt_modify: UIButton!
-    @IBOutlet weak var ui_label_help: UILabel!
-    
-    @IBOutlet weak var ui_view_bt_help: UIView!
-    
-    var tempCode:String? = nil
-    var tempPhone = ""
-    let timeoutInfo = 60
-    var timeOut = 60
-    var countDownTimer:Timer? = nil
-    
-    weak var pageDelegate:OnboardingDelegate? = nil
-    
-    
+    // MARK: - Legacy properties conservées
+    var tempCode: String? = nil
+
+    var tempPhone: String = "" {
+        didSet {
+            reloadSwiftUIView()
+        }
+    }
+
+    /// Durée avant de pouvoir redemander un code (en secondes)
+    let timeoutInfo: Int = 60
+
+    /// Compte à rebours courant
+    private(set) var timeOut: Int = 60
+
+    /// Timer iOS qui décrémente `timeOut`
+    private var countDownTimer: Timer? = nil
+
+    weak var pageDelegate: OnboardingDelegate? {
+        didSet {
+            reloadSwiftUIView()
+        }
+    }
+
+    // MARK: - SwiftUI hosting
+    private var hostingController: UIHostingController<OnboardingSMSCodeView>?
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        ui_tf_code.activateToolBarWithTitle( "close".localized)
-        ui_tf_code.delegate = self
-        ui_tf_code.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 13))
-        
-        ui_label_description.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
-        ui_label_phoneNb.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
-        ui_bt_modify.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15,color: .appOrangeLight))
-        
-        ui_bt_nocode.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appOrange))
-        ui_label_countdown.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appGris112))
-
-        
-        ui_bt_nocode.layer.cornerRadius = ui_bt_nocode.frame.height / 2
-        ui_bt_nocode.layer.borderColor = UIColor.appOrange.cgColor
-        ui_bt_nocode.layer.borderWidth = 1
-        
+        view.backgroundColor = .clear
         timeOut = timeoutInfo
-        countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        setupSwiftUIView()
+        startTimerIfNeeded()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if timeOut == 0 || !((countDownTimer?.isValid) != nil)  {
-            timeOut = timeOut == 0 ? timeoutInfo : timeOut
-            self.ui_label_countdown.isHidden = false
-            countDownTimer?.invalidate()
-            countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        }
-        
-        populateViews()
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Au cas où on revient sur l’écran
+        startTimerIfNeeded()
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        cancelTimer()
+    }
+
+    deinit {
+        cancelTimer()
+    }
+
+    // MARK: - Timer
+
+    /// Démarre le timer si nécessaire
+    private func startTimerIfNeeded() {
+        // Déjà en cours
+        guard countDownTimer == nil else { return }
+
+        // Si déjà à zéro, on ne relance pas
+        if timeOut <= 0 {
+            timeOut = 0
+            reloadSwiftUIView()
+            return
+        }
+
+        // Normalisation de la valeur
+        if timeOut > timeoutInfo || timeOut <= 0 {
+            timeOut = timeoutInfo
+        }
+
+        reloadSwiftUIView()
+
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] t in
+            guard let self = self else {
+                t.invalidate()
+                return
+            }
+
+            self.timeOut -= 1
+
+            if self.timeOut <= 0 {
+                self.timeOut = 0
+                t.invalidate()
+                self.countDownTimer = nil
+            }
+
+            self.reloadSwiftUIView()
+        }
+
+        // Pour que le timer continue pendant les interactions
+        RunLoop.main.add(timer, forMode: .common)
+        countDownTimer = timer
+    }
+
+    /// Redémarre le timer depuis timeoutInfo
+    private func restartTimer() {
+        cancelTimer()
+        timeOut = timeoutInfo
+        startTimerIfNeeded()
+    }
+
+    /// Arrête le timer
+    private func cancelTimer() {
         countDownTimer?.invalidate()
         countDownTimer = nil
     }
-    
-    //MARK: - Methods -
-    @objc func updateTimer() {
-        timeOut = timeOut - 1
-        if timeOut == 0 {
-            countDownTimer?.invalidate()
-            countDownTimer = nil
-            DispatchQueue.main.async {
-                UIView.performWithoutAnimation {
-                    self.ui_bt_nocode.setTitle( "onboard_sms_wait_retry_end".localized, for: .normal)
-                }
-                self.ui_bt_modify.isHidden = false
-                self.ui_bt_nocode.isHidden = false
-                self.ui_label_countdown.isHidden = true
+
+    // MARK: - Setup SwiftUI
+
+    private func makeRootView() -> OnboardingSMSCodeView {
+        let phone = tempPhone
+        let remaining = max(timeOut, 0)
+        let canRetry = (remaining == 0)
+
+        let view = OnboardingSMSCodeView(
+            phone: phone,
+            timeRemaining: remaining,
+            canRetry: canRetry,
+            onCodeFilled: { [weak self] code in
+                self?.pageDelegate?.sendCode(code: code)
+            },
+            onRequestNewCode: { [weak self] in
+                guard let self = self else { return }
+
+                // On ne laisse pas la vue déclencher si ce n’est pas permis
+                guard self.timeOut == 0 else { return }
+
+                self.pageDelegate?.requestNewcode()
+                self.restartTimer()
+            },
+            onModifyPhone: { [weak self] in
+                self?.pageDelegate?.goMain()
             }
-        }
-        else {
-            let _time = timeOut < 10 ? "00:0\(timeOut)" : "00:\(timeOut)"
-            let _retyTxt = String.init(format:  "onboard_sms_wait_retry".localized , _time)
-            DispatchQueue.main.async {
-                self.ui_label_countdown.text = _retyTxt
-            }
-        }
-    }
-    
-    func populateViews() {
-         
-        self.ui_bt_nocode.isHidden = true
-        
-        let _time = timeOut < 10 ? "00:0\(timeOut)" : "00:\(timeOut)"
-        let _retyTxt = String.init(format:  "onboard_sms_wait_retry".localized , "00:\(_time)".localized)
-        ui_label_countdown.text = _retyTxt
-        
-        ui_bt_modify.setTitle( "onboard_sms_modify".localized, for: .normal)
-        ui_bt_modify.isHidden = true
-        
-        ui_label_description.text =  "onboard_sms_sub".localized
-        ui_label_phoneNb.text = tempPhone
-        
-        ui_label_help.attributedText = Utils.formatStringUnderline(textString: "onboarding_help_label".localized, textColor: .appOrange, font: ApplicationTheme.getFontNunitoRegular(size: 14))
-    }
-    
-    
-    //MARK: - IBActions -
-    @IBAction func action_nocode(_ sender: Any) {
-        if timeOut > 0 {
-            let alertvc = UIAlertController.init(title:  "attention_pop_title".localized, message: String.init(format:  "onboard_sms_pop_alert".localized, timeOut), preferredStyle: .alert)
-            
-            let action = UIAlertAction.init(title: "OK".localized, style: .default, handler: nil)
-            alertvc.addAction(action)
-            
-            self.navigationController?.present(alertvc, animated: true, completion: nil)
-        }
-        else {
-            pageDelegate?.requestNewcode()
-        }
-    }
-    
-    @IBAction func tap_background(_ sender: Any) {
-        ui_tf_code.resignFirstResponder()
-    }
-    
-    @IBAction func action_modify(_ sender: Any) {
-        pageDelegate?.goMain()
-    }
-    
-    @IBAction func action_help(_ sender: Any) {
-        if MFMailComposeViewController.canSendMail()  {
-            
-            let controller = MFMailComposeViewController()
-            controller.setMessageBody("", isHTML: true)
-            controller.setToRecipients([emailContact])
-            controller.mailComposeDelegate = self
-            self.present(controller, animated: true, completion: nil)
-        }
-        else {
-            IHProgressHUD.showError(withStatus:  "about_email_notavailable".localized)
-        }
+        )
+
+        return view
     }
 
-}
+    private func setupSwiftUIView() {
+        let root = makeRootView()
+        let host = UIHostingController(rootView: root)
 
+        addChild(host)
+        host.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(host.view)
 
-extension OnboardingPhase2ViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        self.dismiss(animated: true, completion: nil)
+        NSLayoutConstraint.activate([
+            host.view.topAnchor.constraint(equalTo: view.topAnchor),
+            host.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            host.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            host.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+
+        host.didMove(toParent: self)
+        hostingController = host
     }
-}
 
-//MARK: - UITextfieldDelegate -
-extension OnboardingPhase2ViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.tempCode = textField.text
-        
-        pageDelegate?.sendCode(code: self.tempCode ?? "")
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        pageDelegate?.sendCode(code: self.tempCode ?? "")
-        textField.resignFirstResponder()
-        return true
+    private func reloadSwiftUIView() {
+        guard let host = hostingController else { return }
+        host.rootView = makeRootView()
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import MapKit
 
 class MainGuideViewController: UIViewController {
@@ -408,7 +408,7 @@ class MainGuideViewController: UIViewController {
     func getPoiList() {
         if isAllreadyCall { return }
         isAllreadyCall = true
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         
         let latitude = mapView.centerCoordinate.latitude
         let longitude = mapView.centerCoordinate.longitude
@@ -416,7 +416,7 @@ class MainGuideViewController: UIViewController {
         let categories = self.solidarityFilter.getActiveFilters()
         
         PoiService.retrieveClustersAndPois(latitude: latitude, longitude: longitude, distance: distance, categoryIDs: categories, partnersFilters: nil) { [weak self] response, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             guard let self = self else { return }
             self.isAllreadyCall = false
             

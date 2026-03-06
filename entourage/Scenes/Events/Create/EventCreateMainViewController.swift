@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
-import IHProgressHUD
+import SVProgressHUD
 
 class EventCreateMainViewController: UIViewController {
     @IBOutlet weak var ui_page_control: MJCustomPageControl!
@@ -196,14 +196,14 @@ class EventCreateMainViewController: UIViewController {
     
     //MARK: - Network -
     private func createEvent() {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         Logger.print("***** createEvent \(newEvent.dictionaryForWS())")
         EventService.createEvent(event: newEvent) { event, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if event != nil {
                 self.goEnd(event: event!)
             }else {
-                IHProgressHUD.showError(withStatus: "event_create_ok".localized)
+               SVProgressHUD.show(withStatus: "event_create_ok".localized)
             }
         }
     }

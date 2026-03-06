@@ -6,7 +6,7 @@
 //
 
 import MessageUI
-import IHProgressHUD
+import SVProgressHUD
 
 class PartnerDetailViewController: UIViewController {
     
@@ -187,7 +187,7 @@ extension PartnerDetailViewController: PartnerDetailInfoCellDelegate {
             self.present(controller, animated: true, completion: nil)
         }
         else {
-            IHProgressHUD.showError(withStatus: "about_email_notavailable".localized)
+           SVProgressHUD.show(withStatus: "about_email_notavailable".localized)
         }
     }
     

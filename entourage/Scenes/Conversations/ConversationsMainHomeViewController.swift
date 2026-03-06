@@ -1,5 +1,5 @@
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 enum ConversationMainDTO {
     case notificationRequest
@@ -94,12 +94,12 @@ class ConversationsMainHomeViewController: UIViewController {
             isLastPage = false
         }
 
-        IHProgressHUD.show()
+        SVProgressHUD.show()
 
         // 1️⃣ Si on est sur “Smalltalk”, on utilise l’ancien service
         if selectedFilter == "event_conv_filter_smalltalks".localized {
             SmallTalkService.listSmallTalks { smallTalks, error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 self.isFetching = false
                 guard let smallTalks = smallTalks else { return }
                 // On retourne en DTO .smalltalk pour que cellForRowAt et didSelectRowAt
@@ -114,7 +114,7 @@ class ConversationsMainHomeViewController: UIViewController {
         MessagingService.getConversationMemberships(type: typeParam,
                                                    page: currentPage,
                                                    per: perPage) { memberships, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.isFetching = false
             guard let memberships = memberships else { return }
 
@@ -169,8 +169,15 @@ class ConversationsMainHomeViewController: UIViewController {
         conv.numberUnreadMessages = membership.numberOfUnreadMessages
         conv.members_count = membership.numberOfPeople
         conv.imageUrl = membership.imageUrl
+
+        // 🔥 RÈGLE : s'il n'y a qu'UNE personne dans la conv -> c'est toi seul => "Vous"
+        if (membership.numberOfPeople ?? 0) <= 1 {
+            conv.title = "Vous"
+        }
+
         return conv
     }
+
 
     func loadDTO(conversations: [Conversation], reset: Bool) {
         if reset {
@@ -247,8 +254,13 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             let currentUserId = UserDefaults.currentUser?.sid
             let filteredMembers = conversation.members?.filter { $0.uid != currentUserId } ?? []
 
-            let memberNames = filteredMembers.compactMap { $0.username }.joined(separator: " • ")
-            conversation.title = memberNames
+            if filteredMembers.isEmpty {
+                // 👇 Aucun autre membre que moi
+                conversation.title = "Vous"
+            } else {
+                let memberNames = filteredMembers.compactMap { $0.username }.joined(separator: " • ")
+                conversation.title = memberNames
+            }
 
             cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
             return cell

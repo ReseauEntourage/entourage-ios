@@ -4,7 +4,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class ConversationListMembersViewController: BasePopViewController {
 
@@ -87,9 +87,9 @@ class ConversationListMembersViewController: BasePopViewController {
                 goBack()
                 return
             }
-            IHProgressHUD.show()
+            SVProgressHUD.show()
             MessagingService.getDetailConversation(conversationId: "\(convoId)") { [weak self] conversation, error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 guard let self = self, let conversation = conversation else {
                     self?.goBack()
                     return
@@ -103,11 +103,11 @@ class ConversationListMembersViewController: BasePopViewController {
     private func loadParticipants(page: Int) {
         guard !isLoading, nextPage != nil || page == 1 else { return }
         isLoading = true
-        IHProgressHUD.show()
+        SVProgressHUD.show()
 
         let completion: ([MemberLight]?, Int?, EntourageNetworkError?) -> Void = { [weak self] pageUsers, next, error in
             guard let self = self else { return }
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.isLoading = false
 
             if let pageUsers = pageUsers {
@@ -312,15 +312,15 @@ extension ConversationListMembersViewController: NeighborhoodUserCellDelegate {
                 // Popup consentement, puis acceptPhoto -> participate
                 PhotoConsentPopupViewController.present(over: self, onAccept: { [weak self] in
                     guard let self = self else { return }
-                    IHProgressHUD.show()
+                    SVProgressHUD.show()
 
                     EventService.acceptPhotoForUser(eventId: eid, userId: userId) { _, _ in
                         EventService.participateForUser(eventId: eid, userId: userId) { member, error in
-                            IHProgressHUD.dismiss()
+                            SVProgressHUD.dismiss()
                             if member != nil {
                                 completion(true) // garder coché
                             } else {
-                                IHProgressHUD.showError(withStatus: error?.message ?? "Une erreur est survenue.")
+                               SVProgressHUD.show(withStatus: error?.message ?? "Une erreur est survenue.")
                                 completion(false) // rétablir décoché
                             }
                         }
@@ -331,13 +331,13 @@ extension ConversationListMembersViewController: NeighborhoodUserCellDelegate {
 
             } else {
                 // Annuler la participation
-                IHProgressHUD.show()
+                SVProgressHUD.show()
                 EventService.cancelParticipationForUser(eventId: eid, userId: userId) { success, error in
-                    IHProgressHUD.dismiss()
+                    SVProgressHUD.dismiss()
                     if success {
                         completion(true) // garder décoché
                     } else {
-                        IHProgressHUD.showError(withStatus: error?.message ?? "Impossible d’annuler la participation.")
+                       SVProgressHUD.show(withStatus: error?.message ?? "Impossible d’annuler la participation.")
                         completion(false) // rétablir coché
                     }
                 }
@@ -346,7 +346,7 @@ extension ConversationListMembersViewController: NeighborhoodUserCellDelegate {
     
     func showSendMessageToUserForPosition(_ position: Int) {
         let user = isSearch ? usersSearch[position] : users[position]
-        IHProgressHUD.show()
+        SVProgressHUD.show()
 
         if isSmallTalkMode {
             let sb = UIStoryboard(name: StoryboardName.messages, bundle: nil)
@@ -356,17 +356,14 @@ extension ConversationListMembersViewController: NeighborhoodUserCellDelegate {
                 vc.setupFromSmallTalk(smallTalkId: smallTalkIdInt,
                                       title: "Bonnes ondes",
                                       delegate: nil)
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 present(vc, animated: true)
             }
         } else {
             MessagingService.createOrGetConversation(userId: "\(user.uid)") { [weak self] conversation, error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 guard let self = self, let conv = conversation else {
-                    IHProgressHUD.showError(
-                        withStatus: error?.message
-                            ?? "message_error_create_conversation".localized
-                    )
+
                     return
                 }
                 self.presentConversation(conv, username: user.username)

@@ -10,7 +10,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
-import IHProgressHUD
+import SVProgressHUD
 import Photos
 import AVFoundation
 
@@ -724,11 +724,11 @@ class ConversationDetailMessagesViewController: UIViewController {
         if isLoading { return }
         isLoading = true
 
-        DispatchQueue.main.async { IHProgressHUD.show() }
+        DispatchQueue.main.async { SVProgressHUD.show() }
 
         SmallTalkService.getSmallTalk(id: smallTalkId) { smallTalk, error in
             guard let smallTalk = smallTalk else {
-                DispatchQueue.main.async { IHProgressHUD.dismiss() }
+                DispatchQueue.main.async { SVProgressHUD.dismiss() }
                 self.isLoading = false
                 return
             }
@@ -759,7 +759,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
             SmallTalkService.listMessages(id: self.smallTalkId, page: self.currentPage, per: self.numberOfItemsForWS) { messages, _ in
                 DispatchQueue.main.async {
-                    IHProgressHUD.dismiss()
+                    SVProgressHUD.dismiss()
                     self.isLoading = false
 
                     guard let messages = messages else { return }
@@ -914,7 +914,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
         // 3. HUD uniquement si ce n’est PAS un refresh silencieux
         if !isSilentRefresh {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
         }
 
         // 4. Identifiant de la conversation (id ou hash)
@@ -935,7 +935,7 @@ class ConversationDetailMessagesViewController: UIViewController {
             guard let self = self else { return }
 
             // 6. États de fin de chargement
-            if !self.isSilentRefresh { IHProgressHUD.dismiss() }
+            if !self.isSilentRefresh { SVProgressHUD.dismiss() }
             defer {
                 self.isSilentRefresh = false
                 self.setLoadingFalse()

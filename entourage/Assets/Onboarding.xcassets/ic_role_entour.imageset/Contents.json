@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_role_entour.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

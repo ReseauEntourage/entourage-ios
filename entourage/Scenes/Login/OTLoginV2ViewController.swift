@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import IQKeyboardManagerSwift
 import SimpleKeychain
 
@@ -236,10 +236,10 @@ class OTLoginV2ViewController: UIViewController {
     //MARK: - Network -
     func login(phone:String, code:String) {
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         
         AuthService.postLogin(phone: phone, password: code) { [weak self] (user, error, isFirstLogin) in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             
             if let error = error {
                 Logger.print("Erreur Network login: \(String(describing: error))")
@@ -307,12 +307,12 @@ class OTLoginV2ViewController: UIViewController {
     }
     
     func resendCode(phone:String) {
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         
         AuthService.regenerateSecretCode(phone: phone) { [weak self] error in
             Logger.print("***** return resned code ;) error? \(error)")
             if let error = error {
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 var _message =  "requestNotSent".localized
                 if error.code.contains("USER_NOT_FOUND") {
                     _message =  "error_login_resendCode_unknow".localized
@@ -326,8 +326,8 @@ class OTLoginV2ViewController: UIViewController {
                 self?.navigationController?.present(alertvc, animated: true, completion: nil)
             }
             else {
-                IHProgressHUD.dismiss()
-                IHProgressHUD.showSuccesswithStatus( "requestSent".localized)
+                SVProgressHUD.dismiss()
+                SVProgressHUD.show(withStatus: "requestSent".localized)
                 self?.startTimer()
             }
         }

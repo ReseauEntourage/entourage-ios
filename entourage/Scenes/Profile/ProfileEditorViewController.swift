@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
-import IHProgressHUD
+import SVProgressHUD
 
 class ProfileEditorViewController: UIViewController {
     
@@ -210,9 +210,9 @@ class ProfileEditorViewController: UIViewController {
         
         //[OTLogger logEvent:@"SaveProfileEdits"];
         
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         UserService.updateUser(user: newUser, isOnboarding: false) { user, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if let _ = error?.error {
                // self.showError(message: "editUser_error_profile".localized)
                 self.ui_tableview.reloadData()

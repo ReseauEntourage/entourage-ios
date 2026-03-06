@@ -17,7 +17,7 @@ let kAPIUpdateAddressPrimary = "users/me/addresses/1?token=%@"
 let kAPIUpdateAddressSecondary = "users/me/addresses/2?token=%@"
 let kAPIUpdateUser = "users/me.json?token=%@"
 let kAPIDeleteUser = "users/me?token=%@"
-let kAPIUpdateUserPartner = "partners/join_request?token=%@"
+let kAPIUpdateUserPartner = "partners/join?token=%@"
 let kAPIUpdateAccountPartner = "users/me/following?token=%@"
 let kAPIReportUser = "users/%@/report?token=%@"
 let kAPIGetDetailUser = "users/%@?token=%@"
@@ -158,6 +158,7 @@ let kAPIConversationGetPrivateConversations = "conversations/privates?token=%@&p
 let kAPIConversationUsersList = "conversations/%@/users?token=%@"
 //Images
 let kAPIConversationImages = "conversations/%@/images?token=%@"
+let kAPIConversationImagesPaged = "conversations/%@/images?token=%@&page=%d&per=%d"
 let kAPIConversationImageSingle = "conversations/%@/images/%@?token=%@"
 
 //Chat message
@@ -224,4 +225,5 @@ let kAPISmallTalkUsers                    = "smalltalks/%@/users"
 let kAPISmallTalkLeave                    = "smalltalks/%@/users"
 let kAPISmallTalkMessages                 = "smalltalks/%@/chat_messages"
 let kAPISmallTalkMessageDetail            = "smalltalks/%@/chat_messages/%@"
+let kAPICreateAssociation                 = "partners?token=%@"
 

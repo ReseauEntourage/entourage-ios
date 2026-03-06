@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import MapKit
 
 private enum GroupListTableDTO {
@@ -157,7 +157,7 @@ class NeighborhoodV2ViewController: UIViewController {
     func loadForInit() {
         isLoading = true
         isLastPage = false
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         self.currentPageMy = 0
         self.currentPageDiscover = 0
         self.myGroups.removeAll()
@@ -330,7 +330,7 @@ class NeighborhoodV2ViewController: UIViewController {
         }
         self.pullRefreshControl.endRefreshing()
         isLoading = false
-        IHProgressHUD.dismiss()
+        SVProgressHUD.dismiss()
         if self.startSearching {
             self.startSearching = false
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {

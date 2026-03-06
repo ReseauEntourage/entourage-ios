@@ -130,6 +130,8 @@ class EnhancedFullSizeCell: UITableViewCell {
         if let subtitle = subtitleProvider?(), !subtitle.isEmpty {
             ui_label_desc_phase_3.text = subtitle
             ui_label_desc_phase_3.isHidden = false
+            ui_label_desc_phase_3.textColor = UIColor.appGreyTextDeleted
+            ui_label_desc_phase_3.setFontBody(size: 13)
         } else {
             ui_label_desc_phase_3.isHidden = true
             ui_label_desc_phase_3.text = nil

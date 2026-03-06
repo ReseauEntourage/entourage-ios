@@ -7,7 +7,7 @@
 
 import UIKit
 import FirebaseMessaging
-import IHProgressHUD
+import SVProgressHUD
 
 class MainParamsViewController: UIViewController {
     
@@ -68,10 +68,10 @@ extension MainParamsViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 1 && isStaging {
             if let _token = tokenPush {
                 UIPasteboard.general.string = _token
-                IHProgressHUD.showInfowithStatus("Information copiée dans le presse-papier")
+                SVProgressHUD.show(withStatus:"Information copiée dans le presse-papier")
             }
             else {
-                IHProgressHUD.showInfowithStatus("pas de token")
+                SVProgressHUD.show(withStatus:"pas de token")
             }
             guard let token = UserDefaults.token else {return}
             let alertController = UIAlertController(title: "Bonjour testeur", message: "Choisi un jour", preferredStyle: .alert)
@@ -169,12 +169,12 @@ extension MainParamsViewController: MJAlertControllerDelegate {
             UserService.deleteUserAccount { error in
                 if let error = error {
                     let errorMessage = String.init(format: "params_account_not_deleted".localized, error.message)
-                    IHProgressHUD.showError(withStatus: errorMessage)
+                   SVProgressHUD.show(withStatus: errorMessage)
                     
                     return
                 }
                 NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)
-                IHProgressHUD.showSuccesswithStatus("params_account_deleted".localized)
+                SVProgressHUD.show(withStatus:"params_account_deleted".localized)
             }
         case .Logout:
             NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)

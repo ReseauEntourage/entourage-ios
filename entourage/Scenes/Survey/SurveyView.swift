@@ -49,6 +49,7 @@ class SurveyOptionView: UIView {
         // Configuration du questionLabel
         questionLabel.font = UIFont.systemFont(ofSize: 13)
         questionLabel.textColor = .black
+        questionLabel.numberOfLines = 0
         
         // Configuration du progressBar
         progressBar.progressTintColor = .appOrange

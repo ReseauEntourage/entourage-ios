@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import GooglePlaces
 
 class ParamsChoosePlaceViewController: BasePopViewController {

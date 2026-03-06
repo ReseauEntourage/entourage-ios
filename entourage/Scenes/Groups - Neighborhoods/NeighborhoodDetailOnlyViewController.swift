@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class NeighborhoodDetailOnlyViewController: UIViewController {
     
@@ -52,9 +52,9 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
             return
         }
         if isAdd {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
             NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 if let user = user {
                     let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
                     self.neighborhood?.members.append(member)
@@ -100,9 +100,9 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
         guard let neighborhood = neighborhood else {
             return
         }
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         NeighborhoodService.leaveNeighborhood(groupId: neighborhood.uid, userId: UserDefaults.currentUser!.sid) { group, error in
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             if error == nil {
                 self.neighborhood?.members.removeAll(where: {$0.uid == UserDefaults.currentUser!.sid})
                 let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount - 1 : 0

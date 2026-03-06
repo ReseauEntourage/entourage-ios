@@ -9,9 +9,14 @@ extension Notification.Name {
     static let onboardingPhase1CanProceedChanged = Notification.Name("onboardingPhase1CanProceedChanged")
 }
 
-// MARK: - Fonts SwiftUI (Quicksand-Bold & NunitoSans-Regular)
+// MARK: - Fonts SwiftUI (Quicksand‑Bold & NunitoSans‑Regular)
+//
+// Toutes les polices utilisées par les vues de l’onboarding sont
+// centralisées ici afin de garantir une cohérence visuelle. Les titres
+// utilisent Quicksand‑Bold en taille 20 et les textes utilisent
+// NunitoSans‑Regular en taille 15.
 private extension Font {
-    static func entourageTitle(_ size: CGFloat = 15) -> Font {
+    static func entourageTitle(_ size: CGFloat = 20) -> Font {
         .custom("Quicksand-Bold", size: size)
     }
     static func entourageBody(_ size: CGFloat = 15) -> Font {
@@ -27,6 +32,11 @@ extension UIApplication {
 }
 
 // MARK: - UITextField wrapper avec barre “Terminer” (iOS 13+)
+///
+/// Ce composant encapsule un UITextField pour l’utiliser dans SwiftUI. Il
+/// ajoute automatiquement une barre d’outils contenant un bouton “Terminer”
+/// afin de permettre à l’utilisateur de fermer le clavier plus facilement.
+/// Il gère également l’effacement du contenu sans fermer le clavier.
 private struct AccessoryTextField: UIViewRepresentable {
     final class Coordinator: NSObject, UITextFieldDelegate {
         var parent: AccessoryTextField
@@ -51,6 +61,13 @@ private struct AccessoryTextField: UIViewRepresentable {
             textField?.resignFirstResponder()
             parent.onDone?()
             UIApplication.shared.endEditing()
+        }
+
+        /// Intercepte l’appui sur la croix d’effacement pour empêcher la
+        /// fermeture du clavier.
+        func textFieldShouldClear(_ textField: UITextField) -> Bool {
+            parent.text.wrappedValue = ""
+            return false
         }
     }
 
@@ -109,6 +126,12 @@ private struct AccessoryTextField: UIViewRepresentable {
 }
 
 // MARK: - ViewModel
+///
+/// La ViewModel porte toutes les données saisies dans cette étape de
+/// l’onboarding. Elle gère la validation des champs, le chargement des
+/// données dynamiques (liste des genres, des modes de découverte,
+/// entreprises et évènements) et la communication avec le délégué qui
+/// récupère les informations complétées.
 final class OnboardingPhase1VM: ObservableObject {
     // Inputs
     @Published var firstname: String = ""
@@ -129,7 +152,7 @@ final class OnboardingPhase1VM: ObservableObject {
 
     @Published var discoverySourcesMap: [String: String] = [:]       // key -> label
     @Published var howWeMetOptions: [String] = []                    // labels à afficher
-    @Published var howWeMetLabel: String = ""                        // label choisi (UI)
+    @Published var howWeMetLabel: String = ""                       // label choisi (UI)
 
     @Published var enterprises: [SalesforceEnterprise] = []          // contient .id / .name
     @Published var selectedEnterpriseIndex: Int? = nil
@@ -142,7 +165,7 @@ final class OnboardingPhase1VM: ObservableObject {
 
     weak var pageDelegate: OnboardingDelegate?
 
-    // Birthday au format ISO (yyyy-MM-dd)
+    // Birthday au format ISO (yyyy‑MM‑dd)
     private var birthdayISO: String? {
         guard let d = birthday else { return nil }
         let df = DateFormatter()
@@ -268,8 +291,6 @@ final class OnboardingPhase1VM: ObservableObject {
         }
     }
 
-
-
     // MARK: - Networking (services existants)
     func loadMetadata() {
         PreOnboardingService.shared.loadMetadata { [weak self] result in
@@ -383,6 +404,13 @@ final class OnboardingPhase1VM: ObservableObject {
 }
 
 // MARK: - SwiftUI View
+///
+/// Cette vue est la première étape de l’onboarding. Elle recueille les
+/// informations personnelles de l’utilisateur (nom, prénom, date de
+/// naissance, genre), ses coordonnées de contact (téléphone, e-mail) et
+/// comment il a connu Entourage. Le design a été harmonisé de manière à
+/// respecter des marges latérales de 20 points et des espaces verticaux
+/// entre sections de 20 points.
 struct OnboardingPhase1View: View {
     @ObservedObject var vm: OnboardingPhase1VM
 
@@ -396,20 +424,21 @@ struct OnboardingPhase1View: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                CardContainer {
-                    IdentitySection(vm: vm,
-                                    showDateSheet: $showDateSheet,
-                                    tempDate: $tempDate)
+            VStack(alignment: .leading, spacing: 20) {
+                // Titre principal pour la section « Informations personnelles »
+                Text("Vos informations personnelles")
+                    .font(.entourageTitle(20))
+                    .padding(.leading, 0)
+                    .padding(.top, 20)
 
-                    Divider().padding(.vertical, 4)
+                // Section identité
+                IdentitySection(vm: vm,
+                                showDateSheet: $showDateSheet,
+                                tempDate: $tempDate)
 
-                    ContactSection(vm: vm, countries: countries)
+                ContactSection(vm: vm, countries: countries)
 
-                    Divider().padding(.vertical, 4)
-
-                    ProfileSection(vm: vm)
-                }
+                ProfileSection(vm: vm)
 
                 Text("(*) champs obligatoires")
                     .font(.entourageBody(15))
@@ -417,11 +446,11 @@ struct OnboardingPhase1View: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 6)
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
             .padding(.bottom, 40)
         }
         .background(Color.white)
-        // Tap à côté => fermer le clavier (iOS 13+)
+        // Tap à côté → fermer le clavier (iOS 13+)
         .simultaneousGesture(TapGesture().onEnded { UIApplication.shared.endEditing() })
         .onAppear {
             vm.loadMetadata()
@@ -451,7 +480,7 @@ private struct IdentitySection: View {
     @State private var showGenderAS = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 20) {
             SelectorRowButton(
                 title: "Je suis",
                 placeholder: "Sélectionner dans la liste",
@@ -487,7 +516,7 @@ private struct ContactSection: View {
     let countries: [CountryCode]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 20) {
             Text("Téléphone*")
                 .font(.entourageTitle(15))
 
@@ -549,7 +578,7 @@ private struct ProfileSection: View {
     @State private var showEventAS = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 20) {
 
             SelectorRowButton(
                 title: "Comment nous avez-vous connu ?",
@@ -632,17 +661,6 @@ private struct ProfileSection: View {
                 }
             }
         }
-    }
-}
-
-// MARK: - Card container (blanc)
-private struct CardContainer<Content: View>: View {
-    @ViewBuilder var content: Content
-    var body: some View {
-        VStack(alignment: .leading, spacing: 20) { content }
-            .padding(16)
-            .background(Color.white)
-            .cornerRadius(20)
     }
 }
 

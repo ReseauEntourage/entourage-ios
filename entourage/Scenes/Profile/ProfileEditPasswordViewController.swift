@@ -8,7 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import SimpleKeychain
-import IHProgressHUD
+import SVProgressHUD
 
 class ProfileEditPasswordViewController: UIViewController {
     
@@ -126,10 +126,10 @@ class ProfileEditPasswordViewController: UIViewController {
         UserService.updateUserPassword(pwd: newPwd!) { user, error in
             Logger.print("***** Mot reurn \(user) - Error  :\(error)")
             if error == nil {
-                IHProgressHUD.showSuccesswithStatus("pwdUpdated".localized)
+                SVProgressHUD.show(withStatus: "pwdUpdated".localized)
             }
             else {
-                IHProgressHUD.showError(withStatus: "pwdUpdatedErr".localized)
+                SVProgressHUD.showError(withStatus: "pwdUpdatedErr".localized)
             }
             
             DispatchQueue.main.asyncAfter(deadline:  DispatchTime.now() + 0.5, execute: {
@@ -137,7 +137,7 @@ class ProfileEditPasswordViewController: UIViewController {
             })
             
             DispatchQueue.main.asyncAfter(deadline:  DispatchTime.now() + 1.5, execute: {
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
             })
         }
     }

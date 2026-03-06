@@ -8,7 +8,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 class NeighborhoodPostAddViewController: UIViewController {
 
@@ -209,10 +209,10 @@ class NeighborhoodPostAddViewController: UIViewController {
     // MARK: - Envoi du post (texte seul)
     func sendMessageOnly() {
         isLoading = true
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         guard let htmlMessage = getHTMLMessage(), !htmlMessage.isEmpty else {
             isLoading = false
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             return
         }
         if isNeighborhood {
@@ -241,7 +241,7 @@ class NeighborhoodPostAddViewController: UIViewController {
     // MARK: - Envoi du post (texte et image)
     func sendImageText() {
         self.isLoading = true
-        IHProgressHUD.show()
+        SVProgressHUD.show()
         if isNeighborhood {
             NeighborhoodUploadPictureService.prepareUploadWith(neighborhoodId: neighborhoodId, image: currentImage!, message: getHTMLMessage() ?? "") { isOk in
                 self.isLoading = false
@@ -466,7 +466,7 @@ extension NeighborhoodPostAddViewController: UIGestureRecognizerDelegate {
 extension NeighborhoodPostAddViewController: MJNavBackViewDelegate {
     func goBack() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            IHProgressHUD.dismiss()
+            SVProgressHUD.dismiss()
             self.dismiss(animated: true)
         }
     }

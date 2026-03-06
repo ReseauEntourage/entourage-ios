@@ -6,7 +6,7 @@
 //  Fixed: checkbox flow (read real state), debounce, no event loops.
 //
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 
 private enum TableDTO {
     case searchCell
@@ -428,7 +428,7 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
         pendingToggles.insert(tablePosition)
 
         cell.isUserInteractionEnabled = false
-        IHProgressHUD.show()
+        SVProgressHUD.show()
 
         if intendedChecked {
             // CHECK ⇒ participate then maybe ask for photo consent
@@ -439,7 +439,7 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
                     user.confirmedAt = member.confirmedAt
 
                     if user.photoAcceptance == nil {
-                        IHProgressHUD.dismiss()
+                        SVProgressHUD.dismiss()
                         self.presentPhotoConsent(for: user, eventId: eventId, tablePosition: tablePosition, reaction: reaction) { finalUser in
                             self.updateUserAndReload(user: finalUser, positionInTableData: tablePosition, reaction: reaction)
                             self.pendingToggles.remove(tablePosition)
@@ -448,15 +448,15 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
                         }
                     } else {
                         self.updateUserAndReload(user: user, positionInTableData: tablePosition, reaction: reaction)
-                        IHProgressHUD.dismiss()
+                        SVProgressHUD.dismiss()
                         self.pendingToggles.remove(tablePosition)
                         completion(true)
                         cell.isUserInteractionEnabled = true
                     }
                 } else {
-                    IHProgressHUD.dismiss()
+                    SVProgressHUD.dismiss()
                     self.pendingToggles.remove(tablePosition)
-                    IHProgressHUD.showError(withStatus: error?.message ?? "Erreur lors de la confirmation.")
+                   SVProgressHUD.show(withStatus: error?.message ?? "Erreur lors de la confirmation.")
                     completion(false) // revert
                     cell.isUserInteractionEnabled = true
                 }
@@ -465,7 +465,7 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
             // UNCHECK ⇒ cancel participation (do not touch photo consent)
             EventService.cancelParticipationForUser(eventId: eventId, userId: user.sid) { [weak self] success, error in
                 guard let self = self else { return }
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 self.pendingToggles.remove(tablePosition)
                 if success {
                     user.participateAt = nil
@@ -473,7 +473,7 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
                     self.updateUserAndReload(user: user, positionInTableData: tablePosition, reaction: reaction)
                     completion(false)
                 } else {
-                    IHProgressHUD.showError(withStatus: error?.message ?? "Erreur lors de l'annulation.")
+                   SVProgressHUD.show(withStatus: error?.message ?? "Erreur lors de l'annulation.")
                     completion(true) // revert
                 }
                 cell.isUserInteractionEnabled = true
@@ -491,9 +491,9 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
             over: self,
             onAccept: { [weak self] in
                 guard let self = self else { return }
-                IHProgressHUD.show()
+                SVProgressHUD.show()
                 EventService.acceptPhotoForUser(eventId: eventId, userId: user.sid) { ok, _ in
-                    IHProgressHUD.dismiss()
+                    SVProgressHUD.dismiss()
                     var updated = user
                     updated.photoAcceptance = true
                     completion(updated)
@@ -501,9 +501,9 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
             },
             onDecline: { [weak self] in
                 guard let self = self else { return }
-                IHProgressHUD.show()
+                SVProgressHUD.show()
                 EventService.cancelPhotoForUser(eventId: eventId, userId: user.sid) { _, _ in
-                    IHProgressHUD.dismiss()
+                    SVProgressHUD.dismiss()
                     var updated = user
                     updated.photoAcceptance = false
                     completion(updated)
@@ -531,16 +531,16 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
         guard tablePosition < tableData.count else { return }
         if case let .userCell(user, _) = tableData[tablePosition] {
             if !isEvent { AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member) }
-            IHProgressHUD.show()
+            SVProgressHUD.show()
             MessagingService.createOrGetConversation(userId: "\(user.sid)") { conversation, error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 if let conversation = conversation {
                     self.showConversation(conversation: conversation, username: user.displayName)
                     return
                 }
                 var errorMsg = "message_error_create_conversation".localized
                 if let error = error { errorMsg = error.message }
-                IHProgressHUD.showError(withStatus: errorMsg)
+               SVProgressHUD.show(withStatus: errorMsg)
             }
         }
     }

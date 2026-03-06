@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IHProgressHUD
+import SVProgressHUD
 import GooglePlaces
 
 class OTLoginNextViewController: UIViewController {
@@ -70,19 +70,19 @@ class OTLoginNextViewController: UIViewController {
     func sendAddAddress() {
 //        OTLogger.logEvent(Action_Login_Action_Zone_Submit)
         if let _place = temporaryGooglePlace, let placeid = _place.placeID {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
             //MARK: faire
             UserService.updateUserAddressWith(placeId: placeid, isSecondaryAddress: false) { [weak self] error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 self?.goMain()
             }
         }
         else if let _lat = self.temporaryLocation?.coordinate.latitude, let _long = self.temporaryLocation?.coordinate.longitude {
-            IHProgressHUD.show()
+            SVProgressHUD.show()
             let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
             //MARK: faire
             UserService.updateUserAddressWith(name: addressName, latitude: _lat, longitude: _long, isSecondaryAddress: false) { [weak self] error in
-                IHProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
                 self?.goMain()
             }
         }
