@@ -115,12 +115,12 @@ class ConversationListMainCell: UITableViewCell {
             ui_detail_message.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13, color: .rougeErreur))
         }
         if message.type == "outing" {
+            ui_image.image = UIImage(named: "ic_placeholder_my_event")
             self.ui_image.layer.cornerRadius = 10
             self.ui_image.contentMode = .center
             if let _url = URL(string: message.imageUrl ?? "") {
                 ui_image.sd_setImage(with: _url, placeholderImage: UIImage.init(named: "ic_placeholder_my_event"))
             }
-            ui_image.image = UIImage(named: "ic_placeholder_my_event")
             self.ui_username.text = message.title
         }else {
             ui_image.image = UIImage(named: "placeholder_user")

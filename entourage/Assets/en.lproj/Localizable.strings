@@ -1058,14 +1058,27 @@
 "event_no_messageComment" = "No comments yet";
 "event_messageComment_notAuth" = "To comment on this post, join the “%@” event!";
 //"//CGU" = "nan";
-"event_CGU_1_title" = "Be kind";
-"event_CGU_1" = "I use the application for the purposes of mutual aid for people in very precarious or excluded situations.";
-"event_CGU_2_title" = "Collect agreement";
-"event_CGU_2" = "I ensure the consent of the people concerned before creating an action.";
-"event_CGU_3_title" = "Ensuring the protection of people";
-"event_CGU_3" = "I guarantee not to communicate sensitive personal data (medical, legal, etc.), or allowing the precise identification or location of people.";
-"event_CGU_4_title" = "Be united, without distinction";
-"event_CGU_4" = "I undertake to make no distinction as to race, color, sex, language, religion, political opinion, property, birth or any other status.";
+"event_charter_nav_title" = "Entourage Charter";
+
+"event_charter_section_positive_title" = "We come here to:";
+"event_charter_positive_1_title" = "Build friendly bonds";
+"event_charter_positive_1_desc" = "Make first connections with others, respect everyone’s boundaries, and get to know each other step by step. Ask simple questions to spark conversation.";
+"event_charter_positive_2_title" = "Engage as equals";
+"event_charter_positive_2_desc" = "Listen actively and give space to each person. You’re legitimate here, like everyone else. Share and respect everyone’s voice.";
+"event_charter_positive_3_title" = "Respect all differences";
+"event_charter_positive_3_desc" = "We come from diverse backgrounds, which enriches the Entourage network. Be curious and respect everyone’s stories and journeys.";
+"event_charter_positive_4_title" = "Contribute to a friendly atmosphere";
+"event_charter_positive_4_desc" = "Make an effort to immerse yourself in the event’s warmth and conviviality. Help create a positive environment without causing tension.";
+
+"event_charter_section_negative_title" = "What we cannot accept:";
+"event_charter_negative_1_title" = "Insistent behavior";
+"event_charter_negative_1_desc" = "Respect everyone’s boundaries. If someone asks you to stop a gesture or words, listen.";
+"event_charter_negative_2_title" = "Aggressiveness";
+"event_charter_negative_2_desc" = "Any form of violence (verbal, physical or psychological) is prohibited, including insults, mockery and threats.";
+"event_charter_negative_3_title" = "Substance abuse";
+"event_charter_negative_3_desc" = "Everyone is responsible for their consumption. If your behavior harms others’ safety and well-being, you may be asked to leave the event.";
+"event_charter_negative_4_title" = "Intolerant, sexist or discriminatory attitudes";
+"event_charter_negative_4_desc" = "Any form of discrimination, mockery or malicious judgment is unacceptable. Respect everyone’s particularities.";
 
 //"//MARK: - Actions -" = "nan";
 "action_menu_demand" = "Create request";

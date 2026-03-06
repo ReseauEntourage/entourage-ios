@@ -156,7 +156,9 @@ let kAPIAddUserToConversation = "conversations/%@/users?token=%@"
 let kAPIConversationGetOutingConversations = "conversations/outings?token=%@&page=%d&per=%d"
 let kAPIConversationGetPrivateConversations = "conversations/privates?token=%@&page=%d&per=%d"
 let kAPIConversationUsersList = "conversations/%@/users?token=%@"
-
+//Images
+let kAPIConversationImages = "conversations/%@/images?token=%@"
+let kAPIConversationImageSingle = "conversations/%@/images/%@?token=%@"
 
 //Chat message
 let kAPIChatMessageDelete = "/chat_messages/%d?token=%@"

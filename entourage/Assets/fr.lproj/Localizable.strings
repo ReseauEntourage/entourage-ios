@@ -1079,14 +1079,29 @@
 "event_no_messageComment" = "Pas encore de commentaire";
 "event_messageComment_notAuth" = "Pour commenter cette publication, rejoignez l'événement “%@” !";
 //CGU
-"event_CGU_1_title" = "Être bienveillant";
-"event_CGU_1" = "J’utilise l’application à des fins d’entraide en faveur des personnes en situation de grande précarité ou d’exclusion.";
-"event_CGU_2_title" = "Recueillir l’accord";
-"event_CGU_2" = "Je m’assure du consentement des personnes concernées avant de créer une action.";
-"event_CGU_3_title" = "Assurer la protection des personnes";
-"event_CGU_3" = "Je garantie de ne pas communiquer de données personnelles sensibles (médicales, judiciaires…), ou permettant d’identifier ou de localiser précisément les personnes.";
-"event_CGU_4_title" = "Être solidaire, sans distinction";
-"event_CGU_4" = "Je m’engage à ne faire aucune distinction de race, de couleur, de sexe, de langue, de religion, d’opinion politique, de fortune, de naissance ou de toute autre situation.";
+"event_charter_nav_title" = "Charte des événements";
+
+"event_charter_section_positive_title" = "Chez Entourage, nous venons pour :";
+"event_charter_positive_1_title" = "Créer des liens d’amitié";
+"event_charter_positive_1_desc" = "Tissez des premiers liens avec les autres participants, respectez les limites de chacun et apprenez à vous connaître petit à petit. Posez des questions simples pour démarrer des échanges.";
+"event_charter_positive_2_title" = "Échanger d’égal à égal";
+"event_charter_positive_2_desc" = "Soyez à l’écoute et laissez de l’espace à chacun. Vous êtes légitime d’être ici, comme tous les autres. Partagez et respectez la parole de chacun.";
+"event_charter_positive_3_title" = "Respecter toutes les différences";
+"event_charter_positive_3_desc" = "Nous venons d’horizons divers et c’est ce qui enrichit le réseau Entourage. Soyez curieux, respectez les histoires et les parcours de chacun.";
+"event_charter_positive_4_title" = "Participer activement à la convivialité";
+"event_charter_positive_4_desc" = "Faites l’effort de vous immerger dans l’ambiance et la chaleur humaine de l’événement. Contribuez à une atmosphère positive sans créer de tensions.";
+
+"event_charter_section_negative_title" = "Ce qu’on ne peut pas accepter :";
+"event_charter_negative_1_title" = "Comportements insistants";
+"event_charter_negative_1_desc" = "Respectez les limites de chacun. Si un participant vous demande d’arrêter un geste ou une parole, écoutez-le.";
+"event_charter_negative_2_title" = "Agressivité";
+"event_charter_negative_2_desc" = "Toute forme de violence (verbale, physique ou morale) est proscrite. Cela inclut les insultes, moqueries, et menaces.";
+"event_charter_negative_3_title" = "Abus de substances";
+"event_charter_negative_3_desc" = "Chacun est responsable de sa consommation. Si votre comportement nuit à la sécurité et au bien-être des autres, vous serez invité à quitter l'événement.";
+"event_charter_negative_4_title" = "Attitudes intolérantes, sexistes et discriminantes";
+"event_charter_negative_4_desc" = "Toute forme de discrimination, moquerie ou jugement malveillant est inacceptable. Respectez les particularités de chacun.";
+
+
 
 //MARK: - Actions -
 "action_menu_demand" = "Créer une demande";

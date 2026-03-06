@@ -1,5 +1,6 @@
 import UIKit
 import SDWebImage
+import ActiveLabel
 
 private let unifiedBlue = UIColor(red: 0.0, green: 122/255.0, blue: 1.0, alpha: 1.0)
 private let conversationBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)
@@ -12,9 +13,9 @@ class ConversationViewCell: UITableViewCell {
     @IBOutlet weak var ui_image_avatar: UIImageView!
     @IBOutlet weak var ui_image_comment: UIImageView!
     @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint!
-    @IBOutlet weak var ui_label_comment: UILabel!
-    @IBOutlet weak var ui_label_date: UILabel!
-    @IBOutlet weak var ui_view_label: UIView!
+    @IBOutlet weak var ui_label_comment: ActiveLabel!   // ActiveLabel au lieu de UILabel
+    @IBOutlet weak var ui_label_date: UILabel!          // "Nom • HH:mm"
+    @IBOutlet weak var ui_view_label: UIView!           // bulle
     @IBOutlet weak var ui_label_min_width: NSLayoutConstraint?
 
     // MARK: - Properties
@@ -23,58 +24,122 @@ class ConversationViewCell: UITableViewCell {
     private var currentMessage: PostMessage?
     private var currentPositionForRetry: Int = 0
 
+    private var fixedLabelWidthConstraint: NSLayoutConstraint?
+    private var imageWidthConstraint: NSLayoutConstraint?
+    private var imageAspectConstraint: NSLayoutConstraint?
+
+    /// Map des mentions (sans @, normalisées) -> URL de profil (issue du HTML)
+    private var mentionLinkMap: [String: URL] = [:]
+
+    // Détection custom des numéros de tel
+    private let phoneType = ActiveType.custom(pattern: "\\+?\\d[\\d .-]{6,}\\d")
+
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Avatar styling
-        ui_image_avatar.layer.cornerRadius = ui_image_avatar.frame.height / 2
+
+        // Avatar
+        ui_image_avatar.layer.masksToBounds = true
         ui_image_avatar.clipsToBounds = true
-        // Image content mode
+
+        // Image
         ui_image_comment.contentMode = .scaleAspectFill
         ui_image_comment.clipsToBounds = true
-        ui_image_comment.translatesAutoresizingMaskIntoConstraints = false
         ui_image_comment.isUserInteractionEnabled = true
-        // Fonts
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:)))
+        ui_image_comment.addGestureRecognizer(tapGesture)
+
+        // Date
         ui_label_date.setFontBody(size: 12)
-        ui_label_comment.setFontBody(size: 15)
-        // Deleted icon template
+
+        // ActiveLabel config
+        ui_label_comment.numberOfLines = 0
+        ui_label_comment.font = conversationBaseFont
+        ui_label_comment.textColor = .black
+        ui_label_comment.enabledTypes = [.url, .mention, .hashtag, phoneType]
+        ui_label_comment.URLColor = unifiedBlue
+        ui_label_comment.hashtagColor = unifiedBlue
+        ui_label_comment.mentionColor = unifiedBlue
+        ui_label_comment.lineBreakMode = .byWordWrapping
+
+        // Liens soulignés
+        ui_label_comment.configureLinkAttribute = { (_, attributes, _) in
+            var attrs = attributes
+            attrs[.underlineStyle] = NSUnderlineStyle.single.rawValue
+            return attrs
+        }
+
+        // Taps
+        ui_label_comment.handleURLTap { [weak self] url in
+            self?.delegate?.showWebUrl(url: url)
+        }
+        ui_label_comment.handleCustomTap(for: phoneType) { _ in
+            // Optionnel: appeler/coller/… selon ton besoin
+        }
+        ui_label_comment.handleMentionTap { [weak self] mention in
+            guard let self else { return }
+            let key = self.normalizeMention(mention)
+            if let url = self.mentionLinkMap[key] {
+                self.delegate?.showWebUrl(url: url)
+            } else {
+                // Pas d’URL connue pour cette mention (texte brut) -> rien ou fallback si tu en veux un
+            }
+        }
+
+        // Icône "supprimé"
         if let img = UIImage(named: "ic_deleted_comment") {
             let iv = UIImageView(image: img.withRenderingMode(.alwaysTemplate))
             iv.tintColor = deletedTextColor
             iv.translatesAutoresizingMaskIntoConstraints = false
             deletedImageView = iv
         }
-        // By default, no min-width
-        ui_label_min_width?.isActive = false
-        // Force la largeur du label à la moitié de l'écran
-        let screenWidth = UIScreen.main.bounds.width
-        let halfWidth = (screenWidth / 2) - 30 // 30 = marges latérales (15 de chaque côté)
+
+        // Largeur fixe de la bulle ≈ moitié d’écran
         ui_view_label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            ui_view_label.widthAnchor.constraint(equalToConstant: halfWidth)
-        ])
-        // Gestures
+        if fixedLabelWidthConstraint == nil {
+            let screenWidth = UIScreen.main.bounds.width
+            let halfWidth = (screenWidth / 2) - 30 // marges latérales
+            fixedLabelWidthConstraint = ui_view_label.widthAnchor.constraint(equalToConstant: halfWidth)
+            fixedLabelWidthConstraint?.isActive = true
+        }
+
+        // Long press → signaler
         ui_view_label.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         ui_view_label.addGestureRecognizer(longPressGesture)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleImageTap(_:)))
-        ui_image_comment.addGestureRecognizer(tapGesture)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        ui_image_avatar.layer.cornerRadius = ui_image_avatar.bounds.height / 2
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
+
+        // Reset images
         ui_image_avatar.image = UIImage(named: "placeholder_user")
         ui_image_comment.image = nil
+
+        // Reset image sizing
         ui_constraint_image_height.constant = 0
+        imageWidthConstraint?.isActive = false
+        imageAspectConstraint?.isActive = false
+        imageWidthConstraint = nil
+        imageAspectConstraint = nil
+
+        // Reset texte
         ui_label_comment.text = nil
-        ui_label_comment.attributedText = nil
-        ui_label_comment.textColor = .black
-        ui_label_comment.font = conversationBaseFont
         ui_label_date.text = nil
+        mentionLinkMap.removeAll()
+
+        // Reset styles
         ui_view_label.backgroundColor = .clear
         deletedImageView?.removeFromSuperview()
         ui_label_min_width?.isActive = false
+
+        // Reset divers
         delegate = nil
         currentMessage = nil
         currentPositionForRetry = 0
@@ -84,13 +149,16 @@ class ConversationViewCell: UITableViewCell {
     func configure(with message: PostMessage, isMe: Bool, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
+        mentionLinkMap.removeAll()
+
         // Avatar
         if let urlStr = message.user?.avatarURL, let url = URL(string: urlStr) {
             ui_image_avatar.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
         } else {
             ui_image_avatar.image = UIImage(named: "placeholder_user")
         }
-        // Content or status
+
+        // Contenu / statut
         if let status = message.status?.lowercased() {
             switch status {
             case "deleted":
@@ -103,32 +171,51 @@ class ConversationViewCell: UITableViewCell {
         } else {
             applyNormalContent(message: message, isMe: isMe)
         }
-        // Date
-        ui_label_date.text = (message.user?.displayName ?? "") + " " + message.createdDateTimeFormatted
-        // Attached image
+
+        // Nom + heure (HH:mm uniquement)
+        ui_label_date.text = formattedNameAndTime(from: message)
+
+        // ----- Image attachée -----
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
             ui_image_comment.sd_setImage(with: url, placeholderImage: nil)
-            let maxImageSize = (UIScreen.main.bounds.width / 2) - 40 // 40 = marges + padding
+
+            // carré ~ moitié d’écran
+            let maxImageSize = (UIScreen.main.bounds.width / 2) - 40
             ui_constraint_image_height.constant = maxImageSize
-            ui_image_comment.widthAnchor.constraint(equalToConstant: maxImageSize).isActive = true
-            ui_image_comment.heightAnchor.constraint(equalTo: ui_image_comment.widthAnchor).isActive = true
+
+            imageWidthConstraint?.isActive = false
+            imageAspectConstraint?.isActive = false
+            imageWidthConstraint = ui_image_comment.widthAnchor.constraint(equalToConstant: maxImageSize)
+            imageAspectConstraint = ui_image_comment.heightAnchor.constraint(equalTo: ui_image_comment.widthAnchor)
+            imageWidthConstraint?.isActive = true
+            imageAspectConstraint?.isActive = true
+
+            // aligne la bulle avec la largeur image (optionnel)
             ui_label_min_width?.constant = maxImageSize
             ui_label_min_width?.isActive = true
         } else {
+            // Pas d’image
             ui_image_comment.image = nil
             ui_constraint_image_height.constant = 0
+
+            imageWidthConstraint?.isActive = false
+            imageAspectConstraint?.isActive = false
+            imageWidthConstraint = nil
+            imageAspectConstraint = nil
+
             ui_label_min_width?.isActive = false
         }
+
         layoutIfNeeded()
     }
 
-    // MARK: - Gesture Handlers
+    // MARK: - Gestures
     @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .began, let msg = currentMessage else { return }
         delegate?.signalMessage(
             messageId: msg.uid,
             userId: msg.user?.sid ?? 0,
-            textString: msg.content ?? ""
+            textString: (msg.contentHtml?.isEmpty == false ? msg.contentHtml : msg.content) ?? ""
         )
     }
 
@@ -149,8 +236,9 @@ class ConversationViewCell: UITableViewCell {
     private func applyDeletedStyle(text: String) {
         ui_view_label.backgroundColor = deletedBackgroundColor
         ui_label_comment.text = "  " + text
-        ui_label_comment.font = conversationBaseFont
         ui_label_comment.textColor = deletedTextColor
+        ui_label_comment.enabledTypes = [] // pas de liens cliquables
+
         if let icon = deletedImageView {
             ui_view_label.addSubview(icon)
             NSLayoutConstraint.activate([
@@ -167,58 +255,115 @@ class ConversationViewCell: UITableViewCell {
         if message.messageType == "auto" {
             ui_view_label.backgroundColor = UIColor.appBleuAuto
         }
+
+        ui_label_comment.textColor = .black
+        ui_label_comment.enabledTypes = [.url, .mention, .hashtag, phoneType]
+
         if let html = message.contentHtml, !html.isEmpty {
-            ui_label_comment.attributedText = attributedString(fromHTML: html)
+            // Convertit le HTML en texte brut, conserve les URLs visibles,
+            // et remplit mentionLinkMap pour gérer les @mentions cliquables
+            ui_label_comment.text = htmlToPlainWithLinksAndMentionMap(html)
         } else if let content = message.content, !content.isEmpty {
             ui_label_comment.text = content.trimmingCharacters(in: .whitespacesAndNewlines)
-            ui_label_comment.font = conversationBaseFont
-            ui_label_comment.textColor = .black
         } else {
             ui_label_comment.text = ""
         }
     }
 
-    // MARK: - HTML to AttributedString
-    private func attributedString(fromHTML html: String) -> NSAttributedString {
-        let replaced = html.replacingOccurrences(of: "\n", with: "<br>")
-        guard let data = replaced.data(using: .utf8) else {
-            return NSAttributedString(string: html, attributes: [
-                .font: conversationBaseFont,
-                .foregroundColor: UIColor.black
-            ])
+    // MARK: - Name + Time (HH:mm)
+    private func formattedNameAndTime(from message: PostMessage) -> String {
+        let nameOpt: String? = message.user?.displayName
+        let trimmedName = nameOpt?.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if let d = message.createdDate {
+            let time = hourFormatter.string(from: d)
+            if let n = trimmedName, !n.isEmpty { return "\(n) • \(time)" }
+            return time
         }
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-        do {
-            let attr = try NSMutableAttributedString(data: data, options: options, documentAttributes: nil)
-            let full = NSRange(location: 0, length: attr.length)
-            attr.removeAttribute(.foregroundColor, range: full)
-            attr.removeAttribute(.underlineStyle, range: full)
-            attr.addAttributes([
-                .font: conversationBaseFont,
-                .foregroundColor: UIColor.black
-            ], range: full)
-            attr.enumerateAttribute(.link, in: full, options: []) { value, range, _ in
-                if value != nil {
-                    attr.addAttributes([
-                        .foregroundColor: unifiedBlue,
-                        .underlineStyle: NSUnderlineStyle.single.rawValue
-                    ], range: range)
+        let fallbackTime = message.createdTimeFormatted.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !fallbackTime.isEmpty {
+            if let n = trimmedName, !n.isEmpty { return "\(n) • \(fallbackTime)" }
+            return fallbackTime
+        }
+        let raw = message.createdDateString
+        if !raw.isEmpty {
+            if let n = trimmedName, !n.isEmpty { return "\(n) • \(raw)" }
+            return raw
+        }
+        return trimmedName ?? ""
+    }
+
+    // MARK: - Helpers (HTML ➜ texte + map des mentions)
+    /// Remplace:
+    ///  - <a href="...">@Nico</a>  -> "@Nico" (et mappe la mention vers l’URL)
+    ///  - <a href="...">Texte</a> -> "Texte (url)" (ainsi l’URL reste cliquable)
+    /// Puis nettoie les balises restantes et <br>.
+    private func htmlToPlainWithLinksAndMentionMap(_ html: String) -> String {
+        var s = html
+        let pattern = #"<a\s+[^>]*href="([^"]+)"[^>]*>(.*?)</a>"#
+        if let re = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive, .dotMatchesLineSeparators]) {
+            let ns = s as NSString
+            let matches = re.matches(in: s, options: [], range: NSRange(location: 0, length: ns.length))
+
+            for match in matches.reversed() {
+                guard match.numberOfRanges >= 3 else { continue }
+                let href = (s as NSString).substring(with: match.range(at: 1))
+                let rawText = (s as NSString).substring(with: match.range(at: 2))
+
+                let cleanText = rawText
+                    .replacingOccurrences(of: "<br ?/?>", with: "\n", options: .regularExpression)
+                    .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+
+                if cleanText.hasPrefix("@"), let url = URL(string: href) {
+                    // Mention : on garde le @texte et on mémorise le lien pour le tap
+                    let key = normalizeMention(cleanText)
+                    mentionLinkMap[key] = url
+                    s = (s as NSString).replacingCharacters(in: match.range, with: cleanText)
+                } else {
+                    // Lien normal : garder l’info visible pour que .url soit détecté
+                    // Si le texte contient déjà une URL, on la laisse ; sinon on ajoute (url)
+                    if looksLikeURL(cleanText) {
+                        s = (s as NSString).replacingCharacters(in: match.range, with: cleanText)
+                    } else {
+                        let replacement = cleanText.isEmpty ? href : "\(cleanText) (\(href))"
+                        s = (s as NSString).replacingCharacters(in: match.range, with: replacement)
+                    }
                 }
             }
-            while attr.string.hasSuffix("\n") || attr.string.hasSuffix(" ") {
-                attr.deleteCharacters(in: NSRange(location: attr.length - 1, length: 1))
-            }
-            return attr
-        } catch {
-            return NSAttributedString(string: html, attributes: [
-                .font: conversationBaseFont,
-                .foregroundColor: UIColor.black
-            ])
         }
+
+        // Nettoyage global
+        s = s.replacingOccurrences(of: "<br ?/?>", with: "\n", options: .regularExpression)
+             .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+             .replacingOccurrences(of: "&nbsp;", with: " ")
+             .trimmingCharacters(in: .whitespacesAndNewlines)
+        return s
     }
+
+    /// Normalise une mention ("@NicolasE." -> "nicolase")
+    private func normalizeMention(_ mention: String) -> String {
+        var m = mention
+        if m.hasPrefix("@") { m.removeFirst() }
+        // Retire ponctuation/eSpaces en fin
+        m = m.trimmingCharacters(in: CharacterSet(charactersIn: " .,:;!?)»»”’\""))
+        return m.lowercased()
+    }
+
+    /// Détecte si une chaîne ressemble à une URL brute
+    private func looksLikeURL(_ text: String) -> Bool {
+        let pattern = #"(?i)\bhttps?://[^\s]+"#
+        return text.range(of: pattern, options: .regularExpression) != nil
+    }
+
+    // MARK: - Formatter
+    private lazy var hourFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "HH:mm"
+        f.locale = Locale.current
+        f.timeZone = .current
+        return f
+    }()
 }
 
 // MARK: - Subclasses
