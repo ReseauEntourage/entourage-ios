@@ -88,10 +88,10 @@ struct AppState {
     
     static func navigateToLoginScreen(deeplink:NSURL, senderController:UIViewController) {
         
-        let loginVc = UIStoryboard.init(name: StoryboardName.intro, bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC") as! OTLoginV2ViewController
-        loginVc.deeplink = deeplink as URL;
+        let loginVc = OTLoginV2ViewController()
+                loginVc.deeplink = deeplink as URL
+                getTopViewController()?.show(loginVc, sender: self)
         
-        getTopViewController()?.show(loginVc, sender: self)
     }
     
     static func clearDatas(withKeychain:Bool) {

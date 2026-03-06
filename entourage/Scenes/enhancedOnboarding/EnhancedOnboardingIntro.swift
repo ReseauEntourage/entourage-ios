@@ -17,6 +17,7 @@ class EnhancedOnboardingIntro:UIViewController{
     @IBOutlet weak var ui_btn_later: UIButton!
     
     //Variable
+    var isAssociationGoal = false
     
     override func viewDidLoad() {
         if let _user = UserDefaults.currentUser{
@@ -66,6 +67,7 @@ class EnhancedOnboardingIntro:UIViewController{
     func presentViewControllerWithAnimation(identifier: String) {
         let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as? EnhancedViewController {
+            viewController.isAssociationGoal = self.isAssociationGoal
             viewController.modalPresentationStyle = .fullScreen
             viewController.modalTransitionStyle = .coverVertical
             present(viewController, animated: true, completion: nil)

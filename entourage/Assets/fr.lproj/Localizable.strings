@@ -93,6 +93,14 @@
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
 "login_button_change_phone" = "J’ai changé de numéro de téléphone";
+"login_title" = "Connexion";
+
+"login_forgot_code_title" = "Vous avez oublié votre code ?";
+"login_button_resend_code" = "Recevoir un nouveau code par sms";
+
+"login_label_change_phone_question" = "Vous avez changé de numéro de téléphone ?";
+"login_button_change_phone" = "Changer mon numéro";
+"login_button_connect" = "Je me connecte";
 
 "login_change_phone_title" = "Nouveau numéro";
 "login_change_phone_old_number" = "Ancien numéro";
@@ -707,7 +715,7 @@
 /*************
  * Group detail
  */
-"title_is_ambassador" = "Ambassadeur •" ;
+"title_is_ambassador" = "Animateur Entourage •" ;
 "title_is_admin" = "Administrateur •" ;
 
 "neighborhood_detail_button_join_member" = "Membre";
@@ -1922,3 +1930,20 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "title_new_message" = "nouveau message";
 "title_new_message_plural" = "nouveaux messages";
 "you" = "Vous";
+"editUserTitleGender" = "Je suis";
+"editUserPlaceholderGender" = "Sélectionner dans la liste";
+"photo" = "Photo";
+
+"editUser_gender_male" = "Homme";
+"editUser_gender_female" = "Femme";
+"editUser_gender_secret" = "Non renseigné";
+
+"error_settings_notifs_disabled_title" = "Notifications désactivées";
+"error_settings_notifs_disabled_message" = "Pour recevoir les notifications, vous devez les autoriser dans les paramètres de votre téléphone.";
+"error_settings_notifs_disabled_button_settings" = "Paramètres";
+"error_settings_notifs_disabled_button_cancel" = "Annuler";
+"orientation_share" = "Relayer vos événements de convivialité sur l'application";
+"orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
+"orientation_both_actions" = "Donner ou solliciter un coup de pouce";
+"onboarding_zone_potential_event_singular" = "événement potentiel par semaine,";
+"onboarding_zone_potential_event_plural" = "événements potentiels par semaine,";

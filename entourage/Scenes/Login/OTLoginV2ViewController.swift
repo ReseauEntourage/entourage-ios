@@ -1,419 +1,627 @@
-//
-//  OTLoginV2ViewController.swift
-//  entourage
-//
-//  Created by Jr on 14/05/2020.
-//  Copyright © 2020 Entourage. All rights reserved.
-//
-
+import SwiftUI
+import Combine
 import UIKit
 import SVProgressHUD
-import IQKeyboardManagerSwift
 import SimpleKeychain
 
-class OTLoginV2ViewController: UIViewController {
-    
-    @IBOutlet weak var ui_label_country: UILabel!
-    @IBOutlet weak var ui_label_phone: UILabel!
-    @IBOutlet weak var ui_label_code: UILabel!
-    @IBOutlet weak var ui_bt_validate: UIButton!
-    
-    @IBOutlet weak var ui_bt_demand_code: UIButton!
-    @IBOutlet weak var ui_tf_country: OTCustomTextfield!
-    @IBOutlet weak var ui_tf_phone: OTCustomTextfield!
-    
-    @IBOutlet weak var ui_tf_code: OTCustomTextfield!
-    @IBOutlet weak var ui_pickerView: UIPickerView!
-    
-    @IBOutlet weak var ui_main_container_view: UIView!
-    @IBOutlet weak var ui_top_view: MJNavBackView!
-    
-    @IBOutlet weak var ui_button_change_phone: UIButton!
-    var deeplink:URL? = nil
-    
-    let pickerDatas:[CountryCode] = [CountryCode(country: "France",code: "+33",flag:"🇫🇷"),CountryCode(country: "Belgique",code: "+32",flag: "🇧🇪")]
-    
-    var countryCode:CountryCode = defaultCountryCode
-    var tempPhone = ""
-    let minimumCharacters = 9
-    var phoneNumberString = ""
-    
-    var isLoading = false
-    
-    let timeOutLength = 60
-    var timeOut = 60
-    var countDownTimer:Timer? = nil
-    
-    var hasKeychain = false
-    
-    //MARK: - Lifecycle -
-    override func viewDidLoad() {
-        super.viewDidLoad()
+// MARK: - Extensions & Helpers (Style & Utils)
+
+private extension Font {
+    static func entourageTitle(_ size: CGFloat = 20) -> Font {
+        .custom("Quicksand-Bold", size: size)
+    }
+    static func entourageBody(_ size: CGFloat = 15) -> Font {
+        .custom("NunitoSans-Regular", size: size)
+    }
+}
+
+
+
+// MARK: - Components
+
+/// Wrapper UITextField pour SwiftUI avec Toolbar "Terminer"
+private struct AccessoryTextField: UIViewRepresentable {
+    final class Coordinator: NSObject, UITextFieldDelegate {
+        var parent: AccessoryTextField
+        weak var textField: UITextField?
+
+        init(_ parent: AccessoryTextField) { self.parent = parent }
+
+        func textFieldDidChangeSelection(_ textField: UITextField) {
+            parent.text.wrappedValue = textField.text ?? ""
+        }
+
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            if parent.returnKeyCloses {
+                textField.resignFirstResponder()
+                parent.onDone?()
+                return false
+            }
+            return true
+        }
+
+        @objc func doneTapped(_ sender: UIBarButtonItem) {
+            textField?.resignFirstResponder()
+            parent.onDone?()
+            UIApplication.shared.endEditing()
+        }
+    }
+
+    var placeholder: String
+    var text: Binding<String>
+    var keyboardType: UIKeyboardType = .default
+    var textContentType: UITextContentType? = nil
+    var autocapitalizationType: UITextAutocapitalizationType = .none
+    var isSecureTextEntry: Bool = false
+    var returnKeyCloses: Bool = true
+    var onDone: (() -> Void)? = nil
+
+    func makeCoordinator() -> Coordinator { Coordinator(self) }
+
+    func makeUIView(context: Context) -> UITextField {
+        let tf = UITextField(frame: .zero)
+        tf.borderStyle = .none
+        tf.placeholder = placeholder
+        tf.text = text.wrappedValue
+        tf.delegate = context.coordinator
+        tf.keyboardType = keyboardType
+        tf.autocapitalizationType = autocapitalizationType
+        tf.isSecureTextEntry = isSecureTextEntry
+        tf.textContentType = textContentType
         
-        ui_main_container_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-        ui_top_view.populateCustom(title: "login_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
-        
-        ui_tf_phone.activateToolBarWithTitle( "close".localized)
-        ui_tf_code.activateToolBarWithTitle( "close".localized)
-        ui_tf_country.activateToolBarWithTitle()
-        ui_tf_country.text = countryCode.flag
-        ui_tf_country.inputView = ui_pickerView
-        
-        setupViews()
-        
-        IQKeyboardManager.shared.enable = false
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        
-        selectPickerCountry()
-        
-        if hasKeychain {
-            let phone = A0SimpleKeychain().string(forKey:kKeychainPhone)
-            let pwd = A0SimpleKeychain().string(forKey:kKeychainPassword)
-            
-            if let phone = phone, let pwd = pwd {
-                ui_tf_phone.text = phone
-                ui_tf_code.text = pwd
+        // Toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done = UIBarButtonItem(title: "Terminer", style: .done, target: context.coordinator, action: #selector(Coordinator.doneTapped(_:)))
+        toolbar.items = [flex, done]
+        tf.inputAccessoryView = toolbar
+
+        context.coordinator.textField = tf
+        return tf
+    }
+
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        if uiView.text != text.wrappedValue {
+            uiView.text = text.wrappedValue
+        }
+        // Mise à jour dynamique pour le toggle mot de passe
+        if uiView.isSecureTextEntry != isSecureTextEntry {
+            uiView.isSecureTextEntry = isSecureTextEntry
+        }
+    }
+}
+
+/// Champ de saisie simple (flottant)
+private struct FloatingField: View {
+    var title: String
+    var placeholder: String
+    @Binding var text: String
+    var keyboard: UIKeyboardType = .default
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title).font(.entourageTitle(15))
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.secondary.opacity(0.25))
+                AccessoryTextField(placeholder: placeholder, text: $text, keyboardType: keyboard, onDone: { UIApplication.shared.endEditing() })
+                    .padding(.horizontal, 12)
+                    .frame(height: 52)
             }
         }
     }
-    
-    override func viewWillLayoutSubviews() {
-        self.navigationController?.isNavigationBarHidden = true
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        stopTimer()
-    }
-    
-    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
-        button.setTitle(title, for: .normal)
-        button.backgroundColor = UIColor.appOrange
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 25
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
-        button.clipsToBounds = true
-      }
-    
-    deinit {
-        IQKeyboardManager.shared.enable = false
-        IQKeyboardManager.shared.enableAutoToolbar = false
-    }
-    
-    //MARK: - Methods -
-    
-    private func selectPickerCountry() {
-        for i in 0...pickerDatas.count {
-            if pickerDatas[i].code == countryCode.code {
-                ui_pickerView.selectRow(i, inComponent: 0, animated: false)
-                break
+}
+
+/// Champ spécifique pour le mot de passe (Code) avec l'œil
+private struct PasswordFloatingField: View {
+    var title: String
+    var placeholder: String
+    @Binding var text: String
+    @Binding var isSecured: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title).font(.entourageTitle(15))
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    // Bordure orange si actif (simulé ici par non vide) ou gris sinon, pour matcher l'image
+                    .stroke(text.isEmpty ? Color.secondary.opacity(0.25) : Color(UIColor.appOrange).opacity(0.8))
+                
+                HStack {
+                    AccessoryTextField(
+                        placeholder: placeholder,
+                        text: $text,
+                        keyboardType: .numberPad, // Code à 6 chiffres
+                        isSecureTextEntry: isSecured,
+                        onDone: { UIApplication.shared.endEditing() }
+                    )
+                    
+                    Button(action: {
+                        isSecured.toggle()
+                    }) {
+                        Image(systemName: isSecured ? "eye.slash" : "eye")
+                            .foregroundColor(.secondary)
+                            .padding(8)
+                    }
+                }
+                .padding(.horizontal, 12)
+                .frame(height: 52)
             }
         }
     }
+}
+
+/// Champ encadré de hauteur fixe 52 (pour le téléphone)
+private struct BoxedTextField: View {
+    var placeholder: String
+    @Binding var text: String
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.secondary.opacity(0.25))
+            AccessoryTextField(
+                placeholder: placeholder,
+                text: $text,
+                keyboardType: .numberPad,
+                textContentType: .telephoneNumber,
+                onDone: { UIApplication.shared.endEditing() }
+            )
+            .padding(.horizontal, 12)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        }
+        .frame(height: 52)
+    }
+}
+
+// MARK: - ViewModel
+
+final class LoginViewModel: ObservableObject {
+    // Inputs
+    @Published var phone: String = ""
+    @Published var password: String = "" // Le Code
+    @Published var selectedCountry: CountryCode
+    @Published var isPasswordSecured: Bool = true
     
-    func setupViews() {
-        ui_bt_validate.layer.cornerRadius = ui_bt_validate.frame.height / 2
-        ui_bt_validate.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc(size: 15))
-        
-        ui_tf_phone.placeholder =  "login_phone_placeholder".localized
-        ui_tf_code.placeholder =  "login_placeholder_code".localized
-        ui_bt_validate.setTitle( "login_button_connect".localized, for: .normal)
-        configureOrangeButton(ui_bt_validate, withTitle: "login_button_connect".localized)
-        ui_bt_demand_code.setAttributedTitle(Utils.formatStringUnderline(textString: "login_button_resend_code".localized, textColor: .appOrange,font: ApplicationTheme.getFontNunitoRegular(size: 14)), for: .normal)
+    // UI Logic
+    @Published var showCountrySheet: Bool = false // Gère l'ActionSheet du pays
+    
+    // Network Logic State
+    @Published var isLoading: Bool = false
+    @Published var timeOut: Int = 0
+    private let timeOutLength = 60
+    private var timer: Timer? = nil
+    
+    // Alerts
+    @Published var alertMessage: String? = nil
+    @Published var showAlert: Bool = false
+    @Published var showResendConfirmation: Bool = false
+    
+    // Constants
+    let countries: [CountryCode] = [
+        CountryCode(country: "France", code: "+33", flag: "🇫🇷"),
+        CountryCode(country: "Belgique", code: "+32", flag: "🇧🇪")
+    ]
+    private let minimumCharacters = 9
+    
+    // External delegates (Navigation callbacks)
+    var onSuccess: (() -> Void)?
+    var onBack: (() -> Void)?
+    var onChangePhone: (() -> Void)?
 
-        ui_label_country.text =  "login_label_country".localized
-        ui_label_phone.text =  "login_label_phone".localized
-        ui_label_code.text =  "login_label_code".localized
-        ui_label_country.isHidden = true
-
-        ui_button_change_phone.setAttributedTitle(Utils.formatStringUnderline(textString: "login_button_change_phone".localized, textColor: .appGrisSombre40, font: ApplicationTheme.getFontNunitoRegular(size: 14)), for: .normal)
-        
-        
-        ui_tf_country.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
-        ui_tf_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
-        ui_tf_code.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
-        
-        ui_label_country.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
-        ui_label_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
-        ui_label_code.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
+    init() {
+        // Default Country logic
+        self.selectedCountry = countries.first ?? CountryCode(country: "France", code: "+33", flag: "🇫🇷")
     }
     
-    func checkAndValidate() {
-        var isValidated = true
-        var message = ""
-        if ui_tf_phone.text?.count ?? 0 < minimumCharacters {
-            isValidated = false
-            message = String.init(format:  "error_login_phone_length".localized, minimumCharacters)
+    // MARK: - Keychain Logic
+    func checkForKeychain() {
+        if let phoneK = A0SimpleKeychain().string(forKey: kKeychainPhone),
+           let pwdK = A0SimpleKeychain().string(forKey: kKeychainPassword) {
+            self.phone = phoneK
+            self.password = pwdK
         }
-        
-        if isValidated && ui_tf_code.text?.count != 6 {
-            isValidated = false
-            message = "error_login_code_lenght".localized
-        }
-        
-        if !isValidated {
-            let alertVC = UIAlertController.init(title:  "attention_pop_title".localized, message: message, preferredStyle: .alert)
-            let action = UIAlertAction.init(title:  "close".localized, style: .default, handler: nil)
-            
-            alertVC.addAction(action)
-            self.navigationController?.present(alertVC, animated: true, completion: nil)
+    }
+    
+    // MARK: - Validation & Login
+    
+    func validateAndLogin() {
+        // Validation length Phone
+        if phone.count < minimumCharacters {
+            triggerAlert(message: String(format: "error_login_phone_length".localized, minimumCharacters))
             return
         }
         
-        var phone = ""
-        if let _phone = ui_tf_phone.text {
-            phone = Utils.validatePhoneFormat(countryCode: countryCode.code, phone: _phone)
+        // Validation length Code
+        if password.count != 6 {
+            triggerAlert(message: "error_login_code_lenght".localized)
+            return
         }
+        
+        // Format Phone
+        let formattedPhone = Utils.validatePhoneFormat(countryCode: selectedCountry.code, phone: phone)
         
         if !isLoading {
             isLoading = true
-            login(phone: phone, code: ui_tf_code.text!)
             stopTimer()
+            performLogin(phone: formattedPhone, code: password)
         }
     }
     
-    func checkAndResendCode() {
-        if ui_tf_phone.text?.count ?? 0 < minimumCharacters {
-            let message = String.init(format:  "error_login_phone_length".localized, minimumCharacters)
-            let alertVC = UIAlertController.init(title:  "attention_pop_title".localized, message: message, preferredStyle: .alert)
-            let action = UIAlertAction.init(title:  "close".localized, style: .default, handler: nil)
-            
-            alertVC.addAction(action)
-            self.navigationController?.present(alertVC, animated: true, completion: nil)
-            return
-        }
-        
-        if timeOut > 0 && timeOut != timeOutLength {
-            let alertvc = UIAlertController.init(title:  "attention_pop_title".localized, message: String.init(format:  "onboard_sms_pop_alert".localized, timeOut), preferredStyle: .alert)
-            
-            let action = UIAlertAction.init(title: "OK".localized, style: .default, handler: nil)
-            alertvc.addAction(action)
-            
-            self.navigationController?.present(alertvc, animated: true, completion: nil)
-        }
-        else {
-            var phone = ""
-            if let _phone = ui_tf_phone.text {
-                phone = _phone.trimmingCharacters(in: .whitespaces)
-                if !phone.hasPrefix("+") && phone.hasPrefix("0") {
-                    phone.remove(at: .init(encodedOffset: 0))
-                }
-                phone = "\(countryCode.code)\(phone)"
-            }
-            phoneNumberString = phone
-            alertForResent()
-        }
-    }
-    
-    @objc func updateTimer() {
-        timeOut = timeOut - 1
-        if timeOut == 0 {
-            stopTimer()
-        }
-        Logger.print("Update Timer")
-    }
-    
-    func stopTimer() {
-        countDownTimer?.invalidate()
-        countDownTimer = nil
-    }
-    
-    func startTimer() {
-        timeOut = timeOutLength
-        countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-    }
-    
-    func goalRealMain() {
-        AppState.continueFromLoginVC()
-        
-        if (self.deeplink != nil) {
-            //TODO: a faire
-           // OTDeepLinkService.init().handleDeepLink(self.deeplink)
-            self.deeplink = nil;
-        }
-    }
-    
-    //MARK: - Network -
-    func login(phone:String, code:String) {
-        
+    private func performLogin(phone: String, code: String) {
         SVProgressHUD.show()
         
         AuthService.postLogin(phone: phone, password: code) { [weak self] (user, error, isFirstLogin) in
             SVProgressHUD.dismiss()
+            guard let self = self else { return }
             
             if let error = error {
-                Logger.print("Erreur Network login: \(String(describing: error))")
-                self?.isLoading = false
-                
-                self?.parseErrorLogin(error: error)
-            }
-            else {
-                Logger.print("login return user ok  : \(user) first login ? \(isFirstLogin)")
+                self.isLoading = false
+                self.handleLoginError(error)
+            } else {
+                Logger.print("login return user ok : \(String(describing: user))")
                 if user == nil {
-                    self?.parseErrorLogin(error: EntourageNetworkError())
-                    return //TODO
+                    self.handleLoginError(EntourageNetworkError()) // Fallback
+                    return
                 }
-                var newUser = user
                 
-                self?.isLoading = false
+                var newUser = user
+                self.isLoading = false
                 newUser?.phone = phone
                 UserDefaults.currentUser = newUser
                 UserDefaults.temporaryUser = nil
                 
-                self?.goalRealMain()
+                // Success Navigation
+                self.onSuccess?()
             }
         }
     }
     
-    func parseErrorLogin(error:EntourageNetworkError) {
-        var alertTitle =  "error".localized
-        var alertText =  "connection_error".localized
-        var buttonTitle =  "ok".localized
+    private func handleLoginError(_ error: EntourageNetworkError) {
+        var alertText = "connection_error".localized
         
         if error.code.contains("UNAUTHORIZED") {
-            alertTitle =  "tryAgain".localized
-            alertText =  "error_login_phoneNumberOrCode".localized
-            buttonTitle =  "tryAgain_short".localized
-        }
-        else if  error.code.contains("INVALID_PHONE_FORMAT") {
-            alertTitle =  "tryAgain".localized
-            alertText =  "error_login_phoneNumberFormat".localized
-            buttonTitle =  "tryAgain_short".localized
-        }
-        else if let errorCode = error.error as NSError?, errorCode.code == NSURLErrorNotConnectedToInternet {
-            alertTitle =  "tryAgain".localized
+            alertText = "error_login_phoneNumberOrCode".localized
+        } else if error.code.contains("INVALID_PHONE_FORMAT") {
+            alertText = "error_login_phoneNumberFormat".localized
+        } else if let errorCode = error.error as NSError?, errorCode.code == NSURLErrorNotConnectedToInternet {
             alertText = errorCode.localizedDescription
-            buttonTitle =  "tryAgain_short".localized
         }
         
-        let alertvc = UIAlertController.init(title: alertTitle, message: alertText, preferredStyle: .alert)
+        triggerAlert(message: alertText)
+    }
+    
+    // MARK: - Resend Code Logic
+    
+    func tapResendCode() {
+        if phone.count < minimumCharacters {
+            triggerAlert(message: String(format: "error_login_phone_length".localized, minimumCharacters))
+            return
+        }
         
-        let action = UIAlertAction.init(title: buttonTitle, style: .default, handler: nil)
-        alertvc.addAction(action)
-        DispatchQueue.main.async {
-            self.navigationController?.present(alertvc, animated: true, completion: nil)
+        if timeOut > 0 && timeOut != timeOutLength {
+            triggerAlert(message: String(format: "onboard_sms_pop_alert".localized, timeOut))
+        } else {
+            // Demande de confirmation avant envoi
+            showResendConfirmation = true
         }
     }
     
-    func alertForResent(){
-        let message = "login_resend_code_message".localized + phoneNumberString
-        let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "login_resend_code_button_no".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "login_resend_code_button_yes".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: "login_resend_code_title".localized, message: message, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+    func confirmResendCode() {
+        var rawPhone = phone.trimmingCharacters(in: .whitespaces)
+        // Petit fix local pour le formatage manuel si besoin
+        if !rawPhone.hasPrefix("+") && rawPhone.hasPrefix("0") {
+            rawPhone.remove(at: .init(encodedOffset: 0))
+        }
+        let fullPhone = "\(selectedCountry.code)\(rawPhone)"
         
-        alertVC.delegate = self
-        alertVC.show()
-    }
-    
-    func resendCode(phone:String) {
         SVProgressHUD.show()
-        
-        AuthService.regenerateSecretCode(phone: phone) { [weak self] error in
-            Logger.print("***** return resned code ;) error? \(error)")
+        AuthService.regenerateSecretCode(phone: fullPhone) { [weak self] error in
+            SVProgressHUD.dismiss()
+            guard let self = self else { return }
+            
             if let error = error {
-                SVProgressHUD.dismiss()
-                var _message =  "requestNotSent".localized
+                var msg = "requestNotSent".localized
                 if error.code.contains("USER_NOT_FOUND") {
-                    _message =  "error_login_resendCode_unknow".localized
+                    msg = "error_login_resendCode_unknow".localized
+                }
+                self.triggerAlert(message: msg)
+            } else {
+                SVProgressHUD.show(withStatus: "requestSent".localized)
+                SVProgressHUD.dismiss(withDelay: 1.5)
+                self.startTimer()
+            }
+        }
+    }
+    
+    // MARK: - Timer
+    
+    private func startTimer() {
+        stopTimer()
+        timeOut = timeOutLength
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            self.timeOut -= 1
+            if self.timeOut <= 0 {
+                self.stopTimer()
+            }
+        }
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+        timeOut = 0
+    }
+    
+    private func triggerAlert(message: String) {
+        self.alertMessage = message
+        self.showAlert = true
+    }
+}
+
+// MARK: - SwiftUI View
+
+struct LoginView: View {
+    @ObservedObject var vm: LoginViewModel
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            
+            // --------------------------------------------------------
+            // 1. Header Align (Titre + Back)
+            // --------------------------------------------------------
+            HStack(spacing: 16) {
+                Button(action: { vm.onBack?() }) {
+                    Image("back_arrow") // ou "back_arrow" / "back_button_white"
+                        .renderingMode(.template)
+                        .foregroundColor(.black)
+                        .padding(.vertical, 12)
                 }
                 
-                let alertvc = UIAlertController.init(title:  "error".localized, message: _message, preferredStyle: .alert)
+                Text("login_title".localized) // "Connexion"
+                    .font(.entourageTitle(24))
+                    .lineLimit(1)
                 
-                let action = UIAlertAction.init(title: "OK".localized, style: .default, handler: nil)
-                alertvc.addAction(action)
+                Spacer()
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 10)
+            .padding(.bottom, 20)
+            
+            // --------------------------------------------------------
+            // 2. ScrollView (Inputs + Bloc Resend Code)
+            // --------------------------------------------------------
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    
+                    // --- A. Section Téléphone ---
+                    VStack(alignment: .leading, spacing: 6) {
+                        // Titre du champ téléphne (optionnel, selon le design exact, l'image montre un label flottant ou placeholder)
+                        // L'image montre "Téléphone*" en label au dessus ou dans le cadre.
+                        // On garde le style "FloatingField" actuel qui met le titre au dessus.
+                        Text("login_label_phone".localized)
+                            .font(.entourageTitle(15))
+                        
+                        HStack(spacing: 12) {
+                            // Sélecteur Pays
+                            Button(action: {
+                                vm.showCountrySheet = true
+                            }) {
+                                ZStack(alignment: .leading) {
+                                    HStack {
+                                        Text(vm.selectedCountry.flag)
+                                            .font(.system(size: 28))
+                                            .frame(width: 44, height: 52, alignment: .center)
+                                            .padding(.leading, 10)
+                                        Spacer()
+                                        Image(systemName: "chevron.up.chevron.down")
+                                            .font(.entourageBody(15))
+                                            .foregroundColor(Color(UIColor.appOrange))
+                                            .padding(.trailing, 10)
+                                    }
+                                }
+                                .frame(height: 52)
+                                .frame(width: 100)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12).stroke(Color.secondary.opacity(0.25))
+                                )
+                            }
+                            .actionSheet(isPresented: $vm.showCountrySheet) {
+                                ActionSheet(
+                                    title: Text("Sélectionnez un pays"),
+                                    buttons: vm.countries.map { country in
+                                        .default(Text("\(country.flag) \(country.country)")) {
+                                            vm.selectedCountry = country
+                                        }
+                                    } + [.cancel(Text("Annuler"))]
+                                )
+                            }
+                            
+                            // Champ numéro
+                            BoxedTextField(placeholder: "login_phone_placeholder".localized, text: $vm.phone)
+                        }
+                    }
+                    
+                    // --- B. Section Code ---
+                    VStack(alignment: .leading, spacing: 6) {
+                        PasswordFloatingField(
+                            title: "login_label_code".localized, // "Saisir votre code"
+                            placeholder: "Ex : 123456",
+                            text: $vm.password,
+                            isSecured: $vm.isPasswordSecured
+                        )
+                    }
+                    
+                    // --- C. Bloc "Code Oublié" (Encadré) ---
+                    // C'est ici que ça change par rapport au code précédent
+                    VStack(spacing: 8) {
+                        Text("login_forgot_code_title".localized) // "Vous avez oublié votre code ?"
+                            .font(.entourageBody(15))
+                            .foregroundColor(.black)
+                        
+                        Button(action: {
+                            vm.tapResendCode()
+                        }) {
+                            Text("login_button_resend_code".localized) // "Recevoir un nouveau code par sms"
+                                .font(.entourageTitle(15)) // Style gras/orange
+                                .foregroundColor(Color(UIColor.appOrange))
+                                .underline()
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 20)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.secondary.opacity(0.25))
+                    )
+                    .padding(.top, 10)
+                    
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 10)
+            }
+            .simultaneousGesture(TapGesture().onEnded { UIApplication.shared.endEditing() })
+            
+            // --------------------------------------------------------
+            // 3. Footer (Changement numéro + Gros Bouton Connect)
+            // --------------------------------------------------------
+            VStack(spacing: 20) {
                 
-                self?.navigationController?.present(alertvc, animated: true, completion: nil)
+                // Texte + Lien "Changer de numéro"
+                VStack(spacing: 4) {
+                    Text("login_label_change_phone_question".localized) // "Vous avez changé de numéro de téléphone?"
+                        .font(.entourageTitle(16)) // Un peu plus gras comme sur la maquette
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                    
+                    Button(action: {
+                        vm.onChangePhone?()
+                    }) {
+                        Text("login_button_change_phone".localized) // "Changer mon numéro"
+                            .font(.custom("NunitoSans-Regular", size: 15))
+                            .foregroundColor(.black)
+                            .underline()
+                    }
+                }
+                
+                // Bouton Login Principal
+                Button(action: {
+                    vm.validateAndLogin()
+                    UIApplication.shared.endEditing()
+                }) {
+                    Text("login_button_connect".localized) // "Je me connecte"
+                        .font(.custom("Quicksand-Bold", size: 18))
+                        .foregroundColor(.white)
+                        .frame(height: 54) // Un peu plus haut
+                        .frame(maxWidth: .infinity)
+                        .background(Color(UIColor.appOrange))
+                        .cornerRadius(27)
+                }
             }
-            else {
-                SVProgressHUD.dismiss()
-                SVProgressHUD.show(withStatus: "requestSent".localized)
-                self?.startTimer()
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
+            .padding(.bottom, 20) // Marge du bas
+        }
+        .background(Color.white)
+        // Alert Standard
+        .alert(isPresented: $vm.showAlert) {
+            Alert(
+                title: Text("attention_pop_title".localized),
+                message: Text(vm.alertMessage ?? ""),
+                dismissButton: .default(Text("close".localized))
+            )
+        }
+        // Alert Confirmation Renvoi
+        .background(
+            EmptyView().alert(isPresented: $vm.showResendConfirmation) {
+                let phoneFull = "\(vm.selectedCountry.code) \(vm.phone)"
+                return Alert(
+                    title: Text("login_resend_code_title".localized),
+                    message: Text("login_resend_code_message".localized + phoneFull),
+                    primaryButton: .default(Text("login_resend_code_button_yes".localized), action: {
+                        vm.confirmResendCode()
+                    }),
+                    secondaryButton: .cancel(Text("login_resend_code_button_no".localized))
+                )
+            }
+        )
+        .onDisappear {
+            vm.stopTimer()
+        }
+    }
+}
+
+// MARK: - UIViewController Wrapper
+
+final class OTLoginV2ViewController: UIHostingController<LoginView> {
+    
+    private let vm = LoginViewModel()
+    
+    // Compatibilité API externe (pour le routeur)
+    var hasKeychain: Bool = false {
+        didSet {
+            if hasKeychain {
+                vm.checkForKeychain()
             }
         }
     }
     
-    //MARK: - IBActions -
-    @IBAction func action_validate(_ sender: Any) {
-        checkAndValidate()
+    // Deeplink handling variable
+    var deeplink: URL? = nil
+    
+    init() {
+        super.init(rootView: LoginView(vm: vm))
     }
     
-    @IBAction func action_tapview(_ sender: Any) {
-        ui_tf_country.resignFirstResponder()
-        ui_tf_phone.resignFirstResponder()
-        ui_tf_code.resignFirstResponder()
+    @MainActor required dynamic init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder, rootView: LoginView(vm: vm))
     }
     
-    @IBAction func action_demand_code(_ sender: Any) {
-        checkAndResendCode()
-    }
-    
-    @IBAction func action_show_change_phone(_ sender: UIButton) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "ChangePhoneVC") {
-        self.navigationController?.pushViewController(vc, animated: true)
+        // Configuration de la vue racine (fond transparent pour laisser SwiftUI gérer)
+        view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        // Binding des actions ViewModel -> Navigation Controller
+        setupCallbacks()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    private func setupCallbacks() {
+        // Navigation Back
+        vm.onBack = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        // Navigation Change Phone
+        vm.onChangePhone = { [weak self] in
+            guard let self = self else { return }
+            
+            // Charge explicitement le Storyboard "Intro"
+            let sb = UIStoryboard(name: "Intro", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "ChangePhoneVC")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        // Logic Success Login
+        vm.onSuccess = { [weak self] in
+            guard let self = self else { return }
+            
+            // Logique héritée de l'ancien VC
+            AppState.continueFromLoginVC()
+            
+            if let link = self.deeplink {
+                // OTDeepLinkService.init().handleDeepLink(link) // Décommenter si le service est dispo
+                self.deeplink = nil
+            }
         }
     }
-}
-
-//MARK: - UITextfieldDelegate -
-extension OTLoginV2ViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == ui_tf_code {
-            textField.resignFirstResponder()
-            checkAndValidate()
-        }
-        return true
-    }
-}
-
-//MARK: - uipickerView datasource / Delegate -
-extension OTLoginV2ViewController: UIPickerViewDelegate,UIPickerViewDataSource {
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerDatas.count
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(pickerDatas[row].flag) \(pickerDatas[row].country)"
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let title = "\(pickerDatas[row].flag) \(pickerDatas[row].country)"
-        let attrString = NSAttributedString.init(string: title, attributes: [NSAttributedString.Key.foregroundColor:UIColor.black])
-        return attrString
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        ui_tf_country.text = pickerDatas[row].flag
-        countryCode = pickerDatas[row]
-    }
-}
-
-//MARK: - MJNavBackViewDelegate -
-extension OTLoginV2ViewController: MJNavBackViewDelegate {
-    func goBack() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    func didTapEvent() {
-        //Nothing yet
-    }
-}
-
-extension OTLoginV2ViewController:MJAlertControllerDelegate{
-    func validateLeftButton(alertTag: MJAlertTAG) {
-        self.dismiss(animated: true)
-    }
-    
-    func validateRightButton(alertTag: MJAlertTAG) {
-        resendCode(phone: phoneNumberString)
-
-    }
-    
-    
 }

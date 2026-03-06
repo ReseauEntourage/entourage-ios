@@ -126,7 +126,6 @@ class HomeV2ViewController: UIViewController {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
         getUserInfo()
-        //presentOnboardingMode2IfNeeded()
 
 
     }
@@ -202,7 +201,6 @@ class HomeV2ViewController: UIViewController {
                             }
                         }
                     }
-                    
                 } else if _category.contains("event") {
                     DeepLinkManager.showOutingListUniversalLink()
                 } else if _category.contains("resources") {
@@ -228,7 +226,7 @@ class HomeV2ViewController: UIViewController {
         if config.isInterestsFromSetting {
             config.isInterestsFromSetting = false
             SVProgressHUD.dismiss()
-            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
             return
@@ -237,7 +235,7 @@ class HomeV2ViewController: UIViewController {
         if config.isOnboardingFromSetting {
             config.isOnboardingFromSetting = false
             SVProgressHUD.dismiss()
-            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
             navVC.modalPresentationStyle = .fullScreen
             self.tabBarController?.present(navVC, animated: false)
             return
@@ -271,8 +269,10 @@ class HomeV2ViewController: UIViewController {
             if isContributionPreference {
                 config.preference = "contribution"
             }
+            
             config.shouldSendOnboardingFromNormalWay = false
             config.isFromOnboardingFromNormalWay = true
+            viewController.isAssociationGoal = self.userHome.association ?? false
             viewController.modalPresentationStyle = .fullScreen
             viewController.modalTransitionStyle = .coverVertical
             present(viewController, animated: true, completion: nil)
@@ -401,7 +401,13 @@ class HomeV2ViewController: UIViewController {
     func configureDTO() {
         self.tableDTO.removeAll()
         self.updateTopView()
-        if initialPedagos.count > 0 {
+
+        var showInitialPedago = false
+        if let user = UserDefaults.currentUser, let involvements = user.involvements, involvements.contains("resources") {
+            showInitialPedago = true
+        }
+
+        if showInitialPedago && initialPedagos.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
             tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
         }
@@ -1207,51 +1213,51 @@ extension HomeV2ViewController {
 
 //Extension for filling mission infiormation in profile
 extension HomeV2ViewController {
-
+    
     private struct ZonePrefill {
         let coordinate: CLLocationCoordinate2D?
         let label: String?
         let radiusKm: Int
     }
-
+    
     private var appDelegate: AppDelegate? {
         UIApplication.shared.delegate as? AppDelegate
     }
-
+    
     private func logEntryGating(_ message: String) {
         print("[HomeEntryGating] \(message)")
     }
-
+    
     private func describeUserForGating(_ user: User) -> String {
         let goal = (user.goal ?? "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let hasRole = !goal.isEmpty
-
+        
         let hasZone = (user.addressPrimary != nil)
         let addrLabel = user.addressPrimary?.displayAddress ?? "nil"
         let lat = user.addressPrimary?.latitude
         let lon = user.addressPrimary?.longitude
-
+        
         let latStr = lat != nil ? String(lat!) : "nil"
         let lonStr = lon != nil ? String(lon!) : "nil"
-
+        
         let radius = user.radiusDistance ?? -1
         let interestsCount = user.interests?.count ?? 0
         let involvementsCount = user.involvements?.count ?? 0
         let concernsCount = user.concerns?.count ?? 0
-
+        
         return "uuid=\(user.uuid ?? "nil") sid=\(user.sid) goal='\(goal)' hasRole=\(hasRole) hasZone=\(hasZone) addr='\(addrLabel)' lat=\(latStr) lon=\(lonStr) radius=\(radius) interests=\(interestsCount) involvements=\(involvementsCount) concerns=\(concernsCount)"
     }
-
+    
     private func makeZonePrefillFromCurrentUser() -> ZonePrefill {
         guard let user = UserDefaults.currentUser else {
             return ZonePrefill(coordinate: nil, label: nil, radiusKm: 20)
         }
-
+        
         let radius = max(1, user.radiusDistance ?? 20)
-
+        
         var coord: CLLocationCoordinate2D? = nil
         var label: String? = nil
-
+        
         if let addr = user.addressPrimary {
             if let lat = addr.latitude, let lon = addr.longitude {
                 coord = CLLocationCoordinate2D(latitude: lat, longitude: lon)
@@ -1260,34 +1266,34 @@ extension HomeV2ViewController {
                 label = l
             }
         }
-
+        
         return ZonePrefill(coordinate: coord, label: label, radiusKm: radius)
     }
-
+    
     private func userHasRole(_ user: User) -> Bool {
         let g = (user.goal ?? "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         return !g.isEmpty
     }
-
+    
     private func userHasZone(_ user: User) -> Bool {
         user.addressPrimary != nil
     }
-
+    
     private func userNeedsEnhancedOnboarding(_ user: User) -> Bool {
         let interestsEmpty = (user.interests?.isEmpty ?? true)
         let involvementsEmpty = (user.involvements?.isEmpty ?? true)
         let concernsEmpty = (user.concerns?.isEmpty ?? true)
         return interestsEmpty || involvementsEmpty || concernsEmpty
     }
-
+    
     private func hasLaunchedEnhancedOnboarding() -> Bool {
         UserDefaults.standard.bool(forKey: "hasLaunchedEnhancedOnboarding")
     }
-
+    
     private func markEnhancedOnboardingLaunched() {
         UserDefaults.standard.set(true, forKey: "hasLaunchedEnhancedOnboarding")
     }
-
+    
     private func presentPhase3Onboarding() {
         let sb = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
         if let onboardingStart = sb.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
@@ -1320,7 +1326,7 @@ extension HomeV2ViewController {
             }
         }
     }
-
+    
     private func presentZoneChoice(prefill: ZonePrefill) {
         presentZoneChoiceSwiftUI(
             initialCoordinate: prefill.coordinate,
@@ -1335,10 +1341,13 @@ extension HomeV2ViewController {
             }
         )
     }
-
+    
     private func presentEnhancedOnboardingIntro() {
         let sb = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
         if let intro = sb.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
+            if let _ = UserDefaults.currentUser?.partner {
+                intro.isAssociationGoal = true
+            }
             intro.modalPresentationStyle = .fullScreen
             if presentedViewController != nil {
                 dismiss(animated: false)
@@ -1353,7 +1362,7 @@ extension HomeV2ViewController {
             present(fallback, animated: true)
         }
     }
-
+    
     private func shouldSkipBecauseAlreadyPresentedThisSession() -> Bool {
         guard let ad = appDelegate else { return false }
         if ad.homeEntryGatingDidPresentCriticalThisSession { return true }
@@ -1361,81 +1370,115 @@ extension HomeV2ViewController {
         if ad.homeEntryGatingDidPresentEnhancedThisSession { return true }
         return false
     }
-
+    
     func runHomeEntryGatingIfNeeded() {
-        logEntryGating("runHomeEntryGatingIfNeeded() called. hasRunEntryGating=\(hasRunEntryGating)")
-
+        // Log pour le debug
+        print("[HomeEntryGating] runHomeEntryGatingIfNeeded() called. hasRunEntryGating=\(hasRunEntryGating)")
+        
+        // 1. Vérifie si déjà exécuté pour cette instance de vue
         guard !hasRunEntryGating else {
-            logEntryGating("SKIP: already ran for this Home instance")
+            print("[HomeEntryGating] SKIP: already ran for this Home instance")
             return
         }
         hasRunEntryGating = true
-
-        if shouldSkipBecauseAlreadyPresentedThisSession() {
-            logEntryGating("SKIP: already presented something this session via AppDelegate")
-            return
+        
+        // 2. Vérifie si déjà affiché dans la session (RAM/AppDelegate)
+        if let ad = UIApplication.shared.delegate as? AppDelegate {
+            if ad.homeEntryGatingDidPresentCriticalThisSession ||
+                ad.homeEntryGatingDidPresentNotifThisSession ||
+                ad.homeEntryGatingDidPresentEnhancedThisSession {
+                print("[HomeEntryGating] SKIP: already presented something this session via AppDelegate")
+                return
+            }
         }
-
+        
+        // 3. Vérifie l'utilisateur
         guard let user = UserDefaults.currentUser else {
-            logEntryGating("STOP: UserDefaults.currentUser is nil")
+            print("[HomeEntryGating] STOP: UserDefaults.currentUser is nil")
             return
         }
-
-        logEntryGating("User snapshot: \(describeUserForGating(user))")
-
+        
+        // Préparation des données pour la zone
         let prefill = makeZonePrefillFromCurrentUser()
-        logEntryGating("Zone prefill: label='\(prefill.label ?? "nil")' coord=\(prefill.coordinate.map { "\($0.latitude),\($0.longitude)" } ?? "nil") radius=\(prefill.radiusKm)")
-
         let missingRole = !userHasRole(user)
         let missingZone = !userHasZone(user)
-
+        
+        // 4. Critical Onboarding (Goal / Zone)
         if missingRole || missingZone {
             if missingRole {
-                logEntryGating("DECISION: missing role/goal -> presentPhase3Onboarding()")
-                appDelegate?.homeEntryGatingDidPresentCriticalThisSession = true
+                print("[HomeEntryGating] DECISION: missing role/goal -> presentPhase3Onboarding()")
+                if let ad = UIApplication.shared.delegate as? AppDelegate {
+                    ad.homeEntryGatingDidPresentCriticalThisSession = true
+                }
                 presentPhase3Onboarding()
                 return
             }
-
+            
             if missingZone {
-                logEntryGating("DECISION: missing zone -> presentZoneChoice(prefill:)")
-                appDelegate?.homeEntryGatingDidPresentCriticalThisSession = true
+                print("[HomeEntryGating] DECISION: missing zone -> presentZoneChoice(prefill:)")
+                if let ad = UIApplication.shared.delegate as? AppDelegate {
+                    ad.homeEntryGatingDidPresentCriticalThisSession = true
+                }
                 presentZoneChoice(prefill: prefill)
                 return
             }
         }
-
+        
+        // 5. Vérification des Notifications
         UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
             guard let self = self else { return }
             DispatchQueue.main.async {
-
-                if self.shouldSkipBecauseAlreadyPresentedThisSession() {
-                    self.logEntryGating("SKIP: already presented something this session (post notif check)")
-                    return
+                
+                // Revérification session (au cas où ça a changé pendant l'appel asynchrone)
+                if let ad = UIApplication.shared.delegate as? AppDelegate {
+                    if ad.homeEntryGatingDidPresentCriticalThisSession ||
+                        ad.homeEntryGatingDidPresentNotifThisSession ||
+                        ad.homeEntryGatingDidPresentEnhancedThisSession {
+                        return
+                    }
                 }
-
-                self.logEntryGating("Notif status rawValue=\(settings.authorizationStatus.rawValue)")
-
+                
                 if settings.authorizationStatus != .authorized && settings.authorizationStatus != .provisional {
-                    self.logEntryGating("DECISION: notif not allowed -> presentNotificationDemandViewController()")
-                    self.appDelegate?.homeEntryGatingDidPresentNotifThisSession = true
-                    self.presentNotificationDemandViewController()
-                    return
+                    
+                    // --- COOKIE CHECK (iOS) ---
+                    // On vérifie sur le disque si on a DÉJÀ montré la demande auparavant
+                    let notifPopupAlreadyShown = UserDefaults.standard.bool(forKey: "hasPresentedNotificationDemand")
+                    
+                    if !notifPopupAlreadyShown {
+                        // Cas: Jamais montré -> On affiche
+                        print("[HomeEntryGating] DECISION: notif not allowed & never shown -> presentNotificationDemandViewController()")
+                        
+                        // IMPORTANT: On écrit le cookie MAINTENANT
+                        UserDefaults.standard.set(true, forKey: "hasPresentedNotificationDemand")
+                        UserDefaults.standard.synchronize()
+                        
+                        if let ad = UIApplication.shared.delegate as? AppDelegate {
+                            ad.homeEntryGatingDidPresentNotifThisSession = true
+                        }
+                        self.presentNotificationDemandViewController()
+                        return
+                    } else {
+                        // Cas: Déjà montré -> On ne fait rien et on laisse couler vers le code suivant
+                        print("[HomeEntryGating] SKIP: Notification demand already presented historically (Cookie found).")
+                    }
+                    // --- FIN COOKIE CHECK ---
                 }
-
+                
+                // 6. Enhanced Onboarding
                 let needsEO = self.userNeedsEnhancedOnboarding(user)
                 let hasEO = self.hasLaunchedEnhancedOnboarding()
-                self.logEntryGating("Enhanced onboarding: needs=\(needsEO) hasLaunched=\(hasEO)")
-
+                
                 if !hasEO && needsEO {
-                    self.logEntryGating("DECISION: launch enhanced onboarding -> presentEnhancedOnboardingIntro()")
-                    self.appDelegate?.homeEntryGatingDidPresentEnhancedThisSession = true
+                    print("[HomeEntryGating] DECISION: launch enhanced onboarding -> presentEnhancedOnboardingIntro()")
+                    if let ad = UIApplication.shared.delegate as? AppDelegate {
+                        ad.homeEntryGatingDidPresentEnhancedThisSession = true
+                    }
                     self.markEnhancedOnboardingLaunched()
                     self.presentEnhancedOnboardingIntro()
                     return
                 }
-
-                self.logEntryGating("DECISION: nothing to do")
+                
+                print("[HomeEntryGating] DECISION: nothing to do")
             }
         }
     }

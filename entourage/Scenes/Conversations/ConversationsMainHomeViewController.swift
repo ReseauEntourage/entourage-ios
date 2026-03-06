@@ -169,6 +169,7 @@ class ConversationsMainHomeViewController: UIViewController {
         conv.numberUnreadMessages = membership.numberOfUnreadMessages
         conv.members_count = membership.numberOfPeople
         conv.imageUrl = membership.imageUrl
+        conv.lastChatMessageImageUrl = membership.lastChatMessageImageUrl
 
         // 🔥 RÈGLE : s'il n'y a qu'UNE personne dans la conv -> c'est toi seul => "Vous"
         if (membership.numberOfPeople ?? 0) <= 1 {

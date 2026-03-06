@@ -697,7 +697,7 @@
 /*************
  * Group detail
  */
-"title_is_ambassador" = "Ambassadeur •" ;
+"title_is_ambassador" = "Animateur Entourage •" ;
 "title_is_admin" = "Administrateur •" ;
 
 "neighborhood_detail_button_join_member" = "Membre";
@@ -1421,3 +1421,15 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_hz_item_title" = "Tiens, ça semble un peu calme par ici…";
 "home_v2_hz_item_subtitle" = "Et si vous mettiez un peu de solidarité dans votre ville ? Entourage vous donne les clés pour vous lancer !";
 "home_v2_hz_item_button" = "En savoir plus";
+
+"editUser_gender_male" = "Muškarac";
+"editUser_gender_female" = "Žena";
+"editUser_gender_secret" = "Nije navedeno";
+
+"error_settings_notifs_disabled_title" = "Notifications disabled";
+"error_settings_notifs_disabled_message" = "To receive notifications, you must enable them in your phone settings.";
+"error_settings_notifs_disabled_button_settings" = "Settings";
+"error_settings_notifs_disabled_button_cancel" = "Cancel";
+"orientation_share" = "Relayer vos événements de convivialité sur l'application";
+"orientation_guide" = "Orienter vos bénéficiaires aux événements de convivialité";
+"orientation_both_actions" = "Donner ou solliciter un coup de pouce";

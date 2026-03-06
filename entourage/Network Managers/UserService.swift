@@ -12,7 +12,7 @@ struct UserService {
     
     //MARK: - Update User Interests
 
-    static func updateUserChoices(interests: [String], concerns: [String], involvements: [String], selectedDays: Set<Int>, selectedHours: Set<Int>, completion: @escaping (_ user: User?, _ error: EntourageNetworkError?) -> Void) {
+    static func updateUserChoices(interests: [String], concerns: [String], involvements: [String], orientations: [String]? = nil, selectedDays: Set<Int>, selectedHours: Set<Int>, completion: @escaping (_ user: User?, _ error: EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {
             completion(nil, nil)
@@ -50,25 +50,33 @@ struct UserService {
         }
         
         // Préparation des paramètres pour la requête
+        var userParams: [String: Any] = [
+            "interests": interests,
+            "concerns": concerns,
+            "involvements": involvements,
+            "availability": availability // Ajout de la disponibilité
+        ]
+        
+        // Ajout des orientations (spécifique Asso/Action Wishes)
+        if let orientations = orientations {
+            userParams["orientations"] = orientations
+        }
+        
         let parameters: [String: Any] = [
-            "user": [
-                "interests": interests,
-                "concerns": concerns,
-                "involvements": involvements,
-                "availability": availability // Ajout de la disponibilité
-            ]
+            "user": userParams
         ]
         
         // Transformation en JSON
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-        
+        let fullUrl = NetworkManager.sharedInstance.getBaseUrl() + endpoint // Assure-toi d'avoir l'URL complète
+        self.logCurl(url: fullUrl, method: "PATCH", bodyData: bodyData)
         // Requête PATCH
         NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
             guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 completion(nil, error)
                 return
             }
-            
+           
             let userParsed = self.parsingDataUser(data: data).user
             completion(userParsed, nil)
         }
@@ -98,9 +106,9 @@ struct UserService {
                 DispatchQueue.main.async { completion(nil, error) }
                 return
             }
-            
+           
             let userParsed = self.parsingDataUser(data: data).user
-            
+           
             DispatchQueue.main.async { completion(userParsed,nil) }
         }
     }
@@ -109,7 +117,7 @@ struct UserService {
     
     static func updateLanguage(userId: Int, lang: String, completion: @escaping (_ success: Bool) -> Void) {
         
-        
+       
         guard let token = UserDefaults.token else {
             completion(false)
             return
@@ -121,7 +129,7 @@ struct UserService {
         // Vous pourriez avoir besoin de modifier cette méthode ou d'en créer une nouvelle si
         // NetworkManager ne prend pas en charge les requêtes PUT directement.
         NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
-            
+           
             guard let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 Logger.print("***** error updating language - \(error)")
                 DispatchQueue.main.async { completion(false) }
@@ -151,10 +159,10 @@ struct UserService {
                 DispatchQueue.main.async { completion(nil, error) }
                 return
             }
-            
+           
             A0SimpleKeychain().setString(pwd, forKey: kKeychainPassword)
             let userParsed = self.parsingDataUser(data: data).user
-            
+           
             DispatchQueue.main.async { completion(userParsed,nil) }
         }
     }
@@ -166,7 +174,7 @@ struct UserService {
         var endpoint = isSecondaryAddress ? kAPIUpdateAddressSecondary : kAPIUpdateAddressPrimary
         endpoint = String.init(format: endpoint, token)
         
-        
+       
         let parameters = [kWSKeyAddress : [kWSKeyGooglePlaceId: placeId]]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
@@ -179,13 +187,13 @@ struct UserService {
                 DispatchQueue.main.async { completion(error) }
                 return
             }
-            
+           
             let newUser = self.parsingDataUser(data: data).user
             Logger.print("***** update place id user: \(newUser?.addressPrimary?.displayAddress)")
             if newUser?.uuid != nil && newUser?.uuid?.count ?? 0 > 0 {
                 UserDefaults.updateCurrentUser(newUser: newUser!)
             }
-            
+           
             DispatchQueue.main.async { completion(nil) }
         }
     }
@@ -196,7 +204,7 @@ struct UserService {
         var endpoint = isSecondaryAddress ? kAPIUpdateAddressSecondary : kAPIUpdateAddressPrimary
         endpoint = String.init(format: endpoint, token)
         
-        
+       
         let parameters = [kWSKeyAddress : [kWSKeyPlaceName: name,kWSKeyPlaceLatitude: latitude, kWSKeyPlaceLongitude:longitude]]
         
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -210,12 +218,12 @@ struct UserService {
                 DispatchQueue.main.async { completion( error) }
                 return
             }
-            
+           
             let newUser = self.parsingDataUser(data: data).user
             if newUser?.uuid != nil && newUser?.uuid?.count ?? 0 > 0 {
                 UserDefaults.updateCurrentUser(newUser: newUser!)
             }
-            
+           
             DispatchQueue.main.async { completion(nil) }
         }
     }
@@ -233,11 +241,11 @@ struct UserService {
                 DispatchQueue.main.async { completion(error) }
                 return
             }
-            
+           
             var currentUser = UserDefaults.currentUser
             currentUser?.addressSecondary = nil
             UserDefaults.currentUser = currentUser
-            
+           
             DispatchQueue.main.async { completion(nil) }
         }
     }
@@ -310,15 +318,15 @@ struct UserService {
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
         NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
-            
+           
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 Logger.print("***** error update User interests - \(error)")
                 DispatchQueue.main.async { completion(nil,  error) }
                 return
             }
-            
+           
             let userParsed = self.parsingDataUser(data: data).user
-            
+           
             DispatchQueue.main.async { completion(userParsed,nil) }
         }
     }
@@ -331,15 +339,15 @@ struct UserService {
         
         Logger.print("***** get details user : \(endpoint)")
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
-            
+           
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 Logger.print("***** error update User interests - \(error)")
                 DispatchQueue.main.async { completion(nil,  error) }
                 return
             }
-            
+           
             let userParsed = self.parsingDataUser(data: data).user
-            
+           
             DispatchQueue.main.async { completion(userParsed,nil) }
         }
     }
@@ -389,19 +397,75 @@ struct UserService {
         
         Logger.print("***** get kAPIUnreadCount : \(endpoint)")
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
-            
+           
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 Logger.print("***** error kAPIUnreadCount - \(error)")
                 DispatchQueue.main.async { completion(nil,  error) }
                 return
             }
-            
+           
             let unreadCount = self.parsingUnreadCount(data: data)
-            
+           
             DispatchQueue.main.async { completion(unreadCount,nil) }
         }
     }
     
+    //MARK: - Events Stats
+
+    static func getOutingsCount(withinDays: Int = 30, latitude: Double, longitude: Double, travelDistance: Double, completion: @escaping (_ count: Int?, _ error: EntourageNetworkError?) -> Void) {
+
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIOutingsCount, token, withinDays, travelDistance, latitude, longitude)
+
+        Logger.print("***** get outings count: \(endpoint)")
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error get outings count - \(String(describing: error))")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+
+            var count: Int?
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let _count = json["count"] as? Int {
+                    count = _count
+                }
+            } catch {
+                Logger.print("Error parsing outings count \(error)")
+            }
+
+            DispatchQueue.main.async { completion(count, nil) }
+        }
+    }
+
+    static func getOutingsWeekAverage(latitude: Double, longitude: Double, travelDistance: Double, completion: @escaping (_ average: Double?, _ error: EntourageNetworkError?) -> Void) {
+
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIOutingsWeekAverage, token, travelDistance, latitude, longitude)
+
+        Logger.print("***** get outings week average: \(endpoint)")
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error get outings week average - \(String(describing: error))")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+
+            var average: Double?
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let _average = json["average"] as? Double {
+                    average = _average
+                }
+            } catch {
+                Logger.print("Error parsing outings week average \(error)")
+            }
+
+            DispatchQueue.main.async { completion(average, nil) }
+        }
+    }
+
     static func parsingUnreadCount(data:Data) -> (Int,Int) {
         var unreadCount = 0
         var unreadCounGroup = 0
@@ -427,7 +491,7 @@ struct UserService {
         do {
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] {
                 let decoder = JSONDecoder()
-                
+               
                 if let _jsonUser = json["user"] as? [String:AnyObject], let dataUser = try? JSONSerialization.data(withJSONObject: _jsonUser) {
                     user = try decoder.decode(User.self, from: dataUser)
                 }
@@ -439,6 +503,23 @@ struct UserService {
         }
         return (user,isFirstLogin)
     }
+    
+    
+    
+    
+    static func logCurl(url: String, method: String, bodyData: Data?) {
+        var curl = "---------- CURL DEBUG ----------\n"
+        curl += "curl -v -X \(method) \"\(url)\""
+        curl += " -H \"Content-Type: application/json\""
+        
+        if let data = bodyData, let bodyString = String(data: data, encoding: .utf8) {
+            // On échappe les guillemets pour que le curl soit copiable/collable
+            let escapedBody = bodyString.replacingOccurrences(of: "\"", with: "\\\"")
+            curl += " -d \"\(escapedBody)\""
+        }
+        
+        curl += "\n--------------------------------"
+        Logger.print(curl)
+    }
 }
-
 

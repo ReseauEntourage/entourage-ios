@@ -786,4 +786,19 @@ class TagsUtils {
             return NSLocalizedString("interest_other".localized, comment: "")
         }
     }
+
+    static func showOrientationTranslated(_ section: String) -> String {
+        switch section {
+        case "share":
+            return "orientation_share".localized
+        case "guide":
+            return "orientation_guide".localized
+        case "both_actions":
+            return "orientation_both_actions".localized
+        case "help":
+            return "orientation_both_actions".localized
+        default:
+            return showTagTranslated(section)
+        }
+    }
 }

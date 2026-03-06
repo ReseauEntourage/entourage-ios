@@ -25,6 +25,7 @@ class ProfileEditorViewController: UIViewController {
     var birth_date_new:String? = nil
     var email_new:String? = nil
     var radius_new:Int? = nil
+    var gender_new:String? = nil
     var profilFullDelegate:ImageReUpLoadDelegate?
     var location_new:CLLocationCoordinate2D? = nil
     var location_name_new:String? = nil
@@ -170,21 +171,25 @@ class ProfileEditorViewController: UIViewController {
         
         if birth_date_new?.count ?? 0 > 0 {
             if let birth_date_new = birth_date_new, birth_date_new.matchesRegEx("^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])")  {
-                newUser?.birthday = birth_date_new
+                newUser?.birthdate = birth_date_new
             }
             else {
                 showError(message: "editUser_error_birthday".localized)
                 return
             }
         }
-        else if !(currentUser?.birthday?.count ?? 0 > 0) {
-            newUser?.birthday = ""
+        else if !(currentUser?.birthdate?.count ?? 0 > 0) {
+            newUser?.birthdate = ""
         }
         
         if let radius_new = radius_new {
             newUser?.radiusDistance = radius_new
         }
         
+        if let gender_new = gender_new {
+            newUser?.gender = gender_new
+        }
+
         //TODO: la location à la validation ou lors du choix de l'adresse ?
         //check google place
         if let gplace = location_googlePlace_new, let placeId = gplace.placeID {
@@ -232,7 +237,7 @@ class ProfileEditorViewController: UIViewController {
 //MARK: - Tableview Datasource / Delegate -
 extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -245,7 +250,7 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
         
         if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterests", for: indexPath)
-            
+            cell.contentView.isHidden = true
             return cell
         }
         if indexPath.row == 3 {
@@ -263,8 +268,9 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
         else if let _gplace = self.location_googlePlace_new?.formattedAddress { //TODO: quel formattage d'adresse ?
             cityName = _gplace
         }
+        var _gender = currentUser?.gender
         
-        cell.populateCell(firstname: currentUser?.firstname, lastname: currentUser?.lastname , bio: currentUser?.about, birthdate: currentUser?.birthday, email: currentUser?.email,phone: currentUser?.phone, cityName: cityName, radius: currentUser?.radiusDistance, delegate: self)
+        cell.populateCell(firstname: currentUser?.firstname, lastname: currentUser?.lastname , bio: currentUser?.about, birthdate: currentUser?.birthdate, email: currentUser?.email,phone: currentUser?.phone, cityName: cityName, radius: currentUser?.radiusDistance, gender: _gender, delegate: self)
         
         return cell
     }
@@ -334,6 +340,10 @@ extension ProfileEditorViewController:CellTextDelegate {
     
     func updateRadius(radius:Int) {
         self.radius_new = radius
+    }
+
+    func updateGender(gender: String?) {
+        self.gender_new = gender
     }
 }
 

@@ -204,6 +204,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ui_btn_asso" destination="wyP-Pj-ieW" id="u5a-SV-uFT"/>
                 <outlet property="ui_btn_modify" destination="9cK-1i-nLV" id="wtC-dw-S77"/>
                 <outlet property="ui_img_asso" destination="H61-7U-zxA" id="aY6-sM-yJA"/>
                 <outlet property="ui_label_city" destination="C4W-kd-9go" id="NRb-ir-8qZ"/>

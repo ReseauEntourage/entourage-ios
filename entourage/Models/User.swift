@@ -32,10 +32,10 @@ struct User: Codable {
     var memberships:[String]? = nil
     var confirmedAt:String? = nil
     var availability: [String: [String]]? = nil
-
     var firebaseProperties:[String:String]? = [String:String]()
     var interests:[String]? = nil
     var involvements:[String]? = nil
+    var orientations:[String]? = nil
     var concerns:[String]? = nil
     var unreadCount:Int = 0
     var gender:String? = ""
@@ -43,7 +43,8 @@ struct User: Codable {
     var discoverySource: String? = nil
     var company: String? = nil
     var event: String? = nil
-    var birthday:String? = nil
+    var birthdate:String? = nil
+    var birthday:Bool? = nil
     var radiusDistance:Int? = 0
     
     var isEngaged:Bool = false
@@ -103,12 +104,13 @@ struct User: Codable {
         case memberships
         case interests
         case involvements
+        case orientations
         case concerns
-        
+       
         case _firstname = "first_name"
         case _lastname = "last_name"
         case sid = "id"
-        
+       
         case type = "user_type"
         case _displayName = "display_name"
         case password = "sms_code"
@@ -127,7 +129,7 @@ struct User: Codable {
     
     func dictionaryForWS() -> [String:Any] {
         var dict = [String:Any]()
-        
+       
         if firstname.count > 0 {
             dict["first_name"] = firstname
         }
@@ -152,7 +154,7 @@ struct User: Codable {
         if let goal = goal, goal.count > 0 {
             dict["goal"] = goal
         }
-        
+       
         if let hasConsent = hasConsent {
             dict["newsletter_subscription"] = hasConsent
         }
@@ -161,7 +163,7 @@ struct User: Codable {
     
     func dictionaryUserUpdateForWS() -> [String:Any] {
         var dict = [String:Any]()
-        
+       
         if firstname.count > 0 {
             dict["first_name"] = firstname
         }
@@ -183,13 +185,13 @@ struct User: Codable {
         if let avatarKey = avatarKey, avatarKey.count > 0 {
             dict["avatar_key"] = avatarKey
         }
-        if let birthday = birthday, birthday.count >= 0 {
-            dict["birthday"] = birthday
+        if let birthdate = birthdate, birthdate.count >= 0 {
+            dict["birthdate"] = birthdate
         }
         if radiusDistance ?? 0 >= 0 {
             dict["travel_distance"] = radiusDistance
         }
-        
+       
         return dict
     }
     
@@ -234,7 +236,7 @@ struct UserLightNeighborhood: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-       
+        
         case partnerRoleTitle = "partner_role_title"
         case status
         case message
@@ -249,6 +251,7 @@ struct UserLightNeighborhood: Codable {
         case photoAcceptance = "photo_acceptance"
         case _displayName = "display_name"
         case avatarURL = "avatar_url"
+        
     }
     
     func getCommunityRolesFormated() -> String? {
@@ -261,40 +264,64 @@ struct UserLightNeighborhood: Codable {
             }
             return roleStr
         }
-        
+       
         return nil
     }
     
     func getCommunityRoleWithPartnerFormated() -> String? {
         if let communityRoles = communityRoles {
-            
+           
             var roleStr = ""
-            
+           
             if isAdmin() {
                 roleStr = "Admin".localized
             }
-            
-            for role in communityRoles {
-                if roleStr.count > 0 {
-                    roleStr = "\(roleStr) • \(role)"
+           
+            var currentRole: String? = nil
+            if let firstRole = communityRoles.first {
+                currentRole = firstRole
+                if currentRole == "Ambassadeur" {
+                    currentRole = "Animateur Entourage"
+                } else if currentRole == "Équipe Entourage" {
+                    currentRole = "Équipe"
                 }
-                else {
-                    roleStr = role
-                }
-                
-                break
             }
+
             if let name = partner?.name {
+                var showRole = true
+                if let role = currentRole {
+                    if name.lowercased().contains(role.lowercased()) {
+                        showRole = false
+                    }
+                }
+
+                if showRole, let role = currentRole {
+                    if roleStr.count > 0 {
+                        roleStr = "\(roleStr) • \(role)"
+                    } else {
+                        roleStr = role
+                    }
+                }
+
                 if roleStr.count > 0 {
                     roleStr = "\(roleStr) • \(name)"
-                }
-                else {
+                } else {
                     roleStr = name
+                }
+            }
+            else {
+                if let role = currentRole {
+                    if roleStr.count > 0 {
+                        roleStr = "\(roleStr) • \(role)"
+                    }
+                    else {
+                        roleStr = role
+                    }
                 }
             }
             return roleStr
         }
-        
+       
         return nil
     }
     

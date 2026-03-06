@@ -7,22 +7,23 @@
 
 import Foundation
 
-struct Partner:Codable {
-    var name:String = ""
-    var postalCode:String?
-    var userRoleTitle:String?
-    var isCreation:Bool? = false
-    var aid:Int?
-    var smallLogoUrl:String?
-    var largeLogoUrl:String?
-    var descr:String?
-    var phone:String?
-    var address:String?
-    var websiteUrl:String?
-    var email:String?
-    var donations_needs:String?
-    var volunteers_needs:String?
-    var isFollowing:Bool? = false
+struct Partner: Codable {
+    var name: String = ""
+    var postalCode: String?
+    var userRoleTitle: String?
+    var isCreation: Bool? = false
+    var aid: Int?
+    var smallLogoUrl: String?
+    var largeLogoUrl: String?
+    var imageUrl: String? // AJOUTÉ : Correspond au champ "image_url" du JSON
+    var descr: String?
+    var phone: String?
+    var address: String?
+    var websiteUrl: String?
+    var email: String?
+    var donations_needs: String?
+    var volunteers_needs: String?
+    var isFollowing: Bool? = false
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -31,6 +32,7 @@ struct Partner:Codable {
         case aid = "id"
         case smallLogoUrl = "small_logo_url"
         case largeLogoUrl = "large_logo_url"
+        case imageUrl = "image_url" // AJOUTÉ
         case descr = "description"
         case phone
         case address

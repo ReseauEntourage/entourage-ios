@@ -10,6 +10,7 @@ import UIKit
 
 protocol HeaderProfilFullCellDelegate {
     func onModifyClick()
+    func onPartnerClick()
 }
 
 class HeaderProfilFullCell: UITableViewCell {
@@ -28,6 +29,7 @@ class HeaderProfilFullCell: UITableViewCell {
     @IBOutlet weak var ui_view_partner: UIView!           // Vue contenant le partenaire
     @IBOutlet weak var ui_img_asso: UIImageView!
     @IBOutlet weak var ui_label_stackview: UIStackView!   // Contient les labels d'info
+    @IBOutlet weak var ui_btn_asso: UIButton!
     
     // VARIABLE
     class var identifier: String {
@@ -44,7 +46,7 @@ class HeaderProfilFullCell: UITableViewCell {
         ui_label_description.setFontBody(size: 15)
         ui_label_phone.setFontBody(size: 15)
         ui_label_mail.setFontBody(size: 15)
-        
+        setupPartnerTap()
         self.ui_btn_modify.addTarget(self, action: #selector(onModifyClick), for: .touchUpInside)
         
 
@@ -70,7 +72,16 @@ class HeaderProfilFullCell: UITableViewCell {
         delegate?.onModifyClick()
     }
     
+    func setupPartnerTap() {
+        ui_btn_asso.addTarget(self, action: #selector(handlePartnerTap), for: .touchUpInside)
+        }
+        
+    @objc func handlePartnerTap() {
+        delegate?.onPartnerClick()
+    }
+
     func configure(user: User, isMe: Bool) {
+        
         // Réinitialisation de la visibilité (utile en cas de réutilisation de la cellule)
         [ui_label_name, ui_label_city, ui_label_description, ui_label_phone, ui_label_mail, ui_label_partner, ui_label_role].forEach {
             $0?.isHidden = false
