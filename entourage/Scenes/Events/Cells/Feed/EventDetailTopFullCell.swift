@@ -36,12 +36,12 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_view_organised_by: UIView!
     @IBOutlet weak var ui_view_association: UIView!
     @IBOutlet weak var ui_label_association: UILabel!
-    @IBOutlet weak var ui_btn_share: UIButton!
-    @IBOutlet weak var ui_btn_participate: UIButton!
     @IBOutlet weak var ui_button_go_to_discussion: UIButton!
     @IBOutlet weak var ui_height_map_view: NSLayoutConstraint!
     
-    @IBOutlet weak var ui_btn_agenda: UIButton!
+    @IBOutlet weak var ui_lbl_discussion_title: UILabel!
+    @IBOutlet weak var ui_view_discussion_card: UIView!
+
     // **Nouvelle IBOutlet** pour la carte
     @IBOutlet weak var ui_mapview: MKMapView!
     @IBOutlet weak var ui_btn_i_participate: UIButton!
@@ -96,14 +96,13 @@ class EventDetailTopFullCell: UITableViewCell {
 
         ui_view_place_limit.isHidden = true
         
-        ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
-        configureWhiteButton(self.ui_btn_share, withTitle: "neighborhood_add_post_send_button".localized)
-        configureWhiteButton(self.ui_btn_participate, withTitle: "event_detail_button_participe_ON".localized)
-        configureWhiteButton(self.ui_btn_agenda, withTitle: "event_button_add_calendar".localized)
         configureOrangeButton(self.ui_button_go_to_discussion, withTitle: "event_conversation".localized)
         
-        self.ui_btn_agenda.addTarget(self, action: #selector(onAgendaClick), for: .touchUpInside)
-        self.ui_btn_participate.addTarget(self, action: #selector(onParticipateClick), for: .touchUpInside)
+        ui_lbl_discussion_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_lbl_discussion_title.text = "event_discussion_card_title".localized
+
+        ui_view_discussion_card.backgroundColor = .appBeigeClair
+        ui_view_discussion_card.layer.cornerRadius = 15
         
         // **Initialisation de la carte**
         ui_mapview.delegate = self
@@ -121,7 +120,7 @@ class EventDetailTopFullCell: UITableViewCell {
     @objc func onParticipateClick() {
         delegate?.joinLeave()
     }
-    @objc func onAgendaClick() {
+    @IBAction func onAgendaClick() {
         delegate?.showAgenda()
     }
     
@@ -162,10 +161,10 @@ class EventDetailTopFullCell: UITableViewCell {
         self.delegate = delegate
         if event?.isMember ?? false {
             self.ui_btn_i_participate.isHidden = false
-            self.ui_btn_agenda.isHidden = false
+            self.ui_view_discussion_card.isHidden = false
         }else{
             self.ui_btn_i_participate.isHidden = true
-            self.ui_btn_agenda.isHidden = true
+            self.ui_view_discussion_card.isHidden = true
         }
         
         ui_img_member_1.isHidden = true

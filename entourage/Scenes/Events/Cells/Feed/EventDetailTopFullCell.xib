@@ -145,6 +145,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n8b-KZ-OHc">
                                                 <rect key="frame" x="0.0" y="0.0" width="366" height="20"/>
                                                 <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agenda_btn_click">
+                                                        <rect key="frame" x="0.0" y="0.0" width="122" height="20"/>
+                                                        <connections>
+                                                            <action selector="onAgendaClick" destination="lzF-C2-Z1g" eventType="touchUpInside" id="agenda_click_action"/>
+                                                        </connections>
+                                                    </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_event_date" translatesAutoresizingMaskIntoConstraints="NO" id="uWV-jG-Iea">
                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                         <constraints>
@@ -186,6 +192,10 @@
                                                     </view>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="agenda_btn_click" firstAttribute="top" secondItem="n8b-KZ-OHc" secondAttribute="top" id="agenda_btn_top"/>
+                                                    <constraint firstItem="agenda_btn_click" firstAttribute="leading" secondItem="n8b-KZ-OHc" secondAttribute="leading" id="agenda_btn_lead"/>
+                                                    <constraint firstAttribute="bottom" secondItem="agenda_btn_click" secondAttribute="bottom" id="agenda_btn_bot"/>
+                                                    <constraint firstItem="agenda_btn_click" firstAttribute="trailing" secondItem="nNO-3W-e8V" secondAttribute="trailing" constant="10" id="agenda_btn_trail"/>
                                                     <constraint firstItem="uWV-jG-Iea" firstAttribute="leading" secondItem="n8b-KZ-OHc" secondAttribute="leading" id="0z5-d5-WJX"/>
                                                     <constraint firstItem="8TA-y7-TCS" firstAttribute="centerY" secondItem="nNO-3W-e8V" secondAttribute="centerY" id="1E1-To-2x8"/>
                                                     <constraint firstItem="uWV-jG-Iea" firstAttribute="top" secondItem="n8b-KZ-OHc" secondAttribute="top" id="8AB-t1-w3F"/>
@@ -396,48 +406,6 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgR-Y6-WWf">
-                        <rect key="frame" x="20" y="259" width="120" height="44"/>
-                        <color key="backgroundColor" name="orange_medium"/>
-                        <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="2Dh-bO-hHl"/>
-                            <constraint firstAttribute="height" constant="44" id="LXI-91-DvG"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="13"/>
-                        <color key="tintColor" name="orange_app"/>
-                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <state key="normal" title="Partager" image="ic_share_light">
-                            <color key="titleColor" name="orange_app"/>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                <real key="value" value="22"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </button>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9W-bu-4QC">
-                        <rect key="frame" x="160" y="259" width="180" height="44"/>
-                        <color key="backgroundColor" name="orange_medium"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="44" id="3JA-om-kVl"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Fx4-cK-8lv"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="13"/>
-                        <color key="tintColor" name="orange_app"/>
-                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <state key="normal" title="Ajouter à l'agenda" image="ic_calendar_light">
-                            <color key="titleColor" name="orange_app"/>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                <real key="value" value="22"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </button>
                     <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1V4-oV-Dh3">
                         <rect key="frame" x="20" y="585" width="366" height="180"/>
                         <gestureRecognizers/>
@@ -445,60 +413,85 @@
                             <constraint firstAttribute="height" constant="180" id="RMI-gf-7rR"/>
                         </constraints>
                     </mapView>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-ay-YP1">
-                        <rect key="frame" x="20" y="785" width="366" height="0.0"/>
-                        <color key="backgroundColor" name="orange_medium"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="discussion_card_view">
+                        <rect key="frame" x="20" y="785" width="366" height="150"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous pouvez poser vos questions et échanger avec l'organisateur et les participants de l'événement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="discussion_card_lbl">
+                                <rect key="frame" x="80" y="20" width="266" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_bubble_orange" translatesAutoresizingMaskIntoConstraints="NO" id="discussion_card_img">
+                                <rect key="frame" x="20" y="25" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="disc_img_w"/>
+                                    <constraint firstAttribute="height" constant="40" id="disc_img_h"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="discussion_card_btn">
+                                <rect key="frame" x="40" y="86" width="286" height="44"/>
+                                <color key="backgroundColor" name="orange_app"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="disc_btn_h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                                <color key="tintColor" name="orange_app"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" title="Discussion de l'événement">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="action_go_to_discussion:" destination="lzF-C2-Z1g" eventType="touchUpInside" id="disc_btn_action"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="PyF-3s-UYK"/>
-                            <constraint firstAttribute="height" id="de9-KG-C33"/>
+                            <constraint firstItem="discussion_card_lbl" firstAttribute="top" secondItem="discussion_card_view" secondAttribute="top" constant="20" id="disc_lbl_top"/>
+                            <constraint firstItem="discussion_card_lbl" firstAttribute="leading" secondItem="discussion_card_img" secondAttribute="trailing" constant="20" id="disc_lbl_lead"/>
+                            <constraint firstAttribute="trailing" secondItem="discussion_card_lbl" secondAttribute="trailing" constant="20" id="disc_lbl_trail"/>
+                            <constraint firstItem="discussion_card_img" firstAttribute="leading" secondItem="discussion_card_view" secondAttribute="leading" constant="20" id="disc_img_lead"/>
+                            <constraint firstItem="discussion_card_img" firstAttribute="top" secondItem="discussion_card_view" secondAttribute="top" constant="25" id="disc_img_top"/>
+                            <constraint firstItem="discussion_card_btn" firstAttribute="top" secondItem="discussion_card_lbl" secondAttribute="bottom" constant="16" id="disc_btn_top"/>
+                            <constraint firstItem="discussion_card_btn" firstAttribute="leading" secondItem="discussion_card_view" secondAttribute="leading" constant="40" id="disc_btn_lead"/>
+                            <constraint firstAttribute="trailing" secondItem="discussion_card_btn" secondAttribute="trailing" constant="40" id="disc_btn_trail"/>
+                            <constraint firstAttribute="bottom" secondItem="discussion_card_btn" secondAttribute="bottom" constant="20" id="disc_btn_bot"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
-                        <color key="tintColor" name="orange_app"/>
-                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                        <state key="normal" title="Partager" image="ic_share">
-                            <color key="titleColor" name="orange_app"/>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                <real key="value" value="20"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </button>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
                     <constraint firstItem="1V4-oV-Dh3" firstAttribute="leading" secondItem="fuU-Rj-r2w" secondAttribute="leading" id="0qB-9a-Mfi"/>
-                    <constraint firstItem="G9W-bu-4QC" firstAttribute="leading" secondItem="lgR-Y6-WWf" secondAttribute="trailing" constant="20" id="4oR-cO-90w"/>
                     <constraint firstAttribute="trailing" secondItem="Nfw-W1-dO7" secondAttribute="trailing" constant="10" id="5jS-dB-laQ"/>
-                    <constraint firstItem="G9W-bu-4QC" firstAttribute="centerY" secondItem="lgR-Y6-WWf" secondAttribute="centerY" id="A8G-fg-LMj"/>
                     <constraint firstItem="fuU-Rj-r2w" firstAttribute="top" secondItem="CsR-kO-usD" secondAttribute="bottom" constant="24" id="At5-0v-xFn"/>
-                    <constraint firstItem="1xV-ay-YP1" firstAttribute="top" secondItem="1V4-oV-Dh3" secondAttribute="bottom" constant="20" id="FLo-2B-sZ1"/>
+                    <constraint firstItem="discussion_card_view" firstAttribute="top" secondItem="1V4-oV-Dh3" secondAttribute="bottom" constant="20" id="FLo-2B-sZ1"/>
                     <constraint firstItem="fuU-Rj-r2w" firstAttribute="leading" secondItem="CsR-kO-usD" secondAttribute="leading" id="FRM-kF-rtM"/>
                     <constraint firstItem="GxR-dy-Owz" firstAttribute="top" secondItem="Nfw-W1-dO7" secondAttribute="bottom" id="Ggf-Ol-fWh"/>
                     <constraint firstItem="Nfw-W1-dO7" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="H0K-5a-a4q"/>
                     <constraint firstAttribute="trailing" secondItem="GxR-dy-Owz" secondAttribute="trailing" constant="20" id="H5r-RL-hLC"/>
                     <constraint firstItem="CsR-kO-usD" firstAttribute="top" secondItem="UXs-ZL-Ra7" secondAttribute="bottom" constant="4" id="I8J-Cg-s0T"/>
                     <constraint firstItem="GxR-dy-Owz" firstAttribute="leading" secondItem="3q6-vS-dBw" secondAttribute="leading" constant="20" id="MEB-HA-ivE"/>
-                    <constraint firstItem="lgR-Y6-WWf" firstAttribute="top" secondItem="IcL-ha-FmW" secondAttribute="bottom" constant="16" id="MxB-HS-Hf2"/>
                     <constraint firstItem="klB-o1-C0m" firstAttribute="leading" secondItem="3q6-vS-dBw" secondAttribute="leading" constant="20" id="R9N-C9-cmG"/>
                     <constraint firstAttribute="trailing" secondItem="fuU-Rj-r2w" secondAttribute="trailing" constant="20" id="RgV-tb-QmG"/>
                     <constraint firstItem="UXs-ZL-Ra7" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="UYw-0d-rgq"/>
-                    <constraint firstItem="1xV-ay-YP1" firstAttribute="trailing" secondItem="1V4-oV-Dh3" secondAttribute="trailing" id="Ujl-4M-eMB"/>
-                            <constraint firstItem="abc-female-banner" firstAttribute="top" secondItem="klB-o1-C0m" secondAttribute="bottom" constant="5" id="tuv-banner-top"/>
-                            <constraint firstItem="abc-female-banner" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="wxy-banner-leading"/>
-                            <constraint firstItem="abc-female-banner" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="klB-o1-C0m" secondAttribute="trailing" id="xyz-banner-trailing"/>
-                            <constraint firstItem="Nfw-W1-dO7" firstAttribute="top" secondItem="abc-female-banner" secondAttribute="bottom" constant="10" id="VQC-kR-A9p"/>
-                    <constraint firstAttribute="bottom" secondItem="1xV-ay-YP1" secondAttribute="bottom" constant="20" id="Vpw-kr-Z8k"/>
-                    <constraint firstItem="lgR-Y6-WWf" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="Y0c-Lv-hqK"/>
+                    <constraint firstItem="discussion_card_view" firstAttribute="trailing" secondItem="1V4-oV-Dh3" secondAttribute="trailing" id="Ujl-4M-eMB"/>
+                    <constraint firstItem="abc-female-banner" firstAttribute="top" secondItem="klB-o1-C0m" secondAttribute="bottom" constant="5" id="tuv-banner-top"/>
+                    <constraint firstItem="abc-female-banner" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="wxy-banner-leading"/>
+                    <constraint firstItem="abc-female-banner" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="klB-o1-C0m" secondAttribute="trailing" id="xyz-banner-trailing"/>
+                    <constraint firstItem="Nfw-W1-dO7" firstAttribute="top" secondItem="abc-female-banner" secondAttribute="bottom" constant="10" id="VQC-kR-A9p"/>
+                    <constraint firstAttribute="bottom" secondItem="discussion_card_view" secondAttribute="bottom" constant="20" id="Vpw-kr-Z8k"/>
                     <constraint firstItem="CsR-kO-usD" firstAttribute="leading" secondItem="UXs-ZL-Ra7" secondAttribute="leading" id="aoe-s2-pzF"/>
                     <constraint firstAttribute="trailing" secondItem="klB-o1-C0m" secondAttribute="trailing" constant="20" id="hwX-yn-nXS"/>
                     <constraint firstItem="1V4-oV-Dh3" firstAttribute="trailing" secondItem="fuU-Rj-r2w" secondAttribute="trailing" id="img-dY-dzj"/>
-                    <constraint firstItem="UXs-ZL-Ra7" firstAttribute="top" secondItem="lgR-Y6-WWf" secondAttribute="bottom" constant="20" id="j3o-v2-zLf"/>
                     <constraint firstItem="1V4-oV-Dh3" firstAttribute="top" secondItem="fuU-Rj-r2w" secondAttribute="bottom" constant="20" id="kIP-Dp-8gQ"/>
                     <constraint firstAttribute="trailing" secondItem="CsR-kO-usD" secondAttribute="trailing" constant="28" id="n7J-Wl-s1L"/>
-                    <constraint firstItem="1xV-ay-YP1" firstAttribute="leading" secondItem="1V4-oV-Dh3" secondAttribute="leading" id="qy7-A3-TNT"/>
+                    <constraint firstItem="discussion_card_view" firstAttribute="leading" secondItem="1V4-oV-Dh3" secondAttribute="leading" id="qy7-A3-TNT"/>
                     <constraint firstItem="klB-o1-C0m" firstAttribute="top" secondItem="3q6-vS-dBw" secondAttribute="top" constant="28" id="yC2-ZV-76o"/>
                     <constraint firstAttribute="trailing" secondItem="UXs-ZL-Ra7" secondAttribute="trailing" constant="28" id="yGN-4g-yQG"/>
                 </constraints>
@@ -506,14 +499,13 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="adress_view_top_constraint" destination="yX0-kE-283" id="tad-Gm-gRd"/>
-                <outlet property="ui_btn_agenda" destination="G9W-bu-4QC" id="BSR-SG-7Es"/>
                 <outlet property="ui_view_reserved_female" destination="abc-female-banner" id="out-view-reserved"/>
                 <outlet property="ui_lbl_reserved_female" destination="def-female-label" id="out-lbl-reserved"/>
                 <outlet property="ui_constraint_height_reserved_female" destination="hij-height-constraint" id="out-constraint-height"/>
                 <outlet property="ui_btn_i_participate" destination="IR4-sb-IgC" id="2Bw-Ef-4tt"/>
-                <outlet property="ui_btn_participate" destination="1xV-ay-YP1" id="H26-cy-lt3"/>
-                <outlet property="ui_btn_share" destination="lgR-Y6-WWf" id="Lqp-Ta-LcQ"/>
-                <outlet property="ui_button_go_to_discussion" destination="1xV-ay-YP1" id="Q8G-5Z-zcy"/>
+                <outlet property="ui_button_go_to_discussion" destination="discussion_card_btn" id="Q8G-5Z-zcy"/>
+                <outlet property="ui_lbl_discussion_title" destination="discussion_card_lbl" id="disc_card_lbl"/>
+                <outlet property="ui_view_discussion_card" destination="discussion_card_view" id="disc_card_view"/>
                 <outlet property="ui_constraint_listview_top_margin" destination="At5-0v-xFn" id="CGo-JX-gSb"/>
                 <outlet property="ui_height_map_view" destination="RMI-gf-7rR" id="iKr-JI-BjL"/>
                 <outlet property="ui_img_member_1" destination="2x2-3v-72B" id="SOR-qC-Iu0"/>

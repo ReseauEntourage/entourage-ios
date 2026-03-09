@@ -1437,3 +1437,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "Pridružite se solidarnoj raspravi";
 "small_talk_subtitle_match" = "Povezujemo vas s malom grupom ljudi koji dijele vaše interese, bilo gdje u Francuskoj.";
 "Tomorrow" = "Sutra";
+"event_discussion_card_title" = "You can ask questions and discuss with the organizer and event participants.";
+"leave_event" = "Leave event";
+"cancel_event" = "Cancel event";

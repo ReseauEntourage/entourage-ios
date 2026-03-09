@@ -1663,3 +1663,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Tomorrow" = "Mâine";
 "home_v2_moderator_title_format" = "%@, contactul tău privilegiat";
 "home_v2_moderator_subtitle" = "Fac parte din echipa Entourage și sunt aici să te însoțesc. Nu ezita dacă ai întrebări! 🤗";
+"event_discussion_card_title" = "You can ask questions and discuss with the organizer and event participants.";
+"leave_event" = "Leave event";
+"cancel_event" = "Cancel event";

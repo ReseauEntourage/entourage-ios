@@ -3183,3 +3183,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Tomorrow" = "Mañana";
 "home_v2_moderator_title_format" = "%@, tu contacto privilegiado";
 "home_v2_moderator_subtitle" = "Formo parte del equipo de Entourage y estoy aquí para acompañarte. ¡No dudes en preguntar si tienes alguna duda! 🤗";
+"event_discussion_card_title" = "You can ask questions and discuss with the organizer and event participants.";
+"leave_event" = "Leave event";
+"cancel_event" = "Cancel event";

@@ -586,11 +586,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s64-Vk-nq7">
-                                <rect key="frame" x="342" y="110" width="40" height="40"/>
+                                <rect key="frame" x="350" y="110" width="40" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="geH-qY-i1u"/>
                                     <constraint firstAttribute="width" constant="40" id="hrB-4O-lep"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="share_view_bg">
+                                <rect key="frame" x="298" y="110" width="40" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="share_h"/>
+                                    <constraint firstAttribute="width" constant="40" id="share_w"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="keO-la-aOU" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
@@ -602,7 +610,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tG7-Gh-1Qg">
-                                <rect key="frame" x="342" y="110" width="40" height="40"/>
+                                <rect key="frame" x="350" y="110" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ncr-OO-VCc"/>
@@ -613,6 +621,19 @@
                                 <state key="normal" image="ic_setting_mini"/>
                                 <connections>
                                     <action selector="action_show_params:" destination="1Sc-VH-DcS" eventType="touchUpInside" id="2mn-Sb-9N8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="share_btn_top">
+                                <rect key="frame" x="298" y="110" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="share_btn_h"/>
+                                    <constraint firstAttribute="width" constant="40" id="share_btn_w"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="ic_share"/>
+                                <connections>
+                                    <action selector="action_share:" destination="1Sc-VH-DcS" eventType="touchUpInside" id="action_share_id"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0g5-JR-O6f">
@@ -717,7 +738,11 @@
                         <viewLayoutGuide key="safeArea" id="h8q-3a-IrB"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="tG7-Gh-1Qg" firstAttribute="trailing" secondItem="keO-la-aOU" secondAttribute="trailing" constant="-32" id="7aL-Dj-2Gi"/>
+                            <constraint firstItem="tG7-Gh-1Qg" firstAttribute="trailing" secondItem="keO-la-aOU" secondAttribute="trailing" constant="-24" id="7aL-Dj-2Gi"/>
+                            <constraint firstItem="tG7-Gh-1Qg" firstAttribute="leading" secondItem="share_btn_top" secondAttribute="trailing" constant="12" id="share_btn_trailing"/>
+                            <constraint firstItem="share_btn_top" firstAttribute="centerY" secondItem="tG7-Gh-1Qg" secondAttribute="centerY" id="share_btn_cy"/>
+                            <constraint firstItem="share_view_bg" firstAttribute="centerY" secondItem="tG7-Gh-1Qg" secondAttribute="centerY" id="share_bg_cy"/>
+                            <constraint firstItem="share_view_bg" firstAttribute="centerX" secondItem="share_btn_top" secondAttribute="centerX" id="share_bg_cx"/>
                             <constraint firstItem="WNs-CT-aUo" firstAttribute="trailing" secondItem="h8q-3a-IrB" secondAttribute="trailing" id="7ls-5s-mwR"/>
                             <constraint firstAttribute="trailing" secondItem="96a-eR-4eP" secondAttribute="trailing" id="AKM-9r-Tm6"/>
                             <constraint firstItem="0En-it-5CA" firstAttribute="top" secondItem="2TO-pb-TzV" secondAttribute="top" id="B6F-ni-lEg"/>
@@ -769,6 +794,7 @@
                         <outlet property="ui_top_view" destination="keO-la-aOU" id="DvQ-Fl-zDo"/>
                         <outlet property="ui_view_button_back" destination="b8a-81-v78" id="BBI-5w-v4X"/>
                         <outlet property="ui_view_button_settings" destination="s64-Vk-nq7" id="16m-Dx-c8f"/>
+                        <outlet property="ui_view_button_share" destination="share_view_bg" id="share_view_id"/>
                         <outlet property="ui_view_canceled" destination="zD4-yh-EWb" id="YcB-OI-TiJ"/>
                         <outlet property="ui_view_full_image" destination="96a-eR-4eP" id="EoY-Ox-lgc"/>
                         <outlet property="ui_view_height_constraint" destination="gE9-Dv-TuC" id="gE4-lk-NXE"/>

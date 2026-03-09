@@ -26,7 +26,7 @@ class EventDetailFeedViewController: UIViewController {
     
     @IBOutlet weak var ui_view_button_back: UIView!
     @IBOutlet weak var ui_view_button_settings: UIView!
-    
+    @IBOutlet weak var ui_view_button_share: UIView!
     
     @IBOutlet weak var ui_view_full_image: UIView!
     @IBOutlet weak var ui_scrollview: UIScrollView!
@@ -88,6 +88,7 @@ class EventDetailFeedViewController: UIViewController {
         
         addShadowAndRadius(customView: ui_view_button_settings)
         addShadowAndRadius(customView: ui_view_button_back)
+        addShadowAndRadius(customView: ui_view_button_share)
         
         ui_top_view.backgroundColor = .clear
         ui_top_view.populateCustom(title: nil,
@@ -120,6 +121,10 @@ class EventDetailFeedViewController: UIViewController {
         AnalyticsLoggerManager.logEvent(name: Event_detail_main)
         configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_conversation".localized)
         ui_btn_participate_and_see_conv.addTarget(self, action: #selector(button_join_leave_see), for: .touchUpInside)
+    }
+
+    @IBAction func action_share(_ sender: Any) {
+        self.share()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -299,11 +304,14 @@ class EventDetailFeedViewController: UIViewController {
             AppSignableManager.shared.updateFromEvent(event: event!)
             self.eventId = event?.uid ?? 0
             if event?.isMember ?? false {
-                self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_conversation".localized)
+                if let currentUserId = UserDefaults.currentUser?.sid, event?.author?.uid == currentUserId {
+                    self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "cancel_event".localized)
+                } else {
+                    self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "leave_event".localized)
+                }
                 self.ui_btn_participate_and_see_conv.isHidden = false
             }else{
-                self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "go_to_event_conversation".localized)
-                self.ui_btn_participate_and_see_conv.isHidden = false
+                self.ui_btn_participate_and_see_conv.isHidden = true
             }
             // Si l’événement est annulé => on affiche le bandeau
             if event?.isCanceled() ?? false {
@@ -439,7 +447,26 @@ class EventDetailFeedViewController: UIViewController {
     
     @objc func button_join_leave_see(){
         AnalyticsLoggerManager.logEvent(name: Event_detail_action_participate)
-        joinLeaveEvent()
+
+        guard let currentUserId = UserDefaults.currentUser?.sid else { return }
+
+        if event?.author?.uid == currentUserId {
+            let customAlert = MJAlertController()
+            let buttonCancel = MJAlertButtonType(title: "params_cancel_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+            let buttonValidate = MJAlertButtonType(title: "params_cancel_event_pop_bt_delete".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+            customAlert.configureAlert(alertTitle: "params_cancel_event_pop_title".localized, message: "params_cancel_event_pop_message".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+            customAlert.alertTagName = .Suppress
+            customAlert.delegate = self
+            customAlert.show()
+        } else {
+            let customAlert = MJAlertController()
+            let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+            let buttonValidate = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+            customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+            customAlert.alertTagName = .None
+            customAlert.delegate = self
+            customAlert.show()
+        }
     }
     
     @IBAction func action_join(_ sender: Any) {
@@ -633,6 +660,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             let heightImage = min(max(yImage - diffImage, self.minImageHeight), self.maxImageHeight)
             
             self.ui_view_button_settings.alpha = heightImage / self.maxImageHeight
+            self.ui_view_button_share.alpha = heightImage / self.maxImageHeight
             self.ui_view_button_back.alpha = heightImage / self.maxImageHeight
             self.ui_iv_event2.alpha = heightImage / self.maxImageHeight
             self.ui_view_top_bg.alpha = 1 - (heightImage / self.maxImageHeight)
@@ -667,6 +695,17 @@ extension EventDetailFeedViewController: MJAlertControllerDelegate {
             self.sendLeaveGroup()
         }
         
+        // Tag .Suppress => annuler l'événement
+        if alertTag == .Suppress {
+            SVProgressHUD.show()
+            EventService.cancelEvent(eventId: eventId) { error in
+                SVProgressHUD.dismiss()
+                if error == nil {
+                    self.goBack()
+                }
+            }
+        }
+
         // Paramètres pour autoriser l’accès au calendrier
         if alertTag == .AcceptSettings {
             if let url = URL(string: UIApplication.openSettingsURLString) {

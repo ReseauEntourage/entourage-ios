@@ -1966,3 +1966,6 @@
 "event_detail_reserved_female_label" = "This event is reserved for women";
 "home_v2_moderator_title_format" = "%@, your privileged contact";
 "home_v2_moderator_subtitle" = "I am part of the Entourage team and I am here to support you. Do not hesitate if you have any questions! 🤗";
+"event_discussion_card_title" = "You can ask questions and discuss with the organizer and event participants.";
+"leave_event" = "Leave event";
+"cancel_event" = "Cancel event";

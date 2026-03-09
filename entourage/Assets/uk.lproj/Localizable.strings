@@ -1740,3 +1740,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Tomorrow" = "Завтра";
 "home_v2_moderator_title_format" = "%@, твій привілейований контакт";
 "home_v2_moderator_subtitle" = "Я є частиною команди Entourage і тут, щоб супроводжувати тебе. Не соромся, якщо у тебе є питання! 🤗";
+"event_discussion_card_title" = "You can ask questions and discuss with the organizer and event participants.";
+"leave_event" = "Leave event";
+"cancel_event" = "Cancel event";
