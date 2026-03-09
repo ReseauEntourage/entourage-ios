@@ -287,7 +287,7 @@ class EventDetailFeedViewController: UIViewController {
             
             if event == nil {
                 let alertController = UIAlertController(title: "Attention",
-                                                        message: "Cet événement a été supprimé",
+                                                        message: "Cet événement a été annulé",
                                                         preferredStyle: .alert)
                 let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
                 alertController.addAction(closeAction)
