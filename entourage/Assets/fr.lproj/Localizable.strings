@@ -1446,7 +1446,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_help_title_two" = "Comment créer un événement ?";
 "home_v2_help_title_three" = "Une question ?\nContactez";
 
-"home_v2_pedag_item_lenght_title" = "%d min de lecture";
+"home_v2_pedag_item_lenght_title" = "%d min";
 
 "home_v2_action_type_social" = "Social";
 "home_v2_action_type_clothes" = "Vêtements";
@@ -1960,7 +1960,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_small_talk_card_button" = "Discuter";
 "home_v2_solidarity_tools_title" = "Tes outils solidaires";
 "home_v2_tool_card_map" = "Carte des lieux solidaires";
-"home_v2_tool_card_pedago" = "Contenus pour apprendre et agir";
+"home_v2_tool_card_pedago" = "Ressources utiles";
 "home_v2_tool_card_ethics" = "Charte éthique Entourage";
-"home_v2_moderator_title_format" = "%@, votre contact privilégié";
+"home_v2_moderator_title_format" = "%@, votre contact dédié";
 "home_v2_moderator_subtitle" = "Je fais parti·e de l'équipe Entourage et je suis là pour vous accompagner. N'hésitez pas si vous avez des questions ! 🤗";

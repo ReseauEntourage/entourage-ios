@@ -49,9 +49,9 @@ class HomeSolidarityToolsCell: UITableViewCell {
         ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         ui_label_title.textColor = .black
 
-        setupCard(view: ui_view_map, label: ui_lbl_map, image: ui_iv_map, title: "home_v2_tool_card_map".localized, iconName: "ic_card_map", systemIcon: "map.fill")
-        setupCard(view: ui_view_pedago, label: ui_lbl_pedago, image: ui_iv_pedago, title: "home_v2_tool_card_pedago".localized, iconName: "ic_card_pedago", systemIcon: "book.fill")
-        setupCard(view: ui_view_ethics, label: ui_lbl_ethics, image: ui_iv_ethics, title: "home_v2_tool_card_ethics".localized, iconName: "ic_card_charte", systemIcon: "hand.raised.fill")
+        setupCard(view: ui_view_map, label: ui_lbl_map, image: ui_iv_map, title: "home_v2_tool_card_map".localized, iconName: "ic_button_map", systemIcon: "map.fill")
+        setupCard(view: ui_view_pedago, label: ui_lbl_pedago, image: ui_iv_pedago, title: "home_v2_tool_card_pedago".localized, iconName: "ic_button_pedago", systemIcon: "book.fill")
+        setupCard(view: ui_view_ethics, label: ui_lbl_ethics, image: ui_iv_ethics, title: "home_v2_tool_card_ethics".localized, iconName: "ic_button_charte", systemIcon: "hand.raised.fill")
     }
 
     private func setupCard(view: UIView, label: UILabel, image: UIImageView, title: String, iconName: String, systemIcon: String) {
@@ -74,7 +74,7 @@ class HomeSolidarityToolsCell: UITableViewCell {
             image.image = UIImage(systemName: systemIcon)
             image.tintColor = .appOrange
         }
-        image.contentMode = .center
+        image.contentMode = .scaleAspectFit
 
         image.backgroundColor = UIColor.appBeige
         image.layer.cornerRadius = 25

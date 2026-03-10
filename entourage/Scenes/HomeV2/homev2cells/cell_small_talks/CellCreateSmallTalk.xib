@@ -56,7 +56,7 @@
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lnA-Xe-wpR" secondAttribute="bottom" constant="20" id="DLh-Nt-m7u"/>
                             <constraint firstAttribute="trailing" secondItem="W27-Dc-a2R" secondAttribute="trailing" constant="10" id="P9x-kr-0Wy"/>
                             <constraint firstItem="W27-Dc-a2R" firstAttribute="leading" secondItem="ThL-Ar-wbM" secondAttribute="trailing" constant="10" id="Tds-yN-WMa"/>
-                            <constraint firstItem="ThL-Ar-wbM" firstAttribute="height" secondItem="Wof-Yx-i0V" secondAttribute="height" multiplier="0.5" id="VAG-Hz-LDC"/>
+                            <constraint firstItem="ThL-Ar-wbM" firstAttribute="height" secondItem="Wof-Yx-i0V" secondAttribute="height" multiplier="0.4" id="VAG-Hz-LDC"/>
                             <constraint firstItem="lnA-Xe-wpR" firstAttribute="top" secondItem="W27-Dc-a2R" secondAttribute="bottom" constant="20" id="dtY-Ym-oAz"/>
                             <constraint firstItem="ThL-Ar-wbM" firstAttribute="centerY" secondItem="Wof-Yx-i0V" secondAttribute="centerY" id="udv-ia-ZUu"/>
                             <constraint firstItem="W27-Dc-a2R" firstAttribute="top" secondItem="Wof-Yx-i0V" secondAttribute="top" constant="20" id="wSt-iO-yr6"/>
