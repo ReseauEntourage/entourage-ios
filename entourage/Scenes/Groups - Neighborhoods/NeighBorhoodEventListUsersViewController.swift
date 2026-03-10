@@ -174,6 +174,9 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     self.rebuildTableDataFromUsers()
                     self.currentPage = nextPage ?? self.currentPage
                     self.hasMorePages = nextPage != nil
+                    if !self.isSearch {
+                        self.ui_view_no_result.isHidden = !self.users.isEmpty
+                    }
                 } else if let error = error {
                     print("Erreur lors de la récupération des utilisateurs: \(error)")
                 }
@@ -203,7 +206,9 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     self.rebuildTableDataFromUsers()
                     self.currentPage = nextPage ?? self.currentPage
                     self.hasMorePages = nextPage != nil
-                    self.ui_view_no_result.isHidden = !users.isEmpty
+                    if !self.isSearch {
+                        self.ui_view_no_result.isHidden = !self.users.isEmpty
+                    }
                 }
             }
         }
@@ -221,10 +226,14 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         usersSearch.append(contentsOf: searchedUsers)
 
         tableData = [.searchCell]
-        if usersSearch.isEmpty {
-            ui_view_no_result.isHidden = false
+        if isSearch {
+            if usersSearch.isEmpty {
+                ui_view_no_result.isHidden = false
+            } else {
+                ui_view_no_result.isHidden = true
+                tableData += searchedUsers.map { .userCell(user: $0, reactionType: nil) }
+            }
         } else {
-            ui_view_no_result.isHidden = true
             tableData += searchedUsers.map { .userCell(user: $0, reactionType: nil) }
         }
         ui_tableview.reloadData()
@@ -245,6 +254,9 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     self.tableData = [.searchCell]
                     for (idx, user) in self.users.enumerated() {
                         self.tableData.append(.userCell(user: user, reactionType: self.reactionTypeList[safe: idx]))
+                    }
+                    if !self.isSearch {
+                        self.ui_view_no_result.isHidden = !self.users.isEmpty
                     }
                     self.ui_tableview.reloadData()
                 } else if let error = error {
@@ -387,7 +399,7 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
             self.usersSearch.removeAll()
             self.isAlreadyClearRows = false
             self.isSearch = false
-            ui_view_no_result.isHidden = true
+            ui_view_no_result.isHidden = !users.isEmpty
             self.ui_tableview.reloadData()
         }
     }
@@ -400,7 +412,7 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
         } else {
             isAlreadyClearRows = false
         }
-        ui_view_no_result.isHidden = true
+        ui_view_no_result.isHidden = !usersSearch.isEmpty
     }
 }
 
