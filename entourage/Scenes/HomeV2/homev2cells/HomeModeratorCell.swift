@@ -37,10 +37,10 @@ class HomeModeratorCell:UITableViewCell{
         containerView.layer.shadowColor = UIColor.clear.cgColor
         containerView.layer.shadowOpacity = 0
 
-        ui_label_title.font = UIFont(name: "Quicksand-Bold", size: 14)
+        ui_label_title.font = UIFont(name: "Quicksand-Bold", size: 15)
         ui_label_title.textColor = UIColor(named: "black_app")
 
-        ui_label_description.font = UIFont(name: "Quicksand-Regular", size: 13)
+        ui_label_description.font = UIFont(name: "NunitoSans-Regular", size: 13)
         ui_label_description.textColor = UIColor(named: "black_app")
 
         ui_image.layer.borderColor = UIColor.appOrangeLight.cgColor

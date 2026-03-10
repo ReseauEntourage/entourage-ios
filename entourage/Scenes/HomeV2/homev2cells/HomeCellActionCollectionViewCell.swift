@@ -56,7 +56,7 @@ class HomeCellActionCollectionViewCell: UICollectionViewCell {
         ui_label_title.numberOfLines = 2
 
         ui_label_description.font = UIFont(name: "NunitoSans-Regular", size: 13)
-        ui_label_description.textColor = UIColor.lightGray
+        ui_label_description.textColor = UIColor(named: "grey_light")
         ui_label_description.numberOfLines = 3
 
         ui_label_distance.font = UIFont(name: "NunitoSans-Regular", size: 11)
@@ -88,8 +88,8 @@ class HomeCellActionCollectionViewCell: UICollectionViewCell {
 
         // Description
         if let desc = action.description, !desc.isEmpty {
-            let first = desc.prefix(1).uppercased()
-            let other = desc.dropFirst()
+            let first = String(desc.prefix(1)).uppercased()
+            let other = String(desc.dropFirst())
             ui_label_description.text = first + other
         } else {
             ui_label_description.text = ""
@@ -97,9 +97,15 @@ class HomeCellActionCollectionViewCell: UICollectionViewCell {
 
         // Distance
         if let distance = action.distance {
-            ui_label_distance.text = Utils.displayDistance(distance: distance) + " de moi"
+            var distString = Utils.displayDistance(distance: distance)
+            if distString.lowercased().hasPrefix("à ") {
+                distString = String(distString.dropFirst(2))
+            }
+            ui_label_distance.text = distString
+            ui_image_pin.isHidden = false
         } else {
             ui_label_distance.text = "-"
+            ui_image_pin.isHidden = true
         }
     }
 }

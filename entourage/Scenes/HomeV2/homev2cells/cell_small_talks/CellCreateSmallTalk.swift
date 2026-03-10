@@ -27,9 +27,13 @@ class CellCreateSmallTalk:UICollectionViewCell{
         let titleText = "home_v2_small_talk_card_title".localized
         let subtitleText = "home_v2_small_talk_card_subtitle".localized
 
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.paragraphSpacing = 4 // Add spacing between title and subtitle
+
         let attributedString = NSMutableAttributedString(string: titleText + "\n", attributes: [
             .font: ApplicationTheme.getFontQuickSandBold(size: 15),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor.black,
+            .paragraphStyle: paragraphStyle
         ])
 
         attributedString.append(NSAttributedString(string: subtitleText, attributes: [
