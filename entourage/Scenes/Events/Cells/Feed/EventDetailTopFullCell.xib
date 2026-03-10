@@ -99,31 +99,12 @@
                                     <action selector="action_show_members:" destination="lzF-C2-Z1g" eventType="touchUpInside" id="hBX-Ek-VIN"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IR4-sb-IgC">
-                                <rect key="frame" x="232" y="-7.5" width="144" height="40"/>
-                                <color key="backgroundColor" name="green_light"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="OmR-ih-bVW"/>
-                                </constraints>
-                                <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Je participe" image="ic_check_event_participate">
-                                    <color key="titleColor" name="green_middle"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="IR4-sb-IgC" firstAttribute="centerY" secondItem="Ih3-Zq-7lY" secondAttribute="centerY" id="BV3-23-6aO"/>
                             <constraint firstAttribute="trailing" secondItem="b3F-58-XAB" secondAttribute="trailing" id="Beq-iN-rJR"/>
                             <constraint firstAttribute="bottom" secondItem="CF5-px-Uga" secondAttribute="bottom" id="Exa-V3-F5M"/>
                             <constraint firstAttribute="height" constant="25" id="RCx-TQ-bM1"/>
                             <constraint firstItem="CF5-px-Uga" firstAttribute="top" secondItem="Nfw-W1-dO7" secondAttribute="top" id="SVq-JF-Qr6"/>
-                            <constraint firstAttribute="trailing" secondItem="IR4-sb-IgC" secondAttribute="trailing" id="ZWe-hj-jC7"/>
                             <constraint firstItem="Ih3-Zq-7lY" firstAttribute="top" secondItem="Nfw-W1-dO7" secondAttribute="top" id="Zy1-10-kg0"/>
                             <constraint firstItem="b3F-58-XAB" firstAttribute="centerY" secondItem="Nfw-W1-dO7" secondAttribute="centerY" id="esW-Bm-ADv"/>
                             <constraint firstAttribute="trailing" secondItem="Ih3-Zq-7lY" secondAttribute="trailing" id="gEb-oa-7lc"/>
@@ -510,7 +491,6 @@
                 <outlet property="ui_view_reserved_female" destination="abc-female-banner" id="out-view-reserved"/>
                 <outlet property="ui_lbl_reserved_female" destination="def-female-label" id="out-lbl-reserved"/>
                 <outlet property="ui_constraint_height_reserved_female" destination="hij-height-constraint" id="out-constraint-height"/>
-                <outlet property="ui_btn_i_participate" destination="IR4-sb-IgC" id="2Bw-Ef-4tt"/>
                 <outlet property="ui_btn_participate" destination="1xV-ay-YP1" id="H26-cy-lt3"/>
                 <outlet property="ui_btn_share" destination="lgR-Y6-WWf" id="Lqp-Ta-LcQ"/>
                 <outlet property="ui_button_go_to_discussion" destination="1xV-ay-YP1" id="Q8G-5Z-zcy"/>
