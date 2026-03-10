@@ -76,19 +76,19 @@ extension EventCreatePhase3ViewController:UITableViewDataSource, UITableViewDele
             return cell
         }
         else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellLimit", for: indexPath) as! EventPlaceLimitCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EventReservedFemaleCell", for: indexPath) as! EventReservedFemaleCell
+            let isReserved = currentEvent?.metadata?.reservedFemale ?? false
+            cell.populateCell(isReserved: isReserved, delegate: self)
+            return cell
+        }
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellLimit", for: indexPath) as! EventPlaceLimitCell
 
             let _hasplaceLimit = currentEvent?.metadata?.hasPlaceLimit != nil ? currentEvent!.metadata!.hasPlaceLimit! : hasplaceLimit
             let _nbplaceLimit = currentEvent?.metadata?.place_limit != nil ? currentEvent!.metadata!.place_limit! : nbPlaceLimit
 
             cell.populateCell(delegate: self,hasPlaceLimit: _hasplaceLimit, limitNb: _nbplaceLimit)
             return cell
-        }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EventReservedFemaleCell", for: indexPath) as! EventReservedFemaleCell
-        let isReserved = currentEvent?.metadata?.reservedFemale ?? false
-        cell.populateCell(isReserved: isReserved, delegate: self)
-        return cell
     }
 }
 
