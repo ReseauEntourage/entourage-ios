@@ -124,6 +124,10 @@ class ConversationListMembersViewController: BasePopViewController {
                 self.ui_tableview.tableFooterView = (self.nextPage != nil)
                     ? self.makeLoadingFooter()
                     : UIView()
+
+                if !self.isSearch {
+                    self.ui_view_no_result.isHidden = !self.users.isEmpty
+                }
             }
         }
 
@@ -170,7 +174,9 @@ class ConversationListMembersViewController: BasePopViewController {
         usersSearch = users.filter {
             $0.username?.lowercased().contains(text.lowercased()) ?? false
         }
-        ui_view_no_result.isHidden = !usersSearch.isEmpty
+        if isSearch {
+            ui_view_no_result.isHidden = !usersSearch.isEmpty
+        }
         ui_tableview.reloadData()
     }
 }
@@ -273,7 +279,7 @@ extension ConversationListMembersViewController: NeighborhoodHomeSearchDelegate 
             isSearch = false
             usersSearch.removeAll()
             isAlreadyClearRows = false
-            ui_view_no_result.isHidden = true
+            ui_view_no_result.isHidden = !users.isEmpty
             ui_tableview.reloadData()
         }
     }
@@ -282,7 +288,7 @@ extension ConversationListMembersViewController: NeighborhoodHomeSearchDelegate 
         // gère le moment où l'utilisateur appuie sur la loupe sans texte
         isSearch = true
         isAlreadyClearRows.toggle()
-        ui_view_no_result.isHidden = true
+        ui_view_no_result.isHidden = !usersSearch.isEmpty
         ui_tableview.reloadData()
     }
 }
