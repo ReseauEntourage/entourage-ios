@@ -276,14 +276,28 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
     }
     func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         newEvent.onlineEventUrl = nil
-        if let currentlocation = currentlocation {
+
+        if newEvent.metadata == nil {
+            newEvent.metadata = EventMetadata()
+        }
+
+        if let googlePlace = googlePlace {
+            newEvent.location = EventLocation(latitude: googlePlace.coordinate.latitude, longitude:  googlePlace.coordinate.longitude)
+            newEvent.addressName = currentLocationName ?? googlePlace.name
+            newEvent.metadata?.street_address = currentLocationName ?? googlePlace.name ?? ""
+            newEvent.metadata?.google_place_id = googlePlace.placeID
+        }
+        else if let currentlocation = currentlocation {
             newEvent.location = EventLocation(latitude: currentlocation.latitude, longitude: currentlocation.longitude)
             newEvent.addressName = currentLocationName
+            newEvent.metadata?.street_address = currentLocationName ?? ""
+            newEvent.metadata?.google_place_id = nil
         }
-        else if let googlePlace = googlePlace {
-            newEvent.location = EventLocation(latitude: googlePlace.coordinate.latitude, longitude:  googlePlace.coordinate.longitude)
-            newEvent.addressName = googlePlace.name
-            newEvent.metadata?.google_place_id = googlePlace.placeID
+        else {
+            newEvent.location = nil
+            newEvent.addressName = nil
+            newEvent.metadata?.street_address = ""
+            newEvent.metadata?.google_place_id = nil
         }
         _ = checkValidation()
     }
