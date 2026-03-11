@@ -31,13 +31,25 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="view-Map">
                                 <rect key="frame" x="0.0" y="0.0" width="105" height="110"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="img-Map">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cont-Map">
                                         <rect key="frame" x="27.666666666666671" y="15" width="50" height="50"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="img-Map">
+                                                <rect key="frame" x="11" y="11" width="28" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="28" id="wMap"/>
+                                                    <constraint firstAttribute="height" constant="28" id="hMap"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="wMap"/>
-                                            <constraint firstAttribute="height" constant="50" id="hMap"/>
+                                            <constraint firstItem="img-Map" firstAttribute="centerX" secondItem="cont-Map" secondAttribute="centerX" id="cenImgMap"/>
+                                            <constraint firstItem="img-Map" firstAttribute="centerY" secondItem="cont-Map" secondAttribute="centerY" id="cenYImgMap"/>
+                                            <constraint firstAttribute="width" constant="50" id="wContMap"/>
+                                            <constraint firstAttribute="height" constant="50" id="hContMap"/>
                                         </constraints>
-                                    </imageView>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carte" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-Map">
                                         <rect key="frame" x="5" y="70" width="95" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -47,24 +59,36 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="img-Map" firstAttribute="centerX" secondItem="view-Map" secondAttribute="centerX" id="cenMap"/>
-                                    <constraint firstItem="img-Map" firstAttribute="top" secondItem="view-Map" secondAttribute="top" constant="15" id="topMap"/>
+                                    <constraint firstItem="cont-Map" firstAttribute="centerX" secondItem="view-Map" secondAttribute="centerX" id="cenMap"/>
+                                    <constraint firstItem="cont-Map" firstAttribute="top" secondItem="view-Map" secondAttribute="top" constant="15" id="topMap"/>
                                     <constraint firstAttribute="trailing" secondItem="lbl-Map" secondAttribute="trailing" constant="5" id="trMap"/>
                                     <constraint firstItem="lbl-Map" firstAttribute="leading" secondItem="view-Map" secondAttribute="leading" constant="5" id="ldMap"/>
-                                    <constraint firstItem="lbl-Map" firstAttribute="top" secondItem="img-Map" secondAttribute="bottom" constant="5" id="btmMap"/>
+                                    <constraint firstItem="lbl-Map" firstAttribute="top" secondItem="cont-Map" secondAttribute="bottom" constant="5" id="btmMap"/>
                                     <constraint firstAttribute="bottom" secondItem="lbl-Map" secondAttribute="bottom" constant="5" id="btm2Map"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="view-Pedago">
                                 <rect key="frame" x="115" y="0.0" width="105" height="110"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="img-Pedago">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cont-Pedago">
                                         <rect key="frame" x="27.666666666666657" y="15" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="wPed"/>
-                                            <constraint firstAttribute="height" constant="50" id="hPed"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="img-Pedago">
+                                                <rect key="frame" x="11" y="11" width="28" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="28" id="wPed"/>
+                                                    <constraint firstAttribute="height" constant="28" id="hPed"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints
+                                            ><constraint firstItem="img-Pedago" firstAttribute="centerX" secondItem="cont-Pedago" secondAttribute="centerX" id="cenImgPed"/>
+                                            <constraint firstItem="img-Pedago" firstAttribute="centerY" secondItem="cont-Pedago" secondAttribute="centerY" id="cenYImgPed"/>
+                                            <constraint firstAttribute="width" constant="50" id="wContPed"/>
+                                            <constraint firstAttribute="height" constant="50" id="hContPed"/>
                                         </constraints>
-                                    </imageView>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contenus" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-Pedago">
                                         <rect key="frame" x="5" y="70" width="95" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -74,24 +98,36 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="img-Pedago" firstAttribute="centerX" secondItem="view-Pedago" secondAttribute="centerX" id="cenPed"/>
-                                    <constraint firstItem="img-Pedago" firstAttribute="top" secondItem="view-Pedago" secondAttribute="top" constant="15" id="topPed"/>
+                                    <constraint firstItem="cont-Pedago" firstAttribute="centerX" secondItem="view-Pedago" secondAttribute="centerX" id="cenPed"/>
+                                    <constraint firstItem="cont-Pedago" firstAttribute="top" secondItem="view-Pedago" secondAttribute="top" constant="15" id="topPed"/>
                                     <constraint firstAttribute="trailing" secondItem="lbl-Pedago" secondAttribute="trailing" constant="5" id="trPed"/>
                                     <constraint firstItem="lbl-Pedago" firstAttribute="leading" secondItem="view-Pedago" secondAttribute="leading" constant="5" id="ldPed"/>
-                                    <constraint firstItem="lbl-Pedago" firstAttribute="top" secondItem="img-Pedago" secondAttribute="bottom" constant="5" id="btmPed"/>
+                                    <constraint firstItem="lbl-Pedago" firstAttribute="top" secondItem="cont-Pedago" secondAttribute="bottom" constant="5" id="btmPed"/>
                                     <constraint firstAttribute="bottom" secondItem="lbl-Pedago" secondAttribute="bottom" constant="5" id="btm2Ped"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="view-Ethics">
                                 <rect key="frame" x="230" y="0.0" width="105" height="110"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="img-Ethics">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cont-Ethics">
                                         <rect key="frame" x="27.666666666666686" y="15" width="50" height="50"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="img-Ethics">
+                                                <rect key="frame" x="11" y="11" width="28" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="28" id="wEth"/>
+                                                    <constraint firstAttribute="height" constant="28" id="hEth"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="wEth"/>
-                                            <constraint firstAttribute="height" constant="50" id="hEth"/>
+                                            <constraint firstItem="img-Ethics" firstAttribute="centerX" secondItem="cont-Ethics" secondAttribute="centerX" id="cenImgEth"/>
+                                            <constraint firstItem="img-Ethics" firstAttribute="centerY" secondItem="cont-Ethics" secondAttribute="centerY" id="cenYImgEth"/>
+                                            <constraint firstAttribute="width" constant="50" id="wContEth"/>
+                                            <constraint firstAttribute="height" constant="50" id="hContEth"/>
                                         </constraints>
-                                    </imageView>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charte" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-Ethics">
                                         <rect key="frame" x="5" y="70" width="95" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -101,11 +137,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="img-Ethics" firstAttribute="centerX" secondItem="view-Ethics" secondAttribute="centerX" id="cenEth"/>
-                                    <constraint firstItem="img-Ethics" firstAttribute="top" secondItem="view-Ethics" secondAttribute="top" constant="15" id="topEth"/>
+                                    <constraint firstItem="cont-Ethics" firstAttribute="centerX" secondItem="view-Ethics" secondAttribute="centerX" id="cenEth"/>
+                                    <constraint firstItem="cont-Ethics" firstAttribute="top" secondItem="view-Ethics" secondAttribute="top" constant="15" id="topEth"/>
                                     <constraint firstAttribute="trailing" secondItem="lbl-Ethics" secondAttribute="trailing" constant="5" id="trEth"/>
                                     <constraint firstItem="lbl-Ethics" firstAttribute="leading" secondItem="view-Ethics" secondAttribute="leading" constant="5" id="ldEth"/>
-                                    <constraint firstItem="lbl-Ethics" firstAttribute="top" secondItem="img-Ethics" secondAttribute="bottom" constant="5" id="btmEth"/>
+                                    <constraint firstItem="lbl-Ethics" firstAttribute="top" secondItem="cont-Ethics" secondAttribute="bottom" constant="5" id="btmEth"/>
                                     <constraint firstAttribute="bottom" secondItem="lbl-Ethics" secondAttribute="bottom" constant="5" id="btm2Eth"/>
                                 </constraints>
                             </view>
@@ -123,6 +159,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ui_cont_ethics" destination="cont-Ethics" id="out-ContEth"/>
+                <outlet property="ui_cont_map" destination="cont-Map" id="out-ContMap"/>
+                <outlet property="ui_cont_pedago" destination="cont-Pedago" id="out-ContPed"/>
                 <outlet property="ui_iv_ethics" destination="img-Ethics" id="out-EthImg"/>
                 <outlet property="ui_iv_map" destination="img-Map" id="out-MapImg"/>
                 <outlet property="ui_iv_pedago" destination="img-Pedago" id="out-PedImg"/>
