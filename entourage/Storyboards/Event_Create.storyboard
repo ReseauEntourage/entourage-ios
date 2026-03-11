@@ -1291,8 +1291,8 @@
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zaQ-ox-JyF" secondAttribute="trailing" constant="20" id="TPx-nb-yNd"/>
                                                         <constraint firstItem="zaQ-ox-JyF" firstAttribute="leading" secondItem="WZv-1r-MoB" secondAttribute="leading" constant="20" id="VTt-Vd-dZv"/>
                                                         <constraint firstItem="9fl-a0-ueb" firstAttribute="top" secondItem="zaQ-ox-JyF" secondAttribute="bottom" constant="8" symbolic="YES" id="cGv-wF-Mne"/>
-                                                        <constraint firstAttribute="bottom" secondItem="uqy-8z-lUR" secondAttribute="bottom" constant="32" id="cNo-hR-pFA"/>
-                                                        <constraint firstItem="uqy-8z-lUR" firstAttribute="top" secondItem="9fl-a0-ueb" secondAttribute="bottom" constant="32" id="dZX-Ec-plU"/>
+                                                        <constraint firstAttribute="bottom" secondItem="uqy-8z-lUR" secondAttribute="bottom" constant="12" id="cNo-hR-pFA"/>
+                                                        <constraint firstItem="uqy-8z-lUR" firstAttribute="top" secondItem="9fl-a0-ueb" secondAttribute="bottom" constant="12" id="dZX-Ec-plU"/>
                                                         <constraint firstItem="9fl-a0-ueb" firstAttribute="leading" secondItem="WZv-1r-MoB" secondAttribute="leading" constant="20" id="hjp-HW-MnT"/>
                                                     </constraints>
                                                 </view>

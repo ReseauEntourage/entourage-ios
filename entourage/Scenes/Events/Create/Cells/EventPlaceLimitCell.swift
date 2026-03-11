@@ -115,8 +115,8 @@ class EventPlaceLimitCell: UITableViewCell {
         if selectedItem == 1 {
             ui_limit_tf.text = ""
             ui_view_limit.isHidden = false
-            bottomConstraint?.constant = 32
-            topConstraint?.constant = 32
+            bottomConstraint?.constant = 12
+            topConstraint?.constant = 12
         }
         else {
             ui_view_limit.isHidden = true

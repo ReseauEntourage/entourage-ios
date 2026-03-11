@@ -23,6 +23,7 @@ class EventReservedFemaleCell: UITableViewCell {
         ui_title.text = "event_create_reserved_female_title".localized
 
         ui_switch.onTintColor = .appOrange
+        ui_switch.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(toggleSwitch))
         ui_title.superview?.addGestureRecognizer(tap)
