@@ -76,14 +76,18 @@ class EventCreatePhase3ViewModel: ObservableObject {
         self.isOnline = false
         self.onlineUrl = nil
 
-        delegate?.addOnline(url: nil)
-        delegate?.addPlaceType(isOnline: false)
-        delegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
+        // Important: `isOnline = false` triggered its `didSet` block, which nullified the place via `delegate?.addPlace(...)`.
+        // We now need to dispatch the actual place to the delegate AFTER the `isOnline` side effects have settled.
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.addOnline(url: nil)
+            self?.delegate?.addPlaceType(isOnline: false)
+            self?.delegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
+        }
     }
 }
 
 struct EventCreatePhase3View: View {
-    @StateObject var viewModel: EventCreatePhase3ViewModel
+    @ObservedObject var viewModel: EventCreatePhase3ViewModel
 
     var body: some View {
         ScrollView {
@@ -212,12 +216,6 @@ struct EventCreatePhase3View: View {
                         .scaleEffect(0.8)
                 }
                 .padding(.horizontal, 20)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    withAnimation {
-                        viewModel.isReservedFemale.toggle()
-                    }
-                }
 
                 Spacer()
             }
