@@ -33,6 +33,10 @@ class HomeCellPedago:UITableViewCell{
         containerView.layer.borderColor = UIColor.appBeige.cgColor
         containerView.clipsToBounds = true
 
+        ui_view_tag_container.setContentHuggingPriority(.required, for: .horizontal)
+        ui_label_pedago.setContentHuggingPriority(.required, for: .horizontal)
+        ui_label_pedago.setContentCompressionResistancePriority(.required, for: .horizontal)
+
         repositionDurationLabel()
     }
 
