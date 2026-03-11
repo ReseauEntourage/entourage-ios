@@ -1,10 +1,3 @@
-//
-//  HomeSolidarityToolsCell.swift
-//  entourage
-//
-//  Created by Clement entourage on 25/02/2026.
-//
-
 import UIKit
 
 protocol HomeSolidarityToolsCellDelegate: AnyObject {
@@ -49,12 +42,14 @@ class HomeSolidarityToolsCell: UITableViewCell {
         ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         ui_label_title.textColor = .black
 
+        // Configuration des trois cartes
         setupCard(view: ui_view_map, label: ui_lbl_map, image: ui_iv_map, title: "home_v2_tool_card_map".localized, iconName: "ic_button_map", systemIcon: "map.fill")
         setupCard(view: ui_view_pedago, label: ui_lbl_pedago, image: ui_iv_pedago, title: "home_v2_tool_card_pedago".localized, iconName: "ic_button_pedago", systemIcon: "book.fill")
         setupCard(view: ui_view_ethics, label: ui_lbl_ethics, image: ui_iv_ethics, title: "home_v2_tool_card_ethics".localized, iconName: "ic_button_charte", systemIcon: "hand.raised.fill")
     }
 
     private func setupCard(view: UIView, label: UILabel, image: UIImageView, title: String, iconName: String, systemIcon: String) {
+        // Style de la carte (le rectangle blanc)
         view.layer.cornerRadius = 14
         view.backgroundColor = .white
         view.layer.borderColor = UIColor.appBeige.cgColor
@@ -62,23 +57,35 @@ class HomeSolidarityToolsCell: UITableViewCell {
         view.layer.shadowColor = UIColor.clear.cgColor
         view.layer.shadowOpacity = 0
 
+        // Style du texte
         label.text = title
         label.font = ApplicationTheme.getFontNunitoBold(size: 12)
         label.textColor = .black
         label.numberOfLines = 0
         label.textAlignment = .center
 
+        // Style du rond de l'icône
+        image.backgroundColor = UIColor.appBeige
+        image.layer.cornerRadius = 25 // Pour un rond parfait si l'image fait 50x50
+        image.clipsToBounds = true
+        
+        // GESTION DU PADDING (Pour éviter que l'image ne touche les bords)
+        // On utilise .scaleAspectFit pour respecter les proportions
+        image.contentMode = .scaleAspectFit
+        
         if let img = UIImage(named: iconName) {
             image.image = img
+            // Petite astuce : on réduit l'image via les "Layout Margins" ou on s'assure
+            // que l'asset lui-même a du vide autour. Si l'image dépasse encore,
+            // il faudra réduire la taille de la UIImageView dans le XIB de ~10 points.
         } else {
-            image.image = UIImage(systemName: systemIcon)
+            // Configuration pour les icônes système (plus précis pour le centrage)
+            let symbolConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .medium, scale: .medium)
+            image.image = UIImage(systemName: systemIcon, withConfiguration: symbolConfig)
             image.tintColor = .appOrange
+            // Forcer le centrage pour les SF Symbols
+            image.contentMode = .center
         }
-        image.contentMode = .scaleAspectFit
-
-        image.backgroundColor = UIColor.appBeige
-        image.layer.cornerRadius = 25
-        image.clipsToBounds = true
     }
 
     private func setupTapGestures() {
@@ -95,6 +102,7 @@ class HomeSolidarityToolsCell: UITableViewCell {
         ui_view_ethics.isUserInteractionEnabled = true
     }
 
+    // MARK: - Actions
     @objc private func handleMapTap() {
         delegate?.onMapTapped()
     }
