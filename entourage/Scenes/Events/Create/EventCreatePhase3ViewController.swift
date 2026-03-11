@@ -8,99 +8,48 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
+import SwiftUI
 
 class EventCreatePhase3ViewController: UIViewController {
     
-    weak var pageDelegate:EventCreateMainDelegate? = nil
+    weak var pageDelegate: EventCreateMainDelegate? = nil
     
-    @IBOutlet weak var ui_tableview: UITableView!
+    var currentEvent: Event? = nil
     
-    var isOnline:Bool? = nil
-    var onlineUrl:String? = nil
-    var place:EventLocation? = nil
-    var placeName:String? = nil
-    var location_googlePlace:GMSPlace? = nil
-    
-    var hasplaceLimit = false
-    var nbPlaceLimit = 0
-    
-    var isFromPlaceSelection = false
-    
-    var currentEvent:Event? = nil
+    let viewModel = EventCreatePhase3ViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ui_tableview.dataSource = self
-        ui_tableview.delegate = self
-        ui_tableview.rowHeight = UITableView.automaticDimension
-        ui_tableview.estimatedRowHeight = 50
-
-        ui_tableview.register(UINib(nibName: "EventReservedFemaleCell", bundle: nil), forCellReuseIdentifier: "EventReservedFemaleCell")
 
         if pageDelegate?.isEdit() ?? false {
             currentEvent = pageDelegate?.getCurrentEvent()
         }
-    }
-}
-//MARK: - UITableView datasource / Delegate -
-extension EventCreatePhase3ViewController:UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPlace", for: indexPath) as! EventPlaceCell
-            
-            var showError = false
-            var cityName:String? = nil
-            if isFromPlaceSelection {
-                self.isFromPlaceSelection = false
-                if let _cityName = self.placeName {
-                    cityName = _cityName
-                }
-                else if let _gplace = self.location_googlePlace?.formattedAddress { //TODO: quel formattage d'adresse ?
-                    cityName = _gplace
-                }
-                showError = cityName == nil
-            }
-            else {
-                cityName = (currentEvent?.addressName != nil && isOnline == nil) ? currentEvent?.addressName : nil
-            }
-            
-            let _isOnline = (currentEvent?.isOnline != nil && isOnline == nil) ? currentEvent!.isOnline! : isOnline ?? false
-            let _onlineUrl = (currentEvent?.onlineEventUrl != nil  && isOnline == nil) ? currentEvent!.onlineEventUrl : onlineUrl
         
-            cell.populateCell(delegate: self, showError:showError, cityName: cityName, urlOnline: _onlineUrl, isOnline: _isOnline)
-            
-            return cell
-        }
-        else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellLimit", for: indexPath) as! EventPlaceLimitCell
-            let _hasplaceLimit = currentEvent?.metadata?.hasPlaceLimit != nil ? currentEvent!.metadata!.hasPlaceLimit! : hasplaceLimit
-            let _nbplaceLimit = currentEvent?.metadata?.place_limit != nil ? currentEvent!.metadata!.place_limit! : nbPlaceLimit
-            cell.populateCell(delegate: self,hasPlaceLimit: _hasplaceLimit, limitNb: _nbplaceLimit)
-            return cell
+        viewModel.onShowSelectLocation = { [weak self] in
+            self?.showSelectLocation()
         }
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EventReservedFemaleCell", for: indexPath) as! EventReservedFemaleCell
-        let isReserved = currentEvent?.metadata?.reservedFemale ?? false
-        cell.populateCell(isReserved: isReserved, delegate: self)
-        return cell
+        viewModel.load(currentEvent: currentEvent, delegate: pageDelegate)
+
+        let hostingController = UIHostingController(rootView: EventCreatePhase3View(viewModel: viewModel))
+
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+
+        hostingController.didMove(toParent: self)
     }
 }
 
-extension EventCreatePhase3ViewController: EventReservedFemaleCellDelegate {
-    func updateReservedFemale(isReserved: Bool) {
-        pageDelegate?.addReservedFemale(reserved: isReserved)
-        //Force resize cell
-        ui_tableview.beginUpdates()
-        ui_tableview.endUpdates()
-    }
-}
-
-//MARK: - Delegates -
-extension EventCreatePhase3ViewController:PlaceViewControllerDelegate, EventCreateLocationCellDelegate {
+//MARK: - Location Selection Delegate -
+extension EventCreatePhase3ViewController: PlaceViewControllerDelegate {
     func showSelectLocation() {
         AnalyticsLoggerManager.logEvent(name: Action_NewGroup_AddLocation)
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
@@ -112,58 +61,9 @@ extension EventCreatePhase3ViewController:PlaceViewControllerDelegate, EventCrea
         }
     }
     
-    func modifyPlace(currentlocation:CLLocationCoordinate2D?, currentLocationName:String?, googlePlace:GMSPlace?) {
-        Logger.print("***** modify place : \(currentlocation) -- \(currentLocationName) - Goog \(googlePlace)")
-        self.placeName = currentLocationName
+    func modifyPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
+        Logger.print("***** modify place : \(String(describing: currentlocation)) -- \(String(describing: currentLocationName)) - Goog \(String(describing: googlePlace))")
         
-        self.isFromPlaceSelection = true
-        
-        if let currentlocation = currentlocation {
-            self.place = EventLocation()
-            self.place?.latitude = currentlocation.latitude
-            self.place?.longitude = currentlocation.longitude
-        }
-        else {
-            self.place = nil
-        }
-        
-        self.location_googlePlace = googlePlace
-        pageDelegate?.addOnline(url: nil)
-        pageDelegate?.addPlaceType(isOnline: false)
-        pageDelegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
-        
-        DispatchQueue.main.async {
-            self.ui_tableview.reloadData()
-        }
-    }
-    
-    func resetPlaceOnlineSelection(isOnline:Bool) {
-        self.onlineUrl = nil
-        self.isOnline = isOnline
-        self.placeName = nil
-        self.place = nil
-        self.location_googlePlace = nil
-        pageDelegate?.addPlace(currentlocation: nil, currentLocationName: nil, googlePlace: nil)
-        pageDelegate?.addOnline(url: nil)
-        pageDelegate?.addPlaceType(isOnline: isOnline)
-        self.ui_tableview.reloadData()
-    }
-    
-    func addOnlineUrl(urlOnline:String?) {
-        self.onlineUrl = urlOnline
-        Logger.print("***** add online url : \(onlineUrl)")
-        pageDelegate?.addPlace(currentlocation: nil, currentLocationName: nil, googlePlace: nil)
-        pageDelegate?.addOnline(url: urlOnline)
-        pageDelegate?.addPlaceType(isOnline: true)
-    }
-    
-    func addPlaceLimit(hasPlaceLimit:Bool, limitNb:Int) {
-        self.hasplaceLimit = hasPlaceLimit
-        self.nbPlaceLimit = limitNb
-        Logger.print("***** add Limit : \(hasPlaceLimit) - \(limitNb)")
-        pageDelegate?.addPlaceLimit(hasLimit: hasPlaceLimit,nbPlaces: limitNb)
-
-        ui_tableview.beginUpdates()
-        ui_tableview.endUpdates()
+        viewModel.setLocation(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
     }
 }
