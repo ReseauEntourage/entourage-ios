@@ -187,8 +187,6 @@
 		028D4F5A2937971300A0BDD3 /* OnboardingPhase3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028D4F592937971300A0BDD3 /* OnboardingPhase3ViewController.swift */; };
 		0295F2B727E497D0006AE255 /* ProfileEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295F2B627E497D0006AE255 /* ProfileEditorViewController.swift */; };
 		0295F2B927E4AE5B006AE255 /* EditProfileInfosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295F2B827E4AE5B006AE255 /* EditProfileInfosCell.swift */; };
-		029638EF2869E71500E10EFB /* EventPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029638EE2869E71500E10EFB /* EventPlaceCell.swift */; };
-		029638F12869E76600E10EFB /* EventPlaceLimitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029638F02869E76600E10EFB /* EventPlaceLimitCell.swift */; };
 		029638F3286C58D900E10EFB /* EventShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029638F2286C58D900E10EFB /* EventShareCell.swift */; };
 		029638F5286C801A00E10EFB /* EventCreateValidateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029638F4286C801A00E10EFB /* EventCreateValidateViewController.swift */; };
 		029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029BD4F427EDC44F00AE67AF /* MJNavBackView.swift */; };
@@ -378,8 +376,6 @@
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
 		2421081A2F4C97EB004D74E2 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108192F4C97EB004D74E2 /* BirthdayViewController.swift */; };
 		2421081C2F4CA9C8004D74E2 /* birthday_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 2421081B2F4CA9C8004D74E2 /* birthday_animation.json */; };
-		2421081F2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2421081D2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift */; };
-		242108202F4DE5BB004D74E2 /* EventReservedFemaleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */; };
 		242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */; };
 		242108242F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */; };
 		2432FE522F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE502F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift */; };
@@ -633,6 +629,7 @@
 		26F14CE12D3E8B7C004C4524 /* ProfileSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */; };
 		26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */; };
 		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
+		A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -819,8 +816,6 @@
 		028D4F592937971300A0BDD3 /* OnboardingPhase3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPhase3ViewController.swift; sourceTree = "<group>"; };
 		0295F2B627E497D0006AE255 /* ProfileEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorViewController.swift; sourceTree = "<group>"; };
 		0295F2B827E4AE5B006AE255 /* EditProfileInfosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInfosCell.swift; sourceTree = "<group>"; };
-		029638EE2869E71500E10EFB /* EventPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPlaceCell.swift; sourceTree = "<group>"; };
-		029638F02869E76600E10EFB /* EventPlaceLimitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPlaceLimitCell.swift; sourceTree = "<group>"; };
 		029638F2286C58D900E10EFB /* EventShareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventShareCell.swift; sourceTree = "<group>"; };
 		029638F4286C801A00E10EFB /* EventCreateValidateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCreateValidateViewController.swift; sourceTree = "<group>"; };
 		029BD4F427EDC44F00AE67AF /* MJNavBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJNavBackView.swift; sourceTree = "<group>"; };
@@ -1002,8 +997,6 @@
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
 		242108192F4C97EB004D74E2 /* BirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
 		2421081B2F4CA9C8004D74E2 /* birthday_animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = birthday_animation.json; sourceTree = "<group>"; };
-		2421081D2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventReservedFemaleCell.swift; sourceTree = "<group>"; };
-		2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventReservedFemaleCell.xib; sourceTree = "<group>"; };
 		242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSolidarityToolsCell.swift; sourceTree = "<group>"; };
 		242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSolidarityToolsCell.xib; sourceTree = "<group>"; };
 		2432FE502F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActionHorizontalCollectionCell.swift; sourceTree = "<group>"; };
@@ -1267,6 +1260,7 @@
 		26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileSectionCell.xib; sourceTree = "<group>"; };
 		26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightOverlayView.swift; sourceTree = "<group>"; };
 		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
+		4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventCreatePhase3View.swift; path = entourage/Scenes/Events/Create/EventCreatePhase3View.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1528,6 +1522,7 @@
 				02CCE67027D78C2F00D6976C /* Fonts */,
 				025D8717278DD33600909101 /* Products */,
 				2623375C2EE82704007EA8ED /* Frameworks */,
+				4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1843,12 +1838,8 @@
 		029D25312865FA3F00147F77 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				2421081D2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift */,
-				2421081E2F4DE5BB004D74E2 /* EventReservedFemaleCell.xib */,
 				029D25322865FA5F00147F77 /* EventDatesCell.swift */,
-				029638EE2869E71500E10EFB /* EventPlaceCell.swift */,
 				029D25342865FA7B00147F77 /* EventRecurrenceCell.swift */,
-				029638F02869E76600E10EFB /* EventPlaceLimitCell.swift */,
 				029638F2286C58D900E10EFB /* EventShareCell.swift */,
 			);
 			path = Cells;
@@ -2887,7 +2878,6 @@
 				02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */,
 				266B262A2AB8BCDD00C8EAD8 /* MyEventCollectionViewCell.xib in Resources */,
 				020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */,
-				242108202F4DE5BB004D74E2 /* EventReservedFemaleCell.xib in Resources */,
 				268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */,
 				02B94C28284F63AB006059EF /* HomeContribCell.xib in Resources */,
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
@@ -2948,7 +2938,6 @@
 				02A92C3228982D57000DFF95 /* ActionTagInfoCell.swift in Sources */,
 				0288A8D927CCDA5C008D7011 /* PictureUploadS3Service.swift in Sources */,
 				02A92C1B2897D2C2000DFF95 /* ActionsMainHomeViewController.swift in Sources */,
-				2421081F2F4DE5BB004D74E2 /* EventReservedFemaleCell.swift in Sources */,
 				02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */,
 				2649A4B42D7F57F200FD100E /* FilterDiscussionCell.swift in Sources */,
 				0241FE0C286DDB700065E560 /* EventEditMainViewController.swift in Sources */,
@@ -3168,7 +3157,6 @@
 				022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */,
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				26C2C9122DDCD3BC00C8F320 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
-				029638F12869E76600E10EFB /* EventPlaceLimitCell.swift in Sources */,
 				02040CF9288E980C00AB1FBB /* EventParamEditShow.swift in Sources */,
 				021FD963287442C700D3AA54 /* NeighborhoodListEventsViewController.swift in Sources */,
 				0208B0CB289D2EAB009A7A58 /* ActionFullAuthorCell.swift in Sources */,
@@ -3210,7 +3198,6 @@
 				2619E14B2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift in Sources */,
 				02F578CD289AD4060040685C /* ActionContribDetailHomeCell.swift in Sources */,
 				02EB0B46292E1F3100CEB739 /* ParamsNotifsViewController.swift in Sources */,
-				029638EF2869E71500E10EFB /* EventPlaceCell.swift in Sources */,
 				0258E4F9288AAF1A000F107B /* ActionsService.swift in Sources */,
 				02C3ABF2279AB53800817B82 /* Extensions_UserDefaults.swift in Sources */,
 				02E2A9A5292FDDAD0037BA53 /* ProfileEditBlockedUsersViewController.swift in Sources */,
@@ -3372,6 +3359,7 @@
 				2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */,
 				021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */,
 				02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */,
+				A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

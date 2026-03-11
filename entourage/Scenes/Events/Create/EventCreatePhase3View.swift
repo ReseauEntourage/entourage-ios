@@ -1,0 +1,248 @@
+import SwiftUI
+import CoreLocation
+import GooglePlaces
+
+class EventCreatePhase3ViewModel: ObservableObject {
+    @Published var isOnline: Bool = false {
+        didSet {
+            if isOnline {
+                placeName = nil
+                delegate?.addPlace(currentlocation: nil, currentLocationName: nil, googlePlace: nil)
+                delegate?.addOnline(url: onlineUrl)
+            } else {
+                onlineUrl = nil
+                delegate?.addOnline(url: nil)
+            }
+            delegate?.addPlaceType(isOnline: isOnline)
+        }
+    }
+    @Published var onlineUrl: String? = nil {
+        didSet {
+            delegate?.addOnline(url: onlineUrl)
+        }
+    }
+
+    @Published var placeName: String? = nil
+
+    @Published var hasPlaceLimit: Bool = false {
+        didSet {
+            delegate?.addPlaceLimit(hasLimit: hasPlaceLimit, nbPlaces: hasPlaceLimit ? nbPlaceLimit : 0)
+        }
+    }
+    @Published var nbPlaceLimitString: String = "" {
+        didSet {
+            let limit = Int(nbPlaceLimitString) ?? 0
+            delegate?.addPlaceLimit(hasLimit: hasPlaceLimit, nbPlaces: limit)
+        }
+    }
+    var nbPlaceLimit: Int {
+        return Int(nbPlaceLimitString) ?? 0
+    }
+
+    @Published var isReservedFemale: Bool = false {
+        didSet {
+            delegate?.addReservedFemale(reserved: isReservedFemale)
+        }
+    }
+
+    weak var delegate: EventCreateMainDelegate?
+    var onShowSelectLocation: (() -> Void)?
+
+    func load(currentEvent: Event?, delegate: EventCreateMainDelegate?) {
+        self.delegate = delegate
+
+        if let currentEvent = currentEvent {
+            if let eventIsOnline = currentEvent.isOnline {
+                self.isOnline = eventIsOnline
+            }
+            self.onlineUrl = currentEvent.onlineEventUrl
+            self.placeName = currentEvent.addressName
+
+            if let metadata = currentEvent.metadata {
+                if let limit = metadata.place_limit, limit > 0 {
+                    self.hasPlaceLimit = true
+                    self.nbPlaceLimitString = "\(limit)"
+                } else if let hasLimit = metadata.hasPlaceLimit {
+                    self.hasPlaceLimit = hasLimit
+                }
+
+                self.isReservedFemale = metadata.reservedFemale ?? false
+            }
+        }
+    }
+
+    func setLocation(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
+        self.placeName = currentLocationName
+        self.isOnline = false
+        self.onlineUrl = nil
+
+        delegate?.addOnline(url: nil)
+        delegate?.addPlaceType(isOnline: false)
+        delegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
+    }
+}
+
+struct EventCreatePhase3View: View {
+    @StateObject var viewModel: EventCreatePhase3ViewModel
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 24) {
+                // MARK: Place / Online Section
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack(spacing: 0) {
+                        Text("event_create_phase3_title".localized)
+                            .font(.custom("NunitoSans-Bold", size: 15))
+                            .foregroundColor(.black)
+                        Text("event_create_mandatory".localized)
+                            .font(.custom("NunitoSans-Regular", size: 13))
+                            .foregroundColor(Color("color_legend"))
+                    }
+
+                    HStack(spacing: 20) {
+                        RadioButton(title: "event_create_phase3_presentiel".localized, isSelected: !viewModel.isOnline) {
+                            viewModel.isOnline = false
+                        }
+                        RadioButton(title: "event_create_phase3_online".localized, isSelected: viewModel.isOnline) {
+                            viewModel.isOnline = true
+                        }
+                    }
+
+                    if viewModel.isOnline {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 0) {
+                                Text("event_create_phase3_title_online".localized)
+                                    .font(.custom("NunitoSans-Bold", size: 15))
+                                    .foregroundColor(.black)
+                                Text("event_create_mandatory".localized)
+                                    .font(.custom("NunitoSans-Regular", size: 13))
+                                    .foregroundColor(Color("color_legend"))
+                            }
+
+                            TextField("event_create_phase3_placeholder_online".localized, text: Binding(
+                                get: { viewModel.onlineUrl ?? "" },
+                                set: { viewModel.onlineUrl = $0.isEmpty ? nil : $0 }
+                            ))
+                            .font(.custom("NunitoSans-Regular", size: 13))
+                            .padding(.bottom, 8)
+                            .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
+                            .foregroundColor(.black)
+                            .keyboardType(.URL)
+                            .autocapitalization(.none)
+                        }
+                    } else {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 0) {
+                                Text("event_create_phase3_title_place".localized)
+                                    .font(.custom("NunitoSans-Bold", size: 15))
+                                    .foregroundColor(.black)
+                                Text("event_create_mandatory".localized)
+                                    .font(.custom("NunitoSans-Regular", size: 13))
+                                    .foregroundColor(Color("color_legend"))
+                            }
+
+                            Button(action: {
+                                viewModel.onShowSelectLocation?()
+                            }) {
+                                HStack {
+                                    Text(viewModel.placeName ?? "event_create_phase3_placeholder_place".localized)
+                                        .font(.custom("NunitoSans-Regular", size: 13))
+                                        .foregroundColor(viewModel.placeName != nil ? .black : Color(UIColor.appGrisSombre40))
+                                    Spacer()
+                                }
+                                .padding(.bottom, 8)
+                                .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
+                            }
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+
+                // MARK: Limit Section
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack(spacing: 0) {
+                        Text("event_create_phase3_title_limit".localized)
+                            .font(.custom("NunitoSans-Bold", size: 15))
+                            .foregroundColor(.black)
+                        Text("event_create_mandatory".localized)
+                            .font(.custom("NunitoSans-Regular", size: 13))
+                            .foregroundColor(Color("color_legend"))
+                    }
+
+                    HStack(spacing: 20) {
+                        RadioButton(title: "event_create_phase3_limit_yes".localized, isSelected: viewModel.hasPlaceLimit) {
+                            viewModel.hasPlaceLimit = true
+                        }
+                        RadioButton(title: "event_create_phase3_limit_no".localized, isSelected: !viewModel.hasPlaceLimit) {
+                            viewModel.hasPlaceLimit = false
+                            viewModel.nbPlaceLimitString = ""
+                        }
+                    }
+
+                    if viewModel.hasPlaceLimit {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 0) {
+                                Text("event_create_phase3_title_nb_places".localized)
+                                    .font(.custom("NunitoSans-Bold", size: 15))
+                                    .foregroundColor(.black)
+                                Text("event_create_mandatory".localized)
+                                    .font(.custom("NunitoSans-Regular", size: 13))
+                                    .foregroundColor(Color("color_legend"))
+                            }
+
+                            TextField("event_create_phase3_title_nb_places_placeholder".localized, text: $viewModel.nbPlaceLimitString)
+                                .font(.custom("NunitoSans-Regular", size: 13))
+                                .padding(.bottom, 8)
+                                .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
+                                .foregroundColor(.black)
+                                .keyboardType(.numberPad)
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+
+                // MARK: Reserved Female Section
+                HStack {
+                    Text("event_create_reserved_female_title".localized)
+                        .font(.custom("NunitoSans-Bold", size: 15))
+                        .foregroundColor(.black)
+                    Spacer()
+                    Toggle("", isOn: $viewModel.isReservedFemale)
+                        .toggleStyle(SwitchToggleStyle(tint: Color("appOrange")))
+                        .scaleEffect(0.8)
+                }
+                .padding(.horizontal, 20)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation {
+                        viewModel.isReservedFemale.toggle()
+                    }
+                }
+
+                Spacer()
+            }
+            .padding(.top, 24)
+            .padding(.bottom, 40)
+        }
+    }
+}
+
+struct RadioButton: View {
+    let title: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 8) {
+                Image(isSelected ? "ic_selector_on" : "ic_selector_off")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+
+                Text(title)
+                    .font(.custom(isSelected ? "NunitoSans-Bold" : "NunitoSans-Regular", size: 15))
+                    .foregroundColor(.black)
+            }
+        }
+    }
+}
