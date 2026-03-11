@@ -27,13 +27,24 @@ class MainTabbarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate = self
+
+        setupVCs()
+
         // --- FIX POUR IPHONE 17 / iOS 15+ (Fond blanc & Layout) ---
+        let itemsCount = CGFloat(self.tabBar.items?.count ?? 5)
+        let indicatorWidth = UIScreen.main.bounds.width / itemsCount
+        let indicatorImage = createSelectionIndicator(color: UIColor.appOrange, size: CGSize(width: indicatorWidth, height: 49), lineWidth: 2)
+
         if #available(iOS 15.0, *) {
             let appearance = UITabBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = UIColor.white
             appearance.shadowColor = UIColor.clear // Optionnel : supprime la ligne grise fine si besoin
             
+            // Selection indicator replacement logic native style
+            appearance.selectionIndicatorImage = indicatorImage
+
             // On applique la configuration aux états "standard" et "scrollEdge" (quand on scroll en bas)
             self.tabBar.standardAppearance = appearance
             self.tabBar.scrollEdgeAppearance = appearance
@@ -44,12 +55,9 @@ class MainTabbarViewController: UITabBarController {
             UITabBar.appearance().tintColor = UIColor.appOrange
             UITabBar.appearance().barTintColor = UIColor.white
             UITabBar.appearance().isTranslucent = false
+            UITabBar.appearance().selectionIndicatorImage = indicatorImage
         }
         // ---------------------------------------------------------
-        
-        delegate = self
-        
-        setupVCs()
         
         AnalyticsLoggerManager.updateAnalyticsWitUser()
         
@@ -285,5 +293,14 @@ extension MainTabbarViewController {
                 self.tabBar.isHidden = hidden
             }
         })
+    }
+
+    private func createSelectionIndicator(color: UIColor, size: CGSize, lineWidth: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(CGRect(x: 0, y: 0, width: size.width, height: lineWidth))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }
