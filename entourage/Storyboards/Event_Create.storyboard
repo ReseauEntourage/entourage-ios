@@ -1098,13 +1098,13 @@
                                                         <constraint firstItem="vKL-36-TDf" firstAttribute="top" secondItem="4DC-RR-92V" secondAttribute="bottom" constant="8" symbolic="YES" id="B8m-Pc-KVI"/>
                                                         <constraint firstAttribute="bottom" secondItem="XoR-vV-HbR" secondAttribute="bottom" constant="16" id="FdF-GX-hZK"/>
                                                         <constraint firstItem="4DC-RR-92V" firstAttribute="top" secondItem="DL4-sm-GRf" secondAttribute="top" id="HA2-jr-fch"/>
-                                                        <constraint firstAttribute="trailing" secondItem="vKL-36-TDf" secondAttribute="trailing" constant="28" id="UN3-TX-V4M"/>
-                                                        <constraint firstItem="4DC-RR-92V" firstAttribute="leading" secondItem="DL4-sm-GRf" secondAttribute="leading" constant="28" id="Yal-xO-SzR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="vKL-36-TDf" secondAttribute="trailing" constant="20" id="UN3-TX-V4M"/>
+                                                        <constraint firstItem="4DC-RR-92V" firstAttribute="leading" secondItem="DL4-sm-GRf" secondAttribute="leading" constant="20" id="Yal-xO-SzR"/>
                                                         <constraint firstItem="XoR-vV-HbR" firstAttribute="top" secondItem="vKL-36-TDf" secondAttribute="bottom" constant="32" id="Zce-9Z-TCg"/>
-                                                        <constraint firstItem="vKL-36-TDf" firstAttribute="leading" secondItem="DL4-sm-GRf" secondAttribute="leading" constant="28" id="aez-w5-TNx"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4DC-RR-92V" secondAttribute="trailing" constant="28" id="hQd-PO-CJz"/>
-                                                        <constraint firstAttribute="trailing" secondItem="XoR-vV-HbR" secondAttribute="trailing" constant="28" id="ulp-W5-kFJ"/>
-                                                        <constraint firstItem="XoR-vV-HbR" firstAttribute="leading" secondItem="DL4-sm-GRf" secondAttribute="leading" constant="28" id="xx7-jP-1jL"/>
+                                                        <constraint firstItem="vKL-36-TDf" firstAttribute="leading" secondItem="DL4-sm-GRf" secondAttribute="leading" constant="20" id="aez-w5-TNx"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4DC-RR-92V" secondAttribute="trailing" constant="20" id="hQd-PO-CJz"/>
+                                                        <constraint firstAttribute="trailing" secondItem="XoR-vV-HbR" secondAttribute="trailing" constant="20" id="ulp-W5-kFJ"/>
+                                                        <constraint firstItem="XoR-vV-HbR" firstAttribute="leading" secondItem="DL4-sm-GRf" secondAttribute="leading" constant="20" id="xx7-jP-1jL"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1284,16 +1284,16 @@
                                                     </subviews>
                                                     <color key="backgroundColor" name="BeigeClair"/>
                                                     <constraints>
-                                                        <constraint firstItem="uqy-8z-lUR" firstAttribute="leading" secondItem="WZv-1r-MoB" secondAttribute="leading" constant="28" id="4G5-77-cM4"/>
+                                                        <constraint firstItem="uqy-8z-lUR" firstAttribute="leading" secondItem="WZv-1r-MoB" secondAttribute="leading" constant="20" id="4G5-77-cM4"/>
                                                         <constraint firstItem="zaQ-ox-JyF" firstAttribute="top" secondItem="WZv-1r-MoB" secondAttribute="top" id="BLO-uq-r8k"/>
-                                                        <constraint firstAttribute="trailing" secondItem="uqy-8z-lUR" secondAttribute="trailing" constant="28" id="Eo4-42-3lm"/>
-                                                        <constraint firstAttribute="trailing" secondItem="9fl-a0-ueb" secondAttribute="trailing" constant="28" id="Omf-TD-9Is"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zaQ-ox-JyF" secondAttribute="trailing" constant="28" id="TPx-nb-yNd"/>
-                                                        <constraint firstItem="zaQ-ox-JyF" firstAttribute="leading" secondItem="WZv-1r-MoB" secondAttribute="leading" constant="28" id="VTt-Vd-dZv"/>
+                                                        <constraint firstAttribute="trailing" secondItem="uqy-8z-lUR" secondAttribute="trailing" constant="20" id="Eo4-42-3lm"/>
+                                                        <constraint firstAttribute="trailing" secondItem="9fl-a0-ueb" secondAttribute="trailing" constant="20" id="Omf-TD-9Is"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zaQ-ox-JyF" secondAttribute="trailing" constant="20" id="TPx-nb-yNd"/>
+                                                        <constraint firstItem="zaQ-ox-JyF" firstAttribute="leading" secondItem="WZv-1r-MoB" secondAttribute="leading" constant="20" id="VTt-Vd-dZv"/>
                                                         <constraint firstItem="9fl-a0-ueb" firstAttribute="top" secondItem="zaQ-ox-JyF" secondAttribute="bottom" constant="8" symbolic="YES" id="cGv-wF-Mne"/>
                                                         <constraint firstAttribute="bottom" secondItem="uqy-8z-lUR" secondAttribute="bottom" constant="32" id="cNo-hR-pFA"/>
                                                         <constraint firstItem="uqy-8z-lUR" firstAttribute="top" secondItem="9fl-a0-ueb" secondAttribute="bottom" constant="32" id="dZX-Ec-plU"/>
-                                                        <constraint firstItem="9fl-a0-ueb" firstAttribute="leading" secondItem="WZv-1r-MoB" secondAttribute="leading" constant="28" id="hjp-HW-MnT"/>
+                                                        <constraint firstItem="9fl-a0-ueb" firstAttribute="leading" secondItem="WZv-1r-MoB" secondAttribute="leading" constant="20" id="hjp-HW-MnT"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
