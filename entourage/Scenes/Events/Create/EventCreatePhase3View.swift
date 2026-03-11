@@ -7,6 +7,7 @@ class EventCreatePhase3ViewModel: ObservableObject {
         didSet {
             if isOnline {
                 placeName = nil
+                addressViewModel.query = ""
                 delegate?.addPlace(currentlocation: nil, currentLocationName: nil, googlePlace: nil)
                 delegate?.addOnline(url: onlineUrl)
             } else {
@@ -23,6 +24,29 @@ class EventCreatePhase3ViewModel: ObservableObject {
     }
 
     @Published var placeName: String? = nil
+
+    // Address autocomplete
+    @Published var addressViewModel = AddressAutocompleteViewModel()
+    @Published var isShowingSuggestions = false
+
+    // Cancellation tracking
+    private var cancellables = Set<AnyCancellable>()
+
+    init() {
+        // Observe query changes to manage suggestion list visibility
+        addressViewModel.$query
+            .receive(on: RunLoop.main)
+            .sink { [weak self] newQuery in
+                // Only show suggestions if the query is non-empty AND we don't already have an exactly matching placeName
+                // (which means they just selected something or we just loaded a place)
+                if newQuery.isEmpty || newQuery == self?.placeName {
+                    self?.isShowingSuggestions = false
+                } else {
+                    self?.isShowingSuggestions = true
+                }
+            }
+            .store(in: &cancellables)
+    }
 
     @Published var hasPlaceLimit: Bool = false {
         didSet {
@@ -57,6 +81,9 @@ class EventCreatePhase3ViewModel: ObservableObject {
             }
             self.onlineUrl = currentEvent.onlineEventUrl
             self.placeName = currentEvent.addressName
+            if let name = self.placeName {
+                self.addressViewModel.query = name
+            }
 
             if let metadata = currentEvent.metadata {
                 if let limit = metadata.place_limit, limit > 0 {
@@ -75,6 +102,9 @@ class EventCreatePhase3ViewModel: ObservableObject {
         self.placeName = currentLocationName
         self.isOnline = false
         self.onlineUrl = nil
+        if let name = currentLocationName {
+            self.addressViewModel.query = name
+        }
 
         // Important: `isOnline = false` triggered its `didSet` block, which nullified the place via `delegate?.addPlace(...)`.
         // We now need to dispatch the actual place to the delegate AFTER the `isOnline` side effects have settled.
@@ -145,17 +175,42 @@ struct EventCreatePhase3View: View {
                                     .foregroundColor(Color("color_legend"))
                             }
 
-                            Button(action: {
-                                viewModel.onShowSelectLocation?()
-                            }) {
-                                HStack {
-                                    Text(viewModel.placeName ?? "event_create_phase3_placeholder_place".localized)
-                                        .font(.custom("NunitoSans-Regular", size: 13))
-                                        .foregroundColor(viewModel.placeName != nil ? .black : Color(UIColor.appGrisSombre40))
-                                    Spacer()
-                                }
+                            TextField("event_create_phase3_placeholder_place".localized, text: $viewModel.addressViewModel.query)
+                                .font(.custom("NunitoSans-Regular", size: 13))
                                 .padding(.bottom, 8)
                                 .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
+                                .foregroundColor(.black)
+                                .disableAutocorrection(true)
+
+                            if viewModel.isShowingSuggestions && !viewModel.addressViewModel.suggestions.isEmpty {
+                                VStack(alignment: .leading, spacing: 0) {
+                                    ForEach(viewModel.addressViewModel.suggestions, id: \.placeID) { suggestion in
+                                        Button(action: {
+                                            viewModel.addressViewModel.getPlaceDetails(placeID: suggestion.placeID) { place, error in
+                                                guard let place = place else { return }
+                                                viewModel.setLocation(
+                                                    currentlocation: place.coordinate,
+                                                    currentLocationName: place.formattedAddress ?? place.name,
+                                                    googlePlace: place
+                                                )
+                                            }
+                                        }) {
+                                            VStack(alignment: .leading) {
+                                                Text(suggestion.attributedFullText.string)
+                                                    .font(.custom("NunitoSans-Regular", size: 13))
+                                                    .foregroundColor(.black)
+                                                    .multilineTextAlignment(.leading)
+                                                    .padding(.vertical, 12)
+
+                                                Divider()
+                                            }
+                                        }
+                                    }
+                                }
+                                .background(Color.white)
+                                .cornerRadius(8)
+                                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+                                .padding(.top, 4)
                             }
                         }
                     }
