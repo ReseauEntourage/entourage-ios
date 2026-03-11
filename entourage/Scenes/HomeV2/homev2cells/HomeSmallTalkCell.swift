@@ -76,7 +76,7 @@ extension HomeSmallTalkCell: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width * 0.90
+        let width = collectionView.bounds.width * 0.99
         let height = collectionView.bounds.height
         return CGSize(width: width, height: height)
     }

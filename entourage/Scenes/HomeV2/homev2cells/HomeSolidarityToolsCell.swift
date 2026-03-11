@@ -23,6 +23,10 @@ class HomeSolidarityToolsCell: UITableViewCell {
     @IBOutlet weak var ui_view_pedago: UIView!
     @IBOutlet weak var ui_view_ethics: UIView!
 
+    @IBOutlet weak var ui_cont_map: UIView!
+    @IBOutlet weak var ui_cont_pedago: UIView!
+    @IBOutlet weak var ui_cont_ethics: UIView!
+
     @IBOutlet weak var ui_iv_map: UIImageView!
     @IBOutlet weak var ui_iv_pedago: UIImageView!
     @IBOutlet weak var ui_iv_ethics: UIImageView!
@@ -49,12 +53,12 @@ class HomeSolidarityToolsCell: UITableViewCell {
         ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         ui_label_title.textColor = .black
 
-        setupCard(view: ui_view_map, label: ui_lbl_map, image: ui_iv_map, title: "home_v2_tool_card_map".localized, iconName: "ic_button_map", systemIcon: "map.fill")
-        setupCard(view: ui_view_pedago, label: ui_lbl_pedago, image: ui_iv_pedago, title: "home_v2_tool_card_pedago".localized, iconName: "ic_button_pedago", systemIcon: "book.fill")
-        setupCard(view: ui_view_ethics, label: ui_lbl_ethics, image: ui_iv_ethics, title: "home_v2_tool_card_ethics".localized, iconName: "ic_button_charte", systemIcon: "hand.raised.fill")
+        setupCard(view: ui_view_map, label: ui_lbl_map, image: ui_iv_map, imgContainer: ui_cont_map, title: "home_v2_tool_card_map".localized, iconName: "ic_button_map", systemIcon: "map.fill")
+        setupCard(view: ui_view_pedago, label: ui_lbl_pedago, image: ui_iv_pedago, imgContainer: ui_cont_pedago, title: "home_v2_tool_card_pedago".localized, iconName: "ic_button_pedago", systemIcon: "book.fill")
+        setupCard(view: ui_view_ethics, label: ui_lbl_ethics, image: ui_iv_ethics, imgContainer: ui_cont_ethics, title: "home_v2_tool_card_ethics".localized, iconName: "ic_button_charte", systemIcon: "hand.raised.fill")
     }
 
-    private func setupCard(view: UIView, label: UILabel, image: UIImageView, title: String, iconName: String, systemIcon: String) {
+    private func setupCard(view: UIView, label: UILabel, image: UIImageView, imgContainer: UIView?, title: String, iconName: String, systemIcon: String) {
         view.layer.cornerRadius = 14
         view.backgroundColor = .white
         view.layer.borderColor = UIColor.appBeige.cgColor
@@ -76,9 +80,16 @@ class HomeSolidarityToolsCell: UITableViewCell {
         }
         image.contentMode = .scaleAspectFit
 
-        image.backgroundColor = UIColor.appBeige
-        image.layer.cornerRadius = 25
-        image.clipsToBounds = true
+        if let container = imgContainer {
+            container.backgroundColor = UIColor.appBeige
+            container.layer.cornerRadius = 25
+            container.clipsToBounds = true
+            image.backgroundColor = .clear
+        } else {
+            image.backgroundColor = UIColor.appBeige
+            image.layer.cornerRadius = 25
+            image.clipsToBounds = true
+        }
     }
 
     private func setupTapGestures() {

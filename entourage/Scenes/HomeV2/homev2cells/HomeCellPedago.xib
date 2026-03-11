@@ -49,8 +49,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pnT-2M-wbY">
                                 <rect key="frame" x="100" y="10" width="36.33333333333334" height="22"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBt-j9-VNQ">
-                                        <rect key="frame" x="2" y="2" width="32.333333333333336" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBt-j9-VNQ">
+                                        <rect key="frame" x="8" y="2" width="20.333333333333336" height="18"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="12"/>
                                         <color key="textColor" name="orange_light"/>
                                         <nil key="highlightedColor"/>
@@ -58,13 +58,12 @@
                                 </subviews>
                                 <color key="backgroundColor" name="beige_lighter"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="WBt-j9-VNQ" secondAttribute="trailing" constant="2" id="0tL-mI-kGc"/>
-                                    <constraint firstItem="WBt-j9-VNQ" firstAttribute="leading" secondItem="pnT-2M-wbY" secondAttribute="leading" constant="2" id="1qf-B8-XJt"/>
+                                    <constraint firstAttribute="trailing" secondItem="WBt-j9-VNQ" secondAttribute="trailing" constant="8" id="0tL-mI-kGc"/>
+                                    <constraint firstItem="WBt-j9-VNQ" firstAttribute="leading" secondItem="pnT-2M-wbY" secondAttribute="leading" constant="8" id="1qf-B8-XJt"/>
                                     <constraint firstAttribute="height" constant="22" id="CDP-P3-jaC"/>
                                     <constraint firstItem="WBt-j9-VNQ" firstAttribute="centerY" secondItem="pnT-2M-wbY" secondAttribute="centerY" id="IWa-zJ-iFF"/>
                                     <constraint firstItem="WBt-j9-VNQ" firstAttribute="top" secondItem="pnT-2M-wbY" secondAttribute="top" constant="2" id="baw-c5-qBb"/>
                                     <constraint firstAttribute="bottom" secondItem="WBt-j9-VNQ" secondAttribute="bottom" constant="2" id="r49-SW-Wob"/>
-
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cradius">
