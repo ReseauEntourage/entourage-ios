@@ -31,7 +31,7 @@ class EventCreatePhase3ViewController: UIViewController {
 
         viewModel.load(currentEvent: currentEvent, delegate: pageDelegate)
 
-        let hostingController = UIHostingController(rootView: EventCreatePhase3View(viewModel: viewModel))
+        let hostingController = UIHostingController(rootView: EventCreatePhase3View(viewModel: self.viewModel))
 
         addChild(hostingController)
         view.addSubview(hostingController.view)
