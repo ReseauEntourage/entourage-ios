@@ -667,6 +667,10 @@ struct EventEditing {
             metadatas["place_name"] = place_name
         }
         
+        if let street_address = metadata?.street_address {
+            metadatas["street_address"] = street_address
+        }
+
         if let newGoogle_place_id = metadata?.google_place_id {
             metadatas["google_place_id"] = newGoogle_place_id
         }
@@ -696,6 +700,7 @@ struct EventMetadataEditing {
     var starts_at:String? = nil
     var ends_at:String? = nil
     var place_name:String? = nil
+    var street_address:String? = nil
     var google_place_id:String? = nil
     var place_limit:Int? = 0
     var reservedFemale:Bool? = nil

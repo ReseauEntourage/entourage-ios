@@ -41,6 +41,7 @@ class EventEditMainViewController: UIViewController {
     var newOnlineEventUrl:String? = nil
     var newLocation:EventLocation? = nil
     var newAddressName:String? = nil
+    var newStreetAddress:String? = nil
     var newGoogle_place_id:String? = nil
     var newHasPlaceLimit:Bool? = nil
     var newPlace_limit:Int? = nil
@@ -289,6 +290,7 @@ class EventEditMainViewController: UIViewController {
         newEvent.location = newLocation
         
         newEvent.metadata?.place_name = newAddressName
+        newEvent.metadata?.street_address = newStreetAddress
         newEvent.metadata?.google_place_id = newGoogle_place_id
         newEvent.metadata?.place_limit = newPlace_limit
         newEvent.startDate = newStartDate
@@ -359,17 +361,20 @@ extension EventEditMainViewController: EventCreateMainDelegate {
         if let googlePlace = googlePlace {
             newGoogle_place_id = googlePlace.placeID
             newAddressName = currentLocationName ?? googlePlace.name
+            newStreetAddress = googlePlace.formattedAddress ?? googlePlace.name
             newLocation = EventLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
         }
         else if let currentlocation = currentlocation {
             newLocation = EventLocation(latitude: currentlocation.latitude, longitude: currentlocation.longitude)
             newAddressName = currentLocationName
+            newStreetAddress = currentLocationName
             newGoogle_place_id = nil
         }
         else {
             newLocation = nil
             newGoogle_place_id = nil
             newAddressName = nil
+            newStreetAddress = nil
         }
         _ = checkValidation()
     }

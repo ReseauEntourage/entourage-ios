@@ -195,7 +195,7 @@ struct EventCreatePhase3View: View {
                                                 guard let place = place else { return }
                                                 viewModel.setLocation(
                                                     currentlocation: place.coordinate,
-                                                    currentLocationName: place.formattedAddress ?? place.name,
+                                                    currentLocationName: place.name,
                                                     googlePlace: place
                                                 )
                                             }

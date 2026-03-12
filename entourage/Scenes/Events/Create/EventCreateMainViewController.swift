@@ -284,7 +284,7 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
         if let googlePlace = googlePlace {
             newEvent.location = EventLocation(latitude: googlePlace.coordinate.latitude, longitude:  googlePlace.coordinate.longitude)
             newEvent.addressName = currentLocationName ?? googlePlace.name
-            newEvent.metadata?.street_address = currentLocationName ?? googlePlace.name ?? ""
+            newEvent.metadata?.street_address = googlePlace.formattedAddress ?? googlePlace.name ?? ""
             newEvent.metadata?.google_place_id = googlePlace.placeID
         }
         else if let currentlocation = currentlocation {
