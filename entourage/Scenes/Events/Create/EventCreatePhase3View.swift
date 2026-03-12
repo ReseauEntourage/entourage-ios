@@ -114,7 +114,6 @@ class EventCreatePhase3ViewModel: ObservableObject {
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.addOnline(url: nil)
             self?.delegate?.addPlaceType(isOnline: false)
-            // On s'assure d'envoyer uniquement les coordonnées propres à l'adresse sélectionnée.
             self?.delegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
         }
     }
@@ -125,8 +124,8 @@ struct EventCreatePhase3View: View {
 
     var body: some View {
         ScrollView {
-            // Espacement global augmenté de +10dp pour aérer
-            VStack(spacing: 34) {
+            // Espacement global augmenté de nouveau (passage à 48dp)
+            VStack(spacing: 48) {
                 // MARK: Place / Online Section
                 VStack(alignment: .leading, spacing: 16) {
                     HStack(spacing: 4) {
@@ -195,7 +194,7 @@ struct EventCreatePhase3View: View {
                                                 guard let place = place else { return }
                                                 viewModel.setLocation(
                                                     currentlocation: place.coordinate,
-                                                    currentLocationName: place.name,
+                                                    currentLocationName: place.formattedAddress ?? place.name,
                                                     googlePlace: place
                                                 )
                                             }
@@ -220,7 +219,7 @@ struct EventCreatePhase3View: View {
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading) // Fixe l'alignement strict à gauche
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
 
                 // MARK: Limit Section
@@ -264,7 +263,7 @@ struct EventCreatePhase3View: View {
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading) // Corrige le décalage à droite
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
 
                 // MARK: Reserved Female Section
@@ -277,12 +276,12 @@ struct EventCreatePhase3View: View {
                         .toggleStyle(SwitchToggleStyle(tint: Color("orange_app")))
                         .scaleEffect(0.8)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading) // Harmonisation
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
                 
                 Spacer()
             }
-            .padding(.top, 24)
+            .padding(.top, 32) // Un peu d'air au-dessus du premier bloc
             .padding(.bottom, 40)
         }
     }
