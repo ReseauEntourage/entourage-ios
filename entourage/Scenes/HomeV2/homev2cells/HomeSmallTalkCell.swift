@@ -38,7 +38,7 @@ class HomeSmallTalkCell: UITableViewCell {
         ui_collection_view.showsHorizontalScrollIndicator = false
 
         // Register cells
-        ui_collection_view.register(UINib(nibName: "CellCreateSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellCreateSmallTalk")
+        ui_collection_view.register(CellCreateSmallTalk.self, forCellWithReuseIdentifier: "CellCreateSmallTalk")
         ui_collection_view.register(UINib(nibName: "CellWaitingSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellWaitingSmallTalk")
         ui_collection_view.register(UINib(nibName: "CellDiscussionSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellDiscussionSmallTalk")
 

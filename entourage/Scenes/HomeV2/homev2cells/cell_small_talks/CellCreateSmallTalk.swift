@@ -1,62 +1,44 @@
-//
-//  CellCreateSmallTalk.swift
-//  entourage
-//
-//  Created by Clement entourage on 14/05/2025.
-//
-
-import Foundation
 import UIKit
+import SwiftUI
 
-class CellCreateSmallTalk:UICollectionViewCell{
+class CellCreateSmallTalk: UICollectionViewCell {
     
-    //OUTLET
-    @IBOutlet weak var ui_iv: UIImageView!
-    @IBOutlet weak var ui_label_title: UILabel!
-    @IBOutlet weak var ui_btn: UIButton!
+    static let identifier = "CellCreateSmallTalk"
+    private var hostingController: UIHostingController<CellCreateSmallTalkView>?
     
-    //VARIABLE
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupUI()
-        ui_btn.addTarget(self, action: #selector(onBtnClick), for: .touchUpInside)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupSwiftUIView()
     }
     
-    func setupUI() {
-        let titleText = "home_v2_small_talk_card_title".localized
-        let subtitleText = "home_v2_small_talk_card_subtitle".localized
-
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.paragraphSpacing = 4 // Add spacing between title and subtitle
-
-        let attributedString = NSMutableAttributedString(string: titleText + "\n", attributes: [
-            .font: ApplicationTheme.getFontQuickSandBold(size: 15),
-            .foregroundColor: UIColor.black,
-            .paragraphStyle: paragraphStyle
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupSwiftUIView()
+    }
+    
+    private func setupSwiftUIView() {
+        // Initialisation de la vue SwiftUI avec le callback du bouton
+        let swiftUIView = CellCreateSmallTalkView { [weak self] in
+            self?.onBtnClick()
+        }
+        
+        let hostingController = UIHostingController(rootView: swiftUIView)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.backgroundColor = .clear
+        
+        contentView.addSubview(hostingController.view)
+        
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: contentView.topAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
-
-        attributedString.append(NSAttributedString(string: subtitleText, attributes: [
-            .font: ApplicationTheme.getFontNunitoRegular(size: 13),
-            .foregroundColor: UIColor.black
-        ]))
-
-        ui_label_title.attributedText = attributedString
-        ui_label_title.numberOfLines = 0
-
-        configureOrangeButton(ui_btn, withTitle: "home_v2_small_talk_card_button".localized)
-    }
-
-    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
-        button.setTitle(title, for: .normal)
-        button.backgroundColor = UIColor.appOrange
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 15
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
-        button.clipsToBounds = true
+        
+        self.hostingController = hostingController
     }
     
-    @objc func onBtnClick(){
+    @objc private func onBtnClick() {
         guard let collectionView = self.parentCollectionView(),
               let indexPath = self.indexPathInCollectionView(),
               let delegate = collectionView.delegate else {
@@ -65,5 +47,4 @@ class CellCreateSmallTalk:UICollectionViewCell{
 
         delegate.collectionView?(collectionView, didSelectItemAt: indexPath)
     }
-    
 }

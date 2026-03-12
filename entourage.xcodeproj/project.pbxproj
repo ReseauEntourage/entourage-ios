@@ -384,6 +384,7 @@
 		2432FE572F5825450033E711 /* HomeCellActionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */; };
 		2432FE592F5831A00033E711 /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE582F5831A00033E711 /* AnimationUtils.swift */; };
 		244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244715252F15307400F8BFD1 /* AssociationPresenter.swift */; };
+		24832E6C2F63011D00A78F03 /* CellCreateSmallTalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */; };
 		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
 		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
 		24EAAA8A2F0BB94B002F2A41 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
@@ -1006,6 +1007,7 @@
 		2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellActionCollectionViewCell.xib; sourceTree = "<group>"; };
 		2432FE582F5831A00033E711 /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
 		244715252F15307400F8BFD1 /* AssociationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresenter.swift; sourceTree = "<group>"; };
+		24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCreateSmallTalkView.swift; sourceTree = "<group>"; };
 		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
 		24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAutocompleteViewModel.swift; sourceTree = "<group>"; };
@@ -2462,6 +2464,7 @@
 				26A7AA8A2DD4B59500374DDB /* CellWaitingSmallTalk.xib */,
 				26A7AA8C2DD4B83100374DDB /* CellDiscussionSmallTalk.swift */,
 				26A7AA8E2DD4B84400374DDB /* CellDiscussionSmallTalk.xib */,
+				24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */,
 			);
 			path = cell_small_talks;
 			sourceTree = "<group>";
@@ -3181,6 +3184,7 @@
 				2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */,
 				262820D52D49069A00A61C30 /* MainStatUserCell.swift in Sources */,
 				029D25332865FA5F00147F77 /* EventDatesCell.swift in Sources */,
+				24832E6C2F63011D00A78F03 /* CellCreateSmallTalkView.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
 				024131CB2862022100561FB4 /* EventCreateMainViewController.swift in Sources */,
