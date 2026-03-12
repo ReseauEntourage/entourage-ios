@@ -3,6 +3,7 @@ import CoreLocation
 import GooglePlaces
 import Combine
 
+// MARK: - ViewModel
 class EventCreatePhase3ViewModel: ObservableObject {
     @Published var isOnline: Bool = false {
         didSet {
@@ -26,21 +27,14 @@ class EventCreatePhase3ViewModel: ObservableObject {
     }
 
     @Published var placeName: String? = nil
-
-    // Address autocomplete
     @Published var addressViewModel = AddressAutocompleteViewModel()
     @Published var isShowingSuggestions = false
-
-    // Cancellation tracking
     private var cancellables = Set<AnyCancellable>()
 
     init() {
-        // Observe query changes to manage suggestion list visibility
         addressViewModel.$query
             .receive(on: RunLoop.main)
             .sink { [weak self] newQuery in
-                // Only show suggestions if the query is non-empty AND we don't already have an exactly matching placeName
-                // (which means they just selected something or we just loaded a place)
                 if newQuery.isEmpty || newQuery == self?.placeName {
                     self?.isShowingSuggestions = false
                 } else {
@@ -78,16 +72,11 @@ class EventCreatePhase3ViewModel: ObservableObject {
 
     func load(currentEvent: Event?, delegate: EventCreateMainDelegate?) {
         self.delegate = delegate
-
         if let currentEvent = currentEvent {
-            if let eventIsOnline = currentEvent.isOnline {
-                self.isOnline = eventIsOnline
-            }
+            if let eventIsOnline = currentEvent.isOnline { self.isOnline = eventIsOnline }
             self.onlineUrl = currentEvent.onlineEventUrl
             self.placeName = currentEvent.addressName
-            if let name = self.placeName {
-                self.addressViewModel.query = name
-            }
+            if let name = self.placeName { self.addressViewModel.query = name }
 
             if let metadata = currentEvent.metadata {
                 if let limit = metadata.place_limit, limit > 0 {
@@ -96,67 +85,49 @@ class EventCreatePhase3ViewModel: ObservableObject {
                 } else if let hasLimit = metadata.hasPlaceLimit {
                     self.hasPlaceLimit = hasLimit
                 }
-
                 self.isReservedFemale = metadata.reservedFemale ?? false
             }
         }
     }
 
-    func setLocation(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
-        self.placeName = currentLocationName
+    func setLocation(currentlocation: CLLocationCoordinate2D?, displayAddress: String?, backEndAddress: String?, googlePlace: GMSPlace?) {
+        self.placeName = displayAddress
         self.isOnline = false
         self.onlineUrl = nil
-        if let name = currentLocationName {
+        
+        if let name = displayAddress {
             self.addressViewModel.query = name
         }
 
-        // Important: `isOnline = false` triggered its `didSet` block.
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.addOnline(url: nil)
             self?.delegate?.addPlaceType(isOnline: false)
-            self?.delegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
+            self?.delegate?.addPlace(currentlocation: currentlocation, currentLocationName: backEndAddress, googlePlace: googlePlace)
         }
     }
 }
 
+// MARK: - View
 struct EventCreatePhase3View: View {
     @ObservedObject var viewModel: EventCreatePhase3ViewModel
 
     var body: some View {
         ScrollView {
-            // Espacement global augmenté de nouveau (passage à 48dp)
             VStack(spacing: 48) {
-                // MARK: Place / Online Section
+                // Section Lieu / Online
                 VStack(alignment: .leading, spacing: 16) {
                     HStack(spacing: 4) {
-                        Text("event_create_phase3_title".localized)
-                            .font(.custom("NunitoSans-Bold", size: 15))
-                            .foregroundColor(.black)
-                        Text("event_create_mandatory".localized)
-                            .font(.custom("NunitoSans-Regular", size: 13))
-                            .foregroundColor(Color("color_legend"))
+                        Text("event_create_phase3_title".localized).font(.custom("NunitoSans-Bold", size: 15))
+                        Text("event_create_mandatory".localized).font(.custom("NunitoSans-Regular", size: 13)).foregroundColor(Color("color_legend"))
                     }
 
                     HStack(spacing: 20) {
-                        RadioButton(title: "event_create_phase3_presentiel".localized, isSelected: !viewModel.isOnline) {
-                            viewModel.isOnline = false
-                        }
-                        RadioButton(title: "event_create_phase3_online".localized, isSelected: viewModel.isOnline) {
-                            viewModel.isOnline = true
-                        }
+                        RadioButton(title: "event_create_phase3_presentiel".localized, isSelected: !viewModel.isOnline) { viewModel.isOnline = false }
+                        RadioButton(title: "event_create_phase3_online".localized, isSelected: viewModel.isOnline) { viewModel.isOnline = true }
                     }
 
                     if viewModel.isOnline {
                         VStack(alignment: .leading, spacing: 8) {
-                            HStack(spacing: 4) {
-                                Text("event_create_phase3_title_online".localized)
-                                    .font(.custom("NunitoSans-Bold", size: 15))
-                                    .foregroundColor(.black)
-                                Text("event_create_mandatory".localized)
-                                    .font(.custom("NunitoSans-Regular", size: 13))
-                                    .foregroundColor(Color("color_legend"))
-                            }
-
                             TextField("event_create_phase3_placeholder_online".localized, text: Binding(
                                 get: { viewModel.onlineUrl ?? "" },
                                 set: { viewModel.onlineUrl = $0.isEmpty ? nil : $0 }
@@ -164,37 +135,29 @@ struct EventCreatePhase3View: View {
                             .font(.custom("NunitoSans-Regular", size: 13))
                             .padding(.bottom, 8)
                             .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
-                            .foregroundColor(.black)
-                            .keyboardType(.URL)
-                            .autocapitalization(.none)
+                            .keyboardType(.URL).autocapitalization(.none)
                         }
                     } else {
                         VStack(alignment: .leading, spacing: 8) {
-                            HStack(spacing: 4) {
-                                Text("event_create_phase3_title_place".localized)
-                                    .font(.custom("NunitoSans-Bold", size: 15))
-                                    .foregroundColor(.black)
-                                Text("event_create_mandatory".localized)
-                                    .font(.custom("NunitoSans-Regular", size: 13))
-                                    .foregroundColor(Color("color_legend"))
-                            }
-
                             TextField("event_create_phase3_placeholder_place".localized, text: $viewModel.addressViewModel.query)
                                 .font(.custom("NunitoSans-Regular", size: 13))
                                 .padding(.bottom, 8)
                                 .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
-                                .foregroundColor(.black)
                                 .disableAutocorrection(true)
 
                             if viewModel.isShowingSuggestions && !viewModel.addressViewModel.suggestions.isEmpty {
                                 VStack(alignment: .leading, spacing: 0) {
                                     ForEach(viewModel.addressViewModel.suggestions, id: \.placeID) { suggestion in
                                         Button(action: {
+                                            let selectedText = suggestion.attributedFullText.string
+                                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                            
                                             viewModel.addressViewModel.getPlaceDetails(placeID: suggestion.placeID) { place, error in
                                                 guard let place = place else { return }
                                                 viewModel.setLocation(
                                                     currentlocation: place.coordinate,
-                                                    currentLocationName: place.formattedAddress ?? place.name,
+                                                    displayAddress: selectedText,
+                                                    backEndAddress: "",
                                                     googlePlace: place
                                                 )
                                             }
@@ -202,91 +165,50 @@ struct EventCreatePhase3View: View {
                                             VStack(alignment: .leading) {
                                                 Text(suggestion.attributedFullText.string)
                                                     .font(.custom("NunitoSans-Regular", size: 13))
-                                                    .foregroundColor(.black)
-                                                    .multilineTextAlignment(.leading)
-                                                    .padding(.vertical, 12)
-
+                                                    .foregroundColor(.black).padding(.vertical, 12)
                                                 Divider()
                                             }
                                         }
                                     }
                                 }
-                                .background(Color.white)
-                                .cornerRadius(8)
-                                .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
-                                .padding(.top, 4)
+                                .background(Color.white).cornerRadius(8).shadow(radius: 4)
                             }
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
 
-                // MARK: Limit Section
+                // Section Limite
                 VStack(alignment: .leading, spacing: 16) {
-                    HStack(spacing: 4) {
-                        Text("event_create_phase3_title_limit".localized)
-                            .font(.custom("NunitoSans-Bold", size: 15))
-                            .foregroundColor(.black)
-                        Text("event_create_mandatory".localized)
-                            .font(.custom("NunitoSans-Regular", size: 13))
-                            .foregroundColor(Color("color_legend"))
-                    }
-
+                    Text("event_create_phase3_title_limit".localized).font(.custom("NunitoSans-Bold", size: 15))
                     HStack(spacing: 20) {
-                        RadioButton(title: "event_create_phase3_limit_yes".localized, isSelected: viewModel.hasPlaceLimit) {
-                            viewModel.hasPlaceLimit = true
-                        }
+                        RadioButton(title: "event_create_phase3_limit_yes".localized, isSelected: viewModel.hasPlaceLimit) { viewModel.hasPlaceLimit = true }
                         RadioButton(title: "event_create_phase3_limit_no".localized, isSelected: !viewModel.hasPlaceLimit) {
                             viewModel.hasPlaceLimit = false
                             viewModel.nbPlaceLimitString = ""
                         }
                     }
-
                     if viewModel.hasPlaceLimit {
-                        VStack(alignment: .leading, spacing: 8) {
-                            HStack(spacing: 4) {
-                                Text("event_create_phase3_title_nb_places".localized)
-                                    .font(.custom("NunitoSans-Bold", size: 15))
-                                    .foregroundColor(.black)
-                                Text("event_create_mandatory".localized)
-                                    .font(.custom("NunitoSans-Regular", size: 13))
-                                    .foregroundColor(Color("color_legend"))
-                            }
-
-                            TextField("event_create_phase3_title_nb_places_placeholder".localized, text: $viewModel.nbPlaceLimitString)
-                                .font(.custom("NunitoSans-Regular", size: 13))
-                                .padding(.bottom, 8)
-                                .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
-                                .foregroundColor(.black)
-                                .keyboardType(.numberPad)
-                        }
+                        TextField("10", text: $viewModel.nbPlaceLimitString).keyboardType(.numberPad)
+                            .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
                     }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 20)
+                }.padding(.horizontal, 20)
 
-                // MARK: Reserved Female Section
+                // Section Reserved Female
                 HStack {
-                    Text("event_create_reserved_female_title".localized)
-                        .font(.custom("NunitoSans-Bold", size: 15))
-                        .foregroundColor(.black)
+                    Text("event_create_reserved_female_title".localized).font(.custom("NunitoSans-Bold", size: 15))
                     Spacer()
-                    Toggle("", isOn: $viewModel.isReservedFemale)
-                        .toggleStyle(SwitchToggleStyle(tint: Color("orange_app")))
-                        .scaleEffect(0.8)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 20)
+                    Toggle("", isOn: $viewModel.isReservedFemale).toggleStyle(SwitchToggleStyle(tint: Color("orange_app"))).scaleEffect(0.8)
+                }.padding(.horizontal, 20)
                 
                 Spacer()
             }
-            .padding(.top, 32) // Un peu d'air au-dessus du premier bloc
-            .padding(.bottom, 40)
+            .padding(.top, 32)
         }
     }
 }
 
+// MARK: - Subcomponents
 struct RadioButton: View {
     let title: String
     let isSelected: Bool

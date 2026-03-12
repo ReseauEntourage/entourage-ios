@@ -1,10 +1,3 @@
-//
-//  EventCreatePhase1ViewController.swift
-//  entourage
-//
-//  Created by Jerome on 21/06/2022.
-//
-
 import UIKit
 import CoreLocation
 import GooglePlaces
@@ -13,9 +6,7 @@ import SwiftUI
 class EventCreatePhase3ViewController: UIViewController {
     
     weak var pageDelegate: EventCreateMainDelegate? = nil
-    
     var currentEvent: Event? = nil
-    
     let viewModel = EventCreatePhase3ViewModel()
     
     override func viewDidLoad() {
@@ -62,8 +53,12 @@ extension EventCreatePhase3ViewController: PlaceViewControllerDelegate {
     }
     
     func modifyPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
-        Logger.print("***** modify place : \(String(describing: currentlocation)) -- \(String(describing: currentLocationName)) - Goog \(String(describing: googlePlace))")
-        
-        viewModel.setLocation(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
+        // UPDATE: On passe l'adresse aux deux (UI et Back) quand ça vient de la carte
+        viewModel.setLocation(
+            currentlocation: currentlocation,
+            displayAddress: currentLocationName,
+            backEndAddress: currentLocationName,
+            googlePlace: googlePlace
+        )
     }
 }
