@@ -1,10 +1,3 @@
-//
-//  CellCreateSmallTalkView.swift
-//  entourage
-//
-//  Created by clément perrousset on 12/03/2026.
-//
-
 import Foundation
 import SwiftUI
 
@@ -13,42 +6,52 @@ struct CellCreateSmallTalkView: View {
     var action: () -> Void
 
     var body: some View {
-        HStack(alignment: .center, spacing: 10) {
+        // On aligne vers le haut (.top) pour que l'image suive le titre
+        HStack(alignment: .top, spacing: 15) {
             // Image correspondante au XIB
             Image("ic_puzzle_home")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 64, height: 64)
+                .frame(width: 70, height: 70) // Légèrement agrandie pour coller à la maquette
 
             VStack(alignment: .trailing, spacing: 15) {
                 // Titre et Sous-titre
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 6) {
                     Text("home_v2_small_talk_card_title".localized)
-                        .font(.custom("Quicksand-Bold", size: 15))
+                        .font(.custom("Quicksand-Bold", size: 16))
                         .foregroundColor(.black)
                     
                     Text("home_v2_small_talk_card_subtitle".localized)
-                        .font(.custom("NunitoSans-Regular", size: 13))
+                        .font(.custom("NunitoSans-Regular", size: 14))
                         .foregroundColor(.black)
+                        // Force le texte à aller à la ligne au lieu d'être tronqué
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                // Bouton Commencer (Style mis à jour)
+                // Bouton Commencer
                 Button(action: {
                     action()
                 }) {
                     Text("home_v2_small_talk_card_button".localized)
-                        .font(.custom("Quicksand-Bold", size: 14)) // Taille passée à 14
+                        .font(.custom("Quicksand-Bold", size: 14))
                         .foregroundColor(.white)
                         .padding(.horizontal, 20)
                         .frame(height: 40)
-                        .background(Color("orange_app")) 
+                        .background(Color("orange_app"))
                         .cornerRadius(20)
                 }
             }
         }
+        // 1. MARGES INTERNES (Espace entre le texte/image et le bord de la carte)
         .padding(20)
+        
+        // 2. FOND ET STYLE DE LA CARTE
         .background(Color("BeigeClair2"))
-        .cornerRadius(10)
+        .cornerRadius(15) // Un poil plus arrondi pour correspondre à ton image
+        
+        // 3. MARGES EXTERNES (Fait "flotter" la carte au milieu de la cellule)
+        .padding(.horizontal, 15)
+        .padding(.vertical, 10)
     }
 }
