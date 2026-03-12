@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreLocation
 import GooglePlaces
+import Combine
 
 class EventCreatePhase3ViewModel: ObservableObject {
     @Published var isOnline: Bool = false {
@@ -267,7 +268,7 @@ struct EventCreatePhase3View: View {
                         .foregroundColor(.black)
                     Spacer()
                     Toggle("", isOn: $viewModel.isReservedFemale)
-                        .toggleStyle(SwitchToggleStyle(tint: Color("appOrange")))
+                        .toggleStyle(SwitchToggleStyle(tint: Color("orange_app")))
                         .scaleEffect(0.8)
                 }
                 .padding(.horizontal, 20)

@@ -21,7 +21,7 @@ class AddressAutocompleteViewModel: NSObject, ObservableObject, GMSAutocompleteF
         filter.type = .geocode
         filter.locationBias = GMSPlaceRectangularLocationOption(neBoundsCorner, swBoundsCorner)
 
-        fetcher = GMSAutocompleteFetcher(bounds: nil, filter: filter)
+        fetcher = GMSAutocompleteFetcher(filter: filter)
         fetcher?.delegate = self
 
         cancellable = $query
