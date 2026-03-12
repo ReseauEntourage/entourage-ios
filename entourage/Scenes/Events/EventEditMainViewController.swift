@@ -356,14 +356,15 @@ extension EventEditMainViewController: EventCreateMainDelegate {
     }
     func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         newOnlineEventUrl = nil
-        if let currentlocation = currentlocation {
+        if let googlePlace = googlePlace {
+            newGoogle_place_id = googlePlace.placeID
+            newAddressName = currentLocationName ?? googlePlace.name
+            newLocation = EventLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
+        }
+        else if let currentlocation = currentlocation {
             newLocation = EventLocation(latitude: currentlocation.latitude, longitude: currentlocation.longitude)
             newAddressName = currentLocationName
-        }
-        else if let googlePlace = googlePlace {
-            newGoogle_place_id = googlePlace.placeID
-            newAddressName = googlePlace.name
-            newLocation = EventLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
+            newGoogle_place_id = nil
         }
         else {
             newLocation = nil
