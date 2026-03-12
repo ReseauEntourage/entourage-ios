@@ -18,6 +18,7 @@ class EventCreatePhase3ViewModel: ObservableObject {
             delegate?.addPlaceType(isOnline: isOnline)
         }
     }
+    
     @Published var onlineUrl: String? = nil {
         didSet {
             delegate?.addOnline(url: onlineUrl)
@@ -54,12 +55,14 @@ class EventCreatePhase3ViewModel: ObservableObject {
             delegate?.addPlaceLimit(hasLimit: hasPlaceLimit, nbPlaces: hasPlaceLimit ? nbPlaceLimit : 0)
         }
     }
+    
     @Published var nbPlaceLimitString: String = "" {
         didSet {
             let limit = Int(nbPlaceLimitString) ?? 0
             delegate?.addPlaceLimit(hasLimit: hasPlaceLimit, nbPlaces: limit)
         }
     }
+    
     var nbPlaceLimit: Int {
         return Int(nbPlaceLimitString) ?? 0
     }
@@ -107,11 +110,11 @@ class EventCreatePhase3ViewModel: ObservableObject {
             self.addressViewModel.query = name
         }
 
-        // Important: `isOnline = false` triggered its `didSet` block, which nullified the place via `delegate?.addPlace(...)`.
-        // We now need to dispatch the actual place to the delegate AFTER the `isOnline` side effects have settled.
+        // Important: `isOnline = false` triggered its `didSet` block.
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.addOnline(url: nil)
             self?.delegate?.addPlaceType(isOnline: false)
+            // On s'assure d'envoyer uniquement les coordonnées propres à l'adresse sélectionnée.
             self?.delegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
         }
     }
@@ -122,10 +125,11 @@ struct EventCreatePhase3View: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 24) {
+            // Espacement global augmenté de +10dp pour aérer
+            VStack(spacing: 34) {
                 // MARK: Place / Online Section
                 VStack(alignment: .leading, spacing: 16) {
-                    HStack(spacing: 0) {
+                    HStack(spacing: 4) {
                         Text("event_create_phase3_title".localized)
                             .font(.custom("NunitoSans-Bold", size: 15))
                             .foregroundColor(.black)
@@ -145,7 +149,7 @@ struct EventCreatePhase3View: View {
 
                     if viewModel.isOnline {
                         VStack(alignment: .leading, spacing: 8) {
-                            HStack(spacing: 0) {
+                            HStack(spacing: 4) {
                                 Text("event_create_phase3_title_online".localized)
                                     .font(.custom("NunitoSans-Bold", size: 15))
                                     .foregroundColor(.black)
@@ -167,7 +171,7 @@ struct EventCreatePhase3View: View {
                         }
                     } else {
                         VStack(alignment: .leading, spacing: 8) {
-                            HStack(spacing: 0) {
+                            HStack(spacing: 4) {
                                 Text("event_create_phase3_title_place".localized)
                                     .font(.custom("NunitoSans-Bold", size: 15))
                                     .foregroundColor(.black)
@@ -216,11 +220,12 @@ struct EventCreatePhase3View: View {
                         }
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading) // Fixe l'alignement strict à gauche
                 .padding(.horizontal, 20)
 
                 // MARK: Limit Section
                 VStack(alignment: .leading, spacing: 16) {
-                    HStack(spacing: 0) {
+                    HStack(spacing: 4) {
                         Text("event_create_phase3_title_limit".localized)
                             .font(.custom("NunitoSans-Bold", size: 15))
                             .foregroundColor(.black)
@@ -241,7 +246,7 @@ struct EventCreatePhase3View: View {
 
                     if viewModel.hasPlaceLimit {
                         VStack(alignment: .leading, spacing: 8) {
-                            HStack(spacing: 0) {
+                            HStack(spacing: 4) {
                                 Text("event_create_phase3_title_nb_places".localized)
                                     .font(.custom("NunitoSans-Bold", size: 15))
                                     .foregroundColor(.black)
@@ -259,6 +264,7 @@ struct EventCreatePhase3View: View {
                         }
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading) // Corrige le décalage à droite
                 .padding(.horizontal, 20)
 
                 // MARK: Reserved Female Section
@@ -271,8 +277,9 @@ struct EventCreatePhase3View: View {
                         .toggleStyle(SwitchToggleStyle(tint: Color("orange_app")))
                         .scaleEffect(0.8)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading) // Harmonisation
                 .padding(.horizontal, 20)
-
+                
                 Spacer()
             }
             .padding(.top, 24)
