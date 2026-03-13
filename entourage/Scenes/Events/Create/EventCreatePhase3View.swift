@@ -189,7 +189,11 @@ struct EventCreatePhase3View: View {
 
                 // Section Limite
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("event_create_phase3_title_limit".localized).font(.custom("NunitoSans-Bold", size: 15))
+                    HStack(spacing: 4) {
+                        Text("event_create_phase3_title_limit".localized).font(.custom("NunitoSans-Bold", size: 15))
+                        Text("event_create_mandatory".localized).font(.custom("NunitoSans-Regular", size: 13)).foregroundColor(Color("color_legend"))
+                    }
+                    
                     HStack(spacing: 20) {
                         RadioButton(title: "event_create_phase3_limit_yes".localized, isSelected: viewModel.hasPlaceLimit) { viewModel.hasPlaceLimit = true }
                         RadioButton(title: "event_create_phase3_limit_no".localized, isSelected: !viewModel.hasPlaceLimit) {
