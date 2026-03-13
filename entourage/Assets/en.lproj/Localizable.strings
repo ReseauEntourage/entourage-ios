@@ -895,7 +895,8 @@
 "event_create_phase3_placeholder_place" = "Address, city...";
 "event_create_phase3_placeholder_online" = "Web address";
 
-"event_create_phase3_title_limit" = "Does the event have a limited number of places?";
+"event_create_phase3_title_limit" = "Does the event have a limited number of places? - required";
+
 "event_create_phase3_title_nb_places" = "Number of places available - mandatory";
 "event_create_phase3_title_nb_places_placeholder" = "Number of places";
 "event_create_phase3_limit_yes" = "Yes";

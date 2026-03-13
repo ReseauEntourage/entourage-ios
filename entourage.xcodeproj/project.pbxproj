@@ -1457,6 +1457,7 @@
 		024131C92862020B00561FB4 /* Create */ = {
 			isa = PBXGroup;
 			children = (
+				4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */,
 				24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */,
 				024131CA2862022100561FB4 /* EventCreateMainViewController.swift */,
 				024131CC2862024A00561FB4 /* EventCreatePageViewController.swift */,
@@ -1527,7 +1528,6 @@
 				02CCE67027D78C2F00D6976C /* Fonts */,
 				025D8717278DD33600909101 /* Products */,
 				2623375C2EE82704007EA8ED /* Frameworks */,
-				4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */,
 			);
 			sourceTree = "<group>";
 		};
