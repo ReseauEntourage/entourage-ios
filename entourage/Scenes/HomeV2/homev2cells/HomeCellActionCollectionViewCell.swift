@@ -105,7 +105,7 @@ class HomeCellActionCollectionViewCell: UICollectionViewCell {
             ui_image_pin.isHidden = false
         } else {
             ui_label_distance.text = "-"
-            ui_image_pin.isHidden = true
+            ui_image_pin.isHidden = false
         }
     }
 }
