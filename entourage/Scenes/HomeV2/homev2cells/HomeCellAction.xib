@@ -61,6 +61,13 @@
                                 <color key="textColor" name="grey_light"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin_partners_trans" translatesAutoresizingMaskIntoConstraints="NO" id="PIN-im-AG1">
+                                <rect key="frame" x="478" y="38" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="12" id="PIN-wi-dt1"/>
+                                    <constraint firstAttribute="height" constant="12" id="PIN-he-ig1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -73,6 +80,8 @@
                             <constraint firstItem="3Cq-Zr-HzC" firstAttribute="top" secondItem="H8v-nC-eJt" secondAttribute="top" constant="10" id="Uyd-AO-6jY"/>
                             <constraint firstItem="Ffu-Nh-uCX" firstAttribute="top" secondItem="H8v-nC-eJt" secondAttribute="top" id="Xr1-zZ-f95"/>
                             <constraint firstAttribute="trailing" secondItem="e9Y-no-f1i" secondAttribute="trailing" constant="10" id="aFP-jI-Vaz"/>
+                            <constraint firstItem="PIN-im-AG1" firstAttribute="centerY" secondItem="e9Y-no-f1i" secondAttribute="centerY" id="PIN-ce-nY1"/>
+                            <constraint firstItem="e9Y-no-f1i" firstAttribute="leading" secondItem="PIN-im-AG1" secondAttribute="trailing" constant="4" id="PIN-le-aD1"/>
                             <constraint firstItem="mXe-y7-8G7" firstAttribute="leading" secondItem="uM4-6V-qux" secondAttribute="trailing" id="dTH-we-yBi"/>
                             <constraint firstItem="mXe-y7-8G7" firstAttribute="centerY" secondItem="uM4-6V-qux" secondAttribute="centerY" id="eZ8-Yr-Ug4"/>
                             <constraint firstAttribute="bottom" secondItem="uM4-6V-qux" secondAttribute="bottom" constant="10" id="ggr-nT-yOc"/>
@@ -91,6 +100,7 @@
                 <outlet property="containerView" destination="H8v-nC-eJt" id="vf9-Db-HfD"/>
                 <outlet property="ui_image" destination="Ffu-Nh-uCX" id="K7n-cZ-ctm"/>
                 <outlet property="ui_image_tag" destination="uM4-6V-qux" id="B3c-bl-RBg"/>
+                <outlet property="ui_image_pin" destination="PIN-im-AG1" id="PIN-ou-TLE"/>
                 <outlet property="ui_label_distance" destination="e9Y-no-f1i" id="8xg-7p-uAI"/>
                 <outlet property="ui_label_tag" destination="mXe-y7-8G7" id="pHa-kv-6oZ"/>
                 <outlet property="ui_label_title" destination="3Cq-Zr-HzC" id="yVh-he-7Hu"/>
@@ -99,6 +109,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="pin_partners_trans" width="12" height="12"/>
         <namedColor name="grey_dark">
             <color red="0.23899999260902405" green="0.23899999260902405" blue="0.23899999260902405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

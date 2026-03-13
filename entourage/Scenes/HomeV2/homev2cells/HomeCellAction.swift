@@ -18,6 +18,7 @@ class HomeCellAction:UITableViewCell{
     @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_tag: UILabel!
     @IBOutlet weak var ui_image_tag: UIImageView!
+    @IBOutlet weak var ui_image_pin: UIImageView!
     @IBOutlet weak var ui_label_distance: UILabel!
     
     //VARIABLE
@@ -26,12 +27,15 @@ class HomeCellAction:UITableViewCell{
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.contentView.backgroundColor = UIColor(named: "white_orange_home")
 
         containerView.layer.cornerRadius = 15
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.appBeige.cgColor
         containerView.clipsToBounds = true
+
+        ui_image_pin.tintColor = UIColor.appOrangeLight
     }
     
     func configure(action:Action){
@@ -39,9 +43,11 @@ class HomeCellAction:UITableViewCell{
         
         if let _distance = action.distance {
             ui_label_distance.text = _distance.displayDistance()
+            ui_image_pin.isHidden = false
         }else{
             let displayAddress = action.metadata?.displayAddress ?? ""
             ui_label_distance.text = "\(String.init(format: "AtKm".localized, "xx")) - \(displayAddress)"
+            ui_image_pin.isHidden = false
         }
     
                 
