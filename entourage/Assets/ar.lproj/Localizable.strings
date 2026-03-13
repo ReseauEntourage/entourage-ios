@@ -906,7 +906,7 @@
 "event_create_phase3_placeholder_place" = "العنوان .. المدينة ...";
 "event_create_phase3_placeholder_online" = "عنوان الموقع";
 
-"event_create_phase3_title_limit" = "هل الحدث له عدد محدود من الأماكن؟ - إلزامية";
+"event_create_phase3_title_limit" = "هل الحدث له عدد محدود من الأماكن؟";
 "event_create_phase3_title_nb_places" = "عدد الأماكن المتاحة - إلزامي";
 "event_create_phase3_title_nb_places_placeholder" = "عدد الأماكن";
 "event_create_phase3_limit_yes" = "نعم";

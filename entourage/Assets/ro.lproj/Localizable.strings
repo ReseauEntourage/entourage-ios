@@ -915,7 +915,7 @@
 "event_create_phase3_placeholder_place" = "Adresa, orasul...";
 "event_create_phase3_placeholder_online" = "Adresa site-ului web";
 
-"event_create_phase3_title_limit" = "Evenimentul are un număr limitat de locuri? - OBLIGATORIU";
+"event_create_phase3_title_limit" = "Evenimentul are un număr limitat de locuri?";
 "event_create_phase3_title_nb_places" = "Numar de locuri disponibile - obligatoriu";
 "event_create_phase3_title_nb_places_placeholder" = "Numărul de locuri";
 "event_create_phase3_limit_yes" = "Da";

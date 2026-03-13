@@ -911,7 +911,7 @@
 "event_create_phase3_placeholder_place" = "Адреса, місто...";
 "event_create_phase3_placeholder_online" = "Веб-адреса";
 
-"event_create_phase3_title_limit" = "Чи кількість місць на заході обмежена? - ОБОВ'ЯЗКОВО";
+"event_create_phase3_title_limit" = "Чи кількість місць на заході обмежена?";
 "event_create_phase3_title_nb_places" = "Кількість місць - обов'язкова";
 "event_create_phase3_title_nb_places_placeholder" = "Кількість місць";
 "event_create_phase3_limit_yes" = "Так";
