@@ -118,7 +118,7 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         NSLayoutConstraint.activate([
             buttonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             buttonView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            buttonView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            buttonView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             buttonView.heightAnchor.constraint(equalToConstant: height)
         ])
         
