@@ -1699,3 +1699,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Tomorrow" = "غدا";
 "home_v2_moderator_title_format" = "%@، جهة اتصالك المميزة";
 "home_v2_moderator_subtitle" = "أنا جزء من فريق Entourage وأنا هنا لمرافقتك. لا تتردد إذا كان لديك أي أسئلة! 🤗";
+"eventCreatephase3_swiftUI_title_limit" = "هل للحدث عدد محدود من الأماكن؟";
+"eventCreatephase3_swiftUI_title_place" = "المكان";

@@ -1760,3 +1760,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Tomorrow" = "Morgen";
 "home_v2_moderator_title_format" = "%@, Ihr privilegierter Kontakt";
 "home_v2_moderator_subtitle" = "Ich gehöre zum Entourage-Team und bin hier, um Sie zu unterstützen. Zögern Sie nicht, wenn Sie Fragen haben! 🤗";
+"eventCreatephase3_swiftUI_title_limit" = "Hat die Veranstaltung eine begrenzte Teilnehmerzahl?";
+"eventCreatephase3_swiftUI_title_place" = "Ort";

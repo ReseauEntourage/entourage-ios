@@ -1740,3 +1740,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "Tomorrow" = "Завтра";
 "home_v2_moderator_title_format" = "%@, твій привілейований контакт";
 "home_v2_moderator_subtitle" = "Я є частиною команди Entourage і тут, щоб супроводжувати тебе. Не соромся, якщо у тебе є питання! 🤗";
+"eventCreatephase3_swiftUI_title_limit" = "Чи має подія обмежену кількість місць?";
+"eventCreatephase3_swiftUI_title_place" = "Місце";

@@ -125,10 +125,9 @@ struct EventCreatePhase3View: View {
             VStack(spacing: 48) {
                 // Section Lieu / Online
                 VStack(alignment: .leading, spacing: 16) {
-                    HStack(spacing: 4) {
-                        Text("event_create_phase3_title".localized).font(.custom("NunitoSans-Bold", size: 15))
-                        Text("event_create_mandatory".localized).font(.custom("NunitoSans-Regular", size: 13)).foregroundColor(Color("color_legend"))
-                    }
+                    
+                    // On utilise notre vue blindée pour le titre
+                    MandatoryTitleView(titleKey: "eventCreatephase3_swiftUI_title_place")
 
                     HStack(spacing: 20) {
                         RadioButton(title: "event_create_phase3_presentiel".localized, isSelected: !viewModel.isOnline) { viewModel.isOnline = false }
@@ -189,10 +188,9 @@ struct EventCreatePhase3View: View {
 
                 // Section Limite
                 VStack(alignment: .leading, spacing: 16) {
-                    HStack(spacing: 4) {
-                        Text("event_create_phase3_title_limit".localized).font(.custom("NunitoSans-Bold", size: 15))
-                        Text("event_create_mandatory".localized).font(.custom("NunitoSans-Regular", size: 13)).foregroundColor(Color("color_legend"))
-                    }
+                    
+                    // On réutilise la même vue blindée pour la limite
+                    MandatoryTitleView(titleKey: "eventCreatephase3_swiftUI_title_limit")
                     
                     HStack(spacing: 20) {
                         RadioButton(title: "event_create_phase3_limit_yes".localized, isSelected: viewModel.hasPlaceLimit) { viewModel.hasPlaceLimit = true }
@@ -222,6 +220,22 @@ struct EventCreatePhase3View: View {
 }
 
 // MARK: - Subcomponents
+
+/// Composant robuste pour gérer les titres obligatoires sans casser l'alignement SwiftUI
+struct MandatoryTitleView: View {
+    let titleKey: String
+    
+    var body: some View {
+        (Text(titleKey.localized)
+            .font(.custom("NunitoSans-Bold", size: 15))
+        + Text(" ")
+            .font(.custom("NunitoSans-Regular", size: 13)) // Fix: aide SwiftUI à lier les textes
+        + Text("event_create_mandatory".localized)
+            .font(.custom("NunitoSans-Regular", size: 13)))
+        .multilineTextAlignment(.leading)
+    }
+}
+
 struct RadioButton: View {
     let title: String
     let isSelected: Bool
