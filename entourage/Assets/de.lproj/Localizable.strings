@@ -911,7 +911,7 @@
 "event_create_phase3_placeholder_place" = "Adresse, Stadt...";
 "event_create_phase3_placeholder_online" = "Webadresse";
 
-"event_create_phase3_title_limit" = "Hat die Veranstaltung eine begrenzte Anzahl an Plätzen? - OBLIGATORISCH";
+"event_create_phase3_title_limit" = "Hat die Veranstaltung eine begrenzte Anzahl an Plätzen?";
 "event_create_phase3_title_nb_places" = "Anzahl der verfügbaren Plätze – obligatorisch";
 "event_create_phase3_title_nb_places_placeholder" = "Anzahl der Plätze";
 "event_create_phase3_limit_yes" = "Ja";
