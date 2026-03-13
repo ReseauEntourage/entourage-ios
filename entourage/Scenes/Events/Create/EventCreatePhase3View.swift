@@ -5,8 +5,11 @@ import Combine
 
 // MARK: - ViewModel
 class EventCreatePhase3ViewModel: ObservableObject {
+    var isInitializing: Bool = false
+
     @Published var isOnline: Bool = false {
         didSet {
+            guard !isInitializing else { return }
             if isOnline {
                 placeName = nil
                 addressViewModel.query = ""
@@ -22,6 +25,7 @@ class EventCreatePhase3ViewModel: ObservableObject {
     
     @Published var onlineUrl: String? = nil {
         didSet {
+            guard !isInitializing else { return }
             delegate?.addOnline(url: onlineUrl)
         }
     }
@@ -46,12 +50,14 @@ class EventCreatePhase3ViewModel: ObservableObject {
 
     @Published var hasPlaceLimit: Bool = false {
         didSet {
+            guard !isInitializing else { return }
             delegate?.addPlaceLimit(hasLimit: hasPlaceLimit, nbPlaces: hasPlaceLimit ? nbPlaceLimit : 0)
         }
     }
     
     @Published var nbPlaceLimitString: String = "" {
         didSet {
+            guard !isInitializing else { return }
             let limit = Int(nbPlaceLimitString) ?? 0
             delegate?.addPlaceLimit(hasLimit: hasPlaceLimit, nbPlaces: limit)
         }
@@ -63,6 +69,7 @@ class EventCreatePhase3ViewModel: ObservableObject {
 
     @Published var isReservedFemale: Bool = false {
         didSet {
+            guard !isInitializing else { return }
             delegate?.addReservedFemale(reserved: isReservedFemale)
         }
     }
@@ -71,6 +78,7 @@ class EventCreatePhase3ViewModel: ObservableObject {
     var onShowSelectLocation: (() -> Void)?
 
     func load(currentEvent: Event?, delegate: EventCreateMainDelegate?) {
+        isInitializing = true
         self.delegate = delegate
         if let currentEvent = currentEvent {
             if let eventIsOnline = currentEvent.isOnline { self.isOnline = eventIsOnline }
@@ -88,6 +96,7 @@ class EventCreatePhase3ViewModel: ObservableObject {
                 self.isReservedFemale = metadata.reservedFemale ?? false
             }
         }
+        isInitializing = false
     }
 
     func setLocation(currentlocation: CLLocationCoordinate2D?, displayAddress: String?, backEndAddress: String?, googlePlace: GMSPlace?) {
