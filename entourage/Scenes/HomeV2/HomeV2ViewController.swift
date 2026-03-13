@@ -927,8 +927,8 @@ extension HomeV2ViewController: HomeSolidarityToolsCellDelegate {
     func onEthicsTapped() {
         let isProd = EnvironmentConfigurationManager.sharedInstance.runsOnProduction
         let urlString = isProd ? "https://www.entourage.social/app/resources/eMU_InNSSJbE" : "https://preprod.entourage.social/app/resources/87203debda8b"
-        if let url = URL(string: urlString) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if let _url = URL(string: urlString){
+            WebLinkManager.openUrl(url: _url, openInApp: true, presenterViewController: AppState.getTopViewController())
         }
     }
 }
