@@ -67,7 +67,7 @@ class AssociationPresentationCell: UITableViewCell, UITextViewDelegate {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("description_association_label", value: "Description de votre association", comment: "")
-        label.font = ApplicationTheme.getFontQuickSandBold(size: 16)
+        label.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -83,7 +83,7 @@ class AssociationPresentationCell: UITableViewCell, UITextViewDelegate {
         // Padding interne du texte pour qu'il ne colle pas aux bords
         tv.textContainerInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
         
-        tv.font = UIFont.systemFont(ofSize: 15)
+        tv.font = ApplicationTheme.getFontNunitoRegular(size: 15)
         tv.textColor = UIColor.lightGray
         tv.text = "Ex. : Association de quartier œuvrant pour le lien social via des événements ouverts à tous."
         tv.translatesAutoresizingMaskIntoConstraints = false
