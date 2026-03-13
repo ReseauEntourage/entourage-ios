@@ -113,7 +113,7 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         self.stickyButtonView = buttonView
         
-        let height: CGFloat = 85
+        let height: CGFloat = 64
         
         NSLayoutConstraint.activate([
             buttonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
