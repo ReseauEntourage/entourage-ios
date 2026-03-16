@@ -3185,3 +3185,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_moderator_subtitle" = "Formo parte del equipo de Entourage y estoy aquí para acompañarte. ¡No dudes en preguntar si tienes alguna duda! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "¿El evento tiene un número limitado de plazas?";
 "eventCreatephase3_swiftUI_title_place" = "Lugar";
+
+"conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
+"conversation_staff_warning_group_link" = "group";

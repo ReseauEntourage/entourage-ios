@@ -1762,3 +1762,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_moderator_subtitle" = "Ich gehöre zum Entourage-Team und bin hier, um Sie zu unterstützen. Zögern Sie nicht, wenn Sie Fragen haben! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "Hat die Veranstaltung eine begrenzte Teilnehmerzahl?";
 "eventCreatephase3_swiftUI_title_place" = "Ort";
+
+"conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
+"conversation_staff_warning_group_link" = "group";

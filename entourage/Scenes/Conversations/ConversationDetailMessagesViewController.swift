@@ -81,7 +81,10 @@ class ConversationDetailMessagesViewController: UIViewController {
     
     @IBOutlet weak var ui_width_btn: NSLayoutConstraint!
     
-    private var imagePreviewOverlay: UIView?
+        private var staffWarningView: ConversationStaffWarningView?
+    private var isStaffWarningDismissed = false
+
+private var imagePreviewOverlay: UIView?
     private var selectedImage: UIImage? = nil
     private var labelCamera: UILabel!
     private var labelGalery: UILabel!
@@ -841,7 +844,76 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
 
     // MARK: - View New Conversation
-    func checkNewConv() {
+        func checkStaffWarning() {
+        if isStaffWarningDismissed { return }
+        if !isOneToOne { return }
+
+        // Check if the other user has "Équipe Entourage" role
+        var isStaff = false
+        if let members = currentConversation?.members {
+            for member in members {
+                if member.uid != self.meId, let roles = member.roles, roles.contains("Équipe Entourage") {
+                    isStaff = true
+                    break
+                }
+            }
+        } else {
+            for message in self.messages {
+                if let _user = message.user, _user.uid != self.meId, let _roles = _user.roles, _roles.contains("Équipe Entourage") {
+                    isStaff = true
+                    break
+                }
+            }
+        }
+
+        if isStaff {
+            if isStaffOut() {
+                showStaffWarning()
+            }
+        }
+    }
+
+    private func isStaffOut() -> Bool {
+        let calendar = Calendar.current
+        let now = Date()
+        let hour = calendar.component(.hour, from: now)
+        let minute = calendar.component(.minute, from: now)
+        let weekday = calendar.component(.weekday, from: now) // Sunday is 1, Monday is 2... Friday is 6, Saturday is 7
+
+        let limit18 = 18 * 60
+        let limit9 = 9 * 60
+        let currentMinutes = hour * 60 + minute
+
+        if weekday == 7 || weekday == 1 {
+            return true // Saturday or Sunday
+        }
+
+        // Before 9:00 or strictly after 18:00
+        if currentMinutes < limit9 || currentMinutes > limit18 {
+            return true
+        }
+
+        return false
+    }
+
+    private func showStaffWarning() {
+        if staffWarningView == nil {
+            let warning = ConversationStaffWarningView()
+            warning.delegate = self
+            warning.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(warning)
+
+            NSLayoutConstraint.activate([
+                warning.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                warning.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                warning.bottomAnchor.constraint(equalTo: self.ui_tableview_mentions.topAnchor, constant: -8)
+            ])
+            staffWarningView = warning
+        }
+        staffWarningView?.isHidden = false
+    }
+
+func checkNewConv() {
         if !isOneToOne { return }
         for message in self.messages {
             if let _user = message.user,
@@ -953,6 +1025,7 @@ class ConversationDetailMessagesViewController: UIViewController {
 
             // 9. Tout ce qui touche l’UI passe sur le main thread
             DispatchQueue.main.async {
+                self.checkStaffWarning()
                 self.checkNewConv()
                 self.buildConversationCellDTOs()
                 self.ui_view_empty.isHidden = !self.conversationCellDTOs.isEmpty
@@ -1929,6 +2002,22 @@ extension String {
         } catch {
             print("Erreur de parsing HTML: \(error)")
             return nil
+        }
+    }
+}
+
+extension ConversationDetailMessagesViewController: ConversationStaffWarningDelegate {
+    func didTapCloseWarning() {
+        self.isStaffWarningDismissed = true
+        UIView.animate(withDuration: 0.3, animations: {
+            self.staffWarningView?.alpha = 0
+            self.staffWarningView?.transform = CGAffineTransform(translationX: 0, y: 20)
+        }) { _ in
+            self.staffWarningView?.isHidden = true
+            self.staffWarningView?.alpha = 1
+            self.staffWarningView?.transform = .identity
+            self.staffWarningView?.removeFromSuperview()
+            self.staffWarningView = nil
         }
     }
 }

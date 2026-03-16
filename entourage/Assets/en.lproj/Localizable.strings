@@ -1969,3 +1969,6 @@
 "home_v2_moderator_subtitle" = "I am part of the Entourage team and I am here to support you. Do not hesitate if you have any questions! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "Does the event have a limited number of places?";
 "eventCreatephase3_swiftUI_title_place" = "Location";
+
+"conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
+"conversation_staff_warning_group_link" = "group";

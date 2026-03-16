@@ -1966,3 +1966,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_moderator_subtitle" = "Je fais parti·e de l'équipe Entourage et je suis là pour vous accompagner. N'hésitez pas si vous avez des questions ! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "L’événement a-t-il un nombre de places limité ?";
 "eventCreatephase3_swiftUI_title_place" = "Lieu";
+
+"conversation_staff_warning_message" = "L’équipe est en pause... 🌙 En cas d'urgence : 15, 18 ou 115. Pour une aide immédiate, vos voisins sont sur le groupe ! 🏠 On vous répond vite.";
+"conversation_staff_warning_group_link" = "groupe";
