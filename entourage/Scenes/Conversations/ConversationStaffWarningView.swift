@@ -10,7 +10,7 @@ class ConversationStaffWarningView: UIView, UITextViewDelegate {
 
     private let backgroundView = UIView()
     private let messageTextView = UITextView()
-    private let closeButton = UIButton(type: .custom)
+    private let closeButton = UIButton(type: .system)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,7 +25,7 @@ class ConversationStaffWarningView: UIView, UITextViewDelegate {
     private func setupView() {
         self.backgroundColor = .clear
 
-        backgroundView.backgroundColor = .appBeigeClair
+        backgroundView.backgroundColor = .appBeige
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(backgroundView)
 
@@ -33,18 +33,22 @@ class ConversationStaffWarningView: UIView, UITextViewDelegate {
         messageTextView.isEditable = false
         messageTextView.isScrollEnabled = false
         messageTextView.delegate = self
+        messageTextView.textAlignment = .left
         messageTextView.translatesAutoresizingMaskIntoConstraints = false
         messageTextView.textContainerInset = .zero
         messageTextView.textContainer.lineFragmentPadding = 0
+        
         messageTextView.linkTextAttributes = [
-            .foregroundColor: UIColor.appMarron,
+            .foregroundColor: UIColor.black,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         backgroundView.addSubview(messageTextView)
 
-        closeButton.setImage(UIImage(named: "ic_cross"), for: .normal)
+        // MODIFICATION : On réduit la taille du symbole (pointSize: 13) pour qu'il soit moins "gros" visuellement
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .medium)
+        let closeImage = UIImage(systemName: "xmark")?.withConfiguration(symbolConfig)
+        closeButton.setImage(closeImage, for: .normal)
         closeButton.tintColor = .appOrange
-        closeButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(closeButton)
@@ -59,11 +63,14 @@ class ConversationStaffWarningView: UIView, UITextViewDelegate {
             messageTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 16),
             messageTextView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -16),
 
+            // MODIFICATION : On l'aligne en haut à droite plutôt qu'au centre
             closeButton.leadingAnchor.constraint(equalTo: messageTextView.trailingAnchor, constant: 8),
-            closeButton.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 6),
-            closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -6),
-            closeButton.widthAnchor.constraint(equalToConstant: 44),
-            closeButton.heightAnchor.constraint(equalToConstant: 44)
+            closeButton.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 12), // Alignement en haut
+            closeButton.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -12),
+            
+            // On garde une bonne zone de tap (30x30) même si l'icône dedans est plus petite
+            closeButton.widthAnchor.constraint(equalToConstant: 30),
+            closeButton.heightAnchor.constraint(equalToConstant: 30)
         ])
 
         setupText()
@@ -71,10 +78,11 @@ class ConversationStaffWarningView: UIView, UITextViewDelegate {
 
     private func setupText() {
         let text = "conversation_staff_warning_message".localized
-
+        let customFont = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        
         let attributedString = NSMutableAttributedString(string: text, attributes: [
-            .font: ApplicationTheme.getFontCourantRegularNoir(size: 13),
-            .foregroundColor: UIColor.appMarron
+            .font: customFont,
+            .foregroundColor: UIColor.black
         ])
 
         // Find ranges

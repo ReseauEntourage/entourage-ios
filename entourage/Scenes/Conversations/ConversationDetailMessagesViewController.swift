@@ -859,7 +859,7 @@ private var imagePreviewOverlay: UIView?
             }
         } else {
             for message in self.messages {
-                if let _user = message.user, _user.uid != self.meId, let _roles = _user.roles, _roles.contains("Équipe Entourage") {
+                if let _user = message.user, _user.sid != self.meId, let _roles = _user.roles, _roles.contains("Équipe Entourage") {
                     isStaff = true
                     break
                 }
