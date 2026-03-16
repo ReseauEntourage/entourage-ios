@@ -53,6 +53,7 @@ class OnboardingEndViewController: UIViewController {
     }
     
     @IBAction func action_go(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Onboard_end_click_start)
         let config = EnhancedOnboardingConfiguration.shared
         config.shouldSendOnboardingFromNormalWay = false
         goHomeMain()

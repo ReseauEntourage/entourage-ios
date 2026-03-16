@@ -115,6 +115,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        AnalyticsLoggerManager.logEvent(name: Onboard_location_view)
         view.backgroundColor = .systemBackground
         setupLayout()
         setupHeader()
@@ -513,12 +514,14 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     }
 
     @objc private func cancelTapped() {
+        AnalyticsLoggerManager.logEvent(name: Onboard_location_click_back)
         delegate?.zoneChoiceCancelled()
         onCancelClosure?()
         dismiss(animated: true)
     }
 
     @objc private func confirmTapped() {
+        AnalyticsLoggerManager.logEvent(name: Onboard_location_click_next)
         guard let coord = selectedCoord else {
             showZoneError(messageKey: "onboarding_zone_pick_location_first")
             return
