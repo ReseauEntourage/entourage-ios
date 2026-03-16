@@ -1742,3 +1742,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_moderator_subtitle" = "Я є частиною команди Entourage і тут, щоб супроводжувати тебе. Не соромся, якщо у тебе є питання! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "Чи має подія обмежену кількість місць?";
 "eventCreatephase3_swiftUI_title_place" = "Місце";
+
+"conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
+"conversation_staff_warning_group_link" = "group";

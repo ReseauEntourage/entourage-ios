@@ -1665,3 +1665,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_moderator_subtitle" = "Fac parte din echipa Entourage și sunt aici să te însoțesc. Nu ezita dacă ai întrebări! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "Evenimentul are un număr limitat de locuri?";
 "eventCreatephase3_swiftUI_title_place" = "Locație";
+
+"conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
+"conversation_staff_warning_group_link" = "group";
