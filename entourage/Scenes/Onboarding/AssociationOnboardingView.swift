@@ -247,6 +247,7 @@ final class AssociationOnboardingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        AnalyticsLoggerManager.logEvent(name: Onboard_asso_view)
         view.backgroundColor = .systemBackground
         navigationItem.hidesBackButton = true
         loadAssociations()
@@ -303,6 +304,7 @@ final class AssociationOnboardingViewController: UIViewController {
     }
 
     private func handleBack() {
+        AnalyticsLoggerManager.logEvent(name: Onboard_asso_click_back)
         if let nav = navigationController {
             nav.popViewController(animated: true)
         } else {
@@ -311,6 +313,7 @@ final class AssociationOnboardingViewController: UIViewController {
     }
 
     private func handleValidate(selection: AssociationOnboardingSelection) {
+        AnalyticsLoggerManager.logEvent(name: Onboard_asso_click_next)
         switch selection {
         case .existing(let name):
             guard let partner = partners.first(where: { $0.name == name }),
