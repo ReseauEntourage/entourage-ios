@@ -1109,6 +1109,10 @@ func checkNewConv() {
                 
                 self.currentConversation = conversation
 
+                if self.isOneToOne {
+                    self.currentUserId = conversation.user?.uid ?? conversation.members?.first(where: { $0.uid != self.meId })?.uid ?? 0
+                }
+
                 // Si on a le type “outing”, on cherche le titre exact de l’événement
                 if self.type == "outing" {
                     self.ui_view_empty.isHidden = true
