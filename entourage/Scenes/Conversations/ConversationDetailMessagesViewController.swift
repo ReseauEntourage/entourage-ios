@@ -879,7 +879,6 @@ private var imagePreviewOverlay: UIView?
         let hour = calendar.component(.hour, from: now)
         let minute = calendar.component(.minute, from: now)
         let weekday = calendar.component(.weekday, from: now) // Sunday is 1, Monday is 2... Friday is 6, Saturday is 7
-
         let limit18 = 18 * 60
         let limit9 = 9 * 60
         let currentMinutes = hour * 60 + minute
