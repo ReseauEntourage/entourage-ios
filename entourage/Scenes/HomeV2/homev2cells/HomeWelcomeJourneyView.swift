@@ -129,8 +129,12 @@ struct HomeWelcomeJourneyView: View {
             VStack(spacing: 12) {
                 ForEach(viewModel.steps.indices, id: \.self) { index in
                     let step = viewModel.steps[index]
-                    WelcomeJourneyStepView(step: step) {
-                        viewModel.onStepTapped?(step.type)
+                    let isEnabled = (index == 0) ? true : viewModel.steps[index - 1].isCompleted
+
+                    WelcomeJourneyStepView(step: step, isEnabled: isEnabled) {
+                        if isEnabled {
+                            viewModel.onStepTapped?(step.type)
+                        }
                     }
                 }
             }
@@ -145,6 +149,7 @@ struct HomeWelcomeJourneyView: View {
 
 struct WelcomeJourneyStepView: View {
     let step: WelcomeJourneyStep
+    var isEnabled: Bool = true
     let onTap: () -> Void
 
     var body: some View {
@@ -195,7 +200,7 @@ struct WelcomeJourneyStepView: View {
 
                         Text(step.isCompleted ? step.completedSubtitle : step.subtitle)
                             .font(.system(size: 14, weight: .regular))
-                            .foregroundColor(step.isCompleted ? Color("green_light") : Color("grey"))
+                            .foregroundColor(step.isCompleted ? Color("green_light") : Color.black)
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.top, 4)
@@ -209,7 +214,7 @@ struct WelcomeJourneyStepView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .background(Color("orange_app"))
+                        .background(isEnabled ? Color("orange_app") : Color(UIColor.systemGray4))
                         .cornerRadius(12)
                         .padding(.top, 8)
                 }
@@ -222,7 +227,9 @@ struct WelcomeJourneyStepView: View {
                     .stroke(step.isCompleted ? Color("green_light").opacity(0.5) : Color(UIColor.systemGray5), lineWidth: 1)
             )
             .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+            .opacity(isEnabled ? 1.0 : 0.6)
         }
         .buttonStyle(PlainButtonStyle())
+        .disabled(!isEnabled)
     }
 }
