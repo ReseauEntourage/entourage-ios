@@ -37,7 +37,7 @@ class WelcomeJourneyCelebrationPopupViewController: UIViewController {
         // Title
         titleLabel.text = "home_v2_welcome_celebration_title".localized
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        titleLabel.textColor = UIColor(named: "black")
+        titleLabel.textColor = UIColor.black
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

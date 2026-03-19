@@ -93,7 +93,7 @@ struct HomeWelcomeJourneyView: View {
             HStack(alignment: .bottom) {
                 Text("home_v2_welcome_title".localized)
                     .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(Color("black"))
+                    .foregroundColor(Color.black)
                 Spacer()
                 Text("\(viewModel.completedCount)/\(viewModel.steps.count)")
                     .font(.system(size: 14, weight: .bold))
@@ -122,7 +122,7 @@ struct HomeWelcomeJourneyView: View {
             // Microcopy
             Text("Continuez comme ça, vous allez y arriver 🌟") // Mockup static text - wait, maybe use microcopy logic but just this text
                 .font(.system(size: 14, weight: .regular))
-                .foregroundColor(Color("black"))
+                .foregroundColor(Color.black)
                 .padding(.horizontal, 20)
 
             // Steps List
@@ -167,7 +167,7 @@ struct WelcomeJourneyStepView: View {
                         HStack(alignment: .top) {
                             Text(step.isCompleted ? step.completedTitle : step.title)
                                 .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(step.isCompleted ? Color("green_logout") : Color("black"))
+                                .foregroundColor(step.isCompleted ? Color("green_logout") : Color.black)
                                 .multilineTextAlignment(.leading)
                             Spacer(minLength: 8)
                             if step.isCompleted {
