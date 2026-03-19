@@ -30,7 +30,7 @@ class WelcomeVideoModalViewController: UIViewController {
         view.addSubview(containerView)
 
         // Video Placeholder
-        videoPlaceholderView.backgroundColor = UIColor(named: "appOrangeLight")?.withAlphaComponent(0.3)
+        videoPlaceholderView.backgroundColor = UIColor(named: "orange_light_a50")?.withAlphaComponent(0.3)
         videoPlaceholderView.layer.cornerRadius = 16
         videoPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onVideoTap))
@@ -39,7 +39,7 @@ class WelcomeVideoModalViewController: UIViewController {
 
         // Video Icon
         videoIconImageView.image = UIImage(systemName: "play.circle.fill")
-        videoIconImageView.tintColor = UIColor(named: "appOrange")
+        videoIconImageView.tintColor = UIColor(named: "orange_app")
         videoIconImageView.translatesAutoresizingMaskIntoConstraints = false
         videoPlaceholderView.addSubview(videoIconImageView)
 
@@ -113,7 +113,7 @@ class WelcomeVideoModalViewController: UIViewController {
             isVideoClicked = true
             // Enable button
             continueButton.isEnabled = true
-            continueButton.backgroundColor = UIColor(named: "appOrange")
+            continueButton.backgroundColor = UIColor(named: "orange_app")
 
             // "Play" visual feedback
             videoIconImageView.tintColor = UIColor(named: "grey")
