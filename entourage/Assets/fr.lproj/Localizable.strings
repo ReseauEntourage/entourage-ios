@@ -1969,3 +1969,34 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "conversation_staff_warning_message" = "L’équipe est en pause... 🌙 En cas d'urgence : 15, 18 ou 115. Pour une aide immédiate, vos voisins sont sur le groupe ! 🏠 On vous répond vite.";
 "conversation_staff_warning_group_link" = "groupe";
+
+/* Welcome Journey */
+"home_v2_welcome_title" = "Votre parcours de bienvenue";
+"home_v2_welcome_progress" = "%d étape(s) sur %d complétée(s)";
+"home_v2_welcome_microcopy_0" = "Commençons 💛";
+"home_v2_welcome_microcopy_1" = "Vous êtes bien lancé(e) ✨";
+"home_v2_welcome_microcopy_2" = "Plus qu'une étape pour rejoindre la communauté 🎉";
+"home_v2_welcome_microcopy_3" = "Intégration complète ! Tu fais maintenant partie de la communauté !";
+"home_v2_welcome_video_title" = "Commencer par la vidéo de bienvenue";
+"home_v2_welcome_video_subtitle" = "Découvrez l'esprit d'Entourage et voyez comment agir concrètement contre l'isolement.";
+"home_v2_welcome_video_btn" = "Voir la vidéo";
+"home_v2_welcome_video_completed_title" = "Commencer par la vidéo de bienvenue";
+"home_v2_welcome_video_completed_subtitle" = "Découvrez l'esprit d'Entourage et voyez comment agir concrètement contre l'isolement.";
+"home_v2_welcome_webinar_title" = "S'inscrire au webinaire de prise en main";
+"home_v2_welcome_webinar_subtitle" = "Découvrez l'application en 45 min avec notre équipe et posez toutes vos questions.";
+"home_v2_welcome_webinar_btn" = "S'inscrire";
+"home_v2_welcome_webinar_completed_title" = "S'inscrire au webinaire de prise en main";
+"home_v2_welcome_webinar_completed_subtitle" = "Découvrez l'application en 45 min avec notre équipe et posez toutes vos questions.";
+"home_v2_welcome_papotages_title" = "Rejoindre une session de papotages";
+"home_v2_welcome_papotages_subtitle" = "Chaque mardi à 18h, un moment convivial en visio pour discuter de tout et de rien avec d'autres membres.";
+"home_v2_welcome_papotages_btn" = "Rejoindre";
+"home_v2_welcome_papotages_completed_title" = "Rejoindre une session de papotages";
+"home_v2_welcome_papotages_completed_subtitle" = "Chaque mardi à 18h, un moment convivial en visio pour discuter de tout et de rien avec d'autres membres.";
+"home_v2_welcome_video_modal_title" = "Découvrez l'esprit Entourage";
+"home_v2_welcome_video_modal_desc" = "Dans cette vidéo, vous allez découvrir comment nous créons du lien social et luttons contre l'isolement. Rejoignez une communauté bienveillante où chaque action compte.\n\nPrenez 2 minutes pour découvrir l'esprit Entourage.";
+"home_v2_welcome_video_modal_btn" = "Continuer";
+"home_v2_welcome_celebration_title" = "Félicitations !";
+"home_v2_welcome_celebration_desc" = "Votre parcours d'intégration est terminé. Vous avez désormais toutes les clés pour agir et créer du lien autour de vous.";
+"home_v2_welcome_celebration_btn" = "C'est parti !";
+"home_v2_welcome_todo" = "À faire";
+"home_v2_welcome_done" = "Terminé";

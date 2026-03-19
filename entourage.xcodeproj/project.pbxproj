@@ -374,6 +374,9 @@
 		02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */; };
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
+		0EF0213AC19B2C08EE6816EB /* HomeWelcomeJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081CE9A5CFA5FEE2412760C /* HomeWelcomeJourneyView.swift */; };
+		1C1C825E7ECC3FCD707B75D0 /* HomeWelcomeJourneyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867DEF0B46EA92C4785BD075 /* HomeWelcomeJourneyCell.swift */; };
+		2037213E9ABAB5F3FB5F6E8F /* WelcomeJourneyCelebrationPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0751CE0BFBE9C1BF6BC036D /* WelcomeJourneyCelebrationPopupViewController.swift */; };
 		2421081A2F4C97EB004D74E2 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108192F4C97EB004D74E2 /* BirthdayViewController.swift */; };
 		2421081C2F4CA9C8004D74E2 /* birthday_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 2421081B2F4CA9C8004D74E2 /* birthday_animation.json */; };
 		242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */; };
@@ -632,10 +635,12 @@
 		26F14CE12D3E8B7C004C4524 /* ProfileSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */; };
 		26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */; };
 		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
+		2CF02D2BE61AC7E96245CC07 /* WelcomeVideoModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D984F84B1614A4E68324983E /* WelcomeVideoModalViewController.swift */; };
 		A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0081CE9A5CFA5FEE2412760C /* HomeWelcomeJourneyView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HomeWelcomeJourneyView.swift; path = entourage/Scenes/HomeV2/homev2cells/HomeWelcomeJourneyView.swift; sourceTree = "<group>"; };
 		0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInterestCell.swift; sourceTree = "<group>"; };
 		02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamsViewController.swift; sourceTree = "<group>"; };
 		02040CF4288E97E000AB1FBB /* EventParamTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamTopCell.swift; sourceTree = "<group>"; };
@@ -1267,6 +1272,9 @@
 		26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightOverlayView.swift; sourceTree = "<group>"; };
 		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
 		4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventCreatePhase3View.swift; path = entourage/Scenes/Events/Create/EventCreatePhase3View.swift; sourceTree = SOURCE_ROOT; };
+		867DEF0B46EA92C4785BD075 /* HomeWelcomeJourneyCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HomeWelcomeJourneyCell.swift; path = entourage/Scenes/HomeV2/homev2cells/HomeWelcomeJourneyCell.swift; sourceTree = "<group>"; };
+		C0751CE0BFBE9C1BF6BC036D /* WelcomeJourneyCelebrationPopupViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WelcomeJourneyCelebrationPopupViewController.swift; path = entourage/Scenes/HomeV2/homev2cells/WelcomeJourneyCelebrationPopupViewController.swift; sourceTree = "<group>"; };
+		D984F84B1614A4E68324983E /* WelcomeVideoModalViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WelcomeVideoModalViewController.swift; path = entourage/Scenes/HomeV2/homev2cells/WelcomeVideoModalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2405,6 +2413,10 @@
 				2432FE512F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib */,
 				2432FE542F5825450033E711 /* HomeCellActionCollectionViewCell.swift */,
 				2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */,
+				0081CE9A5CFA5FEE2412760C /* HomeWelcomeJourneyView.swift */,
+				867DEF0B46EA92C4785BD075 /* HomeWelcomeJourneyCell.swift */,
+				D984F84B1614A4E68324983E /* WelcomeVideoModalViewController.swift */,
+				C0751CE0BFBE9C1BF6BC036D /* WelcomeJourneyCelebrationPopupViewController.swift */,
 			);
 			path = homev2cells;
 			sourceTree = "<group>";
@@ -3372,6 +3384,10 @@
 				021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */,
 				02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */,
 				A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */,
+				0EF0213AC19B2C08EE6816EB /* HomeWelcomeJourneyView.swift in Sources */,
+				1C1C825E7ECC3FCD707B75D0 /* HomeWelcomeJourneyCell.swift in Sources */,
+				2CF02D2BE61AC7E96245CC07 /* WelcomeVideoModalViewController.swift in Sources */,
+				2037213E9ABAB5F3FB5F6E8F /* WelcomeJourneyCelebrationPopupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
