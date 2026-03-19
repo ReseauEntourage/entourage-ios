@@ -24,7 +24,9 @@ class HomeWelcomeJourneyCell: UITableViewCell {
     func configure(viewModel: WelcomeJourneyViewModel, parentViewController: UIViewController) {
         if let currentHostingController = hostingController {
             currentHostingController.rootView = HomeWelcomeJourneyView(viewModel: viewModel)
+            currentHostingController.view.invalidateIntrinsicContentSize()
             currentHostingController.view.setNeedsLayout()
+            self.contentView.layoutIfNeeded()
         } else {
             let swiftUIView = HomeWelcomeJourneyView(viewModel: viewModel)
             let newHostingController = UIHostingController(rootView: swiftUIView)
@@ -35,14 +37,25 @@ class HomeWelcomeJourneyCell: UITableViewCell {
             newHostingController.view.translatesAutoresizingMaskIntoConstraints = false
             newHostingController.view.backgroundColor = .clear
 
+            if #available(iOS 16.0, *) {
+                newHostingController.sizingOptions = .intrinsicContentSize
+            }
+
+            let topConstraint = newHostingController.view.topAnchor.constraint(equalTo: contentView.topAnchor)
+            topConstraint.priority = .defaultHigh // lower priority to prevent conflict with internal sizing
+            let bottomConstraint = newHostingController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            bottomConstraint.priority = .defaultHigh
+
             NSLayoutConstraint.activate([
-                newHostingController.view.topAnchor.constraint(equalTo: contentView.topAnchor),
-                newHostingController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                topConstraint,
+                bottomConstraint,
                 newHostingController.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 newHostingController.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
             ])
 
             newHostingController.didMove(toParent: parentViewController)
+            newHostingController.view.layoutIfNeeded()
+            self.contentView.layoutIfNeeded()
             self.hostingController = newHostingController
         }
     }

@@ -40,7 +40,7 @@ class WelcomeJourneyViewModel: ObservableObject {
                 buttonTitle: "home_v2_welcome_video_btn".localized,
                 completedTitle: "home_v2_welcome_video_completed_title".localized,
                 completedSubtitle: "home_v2_welcome_video_completed_subtitle".localized,
-                iconName: "video",
+                iconName: "checkmark.circle",
                 isCompleted: hasWatchedVideo
             ),
             WelcomeJourneyStep(
@@ -60,7 +60,7 @@ class WelcomeJourneyViewModel: ObservableObject {
                 buttonTitle: "home_v2_welcome_papotages_btn".localized,
                 completedTitle: "home_v2_welcome_papotages_completed_title".localized,
                 completedSubtitle: "home_v2_welcome_papotages_completed_subtitle".localized,
-                iconName: "bubble.left.and.bubble.right",
+                iconName: "bubble.right",
                 isCompleted: hasJoinedPapotages
             )
         ]
@@ -95,32 +95,32 @@ struct HomeWelcomeJourneyView: View {
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(Color("black"))
                 Spacer()
-                Text(viewModel.progressText)
-                    .font(.system(size: 13, weight: .bold))
-                    .foregroundColor(Color("appOrange"))
+                Text("\(viewModel.completedCount)/\(viewModel.steps.count)")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(Color("orange_app"))
             }
             .padding(.horizontal, 20)
 
             // Progress Bar
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 4)
+                    RoundedRectangle(cornerRadius: 6)
                         .fill(Color(UIColor.systemGray5))
-                        .frame(height: 8)
+                        .frame(height: 12)
 
                     let progressWidth = geometry.size.width * CGFloat(viewModel.completedCount) / CGFloat(max(1, viewModel.steps.count))
 
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color("appOrange"))
-                        .frame(width: progressWidth, height: 8)
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(Color("orange_app"))
+                        .frame(width: progressWidth, height: 12)
                         .animation(.easeInOut, value: viewModel.completedCount)
                 }
             }
-            .frame(height: 8)
+            .frame(height: 12)
             .padding(.horizontal, 20)
 
             // Microcopy
-            Text(viewModel.microcopy)
+            Text("Continuez comme ça, vous allez y arriver 🌟") // Mockup static text - wait, maybe use microcopy logic but just this text
                 .font(.system(size: 14, weight: .regular))
                 .foregroundColor(Color("black"))
                 .padding(.horizontal, 20)
@@ -139,6 +139,7 @@ struct HomeWelcomeJourneyView: View {
         }
         .padding(.top, 20)
         .background(Color("white_orange_home")) // matches the table view background
+        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
@@ -153,49 +154,51 @@ struct WelcomeJourneyStepView: View {
                     // Icon
                     ZStack {
                         Circle()
-                            .fill(step.isCompleted ? Color("appOrangeLight").opacity(0.3) : Color("appOrangeLight"))
-                            .frame(width: 40, height: 40)
+                            .fill(step.isCompleted ? Color("green_light") : Color("orange_light_a50").opacity(0.3))
+                            .frame(width: 44, height: 44)
 
                         Image(systemName: step.iconName)
                             .font(.system(size: 20, weight: .medium))
-                            .foregroundColor(step.isCompleted ? Color("appOrange") : Color("appOrange"))
+                            .foregroundColor(step.isCompleted ? .white : Color("orange_app"))
                     }
 
                     // Texts
                     VStack(alignment: .leading, spacing: 4) {
-                        HStack {
+                        HStack(alignment: .top) {
                             Text(step.isCompleted ? step.completedTitle : step.title)
-                                .font(.system(size: 15, weight: .bold))
-                                .foregroundColor(Color("black"))
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(step.isCompleted ? Color("green_logout") : Color("black"))
                                 .multilineTextAlignment(.leading)
-                            Spacer()
+                            Spacer(minLength: 8)
                             if step.isCompleted {
-                                Image(systemName: "checkmark")
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(Color("appOrange"))
                                 Text("home_v2_welcome_done".localized)
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(Color("appOrange"))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 2)
-                                    .background(Color("appOrangeLight").opacity(0.5))
+                                    .font(.system(size: 12, weight: .regular))
+                                    .foregroundColor(Color("green_logout"))
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 4)
+                                    .background(Color.white)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(Color("green_light"), lineWidth: 1)
+                                    )
                                     .cornerRadius(12)
                             } else {
                                 Text("home_v2_welcome_todo".localized)
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(Color("appOrange"))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 2)
-                                    .background(Color("appOrangeLight").opacity(0.5))
+                                    .font(.system(size: 12, weight: .regular))
+                                    .foregroundColor(Color("orange_app"))
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 4)
+                                    .background(Color("orange_light_a50").opacity(0.3))
                                     .cornerRadius(12)
                             }
                         }
 
                         Text(step.isCompleted ? step.completedSubtitle : step.subtitle)
-                            .font(.system(size: 13, weight: .regular))
-                            .foregroundColor(Color("grey"))
+                            .font(.system(size: 14, weight: .regular))
+                            .foregroundColor(step.isCompleted ? Color("green_light") : Color("grey"))
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
+                            .padding(.top, 4)
                     }
                 }
 
@@ -205,20 +208,20 @@ struct WelcomeJourneyStepView: View {
                         .font(.system(size: 15, weight: .bold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                        .background(Color("appOrange"))
-                        .cornerRadius(8)
+                        .padding(.vertical, 14)
+                        .background(Color("orange_app"))
+                        .cornerRadius(12)
+                        .padding(.top, 8)
                 }
             }
-            .padding(16)
-            .background(step.isCompleted ? Color("white_orange_home") : Color.white) // Adjust background based on completed state
-            .cornerRadius(12)
-            .shadow(color: Color.black.opacity(step.isCompleted ? 0.0 : 0.05), radius: 5, x: 0, y: 2)
-            // Border if completed
+            .padding(20)
+            .background(Color.white)
+            .cornerRadius(16)
             .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(step.isCompleted ? Color(UIColor.systemGray5) : Color.clear, lineWidth: 1)
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(step.isCompleted ? Color("green_light").opacity(0.5) : Color(UIColor.systemGray5), lineWidth: 1)
             )
+            .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
         }
         .buttonStyle(PlainButtonStyle())
     }

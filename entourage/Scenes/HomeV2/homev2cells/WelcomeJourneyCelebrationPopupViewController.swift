@@ -29,7 +29,7 @@ class WelcomeJourneyCelebrationPopupViewController: UIViewController {
 
         // Star Icon
         starImageView.image = UIImage(systemName: "star.fill")
-        starImageView.tintColor = UIColor(named: "appOrange")
+        starImageView.tintColor = UIColor(named: "orange_app")
         starImageView.contentMode = .scaleAspectFit
         starImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(starImageView)
@@ -56,7 +56,7 @@ class WelcomeJourneyCelebrationPopupViewController: UIViewController {
         ctaButton.setTitle("home_v2_welcome_celebration_btn".localized, for: .normal)
         ctaButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         ctaButton.setTitleColor(.white, for: .normal)
-        ctaButton.backgroundColor = UIColor(named: "appOrange")
+        ctaButton.backgroundColor = UIColor(named: "orange_app")
         ctaButton.layer.cornerRadius = 24
         ctaButton.addTarget(self, action: #selector(onCtaTap), for: .touchUpInside)
         ctaButton.translatesAutoresizingMaskIntoConstraints = false
