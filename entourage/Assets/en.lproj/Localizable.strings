@@ -1972,3 +1972,34 @@
 
 "conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
 "conversation_staff_warning_group_link" = "group";
+
+/* Welcome Journey */
+"home_v2_welcome_title" = "Your welcome journey";
+"home_v2_welcome_progress" = "%d out of %d step(s) completed";
+"home_v2_welcome_microcopy_0" = "Let's get started 💛";
+"home_v2_welcome_microcopy_1" = "You're off to a great start ✨";
+"home_v2_welcome_microcopy_2" = "Just one more step to join the community 🎉";
+"home_v2_welcome_microcopy_3" = "Onboarding complete! You are now part of the community!";
+"home_v2_welcome_video_title" = "Start with the welcome video";
+"home_v2_welcome_video_subtitle" = "Discover the Entourage spirit and see how to take concrete action against isolation.";
+"home_v2_welcome_video_btn" = "Watch video";
+"home_v2_welcome_video_completed_title" = "Start with the welcome video";
+"home_v2_welcome_video_completed_subtitle" = "Discover the Entourage spirit and see how to take concrete action against isolation.";
+"home_v2_welcome_webinar_title" = "Sign up for the onboarding webinar";
+"home_v2_welcome_webinar_subtitle" = "Discover the app in 45 min with our team and ask any questions.";
+"home_v2_welcome_webinar_btn" = "Sign up";
+"home_v2_welcome_webinar_completed_title" = "Sign up for the onboarding webinar";
+"home_v2_welcome_webinar_completed_subtitle" = "Discover the app in 45 min with our team and ask any questions.";
+"home_v2_welcome_papotages_title" = "Join a chat session";
+"home_v2_welcome_papotages_subtitle" = "Every Tuesday at 6pm, a friendly video session to chat with other members.";
+"home_v2_welcome_papotages_btn" = "Join";
+"home_v2_welcome_papotages_completed_title" = "Join a chat session";
+"home_v2_welcome_papotages_completed_subtitle" = "Every Tuesday at 6pm, a friendly video session to chat with other members.";
+"home_v2_welcome_video_modal_title" = "Discover the Entourage spirit";
+"home_v2_welcome_video_modal_desc" = "In this video, you'll discover how we create social connection and fight against isolation. Join a caring community where every action counts.\n\nTake 2 minutes to discover the Entourage spirit.";
+"home_v2_welcome_video_modal_btn" = "Continue";
+"home_v2_welcome_celebration_title" = "Congratulations!";
+"home_v2_welcome_celebration_desc" = "Your onboarding journey is complete. You now have all the tools to take action and create connections around you.";
+"home_v2_welcome_celebration_btn" = "Let's go!";
+"home_v2_welcome_todo" = "To do";
+"home_v2_welcome_done" = "Done";

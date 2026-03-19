@@ -3188,3 +3188,34 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
 "conversation_staff_warning_group_link" = "group";
+
+/* Welcome Journey */
+"home_v2_welcome_title" = "Su viaje de bienvenida";
+"home_v2_welcome_progress" = "%d out of %d step(s) completed";
+"home_v2_welcome_microcopy_0" = "Comencemos 💛";
+"home_v2_welcome_microcopy_1" = "Has tenido un gran comienzo ✨";
+"home_v2_welcome_microcopy_2" = "Sólo un paso más para unirte a la comunidad 🎉";
+"home_v2_welcome_microcopy_3" = "¡Incorporación completada! ¡Ya formas parte de la comunidad!";
+"home_v2_welcome_video_title" = "Empezar con el vídeo de bienvenida";
+"home_v2_welcome_video_subtitle" = "Descubre el espíritu Entourage y cómo actuar concretamente contra el aislamiento.";
+"home_v2_welcome_video_btn" = "Ver el vídeo";
+"home_v2_welcome_video_completed_title" = "Empezar con el vídeo de bienvenida";
+"home_v2_welcome_video_completed_subtitle" = "Descubre el espíritu Entourage y cómo actuar concretamente contra el aislamiento.";
+"home_v2_welcome_webinar_title" = "Inscríbete en el seminario web";
+"home_v2_welcome_webinar_subtitle" = "Descubre la app en 45 min con nuestro equipo y haz todas tus preguntas.";
+"home_v2_welcome_webinar_btn" = "Inscribirse";
+"home_v2_welcome_webinar_completed_title" = "Inscríbete en el seminario web";
+"home_v2_welcome_webinar_completed_subtitle" = "Descubre la app en 45 min con nuestro equipo y haz todas tus preguntas.";
+"home_v2_welcome_papotages_title" = "Únete a una sesión de charla";
+"home_v2_welcome_papotages_subtitle" = "Cada martes a las 18h, una agradable sesión de vídeo para charlar.";
+"home_v2_welcome_papotages_btn" = "Unirse";
+"home_v2_welcome_papotages_completed_title" = "Únete a una sesión de charla";
+"home_v2_welcome_papotages_completed_subtitle" = "Cada martes a las 18h, una agradable sesión de vídeo para charlar.";
+"home_v2_welcome_video_modal_title" = "Descubre el espíritu Entourage";
+"home_v2_welcome_video_modal_desc" = "En este vídeo descubrirás cómo creamos conexión social y luchamos contra el aislamiento.\n\nTómese 2 minutos para descubrir el espíritu Entourage.";
+"home_v2_welcome_video_modal_btn" = "Continuar";
+"home_v2_welcome_celebration_title" = "¡Enhorabuena!";
+"home_v2_welcome_celebration_desc" = "Su viaje de incorporación ha finalizado. Ya dispone de las herramientas necesarias para actuar y crear vínculos.";
+"home_v2_welcome_celebration_btn" = "¡Vamos!";
+"home_v2_welcome_todo" = "Por hacer";
+"home_v2_welcome_done" = "Hecho";

@@ -32,6 +32,7 @@ enum HomeV2DTO {
     case moderator(name: String, imageUrl: String? = nil)
     case cellHZ
     case cellInitialPedago(pedagos: [PedagogicResource])
+    case cellWelcomeJourney(viewModel: WelcomeJourneyViewModel)
     case cellSmallTalk(userRequests:[UserSmallTalkRequest])
     case cellSolidarityTools
 }
@@ -70,6 +71,7 @@ class HomeV2ViewController: UIViewController {
     var shouldTestOnboarding = false
     var userSmallTalkRequests: [UserSmallTalkRequest] = []
     private var hasRunEntryGating = false
+    private var hasShownCompletionStateThisSession = false
 
 
     
@@ -103,6 +105,7 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
+        ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
 
         self.checkAndCreateCookieIfNotExists()
         //self.checkNotificationSettings()
@@ -410,6 +413,42 @@ class HomeV2ViewController: UIViewController {
             showInitialPedago = true
         }
 
+        let welcomeJourneyVM = WelcomeJourneyViewModel()
+        welcomeJourneyVM.update(with: userHome.events)
+
+        let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
+
+        // Show block if:
+        // 1. Not completed yet
+        // 2. Or completed, but we just showed the celebration in this session, so it stays until next reload
+        if welcomeJourneyVM.completedCount < 3 {
+            tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
+            self.hasShownCompletionStateThisSession = false
+        } else if welcomeJourneyVM.completedCount >= 3 && self.hasShownCompletionStateThisSession {
+            tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
+        }
+
+        // If it's completed now and we haven't shown the celebration yet, show it!
+        if welcomeJourneyVM.completedCount >= 3 && !hasShownCelebration {
+            UserDefaults.standard.set(true, forKey: "hasShownWelcomeCelebration")
+            self.hasShownCompletionStateThisSession = true
+
+            // Add the cell back because we want it to stay for this session with the "Intégration complète !" text
+            if !tableDTO.contains(where: {
+                if case .cellWelcomeJourney = $0 { return true }
+                return false
+            }) {
+                tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
+            }
+
+            DispatchQueue.main.async {
+                let celebrationVC = WelcomeJourneyCelebrationPopupViewController()
+                celebrationVC.modalPresentationStyle = .overFullScreen
+                celebrationVC.modalTransitionStyle = .crossDissolve
+                self.present(celebrationVC, animated: true)
+            }
+        }
+
         if showInitialPedago && initialPedagos.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
             tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
@@ -605,10 +644,63 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.delegate = self
                 return cell
             }
+        case .cellWelcomeJourney(let viewModel):
+            if let cell = tableView.dequeueReusableCell(withIdentifier: HomeWelcomeJourneyCell.identifier) as? HomeWelcomeJourneyCell {
+                viewModel.onStepTapped = { [weak self] stepType in
+                    self?.handleWelcomeJourneyStep(stepType)
+                }
+                cell.configure(viewModel: viewModel, parentViewController: self)
+                return cell
+            }
         }
         return UITableViewCell()
     }
     
+    private func handleWelcomeJourneyStep(_ stepType: WelcomeJourneyStepType) {
+        switch stepType {
+        case .video:
+            let modalVC = WelcomeVideoModalViewController()
+            modalVC.modalPresentationStyle = .overFullScreen
+            modalVC.modalTransitionStyle = .crossDissolve
+            modalVC.onComplete = { [weak self] in
+                self?.configureDTO() // Refresh home after video is watched locally
+            }
+            self.present(modalVC, animated: true)
+
+        case .webinar:
+            SVProgressHUD.show()
+            EventService.getWelcomeEvent { [weak self] event in
+                SVProgressHUD.dismiss()
+                if let event = event {
+                    self?.showEvent(eventId: event.uid, event: event)
+                } else {
+                    EventService.getWebinarEvent { [weak self] event in
+                        if let event = event {
+                            self?.showEvent(eventId: event.uid, event: event)
+                        } else {
+                            if let url = URL(string: "https://www.entourage.social/app/outings/webinar") {
+                                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
+                            }
+                        }
+                    }
+                }
+            }
+
+        case .papotages:
+            SVProgressHUD.show()
+            EventService.getPapotagesEvent { [weak self] event in
+                SVProgressHUD.dismiss()
+                if let event = event {
+                    self?.showEvent(eventId: event.uid, event: event)
+                } else {
+                    if let url = URL(string: "https://www.entourage.social/app/outings/papotages") {
+                        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
+                    }
+                }
+            }
+        }
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableDTO[indexPath.row] {
         case .cellTitle(_, _):
@@ -674,6 +766,8 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             return
         case .cellSolidarityTools:
             return
+        case .cellWelcomeJourney(_):
+            return
         }
     }
     
@@ -704,6 +798,8 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellSmallTalk(let userRequests):
             return 260
         case .cellSolidarityTools:
+            return UITableView.automaticDimension
+        case .cellWelcomeJourney(_):
             return UITableView.automaticDimension
         }
     }
