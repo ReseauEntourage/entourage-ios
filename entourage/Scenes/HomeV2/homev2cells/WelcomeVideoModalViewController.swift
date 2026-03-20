@@ -46,7 +46,7 @@ class WelcomeVideoModalViewController: UIViewController {
         // Title
         titleLabel.text = "home_v2_welcome_video_modal_title".localized
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        titleLabel.textColor = UIColor.black
+        titleLabel.textColor = UIColor(named: "black")
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
