@@ -25,9 +25,12 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
         ui_webview.uiDelegate = self
         ui_webview.navigationDelegate = self
         
+        // Au cas où le htmlBody est passé directement sans appel réseau
         if let htmlBody = htmlBody {
-            let baseURL = URL(string: "https://www.entourage.social")
-            ui_webview.loadHTMLString(htmlBody, baseURL: baseURL)
+            DispatchQueue.main.async {
+                let baseURL = URL(string: "https://www.entourage.social")
+                self.ui_webview.loadHTMLString(htmlBody, baseURL: baseURL)
+            }
         }
         self.getDetailResource()
     }
@@ -44,6 +47,7 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
         HomeService.getResourceWithId(_resourceId) { resource, error in
             if let htmlBody = resource?.bodyHtml {
                 DispatchQueue.main.async {
+                    // On fournit la baseURL pour que l'iframe YouTube valide l'Origin/Referer
                     let baseURL = URL(string: "https://www.entourage.social")
                     self.ui_webview.loadHTMLString(htmlBody, baseURL: baseURL)
                 }
@@ -64,15 +68,20 @@ extension PedagogicDetailViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url, let components = URLComponents(url: url, resolvingAgainstBaseURL: true) {
-            if components.host == UniversalLinkManager.prodURL ||
-               components.host == UniversalLinkManager.prodURL2 ||
-               components.host == UniversalLinkManager.stagingURL ||
-               components.host == UniversalLinkManager.stagingURL2 {
-                
-                // Utiliser la fonction UniversalLinkManager.handleUniversalLink pour gérer le lien
-                UniversalLinkManager.handleUniversalLink(components: components)
-                decisionHandler(.cancel) // Annuler la navigation par défaut
-                return
+            
+            // CORRECTION : On vérifie que c'est bien un clic utilisateur (.linkActivated)
+            // pour ne pas annuler le loadHTMLString initial qui utilise la baseURL d'Entourage.
+            if navigationAction.navigationType == .linkActivated {
+                if components.host == UniversalLinkManager.prodURL ||
+                   components.host == UniversalLinkManager.prodURL2 ||
+                   components.host == UniversalLinkManager.stagingURL ||
+                   components.host == UniversalLinkManager.stagingURL2 {
+                    
+                    // Utiliser la fonction UniversalLinkManager.handleUniversalLink pour gérer le lien
+                    UniversalLinkManager.handleUniversalLink(components: components)
+                    decisionHandler(.cancel) // Annuler la navigation par défaut
+                    return
+                }
             }
         }
         decisionHandler(.allow) // Autoriser la navigation par défaut
