@@ -26,7 +26,8 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
         ui_webview.navigationDelegate = self
         
         if let htmlBody = htmlBody {
-            ui_webview.loadHTMLString(htmlBody, baseURL: nil)
+            let baseURL = URL(string: "https://www.entourage.social")
+            ui_webview.loadHTMLString(htmlBody, baseURL: baseURL)
         }
         self.getDetailResource()
     }
@@ -43,7 +44,8 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
         HomeService.getResourceWithId(_resourceId) { resource, error in
             if let htmlBody = resource?.bodyHtml {
                 DispatchQueue.main.async {
-                    self.ui_webview.loadHTMLString(htmlBody, baseURL: nil)
+                    let baseURL = URL(string: "https://www.entourage.social")
+                    self.ui_webview.loadHTMLString(htmlBody, baseURL: baseURL)
                 }
             }
         }
