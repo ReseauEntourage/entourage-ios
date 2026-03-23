@@ -764,14 +764,23 @@ class ActionsMainHomeViewController: UIViewController {
     func setupEmptyViews() {
         ui_lbl_empty_title_discover.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lbl_empty_subtitle_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        
+
         ui_lbl_empty_title_discover.text = "action_contrib_empty_title".localized
         ui_lbl_empty_subtitle_discover.text = "action_contrib_empty_subtitle".localized
-        
-        ui_view_bt_clear_filters.layer.cornerRadius = ui_view_bt_clear_filters.frame.height / 2
+
+        let buttonHeight = ui_view_bt_clear_filters.frame.height
+        guard buttonHeight > 0 else {
+            print("Warning: ui_view_bt_clear_filters has invalid height: \(buttonHeight)")
+            ui_view_bt_clear_filters.layer.cornerRadius = 0
+            ui_title_bt_clear_filters.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
+            ui_title_bt_clear_filters.text = "event_event_discover_clear_filters".localized
+            hideEmptyView()
+            return
+        }
+        ui_view_bt_clear_filters.layer.cornerRadius = buttonHeight / 2
         ui_title_bt_clear_filters.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_title_bt_clear_filters.text = "event_event_discover_clear_filters".localized
-        
+
         hideEmptyView()
     }
     
@@ -830,23 +839,33 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard indexPath.row < contribs.count || indexPath.row < solicitations.count || indexPath.row < myActions.count else {
-            print("Incohérence détectée, réinitialisation de la vue.")
-            resetViewToInitialState()
-            return UITableViewCell() // Renvoie une cellule vide pour éviter un crash immédiat
-        }
         let action: Action
         if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
+            guard indexPath.row < contribs.count else {
+                print("Incohérence: indexPath.row (\(indexPath.row)) >= contribs.count (\(contribs.count))")
+                resetViewToInitialState()
+                return UITableViewCell()
+            }
             action = contribs[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: ActionContribDetailHomeCell.identifier, for: indexPath) as! ActionContribDetailHomeCell
             cell.populateCell(action: action, hideSeparator: false)
             return cell
         } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
+            guard indexPath.row < solicitations.count else {
+                print("Incohérence: indexPath.row (\(indexPath.row)) >= solicitations.count (\(solicitations.count))")
+                resetViewToInitialState()
+                return UITableViewCell()
+            }
             action = solicitations[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: ActionSolicitationDetailHomeCell.identifier, for: indexPath) as! ActionSolicitationDetailHomeCell
             cell.populateCell(action: action, hideSeparator: false)
             return cell
         } else {
+            guard indexPath.row < myActions.count else {
+                print("Incohérence: indexPath.row (\(indexPath.row)) >= myActions.count (\(myActions.count))")
+                resetViewToInitialState()
+                return UITableViewCell()
+            }
             action = myActions[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellMy", for: indexPath) as! ActionMineCell
             cell.populateCell(action: action)
@@ -857,13 +876,25 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let action: Action
         if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
+            guard indexPath.row < contribs.count else {
+                print("Incohérence in didSelectRowAt: indexPath.row (\(indexPath.row)) >= contribs.count (\(contribs.count))")
+                return
+            }
             action = contribs[indexPath.row]
         } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
+            guard indexPath.row < solicitations.count else {
+                print("Incohérence in didSelectRowAt: indexPath.row (\(indexPath.row)) >= solicitations.count (\(solicitations.count))")
+                return
+            }
             action = solicitations[indexPath.row]
         } else {
+            guard indexPath.row < myActions.count else {
+                print("Incohérence in didSelectRowAt: indexPath.row (\(indexPath.row)) >= myActions.count (\(myActions.count))")
+                return
+            }
             action = myActions[indexPath.row]
         }
-        
+
         self.showAction(actionId: action.id, isContrib: action.isContrib(), action: action)
     }
     
