@@ -37,7 +37,7 @@ class WelcomeJourneyCelebrationPopupViewController: UIViewController {
         // Title
         titleLabel.text = "home_v2_welcome_celebration_title".localized
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        titleLabel.textColor = UIColor(named: "black")
+        titleLabel.textColor = UIColor.black
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +46,7 @@ class WelcomeJourneyCelebrationPopupViewController: UIViewController {
         // Description
         descriptionLabel.text = "home_v2_welcome_celebration_desc".localized
         descriptionLabel.font = .systemFont(ofSize: 15, weight: .regular)
-        descriptionLabel.textColor = UIColor(named: "grey")
+        descriptionLabel.textColor = UIColor.gray
         descriptionLabel.textAlignment = .center
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
