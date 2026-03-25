@@ -8,15 +8,19 @@ enum WelcomeJourneyStepType: Equatable {
     case papotages
 }
 
+enum WelcomeJourneyStepState {
+    case completed
+    case active
+    case future
+}
+
 struct WelcomeJourneyStep {
     let type: WelcomeJourneyStepType
     let title: String
     let subtitle: String
     let buttonTitle: String
-    let completedTitle: String
-    let completedSubtitle: String
     let iconName: String
-    var isCompleted: Bool
+    var state: WelcomeJourneyStepState = .future
 }
 
 class WelcomeJourneyViewModel: ObservableObject {
@@ -32,42 +36,48 @@ class WelcomeJourneyViewModel: ObservableObject {
         let hasJoinedWebinar = events.contains("onboarding.outing.webinar_or_first_steps")
         let hasJoinedPapotages = events.contains("onboarding.outing.papotages")
 
+        var step1State: WelcomeJourneyStepState = hasWatchedVideo ? .completed : .active
+        var step2State: WelcomeJourneyStepState = .future
+        var step3State: WelcomeJourneyStepState = .future
+
+        if step1State == .completed {
+            step2State = hasJoinedWebinar ? .completed : .active
+        }
+
+        if step2State == .completed {
+            step3State = hasJoinedPapotages ? .completed : .active
+        }
+
         steps = [
             WelcomeJourneyStep(
                 type: .video,
                 title: "home_v2_welcome_video_title".localized,
                 subtitle: "home_v2_welcome_video_subtitle".localized,
                 buttonTitle: "home_v2_welcome_video_btn".localized,
-                completedTitle: "home_v2_welcome_video_completed_title".localized,
-                completedSubtitle: "home_v2_welcome_video_completed_subtitle".localized,
-                iconName: "checkmark.circle",
-                isCompleted: hasWatchedVideo
+                iconName: "play.rectangle",
+                state: step1State
             ),
             WelcomeJourneyStep(
                 type: .webinar,
                 title: "home_v2_welcome_webinar_title".localized,
                 subtitle: "home_v2_welcome_webinar_subtitle".localized,
                 buttonTitle: "home_v2_welcome_webinar_btn".localized,
-                completedTitle: "home_v2_welcome_webinar_completed_title".localized,
-                completedSubtitle: "home_v2_welcome_webinar_completed_subtitle".localized,
-                iconName: "person.2",
-                isCompleted: hasJoinedWebinar
+                iconName: "person.2.fill",
+                state: step2State
             ),
             WelcomeJourneyStep(
                 type: .papotages,
                 title: "home_v2_welcome_papotages_title".localized,
                 subtitle: "home_v2_welcome_papotages_subtitle".localized,
                 buttonTitle: "home_v2_welcome_papotages_btn".localized,
-                completedTitle: "home_v2_welcome_papotages_completed_title".localized,
-                completedSubtitle: "home_v2_welcome_papotages_completed_subtitle".localized,
-                iconName: "bubble.right",
-                isCompleted: hasJoinedPapotages
+                iconName: "message.fill",
+                state: step3State
             )
         ]
     }
 
     var completedCount: Int {
-        steps.filter { $0.isCompleted }.count
+        steps.filter { $0.state == .completed }.count
     }
 
     var progressText: String {
@@ -82,6 +92,10 @@ class WelcomeJourneyViewModel: ObservableObject {
         default: return "home_v2_welcome_microcopy_3".localized
         }
     }
+
+    var isFullyCompleted: Bool {
+        return completedCount >= 3
+    }
 }
 
 struct HomeWelcomeJourneyView: View {
@@ -92,11 +106,11 @@ struct HomeWelcomeJourneyView: View {
             // Header
             HStack(alignment: .bottom) {
                 Text("home_v2_welcome_title".localized)
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(Color("black"))
+                    .font(.custom("Quicksand-Bold", size: 20))
+                    .foregroundColor(Color(UIColor.darkGray))
                 Spacer()
                 Text("\(viewModel.completedCount)/\(viewModel.steps.count)")
-                    .font(.system(size: 14, weight: .bold))
+                    .font(.custom("Quicksand-Bold", size: 15))
                     .foregroundColor(Color("orange_app"))
             }
             .padding(.horizontal, 20)
@@ -106,36 +120,55 @@ struct HomeWelcomeJourneyView: View {
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 6)
                         .fill(Color(UIColor.systemGray5))
-                        .frame(height: 12)
+                        .frame(height: 8)
 
                     let progressWidth = geometry.size.width * CGFloat(viewModel.completedCount) / CGFloat(max(1, viewModel.steps.count))
 
                     RoundedRectangle(cornerRadius: 6)
                         .fill(Color("orange_app"))
-                        .frame(width: progressWidth, height: 12)
+                        .frame(width: progressWidth, height: 8)
                         .animation(.easeInOut, value: viewModel.completedCount)
                 }
             }
-            .frame(height: 12)
+            .frame(height: 8)
             .padding(.horizontal, 20)
 
             // Microcopy
-            Text("Continuez comme ça, vous allez y arriver 🌟") // Mockup static text - wait, maybe use microcopy logic but just this text
-                .font(.system(size: 14, weight: .regular))
-                .foregroundColor(Color("black"))
+            Text(viewModel.microcopy)
+                .font(.custom("NunitoSans-Regular", size: 13))
+                .foregroundColor(Color("grey"))
                 .padding(.horizontal, 20)
 
-            // Steps List
-            VStack(spacing: 12) {
-                ForEach(viewModel.steps.indices, id: \.self) { index in
-                    let step = viewModel.steps[index]
-                    WelcomeJourneyStepView(step: step) {
-                        viewModel.onStepTapped?(step.type)
+            if viewModel.isFullyCompleted {
+                // Success Layout
+                VStack(spacing: 0) {
+                    Text("home_v2_welcome_microcopy_3".localized)
+                        .font(.custom("Quicksand-Bold", size: 15))
+                        .foregroundColor(Color("green_logout"))
+                        .multilineTextAlignment(.center)
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity)
+                .background(Color("green_light").opacity(0.15))
+                .cornerRadius(12)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
+            } else {
+                // Steps List
+                VStack(spacing: 12) {
+                    ForEach(viewModel.steps.indices, id: \.self) { index in
+                        let step = viewModel.steps[index]
+                        WelcomeJourneyStepView(step: step) {
+                            if step.state == .active {
+                                viewModel.onStepTapped?(step.type)
+                            }
+                        }
+                        .disabled(step.state != .active)
                     }
                 }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
         }
         .padding(.top, 20)
         .background(Color("white_orange_home")) // matches the table view background
@@ -154,74 +187,72 @@ struct WelcomeJourneyStepView: View {
                     // Icon
                     ZStack {
                         Circle()
-                            .fill(step.isCompleted ? Color("green_light") : Color("orange_light_a50").opacity(0.3))
-                            .frame(width: 44, height: 44)
+                            .fill(step.state == .completed ? Color("green_logout") : Color("orange_light_a50").opacity(0.3))
+                            .frame(width: 40, height: 40)
 
-                        Image(systemName: step.iconName)
-                            .font(.system(size: 20, weight: .medium))
-                            .foregroundColor(step.isCompleted ? .white : Color("orange_app"))
+                        Image(systemName: step.state == .completed ? "checkmark" : step.iconName)
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundColor(step.state == .completed ? .white : Color("orange_app"))
                     }
 
                     // Texts
                     VStack(alignment: .leading, spacing: 4) {
                         HStack(alignment: .top) {
-                            Text(step.isCompleted ? step.completedTitle : step.title)
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(step.isCompleted ? Color("green_logout") : Color("black"))
+                            Text(step.title)
+                                .font(.custom("Quicksand-Bold", size: 15))
+                                .foregroundColor(step.state == .completed ? Color("green_logout") : (step.state == .future ? Color("grey") : Color.black))
                                 .multilineTextAlignment(.leading)
                             Spacer(minLength: 8)
-                            if step.isCompleted {
+                            if step.state == .completed {
                                 Text("home_v2_welcome_done".localized)
-                                    .font(.system(size: 12, weight: .regular))
+                                    .font(.custom("NunitoSans-Bold", size: 13))
                                     .foregroundColor(Color("green_logout"))
-                                    .padding(.horizontal, 10)
+                                    .padding(.horizontal, 8)
                                     .padding(.vertical, 4)
-                                    .background(Color.white)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color("green_light"), lineWidth: 1)
-                                    )
+                                    .background(Color("green_light").opacity(0.15))
                                     .cornerRadius(12)
-                            } else {
+                            } else if step.state == .active {
                                 Text("home_v2_welcome_todo".localized)
-                                    .font(.system(size: 12, weight: .regular))
+                                    .font(.custom("NunitoSans-Bold", size: 13))
                                     .foregroundColor(Color("orange_app"))
-                                    .padding(.horizontal, 10)
+                                    .padding(.horizontal, 8)
                                     .padding(.vertical, 4)
                                     .background(Color("orange_light_a50").opacity(0.3))
                                     .cornerRadius(12)
                             }
                         }
 
-                        Text(step.isCompleted ? step.completedSubtitle : step.subtitle)
-                            .font(.system(size: 14, weight: .regular))
-                            .foregroundColor(step.isCompleted ? Color("green_light") : Color("grey"))
+                        Text(step.subtitle)
+                            .font(.custom("NunitoSans-Regular", size: 15))
+                            .foregroundColor(step.state == .completed ? Color("green_logout") : Color("grey"))
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.top, 4)
                     }
                 }
 
-                // CTA Button (only if not completed)
-                if !step.isCompleted {
+                // CTA Button (only if active)
+                if step.state == .active {
                     Text(step.buttonTitle)
-                        .font(.system(size: 15, weight: .bold))
+                        .font(.custom("Quicksand-Bold", size: 14))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 24)
                         .background(Color("orange_app"))
-                        .cornerRadius(12)
-                        .padding(.top, 8)
+                        .cornerRadius(32)
+                        .padding(.top, 16)
                 }
             }
-            .padding(20)
+            .padding(16)
             .background(Color.white)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(step.isCompleted ? Color("green_light").opacity(0.5) : Color(UIColor.systemGray5), lineWidth: 1)
+                    .stroke(step.state == .active ? Color.clear : Color(UIColor.systemGray5), lineWidth: 1)
             )
-            .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(step.state == .active ? 0.05 : 0), radius: 8, x: 0, y: 2)
+            .opacity(step.state == .active ? 1.0 : 0.5)
         }
         .buttonStyle(PlainButtonStyle())
     }
