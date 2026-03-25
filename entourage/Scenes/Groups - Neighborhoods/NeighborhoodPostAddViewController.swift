@@ -189,6 +189,13 @@ class NeighborhoodPostAddViewController: UIViewController {
     // MARK: - Conversion en HTML pour prendre en compte le texte enrichi (mentions)
     func getHTMLMessage() -> String? {
         guard let attributedText = ui_tv_message.attributedText else { return nil }
+
+        let placeholder = ui_tv_message.placeholderText ?? "neighborhood_add_post_message_placeholder".localized
+        let currentText = ui_tv_message.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if currentText.isEmpty || currentText == placeholder {
+            return nil
+        }
+
         do {
             let htmlData = try attributedText.data(from: NSRange(location: 0, length: attributedText.length),
                                                    documentAttributes: [.documentType: NSAttributedString.DocumentType.html])

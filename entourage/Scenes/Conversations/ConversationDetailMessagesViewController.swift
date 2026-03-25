@@ -1455,6 +1455,12 @@ func checkNewConv() {
     /// Convertit l'attributedText du UITextView en une chaîne HTML et en extrait le contenu du <body>.
     func getHTMLMessage() -> String? {
         guard let attributedText = ui_textview_message.attributedText else { return nil }
+
+        let currentText = ui_textview_message.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if currentText.isEmpty || currentText == placeholderTxt {
+            return nil
+        }
+
         do {
             let htmlData = try attributedText.data(
                 from: NSRange(location: 0, length: attributedText.length),
