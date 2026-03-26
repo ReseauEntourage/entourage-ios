@@ -46,7 +46,7 @@ class WelcomeVideoModalViewController: UIViewController {
         // Title
         titleLabel.text = "home_v2_welcome_video_modal_title".localized
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        titleLabel.textColor = UIColor(named: "black")
+        titleLabel.textColor = UIColor.black
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
@@ -54,7 +54,7 @@ class WelcomeVideoModalViewController: UIViewController {
         // Description
         descriptionLabel.text = "home_v2_welcome_video_modal_desc".localized
         descriptionLabel.font = .systemFont(ofSize: 15, weight: .regular)
-        descriptionLabel.textColor = UIColor(named: "grey")
+        descriptionLabel.textColor = UIColor.gray
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(descriptionLabel)
@@ -63,7 +63,7 @@ class WelcomeVideoModalViewController: UIViewController {
         continueButton.setTitle("home_v2_welcome_video_modal_btn".localized, for: .normal)
         continueButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         continueButton.setTitleColor(.white, for: .normal)
-        continueButton.backgroundColor = UIColor(named: "grey") // Disabled state initially
+        continueButton.backgroundColor = UIColor.gray // Disabled state initially
         continueButton.layer.cornerRadius = 24
         continueButton.isEnabled = false
         continueButton.addTarget(self, action: #selector(onContinueTap), for: .touchUpInside)
@@ -116,7 +116,7 @@ class WelcomeVideoModalViewController: UIViewController {
             continueButton.backgroundColor = UIColor(named: "orange_app")
 
             // "Play" visual feedback
-            videoIconImageView.tintColor = UIColor(named: "grey")
+            videoIconImageView.tintColor = UIColor.gray
 
             // Open video URL if needed
             let urlStr = "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" // Placeholder

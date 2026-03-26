@@ -136,7 +136,7 @@ struct HomeWelcomeJourneyView: View {
             // Microcopy
             Text(viewModel.microcopy)
                 .font(.custom("NunitoSans-Regular", size: 13))
-                .foregroundColor(Color("grey"))
+                .foregroundColor(Color.gray)
                 .padding(.horizontal, 20)
 
             if viewModel.isFullyCompleted {
@@ -200,7 +200,7 @@ struct WelcomeJourneyStepView: View {
                         HStack(alignment: .top) {
                             Text(step.title)
                                 .font(.custom("Quicksand-Bold", size: 15))
-                                .foregroundColor(step.state == .completed ? Color("green_logout") : (step.state == .future ? Color("grey") : Color.black))
+                                .foregroundColor(step.state == .completed ? Color("green_logout") : (step.state == .future ? Color.gray : Color.black))
                                 .multilineTextAlignment(.leading)
                             Spacer(minLength: 8)
                             if step.state == .completed {
@@ -224,7 +224,7 @@ struct WelcomeJourneyStepView: View {
 
                         Text(step.subtitle)
                             .font(.custom("NunitoSans-Regular", size: 15))
-                            .foregroundColor(step.state == .completed ? Color("green_logout") : Color("grey"))
+                            .foregroundColor(step.state == .completed ? Color("green_logout") : Color.gray)
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.top, 4)
