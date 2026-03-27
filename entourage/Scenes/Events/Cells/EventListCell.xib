@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +34,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="754" text="Dansons ensemble" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xft-PW-a9b">
-                        <rect key="frame" x="120" y="6" width="136" height="19"/>
+                        <rect key="frame" x="120" y="6" width="128.5" height="17.5"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -54,13 +54,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rU3-kg-lsr">
-                        <rect key="frame" x="139" y="29" width="32" height="18"/>
+                        <rect key="frame" x="139" y="27.5" width="32" height="18"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                         <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1L-Fy-qUf">
-                        <rect key="frame" x="139" y="49" width="32" height="18"/>
+                        <rect key="frame" x="139" y="49" width="32" height="15.5"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                         <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
@@ -73,16 +73,16 @@
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_event_list_date" translatesAutoresizingMaskIntoConstraints="NO" id="AEp-eM-B3w">
-                        <rect key="frame" x="120" y="33" width="11" height="10"/>
+                        <rect key="frame" x="120" y="31.5" width="11" height="10"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_event_list_loc" translatesAutoresizingMaskIntoConstraints="NO" id="cMP-w6-HKs">
-                        <rect key="frame" x="120" y="53" width="11" height="10"/>
+                        <rect key="frame" x="120" y="51.5" width="11" height="10"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_event_list_user" translatesAutoresizingMaskIntoConstraints="NO" id="ck9-si-3WR">
-                        <rect key="frame" x="120" y="73" width="10" height="10"/>
+                        <rect key="frame" x="120" y="71.5" width="10" height="10"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19i-WM-5eN">
-                        <rect key="frame" x="138" y="69" width="32" height="18"/>
+                        <rect key="frame" x="138" y="69" width="32" height="15.5"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                         <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
@@ -95,7 +95,7 @@
                         </constraints>
                     </imageView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="753" text="- Annulé" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xts-IW-R3I">
-                        <rect key="frame" x="339.5" y="6" width="50.5" height="18"/>
+                        <rect key="frame" x="341" y="6" width="49" height="15.5"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                         <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
@@ -105,7 +105,7 @@
                         <color key="backgroundColor" name="noir_alpha_50"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Inscrit.e  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIb-yx-Sqw">
-                        <rect key="frame" x="46" y="72" width="59" height="20"/>
+                        <rect key="frame" x="49" y="72" width="56" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Mqr-Ja-eOG"/>
@@ -132,8 +132,6 @@
                     <constraint firstAttribute="bottom" secondItem="V4x-sb-dCg" secondAttribute="bottom" id="7Lg-G6-aPB"/>
                     <constraint firstItem="VxJ-kc-bBP" firstAttribute="leading" secondItem="q6g-Fy-0d4" secondAttribute="leading" constant="16" id="8VA-bP-f8R"/>
                     <constraint firstItem="MbV-11-mUk" firstAttribute="bottom" secondItem="VxJ-kc-bBP" secondAttribute="bottom" constant="-10" id="8yk-nP-hPa"/>
-                    <constraint firstItem="abc-12-wom" firstAttribute="bottom" secondItem="VxJ-kc-bBP" secondAttribute="bottom" constant="-10" id="jkl-01-wom"/>
-                    <constraint firstItem="abc-12-wom" firstAttribute="leading" secondItem="MbV-11-mUk" secondAttribute="trailing" constant="4" id="mno-23-wom"/>
                     <constraint firstItem="GXp-iK-TW2" firstAttribute="top" secondItem="VxJ-kc-bBP" secondAttribute="top" constant="-3" id="9xS-Ze-KwW"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="19i-WM-5eN" secondAttribute="trailing" constant="8" id="AG1-Yg-hWj"/>
                     <constraint firstItem="cMP-w6-HKs" firstAttribute="leading" secondItem="AEp-eM-B3w" secondAttribute="leading" id="AYw-Iv-zb1"/>
@@ -146,8 +144,10 @@
                     <constraint firstItem="ck9-si-3WR" firstAttribute="leading" secondItem="cMP-w6-HKs" secondAttribute="leading" id="dZe-k3-Vmb"/>
                     <constraint firstItem="wHr-6A-1Ud" firstAttribute="centerX" secondItem="VxJ-kc-bBP" secondAttribute="centerX" id="feb-CB-WKK"/>
                     <constraint firstItem="rU3-kg-lsr" firstAttribute="leading" secondItem="AEp-eM-B3w" secondAttribute="trailing" constant="8" id="ioe-w2-fmf"/>
+                    <constraint firstItem="abc-12-wom" firstAttribute="bottom" secondItem="VxJ-kc-bBP" secondAttribute="bottom" constant="-10" id="jkl-01-wom"/>
                     <constraint firstItem="AEp-eM-B3w" firstAttribute="leading" secondItem="VxJ-kc-bBP" secondAttribute="trailing" constant="10" id="mKM-1P-TCw"/>
                     <constraint firstItem="h1L-Fy-qUf" firstAttribute="leading" secondItem="cMP-w6-HKs" secondAttribute="trailing" constant="8" symbolic="YES" id="mjR-4d-Mom"/>
+                    <constraint firstItem="abc-12-wom" firstAttribute="leading" secondItem="MbV-11-mUk" secondAttribute="trailing" constant="4" id="mno-23-wom"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h1L-Fy-qUf" secondAttribute="trailing" constant="16" id="nce-ac-iOJ"/>
                     <constraint firstItem="MbV-11-mUk" firstAttribute="leading" secondItem="VxJ-kc-bBP" secondAttribute="leading" constant="4" id="nvF-Lu-wzO"/>
                     <constraint firstItem="Xts-IW-R3I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xft-PW-a9b" secondAttribute="trailing" id="pDf-uk-XlH"/>
@@ -184,6 +184,7 @@
     </objects>
     <resources>
         <image name="ic_entoutou_logo_little" width="23" height="23"/>
+        <image name="ic_entoutou_logo_woman" width="218" height="208"/>
         <image name="ic_event_canceled" width="20" height="20"/>
         <image name="ic_event_list_date" width="10" height="10"/>
         <image name="ic_event_list_loc" width="11" height="10"/>
@@ -202,7 +203,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="0.51999998092651367" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
-            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.59215686274509804" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
