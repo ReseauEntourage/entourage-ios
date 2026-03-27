@@ -258,6 +258,7 @@ enum MJAlertTAG {
     case Logout
     case None
     case AcceptAdd
+    case DeleteEvent
     case welcomeMessage
 }
 

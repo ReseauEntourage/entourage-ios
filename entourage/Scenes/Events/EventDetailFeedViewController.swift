@@ -298,8 +298,16 @@ class EventDetailFeedViewController: UIViewController {
             self.event = event
             AppSignableManager.shared.updateFromEvent(event: event!)
             self.eventId = event?.uid ?? 0
+
+            // Nouveau format du bouton flottant en bas
             if event?.isMember ?? false {
-                self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_conversation".localized)
+                if event?.author?.uid == UserDefaults.currentUser?.sid {
+                    // Auteur : "Annuler l'événement"
+                    self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_params_cancel".localized)
+                } else {
+                    // Participant : "Quitter l'événement" (as requested: "quitter l'evenement" according to user clarifying: "yes use the Annuler wording only for the deleting button")
+                    self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_params_quit".localized)
+                }
                 self.ui_btn_participate_and_see_conv.isHidden = false
             }else{
                 self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "go_to_event_conversation".localized)
@@ -439,7 +447,36 @@ class EventDetailFeedViewController: UIViewController {
     
     @objc func button_join_leave_see(){
         AnalyticsLoggerManager.logEvent(name: Event_detail_action_participate)
-        joinLeaveEvent()
+        guard let currentUserId = UserDefaults.currentUser?.sid else { return }
+
+        if event?.isMember ?? false {
+            if event?.author?.uid == currentUserId {
+                // Delete Event
+                let customAlert = MJAlertController()
+                let buttonAccept = MJAlertButtonType(title: "params_cancel_event_pop_bt_delete".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+                let buttonCancel = MJAlertButtonType(title: "params_cancel_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+
+                customAlert.configureAlert(alertTitle: "params_cancel_event_pop_title".localized, message: "params_cancel_event_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+
+                customAlert.alertTagName = .DeleteEvent
+                customAlert.delegate = self
+                customAlert.show()
+            } else {
+                // Quit Event
+                let customAlert = MJAlertController()
+                let buttonAccept = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+                let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+
+                customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+
+                customAlert.alertTagName = .None
+                customAlert.delegate = self
+                customAlert.show()
+            }
+        } else {
+            // Join Event
+            joinLeaveEvent()
+        }
     }
     
     @IBAction func action_join(_ sender: Any) {
@@ -667,6 +704,18 @@ extension EventDetailFeedViewController: MJAlertControllerDelegate {
             self.sendLeaveGroup()
         }
         
+        // Tag .DeleteEvent => confirmation pour annuler/supprimer
+        if alertTag == .DeleteEvent {
+            SVProgressHUD.show()
+            EventService.cancelEvent(eventId: eventId) { event, error in
+                SVProgressHUD.dismiss()
+                if error == nil {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+                    self.navigationController?.dismiss(animated: true)
+                }
+            }
+        }
+
         // Paramètres pour autoriser l’accès au calendrier
         if alertTag == .AcceptSettings {
             if let url = URL(string: UIApplication.openSettingsURLString) {

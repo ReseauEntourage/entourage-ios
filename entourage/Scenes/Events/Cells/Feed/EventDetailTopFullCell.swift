@@ -37,9 +37,12 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_view_association: UIView!
     @IBOutlet weak var ui_label_association: UILabel!
     @IBOutlet weak var ui_btn_share: UIButton!
-    @IBOutlet weak var ui_btn_participate: UIButton!
     @IBOutlet weak var ui_button_go_to_discussion: UIButton!
+    @IBOutlet weak var ui_view_discussion_box: UIView!
     @IBOutlet weak var ui_height_map_view: NSLayoutConstraint!
+    @IBOutlet weak var ui_constraint_discussion_box_top: NSLayoutConstraint!
+    @IBOutlet weak var ui_constraint_discussion_box_bottom: NSLayoutConstraint!
+    @IBOutlet weak var ui_constraint_discussion_box_height: NSLayoutConstraint!
     
     @IBOutlet weak var ui_btn_agenda: UIButton!
     // **Nouvelle IBOutlet** pour la carte
@@ -97,12 +100,12 @@ class EventDetailTopFullCell: UITableViewCell {
         
         ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
         configureWhiteButton(self.ui_btn_share, withTitle: "neighborhood_add_post_send_button".localized)
-        configureWhiteButton(self.ui_btn_participate, withTitle: "event_detail_button_participe_ON".localized)
         configureWhiteButton(self.ui_btn_agenda, withTitle: "event_button_add_calendar".localized)
         configureOrangeButton(self.ui_button_go_to_discussion, withTitle: "event_conversation".localized)
-        
+        self.ui_view_discussion_box.layer.cornerRadius = 20
+        self.ui_view_discussion_box.backgroundColor = UIColor.appBeigeClair
+
         self.ui_btn_agenda.addTarget(self, action: #selector(onAgendaClick), for: .touchUpInside)
-        self.ui_btn_participate.addTarget(self, action: #selector(onParticipateClick), for: .touchUpInside)
         
         // **Initialisation de la carte**
         ui_mapview.delegate = self
@@ -159,8 +162,16 @@ class EventDetailTopFullCell: UITableViewCell {
         self.delegate = delegate
         if event?.isMember ?? false {
             self.ui_btn_agenda.isHidden = false
+            self.ui_view_discussion_box.isHidden = false
+            self.ui_constraint_discussion_box_top?.constant = 20
+            self.ui_constraint_discussion_box_bottom?.constant = 20
+            self.ui_constraint_discussion_box_height?.constant = 136
         }else{
             self.ui_btn_agenda.isHidden = true
+            self.ui_view_discussion_box.isHidden = true
+            self.ui_constraint_discussion_box_top?.constant = 0
+            self.ui_constraint_discussion_box_bottom?.constant = 0
+            self.ui_constraint_discussion_box_height?.constant = 0
         }
         
         ui_img_member_1.isHidden = true
