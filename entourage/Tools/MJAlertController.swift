@@ -183,7 +183,12 @@ class MJAlertController: UIViewController {
         }
         
         initButton(button: ui_button_right, butttonType: buttonRightType)
-        configureWhiteButton(self.ui_button_left, withTitle: choice2 ?? "cancel".localized)
+
+        if hasChoice {
+            configureWhiteButton(self.ui_button_left, withTitle: choice2 ?? "cancel".localized)
+        } else if let buttonLeftType = buttonLeftType {
+            configureWhiteButton(self.ui_button_left, withTitle: buttonLeftType.title)
+        }
     }
     
     private func initButton(button:UIButton, butttonType:MJAlertButtonType) {
