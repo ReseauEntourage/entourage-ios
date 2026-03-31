@@ -100,11 +100,25 @@ import UIKit
     
     static func validatePhoneFormat(countryCode:String?, phone:String) -> String {
         var correctPhone = phone.trimmingCharacters(in: .whitespaces)
+        var appliedCountryCode = countryCode
+
+        // Auto-detect DOM-TOM prefixes if France is selected or no country code is provided
+        if appliedCountryCode == "+33" || appliedCountryCode == nil {
+            if correctPhone.hasPrefix("0690") || correctPhone.hasPrefix("0691") {
+                appliedCountryCode = "+590"
+            } else if correctPhone.hasPrefix("0696") || correctPhone.hasPrefix("0697") {
+                appliedCountryCode = "+596"
+            } else if correctPhone.hasPrefix("0694") {
+                appliedCountryCode = "+594"
+            } else if correctPhone.hasPrefix("0692") || correctPhone.hasPrefix("0693") || correctPhone.hasPrefix("0639") {
+                appliedCountryCode = "+262"
+            }
+        }
         
         if correctPhone.starts(with: "0") {
             //correctPhone.remove(at: .init(encodedOffset: 0))
             correctPhone.remove(at: .init(utf16Offset: 0, in: correctPhone))
-            if let _code = countryCode {
+            if let _code = appliedCountryCode {
                 correctPhone = _code + correctPhone
             }
             else {
@@ -112,7 +126,7 @@ import UIKit
             }
         }
         else if !correctPhone.starts(with: "+") {
-            if let _code = countryCode {
+            if let _code = appliedCountryCode {
                 correctPhone = _code + correctPhone
             }
         }
