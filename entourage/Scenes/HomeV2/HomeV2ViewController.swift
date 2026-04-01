@@ -72,6 +72,7 @@ class HomeV2ViewController: UIViewController {
     var userSmallTalkRequests: [UserSmallTalkRequest] = []
     private var hasRunEntryGating = false
     private var hasShownCompletionStateThisSession = false
+    private var hasInitiallyCompletedAll: Bool? = nil
 
 
     
@@ -414,38 +415,27 @@ class HomeV2ViewController: UIViewController {
         }
 
         let welcomeJourneyVM = WelcomeJourneyViewModel()
-        welcomeJourneyVM.update(with: userHome.events)
+        welcomeJourneyVM.update(with: userHome.events, hasInitiallyCompletedAll: &self.hasInitiallyCompletedAll)
 
         let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
 
-        // Show block if:
-        // 1. Not completed yet
-        // 2. Or completed, but we just showed the celebration in this session, so it stays until next reload
-        if welcomeJourneyVM.completedCount < 3 {
+        if !welcomeJourneyVM.hideEntirely {
             tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
-            self.hasShownCompletionStateThisSession = false
-        } else if welcomeJourneyVM.completedCount >= 3 && self.hasShownCompletionStateThisSession {
-            tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
-        }
 
-        // If it's completed now and we haven't shown the celebration yet, show it!
-        if welcomeJourneyVM.completedCount >= 3 && !hasShownCelebration {
-            UserDefaults.standard.set(true, forKey: "hasShownWelcomeCelebration")
-            self.hasShownCompletionStateThisSession = true
+            // Celebration logic
+            if welcomeJourneyVM.isFullyCompleted && !hasShownCelebration {
+                UserDefaults.standard.set(true, forKey: "hasShownWelcomeCelebration")
+                self.hasShownCompletionStateThisSession = true
 
-            // Add the cell back because we want it to stay for this session with the "Intégration complète !" text
-            if !tableDTO.contains(where: {
-                if case .cellWelcomeJourney = $0 { return true }
-                return false
-            }) {
-                tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
-            }
-
-            DispatchQueue.main.async {
-                let celebrationVC = WelcomeJourneyCelebrationPopupViewController()
-                celebrationVC.modalPresentationStyle = .overFullScreen
-                celebrationVC.modalTransitionStyle = .crossDissolve
-                self.present(celebrationVC, animated: true)
+                DispatchQueue.main.async {
+                    let celebrationVC = WelcomeJourneyCelebrationPopupViewController()
+                    celebrationVC.modalPresentationStyle = .overFullScreen
+                    celebrationVC.modalTransitionStyle = .crossDissolve
+                    celebrationVC.onDismiss = { [weak self] in
+                        self?.configureDTO()
+                    }
+                    self.present(celebrationVC, animated: true)
+                }
             }
         }
 
@@ -665,39 +655,22 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             modalVC.onComplete = { [weak self] in
                 self?.configureDTO() // Refresh home after video is watched locally
             }
+            modalVC.onDismissOnly = { [weak self] in
+                self?.configureDTO() // Refresh in case API call succeeded and finished
+            }
             self.present(modalVC, animated: true)
 
         case .webinar:
-            SVProgressHUD.show()
-            EventService.getWelcomeEvent { [weak self] event in
-                SVProgressHUD.dismiss()
-                if let event = event {
-                    self?.showEvent(eventId: event.uid, event: event)
-                } else {
-                    EventService.getWebinarEvent { [weak self] event in
-                        if let event = event {
-                            self?.showEvent(eventId: event.uid, event: event)
-                        } else {
-                            if let url = URL(string: "https://www.entourage.social/app/outings/webinar") {
-                                WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
-                            }
-                        }
-                    }
-                }
-            }
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .webinar
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
 
         case .papotages:
-            SVProgressHUD.show()
-            EventService.getPapotagesEvent { [weak self] event in
-                SVProgressHUD.dismiss()
-                if let event = event {
-                    self?.showEvent(eventId: event.uid, event: event)
-                } else {
-                    if let url = URL(string: "https://www.entourage.social/app/outings/papotages") {
-                        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
-                    }
-                }
-            }
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .papotages
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
     }
 

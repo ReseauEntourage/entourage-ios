@@ -1,5 +1,5 @@
 import UIKit
-import SwiftUI
+import WebKit
 
 class WelcomeVideoModalViewController: UIViewController {
 
@@ -7,17 +7,34 @@ class WelcomeVideoModalViewController: UIViewController {
     private let containerView = UIView()
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let videoPlaceholderView = UIView()
-    private let videoIconImageView = UIImageView()
+    private let webViewContainer = UIView()
+    private var webView: WKWebView?
     private let continueButton = UIButton(type: .system)
+    private let closeImageView = UIImageView()
 
     var onComplete: (() -> Void)?
-    private var isVideoClicked = false
+    var onDismissOnly: (() -> Void)? // Triggered when modal is dismissed, useful to refresh home
+    private var countdownTimer: Timer?
+    private var secondsRemaining = 5
+    private var originalButtonText = "home_v2_welcome_video_modal_btn".localized
+
+    // Data from Backend
+    private var welcomeVideoUrl: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupConstraints()
+        fetchVideoResource()
+        startCountdown()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        countdownTimer?.invalidate()
+        webView?.stopLoading()
+        webView = nil
+        onDismissOnly?()
     }
 
     private func setupView() {
@@ -29,19 +46,16 @@ class WelcomeVideoModalViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
 
-        // Video Placeholder
-        videoPlaceholderView.backgroundColor = UIColor(named: "orange_light_a50")?.withAlphaComponent(0.3)
-        videoPlaceholderView.layer.cornerRadius = 16
-        videoPlaceholderView.translatesAutoresizingMaskIntoConstraints = false
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onVideoTap))
-        videoPlaceholderView.addGestureRecognizer(tapGesture)
-        containerView.addSubview(videoPlaceholderView)
-
-        // Video Icon
-        videoIconImageView.image = UIImage(systemName: "play.circle.fill")
-        videoIconImageView.tintColor = UIColor(named: "orange_app")
-        videoIconImageView.translatesAutoresizingMaskIntoConstraints = false
-        videoPlaceholderView.addSubview(videoIconImageView)
+        // Close Icon
+        closeImageView.image = UIImage(named: "icon_cross")?.withRenderingMode(.alwaysTemplate)
+        if closeImageView.image == nil {
+            closeImageView.image = UIImage(systemName: "xmark") // Fallback
+        }
+        closeImageView.tintColor = .gray
+        closeImageView.isUserInteractionEnabled = true
+        closeImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onClose)))
+        closeImageView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(closeImageView)
 
         // Title
         titleLabel.text = "home_v2_welcome_video_modal_title".localized
@@ -50,6 +64,21 @@ class WelcomeVideoModalViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
+
+        // Video Placeholder / WebView
+        webViewContainer.backgroundColor = UIColor.black
+        webViewContainer.layer.cornerRadius = 16
+        webViewContainer.clipsToBounds = true
+        webViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(webViewContainer)
+
+        let config = WKWebViewConfiguration()
+        config.allowsInlineMediaPlayback = true
+        let wv = WKWebView(frame: .zero, configuration: config)
+        wv.translatesAutoresizingMaskIntoConstraints = false
+        wv.backgroundColor = .black
+        webViewContainer.addSubview(wv)
+        self.webView = wv
 
         // Description
         descriptionLabel.text = "home_v2_welcome_video_modal_desc".localized
@@ -60,7 +89,7 @@ class WelcomeVideoModalViewController: UIViewController {
         containerView.addSubview(descriptionLabel)
 
         // Continue Button
-        continueButton.setTitle("home_v2_welcome_video_modal_btn".localized, for: .normal)
+        continueButton.setTitle("\(originalButtonText) (\(secondsRemaining))", for: .normal)
         continueButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         continueButton.setTitleColor(.white, for: .normal)
         continueButton.backgroundColor = UIColor.gray // Disabled state initially
@@ -74,6 +103,13 @@ class WelcomeVideoModalViewController: UIViewController {
         let bgTap = UITapGestureRecognizer(target: self, action: #selector(onClose))
         view.addGestureRecognizer(bgTap)
         containerView.addGestureRecognizer(UITapGestureRecognizer()) // Prevent tap on modal from closing
+
+        NSLayoutConstraint.activate([
+            wv.topAnchor.constraint(equalTo: webViewContainer.topAnchor),
+            wv.bottomAnchor.constraint(equalTo: webViewContainer.bottomAnchor),
+            wv.leadingAnchor.constraint(equalTo: webViewContainer.leadingAnchor),
+            wv.trailingAnchor.constraint(equalTo: webViewContainer.trailingAnchor)
+        ])
     }
 
     private func setupConstraints() {
@@ -82,21 +118,21 @@ class WelcomeVideoModalViewController: UIViewController {
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 
-            videoPlaceholderView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            videoPlaceholderView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            videoPlaceholderView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            videoPlaceholderView.heightAnchor.constraint(equalToConstant: 180),
+            closeImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            closeImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            closeImageView.widthAnchor.constraint(equalToConstant: 24),
+            closeImageView.heightAnchor.constraint(equalToConstant: 24),
 
-            videoIconImageView.centerXAnchor.constraint(equalTo: videoPlaceholderView.centerXAnchor),
-            videoIconImageView.centerYAnchor.constraint(equalTo: videoPlaceholderView.centerYAnchor),
-            videoIconImageView.widthAnchor.constraint(equalToConstant: 60),
-            videoIconImageView.heightAnchor.constraint(equalToConstant: 60),
-
-            titleLabel.topAnchor.constraint(equalTo: videoPlaceholderView.bottomAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            titleLabel.trailingAnchor.constraint(equalTo: closeImageView.leadingAnchor, constant: -8),
 
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            webViewContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            webViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            webViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            webViewContainer.heightAnchor.constraint(equalTo: webViewContainer.widthAnchor, multiplier: 9.0/16.0),
+
+            descriptionLabel.topAnchor.constraint(equalTo: webViewContainer.bottomAnchor, constant: 24),
             descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
 
@@ -108,27 +144,61 @@ class WelcomeVideoModalViewController: UIViewController {
         ])
     }
 
-    @objc private func onVideoTap() {
-        if !isVideoClicked {
-            isVideoClicked = true
-            // Enable button
-            continueButton.isEnabled = true
-            continueButton.backgroundColor = UIColor(named: "orange_app")
+    private func fetchVideoResource() {
+        HomeService.getWelcomeResource { [weak self] pedago, error in
+            guard let self = self, let pedago = pedago else { return }
+            self.welcomeVideoUrl = pedago.url
+            if let url = self.welcomeVideoUrl {
+                self.loadCleanVideo(url: url)
+            }
+        }
+    }
 
-            // "Play" visual feedback
-            videoIconImageView.tintColor = UIColor.gray
+    private func loadCleanVideo(url: String) {
+        guard let webView = self.webView else { return }
+        let cleanUrl = url.contains("?") ? "\(url)&rel=0" : "\(url)?rel=0"
+        let customHtml = """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+                <style>
+                    body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #000000; overflow: hidden; }
+                    iframe { width: 100%; height: 100%; border: none; }
+                </style>
+            </head>
+            <body>
+                <iframe src="\(cleanUrl)" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            </body>
+            </html>
+        """
+        webView.loadHTMLString(customHtml, baseURL: URL(string: "https://www.entourage.social"))
+    }
 
-            // Open video URL if needed
-            let urlStr = "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" // Placeholder
-            if let url = URL(string: urlStr) {
-                // WebLinkManager.openUrlInApp(url: url, presenterViewController: self)
-                // We just mock it for now since the video is "à venir"
+    private func startCountdown() {
+        secondsRemaining = 5
+        continueButton.isEnabled = false
+        continueButton.backgroundColor = .gray
+        continueButton.setTitle("\(originalButtonText) (\(secondsRemaining))", for: .normal)
+
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            guard let self = self else {
+                timer.invalidate()
+                return
+            }
+            self.secondsRemaining -= 1
+            if self.secondsRemaining > 0 {
+                self.continueButton.setTitle("\(self.originalButtonText) (\(self.secondsRemaining))", for: .normal)
+            } else {
+                self.continueButton.setTitle(self.originalButtonText, for: .normal)
+                self.continueButton.isEnabled = true
+                self.continueButton.backgroundColor = UIColor(named: "orange_app")
+                timer.invalidate()
             }
         }
     }
 
     @objc private func onContinueTap() {
-        // Mark as watched locally
         UserDefaults.standard.set(true, forKey: "hasWatchedWelcomeVideo")
         UserDefaults.standard.synchronize()
 
