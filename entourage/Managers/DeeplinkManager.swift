@@ -341,17 +341,11 @@ struct DeepLinkManager {
     }
 
     static func showWelcomeEvent() {
-        EventService.getWelcomeEvent { event in
-            guard let event = event else { return }
-            DispatchQueue.main.async {
-                if let navVc = UIStoryboard(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
-                    vc.eventId = event.uid
-                    vc.event = event
-                    vc.isAfterCreation = false
-                    vc.modalPresentationStyle = .fullScreen
-                    AppState.getTopViewController()?.present(navVc, animated: true)
-                }
-            }
+        DispatchQueue.main.async {
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .firstStep
+            vc.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
     static func showWelcomeTwo(){
@@ -690,17 +684,11 @@ struct DeepLinkManager {
     }
 
     static func showWelcomeWebinar() {
-        EventService.getWebinarEvent { event in
-            guard let event = event else { return }
-            DispatchQueue.main.async {
-                if let navVc = UIStoryboard(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
-                    vc.eventId = event.uid
-                    vc.event = event
-                    vc.isAfterCreation = false
-                    vc.modalPresentationStyle = .fullScreen
-                    AppState.getTopViewController()?.present(navVc, animated: true)
-                }
-            }
+        DispatchQueue.main.async {
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .webinar
+            vc.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
     
