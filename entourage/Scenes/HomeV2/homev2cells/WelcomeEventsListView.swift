@@ -126,18 +126,22 @@ struct EventListCellWrap: View {
         HStack(alignment: .top, spacing: 12) {
             // Image
             ZStack(alignment: .topTrailing) {
-                if let urlString = event.metadata?.landscapeUrl, let url = URL(string: urlString) {
-                    AsyncImage(url: url) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        Image("ic_event_placeholder")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
+                if let urlString = event.metadata?.landscape_url, let url = URL(string: urlString) {
+                    if #available(iOS 15.0, *) {
+                        AsyncImage(url: url) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        } placeholder: {
+                            Image("ic_event_placeholder")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        }
+                        .frame(width: 100, height: 120)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                    } else {
+                        // Fallback on earlier versions
                     }
-                    .frame(width: 100, height: 120)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
                 } else {
                     Image("ic_event_placeholder")
                         .resizable()
@@ -147,12 +151,12 @@ struct EventListCellWrap: View {
                 }
 
                 // Entourage logo or Woman logo
-                if event.metadata?.is_reserved_female == true {
+                if event.metadata?.reservedFemale == true {
                     Image("ic_entoutou_logo_woman")
                         .resizable()
                         .frame(width: 24, height: 24)
                         .padding(4)
-                } else if event.author?.roles?.contains("Équipe Entourage") == true || event.author?.roles?.contains("Animateur Entourage") == true {
+                } else if event.author?.communityRoles?.contains("Équipe Entourage") == true || event.author?.communityRoles?.contains("Animateur Entourage") == true {
                     Image("ic_entourage_little")
                         .resizable()
                         .frame(width: 24, height: 24)
@@ -168,14 +172,16 @@ struct EventListCellWrap: View {
                     .lineLimit(2)
 
                 // Date
-                if let startDate = event.metadata?.startsAt {
-                    Text(Utils.formatEventDateWithTime(date: startDate))
+                if let startDateString = event.metadata?.starts_at,
+                   let startDate = Utils.getDateFromWSDateString(startDateString) {
+                    
+                    Text(Utils.formatEventDateTime(date: startDate))
                         .font(.custom("NunitoSans-Regular", size: 13))
                         .foregroundColor(.gray)
                 }
 
                 // Place
-                if let address = event.metadata?.displayAddress {
+                if let address = event.metadata?.display_address {
                     let addressCondensed = address.components(separatedBy: ",").last ?? address
                     Text(addressCondensed.trimmingCharacters(in: .whitespaces))
                         .font(.custom("NunitoSans-Regular", size: 13))
