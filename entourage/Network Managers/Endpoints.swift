@@ -79,6 +79,7 @@ let API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD = "contributions/presigned_upload?token
 let kAPIHomeSummary = "home/summary?token=%@"
 let kAPIHomeResources = "resources?token=%@"
 let kAPIHomeInitialResources = "resources/home?token=%@"
+let kAPIHomeWelcomeResource = "resources/welcome?token=%@"
 let kAPIHomeGetResource = "resources/%@?token=%@"
 let kAPIHomeResourceRead = "resources/%d/users?token=%@"
 let kAPIHomeWebRecoRead = "webviews/url?url=%@&token=%@"

@@ -25,16 +25,31 @@ struct WelcomeJourneyStep {
 
 class WelcomeJourneyViewModel: ObservableObject {
     @Published var steps: [WelcomeJourneyStep] = []
+    @Published var isFullyCompleted: Bool = false
+    @Published var hideEntirely: Bool = false
 
-    // Callbacks to trigger navigation in UIKit
     var onStepTapped: ((WelcomeJourneyStepType) -> Void)?
 
-    func update(with userEvents: [String]?) {
+    func update(with userEvents: [String]?, hasInitiallyCompletedAll: inout Bool?) {
         let events = userEvents ?? []
 
         let hasWatchedVideo = UserDefaults.standard.bool(forKey: "hasWatchedWelcomeVideo") || events.contains("onboarding.resource.welcome_watched")
         let hasJoinedWebinar = events.contains("onboarding.outing.webinar_or_first_steps")
         let hasJoinedPapotages = events.contains("onboarding.outing.papotages")
+
+        let allCompleted = hasWatchedVideo && hasJoinedWebinar && hasJoinedPapotages
+
+        if hasInitiallyCompletedAll == nil {
+            hasInitiallyCompletedAll = allCompleted
+        }
+
+        if hasInitiallyCompletedAll == true {
+            self.hideEntirely = true
+            return
+        }
+
+        self.hideEntirely = false
+        self.isFullyCompleted = allCompleted
 
         var step1State: WelcomeJourneyStepState = hasWatchedVideo ? .completed : .active
         var step2State: WelcomeJourneyStepState = .future
@@ -92,87 +107,87 @@ class WelcomeJourneyViewModel: ObservableObject {
         default: return "home_v2_welcome_microcopy_3".localized
         }
     }
-
-    var isFullyCompleted: Bool {
-        return completedCount >= 3
-    }
 }
 
 struct HomeWelcomeJourneyView: View {
     @ObservedObject var viewModel: WelcomeJourneyViewModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            // Header
-            HStack(alignment: .bottom) {
-                Text("home_v2_welcome_title".localized)
-                    .font(.custom("Quicksand-Bold", size: 20))
-                    .foregroundColor(Color(UIColor.darkGray))
-                Spacer()
-                Text("\(viewModel.completedCount)/\(viewModel.steps.count)")
-                    .font(.custom("Quicksand-Bold", size: 15))
-                    .foregroundColor(Color("orange_app"))
-            }
-            .padding(.horizontal, 20)
-
-            // Progress Bar
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 6)
-                        .fill(Color(UIColor.systemGray5))
-                        .frame(height: 8)
-
-                    let progressWidth = geometry.size.width * CGFloat(viewModel.completedCount) / CGFloat(max(1, viewModel.steps.count))
-
-                    RoundedRectangle(cornerRadius: 6)
-                        .fill(Color("orange_app"))
-                        .frame(width: progressWidth, height: 8)
-                        .animation(.easeInOut, value: viewModel.completedCount)
-                }
-            }
-            .frame(height: 8)
-            .padding(.horizontal, 20)
-
-            // Microcopy
-            Text(viewModel.microcopy)
-                .font(.custom("NunitoSans-Regular", size: 13))
-                .foregroundColor(Color.gray)
-                .padding(.horizontal, 20)
-
-            if viewModel.isFullyCompleted {
-                // Success Layout
-                VStack(spacing: 0) {
-                    Text("home_v2_welcome_microcopy_3".localized)
+        if viewModel.hideEntirely {
+            EmptyView()
+        } else {
+            VStack(alignment: .leading, spacing: 16) {
+                // Header
+                HStack(alignment: .bottom) {
+                    Text("home_v2_welcome_title".localized)
+                        .font(.custom("Quicksand-Bold", size: 20))
+                        .foregroundColor(Color(UIColor.darkGray))
+                    Spacer()
+                    Text("\(viewModel.completedCount)/\(max(viewModel.steps.count, 3))")
                         .font(.custom("Quicksand-Bold", size: 15))
-                        .foregroundColor(Color("green_logout"))
-                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color("orange_app"))
                 }
-                .padding(16)
-                .frame(maxWidth: .infinity)
-                .background(Color("green_light").opacity(0.15))
-                .cornerRadius(12)
                 .padding(.horizontal, 20)
-                .padding(.bottom, 20)
-            } else {
-                // Steps List
-                VStack(spacing: 12) {
-                    ForEach(viewModel.steps.indices, id: \.self) { index in
-                        let step = viewModel.steps[index]
-                        WelcomeJourneyStepView(step: step) {
-                            if step.state == .active {
-                                viewModel.onStepTapped?(step.type)
-                            }
-                        }
-                        .disabled(step.state != .active)
+
+                // Progress Bar
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(Color(UIColor.systemGray5))
+                            .frame(height: 8)
+
+                        let progressWidth = geometry.size.width * CGFloat(viewModel.completedCount) / CGFloat(max(1, max(viewModel.steps.count, 3)))
+
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(Color("orange_app"))
+                            .frame(width: progressWidth, height: 8)
+                            .animation(.easeInOut, value: viewModel.completedCount)
                     }
                 }
+                .frame(height: 8)
                 .padding(.horizontal, 20)
-                .padding(.bottom, 20)
+
+                // Microcopy
+                Text(viewModel.microcopy)
+                    .font(.custom("NunitoSans-Regular", size: 13))
+                    .foregroundColor(Color.gray)
+                    .padding(.horizontal, 20)
+
+                if viewModel.isFullyCompleted {
+                    // Success Layout
+                    VStack(spacing: 0) {
+                        Text("home_v2_welcome_microcopy_3".localized)
+                            .font(.custom("Quicksand-Bold", size: 15))
+                            .foregroundColor(Color("green_logout"))
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(16)
+                    .frame(maxWidth: .infinity)
+                    .background(Color("green_light").opacity(0.15))
+                    .cornerRadius(12)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
+                } else {
+                    // Steps List
+                    VStack(spacing: 12) {
+                        ForEach(viewModel.steps.indices, id: \.self) { index in
+                            let step = viewModel.steps[index]
+                            WelcomeJourneyStepView(step: step) {
+                                if step.state == .active {
+                                    viewModel.onStepTapped?(step.type)
+                                }
+                            }
+                            .disabled(step.state != .active)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
+                }
             }
+            .padding(.top, 20)
+            .background(Color("white_orange_home")) // matches the table view background
+            .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(.top, 20)
-        .background(Color("white_orange_home")) // matches the table view background
-        .fixedSize(horizontal: false, vertical: true)
     }
 }
 
