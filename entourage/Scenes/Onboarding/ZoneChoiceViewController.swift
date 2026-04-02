@@ -56,20 +56,16 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private let mapView = MKMapView()
 
     // --- NOUVEAUX ÉLÉMENTS UI (Structure imbriquée pour le bimatière) ---
-    // Stack Principale (Horizontale) : [Icone] | [Bloc Texte Vertical]
     private let eventsMainStackView = UIStackView()
     private let eventIconView = UIImageView()
     
-    // Bloc Texte (Vertical) : [Ligne Orange] \n [Ligne Noire]
     private let textVerticalStackView = UIStackView()
     
-    // Ligne Orange (Horizontale) : [Chiffre] [Suffixe]
     private let orangeLineStackView = UIStackView()
-    private let eventsCountLabel = UILabel()         // "3" (Animé)
-    private let eventsOrangeSuffixLabel = UILabel()  // " événements potentiels par semaine,"
+    private let eventsCountLabel = UILabel()
+    private let eventsOrangeSuffixLabel = UILabel()
     
-    // Ligne Noire
-    private let eventsBlackLabel = UILabel()         // "dans ce périmètre."
+    private let eventsBlackLabel = UILabel()
     // ---------------------------------------------------------------------
 
     private let bottomBar = UIView()
@@ -98,12 +94,13 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     ) {
         self.initialCoordinate = initialCoordinate
         self.initialLabel = initialLabel
-        self.initialRadiusKm = initialRadiusKm
+        // SECURITE ANTI-CRASH: Evite un rayon invalide au lancement (<=0)
+        self.initialRadiusKm = max(1, initialRadiusKm)
         self.delegate = delegate
         self.nextStep = nextStep
         self.onConfirmClosure = onConfirm
         self.onCancelClosure = onCancel
-        self.currentRadiusKm = initialRadiusKm
+        self.currentRadiusKm = max(1, initialRadiusKm)
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .fullScreen
     }
@@ -122,7 +119,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         setupCitySection()
         setupRadiusSection()
         setupMap()
-        setupPotentialEventsUI() // Mise à jour de l'UI ici
+        setupPotentialEventsUI()
         setupBottomBar()
         setupInitialState()
     }
@@ -244,7 +241,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
         slider.minimumValue = 1
         slider.maximumValue = 100
-        slider.value = Float(initialRadiusKm)
+        slider.value = Float(currentRadiusKm)
         slider.minimumTrackTintColor = UIColor.appOrange
         slider.maximumTrackTintColor = UIColor(white: 0.85, alpha: 1.0)
         slider.thumbTintColor = .white
@@ -305,17 +302,14 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         ])
     }
 
-    // --- MISE À JOUR : STRUCTURE BIMATIÈRE (Orange & Bold / Black & Regular) ---
     private func setupPotentialEventsUI() {
-        // 1. Stack Principale (Icone + Bloc Texte)
         eventsMainStackView.axis = .horizontal
         eventsMainStackView.alignment = .top
         eventsMainStackView.distribution = .fill
         eventsMainStackView.spacing = 8
-        eventsMainStackView.isHidden = true // Caché par défaut
+        eventsMainStackView.isHidden = true
         
-        // 2. Icone
-        eventIconView.image = UIImage(named: "ic_calendar_zone") // Assure-toi que l'image existe
+        eventIconView.image = UIImage(named: "ic_calendar_zone")
         eventIconView.tintColor = UIColor.appOrange
         eventIconView.contentMode = .scaleAspectFit
         eventIconView.translatesAutoresizingMaskIntoConstraints = false
@@ -324,22 +318,18 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             eventIconView.heightAnchor.constraint(equalToConstant: 20)
         ])
         
-        // 3. Bloc Texte Vertical (Ligne Orange \n Ligne Noire)
         textVerticalStackView.axis = .vertical
         textVerticalStackView.alignment = .leading
         textVerticalStackView.spacing = 2
         
-        // --- LIGNE ORANGE (Chiffre + Suffixe) ---
         orangeLineStackView.axis = .horizontal
-        orangeLineStackView.alignment = .firstBaseline // Aligne le texte sur la ligne de base
+        orangeLineStackView.alignment = .firstBaseline
         orangeLineStackView.spacing = 4
         
-        // Label Chiffre (Celui qui s'anime) -> ORANGE + BOLD
         eventsCountLabel.font = UIFont(name: "Quicksand-Bold", size: 15)
         eventsCountLabel.textColor = UIColor.appOrange
         eventsCountLabel.text = "0"
         
-        // Label Suffixe (" événements potentiels par semaine,") -> ORANGE + BOLD
         eventsOrangeSuffixLabel.font = UIFont(name: "Quicksand-Bold", size: 15)
         eventsOrangeSuffixLabel.textColor = UIColor.appOrange
         eventsOrangeSuffixLabel.text = NSLocalizedString("onboarding_zone_potential_event_plural", comment: "")
@@ -347,14 +337,11 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         orangeLineStackView.addArrangedSubview(eventsCountLabel)
         orangeLineStackView.addArrangedSubview(eventsOrangeSuffixLabel)
         
-        // --- LIGNE NOIRE ("dans ce périmètre.") ---
-        // -> BLACK + REGULAR
         eventsBlackLabel.font = UIFont(name: "NunitoSans-Regular", size: 15)
         eventsBlackLabel.textColor = UIColor(white: 0.1, alpha: 1.0)
         eventsBlackLabel.numberOfLines = 0
         eventsBlackLabel.text = "dans ce périmètre."
         
-        // Assemblage
         textVerticalStackView.addArrangedSubview(orangeLineStackView)
         textVerticalStackView.addArrangedSubview(eventsBlackLabel)
         
@@ -364,7 +351,6 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
         contentView.addSubview(eventsMainStackView)
         eventsMainStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        // Contraintes (Alignement avec la Map)
         NSLayoutConstraint.activate([
             eventsMainStackView.topAnchor.constraint(equalTo: mapContainerView.bottomAnchor, constant: 16),
             eventsMainStackView.leadingAnchor.constraint(equalTo: mapContainerView.leadingAnchor),
@@ -372,7 +358,6 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             eventsMainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
-    // -----------------------------------------------------
 
     private func fetchWeekAverage() {
         guard let coord = selectedCoord else { return }
@@ -384,8 +369,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
             if let avg = average, avg > 0 {
                 let rounded = Int(avg.rounded())
                 if rounded > 0 {
-                    self.eventsMainStackView.isHidden = false // On affiche la stack principale
-                    // L'animation ne touche que le chiffre, le reste est statique dans les autres labels
+                    self.eventsMainStackView.isHidden = false
                     self.eventsCountLabel.animateCount(to: rounded, prefix: "")
 
                     if rounded == 1 {
@@ -483,8 +467,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     // MARK: - Actions
 
     @objc private func sliderChanged() {
-        currentRadiusKm = Int(slider.value.rounded())
-        if currentRadiusKm < 1 { currentRadiusKm = 1 }
+        // SECURITE ANTI-CRASH: Evite une value de 0 générant NaN sur le MapRegion
+        currentRadiusKm = max(1, Int(slider.value.rounded()))
         slider.value = Float(currentRadiusKm)
         updateRadiusValueLabel()
         drawCircle()
@@ -507,10 +491,13 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     }
 
     @objc private func openAutocomplete() {
-        let ac = GMSAutocompleteViewController()
-        ac.delegate = self
-        ac.placeFields = [.name, .formattedAddress, .coordinate, .placeID]
-        present(ac, animated: true)
+        // SECURITE ANTI-CRASH: Pousse l'affichage à la prochaine boucle pour garantir un layout correct
+        DispatchQueue.main.async {
+            let ac = GMSAutocompleteViewController()
+            ac.delegate = self
+            ac.placeFields = [.name, .formattedAddress, .coordinate, .placeID]
+            self.present(ac, animated: true)
+        }
     }
 
     @objc private func cancelTapped() {
@@ -630,11 +617,13 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
 
     private func centerMap(animated: Bool) {
         guard let c = selectedCoord else { return }
-
+        
+        // SECURITE ANTI-CRASH: Garantit un calcul positif, évitant une division par 0 de la map
+        let safeRadius = max(Double(currentRadiusKm), 1.0)
         let region = MKCoordinateRegion(
             center: c,
-            latitudinalMeters: Double(currentRadiusKm) * 2200,
-            longitudinalMeters: Double(currentRadiusKm) * 2200
+            latitudinalMeters: safeRadius * 2200,
+            longitudinalMeters: safeRadius * 2200
         )
         mapView.setRegion(region, animated: animated)
     }
@@ -642,7 +631,8 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private func drawCircle() {
         mapView.removeOverlays(mapView.overlays)
         guard let c = selectedCoord else { return }
-        let circle = MKCircle(center: c, radius: Double(currentRadiusKm) * 1000)
+        let safeRadius = max(Double(currentRadiusKm), 1.0)
+        let circle = MKCircle(center: c, radius: safeRadius * 1000)
         mapView.addOverlay(circle)
     }
 
