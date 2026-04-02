@@ -1810,3 +1810,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_celebration_btn" = "Let's go!";
 "home_v2_welcome_todo" = "To do";
 "home_v2_welcome_done" = "Done";
+
+"home_title_tools" = "Twoje narzędzia solidarnościowe";
+"home_tools_map" = "Mapa miejsc solidarnościowych";
+"home_tools_pedago" = "Przydatne zasoby";
+"home_tools_charter" = "Karta etyczna Entourage";
+"welcome_video_cta" = "Obejrzyj wideo";
+"welcome_step3_title" = "Pogawędki między członkami";
+"welcome_welcome_list_title" = "Pierwsze kroki w Entourage";
+"welcome_welcome_list_subtitle" = "Poznaj aplikację i zadaj wszystkie pytania zespołowi — w małych grupach, podczas 45-minutowej rozmowy wideo.";
+"welcome_papotages_list_title" = "Pogawędki solidarnościowe";
+"welcome_papotages_list_subtitle" = "Otwarte dyskusje w podgrupach od 2 do 3 osób, prowadzone przez przeszkolonego wolontariusza lub członka zespołu. Możesz zostać tak długo, jak chcesz. W każdy wtorek o 18:00.";
+"welcome_webinar_list_title" = "Sesje uświadamiające Entourage";
+"welcome_webinar_list_subtitle" = "Zespół Entourage daje Ci klucze do zrozumienia świata ulicy i istniejących rozwiązań pomocowych podczas 1-godzinnych warsztatów online.";
+"welcome_firststep_list_title" = "Pierwsze kroki w Entourage";
+"welcome_firststep_list_subtitle" = "Poznaj aplikację i zadaj wszystkie pytania zespołowi — w małych grupach, podczas 45-minutowej rozmowy wideo.";

@@ -1735,3 +1735,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_celebration_btn" = "Let's go!";
 "home_v2_welcome_todo" = "To do";
 "home_v2_welcome_done" = "Done";
+
+"home_title_tools" = "أدوات التضامن الخاصة بك";
+"home_tools_map" = "خريطة أماكن التضامن";
+"home_tools_pedago" = "موارد مفيدة";
+"home_tools_charter" = "ميثاق إنتوراج الأخلاقي";
+"welcome_video_cta" = "شاهد الفيديو";
+"welcome_step3_title" = "دردشات بين الأعضاء";
+"welcome_welcome_list_title" = "الخطوات الأولى على إنتوراج";
+"welcome_welcome_list_subtitle" = "تعرف على التطبيق واطرح جميع أسئلتك على الفريق - في مجموعات صغيرة، في مكالمة فيديو مدتها 45 دقيقة.";
+"welcome_papotages_list_title" = "دردشات التضامن";
+"welcome_papotages_list_subtitle" = "مناقشات مفتوحة في مجموعات فرعية من 2 إلى 3 أشخاص، يديرها متطوع مدرب أو أحد أعضاء الفريق. يمكنك البقاء طالما تريد. كل ثلاثاء الساعة 6 مساءً.";
+"welcome_webinar_list_title" = "جلسات توعية إنتوراج";
+"welcome_webinar_list_subtitle" = "يمنحك فريق إنتوراج المفاتيح لفهم عالم الشارع وحلول المساعدة الحالية خلال ورشة عمل عبر الإنترنت مدتها ساعة واحدة.";
+"welcome_firststep_list_title" = "الخطوات الأولى على إنتوراج";
+"welcome_firststep_list_subtitle" = "تعرف على التطبيق واطرح جميع أسئلتك على الفريق - في مجموعات صغيرة، في مكالمة فيديو مدتها 45 دقيقة.";

@@ -1699,3 +1699,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_celebration_btn" = "Let's go!";
 "home_v2_welcome_todo" = "To do";
 "home_v2_welcome_done" = "Done";
+
+"home_title_tools" = "Instrumentele tale de solidaritate";
+"home_tools_map" = "Harta locurilor de solidaritate";
+"home_tools_pedago" = "Resurse utile";
+"home_tools_charter" = "Carta etică Entourage";
+"welcome_video_cta" = "Urmărește videoclipul";
+"welcome_step3_title" = "Discuții între membri";
+"welcome_welcome_list_title" = "Primii pași pe Entourage";
+"welcome_welcome_list_subtitle" = "Familiarizează-te cu aplicația și pune-i echipei toate întrebările tale — în grupuri mici, printr-un apel video de 45 de minute.";
+"welcome_papotages_list_title" = "Discuții de solidaritate";
+"welcome_papotages_list_subtitle" = "Discuții libere în subgrupuri de 2 până la 3 persoane, moderate de un voluntar instruit sau de un membru al echipei. Poți rămâne cât timp dorești. În fiecare marți la ora 18:00.";
+"welcome_webinar_list_title" = "Sesiuni de conștientizare Entourage";
+"welcome_webinar_list_subtitle" = "Echipa Entourage îți oferă cheile pentru a înțelege lumea străzii și soluțiile de ajutor existente în timpul unui atelier online de 1 oră.";
+"welcome_firststep_list_title" = "Primii pași pe Entourage";
+"welcome_firststep_list_subtitle" = "Familiarizează-te cu aplicația și pune-i echipei toate întrebările tale — în grupuri mici, printr-un apel video de 45 de minute.";

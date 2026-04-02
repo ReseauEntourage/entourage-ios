@@ -66,13 +66,13 @@ struct WelcomeEventsListView: View {
 
             // Title & Subtitle
             VStack(alignment: .leading, spacing: 8) {
-                Text(viewModel.type == .firstStep ? "welcome_firststep_list_title".localized :
+                Text(viewModel.type == .firstStep ? "welcome_welcome_list_title".localized :
                      viewModel.type == .webinar ? "welcome_webinar_list_title".localized :
                      "welcome_papotages_list_title".localized)
                     .font(.custom("Quicksand-Bold", size: 24))
                     .foregroundColor(.black)
 
-                Text(viewModel.type == .firstStep ? "welcome_firststep_list_subtitle".localized :
+                Text(viewModel.type == .firstStep ? "welcome_welcome_list_subtitle".localized :
                      viewModel.type == .webinar ? "welcome_webinar_list_subtitle".localized :
                      "welcome_papotages_list_subtitle".localized)
                     .font(.custom("NunitoSans-Regular", size: 15))
