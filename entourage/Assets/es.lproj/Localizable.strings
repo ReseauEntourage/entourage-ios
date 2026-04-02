@@ -3219,3 +3219,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_celebration_btn" = "¡Vamos!";
 "home_v2_welcome_todo" = "Por hacer";
 "home_v2_welcome_done" = "Hecho";
+
+"home_title_tools" = "Tus herramientas solidarias";
+"home_tools_map" = "Mapa de lugares solidarios";
+"home_tools_pedago" = "Recursos útiles";
+"home_tools_charter" = "Carta ética de Entourage";
+"welcome_video_cta" = "Ver el video";
+"welcome_step3_title" = "Charlas entre miembros";
+"welcome_welcome_list_title" = "Primeros pasos en Entourage";
+"welcome_welcome_list_subtitle" = "Familiarízate con la aplicación y hazle todas tus preguntas al equipo — en pequeños grupos, 45 minutos por videollamada.";
+"welcome_papotages_list_title" = "Charlas solidarias";
+"welcome_papotages_list_subtitle" = "Debates abiertos en subgrupos de 2 a 3 personas, moderados por un voluntario capacitado o un miembro del equipo. Puedes quedarte todo el tiempo que quieras. Todos los martes a las 18h.";
+"welcome_webinar_list_title" = "Sesiones de sensibilización Entourage";
+"welcome_webinar_list_subtitle" = "El equipo de Entourage te da las claves para entender el mundo de la calle y las soluciones de ayuda existentes durante un taller online de 1 hora.";
+"welcome_firststep_list_title" = "Primeros pasos en Entourage";
+"welcome_firststep_list_subtitle" = "Familiarízate con la aplicación y hazle todas tus preguntas al equipo — en pequeños grupos, 45 minutos por videollamada.";

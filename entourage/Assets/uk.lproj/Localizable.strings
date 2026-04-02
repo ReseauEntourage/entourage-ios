@@ -1776,3 +1776,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_celebration_btn" = "Let's go!";
 "home_v2_welcome_todo" = "To do";
 "home_v2_welcome_done" = "Done";
+
+"home_title_tools" = "Ваші інструменти солідарності";
+"home_tools_map" = "Карта солідарних місць";
+"home_tools_pedago" = "Корисні ресурси";
+"home_tools_charter" = "Етична хартія Entourage";
+"welcome_video_cta" = "Подивитися відео";
+"welcome_step3_title" = "Спілкування між учасниками";
+"welcome_welcome_list_title" = "Перші кроки в Entourage";
+"welcome_welcome_list_subtitle" = "Ознайомтеся з додатком та поставте всі свої питання команді — у невеликих групах, під час 45-хвилинного відеодзвінка.";
+"welcome_papotages_list_title" = "Солідарні чати";
+"welcome_papotages_list_subtitle" = "Відкриті дискусії у підгрупах від 2 до 3 осіб, які проводить навчений волонтер або член команди. Ви залишаєтеся стільки, скільки хочете. Щовівторка о 18:00.";
+"welcome_webinar_list_title" = "Сесії обізнаності Entourage";
+"welcome_webinar_list_subtitle" = "Команда Entourage дає вам ключі до розуміння світу вулиці та існуючих рішень допомоги під час 1-годинного онлайн-семінару.";
+"welcome_firststep_list_title" = "Перші кроки в Entourage";
+"welcome_firststep_list_subtitle" = "Ознайомтеся з додатком та поставте всі свої питання команді — у невеликих групах, під час 45-хвилинного відеодзвінка.";
