@@ -743,6 +743,8 @@ extension ProfilFullViewController: MJAlertControllerDelegate {
             NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)
         case .None,.AcceptSettings,.AcceptAdd,.welcomeMessage:
             break
+        case .DeleteEvent:
+            break
         }
     }
     func closePressed(alertTag:MJAlertTAG) {}
