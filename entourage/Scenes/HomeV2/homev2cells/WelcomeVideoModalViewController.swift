@@ -11,8 +11,6 @@ class WelcomeVideoModalViewController: UIViewController {
     private var webView: WKWebView?
     private let continueButton = UIButton(type: .system)
     private let closeImageView = UIImageView()
-    private let playOverlayView = UIView()
-    private let playIconImageView = UIImageView()
 
     var onComplete: (() -> Void)?
     var onDismissOnly: (() -> Void)? // Triggered when modal is dismissed, useful to refresh home
@@ -22,12 +20,13 @@ class WelcomeVideoModalViewController: UIViewController {
 
     // Data from Backend
     private var welcomeVideoUrl: String?
-    private var isVideoStarted = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupConstraints()
+        fetchVideoResource()
+        startCountdown()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -81,21 +80,6 @@ class WelcomeVideoModalViewController: UIViewController {
         webViewContainer.addSubview(wv)
         self.webView = wv
 
-        // Play Overlay
-        playOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        playOverlayView.translatesAutoresizingMaskIntoConstraints = false
-        webViewContainer.addSubview(playOverlayView)
-
-        playIconImageView.image = UIImage(systemName: "play.circle.fill")
-        playIconImageView.tintColor = .white
-        playIconImageView.contentMode = .scaleAspectFit
-        playIconImageView.translatesAutoresizingMaskIntoConstraints = false
-        playOverlayView.addSubview(playIconImageView)
-
-        let playTap = UITapGestureRecognizer(target: self, action: #selector(onPlayTapped))
-        playOverlayView.addGestureRecognizer(playTap)
-        playOverlayView.isUserInteractionEnabled = true
-
         // Description
         descriptionLabel.text = "home_v2_welcome_video_modal_desc".localized
         descriptionLabel.font = .systemFont(ofSize: 15, weight: .regular)
@@ -124,26 +108,8 @@ class WelcomeVideoModalViewController: UIViewController {
             wv.topAnchor.constraint(equalTo: webViewContainer.topAnchor),
             wv.bottomAnchor.constraint(equalTo: webViewContainer.bottomAnchor),
             wv.leadingAnchor.constraint(equalTo: webViewContainer.leadingAnchor),
-            wv.trailingAnchor.constraint(equalTo: webViewContainer.trailingAnchor),
-
-            playOverlayView.topAnchor.constraint(equalTo: webViewContainer.topAnchor),
-            playOverlayView.bottomAnchor.constraint(equalTo: webViewContainer.bottomAnchor),
-            playOverlayView.leadingAnchor.constraint(equalTo: webViewContainer.leadingAnchor),
-            playOverlayView.trailingAnchor.constraint(equalTo: webViewContainer.trailingAnchor),
-
-            playIconImageView.centerXAnchor.constraint(equalTo: playOverlayView.centerXAnchor),
-            playIconImageView.centerYAnchor.constraint(equalTo: playOverlayView.centerYAnchor),
-            playIconImageView.widthAnchor.constraint(equalToConstant: 64),
-            playIconImageView.heightAnchor.constraint(equalToConstant: 64)
+            wv.trailingAnchor.constraint(equalTo: webViewContainer.trailingAnchor)
         ])
-    }
-
-    @objc private func onPlayTapped() {
-        guard !isVideoStarted else { return }
-        isVideoStarted = true
-        playOverlayView.isHidden = true
-        fetchVideoResource()
-        startCountdown()
     }
 
     private func setupConstraints() {
@@ -151,8 +117,6 @@ class WelcomeVideoModalViewController: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            containerView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            containerView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
 
             closeImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
             closeImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
@@ -166,9 +130,7 @@ class WelcomeVideoModalViewController: UIViewController {
             webViewContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             webViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             webViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            // Height is flexible but we want to make sure it expands as much as possible while maintaining the container's bounds.
-            // Using a low priority constraint for a preferred ratio so it doesn't collapse entirely if not needed,
-            // but it will shrink when the screen is too small.
+            webViewContainer.heightAnchor.constraint(equalTo: webViewContainer.widthAnchor, multiplier: 9.0/16.0),
 
             descriptionLabel.topAnchor.constraint(equalTo: webViewContainer.bottomAnchor, constant: 24),
             descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
@@ -180,12 +142,6 @@ class WelcomeVideoModalViewController: UIViewController {
             continueButton.heightAnchor.constraint(equalToConstant: 50),
             continueButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20)
         ])
-
-        // Add a flexible ratio constraint with lower priority so the video doesn't just disappear
-        // but can be crushed by the top/bottom constraints of the containerView
-        let heightConstraint = webViewContainer.heightAnchor.constraint(equalTo: webViewContainer.widthAnchor, multiplier: 16.0/9.0)
-        heightConstraint.priority = .defaultLow
-        heightConstraint.isActive = true
     }
 
     private func fetchVideoResource() {
@@ -223,10 +179,7 @@ class WelcomeVideoModalViewController: UIViewController {
         secondsRemaining = 5
         continueButton.isEnabled = false
         continueButton.backgroundColor = .gray
-        UIView.performWithoutAnimation {
-            self.continueButton.setTitle("\(self.originalButtonText) (\(self.secondsRemaining))", for: .normal)
-            self.continueButton.layoutIfNeeded()
-        }
+        continueButton.setTitle("\(originalButtonText) (\(secondsRemaining))", for: .normal)
 
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             guard let self = self else {
@@ -235,15 +188,9 @@ class WelcomeVideoModalViewController: UIViewController {
             }
             self.secondsRemaining -= 1
             if self.secondsRemaining > 0 {
-                UIView.performWithoutAnimation {
-                    self.continueButton.setTitle("\(self.originalButtonText) (\(self.secondsRemaining))", for: .normal)
-                    self.continueButton.layoutIfNeeded()
-                }
+                self.continueButton.setTitle("\(self.originalButtonText) (\(self.secondsRemaining))", for: .normal)
             } else {
-                UIView.performWithoutAnimation {
-                    self.continueButton.setTitle(self.originalButtonText, for: .normal)
-                    self.continueButton.layoutIfNeeded()
-                }
+                self.continueButton.setTitle(self.originalButtonText, for: .normal)
                 self.continueButton.isEnabled = true
                 self.continueButton.backgroundColor = UIColor(named: "orange_app")
                 timer.invalidate()

@@ -388,6 +388,8 @@
 		2432FE572F5825450033E711 /* HomeCellActionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */; };
 		2432FE592F5831A00033E711 /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE582F5831A00033E711 /* AnimationUtils.swift */; };
 		244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244715252F15307400F8BFD1 /* AssociationPresenter.swift */; };
+		247A2E752F7D34E400DB1661 /* WelcomeEventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A2E742F7D34E400DB1661 /* WelcomeEventsListView.swift */; };
+		247A2E772F7D351E00DB1661 /* WelcomeEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */; };
 		24832E6C2F63011D00A78F03 /* CellCreateSmallTalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */; };
 		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
 		24B68C9B2F6847FA00B35F25 /* ConversationStaffWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */; };
@@ -1015,6 +1017,8 @@
 		2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellActionCollectionViewCell.xib; sourceTree = "<group>"; };
 		2432FE582F5831A00033E711 /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
 		244715252F15307400F8BFD1 /* AssociationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresenter.swift; sourceTree = "<group>"; };
+		247A2E742F7D34E400DB1661 /* WelcomeEventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeEventsListView.swift; sourceTree = "<group>"; };
+		247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeEventsListViewController.swift; sourceTree = "<group>"; };
 		24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCreateSmallTalkView.swift; sourceTree = "<group>"; };
 		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStaffWarningView.swift; sourceTree = "<group>"; };
@@ -2361,6 +2365,7 @@
 		266B26372ABB16BC00C8EAD8 /* HomeV2 */ = {
 			isa = PBXGroup;
 			children = (
+				247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */,
 				26BEEECE2C00CE3800169FBA /* EventLastDayViewController.swift */,
 				266B263A2ABB17A600C8EAD8 /* homev2cells */,
 				266B26382ABB16CF00C8EAD8 /* HomeV2ViewController.swift */,
@@ -2398,6 +2403,7 @@
 				2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */,
 				2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */,
 				2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */,
+				247A2E742F7D34E400DB1661 /* WelcomeEventsListView.swift */,
 				2674FEB82ACD96BE0013D674 /* HomeGroupHorizontalCollectionCell.swift */,
 				2674FEBA2ACD96EB0013D674 /* HomeGroupHorizontalCollectionCell.xib */,
 				2674FEBC2ACD999A0013D674 /* HomeCellPedago.swift */,
@@ -3201,6 +3207,7 @@
 				26BB4D4A2CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift in Sources */,
 				2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */,
 				262820D52D49069A00A61C30 /* MainStatUserCell.swift in Sources */,
+				247A2E752F7D34E400DB1661 /* WelcomeEventsListView.swift in Sources */,
 				029D25332865FA5F00147F77 /* EventDatesCell.swift in Sources */,
 				24832E6C2F63011D00A78F03 /* CellCreateSmallTalkView.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
@@ -3224,6 +3231,7 @@
 				2619E14B2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift in Sources */,
 				02F578CD289AD4060040685C /* ActionContribDetailHomeCell.swift in Sources */,
 				02EB0B46292E1F3100CEB739 /* ParamsNotifsViewController.swift in Sources */,
+				247A2E772F7D351E00DB1661 /* WelcomeEventsListViewController.swift in Sources */,
 				0258E4F9288AAF1A000F107B /* ActionsService.swift in Sources */,
 				02C3ABF2279AB53800817B82 /* Extensions_UserDefaults.swift in Sources */,
 				02E2A9A5292FDDAD0037BA53 /* ProfileEditBlockedUsersViewController.swift in Sources */,
