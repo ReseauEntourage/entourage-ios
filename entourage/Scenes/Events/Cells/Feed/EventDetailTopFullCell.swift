@@ -51,9 +51,6 @@ class EventDetailTopFullCell: UITableViewCell {
     
     let topMarginConstraint: CGFloat = 24
     let cornerRadiusTag: CGFloat = 15
-    
-    // Pour zoomer sur l’événement
-    let regionRadius: CLLocationDistance = 500
 
     class var identifier: String { return String(describing: self) }
     
@@ -92,49 +89,13 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_lbl_reserved_female?.setFontTitle(size: 13)
 
         ui_view_place_limit.isHidden = true
-        
-        ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
-        configureWhiteButton(self.ui_btn_share, withTitle: "neighborhood_add_post_send_button".localized)
-        configureWhiteButton(self.ui_btn_agenda, withTitle: "event_button_add_calendar".localized)
         configureOrangeButton(self.ui_button_go_to_discussion, withTitle: "event_conversation".localized)
         self.ui_view_discussion_box.layer.cornerRadius = 20
         self.ui_view_discussion_box.backgroundColor = UIColor.appBeigeClair
-
-        self.ui_btn_agenda.addTarget(self, action: #selector(onAgendaClick), for: .touchUpInside)
-        
-        // **Initialisation de la carte**
-        ui_mapview.delegate = self
-        ui_mapview.layer.cornerRadius = 20
-        ui_mapview.isHidden = true // on la masquera si c'est un event en ligne
-
-    }
-    
-    @objc func onShareBtnClick() {
-        delegate?.share()
     }
     
     @objc func onParticipateClick() {
         delegate?.joinLeave()
-    }
-    @objc func onAgendaClick() {
-        delegate?.showAgenda()
-    }
-    
-    func configureWhiteButton(_ button: UIButton, withTitle title: String) {
-        button.setTitle(title, for: .normal)
-        button.backgroundColor = .white
-        button.setTitleColor(.black, for: .normal)
-        button.layer.borderColor = UIColor.appOrange.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 21
-        
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
-        button.clipsToBounds = true
-        if let image = button.imageView?.image {
-            let tintedImage = image.withRenderingMode(.alwaysTemplate)
-            button.setImage(tintedImage, for: .normal)
-            button.tintColor = .black // Force l'icône en noir
-        }
     }
     
     func configureOrangeButton(_ button: UIButton, withTitle title: String) {
@@ -156,13 +117,11 @@ class EventDetailTopFullCell: UITableViewCell {
         
         self.delegate = delegate
         if event?.isMember ?? false {
-            self.ui_btn_agenda.isHidden = false
             self.ui_view_discussion_box.isHidden = false
             self.ui_constraint_discussion_box_top?.constant = 20
             self.ui_constraint_discussion_box_bottom?.constant = 20
             self.ui_constraint_discussion_box_height?.constant = 136
         }else{
-            self.ui_btn_agenda.isHidden = true
             self.ui_view_discussion_box.isHidden = true
             self.ui_constraint_discussion_box_top?.constant = 0
             self.ui_constraint_discussion_box_bottom?.constant = 0
@@ -293,29 +252,6 @@ class EventDetailTopFullCell: UITableViewCell {
             ui_constraint_listview_top_margin?.constant = topMarginConstraint
         }
         
-        // --- MAP LOGIC ---
-        if let loc = event.location, !(event.isOnline ?? true),
-           let lat = loc.latitude, let lon = loc.longitude {
-            if lat == 0 && lon == 0 {
-                ui_height_map_view.constant = 0
-                ui_mapview.isHidden = true
-            } else {
-                ui_height_map_view.constant = 180
-                ui_mapview.isHidden = false
-                let location = CLLocation(latitude: lat, longitude: lon)
-
-                // Ajout d’une annotation
-                let annot = PoiAnnot(title: "", coordinate: location.coordinate)
-                ui_mapview.addAnnotation(annot)
-
-                // Centrage sur la position
-                centerMapOnLocation(location)
-            }
-        } else {
-            ui_mapview.isHidden = true
-            ui_height_map_view.constant = 0
-        }
-        
         // Désactive éventuellement le bouton si l’événement est annulé ou passé
         self.disableButtonIfCancelOrPast(event: event)
         
@@ -367,14 +303,6 @@ class EventDetailTopFullCell: UITableViewCell {
         }
     }
     
-    // Centre la carte sur la location
-    private func centerMapOnLocation(_ location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
-                                                  latitudinalMeters: regionRadius,
-                                                  longitudinalMeters: regionRadius)
-        ui_mapview.setRegion(coordinateRegion, animated: true)
-    }
-    
     @IBAction func action_show_user(_ sender: Any) {
         // Optionnel : si vous voulez montrer l’organisateur
     }
@@ -392,46 +320,6 @@ class EventDetailTopFullCell: UITableViewCell {
     }
 }
 
-// MARK: - MKMapViewDelegate
-extension EventDetailTopFullCell: MKMapViewDelegate {
-    // Pour afficher un "pin" personnalisé
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKUserLocation { return nil }
-        
-        if let annotation = annotation as? PoiAnnot {
-            let identifier = "pin"
-            var view: MKAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
-                dequeuedView.annotation = annotation
-                view = dequeuedView
-                view.canShowCallout = false
-                view.image = UIImage(named: "ic_poi_event_map")
-            } else {
-                view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.canShowCallout = false
-                view.image = UIImage(named: "ic_poi_event_map")
-            }
-            return view
-        }
-        return nil
-    }
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let annotation = view.annotation, !(annotation is MKUserLocation) else {
-            return
-        }
-        Logger.print("Annotation tap sur la map (EventDetailTopFullCell)")
-    }
-    
-    // Empêche l’interaction sur la localisation user
-    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-        for view in views {
-            if view.annotation is MKUserLocation {
-                view.canShowCallout = false
-            }
-        }
-    }
-}
 
 // MARK: - Protocol -
 protocol EventDetailTopCellDelegate: AnyObject {
