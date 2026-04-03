@@ -36,17 +36,12 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_view_organised_by: UIView!
     @IBOutlet weak var ui_view_association: UIView!
     @IBOutlet weak var ui_label_association: UILabel!
-    @IBOutlet weak var ui_btn_share: UIButton!
     @IBOutlet weak var ui_button_go_to_discussion: UIButton!
     @IBOutlet weak var ui_view_discussion_box: UIView!
-    @IBOutlet weak var ui_height_map_view: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_discussion_box_top: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_discussion_box_bottom: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_discussion_box_height: NSLayoutConstraint!
     
-    @IBOutlet weak var ui_btn_agenda: UIButton!
-    // **Nouvelle IBOutlet** pour la carte
-    @IBOutlet weak var ui_mapview: MKMapView!
     
     @IBOutlet weak var ui_view_reserved_female: UIView!
     @IBOutlet weak var ui_constraint_height_reserved_female: NSLayoutConstraint!

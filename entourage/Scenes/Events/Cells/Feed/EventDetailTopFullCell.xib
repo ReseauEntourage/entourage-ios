@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,10 +35,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abc-female-banner">
-                        <rect key="frame" x="20" y="62" width="366" height="0"/>
+                        <rect key="frame" x="20" y="62" width="236" height="0.0"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cet événement est réservé aux femmes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="def-female-label">
-                                <rect key="frame" x="12" y="4" width="342" height="18"/>
+                                <rect key="frame" x="12" y="-7" width="212" height="14"/>
                                 <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.49019607843137253" green="0.0" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="0" id="hij-height-constraint"/>
+                            <constraint firstAttribute="height" id="hij-height-constraint"/>
                             <constraint firstItem="def-female-label" firstAttribute="leading" secondItem="abc-female-banner" secondAttribute="leading" constant="12" id="klm-leading"/>
                             <constraint firstAttribute="trailing" secondItem="def-female-label" secondAttribute="trailing" constant="12" id="nop-trailing"/>
                             <constraint firstItem="def-female-label" firstAttribute="centerY" secondItem="abc-female-banner" secondAttribute="centerY" id="qrs-center-y"/>
@@ -336,7 +336,7 @@
                             <constraint firstAttribute="bottom" secondItem="abz-tt-vMF" secondAttribute="bottom" id="wL4-Py-not"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXs-ZL-Ra7">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXs-ZL-Ra7">
                         <rect key="frame" x="20" y="323" width="358" height="0.0"/>
                         <constraints>
                             <constraint firstAttribute="height" id="FyJ-jQ-Gmx"/>
@@ -345,7 +345,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-kO-usD" customClass="ActiveLabel" customModule="ActiveLabel">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-kO-usD" customClass="ActiveLabel" customModule="ActiveLabel">
                         <rect key="frame" x="20" y="327" width="358" height="20.5"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                         <nil key="textColor"/>
@@ -356,7 +356,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="fuU-Rj-r2w" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
+                    <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fuU-Rj-r2w" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
                         <rect key="frame" x="20" y="371.5" width="366" height="193.5"/>
                         <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -377,24 +377,24 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="view-disc-id">
-                        <rect key="frame" x="20" y="785" width="366" height="136"/>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="view-disc-id">
+                        <rect key="frame" x="20" y="649" width="366" height="136"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_messages_top" translatesAutoresizingMaskIntoConstraints="NO" id="img-disc-id">
                                 <rect key="frame" x="16" y="16" width="44" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="w-disc-img"/>
                                     <constraint firstAttribute="height" constant="44" id="h-disc-img"/>
+                                    <constraint firstAttribute="width" constant="44" id="w-disc-img"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discussion de l'événement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-disc-id">
-                                <rect key="frame" x="76" y="27" width="274" height="22"/>
+                                <rect key="frame" x="76" y="28" width="184" height="20.5"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-disc-id">
-                                <rect key="frame" x="16" y="76" width="334" height="40"/>
+                                <rect key="frame" x="16" y="76" width="244" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="h-btn-disc"/>
                                 </constraints>
@@ -406,7 +406,6 @@
                         </subviews>
                         <color key="backgroundColor" name="BeigeClair"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="136" id="h-view-disc"/>
                             <constraint firstItem="img-disc-id" firstAttribute="leading" secondItem="view-disc-id" secondAttribute="leading" constant="16" id="c1-disc"/>
                             <constraint firstItem="img-disc-id" firstAttribute="top" secondItem="view-disc-id" secondAttribute="top" constant="16" id="c2-disc"/>
                             <constraint firstItem="lbl-disc-id" firstAttribute="leading" secondItem="img-disc-id" secondAttribute="trailing" constant="16" id="c3-disc"/>
@@ -416,6 +415,7 @@
                             <constraint firstItem="btn-disc-id" firstAttribute="leading" secondItem="view-disc-id" secondAttribute="leading" constant="16" id="c7-disc"/>
                             <constraint firstAttribute="trailing" secondItem="btn-disc-id" secondAttribute="trailing" constant="16" id="c8-disc"/>
                             <constraint firstAttribute="bottom" secondItem="btn-disc-id" secondAttribute="bottom" constant="20" id="c9-disc"/>
+                            <constraint firstAttribute="height" constant="136" id="h-view-disc"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -426,36 +426,25 @@
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
-                    <constraint firstItem="1V4-oV-Dh3" firstAttribute="leading" secondItem="fuU-Rj-r2w" secondAttribute="leading" id="0qB-9a-Mfi"/>
-                    <constraint firstItem="G9W-bu-4QC" firstAttribute="leading" secondItem="lgR-Y6-WWf" secondAttribute="trailing" constant="20" id="4oR-cO-90w"/>
                     <constraint firstAttribute="trailing" secondItem="Nfw-W1-dO7" secondAttribute="trailing" constant="10" id="5jS-dB-laQ"/>
-                    <constraint firstItem="G9W-bu-4QC" firstAttribute="centerY" secondItem="lgR-Y6-WWf" secondAttribute="centerY" id="A8G-fg-LMj"/>
                     <constraint firstItem="fuU-Rj-r2w" firstAttribute="top" secondItem="CsR-kO-usD" secondAttribute="bottom" constant="24" id="At5-0v-xFn"/>
-                    <constraint firstItem="view-disc-id" firstAttribute="top" secondItem="1V4-oV-Dh3" secondAttribute="bottom" constant="20" id="FLo-2B-sZ1"/>
                     <constraint firstItem="fuU-Rj-r2w" firstAttribute="leading" secondItem="CsR-kO-usD" secondAttribute="leading" id="FRM-kF-rtM"/>
                     <constraint firstItem="GxR-dy-Owz" firstAttribute="top" secondItem="Nfw-W1-dO7" secondAttribute="bottom" id="Ggf-Ol-fWh"/>
                     <constraint firstItem="Nfw-W1-dO7" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="H0K-5a-a4q"/>
                     <constraint firstAttribute="trailing" secondItem="GxR-dy-Owz" secondAttribute="trailing" constant="20" id="H5r-RL-hLC"/>
                     <constraint firstItem="CsR-kO-usD" firstAttribute="top" secondItem="UXs-ZL-Ra7" secondAttribute="bottom" constant="4" id="I8J-Cg-s0T"/>
                     <constraint firstItem="GxR-dy-Owz" firstAttribute="leading" secondItem="3q6-vS-dBw" secondAttribute="leading" constant="20" id="MEB-HA-ivE"/>
-                    <constraint firstItem="lgR-Y6-WWf" firstAttribute="top" secondItem="IcL-ha-FmW" secondAttribute="bottom" constant="16" id="MxB-HS-Hf2"/>
                     <constraint firstItem="klB-o1-C0m" firstAttribute="leading" secondItem="3q6-vS-dBw" secondAttribute="leading" constant="20" id="R9N-C9-cmG"/>
                     <constraint firstAttribute="trailing" secondItem="fuU-Rj-r2w" secondAttribute="trailing" constant="20" id="RgV-tb-QmG"/>
                     <constraint firstItem="UXs-ZL-Ra7" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="UYw-0d-rgq"/>
-                    <constraint firstItem="view-disc-id" firstAttribute="trailing" secondItem="1V4-oV-Dh3" secondAttribute="trailing" id="Ujl-4M-eMB"/>
-                            <constraint firstItem="abc-female-banner" firstAttribute="top" secondItem="klB-o1-C0m" secondAttribute="bottom" constant="5" id="tuv-banner-top"/>
-                            <constraint firstItem="abc-female-banner" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="wxy-banner-leading"/>
-                            <constraint firstItem="abc-female-banner" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="klB-o1-C0m" secondAttribute="trailing" id="xyz-banner-trailing"/>
-                            <constraint firstItem="Nfw-W1-dO7" firstAttribute="top" secondItem="abc-female-banner" secondAttribute="bottom" constant="10" id="VQC-kR-A9p"/>
+                    <constraint firstItem="Nfw-W1-dO7" firstAttribute="top" secondItem="abc-female-banner" secondAttribute="bottom" constant="10" id="VQC-kR-A9p"/>
                     <constraint firstAttribute="bottom" secondItem="view-disc-id" secondAttribute="bottom" constant="20" id="Vpw-kr-Z8k"/>
-                    <constraint firstItem="lgR-Y6-WWf" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="Y0c-Lv-hqK"/>
                     <constraint firstItem="CsR-kO-usD" firstAttribute="leading" secondItem="UXs-ZL-Ra7" secondAttribute="leading" id="aoe-s2-pzF"/>
                     <constraint firstAttribute="trailing" secondItem="klB-o1-C0m" secondAttribute="trailing" constant="20" id="hwX-yn-nXS"/>
-                    <constraint firstItem="1V4-oV-Dh3" firstAttribute="trailing" secondItem="fuU-Rj-r2w" secondAttribute="trailing" id="img-dY-dzj"/>
-                    <constraint firstItem="UXs-ZL-Ra7" firstAttribute="top" secondItem="lgR-Y6-WWf" secondAttribute="bottom" constant="20" id="j3o-v2-zLf"/>
-                    <constraint firstItem="1V4-oV-Dh3" firstAttribute="top" secondItem="fuU-Rj-r2w" secondAttribute="bottom" constant="20" id="kIP-Dp-8gQ"/>
                     <constraint firstAttribute="trailing" secondItem="CsR-kO-usD" secondAttribute="trailing" constant="28" id="n7J-Wl-s1L"/>
-                    <constraint firstItem="view-disc-id" firstAttribute="leading" secondItem="1V4-oV-Dh3" secondAttribute="leading" id="qy7-A3-TNT"/>
+                    <constraint firstItem="abc-female-banner" firstAttribute="top" secondItem="klB-o1-C0m" secondAttribute="bottom" constant="5" id="tuv-banner-top"/>
+                    <constraint firstItem="abc-female-banner" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="wxy-banner-leading"/>
+                    <constraint firstItem="abc-female-banner" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="klB-o1-C0m" secondAttribute="trailing" id="xyz-banner-trailing"/>
                     <constraint firstItem="klB-o1-C0m" firstAttribute="top" secondItem="3q6-vS-dBw" secondAttribute="top" constant="28" id="yC2-ZV-76o"/>
                     <constraint firstAttribute="trailing" secondItem="UXs-ZL-Ra7" secondAttribute="trailing" constant="28" id="yGN-4g-yQG"/>
                 </constraints>
@@ -463,19 +452,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="adress_view_top_constraint" destination="yX0-kE-283" id="tad-Gm-gRd"/>
-                <outlet property="ui_btn_agenda" destination="G9W-bu-4QC" id="BSR-SG-7Es"/>
-                <outlet property="ui_view_reserved_female" destination="abc-female-banner" id="out-view-reserved"/>
-                <outlet property="ui_lbl_reserved_female" destination="def-female-label" id="out-lbl-reserved"/>
-                <outlet property="ui_constraint_height_reserved_female" destination="hij-height-constraint" id="out-constraint-height"/>
-                                <outlet property="ui_btn_share" destination="lgR-Y6-WWf" id="Lqp-Ta-LcQ"/>
                 <outlet property="ui_button_go_to_discussion" destination="btn-disc-id" id="Q8G-5Z-zcy"/>
-                <outlet property="ui_view_discussion_box" destination="view-disc-id" id="view-disc-id-conn"/>
-                <outlet property="ui_constraint_discussion_box_top" destination="FLo-2B-sZ1" id="conn-disc-top"/>
                 <outlet property="ui_constraint_discussion_box_bottom" destination="Vpw-kr-Z8k" id="conn-disc-bottom"/>
                 <outlet property="ui_constraint_discussion_box_height" destination="h-view-disc" id="conn-disc-height"/>
-
+                <outlet property="ui_constraint_height_reserved_female" destination="hij-height-constraint" id="out-constraint-height"/>
                 <outlet property="ui_constraint_listview_top_margin" destination="At5-0v-xFn" id="CGo-JX-gSb"/>
-                <outlet property="ui_height_map_view" destination="RMI-gf-7rR" id="iKr-JI-BjL"/>
                 <outlet property="ui_img_member_1" destination="2x2-3v-72B" id="SOR-qC-Iu0"/>
                 <outlet property="ui_img_member_2" destination="qF7-zU-eSK" id="MdC-vq-GWM"/>
                 <outlet property="ui_img_member_3" destination="WUw-jW-n8n" id="6yh-4s-Pnl"/>
@@ -488,48 +469,38 @@
                 <outlet property="ui_lbl_about_desc" destination="CsR-kO-usD" id="7Sx-ME-uSy"/>
                 <outlet property="ui_lbl_about_title" destination="UXs-ZL-Ra7" id="x09-MN-3FL"/>
                 <outlet property="ui_lbl_nb_members" destination="b3F-58-XAB" id="JpY-9m-klq"/>
+                <outlet property="ui_lbl_reserved_female" destination="def-female-label" id="out-lbl-reserved"/>
                 <outlet property="ui_location_name" destination="DSx-h3-Y1E" id="IJs-Dy-zDX"/>
                 <outlet property="ui_main_view" destination="3q6-vS-dBw" id="B3F-9r-Q0U"/>
-                <outlet property="ui_mapview" destination="1V4-oV-Dh3" id="8Ql-ja-eSM"/>
                 <outlet property="ui_place_limit_nb" destination="VGf-gD-ocr" id="E79-BP-fcp"/>
                 <outlet property="ui_start_date" destination="nNO-3W-e8V" id="WOA-tU-7xV"/>
                 <outlet property="ui_start_time" destination="vMG-Nk-Fe3" id="0vF-Bl-5pm"/>
                 <outlet property="ui_taglist_view" destination="fuU-Rj-r2w" id="FiV-zH-8to"/>
                 <outlet property="ui_title" destination="klB-o1-C0m" id="RDE-wl-Ymg"/>
                 <outlet property="ui_view_association" destination="DwY-20-5TL" id="HZX-l1-aAP"/>
+                <outlet property="ui_view_discussion_box" destination="view-disc-id" id="view-disc-id-conn"/>
                 <outlet property="ui_view_organised_by" destination="BfH-VT-nZB" id="E5B-Jh-TwT"/>
                 <outlet property="ui_view_place_limit" destination="YLQ-hv-Eb2" id="ght-bZ-LHL"/>
+                <outlet property="ui_view_reserved_female" destination="abc-female-banner" id="out-view-reserved"/>
             </connections>
             <point key="canvasLocation" x="124.6376811594203" y="175.44642857142856"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_calendar_light" width="14" height="14"/>
-        <image name="ic_check_event_participate" width="20" height="20"/>
         <image name="ic_desc" width="20" height="20"/>
         <image name="ic_event_date" width="20" height="20"/>
         <image name="ic_event_group_clear" width="21" height="20"/>
         <image name="ic_event_time" width="20" height="20"/>
         <image name="ic_location" width="20" height="20"/>
-        <image name="ic_share" width="20" height="20"/>
-        <image name="ic_share_light" width="14" height="14"/>
+        <image name="ic_messages_top" width="75" height="66"/>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="green_light">
-            <color red="0.87058823529411766" green="0.94509803921568625" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="green_middle">
-            <color red="0.12549019607843137" green="0.50196078431372548" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
             <color red="1" green="0.59215686274509804" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_light_a50">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="orange_medium">
-            <color red="1" green="0.79607843137254897" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
