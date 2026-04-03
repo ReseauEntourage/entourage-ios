@@ -9,7 +9,8 @@ class WelcomeVideoModalViewController: UIViewController {
     private let descriptionLabel = UILabel()
     private let webViewContainer = UIView()
     private var webView: WKWebView?
-    private let continueButton = UIButton(type: .system)
+    // 💡 CHANGEMENT : Passage en `.custom` pour retirer l'animation système (flash) du bouton
+    private let continueButton = UIButton(type: .custom)
     private let closeImageView = UIImageView()
 
     var onComplete: (() -> Void)?
@@ -57,9 +58,9 @@ class WelcomeVideoModalViewController: UIViewController {
         closeImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(closeImageView)
 
-        // Title
+        // Title (Taille légèrement réduite pour gagner de la place)
         titleLabel.text = "home_v2_welcome_video_modal_title".localized
-        titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         titleLabel.textColor = UIColor.black
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +68,7 @@ class WelcomeVideoModalViewController: UIViewController {
 
         // Video Placeholder / WebView
         webViewContainer.backgroundColor = UIColor.black
-        webViewContainer.layer.cornerRadius = 16
+        webViewContainer.layer.cornerRadius = 12 // Un peu plus fin
         webViewContainer.clipsToBounds = true
         webViewContainer.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(webViewContainer)
@@ -80,9 +81,9 @@ class WelcomeVideoModalViewController: UIViewController {
         webViewContainer.addSubview(wv)
         self.webView = wv
 
-        // Description
+        // Description (Taille légèrement réduite)
         descriptionLabel.text = "home_v2_welcome_video_modal_desc".localized
-        descriptionLabel.font = .systemFont(ofSize: 15, weight: .regular)
+        descriptionLabel.font = .systemFont(ofSize: 14, weight: .regular)
         descriptionLabel.textColor = UIColor.gray
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -92,8 +93,9 @@ class WelcomeVideoModalViewController: UIViewController {
         continueButton.setTitle("\(originalButtonText) (\(secondsRemaining))", for: .normal)
         continueButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         continueButton.setTitleColor(.white, for: .normal)
-        continueButton.backgroundColor = UIColor.gray // Disabled state initially
-        continueButton.layer.cornerRadius = 24
+        continueButton.setTitleColor(.white.withAlphaComponent(0.5), for: .disabled) // Texte un peu transparent quand désactivé
+        continueButton.backgroundColor = UIColor.systemGray4 // Gris plus doux pour l'état désactivé
+        continueButton.layer.cornerRadius = 23 // Adapté à la nouvelle hauteur (46/2)
         continueButton.isEnabled = false
         continueButton.addTarget(self, action: #selector(onContinueTap), for: .touchUpInside)
         continueButton.translatesAutoresizingMaskIntoConstraints = false
@@ -123,27 +125,29 @@ class WelcomeVideoModalViewController: UIViewController {
             closeImageView.widthAnchor.constraint(equalToConstant: 24),
             closeImageView.heightAnchor.constraint(equalToConstant: 24),
 
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: closeImageView.leadingAnchor, constant: -8),
 
-            webViewContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            // 💡 CHANGEMENT : On aligne la largeur sur le reste (marges de 20)
+            // et on bloque la hauteur (ex: 320) pour qu'elle ne casse pas l'écran.
+            webViewContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             webViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             webViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            webViewContainer.heightAnchor.constraint(equalTo: webViewContainer.widthAnchor, multiplier: 9.0/16.0),
+            webViewContainer.heightAnchor.constraint(equalToConstant: 320),
 
-            descriptionLabel.topAnchor.constraint(equalTo: webViewContainer.bottomAnchor, constant: 24),
+            descriptionLabel.topAnchor.constraint(equalTo: webViewContainer.bottomAnchor, constant: 16),
             descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
 
-            continueButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
+            continueButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             continueButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             continueButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            continueButton.heightAnchor.constraint(equalToConstant: 50),
-            continueButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20)
+            continueButton.heightAnchor.constraint(equalToConstant: 46),
+            continueButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16)
         ])
     }
-
+    
     private func fetchVideoResource() {
         HomeService.getWelcomeResource { [weak self] pedago, error in
             guard let self = self, let pedago = pedago else { return }
@@ -178,7 +182,7 @@ class WelcomeVideoModalViewController: UIViewController {
     private func startCountdown() {
         secondsRemaining = 5
         continueButton.isEnabled = false
-        continueButton.backgroundColor = .gray
+        continueButton.backgroundColor = UIColor.systemGray4 // Matcher avec le setup initial
         continueButton.setTitle("\(originalButtonText) (\(secondsRemaining))", for: .normal)
 
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
@@ -187,13 +191,18 @@ class WelcomeVideoModalViewController: UIViewController {
                 return
             }
             self.secondsRemaining -= 1
-            if self.secondsRemaining > 0 {
-                self.continueButton.setTitle("\(self.originalButtonText) (\(self.secondsRemaining))", for: .normal)
-            } else {
-                self.continueButton.setTitle(self.originalButtonText, for: .normal)
-                self.continueButton.isEnabled = true
-                self.continueButton.backgroundColor = UIColor(named: "orange_app")
-                timer.invalidate()
+            
+            // 💡 CHANGEMENT : On bloque les animations d'UIKit pour mettre à jour le bouton de manière fluide
+            UIView.performWithoutAnimation {
+                if self.secondsRemaining > 0 {
+                    self.continueButton.setTitle("\(self.originalButtonText) (\(self.secondsRemaining))", for: .normal)
+                } else {
+                    self.continueButton.setTitle(self.originalButtonText, for: .normal)
+                    self.continueButton.isEnabled = true
+                    self.continueButton.backgroundColor = UIColor(named: "orange_app")
+                    timer.invalidate()
+                }
+                self.continueButton.layoutIfNeeded()
             }
         }
     }

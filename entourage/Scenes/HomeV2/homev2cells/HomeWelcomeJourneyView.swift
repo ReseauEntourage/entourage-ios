@@ -33,7 +33,7 @@ class WelcomeJourneyViewModel: ObservableObject {
     func update(with userEvents: [String]?, hasInitiallyCompletedAll: inout Bool?) {
         let events = userEvents ?? []
 
-        let hasWatchedVideo = UserDefaults.standard.bool(forKey: "hasWatchedWelcomeVideo") || events.contains("onboarding.resource.welcome_watched")
+        let hasWatchedVideo = UserDefaults.standard.bool(forKey: "hasWatchedWelcomeVideoHACK") || events.contains("onboarding.resource.welcome_watched")
         let hasJoinedWebinar = events.contains("onboarding.outing.webinar_or_first_steps")
         let hasJoinedPapotages = events.contains("onboarding.outing.papotages")
 
@@ -116,42 +116,26 @@ struct HomeWelcomeJourneyView: View {
         if viewModel.hideEntirely {
             EmptyView()
         } else {
-            VStack(alignment: .leading, spacing: 16) {
+            // Espacements réduits pour compacter la vue
+            VStack(alignment: .leading, spacing: 10) {
                 // Header
                 HStack(alignment: .bottom) {
                     Text("home_v2_welcome_title".localized)
-                        .font(.custom("Quicksand-Bold", size: 20))
+                        .font(.custom("Quicksand-Bold", size: 18))
                         .foregroundColor(Color(UIColor.darkGray))
                     Spacer()
+                    // Affichage du texte uniquement pour le compteur
                     Text("\(viewModel.completedCount)/\(max(viewModel.steps.count, 3))")
                         .font(.custom("Quicksand-Bold", size: 15))
                         .foregroundColor(Color("orange_app"))
                 }
-                .padding(.horizontal, 20)
-
-                // Progress Bar
-                GeometryReader { geometry in
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(Color(UIColor.systemGray5))
-                            .frame(height: 8)
-
-                        let progressWidth = geometry.size.width * CGFloat(viewModel.completedCount) / CGFloat(max(1, max(viewModel.steps.count, 3)))
-
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(Color("orange_app"))
-                            .frame(width: progressWidth, height: 8)
-                            .animation(.easeInOut, value: viewModel.completedCount)
-                    }
-                }
-                .frame(height: 8)
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 16)
 
                 // Microcopy
                 Text(viewModel.microcopy)
                     .font(.custom("NunitoSans-Regular", size: 13))
                     .foregroundColor(Color.gray)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 16)
 
                 if viewModel.isFullyCompleted {
                     // Success Layout
@@ -161,15 +145,15 @@ struct HomeWelcomeJourneyView: View {
                             .foregroundColor(Color("green_logout"))
                             .multilineTextAlignment(.center)
                     }
-                    .padding(16)
+                    .padding(12)
                     .frame(maxWidth: .infinity)
                     .background(Color("green_light").opacity(0.15))
                     .cornerRadius(12)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 20)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 16)
                 } else {
                     // Steps List
-                    VStack(spacing: 12) {
+                    VStack(spacing: 10) {
                         ForEach(viewModel.steps.indices, id: \.self) { index in
                             let step = viewModel.steps[index]
                             WelcomeJourneyStepView(step: step) {
@@ -180,11 +164,11 @@ struct HomeWelcomeJourneyView: View {
                             .disabled(step.state != .active)
                         }
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 20)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 16)
                 }
             }
-            .padding(.top, 20)
+            .padding(.top, 16)
             .background(Color("white_orange_home")) // matches the table view background
             .fixedSize(horizontal: false, vertical: true)
         }
@@ -197,16 +181,16 @@ struct WelcomeJourneyStepView: View {
 
     var body: some View {
         Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(alignment: .top, spacing: 16) {
+            VStack(alignment: .leading, spacing: 10) { // Espacement plus compact
+                HStack(alignment: .top, spacing: 12) {
                     // Icon
                     ZStack {
                         Circle()
                             .fill(step.state == .completed ? Color("green_logout") : Color("orange_light_a50").opacity(0.3))
-                            .frame(width: 40, height: 40)
+                            .frame(width: 36, height: 36)
 
                         Image(systemName: step.state == .completed ? "checkmark" : step.iconName)
-                            .font(.system(size: 16, weight: .medium))
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundColor(step.state == .completed ? .white : Color("orange_app"))
                     }
 
@@ -214,13 +198,13 @@ struct WelcomeJourneyStepView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         HStack(alignment: .top) {
                             Text(step.title)
-                                .font(.custom("Quicksand-Bold", size: 15))
+                                .font(.custom("Quicksand-Bold", size: 14))
                                 .foregroundColor(step.state == .completed ? Color("green_logout") : (step.state == .future ? Color.gray : Color.black))
                                 .multilineTextAlignment(.leading)
                             Spacer(minLength: 8)
                             if step.state == .completed {
                                 Text("home_v2_welcome_done".localized)
-                                    .font(.custom("NunitoSans-Bold", size: 13))
+                                    .font(.custom("NunitoSans-Bold", size: 12))
                                     .foregroundColor(Color("green_logout"))
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 4)
@@ -228,7 +212,7 @@ struct WelcomeJourneyStepView: View {
                                     .cornerRadius(12)
                             } else if step.state == .active {
                                 Text("home_v2_welcome_todo".localized)
-                                    .font(.custom("NunitoSans-Bold", size: 13))
+                                    .font(.custom("NunitoSans-Bold", size: 12))
                                     .foregroundColor(Color("orange_app"))
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 4)
@@ -238,11 +222,11 @@ struct WelcomeJourneyStepView: View {
                         }
 
                         Text(step.subtitle)
-                            .font(.custom("NunitoSans-Regular", size: 15))
+                            .font(.custom("NunitoSans-Regular", size: 13))
                             .foregroundColor(step.state == .completed ? Color("green_logout") : Color.gray)
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
-                            .padding(.top, 4)
+                            .padding(.top, 2)
                     }
                 }
 
@@ -252,22 +236,21 @@ struct WelcomeJourneyStepView: View {
                         .font(.custom("Quicksand-Bold", size: 14))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 24)
+                        .padding(.vertical, 8)
                         .background(Color("orange_app"))
                         .cornerRadius(32)
-                        .padding(.top, 16)
+                        .padding(.top, 8)
                 }
             }
-            .padding(16)
+            .padding(14)
             .background(Color.white)
-            .cornerRadius(16)
+            .cornerRadius(14)
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 14)
                     .stroke(step.state == .active ? Color.clear : Color(UIColor.systemGray5), lineWidth: 1)
             )
             .shadow(color: Color.black.opacity(step.state == .active ? 0.05 : 0), radius: 8, x: 0, y: 2)
-            .opacity(step.state == .active ? 1.0 : 0.5)
+            .opacity(step.state == .active ? 1.0 : 0.6)
         }
         .buttonStyle(PlainButtonStyle())
     }
