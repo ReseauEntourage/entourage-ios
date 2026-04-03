@@ -632,7 +632,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .webinar:
             let storyboard = UIStoryboard(name: StoryboardName.event, bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "eventMainListV2") as? EventListMainV2ViewController {
-                vc.welcomeEventsType = .webinar
+                vc.welcomeEventsType = .firstStep
                 let nav = UINavigationController(rootViewController: vc)
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true)
