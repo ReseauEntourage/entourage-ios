@@ -13,10 +13,17 @@ private enum EventListTableDTO {
     case emptyCell
 }
 
+enum WelcomeEventType {
+    case firstStep
+    case webinar
+    case papotages
+}
+
 enum ViewMode {
     case normal
     case filtered
     case searching
+    case welcomeEvents(WelcomeEventType)
 }
 
 class EventListMainV2ViewController: UIViewController {
@@ -61,15 +68,31 @@ class EventListMainV2ViewController: UIViewController {
     private var startSearching = false
     private var isFromSearch = false
     
+    var welcomeEventsType: WelcomeEventType? = nil
+
     private var filterCell: CellMainFilter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let type = welcomeEventsType {
+            self.mode = .welcomeEvents(type)
+        }
+
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
 
         // Title
-        self.ui_title_label.text = "tabbar_events".localized
+        if let type = welcomeEventsType {
+            if type == .firstStep {
+                self.ui_title_label.text = "welcome_welcome_list_title".localized
+            } else if type == .webinar {
+                self.ui_title_label.text = "welcome_webinar_list_title".localized
+            } else {
+                self.ui_title_label.text = "welcome_papotages_list_title".localized
+            }
+        } else {
+            self.ui_title_label.text = "tabbar_events".localized
+        }
 
         // Table View
         self.ui_table_view.delegate = self
@@ -89,15 +112,23 @@ class EventListMainV2ViewController: UIViewController {
 
         expandedfloatingButton.setTitle("event_title_btn_create_event".localized, for: .normal)
         deployButton()
-        configureUserLocationAndRadius()
-        let searchTapGesture = UITapGestureRecognizer(target: self, action: #selector(onSearchClick))
-        uiBtnSearch.addGestureRecognizer(searchTapGesture)
 
-        let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(onFilterClick))
-        uiBtnFilter.addGestureRecognizer(filterTapGesture)
-        //Confguration Post onboarding
-        configurePostOnboarding()
+        if welcomeEventsType == nil {
+            configureUserLocationAndRadius()
+            let searchTapGesture = UITapGestureRecognizer(target: self, action: #selector(onSearchClick))
+            uiBtnSearch.addGestureRecognizer(searchTapGesture)
 
+            let filterTapGesture = UITapGestureRecognizer(target: self, action: #selector(onFilterClick))
+            uiBtnFilter.addGestureRecognizer(filterTapGesture)
+            //Confguration Post onboarding
+            configurePostOnboarding()
+        } else {
+            uiBtnSearch.isHidden = true
+            uiBtnFilter.isHidden = true
+            floatingButton.isHidden = true
+            expandedfloatingButton.isHidden = true
+            ui_tableview_contraint_top.constant = 0
+        }
 
     }
 
@@ -257,6 +288,14 @@ class EventListMainV2ViewController: UIViewController {
                 }
             } else {
                 tableDTO.append(.secondHeader)
+                tableDTO.append(.emptyCell)
+            }
+        case .welcomeEvents(_):
+            if discoverEvent.count > 0 {
+                for event in discoverEvent {
+                    tableDTO.append(.discoverEventCell(event: event))
+                }
+            } else {
                 tableDTO.append(.emptyCell)
             }
         case .filtered:
@@ -510,11 +549,33 @@ extension EventListMainV2ViewController {
             EventService.searchEvents(query: searchText, currentPage: currentPageDiscover, per: numberOfItemsForWS) { events, error in
                 self.handleDiscoverEventResponse(events: events, error: error)
             }
+        case .welcomeEvents(let type):
+            let completion: ([Event]?, EntourageNetworkError?) -> Void = { [weak self] events, error in
+                self?.handleDiscoverEventResponse(events: events, error: error)
+            }
+            if type == .firstStep {
+                EventService.getWelcomeEvents { events in
+                    completion(events, nil)
+                }
+            } else if type == .webinar {
+                EventService.getWebinarEvents { events in
+                    completion(events, nil)
+                }
+            } else {
+                EventService.getPapotagesEvents { events in
+                    completion(events, nil)
+                }
+            }
         }
     }
 
     func getMyEvent() {
         if isEndOfMyEventList && self.mode != .searching {
+            self.getDiscoverEvent()
+            return
+        }
+        if welcomeEventsType != nil {
+            // For welcome events, we don't have "my events"
             self.getDiscoverEvent()
             return
         }

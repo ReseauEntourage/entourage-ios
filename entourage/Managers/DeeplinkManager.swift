@@ -342,10 +342,13 @@ struct DeepLinkManager {
 
     static func showWelcomeEvent() {
         DispatchQueue.main.async {
-            let vc = WelcomeEventsListViewController()
-            vc.eventType = .firstStep
-            vc.modalPresentationStyle = .fullScreen
-            AppState.getTopViewController()?.present(vc, animated: true)
+            let storyboard = UIStoryboard(name: StoryboardName.event, bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "eventMainListV2") as? EventListMainV2ViewController {
+                vc.welcomeEventsType = .firstStep
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                AppState.getTopViewController()?.present(nav, animated: true)
+            }
         }
     }
     static func showWelcomeTwo(){
@@ -685,10 +688,13 @@ struct DeepLinkManager {
 
     static func showWelcomeWebinar() {
         DispatchQueue.main.async {
-            let vc = WelcomeEventsListViewController()
-            vc.eventType = .webinar
-            vc.modalPresentationStyle = .fullScreen
-            AppState.getTopViewController()?.present(vc, animated: true)
+            let storyboard = UIStoryboard(name: StoryboardName.event, bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "eventMainListV2") as? EventListMainV2ViewController {
+                vc.welcomeEventsType = .webinar
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                AppState.getTopViewController()?.present(nav, animated: true)
+            }
         }
     }
     
