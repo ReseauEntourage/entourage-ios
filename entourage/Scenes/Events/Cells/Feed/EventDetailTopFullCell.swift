@@ -22,9 +22,9 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_img_member_1: UIImageView!
     @IBOutlet weak var ui_img_member_2: UIImageView!
     @IBOutlet weak var ui_img_member_3: UIImageView!
-    @IBOutlet weak var ui_lbl_about_title: UILabel!
-    @IBOutlet weak var ui_lbl_about_desc: ActiveLabel!
-    @IBOutlet weak var ui_taglist_view: TagListView!
+    @IBOutlet weak var ui_lbl_about_title: UILabel?
+    @IBOutlet weak var ui_lbl_about_desc: ActiveLabel?
+    @IBOutlet weak var ui_taglist_view: TagListView?
     @IBOutlet weak var ui_start_time: UILabel!
     @IBOutlet weak var ui_start_date: UILabel!
     @IBOutlet weak var ui_view_place_limit: UIView!
@@ -50,7 +50,7 @@ class EventDetailTopFullCell: UITableViewCell {
     
     @IBOutlet weak var ui_view_reserved_female: UIView!
     @IBOutlet weak var ui_constraint_height_reserved_female: NSLayoutConstraint!
-    @IBOutlet weak var ui_lbl_reserved_female: UILabel!
+    @IBOutlet weak var ui_lbl_reserved_female: UILabel?
 
     weak var delegate: EventDetailTopCellDelegate? = nil
     
@@ -72,7 +72,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_lbl_about_title?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_lbl_about_title?.text = "event_detail_about_title".localized
         ui_lbl_about_desc?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        ui_lbl_about_desc.enableLongPressCopy()
+        ui_lbl_about_desc?.enableLongPressCopy()
         
         ui_taglist_view?.backgroundColor = .appBeigeClair
         ui_taglist_view?.tagBackgroundColor = ApplicationTheme.getFontCategoryBubble().color
@@ -94,7 +94,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_view_reserved_female.layer.cornerRadius = 12
         ui_view_reserved_female.backgroundColor = UIColor.appViolet
         ui_lbl_reserved_female?.text = "event_detail_reserved_female_label".localized
-        ui_lbl_reserved_female.setFontTitle(size: 13)
+        ui_lbl_reserved_female?.setFontTitle(size: 13)
 
         ui_view_place_limit.isHidden = true
         
@@ -219,7 +219,7 @@ class EventDetailTopFullCell: UITableViewCell {
         // --- TITRE et DESCRIPTION ---
         ui_title.text = event.title
         if let _desc = event.descriptionEvent {
-            ui_lbl_about_desc.text = _desc
+            ui_lbl_about_desc?.text = _desc
             ui_lbl_about_desc?.handleURLTap({ url in
                 delegate.showWebUrl(url: url)
             })
