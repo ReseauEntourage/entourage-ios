@@ -12,34 +12,11 @@ import SVProgressHUD
 import CoreLocation
 import GooglePlaces
 import FirebaseMessaging
-
-enum seeAllCellType {
-    case seeAllDemand
-    case seeAllEvent
-    case seeAllGroup
-    case seeAllPedago
-}
-
-enum HomeV2DTO {
-    case cellTitle(title: String, subtitle: String)
-    case cellAction(actions: [Action])
-    case cellSeeAll(seeAllType: seeAllCellType)
-    case cellEvent(events: [Event])
-    case cellGroup(groups: [Neighborhood])
-    case cellPedago(pedago: PedagogicResource)
-    case cellMap
-    case cellIAmLost(helpType: HomeNeedHelpType)
-    case moderator(name: String, imageUrl: String? = nil)
-    case cellHZ
-    case cellInitialPedago(pedagos: [PedagogicResource])
-    case cellWelcomeJourney(viewModel: WelcomeJourneyViewModel)
-    case cellSmallTalk(userRequests:[UserSmallTalkRequest])
-    case cellSolidarityTools
-}
+import SwiftUI
 
 class HomeV2ViewController: UIViewController {
     
-    // OUTLET
+    // OUTLETS (Maintained to prevent Storyboard crashes)
     @IBOutlet weak var ui_drivable_top_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_drivable_table_view_top_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_table_view: UITableView!
@@ -48,104 +25,297 @@ class HomeV2ViewController: UIViewController {
     @IBOutlet weak var ui_image_notif: UIImageView!
     @IBOutlet weak var ui_image_user_avatar: UIImageView!
     @IBOutlet weak var ui_label_subtitle: UILabel!
-    
-    // VARIABLE
-    var tableDTO = [HomeV2DTO]()
-    var notificationCount = 0
-    var allGroups = [Neighborhood]()
-    var allEvents = [Event]()
-    var allDemands = [Action]()
-    var allPedagos = [PedagogicResource]()
-    var initialPedagos = [PedagogicResource]()
-    
-    var currentFilter = EventActionLocationFilters()
-    var currentLocationFilter = EventActionLocationFilters()
-    var currentSectionsFilter: Sections = Sections()
-    var userHome: UserHome = UserHome()
-    var currentUser: User? = nil
 
-    var pedagoCreateEvent: PedagogicResource?
-    var pedagoCreateGroup: PedagogicResource?
-    var isContributionPreference = false
-    var shouldLaunchEventPopup: Int? = nil
-    var shouldTestOnboarding = false
-    var userSmallTalkRequests: [UserSmallTalkRequest] = []
+    // MARK: - Properties
+    var viewModel = HomeV2ViewModel()
+    private var hostingController: UIHostingController<HomeV2View>?
+
+    // VARIABLES FOR GATING & OTHER COMPATIBILITY
     private var hasRunEntryGating = false
     private var hasShownCompletionStateThisSession = false
-    private var hasInitiallyCompletedAll: Bool? = nil
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         SVProgressHUD.show()
-        currentUser = UserDefaults.currentUser
         AnalyticsLoggerManager.logEvent(name: View__Home)
         if EnhancedOnboardingConfiguration.shared.shouldNotDisplayCampain == true {
         } else {
             AnalyticsLoggerManager.logEvent(name: home_activate_firebase_message)
         }
-
-        prepareUINotifAndAvatar()
-        ui_table_view.delegate = self
-        ui_table_view.dataSource = self
-        ui_table_view.backgroundColor = UIColor(named: "white_orange_home")
-
-        ui_table_view.register(UINib(nibName: HomeV2CellTitle.identifier, bundle: nil), forCellReuseIdentifier: HomeV2CellTitle.identifier)
-        ui_table_view.register(UINib(nibName: HomeSeeAllCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSeeAllCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeCellMapButton.identifier, bundle: nil), forCellReuseIdentifier: HomeCellMapButton.identifier)
-        ui_table_view.register(UINib(nibName: HomeCellAction.identifier, bundle: nil), forCellReuseIdentifier: HomeCellAction.identifier)
-        ui_table_view.register(UINib(nibName: HomeActionHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeActionHorizontalCollectionCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeEventHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeEventHorizontalCollectionCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeGroupHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeGroupHorizontalCollectionCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeCellPedago.identifier, bundle: nil), forCellReuseIdentifier: HomeCellPedago.identifier)
-        ui_table_view.register(UINib(nibName: HomeNeedHelpCell.identifier, bundle: nil), forCellReuseIdentifier: HomeNeedHelpCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeModeratorCell.identifier, bundle: nil), forCellReuseIdentifier: HomeModeratorCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeInitialPedagogicHorizontalCell.identifier, bundle: nil), forCellReuseIdentifier: HomeInitialPedagogicHorizontalCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
-        ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
-
-        self.checkAndCreateCookieIfNotExists()
         
-        if let _user = UserDefaults.currentUser {
-            UserService.getDetailsForUser(userId: String(_user.sid)) { user, error in
-                if error == nil {
-                    UserDefaults.currentUser = user
+        setupSwiftUIView()
+        setupViewModelCallbacks()
+        setupDataBindings()
+        checkAndCreateCookieIfNotExists()
+
+        SVProgressHUD.dismiss()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Ensure celebration popup fires if fully completed and not shown
+        if viewModel.welcomeJourneyViewModel.isFullyCompleted && !hasShownCompletionStateThisSession {
+            let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
+            if !hasShownCelebration {
+                UserDefaults.standard.set(true, forKey: "hasShownWelcomeCelebration")
+                self.hasShownCompletionStateThisSession = true
+
+                DispatchQueue.main.async {
+                    let celebrationVC = WelcomeJourneyCelebrationPopupViewController()
+                    celebrationVC.modalPresentationStyle = .overFullScreen
+                    celebrationVC.modalTransitionStyle = .crossDissolve
+                    celebrationVC.onDismiss = { [weak self] in
+                        self?.viewModel.loadData()
+                    }
+                    self.present(celebrationVC, animated: true)
                 }
             }
         }
-        
-        // SECURITE: Gating retiré d'ici pour éviter les présentations modales pendant le layout
-        SVProgressHUD.dismiss()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        currentFilter.resetToDefault()
-        self.loadMetadatas()
-        self.initHome()
+        viewModel.loadData()
         self.checkForUpdates()
         self.ifEventLastDay()
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
-        getUserInfo()
     }
     
-    // SECURITE: Gating déplacé ici (quand la Home est stable graphiquement)
+    // Add logic bindings here that update the view or run checks when data loads
+    private func setupDataBindings() {
+        // Here we could use Combine to listen to viewModel, but since we are relying
+        // on UIHostingController for the UI, we only need to catch the "data loaded" signal
+        // for handling side-effects like onboarding return.
+        // A simple approach since we know getDemandes is the last call in the chain
+        // is to add a completion block or use the viewModel's objectWillChange.
+
+        viewModel.onDataLoaded = { [weak self] in
+            DispatchQueue.main.async {
+                self?.handleEnhancedOnboardingReturn()
+            }
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         runHomeEntryGatingIfNeeded()
     }
     
+    // MARK: - SwiftUI Integration
+    private func setupSwiftUIView() {
+        let homeView = HomeV2View(viewModel: viewModel)
+        let hostingController = UIHostingController(rootView: homeView)
+        self.hostingController = hostingController
+
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+
+        hostingController.didMove(toParent: self)
+    }
+
+    // MARK: - Callbacks
+    private func setupViewModelCallbacks() {
+        viewModel.onAvatarClick = { [weak self] in
+            self?.onAvatarClick()
+        }
+
+        viewModel.onNotifClick = { [weak self] in
+            self?.onNotifClick()
+        }
+
+        viewModel.onSeeAllDemands = { [weak self] in
+            if self?.viewModel.isContributionPreference == true {
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_All)
+                DeepLinkManager.showContribListUniversalLink()
+            } else {
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_All)
+                DeepLinkManager.showDemandListUniversalLink()
+            }
+        }
+
+        viewModel.onSeeAllEvents = {
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Event_All)
+            DeepLinkManager.showOutingListUniversalLink()
+        }
+
+        viewModel.onSeeAllGroups = {
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Group_All)
+            DeepLinkManager.showNeiborhoodListUniversalLink()
+        }
+
+        viewModel.onSeeAllPedagos = {
+            AnalyticsLoggerManager.logEvent(name: Action__Home__Pedago)
+            DeepLinkManager.showRessourceListUniversalLink()
+        }
+
+        viewModel.onMapClick = { [weak self] in
+            AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
+            self?.showAllPois()
+        }
+
+        viewModel.onShowPedagogic = { [weak self] pedago in
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Article)
+            self?.showPedagogic(pedagogic: pedago)
+        }
+
+        viewModel.onShowEvent = { [weak self] event in
+            self?.showEvent(eventId: event.uid)
+        }
+
+        viewModel.onShowGroup = { [weak self] group in
+            self?.showNeighborhood(neighborhoodId: group.uid)
+        }
+
+        viewModel.onShowAction = { [weak self] action, isContrib in
+            if isContrib {
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_Detail)
+            } else {
+                AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
+            }
+            self?.showAction(actionId: action.id, isContrib: isContrib, action: action)
+        }
+
+        viewModel.onModeratorClick = { id in
+            AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
+            MessagingService.createOrGetConversation(userId: String(id)) { conversation, error in
+                if let conversation = conversation {
+                    DeepLinkManager.showConversation(conversationId: conversation.uid)
+                }
+            }
+        }
+
+        viewModel.onGoBuffet = { [weak self] in
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Buffet)
+            let urlStr = "https://reseauentourage.notion.site/Buffet-du-lien-social-69c20e089dbd483cb093e90ae2953a54"
+            if let webUrl = URL(string: urlStr) {
+                WebLinkManager.openUrlInApp(url: webUrl, presenterViewController: self)
+            }
+        }
+
+        viewModel.onSolidarityEthicsTapped = { [weak self] in
+            let isProd = EnvironmentConfigurationManager.sharedInstance.runsOnProduction
+            let urlString = isProd ? "https://www.entourage.social/app/resources/eMU_InNSSJbE" : "https://preprod.entourage.social/app/resources/87203debda8b"
+            if let _url = URL(string: urlString) {
+                WebLinkManager.openUrl(url: _url, openInApp: true, presenterViewController: AppState.getTopViewController())
+            }
+        }
+
+        viewModel.onWelcomeJourneyStepTapped = { [weak self] stepType in
+            self?.handleWelcomeJourneyStep(stepType)
+        }
+
+        viewModel.onShowUnclosedActionPopup = { [weak self] actionType, title, actionId in
+            self?.showPopUpAction(actionType: actionType, title: title, actionId: actionId)
+        }
+
+        viewModel.onTalkTapped = { [weak self] request in
+            let sb = UIStoryboard(name: StoryboardName.messages, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController,
+               let smalltalkId = request.smalltalk_id {
+
+                let smalltalkIdString = String(smalltalkId)
+                vc.setupFromOtherVC(conversationId: smalltalkId, title: "Bonnes ondes", isOneToOne: true, conversation: nil)
+                vc.isSmallTalkMode = true
+                vc.smallTalkId = smalltalkIdString
+                self?.present(vc, animated: true)
+            }
+        }
+
+        viewModel.onCreateSmallTalkTapped = { [weak self] in
+            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
+            guard let vc = storyboard.instantiateInitialViewController() else { return }
+            vc.modalPresentationStyle = .fullScreen
+            self?.present(vc, animated: true)
+        }
+    }
+
+    func showPopUpAction(actionType: String, title: String, actionId: Int?) {
+        AnalyticsLoggerManager.logEvent(name: View__StateDemandPop__Day10)
+
+        let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+        if actionType == "solicitation" {
+            if let vc = sb.instantiateViewController(withIdentifier: "ActionPasseOneDemand") as? ActionPasseOneDemand {
+                vc.setContent(content: title)
+                vc.setActionId(actionId: actionId)
+                vc.setActionType(actionType: actionType)
+                self.present(vc, animated: true)
+            }
+        }
+        if actionType == "contribution" {
+            if let vc = sb.instantiateViewController(withIdentifier: "ActionPassedOneContrib") as? ActionPassedOneContrib {
+                vc.setContent(content: title)
+                vc.setActionId(actionId: actionId)
+                vc.setActionType(actionType: actionType)
+                self.present(vc, animated: true)
+            }
+        }
+    }
+
+    // MARK: - Logic functions
+    func onAvatarClick() {
+        AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
+        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
+    }
+
+    func onNotifClick() {
+        AnalyticsLoggerManager.logEvent(name: Action__Home__Notif)
+        if let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav") as? UINavigationController {
+            navVC.modalPresentationStyle = .fullScreen
+            if let vc = navVC.topViewController as? NotificationsInAppViewController {
+                vc.hasToShowDot = viewModel.notificationCount > 0
+                vc.delegate = self
+            }
+            self.tabBarController?.present(navVC, animated: true)
+        }
+    }
+
+    private func handleWelcomeJourneyStep(_ stepType: WelcomeJourneyStepType) {
+        switch stepType {
+        case .video:
+            let modalVC = WelcomeVideoModalViewController()
+            modalVC.modalPresentationStyle = .overFullScreen
+            modalVC.modalTransitionStyle = .crossDissolve
+            modalVC.onComplete = { [weak self] in
+                self?.viewModel.loadData()
+            }
+            modalVC.onDismissOnly = { [weak self] in
+                self?.viewModel.loadData()
+            }
+            self.present(modalVC, animated: true)
+
+        case .webinar:
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .firstStep
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+
+        case .papotages:
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .papotages
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+    }
+
     func showVotePopupIfNeeded() {
         let userDefaults = UserDefaults.standard
         let hasSeenVotePopup = userDefaults.bool(forKey: "hasSeenVotePopup")
 
-        guard !hasSeenVotePopup else {
-            return
-        }
+        guard !hasSeenVotePopup else { return }
 
         userDefaults.set(true, forKey: "hasSeenVotePopup")
 
@@ -154,6 +324,89 @@ class HomeV2ViewController: UIViewController {
             popupVC.delegate = self
             popupVC.modalPresentationStyle = .overCurrentContext
             self.present(popupVC, animated: true, completion: nil)
+        }
+    }
+
+    func showAction(actionId: Int, isContrib: Bool, isAfterCreation: Bool = false, action: Action? = nil) {
+        DeepLinkManager.showAction(id: actionId, isContrib: isContrib)
+    }
+
+    func showPedagogic(pedagogic: PedagogicResource) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {
+            vc.urlWebview = pedagogic.url
+            vc.resourceId = pedagogic.id
+            vc.isRead = pedagogic.isRead
+            vc.htmlBody = pedagogic.bodyHtml
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+
+    func showAllPois() {
+        let sb = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "MainGuide") as? MainGuideViewController {
+            vc.isFromDeeplink = true
+            let navVc = UINavigationController()
+            navVc.modalPresentationStyle = .fullScreen
+            navVc.addChild(vc)
+            self.navigationController?.present(navVc, animated: true)
+        }
+    }
+
+    func showEvent(eventId: Int, isAfterCreation: Bool = false, event: Event? = nil) {
+        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController {
+            vc.eventId = eventId
+            vc.event = event
+            vc.isAfterCreation = isAfterCreation
+            vc.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(navVc, animated: true, completion: nil)
+            return
+        }
+    }
+
+    func showNeighborhood(neighborhoodId: Int, isAfterCreation: Bool = false, isShowCreatePost: Bool = false, neighborhood: Neighborhood? = nil) {
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
+        if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
+            vc.isAfterCreation = isAfterCreation
+            vc.neighborhoodId = neighborhoodId
+            vc.isShowCreatePost = isShowCreatePost
+            vc.neighborhood = neighborhood
+            self.navigationController?.present(nav, animated: true)
+        }
+    }
+
+    func checkAndCreateCookieIfNotExists() {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: "isTranslatedByDefault") == nil {
+            defaults.set(true, forKey: "isTranslatedByDefault")
+        }
+    }
+
+    func showResources() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "listPedagoNav") {
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
+
+    func showNeighborhoodDetailWithCreatePost(id: Int, group: Neighborhood) {
+        DeepLinkManager.showNeighborhoodDetailWithCreatePost(id: id, group: group)
+    }
+
+    func showAllNeighborhoods() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowDiscover), object: nil)
+    }
+
+    func ifEventLastDay() {
+        if let _eventId = viewModel.shouldLaunchEventPopup {
+            self.getEventAndLaunchPopup(eventId: String(_eventId))
+            viewModel.shouldLaunchEventPopup = nil
+        }
+    }
+
+    func getEventAndLaunchPopup(eventId: String) {
+        EventService.getEventWithId(eventId) { event, error in
+            if let _event = event {
+                self.launchEventLastDayVC(with: _event)
+            }
         }
     }
 
@@ -187,7 +440,6 @@ class HomeV2ViewController: UIViewController {
         if config.isFromOnboardingFromNormalWay {
             config.isFromOnboardingFromNormalWay = false
             SVProgressHUD.dismiss()
-            print("eho _category : " , OnboardingEndChoicesManager.shared.categoryForButton)
             if let _category = OnboardingEndChoicesManager.shared.categoryForButton {
                 if _category.contains("both_action") || _category.contains("no_event") {
                     if let _vc = AppState.getTopViewController() {
@@ -213,8 +465,6 @@ class HomeV2ViewController: UIViewController {
                                 WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: _tabbar)
                             }
                         }
-                    } else {
-                        print("Invalid URL string")
                     }
                 } else if _category.contains("neighborhoods") {
                     OnboardingEndChoicesManager.shared.categoryForButton = ""
@@ -241,37 +491,18 @@ class HomeV2ViewController: UIViewController {
             return
         }
     }
-
-    func testEventLastDay() {
-        getEventAndLaunchPopup(eventId: "136208")
-    }
-    
-    func ifEventLastDay() {
-        if let _eventId = shouldLaunchEventPopup {
-            self.getEventAndLaunchPopup(eventId: String(_eventId))
-            shouldLaunchEventPopup = nil
-        }
-    }
-    
-    func getEventAndLaunchPopup(eventId: String) {
-        EventService.getEventWithId(eventId) { event, error in
-            if let _event = event {
-                self.launchEventLastDayVC(with: _event)
-            }
-        }
-    }
     
     func sendOnboardingIntro() {
         let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
         if let viewController = storyboard.instantiateViewController(withIdentifier: "enhancedOnboardingIntro") as? EnhancedOnboardingIntro {
             let config = EnhancedOnboardingConfiguration.shared
-            if isContributionPreference {
+            if viewModel.isContributionPreference {
                 config.preference = "contribution"
             }
             
             config.shouldSendOnboardingFromNormalWay = false
             config.isFromOnboardingFromNormalWay = true
-            viewController.isAssociationGoal = self.userHome.association ?? false
+            viewController.isAssociationGoal = self.viewModel.userHome.association ?? false
             viewController.modalPresentationStyle = .fullScreen
             viewController.modalTransitionStyle = .coverVertical
             present(viewController, animated: true, completion: nil)
@@ -282,44 +513,9 @@ class HomeV2ViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let eventLastDayVC = storyboard.instantiateViewController(withIdentifier: "eventLastDay") as? EventLastDayViewController {
             eventLastDayVC.event = event
-            eventLastDayVC.user = currentUser
+            eventLastDayVC.user = viewModel.currentUser
             eventLastDayVC.modalPresentationStyle = .overCurrentContext
             self.present(eventLastDayVC, animated: true, completion: nil)
-        }
-    }
-    
-    func checkNotificationSettings() {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            DispatchQueue.main.async {
-                if settings.authorizationStatus == .authorized {
-                    AnalyticsLoggerManager.logEvent(name: has_user_activated_notif)
-                } else {
-                    AnalyticsLoggerManager.logEvent(name: has_user_disabled_notif)
-                    let connectionCount = self.incrementConnectionCount()
-                    if connectionCount == 1 || connectionCount == 4 || connectionCount == 9 {
-                        self.presentNotificationDemandViewController()
-                    }
-                }
-            }
-        }
-    }
-
-    func incrementConnectionCount() -> Int {
-        let defaults = UserDefaults.standard
-        let currentCount = defaults.integer(forKey: "connectionCount")
-        return currentCount
-    }
-    
-    func presentNotificationDemandViewController() {
-        if NotificationDisplayManager.shared.hasBeenDisplayed == false {
-            NotificationDisplayManager.shared.hasBeenDisplayed = true
-            let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
-                vc.modalPresentationStyle = .overFullScreen
-                self.present(vc, animated: true, completion: nil)
-            } else {
-                print("ViewController with identifier 'NotificationDemandViewController' not found")
-            }
         }
     }
     
@@ -346,6 +542,7 @@ class HomeV2ViewController: UIViewController {
                             }
                         }))
                         alert.addAction(UIAlertAction(title: "Plus tard", style: .cancel, handler: nil))
+                        self.present(alert, animated: true)
                     }
                 }
             } catch {
@@ -355,680 +552,34 @@ class HomeV2ViewController: UIViewController {
         task.resume()
     }
     
-    func prepareUINotifAndAvatar() {
-        ui_view_notif.layer.cornerRadius = 18
-        ui_view_notif.clipsToBounds = true
-        ui_image_user_avatar.layer.cornerRadius = 18
-        ui_image_user_avatar.clipsToBounds = true
-        ui_button_notif.addTarget(self, action: #selector(onNotifClick), for: .touchUpInside)
-        ui_image_user_avatar.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onAvatarClick))
-        ui_image_user_avatar.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    @objc func onAvatarClick() {
-        AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
-        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
-        navVC.modalPresentationStyle = .fullScreen
-        self.tabBarController?.present(navVC, animated: true)
-    }
-    
-    @objc func onNotifClick() {
-        AnalyticsLoggerManager.logEvent(name: Action__Home__Notif)
-        if let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav") as? UINavigationController {
-            navVC.modalPresentationStyle = .fullScreen
-            if let vc = navVC.topViewController as? NotificationsInAppViewController {
-                vc.hasToShowDot =  notificationCount > 0
-                vc.delegate = self
-            }
-            self.tabBarController?.present(navVC, animated: true)
-        }
-    }
-    
-    func configureDTO() {
-        self.tableDTO.removeAll()
-        self.updateTopView()
-
-        var showInitialPedago = false
-        if let user = UserDefaults.currentUser, let involvements = user.involvements, involvements.contains("resources") {
-            showInitialPedago = true
-        }
-
-        let welcomeJourneyVM = WelcomeJourneyViewModel()
-        welcomeJourneyVM.update(with: userHome.events, hasInitiallyCompletedAll: &self.hasInitiallyCompletedAll)
-
-        let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
-
-        if !welcomeJourneyVM.hideEntirely {
-            tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
-
-            if welcomeJourneyVM.isFullyCompleted && !hasShownCelebration {
-                UserDefaults.standard.set(true, forKey: "hasShownWelcomeCelebration")
-                self.hasShownCompletionStateThisSession = true
-
-                DispatchQueue.main.async {
-                    let celebrationVC = WelcomeJourneyCelebrationPopupViewController()
-                    celebrationVC.modalPresentationStyle = .overFullScreen
-                    celebrationVC.modalTransitionStyle = .crossDissolve
-                    celebrationVC.onDismiss = { [weak self] in
-                        self?.configureDTO()
-                    }
-                    self.present(celebrationVC, animated: true)
-                }
-            }
-        }
-
-        if showInitialPedago && initialPedagos.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
-            tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
-        }
-
-        if (allDemands.count > 0) {
-            if isContributionPreference {
-                tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
-                tableDTO.append(.cellAction(actions: allDemands))
-                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
+    func presentNotificationDemandViewController() {
+        if NotificationDisplayManager.shared.hasBeenDisplayed == false {
+            NotificationDisplayManager.shared.hasBeenDisplayed = true
+            let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
+                vc.modalPresentationStyle = .overFullScreen
+                self.present(vc, animated: true, completion: nil)
             } else {
-                tableDTO.append(.cellTitle(title: "home_v2_title_action".localized, subtitle: "home_v2_subtitle_action".localized))
-                tableDTO.append(.cellAction(actions: allDemands))
-                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
+                print("ViewController with identifier 'NotificationDemandViewController' not found")
             }
         }
-        if allEvents.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_event".localized, subtitle: "home_v2_subtitle_event".localized))
-            tableDTO.append(.cellEvent(events: allEvents))
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
-        }
-
-        var _offlineEvents = [Event]()
-        for event in allEvents {
-            if event.isOnline == false {
-                _offlineEvents.append(event)
-            }
-        }
-        if _offlineEvents.count == 0 && allDemands.count == 0 && !isContributionPreference {
-            tableDTO.append(.cellHZ)
-        }
-
-        if let _moderator = userHome.moderator {
-            if let _name = _moderator.displayName {
-                tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
-            }
-        }
-
-        tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
-        tableDTO.append(.cellSolidarityTools)
-
-        if allPedagos.count > 0 {
-            for pedago in allPedagos {
-                tableDTO.append(.cellPedago(pedago: pedago))
-            }
-        }
-        
-        self.ui_table_view.reloadData()
-        self.handleEnhancedOnboardingReturn()
-        SVProgressHUD.dismiss()
     }
-    
-    func initHome() {
-        self.ui_label_subtitle.text = "home_v2_title".localized
-        self.getNotif()
-    }
-    
-    func updateTopView() {
-        if let _urlstr = userHome.avatarURL, let url = URL(string: _urlstr) {
-            ui_image_user_avatar.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_user"))
-        } else {
-            ui_image_user_avatar.image = UIImage.init(named: "placeholder_user")
-        }
-        
-        if notificationCount == 0 {
-            self.ui_image_notif.image = UIImage(named: "ic_notif_off")
-            self.ui_view_notif.backgroundColor = UIColor.white
-        } else {
-            self.ui_image_notif.image = UIImage(named: "ic_notif_on")
-            self.ui_view_notif.backgroundColor = UIColor.appOrangeDark
-        }
-        prepareUINotifAndAvatar()
+
+}
+
+// MARK: - NotificationDelegate
+extension HomeV2ViewController: NotificationDelegate {
+    func onEventLastDay(id: Int) {
+        self.getEventAndLaunchPopup(eventId: String(id))
     }
 }
 
-// MARK: - TableView Delegate and DataSource
-extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableDTO.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableDTO[indexPath.row] {
-        case .cellTitle(let title, let subtitle):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeV2CellTitle") as? HomeV2CellTitle {
-                cell.selectionStyle = .none
-                cell.configure(title: title, subtitle: subtitle)
-                return cell
-            }
-        case .cellAction(let actions):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: HomeActionHorizontalCollectionCell.identifier) as? HomeActionHorizontalCollectionCell {
-                cell.selectionStyle = .none
-                cell.delegate = self
-                cell.configure(actions: actions)
-                return cell
-            }
-        case .cellSeeAll(let seeAllType):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeSeeAllCell") as? HomeSeeAllCell {
-                cell.selectionStyle = .none
-                cell.configure(type: seeAllType, isContrib: self.isContributionPreference)
-                return cell
-            }
-        case .cellEvent(let events):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeEventHorizontalCollectionCell") as? HomeEventHorizontalCollectionCell {
-                cell.selectionStyle = .none
-                cell.delegate = self
-                cell.configure(events: events)
-                return cell
-            }
-        case .cellGroup(let groups):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeGroupHorizontalCollectionCell") as? HomeGroupHorizontalCollectionCell {
-                cell.selectionStyle = .none
-                cell.delegate = self
-                cell.configure(groups: groups)
-                return cell
-            }
-        case .cellPedago(let pedago):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeCellPedago") as? HomeCellPedago {
-                cell.selectionStyle = .none
-                cell.configure(pedago: pedago)
-                return cell
-            }
-        case .cellMap:
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeCellMapButton") as? HomeCellMapButton {
-                cell.selectionStyle = .none
-                cell.configure(title: "home_v2_button_map".localized)
-                return cell
-            }
-        case .cellIAmLost(let helpType):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeNeedHelpCell") as? HomeNeedHelpCell {
-                cell.selectionStyle = .none
-                cell.configure(homeNeedHelpType: helpType)
-                return cell
-            }
-        case .moderator(let name, let imageUrl):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeModeratorCell") as? HomeModeratorCell {
-                cell.selectionStyle = .none
-                cell.configure(title: name, imageUrl: imageUrl)
-                return cell
-            }
-        case .cellHZ:
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeHZCell") as? HomeHZCell {
-                cell.selectionStyle = .none
-                cell.delegate = self
-                return cell
-            }
-        case .cellInitialPedago(let pedagos):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeInitialPedagogicHorizontalCell") as? HomeInitialPedagogicHorizontalCell {
-                cell.selectionStyle = .none
-                cell.delegate = self
-                cell.configure(pedagos: pedagos)
-                return cell
-            }
-        case .cellSmallTalk(let userRequests):
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "HomeSmallTalkCell") as? HomeSmallTalkCell {
-                cell.selectionStyle = .none
-                cell.parentViewController = self
-                var dto: [CollectionDTO] = []
-
-                let matchedRequests = userRequests.filter { $0.smalltalk != nil }
-                let pendingRequests = userRequests.filter { $0.smalltalk == nil }
-
-                for req in matchedRequests {
-                    dto.append(.talking(req))
-                }
-
-                let hasWaiting = !pendingRequests.isEmpty
-                if hasWaiting {
-                    dto.append(.waiting)
-                }
-
-                let shouldAddCreate = matchedRequests.count < 3 && !hasWaiting
-                if shouldAddCreate {
-                    dto.append(.create)
-                }
-
-                cell.data = dto
-                return cell
-            }
-        case .cellSolidarityTools:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: HomeSolidarityToolsCell.identifier) as? HomeSolidarityToolsCell {
-                cell.selectionStyle = .none
-                cell.delegate = self
-                return cell
-            }
-        case .cellWelcomeJourney(let viewModel):
-            if let cell = tableView.dequeueReusableCell(withIdentifier: HomeWelcomeJourneyCell.identifier) as? HomeWelcomeJourneyCell {
-                viewModel.onStepTapped = { [weak self] stepType in
-                    self?.handleWelcomeJourneyStep(stepType)
-                }
-                cell.configure(viewModel: viewModel, parentViewController: self)
-                return cell
-            }
+// MARK: - PopupBienCommunViewControllerDelegate
+extension HomeV2ViewController: PopupBienCommunViewControllerDelegate {
+    func didVote() {
+        if let url = URL(string: "https://bit.ly/3Z2tOB5") {
+            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
         }
-        return UITableViewCell()
-    }
-    
-    private func handleWelcomeJourneyStep(_ stepType: WelcomeJourneyStepType) {
-        switch stepType {
-        case .video:
-            let modalVC = WelcomeVideoModalViewController()
-            modalVC.modalPresentationStyle = .overFullScreen
-            modalVC.modalTransitionStyle = .crossDissolve
-            modalVC.onComplete = { [weak self] in
-                self?.configureDTO()
-            }
-            modalVC.onDismissOnly = { [weak self] in
-                self?.configureDTO()
-            }
-            self.present(modalVC, animated: true)
-
-        case .webinar:
-            let vc = WelcomeEventsListViewController()
-            vc.eventType = .firstStep
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
-
-        case .papotages:
-            let vc = WelcomeEventsListViewController()
-            vc.eventType = .papotages
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
-        }
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch tableDTO[indexPath.row] {
-        case .cellTitle(_, _): return
-        case .cellAction(_): return
-        case .cellSeeAll(let seeAllType):
-            switch seeAllType {
-            case .seeAllDemand:
-                if isContributionPreference {
-                    AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_All)
-                    DeepLinkManager.showContribListUniversalLink()
-                } else {
-                    AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_All)
-                    DeepLinkManager.showDemandListUniversalLink()
-                }
-            case .seeAllEvent:
-                AnalyticsLoggerManager.logEvent(name: Action_Home_Event_All)
-                DeepLinkManager.showOutingListUniversalLink()
-            case .seeAllGroup:
-                AnalyticsLoggerManager.logEvent(name: Action_Home_Group_All)
-                DeepLinkManager.showNeiborhoodListUniversalLink()
-            case .seeAllPedago:
-                AnalyticsLoggerManager.logEvent(name: Action__Home__Pedago)
-                DeepLinkManager.showRessourceListUniversalLink()
-            }
-        case .cellEvent(_): return
-        case .cellGroup(_): return
-        case .cellPedago(let pedago):
-            AnalyticsLoggerManager.logEvent(name: Action_Home_Article)
-            showPedagogic(pedagogic: pedago)
-        case .cellMap:
-            AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
-            self.showAllPois()
-        case .cellIAmLost(let helpType):
-            switch helpType {
-            case .createEvent:
-                AnalyticsLoggerManager.logEvent(name: Action_Home_CreateEvent)
-                showPedagogic(pedagogic: pedagoCreateEvent!)
-            case .createGroup:
-                AnalyticsLoggerManager.logEvent(name: Action_Home_CreateGroup)
-                showPedagogic(pedagogic: pedagoCreateGroup!)
-            }
-        case .moderator(_, _):
-            if let _moderator = self.userHome.moderator {
-                AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
-                if let _id = _moderator.id {
-                    MessagingService.createOrGetConversation(userId: String(_id)) { conversation, error in
-                        if let conversation = conversation {
-                            DeepLinkManager.showConversation(conversationId: conversation.uid)
-                        }
-                    }
-                }
-            }
-        case .cellHZ:
-            AnalyticsLoggerManager.logEvent(name: Action_Home_Buffet)
-            return
-        case .cellInitialPedago(_): return
-        case .cellSmallTalk(_): return
-        case .cellSolidarityTools: return
-        case .cellWelcomeJourney(_): return
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch tableDTO[indexPath.row] {
-        case .cellTitle(_, _): return UITableView.automaticDimension
-        case .cellAction(_): return 215
-        case .cellSeeAll(_): return UITableView.automaticDimension
-        case .cellEvent(_): return 215
-        case .cellGroup(_): return 152
-        case .cellPedago(_): return UITableView.automaticDimension
-        case .cellMap: return UITableView.automaticDimension
-        case .cellIAmLost(_): return UITableView.automaticDimension
-        case .moderator(_, _): return UITableView.automaticDimension
-        case .cellHZ: return UITableView.automaticDimension
-        case .cellInitialPedago(_): return 115
-        case .cellSmallTalk(_): return 260
-        case .cellSolidarityTools: return UITableView.automaticDimension
-        case .cellWelcomeJourney(_): return UITableView.automaticDimension
-        }
-    }
-}
-
-// MARK: - API Calls
-extension HomeV2ViewController {
-    func getNotif() {
-        HomeService.getNotificationsCount { count, error in
-            self.notificationCount = count ?? 0
-            self.getMyGroups()
-        }
-    }
-    
-    func getUserSmallTalkRequests() {
-        SmallTalkService.listUserSmallTalkRequests { requests, error in
-            if let requests = requests {
-                self.userSmallTalkRequests = requests
-            } else {
-                self.userSmallTalkRequests = []
-            }
-            DispatchQueue.main.async {
-                self.configureDTO()
-            }
-        }
-    }
-    
-    func getDemandes() {
-        if isContributionPreference {
-            ActionsService.getAllActions(isContrib: true, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
-                if let actions = actions {
-                    self.allDemands.removeAll()
-                    self.allDemands.append(contentsOf: actions)
-                }
-                self.getInitialPedagos()
-            }
-        } else {
-            ActionsService.getAllActions(isContrib: false, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
-                if let actions = actions {
-                    self.allDemands.removeAll()
-                    self.allDemands.append(contentsOf: actions)
-                }
-                self.getInitialPedagos()
-            }
-        }
-    }
-    func getUserInfo() {
-        guard let _userid = UserDefaults.currentUser?.uuid else {return}
-        UserService.getUnreadCountForUser { unreadCount, error in
-            if let unreadCount = unreadCount {
-                UserDefaults.badgeCount = unreadCount.0
-                UserDefaults.groupBadgeCount = unreadCount.1
-                NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
-            }
-        }
-    }
-    
-    func getInitialPedagos() {
-        HomeService.getInitialResources { resources, error in
-          if let resources = resources {
-            self.initialPedagos.removeAll()
-            var pedagoReads = [PedagogicResource]()
-            for resource in resources {
-              if resource.isRead == false {
-                pedagoReads.append(resource)
-              }
-            }
-            for pedagoRead in pedagoReads {
-              self.initialPedagos.append(pedagoRead)
-            }
-          }
-            self.getUserSmallTalkRequests()
-        }
-      }
-    
-    func getMyGroups() {
-        guard let token = UserDefaults.currentUser?.uuid else { return }
-        NeighborhoodService.getNeighborhoodsForUserId(token, currentPage: 1, per: 10, completion: { groups, error in
-            if let groups = groups {
-                self.allGroups.removeAll()
-                self.allGroups.append(contentsOf: groups)
-            }
-            self.getEvents()
-        })
-    }
-    
-    func getEvents() {
-        EventService.getAllEventsDiscover(currentPage: 1, per: 10, filters: currentFilter.getfiltersForWS()) { events, error in
-            if let events = events {
-                self.allEvents.removeAll()
-                self.allEvents.append(contentsOf: events)
-            }
-            self.getPedago()
-        }
-    }
-    
-    func getPedago() {
-        HomeService.getResources { resources, error in
-            if let resources = resources {
-                self.allPedagos.removeAll()
-                var pedagoReads = [PedagogicResource]()
-                for resource in resources {
-                    if resource.isRead == false {
-                        pedagoReads.append(resource)
-                    }
-                }
-                for pedagoRead in pedagoReads {
-                    self.allPedagos.append(pedagoRead)
-                    if self.allPedagos.count >= 3 {
-                        break
-                    }
-                }
-                #if DEBUG
-                for pedago in resources {
-                    if pedago.id == 32 {
-                        self.pedagoCreateEvent = pedago
-                    } else if pedago.id == 33 {
-                        self.pedagoCreateGroup = pedago
-                    }
-                }
-                #else
-                for pedago in resources {
-                    if pedago.id == 15 {
-                        self.pedagoCreateEvent = pedago
-                    } else if pedago.id == 37 {
-                        self.pedagoCreateGroup = pedago
-                    }
-                }
-                #endif
-            }
-            self.getHomeDetail()
-        }
-    }
-    
-    func getHomeDetail() {
-        HomeService.getUserHome { [weak self] userHome, error in
-            if let userHome = userHome {
-                self?.userHome = userHome
-                AppSignableManager.shared.updateFromHome(userHome: userHome)
-                if userHome.preference == "contribution" {
-                    self?.isContributionPreference = true
-                } else {
-                    self?.isContributionPreference = false
-                }
-                let config = EnhancedOnboardingConfiguration.shared
-                config.preference = userHome.preference ?? ""
-                AppManager.shared.isContributionPreference = self?.isContributionPreference ?? false
-                
-                if userHome.unclosedAction != nil {
-                    self?.showPopUpAction(actionType: (userHome.unclosedAction?.actionType)!, title: (userHome.unclosedAction?.title)!)
-                }
-            }
-            self?.getDemandes()
-        }
-    }
-    
-    func loadMetadatas() {
-        MetadatasService.getMetadatas { error in
-            Logger.print("***** return get metadats ? \(error)")
-        }
-    }
-    
-    func showPopUpAction(actionType: String, title: String) {
-        let actionId = self.userHome.unclosedAction?.id
-        AnalyticsLoggerManager.logEvent(name: View__StateDemandPop__Day10)
-
-        let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
-        if actionType == "solicitation" {
-            if let vc = sb.instantiateViewController(withIdentifier: "ActionPasseOneDemand") as? ActionPasseOneDemand {
-                vc.setContent(content: title)
-                vc.setActionId(actionId: actionId)
-                vc.setActionType(actionType: actionType)
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
-                    currentVc.present(vc, animated: true)
-                }
-            }
-        }
-        if actionType == "contribution" {
-            if let vc = sb.instantiateViewController(withIdentifier: "ActionPassedOneContrib") as? ActionPassedOneContrib {
-                vc.setContent(content: title)
-                vc.setActionId(actionId: actionId)
-                vc.setActionType(actionType: actionType)
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
-                    currentVc.present(vc, animated: true)
-                }
-            }
-        }
-    }
-}
-
-// MARK: - HomeSolidarityToolsCellDelegate
-extension HomeV2ViewController: HomeSolidarityToolsCellDelegate {
-    func onMapTapped() {
-        AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
-        self.showAllPois()
-    }
-
-    func onPedagoTapped() {
-        AnalyticsLoggerManager.logEvent(name: Action__Home__Pedago)
-        DeepLinkManager.showRessourceListUniversalLink()
-    }
-
-    func onEthicsTapped() {
-        let isProd = EnvironmentConfigurationManager.sharedInstance.runsOnProduction
-        let urlString = isProd ? "https://www.entourage.social/app/resources/eMU_InNSSJbE" : "https://preprod.entourage.social/app/resources/87203debda8b"
-        if let _url = URL(string: urlString){
-            WebLinkManager.openUrl(url: _url, openInApp: true, presenterViewController: AppState.getTopViewController())
-        }
-    }
-}
-
-// MARK: - Click Handlers
-extension HomeV2ViewController {
-    func showAction(actionId: Int, isContrib: Bool, isAfterCreation: Bool = false, action: Action? = nil) {
-        DeepLinkManager.showAction(id: actionId, isContrib: isContrib)
-    }
-    
-    func showPedagogic(pedagogic: PedagogicResource) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {
-            vc.urlWebview = pedagogic.url
-            vc.resourceId = pedagogic.id
-            vc.isRead = pedagogic.isRead
-            vc.htmlBody = pedagogic.bodyHtml
-            AnalyticsLoggerManager.logEvent(name: Pedago_View_card)
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    func showAllPois() {
-        let sb = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "MainGuide") as? MainGuideViewController {
-            vc.isFromDeeplink = true
-            let navVc = UINavigationController()
-            navVc.modalPresentationStyle = .fullScreen
-            navVc.addChild(vc)
-            self.navigationController?.present(navVc, animated: true)
-        }
-    }
-    
-    func showUserProfile(id: Int) {
-        DeepLinkManager.showUser(userId: id)
-    }
-    
-    func showEvent(eventId: Int, isAfterCreation: Bool = false, event: Event? = nil) {
-        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController {
-            vc.eventId = eventId
-            vc.event = event
-            vc.isAfterCreation = isAfterCreation
-            vc.modalPresentationStyle = .fullScreen
-            self.tabBarController?.present(navVc, animated: true, completion: nil)
-            return
-        }
-    }
-    
-    func showNeighborhood(neighborhoodId: Int, isAfterCreation: Bool = false, isShowCreatePost: Bool = false, neighborhood: Neighborhood? = nil) {
-        let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
-        if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
-            vc.isAfterCreation = isAfterCreation
-            vc.neighborhoodId = neighborhoodId
-            vc.isShowCreatePost = isShowCreatePost
-            vc.neighborhood = neighborhood
-            self.navigationController?.present(nav, animated: true)
-        }
-    }
-    
-    func checkAndCreateCookieIfNotExists() {
-        let defaults = UserDefaults.standard
-        if defaults.object(forKey: "isTranslatedByDefault") == nil {
-            defaults.set(true, forKey: "isTranslatedByDefault")
-        }
-    }
-    
-    func showResources() {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "listPedagoNav") {
-            self.navigationController?.present(vc, animated: true)
-        }
-    }
-    
-    func showNeighborhoodDetailWithCreatePost(id: Int, group: Neighborhood) {
-        DeepLinkManager.showNeighborhoodDetailWithCreatePost(id: id, group: group)
-    }
-    
-    func showAllNeighborhoods() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowDiscover), object: nil)
-    }
-}
-
-// MARK: - HomeInitialPedagoCCDelegate
-extension HomeV2ViewController: HomeInitialPedagoCCDelegate {
-    func goToPedago(pedago: PedagogicResource) {
-        if let index = initialPedagos.firstIndex(where: { $0.id == pedago.id }) {
-            initialPedagos.remove(at: index)
-        }
-        configureDTO()
-        showPedagogic(pedagogic: pedago)
-    }
-}
-
-// MARK: - HomeEventHCCDelegate
-extension HomeV2ViewController: HomeEventHCCDelegate {
-    func goToMyEventHomeCell(event: Event) {
-        showEvent(eventId: event.uid)
-    }
-}
-
-// MARK: - HomeGroupCCDelegate
-extension HomeV2ViewController: HomeGroupCCDelegate {
-    func goToMyGroup(group: Neighborhood) {
-        showNeighborhood(neighborhoodId: group.uid)
     }
 }
 
@@ -1038,7 +589,7 @@ extension HomeV2ViewController: SFSafariViewControllerDelegate {
     }
 }
 
-// MARK: - WelcomeOneDelegate
+// MARK: - Welcome Delegates
 extension HomeV2ViewController: WelcomeOneDelegate {
     func onClickedLink() {
         AnalyticsLoggerManager.logEvent(name: Action_WelcomeOfferHelp_Day1)
@@ -1046,7 +597,6 @@ extension HomeV2ViewController: WelcomeOneDelegate {
     }
 }
 
-// MARK: - WelcomeTwoDelegate
 extension HomeV2ViewController: WelcomeTwoDelegate {
     func goMyGroup(id: Int, group: Neighborhood) {
         showNeighborhoodDetailWithCreatePost(id: id, group: group)
@@ -1057,14 +607,13 @@ extension HomeV2ViewController: WelcomeTwoDelegate {
     }
 }
 
-// MARK: - WelcomeThreeDelegate
 extension HomeV2ViewController: WelcomeThreeDelegate {
 }
 
 // MARK: - MJAlertControllerDelegate
 extension HomeV2ViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        let actionId = self.userHome.unclosedAction?.id
+        let actionId = self.viewModel.userHome.unclosedAction?.id
         
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
@@ -1080,8 +629,8 @@ extension HomeV2ViewController: MJAlertControllerDelegate {
     }
     
     func validateRightButton(alertTag: MJAlertTAG) {
-        let actionType = self.userHome.unclosedAction?.actionType!
-        let actionId = self.userHome.unclosedAction?.id
+        let actionType = self.viewModel.userHome.unclosedAction?.actionType!
+        let actionId = self.viewModel.userHome.unclosedAction?.id
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "ActionPassedOneVC") as? ActionPassedOneVC {
@@ -1096,41 +645,6 @@ extension HomeV2ViewController: MJAlertControllerDelegate {
                 }
             }
         }
-    }
-}
-
-// MARK: - ScrollView Animation
-extension HomeV2ViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0 {
-            if ui_drivable_top_constraint.constant != 5 {
-                UIView.animate(withDuration: 0.3) {
-                    self.ui_drivable_top_constraint.constant = 5
-                    self.ui_drivable_table_view_top_constraint.constant = 15
-                    self.ui_label_subtitle.alpha = 0
-                    self.view.layoutIfNeeded()
-                }
-            }
-        } else {
-            if ui_drivable_top_constraint.constant != 20 {
-                UIView.animate(withDuration: 0.3) {
-                    self.ui_drivable_top_constraint.constant = 20
-                    self.ui_drivable_table_view_top_constraint.constant = 40
-                    self.ui_label_subtitle.alpha = 1
-                    self.view.layoutIfNeeded()
-                }
-            }
-        }
-    }
-}
-
-// MARK: - HomeHZCellDelegate
-extension HomeV2ViewController: HomeHZCellDelegate {
-    func onCLickGoBuffet() {
-        let urlStr = "https://reseauentourage.notion.site/Buffet-du-lien-social-69c20e089dbd483cb093e90ae2953a54"
-        var webUrl: URL?
-        webUrl = URL(string: urlStr)
-        WebLinkManager.openUrlInApp(url: webUrl, presenterViewController: self)
     }
 }
 
@@ -1165,67 +679,33 @@ extension HomeV2ViewController: Phase3fromAppDelegate {
     }
     
     func updatePreference(userType: UserType) {
-        var _user = currentUser
+        var _user = viewModel.currentUser
         _user?.goal = userType.getGoalString()
         UserService.updateUser(user: _user) { [weak self] user, error in
             SVProgressHUD.dismiss()
             if let user = user {
-                self?.currentUser = user
+                self?.viewModel.currentUser = user
             }
         }
     }
     
     func updateLoc(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         if let _place = googlePlace, let placeId = _place.placeID {
-            UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { [weak self] error in
+            UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { error in
                 SVProgressHUD.dismiss()
             }
         }
     }
 }
 
-// MARK: - NotificationDelegate
-extension HomeV2ViewController: NotificationDelegate {
-    func onEventLastDay(id: Int) {
-        self.getEventAndLaunchPopup(eventId: String(id))
-    }
-}
-
-extension HomeV2ViewController: PopupBienCommunViewControllerDelegate {
-    func didVote() {
-        if let url = URL(string: "https://bit.ly/3Z2tOB5") {
-            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
-        }
-    }
-}
-
+// MARK: - AppManager
 class AppManager {
     static let shared = AppManager()
     var isContributionPreference: Bool = false
     private init() {}
 }
 
-extension HomeV2ViewController {
-    func presentOnboardingMode2IfNeeded() {
-            let initialCoordinate: CLLocationCoordinate2D? = nil
-            let initialLabel: String? = nil
-            let initialRadiusKm = 20
-
-            presentZoneChoiceSwiftUI(
-                initialCoordinate: initialCoordinate,
-                initialLabel: initialLabel,
-                initialRadiusKm: initialRadiusKm,
-                onConfirm: { [weak self] result in
-                    self?.dismiss(animated: true)
-                },
-                onCancel: { [weak self] in
-                    self?.dismiss(animated: true)
-                }
-            )
-        }
-}
-
-//Extension for filling mission infiormation in profile
+// MARK: - Entry Gating Logic
 extension HomeV2ViewController {
     
     private struct ZonePrefill {
@@ -1238,37 +718,12 @@ extension HomeV2ViewController {
         UIApplication.shared.delegate as? AppDelegate
     }
     
-    private func logEntryGating(_ message: String) {
-        print("[HomeEntryGating] \(message)")
-    }
-    
-    private func describeUserForGating(_ user: User) -> String {
-        let goal = (user.goal ?? "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let hasRole = !goal.isEmpty
-        
-        let hasZone = (user.addressPrimary != nil)
-        let addrLabel = user.addressPrimary?.displayAddress ?? "nil"
-        let lat = user.addressPrimary?.latitude
-        let lon = user.addressPrimary?.longitude
-        
-        let latStr = lat != nil ? String(lat!) : "nil"
-        let lonStr = lon != nil ? String(lon!) : "nil"
-        
-        let radius = user.radiusDistance ?? -1
-        let interestsCount = user.interests?.count ?? 0
-        let involvementsCount = user.involvements?.count ?? 0
-        let concernsCount = user.concerns?.count ?? 0
-        
-        return "uuid=\(user.uuid ?? "nil") sid=\(user.sid) goal='\(goal)' hasRole=\(hasRole) hasZone=\(hasZone) addr='\(addrLabel)' lat=\(latStr) lon=\(lonStr) radius=\(radius) interests=\(interestsCount) involvements=\(involvementsCount) concerns=\(concernsCount)"
-    }
-    
     private func makeZonePrefillFromCurrentUser() -> ZonePrefill {
         guard let user = UserDefaults.currentUser else {
             return ZonePrefill(coordinate: nil, label: nil, radiusKm: 20)
         }
         
         let radius = max(1, user.radiusDistance ?? 20)
-        
         var coord: CLLocationCoordinate2D? = nil
         var label: String? = nil
         
@@ -1326,18 +781,6 @@ extension HomeV2ViewController {
             } else {
                 present(onboardingStart, animated: true)
             }
-        } else {
-            let fallback = sb.instantiateViewController(withIdentifier: "onboardingStart")
-            fallback.modalPresentationStyle = .fullScreen
-            if presentedViewController != nil {
-                dismiss(animated: false)
-            }
-            if let window = UIApplication.shared.windows.first {
-                window.rootViewController = fallback
-                window.makeKeyAndVisible()
-            } else {
-                present(fallback, animated: true)
-            }
         }
     }
     
@@ -1348,10 +791,10 @@ extension HomeV2ViewController {
             initialRadiusKm: prefill.radiusKm,
             nextStep: .onboardingEnd,
             onConfirm: { [weak self] result in
-                self?.logEntryGating("ZoneChoice confirm label='\(result.label ?? "nil")' coord=\(result.coordinate.map { "\($0.latitude),\($0.longitude)" } ?? "nil") radius=\(result.radiusKm)")
+                print("ZoneChoice confirm")
             },
-            onCancel: { [weak self] in
-                self?.logEntryGating("ZoneChoice cancel")
+            onCancel: {
+                print("ZoneChoice cancel")
             }
         )
     }
@@ -1367,35 +810,15 @@ extension HomeV2ViewController {
                 dismiss(animated: false)
             }
             present(intro, animated: true)
-        } else {
-            let fallback = sb.instantiateViewController(withIdentifier: "enhancedOnboardingIntro")
-            fallback.modalPresentationStyle = .fullScreen
-            if presentedViewController != nil {
-                dismiss(animated: false)
-            }
-            present(fallback, animated: true)
         }
     }
     
-    private func shouldSkipBecauseAlreadyPresentedThisSession() -> Bool {
-        guard let ad = appDelegate else { return false }
-        if ad.homeEntryGatingDidPresentCriticalThisSession { return true }
-        if ad.homeEntryGatingDidPresentNotifThisSession { return true }
-        if ad.homeEntryGatingDidPresentEnhancedThisSession { return true }
-        return false
-    }
-    
     func runHomeEntryGatingIfNeeded() {
-        print("[HomeEntryGating] runHomeEntryGatingIfNeeded() called. hasRunEntryGating=\(hasRunEntryGating)")
-        
-        // SECURITE ANTI-CRASH: Empêche l'affichage d'une modale si une est déjà en cours
         guard presentedViewController == nil else {
-            print("[HomeEntryGating] SKIP: A view controller is already being presented.")
             return
         }
         
         guard !hasRunEntryGating else {
-            print("[HomeEntryGating] SKIP: already ran for this Home instance")
             return
         }
         hasRunEntryGating = true
@@ -1404,13 +827,11 @@ extension HomeV2ViewController {
             if ad.homeEntryGatingDidPresentCriticalThisSession ||
                 ad.homeEntryGatingDidPresentNotifThisSession ||
                 ad.homeEntryGatingDidPresentEnhancedThisSession {
-                print("[HomeEntryGating] SKIP: already presented something this session via AppDelegate")
                 return
             }
         }
         
         guard let user = UserDefaults.currentUser else {
-            print("[HomeEntryGating] STOP: UserDefaults.currentUser is nil")
             return
         }
         
@@ -1420,7 +841,6 @@ extension HomeV2ViewController {
         
         if missingRole || missingZone {
             if missingRole {
-                print("[HomeEntryGating] DECISION: missing role/goal -> presentPhase3Onboarding()")
                 if let ad = UIApplication.shared.delegate as? AppDelegate {
                     ad.homeEntryGatingDidPresentCriticalThisSession = true
                 }
@@ -1429,7 +849,6 @@ extension HomeV2ViewController {
             }
             
             if missingZone {
-                print("[HomeEntryGating] DECISION: missing zone -> presentZoneChoice(prefill:)")
                 if let ad = UIApplication.shared.delegate as? AppDelegate {
                     ad.homeEntryGatingDidPresentCriticalThisSession = true
                 }
@@ -1441,8 +860,6 @@ extension HomeV2ViewController {
         UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                
-                // SECURITE ANTI-CRASH de la closure async
                 guard self.presentedViewController == nil else { return }
                 
                 if let ad = UIApplication.shared.delegate as? AppDelegate {
@@ -1457,7 +874,6 @@ extension HomeV2ViewController {
                     let notifPopupAlreadyShown = UserDefaults.standard.bool(forKey: "hasPresentedNotificationDemand")
                     
                     if !notifPopupAlreadyShown {
-                        print("[HomeEntryGating] DECISION: notif not allowed & never shown -> presentNotificationDemandViewController()")
                         UserDefaults.standard.set(true, forKey: "hasPresentedNotificationDemand")
                         UserDefaults.standard.synchronize()
                         
@@ -1466,8 +882,6 @@ extension HomeV2ViewController {
                         }
                         self.presentNotificationDemandViewController()
                         return
-                    } else {
-                        print("[HomeEntryGating] SKIP: Notification demand already presented historically (Cookie found).")
                     }
                 }
                 
@@ -1475,7 +889,6 @@ extension HomeV2ViewController {
                 let hasEO = self.hasLaunchedEnhancedOnboarding()
                 
                 if !hasEO && needsEO {
-                    print("[HomeEntryGating] DECISION: launch enhanced onboarding -> presentEnhancedOnboardingIntro()")
                     if let ad = UIApplication.shared.delegate as? AppDelegate {
                         ad.homeEntryGatingDidPresentEnhancedThisSession = true
                     }
@@ -1483,21 +896,7 @@ extension HomeV2ViewController {
                     self.presentEnhancedOnboardingIntro()
                     return
                 }
-                print("[HomeEntryGating] DECISION: nothing to do")
             }
-        }
-    }
-}
-
-// MARK: - HomeActionHCCDelegate
-extension HomeV2ViewController: HomeActionHCCDelegate {
-    func goToMyActionHomeCell(action: Action) {
-        if isContributionPreference {
-            AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_Detail)
-            self.showAction(actionId: action.id, isContrib: true, action: action)
-        } else {
-            AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
-            self.showAction(actionId: action.id, isContrib: false, action: action)
         }
     }
 }
