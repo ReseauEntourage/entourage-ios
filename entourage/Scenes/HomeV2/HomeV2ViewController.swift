@@ -630,16 +630,22 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             self.present(modalVC, animated: true)
 
         case .webinar:
-            let vc = WelcomeEventsListViewController()
-            vc.eventType = .webinar
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            let storyboard = UIStoryboard(name: StoryboardName.event, bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "eventMainListV2") as? EventListMainV2ViewController {
+                vc.welcomeEventsType = .webinar
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true)
+            }
 
         case .papotages:
-            let vc = WelcomeEventsListViewController()
-            vc.eventType = .papotages
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            let storyboard = UIStoryboard(name: StoryboardName.event, bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "eventMainListV2") as? EventListMainV2ViewController {
+                vc.welcomeEventsType = .papotages
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true)
+            }
         }
     }
 
