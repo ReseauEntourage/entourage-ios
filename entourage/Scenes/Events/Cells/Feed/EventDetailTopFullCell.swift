@@ -47,6 +47,9 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_constraint_height_reserved_female: NSLayoutConstraint!
     @IBOutlet weak var ui_lbl_reserved_female: UILabel?
 
+    @IBOutlet weak var ui_mapview: MKMapView!
+    @IBOutlet weak var ui_height_map_view: NSLayoutConstraint!
+
     weak var delegate: EventDetailTopCellDelegate? = nil
     
     let topMarginConstraint: CGFloat = 24
