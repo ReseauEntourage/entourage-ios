@@ -631,7 +631,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
 
         case .webinar:
             let vc = WelcomeEventsListViewController()
-            vc.eventType = .webinar
+            vc.eventType = .firstStep
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true)
 
