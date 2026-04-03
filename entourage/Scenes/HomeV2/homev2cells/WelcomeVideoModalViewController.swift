@@ -151,6 +151,8 @@ class WelcomeVideoModalViewController: UIViewController {
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            containerView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            containerView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
 
             closeImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
             closeImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
@@ -164,7 +166,9 @@ class WelcomeVideoModalViewController: UIViewController {
             webViewContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             webViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             webViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            webViewContainer.heightAnchor.constraint(equalTo: webViewContainer.widthAnchor, multiplier: 16.0/9.0),
+            // Height is flexible but we want to make sure it expands as much as possible while maintaining the container's bounds.
+            // Using a low priority constraint for a preferred ratio so it doesn't collapse entirely if not needed,
+            // but it will shrink when the screen is too small.
 
             descriptionLabel.topAnchor.constraint(equalTo: webViewContainer.bottomAnchor, constant: 24),
             descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
@@ -176,6 +180,12 @@ class WelcomeVideoModalViewController: UIViewController {
             continueButton.heightAnchor.constraint(equalToConstant: 50),
             continueButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20)
         ])
+
+        // Add a flexible ratio constraint with lower priority so the video doesn't just disappear
+        // but can be crushed by the top/bottom constraints of the containerView
+        let heightConstraint = webViewContainer.heightAnchor.constraint(equalTo: webViewContainer.widthAnchor, multiplier: 16.0/9.0)
+        heightConstraint.priority = .defaultLow
+        heightConstraint.isActive = true
     }
 
     private func fetchVideoResource() {
