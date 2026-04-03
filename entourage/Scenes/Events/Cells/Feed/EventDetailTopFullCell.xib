@@ -337,7 +337,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXs-ZL-Ra7">
-                        <rect key="frame" x="20" y="323" width="358" height="0.0"/>
+                        <rect key="frame" x="20" y="423" width="358" height="0.0"/>
                         <constraints>
                             <constraint firstAttribute="height" id="FyJ-jQ-Gmx"/>
                         </constraints>
@@ -346,7 +346,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-kO-usD" customClass="ActiveLabel" customModule="ActiveLabel">
-                        <rect key="frame" x="20" y="327" width="358" height="20.5"/>
+                        <rect key="frame" x="20" y="427" width="358" height="20.5"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -357,7 +357,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="fuU-Rj-r2w" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
-                        <rect key="frame" x="20" y="371.5" width="366" height="193.5"/>
+                        <rect key="frame" x="20" y="471.5" width="366" height="113.5"/>
                         <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" id="Vug-5H-gmT"/>
@@ -378,7 +378,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="view-disc-id">
-                        <rect key="frame" x="20" y="649" width="366" height="136"/>
+                        <rect key="frame" x="20" y="263" width="366" height="136"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_messages_top" translatesAutoresizingMaskIntoConstraints="NO" id="img-disc-id">
                                 <rect key="frame" x="16" y="16" width="44" height="44"/>
@@ -388,13 +388,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discussion de l'événement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-disc-id">
-                                <rect key="frame" x="76" y="28" width="184" height="20.5"/>
+                                <rect key="frame" x="76" y="28" width="274" height="20.5"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-disc-id">
-                                <rect key="frame" x="16" y="76" width="244" height="40"/>
+                                <rect key="frame" x="16" y="76" width="334" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="h-btn-disc"/>
                                 </constraints>
@@ -404,7 +404,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" name="BeigeClair"/>
+                        <color key="backgroundColor" name="beige_lighter"/>
                         <constraints>
                             <constraint firstItem="img-disc-id" firstAttribute="leading" secondItem="view-disc-id" secondAttribute="leading" constant="16" id="c1-disc"/>
                             <constraint firstItem="img-disc-id" firstAttribute="top" secondItem="view-disc-id" secondAttribute="top" constant="16" id="c2-disc"/>
@@ -423,9 +423,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-
-                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="YES" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="new-map-id">
-                        <rect key="frame" x="20" y="805" width="366" height="180"/>
+                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="new-map-id">
+                        <rect key="frame" x="20" y="605" width="366" height="180"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="180" id="h-map-new"/>
                         </constraints>
@@ -446,22 +445,21 @@
                     <constraint firstItem="UXs-ZL-Ra7" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="UYw-0d-rgq"/>
                     <constraint firstItem="Nfw-W1-dO7" firstAttribute="top" secondItem="abc-female-banner" secondAttribute="bottom" constant="10" id="VQC-kR-A9p"/>
                     <constraint firstItem="CsR-kO-usD" firstAttribute="leading" secondItem="UXs-ZL-Ra7" secondAttribute="leading" id="aoe-s2-pzF"/>
+                    <constraint firstItem="view-disc-id" firstAttribute="leading" secondItem="3q6-vS-dBw" secondAttribute="leading" constant="20" id="disc-lead-super"/>
+                    <constraint firstAttribute="trailing" secondItem="view-disc-id" secondAttribute="trailing" constant="20" id="disc-trail-super"/>
+                    <constraint firstItem="view-disc-id" firstAttribute="top" secondItem="GxR-dy-Owz" secondAttribute="bottom" constant="20" id="gxZ-top-disc"/>
                     <constraint firstAttribute="trailing" secondItem="klB-o1-C0m" secondAttribute="trailing" constant="20" id="hwX-yn-nXS"/>
+                    <constraint firstAttribute="bottom" secondItem="new-map-id" secondAttribute="bottom" constant="20" id="map-bottom-super"/>
+                    <constraint firstItem="new-map-id" firstAttribute="leading" secondItem="3q6-vS-dBw" secondAttribute="leading" constant="20" id="map-lead-super"/>
+                    <constraint firstItem="new-map-id" firstAttribute="top" secondItem="fuU-Rj-r2w" secondAttribute="bottom" constant="20" id="map-top-tags"/>
+                    <constraint firstAttribute="trailing" secondItem="new-map-id" secondAttribute="trailing" constant="20" id="map-trail-super"/>
                     <constraint firstAttribute="trailing" secondItem="CsR-kO-usD" secondAttribute="trailing" constant="28" id="n7J-Wl-s1L"/>
                     <constraint firstItem="abc-female-banner" firstAttribute="top" secondItem="klB-o1-C0m" secondAttribute="bottom" constant="5" id="tuv-banner-top"/>
+                    <constraint firstItem="UXs-ZL-Ra7" firstAttribute="top" secondItem="view-disc-id" secondAttribute="bottom" constant="24" id="uxs-top-disc"/>
                     <constraint firstItem="abc-female-banner" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="wxy-banner-leading"/>
                     <constraint firstItem="abc-female-banner" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="klB-o1-C0m" secondAttribute="trailing" id="xyz-banner-trailing"/>
                     <constraint firstItem="klB-o1-C0m" firstAttribute="top" secondItem="3q6-vS-dBw" secondAttribute="top" constant="28" id="yC2-ZV-76o"/>
                     <constraint firstAttribute="trailing" secondItem="UXs-ZL-Ra7" secondAttribute="trailing" constant="28" id="yGN-4g-yQG"/>
-
-                    <constraint firstItem="view-disc-id" firstAttribute="top" secondItem="GxR-dy-Owz" secondAttribute="bottom" constant="20" id="gxZ-top-disc"/>
-                    <constraint firstItem="UXs-ZL-Ra7" firstAttribute="top" secondItem="view-disc-id" secondAttribute="bottom" constant="24" id="uxs-top-disc"/>
-                    <constraint firstItem="new-map-id" firstAttribute="top" secondItem="fuU-Rj-r2w" secondAttribute="bottom" constant="20" id="map-top-tags"/>
-                    <constraint firstAttribute="bottom" secondItem="new-map-id" secondAttribute="bottom" constant="20" id="map-bottom-super"/>
-                    <constraint firstItem="new-map-id" firstAttribute="leading" secondItem="3q6-vS-dBw" secondAttribute="leading" constant="20" id="map-lead-super"/>
-                    <constraint firstAttribute="trailing" secondItem="new-map-id" secondAttribute="trailing" constant="20" id="map-trail-super"/>
-                    <constraint firstItem="view-disc-id" firstAttribute="leading" secondItem="3q6-vS-dBw" secondAttribute="leading" constant="20" id="disc-lead-super"/>
-                    <constraint firstAttribute="trailing" secondItem="view-disc-id" secondAttribute="trailing" constant="20" id="disc-trail-super"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -470,8 +468,10 @@
                 <outlet property="ui_button_go_to_discussion" destination="btn-disc-id" id="Q8G-5Z-zcy"/>
                 <outlet property="ui_constraint_discussion_box_bottom" destination="uxs-top-disc" id="conn-disc-bottom"/>
                 <outlet property="ui_constraint_discussion_box_height" destination="h-view-disc" id="conn-disc-height"/>
+                <outlet property="ui_constraint_discussion_box_top" destination="gxZ-top-disc" id="ObY-Sz-I4s"/>
                 <outlet property="ui_constraint_height_reserved_female" destination="hij-height-constraint" id="out-constraint-height"/>
                 <outlet property="ui_constraint_listview_top_margin" destination="At5-0v-xFn" id="CGo-JX-gSb"/>
+                <outlet property="ui_height_map_view" destination="h-map-new" id="h-map-new-conn"/>
                 <outlet property="ui_img_member_1" destination="2x2-3v-72B" id="SOR-qC-Iu0"/>
                 <outlet property="ui_img_member_2" destination="qF7-zU-eSK" id="MdC-vq-GWM"/>
                 <outlet property="ui_img_member_3" destination="WUw-jW-n8n" id="6yh-4s-Pnl"/>
@@ -487,6 +487,7 @@
                 <outlet property="ui_lbl_reserved_female" destination="def-female-label" id="out-lbl-reserved"/>
                 <outlet property="ui_location_name" destination="DSx-h3-Y1E" id="IJs-Dy-zDX"/>
                 <outlet property="ui_main_view" destination="3q6-vS-dBw" id="B3F-9r-Q0U"/>
+                <outlet property="ui_mapview" destination="new-map-id" id="map-id-conn"/>
                 <outlet property="ui_place_limit_nb" destination="VGf-gD-ocr" id="E79-BP-fcp"/>
                 <outlet property="ui_start_date" destination="nNO-3W-e8V" id="WOA-tU-7xV"/>
                 <outlet property="ui_start_time" destination="vMG-Nk-Fe3" id="0vF-Bl-5pm"/>
@@ -497,9 +498,6 @@
                 <outlet property="ui_view_organised_by" destination="BfH-VT-nZB" id="E5B-Jh-TwT"/>
                 <outlet property="ui_view_place_limit" destination="YLQ-hv-Eb2" id="ght-bZ-LHL"/>
                 <outlet property="ui_view_reserved_female" destination="abc-female-banner" id="out-view-reserved"/>
-
-                <outlet property="ui_mapview" destination="new-map-id" id="map-id-conn"/>
-                <outlet property="ui_height_map_view" destination="h-map-new" id="h-map-new-conn"/>
             </connections>
             <point key="canvasLocation" x="124.6376811594203" y="175.44642857142856"/>
         </tableViewCell>
@@ -513,6 +511,9 @@
         <image name="ic_messages_top" width="75" height="66"/>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="beige_lighter">
+            <color red="1" green="0.96078431372549022" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
             <color red="1" green="0.59215686274509804" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
