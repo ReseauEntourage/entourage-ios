@@ -13,17 +13,16 @@ private enum EventListTableDTO {
     case emptyCell
 }
 
-enum WelcomeEventType {
+enum WelcomeEventType: Equatable {
     case firstStep
     case webinar
     case papotages
 }
 
-enum ViewMode {
+enum ViewMode: Equatable {
     case normal
     case filtered
     case searching
-    case welcomeEvents(WelcomeEventType)
 }
 
 class EventListMainV2ViewController: UIViewController {
@@ -74,10 +73,6 @@ class EventListMainV2ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let type = welcomeEventsType {
-            self.mode = .welcomeEvents(type)
-        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
 
@@ -275,6 +270,18 @@ class EventListMainV2ViewController: UIViewController {
     func configureDTO() {
         tableDTO.removeAll()
         
+        if welcomeEventsType != nil {
+            if discoverEvent.count > 0 {
+                for event in discoverEvent {
+                    tableDTO.append(.discoverEventCell(event: event))
+                }
+            } else {
+                tableDTO.append(.emptyCell)
+            }
+            self.ui_table_view.reloadData()
+            return
+        }
+
         switch mode {
         case .normal:
             if myEvent.count > 0 {
@@ -288,14 +295,6 @@ class EventListMainV2ViewController: UIViewController {
                 }
             } else {
                 tableDTO.append(.secondHeader)
-                tableDTO.append(.emptyCell)
-            }
-        case .welcomeEvents(_):
-            if discoverEvent.count > 0 {
-                for event in discoverEvent {
-                    tableDTO.append(.discoverEventCell(event: event))
-                }
-            } else {
                 tableDTO.append(.emptyCell)
             }
         case .filtered:
@@ -532,6 +531,27 @@ extension EventListMainV2ViewController {
         if isEndOfDiscoverList && self.mode != .searching {
             return
         }
+
+        if let type = welcomeEventsType {
+            let completion: ([Event]?, EntourageNetworkError?) -> Void = { [weak self] events, error in
+                self?.handleDiscoverEventResponse(events: events, error: error)
+            }
+            if type == .firstStep {
+                EventService.getWelcomeEvents { events in
+                    completion(events, nil)
+                }
+            } else if type == .webinar {
+                EventService.getWebinarEvents { events in
+                    completion(events, nil)
+                }
+            } else {
+                EventService.getPapotagesEvents { events in
+                    completion(events, nil)
+                }
+            }
+            return
+        }
+
         switch mode {
         case .normal, .filtered:
             let selectedItemsList = selectedItemsFilter.filter { $0.value }.map { $0.key }
@@ -548,23 +568,6 @@ extension EventListMainV2ViewController {
         case .searching:
             EventService.searchEvents(query: searchText, currentPage: currentPageDiscover, per: numberOfItemsForWS) { events, error in
                 self.handleDiscoverEventResponse(events: events, error: error)
-            }
-        case .welcomeEvents(let type):
-            let completion: ([Event]?, EntourageNetworkError?) -> Void = { [weak self] events, error in
-                self?.handleDiscoverEventResponse(events: events, error: error)
-            }
-            if type == .firstStep {
-                EventService.getWelcomeEvents { events in
-                    completion(events, nil)
-                }
-            } else if type == .webinar {
-                EventService.getWebinarEvents { events in
-                    completion(events, nil)
-                }
-            } else {
-                EventService.getPapotagesEvents { events in
-                    completion(events, nil)
-                }
             }
         }
     }
