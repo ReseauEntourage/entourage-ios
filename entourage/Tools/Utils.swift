@@ -355,6 +355,24 @@ import UIKit
     }
 }
 
+extension UIImage {
+    /// Resine et normalise l'image. Indispensable pour certaines images (dont les HEIC ou les photos avec balise EXIF d'orientation).
+    /// Assure que la conversion `jpegData()` subséquente ne contient pas d'en-tête de rotation propriétaire ou erroné,
+    /// garantissant un affichage correct sur toutes les plateformes (Android, Web, etc.).
+    func normalizedImage() -> UIImage {
+        if self.imageOrientation == .up {
+            return self
+        }
+
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        self.draw(in: CGRect(origin: .zero, size: self.size))
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext() ?? self
+        UIGraphicsEndImageContext()
+
+        return normalizedImage
+    }
+}
+
 class ImageLoaderSwift {
     
     private static let cache = NSCache<NSString, NSData>()
