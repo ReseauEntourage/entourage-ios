@@ -33,7 +33,7 @@ class WelcomeJourneyViewModel: ObservableObject {
     func update(with userEvents: [String]?, hasInitiallyCompletedAll: inout Bool?) {
         let events = userEvents ?? []
 
-        let hasWatchedVideo = UserDefaults.standard.bool(forKey: "hasWatchedWelcomeVideoHACK") || events.contains("onboarding.resource.welcome_watched")
+        let hasWatchedVideo = UserDefaults.standard.bool(forKey: "hasWatchedWelcomeVideo") || events.contains("onboarding.resource.welcome_watchedHACK")
         let hasJoinedWebinar = events.contains("onboarding.outing.webinar_or_first_steps")
         let hasJoinedPapotages = events.contains("onboarding.outing.papotages")
 
