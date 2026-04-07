@@ -93,7 +93,7 @@ class EventDetailTopFullCell: UITableViewCell {
 
         ui_view_place_limit.isHidden = true
         configureOrangeButton(self.ui_button_go_to_discussion, withTitle: "event_conversation".localized)
-        self.ui_view_discussion_box.layer.cornerRadius = 15
+        self.ui_view_discussion_box.layer.cornerRadius = 20
     }
     
     @objc func onParticipateClick() {
@@ -104,7 +104,7 @@ class EventDetailTopFullCell: UITableViewCell {
         button.setTitle(title, for: .normal)
         button.backgroundColor = UIColor.appOrange
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 25
+        button.layer.cornerRadius = 20
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         button.clipsToBounds = true
         

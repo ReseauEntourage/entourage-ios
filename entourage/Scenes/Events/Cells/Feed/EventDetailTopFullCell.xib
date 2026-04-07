@@ -399,6 +399,11 @@
                                     <constraint firstAttribute="height" constant="40" id="h-btn-disc"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="action_go_to_discussion:" destination="lzF-C2-Z1g" eventType="touchUpInside" id="act-disc-id"/>
                                 </connections>
