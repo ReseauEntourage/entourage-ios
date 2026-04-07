@@ -387,17 +387,18 @@
                                     <constraint firstAttribute="width" constant="44" id="w-disc-img"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discussion de l'événement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-disc-id">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discussion de l'événement" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-disc-id">
                                 <rect key="frame" x="76" y="28" width="274" height="20.5"/>
-                                <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-disc-id">
-                                <rect key="frame" x="16" y="76" width="334" height="40"/>
+                                <rect key="frame" x="80" y="76" width="206" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="h-btn-disc"/>
                                 </constraints>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cradius">
@@ -417,8 +418,7 @@
                             <constraint firstItem="lbl-disc-id" firstAttribute="centerY" secondItem="img-disc-id" secondAttribute="centerY" id="c4-disc"/>
                             <constraint firstAttribute="trailing" secondItem="lbl-disc-id" secondAttribute="trailing" constant="16" id="c5-disc"/>
                             <constraint firstItem="btn-disc-id" firstAttribute="top" secondItem="img-disc-id" secondAttribute="bottom" constant="16" id="c6-disc"/>
-                            <constraint firstItem="btn-disc-id" firstAttribute="leading" secondItem="view-disc-id" secondAttribute="leading" constant="16" id="c7-disc"/>
-                            <constraint firstAttribute="trailing" secondItem="btn-disc-id" secondAttribute="trailing" constant="16" id="c8-disc"/>
+                            <constraint firstItem="btn-disc-id" firstAttribute="centerX" secondItem="view-disc-id" secondAttribute="centerX" id="c7-disc-center"/>
                             <constraint firstAttribute="bottom" secondItem="btn-disc-id" secondAttribute="bottom" constant="20" id="c9-disc"/>
                             <constraint firstAttribute="height" constant="136" id="h-view-disc"/>
                         </constraints>
@@ -500,6 +500,7 @@
                 <outlet property="ui_title" destination="klB-o1-C0m" id="RDE-wl-Ymg"/>
                 <outlet property="ui_view_association" destination="DwY-20-5TL" id="HZX-l1-aAP"/>
                 <outlet property="ui_view_discussion_box" destination="view-disc-id" id="view-disc-id-conn"/>
+                <outlet property="ui_label_discussion_desc" destination="lbl-disc-id" id="lbl-disc-id-conn"/>
                 <outlet property="ui_view_organised_by" destination="BfH-VT-nZB" id="E5B-Jh-TwT"/>
                 <outlet property="ui_view_place_limit" destination="YLQ-hv-Eb2" id="ght-bZ-LHL"/>
                 <outlet property="ui_view_reserved_female" destination="abc-female-banner" id="out-view-reserved"/>

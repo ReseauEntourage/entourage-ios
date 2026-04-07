@@ -41,6 +41,7 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_constraint_discussion_box_top: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_discussion_box_bottom: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_discussion_box_height: NSLayoutConstraint!
+    @IBOutlet weak var ui_label_discussion_desc: UILabel!
     
     
     @IBOutlet weak var ui_view_reserved_female: UIView!
@@ -92,8 +93,11 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_lbl_reserved_female?.setFontTitle(size: 13)
 
         ui_view_place_limit.isHidden = true
-        configureOrangeButton(self.ui_button_go_to_discussion, withTitle: "event_conversation".localized)
+        configureOrangeButton(self.ui_button_go_to_discussion, withTitle: "event_discussion_title".localized)
         self.ui_view_discussion_box.layer.cornerRadius = 20
+        self.ui_view_discussion_box.layer.borderWidth = 1.0
+        self.ui_view_discussion_box.layer.borderColor = UIColor.appOrange.cgColor
+        self.ui_label_discussion_desc.text = "event_discussion_desc".localized
     }
     
     @objc func onParticipateClick() {
