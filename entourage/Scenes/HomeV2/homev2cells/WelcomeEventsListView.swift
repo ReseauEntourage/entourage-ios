@@ -130,80 +130,140 @@ struct EventListCellWrap: View {
     let event: Event
 
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {
+        HStack(alignment: .top, spacing: 10) {
             // Image
-            ZStack(alignment: .topTrailing) {
-                if let urlString = event.metadata?.landscape_url, let url = URL(string: urlString) {
-                    if #available(iOS 15.0, *) {
-                        AsyncImage(url: url) { image in
-                            image
+            ZStack(alignment: .bottomLeading) {
+                ZStack(alignment: .topLeading) {
+                    if let urlString = event.metadata?.landscape_url ?? event.metadata?.portrait_url, !urlString.isEmpty, let url = URL(string: urlString) {
+                        if #available(iOS 15.0, *) {
+                            AsyncImage(url: url) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            } placeholder: {
+                                Image("ic_placeholder_event")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            }
+                            .frame(width: 94, height: 94)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                        } else {
+                            // Fallback on earlier versions
+                            Image("ic_placeholder_event")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                        } placeholder: {
-                            Image("ic_event_placeholder")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 94, height: 94)
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
                         }
-                        .frame(width: 100, height: 120)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
                     } else {
-                        // Fallback on earlier versions
+                        Image("ic_placeholder_event")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 94, height: 94)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
                     }
-                } else {
-                    Image("ic_event_placeholder")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 100, height: 120)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                    if event.isCanceled() {
+                        Color.black.opacity(0.5)
+                            .frame(width: 94, height: 94)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
+
+                    // Entourage logo or Woman logo
+                    if event.metadata?.reservedFemale == true {
+                        Image("ic_entoutou_logo_woman")
+                            .resizable()
+                            .frame(width: 22, height: 22)
+                            .padding(.leading, 4)
+                            .padding(.top, -10)
+                    } else if event.author?.communityRoles?.contains("Équipe Entourage") == true || event.author?.communityRoles?.contains("Animateur Entourage") == true {
+                        Image("ic_entoutou_logo_little")
+                            .resizable()
+                            .frame(width: 23, height: 23)
+                            .padding(.leading, 4)
+                            .padding(.top, -10)
+                    }
+
+                    if event.isCanceled() {
+                        Image("ic_event_canceled")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .padding(.leading, -4)
+                            .padding(.top, -3)
+                    }
                 }
 
-                // Entourage logo or Woman logo
-                if event.metadata?.reservedFemale == true {
-                    Image("ic_entoutou_logo_woman")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .padding(4)
-                } else if event.author?.communityRoles?.contains("Équipe Entourage") == true || event.author?.communityRoles?.contains("Animateur Entourage") == true {
-                    Image("ic_entourage_little")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .padding(4)
+                if event.isMember ?? false {
+                    Text("  Inscrit.e  ")
+                        .font(.custom("Quicksand-Bold", size: 12))
+                        .foregroundColor(Color("orange_app"))
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .padding(.leading, 33)
+                        .padding(.bottom, -10)
                 }
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                // Title
-                Text(event.title)
-                    .font(.custom("Quicksand-Bold", size: 15))
-                    .foregroundColor(.black)
-                    .lineLimit(2)
+                // Title and Cancelled label
+                HStack(alignment: .top) {
+                    Text(event.title)
+                        .font(.custom("Quicksand-Bold", size: 15))
+                        .foregroundColor(event.isCanceled() ? Color("gris_112") : .black)
+                        .lineLimit(2)
+                    Spacer()
+                    if event.isCanceled() {
+                        Text("- \("event_cancel_list".localized)")
+                            .font(.custom("NunitoSans-Light", size: 13))
+                            .foregroundColor(Color("gris_112"))
+                    }
+                }
+                .padding(.top, 6)
 
                 // Date
-                if let startDateString = event.metadata?.starts_at,
-                   let startDate = Utils.getDateFromWSDateString(startDateString) {
+                HStack(spacing: 8) {
+                    Image("ic_event_list_date")
+                        .resizable()
+                        .frame(width: 10, height: 10)
                     
-                    Text(Utils.formatEventDateTime(date: startDate))
-                        .font(.custom("NunitoSans-Regular", size: 13))
-                        .foregroundColor(.gray)
+                    Text(event.startDateFormatted)
+                        .font(.custom("NunitoSans-Light", size: 13))
+                        .foregroundColor(Color("gris_112"))
                 }
+                .padding(.top, 4)
 
                 // Place
-                if let address = event.metadata?.display_address {
-                    let addressCondensed = address.components(separatedBy: ",").last ?? address
-                    Text(addressCondensed.trimmingCharacters(in: .whitespaces))
-                        .font(.custom("NunitoSans-Regular", size: 13))
-                        .foregroundColor(.gray)
+                HStack(spacing: 8) {
+                    Image("ic_event_list_loc")
+                        .resizable()
+                        .frame(width: 11, height: 10)
+                    Text(event.addressName ?? "")
+                        .font(.custom("NunitoSans-Light", size: 13))
+                        .foregroundColor(Color("gris_112"))
                         .lineLimit(1)
                 }
 
+                // Members
+                if let membersCount = event.membersCount {
+                    HStack(spacing: 8) {
+                        Image("ic_event_list_user")
+                            .resizable()
+                            .frame(width: 10, height: 10)
+
+                        let memberString = membersCount > 1 ? String(format: "event_members_cell_list".localized, membersCount) : String(format: "event_member_cell_list".localized, membersCount)
+                        Text(memberString)
+                            .font(.custom("NunitoSans-Light", size: 13))
+                            .foregroundColor(Color("gris_112"))
+                            .lineLimit(1)
+                    }
+                }
                 Spacer()
             }
-            .padding(.vertical, 8)
+            .padding(.vertical, 2)
             Spacer()
         }
         .padding(8)
-        .background(Color.white)
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .padding(.horizontal, 8)
+        .background(Color("BeigeClair"))
     }
 }
