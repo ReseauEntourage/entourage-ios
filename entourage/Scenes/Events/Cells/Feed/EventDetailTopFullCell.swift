@@ -94,7 +94,6 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_view_place_limit.isHidden = true
         configureOrangeButton(self.ui_button_go_to_discussion, withTitle: "event_conversation".localized)
         self.ui_view_discussion_box.layer.cornerRadius = 20
-        self.ui_view_discussion_box.backgroundColor = UIColor.appBeigeClair
     }
     
     @objc func onParticipateClick() {
