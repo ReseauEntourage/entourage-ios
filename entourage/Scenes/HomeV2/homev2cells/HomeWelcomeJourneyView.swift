@@ -33,7 +33,8 @@ class WelcomeJourneyViewModel: ObservableObject {
     func update(with userEvents: [String]?, hasInitiallyCompletedAll: inout Bool?) {
         let events = userEvents ?? []
 
-        let hasWatchedVideo = UserDefaults.standard.bool(forKey: "hasWatchedWelcomeVideo") || events.contains("onboarding.resource.welcome_watched")
+        // On se fie uniquement au backend pour l'état d'avancement
+        let hasWatchedVideo = events.contains("onboarding.resource.welcome_watched")
         let hasJoinedWebinar = events.contains("onboarding.outing.webinar_or_first_steps")
         let hasJoinedPapotages = events.contains("onboarding.outing.papotages")
 
@@ -90,7 +91,6 @@ class WelcomeJourneyViewModel: ObservableObject {
             )
         ]
     }
-
     var completedCount: Int {
         steps.filter { $0.state == .completed }.count
     }

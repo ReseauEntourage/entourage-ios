@@ -11,11 +11,13 @@ class WelcomeEventsListViewController: UIViewController {
         let swiftUIView = WelcomeEventsListView(viewModel: viewModel, onBack: { [weak self] in
             self?.dismiss(animated: true)
         }, onEventTapped: { [weak self] event in
-            // Route to Event Detail
             let storyboard = UIStoryboard(name: StoryboardName.event, bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "eventDetailFeed") as? EventDetailFeedViewController {
+            
+            if let navVc = storyboard.instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController,
+               let vc = navVc.topViewController as? EventDetailFeedViewController {
                 vc.eventId = event.uid
-                self?.present(vc, animated: true)
+                navVc.modalPresentationStyle = .fullScreen
+                self?.present(navVc, animated: true)
             }
         })
 
