@@ -622,10 +622,10 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             modalVC.modalPresentationStyle = .overFullScreen
             modalVC.modalTransitionStyle = .crossDissolve
             modalVC.onComplete = { [weak self] in
-                self?.configureDTO()
+                self?.initHome()
             }
             modalVC.onDismissOnly = { [weak self] in
-                self?.configureDTO()
+                self?.initHome()
             }
             self.present(modalVC, animated: true)
 
