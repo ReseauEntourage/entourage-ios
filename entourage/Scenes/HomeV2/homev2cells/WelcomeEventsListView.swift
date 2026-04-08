@@ -54,7 +54,7 @@ struct WelcomeEventsListView: View {
                 Button(action: {
                     onBack?()
                 }) {
-                    Image(systemName: "chevron.left")
+                    Image("back_arrow")
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.black)
                         .padding(12)
@@ -174,14 +174,14 @@ struct EventListCellWrap: View {
                         Image("ic_entoutou_logo_woman")
                             .resizable()
                             .frame(width: 22, height: 22)
-                            .padding(.leading, 4)
-                            .padding(.top, -10)
+                            .padding(.leading, 5)
+                            .padding(.top, 68)
                     } else if event.author?.communityRoles?.contains("Équipe Entourage") == true || event.author?.communityRoles?.contains("Animateur Entourage") == true {
                         Image("ic_entoutou_logo_little")
                             .resizable()
                             .frame(width: 23, height: 23)
-                            .padding(.leading, 4)
-                            .padding(.top, -10)
+                            .padding(.leading, 5)
+                            .padding(.top, 68)
                     }
 
                     if event.isCanceled() {
