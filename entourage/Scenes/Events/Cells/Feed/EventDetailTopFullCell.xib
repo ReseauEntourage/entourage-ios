@@ -394,15 +394,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-disc-id">
-                                <rect key="frame" x="80" y="76" width="206" height="40"/>
+                                <rect key="frame" x="76" y="76" width="206" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="h-btn-disc"/>
+                                    <constraint firstAttribute="height" constant="50" id="h-btn-disc"/>
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                        <real key="value" value="15"/>
+                                        <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -417,10 +417,10 @@
                             <constraint firstItem="lbl-disc-id" firstAttribute="leading" secondItem="img-disc-id" secondAttribute="trailing" constant="16" id="c3-disc"/>
                             <constraint firstItem="lbl-disc-id" firstAttribute="centerY" secondItem="img-disc-id" secondAttribute="centerY" id="c4-disc"/>
                             <constraint firstAttribute="trailing" secondItem="lbl-disc-id" secondAttribute="trailing" constant="16" id="c5-disc"/>
-                            <constraint firstItem="btn-disc-id" firstAttribute="top" secondItem="img-disc-id" secondAttribute="bottom" constant="16" id="c6-disc"/>
-                            <constraint firstItem="btn-disc-id" firstAttribute="centerX" secondItem="view-disc-id" secondAttribute="centerX" id="c7-disc-center"/>
+                            <constraint firstItem="btn-disc-id" firstAttribute="top" secondItem="lbl-disc-id" secondAttribute="bottom" constant="16" id="c6-disc"/>
+                            <constraint firstItem="btn-disc-id" firstAttribute="leading" secondItem="lbl-disc-id" secondAttribute="leading" id="c7-disc-center"/>
                             <constraint firstAttribute="bottom" secondItem="btn-disc-id" secondAttribute="bottom" constant="20" id="c9-disc"/>
-                            <constraint firstAttribute="height" constant="136" id="h-view-disc"/>
+                            <constraint firstAttribute="height" constant="146" id="h-view-disc"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
