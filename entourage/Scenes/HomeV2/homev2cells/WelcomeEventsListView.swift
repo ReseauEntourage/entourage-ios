@@ -105,7 +105,7 @@ struct WelcomeEventsListView: View {
                     LazyVStack(spacing: 16) {
                         ForEach(viewModel.events, id: \.uid) { event in
                             EventListCellWrap(event: event)
-                                .frame(height: 140) // Approximation, adjusts natively if configured properly
+
                                 .onTapGesture {
                                     onEventTapped?(event)
                                 }
