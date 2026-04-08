@@ -5,7 +5,6 @@ class WelcomeVideoModalViewController: UIViewController {
 
     // UI Elements
     private let containerView = UIView()
-    private let dragIndicator = UIView()
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
     private let webViewContainer = UIView()
@@ -13,8 +12,6 @@ class WelcomeVideoModalViewController: UIViewController {
     // 💡 CHANGEMENT : Passage en `.custom` pour retirer l'animation système (flash) du bouton
     private let continueButton = UIButton(type: .custom)
     private let closeImageView = UIImageView()
-
-    private var containerViewBottomConstraint: NSLayoutConstraint?
 
     var onComplete: (() -> Void)?
     var onDismissOnly: (() -> Void)? // Triggered when modal is dismissed, useful to refresh home
@@ -33,21 +30,6 @@ class WelcomeVideoModalViewController: UIViewController {
         startCountdown()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        // Setup initial position for animation
-        containerViewBottomConstraint?.constant = 1000 // Push off screen
-        view.backgroundColor = .clear
-        view.layoutIfNeeded()
-
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-            self.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-            self.containerViewBottomConstraint?.constant = 0
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         countdownTimer?.invalidate()
@@ -57,20 +39,13 @@ class WelcomeVideoModalViewController: UIViewController {
     }
 
     private func setupView() {
-        view.backgroundColor = .clear // Handled in animation
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
 
         // Container
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 24
-        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
-
-        // Drag Indicator
-        dragIndicator.backgroundColor = UIColor.systemGray4
-        dragIndicator.layer.cornerRadius = 2.5
-        dragIndicator.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(dragIndicator)
 
         // Close Icon
         closeImageView.image = UIImage(named: "icon_cross")?.withRenderingMode(.alwaysTemplate)
@@ -140,25 +115,17 @@ class WelcomeVideoModalViewController: UIViewController {
     }
 
     private func setupConstraints() {
-        let bottomConstraint = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        self.containerViewBottomConstraint = bottomConstraint
-
         NSLayoutConstraint.activate([
-            bottomConstraint,
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 
-            dragIndicator.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12),
-            dragIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            dragIndicator.widthAnchor.constraint(equalToConstant: 40),
-            dragIndicator.heightAnchor.constraint(equalToConstant: 5),
-
-            closeImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            closeImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            closeImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
+            closeImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             closeImageView.widthAnchor.constraint(equalToConstant: 24),
             closeImageView.heightAnchor.constraint(equalToConstant: 24),
 
-            titleLabel.topAnchor.constraint(equalTo: dragIndicator.bottomAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: closeImageView.leadingAnchor, constant: -8),
 
@@ -177,10 +144,10 @@ class WelcomeVideoModalViewController: UIViewController {
             continueButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             continueButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             continueButton.heightAnchor.constraint(equalToConstant: 46),
-            continueButton.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            continueButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16)
         ])
     }
-    
+
     private func fetchVideoResource() {
         HomeService.getWelcomeResource { [weak self] pedago, error in
             guard let self = self, let pedago = pedago else { return }
@@ -224,7 +191,7 @@ class WelcomeVideoModalViewController: UIViewController {
                 return
             }
             self.secondsRemaining -= 1
-            
+
             // 💡 CHANGEMENT : On bloque les animations d'UIKit pour mettre à jour le bouton de manière fluide
             UIView.performWithoutAnimation {
                 if self.secondsRemaining > 0 {
@@ -244,26 +211,12 @@ class WelcomeVideoModalViewController: UIViewController {
         UserDefaults.standard.set(true, forKey: "hasWatchedWelcomeVideo")
         UserDefaults.standard.synchronize()
 
-        animateDismiss { [weak self] in
-            self?.dismiss(animated: false) {
-                self?.onComplete?()
-            }
+        dismiss(animated: true) { [weak self] in
+            self?.onComplete?()
         }
     }
 
     @objc private func onClose() {
-        animateDismiss { [weak self] in
-            self?.dismiss(animated: false, completion: nil)
-        }
-    }
-
-    private func animateDismiss(completion: @escaping () -> Void) {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.backgroundColor = .clear
-            self.containerViewBottomConstraint?.constant = self.containerView.frame.height
-            self.view.layoutIfNeeded()
-        }) { _ in
-            completion()
-        }
+        dismiss(animated: true, completion: nil)
     }
 }
