@@ -353,12 +353,12 @@ class EventDetailFeedViewController: UIViewController {
     // MARK: - Joindre / Quitter (action manuelle)
     
     func addRemoveMember(isAdd: Bool) {
-        // Met à jour localement
-        event?.isMember = isAdd
-        // La variable isAfterCreation est conservée, mais non utilisée pour l’affichage
-        // On la laisse telle quelle
-        isAfterCreation = false
-        ui_tableview.reloadData()
+        if !isAdd {
+            // Met à jour localement lorsqu'on quitte (pour éviter un délai visible)
+            event?.isMember = isAdd
+            isAfterCreation = false
+            ui_tableview.reloadData()
+        }
         
         SVProgressHUD.show()
         if isAdd {
@@ -877,11 +877,6 @@ extension EventDetailFeedViewController: CreateSurveyValidationDelegate {
 // MARK: - AmbassadorAskNotificationPopupDelegate
 extension EventDetailFeedViewController: AmbassadorAskNotificationPopupDelegate {
     func joinAsOrganizer() {
-        event?.isMember = true
-        // isAfterCreation reste, mais on ne l’utilise plus pour la cell
-        isAfterCreation = false
-        ui_tableview.reloadData()
-        
         SVProgressHUD.show()
         EventService.joinEventAsOrganizer(eventId: eventId) { _, _ in
             SVProgressHUD.dismiss()
@@ -889,10 +884,6 @@ extension EventDetailFeedViewController: AmbassadorAskNotificationPopupDelegate 
     }
     
     func justParticipate() {
-        event?.isMember = true
-        isAfterCreation = false
-        ui_tableview.reloadData()
-        
         SVProgressHUD.show()
         EventService.joinEvent(eventId: eventId) { _, _ in
             SVProgressHUD.dismiss()
