@@ -108,8 +108,8 @@ class EventDetailTopFullCell: UITableViewCell {
         button.setTitle(title, for: .normal)
         button.backgroundColor = UIColor.appOrange
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 20
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
+        button.layer.cornerRadius = 25
+        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 13)
         button.clipsToBounds = true
         
         if let image = button.imageView?.image {
@@ -126,7 +126,7 @@ class EventDetailTopFullCell: UITableViewCell {
             self.ui_view_discussion_box.isHidden = false
             self.ui_constraint_discussion_box_top?.constant = 20
             self.ui_constraint_discussion_box_bottom?.constant = 20
-            self.ui_constraint_discussion_box_height?.constant = 136
+            self.ui_constraint_discussion_box_height?.constant = 146
         }else{
             self.ui_view_discussion_box.isHidden = true
             self.ui_constraint_discussion_box_top?.constant = 0
