@@ -1,11 +1,12 @@
 import UIKit
 import SwiftUI
+import Lottie
 
 class WelcomeJourneyCelebrationPopupViewController: UIViewController {
 
     // UI Elements
     private let containerView = UIView()
-    private let starImageView = UIImageView()
+    private let animationView = LottieAnimationView()
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
     private let ctaButton = UIButton(type: .system)
@@ -28,11 +29,12 @@ class WelcomeJourneyCelebrationPopupViewController: UIViewController {
         view.addSubview(containerView)
 
         // Star Icon
-        starImageView.image = UIImage(systemName: "star.fill")
-        starImageView.tintColor = UIColor(named: "orange_app")
-        starImageView.contentMode = .scaleAspectFit
-        starImageView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(starImageView)
+        animationView.animation = LottieAnimation.named("congrats_animation")
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(animationView)
+        animationView.play()
 
         // Title
         titleLabel.text = "home_v2_welcome_celebration_title".localized
@@ -69,12 +71,12 @@ class WelcomeJourneyCelebrationPopupViewController: UIViewController {
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
 
-            starImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 32),
-            starImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            starImageView.widthAnchor.constraint(equalToConstant: 80),
-            starImageView.heightAnchor.constraint(equalToConstant: 80),
+            animationView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 32),
+            animationView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            animationView.widthAnchor.constraint(equalToConstant: 80),
+            animationView.heightAnchor.constraint(equalToConstant: 80),
 
-            titleLabel.topAnchor.constraint(equalTo: starImageView.bottomAnchor, constant: 24),
+            titleLabel.topAnchor.constraint(equalTo: animationView.bottomAnchor, constant: 24),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
             titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
 

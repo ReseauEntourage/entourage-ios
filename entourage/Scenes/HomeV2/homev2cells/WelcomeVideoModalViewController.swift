@@ -60,7 +60,7 @@ class WelcomeVideoModalViewController: UIViewController {
 
         // Title (Taille légèrement réduite pour gagner de la place)
         titleLabel.text = "home_v2_welcome_video_modal_title".localized
-        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        titleLabel.setFontTitle(size: 20)
         titleLabel.textColor = UIColor.black
         titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -83,15 +83,15 @@ class WelcomeVideoModalViewController: UIViewController {
 
         // Description (Taille légèrement réduite)
         descriptionLabel.text = "home_v2_welcome_video_modal_desc".localized
-        descriptionLabel.font = .systemFont(ofSize: 14, weight: .regular)
-        descriptionLabel.textColor = UIColor.gray
+        descriptionLabel.setFontBody(size: 15)
+        descriptionLabel.textColor = UIColor.black
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(descriptionLabel)
 
         // Continue Button
         continueButton.setTitle("\(originalButtonText) (\(secondsRemaining))", for: .normal)
-        continueButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        continueButton.titleLabel?.font = UIFont(name: "Quicksand-Bold", size: 15)
         continueButton.setTitleColor(.white, for: .normal)
         continueButton.setTitleColor(.white.withAlphaComponent(0.5), for: .disabled) // Texte un peu transparent quand désactivé
         continueButton.backgroundColor = UIColor.systemGray4 // Gris plus doux pour l'état désactivé
