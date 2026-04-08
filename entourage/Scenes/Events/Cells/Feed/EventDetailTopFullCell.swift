@@ -98,6 +98,7 @@ class EventDetailTopFullCell: UITableViewCell {
         self.ui_view_discussion_box.layer.borderWidth = 1.0
         self.ui_view_discussion_box.layer.borderColor = UIColor.appOrange.cgColor
         self.ui_label_discussion_desc.text = "event_discussion_desc".localized
+        self.ui_label_discussion_desc.numberOfLines = 0
     }
     
     @objc func onParticipateClick() {
@@ -126,7 +127,7 @@ class EventDetailTopFullCell: UITableViewCell {
             self.ui_view_discussion_box.isHidden = false
             self.ui_constraint_discussion_box_top?.constant = 20
             self.ui_constraint_discussion_box_bottom?.constant = 20
-            self.ui_constraint_discussion_box_height?.constant = 146
+            self.ui_constraint_discussion_box_height?.constant = 160
         }else{
             self.ui_view_discussion_box.isHidden = true
             self.ui_constraint_discussion_box_top?.constant = 0
