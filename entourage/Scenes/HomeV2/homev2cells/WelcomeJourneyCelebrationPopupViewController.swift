@@ -29,9 +29,9 @@ class WelcomeJourneyCelebrationPopupViewController: UIViewController {
         view.addSubview(containerView)
 
         // Star Icon
-        animationView.animation = LottieAnimation.named("congrats_animation")
+        animationView.animation = LottieAnimation.named("congrat_short_anim 2")
         animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .playOnce
+        animationView.loopMode = .loop
         animationView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(animationView)
         animationView.play()

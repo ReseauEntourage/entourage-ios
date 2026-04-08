@@ -397,6 +397,7 @@
 		24EAAA8A2F0BB94B002F2A41 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
 		24EAAA8C2F0E4FC0002F2A41 /* AssociationPresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */; };
 		24F3EF252F61D135005AD389 /* AddressAutocompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */; };
+		24F46AE62F8650A200A88B91 /* congrat_short_anim 2.json in Resources */ = {isa = PBXBuildFile; fileRef = 24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */; };
 		260377FC2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */; };
 		26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */; };
 		26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */; };
@@ -1024,6 +1025,7 @@
 		24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStaffWarningView.swift; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
 		24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAutocompleteViewModel.swift; sourceTree = "<group>"; };
+		24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "congrat_short_anim 2.json"; sourceTree = "<group>"; };
 		260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionSmokeTestViewController.swift; sourceTree = "<group>"; };
 		26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDayCell.swift; sourceTree = "<group>"; };
 		26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChoiceDayCell.xib; sourceTree = "<group>"; };
@@ -1618,6 +1620,7 @@
 		025D876C278DF44800909101 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */,
 				2421081B2F4CA9C8004D74E2 /* birthday_animation.json */,
 				26BEEED02C06180D00169FBA /* congrats_animation.json */,
 				2636B9632A7BA199007EE1B2 /* anim_rugby.json */,
@@ -2808,6 +2811,7 @@
 				26C70B422B2B5D6F005C8846 /* CellGroupV2.xib in Resources */,
 				26F03C972A1B850C00450A61 /* WelcomeOneContentMain.xib in Resources */,
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
+				24F46AE62F8650A200A88B91 /* congrat_short_anim 2.json in Resources */,
 				26BEEECA2C00C32B00169FBA /* EnhancedOnboardingTitle.xib in Resources */,
 				021FD96E2876F12E00D3AA54 /* EventListSectionCell.xib in Resources */,
 				0243DCC828AF832D00273679 /* Messages.storyboard in Resources */,
