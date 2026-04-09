@@ -52,14 +52,15 @@ struct WelcomeEventsListView: View {
             
             // Header
             VStack(alignment: .leading, spacing: 16) {
-                HStack(alignment: .top, spacing: 16) {
+                
+                // Top Navigation (Arrow + Title)
+                HStack(alignment: .center, spacing: 16) {
                     Button(action: {
                         onBack?()
                     }) {
                         Image("back_arrow")
                             .renderingMode(.template)
                             .foregroundColor(.black)
-                            .padding(.top, 6)
                     }
                     
                     Text(viewModel.type == .firstStep ? "welcome_welcome_list_title".localized :
@@ -69,74 +70,55 @@ struct WelcomeEventsListView: View {
                         .foregroundColor(.black)
                 }
 
+                // Subtitle
                 Text(viewModel.type == .firstStep ? "welcome_welcome_list_subtitle".localized :
-                     viewModel.type == .webinar ? "welcome_webinar_list_subtitle".localized :
-                     "welcome_papotages_list_subtitle".localized)
-                            viewModel.type == .webinar ? "welcome_webinar_list_title".localized :
-                            "welcome_papotages_list_title".localized)
-                    .font(.custom("Quicksand-Bold", size: 24))
-                    .foregroundColor(.black)
-                    .lineLimit(1)
-                    
-                    // Title & Subtitle
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(viewModel.type == .firstStep ? "welcome_welcome_list_title".localized :
-                                viewModel.type == .webinar ? "welcome_webinar_list_title".localized :
-                                "welcome_papotages_list_title".localized)
-                        .font(.custom("Quicksand-Bold", size: 18))
+                        viewModel.type == .webinar ? "welcome_webinar_list_subtitle".localized :
+                        "welcome_papotages_list_subtitle".localized)
+                .font(.custom("NunitoSans-Regular", size: 15))
+                .foregroundColor(.black)
+                .padding(.top, 8) // Un petit padding pour respirer si besoin
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 10)
+            .padding(.bottom, 20)
+            
+            // Content
+            if viewModel.isLoading {
+                Spacer()
+                HStack {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+                Spacer()
+            } else if viewModel.events.isEmpty || viewModel.hasError {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Text("no_events_found".localized)
+                        .font(.custom("NunitoSans-Regular", size: 16))
                         .foregroundColor(.black)
-                        Spacer()
-                    }
-                    
-                    Text(viewModel.type == .firstStep ? "welcome_welcome_list_subtitle".localized :
-                            viewModel.type == .webinar ? "welcome_webinar_list_subtitle".localized :
-                            "welcome_papotages_list_subtitle".localized)
-                    .font(.custom("NunitoSans-Regular", size: 15))
-                    .foregroundColor(.black)
+                    Spacer()
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 10)
-                .padding(.bottom, 20)
-                
-                // Content
-                if viewModel.isLoading {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                        Spacer()
-                    }
-                    Spacer()
-                } else if viewModel.events.isEmpty || viewModel.hasError {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Text("no_events_found".localized)
-                            .font(.custom("NunitoSans-Regular", size: 16))
-                            .foregroundColor(.black)
-                        Spacer()
-                    }
-                    Spacer()
-                } else {
-                    ScrollView {
-                        LazyVStack(spacing: 16) {
-                            ForEach(viewModel.events, id: \.uid) { event in
-                                EventListCellWrap(event: event)
-                                
-                                    .onTapGesture {
-                                        onEventTapped?(event)
-                                    }
-                            }
+                Spacer()
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 16) {
+                        ForEach(viewModel.events, id: \.uid) { event in
+                            EventListCellWrap(event: event)
+                                .onTapGesture {
+                                    onEventTapped?(event)
+                                }
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 20)
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 20)
                 }
             }
-            .background(Color.white.ignoresSafeArea())
-            .onAppear {
-                viewModel.fetchEvents()
-            }
+        }
+        .background(Color.white.ignoresSafeArea())
+        .onAppear {
+            viewModel.fetchEvents()
         }
     }
     
