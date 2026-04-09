@@ -141,7 +141,7 @@ struct HomeWelcomeJourneyView: View {
                     VStack(spacing: 0) {
                         Text("home_v2_welcome_microcopy_3".localized)
                             .font(.custom("Quicksand-Bold", size: 15))
-                            .foregroundColor(Color(red: 45/255, green: 104/255, blue: 50/255))
+                            .foregroundColor(Color("green_middle"))
                             .multilineTextAlignment(.center)
                     }
                     .padding(12)
@@ -150,7 +150,7 @@ struct HomeWelcomeJourneyView: View {
                     .cornerRadius(12)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color(red: 45/255, green: 104/255, blue: 50/255), lineWidth: 1)
+                            .stroke(Color("green_middle"), lineWidth: 1)
                     )
                     .padding(.horizontal, 16)
                     .padding(.bottom, 16)
@@ -195,7 +195,7 @@ struct WelcomeJourneyStepView: View {
                     // Icon
                     ZStack {
                         Circle()
-                            .fill(step.state == .completed ? Color(red: 45/255, green: 104/255, blue: 50/255) : Color("orange_light_a50").opacity(0.3))
+                            .fill(step.state == .completed ? Color("green_middle") : Color("orange_light_a50").opacity(0.3))
                             .frame(width: 36, height: 36)
 
                         Image(systemName: step.state == .completed ? "checkmark" : step.iconName)
@@ -208,20 +208,20 @@ struct WelcomeJourneyStepView: View {
                         HStack(alignment: .top) {
                             Text(step.title)
                                 .font(.custom("Quicksand-Bold", size: 14))
-                                .foregroundColor(step.state == .completed ? Color(red: 45/255, green: 104/255, blue: 50/255) : (step.state == .future ? Color.gray : Color.black))
+                                .foregroundColor(step.state == .completed ? Color("green_middle") : (step.state == .future ? Color.gray : Color.black))
                                 .multilineTextAlignment(.leading)
                             Spacer(minLength: 8)
                             if step.state == .completed {
                                 Text("home_v2_welcome_done".localized)
                                     .font(.custom("NunitoSans-Bold", size: 12))
-                                    .foregroundColor(Color(red: 45/255, green: 104/255, blue: 50/255))
+                                    .foregroundColor(Color("green_middle"))
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 4)
                                     .background(Color("green_light").opacity(0.15))
                                     .cornerRadius(12)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color(red: 45/255, green: 104/255, blue: 50/255), lineWidth: 1)
+                                            .stroke(Color("green_middle"), lineWidth: 1)
                                     )
                             } else if step.state == .active {
                                 Text("home_v2_welcome_todo".localized)
@@ -236,7 +236,7 @@ struct WelcomeJourneyStepView: View {
 
                         Text(step.subtitle)
                             .font(.custom("NunitoSans-Regular", size: 13))
-                            .foregroundColor(step.state == .completed ? Color(red: 45/255, green: 104/255, blue: 50/255) : Color.gray)
+                            .foregroundColor(step.state == .completed ? Color("green_middle") : Color.gray)
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.top, 2)
@@ -260,7 +260,7 @@ struct WelcomeJourneyStepView: View {
             .cornerRadius(14)
             .overlay(
                 RoundedRectangle(cornerRadius: 14)
-                    .stroke(step.state == .active ? Color("orange_app") : (step.state == .completed ? Color(red: 45/255, green: 104/255, blue: 50/255) : Color(UIColor.systemGray5)), lineWidth: step.state == .active ? 2 : 1)
+                    .stroke(step.state == .active ? Color("orange_app") : (step.state == .completed ? Color("green_middle") : Color(UIColor.systemGray5)), lineWidth: step.state == .active ? 2 : 1)
             )
             .shadow(color: Color.black.opacity(step.state == .active ? 0.05 : 0), radius: 8, x: 0, y: 2)
             .opacity(step.state == .future ? 0.6 : (step.state == .completed ? 0.9 : 1.0))
