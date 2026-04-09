@@ -36,7 +36,7 @@ class WelcomeJourneyViewModel: ObservableObject {
         // On se fie uniquement au backend pour l'état d'avancement
         let hasWatchedVideo = events.contains("onboarding.resource.welcome_watched")
         let hasJoinedWebinar = events.contains("onboarding.outing.webinar_or_first_steps")
-        let hasJoinedPapotages = events.contains("onboarding.outing.papotages")
+        let hasJoinedPapotages = events.contains("onboarding.outing.papotagesHack")
 
         let allCompleted = hasWatchedVideo && hasJoinedWebinar && hasJoinedPapotages
 
