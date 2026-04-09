@@ -18,7 +18,7 @@ struct CellCreateSmallTalkView: View {
                 // Titre et Sous-titre
                 VStack(alignment: .leading, spacing: 6) {
                     Text("home_v2_small_talk_card_title".localized)
-                        .font(.custom("Quicksand-Bold", size: 18))
+                        .font(.custom("Quicksand-Bold", size: 15))
                         .foregroundColor(.black)
                     
                     Text("home_v2_small_talk_card_subtitle".localized)

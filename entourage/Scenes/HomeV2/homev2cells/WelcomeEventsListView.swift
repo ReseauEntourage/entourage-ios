@@ -66,7 +66,7 @@ struct WelcomeEventsListView: View {
                     Text(viewModel.type == .firstStep ? "welcome_welcome_list_title".localized :
                          viewModel.type == .webinar ? "welcome_webinar_list_title".localized :
                          "welcome_papotages_list_title".localized)
-                        .font(.custom("Quicksand-Bold", size: 24))
+                        .font(.custom("Quicksand-Bold", size: 18))
                         .foregroundColor(.black)
                 }
 
@@ -103,6 +103,7 @@ struct WelcomeEventsListView: View {
                 Spacer()
             } else {
                 ScrollView {
+                    // MODIFICATION ICI : L'espacement est uniquement géré ici maintenant (16 points nets)
                     LazyVStack(spacing: 16) {
                         ForEach(viewModel.events, id: \.uid) { event in
                             EventListCellWrap(event: event)
@@ -111,7 +112,7 @@ struct WelcomeEventsListView: View {
                                 }
                         }
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 20) // Aligné avec le header
                     .padding(.bottom, 20)
                 }
             }
@@ -122,14 +123,11 @@ struct WelcomeEventsListView: View {
         }
     }
     
-    // Wrapper to use the native HomeCellEvent or equivalent, but since HomeCellEvent is a UICollectionViewCell
-    // we will just build a native SwiftUI equivalent or wrap the existing view.
-    // Given time constraints, building a simple SwiftUI equivalent of HomeEventAdapter's cell.
     struct EventListCellWrap: View {
         let event: Event
         
         var body: some View {
-            HStack(alignment: .top, spacing: 10) {
+            HStack(alignment: .top, spacing: 12) {
                 // Image
                 ZStack(alignment: .bottomLeading) {
                     ZStack(alignment: .topLeading) {
@@ -217,7 +215,7 @@ struct WelcomeEventsListView: View {
                                 .foregroundColor(Color("gris_112"))
                         }
                     }
-                    .padding(.top, 6)
+                    .padding(.top, 4) // Ajustement cosmétique pour aligner le texte avec le haut de l'image
                     
                     // Date
                     HStack(spacing: 8) {
@@ -229,7 +227,7 @@ struct WelcomeEventsListView: View {
                             .font(.custom("NunitoSans-Light", size: 13))
                             .foregroundColor(Color("gris_112"))
                     }
-                    .padding(.top, 4)
+                    .padding(.top, 2)
                     
                     // Place
                     HStack(spacing: 8) {
@@ -256,14 +254,14 @@ struct WelcomeEventsListView: View {
                                 .lineLimit(1)
                         }
                     }
-                    Spacer()
+                    
+                    // MODIFICATION ICI : Le Spacer() qui détruisait la mise en page a été supprimé !
                 }
-                .padding(.vertical, 2)
-                Spacer()
+                
+                Spacer(minLength: 0) // Ce spacer reste pour pousser le contenu à gauche horizontalement
             }
-            .padding(8)
-            .padding(.horizontal, 8)
-            .background(Color("BeigeClair"))
+            .contentShape(Rectangle()) // Rend toute la zone cliquable
+            .background(Color.white) // Les padding() superflus ont été retirés
         }
     }
 }
