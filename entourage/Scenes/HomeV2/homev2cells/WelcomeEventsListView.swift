@@ -69,6 +69,13 @@ struct WelcomeEventsListView: View {
                         .foregroundColor(.black)
                         .lineLimit(1)
 
+            // Title & Subtitle
+            VStack(alignment: .leading, spacing: 8) {
+                Text(viewModel.type == .firstStep ? "welcome_welcome_list_title".localized :
+                     viewModel.type == .webinar ? "welcome_webinar_list_title".localized :
+                     "welcome_papotages_list_title".localized)
+                    .font(.custom("Quicksand-Bold", size: 18))
+                    .foregroundColor(.black)
                     Spacer()
                 }
 

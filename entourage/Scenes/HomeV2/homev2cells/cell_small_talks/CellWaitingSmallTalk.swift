@@ -20,7 +20,7 @@ class CellWaitingSmallTalk:UICollectionViewCell {
     
     override func awakeFromNib() {
         ui_label_title.text = "small_talk_title_waiting".localized
-        ui_label_title.setFontTitle(size: 15)
+        ui_label_title.setFontTitle(size: 18)
         ui_label_subtitle.text = "small_talk_subtitle_waiting".localized
         ui_label_subtitle.setFontBody(size: 15)
     }
