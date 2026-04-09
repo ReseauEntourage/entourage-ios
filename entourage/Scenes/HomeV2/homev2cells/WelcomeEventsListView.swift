@@ -69,7 +69,7 @@ struct WelcomeEventsListView: View {
                 Text(viewModel.type == .firstStep ? "welcome_welcome_list_title".localized :
                      viewModel.type == .webinar ? "welcome_webinar_list_title".localized :
                      "welcome_papotages_list_title".localized)
-                    .font(.custom("Quicksand-Bold", size: 24))
+                    .font(.custom("Quicksand-Bold", size: 18))
                     .foregroundColor(.black)
 
                 Text(viewModel.type == .firstStep ? "welcome_welcome_list_subtitle".localized :

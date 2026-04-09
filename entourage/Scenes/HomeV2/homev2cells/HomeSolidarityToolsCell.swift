@@ -50,7 +50,7 @@ class HomeSolidarityToolsCell: UITableViewCell {
 
     private func setupUI() {
         ui_label_title.text = "home_v2_solidarity_tools_title".localized
-        ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 15)
+        ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 18)
         ui_label_title.textColor = .black
 
         setupCard(view: ui_view_map, label: ui_lbl_map, image: ui_iv_map, imgContainer: ui_cont_map, title: "home_v2_tool_card_map".localized, iconName: "ic_button_map", systemIcon: "map.fill")
