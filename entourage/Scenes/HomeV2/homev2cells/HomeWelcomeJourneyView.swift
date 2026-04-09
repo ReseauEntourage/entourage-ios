@@ -177,7 +177,7 @@ struct HomeWelcomeJourneyView: View {
                     .padding(.bottom, 16)
                 }
             }
-            .padding(.top, 16)
+            .padding(.top, 32)
             .background(Color("white_orange_home")) // matches the table view background
             .fixedSize(horizontal: false, vertical: true)
         }
