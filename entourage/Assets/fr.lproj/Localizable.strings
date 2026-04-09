@@ -1024,7 +1024,7 @@
 "event_filter_position_placeholder" = "Ma position";
 
 //Pop leave/cancel event
-"params_leave_event_pop_title" = "Quitter l'événement";
+"params_leave_event_pop_title" = "Je ne souhaite plus participer";
 "params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
 "params_leave_event_pop_bt_quit" = "Quitter";
 "params_leave_event_pop_bt_cancel" = "Annuler";
@@ -1066,7 +1066,7 @@
 "event_params_cgu_description" = "Charte des événements, à lire attentivement.";
 "event_params_participant" = "participant";
 "event_params_participants" = "participants";
-"event_params_quit" = "Quitter l’événement";
+"event_params_quit" = "Je ne souhaite plus participer";
 "event_params_cancel" = "Annuler l'événement";
 
 "event_params_notif_title" = "Me notifier de";
