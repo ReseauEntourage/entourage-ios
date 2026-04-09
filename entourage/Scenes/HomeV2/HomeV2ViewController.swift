@@ -398,8 +398,9 @@ class HomeV2ViewController: UIViewController {
         welcomeJourneyVM.update(with: userHome.events, hasInitiallyCompletedAll: &self.hasInitiallyCompletedAll)
 
         let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
+        let isUserProOrTeam = (UserDefaults.currentUser?.partner != nil)
 
-        if !welcomeJourneyVM.hideEntirely {
+        if !welcomeJourneyVM.hideEntirely && !isUserProOrTeam {
             tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
 
             if welcomeJourneyVM.isFullyCompleted && !hasShownCelebration {
