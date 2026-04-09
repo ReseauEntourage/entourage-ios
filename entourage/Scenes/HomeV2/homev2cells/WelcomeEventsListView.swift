@@ -51,15 +51,15 @@ struct WelcomeEventsListView: View {
         VStack(alignment: .leading, spacing: 0) {
 
             // Header
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack(alignment: .top, spacing: 16) {
                     Button(action: {
                         onBack?()
                     }) {
                         Image("back_arrow")
                             .renderingMode(.template)
                             .foregroundColor(.black)
-                            .padding(.vertical, 12)
+                            .padding(.top, 6)
                     }
 
                     Text(viewModel.type == .firstStep ? "welcome_welcome_list_title".localized :
@@ -67,16 +67,6 @@ struct WelcomeEventsListView: View {
                          "welcome_papotages_list_title".localized)
                         .font(.custom("Quicksand-Bold", size: 24))
                         .foregroundColor(.black)
-                        .lineLimit(1)
-
-            // Title & Subtitle
-            VStack(alignment: .leading, spacing: 8) {
-                Text(viewModel.type == .firstStep ? "welcome_welcome_list_title".localized :
-                     viewModel.type == .webinar ? "welcome_webinar_list_title".localized :
-                     "welcome_papotages_list_title".localized)
-                    .font(.custom("Quicksand-Bold", size: 18))
-                    .foregroundColor(.black)
-                    Spacer()
                 }
 
                 Text(viewModel.type == .firstStep ? "welcome_welcome_list_subtitle".localized :
