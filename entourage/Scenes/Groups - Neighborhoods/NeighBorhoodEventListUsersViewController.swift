@@ -13,6 +13,9 @@ private enum TableDTO {
     case questionCell(title: String)
     case userCell(user: UserLightNeighborhood, reactionType: ReactionType?)
     case surveySection(title: String, voteCount: Int)
+    case unsubscribedParticipantsHeader
+    case unsubscribedParticipantsAskHelpCell(count: Int)
+    case unsubscribedParticipantsOfferHelpCell(count: Int)
 }
 
 class NeighBorhoodEventListUsersViewController: BasePopViewController {
@@ -20,6 +23,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_lb_no_result: UILabel!
     @IBOutlet weak var ui_view_no_result: UIView!
+    @IBOutlet weak var ui_floaty_button: Floaty!
 
     var neighborhood: Neighborhood? = nil
     var event: Event? = nil
@@ -67,6 +71,10 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
         ui_tableview.register(UINib(nibName: SectionOptionNameCell.identifier, bundle: nil), forCellReuseIdentifier: SectionOptionNameCell.identifier)
         ui_tableview.register(UINib(nibName: QuestionSurveyVoteCell.identifier, bundle: nil), forCellReuseIdentifier: QuestionSurveyVoteCell.identifier)
+        ui_tableview.register(NeighborhoodUnsubscribedParticipantsHeaderCell.self, forCellReuseIdentifier: "UnsubscribedHeaderCell")
+        ui_tableview.register(NeighborhoodUnsubscribedParticipantsCell.self, forCellReuseIdentifier: "UnsubscribedCell")
+
+        setupFloaty()
 
         var title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
         if isFromReact { title = "see_member_react".localized }
@@ -216,7 +224,38 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
     private func rebuildTableDataFromUsers() {
         tableData = [.searchCell] + users.map { .userCell(user: $0, reactionType: nil) }
+
+        if isEvent, let event = event {
+            let askForHelp = event.unsubscribed_participants_ask_for_help ?? 0
+            let offerHelp = event.unsubscribed_participants_offer_help ?? 0
+
+            if askForHelp > 0 || offerHelp > 0 {
+                tableData.append(.unsubscribedParticipantsHeader)
+                if askForHelp > 0 {
+                    tableData.append(.unsubscribedParticipantsAskHelpCell(count: askForHelp))
+                }
+                if offerHelp > 0 {
+                    tableData.append(.unsubscribedParticipantsOfferHelpCell(count: offerHelp))
+                }
+            }
+        }
+
         ui_tableview.reloadData()
+    }
+
+    private func setupFloaty() {
+        if let floaty = ui_floaty_button {
+            floaty.isHidden = true // hidden by default
+
+            if isEvent && viewerCanUseCheckboxes && !isFromSurvey && !isFromReact {
+                floaty.isHidden = false
+                floaty.buttonImage = UIImage(named: "ic_button_plus_fill")
+                floaty.buttonColor = UIColor(named: "appOrange") ?? .orange
+                floaty.paddingY = 20
+                floaty.paddingX = 20
+                floaty.fabDelegate = self
+            }
+        }
     }
 
     // MARK: - Search
@@ -311,6 +350,23 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
 
         switch tableData[indexPath.row] {
 
+        case .unsubscribedParticipantsHeader:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UnsubscribedHeaderCell", for: indexPath) as! NeighborhoodUnsubscribedParticipantsHeaderCell
+            cell.selectionStyle = .none
+            return cell
+
+        case .unsubscribedParticipantsAskHelpCell(let count):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UnsubscribedCell", for: indexPath) as! NeighborhoodUnsubscribedParticipantsCell
+            cell.selectionStyle = .none
+            cell.configure(count: count, isAskForHelp: true)
+            return cell
+
+        case .unsubscribedParticipantsOfferHelpCell(let count):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UnsubscribedCell", for: indexPath) as! NeighborhoodUnsubscribedParticipantsCell
+            cell.selectionStyle = .none
+            cell.configure(count: count, isAskForHelp: false)
+            return cell
+
         case .searchCell:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_search", for: indexPath) as! NeighborhoodHomeSearchCell
             let title = isEvent ? "event_userInput_search".localized : "neighborhood_userInput_search".localized
@@ -361,7 +417,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableData[indexPath.row] {
-        case .searchCell, .surveySection, .questionCell:
+        case .searchCell, .surveySection, .questionCell, .unsubscribedParticipantsHeader, .unsubscribedParticipantsAskHelpCell, .unsubscribedParticipantsOfferHelpCell:
             return
 
         case .userCell(_, _):
@@ -568,6 +624,42 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
                 }
             }
         }
+    }
+}
+
+// MARK: - FloatyDelegate
+extension NeighBorhoodEventListUsersViewController: FloatyDelegate {
+    func emptyFloatySelected(_ floaty: Floaty) {
+        let bottomSheet = UnsubscribedParticipantsBottomSheet()
+        bottomSheet.initialAskCount = event?.unsubscribed_participants_ask_for_help ?? 0
+        bottomSheet.initialOfferCount = event?.unsubscribed_participants_offer_help ?? 0
+
+        bottomSheet.onValidate = { [weak self] (offerCount, askCount) in
+            guard let self = self, let eventId = self.event?.uid else { return }
+
+            SVProgressHUD.show()
+            EventService.updateUnsubscribedParticipants(eventId: eventId, offerHelp: offerCount, askForHelp: askCount) { error in
+                SVProgressHUD.dismiss()
+                if let error = error {
+                    SVProgressHUD.showError(withStatus: error.message)
+                } else {
+                    self.event?.unsubscribed_participants_ask_for_help = askCount
+                    self.event?.unsubscribed_participants_offer_help = offerCount
+                    self.rebuildTableDataFromUsers()
+                }
+            }
+        }
+
+        if #available(iOS 15.0, *) {
+            if let sheet = bottomSheet.sheetPresentationController {
+                sheet.detents = [.medium()]
+                sheet.prefersGrabberVisible = true
+            }
+        } else {
+            bottomSheet.modalPresentationStyle = .custom
+        }
+
+        self.present(bottomSheet, animated: true, completion: nil)
     }
 }
 

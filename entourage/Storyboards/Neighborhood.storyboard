@@ -1774,10 +1774,24 @@
                                             <constraint firstItem="MUu-JM-Yek" firstAttribute="leading" secondItem="T9h-vF-R4Q" secondAttribute="leading" constant="32" id="rT2-nV-C24"/>
                                         </constraints>
                                     </view>
+                                    <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QW-eD-fLt" customClass="Floaty" customModule="Ent_Beta" customModuleProvider="target">
+                                        <rect key="frame" x="324" y="706" width="62" height="62"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="orange_light_a50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="62" id="1hE-P2-aU3"/>
+                                            <constraint firstAttribute="width" constant="62" id="q8O-QY-5o9"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="buttonImage" value="ic_button_plus_fill"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="e6K-FI-yGc" firstAttribute="top" secondItem="Aew-nQ-kXv" secondAttribute="bottom" id="5Ti-3L-Gr7"/>
+                                    <constraint firstAttribute="bottom" secondItem="QW-eD-fLt" secondAttribute="bottom" constant="32" id="B3Q-cR-Qd6"/>
+                                    <constraint firstAttribute="trailing" secondItem="QW-eD-fLt" secondAttribute="trailing" constant="28" id="D0X-qS-k2x"/>
                                     <constraint firstAttribute="trailing" secondItem="T9h-vF-R4Q" secondAttribute="trailing" id="Dx7-SG-lCa"/>
                                     <constraint firstItem="Aew-nQ-kXv" firstAttribute="top" secondItem="fDV-bM-SIb" secondAttribute="top" id="EaS-R7-bdk"/>
                                     <constraint firstItem="e6K-FI-yGc" firstAttribute="leading" secondItem="fDV-bM-SIb" secondAttribute="leading" id="JB9-VI-DvS"/>
@@ -1807,6 +1821,7 @@
                         <outlet property="ui_top_view" destination="Aew-nQ-kXv" id="HPh-S2-oA8"/>
                         <outlet property="ui_view_container" destination="fDV-bM-SIb" id="aPW-Tr-6gQ"/>
                         <outlet property="ui_view_no_result" destination="T9h-vF-R4Q" id="BYD-1r-9CZ"/>
+                        <outlet property="ui_floaty_button" destination="QW-eD-fLt" id="bYD-2r-1C1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0y-Fg-pE6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

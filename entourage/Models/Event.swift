@@ -45,6 +45,10 @@ struct Event:Codable {
     var status = ""
     var signable:Bool? = nil
     var manageableByCurrentUser:Bool? = false
+
+    var unsubscribed_participants_ask_for_help: Int? = 0
+    var unsubscribed_participants_offer_help: Int? = 0
+
     private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
     private var updatedAt:String? = nil
@@ -216,6 +220,8 @@ struct Event:Codable {
         case imageId = "entourage_image_id"
         
         case recurrency
+        case unsubscribed_participants_ask_for_help
+        case unsubscribed_participants_offer_help
         case membersCount = "members_count"
         case members
         case isMember = "member"

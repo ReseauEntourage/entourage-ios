@@ -1,0 +1,178 @@
+import UIKit
+
+class UnsubscribedParticipantsBottomSheet: UIViewController {
+
+    private let titleLabel = UILabel()
+    private let dismissLine = UIView()
+
+    private let helpAskLabel = UILabel()
+    private let helpAskMinusButton = UIButton()
+    private let helpAskPlusButton = UIButton()
+    private let helpAskCountLabel = UILabel()
+
+    private let helpOfferLabel = UILabel()
+    private let helpOfferMinusButton = UIButton()
+    private let helpOfferPlusButton = UIButton()
+    private let helpOfferCountLabel = UILabel()
+
+    private let validateButton = UIButton()
+
+    var initialAskCount: Int = 0
+    var initialOfferCount: Int = 0
+
+    private var currentAskCount: Int = 0 {
+        didSet {
+            helpAskCountLabel.text = "\(currentAskCount)"
+        }
+    }
+
+    private var currentOfferCount: Int = 0 {
+        didSet {
+            helpOfferCountLabel.text = "\(currentOfferCount)"
+        }
+    }
+
+    var onValidate: ((Int, Int) -> Void)?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        currentAskCount = initialAskCount
+        currentOfferCount = initialOfferCount
+    }
+
+    private func setupUI() {
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 20
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+
+        dismissLine.backgroundColor = UIColor(named: "grey_line") ?? .lightGray
+        dismissLine.layer.cornerRadius = 2
+        dismissLine.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(dismissLine)
+
+        titleLabel.text = "Ajouter des participants"
+        titleLabel.font = ApplicationTheme.getFontH1Noir()
+        titleLabel.textColor = .black
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(titleLabel)
+
+        helpAskLabel.text = "Combien de personnes isolées supplémentaires ont rejoint l'événement ?"
+        helpAskLabel.font = ApplicationTheme.getFontCourantRegularNoir()
+        helpAskLabel.textColor = .black
+        helpAskLabel.numberOfLines = 0
+        helpAskLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(helpAskLabel)
+
+        setupCounter(minusBtn: helpAskMinusButton, plusBtn: helpAskPlusButton, countLabel: helpAskCountLabel, yAnchorView: helpAskLabel)
+
+        helpOfferLabel.text = "Combien de riverains supplémentaires ont rejoint l'événement ?"
+        helpOfferLabel.font = ApplicationTheme.getFontCourantRegularNoir()
+        helpOfferLabel.textColor = .black
+        helpOfferLabel.numberOfLines = 0
+        helpOfferLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(helpOfferLabel)
+
+        setupCounter(minusBtn: helpOfferMinusButton, plusBtn: helpOfferPlusButton, countLabel: helpOfferCountLabel, yAnchorView: helpOfferLabel)
+
+        validateButton.setTitle("Valider", for: .normal)
+        validateButton.backgroundColor = UIColor(named: "appOrange") ?? .orange
+        validateButton.titleLabel?.font = ApplicationTheme.getFontBoutonBlanc().font
+        validateButton.layer.cornerRadius = 8
+        validateButton.translatesAutoresizingMaskIntoConstraints = false
+        validateButton.addTarget(self, action: #selector(validateAction), for: .touchUpInside)
+        view.addSubview(validateButton)
+
+        NSLayoutConstraint.activate([
+            dismissLine.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
+            dismissLine.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            dismissLine.widthAnchor.constraint(equalToConstant: 40),
+            dismissLine.heightAnchor.constraint(equalToConstant: 4),
+
+            titleLabel.topAnchor.constraint(equalTo: dismissLine.bottomAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            helpAskLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            helpAskLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            helpAskLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            helpOfferLabel.topAnchor.constraint(equalTo: helpAskLabel.bottomAnchor, constant: 90),
+            helpOfferLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            helpOfferLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            validateButton.topAnchor.constraint(equalTo: helpOfferLabel.bottomAnchor, constant: 100),
+            validateButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            validateButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            validateButton.heightAnchor.constraint(equalToConstant: 50),
+            validateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
+
+        helpAskMinusButton.addTarget(self, action: #selector(askMinusAction), for: .touchUpInside)
+        helpAskPlusButton.addTarget(self, action: #selector(askPlusAction), for: .touchUpInside)
+
+        helpOfferMinusButton.addTarget(self, action: #selector(offerMinusAction), for: .touchUpInside)
+        helpOfferPlusButton.addTarget(self, action: #selector(offerPlusAction), for: .touchUpInside)
+    }
+
+    private func setupCounter(minusBtn: UIButton, plusBtn: UIButton, countLabel: UILabel, yAnchorView: UIView) {
+        let stack = UIStackView(arrangedSubviews: [minusBtn, countLabel, plusBtn])
+        stack.axis = .horizontal
+        stack.spacing = 20
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stack)
+
+        minusBtn.setTitle("−", for: .normal)
+        minusBtn.setTitleColor(UIColor(named: "appOrange") ?? .orange, for: .normal)
+        minusBtn.titleLabel?.font = .systemFont(ofSize: 24, weight: .regular)
+        minusBtn.layer.cornerRadius = 20
+        minusBtn.backgroundColor = UIColor(named: "orange_light_a50") ?? UIColor.orange.withAlphaComponent(0.1)
+
+        plusBtn.setTitle("+", for: .normal)
+        plusBtn.setTitleColor(UIColor(named: "appOrange") ?? .orange, for: .normal)
+        plusBtn.titleLabel?.font = .systemFont(ofSize: 24, weight: .regular)
+        plusBtn.layer.cornerRadius = 20
+        plusBtn.backgroundColor = UIColor(named: "orange_light_a50") ?? UIColor.orange.withAlphaComponent(0.1)
+
+        countLabel.font = ApplicationTheme.getFontH2Noir()
+        countLabel.textColor = .black
+        countLabel.textAlignment = .center
+
+        NSLayoutConstraint.activate([
+            minusBtn.widthAnchor.constraint(equalToConstant: 40),
+            minusBtn.heightAnchor.constraint(equalToConstant: 40),
+            plusBtn.widthAnchor.constraint(equalToConstant: 40),
+            plusBtn.heightAnchor.constraint(equalToConstant: 40),
+            countLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30),
+
+            stack.topAnchor.constraint(equalTo: yAnchorView.bottomAnchor, constant: 16),
+            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+
+    @objc private func askMinusAction() {
+        if currentAskCount > 0 {
+            currentAskCount -= 1
+        }
+    }
+
+    @objc private func askPlusAction() {
+        currentAskCount += 1
+    }
+
+    @objc private func offerMinusAction() {
+        if currentOfferCount > 0 {
+            currentOfferCount -= 1
+        }
+    }
+
+    @objc private func offerPlusAction() {
+        currentOfferCount += 1
+    }
+
+    @objc private func validateAction() {
+        onValidate?(currentOfferCount, currentAskCount)
+        dismiss(animated: true)
+    }
+}
