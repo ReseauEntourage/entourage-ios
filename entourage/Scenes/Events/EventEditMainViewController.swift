@@ -532,7 +532,7 @@ extension EventEditMainViewController: MJNavBackViewDelegate {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "eventModPopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         let buttonValidate = MJAlertButtonType(title: "eventModPopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: "eventModPopCloseBackTitle".localized, message: "eventModPopCloseBackMessage".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        alertVC.configureAlert(alertTitle: "eventModPopCloseBackTitle".localized, message: "eventModPopCloseBackMessage".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         alertVC.delegate = self
         alertVC.show()
     }
@@ -541,16 +541,13 @@ extension EventEditMainViewController: MJNavBackViewDelegate {
 //MARK: - MJAlertControllerDelegate -
 extension EventEditMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        if alertTag == .None {
-            self.dismiss(animated: true)
-        }
     }
     func validateRightButton(alertTag: MJAlertTAG) {
         if alertTag == .Suppress {
             let isAll = selectedRecurrencyPosition == 1
             self.createEvent(applyToAll:isAll)
         } else if alertTag == .None {
-            // "Annuler" ferme juste la popup
+            self.dismiss(animated: true)
         }
     }
     
