@@ -56,10 +56,7 @@ class OnboardingStartCell: UITableViewCell {
     var tempPhone = ""
 
     // Data for country picker (déjà en dur chez toi)
-    let pickerDatas: [CountryCode] = [
-        CountryCode(country: "France",   code: "+33", flag: "🇫🇷"),
-        CountryCode(country: "Belgique", code: "+32", flag: "🇧🇪")
-    ]
+    let pickerDatas: [CountryCode] = allCountryCodes
 
     // --- Dynamic data (depuis l'API) ---
     // /home/metadata
@@ -229,7 +226,7 @@ class OnboardingStartCell: UITableViewCell {
         ui_title_phone.text = "onboard_welcome_phone".localized
         ui_title_email.text = "onboard_welcome_mail".localized
         ui_info_mailing.text = "onboard_welcome_consent".localized
-        ui_tf_phone.placeholder = "0600000000"
+        ui_tf_phone.placeholder = countryCode.exampleNumber
         ui_tf_email.placeholder = "onboard_welcome_placeholder_mail".localized
         ui_label_mandatory.text = "onboard_welcome_info_mandatory".localized
         ui_label_title_birthday.text = "Date d'anniversaire".localized
@@ -429,6 +426,7 @@ class OnboardingStartCell: UITableViewCell {
 
         if let countryCode = countryCode {
             self.countryCode = countryCode
+            ui_tf_phone.placeholder = countryCode.exampleNumber
         }
 
         selectPickerCountry()
@@ -601,6 +599,32 @@ extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
         case 3: return enterpriseOptions[safe: row]
         case 4: return eventOptions[safe: row]
         default: return "\(pickerDatas[row].flag) \(pickerDatas[row].country)"
+        }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView.tag == 1 {
+            genderTextField.text = genderOptions[safe: row]
+            delegate?.validateGender(gender: genderTextField.text)
+        } else if pickerView.tag == 2 {
+            howWeMetTextField.text = howWeMetOptions[safe: row]
+            delegate?.validateHowWeMet(howWeMet: howWeMetTextField.text)
+        } else if pickerView.tag == 3 {
+            companyTextField.text = enterpriseOptions[safe: row]
+            if let selectedCompany = enterprises[safe: row] {
+                delegate?.validateCompany(company: String(selectedCompany.id ?? 0))
+                loadEvents(forEnterpriseAt: row)
+            }
+        } else if pickerView.tag == 4 {
+            eventTextField.text = eventOptions[safe: row]
+            if let selectedEvent = eventsForSelectedEnterprise[safe: row] {
+                delegate?.validateEvent(event: String(selectedEvent.id ?? 0))
+            }
+        } else {
+            if pickerDatas.indices.contains(row) {
+                let selectedCountry = pickerDatas[row]
+                self.countryCode = selectedCountry
+                ui_tf_country.text = selectedCountry.flag
+                ui_tf_phone.placeholder = selectedCountry.exampleNumber
+            }
         }
     }
 

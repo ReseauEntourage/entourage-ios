@@ -139,7 +139,7 @@ final class OnboardingPhase1VM: ObservableObject {
     @Published var birthday: Date? = nil
 
     // Valeur par défaut locale (pas de dépendance globale)
-    @Published var selectedCountry: CountryCode = CountryCode(country: "France", code: "+33", flag: "🇫🇷")
+    @Published var selectedCountry: CountryCode = defaultCountryCode
 
     @Published var phone: String = ""
     @Published var email: String = ""
@@ -426,10 +426,7 @@ final class OnboardingPhase1VM: ObservableObject {
 struct OnboardingPhase1View: View {
     @ObservedObject var vm: OnboardingPhase1VM
 
-    private let countries: [CountryCode] = [
-        CountryCode(country: "France",   code: "+33", flag: "🇫🇷"),
-        CountryCode(country: "Belgique", code: "+32", flag: "🇧🇪"),
-    ]
+    private let countries: [CountryCode] = allCountryCodes
 
     @State private var showDateSheet = false
     @State private var tempDate = Date()
@@ -570,7 +567,7 @@ private struct ContactSection: View {
                 )
 
                 // ---- Boîte numéro (52) — même style EXACT ----
-                BoxedTextField(placeholder: "06 XX XX XX XX", text: $vm.phone)
+                BoxedTextField(placeholder: vm.selectedCountry.exampleNumber, text: $vm.phone)
             }
 
             FloatingField(title: "E-mail",
@@ -839,7 +836,7 @@ final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1
     // Compat API externe
     var userFirstname: String? { didSet { vm.firstname = userFirstname ?? "" } }
     var userLastname:  String? { didSet { vm.lastname  = userLastname  ?? "" } }
-    var countryCode:   CountryCode = CountryCode(country: "France", code: "+33", flag: "🇫🇷") { didSet { vm.selectedCountry = countryCode } }
+    var countryCode:   CountryCode = defaultCountryCode { didSet { vm.selectedCountry = countryCode } }
     var phone:         String? { didSet { vm.phone = phone ?? "" } }
     var email:         String? { didSet { vm.email = email ?? "" } }
     var hasConsent:    Bool = false { didSet { vm.consent = hasConsent } }
