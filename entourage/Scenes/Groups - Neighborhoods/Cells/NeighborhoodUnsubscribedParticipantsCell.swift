@@ -30,12 +30,12 @@ class NeighborhoodUnsubscribedParticipantsCell: UITableViewCell {
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         bgIconView.addSubview(iconImageView)
 
-        typeLabel.font = ApplicationTheme.getFontCourantBoldNoir()
+        typeLabel.font = UIFont.boldSystemFont(ofSize: 17)
         typeLabel.textColor = .black
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(typeLabel)
 
-        subtitleLabel.font = ApplicationTheme.getFontNunitoRegular(size: 13)
+        subtitleLabel.font = UIFont.systemFont(ofSize: 13)
         subtitleLabel.textColor = UIColor(named: "grey_reaction") ?? .gray
         subtitleLabel.text = "Ajoutés sur place"
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -73,3 +73,4 @@ class NeighborhoodUnsubscribedParticipantsCell: UITableViewCell {
         }
     }
 }
+

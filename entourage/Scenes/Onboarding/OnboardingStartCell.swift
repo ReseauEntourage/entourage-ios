@@ -581,7 +581,7 @@ extension OnboardingStartCell: UITextFieldDelegate {
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int { 1 }
-
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case 1: return genderOptions.count
@@ -591,7 +591,7 @@ extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
         default: return pickerDatas.count
         }
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case 1: return genderOptions[safe: row]
@@ -600,6 +600,8 @@ extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
         case 4: return eventOptions[safe: row]
         default: return "\(pickerDatas[row].flag) \(pickerDatas[row].country)"
         }
+    } // <-- ICI se trouvait l'erreur de parenthèse manquante !
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
             genderTextField.text = genderOptions[safe: row]
@@ -610,13 +612,17 @@ extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
         } else if pickerView.tag == 3 {
             companyTextField.text = enterpriseOptions[safe: row]
             if let selectedCompany = enterprises[safe: row] {
-                delegate?.validateCompany(company: String(selectedCompany.id ?? 0))
+                // Conversion sécurisée en String, peu importe que l'ID soit Int ou String de base
+                let companyId = selectedCompany.id != nil ? "\(selectedCompany.id!)" : ""
+                delegate?.validateCompany(company: companyId)
                 loadEvents(forEnterpriseAt: row)
             }
         } else if pickerView.tag == 4 {
             eventTextField.text = eventOptions[safe: row]
             if let selectedEvent = eventsForSelectedEnterprise[safe: row] {
-                delegate?.validateEvent(event: String(selectedEvent.id ?? 0))
+                // Conversion sécurisée en String
+                let eventId = selectedEvent.id != nil ? "\(selectedEvent.id!)" : ""
+                delegate?.validateEvent(event: eventId)
             }
         } else {
             if pickerDatas.indices.contains(row) {
@@ -627,7 +633,4 @@ extension OnboardingStartCell: UIPickerViewDelegate, UIPickerViewDataSource {
             }
         }
     }
-
 }
-
-

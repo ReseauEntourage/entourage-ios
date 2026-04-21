@@ -52,13 +52,13 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         view.addSubview(dismissLine)
 
         titleLabel.text = "Ajouter des participants"
-        titleLabel.font = ApplicationTheme.getFontH1Noir()
+        titleLabel.font = ApplicationTheme.getFontH1Noir().font
         titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
 
         helpAskLabel.text = "Combien de personnes isolées supplémentaires ont rejoint l'événement ?"
-        helpAskLabel.font = ApplicationTheme.getFontCourantRegularNoir()
+        helpAskLabel.font = ApplicationTheme.getFontCourantRegularNoir().font
         helpAskLabel.textColor = .black
         helpAskLabel.numberOfLines = 0
         helpAskLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +67,7 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         setupCounter(minusBtn: helpAskMinusButton, plusBtn: helpAskPlusButton, countLabel: helpAskCountLabel, yAnchorView: helpAskLabel)
 
         helpOfferLabel.text = "Combien de riverains supplémentaires ont rejoint l'événement ?"
-        helpOfferLabel.font = ApplicationTheme.getFontCourantRegularNoir()
+        helpOfferLabel.font = ApplicationTheme.getFontCourantRegularNoir().font
         helpOfferLabel.textColor = .black
         helpOfferLabel.numberOfLines = 0
         helpOfferLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +135,7 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         plusBtn.layer.cornerRadius = 20
         plusBtn.backgroundColor = UIColor(named: "orange_light_a50") ?? UIColor.orange.withAlphaComponent(0.1)
 
-        countLabel.font = ApplicationTheme.getFontH2Noir()
+        countLabel.font = ApplicationTheme.getFontH2Noir().font
         countLabel.textColor = .black
         countLabel.textAlignment = .center
 

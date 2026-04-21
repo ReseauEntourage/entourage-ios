@@ -394,6 +394,9 @@
 		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
 		24B68C9B2F6847FA00B35F25 /* ConversationStaffWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */; };
 		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
+		24D8DEDF2F975F720081AF8B /* NeighborhoodUnsubscribedParticipantsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D8DEDD2F975F720081AF8B /* NeighborhoodUnsubscribedParticipantsHeaderCell.swift */; };
+		24D8DEE12F9761C50081AF8B /* NeighborhoodUnsubscribedParticipantsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D8DEE02F9761C50081AF8B /* NeighborhoodUnsubscribedParticipantsCell.swift */; };
+		24D8DEE32F976EAB0081AF8B /* UnsubscribedParticipantsBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D8DEE22F976EAB0081AF8B /* UnsubscribedParticipantsBottomSheet.swift */; };
 		24EAAA8A2F0BB94B002F2A41 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
 		24EAAA8C2F0E4FC0002F2A41 /* AssociationPresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */; };
 		24F3EF252F61D135005AD389 /* AddressAutocompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */; };
@@ -1023,6 +1026,9 @@
 		24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCreateSmallTalkView.swift; sourceTree = "<group>"; };
 		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStaffWarningView.swift; sourceTree = "<group>"; };
+		24D8DEDD2F975F720081AF8B /* NeighborhoodUnsubscribedParticipantsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodUnsubscribedParticipantsHeaderCell.swift; sourceTree = "<group>"; };
+		24D8DEE02F9761C50081AF8B /* NeighborhoodUnsubscribedParticipantsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodUnsubscribedParticipantsCell.swift; sourceTree = "<group>"; };
+		24D8DEE22F976EAB0081AF8B /* UnsubscribedParticipantsBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsubscribedParticipantsBottomSheet.swift; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
 		24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAutocompleteViewModel.swift; sourceTree = "<group>"; };
 		24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "congrat_short_anim 2.json"; sourceTree = "<group>"; };
@@ -1353,6 +1359,7 @@
 		0224597227FF31FC00944DE4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				24D8DEE02F9761C50081AF8B /* NeighborhoodUnsubscribedParticipantsCell.swift */,
 				02369715296D9F6A00E2CACC /* Message top cell */,
 				0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */,
 				0224597327FF323600944DE4 /* NeighborhoodCreateNameCell.swift */,
@@ -1922,6 +1929,8 @@
 		02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */ = {
 			isa = PBXGroup;
 			children = (
+				24D8DEE22F976EAB0081AF8B /* UnsubscribedParticipantsBottomSheet.swift */,
+				24D8DEDD2F975F720081AF8B /* NeighborhoodUnsubscribedParticipantsHeaderCell.swift */,
 				02E7845E2811A91900177F13 /* NeighborhoodHomeViewController.swift */,
 				0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */,
 				02DD1E90280853CF00538EF4 /* NeighborhoodEditViewController.swift */,
@@ -3046,6 +3055,7 @@
 				02A92C1E2897D347000DFF95 /* ActionCreateMainViewController.swift in Sources */,
 				02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */,
 				26E25EFD2E8EB57A0073B46A /* ImageCache.swift in Sources */,
+				24D8DEE32F976EAB0081AF8B /* UnsubscribedParticipantsBottomSheet.swift in Sources */,
 				02A3DD3527FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift in Sources */,
 				02FB5448287DC11100E4B9FA /* EventDetailFullGroupCell.swift in Sources */,
 				02D64F4B2799CA6800F6C4BD /* CustomAnnotation.swift in Sources */,
@@ -3092,6 +3102,7 @@
 				26445C4B2BB46AAF0010A8D8 /* SimpleMJAlertDialog.swift in Sources */,
 				26584C4E2ACC4B1300ABD401 /* CustomGradientView.swift in Sources */,
 				02B57DA027FC9757005A567B /* PartnerDetailNeedsCell.swift in Sources */,
+				24D8DEE12F9761C50081AF8B /* NeighborhoodUnsubscribedParticipantsCell.swift in Sources */,
 				02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */,
 				0232A6D62888126700A47828 /* EventActionLocationFilters.swift in Sources */,
 				2630F6182C21CCB7007BAE56 /* HomeInitialPedagogicHorizontalCell.swift in Sources */,
@@ -3126,6 +3137,7 @@
 				02E21921283520A1002A1FCB /* NeighborhoodUploadPictureService.swift in Sources */,
 				26D13E172BA1FCAC00CAD4F7 /* CreateSurveyViewController.swift in Sources */,
 				02CCE68927D7B51E00D6976C /* TagView.swift in Sources */,
+				24D8DEDF2F975F720081AF8B /* NeighborhoodUnsubscribedParticipantsHeaderCell.swift in Sources */,
 				26F14CDB2D3E8766004C4524 /* ProfileFullStandardCell.swift in Sources */,
 				26D13E1C2BA35DA700CAD4F7 /* QuestionCell.swift in Sources */,
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,
