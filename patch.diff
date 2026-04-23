@@ -1,0 +1,13 @@
+--- entourage/Scenes/Conversations/ConversationParametersViewController.swift
++++ entourage/Scenes/Conversations/ConversationParametersViewController.swift
+@@ -107,9 +107,8 @@
+         result.append(.signal)
+         if isOneToOne && !isSeveral {
+             if !imBlocker { result.append(.blockUser) }
+-        } else {
+-            result.append(.leave)
+         }
++        result.append(.leave)
+         rows = result
+         ui_tableview.reloadData()
+     }
