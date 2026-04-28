@@ -1825,5 +1825,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_webinar_list_subtitle" = "Zespół Entourage daje Ci klucze do zrozumienia świata ulicy i istniejących rozwiązań pomocowych podczas 1-godzinnych warsztatów online.";
 "welcome_firststep_list_title" = "Pierwsze kroki w Entourage";
 "welcome_firststep_list_subtitle" = "Poznaj aplikację i zadaj wszystkie pytania zespołowi — w małych grupach, podczas 45-minutowej rozmowy wideo.";
-"conv_param_delete_action" = "Supprimer la conversation";
-"conv_param_not_participating_action" = "Je ne participe plus";
+
+"conv_param_delete_discussion" = "Delete the discussion";
+"conv_param_no_longer_participate" = "I no longer wish to participate";

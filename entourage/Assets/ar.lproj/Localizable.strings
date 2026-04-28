@@ -1750,5 +1750,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_webinar_list_subtitle" = "يمنحك فريق إنتوراج المفاتيح لفهم عالم الشارع وحلول المساعدة الحالية خلال ورشة عمل عبر الإنترنت مدتها ساعة واحدة.";
 "welcome_firststep_list_title" = "الخطوات الأولى على إنتوراج";
 "welcome_firststep_list_subtitle" = "تعرف على التطبيق واطرح جميع أسئلتك على الفريق - في مجموعات صغيرة، في مكالمة فيديو مدتها 45 دقيقة.";
-"conv_param_delete_action" = "Supprimer la conversation";
-"conv_param_not_participating_action" = "Je ne participe plus";
+
+"conv_param_delete_discussion" = "Delete the discussion";
+"conv_param_no_longer_participate" = "I no longer wish to participate";

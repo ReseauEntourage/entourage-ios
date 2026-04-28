@@ -1791,5 +1791,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_webinar_list_subtitle" = "Команда Entourage дає вам ключі до розуміння світу вулиці та існуючих рішень допомоги під час 1-годинного онлайн-семінару.";
 "welcome_firststep_list_title" = "Перші кроки в Entourage";
 "welcome_firststep_list_subtitle" = "Ознайомтеся з додатком та поставте всі свої питання команді — у невеликих групах, під час 45-хвилинного відеодзвінка.";
-"conv_param_delete_action" = "Supprimer la conversation";
-"conv_param_not_participating_action" = "Je ne participe plus";
+
+"conv_param_delete_discussion" = "Delete the discussion";
+"conv_param_no_longer_participate" = "I no longer wish to participate";
