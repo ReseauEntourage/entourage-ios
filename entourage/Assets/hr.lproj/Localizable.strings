@@ -1440,3 +1440,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
 "conversation_staff_warning_group_link" = "group";
+"conv_param_delete_action" = "Supprimer la conversation";
+"conv_param_not_participating_action" = "Je ne participe plus";

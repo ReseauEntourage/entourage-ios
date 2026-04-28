@@ -3234,3 +3234,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_webinar_list_subtitle" = "El equipo de Entourage te da las claves para entender el mundo de la calle y las soluciones de ayuda existentes durante un taller online de 1 hora.";
 "welcome_firststep_list_title" = "Primeros pasos en Entourage";
 "welcome_firststep_list_subtitle" = "Familiarízate con la aplicación y hazle todas tus preguntas al equipo — en pequeños grupos, 45 minutos por videollamada.";
+"conv_param_delete_action" = "Supprimer la conversation";
+"conv_param_not_participating_action" = "Je ne participe plus";

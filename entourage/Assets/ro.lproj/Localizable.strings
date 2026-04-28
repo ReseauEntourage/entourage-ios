@@ -1714,3 +1714,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_webinar_list_subtitle" = "Echipa Entourage îți oferă cheile pentru a înțelege lumea străzii și soluțiile de ajutor existente în timpul unui atelier online de 1 oră.";
 "welcome_firststep_list_title" = "Primii pași pe Entourage";
 "welcome_firststep_list_subtitle" = "Familiarizează-te cu aplicația și pune-i echipei toate întrebările tale — în grupuri mici, printr-un apel video de 45 de minute.";
+"conv_param_delete_action" = "Supprimer la conversation";
+"conv_param_not_participating_action" = "Je ne participe plus";
