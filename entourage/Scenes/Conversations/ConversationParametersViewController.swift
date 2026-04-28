@@ -305,14 +305,34 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             return cell
 
         case .leave:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-            cell.populateCell(title: "conv_param_qui_action".localized,
-                              subtitle: nil,
-                              isTitleOrange: true,
-                              pictoStr: "ic_leave_conv",
-                              hideSeparator: true,
-                              isIconOrange: true) // ✅ icône orange
-            return cell
+            if isEvent {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
+                cell.populateCell(title: "conv_param_no_longer_participate".localized,
+                                  subtitle: "conv_param_delete_discussion".localized,
+                                  isTitleOrange: true,
+                                  pictoStr: "ic_leave_conv",
+                                  hideSeparator: true,
+                                  isIconOrange: true)
+                return cell
+            } else if isOneToOne && !isSmallTalkMode {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
+                cell.populateCell(title: "conv_param_delete_discussion".localized,
+                                  subtitle: nil,
+                                  isTitleOrange: true,
+                                  pictoStr: "ic_leave_conv",
+                                  hideSeparator: true,
+                                  isIconOrange: true)
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
+                cell.populateCell(title: "conv_param_qui_action".localized,
+                                  subtitle: nil,
+                                  isTitleOrange: true,
+                                  pictoStr: "ic_leave_conv",
+                                  hideSeparator: true,
+                                  isIconOrange: true)
+                return cell
+            }
         }
     }
 
