@@ -3,7 +3,6 @@ import UIKit
 class UnsubscribedParticipantsBottomSheet: UIViewController {
 
     private let titleLabel = UILabel()
-    private let dismissLine = UIView()
 
     private let helpAskLabel = UILabel()
     private let helpAskMinusButton = UIButton()
@@ -46,11 +45,6 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         view.layer.cornerRadius = 20
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
-        dismissLine.backgroundColor = UIColor(named: "grey_line") ?? .lightGray
-        dismissLine.layer.cornerRadius = 2
-        dismissLine.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(dismissLine)
-
         titleLabel.text = "Ajouter des participants"
         titleLabel.font = ApplicationTheme.getFontH1Noir().font
         titleLabel.textColor = .black
@@ -76,20 +70,17 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         setupCounter(minusBtn: helpOfferMinusButton, plusBtn: helpOfferPlusButton, countLabel: helpOfferCountLabel, yAnchorView: helpOfferLabel)
 
         validateButton.setTitle("Valider", for: .normal)
-        validateButton.backgroundColor = UIColor(named: "appOrange") ?? .orange
-        validateButton.titleLabel?.font = ApplicationTheme.getFontBoutonBlanc().font
-        validateButton.layer.cornerRadius = 8
+        validateButton.backgroundColor = UIColor.appOrange
+        validateButton.setTitleColor(.white, for: .normal)
+        validateButton.layer.cornerRadius = 25
+        validateButton.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        validateButton.clipsToBounds = true
         validateButton.translatesAutoresizingMaskIntoConstraints = false
         validateButton.addTarget(self, action: #selector(validateAction), for: .touchUpInside)
         view.addSubview(validateButton)
 
         NSLayoutConstraint.activate([
-            dismissLine.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
-            dismissLine.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dismissLine.widthAnchor.constraint(equalToConstant: 40),
-            dismissLine.heightAnchor.constraint(equalToConstant: 4),
-
-            titleLabel.topAnchor.constraint(equalTo: dismissLine.bottomAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 
