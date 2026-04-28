@@ -2017,3 +2017,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_firststep_list_title" = "Premiers pas sur Entourage";
 "welcome_firststep_list_subtitle" = "Prenez en main l'application et posez toutes vos questions à l'équipe — en petit groupe, en 45 minutes en visio.";
 "event_discussion_desc" = "Vous pouvez poser vos questions et échanger avec l'organisateur et les participants de l'événement";
+
+"conv_param_delete_discussion" = "Supprimer la discussion";
+"conv_param_no_longer_participate" = "Je ne souhaite plus participer";
