@@ -29,6 +29,8 @@ class ConversationParametersViewController: BasePopViewController {
         case signal
         case blockUser
         case leave
+        case deleteConversation
+        case notParticipating
     }
     private var rows: [Row] = []
 
@@ -69,8 +71,13 @@ class ConversationParametersViewController: BasePopViewController {
         result.append(.signal)
         if isOneToOne && !isSeveral {
             if !imBlocker { result.append(.blockUser) }
+            result.append(.deleteConversation)
+        } else if isEvent {
+            result.append(.deleteConversation)
+            result.append(.notParticipating)
+        } else {
+            result.append(.leave)
         }
-        result.append(.leave)
         rows = result
         ui_tableview.reloadData()
     }
@@ -343,6 +350,8 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
         case .signal: self.signalConversation()
         case .blockUser: self.showPopBlockUser()
         case .leave: self.showPopLeave()
+        case .deleteConversation: self.showPopLeave()
+        case .notParticipating: self.showPopLeave()
         }
     }
 }
