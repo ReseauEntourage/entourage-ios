@@ -79,7 +79,7 @@
                             },
                         @{
                             @"Code 2 char" : @"RE",
-                            @"Final list" : @"Réunion",
+                            @"Final list" : @"La Réunion",
                             @"Number" : @"+262",
                             },
                         @{
