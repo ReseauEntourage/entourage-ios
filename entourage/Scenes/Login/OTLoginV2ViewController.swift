@@ -85,6 +85,9 @@ private struct AccessoryTextField: UIViewRepresentable {
         if uiView.text != text.wrappedValue {
             uiView.text = text.wrappedValue
         }
+        if uiView.placeholder != placeholder {
+            uiView.placeholder = placeholder
+        }
         // Mise à jour dynamique pour le toggle mot de passe
         if uiView.isSecureTextEntry != isSecureTextEntry {
             uiView.isSecureTextEntry = isSecureTextEntry
