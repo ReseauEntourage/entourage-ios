@@ -117,6 +117,9 @@ private struct AccessoryTextField: UIViewRepresentable {
         if uiView.text != text.wrappedValue {
             uiView.text = text.wrappedValue
         }
+        if uiView.placeholder != placeholder {
+            uiView.placeholder = placeholder
+        }
         uiView.keyboardType = keyboardType
         uiView.autocapitalizationType = autocapitalizationType
         uiView.isSecureTextEntry = isSecureTextEntry
