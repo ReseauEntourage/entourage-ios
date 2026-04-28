@@ -41,7 +41,7 @@ class ConversationParametersViewController: BasePopViewController {
 
         let title = isSmallTalkMode ? "small_talk_params_title".localized : "conversation_params_title".localized
         ui_top_view.populateView(title: title,
-                                 titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
+                                 titleFont: ApplicationTheme.getFontNunitoRegular(size: 15),
                                  titleColor: .black,
                                  delegate: self,
                                  backgroundColor: .appBeigeClair,
@@ -278,7 +278,6 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             cell.populateCell(title: isOneToOne ? "conv_param_title_profil".localized
                                                : "conv_param_title_members".localized,
                               subtitle: nil,
-                              isTitleOrange: false,
                               pictoStr: "ic_user_conv")
             return cell
 
@@ -286,7 +285,6 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_arrow", for: indexPath) as! ConversationParamCell
             cell.populateCell(title: "Photos de la conversation",
                               subtitle: nil,
-                              isTitleOrange: false,
                               pictoStr: "ic_param_gallery")
             return cell
 
@@ -296,10 +294,8 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
                                                : "conv_param_title_signal_action".localized,
                               subtitle: isOneToOne ? "conv_param_subtitle_signal".localized
                                                    : "conv_param_subtitle_signal_action".localized,
-                              isTitleOrange: true,
                               pictoStr: "ic_signal_orange",
-                              hideSeparator: false,
-                              isIconOrange: true) // ✅ icône orange
+                              hideSeparator: false)
             return cell
 
         case .blockUser:
@@ -307,7 +303,6 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             let subtitle = String(format: "conv_param_subtitle_block".localized, username)
             cell.populateCell(title: "conv_param_title_block".localized,
                               subtitle: subtitle,
-                              isTitleOrange: true,
                               pictoStr: "ic_user_block")
             return cell
 
@@ -316,28 +311,22 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
                 cell.populateCell(title: "conv_param_no_longer_participate".localized,
                                   subtitle: "conv_param_delete_discussion".localized,
-                                  isTitleOrange: true,
                                   pictoStr: "ic_leave_conv",
-                                  hideSeparator: true,
-                                  isIconOrange: true)
+                                  hideSeparator: true)
                 return cell
             } else if isOneToOne && !isSmallTalkMode {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
                 cell.populateCell(title: "conv_param_delete_discussion".localized,
                                   subtitle: nil,
-                                  isTitleOrange: true,
                                   pictoStr: "ic_leave_conv",
-                                  hideSeparator: true,
-                                  isIconOrange: true)
+                                  hideSeparator: true)
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
                 cell.populateCell(title: "conv_param_qui_action".localized,
                                   subtitle: nil,
-                                  isTitleOrange: true,
                                   pictoStr: "ic_leave_conv",
-                                  hideSeparator: true,
-                                  isIconOrange: true)
+                                  hideSeparator: true)
                 return cell
             }
         }
