@@ -30,7 +30,7 @@ class ConversationParametersViewController: BasePopViewController {
         case blockUser
         case leave
         case deleteConversation
-        case notParticipating
+        case leaveEvent
     }
     private var rows: [Row] = []
 
@@ -73,8 +73,7 @@ class ConversationParametersViewController: BasePopViewController {
             if !imBlocker { result.append(.blockUser) }
             result.append(.deleteConversation)
         } else if isEvent {
-            result.append(.deleteConversation)
-            result.append(.notParticipating)
+            result.append(.leaveEvent)
         } else {
             result.append(.leave)
         }
@@ -148,8 +147,20 @@ class ConversationParametersViewController: BasePopViewController {
                                              titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
                                              bgColor: .appOrangeLight,
                                              cornerRadius: -1)
-        customAlert.configureAlert(alertTitle: "params_leave_conv_pop_title".localized,
-                                   message: "params_leave_conv_pop_message".localized,
+
+        var alertTitle = "params_delete_discussion_pop_title".localized
+        var alertMessage = "params_delete_discussion_pop_message".localized
+
+        if isEvent {
+            alertTitle = "params_leave_event_pop_title".localized
+            alertMessage = "params_leave_event_pop_message".localized
+        } else if isSmallTalkMode {
+            alertTitle = "params_leave_group_pop_title".localized
+            alertMessage = "params_leave_group_pop_message".localized
+        }
+
+        customAlert.configureAlert(alertTitle: alertTitle,
+                                   message: alertMessage,
                                    buttonrightType: buttonAccept,
                                    buttonLeftType: buttonCancel,
                                    titleStyle: ApplicationTheme.getFontCourantBoldOrange(),
@@ -307,14 +318,14 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             return cell
 
         case .leave:
-            if isEvent {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
-                cell.populateCell(title: "conv_param_no_longer_participate".localized,
-                                  subtitle: "conv_param_delete_discussion".localized,
+            if isSmallTalkMode {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
+                cell.populateCell(title: "conv_param_leave_group".localized,
+                                  subtitle: nil,
                                   pictoStr: "ic_leave_conv",
                                   hideSeparator: true)
                 return cell
-            } else if isOneToOne && !isSmallTalkMode {
+            } else if isOneToOne {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
                 cell.populateCell(title: "conv_param_delete_discussion".localized,
                                   subtitle: nil,
@@ -323,7 +334,7 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-                cell.populateCell(title: "conv_param_qui_action".localized,
+                cell.populateCell(title: "conv_param_delete_discussion".localized,
                                   subtitle: nil,
                                   pictoStr: "ic_leave_conv",
                                   hideSeparator: true)
@@ -340,10 +351,10 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
                               isIconOrange: true)
             return cell
 
-        case .notParticipating:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
-            cell.populateCell(title: "conv_param_no_longer_participate".localized,
-                              subtitle: "conv_param_delete_discussion".localized,
+        case .leaveEvent:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
+            cell.populateCell(title: "conv_param_leave_event".localized,
+                              subtitle: nil,
                               isTitleOrange: true,
                               pictoStr: "ic_leave_conv",
                               hideSeparator: true,
@@ -360,7 +371,7 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
         case .blockUser: self.showPopBlockUser()
         case .leave: self.showPopLeave()
         case .deleteConversation: self.showPopLeave()
-        case .notParticipating: self.showPopLeave()
+        case .leaveEvent: self.showPopLeave()
         }
     }
 }
