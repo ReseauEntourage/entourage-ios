@@ -566,7 +566,7 @@
 "supress_alert_text_publi" = "Souhaitez-vous supprimer cette publication ?";
 
 "supress_alert_title_message" = "Supprimer le message";
-"supress_alert_text_message" = "Souhaitez-vous supprimer ce message de la conversation ?";
+"supress_alert_text_message" = "Souhaitez-vous supprimer ce message de la discussion ?";
 
 "supress_alert_title_comment" = "Supprimer le commentaire";
 "supress_alert_text_comment" = "Souhaitez-vous supprimer ce commentaire ?";
@@ -797,7 +797,7 @@
 "report_comment_title" = "Signaler le commentaire";
 "report_contrib_title" = "Signaler la contribution";
 "report_solicitation_title" = "Signaler la demande";
-"report_conversation_title" = "Signaler la conversation";
+"report_conversation_title" = "Signaler la discussion";
 "report_group_message_success" = "Votre demande a bien été envoyée. Elle sera traitée au plus vite par notre équipe.";
 "report_group_description" = "Dites-nous la raison de votre signalement";
 "report_group_mandatory" = "• obligatoire";
@@ -1263,29 +1263,29 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
  */
 "Messages_title" = "Discussions";
 "messaging_message_placeholder_discut" = "Écrire un message...";
-"messaging_message_title" = "Conversation";
+"messaging_message_title" = "Discussion";
 "messaging_message_send" = "Envoyer";
 "messaging_message_no_message" = "Pas encore de message";
 
-"message_title_new_conv" = "Nouvelle conversation";
-"message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la conversation dans les paramètres.";
-"message_error_create_conversation" = "Erreur lors de la création de la conversation";
+"message_title_new_conv" = "Nouvelle discussion";
+"message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la discussion dans les paramètres.";
+"message_error_create_conversation" = "Erreur lors de la création de la discussion";
 
-"conversation_params_title" = "Paramètres de la conversation";
-"small_talk_params_title" = "Paramètres de la conversation";
+"conversation_params_title" = "Paramètres de la discussion";
+"small_talk_params_title" = "Paramètres de la discussion";
 "conv_param_title_profil" = "Voir le profil";
 "conv_param_title_signal" = "Signaler";
-"conv_param_subtitle_signal" = "Signalez cette conversation à l'équipe Entourage.";
-"conv_param_title_members" = "Membres de la conversation";
+"conv_param_subtitle_signal" = "Signalez cette discussion à l'équipe Entourage.";
+"conv_param_title_members" = "Membres de la discussion";
 "conv_param_title_signal_action" = "Signaler";
-"conv_param_subtitle_signal_action" = "Signalez cette conversation à l'équipe Entourage.";
-"conv_param_qui_action" = "Quitter la conversation";
+"conv_param_subtitle_signal_action" = "Signalez cette discussion à l'équipe Entourage.";
+"conv_param_qui_action" = "Quitter la discussion";
 "conv_param_title_block" = "Bloquer";
 "conv_param_subtitle_block" = "%@ ne pourra plus vous écrire.";
 
 //Pop leave conversation
-"params_leave_conv_pop_title" = "Quitter la conversation";
-"params_leave_conv_pop_message" = "Souhaitez-vous quitter la conversation ?";
+"params_leave_conv_pop_title" = "Quitter la discussion";
+"params_leave_conv_pop_message" = "Souhaitez-vous quitter la discussion ?";
 "params_leave_conv_pop_bt_quit" = "Quitter";
 "params_leave_conv_pop_bt_cancel" = "Annuler";
 
@@ -1301,7 +1301,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "message_user_blocked_by_me_list" = "Vous avez bloqué ce contact";
 "message_user_blocked_by_me" = "Vous avez bloqué %@ . Vous ne pouvez plus lui envoyer de message.";
-"message_user_blocked_by_other" = "Vous ne pouvez plus envoyer de message à %@ . Cette conversation a été bloquée.";
+"message_user_blocked_by_other" = "Vous ne pouvez plus envoyer de message à %@ . Cette discussion a été bloquée.";
 
 "settingsUnblockUserInfo" = "Sélectionnez un ou plusieurs contacts à débloquer.";
 "settingsUnblockBT" = "Débloquer";
@@ -1320,8 +1320,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "param_empty_blocked_user" = "Vous n'avez bloqué aucun contact.";
 
-"conversation_users_title" = "Membres de la conversation ";
-"conversation_userInput_search" = "Rechercher un membre de la conversation";
+"conversation_users_title" = "Membres de la discussion ";
+"conversation_userInput_search" = "Rechercher un membre de la discussion";
 "conversation_search_empty_title" = "Oups, aucun résultat ne correspond à votre recherche ! ";
 
 "notifs_title" = "Notifications";
@@ -1746,8 +1746,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "settings_unblock_contacts_subtitle_plural" = "%d contacts bloqués";
 "language_change_redirect" = "Vous allez être redirigé sur la page d'accueil pour changer la langue de l'application";
 "settings_back_subtitle" = "Retour aux paramètres";
-"event_conversation" = "Voir la conversation";
-"go_to_event_conversation" = "Participer et rejoindre la conversation";
+"event_conversation" = "Voir la discussion";
+"go_to_event_conversation" = "Participer et rejoindre la discussion";
 
 "event_conv_filter_all" = "Toutes";
 "event_conv_filter_discussions" = "Discussions";
@@ -1771,7 +1771,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_title" = "Prêts à partager des Bonnes ondes ?";
 "onboarding_start_button" = "Je commence";
 "onboarding_end_button" = "Annuler";
-"onboarding_intro_html" = "<p>Avec les <b>Bonnes ondes</b>, rencontrez des personnes qui vous ressemblent, échangez en toute simplicité et créez des liens qui font du bien !</p><p>1. Vous répondez à quelques questions pour mieux vous connaître</p><p>2. On vous met en relation avec des personnes qui vous correspondent</p><p>3. Une conversation de groupe se crée automatiquement dans l’application pour échanger et tisser des liens</p><p>4. Si vous le souhaitez, vous choisissez un moment pour vous rencontrer : en visio ou dans la vraie vie, c’est vous qui voyez !</p>";
+"onboarding_intro_html" = "<p>Avec les <b>Bonnes ondes</b>, rencontrez des personnes qui vous ressemblent, échangez en toute simplicité et créez des liens qui font du bien !</p><p>1. Vous répondez à quelques questions pour mieux vous connaître</p><p>2. On vous met en relation avec des personnes qui vous correspondent</p><p>3. Une discussion de groupe se crée automatiquement dans l’application pour échanger et tisser des liens</p><p>4. Si vous le souhaitez, vous choisissez un moment pour vous rencontrer : en visio ou dans la vraie vie, c’est vous qui voyez !</p>";
 
 /* Step 1: Format de discussion */
 "small_talk_step_title_1" = "Quel format de discussion vous convient le mieux ?";
@@ -1863,7 +1863,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "small_talk_what_it_is_item_3" = "Une occasion de briser l’isolement";
 "small_talk_what_it_is_not_title" = "Ce que ce n’est pas";
 "small_talk_what_it_is_not_item_1" = "Un accompagnement social ou une aide formelle";
-"small_talk_what_it_is_not_item_2" = "Une conversation à sens unique ou un débat";
+"small_talk_what_it_is_not_item_2" = "Une discussion à sens unique ou un débat";
 "small_talk_what_it_is_not_item_3" = "Une discussion intrusive sur des sujets sensibles";
 "small_talk_ethics_title" = "La charte éthique Entourage";
 "small_talk_ethics_1_title" = "🧡 Bienveillance";
@@ -1988,7 +1988,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_webinar_completed_title" = "S'inscrire au webinaire de prise en main";
 "home_v2_welcome_webinar_completed_subtitle" = "Découvrez l'application en 45 min avec notre équipe et posez toutes vos questions.";
 "home_v2_welcome_papotages_title" = "Papotages entre membres";
-"home_v2_welcome_papotages_subtitle" = "Chaque mardi à 18h, en petits groupes animés, pour discuter de tout et de rien. Pas d'ordre du jour, pas de pression — juste une conversation.";
+"home_v2_welcome_papotages_subtitle" = "Chaque mardi à 18h, en petits groupes animés, pour discuter de tout et de rien. Pas d'ordre du jour, pas de pression — juste une discussion.";
 "home_v2_welcome_papotages_btn" = "Voir les prochaines sessions";
 "home_v2_welcome_papotages_completed_title" = "Rejoindre une session de papotages";
 "home_v2_welcome_papotages_completed_subtitle" = "Chaque mardi à 18h, un moment convivial en visio pour discuter de tout et de rien avec d'autres membres.";
@@ -2020,3 +2020,13 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "conv_param_delete_discussion" = "Supprimer la discussion";
 "conv_param_no_longer_participate" = "Je ne souhaite plus participer";
+
+// Actions for discussion, group, event
+"params_delete_discussion_pop_title" = "Supprimer la discussion";
+"params_delete_discussion_pop_message" = "Souhaitez-vous supprimer la discussion ?";
+"params_leave_group_pop_title" = "Quitter le groupe";
+"params_leave_group_pop_message" = "Souhaitez-vous quitter le groupe ?";
+"params_leave_event_pop_title" = "Quitter l'événement";
+"params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
+"conv_param_leave_event" = "Quitter l'événement";
+"conv_param_leave_group" = "Quitter le groupe";
