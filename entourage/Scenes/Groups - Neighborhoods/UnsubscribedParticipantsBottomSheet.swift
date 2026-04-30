@@ -2,6 +2,9 @@ import UIKit
 
 class UnsubscribedParticipantsBottomSheet: UIViewController {
 
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+
     private let titleLabel = UILabel()
 
     private let helpAskLabel = UILabel()
@@ -45,18 +48,36 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         view.layer.cornerRadius = 20
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
+        ])
+
         titleLabel.text = "Ajouter des participants"
         titleLabel.font = ApplicationTheme.getFontH1Noir().font
         titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
 
         helpAskLabel.text = "Combien de personnes isolées supplémentaires ont rejoint l'événement ?"
         helpAskLabel.font = ApplicationTheme.getFontCourantRegularNoir().font
         helpAskLabel.textColor = .black
         helpAskLabel.numberOfLines = 0
         helpAskLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(helpAskLabel)
+        contentView.addSubview(helpAskLabel)
 
         setupCounter(minusBtn: helpAskMinusButton, plusBtn: helpAskPlusButton, countLabel: helpAskCountLabel, yAnchorView: helpAskLabel)
 
@@ -65,7 +86,7 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         helpOfferLabel.textColor = .black
         helpOfferLabel.numberOfLines = 0
         helpOfferLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(helpOfferLabel)
+        contentView.addSubview(helpOfferLabel)
 
         setupCounter(minusBtn: helpOfferMinusButton, plusBtn: helpOfferPlusButton, countLabel: helpOfferCountLabel, yAnchorView: helpOfferLabel)
 
@@ -77,26 +98,26 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         validateButton.clipsToBounds = true
         validateButton.translatesAutoresizingMaskIntoConstraints = false
         validateButton.addTarget(self, action: #selector(validateAction), for: .touchUpInside)
-        view.addSubview(validateButton)
+        contentView.addSubview(validateButton)
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
 
             helpAskLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            helpAskLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            helpAskLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            helpAskLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            helpAskLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
 
             helpOfferLabel.topAnchor.constraint(equalTo: helpAskLabel.bottomAnchor, constant: 90),
-            helpOfferLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            helpOfferLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            helpOfferLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            helpOfferLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
 
             validateButton.topAnchor.constraint(equalTo: helpOfferLabel.bottomAnchor, constant: 100),
-            validateButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            validateButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            validateButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            validateButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             validateButton.heightAnchor.constraint(equalToConstant: 50),
-            validateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            validateButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
 
         helpAskMinusButton.addTarget(self, action: #selector(askMinusAction), for: .touchUpInside)
@@ -112,7 +133,7 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         stack.spacing = 20
         stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stack)
+        contentView.addSubview(stack)
 
         minusBtn.setTitle("−", for: .normal)
         minusBtn.setTitleColor(UIColor(named: "appOrange") ?? .orange, for: .normal)
@@ -138,7 +159,7 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
             countLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 30),
 
             stack.topAnchor.constraint(equalTo: yAnchorView.bottomAnchor, constant: 16),
-            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            stack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
 

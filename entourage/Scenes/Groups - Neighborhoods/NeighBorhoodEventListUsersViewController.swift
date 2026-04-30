@@ -652,7 +652,7 @@ extension NeighBorhoodEventListUsersViewController: FloatyDelegate {
 
         if #available(iOS 15.0, *) {
             if let sheet = bottomSheet.sheetPresentationController {
-                sheet.detents = [.medium()]
+                sheet.detents = [.medium(), .large()]
                 sheet.prefersGrabberVisible = true
             }
         } else {
