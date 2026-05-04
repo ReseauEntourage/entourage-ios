@@ -334,7 +334,16 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row < 1 {
+        let isUnsubscribedHeader = {
+            if indexPath.row < self.tableData.count {
+                if case .unsubscribedParticipantsHeader = self.tableData[indexPath.row] { return true }
+                if case .unsubscribedParticipantsAskHelpCell = self.tableData[indexPath.row] { return true }
+                if case .unsubscribedParticipantsOfferHelpCell = self.tableData[indexPath.row] { return true }
+            }
+            return false
+        }()
+
+        if indexPath.row < 1 || isUnsubscribedHeader {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: cell.bounds.width)
         } else {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
