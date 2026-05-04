@@ -17,7 +17,7 @@ class NeighborhoodUnsubscribedParticipantsHeaderCell: UITableViewCell {
         contentView.backgroundColor = .clear
 
         titleLabel.font = ApplicationTheme.getFontNunitoBold(size: 13)
-        titleLabel.textColor = UIColor(named: "grey_reaction") ?? .gray
+        titleLabel.textColor = .black
         titleLabel.text = "PARTICIPANTS AJOUTÉS SUR PLACE"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)

@@ -6,7 +6,6 @@ class NeighborhoodUnsubscribedParticipantsCell: UITableViewCell {
     let typeLabel = UILabel()
     let subtitleLabel = UILabel()
     let iconImageView = UIImageView()
-    let bgIconView = UIView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,38 +20,29 @@ class NeighborhoodUnsubscribedParticipantsCell: UITableViewCell {
     private func setupUI() {
         contentView.backgroundColor = UIColor(named: "BeigeClair") ?? UIColor(red: 255/255, green: 245/255, blue: 237/255, alpha: 1.0)
 
-        bgIconView.backgroundColor = UIColor(named: "appOrange") ?? .orange
-        bgIconView.layer.cornerRadius = 25
-        bgIconView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(bgIconView)
-
-        iconImageView.contentMode = .scaleAspectFit
+        iconImageView.contentMode = .scaleAspectFill
+        iconImageView.layer.cornerRadius = 25
+        iconImageView.layer.masksToBounds = true
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        bgIconView.addSubview(iconImageView)
+        contentView.addSubview(iconImageView)
 
-        typeLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        typeLabel.textColor = .black
+        typeLabel.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(typeLabel)
 
-        subtitleLabel.font = UIFont.systemFont(ofSize: 13)
+        subtitleLabel.font = ApplicationTheme.getFontNunitoRegular(size: 13)
         subtitleLabel.textColor = UIColor(named: "grey_reaction") ?? .gray
         subtitleLabel.text = "Ajoutés sur place"
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(subtitleLabel)
 
         NSLayoutConstraint.activate([
-            bgIconView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            bgIconView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            bgIconView.widthAnchor.constraint(equalToConstant: 50),
-            bgIconView.heightAnchor.constraint(equalToConstant: 50),
+            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            iconImageView.widthAnchor.constraint(equalToConstant: 50),
+            iconImageView.heightAnchor.constraint(equalToConstant: 50),
 
-            iconImageView.centerXAnchor.constraint(equalTo: bgIconView.centerXAnchor),
-            iconImageView.centerYAnchor.constraint(equalTo: bgIconView.centerYAnchor),
-            iconImageView.widthAnchor.constraint(equalToConstant: 24),
-            iconImageView.heightAnchor.constraint(equalToConstant: 24),
-
-            typeLabel.leadingAnchor.constraint(equalTo: bgIconView.trailingAnchor, constant: 12),
+            typeLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12),
             typeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
 
             subtitleLabel.leadingAnchor.constraint(equalTo: typeLabel.leadingAnchor),
@@ -65,12 +55,11 @@ class NeighborhoodUnsubscribedParticipantsCell: UITableViewCell {
         if isAskForHelp {
             let labelText = count > 1 ? "\(count) personnes isolées" : "\(count) personne isolée"
             typeLabel.text = labelText
-            iconImageView.image = UIImage(named: "user") // Find the right image
+            iconImageView.image = UIImage(named: "placeholder_user")
         } else {
             let labelText = count > 1 ? "\(count) riverains" : "\(count) riverain"
             typeLabel.text = labelText
-            iconImageView.image = UIImage(named: "ic_neighb_home") // Find the right image
+            iconImageView.image = UIImage(named: "placeholder_user")
         }
     }
 }
-
