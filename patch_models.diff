@@ -1,0 +1,79 @@
+<<<<<<< SEARCH
+    var manageableByCurrentUser:Bool? = false
+
+    var unsubscribed_participants_ask_for_help: Int? = 0
+    var unsubscribed_participants_offer_help: Int? = 0
+
+    private var statusChangedAt:String? = nil
+=======
+    var manageableByCurrentUser:Bool? = false
+
+    private var statusChangedAt:String? = nil
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+        case imageId = "entourage_image_id"
+
+        case recurrency
+        case unsubscribed_participants_ask_for_help
+        case unsubscribed_participants_offer_help
+        case membersCount = "members_count"
+=======
+        case imageId = "entourage_image_id"
+
+        case recurrency
+        case membersCount = "members_count"
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+    var reservedFemale: Bool? = false
+
+    var hasPlaceLimit: Bool? {
+=======
+    var reservedFemale: Bool? = false
+    var unsubscribed_participants_ask_for_help: String? = "0"
+    var unsubscribed_participants_offer_help: String? = "0"
+
+    var hasPlaceLimit: Bool? {
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+        case place_limit
+        case portrait_url
+        case landscape_url
+        case reservedFemale = "reserved_female"
+    }
+=======
+        case place_limit
+        case portrait_url
+        case landscape_url
+        case reservedFemale = "reserved_female"
+        case unsubscribed_participants_ask_for_help
+        case unsubscribed_participants_offer_help
+    }
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+        portrait_url = try container.decodeIfPresent(String.self, forKey: .portrait_url)
+        landscape_url = try container.decodeIfPresent(String.self, forKey: .landscape_url)
+
+        // C'EST ICI QUE LA MAGIE OPÈRE ✨
+=======
+        portrait_url = try container.decodeIfPresent(String.self, forKey: .portrait_url)
+        landscape_url = try container.decodeIfPresent(String.self, forKey: .landscape_url)
+
+        // Same logic as reservedFemale but for unsubscribed_participants which can be int or string
+        if let intValue = try? container.decodeIfPresent(Int.self, forKey: .unsubscribed_participants_ask_for_help) {
+            unsubscribed_participants_ask_for_help = String(intValue)
+        } else if let stringValue = try? container.decodeIfPresent(String.self, forKey: .unsubscribed_participants_ask_for_help) {
+            unsubscribed_participants_ask_for_help = stringValue
+        } else {
+            unsubscribed_participants_ask_for_help = "0"
+        }
+
+        if let intValue = try? container.decodeIfPresent(Int.self, forKey: .unsubscribed_participants_offer_help) {
+            unsubscribed_participants_offer_help = String(intValue)
+        } else if let stringValue = try? container.decodeIfPresent(String.self, forKey: .unsubscribed_participants_offer_help) {
+            unsubscribed_participants_offer_help = stringValue
+        } else {
+            unsubscribed_participants_offer_help = "0"
+        }
+
+        // C'EST ICI QUE LA MAGIE OPÈRE ✨
+>>>>>>> REPLACE

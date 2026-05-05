@@ -46,9 +46,6 @@ struct Event:Codable {
     var signable:Bool? = nil
     var manageableByCurrentUser:Bool? = false
 
-    var unsubscribed_participants_ask_for_help: Int? = 0
-    var unsubscribed_participants_offer_help: Int? = 0
-
     private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
     private var updatedAt:String? = nil
@@ -220,8 +217,6 @@ struct Event:Codable {
         case imageId = "entourage_image_id"
         
         case recurrency
-        case unsubscribed_participants_ask_for_help
-        case unsubscribed_participants_offer_help
         case membersCount = "members_count"
         case members
         case isMember = "member"
@@ -409,6 +404,8 @@ struct EventMetadata: Codable {
     var portrait_url: String? = nil
     var landscape_url: String? = nil
     var reservedFemale: Bool? = false
+    var unsubscribed_participants_ask_for_help: String? = "0"
+    var unsubscribed_participants_offer_help: String? = "0"
     
     var hasPlaceLimit: Bool? {
         get {
@@ -430,6 +427,8 @@ struct EventMetadata: Codable {
         case portrait_url
         case landscape_url
         case reservedFemale = "reserved_female"
+        case unsubscribed_participants_ask_for_help
+        case unsubscribed_participants_offer_help
     }
     
     // 1. On garde un initialiseur vide par défaut pour ne pas casser le reste du code
@@ -449,6 +448,23 @@ struct EventMetadata: Codable {
         portrait_url = try container.decodeIfPresent(String.self, forKey: .portrait_url)
         landscape_url = try container.decodeIfPresent(String.self, forKey: .landscape_url)
         
+        // Same logic as reservedFemale but for unsubscribed_participants which can be int or string
+        if let intValue = try? container.decodeIfPresent(Int.self, forKey: .unsubscribed_participants_ask_for_help) {
+            unsubscribed_participants_ask_for_help = String(intValue)
+        } else if let stringValue = try? container.decodeIfPresent(String.self, forKey: .unsubscribed_participants_ask_for_help) {
+            unsubscribed_participants_ask_for_help = stringValue
+        } else {
+            unsubscribed_participants_ask_for_help = "0"
+        }
+
+        if let intValue = try? container.decodeIfPresent(Int.self, forKey: .unsubscribed_participants_offer_help) {
+            unsubscribed_participants_offer_help = String(intValue)
+        } else if let stringValue = try? container.decodeIfPresent(String.self, forKey: .unsubscribed_participants_offer_help) {
+            unsubscribed_participants_offer_help = stringValue
+        } else {
+            unsubscribed_participants_offer_help = "0"
+        }
+
         // C'EST ICI QUE LA MAGIE OPÈRE ✨
         // On essaie d'abord de lire un Bool classique
         if let boolValue = try? container.decodeIfPresent(Bool.self, forKey: .reservedFemale) {

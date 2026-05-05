@@ -1,0 +1,32 @@
+<<<<<<< SEARCH
+        bottomSheet.onDismiss = { [weak self] in
+            // Trigger refresh when sheet is dismissed
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        }
+=======
+        bottomSheet.onDismiss = { [weak self] in
+            // Trigger refresh when sheet is dismissed
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        }
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+                    self.rebuildTableDataFromUsers()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+=======
+                    self.rebuildTableDataFromUsers()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+>>>>>>> REPLACE
+<<<<<<< SEARCH
+    func goBack() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        self.navigationController?.dismiss(animated: true)
+    }
+=======
+    func goBack() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        self.navigationController?.dismiss(animated: true)
+    }
+>>>>>>> REPLACE

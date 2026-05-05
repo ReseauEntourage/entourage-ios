@@ -1,0 +1,21 @@
+<<<<<<< SEARCH
+    func showMembers() {
+        if let navVC = UIStoryboard(name: StoryboardName.neighborhood, bundle: nil)
+            .instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController,
+           let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.event = event
+            vc.isEvent = true
+            self.present(navVC, animated: true, completion: nil)
+        }
+    }
+=======
+    func showMembers() {
+        if let navVC = UIStoryboard(name: StoryboardName.neighborhood, bundle: nil)
+            .instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController,
+           let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.event = event
+            vc.isEvent = true
+            self.present(navVC, animated: true, completion: nil)
+        }
+    }
+>>>>>>> REPLACE

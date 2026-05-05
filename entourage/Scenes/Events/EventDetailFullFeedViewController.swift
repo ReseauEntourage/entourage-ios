@@ -24,6 +24,8 @@ class EventDetailFullFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshEvent), name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         
@@ -71,6 +73,19 @@ class EventDetailFullFeedViewController: UIViewController {
                 self.goBack()
             }
         }
+    }
+
+    @objc func refreshEvent() {
+        EventService.getEventWithId(String(eventId)) { event, error in
+            if let event = event {
+                self.event = event
+                self.ui_tableview.reloadData()
+            }
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -268,7 +283,9 @@ extension EventDetailFullFeedViewController: MJAlertControllerDelegate {
 //MARK: - MJNavBackViewDelegate -
 extension EventDetailFullFeedViewController: MJNavBackViewDelegate {
     func goBack() {
-        self.navigationController?.dismiss(animated: true)
+        self.navigationController?.dismiss(animated: true) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+        }
     }
     func didTapEvent() {
         //Nothing yet
