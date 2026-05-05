@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Jerome on 04/05/2022.
-//  Fixed: checkbox flow (read real state), debounce, no event loops.
+//  Fixed: checkbox flow (read real state), debounce, no event loops, Sticky Bottom View under Floaty.
 //
 import UIKit
 import SVProgressHUD
@@ -93,7 +93,6 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
-        ui_tableview.tableFooterView = UIView()
 
         if isFromSurvey {
             loadSurveyData()
@@ -243,25 +242,21 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     private func setupBottomViews() {
         guard isEvent else { return }
 
+        // STICKY VIEW : On repasse la vue en mode fixe en bas, mais OPAQUE pour cacher le scroll
         unsubscribedStackView.axis = .vertical
         unsubscribedStackView.distribution = .fill
         unsubscribedStackView.alignment = .fill
-        unsubscribedStackView.backgroundColor = .clear
+        unsubscribedStackView.backgroundColor = .white // <--- TRÈS IMPORTANT: fond opaque
         unsubscribedStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        self.view.addSubview(unsubscribedStackView)
-
-        NSLayoutConstraint.activate([
-            unsubscribedStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            unsubscribedStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            unsubscribedStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-
-        // Add padding to bottom of tableview so content is not hidden
-        ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+        // Optionnel : on peut ajouter une légère ombre pour démarquer la table de la vue fixe
+        unsubscribedStackView.layer.shadowColor = UIColor.black.cgColor
+        unsubscribedStackView.layer.shadowOffset = CGSize(width: 0, height: -3)
+        unsubscribedStackView.layer.shadowOpacity = 0.05
+        unsubscribedStackView.layer.shadowRadius = 4
 
         // Header
-        headerView.backgroundColor = .clear
+        headerView.backgroundColor = .white
         let titleLabel = UILabel()
         titleLabel.font = ApplicationTheme.getFontNunitoBold(size: 13)
         titleLabel.textColor = .black
@@ -269,20 +264,49 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
 
+        // Contrainte du label pour qu'il prenne sa place
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 32),
+            titleLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
             titleLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 16),
             titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -8)
         ])
+
+        // FIX DE L'ÉCRITURE PÉTÉE :
+        // La StackView écrase les cellules, on DOIT forcer la hauteur ET relier le contentView
+        [askForHelpCell, offerHelpCell].forEach { cell in
+            cell.selectionStyle = .none
+            cell.backgroundColor = .white // Opaque aussi
+            cell.translatesAutoresizingMaskIntoConstraints = false
+            cell.heightAnchor.constraint(equalToConstant: 75).isActive = true
+
+            cell.contentView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                cell.contentView.topAnchor.constraint(equalTo: cell.topAnchor),
+                cell.contentView.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
+                cell.contentView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+                cell.contentView.trailingAnchor.constraint(equalTo: cell.trailingAnchor)
+            ])
+        }
 
         unsubscribedStackView.addArrangedSubview(headerView)
         unsubscribedStackView.addArrangedSubview(askForHelpCell)
         unsubscribedStackView.addArrangedSubview(offerHelpCell)
 
-        askForHelpCell.selectionStyle = .none
-        offerHelpCell.selectionStyle = .none
+        // ON L'AJOUTE EN DESSOUS DU BOUTON FLOATY POUR NE PAS LE CACHER !
+        if let floaty = ui_floaty_button {
+            self.view.insertSubview(unsubscribedStackView, belowSubview: floaty)
+        } else {
+            self.view.addSubview(unsubscribedStackView)
+        }
 
-        // Initially hidden
+        NSLayoutConstraint.activate([
+            unsubscribedStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            unsubscribedStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            // On l'ancre en bas de la safe area pour ne pas mordre sur l'encoche du bas (Home Indicator)
+            unsubscribedStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+
         unsubscribedStackView.isHidden = true
     }
 
@@ -295,25 +319,32 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         let askForHelp = Int(askForHelpStr) ?? 0
         let offerHelp = Int(offerHelpStr) ?? 0
 
+        var stickyHeight: CGFloat = 0
+
         if askForHelp > 0 || offerHelp > 0 {
             unsubscribedStackView.isHidden = false
 
             askForHelpCell.isHidden = (askForHelp <= 0)
             if askForHelp > 0 {
                 askForHelpCell.configure(count: askForHelp, isAskForHelp: true)
+                stickyHeight += 75
             }
 
             offerHelpCell.isHidden = (offerHelp <= 0)
             if offerHelp > 0 {
                 offerHelpCell.configure(count: offerHelp, isAskForHelp: false)
+                stickyHeight += 75
             }
-
-            let totalCells = (askForHelp > 0 ? 1 : 0) + (offerHelp > 0 ? 1 : 0)
-            ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(50 + (totalCells * 60)), right: 0)
+            // Hauteur du header approximative (environ 40-50pts avec les marges)
+            stickyHeight += 50
         } else {
             unsubscribedStackView.isHidden = true
-            ui_tableview.contentInset = UIEdgeInsets.zero
         }
+
+        // LE SECRET POUR POUVOIR TOUT VOIR :
+        // On rajoute un padding en bas de la tableView correspondant à la hauteur du "Sticky Footer"
+        // + 80 pour laisser la place au bouton Floaty orange
+        ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: stickyHeight + 80, right: 0)
     }
 
     private func setupFloaty() {
@@ -327,6 +358,9 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                 floaty.paddingY = 20
                 floaty.paddingX = 20
                 floaty.fabDelegate = self
+
+                // Assure-toi que le floaty reste par-dessus la sticky view si jamais elle se chevauchent
+                self.view.bringSubviewToFront(floaty)
             }
         }
     }
