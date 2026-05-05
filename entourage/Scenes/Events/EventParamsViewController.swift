@@ -68,6 +68,12 @@ class EventParamsViewController: BasePopViewController {
             name: NSNotification.Name(rawValue: kNotificationEventUpdate),
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshEventDetail),
+            name: NSNotification.Name(rawValue: "RefreshEventDetail"),
+            object: nil
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +89,17 @@ class EventParamsViewController: BasePopViewController {
         if let _event = notification.userInfo?["event"] as? Event {
             self.event = _event
             self.ui_tableview.reloadData()
+        }
+    }
+
+    @objc func refreshEventDetail() {
+        if let eventId = event?.uid {
+            EventService.getEventWithId(String(eventId)) { event, error in
+                if let event = event {
+                    self.event = event
+                    self.ui_tableview.reloadData()
+                }
+            }
         }
     }
 
@@ -544,6 +561,7 @@ extension EventParamsViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true, completion: {
             self.delegate?.reloadView()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
         })
     }
 

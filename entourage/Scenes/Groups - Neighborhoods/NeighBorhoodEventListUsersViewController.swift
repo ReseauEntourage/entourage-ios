@@ -13,9 +13,6 @@ private enum TableDTO {
     case questionCell(title: String)
     case userCell(user: UserLightNeighborhood, reactionType: ReactionType?)
     case surveySection(title: String, voteCount: Int)
-    case unsubscribedParticipantsHeader
-    case unsubscribedParticipantsAskHelpCell(count: Int)
-    case unsubscribedParticipantsOfferHelpCell(count: Int)
 }
 
 class NeighBorhoodEventListUsersViewController: BasePopViewController {
@@ -24,6 +21,12 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     @IBOutlet weak var ui_lb_no_result: UILabel!
     @IBOutlet weak var ui_view_no_result: UIView!
     @IBOutlet weak var ui_floaty_button: Floaty!
+
+    // Bottom stack view components
+    let unsubscribedStackView = UIStackView()
+    let headerView = UIView()
+    let askForHelpCell = NeighborhoodUnsubscribedParticipantsCell(style: .default, reuseIdentifier: nil)
+    let offerHelpCell = NeighborhoodUnsubscribedParticipantsCell(style: .default, reuseIdentifier: nil)
 
     var neighborhood: Neighborhood? = nil
     var event: Event? = nil
@@ -71,9 +74,8 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
         ui_tableview.register(UINib(nibName: SectionOptionNameCell.identifier, bundle: nil), forCellReuseIdentifier: SectionOptionNameCell.identifier)
         ui_tableview.register(UINib(nibName: QuestionSurveyVoteCell.identifier, bundle: nil), forCellReuseIdentifier: QuestionSurveyVoteCell.identifier)
-        ui_tableview.register(NeighborhoodUnsubscribedParticipantsHeaderCell.self, forCellReuseIdentifier: "UnsubscribedHeaderCell")
-        ui_tableview.register(NeighborhoodUnsubscribedParticipantsCell.self, forCellReuseIdentifier: "UnsubscribedCell")
 
+        setupBottomViews()
         setupFloaty()
 
         var title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
@@ -110,6 +112,15 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.hideTransparentNavigationBar()
+
+        if isEvent, let eventId = event?.uid {
+            EventService.getEventWithId(String(eventId)) { [weak self] event, error in
+                guard let self = self, let event = event else { return }
+                self.event?.metadata?.unsubscribed_participants_ask_for_help = event.metadata?.unsubscribed_participants_ask_for_help
+                self.event?.metadata?.unsubscribed_participants_offer_help = event.metadata?.unsubscribed_participants_offer_help
+                self.updateUnsubscribedBottomViews()
+            }
+        }
     }
 
     // MARK: - Survey
@@ -225,22 +236,84 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     private func rebuildTableDataFromUsers() {
         tableData = [.searchCell] + users.map { .userCell(user: $0, reactionType: nil) }
 
-        if isEvent, let event = event {
-            let askForHelp = event.unsubscribed_participants_ask_for_help ?? 0
-            let offerHelp = event.unsubscribed_participants_offer_help ?? 0
-
-            if askForHelp > 0 || offerHelp > 0 {
-                tableData.append(.unsubscribedParticipantsHeader)
-                if askForHelp > 0 {
-                    tableData.append(.unsubscribedParticipantsAskHelpCell(count: askForHelp))
-                }
-                if offerHelp > 0 {
-                    tableData.append(.unsubscribedParticipantsOfferHelpCell(count: offerHelp))
-                }
-            }
-        }
-
         ui_tableview.reloadData()
+        updateUnsubscribedBottomViews()
+    }
+
+    private func setupBottomViews() {
+        guard isEvent else { return }
+
+        unsubscribedStackView.axis = .vertical
+        unsubscribedStackView.distribution = .fill
+        unsubscribedStackView.alignment = .fill
+        unsubscribedStackView.backgroundColor = .clear
+        unsubscribedStackView.translatesAutoresizingMaskIntoConstraints = false
+
+        self.view.addSubview(unsubscribedStackView)
+
+        NSLayoutConstraint.activate([
+            unsubscribedStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            unsubscribedStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            unsubscribedStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+
+        // Add padding to bottom of tableview so content is not hidden
+        ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+
+        // Header
+        headerView.backgroundColor = .clear
+        let titleLabel = UILabel()
+        titleLabel.font = ApplicationTheme.getFontNunitoBold(size: 13)
+        titleLabel.textColor = .black
+        titleLabel.text = "PARTICIPANTS AJOUTÉS SUR PLACE"
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(titleLabel)
+
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 32),
+            titleLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 16),
+            titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -8)
+        ])
+
+        unsubscribedStackView.addArrangedSubview(headerView)
+        unsubscribedStackView.addArrangedSubview(askForHelpCell)
+        unsubscribedStackView.addArrangedSubview(offerHelpCell)
+
+        askForHelpCell.selectionStyle = .none
+        offerHelpCell.selectionStyle = .none
+
+        // Initially hidden
+        unsubscribedStackView.isHidden = true
+    }
+
+    private func updateUnsubscribedBottomViews() {
+        guard isEvent, let event = event else { return }
+
+        let askForHelpStr = event.metadata?.unsubscribed_participants_ask_for_help ?? "0"
+        let offerHelpStr = event.metadata?.unsubscribed_participants_offer_help ?? "0"
+
+        let askForHelp = Int(askForHelpStr) ?? 0
+        let offerHelp = Int(offerHelpStr) ?? 0
+
+        if askForHelp > 0 || offerHelp > 0 {
+            unsubscribedStackView.isHidden = false
+
+            askForHelpCell.isHidden = (askForHelp <= 0)
+            if askForHelp > 0 {
+                askForHelpCell.configure(count: askForHelp, isAskForHelp: true)
+            }
+
+            offerHelpCell.isHidden = (offerHelp <= 0)
+            if offerHelp > 0 {
+                offerHelpCell.configure(count: offerHelp, isAskForHelp: false)
+            }
+
+            let totalCells = (askForHelp > 0 ? 1 : 0) + (offerHelp > 0 ? 1 : 0)
+            ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(50 + (totalCells * 60)), right: 0)
+        } else {
+            unsubscribedStackView.isHidden = true
+            ui_tableview.contentInset = UIEdgeInsets.zero
+        }
     }
 
     private func setupFloaty() {
@@ -334,16 +407,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let isUnsubscribedHeader = {
-            if indexPath.row < self.tableData.count {
-                if case .unsubscribedParticipantsHeader = self.tableData[indexPath.row] { return true }
-                if case .unsubscribedParticipantsAskHelpCell = self.tableData[indexPath.row] { return true }
-                if case .unsubscribedParticipantsOfferHelpCell = self.tableData[indexPath.row] { return true }
-            }
-            return false
-        }()
-
-        if indexPath.row < 1 || isUnsubscribedHeader {
+        if indexPath.row < 1 {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: cell.bounds.width)
         } else {
             cell.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
@@ -358,23 +422,6 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         switch tableData[indexPath.row] {
-
-        case .unsubscribedParticipantsHeader:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UnsubscribedHeaderCell", for: indexPath) as! NeighborhoodUnsubscribedParticipantsHeaderCell
-            cell.selectionStyle = .none
-            return cell
-
-        case .unsubscribedParticipantsAskHelpCell(let count):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UnsubscribedCell", for: indexPath) as! NeighborhoodUnsubscribedParticipantsCell
-            cell.selectionStyle = .none
-            cell.configure(count: count, isAskForHelp: true)
-            return cell
-
-        case .unsubscribedParticipantsOfferHelpCell(let count):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UnsubscribedCell", for: indexPath) as! NeighborhoodUnsubscribedParticipantsCell
-            cell.selectionStyle = .none
-            cell.configure(count: count, isAskForHelp: false)
-            return cell
 
         case .searchCell:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_search", for: indexPath) as! NeighborhoodHomeSearchCell
@@ -426,7 +473,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableData[indexPath.row] {
-        case .searchCell, .surveySection, .questionCell, .unsubscribedParticipantsHeader, .unsubscribedParticipantsAskHelpCell, .unsubscribedParticipantsOfferHelpCell:
+        case .searchCell, .surveySection, .questionCell:
             return
 
         case .userCell(_, _):
@@ -640,12 +687,17 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
 extension NeighBorhoodEventListUsersViewController: FloatyDelegate {
     func emptyFloatySelected(_ floaty: Floaty) {
         let bottomSheet = UnsubscribedParticipantsBottomSheet()
-        bottomSheet.initialAskCount = event?.unsubscribed_participants_ask_for_help ?? 0
-        bottomSheet.initialOfferCount = event?.unsubscribed_participants_offer_help ?? 0
+
+        let initialAskStr = event?.metadata?.unsubscribed_participants_ask_for_help ?? "0"
+        let initialOfferStr = event?.metadata?.unsubscribed_participants_offer_help ?? "0"
+
+        bottomSheet.initialAskCount = Int(initialAskStr) ?? 0
+        bottomSheet.initialOfferCount = Int(initialOfferStr) ?? 0
 
         bottomSheet.onDismiss = { [weak self] in
             // Trigger refresh when sheet is dismissed
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
         }
         bottomSheet.onValidate = { [weak self] (offerCount, askCount) in
             guard let self = self, let eventId = self.event?.uid else { return }
@@ -656,9 +708,14 @@ extension NeighBorhoodEventListUsersViewController: FloatyDelegate {
                 if let error = error {
                     SVProgressHUD.showError(withStatus: error.message)
                 } else {
-                    self.event?.unsubscribed_participants_ask_for_help = askCount
-                    self.event?.unsubscribed_participants_offer_help = offerCount
+                    if self.event?.metadata == nil {
+                        self.event?.metadata = EventMetadata()
+                    }
+                    self.event?.metadata?.unsubscribed_participants_ask_for_help = String(askCount)
+                    self.event?.metadata?.unsubscribed_participants_offer_help = String(offerCount)
                     self.rebuildTableDataFromUsers()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
                 }
             }
         }
@@ -686,6 +743,8 @@ extension NeighBorhoodEventListUsersViewController: FloatyDelegate {
 // MARK: - MJNavBackViewDelegate
 extension NeighBorhoodEventListUsersViewController: MJNavBackViewDelegate {
     func goBack() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
         self.navigationController?.dismiss(animated: true)
     }
     func didTapEvent() { /* no-op */ }
