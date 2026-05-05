@@ -23,7 +23,7 @@ class NeighborhoodUnsubscribedParticipantsHeaderCell: UITableViewCell {
         contentView.addSubview(titleLabel)
 
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])

@@ -37,12 +37,12 @@ class NeighborhoodUnsubscribedParticipantsCell: UITableViewCell {
         contentView.addSubview(subtitleLabel)
 
         NSLayoutConstraint.activate([
-            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
             iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             iconImageView.widthAnchor.constraint(equalToConstant: 50),
             iconImageView.heightAnchor.constraint(equalToConstant: 50),
 
-            typeLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12),
+            typeLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16),
             typeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
 
             subtitleLabel.leadingAnchor.constraint(equalTo: typeLabel.leadingAnchor),

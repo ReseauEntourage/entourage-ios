@@ -634,6 +634,10 @@ extension NeighBorhoodEventListUsersViewController: FloatyDelegate {
         bottomSheet.initialAskCount = event?.unsubscribed_participants_ask_for_help ?? 0
         bottomSheet.initialOfferCount = event?.unsubscribed_participants_offer_help ?? 0
 
+        bottomSheet.onDismiss = { [weak self] in
+            // Trigger refresh when sheet is dismissed
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+        }
         bottomSheet.onValidate = { [weak self] (offerCount, askCount) in
             guard let self = self, let eventId = self.event?.uid else { return }
 
@@ -652,7 +656,14 @@ extension NeighBorhoodEventListUsersViewController: FloatyDelegate {
 
         if #available(iOS 15.0, *) {
             if let sheet = bottomSheet.sheetPresentationController {
-                sheet.detents = [.medium(), .large()]
+                if #available(iOS 16.0, *) {
+                    let customDetent = UISheetPresentationController.Detent.custom { context in
+                        return 600
+                    }
+                    sheet.detents = [customDetent, .large()]
+                } else {
+                    sheet.detents = [.large()]
+                }
                 sheet.prefersGrabberVisible = true
             }
         } else {

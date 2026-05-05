@@ -35,12 +35,20 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
     }
 
     var onValidate: ((Int, Int) -> Void)?
+    var onDismiss: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         currentAskCount = initialAskCount
         currentOfferCount = initialOfferCount
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.isBeingDismissed {
+            onDismiss?()
+        }
     }
 
     private func setupUI() {
@@ -54,7 +62,7 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         scrollView.addSubview(contentView)
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
