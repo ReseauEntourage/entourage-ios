@@ -3,9 +3,10 @@
 //  entourage
 //
 //  Created by Jerome on 04/05/2022.
-//  Fixed: checkbox flow (read real state), debounce, no event loops.
+//  Fixed: checkbox flow (read real state), debounce, Hybrid Architecture (UIKit + SwiftUI Sticky Bottom & FAB).
 //
 import UIKit
+import SwiftUI
 import SVProgressHUD
 
 private enum TableDTO {
@@ -20,13 +21,14 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_lb_no_result: UILabel!
     @IBOutlet weak var ui_view_no_result: UIView!
+    
+    // Ancien bouton conservé en outlet pour ne pas faire crasher le storyboard,
+    // mais on le désactive pour utiliser notre propre bouton SwiftUI.
     @IBOutlet weak var ui_floaty_button: Floaty!
 
-    // Bottom stack view components
-    let unsubscribedStackView = UIStackView()
-    let headerView = UIView()
-    let askForHelpCell = NeighborhoodUnsubscribedParticipantsCell(style: .default, reuseIdentifier: nil)
-    let offerHelpCell = NeighborhoodUnsubscribedParticipantsCell(style: .default, reuseIdentifier: nil)
+    // SwiftUI Hybrid components
+    private var bottomViewModel = UnsubscribedViewModel()
+    private var bottomHostingController: UIHostingController<UnsubscribedBottomSwiftUIView>?
 
     var neighborhood: Neighborhood? = nil
     var event: Event? = nil
@@ -71,12 +73,14 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // On masque l'ancien bouton UIKit pour utiliser celui de SwiftUI
+        ui_floaty_button?.isHidden = true
 
         ui_tableview.register(UINib(nibName: SectionOptionNameCell.identifier, bundle: nil), forCellReuseIdentifier: SectionOptionNameCell.identifier)
         ui_tableview.register(UINib(nibName: QuestionSurveyVoteCell.identifier, bundle: nil), forCellReuseIdentifier: QuestionSurveyVoteCell.identifier)
 
         setupBottomViews()
-        setupFloaty()
 
         var title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
         if isFromReact { title = "see_member_react".localized }
@@ -93,7 +97,6 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
-        ui_tableview.tableFooterView = UIView()
 
         if isFromSurvey {
             loadSurveyData()
@@ -125,32 +128,20 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
     // MARK: - Survey
     func loadSurveyData() {
-        guard let postId = self.postId, let survey = self.survey else {
-            print("Survey information or postId is missing.")
-            return
-        }
+        guard let postId = self.postId, let survey = self.survey else { return }
 
         let completion: (SurveyResponsesListWrapper?, EntourageNetworkError?) -> Void = { [weak self] surveyResponsesListWrapper, error in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                if let error = error {
-                    print("Error retrieving survey responses: \(error)")
-                    return
-                }
-                guard let surveyResponsesList = surveyResponsesListWrapper?.responses, !surveyResponsesList.isEmpty else {
-                    print("No survey responses were found or the response list is empty.")
-                    return
-                }
+                if error != nil { return }
+                guard let surveyResponsesList = surveyResponsesListWrapper?.responses, !surveyResponsesList.isEmpty else { return }
 
                 self.tableData.removeAll()
                 self.tableData.append(.questionCell(title: self.questionTitle ?? "Default Title"))
 
                 for (index, choice) in survey.choices.enumerated() {
                     guard let voteCount = survey.summary[safe: index],
-                          let usersForChoice = surveyResponsesList[safe: index] else {
-                        print("Index \(index) is out of bounds.")
-                        continue
-                    }
+                          let usersForChoice = surveyResponsesList[safe: index] else { continue }
 
                     self.tableData.append(.surveySection(title: choice, voteCount: voteCount))
 
@@ -163,7 +154,6 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                         return TableDTO.userCell(user: userLight, reactionType: nil)
                     }
                 }
-
                 self.ui_tableview.reloadData()
             }
         }
@@ -196,8 +186,6 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     if !self.isSearch {
                         self.ui_view_no_result.isHidden = !self.users.isEmpty
                     }
-                } else if let error = error {
-                    print("Erreur lors de la récupération des utilisateurs: \(error)")
                 }
             }
         }
@@ -211,8 +199,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.isLoading = false
-                if let error = error {
-                    print("Erreur lors de la récupération des utilisateurs de l'événement: \(error)")
+                if error != nil {
                     self.goBack()
                     return
                 }
@@ -235,100 +222,110 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
     private func rebuildTableDataFromUsers() {
         tableData = [.searchCell] + users.map { .userCell(user: $0, reactionType: nil) }
-
         ui_tableview.reloadData()
         updateUnsubscribedBottomViews()
     }
 
+    // MARK: - SwiftUI Integration
     private func setupBottomViews() {
         guard isEvent else { return }
 
-        unsubscribedStackView.axis = .vertical
-        unsubscribedStackView.distribution = .fill
-        unsubscribedStackView.alignment = .fill
-        unsubscribedStackView.backgroundColor = .clear
-        unsubscribedStackView.translatesAutoresizingMaskIntoConstraints = false
+        // Configuration du bouton flottant SwiftUI
+        bottomViewModel.showFab = viewerCanUseCheckboxes && !isFromSurvey && !isFromReact
+        bottomViewModel.onFabTapped = { [weak self] in
+            self?.showBottomSheet()
+        }
 
-        self.view.addSubview(unsubscribedStackView)
-
-        NSLayoutConstraint.activate([
-            unsubscribedStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            unsubscribedStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            unsubscribedStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-
-        // Add padding to bottom of tableview so content is not hidden
-        ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
-
-        // Header
-        headerView.backgroundColor = .clear
-        let titleLabel = UILabel()
-        titleLabel.font = ApplicationTheme.getFontNunitoBold(size: 13)
-        titleLabel.textColor = .black
-        titleLabel.text = "PARTICIPANTS AJOUTÉS SUR PLACE"
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerView.addSubview(titleLabel)
+        // Création du conteneur SwiftUI
+        let swiftUIView = UnsubscribedBottomSwiftUIView(viewModel: bottomViewModel)
+        let hostingController = UIHostingController(rootView: swiftUIView)
+        
+        hostingController.view.backgroundColor = .clear
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.addChild(hostingController)
+        self.view.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
 
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 32),
-            titleLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 16),
-            titleLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -8)
+            hostingController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
-
-        unsubscribedStackView.addArrangedSubview(headerView)
-        unsubscribedStackView.addArrangedSubview(askForHelpCell)
-        unsubscribedStackView.addArrangedSubview(offerHelpCell)
-
-        askForHelpCell.selectionStyle = .none
-        offerHelpCell.selectionStyle = .none
-
-        // Initially hidden
-        unsubscribedStackView.isHidden = true
+        
+        self.bottomHostingController = hostingController
     }
 
     private func updateUnsubscribedBottomViews() {
         guard isEvent, let event = event else { return }
 
-        let askForHelpStr = event.metadata?.unsubscribed_participants_ask_for_help ?? "0"
-        let offerHelpStr = event.metadata?.unsubscribed_participants_offer_help ?? "0"
+        let askForHelp = Int(event.metadata?.unsubscribed_participants_ask_for_help ?? "0") ?? 0
+        let offerHelp = Int(event.metadata?.unsubscribed_participants_offer_help ?? "0") ?? 0
 
-        let askForHelp = Int(askForHelpStr) ?? 0
-        let offerHelp = Int(offerHelpStr) ?? 0
+        // Met à jour l'interface SwiftUI
+        bottomViewModel.askCount = askForHelp
+        bottomViewModel.offerCount = offerHelp
 
-        if askForHelp > 0 || offerHelp > 0 {
-            unsubscribedStackView.isHidden = false
-
-            askForHelpCell.isHidden = (askForHelp <= 0)
-            if askForHelp > 0 {
-                askForHelpCell.configure(count: askForHelp, isAskForHelp: true)
-            }
-
-            offerHelpCell.isHidden = (offerHelp <= 0)
-            if offerHelp > 0 {
-                offerHelpCell.configure(count: offerHelp, isAskForHelp: false)
-            }
-
-            let totalCells = (askForHelp > 0 ? 1 : 0) + (offerHelp > 0 ? 1 : 0)
-            ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(50 + (totalCells * 60)), right: 0)
-        } else {
-            unsubscribedStackView.isHidden = true
-            ui_tableview.contentInset = UIEdgeInsets.zero
+        // Ajuste le padding de la tableView pour pouvoir scroller jusqu'au bout
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let targetSize = CGSize(width: self.view.bounds.width, height: UIView.layoutFittingExpandedSize.height)
+            let bottomHeight = self.bottomHostingController?.sizeThatFits(in: targetSize).height ?? 0
+            
+            self.ui_tableview.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomHeight + 20, right: 0)
         }
     }
+    
+    // MARK: - Show Bottom Sheet
+    private func showBottomSheet() {
+        let bottomSheet = UnsubscribedParticipantsBottomSheet()
 
-    private func setupFloaty() {
-        if let floaty = ui_floaty_button {
-            floaty.isHidden = true // hidden by default
+        let initialAskStr = event?.metadata?.unsubscribed_participants_ask_for_help ?? "0"
+        let initialOfferStr = event?.metadata?.unsubscribed_participants_offer_help ?? "0"
 
-            if isEvent && viewerCanUseCheckboxes && !isFromSurvey && !isFromReact {
-                floaty.isHidden = false
-                floaty.buttonImage = UIImage(named: "ic_button_plus_fill")
-                floaty.buttonColor = UIColor(named: "appOrange") ?? .orange
-                floaty.paddingY = 20
-                floaty.paddingX = 20
-                floaty.fabDelegate = self
+        bottomSheet.initialAskCount = Int(initialAskStr) ?? 0
+        bottomSheet.initialOfferCount = Int(initialOfferStr) ?? 0
+
+        bottomSheet.onDismiss = {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        }
+        bottomSheet.onValidate = { [weak self] (offerCount, askCount) in
+            guard let self = self, let eventId = self.event?.uid else { return }
+
+            SVProgressHUD.show()
+            EventService.updateUnsubscribedParticipants(eventId: eventId, offerHelp: offerCount, askForHelp: askCount) { error in
+                SVProgressHUD.dismiss()
+                if let error = error {
+                    SVProgressHUD.showError(withStatus: error.message)
+                } else {
+                    if self.event?.metadata == nil { self.event?.metadata = EventMetadata() }
+                    self.event?.metadata?.unsubscribed_participants_ask_for_help = String(askCount)
+                    self.event?.metadata?.unsubscribed_participants_offer_help = String(offerCount)
+                    
+                    self.updateUnsubscribedBottomViews()
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+                }
             }
         }
+
+        if #available(iOS 15.0, *) {
+            if let sheet = bottomSheet.sheetPresentationController {
+                if #available(iOS 16.0, *) {
+                    let customDetent = UISheetPresentationController.Detent.custom { _ in return 600 }
+                    sheet.detents = [customDetent, .large()]
+                } else {
+                    sheet.detents = [.large()]
+                }
+                sheet.prefersGrabberVisible = true
+            }
+        } else {
+            bottomSheet.modalPresentationStyle = .custom
+        }
+
+        self.present(bottomSheet, animated: true, completion: nil)
     }
 
     // MARK: - Search
@@ -371,8 +368,6 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                         self.ui_view_no_result.isHidden = !self.users.isEmpty
                     }
                     self.ui_tableview.reloadData()
-                } else if let error = error {
-                    print("Erreur lors de la récupération des détails des réactions: \(error)")
                 }
             }
         }
@@ -389,10 +384,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
         do {
             return try JSONDecoder().decode([ReactionType].self, from: reactionsData)
-        } catch {
-            print("Erreur de décodage des réactions : \(error)")
-            return nil
-        }
+        } catch { return nil }
     }
     func loadStoredReactionTypes() {
         reactionsTypes = getStoredReactionTypes() ?? []
@@ -442,7 +434,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                 imageUrl: user.avatarURL,
                 showBtMessage: true,
                 delegate: self,
-                position: indexPath.row,              // exact index in tableData
+                position: indexPath.row,
                 reactionType: reactionType,
                 isParticipating: isParticipating,
                 isOrganizer: isConfirmed,
@@ -531,32 +523,22 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
 // MARK: - NeighborhoodUserCellDelegate (checkbox flow FIX)
 extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate {
 
-    func neighborhoodUserCell(_ cell: NeighborhoodUserCell,
-                              didRequestToggleAt tablePosition: Int,
-                              intendedChecked: Bool,
-                              completion: @escaping (_ finalChecked: Bool) -> Void) {
+    func neighborhoodUserCell(_ cell: NeighborhoodUserCell, didRequestToggleAt tablePosition: Int, intendedChecked: Bool, completion: @escaping (_ finalChecked: Bool) -> Void) {
 
         guard isEvent, let eventId = event?.uid, tablePosition < tableData.count else {
-            completion(!intendedChecked) // revert
-            return
+            completion(!intendedChecked); return
         }
         guard case var .userCell(user, reaction) = tableData[tablePosition] else {
-            completion(!intendedChecked)
-            return
+            completion(!intendedChecked); return
         }
 
-        // Debounce repeated valueChanged while we are processing
-        if pendingToggles.contains(tablePosition) {
-            completion(!intendedChecked) // keep current UI
-            return
-        }
+        if pendingToggles.contains(tablePosition) { completion(!intendedChecked); return }
         pendingToggles.insert(tablePosition)
 
         cell.isUserInteractionEnabled = false
         SVProgressHUD.show()
 
         if intendedChecked {
-            // CHECK ⇒ participate then maybe ask for photo consent
             EventService.participateForUser(eventId: eventId, userId: user.sid) { [weak self] member, error in
                 guard let self = self else { return }
                 if let member = member {
@@ -582,12 +564,11 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
                     SVProgressHUD.dismiss()
                     self.pendingToggles.remove(tablePosition)
                    SVProgressHUD.show(withStatus: error?.message ?? "Erreur lors de la confirmation.")
-                    completion(false) // revert
+                    completion(false)
                     cell.isUserInteractionEnabled = true
                 }
             }
         } else {
-            // UNCHECK ⇒ cancel participation (do not touch photo consent)
             EventService.cancelParticipationForUser(eventId: eventId, userId: user.sid) { [weak self] success, error in
                 guard let self = self else { return }
                 SVProgressHUD.dismiss()
@@ -599,18 +580,14 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
                     completion(false)
                 } else {
                    SVProgressHUD.show(withStatus: error?.message ?? "Erreur lors de l'annulation.")
-                    completion(true) // revert
+                    completion(true)
                 }
                 cell.isUserInteractionEnabled = true
             }
         }
     }
 
-    private func presentPhotoConsent(for user: UserLightNeighborhood,
-                                     eventId: Int,
-                                     tablePosition: Int,
-                                     reaction: ReactionType?,
-                                     completion: @escaping (UserLightNeighborhood) -> Void) {
+    private func presentPhotoConsent(for user: UserLightNeighborhood, eventId: Int, tablePosition: Int, reaction: ReactionType?, completion: @escaping (UserLightNeighborhood) -> Void) {
 
         PhotoConsentPopupViewController.present(
             over: self,
@@ -637,15 +614,13 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
         )
     }
 
-    private func updateUserAndReload(user: UserLightNeighborhood,
-                                     positionInTableData: Int,
-                                     reaction: ReactionType?) {
+    private func updateUserAndReload(user: UserLightNeighborhood, positionInTableData: Int, reaction: ReactionType?) {
         tableData[positionInTableData] = .userCell(user: user, reactionType: reaction)
         let indexPath = IndexPath(row: positionInTableData, section: 0)
         ui_tableview.reloadRows(at: [indexPath], with: .automatic)
 
         if !isFromReact && !isFromSurvey && !isSearch {
-            let userIndexInUsers = positionInTableData - 1 // account for search cell at 0
+            let userIndexInUsers = positionInTableData - 1
             if users.indices.contains(userIndexInUsers) {
                 users[userIndexInUsers] = user
             }
@@ -683,63 +658,6 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodUserCellDelegate
     }
 }
 
-// MARK: - FloatyDelegate
-extension NeighBorhoodEventListUsersViewController: FloatyDelegate {
-    func emptyFloatySelected(_ floaty: Floaty) {
-        let bottomSheet = UnsubscribedParticipantsBottomSheet()
-
-        let initialAskStr = event?.metadata?.unsubscribed_participants_ask_for_help ?? "0"
-        let initialOfferStr = event?.metadata?.unsubscribed_participants_offer_help ?? "0"
-
-        bottomSheet.initialAskCount = Int(initialAskStr) ?? 0
-        bottomSheet.initialOfferCount = Int(initialOfferStr) ?? 0
-
-        bottomSheet.onDismiss = { [weak self] in
-            // Trigger refresh when sheet is dismissed
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
-        }
-        bottomSheet.onValidate = { [weak self] (offerCount, askCount) in
-            guard let self = self, let eventId = self.event?.uid else { return }
-
-            SVProgressHUD.show()
-            EventService.updateUnsubscribedParticipants(eventId: eventId, offerHelp: offerCount, askForHelp: askCount) { error in
-                SVProgressHUD.dismiss()
-                if let error = error {
-                    SVProgressHUD.showError(withStatus: error.message)
-                } else {
-                    if self.event?.metadata == nil {
-                        self.event?.metadata = EventMetadata()
-                    }
-                    self.event?.metadata?.unsubscribed_participants_ask_for_help = String(askCount)
-                    self.event?.metadata?.unsubscribed_participants_offer_help = String(offerCount)
-                    self.rebuildTableDataFromUsers()
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
-                }
-            }
-        }
-
-        if #available(iOS 15.0, *) {
-            if let sheet = bottomSheet.sheetPresentationController {
-                if #available(iOS 16.0, *) {
-                    let customDetent = UISheetPresentationController.Detent.custom { context in
-                        return 600
-                    }
-                    sheet.detents = [customDetent, .large()]
-                } else {
-                    sheet.detents = [.large()]
-                }
-                sheet.prefersGrabberVisible = true
-            }
-        } else {
-            bottomSheet.modalPresentationStyle = .custom
-        }
-
-        self.present(bottomSheet, animated: true, completion: nil)
-    }
-}
-
 // MARK: - MJNavBackViewDelegate
 extension NeighBorhoodEventListUsersViewController: MJNavBackViewDelegate {
     func goBack() {
@@ -754,5 +672,115 @@ extension NeighBorhoodEventListUsersViewController: MJNavBackViewDelegate {
 extension Collection {
     subscript(safe index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil
+    }
+}
+
+
+// MARK: - SwiftUI View for Bottom Sticky Section & FAB
+
+class UnsubscribedViewModel: ObservableObject {
+    @Published var askCount: Int = 0
+    @Published var offerCount: Int = 0
+    @Published var showFab: Bool = false
+    var onFabTapped: (() -> Void)?
+}
+
+struct UnsubscribedBottomSwiftUIView: View {
+    @ObservedObject var viewModel: UnsubscribedViewModel
+
+    var body: some View {
+        ZStack(alignment: .bottomTrailing) {
+            
+            // 1. Fond blanc et contenu textuel (Sticky View)
+            if viewModel.askCount > 0 || viewModel.offerCount > 0 {
+                VStack(alignment: .leading, spacing: 0) {
+                    Divider()
+                        .background(Color.clear)
+                        .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: -2)
+                    
+                    Text("PARTICIPANTS AJOUTÉS SUR PLACE")
+                        .font(.system(size: 13, weight: .bold)) // Match ApplicationTheme
+                        .foregroundColor(.black)
+                        .padding(.top, 16)
+                        .padding(.horizontal, 32)
+                        .padding(.bottom, 16)
+
+                    if viewModel.askCount > 0 {
+                        let title = viewModel.askCount > 1 ? "personnes isolées" : "personne isolée"
+                        ParticipantRow(count: viewModel.askCount, title: title)
+                    }
+
+                    if viewModel.offerCount > 0 {
+                        let title = viewModel.offerCount > 1 ? "riverains" : "riverain"
+                        ParticipantRow(count: viewModel.offerCount, title: title)
+                    }
+                    
+                    // 🔥 On force un grand espace en bas de la Stack pour contourner la ligne/encoche système de l'iPhone
+                    Spacer().frame(height: 40)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                // C'est ce background qui colore tout l'espace vide en dessous (safe area ignorée), MAIS le texte reste poussé vers le haut !
+                .background(Color.white.ignoresSafeArea())
+            } else {
+                // Vue transparente invisible pour que le bouton puisse exister seul
+                Color.clear.frame(maxWidth: .infinity, maxHeight: 1)
+            }
+
+            // 2. Le Nouveau Bouton Flottant (+)
+            if viewModel.showFab {
+                Button(action: {
+                    viewModel.onFabTapped?()
+                }) {
+                    ZStack {
+                        Circle()
+                            .fill(Color(UIColor(named: "appOrange") ?? .orange))
+                            .frame(width: 56, height: 56)
+                            .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 3)
+                        
+                        Image(systemName: "plus")
+                            .font(.system(size: 24, weight: .semibold))
+                            .foregroundColor(.white)
+                    }
+                }
+                .padding(.trailing, 20)
+                // 🔥 On remonte généreusement le bouton pour qu'il soit bien au-dessus du texte et de l'encoche
+                .padding(.bottom, (viewModel.askCount > 0 || viewModel.offerCount > 0) ? 60 : 40)
+            }
+        }
+        .animation(.easeInOut, value: viewModel.askCount)
+        .animation(.easeInOut, value: viewModel.offerCount)
+        .animation(.easeInOut, value: viewModel.showFab)
+    }
+}
+
+struct ParticipantRow: View {
+    var count: Int
+    var title: String
+
+    var body: some View {
+        HStack(spacing: 16) {
+            // Icone bonhomme orange
+            ZStack {
+                Circle()
+                    .fill(Color(UIColor(named: "appOrange") ?? .orange).opacity(0.2))
+                Image(systemName: "person.fill")
+                    .foregroundColor(Color(UIColor(named: "appOrange") ?? .orange))
+                    .font(.system(size: 18))
+            }
+            .frame(width: 48, height: 48)
+
+            // Textes
+            VStack(alignment: .leading, spacing: 4) {
+                Text("\(count) \(title)")
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.black)
+                Text("Ajoutés sur place")
+                    .font(.system(size: 13))
+                    .foregroundColor(Color.gray)
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 32)
+        .padding(.bottom, 16)
     }
 }
