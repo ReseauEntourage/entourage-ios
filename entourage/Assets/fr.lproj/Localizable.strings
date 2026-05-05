@@ -2000,7 +2000,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_celebration_btn" = "C'est parti !";
 "home_v2_welcome_todo" = "À faire";
 "home_v2_welcome_done" = "Terminé";
-"event_discussion_title" = "Discussion de l'événement";
+"event_discussion_title" = "Discussion de groupe";
 
 "home_title_tools" = "Tes outils solidaires";
 "home_tools_map" = "Carte des lieux solidaires";
@@ -2016,7 +2016,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_webinar_list_subtitle" = "L'équipe Entourage vous donne les clefs pour appréhender le monde de la rue et les solutions d'aide existantes lors d'un atelier en ligne de 1h.";
 "welcome_firststep_list_title" = "Premiers pas sur Entourage";
 "welcome_firststep_list_subtitle" = "Prenez en main l'application et posez toutes vos questions à l'équipe — en petit groupe, en 45 minutes en visio.";
-"event_discussion_desc" = "Vous pouvez poser vos questions et échanger avec l'organisateur et les participants de l'événement";
+"event_discussion_desc" = "Échanger avec les participants";
 
 "conv_param_delete_discussion" = "Supprimer la discussion";
 "conv_param_no_longer_participate" = "Je ne souhaite plus participer";

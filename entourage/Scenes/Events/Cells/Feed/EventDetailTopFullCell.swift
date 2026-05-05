@@ -41,6 +41,7 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_constraint_discussion_box_top: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_discussion_box_bottom: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_discussion_box_height: NSLayoutConstraint!
+    @IBOutlet weak var ui_label_discussion_title: UILabel!
     @IBOutlet weak var ui_label_discussion_desc: UILabel!
     
     
@@ -93,31 +94,18 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_lbl_reserved_female?.setFontTitle(size: 13)
 
         ui_view_place_limit.isHidden = true
-        configureOrangeButton(self.ui_button_go_to_discussion, withTitle: "event_discussion_title".localized)
+
         self.ui_view_discussion_box.layer.cornerRadius = 20
         self.ui_view_discussion_box.layer.borderWidth = 1.0
         self.ui_view_discussion_box.layer.borderColor = UIColor.appOrange.cgColor
+        self.ui_label_discussion_title.text = "event_discussion_title".localized
+        self.ui_label_discussion_title.font = ApplicationTheme.getFontQuickSandBold(size: 14)
         self.ui_label_discussion_desc.text = "event_discussion_desc".localized
         self.ui_label_discussion_desc.numberOfLines = 0
     }
     
     @objc func onParticipateClick() {
         delegate?.joinLeave()
-    }
-    
-    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
-        button.setTitle(title, for: .normal)
-        button.backgroundColor = UIColor.appOrange
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 25
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 13)
-        button.clipsToBounds = true
-        
-        if let image = button.imageView?.image {
-            let tintedImage = image.withRenderingMode(.alwaysTemplate)
-            button.setImage(tintedImage, for: .normal)
-            button.tintColor = .white // Force l'icône en noir
-        }
     }
     
     func populateCell(event: Event?, delegate: EventDetailTopCellDelegate, isEntourageEvent: Bool) {
@@ -127,7 +115,7 @@ class EventDetailTopFullCell: UITableViewCell {
             self.ui_view_discussion_box.isHidden = false
             self.ui_constraint_discussion_box_top?.constant = 20
             self.ui_constraint_discussion_box_bottom?.constant = 20
-            self.ui_constraint_discussion_box_height?.constant = 160
+            self.ui_constraint_discussion_box_height?.constant = 74
         }else{
             self.ui_view_discussion_box.isHidden = true
             self.ui_constraint_discussion_box_top?.constant = 0
