@@ -231,7 +231,9 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         guard isEvent else { return }
 
         // Configuration du bouton flottant SwiftUI
-        bottomViewModel.showFab = viewerCanUseCheckboxes && !isFromSurvey && !isFromReact
+        let isEventSignable = event?.signable ?? false
+        let isUserSignable = AppSignableManager.shared.signablePermission
+        bottomViewModel.showFab = viewerCanUseCheckboxes && !isFromSurvey && !isFromReact && isEventSignable && isUserSignable
         bottomViewModel.onFabTapped = { [weak self] in
             self?.showBottomSheet()
         }
@@ -263,6 +265,10 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         let offerHelp = Int(event.metadata?.unsubscribed_participants_offer_help ?? "0") ?? 0
 
         // Met à jour l'interface SwiftUI
+        let isEventSignable = event.signable ?? false
+        let isUserSignable = AppSignableManager.shared.signablePermission
+        bottomViewModel.showFab = viewerCanUseCheckboxes && !isFromSurvey && !isFromReact && isEventSignable && isUserSignable
+
         bottomViewModel.askCount = askForHelp
         bottomViewModel.offerCount = offerHelp
 
