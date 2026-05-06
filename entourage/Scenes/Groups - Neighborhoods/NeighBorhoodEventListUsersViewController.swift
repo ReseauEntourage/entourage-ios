@@ -715,8 +715,8 @@ struct UnsubscribedBottomSwiftUIView: View {
                         ParticipantRow(count: viewModel.offerCount, title: title)
                     }
                     
-                    // 🔥 On force un grand espace en bas de la Stack pour contourner la ligne/encoche système de l'iPhone
-                    Spacer().frame(height: 40)
+                    // 🔥 On force un grand espace en bas de la Stack pour contourner la ligne/encoche système de l'iPhone et aérer la vue sur petits écrans (augmenté à 70)
+                    Spacer().frame(height: 70)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 // C'est ce background qui colore tout l'espace vide en dessous (safe area ignorée), MAIS le texte reste poussé vers le haut !
@@ -743,8 +743,8 @@ struct UnsubscribedBottomSwiftUIView: View {
                     }
                 }
                 .padding(.trailing, 20)
-                // 🔥 On remonte généreusement le bouton pour qu'il soit bien au-dessus du texte et de l'encoche
-                .padding(.bottom, (viewModel.askCount > 0 || viewModel.offerCount > 0) ? 60 : 40)
+                // 🔥 On remonte généreusement le bouton pour qu'il soit bien au-dessus du texte et de l'encoche (augmenté à 90 / 60)
+                .padding(.bottom, (viewModel.askCount > 0 || viewModel.offerCount > 0) ? 90 : 60)
             }
         }
         .animation(.easeInOut, value: viewModel.askCount)
