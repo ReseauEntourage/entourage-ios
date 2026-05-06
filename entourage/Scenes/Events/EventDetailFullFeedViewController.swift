@@ -78,6 +78,7 @@ class EventDetailFullFeedViewController: UIViewController {
     @objc func refreshEvent() {
         EventService.getEventWithId(String(eventId)) { event, error in
             if let event = event {
+                AppSignableManager.shared.updateFromEvent(event: event)
                 self.event = event
                 self.ui_tableview.reloadData()
             }

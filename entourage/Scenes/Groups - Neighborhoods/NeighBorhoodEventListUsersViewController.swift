@@ -119,6 +119,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         if isEvent, let eventId = event?.uid {
             EventService.getEventWithId(String(eventId)) { [weak self] event, error in
                 guard let self = self, let event = event else { return }
+                AppSignableManager.shared.updateFromEvent(event: event)
                 self.event?.metadata?.unsubscribed_participants_ask_for_help = event.metadata?.unsubscribed_participants_ask_for_help
                 self.event?.metadata?.unsubscribed_participants_offer_help = event.metadata?.unsubscribed_participants_offer_help
                 self.updateUnsubscribedBottomViews()
