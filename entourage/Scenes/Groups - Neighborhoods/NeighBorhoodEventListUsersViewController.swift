@@ -121,6 +121,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                 guard let self = self, let event = event else { return }
                 self.event?.metadata?.unsubscribed_participants_ask_for_help = event.metadata?.unsubscribed_participants_ask_for_help
                 self.event?.metadata?.unsubscribed_participants_offer_help = event.metadata?.unsubscribed_participants_offer_help
+                self.event?.metadata?.unsubscribed_participants_female = event.metadata?.unsubscribed_participants_female
                 self.updateUnsubscribedBottomViews()
             }
         }
@@ -261,10 +262,12 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
         let askForHelp = Int(event.metadata?.unsubscribed_participants_ask_for_help ?? "0") ?? 0
         let offerHelp = Int(event.metadata?.unsubscribed_participants_offer_help ?? "0") ?? 0
+        let femaleCount = Int(event.metadata?.unsubscribed_participants_female ?? "0") ?? 0
 
         // Met à jour l'interface SwiftUI
         bottomViewModel.askCount = askForHelp
         bottomViewModel.offerCount = offerHelp
+        bottomViewModel.femaleCount = femaleCount
 
         // Ajuste le padding de la tableView pour pouvoir scroller jusqu'au bout
         DispatchQueue.main.async { [weak self] in
@@ -282,19 +285,21 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
 
         let initialAskStr = event?.metadata?.unsubscribed_participants_ask_for_help ?? "0"
         let initialOfferStr = event?.metadata?.unsubscribed_participants_offer_help ?? "0"
+        let initialFemaleStr = event?.metadata?.unsubscribed_participants_female ?? "0"
 
         bottomSheet.initialAskCount = Int(initialAskStr) ?? 0
         bottomSheet.initialOfferCount = Int(initialOfferStr) ?? 0
+        bottomSheet.initialFemaleCount = Int(initialFemaleStr) ?? 0
 
         bottomSheet.onDismiss = {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
         }
-        bottomSheet.onValidate = { [weak self] (offerCount, askCount) in
+        bottomSheet.onValidate = { [weak self] (offerCount, askCount, femaleCount) in
             guard let self = self, let eventId = self.event?.uid else { return }
 
             SVProgressHUD.show()
-            EventService.updateUnsubscribedParticipants(eventId: eventId, offerHelp: offerCount, askForHelp: askCount) { error in
+            EventService.updateUnsubscribedParticipants(eventId: eventId, offerHelp: offerCount, askForHelp: askCount, female: femaleCount) { error in
                 SVProgressHUD.dismiss()
                 if let error = error {
                     SVProgressHUD.showError(withStatus: error.message)
@@ -302,6 +307,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     if self.event?.metadata == nil { self.event?.metadata = EventMetadata() }
                     self.event?.metadata?.unsubscribed_participants_ask_for_help = String(askCount)
                     self.event?.metadata?.unsubscribed_participants_offer_help = String(offerCount)
+                    self.event?.metadata?.unsubscribed_participants_female = String(femaleCount)
                     
                     self.updateUnsubscribedBottomViews()
                     
@@ -681,6 +687,7 @@ extension Collection {
 class UnsubscribedViewModel: ObservableObject {
     @Published var askCount: Int = 0
     @Published var offerCount: Int = 0
+    @Published var femaleCount: Int = 0
     @Published var showFab: Bool = false
     var onFabTapped: (() -> Void)?
 }
@@ -692,7 +699,7 @@ struct UnsubscribedBottomSwiftUIView: View {
         ZStack(alignment: .bottomTrailing) {
             
             // 1. Fond blanc et contenu textuel (Sticky View)
-            if viewModel.askCount > 0 || viewModel.offerCount > 0 {
+            if viewModel.askCount > 0 || viewModel.offerCount > 0 || viewModel.femaleCount > 0 {
                 VStack(alignment: .leading, spacing: 0) {
                     Divider()
                         .background(Color.clear)
@@ -713,6 +720,11 @@ struct UnsubscribedBottomSwiftUIView: View {
                     if viewModel.offerCount > 0 {
                         let title = viewModel.offerCount > 1 ? "riverains" : "riverain"
                         ParticipantRow(count: viewModel.offerCount, title: title)
+                    }
+
+                    if viewModel.femaleCount > 0 {
+                        let title = viewModel.femaleCount > 1 ? "femmes isolées" : "femme isolée"
+                        ParticipantRow(count: viewModel.femaleCount, title: title)
                     }
                     
                     // 🔥 On force un grand espace en bas de la Stack pour contourner la ligne/encoche système de l'iPhone
