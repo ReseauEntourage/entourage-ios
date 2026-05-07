@@ -31,6 +31,8 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
     private var currentAskCount: Int = 0 {
         didSet {
             helpAskCountLabel.text = "\(currentAskCount)"
+            updateFemaleLabelText()
+            checkFemaleCountConstraints()
         }
     }
 
@@ -43,6 +45,7 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
     private var currentFemaleCount: Int = 0 {
         didSet {
             helpFemaleCountLabel.text = "\(currentFemaleCount)"
+            checkFemaleCountConstraints()
         }
     }
 
@@ -55,6 +58,8 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         currentAskCount = initialAskCount
         currentOfferCount = initialOfferCount
         currentFemaleCount = initialFemaleCount
+        updateFemaleLabelText()
+        checkFemaleCountConstraints()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -102,6 +107,14 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
 
         setupCounter(minusBtn: helpAskMinusButton, plusBtn: helpAskPlusButton, countLabel: helpAskCountLabel, yAnchorView: helpAskLabel)
 
+        helpFemaleLabel.font = ApplicationTheme.getFontCourantRegularNoir().font
+        helpFemaleLabel.textColor = .black
+        helpFemaleLabel.numberOfLines = 0
+        helpFemaleLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(helpFemaleLabel)
+
+        setupCounter(minusBtn: helpFemaleMinusButton, plusBtn: helpFemalePlusButton, countLabel: helpFemaleCountLabel, yAnchorView: helpFemaleLabel)
+
         helpOfferLabel.text = "Combien de riverains supplémentaires ont rejoint l'événement ?"
         helpOfferLabel.font = ApplicationTheme.getFontCourantRegularNoir().font
         helpOfferLabel.textColor = .black
@@ -110,15 +123,6 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         contentView.addSubview(helpOfferLabel)
 
         setupCounter(minusBtn: helpOfferMinusButton, plusBtn: helpOfferPlusButton, countLabel: helpOfferCountLabel, yAnchorView: helpOfferLabel)
-
-        helpFemaleLabel.text = "Combien de femmes isolées supplémentaires ont rejoint l'événement ?"
-        helpFemaleLabel.font = ApplicationTheme.getFontCourantRegularNoir().font
-        helpFemaleLabel.textColor = .black
-        helpFemaleLabel.numberOfLines = 0
-        helpFemaleLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(helpFemaleLabel)
-
-        setupCounter(minusBtn: helpFemaleMinusButton, plusBtn: helpFemalePlusButton, countLabel: helpFemaleCountLabel, yAnchorView: helpFemaleLabel)
 
         validateButton.setTitle("Valider", for: .normal)
         validateButton.backgroundColor = UIColor.appOrange
@@ -139,15 +143,15 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
             helpAskLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             helpAskLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
 
-            helpOfferLabel.topAnchor.constraint(equalTo: helpAskLabel.bottomAnchor, constant: 90),
-            helpOfferLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            helpOfferLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-
-            helpFemaleLabel.topAnchor.constraint(equalTo: helpOfferLabel.bottomAnchor, constant: 90),
+            helpFemaleLabel.topAnchor.constraint(equalTo: helpAskLabel.bottomAnchor, constant: 90),
             helpFemaleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             helpFemaleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
 
-            validateButton.topAnchor.constraint(equalTo: helpFemaleLabel.bottomAnchor, constant: 100),
+            helpOfferLabel.topAnchor.constraint(equalTo: helpFemaleLabel.bottomAnchor, constant: 90),
+            helpOfferLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            helpOfferLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+
+            validateButton.topAnchor.constraint(equalTo: helpOfferLabel.bottomAnchor, constant: 100),
             validateButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             validateButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             validateButton.heightAnchor.constraint(equalToConstant: 50),
@@ -233,5 +237,27 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
     @objc private func validateAction() {
         onValidate?(currentOfferCount, currentAskCount, currentFemaleCount)
         dismiss(animated: true)
+    }
+
+    private func updateFemaleLabelText() {
+        if currentAskCount > 1 {
+            helpFemaleLabel.text = "Parmi ces \(currentAskCount) personnes isolées, combien sont des femmes ?"
+        } else {
+            helpFemaleLabel.text = "Parmi cette \(currentAskCount) personne isolée, combien sont des femmes ?"
+        }
+    }
+
+    private func checkFemaleCountConstraints() {
+        if currentFemaleCount > currentAskCount {
+            currentFemaleCount = currentAskCount
+        }
+
+        if currentFemaleCount >= currentAskCount {
+            helpFemalePlusButton.isEnabled = false
+            helpFemalePlusButton.alpha = 0.5
+        } else {
+            helpFemalePlusButton.isEnabled = true
+            helpFemalePlusButton.alpha = 1.0
+        }
     }
 }
