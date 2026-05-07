@@ -17,10 +17,16 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
     private let helpOfferPlusButton = UIButton()
     private let helpOfferCountLabel = UILabel()
 
+    private let helpFemaleLabel = UILabel()
+    private let helpFemaleMinusButton = UIButton()
+    private let helpFemalePlusButton = UIButton()
+    private let helpFemaleCountLabel = UILabel()
+
     private let validateButton = UIButton()
 
     var initialAskCount: Int = 0
     var initialOfferCount: Int = 0
+    var initialFemaleCount: Int = 0
 
     private var currentAskCount: Int = 0 {
         didSet {
@@ -34,7 +40,13 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         }
     }
 
-    var onValidate: ((Int, Int) -> Void)?
+    private var currentFemaleCount: Int = 0 {
+        didSet {
+            helpFemaleCountLabel.text = "\(currentFemaleCount)"
+        }
+    }
+
+    var onValidate: ((Int, Int, Int) -> Void)?
     var onDismiss: (() -> Void)?
 
     override func viewDidLoad() {
@@ -42,6 +54,7 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         setupUI()
         currentAskCount = initialAskCount
         currentOfferCount = initialOfferCount
+        currentFemaleCount = initialFemaleCount
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -98,6 +111,15 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
 
         setupCounter(minusBtn: helpOfferMinusButton, plusBtn: helpOfferPlusButton, countLabel: helpOfferCountLabel, yAnchorView: helpOfferLabel)
 
+        helpFemaleLabel.text = "Combien de femmes isolées supplémentaires ont rejoint l'événement ?"
+        helpFemaleLabel.font = ApplicationTheme.getFontCourantRegularNoir().font
+        helpFemaleLabel.textColor = .black
+        helpFemaleLabel.numberOfLines = 0
+        helpFemaleLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(helpFemaleLabel)
+
+        setupCounter(minusBtn: helpFemaleMinusButton, plusBtn: helpFemalePlusButton, countLabel: helpFemaleCountLabel, yAnchorView: helpFemaleLabel)
+
         validateButton.setTitle("Valider", for: .normal)
         validateButton.backgroundColor = UIColor.appOrange
         validateButton.setTitleColor(.white, for: .normal)
@@ -121,7 +143,11 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
             helpOfferLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             helpOfferLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
 
-            validateButton.topAnchor.constraint(equalTo: helpOfferLabel.bottomAnchor, constant: 100),
+            helpFemaleLabel.topAnchor.constraint(equalTo: helpOfferLabel.bottomAnchor, constant: 90),
+            helpFemaleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            helpFemaleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+
+            validateButton.topAnchor.constraint(equalTo: helpFemaleLabel.bottomAnchor, constant: 100),
             validateButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             validateButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             validateButton.heightAnchor.constraint(equalToConstant: 50),
@@ -133,6 +159,9 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
 
         helpOfferMinusButton.addTarget(self, action: #selector(offerMinusAction), for: .touchUpInside)
         helpOfferPlusButton.addTarget(self, action: #selector(offerPlusAction), for: .touchUpInside)
+
+        helpFemaleMinusButton.addTarget(self, action: #selector(femaleMinusAction), for: .touchUpInside)
+        helpFemalePlusButton.addTarget(self, action: #selector(femalePlusAction), for: .touchUpInside)
     }
 
     private func setupCounter(minusBtn: UIButton, plusBtn: UIButton, countLabel: UILabel, yAnchorView: UIView) {
@@ -191,8 +220,18 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
         currentOfferCount += 1
     }
 
+    @objc private func femaleMinusAction() {
+        if currentFemaleCount > 0 {
+            currentFemaleCount -= 1
+        }
+    }
+
+    @objc private func femalePlusAction() {
+        currentFemaleCount += 1
+    }
+
     @objc private func validateAction() {
-        onValidate?(currentOfferCount, currentAskCount)
+        onValidate?(currentOfferCount, currentAskCount, currentFemaleCount)
         dismiss(animated: true)
     }
 }

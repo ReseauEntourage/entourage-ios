@@ -406,6 +406,7 @@ struct EventMetadata: Codable {
     var reservedFemale: Bool? = false
     var unsubscribed_participants_ask_for_help: String? = "0"
     var unsubscribed_participants_offer_help: String? = "0"
+    var unsubscribed_participants_female: String? = "0"
     
     var hasPlaceLimit: Bool? {
         get {
@@ -429,6 +430,7 @@ struct EventMetadata: Codable {
         case reservedFemale = "reserved_female"
         case unsubscribed_participants_ask_for_help
         case unsubscribed_participants_offer_help
+        case unsubscribed_participants_female
     }
     
     // 1. On garde un initialiseur vide par défaut pour ne pas casser le reste du code
@@ -463,6 +465,14 @@ struct EventMetadata: Codable {
             unsubscribed_participants_offer_help = stringValue
         } else {
             unsubscribed_participants_offer_help = "0"
+        }
+
+        if let intValue = try? container.decodeIfPresent(Int.self, forKey: .unsubscribed_participants_female) {
+            unsubscribed_participants_female = String(intValue)
+        } else if let stringValue = try? container.decodeIfPresent(String.self, forKey: .unsubscribed_participants_female) {
+            unsubscribed_participants_female = stringValue
+        } else {
+            unsubscribed_participants_female = "0"
         }
 
         // C'EST ICI QUE LA MAGIE OPÈRE ✨
