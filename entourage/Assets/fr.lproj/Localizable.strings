@@ -2030,3 +2030,14 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
 "conv_param_leave_event" = "Quitter l'événement";
 "conv_param_leave_group" = "Quitter le groupe";
+
+// SmallTalk Home V2
+"home_small_talk_pending_plural" = "%d discussions en cours de matching";
+"home_small_talk_pending_singular" = "%d discussion en cours de matching";
+"home_small_talk_active_title" = "Vos discussions solidaires";
+"home_small_talk_active_plural" = "%d discussions actives";
+"home_small_talk_active_singular" = "%d discussion active";
+"home_small_talk_pending_plus_plural" = "+%d en cours de matching";
+"home_small_talk_pending_plus_singular" = "+%d en cours de matching";
+"home_small_talk_start_new" = "+ Lancer une nouvelle rencontre (%d/3)";
+"home_small_talk_view_button" = "Voir";

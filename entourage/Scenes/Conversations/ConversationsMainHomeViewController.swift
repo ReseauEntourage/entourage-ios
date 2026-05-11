@@ -45,6 +45,17 @@ class ConversationsMainHomeViewController: UIViewController {
         setupViews()
         checkNotificationStatus()
         loadConversations(reset: true)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFilterSmallTalk), name: NSNotification.Name(kNotificationMessagesUpdateSmallTalkFilter), object: nil)
+    }
+
+    @objc private func updateFilterSmallTalk() {
+        self.selectedFilter = "event_conv_filter_smalltalks".localized
+        self.loadConversations(reset: true)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {

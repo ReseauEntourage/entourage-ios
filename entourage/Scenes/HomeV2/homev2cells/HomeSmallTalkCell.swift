@@ -1,10 +1,5 @@
 import UIKit
-
-enum CollectionDTO {
-    case talking(UserSmallTalkRequest)
-    case waiting
-    case create
-}
+import SwiftUI
 
 class HomeSmallTalkCell: UITableViewCell {
     weak var parentViewController: UIViewController?
@@ -13,143 +8,115 @@ class HomeSmallTalkCell: UITableViewCell {
         return String(describing: self)
     }
 
-    // MARK: - Outlets
-    @IBOutlet weak var ui_collection_view: UICollectionView!
+    private var hostingController: UIHostingController<HomeSmallTalkCardView>?
 
-    // MARK: - Properties
-    var data: [CollectionDTO] = [] {
+    // Default state
+    var state: SmallTalkCardState = .initial {
         didSet {
-            ui_collection_view.reloadData()
+            updateSwiftUIView()
         }
     }
 
-    // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupCollectionView()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupSwiftUIView()
     }
 
-    // MARK: - Setup
-    private func setupCollectionView() {
-        ui_collection_view.delegate = self
-        ui_collection_view.dataSource = self
-
-        ui_collection_view.decelerationRate = .fast
-        ui_collection_view.showsHorizontalScrollIndicator = false
-
-        // Register cells
-        ui_collection_view.register(CellCreateSmallTalk.self, forCellWithReuseIdentifier: "CellCreateSmallTalk")
-        ui_collection_view.register(UINib(nibName: "CellWaitingSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellWaitingSmallTalk")
-        ui_collection_view.register(UINib(nibName: "CellDiscussionSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellDiscussionSmallTalk")
-
-        if let layout = ui_collection_view.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 0
-            layout.minimumInteritemSpacing = 0
-        }
-    }
-}
-
-// MARK: - UICollectionViewDataSource
-extension HomeSmallTalkCell: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupSwiftUIView()
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = data[indexPath.item]
+    private func setupSwiftUIView() {
+        let swiftUIView = HomeSmallTalkCardView(state: state, actionStart: { [weak self] in
+            self?.onActionStart()
+        }, actionView: { [weak self] in
+            self?.onActionView()
+        })
 
-        switch item {
-        case .create:
-            
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "CellCreateSmallTalk", for: indexPath)
-        case .waiting:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "CellWaitingSmallTalk", for: indexPath)
-        case .talking(let request):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellDiscussionSmallTalk", for: indexPath) as! CellDiscussionSmallTalk
-            cell.configure(with: request)
-            return cell
-        }
-    }
-}
+        let hostingController = UIHostingController(rootView: swiftUIView)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.backgroundColor = .clear
 
-// MARK: - UICollectionViewDelegateFlowLayout
-extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width * 0.99
-        let height = collectionView.bounds.height
-        return CGSize(width: width, height: height)
+        contentView.addSubview(hostingController.view)
+
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: contentView.topAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+
+        self.hostingController = hostingController
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    private func updateSwiftUIView() {
+        let swiftUIView = HomeSmallTalkCardView(state: state, actionStart: { [weak self] in
+            self?.onActionStart()
+        }, actionView: { [weak self] in
+            self?.onActionView()
+        })
+        self.hostingController?.rootView = swiftUIView
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = data[indexPath.item]
+    func configure(with userRequests: [UserSmallTalkRequest]) {
+        let matchedRequests = userRequests.filter { $0.smalltalk != nil }
+        let pendingRequests = userRequests.filter { $0.smalltalk == nil }
 
-        switch item {
-        case .talking(let userRequest):
-            let sb = UIStoryboard(name: StoryboardName.messages, bundle: nil)
-            if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController,
-               let smalltalkId = userRequest.smalltalk_id {
-                
-                let smalltalkIdString = String(smalltalkId)
-                vc.setupFromOtherVC(conversationId: smalltalkId, title: "Bonnes ondes", isOneToOne: true, conversation: nil)
-                vc.isSmallTalkMode = true
-                vc.smallTalkId = smalltalkIdString
-                parentViewController?.present(vc, animated: true)
+        let activeCount = matchedRequests.count
+        let pendingCount = pendingRequests.count
+
+        if activeCount == 0 {
+            if pendingCount > 0 {
+                self.state = .pending(count: pendingCount)
+            } else {
+                self.state = .initial
             }
-
-            //COMPORTEMENT REEL
-        case .create:
-            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-            guard let vc = storyboard.instantiateInitialViewController() else { return }
-            vc.modalPresentationStyle = .fullScreen
-            parentViewController?.present(vc, animated: true)
-
+        } else {
+            // Get avatars
+            var avatars = [String]()
+            var unreadTotal = 0
             
-            //TESTING GROUP FOUND
-//        case .create: //Testing the almostMatching
-//            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-//
-//            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkGroupFoundViewController") as? SmallTalkGroupFoundViewController else { return }
-//
-//            // 👉 Ajoute configureTest si tu veux injecter des données factices :
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                vc.configureForTest()
-//            }
-//            vc.modalPresentationStyle = .fullScreen
-//            parentViewController?.present(vc, animated: true)
-            
-            
-            //CONFIGURE ALMOST
-//        case .create: //Testing the almostMatching
-//            let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
-//
-//            guard let vc = storyboard.instantiateViewController(withIdentifier: "SmallTalkAlmostMatchingViewController") as? SmallTalkAlmostMatchingViewController else { return }
-//
-//            // 👉 Configuration de test ici (tu peux garder les vraies valeurs si tu les as)
-//            vc.configure(
-//                with: "fake_request_id",
-//                group: "one",
-//                gender: true,
-//                locality: true
-//            )
-//
-//            // 👉 Ajoute configureTest si tu veux injecter des données factices :
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                vc.configureTest()
-//            }
-//            vc.modalPresentationStyle = .fullScreen
-//            parentViewController?.present(vc, animated: true)
+            for request in matchedRequests {
+                if let smalltalk = request.smalltalk {
+                    // Try to find the first member that is not the current user
+                    let members = smalltalk.members
+                    var filteredMembers = members
+                    if let currentSid = UserDefaults.currentUser?.sid {
+                        filteredMembers.removeAll(where: { $0.id == currentSid })
+                    }
 
-        case .waiting:
-            print("nothing to do")
+                    if let firstAvatar = filteredMembers.first(where: { $0.avatar_url != nil })?.avatar_url {
+                        avatars.append(firstAvatar)
+                    } else if let firstMember = filteredMembers.first {
+                        // placeholder if needed, although AsyncImage handles empty/invalid url with placeholder
+                    }
+                }
+
+                if let unread = request.number_of_unread_messages {
+                    unreadTotal += unread
+                }
+            }
+            
+            self.state = .active(activeCount: activeCount, pendingCount: pendingCount, totalUnread: unreadTotal, avatars: avatars)
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        AnimationUtils.animateCell(cell, index: indexPath.row)
+    private func onActionStart() {
+        AnalyticsLoggerManager.logEvent(name: "click_bonnes_ondes_start_discussion")
+        let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
+        guard let vc = storyboard.instantiateInitialViewController() else { return }
+        vc.modalPresentationStyle = .fullScreen
+        parentViewController?.present(vc, animated: true)
+    }
+
+    private func onActionView() {
+        AnalyticsLoggerManager.logEvent(name: "click_bonnes_ondes_view_messages")
+        // Switch to the messages tab and apply smalltalk filter
+        NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateSmallTalkFilter), object: nil)
+
+        if let tabController = self.parentViewController?.tabBarController as? MainTabbarViewController {
+            tabController.selectedIndex = 2
+        }
     }
 }

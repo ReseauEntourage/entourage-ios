@@ -1794,3 +1794,14 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "conv_param_delete_discussion" = "Delete the discussion";
 "conv_param_no_longer_participate" = "I no longer wish to participate";
+
+// SmallTalk Home V2
+"home_small_talk_pending_plural" = "%d matching discussions";
+"home_small_talk_pending_singular" = "%d matching discussion";
+"home_small_talk_active_title" = "Your solidarity discussions";
+"home_small_talk_active_plural" = "%d active discussions";
+"home_small_talk_active_singular" = "%d active discussion";
+"home_small_talk_pending_plus_plural" = "+%d matching";
+"home_small_talk_pending_plus_singular" = "+%d matching";
+"home_small_talk_start_new" = "+ Start a new discussion (%d/3)";
+"home_small_talk_view_button" = "See";

@@ -390,7 +390,7 @@
 		244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244715252F15307400F8BFD1 /* AssociationPresenter.swift */; };
 		247A2E752F7D34E400DB1661 /* WelcomeEventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A2E742F7D34E400DB1661 /* WelcomeEventsListView.swift */; };
 		247A2E772F7D351E00DB1661 /* WelcomeEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */; };
-		24832E6C2F63011D00A78F03 /* CellCreateSmallTalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */; };
+		24832E6E2F63011D00A78F04 /* HomeSmallTalkCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24832E6D2F63011D00A78F04 /* HomeSmallTalkCardView.swift */; };
 		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
 		24B68C9B2F6847FA00B35F25 /* ConversationStaffWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */; };
 		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
@@ -512,8 +512,6 @@
 		268ADBCF2DD3757700031C6F /* SmallTalk.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 268ADBCE2DD3757700031C6F /* SmallTalk.xcassets */; };
 		268ADBD12DD48C1700031C6F /* HomeSmallTalkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ADBD02DD48C1700031C6F /* HomeSmallTalkCell.swift */; };
 		268ADBD32DD48F5900031C6F /* HomeSmallTalkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268ADBD22DD48F5900031C6F /* HomeSmallTalkCell.xib */; };
-		268ADBD62DD4913400031C6F /* CellCreateSmallTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ADBD52DD4913400031C6F /* CellCreateSmallTalk.swift */; };
-		268ADBD82DD4915F00031C6F /* CellCreateSmallTalk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268ADBD72DD4915F00031C6F /* CellCreateSmallTalk.xib */; };
 		268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FCA292967281100159C34 /* MJAlertWithImageController.swift */; };
 		268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */; };
 		2693F8A62D68CE6F002726FD /* MentionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2693F8A52D68CE6F002726FD /* MentionCell.swift */; };
@@ -530,10 +528,6 @@
 		26A06BB12B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */; };
 		26A06E582B1E23B500AC323A /* Translations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A06E572B1E23B500AC323A /* Translations.swift */; };
 		26A60E212A3A05AD004849FB /* WelcomeFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */; };
-		26A7AA892DD4B3DB00374DDB /* CellWaitingSmallTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A7AA882DD4B3DB00374DDB /* CellWaitingSmallTalk.swift */; };
-		26A7AA8B2DD4B59500374DDB /* CellWaitingSmallTalk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A7AA8A2DD4B59500374DDB /* CellWaitingSmallTalk.xib */; };
-		26A7AA8D2DD4B83100374DDB /* CellDiscussionSmallTalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A7AA8C2DD4B83100374DDB /* CellDiscussionSmallTalk.swift */; };
-		26A7AA8F2DD4B84400374DDB /* CellDiscussionSmallTalk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A7AA8E2DD4B84400374DDB /* CellDiscussionSmallTalk.xib */; };
 		26A8DE0B2C0DF32300C34641 /* EnhancecOnboardingBackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8DE0A2C0DF32300C34641 /* EnhancecOnboardingBackCell.swift */; };
 		26A8DE0D2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26A8DE0C2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib */; };
 		26A8DE0F2C0E1B9500C34641 /* EditProfileOnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8DE0E2C0E1B9500C34641 /* EditProfileOnboardingCell.swift */; };
@@ -1023,7 +1017,7 @@
 		244715252F15307400F8BFD1 /* AssociationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresenter.swift; sourceTree = "<group>"; };
 		247A2E742F7D34E400DB1661 /* WelcomeEventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeEventsListView.swift; sourceTree = "<group>"; };
 		247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeEventsListViewController.swift; sourceTree = "<group>"; };
-		24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCreateSmallTalkView.swift; sourceTree = "<group>"; };
+		24832E6D2F63011D00A78F04 /* HomeSmallTalkCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSmallTalkCardView.swift; sourceTree = "<group>"; };
 		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
 		24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStaffWarningView.swift; sourceTree = "<group>"; };
 		24D8DEDD2F975F720081AF8B /* NeighborhoodUnsubscribedParticipantsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodUnsubscribedParticipantsHeaderCell.swift; sourceTree = "<group>"; };
@@ -1155,8 +1149,6 @@
 		268ADBCE2DD3757700031C6F /* SmallTalk.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SmallTalk.xcassets; sourceTree = "<group>"; };
 		268ADBD02DD48C1700031C6F /* HomeSmallTalkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSmallTalkCell.swift; sourceTree = "<group>"; };
 		268ADBD22DD48F5900031C6F /* HomeSmallTalkCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSmallTalkCell.xib; sourceTree = "<group>"; };
-		268ADBD52DD4913400031C6F /* CellCreateSmallTalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCreateSmallTalk.swift; sourceTree = "<group>"; };
-		268ADBD72DD4915F00031C6F /* CellCreateSmallTalk.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellCreateSmallTalk.xib; sourceTree = "<group>"; };
 		268FCA292967281100159C34 /* MJAlertWithImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertWithImageController.swift; sourceTree = "<group>"; };
 		268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertWithImageController.xib; sourceTree = "<group>"; };
 		2693F8A52D68CE6F002726FD /* MentionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionCell.swift; sourceTree = "<group>"; };
@@ -1173,10 +1165,6 @@
 		26A06BB02B4D4DBA00F345D0 /* NeighborhoodPostImageTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostImageTranslationCell.xib; sourceTree = "<group>"; };
 		26A06E572B1E23B500AC323A /* Translations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translations.swift; sourceTree = "<group>"; };
 		26A60E202A3A05AD004849FB /* WelcomeFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFourViewController.swift; sourceTree = "<group>"; };
-		26A7AA882DD4B3DB00374DDB /* CellWaitingSmallTalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellWaitingSmallTalk.swift; sourceTree = "<group>"; };
-		26A7AA8A2DD4B59500374DDB /* CellWaitingSmallTalk.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellWaitingSmallTalk.xib; sourceTree = "<group>"; };
-		26A7AA8C2DD4B83100374DDB /* CellDiscussionSmallTalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDiscussionSmallTalk.swift; sourceTree = "<group>"; };
-		26A7AA8E2DD4B84400374DDB /* CellDiscussionSmallTalk.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellDiscussionSmallTalk.xib; sourceTree = "<group>"; };
 		26A8DE0A2C0DF32300C34641 /* EnhancecOnboardingBackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancecOnboardingBackCell.swift; sourceTree = "<group>"; };
 		26A8DE0C2C0DF38700C34641 /* EnhancecOnboardingBackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EnhancecOnboardingBackCell.xib; sourceTree = "<group>"; };
 		26A8DE0E2C0E1B9500C34641 /* EditProfileOnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileOnboardingCell.swift; sourceTree = "<group>"; };
@@ -2490,13 +2478,7 @@
 		268ADBD42DD4910900031C6F /* cell_small_talks */ = {
 			isa = PBXGroup;
 			children = (
-				268ADBD52DD4913400031C6F /* CellCreateSmallTalk.swift */,
-				268ADBD72DD4915F00031C6F /* CellCreateSmallTalk.xib */,
-				26A7AA882DD4B3DB00374DDB /* CellWaitingSmallTalk.swift */,
-				26A7AA8A2DD4B59500374DDB /* CellWaitingSmallTalk.xib */,
-				26A7AA8C2DD4B83100374DDB /* CellDiscussionSmallTalk.swift */,
-				26A7AA8E2DD4B84400374DDB /* CellDiscussionSmallTalk.xib */,
-				24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */,
+				24832E6D2F63011D00A78F04 /* HomeSmallTalkCardView.swift */,
 			);
 			path = cell_small_talks;
 			sourceTree = "<group>";
@@ -2928,9 +2910,6 @@
 				2689F3B42A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib in Resources */,
 				024131C72862019500561FB4 /* Event_Create.storyboard in Resources */,
 				02CCE67627D78C7500D6976C /* Quicksand-Bold.ttf in Resources */,
-				26A7AA8B2DD4B59500374DDB /* CellWaitingSmallTalk.xib in Resources */,
-				268ADBD82DD4915F00031C6F /* CellCreateSmallTalk.xib in Resources */,
-				26A7AA8F2DD4B84400374DDB /* CellDiscussionSmallTalk.xib in Resources */,
 				02EB4B522892B77100CC977E /* Event_Message.storyboard in Resources */,
 				02D10D8C2873236500ACC267 /* MJPopupViewController.xib in Resources */,
 				02B7922527F74801003AFFB9 /* Neighborhood_Create.storyboard in Resources */,
@@ -3010,7 +2989,6 @@
 				26F03C9D2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift in Sources */,
 				26E2877B2E9D59370045A9FA /* EventRuleSectionTitle.swift in Sources */,
 				02C6E86528203127009D4289 /* NeighborhoodParamSignalCell.swift in Sources */,
-				26A7AA892DD4B3DB00374DDB /* CellWaitingSmallTalk.swift in Sources */,
 				26AD11962AEA686200FA7BEC /* ProfileLanguageChooseViewController.swift in Sources */,
 				0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */,
 				02B94C47285223A4006059EF /* PedagogicListViewController.swift in Sources */,
@@ -3037,7 +3015,6 @@
 				02D5689B2809A5B50092C7A4 /* TitleOnlyCell.swift in Sources */,
 				0208937D28BCFE3100160F1E /* NotificationPushData.swift in Sources */,
 				02CCE68D27D7B8E700D6976C /* MainUserProfileViewController.swift in Sources */,
-				26A7AA8D2DD4B83100374DDB /* CellDiscussionSmallTalk.swift in Sources */,
 				021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */,
 				02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */,
 				264C1AFC29AF5BED0083F83E /* HeaderReportView.swift in Sources */,
@@ -3177,7 +3154,6 @@
 				266757612E8570120039FF88 /* PreOnboardingService.swift in Sources */,
 				0288A8DB27CD00FD008D7011 /* Extensions_UIImage.swift in Sources */,
 				244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */,
-				268ADBD62DD4913400031C6F /* CellCreateSmallTalk.swift in Sources */,
 				026819BD278E105600A98A4A /* OTLoginV2ViewController.swift in Sources */,
 				26E287812E9E8CBE0045A9FA /* OnboardingShared.swift in Sources */,
 				26EA54F12E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift in Sources */,
@@ -3225,7 +3201,7 @@
 				262820D52D49069A00A61C30 /* MainStatUserCell.swift in Sources */,
 				247A2E752F7D34E400DB1661 /* WelcomeEventsListView.swift in Sources */,
 				029D25332865FA5F00147F77 /* EventDatesCell.swift in Sources */,
-				24832E6C2F63011D00A78F03 /* CellCreateSmallTalkView.swift in Sources */,
+				24832E6E2F63011D00A78F04 /* HomeSmallTalkCardView.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
 				024131CB2862022100561FB4 /* EventCreateMainViewController.swift in Sources */,
