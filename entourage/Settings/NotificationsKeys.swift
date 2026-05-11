@@ -44,5 +44,6 @@ let kNotificationActionShowContrib = "actionShowContrib"
 let kNotificationMessagesUpdate = "MessagesUpdate"
 let kNotificationMessagesUpdateCount = "MessagesUpdateCount"
 let kNotificationMessagesUpdateUserBlocked = "userBlocked"
+let kNotificationMessagesUpdateSmallTalkFilter = "MessagesUpdateSmallTalkFilter"
 
 let kNotificationHomeUpdate = "HomeUpdate"
