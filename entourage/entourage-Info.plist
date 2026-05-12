@@ -54,6 +54,8 @@
 	<string>Pour vous montrer les actions de solidarité à proximité</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Pour saisir la description des entourages</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Pour enregistrer la photo dans votre pellicule.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Pour afficher votre photo de profil.</string>
 	<key>UIAppFonts</key>
