@@ -102,20 +102,24 @@ struct HomeSmallTalkCardView: View {
             // Avatars
             ZStack(alignment: .leading) {
                 ForEach(Array(avatars.prefix(3).enumerated()), id: \.offset) { index, avatarUrlStr in
-                    AsyncImage(url: URL(string: avatarUrlStr)) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    } placeholder: {
-                        Image("placeholder_user")
-                            .resizable()
-                            .scaledToFill()
+                    if #available(iOS 15.0, *) {
+                        AsyncImage(url: URL(string: avatarUrlStr)) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        } placeholder: {
+                            Image("placeholder_user")
+                                .resizable()
+                                .scaledToFill()
+                        }
+                        .frame(width: 40, height: 40)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color("BeigeClair2"), lineWidth: 2))
+                        .offset(x: CGFloat(index * 25))
+                        .zIndex(Double(avatars.count - index))
+                    } else {
+                        // Fallback on earlier versions
                     }
-                    .frame(width: 40, height: 40)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color("BeigeClair2"), lineWidth: 2))
-                    .offset(x: CGFloat(index * 25))
-                    .zIndex(Double(avatars.count - index))
                 }
             }
             .frame(width: CGFloat(40 + (min(avatars.count, 3) - 1) * 25), height: 40)
