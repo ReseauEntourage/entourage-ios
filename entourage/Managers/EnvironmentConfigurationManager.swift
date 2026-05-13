@@ -18,7 +18,6 @@ struct UserStorageKey {
     static let amazonPictureFolder = "AmazonPictureFolder"
     static let amazonAccessKey = "AmazonAccessKey"
     static let amazonSecretKey = "AmazonSecretKey"
-    static let mixpanelToken = "MixpanelToken"
     static let awsPictureBucket = "AwsPictureBucket"
     static let environmentTypeKey = "EnvironmentType"
     static let googlePlaceApiKey = "GooglePlaceApiKey"
@@ -75,10 +74,6 @@ class EnvironmentConfigurationManager {
     
     var APIKey: NSString {
         return apiKeysConfiguration(forKey: UserStorageKey.APIKey)
-    }
-    
-    var MixpanelToken : NSString {
-        return configuration(forKey: UserStorageKey.mixpanelToken)
     }
     
     var AwsPictureBucket : NSString {
