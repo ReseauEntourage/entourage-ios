@@ -9,6 +9,28 @@ Our goal is to create a local social network on smartphones to help the HOMELESS
 
 ...
 
+## Configuration — ApiKeys.plist
+
+Sensitive keys are stored in `ApiKeys.plist` (gitignored). Copy the template and fill in the values:
+
+```bash
+cp ApiKeys.dist.plist ApiKeys.plist
+```
+
+| Key | Description |
+|-----|-------------|
+| `ApiKey` | API key identifying the app version against the backend |
+| `HmacSecret` | Shared secret for HMAC-SHA256 request signing (anti-bot, see below) |
+
+### HmacSecret — HMAC request signing
+
+`HmacSecret` protects the account creation endpoint (`POST /api/v1/users`) against bots.
+The app signs each request with `HMAC-SHA256(secret, "POST\n/api/v1/users\n{timestamp}\n{phone}")` and sends the result in the `X-Request-Signature` header.
+
+- **Leave empty** in development: the backend skips verification when the secret is not configured.
+- **Set in CI** (Bitrise env var `HMAC_SECRET_IOS`) before the release build; the Bitrise workflow injects it into `ApiKeys.plist`.
+- The same secret must be set as `HMAC_SECRET_IOS` on the backend (Heroku config vars).
+
 ## Upload Symbols to Firebase
 
 Crashlytics requires you to upload debug symbols.

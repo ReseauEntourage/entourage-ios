@@ -65,7 +65,15 @@ struct AuthService: ParsingDataCodable {
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         Logger.print("[AuthService] Datas passed \(parameters)")
 
-        NetworkManager.sharedInstance.requestPost(endPoint: kAPICreateAccount, headers: nil, body: bodyData) { data, resp, error in
+        var hmacHeaders: [String: String]? = nil
+        if let signed = HmacSigner.signCreateAccount(phone: user.phone ?? "") {
+            hmacHeaders = [
+                "X-Request-Timestamp": signed.timestamp,
+                "X-Request-Signature": signed.signature
+            ]
+        }
+
+        NetworkManager.sharedInstance.requestPost(endPoint: kAPICreateAccount, headers: hmacHeaders, body: bodyData) { data, resp, error in
             Logger.print("[NetworkManager] ***** return resp post : \((resp as? HTTPURLResponse)?.statusCode ?? -1)")
             Logger.print("[AuthService] Response Post update User: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
 
