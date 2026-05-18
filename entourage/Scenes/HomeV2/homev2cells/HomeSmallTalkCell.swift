@@ -88,8 +88,8 @@ class HomeSmallTalkCell: UITableViewCell {
 
                     if let firstAvatar = filteredMembers.first(where: { $0.avatar_url != nil })?.avatar_url {
                         avatars.append(firstAvatar)
-                    } else if let firstMember = filteredMembers.first {
-                        // placeholder if needed, although AsyncImage handles empty/invalid url with placeholder
+                    } else if filteredMembers.first != nil {
+                        avatars.append("placeholder")
                     }
                 }
 

@@ -46,20 +46,13 @@ struct HomeSmallTalkCardView: View {
                 Button(action: {
                     actionStart()
                 }) {
-                    HStack(spacing: 5) {
-                        Image("ic_chat_white")
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundColor(.white)
-                            .frame(width: 15, height: 15)
-                        Text("home_v2_small_talk_card_button".localized)
-                            .font(.custom("Quicksand-Bold", size: 14))
-                            .foregroundColor(.white)
-                    }
-                    .padding(.horizontal, 20)
-                    .frame(height: 40)
-                    .background(Color("orange_app"))
-                    .cornerRadius(20)
+                    Text("home_v2_small_talk_card_button".localized)
+                        .font(.custom("Quicksand-Bold", size: 14))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                        .frame(height: 40)
+                        .background(Color("orange_app"))
+                        .cornerRadius(20)
                 }
             }
         }
@@ -102,24 +95,34 @@ struct HomeSmallTalkCardView: View {
             // Avatars
             ZStack(alignment: .leading) {
                 ForEach(Array(avatars.prefix(3).enumerated()), id: \.offset) { index, avatarUrlStr in
-                    if #available(iOS 15.0, *) {
-                        AsyncImage(url: URL(string: avatarUrlStr)) { image in
-                            image
-                                .resizable()
-                                .scaledToFill()
-                        } placeholder: {
+                    Group {
+                        if avatarUrlStr == "placeholder" {
                             Image("placeholder_user")
                                 .resizable()
                                 .scaledToFill()
+                        } else {
+                            if #available(iOS 15.0, *) {
+                                AsyncImage(url: URL(string: avatarUrlStr)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                } placeholder: {
+                                    Image("placeholder_user")
+                                        .resizable()
+                                        .scaledToFill()
+                                }
+                            } else {
+                                Image("placeholder_user")
+                                    .resizable()
+                                    .scaledToFill()
+                            }
                         }
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color("BeigeClair2"), lineWidth: 2))
-                        .offset(x: CGFloat(index * 25))
-                        .zIndex(Double(avatars.count - index))
-                    } else {
-                        // Fallback on earlier versions
                     }
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color("BeigeClair2"), lineWidth: 2))
+                    .offset(x: CGFloat(index * 25))
+                    .zIndex(Double(avatars.count - index))
                 }
             }
             .frame(width: CGFloat(40 + (min(avatars.count, 3) - 1) * 25), height: 40)
@@ -153,39 +156,35 @@ struct HomeSmallTalkCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
 
             // CTA Button
-            Button(action: {
-                actionView()
-            }) {
-                ZStack(alignment: .topTrailing) {
-                    HStack(spacing: 5) {
-                        Image("ic_chat_white")
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundColor(.white)
-                            .frame(width: 15, height: 15)
+            VStack {
+                Button(action: {
+                    actionView()
+                }) {
+                    ZStack(alignment: .topTrailing) {
                         Text("home_small_talk_view_button".localized)
                             .font(.custom("Quicksand-Bold", size: 14))
                             .foregroundColor(.white)
-                    }
-                    .padding(.horizontal, 15)
-                    .frame(height: 40)
-                    .background(Color("orange_app"))
-                    .cornerRadius(20)
-                    .padding(.top, 5)
-                    .padding(.trailing, 5)
+                            .padding(.horizontal, 20)
+                            .frame(height: 40)
+                            .background(Color("orange_app"))
+                            .cornerRadius(20)
 
-                    if totalUnread > 0 {
-                        Text("\(totalUnread)")
-                            .font(.custom("Quicksand-Bold", size: 12))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color.red)
-                            .clipShape(Capsule())
-                            .offset(x: 5, y: -5)
+                        if totalUnread > 0 {
+                            Text("\(totalUnread)")
+                                .font(.custom("Quicksand-Bold", size: 12))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Color.red)
+                                .clipShape(Capsule())
+                                .offset(x: 5, y: -5)
+                        }
                     }
                 }
+                .padding(.top, 5)
+                .padding(.trailing, 5)
             }
+            .frame(maxHeight: .infinity, alignment: .top)
         }
         .padding(20)
         .background(Color("BeigeClair2"))
