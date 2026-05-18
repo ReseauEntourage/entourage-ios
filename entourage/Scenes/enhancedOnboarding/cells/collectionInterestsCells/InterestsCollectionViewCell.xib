@@ -86,7 +86,6 @@
                 <outlet property="ui_image_check" destination="zLX-kS-WL4" id="PdY-CY-uRQ"/>
                 <outlet property="ui_image_choice" destination="dn6-JY-0yU" id="78b-sW-UJI"/>
                 <outlet property="ui_title_label" destination="QPA-wt-2lF" id="kGb-me-3L5"/>
-                <outlet property="ui_subtitle_label" destination="XYZ-ab-CDE" id="ui_subtitle_outlet"/>
             </connections>
             <point key="canvasLocation" x="19.083969465648853" y="-109.1549295774648"/>
         </collectionViewCell>
