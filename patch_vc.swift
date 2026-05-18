@@ -9,13 +9,13 @@ final class ImagePreviewController: UIHostingController<ImagePreviewWrapper> {
         self.modalPresentationStyle = .overFullScreen
         self.modalTransitionStyle = .crossDissolve
         self.view.backgroundColor = .clear
-        
+
         // Pass dismiss block down
         self.rootView.dismissAction = { [weak self] in
             self?.dismiss(animated: true)
         }
     }
-    
+
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
