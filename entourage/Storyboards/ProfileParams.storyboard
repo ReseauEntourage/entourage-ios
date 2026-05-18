@@ -19,6 +19,9 @@
         <array key="Quicksand-Bold.ttf">
             <string>Quicksand-Bold</string>
         </array>
+        <array key="TimesNewRoman.ttf">
+            <string>.SFUI-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Main Profile Settings View Controller-->
@@ -2482,7 +2485,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ZaS-l5-2ae"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="18"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Appliquer les modifications">
@@ -2805,15 +2808,9 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0H-iq-xOk">
-                                                                    <rect key="frame" x="83" y="15" width="271" height="18"/>
+                                                                    <rect key="frame" x="83" y="23" width="271" height="18"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abc-def-ghi">
-                                                                    <rect key="frame" x="83" y="38" width="271" height="15"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="params_next" translatesAutoresizingMaskIntoConstraints="NO" id="ijj-uL-xEE">
@@ -2835,10 +2832,7 @@
                                                                 <constraint firstItem="Kqn-rc-93u" firstAttribute="leading" secondItem="YLT-b5-YbH" secondAttribute="leading" constant="32" id="2NF-Re-Fft"/>
                                                                 <constraint firstAttribute="trailing" secondItem="IIX-Td-Z2Q" secondAttribute="trailing" id="43P-nm-MeI"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ijj-uL-xEE" secondAttribute="trailing" constant="32" id="4yn-ia-X5k"/>
-                                                                <constraint firstItem="p0H-iq-xOk" firstAttribute="top" secondItem="YLT-b5-YbH" secondAttribute="top" constant="15" id="73H-Jo-wYC"/>
-                                                                <constraint firstItem="abc-def-ghi" firstAttribute="top" secondItem="p0H-iq-xOk" secondAttribute="bottom" constant="5" id="cst-Ab-123"/>
-                                                                <constraint firstItem="abc-def-ghi" firstAttribute="leading" secondItem="p0H-iq-xOk" secondAttribute="leading" id="cst-Ab-124"/>
-                                                                <constraint firstItem="abc-def-ghi" firstAttribute="trailing" secondItem="p0H-iq-xOk" secondAttribute="trailing" id="cst-Ab-125"/>
+                                                                <constraint firstItem="p0H-iq-xOk" firstAttribute="centerY" secondItem="YLT-b5-YbH" secondAttribute="centerY" id="73H-Jo-wYC"/>
                                                                 <constraint firstItem="ijj-uL-xEE" firstAttribute="leading" secondItem="p0H-iq-xOk" secondAttribute="trailing" constant="8" id="Eig-Ee-EGY"/>
                                                                 <constraint firstItem="ijj-uL-xEE" firstAttribute="centerY" secondItem="YLT-b5-YbH" secondAttribute="centerY" id="G6r-VU-trv"/>
                                                                 <constraint firstAttribute="bottom" secondItem="IIX-Td-Z2Q" secondAttribute="bottom" id="GyZ-6L-6nQ"/>
@@ -2860,7 +2854,6 @@
                                                     <outlet property="ui_iv_check" destination="ijj-uL-xEE" id="MKl-a7-n3h"/>
                                                     <outlet property="ui_picto" destination="Kqn-rc-93u" id="gDy-QE-hgm"/>
                                                     <outlet property="ui_title" destination="p0H-iq-xOk" id="ZcM-yY-iGc"/>
-                                                    <outlet property="ui_subtitle" destination="abc-def-ghi" id="ui_subtitle_outlet_2"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
