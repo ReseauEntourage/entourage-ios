@@ -2041,3 +2041,15 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_small_talk_pending_plus_singular" = "+%d en cours de matching";
 "home_small_talk_start_new" = "+ Lancer une nouvelle rencontre (%d/3)";
 "home_small_talk_view_button" = "Voir";
+
+// Interests subtitles
+"interest_sport_subtitle" = "Football, yoga, basket…";
+"interest_animaux_subtitle" = "Refuge, soin, promenade…";
+"interest_marauding_subtitle" = "Repas, café, discussion…";
+"interest_bien_etre_subtitle" = "Relaxation, soin, hygiène…";
+"interest_cuisine_subtitle" = "Partage de repas, recettes…";
+"interest_culture_subtitle" = "Sorties, musées, ciné…";
+"interest_nature_subtitle" = "Jardinage, parcs, forêt…";
+"interest_jeux_subtitle" = "Jeux de société, cartes, plein air…";
+"interest_activites_subtitle" = "Bricolage, couture, réparation…";
+"interest_other_subtitle" = " ";

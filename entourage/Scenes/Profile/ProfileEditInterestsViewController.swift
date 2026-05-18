@@ -108,9 +108,10 @@ extension ProfileEditInterestsViewController : UITableViewDataSource, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterest", for: indexPath) as! SelectTagCell
         
         let interest = tagsInterests?.getTags()[indexPath.row]
+        let interestTitle = tagsInterests!.getTagNameFrom(key: interest!.name)
+        let interestSubtitle = TagsUtils.showSubTagTranslated(interest!.name)
         
-        
-        cell.populateCell(title: tagsInterests!.getTagNameFrom(key: interest!.name) , isChecked: interest!.isSelected, imageName: (interest! as! TagInterest).tagImageName, isAction: false)
+        cell.populateCell(title: interestTitle , isChecked: interest!.isSelected, imageName: (interest! as! TagInterest).tagImageName, subtitle: interestSubtitle, isAction: false)
         
         return cell
     }

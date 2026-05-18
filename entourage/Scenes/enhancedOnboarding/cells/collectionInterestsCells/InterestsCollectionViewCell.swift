@@ -16,10 +16,12 @@ class InterestsCollectionViewCell:UICollectionViewCell{
     @IBOutlet weak var ui_image_check: UIImageView!
     
     @IBOutlet weak var ui_title_label: UILabel!
+    @IBOutlet weak var ui_subtitle_label: UILabel!
     @IBOutlet weak var ui_container_view: UIView!
     //Variable
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.ui_container_view.layer.borderWidth = 1
         self.ui_image_choice.backgroundColor = UIColor.appBeige
         self.ui_image_choice.layer.cornerRadius = 30
@@ -28,6 +30,15 @@ class InterestsCollectionViewCell:UICollectionViewCell{
     func configure(choice:OnboardingChoice, isSelected:Bool){
         print("choice : ", choice.title)
         self.ui_title_label.text = choice.title
+
+        if let sub = choice.subtitle, !sub.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.ui_subtitle_label?.text = sub
+            self.ui_subtitle_label?.isHidden = false
+        } else {
+            self.ui_subtitle_label?.isHidden = true
+            self.ui_subtitle_label?.text = ""
+        }
+
         self.ui_image_choice.image = UIImage(named: choice.img)
         if isSelected {
             ui_image_check.image = UIImage(named: "ic_onboarding_checked")

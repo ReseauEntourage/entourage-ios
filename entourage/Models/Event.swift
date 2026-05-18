@@ -862,6 +862,27 @@ class TagsUtils {
         case "Savon, protection hygiénique...":
             return NSLocalizedString("action_hygiene_subname".localized, comment: "")
             
+        case "sport":
+            return NSLocalizedString("interest_sport_subtitle", comment: "")
+        case "animaux":
+            return NSLocalizedString("interest_animaux_subtitle", comment: "")
+        case "marauding", "rencontres nomades":
+            return NSLocalizedString("interest_marauding_subtitle", comment: "")
+        case "bien-etre", "bien-être":
+            return NSLocalizedString("interest_bien_etre_subtitle", comment: "")
+        case "cuisine":
+            return NSLocalizedString("interest_cuisine_subtitle", comment: "")
+        case "culture", "art & culture":
+            return NSLocalizedString("interest_culture_subtitle", comment: "")
+        case "nature":
+            return NSLocalizedString("interest_nature_subtitle", comment: "")
+        case "jeux":
+            return NSLocalizedString("interest_jeux_subtitle", comment: "")
+        case "activites", "activités manuelles":
+            return NSLocalizedString("interest_activites_subtitle", comment: "")
+        case "other", "autre":
+            return NSLocalizedString("interest_other_subtitle", comment: "")
+
         default:
             return NSLocalizedString("interest_other".localized, comment: "")
         }

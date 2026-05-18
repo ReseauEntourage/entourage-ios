@@ -7,11 +7,13 @@ class OnboardingChoice {
     var id: String
     var img: String
     var title: String
+    var subtitle: String?
 
-    init(id: String, img: String, title: String) {
+    init(id: String, img: String, title: String, subtitle: String? = nil) {
         self.id = id
         self.img = img
         self.title = title
+        self.subtitle = subtitle
     }
 }
 
