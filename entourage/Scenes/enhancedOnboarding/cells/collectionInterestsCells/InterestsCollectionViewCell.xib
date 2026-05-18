@@ -39,6 +39,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYZ-ab-CDE">
+                                <rect key="frame" x="20" y="112.66666666666667" width="277" height="15.333333333333343"/>
+                                <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="11"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zLX-kS-WL4">
                                 <rect key="frame" x="272" y="20" width="25" height="25"/>
                                 <constraints>
@@ -50,6 +56,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QPA-wt-2lF" secondAttribute="trailing" constant="20" id="03Y-5h-9yb"/>
+                            <constraint firstItem="XYZ-ab-CDE" firstAttribute="leading" secondItem="gSJ-vy-Sos" secondAttribute="leading" constant="20" id="AbC-DE-FgH"/>
+                            <constraint firstAttribute="trailing" secondItem="XYZ-ab-CDE" secondAttribute="trailing" constant="20" id="IjK-Lm-NoP"/>
+                            <constraint firstItem="XYZ-ab-CDE" firstAttribute="top" secondItem="QPA-wt-2lF" secondAttribute="bottom" constant="5" id="QrS-Tu-VwX"/>
                             <constraint firstItem="zLX-kS-WL4" firstAttribute="top" secondItem="gSJ-vy-Sos" secondAttribute="top" constant="20" id="6nr-Dj-aGd"/>
                             <constraint firstItem="QPA-wt-2lF" firstAttribute="leading" secondItem="gSJ-vy-Sos" secondAttribute="leading" constant="20" id="Cgd-MR-s66"/>
                             <constraint firstItem="QPA-wt-2lF" firstAttribute="top" secondItem="dn6-JY-0yU" secondAttribute="bottom" constant="10" id="GXh-t5-7JW"/>
@@ -77,6 +86,7 @@
                 <outlet property="ui_image_check" destination="zLX-kS-WL4" id="PdY-CY-uRQ"/>
                 <outlet property="ui_image_choice" destination="dn6-JY-0yU" id="78b-sW-UJI"/>
                 <outlet property="ui_title_label" destination="QPA-wt-2lF" id="kGb-me-3L5"/>
+                <outlet property="ui_subtitle_label" destination="XYZ-ab-CDE" id="ui_subtitle_outlet"/>
             </connections>
             <point key="canvasLocation" x="19.083969465648853" y="-109.1549295774648"/>
         </collectionViewCell>
