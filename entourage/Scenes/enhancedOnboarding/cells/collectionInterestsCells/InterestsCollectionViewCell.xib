@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYZ-ab-CDE">
-                                <rect key="frame" x="20" y="112.66666666666667" width="277" height="15.333333333333343"/>
+                                <rect key="frame" x="20" y="112.66666666666667" width="277" height="13"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="11"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -56,12 +56,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QPA-wt-2lF" secondAttribute="trailing" constant="20" id="03Y-5h-9yb"/>
-                            <constraint firstItem="XYZ-ab-CDE" firstAttribute="leading" secondItem="gSJ-vy-Sos" secondAttribute="leading" constant="20" id="AbC-DE-FgH"/>
-                            <constraint firstAttribute="trailing" secondItem="XYZ-ab-CDE" secondAttribute="trailing" constant="20" id="IjK-Lm-NoP"/>
-                            <constraint firstItem="XYZ-ab-CDE" firstAttribute="top" secondItem="QPA-wt-2lF" secondAttribute="bottom" constant="5" id="QrS-Tu-VwX"/>
                             <constraint firstItem="zLX-kS-WL4" firstAttribute="top" secondItem="gSJ-vy-Sos" secondAttribute="top" constant="20" id="6nr-Dj-aGd"/>
+                            <constraint firstItem="XYZ-ab-CDE" firstAttribute="leading" secondItem="gSJ-vy-Sos" secondAttribute="leading" constant="20" id="AbC-DE-FgH"/>
                             <constraint firstItem="QPA-wt-2lF" firstAttribute="leading" secondItem="gSJ-vy-Sos" secondAttribute="leading" constant="20" id="Cgd-MR-s66"/>
                             <constraint firstItem="QPA-wt-2lF" firstAttribute="top" secondItem="dn6-JY-0yU" secondAttribute="bottom" constant="10" id="GXh-t5-7JW"/>
+                            <constraint firstAttribute="trailing" secondItem="XYZ-ab-CDE" secondAttribute="trailing" constant="20" id="IjK-Lm-NoP"/>
+                            <constraint firstItem="XYZ-ab-CDE" firstAttribute="top" secondItem="QPA-wt-2lF" secondAttribute="bottom" constant="5" id="QrS-Tu-VwX"/>
                             <constraint firstItem="dn6-JY-0yU" firstAttribute="leading" secondItem="gSJ-vy-Sos" secondAttribute="leading" constant="20" id="VJJ-wF-y7N"/>
                             <constraint firstItem="dn6-JY-0yU" firstAttribute="top" secondItem="gSJ-vy-Sos" secondAttribute="top" constant="20" id="XbQ-tH-am4"/>
                             <constraint firstAttribute="trailing" secondItem="zLX-kS-WL4" secondAttribute="trailing" constant="20" id="zpU-t7-3XI"/>
@@ -85,6 +85,7 @@
                 <outlet property="ui_container_view" destination="gSJ-vy-Sos" id="czP-DU-O3A"/>
                 <outlet property="ui_image_check" destination="zLX-kS-WL4" id="PdY-CY-uRQ"/>
                 <outlet property="ui_image_choice" destination="dn6-JY-0yU" id="78b-sW-UJI"/>
+                <outlet property="ui_subtitle_label" destination="XYZ-ab-CDE" id="QjQ-SX-Rb6"/>
                 <outlet property="ui_title_label" destination="QPA-wt-2lF" id="kGb-me-3L5"/>
             </connections>
             <point key="canvasLocation" x="19.083969465648853" y="-109.1549295774648"/>
