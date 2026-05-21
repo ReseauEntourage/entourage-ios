@@ -197,8 +197,7 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
             OnboardingChoice(id: "activites", img: "interest_activite-manuelle", title: NSLocalizedString("enhanced_onboarding_interest_manual_activities", comment: "")),
             OnboardingChoice(id: "bien-etre", img: "interest_bien-etre", title: NSLocalizedString("enhanced_onboarding_interest_wellbeing", comment: "")),
             OnboardingChoice(id: "nature", img: "interest_nature", title: NSLocalizedString("enhanced_onboarding_interest_nature", comment: "")),
-            OnboardingChoice(id: "culture", img: "interest_art", title: NSLocalizedString("enhanced_onboarding_interest_art_culture", comment: "")),
-            OnboardingChoice(id: "other", img: "interest_autre", title: NSLocalizedString("enhanced_onboarding_interest_other", comment: ""))
+            OnboardingChoice(id: "culture", img: "interest_art", title: NSLocalizedString("enhanced_onboarding_interest_art_culture", comment: ""))
         ]
 
         let interests = Set(currentUser.interests ?? [])

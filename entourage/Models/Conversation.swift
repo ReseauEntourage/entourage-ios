@@ -257,6 +257,7 @@ struct ConversationMembership: Decodable {
     let numberOfUnreadMessages: Int?
     let lastChatMessageText: String?
     let lastChatMessageImageUrl: String?
+    let lastChatMessageDate: String?
 
     private enum CodingKeys: String, CodingKey {
         case status
@@ -271,6 +272,7 @@ struct ConversationMembership: Decodable {
         case numberOfUnreadMessages = "number_of_unread_messages"
         case lastChatMessageText = "last_chat_message"
         case lastChatMessageImageUrl = "last_chat_message_image_url"
+        case lastChatMessageDate = "last_chat_message_date"
     }
 }
 

@@ -21,7 +21,8 @@ class MainFilterTagCell: UITableViewCell {
         // Creating the attributed string for title and subtitle
         let titleAttributes: [NSAttributedString.Key: Any]
         let subtitleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: ui_title_label.font.pointSize)
+            .font: UIFont.systemFont(ofSize: ui_title_label.font.pointSize - 2),
+            .foregroundColor: UIColor.appGreyOff
         ]
         
         if choice.subtitle.isEmpty {

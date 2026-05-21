@@ -172,7 +172,11 @@ class ConversationsMainHomeViewController: UIViewController {
         conv.title = membership.name ?? ""
         conv.subname = formattedDate
         if let text = membership.lastChatMessageText {
-            conv.lastMessage = LastMessage(text: text, dateStr: nil)
+            conv.lastMessage = LastMessage(text: text, dateStr: membership.lastChatMessageDate)
+        } else if let imageUrl = membership.lastChatMessageImageUrl, !imageUrl.isEmpty {
+            conv.lastMessage = LastMessage(text: nil, dateStr: membership.lastChatMessageDate)
+        } else if let dateStr = membership.lastChatMessageDate {
+            conv.lastMessage = LastMessage(text: nil, dateStr: dateStr)
         }
         conv.numberUnreadMessages = membership.numberOfUnreadMessages
         conv.members_count = membership.numberOfPeople
