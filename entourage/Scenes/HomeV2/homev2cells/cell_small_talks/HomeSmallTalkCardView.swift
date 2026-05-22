@@ -65,10 +65,16 @@ struct HomeSmallTalkCardView: View {
 
     private func pendingView(count: Int) -> some View {
         HStack(alignment: .center, spacing: 15) {
-            Image("ic_waiting_home")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
+            ZStack {
+                Circle()
+                    .fill(Color("orange_app").opacity(0.15))
+                    .frame(width: 50, height: 50)
+                Image(systemName: "hourglass")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(Color("orange_app"))
+            }
 
             VStack(alignment: .leading, spacing: 6) {
                 Text("small_talk_title_waiting".localized)
