@@ -17,6 +17,8 @@ class EventCreatePhase1ViewController: UIViewController {
     var hasGrowingTV = false
     
     var image:EventImage? = nil
+    var customImage:UIImage? = nil
+    var customImageKey:String? = nil
     var event_title:String? = nil
     var event_description:String? = nil
     
@@ -113,7 +115,10 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! NeighborhoodCreatePhotoCell
             
             var imgUrl:String?
-            if image != nil {
+            if customImage != nil {
+                cell.ui_photo.image = customImage
+            }
+            else if image != nil {
                 if let img = image?.url_image_portrait {
                     imgUrl = img
                 }
@@ -126,6 +131,9 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
             }
             
             cell.populateCell(urlImg: imgUrl,isEvent: true)
+            if customImage != nil {
+                cell.ui_photo.image = customImage
+            }
             
             return cell
         }
@@ -134,10 +142,20 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
 
 //MARK: - Delegates -
 extension EventCreatePhase1ViewController: ChoosePictureEventDelegate {
+    func selectedCustomPicture(image: UIImage, uploadKey: String) {
+        self.image = nil
+        self.customImage = image
+        self.customImageKey = uploadKey
+        pageDelegate?.addCustomPhoto(image: image, uploadKey: uploadKey)
+        self.ui_tableview.reloadData()
+    }
+
     func selectedPicture(image:EventImage) {
         Logger.print("***** image ? \(image)")
         pageDelegate?.addPhoto(image: image)
         self.image = image
+        self.customImage = nil
+        self.customImageKey = nil
         self.ui_tableview.reloadData()
     }
 }

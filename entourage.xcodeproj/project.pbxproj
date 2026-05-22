@@ -373,6 +373,7 @@
 		02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */; };
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
+		13B108231076769CB39E8ACF /* EventPictureUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF461411E800C522D97AD19 /* EventPictureUploadService.swift */; };
 		241A6AEC2F6C3229005BF63B /* WelcomeVideoModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AEB2F6C3229005BF63B /* WelcomeVideoModalViewController.swift */; };
 		241A6AED2F6C3229005BF63B /* HomeWelcomeJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AE92F6C3229005BF63B /* HomeWelcomeJourneyView.swift */; };
 		241A6AEE2F6C3229005BF63B /* HomeWelcomeJourneyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AE82F6C3229005BF63B /* HomeWelcomeJourneyCell.swift */; };
@@ -637,6 +638,8 @@
 		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
 		44FB28AB84FE1C35684C3B5E /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262AB8181698E450A4449D42 /* FullScreenImageView.swift */; };
 		A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */; };
+		B3FF84EE67DF8991FED8D6A0 /* EventPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA8810346BEBCF366D2B578 /* EventPicturePreviewResizeViewController.swift */; };
+		DB5F3210DA3516BECF3FB482 /* EventPictureUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF2A865DD2A2F78C8A7F5C /* EventPictureUploadService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1276,6 +1279,9 @@
 		26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightOverlayView.swift; sourceTree = "<group>"; };
 		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
 		4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventCreatePhase3View.swift; path = entourage/Scenes/Events/Create/EventCreatePhase3View.swift; sourceTree = SOURCE_ROOT; };
+		CAA8810346BEBCF366D2B578 /* EventPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
+		DBDF2A865DD2A2F78C8A7F5C /* EventPictureUploadService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventPictureUploadService.swift; sourceTree = "<group>"; };
+		DDF461411E800C522D97AD19 /* EventPictureUploadService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventPictureUploadService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1481,6 +1487,7 @@
 				024131D32862030A00561FB4 /* EventCreatePhase5ViewController.swift */,
 				029638F4286C801A00E10EFB /* EventCreateValidateViewController.swift */,
 				029D25312865FA3F00147F77 /* Cells */,
+				CAA8810346BEBCF366D2B578 /* EventPicturePreviewResizeViewController.swift */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -2014,6 +2021,8 @@
 				268ADBBF2DD1D85A00031C6F /* SmallTalkService.swift */,
 				2667575C2E856F8F0039FF88 /* PreOnboardingAPI.swift */,
 				266757602E8570120039FF88 /* PreOnboardingService.swift */,
+				DDF461411E800C522D97AD19 /* EventPictureUploadService.swift */,
+				DBDF2A865DD2A2F78C8A7F5C /* EventPictureUploadService.swift */,
 			);
 			path = "Network Managers";
 			sourceTree = "<group>";
@@ -3390,6 +3399,9 @@
 				02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */,
 				A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */,
 				44FB28AB84FE1C35684C3B5E /* FullScreenImageView.swift in Sources */,
+				13B108231076769CB39E8ACF /* EventPictureUploadService.swift in Sources */,
+				DB5F3210DA3516BECF3FB482 /* EventPictureUploadService.swift in Sources */,
+				B3FF84EE67DF8991FED8D6A0 /* EventPicturePreviewResizeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
