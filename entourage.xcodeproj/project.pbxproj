@@ -642,10 +642,10 @@
 		4508652EF5ADE09EE8C04623 /* ConversationsMainHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB7F09AD97DF19C9B3C28E /* ConversationsMainHomeView.swift */; };
 		A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */; };
 		B3FF84EE67DF8991FED8D6A0 /* EventPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA8810346BEBCF366D2B578 /* EventPicturePreviewResizeViewController.swift */; };
-		DB5F3210DA3516BECF3FB482 /* EventPictureUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF2A865DD2A2F78C8A7F5C /* EventPictureUploadService.swift */; };
 		B5DFA31F559B0DD131071B22 /* ConversationFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7BA03D9C67EF073BEEC601 /* ConversationFilterView.swift */; };
 		C3C73D95E128427274B44194 /* ConversationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55E9A1A44A4D5B722B5C109 /* ConversationsViewModel.swift */; };
 		D539FA8A98C24409A13712DA /* ConversationListMainCellSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987208D95D44965720398373 /* ConversationListMainCellSwiftUI.swift */; };
+		DB5F3210DA3516BECF3FB482 /* EventPictureUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF2A865DD2A2F78C8A7F5C /* EventPictureUploadService.swift */; };
 		E71D33E52CB7FBE9D7732EAE /* ConversationNotifAskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAFE62DCEBA298C105FB09E /* ConversationNotifAskView.swift */; };
 		ED13ACB34F217E1E4836F2EA /* ConversationMainDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A62EFA54C5927D8F54BDCDB /* ConversationMainDTO.swift */; };
 /* End PBXBuildFile section */
@@ -1290,13 +1290,13 @@
 		26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightOverlayView.swift; sourceTree = "<group>"; };
 		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
 		4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventCreatePhase3View.swift; path = entourage/Scenes/Events/Create/EventCreatePhase3View.swift; sourceTree = SOURCE_ROOT; };
-		CAA8810346BEBCF366D2B578 /* EventPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
-		DBDF2A865DD2A2F78C8A7F5C /* EventPictureUploadService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventPictureUploadService.swift; sourceTree = "<group>"; };
-		DDF461411E800C522D97AD19 /* EventPictureUploadService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventPictureUploadService.swift; sourceTree = "<group>"; };
 		6A62EFA54C5927D8F54BDCDB /* ConversationMainDTO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConversationMainDTO.swift; sourceTree = "<group>"; };
 		6CAFE62DCEBA298C105FB09E /* ConversationNotifAskView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConversationNotifAskView.swift; path = SwiftUI/ConversationNotifAskView.swift; sourceTree = "<group>"; };
 		987208D95D44965720398373 /* ConversationListMainCellSwiftUI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConversationListMainCellSwiftUI.swift; path = SwiftUI/ConversationListMainCellSwiftUI.swift; sourceTree = "<group>"; };
+		CAA8810346BEBCF366D2B578 /* EventPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
 		CD7BA03D9C67EF073BEEC601 /* ConversationFilterView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConversationFilterView.swift; path = SwiftUI/ConversationFilterView.swift; sourceTree = "<group>"; };
+		DBDF2A865DD2A2F78C8A7F5C /* EventPictureUploadService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventPictureUploadService.swift; sourceTree = "<group>"; };
+		DDF461411E800C522D97AD19 /* EventPictureUploadService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EventPictureUploadService.swift; sourceTree = "<group>"; };
 		E55E9A1A44A4D5B722B5C109 /* ConversationsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConversationsViewModel.swift; path = SwiftUI/ConversationsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -3576,7 +3576,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3683,7 +3683,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3796,7 +3796,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

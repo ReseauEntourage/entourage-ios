@@ -122,17 +122,24 @@ class ConversationsViewModel: ObservableObject {
 
     private func conversation(from membership: ConversationMembership) -> Conversation {
         var conv = Conversation()
-        conv.uid = membership.id ?? 0
-        conv.type = membership.type
+        
+        // 1. Correction uid -> joinableId
+        conv.uid = membership.joinableId ?? 0
+        
+        // 2. Correction type -> joinableType
+        conv.type = membership.joinableType
+        
         conv.title = membership.name
         conv.subname = membership.subname
 
-        if let lastMessage = membership.lastMessage {
-            conv.lastMessage = lastMessage
-            conv.lastMessage?.dateStr = membership.lastChatMessageDate
-        } else if let dateStr = membership.lastChatMessageDate {
-            conv.lastMessage = LastMessage(text: nil, dateStr: dateStr)
+        // 3. Correction lastMessage : on le construit à partir des champs "à plat"
+        if membership.lastChatMessageText != nil || membership.lastChatMessageDate != nil {
+            conv.lastMessage = LastMessage(
+                text: membership.lastChatMessageText,
+                dateStr: membership.lastChatMessageDate // (N'oublie pas que côté struct, on avait vu qu'il fallait mapper ça sur "last_chat_message_datetime")
+            )
         }
+
         conv.numberUnreadMessages = membership.numberOfUnreadMessages
         conv.members_count = membership.numberOfPeople
         conv.imageUrl = membership.imageUrl

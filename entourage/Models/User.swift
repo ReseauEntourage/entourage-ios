@@ -207,7 +207,7 @@ struct User: Codable {
         if partner != nil {
             return true
         }
-        if roles?.contains("Équipe Entourage") == true || communityRoles?.contains("Équipe Entourage") == true {
+        if roles?.contains("Équipe Entourage") == true || roles?.contains("Équipe Entourage") == true {
             return true
         }
         if roles?.contains("equipe") == true || roles?.contains("Equipe") == true {

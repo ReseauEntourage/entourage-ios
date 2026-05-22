@@ -30,8 +30,10 @@ struct ConversationListMainCellSwiftUI: View {
                 }
             }
             .frame(width: 50, height: 50)
-            .clipShape(isEvent ? AnyShape(RoundedRectangle(cornerRadius: 10)) : AnyShape(Circle()))
             .background(Color("Beige")) // fallback background
+            // CORRECTION iOS 15 : Plus de AnyShape. On utilise un RoundedRectangle.
+            // 25 de radius sur une frame de 50x50 crée un cercle parfait.
+            .clipShape(RoundedRectangle(cornerRadius: isEvent ? 10 : 25))
 
             // Content
             VStack(alignment: .leading, spacing: 4) {
