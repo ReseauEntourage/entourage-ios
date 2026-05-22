@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SVProgressHUD
 
 class EventChoosePictureViewController: BasePopViewController {
     
@@ -19,7 +18,6 @@ class EventChoosePictureViewController: BasePopViewController {
     var selectedImagePos = -1
     
     var images = [EventImage]()
-    var showAddPhoto = false
     
     weak var delegate:ChoosePictureEventDelegate? = nil
     
@@ -44,9 +42,7 @@ class EventChoosePictureViewController: BasePopViewController {
         ui_collectionview.dataSource = self
         
         setupFlowLayout()
-        if let currentUser = UserDefaults.currentUser {
-            self.showAddPhoto = currentUser.hasEventCreationImageUploadRole()
-        }
+        
         getImages()
         changeButtonSelection()
         AnalyticsLoggerManager.logEvent(name: View_NewGroup_Step3_PicGallery)
@@ -110,9 +106,6 @@ class EventChoosePictureViewController: BasePopViewController {
 extension EventChoosePictureViewController: UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if showAddPhoto {
-            return images.count + 1
-        }
         return images.count
     }
     
@@ -120,18 +113,9 @@ extension EventChoosePictureViewController: UICollectionViewDataSource, UICollec
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellImage", for: indexPath) as! NeighborhoodChoosePhotoCell
         
-        if showAddPhoto && indexPath.row == 0 {
-            cell.populateCell(imageUrl: "", isSelected: false)
-            cell.ui_image.image = UIImage(named: "ic_plus")?.withRenderingMode(.alwaysTemplate)
-            cell.ui_image.tintColor = .appOrange
-            cell.ui_image.contentMode = .center
-            cell.ui_image.backgroundColor = .appBeige
-            return cell
-        }
+        let image = images[indexPath.row]
         
-        let imagePos = showAddPhoto ? indexPath.row - 1 : indexPath.row
-        let image = images[imagePos]
-        let isSelected = selectedImagePos == imagePos
+        let isSelected = selectedImagePos == indexPath.row
         
         var imgUrl = ""
         
@@ -143,18 +127,12 @@ extension EventChoosePictureViewController: UICollectionViewDataSource, UICollec
         }
         
         cell.populateCell(imageUrl: imgUrl, isSelected: isSelected)
-        cell.ui_image.contentMode = .scaleAspectFill
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if showAddPhoto && indexPath.row == 0 {
-            showImagePicker()
-            return
-        }
-
-        let imagePos = showAddPhoto ? indexPath.row - 1 : indexPath.row
-        selectedImagePos = imagePos == selectedImagePos ? -1 : imagePos
+        selectedImagePos = indexPath.row == selectedImagePos ? -1 : indexPath.row
         collectionView.reloadData()
         self.changeButtonSelection()
     }
@@ -183,52 +161,4 @@ extension EventChoosePictureViewController: MJNavBackViewDelegate {
 //MARK: - Protocol PlaceViewControllerDelegate -
 protocol ChoosePictureEventDelegate: AnyObject {
     func selectedPicture(image:EventImage)
-    func selectedCustomPicture(image: UIImage, uploadKey: String)
-}
-
-//MARK: - Image Picker -
-extension EventChoosePictureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func showImagePicker() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = false
-        self.present(imagePicker, animated: true, completion: nil)
-    }
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true) {
-            if let image = info[.originalImage] as? UIImage {
-                if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EventPictureResizeVC") as? EventPicturePreviewResizeViewController {
-                    vc.currentImage = image
-                    vc.delegate = self
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true)
-                }
-            }
-        }
-    }
-}
-
-extension EventChoosePictureViewController: TakePhotoDelegate {
-    func updatePhoto(image: UIImage?) {
-        guard let image = image else { return }
-
-        SVProgressHUD.show()
-
-        // upload via EventPictureUploadService
-        EventPictureUploadService.prepareUploadWith(image: image) { uploadKey, isOk in
-            DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
-                if isOk, let uploadKey = uploadKey {
-                    self.delegate?.selectedCustomPicture(image: image, uploadKey: uploadKey)
-                    self.dismiss(animated: true)
-                } else {
-                    // show error
-                    self.ui_view_error.changeTitleAndImage(title: "Erreur lors de l'envoi de l'image")
-                    self.ui_view_error.show()
-                }
-            }
-        }
-    }
 }

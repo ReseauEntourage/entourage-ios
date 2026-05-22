@@ -203,19 +203,6 @@ struct User: Codable {
         return false
     }
     
-    func hasEventCreationImageUploadRole() -> Bool {
-        if partner != nil {
-            return true
-        }
-        if roles?.contains("Équipe Entourage") == true || roles?.contains("Équipe Entourage") == true {
-            return true
-        }
-        if roles?.contains("equipe") == true || roles?.contains("Equipe") == true {
-            return true
-        }
-        return isAmbassador()
-    }
-
     func isAmbassador() -> Bool {
         guard let roles = roles else {
             return false
@@ -347,19 +334,6 @@ struct UserLightNeighborhood: Codable {
         }
         return false
     }
-    func hasEventCreationImageUploadRole() -> Bool {
-        if partner != nil {
-            return true
-        }
-        if roles?.contains("Équipe Entourage") == true || communityRoles?.contains("Équipe Entourage") == true {
-            return true
-        }
-        if roles?.contains("equipe") == true || roles?.contains("Equipe") == true {
-            return true
-        }
-        return isAmbassador()
-    }
-
     func isAmbassador() -> Bool {
         guard let role = role else {
             return false

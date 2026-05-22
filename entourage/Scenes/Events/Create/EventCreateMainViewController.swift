@@ -234,12 +234,6 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
         _ = checkValidation()
     }
     
-    func addCustomPhoto(image: UIImage, uploadKey: String) {
-        newEvent.entourage_image_url = uploadKey
-        newEvent.imageId = nil
-        _ = checkValidation()
-    }
-
     func addPhoto(image: EventImage) {
         newEvent.imageId = image.id
         _ = checkValidation()
@@ -377,7 +371,7 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
         switch currentPhasePosition {
         case 1:
             //Check name / desc + img
-            if newEvent.title.count >= 2 && newEvent.descriptionEvent?.count ?? 0 > 2 && (newEvent.imageId != nil || newEvent.entourage_image_url != nil) {
+            if newEvent.title.count >= 2 && newEvent.descriptionEvent?.count ?? 0 > 2 && newEvent.imageId != nil {
                 isValid = true
             }
             message = "eventCreatePhase1_error".localized
@@ -451,7 +445,7 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
     }
     
     func hasNoInput() -> Bool {
-        return newEvent.title.count == 0 && newEvent.descriptionEvent?.count ?? 0 == 0 && newEvent.imageId == nil && newEvent.entourage_image_url == nil
+        return newEvent.title.count == 0 && newEvent.descriptionEvent?.count ?? 0 == 0 && newEvent.imageId == nil
     }
 }
 
@@ -491,7 +485,6 @@ protocol EventCreateMainDelegate: AnyObject {
     func addTitle(_ title:String)
     func addDescription(_ about:String?)
     func addPhoto(image:EventImage)
-    func addCustomPhoto(image:UIImage, uploadKey:String)
     
     func showChooseImage(delegate:ChoosePictureEventDelegate)
     //Phase 2

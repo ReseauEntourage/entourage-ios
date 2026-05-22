@@ -1,68 +1,341 @@
 import UIKit
-import SwiftUI
+import SVProgressHUD
+
+enum ConversationMainDTO {
+    case notificationRequest
+    case conversation(conversation: Conversation)
+    case filter(filter: String)
+    case smalltalk(smallTalk: SmallTalk)
+}
 
 class ConversationsMainHomeViewController: UIViewController {
     
-    private var hostingController: UIHostingController<ConversationsMainHomeView>?
-    private var swiftUIView: ConversationsMainHomeView?
+    // MARK: - UI Outlets
+    @IBOutlet weak var ui_image_inside_top_constraint: NSLayoutConstraint!
+    @IBOutlet weak var ui_image_constraint_height: NSLayoutConstraint!
+    @IBOutlet weak var ui_image: UIImageView!
+    @IBOutlet weak var ui_constraint_bottom_label: NSLayoutConstraint!
+    @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
+    @IBOutlet weak var ui_label_title: UILabel!
+    @IBOutlet weak var ui_tableview: UITableView!
+    @IBOutlet weak var ui_view_selector: UIView!
     
+    // MARK: - Properties
+    var dataSource = [ConversationMainDTO]()
+    var notificationsDisabled: Bool = false
+    var selectedFilter: String = "event_conv_filter_all".localized
+    var isLastPage = false
+
+    var currentPage = 1
+    var isFetching = false
+    let perPage = 25
+
+    var maxViewHeight: CGFloat = 109
+    var minViewHeight: CGFloat = 70
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupSwiftUIView()
+        ui_tableview.dataSource = self
+        ui_tableview.delegate = self
+        
+        ui_tableview.register(UINib(nibName: "ConversationNotifAskViewCell", bundle: nil), forCellReuseIdentifier: "ConversationNotifAskViewCell")
+        ui_tableview.register(UINib(nibName: "FilterDiscussionCell", bundle: nil), forCellReuseIdentifier: "FilterDiscussionCell")
+
+        setupViews()
+        checkNotificationStatus()
+        loadConversations(reset: true)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFilterSmallTalk), name: NSNotification.Name(kNotificationMessagesUpdateSmallTalkFilter), object: nil)
+    }
+
+    @objc private func updateFilterSmallTalk() {
+        self.selectedFilter = "event_conv_filter_smalltalks".localized
+        self.loadConversations(reset: true)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        // Optionally trigger refresh here if needed, but the view model does it on init
-        if let vm = hostingController?.rootView.viewModel {
-            vm.loadConversations(reset: true)
+        loadConversations(reset: true)
+    }
+
+    func setupViews() {
+        ui_tableview.contentInset = UIEdgeInsets(top: maxViewHeight, left: 0, bottom: 0, right: 0)
+        ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: maxViewHeight, left: 0, bottom: 0, right: 0)
+
+        ui_view_selector.layer.cornerRadius = ApplicationTheme.bigCornerRadius
+        ui_view_selector.layer.maskedCorners = CACornerMask.radiusTopOnly()
+
+        ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 23)
+        ui_label_title.text = "Messages_title".localized
+    }
+
+    func checkNotificationStatus() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                self.notificationsDisabled = settings.authorizationStatus != .authorized
+                self.loadDTO(conversations: [], reset: true)
+            }
         }
     }
     
-    private func setupSwiftUIView() {
-        var view = ConversationsMainHomeView()
-
-        view.onShowConversation = { [weak self] dto in
-            self?.handleShowConversation(dto: dto)
+    private func membershipTypeParam() -> String? {
+        switch selectedFilter {
+        case "event_conv_filter_discussions".localized:
+            return "Conversation"
+        case "event_conv_filter_events".localized:
+            return "Outing"
+        case "event_conv_filter_smalltalks".localized:
+            return "Smalltalk"
+        default:
+            return nil
         }
-
-        view.onShowProfile = { [weak self] userId in
-            self?.handleShowProfile(userId: userId)
-        }
-
-        view.onShowWebUrl = { [weak self] url in
-            guard let self = self else { return }
-            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
-        }
-
-        view.onRequestNotifications = { [weak self] in
-            self?.handleNotificationRequest()
-        }
-
-        let host = UIHostingController(rootView: view)
-        addChild(host)
-        host.view.frame = self.view.bounds
-        host.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(host.view)
-        host.didMove(toParent: self)
-
-        self.hostingController = host
-        self.swiftUIView = view
     }
 
-    private func handleShowConversation(dto: ConversationMainDTO) {
+    func loadConversations(reset: Bool) {
+        guard !isFetching else { return }
+        isFetching = true
+
+        if reset {
+            currentPage = 1
+            isLastPage = false
+        }
+
+        SVProgressHUD.show()
+
+        // 1️⃣ Si on est sur “Smalltalk”, on utilise l’ancien service
+        if selectedFilter == "event_conv_filter_smalltalks".localized {
+            SmallTalkService.listSmallTalks { smallTalks, error in
+                SVProgressHUD.dismiss()
+                self.isFetching = false
+                guard let smallTalks = smallTalks else { return }
+                // On retourne en DTO .smalltalk pour que cellForRowAt et didSelectRowAt
+                // passent bien par la case .smalltalk
+                self.loadDTO(smallTalks: smallTalks, reset: reset)
+            }
+            return
+        }
+
+        // 2️⃣ Sinon, on utilise le nouvel endpoint memberships
+        let typeParam = membershipTypeParam()
+        MessagingService.getConversationMemberships(type: typeParam,
+                                                   page: currentPage,
+                                                   per: perPage) { memberships, error in
+            SVProgressHUD.dismiss()
+            self.isFetching = false
+            guard let memberships = memberships else { return }
+
+            // pagination
+            self.isLastPage = memberships.count < self.perPage
+
+            // map en Conversation
+            let conversations = memberships.map { self.conversation(from: $0) }
+            // et on recharge via le DTO conversation
+            self.loadDTO(conversations: conversations, reset: reset)
+            self.currentPage += 1
+        }
+    }
+
+    private func conversation(from membership: ConversationMembership) -> Conversation {
+        var conv = Conversation()
+        conv.uid = membership.joinableId ?? 0
+
+        conv.type = {
+            switch membership.joinableType?.lowercased() {
+            case "outing":
+                return "outing"
+            case "conversation":
+                return "private"
+            case "smalltalk":
+                return "small_talk"
+            default:
+                return "group"
+            }
+        }()
+
+        // Formatage de la date ISO (si c'est bien une date)
+        let formattedDate: String? = {
+            guard let subname = membership.subname else { return nil }
+            let isoFormatter = ISO8601DateFormatter()
+            isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+            if let date = isoFormatter.date(from: subname) {
+                return Utils.formatEventDateShort(date: date)
+            }
+            return subname // si ce n'est pas une date, on retourne tel quel
+        }()
+
+        conv.title = membership.name ?? ""
+        conv.subname = formattedDate
+        if let text = membership.lastChatMessageText {
+            conv.lastMessage = LastMessage(text: text, dateStr: membership.lastChatMessageDate)
+        } else if let imageUrl = membership.lastChatMessageImageUrl, !imageUrl.isEmpty {
+            conv.lastMessage = LastMessage(text: nil, dateStr: membership.lastChatMessageDate)
+        } else if let dateStr = membership.lastChatMessageDate {
+            conv.lastMessage = LastMessage(text: nil, dateStr: dateStr)
+        }
+        conv.numberUnreadMessages = membership.numberOfUnreadMessages
+        conv.members_count = membership.numberOfPeople
+        conv.imageUrl = membership.imageUrl
+        conv.lastChatMessageImageUrl = membership.lastChatMessageImageUrl
+
+        // 🔥 RÈGLE : s'il n'y a qu'UNE personne dans la conv -> c'est toi seul => "Vous"
+        if (membership.numberOfPeople ?? 0) <= 1 {
+            conv.title = "Vous"
+        }
+
+        return conv
+    }
+
+
+    func loadDTO(conversations: [Conversation], reset: Bool) {
+        if reset {
+            dataSource.removeAll()
+            dataSource.append(.filter(filter: ""))
+            if notificationsDisabled {
+                dataSource.append(.notificationRequest)
+            }
+        }
+
+        let startIndex = dataSource.count
+        let newItems = conversations.map { ConversationMainDTO.conversation(conversation: $0) }
+        dataSource.append(contentsOf: newItems)
+
+        DispatchQueue.main.async {
+            if reset {
+                self.ui_tableview.reloadData()
+            } else {
+                let indexPaths = (startIndex..<self.dataSource.count).map { IndexPath(row: $0, section: 0) }
+                self.ui_tableview.insertRows(at: indexPaths, with: .fade)
+            }
+        }
+    }
+
+    func loadDTO(smallTalks: [SmallTalk], reset: Bool) {
+        if reset {
+            dataSource.removeAll()
+            dataSource.append(.filter(filter: ""))
+            if notificationsDisabled {
+                dataSource.append(.notificationRequest)
+            }
+        }
+
+        let startIndex = dataSource.count
+        let newItems = smallTalks.map { ConversationMainDTO.smalltalk(smallTalk: $0) }
+        dataSource.append(contentsOf: newItems)
+
+        DispatchQueue.main.async {
+            if reset {
+                self.ui_tableview.reloadData()
+            } else {
+                let indexPaths = (startIndex..<self.dataSource.count).map { IndexPath(row: $0, section: 0) }
+                self.ui_tableview.insertRows(at: indexPaths, with: .fade)
+            }
+        }
+    }
+}
+
+// MARK: - Table View
+extension ConversationsMainHomeViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let dto = dataSource[indexPath.row]
+
         switch dto {
+        case .notificationRequest:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationNotifAskViewCell", for: indexPath) as! ConversationNotifAskViewCell
+            cell.configureText()
+            cell.selectionStyle = .none
+            return cell
+
         case .conversation(let conversation):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
+            cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
+            return cell
+
+        case .smalltalk(let smallTalk):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
+            var conversation = Conversation(from: smallTalk)
+
+            let currentUserId = UserDefaults.currentUser?.sid
+            let filteredMembers = conversation.members?.filter { $0.uid != currentUserId } ?? []
+
+            if filteredMembers.isEmpty {
+                // 👇 Aucun autre membre que moi
+                conversation.title = "Vous"
+            } else {
+                let memberNames = filteredMembers.compactMap { $0.username }.joined(separator: " • ")
+                conversation.title = memberNames
+            }
+
+            cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
+            return cell
+
+        case .filter(_):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FilterDiscussionCell", for: indexPath) as! FilterDiscussionCell
+            let filters = [
+                "event_conv_filter_all".localized,
+                "event_conv_filter_discussions".localized,
+                "event_conv_filter_events".localized,
+                "event_conv_filter_smalltalks".localized
+            ]
+            cell.configure(filters: filters, selectedFilter: selectedFilter)
+            cell.delegate = self
+            cell.selectionStyle = .none
+            return cell
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dto = dataSource[indexPath.row]
+
+        switch dto {
+        case .filter(_):
+            return
+            
+        case .notificationRequest:
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                DispatchQueue.main.async {
+                    if granted {
+                        self.notificationsDisabled = false
+                        self.loadConversations(reset: true)
+                    } else {
+                        // Navigation vers l'écran de réglages de notifications dans l'app
+                        let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+                        let vc = sb.instantiateViewController(withIdentifier: "paramsNotifsVC")
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            }
+            return
+
+        case .conversation(let conversation):
+            // si small_talk, on appelle la bonne méthode
             if conversation.type == "small_talk" {
-                if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                if let vc = storyboard?
+                    .instantiateViewController(withIdentifier: "detailMessagesVC")
+                    as? ConversationDetailMessagesViewController {
                     vc.type = "small_talk"
-                    vc.setupFromSmallTalk(smallTalkId: conversation.uid, title: conversation.title, delegate: self)
+                    vc.setupFromSmallTalk(
+                        smallTalkId: conversation.uid,
+                        title: conversation.title,
+                        delegate: self
+                    )
                     present(vc, animated: true)
                 }
-            } else {
-                if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+            }
+            else {
+                // comportement « historique » pour events/discussions
+                if let vc = storyboard?
+                    .instantiateViewController(withIdentifier: "detailMessagesVC")
+                    as? ConversationDetailMessagesViewController {
                     vc.type = conversation.type ?? ""
                     vc.setupFromOtherVC(
                         conversationId: conversation.uid,
@@ -70,7 +343,7 @@ class ConversationsMainHomeViewController: UIViewController {
                         isOneToOne: conversation.isOneToOne(),
                         conversation: conversation,
                         delegate: self,
-                        selectedIndexPath: nil
+                        selectedIndexPath: indexPath
                     )
                     present(vc, animated: true)
                 }
@@ -81,38 +354,64 @@ class ConversationsMainHomeViewController: UIViewController {
                 vc.setupFromSmallTalk(smallTalkId: smallTalk.id, title: smallTalk.name ?? "", delegate: self)
                 present(vc, animated: true)
             }
-        default:
-            break
         }
     }
 
-    private func handleShowProfile(userId: Int) {
-        if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-            .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-            profileVC.userIdToDisplay = "\(userId)"
-            profileVC.modalPresentationStyle = .fullScreen
-            self.present(profileVC, animated: true)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+
+        if offsetY > contentHeight - frameHeight - 100 && !isLastPage {
+            loadConversations(reset: false)
         }
     }
+}
 
-    private func handleNotificationRequest() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            DispatchQueue.main.async {
-                if granted {
-                    self.hostingController?.rootView.viewModel.notificationsDisabled = false
-                    self.hostingController?.rootView.viewModel.loadConversations(reset: true)
-                } else {
-                    let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-                    let vc = sb.instantiateViewController(withIdentifier: "paramsNotifsVC")
-                    self.present(vc, animated: true, completion: nil)
-                }
+// MARK: - ConversationListMainCellDelegate
+extension ConversationsMainHomeViewController: ConversationListMainCellDelegate {
+    func showWebUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+    }
+
+    func showUserDetail(_ position: Int) {
+        if case let .conversation(conversation) = dataSource[position] {
+            guard let userId = conversation.user?.uid else { return }
+
+            if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+                .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
+                profileVC.userIdToDisplay = "\(userId)"
+                profileVC.modalPresentationStyle = .fullScreen
+                self.present(profileVC, animated: true)
             }
         }
     }
 }
 
+// MARK: - UpdateUnreadCountDelegate
 extension ConversationsMainHomeViewController: UpdateUnreadCountDelegate {
     func updateUnreadCount(conversationId: Int, currentIndexPathSelected: IndexPath?) {
-        hostingController?.rootView.viewModel.updateUnreadCount(conversationId: conversationId)
+        guard let currentIndexPathSelected = currentIndexPathSelected else { return }
+
+        if case var .conversation(conversation) = dataSource[currentIndexPathSelected.row] {
+            conversation.numberUnreadMessages = 0
+            dataSource[currentIndexPathSelected.row] = .conversation(conversation: conversation)
+        }
+
+        DispatchQueue.main.async {
+            if self.ui_tableview.numberOfRows(inSection: currentIndexPathSelected.section) > currentIndexPathSelected.row {
+                self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
+            } else {
+                self.ui_tableview.reloadData()
+            }
+        }
+    }
+}
+
+// MARK: - FilterDiscussionCellDelegate
+extension ConversationsMainHomeViewController: FilterDiscussionCellDelegate {
+    func onFilterClick(filter: String) {
+        self.selectedFilter = filter
+        loadConversations(reset: true)
     }
 }

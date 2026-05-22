@@ -31,7 +31,6 @@ class EventEditMainViewController: UIViewController {
     var newTitle:String? = nil
     var newDescription:String? = nil
     var newImageId:Int? = nil
-    var newEntourageImageUrl:String? = nil
     
     var newDateChanged:Bool? = nil
     var newStartDate:Date? = nil
@@ -283,7 +282,6 @@ class EventEditMainViewController: UIViewController {
         newEvent.title = newTitle
         newEvent.descriptionEvent = newDescription
         newEvent.imageId = newImageId
-        newEvent.entourage_image_url = newEntourageImageUrl
         
         newEvent.recurrence = newRecurrence
         newEvent.metadata?.reservedFemale = newReservedFemale
@@ -322,12 +320,6 @@ extension EventEditMainViewController: EventCreateMainDelegate {
         newDescription = about
         _ = checkValidation()
     }
-    func addCustomPhoto(image: UIImage, uploadKey: String) {
-        newEntourageImageUrl = uploadKey
-        newImageId = nil
-        _ = checkValidation()
-    }
-
     func addPhoto(image: EventImage) {
         newImageId = image.id
         _ = checkValidation()

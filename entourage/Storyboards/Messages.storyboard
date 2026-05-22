@@ -181,15 +181,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-
-
-
-
-
-
-
-
-
+                                            <outlet property="ui_bt_user" destination="XeF-8s-oP9" id="Yzm-Rd-sU7"/>
+                                            <outlet property="ui_date" destination="PAA-hS-bMj" id="73d-hP-rd6"/>
+                                            <outlet property="ui_detail_message" destination="VSX-1z-7hS" id="afn-n0-KZa"/>
+                                            <outlet property="ui_image" destination="SJz-D4-oGH" id="eKN-lv-CnQ"/>
+                                            <outlet property="ui_nb_unread" destination="HsN-gm-L3v" id="dlt-o4-q5d"/>
+                                            <outlet property="ui_picto_cat" destination="3os-WI-k5h" id="6cq-2y-Jmj"/>
+                                            <outlet property="ui_role" destination="Daz-jr-FTw" id="8Sc-RT-egc"/>
+                                            <outlet property="ui_username" destination="pVM-TK-TLe" id="wc7-cH-bk6"/>
+                                            <outlet property="ui_view_separator" destination="IXb-1d-soe" id="Yhh-8t-S4t"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -264,14 +264,14 @@
                         </constraints>
                     </view>
                     <connections>
-
-
-
-
-
-
-
-
+                        <outlet property="ui_constraint_bottom_label" destination="6rN-8y-LCP" id="HzD-zJ-KGk"/>
+                        <outlet property="ui_image" destination="cRZ-PA-DJe" id="CNv-Mr-PIR"/>
+                        <outlet property="ui_image_constraint_height" destination="t3j-NT-qTz" id="GRM-SY-f7I"/>
+                        <outlet property="ui_image_inside_top_constraint" destination="haF-q3-TpP" id="a6s-Zs-rzg"/>
+                        <outlet property="ui_label_title" destination="kTZ-7t-qL7" id="YpQ-7A-WP9"/>
+                        <outlet property="ui_tableview" destination="QLq-8b-Nyr" id="Ijx-aX-jCJ"/>
+                        <outlet property="ui_view_height_constraint" destination="7nb-uA-6wa" id="23D-AT-koq"/>
+                        <outlet property="ui_view_selector" destination="6Rf-5V-aAC" id="mWO-P1-HIc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIl-WD-LER" sceneMemberID="firstResponder"/>
