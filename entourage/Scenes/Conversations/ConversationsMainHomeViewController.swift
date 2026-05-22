@@ -41,6 +41,7 @@ class ConversationsMainHomeViewController: UIViewController {
         
         ui_tableview.register(UINib(nibName: "ConversationNotifAskViewCell", bundle: nil), forCellReuseIdentifier: "ConversationNotifAskViewCell")
         ui_tableview.register(UINib(nibName: "FilterDiscussionCell", bundle: nil), forCellReuseIdentifier: "FilterDiscussionCell")
+        ui_tableview.register(ConversationListMainSwiftUICell.self, forCellReuseIdentifier: ConversationListMainSwiftUICell.identifier)
 
         setupViews()
         checkNotificationStatus()
@@ -256,12 +257,13 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             return cell
 
         case .conversation(let conversation):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
-            cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
+            let cell = tableView.dequeueReusableCell(withIdentifier: ConversationListMainSwiftUICell.identifier, for: indexPath) as! ConversationListMainSwiftUICell
+            let currentUserId = UserDefaults.currentUser?.sid
+            cell.configure(conversation: conversation, currentUserId: currentUserId, isSmallTalk: false)
             return cell
 
         case .smalltalk(let smallTalk):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ConversationListMainSwiftUICell.identifier, for: indexPath) as! ConversationListMainSwiftUICell
             var conversation = Conversation(from: smallTalk)
 
             let currentUserId = UserDefaults.currentUser?.sid
@@ -275,7 +277,7 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
                 conversation.title = memberNames
             }
 
-            cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
+            cell.configure(conversation: conversation, currentUserId: currentUserId, isSmallTalk: true)
             return cell
 
         case .filter(_):

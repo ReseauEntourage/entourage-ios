@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24EE59DE2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59DD2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift */; };
 		0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */; };
 		02040CF2288E8C2E00AB1FBB /* EventParamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */; };
 		02040CF5288E97E000AB1FBB /* EventParamTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF4288E97E000AB1FBB /* EventParamTopCell.swift */; };
@@ -644,6 +645,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		24EE59DD2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListMainSwiftUICell.swift; sourceTree = "<group>"; };
 		0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInterestCell.swift; sourceTree = "<group>"; };
 		02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamsViewController.swift; sourceTree = "<group>"; };
 		02040CF4288E97E000AB1FBB /* EventParamTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamTopCell.swift; sourceTree = "<group>"; };
@@ -2204,6 +2206,7 @@
 			isa = PBXGroup;
 			children = (
 				24EE59DB2FC092F1008E7291 /* ConversationListMainCellSwiftUI.swift */,
+				24EE59DD2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift */,
 				24EE59AF2FC09292008E7291 /* ImageCache.swift */,
 				24EE59B02FC09292008E7291 /* ImageGridCell.swift */,
 				24EE59B12FC09292008E7291 /* ImageListViewController.swift */,
@@ -3138,6 +3141,7 @@
 				02D64F4D2799D5E000F6C4BD /* InviteSourceViewController.swift in Sources */,
 				02C91A29278F335000305E0B /* MainTabbarViewController.swift in Sources */,
 				24EE59DC2FC092F1008E7291 /* ConversationListMainCellSwiftUI.swift in Sources */,
+				24EE59DE2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift in Sources */,
 				02040CFD288ED75100AB1FBB /* EventParamsCGUViewController.swift in Sources */,
 				02A3DD3927FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift in Sources */,
 				02EB4B542892B9C400CC977E /* EventDetailMessagesViewController.swift in Sources */,
