@@ -17,6 +17,7 @@ struct Event:Codable {
     var shareUrl:String? = nil
     var imageUrl:String? = nil
     var imageId:Int? = nil
+    var entourage_image_url:String? = nil
     
     var isOnline:Bool? = false
     var onlineEventUrl:String? = nil
@@ -243,6 +244,9 @@ struct Event:Codable {
         
         if let imageId = imageId {
             dict["entourage_image_id"] = imageId
+        }
+        if let entourage_image_url = entourage_image_url {
+            dict["image_url"] = entourage_image_url
         }
         
         if location?.latitude ?? 0 != 0 {
@@ -581,6 +585,7 @@ struct EventEditing {
     var title:String? = nil
     var descriptionEvent:String? = nil
     var imageId:Int? = nil
+    var entourage_image_url:String? = nil
     
     var isOnline:Bool? = nil
     var onlineEventUrl:String? = nil
@@ -638,6 +643,9 @@ struct EventEditing {
         }
         if let imageId = imageId {
             dict["entourage_image_id"] = imageId
+        }
+        if let entourage_image_url = entourage_image_url {
+            dict["image_url"] = entourage_image_url
         }
         
         if location?.latitude ?? 0 != 0 {
