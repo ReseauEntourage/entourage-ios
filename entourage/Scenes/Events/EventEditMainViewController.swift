@@ -31,6 +31,7 @@ class EventEditMainViewController: UIViewController {
     var newTitle:String? = nil
     var newDescription:String? = nil
     var newImageId:Int? = nil
+    var newEntourageImageUrl:String? = nil
     
     var newDateChanged:Bool? = nil
     var newStartDate:Date? = nil
@@ -282,6 +283,7 @@ class EventEditMainViewController: UIViewController {
         newEvent.title = newTitle
         newEvent.descriptionEvent = newDescription
         newEvent.imageId = newImageId
+        newEvent.entourage_image_url = newEntourageImageUrl
         
         newEvent.recurrence = newRecurrence
         newEvent.metadata?.reservedFemale = newReservedFemale
@@ -321,8 +323,28 @@ extension EventEditMainViewController: EventCreateMainDelegate {
         _ = checkValidation()
     }
     func addPhoto(image: EventImage) {
+        newEntourageImageUrl = nil
         newImageId = image.id
         _ = checkValidation()
+    }
+    func addCustomPhoto(image: UIImage) {
+        newImageId = nil
+        newEntourageImageUrl = nil
+
+        // Show loading and upload
+        SVProgressHUD.show()
+        EventCoverUploadPictureService.prepareUploadWith(image: image) { uploadKey in
+            SVProgressHUD.dismiss()
+            if let uploadKey = uploadKey {
+                self.newEntourageImageUrl = uploadKey
+                _ = self.checkValidation()
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventCreatePhase1CustomPhotoUploaded), object: nil, userInfo: ["image": image])
+            } else {
+                let errorVC = MJErrorInputView()
+                errorVC.changeTitleAndImage(title: "neighborhood_choosephoto_error".localized)
+                errorVC.show()
+            }
+        }
     }
     
     func showChooseImage(delegate:ChoosePictureEventDelegate) {
