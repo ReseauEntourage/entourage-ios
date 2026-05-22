@@ -41,6 +41,8 @@
 		021E804328916FF500C891DC /* EventEditRecurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */; };
 		021F084F2798113D00F32A34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021F084E2798113D00F32A34 /* LocationManager.swift */; };
 		021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FBF9128856DC600710584 /* EventUploadPictureService.swift */; };
+		D6A88DCCB1D1433084E71F7E /* EventCoverUploadPictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D1F6C8D73C44FA862B174C /* EventCoverUploadPictureService.swift */; };
+		894686DB0A1F459ABE16D84F /* EventPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897365250BFB4959961BD035 /* EventPicturePreviewResizeViewController.swift */; };
 		021FD96028743EFF00D3AA54 /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FD95E28743EFF00D3AA54 /* EventListCell.swift */; };
 		021FD96128743EFF00D3AA54 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021FD95F28743EFF00D3AA54 /* EventListCell.xib */; };
 		021FD963287442C700D3AA54 /* NeighborhoodListEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FD962287442C700D3AA54 /* NeighborhoodListEventsViewController.swift */; };
@@ -675,6 +677,8 @@
 		021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditRecurrencyViewController.swift; sourceTree = "<group>"; };
 		021F084E2798113D00F32A34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		021FBF9128856DC600710584 /* EventUploadPictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUploadPictureService.swift; sourceTree = "<group>"; };
+		42D1F6C8D73C44FA862B174C /* EventCoverUploadPictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCoverUploadPictureService.swift; sourceTree = "<group>"; };
+		897365250BFB4959961BD035 /* EventPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
 		021FD95E28743EFF00D3AA54 /* EventListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
 		021FD95F28743EFF00D3AA54 /* EventListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
 		021FD962287442C700D3AA54 /* NeighborhoodListEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodListEventsViewController.swift; sourceTree = "<group>"; };
@@ -1476,6 +1480,7 @@
 				4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */,
 				24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */,
 				024131CA2862022100561FB4 /* EventCreateMainViewController.swift */,
+				897365250BFB4959961BD035 /* EventPicturePreviewResizeViewController.swift */,
 				024131CC2862024A00561FB4 /* EventCreatePageViewController.swift */,
 				02E854512865CA090012D941 /* EventChoosePictureViewController.swift */,
 				024131CE2862026500561FB4 /* EventCreatePhase1ViewController.swift */,
@@ -2009,6 +2014,7 @@
 				02B94C19284F508B006059EF /* HomeService.swift */,
 				02E8544F2865C60A0012D941 /* EventService.swift */,
 				021FBF9128856DC600710584 /* EventUploadPictureService.swift */,
+				42D1F6C8D73C44FA862B174C /* EventCoverUploadPictureService.swift */,
 				0258E4F8288AAF1A000F107B /* ActionsService.swift */,
 				0264C5D728B4FEC1001EA654 /* MessagingService.swift */,
 				0258E4FA288AAF47000F107B /* ContribUploadPictureService.swift */,
@@ -3395,6 +3401,8 @@
 				02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */,
 				2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */,
 				021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */,
+				D6A88DCCB1D1433084E71F7E /* EventCoverUploadPictureService.swift in Sources */,
+				894686DB0A1F459ABE16D84F /* EventPicturePreviewResizeViewController.swift in Sources */,
 				02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */,
 				A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */,
 				44FB28AB84FE1C35684C3B5E /* FullScreenImageView.swift in Sources */,

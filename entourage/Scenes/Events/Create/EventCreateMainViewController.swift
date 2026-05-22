@@ -235,10 +235,32 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
     }
     
     func addPhoto(image: EventImage) {
+        newEvent.entourage_image_url = nil
         newEvent.imageId = image.id
         _ = checkValidation()
     }
     
+    func addCustomPhoto(image: UIImage) {
+        // Remove existing standard image
+        newEvent.imageId = nil
+        newEvent.entourage_image_url = nil // Reset before upload
+
+        // Show loading and upload
+        SVProgressHUD.show()
+        EventCoverUploadPictureService.prepareUploadWith(image: image) { uploadKey in
+            SVProgressHUD.dismiss()
+            if let uploadKey = uploadKey {
+                self.newEvent.entourage_image_url = uploadKey
+                _ = self.checkValidation()
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventCreatePhase1CustomPhotoUploaded), object: nil, userInfo: ["image": image])
+            } else {
+                let errorVC = MJErrorInputView()
+                errorVC.changeTitleAndImage(title: "neighborhood_choosephoto_error".localized)
+                errorVC.show()
+            }
+        }
+    }
+
     func showChooseImage(delegate:ChoosePictureEventDelegate) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "eventChoosePhotoVC") as? EventChoosePictureViewController {
             
@@ -485,6 +507,7 @@ protocol EventCreateMainDelegate: AnyObject {
     func addTitle(_ title:String)
     func addDescription(_ about:String?)
     func addPhoto(image:EventImage)
+    func addCustomPhoto(image:UIImage)
     
     func showChooseImage(delegate:ChoosePictureEventDelegate)
     //Phase 2

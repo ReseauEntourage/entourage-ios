@@ -74,6 +74,7 @@ let API_URL_CONVERSATION_PREPARE_IMAGE_POST_UPLOAD = "conversations/%@/chat_mess
 let API_URL_SMALLTALK_PREPARE_IMAGE_POST_UPLOAD = "smalltalks/%@/chat_messages/presigned_upload?token=%@"
 let API_URL_EVENT_PREPARE_IMAGE_POST_UPLOAD = "outings/%@/chat_messages/presigned_upload?token=%@"
 let API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD = "contributions/presigned_upload?token=%@"
+let API_URL_EVENT_PREPARE_IMAGE_UPLOAD = "outings/presigned_upload?token=%@"
 
 //Home
 let kAPIHomeSummary = "home/summary?token=%@"
