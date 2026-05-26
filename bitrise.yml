@@ -197,9 +197,22 @@ workflows:
         - destination: "$BITRISE_SOURCE_DIR/AppConfigurations.plist"
     - script:
         inputs:
-        - content: |-
+        - content: |
             #!/usr/bin/env bash
             # fail if any commands fails
             set -ex
+
+            # 1. On se place à la racine des sources du projet
+            cd "$BITRISE_SOURCE_DIR"
+
+            # 2. On duplique le fichier .dist.plist vers le fichier final attendu par Xcode
+            cp ApiKeys.dist.plist ApiKeys.plist
+
+            # 3. On remplace les placeholders par les vrais secrets de Bitrise
+            # (Adapte les noms $BITRISE_API_KEY et $BITRISE_HMAC_SECRET avec le nom exact de tes secrets Bitrise)
+            sed -i '' "s/13f7d4ed0009b761df1c9400/$BITRISE_API_KEY/g" ApiKeys.plist
+            sed -i '' "s/1a202605156f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b/$BITRISE_HMAC_SECRET/g" ApiKeys.plist
+
+            echo "Le fichier ApiKeys.plist a été généré avec les clés secrètes !"
 
             ./Scripts/count_commit.sh
