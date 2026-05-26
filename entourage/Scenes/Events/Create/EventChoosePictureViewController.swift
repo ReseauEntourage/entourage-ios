@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mantis
 
 class EventChoosePictureViewController: BasePopViewController {
     
@@ -122,8 +123,10 @@ extension EventChoosePictureViewController: UICollectionViewDataSource, UICollec
         
         if hasCustomAddImageRights && indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellImage", for: indexPath) as! NeighborhoodChoosePhotoCell
-            cell.ui_image.image = UIImage(named: "ic_add_photo_gallery")
+            cell.ui_image.image = UIImage(named: "ic_plus")?.withRenderingMode(.alwaysTemplate)
+            cell.ui_image.tintColor = .appOrange
             cell.ui_image.contentMode = .center
+            cell.ui_contentview.backgroundColor = .appBeige
             cell.ui_contentview.layer.borderWidth = 1
             cell.ui_contentview.layer.borderColor = UIColor.appOrangeLight.cgColor
             return cell
@@ -186,28 +189,44 @@ extension EventChoosePictureViewController: UIImagePickerControllerDelegate, UIN
         picker.dismiss(animated: true, completion: nil)
 
         if let image = info[.originalImage] as? UIImage {
-            let storyboard = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "EventPictureResizeVC") as? EventPicturePreviewResizeViewController {
-                vc.currentImage = image
-                vc.delegate = self
-                self.present(vc, animated: true, completion: nil)
-            }
+            var config = Mantis.Config()
+            config.cropViewConfig.cropShapeType = .rect
+            let cropViewController = Mantis.cropViewController(image: image, config: config)
+            cropViewController.delegate = self
+            cropViewController.modalPresentationStyle = .fullScreen
+            self.present(cropViewController, animated: true)
         }
     }
 }
 
-extension EventChoosePictureViewController: TakePhotoDelegate {
-    func updatePhoto(image: UIImage?) {
-        if let img = image {
-            if let phase1Delegate = delegate as? EventCreatePhase1ViewController {
-                phase1Delegate.pageDelegate?.addCustomPhoto(image: img)
-            } else if let editMainDelegate = delegate as? EventEditMainViewController {
-                editMainDelegate.addCustomPhoto(image: img)
-            } else if let mainDelegate = delegate as? EventCreateMainDelegate {
-                mainDelegate.addCustomPhoto(image: img)
+//MARK: - CropViewControllerDelegate
+extension EventChoosePictureViewController: CropViewControllerDelegate {
+    func cropViewControllerDidCrop(_ cropViewController: Mantis.CropViewController, cropped: UIImage, transformation: Mantis.Transformation, cropInfo: Mantis.CropInfo) {
+        cropViewController.dismiss(animated: true) {
+            if let phase1Delegate = self.delegate as? EventCreatePhase1ViewController {
+                phase1Delegate.pageDelegate?.addCustomPhoto(image: cropped)
+            } else if let editMainDelegate = self.delegate as? EventEditMainViewController {
+                editMainDelegate.addCustomPhoto(image: cropped)
+            } else if let mainDelegate = self.delegate as? EventCreateMainDelegate {
+                mainDelegate.addCustomPhoto(image: cropped)
             }
             self.dismiss(animated: true)
         }
+    }
+
+    func cropViewControllerDidCancel(_ cropViewController: Mantis.CropViewController, original: UIImage) {
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
+
+    func cropViewControllerDidFailToCrop(_ cropViewController: Mantis.CropViewController, original: UIImage) {
+        // Fallback or handle failure
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
+
+    func cropViewControllerDidBeginResize(_ cropViewController: Mantis.CropViewController) {
+    }
+
+    func cropViewControllerDidEndResize(_ cropViewController: Mantis.CropViewController, original: UIImage, cropInfo: Mantis.CropInfo) {
     }
 }
 
