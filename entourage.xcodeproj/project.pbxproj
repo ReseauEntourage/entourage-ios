@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		24EE59DE2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59DD2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift */; };
 		0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */; };
 		02040CF2288E8C2E00AB1FBB /* EventParamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */; };
 		02040CF5288E97E000AB1FBB /* EventParamTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF4288E97E000AB1FBB /* EventParamTopCell.swift */; };
@@ -42,8 +41,6 @@
 		021E804328916FF500C891DC /* EventEditRecurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */; };
 		021F084F2798113D00F32A34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021F084E2798113D00F32A34 /* LocationManager.swift */; };
 		021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FBF9128856DC600710584 /* EventUploadPictureService.swift */; };
-		D6A88DCCB1D1433084E71F7E /* EventCoverUploadPictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D1F6C8D73C44FA862B174C /* EventCoverUploadPictureService.swift */; };
-		894686DB0A1F459ABE16D84F /* EventPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897365250BFB4959961BD035 /* EventPicturePreviewResizeViewController.swift */; };
 		021FD96028743EFF00D3AA54 /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FD95E28743EFF00D3AA54 /* EventListCell.swift */; };
 		021FD96128743EFF00D3AA54 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021FD95F28743EFF00D3AA54 /* EventListCell.xib */; };
 		021FD963287442C700D3AA54 /* NeighborhoodListEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FD962287442C700D3AA54 /* NeighborhoodListEventsViewController.swift */; };
@@ -422,6 +419,7 @@
 		24EE59D92FC09292008E7291 /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59B12FC09292008E7291 /* ImageListViewController.swift */; };
 		24EE59DA2FC09292008E7291 /* ConversationParamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59BA2FC09292008E7291 /* ConversationParamCell.swift */; };
 		24EE59DC2FC092F1008E7291 /* ConversationListMainCellSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59DB2FC092F1008E7291 /* ConversationListMainCellSwiftUI.swift */; };
+		24EE59DE2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59DD2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift */; };
 		24F3EF252F61D135005AD389 /* AddressAutocompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */; };
 		24F46AE62F8650A200A88B91 /* congrat_short_anim 2.json in Resources */ = {isa = PBXBuildFile; fileRef = 24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */; };
 		260377FC2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */; };
@@ -643,11 +641,12 @@
 		26F14CE12D3E8B7C004C4524 /* ProfileSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */; };
 		26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */; };
 		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
+		7FDDC1E7C9EDFC09AECDB828 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 5944ADF5ABBA34EC41DC55FD /* Mantis */; };
 		A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */; };
+		D6A88DCCB1D1433084E71F7E /* EventCoverUploadPictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D1F6C8D73C44FA862B174C /* EventCoverUploadPictureService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		24EE59DD2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListMainSwiftUICell.swift; sourceTree = "<group>"; };
 		0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInterestCell.swift; sourceTree = "<group>"; };
 		02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamsViewController.swift; sourceTree = "<group>"; };
 		02040CF4288E97E000AB1FBB /* EventParamTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamTopCell.swift; sourceTree = "<group>"; };
@@ -681,8 +680,6 @@
 		021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditRecurrencyViewController.swift; sourceTree = "<group>"; };
 		021F084E2798113D00F32A34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		021FBF9128856DC600710584 /* EventUploadPictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUploadPictureService.swift; sourceTree = "<group>"; };
-		42D1F6C8D73C44FA862B174C /* EventCoverUploadPictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCoverUploadPictureService.swift; sourceTree = "<group>"; };
-		897365250BFB4959961BD035 /* EventPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
 		021FD95E28743EFF00D3AA54 /* EventListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
 		021FD95F28743EFF00D3AA54 /* EventListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
 		021FD962287442C700D3AA54 /* NeighborhoodListEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodListEventsViewController.swift; sourceTree = "<group>"; };
@@ -1055,6 +1052,7 @@
 		24EE59C02FC09292008E7291 /* MentionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionCell.swift; sourceTree = "<group>"; };
 		24EE59C12FC09292008E7291 /* MentionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MentionCell.xib; sourceTree = "<group>"; };
 		24EE59DB2FC092F1008E7291 /* ConversationListMainCellSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListMainCellSwiftUI.swift; sourceTree = "<group>"; };
+		24EE59DD2FC092F2008E7291 /* ConversationListMainSwiftUICell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListMainSwiftUICell.swift; sourceTree = "<group>"; };
 		24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAutocompleteViewModel.swift; sourceTree = "<group>"; };
 		24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "congrat_short_anim 2.json"; sourceTree = "<group>"; };
 		260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionSmokeTestViewController.swift; sourceTree = "<group>"; };
@@ -1289,6 +1287,7 @@
 		26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileSectionCell.xib; sourceTree = "<group>"; };
 		26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightOverlayView.swift; sourceTree = "<group>"; };
 		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
+		42D1F6C8D73C44FA862B174C /* EventCoverUploadPictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCoverUploadPictureService.swift; sourceTree = "<group>"; };
 		4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventCreatePhase3View.swift; path = entourage/Scenes/Events/Create/EventCreatePhase3View.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -1312,6 +1311,7 @@
 				02E9D6C22970124900F9625D /* ActiveLabel in Frameworks */,
 				2623375E2EE82704007EA8ED /* FirebaseAppCheck in Frameworks */,
 				020AF5DE286064AC0012AE60 /* Lottie in Frameworks */,
+				7FDDC1E7C9EDFC09AECDB828 /* Mantis in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1486,7 +1486,6 @@
 				4F024A7293C2D6D6B59A5288 /* EventCreatePhase3View.swift */,
 				24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */,
 				024131CA2862022100561FB4 /* EventCreateMainViewController.swift */,
-				897365250BFB4959961BD035 /* EventPicturePreviewResizeViewController.swift */,
 				024131CC2862024A00561FB4 /* EventCreatePageViewController.swift */,
 				02E854512865CA090012D941 /* EventChoosePictureViewController.swift */,
 				024131CE2862026500561FB4 /* EventCreatePhase1ViewController.swift */,
@@ -2771,6 +2770,7 @@
 				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */,
 				07D073F4B75D5470C000D4A2 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 				24CFFF382EF1828D0003509F /* XCRemoteSwiftPackageReference "SVProgressHUD" */,
+				3D2127938252BD60A9D8C696 /* XCRemoteSwiftPackageReference "Mantis" */,
 			);
 			productRefGroup = 025D8717278DD33600909101 /* Products */;
 			projectDirPath = "";
@@ -3415,7 +3415,6 @@
 				2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */,
 				021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */,
 				D6A88DCCB1D1433084E71F7E /* EventCoverUploadPictureService.swift in Sources */,
-				894686DB0A1F459ABE16D84F /* EventPicturePreviewResizeViewController.swift in Sources */,
 				02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */,
 				A21749A2A93E5648C02B4A5B /* EventCreatePhase3View.swift in Sources */,
 			);
@@ -3895,6 +3894,14 @@
 				minimumVersion = 2.3.1;
 			};
 		};
+		3D2127938252BD60A9D8C696 /* XCRemoteSwiftPackageReference "Mantis" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/guoyingtao/Mantis.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3972,6 +3979,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAppCheck;
+		};
+		5944ADF5ABBA34EC41DC55FD /* Mantis */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D2127938252BD60A9D8C696 /* XCRemoteSwiftPackageReference "Mantis" */;
+			productName = Mantis;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
