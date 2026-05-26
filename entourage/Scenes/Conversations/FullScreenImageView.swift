@@ -109,10 +109,9 @@ struct FullScreenImageView: View {
                         dismissAction()
                     }) {
                         Image(systemName: "chevron.left")
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.system(size: 16, weight: .bold))
                             .foregroundColor(.white)
-                            .frame(width: 25, height: 25)
-                            .padding()
+                            .frame(width: 35, height: 35)
                             .background(Color.black.opacity(0.4))
                             .clipShape(Circle())
                     }
@@ -124,10 +123,9 @@ struct FullScreenImageView: View {
                             saveImage()
                         }) {
                             Image(systemName: "square.and.arrow.down")
-                                .font(.system(size: 24, weight: .bold))
+                                .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(.white)
-                                .frame(width: 30, height: 30)
-                                .padding()
+                                .frame(width: 35, height: 35)
                                 .background(Color.black.opacity(0.4))
                                 .clipShape(Circle())
                         }
