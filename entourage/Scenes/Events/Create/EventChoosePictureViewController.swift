@@ -191,6 +191,7 @@ extension EventChoosePictureViewController: UIImagePickerControllerDelegate, UIN
         if let image = info[.originalImage] as? UIImage {
             var config = Mantis.Config()
             config.cropViewConfig.cropShapeType = .rect
+            config.presetFixedRatioType = .alwaysUsingOnePresetFixedRatio(ratio: 16.0 / 9.0)
             let cropViewController = Mantis.cropViewController(image: image, config: config)
             cropViewController.delegate = self
             cropViewController.modalPresentationStyle = .fullScreen
