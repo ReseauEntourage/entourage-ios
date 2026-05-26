@@ -124,7 +124,7 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! NeighborhoodCreatePhotoCell
             
-            var imgUrl:String?
+            var imgUrl: String?
             if image != nil {
                 if let img = image?.url_image_portrait {
                     imgUrl = img
@@ -138,10 +138,15 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
             }
             
             if let customImage = self.customImage {
-                cell.ui_image.image = customImage
-                cell.ui_image.contentMode = .scaleAspectFill
+                // FIX HERE: Changed ui_image to ui_photo
+                cell.ui_photo.image = customImage
+                cell.ui_photo.contentMode = .scaleAspectFill
+                
+                // OPTIONAL: Since you are bypassing populateCell for custom images,
+                // you might want to hide the picker icon manually here:
+                cell.ui_picto_photo.isHidden = true
             } else {
-                cell.populateCell(urlImg: imgUrl,isEvent: true)
+                cell.populateCell(urlImg: imgUrl, isEvent: true)
             }
             
             return cell

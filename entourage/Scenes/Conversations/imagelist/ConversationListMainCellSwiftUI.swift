@@ -97,19 +97,16 @@ struct ConversationListMainCellSwiftUI: View {
                         .font(.custom("Quicksand-Bold", size: 15))
                         .foregroundColor(.black)
                         .lineLimit(1)
+                        .layoutPriority(0) // Laisse la priorité à la date
 
                     Spacer(minLength: 8)
 
-                    if !isEvent, !conversation.hasUnread {
+                    if !isEvent && !conversation.createdDateFormatted.isEmpty {
                         Text(conversation.createdDateFormatted)
                             .font(.custom("NunitoSans-Regular", size: 13))
-                            .foregroundColor(Color("gris_sombre_40"))
+                            .foregroundColor(conversation.hasUnread ? Color("orange_app") : Color("gris_sombre_40"))
                             .lineLimit(1)
-                    } else if !isEvent, conversation.hasUnread {
-                        Text(conversation.createdDateFormatted)
-                            .font(.custom("NunitoSans-Regular", size: 13))
-                            .foregroundColor(Color("orange_app"))
-                            .lineLimit(1)
+                            .layoutPriority(1) // Force la date à rester visible
                     }
                 }
 

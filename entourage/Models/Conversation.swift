@@ -71,15 +71,27 @@ struct Conversation:Codable {
         return blockers?.count ?? 0 > 0
     }
     
-    var createdDate:Date? {
-        get {
-            guard let dateStr = lastMessage?.dateStr else {return nil}
-            return Utils.getDateFromWSDateString(dateStr)
+    var createdDate: Date? {
+            get {
+                // 1. On tente via le format classique lastMessage
+                if let dateStr = lastMessage?.dateStr, !dateStr.isEmpty {
+                    return Utils.getDateFromWSDateString(dateStr)
+                }
+                
+                // 2. Fallback de secours : si ton modèle reçoit parfois la date au format racine,
+                // ou si tu as stocké lastChatMessageDate quelque part, tu peux l'ajouter ici.
+                return nil
+            }
         }
-    }
-    var createdDateFormatted:String {
+        
+    var createdDateFormatted: String {
         get {
-            return Utils.formatMessageListDateName(date:createdDate)
+            guard let date = createdDate else {
+                // CORRECTION : Au lieu de retourner un tiret brut "-" si la date est nil,
+                // on évite d'afficher une chaîne vide qui casse le design.
+                return ""
+            }
+            return Utils.formatMessageListDateName(date: date)
         }
     }
     var getLastMessage:String? {
@@ -257,7 +269,7 @@ struct ConversationMembership: Decodable {
     let numberOfUnreadMessages: Int?
     let lastChatMessageText: String?
     let lastChatMessageImageUrl: String?
-    let lastChatMessageDate: String?
+    let lastChatMessageDate: String? // Garde la propriété existante
 
     private enum CodingKeys: String, CodingKey {
         case status
@@ -272,10 +284,9 @@ struct ConversationMembership: Decodable {
         case numberOfUnreadMessages = "number_of_unread_messages"
         case lastChatMessageText = "last_chat_message"
         case lastChatMessageImageUrl = "last_chat_message_image_url"
-        case lastChatMessageDate = "last_chat_message_date"
+        case lastChatMessageDate = "last_chat_message_datetime"
     }
 }
-
 struct ConversationMembershipsWrapper: Decodable {
     let memberships: [ConversationMembership]
 }
