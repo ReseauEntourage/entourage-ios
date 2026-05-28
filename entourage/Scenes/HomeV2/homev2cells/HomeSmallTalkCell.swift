@@ -98,6 +98,9 @@ class HomeSmallTalkCell: UITableViewCell {
                 }
             }
             
+            // Prioritize filled avatars
+            avatars.sort { $0 != "placeholder" && $1 == "placeholder" }
+
             self.state = .active(activeCount: activeCount, pendingCount: pendingCount, totalUnread: unreadTotal, avatars: avatars)
         }
     }

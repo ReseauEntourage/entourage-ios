@@ -100,7 +100,7 @@ struct HomeSmallTalkCardView: View {
 
             // Avatars
             ZStack(alignment: .leading) {
-                ForEach(Array(avatars.prefix(3).enumerated()), id: \.offset) { index, avatarUrlStr in
+                ForEach(Array(avatars.prefix(2).enumerated()), id: \.offset) { index, avatarUrlStr in
                     Group {
                         if avatarUrlStr == "placeholder" {
                             Image("placeholder_user")
@@ -131,13 +131,15 @@ struct HomeSmallTalkCardView: View {
                     .zIndex(Double(avatars.count - index))
                 }
             }
-            .frame(width: CGFloat(40 + (min(avatars.count, 3) - 1) * 25), height: 40)
+            .frame(width: CGFloat(40 + (min(avatars.count, 2) - 1) * 25), height: 40)
             .padding(.trailing, 5)
 
             VStack(alignment: .leading, spacing: 6) {
                 Text("home_small_talk_active_title".localized)
                     .font(.custom("Quicksand-Bold", size: 15))
                     .foregroundColor(.black)
+                    .lineLimit(1)
+                    .padding(.top, 2)
 
                 let textActive = activeCount > 1 ? String(format: "home_small_talk_active_plural".localized, activeCount) : String(format: "home_small_talk_active_singular".localized, activeCount)
                 Text(textActive)
@@ -170,7 +172,7 @@ struct HomeSmallTalkCardView: View {
                         Text("home_small_talk_view_button".localized)
                             .font(.custom("Quicksand-Bold", size: 14))
                             .foregroundColor(.white)
-                            .padding(.horizontal, 20)
+                            .padding(.horizontal, 12)
                             .frame(height: 40)
                             .background(Color("orange_app"))
                             .cornerRadius(20)
