@@ -156,6 +156,8 @@ struct HomeSmallTalkCardView: View {
                         Text(textPending)
                             .font(.custom("NunitoSans-Regular", size: 14))
                             .foregroundColor(Color("orange_app"))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 5)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -188,7 +190,7 @@ struct HomeSmallTalkCardView: View {
             }
             
             // --- BLOC DU BAS (Bouton de création centré sur la largeur complète) ---
-            if totalMatches < 3 {
+            if totalMatches < 3 && pendingCount == 0 {
                 Button(action: {
                     actionStart()
                 }) {
@@ -198,6 +200,7 @@ struct HomeSmallTalkCardView: View {
                         .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.top, 5)
             }
             
         }
