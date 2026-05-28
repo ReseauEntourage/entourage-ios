@@ -141,24 +141,26 @@ struct HomeSmallTalkCardView: View {
                 
                 // 2. Les Textes de statut
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("home_small_talk_active_title".localized)
-                        .font(.custom("Quicksand-Bold", size: 15))
-                        .foregroundColor(.black)
-                        .lineLimit(1)
+                    
+                    // NOUVEAU: Regroupement du titre et du texte "pending" pour les coller
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("home_small_talk_active_title".localized)
+                            .font(.custom("Quicksand-Bold", size: 15))
+                            .foregroundColor(.black)
+                            .lineLimit(1)
+                        
+                        if pendingCount > 0 {
+                            let textPending = pendingCount > 1 ? String(format: "home_small_talk_pending_plus_plural".localized, pendingCount) : String(format: "home_small_talk_pending_plus_singular".localized, pendingCount)
+                            Text(textPending)
+                                .font(.custom("NunitoSans-Regular", size: 14))
+                                .foregroundColor(Color("orange_app"))
+                        }
+                    }
                     
                     let textActive = activeCount > 1 ? String(format: "home_small_talk_active_plural".localized, activeCount) : String(format: "home_small_talk_active_singular".localized, activeCount)
                     Text(textActive)
                         .font(.custom("NunitoSans-Regular", size: 14))
                         .foregroundColor(Color("blue_app"))
-                    
-                    if pendingCount > 0 {
-                        let textPending = pendingCount > 1 ? String(format: "home_small_talk_pending_plus_plural".localized, pendingCount) : String(format: "home_small_talk_pending_plus_singular".localized, pendingCount)
-                        Text(textPending)
-                            .font(.custom("NunitoSans-Regular", size: 14))
-                            .foregroundColor(Color("orange_app"))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, 5)
-                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
