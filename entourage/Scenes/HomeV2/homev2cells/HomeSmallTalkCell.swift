@@ -10,7 +10,6 @@ class HomeSmallTalkCell: UITableViewCell {
 
     private var hostingController: UIHostingController<HomeSmallTalkCardView>?
 
-    // Default state
     var state: SmallTalkCardState = .initial {
         didSet {
             updateSwiftUIView()
@@ -28,11 +27,11 @@ class HomeSmallTalkCell: UITableViewCell {
     }
 
     private func setupSwiftUIView() {
-        let swiftUIView = HomeSmallTalkCardView(state: state, actionStart: { [weak self] in
-            self?.onActionStart()
-        }, actionView: { [weak self] in
-            self?.onActionView()
-        })
+        let swiftUIView = HomeSmallTalkCardView(
+            state: state,
+            actionStart: { [weak self] in self?.onActionStart() },
+            actionView: { [weak self] in self?.onActionView() }
+        )
 
         let hostingController = UIHostingController(rootView: swiftUIView)
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -51,60 +50,76 @@ class HomeSmallTalkCell: UITableViewCell {
     }
 
     private func updateSwiftUIView() {
-        let swiftUIView = HomeSmallTalkCardView(state: state, actionStart: { [weak self] in
-            self?.onActionStart()
-        }, actionView: { [weak self] in
-            self?.onActionView()
-        })
-        self.hostingController?.rootView = swiftUIView
+        let swiftUIView = HomeSmallTalkCardView(
+            state: state,
+            actionStart: { [weak self] in self?.onActionStart() },
+            actionView: { [weak self] in self?.onActionView() }
+        )
+        hostingController?.rootView = swiftUIView
     }
 
+    // MARK: - Configuration avec les requêtes utilisateur
     func configure(with userRequests: [UserSmallTalkRequest]) {
         let matchedRequests = userRequests.filter { $0.smalltalk != nil }
         let pendingRequests = userRequests.filter { $0.smalltalk == nil }
 
         let activeCount = matchedRequests.count
         let pendingCount = pendingRequests.count
+        let totalMatches = activeCount + pendingCount
 
         if activeCount == 0 {
+            // Aucun match actif → afficher l'état initial ou en attente
             if pendingCount > 0 {
                 self.state = .pending(count: pendingCount)
             } else {
                 self.state = .initial
             }
         } else {
-            // Get avatars
+            // Au moins un match actif → état actif
             var avatars = [String]()
             var unreadTotal = 0
-            
+
             for request in matchedRequests {
                 if let smalltalk = request.smalltalk {
-                    // Try to find the first member that is not the current user
+                    // Récupérer les membres (exclure l'utilisateur courant)
                     let members = smalltalk.members
                     var filteredMembers = members
                     if let currentSid = UserDefaults.currentUser?.sid {
                         filteredMembers.removeAll(where: { $0.id == currentSid })
                     }
 
+                    // Priorité aux avatars non-placeholder
                     if let firstAvatar = filteredMembers.first(where: { $0.avatar_url != nil })?.avatar_url {
                         avatars.append(firstAvatar)
-                    } else if filteredMembers.first != nil {
-                        avatars.append("placeholder")
+                    } else if let firstMember = filteredMembers.first {
+                        avatars.append(firstMember.avatar_url ?? "placeholder")
                     }
                 }
 
+                // Compter les messages non lus
                 if let unread = request.number_of_unread_messages {
                     unreadTotal += unread
                 }
             }
-            
-            // Prioritize filled avatars
+
+            // Trier pour mettre les avatars valides en premier
             avatars.sort { $0 != "placeholder" && $1 == "placeholder" }
 
-            self.state = .active(activeCount: activeCount, pendingCount: pendingCount, totalUnread: unreadTotal, avatars: avatars)
+            // Limiter à 2 avatars max
+            if avatars.count > 2 {
+                avatars = Array(avatars.prefix(2))
+            }
+
+            self.state = .active(
+                activeCount: activeCount,
+                pendingCount: pendingCount,
+                totalUnread: unreadTotal,
+                avatars: avatars
+            )
         }
     }
 
+    // MARK: - Actions
     private func onActionStart() {
         AnalyticsLoggerManager.logEvent(name: "click_bonnes_ondes_start_discussion")
         let storyboard = UIStoryboard(name: "SmallTalk", bundle: nil)
@@ -115,11 +130,12 @@ class HomeSmallTalkCell: UITableViewCell {
 
     private func onActionView() {
         AnalyticsLoggerManager.logEvent(name: "click_bonnes_ondes_view_messages")
-        // Switch to the messages tab and apply smalltalk filter
-        NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateSmallTalkFilter), object: nil)
-
-        if let tabController = self.parentViewController?.tabBarController as? MainTabbarViewController {
-            tabController.selectedIndex = 2
+        NotificationCenter.default.post(
+            name: NSNotification.Name(kNotificationMessagesUpdateSmallTalkFilter),
+            object: nil
+        )
+        if let tabController = parentViewController?.tabBarController as? MainTabbarViewController {
+            tabController.selectedIndex = 2 // Onglet Messages
         }
     }
 }

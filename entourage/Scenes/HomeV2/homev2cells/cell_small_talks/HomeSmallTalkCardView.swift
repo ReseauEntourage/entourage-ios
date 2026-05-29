@@ -1,12 +1,14 @@
 import Foundation
 import SwiftUI
 
+// MARK: - State Definition
 enum SmallTalkCardState {
     case initial
     case pending(count: Int)
     case active(activeCount: Int, pendingCount: Int, totalUnread: Int, avatars: [String])
 }
 
+// MARK: - View
 struct HomeSmallTalkCardView: View {
     var state: SmallTalkCardState
     var actionStart: () -> Void
@@ -19,10 +21,16 @@ struct HomeSmallTalkCardView: View {
         case .pending(let count):
             pendingView(count: count)
         case .active(let activeCount, let pendingCount, let totalUnread, let avatars):
-            activeView(activeCount: activeCount, pendingCount: pendingCount, totalUnread: totalUnread, avatars: avatars)
+            activeView(
+                activeCount: activeCount,
+                pendingCount: pendingCount,
+                totalUnread: totalUnread,
+                avatars: avatars
+            )
         }
     }
     
+    // MARK: - Initial View (No active/pending discussions)
     private var initialView: some View {
         HStack(alignment: .top, spacing: 15) {
             Image("ic_puzzle_home")
@@ -30,22 +38,19 @@ struct HomeSmallTalkCardView: View {
                 .scaledToFit()
                 .frame(width: 70, height: 70)
             
-            VStack(alignment: .trailing, spacing: 15) {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("home_v2_small_talk_card_title".localized)
-                        .font(.custom("Quicksand-Bold", size: 15))
-                        .foregroundColor(.black)
-                    
-                    Text("home_v2_small_talk_card_subtitle".localized)
-                        .font(.custom("NunitoSans-Regular", size: 14))
-                        .foregroundColor(.black)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(alignment: .leading, spacing: 6) {
+                Text("home_v2_small_talk_card_title".localized)
+                    .font(.custom("Quicksand-Bold", size: 15))
+                    .foregroundColor(.black)
                 
-                Button(action: {
-                    actionStart()
-                }) {
+                Text("home_v2_small_talk_card_subtitle".localized)
+                    .font(.custom("NunitoSans-Regular", size: 14))
+                    .foregroundColor(.black)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Spacer()
+                
+                Button(action: actionStart) {
                     Text("home_v2_small_talk_card_button".localized)
                         .font(.custom("Quicksand-Bold", size: 14))
                         .foregroundColor(.white)
@@ -64,32 +69,48 @@ struct HomeSmallTalkCardView: View {
         .padding(.vertical, 10)
     }
     
+    // MARK: - Pending View (Only pending discussions)
     private func pendingView(count: Int) -> some View {
-        HStack(alignment: .center, spacing: 15) {
+        HStack(alignment: .center, spacing: 12) {
+            // 1. Icône de sablier
             ZStack {
                 Circle()
                     .fill(Color("orange_app").opacity(0.15))
-                    .frame(width: 50, height: 50)
+                    .frame(width: 40, height: 40)
                 Image(systemName: "hourglass")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 24, height: 24)
+                    .frame(width: 20, height: 20)
                     .foregroundColor(Color("orange_app"))
             }
             
-            VStack(alignment: .leading, spacing: 6) {
-                Text("small_talk_title_waiting".localized)
+            // 2. Texte : Titre + Sous-titre
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Vos discussions solidaires")
                     .font(.custom("Quicksand-Bold", size: 15))
                     .foregroundColor(.black)
                 
-                let text = count > 1 ? String(format: "home_small_talk_pending_plural".localized, count) : String(format: "home_small_talk_pending_singular".localized, count)
-                Text(text)
+                let matchingText = count > 1
+                ? String(format: "home_small_talk_matching_plural".localized, count)
+                : String(format: "home_small_talk_matching_singular".localized, count)
+                Text(matchingText)
                     .font(.custom("NunitoSans-Regular", size: 14))
-                    .foregroundColor(Color("blue_app"))
+                    .foregroundColor(Color("orange_app"))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            
+            // 3. Bouton "Voir"
+            Button(action: { actionView() }) {
+                Text("Voir")
+                    .font(.custom("Quicksand-Bold", size: 14))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(Color("orange_app"))
+                    .cornerRadius(20)
+            }
         }
-        .padding(.vertical, 20)
+        .padding(.vertical, 16)
         .padding(.horizontal, 12)
         .background(Color("BeigeClair2"))
         .cornerRadius(15)
@@ -100,12 +121,9 @@ struct HomeSmallTalkCardView: View {
     private func activeView(activeCount: Int, pendingCount: Int, totalUnread: Int, avatars: [String]) -> some View {
         let totalMatches = activeCount + pendingCount
         
-        return VStack(alignment: .leading, spacing: 15) {
-            
-            // --- BLOC DU HAUT (Avatars + Textes alignés à gauche + Bouton Voir) ---
-            HStack(alignment: .top, spacing: 12) {
-                
-                // 1. Les Avatars
+        return VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top, spacing: 8) {  // Espacement horizontal réduit entre éléments
+                // 1. Avatars (max 2)
                 ZStack(alignment: .leading) {
                     ForEach(Array(avatars.prefix(2).enumerated()), id: \.offset) { index, avatarUrlStr in
                         Group {
@@ -116,9 +134,7 @@ struct HomeSmallTalkCardView: View {
                             } else {
                                 if #available(iOS 15.0, *) {
                                     AsyncImage(url: URL(string: avatarUrlStr)) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
+                                        image.resizable().scaledToFill()
                                     } placeholder: {
                                         Image("placeholder_user")
                                             .resizable()
@@ -131,53 +147,47 @@ struct HomeSmallTalkCardView: View {
                                 }
                             }
                         }
-                        .frame(width: 34, height: 34)
+                        .frame(width: 40, height: 40)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color("BeigeClair2"), lineWidth: 2))
                         .offset(x: CGFloat(index * 20))
                         .zIndex(Double(avatars.count - index))
                     }
                 }
-                .frame(width: CGFloat(34 + (min(avatars.count, 2) - 1) * 20), height: 34)
-                .padding(.top, 4)
+                .frame(width: CGFloat(40 + (min(avatars.count, 2) - 1) * 20), height: 40)
                 
-                // 2. Les Textes de statut
-                VStack(alignment: .leading, spacing: 6) {
+                // 2. Textes : Titre + Sous-titres
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Vos discussions solidaires")
+                        .font(.custom("Quicksand-Bold", size: 16))
+                        .foregroundColor(.black)
+                        .lineLimit(1)
                     
-                    // NOUVEAU: Regroupement du titre et du texte "pending" pour les coller
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("home_small_talk_active_title".localized)
-                            .font(.custom("Quicksand-Bold", size: 15))
-                            .foregroundColor(.black)
-                            .lineLimit(2)
-                        
-                        let textActive = activeCount > 1 ? String(format: "home_small_talk_active_plural".localized, activeCount) : String(format: "home_small_talk_active_singular".localized, activeCount)
-                        Text(textActive)
-                            .font(.custom("NunitoSans-Regular", size: 14))
-                            .foregroundColor(Color("blue_app"))
-
-                        if pendingCount > 0 {
-                            let textPending = pendingCount > 1 ? String(format: "home_small_talk_pending_plus_plural".localized, pendingCount) : String(format: "home_small_talk_pending_plus_singular".localized, pendingCount)
-                            Text(textPending)
-                                .font(.custom("NunitoSans-Regular", size: 14))
-                                .foregroundColor(Color("orange_app"))
-                        }
+                    let activeText = activeCount > 1
+                    ? String(format: "%d discussions actives", activeCount)
+                    : String(format: "%d discussion active", activeCount)
+                    Text(activeText)
+                        .font(.custom("NunitoSans-Regular", size: 13))
+                        .foregroundColor(Color("grey_dark"))
+                    
+                    if pendingCount > 0 {
+                        Text(String(format: "+%d en cours de matching", pendingCount))
+                            .font(.custom("NunitoSans-Regular", size: 13))
+                            .foregroundColor(Color("orange_app"))
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
-                // 3. Bouton Voir
+                // 3. Bouton "Voir" + Badge
                 ZStack(alignment: .topTrailing) {
-                    Button(action: {
-                        actionView()
-                    }) {
-                        Text("home_small_talk_view_button".localized)
+                    Button(action: { actionView() }) {
+                        Text("Voir")
                             .font(.custom("Quicksand-Bold", size: 14))
                             .foregroundColor(.white)
-                            .padding(.horizontal, 10)
-                            .frame(height: 34)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
                             .background(Color("orange_app"))
-                            .cornerRadius(17)
+                            .cornerRadius(20)
                     }
                     
                     if totalUnread > 0 {
@@ -192,27 +202,23 @@ struct HomeSmallTalkCardView: View {
                     }
                 }
             }
+            .padding(.horizontal, 8)  // Marges latérales réduites pour le HStack
             
-            // --- BLOC DU BAS (Bouton de création centré sur la largeur complète) ---
             if totalMatches < 3 && pendingCount == 0 {
-                Button(action: {
-                    actionStart()
-                }) {
+                Button(action: { actionStart() }) {
                     Text(String(format: "home_small_talk_start_new".localized, totalMatches))
                         .font(.custom("NunitoSans-Regular", size: 14))
                         .foregroundColor(Color("orange_app"))
-                        .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 5)
+                .padding(.top, 8)
             }
-            
         }
-        .padding(.vertical, 20)
-        .padding(.horizontal, 12)
+        .padding(.vertical, 12)  // Marges verticales réduites
+        .padding(.horizontal, 10)  // Marges latérales globales réduites
         .background(Color("BeigeClair2"))
         .cornerRadius(15)
-        .padding(.horizontal, 15)
-        .padding(.vertical, 10)
+        .padding(.horizontal, 12)  // Padding externe réduit
+        .padding(.vertical, 8)  // Padding vertical externe réduit
     }
 }

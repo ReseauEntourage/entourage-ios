@@ -457,6 +457,10 @@ class HomeV2ViewController: UIViewController {
             }
         }
 
+        tableDTO.append(.cellTitle(
+            title: "home_v2_title_small_talk".localized,
+            subtitle: "home_v2_subtitle_small_talk".localized
+        ))
         tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
         tableDTO.append(.cellSolidarityTools)
 
@@ -717,18 +721,14 @@ extension HomeV2ViewController {
     }
     
     func getUserSmallTalkRequests() {
-        SmallTalkService.listUserSmallTalkRequests { requests, error in
-            if let requests = requests {
-                self.userSmallTalkRequests = requests
-            } else {
-                self.userSmallTalkRequests = []
-            }
+        SmallTalkService.listUserSmallTalkRequests { [weak self] requests, error in
+            guard let self = self else { return }
+            self.userSmallTalkRequests = requests ?? []
             DispatchQueue.main.async {
                 self.configureDTO()
             }
         }
     }
-    
     func getDemandes() {
         if isContributionPreference {
             ActionsService.getAllActions(isContrib: true, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
