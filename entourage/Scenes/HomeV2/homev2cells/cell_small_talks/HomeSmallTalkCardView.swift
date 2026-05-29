@@ -19,7 +19,7 @@ struct HomeSmallTalkCardView: View {
         case .initial:
             initialView
         case .pending(let count):
-            pendingView(count: count)
+            pendingView(count: 1) //here force one because there is only one possible
         case .active(let activeCount, let pendingCount, let totalUnread, let avatars):
             activeView(
                 activeCount: activeCount,
@@ -70,53 +70,43 @@ struct HomeSmallTalkCardView: View {
     }
     
     // MARK: - Pending View (Only pending discussions)
-    private func pendingView(count: Int) -> some View {
-        HStack(alignment: .center, spacing: 10) { // Espacement interne réduit
-            // 1. Icône de sablier
-            ZStack {
-                Circle()
-                    .fill(Color("orange_app").opacity(0.15))
-                    .frame(width: 36, height: 36) // Icône légèrement plus compacte
-                Image(systemName: "hourglass")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 18, height: 18)
-                    .foregroundColor(Color("orange_app"))
-            }
-            
-            // 2. Texte : Titre + Sous-titre
-            VStack(alignment: .leading, spacing: 0) { // Espacement entre textes réduit
-                Text("Vos discussions solidaires")
-                    .font(.custom("Quicksand-Bold", size: 14)) // Taille texte ajustée
-                    .foregroundColor(.black)
+        private func pendingView(count: Int) -> some View {
+            HStack(alignment: .center, spacing: 12) {
+                // 1. Icône de sablier (50x50 avec padding équivalent à 12dp)
+                ZStack {
+                    Circle()
+                        .fill(Color("orange_app").opacity(0.15))
+                        .frame(width: 50, height: 50)
+                    
+                    Image(systemName: "hourglass") // Remplacez par "ic_hourglass_small_talk" si c'est un asset custom
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 26, height: 26) // 50 - (12 * 2) = 26
+                        .foregroundColor(Color("orange_app"))
+                }
                 
-                let matchingText = count > 1
-                ? String(format: "home_small_talk_pending_plural".localized, count)
-                : String(format: "home_small_talk_pending_singular".localized, count)
-                
-                Text(matchingText)
-                    .font(.custom("NunitoSans-Regular", size: 13))
-                    .foregroundColor(Color("orange_app"))
+                // 2. Texte : Titre + Sous-titre
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Vos discussions solidaires")
+                        .font(.custom("Quicksand-Bold", size: 16))
+                        .foregroundColor(.black)
+                    
+                    let matchingText = count > 1
+                    ? String(format: "home_small_talk_pending_plural".localized, count)
+                    : String(format: "home_small_talk_pending_singular".localized, count)
+                    
+                    Text(matchingText)
+                        .font(.custom("NunitoSans-Regular", size: 13))
+                        .foregroundColor(Color("grey_dark"))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            
-            // 3. Bouton "Voir"
-            Button(action: { actionView() }) {
-                Text("Voir")
-                    .font(.custom("Quicksand-Bold", size: 13))
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 12) // Padding réduit
-                    .padding(.vertical, 6)    // Padding réduit
-                    .background(Color("orange_app"))
-                    .cornerRadius(16)         // Rayon ajusté
-            }
+            .padding(16) // Padding interne de la carte
+            .background(Color("BeigeClair2"))
+            .cornerRadius(15)
+            .padding(.horizontal, 14) // Marges horizontales réduites de 1dp (14 au lieu de 15)
+            .padding(.vertical, 10)   // Marges verticales réduites de 5dp (10 au lieu de 15)
         }
-        .padding(.vertical, 10) // Padding vertical global réduit
-        .padding(.horizontal, 10) // Padding horizontal global réduit (là où se trouvait la grosse marge)
-        .background(Color("BeigeClair2"))
-        .cornerRadius(12)
-        // Retrait des padding(.horizontal/vertical) qui entouraient le bloc
-    }
     
     private func activeView(activeCount: Int, pendingCount: Int, totalUnread: Int, avatars: [String]) -> some View {
         let totalMatches = activeCount + pendingCount
