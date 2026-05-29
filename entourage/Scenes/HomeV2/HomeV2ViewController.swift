@@ -457,10 +457,6 @@ class HomeV2ViewController: UIViewController {
             }
         }
 
-        tableDTO.append(.cellTitle(
-            title: "home_v2_title_small_talk".localized,
-            subtitle: "home_v2_subtitle_small_talk".localized
-        ))
         tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
         tableDTO.append(.cellSolidarityTools)
 
