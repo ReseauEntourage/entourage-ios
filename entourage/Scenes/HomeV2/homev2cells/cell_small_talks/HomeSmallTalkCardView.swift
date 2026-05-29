@@ -87,8 +87,8 @@ struct HomeSmallTalkCardView: View {
                 
                 // 2. Texte : Titre + Sous-titre
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Vos discussions solidaires")
-                        .font(.custom("Quicksand-Bold", size: 16))
+                    Text("Bientôt de nouvelles rencontres")
+                        .font(.custom("Quicksand-Bold", size: 15))
                         .foregroundColor(.black)
                     
                     let matchingText = count > 1
