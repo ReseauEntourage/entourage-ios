@@ -4,6 +4,7 @@ enum WelcomeEventType {
     case firstStep
     case webinar
     case papotages
+    case nationalGroups
 }
 
 class WelcomeEventsListViewModel: ObservableObject {

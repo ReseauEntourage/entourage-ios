@@ -4,6 +4,7 @@ import Combine
 
 enum WelcomeJourneyStepType: Equatable {
     case video
+    case nationalGroups
     case webinar
     case papotages
 }
@@ -30,15 +31,16 @@ class WelcomeJourneyViewModel: ObservableObject {
 
     var onStepTapped: ((WelcomeJourneyStepType) -> Void)?
 
-    func update(with userEvents: [String]?, hasInitiallyCompletedAll: inout Bool?) {
+    func update(with userEvents: [String]?, groupCount: Int, hasInitiallyCompletedAll: inout Bool?) {
         let events = userEvents ?? []
 
         // On se fie uniquement au backend pour l'état d'avancement
         let hasWatchedVideo = events.contains("onboarding.resource.welcome_watched")
+        let hasJoinedNationalGroup = events.contains("onboarding.neighborhood.nationals") || groupCount > 0
         let hasJoinedWebinar = events.contains("onboarding.outing.webinar_or_first_steps")
         let hasJoinedPapotages = events.contains("onboarding.outing.papotages")
 
-        let allCompleted = hasWatchedVideo && hasJoinedWebinar && hasJoinedPapotages
+        let allCompleted = hasWatchedVideo && hasJoinedNationalGroup && hasJoinedWebinar && hasJoinedPapotages
 
         if hasInitiallyCompletedAll == nil {
             hasInitiallyCompletedAll = allCompleted
@@ -55,13 +57,18 @@ class WelcomeJourneyViewModel: ObservableObject {
         var step1State: WelcomeJourneyStepState = hasWatchedVideo ? .completed : .active
         var step2State: WelcomeJourneyStepState = .future
         var step3State: WelcomeJourneyStepState = .future
+        var step4State: WelcomeJourneyStepState = .future
 
         if step1State == .completed {
-            step2State = hasJoinedWebinar ? .completed : .active
+            step2State = hasJoinedNationalGroup ? .completed : .active
         }
 
         if step2State == .completed {
-            step3State = hasJoinedPapotages ? .completed : .active
+            step3State = hasJoinedWebinar ? .completed : .active
+        }
+
+        if step3State == .completed {
+            step4State = hasJoinedPapotages ? .completed : .active
         }
 
         steps = [
@@ -74,12 +81,20 @@ class WelcomeJourneyViewModel: ObservableObject {
                 state: step1State
             ),
             WelcomeJourneyStep(
+                type: .nationalGroups,
+                title: "home_v2_welcome_national_title".localized,
+                subtitle: "home_v2_welcome_national_subtitle".localized,
+                buttonTitle: "home_v2_welcome_national_btn".localized,
+                iconName: "person.3.fill",
+                state: step2State
+            ),
+            WelcomeJourneyStep(
                 type: .webinar,
                 title: "home_v2_welcome_webinar_title".localized,
                 subtitle: "home_v2_welcome_webinar_subtitle".localized,
                 buttonTitle: "home_v2_welcome_webinar_btn".localized,
                 iconName: "person.2.fill",
-                state: step2State
+                state: step3State
             ),
             WelcomeJourneyStep(
                 type: .papotages,
@@ -87,7 +102,7 @@ class WelcomeJourneyViewModel: ObservableObject {
                 subtitle: "home_v2_welcome_papotages_subtitle".localized,
                 buttonTitle: "home_v2_welcome_papotages_btn".localized,
                 iconName: "message.fill",
-                state: step3State
+                state: step4State
             )
         ]
     }
@@ -104,7 +119,8 @@ class WelcomeJourneyViewModel: ObservableObject {
         case 0: return "home_v2_welcome_microcopy_0".localized
         case 1: return "home_v2_welcome_microcopy_1".localized
         case 2: return "home_v2_welcome_microcopy_2".localized
-        default: return "home_v2_welcome_microcopy_3".localized
+        case 3: return "home_v2_welcome_microcopy_3".localized
+        default: return "home_v2_welcome_microcopy_4".localized
         }
     }
 }
@@ -166,11 +182,11 @@ struct HomeWelcomeJourneyView: View {
                         ForEach(viewModel.steps.indices, id: \.self) { index in
                             let step = viewModel.steps[index]
                             WelcomeJourneyStepView(step: step) {
-                                if step.state == .active {
+                                if step.state != .future {
                                     viewModel.onStepTapped?(step.type)
                                 }
                             }
-                            .disabled(step.state != .active)
+                            .disabled(step.state == .future)
                         }
                     }
                     .padding(.horizontal, 16)

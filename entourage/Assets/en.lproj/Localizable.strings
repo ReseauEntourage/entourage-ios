@@ -2034,3 +2034,13 @@
 "home_small_talk_pending_plus_singular" = "+%d matching";
 "home_small_talk_start_new" = "+ Start a new discussion (%d/3)";
 "home_small_talk_view_button" = "See";
+
+// National Groups Welcome
+"welcome_national_groups_title" = "Thematic Groups";
+"welcome_national_groups_subtitle" = "Members all over France share your interests. Join them.";
+"welcome_national_groups_join" = "Join";
+"welcome_national_groups_joined" = "✓ Joined";
+"welcome_national_groups_snackbar" = "Your groups are accessible in the Groups tab";
+"home_v2_welcome_national_title" = "Join a group that suits you";
+"home_v2_welcome_national_subtitle" = "Members all over France share your interests. Join them.";
+"home_v2_welcome_national_btn" = "Discover groups";
