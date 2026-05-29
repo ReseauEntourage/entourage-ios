@@ -71,30 +71,31 @@ struct HomeSmallTalkCardView: View {
     
     // MARK: - Pending View (Only pending discussions)
     private func pendingView(count: Int) -> some View {
-        HStack(alignment: .center, spacing: 12) {
+        HStack(alignment: .center, spacing: 10) { // Espacement interne réduit
             // 1. Icône de sablier
             ZStack {
                 Circle()
                     .fill(Color("orange_app").opacity(0.15))
-                    .frame(width: 40, height: 40)
+                    .frame(width: 36, height: 36) // Icône légèrement plus compacte
                 Image(systemName: "hourglass")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 20, height: 20)
+                    .frame(width: 18, height: 18)
                     .foregroundColor(Color("orange_app"))
             }
             
             // 2. Texte : Titre + Sous-titre
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 0) { // Espacement entre textes réduit
                 Text("Vos discussions solidaires")
-                    .font(.custom("Quicksand-Bold", size: 15))
+                    .font(.custom("Quicksand-Bold", size: 14)) // Taille texte ajustée
                     .foregroundColor(.black)
                 
                 let matchingText = count > 1
-                ? String(format: "home_small_talk_matching_plural".localized, count)
-                : String(format: "home_small_talk_matching_singular".localized, count)
+                ? String(format: "home_small_talk_pending_plural".localized, count)
+                : String(format: "home_small_talk_pending_singular".localized, count)
+                
                 Text(matchingText)
-                    .font(.custom("NunitoSans-Regular", size: 14))
+                    .font(.custom("NunitoSans-Regular", size: 13))
                     .foregroundColor(Color("orange_app"))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -102,20 +103,19 @@ struct HomeSmallTalkCardView: View {
             // 3. Bouton "Voir"
             Button(action: { actionView() }) {
                 Text("Voir")
-                    .font(.custom("Quicksand-Bold", size: 14))
+                    .font(.custom("Quicksand-Bold", size: 13))
                     .foregroundColor(.white)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
+                    .padding(.horizontal, 12) // Padding réduit
+                    .padding(.vertical, 6)    // Padding réduit
                     .background(Color("orange_app"))
-                    .cornerRadius(20)
+                    .cornerRadius(16)         // Rayon ajusté
             }
         }
-        .padding(.vertical, 16)
-        .padding(.horizontal, 12)
+        .padding(.vertical, 10) // Padding vertical global réduit
+        .padding(.horizontal, 10) // Padding horizontal global réduit (là où se trouvait la grosse marge)
         .background(Color("BeigeClair2"))
-        .cornerRadius(15)
-        .padding(.horizontal, 15)
-        .padding(.vertical, 10)
+        .cornerRadius(12)
+        // Retrait des padding(.horizontal/vertical) qui entouraient le bloc
     }
     
     private func activeView(activeCount: Int, pendingCount: Int, totalUnread: Int, avatars: [String]) -> some View {
