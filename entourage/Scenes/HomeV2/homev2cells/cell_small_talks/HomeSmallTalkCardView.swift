@@ -56,7 +56,8 @@ struct HomeSmallTalkCardView: View {
                 }
             }
         }
-        .padding(20)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 12)
         .background(Color("BeigeClair2"))
         .cornerRadius(15)
         .padding(.horizontal, 15)
@@ -88,7 +89,8 @@ struct HomeSmallTalkCardView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(20)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 12)
         .background(Color("BeigeClair2"))
         .cornerRadius(15)
         .padding(.horizontal, 15)
@@ -129,15 +131,15 @@ struct HomeSmallTalkCardView: View {
                                 }
                             }
                         }
-                        .frame(width: 40, height: 40)
+                        .frame(width: 34, height: 34)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color("BeigeClair2"), lineWidth: 2))
-                        .offset(x: CGFloat(index * 25))
+                        .offset(x: CGFloat(index * 20))
                         .zIndex(Double(avatars.count - index))
                     }
                 }
-                .frame(width: CGFloat(40 + (min(avatars.count, 2) - 1) * 25), height: 40)
-                .padding(.top, 2)
+                .frame(width: CGFloat(34 + (min(avatars.count, 2) - 1) * 20), height: 34)
+                .padding(.top, 4)
                 
                 // 2. Les Textes de statut
                 VStack(alignment: .leading, spacing: 6) {
@@ -147,8 +149,13 @@ struct HomeSmallTalkCardView: View {
                         Text("home_small_talk_active_title".localized)
                             .font(.custom("Quicksand-Bold", size: 15))
                             .foregroundColor(.black)
-                            .lineLimit(1)
+                            .lineLimit(2)
                         
+                        let textActive = activeCount > 1 ? String(format: "home_small_talk_active_plural".localized, activeCount) : String(format: "home_small_talk_active_singular".localized, activeCount)
+                        Text(textActive)
+                            .font(.custom("NunitoSans-Regular", size: 14))
+                            .foregroundColor(Color("blue_app"))
+
                         if pendingCount > 0 {
                             let textPending = pendingCount > 1 ? String(format: "home_small_talk_pending_plus_plural".localized, pendingCount) : String(format: "home_small_talk_pending_plus_singular".localized, pendingCount)
                             Text(textPending)
@@ -156,11 +163,6 @@ struct HomeSmallTalkCardView: View {
                                 .foregroundColor(Color("orange_app"))
                         }
                     }
-                    
-                    let textActive = activeCount > 1 ? String(format: "home_small_talk_active_plural".localized, activeCount) : String(format: "home_small_talk_active_singular".localized, activeCount)
-                    Text(textActive)
-                        .font(.custom("NunitoSans-Regular", size: 14))
-                        .foregroundColor(Color("blue_app"))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -172,10 +174,10 @@ struct HomeSmallTalkCardView: View {
                         Text("home_small_talk_view_button".localized)
                             .font(.custom("Quicksand-Bold", size: 14))
                             .foregroundColor(.white)
-                            .padding(.horizontal, 12)
-                            .frame(height: 40)
+                            .padding(.horizontal, 10)
+                            .frame(height: 34)
                             .background(Color("orange_app"))
-                            .cornerRadius(20)
+                            .cornerRadius(17)
                     }
                     
                     if totalUnread > 0 {
@@ -206,7 +208,8 @@ struct HomeSmallTalkCardView: View {
             }
             
         }
-        .padding(20)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 12)
         .background(Color("BeigeClair2"))
         .cornerRadius(15)
         .padding(.horizontal, 15)
