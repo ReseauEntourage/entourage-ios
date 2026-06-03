@@ -49,14 +49,14 @@ struct WelcomeNationalGroupsListView: View {
                         .renderingMode(.template)
                         .foregroundColor(.black)
                 }
-                .padding(.leading, 16)
+                .padding(.leading, 10)
                 .padding(.top, 10)
 
                 // Title - aligned to left, below back button
                 Text("welcome_national_groups_title".localized)
                     .font(.custom("Quicksand-Bold", size: 18))
                     .foregroundColor(.black)
-                    .padding(.horizontal, 5)
+                    .padding(.horizontal, 20)
                     .padding(.top, 8)
 
                 // Subtitle - aligned to left, below title
