@@ -90,7 +90,7 @@ struct WelcomeNationalGroupsListView: View {
             } else {
                 ScrollView {
                     // Alignement à gauche
-                    LazyVStack(alignment: .leading, spacing: 16) {
+                    LazyVStack(alignment: .leading, spacing: 5) {
                         ForEach(viewModel.groups, id: \.uid) { group in
                             NationalGroupListCellWrap(
                                 group: group,
@@ -183,7 +183,7 @@ struct WelcomeNationalGroupsListView: View {
                     Text(group.name)
                         .font(.custom("Quicksand-Bold", size: 15))
                         .foregroundColor(.black)
-                        .lineLimit(2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
                     let memberString = group.membersCount > 1 ? String(format: "neighborhood_main_page_members".localized, group.membersCount) : String(format: "neighborhood_main_page_member".localized, group.membersCount)
                     Text(memberString)
@@ -193,7 +193,7 @@ struct WelcomeNationalGroupsListView: View {
                 }
                 .padding(.vertical, 4)
 
-                Spacer(minLength: 8)
+                Spacer(minLength: 0)
 
                 Button(action: onJoinTapped) {
                     if isJoining {
