@@ -89,7 +89,8 @@ struct WelcomeNationalGroupsListView: View {
                 Spacer()
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 16) {
+                    // Alignement à gauche
+                    LazyVStack(alignment: .leading, spacing: 16) {
                         ForEach(viewModel.groups, id: \.uid) { group in
                             NationalGroupListCellWrap(
                                 group: group,
@@ -222,10 +223,7 @@ struct WelcomeNationalGroupsListView: View {
             .padding(12)
             .background(Color.white)
             .cornerRadius(16)
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color("orange_light_a50"), lineWidth: 1)
-            )
+            // Le liseré (overlay) a été supprimé ici
         }
     }
 }
