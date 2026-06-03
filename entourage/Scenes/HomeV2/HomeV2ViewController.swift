@@ -395,7 +395,7 @@ class HomeV2ViewController: UIViewController {
         }
 
         let welcomeJourneyVM = WelcomeJourneyViewModel()
-        welcomeJourneyVM.update(with: userHome.events, hasInitiallyCompletedAll: &self.hasInitiallyCompletedAll)
+        welcomeJourneyVM.update(with: userHome.events, groupCount: userHome.neighborhoodParticipationsCount, hasInitiallyCompletedAll: &self.hasInitiallyCompletedAll)
 
         let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
         let isUserProOrTeam = (UserDefaults.currentUser?.partner != nil)
@@ -610,6 +610,11 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 self?.initHome()
             }
             self.present(modalVC, animated: true)
+
+        case .nationalGroups:
+            let vc = WelcomeNationalGroupsListViewController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
 
         case .webinar:
             let vc = WelcomeEventsListViewController()
@@ -926,6 +931,40 @@ extension HomeV2ViewController {
         }
     }
     
+    func showWelcomeNationalGroupSnackbar() {
+        // Simple toast style snackbar as requested.
+        // It triggers the navigation when tapped.
+        let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first
+        let safeBottom = window?.safeAreaInsets.bottom ?? 0
+
+        let snackbar = UIButton(type: .system)
+        snackbar.setTitle("welcome_national_groups_snackbar".localized, for: .normal)
+        snackbar.setTitleColor(.white, for: .normal)
+        snackbar.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 14)
+        snackbar.backgroundColor = UIColor(named: "orange_app")
+        snackbar.layer.cornerRadius = 8
+        snackbar.frame = CGRect(x: 20, y: self.view.frame.height - safeBottom - 100, width: self.view.frame.width - 40, height: 50)
+
+        snackbar.addTarget(self, action: #selector(onWelcomeNationalGroupSnackbarTapped(_:)), for: .touchUpInside)
+
+        self.view.addSubview(snackbar)
+
+        UIView.animate(withDuration: 4.0, delay: 0, options: .curveEaseInOut) {
+            snackbar.alpha = 0.99
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5) {
+                snackbar.alpha = 0
+            } completion: { _ in
+                snackbar.removeFromSuperview()
+            }
+        }
+    }
+
+    @objc func onWelcomeNationalGroupSnackbarTapped(_ sender: UIButton) {
+        sender.removeFromSuperview()
+        DeepLinkManager.showNeiborhoodListUniversalLink()
+    }
+
     func showAllPois() {
         let sb = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "MainGuide") as? MainGuideViewController {

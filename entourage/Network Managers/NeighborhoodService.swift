@@ -91,6 +91,12 @@ struct NeighborhoodService:ParsingDataCodable {
         endpoint = String.init(format: endpoint, token, currentPage, per)
         getNeighborhoodsWithEndpoint(endpoint, completion)
     }
+
+    static func getNationalNeighborhoods(completion: @escaping (_ groups:[Neighborhood]?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String(format: kAPIGetNationalNeighborhoods, token)
+        getNeighborhoodsWithEndpoint(endpoint, completion)
+    }
     
     static func getSuggestFilteredNeighborhoods(currentPage:Int, per:Int,radius:Float ,latitude:Float ,longitude:Float ,selectedItem:[String],  completion: @escaping (_ groups:[Neighborhood]?, _ error:EntourageNetworkError?) -> Void) {
         
