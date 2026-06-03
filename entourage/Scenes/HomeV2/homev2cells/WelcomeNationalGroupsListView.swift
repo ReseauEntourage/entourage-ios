@@ -204,9 +204,9 @@ struct WelcomeNationalGroupsListView: View {
                     } else if group.isMember {
                         Text("welcome_national_groups_joined".localized)
                             .font(.custom("NunitoSans-Bold", size: 13))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("orange_app"))
                             .frame(minWidth: 80, minHeight: 32)
-                            .background(Color("green_middle"))
+                            .background(Color("Beige"))
                             .cornerRadius(16)
                     } else {
                         Text("welcome_national_groups_join".localized)

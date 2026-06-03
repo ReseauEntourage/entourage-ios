@@ -2058,7 +2058,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_national_groups_title" = "Groupes thématiques";
 "welcome_national_groups_subtitle" = "Des membres partout en France partagent vos centres d'intérêt. Rejoignez-les.";
 "welcome_national_groups_join" = "Rejoindre";
-"welcome_national_groups_joined" = "✓ Rejoint";
+"welcome_national_groups_joined" = "Rejoint ✓";
 "welcome_national_groups_snackbar" = "Vos groupes sont accessibles dans l'onglet Groupes";
 "home_v2_welcome_national_title" = "Rejoignez un groupe qui vous ressemble";
 "home_v2_welcome_national_subtitle" = "Des membres partout en France partagent vos centres d'intérêt. Rejoignez-les.";
