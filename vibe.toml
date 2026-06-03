@@ -1,0 +1,91 @@
+# Vibe configuration for Entourage iOS project
+# This file configures the Vibe CLI agent for this iOS project
+
+[project]
+name = "entourage-ios"
+type = "ios"
+language = "swift"
+
+[build]
+# Xcode project configuration
+xcode_project = "entourage.xcodeproj"
+xcode_scheme = "Entourage-ios"
+xcode_workspace = ""
+
+# Build directories
+build_directory = "build"
+derived_data_path = "DerivedData"
+
+[ci_cd]
+# Bitrise configuration
+ci_provider = "bitrise"
+bitrise_config = "bitrise.yml"
+
+[dependencies]
+# Dependency management
+package_manager = "cocoapods"
+podfile_path = "Podfile"
+
+[configuration]
+# API keys and sensitive configuration
+api_keys_file = "ApiKeys.plist"
+api_keys_template = "ApiKeys.dist.plist"
+
+# App configurations
+app_config_file = "AppConfigurations.plist"
+
+[testing]
+test_scheme = "Entourage-ios"
+test_destination = "platform=iOS Simulator,name=iPhone 16,OS=18.3.1"
+
+[code_quality]
+# SwiftLint configuration (if used)
+swiftlint_config = ".swiftlint.yml"
+enable_swiftlint = false
+
+[features]
+# Feature flags and toggle
+enable_firebase = true
+enable_crashlytics = true
+enable_analytics = false
+
+[directories]
+# Important project directories
+source_root = "entourage"
+assets_directory = "entourage/Assets"
+fonts_directory = "Fonts"
+scripts_directory = "Scripts"
+
+[environment]
+# Environment variables for local development
+# These can be overridden by CI/CD
+ENVIRONMENT = "development"
+API_BASE_URL = "https://api.entourage.social"
+
+[tools]
+# Tools and their versions
+xcode_version = "15.0"
+swift_version = "5.9"
+cocoapods_version = "1.12.0"
+
+[git]
+# Git configuration
+main_branch = "master"
+develop_branch = "develop"
+
+[documentation]
+# Documentation files
+readme = "README.md"
+overview = "OVERVIEW.md"
+contributing = "CONTRIBUTING.md"
+
+[secrets]
+# Secret management (these should not be committed)
+# HMAC secret for request signing
+hmac_secret_env = "HMAC_SECRET_IOS"
+api_key_env = "API_KEY_IOS"
+
+[notifications]
+# Notification settings
+enable_build_notifications = true
+notification_platform = "slack"
