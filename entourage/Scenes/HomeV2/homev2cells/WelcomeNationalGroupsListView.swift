@@ -37,32 +37,35 @@ struct WelcomeNationalGroupsListView: View {
         VStack(spacing: 0) {
             // Header
             VStack(alignment: .leading, spacing: 0) {
-                HStack(alignment: .top, spacing: 16) {
-                    Button(action: {
-                        if hasJoinedAGroup {
-                            onGroupsTabRequested?()
-                        } else {
-                            onBack?()
-                        }
-                    }) {
-                        Image("back_arrow")
-                            .renderingMode(.template)
-                            .foregroundColor(.black)
+                // Back button - aligned to top left
+                Button(action: {
+                    if hasJoinedAGroup {
+                        onGroupsTabRequested?()
+                    } else {
+                        onBack?()
                     }
-
-                    Text("welcome_national_groups_title".localized)
-                        .font(.custom("Quicksand-Bold", size: 18))
+                }) {
+                    Image("back_arrow")
+                        .renderingMode(.template)
                         .foregroundColor(.black)
                 }
+                .padding(.leading, 16)
+                .padding(.top, 10)
 
-                // Subtitle
+                // Title - aligned to left, below back button
+                Text("welcome_national_groups_title".localized)
+                    .font(.custom("Quicksand-Bold", size: 18))
+                    .foregroundColor(.black)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+
+                // Subtitle - aligned to left, below title
                 Text("welcome_national_groups_subtitle".localized)
                     .font(.custom("NunitoSans-Regular", size: 15))
                     .foregroundColor(.black)
-                    .padding(.top, 8)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 4)
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 10)
             .padding(.bottom, 20)
 
             // Content
