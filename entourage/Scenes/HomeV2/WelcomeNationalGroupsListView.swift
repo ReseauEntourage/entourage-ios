@@ -34,61 +34,59 @@ struct WelcomeNationalGroupsListView: View {
     @State private var hasJoinedAGroup: Bool = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Header
-            VStack(alignment: .leading, spacing: 0) {
-                // Back button - aligned to top left
-                Button(action: {
-                    if hasJoinedAGroup {
-                        onGroupsTabRequested?()
-                    } else {
-                        onBack?()
+        ScrollView {
+            VStack(spacing: 0) {
+                // Header
+                VStack(alignment: .leading, spacing: 0) {
+                    // Back button - aligned to top left
+                    Button(action: {
+                        if hasJoinedAGroup {
+                            onGroupsTabRequested?()
+                        } else {
+                            onBack?()
+                        }
+                    }) {
+                        Image("back_arrow")
+                            .renderingMode(.template)
+                            .foregroundColor(.black)
                     }
-                }) {
-                    Image("back_arrow")
-                        .renderingMode(.template)
+                    .padding(.leading, 10)
+                    .padding(.top, 10)
+
+                    // Title - aligned to left, below back button
+                    Text("welcome_national_groups_title".localized)
+                        .font(.custom("Quicksand-Bold", size: 18))
                         .foregroundColor(.black)
-                }
-                .padding(.leading, 10)
-                .padding(.top, 10)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 8)
 
-                // Title - aligned to left, below back button
-                Text("welcome_national_groups_title".localized)
-                    .font(.custom("Quicksand-Bold", size: 18))
-                    .foregroundColor(.black)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
-
-                // Subtitle - aligned to left, below title
-                Text("welcome_national_groups_subtitle".localized)
-                    .font(.custom("NunitoSans-Regular", size: 15))
-                    .foregroundColor(.black)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 4)
-            }
-            .padding(.bottom, 20)
-
-            // Content
-            if viewModel.isLoading {
-                Spacer()
-                HStack {
-                    Spacer()
-                    ProgressView()
-                    Spacer()
-                }
-                Spacer()
-            } else if viewModel.groups.isEmpty || viewModel.hasError {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Text("no_events_found".localized) // TODO: create a generic one or use existing
-                        .font(.custom("NunitoSans-Regular", size: 16))
+                    // Subtitle - aligned to left, below title
+                    Text("welcome_national_groups_subtitle".localized)
+                        .font(.custom("NunitoSans-Regular", size: 15))
                         .foregroundColor(.black)
-                    Spacer()
+                        .padding(.horizontal, 20)
+                        .padding(.top, 4)
                 }
-                Spacer()
-            } else {
-                ScrollView {
+                .padding(.bottom, 20)
+
+                // Content
+                if viewModel.isLoading {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    .padding(.vertical, 50)
+                } else if viewModel.groups.isEmpty || viewModel.hasError {
+                    HStack {
+                        Spacer()
+                        Text("no_events_found".localized)
+                            .font(.custom("NunitoSans-Regular", size: 16))
+                            .foregroundColor(.black)
+                        Spacer()
+                    }
+                    .padding(.vertical, 50)
+                } else {
                     // Alignement à gauche
                     LazyVStack(alignment: .leading, spacing: 5) {
                         ForEach(viewModel.groups, id: \.uid) { group in
@@ -192,6 +190,7 @@ struct WelcomeNationalGroupsListView: View {
                         .lineLimit(1)
                 }
                 .padding(.vertical, 4)
+                .padding(.bottom, 8) // Ajout de marge entre le titre du groupe et le CTA rejoindre
 
                 Spacer(minLength: 0)
 

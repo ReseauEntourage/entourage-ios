@@ -49,13 +49,11 @@ struct WelcomeEventsListView: View {
     var onEventTapped: ((Event) -> Void)?
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            
-            // Header
-            VStack(alignment: .leading, spacing: 16) {
-                
-                // Top Navigation (Arrow + Title)
-                HStack(alignment: .center, spacing: 16) {
+        ScrollView {
+            VStack(spacing: 0) {
+                // Header
+                VStack(alignment: .leading, spacing: 0) {
+                    // Back button - aligned to top left
                     Button(action: {
                         onBack?()
                     }) {
@@ -63,47 +61,47 @@ struct WelcomeEventsListView: View {
                             .renderingMode(.template)
                             .foregroundColor(.black)
                     }
-                    
+                    .padding(.leading, 10)
+                    .padding(.top, 10)
+
+                    // Title - aligned to left, below back button
                     Text(viewModel.type == .firstStep ? "welcome_welcome_list_title".localized :
                          viewModel.type == .webinar ? "welcome_webinar_list_title".localized :
                          "welcome_papotages_list_title".localized)
                         .font(.custom("Quicksand-Bold", size: 18))
                         .foregroundColor(.black)
-                }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 8)
 
-                // Subtitle
-                Text(viewModel.type == .firstStep ? "welcome_welcome_list_subtitle".localized :
-                        viewModel.type == .webinar ? "welcome_webinar_list_subtitle".localized :
-                        "welcome_papotages_list_subtitle".localized)
-                .font(.custom("NunitoSans-Regular", size: 15))
-                .foregroundColor(.black)
-                .padding(.top, 8) // Un petit padding pour respirer si besoin
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 10)
-            .padding(.bottom, 20)
-            
-            // Content
-            if viewModel.isLoading {
-                Spacer()
-                HStack {
-                    Spacer()
-                    ProgressView()
-                    Spacer()
-                }
-                Spacer()
-            } else if viewModel.events.isEmpty || viewModel.hasError {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Text("no_events_found".localized)
-                        .font(.custom("NunitoSans-Regular", size: 16))
+                    // Subtitle - aligned to left, below title
+                    Text(viewModel.type == .firstStep ? "welcome_welcome_list_subtitle".localized :
+                            viewModel.type == .webinar ? "welcome_webinar_list_subtitle".localized :
+                            "welcome_papotages_list_subtitle".localized)
+                        .font(.custom("NunitoSans-Regular", size: 15))
                         .foregroundColor(.black)
-                    Spacer()
+                        .padding(.horizontal, 20)
+                        .padding(.top, 4)
                 }
-                Spacer()
-            } else {
-                ScrollView {
+                .padding(.bottom, 20)
+                
+                // Content
+                if viewModel.isLoading {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    .padding(.vertical, 50)
+                } else if viewModel.events.isEmpty || viewModel.hasError {
+                    HStack {
+                        Spacer()
+                        Text("no_events_found".localized)
+                            .font(.custom("NunitoSans-Regular", size: 16))
+                            .foregroundColor(.black)
+                        Spacer()
+                    }
+                    .padding(.vertical, 50)
+                } else {
                     // MODIFICATION ICI : L'espacement est uniquement géré ici maintenant (16 points nets)
                     LazyVStack(spacing: 16) {
                         ForEach(viewModel.events, id: \.uid) { event in
