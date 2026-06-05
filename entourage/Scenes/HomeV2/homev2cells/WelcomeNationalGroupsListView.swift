@@ -49,7 +49,7 @@ struct WelcomeNationalGroupsListView: View {
                         .renderingMode(.template)
                         .foregroundColor(.black)
                 }
-                .padding(.leading, 16)
+                .padding(.leading, 10)
                 .padding(.top, 10)
 
                 // Title - aligned to left, below back button
@@ -89,7 +89,7 @@ struct WelcomeNationalGroupsListView: View {
                 Spacer()
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 5) {
+                    LazyVStack(spacing: 16) {
                         ForEach(viewModel.groups, id: \.uid) { group in
                             NationalGroupListCellWrap(
                                 group: group,
@@ -161,28 +161,32 @@ struct WelcomeNationalGroupsListView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                         }
-                        .frame(width: 64, height: 64)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .frame(width: 94, height: 94)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                     } else {
                         Image("ic_placeholder_group")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 64, height: 64)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .frame(width: 94, height: 94)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
                     }
                 } else {
                     Image("ic_placeholder_group")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 64, height: 64)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .frame(width: 94, height: 94)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(group.name)
-                        .font(.custom("Quicksand-Bold", size: 15))
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HStack(alignment: .top) {
+                        Text(group.name)
+                            .font(.custom("Quicksand-Bold", size: 15))
+                            .foregroundColor(.black)
+                            .lineLimit(2)
+                        Spacer()
+                    }
+                    .padding(.top, 4)
 
                     let memberString = group.membersCount > 1 ? String(format: "neighborhood_main_page_members".localized, group.membersCount) : String(format: "neighborhood_main_page_member".localized, group.membersCount)
                     Text(memberString)
@@ -190,7 +194,6 @@ struct WelcomeNationalGroupsListView: View {
                         .foregroundColor(Color("gris_112"))
                         .lineLimit(1)
                 }
-                .padding(.vertical, 4)
 
                 Spacer(minLength: 0)
 

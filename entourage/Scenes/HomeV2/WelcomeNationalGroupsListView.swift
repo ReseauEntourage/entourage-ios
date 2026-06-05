@@ -38,7 +38,7 @@ struct WelcomeNationalGroupsListView: View {
             VStack(spacing: 0) {
                 // Header
                 VStack(alignment: .leading, spacing: 0) {
-                    // Back button - aligned to top left
+                    // Back button
                     Button(action: {
                         if hasJoinedAGroup {
                             onGroupsTabRequested?()
@@ -50,21 +50,21 @@ struct WelcomeNationalGroupsListView: View {
                             .renderingMode(.template)
                             .foregroundColor(.black)
                     }
-                    .padding(.leading, 10)
+                    .padding(.leading, 2)
                     .padding(.top, 10)
 
-                    // Title - aligned to left, below back button
+                    // Title
                     Text("welcome_national_groups_title".localized)
                         .font(.custom("Quicksand-Bold", size: 18))
                         .foregroundColor(.black)
-                        .padding(.horizontal, 20)
+                        .padding(.horizontal, 12)
                         .padding(.top, 8)
 
-                    // Subtitle - aligned to left, below title
+                    // Subtitle
                     Text("welcome_national_groups_subtitle".localized)
                         .font(.custom("NunitoSans-Regular", size: 15))
                         .foregroundColor(.black)
-                        .padding(.horizontal, 20)
+                        .padding(.horizontal, 12)
                         .padding(.top, 4)
                 }
                 .padding(.bottom, 20)
@@ -87,8 +87,7 @@ struct WelcomeNationalGroupsListView: View {
                     }
                     .padding(.vertical, 50)
                 } else {
-                    // Alignement à gauche
-                    LazyVStack(alignment: .leading, spacing: 5) {
+                    LazyVStack(spacing: 16) {
                         ForEach(viewModel.groups, id: \.uid) { group in
                             NationalGroupListCellWrap(
                                 group: group,
@@ -140,89 +139,89 @@ struct WelcomeNationalGroupsListView: View {
             }
         }
     }
+}
 
-    struct NationalGroupListCellWrap: View {
-        let group: Neighborhood
-        let isJoining: Bool
-        let onJoinTapped: () -> Void
+struct NationalGroupListCellWrap: View {
+    let group: Neighborhood
+    let isJoining: Bool
+    let onJoinTapped: () -> Void
 
-        var body: some View {
-            HStack(alignment: .top, spacing: 12) {
-                // Image
-                if let urlString = group.image_url, !urlString.isEmpty, let url = URL(string: urlString) {
-                    if #available(iOS 15.0, *) {
-                        AsyncImage(url: url) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        } placeholder: {
-                            Image("ic_placeholder_group")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        }
-                        .frame(width: 64, height: 64)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                    } else {
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            // Image
+            if let urlString = group.image_url, !urlString.isEmpty, let url = URL(string: urlString) {
+                if #available(iOS 15.0, *) {
+                    AsyncImage(url: url) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    } placeholder: {
                         Image("ic_placeholder_group")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 64, height: 64)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
+                    .frame(width: 94, height: 94)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
                 } else {
                     Image("ic_placeholder_group")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 64, height: 64)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .frame(width: 94, height: 94)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(group.name)
-                        .font(.custom("Quicksand-Bold", size: 15))
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                    let memberString = group.membersCount > 1 ? String(format: "neighborhood_main_page_members".localized, group.membersCount) : String(format: "neighborhood_main_page_member".localized, group.membersCount)
-                    Text(memberString)
-                        .font(.custom("NunitoSans-Light", size: 13))
-                        .foregroundColor(Color("gris_112"))
-                        .lineLimit(1)
-                }
-                .padding(.vertical, 4)
-                .padding(.bottom, 8) // Ajout de marge entre le titre du groupe et le CTA rejoindre
-
-                Spacer(minLength: 0)
-
-                Button(action: onJoinTapped) {
-                    if isJoining {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            .frame(minWidth: 80, minHeight: 32)
-                            .background(Color("orange_app").opacity(0.5))
-                            .cornerRadius(16)
-                    } else if group.isMember {
-                        Text("welcome_national_groups_joined".localized)
-                            .font(.custom("NunitoSans-Bold", size: 13))
-                            .foregroundColor(Color("orange_app"))
-                            .frame(minWidth: 80, minHeight: 32)
-                            .background(Color("Beige"))
-                            .cornerRadius(16)
-                    } else {
-                        Text("welcome_national_groups_join".localized)
-                            .font(.custom("NunitoSans-Bold", size: 13))
-                            .foregroundColor(.white)
-                            .frame(minWidth: 80, minHeight: 32)
-                            .background(Color("orange_app"))
-                            .cornerRadius(16)
-                    }
-                }
-                .padding(.top, 16)
+            } else {
+                Image("ic_placeholder_group")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 94, height: 94)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
             }
-            .padding(12)
-            .background(Color.white)
-            .cornerRadius(16)
-            // Le liseré (overlay) a été supprimé ici
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(group.name)
+                    .font(.custom("Quicksand-Bold", size: 15))
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                let memberString = group.membersCount > 1
+                    ? String(format: "neighborhood_main_page_members".localized, group.membersCount)
+                    : String(format: "neighborhood_main_page_member".localized, group.membersCount)
+                Text(memberString)
+                    .font(.custom("NunitoSans-Light", size: 13))
+                    .foregroundColor(Color("gris_112"))
+                    .lineLimit(1)
+            }
+            .padding(.vertical, 4)
+            .padding(.bottom, 8)
+
+            Spacer(minLength: 0)
+
+            Button(action: onJoinTapped) {
+                if isJoining {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .frame(minWidth: 80, minHeight: 32)
+                        .background(Color("orange_app").opacity(0.5))
+                        .cornerRadius(16)
+                } else if group.isMember {
+                    Text("welcome_national_groups_joined".localized)
+                        .font(.custom("NunitoSans-Bold", size: 13))
+                        .foregroundColor(Color("orange_app"))
+                        .frame(minWidth: 80, minHeight: 32)
+                        .background(Color("Beige"))
+                        .cornerRadius(16)
+                } else {
+                    Text("welcome_national_groups_join".localized)
+                        .font(.custom("NunitoSans-Bold", size: 13))
+                        .foregroundColor(.white)
+                        .frame(minWidth: 80, minHeight: 32)
+                        .background(Color("orange_app"))
+                        .cornerRadius(16)
+                }
+            }
+            .padding(.top, 16)
         }
+        .contentShape(Rectangle())
+        .background(Color.white)
     }
 }
