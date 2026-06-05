@@ -46,6 +46,7 @@ class WelcomeJourneyViewModel: ObservableObject {
             hasInitiallyCompletedAll = allCompleted
         }
 
+        // Si l'utilisateur avait déjà tout complété initialement, on cache entièrement
         if hasInitiallyCompletedAll == true {
             self.hideEntirely = true
             return
