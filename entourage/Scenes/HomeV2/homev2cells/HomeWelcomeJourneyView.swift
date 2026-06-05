@@ -152,19 +152,10 @@ struct HomeWelcomeJourneyView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 4)
 
-                // Micro-copy sous la jauge
-                if viewModel.completedCount >= 2 {
-                    Text("home_v2_welcome_microcopy_2".localized)
-                        .font(.custom("NunitoSans-Regular", size: 13))
-                        .foregroundColor(Color.gray)
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 16)
-                }
-
                 if viewModel.isFullyCompleted {
                     // Success Layout
                     VStack(spacing: 0) {
-                        Text("home_v2_welcome_microcopy_3".localized)
+                        Text("home_v2_welcome_microcopy_4".localized)
                             .font(.custom("Quicksand-Bold", size: 15))
                             .foregroundColor(Color("green_middle"))
                             .multilineTextAlignment(.center)

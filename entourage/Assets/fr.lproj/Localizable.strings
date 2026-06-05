@@ -1975,8 +1975,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_progress" = "%d étape(s) sur %d complétée(s)";
 "home_v2_welcome_microcopy_0" = "Commençons 💛";
 "home_v2_welcome_microcopy_1" = "Vous êtes bien lancé(e) ✨";
-"home_v2_welcome_microcopy_2" = "Plus qu'une étape pour rejoindre la communauté 🎉";
-"home_v2_welcome_microcopy_3" = "Intégration complète ! Tu fais maintenant partie de la communauté !";
+"home_v2_welcome_microcopy_2" = "Vous faites partie d'une communauté 🙌";
+"home_v2_welcome_microcopy_3" = "Plus qu'une étape pour rejoindre la communauté 🎉";
+"home_v2_welcome_microcopy_4" = "Intégration complète ! Vous faites maintenant partie de la communauté !";
 "home_v2_welcome_video_title" = "1 min pour tout comprendre";
 "home_v2_welcome_video_subtitle" = "Qui sommes-nous, comment ça marche, et comment vous pouvez agir en 1 minute";
 "home_v2_welcome_video_btn" = "Regarder la vidéo";
