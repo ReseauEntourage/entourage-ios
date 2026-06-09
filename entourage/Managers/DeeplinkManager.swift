@@ -331,7 +331,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     vc.delegate = currentVc.self
                     currentVc.present(vc, animated: true)
                 }
@@ -349,7 +349,7 @@ struct DeepLinkManager {
                     let modalVC = WelcomeVideoModalViewController()
                     modalVC.modalPresentationStyle = .overFullScreen
                     modalVC.modalTransitionStyle = .crossDissolve
-                    if let homeVC = AppState.getTopViewController() as? HomeV2ViewController {
+                    if let homeVC = AppState.getTopViewController() as? HomeMainViewController {
                         modalVC.onComplete = { [weak homeVC] in
                             homeVC?.initHome()
                         }
@@ -368,7 +368,7 @@ struct DeepLinkManager {
                             let modalVC = WelcomeVideoModalViewController()
                             modalVC.modalPresentationStyle = .overFullScreen
                             modalVC.modalTransitionStyle = .crossDissolve
-                            if let homeVC = AppState.getTopViewController() as? HomeV2ViewController {
+                            if let homeVC = AppState.getTopViewController() as? HomeMainViewController {
                                 modalVC.onComplete = { [weak homeVC] in
                                     homeVC?.initHome()
                                 }
@@ -396,7 +396,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     vc.delegate = currentVc.self
                     currentVc.present(vc, animated: true)
                 }
@@ -408,7 +408,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomethreevc") as? WelcomeThreeViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     vc.delegate = currentVc.self
                     currentVc.present(vc, animated: true)
                 }
@@ -420,7 +420,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -431,7 +431,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomefivevc") as? WelcomeFiveViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -528,7 +528,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             if let vc = AppState.getTopViewController() {
                 if let _tabbar = vc.tabBarController as? MainTabbarViewController {
-                    if let homeVC = vc as? HomeV2ViewController {
+                    if let homeVC = vc as? HomeMainViewController {
                         homeVC.shouldLaunchEventPopup = eventId
                         _tabbar.showHome()
                     }
@@ -536,7 +536,7 @@ struct DeepLinkManager {
                 else{
                     vc.dismiss(animated: true) {
                         let _currentVc = AppState.getTopViewController()
-                        if let _home = _currentVc as? HomeV2ViewController{
+                        if let _home = _currentVc as? HomeMainViewController{
                             _home.shouldLaunchEventPopup = eventId
 
                         }
@@ -638,7 +638,7 @@ struct DeepLinkManager {
         }
     }
     static func showNeiborhoodListUniversalLink() {
-        if let vc = AppState.getTopViewController() as? HomeV2ViewController{
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
                 _tabbar.showMyNeighborhoods()
             }

@@ -1,5 +1,5 @@
 //
-//  HomeV2ViewController.swift
+//  HomeMainViewController.swift
 //  entourage
 //
 //  Created by Clement entourage on 20/09/2023.
@@ -37,7 +37,7 @@ enum HomeV2DTO {
     case cellSolidarityTools
 }
 
-class HomeV2ViewController: UIViewController {
+class HomeMainViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
     // OUTLET
     @IBOutlet weak var ui_drivable_top_constraint: NSLayoutConstraint!
@@ -48,6 +48,7 @@ class HomeV2ViewController: UIViewController {
     @IBOutlet weak var ui_image_notif: UIImageView!
     @IBOutlet weak var ui_image_user_avatar: UIImageView!
     @IBOutlet weak var ui_label_subtitle: UILabel!
+    @IBOutlet weak var ui_logo_entourage: UIImageView!
     
     // VARIABLE
     var tableDTO = [HomeV2DTO]()
@@ -105,6 +106,13 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
         ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
+
+        // Setup logo - make it user interactive and add tap gesture
+        if let logo = ui_logo_entourage {
+            logo.isUserInteractionEnabled = true
+            let logoTapGesture = UITapGestureRecognizer(target: self, action: #selector(showBadgeDetail))
+            logo.addGestureRecognizer(logoTapGesture)
+        }
 
         self.checkAndCreateCookieIfNotExists()
         
@@ -385,6 +393,16 @@ class HomeV2ViewController: UIViewController {
         }
     }
     
+    @objc func showBadgeDetail() {
+        let badgeDetailVC = BadgeDetailViewController()
+        badgeDetailVC.modalPresentationStyle = .fullScreen
+        
+        let navigationController = UINavigationController(rootViewController: badgeDetailVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        present(navigationController, animated: true, completion: nil)
+    }
+    
     func configureDTO() {
         self.tableDTO.removeAll()
         self.updateTopView()
@@ -495,7 +513,7 @@ class HomeV2ViewController: UIViewController {
 }
 
 // MARK: - TableView Delegate and DataSource
-extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
+extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableDTO.count
     }
@@ -713,7 +731,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 // MARK: - API Calls
-extension HomeV2ViewController {
+extension HomeMainViewController {
     func getNotif() {
         HomeService.getNotificationsCount { count, error in
             self.notificationCount = count ?? 0
@@ -875,7 +893,7 @@ extension HomeV2ViewController {
                 vc.setContent(content: title)
                 vc.setActionId(actionId: actionId)
                 vc.setActionType(actionType: actionType)
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -885,7 +903,7 @@ extension HomeV2ViewController {
                 vc.setContent(content: title)
                 vc.setActionId(actionId: actionId)
                 vc.setActionType(actionType: actionType)
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -894,7 +912,7 @@ extension HomeV2ViewController {
 }
 
 // MARK: - HomeSolidarityToolsCellDelegate
-extension HomeV2ViewController: HomeSolidarityToolsCellDelegate {
+extension HomeMainViewController: HomeSolidarityToolsCellDelegate {
     func onMapTapped() {
         AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
         self.showAllPois()
@@ -915,7 +933,7 @@ extension HomeV2ViewController: HomeSolidarityToolsCellDelegate {
 }
 
 // MARK: - Click Handlers
-extension HomeV2ViewController {
+extension HomeMainViewController {
     func showAction(actionId: Int, isContrib: Bool, isAfterCreation: Bool = false, action: Action? = nil) {
         DeepLinkManager.showAction(id: actionId, isContrib: isContrib)
     }
@@ -1025,7 +1043,7 @@ extension HomeV2ViewController {
 }
 
 // MARK: - HomeInitialPedagoCCDelegate
-extension HomeV2ViewController: HomeInitialPedagoCCDelegate {
+extension HomeMainViewController: HomeInitialPedagoCCDelegate {
     func goToPedago(pedago: PedagogicResource) {
         if let index = initialPedagos.firstIndex(where: { $0.id == pedago.id }) {
             initialPedagos.remove(at: index)
@@ -1036,27 +1054,27 @@ extension HomeV2ViewController: HomeInitialPedagoCCDelegate {
 }
 
 // MARK: - HomeEventHCCDelegate
-extension HomeV2ViewController: HomeEventHCCDelegate {
+extension HomeMainViewController: HomeEventHCCDelegate {
     func goToMyEventHomeCell(event: Event) {
         showEvent(eventId: event.uid)
     }
 }
 
 // MARK: - HomeGroupCCDelegate
-extension HomeV2ViewController: HomeGroupCCDelegate {
+extension HomeMainViewController: HomeGroupCCDelegate {
     func goToMyGroup(group: Neighborhood) {
         showNeighborhood(neighborhoodId: group.uid)
     }
 }
 
 // MARK: - SFSafariViewControllerDelegate
-extension HomeV2ViewController: SFSafariViewControllerDelegate {
+extension HomeMainViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
     }
 }
 
 // MARK: - WelcomeOneDelegate
-extension HomeV2ViewController: WelcomeOneDelegate {
+extension HomeMainViewController: WelcomeOneDelegate {
     func onClickedLink() {
         AnalyticsLoggerManager.logEvent(name: Action_WelcomeOfferHelp_Day1)
         showResources()
@@ -1064,7 +1082,7 @@ extension HomeV2ViewController: WelcomeOneDelegate {
 }
 
 // MARK: - WelcomeTwoDelegate
-extension HomeV2ViewController: WelcomeTwoDelegate {
+extension HomeMainViewController: WelcomeTwoDelegate {
     func goMyGroup(id: Int, group: Neighborhood) {
         showNeighborhoodDetailWithCreatePost(id: id, group: group)
     }
@@ -1075,11 +1093,11 @@ extension HomeV2ViewController: WelcomeTwoDelegate {
 }
 
 // MARK: - WelcomeThreeDelegate
-extension HomeV2ViewController: WelcomeThreeDelegate {
+extension HomeMainViewController: WelcomeThreeDelegate {
 }
 
 // MARK: - MJAlertControllerDelegate
-extension HomeV2ViewController: MJAlertControllerDelegate {
+extension HomeMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
         let actionId = self.userHome.unclosedAction?.id
         
@@ -1089,7 +1107,7 @@ extension HomeV2ViewController: MJAlertControllerDelegate {
                 if actionId != nil {
                     vc.setActionId(id: actionId!)
                 }
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -1108,7 +1126,7 @@ extension HomeV2ViewController: MJAlertControllerDelegate {
                 if actionType != nil {
                     vc.setActionType(actionType: actionType!)
                 }
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController {
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -1117,7 +1135,7 @@ extension HomeV2ViewController: MJAlertControllerDelegate {
 }
 
 // MARK: - ScrollView Animation
-extension HomeV2ViewController: UIScrollViewDelegate {
+extension HomeMainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 {
             if ui_drivable_top_constraint.constant != 5 {
@@ -1142,7 +1160,7 @@ extension HomeV2ViewController: UIScrollViewDelegate {
 }
 
 // MARK: - HomeHZCellDelegate
-extension HomeV2ViewController: HomeHZCellDelegate {
+extension HomeMainViewController: HomeHZCellDelegate {
     func onCLickGoBuffet() {
         let urlStr = "https://reseauentourage.notion.site/Buffet-du-lien-social-69c20e089dbd483cb093e90ae2953a54"
         var webUrl: URL?
@@ -1152,7 +1170,7 @@ extension HomeV2ViewController: HomeHZCellDelegate {
 }
 
 // MARK: - PlaceViewControllerDelegate
-extension HomeV2ViewController: PlaceViewControllerDelegate {
+extension HomeMainViewController: PlaceViewControllerDelegate {
     func modifyPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         if let gplace = googlePlace, let placeId = gplace.placeID {
             UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { error in
@@ -1162,7 +1180,7 @@ extension HomeV2ViewController: PlaceViewControllerDelegate {
 }
 
 // MARK: - SimpleAlertClick
-extension HomeV2ViewController: SimpleAlertClick {
+extension HomeMainViewController: SimpleAlertClick {
     func onClickMainButton() {
         let sb = UIStoryboard(name: "ProfileParams", bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
@@ -1173,7 +1191,7 @@ extension HomeV2ViewController: SimpleAlertClick {
 }
 
 // MARK: - Phase3fromAppDelegate
-extension HomeV2ViewController: Phase3fromAppDelegate {
+extension HomeMainViewController: Phase3fromAppDelegate {
     func sendOnboardingEnd() {
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if let onboardingVC = storyboard.instantiateViewController(withIdentifier: "OnboardingEndViewController") as? OnboardingEndViewController {
@@ -1202,13 +1220,13 @@ extension HomeV2ViewController: Phase3fromAppDelegate {
 }
 
 // MARK: - NotificationDelegate
-extension HomeV2ViewController: NotificationDelegate {
+extension HomeMainViewController: NotificationDelegate {
     func onEventLastDay(id: Int) {
         self.getEventAndLaunchPopup(eventId: String(id))
     }
 }
 
-extension HomeV2ViewController: PopupBienCommunViewControllerDelegate {
+extension HomeMainViewController: PopupBienCommunViewControllerDelegate {
     func didVote() {
         if let url = URL(string: "https://bit.ly/3Z2tOB5") {
             WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
@@ -1222,7 +1240,7 @@ class AppManager {
     private init() {}
 }
 
-extension HomeV2ViewController {
+extension HomeMainViewController {
     func presentOnboardingMode2IfNeeded() {
             let initialCoordinate: CLLocationCoordinate2D? = nil
             let initialLabel: String? = nil
@@ -1243,7 +1261,7 @@ extension HomeV2ViewController {
 }
 
 //Extension for filling mission infiormation in profile
-extension HomeV2ViewController {
+extension HomeMainViewController {
     
     private struct ZonePrefill {
         let coordinate: CLLocationCoordinate2D?
@@ -1507,7 +1525,7 @@ extension HomeV2ViewController {
 }
 
 // MARK: - HomeActionHCCDelegate
-extension HomeV2ViewController: HomeActionHCCDelegate {
+extension HomeMainViewController: HomeActionHCCDelegate {
     func goToMyActionHomeCell(action: Action) {
         if isContributionPreference {
             AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_Detail)
@@ -1516,5 +1534,14 @@ extension HomeV2ViewController: HomeActionHCCDelegate {
             AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
             self.showAction(actionId: action.id, isContrib: false, action: action)
         }
+    }
+    
+    // MARK: - UIPopoverPresentationControllerDelegate
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        // Handle popover dismissal if needed
     }
 }

@@ -232,7 +232,6 @@
 		02B94C1A284F508B006059EF /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C19284F508B006059EF /* HomeService.swift */; };
 		02B94C1C284F50D8006059EF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C1B284F50D8006059EF /* Home.swift */; };
 		02B94C1E284F55D9006059EF /* Home.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02B94C1D284F55D9006059EF /* Home.xcassets */; };
-		02B94C21284F5838006059EF /* HomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C20284F5838006059EF /* HomeMainViewController.swift */; };
 		02B94C23284F594A006059EF /* HomeMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C22284F594A006059EF /* HomeMainViewModel.swift */; };
 		02B94C27284F63AB006059EF /* HomeContribCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C25284F63AB006059EF /* HomeContribCell.swift */; };
 		02B94C28284F63AB006059EF /* HomeContribCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B94C26284F63AB006059EF /* HomeContribCell.xib */; };
@@ -369,6 +368,9 @@
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
 		24037B902FD00CB200D52EE0 /* WelcomeNationalGroupsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B8F2FD00CB200D52EE0 /* WelcomeNationalGroupsListViewController.swift */; };
 		24037B922FD00CEB00D52EE0 /* WelcomeNationalGroupsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B912FD00CEB00D52EE0 /* WelcomeNationalGroupsListView.swift */; };
+		24037B942FD82B2100D52EE0 /* BadgeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B932FD82B2100D52EE0 /* BadgeDetailViewController.swift */; };
+		24037B9B2FD837A000D52EE0 /* HomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B9A2FD837A000D52EE0 /* HomeMainViewController.swift */; };
+		24037B9D2FD84A3400D52EE0 /* BadgeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B9C2FD84A3400D52EE0 /* BadgeDetailView.swift */; };
 		241A6AEC2F6C3229005BF63B /* WelcomeVideoModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AEB2F6C3229005BF63B /* WelcomeVideoModalViewController.swift */; };
 		241A6AED2F6C3229005BF63B /* HomeWelcomeJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AE92F6C3229005BF63B /* HomeWelcomeJourneyView.swift */; };
 		241A6AEE2F6C3229005BF63B /* HomeWelcomeJourneyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AE82F6C3229005BF63B /* HomeWelcomeJourneyCell.swift */; };
@@ -509,7 +511,6 @@
 		266B26322AB9DD1800C8EAD8 /* EventListCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266B26312AB9DD1800C8EAD8 /* EventListCollectionTableViewCell.xib */; };
 		266B26342AB9E5A500C8EAD8 /* EmptyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266B26332AB9E5A500C8EAD8 /* EmptyListCell.xib */; };
 		266B26362AB9E5FD00C8EAD8 /* EmptyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B26352AB9E5FD00C8EAD8 /* EmptyListCell.swift */; };
-		266B26392ABB16CF00C8EAD8 /* HomeV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266B26382ABB16CF00C8EAD8 /* HomeV2ViewController.swift */; };
 		2674FEB92ACD96BE0013D674 /* HomeGroupHorizontalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674FEB82ACD96BE0013D674 /* HomeGroupHorizontalCollectionCell.swift */; };
 		2674FEBB2ACD96EB0013D674 /* HomeGroupHorizontalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2674FEBA2ACD96EB0013D674 /* HomeGroupHorizontalCollectionCell.xib */; };
 		2674FEBD2ACD999A0013D674 /* HomeCellPedago.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674FEBC2ACD999A0013D674 /* HomeCellPedago.swift */; };
@@ -878,7 +879,6 @@
 		02B94C19284F508B006059EF /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
 		02B94C1B284F50D8006059EF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		02B94C1D284F55D9006059EF /* Home.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Home.xcassets; sourceTree = "<group>"; };
-		02B94C20284F5838006059EF /* HomeMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainViewController.swift; sourceTree = "<group>"; };
 		02B94C22284F594A006059EF /* HomeMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainViewModel.swift; sourceTree = "<group>"; };
 		02B94C25284F63AB006059EF /* HomeContribCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContribCell.swift; sourceTree = "<group>"; };
 		02B94C26284F63AB006059EF /* HomeContribCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeContribCell.xib; sourceTree = "<group>"; };
@@ -1007,6 +1007,9 @@
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
 		24037B8F2FD00CB200D52EE0 /* WelcomeNationalGroupsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNationalGroupsListViewController.swift; sourceTree = "<group>"; };
 		24037B912FD00CEB00D52EE0 /* WelcomeNationalGroupsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNationalGroupsListView.swift; sourceTree = "<group>"; };
+		24037B932FD82B2100D52EE0 /* BadgeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeDetailViewController.swift; sourceTree = "<group>"; };
+		24037B9A2FD837A000D52EE0 /* HomeMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainViewController.swift; sourceTree = "<group>"; };
+		24037B9C2FD84A3400D52EE0 /* BadgeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeDetailView.swift; sourceTree = "<group>"; };
 		241A6AE82F6C3229005BF63B /* HomeWelcomeJourneyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWelcomeJourneyCell.swift; sourceTree = "<group>"; };
 		241A6AE92F6C3229005BF63B /* HomeWelcomeJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWelcomeJourneyView.swift; sourceTree = "<group>"; };
 		241A6AEA2F6C3229005BF63B /* WelcomeJourneyCelebrationPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeJourneyCelebrationPopupViewController.swift; sourceTree = "<group>"; };
@@ -1156,7 +1159,6 @@
 		266B26312AB9DD1800C8EAD8 /* EventListCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventListCollectionTableViewCell.xib; sourceTree = "<group>"; };
 		266B26332AB9E5A500C8EAD8 /* EmptyListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyListCell.xib; sourceTree = "<group>"; };
 		266B26352AB9E5FD00C8EAD8 /* EmptyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListCell.swift; sourceTree = "<group>"; };
-		266B26382ABB16CF00C8EAD8 /* HomeV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeV2ViewController.swift; sourceTree = "<group>"; };
 		2674FEB82ACD96BE0013D674 /* HomeGroupHorizontalCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGroupHorizontalCollectionCell.swift; sourceTree = "<group>"; };
 		2674FEBA2ACD96EB0013D674 /* HomeGroupHorizontalCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeGroupHorizontalCollectionCell.xib; sourceTree = "<group>"; };
 		2674FEBC2ACD999A0013D674 /* HomeCellPedago.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellPedago.swift; sourceTree = "<group>"; };
@@ -1948,7 +1950,6 @@
 				242108192F4C97EB004D74E2 /* BirthdayViewController.swift */,
 				02B94C4328521F1F006059EF /* Pedagogic */,
 				02B94C24284F635D006059EF /* Cells */,
-				02B94C20284F5838006059EF /* HomeMainViewController.swift */,
 				02B94C22284F594A006059EF /* HomeMainViewModel.swift */,
 				02B94C412851FEB1006059EF /* HomeMainProtocols.swift */,
 				020AF5E62860B10C0012AE60 /* HomeCongratPopupViewController.swift */,
@@ -2413,12 +2414,14 @@
 		266B26372ABB16BC00C8EAD8 /* HomeV2 */ = {
 			isa = PBXGroup;
 			children = (
+				24037B9C2FD84A3400D52EE0 /* BadgeDetailView.swift */,
+				24037B9A2FD837A000D52EE0 /* HomeMainViewController.swift */,
+				24037B932FD82B2100D52EE0 /* BadgeDetailViewController.swift */,
 				24037B912FD00CEB00D52EE0 /* WelcomeNationalGroupsListView.swift */,
 				24037B8F2FD00CB200D52EE0 /* WelcomeNationalGroupsListViewController.swift */,
 				247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */,
 				26BEEECE2C00CE3800169FBA /* EventLastDayViewController.swift */,
 				266B263A2ABB17A600C8EAD8 /* homev2cells */,
-				266B26382ABB16CF00C8EAD8 /* HomeV2ViewController.swift */,
 				260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */,
 				26D853452C8740850006C9D8 /* PopupBienCommunViewController.swift */,
 			);
@@ -3008,12 +3011,10 @@
 				0208B0CD289D6F28009A7A58 /* ActionParamsCGUViewController.swift in Sources */,
 				0208B0C9289D2E9D009A7A58 /* ActionFullTopCell.swift in Sources */,
 				0229376D27A434F500206201 /* ApplicationTheme.swift in Sources */,
-				02B94C21284F5838006059EF /* HomeMainViewController.swift in Sources */,
 				02F5FEC427E0CB6800A14313 /* MJAlertController.swift in Sources */,
 				2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */,
 				02B94C1A284F508B006059EF /* HomeService.swift in Sources */,
 				02B94C1C284F50D8006059EF /* Home.swift in Sources */,
-				266B26392ABB16CF00C8EAD8 /* HomeV2ViewController.swift in Sources */,
 				2619E1492A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift in Sources */,
 				0223E5142864A4B200E7556E /* AddDescriptionTableViewCell.swift in Sources */,
 				26F03C9D2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift in Sources */,
@@ -3112,6 +3113,7 @@
 				26D13E322BA8AC2800CAD4F7 /* SurveyView.swift in Sources */,
 				02FCB537281BDD2600682E61 /* NeighborhoodDetailTopCell.swift in Sources */,
 				02F5278327999AD700929431 /* MapPoi.swift in Sources */,
+				24037B9B2FD837A000D52EE0 /* HomeMainViewController.swift in Sources */,
 				0262997B2790815000D84A6A /* APIKeys.swift in Sources */,
 				02A92C202897D374000DFF95 /* ActionCreatePageViewController.swift in Sources */,
 				026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */,
@@ -3283,6 +3285,7 @@
 				02F5278527999B8F00929431 /* SolidarityGuideCell.swift in Sources */,
 				2623375B2EE8229E007EA8ED /* AppCheckTokenProvider.swift in Sources */,
 				2667575D2E856F8F0039FF88 /* PreOnboardingAPI.swift in Sources */,
+				24037B942FD82B2100D52EE0 /* BadgeDetailViewController.swift in Sources */,
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
 				02B94C33284F92AD006059EF /* HomeActionTeachCell.swift in Sources */,
 				02A92C2C2898116B000DFF95 /* ActionCreatePhotoCell.swift in Sources */,
@@ -3347,6 +3350,7 @@
 				0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */,
 				0258AFE6282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift in Sources */,
 				24037B922FD00CEB00D52EE0 /* WelcomeNationalGroupsListView.swift in Sources */,
+				24037B9D2FD84A3400D52EE0 /* BadgeDetailView.swift in Sources */,
 				26192DEB2D31107900944D32 /* HeaderProfilFullCell.swift in Sources */,
 				0224597D28001B2500944DE4 /* Address.swift in Sources */,
 				26BEEEC52C00C32B00169FBA /* EnhancedOnboardingCollectionCell.swift in Sources */,
