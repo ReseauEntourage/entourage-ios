@@ -570,8 +570,8 @@ extension OnboardingStartViewController: OnboardingDelegate {
         email: String?,
         consentEmail: Bool,
         gender: String?,
-        howWeMet howWeMet: String?,
-        birthdate birthdate: String?,
+        howWeMet: String?,
+        birthdate: String?,
         company: String?,
         event: String?
     ) {

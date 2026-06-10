@@ -77,7 +77,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     private var hasInitiallyCompletedAll: Bool? = nil
     
     // ViewModel for ProfileViewControllerSwiftUI
-    var viewModel = ProfileViewModel()
+    var profileViewModel = ProfileViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -380,18 +380,10 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     
     @objc func onAvatarClick() {
         AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
-        if #available(iOS 15.0, *) {
-            let profileSwiftUIView = ProfileViewControllerSwiftUI()
-            profileSwiftUIView.viewModel.navigationDelegate = self
-            let hostingController = UIHostingController(rootView: profileSwiftUIView)
-            hostingController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-            self.tabBarController?.present(hostingController, animated: true)
-        } else {
-            // Fallback for iOS 14
-            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
-            navVC.modalPresentationStyle = .fullScreen
-            self.tabBarController?.present(navVC, animated: true)
-        }
+        // Always use UIKit ProfileFullViewController for avatar click
+        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
     }
     
     @objc func onNotifClick() {
@@ -407,12 +399,13 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     }
     
     @objc func showBadgeDetail() {
-        let profileView = ProfileViewControllerSwiftUI()
+        let profileView = ProfileView(viewModel: self.profileViewModel)
+        self.profileViewModel.navigationDelegate = self
         let hostingController = UIHostingController(rootView: profileView)
-        hostingController.modalPresentationStyle = .fullScreen
+        hostingController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         
         let navigationController = UINavigationController(rootViewController: hostingController)
-        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         
         present(navigationController, animated: true, completion: nil)
     }
@@ -1248,7 +1241,7 @@ extension HomeMainViewController: PopupBienCommunViewControllerDelegate {
     }
 }
 
-extension HomeMainViewController: ProfileNavigationDelegate {
+extension HomeMainViewController: ProfileNavigationDelegate, ImageReUpLoadDelegate, UserProfileDetailDelegate, ProfileLanguageCloseDelegate {
     func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -1257,7 +1250,7 @@ extension HomeMainViewController: ProfileNavigationDelegate {
         let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
         if let navVC = sb.instantiateViewController(withIdentifier: "editProfilePhotoNav") as? UINavigationController,
            let editPhotoVC = navVC.topViewController as? UserPhotoAddViewController {
-            editPhotoVC.pictureSettingDelegate = nil
+            editPhotoVC.pictureSettingDelegate = self
             self.present(navVC, animated: true, completion: nil)
         }
     }
@@ -1265,11 +1258,23 @@ extension HomeMainViewController: ProfileNavigationDelegate {
     func showProfileEditor(user: User?) {
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         if let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav") as? UINavigationController, let editVC = navVC.topViewController as? ProfileEditorViewController {
-            editVC.profilFullDelegate = nil
+            editVC.profilFullDelegate = self
             editVC.currentUser = user
             navVC.modalPresentationStyle = .fullScreen
             self.present(navVC, animated: true)
         }
+    }
+
+    func reloadOnImageUpdate() {
+        // Implementation for ImageReUpLoadDelegate
+    }
+
+    func showMessage(message: String, imageName: String?) {
+        // Implementation for UserProfileDetailDelegate
+    }
+
+    func onDismiss() {
+        // Implementation for ProfileLanguageCloseDelegate
     }
 
     func showPartnerDetails(partner: Partner) {
@@ -1290,7 +1295,7 @@ extension HomeMainViewController: ProfileNavigationDelegate {
             if let convId = conversation?.uid {
                 let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-                    vc.setupFromOtherVC(conversationId: convId, title: self.currentUser?.displayName, isOneToOne: true, conversation: conversation)
+                    vc.setupFromOtherVC(conversationId: convId, title: conversation?.title, isOneToOne: true, conversation: conversation)
                     self.present(vc, animated: true)
                 }
             }
@@ -1301,7 +1306,7 @@ extension HomeMainViewController: ProfileNavigationDelegate {
         if let vc = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil)
             .instantiateViewController(withIdentifier: "reportUserMainVC") as? ReportUserMainViewController {
             vc.user = user
-            vc.parentDelegate = nil
+            vc.parentDelegate = self
             DispatchQueue.main.async {
                 self.present(vc, animated: true)
             }
@@ -1322,7 +1327,7 @@ extension HomeMainViewController: ProfileNavigationDelegate {
     func showLanguageSelector() {
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "language") as? ProfileLanguageChooseViewController {
-            vc.delegate = nil
+            vc.delegate = self
             vc.fromSettings = true
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
