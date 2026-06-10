@@ -581,6 +581,7 @@ struct MainStatUserView: View {
     func formatCreationDate(_ date: Date) -> String {
         print("DEBUG: formatCreationDate called, date: ", date)
         let dateFormat = DateFormatter()
+        dateFormat.locale = Locale.getPreferredLocale()
         dateFormat.dateFormat = "MM/yyyy"
         let result = dateFormat.string(from: date)
         print("DEBUG: formatCreationDate result: ", result)
@@ -592,6 +593,7 @@ struct MainStatUserView: View {
             Text(isMe ? "mainUserTitleActivity".localized : "detail_user_his_activity".localized)
                 .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
                 .foregroundColor(.black)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
             HStack(spacing: 32) {
                 VStack {
@@ -617,6 +619,7 @@ struct MainStatUserView: View {
                         .foregroundColor(.black)
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             if let myDate = user.creationDate {
                 HStack {
@@ -629,6 +632,7 @@ struct MainStatUserView: View {
                         .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
                         .foregroundColor(.black)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
         .padding()
