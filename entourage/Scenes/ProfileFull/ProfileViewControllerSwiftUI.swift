@@ -169,9 +169,9 @@ struct ProfileView: View {
                     }
                 )
 
-                // Spacing between header and content (60pts like UIKit)
+                // Spacing between header and content (20pts as requested)
                 Spacer()
-                    .frame(height: 60)
+                    .frame(height: 20)
 
                 // User info section - redesigned to match UIKit HeaderProfilFullCell
                 VStack(spacing: 10) {
@@ -325,24 +325,6 @@ struct ProfileView: View {
                 // Main user activity
                 if let user = viewModel.user {
                     MainStatUserView(isMe: viewModel.isMe, user: user)
-                        .padding(.horizontal)
-                }
-
-                // User infos section
-                if let user = viewModel.user {
-                    let hasInfo = !(user.birthdate?.isNullOrEmpty() ?? true) ||
-                                !(user.phone?.isNullOrEmpty() ?? true) ||
-                                !(user.email?.isNullOrEmpty() ?? true) ||
-                                !(user.addressPrimary?.displayAddress?.isNullOrEmpty() ?? true)
-                    if hasInfo {
-                        UserInfosSectionView(user: user)
-                            .padding(.horizontal)
-                    }
-                }
-
-                // Interests section
-                if let interests = viewModel.user?.interests, !interests.isEmpty {
-                    InterestsSectionView(interests: interests)
                         .padding(.horizontal)
                 }
 
