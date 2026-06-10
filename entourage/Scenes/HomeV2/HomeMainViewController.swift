@@ -12,6 +12,7 @@ import SVProgressHUD
 import CoreLocation
 import GooglePlaces
 import FirebaseMessaging
+import SwiftUI
 
 enum seeAllCellType {
     case seeAllDemand
@@ -74,6 +75,9 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     private var hasRunEntryGating = false
     private var hasShownCompletionStateThisSession = false
     private var hasInitiallyCompletedAll: Bool? = nil
+    
+    // ViewModel for ProfileViewControllerSwiftUI
+    var viewModel = ProfileViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -376,9 +380,18 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     
     @objc func onAvatarClick() {
         AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
-        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
-        navVC.modalPresentationStyle = .fullScreen
-        self.tabBarController?.present(navVC, animated: true)
+        if #available(iOS 15.0, *) {
+            let profileSwiftUIView = ProfileViewControllerSwiftUI()
+            profileSwiftUIView.viewModel.navigationDelegate = self
+            let hostingController = UIHostingController(rootView: profileSwiftUIView)
+            hostingController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+            self.tabBarController?.present(hostingController, animated: true)
+        } else {
+            // Fallback for iOS 14
+            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
+            navVC.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(navVC, animated: true)
+        }
     }
     
     @objc func onNotifClick() {
@@ -394,10 +407,11 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     }
     
     @objc func showBadgeDetail() {
-        let badgeDetailVC = BadgeDetailViewController()
-        badgeDetailVC.modalPresentationStyle = .fullScreen
+        let profileView = ProfileViewControllerSwiftUI()
+        let hostingController = UIHostingController(rootView: profileView)
+        hostingController.modalPresentationStyle = .fullScreen
         
-        let navigationController = UINavigationController(rootViewController: badgeDetailVC)
+        let navigationController = UINavigationController(rootViewController: hostingController)
         navigationController.modalPresentationStyle = .fullScreen
         
         present(navigationController, animated: true, completion: nil)
@@ -1234,6 +1248,149 @@ extension HomeMainViewController: PopupBienCommunViewControllerDelegate {
     }
 }
 
+extension HomeMainViewController: ProfileNavigationDelegate {
+    func dismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func showImagePicker() {
+        let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
+        if let navVC = sb.instantiateViewController(withIdentifier: "editProfilePhotoNav") as? UINavigationController,
+           let editPhotoVC = navVC.topViewController as? UserPhotoAddViewController {
+            editPhotoVC.pictureSettingDelegate = nil
+            self.present(navVC, animated: true, completion: nil)
+        }
+    }
+
+    func showProfileEditor(user: User?) {
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+        if let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav") as? UINavigationController, let editVC = navVC.topViewController as? ProfileEditorViewController {
+            editVC.profilFullDelegate = nil
+            editVC.currentUser = user
+            navVC.modalPresentationStyle = .fullScreen
+            self.present(navVC, animated: true)
+        }
+    }
+
+    func showPartnerDetails(partner: Partner) {
+        guard let navVc = UIStoryboard(name: StoryboardName.partnerDetails, bundle: nil).instantiateInitialViewController() as? UINavigationController,
+              let vc = navVc.topViewController as? PartnerDetailViewController else { return }
+        if let id = partner.aid {
+            vc.partnerId = id
+        } else {
+            vc.partner = partner
+        }
+        DispatchQueue.main.async {
+            self.present(navVc, animated: true)
+        }
+    }
+
+    func showConversation(conversation: Conversation?) {
+        DispatchQueue.main.async {
+            if let convId = conversation?.uid {
+                let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                    vc.setupFromOtherVC(conversationId: convId, title: self.currentUser?.displayName, isOneToOne: true, conversation: conversation)
+                    self.present(vc, animated: true)
+                }
+            }
+        }
+    }
+
+    func showReportUser(user: User?) {
+        if let vc = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil)
+            .instantiateViewController(withIdentifier: "reportUserMainVC") as? ReportUserMainViewController {
+            vc.user = user
+            vc.parentDelegate = nil
+            DispatchQueue.main.async {
+                self.present(vc, animated: true)
+            }
+        }
+    }
+
+    func openEnhancedOnboarding(mode: EnhancedOnboardingMode) {
+        EnhancedOnboardingConfiguration.shared.isInterestsFromSetting = true
+        let storyboard = UIStoryboard(name: "EnhancedOnboarding", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "enhancedOnboarding") as? EnhancedViewController {
+            vc.mode = mode
+            vc.isAssociationGoal = (self.currentUser?.partner != nil)
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
+    }
+
+    func showLanguageSelector() {
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "language") as? ProfileLanguageChooseViewController {
+            vc.delegate = nil
+            vc.fromSettings = true
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+
+    func showNotificationSettings() {
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "paramsNotifsVC")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    func showHelp() {
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "paramsHelpVC")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    func showBlockedContacts() {
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "editBlockedVC")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    func openFeedbackUrl() {
+        if let url = URL(string: MENU_SUGGEST_URL) {
+            WebLinkManager.openUrlInApp(url: url, presenterViewController: self)
+        }
+    }
+
+    func shareApp() {
+        let textShare = String(format: "menu_info_text_share".localized, ENTOURAGE_BITLY_LINK)
+        let vc = UIActivityViewController(activityItems: [textShare], applicationActivities: nil)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    func showPasswordChange() {
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "editpwdNav")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    func showLogoutAlert() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "params_logout_pop_logout".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_logout_pop_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        customAlert.configureAlert(alertTitle: "params_logout_pop_title".localized, message: "params_logout_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        customAlert.alertTagName = .Logout
+        customAlert.delegate = self
+        customAlert.show()
+    }
+
+    func showDeleteAccountAlert() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "params_suppress_pop_suppress".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_suppress_pop_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        customAlert.configureAlert(alertTitle: "params_suppress_pop_title".localized, message: "params_suppress_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        customAlert.alertTagName = .Suppress
+        customAlert.delegate = self
+        customAlert.show()
+    }
+}
+
 class AppManager {
     static let shared = AppManager()
     var isContributionPreference: Bool = false
@@ -1535,8 +1692,10 @@ extension HomeMainViewController: HomeActionHCCDelegate {
             self.showAction(actionId: action.id, isContrib: false, action: action)
         }
     }
-    
-    // MARK: - UIPopoverPresentationControllerDelegate
+}
+
+// MARK: - UIPopoverPresentationControllerDelegate
+extension HomeMainViewController {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
