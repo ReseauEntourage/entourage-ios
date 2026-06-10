@@ -95,7 +95,7 @@ struct ProfileView: View {
                     Image("ic_backgrnd_welcome")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: 376) // Match UIKit height
+                        .frame(height: 170) // Match UIKit height
                         .clipped()
                 }
                 .overlay(
@@ -103,18 +103,16 @@ struct ProfileView: View {
                         // Profile Image and Modify Button
                         VStack {
                             Spacer()
-                                .frame(height: 106) // Position avatar top at 106 to match UIKit
-                            
+                                .frame(height: 120)
                             ZStack(alignment: .bottomTrailing) {
                                 ProfileImageView(
                                     urlString: viewModel.user?.avatarURL,
-                                    size: CGSize(width: 80, height: 80)
-                                        
+                                    size: CGSize(width: 120, height: 120)
 
                                 )
-                                .frame(width: 80, height: 80)
+                                .frame(width: 120 ,height: 120)
                                 .clipped()
-                                .cornerRadius(40)
+                                .cornerRadius(60)
                                 if viewModel.isMe {
                                     Button(action: {
                                         print("DEBUG: Modify image button tapped")
@@ -169,11 +167,8 @@ struct ProfileView: View {
                     }
                 )
 
-                // Spacing between header and content (20pts as requested)
                 Spacer()
                     .frame(height: 20)
-
-                // User info section - redesigned to match UIKit HeaderProfilFullCell
                 VStack(spacing: 10) {
                     // Name - centered, bold
                     if let displayName = viewModel.user?.displayName, !displayName.isEmpty {
@@ -181,7 +176,6 @@ struct ProfileView: View {
                             .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.top, 70)
                     }
 
                     // Roles and Partner stack (beige pills with orange text)
