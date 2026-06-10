@@ -1,6 +1,13 @@
 import SwiftUI
 import SDWebImage
 
+// MARK: - Color Extensions
+extension Color {
+    static var appBeige: Color {
+        return Color(red: 1, green: 0.91764705882352937, blue: 0.86274509803921573)
+    }
+}
+
 // MARK: - Navigation Protocol
 protocol ProfileNavigationDelegate: AnyObject {
     func dismiss()
@@ -43,11 +50,10 @@ struct ProfileImageView: UIViewRepresentable {
 
     func updateUIView(_ uiView: UIImageView, context: Context) {
         print("DEBUG: ProfileImageView updateUIView called, urlString: ", urlString as Any)
+        uiView.frame = CGRect(origin: .zero, size: size) // <-- Ajoute cette ligne
         if let urlString = urlString, let url = URL(string: urlString) {
-            print("DEBUG: ProfileImageView loading image from URL: ", url)
             uiView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
         } else {
-            print("DEBUG: ProfileImageView using placeholder image")
             uiView.image = UIImage(named: "placeholder_user")
         }
     }
@@ -97,14 +103,18 @@ struct ProfileView: View {
                         // Profile Image and Modify Button
                         VStack {
                             Spacer()
-                                .frame(height: 106) // Match UIKit vertical position (y=106)
+                                .frame(height: 106) // Position avatar top at 106 to match UIKit
                             
                             ZStack(alignment: .bottomTrailing) {
                                 ProfileImageView(
                                     urlString: viewModel.user?.avatarURL,
-                                    size: CGSize(width: 120, height: 120)
-                                )
+                                    size: CGSize(width: 80, height: 80)
+                                        
 
+                                )
+                                .frame(width: 80, height: 80)
+                                .clipped()
+                                .cornerRadius(40)
                                 if viewModel.isMe {
                                     Button(action: {
                                         print("DEBUG: Modify image button tapped")
@@ -120,7 +130,7 @@ struct ProfileView: View {
                                     .opacity(1.0)
                                 }
                             }
-                            .frame(width: 120, height: 120)
+                            .frame(width: 80, height: 80)
                         }
 
                         // Back Button & Signal Button
@@ -135,6 +145,8 @@ struct ProfileView: View {
                                     .background(Color.black.opacity(0.5))
                                     .clipShape(Circle())
                             }
+                            .frame(width: 50, height: 50)
+                            .position(x: 50, y: 50)
 
                             Spacer()
 
@@ -161,56 +173,133 @@ struct ProfileView: View {
                 Spacer()
                     .frame(height: 60)
 
-                // User info section
-                VStack(spacing: 16) {
-                    VStack(spacing: 4) {
-                        if let displayName = viewModel.user?.displayName, !displayName.isEmpty {
-                            Text(displayName)
-                                .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)))
-                                .foregroundColor(.black)
-                        }
-
-                        if let roles = viewModel.user?.roles, !roles.isEmpty {
-                            Text(roles.joined(separator: " • "))
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                                .foregroundColor(.black)
-                        }
-
-                        if let city = viewModel.user?.addressPrimary?.displayAddress, !city.isEmpty {
-                            Text(city)
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                                .foregroundColor(Color(.gray))
-                        }
-                    }
-
-                    // Description
-                    if let aboutText = viewModel.user?.about, !aboutText.isEmpty {
-                        Text(aboutText)
-                            .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)))
+                // User info section - redesigned to match UIKit HeaderProfilFullCell
+                VStack(spacing: 10) {
+                    // Name - centered, bold
+                    if let displayName = viewModel.user?.displayName, !displayName.isEmpty {
+                        Text(displayName)
+                            .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
                             .foregroundColor(.black)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding(.top, 70)
                     }
 
-                    // Partner and roles
-                    if let partnerText = viewModel.user?.partner?.name ?? viewModel.user?.organization?.name, !partnerText.isEmpty {
-                        Button(action: { 
-                            print("DEBUG: Partner button tapped")
-                            viewModel.onPartnerClick() 
-                        }) {
-                            HStack {
-                                if let partnerLogoUrl = viewModel.user?.partner?.smallLogoUrl {
-                                    PartnerLogoView(urlString: partnerLogoUrl)
-                                        .frame(width: 30, height: 30)
+                    // Roles and Partner stack (beige pills with orange text)
+                    if let roles = viewModel.user?.roles, !roles.isEmpty, 
+                       let partnerText = viewModel.user?.partner?.name ?? viewModel.user?.organization?.name, !partnerText.isEmpty {
+                        HStack(spacing: 4) {
+                            // Roles pill
+                            if !roles.isEmpty {
+                                Text(roles.joined(separator: " • "))
+                                    .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                    .foregroundColor(Color(UIColor.appOrange))
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 4)
+                                    .background(Color.appBeige)
+                                    .cornerRadius(11)
+                                    .fixedSize(horizontal: true, vertical: false)
+                            }
+
+                            // Partner pill
+                            if !partnerText.isEmpty {
+                                HStack(spacing: 4) {
+                                    if let partnerLogoUrl = viewModel.user?.partner?.smallLogoUrl {
+                                        PartnerLogoView(urlString: partnerLogoUrl)
+                                            .frame(width: 30, height: 30)
+                                    }
+                                    Text(partnerText)
+                                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                        .foregroundColor(Color(UIColor.appOrange))
                                 }
-                                Text(partnerText)
-                                    .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                                    .foregroundColor(.black)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 4)
+                                .background(Color.appBeige)
+                                .cornerRadius(11)
+                                .fixedSize(horizontal: true, vertical: false)
+                                .onTapGesture {
+                                    print("DEBUG: Partner button tapped")
+                                    viewModel.onPartnerClick()
+                                }
                             }
                         }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    } else if let roles = viewModel.user?.roles, !roles.isEmpty {
+                        // Only roles
+                        Text(roles.joined(separator: " • "))
+                            .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                            .foregroundColor(Color(UIColor.appOrange))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(Color.appBeige)
+                            .cornerRadius(11)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .fixedSize(horizontal: true, vertical: false)
+                    } else if let partnerText = viewModel.user?.partner?.name ?? viewModel.user?.organization?.name, !partnerText.isEmpty {
+                        // Only partner
+                        HStack(spacing: 4) {
+                            if let partnerLogoUrl = viewModel.user?.partner?.smallLogoUrl {
+                                PartnerLogoView(urlString: partnerLogoUrl)
+                                    .frame(width: 30, height: 30)
+                            }
+                            Text(partnerText)
+                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                .foregroundColor(Color(UIColor.appOrange))
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(Color.appBeige)
+                        .cornerRadius(11)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .fixedSize(horizontal: true, vertical: false)
+                        .onTapGesture {
+                            print("DEBUG: Partner button tapped")
+                            viewModel.onPartnerClick()
+                        }
                     }
 
-                    // Modify or Send Message button
+                    // Info stack (city, phone, email, birthdate, description)
+                    VStack(spacing: 10) {
+                        if let city = viewModel.user?.addressPrimary?.displayAddress, !city.isEmpty {
+                            let radiusString = String(viewModel.user?.radiusDistance ?? 0)
+                            let fullAddress = "\(city) - \(radiusString) km"
+                            Text(fullAddress)
+                                .font(Font(UIFont(name: "HelveticaNeue", size: 15) ?? UIFont.systemFont(ofSize: 15)))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+
+                        if let phone = viewModel.user?.phone, !phone.isEmpty, viewModel.isMe {
+                            Text(phone)
+                                .font(Font(UIFont.systemFont(ofSize: 15)))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+
+                        if let email = viewModel.user?.email, !email.isEmpty, viewModel.isMe {
+                            Text(email)
+                                .font(Font(UIFont.systemFont(ofSize: 15)))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+
+                        if let birthdate = viewModel.user?.birthdate, !birthdate.isEmpty, viewModel.isMe {
+                            Text(birthdate)
+                                .font(Font(UIFont.systemFont(ofSize: 15)))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+
+                        if let aboutText = viewModel.user?.about, !aboutText.isEmpty {
+                            Text(aboutText)
+                                .font(Font(UIFont.systemFont(ofSize: 15)))
+                                .foregroundColor(.black)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                    }
+                    .padding(.horizontal, 10)
+
+                    // Modify or Send Message button - match UIKit style
                     Button(action: {
                         print("DEBUG: Main action button tapped, isMe: ", viewModel.isMe)
                         if viewModel.isMe {
@@ -220,13 +309,16 @@ struct ProfileView: View {
                         }
                     }) {
                         Text(viewModel.isMe ? "modify".localized : "detail_user_send_message".localized)
-                            .font(Font(UIFont(name: "Quicksand-Bold", size: 14) ?? UIFont.systemFont(ofSize: 14)))
+                            .font(Font(UIFont(name: "Quicksand-Bold", size: 12) ?? UIFont.systemFont(ofSize: 12)))
                             .foregroundColor(.white)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 8)
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 12)
+                            .frame(minWidth: 136, minHeight: 48)
                             .background(Color(UIColor.appOrange))
                             .cornerRadius(25)
                     }
+                    .padding(.top, 10)
+                    .padding(.bottom, 20)
                 }
                 .padding()
 
