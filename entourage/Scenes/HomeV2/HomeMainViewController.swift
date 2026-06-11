@@ -1106,35 +1106,55 @@ extension HomeMainViewController: WelcomeThreeDelegate {
 // MARK: - MJAlertControllerDelegate
 extension HomeMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        let actionId = self.userHome.unclosedAction?.id
-        
-        DispatchQueue.main.async {
-            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
-            if let vc = sb.instantiateViewController(withIdentifier: "ActionPassedTwoVC") as? ActionPassedTwoVC {
-                if actionId != nil {
-                    vc.setActionId(id: actionId!)
-                }
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
-                    currentVc.present(vc, animated: true)
+        switch alertTag {
+        case .Logout, .Suppress:
+            break
+        default:
+            let actionId = self.userHome.unclosedAction?.id
+            
+            DispatchQueue.main.async {
+                let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "ActionPassedTwoVC") as? ActionPassedTwoVC {
+                    if actionId != nil {
+                        vc.setActionId(id: actionId!)
+                    }
+                    if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
+                        currentVc.present(vc, animated: true)
+                    }
                 }
             }
         }
     }
     
     func validateRightButton(alertTag: MJAlertTAG) {
-        let actionType = self.userHome.unclosedAction?.actionType!
-        let actionId = self.userHome.unclosedAction?.id
-        DispatchQueue.main.async {
-            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
-            if let vc = sb.instantiateViewController(withIdentifier: "ActionPassedOneVC") as? ActionPassedOneVC {
-                if actionId != nil {
-                    vc.setActionId(id: actionId!)
+        switch alertTag {
+        case .Logout:
+            NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)
+        case .Suppress:
+            UserService.deleteUserAccount { error in
+                if let error = error {
+                    let errorMessage = String.init(format: "params_account_not_deleted".localized, error.message)
+                    SVProgressHUD.show(withStatus: errorMessage)
+                    return
                 }
-                if actionType != nil {
-                    vc.setActionType(actionType: actionType!)
-                }
-                if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
-                    currentVc.present(vc, animated: true)
+                NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)
+                SVProgressHUD.show(withStatus:"params_account_deleted".localized)
+            }
+        default:
+            let actionType = self.userHome.unclosedAction?.actionType!
+            let actionId = self.userHome.unclosedAction?.id
+            DispatchQueue.main.async {
+                let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "ActionPassedOneVC") as? ActionPassedOneVC {
+                    if actionId != nil {
+                        vc.setActionId(id: actionId!)
+                    }
+                    if actionType != nil {
+                        vc.setActionType(actionType: actionType!)
+                    }
+                    if let currentVc = AppState.getTopViewController() as? HomeMainViewController {
+                        currentVc.present(vc, animated: true)
+                    }
                 }
             }
         }
@@ -1320,7 +1340,7 @@ extension HomeMainViewController: ProfileNavigationDelegate, ImageReUpLoadDelega
             vc.mode = mode
             vc.isAssociationGoal = (self.currentUser?.partner != nil)
             vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
+            AppState.getTopViewController()?.present(vc, animated: true, completion: nil)
         }
     }
 
@@ -1330,7 +1350,7 @@ extension HomeMainViewController: ProfileNavigationDelegate, ImageReUpLoadDelega
             vc.delegate = self
             vc.fromSettings = true
             vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
+            AppState.getTopViewController()?.present(vc, animated: true, completion: nil)
         }
     }
 
@@ -1338,26 +1358,26 @@ extension HomeMainViewController: ProfileNavigationDelegate, ImageReUpLoadDelega
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "paramsNotifsVC")
         vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        AppState.getTopViewController()?.present(vc, animated: true, completion: nil)
     }
 
     func showHelp() {
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "paramsHelpVC")
         vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        AppState.getTopViewController()?.present(vc, animated: true, completion: nil)
     }
 
     func showBlockedContacts() {
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "editBlockedVC")
         vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        AppState.getTopViewController()?.present(vc, animated: true, completion: nil)
     }
 
     func openFeedbackUrl() {
         if let url = URL(string: MENU_SUGGEST_URL) {
-            WebLinkManager.openUrlInApp(url: url, presenterViewController: self)
+            WebLinkManager.openUrlInApp(url: url, presenterViewController: AppState.getTopViewController())
         }
     }
 
@@ -1365,14 +1385,14 @@ extension HomeMainViewController: ProfileNavigationDelegate, ImageReUpLoadDelega
         let textShare = String(format: "menu_info_text_share".localized, ENTOURAGE_BITLY_LINK)
         let vc = UIActivityViewController(activityItems: [textShare], applicationActivities: nil)
         vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        AppState.getTopViewController()?.present(vc, animated: true, completion: nil)
     }
 
     func showPasswordChange() {
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "editpwdNav")
         vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        AppState.getTopViewController()?.present(vc, animated: true, completion: nil)
     }
 
     func showLogoutAlert() {
