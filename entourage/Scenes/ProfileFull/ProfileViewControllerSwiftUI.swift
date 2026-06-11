@@ -84,6 +84,7 @@ struct PartnerLogoView: UIViewRepresentable {
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel
     @State private var scrollOffset: CGFloat = 0
+    @State private var showBadges: Bool = false
 
     var body: some View {
         print("DEBUG: ProfileView body called")
@@ -176,6 +177,11 @@ struct ProfileView: View {
                             .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, alignment: .center)
+                            .onLongPressGesture {
+                                if viewModel.isMe {
+                                    showBadges = true
+                                }
+                            }
                     }
 
                     // Roles and Partner stack (beige pills with orange text)
@@ -356,6 +362,9 @@ struct ProfileView: View {
         .onAppear {
             print("DEBUG: ProfileView onAppear called")
             viewModel.loadData()
+        }
+        .fullScreenCover(isPresented: $showBadges) {
+            BadgesView()
         }
     }
 }

@@ -24,6 +24,8 @@ struct UserHome:Codable {
     var signablePermission:Bool? = nil
     var association:Bool? = false
 
+    var badge: String? = nil
+    var badges: [Badge]? = nil
     
     var congratulations = HomeActions()
     
@@ -52,6 +54,8 @@ struct UserHome:Codable {
         case events = "events"
         case signablePermission = "signable_permission"
         case association
+        case badge = "badge"
+        case badges = "badges"
     }
 }
 

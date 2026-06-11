@@ -1728,3 +1728,38 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_small_talk_pending_plus_singular" = "+%d matching";
 "home_small_talk_start_new" = "+ Start a new discussion (%d/3)";
 "home_small_talk_view_button" = "See";
+
+// Badges
+"badges_title" = "Mes badges";
+"badges_subtitle" = "Vos badges Entourage";
+"badges_empty_desc" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
+"badges_filled_desc" = "%d obtenus, %d en cours, %d à découvrir. Chaque badge récompense une action concrète dans votre communauté.";
+
+"badges_how_it_works" = "Comment fonctionnent les badges ?";
+"badges_section_obtained" = "Obtenus";
+"badges_section_in_progress" = "En cours";
+"badges_section_not_started" = "Non commencés";
+"badges_section_all" = "Tous les badges";
+"badges_obtained_date" = "Obtenu le %@";
+
+"badge_premier_contact_name" = "Premier pas";
+"badge_premier_contact_desc" = "Terminez votre onboarding et faites votre première action — réaction, post, rejoindre un groupe ou participer à un événement — pour obtenir ce badge.";
+
+"badge_bienvenue_name" = "Premier lien";
+"badge_bienvenue_desc" = "Échangez un premier message en privé avec un autre membre";
+
+"badge_moteur_rencontres_name" = "Diffuseur de liens";
+"badge_moteur_rencontres_desc" = "Créez 3 événements sur 90 jours";
+"badge_moteur_rencontres_desc_short" = "Créez %d événements pour le décrocher";
+
+"badge_fidele_papotages_name" = "As du papotage";
+"badge_fidele_papotages_desc" = "Participez à 3 Papotages solidaires sur 90 jours";
+"badge_fidele_papotages_desc_short" = "Plus qu'1 Papotage pour décrocher";
+
+"badge_voix_presente_name" = "Tisseur de liens";
+"badge_voix_presente_desc" = "Soyez actif·ve (en postant, commentant, réagissant) dans vos groupes 3 semaines sur 4";
+"badge_voix_presente_desc_short" = "%d semaines actives sur 4 dernières";
+
+"badges_start_with" = "COMMENCEZ PAR";
+"badges_start_with_name" = "Le badge Premier pas 👣";
+"badges_start_with_button" = "Je me lance";
