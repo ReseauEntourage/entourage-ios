@@ -84,6 +84,9 @@ struct PartnerLogoView: UIViewRepresentable {
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel
     @State private var scrollOffset: CGFloat = 0
+    @State private var showBadgesList = false
+    @State private var selectedBadgeProgress: UserBadgeProgress?
+    @State private var showBadgeDetail = false
 
     var body: some View {
         print("DEBUG: ProfileView body called")
@@ -320,6 +323,32 @@ struct ProfileView: View {
                 if let user = viewModel.user {
                     MainStatUserView(isMe: viewModel.isMe, user: user)
                         .padding(.horizontal)
+                }
+
+                // Badges section (own profile only)
+                if viewModel.isMe {
+                    BadgesSectionView(
+                        obtainedKeys: viewModel.badgeKeys,
+                        onShowAllBadges: { showBadgesList = true },
+                        onBadgeTap: { p in
+                            selectedBadgeProgress = p
+                            showBadgeDetail = true
+                        }
+                    )
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+                    .sheet(isPresented: $showBadgesList) {
+                        BadgesListView(obtainedKeys: viewModel.badgeKeys)
+                    }
+                    .sheet(isPresented: $showBadgeDetail) {
+                        if let p = selectedBadgeProgress {
+                            BadgeDetailSheet(
+                                progress: p,
+                                obtainedKeys: viewModel.badgeKeys,
+                                onShowAllBadges: { showBadgesList = true }
+                            )
+                        }
+                    }
                 }
 
                 // Preferences section
@@ -1032,6 +1061,7 @@ class ProfileViewModel: ObservableObject {
     @Published var activatedNotif: [String] = []
     @Published var numberOfBlocked: Int = 0
     @Published var userIdToDisplay: String?
+    @Published var badgeKeys: [String] = []
 
     weak var navigationDelegate: ProfileNavigationDelegate?
 
@@ -1073,6 +1103,14 @@ class ProfileViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self?.numberOfBlocked = blockedUsers?.count ?? 0
                 print("DEBUG: numberOfBlocked set to: ", self?.numberOfBlocked ?? 0)
+            }
+        }
+
+        if self.isMe {
+            HomeService.getUserHome { [weak self] userHome, _ in
+                DispatchQueue.main.async {
+                    self?.badgeKeys = userHome?.badges ?? []
+                }
             }
         }
 
