@@ -1863,3 +1863,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badge_tisseur_liens_what_it_means" = "Регулярність — ключ до соціальних зв'язків. Цей значок нагороджує тих, хто повертається щотижня.";
 "badge_tisseur_liens_cta" = "Досліджувати додаток";
 "badge_tisseur_liens_unlocked_message" = "3 активних тижні з 4 — дякуємо за вашу постійну участь.";
+"badges_all_title" = "%d/%d значків отримано";

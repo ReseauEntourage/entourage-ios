@@ -305,13 +305,8 @@ extension ActionDetailFullViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-                .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-                guard let userId = action?.author?.uid else { return }
-                profileVC.userIdToDisplay = "\(userId)"
-                profileVC.modalPresentationStyle = .fullScreen
-                self.navigationController?.present(profileVC, animated: true)
-            }
+            guard let userId = action?.author?.uid else { return }
+            (navigationController ?? self).presentOtherUserProfile(userId: "\(userId)")
         }
     }
 }

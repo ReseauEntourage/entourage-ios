@@ -90,7 +90,8 @@ let allBadgeDefinitions: [BadgeDefinition] = [
     )
 ]
 
-struct UserBadgeProgress {
+struct UserBadgeProgress: Identifiable {
+    var id: String { definition.key.rawValue }
     let definition: BadgeDefinition
     let isObtained: Bool
     let progress: Int

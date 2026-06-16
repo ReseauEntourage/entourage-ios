@@ -1512,3 +1512,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badge_tisseur_liens_what_it_means" = "Redovitost je ključ socijalnih veza. Ova značka nagrađuje one koji se vraćaju tjedan za tjednom.";
 "badge_tisseur_liens_cta" = "Istražite aplikaciju";
 "badge_tisseur_liens_unlocked_message" = "3 aktivna tjedna od 4 — hvala na vašem stalnom angažiranju.";
+"badges_all_title" = "%d/%d značke zarađene";

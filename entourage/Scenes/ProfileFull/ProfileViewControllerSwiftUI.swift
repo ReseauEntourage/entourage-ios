@@ -10,7 +10,6 @@ extension Color {
 
 // MARK: - Navigation Protocol
 protocol ProfileNavigationDelegate: AnyObject {
-    func dismiss()
     func showImagePicker()
     func showProfileEditor(user: User?)
     func showPartnerDetails(partner: Partner)
@@ -35,7 +34,6 @@ struct ProfileImageView: UIViewRepresentable {
     let size: CGSize
 
     func makeUIView(context: Context) -> UIImageView {
-        print("DEBUG: ProfileImageView makeUIView called, size: ", size)
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = size.width / 2
@@ -44,12 +42,10 @@ struct ProfileImageView: UIViewRepresentable {
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.shadowRadius = 4
         imageView.layer.shadowOpacity = 0.3
-        print("DEBUG: ProfileImageView makeUIView completed")
         return imageView
     }
 
     func updateUIView(_ uiView: UIImageView, context: Context) {
-        print("DEBUG: ProfileImageView updateUIView called, urlString: ", urlString as Any)
         uiView.frame = CGRect(origin: .zero, size: size) // <-- Ajoute cette ligne
         if let urlString = urlString, let url = URL(string: urlString) {
             uiView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
@@ -63,17 +59,13 @@ struct PartnerLogoView: UIViewRepresentable {
     let urlString: String
 
     func makeUIView(context: Context) -> UIImageView {
-        print("DEBUG: PartnerLogoView makeUIView called")
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        print("DEBUG: PartnerLogoView makeUIView completed")
         return imageView
     }
 
     func updateUIView(_ uiView: UIImageView, context: Context) {
-        print("DEBUG: PartnerLogoView updateUIView called, urlString: ", urlString)
         if let url = URL(string: urlString) {
-            print("DEBUG: PartnerLogoView loading image from URL: ", url)
             uiView.sd_setImage(with: url, placeholderImage: nil)
         }
     }
@@ -83,13 +75,13 @@ struct PartnerLogoView: UIViewRepresentable {
 
 struct ProfileView: View {
     @StateObject var viewModel: ProfileViewModel
+    @Environment(\.presentationMode) private var presentationMode
     @State private var scrollOffset: CGFloat = 0
     @State private var showBadgesList = false
     @State private var selectedBadgeProgress: UserBadgeProgress?
-    @State private var showBadgeDetail = false
+
 
     var body: some View {
-        print("DEBUG: ProfileView body called")
         return ScrollView {
             VStack(spacing: 0) {
                 // Header with profile image and back button
@@ -118,7 +110,6 @@ struct ProfileView: View {
                                 .cornerRadius(60)
                                 if viewModel.isMe {
                                     Button(action: {
-                                        print("DEBUG: Modify image button tapped")
                                         viewModel.modifyImageClick()
                                     }) {
                                         Image(systemName: "camera.fill")
@@ -136,10 +127,7 @@ struct ProfileView: View {
 
                         // Back Button & Signal Button
                         HStack {
-                            Button(action: {
-                                print("DEBUG: Back button tapped")
-                                viewModel.handleBackButtonTap()
-                            }) {
+                            Button(action: { presentationMode.wrappedValue.dismiss() }) {
                                 Image(systemName: "chevron.left")
                                     .foregroundColor(.white)
                                     .padding()
@@ -153,7 +141,6 @@ struct ProfileView: View {
 
                             if !viewModel.isMe {
                                 Button(action: {
-                                    print("DEBUG: Signal user button tapped")
                                     viewModel.onSignalUserClick()
                                 }) {
                                     Image("ic_signal")
@@ -214,7 +201,6 @@ struct ProfileView: View {
                                 .cornerRadius(11)
                                 .fixedSize(horizontal: true, vertical: false)
                                 .onTapGesture {
-                                    print("DEBUG: Partner button tapped")
                                     viewModel.onPartnerClick()
                                 }
                             }
@@ -249,7 +235,6 @@ struct ProfileView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                         .fixedSize(horizontal: true, vertical: false)
                         .onTapGesture {
-                            print("DEBUG: Partner button tapped")
                             viewModel.onPartnerClick()
                         }
                     }
@@ -266,7 +251,7 @@ struct ProfileView: View {
                         }
 
                         if let phone = viewModel.user?.phone, !phone.isEmpty, viewModel.isMe {
-                            Text(phone)
+                            Text(ProfileViewHelpers.formatPhoneNumber(phone))
                                 .font(Font(UIFont.systemFont(ofSize: 15)))
                                 .foregroundColor(.black)
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -280,7 +265,7 @@ struct ProfileView: View {
                         }
 
                         if let birthdate = viewModel.user?.birthdate, !birthdate.isEmpty, viewModel.isMe {
-                            Text(birthdate)
+                            Text(ProfileViewHelpers.formatBirthdate(birthdate))
                                 .font(Font(UIFont.systemFont(ofSize: 15)))
                                 .foregroundColor(.black)
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -298,7 +283,6 @@ struct ProfileView: View {
 
                     // Modify or Send Message button - match UIKit style
                     Button(action: {
-                        print("DEBUG: Main action button tapped, isMe: ", viewModel.isMe)
                         if viewModel.isMe {
                             viewModel.modifyProfile()
                         } else {
@@ -330,24 +314,19 @@ struct ProfileView: View {
                     BadgesSectionView(
                         obtainedKeys: viewModel.badgeKeys,
                         onShowAllBadges: { showBadgesList = true },
-                        onBadgeTap: { p in
-                            selectedBadgeProgress = p
-                            showBadgeDetail = true
-                        }
+                        onBadgeTap: { p in selectedBadgeProgress = p }
                     )
                     .padding(.horizontal)
                     .padding(.top, 8)
-                    .sheet(isPresented: $showBadgesList) {
+                    .fullScreenCover(isPresented: $showBadgesList) {
                         BadgesListView(obtainedKeys: viewModel.badgeKeys)
                     }
-                    .sheet(isPresented: $showBadgeDetail) {
-                        if let p = selectedBadgeProgress {
-                            BadgeDetailSheet(
-                                progress: p,
-                                obtainedKeys: viewModel.badgeKeys,
-                                onShowAllBadges: { showBadgesList = true }
-                            )
-                        }
+                    .sheet(item: $selectedBadgeProgress) { p in
+                        BadgeDetailSheet(
+                            progress: p,
+                            obtainedKeys: viewModel.badgeKeys,
+                            onShowAllBadges: { showBadgesList = true }
+                        )
                     }
                 }
 
@@ -383,117 +362,44 @@ struct ProfileView: View {
         .edgesIgnoringSafeArea(.top)
         .id(viewModel.user?.uuid ?? "profile")
         .onAppear {
-            print("DEBUG: ProfileView onAppear called")
             viewModel.loadData()
         }
     }
 }
 
+// MARK: - Helpers
+
+enum ProfileViewHelpers {
+    static func formatPhoneNumber(_ number: String) -> String {
+        var formatted = number
+        if number.hasPrefix("+33") {
+            formatted = "0" + number.dropFirst(3)
+        }
+        let digits = formatted.replacingOccurrences(of: "\\D", with: "", options: .regularExpression)
+        guard digits.count == 10 else { return number }
+        return stride(from: 0, to: digits.count, by: 2).map { i -> String in
+            let start = digits.index(digits.startIndex, offsetBy: i)
+            let end = digits.index(start, offsetBy: 2, limitedBy: digits.endIndex) ?? digits.endIndex
+            return String(digits[start..<end])
+        }.joined(separator: " ")
+    }
+
+    static func formatBirthdate(_ raw: String) -> String {
+        if let date = Utils.getDateFromWSDateString(raw) {
+            return Utils.formatEventDate(date: date)
+        }
+        let parser = DateFormatter()
+        parser.dateFormat = "yyyy-MM-dd"
+        if let date = parser.date(from: raw) {
+            let display = DateFormatter()
+            display.dateFormat = "dd/MM/yyyy"
+            return display.string(from: date)
+        }
+        return raw
+    }
+}
+
 // MARK: - Subviews
-
-struct InterestsSectionView: View {
-    let interests: [String]
-
-    var body: some View {
-        VStack(spacing: 0) {
-            Text("detail_user_his_interests".localized)
-                .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)))
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 8)
-
-            InterestTagsView(interests: interests)
-        }
-        .background(Color.white)
-        .cornerRadius(16)
-        .padding(.vertical, 8)
-    }
-}
-
-struct UserInfosSectionView: View {
-    let user: User
-
-    func formatRadiusText() -> Text {
-        print("DEBUG: formatRadiusText called, currentRadius: ", user.radiusDistance ?? 0)
-        let currentRadius = user.radiusDistance ?? 0
-        let str = String(format: "mainUserCityRadius".localized, currentRadius)
-        let radiusStr = String(currentRadius)
-
-        if let range = str.range(of: radiusStr) {
-            let before = str[str.startIndex..<range.lowerBound]
-            let after = str[range.upperBound...]
-
-            let result = Text(before) +
-                Text(radiusStr)
-                    .font(Font(UIFont(name: "Quicksand-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                    .foregroundColor(Color(UIColor.appOrange)) +
-                Text(after)
-            print("DEBUG: formatRadiusText result: ", result)
-            return result
-        }
-        let result = Text(str)
-        print("DEBUG: formatRadiusText result: ", result)
-        return result
-    }
-
-    var body: some View {
-        VStack(spacing: 12) {
-            Text("mainUserTitleInfos".localized)
-                .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)))
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-            if let birthdate = user.birthdate, !birthdate.isEmpty {
-                InfoRow(title: "mainUserTitleBirth".localized, value: birthdate)
-            }
-
-            if let phone = user.phone, !phone.isEmpty {
-                InfoRow(title: "mainUserTitlePhone".localized, value: phone)
-            }
-
-            if let email = user.email, !email.isEmpty {
-                InfoRow(title: "mainUserTitleEmail".localized, value: email)
-            }
-
-            if let city = user.addressPrimary?.displayAddress, !city.isEmpty {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("mainUserTitleCity".localized)
-                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                        .foregroundColor(Color(UIColor.appOrange))
-
-                    Text(city)
-                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                        .foregroundColor(.black)
-                }
-
-                formatRadiusText()
-                    .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(16)
-        .padding(.vertical, 8)
-    }
-}
-
-struct InfoRow: View {
-    let title: String
-    let value: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(title)
-                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                .foregroundColor(Color(UIColor.appOrange))
-
-            Text(value)
-                .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                .foregroundColor(.black)
-        }
-    }
-}
 
 struct InterestTagsView: View {
     let interests: [String]
@@ -608,12 +514,10 @@ struct MainStatUserView: View {
     let user: User
 
     func formatCreationDate(_ date: Date) -> String {
-        print("DEBUG: formatCreationDate called, date: ", date)
         let dateFormat = DateFormatter()
         dateFormat.locale = Locale.getPreferredLocale()
         dateFormat.dateFormat = "MM/yyyy"
         let result = dateFormat.string(from: date)
-        print("DEBUG: formatCreationDate result: ", result)
         return result
     }
 
@@ -627,7 +531,7 @@ struct MainStatUserView: View {
             HStack(spacing: 32) {
                 VStack {
                     let count = user.stats?.neighborhoodsCount ?? 0
-                    Text("\\(count)")
+                    Text("\(count)")
                         .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)))
                         .foregroundColor(count == 0 ? .gray : .black)
 
@@ -639,7 +543,7 @@ struct MainStatUserView: View {
                 VStack {
                     let count = user.stats?.outingsCount ?? -1
                     let displayCount = count < 0 ? 0 : count
-                    Text("\\(displayCount)")
+                    Text("\(displayCount)")
                         .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)))
                         .foregroundColor(displayCount == 0 ? .gray : .black)
 
@@ -687,9 +591,7 @@ struct PreferencesSectionView: View {
                 .padding(.vertical, 8)
 
             Button(action: {
-                print("DEBUG: Interests button tapped, isMe: ", isMe)
                 if isMe { 
-                    print("DEBUG: navigationDelegate: ", viewModel.navigationDelegate as Any)
                     viewModel.navigationDelegate?.openEnhancedOnboarding(mode: .interest)
                 }
             }) {
@@ -704,7 +606,6 @@ struct PreferencesSectionView: View {
 
             let involvements = (user.partner != nil) ? (user.orientations ?? []) : (user.involvements ?? [])
             Button(action: {
-                print("DEBUG: Involvements button tapped, isMe: ", isMe)
                 if isMe { viewModel.navigationDelegate?.openEnhancedOnboarding(mode: .involvement) }
             }) {
                 ProfileStandardRow(
@@ -718,7 +619,6 @@ struct PreferencesSectionView: View {
 
             if user.partner == nil {
                 Button(action: {
-                    print("DEBUG: Concerns button tapped, isMe: ", isMe)
                     if isMe { viewModel.navigationDelegate?.openEnhancedOnboarding(mode: .concern) }
                 }) {
                     ProfileStandardRow(
@@ -731,7 +631,6 @@ struct PreferencesSectionView: View {
                 .buttonStyle(PlainButtonStyle())
 
                 Button(action: {
-                    print("DEBUG: Availability button tapped, isMe: ", isMe)
                     if isMe { viewModel.navigationDelegate?.openEnhancedOnboarding(mode: .choiceDisponibility) }
                 }) {
                     ProfileStandardRow(
@@ -749,42 +648,31 @@ struct PreferencesSectionView: View {
     }
 
     private func formatInterests(_ interests: [String]?) -> String {
-        print("DEBUG: formatInterests called, interests: ", interests as Any)
         guard let interests = interests, !interests.isEmpty else { 
-            print("DEBUG: formatInterests returning no_data_available")
             return "no_data_available".localized 
         }
         let result = interests.map { TagsUtils.showTagTranslated($0) }.joined(separator: ", ")
-        print("DEBUG: formatInterests result: ", result)
         return result
     }
 
     private func formatInvolvements(_ involvements: [String], isAssociation: Bool) -> String {
-        print("DEBUG: formatInvolvements called, involvements: ", involvements, "isAssociation: ", isAssociation)
         guard !involvements.isEmpty else { 
-            print("DEBUG: formatInvolvements returning no_data_available")
             return "no_data_available".localized 
         }
         let result = involvements.map { isAssociation ? TagsUtils.showOrientationTranslated($0) : TagsUtils.showTagTranslated($0) }.joined(separator: ", ")
-        print("DEBUG: formatInvolvements result: ", result)
         return result
     }
 
     private func formatConcerns(_ concerns: [String]?) -> String {
-        print("DEBUG: formatConcerns called, concerns: ", concerns as Any)
         guard let concerns = concerns, !concerns.isEmpty else { 
-            print("DEBUG: formatConcerns returning no_data_available")
             return "no_data_available".localized 
         }
         let result = concerns.map { TagsUtils.showTagTranslated($0) }.joined(separator: ", ")
-        print("DEBUG: formatConcerns result: ", result)
         return result
     }
 
     private func formatAvailability(_ availability: [String: [String]]?) -> String {
-        print("DEBUG: formatAvailability called, availability: ", availability as Any)
         guard let availability = availability, !availability.isEmpty else { 
-            print("DEBUG: formatAvailability returning no_data_available")
             return "no_data_available".localized 
         }
         var availabilityParts: [String] = []
@@ -794,7 +682,6 @@ struct PreferencesSectionView: View {
             availabilityParts.append("\\(dayLabel) (\\(slotLabels))")
         }
         let result = availabilityParts.joined(separator: " • ")
-        print("DEBUG: formatAvailability result: ", result)
         return result
     }
 
@@ -835,7 +722,6 @@ struct SettingsSectionView: View {
                 .padding(.vertical, 8)
 
             Button(action: { 
-                print("DEBUG: Language selector button tapped")
                 viewModel.navigationDelegate?.showLanguageSelector() 
             }) {
                 ProfileStandardRow(
@@ -848,7 +734,6 @@ struct SettingsSectionView: View {
             .buttonStyle(PlainButtonStyle())
 
             Button(action: { 
-                print("DEBUG: Notification settings button tapped")
                 viewModel.navigationDelegate?.showNotificationSettings() 
             }) {
                 ProfileStandardRow(
@@ -861,7 +746,6 @@ struct SettingsSectionView: View {
             .buttonStyle(PlainButtonStyle())
 
             Button(action: { 
-                print("DEBUG: Blocked contacts button tapped")
                 viewModel.navigationDelegate?.showBlockedContacts() 
             }) {
                 ProfileStandardRow(
@@ -874,7 +758,6 @@ struct SettingsSectionView: View {
             .buttonStyle(PlainButtonStyle())
 
             Button(action: { 
-                print("DEBUG: Feedback button tapped")
                 viewModel.navigationDelegate?.openFeedbackUrl() 
             }) {
                 ProfileStandardRow(
@@ -887,7 +770,6 @@ struct SettingsSectionView: View {
             .buttonStyle(PlainButtonStyle())
 
             Button(action: { 
-                print("DEBUG: Share app button tapped")
                 viewModel.navigationDelegate?.shareApp() 
             }) {
                 ProfileStandardRow(
@@ -900,7 +782,6 @@ struct SettingsSectionView: View {
             .buttonStyle(PlainButtonStyle())
 
             Button(action: { 
-                print("DEBUG: Help button tapped")
                 viewModel.navigationDelegate?.showHelp() 
             }) {
                 ProfileStandardRow(
@@ -913,7 +794,6 @@ struct SettingsSectionView: View {
             .buttonStyle(PlainButtonStyle())
 
             Button(action: { 
-                print("DEBUG: Password change button tapped")
                 viewModel.navigationDelegate?.showPasswordChange() 
             }) {
                 ProfileStandardRow(
@@ -926,7 +806,6 @@ struct SettingsSectionView: View {
             .buttonStyle(PlainButtonStyle())
 
             Button(action: { 
-                print("DEBUG: Logout button tapped")
                 viewModel.navigationDelegate?.showLogoutAlert() 
             }) {
                 ProfileStandardRow(
@@ -940,7 +819,6 @@ struct SettingsSectionView: View {
             .buttonStyle(PlainButtonStyle())
 
             Button(action: { 
-                print("DEBUG: Delete account button tapped")
                 viewModel.navigationDelegate?.showDeleteAccountAlert() 
             }) {
                 ProfileStandardRow(
@@ -958,12 +836,9 @@ struct SettingsSectionView: View {
     }
 
     private func formatLanguage() -> String {
-        print("DEBUG: formatLanguage called")
         let preferredLanguage = LanguageManager.loadLanguageFromPreferences()
-        print("DEBUG: preferredLanguage: ", preferredLanguage)
         let localizedKey = getLocalizedKey(for: preferredLanguage)
         let result = String(localizedKey.dropFirst(3))
-        print("DEBUG: formatLanguage result: ", result)
         return result
     }
 
@@ -982,28 +857,22 @@ struct SettingsSectionView: View {
     }
 
     private func formatNotifications() -> String {
-        print("DEBUG: formatNotifications called, activatedNotif: ", activatedNotif)
         if activatedNotif.isEmpty {
-            print("DEBUG: formatNotifications returning none")
             return "settings_notifications_subtitle_none".localized
         } else {
             let result = String(format: "settings_notifications_subtitle".localized, activatedNotif.joined(separator: ", "))
-            print("DEBUG: formatNotifications result: ", result)
             return result
         }
     }
 
     private func formatBlockedUsers() -> String {
-        print("DEBUG: formatBlockedUsers called, numberOfBlocked: ", numberOfBlocked)
         if numberOfBlocked == 0 {
-            print("DEBUG: formatBlockedUsers returning none")
             return "settings_unblock_contacts_subtitle_none".localized
         } else {
             let result = String.localizedStringWithFormat(
                 numberOfBlocked == 1 ? "settings_unblock_contacts_subtitle".localized : "settings_unblock_contacts_subtitle_plural".localized,
                 numberOfBlocked
             )
-            print("DEBUG: formatBlockedUsers result: ", result)
             return result
         }
     }
@@ -1065,26 +934,18 @@ class ProfileViewModel: ObservableObject {
 
     weak var navigationDelegate: ProfileNavigationDelegate?
 
-    func handleBackButtonTap() {
-        print("DEBUG: handleBackButtonTap called")
-        navigationDelegate?.dismiss()
-    }
+    func handleBackButtonTap() {}
 
     func loadData() {
-        print("DEBUG: loadData called")
         guard let currentUser = UserDefaults.currentUser else { 
-            print("DEBUG: currentUser is nil")
             return 
         }
-        print("DEBUG: currentUser loaded: ", currentUser)
 
         self.user = currentUser
         self.isMe = userIdToDisplay == nil
-        print("DEBUG: isMe = ", self.isMe)
 
         HomeService.getNotifsPermissions { [weak self] notifPerms, error in
             guard let self = self else { return }
-            print("DEBUG: getNotifsPermissions callback, notifPerms: ", notifPerms as Any, "error: ", error as Any)
             if let notifPerms = notifPerms {
                 var activeNotifs: [String] = []
                 if notifPerms.chat_message { activeNotifs.append("message") }
@@ -1093,16 +954,13 @@ class ProfileViewModel: ObservableObject {
                 if notifPerms.action { activeNotifs.append("action") }
                 DispatchQueue.main.async {
                     self.activatedNotif = activeNotifs
-                    print("DEBUG: activatedNotif set to: ", activeNotifs)
                 }
             }
         }
 
         MessagingService.getUsersBlocked { [weak self] blockedUsers, error in
-            print("DEBUG: getUsersBlocked callback, blockedUsers: ", blockedUsers as Any, "error: ", error as Any)
             DispatchQueue.main.async {
                 self?.numberOfBlocked = blockedUsers?.count ?? 0
-                print("DEBUG: numberOfBlocked set to: ", self?.numberOfBlocked ?? 0)
             }
         }
 
@@ -1115,14 +973,11 @@ class ProfileViewModel: ObservableObject {
         }
 
         let userIdToLoad = userIdToDisplay ?? currentUser.uuid ?? ""
-        print("DEBUG: userIdToLoad = ", userIdToLoad)
         if !userIdToLoad.isEmpty {
             UserService.getDetailsForUser(userId: userIdToLoad) { [weak self] returnUser, error in
-                print("DEBUG: getDetailsForUser callback, returnUser: ", returnUser as Any, "error: ", error as Any)
                 DispatchQueue.main.async {
                     if let returnUser = returnUser {
                         self?.user = returnUser
-                        print("DEBUG: user set to: ", returnUser)
                         if self?.isMe == true {
                             UserDefaults.currentUser = returnUser
                         }
@@ -1133,43 +988,32 @@ class ProfileViewModel: ObservableObject {
     }
 
     func modifyImageClick() {
-        print("DEBUG: modifyImageClick called")
-        print("DEBUG: navigationDelegate: ", navigationDelegate as Any)
         AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
         navigationDelegate?.showImagePicker()
     }
 
     func modifyProfile() {
-        print("DEBUG: modifyProfile called")
         AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
         navigationDelegate?.showProfileEditor(user: self.user)
     }
 
     func onSignalUserClick() {
-        print("DEBUG: onSignalUserClick called")
         navigationDelegate?.showReportUser(user: self.user)
     }
 
     func onPartnerClick() {
-        print("DEBUG: onPartnerClick called")
         guard let currentPartner = self.user?.partner else { 
-            print("DEBUG: currentPartner is nil")
             return 
         }
-        print("DEBUG: currentPartner: ", currentPartner)
         navigationDelegate?.showPartnerDetails(partner: currentPartner)
     }
 
     func sendMessage() {
-        print("DEBUG: sendMessage called")
         AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
         guard let currentUserId = user?.sid.description else { 
-            print("DEBUG: currentUserId is nil")
             return 
         }
-        print("DEBUG: currentUserId: ", currentUserId)
         MessagingService.createOrGetConversation(userId: currentUserId) { [weak self] conversation, error in
-            print("DEBUG: createOrGetConversation callback, conversation: ", conversation as Any, "error: ", error as Any)
             if let conversation = conversation {
                 self?.navigationDelegate?.showConversation(conversation: conversation)
                 return
@@ -1179,11 +1023,80 @@ class ProfileViewModel: ObservableObject {
     }
 
     func getAppVersion() -> String {
-        print("DEBUG: getAppVersion called")
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
-        let result = "Version \(version) \(build)"
-        print("DEBUG: getAppVersion result: ", result)
-        return result
+        return "Version \(version) (\(build))"
+    }
+}
+
+// MARK: - BasicProfileNavigationDelegate
+
+/// Delegate used when showing another user's profile from any context.
+/// Handles partner, conversation, and report navigation. All isMe-only actions are no-ops.
+class BasicProfileNavigationDelegate: NSObject, ProfileNavigationDelegate {
+    weak var presenter: UIViewController?
+
+    init(presenter: UIViewController) { self.presenter = presenter }
+
+    func showImagePicker() {}
+    func showProfileEditor(user: User?) {}
+    func openEnhancedOnboarding(mode: EnhancedOnboardingMode) {}
+    func showLanguageSelector() {}
+    func showNotificationSettings() {}
+    func showHelp() {}
+    func showBlockedContacts() {}
+    func openFeedbackUrl() {}
+    func shareApp() {}
+    func showPasswordChange() {}
+    func showLogoutAlert() {}
+    func showDeleteAccountAlert() {}
+
+    func showPartnerDetails(partner: Partner) {
+        guard let navVc = UIStoryboard(name: StoryboardName.partnerDetails, bundle: nil)
+                .instantiateInitialViewController() as? UINavigationController,
+              let vc = navVc.topViewController as? PartnerDetailViewController else { return }
+        if let id = partner.aid { vc.partnerId = id } else { vc.partner = partner }
+        DispatchQueue.main.async { self.presenter?.present(navVc, animated: true) }
+    }
+
+    func showConversation(conversation: Conversation?) {
+        DispatchQueue.main.async {
+            guard let convId = conversation?.uid else { return }
+            let sb = UIStoryboard(name: StoryboardName.messages, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC")
+                as? ConversationDetailMessagesViewController {
+                vc.setupFromOtherVC(conversationId: convId, title: conversation?.title,
+                                    isOneToOne: true, conversation: conversation)
+                self.presenter?.present(vc, animated: true)
+            }
+        }
+    }
+
+    func showReportUser(user: User?) {
+        guard let vc = UIStoryboard(name: StoryboardName.userDetail, bundle: nil)
+            .instantiateViewController(withIdentifier: "reportUserMainVC")
+            as? ReportUserMainViewController else { return }
+        vc.user = user
+        DispatchQueue.main.async { self.presenter?.present(vc, animated: true) }
+    }
+}
+
+// MARK: - Presentation helper
+
+private var associatedDelegateKey = "profileNavDelegate"
+
+extension UIViewController {
+    /// Present the SwiftUI profile for another user (isMe = false).
+    func presentOtherUserProfile(userId: String) {
+        let vm = ProfileViewModel()
+        vm.userIdToDisplay = userId
+        vm.isMe = false
+        let delegate = BasicProfileNavigationDelegate(presenter: self)
+        vm.navigationDelegate = delegate
+        let hc = UIHostingController(rootView: ProfileView(viewModel: vm))
+        hc.modalPresentationStyle = .fullScreen
+        // Retain the delegate for the lifetime of the hosting controller
+        objc_setAssociatedObject(hc, &associatedDelegateKey, delegate, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        present(hc, animated: true)
     }
 }

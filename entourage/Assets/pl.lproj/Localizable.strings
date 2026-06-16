@@ -1897,3 +1897,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badge_tisseur_liens_what_it_means" = "Regularność jest kluczem do więzi społecznych. Ta odznaka nagradza tych, którzy wracają tydzień po tygodniu.";
 "badge_tisseur_liens_cta" = "Odkryj aplikację";
 "badge_tisseur_liens_unlocked_message" = "3 aktywne tygodnie z 4 — dziękujemy za Twoje stałe zaangażowanie.";
+"badges_all_title" = "%d/%d odznak zdobytych";

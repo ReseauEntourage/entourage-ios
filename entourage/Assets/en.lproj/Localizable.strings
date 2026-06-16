@@ -2102,3 +2102,4 @@
 "badge_tisseur_liens_what_it_means" = "Consistency is the key to social bonds. This badge rewards those who come back week after week, keeping neighbourhood groups alive.";
 "badge_tisseur_liens_cta" = "Explore the app";
 "badge_tisseur_liens_unlocked_message" = "3 active weeks out of 4 — you keep neighbourhood groups alive. Thank you for your constant commitment.";
+"badges_all_title" = "%d/%d badges earned";

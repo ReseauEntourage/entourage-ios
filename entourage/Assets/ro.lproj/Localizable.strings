@@ -1786,3 +1786,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badge_tisseur_liens_what_it_means" = "Regularitatea este cheia legăturilor sociale. Această insignă recompensează pe cei care revin săptămână de săptămână.";
 "badge_tisseur_liens_cta" = "Explorează aplicația";
 "badge_tisseur_liens_unlocked_message" = "3 săptămâni active din 4 — mulțumim pentru angajamentul tău constant.";
+"badges_all_title" = "%d/%d insigne obținute";

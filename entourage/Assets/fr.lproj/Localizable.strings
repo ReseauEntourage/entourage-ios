@@ -2122,3 +2122,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badge_tisseur_liens_what_it_means" = "La régularité est la clé du lien social. Ce badge récompense ceux qui reviennent semaine après semaine, faisant battre le cœur des groupes de voisins.";
 "badge_tisseur_liens_cta" = "Explorer l'app";
 "badge_tisseur_liens_unlocked_message" = "3 semaines d'activité sur 4 — vous faites battre le cœur des groupes de voisins. Merci pour votre engagement constant.";
+"badges_all_title" = "%d/%d badges obtenus";

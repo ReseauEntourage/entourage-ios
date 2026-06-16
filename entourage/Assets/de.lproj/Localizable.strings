@@ -1883,3 +1883,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badge_tisseur_liens_what_it_means" = "Regelmäßigkeit ist der Schlüssel zu sozialen Bindungen. Dieses Abzeichen belohnt diejenigen, die Woche für Woche zurückkommen.";
 "badge_tisseur_liens_cta" = "App erkunden";
 "badge_tisseur_liens_unlocked_message" = "3 aktive Wochen von 4 — du lässt das Herz der Nachbarschaftsgruppen schlagen. Danke!";
+"badges_all_title" = "%d/%d Abzeichen erhalten";

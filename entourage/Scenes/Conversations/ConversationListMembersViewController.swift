@@ -256,15 +256,7 @@ extension ConversationListMembersViewController: UITableViewDelegate {
             ? usersSearch[indexPath.row - 1]
             : users[indexPath.row - 1]
 
-        if let navVC = UIStoryboard(name: StoryboardName.profileParams,
-                                    bundle: nil)
-            .instantiateViewController(withIdentifier: "profileFull")
-                as? UINavigationController,
-           let profileVC = navVC.topViewController
-                as? ProfilFullViewController {
-            profileVC.userIdToDisplay = "\(user.uid)"
-            present(navVC, animated: true)
-        }
+        presentOtherUserProfile(userId: "\(user.uid)")
     }
 }
 

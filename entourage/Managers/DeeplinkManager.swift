@@ -209,13 +209,7 @@ struct DeepLinkManager {
     
     //MARK: - Navigation Actions -
     static func showUser(userId:Int) {
-        if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-            .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-            profileVC.userIdToDisplay = "\(userId)"
-            profileVC.isMe = false
-            profileVC.modalPresentationStyle = .fullScreen
-            AppState.getTopViewController()?.present(profileVC, animated: true)
-        }
+        AppState.getTopViewController()?.presentOtherUserProfile(userId: "\(userId)")
     }
     
     static func showPoi(id:Int) {

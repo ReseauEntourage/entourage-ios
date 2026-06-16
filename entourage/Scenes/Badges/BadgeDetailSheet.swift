@@ -9,6 +9,8 @@ struct BadgeDetailSheet: View {
     @State private var showUnlocked = false
 
     private var def: BadgeDefinition { progress.definition }
+    // TODO: restore isObtained when backend sends real obtained state
+    private var isObtained: Bool { false }
 
     var body: some View {
         NavigationView {
@@ -105,7 +107,7 @@ struct BadgeDetailSheet: View {
 
     @ViewBuilder
     private var statusCard: some View {
-        if progress.isObtained {
+        if isObtained {
             VStack(spacing: 4) {
                 HStack(spacing: 6) {
                     Image(systemName: "checkmark")
@@ -209,7 +211,7 @@ struct BadgeDetailSheet: View {
     }
 
     private func handleCta() {
-        if !progress.isObtained {
+        if !isObtained {
             showUnlocked = true
         }
         // When obtained: CTA navigates somewhere — TODO when backend ready

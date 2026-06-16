@@ -1822,3 +1822,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badge_tisseur_liens_what_it_means" = "الانتظام هو مفتاح الروابط الاجتماعية. هذه الشارة تكافئ من يعودون أسبوعاً بعد أسبوع.";
 "badge_tisseur_liens_cta" = "استكشاف التطبيق";
 "badge_tisseur_liens_unlocked_message" = "3 أسابيع نشطة من أصل 4 — شكراً على التزامك المستمر.";
+"badges_all_title" = "%d/%d شارة تم الحصول عليها";

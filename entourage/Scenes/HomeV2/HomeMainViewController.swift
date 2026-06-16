@@ -111,12 +111,6 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
         ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
 
-        // Setup logo - make it user interactive and add tap gesture
-        if let logo = ui_logo_entourage {
-            logo.isUserInteractionEnabled = true
-            let logoTapGesture = UITapGestureRecognizer(target: self, action: #selector(showBadgeDetail))
-            logo.addGestureRecognizer(logoTapGesture)
-        }
 
         self.checkAndCreateCookieIfNotExists()
         
@@ -380,10 +374,11 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     
     @objc func onAvatarClick() {
         AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
-        // Always use UIKit ProfileFullViewController for avatar click
-        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
-        navVC.modalPresentationStyle = .fullScreen
-        self.tabBarController?.present(navVC, animated: true)
+        let profileView = ProfileView(viewModel: self.profileViewModel)
+        self.profileViewModel.navigationDelegate = self
+        let hc = UIHostingController(rootView: profileView)
+        hc.modalPresentationStyle = .fullScreen
+        (self.tabBarController ?? self).present(hc, animated: true)
     }
     
     @objc func onNotifClick() {
@@ -396,18 +391,6 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
             }
             self.tabBarController?.present(navVC, animated: true)
         }
-    }
-    
-    @objc func showBadgeDetail() {
-        let profileView = ProfileView(viewModel: self.profileViewModel)
-        self.profileViewModel.navigationDelegate = self
-        let hostingController = UIHostingController(rootView: profileView)
-        hostingController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        
-        let navigationController = UINavigationController(rootViewController: hostingController)
-        navigationController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        
-        present(navigationController, animated: true, completion: nil)
     }
     
     func configureDTO() {
@@ -1271,17 +1254,18 @@ extension HomeMainViewController: ProfileNavigationDelegate, ImageReUpLoadDelega
         if let navVC = sb.instantiateViewController(withIdentifier: "editProfilePhotoNav") as? UINavigationController,
            let editPhotoVC = navVC.topViewController as? UserPhotoAddViewController {
             editPhotoVC.pictureSettingDelegate = self
-            self.present(navVC, animated: true, completion: nil)
+            AppState.getTopViewController()?.present(navVC, animated: true, completion: nil)
         }
     }
 
     func showProfileEditor(user: User?) {
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
-        if let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav") as? UINavigationController, let editVC = navVC.topViewController as? ProfileEditorViewController {
+        if let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav") as? UINavigationController,
+           let editVC = navVC.topViewController as? ProfileEditorViewController {
             editVC.profilFullDelegate = self
             editVC.currentUser = user
             navVC.modalPresentationStyle = .fullScreen
-            self.present(navVC, animated: true)
+            AppState.getTopViewController()?.present(navVC, animated: true)
         }
     }
 
