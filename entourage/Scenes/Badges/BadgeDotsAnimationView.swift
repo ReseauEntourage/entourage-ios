@@ -5,7 +5,7 @@ private struct DotConfig {
     let yRatio: CGFloat
     let radius: CGFloat
     let color: Color
-    let phaseOffset: Double
+    let delay: Double
 }
 
 private let dotConfigs: [DotConfig] = {
@@ -17,31 +17,36 @@ private let dotConfigs: [DotConfig] = {
         (0.70, 0.68), (0.42, 0.50), (0.10, 0.38)
     ]
     let colors: [Color] = [.orange, Color(red: 0.2, green: 0.7, blue: 0.3), Color(red: 0.2, green: 0.5, blue: 0.9), Color(red: 0.8, green: 0.2, blue: 0.2)]
+    let cycleDuration = 2.5
     return positions.enumerated().map { i, pos in
         DotConfig(
             xRatio: pos.0,
             yRatio: pos.1,
             radius: CGFloat(4 + (i % 3) * 2),
             color: colors[i % colors.count],
-            phaseOffset: Double(i) / Double(positions.count)
+            delay: Double(i) / Double(positions.count) * cycleDuration
         )
     }
 }()
 
 struct BadgeDotsAnimationView: View {
-    @State private var phase: Double = 0
+    @State private var animating = false
 
     var body: some View {
         GeometryReader { geo in
             ZStack {
                 ForEach(0..<dotConfigs.count, id: \.self) { i in
                     let dot = dotConfigs[i]
-                    let currentPhase = (phase + dot.phaseOffset).truncatingRemainder(dividingBy: 1.0)
-                    let alpha = sin(currentPhase * .pi)
                     Circle()
                         .fill(dot.color)
                         .frame(width: dot.radius * 2, height: dot.radius * 2)
-                        .opacity(Double(alpha).clamped(to: 0.15...0.85))
+                        .opacity(animating ? 0.85 : 0.1)
+                        .animation(
+                            .easeInOut(duration: 1.25)
+                                .repeatForever(autoreverses: true)
+                                .delay(dot.delay),
+                            value: animating
+                        )
                         .position(
                             x: geo.size.width * dot.xRatio,
                             y: geo.size.height * dot.yRatio
@@ -50,15 +55,7 @@ struct BadgeDotsAnimationView: View {
             }
         }
         .onAppear {
-            withAnimation(.linear(duration: 2.5).repeatForever(autoreverses: false)) {
-                phase = 1.0
-            }
+            animating = true
         }
-    }
-}
-
-private extension Double {
-    func clamped(to range: ClosedRange<Double>) -> Double {
-        Swift.min(Swift.max(self, range.lowerBound), range.upperBound)
     }
 }

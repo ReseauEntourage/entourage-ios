@@ -129,31 +129,30 @@ struct ProfileView: View {
                         HStack {
                             Button(action: { presentationMode.wrappedValue.dismiss() }) {
                                 Image(systemName: "chevron.left")
+                                    .font(.system(size: 16, weight: .semibold))
                                     .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.black.opacity(0.5))
+                                    .frame(width: 36, height: 36)
+                                    .background(Color.black.opacity(0.45))
                                     .clipShape(Circle())
                             }
-                            .frame(width: 50, height: 50)
-                            .position(x: 50, y: 50)
 
                             Spacer()
 
                             if !viewModel.isMe {
-                                Button(action: {
-                                    viewModel.onSignalUserClick()
-                                }) {
-                                    Image("ic_signal")
-                                        .renderingMode(.template)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .background(Color.black.opacity(0.5))
+                                Button(action: { viewModel.onSignalUserClick() }) {
+                                    Image("ic_signal_orange")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
+                                        .colorMultiply(.white)
+                                        .frame(width: 36, height: 36)
+                                        .background(Color.black.opacity(0.45))
                                         .clipShape(Circle())
                                 }
                             }
                         }
                         .padding(.horizontal, 16)
-                        .padding(.top, 40)
+                        .padding(.top, 52)
                     }
                 )
 
@@ -307,6 +306,7 @@ struct ProfileView: View {
                 if let user = viewModel.user {
                     MainStatUserView(isMe: viewModel.isMe, user: user)
                         .padding(.horizontal)
+                        .padding(.top, 10)
                 }
 
                 // Badges section (own profile only)
@@ -513,65 +513,83 @@ struct MainStatUserView: View {
     let isMe: Bool
     let user: User
 
-    func formatCreationDate(_ date: Date) -> String {
-        let dateFormat = DateFormatter()
-        dateFormat.locale = Locale.getPreferredLocale()
-        dateFormat.dateFormat = "MM/yyyy"
-        let result = dateFormat.string(from: date)
-        return result
+    private func formatDate(_ date: Date) -> String {
+        let fmt = DateFormatter()
+        fmt.locale = Locale.getPreferredLocale()
+        fmt.dateFormat = "MM/yyyy"
+        return fmt.string(from: date)
     }
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(alignment: .leading, spacing: 0) {
+            // Title — "Mon activité" / "Son activité"
             Text(isMe ? "mainUserTitleActivity".localized : "detail_user_his_activity".localized)
-                .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
+                .font(.custom("Quicksand-Bold", size: 15))
                 .foregroundColor(.black)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 10)
+                .padding(.bottom, 18)
 
-            HStack(spacing: 32) {
-                VStack {
-                    let count = user.stats?.neighborhoodsCount ?? 0
-                    Text("\(count)")
-                        .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)))
-                        .foregroundColor(count == 0 ? .gray : .black)
-
-                    Text(count <= 1 ? "mainUserTitleGroup".localized : "mainUserTitleGroups".localized)
-                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+            // Member since card (full width)
+            if let date = user.creationDate {
+                VStack(spacing: 2) {
+                    Text("memberSince".localized)
+                        .font(.custom("NunitoSans-Regular", size: 14))
+                        .foregroundColor(.black)
+                    Text(formatDate(date))
+                        .font(.custom("Quicksand-Bold", size: 15))
                         .foregroundColor(.black)
                 }
-
-                VStack {
-                    let count = user.stats?.outingsCount ?? -1
-                    let displayCount = count < 0 ? 0 : count
-                    Text("\(displayCount)")
-                        .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)))
-                        .foregroundColor(displayCount == 0 ? .gray : .black)
-
-                    Text(displayCount <= 1 ? "mainUserTitleOuting".localized : "mainUserTitleOutings".localized)
-                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                        .foregroundColor(.black)
-                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
+                .background(Color.white)
+                .cornerRadius(16)
+                .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(UIColor.appOrangeLight), lineWidth: 1))
+                .padding(.bottom, 12)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
 
-            if let myDate = user.creationDate {
-                HStack {
-                    Text("mainUserTitleMember".localized)
-                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                        .foregroundColor(.black)
+            // Two stat cards side by side
+            HStack(spacing: 8) {
+                let groups = user.stats?.neighborhoodsCount ?? 0
+                let outings = max(0, user.stats?.outingsCount ?? 0)
 
-                    let dateString = self.formatCreationDate(myDate)
-                    Text(dateString)
-                        .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                        .foregroundColor(.black)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                statCard(
+                    count: groups,
+                    label: groups <= 1 ? "mainUserTitleGroup".localized : "mainUserTitleGroups".localized,
+                    systemIcon: "person.2.fill"
+                )
+                statCard(
+                    count: outings,
+                    label: outings <= 1 ? "mainUserTitleOuting".localized : "mainUserTitleOutings".localized,
+                    systemIcon: "calendar"
+                )
             }
         }
-        .padding()
+        .padding(10)
+        .background(Color.appBeige)
+        .cornerRadius(10)
+    }
+
+    private func statCard(count: Int, label: String, systemIcon: String) -> some View {
+        VStack(spacing: 4) {
+            Text("\(count)")
+                .font(.custom("Quicksand-Bold", size: 20))
+                .foregroundColor(count == 0 ? Color(UIColor.appGris112) : .black)
+
+            HStack(spacing: 4) {
+                Image(systemName: systemIcon)
+                    .font(.system(size: 13))
+                    .foregroundColor(Color(UIColor.appOrange))
+                Text(label)
+                    .font(.custom("NunitoSans-Regular", size: 13))
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 10)
         .background(Color.white)
         .cornerRadius(16)
-        .shadow(color: Color(UIColor.appOrangeLight).opacity(0.25), radius: 4, x: 1, y: 1)
+        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(UIColor.appOrangeLight), lineWidth: 1))
     }
 }
 
@@ -1056,7 +1074,7 @@ class BasicProfileNavigationDelegate: NSObject, ProfileNavigationDelegate {
                 .instantiateInitialViewController() as? UINavigationController,
               let vc = navVc.topViewController as? PartnerDetailViewController else { return }
         if let id = partner.aid { vc.partnerId = id } else { vc.partner = partner }
-        DispatchQueue.main.async { self.presenter?.present(navVc, animated: true) }
+        DispatchQueue.main.async { AppState.getTopViewController()?.present(navVc, animated: true) }
     }
 
     func showConversation(conversation: Conversation?) {
@@ -1067,7 +1085,7 @@ class BasicProfileNavigationDelegate: NSObject, ProfileNavigationDelegate {
                 as? ConversationDetailMessagesViewController {
                 vc.setupFromOtherVC(conversationId: convId, title: conversation?.title,
                                     isOneToOne: true, conversation: conversation)
-                self.presenter?.present(vc, animated: true)
+                AppState.getTopViewController()?.present(vc, animated: true)
             }
         }
     }
@@ -1077,7 +1095,7 @@ class BasicProfileNavigationDelegate: NSObject, ProfileNavigationDelegate {
             .instantiateViewController(withIdentifier: "reportUserMainVC")
             as? ReportUserMainViewController else { return }
         vc.user = user
-        DispatchQueue.main.async { self.presenter?.present(vc, animated: true) }
+        DispatchQueue.main.async { AppState.getTopViewController()?.present(vc, animated: true) }
     }
 }
 
@@ -1086,16 +1104,24 @@ class BasicProfileNavigationDelegate: NSObject, ProfileNavigationDelegate {
 private var associatedDelegateKey = "profileNavDelegate"
 
 extension UIViewController {
-    /// Present the SwiftUI profile for another user (isMe = false).
+    /// Present the SwiftUI profile for a given userId.
+    /// Automatically detects if it's the current user and sets isMe accordingly.
     func presentOtherUserProfile(userId: String) {
+        let currentUserId = UserDefaults.currentUser?.sid.description ?? ""
+        let isCurrentUser = !userId.isEmpty && userId == currentUserId
+
         let vm = ProfileViewModel()
-        vm.userIdToDisplay = userId
-        vm.isMe = false
+        if isCurrentUser {
+            // Own profile — no userIdToDisplay, loadData will set isMe=true
+            vm.isMe = true
+        } else {
+            vm.userIdToDisplay = userId
+            vm.isMe = false
+        }
         let delegate = BasicProfileNavigationDelegate(presenter: self)
         vm.navigationDelegate = delegate
         let hc = UIHostingController(rootView: ProfileView(viewModel: vm))
         hc.modalPresentationStyle = .fullScreen
-        // Retain the delegate for the lifetime of the hosting controller
         objc_setAssociatedObject(hc, &associatedDelegateKey, delegate, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         present(hc, animated: true)
     }
