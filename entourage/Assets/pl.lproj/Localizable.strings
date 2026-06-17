@@ -1846,6 +1846,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badges_none_yet" = "Brak zdobytych odznak.";
 "badges_list_title" = "Moje odznaki";
 "badges_list_main_title" = "Twoje odznaki Entourage";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
 "badges_list_subtitle" = "%d zdobytych, %d w toku, %d do odkrycia. Każda odznaka nagradza konkretne działanie w Twojej społeczności.";
 "badges_section_obtained" = "Zdobyte %d/%d";
 "badges_section_in_progress" = "W toku %d/%d";

@@ -1771,6 +1771,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badges_none_yet" = "لا توجد شارات مكتسبة بعد.";
 "badges_list_title" = "شاراتي";
 "badges_list_main_title" = "شارات Entourage الخاصة بك";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
 "badges_list_subtitle" = "%d مكتسبة، %d قيد التقدم، %d لاكتشافها. كل شارة تكافئ عملاً ملموساً في مجتمعك.";
 "badges_section_obtained" = "مكتسبة %d/%d";
 "badges_section_in_progress" = "قيد التقدم %d/%d";

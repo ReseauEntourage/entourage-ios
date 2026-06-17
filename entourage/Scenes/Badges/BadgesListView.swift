@@ -4,12 +4,15 @@ struct BadgesListView: View {
     let obtainedKeys: [String]
     @Environment(\.presentationMode) var presentationMode
     @State private var selectedProgress: UserBadgeProgress?
-    @State private var showDetail = false
     @State private var demoMode = false
+
+    // Switch OFF → 0 badges (état vide), Switch ON → demo (badges hardcodés)
+    private let demoKeys = ["bienvenue", "premier_contact", "fidele_papotages"]
+    private let hPad: CGFloat = 20
 
     private var effectiveKeys: [String] {
         #if DEBUG
-        return demoMode ? [] : obtainedKeys
+        return demoMode ? demoKeys : []
         #else
         return obtainedKeys
         #endif
@@ -19,63 +22,20 @@ struct BadgesListView: View {
     private var obtained: [UserBadgeProgress] { allProgress.filter { $0.isObtained } }
     private var inProgress: [UserBadgeProgress] { allProgress.filter { !$0.isObtained && $0.progress > 0 } }
     private var notStarted: [UserBadgeProgress] { allProgress.filter { !$0.isObtained && $0.progress == 0 } }
-    private var isEmpty: Bool { obtained.isEmpty && inProgress.isEmpty }
+    private var isEmptyState: Bool { obtained.isEmpty && inProgress.isEmpty }
 
     var body: some View {
         VStack(spacing: 0) {
-            // Navigation bar
-            ZStack {
-                Text("badges_list_title".localized)
-                    .font(Font(UIFont(name: "NunitoSans-Bold", size: 17) ?? .systemFont(ofSize: 17, weight: .bold)))
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity, alignment: .center)
-
-                HStack {
-                    Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.black)
-                            .padding(.leading, 20)
-                    }
-                    Spacer()
-                    #if DEBUG
-                    Toggle("", isOn: $demoMode)
-                        .labelsHidden()
-                        .padding(.trailing, 16)
-                        .scaleEffect(0.8)
-                    #endif
-                }
-            }
-            .frame(height: 44)
-            .padding(.top, 30)
-            .padding(.bottom, 12)
-            .background(Color.white)
+            navBar
 
             Divider()
 
-            // Content
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 0) {
-                    if isEmpty {
-                        emptyStateHeader
+                VStack(alignment: .leading, spacing: 0) {
+                    if isEmptyState {
+                        emptyStateContent
                     } else {
-                        fullHeader
-                    }
-
-                    if isEmpty {
-                        badgeRows(items: allProgress)
-                    } else {
-                        if !obtained.isEmpty {
-                            sectionHeader(String(format: "badges_section_obtained".localized, obtained.count, allBadgeDefinitions.count))
-                            badgeRows(items: obtained)
-                        }
-                        if !inProgress.isEmpty {
-                            sectionHeader(String(format: "badges_section_in_progress".localized, inProgress.count, allBadgeDefinitions.count))
-                            badgeRows(items: inProgress)
-                        }
-                        if !notStarted.isEmpty {
-                            sectionHeader(String(format: "badges_section_not_started".localized, notStarted.count, allBadgeDefinitions.count))
-                            badgeRows(items: notStarted)
-                        }
+                        fullContent
                     }
 
                     Button(action: {}) {
@@ -86,118 +46,201 @@ struct BadgesListView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 24)
                 }
+                .padding(.top, 16)
             }
             .background(Color.white)
         }
         .background(Color.white)
-        .sheet(isPresented: $showDetail) {
-            if let p = selectedProgress {
-                BadgeDetailSheet(
-                    progress: p,
-                    obtainedKeys: effectiveKeys,
-                    onShowAllBadges: {}
-                )
-            }
+        .sheet(item: $selectedProgress) { p in
+            BadgeDetailSheet(
+                progress: p,
+                obtainedKeys: effectiveKeys,
+                onShowAllBadges: {}
+            )
         }
     }
 
-    // MARK: - Subviews
+    // MARK: - Nav bar
 
-    private var emptyStateHeader: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(allBadgeDefinitions.map { $0.emoji }.joined(separator: "  "))
-                .font(.system(size: 24))
+    private var navBar: some View {
+        ZStack {
+            Text("badges_list_title".localized)
+                .font(Font(UIFont(name: "NunitoSans-Bold", size: 17) ?? .systemFont(ofSize: 17, weight: .bold)))
+                .foregroundColor(.black)
                 .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 8)
 
-            if let firstDef = allBadgeDefinitions.first {
-                Text(String(format: "badges_empty_start_label".localized) + " \(firstDef.titleKey.localized) \(firstDef.emoji)")
+            HStack {
+                Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.black)
+                        .padding(.leading, hPad)
+                }
+                Spacer()
+                #if DEBUG
+                Toggle("", isOn: $demoMode)
+                    .labelsHidden()
+                    .padding(.trailing, 16)
+                    .scaleEffect(0.85)
+                #endif
+            }
+        }
+        .frame(height: 44)
+        .padding(.top, 30)
+        .padding(.bottom, 12)
+        .background(Color.white)
+    }
+
+    // MARK: - Empty state (0 badges)
+
+    private var emptyStateContent: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            // Carte héro
+            VStack(spacing: 10) {
+                Text(allBadgeDefinitions.map { $0.emoji }.joined(separator: "  "))
+                    .font(.system(size: 26))
+                    .frame(maxWidth: .infinity, alignment: .center)
+
+                Text("badges_list_main_title".localized)
+                    .font(Font(UIFont(name: "Quicksand-Bold", size: 20) ?? .systemFont(ofSize: 20, weight: .bold)))
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, alignment: .center)
+
+                Text("badges_list_intro".localized)
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundColor(Color(UIColor.appGris112))
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
             }
+            .padding(16)
+            .background(Color(UIColor.appOrangeLight).opacity(0.4))
+            .cornerRadius(16)
+            .padding(.horizontal, hPad)
 
+            // Carte "premier badge" CTA
+            if let firstDef = allBadgeDefinitions.first {
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 10) {
+                        ZStack {
+                            Circle()
+                                .fill(Color(UIColor.appOrangeLight).opacity(0.6))
+                                .frame(width: 48, height: 48)
+                            Text(firstDef.emoji)
+                                .font(.system(size: 24))
+                        }
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("badges_empty_start_label".localized.uppercased())
+                                .font(Font(UIFont(name: "NunitoSans-Bold", size: 11) ?? .systemFont(ofSize: 11, weight: .bold)))
+                                .foregroundColor(Color(UIColor.appOrange))
+                                .kerning(0.5)
+                            Text("\(firstDef.titleKey.localized) \(firstDef.emoji)")
+                                .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15, weight: .bold)))
+                                .foregroundColor(.black)
+                        }
+                    }
+
+                    Text(firstDef.descriptionShortKey.localized)
+                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
+                        .foregroundColor(.black.opacity(0.8))
+
+                    Button(action: {}) {
+                        Text(firstDef.ctaLabelKey.localized)
+                            .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15, weight: .bold)))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 12)
+                            .background(Color(UIColor.appOrange))
+                            .cornerRadius(30)
+                    }
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(UIColor.appOrangeLight).opacity(0.4))
+                .cornerRadius(16)
+                .padding(.horizontal, hPad)
+            }
+
+            // En-tête "Tous les badges 0/5"
             Text(String(format: "badges_all_title".localized, 0, allBadgeDefinitions.count))
-                .font(Font(UIFont(name: "NunitoSans-Bold", size: 14) ?? .systemFont(ofSize: 14, weight: .bold)))
+                .font(Font(UIFont(name: "NunitoSans-Bold", size: 13) ?? .systemFont(ofSize: 13, weight: .bold)))
                 .foregroundColor(.black)
-                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.horizontal, hPad)
+                .padding(.top, 12)
+                .padding(.bottom, 6)
+
+            // Tous les badges en mode "non commencé"
+            VStack(spacing: 10) {
+                ForEach(allProgress, id: \.definition.key.rawValue) { item in
+                    BadgeListRowView(progress: item)
+                        .onTapGesture { selectedProgress = item }
+                }
+            }
+            .padding(.horizontal, hPad)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 16)
     }
 
-    private var fullHeader: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("badges_list_main_title".localized)
-                .font(Font(UIFont(name: "Quicksand-Bold", size: 20) ?? .systemFont(ofSize: 20, weight: .bold)))
-                .foregroundColor(.black)
+    // MARK: - Full content (avec badges)
 
-            Text(String(format: "badges_list_subtitle".localized, obtained.count, inProgress.count, allBadgeDefinitions.count - obtained.count - inProgress.count))
-                .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
-                .foregroundColor(Color(UIColor.appGris112))
-                .multilineTextAlignment(.leading)
+    private var fullContent: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if !obtained.isEmpty {
+                sectionHeader(String(format: "badges_section_obtained".localized, obtained.count, allBadgeDefinitions.count))
+                badgeRows(items: obtained)
+                    .padding(.bottom, 4)
+            }
+            if !inProgress.isEmpty {
+                sectionHeader(String(format: "badges_section_in_progress".localized, inProgress.count, allBadgeDefinitions.count))
+                badgeRows(items: inProgress)
+                    .padding(.bottom, 4)
+            }
+            if !notStarted.isEmpty {
+                sectionHeader(String(format: "badges_section_not_started".localized, notStarted.count, allBadgeDefinitions.count))
+                badgeRows(items: notStarted)
+                    .padding(.bottom, 4)
+            }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 16)
-        .padding(.vertical, 16)
     }
 
     private func sectionHeader(_ title: String) -> some View {
         Text(title)
             .font(Font(UIFont(name: "NunitoSans-Bold", size: 13) ?? .systemFont(ofSize: 13, weight: .bold)))
             .foregroundColor(Color(UIColor.appGris112))
-            .kerning(0.5)
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
-            .padding(.bottom, 8)
+            .padding(.horizontal, hPad)
+            .padding(.top, 8)
+            .padding(.bottom, 10)
     }
 
     private func badgeRows(items: [UserBadgeProgress]) -> some View {
-        ForEach(items, id: \.definition.key.rawValue) { item in
-            BadgeListRowView(progress: item)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 4)
-                .onTapGesture {
-                    selectedProgress = item
-                    showDetail = true
-                }
+        VStack(spacing: 10) {
+            ForEach(items, id: \.definition.key.rawValue) { item in
+                BadgeListRowView(progress: item)
+                    .padding(.horizontal, hPad)
+                    .onTapGesture { selectedProgress = item }
+            }
         }
     }
 }
 
-// MARK: - Row
+// MARK: - BadgeListRowView
 
 struct BadgeListRowView: View {
     let progress: UserBadgeProgress
     private var def: BadgeDefinition { progress.definition }
 
-    private var cardBackground: Color {
-        if progress.isObtained || progress.progress > 0 {
-            return Color.white
-        } else {
-            return Color(UIColor.appOrangeLight).opacity(0.15)
-        }
-    }
-
-    private var emojiCircleBackground: Color {
-        if progress.isObtained || progress.progress > 0 {
-            return Color(UIColor.appOrangeLight).opacity(0.4)
-        } else {
-            return Color(UIColor.systemGray5)
-        }
-    }
+    private var isActive: Bool { progress.isObtained || progress.progress > 0 }
 
     var body: some View {
         HStack(spacing: 12) {
-            // Emoji in circle
+            // Emoji en cercle
             ZStack {
                 Circle()
-                    .fill(emojiCircleBackground)
+                    .fill(isActive
+                        ? Color(UIColor.appOrangeLight).opacity(0.5)
+                        : Color(UIColor.systemGray5))
                     .frame(width: 52, height: 52)
                 Text(def.emoji)
                     .font(.system(size: 26))
-                    .opacity(progress.isObtained || progress.progress > 0 ? 1.0 : 0.5)
+                    .opacity(isActive ? 1.0 : 0.5)
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -205,7 +248,7 @@ struct BadgeListRowView: View {
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15, weight: .bold)))
                     .foregroundColor(.black)
 
-                // Subtitle
+                // Sous-titre
                 if progress.isObtained {
                     let dateText = progress.obtainedDate ?? ""
                     Text(dateText.isEmpty ? "badge_obtained".localized : String(format: "badge_obtained_on".localized, dateText))
@@ -214,11 +257,11 @@ struct BadgeListRowView: View {
                 } else {
                     Text(def.descriptionShortKey.localized)
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
-                        .foregroundColor(progress.progress > 0 ? Color(UIColor.appGris112) : .black)
-                        .lineLimit(1)
+                        .foregroundColor(Color(UIColor.appGris112))
+                        .lineLimit(2)
                 }
 
-                // Progress bar
+                // Barre de progression
                 if progress.isObtained {
                     GeometryReader { geo in
                         ZStack(alignment: .leading) {
@@ -239,6 +282,7 @@ struct BadgeListRowView: View {
                         alignment: .trailing
                     )
                     .padding(.bottom, 14)
+                    .padding(.top, 2)
                 } else if progress.progress > 0 {
                     GeometryReader { geo in
                         ZStack(alignment: .leading) {
@@ -259,20 +303,18 @@ struct BadgeListRowView: View {
                         alignment: .trailing
                     )
                     .padding(.bottom, 14)
+                    .padding(.top, 2)
                 } else {
-                    // Not started — just label
-                    HStack {
-                        Spacer()
-                        Text("0/\(def.maxProgress)")
-                            .font(Font(UIFont(name: "NunitoSans-Regular", size: 11) ?? .systemFont(ofSize: 11)))
-                            .foregroundColor(.black)
-                    }
+                    // Non commencé
+                    Text("0/\(def.maxProgress)")
+                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 11) ?? .systemFont(ofSize: 11)))
+                        .foregroundColor(Color(UIColor.appGris112))
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
         }
         .padding(12)
-        .background(cardBackground)
+        .background(isActive ? Color.white : Color(UIColor.systemGray6))
         .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.07), radius: 4, x: 0, y: 2)
     }
 }

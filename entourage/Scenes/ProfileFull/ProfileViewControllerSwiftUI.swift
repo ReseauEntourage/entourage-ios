@@ -79,6 +79,7 @@ struct ProfileView: View {
     @State private var scrollOffset: CGFloat = 0
     @State private var showBadgesList = false
     @State private var selectedBadgeProgress: UserBadgeProgress?
+    @State private var showSettings = false
 
 
     var body: some View {
@@ -138,7 +139,16 @@ struct ProfileView: View {
 
                             Spacer()
 
-                            if !viewModel.isMe {
+                            if viewModel.isMe {
+                                Button(action: { showSettings = true }) {
+                                    Image(systemName: "gearshape.fill")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .foregroundColor(.white)
+                                        .frame(width: 36, height: 36)
+                                        .background(Color.black.opacity(0.45))
+                                        .clipShape(Circle())
+                                }
+                            } else {
                                 Button(action: { viewModel.onSignalUserClick() }) {
                                     Image("ic_signal_orange")
                                         .resizable()
@@ -342,27 +352,15 @@ struct ProfileView: View {
                     .padding(.horizontal)
                 }
 
-                // Settings section (only for current user)
-                if viewModel.isMe {
-                    SettingsSectionView(
-                        activatedNotif: viewModel.activatedNotif,
-                        numberOfBlocked: viewModel.numberOfBlocked,
-                        viewModel: viewModel
-                    )
-                    .padding(.horizontal)
-
-                    // App version
-                    Text(viewModel.getAppVersion())
-                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 10) ?? UIFont.systemFont(ofSize: 10)))
-                        .foregroundColor(.gray)
-                        .padding()
-                }
             }
         }
         .edgesIgnoringSafeArea(.top)
         .id(viewModel.user?.uuid ?? "profile")
         .onAppear {
             viewModel.loadData()
+        }
+        .sheet(isPresented: $showSettings) {
+            ProfileSettingsView(viewModel: viewModel)
         }
     }
 }

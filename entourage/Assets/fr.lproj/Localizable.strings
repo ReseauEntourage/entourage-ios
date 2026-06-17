@@ -2071,6 +2071,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badges_none_yet" = "Pas encore de badges obtenus.";
 "badges_list_title" = "Mes badges";
 "badges_list_main_title" = "Vos badges Entourage";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
 "badges_list_subtitle" = "%d obtenus, %d en cours, %d à découvrir. Chaque badge récompense une action concrète dans votre communauté.";
 "badges_section_obtained" = "Obtenus %d/%d";
 "badges_section_in_progress" = "En cours %d/%d";

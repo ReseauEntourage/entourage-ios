@@ -12,11 +12,14 @@ struct BadgeDetailSheet: View {
     // TODO: restore isObtained when backend sends real obtained state
     private var isObtained: Bool { false }
 
+    private let hPad: CGFloat = 20
+    private let sectionSpacing: CGFloat = 10
+
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 0) {
-                    // Emoji + title header
+                VStack(spacing: sectionSpacing) {
+                    // Emoji + title — fond blanc
                     VStack(spacing: 8) {
                         Text(def.emoji)
                             .font(.system(size: 64))
@@ -28,36 +31,31 @@ struct BadgeDetailSheet: View {
                             .multilineTextAlignment(.center)
                     }
                     .frame(maxWidth: .infinity)
+                    .padding(.horizontal, hPad)
                     .padding(.vertical, 16)
-                    .background(Color(UIColor.appOrangeLight).opacity(0.15))
+                    .background(Color.white)
+                    .cornerRadius(12)
 
-                    // Status card
+                    // Statut obtenu / pas obtenu
                     statusCard
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 16)
+                        .padding(.horizontal, hPad)
 
-                    Divider()
-
-                    // How it works
-                    badgeSection(
+                    // Comment ça marche — fond blanc
+                    sectionCard(
                         title: "badge_how_it_works_title".localized,
-                        body: def.howItWorksKey.localized,
-                        background: Color(UIColor.appOrangeLight).opacity(0.15)
+                        body: def.howItWorksKey.localized
                     )
 
-                    // Mechanism
-                    mechanismSection
+                    // Mécanique — fond blanc
+                    mechanismCard
 
-                    // What it means
-                    badgeSection(
+                    // Ce que ça représente — fond blanc
+                    sectionCard(
                         title: "badge_what_it_means_title".localized,
-                        body: def.whatItMeansKey.localized,
-                        background: Color.white
+                        body: def.whatItMeansKey.localized
                     )
 
-                    Spacer().frame(height: 16)
-
-                    // CTA button
+                    // Boutons CTA
                     VStack(spacing: 12) {
                         Button(action: handleCta) {
                             Text(def.ctaLabelKey.localized)
@@ -78,10 +76,13 @@ struct BadgeDetailSheet: View {
                                 .foregroundColor(Color(UIColor.appOrange))
                         }
                     }
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, hPad)
                     .padding(.bottom, 32)
                 }
+                .padding(.horizontal, 0)
+                .padding(.top, sectionSpacing)
             }
+            .background(Color(UIColor.systemGray6).edgesIgnoringSafeArea(.all))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarTitle("badge_detail_title".localized)
             .toolbar {
@@ -105,35 +106,40 @@ struct BadgeDetailSheet: View {
         }
     }
 
+    // MARK: - Status card
+
     @ViewBuilder
     private var statusCard: some View {
         if isObtained {
-            VStack(spacing: 4) {
-                HStack(spacing: 6) {
-                    Image(systemName: "checkmark")
+            HStack(spacing: 6) {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
+                    .font(.system(size: 16, weight: .bold))
+                let dateText = progress.obtainedDate ?? ""
+                if dateText.isEmpty {
+                    Text("badge_obtained".localized)
+                        .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
                         .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
-                        .font(.system(size: 13, weight: .bold))
-                    let dateText = progress.obtainedDate ?? ""
-                    if dateText.isEmpty {
-                        Text("badge_obtained".localized)
-                            .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
-                            .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
-                    } else {
-                        Text(String(format: "badge_obtained_on".localized, dateText))
-                            .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
-                            .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
-                    }
+                } else {
+                    Text(String(format: "badge_obtained_on".localized, dateText))
+                        .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
+                        .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
                 }
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, alignment: .center)
             .padding(.vertical, 14)
             .background(Color(red: 0.88, green: 0.96, blue: 0.91))
             .cornerRadius(12)
         } else {
             VStack(alignment: .leading, spacing: 8) {
-                Text("badge_not_obtained".localized)
-                    .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
-                    .foregroundColor(.black)
+                HStack(spacing: 6) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(Color(UIColor.systemGray3))
+                        .font(.system(size: 16))
+                    Text("badge_not_obtained".localized)
+                        .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
+                        .foregroundColor(.black)
+                }
 
                 Text(def.descriptionShortKey.localized)
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
@@ -164,13 +170,32 @@ struct BadgeDetailSheet: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(14)
-            .background(Color(UIColor.appOrangeLight).opacity(0.2))
+            .background(Color(UIColor.systemGray5))
             .cornerRadius(12)
         }
     }
 
-    @ViewBuilder
-    private var mechanismSection: some View {
+    // MARK: - Sections
+
+    private func sectionCard(title: String, body: String) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(Font(UIFont(name: "Quicksand-Bold", size: 13) ?? .systemFont(ofSize: 13)))
+                .foregroundColor(Color(UIColor.appGris112))
+                .textCase(.uppercase)
+            Text(body)
+                .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
+                .foregroundColor(.black)
+                .multilineTextAlignment(.leading)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, hPad)
+        .padding(.vertical, 16)
+        .background(Color.white)
+        .cornerRadius(12)
+    }
+
+    private var mechanismCard: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("badge_mechanism_title".localized)
                 .font(Font(UIFont(name: "Quicksand-Bold", size: 13) ?? .systemFont(ofSize: 13)))
@@ -187,27 +212,10 @@ struct BadgeDetailSheet: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 16)
+        .padding(.horizontal, hPad)
         .padding(.vertical, 16)
-        .background(Color(red: 0.88, green: 0.96, blue: 0.91).opacity(def.isReversible ? 0 : 1).blendMode(.normal))
-        .background(def.isReversible ? Color(UIColor.appOrangeLight).opacity(0.1) : Color(red: 0.88, green: 0.96, blue: 0.91))
-    }
-
-    private func badgeSection(title: String, body: String, background: Color) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(Font(UIFont(name: "Quicksand-Bold", size: 13) ?? .systemFont(ofSize: 13)))
-                .foregroundColor(Color(UIColor.appGris112))
-                .textCase(.uppercase)
-            Text(body)
-                .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
-                .foregroundColor(.black)
-                .multilineTextAlignment(.leading)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 16)
-        .padding(.vertical, 16)
-        .background(background)
+        .background(Color.white)
+        .cornerRadius(12)
     }
 
     private func handleCta() {

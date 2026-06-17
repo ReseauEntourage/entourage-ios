@@ -1735,6 +1735,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badges_none_yet" = "Nicio insignă obținută încă.";
 "badges_list_title" = "Insignele mele";
 "badges_list_main_title" = "Insignele tale Entourage";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
 "badges_list_subtitle" = "%d obținute, %d în curs, %d de descoperit. Fiecare insignă recompensează o acțiune concretă în comunitatea ta.";
 "badges_section_obtained" = "Obținute %d/%d";
 "badges_section_in_progress" = "În curs %d/%d";

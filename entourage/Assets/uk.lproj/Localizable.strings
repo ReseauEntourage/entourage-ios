@@ -1812,6 +1812,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badges_none_yet" = "Ще немає отриманих значків.";
 "badges_list_title" = "Мої значки";
 "badges_list_main_title" = "Ваші значки Entourage";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
 "badges_list_subtitle" = "%d отримано, %d у процесі, %d ще відкрити. Кожен значок нагороджує конкретну дію у вашій спільноті.";
 "badges_section_obtained" = "Отримано %d/%d";
 "badges_section_in_progress" = "У процесі %d/%d";

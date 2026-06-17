@@ -2051,6 +2051,7 @@
 "badges_none_yet" = "No badges earned yet.";
 "badges_list_title" = "My badges";
 "badges_list_main_title" = "Your Entourage badges";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
 "badges_list_subtitle" = "%d earned, %d in progress, %d to discover. Each badge rewards a concrete action in your community.";
 "badges_section_obtained" = "Earned %d/%d";
 "badges_section_in_progress" = "In progress %d/%d";
