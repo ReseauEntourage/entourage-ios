@@ -2104,3 +2104,14 @@
 "badge_tisseur_liens_cta" = "Explore the app";
 "badge_tisseur_liens_unlocked_message" = "3 active weeks out of 4 — you keep neighbourhood groups alive. Thank you for your constant commitment.";
 "badges_all_title" = "%d/%d badges earned";
+
+"badges_intro_title" = "Chaque geste compte";
+"badges_intro_subtitle" = "Vos actions tissent des liens.\nVos badges en gardent la mémoire.";
+"badges_intro_point1_title" = "Agissez à votre rythme";
+"badges_intro_point1_body" = "Pas de pression : chaque geste dans la communauté compte.";
+"badges_intro_point2_title" = "Chaque action laisse une trace";
+"badges_intro_point2_body" = "Au fil de vos échanges et de vos participations, des badges viennent marquer les étapes.";
+"badges_intro_point3_title" = "Montrez qui vous êtes";
+"badges_intro_point3_body" = "Vos badges s'affichent sur votre profil et racontent votre histoire dans la communauté.";
+"badges_intro_cta" = "Découvrir mes badges";
+"badges_intro_later" = "Plus tard";

@@ -1885,3 +1885,14 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badge_tisseur_liens_cta" = "App erkunden";
 "badge_tisseur_liens_unlocked_message" = "3 aktive Wochen von 4 — du lässt das Herz der Nachbarschaftsgruppen schlagen. Danke!";
 "badges_all_title" = "%d/%d Abzeichen erhalten";
+
+"badges_intro_title" = "Chaque geste compte";
+"badges_intro_subtitle" = "Vos actions tissent des liens.\nVos badges en gardent la mémoire.";
+"badges_intro_point1_title" = "Agissez à votre rythme";
+"badges_intro_point1_body" = "Pas de pression : chaque geste dans la communauté compte.";
+"badges_intro_point2_title" = "Chaque action laisse une trace";
+"badges_intro_point2_body" = "Au fil de vos échanges et de vos participations, des badges viennent marquer les étapes.";
+"badges_intro_point3_title" = "Montrez qui vous êtes";
+"badges_intro_point3_body" = "Vos badges s'affichent sur votre profil et racontent votre histoire dans la communauté.";
+"badges_intro_cta" = "Découvrir mes badges";
+"badges_intro_later" = "Plus tard";

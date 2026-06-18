@@ -401,6 +401,7 @@
 		24DE08792FE0245800806810 /* BadgeDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DE08702FE0245800806810 /* BadgeDetailSheet.swift */; };
 		24DE087A2FE0245800806810 /* BadgesSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DE08742FE0245800806810 /* BadgesSectionView.swift */; };
 		24DE087B2FE0245800806810 /* BadgeUnlockedSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DE08752FE0245800806810 /* BadgeUnlockedSheet.swift */; };
+		24DE087C2FE0245800806810 /* BadgesIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DE087D2FE0245800806810 /* BadgesIntroView.swift */; };
 		24EAAA8A2F0BB94B002F2A41 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
 		24EAAA8C2F0E4FC0002F2A41 /* AssociationPresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */; };
 		24EE59A02FC08207008E7291 /* ApiKeys.dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EE599F2FC08207008E7291 /* ApiKeys.dist.plist */; };
@@ -1051,6 +1052,7 @@
 		24DE08732FE0245800806810 /* BadgesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesListView.swift; sourceTree = "<group>"; };
 		24DE08742FE0245800806810 /* BadgesSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesSectionView.swift; sourceTree = "<group>"; };
 		24DE08752FE0245800806810 /* BadgeUnlockedSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeUnlockedSheet.swift; sourceTree = "<group>"; };
+		24DE087D2FE0245800806810 /* BadgesIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesIntroView.swift; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
 		24EE599F2FC08207008E7291 /* ApiKeys.dist.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.dist.plist; sourceTree = "<group>"; };
 		24EE59A12FC083F5008E7291 /* HmacSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HmacSigner.swift; sourceTree = "<group>"; };
@@ -2226,6 +2228,7 @@
 				24DE08732FE0245800806810 /* BadgesListView.swift */,
 				24DE08742FE0245800806810 /* BadgesSectionView.swift */,
 				24DE08752FE0245800806810 /* BadgeUnlockedSheet.swift */,
+				24DE087D2FE0245800806810 /* BadgesIntroView.swift */,
 			);
 			path = Badges;
 			sourceTree = "<group>";
@@ -3212,6 +3215,7 @@
 				24DE08792FE0245800806810 /* BadgeDetailSheet.swift in Sources */,
 				24DE087A2FE0245800806810 /* BadgesSectionView.swift in Sources */,
 				24DE087B2FE0245800806810 /* BadgeUnlockedSheet.swift in Sources */,
+				24DE087C2FE0245800806810 /* BadgesIntroView.swift in Sources */,
 				24EE59A22FC083F5008E7291 /* HmacSigner.swift in Sources */,
 				0247AD002819348E008F915B /* NeighborhoodDetailViewController.swift in Sources */,
 				2432FE562F5825450033E711 /* HomeCellActionCollectionViewCell.swift in Sources */,

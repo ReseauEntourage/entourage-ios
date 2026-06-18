@@ -370,6 +370,9 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_image_user_avatar.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onAvatarClick))
         ui_image_user_avatar.addGestureRecognizer(tapGestureRecognizer)
+        ui_logo_entourage.isUserInteractionEnabled = true
+        let logoTap = UITapGestureRecognizer(target: self, action: #selector(onLogoClick))
+        ui_logo_entourage.addGestureRecognizer(logoTap)
     }
     
     @objc func onAvatarClick() {
@@ -380,7 +383,24 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         hc.modalPresentationStyle = .fullScreen
         (self.tabBarController ?? self).present(hc, animated: true)
     }
-    
+
+    @objc func onLogoClick() {
+        let badgeKeys = profileViewModel.badgeKeys
+        let introView = BadgesIntroView(
+            onDiscover: { [weak self] in
+                guard let self = self else { return }
+                let listView = BadgesListView(obtainedKeys: badgeKeys)
+                let hc = UIHostingController(rootView: listView)
+                hc.modalPresentationStyle = .fullScreen
+                AppState.getTopViewController()?.present(hc, animated: true)
+            },
+            onDismiss: {}
+        )
+        let hc = UIHostingController(rootView: introView)
+        hc.modalPresentationStyle = .pageSheet
+        (self.tabBarController ?? self).present(hc, animated: true)
+    }
+
     @objc func onNotifClick() {
         AnalyticsLoggerManager.logEvent(name: Action__Home__Notif)
         if let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav") as? UINavigationController {
