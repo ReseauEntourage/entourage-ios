@@ -1241,6 +1241,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "Надіслати";
 "messaging_message_no_message" = "Ще 0 повідомлень";
 
+"messaging_empty_state_title" = "C'est le début de votre échange";
+"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
+Choisissez un sujet pour démarrer.";
+"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
+"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
+"messaging_empty_chip_question" = "Poser une question 💬";
+"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
+"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
+"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
+"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
+"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+
 "message_title_new_conv" = "Нова розмова";
 "message_subtitle_new_conv" = "Ви ще не взаємодіяли з цим користувачем. Якщо виникла проблема, ви можете повідомити про розмову в налаштуваннях.";
 "message_error_create_conversation" = "Помилка створення бесіди";
@@ -1876,3 +1888,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badges_intro_point3_body" = "Vos badges s'affichent sur votre profil et racontent votre histoire dans la communauté.";
 "badges_intro_cta" = "Découvrir mes badges";
 "badges_intro_later" = "Plus tard";
+
+"badge_cta_see_badges" = "Voir mes badges";
+"badge_premier_pas_cta" = "Faire une première action";
+"badge_premier_lien_cta" = "Discuter avec quelqu'un";
+"badge_as_papotage_cta" = "Voir les prochaines dates";
+"badge_diffuseur_liens_cta" = "Créer un événement";
+"badge_tisseur_liens_cta" = "Voir mes groupes";

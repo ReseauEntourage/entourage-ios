@@ -46,7 +46,8 @@ struct User: Codable {
     var birthdate:String? = nil
     var isBirthday:Bool? = nil
     var radiusDistance:Int? = 0
-    
+    var badges: [UserBadgeAPI]? = nil
+
     var isEngaged:Bool = false
     
     var hasConsent:Bool? = nil
@@ -126,6 +127,7 @@ struct User: Codable {
         case birthdate
         case creationDateString = "created_at"
         case confirmedAt = "confirmed_at"
+        case badges
     }
     
     func dictionaryForWS() -> [String:Any] {

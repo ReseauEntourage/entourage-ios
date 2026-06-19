@@ -2,15 +2,14 @@ import SwiftUI
 
 struct BadgeDetailSheet: View {
     let progress: UserBadgeProgress
-    let obtainedKeys: [String]
+    let isMe: Bool
     let onShowAllBadges: () -> Void
+    let onCta: () -> Void  // appelé après dismiss, le parent gère la navigation
 
     @Environment(\.presentationMode) var presentationMode
-    @State private var showUnlocked = false
 
     private var def: BadgeDefinition { progress.definition }
-    // TODO: restore isObtained when backend sends real obtained state
-    private var isObtained: Bool { false }
+    private var isObtained: Bool { progress.isObtained }
 
     private let hPad: CGFloat = 20
     private let sectionSpacing: CGFloat = 10
@@ -19,7 +18,7 @@ struct BadgeDetailSheet: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: sectionSpacing) {
-                    // Emoji + title — fond blanc
+                    // Emoji + titre — fond blanc
                     VStack(spacing: 8) {
                         Text(def.emoji)
                             .font(.system(size: 64))
@@ -36,50 +35,48 @@ struct BadgeDetailSheet: View {
                     .background(Color.white)
                     .cornerRadius(12)
 
-                    // Statut obtenu / pas obtenu
-                    statusCard
-                        .padding(.horizontal, hPad)
+                    // Statut
+                    statusCard.padding(.horizontal, hPad)
 
-                    // Comment ça marche — fond blanc
-                    sectionCard(
-                        title: "badge_how_it_works_title".localized,
-                        body: def.howItWorksKey.localized
-                    )
+                    // Comment ça marche
+                    sectionCard(title: "badge_how_it_works_title".localized, body: def.howItWorksKey.localized)
 
-                    // Mécanique — fond blanc
+                    // Mécanique
                     mechanismCard
 
-                    // Ce que ça représente — fond blanc
-                    sectionCard(
-                        title: "badge_what_it_means_title".localized,
-                        body: def.whatItMeansKey.localized
-                    )
+                    // Ce que ça représente
+                    sectionCard(title: "badge_what_it_means_title".localized, body: def.whatItMeansKey.localized)
 
-                    // Boutons CTA
-                    VStack(spacing: 12) {
-                        Button(action: handleCta) {
-                            Text(def.ctaLabelKey.localized)
-                                .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? .systemFont(ofSize: 16)))
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
-                                .background(Color(UIColor.appOrange))
-                                .cornerRadius(30)
-                        }
+                    if isMe {
+                        // Boutons CTA
+                        VStack(spacing: 12) {
+                            Button(action: handleCta) {
+                                Text(ctaLabel)
+                                    .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? .systemFont(ofSize: 16)))
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 16)
+                                    .background(Color(UIColor.appOrange))
+                                    .cornerRadius(30)
+                            }
 
-                        Button(action: {
-                            presentationMode.wrappedValue.dismiss()
-                            onShowAllBadges()
-                        }) {
-                            Text("badge_see_all_badges".localized)
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? .systemFont(ofSize: 15)))
-                                .foregroundColor(Color(UIColor.appOrange))
+                            if !isObtained {
+                                Button(action: {
+                                    presentationMode.wrappedValue.dismiss()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                                        onShowAllBadges()
+                                    }
+                                }) {
+                                    Text("badge_see_all_badges".localized)
+                                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? .systemFont(ofSize: 15)))
+                                        .foregroundColor(Color(UIColor.appOrange))
+                                }
+                            }
                         }
+                        .padding(.horizontal, hPad)
+                        .padding(.bottom, 32)
                     }
-                    .padding(.horizontal, hPad)
-                    .padding(.bottom, 32)
                 }
-                .padding(.horizontal, 0)
                 .padding(.top, sectionSpacing)
             }
             .background(Color(UIColor.systemGray6).edgesIgnoringSafeArea(.all))
@@ -94,15 +91,18 @@ struct BadgeDetailSheet: View {
                 }
             }
         }
-        .sheet(isPresented: $showUnlocked) {
-            BadgeUnlockedSheet(
-                definition: def,
-                firstName: UserDefaults.currentUser?.firstname ?? "",
-                onSeeBadges: {
-                    presentationMode.wrappedValue.dismiss()
-                    onShowAllBadges()
-                }
-            )
+    }
+
+    // MARK: - CTA
+
+    private var ctaLabel: String {
+        isObtained ? def.ctaObtainedLabelKey.localized : def.ctaLabelKey.localized
+    }
+
+    private func handleCta() {
+        presentationMode.wrappedValue.dismiss()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            onCta()
         }
     }
 
@@ -115,7 +115,7 @@ struct BadgeDetailSheet: View {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
                     .font(.system(size: 16, weight: .bold))
-                let dateText = progress.obtainedDate ?? ""
+                let dateText = progress.obtainedDate.map { formatBadgeDate($0) } ?? ""
                 if dateText.isEmpty {
                     Text("badge_obtained".localized)
                         .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
@@ -145,7 +145,7 @@ struct BadgeDetailSheet: View {
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundColor(Color(UIColor.appGris112))
 
-                if progress.progress > 0 && def.maxProgress > 1 {
+                if progress.progress > 0 {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("badge_your_progress".localized)
                             .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
@@ -157,11 +157,11 @@ struct BadgeDetailSheet: View {
                                     .frame(height: 8)
                                 RoundedRectangle(cornerRadius: 4)
                                     .fill(Color(UIColor.appOrange))
-                                    .frame(width: geo.size.width * CGFloat(progress.progress) / CGFloat(def.maxProgress), height: 8)
+                                    .frame(width: geo.size.width * CGFloat(progress.progress) / CGFloat(max(progress.target, 1)), height: 8)
                             }
                         }
                         .frame(height: 8)
-                        Text("\(progress.progress)/\(def.maxProgress)")
+                        Text("\(progress.progress)/\(progress.target)")
                             .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
                             .foregroundColor(Color(UIColor.appOrange))
                             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -216,12 +216,5 @@ struct BadgeDetailSheet: View {
         .padding(.vertical, 16)
         .background(Color.white)
         .cornerRadius(12)
-    }
-
-    private func handleCta() {
-        if !isObtained {
-            showUnlocked = true
-        }
-        // When obtained: CTA navigates somewhere — TODO when backend ready
     }
 }

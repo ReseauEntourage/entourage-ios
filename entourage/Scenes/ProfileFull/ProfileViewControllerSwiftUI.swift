@@ -319,25 +319,45 @@ struct ProfileView: View {
                         .padding(.top, 10)
                 }
 
-                // Badges section (own profile only)
-                if viewModel.isMe {
-                    BadgesSectionView(
-                        obtainedKeys: viewModel.badgeKeys,
-                        onShowAllBadges: { showBadgesList = true },
-                        onBadgeTap: { p in selectedBadgeProgress = p }
+                // Badges section (tous les profils)
+                BadgesSectionView(
+                    apiBadges: viewModel.apiBadges,
+                    isMe: viewModel.isMe,
+                    onShowAllBadges: { showBadgesList = true },
+                    onBadgeTap: viewModel.isMe ? { p in selectedBadgeProgress = p } : nil
+                )
+                .padding(.horizontal)
+                .padding(.top, 8)
+                .fullScreenCover(isPresented: $showBadgesList) {
+                    BadgesListView(apiBadges: viewModel.apiBadges)
+                }
+                .sheet(item: $selectedBadgeProgress) { p in
+                    BadgeDetailSheet(
+                        progress: p,
+                        isMe: viewModel.isMe,
+                        onShowAllBadges: {
+                            selectedBadgeProgress = nil
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                                showBadgesList = true
+                            }
+                        },
+                        onCta: {
+                            if p.isObtained {
+                                selectedBadgeProgress = nil
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                                    showBadgesList = true
+                                }
+                            } else {
+                                selectedBadgeProgress = nil
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                                    presentationMode.wrappedValue.dismiss()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                                        BadgesListView.navigateToBadgeCta(key: p.definition.key)
+                                    }
+                                }
+                            }
+                        }
                     )
-                    .padding(.horizontal)
-                    .padding(.top, 8)
-                    .fullScreenCover(isPresented: $showBadgesList) {
-                        BadgesListView(obtainedKeys: viewModel.badgeKeys)
-                    }
-                    .sheet(item: $selectedBadgeProgress) { p in
-                        BadgeDetailSheet(
-                            progress: p,
-                            obtainedKeys: viewModel.badgeKeys,
-                            onShowAllBadges: { showBadgesList = true }
-                        )
-                    }
                 }
 
                 // Preferences section
@@ -946,7 +966,7 @@ class ProfileViewModel: ObservableObject {
     @Published var activatedNotif: [String] = []
     @Published var numberOfBlocked: Int = 0
     @Published var userIdToDisplay: String?
-    @Published var badgeKeys: [String] = []
+    @Published var apiBadges: [UserBadgeAPI] = []
 
     weak var navigationDelegate: ProfileNavigationDelegate?
 
@@ -980,20 +1000,13 @@ class ProfileViewModel: ObservableObject {
             }
         }
 
-        if self.isMe {
-            HomeService.getUserHome { [weak self] userHome, _ in
-                DispatchQueue.main.async {
-                    self?.badgeKeys = userHome?.badges ?? []
-                }
-            }
-        }
-
         let userIdToLoad = userIdToDisplay ?? currentUser.uuid ?? ""
         if !userIdToLoad.isEmpty {
             UserService.getDetailsForUser(userId: userIdToLoad) { [weak self] returnUser, error in
                 DispatchQueue.main.async {
                     if let returnUser = returnUser {
                         self?.user = returnUser
+                        self?.apiBadges = returnUser.badges ?? []
                         if self?.isMe == true {
                             UserDefaults.currentUser = returnUser
                         }

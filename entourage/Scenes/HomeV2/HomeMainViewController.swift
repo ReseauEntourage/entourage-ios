@@ -385,11 +385,11 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     }
 
     @objc func onLogoClick() {
-        let badgeKeys = profileViewModel.badgeKeys
+        let apiBadges = profileViewModel.apiBadges
         let introView = BadgesIntroView(
             onDiscover: { [weak self] in
                 guard let self = self else { return }
-                let listView = BadgesListView(obtainedKeys: badgeKeys)
+                let listView = BadgesListView(apiBadges: apiBadges)
                 let hc = UIHostingController(rootView: listView)
                 hc.modalPresentationStyle = .fullScreen
                 AppState.getTopViewController()?.present(hc, animated: true)

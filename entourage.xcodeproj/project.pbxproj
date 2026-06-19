@@ -419,6 +419,7 @@
 		24EE59CD2FC09292008E7291 /* DiscussionEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59AA2FC09292008E7291 /* DiscussionEventCell.swift */; };
 		24EE59CE2FC09292008E7291 /* ImagePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59B22FC09292008E7291 /* ImagePreviewController.swift */; };
 		24EE59CF2FC09292008E7291 /* ConversationDetailMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59B52FC09292008E7291 /* ConversationDetailMessagesViewController.swift */; };
+		24EE59E02FC09292008E7291 /* ConversationEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59E12FC09292008E7291 /* ConversationEmptyStateView.swift */; };
 		24EE59D02FC09292008E7291 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59AF2FC09292008E7291 /* ImageCache.swift */; };
 		24EE59D12FC09292008E7291 /* ConversationStaffWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59BE2FC09292008E7291 /* ConversationStaffWarningView.swift */; };
 		24EE59D22FC09292008E7291 /* ConversationParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59BB2FC09292008E7291 /* ConversationParametersViewController.swift */; };
@@ -1068,6 +1069,7 @@
 		24EE59B12FC09292008E7291 /* ImageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewController.swift; sourceTree = "<group>"; };
 		24EE59B22FC09292008E7291 /* ImagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewController.swift; sourceTree = "<group>"; };
 		24EE59B52FC09292008E7291 /* ConversationDetailMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailMessagesViewController.swift; sourceTree = "<group>"; };
+		24EE59E12FC09292008E7291 /* ConversationEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEmptyStateView.swift; sourceTree = "<group>"; };
 		24EE59B62FC09292008E7291 /* ConversationListMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListMainCell.swift; sourceTree = "<group>"; };
 		24EE59B72FC09292008E7291 /* ConversationListMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListMembersViewController.swift; sourceTree = "<group>"; };
 		24EE59B82FC09292008E7291 /* ConversationNotifAskViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationNotifAskViewCell.swift; sourceTree = "<group>"; };
@@ -2274,6 +2276,7 @@
 				24EE59AE2FC09292008E7291 /* cells */,
 				24EE59B32FC09292008E7291 /* imagelist */,
 				24EE59B52FC09292008E7291 /* ConversationDetailMessagesViewController.swift */,
+				24EE59E12FC09292008E7291 /* ConversationEmptyStateView.swift */,
 				24EE59B62FC09292008E7291 /* ConversationListMainCell.swift */,
 				24EE59B72FC09292008E7291 /* ConversationListMembersViewController.swift */,
 				24EE59B82FC09292008E7291 /* ConversationNotifAskViewCell.swift */,
@@ -3314,6 +3317,7 @@
 				24EE59CD2FC09292008E7291 /* DiscussionEventCell.swift in Sources */,
 				24EE59CE2FC09292008E7291 /* ImagePreviewController.swift in Sources */,
 				24EE59CF2FC09292008E7291 /* ConversationDetailMessagesViewController.swift in Sources */,
+				24EE59E02FC09292008E7291 /* ConversationEmptyStateView.swift in Sources */,
 				24EE59D02FC09292008E7291 /* ImageCache.swift in Sources */,
 				24EE59D12FC09292008E7291 /* ConversationStaffWarningView.swift in Sources */,
 				24EE59D22FC09292008E7291 /* ConversationParametersViewController.swift in Sources */,

@@ -1,24 +1,13 @@
 import SwiftUI
+import UIKit
 
 struct BadgesListView: View {
-    let obtainedKeys: [String]
+    let apiBadges: [UserBadgeAPI]
     @Environment(\.presentationMode) var presentationMode
     @State private var selectedProgress: UserBadgeProgress?
-    @State private var demoMode = false
-
-    // Switch OFF → 0 badges (état vide), Switch ON → demo (badges hardcodés)
-    private let demoKeys = ["bienvenue", "premier_contact", "fidele_papotages"]
     private let hPad: CGFloat = 20
 
-    private var effectiveKeys: [String] {
-        #if DEBUG
-        return demoMode ? demoKeys : []
-        #else
-        return obtainedKeys
-        #endif
-    }
-
-    private var allProgress: [UserBadgeProgress] { buildBadgeProgress(obtainedKeys: effectiveKeys) }
+    private var allProgress: [UserBadgeProgress] { buildBadgeProgress(apiBadges: apiBadges) }
     private var obtained: [UserBadgeProgress] { allProgress.filter { $0.isObtained } }
     private var inProgress: [UserBadgeProgress] { allProgress.filter { !$0.isObtained && $0.progress > 0 } }
     private var notStarted: [UserBadgeProgress] { allProgress.filter { !$0.isObtained && $0.progress == 0 } }
@@ -54,8 +43,18 @@ struct BadgesListView: View {
         .sheet(item: $selectedProgress) { p in
             BadgeDetailSheet(
                 progress: p,
-                obtainedKeys: effectiveKeys,
-                onShowAllBadges: {}
+                isMe: true,
+                onShowAllBadges: { selectedProgress = nil },
+                onCta: {
+                    // Depuis la liste, le CTA badge list = reste ici, sinon navigation externe
+                    selectedProgress = nil
+                    if !p.isObtained {
+                        presentationMode.wrappedValue.dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            BadgesListView.navigateToBadgeCta(key: p.definition.key)
+                        }
+                    }
+                }
             )
         }
     }
@@ -76,12 +75,6 @@ struct BadgesListView: View {
                         .padding(.leading, hPad)
                 }
                 Spacer()
-                #if DEBUG
-                Toggle("", isOn: $demoMode)
-                    .labelsHidden()
-                    .padding(.trailing, 16)
-                    .scaleEffect(0.85)
-                #endif
             }
         }
         .frame(height: 44)
@@ -291,12 +284,12 @@ struct BadgeListRowView: View {
                                 .frame(height: 6)
                             RoundedRectangle(cornerRadius: 3)
                                 .fill(Color(UIColor.appOrange))
-                                .frame(width: geo.size.width * CGFloat(progress.progress) / CGFloat(def.maxProgress), height: 6)
+                                .frame(width: geo.size.width * CGFloat(progress.progress) / CGFloat(max(progress.target, 1)), height: 6)
                         }
                     }
                     .frame(height: 6)
                     .overlay(
-                        Text("\(progress.progress)/\(def.maxProgress)")
+                        Text("\(progress.progress)/\(progress.target)")
                             .font(Font(UIFont(name: "NunitoSans-Regular", size: 11) ?? .systemFont(ofSize: 11)))
                             .foregroundColor(Color(UIColor.appOrange))
                             .offset(x: 0, y: 12),
@@ -306,7 +299,7 @@ struct BadgeListRowView: View {
                     .padding(.top, 2)
                 } else {
                     // Non commencé
-                    Text("0/\(def.maxProgress)")
+                    Text("0/\(progress.target)")
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 11) ?? .systemFont(ofSize: 11)))
                         .foregroundColor(Color(UIColor.appGris112))
                         .frame(maxWidth: .infinity, alignment: .trailing)
@@ -316,5 +309,20 @@ struct BadgeListRowView: View {
         .padding(12)
         .background(isActive ? Color.white : Color(UIColor.systemGray6))
         .cornerRadius(12)
+    }
+}
+
+// MARK: - Tab navigation helper
+
+extension BadgesListView {
+    static func navigateToBadgeCta(key: BadgeKey) {
+        let tabVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController
+        switch key {
+        case .premierPas:      tabVC?.selectedIndex = 0
+        case .premierLien:     tabVC?.selectedIndex = 2
+        case .asPapotage:      tabVC?.selectedIndex = 4
+        case .diffuseurLiens:  DeepLinkManager.showEventCreation()
+        case .tisseurLiens:    tabVC?.selectedIndex = 3
+        }
     }
 }

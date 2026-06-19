@@ -84,6 +84,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     
         private var staffWarningView: ConversationStaffWarningView?
     private var isStaffWarningDismissed = false
+    private var emptyStateView: ConversationEmptyStateView?
 
 private var imagePreviewOverlay: UIView?
     private var selectedImage: UIImage? = nil
@@ -173,10 +174,9 @@ private var imagePreviewOverlay: UIView?
         ui_tableview.register(UINib(nibName: DiscussionEventCell.identifier, bundle: nil),
                               forCellReuseIdentifier: DiscussionEventCell.identifier)
         ui_tableview.delegate = self
-        // Vue "vide"
-        ui_title_empty.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        ui_title_empty.text = "messaging_message_no_message".localized
+        // Vue "vide" — masquée définitivement, remplacée par emptyStateView
         ui_view_empty.isHidden = true
+        setupConversationEmptyState()
 
         // Zone texte
         ui_view_txtview.layer.borderWidth = 1
@@ -351,6 +351,44 @@ private var imagePreviewOverlay: UIView?
     }
     
     
+    // MARK: - Empty state
+    private func setupConversationEmptyState() {
+        let view = ConversationEmptyStateView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        self.view.addSubview(view)
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: ui_top_view.bottomAnchor),
+            view.bottomAnchor.constraint(equalTo: ui_view_txtview.topAnchor),
+            view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+        ])
+        view.onChipSelected = { [weak self] draft in
+            self?.fillTextViewWithDraft(draft)
+        }
+        emptyStateView = view
+    }
+
+    private func setEmptyStateVisible(_ visible: Bool) {
+        let shouldShow = visible && type != "outing" && !isSmallTalkMode
+        emptyStateView?.isHidden = !shouldShow
+    }
+
+    private func fillTextViewWithDraft(_ text: String) {
+        _ = ui_textview_message.becomeFirstResponder()
+        ui_textview_message.text = text
+        ui_textview_message.textColor = .black
+        ui_textview_message.typingAttributes = [
+            .font: ApplicationTheme.getFontNunitoRegular(size: 15),
+            .foregroundColor: UIColor.black
+        ]
+        if let end = ui_textview_message.position(
+            from: ui_textview_message.endOfDocument, offset: 0
+        ) {
+            ui_textview_message.selectedTextRange = ui_textview_message.textRange(from: end, to: end)
+        }
+    }
+
     @IBAction func btnSend(_ sender: Any) {
         dismissImagePreview()
         if isOptionViewVisible { toggleOptionViewVisibility() }
@@ -775,7 +813,7 @@ private var imagePreviewOverlay: UIView?
                     }
 
                     self.buildConversationCellDTOs()
-                    self.ui_view_empty.isHidden = !self.conversationCellDTOs.isEmpty
+                    self.setEmptyStateVisible(self.conversationCellDTOs.isEmpty)
                     self.ui_tableview.reloadData()
 
                     if self.currentPage == 1 {
@@ -956,17 +994,12 @@ func checkNewConv() {
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
-        // Masquer la vue vide
-        if conversationCellDTOs.isEmpty {
-            ui_view_empty.isHidden = true
-        }
+        if conversationCellDTOs.isEmpty { setEmptyStateVisible(false) }
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
         ui_constraint_bottom_view_Tf.constant = bottomConstraint
-        if conversationCellDTOs.isEmpty {
-            ui_view_empty.isHidden = false
-        }
+        if conversationCellDTOs.isEmpty { setEmptyStateVisible(true) }
     }
 
     // MARK: - Network – chargement des messages
@@ -1028,7 +1061,7 @@ func checkNewConv() {
                 self.checkStaffWarning()
                 self.checkNewConv()
                 self.buildConversationCellDTOs()
-                self.ui_view_empty.isHidden = !self.conversationCellDTOs.isEmpty
+                self.setEmptyStateVisible(self.conversationCellDTOs.isEmpty)
                 self.ui_tableview.reloadData()
 
                 // 10. Auto-scroll en bas :
@@ -1116,7 +1149,7 @@ func checkNewConv() {
 
                 // Si on a le type “outing”, on cherche le titre exact de l’événement
                 if self.type == "outing" {
-                    self.ui_view_empty.isHidden = true
+                    self.setEmptyStateVisible(false)
                     EventService.getEventWithId(self.currentConversation?.uuid ?? "") { event, error in
                         if event != nil {
                             AppSignableManager.shared.updateFromEvent(event: event!)
