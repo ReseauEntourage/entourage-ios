@@ -207,6 +207,7 @@ struct BadgeDetailSheet: View {
                 Image(systemName: def.isReversible ? "xmark.circle" : "checkmark.circle.fill")
                     .foregroundColor(def.isReversible ? Color(UIColor.appOrange) : Color(red: 0.18, green: 0.65, blue: 0.37))
                     .font(.system(size: 18))
+                    .frame(width: 20)
                 Text(def.mechanismKey.localized)
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundColor(.black)

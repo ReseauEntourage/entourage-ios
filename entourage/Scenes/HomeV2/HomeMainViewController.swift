@@ -370,9 +370,6 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_image_user_avatar.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onAvatarClick))
         ui_image_user_avatar.addGestureRecognizer(tapGestureRecognizer)
-        ui_logo_entourage.isUserInteractionEnabled = true
-        let logoTap = UITapGestureRecognizer(target: self, action: #selector(onLogoClick))
-        ui_logo_entourage.addGestureRecognizer(logoTap)
     }
     
     @objc func onAvatarClick() {
@@ -381,23 +378,6 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         self.profileViewModel.navigationDelegate = self
         let hc = UIHostingController(rootView: profileView)
         hc.modalPresentationStyle = .fullScreen
-        (self.tabBarController ?? self).present(hc, animated: true)
-    }
-
-    @objc func onLogoClick() {
-        let apiBadges = profileViewModel.apiBadges
-        let introView = BadgesIntroView(
-            onDiscover: { [weak self] in
-                guard let self = self else { return }
-                let listView = BadgesListView(apiBadges: apiBadges)
-                let hc = UIHostingController(rootView: listView)
-                hc.modalPresentationStyle = .fullScreen
-                AppState.getTopViewController()?.present(hc, animated: true)
-            },
-            onDismiss: {}
-        )
-        let hc = UIHostingController(rootView: introView)
-        hc.modalPresentationStyle = .pageSheet
         (self.tabBarController ?? self).present(hc, animated: true)
     }
 

@@ -5,6 +5,7 @@ struct BadgesListView: View {
     let apiBadges: [UserBadgeAPI]
     @Environment(\.presentationMode) var presentationMode
     @State private var selectedProgress: UserBadgeProgress?
+    @State private var showIntro = false
     private let hPad: CGFloat = 20
 
     private var allProgress: [UserBadgeProgress] { buildBadgeProgress(apiBadges: apiBadges) }
@@ -27,13 +28,19 @@ struct BadgesListView: View {
                         fullContent
                     }
 
-                    Button(action: {}) {
+                    Button(action: { showIntro = true }) {
                         Text("badges_faq_link".localized)
                             .font(Font(UIFont(name: "NunitoSans-SemiBold", size: 14) ?? .systemFont(ofSize: 14, weight: .semibold)))
                             .foregroundColor(Color(UIColor.appOrange))
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 24)
+                    .sheet(isPresented: $showIntro) {
+                        BadgesIntroView(
+                            onDiscover: { showIntro = false },
+                            onDismiss: { showIntro = false }
+                        )
+                    }
                 }
                 .padding(.top, 16)
             }
@@ -248,7 +255,8 @@ struct BadgeListRowView: View {
 
                 // Sous-titre
                 if progress.isObtained {
-                    let dateText = progress.obtainedDate ?? ""
+                    let rawDate = progress.obtainedDate ?? ""
+                    let dateText = rawDate.isEmpty ? "" : formatBadgeDate(rawDate)
                     Text(dateText.isEmpty ? "badge_obtained".localized : String(format: "badge_obtained_on".localized, dateText))
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
                         .foregroundColor(Color(UIColor.appGris112))
@@ -317,7 +325,11 @@ extension BadgesListView {
         switch key {
         case .premierPas:      tabVC?.selectedIndex = 0
         case .premierLien:     tabVC?.selectedIndex = 2
-        case .asPapotage:      tabVC?.selectedIndex = 4
+        case .asPapotage:
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .papotages
+            vc.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(vc, animated: true)
         case .diffuseurLiens:  DeepLinkManager.showEventCreation()
         case .tisseurLiens:    tabVC?.selectedIndex = 3
         }

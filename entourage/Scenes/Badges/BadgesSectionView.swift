@@ -18,7 +18,6 @@ struct BadgesSectionView: View {
                 Text("badges_section_title".localized)
                     .font(Font(UIFont(name: "NunitoSans-Bold", size: 12) ?? .systemFont(ofSize: 12, weight: .bold)))
                     .foregroundColor(.black)
-                    .kerning(0.8)
 
                 Spacer()
 
@@ -62,7 +61,7 @@ private struct BadgeProfileCardView: View {
                 .opacity(progress.isObtained ? 1.0 : 0.4)
 
             Text(progress.definition.titleKey.localized)
-                .font(Font(UIFont(name: "NunitoSans-Regular", size: 10) ?? .systemFont(ofSize: 10)))
+                .font(Font(UIFont(name: "NunitoSans-Regular", size: 12) ?? .systemFont(ofSize: 12)))
                 .foregroundColor(progress.isObtained ? .black : Color(UIColor.appGris112))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
