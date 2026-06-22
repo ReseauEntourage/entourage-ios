@@ -13,7 +13,7 @@ struct BadgeUnlockedSheet: View {
                 Color(UIColor.appOrangeLight).opacity(0.3)
                 BadgeDotsAnimationView()
                 Text(definition.emoji)
-                    .font(.system(size: 80))
+                    .font(.system(size: 72))
             }
             .frame(maxWidth: .infinity)
             .frame(height: 280)
@@ -21,7 +21,7 @@ struct BadgeUnlockedSheet: View {
             // Bottom white content
             VStack(spacing: 16) {
                 Text(String(format: "badge_unlocked_bravo".localized, firstName))
-                    .font(Font(UIFont(name: "Quicksand-Bold", size: 22) ?? .systemFont(ofSize: 22)))
+                    .font(Font(UIFont(name: "Quicksand-Bold", size: 24) ?? .systemFont(ofSize: 24)))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
 
@@ -37,7 +37,7 @@ struct BadgeUnlockedSheet: View {
 
                 Text(definition.unlockedMessageKey.localized)
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? .systemFont(ofSize: 15)))
-                    .foregroundColor(.black)
+                    .foregroundColor(Color(UIColor.appGris112))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 8)
 
@@ -61,7 +61,7 @@ struct BadgeUnlockedSheet: View {
                 }) {
                     Text("badge_unlocked_continue".localized)
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 15) ?? .systemFont(ofSize: 15)))
-                        .foregroundColor(.black)
+                        .foregroundColor(Color(UIColor.appGris112))
                 }
                 .padding(.bottom, 8)
             }

@@ -106,7 +106,7 @@ struct BadgesListView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding(16)
-            .background(Color(UIColor.appOrangeLight).opacity(0.4))
+            .background(Color(red: 0.98, green: 0.95, blue: 0.91))
             .cornerRadius(16)
             .padding(.horizontal, hPad)
 
@@ -116,7 +116,7 @@ struct BadgesListView: View {
                     HStack(spacing: 10) {
                         ZStack {
                             Circle()
-                                .fill(Color(UIColor.appOrangeLight).opacity(0.6))
+                                .fill(Color(UIColor.appOrangeLight).opacity(0.35))
                                 .frame(width: 48, height: 48)
                             Text(firstDef.emoji)
                                 .font(.system(size: 24))
@@ -136,7 +136,12 @@ struct BadgesListView: View {
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                         .foregroundColor(.black.opacity(0.8))
 
-                    Button(action: {}) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            BadgesListView.navigateToBadgeCta(key: firstDef.key)
+                        }
+                    }) {
                         Text(firstDef.ctaLabelKey.localized)
                             .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15, weight: .bold)))
                             .foregroundColor(.white)
@@ -148,7 +153,7 @@ struct BadgesListView: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(UIColor.appOrangeLight).opacity(0.4))
+                .background(Color(UIColor.appOrangeLight).opacity(0.18))
                 .cornerRadius(16)
                 .padding(.horizontal, hPad)
             }
@@ -250,7 +255,7 @@ struct BadgeListRowView: View {
                 } else {
                     Text(def.descriptionShortKey.localized)
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
-                        .foregroundColor(Color(UIColor.appGris112))
+                        .foregroundColor(isActive ? Color(UIColor.appGris112) : .black)
                         .lineLimit(2)
                 }
 
@@ -267,14 +272,6 @@ struct BadgeListRowView: View {
                         }
                     }
                     .frame(height: 6)
-                    .overlay(
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 9, weight: .bold))
-                            .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
-                            .offset(x: 0, y: 12),
-                        alignment: .trailing
-                    )
-                    .padding(.bottom, 14)
                     .padding(.top, 2)
                 } else if progress.progress > 0 {
                     GeometryReader { geo in
@@ -301,13 +298,13 @@ struct BadgeListRowView: View {
                     // Non commencé
                     Text("0/\(progress.target)")
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 11) ?? .systemFont(ofSize: 11)))
-                        .foregroundColor(Color(UIColor.appGris112))
+                        .foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
         }
         .padding(12)
-        .background(isActive ? Color.white : Color(UIColor.systemGray6))
+        .background(isActive ? Color.white : Color(red: 0.937, green: 0.937, blue: 0.957))
         .cornerRadius(12)
     }
 }

@@ -79,7 +79,7 @@ struct BadgeDetailSheet: View {
                 }
                 .padding(.top, sectionSpacing)
             }
-            .background(Color(UIColor.systemGray6).edgesIgnoringSafeArea(.all))
+            .background(Color.white.edgesIgnoringSafeArea(.all))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarTitle("badge_detail_title".localized)
             .toolbar {
@@ -128,8 +128,9 @@ struct BadgeDetailSheet: View {
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.vertical, 14)
-            .background(Color(red: 0.88, green: 0.96, blue: 0.91))
+            .background(Color.white)
             .cornerRadius(12)
+            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(red: 0.18, green: 0.65, blue: 0.37).opacity(0.3), lineWidth: 1))
         } else {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 6) {
@@ -170,7 +171,7 @@ struct BadgeDetailSheet: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(14)
-            .background(Color(UIColor.systemGray5))
+            .background(Color(UIColor.systemGray6))
             .cornerRadius(12)
         }
     }
@@ -203,7 +204,7 @@ struct BadgeDetailSheet: View {
                 .textCase(.uppercase)
 
             HStack(spacing: 8) {
-                Image(systemName: def.isReversible ? "arrow.clockwise.circle" : "checkmark.circle.fill")
+                Image(systemName: def.isReversible ? "xmark.circle" : "checkmark.circle.fill")
                     .foregroundColor(def.isReversible ? Color(UIColor.appOrange) : Color(red: 0.18, green: 0.65, blue: 0.37))
                     .font(.system(size: 18))
                 Text(def.mechanismKey.localized)

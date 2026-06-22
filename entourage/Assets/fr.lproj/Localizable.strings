@@ -2107,7 +2107,7 @@ Choisissez un sujet pour démarrer.";
 "badge_mechanism_reversible" = "Réversible — à renouveler tous les 90 jours.";
 "badge_premier_pas_title" = "Premier pas";
 "badge_premier_pas_description_short" = "Une seule action pour obtenir ce badge.";
-"badge_premier_pas_how_it_works" = "Terminez votre onboarding (centres d'intérêt, envies d'agir, catégories d'entraide, disponibilités) puis réalisez votre première action sur l'app.";
+"badge_premier_pas_how_it_works" = "Complétez votre profil (envies d'agir, centres d'intérêt, catégories d'entraides préférées, disponibilités) et réalisez votre première action sur l'app";
 "badge_premier_pas_what_it_means" = "Ce badge célèbre votre arrivée dans la communauté. Il marque votre premier geste — celui qui transforme un compte créé en une réelle intention.";
 "badge_premier_pas_cta" = "Faire une première action";
 "badge_premier_pas_unlocked_message" = "Vous venez de faire votre premier pas dans la communauté Entourage. Votre présence compte déjà, bienvenue parmi nous.";

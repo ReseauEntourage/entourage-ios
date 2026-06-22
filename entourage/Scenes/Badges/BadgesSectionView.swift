@@ -54,27 +54,26 @@ private struct BadgeProfileCardView: View {
     let progress: UserBadgeProgress
 
     var body: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 5) {
             Text(progress.definition.emoji)
-                .font(.system(size: 28))
-                .frame(width: 48, height: 48)
+                .font(.system(size: 22))
+                .frame(width: 38, height: 38)
                 .multilineTextAlignment(.center)
                 .opacity(progress.isObtained ? 1.0 : 0.4)
 
             Text(progress.definition.titleKey.localized)
-                .font(Font(UIFont(name: "NunitoSans-Regular", size: 11) ?? .systemFont(ofSize: 11)))
+                .font(Font(UIFont(name: "NunitoSans-Regular", size: 10) ?? .systemFont(ofSize: 10)))
                 .foregroundColor(progress.isObtained ? .black : Color(UIColor.appGris112))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
-                .frame(width: 76)
+                .frame(width: 60)
         }
-        .frame(width: 96, height: 110)
+        .frame(width: 77, height: 88)
         .background(Color.white)
-        .cornerRadius(12)
+        .cornerRadius(10)
         .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(progress.isObtained ? Color(UIColor.appOrange) : Color(UIColor.systemGray4), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color(UIColor.appOrange).opacity(progress.isObtained ? 0.35 : 0.15), lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.06), radius: 4, x: 0, y: 2)
     }
 }
