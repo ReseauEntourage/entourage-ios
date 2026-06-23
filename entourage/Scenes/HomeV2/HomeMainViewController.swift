@@ -622,18 +622,21 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .nationalGroups:
             let vc = WelcomeNationalGroupsListViewController()
             vc.modalPresentationStyle = .fullScreen
+            vc.onDismiss = { [weak self] in self?.initHome() }
             self.present(vc, animated: true)
 
         case .webinar:
             let vc = WelcomeEventsListViewController()
             vc.eventType = .firstStep
             vc.modalPresentationStyle = .fullScreen
+            vc.onDismiss = { [weak self] in self?.initHome() }
             self.present(vc, animated: true)
 
         case .papotages:
             let vc = WelcomeEventsListViewController()
             vc.eventType = .papotages
             vc.modalPresentationStyle = .fullScreen
+            vc.onDismiss = { [weak self] in self?.initHome() }
             self.present(vc, animated: true)
         }
     }

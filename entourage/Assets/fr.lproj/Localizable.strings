@@ -2103,6 +2103,7 @@ Choisissez un sujet pour démarrer.";
 "badge_unlocked_subtitle" = "Vous venez de débloquer le badge";
 "badge_unlocked_see_badges" = "Voir mes badges";
 "badge_unlocked_continue" = "Continuer";
+"badge_cta_see_badges" = "Voir mes badges";
 "badge_mechanism_irreversible" = "Irréversible — une fois obtenu, c'est pour toujours.";
 "badge_mechanism_reversible" = "Réversible — à renouveler tous les 90 jours.";
 "badge_premier_pas_title" = "Premier pas";

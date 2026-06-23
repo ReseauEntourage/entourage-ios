@@ -208,8 +208,8 @@ struct BadgesListView: View {
 
     private func sectionHeader(_ title: String) -> some View {
         Text(title)
-            .font(Font(UIFont(name: "NunitoSans-Bold", size: 13) ?? .systemFont(ofSize: 13, weight: .bold)))
-            .foregroundColor(Color(UIColor.appGris112))
+            .font(Font(UIFont(name: "Quicksand-Bold", size: 13) ?? .systemFont(ofSize: 13, weight: .bold)))
+            .foregroundColor(.black)
             .padding(.horizontal, hPad)
             .padding(.top, 8)
             .padding(.bottom, 10)

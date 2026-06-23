@@ -3,16 +3,20 @@ import SwiftUI
 
 class WelcomeNationalGroupsListViewController: UIViewController {
 
+    var onDismiss: (() -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let swiftUIView = WelcomeNationalGroupsListView(onBack: { [weak self] in
+            self?.onDismiss?()
             self?.dismiss(animated: true)
         }, onGroupTapped: { group in
             DeepLinkManager.showNeighborhoodDetailUniversalLink(id: "\(group.uid)")
         }, onGroupsTabRequested: { [weak self] in
             guard let self = self else { return }
             let parent = self.presentingViewController as? HomeMainViewController
+            self.onDismiss?()
             self.dismiss(animated: true) {
                 let hasShownSnackbar = UserDefaults.standard.bool(forKey: "hasShownWelcomeNationalGroupSnackbar")
                 if !hasShownSnackbar {

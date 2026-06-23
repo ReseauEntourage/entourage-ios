@@ -166,6 +166,6 @@ func formatBadgeDate(_ isoString: String) -> String {
 private func displayDate(_ date: Date) -> String {
     let fmt = DateFormatter()
     fmt.locale = Locale.getPreferredLocale()
-    fmt.dateFormat = "dd/MM/yyyy"
+    fmt.dateFormat = "d MMMM yyyy"
     return fmt.string(from: date)
 }
