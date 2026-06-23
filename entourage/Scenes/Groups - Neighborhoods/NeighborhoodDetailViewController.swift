@@ -460,6 +460,7 @@ class NeighborhoodDetailViewController: UIViewController {
         if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController  {
             isAfterCreation = false
             vc.neighborhoodId = self.neighborhoodId
+            vc.neighborhood = self.neighborhood
             self.navigationController?.present(vc, animated: true)
         }
     }

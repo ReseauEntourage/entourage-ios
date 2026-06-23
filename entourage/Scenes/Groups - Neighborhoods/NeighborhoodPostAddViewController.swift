@@ -42,21 +42,48 @@ class NeighborhoodPostAddViewController: UIViewController {
     var currentImage: UIImage? = nil
     let cornerRadiusImage: CGFloat = 14
     var isValid = false
-    
+
     var neighborhoodId: Int = 0
     var eventId: Int = 0
-    
+    var neighborhood: Neighborhood? = nil
+
     var isNeighborhood = true
-    
+
     var isLoading = false
 
     // MARK: - Propriétés pour la fonctionnalité de mention
     var mentionSuggestions: [UserLightNeighborhood] = []
     private let mentionCellHeight: CGFloat = 50.0
 
+    // MARK: - Chips d'inspiration
+    private struct PostChip {
+        let label: String
+        let draft: String
+    }
+
+    private static let generalisteChips: [PostChip] = [
+        PostChip(label: "Info de quartier 📢", draft: "Je voulais partager une info qui concerne notre quartier : "),
+        PostChip(label: "Proposer une activité 🎉", draft: "J'organise une petite activité et j'aimerais vous inviter ! "),
+        PostChip(label: "Demander un coup de main 🤝", draft: "Bonjour à tous, j'aurais besoin d'un petit coup de main pour "),
+        PostChip(label: "Dire bonjour 👋", draft: "Bonjour à tous ! Je voulais juste prendre contact avec le groupe 😊"),
+    ]
+
+    private static let thematiqueChips: [PostChip] = [
+        PostChip(label: "Partager un contenu 💡", draft: "J'ai trouvé quelque chose d'intéressant à partager avec vous : "),
+        PostChip(label: "Poser une question ❓", draft: "Bonjour, j'aurais une question pour le groupe : "),
+        PostChip(label: "Proposer un échange 💬", draft: "J'aimerais qu'on échange sur ce sujet ensemble : "),
+        PostChip(label: "Organiser une rencontre 📅", draft: "Et si on se retrouvait prochainement ? Je propose "),
+    ]
+
+    private var selectedChipButton: UIButton? = nil
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if isNeighborhood {
+            setupInspirationChips()
+        }
 
         // Configuration de la barre de navigation et des labels
         ui_top_view.populateView(title: "neighborhood_add_post_title".localized,
@@ -130,6 +157,105 @@ class NeighborhoodPostAddViewController: UIViewController {
         hideMentionSuggestions()
     }
     
+    // MARK: - Chips d'inspiration setup
+    private func setupInspirationChips() {
+        let isThematic = neighborhood?.zone == nil
+        let chips = isThematic ? Self.thematiqueChips : Self.generalisteChips
+
+        guard let messageSection = ui_tv_message.superview,
+              let outerContainer = messageSection.superview else { return }
+
+        let photoSection = ui_image.superview
+
+        let chipsScrollView = UIScrollView()
+        chipsScrollView.translatesAutoresizingMaskIntoConstraints = false
+        chipsScrollView.showsHorizontalScrollIndicator = false
+        chipsScrollView.showsVerticalScrollIndicator = false
+        outerContainer.addSubview(chipsScrollView)
+
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .center
+        chipsScrollView.addSubview(stackView)
+
+        for (index, chip) in chips.enumerated() {
+            let button = UIButton(type: .custom)
+            button.setTitle(chip.label, for: .normal)
+            button.setTitleColor(.appGrisSombre, for: .normal)
+            button.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 12)
+            button.backgroundColor = .white
+            button.layer.borderWidth = 1.5
+            button.layer.borderColor = UIColor.appOrangeLight.cgColor
+            button.layer.cornerRadius = 16
+            button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+            button.tag = index
+            button.addTarget(self, action: #selector(chipTapped(_:)), for: .touchUpInside)
+            stackView.addArrangedSubview(button)
+        }
+
+        let chipsHeight: CGFloat = 38
+        let chipsMargin: CGFloat = 8
+
+        NSLayoutConstraint.activate([
+            chipsScrollView.topAnchor.constraint(equalTo: messageSection.bottomAnchor, constant: chipsMargin),
+            chipsScrollView.leadingAnchor.constraint(equalTo: outerContainer.leadingAnchor, constant: 20),
+            chipsScrollView.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -20),
+            chipsScrollView.heightAnchor.constraint(equalToConstant: chipsHeight),
+
+            stackView.topAnchor.constraint(equalTo: chipsScrollView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: chipsScrollView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: chipsScrollView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: chipsScrollView.bottomAnchor),
+            stackView.heightAnchor.constraint(equalTo: chipsScrollView.heightAnchor),
+        ])
+
+        // Décale la section photo pour laisser de la place aux chips
+        if let photoSection = photoSection {
+            for constraint in outerContainer.constraints {
+                if let firstView = constraint.firstItem as? UIView,
+                   firstView == photoSection,
+                   constraint.firstAttribute == .top {
+                    constraint.constant += chipsHeight + chipsMargin * 2
+                    break
+                }
+            }
+        }
+    }
+
+    @objc private func chipTapped(_ sender: UIButton) {
+        let isThematic = neighborhood?.zone == nil
+        let chips = isThematic ? Self.thematiqueChips : Self.generalisteChips
+        guard sender.tag < chips.count else { return }
+
+        if selectedChipButton == sender {
+            deselectCurrentChip()
+            ui_tv_message.text = ""
+            changeButtonShare()
+            return
+        }
+
+        deselectCurrentChip()
+
+        sender.backgroundColor = UIColor(red: 254/255, green: 234/255, blue: 227/255, alpha: 1)
+        sender.layer.borderColor = UIColor.appOrange.cgColor
+        sender.setTitleColor(.appOrangeDark, for: .normal)
+        selectedChipButton = sender
+
+        ui_tv_message.text = chips[sender.tag].draft
+        ui_tv_message.textColor = .black
+        _ = ui_tv_message.resignFirstResponder()
+        changeButtonShare()
+    }
+
+    private func deselectCurrentChip() {
+        selectedChipButton?.backgroundColor = .white
+        selectedChipButton?.layer.borderColor = UIColor.appOrangeLight.cgColor
+        selectedChipButton?.setTitleColor(.appGrisSombre, for: .normal)
+        selectedChipButton = nil
+    }
+
     deinit {
         Logger.print("***** deinit VC")
     }
@@ -398,6 +524,7 @@ class NeighborhoodPostAddViewController: UIViewController {
 // MARK: - UITextViewDelegate
 extension NeighborhoodPostAddViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
+        deselectCurrentChip()
         let cursorPosition = textView.selectedRange.location
         let textNSString = textView.text as NSString
         let textUpToCursor = textNSString.substring(to: cursorPosition)

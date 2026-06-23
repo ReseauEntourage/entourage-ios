@@ -28,6 +28,7 @@ struct Neighborhood: Codable {
     var future_outings_count: Int = 0
     var has_ongoing_outing = false
     var national: Bool? = false
+    var zone: String? = nil
     
     var image_url: String?
     var neighborhood_image_id: Int? = nil // Utilisé pour passer l'info image depuis la galerie
@@ -70,6 +71,7 @@ struct Neighborhood: Codable {
         case welcomeMessageTranslations = "welcome_message_translations"
         case unreadPostCount = "unread_posts_count"
         case national
+        case zone
     }
     
     func dictionaryForWS() -> [String: Any] {

@@ -3,12 +3,14 @@ import SwiftUI
 
 class WelcomeEventsListViewController: UIViewController {
     var eventType: WelcomeEventType = .webinar
+    var onDismiss: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let viewModel = WelcomeEventsListViewModel(type: eventType)
         let swiftUIView = WelcomeEventsListView(viewModel: viewModel, onBack: { [weak self] in
+            self?.onDismiss?()
             self?.dismiss(animated: true)
         }, onEventTapped: { [weak self] event in
             let storyboard = UIStoryboard(name: StoryboardName.event, bundle: nil)
