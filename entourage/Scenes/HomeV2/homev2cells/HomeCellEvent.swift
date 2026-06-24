@@ -34,6 +34,8 @@ class HomeCellEvent:UICollectionViewCell{
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.appBeige.cgColor
         containerView.clipsToBounds = true
+        ui_label_title.numberOfLines = 2
+        ui_label_title.lineBreakMode = .byTruncatingTail
     }
 
     

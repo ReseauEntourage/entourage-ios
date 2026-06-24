@@ -4,11 +4,13 @@ import Foundation
 
 struct UserBadgeAPI: Codable {
     let name: String
+    let active: Bool
     let awardedAt: String?
     let metadata: BadgeAPIMetadata?
 
     enum CodingKeys: String, CodingKey {
         case name
+        case active
         case awardedAt = "awarded_at"
         case metadata
     }
@@ -133,17 +135,18 @@ struct UserBadgeProgress: Identifiable {
 // MARK: - Builder
 
 func buildBadgeProgress(apiBadges: [UserBadgeAPI]) -> [UserBadgeProgress] {
-    return allBadgeDefinitions.map { def in
-        let apiBadge = apiBadges.first { $0.name == def.key.rawValue }
-        let isObtained = apiBadge?.awardedAt != nil
-        let current = apiBadge?.metadata?.current ?? 0
-        let target = apiBadge?.metadata?.target ?? def.maxProgress
+    return apiBadges.compactMap { apiBadge in
+        guard let key = BadgeKey(rawValue: apiBadge.name),
+              let def = allBadgeDefinitions.first(where: { $0.key == key }) else { return nil }
+        let isObtained = apiBadge.awardedAt != nil
+        let current = apiBadge.metadata?.current ?? 0
+        let target = apiBadge.metadata?.target ?? def.maxProgress
         return UserBadgeProgress(
             definition: def,
             isObtained: isObtained,
             progress: current,
             target: target,
-            obtainedDate: apiBadge?.awardedAt
+            obtainedDate: apiBadge.awardedAt
         )
     }
 }

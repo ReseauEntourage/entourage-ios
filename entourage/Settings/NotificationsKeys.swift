@@ -48,3 +48,4 @@ let kNotificationMessagesUpdateUserBlocked = "userBlocked"
 let kNotificationMessagesUpdateSmallTalkFilter = "MessagesUpdateSmallTalkFilter"
 
 let kNotificationHomeUpdate = "HomeUpdate"
+let kNotificationAPIError = "APIHTTPError"

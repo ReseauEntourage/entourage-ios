@@ -53,11 +53,11 @@ struct BadgesListView: View {
                 isMe: true,
                 onShowAllBadges: { selectedProgress = nil },
                 onCta: {
-                    // Depuis la liste, le CTA badge list = reste ici, sinon navigation externe
-                    selectedProgress = nil
-                    if !p.isObtained {
+                    if p.isObtained {
+                        selectedProgress = nil
+                    } else {
                         presentationMode.wrappedValue.dismiss()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                             BadgesListView.navigateToBadgeCta(key: p.definition.key)
                         }
                     }
@@ -96,7 +96,7 @@ struct BadgesListView: View {
         VStack(alignment: .leading, spacing: 12) {
             // Carte héro
             VStack(spacing: 10) {
-                Text(allBadgeDefinitions.map { $0.emoji }.joined(separator: "  "))
+                Text(allProgress.map { $0.definition.emoji }.joined(separator: "  "))
                     .font(.system(size: 26))
                     .frame(maxWidth: .infinity, alignment: .center)
 
@@ -118,7 +118,7 @@ struct BadgesListView: View {
             .padding(.horizontal, hPad)
 
             // Carte "premier badge" CTA
-            if let firstDef = allBadgeDefinitions.first {
+            if let firstDef = allProgress.first?.definition {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(spacing: 10) {
                         ZStack {
@@ -166,7 +166,7 @@ struct BadgesListView: View {
             }
 
             // En-tête "Tous les badges 0/5"
-            Text(String(format: "badges_all_title".localized, 0, allBadgeDefinitions.count))
+            Text(String(format: "badges_all_title".localized, 0, allProgress.count))
                 .font(Font(UIFont(name: "NunitoSans-Bold", size: 13) ?? .systemFont(ofSize: 13, weight: .bold)))
                 .foregroundColor(.black)
                 .padding(.horizontal, hPad)
@@ -189,17 +189,17 @@ struct BadgesListView: View {
     private var fullContent: some View {
         VStack(alignment: .leading, spacing: 0) {
             if !obtained.isEmpty {
-                sectionHeader(String(format: "badges_section_obtained".localized, obtained.count, allBadgeDefinitions.count))
+                sectionHeader(String(format: "badges_section_obtained".localized, obtained.count, allProgress.count))
                 badgeRows(items: obtained)
                     .padding(.bottom, 4)
             }
             if !inProgress.isEmpty {
-                sectionHeader(String(format: "badges_section_in_progress".localized, inProgress.count, allBadgeDefinitions.count))
+                sectionHeader(String(format: "badges_section_in_progress".localized, inProgress.count, allProgress.count))
                 badgeRows(items: inProgress)
                     .padding(.bottom, 4)
             }
             if !notStarted.isEmpty {
-                sectionHeader(String(format: "badges_section_not_started".localized, notStarted.count, allBadgeDefinitions.count))
+                sectionHeader(String(format: "badges_section_not_started".localized, notStarted.count, allProgress.count))
                 badgeRows(items: notStarted)
                     .padding(.bottom, 4)
             }

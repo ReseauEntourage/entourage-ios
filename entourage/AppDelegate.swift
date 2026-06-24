@@ -49,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(goLogin), name: NSNotification.Name(notificationLoginError), object: nil)
+        APIErrorPresenter.shared.start()
         
         if UserDefaults.currentUser == nil || A0SimpleKeychain().string(forKey:kKeychainPassword) == nil {
             AppState.navigateToStartupScreen()

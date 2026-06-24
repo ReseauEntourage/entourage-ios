@@ -7,7 +7,7 @@ struct BadgesSectionView: View {
     let onBadgeTap: ((UserBadgeProgress) -> Void)?  // nil pour les autres profils
 
     private var displayedProgress: [UserBadgeProgress] {
-        buildBadgeProgress(apiBadges: apiBadges).filter { $0.isObtained }
+        buildBadgeProgress(apiBadges: apiBadges)
     }
 
     var body: some View {
