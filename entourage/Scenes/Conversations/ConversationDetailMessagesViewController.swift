@@ -370,7 +370,7 @@ private var imagePreviewOverlay: UIView?
     }
 
     private func setEmptyStateVisible(_ visible: Bool) {
-        let shouldShow = visible && type != "outing" && !isSmallTalkMode
+        let shouldShow = visible && type != "outing" && type != "small_talk" && !isSmallTalkMode
         emptyStateView?.isHidden = !shouldShow
     }
 
