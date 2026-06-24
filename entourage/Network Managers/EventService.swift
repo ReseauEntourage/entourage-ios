@@ -371,20 +371,20 @@ struct EventService:ParsingDataCodable {
         
         Logger.print("Endpoint passed cancel event \(endpoint)")
                 
-        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
             Logger.print("Response cancel event: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
             guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 Logger.print("***** error cancel event - \(error)")
                 DispatchQueue.main.async { completion(nil, error) }
                 return
             }
-            
+
             let event:Event? = self.parseData(data: data,key: "outing")
             DispatchQueue.main.async { completion(event, nil) }
         }
     }
-    
-    
+
+
     static func cancelEventWithRecurrency(eventId:Int, completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIEventCancelWithRecurrency

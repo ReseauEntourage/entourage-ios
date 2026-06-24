@@ -243,9 +243,6 @@ class WelcomeVideoModalViewController: UIViewController {
     }
 
     @objc private func onContinueTap() {
-        UserDefaults.standard.set(true, forKey: "hasWatchedWelcomeVideo")
-        UserDefaults.standard.synchronize()
-
         continueButton.isEnabled = false
 
         let doComplete = { [weak self] in
