@@ -285,7 +285,7 @@ struct BadgeListRowView: View {
                     Text(def.descriptionShortKey.localized)
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
                         .foregroundColor(isActive ? Color(UIColor.appGris112) : .black)
-                        .lineLimit(2)
+                        .lineLimit(4)
                 }
 
                 // Barre de progression
