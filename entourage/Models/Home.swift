@@ -26,7 +26,6 @@ struct UserHome:Codable {
 
     
     var congratulations = HomeActions()
-    var badges: [String] = []
 
     var displayName:String {
         get {
@@ -53,7 +52,6 @@ struct UserHome:Codable {
         case events = "events"
         case signablePermission = "signable_permission"
         case association
-        case badges
     }
 }
 
