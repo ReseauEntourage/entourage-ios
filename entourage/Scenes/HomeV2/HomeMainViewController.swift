@@ -124,6 +124,39 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         
         // SECURITE: Gating retiré d'ici pour éviter les présentations modales pendant le layout
         SVProgressHUD.dismiss()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(handleBadgeCtaNotification(_:)), name: NSNotification.Name(kNotificationBadgeCta), object: nil)
+    }
+
+    @objc private func handleBadgeCtaNotification(_ notification: Notification) {
+        guard let keyRaw = notification.userInfo?[kNotificationBadgeCtaKey] as? String,
+              let key = BadgeKey(rawValue: keyRaw) else { return }
+        // Dismiss everything above home (profile, badge list, etc.) then navigate
+        dismiss(animated: true) { [weak self] in
+            self?.performBadgeCta(key)
+        }
+    }
+
+    private func performBadgeCta(_ key: BadgeKey) {
+        switch key {
+        case .premierPas:
+            tabBarController?.selectedIndex = 0
+        case .premierLien:
+            tabBarController?.selectedIndex = 2
+        case .tisseurLiens:
+            tabBarController?.selectedIndex = 3
+        case .asPapotage:
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .papotages
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        case .diffuseurLiens:
+            let sb = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "eventCreateVCMain") as? EventCreateMainViewController {
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true)
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

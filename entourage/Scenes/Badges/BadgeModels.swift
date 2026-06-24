@@ -4,7 +4,7 @@ import Foundation
 
 struct UserBadgeAPI: Codable {
     let name: String
-    let active: Bool
+    let active: Bool?
     let awardedAt: String?
     let metadata: BadgeAPIMetadata?
 

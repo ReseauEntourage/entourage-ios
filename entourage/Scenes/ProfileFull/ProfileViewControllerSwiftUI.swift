@@ -329,7 +329,7 @@ struct ProfileView: View {
                 .padding(.horizontal)
                 .padding(.top, 8)
                 .fullScreenCover(isPresented: $showBadgesList) {
-                    BadgesListView(apiBadges: viewModel.apiBadges)
+                    BadgesListView()
                 }
                 .sheet(item: $selectedBadgeProgress) { p in
                     BadgeDetailSheet(
@@ -348,13 +348,7 @@ struct ProfileView: View {
                                     showBadgesList = true
                                 }
                             } else {
-                                selectedBadgeProgress = nil
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                                    presentationMode.wrappedValue.dismiss()
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                                        BadgesListView.navigateToBadgeCta(key: p.definition.key)
-                                    }
-                                }
+                                BadgesListView.navigateToBadgeCta(key: p.definition.key)
                             }
                         }
                     )

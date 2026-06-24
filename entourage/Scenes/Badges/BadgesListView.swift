@@ -2,8 +2,9 @@ import SwiftUI
 import UIKit
 
 struct BadgesListView: View {
-    let apiBadges: [UserBadgeAPI]
     @Environment(\.presentationMode) var presentationMode
+    @State private var apiBadges: [UserBadgeAPI] = []
+    @State private var isLoading = true
     @State private var selectedProgress: UserBadgeProgress?
     @State private var showIntro = false
     private let hPad: CGFloat = 20
@@ -47,6 +48,16 @@ struct BadgesListView: View {
             .background(Color.white)
         }
         .background(Color.white)
+        .onAppear { fetchBadges() }
+        .overlay(
+            Group {
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .scaleEffect(1.2)
+                }
+            }
+        )
         .sheet(item: $selectedProgress) { p in
             BadgeDetailSheet(
                 progress: p,
@@ -56,13 +67,23 @@ struct BadgesListView: View {
                     if p.isObtained {
                         selectedProgress = nil
                     } else {
-                        presentationMode.wrappedValue.dismiss()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                            BadgesListView.navigateToBadgeCta(key: p.definition.key)
-                        }
+                        BadgesListView.navigateToBadgeCta(key: p.definition.key)
                     }
                 }
             )
+        }
+    }
+
+    // MARK: - Data
+
+    private func fetchBadges() {
+        guard let userId = UserDefaults.currentUser?.uuid else {
+            isLoading = false
+            return
+        }
+        UserService.getDetailsForUser(userId: userId) { user, _ in
+            self.apiBadges = user?.badges ?? []
+            self.isLoading = false
         }
     }
 
@@ -321,17 +342,10 @@ struct BadgeListRowView: View {
 
 extension BadgesListView {
     static func navigateToBadgeCta(key: BadgeKey) {
-        let tabVC = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UITabBarController
-        switch key {
-        case .premierPas:      tabVC?.selectedIndex = 0
-        case .premierLien:     tabVC?.selectedIndex = 2
-        case .asPapotage:
-            let vc = WelcomeEventsListViewController()
-            vc.eventType = .papotages
-            vc.modalPresentationStyle = .fullScreen
-            AppState.getTopViewController()?.present(vc, animated: true)
-        case .diffuseurLiens:  DeepLinkManager.showEventCreation()
-        case .tisseurLiens:    tabVC?.selectedIndex = 3
-        }
+        NotificationCenter.default.post(
+            name: NSNotification.Name(kNotificationBadgeCta),
+            object: nil,
+            userInfo: [kNotificationBadgeCtaKey: key.rawValue]
+        )
     }
 }

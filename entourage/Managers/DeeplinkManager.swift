@@ -699,10 +699,12 @@ struct DeepLinkManager {
     }
 
     static func showEventCreation() {
-        let sb = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "eventCreateVCMain") as? EventCreateMainViewController {
-            vc.modalPresentationStyle = .fullScreen
-            AppState.getTopViewController()?.present(vc, animated: true)
+        DispatchQueue.main.async {
+            let sb = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "eventCreateVCMain") as? EventCreateMainViewController {
+                vc.modalPresentationStyle = .fullScreen
+                AppState.getTopViewController()?.present(vc, animated: true)
+            }
         }
     }
 
