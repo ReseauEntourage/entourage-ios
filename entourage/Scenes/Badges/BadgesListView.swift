@@ -168,10 +168,7 @@ struct BadgesListView: View {
                         .foregroundColor(.black.opacity(0.8))
 
                     Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            BadgesListView.navigateToBadgeCta(key: firstDef.key)
-                        }
+                        BadgesListView.navigateToBadgeCta(key: firstDef.key)
                     }) {
                         Text(firstDef.ctaLabelKey.localized)
                             .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15, weight: .bold)))
