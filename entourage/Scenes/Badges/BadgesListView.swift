@@ -49,6 +49,9 @@ struct BadgesListView: View {
         }
         .background(Color.white)
         .onAppear { fetchBadges() }
+        .onChange(of: selectedProgress) { progress in
+            if progress == nil { fetchBadges() }
+        }
         .overlay(
             Group {
                 if isLoading {
