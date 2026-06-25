@@ -409,7 +409,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
         let profileView = ProfileView(viewModel: self.profileViewModel)
         self.profileViewModel.navigationDelegate = self
-        let hc = UIHostingController(rootView: profileView)
+        let hc = ProfileHostingController(rootView: profileView, viewModel: self.profileViewModel)
         hc.modalPresentationStyle = .fullScreen
         (self.tabBarController ?? self).present(hc, animated: true)
     }
@@ -1306,7 +1306,7 @@ extension HomeMainViewController: ProfileNavigationDelegate, ImageReUpLoadDelega
     }
 
     func reloadOnImageUpdate() {
-        // Implementation for ImageReUpLoadDelegate
+        profileViewModel.loadData()
     }
 
     func showMessage(message: String, imageName: String?) {

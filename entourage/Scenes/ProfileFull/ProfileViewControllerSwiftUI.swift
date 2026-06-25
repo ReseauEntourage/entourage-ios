@@ -1,6 +1,25 @@
 import SwiftUI
 import SDWebImage
 
+// MARK: - Hosting Controller
+
+final class ProfileHostingController: UIHostingController<ProfileView> {
+    private let viewModel: ProfileViewModel
+
+    init(rootView: ProfileView, viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(rootView: rootView)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) { fatalError() }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.loadData()
+    }
+}
+
 // MARK: - Color Extensions
 extension Color {
     static var appBeige: Color {
@@ -38,10 +57,8 @@ struct ProfileImageView: UIViewRepresentable {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = size.width / 2
         imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 2
+        imageView.layer.borderWidth = 1
         imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.layer.shadowRadius = 4
-        imageView.layer.shadowOpacity = 0.3
         return imageView
     }
 
@@ -82,93 +99,67 @@ struct ProfileView: View {
     @State private var showSettings = false
 
 
+    private var safeAreaTop: CGFloat {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first?.windows.first?.safeAreaInsets.top ?? 44
+    }
+
     var body: some View {
-        return ScrollView {
+        ScrollView {
             VStack(spacing: 0) {
-                // Header with profile image and back button
+                // Orange header
                 ZStack {
-                    // Use the same background image as UIKit version
                     Image("ic_backgrnd_welcome")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: 170) // Match UIKit height
+                        .frame(height: safeAreaTop + 120)
                         .clipped()
                 }
+                // Nav buttons overlay — respects safe area
                 .overlay(
-                    ZStack(alignment: .top) {
-                        // Profile Image and Modify Button
-                        VStack {
-                            Spacer()
-                                .frame(height: 120)
-                            ZStack(alignment: .bottomTrailing) {
-                                ProfileImageView(
-                                    urlString: viewModel.user?.avatarURL,
-                                    size: CGSize(width: 120, height: 120)
-
-                                )
-                                .frame(width: 120 ,height: 120)
-                                .clipped()
-                                .cornerRadius(60)
-                                if viewModel.isMe {
-                                    Button(action: {
-                                        viewModel.modifyImageClick()
-                                    }) {
-                                        Image(systemName: "camera.fill")
-                                            .foregroundColor(.white)
-                                            .padding(8)
-                                            .background(Color.orange)
-                                            .clipShape(Circle())
-                                    }
-                                    .frame(width: 30, height: 30)
-                                    .opacity(1.0)
-                                }
-                            }
-                            .frame(width: 80, height: 80)
+                    HStack {
+                        Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(.white)
+                                .frame(width: 36, height: 36)
+                                .background(Color.black.opacity(0.45))
+                                .clipShape(Circle())
                         }
-
-                        // Back Button & Signal Button
-                        HStack {
-                            Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                                Image(systemName: "chevron.left")
+                        Spacer()
+                        if viewModel.isMe {
+                            Button(action: { showSettings = true }) {
+                                Image(systemName: "gearshape.fill")
                                     .font(.system(size: 16, weight: .semibold))
                                     .foregroundColor(.white)
                                     .frame(width: 36, height: 36)
                                     .background(Color.black.opacity(0.45))
                                     .clipShape(Circle())
                             }
-
-                            Spacer()
-
-                            if viewModel.isMe {
-                                Button(action: { showSettings = true }) {
-                                    Image(systemName: "gearshape.fill")
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .foregroundColor(.white)
-                                        .frame(width: 36, height: 36)
-                                        .background(Color.black.opacity(0.45))
-                                        .clipShape(Circle())
-                                }
-                            } else {
-                                Button(action: { viewModel.onSignalUserClick() }) {
-                                    Image("ic_signal_orange")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20, height: 20)
-                                        .colorMultiply(.white)
-                                        .frame(width: 36, height: 36)
-                                        .background(Color.black.opacity(0.45))
-                                        .clipShape(Circle())
-                                }
+                        } else {
+                            Button(action: { viewModel.onSignalUserClick() }) {
+                                Image("ic_signal_orange")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20, height: 20)
+                                    .colorMultiply(.white)
+                                    .frame(width: 36, height: 36)
+                                    .background(Color.black.opacity(0.45))
+                                    .clipShape(Circle())
                             }
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 52)
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.top, safeAreaTop + 8),
+                    alignment: .top
                 )
 
-                Spacer()
-                    .frame(height: 20)
-                VStack(spacing: 10) {
+                // White rounded card — overlaps the orange header by 60pt
+                VStack(spacing: 0) {
+                    Spacer().frame(height: 68) // room below profile image center
+
+                    VStack(spacing: 10) {
                     // Name - centered, bold
                     if let displayName = viewModel.user?.displayName, !displayName.isEmpty {
                         Text(displayName)
@@ -249,41 +240,50 @@ struct ProfileView: View {
                     }
 
                     // Info stack (city, phone, email, birthdate, description)
-                    VStack(spacing: 10) {
+                    VStack(spacing: 8) {
                         if let city = viewModel.user?.addressPrimary?.displayAddress, !city.isEmpty {
                             let radiusString = String(viewModel.user?.radiusDistance ?? 0)
                             let fullAddress = "\(city) - \(radiusString) km"
                             Text(fullAddress)
-                                .font(Font(UIFont(name: "HelveticaNeue", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                                .foregroundColor(.black)
+                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                .foregroundColor(Color(UIColor.appGris112))
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
 
                         if let phone = viewModel.user?.phone, !phone.isEmpty, viewModel.isMe {
                             Text(ProfileViewHelpers.formatPhoneNumber(phone))
-                                .font(Font(UIFont.systemFont(ofSize: 15)))
-                                .foregroundColor(.black)
+                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                .foregroundColor(Color(UIColor.appGris112))
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
 
                         if let email = viewModel.user?.email, !email.isEmpty, viewModel.isMe {
                             Text(email)
-                                .font(Font(UIFont.systemFont(ofSize: 15)))
-                                .foregroundColor(.black)
+                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                .foregroundColor(Color(UIColor.appGris112))
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
 
                         if let birthdate = viewModel.user?.birthdate, !birthdate.isEmpty, viewModel.isMe {
                             Text(ProfileViewHelpers.formatBirthdate(birthdate))
-                                .font(Font(UIFont.systemFont(ofSize: 15)))
-                                .foregroundColor(.black)
+                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                .foregroundColor(Color(UIColor.appGris112))
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
 
-                        if let aboutText = viewModel.user?.about, !aboutText.isEmpty {
+                        let aboutText = viewModel.user?.about?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                        if !aboutText.isEmpty {
                             Text(aboutText)
-                                .font(Font(UIFont.systemFont(ofSize: 15)))
-                                .foregroundColor(.black)
+                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                .foregroundColor(Color(UIColor.appGris112))
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.horizontal, 20)
+                        } else if viewModel.isMe {
+                            Text("profile_description_placeholder".localized)
+                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                .foregroundColor(Color(UIColor.appGris112).opacity(0.6))
+                                .italic()
                                 .multilineTextAlignment(.center)
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
@@ -365,8 +365,44 @@ struct ProfileView: View {
                     )
                     .padding(.horizontal)
                 }
-
+                }
+                .background(Color.white)
+                .cornerRadius(24)
+                .padding(.horizontal, 4)
+                .padding(.bottom, 32)
+                .offset(y: -60)
+                .padding(.bottom, -60)
             }
+            // Profile image — overlaid on outer VStack so it renders above the white card
+            .overlay(
+                HStack {
+                    Spacer()
+                    ZStack(alignment: .bottomTrailing) {
+                        ProfileImageView(
+                            urlString: viewModel.user?.avatarURL,
+                            size: CGSize(width: 120, height: 120)
+                        )
+                        .frame(width: 120, height: 120)
+                        .clipShape(Circle())
+                        if viewModel.isMe {
+                            Button(action: { viewModel.modifyImageClick() }) {
+                                Image(systemName: "pencil")
+                                    .font(.system(size: 13))
+                                    .foregroundColor(.white)
+                                    .padding(7)
+                                    .background(Color.orange)
+                                    .clipShape(Circle())
+                            }
+                            .frame(width: 32, height: 32)
+                        }
+                    }
+                    .frame(width: 120, height: 120)
+                    Spacer()
+                }
+                // image top = safeAreaTop → center = safeAreaTop+60 = card edge
+                .padding(.top, safeAreaTop),
+                alignment: .top
+            )
         }
         .edgesIgnoringSafeArea(.top)
         .id(viewModel.user?.uuid ?? "profile")
@@ -536,7 +572,7 @@ struct MainStatUserView: View {
         VStack(alignment: .leading, spacing: 0) {
             // Title — "Mon activité" / "Son activité"
             Text(isMe ? "mainUserTitleActivity".localized : "detail_user_his_activity".localized)
-                .font(.custom("Quicksand-Bold", size: 15))
+                .font(.custom("Quicksand-Bold", size: 16))
                 .foregroundColor(.black)
                 .padding(.top, 10)
                 .padding(.bottom, 18)
@@ -582,17 +618,17 @@ struct MainStatUserView: View {
     }
 
     private func statCard(count: Int, label: String, systemIcon: String) -> some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 6) {
             Text("\(count)")
-                .font(.custom("Quicksand-Bold", size: 20))
+                .font(.custom("Quicksand-Bold", size: 17))
                 .foregroundColor(count == 0 ? Color(UIColor.appGris112) : .black)
 
             HStack(spacing: 4) {
                 Image(systemName: systemIcon)
-                    .font(.system(size: 13))
+                    .font(.system(size: 12))
                     .foregroundColor(Color(UIColor.appOrange))
                 Text(label)
-                    .font(.custom("NunitoSans-Regular", size: 13))
+                    .font(.custom("NunitoSans-Regular", size: 12))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
             }
@@ -615,7 +651,7 @@ struct PreferencesSectionView: View {
     var body: some View {
         VStack(spacing: 0) {
             Text(isMe ? "preferences_section_title".localized : "preferences_section_title_others".localized)
-                .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)))
+                .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)))
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 8)

@@ -132,47 +132,40 @@ struct BadgeDetailSheet: View {
             .cornerRadius(12)
             .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(red: 0.18, green: 0.65, blue: 0.37).opacity(0.3), lineWidth: 1))
         } else {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 6) {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(Color(UIColor.systemGray3))
-                        .font(.system(size: 16))
-                    Text("badge_not_obtained".localized)
+            VStack(alignment: .leading, spacing: 10) {
+                // Progression header
+                HStack {
+                    Text("badge_your_progress".localized)
                         .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
                         .foregroundColor(.black)
+                    Spacer()
+                    Text("\(progress.progress)/\(progress.target)")
+                        .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
+                        .foregroundColor(Color(UIColor.appOrange))
                 }
+
+                // Progress bar
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color(UIColor.systemGray5))
+                            .frame(height: 8)
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color(UIColor.appOrange))
+                            .frame(width: geo.size.width * CGFloat(progress.progress) / CGFloat(max(progress.target, 1)), height: 8)
+                    }
+                }
+                .frame(height: 8)
 
                 Text(def.descriptionShortKey.localized)
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundColor(Color(UIColor.appGris112))
-
-                if progress.progress > 0 {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("badge_your_progress".localized)
-                            .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
-                            .foregroundColor(Color(UIColor.appGris112))
-                        GeometryReader { geo in
-                            ZStack(alignment: .leading) {
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color(UIColor.systemGray5))
-                                    .frame(height: 8)
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color(UIColor.appOrange))
-                                    .frame(width: geo.size.width * CGFloat(progress.progress) / CGFloat(max(progress.target, 1)), height: 8)
-                            }
-                        }
-                        .frame(height: 8)
-                        Text("\(progress.progress)/\(progress.target)")
-                            .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
-                            .foregroundColor(Color(UIColor.appOrange))
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
-                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(14)
-            .background(Color(UIColor.systemGray6))
+            .padding(16)
+            .background(Color.white)
             .cornerRadius(12)
+            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(UIColor.systemGray4), lineWidth: 1))
         }
     }
 

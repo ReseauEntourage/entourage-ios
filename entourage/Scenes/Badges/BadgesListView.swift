@@ -49,8 +49,8 @@ struct BadgesListView: View {
         }
         .background(Color.white)
         .onAppear { fetchBadges() }
-        .onChange(of: selectedProgress) { progress in
-            if progress == nil { fetchBadges() }
+        .onChange(of: selectedProgress == nil) { isNil in
+            if isNil { fetchBadges() }
         }
         .overlay(
             Group {
@@ -240,10 +240,17 @@ struct BadgesListView: View {
         VStack(spacing: 10) {
             ForEach(items, id: \.definition.key.rawValue) { item in
                 BadgeListRowView(progress: item)
-                    .padding(.horizontal, hPad)
                     .onTapGesture { selectedProgress = item }
             }
         }
+        .padding(12)
+        .background(Color.white)
+        .cornerRadius(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color(UIColor.systemGray4), lineWidth: 1)
+        )
+        .padding(.horizontal, hPad)
     }
 }
 

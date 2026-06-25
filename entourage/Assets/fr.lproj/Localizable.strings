@@ -2148,3 +2148,4 @@ Choisissez un sujet pour démarrer.";
 "badges_intro_point3_body" = "Vos badges s'affichent sur votre profil et racontent votre histoire dans la communauté.";
 "badges_intro_cta" = "Découvrir mes badges";
 "badges_intro_later" = "Plus tard";
+"profile_description_placeholder" = "Description non renseignée";
