@@ -2149,3 +2149,13 @@ Choisissez un sujet pour démarrer.";
 "badges_intro_cta" = "Découvrir mes badges";
 "badges_intro_later" = "Plus tard";
 "profile_description_placeholder" = "Description non renseignée";
+
+
+// Ambassador resources section
+"profile_ambassador_resources_section" = "Mes ressources bénévoles";
+"profile_ambassador_tool_toolkit" = "Boîte à outils";
+"profile_ambassador_tool_whatsapp" = "WhatsApp Entoureurs";
+"profile_ambassador_tool_charter" = "Charte des événements";
+"profile_ambassador_referent_section" = "Mon référent";
+"profile_ambassador_referent_role" = "Responsable engagement citoyen";
+"profile_ambassador_referent_cta" = "Envoyer un message";

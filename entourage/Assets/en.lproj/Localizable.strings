@@ -2130,3 +2130,13 @@ Choisissez un sujet pour démarrer.";
 
 "badge_cta_see_badges" = "See my badges";
 "profile_description_placeholder" = "No description provided";
+
+
+// Ambassador resources section
+"profile_ambassador_resources_section" = "My volunteer resources";
+"profile_ambassador_tool_toolkit" = "Toolkit";
+"profile_ambassador_tool_whatsapp" = "WhatsApp Entoureurs";
+"profile_ambassador_tool_charter" = "Event charter";
+"profile_ambassador_referent_section" = "My contact";
+"profile_ambassador_referent_role" = "Citizen engagement manager";
+"profile_ambassador_referent_cta" = "Send a message";

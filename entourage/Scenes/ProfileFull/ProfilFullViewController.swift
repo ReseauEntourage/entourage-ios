@@ -17,6 +17,8 @@ enum ProfileFullDTO {
     case section(title: String)
     case standard(img: String, title: String, subtitle: String)
     case version(version:String)
+    case ambassadorResources
+    case ambassadorModerator(moderator: HomeModerator)
 }
 
 class ProfilFullViewController: UIViewController {
@@ -38,6 +40,7 @@ class ProfilFullViewController: UIViewController {
     var activated_notif : [String] = []
     var numberOfBlocked :Int = 0
     var userIdToDisplay: String?
+    var moderator: HomeModerator?
 
     let profileImageMaxHeight: CGFloat = 120
     let profileImageMinHeight: CGFloat = 0
@@ -66,6 +69,10 @@ class ProfilFullViewController: UIViewController {
                                forCellReuseIdentifier: MainStatUserCell.identifier)
         ui_table_view.register(UINib(nibName: VersionAppCell.identifier, bundle: nil),
                                forCellReuseIdentifier: VersionAppCell.identifier)
+        ui_table_view.register(ProfileAmbassadorResourcesCell.self,
+                               forCellReuseIdentifier: ProfileAmbassadorResourcesCell.identifier)
+        ui_table_view.register(ProfileAmbassadorModeratorCell.self,
+                               forCellReuseIdentifier: ProfileAmbassadorModeratorCell.identifier)
         
         // Ajout d’un padding visuel en réduisant légèrement la taille de l’image
         ui_view_image_modify.layer.cornerRadius = 15 // Arrondi de 1dp
@@ -130,49 +137,63 @@ class ProfilFullViewController: UIViewController {
     }
     
     func loadData(){
-        HomeService.getNotifsPermissions { notifPerms, error in
-            // Vérifier et afficher les notifications activées
+        let userId = userIdToDisplay ?? user?.uuid ?? ""
+        let isOtherUser = userIdToDisplay != nil
+
+        // Récupère toutes les données nécessaires en parallèle puis construit l'écran
+        var resolvedUser: User? = nil
+        var resolvedNotifs: [String] = []
+        var resolvedBlocked: Int = 0
+        var resolvedModerator: HomeModerator? = nil
+
+        let group = DispatchGroup()
+
+        group.enter()
+        HomeService.getNotifsPermissions { notifPerms, _ in
             if let notifPerms = notifPerms {
-                var activeNotifs: [String] = []
-
-                if notifPerms.chat_message {
-                    activeNotifs.append("message")
-                }
-                if notifPerms.neighborhood {
-                    activeNotifs.append("groupe")
-                }
-                if notifPerms.outing {
-                    activeNotifs.append("événement")
-                }
-                if notifPerms.action {
-                    activeNotifs.append("action")
-                }
-                self.activated_notif = activeNotifs
-                //self.activated_notif = activeNotifs.joined(separator: ", ")
-                MessagingService.getUsersBlocked { blockedUsers, error in
-                    self.numberOfBlocked = blockedUsers?.count ?? 0
-                    if let _otherUserId = self.userIdToDisplay {
-                        self.isMe = false
-                        UserService.getDetailsForUser(userId: _otherUserId) { returnUser, error in
-                            if let returnUser = returnUser {
-                                self.user = returnUser
-                                self.loadImage()
-                                self.loadDTO()
-                            }
-                        }
-
-                    }else{
-                        UserService.getDetailsForUser(userId: self.user?.uuid ?? "") { returnUser, error in
-                            if let returnUser = returnUser {
-                                self.user = returnUser
-                                self.loadImage()
-                                self.loadDTO()
-                            }
-                        }
-
-                    }
-                }
+                var active: [String] = []
+                if notifPerms.chat_message { active.append("message") }
+                if notifPerms.neighborhood { active.append("groupe") }
+                if notifPerms.outing      { active.append("événement") }
+                if notifPerms.action      { active.append("action") }
+                resolvedNotifs = active
             }
+            group.leave()
+        }
+
+        group.enter()
+        MessagingService.getUsersBlocked { blockedUsers, _ in
+            resolvedBlocked = blockedUsers?.count ?? 0
+            group.leave()
+        }
+
+        group.enter()
+        UserService.getDetailsForUser(userId: userId) { returnUser, _ in
+            if var u = returnUser {
+                if u.roles == nil || u.roles?.isEmpty == true {
+                    u.roles = UserDefaults.currentUser?.roles
+                }
+                resolvedUser = u
+            }
+            group.leave()
+        }
+
+        group.enter()
+        HomeService.getUserHome { userHome, _ in
+            resolvedModerator = userHome?.moderator
+            group.leave()
+        }
+
+        group.notify(queue: .main) {
+            self.activated_notif = resolvedNotifs
+            self.numberOfBlocked = resolvedBlocked
+            self.moderator = resolvedModerator
+            if isOtherUser { self.isMe = false }
+            if let u = resolvedUser {
+                self.user = u
+                self.loadImage()
+            }
+            self.loadDTO()
         }
     }
     
@@ -378,6 +399,18 @@ class ProfilFullViewController: UIViewController {
         }
         
         // --------------------------------------------------
+        // SECTION : RESSOURCES AMBASSADEUR (si ambassadeur et profil perso)
+        // --------------------------------------------------
+        let isAmbassador = user.isAmbassador() || (UserDefaults.currentUser?.isAmbassador() ?? false)
+        if isMe && isAmbassador {
+            tableDTO.append(.section(title: "profile_ambassador_resources_section".localized))
+            tableDTO.append(.ambassadorResources)
+            if let mod = moderator {
+                tableDTO.append(.ambassadorModerator(moderator: mod))
+            }
+        }
+
+        // --------------------------------------------------
         // SECTION : PRÉFÉRENCES
         // --------------------------------------------------
         let preferencesSectionTitle = isMe
@@ -580,8 +613,21 @@ extension ProfilFullViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.configure(version: version)
                 return cell
             }
+
+        case .ambassadorResources:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ProfileAmbassadorResourcesCell.identifier) as? ProfileAmbassadorResourcesCell {
+                cell.delegate = self
+                return cell
+            }
+
+        case .ambassadorModerator(let mod):
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ProfileAmbassadorModeratorCell.identifier) as? ProfileAmbassadorModeratorCell {
+                cell.configure(displayName: mod.displayName, imageUrl: mod.imgUrl)
+                cell.delegate = self
+                return cell
+            }
         }
-        
+
         return UITableViewCell()
     }
     
@@ -832,5 +878,38 @@ extension ProfilFullViewController:ImageReUpLoadDelegate{
 extension ProfilFullViewController:UserProfileDetailDelegate {
     func showMessage(message: String, imageName: String?) {
 
+    }
+}
+
+// MARK: - Ambassador Resources Delegate
+extension ProfilFullViewController: ProfileAmbassadorResourcesCellDelegate {
+    func onToolkitTapped() {
+        if let url = URL(string: AMBASSADOR_TOOLKIT_URL) {
+            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+        }
+    }
+
+    func onWhatsappTapped() {
+        if let url = URL(string: AMBASSADOR_WHATSAPP_URL) {
+            UIApplication.shared.open(url)
+        }
+    }
+
+    func onCharterTapped() {
+        if let url = URL(string: AMBASSADOR_CHARTER_URL) {
+            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+        }
+    }
+}
+
+// MARK: - Ambassador Moderator Delegate
+extension ProfilFullViewController: ProfileAmbassadorModeratorCellDelegate {
+    func onSendMessageToReferent() {
+        guard let moderatorId = moderator?.id else { return }
+        MessagingService.createOrGetConversation(userId: String(moderatorId)) { conversation, error in
+            if let conversation = conversation {
+                self.showConversation(conversation: conversation)
+            }
+        }
     }
 }

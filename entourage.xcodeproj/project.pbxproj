@@ -650,6 +650,8 @@
 		26F14CDB2D3E8766004C4524 /* ProfileFullStandardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F14CDA2D3E8766004C4524 /* ProfileFullStandardCell.swift */; };
 		26F14CDD2D3E885B004C4524 /* ProfileFullStandardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F14CDC2D3E885B004C4524 /* ProfileFullStandardCell.xib */; };
 		26F14CDF2D3E8B48004C4524 /* ProfileSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F14CDE2D3E8B48004C4524 /* ProfileSectionCell.swift */; };
+		26AA0002ABCD1234004C4524 /* ProfileAmbassadorResourcesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AA0001ABCD1234004C4524 /* ProfileAmbassadorResourcesCell.swift */; };
+		26AA0004ABCD1234004C4524 /* ProfileAmbassadorModeratorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AA0003ABCD1234004C4524 /* ProfileAmbassadorModeratorCell.swift */; };
 		26F14CE12D3E8B7C004C4524 /* ProfileSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */; };
 		26F2278B2CE73BEE009EABA7 /* HighlightOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */; };
 		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
@@ -1316,6 +1318,8 @@
 		26F14CDA2D3E8766004C4524 /* ProfileFullStandardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFullStandardCell.swift; sourceTree = "<group>"; };
 		26F14CDC2D3E885B004C4524 /* ProfileFullStandardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileFullStandardCell.xib; sourceTree = "<group>"; };
 		26F14CDE2D3E8B48004C4524 /* ProfileSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionCell.swift; sourceTree = "<group>"; };
+		26AA0001ABCD1234004C4524 /* ProfileAmbassadorResourcesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAmbassadorResourcesCell.swift; sourceTree = "<group>"; };
+		26AA0003ABCD1234004C4524 /* ProfileAmbassadorModeratorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAmbassadorModeratorCell.swift; sourceTree = "<group>"; };
 		26F14CE02D3E8B7C004C4524 /* ProfileSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileSectionCell.xib; sourceTree = "<group>"; };
 		26F2278A2CE73BEE009EABA7 /* HighlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightOverlayView.swift; sourceTree = "<group>"; };
 		26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTranslationCell.xib; sourceTree = "<group>"; };
@@ -2342,6 +2346,8 @@
 				262820D22D49042A00A61C30 /* MainStatUserCell.xib */,
 				262820D42D49069A00A61C30 /* MainStatUserCell.swift */,
 				26E2579B2D5B839800A8B9C1 /* VersionAppCell.swift */,
+				26AA0001ABCD1234004C4524 /* ProfileAmbassadorResourcesCell.swift */,
+				26AA0003ABCD1234004C4524 /* ProfileAmbassadorModeratorCell.swift */,
 				26E2579F2D5B83DA00A8B9C1 /* VersionAppCell.xib */,
 			);
 			path = cells;
@@ -3169,6 +3175,8 @@
 				024131D42862030A00561FB4 /* EventCreatePhase2ViewController.swift in Sources */,
 				02FCC3152812DD9200578407 /* NeighborhoodHomeSearchCell.swift in Sources */,
 				26F14CDF2D3E8B48004C4524 /* ProfileSectionCell.swift in Sources */,
+				26AA0002ABCD1234004C4524 /* ProfileAmbassadorResourcesCell.swift in Sources */,
+				26AA0004ABCD1234004C4524 /* ProfileAmbassadorModeratorCell.swift in Sources */,
 				029D253728660C4500147F77 /* MJTimePickerView.swift in Sources */,
 				26BEEECC2C00C32B00169FBA /* EnhancedViewController.swift in Sources */,
 				021E804328916FF500C891DC /* EventEditRecurrencyViewController.swift in Sources */,
