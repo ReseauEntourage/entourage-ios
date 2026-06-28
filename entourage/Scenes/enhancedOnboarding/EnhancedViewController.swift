@@ -21,7 +21,7 @@ enum EnhancedOnboardingTableDTO {
     case title(title: String, subtitle: String)
     case fullSizeCell(choice: OnboardingChoice, isSelected: Bool)
     case collectionViewCell(choices: [OnboardingChoice])
-    case choiceDayCell(days: [String], selectedDays: Set<Int>)
+    case availabilityGrid(availability: [Int: Set<Int>])
     case associationPresentation
     case backArrow
 }
@@ -52,16 +52,16 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
     var returnHome = false
     var hasChangedMod = false
 
-    var selectedDays = Set<Int>()
-    var selectedHours = Set<Int>()
+    // [dayIndex: Set<slotIndex>]  dayIndex 0=Lun…6=Dim, slotIndex 0=Matin 1=AM 2=Soir
+    var selectedAvailability: [Int: Set<Int>] = [:]
 
     var isAssociationGoal: Bool = false
     var associationLogoImage: UIImage?
     var associationDescription: String?
-    
+
     // Référence pour le bouton "Sticky"
     var stickyButtonView: EnahancedOnboardingButtonCell?
-    
+
     // MARK: - Association Logic Variables
     private let associationPresenter = AssociationPresenter()
     private var currentPartnerId: Int?
@@ -74,12 +74,12 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         ui_tableview.register(UINib(nibName: "EnhancedFullSizeCell", bundle: nil), forCellReuseIdentifier: "fullSizeCell")
         ui_tableview.register(UINib(nibName: "EnhancedOnboardingCollectionCell", bundle: nil), forCellReuseIdentifier: "collectionViewCell")
         ui_tableview.register(UINib(nibName: "EnhancecOnboardingBackCell", bundle: nil), forCellReuseIdentifier: "enhancecOnboardingBackCell")
-        ui_tableview.register(UINib(nibName: "ChoiceDayCell", bundle: nil), forCellReuseIdentifier: "ChoiceDayCell")
+        ui_tableview.register(AvailabilityGridCell.self, forCellReuseIdentifier: AvailabilityGridCell.identifier)
         ui_tableview.register(AssociationPresentationCell.self, forCellReuseIdentifier: "associationPresentationCell")
 
         ui_tableview.delegate = self
         ui_tableview.dataSource = self
-        
+
         // Configuration de l'interface
         setupStickyFooter()
         preconfigureAvailability()
@@ -87,43 +87,43 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         setupAssociationLogic()
         loadDTO()
     }
-    
+
     /// Configuration initiale pour la logique Association
     private func setupAssociationLogic() {
         associationPresenter.delegate = self
-        
+
         if let user = UserDefaults.currentUser,
            let partner = user.partner,
            let pid = partner.aid {
             self.currentPartnerId = pid
         }
     }
-    
+
     /// Cette méthode crée le bouton et le "colle" en bas de l'écran
     private func setupStickyFooter() {
         guard let buttonView = Bundle.main.loadNibNamed("EnahancedOnboardingButtonCell", owner: self, options: nil)?.first as? EnahancedOnboardingButtonCell else {
             return
         }
-        
+
         buttonView.delegate = self
         buttonView.configure()
         if EnhancedOnboardingConfiguration.shared.isInterestsFromSetting {
             buttonView.configureForMainFilter()
         }
-        
+
         self.view.addSubview(buttonView)
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         self.stickyButtonView = buttonView
-        
+
         let height: CGFloat = 85
-        
+
         NSLayoutConstraint.activate([
             buttonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             buttonView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             buttonView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             buttonView.heightAnchor.constraint(equalToConstant: height)
         ])
-        
+
         if let existingConstraint = self.view.constraints.first(where: {
             ($0.firstItem as? NSObject == ui_tableview && $0.firstAttribute == .bottom) ||
             ($0.secondItem as? NSObject == ui_tableview && $0.secondAttribute == .bottom)
@@ -135,27 +135,26 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     private func preconfigureAvailability() {
-        if let userAvailability = UserDefaults.currentUser?.availability {
-            for (dayKey, timeRanges) in userAvailability {
-                if let dayIndex = Int(dayKey) { selectedDays.insert(dayIndex - 1) }
-                for timeRange in timeRanges {
-                    let slot: Int? = {
-                        switch timeRange {
-                        case "09:00-12:00": return 0
-                        case "14:00-18:00": return 1
-                        case "18:00-21:00": return 2
-                        default: return nil
-                        }
-                    }()
-                    if let s = slot { selectedHours.insert(s) }
+        guard let userAvailability = UserDefaults.currentUser?.availability else { return }
+        for (dayKey, timeRanges) in userAvailability {
+            guard let dayNumber = Int(dayKey) else { continue }
+            let dayIndex = dayNumber - 1
+            var slots = Set<Int>()
+            for timeRange in timeRanges {
+                switch timeRange {
+                case "09:00-12:00": slots.insert(0)
+                case "14:00-18:00": slots.insert(1)
+                case "18:00-21:00": slots.insert(2)
+                default: break
                 }
             }
+            if !slots.isEmpty { selectedAvailability[dayIndex] = slots }
         }
     }
 
     private func initializeChoices() {
         guard let currentUser = UserDefaults.currentUser else { return }
-        
+
         concernChoices = [
             OnboardingChoice(id: "sharing_time", img: "img_asset_onboarding_share", title: NSLocalizedString("enhanced_onboarding_sharing_time", comment: "")),
             OnboardingChoice(id: "material_donations", img: "img_asset_onboarding_entraide", title: NSLocalizedString("enhanced_onboarding_material_donations", comment: "")),
@@ -163,11 +162,6 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         ]
 
         if isAssociationGoal {
-            // Mapping ID et Icons basés sur la logique Android (Action Wishes / Orientations)
-            // share -> "resources" icon (Android) -> img_asset_onboarding_sensib
-            // guide -> "outings" icon (Android) -> img_asset_onboarding_convivialite
-            // both_actions -> "actions" icon (Android) -> img_asset_onboarding_pouce
-            
             involvementChoices = [
                 OnboardingChoice(id: "share", img: "img_asset_onboarding_sensib", title: "Relayer vos événements de convivialité sur l'application"),
                 OnboardingChoice(id: "guide", img: "img_asset_onboarding_convivialite", title: "Orienter vos bénéficiaires aux événements de convivialité"),
@@ -204,7 +198,7 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
         let concerns = Set(currentUser.concerns ?? [])
         let involvements = Set(currentUser.involvements ?? [])
         let orientations = Set(currentUser.orientations ?? [])
-        
+
         if isAssociationGoal {
             selectedIds = interests.union(concerns).union(orientations)
         } else {
@@ -238,24 +232,23 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
             AnalyticsLoggerManager.logEvent(name: "onboarding_disponibility_view")
             tableDTO.append(.backArrow)
             tableDTO.append(.title(title: NSLocalizedString("enhanced_onboarding_my_availability", comment: ""), subtitle: NSLocalizedString("enhanced_onboarding_select_availability", comment: "")))
-            tableDTO.append(.choiceDayCell(days: generateDaysAnd(), selectedDays: selectedDays))
-            tableDTO.append(.choiceDayCell(days: generateHours(), selectedDays: selectedHours))
+            tableDTO.append(.availabilityGrid(availability: selectedAvailability))
 
         case .associationPresentation:
             AnalyticsLoggerManager.logEvent(name: "onboarding_association_view")
             tableDTO.append(.backArrow)
             tableDTO.append(.title(title: "Présentez votre association à la communauté", subtitle: "Ajoutez votre logo et une courte description pour que les membres de la communauté sachent qui vous êtes et ce que vous faites."))
-            
+
             // Chargement des données si nécessaire
             if associationDescription == nil && associationLogoImage == nil, let pid = currentPartnerId {
                 associationPresenter.getPartnerDetails(partnerId: pid)
             }
-            
+
             tableDTO.append(.associationPresentation)
         }
-        
+
         ui_tableview.reloadData()
-        
+
         if hasChangedMod {
             hasChangedMod = false
             ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
@@ -293,23 +286,21 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
     func updateUserChoices(shouldQuit: Bool = true, completion: (() -> Void)? = nil) {
         let interests = interestChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
         let concerns = concernChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
-        
+
         // Séparation logique: Involvements pour user standard, Orientations pour Association
         let selectedInvolvementItems = involvementChoices.filter { selectedIds.contains($0.id) }.map { $0.id }
         let involvements = isAssociationGoal ? [] : selectedInvolvementItems
         let orientations = isAssociationGoal ? selectedInvolvementItems : nil
 
-        UserService.updateUserChoices(interests: interests, concerns: concerns, involvements: involvements, orientations: orientations, selectedDays: self.selectedDays, selectedHours: self.selectedHours) { user, error in
+        UserService.updateUserChoices(interests: interests, concerns: concerns, involvements: involvements, orientations: orientations, selectedAvailability: self.selectedAvailability) { user, error in
             if let error = error {
                 print("Error updating user choices: \(error)")
-                // Même en cas d'erreur, on peut vouloir continuer si completion est présent
                 if let completion = completion {
                     DispatchQueue.main.async { completion() }
                 }
             } else {
                 var updatedUser = user ?? UserDefaults.currentUser
-                if self.isAssociationGoal, var localUser = updatedUser {
-                    // On ne touche pas encore à l'organisation ici, c'est fait dans le presenter Asso
+                if self.isAssociationGoal, let localUser = updatedUser {
                     UserDefaults.updateCurrentUser(newUser: localUser)
                     updatedUser = localUser
                 } else if let _user = updatedUser {
@@ -317,13 +308,11 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
                 }
 
                 DispatchQueue.main.async {
-                    // Si on a un bloc de completion (ex: aller vers écran asso), on l'exécute et on s'arrête là
                     if let completion = completion {
                         completion()
                         return
                     }
 
-                    // Sinon flow normal (Quitter)
                     if self.returnHome {
                         AppState.navigateToMainApp()
                     } else {
@@ -370,11 +359,9 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "enhancecOnboardingBackCell", for: indexPath) as! EnhancecOnboardingBackCell
             cell.configure(isFromSettings: EnhancedOnboardingConfiguration.shared.isInterestsFromSetting)
             return cell
-        case .choiceDayCell(let days, let selectedS):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceDayCell", for: indexPath) as! ChoiceDayCell
-            cell.isDay = days.count >= 5
-            cell.selectedDays = selectedS
-            cell.configure(days: days)
+        case .availabilityGrid(let avail):
+            let cell = tableView.dequeueReusableCell(withIdentifier: AvailabilityGridCell.identifier, for: indexPath) as! AvailabilityGridCell
+            cell.configure(availability: avail)
             cell.delegate = self
             return cell
         case .associationPresentation:
@@ -403,10 +390,10 @@ extension EnhancedViewController: UITableViewDelegate, UITableViewDataSource {
         case .fullSizeCell(let choice, _):
             if selectedIds.contains(choice.id) { selectedIds.remove(choice.id) }
             else { selectedIds.insert(choice.id) }
-            
+
             tableDTO[indexPath.row] = .fullSizeCell(choice: choice, isSelected: selectedIds.contains(choice.id))
             tableView.reloadRows(at: [indexPath], with: .none)
-            
+
         case .backArrow:
             hasChangedMod = true
             if EnhancedOnboardingConfiguration.shared.isInterestsFromSetting {
@@ -437,51 +424,47 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
     func onNextClick() { // Bouton Valider
         hasChangedMod = true
         if EnhancedOnboardingConfiguration.shared.isInterestsFromSetting { self.updateUserChoices(); return }
-        
+
         switch mode {
         case .involvement:
             mode = .interest
-            
+
         case .interest:
             if isAssociationGoal {
-                // CORRECTION: On sauvegarde les infos USER maintenant avant de passer à l'asso
                 updateUserChoices(shouldQuit: false) {
                     self.mode = .associationPresentation
                     self.loadDTO()
                 }
-                return // On return pour ne pas recharger loadDTO deux fois
+                return
             } else {
                 mode = .concern
             }
-            
+
         case .concern:
             mode = .choiceDisponibility
-            
+
         case .choiceDisponibility:
             self.updateUserChoices()
             return
-            
+
         case .associationPresentation:
             handleAssociationValidation()
             return
         }
-        
+
         self.loadDTO()
     }
-    
-    // Logique de validation spécifique pour l'association
+
     private func handleAssociationValidation() {
         guard let pid = currentPartnerId else {
             quitOnboarding()
             return
         }
-        
-        // On lance la séquence Upload -> Update via le presenter
         associationPresenter.updateUserPartner(partnerId: pid,
                                                newDescription: associationDescription,
                                                newImage: associationLogoImage)
     }
-    
+
     private func quitOnboarding() {
         self.dismiss(animated: true) {
             AppState.navigateToMainApp()
@@ -497,10 +480,9 @@ extension EnhancedViewController: EnhancedOnboardingCollectionCellDelegate {
     }
 }
 
-extension EnhancedViewController: ChoiceDayCellDelegate {
-    func choiceDayCell(_ cell: ChoiceDayCell, didUpdateSelectedDays selectedDays: Set<Int>, isDay: Bool) {
-        if isDay { self.selectedDays = selectedDays }
-        else { self.selectedHours = selectedDays }
+extension EnhancedViewController: AvailabilityGridCellDelegate {
+    func availabilityGridCell(_ cell: AvailabilityGridCell, didUpdateAvailability availability: [Int: Set<Int>]) {
+        self.selectedAvailability = availability
     }
 }
 
@@ -518,29 +500,21 @@ extension EnhancedViewController: AssociationPresentationCellDelegate {
 // MARK: - AssociationPresenterDelegate
 
 extension EnhancedViewController: AssociationPresenterDelegate {
-    
+
     func didLoadPartner(_ partner: Partner) {
-        // 1. Description
         if self.associationDescription == nil {
             self.associationDescription = partner.descr
         }
-        
-        // 2. Image Loading
-        // PATCH CORRECTION DOUBLE URL :
-        // Le backend renvoie parfois : BaseURL + URL_ABSOLUE.
-        // On détecte la présence d'une deuxième occurrence de "http" pour extraire la bonne partie.
-        
+
         var urlStr = partner.imageUrl ?? partner.largeLogoUrl ?? partner.smallLogoUrl
-        
+
         if let str = urlStr, let range = str.range(of: "http", options: .backwards) {
-            // Si on trouve "http" ailleurs qu'au début (index > 0), c'est une concaténation
             if range.lowerBound != str.startIndex {
                 let substring = str[range.lowerBound...]
-                // On décode le %3A éventuel (ex: https%3A -> https:)
                 urlStr = substring.removingPercentEncoding ?? String(substring)
             }
         }
-        
+
         if self.associationLogoImage == nil, let finalUrl = urlStr {
             if let url = URL(string: finalUrl) {
                 print("🔹 DEBUG: Downloading image from \(finalUrl)")
@@ -551,7 +525,6 @@ extension EnhancedViewController: AssociationPresenterDelegate {
                             DispatchQueue.main.async {
                                 if self.associationLogoImage == nil {
                                     self.associationLogoImage = img
-                                    // Refresh UI seulement si on est sur l'écran concerné
                                     if self.mode == .associationPresentation {
                                         self.ui_tableview.reloadData()
                                     }
@@ -564,17 +537,16 @@ extension EnhancedViewController: AssociationPresenterDelegate {
                 }
             }
         }
-        
-        // 3. Refresh UI pour afficher la description chargée
+
         if self.mode == .associationPresentation {
             self.ui_tableview.reloadData()
         }
     }
-    
+
     func didUpdatePartnerSuccess() {
         quitOnboarding()
     }
-    
+
     func didFailWithError(_ error: String) {
         let alert = UIAlertController(title: "Erreur", message: error, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -582,16 +554,10 @@ extension EnhancedViewController: AssociationPresenterDelegate {
     }
 }
 
-// MARK: - Helpers
+// MARK: - Image Picker
 
 extension EnhancedViewController {
-    func generateDaysAnd() -> [String] {
-        return [NSLocalizedString("day_monday", comment: ""), NSLocalizedString("day_tuesday", comment: ""), NSLocalizedString("day_wednesday", comment: ""), NSLocalizedString("day_thursday", comment: ""), NSLocalizedString("day_friday", comment: ""), NSLocalizedString("day_saturday", comment: ""), NSLocalizedString("day_sunday", comment: "")]
-    }
-    func generateHours() -> [String] {
-        return [NSLocalizedString("hour_morning", comment: ""), NSLocalizedString("hour_afternoon", comment: ""), NSLocalizedString("hour_evening", comment: "")]
-    }
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let img = info[.originalImage] as? UIImage { self.associationLogoImage = img; loadDTO() }
         picker.dismiss(animated: true)
     }

@@ -30,18 +30,51 @@ class EventCreateMainViewController: UIViewController {
     var newTags:Tags? = nil
     var isGroupSharing = false
     var hasPlaceLimit = false
-    
+
     var currentPhasePosition = 1
-    
+
     var currentNeighborhoodId:Int? = nil
-    
+
+    var sourceEvent: Event? = nil
+
     weak var parentController:UIViewController? = nil // Use to open the ending screen
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         newEvent.metadata = EventMetadata()
-        
+
+        if let source = sourceEvent {
+            newEvent.title = source.title
+            newEvent.descriptionEvent = source.descriptionEvent
+            newEvent.imageId = source.imageId
+            // Fallback: events from API store the image in metadata URLs, not imageId/entourage_image_url
+            if source.imageId == nil {
+                newEvent.entourage_image_url = source.entourage_image_url ?? source.metadata?.portrait_url ?? source.metadata?.landscape_url
+            }
+            newEvent.isOnline = source.isOnline
+            newEvent.onlineEventUrl = source.onlineEventUrl
+            newEvent.location = source.location
+            newEvent.addressName = source.addressName
+            newEvent.interests = source.interests
+            newEvent.tagOtherMessage = source.tagOtherMessage
+            newEvent.recurrence = source.recurrence
+            if let sourceMeta = source.metadata {
+                newEvent.metadata?.reservedFemale = sourceMeta.reservedFemale
+                newEvent.metadata?.place_limit = sourceMeta.place_limit
+                newEvent.metadata?.street_address = sourceMeta.street_address
+                newEvent.metadata?.google_place_id = sourceMeta.google_place_id
+                newEvent.metadata?.display_address = sourceMeta.display_address
+                newEvent.metadata?.portrait_url = sourceMeta.portrait_url
+                newEvent.metadata?.landscape_url = sourceMeta.landscape_url
+            }
+            hasPlaceLimit = (source.metadata?.place_limit ?? 0) > 0
+            if let neighborhoods = source.neighborhoods, !neighborhoods.isEmpty {
+                newEvent.neighborhoods = neighborhoods
+                isGroupSharing = true
+            }
+        }
+
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
         ui_error_view.hide()
         
@@ -72,7 +105,11 @@ class EventCreateMainViewController: UIViewController {
         configureOrangeButton(ui_bt_next, withTitle: "event_create_group_bt_next".localized)
         
         enableDisableNextButton(isEnable: false) //TODO: remettre false
-        
+
+        if sourceEvent != nil {
+            _ = checkValidation()
+        }
+
         ui_main_container_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         
         self.modalPresentationStyle = .fullScreen
@@ -379,11 +416,16 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
         return currentNeighborhoodId
     }
     
-    //Non used here
-    func isEdit() -> Bool { return false }
-    func getCurrentEvent() -> Event? { return nil }
+    func isEdit() -> Bool { return sourceEvent != nil }
+    func getCurrentEvent() -> Event? {
+        guard var copy = sourceEvent else { return nil }
+        // Dates cleared so Phase2 forces the user to pick new ones
+        copy.startDate = nil
+        copy.endDate = nil
+        return copy
+    }
     func setDateChanged() { }
-    func hasCurrentRecurrency() -> Bool {return false}
+    func hasCurrentRecurrency() -> Bool { return false }
     
     //MARK: - Checks -
     func checkValidation() -> (isValid:Bool, message:String) {

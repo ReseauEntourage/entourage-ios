@@ -404,6 +404,7 @@
 		24DE087C2FE0245800806810 /* BadgesIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DE087D2FE0245800806810 /* BadgesIntroView.swift */; };
 		24EAAA8A2F0BB94B002F2A41 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
 		24EAAA8C2F0E4FC0002F2A41 /* AssociationPresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */; };
+		24AB001B2F1B0000002F2B01 /* AvailabilityGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB001A2F1B0000002F2B01 /* AvailabilityGridCell.swift */; };
 		24EE59A02FC08207008E7291 /* ApiKeys.dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24EE599F2FC08207008E7291 /* ApiKeys.dist.plist */; };
 		24EE59A22FC083F5008E7291 /* HmacSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59A12FC083F5008E7291 /* HmacSigner.swift */; };
 		24EE59C32FC09292008E7291 /* cellMeWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EE59A62FC09292008E7291 /* cellMeWithImage.xib */; };
@@ -1059,6 +1060,7 @@
 		24DE08752FE0245800806810 /* BadgeUnlockedSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeUnlockedSheet.swift; sourceTree = "<group>"; };
 		24DE087D2FE0245800806810 /* BadgesIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesIntroView.swift; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
+		24AB001A2F1B0000002F2B01 /* AvailabilityGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityGridCell.swift; sourceTree = "<group>"; };
 		24EE599F2FC08207008E7291 /* ApiKeys.dist.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.dist.plist; sourceTree = "<group>"; };
 		24EE59A12FC083F5008E7291 /* HmacSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HmacSigner.swift; sourceTree = "<group>"; };
 		24EE59A62FC09292008E7291 /* cellMeWithImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cellMeWithImage.xib; sourceTree = "<group>"; };
@@ -2661,6 +2663,7 @@
 			isa = PBXGroup;
 			children = (
 				24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */,
+				24AB001A2F1B0000002F2B01 /* AvailabilityGridCell.swift */,
 				26043D962CE4F65700F4083F /* collectionDayAndHourCells */,
 				26BEEEB82C00C32B00169FBA /* collectionInterestsCells */,
 				26BEEEBB2C00C32B00169FBA /* EnhancedFullSizeCell.swift */,
@@ -3395,6 +3398,7 @@
 				02C91A23278F07D900305E0B /* Endpoints.swift in Sources */,
 				0229376B27A4000800206201 /* SafariWebManager.swift in Sources */,
 				24EAAA8C2F0E4FC0002F2A41 /* AssociationPresentationCell.swift in Sources */,
+				24AB001B2F1B0000002F2B01 /* AvailabilityGridCell.swift in Sources */,
 				02EC7E4B27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift in Sources */,
 				028D4F582937970B00A0BDD3 /* OnboardingPhase2ViewController.swift in Sources */,
 				02C6E87128203E1F009D4289 /* ReportGroupViewController.swift in Sources */,

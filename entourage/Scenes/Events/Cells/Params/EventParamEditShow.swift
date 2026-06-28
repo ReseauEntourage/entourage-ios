@@ -51,6 +51,8 @@ class EventParamEditShow: UITableViewCell {
             delegate?.showCGU()
         case .EditEvent:
             delegate?.editEvent()
+        case .DuplicateEvent:
+            delegate?.duplicateEvent()
         case .EditRecurrency:
             delegate?.editRecurrency()
         case .share:

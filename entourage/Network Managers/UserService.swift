@@ -12,40 +12,22 @@ struct UserService {
     
     //MARK: - Update User Interests
 
-    static func updateUserChoices(interests: [String], concerns: [String], involvements: [String], orientations: [String]? = nil, selectedDays: Set<Int>, selectedHours: Set<Int>, completion: @escaping (_ user: User?, _ error: EntourageNetworkError?) -> Void) {
-        
+    static func updateUserChoices(interests: [String], concerns: [String], involvements: [String], orientations: [String]? = nil, selectedAvailability: [Int: Set<Int>], completion: @escaping (_ user: User?, _ error: EntourageNetworkError?) -> Void) {
+
         guard let token = UserDefaults.token else {
             completion(nil, nil)
             return
         }
-        
+
         let endpoint = String(format: kAPIUpdateUser, token)
-        
-        // Mappings pour les jours et les créneaux horaires
-        let dayMapping = [
-            0: "1", // Lundi
-            1: "2", // Mardi
-            2: "3", // Mercredi
-            3: "4", // Jeudi
-            4: "5", // Vendredi
-            5: "6", // Samedi
-            6: "7"  // Dimanche
-        ]
-        
-        let timeSlotMapping = [
-            0: "09:00-12:00", // Matin
-            1: "14:00-18:00", // Après-midi
-            2: "18:00-21:00"  // Soir
-        ]
-        
-        // Construction de la structure de disponibilité
+
+        // dayIndex 0=Lun…6=Dim → API key "1"…"7", slotIndex 0=Matin 1=AM 2=Soir
+        let timeSlotStrings = ["09:00-12:00", "14:00-18:00", "18:00-21:00"]
         var availability: [String: [String]] = [:]
-        for day in selectedDays {
-            if let dayNumber = dayMapping[day] {
-                let timeRanges = selectedHours.compactMap { timeSlotMapping[$0] }
-                if !timeRanges.isEmpty {
-                    availability[dayNumber] = timeRanges
-                }
+        for (dayIndex, slots) in selectedAvailability {
+            let timeRanges = slots.sorted().compactMap { $0 < timeSlotStrings.count ? timeSlotStrings[$0] : nil }
+            if !timeRanges.isEmpty {
+                availability[String(dayIndex + 1)] = timeRanges
             }
         }
         
