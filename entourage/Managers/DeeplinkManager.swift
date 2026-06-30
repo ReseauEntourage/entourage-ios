@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 struct DeepLinkManager {
@@ -731,7 +732,27 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
-    
+
+    static func showBadgeUnlocked(badgeTag: String) {
+        guard let badgeKey = BadgeKey(rawValue: badgeTag),
+              let definition = allBadgeDefinitions.first(where: { $0.key == badgeKey }) else {
+            print("❌ showBadgeUnlocked: no definition for tag '\(badgeTag)'")
+            return
+        }
+        let firstName = UserDefaults.currentUser?.firstname ?? ""
+        DispatchQueue.main.async {
+            let sheet = BadgeUnlockedSheet(definition: definition, firstName: firstName, onSeeBadges: {})
+            let hostingVC = UIHostingController(rootView: sheet)
+            hostingVC.modalPresentationStyle = .fullScreen
+            guard let top = AppState.getTopViewController() else {
+                print("❌ showBadgeUnlocked: no top VC")
+                return
+            }
+            print("✅ showBadgeUnlocked presenting on \(type(of: top))")
+            top.present(hostingVC, animated: true)
+        }
+    }
+
 }
 
 enum RedirectionType {
