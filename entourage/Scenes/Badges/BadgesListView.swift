@@ -48,6 +48,7 @@ struct BadgesListView: View {
             .background(Color.white)
         }
         .background(Color.white)
+        .navigationBarHidden(true)
         .onAppear { fetchBadges() }
         .onChange(of: selectedProgress == nil) { isNil in
             if isNil { fetchBadges() }
@@ -271,8 +272,10 @@ struct BadgeListRowView: View {
                         ? Color(UIColor.appOrangeLight).opacity(0.5)
                         : Color(UIColor.systemGray5))
                     .frame(width: 52, height: 52)
-                Text(def.emoji)
-                    .font(.system(size: 26))
+                Image(def.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
                     .opacity(isActive ? 1.0 : 0.5)
             }
 

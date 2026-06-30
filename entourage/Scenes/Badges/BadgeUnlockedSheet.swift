@@ -12,8 +12,10 @@ struct BadgeUnlockedSheet: View {
             ZStack {
                 Color(UIColor.appOrangeLight).opacity(0.3)
                 BadgeDotsAnimationView()
-                Text(definition.emoji)
-                    .font(.system(size: 72))
+                Image(definition.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 280)
