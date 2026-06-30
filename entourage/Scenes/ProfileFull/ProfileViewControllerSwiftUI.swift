@@ -1,25 +1,6 @@
 import SwiftUI
 import SDWebImage
 
-// MARK: - Hosting Controller
-
-final class ProfileHostingController: UIHostingController<ProfileView> {
-    private let viewModel: ProfileViewModel
-
-    init(rootView: ProfileView, viewModel: ProfileViewModel) {
-        self.viewModel = viewModel
-        super.init(rootView: rootView)
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) { fatalError() }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewModel.loadData()
-    }
-}
-
 // MARK: - Color Extensions
 extension Color {
     static var appBeige: Color {
@@ -27,26 +8,7 @@ extension Color {
     }
 }
 
-// MARK: - Navigation Protocol
-protocol ProfileNavigationDelegate: AnyObject {
-    func showImagePicker()
-    func showProfileEditor(user: User?)
-    func showPartnerDetails(partner: Partner)
-    func showConversation(conversation: Conversation?)
-    func showReportUser(user: User?)
-    func openEnhancedOnboarding(mode: EnhancedOnboardingMode)
-    func showLanguageSelector()
-    func showNotificationSettings()
-    func showHelp()
-    func showBlockedContacts()
-    func openFeedbackUrl()
-    func shareApp()
-    func showPasswordChange()
-    func showLogoutAlert()
-    func showDeleteAccountAlert()
-}
-
-// MARK: - Views Components
+// MARK: - Shared UI Components
 
 struct ProfileImageView: UIViewRepresentable {
     let urlString: String?
@@ -63,7 +25,7 @@ struct ProfileImageView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIImageView, context: Context) {
-        uiView.frame = CGRect(origin: .zero, size: size) // <-- Ajoute cette ligne
+        uiView.frame = CGRect(origin: .zero, size: size)
         if let urlString = urlString, let url = URL(string: urlString) {
             uiView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
         } else {
@@ -84,333 +46,6 @@ struct PartnerLogoView: UIViewRepresentable {
     func updateUIView(_ uiView: UIImageView, context: Context) {
         if let url = URL(string: urlString) {
             uiView.sd_setImage(with: url, placeholderImage: nil)
-        }
-    }
-}
-
-// MARK: - Main View
-
-struct ProfileView: View {
-    @StateObject var viewModel: ProfileViewModel
-    @Environment(\.presentationMode) private var presentationMode
-    @State private var scrollOffset: CGFloat = 0
-    @State private var showBadgesList = false
-    @State private var selectedBadgeProgress: UserBadgeProgress?
-    @State private var showSettings = false
-
-
-    private var safeAreaTop: CGFloat {
-        UIApplication.shared.connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .first?.windows.first?.safeAreaInsets.top ?? 44
-    }
-
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                // Orange header
-                ZStack {
-                    Image("ic_backgrnd_welcome")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: safeAreaTop + 120)
-                        .clipped()
-                }
-                // Nav buttons overlay — respects safe area
-                .overlay(
-                    HStack {
-                        Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
-                                .frame(width: 36, height: 36)
-                                .background(Color.black.opacity(0.45))
-                                .clipShape(Circle())
-                        }
-                        Spacer()
-                        if viewModel.isMe {
-                            Button(action: { showSettings = true }) {
-                                Image(systemName: "gearshape.fill")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.white)
-                                    .frame(width: 36, height: 36)
-                                    .background(Color.black.opacity(0.45))
-                                    .clipShape(Circle())
-                            }
-                        } else {
-                            Button(action: { viewModel.onSignalUserClick() }) {
-                                Image("ic_signal_orange")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 20, height: 20)
-                                    .colorMultiply(.white)
-                                    .frame(width: 36, height: 36)
-                                    .background(Color.black.opacity(0.45))
-                                    .clipShape(Circle())
-                            }
-                        }
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.top, safeAreaTop + 8),
-                    alignment: .top
-                )
-
-                // White rounded card — overlaps the orange header by 60pt
-                VStack(spacing: 0) {
-                    Spacer().frame(height: 68) // room below profile image center
-
-                    VStack(spacing: 10) {
-                    // Name - centered, bold
-                    if let displayName = viewModel.user?.displayName, !displayName.isEmpty {
-                        Text(displayName)
-                            .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-
-                    // Roles and Partner stack (beige pills with orange text)
-                    if let roles = viewModel.user?.roles, !roles.isEmpty, 
-                       let partnerText = viewModel.user?.partner?.name ?? viewModel.user?.organization?.name, !partnerText.isEmpty {
-                        HStack(spacing: 4) {
-                            // Roles pill
-                            if !roles.isEmpty {
-                                Text(roles.joined(separator: " • "))
-                                    .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                    .foregroundColor(Color(UIColor.appOrange))
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 4)
-                                    .background(Color.appBeige)
-                                    .cornerRadius(11)
-                                    .fixedSize(horizontal: true, vertical: false)
-                            }
-
-                            // Partner pill
-                            if !partnerText.isEmpty {
-                                HStack(spacing: 4) {
-                                    if let partnerLogoUrl = viewModel.user?.partner?.smallLogoUrl {
-                                        PartnerLogoView(urlString: partnerLogoUrl)
-                                            .frame(width: 30, height: 30)
-                                    }
-                                    Text(partnerText)
-                                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                        .foregroundColor(Color(UIColor.appOrange))
-                                }
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 4)
-                                .background(Color.appBeige)
-                                .cornerRadius(11)
-                                .fixedSize(horizontal: true, vertical: false)
-                                .onTapGesture {
-                                    viewModel.onPartnerClick()
-                                }
-                            }
-                        }
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    } else if let roles = viewModel.user?.roles, !roles.isEmpty {
-                        // Only roles
-                        Text(roles.joined(separator: " • "))
-                            .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                            .foregroundColor(Color(UIColor.appOrange))
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 4)
-                            .background(Color.appBeige)
-                            .cornerRadius(11)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .fixedSize(horizontal: true, vertical: false)
-                    } else if let partnerText = viewModel.user?.partner?.name ?? viewModel.user?.organization?.name, !partnerText.isEmpty {
-                        // Only partner
-                        HStack(spacing: 4) {
-                            if let partnerLogoUrl = viewModel.user?.partner?.smallLogoUrl {
-                                PartnerLogoView(urlString: partnerLogoUrl)
-                                    .frame(width: 30, height: 30)
-                            }
-                            Text(partnerText)
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                .foregroundColor(Color(UIColor.appOrange))
-                        }
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
-                        .background(Color.appBeige)
-                        .cornerRadius(11)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .fixedSize(horizontal: true, vertical: false)
-                        .onTapGesture {
-                            viewModel.onPartnerClick()
-                        }
-                    }
-
-                    // Info stack (city, phone, email, birthdate, description)
-                    VStack(spacing: 8) {
-                        if let city = viewModel.user?.addressPrimary?.displayAddress, !city.isEmpty {
-                            let radiusString = String(viewModel.user?.radiusDistance ?? 0)
-                            let fullAddress = "\(city) - \(radiusString) km"
-                            Text(fullAddress)
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                .foregroundColor(Color(UIColor.appGris112))
-                                .frame(maxWidth: .infinity, alignment: .center)
-                        }
-
-                        if let phone = viewModel.user?.phone, !phone.isEmpty, viewModel.isMe {
-                            Text(ProfileViewHelpers.formatPhoneNumber(phone))
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                .foregroundColor(Color(UIColor.appGris112))
-                                .frame(maxWidth: .infinity, alignment: .center)
-                        }
-
-                        if let email = viewModel.user?.email, !email.isEmpty, viewModel.isMe {
-                            Text(email)
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                .foregroundColor(Color(UIColor.appGris112))
-                                .frame(maxWidth: .infinity, alignment: .center)
-                        }
-
-                        if let birthdate = viewModel.user?.birthdate, !birthdate.isEmpty, viewModel.isMe {
-                            Text(ProfileViewHelpers.formatBirthdate(birthdate))
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                .foregroundColor(Color(UIColor.appGris112))
-                                .frame(maxWidth: .infinity, alignment: .center)
-                        }
-
-                        let aboutText = viewModel.user?.about?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-                        if !aboutText.isEmpty {
-                            Text(aboutText)
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                .foregroundColor(Color(UIColor.appGris112))
-                                .multilineTextAlignment(.center)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .padding(.horizontal, 20)
-                        } else if viewModel.isMe {
-                            Text("profile_description_placeholder".localized)
-                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                .foregroundColor(Color(UIColor.appGris112).opacity(0.6))
-                                .italic()
-                                .multilineTextAlignment(.center)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                        }
-                    }
-                    .padding(.horizontal, 10)
-
-                    // Modify or Send Message button - match UIKit style
-                    Button(action: {
-                        if viewModel.isMe {
-                            viewModel.modifyProfile()
-                        } else {
-                            viewModel.sendMessage()
-                        }
-                    }) {
-                        Text(viewModel.isMe ? "modify".localized : "detail_user_send_message".localized)
-                            .font(Font(UIFont(name: "Quicksand-Bold", size: 12) ?? UIFont.systemFont(ofSize: 12)))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 15)
-                            .padding(.vertical, 12)
-                            .frame(minWidth: 136, minHeight: 48)
-                            .background(Color(UIColor.appOrange))
-                            .cornerRadius(25)
-                    }
-                    .padding(.top, 10)
-                    .padding(.bottom, 20)
-                }
-                .padding()
-
-                // Main user activity
-                if let user = viewModel.user {
-                    MainStatUserView(isMe: viewModel.isMe, user: user)
-                        .padding(.horizontal)
-                        .padding(.top, 10)
-                }
-
-                // Badges section (tous les profils)
-                BadgesSectionView(
-                    apiBadges: viewModel.apiBadges,
-                    isMe: viewModel.isMe,
-                    onShowAllBadges: { showBadgesList = true },
-                    onBadgeTap: viewModel.isMe ? { p in selectedBadgeProgress = p } : nil
-                )
-                .padding(.horizontal)
-                .padding(.top, 8)
-                .fullScreenCover(isPresented: $showBadgesList) {
-                    BadgesListView()
-                }
-                .sheet(item: $selectedBadgeProgress) { p in
-                    BadgeDetailSheet(
-                        progress: p,
-                        isMe: viewModel.isMe,
-                        onShowAllBadges: {
-                            selectedBadgeProgress = nil
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                                showBadgesList = true
-                            }
-                        },
-                        onCta: {
-                            if p.isObtained {
-                                selectedBadgeProgress = nil
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                                    showBadgesList = true
-                                }
-                            } else {
-                                BadgesListView.navigateToBadgeCta(key: p.definition.key)
-                            }
-                        }
-                    )
-                }
-
-                // Preferences section
-                if let user = viewModel.user {
-                    PreferencesSectionView(
-                        isMe: viewModel.isMe,
-                        user: user,
-                        activatedNotif: viewModel.activatedNotif,
-                        numberOfBlocked: viewModel.numberOfBlocked,
-                        viewModel: viewModel
-                    )
-                    .padding(.horizontal)
-                }
-                }
-                .background(Color.white)
-                .cornerRadius(24)
-                .padding(.horizontal, 4)
-                .padding(.bottom, 32)
-                .offset(y: -60)
-                .padding(.bottom, -60)
-            }
-            // Profile image — overlaid on outer VStack so it renders above the white card
-            .overlay(
-                HStack {
-                    Spacer()
-                    ZStack(alignment: .bottomTrailing) {
-                        ProfileImageView(
-                            urlString: viewModel.user?.avatarURL,
-                            size: CGSize(width: 120, height: 120)
-                        )
-                        .frame(width: 120, height: 120)
-                        .clipShape(Circle())
-                        if viewModel.isMe {
-                            Button(action: { viewModel.modifyImageClick() }) {
-                                Image(systemName: "pencil")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.white)
-                                    .padding(7)
-                                    .background(Color.orange)
-                                    .clipShape(Circle())
-                            }
-                            .frame(width: 32, height: 32)
-                        }
-                    }
-                    .frame(width: 120, height: 120)
-                    Spacer()
-                }
-                // image top = safeAreaTop → center = safeAreaTop+60 = card edge
-                .padding(.top, safeAreaTop),
-                alignment: .top
-            )
-        }
-        .edgesIgnoringSafeArea(.top)
-        .id(viewModel.user?.uuid ?? "profile")
-        .onAppear {
-            viewModel.loadData()
-        }
-        .sheet(isPresented: $showSettings) {
-            ProfileSettingsView(viewModel: viewModel)
         }
     }
 }
@@ -447,7 +82,7 @@ enum ProfileViewHelpers {
     }
 }
 
-// MARK: - Subviews
+// MARK: - Interest Tags
 
 struct InterestTagsView: View {
     let interests: [String]
@@ -557,6 +192,48 @@ struct WrappingHStackLayout: View {
     }
 }
 
+// MARK: - Shared Row
+
+struct ProfileStandardRow: View {
+    let imageName: String
+    let title: String
+    let subtitle: String
+    let isMe: Bool
+    var isDestructive: Bool = false
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(imageName)
+                .resizable()
+                .frame(width: 24, height: 24)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
+                    .foregroundColor(isDestructive ? .orange : .black)
+
+                if !subtitle.isEmpty {
+                    Text(subtitle)
+                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                        .foregroundColor(Color(UIColor.appGris112))
+                }
+            }
+
+            Spacer()
+
+            if isMe {
+                Image(systemName: "chevron.right")
+                    .foregroundColor(isDestructive ? Color(UIColor.appOrange) : .black)
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .contentShape(Rectangle())
+    }
+}
+
+// MARK: - Activity Stats (shared, isMe controls title only)
+
 struct MainStatUserView: View {
     let isMe: Bool
     let user: User
@@ -570,14 +247,12 @@ struct MainStatUserView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Title — "Mon activité" / "Son activité"
             Text(isMe ? "mainUserTitleActivity".localized : "detail_user_his_activity".localized)
                 .font(.custom("Quicksand-Bold", size: 16))
                 .foregroundColor(.black)
                 .padding(.top, 10)
                 .padding(.bottom, 18)
 
-            // Member since card (full width)
             if let date = user.creationDate {
                 VStack(spacing: 2) {
                     Text("memberSince".localized)
@@ -595,7 +270,6 @@ struct MainStatUserView: View {
                 .padding(.bottom, 12)
             }
 
-            // Two stat cards side by side
             HStack(spacing: 8) {
                 let groups = user.stats?.neighborhoodsCount ?? 0
                 let outings = max(0, user.stats?.outingsCount ?? 0)
@@ -641,529 +315,10 @@ struct MainStatUserView: View {
     }
 }
 
-struct PreferencesSectionView: View {
-    let isMe: Bool
-    let user: User
-    let activatedNotif: [String]
-    let numberOfBlocked: Int
-    @ObservedObject var viewModel: ProfileViewModel
-
-    var body: some View {
-        VStack(spacing: 0) {
-            Text(isMe ? "preferences_section_title".localized : "preferences_section_title_others".localized)
-                .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)))
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 8)
-
-            Button(action: {
-                if isMe { 
-                    viewModel.navigationDelegate?.openEnhancedOnboarding(mode: .interest)
-                }
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profil_full_interest",
-                    title: isMe ? "preferences_interest_title".localized : "preferences_interest_title_others".localized,
-                    subtitle: formatInterests(user.interests),
-                    isMe: isMe
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            let involvements = (user.partner != nil) ? (user.orientations ?? []) : (user.involvements ?? [])
-            Button(action: {
-                if isMe { viewModel.navigationDelegate?.openEnhancedOnboarding(mode: .involvement) }
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profil_full_action",
-                    title: isMe ? "preferences_action_title".localized : "preferences_action_title_others".localized,
-                    subtitle: formatInvolvements(involvements, isAssociation: user.partner != nil),
-                    isMe: isMe
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            if user.partner == nil {
-                Button(action: {
-                    if isMe { viewModel.navigationDelegate?.openEnhancedOnboarding(mode: .concern) }
-                }) {
-                    ProfileStandardRow(
-                        imageName: "ic_profil_full_action_category",
-                        title: isMe ? "preferences_action_categories_title".localized : "preferences_action_categories_title_others".localized,
-                        subtitle: formatConcerns(user.concerns),
-                        isMe: isMe
-                    )
-                }
-                .buttonStyle(PlainButtonStyle())
-
-                Button(action: {
-                    if isMe { viewModel.navigationDelegate?.openEnhancedOnboarding(mode: .choiceDisponibility) }
-                }) {
-                    ProfileStandardRow(
-                        imageName: "ic_profil_full_disponibility",
-                        title: isMe ? "preferences_availability_title".localized : "preferences_availability_title_others".localized,
-                        subtitle: formatAvailability(user.availability),
-                        isMe: isMe
-                    )
-                }
-                .buttonStyle(PlainButtonStyle())
-            }
-        }
-        .background(Color.white)
-        .cornerRadius(16)
-    }
-
-    private func formatInterests(_ interests: [String]?) -> String {
-        guard let interests = interests, !interests.isEmpty else { 
-            return "no_data_available".localized 
-        }
-        let result = interests.map { TagsUtils.showTagTranslated($0) }.joined(separator: ", ")
-        return result
-    }
-
-    private func formatInvolvements(_ involvements: [String], isAssociation: Bool) -> String {
-        guard !involvements.isEmpty else { 
-            return "no_data_available".localized 
-        }
-        let result = involvements.map { isAssociation ? TagsUtils.showOrientationTranslated($0) : TagsUtils.showTagTranslated($0) }.joined(separator: ", ")
-        return result
-    }
-
-    private func formatConcerns(_ concerns: [String]?) -> String {
-        guard let concerns = concerns, !concerns.isEmpty else { 
-            return "no_data_available".localized 
-        }
-        let result = concerns.map { TagsUtils.showTagTranslated($0) }.joined(separator: ", ")
-        return result
-    }
-
-    private func formatAvailability(_ availability: [String: [String]]?) -> String {
-        guard let availability = availability, !availability.isEmpty else { 
-            return "no_data_available".localized 
-        }
-        var availabilityParts: [String] = []
-        for (dayKey, slots) in availability {
-            let dayLabel = dayName(for: dayKey)
-            let slotLabels = slots.map { timeSlotName(for: $0) }.joined(separator: ", ")
-            availabilityParts.append("\\(dayLabel) (\\(slotLabels))")
-        }
-        let result = availabilityParts.joined(separator: " • ")
-        return result
-    }
-
-    private func dayName(for dayKey: String) -> String {
-        switch dayKey {
-        case "1": return "enhanced_onboarding_time_disponibility_day_monday".localized
-        case "2": return "enhanced_onboarding_time_disponibility_day_tuesday".localized
-        case "3": return "enhanced_onboarding_time_disponibility_day_wednesday".localized
-        case "4": return "enhanced_onboarding_time_disponibility_day_thursday".localized
-        case "5": return "enhanced_onboarding_time_disponibility_day_friday".localized
-        case "6": return "enhanced_onboarding_time_disponibility_day_saturday".localized
-        case "7": return "enhanced_onboarding_time_disponibility_day_sunday".localized
-        default: return dayKey
-        }
-    }
-
-    private func timeSlotName(for slot: String) -> String {
-        switch slot {
-        case "09:00-12:00": return "enhanced_onboarding_time_disponibility_time_morning".localized
-        case "14:00-18:00": return "enhanced_onboarding_time_disponibility_time_afternoon".localized
-        case "18:00-21:00": return "enhanced_onboarding_time_disponibility_time_evening".localized
-        default: return slot
-        }
-    }
-}
-
-struct SettingsSectionView: View {
-    let activatedNotif: [String]
-    let numberOfBlocked: Int
-    @ObservedObject var viewModel: ProfileViewModel
-
-    var body: some View {
-        VStack(spacing: 0) {
-            Text("settings_section_title".localized)
-                .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)))
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 8)
-
-            Button(action: { 
-                viewModel.navigationDelegate?.showLanguageSelector() 
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profil_full_language",
-                    title: "settings_language_title".localized,
-                    subtitle: formatLanguage(),
-                    isMe: true
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Button(action: { 
-                viewModel.navigationDelegate?.showNotificationSettings() 
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profil_full_notif",
-                    title: "settings_notifications_title".localized,
-                    subtitle: formatNotifications(),
-                    isMe: true
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Button(action: { 
-                viewModel.navigationDelegate?.showBlockedContacts() 
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profil_full_block_people",
-                    title: "settings_unblock_contacts_title".localized,
-                    subtitle: formatBlockedUsers(),
-                    isMe: true
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Button(action: { 
-                viewModel.navigationDelegate?.openFeedbackUrl() 
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profil_full_suggest",
-                    title: "settings_feedback_title".localized,
-                    subtitle: "",
-                    isMe: true
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Button(action: { 
-                viewModel.navigationDelegate?.shareApp() 
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profile_full_share",
-                    title: "settings_share_title".localized,
-                    subtitle: "",
-                    isMe: true
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Button(action: { 
-                viewModel.navigationDelegate?.showHelp() 
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profile_help",
-                    title: "settings_help_title".localized,
-                    subtitle: "",
-                    isMe: true
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Button(action: { 
-                viewModel.navigationDelegate?.showPasswordChange() 
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profil_full_mdp",
-                    title: "settings_password_title".localized,
-                    subtitle: "",
-                    isMe: true
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Button(action: { 
-                viewModel.navigationDelegate?.showLogoutAlert() 
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profil_full_log_out",
-                    title: "logout_button".localized,
-                    subtitle: "",
-                    isMe: true,
-                    isDestructive: true
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            Button(action: { 
-                viewModel.navigationDelegate?.showDeleteAccountAlert() 
-            }) {
-                ProfileStandardRow(
-                    imageName: "ic_profil_full_suppress_account",
-                    title: "delete_account_button".localized,
-                    subtitle: "",
-                    isMe: true,
-                    isDestructive: true
-                )
-            }
-            .buttonStyle(PlainButtonStyle())
-        }
-        .background(Color.white)
-        .cornerRadius(16)
-    }
-
-    private func formatLanguage() -> String {
-        let preferredLanguage = LanguageManager.loadLanguageFromPreferences()
-        let localizedKey = getLocalizedKey(for: preferredLanguage)
-        let result = String(localizedKey.dropFirst(3))
-        return result
-    }
-
-    private func getLocalizedKey(for lang: String) -> String {
-        let languageMapping: [String: String] = [
-            "fr": "lang_fr",
-            "en": "lang_en",
-            "es": "lang_es",
-            "ar": "lang_ar",
-            "uk": "lang_uk",
-            "de": "lang_de",
-            "ro": "lang_ro",
-            "pl": "lang_pl"
-        ]
-        return languageMapping[lang]?.localized ?? "lang_fr".localized
-    }
-
-    private func formatNotifications() -> String {
-        if activatedNotif.isEmpty {
-            return "settings_notifications_subtitle_none".localized
-        } else {
-            let result = String(format: "settings_notifications_subtitle".localized, activatedNotif.joined(separator: ", "))
-            return result
-        }
-    }
-
-    private func formatBlockedUsers() -> String {
-        if numberOfBlocked == 0 {
-            return "settings_unblock_contacts_subtitle_none".localized
-        } else {
-            let result = String.localizedStringWithFormat(
-                numberOfBlocked == 1 ? "settings_unblock_contacts_subtitle".localized : "settings_unblock_contacts_subtitle_plural".localized,
-                numberOfBlocked
-            )
-            return result
-        }
-    }
-}
-
-struct ProfileStandardRow: View {
-    let imageName: String
-    let title: String
-    let subtitle: String
-    let isMe: Bool
-    var isDestructive: Bool = false
-
-    var body: some View {
-        HStack(spacing: 12) {
-            Image(imageName)
-                .resizable()
-                .frame(width: 24, height: 24)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
-                    .foregroundColor(isDestructive ? .orange : .black)
-
-                if !subtitle.isEmpty {
-                    Text(subtitle)
-                        .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                        .foregroundColor(Color(UIColor.appGris112))
-                }
-            }
-
-            Spacer()
-
-            if isMe {
-                Image(systemName: "chevron.right")
-                    .foregroundColor(isDestructive ? Color(UIColor.appOrange) : .black)
-            }
-        }
-        .padding()
-        .background(Color.white)
-        .contentShape(Rectangle())
-    }
-}
-
 // MARK: - Extension String
+
 extension String {
     func isNullOrEmpty() -> Bool {
         return self.isEmpty || self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-    }
-}
-
-// MARK: - ViewModel
-class ProfileViewModel: ObservableObject {
-    @Published var user: User?
-    @Published var isMe: Bool = true
-    @Published var activatedNotif: [String] = []
-    @Published var numberOfBlocked: Int = 0
-    @Published var userIdToDisplay: String?
-    @Published var apiBadges: [UserBadgeAPI] = []
-
-    weak var navigationDelegate: ProfileNavigationDelegate?
-
-    func handleBackButtonTap() {}
-
-    func loadData() {
-        guard let currentUser = UserDefaults.currentUser else { 
-            return 
-        }
-
-        self.user = currentUser
-        self.isMe = userIdToDisplay == nil
-
-        HomeService.getNotifsPermissions { [weak self] notifPerms, error in
-            guard let self = self else { return }
-            if let notifPerms = notifPerms {
-                var activeNotifs: [String] = []
-                if notifPerms.chat_message { activeNotifs.append("message") }
-                if notifPerms.neighborhood { activeNotifs.append("groupe") }
-                if notifPerms.outing { activeNotifs.append("événement") }
-                if notifPerms.action { activeNotifs.append("action") }
-                DispatchQueue.main.async {
-                    self.activatedNotif = activeNotifs
-                }
-            }
-        }
-
-        MessagingService.getUsersBlocked { [weak self] blockedUsers, error in
-            DispatchQueue.main.async {
-                self?.numberOfBlocked = blockedUsers?.count ?? 0
-            }
-        }
-
-        let userIdToLoad = userIdToDisplay ?? currentUser.uuid ?? ""
-        if !userIdToLoad.isEmpty {
-            UserService.getDetailsForUser(userId: userIdToLoad) { [weak self] returnUser, error in
-                DispatchQueue.main.async {
-                    if let returnUser = returnUser {
-                        self?.user = returnUser
-                        self?.apiBadges = returnUser.badges ?? []
-                        if self?.isMe == true {
-                            UserDefaults.currentUser = returnUser
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    func modifyImageClick() {
-        AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
-        navigationDelegate?.showImagePicker()
-    }
-
-    func modifyProfile() {
-        AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
-        navigationDelegate?.showProfileEditor(user: self.user)
-    }
-
-    func onSignalUserClick() {
-        navigationDelegate?.showReportUser(user: self.user)
-    }
-
-    func onPartnerClick() {
-        guard let currentPartner = self.user?.partner else { 
-            return 
-        }
-        navigationDelegate?.showPartnerDetails(partner: currentPartner)
-    }
-
-    func sendMessage() {
-        AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
-        guard let currentUserId = user?.sid.description else { 
-            return 
-        }
-        MessagingService.createOrGetConversation(userId: currentUserId) { [weak self] conversation, error in
-            if let conversation = conversation {
-                self?.navigationDelegate?.showConversation(conversation: conversation)
-                return
-            }
-            let _ = error?.message ?? "message_error_create_conversation".localized
-        }
-    }
-
-    func getAppVersion() -> String {
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
-        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
-        return "Version \(version) (\(build))"
-    }
-}
-
-// MARK: - BasicProfileNavigationDelegate
-
-/// Delegate used when showing another user's profile from any context.
-/// Handles partner, conversation, and report navigation. All isMe-only actions are no-ops.
-class BasicProfileNavigationDelegate: NSObject, ProfileNavigationDelegate {
-    weak var presenter: UIViewController?
-
-    init(presenter: UIViewController) { self.presenter = presenter }
-
-    func showImagePicker() {}
-    func showProfileEditor(user: User?) {}
-    func openEnhancedOnboarding(mode: EnhancedOnboardingMode) {}
-    func showLanguageSelector() {}
-    func showNotificationSettings() {}
-    func showHelp() {}
-    func showBlockedContacts() {}
-    func openFeedbackUrl() {}
-    func shareApp() {}
-    func showPasswordChange() {}
-    func showLogoutAlert() {}
-    func showDeleteAccountAlert() {}
-
-    func showPartnerDetails(partner: Partner) {
-        guard let navVc = UIStoryboard(name: StoryboardName.partnerDetails, bundle: nil)
-                .instantiateInitialViewController() as? UINavigationController,
-              let vc = navVc.topViewController as? PartnerDetailViewController else { return }
-        if let id = partner.aid { vc.partnerId = id } else { vc.partner = partner }
-        DispatchQueue.main.async { AppState.getTopViewController()?.present(navVc, animated: true) }
-    }
-
-    func showConversation(conversation: Conversation?) {
-        DispatchQueue.main.async {
-            guard let convId = conversation?.uid else { return }
-            let sb = UIStoryboard(name: StoryboardName.messages, bundle: nil)
-            if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC")
-                as? ConversationDetailMessagesViewController {
-                vc.setupFromOtherVC(conversationId: convId, title: conversation?.title,
-                                    isOneToOne: true, conversation: conversation)
-                AppState.getTopViewController()?.present(vc, animated: true)
-            }
-        }
-    }
-
-    func showReportUser(user: User?) {
-        guard let vc = UIStoryboard(name: StoryboardName.userDetail, bundle: nil)
-            .instantiateViewController(withIdentifier: "reportUserMainVC")
-            as? ReportUserMainViewController else { return }
-        vc.user = user
-        DispatchQueue.main.async { AppState.getTopViewController()?.present(vc, animated: true) }
-    }
-}
-
-// MARK: - Presentation helper
-
-private var associatedDelegateKey = "profileNavDelegate"
-
-extension UIViewController {
-    /// Present the SwiftUI profile for a given userId.
-    /// Automatically detects if it's the current user and sets isMe accordingly.
-    func presentOtherUserProfile(userId: String) {
-        let currentUserId = UserDefaults.currentUser?.sid.description ?? ""
-        let isCurrentUser = !userId.isEmpty && userId == currentUserId
-
-        let vm = ProfileViewModel()
-        if isCurrentUser {
-            // Own profile — no userIdToDisplay, loadData will set isMe=true
-            vm.isMe = true
-        } else {
-            vm.userIdToDisplay = userId
-            vm.isMe = false
-        }
-        let delegate = BasicProfileNavigationDelegate(presenter: self)
-        vm.navigationDelegate = delegate
-        let hc = UIHostingController(rootView: ProfileView(viewModel: vm))
-        hc.modalPresentationStyle = .fullScreen
-        objc_setAssociatedObject(hc, &associatedDelegateKey, delegate, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        present(hc, animated: true)
     }
 }

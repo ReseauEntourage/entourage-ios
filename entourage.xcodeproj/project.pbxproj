@@ -371,6 +371,8 @@
 		24037B922FD00CEB00D52EE0 /* WelcomeNationalGroupsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B912FD00CEB00D52EE0 /* WelcomeNationalGroupsListView.swift */; };
 		24037B9B2FD837A000D52EE0 /* HomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B9A2FD837A000D52EE0 /* HomeMainViewController.swift */; };
 		24037BA92FD8B7F400D52EE0 /* ProfileViewControllerSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037BA82FD8B7F400D52EE0 /* ProfileViewControllerSwiftUI.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F3 /* MyProfileViewController.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F4 /* OtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F5 /* OtherUserProfileViewController.swift */; };
 		24037BAA2FD8B7F400D52EE0 /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037BAB2FD8B7F400D52EE0 /* ProfileSettingsView.swift */; };
 		241A6AEC2F6C3229005BF63B /* WelcomeVideoModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AEB2F6C3229005BF63B /* WelcomeVideoModalViewController.swift */; };
 		241A6AED2F6C3229005BF63B /* HomeWelcomeJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AE92F6C3229005BF63B /* HomeWelcomeJourneyView.swift */; };
@@ -1027,6 +1029,8 @@
 		24037B912FD00CEB00D52EE0 /* WelcomeNationalGroupsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeNationalGroupsListView.swift; sourceTree = "<group>"; };
 		24037B9A2FD837A000D52EE0 /* HomeMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainViewController.swift; sourceTree = "<group>"; };
 		24037BA82FD8B7F400D52EE0 /* ProfileViewControllerSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerSwiftUI.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A7B8C9D0E1F3 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A7B8C9D0E1F5 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		24037BAB2FD8B7F400D52EE0 /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
 		241A6AE82F6C3229005BF63B /* HomeWelcomeJourneyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWelcomeJourneyCell.swift; sourceTree = "<group>"; };
 		241A6AE92F6C3229005BF63B /* HomeWelcomeJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWelcomeJourneyView.swift; sourceTree = "<group>"; };
@@ -2323,6 +2327,8 @@
 			isa = PBXGroup;
 			children = (
 				24037BA82FD8B7F400D52EE0 /* ProfileViewControllerSwiftUI.swift */,
+				A1B2C3D4E5F6A7B8C9D0E1F3 /* MyProfileViewController.swift */,
+				A1B2C3D4E5F6A7B8C9D0E1F5 /* OtherUserProfileViewController.swift */,
 				24037BAB2FD8B7F400D52EE0 /* ProfileSettingsView.swift */,
 				26192DE92D300EE100944D32 /* cells */,
 				26192DE72D300C7E00944D32 /* ProfilFullViewController.swift */,
@@ -3467,6 +3473,8 @@
 				022744762795D1D8005600A1 /* NotificationManager.swift in Sources */,
 				2694A74C2ACD90D70042CFCA /* HomeGroupCell.swift in Sources */,
 				24037BA92FD8B7F400D52EE0 /* ProfileViewControllerSwiftUI.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* MyProfileViewController.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F4 /* OtherUserProfileViewController.swift in Sources */,
 				24037BAA2FD8B7F400D52EE0 /* ProfileSettingsView.swift in Sources */,
 				02C6E86328203119009D4289 /* NeighborhoodParamTopCell.swift in Sources */,
 				26AD119B2AEBEFEA00FA7BEC /* LanguageCell.swift in Sources */,

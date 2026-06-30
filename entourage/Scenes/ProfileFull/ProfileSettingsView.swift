@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProfileSettingsView: View {
-    @ObservedObject var viewModel: ProfileViewModel
+    @ObservedObject var viewModel: MyProfileViewModel
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {

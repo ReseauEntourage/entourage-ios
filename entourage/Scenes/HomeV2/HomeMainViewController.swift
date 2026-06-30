@@ -76,8 +76,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     private var hasShownCompletionStateThisSession = false
     private var hasInitiallyCompletedAll: Bool? = nil
     
-    // ViewModel for ProfileViewControllerSwiftUI
-    var profileViewModel = ProfileViewModel()
+    var profileViewModel = MyProfileViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -407,12 +406,14 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     
     @objc func onAvatarClick() {
         AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
-        let profileView = ProfileView(viewModel: self.profileViewModel)
+        let profileView = MyProfileView(viewModel: self.profileViewModel)
         self.profileViewModel.navigationDelegate = self
-        let hc = ProfileHostingController(rootView: profileView, viewModel: self.profileViewModel)
+        let hc = MyProfileHostingController(rootView: profileView, viewModel: self.profileViewModel)
         hc.modalPresentationStyle = .fullScreen
         (self.tabBarController ?? self).present(hc, animated: true)
     }
+
+    @IBAction func action_show_notifs(_ sender: Any) { onNotifClick() }
 
     @objc func onNotifClick() {
         AnalyticsLoggerManager.logEvent(name: Action__Home__Notif)
@@ -1280,7 +1281,7 @@ extension HomeMainViewController: PopupBienCommunViewControllerDelegate {
     }
 }
 
-extension HomeMainViewController: ProfileNavigationDelegate, ImageReUpLoadDelegate, UserProfileDetailDelegate, ProfileLanguageCloseDelegate {
+extension HomeMainViewController: MyProfileNavigationDelegate, ImageReUpLoadDelegate, UserProfileDetailDelegate, ProfileLanguageCloseDelegate {
     func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
