@@ -36,6 +36,7 @@ enum BadgeKey: String, CaseIterable {
 struct BadgeDefinition {
     let key: BadgeKey
     let emoji: String
+    let imageName: String
     let titleKey: String
     let descriptionShortKey: String
     let howItWorksKey: String
@@ -52,6 +53,7 @@ let allBadgeDefinitions: [BadgeDefinition] = [
     BadgeDefinition(
         key: .premierPas,
         emoji: "👣",
+        imageName: "badge_premier_pas",
         titleKey: "badge_premier_pas_title",
         descriptionShortKey: "badge_premier_pas_description_short",
         howItWorksKey: "badge_premier_pas_how_it_works",
@@ -66,6 +68,7 @@ let allBadgeDefinitions: [BadgeDefinition] = [
     BadgeDefinition(
         key: .premierLien,
         emoji: "🤝",
+        imageName: "badge_premier_lien",
         titleKey: "badge_premier_lien_title",
         descriptionShortKey: "badge_premier_lien_description_short",
         howItWorksKey: "badge_premier_lien_how_it_works",
@@ -80,6 +83,7 @@ let allBadgeDefinitions: [BadgeDefinition] = [
     BadgeDefinition(
         key: .diffuseurLiens,
         emoji: "🪁",
+        imageName: "badge_createur_rencontres",
         titleKey: "badge_diffuseur_liens_title",
         descriptionShortKey: "badge_diffuseur_liens_description_short",
         howItWorksKey: "badge_diffuseur_liens_how_it_works",
@@ -94,6 +98,7 @@ let allBadgeDefinitions: [BadgeDefinition] = [
     BadgeDefinition(
         key: .asPapotage,
         emoji: "💬",
+        imageName: "badge_as_papotage",
         titleKey: "badge_as_papotage_title",
         descriptionShortKey: "badge_as_papotage_description_short",
         howItWorksKey: "badge_as_papotage_how_it_works",
@@ -108,6 +113,7 @@ let allBadgeDefinitions: [BadgeDefinition] = [
     BadgeDefinition(
         key: .tisseurLiens,
         emoji: "🌱",
+        imageName: "badge_tisseur_liens",
         titleKey: "badge_tisseur_liens_title",
         descriptionShortKey: "badge_tisseur_liens_description_short",
         howItWorksKey: "badge_tisseur_liens_how_it_works",
@@ -120,6 +126,31 @@ let allBadgeDefinitions: [BadgeDefinition] = [
         unlockedMessageKey: "badge_tisseur_liens_unlocked_message"
     )
 ]
+
+// MARK: - Progress hint
+
+extension BadgeDefinition {
+    func progressHint(remaining: Int) -> String {
+        switch key {
+        case .premierPas:
+            return "badge_premier_pas_hint".localized
+        case .premierLien:
+            return "badge_premier_lien_hint".localized
+        case .diffuseurLiens:
+            return remaining <= 1
+                ? "badge_diffuseur_liens_hint_singular".localized
+                : String(format: "badge_diffuseur_liens_hint_plural".localized, remaining)
+        case .asPapotage:
+            return remaining <= 1
+                ? "badge_as_papotage_hint_singular".localized
+                : String(format: "badge_as_papotage_hint_plural".localized, remaining)
+        case .tisseurLiens:
+            return remaining <= 1
+                ? "badge_tisseur_liens_hint_singular".localized
+                : String(format: "badge_tisseur_liens_hint_plural".localized, remaining)
+        }
+    }
+}
 
 // MARK: - UserBadgeProgress (view model)
 

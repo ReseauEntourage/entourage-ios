@@ -20,8 +20,10 @@ struct BadgeDetailSheet: View {
                 VStack(spacing: sectionSpacing) {
                     // Emoji + titre — fond blanc
                     VStack(spacing: 8) {
-                        Text(def.emoji)
-                            .font(.system(size: 64))
+                        Image(def.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
                             .padding(.top, 8)
 
                         Text(def.titleKey.localized)
@@ -157,7 +159,7 @@ struct BadgeDetailSheet: View {
                 }
                 .frame(height: 8)
 
-                Text(def.descriptionShortKey.localized)
+                Text(def.progressHint(remaining: max(0, progress.target - progress.progress)))
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundColor(Color(UIColor.appGris112))
             }

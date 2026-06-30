@@ -31,7 +31,7 @@ struct BadgesSectionView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(displayedProgress, id: \.definition.key.rawValue) { p in
-                        BadgeProfileCardView(progress: p)
+                        BadgeProfileCardView(progress: p, showProgressWhenObtained: isMe)
                             .onTapGesture {
                                 if let tap = onBadgeTap {
                                     tap(p)
@@ -49,16 +49,17 @@ struct BadgesSectionView: View {
 
 private struct BadgeProfileCardView: View {
     let progress: UserBadgeProgress
+    var showProgressWhenObtained: Bool = false
 
     private var isObtained: Bool { progress.isObtained }
     private var isInProgress: Bool { !progress.isObtained && progress.progress > 0 }
 
     var body: some View {
         VStack(spacing: 6) {
-            Text(progress.definition.emoji)
-                .font(.system(size: 28))
+            Image(progress.definition.imageName)
+                .resizable()
+                .scaledToFit()
                 .frame(width: 44, height: 44)
-                .multilineTextAlignment(.center)
                 .opacity(isObtained || isInProgress ? 1.0 : 0.4)
 
             Text(progress.definition.titleKey.localized)
@@ -66,11 +67,13 @@ private struct BadgeProfileCardView: View {
                 .foregroundColor(isObtained ? .black : Color(UIColor.appGris112))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
-                .frame(width: 70)
+                .frame(width: 88, height: 30, alignment: .center)
 
             statusLabel
+                .frame(height: 28, alignment: .top)
         }
-        .frame(width: 90, height: 110)
+        .frame(width: 108)
+        .padding(.vertical, 8)
         .background(Color.white)
         .cornerRadius(12)
         .overlay(
@@ -82,9 +85,11 @@ private struct BadgeProfileCardView: View {
     @ViewBuilder
     private var statusLabel: some View {
         if isObtained {
-            Text("badge_obtained".localized)
-                .font(Font(UIFont(name: "NunitoSans-SemiBold", size: 10) ?? .systemFont(ofSize: 10, weight: .semibold)))
-                .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
+            VStack(spacing: 2) {
+                Text("badge_obtained".localized)
+                    .font(Font(UIFont(name: "NunitoSans-SemiBold", size: 10) ?? .systemFont(ofSize: 10, weight: .semibold)))
+                    .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
+            }
         } else if isInProgress {
             Text("\(progress.progress)/\(progress.target)")
                 .font(Font(UIFont(name: "NunitoSans-SemiBold", size: 10) ?? .systemFont(ofSize: 10, weight: .semibold)))
