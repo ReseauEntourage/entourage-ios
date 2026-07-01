@@ -85,6 +85,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         private var staffWarningView: ConversationStaffWarningView?
     private var isStaffWarningDismissed = false
     private var emptyStateView: ConversationEmptyStateView?
+    private var emptyStateChipWasSelected = false
 
 private var imagePreviewOverlay: UIView?
     private var selectedImage: UIImage? = nil
@@ -364,13 +365,14 @@ private var imagePreviewOverlay: UIView?
             view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
         ])
         view.onChipSelected = { [weak self] draft in
+            self?.emptyStateChipWasSelected = true
             self?.fillTextViewWithDraft(draft)
         }
         emptyStateView = view
     }
 
     private func setEmptyStateVisible(_ visible: Bool) {
-        let shouldShow = visible && type != "outing" && type != "small_talk" && !isSmallTalkMode
+        let shouldShow = visible && type != "outing" && type != "small_talk" && !isSmallTalkMode && !emptyStateChipWasSelected
         emptyStateView?.isHidden = !shouldShow
     }
 
