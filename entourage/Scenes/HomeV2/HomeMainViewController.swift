@@ -139,7 +139,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     private func performBadgeCta(_ key: BadgeKey) {
         switch key {
         case .premierPas:
-            openEnhancedOnboarding(mode: .interest)
+            presentEnhancedOnboardingIntro()
         case .premierLien:
             tabBarController?.selectedIndex = 2
         case .tisseurLiens:

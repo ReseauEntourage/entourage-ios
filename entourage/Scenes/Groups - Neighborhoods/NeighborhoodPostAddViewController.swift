@@ -221,13 +221,13 @@ class NeighborhoodPostAddViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             inspirationLabel.topAnchor.constraint(equalTo: messageSection.bottomAnchor, constant: topMargin),
-            inspirationLabel.leadingAnchor.constraint(equalTo: outerContainer.leadingAnchor, constant: 20),
-            inspirationLabel.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -20),
+            inspirationLabel.leadingAnchor.constraint(equalTo: ui_lb_message.leadingAnchor),
+            inspirationLabel.trailingAnchor.constraint(equalTo: ui_lb_message.trailingAnchor),
             inspirationLabel.heightAnchor.constraint(equalToConstant: labelHeight),
 
             gridStack.topAnchor.constraint(equalTo: inspirationLabel.bottomAnchor, constant: 8),
-            gridStack.leadingAnchor.constraint(equalTo: outerContainer.leadingAnchor, constant: 20),
-            gridStack.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -20),
+            gridStack.leadingAnchor.constraint(equalTo: ui_lb_message.leadingAnchor),
+            gridStack.trailingAnchor.constraint(equalTo: ui_lb_message.trailingAnchor),
         ])
 
         // Décale la section photo pour laisser de la place au label + chips

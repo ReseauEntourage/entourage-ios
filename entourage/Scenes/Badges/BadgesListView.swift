@@ -342,6 +342,7 @@ struct BadgeListRowView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
         .background(isActive ? Color.white : Color(red: 0.937, green: 0.937, blue: 0.957))
         .cornerRadius(12)
