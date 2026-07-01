@@ -145,7 +145,7 @@ struct BadgesListView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
             }
             .padding(16)
-            .background(Color(red: 0.98, green: 0.95, blue: 0.91))
+            .background(Color(UIColor.appOrangeLight).opacity(0.18))
             .cornerRadius(16)
             .padding(.horizontal, hPad)
 
