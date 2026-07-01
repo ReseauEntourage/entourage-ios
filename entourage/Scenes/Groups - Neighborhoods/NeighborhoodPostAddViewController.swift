@@ -175,35 +175,48 @@ class NeighborhoodPostAddViewController: UIViewController {
         inspirationLabel.textColor = .appOrange
         outerContainer.addSubview(inspirationLabel)
 
-        // Chips en layout vertical
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.alignment = .fill
-        outerContainer.addSubview(stackView)
+        // Grille 2 colonnes
+        let gridStack = UIStackView()
+        gridStack.translatesAutoresizingMaskIntoConstraints = false
+        gridStack.axis = .vertical
+        gridStack.spacing = 8
+        outerContainer.addSubview(gridStack)
 
-        for (index, chip) in chips.enumerated() {
-            let button = UIButton(type: .custom)
-            button.setTitle(chip.label, for: .normal)
-            button.setTitleColor(.appGrisSombre, for: .normal)
-            button.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 13)
-            button.backgroundColor = .white
-            button.layer.borderWidth = 1.5
-            button.layer.borderColor = UIColor.appOrangeLight.cgColor
-            button.layer.cornerRadius = 16
-            button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 14, bottom: 10, right: 14)
-            button.contentHorizontalAlignment = .left
-            button.tag = index
-            button.addTarget(self, action: #selector(chipTapped(_:)), for: .touchUpInside)
-            stackView.addArrangedSubview(button)
+        let pairs = stride(from: 0, to: chips.count, by: 2).map { i in
+            Array(chips[i..<min(i + 2, chips.count)])
+        }
+        for (rowIndex, pair) in pairs.enumerated() {
+            let rowStack = UIStackView()
+            rowStack.axis = .horizontal
+            rowStack.spacing = 8
+            rowStack.distribution = .fillEqually
+            for (colIndex, chip) in pair.enumerated() {
+                let button = UIButton(type: .custom)
+                button.setTitle(chip.label, for: .normal)
+                button.setTitleColor(.appGrisSombre, for: .normal)
+                button.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 13)
+                button.titleLabel?.numberOfLines = 1
+                button.titleLabel?.adjustsFontSizeToFitWidth = true
+                button.titleLabel?.minimumScaleFactor = 0.8
+                button.backgroundColor = .white
+                button.layer.borderWidth = 1.5
+                button.layer.borderColor = UIColor.appOrangeLight.cgColor
+                button.layer.cornerRadius = 16
+                button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
+                button.contentHorizontalAlignment = .left
+                button.tag = rowIndex * 2 + colIndex
+                button.addTarget(self, action: #selector(chipTapped(_:)), for: .touchUpInside)
+                rowStack.addArrangedSubview(button)
+            }
+            gridStack.addArrangedSubview(rowStack)
         }
 
         let chipHeight: CGFloat = 40
         let chipSpacing: CGFloat = 8
         let labelHeight: CGFloat = 20
         let topMargin: CGFloat = 12
-        let totalChipsHeight = CGFloat(chips.count) * chipHeight + CGFloat(chips.count - 1) * chipSpacing
+        let numRows = CGFloat((chips.count + 1) / 2)
+        let totalChipsHeight = numRows * chipHeight + (numRows - 1) * chipSpacing
         let totalOffset = topMargin + labelHeight + 8 + totalChipsHeight + 12
 
         NSLayoutConstraint.activate([
@@ -212,9 +225,9 @@ class NeighborhoodPostAddViewController: UIViewController {
             inspirationLabel.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -20),
             inspirationLabel.heightAnchor.constraint(equalToConstant: labelHeight),
 
-            stackView.topAnchor.constraint(equalTo: inspirationLabel.bottomAnchor, constant: 8),
-            stackView.leadingAnchor.constraint(equalTo: outerContainer.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -20),
+            gridStack.topAnchor.constraint(equalTo: inspirationLabel.bottomAnchor, constant: 8),
+            gridStack.leadingAnchor.constraint(equalTo: outerContainer.leadingAnchor, constant: 20),
+            gridStack.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -20),
         ])
 
         // Décale la section photo pour laisser de la place au label + chips
