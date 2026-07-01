@@ -733,6 +733,19 @@ struct DeepLinkManager {
         }
     }
 
+    static func showBadgesIntro() {
+        DispatchQueue.main.async {
+            var hostingVC: UIHostingController<BadgesIntroView>?
+            let view = BadgesIntroView(
+                onDiscover: { hostingVC?.dismiss(animated: true) },
+                onDismiss: { hostingVC?.dismiss(animated: true) }
+            )
+            hostingVC = UIHostingController(rootView: view)
+            hostingVC?.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(hostingVC!, animated: true)
+        }
+    }
+
     static func showBadgeUnlocked(badgeTag: String) {
         guard let badgeKey = BadgeKey(rawValue: badgeTag),
               let definition = allBadgeDefinitions.first(where: { $0.key == badgeKey }) else {

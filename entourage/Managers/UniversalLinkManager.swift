@@ -37,7 +37,11 @@ struct UniversalLinkManager {
 
         switch mainEntity {
         
-        // --- 1. Bonnes ondes ---
+        // --- 1. Badges ---
+        case "badges":
+            DeepLinkManager.showBadgesIntro()
+
+        // --- 2. Bonnes ondes ---
         case "good-waves":
             // Android: SmallTalkIntroActivity
             DeepLinkManager.showSmallTalkIntro()
