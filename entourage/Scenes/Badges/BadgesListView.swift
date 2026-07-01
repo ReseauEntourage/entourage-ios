@@ -226,7 +226,7 @@ struct BadgesListView: View {
             }
             if !notStarted.isEmpty {
                 sectionHeader(String(format: "badges_section_not_started".localized, notStarted.count, allProgress.count))
-                badgeRows(items: notStarted, showBorder: false)
+                badgeRows(items: notStarted)
                     .padding(.bottom, 4)
             }
         }
@@ -344,7 +344,7 @@ struct BadgeListRowView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
-        .background(isActive ? Color.white : Color(red: 0.937, green: 0.937, blue: 0.957))
+        .background(Color.white)
         .cornerRadius(12)
     }
 }
