@@ -241,24 +241,13 @@ struct BadgesListView: View {
             .padding(.bottom, 10)
     }
 
-    private func badgeRows(items: [UserBadgeProgress], showBorder: Bool = true) -> some View {
+    private func badgeRows(items: [UserBadgeProgress]) -> some View {
         VStack(spacing: 10) {
             ForEach(items, id: \.definition.key.rawValue) { item in
                 BadgeListRowView(progress: item)
                     .onTapGesture { selectedProgress = item }
             }
         }
-        .padding(12)
-        .background(Color.white)
-        .cornerRadius(16)
-        .overlay(
-            Group {
-                if showBorder {
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color(UIColor.systemGray4), lineWidth: 1)
-                }
-            }
-        )
         .padding(.horizontal, hPad)
     }
 }
@@ -344,7 +333,7 @@ struct BadgeListRowView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
-        .background(Color.white)
+        .background(isActive ? Color.white : Color(red: 0.937, green: 0.937, blue: 0.957))
         .cornerRadius(12)
     }
 }
