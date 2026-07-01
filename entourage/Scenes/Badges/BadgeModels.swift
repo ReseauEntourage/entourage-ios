@@ -142,8 +142,10 @@ extension BadgeDefinition {
 
     func progressHintRemaining(remaining: Int) -> String {
         switch key {
-        case .premierPas, .premierLien:
-            return progressHint
+        case .premierPas:
+            return "badge_premier_pas_hint_remaining_one".localized
+        case .premierLien:
+            return "badge_premier_lien_hint_remaining_one".localized
         case .diffuseurLiens:
             return remaining == 1
                 ? "badge_diffuseur_liens_hint_remaining_one".localized
