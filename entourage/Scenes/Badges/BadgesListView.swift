@@ -335,6 +335,10 @@ struct BadgeListRowView: View {
         .padding(12)
         .background(isActive ? Color.white : Color(red: 0.937, green: 0.937, blue: 0.957))
         .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(isActive ? Color(UIColor.systemGray4) : Color.clear, lineWidth: 1)
+        )
     }
 }
 
