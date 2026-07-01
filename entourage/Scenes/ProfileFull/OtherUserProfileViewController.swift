@@ -296,6 +296,7 @@ struct OtherUserPreferencesSectionView: View {
                 .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)))
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
                 .padding(.vertical, 8)
 
             ProfileStandardRow(
