@@ -742,7 +742,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellTitle(_, _): return UITableView.automaticDimension
         case .cellAction(_): return 215
         case .cellSeeAll(_): return UITableView.automaticDimension
-        case .cellEvent(_): return 215
+        case .cellEvent(_): return 240
         case .cellGroup(_): return 152
         case .cellPedago(_): return UITableView.automaticDimension
         case .cellMap: return UITableView.automaticDimension

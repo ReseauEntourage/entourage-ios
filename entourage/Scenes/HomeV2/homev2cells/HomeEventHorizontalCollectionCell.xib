@@ -10,15 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeEventHorizontalCollectionCell" rowHeight="207" id="2mG-jO-Huu" customClass="HomeEventHorizontalCollectionCell" customModule="Ent_Beta" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="669" height="207"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeEventHorizontalCollectionCell" rowHeight="240" id="2mG-jO-Huu" customClass="HomeEventHorizontalCollectionCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="669" height="240"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2mG-jO-Huu" id="vDO-Da-VjE">
-                <rect key="frame" x="0.0" y="0.0" width="669" height="207"/>
+                <rect key="frame" x="0.0" y="0.0" width="669" height="240"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="13H-LX-KCU">
-                        <rect key="frame" x="0.0" y="0.0" width="669" height="207"/>
+                        <rect key="frame" x="0.0" y="0.0" width="669" height="240"/>
                         <color key="backgroundColor" name="white_orange_home"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VCW-mn-WlH">
                             <size key="itemSize" width="128" height="128"/>
