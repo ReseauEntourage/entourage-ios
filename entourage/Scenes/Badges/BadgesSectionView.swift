@@ -63,16 +63,16 @@ private struct BadgeProfileCardView: View {
                 .opacity(isObtained || isInProgress ? 1.0 : 0.4)
 
             Text(progress.definition.titleKey.localized)
-                .font(Font(UIFont(name: "NunitoSans-Regular", size: 12) ?? .systemFont(ofSize: 12)))
+                .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
                 .foregroundColor(isObtained ? .black : Color(UIColor.appGris112))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
-                .frame(width: 100, height: 32, alignment: .center)
+                .frame(width: 120, height: 38, alignment: .center)
 
             statusLabel
                 .frame(height: 28, alignment: .top)
         }
-        .frame(width: 120)
+        .frame(width: 144)
         .padding(.vertical, 8)
         .background(Color.white)
         .cornerRadius(12)
@@ -85,18 +85,16 @@ private struct BadgeProfileCardView: View {
     @ViewBuilder
     private var statusLabel: some View {
         if isObtained {
-            VStack(spacing: 2) {
-                Text("badge_obtained".localized)
-                    .font(Font(UIFont(name: "NunitoSans-SemiBold", size: 10) ?? .systemFont(ofSize: 10, weight: .semibold)))
-                    .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
-            }
+            Text("badge_obtained".localized)
+                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
+                .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
         } else if isInProgress {
             Text("\(progress.progress)/\(progress.target)")
-                .font(Font(UIFont(name: "NunitoSans-SemiBold", size: 10) ?? .systemFont(ofSize: 10, weight: .semibold)))
+                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
                 .foregroundColor(Color(UIColor.appOrange))
         } else {
             Text("badge_not_obtained".localized)
-                .font(Font(UIFont(name: "NunitoSans-Regular", size: 10) ?? .systemFont(ofSize: 10)))
+                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
                 .foregroundColor(Color(UIColor.appGris112))
         }
     }
