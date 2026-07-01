@@ -139,7 +139,7 @@ struct BadgeDetailSheet: View {
                 Text("badge_not_obtained".localized)
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
                     .foregroundColor(.black)
-                Text(def.progressHint(remaining: 1))
+                Text(def.progressHint)
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundColor(Color(UIColor.appGris112))
             }
@@ -172,7 +172,7 @@ struct BadgeDetailSheet: View {
                 }
                 .frame(height: 8)
 
-                Text(def.progressHint(remaining: max(0, progress.target - progress.progress)))
+                Text(def.progressHint)
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundColor(Color(UIColor.appGris112))
             }

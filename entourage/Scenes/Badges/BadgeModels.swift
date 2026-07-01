@@ -130,24 +130,13 @@ let allBadgeDefinitions: [BadgeDefinition] = [
 // MARK: - Progress hint
 
 extension BadgeDefinition {
-    func progressHint(remaining: Int) -> String {
+    var progressHint: String {
         switch key {
-        case .premierPas:
-            return "badge_premier_pas_hint".localized
-        case .premierLien:
-            return "badge_premier_lien_hint".localized
-        case .diffuseurLiens:
-            return remaining <= 1
-                ? "badge_diffuseur_liens_hint_singular".localized
-                : String(format: "badge_diffuseur_liens_hint_plural".localized, remaining)
-        case .asPapotage:
-            return remaining <= 1
-                ? "badge_as_papotage_hint_singular".localized
-                : String(format: "badge_as_papotage_hint_plural".localized, remaining)
-        case .tisseurLiens:
-            return remaining <= 1
-                ? "badge_tisseur_liens_hint_singular".localized
-                : String(format: "badge_tisseur_liens_hint_plural".localized, remaining)
+        case .premierPas:     return "badge_premier_pas_hint".localized
+        case .premierLien:    return "badge_premier_lien_hint".localized
+        case .diffuseurLiens: return "badge_diffuseur_liens_hint".localized
+        case .asPapotage:     return "badge_as_papotage_hint".localized
+        case .tisseurLiens:   return "badge_tisseur_liens_hint".localized
         }
     }
 }
