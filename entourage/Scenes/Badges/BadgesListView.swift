@@ -292,7 +292,7 @@ struct BadgeListRowView: View {
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
                         .foregroundColor(Color(UIColor.appGris112))
                 } else {
-                    Text(def.progressHint)
+                    Text(def.descriptionShortKey.localized)
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
                         .foregroundColor(Color(UIColor.appGris112))
                         .lineLimit(3)
