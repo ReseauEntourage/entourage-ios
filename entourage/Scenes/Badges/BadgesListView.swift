@@ -175,7 +175,7 @@ struct BadgesListView: View {
                     Button(action: {
                         BadgesListView.navigateToBadgeCta(key: firstDef.key)
                     }) {
-                        Text(firstDef.ctaLabelKey.localized)
+                        Text("badges_empty_cta".localized)
                             .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15, weight: .bold)))
                             .foregroundColor(.white)
                             .padding(.horizontal, 24)
