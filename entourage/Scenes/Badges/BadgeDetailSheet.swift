@@ -157,7 +157,7 @@ struct BadgeDetailSheet: View {
                 }
                 .frame(height: 8)
 
-                Text(def.progressHint)
+                Text(def.progressHintRemaining(remaining: max(0, progress.target - progress.progress)))
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundColor(Color(UIColor.appGris112))
             }

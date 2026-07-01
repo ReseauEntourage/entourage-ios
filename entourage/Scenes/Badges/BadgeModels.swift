@@ -139,6 +139,25 @@ extension BadgeDefinition {
         case .tisseurLiens:   return "badge_tisseur_liens_hint".localized
         }
     }
+
+    func progressHintRemaining(remaining: Int) -> String {
+        switch key {
+        case .premierPas, .premierLien:
+            return progressHint
+        case .diffuseurLiens:
+            return remaining == 1
+                ? "badge_diffuseur_liens_hint_remaining_one".localized
+                : String(format: "badge_diffuseur_liens_hint_remaining_other".localized, remaining)
+        case .asPapotage:
+            return remaining == 1
+                ? "badge_as_papotage_hint_remaining_one".localized
+                : String(format: "badge_as_papotage_hint_remaining_other".localized, remaining)
+        case .tisseurLiens:
+            return remaining == 1
+                ? "badge_tisseur_liens_hint_remaining_one".localized
+                : String(format: "badge_tisseur_liens_hint_remaining_other".localized, remaining)
+        }
+    }
 }
 
 // MARK: - UserBadgeProgress (view model)
