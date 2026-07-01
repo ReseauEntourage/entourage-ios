@@ -2098,7 +2098,7 @@ Choisissez un sujet pour démarrer.";
 "badge_mechanism_title" = "MÉCANIQUE";
 "badge_obtained" = "Obtenu";
 "badge_obtained_on" = "Obtenu le %@";
-"badge_not_obtained" = "Pas encore obtenu";
+"badge_not_obtained" = "Non obtenu";
 "badge_your_progress" = "Votre progression";
 "badge_see_all_badges" = "Voir tous mes badges";
 "badge_unlocked_bravo" = "Bravo %@ !";
