@@ -63,16 +63,16 @@ private struct BadgeProfileCardView: View {
                 .opacity(isObtained || isInProgress ? 1.0 : 0.4)
 
             Text(progress.definition.titleKey.localized)
-                .font(Font(UIFont(name: "NunitoSans-Regular", size: 11) ?? .systemFont(ofSize: 11)))
+                .font(Font(UIFont(name: "NunitoSans-Regular", size: 12) ?? .systemFont(ofSize: 12)))
                 .foregroundColor(isObtained ? .black : Color(UIColor.appGris112))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
-                .frame(width: 88, height: 30, alignment: .center)
+                .frame(width: 100, height: 32, alignment: .center)
 
             statusLabel
                 .frame(height: 28, alignment: .top)
         }
-        .frame(width: 108)
+        .frame(width: 120)
         .padding(.vertical, 8)
         .background(Color.white)
         .cornerRadius(12)

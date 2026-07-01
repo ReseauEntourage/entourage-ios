@@ -391,7 +391,7 @@ struct MyPreferencesSectionView: View {
     @ObservedObject var viewModel: MyProfileViewModel
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             Text("preferences_section_title".localized)
                 .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)))
                 .foregroundColor(.black)

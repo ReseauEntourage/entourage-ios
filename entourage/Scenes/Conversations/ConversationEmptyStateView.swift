@@ -134,6 +134,7 @@ final class ConversationEmptyStateView: UIView {
     @objc private func chipTapped(_ sender: UIButton) {
         animateChip(sender, highlighted: false)
         onChipSelected?(chipData[sender.tag].draft)
+        isHidden = true
     }
 
     @objc private func chipPressed(_ sender: UIButton) {

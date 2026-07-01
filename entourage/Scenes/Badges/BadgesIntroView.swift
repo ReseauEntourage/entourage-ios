@@ -56,15 +56,19 @@ struct BadgesIntroView: View {
 
             ScrollView {
                 VStack(spacing: 0) {
-                    // En-tête beige avec emojis
-                    VStack(spacing: 0) {
-                        Text(allBadgeDefinitions.map { $0.emoji }.joined(separator: "  "))
-                            .font(.system(size: 30))
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.vertical, 28)
+                    // En-tête beige avec images des badges
+                    HStack(spacing: 12) {
+                        ForEach(allBadgeDefinitions, id: \.key.rawValue) { def in
+                            Image(def.imageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                        }
                     }
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.vertical, 28)
                     .background(Color(UIColor.appOrangeLight).opacity(0.35))
+                    .frame(maxWidth: .infinity)
 
                     // Corps
                     VStack(spacing: 32) {

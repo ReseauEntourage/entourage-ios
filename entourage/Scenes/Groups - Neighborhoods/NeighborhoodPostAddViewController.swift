@@ -167,57 +167,63 @@ class NeighborhoodPostAddViewController: UIViewController {
 
         let photoSection = ui_image.superview
 
-        let chipsScrollView = UIScrollView()
-        chipsScrollView.translatesAutoresizingMaskIntoConstraints = false
-        chipsScrollView.showsHorizontalScrollIndicator = false
-        chipsScrollView.showsVerticalScrollIndicator = false
-        outerContainer.addSubview(chipsScrollView)
+        // Label "Besoin d'inspiration ?"
+        let inspirationLabel = UILabel()
+        inspirationLabel.translatesAutoresizingMaskIntoConstraints = false
+        inspirationLabel.text = "neighborhood_post_inspiration_title".localized
+        inspirationLabel.font = ApplicationTheme.getFontQuickSandBold(size: 13)
+        inspirationLabel.textColor = .appOrange
+        outerContainer.addSubview(inspirationLabel)
 
+        // Chips en layout vertical
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.spacing = 8
-        stackView.alignment = .center
-        chipsScrollView.addSubview(stackView)
+        stackView.alignment = .fill
+        outerContainer.addSubview(stackView)
 
         for (index, chip) in chips.enumerated() {
             let button = UIButton(type: .custom)
             button.setTitle(chip.label, for: .normal)
             button.setTitleColor(.appGrisSombre, for: .normal)
-            button.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 12)
+            button.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 13)
             button.backgroundColor = .white
             button.layer.borderWidth = 1.5
             button.layer.borderColor = UIColor.appOrangeLight.cgColor
             button.layer.cornerRadius = 16
-            button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+            button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 14, bottom: 10, right: 14)
+            button.contentHorizontalAlignment = .left
             button.tag = index
             button.addTarget(self, action: #selector(chipTapped(_:)), for: .touchUpInside)
             stackView.addArrangedSubview(button)
         }
 
-        let chipsHeight: CGFloat = 38
-        let chipsMargin: CGFloat = 8
+        let chipHeight: CGFloat = 40
+        let chipSpacing: CGFloat = 8
+        let labelHeight: CGFloat = 20
+        let topMargin: CGFloat = 12
+        let totalChipsHeight = CGFloat(chips.count) * chipHeight + CGFloat(chips.count - 1) * chipSpacing
+        let totalOffset = topMargin + labelHeight + 8 + totalChipsHeight + 12
 
         NSLayoutConstraint.activate([
-            chipsScrollView.topAnchor.constraint(equalTo: messageSection.bottomAnchor, constant: chipsMargin),
-            chipsScrollView.leadingAnchor.constraint(equalTo: outerContainer.leadingAnchor, constant: 20),
-            chipsScrollView.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -20),
-            chipsScrollView.heightAnchor.constraint(equalToConstant: chipsHeight),
+            inspirationLabel.topAnchor.constraint(equalTo: messageSection.bottomAnchor, constant: topMargin),
+            inspirationLabel.leadingAnchor.constraint(equalTo: outerContainer.leadingAnchor, constant: 20),
+            inspirationLabel.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -20),
+            inspirationLabel.heightAnchor.constraint(equalToConstant: labelHeight),
 
-            stackView.topAnchor.constraint(equalTo: chipsScrollView.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: chipsScrollView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: chipsScrollView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: chipsScrollView.bottomAnchor),
-            stackView.heightAnchor.constraint(equalTo: chipsScrollView.heightAnchor),
+            stackView.topAnchor.constraint(equalTo: inspirationLabel.bottomAnchor, constant: 8),
+            stackView.leadingAnchor.constraint(equalTo: outerContainer.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -20),
         ])
 
-        // Décale la section photo pour laisser de la place aux chips
+        // Décale la section photo pour laisser de la place au label + chips
         if let photoSection = photoSection {
             for constraint in outerContainer.constraints {
                 if let firstView = constraint.firstItem as? UIView,
                    firstView == photoSection,
                    constraint.firstAttribute == .top {
-                    constraint.constant += chipsHeight + chipsMargin * 2
+                    constraint.constant += totalOffset
                     break
                 }
             }

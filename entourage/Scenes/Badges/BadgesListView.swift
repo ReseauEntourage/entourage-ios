@@ -121,9 +121,16 @@ struct BadgesListView: View {
         VStack(alignment: .leading, spacing: 12) {
             // Carte héro
             VStack(spacing: 10) {
-                Text(allProgress.map { $0.definition.emoji }.joined(separator: "  "))
-                    .font(.system(size: 26))
-                    .frame(maxWidth: .infinity, alignment: .center)
+                HStack(spacing: 8) {
+                    ForEach(allProgress, id: \.definition.key.rawValue) { p in
+                        Image(p.definition.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 32, height: 32)
+                            .opacity(0.5)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
 
                 Text("badges_list_main_title".localized)
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 20) ?? .systemFont(ofSize: 20, weight: .bold)))
@@ -146,19 +153,16 @@ struct BadgesListView: View {
             if let firstDef = allProgress.first?.definition {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(spacing: 10) {
-                        ZStack {
-                            Circle()
-                                .fill(Color(UIColor.appOrangeLight).opacity(0.35))
-                                .frame(width: 48, height: 48)
-                            Text(firstDef.emoji)
-                                .font(.system(size: 24))
-                        }
+                        Image(firstDef.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 44, height: 44)
                         VStack(alignment: .leading, spacing: 2) {
                             Text("badges_empty_start_label".localized.uppercased())
                                 .font(Font(UIFont(name: "NunitoSans-Bold", size: 11) ?? .systemFont(ofSize: 11, weight: .bold)))
                                 .foregroundColor(Color(UIColor.appOrange))
                                 .kerning(0.5)
-                            Text("\(firstDef.titleKey.localized) \(firstDef.emoji)")
+                            Text(String(format: "badges_empty_badge_title".localized, firstDef.titleKey.localized))
                                 .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15, weight: .bold)))
                                 .foregroundColor(.black)
                         }
@@ -222,7 +226,7 @@ struct BadgesListView: View {
             }
             if !notStarted.isEmpty {
                 sectionHeader(String(format: "badges_section_not_started".localized, notStarted.count, allProgress.count))
-                badgeRows(items: notStarted)
+                badgeRows(items: notStarted, showBorder: false)
                     .padding(.bottom, 4)
             }
         }
@@ -237,7 +241,7 @@ struct BadgesListView: View {
             .padding(.bottom, 10)
     }
 
-    private func badgeRows(items: [UserBadgeProgress]) -> some View {
+    private func badgeRows(items: [UserBadgeProgress], showBorder: Bool = true) -> some View {
         VStack(spacing: 10) {
             ForEach(items, id: \.definition.key.rawValue) { item in
                 BadgeListRowView(progress: item)
@@ -248,8 +252,12 @@ struct BadgesListView: View {
         .background(Color.white)
         .cornerRadius(16)
         .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color(UIColor.systemGray4), lineWidth: 1)
+            Group {
+                if showBorder {
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color(UIColor.systemGray4), lineWidth: 1)
+                }
+            }
         )
         .padding(.horizontal, hPad)
     }
@@ -265,19 +273,11 @@ struct BadgeListRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            // Emoji en cercle
-            ZStack {
-                Circle()
-                    .fill(isActive
-                        ? Color(UIColor.appOrangeLight).opacity(0.5)
-                        : Color(UIColor.systemGray5))
-                    .frame(width: 52, height: 52)
-                Image(def.imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
-                    .opacity(isActive ? 1.0 : 0.5)
-            }
+            Image(def.imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 44, height: 44)
+                .opacity(isActive ? 1.0 : 0.4)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(def.titleKey.localized)
@@ -292,10 +292,10 @@ struct BadgeListRowView: View {
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
                         .foregroundColor(Color(UIColor.appGris112))
                 } else {
-                    Text(def.descriptionShortKey.localized)
+                    Text(def.progressHint(remaining: max(0, progress.target - progress.progress)))
                         .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? .systemFont(ofSize: 13)))
-                        .foregroundColor(isActive ? Color(UIColor.appGris112) : .black)
-                        .lineLimit(4)
+                        .foregroundColor(Color(UIColor.appGris112))
+                        .lineLimit(3)
                 }
 
                 // Barre de progression
