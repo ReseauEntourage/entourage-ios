@@ -133,9 +133,23 @@ struct BadgeDetailSheet: View {
             .background(Color.white)
             .cornerRadius(12)
             .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(red: 0.18, green: 0.65, blue: 0.37).opacity(0.3), lineWidth: 1))
+        } else if progress.target == 1 {
+            // Badge binaire (0/1) : pas de barre de progression, juste "Pas encore obtenu" + hint
+            VStack(alignment: .leading, spacing: 6) {
+                Text("badge_not_obtained".localized)
+                    .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
+                    .foregroundColor(.black)
+                Text(def.progressHint(remaining: 1))
+                    .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
+                    .foregroundColor(Color(UIColor.appGris112))
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(16)
+            .background(Color.white)
+            .cornerRadius(12)
+            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(UIColor.systemGray4), lineWidth: 1))
         } else {
             VStack(alignment: .leading, spacing: 10) {
-                // Progression header
                 HStack {
                     Text("badge_your_progress".localized)
                         .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))
@@ -146,7 +160,6 @@ struct BadgeDetailSheet: View {
                         .foregroundColor(Color(UIColor.appOrange))
                 }
 
-                // Progress bar
                 GeometryReader { geo in
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 4)
