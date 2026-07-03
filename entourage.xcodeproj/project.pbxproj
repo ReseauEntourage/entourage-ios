@@ -785,6 +785,7 @@
 		025D8725278DD33800909101 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		025D872D278DD42100909101 /* EnvironmentConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentConfigurationManager.swift; sourceTree = "<group>"; };
 		025D873E278DDBEB00909101 /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
+		0AC1BAD9E0000000000057DE /* entourage-store.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "entourage-store.entitlements"; sourceTree = "<group>"; };
 		025D8763278DEB3A00909101 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		025D8765278DEC2100909101 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		025D8767278DED3C00909101 /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = "<group>"; };
@@ -1621,6 +1622,7 @@
 				029E307827DB5EF300B12357 /* Environment */,
 				0229376C27A434F500206201 /* ApplicationTheme.swift */,
 				025D873E278DDBEB00909101 /* entourage.entitlements */,
+				0AC1BAD9E0000000000057DE /* entourage-store.entitlements */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3665,6 +3667,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				URL_SCHEME_SUFFIX = "-beta";
 			};
 			name = Debug;
 		};
@@ -3732,7 +3735,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUNDLE_ID_SUFFIX = "";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = entourage/Settings/entourage.entitlements;
+				CODE_SIGN_ENTITLEMENTS = entourage/Settings/entourage-store.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
@@ -3771,6 +3774,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/entourage-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				URL_SCHEME_SUFFIX = "";
 			};
 			name = Store;
 		};
@@ -3885,6 +3889,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				URL_SCHEME_SUFFIX = "-beta";
 			};
 			name = Beta;
 		};

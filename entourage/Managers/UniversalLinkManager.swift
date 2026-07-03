@@ -39,7 +39,11 @@ struct UniversalLinkManager {
         
         // --- 1. Badges ---
         case "badges":
-            DeepLinkManager.showBadgesIntro()
+            if pathElements.count > 1, let badgeKey = BadgeKey(rawValue: pathElements[1]) {
+                DeepLinkManager.showBadgesList(initialBadgeKey: badgeKey)
+            } else {
+                DeepLinkManager.showBadgesList()
+            }
 
         // --- 2. Bonnes ondes ---
         case "good-waves":

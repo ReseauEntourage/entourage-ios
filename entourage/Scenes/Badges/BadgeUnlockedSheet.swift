@@ -46,7 +46,6 @@ struct BadgeUnlockedSheet: View {
                 Spacer().frame(height: 8)
 
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
                     onSeeBadges()
                 }) {
                     Text("badge_unlocked_see_badges".localized)

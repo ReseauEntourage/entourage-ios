@@ -754,15 +754,28 @@ struct DeepLinkManager {
         }
         let firstName = UserDefaults.currentUser?.firstname ?? ""
         DispatchQueue.main.async {
-            let sheet = BadgeUnlockedSheet(definition: definition, firstName: firstName, onSeeBadges: {})
-            let hostingVC = UIHostingController(rootView: sheet)
-            hostingVC.modalPresentationStyle = .fullScreen
+            var hostingVC: UIHostingController<BadgeUnlockedSheet>?
+            let sheet = BadgeUnlockedSheet(definition: definition, firstName: firstName, onSeeBadges: {
+                hostingVC?.dismiss(animated: true) {
+                    showBadgesList()
+                }
+            })
+            hostingVC = UIHostingController(rootView: sheet)
+            hostingVC?.modalPresentationStyle = .fullScreen
             guard let top = AppState.getTopViewController() else {
                 print("❌ showBadgeUnlocked: no top VC")
                 return
             }
             print("✅ showBadgeUnlocked presenting on \(type(of: top))")
-            top.present(hostingVC, animated: true)
+            top.present(hostingVC!, animated: true)
+        }
+    }
+
+    static func showBadgesList(initialBadgeKey: BadgeKey? = nil) {
+        DispatchQueue.main.async {
+            let hostingVC = UIHostingController(rootView: BadgesListView(initialBadgeKey: initialBadgeKey))
+            hostingVC.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(hostingVC, animated: true)
         }
     }
 

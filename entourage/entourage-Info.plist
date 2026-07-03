@@ -25,7 +25,7 @@
 			<string>entourage</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>entourage</string>
+				<string>entourage$(URL_SCHEME_SUFFIX)</string>
 			</array>
 		</dict>
 	</array>

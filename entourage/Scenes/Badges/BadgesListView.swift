@@ -7,7 +7,12 @@ struct BadgesListView: View {
     @State private var isLoading = true
     @State private var selectedProgress: UserBadgeProgress?
     @State private var showIntro = false
+    @State private var pendingInitialBadgeKey: BadgeKey?
     private let hPad: CGFloat = 20
+
+    init(initialBadgeKey: BadgeKey? = nil) {
+        _pendingInitialBadgeKey = State(initialValue: initialBadgeKey)
+    }
 
     private var allProgress: [UserBadgeProgress] { buildBadgeProgress(apiBadges: apiBadges) }
     private var obtained: [UserBadgeProgress] { allProgress.filter { $0.isObtained } }
@@ -88,6 +93,10 @@ struct BadgesListView: View {
         UserService.getDetailsForUser(userId: userId) { user, _ in
             self.apiBadges = user?.badges ?? []
             self.isLoading = false
+            if let key = self.pendingInitialBadgeKey {
+                self.pendingInitialBadgeKey = nil
+                self.selectedProgress = self.allProgress.first(where: { $0.definition.key == key })
+            }
         }
     }
 
