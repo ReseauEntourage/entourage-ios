@@ -36,6 +36,7 @@ enum HomeV2DTO {
     case cellWelcomeJourney(viewModel: WelcomeJourneyViewModel)
     case cellSmallTalk(userRequests:[UserSmallTalkRequest])
     case cellSolidarityTools
+    case cellClimatisation
 }
 
 class HomeMainViewController: UIViewController, UIPopoverPresentationControllerDelegate {
@@ -108,6 +109,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
+        ui_table_view.register(UINib(nibName: HomeCellClimatisation.identifier, bundle: nil), forCellReuseIdentifier: HomeCellClimatisation.identifier)
         ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
 
 
@@ -501,6 +503,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
 
         tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
         tableDTO.append(.cellSolidarityTools)
+        tableDTO.append(.cellClimatisation)
 
         if allPedagos.count > 0 {
             for pedago in allPedagos {
@@ -627,6 +630,12 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.delegate = self
                 return cell
             }
+        case .cellClimatisation:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: HomeCellClimatisation.identifier) as? HomeCellClimatisation {
+                cell.selectionStyle = .none
+                cell.configure(title: "home_v2_climatisation_title".localized, subtitle: "home_v2_climatisation_subtitle".localized, badge: "home_v2_climatisation_badge".localized)
+                return cell
+            }
         case .cellWelcomeJourney(let viewModel):
             if let cell = tableView.dequeueReusableCell(withIdentifier: HomeWelcomeJourneyCell.identifier) as? HomeWelcomeJourneyCell {
                 viewModel.onStepTapped = { [weak self] stepType in
@@ -733,10 +742,13 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(_): return
         case .cellSmallTalk(_): return
         case .cellSolidarityTools: return
+        case .cellClimatisation:
+            AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
+            self.showAllPois(airConditionedFilter: true)
         case .cellWelcomeJourney(_): return
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableDTO[indexPath.row] {
         case .cellTitle(_, _): return UITableView.automaticDimension
@@ -752,6 +764,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(_): return 115
         case .cellSmallTalk(_): return UITableView.automaticDimension
         case .cellSolidarityTools: return UITableView.automaticDimension
+        case .cellClimatisation: return UITableView.automaticDimension
         case .cellWelcomeJourney(_): return UITableView.automaticDimension
         }
     }
@@ -1010,10 +1023,11 @@ extension HomeMainViewController {
         DeepLinkManager.showNeiborhoodListUniversalLink()
     }
 
-    func showAllPois() {
+    func showAllPois(airConditionedFilter: Bool = false) {
         let sb = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "MainGuide") as? MainGuideViewController {
             vc.isFromDeeplink = true
+            vc.isAirConditionedFilterOn = airConditionedFilter
             let navVc = UINavigationController()
             navVc.modalPresentationStyle = .fullScreen
             navVc.addChild(vc)

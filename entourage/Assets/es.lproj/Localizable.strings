@@ -323,6 +323,7 @@
 "home_button_map" = "Mapa";
 "home_button_list" = "Lista";
 "home_button_filters" = "Filtros";
+"guide_button_air_conditioned" = "Lugares climatizados";
 "home_button_filters_on" = "Filtros habilitados";
 //Solidarity Guide
 "button_reset_filters" = "Cancelar filtros";
@@ -1411,6 +1412,9 @@ Choisissez un sujet pour démarrer.";
 "home_v2_title_map" = "Descubra direcciones útiles";
 "home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas";
 "home_v2_button_map" = "Mapa de lugares solidarios";
+"home_v2_climatisation_title" = "Lugares solidarios climatizados";
+"home_v2_climatisation_subtitle" = "Encuentre un lugar fresco cerca de usted durante la ola de calor.";
+"home_v2_climatisation_badge" = "Especial ola de calor";
 
 "home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";
 "home_v2_subtitle_pedago" = "Luchar contra la precariedad es como todo, ¡se aprende!";
@@ -1765,6 +1769,7 @@ Choisissez un sujet pour démarrer.";
 "home_button_map" = "Mapa";
 "home_button_list" = "Lista";
 "home_button_filters" = "Filtros";
+"guide_button_air_conditioned" = "Lugares climatizados";
 "home_button_filters_on" = "Filtros habilitados";
 //Solidarity Guide
 "button_reset_filters" = "Cancelar filtros";

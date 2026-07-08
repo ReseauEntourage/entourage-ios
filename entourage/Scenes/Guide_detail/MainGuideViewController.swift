@@ -39,6 +39,8 @@ class MainGuideViewController: UIViewController {
     var mapWasCenteredOnUserLocation = false
     var isShowMap = false
     var isFirstLaunch = true
+    var isAirConditionedFilterOn = false
+    var airConditionedButton:UIButton!
     
     @objc var isFromDeeplink = false
      let kNotificationShowFeedsMapCurrentLocation = "NotificationFeedsMapCurrentLocation"
@@ -313,13 +315,47 @@ class MainGuideViewController: UIViewController {
         showCurrentLocationButton.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         
         showCurrentLocationButton.addTarget(self, action: #selector(requestCurrentLocation), for: .touchUpInside)
-        
+
+        self.airConditionedButton = UIButton(type: .system)
+
+        airConditionedButton.setImage(UIImage(named: "picto_air_conditioned")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        airConditionedButton.setTitle("guide_button_air_conditioned".localized, for: .normal)
+        airConditionedButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        airConditionedButton.setTitleColor(.white, for: .normal)
+        airConditionedButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 16)
+        airConditionedButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        airConditionedButton.clipsToBounds = true
+
+        airConditionedButton.layer.shadowColor = UIColor.black.cgColor
+        airConditionedButton.layer.shadowOpacity = 0.5
+        airConditionedButton.layer.shadowRadius = 4.0
+        airConditionedButton.layer.masksToBounds = false
+        airConditionedButton.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+
+        airConditionedButton.addTarget(self, action: #selector(toggleAirConditionedFilter), for: .touchUpInside)
+        updateAirConditionedButtonAppearance()
+
+        airConditionedButton.sizeToFit()
+        var airConditionedFrame = airConditionedButton.frame
+        airConditionedFrame.size.height = buttonSize
+        airConditionedFrame.origin.x = (x + buttonSize) - airConditionedFrame.size.width
+        airConditionedFrame.origin.y = y + buttonSize + 10
+        airConditionedButton.frame = airConditionedFrame
+        airConditionedButton.layer.cornerRadius = buttonSize / 2
+
         headerView.addSubview(mapView)
         headerView.addSubview(showCurrentLocationButton)
+        headerView.addSubview(airConditionedButton)
         headerView.bringSubviewToFront(showCurrentLocationButton)
+        headerView.bringSubviewToFront(airConditionedButton)
         headerView.sendSubviewToBack(mapView)
-        
+
         return headerView
+    }
+
+    func updateAirConditionedButtonAppearance() {
+        airConditionedButton.backgroundColor = isAirConditionedFilterOn ? .appOrange : UIColor.lightGray
+        airConditionedButton.tintColor = .white
     }
     
     func setupButtons() {
@@ -395,6 +431,12 @@ class MainGuideViewController: UIViewController {
     @objc func requestCurrentLocation() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationShowFeedsMapCurrentLocation), object: nil)
     }
+
+    @objc func toggleAirConditionedFilter() {
+        isAirConditionedFilterOn.toggle()
+        updateAirConditionedButtonAppearance()
+        getPoiList()
+    }
     
     @objc func handleTap(gesture:UITapGestureRecognizer) {
         Logger.print("Handle Tap ? \(gesture.state.rawValue) -- \(UIGestureRecognizer.State.ended.rawValue)")
@@ -418,7 +460,7 @@ class MainGuideViewController: UIViewController {
         let distance = getMapHeight()
         let categories = self.solidarityFilter.getActiveFilters()
         
-        PoiService.retrieveClustersAndPois(latitude: latitude, longitude: longitude, distance: distance, categoryIDs: categories, partnersFilters: nil) { [weak self] response, error in
+        PoiService.retrieveClustersAndPois(latitude: latitude, longitude: longitude, distance: distance, categoryIDs: categories, partnersFilters: nil, airConditioned: isAirConditionedFilterOn) { [weak self] response, error in
             SVProgressHUD.dismiss()
             guard let self = self else { return }
             self.isAllreadyCall = false

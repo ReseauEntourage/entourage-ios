@@ -322,6 +322,7 @@
 "home_button_map" = "Karte";
 "home_button_list" = "Aufführen";
 "home_button_filters" = "Filter";
+"guide_button_air_conditioned" = "Klimatisierte Orte";
 "home_button_filters_on" = "Filter aktiviert";
 //Solidarity Guide
 "button_reset_filters" = "Filter abbrechen";
@@ -1411,6 +1412,9 @@ Choisissez un sujet pour démarrer.";
 "home_v2_title_map" = "Entdecken Sie nützliche Adressen";
 "home_v2_subtitle_map" = "Alle Solidaritätsstrukturen in der Nähe";
 "home_v2_button_map" = "Karte der solidarischen Orte";
+"home_v2_climatisation_title" = "Klimatisierte solidarische Orte";
+"home_v2_climatisation_subtitle" = "Finden Sie einen kühlen Ort in Ihrer Nähe während der Hitzewelle.";
+"home_v2_climatisation_badge" = "Hitzewelle Spezial";
 
 "home_v2_title_pedago" = "Alles, was Sie wissen müssen, um Maßnahmen zu ergreifen";
 "home_v2_subtitle_pedago" = "Prekarität zu bekämpfen ist wie alles, man kann es lernen!";

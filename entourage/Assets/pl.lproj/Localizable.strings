@@ -336,6 +336,7 @@
 "home_button_map" = "Carte";
 "home_button_list" = "Liste";
 "home_button_filters" = "Filtres";
+"guide_button_air_conditioned" = "Miejsca klimatyzowane";
 "home_button_filters_on" = "Filtres activés";
 //Solidarity Guide
 "button_reset_filters" = "Annuler Filtres";
@@ -1423,6 +1424,9 @@ Choisissez un sujet pour démarrer.";
 "home_v2_title_map" = "Découvrir des adresses utiles";
 "home_v2_subtitle_map" = "Toutes les structures solidaires à proximité";
 "home_v2_button_map" = "Mapa miejsc solidarności";
+"home_v2_climatisation_title" = "Klimatyzowane miejsca solidarności";
+"home_v2_climatisation_subtitle" = "Znajdźcie Państwo chłodne miejsce w pobliżu podczas fali upałów.";
+"home_v2_climatisation_badge" = "Specjalnie na upały";
 
 "home_v2_title_pedago" = "Tout savoir pour passer à l‘action";
 "home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";

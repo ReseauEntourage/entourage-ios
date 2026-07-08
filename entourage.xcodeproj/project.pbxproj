@@ -383,6 +383,8 @@
 		2421081C2F4CA9C8004D74E2 /* birthday_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 2421081B2F4CA9C8004D74E2 /* birthday_animation.json */; };
 		242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */; };
 		242108242F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */; };
+		86384CF3B8823D5B7D619D64 /* HomeCellClimatisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86253553A998914FD3B9CD21 /* HomeCellClimatisation.swift */; };
+		5C879E9935784BE79435B827 /* HomeCellClimatisation.xib in Resources */ = {isa = PBXBuildFile; fileRef = A26ACD37313DE88FC1B62C9D /* HomeCellClimatisation.xib */; };
 		2432FE522F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE502F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift */; };
 		2432FE532F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2432FE512F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib */; };
 		2432FE562F5825450033E711 /* HomeCellActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE542F5825450033E711 /* HomeCellActionCollectionViewCell.swift */; };
@@ -1041,6 +1043,8 @@
 		2421081B2F4CA9C8004D74E2 /* birthday_animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = birthday_animation.json; sourceTree = "<group>"; };
 		242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSolidarityToolsCell.swift; sourceTree = "<group>"; };
 		242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSolidarityToolsCell.xib; sourceTree = "<group>"; };
+		86253553A998914FD3B9CD21 /* HomeCellClimatisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellClimatisation.swift; sourceTree = "<group>"; };
+		A26ACD37313DE88FC1B62C9D /* HomeCellClimatisation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellClimatisation.xib; sourceTree = "<group>"; };
 		2432FE502F5820DC0033E711 /* HomeActionHorizontalCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActionHorizontalCollectionCell.swift; sourceTree = "<group>"; };
 		2432FE512F5820DC0033E711 /* HomeActionHorizontalCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeActionHorizontalCollectionCell.xib; sourceTree = "<group>"; };
 		2432FE542F5825450033E711 /* HomeCellActionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellActionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -2496,6 +2500,8 @@
 				241A6AEB2F6C3229005BF63B /* WelcomeVideoModalViewController.swift */,
 				242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */,
 				242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */,
+				86253553A998914FD3B9CD21 /* HomeCellClimatisation.swift */,
+				A26ACD37313DE88FC1B62C9D /* HomeCellClimatisation.xib */,
 				268ADBD02DD48C1700031C6F /* HomeSmallTalkCell.swift */,
 				268ADBD22DD48F5900031C6F /* HomeSmallTalkCell.xib */,
 				268ADBD42DD4910900031C6F /* cell_small_talks */,
@@ -3025,6 +3031,7 @@
 				02E2192328352552002A1FCB /* Neighborhood_Message.storyboard in Resources */,
 				26BEEED12C06180D00169FBA /* congrats_animation.json in Resources */,
 				242108242F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib in Resources */,
+				5C879E9935784BE79435B827 /* HomeCellClimatisation.xib in Resources */,
 				0236971A296D9F6A00E2CACC /* DetailMessageTopPostImageCell.xib in Resources */,
 				26195B252C09F7E000BEAD84 /* InterestsCollectionViewCell.xib in Resources */,
 				025C92B828340CFC000970D9 /* NeighborhoodPostImageCell.xib in Resources */,
@@ -3484,6 +3491,7 @@
 				26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */,
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
 				242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */,
+				86384CF3B8823D5B7D619D64 /* HomeCellClimatisation.swift in Sources */,
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,
 				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,

@@ -323,6 +323,7 @@
 "home_button_map" = "Hartă";
 "home_button_list" = "Listă";
 "home_button_filters" = "Filtre";
+"guide_button_air_conditioned" = "Locuri climatizate";
 "home_button_filters_on" = "Filtrele activate";
 //Solidarity Guide
 "button_reset_filters" = "Anulează filtrele";
@@ -1415,6 +1416,9 @@ Choisissez un sujet pour démarrer.";
 "home_v2_title_map" = "Descoperiți adrese utile";
 "home_v2_subtitle_map" = "Toate structurile de solidaritate din apropiere";
 "home_v2_button_map" = "Harta locurilor de solidaritate din apropiere";
+"home_v2_climatisation_title" = "Locuri solidare climatizate";
+"home_v2_climatisation_subtitle" = "Găsiți un loc răcoros lângă dumneavoastră în timpul valului de căldură.";
+"home_v2_climatisation_badge" = "Special val de căldură";
 
 "home_v2_title_pedago" = "Tot ce trebuie să știi pentru a acționa";
 "home_v2_subtitle_pedago" = "Combaterea precarității este ca orice, se poate învăța!";

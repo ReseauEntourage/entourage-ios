@@ -314,6 +314,7 @@
 "home_button_map" = "رسم خريطة";
 "home_button_list" = "قائمة";
 "home_button_filters" = "المرشحات";
+"guide_button_air_conditioned" = "أماكن مكيّفة";
 "home_button_filters_on" = "تم تمكين عوامل التصفية";
 //Solidarity Guide
 "button_reset_filters" = "إلغاء عوامل التصفية";
@@ -1406,6 +1407,9 @@ Choisissez un sujet pour démarrer.";
 "home_v2_title_map" = "اكتشف عناوين مفيدة";
 "home_v2_subtitle_map" = "جميع الهياكل التضامنية في مكان قريب";
 "home_v2_button_map" = "خريطة الأماكن التضامنية";
+"home_v2_climatisation_title" = "أماكن تضامنية مكيّفة";
+"home_v2_climatisation_subtitle" = "ابحثوا عن مكان بارد بالقرب منكم خلال موجة الحر.";
+"home_v2_climatisation_badge" = "خاص بموجة الحر";
 
 "home_v2_title_pedago" = "كل ما تحتاج إلى معرفته لاتخاذ الإجراءات اللازمة";
 "home_v2_subtitle_pedago" = "محاربة عدم الاستقرار مثل كل شيء، يمكن تعلمه!";

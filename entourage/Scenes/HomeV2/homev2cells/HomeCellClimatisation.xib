@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeCellClimatisation" rowHeight="120" id="KGk-i7-Clm" customClass="HomeCellClimatisation" customModule="entourage" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Clm" id="H2p-sc-Clm">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="card-Clim">
+                        <rect key="frame" x="20" y="8" width="335" height="104"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icon-Circle">
+                                <rect key="frame" x="16" y="30" width="44" height="44"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="icon-Image">
+                                        <rect key="frame" x="11" y="11" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="wIcon"/>
+                                            <constraint firstAttribute="height" constant="22" id="hIcon"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="icon-Image" firstAttribute="centerX" secondItem="icon-Circle" secondAttribute="centerX" id="cenXIcon"/>
+                                    <constraint firstItem="icon-Image" firstAttribute="centerY" secondItem="icon-Circle" secondAttribute="centerY" id="cenYIcon"/>
+                                    <constraint firstAttribute="width" constant="44" id="wCircle"/>
+                                    <constraint firstAttribute="height" constant="44" id="hCircle"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lieux solidaires climatis\U00e9s" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="title-Clim">
+                                <rect key="frame" x="72" y="16" width="247" height="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trouvez un endroit frais pr\U00e8s de chez vous pendant la canicule." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="subtitle-Clim">
+                                <rect key="frame" x="72" y="40" width="247" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="icon-Circle" firstAttribute="leading" secondItem="card-Clim" secondAttribute="leading" constant="16" id="ldCircle"/>
+                            <constraint firstItem="icon-Circle" firstAttribute="centerY" secondItem="card-Clim" secondAttribute="centerY" id="cenYCircle"/>
+                            <constraint firstItem="title-Clim" firstAttribute="leading" secondItem="icon-Circle" secondAttribute="trailing" constant="12" id="ldTitle"/>
+                            <constraint firstAttribute="trailing" secondItem="title-Clim" secondAttribute="trailing" constant="16" id="trTitle"/>
+                            <constraint firstItem="title-Clim" firstAttribute="top" secondItem="card-Clim" secondAttribute="top" constant="16" id="topTitle"/>
+                            <constraint firstItem="subtitle-Clim" firstAttribute="leading" secondItem="title-Clim" secondAttribute="leading" id="ldSubtitle"/>
+                            <constraint firstAttribute="trailing" secondItem="subtitle-Clim" secondAttribute="trailing" constant="16" id="trSubtitle"/>
+                            <constraint firstItem="subtitle-Clim" firstAttribute="top" secondItem="title-Clim" secondAttribute="bottom" constant="4" id="topSubtitle"/>
+                            <constraint firstAttribute="bottom" secondItem="subtitle-Clim" secondAttribute="bottom" constant="16" id="btmSubtitle"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="badge-Container">
+                        <rect key="frame" x="36" y="6" width="140" height="22"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SP\U00c9CIAL CANICULE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="badge-Label">
+                                <rect key="frame" x="10" y="3" width="120" height="16"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="badge-Label" firstAttribute="leading" secondItem="badge-Container" secondAttribute="leading" constant="10" id="ldBadgeLbl"/>
+                            <constraint firstAttribute="trailing" secondItem="badge-Label" secondAttribute="trailing" constant="10" id="trBadgeLbl"/>
+                            <constraint firstItem="badge-Label" firstAttribute="top" secondItem="badge-Container" secondAttribute="top" constant="3" id="topBadgeLbl"/>
+                            <constraint firstAttribute="bottom" secondItem="badge-Label" secondAttribute="bottom" constant="3" id="btmBadgeLbl"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                <real key="value" value="11"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="card-Clim" firstAttribute="leading" secondItem="H2p-sc-Clm" secondAttribute="leading" constant="20" id="ldCard"/>
+                    <constraint firstAttribute="trailing" secondItem="card-Clim" secondAttribute="trailing" constant="20" id="trCard"/>
+                    <constraint firstItem="card-Clim" firstAttribute="top" secondItem="H2p-sc-Clm" secondAttribute="top" constant="20" id="topCard"/>
+                    <constraint firstAttribute="bottom" secondItem="card-Clim" secondAttribute="bottom" constant="8" id="btmCard"/>
+                    <constraint firstItem="badge-Container" firstAttribute="leading" secondItem="card-Clim" secondAttribute="leading" constant="16" id="ldBadge"/>
+                    <constraint firstItem="badge-Container" firstAttribute="centerY" secondItem="card-Clim" secondAttribute="top" id="cenYBadge"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ui_gradient_view" destination="card-Clim" id="out-GradClim"/>
+                <outlet property="ui_image_icon" destination="icon-Image" id="out-IconClim"/>
+                <outlet property="ui_label_badge" destination="badge-Label" id="out-BadgeClim"/>
+                <outlet property="ui_label_subtitle" destination="subtitle-Clim" id="out-SubClim"/>
+                <outlet property="ui_label_title" destination="title-Clim" id="out-TitleClim"/>
+            </connections>
+            <point key="canvasLocation" x="139.69465648854961" y="220.42253521126761"/>
+        </tableViewCell>
+    </objects>
+</document>

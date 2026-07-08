@@ -330,6 +330,7 @@
 "home_button_map" = "Carte";
 "home_button_list" = "Liste";
 "home_button_filters" = "Filtres";
+"guide_button_air_conditioned" = "Lieux climatisés";
 "home_button_filters_on" = "Filtres activés";
 //Solidarity Guide
 "button_reset_filters" = "Annuler Filtres";
@@ -1439,6 +1440,9 @@ Choisissez un sujet pour démarrer.";
 "home_v2_title_map" = "Découvrir des adresses utiles";
 "home_v2_subtitle_map" = "Toutes les structures solidaires à proximité";
 "home_v2_button_map" = "Carte des lieux solidaires";
+"home_v2_climatisation_title" = "Lieux solidaires climatisés";
+"home_v2_climatisation_subtitle" = "Trouvez un endroit frais près de chez vous pendant la canicule.";
+"home_v2_climatisation_badge" = "Spécial canicule";
 
 "home_v2_title_pedago" = "Tout savoir pour passer à l‘action";
 "home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";

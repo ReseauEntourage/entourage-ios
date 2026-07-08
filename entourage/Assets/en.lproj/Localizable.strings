@@ -322,6 +322,7 @@
 "home_button_map" = "Map";
 "home_button_list" = "List";
 "home_button_filters" = "Filters";
+"guide_button_air_conditioned" = "Air-conditioned places";
 "home_button_filters_on" = "Filters enabled";
 //"//Solidarity Guide" = "nan";
 "button_reset_filters" = "Cancel Filters";
@@ -1410,6 +1411,9 @@ Choisissez un sujet pour démarrer.";
 "home_v2_title_map" = "Discover useful addresses";
 "home_v2_subtitle_map" = "All solidarity structures nearby";
 "home_v2_button_map" = "Map of solidarity places";
+"home_v2_climatisation_title" = "Air-conditioned solidarity places";
+"home_v2_climatisation_subtitle" = "Find a cool place near you during the heatwave.";
+"home_v2_climatisation_badge" = "Heatwave special";
 
 "home_v2_title_pedago" = "Everything you need to know";
 "home_v2_subtitle_pedago" = "Fighting precarity, like everything else, can be learned!";

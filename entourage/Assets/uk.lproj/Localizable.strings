@@ -323,6 +323,7 @@
 "home_button_map" = "Карта";
 "home_button_list" = "Список";
 "home_button_filters" = "Фільтри";
+"guide_button_air_conditioned" = "Кондиційовані місця";
 "home_button_filters_on" = "Фільтри включені";
 //Solidarity Guide
 "button_reset_filters" = "Скасувати фільтри";
@@ -1411,6 +1412,9 @@ Choisissez un sujet pour démarrer.";
 "home_v2_title_map" = "Відкрийте для себе корисні адреси";
 "home_v2_subtitle_map" = "Всі споруди солідарності поруч";
 "home_v2_button_map" = "Карта місць солідарності";
+"home_v2_climatisation_title" = "Кондиційовані місця солідарності";
+"home_v2_climatisation_subtitle" = "Знайдіть прохолодне місце поруч під час спеки.";
+"home_v2_climatisation_badge" = "Спецвипуск спеки";
 
 "home_v2_title_pedago" = "Усе, що вам потрібно знати, щоб діяти";
 "home_v2_subtitle_pedago" = "Боротьба з нестабільністю – це як усе, цьому можна навчитися!";
