@@ -51,6 +51,7 @@ class MainGuideViewController: UIViewController {
         
         setup()
         setupButtons()
+        setupAirConditionedButton()
         fillCategories()
         configureOrangeButton(ui_button_filters, withTitle: "home_button_filters".localized)
         configureOrangeButton(ui_button_map_list, withTitle: "home_button_list".localized)
@@ -316,15 +317,31 @@ class MainGuideViewController: UIViewController {
         
         showCurrentLocationButton.addTarget(self, action: #selector(requestCurrentLocation), for: .touchUpInside)
 
+        headerView.addSubview(mapView)
+        headerView.addSubview(showCurrentLocationButton)
+        headerView.bringSubviewToFront(showCurrentLocationButton)
+        headerView.sendSubviewToBack(mapView)
+
+        return headerView
+    }
+
+    func updateAirConditionedButtonAppearance() {
+        airConditionedButton.backgroundColor = isAirConditionedFilterOn ? .appOrange : UIColor.lightGray
+        airConditionedButton.tintColor = .white
+    }
+
+    func setupAirConditionedButton() {
         self.airConditionedButton = UIButton(type: .system)
+        airConditionedButton.translatesAutoresizingMaskIntoConstraints = false
 
         airConditionedButton.setImage(UIImage(named: "picto_air_conditioned")?.withRenderingMode(.alwaysTemplate), for: .normal)
         airConditionedButton.setTitle("guide_button_air_conditioned".localized, for: .normal)
         airConditionedButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         airConditionedButton.setTitleColor(.white, for: .normal)
-        airConditionedButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 16)
-        airConditionedButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        airConditionedButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 12)
+        airConditionedButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
         airConditionedButton.clipsToBounds = true
+        airConditionedButton.layer.cornerRadius = 15
 
         airConditionedButton.layer.shadowColor = UIColor.black.cgColor
         airConditionedButton.layer.shadowOpacity = 0.5
@@ -335,29 +352,14 @@ class MainGuideViewController: UIViewController {
         airConditionedButton.addTarget(self, action: #selector(toggleAirConditionedFilter), for: .touchUpInside)
         updateAirConditionedButtonAppearance()
 
-        airConditionedButton.sizeToFit()
-        var airConditionedFrame = airConditionedButton.frame
-        airConditionedFrame.size.height = buttonSize
-        airConditionedFrame.origin.x = (x + buttonSize) - airConditionedFrame.size.width
-        airConditionedFrame.origin.y = y + buttonSize + 10
-        airConditionedButton.frame = airConditionedFrame
-        airConditionedButton.layer.cornerRadius = buttonSize / 2
-
-        headerView.addSubview(mapView)
-        headerView.addSubview(showCurrentLocationButton)
-        headerView.addSubview(airConditionedButton)
-        headerView.bringSubviewToFront(showCurrentLocationButton)
-        headerView.bringSubviewToFront(airConditionedButton)
-        headerView.sendSubviewToBack(mapView)
-
-        return headerView
+        self.view.addSubview(airConditionedButton)
+        NSLayoutConstraint.activate([
+            airConditionedButton.leadingAnchor.constraint(equalTo: ui_button_filters.leadingAnchor),
+            airConditionedButton.topAnchor.constraint(equalTo: ui_button_filters.bottomAnchor, constant: 10),
+            airConditionedButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
     }
 
-    func updateAirConditionedButtonAppearance() {
-        airConditionedButton.backgroundColor = isAirConditionedFilterOn ? .appOrange : UIColor.lightGray
-        airConditionedButton.tintColor = .white
-    }
-    
     func setupButtons() {
         addEffectToButton(customButton:  self.ui_button_filters)
         addEffectToButton(customButton: self.ui_button_map_list)
@@ -435,7 +437,13 @@ class MainGuideViewController: UIViewController {
     @objc func toggleAirConditionedFilter() {
         isAirConditionedFilterOn.toggle()
         updateAirConditionedButtonAppearance()
+        clearMapAnnotations()
         getPoiList()
+    }
+
+    func clearMapAnnotations() {
+        let annotationsToRemove = self.mapView.annotations.filter { !($0 is MKUserLocation) }
+        self.mapView.removeAnnotations(annotationsToRemove)
     }
     
     @objc func handleTap(gesture:UITapGestureRecognizer) {
