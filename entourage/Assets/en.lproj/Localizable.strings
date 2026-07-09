@@ -323,6 +323,7 @@
 "home_button_list" = "List";
 "home_button_filters" = "Filters";
 "guide_button_air_conditioned" = "Air-conditioned places";
+"detail_poi_air_conditioned" = "Air-conditioned place";
 "home_button_filters_on" = "Filters enabled";
 //"//Solidarity Guide" = "nan";
 "button_reset_filters" = "Cancel Filters";

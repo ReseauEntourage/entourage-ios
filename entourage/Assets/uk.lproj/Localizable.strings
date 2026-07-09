@@ -324,6 +324,7 @@
 "home_button_list" = "Список";
 "home_button_filters" = "Фільтри";
 "guide_button_air_conditioned" = "Кондиційовані місця";
+"detail_poi_air_conditioned" = "Кондиційоване місце";
 "home_button_filters_on" = "Фільтри включені";
 //Solidarity Guide
 "button_reset_filters" = "Скасувати фільтри";

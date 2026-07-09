@@ -324,6 +324,7 @@
 "home_button_list" = "Listă";
 "home_button_filters" = "Filtre";
 "guide_button_air_conditioned" = "Locuri climatizate";
+"detail_poi_air_conditioned" = "Loc climatizat";
 "home_button_filters_on" = "Filtrele activate";
 //Solidarity Guide
 "button_reset_filters" = "Anulează filtrele";

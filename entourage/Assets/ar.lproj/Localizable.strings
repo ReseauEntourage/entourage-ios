@@ -315,6 +315,7 @@
 "home_button_list" = "قائمة";
 "home_button_filters" = "المرشحات";
 "guide_button_air_conditioned" = "أماكن مكيّفة";
+"detail_poi_air_conditioned" = "مكان مكيّف";
 "home_button_filters_on" = "تم تمكين عوامل التصفية";
 //Solidarity Guide
 "button_reset_filters" = "إلغاء عوامل التصفية";

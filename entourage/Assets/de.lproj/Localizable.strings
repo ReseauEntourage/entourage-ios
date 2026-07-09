@@ -323,6 +323,7 @@
 "home_button_list" = "Aufführen";
 "home_button_filters" = "Filter";
 "guide_button_air_conditioned" = "Klimatisierte Orte";
+"detail_poi_air_conditioned" = "Klimatisierter Ort";
 "home_button_filters_on" = "Filter aktiviert";
 //Solidarity Guide
 "button_reset_filters" = "Filter abbrechen";

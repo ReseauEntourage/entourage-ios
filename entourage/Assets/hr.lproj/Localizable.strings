@@ -323,6 +323,7 @@
 "home_button_list" = "Liste";
 "home_button_filters" = "Filtres";
 "guide_button_air_conditioned" = "Klimatizirana mjesta";
+"detail_poi_air_conditioned" = "Klimatizirano mjesto";
 "home_button_filters_on" = "Filtres activés";
 //Solidarity Guide
 "button_reset_filters" = "Annuler Filtres";

@@ -331,6 +331,7 @@
 "home_button_list" = "Liste";
 "home_button_filters" = "Filtres";
 "guide_button_air_conditioned" = "Lieux climatisés";
+"detail_poi_air_conditioned" = "Lieu climatisé";
 "home_button_filters_on" = "Filtres activés";
 //Solidarity Guide
 "button_reset_filters" = "Annuler Filtres";

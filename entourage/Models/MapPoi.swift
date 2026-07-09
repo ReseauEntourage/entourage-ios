@@ -31,6 +31,7 @@ struct MapPoi : Codable {
     var languageTxt:String? = nil
     var latitude:Double? = nil
     var longitude:Double? = nil
+    var airConditioned:Bool? = nil
     var image:UIImage {
         get {
             return getImage()
@@ -71,7 +72,8 @@ struct MapPoi : Codable {
         case languageTxt = "languages"
         case latitude
         case longitude
-        
+        case airConditioned = "air_conditioned"
+
         case categories_id = "category_ids"
     }
     
