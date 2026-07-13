@@ -35,6 +35,7 @@ protocol MyProfileNavigationDelegate: AnyObject {
     func showPasswordChange()
     func showLogoutAlert()
     func showDeleteAccountAlert()
+    func showConversation(conversation: Conversation?)
 }
 
 // MARK: - ViewModel
@@ -44,6 +45,7 @@ class MyProfileViewModel: ObservableObject {
     @Published var activatedNotif: [String] = []
     @Published var numberOfBlocked: Int = 0
     @Published var apiBadges: [UserBadgeAPI] = []
+    @Published var moderator: HomeModerator?
 
     weak var navigationDelegate: MyProfileNavigationDelegate?
 
@@ -75,10 +77,18 @@ class MyProfileViewModel: ObservableObject {
         if !userId.isEmpty {
             UserService.getDetailsForUser(userId: userId) { [weak self] returnUser, error in
                 DispatchQueue.main.async {
+                    guard let self = self else { return }
                     if let returnUser = returnUser {
-                        self?.user = returnUser
-                        self?.apiBadges = returnUser.badges ?? []
+                        self.user = returnUser
+                        self.apiBadges = returnUser.badges ?? []
                         UserDefaults.currentUser = returnUser
+                        if returnUser.isAmbassador() {
+                            HomeService.getUserHome { [weak self] userHome, _ in
+                                DispatchQueue.main.async {
+                                    self?.moderator = userHome?.moderator
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -98,6 +108,15 @@ class MyProfileViewModel: ObservableObject {
     func onPartnerClick() {
         guard let partner = self.user?.partner else { return }
         navigationDelegate?.showPartnerDetails(partner: partner)
+    }
+
+    func sendMessageToModerator() {
+        guard let moderatorId = moderator?.id else { return }
+        MessagingService.createOrGetConversation(userId: String(moderatorId)) { [weak self] conversation, error in
+            if let conversation = conversation {
+                self?.navigationDelegate?.showConversation(conversation: conversation)
+            }
+        }
     }
 
     func getAppVersion() -> String {
@@ -278,6 +297,17 @@ struct MyProfileView: View {
                     if let user = viewModel.user {
                         MyPreferencesSectionView(user: user, viewModel: viewModel)
                             .padding(.horizontal)
+                    }
+
+                    if let user = viewModel.user, user.isAmbassador() {
+                        AmbassadorToolsSectionView()
+                            .padding(.horizontal)
+
+                        AmbassadorReferentSectionView(
+                            moderator: viewModel.moderator,
+                            onSendMessage: { viewModel.sendMessageToModerator() }
+                        )
+                        .padding(.horizontal)
                     }
                 }
                 .background(Color.white)
@@ -487,5 +517,162 @@ struct MyPreferencesSectionView: View {
         case "18:00-21:00": return "enhanced_onboarding_time_disponibility_time_evening".localized
         default: return slot
         }
+    }
+}
+
+// MARK: - Ambassador Sections
+
+struct AmbassadorSectionHeader: View {
+    let title: String
+    var body: some View {
+        Text(title)
+            .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)))
+            .foregroundColor(.black)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 8)
+    }
+}
+
+struct AmbassadorToolsSectionView: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            AmbassadorSectionHeader(title: "profile_ambassador_resources_section".localized)
+
+            HStack(alignment: .top, spacing: 10) {
+                AmbassadorToolCard(
+                    systemIcon: "books.vertical.fill",
+                    title: "profile_ambassador_tool_toolkit".localized
+                ) {
+                    if let url = URL(string: AMBASSADOR_TOOLKIT_URL) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+                AmbassadorToolCard(
+                    systemIcon: "doc.text.fill",
+                    title: "profile_ambassador_tool_charter".localized
+                ) {
+                    if let url = URL(string: AMBASSADOR_CHARTER_URL) {
+                        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
+                    }
+                }
+                AmbassadorToolCard(
+                    systemIcon: "message.fill",
+                    title: "profile_ambassador_tool_whatsapp".localized
+                ) {
+                    if let url = URL(string: AMBASSADOR_WHATSAPP_URL) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct AmbassadorToolCard: View {
+    let systemIcon: String
+    let title: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 10) {
+                ZStack {
+                    Circle()
+                        .fill(Color.appBeige)
+                        .frame(width: 48, height: 48)
+                    Image(systemName: systemIcon)
+                        .font(.system(size: 20))
+                        .foregroundColor(Color(UIColor.appOrange))
+                }
+                Text(title)
+                    .font(Font(UIFont(name: "Quicksand-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(.vertical, 16)
+            .padding(.horizontal, 8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
+            .cornerRadius(14)
+            .overlay(
+                RoundedRectangle(cornerRadius: 14)
+                    .stroke(Color(UIColor(red: 0.78, green: 0.78, blue: 0.78, alpha: 1)), lineWidth: 1)
+            )
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+}
+
+struct AmbassadorReferentSectionView: View {
+    let moderator: HomeModerator?
+    let onSendMessage: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            AmbassadorSectionHeader(title: "profile_ambassador_referent_section".localized)
+
+            if let mod = moderator {
+                VStack(spacing: 16) {
+                    HStack(spacing: 14) {
+                        // Avatar
+                        ZStack {
+                            Circle()
+                                .fill(Color(UIColor.appOrangeLight))
+                                .frame(width: 56, height: 56)
+                            if let urlStr = mod.imgUrl, !urlStr.isEmpty {
+                                ProfileImageView(urlString: urlStr, size: CGSize(width: 56, height: 56))
+                                    .frame(width: 56, height: 56)
+                                    .clipShape(Circle())
+                            } else {
+                                Text(initials(from: mod.displayName))
+                                    .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)))
+                                    .foregroundColor(Color(UIColor.appOrange))
+                            }
+                        }
+                        .frame(width: 56, height: 56)
+
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text(mod.displayName ?? "")
+                                .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
+                                .foregroundColor(.black)
+                            Text("profile_ambassador_referent_role".localized)
+                                .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
+                                .foregroundColor(Color(UIColor.appGris112))
+                        }
+
+                        Spacer()
+                    }
+
+                    // CTA pleine largeur
+                    Button(action: onSendMessage) {
+                        Text("profile_ambassador_referent_cta".localized)
+                            .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? UIFont.systemFont(ofSize: 15)))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(Color(UIColor.appOrange))
+                            .cornerRadius(25)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .padding(16)
+                .background(Color.white)
+                .cornerRadius(15)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.appBeige, lineWidth: 1)
+                )
+            }
+        }
+    }
+
+    private func initials(from name: String?) -> String {
+        guard let name = name, !name.isEmpty else { return "?" }
+        let parts = name.components(separatedBy: " ").filter { !$0.isEmpty }
+        if parts.count >= 2 {
+            return "\(parts[0].prefix(1))\(parts[parts.count - 1].prefix(1))".uppercased()
+        }
+        return String(name.prefix(2)).uppercased()
     }
 }
