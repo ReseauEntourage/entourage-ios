@@ -266,18 +266,22 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         if config.isInterestsFromSetting {
             config.isInterestsFromSetting = false
             SVProgressHUD.dismiss()
-            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
-            navVC.modalPresentationStyle = .fullScreen
-            self.tabBarController?.present(navVC, animated: false)
+            let profileView = MyProfileView(viewModel: self.profileViewModel)
+            self.profileViewModel.navigationDelegate = self
+            let hc = MyProfileHostingController(rootView: profileView, viewModel: self.profileViewModel)
+            hc.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(hc, animated: false)
             return
         }
-        
+
         if config.isOnboardingFromSetting {
             config.isOnboardingFromSetting = false
             SVProgressHUD.dismiss()
-            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
-            navVC.modalPresentationStyle = .fullScreen
-            self.tabBarController?.present(navVC, animated: false)
+            let profileView = MyProfileView(viewModel: self.profileViewModel)
+            self.profileViewModel.navigationDelegate = self
+            let hc = MyProfileHostingController(rootView: profileView, viewModel: self.profileViewModel)
+            hc.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(hc, animated: false)
             return
         }
     }
