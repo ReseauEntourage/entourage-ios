@@ -21,9 +21,11 @@ protocol MainFilterChipsCellDelegate: AnyObject {
 
 class MainFilterChipsCell: UITableViewCell {
     static let identifier = "MainFilterChipsCell"
+    private static let chipIconSize = CGSize(width: 22, height: 22)
 
     weak var delegate: MainFilterChipsCellDelegate?
 
+    private let scrollView = UIScrollView()
     private let stackView = UIStackView()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -38,18 +40,31 @@ class MainFilterChipsCell: UITableViewCell {
 
     private func setup() {
         selectionStyle = .none
+
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(scrollView)
+
         stackView.axis = .horizontal
         stackView.spacing = 12
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(stackView)
+        scrollView.addSubview(stackView)
 
+        // Chips can outgrow the screen width (e.g. two long labels side by side) — scroll
+        // horizontally instead of letting the stack view compress/truncate their titles.
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            scrollView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            scrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            scrollView.heightAnchor.constraint(equalTo: stackView.heightAnchor),
+
+            stackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
 
@@ -64,10 +79,6 @@ class MainFilterChipsCell: UITableViewCell {
             let btn = makeChip(item: item, isSelected: isSelected, style: style)
             stackView.addArrangedSubview(btn)
         }
-
-        let spacer = UIView()
-        spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        stackView.addArrangedSubview(spacer)
     }
 
     private func makeChip(item: MainFilterChipItem, isSelected: Bool, style: MainFilterChipsStyle) -> UIButton {
@@ -78,38 +89,55 @@ class MainFilterChipsCell: UITableViewCell {
         btn.layer.cornerRadius = 20
         btn.layer.borderWidth = 1.5
         btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 14, bottom: 10, right: 14)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
 
         if style == .radio {
             let symbolName = isSelected ? "largecircle.fill.circle" : "circle"
             btn.setImage(UIImage(systemName: symbolName), for: .normal)
             btn.tintColor = isSelected ? .white : UIColor.appGreyOff
         } else if let iconName = item.iconName {
-            btn.setImage(UIImage(named: iconName), for: .normal)
+            // UIButton derives its image layout rect from the UIImage's own size, not from
+            // imageView constraints — some source SVGs have no explicit width/height so their
+            // viewBox (e.g. 217x207) becomes the intrinsic size otherwise. Resize the bitmap
+            // itself so it matches the other, correctly-sized icons.
+            btn.setImage(UIImage(named: iconName)?.resized(to: Self.chipIconSize), for: .normal)
             btn.imageView?.contentMode = .scaleAspectFit
         }
 
-        applyStyle(btn, item: item, isSelected: isSelected)
+        applyStyle(btn, item: item, isSelected: isSelected, style: style)
         btn.addTarget(self, action: #selector(chipTapped(_:)), for: .touchUpInside)
         return btn
     }
 
-    private func applyStyle(_ btn: UIButton, item: MainFilterChipItem, isSelected: Bool) {
+    private func applyStyle(_ btn: UIButton, item: MainFilterChipItem, isSelected: Bool, style: MainFilterChipsStyle) {
         if isSelected {
             btn.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
             btn.backgroundColor = item.accentColor
             btn.layer.borderColor = item.accentColor.cgColor
             btn.setTitleColor(.white, for: .normal)
         } else {
+            // Radio chips (exclusive choice) stay neutral grey when unselected — only the
+            // active choice takes the accent color. Toggle chips keep their accent outline
+            // even when unselected, since each one carries its own identity color.
+            let unselectedColor = style == .radio ? UIColor.appGreyOff : item.accentColor
             btn.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 14)
             btn.backgroundColor = .white
-            btn.layer.borderColor = item.accentColor.cgColor
-            btn.setTitleColor(item.accentColor, for: .normal)
+            btn.layer.borderColor = unselectedColor.cgColor
+            btn.setTitleColor(unselectedColor, for: .normal)
         }
     }
 
     @objc private func chipTapped(_ sender: UIButton) {
         guard let id = sender.accessibilityIdentifier else { return }
         delegate?.mainFilterChipsCell(self, didSelect: id)
+    }
+}
+
+private extension UIImage {
+    func resized(to size: CGSize) -> UIImage {
+        UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
     }
 }

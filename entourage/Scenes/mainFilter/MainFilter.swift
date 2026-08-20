@@ -311,35 +311,26 @@ extension MainFilter: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableDTO[indexPath.row] {
         case .tagCell(let choice):
+            let selectedCount: Int
             if mod == .action {
-                // Mettre à jour l'état de sélection
                 selectedItemsAction[choice.id]?.toggle()
-                // Calculer le nombre de filtres sélectionnés
-                let selectedCount = selectedItemsAction.values.filter { $0 }.count
-
-                // Mettre à jour la deuxième cellule de section avec le nouveau nombre de filtres sélectionnés
-                if tableDTO.count > 1, case .sectionCell(let content, _) = tableDTO[1] {
-                    tableDTO[1] = .sectionCell(content: content, numberOfItem: selectedCount)
-                    tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
-                }
-
-                // Recharger la cellule sélectionnée pour refléter le changement
-                tableView.reloadRows(at: [indexPath], with: .automatic)
+                selectedCount = selectedItemsAction.values.filter { $0 }.count
             } else {
-                // Mettre à jour l'état de sélection
                 selectedItems[choice.id]?.toggle()
-                // Calculer le nombre de filtres sélectionnés
-                let selectedCount = selectedItems.values.filter { $0 }.count
-
-                // Mettre à jour la deuxième cellule de section avec le nouveau nombre de filtres sélectionnés
-                if tableDTO.count > 1, case .sectionCell(let content, _) = tableDTO[1] {
-                    tableDTO[1] = .sectionCell(content: content, numberOfItem: selectedCount)
-                    tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
-                }
-
-                // Recharger la cellule sélectionnée pour refléter le changement
-                tableView.reloadRows(at: [indexPath], with: .automatic)
+                selectedCount = selectedItems.values.filter { $0 }.count
             }
+
+            // Find the header directly above this tag (its index shifts depending on mode/
+            // sections present, e.g. "Type d'événement"/"Format" pushed it down for .event).
+            if let sectionRow = (0..<indexPath.row).reversed().first(where: {
+                if case .sectionCell = tableDTO[$0] { return true }
+                return false
+            }), case .sectionCell(let content, _) = tableDTO[sectionRow] {
+                tableDTO[sectionRow] = .sectionCell(content: content, numberOfItem: selectedCount)
+                tableView.reloadRows(at: [IndexPath(row: sectionRow, section: 0)], with: .automatic)
+            }
+
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         default:
             break
         }
