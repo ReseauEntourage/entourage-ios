@@ -29,6 +29,7 @@
 		0208B0CD289D6F28009A7A58 /* ActionParamsCGUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208B0CC289D6F28009A7A58 /* ActionParamsCGUViewController.swift */; };
 		020AF5DE286064AC0012AE60 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 020AF5DD286064AC0012AE60 /* Lottie */; };
 		020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */ = {isa = PBXBuildFile; fileRef = 020AF5E428607EFE0012AE60 /* congrat_short_anim.json */; };
+		EFA65B66341DE92F2ACCFF17 /* error_404_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 047657E2E9D4DFF8EDEB98F5 /* error_404_animation.json */; };
 		020AF5E82860B10C0012AE60 /* HomeCongratPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020AF5E62860B10C0012AE60 /* HomeCongratPopupViewController.swift */; };
 		020AF5E92860B10C0012AE60 /* HomeCongratPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020AF5E72860B10C0012AE60 /* HomeCongratPopupViewController.xib */; };
 		021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318A827DF4E3100B0F1BD /* Metadatas.swift */; };
@@ -693,6 +694,7 @@
 		0208B0CA289D2EAB009A7A58 /* ActionFullAuthorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFullAuthorCell.swift; sourceTree = "<group>"; };
 		0208B0CC289D6F28009A7A58 /* ActionParamsCGUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionParamsCGUViewController.swift; sourceTree = "<group>"; };
 		020AF5E428607EFE0012AE60 /* congrat_short_anim.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = congrat_short_anim.json; sourceTree = "<group>"; };
+		047657E2E9D4DFF8EDEB98F5 /* error_404_animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = error_404_animation.json; sourceTree = "<group>"; };
 		020AF5E62860B10C0012AE60 /* HomeCongratPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCongratPopupViewController.swift; sourceTree = "<group>"; };
 		020AF5E72860B10C0012AE60 /* HomeCongratPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCongratPopupViewController.xib; sourceTree = "<group>"; };
 		021318A827DF4E3100B0F1BD /* Metadatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadatas.swift; sourceTree = "<group>"; };
@@ -1663,6 +1665,7 @@
 			isa = PBXGroup;
 			children = (
 				24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */,
+				047657E2E9D4DFF8EDEB98F5 /* error_404_animation.json */,
 				2421081B2F4CA9C8004D74E2 /* birthday_animation.json */,
 				26BEEED02C06180D00169FBA /* congrats_animation.json */,
 				2636B9632A7BA199007EE1B2 /* anim_rugby.json */,
@@ -3017,6 +3020,7 @@
 				02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */,
 				266B262A2AB8BCDD00C8EAD8 /* MyEventCollectionViewCell.xib in Resources */,
 				020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */,
+				EFA65B66341DE92F2ACCFF17 /* error_404_animation.json in Resources */,
 				268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */,
 				02B94C28284F63AB006059EF /* HomeContribCell.xib in Resources */,
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
