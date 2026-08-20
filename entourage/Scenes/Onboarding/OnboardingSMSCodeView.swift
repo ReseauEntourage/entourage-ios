@@ -89,11 +89,11 @@ struct OnboardingSMSCodeView: View {
 
                 // --- Titre + numéro ---
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("onboard_sms_view_title")
+                    Text("onboard_sms_view_title".localized)
                         .font(.entourageTitle(20))
                         .foregroundColor(.black)
 
-                    Text("onboard_sms_view_sub")
+                    Text("onboard_sms_view_sub".localized)
                         .font(.entourageBody(15))
                         .foregroundColor(Color(UIColor.appGrey151))
 
@@ -128,7 +128,7 @@ struct OnboardingSMSCodeView: View {
                             onRequestNewCode()
                         }
                     }) {
-                        Text("onboard_retry_view_link")
+                        Text("onboard_retry_view_link".localized)
                             .font(.entourageBody(15))
                             .foregroundColor(Color(UIColor.appOrange))
                             .underline(canRetry, color: Color(UIColor.appOrange))
@@ -142,12 +142,12 @@ struct OnboardingSMSCodeView: View {
 
                 // --- Bloc aide ---
                 VStack(spacing: 4) {
-                    Text("onboard_help_view_title")
+                    Text("onboard_help_view_title".localized)
                         .font(.system(size: 15, weight: .bold))
                         .foregroundColor(Color(UIColor.appBlack30))
 
                     Button(action: { openHelpEmail() }) {
-                        Text("onboard_help_view_link")
+                        Text("onboard_help_view_link".localized)
                             .font(.entourageBody(15))
                             .foregroundColor(.black)
                             .underline()
