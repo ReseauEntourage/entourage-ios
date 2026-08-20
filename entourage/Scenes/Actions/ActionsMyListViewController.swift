@@ -53,6 +53,7 @@ class ActionsMyListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.hideTransparentNavigationBar()
+        currentPage = 1
         getMyActions()
     }
     
