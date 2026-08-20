@@ -1243,17 +1243,17 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "enviar a";
 "messaging_message_no_message" = "0 mensajes más";
 
-"messaging_empty_state_title" = "C'est le début de votre échange";
-"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
-Choisissez un sujet pour démarrer.";
-"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
-"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
-"messaging_empty_chip_question" = "Poser une question 💬";
-"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
-"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
-"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
-"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
-"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+"messaging_empty_state_title" = "Este es el comienzo de tu conversación";
+"messaging_empty_state_subtitle" = "¿No sabes qué decir?
+Elige un tema para empezar.";
+"messaging_empty_chip_bonjour" = "Saludar 👋";
+"messaging_empty_chip_main" = "Ofrecer ayuda 🤝";
+"messaging_empty_chip_question" = "Hacer una pregunta 💬";
+"messaging_empty_chip_evenement" = "Hablar de un evento 📅";
+"messaging_empty_draft_bonjour" = "¡Hola! Solo quería presentarme y ponerme en contacto 😊";
+"messaging_empty_draft_main" = "Hola, puedo echarte una mano si lo necesitas. ¡No dudes en decírmelo!";
+"messaging_empty_draft_question" = "Hola, ¿te importaría si te hago una pequeña pregunta cuando tengas un momento?";
+"messaging_empty_draft_evenement" = "Hola, nos cruzamos en un evento y solo quería charlar un poco contigo!";
 
 "message_title_new_conv" = "Nueva conversación";
 "message_subtitle_new_conv" = "Aún no has interactuado con este usuario. Si hay un problema, puedes reportar la conversación en la configuración.";
@@ -3340,3 +3340,72 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "badges_intro_later" = "Más tarde";
 
 "badge_cta_see_badges" = "Ver mis insignias";
+
+// MARK: - Fix traducciones faltantes iOS (2026-08-18)
+"login_forgot_code_title" = "¿Has olvidado tu código?";
+"login_label_change_phone_question" = "¿Has cambiado de número de teléfono?";
+
+"onboard_sms_view_title" = "Introduce el código recibido por SMS";
+"onboard_sms_view_sub" = "Se te acaba de enviar un SMS al:";
+"onboard_sms_view_wait_countdown" = "Podrás solicitar un nuevo código en %@";
+"onboard_sms_view_wait_ready" = "Puedes solicitar un nuevo código.";
+"onboard_retry_view_link" = "Recibir un nuevo código por SMS";
+
+"onboarding_zone_title" = "Tu ubicación";
+"onboarding_zone_subtitle" = "Esta información nos permite ajustar las actividades que te proponemos cerca de ti.";
+"onboarding_zone_city_placeholder_example" = "Ej.: Valence";
+
+"onboarding_phase1_title" = "Tu información personal";
+"onboarding_phase1_required_fields" = "(*) campos obligatorios";
+"onboarding_phase1_nav_title" = "Información";
+
+"neighborhood_post_inspiration_title" = "¿Necesitas inspiración?";
+
+"home_v2_small_talk_card_title" = "Únete a una conversación solidaria";
+"home_v2_small_talk_card_subtitle" = "Te ponemos en contacto con un pequeño grupo que comparte tus intereses, en cualquier lugar de Francia";
+"home_v2_small_talk_card_button" = "Chatear";
+"home_v2_solidarity_tools_title" = "Tus herramientas solidarias";
+"home_v2_tool_card_map" = "Mapa de lugares solidarios";
+"home_v2_tool_card_pedago" = "Recursos útiles";
+"home_v2_tool_card_ethics" = "Carta ética de Entourage";
+
+"settings_back_subtitle" = "Volver a los ajustes";
+
+"interest_sport_subtitle" = "Fútbol, yoga, baloncesto…";
+"interest_animaux_subtitle" = "Refugio, cuidados, paseos…";
+"interest_marauding_subtitle" = "Comidas, café, conversación…";
+"interest_bien_etre_subtitle" = "Relajación, cuidados, higiene…";
+"interest_cuisine_subtitle" = "Comidas compartidas, recetas…";
+"interest_culture_subtitle" = "Salidas, museos, cine…";
+"interest_nature_subtitle" = "Jardinería, parques, bosque…";
+"interest_jeux_subtitle" = "Juegos de mesa, cartas, aire libre…";
+"interest_activites_subtitle" = "Bricolaje, costura, reparación…";
+
+"hour_morning" = "Mañana";
+"hour_afternoon" = "Tarde";
+"hour_evening" = "Noche";
+
+"neighborhood_post_chip_info_label" = "Info del barrio 📢";
+"neighborhood_post_chip_info_draft" = "Quería compartir una información sobre nuestro barrio: ";
+"neighborhood_post_chip_activity_label" = "Proponer una actividad 🎉";
+"neighborhood_post_chip_activity_draft" = "Estoy organizando una pequeña actividad y me gustaría invitarte! ";
+"neighborhood_post_chip_help_label" = "Pedir ayuda 🤝";
+"neighborhood_post_chip_help_draft" = "Hola a todos, necesitaría una pequeña ayuda para ";
+"neighborhood_post_chip_hello_label" = "Saludar 👋";
+"neighborhood_post_chip_hello_draft" = "¡Hola a todos! Solo quería ponerme en contacto con el grupo 😊";
+"neighborhood_post_chip_share_label" = "Compartir un contenido 💡";
+"neighborhood_post_chip_share_draft" = "Encontré algo interesante para compartir con vosotros: ";
+"neighborhood_post_chip_question_label" = "Hacer una pregunta ❓";
+"neighborhood_post_chip_question_draft" = "Hola, tengo una pregunta para el grupo: ";
+"neighborhood_post_chip_exchange_label" = "Proponer un intercambio 💬";
+"neighborhood_post_chip_exchange_draft" = "Me gustaría que habláramos juntos sobre este tema: ";
+"neighborhood_post_chip_meetup_label" = "Organizar un encuentro 📅";
+"neighborhood_post_chip_meetup_draft" = "¿Y si quedamos pronto? Propongo ";
+
+"availability_day_mon" = "Lun";
+"availability_day_tue" = "Mar";
+"availability_day_wed" = "Mié";
+"availability_day_thu" = "Jue";
+"availability_day_fri" = "Vie";
+"availability_day_sat" = "Sáb";
+"availability_day_sun" = "Dom";

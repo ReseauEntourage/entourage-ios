@@ -1238,17 +1238,17 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "يرسل";
 "messaging_message_no_message" = "0 المزيد من الرسائل";
 
-"messaging_empty_state_title" = "C'est le début de votre échange";
-"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
-Choisissez un sujet pour démarrer.";
-"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
-"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
-"messaging_empty_chip_question" = "Poser une question 💬";
-"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
-"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
-"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
-"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
-"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+"messaging_empty_state_title" = "هذه بداية محادثتكم";
+"messaging_empty_state_subtitle" = "لست متأكدًا مما تقوله؟
+اختر موضوعًا للبدء.";
+"messaging_empty_chip_bonjour" = "قل مرحبًا 👋";
+"messaging_empty_chip_main" = "عرض المساعدة 🤝";
+"messaging_empty_chip_question" = "طرح سؤال 💬";
+"messaging_empty_chip_evenement" = "التحدث عن فعالية 📅";
+"messaging_empty_draft_bonjour" = "مرحبًا! أردت فقط أن أعرّف بنفسي وأتواصل معك 😊";
+"messaging_empty_draft_main" = "مرحبًا، يمكنني مساعدتك إذا احتجت لذلك. لا تتردد في إخباري!";
+"messaging_empty_draft_question" = "مرحبًا، لدي سؤال صغير أود طرحه إذا كان لديك لحظة؟";
+"messaging_empty_draft_evenement" = "مرحبًا، التقينا في فعالية وأردت فقط التحدث معك قليلاً!";
 
 "message_title_new_conv" = "محادثة جديدة";
 "message_subtitle_new_conv" = "لم تتفاعل بعد مع هذا المستخدم. إذا كانت هناك مشكلة، يمكنك الإبلاغ عن المحادثة في الإعدادات.";
@@ -1854,3 +1854,72 @@ Choisissez un sujet pour démarrer.";
 "badges_intro_later" = "لاحقاً";
 
 "badge_cta_see_badges" = "عرض شاراتي";
+
+// MARK: - إصلاح الترجمات الناقصة iOS (2026-08-18)
+"login_forgot_code_title" = "هل نسيت رمزك؟";
+"login_label_change_phone_question" = "هل غيرت رقم هاتفك؟";
+
+"onboard_sms_view_title" = "أدخل الرمز الذي تلقيته عبر الرسائل القصيرة";
+"onboard_sms_view_sub" = "تم للتو إرسال رسالة نصية إلى:";
+"onboard_sms_view_wait_countdown" = "يمكنك طلب رمز جديد خلال %@";
+"onboard_sms_view_wait_ready" = "يمكنك طلب رمز جديد.";
+"onboard_retry_view_link" = "استلام رمز جديد عبر الرسائل القصيرة";
+
+"onboarding_zone_title" = "موقعك";
+"onboarding_zone_subtitle" = "تساعدنا هذه المعلومة على تحسين الأنشطة المقترحة بالقرب منك.";
+"onboarding_zone_city_placeholder_example" = "مثال: فالانس";
+
+"onboarding_phase1_title" = "معلوماتك الشخصية";
+"onboarding_phase1_required_fields" = "(*) حقول إلزامية";
+"onboarding_phase1_nav_title" = "معلومات";
+
+"neighborhood_post_inspiration_title" = "بحاجة إلى إلهام؟";
+
+"home_v2_small_talk_card_title" = "انضم إلى محادثة تضامنية";
+"home_v2_small_talk_card_subtitle" = "نربطك بمجموعة صغيرة تشاركك اهتماماتك، في أي مكان في فرنسا";
+"home_v2_small_talk_card_button" = "الدردشة";
+"home_v2_solidarity_tools_title" = "أدواتك التضامنية";
+"home_v2_tool_card_map" = "خريطة الأماكن التضامنية";
+"home_v2_tool_card_pedago" = "موارد مفيدة";
+"home_v2_tool_card_ethics" = "ميثاق أخلاقيات Entourage";
+
+"settings_back_subtitle" = "العودة إلى الإعدادات";
+
+"interest_sport_subtitle" = "كرة القدم، اليوغا، كرة السلة…";
+"interest_animaux_subtitle" = "الملجأ، الرعاية، التنزه…";
+"interest_marauding_subtitle" = "وجبات، قهوة، حديث…";
+"interest_bien_etre_subtitle" = "الاسترخاء، الرعاية، النظافة…";
+"interest_cuisine_subtitle" = "مشاركة الوجبات، الوصفات…";
+"interest_culture_subtitle" = "الخرجات، المتاحف، السينما…";
+"interest_nature_subtitle" = "البستنة، الحدائق، الغابات…";
+"interest_jeux_subtitle" = "ألعاب الطاولة، الورق، الأنشطة الخارجية…";
+"interest_activites_subtitle" = "الأعمال اليدوية، الخياطة، الإصلاح…";
+
+"hour_morning" = "صباحًا";
+"hour_afternoon" = "بعد الظهر";
+"hour_evening" = "مساءً";
+
+"neighborhood_post_chip_info_label" = "معلومة عن الحي 📢";
+"neighborhood_post_chip_info_draft" = "أردت مشاركة معلومة تخص حينا: ";
+"neighborhood_post_chip_activity_label" = "اقتراح نشاط 🎉";
+"neighborhood_post_chip_activity_draft" = "أنظّم نشاطًا صغيرًا وأود دعوتكم إليه! ";
+"neighborhood_post_chip_help_label" = "طلب المساعدة 🤝";
+"neighborhood_post_chip_help_draft" = "مرحبًا بالجميع، أحتاج إلى بعض المساعدة في ";
+"neighborhood_post_chip_hello_label" = "قل مرحبًا 👋";
+"neighborhood_post_chip_hello_draft" = "مرحبًا بالجميع! أردت فقط التواصل مع المجموعة 😊";
+"neighborhood_post_chip_share_label" = "مشاركة محتوى 💡";
+"neighborhood_post_chip_share_draft" = "وجدت شيئًا مثيرًا للاهتمام لأشاركه معكم: ";
+"neighborhood_post_chip_question_label" = "طرح سؤال ❓";
+"neighborhood_post_chip_question_draft" = "مرحبًا، لدي سؤال للمجموعة: ";
+"neighborhood_post_chip_exchange_label" = "اقتراح نقاش 💬";
+"neighborhood_post_chip_exchange_draft" = "أود أن نتناقش معًا حول هذا الموضوع: ";
+"neighborhood_post_chip_meetup_label" = "تنظيم لقاء 📅";
+"neighborhood_post_chip_meetup_draft" = "ماذا لو التقينا قريبًا؟ أقترح ";
+
+"availability_day_mon" = "اثن";
+"availability_day_tue" = "ثلا";
+"availability_day_wed" = "أرب";
+"availability_day_thu" = "خمي";
+"availability_day_fri" = "جمع";
+"availability_day_sat" = "سبت";
+"availability_day_sun" = "أحد";

@@ -1559,7 +1559,7 @@ Choisissez un sujet pour démarrer.";
 "vote_plural" = "votes";
 
 "enhanced_onboarding_start_title" = "%@, faisons connaissance !";
-"enhanced_onboarding_start_subtitle" = "Avant de plonger dans notre application, prenons quelques instants pour mieux te connaître. Tes centres d'intérêts vont nous aider à te suggérer des activités et des contenus qui t'intéresseront.";
+"enhanced_onboarding_start_subtitle" = "Avant de plonger dans notre application, prenons quelques instants pour mieux vous connaître. Vos centres d'intérêts vont nous aider à vous suggérer des activités et des contenus qui vous intéresseront.";
 "enhanced_onboarding_button_title_start" = "Commencer";
 "enhanced_onboarding_button_title_later" = "Terminer plus tard";
 "enhanced_onboarding_button_title_configlater" = "Configurer plus tard";
@@ -2187,3 +2187,34 @@ Choisissez un sujet pour démarrer.";
 "profile_ambassador_referent_section" = "Mon référent";
 "profile_ambassador_referent_role" = "Responsable engagement citoyen";
 "profile_ambassador_referent_cta" = "Envoyer un message";
+
+// MARK: - Fix traductions manquantes iOS (2026-08-18)
+"onboarding_phase1_title" = "Vos informations personnelles";
+"onboarding_phase1_required_fields" = "(*) champs obligatoires";
+"onboarding_phase1_nav_title" = "Informations";
+"onboarding_zone_city_placeholder_example" = "Ex. : Valence";
+
+"neighborhood_post_chip_info_label" = "Info de quartier 📢";
+"neighborhood_post_chip_info_draft" = "Je voulais partager une info qui concerne notre quartier : ";
+"neighborhood_post_chip_activity_label" = "Proposer une activité 🎉";
+"neighborhood_post_chip_activity_draft" = "J'organise une petite activité et j'aimerais vous inviter ! ";
+"neighborhood_post_chip_help_label" = "Demander un coup de main 🤝";
+"neighborhood_post_chip_help_draft" = "Bonjour à tous, j'aurais besoin d'un petit coup de main pour ";
+"neighborhood_post_chip_hello_label" = "Dire bonjour 👋";
+"neighborhood_post_chip_hello_draft" = "Bonjour à tous ! Je voulais juste prendre contact avec le groupe 😊";
+"neighborhood_post_chip_share_label" = "Partager un contenu 💡";
+"neighborhood_post_chip_share_draft" = "J'ai trouvé quelque chose d'intéressant à partager avec vous : ";
+"neighborhood_post_chip_question_label" = "Poser une question ❓";
+"neighborhood_post_chip_question_draft" = "Bonjour, j'aurais une question pour le groupe : ";
+"neighborhood_post_chip_exchange_label" = "Proposer un échange 💬";
+"neighborhood_post_chip_exchange_draft" = "J'aimerais qu'on échange sur ce sujet ensemble : ";
+"neighborhood_post_chip_meetup_label" = "Organiser une rencontre 📅";
+"neighborhood_post_chip_meetup_draft" = "Et si on se retrouvait prochainement ? Je propose ";
+
+"availability_day_mon" = "Lun";
+"availability_day_tue" = "Mar";
+"availability_day_wed" = "Mer";
+"availability_day_thu" = "Jeu";
+"availability_day_fri" = "Ven";
+"availability_day_sat" = "Sam";
+"availability_day_sun" = "Dim";

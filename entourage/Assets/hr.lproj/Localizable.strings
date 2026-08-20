@@ -1235,17 +1235,17 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "Envoyer";
 "messaging_message_no_message" = "0encore de message";
 
-"messaging_empty_state_title" = "C'est le début de votre échange";
-"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
-Choisissez un sujet pour démarrer.";
-"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
-"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
-"messaging_empty_chip_question" = "Poser une question 💬";
-"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
-"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
-"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
-"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
-"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+"messaging_empty_state_title" = "Ovo je početak vašeg razgovora";
+"messaging_empty_state_subtitle" = "Niste sigurni što reći?
+Odaberite temu za početak.";
+"messaging_empty_chip_bonjour" = "Pozdravi 👋";
+"messaging_empty_chip_main" = "Ponudi pomoć 🤝";
+"messaging_empty_chip_question" = "Postavi pitanje 💬";
+"messaging_empty_chip_evenement" = "Razgovaraj o događaju 📅";
+"messaging_empty_draft_bonjour" = "Bok! Samo sam se htio/htjela predstaviti i uspostaviti kontakt 😊";
+"messaging_empty_draft_main" = "Bok, mogu ti pomoći ako ti treba. Slobodno mi javi!";
+"messaging_empty_draft_question" = "Bok, imam jedno kratko pitanje za tebe ako imaš trenutak?";
+"messaging_empty_draft_evenement" = "Bok, sreli smo se na jednom događaju i samo sam htio/htjela malo porazgovarati s tobom!";
 
 "message_title_new_conv" = "Nouvelle conversation";
 "message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la conversation dans les paramètres.";
@@ -1549,3 +1549,72 @@ Choisissez un sujet pour démarrer.";
 "badge_as_papotage_cta" = "Voir les prochaines dates";
 "badge_diffuseur_liens_cta" = "Créer un événement";
 "badge_tisseur_liens_cta" = "Voir mes groupes";
+
+// MARK: - Fix nedostajućih prijevoda iOS (2026-08-18)
+"login_forgot_code_title" = "Zaboravili ste kod?";
+"login_label_change_phone_question" = "Jeste li promijenili broj telefona?";
+
+"onboard_sms_view_title" = "Unesite kod primljen putem SMS-a";
+"onboard_sms_view_sub" = "Upravo vam je poslan SMS na:";
+"onboard_sms_view_wait_countdown" = "Moći ćete zatražiti novi kod za %@";
+"onboard_sms_view_wait_ready" = "Možete zatražiti novi kod.";
+"onboard_retry_view_link" = "Primite novi kod putem SMS-a";
+
+"onboarding_zone_title" = "Vaša lokacija";
+"onboarding_zone_subtitle" = "Ova informacija nam pomaže prilagoditi aktivnosti koje vam predlažemo u blizini.";
+"onboarding_zone_city_placeholder_example" = "Npr.: Valence";
+
+"onboarding_phase1_title" = "Vaši osobni podaci";
+"onboarding_phase1_required_fields" = "(*) obavezna polja";
+"onboarding_phase1_nav_title" = "Informacije";
+
+"neighborhood_post_inspiration_title" = "Trebate inspiraciju?";
+
+"home_v2_small_talk_card_title" = "Pridružite se solidarnoj raspravi";
+"home_v2_small_talk_card_subtitle" = "Povezujemo vas s malom skupinom koja dijeli vaše interese, bilo gdje u Francuskoj";
+"home_v2_small_talk_card_button" = "Razgovaraj";
+"home_v2_solidarity_tools_title" = "Vaši solidarni alati";
+"home_v2_tool_card_map" = "Karta solidarnih mjesta";
+"home_v2_tool_card_pedago" = "Korisni resursi";
+"home_v2_tool_card_ethics" = "Etička povelja Entourage";
+
+"settings_back_subtitle" = "Povratak na postavke";
+
+"interest_sport_subtitle" = "Nogomet, joga, košarka…";
+"interest_animaux_subtitle" = "Sklonište, njega, šetnje…";
+"interest_marauding_subtitle" = "Obroci, kava, razgovor…";
+"interest_bien_etre_subtitle" = "Opuštanje, njega, higijena…";
+"interest_cuisine_subtitle" = "Dijeljenje obroka, recepti…";
+"interest_culture_subtitle" = "Izlasci, muzeji, kino…";
+"interest_nature_subtitle" = "Vrtlarstvo, parkovi, šuma…";
+"interest_jeux_subtitle" = "Društvene igre, karte, igre na otvorenom…";
+"interest_activites_subtitle" = "Popravci, šivanje, majstorisanje…";
+
+"hour_morning" = "Jutro";
+"hour_afternoon" = "Poslijepodne";
+"hour_evening" = "Večer";
+
+"neighborhood_post_chip_info_label" = "Info iz susjedstva 📢";
+"neighborhood_post_chip_info_draft" = "Htio/htjela sam podijeliti informaciju o našem susjedstvu: ";
+"neighborhood_post_chip_activity_label" = "Predloži aktivnost 🎉";
+"neighborhood_post_chip_activity_draft" = "Organiziram malu aktivnost i htio/htjela bih vas pozvati! ";
+"neighborhood_post_chip_help_label" = "Zatraži pomoć 🤝";
+"neighborhood_post_chip_help_draft" = "Bok svima, trebala bi mi mala pomoć oko ";
+"neighborhood_post_chip_hello_label" = "Pozdravi 👋";
+"neighborhood_post_chip_hello_draft" = "Bok svima! Samo sam htio/htjela stupiti u kontakt sa skupinom 😊";
+"neighborhood_post_chip_share_label" = "Podijeli sadržaj 💡";
+"neighborhood_post_chip_share_draft" = "Pronašao/pronašla sam nešto zanimljivo za podijeliti s vama: ";
+"neighborhood_post_chip_question_label" = "Postavi pitanje ❓";
+"neighborhood_post_chip_question_draft" = "Bok, imam pitanje za skupinu: ";
+"neighborhood_post_chip_exchange_label" = "Predloži razmjenu 💬";
+"neighborhood_post_chip_exchange_draft" = "Volio/voljela bih da zajedno razgovaramo o ovoj temi: ";
+"neighborhood_post_chip_meetup_label" = "Organiziraj susret 📅";
+"neighborhood_post_chip_meetup_draft" = "Što kažete da se uskoro nađemo? Predlažem ";
+
+"availability_day_mon" = "Pon";
+"availability_day_tue" = "Uto";
+"availability_day_wed" = "Sri";
+"availability_day_thu" = "Čet";
+"availability_day_fri" = "Pet";
+"availability_day_sat" = "Sub";
+"availability_day_sun" = "Ned";

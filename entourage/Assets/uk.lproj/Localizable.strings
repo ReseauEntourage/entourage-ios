@@ -1243,17 +1243,17 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "Надіслати";
 "messaging_message_no_message" = "Ще 0 повідомлень";
 
-"messaging_empty_state_title" = "C'est le début de votre échange";
-"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
-Choisissez un sujet pour démarrer.";
-"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
-"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
-"messaging_empty_chip_question" = "Poser une question 💬";
-"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
-"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
-"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
-"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
-"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+"messaging_empty_state_title" = "Це початок вашого спілкування";
+"messaging_empty_state_subtitle" = "Не знаєте, що написати?
+Оберіть тему, щоб почати.";
+"messaging_empty_chip_bonjour" = "Привітатися 👋";
+"messaging_empty_chip_main" = "Запропонувати допомогу 🤝";
+"messaging_empty_chip_question" = "Поставити запитання 💬";
+"messaging_empty_chip_evenement" = "Поговорити про подію 📅";
+"messaging_empty_draft_bonjour" = "Привіт! Хотів(ла) просто представитися і зв'язатися 😊";
+"messaging_empty_draft_main" = "Привіт, я можу допомогти, якщо потрібно. Не соромся написати!";
+"messaging_empty_draft_question" = "Привіт, у мене є маленьке запитання, якщо у тебе є хвилинка?";
+"messaging_empty_draft_evenement" = "Привіт, ми зустрічались на заході, і я просто хотів(ла) трохи поспілкуватися!";
 
 "message_title_new_conv" = "Нова розмова";
 "message_subtitle_new_conv" = "Ви ще не взаємодіяли з цим користувачем. Якщо виникла проблема, ви можете повідомити про розмову в налаштуваннях.";
@@ -1895,3 +1895,72 @@ Choisissez un sujet pour démarrer.";
 "badges_intro_later" = "Пізніше";
 
 "badge_cta_see_badges" = "Переглянути мої значки";
+
+// MARK: - Виправлення відсутніх перекладів iOS (2026-08-18)
+"login_forgot_code_title" = "Забули код?";
+"login_label_change_phone_question" = "Ви змінили номер телефону?";
+
+"onboard_sms_view_title" = "Введіть код, отриманий через SMS";
+"onboard_sms_view_sub" = "Щойно надіслано SMS на номер:";
+"onboard_sms_view_wait_countdown" = "Ви зможете запросити новий код через %@";
+"onboard_sms_view_wait_ready" = "Ви можете запросити новий код.";
+"onboard_retry_view_link" = "Отримати новий код через SMS";
+
+"onboarding_zone_title" = "Ваше місцезнаходження";
+"onboarding_zone_subtitle" = "Ця інформація допомагає нам точніше пропонувати заходи поблизу вас.";
+"onboarding_zone_city_placeholder_example" = "Напр.: Valence";
+
+"onboarding_phase1_title" = "Ваша особиста інформація";
+"onboarding_phase1_required_fields" = "(*) обов'язкові поля";
+"onboarding_phase1_nav_title" = "Інформація";
+
+"neighborhood_post_inspiration_title" = "Потрібне натхнення?";
+
+"home_v2_small_talk_card_title" = "Приєднатися до дискусії солідарності";
+"home_v2_small_talk_card_subtitle" = "Ми з'єднаємо вас із невеликою групою людей зі схожими інтересами, будь-де у Франції";
+"home_v2_small_talk_card_button" = "Спілкуватися";
+"home_v2_solidarity_tools_title" = "Ваші інструменти солідарності";
+"home_v2_tool_card_map" = "Карта місць солідарності";
+"home_v2_tool_card_pedago" = "Корисні ресурси";
+"home_v2_tool_card_ethics" = "Етичний кодекс Entourage";
+
+"settings_back_subtitle" = "Повернутися до налаштувань";
+
+"interest_sport_subtitle" = "Футбол, йога, баскетбол…";
+"interest_animaux_subtitle" = "Притулок, догляд, прогулянки…";
+"interest_marauding_subtitle" = "Їжа, кава, спілкування…";
+"interest_bien_etre_subtitle" = "Релаксація, догляд, гігієна…";
+"interest_cuisine_subtitle" = "Спільні страви, рецепти…";
+"interest_culture_subtitle" = "Прогулянки, музеї, кіно…";
+"interest_nature_subtitle" = "Садівництво, парки, ліс…";
+"interest_jeux_subtitle" = "Настільні ігри, карти, ігри на свіжому повітрі…";
+"interest_activites_subtitle" = "Майстерування, шиття, ремонт…";
+
+"hour_morning" = "Ранок";
+"hour_afternoon" = "День";
+"hour_evening" = "Вечір";
+
+"neighborhood_post_chip_info_label" = "Новини району 📢";
+"neighborhood_post_chip_info_draft" = "Хотів(ла) поділитися інформацією про наш район: ";
+"neighborhood_post_chip_activity_label" = "Запропонувати активність 🎉";
+"neighborhood_post_chip_activity_draft" = "Я організовую невеликий захід і хотів(ла) би вас запросити! ";
+"neighborhood_post_chip_help_label" = "Попросити допомоги 🤝";
+"neighborhood_post_chip_help_draft" = "Привіт усім, мені потрібна невелика допомога з ";
+"neighborhood_post_chip_hello_label" = "Привітатися 👋";
+"neighborhood_post_chip_hello_draft" = "Привіт усім! Просто хотів(ла) зв'язатися з групою 😊";
+"neighborhood_post_chip_share_label" = "Поділитися контентом 💡";
+"neighborhood_post_chip_share_draft" = "Я знайшов(ла) щось цікаве, чим хочу поділитися з вами: ";
+"neighborhood_post_chip_question_label" = "Поставити запитання ❓";
+"neighborhood_post_chip_question_draft" = "Привіт, у мене є запитання до групи: ";
+"neighborhood_post_chip_exchange_label" = "Запропонувати обговорення 💬";
+"neighborhood_post_chip_exchange_draft" = "Хотів(ла) би обговорити цю тему разом: ";
+"neighborhood_post_chip_meetup_label" = "Організувати зустріч 📅";
+"neighborhood_post_chip_meetup_draft" = "А що якщо ми скоро зустрінемось? Пропоную ";
+
+"availability_day_mon" = "Пн";
+"availability_day_tue" = "Вт";
+"availability_day_wed" = "Ср";
+"availability_day_thu" = "Чт";
+"availability_day_fri" = "Пт";
+"availability_day_sat" = "Сб";
+"availability_day_sun" = "Нд";

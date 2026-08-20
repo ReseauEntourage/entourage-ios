@@ -1247,17 +1247,17 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "Trimite";
 "messaging_message_no_message" = "Încă 0 mesaje";
 
-"messaging_empty_state_title" = "C'est le début de votre échange";
-"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
-Choisissez un sujet pour démarrer.";
-"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
-"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
-"messaging_empty_chip_question" = "Poser une question 💬";
-"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
-"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
-"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
-"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
-"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+"messaging_empty_state_title" = "Acesta este începutul conversației dumneavoastră";
+"messaging_empty_state_subtitle" = "Nu știți ce să spuneți?
+Alegeți un subiect pentru a începe.";
+"messaging_empty_chip_bonjour" = "Salută 👋";
+"messaging_empty_chip_main" = "Oferă ajutor 🤝";
+"messaging_empty_chip_question" = "Pune o întrebare 💬";
+"messaging_empty_chip_evenement" = "Vorbește despre un eveniment 📅";
+"messaging_empty_draft_bonjour" = "Bună! Am vrut doar să mă prezint și să iau legătura 😊";
+"messaging_empty_draft_main" = "Bună, vă pot da o mână de ajutor dacă aveți nevoie. Nu ezitați să-mi spuneți!";
+"messaging_empty_draft_question" = "Bună, aș avea o mică întrebare pentru dumneavoastră, dacă aveți un moment?";
+"messaging_empty_draft_evenement" = "Bună, ne-am întâlnit la un eveniment și am vrut doar să discut puțin cu dumneavoastră!";
 
 "message_title_new_conv" = "Conversație nouă";
 "message_subtitle_new_conv" = "Încă nu ați interacționat cu acest utilizator. Dacă există o problemă, puteți raporta conversația în setări.";
@@ -1818,3 +1818,72 @@ Choisissez un sujet pour démarrer.";
 "badges_intro_later" = "Mai târziu";
 
 "badge_cta_see_badges" = "Vezi insignele mele";
+
+// MARK: - Fix traduceri lipsă iOS (2026-08-18)
+"login_forgot_code_title" = "Ați uitat codul?";
+"login_label_change_phone_question" = "V-ați schimbat numărul de telefon?";
+
+"onboard_sms_view_title" = "Introduceți codul primit prin SMS";
+"onboard_sms_view_sub" = "Tocmai v-a fost trimis un SMS la:";
+"onboard_sms_view_wait_countdown" = "Veți putea solicita un cod nou în %@";
+"onboard_sms_view_wait_ready" = "Puteți solicita un cod nou.";
+"onboard_retry_view_link" = "Primiți un cod nou prin SMS";
+
+"onboarding_zone_title" = "Locația dumneavoastră";
+"onboarding_zone_subtitle" = "Aceste informații ne ajută să ajustăm acțiunile propuse în apropierea dumneavoastră.";
+"onboarding_zone_city_placeholder_example" = "Ex.: Valence";
+
+"onboarding_phase1_title" = "Informațiile dumneavoastră personale";
+"onboarding_phase1_required_fields" = "(*) câmpuri obligatorii";
+"onboarding_phase1_nav_title" = "Informații";
+
+"neighborhood_post_inspiration_title" = "Aveți nevoie de inspirație?";
+
+"home_v2_small_talk_card_title" = "Alăturați-vă unei discuții solidare";
+"home_v2_small_talk_card_subtitle" = "Vă punem în legătură cu un grup mic care vă împărtășește interesele, oriunde în Franța";
+"home_v2_small_talk_card_button" = "Discută";
+"home_v2_solidarity_tools_title" = "Instrumentele tale solidare";
+"home_v2_tool_card_map" = "Harta locurilor solidare";
+"home_v2_tool_card_pedago" = "Resurse utile";
+"home_v2_tool_card_ethics" = "Carta etică Entourage";
+
+"settings_back_subtitle" = "Înapoi la setări";
+
+"interest_sport_subtitle" = "Fotbal, yoga, baschet…";
+"interest_animaux_subtitle" = "Adăpost, îngrijire, plimbări…";
+"interest_marauding_subtitle" = "Mese, cafea, discuții…";
+"interest_bien_etre_subtitle" = "Relaxare, îngrijire, igienă…";
+"interest_cuisine_subtitle" = "Mese în comun, rețete…";
+"interest_culture_subtitle" = "Ieșiri, muzee, cinema…";
+"interest_nature_subtitle" = "Grădinărit, parcuri, pădure…";
+"interest_jeux_subtitle" = "Jocuri de societate, cărți, jocuri în aer liber…";
+"interest_activites_subtitle" = "Bricolaj, cusut, reparații…";
+
+"hour_morning" = "Dimineața";
+"hour_afternoon" = "După-amiaza";
+"hour_evening" = "Seara";
+
+"neighborhood_post_chip_info_label" = "Informație de cartier 📢";
+"neighborhood_post_chip_info_draft" = "Am vrut să vă împărtășesc o informație despre cartierul nostru: ";
+"neighborhood_post_chip_activity_label" = "Propune o activitate 🎉";
+"neighborhood_post_chip_activity_draft" = "Organizez o mică activitate și aș dori să vă invit! ";
+"neighborhood_post_chip_help_label" = "Cere o mână de ajutor 🤝";
+"neighborhood_post_chip_help_draft" = "Bună tuturor, aș avea nevoie de puțin ajutor pentru ";
+"neighborhood_post_chip_hello_label" = "Salută 👋";
+"neighborhood_post_chip_hello_draft" = "Bună tuturor! Am vrut doar să iau legătura cu grupul 😊";
+"neighborhood_post_chip_share_label" = "Distribuie un conținut 💡";
+"neighborhood_post_chip_share_draft" = "Am găsit ceva interesant pe care vreau să vi-l împărtășesc: ";
+"neighborhood_post_chip_question_label" = "Pune o întrebare ❓";
+"neighborhood_post_chip_question_draft" = "Bună, aș avea o întrebare pentru grup: ";
+"neighborhood_post_chip_exchange_label" = "Propune un schimb de idei 💬";
+"neighborhood_post_chip_exchange_draft" = "Aș dori să discutăm împreună despre acest subiect: ";
+"neighborhood_post_chip_meetup_label" = "Organizează o întâlnire 📅";
+"neighborhood_post_chip_meetup_draft" = "Ce-ar fi să ne întâlnim în curând? Propun ";
+
+"availability_day_mon" = "Lun";
+"availability_day_tue" = "Mar";
+"availability_day_wed" = "Mie";
+"availability_day_thu" = "Joi";
+"availability_day_fri" = "Vin";
+"availability_day_sat" = "Sâm";
+"availability_day_sun" = "Dum";

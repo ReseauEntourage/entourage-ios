@@ -111,10 +111,10 @@
 
 "login_title" = "Connexion";
 
-"login_forgot_code_title" = "Vous avez oublié votre code ?";
+"login_forgot_code_title" = "Zapomniałeś/aś kodu?";
 "login_button_resend_code" = "Recevoir un nouveau code par sms";
 
-"login_label_change_phone_question" = "Vous avez changé de numéro de téléphone ?";
+"login_label_change_phone_question" = "Zmieniłeś/aś numer telefonu?";
 "login_button_change_phone" = "Changer mon numéro";
 
 "login_button_connect" = "Je me connecte";
@@ -1255,17 +1255,17 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "Envoyer";
 "messaging_message_no_message" = "Pas encore de message";
 
-"messaging_empty_state_title" = "C'est le début de votre échange";
-"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
-Choisissez un sujet pour démarrer.";
-"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
-"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
-"messaging_empty_chip_question" = "Poser une question 💬";
-"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
-"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
-"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
-"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
-"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+"messaging_empty_state_title" = "To początek Waszej rozmowy";
+"messaging_empty_state_subtitle" = "Nie wiesz, co napisać?
+Wybierz temat, aby zacząć.";
+"messaging_empty_chip_bonjour" = "Przywitaj się 👋";
+"messaging_empty_chip_main" = "Zaproponuj pomoc 🤝";
+"messaging_empty_chip_question" = "Zadaj pytanie 💬";
+"messaging_empty_chip_evenement" = "Porozmawiaj o wydarzeniu 📅";
+"messaging_empty_draft_bonjour" = "Cześć! Chciałem/am się przedstawić i nawiązać kontakt 😊";
+"messaging_empty_draft_main" = "Cześć, mogę Ci pomóc, jeśli tego potrzebujesz. Śmiało daj mi znać!";
+"messaging_empty_draft_question" = "Cześć, chciałbym/chciałabym zadać Ci krótkie pytanie, jeśli masz chwilę?";
+"messaging_empty_draft_evenement" = "Cześć, spotkaliśmy się na wydarzeniu i chciałem/am po prostu trochę porozmawiać!";
 
 "message_title_new_conv" = "Nouvelle conversation";
 "message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la conversation dans les paramètres.";
@@ -1929,3 +1929,69 @@ Choisissez un sujet pour démarrer.";
 "badges_intro_later" = "Później";
 
 "badge_cta_see_badges" = "Zobacz moje odznaki";
+
+// MARK: - Poprawka brakujących tłumaczeń iOS (2026-08-18)
+"onboard_sms_view_title" = "Wpisz kod otrzymany SMS-em";
+"onboard_sms_view_sub" = "Właśnie wysłano SMS na numer:";
+"onboard_sms_view_wait_countdown" = "Będziesz mógł/mogła poprosić o nowy kod za %@";
+"onboard_sms_view_wait_ready" = "Możesz poprosić o nowy kod.";
+"onboard_retry_view_link" = "Otrzymaj nowy kod SMS-em";
+
+"onboarding_zone_title" = "Twoja lokalizacja";
+"onboarding_zone_subtitle" = "Ta informacja pomaga nam dopracować działania proponowane w Twojej okolicy.";
+"onboarding_zone_city_placeholder_example" = "Np.: Valence";
+
+"onboarding_phase1_title" = "Twoje dane osobowe";
+"onboarding_phase1_required_fields" = "(*) pola wymagane";
+"onboarding_phase1_nav_title" = "Informacje";
+
+"neighborhood_post_inspiration_title" = "Potrzebujesz inspiracji?";
+
+"home_v2_small_talk_card_title" = "Dołącz do rozmowy solidarnościowej";
+"home_v2_small_talk_card_subtitle" = "Łączymy Cię z małą grupą, która dzieli Twoje zainteresowania, w dowolnym miejscu we Francji";
+"home_v2_small_talk_card_button" = "Czatuj";
+"home_v2_solidarity_tools_title" = "Twoje narzędzia solidarności";
+"home_v2_tool_card_map" = "Mapa miejsc solidarnościowych";
+"home_v2_tool_card_pedago" = "Przydatne zasoby";
+"home_v2_tool_card_ethics" = "Karta etyczna Entourage";
+
+"settings_back_subtitle" = "Powrót do ustawień";
+
+"interest_sport_subtitle" = "Piłka nożna, joga, koszykówka…";
+"interest_animaux_subtitle" = "Schronisko, opieka, spacery…";
+"interest_marauding_subtitle" = "Posiłki, kawa, rozmowa…";
+"interest_bien_etre_subtitle" = "Relaks, pielęgnacja, higiena…";
+"interest_cuisine_subtitle" = "Wspólne posiłki, przepisy…";
+"interest_culture_subtitle" = "Wyjścia, muzea, kino…";
+"interest_nature_subtitle" = "Ogrodnictwo, parki, las…";
+"interest_jeux_subtitle" = "Gry planszowe, karty, gry na świeżym powietrzu…";
+"interest_activites_subtitle" = "Majsterkowanie, szycie, naprawy…";
+
+"hour_morning" = "Rano";
+"hour_afternoon" = "Popołudnie";
+"hour_evening" = "Wieczór";
+
+"neighborhood_post_chip_info_label" = "Informacja z sąsiedztwa 📢";
+"neighborhood_post_chip_info_draft" = "Chciałem/am podzielić się informacją dotyczącą naszej okolicy: ";
+"neighborhood_post_chip_activity_label" = "Zaproponuj aktywność 🎉";
+"neighborhood_post_chip_activity_draft" = "Organizuję małe wydarzenie i chciałbym/chciałabym Cię zaprosić! ";
+"neighborhood_post_chip_help_label" = "Poproś o pomoc 🤝";
+"neighborhood_post_chip_help_draft" = "Cześć wszystkim, potrzebowałbym/potrzebowałabym małej pomocy przy ";
+"neighborhood_post_chip_hello_label" = "Przywitaj się 👋";
+"neighborhood_post_chip_hello_draft" = "Cześć wszystkim! Chciałem/am po prostu nawiązać kontakt z grupą 😊";
+"neighborhood_post_chip_share_label" = "Udostępnij treść 💡";
+"neighborhood_post_chip_share_draft" = "Znalazłem/am coś ciekawego, czym chcę się z Wami podzielić: ";
+"neighborhood_post_chip_question_label" = "Zadaj pytanie ❓";
+"neighborhood_post_chip_question_draft" = "Cześć, mam pytanie do grupy: ";
+"neighborhood_post_chip_exchange_label" = "Zaproponuj wymianę zdań 💬";
+"neighborhood_post_chip_exchange_draft" = "Chciałbym/chciałabym, żebyśmy razem porozmawiali o tym temacie: ";
+"neighborhood_post_chip_meetup_label" = "Zorganizuj spotkanie 📅";
+"neighborhood_post_chip_meetup_draft" = "A może spotkalibyśmy się wkrótce? Proponuję ";
+
+"availability_day_mon" = "Pon";
+"availability_day_tue" = "Wt";
+"availability_day_wed" = "Śr";
+"availability_day_thu" = "Czw";
+"availability_day_fri" = "Pt";
+"availability_day_sat" = "Sob";
+"availability_day_sun" = "Nie";
