@@ -35,6 +35,7 @@ class APIErrorPresenter: NSObject {
               !(topVC is APIErrorBottomSheetViewController) else { return }
 
         isPresenting = true
+        topVC.view.endEditing(true)
 
         let sheet = APIErrorBottomSheetViewController()
         sheet.statusCode = statusCode
@@ -43,12 +44,7 @@ class APIErrorPresenter: NSObject {
 
         if #available(iOS 15.0, *) {
             if let sheetController = sheet.sheetPresentationController {
-                if #available(iOS 16.0, *) {
-                    let customDetent = UISheetPresentationController.Detent.custom { _ in 600 }
-                    sheetController.detents = [customDetent]
-                } else {
-                    sheetController.detents = [.large()]
-                }
+                sheetController.detents = [.large()]
                 sheetController.prefersGrabberVisible = true
                 sheetController.prefersScrollingExpandsWhenScrolledToEdge = false
             }

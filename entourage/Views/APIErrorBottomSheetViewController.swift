@@ -29,7 +29,7 @@ class APIErrorBottomSheetViewController: UIViewController {
         let l = UILabel()
         l.text = "ERREUR"
         l.font = UIFont(name: "NunitoSans-Bold", size: 11)
-        l.textColor = UIColor.appOrange
+        l.textColor = UIColor.appOrangeDark
         return l
     }()
 
