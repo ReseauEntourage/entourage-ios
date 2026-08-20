@@ -53,6 +53,7 @@ class EnhancedOnboardingEnd:UIViewController{
             ) { events, error in
                 guard let _events = events else{
                     self.haveEvents = false
+                    self.configureOnboardingEndView()
                     return
                 }
                 var offLineEvent = [Event]()
@@ -69,6 +70,8 @@ class EnhancedOnboardingEnd:UIViewController{
                     self.configureOnboardingEndView()
                 }
             }
+        } else {
+            self.configureOnboardingEndView()
         }
     }
     

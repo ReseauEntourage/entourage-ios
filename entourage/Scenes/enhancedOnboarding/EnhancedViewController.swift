@@ -59,6 +59,12 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
     var associationLogoImage: UIImage?
     var associationDescription: String?
 
+    // "Personne isolée" persona ("je demande de l'aide") — the availability step is skipped
+    // for them in this onboarding flow, but stays reachable from the Profile screen.
+    private var isIsolatedUser: Bool {
+        UserDefaults.currentUser?.goal == "ask_for_help"
+    }
+
     // Référence pour le bouton "Sticky"
     var stickyButtonView: EnahancedOnboardingButtonCell?
 
@@ -264,7 +270,14 @@ class EnhancedViewController: UIViewController, UIImagePickerControllerDelegate,
             return // Already handled in configureForMainFilter (only validate)
         }
 
-        let isLastStep = isAssociationGoal ? (self.mode == .associationPresentation) : (self.mode == .choiceDisponibility)
+        let isLastStep: Bool
+        if isAssociationGoal {
+            isLastStep = (self.mode == .associationPresentation)
+        } else if isIsolatedUser {
+            isLastStep = (self.mode == .concern)
+        } else {
+            isLastStep = (self.mode == .choiceDisponibility)
+        }
 
         if isLastStep {
             buttonView.ui_btn_next.setTitle("action_create_close_button".localized, for: .normal)
@@ -441,6 +454,10 @@ extension EnhancedViewController: EnhancedOnboardingButtonDelegate {
             }
 
         case .concern:
+            if isIsolatedUser {
+                self.updateUserChoices()
+                return
+            }
             mode = .choiceDisponibility
 
         case .choiceDisponibility:
