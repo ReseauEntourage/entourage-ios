@@ -52,9 +52,15 @@ class EventListMainV2ViewController: UIViewController {
     var comeFromDetail = false
     var numberOfFilters = 0
     var selectedItemsFilter = [String: Bool]()
+    var selectedEventTypes = Set<String>()
+    var selectedFormat: String?
     var selectedAddress: String = ""
     var selectedRadius: Float = 0
     var selectedCoordinate: CLLocationCoordinate2D?
+    private var isOnlineFilterValue: Bool? {
+        guard let format = selectedFormat else { return nil }
+        return format == MainFilterFormatID.online
+    }
     private var searchText = ""
     private var mode: ViewMode = .normal
     private var isSearching = false
@@ -343,6 +349,8 @@ class EventListMainV2ViewController: UIViewController {
             vc.mod = .event
             vc.delegate = self
             vc.selectedItems = self.selectedItemsFilter
+            vc.selectedEventTypes = self.selectedEventTypes
+            vc.selectedFormat = self.selectedFormat
             vc.selectedAdressTitle = self.selectedAddress
             vc.selectedRadius = Int(self.selectedRadius)
             vc.selectedAdress = self.selectedCoordinate
@@ -502,7 +510,9 @@ extension EventListMainV2ViewController {
                 radius: self.selectedRadius,
                 latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
                 longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
-                selectedItem: selectedItemsList
+                selectedItem: selectedItemsList,
+                eventTypes: Array(selectedEventTypes),
+                isOnline: isOnlineFilterValue
             ) { events, error in
                 self.handleDiscoverEventResponse(events: events, error: error)
             }
@@ -533,7 +543,9 @@ extension EventListMainV2ViewController {
                 radius: self.selectedRadius,
                 latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
                 longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
-                selectedItem: selectedItemsList
+                selectedItem: selectedItemsList,
+                eventTypes: Array(selectedEventTypes),
+                isOnline: isOnlineFilterValue
             ) { events, error in
                 self.handleMyEventResponse(events: events, error: error)
             }
@@ -650,8 +662,8 @@ extension EventListMainV2ViewController: CellMainFilterDelegate {
 }
 
 extension EventListMainV2ViewController: MainFilterDelegate {
-    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String) {
-        let selectedCount = selectedItems.values.filter { $0 }.count
+    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String, eventTypes: Set<String>, format: String?) {
+        let selectedCount = selectedItems.values.filter { $0 }.count + eventTypes.count + (format != nil ? 1 : 0)
         self.numberOfFilters = selectedCount
         if numberOfFilters > 0 {
             self.ui_tv_number_of_filter.text = String(numberOfFilters)
@@ -660,6 +672,8 @@ extension EventListMainV2ViewController: MainFilterDelegate {
             self.ui_tv_number_of_filter.isHidden = true
         }
         self.selectedItemsFilter = selectedItems
+        self.selectedEventTypes = eventTypes
+        self.selectedFormat = format
         self.selectedCoordinate = coordinate
         self.selectedRadius = radius ?? 0
         self.selectedAddress = adressTitle

@@ -17,6 +17,8 @@ class MainFilterTagItem {
 enum MainFilterDTO {
     case titleCell(title: String)
     case sectionCell(content: String, numberOfItem: Int)
+    case eventTypeCell
+    case formatCell
     case tagCell(choice: MainFilterTagItem)
     case localisationCell(address: String)
     case radiusCell(radius: Int)
@@ -29,8 +31,19 @@ enum MainFilterMode {
     case action
 }
 
+// Ids exchanged with the events list / network layer for the "type" and "format" event filters.
+enum MainFilterEventTypeID {
+    static let entourage = "entourage"
+    static let reservedFemale = "reserved_female"
+}
+
+enum MainFilterFormatID {
+    static let onSite = "onsite"
+    static let online = "online"
+}
+
 protocol MainFilterDelegate: AnyObject {
-    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String)
+    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String, eventTypes: Set<String>, format: String?)
 }
 
 class MainFilter: UIViewController, MainFilterLocationCellDelegate {
@@ -45,6 +58,8 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     var mod: MainFilterMode = .action
     var selectedItems = [String: Bool]()
     var selectedItemsAction = [String: Bool]()
+    var selectedEventTypes = Set<String>()
+    var selectedFormat: String?
     var locationCellHeight: CGFloat = 70 // Default height
     var selectedAdress: CLLocationCoordinate2D?
     var selectedRadius: Int = 40
@@ -60,6 +75,7 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
         ui_tableview.register(UINib(nibName: "MainFilterTitleCell", bundle: nil), forCellReuseIdentifier: "MainFilterTitleCell")
         ui_tableview.register(UINib(nibName: "MainFilterSectionTitleCell", bundle: nil), forCellReuseIdentifier: "MainFilterSectionTitleCell")
         ui_tableview.register(UINib(nibName: "MainFilterTagCell", bundle: nil), forCellReuseIdentifier: "MainFilterTagCell")
+        ui_tableview.register(MainFilterChipsCell.self, forCellReuseIdentifier: MainFilterChipsCell.identifier)
         ui_tableview.register(UINib(nibName: "MainFilterLocationCell", bundle: nil), forCellReuseIdentifier: "MainFilterLocationCell")
         ui_tableview.register(UINib(nibName: "MainFilterDistanceCell", bundle: nil), forCellReuseIdentifier: "MainFilterDistanceCell")
         self.constructFilter()
@@ -105,6 +121,12 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
             ]
             
             tableDTO.append(.titleCell(title: NSLocalizedString("filter_groupevent_filters", comment: "")))
+            if mod == .event {
+                tableDTO.append(.sectionCell(content: NSLocalizedString("filter_event_by_type", comment: ""), numberOfItem: 0))
+                tableDTO.append(.eventTypeCell)
+                tableDTO.append(.sectionCell(content: NSLocalizedString("filter_event_by_format", comment: ""), numberOfItem: 0))
+                tableDTO.append(.formatCell)
+            }
             tableDTO.append(.sectionCell(content: NSLocalizedString("filter_groupevent_by_theme", comment: ""), numberOfItem: selectedItems.values.filter { $0 }.count))
             for interestChoice in interestChoices {
                 if selectedItems[interestChoice.id] == nil {
@@ -176,6 +198,8 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     func resetFilters() {
         self.selectedItems.removeAll()
         self.selectedItemsAction.removeAll()
+        self.selectedEventTypes.removeAll()
+        self.selectedFormat = nil
         self.selectedAdress = nil
         self.selectedRadius = 40
         self.selectedAdressTitle = ""
@@ -211,6 +235,31 @@ extension MainFilter: UITableViewDelegate, UITableViewDataSource {
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "MainFilterSectionTitleCell") as? MainFilterSectionTitleCell {
                 cell.selectionStyle = .none
                 cell.configure(content: content, numberOfItem: numberOfItem)
+                return cell
+            }
+        case .eventTypeCell:
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: MainFilterChipsCell.identifier) as? MainFilterChipsCell {
+                cell.selectionStyle = .none
+                cell.delegate = self
+                var items = [
+                    MainFilterChipItem(id: MainFilterEventTypeID.entourage, title: NSLocalizedString("filter_event_type_entourage", comment: ""), iconName: "ic_entoutou_logo_little", accentColor: .appOrange)
+                ]
+                if UserDefaults.currentUser?.isFemale() == true {
+                    items.append(MainFilterChipItem(id: MainFilterEventTypeID.reservedFemale, title: NSLocalizedString("filter_event_type_reserved_female", comment: ""), iconName: "ic_entoutou_logo_woman", accentColor: .appViolet))
+                }
+                cell.configure(items: items, selectedIds: selectedEventTypes, style: .toggle)
+                return cell
+            }
+        case .formatCell:
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: MainFilterChipsCell.identifier) as? MainFilterChipsCell {
+                cell.selectionStyle = .none
+                cell.delegate = self
+                let items = [
+                    MainFilterChipItem(id: MainFilterFormatID.onSite, title: NSLocalizedString("filter_event_format_onsite", comment: ""), iconName: nil, accentColor: .appOrange),
+                    MainFilterChipItem(id: MainFilterFormatID.online, title: NSLocalizedString("filter_event_format_online", comment: ""), iconName: nil, accentColor: .appOrange)
+                ]
+                let selected = selectedFormat.map { Set([$0]) } ?? Set<String>()
+                cell.configure(items: items, selectedIds: selected, style: .radio)
                 return cell
             }
         case .tagCell(let choice):
@@ -297,6 +346,23 @@ extension MainFilter: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension MainFilter: MainFilterChipsCellDelegate {
+    func mainFilterChipsCell(_ cell: MainFilterChipsCell, didSelect id: String) {
+        switch id {
+        case MainFilterFormatID.onSite, MainFilterFormatID.online:
+            selectedFormat = (selectedFormat == id) ? nil : id
+        default:
+            if selectedEventTypes.contains(id) {
+                selectedEventTypes.remove(id)
+            } else {
+                selectedEventTypes.insert(id)
+            }
+        }
+        guard let indexPath = ui_tableview.indexPath(for: cell) else { return }
+        ui_tableview.reloadRows(at: [indexPath], with: .none)
+    }
+}
+
 extension MainFilter: MainFilterDistanceCellDelegate {
     func onRadiusChanged(radius: Float) {
         self.selectedRadius = Int(radius)
@@ -312,9 +378,9 @@ extension MainFilter: EnhancedOnboardingButtonDelegate {
         print("selected address title", selectedAdressTitle)
         print("selected radius", selectedRadius)
         if mod == .action {
-            delegate?.didUpdateFilter(selectedItems: selectedItemsAction, radius: Float(selectedRadius), coordinate: selectedAdress, adressTitle: self.selectedAdressTitle)
+            delegate?.didUpdateFilter(selectedItems: selectedItemsAction, radius: Float(selectedRadius), coordinate: selectedAdress, adressTitle: self.selectedAdressTitle, eventTypes: [], format: nil)
         } else {
-            delegate?.didUpdateFilter(selectedItems: selectedItems, radius: Float(selectedRadius), coordinate: selectedAdress, adressTitle: self.selectedAdressTitle)
+            delegate?.didUpdateFilter(selectedItems: selectedItems, radius: Float(selectedRadius), coordinate: selectedAdress, adressTitle: self.selectedAdressTitle, eventTypes: selectedEventTypes, format: selectedFormat)
         }
         dismiss(animated: true, completion: nil)
     }

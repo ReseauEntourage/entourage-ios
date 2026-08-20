@@ -1594,6 +1594,12 @@ Choisissez un sujet pour démarrer.";
 
 // filter group event
 "filter_groupevent_filters" = "Filtres";
+"filter_event_by_type" = "Type d'événement";
+"filter_event_type_entourage" = "Événements Entourage";
+"filter_event_type_reserved_female" = "Réservé aux femmes";
+"filter_event_by_format" = "Format";
+"filter_event_format_onsite" = "Présentiel";
+"filter_event_format_online" = "Visio";
 "filter_groupevent_by_theme" = "Par thématique";
 "filter_groupevent_by_location" = "Par localisation";
 "filter_groupevent_by_category" = "Par catégorie";

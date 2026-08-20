@@ -178,8 +178,8 @@ struct EventService:ParsingDataCodable {
         }
     }
     
-    static func getSuggestFilteredEvents(currentPage: Int, per: Int, radius: Float, latitude: Float, longitude: Float, selectedItem: [String], completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
-            
+    static func getSuggestFilteredEvents(currentPage: Int, per: Int, radius: Float, latitude: Float, longitude: Float, selectedItem: [String], eventTypes: [String] = [], isOnline: Bool? = nil, completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
+
             guard let token = UserDefaults.token else { return }
             var stringifiedItems = ""
             if selectedItem.count != 0 {
@@ -190,7 +190,7 @@ struct EventService:ParsingDataCodable {
                     stringifiedItems.removeLast()
                 }
             }
-            
+
             var endpoint: String
             if stringifiedItems.isEmpty {
                 endpoint = kAPIEventGetAllFilteredDiscoverNoInterest
@@ -199,9 +199,21 @@ struct EventService:ParsingDataCodable {
                 endpoint = kAPIEventGetAllFilteredDiscover
                 endpoint = String.init(format: endpoint, token, currentPage, per, radius, latitude, longitude, stringifiedItems)
             }
-            
+            endpoint += eventFilterQueryParams(eventTypes: eventTypes, isOnline: isOnline)
+
             print("event endpoint", endpoint)
             getEventsWithEndpoint(endpoint, completion)
+        }
+
+        private static func eventFilterQueryParams(eventTypes: [String], isOnline: Bool?) -> String {
+            var params = ""
+            if !eventTypes.isEmpty {
+                params += "&type=\(eventTypes.joined(separator: ","))"
+            }
+            if let isOnline = isOnline {
+                params += "&online=\(isOnline)"
+            }
+            return params
         }
         
         fileprivate static func getEventsWithEndpoint(_ endpoint: String, _ completion: @escaping ([Event]?, EntourageNetworkError?) -> Void) {
@@ -660,12 +672,15 @@ struct EventService:ParsingDataCodable {
             }
         }
     }
-    static func getFilteredMyEvents(userId: Int, currentPage: Int, per: Int, radius: Float, latitude: Float, longitude: Float, selectedItem: [String], completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
+    static func getFilteredMyEvents(userId: Int, currentPage: Int, per: Int, radius: Float, latitude: Float, longitude: Float, selectedItem: [String], eventTypes: [String] = [], isOnline: Bool? = nil, completion: @escaping (_ events: [Event]?, _ error: EntourageNetworkError?) -> Void) {
             guard let token = UserDefaults.token else { return }
             let stringifiedItems = selectedItem.joined(separator: ",")
-            var endpoint = String(format: kAPIGetMyFilteredOutings, String(userId), token, currentPage, per, radius, latitude, longitude, stringifiedItems)
-            if stringifiedItems.isEmpty {
-                endpoint = String(format: kAPIEventGetAllForUser,String(userId), token, currentPage, per)
+            var endpoint: String
+            if stringifiedItems.isEmpty && eventTypes.isEmpty && isOnline == nil {
+                endpoint = String(format: kAPIEventGetAllForUser, String(userId), token, currentPage, per)
+            } else {
+                endpoint = String(format: kAPIGetMyFilteredOutings, String(userId), token, currentPage, per, radius, latitude, longitude, stringifiedItems)
+                endpoint += eventFilterQueryParams(eventTypes: eventTypes, isOnline: isOnline)
             }
             getEventsWithEndpoint(endpoint, completion)
         }

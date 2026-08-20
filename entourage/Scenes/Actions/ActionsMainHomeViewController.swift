@@ -995,7 +995,7 @@ extension ActionsMainHomeViewController: FloatyDelegate {
 
 
 extension ActionsMainHomeViewController: MainFilterDelegate {
-    func didUpdateFilter(selectedItems: [String : Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String) {
+    func didUpdateFilter(selectedItems: [String : Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String, eventTypes: Set<String>, format: String?) {
         let selectedCount = selectedItems.values.filter { $0 }.count
         self.numberOfFilter = selectedCount
         

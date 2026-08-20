@@ -480,6 +480,7 @@
 		2630F62D2C2467FD007BAE56 /* MainFilterSectionTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2630F62C2C2467FD007BAE56 /* MainFilterSectionTitleCell.swift */; };
 		2630F62F2C24691B007BAE56 /* MainFilterSectionTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2630F62E2C24691B007BAE56 /* MainFilterSectionTitleCell.xib */; };
 		2630F6312C2470B1007BAE56 /* MainFilterTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2630F6302C2470B1007BAE56 /* MainFilterTagCell.swift */; };
+		C3209CB3DB1C442CB7387993 /* MainFilterChipsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C22B8E48144718912A6869 /* MainFilterChipsCell.swift */; };
 		2630F6332C2472D9007BAE56 /* MainFilterTagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2630F6322C2472D9007BAE56 /* MainFilterTagCell.xib */; };
 		2630F6352C247C13007BAE56 /* MainFilterLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2630F6342C247C13007BAE56 /* MainFilterLocationCell.swift */; };
 		2630F6372C247D7D007BAE56 /* MainFilterLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2630F6362C247D7D007BAE56 /* MainFilterLocationCell.xib */; };
@@ -1150,6 +1151,7 @@
 		2630F62C2C2467FD007BAE56 /* MainFilterSectionTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFilterSectionTitleCell.swift; sourceTree = "<group>"; };
 		2630F62E2C24691B007BAE56 /* MainFilterSectionTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainFilterSectionTitleCell.xib; sourceTree = "<group>"; };
 		2630F6302C2470B1007BAE56 /* MainFilterTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFilterTagCell.swift; sourceTree = "<group>"; };
+		D3C22B8E48144718912A6869 /* MainFilterChipsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFilterChipsCell.swift; sourceTree = "<group>"; };
 		2630F6322C2472D9007BAE56 /* MainFilterTagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainFilterTagCell.xib; sourceTree = "<group>"; };
 		2630F6342C247C13007BAE56 /* MainFilterLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFilterLocationCell.swift; sourceTree = "<group>"; };
 		2630F6362C247D7D007BAE56 /* MainFilterLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainFilterLocationCell.xib; sourceTree = "<group>"; };
@@ -2394,6 +2396,7 @@
 				2630F62C2C2467FD007BAE56 /* MainFilterSectionTitleCell.swift */,
 				2630F62E2C24691B007BAE56 /* MainFilterSectionTitleCell.xib */,
 				2630F6302C2470B1007BAE56 /* MainFilterTagCell.swift */,
+				D3C22B8E48144718912A6869 /* MainFilterChipsCell.swift */,
 				2630F6322C2472D9007BAE56 /* MainFilterTagCell.xib */,
 				2630F6342C247C13007BAE56 /* MainFilterLocationCell.swift */,
 				2630F6362C247D7D007BAE56 /* MainFilterLocationCell.xib */,
@@ -3213,6 +3216,7 @@
 				02A92C222897E68B000DFF95 /* ActionCreatePhase1ViewController.swift in Sources */,
 				0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */,
 				2630F6312C2470B1007BAE56 /* MainFilterTagCell.swift in Sources */,
+				C3209CB3DB1C442CB7387993 /* MainFilterChipsCell.swift in Sources */,
 				26AD11A62AEFF99900FA7BEC /* OnboardingLanguageStoryBoard.swift in Sources */,
 				0268197D278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift in Sources */,
 				26D13E2C2BA43E8A00CAD4F7 /* SurveyService.swift in Sources */,

@@ -546,7 +546,7 @@ extension NeighborhoodV2ViewController: CellMainFilterDelegate {
 }
 
 extension NeighborhoodV2ViewController: MainFilterDelegate {
-    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String) {
+    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String, eventTypes: Set<String>, format: String?) {
         let selectedCount = selectedItems.values.filter { $0 }.count
         self.numberOfFilter = selectedCount
         self.selectedItemsFilter = selectedItems
