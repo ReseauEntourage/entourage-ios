@@ -76,7 +76,6 @@ class ActionDeletePopsViewController: UIViewController {
         configureWhiteButton(ui_bt_no, withTitle: "params_cancel_action_pop_bt_no".localized)
         
         ui_bt_yes.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
-        ui_bt_no.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_bt_send.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         
         ui_title_demand.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
