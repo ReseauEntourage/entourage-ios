@@ -12,8 +12,12 @@ class AvailabilityGridCell: UITableViewCell {
     weak var delegate: AvailabilityGridCellDelegate?
 
     private let stackView = UIStackView()
-    private let dayAbbreviations = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"]
-    private let slotTitles = ["Matin", "Après-midi", "Soir"]
+    private let dayAbbreviations = [
+        "availability_day_mon".localized, "availability_day_tue".localized, "availability_day_wed".localized,
+        "availability_day_thu".localized, "availability_day_fri".localized, "availability_day_sat".localized,
+        "availability_day_sun".localized
+    ]
+    private let slotTitles = ["hour_morning".localized, "hour_afternoon".localized, "hour_evening".localized]
 
     // [dayIndex: Set<slotIndex>]  (0=Lun…6=Dim, 0=Matin 1=AM 2=Soir)
     var availability: [Int: Set<Int>] = [:]
@@ -86,6 +90,11 @@ class AvailabilityGridCell: UITableViewCell {
         btn.setTitle(title, for: .normal)
         btn.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 13)
         btn.setTitleColor(.black, for: .normal)
+        btn.titleLabel?.textAlignment = .center
+        btn.titleLabel?.numberOfLines = 0
+        btn.titleLabel?.lineBreakMode = .byWordWrapping
+        btn.contentHorizontalAlignment = .center
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
         btn.layer.cornerRadius = 20
         btn.layer.borderWidth = 1.5
         btn.layer.borderColor = UIColor.appGrey151.cgColor

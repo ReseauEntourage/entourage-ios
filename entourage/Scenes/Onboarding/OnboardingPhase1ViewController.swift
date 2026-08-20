@@ -438,7 +438,7 @@ struct OnboardingPhase1View: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 // Titre principal pour la section « Informations personnelles »
-                Text("Vos informations personnelles")
+                Text("onboarding_phase1_title".localized)
                     .font(.entourageTitle(20))
                     .padding(.leading, 0)
                     .padding(.top, 20)
@@ -452,7 +452,7 @@ struct OnboardingPhase1View: View {
 
                 ProfileSection(vm: vm)
 
-                Text("(*) champs obligatoires")
+                Text("onboarding_phase1_required_fields".localized)
                     .font(.entourageBody(15))
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -470,7 +470,7 @@ struct OnboardingPhase1View: View {
             vm.pushToDelegate()
             vm.recomputeCanProceed()
         }
-        .navigationBarTitle("Informations", displayMode: .inline)
+        .navigationBarTitle("onboarding_phase1_nav_title".localized, displayMode: .inline)
         .sheet(isPresented: $showDateSheet) {
             DateSheet(tempDate: $tempDate) {
                 vm.birthday = nil
@@ -870,7 +870,7 @@ final class OnboardingPhase1ViewController: UIHostingController<OnboardingPhase1
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Informations"
+        navigationItem.title = "onboarding_phase1_nav_title".localized
     }
 
     // Compat avec l’ancien nom
