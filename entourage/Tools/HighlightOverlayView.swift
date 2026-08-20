@@ -17,10 +17,21 @@ class HighlightOverlayView: UIView {
         self.targetView = targetView
         super.init(frame: UIScreen.main.bounds)
         self.backgroundColor = .clear
+        // Requis pour que le "trou" (blend mode .clear) soit réellement transparent :
+        // sinon la vue est compositée comme opaque et le trou reste noir.
+        self.isOpaque = false
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // Le cadre de targetView peut ne pas être stabilisé au premier passage
+        // (ex: juste après un changement d'onglet) : on redessine à chaque layout
+        // pour que le cercle reste aligné sur l'icône réelle.
+        setNeedsDisplay()
     }
 
     override func draw(_ rect: CGRect) {

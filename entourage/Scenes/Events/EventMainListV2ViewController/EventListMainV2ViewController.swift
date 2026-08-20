@@ -691,9 +691,16 @@ extension EventListMainV2ViewController: MainFilterDelegate {
 
 extension EventListMainV2ViewController {
     func showHighlightOverlay(targetView: UIView, withBubbleText text: String) {
+        // S'assure que targetView a bien sa position finale avant de calculer le cercle
+        self.view.layoutIfNeeded()
+
         // Crée l'overlay
         let overlayView = HighlightOverlayView(targetView: targetView)
         overlayView.frame = self.view.bounds
+
+        // Ajoute l'overlay à la vue principale avant de construire la bulle,
+        // pour que la conversion de coordonnées se fasse dans une hiérarchie de vues valide
+        self.view.addSubview(overlayView)
 
         // Ajoute la bulle
         overlayView.addBubble(with: text, below: targetView)
@@ -701,9 +708,6 @@ extension EventListMainV2ViewController {
         // Gérer le clic sur l'overlay pour le retirer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeOverlay(_:)))
         overlayView.addGestureRecognizer(tapGesture)
-
-        // Ajoute l'overlay à la vue principale
-        self.view.addSubview(overlayView)
     }
 
     @objc private func removeOverlay(_ sender: UITapGestureRecognizer) {
