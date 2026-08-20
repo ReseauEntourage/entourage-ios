@@ -526,7 +526,8 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
         } else {
             isAlreadyClearRows = false
         }
-        ui_view_no_result.isHidden = !usersSearch.isEmpty
+        // No text has been typed yet, so there is no "no result" state to show.
+        ui_view_no_result.isHidden = true
     }
 }
 
