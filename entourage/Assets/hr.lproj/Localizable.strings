@@ -719,6 +719,7 @@
 "neighborhood_post_group_section_title" = "Fil d’actualités";
 "neighborhood_post_group_section_new_posts_title" = "Nouvelles publications";
 "neighborhood_post_group_section_old_posts_title" = "Anciennes publications";
+"neighborhood_post_not_found_toast" = "Ce post n'est plus disponible";
 "neighborhood_empty_event_title" = "Pas encore d’événements prévus dans ce groupe";
 "neighborhood_empty_event_subtitle" = "Cliquez sur « + » pour en créer un";
 "neighborhood_empty_post_title" = "Il n'y a pas (encore) de publication sur ce groupe";

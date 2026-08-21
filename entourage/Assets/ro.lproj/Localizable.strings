@@ -729,6 +729,7 @@
 "neighborhood_post_group_section_title" = "Flux de știri";
 "neighborhood_post_group_section_new_posts_title" = "Publicații noi";
 "neighborhood_post_group_section_old_posts_title" = "Publicații vechi";
+"neighborhood_post_not_found_toast" = "Această publicație nu mai este disponibilă";
 "neighborhood_empty_event_title" = "Încă nu au fost planificate evenimente în acest grup";
 "neighborhood_empty_event_subtitle" = "Faceți clic pe „+” pentru a crea unul";
 "neighborhood_empty_post_title" = "Nu există postări (încă) în acest grup";

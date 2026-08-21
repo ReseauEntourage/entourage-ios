@@ -85,7 +85,7 @@ struct DeepLinkManager {
         case .conversations:
             showConversation(conversationId: notification.instanceId)
         case .neighborhoods:
-            showNeighborhoodDetail(id: notification.instanceId)
+            showNeighborhoodDetail(id: notification.instanceId, targetPostId: notification.postId)
         case .outings:
             showOuting(id: notification.instanceId)
         case .partners:
@@ -120,7 +120,7 @@ struct DeepLinkManager {
             showBirthday(presenter: presenter)
         }
     }
-    
+
     static func presentActionFromDeeplink(notification:NotificationPushData) {
         if notification.tracking == "outing_message"{
             showConversation(conversationId: notification.instanceId)
@@ -135,7 +135,7 @@ struct DeepLinkManager {
         case .conversations:
             showConversation(conversationId: notification.instanceId)
         case .neighborhoods:
-            showNeighborhoodDetail(id: notification.instanceId)
+            showNeighborhoodDetail(id: notification.instanceId, targetPostId: notification.postId)
         case .outings:
             showOuting(id: notification.instanceId)
         case .partners:
@@ -277,13 +277,14 @@ struct DeepLinkManager {
         }
     }
     
-    static func showNeighborhoodDetail(id:Int) {
+    static func showNeighborhoodDetail(id:Int, targetPostId:Int? = nil) {
         let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
         if let navVC = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodDetailViewController {
             vc.isAfterCreation = false
             vc.neighborhoodId = id
             vc.isShowCreatePost = false
             vc.neighborhood = nil
+            vc.targetPostId = targetPostId
             AppState.getTopViewController()?.present(navVC, animated: true)
         }
     }

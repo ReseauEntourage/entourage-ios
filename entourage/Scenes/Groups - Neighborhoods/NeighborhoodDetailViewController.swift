@@ -47,6 +47,13 @@ class NeighborhoodDetailViewController: UIViewController {
     var isLoading = false
     var isAfterCreation = true
     var isShowCreatePost = false
+
+    // Post à cibler après ouverture depuis une notification/deeplink : on pagine
+    // automatiquement jusqu'à le trouver, puis on scrolle et on le met en surbrillance.
+    var targetPostId: Int? = nil
+    private var isAutoSearchingForPost = false
+    private var reachedEndOfPosts = false
+    private let maxAutoPaginationPages = 40
     
     let DELETED_POST_CELL_SIZE = 165.0
     let TEXT_POST_CELL_SIZE = 220.0
@@ -260,8 +267,8 @@ class NeighborhoodDetailViewController: UIViewController {
                 self.splitMessages()
                 
                 // Récupère les posts et recharge la table view une fois terminé
-                self.getMorePosts {
-                
+                self.getMorePosts { [weak self] in
+                    self?.handlePotentialTargetPostAfterLoad()
                 }
                 
                 if hasToRefreshLists {
@@ -276,21 +283,77 @@ class NeighborhoodDetailViewController: UIViewController {
         NeighborhoodService.getNeighborhoodPostsPaging(id: neighborhoodId, currentPage: currentPagingPage, per: itemsPerPage) { [weak self] posts, error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                
+
                 guard let posts = posts, error == nil else {
                     self.isLoading = false
+                    self.reachedEndOfPosts = true
                     completion()
                     return
                 }
-                
+
                 // Ajoute les nouveaux posts à la data source
                 self.neighborhood?.messages?.append(contentsOf: posts)
+                self.reachedEndOfPosts = posts.count < self.itemsPerPage
                 self.splitMessages()
                 self.ui_tableview.reloadData()
                 self.isLoading = false
                 completion()
             }
         }
+    }
+
+    // MARK: - Scroll vers un post ciblé (venant d'une notification/deeplink) -
+
+    /// Cherche `targetPostId` dans les posts déjà chargés. Si trouvé, scrolle et surligne la cellule.
+    /// Sinon, pagine automatiquement jusqu'à le trouver ou jusqu'à la fin du fil (ou une limite de sécurité),
+    /// auquel cas on prévient l'utilisateur que le post n'est plus disponible.
+    private func handlePotentialTargetPostAfterLoad() {
+        guard let targetPostId = targetPostId else { return }
+
+        if let index = neighborhood?.messages?.firstIndex(where: { $0.uid == targetPostId }) {
+            self.targetPostId = nil
+            self.isAutoSearchingForPost = false
+            SVProgressHUD.dismiss()
+            scrollAndHighlightPost(at: index)
+            return
+        }
+
+        if reachedEndOfPosts || currentPagingPage >= maxAutoPaginationPages {
+            self.targetPostId = nil
+            self.isAutoSearchingForPost = false
+            SVProgressHUD.dismiss()
+            self.view.showToast(message: "neighborhood_post_not_found_toast".localized, duration: 3.0)
+            return
+        }
+
+        isAutoSearchingForPost = true
+        SVProgressHUD.show()
+        currentPagingPage += 1
+        getMorePosts { [weak self] in
+            self?.handlePotentialTargetPostAfterLoad()
+        }
+    }
+
+    private func scrollAndHighlightPost(at messageIndex: Int) {
+        let indexPath = IndexPath(row: messageIndex + countToAdd(), section: 1)
+        ui_tableview.layoutIfNeeded()
+        guard indexPath.section < ui_tableview.numberOfSections,
+              indexPath.row < ui_tableview.numberOfRows(inSection: indexPath.section) else { return }
+
+        ui_tableview.scrollToRow(at: indexPath, at: .middle, animated: true)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let cell = self?.ui_tableview.cellForRow(at: indexPath) else { return }
+            self?.flashHighlight(on: cell)
+        }
+    }
+
+    private func flashHighlight(on cell: UITableViewCell) {
+        let originalColor = cell.contentView.backgroundColor
+        cell.contentView.backgroundColor = UIColor.appOrangeLight.withAlphaComponent(0.35)
+        UIView.animate(withDuration: 1.0, delay: 0.4, options: .curveEaseOut, animations: {
+            cell.contentView.backgroundColor = originalColor
+        })
     }
 
 
@@ -681,7 +744,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     
     //Use to paging tableview ;)
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if isLoading { return }
+        if isLoading || isAutoSearchingForPost { return }
         
         var realIndex:Int
         

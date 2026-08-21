@@ -725,6 +725,7 @@
 "neighborhood_post_group_section_title" = "Noticias";
 "neighborhood_post_group_section_new_posts_title" = "Nuevas publicaciones";
 "neighborhood_post_group_section_old_posts_title" = "Publicaciones antiguas";
+"neighborhood_post_not_found_toast" = "Esta publicación ya no está disponible";
 "neighborhood_empty_event_title" = "Aún no hay eventos planificados en este grupo";
 "neighborhood_empty_event_subtitle" = "Haga clic en “+” para crear uno";
 "neighborhood_empty_post_title" = "No hay publicaciones (todavía) en este grupo.";
@@ -2167,6 +2168,7 @@ Elige un tema para empezar.";
 "neighborhood_post_group_section_title" = "Noticias";
 "neighborhood_post_group_section_new_posts_title" = "Nuevas publicaciones";
 "neighborhood_post_group_section_old_posts_title" = "Publicaciones antiguas";
+"neighborhood_post_not_found_toast" = "Esta publicación ya no está disponible";
 "neighborhood_empty_event_title" = "Aún no hay eventos planificados en este grupo";
 "neighborhood_empty_event_subtitle" = "Haga clic en “+” para crear uno";
 "neighborhood_empty_post_title" = "No hay publicaciones (todavía) en este grupo.";

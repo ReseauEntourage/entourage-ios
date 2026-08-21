@@ -720,6 +720,7 @@
 "neighborhood_post_group_section_title" = "تغذية الأخبار";
 "neighborhood_post_group_section_new_posts_title" = "منشورات جديدة";
 "neighborhood_post_group_section_old_posts_title" = "منشورات قديمة";
+"neighborhood_post_not_found_toast" = "لم يعد هذا المنشور متاحًا";
 "neighborhood_empty_event_title" = "لم يتم التخطيط لأي أحداث في هذه المجموعة حتى الآن";
 "neighborhood_empty_event_subtitle" = "انقر فوق  لإنشاء واحدة";
 "neighborhood_empty_post_title" = "لا توجد مشاركات (حتى الآن) في هذه المجموعة";

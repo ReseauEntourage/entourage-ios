@@ -725,6 +725,7 @@
 "neighborhood_post_group_section_title" = "Стрічка новин";
 "neighborhood_post_group_section_new_posts_title" = "Нові публікації";
 "neighborhood_post_group_section_old_posts_title" = "Старі видання";
+"neighborhood_post_not_found_toast" = "Ця публікація більше недоступна";
 "neighborhood_empty_event_title" = "У цій групі ще не заплановано жодної події";
 "neighborhood_empty_event_subtitle" = "Натисніть «+», щоб створити його";
 "neighborhood_empty_post_title" = "У цій групі (поки що) немає публікацій";

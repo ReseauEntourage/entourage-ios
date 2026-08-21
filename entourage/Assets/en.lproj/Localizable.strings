@@ -714,6 +714,7 @@
 "neighborhood_post_group_section_title" = "Feed";
 "neighborhood_post_group_section_new_posts_title" = "New publications";
 "neighborhood_post_group_section_old_posts_title" = "Old publications";
+"neighborhood_post_not_found_toast" = "This post is no longer available";
 "neighborhood_empty_event_title" = "No events planned in this group yet";
 "neighborhood_empty_event_subtitle" = "Click “+” to create one";
 "neighborhood_empty_post_title" = "There are no posts (yet) on this group";
