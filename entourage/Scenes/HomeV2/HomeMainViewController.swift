@@ -408,8 +408,23 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_image_user_avatar.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onAvatarClick))
         ui_image_user_avatar.addGestureRecognizer(tapGestureRecognizer)
+
+        #if DEBUG
+        ui_logo_entourage.isUserInteractionEnabled = true
+        ui_logo_entourage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onLogoDebugTestNotifClick)))
+        #endif
     }
-    
+
+    #if DEBUG
+    // Rejoue exactement le chemin d'une vraie notif in-app/push (voir NotificationsInAppViewController.didSelectRowAt)
+    // pour vérifier le scroll + highlight sur un post précis sans attendre un vrai envoi backend.
+    // Données de staging : groupe "Voisin Dijon" (id 286), post "Test pour click" (id 54621).
+    @objc private func onLogoDebugTestNotifClick() {
+        let notification = NotificationPushData(instanceName: "neighborhood", instanceId: 286, postId: 54621)
+        DeepLinkManager.presentAction(notification: notification, presenter: self)
+    }
+    #endif
+
     @objc func onAvatarClick() {
         AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
         let profileView = MyProfileView(viewModel: self.profileViewModel)

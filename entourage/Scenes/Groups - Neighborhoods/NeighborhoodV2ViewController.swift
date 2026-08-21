@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import SVProgressHUD
 import MapKit
 
 private enum GroupListTableDTO {
@@ -49,6 +48,9 @@ class NeighborhoodV2ViewController: UIViewController {
     private var numberOfItemsForWS = 10
     private var isLastPage = false
     var pullRefreshControl = UIRefreshControl()
+    private var skeletonOverlayView: PostsSkeletonOverlayView?
+    private var skeletonShownAt: CFAbsoluteTime? = nil
+    private let skeletonMinimumDuration: TimeInterval = 1.0
     var numberOfFilter = 0
     var selectedItemsFilter = [String: Bool]()
     var selectedAddress: String = ""
@@ -154,10 +156,37 @@ class NeighborhoodV2ViewController: UIViewController {
         self.tabBarController?.present(navVC, animated: true)
     }
     
+    private func showSkeletonOverlay() {
+        guard skeletonOverlayView == nil else { return }
+        skeletonShownAt = CFAbsoluteTimeGetCurrent()
+        let overlay = PostsSkeletonOverlayView(frame: ui_table_view.frame)
+        self.view.insertSubview(overlay, aboveSubview: ui_table_view)
+        skeletonOverlayView = overlay
+    }
+
+    private func hideSkeletonOverlay() {
+        skeletonOverlayView?.removeFromSuperview()
+        skeletonOverlayView = nil
+        skeletonShownAt = nil
+    }
+
+    /// Laisse le skeleton visible au moins `skeletonMinimumDuration` au total, même si les données
+    /// arrivent plus vite — sinon le shimmer n'a pas le temps de s'animer.
+    private func hideSkeletonOverlayRespectingMinimumDuration(_ completion: @escaping () -> Void = {}) {
+        let elapsed = skeletonShownAt.map { CFAbsoluteTimeGetCurrent() - $0 } ?? skeletonMinimumDuration
+        let remaining = max(0, skeletonMinimumDuration - elapsed)
+        DispatchQueue.main.asyncAfter(deadline: .now() + remaining) { [weak self] in
+            self?.hideSkeletonOverlay()
+            completion()
+        }
+    }
+
     func loadForInit() {
         isLoading = true
         isLastPage = false
-        SVProgressHUD.show()
+        if !pullRefreshControl.isRefreshing {
+            showSkeletonOverlay()
+        }
         self.currentPageMy = 0
         self.currentPageDiscover = 0
         self.myGroups.removeAll()
@@ -330,7 +359,7 @@ class NeighborhoodV2ViewController: UIViewController {
         }
         self.pullRefreshControl.endRefreshing()
         isLoading = false
-        SVProgressHUD.dismiss()
+        hideSkeletonOverlayRespectingMinimumDuration()
         if self.startSearching {
             self.startSearching = false
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {

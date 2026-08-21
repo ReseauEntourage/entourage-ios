@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 import SDWebImage
-import SVProgressHUD
 import MapKit
 
 private enum EventListTableDTO {
@@ -47,6 +46,9 @@ class EventListMainV2ViewController: UIViewController {
     private var isLoading = false
     private var isOnlyDiscoverPagination = false
     var pullRefreshControl = UIRefreshControl()
+    private var skeletonOverlayView: PostsSkeletonOverlayView?
+    private var skeletonShownAt: CFAbsoluteTime? = nil
+    private let skeletonMinimumDuration: TimeInterval = 1.0
     var isEndOfDiscoverList = false
     var isEndOfMyEventList = false
     var comeFromDetail = false
@@ -195,9 +197,36 @@ class EventListMainV2ViewController: UIViewController {
         }
     }
 
+    private func showSkeletonOverlay() {
+        guard skeletonOverlayView == nil else { return }
+        skeletonShownAt = CFAbsoluteTimeGetCurrent()
+        let overlay = PostsSkeletonOverlayView(frame: ui_table_view.frame)
+        self.view.insertSubview(overlay, aboveSubview: ui_table_view)
+        skeletonOverlayView = overlay
+    }
+
+    private func hideSkeletonOverlay() {
+        skeletonOverlayView?.removeFromSuperview()
+        skeletonOverlayView = nil
+        skeletonShownAt = nil
+    }
+
+    /// Laisse le skeleton visible au moins `skeletonMinimumDuration` au total, même si les données
+    /// arrivent plus vite — sinon le shimmer n'a pas le temps de s'animer.
+    private func hideSkeletonOverlayRespectingMinimumDuration(_ completion: @escaping () -> Void = {}) {
+        let elapsed = skeletonShownAt.map { CFAbsoluteTimeGetCurrent() - $0 } ?? skeletonMinimumDuration
+        let remaining = max(0, skeletonMinimumDuration - elapsed)
+        DispatchQueue.main.asyncAfter(deadline: .now() + remaining) { [weak self] in
+            self?.hideSkeletonOverlay()
+            completion()
+        }
+    }
+
     func loadForInit() {
         isLoading = true
-        SVProgressHUD.show()
+        if !pullRefreshControl.isRefreshing {
+            showSkeletonOverlay()
+        }
         if !isFromFilter {
             currentFilter = EventActionLocationFilters()
         }
@@ -300,7 +329,7 @@ class EventListMainV2ViewController: UIViewController {
 
         self.pullRefreshControl.endRefreshing()
         isLoading = false
-        SVProgressHUD.dismiss()
+        hideSkeletonOverlayRespectingMinimumDuration()
         if self.startSearching {
             self.startSearching = false
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {

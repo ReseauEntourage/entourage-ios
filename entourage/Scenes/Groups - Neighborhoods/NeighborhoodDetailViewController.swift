@@ -54,6 +54,9 @@ class NeighborhoodDetailViewController: UIViewController {
     private var isAutoSearchingForPost = false
     private var reachedEndOfPosts = false
     private let maxAutoPaginationPages = 40
+    private var skeletonOverlayView: PostsSkeletonOverlayView?
+    private var skeletonShownAt: CFAbsoluteTime? = nil
+    private let skeletonMinimumDuration: TimeInterval = 1.0
     
     let DELETED_POST_CELL_SIZE = 165.0
     let TEXT_POST_CELL_SIZE = 220.0
@@ -265,7 +268,13 @@ class NeighborhoodDetailViewController: UIViewController {
                 // Réinitialise le tableau des messages et les tableaux auxiliaires
                 self.neighborhood?.messages = []
                 self.splitMessages()
-                
+
+                // Masque le fil pendant le chargement (initial ou venant d'un autre écran) — sauf en
+                // pull-to-refresh, où le spinner natif de la table suffit déjà.
+                if !self.pullRefreshControl.isRefreshing {
+                    self.showSkeletonOverlay()
+                }
+
                 // Récupère les posts et recharge la table view une fois terminé
                 self.getMorePosts { [weak self] in
                     self?.handlePotentialTargetPostAfterLoad()
@@ -304,56 +313,74 @@ class NeighborhoodDetailViewController: UIViewController {
 
     // MARK: - Scroll vers un post ciblé (venant d'une notification/deeplink) -
 
-    /// Cherche `targetPostId` dans les posts déjà chargés. Si trouvé, scrolle et surligne la cellule.
+    /// Cherche `targetPostId` dans les posts déjà chargés. Si trouvé, scrolle jusqu'à la cellule.
     /// Sinon, pagine automatiquement jusqu'à le trouver ou jusqu'à la fin du fil (ou une limite de sécurité),
     /// auquel cas on prévient l'utilisateur que le post n'est plus disponible.
     private func handlePotentialTargetPostAfterLoad() {
-        guard let targetPostId = targetPostId else { return }
+        guard let targetPostId = targetPostId else {
+            hideSkeletonOverlayRespectingMinimumDuration {}
+            return
+        }
 
         if let index = neighborhood?.messages?.firstIndex(where: { $0.uid == targetPostId }) {
             self.targetPostId = nil
             self.isAutoSearchingForPost = false
-            SVProgressHUD.dismiss()
-            scrollAndHighlightPost(at: index)
+            hideSkeletonOverlayRespectingMinimumDuration { [weak self] in
+                self?.scrollToTargetPost(at: index)
+            }
             return
         }
 
         if reachedEndOfPosts || currentPagingPage >= maxAutoPaginationPages {
             self.targetPostId = nil
             self.isAutoSearchingForPost = false
-            SVProgressHUD.dismiss()
-            self.view.showToast(message: "neighborhood_post_not_found_toast".localized, duration: 3.0)
+            hideSkeletonOverlayRespectingMinimumDuration { [weak self] in
+                self?.view.showToast(message: "neighborhood_post_not_found_toast".localized, duration: 3.0)
+            }
             return
         }
 
         isAutoSearchingForPost = true
-        SVProgressHUD.show()
+        showSkeletonOverlay()
         currentPagingPage += 1
         getMorePosts { [weak self] in
             self?.handlePotentialTargetPostAfterLoad()
         }
     }
 
-    private func scrollAndHighlightPost(at messageIndex: Int) {
+    private func showSkeletonOverlay() {
+        guard skeletonOverlayView == nil else { return }
+        skeletonShownAt = CFAbsoluteTimeGetCurrent()
+        let overlay = PostsSkeletonOverlayView(frame: ui_tableview.frame)
+        self.view.insertSubview(overlay, aboveSubview: ui_tableview)
+        skeletonOverlayView = overlay
+    }
+
+    private func hideSkeletonOverlay() {
+        skeletonOverlayView?.removeFromSuperview()
+        skeletonOverlayView = nil
+        skeletonShownAt = nil
+    }
+
+    /// Laisse le skeleton visible au moins `skeletonMinimumDuration` au total, même si le post
+    /// a été trouvé (ou la recherche abandonnée) plus vite — sinon le shimmer n'a pas le temps de s'animer.
+    private func hideSkeletonOverlayRespectingMinimumDuration(_ completion: @escaping () -> Void) {
+        let elapsed = skeletonShownAt.map { CFAbsoluteTimeGetCurrent() - $0 } ?? skeletonMinimumDuration
+        let remaining = max(0, skeletonMinimumDuration - elapsed)
+        DispatchQueue.main.asyncAfter(deadline: .now() + remaining) { [weak self] in
+            self?.hideSkeletonOverlay()
+            completion()
+        }
+    }
+
+    private func scrollToTargetPost(at messageIndex: Int) {
         let indexPath = IndexPath(row: messageIndex + countToAdd(), section: 1)
         ui_tableview.layoutIfNeeded()
         guard indexPath.section < ui_tableview.numberOfSections,
               indexPath.row < ui_tableview.numberOfRows(inSection: indexPath.section) else { return }
 
-        ui_tableview.scrollToRow(at: indexPath, at: .middle, animated: true)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            guard let cell = self?.ui_tableview.cellForRow(at: indexPath) else { return }
-            self?.flashHighlight(on: cell)
-        }
-    }
-
-    private func flashHighlight(on cell: UITableViewCell) {
-        let originalColor = cell.contentView.backgroundColor
-        cell.contentView.backgroundColor = UIColor.appOrangeLight.withAlphaComponent(0.35)
-        UIView.animate(withDuration: 1.0, delay: 0.4, options: .curveEaseOut, animations: {
-            cell.contentView.backgroundColor = originalColor
-        })
+        // Pas d'animation : le skeleton masquait déjà le fil, le post apparaît directement en place.
+        ui_tableview.scrollToRow(at: indexPath, at: .middle, animated: false)
     }
 
 

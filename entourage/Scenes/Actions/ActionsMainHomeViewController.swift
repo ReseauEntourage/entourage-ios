@@ -1,6 +1,5 @@
 import UIKit
 import IQKeyboardManagerSwift
-import SVProgressHUD
 import MapKit
 
 enum ActionMode {
@@ -62,7 +61,10 @@ class ActionsMainHomeViewController: UIViewController {
     var topSafeAreaInsets: CGFloat = 0
     
     var pullRefreshControl = UIRefreshControl()
-    
+    private var skeletonOverlayView: PostsSkeletonOverlayView?
+    private var skeletonShownAt: CFAbsoluteTime? = nil
+    private let skeletonMinimumDuration: TimeInterval = 1.0
+
     private var isfirstLoadingContrib = true
     
     var isLoading = false
@@ -399,13 +401,38 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     //MARK: - Network -
+    private func showSkeletonOverlay() {
+        guard skeletonOverlayView == nil else { return }
+        skeletonShownAt = CFAbsoluteTimeGetCurrent()
+        let overlay = PostsSkeletonOverlayView(frame: ui_tableview.frame)
+        self.view.insertSubview(overlay, aboveSubview: ui_tableview)
+        skeletonOverlayView = overlay
+    }
+
+    private func hideSkeletonOverlay() {
+        skeletonOverlayView?.removeFromSuperview()
+        skeletonOverlayView = nil
+        skeletonShownAt = nil
+    }
+
+    /// Laisse le skeleton visible au moins `skeletonMinimumDuration` au total, même si les données
+    /// arrivent plus vite — sinon le shimmer n'a pas le temps de s'animer.
+    private func hideSkeletonOverlayRespectingMinimumDuration(_ completion: @escaping () -> Void = {}) {
+        let elapsed = skeletonShownAt.map { CFAbsoluteTimeGetCurrent() - $0 } ?? skeletonMinimumDuration
+        let remaining = max(0, skeletonMinimumDuration - elapsed)
+        DispatchQueue.main.asyncAfter(deadline: .now() + remaining) { [weak self] in
+            self?.hideSkeletonOverlay()
+            completion()
+        }
+    }
+
     func loadDataBasedOnMode(isReloadFromTab: Bool = false, reloadOther: Bool = false) {
         if self.isLoading { return }
-        
+
         if self.contribs.isEmpty { self.ui_tableview.reloadData() }
-        
-        if !isReloadFromTab {
-            SVProgressHUD.show()
+
+        if !isReloadFromTab && !pullRefreshControl.isRefreshing {
+            showSkeletonOverlay()
         }
         
         self.isLoading = true
@@ -433,7 +460,7 @@ class ActionsMainHomeViewController: UIViewController {
     func handleActionsResponse(isReloadFromTab: Bool, reloadOther: Bool) -> ([Action]?, EntourageNetworkError?) -> Void {
         return { actions, error in
             DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
+                self.hideSkeletonOverlayRespectingMinimumDuration()
                 self.isfirstLoadingContrib = false
                 self.pullRefreshControl.endRefreshing()
                 if let actions = actions {
@@ -471,7 +498,7 @@ class ActionsMainHomeViewController: UIViewController {
     func handleSolicitationsResponse(isReloadFromTab: Bool, reloadOther: Bool) -> ([Action]?, EntourageNetworkError?) -> Void {
         return { actions, error in
             DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
+                self.hideSkeletonOverlayRespectingMinimumDuration()
                 self.pullRefreshControl.endRefreshing()
 
                 if let actions = actions {
@@ -504,11 +531,13 @@ class ActionsMainHomeViewController: UIViewController {
     
     func getMyActions() {
 
-        SVProgressHUD.show()
+        if !pullRefreshControl.isRefreshing {
+            showSkeletonOverlay()
+        }
         self.isLoading = true
         ActionsService.getAllMyActions(currentPage: currentPageMyActions, per: numberOfItemsForWS) { actions, error in
             DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
+                self.hideSkeletonOverlayRespectingMinimumDuration()
                 self.isLoading = false
 
                 if let actions = actions {

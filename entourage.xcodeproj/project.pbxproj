@@ -187,6 +187,7 @@
 		029638F3286C58D900E10EFB /* EventShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029638F2286C58D900E10EFB /* EventShareCell.swift */; };
 		029638F5286C801A00E10EFB /* EventCreateValidateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029638F4286C801A00E10EFB /* EventCreateValidateViewController.swift */; };
 		029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029BD4F427EDC44F00AE67AF /* MJNavBackView.swift */; };
+		B8A496B20DCBE56FC8CFB396 /* PostsSkeletonOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF5C1066AB1B6532719CED1 /* PostsSkeletonOverlayView.swift */; };
 		029BD4F727EDC45E00AE67AF /* MJNavBackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029BD4F627EDC45E00AE67AF /* MJNavBackView.xib */; };
 		029D25332865FA5F00147F77 /* EventDatesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D25322865FA5F00147F77 /* EventDatesCell.swift */; };
 		029D25352865FA7B00147F77 /* EventRecurrenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D25342865FA7B00147F77 /* EventRecurrenceCell.swift */; };
@@ -858,6 +859,7 @@
 		029638F2286C58D900E10EFB /* EventShareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventShareCell.swift; sourceTree = "<group>"; };
 		029638F4286C801A00E10EFB /* EventCreateValidateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCreateValidateViewController.swift; sourceTree = "<group>"; };
 		029BD4F427EDC44F00AE67AF /* MJNavBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJNavBackView.swift; sourceTree = "<group>"; };
+		4AF5C1066AB1B6532719CED1 /* PostsSkeletonOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsSkeletonOverlayView.swift; sourceTree = "<group>"; };
 		029BD4F627EDC45E00AE67AF /* MJNavBackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJNavBackView.xib; sourceTree = "<group>"; };
 		029D25322865FA5F00147F77 /* EventDatesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDatesCell.swift; sourceTree = "<group>"; };
 		029D25342865FA7B00147F77 /* EventRecurrenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRecurrenceCell.swift; sourceTree = "<group>"; };
@@ -1770,6 +1772,7 @@
 				0224597027FF290900944DE4 /* MJErrorInputTextView.xib */,
 				026E54B12837F96200BE7993 /* MJShadowBottomView.swift */,
 				F5F24C295CCA61EDF2ACDD08 /* APIErrorBottomSheetViewController.swift */,
+				4AF5C1066AB1B6532719CED1 /* PostsSkeletonOverlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3362,6 +3365,7 @@
 				26BEEEB02C00989A00169FBA /* EventLastDayViewController.swift in Sources */,
 				26BB4D4D2CCFC23400A8ACF7 /* CreateAction4HeaderCell.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
+				B8A496B20DCBE56FC8CFB396 /* PostsSkeletonOverlayView.swift in Sources */,
 				02F5278727999D8400929431 /* PoiCategory.swift in Sources */,
 				02F5277D2799995900929431 /* GuideDetailTableViewCells.swift in Sources */,
 				024131CD2862024A00561FB4 /* EventCreatePageViewController.swift in Sources */,
