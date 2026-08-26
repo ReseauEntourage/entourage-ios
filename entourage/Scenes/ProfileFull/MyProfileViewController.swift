@@ -45,7 +45,7 @@ class MyProfileViewModel: ObservableObject {
     @Published var activatedNotif: [String] = []
     @Published var numberOfBlocked: Int = 0
     @Published var apiBadges: [UserBadgeAPI] = []
-    @Published var moderator: HomeModerator?
+    @Published var referentBenevole: HomeReferentBenevole?
 
     weak var navigationDelegate: MyProfileNavigationDelegate?
 
@@ -85,7 +85,7 @@ class MyProfileViewModel: ObservableObject {
                         if returnUser.isAmbassador() {
                             HomeService.getUserHome { [weak self] userHome, _ in
                                 DispatchQueue.main.async {
-                                    self?.moderator = userHome?.moderator
+                                    self?.referentBenevole = userHome?.referentBenevole
                                 }
                             }
                         }
@@ -110,9 +110,9 @@ class MyProfileViewModel: ObservableObject {
         navigationDelegate?.showPartnerDetails(partner: partner)
     }
 
-    func sendMessageToModerator() {
-        guard let moderatorId = moderator?.id else { return }
-        MessagingService.createOrGetConversation(userId: String(moderatorId)) { [weak self] conversation, error in
+    func sendMessageToReferent() {
+        guard let referentId = referentBenevole?.id else { return }
+        MessagingService.createOrGetConversation(userId: String(referentId)) { [weak self] conversation, error in
             if let conversation = conversation {
                 self?.navigationDelegate?.showConversation(conversation: conversation)
             }
@@ -304,8 +304,8 @@ struct MyProfileView: View {
                             .padding(.horizontal)
 
                         AmbassadorReferentSectionView(
-                            moderator: viewModel.moderator,
-                            onSendMessage: { viewModel.sendMessageToModerator() }
+                            referentBenevole: viewModel.referentBenevole,
+                            onSendMessage: { viewModel.sendMessageToReferent() }
                         )
                         .padding(.horizontal)
                     }
@@ -605,14 +605,14 @@ struct AmbassadorToolCard: View {
 }
 
 struct AmbassadorReferentSectionView: View {
-    let moderator: HomeModerator?
+    let referentBenevole: HomeReferentBenevole?
     let onSendMessage: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             AmbassadorSectionHeader(title: "profile_ambassador_referent_section".localized)
 
-            if let mod = moderator {
+            if let mod = referentBenevole {
                 VStack(spacing: 16) {
                     HStack(spacing: 14) {
                         // Avatar

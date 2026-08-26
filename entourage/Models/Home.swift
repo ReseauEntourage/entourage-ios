@@ -18,6 +18,7 @@ struct UserHome:Codable {
     var neighborhoodParticipationsCount: Int = 0
     var actions = HomeActions()
     var moderator:HomeModerator? = nil
+    var referentBenevole:HomeReferentBenevole? = nil
     var unclosedAction:SummaryAction? = nil
     var preference:String? = nil
     var events: [String]? = nil
@@ -46,6 +47,7 @@ struct UserHome:Codable {
         case neighborhoodParticipationsCount = "neighborhood_participations_count"
         case actions = "recommandations"
         case moderator
+        case referentBenevole = "referent_benevole"
         case congratulations
         case unclosedAction = "unclosed_action"
         case preference = "preference"
@@ -154,7 +156,19 @@ struct HomeModerator:Codable {
     var id:Int?
     var displayName:String?
     var imgUrl:String?
-    
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case displayName = "display_name"
+        case imgUrl = "avatar_url"
+    }
+}
+
+struct HomeReferentBenevole:Codable {
+    var id:Int?
+    var displayName:String?
+    var imgUrl:String?
+
     enum CodingKeys: String, CodingKey {
         case id
         case displayName = "display_name"
