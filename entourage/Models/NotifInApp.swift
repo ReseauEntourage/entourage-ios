@@ -15,29 +15,31 @@ struct NotifInApp:Codable {
     var title:String? = nil
     var imageUrl:String? = nil
     var postId:Int? = nil
+    var chatMessageId:Int? = nil
     var context:String? = nil
-    
+
     private var createdAt:String? = nil
     var completedAt:String? = nil
-    
+
     let actionType = HomeAction_TypeAction.show
-    
+
     var type: HomeActionType {
         get {
             return getTypeFromKey(instanceString ?? "")
         }
     }
-    
-    
+
+
     func getNotificationPushData() -> NotificationPushData {
-        return NotificationPushData(instanceName: instanceString ?? "", instanceId: instanceId ?? 0, postId:postId, context: context)
+        return NotificationPushData(instanceName: instanceString ?? "", instanceId: instanceId ?? 0, postId:postId, chatMessageId: chatMessageId, context: context)
     }
-    
-    
+
+
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case instanceId = "instance_id"
         case postId = "post_id"
+        case chatMessageId = "chat_message_id"
         case instanceString = "instance"
         case content
         case title

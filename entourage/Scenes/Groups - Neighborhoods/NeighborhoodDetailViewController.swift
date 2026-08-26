@@ -48,9 +48,10 @@ class NeighborhoodDetailViewController: UIViewController {
     var isAfterCreation = true
     var isShowCreatePost = false
 
-    // Post à cibler après ouverture depuis une notification/deeplink : on pagine
-    // automatiquement jusqu'à le trouver, puis on scrolle et on le met en surbrillance.
-    var targetPostId: Int? = nil
+    // Post à cibler après ouverture depuis une notification/deeplink (chat_message_id, pas post_id :
+    // post_id ne désigne que le post racine d'une réponse) : on pagine automatiquement jusqu'à le
+    // trouver, puis on scrolle et on le met en surbrillance.
+    var targetChatMessageId: Int? = nil
     private var isAutoSearchingForPost = false
     private var reachedEndOfPosts = false
     private let maxAutoPaginationPages = 40
@@ -313,17 +314,17 @@ class NeighborhoodDetailViewController: UIViewController {
 
     // MARK: - Scroll vers un post ciblé (venant d'une notification/deeplink) -
 
-    /// Cherche `targetPostId` dans les posts déjà chargés. Si trouvé, scrolle jusqu'à la cellule.
+    /// Cherche `targetChatMessageId` dans les posts déjà chargés. Si trouvé, scrolle jusqu'à la cellule.
     /// Sinon, pagine automatiquement jusqu'à le trouver ou jusqu'à la fin du fil (ou une limite de sécurité),
     /// auquel cas on prévient l'utilisateur que le post n'est plus disponible.
     private func handlePotentialTargetPostAfterLoad() {
-        guard let targetPostId = targetPostId else {
+        guard let targetChatMessageId = targetChatMessageId else {
             hideSkeletonOverlayRespectingMinimumDuration {}
             return
         }
 
-        if let index = neighborhood?.messages?.firstIndex(where: { $0.uid == targetPostId }) {
-            self.targetPostId = nil
+        if let index = neighborhood?.messages?.firstIndex(where: { $0.uid == targetChatMessageId }) {
+            self.targetChatMessageId = nil
             self.isAutoSearchingForPost = false
             hideSkeletonOverlayRespectingMinimumDuration { [weak self] in
                 self?.scrollToTargetPost(at: index)
@@ -332,7 +333,7 @@ class NeighborhoodDetailViewController: UIViewController {
         }
 
         if reachedEndOfPosts || currentPagingPage >= maxAutoPaginationPages {
-            self.targetPostId = nil
+            self.targetChatMessageId = nil
             self.isAutoSearchingForPost = false
             hideSkeletonOverlayRespectingMinimumDuration { [weak self] in
                 self?.view.showToast(message: "neighborhood_post_not_found_toast".localized, duration: 3.0)
