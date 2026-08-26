@@ -207,11 +207,14 @@ struct EventService:ParsingDataCodable {
 
         private static func eventFilterQueryParams(eventTypes: [String], isOnline: Bool?) -> String {
             var params = ""
-            if !eventTypes.isEmpty {
-                params += "&type=\(eventTypes.joined(separator: ","))"
+            if eventTypes.contains(MainFilterEventTypeID.entourage) {
+                params += "&entourage_only=true"
+            }
+            if eventTypes.contains(MainFilterEventTypeID.reservedFemale) {
+                params += "&reserved_female=true"
             }
             if let isOnline = isOnline {
-                params += "&online=\(isOnline)"
+                params += "&format=\(isOnline ? "online" : "in_person")"
             }
             return params
         }
