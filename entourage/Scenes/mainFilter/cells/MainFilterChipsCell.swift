@@ -11,7 +11,7 @@ struct MainFilterChipItem {
 enum MainFilterChipsStyle {
     // Independent multi-select toggles, each chip keeps its own accent color when selected.
     case toggle
-    // Exclusive single-select, shared accent color, hollow/filled circle indicator.
+    // Exclusive single-select, shared accent color — selection is shown via fill/border only.
     case radio
 }
 
@@ -89,14 +89,10 @@ class MainFilterChipsCell: UITableViewCell {
         btn.layer.cornerRadius = 20
         btn.layer.borderWidth = 1.5
         btn.contentEdgeInsets = UIEdgeInsets(top: 10, left: 14, bottom: 10, right: 14)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
-        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
 
-        if style == .radio {
-            let symbolName = isSelected ? "largecircle.fill.circle" : "circle"
-            btn.setImage(UIImage(systemName: symbolName), for: .normal)
-            btn.tintColor = isSelected ? .white : UIColor.appGreyOff
-        } else if let iconName = item.iconName {
+        if let iconName = item.iconName {
+            btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
+            btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
             // UIButton derives its image layout rect from the UIImage's own size, not from
             // imageView constraints — some source SVGs have no explicit width/height so their
             // viewBox (e.g. 217x207) becomes the intrinsic size otherwise. Resize the bitmap
@@ -119,12 +115,14 @@ class MainFilterChipsCell: UITableViewCell {
         } else {
             // Radio chips (exclusive choice) stay neutral grey when unselected — only the
             // active choice takes the accent color. Toggle chips keep their accent outline
-            // even when unselected, since each one carries its own identity color.
-            let unselectedColor = style == .radio ? UIColor.appGreyOff : item.accentColor
+            // even when unselected, since each one carries its own identity color. The title
+            // itself always renders black so unselected chips don't read as disabled.
+            let unselectedBorderColor = style == .radio ? UIColor.appGreyOff : item.accentColor
+            let unselectedTextColor = style == .radio ? UIColor.black : item.accentColor
             btn.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 14)
             btn.backgroundColor = .white
-            btn.layer.borderColor = unselectedColor.cgColor
-            btn.setTitleColor(unselectedColor, for: .normal)
+            btn.layer.borderColor = unselectedBorderColor.cgColor
+            btn.setTitleColor(unselectedTextColor, for: .normal)
         }
     }
 
