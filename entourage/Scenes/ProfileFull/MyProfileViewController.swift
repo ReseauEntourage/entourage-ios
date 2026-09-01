@@ -658,10 +658,10 @@ struct AmbassadorReferentSectionView: View {
                 }
                 .padding(16)
                 .background(Color.white)
-                .cornerRadius(15)
+                .cornerRadius(14)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.appBeige, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 14)
+                        .stroke(Color(UIColor(red: 0.78, green: 0.78, blue: 0.78, alpha: 1)), lineWidth: 1)
                 )
             }
         }
