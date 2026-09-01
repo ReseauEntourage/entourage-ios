@@ -29,17 +29,17 @@ class MainFilterTagCell: UITableViewCell {
             // Title only
             if isSelected {
                 titleAttributes = [
-                    .font: UIFont.boldSystemFont(ofSize: ui_title_label.font.pointSize)
+                    .font: ApplicationTheme.getFontQuickSandBold(size: ui_title_label.font.pointSize)
                 ]
             } else {
                 titleAttributes = [
-                    .font: UIFont.systemFont(ofSize: ui_title_label.font.pointSize)
+                    .font: ApplicationTheme.getFontNunitoRegular(size: ui_title_label.font.pointSize)
                 ]
             }
         } else {
             // Title and subtitle
             titleAttributes = [
-                .font: UIFont.boldSystemFont(ofSize: ui_title_label.font.pointSize)
+                .font: ApplicationTheme.getFontQuickSandBold(size: ui_title_label.font.pointSize)
             ]
         }
         
