@@ -52,3 +52,19 @@ struct UserReaction: Codable {
         case user
     }
 }
+
+/// Forme plate d'un événement socket `user_reaction_added` / `user_reaction_removed` —
+/// distincte de `Reaction` (agrégat compteur) et `UserReaction` (imbrique l'utilisateur complet).
+struct ChatReactionEvent: Codable {
+    var id: Int
+    var reactionId: Int
+    var userId: Int
+    var chatMessageId: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case reactionId = "reaction_id"
+        case userId = "user_id"
+        case chatMessageId = "chat_message_id"
+    }
+}

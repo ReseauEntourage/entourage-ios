@@ -67,7 +67,8 @@ class NeighborhoodDetailViewController: UIViewController {
     //165 image post message
     
     var pullRefreshControl = UIRefreshControl()
-    
+    private var socketToken: SocketManager.Token? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_top_view.backgroundColor = .clear
@@ -103,11 +104,47 @@ class NeighborhoodDetailViewController: UIViewController {
             isAfterCreation = true
             self.getNeighborhoodDetail(hasToRefreshLists:true)
         }
+        subscribeToSocket()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.post(name: NSNotification.Name("FermerReactionsPopup"), object: nil)
+        unsubscribeFromSocket()
+    }
+
+    // MARK: - Socket temps réel
+
+    private func subscribeToSocket() {
+        guard socketToken == nil, neighborhoodId != 0 else { return }
+        socketToken = SocketManager.shared.subscribe(
+            instanceType: "Neighborhood",
+            instanceId: neighborhoodId,
+            onEvent: { [weak self] event in
+                self?.handleSocketEvent(event)
+            },
+            onReconnected: { [weak self] in
+                self?.getNeighborhoodDetail()
+            }
+        )
+    }
+
+    private func unsubscribeFromSocket() {
+        guard let token = socketToken else { return }
+        SocketManager.shared.unsubscribe(token)
+        socketToken = nil
+    }
+
+    private func handleSocketEvent(_ event: SocketChannelEvent) {
+        // Seuls les posts racines concernent le fil ; les commentaires (post_id != nil)
+        // sont affichés sur l'écran de détail du post, pas ici.
+        guard event.type == "chat_message_created",
+              let incoming = event.decodeData(as: PostMessage.self),
+              incoming.parentPostId == nil,
+              neighborhood?.messages?.contains(where: { $0.uid == incoming.uid }) != true else { return }
+
+        neighborhood?.messages?.insert(incoming, at: 0)
+        splitMessages()
     }
 
     
@@ -229,9 +266,10 @@ class NeighborhoodDetailViewController: UIViewController {
 
     
     deinit {
+        unsubscribeFromSocket()
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     //MARK: - Network -
     func getNeighborhoodDetail(hasToRefreshLists: Bool = false) {
         self.currentPagingPage = 1

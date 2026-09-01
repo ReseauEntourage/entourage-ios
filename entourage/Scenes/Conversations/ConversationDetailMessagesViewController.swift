@@ -108,9 +108,9 @@ private var imagePreviewOverlay: UIView?
     var meetUrl:String = ""
     var uuidv2:String = ""
     private var isScrollDetectionEnabled = false
-    private var autoRefreshTimer: Timer?
-    private let autoRefreshInterval: TimeInterval = 1.5
     private var isSilentRefresh = false
+    private var outingId: Int? = nil
+    private var socketToken: SocketManager.Token? = nil
     private var isOptionViewVisible = false
     private var shouldScrollToBottomAfterReload = false
 
@@ -667,17 +667,17 @@ private var imagePreviewOverlay: UIView?
             _ = ui_textview_message.becomeFirstResponder()
         }
         
-        startAutoRefresh()
+        subscribeToSocket()
 
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        stopAutoRefresh()             // 🆕
+        unsubscribeFromSocket()
     }
-        
+
     deinit {
-        stopAutoRefresh()             // 🆕 sécurise en cas de fuite
+        unsubscribeFromSocket()
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -687,39 +687,111 @@ private var imagePreviewOverlay: UIView?
         self.view.bringSubviewToFront(ui_tableview_mentions)
     }
 
-    private func startAutoRefresh() {
-        stopAutoRefresh()
-        autoRefreshTimer = Timer.scheduledTimer(withTimeInterval: autoRefreshInterval,
-                                                repeats: true) { [weak self] _ in
-            self?.autoRefreshMessages()
+    // MARK: - Socket temps réel
+
+    private func resolvedSocketInstance() -> (type: String, id: Int)? {
+        if isSmallTalkMode {
+            guard let id = Int(smallTalkId) else { return nil }
+            return ("Smalltalk", id)
         }
+        if type == "outing" {
+            guard let id = outingId else { return nil }
+            return ("Outing", id)
+        }
+        guard conversationId != 0 else { return nil }
+        return ("Conversation", conversationId)
     }
-    
-    private func autoRefreshMessages() {
-        guard !isLoading, !isSmallTalkMode else { return }
 
-        isSilentRefresh = true
-        getMessages()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) { [weak self] in
-            guard let self = self else { return }
-
-            if !self.hasMoved {
-                if !self.conversationCellDTOs.isEmpty {
-                    let lastRow = self.conversationCellDTOs.count - 1
-                    let ip = IndexPath(row: lastRow, section: 0)
-                    self.ui_tableview.scrollToRow(at: ip, at: .bottom, animated: false)
+    private func subscribeToSocket() {
+        guard socketToken == nil, let instance = resolvedSocketInstance() else { return }
+        socketToken = SocketManager.shared.subscribe(
+            instanceType: instance.type,
+            instanceId: instance.id,
+            onEvent: { [weak self] event in
+                self?.handleSocketEvent(event)
+            },
+            onReconnected: { [weak self] in
+                guard let self = self else { return }
+                self.isSilentRefresh = true
+                if self.isSmallTalkMode {
+                    self.fetchSmallTalkData()
+                } else {
+                    self.getMessages()
                 }
             }
+        )
+    }
+
+    private func unsubscribeFromSocket() {
+        guard let token = socketToken else { return }
+        SocketManager.shared.unsubscribe(token)
+        socketToken = nil
+    }
+
+    private func handleSocketEvent(_ event: SocketChannelEvent) {
+        switch event.type {
+        case "chat_message_created":
+            applyIncomingMessage(event)
+        case "chat_message_updated":
+            applyMessageUpdate(event)
+        case "user_reaction_added":
+            applyReactionEvent(event, added: true)
+        case "user_reaction_removed":
+            applyReactionEvent(event, added: false)
+        default:
+            break
         }
     }
 
+    private func applyIncomingMessage(_ event: SocketChannelEvent) {
+        guard let incoming = event.decodeData(as: PostMessage.self) else { return }
+        guard !messages.contains(where: { $0.uid == incoming.uid }) else { return }
 
-    private func stopAutoRefresh() {
-        autoRefreshTimer?.invalidate()
-        autoRefreshTimer = nil
+        messages.append(incoming)
+        buildConversationCellDTOs()
+        setEmptyStateVisible(conversationCellDTOs.isEmpty)
+        ui_tableview.reloadData()
+
+        if !hasMoved, !conversationCellDTOs.isEmpty {
+            let lastRow = conversationCellDTOs.count - 1
+            let ip = IndexPath(row: lastRow, section: 0)
+            ui_tableview.scrollToRow(at: ip, at: .bottom, animated: true)
+        }
+
+        parentDelegate?.updateUnreadCount(conversationId: conversationId, currentIndexPathSelected: selectedIndexPath)
     }
-    
+
+    private func applyMessageUpdate(_ event: SocketChannelEvent) {
+        guard let updated = event.decodeData(as: PostMessage.self),
+              let idx = messages.firstIndex(where: { $0.uid == updated.uid }) else { return }
+
+        messages[idx] = updated
+        buildConversationCellDTOs()
+        ui_tableview.reloadData()
+    }
+
+    private func applyReactionEvent(_ event: SocketChannelEvent, added: Bool) {
+        guard let reactionEvent = event.decodeData(as: ChatReactionEvent.self),
+              let idx = messages.firstIndex(where: { $0.uid == reactionEvent.chatMessageId }) else { return }
+
+        var reactions = messages[idx].reactions ?? []
+        if let rIdx = reactions.firstIndex(where: { $0.reactionId == reactionEvent.reactionId }) {
+            var updated = reactions[rIdx]
+            updated.reactionsCount = max(0, updated.reactionsCount + (added ? 1 : -1))
+            if updated.reactionsCount == 0 {
+                reactions.remove(at: rIdx)
+            } else {
+                reactions[rIdx] = updated
+            }
+        } else if added {
+            reactions.append(Reaction(reactionId: reactionEvent.reactionId, chatMessageId: reactionEvent.chatMessageId, reactionsCount: 1))
+        }
+        messages[idx].reactions = reactions
+
+        buildConversationCellDTOs()
+        ui_tableview.reloadData()
+    }
+
     private func isTableViewAtBottom() -> Bool {
         let contentHeight = ui_tableview.contentSize.height
         let tableHeight = ui_tableview.bounds.height
@@ -846,7 +918,8 @@ private var imagePreviewOverlay: UIView?
         isOneToOne: Bool,
         conversation: Conversation? = nil,
         delegate: UpdateUnreadCountDelegate? = nil,
-        selectedIndexPath: IndexPath? = nil
+        selectedIndexPath: IndexPath? = nil,
+        outingId: Int? = nil
     ) {
         self.parentDelegate = delegate
         self.selectedIndexPath = selectedIndexPath
@@ -855,6 +928,7 @@ private var imagePreviewOverlay: UIView?
         self.isOneToOne = isOneToOne
         self.hasToShowFirstMessage = conversation?.hasToShowFirstMessage() ?? true
         self.currentUserId = conversation?.user?.uid ?? 0
+        self.outingId = outingId
     }
 
     func setupFromOtherVCWithHash(
@@ -1145,6 +1219,13 @@ func checkNewConv() {
                 
                 self.currentConversation = conversation
 
+                if self.conversationId == 0 {
+                    // Cas `setupFromOtherVCWithHash` : on ne connaissait que le hash, on peut
+                    // désormais s'abonner au socket avec l'id numérique résolu.
+                    self.conversationId = conversation.uid
+                    self.subscribeToSocket()
+                }
+
                 if self.isOneToOne {
                     self.currentUserId = conversation.user?.uid ?? conversation.members?.first(where: { $0.uid != self.meId })?.uid ?? 0
                 }
@@ -1155,6 +1236,12 @@ func checkNewConv() {
                     EventService.getEventWithId(self.currentConversation?.uuid ?? "") { event, error in
                         if event != nil {
                             AppSignableManager.shared.updateFromEvent(event: event!)
+                        }
+                        if self.outingId == nil {
+                            // Filet de sécurité si l'appelant n'a pas fourni l'id de l'outing :
+                            // on le résout ici et on retente l'abonnement socket.
+                            self.outingId = event?.uid
+                            self.subscribeToSocket()
                         }
                         let _title = event?.title ?? "messaging_message_title".localized
                         self.ui_top_view.populateView(
