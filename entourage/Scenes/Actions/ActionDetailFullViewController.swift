@@ -193,7 +193,6 @@ class ActionDetailFullViewController: UIViewController {
     
     @IBAction func action_show_actions(_ sender: Any) {
         self.navigationController?.dismiss(animated: true) {
-            self.parentVC?.dismiss(animated: true)
             if self.action?.isContrib() ?? false {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowContrib), object: nil)
             }
