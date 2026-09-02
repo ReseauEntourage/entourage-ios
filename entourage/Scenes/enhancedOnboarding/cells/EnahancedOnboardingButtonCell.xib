@@ -72,6 +72,7 @@
             <connections>
                 <outlet property="ui_btn_configure_later" destination="q13-Wm-2Ev" id="luo-Dr-PI6"/>
                 <outlet property="ui_btn_next" destination="dJO-20-Ltv" id="c6i-zi-J1K"/>
+                <outlet property="ui_wrapper_view" destination="ku5-G9-opM" id="glz-Wr-4Kp"/>
             </connections>
             <point key="canvasLocation" x="66.412213740458014" y="35.211267605633807"/>
         </tableViewCell>

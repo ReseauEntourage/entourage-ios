@@ -17,6 +17,7 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
     //Outlet
     @IBOutlet weak var ui_btn_configure_later: UIButton!
     @IBOutlet weak var ui_btn_next: UIButton!
+    @IBOutlet weak var ui_wrapper_view: UIView!
     
     //Variable
     var delegate:EnhancedOnboardingButtonDelegate?
@@ -44,6 +45,13 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
         self.ui_btn_next.setTitle("validate".localized, for: .normal)
         self.ui_btn_configure_later.setTitle("btn_main_filter_cancel_title".localized, for: .normal)
         self.ui_btn_configure_later.isHidden = false
+    }
+
+    // Lets the wrapper's opaque background show through a glass/blur container placed behind the cell.
+    func makeBackgroundTransparent() {
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        ui_wrapper_view.backgroundColor = .clear
     }
     
     @objc func onConfigureLaterClick(){

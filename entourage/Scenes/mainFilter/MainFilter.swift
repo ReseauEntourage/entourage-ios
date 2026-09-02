@@ -22,7 +22,6 @@ enum MainFilterDTO {
     case tagCell(choice: MainFilterTagItem)
     case localisationCell(address: String)
     case radiusCell(radius: Int)
-    case buttonCell
 }
 
 enum MainFilterMode {
@@ -64,20 +63,21 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
     var selectedAdress: CLLocationCoordinate2D?
     var selectedRadius: Int = 40
     var selectedAdressTitle: String = ""
-    
+    private let stickyFooterHeight: CGFloat = 85
+
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_tableview.delegate = self
         ui_tableview.dataSource = self
         
         // Register cell
-        ui_tableview.register(UINib(nibName: "EnahancedOnboardingButtonCell", bundle: nil), forCellReuseIdentifier: "buttonCell")
         ui_tableview.register(UINib(nibName: "MainFilterTitleCell", bundle: nil), forCellReuseIdentifier: "MainFilterTitleCell")
         ui_tableview.register(UINib(nibName: "MainFilterSectionTitleCell", bundle: nil), forCellReuseIdentifier: "MainFilterSectionTitleCell")
         ui_tableview.register(UINib(nibName: "MainFilterTagCell", bundle: nil), forCellReuseIdentifier: "MainFilterTagCell")
         ui_tableview.register(MainFilterChipsCell.self, forCellReuseIdentifier: MainFilterChipsCell.identifier)
         ui_tableview.register(UINib(nibName: "MainFilterLocationCell", bundle: nil), forCellReuseIdentifier: "MainFilterLocationCell")
         ui_tableview.register(UINib(nibName: "MainFilterDistanceCell", bundle: nil), forCellReuseIdentifier: "MainFilterDistanceCell")
+        setupStickyFooter()
         self.constructFilter()
         
         // Register for keyboard notifications
@@ -89,18 +89,74 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
         // self.view.addGestureRecognizer(tapGesture) // Cette ligne est commentée car elle ne semble pas correcte
     }
     
+    // Floats the Valider/Réinitialiser buttons over the bottom of the screen, in a Liquid Glass
+    // container on iOS 26+ so the table content is visible (blurred) through it while scrolling,
+    // falling back to a plain opaque bar on older versions. The table itself keeps its full-height
+    // storyboard constraints — a bottom content inset makes room for the floating footer instead.
+    private func setupStickyFooter() {
+        guard let buttonCell = Bundle.main.loadNibNamed("EnahancedOnboardingButtonCell", owner: nil, options: nil)?.first as? EnahancedOnboardingButtonCell else {
+            return
+        }
+        buttonCell.delegate = self
+        buttonCell.configureForMainFilter()
+        buttonCell.translatesAutoresizingMaskIntoConstraints = false
+
+        let footerContainer: UIView
+
+        if #available(iOS 26.0, *) {
+            buttonCell.makeBackgroundTransparent()
+            let glassEffect = UIGlassEffect(style: .regular)
+            glassEffect.isInteractive = true
+            let glassView = UIVisualEffectView(effect: glassEffect)
+            glassView.contentView.addSubview(buttonCell)
+            NSLayoutConstraint.activate([
+                buttonCell.leadingAnchor.constraint(equalTo: glassView.contentView.leadingAnchor),
+                buttonCell.trailingAnchor.constraint(equalTo: glassView.contentView.trailingAnchor),
+                buttonCell.topAnchor.constraint(equalTo: glassView.contentView.topAnchor),
+                buttonCell.bottomAnchor.constraint(equalTo: glassView.contentView.bottomAnchor)
+            ])
+            footerContainer = glassView
+        } else {
+            let plainContainer = UIView()
+            plainContainer.backgroundColor = .white
+            plainContainer.addSubview(buttonCell)
+            NSLayoutConstraint.activate([
+                buttonCell.leadingAnchor.constraint(equalTo: plainContainer.leadingAnchor),
+                buttonCell.trailingAnchor.constraint(equalTo: plainContainer.trailingAnchor),
+                buttonCell.topAnchor.constraint(equalTo: plainContainer.topAnchor),
+                buttonCell.bottomAnchor.constraint(equalTo: plainContainer.bottomAnchor)
+            ])
+            footerContainer = plainContainer
+        }
+
+        footerContainer.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(footerContainer)
+
+        NSLayoutConstraint.activate([
+            footerContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            footerContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            footerContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            footerContainer.heightAnchor.constraint(equalToConstant: stickyFooterHeight)
+        ])
+
+        let baseInset = UIEdgeInsets(top: 0, left: 0, bottom: stickyFooterHeight, right: 0)
+        ui_tableview.contentInset = baseInset
+        ui_tableview.scrollIndicatorInsets = baseInset
+    }
+
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        
+
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.height + 100, right: 0) // Ajuster le décalage pour voir plus de suggestions
         ui_tableview.contentInset = contentInsets
         ui_tableview.scrollIndicatorInsets = contentInsets
     }
-    
+
     @objc func keyboardWillHide(notification: NSNotification) {
-        ui_tableview.contentInset = .zero
-        ui_tableview.scrollIndicatorInsets = .zero
+        let baseInset = UIEdgeInsets(top: 0, left: 0, bottom: stickyFooterHeight, right: 0)
+        ui_tableview.contentInset = baseInset
+        ui_tableview.scrollIndicatorInsets = baseInset
     }
     
     func constructFilter() {
@@ -137,7 +193,6 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
             tableDTO.append(.sectionCell(content: NSLocalizedString("filter_groupevent_by_location", comment: ""), numberOfItem: 0))
             tableDTO.append(.localisationCell(address: self.selectedAdressTitle))
             tableDTO.append(.radiusCell(radius: self.selectedRadius))
-            tableDTO.append(.buttonCell)
 
         case .action:
             let actionChoices = [
@@ -158,7 +213,6 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
             tableDTO.append(.sectionCell(content: NSLocalizedString("filter_groupevent_by_location", comment: ""), numberOfItem: 0))
             tableDTO.append(.localisationCell(address: selectedAdressTitle))
             tableDTO.append(.radiusCell(radius: self.selectedRadius))
-            tableDTO.append(.buttonCell)
         }
         
         loadDTO()
@@ -286,13 +340,6 @@ extension MainFilter: UITableViewDelegate, UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.delegate = self
                 cell.configure(distance: radius)
-                return cell
-            }
-        case .buttonCell:
-            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "buttonCell") as? EnahancedOnboardingButtonCell {
-                cell.selectionStyle = .none
-                cell.delegate = self
-                cell.configureForMainFilter()
                 return cell
             }
         }
