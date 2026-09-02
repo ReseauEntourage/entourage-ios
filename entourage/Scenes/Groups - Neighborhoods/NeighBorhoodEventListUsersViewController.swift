@@ -228,6 +228,14 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         updateUnsubscribedBottomViews()
     }
 
+    private func rebuildTableDataFromUsersWithReactions() {
+        tableData = [.searchCell]
+        for (idx, user) in users.enumerated() {
+            tableData.append(.userCell(user: user, reactionType: reactionTypeList[safe: idx]))
+        }
+        ui_tableview.reloadData()
+    }
+
     // MARK: - SwiftUI Integration
     private func setupBottomViews() {
         guard isEvent else { return }
@@ -372,15 +380,10 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     self.users = userReactions.map { $0.user }
                     self.reactionTypeList = userReactions.map { ReactionType(id: $0.reactionId, key: nil, imageUrl: nil) }
 
-                    self.tableData.removeAll()
-                    self.tableData = [.searchCell]
-                    for (idx, user) in self.users.enumerated() {
-                        self.tableData.append(.userCell(user: user, reactionType: self.reactionTypeList[safe: idx]))
-                    }
                     if !self.isSearch {
                         self.ui_view_no_result.isHidden = !self.users.isEmpty
                     }
-                    self.ui_tableview.reloadData()
+                    self.rebuildTableDataFromUsersWithReactions()
                 }
             }
         }
@@ -514,7 +517,11 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
             self.isAlreadyClearRows = false
             self.isSearch = false
             ui_view_no_result.isHidden = !users.isEmpty
-            self.ui_tableview.reloadData()
+            if isFromReact {
+                self.rebuildTableDataFromUsersWithReactions()
+            } else {
+                self.rebuildTableDataFromUsers()
+            }
         }
     }
 
