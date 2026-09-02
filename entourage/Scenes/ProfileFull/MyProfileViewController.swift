@@ -582,7 +582,7 @@ struct AmbassadorToolCard: View {
                         .frame(width: 50, height: 50)
                     Image(systemName: systemIcon)
                         .font(.system(size: 20))
-                        .foregroundColor(Color(UIColor.appOrange))
+                        .foregroundColor(.black)
                 }
                 Text(title)
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13)))
