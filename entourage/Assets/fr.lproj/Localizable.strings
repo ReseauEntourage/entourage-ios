@@ -2219,3 +2219,24 @@ Choisissez un sujet pour démarrer.";
 "availability_day_fri" = "Ven";
 "availability_day_sat" = "Sam";
 "availability_day_sun" = "Dim";
+
+// MARK: - Fix traductions manquantes iOS (2026-09-02)
+"onboarding_phase1_gender_label" = "Je suis";
+"onboarding_phase1_select_placeholder" = "Sélectionner dans la liste";
+"onboarding_phase1_clear_selection" = "Effacer";
+"onboarding_phase1_firstname_label" = "Prénom*";
+"onboarding_phase1_firstname_placeholder" = "Ex. : Marie";
+"onboarding_phase1_lastname_label" = "Nom*";
+"onboarding_phase1_lastname_placeholder" = "Ex. : Dupont";
+"onboarding_phase1_birthday_label" = "Date d’anniversaire";
+"onboarding_phase1_birthday_placeholder" = "Ex. : 22/10/1989";
+"onboarding_phase1_phone_label" = "Téléphone*";
+"onboarding_phase1_email_label" = "E-mail";
+"onboarding_phase1_email_placeholder" = "Ex. : marie.dupont@email.com";
+"onboarding_phase1_howwemet_label" = "Comment nous avez-vous connu ?";
+"onboarding_phase1_consent_label" = "Je souhaite recevoir des informations et des conseils de l’équipe Entourage";
+"onboarding_phase1_enterprise_label" = "Nom de votre entreprise";
+"onboarding_phase1_field_required_error" = "Champ requis";
+"onboarding_phase1_event_label" = "Événement auquel vous participez";
+"onboarding_phase1_event_select_enterprise_first_placeholder" = "Sélectionner une entreprise d’abord";
+"onboarding_phase1_select_date_title" = "Sélectionner une date";

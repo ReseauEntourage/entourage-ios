@@ -1966,3 +1966,27 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "availability_day_fri" = "Пт";
 "availability_day_sat" = "Сб";
 "availability_day_sun" = "Нд";
+
+// MARK: - Fix traductions manquantes iOS (2026-09-02)
+"onboarding_zone_radius_title" = "У радіусі";
+"onboard_help_view_title" = "Потрібна допомога?";
+"onboard_help_view_link" = "Зв'язатися з командою Entourage";
+"onboarding_phase1_gender_label" = "Я";
+"onboarding_phase1_select_placeholder" = "Виберіть зі списку";
+"onboarding_phase1_clear_selection" = "Очистити";
+"onboarding_phase1_firstname_label" = "Ім'я*";
+"onboarding_phase1_firstname_placeholder" = "Напр.: Marie";
+"onboarding_phase1_lastname_label" = "Прізвище*";
+"onboarding_phase1_lastname_placeholder" = "Напр.: Dupont";
+"onboarding_phase1_birthday_label" = "Дата народження";
+"onboarding_phase1_birthday_placeholder" = "Напр.: 22/10/1989";
+"onboarding_phase1_phone_label" = "Телефон*";
+"onboarding_phase1_email_label" = "Електронна пошта";
+"onboarding_phase1_email_placeholder" = "Напр.: marie.dupont@email.com";
+"onboarding_phase1_howwemet_label" = "Звідки ви дізналися про нас?";
+"onboarding_phase1_consent_label" = "Я хочу отримувати інформацію та поради від команди Entourage";
+"onboarding_phase1_enterprise_label" = "Назва вашої компанії";
+"onboarding_phase1_field_required_error" = "Обов'язкове поле";
+"onboarding_phase1_event_label" = "Подія, в якій ви берете участь";
+"onboarding_phase1_event_select_enterprise_first_placeholder" = "Спочатку виберіть компанію";
+"onboarding_phase1_select_date_title" = "Виберіть дату";

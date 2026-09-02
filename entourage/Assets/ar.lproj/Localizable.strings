@@ -1925,3 +1925,27 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "availability_day_fri" = "جمع";
 "availability_day_sat" = "سبت";
 "availability_day_sun" = "أحد";
+
+// MARK: - Fix traductions manquantes iOS (2026-09-02)
+"onboarding_zone_radius_title" = "ضمن نطاق";
+"onboard_help_view_title" = "هل تحتاج إلى مساعدة؟";
+"onboard_help_view_link" = "تواصل مع فريق Entourage";
+"onboarding_phase1_gender_label" = "أنا";
+"onboarding_phase1_select_placeholder" = "اختر من القائمة";
+"onboarding_phase1_clear_selection" = "مسح";
+"onboarding_phase1_firstname_label" = "الاسم الأول*";
+"onboarding_phase1_firstname_placeholder" = "مثال: Marie";
+"onboarding_phase1_lastname_label" = "اسم*";
+"onboarding_phase1_lastname_placeholder" = "مثال: Dupont";
+"onboarding_phase1_birthday_label" = "تاريخ الميلاد";
+"onboarding_phase1_birthday_placeholder" = "مثال: 22/10/1989";
+"onboarding_phase1_phone_label" = "هاتف*";
+"onboarding_phase1_email_label" = "بريد إلكتروني";
+"onboarding_phase1_email_placeholder" = "مثال: marie.dupont@email.com";
+"onboarding_phase1_howwemet_label" = "كيف تعرفت علينا؟";
+"onboarding_phase1_consent_label" = "أرغب في تلقي معلومات ونصائح من فريق Entourage";
+"onboarding_phase1_enterprise_label" = "اسم شركتك";
+"onboarding_phase1_field_required_error" = "حقل مطلوب";
+"onboarding_phase1_event_label" = "الفعالية التي تشارك فيها";
+"onboarding_phase1_event_select_enterprise_first_placeholder" = "اختر شركة أولاً";
+"onboarding_phase1_select_date_title" = "اختر تاريخًا";

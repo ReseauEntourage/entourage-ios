@@ -1889,3 +1889,27 @@ Alegeți un subiect pentru a începe.";
 "availability_day_fri" = "Vin";
 "availability_day_sat" = "Sâm";
 "availability_day_sun" = "Dum";
+
+// MARK: - Fix traductions manquantes iOS (2026-09-02)
+"onboarding_zone_radius_title" = "Într-o rază de";
+"onboard_help_view_title" = "Aveți nevoie de ajutor?";
+"onboard_help_view_link" = "Contactați echipa Entourage";
+"onboarding_phase1_gender_label" = "Sunt";
+"onboarding_phase1_select_placeholder" = "Selectați din listă";
+"onboarding_phase1_clear_selection" = "Șterge";
+"onboarding_phase1_firstname_label" = "Prenume*";
+"onboarding_phase1_firstname_placeholder" = "Ex.: Marie";
+"onboarding_phase1_lastname_label" = "Nume*";
+"onboarding_phase1_lastname_placeholder" = "Ex.: Dupont";
+"onboarding_phase1_birthday_label" = "Data nașterii";
+"onboarding_phase1_birthday_placeholder" = "Ex.: 22/10/1989";
+"onboarding_phase1_phone_label" = "Telefon*";
+"onboarding_phase1_email_label" = "E-mail";
+"onboarding_phase1_email_placeholder" = "Ex.: marie.dupont@email.com";
+"onboarding_phase1_howwemet_label" = "Cum ați aflat despre noi?";
+"onboarding_phase1_consent_label" = "Aș dori să primesc informații și sfaturi de la echipa Entourage";
+"onboarding_phase1_enterprise_label" = "Numele companiei dvs.";
+"onboarding_phase1_field_required_error" = "Câmp obligatoriu";
+"onboarding_phase1_event_label" = "Evenimentul la care participați";
+"onboarding_phase1_event_select_enterprise_first_placeholder" = "Selectați mai întâi o companie";
+"onboarding_phase1_select_date_title" = "Selectați o dată";

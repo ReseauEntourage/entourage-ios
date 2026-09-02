@@ -1620,3 +1620,27 @@ Odaberite temu za početak.";
 "availability_day_fri" = "Pet";
 "availability_day_sat" = "Sub";
 "availability_day_sun" = "Ned";
+
+// MARK: - Fix traductions manquantes iOS (2026-09-02)
+"onboarding_zone_radius_title" = "U radijusu od";
+"onboard_help_view_title" = "Trebate pomoć?";
+"onboard_help_view_link" = "Kontaktirajte tim Entourage";
+"onboarding_phase1_gender_label" = "Ja sam";
+"onboarding_phase1_select_placeholder" = "Odaberite s popisa";
+"onboarding_phase1_clear_selection" = "Obriši";
+"onboarding_phase1_firstname_label" = "Ime*";
+"onboarding_phase1_firstname_placeholder" = "Npr.: Marie";
+"onboarding_phase1_lastname_label" = "Prezime*";
+"onboarding_phase1_lastname_placeholder" = "Npr.: Dupont";
+"onboarding_phase1_birthday_label" = "Datum rođenja";
+"onboarding_phase1_birthday_placeholder" = "Npr.: 22/10/1989";
+"onboarding_phase1_phone_label" = "Telefon*";
+"onboarding_phase1_email_label" = "E-mail";
+"onboarding_phase1_email_placeholder" = "Npr.: marie.dupont@email.com";
+"onboarding_phase1_howwemet_label" = "Kako ste čuli za nas?";
+"onboarding_phase1_consent_label" = "Želim primati informacije i savjete od tima Entourage";
+"onboarding_phase1_enterprise_label" = "Naziv vaše tvrtke";
+"onboarding_phase1_field_required_error" = "Obavezno polje";
+"onboarding_phase1_event_label" = "Događaj na kojem sudjelujete";
+"onboarding_phase1_event_select_enterprise_first_placeholder" = "Prvo odaberite tvrtku";
+"onboarding_phase1_select_date_title" = "Odaberite datum";
