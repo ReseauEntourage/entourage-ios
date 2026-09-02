@@ -494,26 +494,26 @@ private struct IdentitySection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             SelectorRowButton(
-                title: "Je suis",
-                placeholder: "Sélectionner dans la liste",
+                title: "onboarding_phase1_gender_label".localized,
+                placeholder: "onboarding_phase1_select_placeholder".localized,
                 value: vm.genderLabel
             ) { showGenderAS = true }
             .actionSheet(isPresented: $showGenderAS) {
                 var buttons: [ActionSheet.Button] = vm.genderOptions.map { opt in
                     .default(Text(opt)) { vm.genderLabel = opt }
                 }
-                buttons.append(.destructive(Text("Effacer")) { vm.genderLabel = "" })
+                buttons.append(.destructive(Text("onboarding_phase1_clear_selection".localized)) { vm.genderLabel = "" })
                 buttons.append(.cancel())
-                return ActionSheet(title: Text("Je suis"), buttons: buttons)
+                return ActionSheet(title: Text("onboarding_phase1_gender_label".localized), buttons: buttons)
             }
 
-            FloatingField(title: "Prénom*", placeholder: "Ex. : Marie", text: $vm.firstname)
+            FloatingField(title: "onboarding_phase1_firstname_label".localized, placeholder: "onboarding_phase1_firstname_placeholder".localized, text: $vm.firstname)
 
-            FloatingField(title: "Nom*", placeholder: "Ex. : Dupont", text: $vm.lastname)
+            FloatingField(title: "onboarding_phase1_lastname_label".localized, placeholder: "onboarding_phase1_lastname_placeholder".localized, text: $vm.lastname)
 
             DateRowButton(
-                title: "Date d’anniversaire",
-                placeholder: "Ex. : 22/10/1989",
+                title: "onboarding_phase1_birthday_label".localized,
+                placeholder: "onboarding_phase1_birthday_placeholder".localized,
                 date: vm.birthday
             ) {
                 tempDate = vm.birthday ?? Date()
@@ -529,7 +529,7 @@ private struct ContactSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("Téléphone*")
+            Text("onboarding_phase1_phone_label".localized)
                 .font(.entourageTitle(15))
 
             HStack(spacing: 12) {
@@ -573,8 +573,8 @@ private struct ContactSection: View {
                 BoxedTextField(placeholder: vm.selectedCountry.exampleNumber, text: $vm.phone)
             }
 
-            FloatingField(title: "E-mail",
-                          placeholder: "Ex. : marie.dupont@email.com",
+            FloatingField(title: "onboarding_phase1_email_label".localized,
+                          placeholder: "onboarding_phase1_email_placeholder".localized,
                           text: $vm.email,
                           keyboard: .emailAddress,
                           contentType: .emailAddress)
@@ -593,28 +593,28 @@ private struct ProfileSection: View {
         VStack(alignment: .leading, spacing: 20) {
 
             SelectorRowButton(
-                title: "Comment nous avez-vous connu ?",
-                placeholder: "Sélectionner dans la liste",
+                title: "onboarding_phase1_howwemet_label".localized,
+                placeholder: "onboarding_phase1_select_placeholder".localized,
                 value: vm.howWeMetLabel
             ) { showHowAS = true }
             .actionSheet(isPresented: $showHowAS) {
                 var buttons: [ActionSheet.Button] = vm.howWeMetOptions.map { opt in
                     .default(Text(opt)) { vm.howWeMetLabel = opt }
                 }
-                buttons.append(.destructive(Text("Effacer")) { vm.howWeMetLabel = "" })
+                buttons.append(.destructive(Text("onboarding_phase1_clear_selection".localized)) { vm.howWeMetLabel = "" })
                 buttons.append(.cancel())
-                return ActionSheet(title: Text("Comment nous avez-vous connu ?"), buttons: buttons)
+                return ActionSheet(title: Text("onboarding_phase1_howwemet_label".localized), buttons: buttons)
             }
 
             if #available(iOS 15.0, *) {
                 Toggle(isOn: $vm.consent) {
-                    Text("Je souhaite recevoir des informations et des conseils de l’équipe Entourage")
+                    Text("onboarding_phase1_consent_label".localized)
                         .font(.entourageBody(11))
                 }
                 .tint(Color(UIColor.appOrange))
             } else {
                 Toggle(isOn: $vm.consent) {
-                    Text("Je souhaite recevoir des informations et des conseils de l’équipe Entourage")
+                    Text("onboarding_phase1_consent_label".localized)
                         .font(.entourageBody(11))
                 }
                 .accentColor(Color(UIColor.appOrange))
@@ -625,14 +625,14 @@ private struct ProfileSection: View {
 
                 // Entreprise (affichage = nom, envoi = ID)
                 SelectorRowButton(
-                    title: "Nom de votre entreprise",
-                    placeholder: vm.enterprises.isEmpty ? "Chargement..." : "Sélectionner dans la liste",
+                    title: "onboarding_phase1_enterprise_label".localized,
+                    placeholder: vm.enterprises.isEmpty ? "\("Loading".localized)..." : "onboarding_phase1_select_placeholder".localized,
                     value: (vm.selectedEnterpriseIndex.flatMap { idx in
                         vm.enterprises.indices.contains(idx) ? (vm.enterprises[idx].name ?? "") : ""
                     }) ?? "",
                     isRequired: vm.isEnterpriseRequired,
                     showError: vm.isEnterpriseRequired && !vm.isEnterpriseSelected,
-                    errorText: "Champ requis"
+                    errorText: "onboarding_phase1_field_required_error".localized
                 ) { showEnterpriseAS = true }
                 .actionSheet(isPresented: $showEnterpriseAS) {
                     var buttons: [ActionSheet.Button] =
@@ -642,34 +642,34 @@ private struct ProfileSection: View {
                                 vm.loadEventsForSelectedEnterprise()
                             }
                         }
-                    buttons.append(.destructive(Text("Effacer")) {
+                    buttons.append(.destructive(Text("onboarding_phase1_clear_selection".localized)) {
                         vm.selectedEnterpriseIndex = nil
                         vm.events = []
                         vm.selectedEventIndex = nil
                     })
                     buttons.append(.cancel())
-                    return ActionSheet(title: Text("Nom de votre entreprise"), buttons: buttons)
+                    return ActionSheet(title: Text("onboarding_phase1_enterprise_label".localized), buttons: buttons)
                 }
 
                 // Événement (affichage = nom, envoi = ID)
                 SelectorRowButton(
-                    title: "Événement auquel vous participez",
-                    placeholder: vm.events.isEmpty ? "Sélectionner une entreprise d’abord" : "Sélectionner dans la liste",
+                    title: "onboarding_phase1_event_label".localized,
+                    placeholder: vm.events.isEmpty ? "onboarding_phase1_event_select_enterprise_first_placeholder".localized : "onboarding_phase1_select_placeholder".localized,
                     value: (vm.selectedEventIndex.flatMap { idx in
                         vm.events.indices.contains(idx) ? (vm.events[idx].name ?? "") : ""
                     }) ?? "",
                     isRequired: vm.isEventRequired,
                     showError: vm.isEventRequired && !vm.isEventSelected,
-                    errorText: "Champ requis"
+                    errorText: "onboarding_phase1_field_required_error".localized
                 ) { showEventAS = true }
                 .actionSheet(isPresented: $showEventAS) {
                     var buttons: [ActionSheet.Button] =
                         vm.events.enumerated().map { i, ev in
                             .default(Text(ev.name ?? "")) { vm.selectedEventIndex = i }
                         }
-                    buttons.append(.destructive(Text("Effacer")) { vm.selectedEventIndex = nil })
+                    buttons.append(.destructive(Text("onboarding_phase1_clear_selection".localized)) { vm.selectedEventIndex = nil })
                     buttons.append(.cancel())
-                    return ActionSheet(title: Text("Événement auquel vous participez"), buttons: buttons)
+                    return ActionSheet(title: Text("onboarding_phase1_event_label".localized), buttons: buttons)
                 }
             }
         }
@@ -888,7 +888,7 @@ private struct DateSheet: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            Text("Sélectionner une date")
+            Text("onboarding_phase1_select_date_title".localized)
                 .font(.entourageTitle(15))
                 .padding(.top, 12)
 
@@ -911,9 +911,9 @@ private struct DateSheet: View {
             .frame(maxWidth: .infinity)
 
             HStack {
-                Button("Effacer", action: onClear)
+                Button("onboarding_phase1_clear_selection".localized, action: onClear)
                 Spacer()
-                Button("Valider", action: onValidate)
+                Button("validate".localized, action: onValidate)
                     .font(.entourageTitle(15))
             }
             .padding()
