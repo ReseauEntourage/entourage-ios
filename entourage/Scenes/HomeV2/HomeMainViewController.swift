@@ -234,9 +234,12 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
                         if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
                             let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
                             if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
+                                // "both_actions" can mean "give" or "ask" depending on the persona (see EnhancedOnboardingEnd); "no_event" always suggests a contribution.
+                                let isContrib = _category.contains("both_action") ? OnboardingEndChoicesManager.shared.isContribForBothActions : true
                                 OnboardingEndChoicesManager.shared.categoryForButton = ""
+                                OnboardingEndChoicesManager.shared.isContribForBothActions = true
                                 vc.modalPresentationStyle = .fullScreen
-                                vc.isContrib = true
+                                vc.isContrib = isContrib
                                 vc.parentController = self
                                 _tabbar.present(vc, animated: true)
                             }

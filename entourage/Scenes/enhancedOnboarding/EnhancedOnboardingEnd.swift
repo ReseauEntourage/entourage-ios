@@ -110,6 +110,8 @@ class EnhancedOnboardingEnd:UIViewController{
                  subtitleKey = "onboarding_start_action_content"
                  buttonTitleKey = "onboarding_start_action_button"
                  OnboardingEndChoicesManager.shared.categoryForButton = "both_actions"
+                 // "both_actions" reads as "give or ask" normally, but as "ask" only for the contribution/être-entouré preference.
+                 OnboardingEndChoicesManager.shared.isContribForBothActions = (EnhancedOnboardingConfiguration.shared.preference != "contribution")
              } else if involvements.contains("outings") {
                  if(self.haveEvents){
                      titleKey = "onboarding_experience_event_title"
@@ -191,6 +193,7 @@ class OnboardingEndChoicesManager {
     var concerns: [String]?
     var involvements: [String]?
     var categoryForButton:String?
+    var isContribForBothActions: Bool = true
     
     // Initialiseur privé pour empêcher les autres d'instancier ce singleton
     private init() {
