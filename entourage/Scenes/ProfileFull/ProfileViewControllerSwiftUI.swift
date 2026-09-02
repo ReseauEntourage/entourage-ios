@@ -26,10 +26,13 @@ struct ProfileImageView: UIViewRepresentable {
 
     func updateUIView(_ uiView: UIImageView, context: Context) {
         uiView.frame = CGRect(origin: .zero, size: size)
+        let placeholder = UIImage(named: "placeholder_user")?.withRenderingMode(.alwaysOriginal)
         if let urlString = urlString, let url = URL(string: urlString) {
-            uiView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
+            uiView.sd_setImage(with: url, placeholderImage: placeholder) { image, _, _, _ in
+                uiView.image = image?.withRenderingMode(.alwaysOriginal)
+            }
         } else {
-            uiView.image = UIImage(named: "placeholder_user")
+            uiView.image = placeholder
         }
     }
 }

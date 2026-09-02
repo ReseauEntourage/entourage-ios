@@ -540,7 +540,7 @@ struct AmbassadorToolsSectionView: View {
 
             HStack(alignment: .top, spacing: 10) {
                 AmbassadorToolCard(
-                    systemIcon: "books.vertical.fill",
+                    icon: .emoji("📚"),
                     title: "profile_ambassador_tool_toolkit".localized
                 ) {
                     if let url = URL(string: AMBASSADOR_TOOLKIT_URL) {
@@ -548,7 +548,7 @@ struct AmbassadorToolsSectionView: View {
                     }
                 }
                 AmbassadorToolCard(
-                    systemIcon: "doc.text.fill",
+                    icon: .emoji("📜"),
                     title: "profile_ambassador_tool_charter".localized
                 ) {
                     if let url = URL(string: AMBASSADOR_CHARTER_URL) {
@@ -556,7 +556,7 @@ struct AmbassadorToolsSectionView: View {
                     }
                 }
                 AmbassadorToolCard(
-                    systemIcon: "message.fill",
+                    icon: .asset("icon_whatsapp_entoureurs"),
                     title: "profile_ambassador_tool_whatsapp".localized
                 ) {
                     if let url = URL(string: AMBASSADOR_WHATSAPP_URL) {
@@ -568,8 +568,13 @@ struct AmbassadorToolsSectionView: View {
     }
 }
 
+enum AmbassadorToolIcon {
+    case emoji(String)
+    case asset(String)
+}
+
 struct AmbassadorToolCard: View {
-    let systemIcon: String
+    let icon: AmbassadorToolIcon
     let title: String
     let action: () -> Void
 
@@ -580,9 +585,16 @@ struct AmbassadorToolCard: View {
                     Circle()
                         .fill(Color.appBeige)
                         .frame(width: 50, height: 50)
-                    Image(systemName: systemIcon)
-                        .font(.system(size: 20))
-                        .foregroundColor(.black)
+                    switch icon {
+                    case .emoji(let emoji):
+                        Text(emoji)
+                            .font(.system(size: 24))
+                    case .asset(let name):
+                        Image(name)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 28, height: 28)
+                    }
                 }
                 Text(title)
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 13) ?? UIFont.systemFont(ofSize: 13)))
@@ -618,7 +630,7 @@ struct AmbassadorReferentSectionView: View {
                         // Avatar
                         ZStack {
                             Circle()
-                                .fill(Color(UIColor.appOrangeLight))
+                                .fill(Color(UIColor.appOrange))
                                 .frame(width: 56, height: 56)
                             if let urlStr = mod.imgUrl, !urlStr.isEmpty {
                                 ProfileImageView(urlString: urlStr, size: CGSize(width: 56, height: 56))
@@ -627,7 +639,7 @@ struct AmbassadorReferentSectionView: View {
                             } else {
                                 Text(initials(from: mod.displayName))
                                     .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)))
-                                    .foregroundColor(Color(UIColor.appOrange))
+                                    .foregroundColor(.white)
                             }
                         }
                         .frame(width: 56, height: 56)
