@@ -109,14 +109,18 @@ extension NeighborhoodHomeSearchCell: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        var count = textField.text?.count ?? 0
-        count = count + (string.isEmpty ? -1 : 1)
-        if count > 0 {
-            ui_bt_search.isHidden = false
-        }
-        else {
-            ui_bt_search.isHidden = true
+
+        let currentText = textField.text ?? ""
+        guard let textRange = Range(range, in: currentText) else { return true }
+        let updatedText = currentText.replacingCharacters(in: textRange, with: string)
+
+        ui_bt_search.isHidden = updatedText.isEmpty
+
+        // La recherche de membres filtre une liste déjà chargée en mémoire (pas d'appel réseau),
+        // on peut donc filtrer à chaque frappe. La recherche de groupes appelle l'API à chaque
+        // fois : on la garde déclenchée sur validation pour éviter de la spammer.
+        if isCellUserSearch {
+            delegate?.goSearch(updatedText)
         }
         return true
     }
