@@ -24,12 +24,18 @@ cp ApiKeys.dist.plist ApiKeys.plist
 
 ### HmacSecret — HMAC request signing
 
-`HmacSecret` protects the account creation endpoint (`POST /api/v1/users`) against bots.
-The app signs each request with `HMAC-SHA256(secret, "POST\n/api/v1/users\n{timestamp}\n{phone}")` and sends the result in the `X-Request-Signature` header.
+`HmacSecret` signs every API call against bot/tamper abuse:
+
+- **Account creation** (`POST /api/v1/users`) keeps its dedicated format:
+  `HMAC-SHA256(secret, "POST\n/api/v1/users\n{timestamp}\n{phone}")`.
+- **Every other call** (GET/POST/PATCH/PUT/DELETE through `NetworkManager`) is signed generically:
+  `HMAC-SHA256(secret, "{METHOD}\n{path}{?query}\n{timestamp}\n{raw body or empty}")`.
+
+Both send the result via the `X-Request-Timestamp` / `X-Request-Signature` headers.
 
 - **Leave empty** in development: the backend skips verification when the secret is not configured.
 - **Set in CI** (Bitrise env var `HMAC_SECRET_IOS`) before the release build; the Bitrise workflow injects it into `ApiKeys.plist`.
-- The same secret must be set as `HMAC_SECRET_IOS` on the backend (Heroku config vars).
+- The same secret must be set as `HMAC_SECRET_IOS` on the backend (Heroku config vars), and the backend must verify with the matching message format for each call.
 
 ## Upload Symbols to Firebase
 
