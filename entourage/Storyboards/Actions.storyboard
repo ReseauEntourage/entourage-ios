@@ -818,7 +818,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="action_show_actions:" destination="8gT-bk-ikX" eventType="touchUpInside" id="3pY-Ye-EtN"/>
-                                                    <action selector="action_validate:" destination="r4m-OF-nDo" eventType="touchUpInside" id="tcV-rn-7PJ"/>
                                                 </connections>
                                             </button>
                                         </subviews>

@@ -68,7 +68,7 @@ class ActionDetailFullViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     @objc func updateAction() {
         getAction()
     }
@@ -110,23 +110,28 @@ class ActionDetailFullViewController: UIViewController {
         if action?.isCanceled() ?? false {
             ui_view_contact.isHidden = true
             ui_view_my.isHidden = true
-            
+
             ui_view_empty.isHidden = false
-            
+            // ui_tableview is empty (0 rows) in this state but still sits on top of ui_view_empty
+            // in the storyboard's z-order and would otherwise swallow taps meant for its button.
+            ui_tableview.isUserInteractionEnabled = false
+
             ui_cancel_subtitle.text = action?.isContrib() ?? false ? "action_view_canceled_contrib_subtitle".localized : "action_view_canceled_demand_subtitle".localized
             let _btTitle = action?.isContrib() ?? false ? "action_view_canceled_contrib_button".localized : "action_view_canceled_demand_button".localized
             ui_cancel_button.setTitle(_btTitle, for: .normal)
-            
+
             ui_top_view.changeTitleColor(titleColor: .appGris112)
             ui_button_share.isHidden = true
         }
         else if action?.isMine() ?? false {
             ui_view_contact.isHidden = true
             ui_view_my.isHidden = false
+            ui_tableview.isUserInteractionEnabled = true
         }
         else {
             ui_view_contact.isHidden = false
             ui_view_my.isHidden = true
+            ui_tableview.isUserInteractionEnabled = true
         }
     }
     
@@ -193,12 +198,7 @@ class ActionDetailFullViewController: UIViewController {
     
     @IBAction func action_show_actions(_ sender: Any) {
         self.navigationController?.dismiss(animated: true) {
-            if self.action?.isContrib() ?? false {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowContrib), object: nil)
-            }
-            else {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowSolicitation), object: nil)
-            }
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowMyActions), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationActionsUpdate), object: nil)
         }
     }
