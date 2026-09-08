@@ -40,7 +40,8 @@ class ActionDetailFullViewController: UIViewController {
     var isContrib = false
     
     var parentVC:UIViewController? = nil
-    
+    private var didRedirectToMyActions = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_tableview.dataSource = self
@@ -108,6 +109,12 @@ class ActionDetailFullViewController: UIViewController {
     
     func showHideBottomViews() {
         if action?.isCanceled() ?? false {
+            // Our own action was deleted: the "annonce supprimée" screen only
+            // points back to "mes annonces", so skip it and go there directly.
+            if action?.isMine() ?? false {
+                goToMyActions()
+                return
+            }
             ui_view_contact.isHidden = true
             ui_view_my.isHidden = true
 
@@ -197,6 +204,12 @@ class ActionDetailFullViewController: UIViewController {
     
     
     @IBAction func action_show_actions(_ sender: Any) {
+        goToMyActions()
+    }
+
+    private func goToMyActions() {
+        guard !didRedirectToMyActions else { return }
+        didRedirectToMyActions = true
         self.navigationController?.dismiss(animated: true) {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowMyActions), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationActionsUpdate), object: nil)
