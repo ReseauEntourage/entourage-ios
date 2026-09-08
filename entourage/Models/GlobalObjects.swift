@@ -99,7 +99,36 @@ struct PostMessage:Codable {
         case messageType = "message_type"
 
     }
-    
+
+    init() {}
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        uid = try container.decode(Int.self, forKey: .uid)
+        content = try container.decodeIfPresent(String.self, forKey: .content)
+        contentHtml = try container.decodeIfPresent(String.self, forKey: .contentHtml)
+        createdDateString = try container.decodeIfPresent(String.self, forKey: .createdDateString) ?? ""
+        parentPostId = try container.decodeIfPresent(Int.self, forKey: .parentPostId)
+        hasComments = try container.decodeIfPresent(Bool.self, forKey: .hasComments)
+        user = try container.decodeIfPresent(UserLightNeighborhood.self, forKey: .user)
+        commentsCount = try container.decodeIfPresent(Int.self, forKey: .commentsCount)
+        messageImageUrl = try container.decodeIfPresent(String.self, forKey: .messageImageUrl)
+        read = try container.decodeIfPresent(Bool.self, forKey: .read)
+        status = try container.decodeIfPresent(String.self, forKey: .status)
+        reactions = try container.decodeIfPresent([Reaction].self, forKey: .reactions)
+        contentTranslations = try container.decodeIfPresent(Translations.self, forKey: .contentTranslations)
+        contentTranslationsHtml = try container.decodeIfPresent(Translations.self, forKey: .contentTranslationsHtml)
+        // L'API renvoie parfois `false` au lieu de `null`/un entier pour reaction_id
+        // (constaté sur la réponse de création d'un message côté preprod) : on ignore
+        // la valeur plutôt que de faire échouer tout le decode du message.
+        reactionId = try? container.decodeIfPresent(Int.self, forKey: .reactionId)
+        survey = try container.decodeIfPresent(Survey.self, forKey: .survey)
+        surveyResponse = try container.decodeIfPresent([Bool].self, forKey: .surveyResponse)
+        autoPostFrom = try container.decodeIfPresent(AutoPostFrom.self, forKey: .autoPostFrom)
+        messageType = try container.decodeIfPresent(String.self, forKey: .messageType)
+        isRetryMsg = false
+    }
+
     //Use to sort messages in days Dicts
     static func getArrayOfDateSorted(messages:[PostMessage], isAscendant:Bool) -> [Dictionary<DayMonthYearKey, [PostMessage]>.Element] {
         let dict = Dictionary(grouping: messages) { (message) -> DayMonthYearKey in
