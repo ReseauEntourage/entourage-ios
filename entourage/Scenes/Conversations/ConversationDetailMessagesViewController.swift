@@ -114,6 +114,11 @@ private var imagePreviewOverlay: UIView?
     private var isOptionViewVisible = false
     private var shouldScrollToBottomAfterReload = false
 
+    // MARK: - Édition de message (bouton "•••" → Modifier, écran conversation uniquement)
+    private var editingMessageId: Int? = nil
+    private let editBanner = UIView()
+    private let editBannerLabel = UILabel()
+
     /// Liste brute de messages issus de l’API
     var messages = [PostMessage]()
     /// Structure “MessagesSorted” qui contient la liste triée (sections date + messages)
@@ -349,9 +354,92 @@ private var imagePreviewOverlay: UIView?
             labelGalery.centerXAnchor.constraint(equalTo: ui_btn_galery.centerXAnchor),
             labelGalery.topAnchor.constraint(equalTo: ui_btn_galery.bottomAnchor, constant: 4),
         ])
+
+        setupEditBanner()
     }
-    
-    
+
+    /// Bandeau "Modification du message" affiché au-dessus de la barre de saisie
+    /// lorsqu'on édite un message existant (bouton "•••" → Modifier).
+    private func setupEditBanner() {
+        editBanner.translatesAutoresizingMaskIntoConstraints = false
+        editBanner.backgroundColor = .appBeige
+        editBanner.isHidden = true
+        view.addSubview(editBanner)
+
+        editBannerLabel.text = "cancel_edit_message".localized
+        editBannerLabel.font = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        editBannerLabel.textColor = .black
+        editBannerLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        let cancelButton = UIButton(type: .system)
+        cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        cancelButton.tintColor = .black
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.addTarget(self, action: #selector(handleCancelEditTap), for: .touchUpInside)
+
+        editBanner.addSubview(editBannerLabel)
+        editBanner.addSubview(cancelButton)
+
+        NSLayoutConstraint.activate([
+            editBanner.leadingAnchor.constraint(equalTo: ui_view_txtview.leadingAnchor),
+            editBanner.trailingAnchor.constraint(equalTo: ui_view_txtview.trailingAnchor),
+            editBanner.bottomAnchor.constraint(equalTo: ui_view_txtview.topAnchor),
+            editBanner.heightAnchor.constraint(equalToConstant: 32),
+
+            editBannerLabel.leadingAnchor.constraint(equalTo: editBanner.leadingAnchor, constant: 12),
+            editBannerLabel.centerYAnchor.constraint(equalTo: editBanner.centerYAnchor),
+
+            cancelButton.trailingAnchor.constraint(equalTo: editBanner.trailingAnchor, constant: -12),
+            cancelButton.centerYAnchor.constraint(equalTo: editBanner.centerYAnchor),
+            cancelButton.widthAnchor.constraint(equalToConstant: 24),
+            cancelButton.heightAnchor.constraint(equalToConstant: 24)
+        ])
+    }
+
+    @objc private func handleCancelEditTap() {
+        cancelEditingMessage()
+    }
+
+    private func startEditingMessage(id: Int, content: String?) {
+        editingMessageId = id
+        editBanner.isHidden = false
+        let plainText = (content ?? "").replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+        ui_textview_message.text = plainText.trimmingCharacters(in: .whitespacesAndNewlines)
+        ui_textview_message.textColor = .black
+        updateSendAffordance()
+        ui_textview_message.becomeFirstResponder()
+    }
+
+    private func cancelEditingMessage() {
+        editingMessageId = nil
+        editBanner.isHidden = true
+        ui_textview_message.text = placeholderTxt
+        ui_textview_message.textColor = .appGreyOff
+        updateSendAffordance()
+    }
+
+    private func sendEditedMessage(messageId: Int, text: String) {
+        let completion: (PostMessage?, EntourageNetworkError?) -> Void = { [weak self] message, _ in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.cancelEditingMessage()
+                guard message != nil, let idx = self.messages.firstIndex(where: { $0.uid == messageId }) else { return }
+                // Piège backend : la traduction renvoyée par le PATCH peut ne pas être encore
+                // recalculée — on affiche directement le texte qu'on vient d'envoyer.
+                self.messages[idx].content = text
+                self.messages[idx].contentHtml = text
+                self.buildConversationCellDTOs()
+                self.ui_tableview.reloadData()
+            }
+        }
+        if isSmallTalkMode {
+            SmallTalkService.editMessage(smallTalkId: smallTalkId, messageId: "\(messageId)", content: text, completion: completion)
+        } else {
+            MessagingService.editMessage(conversationId: conversationId, messageId: messageId, content: text, completion: completion)
+        }
+    }
+
+
     // MARK: - Empty state
     private func setupConversationEmptyState() {
         let view = ConversationEmptyStateView()
@@ -424,6 +512,13 @@ private var imagePreviewOverlay: UIView?
 
         let text = getHTMLMessage()?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         var safeText = (text == "messaging_message_placeholder_discut".localized) ? "" : text
+
+        if let editingId = editingMessageId {
+            guard !safeText.isEmpty else { return }
+            sendEditedMessage(messageId: editingId, text: safeText)
+            return
+        }
+
         if isSmallTalkMode {
             sendSmallTalkMessage(text: safeText)
         } else {
@@ -744,7 +839,7 @@ private var imagePreviewOverlay: UIView?
     }
 
     private func applyIncomingMessage(_ event: SocketChannelEvent) {
-        guard let incoming = event.decodeData(as: PostMessage.self) else { return }
+        guard let incoming = event.decodeMessage() else { return }
         guard !messages.contains(where: { $0.uid == incoming.uid }) else { return }
 
         messages.append(incoming)
@@ -762,16 +857,19 @@ private var imagePreviewOverlay: UIView?
     }
 
     private func applyMessageUpdate(_ event: SocketChannelEvent) {
-        guard let updated = event.decodeData(as: PostMessage.self),
+        guard let updated = event.decodeMessage(),
               let idx = messages.firstIndex(where: { $0.uid == updated.uid }) else { return }
 
-        messages[idx] = updated
+        messages[idx] = updated.mergingOverLocal(messages[idx])
         buildConversationCellDTOs()
         ui_tableview.reloadData()
     }
 
     private func applyReactionEvent(_ event: SocketChannelEvent, added: Bool) {
-        guard let reactionEvent = event.decodeData(as: ChatReactionEvent.self),
+        // L'action de l'utilisateur courant est déjà appliquée en optimiste dans didTapReaction —
+        // ignorer l'écho socket de sa propre action pour éviter un double comptage.
+        guard event.userId != meId,
+              let reactionEvent = event.decodeData(as: ChatReactionEvent.self),
               let idx = messages.firstIndex(where: { $0.uid == reactionEvent.chatMessageId }) else { return }
 
         var reactions = messages[idx].reactions ?? []
@@ -1917,7 +2015,7 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
         self.present(hostingController, animated: true)
     }
     
-    func signalMessage(messageId: Int, userId: Int, textString: String) {
+    func signalMessage(messageId: Int, userId: Int, textString: String, status: String?) {
         if let navvc = UIStoryboard(name: StoryboardName.neighborhoodReport, bundle: nil)
             .instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController,
            let vc = navvc.topViewController as? ReportGroupMainViewController {
@@ -1928,8 +2026,66 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
             vc.messageId = messageId
             vc.conversationId = conversationId
             vc.textString = textString
+            // Édition autorisée uniquement sur cet écran (1-1/groupe/smalltalk/discussion outing),
+            // jamais sur les commentaires de post de groupe/event.
+            vc.allowsMessageEdit = true
+            vc.messageStatus = status
             self.present(navvc, animated: true)
         }
+    }
+
+    func didTapReaction(messageId: Int, reactionType: ReactionType) {
+        guard let idx = messages.firstIndex(where: { $0.uid == messageId }) else { return }
+        let currentReactionId = messages[idx].reactionId ?? 0
+        let isRemoving = currentReactionId == reactionType.id
+
+        applyLocalReaction(atIndex: idx, reactionId: isRemoving ? 0 : reactionType.id)
+
+        if isSmallTalkMode {
+            if isRemoving {
+                SmallTalkService.deleteReaction(smallTalkId: smallTalkId, messageId: "\(messageId)") { _ in }
+            } else {
+                if currentReactionId != 0 {
+                    SmallTalkService.deleteReaction(smallTalkId: smallTalkId, messageId: "\(messageId)") { _ in }
+                }
+                SmallTalkService.postReaction(smallTalkId: smallTalkId, messageId: "\(messageId)", reactionId: reactionType.id) { _ in }
+            }
+        } else {
+            if isRemoving {
+                MessagingService.deleteReaction(conversationId: conversationId, messageId: messageId) { _ in }
+            } else {
+                if currentReactionId != 0 {
+                    MessagingService.deleteReaction(conversationId: conversationId, messageId: messageId) { _ in }
+                }
+                MessagingService.postReaction(conversationId: conversationId, messageId: messageId, reactionId: reactionType.id) { _ in }
+            }
+        }
+    }
+
+    /// Mutation optimiste locale (toggle si même réaction déjà posée par l'utilisateur, sinon
+    /// retire l'ancienne + pose la nouvelle), reflétée immédiatement dans l'UI avant la réponse serveur.
+    private func applyLocalReaction(atIndex idx: Int, reactionId: Int) {
+        var reactions = messages[idx].reactions ?? []
+        let previousReactionId = messages[idx].reactionId ?? 0
+
+        if previousReactionId != 0, let rIdx = reactions.firstIndex(where: { $0.reactionId == previousReactionId }) {
+            if reactions[rIdx].reactionsCount > 1 {
+                reactions[rIdx].reactionsCount -= 1
+            } else {
+                reactions.remove(at: rIdx)
+            }
+        }
+        if reactionId != 0 {
+            if let rIdx = reactions.firstIndex(where: { $0.reactionId == reactionId }) {
+                reactions[rIdx].reactionsCount += 1
+            } else {
+                reactions.append(Reaction(reactionId: reactionId, chatMessageId: messages[idx].uid, reactionsCount: 1))
+            }
+        }
+        messages[idx].reactions = reactions
+        messages[idx].reactionId = reactionId
+        buildConversationCellDTOs()
+        ui_tableview.reloadData()
     }
 
     func showUser(userId: Int?) {
@@ -1993,8 +2149,17 @@ extension ConversationDetailMessagesViewController: GroupDetailDelegate {
 
     func publicationDeleted() {
         DispatchQueue.main.async {
-            self.getMessages()
+            self.currentPage = 1
+            if self.isSmallTalkMode {
+                self.fetchSmallTalkData()
+            } else {
+                self.getMessages()
+            }
         }
+    }
+
+    func editMessage(id: Int, content: String?) {
+        startEditingMessage(id: id, content: content)
     }
 }
 

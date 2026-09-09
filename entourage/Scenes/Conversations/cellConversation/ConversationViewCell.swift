@@ -27,10 +27,33 @@ class ConversationViewCell: UITableViewCell {
     weak var delegate: MessageCellSignalDelegate?
     private var currentMessage: PostMessage?
     private var currentPositionForRetry: Int = 0
+    private var currentIsMe: Bool = false
 
     private var fixedLabelWidthConstraint: NSLayoutConstraint?
     private var imageWidthConstraint: NSLayoutConstraint?
     private var imageAspectConstraint: NSLayoutConstraint?
+
+    // MARK: - Réactions & options ("•••" toujours du côté opposé à l'avatar)
+    private let optionsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.tintColor = .appGreyOff
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    private let reactionPickerBar = ReactionPickerBarView()
+    private let reactionBadges = ReactionBadgesView()
+    private lazy var reactionsStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [reactionPickerBar, reactionBadges])
+        stack.axis = .vertical
+        stack.spacing = 6
+        stack.alignment = .leading
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    private var optionsLeadingConstraint: NSLayoutConstraint?
+    private var optionsTrailingConstraint: NSLayoutConstraint?
+    private var isPickerOpen = false
 
     /// Map des mentions (sans @, normalisées) -> URL de profil (issue du HTML)
     private var mentionLinkMap: [String: URL] = [:]
@@ -112,11 +135,58 @@ class ConversationViewCell: UITableViewCell {
             ui_view_label.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
 
-        // Long press → signaler
+        // Long press → réactions (uniquement sur un message reçu, jamais le sien)
         ui_view_label.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         ui_view_label.addGestureRecognizer(longPressGesture)
+
+        setupOptionsAndReactions()
+    }
+
+    private func setupOptionsAndReactions() {
+        contentView.addSubview(optionsButton)
+        contentView.addSubview(reactionsStack)
+
+        optionsButton.addTarget(self, action: #selector(handleOptionsTap), for: .touchUpInside)
+        reactionBadges.onTap = nil
+
+        // Collé à la bulle, du côté opposé à l'avatar (pas à l'extrémité de l'écran).
+        let leading = optionsButton.trailingAnchor.constraint(equalTo: ui_view_label.leadingAnchor, constant: -6)
+        let trailing = optionsButton.leadingAnchor.constraint(equalTo: ui_view_label.trailingAnchor, constant: 6)
+        optionsLeadingConstraint = leading
+        optionsTrailingConstraint = trailing
+
+        // Le .xib pin `ui_label_date.top` directement sous la bulle — on détache cette
+        // contrainte pour intercaler la barre de réactions AU-DESSUS du nom/heure
+        // (bulle → réactions → nom), sans toucher au reste de la mise en page.
+        detachTopConstraint(of: ui_label_date, from: ui_view_label)
+
+        NSLayoutConstraint.activate([
+            optionsButton.widthAnchor.constraint(equalToConstant: 28),
+            optionsButton.heightAnchor.constraint(equalToConstant: 28),
+            optionsButton.centerYAnchor.constraint(equalTo: ui_view_label.centerYAnchor),
+            // Filet de sécurité pour ne jamais sortir de l'écran sur une bulle très large.
+            optionsButton.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 2),
+            optionsButton.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -2),
+
+            reactionsStack.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 4),
+            reactionsStack.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor),
+            reactionsStack.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10),
+
+            ui_label_date.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4)
+        ])
+    }
+
+    /// Détache la contrainte `.top` du .xib reliant `label` au bas de `anchorView`, pour
+    /// pouvoir la repositionner par code (ex: intercaler une vue entre les deux).
+    private func detachTopConstraint(of label: UIView, from anchorView: UIView) {
+        guard let container = label.superview else { return }
+        let toDeactivate = container.constraints.filter { constraint in
+            (constraint.firstItem === label && constraint.firstAttribute == .top) ||
+            (constraint.secondItem === label && constraint.secondAttribute == .top)
+        }
+        NSLayoutConstraint.deactivate(toDeactivate)
     }
 
     override func layoutSubviews() {
@@ -153,13 +223,23 @@ class ConversationViewCell: UITableViewCell {
         delegate = nil
         currentMessage = nil
         currentPositionForRetry = 0
+        isPickerOpen = false
+        reactionPickerBar.isHidden = true
     }
 
     // MARK: - Configuration
     func configure(with message: PostMessage, isMe: Bool, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
+        currentIsMe = isMe
         mentionLinkMap.removeAll()
+
+        optionsLeadingConstraint?.isActive = isMe
+        optionsTrailingConstraint?.isActive = !isMe
+
+        isPickerOpen = false
+        reactionPickerBar.isHidden = true
+        reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
 
         // Avatar
         if let urlStr = message.user?.avatarURL, let url = URL(string: urlStr) {
@@ -224,12 +304,33 @@ class ConversationViewCell: UITableViewCell {
 
     // MARK: - Gestures
     @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        guard gesture.state == .began, let msg = currentMessage else { return }
+        // Réactions : uniquement sur un message reçu, jamais sur son propre message.
+        guard gesture.state == .began, !currentIsMe, currentMessage != nil else { return }
+        toggleReactionPicker()
+    }
+
+    @objc private func handleOptionsTap() {
+        guard let msg = currentMessage else { return }
         delegate?.signalMessage(
             messageId: msg.uid,
             userId: msg.user?.sid ?? 0,
-            textString: (msg.contentHtml?.isEmpty == false ? msg.contentHtml : msg.content) ?? ""
+            textString: (msg.contentHtml?.isEmpty == false ? msg.contentHtml : msg.content) ?? "",
+            status: msg.status
         )
+    }
+
+    private func toggleReactionPicker() {
+        guard let msg = currentMessage, let types = ReactionType.stored(), !types.isEmpty else { return }
+        isPickerOpen.toggle()
+        reactionPickerBar.configure(types: types, selectedId: msg.reactionId) { [weak self] type in
+            guard let self, let currentMsg = self.currentMessage else { return }
+            self.isPickerOpen = false
+            UIView.animate(withDuration: 0.2) { self.reactionPickerBar.isHidden = true }
+            self.delegate?.didTapReaction(messageId: currentMsg.uid, reactionType: type)
+        }
+        UIView.animate(withDuration: 0.2) {
+            self.reactionPickerBar.isHidden = !self.isPickerOpen
+        }
     }
 
     @objc private func handleImageTap(_ gesture: UITapGestureRecognizer) {

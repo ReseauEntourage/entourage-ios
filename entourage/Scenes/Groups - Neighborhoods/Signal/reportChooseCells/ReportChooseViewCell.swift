@@ -13,6 +13,7 @@ enum ReportCellType {
     case suppress
     case translate
     case copy
+    case edit
 }
 
 class ReportChooseViewCell:UITableViewCell {
@@ -82,6 +83,13 @@ class ReportChooseViewCell:UITableViewCell {
             ui_image?.image = UIImage(named: "ic_copy")
             ui_title?.text = "copy_the_text".localized
             ui_subtitle?.text = "copy_the_text_explanation".localized
+        case .edit:
+            // L'icône source a un trait blanc (prévue pour un fond coloré) : on la force en
+            // template pour la teinter en orange, cohérent avec les autres lignes du menu.
+            ui_image?.image = UIImage(named: "ic_profil_full_pen")?.withRenderingMode(.alwaysTemplate)
+            ui_image?.tintColor = .appOrange
+            ui_title?.text = "modify".localized
+            ui_subtitle?.text = "edit_message_cell_subtitle".localized
         }
     }
 }

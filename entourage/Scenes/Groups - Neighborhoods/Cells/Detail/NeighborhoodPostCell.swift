@@ -733,14 +733,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     
     func getStoredReactionTypes() -> [ReactionType]? {
-        guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
-        do {
-            let reactions = try JSONDecoder().decode([ReactionType].self, from: reactionsData)
-            return reactions
-        } catch {
-            print("Erreur de décodage des réactions : \(error)")
-            return nil
-        }
+        return ReactionType.stored()
     }
 
 

@@ -129,6 +129,18 @@ struct PostMessage:Codable {
         isRetryMsg = false
     }
 
+    /// Fusionne un message reçu par websocket avec la version locale déjà affichée : certains
+    /// événements (`chat_message_updated`) peuvent renvoyer une projection plus légère que la
+    /// réponse REST complète — on ne veut pas effacer des champs déjà connus (auteur, réactions)
+    /// qu'une édition/suppression ne touche pourtant jamais.
+    func mergingOverLocal(_ local: PostMessage) -> PostMessage {
+        var merged = self
+        if merged.user == nil { merged.user = local.user }
+        if merged.reactions == nil { merged.reactions = local.reactions }
+        if merged.reactionId == nil { merged.reactionId = local.reactionId }
+        return merged
+    }
+
     //Use to sort messages in days Dicts
     static func getArrayOfDateSorted(messages:[PostMessage], isAscendant:Bool) -> [Dictionary<DayMonthYearKey, [PostMessage]>.Element] {
         let dict = Dictionary(grouping: messages) { (message) -> DayMonthYearKey in
@@ -155,7 +167,7 @@ struct PostMessage:Codable {
                 dateTitle = "\(dayLitteral) \(day) \(monthLiterral) \(year)"
             }
 
-            return DayMonthYearKey(dayId: day, monthId: month, date: date, dateString: dateTitle)
+            return DayMonthYearKey(dayId: day, monthId: month, yearId: year, date: date, dateString: dateTitle)
         }
         
         let sortedDict = isAscendant ? dict.sorted { $0.key.date ?? Date() < $1.key.date ?? Date() } : dict.sorted { $0.key.date ?? Date() > $1.key.date ?? Date() }
@@ -164,11 +176,25 @@ struct PostMessage:Codable {
     }
 }
 
-struct DayMonthYearKey:Hashable {
-    var dayId:Int = 0
-    var monthId:Int = 0
-    var date:Date? = nil
-    var dateString:String = ""
+struct DayMonthYearKey: Hashable {
+    var dayId: Int = 0
+    var monthId: Int = 0
+    var yearId: Int = 0
+    var date: Date? = nil
+    var dateString: String = ""
+
+    // Égalité/hash basés uniquement sur le jour calendaire (jour+mois+année) : `date` est un
+    // horodatage précis à la seconde, propre à CHAQUE message — l'inclure dans l'égalité
+    // empêchait tout regroupement (chaque message devenait son propre groupe de date).
+    static func == (lhs: DayMonthYearKey, rhs: DayMonthYearKey) -> Bool {
+        lhs.dayId == rhs.dayId && lhs.monthId == rhs.monthId && lhs.yearId == rhs.yearId
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(dayId)
+        hasher.combine(monthId)
+        hasher.combine(yearId)
+    }
 }
 
 struct MemberLight: Codable {

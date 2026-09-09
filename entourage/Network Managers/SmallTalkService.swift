@@ -235,7 +235,69 @@ struct SmallTalkService: ParsingDataCodable {
             completion(error == nil && (response as? HTTPURLResponse)?.statusCode ?? 500 < 300)
         }
     }
-    
+
+    // MARK: - Réactions
+
+    static func postReaction(smallTalkId: String, messageId: String, reactionId: Int, completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIPostReactionSmallTalk, smallTalkId, messageId, token)
+        let wrapper = ReactionWrapper(reactionId: reactionId)
+        guard let bodyData = try? JSONEncoder().encode(wrapper) else {
+            DispatchQueue.main.async { completion(nil) }
+            return
+        }
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { _, resp, error in
+            guard let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+    static func deleteReaction(smallTalkId: String, messageId: String, completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIDeleteReactionSmallTalk, smallTalkId, messageId, token)
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { _, resp, error in
+            guard let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+    static func getReactionDetails(smallTalkId: String, messageId: String, completion: @escaping (CompleteReactionsResponse?, EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIGetDetailsReactionSmallTalk, smallTalkId, messageId, token)
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            let details = try? JSONDecoder().decode(CompleteReactionsResponse.self, from: data)
+            DispatchQueue.main.async { completion(details, nil) }
+        }
+    }
+
+    // MARK: - Édition
+
+    static func editMessage(smallTalkId: String, messageId: String, content: String, completion: @escaping (PostMessage?, EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIPatchSmallTalkMessage, smallTalkId, messageId, token)
+        let body = ["chat_message": ["content": content]]
+        let bodyData = try! JSONSerialization.data(withJSONObject: body, options: [])
+
+        NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { data, _, error in
+            guard let data = data, error == nil else {
+                completion(nil, error)
+                return
+            }
+            let message: PostMessage? = self.parseData(data: data, key: "chat_message")
+            completion(message, nil)
+        }
+    }
+
     /// Force la création du match, avec option d'envoyer un paramètre `unmatch`
        static func forceMatch(
            id: Int,

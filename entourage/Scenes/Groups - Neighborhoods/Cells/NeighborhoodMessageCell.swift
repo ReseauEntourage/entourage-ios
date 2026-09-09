@@ -50,9 +50,32 @@ class NeighborhoodMessageCell: UITableViewCell {
     var deletedImageView: UIImageView? = nil
     
     weak var delegate: MessageCellSignalDelegate? = nil
-    
+    private var currentIsMe = false
+
     // Changez "private" en "fileprivate" pour que ce membre soit accessible dans l'extension
     fileprivate static let baseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 28)
+
+    // MARK: - Réactions & options ("•••" toujours du côté opposé à l'avatar)
+    private let optionsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.tintColor = .gray
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    private let reactionPickerBar = ReactionPickerBarView()
+    private let reactionBadges = ReactionBadgesView()
+    private lazy var reactionsStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [reactionPickerBar, reactionBadges])
+        stack.axis = .vertical
+        stack.spacing = 6
+        stack.alignment = .leading
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    private var optionsLeadingConstraint: NSLayoutConstraint?
+    private var optionsTrailingConstraint: NSLayoutConstraint?
+    private var isPickerOpen = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -99,7 +122,15 @@ class NeighborhoodMessageCell: UITableViewCell {
         }
         
         ui_message.enableLongPressCopy()
-        
+
+        setupOptionsAndReactions()
+
+        // Appui long → réactions (géré une seule fois ici pour éviter d'empiler des gestes
+        // à chaque réutilisation de cellule ; le gate `!isMe` est fait dans le handler).
+        ui_view_message.isUserInteractionEnabled = true
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        ui_view_message.addGestureRecognizer(longPressGesture)
+
         deletedImage = UIImage(named: "ic_deleted_comment")
         deletedImageView = UIImageView(image: deletedImage)
         deletedImageView?.frame = CGRect(x: 16, y: 16, width: 15, height: 15)
@@ -108,12 +139,61 @@ class NeighborhoodMessageCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
         // RESET COMPLET des styles et de l'état de la cellule avant réutilisation
         ui_message.attributedText = nil
         ui_message.text = nil
         ui_image_user.image = UIImage(named: "placeholder_user")
         ui_view_message.backgroundColor = .clear
+        isPickerOpen = false
+        reactionPickerBar.isHidden = true
+    }
+
+    private func setupOptionsAndReactions() {
+        guard let contentView = self.contentView as UIView? else { return }
+        contentView.addSubview(optionsButton)
+        contentView.addSubview(reactionsStack)
+
+        optionsButton.addTarget(self, action: #selector(handleOptionsTap), for: .touchUpInside)
+
+        // Collé à la bulle, du côté opposé à l'avatar (pas à l'extrémité de l'écran).
+        let leading = optionsButton.trailingAnchor.constraint(equalTo: ui_view_message.leadingAnchor, constant: -6)
+        let trailing = optionsButton.leadingAnchor.constraint(equalTo: ui_view_message.trailingAnchor, constant: 6)
+        optionsLeadingConstraint = leading
+        optionsTrailingConstraint = trailing
+
+        // Le storyboard pin `ui_username`/`ui_date` directement sous la bulle — on détache ces
+        // contraintes pour intercaler la barre de réactions AU-DESSUS (bulle → réactions → nom).
+        detachTopConstraint(of: ui_username, in: contentView)
+        detachTopConstraint(of: ui_date, in: contentView)
+
+        NSLayoutConstraint.activate([
+            optionsButton.widthAnchor.constraint(equalToConstant: 28),
+            optionsButton.heightAnchor.constraint(equalToConstant: 28),
+            optionsButton.centerYAnchor.constraint(equalTo: ui_view_message.centerYAnchor),
+            // Filet de sécurité pour ne jamais sortir de l'écran sur une bulle très large.
+            optionsButton.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 2),
+            optionsButton.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -2),
+
+            reactionsStack.topAnchor.constraint(equalTo: ui_view_message.bottomAnchor, constant: 4),
+            reactionsStack.leadingAnchor.constraint(equalTo: ui_view_message.leadingAnchor),
+            reactionsStack.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10),
+
+            ui_username.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4),
+            ui_date.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4),
+            contentView.bottomAnchor.constraint(greaterThanOrEqualTo: ui_date.bottomAnchor, constant: 10),
+            contentView.bottomAnchor.constraint(greaterThanOrEqualTo: ui_username.bottomAnchor, constant: 10)
+        ])
+    }
+
+    /// Détache toute contrainte `.top` du storyboard portant sur `label`, pour pouvoir la
+    /// repositionner par code (ex: intercaler une vue entre la bulle et le nom/la date).
+    private func detachTopConstraint(of label: UIView, in container: UIView) {
+        let toDeactivate = container.constraints.filter { constraint in
+            (constraint.firstItem === label && constraint.firstAttribute == .top) ||
+            (constraint.secondItem === label && constraint.secondAttribute == .top)
+        }
+        NSLayoutConstraint.deactivate(toDeactivate)
     }
 
     
@@ -138,12 +218,30 @@ class NeighborhoodMessageCell: UITableViewCell {
     }
     
     @objc func handleLongPressGesture(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        if gestureRecognizer.state == .began,
-           let userId = userId,
-           let innerPostMessage = innerPostMessage {
-            delegate?.signalMessage(messageId: messageId,
-                                    userId: userId,
-                                    textString: innerPostMessage.content ?? "")
+        // Réactions : uniquement sur un message reçu, jamais sur son propre message.
+        guard gestureRecognizer.state == .began, !currentIsMe else { return }
+        toggleReactionPicker()
+    }
+
+    @objc private func handleOptionsTap() {
+        guard let userId = userId, let innerPostMessage = innerPostMessage else { return }
+        delegate?.signalMessage(messageId: messageId,
+                                userId: userId,
+                                textString: innerPostMessage.content ?? "",
+                                status: innerPostMessage.status)
+    }
+
+    private func toggleReactionPicker() {
+        guard let types = ReactionType.stored(), !types.isEmpty else { return }
+        isPickerOpen.toggle()
+        reactionPickerBar.configure(types: types, selectedId: innerPostMessage?.reactionId) { [weak self] type in
+            guard let self, let msgId = self.innerPostMessage?.uid else { return }
+            self.isPickerOpen = false
+            UIView.animate(withDuration: 0.2) { self.reactionPickerBar.isHidden = true }
+            self.delegate?.didTapReaction(messageId: msgId, reactionType: type)
+        }
+        UIView.animate(withDuration: 0.2) {
+            self.reactionPickerBar.isHidden = !self.isPickerOpen
         }
     }
     
@@ -155,15 +253,22 @@ class NeighborhoodMessageCell: UITableViewCell {
                       delegate: MessageCellSignalDelegate,
                       isTranslated: Bool) {
         ui_message.attributedText = nil
-        
+
         innerPostMessage = message
         messageId = message.uid
         userId = message.user?.sid
-        
+
         self.delegate = delegate
         self.messageForRetry = message.content ?? ""
         self.positionForRetry = positionRetry
-        
+
+        currentIsMe = isMe
+        optionsLeadingConstraint?.isActive = isMe
+        optionsTrailingConstraint?.isActive = !isMe
+        isPickerOpen = false
+        reactionPickerBar.isHidden = true
+        reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
+
         if isMe {
             ui_bt_signal_me?.isHidden = true
             ui_view_message.backgroundColor = .appOrangeLight_50
@@ -240,11 +345,6 @@ class NeighborhoodMessageCell: UITableViewCell {
                 if let deletedImageView = deletedImageView,
                    ui_message.superview?.subviews.contains(deletedImageView) == true {
                     deletedImageView.removeFromSuperview()
-                }
-                // Geste pour signaler (long press)
-                if isMe {
-                    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
-                    ui_message.addGestureRecognizer(longPressGesture)
                 }
                 ui_message.attributedText = getAttributedDisplayText(for: message, isTranslated: isTranslated)
                 ui_message.font = NeighborhoodMessageCell.baseFont
@@ -406,7 +506,8 @@ class NeighborhoodMessageCell: UITableViewCell {
            let innerPostMessage = innerPostMessage {
             delegate?.signalMessage(messageId: messageId,
                                     userId: userId,
-                                    textString: innerPostMessage.content ?? "")
+                                    textString: innerPostMessage.content ?? "",
+                                    status: innerPostMessage.status)
         }
     }
     
@@ -415,7 +516,8 @@ class NeighborhoodMessageCell: UITableViewCell {
            let innerPostMessage = innerPostMessage {
             delegate?.signalMessage(messageId: messageId,
                                     userId: userId,
-                                    textString: innerPostMessage.content ?? "")
+                                    textString: innerPostMessage.content ?? "",
+                                    status: innerPostMessage.status)
         }
     }
     
@@ -632,10 +734,12 @@ extension NeighborhoodMessageCell {
 
 // MARK: - Protocole de délégation pour la cellule
 protocol MessageCellSignalDelegate: AnyObject {
-    func signalMessage(messageId: Int, userId: Int, textString: String)
+    /// Ouvre le menu d'actions du message (bouton "•••" : Copier / Signaler / Modifier / Supprimer selon le contexte).
+    func signalMessage(messageId: Int, userId: Int, textString: String, status: String?)
     func retrySend(message: String, positionForRetry: Int)
     func showUser(userId: Int?)
     func showWebUrl(url: URL)
     func showFullScreenImage(_ image: UIImage) // 🆕 Ajoute cette méthode
-
+    /// Tap sur un emoji de la barre de réactions (jamais disponible sur son propre message).
+    func didTapReaction(messageId: Int, reactionType: ReactionType)
 }

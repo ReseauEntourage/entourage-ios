@@ -24,6 +24,19 @@ extension SocketChannelEvent {
         guard let jsonData = try? JSONSerialization.data(withJSONObject: rawData) else { return nil }
         return try? JSONDecoder().decode(T.self, from: jsonData)
     }
+
+    /// `chat_message_created`/`chat_message_updated` : le message peut être exposé à plat dans
+    /// `data`, ou imbriqué sous `data.chat_message` selon les cas — on essaie les deux formes
+    /// plutôt que d'échouer silencieusement (un décodage à plat raté renvoie un objet vide qui
+    /// ne matche jamais rien côté client, donnant l'impression que l'événement est ignoré).
+    func decodeMessage() -> PostMessage? {
+        if let message = decodeData(as: PostMessage.self) {
+            return message
+        }
+        guard let nested = rawData["chat_message"] as? [String: Any],
+              let jsonData = try? JSONSerialization.data(withJSONObject: nested) else { return nil }
+        return try? JSONDecoder().decode(PostMessage.self, from: jsonData)
+    }
 }
 
 final class SocketManager: NSObject {
@@ -126,15 +139,26 @@ final class SocketManager: NSObject {
         guard !isConnected, !isConnecting else { return }
         guard let token = UserDefaults.token, !token.isEmpty else { return }
 
-        let base = EnvironmentConfigurationManager.sharedInstance.baseURL
-            .replacingOccurrences(of: "https://", with: "wss://")
+        // ActionCable vit sur le serveur API (ex: api-preprod.entourage.social), pas sur le
+        // domaine web public (`baseURL`, ex: preprod.entourage.social) utilisé par ailleurs
+        // pour les liens — confondre les deux fait échouer le handshake (mauvais host).
+        guard let apiHost = URL(string: EnvironmentConfigurationManager.sharedInstance.APIHostURL as String)?.host else { return }
+        let appOrigin = EnvironmentConfigurationManager.sharedInstance.baseURL
         let encodedToken = token.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? token
-        guard let url = URL(string: "\(base)/cable?token=\(encodedToken)") else { return }
+        guard let url = URL(string: "wss://\(apiHost)/cable?token=\(encodedToken)") else { return }
+
+        // Un client natif n'envoie normalement aucun header Origin — si le back valide quand
+        // même l'origine (protection CSRF ActionCable non désactivée pour les clients mobiles),
+        // son absence fait répondre une page d'erreur HTTP au lieu du 101 Switching Protocols
+        // attendu, ce que URLSession remonte sous la forme générique -1011 "bad server response"
+        // (constaté aussi bien avec qu'sans ce header tant que le host était encore erroné).
+        var request = URLRequest(url: url)
+        request.setValue(appOrigin, forHTTPHeaderField: "Origin")
 
         isConnecting = true
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
         urlSession = session
-        let task = session.webSocketTask(with: url)
+        let task = session.webSocketTask(with: request)
         webSocketTask = task
         task.resume()
         listen()
@@ -290,5 +314,28 @@ extension SocketManager: URLSessionWebSocketDelegate {
             self?.isConnecting = false
             self?.scheduleReconnect()
         }
+    }
+
+    // Un échec au moment même du handshake (mauvais host, réponse HTTP invalide, etc.) est
+    // signalé ici — PAS par `didCloseWith`, qui ne concerne que la fermeture d'une connexion
+    // WebSocket déjà établie. Sans ce handler, `isConnecting` reste bloqué à `true` et plus
+    // aucune tentative de connexion n'est retentée pour le reste de la session.
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        guard error != nil else { return }
+        queue.async { [weak self] in
+            self?.isConnected = false
+            self?.isConnecting = false
+            self?.scheduleReconnect()
+        }
+    }
+
+    // Diagnostic temporaire : en cas d'échec du handshake, la seule erreur -1011 générique ne dit
+    // pas *pourquoi* (mauvaise réponse HTTP ? négociation HTTP/2 au lieu de HTTP/1.1, qui casse
+    // l'upgrade WebSocket derrière certains proxys ?). Ces métriques exposent le vrai statut HTTP
+    // reçu et le protocole réseau négocié (`http/1.1` vs `h2`).
+    func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
+        guard let last = metrics.transactionMetrics.last else { return }
+        let status = (last.response as? HTTPURLResponse)?.statusCode
+        print("[SocketManager] handshake diagnostic — protocol: \(last.networkProtocolName ?? "?"), HTTP status: \(status.map(String.init) ?? "?")")
     }
 }

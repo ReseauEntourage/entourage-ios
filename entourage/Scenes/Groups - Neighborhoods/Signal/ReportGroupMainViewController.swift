@@ -21,7 +21,9 @@ class ReportGroupMainViewController: BasePopViewController {
     var conversationId:Int? = nil
     var messageId:Int? = nil
     var textString:String? = nil
-    
+    var allowsMessageEdit = false
+    var messageStatus: String? = nil
+
     weak var parentDelegate:GroupDetailDelegate? = nil
     
     override func viewDidLoad() {
@@ -57,6 +59,8 @@ class ReportGroupMainViewController: BasePopViewController {
             vc.conversationId = conversationId
             vc.titleDelegate = self
             vc.textString = textString
+            vc.allowsMessageEdit = allowsMessageEdit
+            vc.messageStatus = messageStatus
         }
     }
 }
@@ -76,6 +80,13 @@ protocol GroupDetailDelegate: AnyObject {
     func showMessage(signalType:GroupDetailSignalType)
     func publicationDeleted()
     func translateItem(id:Int)
+    func editMessage(id:Int, content:String?)
+}
+
+// Implémentation par défaut : seul l'écran de conversation autorise l'édition
+// (allowsMessageEdit == true), c'est donc le seul à devoir surcharger cette méthode.
+extension GroupDetailDelegate {
+    func editMessage(id:Int, content:String?) {}
 }
 
 enum GroupDetailSignalType {

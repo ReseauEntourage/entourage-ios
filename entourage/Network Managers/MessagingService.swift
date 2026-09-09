@@ -132,7 +132,7 @@ struct MessagingService:ParsingDataCodable {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIChatMessageDelete
         endpoint = String.init(format: endpoint, chatMessageId, token)
-        
+
         NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
             guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 DispatchQueue.main.async { completion(error) }
@@ -141,7 +141,69 @@ struct MessagingService:ParsingDataCodable {
             DispatchQueue.main.async { completion(nil) }
         }
     }
-    
+
+    // MARK: - Réactions
+
+    static func postReaction(conversationId: Int, messageId: Int, reactionId: Int, completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIPostReactionConversation, "\(conversationId)", "\(messageId)", token)
+        let wrapper = ReactionWrapper(reactionId: reactionId)
+        guard let bodyData = try? JSONEncoder().encode(wrapper) else {
+            DispatchQueue.main.async { completion(nil) }
+            return
+        }
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { _, resp, error in
+            guard let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+    static func deleteReaction(conversationId: Int, messageId: Int, completion: @escaping (EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIDeleteReactionConversation, "\(conversationId)", "\(messageId)", token)
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { _, resp, error in
+            guard let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
+    static func getReactionDetails(conversationId: Int, messageId: Int, completion: @escaping (CompleteReactionsResponse?, EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIGetDetailsReactionConversation, "\(conversationId)", "\(messageId)", token)
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let data = data, let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            let details = try? JSONDecoder().decode(CompleteReactionsResponse.self, from: data)
+            DispatchQueue.main.async { completion(details, nil) }
+        }
+    }
+
+    // MARK: - Édition
+
+    static func editMessage(conversationId: Int, messageId: Int, content: String, completion: @escaping (_ message: PostMessage?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIPatchConversationMessage, "\(conversationId)", "\(messageId)", token)
+        let parameters = ["chat_message": ["content": content]]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            let message: PostMessage? = self.parseData(data: data, key: "chat_message")
+            DispatchQueue.main.async { completion(message, nil) }
+        }
+    }
+
     static func createOrGetConversation(userId:String, completion: @escaping (_ conversation:Conversation?,_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIConversationPostCreateConversation

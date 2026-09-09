@@ -538,6 +538,8 @@
 		2674FEC92ACDB7520013D674 /* HomeModeratorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2674FEC82ACDB7520013D674 /* HomeModeratorCell.xib */; };
 		2684542C29DAC63700C944EA /* UniversalLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2684542B29DAC63700C944EA /* UniversalLinkManager.swift */; };
 		2685FFE22B68EA1D0083F683 /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685FFE12B68EA1D0083F683 /* Reaction.swift */; };
+		29661BA7659D4853B8D5A9BD /* ReactionBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F763168D06774C2CBB93621C /* ReactionBadgesView.swift */; };
+		B782C67A4A1B497B8168D03F /* ReactionPickerBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C7D127DB54B909F87DF0E /* ReactionPickerBarView.swift */; };
 		2689F3B42A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2689F3B32A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib */; };
 		2689F3B62A3B6D3E0009920D /* WelcomeFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */; };
 		268ADBBE2DD1D80100031C6F /* SmallTalksModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ADBBD2DD1D80100031C6F /* SmallTalksModels.swift */; };
@@ -1212,6 +1214,8 @@
 		2674FEC82ACDB7520013D674 /* HomeModeratorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeModeratorCell.xib; sourceTree = "<group>"; };
 		2684542B29DAC63700C944EA /* UniversalLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkManager.swift; sourceTree = "<group>"; };
 		2685FFE12B68EA1D0083F683 /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
+		F763168D06774C2CBB93621C /* ReactionBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionBadgesView.swift; sourceTree = "<group>"; };
+		157C7D127DB54B909F87DF0E /* ReactionPickerBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionPickerBarView.swift; sourceTree = "<group>"; };
 		2689F3B32A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeThreeDemandExampleCell.xib; sourceTree = "<group>"; };
 		2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFiveViewController.swift; sourceTree = "<group>"; };
 		268ADBBD2DD1D80100031C6F /* SmallTalksModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalksModels.swift; sourceTree = "<group>"; };
@@ -1762,6 +1766,7 @@
 				025E917727F36A6E00D4A7A8 /* Shared Cells */,
 				02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */,
 				02CCE68B27D7B52900D6976C /* TagListView */,
+				A70ADF6D547447A48D8C491D /* Reactions */,
 				0268194E278DF6AF00A98A4A /* Onboarding */,
 				02DDF1D627D9117700EE22DE /* ProgressRadiusView.swift */,
 				02490DC427EA245E00E2577B /* MJErrorInputView.swift */,
@@ -1778,6 +1783,15 @@
 				4AF5C1066AB1B6532719CED1 /* PostsSkeletonOverlayView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A70ADF6D547447A48D8C491D /* Reactions */ = {
+			isa = PBXGroup;
+			children = (
+				F763168D06774C2CBB93621C /* ReactionBadgesView.swift */,
+				157C7D127DB54B909F87DF0E /* ReactionPickerBarView.swift */,
+			);
+			path = Reactions;
 			sourceTree = "<group>";
 		};
 		0268194E278DF6AF00A98A4A /* Onboarding */ = {
@@ -3093,6 +3107,8 @@
 				260377FC2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift in Sources */,
 				2608F2312E4E0D7600C3C254 /* Checkbox.swift in Sources */,
 				2685FFE22B68EA1D0083F683 /* Reaction.swift in Sources */,
+				29661BA7659D4853B8D5A9BD /* ReactionBadgesView.swift in Sources */,
+				B782C67A4A1B497B8168D03F /* ReactionPickerBarView.swift in Sources */,
 				24037B902FD00CB200D52EE0 /* WelcomeNationalGroupsListViewController.swift in Sources */,
 				A451653168895A18B5E6A1C2 /* BadgeModels.swift in Sources */,
 				E825E0A56600535D9D407B96 /* BadgeDotsAnimationView.swift in Sources */,

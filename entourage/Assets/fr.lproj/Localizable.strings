@@ -594,6 +594,8 @@
 "suppress_post_cell_subtitle" = "";
 "suppress_message_cell_subtitle" = "";
 "suppress_comment_cell_subtitle" = "";
+"edit_message_cell_subtitle" = "";
+"cancel_edit_message" = "Annuler la modification";
 
 "deleted_message" = "Ce message a été supprimé";
 "deleted_comment" = "Ce message a été supprimé";

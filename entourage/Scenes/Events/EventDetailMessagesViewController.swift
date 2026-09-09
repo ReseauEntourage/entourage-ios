@@ -53,6 +53,7 @@ class EventDetailMessagesViewController: UIViewController {
     var selectedIndexPath: IndexPath? = nil
     weak var parentDelegate: UpdateCommentCountDelegate? = nil
     var postMessage: PostMessage? = nil
+    private var socketToken: SocketManager.Token? = nil
     
     // MARK: - Propriétés pour la fonctionnalité de mention
     /// Liste filtrée affichée dans le tableau des suggestions (obtenue via l’appel query)
@@ -160,8 +161,111 @@ class EventDetailMessagesViewController: UIViewController {
             isStartEditing = false
             _ = ui_textview_message.becomeFirstResponder()
         }
+        subscribeToSocket()
     }
-    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromSocket()
+    }
+
+    // MARK: - Websocket (temps réel messages + réactions, canal partagé avec la discussion d'outing)
+    private func subscribeToSocket() {
+        guard socketToken == nil, eventId != 0 else { return }
+        socketToken = SocketManager.shared.subscribe(
+            instanceType: "Outing",
+            instanceId: eventId,
+            onEvent: { [weak self] event in
+                self?.handleSocketEvent(event)
+            },
+            onReconnected: { [weak self] in
+                self?.getMessages()
+            }
+        )
+    }
+
+    private func unsubscribeFromSocket() {
+        guard let token = socketToken else { return }
+        SocketManager.shared.unsubscribe(token)
+        socketToken = nil
+    }
+
+    private func handleSocketEvent(_ event: SocketChannelEvent) {
+        switch event.type {
+        case "chat_message_created":
+            applyIncomingMessage(event)
+        case "chat_message_updated":
+            applyMessageUpdate(event)
+        case "user_reaction_added":
+            applyReactionEvent(event, added: true)
+        case "user_reaction_removed":
+            applyReactionEvent(event, added: false)
+        default:
+            break
+        }
+    }
+
+    private func applyIncomingMessage(_ event: SocketChannelEvent) {
+        guard let incoming = event.decodeMessage(),
+              incoming.parentPostId == parentCommentId,
+              !messages.contains(where: { $0.uid == incoming.uid }) else { return }
+
+        messages.append(incoming)
+        ui_view_empty.isHidden = messages.count > 0
+        setItemsTranslated(messages: [incoming])
+        ui_tableview.reloadData()
+
+        let lastRow = ui_tableview.numberOfRows(inSection: 0) - 1
+        if lastRow >= 0 {
+            ui_tableview.scrollToRow(at: IndexPath(row: lastRow, section: 0), at: .bottom, animated: true)
+        }
+    }
+
+    private func applyMessageUpdate(_ event: SocketChannelEvent) {
+        guard let updated = event.decodeMessage() else { return }
+
+        if updated.uid == parentCommentId {
+            postMessage = postMessage.map { updated.mergingOverLocal($0) } ?? updated
+            ui_tableview.reloadData()
+            return
+        }
+        guard updated.parentPostId == parentCommentId,
+              let idx = messages.firstIndex(where: { $0.uid == updated.uid }) else { return }
+        messages[idx] = updated.mergingOverLocal(messages[idx])
+        ui_tableview.reloadData()
+    }
+
+    private func applyReactionEvent(_ event: SocketChannelEvent, added: Bool) {
+        // L'action de l'utilisateur courant est déjà appliquée en optimiste dans didTapReaction —
+        // ignorer l'écho socket de sa propre action pour éviter un double comptage.
+        guard event.userId != meId,
+              let reactionEvent = event.decodeData(as: ChatReactionEvent.self) else { return }
+
+        func applying(to reactions: [Reaction]?) -> [Reaction] {
+            var reactions = reactions ?? []
+            if let rIdx = reactions.firstIndex(where: { $0.reactionId == reactionEvent.reactionId }) {
+                var updatedReaction = reactions[rIdx]
+                updatedReaction.reactionsCount = max(0, updatedReaction.reactionsCount + (added ? 1 : -1))
+                if updatedReaction.reactionsCount == 0 {
+                    reactions.remove(at: rIdx)
+                } else {
+                    reactions[rIdx] = updatedReaction
+                }
+            } else if added {
+                reactions.append(Reaction(reactionId: reactionEvent.reactionId, chatMessageId: reactionEvent.chatMessageId, reactionsCount: 1))
+            }
+            return reactions
+        }
+
+        if reactionEvent.chatMessageId == parentCommentId {
+            postMessage?.reactions = applying(to: postMessage?.reactions)
+            ui_tableview.reloadData()
+        } else if let idx = messages.firstIndex(where: { $0.uid == reactionEvent.chatMessageId }) {
+            messages[idx].reactions = applying(to: messages[idx].reactions)
+            ui_tableview.reloadData()
+        }
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // S'assurer que la table des suggestions reste au-dessus
@@ -589,7 +693,7 @@ extension EventDetailMessagesViewController: MessageCellSignalDelegate {
         self.present(hostingController, animated: true)
     }
     
-    func signalMessage(messageId: Int, userId: Int, textString: String) {
+    func signalMessage(messageId: Int, userId: Int, textString: String, status: String?) {
         if let navvc = UIStoryboard(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController,
            let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
@@ -599,10 +703,52 @@ extension EventDetailMessagesViewController: MessageCellSignalDelegate {
             vc.userId = userId
             vc.messageId = messageId
             vc.textString = textString
+            // Pas d'édition sur les commentaires de post d'event (allowsMessageEdit reste false).
             self.present(navvc, animated: true)
         }
     }
-    
+
+    func didTapReaction(messageId: Int, reactionType: ReactionType) {
+        guard let idx = messages.firstIndex(where: { $0.uid == messageId }) else { return }
+        let currentReactionId = messages[idx].reactionId ?? 0
+        let isRemoving = currentReactionId == reactionType.id
+
+        applyLocalReaction(atIndex: idx, reactionId: isRemoving ? 0 : reactionType.id)
+
+        if isRemoving {
+            EventService.deleteReactionToEventPost(eventId: eventId, postId: messageId) { _ in }
+        } else {
+            if currentReactionId != 0 {
+                EventService.deleteReactionToEventPost(eventId: eventId, postId: messageId) { _ in }
+            }
+            let wrapper = ReactionWrapper(reactionId: reactionType.id)
+            EventService.postReactionToEventPost(eventId: eventId, postId: messageId, reactionWrapper: wrapper) { _ in }
+        }
+    }
+
+    private func applyLocalReaction(atIndex idx: Int, reactionId: Int) {
+        var reactions = messages[idx].reactions ?? []
+        let previousReactionId = messages[idx].reactionId ?? 0
+
+        if previousReactionId != 0, let rIdx = reactions.firstIndex(where: { $0.reactionId == previousReactionId }) {
+            if reactions[rIdx].reactionsCount > 1 {
+                reactions[rIdx].reactionsCount -= 1
+            } else {
+                reactions.remove(at: rIdx)
+            }
+        }
+        if reactionId != 0 {
+            if let rIdx = reactions.firstIndex(where: { $0.reactionId == reactionId }) {
+                reactions[rIdx].reactionsCount += 1
+            } else {
+                reactions.append(Reaction(reactionId: reactionId, chatMessageId: messages[idx].uid, reactionsCount: 1))
+            }
+        }
+        messages[idx].reactions = reactions
+        messages[idx].reactionId = reactionId
+        ui_tableview.reloadData()
+    }
+
     func retrySend(message: String, positionForRetry: Int) {
         sendMessage(message: message, isRetry: true, positionForRetry: positionForRetry)
     }
