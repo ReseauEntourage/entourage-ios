@@ -124,6 +124,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         ui_message.enableLongPressCopy()
 
         setupOptionsAndReactions()
+        hideLegacySignalButtons()
 
         // Appui long → réactions (géré une seule fois ici pour éviter d'empiler des gestes
         // à chaque réutilisation de cellule ; le gate `!isMe` est fait dans le handler).
@@ -162,11 +163,11 @@ class NeighborhoodMessageCell: UITableViewCell {
         optionsLeadingConstraint = leading
         optionsTrailingConstraint = trailing
 
-        // Le storyboard pin `ui_username`/`ui_date` directement sous la bulle — on détache ces
-        // contraintes pour intercaler la barre de réactions AU-DESSUS (bulle → réactions → nom).
-        detachTopConstraint(of: ui_username, in: contentView)
-        detachTopConstraint(of: ui_date, in: contentView)
-
+        // Le storyboard pin directement sous la bulle SOIT ui_date SOIT ui_username selon le
+        // prototype (cellMe : ui_date.top ; cellOther : ui_username.top) — l'autre label suit
+        // via une contrainte centerY déjà existante qu'on ne touche pas. On détache uniquement
+        // celui qui possède réellement la contrainte .top et on le repositionne sous la barre
+        // de réactions ; forcer les deux créerait un conflit avec ce centerY existant.
         NSLayoutConstraint.activate([
             optionsButton.widthAnchor.constraint(equalToConstant: 28),
             optionsButton.heightAnchor.constraint(equalToConstant: 28),
@@ -177,23 +178,45 @@ class NeighborhoodMessageCell: UITableViewCell {
 
             reactionsStack.topAnchor.constraint(equalTo: ui_view_message.bottomAnchor, constant: 4),
             reactionsStack.leadingAnchor.constraint(equalTo: ui_view_message.leadingAnchor),
-            reactionsStack.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10),
-
-            ui_username.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4),
-            ui_date.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4),
-            contentView.bottomAnchor.constraint(greaterThanOrEqualTo: ui_date.bottomAnchor, constant: 10),
-            contentView.bottomAnchor.constraint(greaterThanOrEqualTo: ui_username.bottomAnchor, constant: 10)
+            reactionsStack.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10)
         ])
+
+        if let anchoredLabel = detachTopConstraint(preferring: ui_date, orElse: ui_username, in: contentView) {
+            anchoredLabel.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4).isActive = true
+        }
     }
 
-    /// Détache toute contrainte `.top` du storyboard portant sur `label`, pour pouvoir la
-    /// repositionner par code (ex: intercaler une vue entre la bulle et le nom/la date).
-    private func detachTopConstraint(of label: UIView, in container: UIView) {
-        let toDeactivate = container.constraints.filter { constraint in
-            (constraint.firstItem === label && constraint.firstAttribute == .top) ||
-            (constraint.secondItem === label && constraint.secondAttribute == .top)
+    /// Détache la contrainte `.top` du storyboard portant sur `preferred` si elle existe, sinon
+    /// sur `fallback`, et renvoie le label concerné (à repositionner par l'appelant). L'autre
+    /// label n'est pas touché : il suit via sa propre contrainte centerY déjà existante.
+    private func detachTopConstraint(preferring preferred: UIView, orElse fallback: UIView, in container: UIView) -> UIView? {
+        func topConstraint(for label: UIView) -> NSLayoutConstraint? {
+            container.constraints.first { constraint in
+                (constraint.firstItem === label && constraint.firstAttribute == .top) ||
+                (constraint.secondItem === label && constraint.secondAttribute == .top)
+            }
         }
-        NSLayoutConstraint.deactivate(toDeactivate)
+        if let constraint = topConstraint(for: preferred) {
+            constraint.isActive = false
+            return preferred
+        }
+        if let constraint = topConstraint(for: fallback) {
+            constraint.isActive = false
+            return fallback
+        }
+        return nil
+    }
+
+    /// Le storyboard place déjà un bouton "..." à côté de la bulle (signaler), visible par
+    /// défaut sur "cellOther" (celui de "cellMe" est masqué). Il n'a pas d'outlet connecté et
+    /// fait doublon avec le nouveau bouton "•••" programmatique — on le masque au lieu de le
+    /// réutiliser pour ne pas dépendre du câblage storyboard existant.
+    private func hideLegacySignalButtons() {
+        for subview in contentView.subviews where subview !== optionsButton {
+            if let button = subview as? UIButton, button.currentTitle == "..." {
+                button.isHidden = true
+            }
+        }
     }
 
     
