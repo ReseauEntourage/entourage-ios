@@ -56,8 +56,24 @@ final class ReactionBadgesView: UIView {
         onTap?()
     }
 
+    /// La hauteur réelle du contenu (dérivée de `stackView`) plutôt que de dépendre
+    /// uniquement de la contrainte `bottom` non-required posée dans `setup()` — sur une
+    /// cellule déjà mise en page une première fois (ex : réaction reçue en direct par
+    /// websocket sur un message déjà affiché), cette contrainte seule ne suffit pas
+    /// toujours à faire regrandir la vue lors d'un second passage de layout, ce qui
+    /// décalait le label de date au-dessus des pastilles (elles se chevauchaient).
+    override var intrinsicContentSize: CGSize {
+        guard !isHidden else { return CGSize(width: UIView.noIntrinsicMetric, height: 0) }
+        return stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    }
+
     func configure(reactions: [Reaction]?, types: [ReactionType]?) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        defer {
+            invalidateIntrinsicContentSize()
+            setNeedsLayout()
+        }
 
         guard let reactions = reactions, let types = types, !types.isEmpty else {
             isHidden = true

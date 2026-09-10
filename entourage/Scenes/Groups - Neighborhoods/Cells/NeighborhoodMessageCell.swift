@@ -386,6 +386,11 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_message.textColor = UIColor.black
         }
         ui_message.setFontBody(size: 15)
+        // Force un passage de layout complet (pas seulement celui d'une éventuelle vue déjà
+        // marquée dirty) : une cellule réutilisée dont le contenu des réactions change après
+        // un premier affichage (ex : réaction reçue en direct) a sinon pu garder une hauteur
+        // de ligne obsolète.
+        setNeedsLayout()
         layoutIfNeeded()
     }
     
@@ -527,6 +532,11 @@ class NeighborhoodMessageCell: UITableViewCell {
             }
         }
         ui_message.setFontBody(size: 15)
+        // Force un passage de layout complet (pas seulement celui d'une éventuelle vue déjà
+        // marquée dirty) : une cellule réutilisée dont le contenu des réactions change après
+        // un premier affichage (ex : réaction reçue en direct) a sinon pu garder une hauteur
+        // de ligne obsolète.
+        setNeedsLayout()
         layoutIfNeeded()
     }
     
