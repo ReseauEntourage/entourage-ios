@@ -221,15 +221,30 @@ class EventDetailMessagesViewController: UIViewController {
         }
         guard parentId == parentCommentId else { return }
 
+        // Capturé avant l'ajout du message : on ne force le scroll que si on lisait déjà le
+        // bas de la conversation, pour ne pas arracher l'utilisateur à un commentaire plus
+        // ancien qu'il est en train de consulter.
+        let wasAtBottom = isTableViewAtBottom()
+
         messages.append(incoming)
         ui_view_empty.isHidden = messages.count > 0
         setItemsTranslated(messages: [incoming])
         ui_tableview.reloadData()
 
+        guard wasAtBottom else { return }
         let lastRow = ui_tableview.numberOfRows(inSection: 0) - 1
         if lastRow >= 0 {
             ui_tableview.scrollToRow(at: IndexPath(row: lastRow, section: 0), at: .bottom, animated: true)
         }
+    }
+
+    /// Vrai si le dernier message visible est déjà à l'écran (ou si le contenu tient dans la
+    /// hauteur de la table, auquel cas on est trivialement "en bas").
+    private func isTableViewAtBottom() -> Bool {
+        let contentHeight = ui_tableview.contentSize.height
+        let tableHeight = ui_tableview.bounds.height
+        let offsetY = ui_tableview.contentOffset.y
+        return offsetY >= contentHeight - tableHeight - 1
     }
 
     private func applyMessageUpdate(_ event: SocketChannelEvent) {

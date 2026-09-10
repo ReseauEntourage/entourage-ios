@@ -842,12 +842,17 @@ private var imagePreviewOverlay: UIView?
         guard let incoming = event.decodeMessage() else { return }
         guard !messages.contains(where: { $0.uid == incoming.uid }) else { return }
 
+        // Capturé avant l'ajout : `hasMoved` ne redevient jamais false une fois qu'on a
+        // scrollé vers le haut (cf. scrollViewDidScroll), même si on est ensuite revenu tout
+        // en bas — on se fie donc à la position réelle au moment de l'arrivée du message.
+        let wasAtBottom = conversationCellDTOs.isEmpty || isTableViewAtBottom()
+
         messages.append(incoming)
         buildConversationCellDTOs()
         setEmptyStateVisible(conversationCellDTOs.isEmpty)
         ui_tableview.reloadData()
 
-        if !hasMoved, !conversationCellDTOs.isEmpty {
+        if wasAtBottom, !conversationCellDTOs.isEmpty {
             let lastRow = conversationCellDTOs.count - 1
             let ip = IndexPath(row: lastRow, section: 0)
             ui_tableview.scrollToRow(at: ip, at: .bottom, animated: true)

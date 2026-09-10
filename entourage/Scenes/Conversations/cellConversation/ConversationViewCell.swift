@@ -34,7 +34,8 @@ class ConversationViewCell: UITableViewCell {
     private var imageAspectConstraint: NSLayoutConstraint?
 
     // MARK: - Réactions & options (pastille "Réagir" sous la bulle, ouvre l'overlay unifié
-    // réactions + options — cf. MessageActionOverlay)
+    // réactions + options — cf. MessageActionOverlay. Masquée sur son propre message : seul
+    // l'appui long y donne alors accès, cf. handleLongPress/presentOverlay.)
     private let optionsButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .white
@@ -53,8 +54,6 @@ class ConversationViewCell: UITableViewCell {
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    /// Visible seulement pour inviter à réagir à un message reçu qui n'a encore aucune
-    /// réaction (masqué sur son propre message, et une fois qu'une réaction existe déjà).
     private let optionsLabel: UILabel = {
         let label = UILabel()
         label.text = "react_action_button".localized
@@ -254,8 +253,9 @@ class ConversationViewCell: UITableViewCell {
         currentIsMe = isMe
         mentionLinkMap.removeAll()
 
-        let hasReactions = (message.reactions ?? []).contains { $0.reactionsCount > 0 }
-        optionsLabel.isHidden = isMe || hasReactions
+        // Pas de réaction possible sur son propre message : seul l'appui long reste disponible
+        // pour accéder aux options (Copier/Modifier/Supprimer), le bouton "Réagir" est masqué.
+        optionsButton.isHidden = isMe
 
         reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
 
