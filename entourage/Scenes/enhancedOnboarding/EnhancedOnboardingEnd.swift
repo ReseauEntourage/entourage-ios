@@ -17,8 +17,9 @@ class EnhancedOnboardingEnd:UIViewController{
     @IBOutlet weak var ui_title_label: UILabel!
     @IBOutlet weak var ui_subtitle_label: UILabel!
     @IBOutlet weak var ui_btn_go_event: UIButton!
-    
-    
+    @IBOutlet weak var ui_btn_remind_later: UIButton!
+
+
     //Variable
     let interests: [String]? = nil
     let concerns: [String]? = nil
@@ -28,6 +29,7 @@ class EnhancedOnboardingEnd:UIViewController{
     var selectedAddress: String = ""
     var selectedRadius: Float = 0
     var selectedCoordinate: CLLocationCoordinate2D?
+    var showRemindLater = false
     
     override func viewDidLoad() {
         self.view.isHidden = true
@@ -40,6 +42,8 @@ class EnhancedOnboardingEnd:UIViewController{
         configureUserLocationAndRadius()
         configureOrangeButton(ui_btn_go_event, withTitle: "enhanced_onboarding_button_title_event".localized)
         ui_btn_go_event.addTarget(self, action: #selector(onEventClick), for: .touchUpInside)
+        ui_btn_remind_later.isHidden = true
+        ui_btn_remind_later.addTarget(self, action: #selector(onRemindLaterClick), for: .touchUpInside)
         
         AnalyticsLoggerManager.logEvent(name: onboarding_end_view)
         if EnhancedOnboardingConfiguration.shared.preference != "contribution" {
@@ -93,8 +97,17 @@ class EnhancedOnboardingEnd:UIViewController{
         let config = EnhancedOnboardingConfiguration.shared
         config.isFromOnboardingFromNormalWay = true
         AppState.navigateToMainApp()
-        
-        
+
+
+    }
+
+    @objc func onRemindLaterClick(){
+        AnalyticsLoggerManager.logEvent(name: onboarding_end_remind_later_clic)
+        // On ferme l'onboarding sans déclencher le CTA (création de demande/contribution).
+        OnboardingEndChoicesManager.shared.categoryForButton = ""
+        let config = EnhancedOnboardingConfiguration.shared
+        config.isFromOnboardingFromNormalWay = false
+        AppState.navigateToMainApp()
     }
     
     func configureOnboardingEndView() {
@@ -106,12 +119,14 @@ class EnhancedOnboardingEnd:UIViewController{
          // Vérification des choix utilisateur
          if let involvements = choicesManager.involvements {
              if involvements.contains("both_actions") {
-                 titleKey = "onboarding_start_action_title"
-                 subtitleKey = "onboarding_start_action_content"
-                 buttonTitleKey = "onboarding_start_action_button"
+                 // Être-entouré/préca solicite une demande ; riverain donne une contribution : wording et destination diffèrent.
+                 let isPreca = EnhancedOnboardingConfiguration.shared.preference == "contribution"
+                 titleKey = isPreca ? "onboarding_start_action_title_preca" : "onboarding_start_action_title"
+                 subtitleKey = isPreca ? "onboarding_start_action_content_preca" : "onboarding_start_action_content"
+                 buttonTitleKey = isPreca ? "onboarding_start_action_button_preca" : "onboarding_start_action_button"
                  OnboardingEndChoicesManager.shared.categoryForButton = "both_actions"
-                 // "both_actions" reads as "give or ask" normally, but as "ask" only for the contribution/être-entouré preference.
-                 OnboardingEndChoicesManager.shared.isContribForBothActions = (EnhancedOnboardingConfiguration.shared.preference != "contribution")
+                 OnboardingEndChoicesManager.shared.isContribForBothActions = !isPreca
+                 showRemindLater = isPreca
              } else if involvements.contains("outings") {
                  if(self.haveEvents){
                      titleKey = "onboarding_experience_event_title"
@@ -141,6 +156,10 @@ class EnhancedOnboardingEnd:UIViewController{
          ui_title_label.text = titleKey.localized
          ui_subtitle_label.text = subtitleKey.localized
          configureOrangeButton(ui_btn_go_event, withTitle: buttonTitleKey.localized)
+         ui_btn_remind_later.isHidden = !showRemindLater
+         if showRemindLater {
+             configureLinkButton(ui_btn_remind_later, withTitle: "onboarding_start_action_remind_later".localized)
+         }
         let config = EnhancedOnboardingConfiguration.shared
         if config.isOnboardingFromSetting{
             config.isOnboardingFromSetting = false
@@ -170,6 +189,13 @@ class EnhancedOnboardingEnd:UIViewController{
         button.layer.borderWidth = 1
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
         button.clipsToBounds = true
+    }
+
+    func configureLinkButton(_ button: UIButton, withTitle title: String) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = .clear
+        button.setTitleColor(UIColor.appOrange, for: .normal)
+        button.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 14)
     }
     
     func presentViewControllerWithAnimation(identifier: String) {

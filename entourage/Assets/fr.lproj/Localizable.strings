@@ -1711,6 +1711,11 @@ Choisissez un sujet pour démarrer.";
 "onboarding_start_action_content" = "On vous propose de commencer par donner une seconde vie à un objet, un geste qui renforce la solidarité et crée des liens avec vos voisins.";
 "onboarding_start_action_button" = "Faire ma première action solidaire";
 
+"onboarding_start_action_title_preca" = "C'est parti ! Demandez un coup de pouce près de chez vous";
+"onboarding_start_action_content_preca" = "On vous propose de commencer par formuler une première demande : un coup de main, un objet utile ou juste un moment de partage. C'est gratuit, et c'est souvent le début d'une belle rencontre avec vos voisins.";
+"onboarding_start_action_button_preca" = "Faire ma première demande";
+"onboarding_start_action_remind_later" = "Me le rappeler plus tard";
+
 "day_monday" = "Lundi";
 "day_tuesday" = "Mardi";
 "day_wednesday" = "Mercredi";

@@ -1738,6 +1738,11 @@ Choose a topic to get started.";
 "onboarding_start_action_content" = "We suggest starting by giving a second life to an item—a simple act that strengthens solidarity and builds bonds with your neighbors.";
 "onboarding_start_action_button" = "Do my first act of solidarity";
 
+"onboarding_start_action_title_preca" = "You're all set! Ask for a helping hand nearby";
+"onboarding_start_action_content_preca" = "We suggest starting by making your first request: a helping hand, a useful item, or just a moment to connect. It's free, and it's often the start of a great connection with your neighbors.";
+"onboarding_start_action_button_preca" = "Make my first request";
+"onboarding_start_action_remind_later" = "Remind me later";
+
 "day_monday" = "Monday";
 "day_tuesday" = "Tuesday";
 "day_wednesday" = "Wednesday";

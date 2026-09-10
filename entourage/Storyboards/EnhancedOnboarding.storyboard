@@ -147,10 +147,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2QC-wh-6oe">
-                                <rect key="frame" x="0.0" y="714" width="393" height="70"/>
+                                <rect key="frame" x="0.0" y="714" width="393" height="122"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="big-lG-WHQ">
-                                        <rect key="frame" x="134.66666666666666" y="11" width="123.99999999999997" height="48"/>
+                                        <rect key="frame" x="134.66666666666666" y="16" width="123.99999999999997" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="CCx-M5-ESV"/>
                                         </constraints>
@@ -160,12 +160,20 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmL-8k-3nD">
+                                        <rect key="frame" x="150" y="72" width="93" height="20.333333333333329"/>
+                                        <state key="normal" title="Plus tard">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="big-lG-WHQ" firstAttribute="centerY" secondItem="2QC-wh-6oe" secondAttribute="centerY" id="1qo-Q0-jDq"/>
-                                    <constraint firstAttribute="height" constant="70" id="W5d-w6-lg0"/>
+                                    <constraint firstItem="big-lG-WHQ" firstAttribute="top" secondItem="2QC-wh-6oe" secondAttribute="top" constant="16" id="4tK-Nq-1oM"/>
+                                    <constraint firstAttribute="height" constant="122" id="W5d-w6-lg0"/>
                                     <constraint firstItem="big-lG-WHQ" firstAttribute="centerX" secondItem="2QC-wh-6oe" secondAttribute="centerX" id="uel-va-eQX"/>
+                                    <constraint firstItem="rmL-8k-3nD" firstAttribute="top" secondItem="big-lG-WHQ" secondAttribute="bottom" constant="8" id="9pR-2s-6zC"/>
+                                    <constraint firstItem="rmL-8k-3nD" firstAttribute="centerX" secondItem="2QC-wh-6oe" secondAttribute="centerX" id="qWx-5f-7bT"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DmY-Gs-Gtk" customClass="LottieAnimationView" customModule="Lottie">
@@ -207,6 +215,7 @@
                     </view>
                     <connections>
                         <outlet property="ui_btn_go_event" destination="big-lG-WHQ" id="wGf-i3-KEK"/>
+                        <outlet property="ui_btn_remind_later" destination="rmL-8k-3nD" id="xYz-1a-2bC"/>
                         <outlet property="ui_lottiview" destination="DmY-Gs-Gtk" id="XPt-1i-sIp"/>
                         <outlet property="ui_subtitle_label" destination="Hqa-w7-W8d" id="VZ0-V8-RCO"/>
                         <outlet property="ui_title_label" destination="UE9-2Y-JgO" id="5j1-mp-ifw"/>
