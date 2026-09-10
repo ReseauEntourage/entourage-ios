@@ -62,6 +62,7 @@ let kAPIReportPostNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token
 let kAPIReportPostCommentNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token=%@"
 let kAPIGetNeighborhoodPostMessage = "neighborhoods/%@/chat_messages/%@?token=%@&image_size=high"
 let kAPIDeleteNeigborhoodPostMessage = "neighborhoods/%d/chat_messages/%d?token=%@"
+let kAPIPatchNeighborhoodPostMessage = "neighborhoods/%d/chat_messages/%d?token=%@"
 let kAPIPostReactionGroupPost = "neighborhoods/%d/chat_messages/%d/reactions?token=%@"
 let kAPIDeleteReactionGroupPost = "neighborhoods/%d/chat_messages/%d/reactions?token=%@"
 let kAPIGetDetailsReactionGroupPost = "neighborhoods/%d/chat_messages/%d/reactions/users?token=%@"

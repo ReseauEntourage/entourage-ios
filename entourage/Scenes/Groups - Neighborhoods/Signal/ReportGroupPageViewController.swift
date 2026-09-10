@@ -25,20 +25,22 @@ class ReportGroupPageViewController: UIPageViewController {
     var textString:String? = nil
     var allowsMessageEdit = false
     var messageStatus: String? = nil
-    
+    /// Cf. ReportGroupMainViewController.startAtReportReason.
+    var startAtReportReason = false
+
     var reportVc:ReportGroupViewController? = nil
     var chooseVc:ReportGroupChoosePageViewController? = nil
     weak var parentDelegate:GroupDetailDelegate? = nil
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         reportVc = viewController(isSend:false) as? ReportGroupViewController
-        
+
         guard let reportVc = reportVc else {
             return
         }
-        if(signalType == .group || signalType == .event || signalType == .conversation){
+        if(signalType == .group || signalType == .event || signalType == .conversation || startAtReportReason){
             haveChosen = true
             self.titleDelegate?.setTitleForSignal()
             setViewControllers([reportVc], direction: .forward, animated: true)

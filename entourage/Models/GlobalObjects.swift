@@ -108,7 +108,16 @@ struct PostMessage:Codable {
         content = try container.decodeIfPresent(String.self, forKey: .content)
         contentHtml = try container.decodeIfPresent(String.self, forKey: .contentHtml)
         createdDateString = try container.decodeIfPresent(String.self, forKey: .createdDateString) ?? ""
-        parentPostId = try container.decodeIfPresent(Int.self, forKey: .parentPostId)
+        // `post_id` peut être un entier, une chaîne contenant un entier, une chaîne vide (post
+        // de premier niveau) ou absent (anciens payloads socket) selon le contexte — on essaie
+        // les formes possibles plutôt que de faire échouer tout le decode du message.
+        if let intValue = try? container.decode(Int.self, forKey: .parentPostId) {
+            parentPostId = intValue
+        } else if let stringValue = try? container.decode(String.self, forKey: .parentPostId) {
+            parentPostId = Int(stringValue)
+        } else {
+            parentPostId = nil
+        }
         hasComments = try container.decodeIfPresent(Bool.self, forKey: .hasComments)
         user = try container.decodeIfPresent(UserLightNeighborhood.self, forKey: .user)
         commentsCount = try container.decodeIfPresent(Int.self, forKey: .commentsCount)

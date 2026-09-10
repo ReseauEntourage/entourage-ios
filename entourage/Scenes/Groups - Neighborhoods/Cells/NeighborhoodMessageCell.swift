@@ -55,28 +55,56 @@ class NeighborhoodMessageCell: UITableViewCell {
     // Changez "private" en "fileprivate" pour que ce membre soit accessible dans l'extension
     fileprivate static let baseFont: UIFont = UIFont(name: "NunitoSans-Regular", size: 15) ?? UIFont.systemFont(ofSize: 28)
 
-    // MARK: - Réactions & options ("•••" toujours du côté opposé à l'avatar)
+    // MARK: - Réactions & options (pastille "Réagir" sous la bulle, ouvre l'overlay unifié
+    // réactions + options — cf. MessageActionOverlay)
     private let optionsButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        button.tintColor = .gray
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 16
+        button.layer.masksToBounds = true
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.appGrisReaction.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    private let reactionPickerBar = ReactionPickerBarView()
-    private let reactionBadges = ReactionBadgesView()
-    private lazy var reactionsStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [reactionPickerBar, reactionBadges])
-        stack.axis = .vertical
+    private let optionsIcon: UIImageView = {
+        let iv = UIImageView(image: UIImage(systemName: "face.smiling"))
+        iv.tintColor = .appOrange
+        iv.contentMode = .scaleAspectFit
+        iv.isUserInteractionEnabled = false
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    /// Visible seulement pour inviter à réagir à un message reçu qui n'a encore aucune
+    /// réaction (masqué sur son propre message, et une fois qu'une réaction existe déjà).
+    private let optionsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "react_action_button".localized
+        label.font = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        label.textColor = .appGreyOff
+        label.isUserInteractionEnabled = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private lazy var optionsContentStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [optionsIcon, optionsLabel])
+        stack.axis = .horizontal
         stack.spacing = 6
-        stack.alignment = .leading
+        stack.alignment = .center
+        stack.isUserInteractionEnabled = false
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    private var optionsLeadingConstraint: NSLayoutConstraint?
-    private var optionsTrailingConstraint: NSLayoutConstraint?
-    private var isPickerOpen = false
-    
+    private let reactionBadges = ReactionBadgesView()
+    private lazy var reactionsStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [reactionBadges, optionsButton])
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -121,13 +149,12 @@ class NeighborhoodMessageCell: UITableViewCell {
             }
         }
         
-        ui_message.enableLongPressCopy()
-
         setupOptionsAndReactions()
         hideLegacySignalButtons()
 
-        // Appui long → réactions (géré une seule fois ici pour éviter d'empiler des gestes
-        // à chaque réutilisation de cellule ; le gate `!isMe` est fait dans le handler).
+        // Appui long → overlay unifié réactions + options, sur son propre message comme sur
+        // celui d'un autre (géré une seule fois ici pour éviter d'empiler des gestes à
+        // chaque réutilisation de cellule).
         ui_view_message.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         ui_view_message.addGestureRecognizer(longPressGesture)
@@ -146,22 +173,14 @@ class NeighborhoodMessageCell: UITableViewCell {
         ui_message.text = nil
         ui_image_user.image = UIImage(named: "placeholder_user")
         ui_view_message.backgroundColor = .clear
-        isPickerOpen = false
-        reactionPickerBar.isHidden = true
     }
 
     private func setupOptionsAndReactions() {
         guard let contentView = self.contentView as UIView? else { return }
-        contentView.addSubview(optionsButton)
         contentView.addSubview(reactionsStack)
 
         optionsButton.addTarget(self, action: #selector(handleOptionsTap), for: .touchUpInside)
-
-        // Collé à la bulle, du côté opposé à l'avatar (pas à l'extrémité de l'écran).
-        let leading = optionsButton.trailingAnchor.constraint(equalTo: ui_view_message.leadingAnchor, constant: -6)
-        let trailing = optionsButton.leadingAnchor.constraint(equalTo: ui_view_message.trailingAnchor, constant: 6)
-        optionsLeadingConstraint = leading
-        optionsTrailingConstraint = trailing
+        optionsButton.addSubview(optionsContentStack)
 
         // Le storyboard pin directement sous la bulle SOIT ui_date SOIT ui_username selon le
         // prototype (cellMe : ui_date.top ; cellOther : ui_username.top) — l'autre label suit
@@ -169,12 +188,12 @@ class NeighborhoodMessageCell: UITableViewCell {
         // celui qui possède réellement la contrainte .top et on le repositionne sous la barre
         // de réactions ; forcer les deux créerait un conflit avec ce centerY existant.
         NSLayoutConstraint.activate([
-            optionsButton.widthAnchor.constraint(equalToConstant: 28),
-            optionsButton.heightAnchor.constraint(equalToConstant: 28),
-            optionsButton.centerYAnchor.constraint(equalTo: ui_view_message.centerYAnchor),
-            // Filet de sécurité pour ne jamais sortir de l'écran sur une bulle très large.
-            optionsButton.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 2),
-            optionsButton.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -2),
+            optionsIcon.widthAnchor.constraint(equalToConstant: 18),
+            optionsIcon.heightAnchor.constraint(equalToConstant: 18),
+            optionsContentStack.topAnchor.constraint(equalTo: optionsButton.topAnchor, constant: 7),
+            optionsContentStack.bottomAnchor.constraint(equalTo: optionsButton.bottomAnchor, constant: -7),
+            optionsContentStack.leadingAnchor.constraint(equalTo: optionsButton.leadingAnchor, constant: 14),
+            optionsContentStack.trailingAnchor.constraint(equalTo: optionsButton.trailingAnchor, constant: -14),
 
             reactionsStack.topAnchor.constraint(equalTo: ui_view_message.bottomAnchor, constant: 4),
             reactionsStack.leadingAnchor.constraint(equalTo: ui_view_message.leadingAnchor),
@@ -241,33 +260,22 @@ class NeighborhoodMessageCell: UITableViewCell {
     }
     
     @objc func handleLongPressGesture(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        // Réactions : uniquement sur un message reçu, jamais sur son propre message.
-        guard gestureRecognizer.state == .began, !currentIsMe else { return }
-        toggleReactionPicker()
+        guard gestureRecognizer.state == .began else { return }
+        presentOverlay()
     }
 
     @objc private func handleOptionsTap() {
-        guard let userId = userId, let innerPostMessage = innerPostMessage else { return }
-        delegate?.signalMessage(messageId: messageId,
-                                userId: userId,
-                                textString: innerPostMessage.content ?? "",
-                                status: innerPostMessage.status)
+        presentOverlay()
     }
 
-    private func toggleReactionPicker() {
-        guard let types = ReactionType.stored(), !types.isEmpty else { return }
-        isPickerOpen.toggle()
-        reactionPickerBar.configure(types: types, selectedId: innerPostMessage?.reactionId) { [weak self] type in
-            guard let self, let msgId = self.innerPostMessage?.uid else { return }
-            self.isPickerOpen = false
-            UIView.animate(withDuration: 0.2) { self.reactionPickerBar.isHidden = true }
-            self.delegate?.didTapReaction(messageId: msgId, reactionType: type)
-        }
-        UIView.animate(withDuration: 0.2) {
-            self.reactionPickerBar.isHidden = !self.isPickerOpen
-        }
+    private func presentOverlay() {
+        guard let message = innerPostMessage else { return }
+        delegate?.presentMessageOptions(anchorView: ui_view_message,
+                                        message: message,
+                                        textString: message.content ?? "",
+                                        isMe: currentIsMe)
     }
-    
+
     // MARK: - Populate Cell (Messages classiques de groupe)
     func populateCell(isMe: Bool,
                       message: PostMessage,
@@ -286,11 +294,9 @@ class NeighborhoodMessageCell: UITableViewCell {
         self.positionForRetry = positionRetry
 
         currentIsMe = isMe
-        optionsLeadingConstraint?.isActive = isMe
-        optionsTrailingConstraint?.isActive = !isMe
-        isPickerOpen = false
-        reactionPickerBar.isHidden = true
         reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
+        let hasReactions = (message.reactions ?? []).contains { $0.reactionsCount > 0 }
+        optionsLabel.isHidden = isMe || hasReactions
 
         if isMe {
             ui_bt_signal_me?.isHidden = true
@@ -525,23 +531,11 @@ class NeighborhoodMessageCell: UITableViewCell {
     }
     
     @objc func action_signal_conversation() {
-        if let userId = userId,
-           let innerPostMessage = innerPostMessage {
-            delegate?.signalMessage(messageId: messageId,
-                                    userId: userId,
-                                    textString: innerPostMessage.content ?? "",
-                                    status: innerPostMessage.status)
-        }
+        presentOverlay()
     }
-    
+
     @IBAction func action_signal_message(_ sender: Any) {
-        if let userId = userId,
-           let innerPostMessage = innerPostMessage {
-            delegate?.signalMessage(messageId: messageId,
-                                    userId: userId,
-                                    textString: innerPostMessage.content ?? "",
-                                    status: innerPostMessage.status)
-        }
+        presentOverlay()
     }
     
     @IBAction func action_retry(_ sender: Any) {
@@ -757,8 +751,10 @@ extension NeighborhoodMessageCell {
 
 // MARK: - Protocole de délégation pour la cellule
 protocol MessageCellSignalDelegate: AnyObject {
-    /// Ouvre le menu d'actions du message (bouton "•••" : Copier / Signaler / Modifier / Supprimer selon le contexte).
-    func signalMessage(messageId: Int, userId: Int, textString: String, status: String?)
+    /// Ouvre l'overlay unifié (réactions + options : Copier / Signaler / Modifier /
+    /// Supprimer / Traduire selon le contexte) ancré sur la bulle du message —
+    /// déclenché par un appui long ou un tap sur le bouton de réaction.
+    func presentMessageOptions(anchorView: UIView, message: PostMessage, textString: String, isMe: Bool)
     func retrySend(message: String, positionForRetry: Int)
     func showUser(userId: Int?)
     func showWebUrl(url: URL)

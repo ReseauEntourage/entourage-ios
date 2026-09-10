@@ -2015,7 +2015,48 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
         self.present(hostingController, animated: true)
     }
     
-    func signalMessage(messageId: Int, userId: Int, textString: String, status: String?) {
+    func presentMessageOptions(anchorView: UIView, message: PostMessage, textString: String, isMe: Bool) {
+        guard let userId = message.user?.sid else { return }
+        let context = MessageActionContext(
+            groupId: nil,
+            eventId: nil,
+            postId: nil,
+            chatMessageId: message.uid,
+            conversationId: conversationId,
+            userId: userId,
+            textString: textString,
+            // Édition autorisée uniquement sur cet écran (1-1/groupe/smalltalk/discussion outing),
+            // jamais sur les commentaires de post de groupe/event.
+            allowsMessageEdit: true,
+            messageStatus: message.status
+        )
+        guard let coordinator = MessageActionsCoordinator(
+            context: context,
+            onEdit: { [weak self] id, text in self?.editMessage(id: id, content: text) },
+            onDeleted: { [weak self] in self?.publicationDeleted() },
+            onTranslate: { [weak self] id in self?.translateItem(id: id) }
+        ) else { return }
+
+        MessageActionOverlay.show(
+            anchorView: anchorView,
+            isMe: isMe,
+            reactionTypes: ReactionType.stored() ?? [],
+            selectedReactionId: message.reactionId,
+            options: coordinator.options,
+            paramType: coordinator.paramType,
+            onReaction: { [weak self] type in self?.didTapReaction(messageId: message.uid, reactionType: type) },
+            onOption: { [weak self] type in
+                guard let self else { return }
+                if case .report = type {
+                    self.presentReportReason(userId: userId, messageId: message.uid, textString: textString, status: message.status)
+                } else {
+                    coordinator.perform(type)
+                }
+            }
+        )
+    }
+
+    private func presentReportReason(userId: Int, messageId: Int, textString: String, status: String?) {
         if let navvc = UIStoryboard(name: StoryboardName.neighborhoodReport, bundle: nil)
             .instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController,
            let vc = navvc.topViewController as? ReportGroupMainViewController {
@@ -2023,13 +2064,11 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
             vc.messageId = messageId
             vc.signalType = .comment
             vc.userId = userId
-            vc.messageId = messageId
             vc.conversationId = conversationId
             vc.textString = textString
-            // Édition autorisée uniquement sur cet écran (1-1/groupe/smalltalk/discussion outing),
-            // jamais sur les commentaires de post de groupe/event.
             vc.allowsMessageEdit = true
             vc.messageStatus = status
+            vc.startAtReportReason = true
             self.present(navvc, animated: true)
         }
     }

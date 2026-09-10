@@ -2248,3 +2248,4 @@ Choose a topic to get started.";
 "onboarding_phase1_event_label" = "Event you are attending";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Select a company first";
 "onboarding_phase1_select_date_title" = "Select a date";
+"react_action_button" = "React";

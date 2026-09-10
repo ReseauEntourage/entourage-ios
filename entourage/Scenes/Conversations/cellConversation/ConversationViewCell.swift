@@ -33,27 +33,55 @@ class ConversationViewCell: UITableViewCell {
     private var imageWidthConstraint: NSLayoutConstraint?
     private var imageAspectConstraint: NSLayoutConstraint?
 
-    // MARK: - Réactions & options ("•••" toujours du côté opposé à l'avatar)
+    // MARK: - Réactions & options (pastille "Réagir" sous la bulle, ouvre l'overlay unifié
+    // réactions + options — cf. MessageActionOverlay)
     private let optionsButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        button.tintColor = .appGreyOff
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 16
+        button.layer.masksToBounds = true
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.appGrisReaction.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    private let reactionPickerBar = ReactionPickerBarView()
-    private let reactionBadges = ReactionBadgesView()
-    private lazy var reactionsStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [reactionPickerBar, reactionBadges])
-        stack.axis = .vertical
+    private let optionsIcon: UIImageView = {
+        let iv = UIImageView(image: UIImage(systemName: "face.smiling"))
+        iv.tintColor = .appOrange
+        iv.contentMode = .scaleAspectFit
+        iv.isUserInteractionEnabled = false
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    /// Visible seulement pour inviter à réagir à un message reçu qui n'a encore aucune
+    /// réaction (masqué sur son propre message, et une fois qu'une réaction existe déjà).
+    private let optionsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "react_action_button".localized
+        label.font = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        label.textColor = .appGreyOff
+        label.isUserInteractionEnabled = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private lazy var optionsContentStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [optionsIcon, optionsLabel])
+        stack.axis = .horizontal
         stack.spacing = 6
-        stack.alignment = .leading
+        stack.alignment = .center
+        stack.isUserInteractionEnabled = false
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    private var optionsLeadingConstraint: NSLayoutConstraint?
-    private var optionsTrailingConstraint: NSLayoutConstraint?
-    private var isPickerOpen = false
+    private let reactionBadges = ReactionBadgesView()
+    private lazy var reactionsStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [reactionBadges, optionsButton])
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
 
     /// Map des mentions (sans @, normalisées) -> URL de profil (issue du HTML)
     private var mentionLinkMap: [String: URL] = [:]
@@ -135,7 +163,7 @@ class ConversationViewCell: UITableViewCell {
             ui_view_label.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
 
-        // Long press → réactions (uniquement sur un message reçu, jamais le sien)
+        // Long press → overlay unifié réactions + options, sur son propre message comme sur celui d'un autre
         ui_view_label.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
@@ -145,17 +173,11 @@ class ConversationViewCell: UITableViewCell {
     }
 
     private func setupOptionsAndReactions() {
-        contentView.addSubview(optionsButton)
         contentView.addSubview(reactionsStack)
 
         optionsButton.addTarget(self, action: #selector(handleOptionsTap), for: .touchUpInside)
+        optionsButton.addSubview(optionsContentStack)
         reactionBadges.onTap = nil
-
-        // Collé à la bulle, du côté opposé à l'avatar (pas à l'extrémité de l'écran).
-        let leading = optionsButton.trailingAnchor.constraint(equalTo: ui_view_label.leadingAnchor, constant: -6)
-        let trailing = optionsButton.leadingAnchor.constraint(equalTo: ui_view_label.trailingAnchor, constant: 6)
-        optionsLeadingConstraint = leading
-        optionsTrailingConstraint = trailing
 
         // Le .xib pin `ui_label_date.top` directement sous la bulle — on détache cette
         // contrainte pour intercaler la barre de réactions AU-DESSUS du nom/heure
@@ -163,12 +185,12 @@ class ConversationViewCell: UITableViewCell {
         detachTopConstraint(of: ui_label_date, from: ui_view_label)
 
         NSLayoutConstraint.activate([
-            optionsButton.widthAnchor.constraint(equalToConstant: 28),
-            optionsButton.heightAnchor.constraint(equalToConstant: 28),
-            optionsButton.centerYAnchor.constraint(equalTo: ui_view_label.centerYAnchor),
-            // Filet de sécurité pour ne jamais sortir de l'écran sur une bulle très large.
-            optionsButton.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 2),
-            optionsButton.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -2),
+            optionsIcon.widthAnchor.constraint(equalToConstant: 18),
+            optionsIcon.heightAnchor.constraint(equalToConstant: 18),
+            optionsContentStack.topAnchor.constraint(equalTo: optionsButton.topAnchor, constant: 7),
+            optionsContentStack.bottomAnchor.constraint(equalTo: optionsButton.bottomAnchor, constant: -7),
+            optionsContentStack.leadingAnchor.constraint(equalTo: optionsButton.leadingAnchor, constant: 14),
+            optionsContentStack.trailingAnchor.constraint(equalTo: optionsButton.trailingAnchor, constant: -14),
 
             reactionsStack.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 4),
             reactionsStack.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor),
@@ -223,8 +245,6 @@ class ConversationViewCell: UITableViewCell {
         delegate = nil
         currentMessage = nil
         currentPositionForRetry = 0
-        isPickerOpen = false
-        reactionPickerBar.isHidden = true
     }
 
     // MARK: - Configuration
@@ -234,11 +254,9 @@ class ConversationViewCell: UITableViewCell {
         currentIsMe = isMe
         mentionLinkMap.removeAll()
 
-        optionsLeadingConstraint?.isActive = isMe
-        optionsTrailingConstraint?.isActive = !isMe
+        let hasReactions = (message.reactions ?? []).contains { $0.reactionsCount > 0 }
+        optionsLabel.isHidden = isMe || hasReactions
 
-        isPickerOpen = false
-        reactionPickerBar.isHidden = true
         reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
 
         // Avatar
@@ -304,33 +322,18 @@ class ConversationViewCell: UITableViewCell {
 
     // MARK: - Gestures
     @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        // Réactions : uniquement sur un message reçu, jamais sur son propre message.
-        guard gesture.state == .began, !currentIsMe, currentMessage != nil else { return }
-        toggleReactionPicker()
+        guard gesture.state == .began else { return }
+        presentOverlay()
     }
 
     @objc private func handleOptionsTap() {
-        guard let msg = currentMessage else { return }
-        delegate?.signalMessage(
-            messageId: msg.uid,
-            userId: msg.user?.sid ?? 0,
-            textString: (msg.contentHtml?.isEmpty == false ? msg.contentHtml : msg.content) ?? "",
-            status: msg.status
-        )
+        presentOverlay()
     }
 
-    private func toggleReactionPicker() {
-        guard let msg = currentMessage, let types = ReactionType.stored(), !types.isEmpty else { return }
-        isPickerOpen.toggle()
-        reactionPickerBar.configure(types: types, selectedId: msg.reactionId) { [weak self] type in
-            guard let self, let currentMsg = self.currentMessage else { return }
-            self.isPickerOpen = false
-            UIView.animate(withDuration: 0.2) { self.reactionPickerBar.isHidden = true }
-            self.delegate?.didTapReaction(messageId: currentMsg.uid, reactionType: type)
-        }
-        UIView.animate(withDuration: 0.2) {
-            self.reactionPickerBar.isHidden = !self.isPickerOpen
-        }
+    private func presentOverlay() {
+        guard let msg = currentMessage else { return }
+        let textString = (msg.contentHtml?.isEmpty == false ? msg.contentHtml : msg.content) ?? ""
+        delegate?.presentMessageOptions(anchorView: ui_view_label, message: msg, textString: textString, isMe: currentIsMe)
     }
 
     @objc private func handleImageTap(_ gesture: UITapGestureRecognizer) {

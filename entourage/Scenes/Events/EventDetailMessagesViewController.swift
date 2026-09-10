@@ -207,8 +207,19 @@ class EventDetailMessagesViewController: UIViewController {
 
     private func applyIncomingMessage(_ event: SocketChannelEvent) {
         guard let incoming = event.decodeMessage(),
-              incoming.parentPostId == parentCommentId,
               !messages.contains(where: { $0.uid == incoming.uid }) else { return }
+
+        // Un seul canal socket diffuse TOUS les chat_messages de l'outing (posts ET commentaires
+        // confondus) — `post_id` sert normalement à ne garder que ceux de CE fil. Mais le
+        // payload `chat_message_created` omet parfois ce champ (constaté en prod) : dans ce cas
+        // impossible de savoir localement si le message appartient à ce post ou à un autre —
+        // on recharge via REST (qui, lui, est correctement scopé) plutôt que de risquer
+        // d'afficher à tort le commentaire d'un autre post dans ce fil.
+        guard let parentId = incoming.parentPostId else {
+            getMessages()
+            return
+        }
+        guard parentId == parentCommentId else { return }
 
         messages.append(incoming)
         ui_view_empty.isHidden = messages.count > 0
@@ -229,8 +240,10 @@ class EventDetailMessagesViewController: UIViewController {
             ui_tableview.reloadData()
             return
         }
-        guard updated.parentPostId == parentCommentId,
-              let idx = messages.firstIndex(where: { $0.uid == updated.uid }) else { return }
+        // Pas de filtre par post_id ici : `messages` ne contient déjà que les commentaires de
+        // CE post (chargés via REST, correctement scopé) — matcher par uid suffit, et évite de
+        // dépendre de post_id qui est parfois absent du payload socket `chat_message_updated`.
+        guard let idx = messages.firstIndex(where: { $0.uid == updated.uid }) else { return }
         messages[idx] = updated.mergingOverLocal(messages[idx])
         ui_tableview.reloadData()
     }
@@ -693,7 +706,47 @@ extension EventDetailMessagesViewController: MessageCellSignalDelegate {
         self.present(hostingController, animated: true)
     }
     
-    func signalMessage(messageId: Int, userId: Int, textString: String, status: String?) {
+    func presentMessageOptions(anchorView: UIView, message: PostMessage, textString: String, isMe: Bool) {
+        guard let userId = message.user?.sid else { return }
+        let context = MessageActionContext(
+            groupId: nil,
+            eventId: eventId,
+            postId: parentCommentId,
+            chatMessageId: message.uid,
+            conversationId: nil,
+            userId: userId,
+            textString: textString,
+            // Pas d'édition sur les commentaires de post d'event.
+            allowsMessageEdit: false,
+            messageStatus: message.status
+        )
+        guard let coordinator = MessageActionsCoordinator(
+            context: context,
+            onEdit: { _, _ in },
+            onDeleted: { [weak self] in self?.publicationDeleted() },
+            onTranslate: { [weak self] id in self?.translateItem(id: id) }
+        ) else { return }
+
+        MessageActionOverlay.show(
+            anchorView: anchorView,
+            isMe: isMe,
+            reactionTypes: ReactionType.stored() ?? [],
+            selectedReactionId: message.reactionId,
+            options: coordinator.options,
+            paramType: coordinator.paramType,
+            onReaction: { [weak self] type in self?.didTapReaction(messageId: message.uid, reactionType: type) },
+            onOption: { [weak self] type in
+                guard let self else { return }
+                if case .report = type {
+                    self.presentReportReason(userId: userId, messageId: message.uid, textString: textString, status: message.status)
+                } else {
+                    coordinator.perform(type)
+                }
+            }
+        )
+    }
+
+    private func presentReportReason(userId: Int, messageId: Int, textString: String, status: String?) {
         if let navvc = UIStoryboard(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController,
            let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
@@ -703,7 +756,7 @@ extension EventDetailMessagesViewController: MessageCellSignalDelegate {
             vc.userId = userId
             vc.messageId = messageId
             vc.textString = textString
-            // Pas d'édition sur les commentaires de post d'event (allowsMessageEdit reste false).
+            vc.startAtReportReason = true
             self.present(navvc, animated: true)
         }
     }

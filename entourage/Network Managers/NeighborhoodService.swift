@@ -495,6 +495,23 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
+    //MARK: - Édition
+    static func editComment(groupId: Int, messageId: Int, content: String, completion: @escaping (_ message: PostMessage?, _ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        let endpoint = String(format: kAPIPatchNeighborhoodPostMessage, groupId, messageId, token)
+        let parameters = ["chat_message": ["content": content]]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+
+        NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            let message: PostMessage? = self.parseData(data: data, key: "chat_message")
+            DispatchQueue.main.async { completion(message, nil) }
+        }
+    }
+
     //  REACTION CALL
     static func postReactionToGroupPost(groupId: Int, postId: Int, reactionWrapper: ReactionWrapper, completion: @escaping (EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}

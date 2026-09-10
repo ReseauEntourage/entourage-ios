@@ -2010,3 +2010,4 @@ Wählen Sie ein Thema, um zu beginnen.";
 "onboarding_phase1_event_label" = "Veranstaltung, an der Sie teilnehmen";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Wählen Sie zuerst ein Unternehmen aus";
 "onboarding_phase1_select_date_title" = "Datum auswählen";
+"react_action_button" = "Reagieren";

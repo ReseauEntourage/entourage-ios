@@ -1644,3 +1644,4 @@ Odaberite temu za početak.";
 "onboarding_phase1_event_label" = "Događaj na kojem sudjelujete";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Prvo odaberite tvrtku";
 "onboarding_phase1_select_date_title" = "Odaberite datum";
+"react_action_button" = "Reagiraj";

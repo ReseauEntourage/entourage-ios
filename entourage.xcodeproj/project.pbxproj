@@ -540,6 +540,8 @@
 		2685FFE22B68EA1D0083F683 /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685FFE12B68EA1D0083F683 /* Reaction.swift */; };
 		29661BA7659D4853B8D5A9BD /* ReactionBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F763168D06774C2CBB93621C /* ReactionBadgesView.swift */; };
 		B782C67A4A1B497B8168D03F /* ReactionPickerBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157C7D127DB54B909F87DF0E /* ReactionPickerBarView.swift */; };
+		1D62A501DE98FB88861E6F42 /* MessageActionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF4BE1D7F24AA0D9C75E90 /* MessageActionOverlay.swift */; };
+		8F05CDFBE1F3D3DAD23EE275 /* MessageActionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635ED36512E7A2B6F85E9721 /* MessageActionsCoordinator.swift */; };
 		2689F3B42A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2689F3B32A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib */; };
 		2689F3B62A3B6D3E0009920D /* WelcomeFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */; };
 		268ADBBE2DD1D80100031C6F /* SmallTalksModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ADBBD2DD1D80100031C6F /* SmallTalksModels.swift */; };
@@ -1216,6 +1218,8 @@
 		2685FFE12B68EA1D0083F683 /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		F763168D06774C2CBB93621C /* ReactionBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionBadgesView.swift; sourceTree = "<group>"; };
 		157C7D127DB54B909F87DF0E /* ReactionPickerBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionPickerBarView.swift; sourceTree = "<group>"; };
+		BBCF4BE1D7F24AA0D9C75E90 /* MessageActionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionOverlay.swift; sourceTree = "<group>"; };
+		635ED36512E7A2B6F85E9721 /* MessageActionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionsCoordinator.swift; sourceTree = "<group>"; };
 		2689F3B32A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeThreeDemandExampleCell.xib; sourceTree = "<group>"; };
 		2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFiveViewController.swift; sourceTree = "<group>"; };
 		268ADBBD2DD1D80100031C6F /* SmallTalksModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalksModels.swift; sourceTree = "<group>"; };
@@ -1767,6 +1771,7 @@
 				02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */,
 				02CCE68B27D7B52900D6976C /* TagListView */,
 				A70ADF6D547447A48D8C491D /* Reactions */,
+				09FD7F128AF40177E32C3149 /* MessageActions */,
 				0268194E278DF6AF00A98A4A /* Onboarding */,
 				02DDF1D627D9117700EE22DE /* ProgressRadiusView.swift */,
 				02490DC427EA245E00E2577B /* MJErrorInputView.swift */,
@@ -1792,6 +1797,15 @@
 				157C7D127DB54B909F87DF0E /* ReactionPickerBarView.swift */,
 			);
 			path = Reactions;
+			sourceTree = "<group>";
+		};
+		09FD7F128AF40177E32C3149 /* MessageActions */ = {
+			isa = PBXGroup;
+			children = (
+				BBCF4BE1D7F24AA0D9C75E90 /* MessageActionOverlay.swift */,
+				635ED36512E7A2B6F85E9721 /* MessageActionsCoordinator.swift */,
+			);
+			path = MessageActions;
 			sourceTree = "<group>";
 		};
 		0268194E278DF6AF00A98A4A /* Onboarding */ = {
@@ -3109,6 +3123,8 @@
 				2685FFE22B68EA1D0083F683 /* Reaction.swift in Sources */,
 				29661BA7659D4853B8D5A9BD /* ReactionBadgesView.swift in Sources */,
 				B782C67A4A1B497B8168D03F /* ReactionPickerBarView.swift in Sources */,
+				1D62A501DE98FB88861E6F42 /* MessageActionOverlay.swift in Sources */,
+				8F05CDFBE1F3D3DAD23EE275 /* MessageActionsCoordinator.swift in Sources */,
 				24037B902FD00CB200D52EE0 /* WelcomeNationalGroupsListViewController.swift in Sources */,
 				A451653168895A18B5E6A1C2 /* BadgeModels.swift in Sources */,
 				E825E0A56600535D9D407B96 /* BadgeDotsAnimationView.swift in Sources */,

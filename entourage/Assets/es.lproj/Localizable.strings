@@ -3436,3 +3436,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_phase1_event_label" = "Evento en el que participas";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Selecciona primero una empresa";
 "onboarding_phase1_select_date_title" = "Seleccionar una fecha";
+"react_action_button" = "Reaccionar";

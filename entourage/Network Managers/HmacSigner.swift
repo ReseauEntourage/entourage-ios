@@ -38,6 +38,8 @@ struct HmacSigner {
         )
         let signature = Data(code).base64EncodedString()
 
+        Logger.print("[HmacSigner] HMAC KEY: [\(secret)] MESSAGE: [\(message)] SIGNATURE: [\(signature)]")
+
         return (timestamp: String(timestamp), signature: signature)
     }
 }

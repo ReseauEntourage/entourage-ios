@@ -540,7 +540,7 @@ struct AmbassadorToolsSectionView: View {
 
             HStack(alignment: .top, spacing: 10) {
                 AmbassadorToolCard(
-                    icon: .emoji("🔧"),
+                    icon: .emoji("📚"),
                     title: "profile_ambassador_tool_toolkit".localized
                 ) {
                     if let url = URL(string: AMBASSADOR_TOOLKIT_URL) {
@@ -548,7 +548,7 @@ struct AmbassadorToolsSectionView: View {
                     }
                 }
                 AmbassadorToolCard(
-                    icon: .emoji("📜"),
+                    icon: .emoji("📝"),
                     title: "profile_ambassador_tool_charter".localized
                 ) {
                     if let url = URL(string: AMBASSADOR_CHARTER_URL) {

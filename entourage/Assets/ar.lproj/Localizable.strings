@@ -1949,3 +1949,4 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_phase1_event_label" = "الفعالية التي تشارك فيها";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "اختر شركة أولاً";
 "onboarding_phase1_select_date_title" = "اختر تاريخًا";
+"react_action_button" = "تفاعل";

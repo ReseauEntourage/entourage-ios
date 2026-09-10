@@ -23,14 +23,19 @@ class ReportGroupMainViewController: BasePopViewController {
     var textString:String? = nil
     var allowsMessageEdit = false
     var messageStatus: String? = nil
+    /// Permet de sauter directement à l'écran de motif de signalement (skip la liste de
+    /// choix), utilisé par le nouvel overlay unifié (MessageActionOverlay) qui gère déjà
+    /// lui-même Copier/Modifier/Supprimer/Traduire et ne délègue que "Signaler" ici.
+    var startAtReportReason = false
 
     weak var parentDelegate:GroupDetailDelegate? = nil
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        if (groupId != nil || eventId != nil) && messageId != nil {
+        if startAtReportReason {
+            setTitleForSignal()
+        } else if (groupId != nil || eventId != nil) && messageId != nil {
             ui_top_view.populateView(title: "parameter_comment".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
         }else if messageId != nil && groupId == nil && eventId == nil{
             ui_top_view.populateView(title: "parameter_message".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
@@ -61,6 +66,7 @@ class ReportGroupMainViewController: BasePopViewController {
             vc.textString = textString
             vc.allowsMessageEdit = allowsMessageEdit
             vc.messageStatus = messageStatus
+            vc.startAtReportReason = startAtReportReason
         }
     }
 }
@@ -83,8 +89,8 @@ protocol GroupDetailDelegate: AnyObject {
     func editMessage(id:Int, content:String?)
 }
 
-// Implémentation par défaut : seul l'écran de conversation autorise l'édition
-// (allowsMessageEdit == true), c'est donc le seul à devoir surcharger cette méthode.
+// Implémentation par défaut no-op : seuls les écrans qui autorisent l'édition
+// (allowsMessageEdit == true) ont besoin de surcharger cette méthode.
 extension GroupDetailDelegate {
     func editMessage(id:Int, content:String?) {}
 }

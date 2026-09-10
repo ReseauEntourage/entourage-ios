@@ -2247,3 +2247,4 @@ Choisissez un sujet pour démarrer.";
 "onboarding_phase1_event_label" = "Événement auquel vous participez";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Sélectionner une entreprise d’abord";
 "onboarding_phase1_select_date_title" = "Sélectionner une date";
+"react_action_button" = "Réagir";
