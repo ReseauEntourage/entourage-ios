@@ -524,7 +524,7 @@ struct NeighborhoodService:ParsingDataCodable {
 
         NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { _, resp, error in
             guard let response = resp as? HTTPURLResponse, response.statusCode < 300 else {
-                DispatchQueue.main.async { completion(nil) }
+                DispatchQueue.main.async { completion(error) }
                 return
             }
             DispatchQueue.main.async { completion(nil) }

@@ -2085,25 +2085,53 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
 
         applyLocalReaction(atIndex: idx, reactionId: isRemoving ? 0 : reactionType.id)
 
+        let smallTalkId = self.smallTalkId
+        let conversationId = self.conversationId
+
         if isSmallTalkMode {
             if isRemoving {
-                SmallTalkService.deleteReaction(smallTalkId: smallTalkId, messageId: "\(messageId)") { _ in }
-            } else {
-                if currentReactionId != 0 {
-                    SmallTalkService.deleteReaction(smallTalkId: smallTalkId, messageId: "\(messageId)") { _ in }
+                SmallTalkService.deleteReaction(smallTalkId: smallTalkId, messageId: "\(messageId)") { [weak self] error in
+                    if error != nil { self?.revertLocalReaction(messageId: messageId, to: currentReactionId) }
                 }
-                SmallTalkService.postReaction(smallTalkId: smallTalkId, messageId: "\(messageId)", reactionId: reactionType.id) { _ in }
+            } else if currentReactionId != 0 {
+                // On attend la suppression de l'ancienne réaction avant de poser la nouvelle :
+                // le back-end interdit d'avoir deux réactions en même temps sur un message.
+                SmallTalkService.deleteReaction(smallTalkId: smallTalkId, messageId: "\(messageId)") { [weak self] deleteError in
+                    if deleteError != nil { self?.revertLocalReaction(messageId: messageId, to: currentReactionId); return }
+                    SmallTalkService.postReaction(smallTalkId: smallTalkId, messageId: "\(messageId)", reactionId: reactionType.id) { postError in
+                        if postError != nil { self?.revertLocalReaction(messageId: messageId, to: 0) }
+                    }
+                }
+            } else {
+                SmallTalkService.postReaction(smallTalkId: smallTalkId, messageId: "\(messageId)", reactionId: reactionType.id) { [weak self] error in
+                    if error != nil { self?.revertLocalReaction(messageId: messageId, to: 0) }
+                }
             }
         } else {
             if isRemoving {
-                MessagingService.deleteReaction(conversationId: conversationId, messageId: messageId) { _ in }
-            } else {
-                if currentReactionId != 0 {
-                    MessagingService.deleteReaction(conversationId: conversationId, messageId: messageId) { _ in }
+                MessagingService.deleteReaction(conversationId: conversationId, messageId: messageId) { [weak self] error in
+                    if error != nil { self?.revertLocalReaction(messageId: messageId, to: currentReactionId) }
                 }
-                MessagingService.postReaction(conversationId: conversationId, messageId: messageId, reactionId: reactionType.id) { _ in }
+            } else if currentReactionId != 0 {
+                MessagingService.deleteReaction(conversationId: conversationId, messageId: messageId) { [weak self] deleteError in
+                    if deleteError != nil { self?.revertLocalReaction(messageId: messageId, to: currentReactionId); return }
+                    MessagingService.postReaction(conversationId: conversationId, messageId: messageId, reactionId: reactionType.id) { postError in
+                        if postError != nil { self?.revertLocalReaction(messageId: messageId, to: 0) }
+                    }
+                }
+            } else {
+                MessagingService.postReaction(conversationId: conversationId, messageId: messageId, reactionId: reactionType.id) { [weak self] error in
+                    if error != nil { self?.revertLocalReaction(messageId: messageId, to: 0) }
+                }
             }
         }
+    }
+
+    /// Restaure l'état de réaction local après l'échec d'un appel réseau (le tableau a été mis à
+    /// jour de façon optimiste dans `didTapReaction` avant la réponse serveur).
+    private func revertLocalReaction(messageId: Int, to previousReactionId: Int) {
+        guard let idx = messages.firstIndex(where: { $0.uid == messageId }) else { return }
+        applyLocalReaction(atIndex: idx, reactionId: previousReactionId)
     }
 
     /// Mutation optimiste locale (toggle si même réaction déjà posée par l'utilisateur, sinon

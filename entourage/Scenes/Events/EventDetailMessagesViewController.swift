@@ -783,15 +783,35 @@ extension EventDetailMessagesViewController: MessageCellSignalDelegate {
 
         applyLocalReaction(atIndex: idx, reactionId: isRemoving ? 0 : reactionType.id)
 
+        let eventId = self.eventId
+
         if isRemoving {
-            EventService.deleteReactionToEventPost(eventId: eventId, postId: messageId) { _ in }
-        } else {
-            if currentReactionId != 0 {
-                EventService.deleteReactionToEventPost(eventId: eventId, postId: messageId) { _ in }
+            EventService.deleteReactionToEventPost(eventId: eventId, postId: messageId) { [weak self] error in
+                if error != nil { self?.revertLocalReaction(messageId: messageId, to: currentReactionId) }
             }
+        } else if currentReactionId != 0 {
+            // On attend la suppression de l'ancienne réaction avant de poser la nouvelle :
+            // le back-end interdit d'avoir deux réactions en même temps sur un message.
+            EventService.deleteReactionToEventPost(eventId: eventId, postId: messageId) { [weak self] deleteError in
+                if deleteError != nil { self?.revertLocalReaction(messageId: messageId, to: currentReactionId); return }
+                let wrapper = ReactionWrapper(reactionId: reactionType.id)
+                EventService.postReactionToEventPost(eventId: eventId, postId: messageId, reactionWrapper: wrapper) { postError in
+                    if postError != nil { self?.revertLocalReaction(messageId: messageId, to: 0) }
+                }
+            }
+        } else {
             let wrapper = ReactionWrapper(reactionId: reactionType.id)
-            EventService.postReactionToEventPost(eventId: eventId, postId: messageId, reactionWrapper: wrapper) { _ in }
+            EventService.postReactionToEventPost(eventId: eventId, postId: messageId, reactionWrapper: wrapper) { [weak self] error in
+                if error != nil { self?.revertLocalReaction(messageId: messageId, to: 0) }
+            }
         }
+    }
+
+    /// Restaure l'état de réaction local après l'échec d'un appel réseau (le tableau a été mis à
+    /// jour de façon optimiste dans `didTapReaction` avant la réponse serveur).
+    private func revertLocalReaction(messageId: Int, to previousReactionId: Int) {
+        guard let idx = messages.firstIndex(where: { $0.uid == messageId }) else { return }
+        applyLocalReaction(atIndex: idx, reactionId: previousReactionId)
     }
 
     private func applyLocalReaction(atIndex idx: Int, reactionId: Int) {

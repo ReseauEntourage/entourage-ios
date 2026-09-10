@@ -173,20 +173,14 @@ class NeighborhoodPostCell: UITableViewCell {
     @objc func handleLittleTap(gesture: UITapGestureRecognizer) {
         AnalyticsLoggerManager.logEvent(name: Clic_Post_Like)
         VibrationUtil.vibrate(style: .light)
-        if gesture.state == .ended {
-            // Vérifier si l'utilisateur a déjà réagi
-            if postMessage.reactionId == 0 || postMessage.reactionId == nil, let firstReactionType = getStoredReactionTypes()?.first {
-                // Ajouter la première réaction disponible
-                updateReaction(reactionType: firstReactionType, add: true)
-                delegate?.addReaction(post: self.postMessage, reactionType: firstReactionType)
-            } else {
-                // Supprimer la réaction existante si l'utilisateur a déjà réagi
-                if let existingReactionType = getReactionTypeById(postMessage.reactionId ?? 0) {
-                    updateReaction(reactionType: existingReactionType, add: false)
-                    delegate?.deleteReaction(post: self.postMessage, reactionType: existingReactionType)
-                }
-            }
-        }
+        guard gesture.state == .ended else { return }
+
+        let currentReactionId = postMessage.reactionId ?? 0
+        // Pas encore de réaction : le tap rapide pose la réaction par défaut (la première de la liste).
+        // Réaction existante : retaper la même réaction la retire (géré par le delegate).
+        let targetReactionType = currentReactionId == 0 ? getStoredReactionTypes()?.first : getReactionTypeById(currentReactionId)
+        guard let targetReactionType = targetReactionType else { return }
+        delegate?.didTapReaction(post: postMessage, reactionType: targetReactionType)
     }
     private func setupRoundedCorners() {
         if ui_view_sharing_header != nil {
@@ -506,39 +500,6 @@ class NeighborhoodPostCell: UITableViewCell {
         delegate?.onReactClickSeeMember(post: postMessage) // Assure-toi que `delegate` et `postMessage` sont accessibles ici
     }
 
-    func updateReaction(reactionType: ReactionType, add: Bool) {
-        if add {
-            // Ajouter une réaction
-            postMessage.reactionId = reactionType.id
-            if let index = postMessage.reactions?.firstIndex(where: { $0.reactionId == reactionType.id }) {
-                // La réaction existe déjà, augmenter le compteur
-                postMessage.reactions?[index].reactionsCount += 1
-            } else {
-                // Ajouter une nouvelle réaction
-                let newReaction = Reaction(reactionId: reactionType.id, chatMessageId: postId, reactionsCount: 1)
-                if postMessage.reactions != nil {
-                    postMessage.reactions?.append(newReaction)
-                } else {
-                    postMessage.reactions = [newReaction]
-                }
-            }
-        } else {
-            // Supprimer une réaction
-            postMessage.reactionId = 0
-            if let index = postMessage.reactions?.firstIndex(where: { $0.reactionId == reactionType.id }) {
-                if postMessage.reactions?[index].reactionsCount ?? 0 > 1 {
-                    postMessage.reactions?[index].reactionsCount -= 1
-                } else {
-                    postMessage.reactions?.remove(at: index)
-                }
-            }
-        }
-
-        // Mettre à jour l'affichage des réactions
-        updateReactionIcon()
-        displayReactions(for: postMessage)
-    }
-    
     func updateCommentAttributedText() {
         // 1) Récupérer le HTML (ou pseudo-HTML) original
         var htmlContent = isTranslated ? postMessage.contentTranslationsHtml?.translation
@@ -760,8 +721,7 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showImage(imageUrl:URL?, postId:Int)
     func signalPost(postId:Int, userId:Int, textString:String)
     func showWebviewUrl(url:URL)
-    func addReaction(post:PostMessage, reactionType:ReactionType)
-    func deleteReaction(post:PostMessage, reactionType:ReactionType)
+    func didTapReaction(post:PostMessage, reactionType:ReactionType)
     func onReactClickSeeMember(post:PostMessage)
     func ifNotMemberWarnUser()
     func postSurveyResponse(forPostId postId: Int, withResponses responses: [Bool])
@@ -772,26 +732,10 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
 extension NeighborhoodPostCell: ReactionsPopupViewDelegate {
 
     func reactForPost(reactionType: ReactionType) {
-        if postMessage.reactionId != 0 {
-            if postMessage.reactionId == reactionType.id {
-                // L'utilisateur souhaite supprimer sa réaction précédente
-                updateReaction(reactionType: reactionType, add: false)
-                delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
-            } else {
-                // Supprimer la réaction existante avant d'ajouter la nouvelle
-                if let existingReactionType = getReactionTypeById(postMessage.reactionId ?? 0) {
-                    updateReaction(reactionType: existingReactionType, add: false)
-                    delegate?.deleteReaction(post: self.postMessage, reactionType: existingReactionType)
-                }
-                // Ajouter la nouvelle réaction
-                updateReaction(reactionType: reactionType, add: true)
-                delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
-            }
-        } else {
-            // Ajouter une nouvelle réaction
-            updateReaction(reactionType: reactionType, add: true)
-            delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
-        }
+        // La décision (ajout / suppression / changement) et l'enchaînement des appels réseau
+        // sont gérés par le delegate, seule source de vérité pour l'état de la réaction
+        // (voir NeighborhoodDetailViewController.didTapReaction).
+        delegate?.didTapReaction(post: postMessage, reactionType: reactionType)
     }
 
 

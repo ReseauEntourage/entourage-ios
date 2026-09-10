@@ -882,32 +882,6 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
         }
     }
     
-    func updatedPostWithReaction(originalPost: PostMessage, reactionId: Int, addReaction: Bool) -> PostMessage {
-        var updatedReactions = originalPost.reactions ?? []
-
-        if addReaction {
-            // Ajouter une réaction
-            if let index = updatedReactions.firstIndex(where: { $0.reactionId == reactionId }) {
-                updatedReactions[index].reactionsCount += 1
-            } else {
-                let newReaction = Reaction(reactionId: reactionId, chatMessageId: originalPost.uid, reactionsCount: 1)
-                updatedReactions.append(newReaction)
-            }
-        } else {
-            // Supprimer une réaction
-            if let index = updatedReactions.firstIndex(where: { $0.reactionId == reactionId }) {
-                if updatedReactions[index].reactionsCount > 1 {
-                    updatedReactions[index].reactionsCount -= 1
-                } else {
-                    updatedReactions.remove(at: index)
-                }
-            }
-        }
-
-        var updatedPost = originalPost
-        updatedPost.reactions = updatedReactions
-        return updatedPost
-    }
     func replacePostInArray(post: PostMessage) {
         if let indexNew = messagesNew.firstIndex(where: { $0.uid == post.uid }) {
             messagesNew[indexNew] = post
@@ -981,26 +955,67 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
         showMemberReact(postId: post.uid)
     }
     
-    func addReaction(post: PostMessage, reactionType: ReactionType) {
-        var reactionWrapper = ReactionWrapper()
-        reactionWrapper.reactionId = reactionType.id
-        NeighborhoodService.postReactionToGroupPost(groupId: self.neighborhoodId, postId: post.uid, reactionWrapper: reactionWrapper) { error in
-            if error == nil {
-//                let updatedPost = self.updatedPostWithReaction(originalPost: post, reactionId: reactionType.id, addReaction: true)
-//                self.replacePostInArray(post: updatedPost)
-//                self.ui_tableview.reloadData()
+    func didTapReaction(post: PostMessage, reactionType: ReactionType) {
+        let currentReactionId = post.reactionId ?? 0
+        let isRemoving = currentReactionId == reactionType.id
+
+        applyLocalReaction(postId: post.uid, reactionId: isRemoving ? 0 : reactionType.id)
+
+        let groupId = self.neighborhoodId
+
+        if isRemoving {
+            NeighborhoodService.deleteReactionToGroupPost(groupId: groupId, postId: post.uid) { [weak self] error in
+                if error != nil { self?.applyLocalReaction(postId: post.uid, reactionId: currentReactionId) }
+            }
+        } else if currentReactionId != 0 {
+            // On attend la suppression de l'ancienne réaction avant de poser la nouvelle :
+            // le back-end interdit d'avoir deux réactions en même temps sur un message.
+            NeighborhoodService.deleteReactionToGroupPost(groupId: groupId, postId: post.uid) { [weak self] deleteError in
+                if deleteError != nil { self?.applyLocalReaction(postId: post.uid, reactionId: currentReactionId); return }
+                let wrapper = ReactionWrapper(reactionId: reactionType.id)
+                NeighborhoodService.postReactionToGroupPost(groupId: groupId, postId: post.uid, reactionWrapper: wrapper) { postError in
+                    if postError != nil { self?.applyLocalReaction(postId: post.uid, reactionId: 0) }
+                }
+            }
+        } else {
+            let wrapper = ReactionWrapper(reactionId: reactionType.id)
+            NeighborhoodService.postReactionToGroupPost(groupId: groupId, postId: post.uid, reactionWrapper: wrapper) { [weak self] error in
+                if error != nil { self?.applyLocalReaction(postId: post.uid, reactionId: 0) }
             }
         }
     }
 
-    func deleteReaction(post: PostMessage, reactionType: ReactionType) {
-        NeighborhoodService.deleteReactionToGroupPost(groupId: self.neighborhoodId, postId: post.uid) { error in
-            if error == nil {
-//                let updatedPost = self.updatedPostWithReaction(originalPost: post, reactionId: reactionType.id, addReaction: false)
-//                self.replacePostInArray(post: updatedPost)
-//                self.ui_tableview.reloadData()
+    /// Mutation optimiste locale de la réaction d'un post (compteurs agrégés + réaction propre à
+    /// l'utilisateur), écrite directement dans messagesNew/messagesOld puis reflétée dans l'UI —
+    /// c'est cette source de vérité (et non une copie locale dans la cellule) qui survit au
+    /// scroll/réutilisation de cellule et aux reloadData() suivants. Sert aussi de rollback en cas
+    /// d'échec réseau (appelée à nouveau avec l'ancien reactionId).
+    private func applyLocalReaction(postId: Int, reactionId: Int) {
+        guard let originalPost = (messagesNew.first(where: { $0.uid == postId }) ?? messagesOld.first(where: { $0.uid == postId })) else { return }
+
+        var reactions = originalPost.reactions ?? []
+        let previousReactionId = originalPost.reactionId ?? 0
+
+        if previousReactionId != 0, let idx = reactions.firstIndex(where: { $0.reactionId == previousReactionId }) {
+            if reactions[idx].reactionsCount > 1 {
+                reactions[idx].reactionsCount -= 1
+            } else {
+                reactions.remove(at: idx)
             }
         }
+        if reactionId != 0 {
+            if let idx = reactions.firstIndex(where: { $0.reactionId == reactionId }) {
+                reactions[idx].reactionsCount += 1
+            } else {
+                reactions.append(Reaction(reactionId: reactionId, chatMessageId: postId, reactionsCount: 1))
+            }
+        }
+
+        var updatedPost = originalPost
+        updatedPost.reactions = reactions
+        updatedPost.reactionId = reactionId
+        replacePostInArray(post: updatedPost)
+        ui_tableview.reloadData()
     }
 
     
