@@ -34,8 +34,8 @@ cp ApiKeys.dist.plist ApiKeys.plist
 Both send the result via the `X-Request-Timestamp` / `X-Request-Signature` headers.
 
 - **Leave empty** in development: the backend skips verification when the secret is not configured.
-- **Set in CI** (Bitrise env var `HMAC_SECRET_IOS`) before the release build; the Bitrise workflow injects it into `ApiKeys.plist`.
-- The same secret must be set as `HMAC_SECRET_IOS` on the backend (Heroku config vars), and the backend must verify with the matching message format for each call.
+- **Set in CI** via two Bitrise Secret env vars, one per bundle ID/environment: `HMAC_SECRET_IOS_PROD` (`social.entourage.entourageios`) and `HMAC_SECRET_IOS_PREPROD` (`social.entourage.entourageios.beta`). The shared `Prepare` workflow step injects both into `ApiKeys.plist` before every archive; only the entry matching the running bundle ID is ever read at runtime.
+- Each value must match the `HMAC_SECRET_IOS` config var set on the corresponding backend (Heroku config vars — prod app vs preprod app), and the backend must verify with the matching message format for each call.
 
 ## Upload Symbols to Firebase
 
