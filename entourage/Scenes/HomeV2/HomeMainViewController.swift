@@ -241,7 +241,16 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
                                 vc.modalPresentationStyle = .fullScreen
                                 vc.isContrib = isContrib
                                 vc.parentController = self
-                                _tabbar.present(vc, animated: true)
+                                // Si une modale de gating (notif, etc.) a pris le slot de présentation
+                                // avant que ce retour d'onboarding ne soit traité, la dismiss d'abord :
+                                // sinon UIKit ignore silencieusement ce present() (EN-9530).
+                                if _tabbar.presentedViewController != nil {
+                                    _tabbar.dismiss(animated: false) {
+                                        _tabbar.present(vc, animated: true)
+                                    }
+                                } else {
+                                    _tabbar.present(vc, animated: true)
+                                }
                             }
                         }
                     }
@@ -1667,7 +1676,16 @@ extension HomeMainViewController {
             print("[HomeEntryGating] SKIP: A view controller is already being presented.")
             return
         }
-        
+
+        // Un retour d'onboarding est en attente (handleEnhancedOnboardingReturn, appelé plus tard
+        // une fois loadMetadatas() terminé) : ne pas lui voler le slot de présentation avec un
+        // popup de gating (notif, zone, re-onboarding...), sinon la présentation de l'action à
+        // créer est silencieusement avalée par UIKit (EN-9530).
+        guard !EnhancedOnboardingConfiguration.shared.isFromOnboardingFromNormalWay else {
+            print("[HomeEntryGating] SKIP: onboarding return pending, deferring to handleEnhancedOnboardingReturn()")
+            return
+        }
+
         guard !hasRunEntryGating else {
             print("[HomeEntryGating] SKIP: already ran for this Home instance")
             return
