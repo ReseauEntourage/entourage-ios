@@ -207,7 +207,12 @@ workflows:
 
             # 3. On remplace les placeholders par les vrais secrets de Bitrise
             # Utilisation des noms exacts provenant de l'interface Bitrise
-            sed -i '' "s/13f7d4ed0009b761df1c9400/$ApiKey/g" ApiKeys.plist
+            # ApiKey est une Secret env var Bitrise partagee entre prod et beta
+            # (jamais en clair ici) ; injectee via PlistBuddy plutot qu'un sed
+            # sur placeholder, car ApiKeys.dist.plist ne contient plus de valeur
+            # en clair pour cette cle.
+            /usr/libexec/PlistBuddy -c "Set :social.entourage.entourageios:ApiKey $ApiKey" ApiKeys.plist
+            /usr/libexec/PlistBuddy -c "Set :social.entourage.entourageios.beta:ApiKey $ApiKey" ApiKeys.plist
 
             # HMAC_SECRET_IOS_PROD / HMAC_SECRET_IOS_PREPROD sont des Secret env vars
             # Bitrise (jamais en clair ici), une par bundle ID / environnement backend.
