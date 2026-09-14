@@ -2194,7 +2194,7 @@ extension ConversationDetailMessagesViewController: GroupDetailDelegate {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(
             title: "OK".localized,
-            titleStyle: ApplicationTheme.getFontCourantBoldOrange(),
+            titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
             bgColor: .appOrange,
             cornerRadius: -1
         )
