@@ -1363,7 +1363,7 @@ extension HomeMainViewController: MyProfileNavigationDelegate, ImageReUpLoadDele
             vc.partner = partner
         }
         DispatchQueue.main.async {
-            self.present(navVc, animated: true)
+            AppState.getTopViewController()?.present(navVc, animated: true)
         }
     }
 
@@ -1373,7 +1373,7 @@ extension HomeMainViewController: MyProfileNavigationDelegate, ImageReUpLoadDele
                 let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.setupFromOtherVC(conversationId: convId, title: conversation?.title, isOneToOne: true, conversation: conversation)
-                    self.present(vc, animated: true)
+                    AppState.getTopViewController()?.present(vc, animated: true)
                 }
             }
         }
@@ -1385,7 +1385,7 @@ extension HomeMainViewController: MyProfileNavigationDelegate, ImageReUpLoadDele
             vc.user = user
             vc.parentDelegate = self
             DispatchQueue.main.async {
-                self.present(vc, animated: true)
+                AppState.getTopViewController()?.present(vc, animated: true)
             }
         }
     }
