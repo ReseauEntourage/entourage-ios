@@ -1057,8 +1057,6 @@
 "event_add_contact_title" = "Votre inscription est prise en compte !";
 "event_add_contact_description" = "Voulez-vous ajouter cet événement à votre agenda personnel ?";
 
-"event_add_contact_places_title" = "Événement à places limitées";
-"event_add_contact_places_description" = "Attention, cet événement est à places limitées, votre inscription n’est pas garantie. L’administrateur de l’événement reviendra vers vous pour vous confirmer la réservation de votre place.";
 "event_add_contact_error" = "Pour ajouter l'événement dans votre calendrier, vous devez activer l'accès au calendrier";
 "event_add_contact_refuse" = "Refuser";
 "event_add_contact_activate" = "Activer";
@@ -1779,6 +1777,17 @@ Choisissez un sujet pour démarrer.";
 "settings_back_subtitle" = "Retour aux paramètres";
 "event_conversation" = "Voir la discussion";
 "go_to_event_conversation" = "Participer et rejoindre la discussion";
+
+"event_limited_places_badge" = "Places limitées";
+"event_limited_places_title" = "Réservez votre place !";
+"event_limited_places_context" = "Le nombre de places étant limité pour cet événement, votre inscription se fait sur demande :";
+"event_limited_places_step1" = "Vous rejoignez la discussion et demandez votre place.";
+"event_limited_places_step2" = "L'organisateur confirme votre inscription.";
+"event_limited_places_step3" = "Vous êtes prévenu(e) par notification, SMS ou appel dès que c'est validé.";
+"event_limited_places_nudge" = "Un empêchement ? Pensez à vous désinscrire pour laisser votre place à quelqu'un d'autre.";
+"event_limited_places_cta_primary" = "Demander ma place";
+"event_limited_places_cta_secondary" = "Je ne souhaite pas m'inscrire";
+"event_limited_places_join_toast" = "Votre demande est envoyée ! L'organisateur reviendra vers vous pour la confirmer.";
 
 "event_conv_filter_all" = "Toutes";
 "event_conv_filter_discussions" = "Discussions";

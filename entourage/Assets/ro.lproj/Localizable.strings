@@ -1046,8 +1046,6 @@
 "event_add_contact_title" = "Înregistrarea dvs. este luată în considerare!";
 "event_add_contact_description" = "Doriți să adăugați acest eveniment în calendarul dvs. personal?";
 
-"event_add_contact_places_title" = "Eveniment cu locuri limitate";
-"event_add_contact_places_description" = "Vă rugăm să rețineți că acest eveniment are locuri limitate, înregistrarea dvs. nu este garantată. Administratorul evenimentului vă va contacta pentru a vă confirma rezervarea locului.";
 "event_add_contact_error" = "Pentru a adăuga evenimentul în calendarul dvs., trebuie să activați accesul la calendar";
 "event_add_contact_refuse" = "Refuza";
 "event_add_contact_activate" = "Permite";

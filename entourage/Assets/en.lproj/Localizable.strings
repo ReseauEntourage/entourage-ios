@@ -1030,8 +1030,6 @@
 "event_add_contact_title" = "Your registration is taken into account!";
 "event_add_contact_description" = "Do you want to add this event to your personal calendar?";
 
-"event_add_contact_places_title" = "Limited places event";
-"event_add_contact_places_description" = "Please note, this event has limited places, your registration is not guaranteed. The event administrator will get back to you to confirm your place reservation.";
 "event_add_contact_error" = "To add the event to your calendar, you must enable calendar access";
 "event_add_contact_refuse" = "Refuse";
 "event_add_contact_activate" = "Enable";

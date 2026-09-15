@@ -1037,8 +1037,6 @@
 "event_add_contact_title" = "يتم أخذ تسجيلك بعين الاعتبار!";
 "event_add_contact_description" = "هل تريد إضافة هذا الحدث إلى التقويم الشخصي الخاص بك؟";
 
-"event_add_contact_places_title" = "حدث الأماكن محدودة";
-"event_add_contact_places_description" = "يرجى ملاحظة أن هذا الحدث له أماكن محدودة، وتسجيلك غير مضمون. سيعود إليك مسؤول الحدث لتأكيد حجز مكانك.";
 "event_add_contact_error" = "لإضافة الحدث إلى التقويم الخاص بك، يجب عليك تمكين الوصول إلى التقويم";
 "event_add_contact_refuse" = "رفض";
 "event_add_contact_activate" = "يُمكَِن";

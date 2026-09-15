@@ -1042,8 +1042,6 @@
 "event_add_contact_title" = "Ihre Anmeldung wird berücksichtigt!";
 "event_add_contact_description" = "Möchten Sie dieses Ereignis zu Ihrem persönlichen Kalender hinzufügen?";
 
-"event_add_contact_places_title" = "Veranstaltung mit begrenzter Teilnehmerzahl";
-"event_add_contact_places_description" = "Bitte beachten Sie, dass die Plätze für diese Veranstaltung begrenzt sind und Ihre Anmeldung nicht garantiert ist. Der Veranstaltungsadministrator wird sich mit Ihnen in Verbindung setzen, um Ihre Platzreservierung zu bestätigen.";
 "event_add_contact_error" = "Um das Ereignis zu Ihrem Kalender hinzuzufügen, müssen Sie den Kalenderzugriff aktivieren";
 "event_add_contact_refuse" = "Verweigern";
 "event_add_contact_activate" = "Aktivieren";

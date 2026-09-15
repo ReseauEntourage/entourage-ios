@@ -1036,8 +1036,6 @@
 "event_add_contact_title" = "Votre inscription est prise en compte !";
 "event_add_contact_description" = "Voulez-vous ajouter cet événement à votre agenda personnel ?";
 
-"event_add_contact_places_title" = "Événement à places limitées";
-"event_add_contact_places_description" = "Attention, cet événement est à places limitées, votre inscription n’est pas garantie. L’administrateur de l’événement reviendra vers vous pour vous confirmer la réservation de votre place.";
 "event_add_contact_error" = "Pour ajouter l'événement dans votre calendrier, vous devez activer l'accès au calendrier";
 "event_add_contact_refuse" = "Refuser";
 "event_add_contact_activate" = "Activer";

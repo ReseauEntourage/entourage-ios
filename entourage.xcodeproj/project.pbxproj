@@ -306,6 +306,7 @@
 		02E0099227E37B1100BB23CA /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 02E0099127E37B1100BB23CA /* FirebaseRemoteConfig */; };
 		02E0099527E3863D00BB23CA /* MenuItemInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E0099427E3863D00BB23CA /* MenuItemInfos.swift */; };
 		02E0EFA028783900009B2C65 /* EventDetailFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E0EF9F28783900009B2C65 /* EventDetailFeedViewController.swift */; };
+		4F7CE641A48EBB9BB1436A81 /* EventLimitedPlacesModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E5B1A516C8C8AB5C153073 /* EventLimitedPlacesModalView.swift */; };
 		02E0EFA328787082009B2C65 /* EventDetailTopFullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E0EFA128787082009B2C65 /* EventDetailTopFullCell.swift */; };
 		02E0EFA428787082009B2C65 /* EventDetailTopFullCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E0EFA228787082009B2C65 /* EventDetailTopFullCell.xib */; };
 		02E0EFA72878709D009B2C65 /* EventDetailTopLightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E0EFA52878709D009B2C65 /* EventDetailTopLightCell.swift */; };
@@ -976,6 +977,7 @@
 		02E0098827E33DD200BB23CA /* WebLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkManager.swift; sourceTree = "<group>"; };
 		02E0099427E3863D00BB23CA /* MenuItemInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemInfos.swift; sourceTree = "<group>"; };
 		02E0EF9F28783900009B2C65 /* EventDetailFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailFeedViewController.swift; sourceTree = "<group>"; };
+		75E5B1A516C8C8AB5C153073 /* EventLimitedPlacesModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLimitedPlacesModalView.swift; sourceTree = "<group>"; };
 		02E0EFA128787082009B2C65 /* EventDetailTopFullCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailTopFullCell.swift; sourceTree = "<group>"; };
 		02E0EFA228787082009B2C65 /* EventDetailTopFullCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailTopFullCell.xib; sourceTree = "<group>"; };
 		02E0EFA52878709D009B2C65 /* EventDetailTopLightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailTopLightCell.swift; sourceTree = "<group>"; };
@@ -1539,6 +1541,7 @@
 				021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */,
 				021FD9682876CD8500D3AA54 /* Cells */,
 				26EA54F02E5DA3E100CF6866 /* PhotoConsentPopupViewController.swift */,
+				75E5B1A516C8C8AB5C153073 /* EventLimitedPlacesModalView.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -3432,6 +3435,7 @@
 				26A8DE0F2C0E1B9500C34641 /* EditProfileOnboardingCell.swift in Sources */,
 				02A92C262897E6A9000DFF95 /* ActionCreatePhase3ViewController.swift in Sources */,
 				02E0EFA028783900009B2C65 /* EventDetailFeedViewController.swift in Sources */,
+				4F7CE641A48EBB9BB1436A81 /* EventLimitedPlacesModalView.swift in Sources */,
 				02B94C37284F9FB3006059EF /* HomeHelpCell.swift in Sources */,
 				02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */,
 				02C6E86F28203E1F009D4289 /* ReportGroupSendViewController.swift in Sources */,

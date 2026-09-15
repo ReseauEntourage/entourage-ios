@@ -1042,8 +1042,6 @@
 "event_add_contact_title" = "¡Tu registro es tomado en cuenta!";
 "event_add_contact_description" = "¿Quieres agregar este evento a tu calendario personal?";
 
-"event_add_contact_places_title" = "Evento con plazas limitadas";
-"event_add_contact_places_description" = "Tenga en cuenta que este evento tiene plazas limitadas, su inscripción no está garantizada. El administrador del evento se comunicará contigo para confirmar tu reserva de lugar.";
 "event_add_contact_error" = "Para agregar el evento a su calendario, debe habilitar el acceso al calendario";
 "event_add_contact_refuse" = "Rechazar";
 "event_add_contact_activate" = "Permitir";
@@ -2479,8 +2477,6 @@ Elige un tema para empezar.";
 "event_add_contact_title" = "¡Tu registro es tomado en cuenta!";
 "event_add_contact_description" = "¿Quieres agregar este evento a tu calendario personal?";
 
-"event_add_contact_places_title" = "Evento con plazas limitadas";
-"event_add_contact_places_description" = "Tenga en cuenta que este evento tiene plazas limitadas, su inscripción no está garantizada. El administrador del evento se comunicará contigo para confirmar tu reserva de lugar.";
 "event_add_contact_error" = "Para agregar el evento a su calendario, debe habilitar el acceso al calendario";
 "event_add_contact_refuse" = "Rechazar";
 "event_add_contact_activate" = "Permitir";

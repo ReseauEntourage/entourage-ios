@@ -392,7 +392,7 @@ class EventDetailFeedViewController: UIViewController {
     
     // MARK: - Joindre / Quitter (action manuelle)
     
-    func addRemoveMember(isAdd: Bool) {
+    func addRemoveMember(isAdd: Bool, showLimitedPlacesToast: Bool = false) {
         if !isAdd {
             // Met à jour localement lorsqu'on quitte (pour éviter un délai visible)
             event?.isMember = isAdd
@@ -422,7 +422,11 @@ class EventDetailFeedViewController: UIViewController {
                                 return
                             }
 
-                            self.present(vc, animated: true)
+                            self.present(vc, animated: true) {
+                                if showLimitedPlacesToast {
+                                    SVProgressHUD.showSuccess(withStatus: "event_limited_places_join_toast".localized)
+                                }
+                            }
                         }
                     }
                 }
@@ -466,8 +470,27 @@ class EventDetailFeedViewController: UIViewController {
         }
         
         let alreadyMember = event?.members?.contains(where: { $0.uid == currentUserId }) ?? false
-        addRemoveMember(isAdd: !alreadyMember)
 
+        if !alreadyMember && (event?.metadata?.hasPlaceLimit ?? false) {
+            showLimitedPlacesModal()
+        } else {
+            addRemoveMember(isAdd: !alreadyMember)
+        }
+    }
+
+    /// New content/flow for the "places limitées" registration modal (EN-9376/EN-9445).
+    private func showLimitedPlacesModal() {
+        let modal = EventLimitedPlacesModalViewController(
+            onRequestPlace: { [weak self] in
+                self?.dismiss(animated: true) {
+                    self?.addRemoveMember(isAdd: true, showLimitedPlacesToast: true)
+                }
+            },
+            onDecline: { [weak self] in
+                self?.dismiss(animated: true)
+            }
+        )
+        present(modal, animated: true)
     }
     
     // MARK: - IBAction
@@ -549,27 +572,6 @@ class EventDetailFeedViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             self.navigationController?.present(vc, animated: true)
         }
-    }
-    
-    func showPopInfoPlaces() {
-        let customAlert = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "OK".localized,
-                                             titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
-                                             bgColor: .appOrange,
-                                             cornerRadius: -1)
-        
-        customAlert.configureAlert(alertTitle: "event_add_contact_places_title".localized,
-                                   message: "event_add_contact_places_description".localized,
-                                   buttonrightType: buttonCancel,
-                                   buttonLeftType: nil,
-                                   titleStyle: ApplicationTheme.getFontCourantBoldOrange(),
-                                   messageStyle: ApplicationTheme.getFontCourantRegularNoir(),
-                                   mainviewBGColor: .white,
-                                   mainviewRadius: 35)
-        
-        customAlert.alertTagName = .Suppress
-        customAlert.delegate = self
-        customAlert.show()
     }
     
     // MARK: - Agenda
