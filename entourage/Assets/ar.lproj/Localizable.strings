@@ -1441,9 +1441,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_action_type_services" = "خدمات";
 "home_v2_action_type_other" = "آحرون";
 
-"home_v2_hz_item_title" = "مرحبًا، يبدو الوضع هادئًا بعض الشيء هنا...";
-"home_v2_hz_item_subtitle" = "ماذا لو جلبت القليل من التضامن إلى مدينتك؟ Entourage يمنحك المفاتيح للبدء!";
-"home_v2_hz_item_button" = "يتعلم أكثر";
 
 "lang_fr" = "- فرنسي";
 "lang_en" = "- إنجليزي";

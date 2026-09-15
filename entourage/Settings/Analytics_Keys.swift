@@ -326,7 +326,7 @@ let   Action_Home_CreateGroup = "Action_Home_CreateGroup"//
 let   Action__Home__Moderator = "Action__Home__Moderator"//
 let   Action_Home_Contrib_Detail = "Action_Home_Contrib_Detail"
 let   Action_Home_Contrib_All = "Action_Home_Contrib_All"
-let   Action_Home_Buffet = "Action_Home_Buffet"//
+//
 
 // NEW EVENT
 let   View__Event__List = "View__Event__List"

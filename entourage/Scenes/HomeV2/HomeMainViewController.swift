@@ -31,7 +31,6 @@ enum HomeV2DTO {
     case cellMap
     case cellIAmLost(helpType: HomeNeedHelpType)
     case moderator(name: String, imageUrl: String? = nil)
-    case cellHZ
     case cellInitialPedago(pedagos: [PedagogicResource])
     case cellWelcomeJourney(viewModel: WelcomeJourneyViewModel)
     case cellSmallTalk(userRequests:[UserSmallTalkRequest])
@@ -106,7 +105,6 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_table_view.register(UINib(nibName: HomeNeedHelpCell.identifier, bundle: nil), forCellReuseIdentifier: HomeNeedHelpCell.identifier)
         ui_table_view.register(UINib(nibName: HomeModeratorCell.identifier, bundle: nil), forCellReuseIdentifier: HomeModeratorCell.identifier)
         ui_table_view.register(UINib(nibName: HomeInitialPedagogicHorizontalCell.identifier, bundle: nil), forCellReuseIdentifier: HomeInitialPedagogicHorizontalCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
         ui_table_view.register(UINib(nibName: HomeCellClimatisation.identifier, bundle: nil), forCellReuseIdentifier: HomeCellClimatisation.identifier)
@@ -516,16 +514,6 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
         }
 
-        var _offlineEvents = [Event]()
-        for event in allEvents {
-            if event.isOnline == false {
-                _offlineEvents.append(event)
-            }
-        }
-        if _offlineEvents.count == 0 && allDemands.count == 0 && !isContributionPreference {
-            tableDTO.append(.cellHZ)
-        }
-
         if let _moderator = userHome.moderator {
             if let _name = _moderator.displayName {
                 tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
@@ -633,12 +621,6 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
             if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeModeratorCell") as? HomeModeratorCell {
                 cell.selectionStyle = .none
                 cell.configure(title: name, imageUrl: imageUrl)
-                return cell
-            }
-        case .cellHZ:
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeHZCell") as? HomeHZCell {
-                cell.selectionStyle = .none
-                cell.delegate = self
                 return cell
             }
         case .cellInitialPedago(let pedagos):
@@ -767,9 +749,6 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
-        case .cellHZ:
-            AnalyticsLoggerManager.logEvent(name: Action_Home_Buffet)
-            return
         case .cellInitialPedago(_): return
         case .cellSmallTalk(_): return
         case .cellSolidarityTools: return
@@ -791,7 +770,6 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellMap: return UITableView.automaticDimension
         case .cellIAmLost(_): return UITableView.automaticDimension
         case .moderator(_, _): return UITableView.automaticDimension
-        case .cellHZ: return UITableView.automaticDimension
         case .cellInitialPedago(_): return 115
         case .cellSmallTalk(_): return UITableView.automaticDimension
         case .cellSolidarityTools: return UITableView.automaticDimension
@@ -1248,16 +1226,6 @@ extension HomeMainViewController: UIScrollViewDelegate {
                 }
             }
         }
-    }
-}
-
-// MARK: - HomeHZCellDelegate
-extension HomeMainViewController: HomeHZCellDelegate {
-    func onCLickGoBuffet() {
-        let urlStr = "https://reseauentourage.notion.site/Buffet-du-lien-social-69c20e089dbd483cb093e90ae2953a54"
-        var webUrl: URL?
-        webUrl = URL(string: urlStr)
-        WebLinkManager.openUrlInApp(url: webUrl, presenterViewController: self)
     }
 }
 

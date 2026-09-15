@@ -1444,9 +1444,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_action_type_services" = "Послуги";
 "home_v2_action_type_other" = "інші";
 
-"home_v2_hz_item_title" = "Гей, здається, тут трохи тихо...";
-"home_v2_hz_item_subtitle" = "Що якби ви принесли трохи солідарності у своє місто? Entourage дає вам ключі, щоб почати!";
-"home_v2_hz_item_button" = "Вивчайте більше";
 
 "lang_fr" = " - Французька";
 "lang_en" = " - Англійська";

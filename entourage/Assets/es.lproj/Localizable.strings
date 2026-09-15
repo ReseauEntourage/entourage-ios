@@ -1444,9 +1444,6 @@ Elige un tema para empezar.";
 "home_v2_action_type_services" = "Servicios";
 "home_v2_action_type_other" = "Otros";
 
-"home_v2_hz_item_title" = "Oye, parece un poco tranquilo por aquí...";
-"home_v2_hz_item_subtitle" = "¿Y si trajeras un poco de solidaridad a tu ciudad? ¡Entourage te da las claves para empezar!";
-"home_v2_hz_item_button" = "Más información";
 /*
   Localizable.strings
   entourage
@@ -2866,9 +2863,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_action_type_services" = "Servicios";
 "home_v2_action_type_other" = "Otros";
 
-"home_v2_hz_item_title" = "Oye, parece un poco tranquilo por aquí...";
-"home_v2_hz_item_subtitle" = "¿Y si trajeras un poco de solidaridad a tu ciudad? ¡Entourage te da las claves para empezar!";
-"home_v2_hz_item_button" = "Más información";
 
 "lang_fr" = " - Francés";
 "lang_en" = " - Inglés";

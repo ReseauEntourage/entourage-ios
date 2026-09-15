@@ -490,8 +490,6 @@
 		2630F6372C247D7D007BAE56 /* MainFilterLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2630F6362C247D7D007BAE56 /* MainFilterLocationCell.xib */; };
 		2630F6392C248520007BAE56 /* MainFilterDistanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2630F6382C248520007BAE56 /* MainFilterDistanceCell.swift */; };
 		2630F63B2C248565007BAE56 /* MainFilterDistanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2630F63A2C248565007BAE56 /* MainFilterDistanceCell.xib */; };
-		2631DC5E2AD68FC40040C120 /* HomeHZCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2631DC5D2AD68FC40040C120 /* HomeHZCell.swift */; };
-		2631DC602AD690130040C120 /* HomeHZCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2631DC5F2AD690130040C120 /* HomeHZCell.xib */; };
 		2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */; };
 		2636B9642A7BA199007EE1B2 /* anim_rugby.json in Resources */ = {isa = PBXBuildFile; fileRef = 2636B9632A7BA199007EE1B2 /* anim_rugby.json */; };
 		263D7D692D4D02E900C4D99E /* TranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 263D7D682D4D02E900C4D99E /* TranslationCell.xib */; };
@@ -1169,8 +1167,6 @@
 		2630F6362C247D7D007BAE56 /* MainFilterLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainFilterLocationCell.xib; sourceTree = "<group>"; };
 		2630F6382C248520007BAE56 /* MainFilterDistanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFilterDistanceCell.swift; sourceTree = "<group>"; };
 		2630F63A2C248565007BAE56 /* MainFilterDistanceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainFilterDistanceCell.xib; sourceTree = "<group>"; };
-		2631DC5D2AD68FC40040C120 /* HomeHZCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHZCell.swift; sourceTree = "<group>"; };
-		2631DC5F2AD690130040C120 /* HomeHZCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHZCell.xib; sourceTree = "<group>"; };
 		2636B9612A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RugbySpecialPopUpViewController.swift; sourceTree = "<group>"; };
 		2636B9632A7BA199007EE1B2 /* anim_rugby.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = anim_rugby.json; sourceTree = "<group>"; };
 		263D7D682D4D02E900C4D99E /* TranslationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TranslationCell.xib; sourceTree = "<group>"; };
@@ -2572,8 +2568,6 @@
 				2674FEC42ACDA5F00013D674 /* HomeNeedHelpCell.xib */,
 				2674FEC62ACDB6AC0013D674 /* HomeModeratorCell.swift */,
 				2674FEC82ACDB7520013D674 /* HomeModeratorCell.xib */,
-				2631DC5D2AD68FC40040C120 /* HomeHZCell.swift */,
-				2631DC5F2AD690130040C120 /* HomeHZCell.xib */,
 				2630F6172C21CCB7007BAE56 /* HomeInitialPedagogicHorizontalCell.swift */,
 				2630F6192C21CCE6007BAE56 /* HomeInitialPedagogicHorizontalCell.xib */,
 				2630F61B2C21D320007BAE56 /* HomeInitialPedagoCell.swift */,
@@ -2933,7 +2927,6 @@
 				26BFC9A02ACD4DB400FDA030 /* HomeCellAction.xib in Resources */,
 				2630F62B2C24646E007BAE56 /* MainFilterTitleCell.xib in Resources */,
 				26B58C862D8C5ECC00D77FAB /* OnboardingPhase3MapCell.xib in Resources */,
-				2631DC602AD690130040C120 /* HomeHZCell.xib in Resources */,
 				025C92C028341007000970D9 /* NeighborhoodEmptyPostCell.xib in Resources */,
 				0223E5152864A4B200E7556E /* AddDescriptionTableViewCell.xib in Resources */,
 				2630F63B2C248565007BAE56 /* MainFilterDistanceCell.xib in Resources */,
@@ -3570,7 +3563,6 @@
 				02B94C27284F63AB006059EF /* HomeContribCell.swift in Sources */,
 				26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */,
 				266B26212AB8AD5600C8EAD8 /* EventListMainV2ViewController.swift in Sources */,
-				2631DC5E2AD68FC40040C120 /* HomeHZCell.swift in Sources */,
 				02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */,
 				2636B9622A7B9F04007EE1B2 /* RugbySpecialPopUpViewController.swift in Sources */,
 				021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */,
