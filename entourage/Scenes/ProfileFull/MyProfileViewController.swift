@@ -256,7 +256,11 @@ struct MyProfileView: View {
                     .padding()
 
                     if let user = viewModel.user {
-                        MainStatUserView(isMe: true, user: user)
+                        ImpactCounterView(isMe: true, user: user, onDiscoverNearby: {
+                            if let tabbar = AppState.getTopViewController()?.tabBarController as? MainTabbarViewController {
+                                tabbar.selectedIndex = 4
+                            }
+                        })
                             .padding(.horizontal)
                             .padding(.top, 10)
                     }

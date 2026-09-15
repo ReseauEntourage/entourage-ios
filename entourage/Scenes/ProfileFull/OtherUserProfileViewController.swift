@@ -175,7 +175,7 @@ struct OtherUserProfileView: View {
                     .padding()
 
                     if let user = viewModel.user {
-                        MainStatUserView(isMe: false, user: user)
+                        ImpactCounterView(isMe: false, user: user)
                             .padding(.horizontal)
                             .padding(.top, 10)
                     }

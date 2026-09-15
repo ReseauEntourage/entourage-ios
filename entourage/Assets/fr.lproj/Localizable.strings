@@ -432,6 +432,21 @@
 
 "memberSince" = "Membre Entourage depuis";
 
+"impact_title_me" = "Mon impact";
+"impact_title_other" = "Son impact";
+"impact_row_events_me" = "J'ai participé à des événements";
+"impact_row_events_other" = "Participation à des événements";
+"impact_row_entraides_me" = "J'ai partagé une entraide";
+"impact_row_entraides_other" = "Entraides partagées";
+"impact_row_groups_other" = "Groupes de voisins rejoints";
+"impact_hero_subtitle" = "actions depuis votre inscription";
+"impact_detail_title" = "Ce que j'ai fait";
+"impact_new_member_message" = "Bienvenue ! Votre histoire commence ici.\nDès votre première action — un bonjour, un café, un événement — elle apparaîtra ici. Même les petits gestes comptent.";
+"impact_new_member_cta" = "Découvrir près de chez moi";
+"member_since_recent_format" = "Membre depuis %@";
+"member_since_year_format" = "Membre depuis %d an, %@";
+"member_since_years_format" = "Membre depuis %d ans, %@";
+
 /*******
 //Profile Edit
  */

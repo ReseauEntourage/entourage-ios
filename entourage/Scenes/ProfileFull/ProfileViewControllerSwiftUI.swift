@@ -235,58 +235,104 @@ struct ProfileStandardRow: View {
     }
 }
 
-// MARK: - Activity Stats (shared, isMe controls title only)
+// MARK: - Impact counter (shared, isMe controls title/rows) — EN-9468/EN-9470
 
-struct MainStatUserView: View {
+private struct ImpactRow: Identifiable {
+    let id: String
+    let count: Int
+    let label: String
+    let icon: String
+}
+
+struct ImpactCounterView: View {
     let isMe: Bool
     let user: User
+    /// Called when the new-member state's CTA is tapped (own profile only) — should navigate to the events tab.
+    var onDiscoverNearby: (() -> Void)? = nil
 
-    private func formatDate(_ date: Date) -> String {
+    private var rows: [ImpactRow] {
+        let stats = user.stats
+        let events = stats?.eventsParticipatedCount ?? 0
+        let entraides = stats?.entraidesCount ?? 0
+
+        var all: [ImpactRow] = [
+            ImpactRow(id: "events", count: events, label: isMe ? "impact_row_events_me".localized : "impact_row_events_other".localized, icon: "calendar"),
+            ImpactRow(id: "entraides", count: entraides, label: isMe ? "impact_row_entraides_me".localized : "impact_row_entraides_other".localized, icon: "heart.fill")
+        ]
+
+        if !isMe {
+            let groups = stats?.neighborhoodsCount ?? 0
+            all.append(ImpactRow(id: "groups", count: groups, label: "impact_row_groups_other".localized, icon: "person.2.fill"))
+        }
+
+        // Etat faible activité : une typologie à 0 n'est pas affichée.
+        return all.filter { $0.count > 0 }
+    }
+
+    private var totalCount: Int {
+        rows.reduce(0) { $0 + $1.count }
+    }
+
+    private func seniorityText(_ date: Date) -> String {
+        let years = Calendar.current.dateComponents([.year], from: date, to: Date()).year ?? 0
         let fmt = DateFormatter()
         fmt.locale = Locale.getPreferredLocale()
-        fmt.dateFormat = "MM/yyyy"
-        return fmt.string(from: date)
+        fmt.dateFormat = "LLLL yyyy"
+        let monthYear = fmt.string(from: date)
+
+        if years <= 0 {
+            return String(format: "member_since_recent_format".localized, monthYear)
+        } else if years == 1 {
+            return String(format: "member_since_year_format".localized, years, monthYear)
+        } else {
+            return String(format: "member_since_years_format".localized, years, monthYear)
+        }
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(isMe ? "mainUserTitleActivity".localized : "detail_user_his_activity".localized)
+            Text(isMe ? "impact_title_me".localized : "impact_title_other".localized)
                 .font(.custom("Quicksand-Bold", size: 16))
                 .foregroundColor(.black)
                 .padding(.top, 10)
                 .padding(.bottom, 18)
 
             if let date = user.creationDate {
-                VStack(spacing: 2) {
-                    Text("memberSince".localized)
-                        .font(.custom("NunitoSans-Regular", size: 14))
-                        .foregroundColor(.black)
-                    Text(formatDate(date))
-                        .font(.custom("Quicksand-Bold", size: 15))
-                        .foregroundColor(.black)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 10)
-                .background(Color.white)
-                .cornerRadius(16)
-                .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(UIColor.appOrangeLight), lineWidth: 1))
-                .padding(.bottom, 12)
+                Text(seniorityText(date))
+                    .font(.custom("NunitoSans-SemiBold", size: 13))
+                    .foregroundColor(Color(UIColor.appOrange))
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(Color(UIColor.appOrangeLight_50))
+                    .clipShape(Capsule())
+                    .padding(.bottom, 14)
             }
 
-            HStack(spacing: 8) {
-                let groups = user.stats?.neighborhoodsCount ?? 0
-                let outings = max(0, user.stats?.outingsCount ?? 0)
+            if isMe && totalCount == 0 {
+                newMemberState
+            } else {
+                if isMe {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("\(totalCount)")
+                            .font(.custom("Quicksand-Bold", size: 34))
+                            .foregroundColor(.black)
+                        Text("impact_hero_subtitle".localized)
+                            .font(.custom("NunitoSans-Regular", size: 13))
+                            .foregroundColor(Color(UIColor.appGris112))
+                    }
+                    .padding(.bottom, 14)
 
-                statCard(
-                    count: groups,
-                    label: groups <= 1 ? "mainUserTitleGroup".localized : "mainUserTitleGroups".localized,
-                    systemIcon: "person.2.fill"
-                )
-                statCard(
-                    count: outings,
-                    label: outings <= 1 ? "mainUserTitleOuting".localized : "mainUserTitleOutings".localized,
-                    systemIcon: "calendar"
-                )
+                    Text("impact_detail_title".localized)
+                        .font(.custom("NunitoSans-Bold", size: 13))
+                        .foregroundColor(.black)
+                        .padding(.bottom, 8)
+                }
+
+                VStack(spacing: 8) {
+                    ForEach(rows) { row in
+                        impactRow(row)
+                    }
+                }
             }
         }
         .padding(10)
@@ -294,27 +340,52 @@ struct MainStatUserView: View {
         .cornerRadius(10)
     }
 
-    private func statCard(count: Int, label: String, systemIcon: String) -> some View {
-        VStack(spacing: 6) {
-            Text("\(count)")
-                .font(.custom("Quicksand-Bold", size: 17))
-                .foregroundColor(count == 0 ? Color(UIColor.appGris112) : .black)
+    private var newMemberState: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("impact_new_member_message".localized)
+                .font(.custom("NunitoSans-Regular", size: 14))
+                .foregroundColor(.black)
+                .fixedSize(horizontal: false, vertical: true)
 
-            HStack(spacing: 4) {
-                Image(systemName: systemIcon)
-                    .font(.system(size: 12))
-                    .foregroundColor(Color(UIColor.appOrange))
-                Text(label)
-                    .font(.custom("NunitoSans-Regular", size: 12))
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
+            Button(action: { onDiscoverNearby?() }) {
+                Text("impact_new_member_cta".localized)
+                    .font(.custom("Quicksand-Bold", size: 14))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 18)
+                    .padding(.vertical, 12)
+                    .background(Color(UIColor.appOrange))
+                    .clipShape(Capsule())
             }
         }
+        .padding(.bottom, 6)
+    }
+
+    private func impactRow(_ row: ImpactRow) -> some View {
+        HStack(spacing: 10) {
+            Image(systemName: row.icon)
+                .font(.system(size: 14))
+                .foregroundColor(.white)
+                .frame(width: 30, height: 30)
+                .background(Color(UIColor.appOrange))
+                .clipShape(Circle())
+
+            Text(row.label)
+                .font(.custom("NunitoSans-Regular", size: 13))
+                .foregroundColor(.black)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Spacer()
+
+            Text("\(row.count)")
+                .font(.custom("Quicksand-Bold", size: 16))
+                .foregroundColor(.black)
+        }
+        .padding(10)
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 10)
         .background(Color.white)
-        .cornerRadius(16)
-        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color(UIColor.appOrangeLight), lineWidth: 1))
+        .cornerRadius(14)
+        .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color(UIColor.appOrangeLight), lineWidth: 1))
+        .accessibilityElement(children: .combine)
     }
 }
 

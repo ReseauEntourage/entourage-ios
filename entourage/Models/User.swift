@@ -394,7 +394,17 @@ struct UserStats:Codable {
     var askCreactionCount:Int = 0
     var neighborhoodsCount:Int = 0
     var outingsCount:Int? = 0
-    
+
+    /// Entraides partagées (offres + demandes créées) — EN-9468.
+    var entraidesCount: Int {
+        return contribCreationCount + askCreactionCount
+    }
+
+    /// Participations à des événements — EN-9468.
+    var eventsParticipatedCount: Int {
+        return max(0, outingsCount ?? 0)
+    }
+
     enum CodingKeys: String, CodingKey {
         case entourageCount = "entourage_count"
         case actionsCount = "actions_count"
