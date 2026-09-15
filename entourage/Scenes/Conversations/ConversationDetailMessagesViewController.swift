@@ -31,9 +31,12 @@ struct MessagesSorted {
 /// - Les cellules “message en échec / retry”
 private enum ConversationCellDTO {
     case dateString(title:String)
-    case message(message:PostMessage)
-    case retryMessage(message:PostMessage, positionRetry: Int)
+    case message(message:PostMessage, isFirstInGroup: Bool)
+    case retryMessage(message:PostMessage, positionRetry: Int, isFirstInGroup: Bool)
 }
+
+/// Deux messages consécutifs du même expéditeur à moins de 5 minutes d'écart forment un même groupe (EN-9558).
+private let kConversationGroupingIntervalSeconds: TimeInterval = 5 * 60
 
 /// Enum représentant les types de cellules de la tableView des mentions.
 private enum MentionCellDTO {
@@ -1400,17 +1403,32 @@ func checkNewConv() {
         let newMessagessSorted = PostMessage.getArrayOfDateSorted(messages: messages, isAscendant: true)
         var newDTOs: [ConversationCellDTO] = []
 
+        // Sert à déterminer si `current` démarre un nouveau groupe visuel par rapport à `previous`
+        // (EN-9558) : expéditeur différent, ou plus de 5 minutes d'écart, ou pas de message précédent.
+        func isFirstInGroup(_ current: PostMessage, after previous: PostMessage?) -> Bool {
+            guard let previous = previous else { return true }
+            if previous.user?.sid != current.user?.sid { return true }
+            guard let prevDate = previous.createdDate, let currentDate = current.createdDate else { return true }
+            return currentDate.timeIntervalSince(prevDate) >= kConversationGroupingIntervalSeconds
+        }
+
+        var lastMessageOverall: PostMessage? = nil
+
         for (k, v) in newMessagessSorted {
             // k: date + dateString
             newDTOs.append(.dateString(title: k.dateString))
+            lastMessageOverall = nil // un nouveau jour démarre toujours un nouveau groupe
             for msg in v {
-                newDTOs.append(.message(message: msg))
+                newDTOs.append(.message(message: msg, isFirstInGroup: isFirstInGroup(msg, after: lastMessageOverall)))
+                lastMessageOverall = msg
             }
         }
 
         // 2) On ajoute les messages en “retry”
         for (idx, retryMsg) in messagesForRetry.enumerated() {
-            newDTOs.append(.retryMessage(message: retryMsg, positionRetry: idx))
+            let firstInGroup = isFirstInGroup(retryMsg, after: lastMessageOverall)
+            newDTOs.append(.retryMessage(message: retryMsg, positionRetry: idx, isFirstInGroup: firstInGroup))
+            lastMessageOverall = retryMsg
         }
 
         // 3) On affecte le tableau final
@@ -1764,11 +1782,11 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
                     .dequeueReusableCell(withIdentifier: EventListSectionCell.identifier,
                                          for: indexPath) as? EventListSectionCell
             else { return UITableViewCell() }
-            cell.populateMessageSectionCell(title: title)
+            cell.populateMessageSectionCell(title: title, useWhiteDivider: true)
             return cell
 
         // MARK: – Message « normal »
-        case .message(let message):
+        case .message(let message, let isFirstInGroup):
             let isMe = (message.user?.sid == self.meId)
             let reuseId = isMe
                 ? ConversationMeCell.identifier
@@ -1780,14 +1798,14 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
             else { return UITableViewCell() }
 
             // Configure selon le contenu
-            cell.configure(with: message, isMe: isMe)
+            cell.configure(with: message, isMe: isMe, isFirstInGroup: isFirstInGroup)
             cell.selectionStyle = .none
             cell.delegate = self
 
             return cell
 
         // MARK: – Message en échec (retry)
-        case .retryMessage(let message, _):
+        case .retryMessage(let message, _, let isFirstInGroup):
             // Toujours « me » pour les retry
             guard let cell = tableView
                     .dequeueReusableCell(withIdentifier: ConversationMeCell.identifier,
@@ -1795,7 +1813,7 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
             else { return UITableViewCell() }
 
             // On affiche le message dans l’état « retry »
-            cell.configure(with: message, isMe: true)
+            cell.configure(with: message, isMe: true, isFirstInGroup: isFirstInGroup)
             return cell
         }
     }

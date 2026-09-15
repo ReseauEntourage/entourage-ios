@@ -57,6 +57,8 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="ui_divider_left" destination="avo-LN-p3U" id="AAA-01-divL"/>
+                <outlet property="ui_divider_right" destination="XFm-8G-igQ" id="AAA-01-divR"/>
                 <outlet property="ui_title" destination="Fyp-J9-Sa9" id="XUF-jQ-qtM"/>
             </connections>
             <point key="canvasLocation" x="132" y="104"/>

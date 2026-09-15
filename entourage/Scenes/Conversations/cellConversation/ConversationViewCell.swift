@@ -220,6 +220,7 @@ class ConversationViewCell: UITableViewCell {
 
         // Reset images
         ui_image_avatar.image = UIImage(named: "placeholder_user")
+        ui_image_avatar.isHidden = false
         ui_image_comment.image = nil
 
         // Reset image sizing
@@ -247,7 +248,7 @@ class ConversationViewCell: UITableViewCell {
     }
 
     // MARK: - Configuration
-    func configure(with message: PostMessage, isMe: Bool, positionForRetry: Int = 0) {
+    func configure(with message: PostMessage, isMe: Bool, isFirstInGroup: Bool = true, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
         currentIsMe = isMe
@@ -259,11 +260,16 @@ class ConversationViewCell: UITableViewCell {
 
         reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
 
-        // Avatar
-        if let urlStr = message.user?.avatarURL, let url = URL(string: urlStr) {
-            ui_image_avatar.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
+        // Avatar : jamais affiché pour ses propres messages (EN-9558), uniquement pour l'interlocuteur.
+        if isMe {
+            ui_image_avatar.isHidden = true
         } else {
-            ui_image_avatar.image = UIImage(named: "placeholder_user")
+            ui_image_avatar.isHidden = false
+            if let urlStr = message.user?.avatarURL, let url = URL(string: urlStr) {
+                ui_image_avatar.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder_user"))
+            } else {
+                ui_image_avatar.image = UIImage(named: "placeholder_user")
+            }
         }
 
         // Contenu / statut
@@ -280,8 +286,8 @@ class ConversationViewCell: UITableViewCell {
             applyNormalContent(message: message, isMe: isMe)
         }
 
-        // Nom + heure (HH:mm uniquement)
-        ui_label_date.text = formattedNameAndTime(from: message)
+        // Nom (si premier message du groupe) + heure (HH:mm, toujours affichée) — EN-9558
+        ui_label_date.text = formattedNameAndTime(from: message, showName: isFirstInGroup)
 
         // ----- Image attachée -----
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
@@ -424,8 +430,8 @@ class ConversationViewCell: UITableViewCell {
     }
 
     // MARK: - Name + Time (HH:mm)
-    private func formattedNameAndTime(from message: PostMessage) -> String {
-        let nameOpt: String? = message.user?.displayName
+    private func formattedNameAndTime(from message: PostMessage, showName: Bool) -> String {
+        let nameOpt: String? = showName ? message.user?.displayName : nil
         let trimmedName = nameOpt?.trimmingCharacters(in: .whitespacesAndNewlines)
 
         if let d = message.createdDate {

@@ -16,7 +16,9 @@ class EventListSectionCell: UITableViewCell {
     }
     
     @IBOutlet weak var ui_title: UILabel!
-    
+    @IBOutlet weak var ui_divider_left: UIView?
+    @IBOutlet weak var ui_divider_right: UIView?
+
     func populateCell(title:String,isTopHeader:Bool) {
         if isTopHeader {
             ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
@@ -26,10 +28,16 @@ class EventListSectionCell: UITableViewCell {
         }
         ui_title.text = title
     }
-    
-    func populateMessageSectionCell(title:String) {
+
+    /// - Parameter useWhiteDivider: quand `true`, les lignes de séparation sont blanches plutôt
+    ///   qu'orange — utilisé dans la conversation pour éviter l'effet de "rayures" (EN-9558).
+    func populateMessageSectionCell(title:String, useWhiteDivider: Bool = false) {
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontChampDefault())
         ui_title.text = title
+
+        let dividerColor: UIColor = useWhiteDivider ? .white : .appOrangeLight
+        ui_divider_left?.backgroundColor = dividerColor
+        ui_divider_right?.backgroundColor = dividerColor
     }
-    
+
 }
