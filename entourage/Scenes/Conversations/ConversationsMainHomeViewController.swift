@@ -3,8 +3,9 @@ import SVProgressHUD
 
 enum ConversationMainDTO {
     case notificationRequest
+    case bonnesOndesCard
+    case sectionLabel(text: String)
     case conversation(conversation: Conversation)
-    case filter(filter: String)
     case smalltalk(smallTalk: SmallTalk)
 }
 
@@ -23,36 +24,72 @@ class ConversationsMainHomeViewController: UIViewController {
     // MARK: - Properties
     var dataSource = [ConversationMainDTO]()
     var notificationsDisabled: Bool = false
-    var selectedFilter: String = "event_conv_filter_all".localized
+    /// Empty = no filter (all conversations). Values: "Conversation", "Outing", "Smalltalk" — EN-9487.
+    var selectedTypes: Set<String> = []
     var isLastPage = false
 
     var currentPage = 1
     var isFetching = false
     let perPage = 25
+    /// Larger page used when merging results from several types client-side (no server-side multi-type support).
+    let multiTypePerPage = 50
 
     var maxViewHeight: CGFloat = 109
     var minViewHeight: CGFloat = 70
 
+    /// Fetched once per screen lifetime to identify the pinned "Votre contact Entourage" conversation.
+    private var moderatorUserId: Int?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
-        
+
         ui_tableview.register(UINib(nibName: "ConversationNotifAskViewCell", bundle: nil), forCellReuseIdentifier: "ConversationNotifAskViewCell")
-        ui_tableview.register(UINib(nibName: "FilterDiscussionCell", bundle: nil), forCellReuseIdentifier: "FilterDiscussionCell")
         ui_tableview.register(ConversationListMainSwiftUICell.self, forCellReuseIdentifier: ConversationListMainSwiftUICell.identifier)
+        ui_tableview.register(ConversationSectionLabelCell.self, forCellReuseIdentifier: ConversationSectionLabelCell.identifier)
+        ui_tableview.register(BonnesOndesCardCell.self, forCellReuseIdentifier: BonnesOndesCardCell.identifier)
 
         setupViews()
         checkNotificationStatus()
-        loadConversations(reset: true)
+        fetchModeratorIdThenLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateFilterSmallTalk), name: NSNotification.Name(kNotificationMessagesUpdateSmallTalkFilter), object: nil)
     }
 
     @objc private func updateFilterSmallTalk() {
-        self.selectedFilter = "event_conv_filter_smalltalks".localized
+        self.selectedTypes = ["Smalltalk"]
+        self.updateFilterBadge()
         self.loadConversations(reset: true)
+    }
+
+    private func fetchModeratorIdThenLoad() {
+        HomeService.getUserHome { [weak self] userHome, _ in
+            self?.moderatorUserId = userHome?.moderator?.id
+            self?.loadConversations(reset: true)
+        }
+    }
+
+    private func updateFilterBadge() {
+        ui_tableview.reloadData()
+    }
+
+    private func onFilterTap() {
+        let modal = ConversationFilterModalViewController(
+            initialSelection: selectedTypes,
+            onApply: { [weak self] newSelection in
+                self?.selectedTypes = newSelection
+                self?.updateFilterBadge()
+                self?.loadConversations(reset: true)
+            },
+            onReset: { [weak self] in
+                self?.selectedTypes = []
+                self?.updateFilterBadge()
+                self?.loadConversations(reset: true)
+            }
+        )
+        present(modal, animated: true)
     }
 
     deinit {
@@ -84,19 +121,6 @@ class ConversationsMainHomeViewController: UIViewController {
         }
     }
     
-    private func membershipTypeParam() -> String? {
-        switch selectedFilter {
-        case "event_conv_filter_discussions".localized:
-            return "Conversation"
-        case "event_conv_filter_events".localized:
-            return "Outing"
-        case "event_conv_filter_smalltalks".localized:
-            return "Smalltalk"
-        default:
-            return nil
-        }
-    }
-
     func loadConversations(reset: Bool) {
         guard !isFetching else { return }
         isFetching = true
@@ -108,8 +132,17 @@ class ConversationsMainHomeViewController: UIViewController {
 
         SVProgressHUD.show()
 
-        // 1️⃣ Si on est sur “Smalltalk”, on utilise l’ancien service
-        if selectedFilter == "event_conv_filter_smalltalks".localized {
+        if selectedTypes.count > 1 {
+            // Plusieurs types sélectionnés : l'API ne supporte qu'un seul `type=` à la fois,
+            // on merge donc côté client (pagination simplifiée à la 1ère page pour ce cas).
+            loadMultipleTypes(reset: reset)
+            return
+        }
+
+        let onlyType = selectedTypes.first
+
+        // 1️⃣ Si "Bonnes ondes" est le seul filtre actif, on utilise l’ancien service
+        if onlyType == "Smalltalk" {
             SmallTalkService.listSmallTalks { smallTalks, error in
                 SVProgressHUD.dismiss()
                 self.isFetching = false
@@ -119,25 +152,65 @@ class ConversationsMainHomeViewController: UIViewController {
             return
         }
 
-        // 2️⃣ Sinon, on utilise le nouvel endpoint memberships
-        let typeParam = membershipTypeParam()
-        MessagingService.getConversationMemberships(type: typeParam,
+        // 2️⃣ Sinon (aucun filtre, ou un seul filtre "Conversation"/"Outing"), le nouvel endpoint memberships
+        MessagingService.getConversationMemberships(type: onlyType,
                                                    page: currentPage,
                                                    per: perPage) { memberships, error in
             SVProgressHUD.dismiss()
             self.isFetching = false
             guard let memberships = memberships else { return }
 
-            // pagination
             self.isLastPage = memberships.count < self.perPage
 
-            // map en Conversation
             let conversations = memberships.map { self.conversation(from: $0) }
-            
-            // recharge via le DTO conversation
             self.loadDTO(conversations: conversations, reset: reset)
             self.currentPage += 1
         }
+    }
+
+    /// Fetches 2-3 selected types in parallel and merges the results, most recent message first.
+    private func loadMultipleTypes(reset: Bool) {
+        isLastPage = true // pas de pagination pour la vue fusionnée multi-types
+        let group = DispatchGroup()
+        var mergedConversations: [Conversation] = []
+        var mergedSmallTalks: [SmallTalk] = []
+        let lock = NSLock()
+
+        for type in selectedTypes {
+            group.enter()
+            if type == "Smalltalk" {
+                SmallTalkService.listSmallTalks { smallTalks, _ in
+                    lock.lock(); mergedSmallTalks.append(contentsOf: smallTalks ?? []); lock.unlock()
+                    group.leave()
+                }
+            } else {
+                MessagingService.getConversationMemberships(type: type, page: 1, per: multiTypePerPage) { memberships, _ in
+                    let conversations = (memberships ?? []).map { self.conversation(from: $0) }
+                    lock.lock(); mergedConversations.append(contentsOf: conversations); lock.unlock()
+                    group.leave()
+                }
+            }
+        }
+
+        group.notify(queue: .main) {
+            SVProgressHUD.dismiss()
+            self.isFetching = false
+
+            let sortedConversations = mergedConversations.sorted {
+                self.lastMessageDate($0) > self.lastMessageDate($1)
+            }
+            self.loadDTO(conversations: sortedConversations, reset: reset)
+            if !mergedSmallTalks.isEmpty {
+                self.loadDTO(smallTalks: mergedSmallTalks, reset: false)
+            }
+        }
+    }
+
+    private func lastMessageDate(_ conversation: Conversation) -> Date {
+        guard let dateStr = conversation.lastMessage?.dateStr else { return .distantPast }
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return isoFormatter.date(from: dateStr) ?? .distantPast
     }
 
     private func conversation(from membership: ConversationMembership) -> Conversation {
@@ -195,17 +268,36 @@ class ConversationsMainHomeViewController: UIViewController {
         return conv
     }
 
+    private func appendHeaderRows() {
+        dataSource.append(.bonnesOndesCard)
+        if notificationsDisabled {
+            dataSource.append(.notificationRequest)
+        }
+        dataSource.append(.sectionLabel(text: "conversation_your_conversations".localized))
+    }
+
+    /// Moves the moderator's 1-1 conversation (if present in `conversations`) to the top, with its own label.
+    private func pinModeratorConversation(in conversations: [Conversation]) -> [Conversation] {
+        guard let moderatorUserId = moderatorUserId,
+              let index = conversations.firstIndex(where: { $0.type == "private" && $0.user?.uid == moderatorUserId }) else {
+            return conversations
+        }
+        var result = conversations
+        let moderatorConv = result.remove(at: index)
+        dataSource.append(.sectionLabel(text: "conversation_pinned_contact_label".localized))
+        dataSource.append(.conversation(conversation: moderatorConv))
+        return result
+    }
+
     func loadDTO(conversations: [Conversation], reset: Bool) {
         if reset {
             dataSource.removeAll()
-            dataSource.append(.filter(filter: ""))
-            if notificationsDisabled {
-                dataSource.append(.notificationRequest)
-            }
+            appendHeaderRows()
         }
 
         let startIndex = dataSource.count
-        let newItems = conversations.map { ConversationMainDTO.conversation(conversation: $0) }
+        let remaining = reset ? pinModeratorConversation(in: conversations) : conversations
+        let newItems = remaining.map { ConversationMainDTO.conversation(conversation: $0) }
         dataSource.append(contentsOf: newItems)
 
         DispatchQueue.main.async {
@@ -221,10 +313,7 @@ class ConversationsMainHomeViewController: UIViewController {
     func loadDTO(smallTalks: [SmallTalk], reset: Bool) {
         if reset {
             dataSource.removeAll()
-            dataSource.append(.filter(filter: ""))
-            if notificationsDisabled {
-                dataSource.append(.notificationRequest)
-            }
+            appendHeaderRows()
         }
 
         let startIndex = dataSource.count
@@ -281,28 +370,43 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             cell.configure(conversation: conversation, currentUserId: currentUserId, isSmallTalk: true)
             return cell
 
-        case .filter(_):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FilterDiscussionCell", for: indexPath) as! FilterDiscussionCell
-            let filters = [
-                "event_conv_filter_all".localized,
-                "event_conv_filter_discussions".localized,
-                "event_conv_filter_events".localized,
-                "event_conv_filter_smalltalks".localized
-            ]
-            cell.configure(filters: filters, selectedFilter: selectedFilter)
-            cell.delegate = self
+        case .bonnesOndesCard:
+            let cell = tableView.dequeueReusableCell(withIdentifier: BonnesOndesCardCell.identifier, for: indexPath) as! BonnesOndesCardCell
+            cell.onDiscuterTap = { [weak self] in
+                self?.presentSmallTalkFunnel()
+            }
+            cell.selectionStyle = .none
+            return cell
+
+        case .sectionLabel(let text):
+            let cell = tableView.dequeueReusableCell(withIdentifier: ConversationSectionLabelCell.identifier, for: indexPath) as! ConversationSectionLabelCell
+            if text == "conversation_your_conversations".localized {
+                cell.configureWithFilter(text: text, hasActiveFilter: !selectedTypes.isEmpty) { [weak self] in
+                    self?.onFilterTap()
+                }
+            } else {
+                cell.configure(text: text)
+            }
             cell.selectionStyle = .none
             return cell
         }
+    }
+
+    private func presentSmallTalkFunnel() {
+        AnalyticsLoggerManager.logEvent(name: "click_bonnes_ondes_start_discussion")
+        let sb = UIStoryboard(name: "SmallTalk", bundle: nil)
+        guard let vc = sb.instantiateInitialViewController() else { return }
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dto = dataSource[indexPath.row]
 
         switch dto {
-        case .filter(_):
+        case .bonnesOndesCard, .sectionLabel:
             return
-            
+
         case .notificationRequest:
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
                 DispatchQueue.main.async {
@@ -352,6 +456,26 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
         }
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch dataSource[indexPath.row] {
+        case .bonnesOndesCard, .sectionLabel:
+            return UITableView.automaticDimension
+        default:
+            return 75
+        }
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch dataSource[indexPath.row] {
+        case .bonnesOndesCard:
+            return 160
+        case .sectionLabel:
+            return 40
+        default:
+            return 75
+        }
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
@@ -395,13 +519,5 @@ extension ConversationsMainHomeViewController: UpdateUnreadCountDelegate {
                 self.ui_tableview.reloadData()
             }
         }
-    }
-}
-
-// MARK: - FilterDiscussionCellDelegate
-extension ConversationsMainHomeViewController: FilterDiscussionCellDelegate {
-    func onFilterClick(filter: String) {
-        self.selectedFilter = filter
-        loadConversations(reset: true)
     }
 }

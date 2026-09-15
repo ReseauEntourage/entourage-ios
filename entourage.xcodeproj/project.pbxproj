@@ -417,7 +417,7 @@
 		24EE59A22FC083F5008E7291 /* HmacSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59A12FC083F5008E7291 /* HmacSigner.swift */; };
 		24EE59C32FC09292008E7291 /* cellMeWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EE59A62FC09292008E7291 /* cellMeWithImage.xib */; };
 		24EE59C42FC09292008E7291 /* cellOtherWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EE59A72FC09292008E7291 /* cellOtherWithImage.xib */; };
-		24EE59C52FC09292008E7291 /* FilterDiscussionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EE59AD2FC09292008E7291 /* FilterDiscussionCell.xib */; };
+		A87062E798E4837EFC208628 /* ConversationFilterModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CA96658A44D04696F21EA /* ConversationFilterModalView.swift */; };
 		24EE59C62FC09292008E7291 /* DiscussionEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EE59AB2FC09292008E7291 /* DiscussionEventCell.xib */; };
 		24EE59C72FC09292008E7291 /* ConversationNotifAskViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EE59B92FC09292008E7291 /* ConversationNotifAskViewCell.xib */; };
 		24EE59C82FC09292008E7291 /* MentionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EE59C12FC09292008E7291 /* MentionCell.xib */; };
@@ -433,7 +433,8 @@
 		24EE59D22FC09292008E7291 /* ConversationParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59BB2FC09292008E7291 /* ConversationParametersViewController.swift */; };
 		24EE59D32FC09292008E7291 /* ConversationListMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59B62FC09292008E7291 /* ConversationListMainCell.swift */; };
 		24EE59D42FC09292008E7291 /* ConversationNotifAskViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59B82FC09292008E7291 /* ConversationNotifAskViewCell.swift */; };
-		24EE59D52FC09292008E7291 /* FilterDiscussionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59AC2FC09292008E7291 /* FilterDiscussionCell.swift */; };
+		194EA84686976862D731B969 /* BonnesOndesCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777E8CA9AFDBA2DC285F9493 /* BonnesOndesCardCell.swift */; };
+		C313ABE1095FE492E280E4D3 /* ConversationSectionLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D494315B7391BF1A24F69 /* ConversationSectionLabelCell.swift */; };
 		24EE59D62FC09292008E7291 /* ImageGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59B02FC09292008E7291 /* ImageGridCell.swift */; };
 		24EE59D72FC09292008E7291 /* ConversationsMainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59BD2FC09292008E7291 /* ConversationsMainHomeViewController.swift */; };
 		24EE59D82FC09292008E7291 /* ConversationListMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59B72FC09292008E7291 /* ConversationListMembersViewController.swift */; };
@@ -1086,8 +1087,9 @@
 		24EE59A82FC09292008E7291 /* ConversationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewCell.swift; sourceTree = "<group>"; };
 		24EE59AA2FC09292008E7291 /* DiscussionEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionEventCell.swift; sourceTree = "<group>"; };
 		24EE59AB2FC09292008E7291 /* DiscussionEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscussionEventCell.xib; sourceTree = "<group>"; };
-		24EE59AC2FC09292008E7291 /* FilterDiscussionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDiscussionCell.swift; sourceTree = "<group>"; };
-		24EE59AD2FC09292008E7291 /* FilterDiscussionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDiscussionCell.xib; sourceTree = "<group>"; };
+		777E8CA9AFDBA2DC285F9493 /* BonnesOndesCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonnesOndesCardCell.swift; sourceTree = "<group>"; };
+		4C2D494315B7391BF1A24F69 /* ConversationSectionLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSectionLabelCell.swift; sourceTree = "<group>"; };
+		D20CA96658A44D04696F21EA /* ConversationFilterModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationFilterModalView.swift; sourceTree = "<group>"; };
 		24EE59AF2FC09292008E7291 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		24EE59B02FC09292008E7291 /* ImageGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridCell.swift; sourceTree = "<group>"; };
 		24EE59B12FC09292008E7291 /* ImageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewController.swift; sourceTree = "<group>"; };
@@ -2307,8 +2309,8 @@
 			children = (
 				24EE59AA2FC09292008E7291 /* DiscussionEventCell.swift */,
 				24EE59AB2FC09292008E7291 /* DiscussionEventCell.xib */,
-				24EE59AC2FC09292008E7291 /* FilterDiscussionCell.swift */,
-				24EE59AD2FC09292008E7291 /* FilterDiscussionCell.xib */,
+				777E8CA9AFDBA2DC285F9493 /* BonnesOndesCardCell.swift */,
+				4C2D494315B7391BF1A24F69 /* ConversationSectionLabelCell.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -2342,6 +2344,7 @@
 				24EE59BB2FC09292008E7291 /* ConversationParametersViewController.swift */,
 				24EE59BC2FC09292008E7291 /* ConversationParametersViewController.swift.orig */,
 				24EE59BD2FC09292008E7291 /* ConversationsMainHomeViewController.swift */,
+				D20CA96658A44D04696F21EA /* ConversationFilterModalView.swift */,
 				24EE59BE2FC09292008E7291 /* ConversationStaffWarningView.swift */,
 				24EE59BF2FC09292008E7291 /* FullScreenImageView.swift */,
 				24EE59C02FC09292008E7291 /* MentionCell.swift */,
@@ -2983,7 +2986,6 @@
 				020AF5E92860B10C0012AE60 /* HomeCongratPopupViewController.xib in Resources */,
 				24EE59C32FC09292008E7291 /* cellMeWithImage.xib in Resources */,
 				24EE59C42FC09292008E7291 /* cellOtherWithImage.xib in Resources */,
-				24EE59C52FC09292008E7291 /* FilterDiscussionCell.xib in Resources */,
 				24EE59C62FC09292008E7291 /* DiscussionEventCell.xib in Resources */,
 				24EE59C72FC09292008E7291 /* ConversationNotifAskViewCell.xib in Resources */,
 				24EE59C82FC09292008E7291 /* MentionCell.xib in Resources */,
@@ -3390,9 +3392,11 @@
 				24EE59D22FC09292008E7291 /* ConversationParametersViewController.swift in Sources */,
 				24EE59D32FC09292008E7291 /* ConversationListMainCell.swift in Sources */,
 				24EE59D42FC09292008E7291 /* ConversationNotifAskViewCell.swift in Sources */,
-				24EE59D52FC09292008E7291 /* FilterDiscussionCell.swift in Sources */,
 				24EE59D62FC09292008E7291 /* ImageGridCell.swift in Sources */,
 				24EE59D72FC09292008E7291 /* ConversationsMainHomeViewController.swift in Sources */,
+				194EA84686976862D731B969 /* BonnesOndesCardCell.swift in Sources */,
+				C313ABE1095FE492E280E4D3 /* ConversationSectionLabelCell.swift in Sources */,
+				A87062E798E4837EFC208628 /* ConversationFilterModalView.swift in Sources */,
 				24EE59D82FC09292008E7291 /* ConversationListMembersViewController.swift in Sources */,
 				24EE59D92FC09292008E7291 /* ImageListViewController.swift in Sources */,
 				24EE59DA2FC09292008E7291 /* ConversationParamCell.swift in Sources */,
