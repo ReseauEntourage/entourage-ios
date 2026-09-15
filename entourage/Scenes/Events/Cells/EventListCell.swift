@@ -27,44 +27,60 @@ class EventListCell: UITableViewCell {
     @IBOutlet weak var ui_label_canceled: UILabel!
     @IBOutlet weak var ui_label_admin: UILabel?
     @IBOutlet weak var ui_subscribed_label: UILabel!
-    
+
+    /// Badge/wash shown over the thumbnail for a cancelled event (EN-9335). Replaces the old inline icon+text indicator.
+    private let ui_badge_cancelled = EventCancelledBadgeView()
+    private var isCancelled = false
+
     class var identifier: String {
         return String(describing: self)
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_date.setupFontAndColor(style: ApplicationTheme.getFontLegendGris(size: 15))
         ui_location.setupFontAndColor(style: ApplicationTheme.getFontLegendGris(size: 15))
         ui_members.setupFontAndColor(style: ApplicationTheme.getFontLegendGris(size: 15))
-        
+
         ui_image.layer.cornerRadius = 20
         ui_alpha_view.layer.cornerRadius = 20
-        
+
         ui_label_admin?.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 15), color: .appOrangeLight))
         ui_label_admin?.text = "Admin".localized
-        ui_label_canceled.text = "- \("event_cancel_list".localized)"
+
+        // Old inline "- Annulé" indicator: superseded by ui_badge_cancelled below, kept hidden for good.
+        ui_iv_canceled.isHidden = true
+        ui_label_canceled.isHidden = true
+        ui_label_canceled.text = ""
+
+        ui_badge_cancelled.isHidden = true
+        ui_badge_cancelled.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(ui_badge_cancelled)
+        NSLayoutConstraint.activate([
+            ui_badge_cancelled.topAnchor.constraint(equalTo: ui_image.topAnchor, constant: 4),
+            ui_badge_cancelled.leadingAnchor.constraint(equalTo: ui_image.leadingAnchor, constant: 4),
+            ui_badge_cancelled.heightAnchor.constraint(equalToConstant: 16)
+        ])
     }
-    
+
     func populateCell(event:Event, hideSeparator:Bool) {
-        
-        if event.isCanceled() {
-            ui_label_canceled.text = "- \("event_cancel_list".localized)"
-            ui_iv_canceled.isHidden = false
-            ui_label_canceled.isHidden = false
-            ui_constraint_left_title.constant = 38
+
+        isCancelled = event.isCanceled()
+        ui_constraint_left_title.constant = 10
+
+        if isCancelled {
+            ui_badge_cancelled.isHidden = false
             ui_title.textColor = .appGris112
+            ui_alpha_view.isHidden = false
         }
         else {
-            ui_label_canceled.text = ""
+            ui_badge_cancelled.isHidden = true
             ui_title.textColor = .black
-            ui_constraint_left_title.constant = 10
-            ui_iv_canceled.isHidden = true
-            ui_label_canceled.isHidden = true
+            ui_alpha_view.isHidden = true
         }
-        
+
         var isAmbassador = false
         if let _author = event.author {
             if let _roles = _author.communityRoles{
@@ -120,10 +136,12 @@ class EventListCell: UITableViewCell {
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGris())
         self.ui_alpha_view.isHidden = false
     }
-    
+
     func setIncoming(){
-        ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        self.ui_alpha_view.isHidden = true
+        if !isCancelled {
+            ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
+            self.ui_alpha_view.isHidden = true
+        }
     }
     
     private func updateImage(mainUrl:URL) {

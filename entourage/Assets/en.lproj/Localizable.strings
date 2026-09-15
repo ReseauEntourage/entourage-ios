@@ -990,6 +990,7 @@
 "event_detail_cat_title" = "Category :";
 "event_cancel_list" = "Canceled";
 "event_canceled" = "Event canceled";
+"event_canceled_subtitle" = "This event will not take place";
 
 //"//Event filters" = "nan";
 "event_filter_title" = "Events - Search filters";

@@ -140,6 +140,9 @@ extension UIColor {
         return UIColor(named: "grey_off") ?? .red
     }
 
+    //MARK: - Event status colors -
+    static var appAnthracite: UIColor { return UIColor(hexString: "#363636") }
+
     //MARK: - Tag colors -
     static var appTagInspire: UIColor { return UIColor(hexString: "#D4A000") }
     static var appTagInspireBackground: UIColor { return UIColor(hexString: "#FFF8DE") }

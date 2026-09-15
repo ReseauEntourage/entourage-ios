@@ -1017,6 +1017,7 @@
 "event_detail_cat_title" = "Catégorie :";
 "event_cancel_list" = "Annulé";
 "event_canceled" = "Événement annulé";
+"event_canceled_subtitle" = "Cet événement n'aura pas lieu";
 
 //Event filters
 "event_filter_title" = "Événements - Filtres de recherche";

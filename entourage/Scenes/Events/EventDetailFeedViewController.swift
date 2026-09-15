@@ -68,7 +68,11 @@ class EventDetailFeedViewController: UIViewController {
     
     // Stocke la liste des utilisateurs participants
     var users: [UserLightNeighborhood] = []
-    
+
+    /// Subtitle under the cancelled banner + wash overlay on the cover, added in code (EN-9335).
+    private let ui_lbl_canceled_subtitle = UILabel()
+    private let ui_view_cover_wash = UIView()
+
     override func loadView(){
         super.loadView()
         ui_btn_participate_and_see_conv.isHidden = true
@@ -198,9 +202,33 @@ class EventDetailFeedViewController: UIViewController {
         ui_title_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_title_bt_join.text = "event_detail_button_participe_OFF".localized
         
+        ui_view_canceled.backgroundColor = .appAnthracite
         ui_view_canceled.layer.cornerRadius = 8
         ui_lbl_canceled.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldBlanc(size: 15))
-        ui_lbl_canceled.text = "event_canceled".localized.uppercased()
+        ui_lbl_canceled.text = "event_canceled".localized
+
+        ui_lbl_canceled_subtitle.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 12), color: .white.withAlphaComponent(0.75)))
+        ui_lbl_canceled_subtitle.text = "event_canceled_subtitle".localized
+        ui_lbl_canceled_subtitle.translatesAutoresizingMaskIntoConstraints = false
+        ui_view_canceled.addSubview(ui_lbl_canceled_subtitle)
+        NSLayoutConstraint.activate([
+            ui_lbl_canceled_subtitle.leadingAnchor.constraint(equalTo: ui_lbl_canceled.leadingAnchor),
+            ui_lbl_canceled_subtitle.topAnchor.constraint(equalTo: ui_lbl_canceled.bottomAnchor, constant: 1),
+            ui_lbl_canceled_subtitle.trailingAnchor.constraint(lessThanOrEqualTo: ui_view_canceled.trailingAnchor, constant: -12)
+        ])
+
+        // Cover wash overlay for the cancelled state (EN-9335), pinned over the header image.
+        ui_view_cover_wash.backgroundColor = UIColor.white.withAlphaComponent(0.45)
+        ui_view_cover_wash.isHidden = true
+        ui_view_cover_wash.isUserInteractionEnabled = false
+        ui_view_cover_wash.translatesAutoresizingMaskIntoConstraints = false
+        ui_iv_event.superview?.insertSubview(ui_view_cover_wash, aboveSubview: ui_iv_event)
+        NSLayoutConstraint.activate([
+            ui_view_cover_wash.topAnchor.constraint(equalTo: ui_iv_event.topAnchor),
+            ui_view_cover_wash.leadingAnchor.constraint(equalTo: ui_iv_event.leadingAnchor),
+            ui_view_cover_wash.trailingAnchor.constraint(equalTo: ui_iv_event.trailingAnchor),
+            ui_view_cover_wash.bottomAnchor.constraint(equalTo: ui_iv_event.bottomAnchor)
+        ])
     }
     
     func populateTopView(isAfterLoading: Bool) {
@@ -238,6 +266,10 @@ class EventDetailFeedViewController: UIViewController {
         
         self.ui_label_title_event.text = self.event?.title
         self.ui_bt_floating_join.isHidden = true
+
+        let isCancelled = self.event?.isCanceled() ?? false
+        self.ui_view_cover_wash.isHidden = !isCancelled
+        self.ui_label_title_event.textColor = isCancelled ? .appGris112 : .black
     }
     
     // MARK: - Actions
@@ -315,14 +347,20 @@ class EventDetailFeedViewController: UIViewController {
                 self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "go_to_event_conversation".localized)
                 self.ui_btn_participate_and_see_conv.isHidden = false
             }
-            // Si l’événement est annulé => on affiche le bandeau
+            // Si l’événement est annulé => on affiche le bandeau et on désactive le bouton d'action
             if event?.isCanceled() ?? false {
                 self.ui_view_canceled.isHidden = false
+
+                self.configureOrangeButton(self.ui_btn_participate_and_see_conv, withTitle: "event_canceled".localized)
+                self.ui_btn_participate_and_see_conv.backgroundColor = .appGris112
+                self.ui_btn_participate_and_see_conv.isEnabled = false
+                self.ui_btn_participate_and_see_conv.isHidden = false
             }
             else {
                 self.ui_view_canceled.isHidden = true
+                self.ui_btn_participate_and_see_conv.isEnabled = true
             }
-            
+
             // Met à jour la topView
             self.populateTopView(isAfterLoading: true)
             

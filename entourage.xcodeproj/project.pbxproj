@@ -450,6 +450,7 @@
 		26043D9C2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */; };
 		2605FE6C2EBB859500C04C64 /* ZoneChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2605FE6B2EBB859500C04C64 /* ZoneChoiceViewController.swift */; };
 		2608F2312E4E0D7600C3C254 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608F2302E4E0D7600C3C254 /* Checkbox.swift */; };
+		97B923BAF1476CD5F6FC777A /* EventCancelledBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004C9978909256CDCC2C4BA4 /* EventCancelledBadgeView.swift */; };
 		2609BFA42AC2BE640052111C /* HomeV2CellTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */; };
 		2609BFA62AC2C7D00052111C /* HomeV2CellTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */; };
 		2609BFA82AC329120052111C /* HomeSeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2609BFA72AC329120052111C /* HomeSeeAllCell.swift */; };
@@ -1116,6 +1117,7 @@
 		26043D9B2CE4F6AB00F4083F /* SelectableDayAndHourCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableDayAndHourCollectionViewCell.xib; sourceTree = "<group>"; };
 		2605FE6B2EBB859500C04C64 /* ZoneChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneChoiceViewController.swift; sourceTree = "<group>"; };
 		2608F2302E4E0D7600C3C254 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		004C9978909256CDCC2C4BA4 /* EventCancelledBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCancelledBadgeView.swift; sourceTree = "<group>"; };
 		2609BFA32AC2BE640052111C /* HomeV2CellTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeV2CellTitle.swift; sourceTree = "<group>"; };
 		2609BFA52AC2C7D00052111C /* HomeV2CellTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeV2CellTitle.xib; sourceTree = "<group>"; };
 		2609BFA72AC329120052111C /* HomeSeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSeeAllCell.swift; sourceTree = "<group>"; };
@@ -1761,6 +1763,7 @@
 			isa = PBXGroup;
 			children = (
 				2608F2302E4E0D7600C3C254 /* Checkbox.swift */,
+				004C9978909256CDCC2C4BA4 /* EventCancelledBadgeView.swift */,
 				02D10D892873236500ACC267 /* MJPopupViewController.swift */,
 				02D10D8A2873236500ACC267 /* MJPopupViewController.xib */,
 				0268C246285A2B1400294055 /* Floaty */,
@@ -3120,6 +3123,7 @@
 				029638F5286C801A00E10EFB /* EventCreateValidateViewController.swift in Sources */,
 				260377FC2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift in Sources */,
 				2608F2312E4E0D7600C3C254 /* Checkbox.swift in Sources */,
+				97B923BAF1476CD5F6FC777A /* EventCancelledBadgeView.swift in Sources */,
 				2685FFE22B68EA1D0083F683 /* Reaction.swift in Sources */,
 				29661BA7659D4853B8D5A9BD /* ReactionBadgesView.swift in Sources */,
 				B782C67A4A1B497B8168D03F /* ReactionPickerBarView.swift in Sources */,
