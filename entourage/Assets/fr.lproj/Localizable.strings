@@ -2166,7 +2166,7 @@ Choisissez un sujet pour démarrer.";
 "badge_tisseur_liens_hint" = "Soyez actif dans vos groupes au moins 3 semaines sur les 4 dernières pour obtenir ce badge.";
 "badge_tisseur_liens_hint_remaining_one" = "Plus qu'1 semaine d'activité pour obtenir ce badge.";
 "badge_tisseur_liens_hint_remaining_other" = "Encore %d semaines d'activité pour obtenir ce badge.";
-"badge_tisseur_liens_how_it_works" = "Soyez actif dans vos groupes (en postant, commentant, réagissant) au moins 3 semaines par mois.";
+"badge_tisseur_liens_how_it_works" = "Soyez actif dans vos groupes 3 semaines sur 4 : il suffit de poster, commenter ou réagir à une publication. Une action par semaine suffit.";
 "badge_tisseur_liens_what_it_means" = "La régularité crée la confiance. Ce badge honore ceux qui sont là semaine après semaine, qui animent la vie locale et maintiennent le lien dans leur quartier.";
 "badge_tisseur_liens_cta" = "Aller dans mes groupes";
 "badge_tisseur_liens_unlocked_message" = "3 semaines d'activité sur 4 — vous faites battre le cœur des groupes de voisins. Merci pour votre engagement constant.";
