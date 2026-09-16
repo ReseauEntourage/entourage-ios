@@ -144,6 +144,9 @@ extension UIColor {
     static var appAnthracite: UIColor { return UIColor(hexString: "#363636") }
 
     //MARK: - Tag colors -
+    /// "Votre contact Entourage" tag (Discussions list) — EN-9490.
+    static var appDedicatedContactTag: UIColor { return UIColor(hexString: "#D53F00") }
+    static var appDedicatedContactTagBackground: UIColor { return UIColor(hexString: "#FFE7D6") }
     static var appTagInspire: UIColor { return UIColor(hexString: "#D4A000") }
     static var appTagInspireBackground: UIColor { return UIColor(hexString: "#FFF8DE") }
     static var appTagAct: UIColor { return UIColor(hexString: "#4DA865") }

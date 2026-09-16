@@ -20,11 +20,12 @@ class ConversationListMainSwiftUICell: UITableViewCell {
         self.backgroundColor = .clear
     }
 
-    func configure(conversation: Conversation, currentUserId: Int?, isSmallTalk: Bool) {
+    func configure(conversation: Conversation, currentUserId: Int?, isSmallTalk: Bool, isDedicatedContact: Bool = false) {
         let swiftUIView = ConversationListMainCellSwiftUI(
             conversation: conversation,
             currentUserId: currentUserId,
-            isSmallTalk: isSmallTalk
+            isSmallTalk: isSmallTalk,
+            isDedicatedContact: isDedicatedContact
         )
 
         if let hostingController = hostingController {

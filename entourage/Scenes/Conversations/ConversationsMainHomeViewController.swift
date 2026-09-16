@@ -5,7 +5,7 @@ enum ConversationMainDTO {
     case notificationRequest
     case bonnesOndesCard
     case sectionLabel(text: String)
-    case conversation(conversation: Conversation)
+    case conversation(conversation: Conversation, isDedicatedContact: Bool)
     case smalltalk(smallTalk: SmallTalk)
 }
 
@@ -40,6 +40,9 @@ class ConversationsMainHomeViewController: UIViewController {
     /// Fetched once per screen lifetime to identify the pinned "Votre contact Entourage" conversation.
     private var moderatorUserId: Int?
 
+    private let ui_btn_filter = UIButton(type: .system)
+    private let ui_view_filter_badge = UIView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,10 +55,50 @@ class ConversationsMainHomeViewController: UIViewController {
         ui_tableview.register(BonnesOndesCardCell.self, forCellReuseIdentifier: BonnesOndesCardCell.identifier)
 
         setupViews()
+        setupHeaderFilterButton()
         checkNotificationStatus()
         fetchModeratorIdThenLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateFilterSmallTalk), name: NSNotification.Name(kNotificationMessagesUpdateSmallTalkFilter), object: nil)
+    }
+
+    /// Round white "sliders" button in the header, matching the reference mockup — EN-9490.
+    private func setupHeaderFilterButton() {
+        ui_btn_filter.backgroundColor = .white
+        ui_btn_filter.layer.cornerRadius = 26
+        ui_btn_filter.layer.shadowColor = UIColor.black.cgColor
+        ui_btn_filter.layer.shadowOpacity = 0.08
+        ui_btn_filter.layer.shadowOffset = CGSize(width: 0, height: 2)
+        ui_btn_filter.layer.shadowRadius = 6
+        ui_btn_filter.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
+        ui_btn_filter.tintColor = .appOrange
+        ui_btn_filter.translatesAutoresizingMaskIntoConstraints = false
+        ui_btn_filter.addTarget(self, action: #selector(onFilterTapped), for: .touchUpInside)
+        view.addSubview(ui_btn_filter)
+
+        ui_view_filter_badge.backgroundColor = UIColor(red: 1, green: 0.16, blue: 0.16, alpha: 1)
+        ui_view_filter_badge.layer.cornerRadius = 7.5
+        ui_view_filter_badge.layer.borderWidth = 2.5
+        ui_view_filter_badge.layer.borderColor = UIColor.appOrange.cgColor
+        ui_view_filter_badge.isHidden = true
+        ui_view_filter_badge.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(ui_view_filter_badge)
+
+        NSLayoutConstraint.activate([
+            ui_btn_filter.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            ui_btn_filter.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            ui_btn_filter.widthAnchor.constraint(equalToConstant: 52),
+            ui_btn_filter.heightAnchor.constraint(equalToConstant: 52),
+
+            ui_view_filter_badge.topAnchor.constraint(equalTo: ui_btn_filter.topAnchor, constant: -1),
+            ui_view_filter_badge.trailingAnchor.constraint(equalTo: ui_btn_filter.trailingAnchor, constant: 1),
+            ui_view_filter_badge.widthAnchor.constraint(equalToConstant: 15),
+            ui_view_filter_badge.heightAnchor.constraint(equalToConstant: 15)
+        ])
+    }
+
+    @objc private func onFilterTapped() {
+        onFilterTap()
     }
 
     @objc private func updateFilterSmallTalk() {
@@ -72,7 +115,7 @@ class ConversationsMainHomeViewController: UIViewController {
     }
 
     private func updateFilterBadge() {
-        ui_tableview.reloadData()
+        ui_view_filter_badge.isHidden = selectedTypes.isEmpty
     }
 
     private func onFilterTap() {
@@ -284,8 +327,7 @@ class ConversationsMainHomeViewController: UIViewController {
         }
         var result = conversations
         let moderatorConv = result.remove(at: index)
-        dataSource.append(.sectionLabel(text: "conversation_pinned_contact_label".localized))
-        dataSource.append(.conversation(conversation: moderatorConv))
+        dataSource.append(.conversation(conversation: moderatorConv, isDedicatedContact: true))
         return result
     }
 
@@ -297,7 +339,7 @@ class ConversationsMainHomeViewController: UIViewController {
 
         let startIndex = dataSource.count
         let remaining = reset ? pinModeratorConversation(in: conversations) : conversations
-        let newItems = remaining.map { ConversationMainDTO.conversation(conversation: $0) }
+        let newItems = remaining.map { ConversationMainDTO.conversation(conversation: $0, isDedicatedContact: false) }
         dataSource.append(contentsOf: newItems)
 
         DispatchQueue.main.async {
@@ -347,10 +389,10 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             cell.selectionStyle = .none
             return cell
 
-        case .conversation(let conversation):
+        case .conversation(let conversation, let isDedicatedContact):
             let cell = tableView.dequeueReusableCell(withIdentifier: ConversationListMainSwiftUICell.identifier, for: indexPath) as! ConversationListMainSwiftUICell
             let currentUserId = UserDefaults.currentUser?.sid
-            cell.configure(conversation: conversation, currentUserId: currentUserId, isSmallTalk: false)
+            cell.configure(conversation: conversation, currentUserId: currentUserId, isSmallTalk: false, isDedicatedContact: isDedicatedContact)
             return cell
 
         case .smalltalk(let smallTalk):
@@ -380,13 +422,7 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
 
         case .sectionLabel(let text):
             let cell = tableView.dequeueReusableCell(withIdentifier: ConversationSectionLabelCell.identifier, for: indexPath) as! ConversationSectionLabelCell
-            if text == "conversation_your_conversations".localized {
-                cell.configureWithFilter(text: text, hasActiveFilter: !selectedTypes.isEmpty) { [weak self] in
-                    self?.onFilterTap()
-                }
-            } else {
-                cell.configure(text: text)
-            }
+            cell.configure(text: text)
             cell.selectionStyle = .none
             return cell
         }
@@ -422,7 +458,7 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             }
             return
 
-        case .conversation(let conversation):
+        case .conversation(let conversation, _):
             if conversation.type == "small_talk" {
                 if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.type = "small_talk"
@@ -494,7 +530,7 @@ extension ConversationsMainHomeViewController: ConversationListMainCellDelegate 
     }
 
     func showUserDetail(_ position: Int) {
-        if case let .conversation(conversation) = dataSource[position] {
+        if case let .conversation(conversation, _) = dataSource[position] {
             guard let userId = conversation.user?.uid else { return }
 
             presentOtherUserProfile(userId: "\(userId)")
@@ -507,9 +543,9 @@ extension ConversationsMainHomeViewController: UpdateUnreadCountDelegate {
     func updateUnreadCount(conversationId: Int, currentIndexPathSelected: IndexPath?) {
         guard let currentIndexPathSelected = currentIndexPathSelected else { return }
 
-        if case var .conversation(conversation) = dataSource[currentIndexPathSelected.row] {
+        if case var .conversation(conversation, isDedicatedContact) = dataSource[currentIndexPathSelected.row] {
             conversation.numberUnreadMessages = 0
-            dataSource[currentIndexPathSelected.row] = .conversation(conversation: conversation)
+            dataSource[currentIndexPathSelected.row] = .conversation(conversation: conversation, isDedicatedContact: isDedicatedContact)
         }
 
         DispatchQueue.main.async {

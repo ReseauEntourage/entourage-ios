@@ -65,6 +65,8 @@ struct ConversationListMainCellSwiftUI: View {
     var conversation: Conversation
     var currentUserId: Int?
     var isSmallTalk: Bool = false
+    /// Shows the "Votre contact Entourage" tag under the name — EN-9490.
+    var isDedicatedContact: Bool = false
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
@@ -108,6 +110,16 @@ struct ConversationListMainCellSwiftUI: View {
                             .lineLimit(1)
                             .layoutPriority(1) // Force la date à rester visible
                     }
+                }
+
+                if isDedicatedContact {
+                    Text("conversation_pinned_contact_label".localized)
+                        .font(.custom("NunitoSans-Bold", size: 10.5))
+                        .foregroundColor(Color(UIColor.appDedicatedContactTag))
+                        .padding(.horizontal, 9)
+                        .padding(.vertical, 3)
+                        .background(Color(UIColor.appDedicatedContactTagBackground))
+                        .clipShape(Capsule())
                 }
 
                 if isEvent, let role = conversation.subname {
