@@ -888,6 +888,13 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
         } else if let indexOld = messagesOld.firstIndex(where: { $0.uid == post.uid }) {
             messagesOld[indexOld] = post
         }
+        // `cellForRowAt` lit `neighborhood.messages` (pas messagesNew/messagesOld) tant que
+        // `hasNewAndOldSections` est false — c'est-à-dire pratiquement toujours, cf. splitMessages().
+        // Sans cette synchronisation, la réaction était bien envoyée au serveur mais jamais reflétée
+        // à l'écran, et le tap suivant relisait un reactionId resté à 0 (mauvaise branche add/delete).
+        if let indexMessage = neighborhood?.messages?.firstIndex(where: { $0.uid == post.uid }) {
+            neighborhood?.messages?[indexMessage] = post
+        }
     }
 
     
