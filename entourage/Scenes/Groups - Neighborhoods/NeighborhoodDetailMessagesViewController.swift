@@ -1051,7 +1051,13 @@ extension NeighborhoodDetailMessagesViewController: MessageCellSignalDelegate {
         }
         messages[idx].reactions = reactions
         messages[idx].reactionId = reactionId
+        // reloadData() recalcule la hauteur de TOUTES les cellules (cellules à hauteur
+        // automatique) : UIKit peut alors re-clamper le contentOffset et faire sauter le fil
+        // en haut le temps que les hauteurs se stabilisent. On restaure l'offset explicitement.
+        let previousOffset = ui_tableview.contentOffset
         ui_tableview.reloadData()
+        ui_tableview.layoutIfNeeded()
+        ui_tableview.setContentOffset(previousOffset, animated: false)
     }
 
     func retrySend(message: String, positionForRetry: Int) {
