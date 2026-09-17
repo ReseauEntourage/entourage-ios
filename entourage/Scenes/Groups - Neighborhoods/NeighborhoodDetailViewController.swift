@@ -979,8 +979,7 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
             // le back-end interdit d'avoir deux réactions en même temps sur un message.
             NeighborhoodService.deleteReactionToGroupPost(groupId: groupId, postId: post.uid) { [weak self] deleteError in
                 if deleteError != nil { self?.applyLocalReaction(postId: post.uid, reactionId: currentReactionId); return }
-                let wrapper = ReactionWrapper(reactionId: reactionType.id)
-                NeighborhoodService.postReactionToGroupPost(groupId: groupId, postId: post.uid, reactionWrapper: wrapper) { postError in
+                self?.postReactionToGroupPostWithRetry(groupId: groupId, postId: post.uid, reactionId: reactionType.id) { postError in
                     if postError != nil { self?.applyLocalReaction(postId: post.uid, reactionId: 0) }
                 }
             }
@@ -988,6 +987,25 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
             let wrapper = ReactionWrapper(reactionId: reactionType.id)
             NeighborhoodService.postReactionToGroupPost(groupId: groupId, postId: post.uid, reactionWrapper: wrapper) { [weak self] error in
                 if error != nil { self?.applyLocalReaction(postId: post.uid, reactionId: 0) }
+            }
+        }
+    }
+
+    /// Reproduit un délai/retard observé côté back lors d'un switch de réaction : le POST de la
+    /// nouvelle réaction, envoyé juste après le DELETE de l'ancienne, échoue parfois (le serveur
+    /// considère encore l'ancienne réaction présente), ce qui obligeait l'utilisateur à retaper
+    /// l'émoji une seconde fois pour que ça prenne. On retente une fois après un court délai avant
+    /// de renoncer et de retomber sur l'état "aucune réaction".
+    private func postReactionToGroupPostWithRetry(groupId: Int, postId: Int, reactionId: Int, retriesLeft: Int = 1, completion: @escaping (EntourageNetworkError?) -> Void) {
+        let wrapper = ReactionWrapper(reactionId: reactionId)
+        NeighborhoodService.postReactionToGroupPost(groupId: groupId, postId: postId, reactionWrapper: wrapper) { [weak self] error in
+            guard let self else { completion(error); return }
+            if error != nil, retriesLeft > 0 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.postReactionToGroupPostWithRetry(groupId: groupId, postId: postId, reactionId: reactionId, retriesLeft: retriesLeft - 1, completion: completion)
+                }
+            } else {
+                completion(error)
             }
         }
     }
