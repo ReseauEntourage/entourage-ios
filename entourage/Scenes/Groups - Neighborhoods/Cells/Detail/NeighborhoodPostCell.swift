@@ -121,15 +121,10 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_label_nb_votes.addGestureRecognizer(voteLabelTapGesture)
             ui_label_nb_votes.isUserInteractionEnabled = true  // Assure-toi que l'interaction utilisateur est activée
         }
-        if(ui_view_btn_i_like != nil){
-            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-                ui_view_btn_i_like.addGestureRecognizer(longPressGesture)
-        }
-        if ui_view_btn_i_like != nil {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLittleTap))
-            ui_view_btn_i_like.addGestureRecognizer(tapGesture)
-        }
-
+        // Les gestes de réaction sur ui_view_btn_i_like sont (ré)installés dans populateCell,
+        // qui seul connaît l'état isMember courant et qui est rappelé à chaque réutilisation/
+        // reload de cellule — les ajouter aussi ici les ferait s'empiler à chaque reload
+        // (un appui déclenchait alors N appels réseau dupliqués, cf. 422/404 sur les réactions).
     }
     
     @objc func onUserImageTapped() {
@@ -660,6 +655,15 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         
         displayReactions(for: message)
+
+        // populateCell est rappelée à chaque réutilisation de cellule ET à chaque reload de
+        // table (ex: après une réaction, cf. applyLocalReaction) : sans ce nettoyage, les gestes
+        // ajoutés ci-dessous s'empilaient sur ceux des appels précédents, si bien qu'un seul tap
+        // déclenchait N appels réseau (le 1er réussissait, les suivants renvoyaient 422 "déjà
+        // réagi" côté POST ou 404 "introuvable" côté DELETE).
+        ui_view_btn_i_like?.gestureRecognizers?.forEach { ui_view_btn_i_like.removeGestureRecognizer($0) }
+        ui_btn_signal_post?.gestureRecognizers?.forEach { ui_btn_signal_post.removeGestureRecognizer($0) }
+
         if let isMember = isMember, !isMember {
             if ui_view_btn_i_like != nil {
                 ui_view_btn_i_like.isUserInteractionEnabled = true
@@ -684,7 +688,7 @@ class NeighborhoodPostCell: UITableViewCell {
             }
             let tapGestureForSignal = UITapGestureRecognizer(target: self, action: #selector(signalClicked))
             ui_btn_signal_post.addGestureRecognizer(tapGestureForSignal)
-            
+
         }
     }
     
