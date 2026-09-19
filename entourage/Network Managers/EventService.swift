@@ -817,10 +817,10 @@ struct EventService:ParsingDataCodable {
         }
     }
 
-    static func updateUnsubscribedParticipants(eventId: Int, offerHelp: Int, askForHelp: Int, completion: @escaping (_ error: EntourageNetworkError?) -> Void) {
+    static func updateUnsubscribedParticipants(eventId: Int, offerHelp: Int, askForHelp: Int, female: Int, completion: @escaping (_ error: EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
         var endpoint = kAPIUpdateUnsubscribedParticipants
-        endpoint = String(format: endpoint, "\(eventId)", token, offerHelp, askForHelp)
+        endpoint = String(format: endpoint, "\(eventId)", token, offerHelp, askForHelp, female)
 
         Logger.print("Endpoint updateUnsubscribedParticipants: \(endpoint)")
 

@@ -153,6 +153,19 @@ struct UniversalLinkManager {
         // --- CGU / Charte ---
         case "chart-event":
             DeepLinkManager.showCGU()
+
+        // --- Home ---
+        case "home":
+            if pathElements.count > 1 {
+                let subEntity = pathElements[1]
+                if subEntity == "welcome-video" {
+                    DeepLinkManager.showWelcomeVideoUniversalLink()
+                } else {
+                    DeepLinkManager.showHomeUniversalLink()
+                }
+            } else {
+                DeepLinkManager.showHomeUniversalLink()
+            }
             
         // --- Fallback ---
         default:

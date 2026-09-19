@@ -1847,7 +1847,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "small_talk_group_found_subtitle" = "Découvrez les personnes de votre groupe.";
 
 /* Accueil SmallTalk */
-"home_v2_title_small_talk" = "Partager des « Bonnes Ondes » !";
+"home_v2_title_small_talk" = "Rejoindre une discussion solidaire";
 "small_talk_subtitle_match" = "Découvrez un nouveau moyen de discuter et de créer des liens qui durent dans le temps !";
 "small_talk_button_match" = "Discuter";
 "small_talk_title_waiting" = "Bientôt de nouvelles rencontres";
@@ -1963,7 +1963,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_tool_card_pedago" = "Ressources utiles";
 "home_v2_tool_card_ethics" = "Charte éthique Entourage";
 "home_v2_moderator_title_format" = "%@, votre contact dédié";
-"home_v2_moderator_subtitle" = "Je fais parti·e de l'équipe Entourage et je suis là pour vous accompagner. N'hésitez pas si vous avez des questions ! 🤗";
+"home_v2_moderator_subtitle" = "Je fais partie de l'équipe Entourage et je suis là pour vous accompagner. N'hésitez pas si vous avez des questions ! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "L’événement a-t-il un nombre de places limité ?";
 "eventCreatephase3_swiftUI_title_place" = "Lieu";
 
@@ -2030,3 +2030,26 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
 "conv_param_leave_event" = "Quitter l'événement";
 "conv_param_leave_group" = "Quitter le groupe";
+
+// SmallTalk Home V2
+"home_small_talk_pending_plural" = "%d discussions en cours de matching";
+"home_small_talk_pending_singular" = "%d discussion en cours de matching";
+"home_small_talk_active_title" = "Vos discussions solidaires";
+"home_small_talk_active_plural" = "%d discussions actives";
+"home_small_talk_active_singular" = "%d discussion active";
+"home_small_talk_pending_plus_plural" = "+%d en cours de matching";
+"home_small_talk_pending_plus_singular" = "+%d en cours de matching";
+"home_small_talk_start_new" = "+ Lancer une nouvelle rencontre (%d/3)";
+"home_small_talk_view_button" = "Voir";
+
+// Interests subtitles
+"interest_sport_subtitle" = "Football, yoga, basket…";
+"interest_animaux_subtitle" = "Refuge, soin, promenade…";
+"interest_marauding_subtitle" = "Repas, café, discussion…";
+"interest_bien_etre_subtitle" = "Relaxation, soin, hygiène…";
+"interest_cuisine_subtitle" = "Partage de repas, recettes…";
+"interest_culture_subtitle" = "Sorties, musées, ciné…";
+"interest_nature_subtitle" = "Jardinage, parcs, forêt…";
+"interest_jeux_subtitle" = "Jeux de société, cartes, plein air…";
+"interest_activites_subtitle" = "Bricolage, couture, réparation…";
+"interest_other_subtitle" = " ";

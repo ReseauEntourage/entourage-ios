@@ -156,11 +156,15 @@ import UIKit
             return nil
         }
 
-        let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        dateFormatter.dateFormat = dateFormat
-        return dateFormatter.date(from: dateStr)
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+        if let d = dateFormatter.date(from: dateStr) { return d }
+
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXX"
+        if let d = dateFormatter.date(from: dateStr) { return d }
+
+        return nil
     }
     
     static func formatEventDate(date:Date?) -> String {

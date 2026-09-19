@@ -41,10 +41,22 @@ class ConversationsMainHomeViewController: UIViewController {
         
         ui_tableview.register(UINib(nibName: "ConversationNotifAskViewCell", bundle: nil), forCellReuseIdentifier: "ConversationNotifAskViewCell")
         ui_tableview.register(UINib(nibName: "FilterDiscussionCell", bundle: nil), forCellReuseIdentifier: "FilterDiscussionCell")
+        ui_tableview.register(ConversationListMainSwiftUICell.self, forCellReuseIdentifier: ConversationListMainSwiftUICell.identifier)
 
         setupViews()
         checkNotificationStatus()
         loadConversations(reset: true)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFilterSmallTalk), name: NSNotification.Name(kNotificationMessagesUpdateSmallTalkFilter), object: nil)
+    }
+
+    @objc private func updateFilterSmallTalk() {
+        self.selectedFilter = "event_conv_filter_smalltalks".localized
+        self.loadConversations(reset: true)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -102,8 +114,6 @@ class ConversationsMainHomeViewController: UIViewController {
                 SVProgressHUD.dismiss()
                 self.isFetching = false
                 guard let smallTalks = smallTalks else { return }
-                // On retourne en DTO .smalltalk pour que cellForRowAt et didSelectRowAt
-                // passent bien par la case .smalltalk
                 self.loadDTO(smallTalks: smallTalks, reset: reset)
             }
             return
@@ -123,7 +133,8 @@ class ConversationsMainHomeViewController: UIViewController {
 
             // map en Conversation
             let conversations = memberships.map { self.conversation(from: $0) }
-            // et on recharge via le DTO conversation
+            
+            // recharge via le DTO conversation
             self.loadDTO(conversations: conversations, reset: reset)
             self.currentPage += 1
         }
@@ -146,7 +157,7 @@ class ConversationsMainHomeViewController: UIViewController {
             }
         }()
 
-        // Formatage de la date ISO (si c'est bien une date)
+        // Formatage de la date ISO de l'événement (si présente)
         let formattedDate: String? = {
             guard let subname = membership.subname else { return nil }
             let isoFormatter = ISO8601DateFormatter()
@@ -155,27 +166,34 @@ class ConversationsMainHomeViewController: UIViewController {
             if let date = isoFormatter.date(from: subname) {
                 return Utils.formatEventDateShort(date: date)
             }
-            return subname // si ce n'est pas une date, on retourne tel quel
+            return subname
         }()
 
         conv.title = membership.name ?? ""
         conv.subname = formattedDate
+        
+        // CORRECTION DE LA DATE DU DERNIER MESSAGE :
+        // membership.lastChatMessageDate contient désormais la bonne chaîne ISO reçue de l'API
         if let text = membership.lastChatMessageText {
-            conv.lastMessage = LastMessage(text: text, dateStr: nil)
+            conv.lastMessage = LastMessage(text: text, dateStr: membership.lastChatMessageDate)
+        } else if let imageUrl = membership.lastChatMessageImageUrl, !imageUrl.isEmpty {
+            conv.lastMessage = LastMessage(text: nil, dateStr: membership.lastChatMessageDate)
+        } else if let dateStr = membership.lastChatMessageDate {
+            conv.lastMessage = LastMessage(text: nil, dateStr: dateStr)
         }
+        
         conv.numberUnreadMessages = membership.numberOfUnreadMessages
         conv.members_count = membership.numberOfPeople
         conv.imageUrl = membership.imageUrl
         conv.lastChatMessageImageUrl = membership.lastChatMessageImageUrl
 
-        // 🔥 RÈGLE : s'il n'y a qu'UNE personne dans la conv -> c'est toi seul => "Vous"
+        // RÈGLE : s'il n'y a qu'UNE personne dans la conv -> c'est toi seul => "Vous"
         if (membership.numberOfPeople ?? 0) <= 1 {
             conv.title = "Vous"
         }
 
         return conv
     }
-
 
     func loadDTO(conversations: [Conversation], reset: Bool) {
         if reset {
@@ -241,26 +259,26 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             return cell
 
         case .conversation(let conversation):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
-            cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
+            let cell = tableView.dequeueReusableCell(withIdentifier: ConversationListMainSwiftUICell.identifier, for: indexPath) as! ConversationListMainSwiftUICell
+            let currentUserId = UserDefaults.currentUser?.sid
+            cell.configure(conversation: conversation, currentUserId: currentUserId, isSmallTalk: false)
             return cell
 
         case .smalltalk(let smallTalk):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ConversationListMainSwiftUICell.identifier, for: indexPath) as! ConversationListMainSwiftUICell
             var conversation = Conversation(from: smallTalk)
 
             let currentUserId = UserDefaults.currentUser?.sid
             let filteredMembers = conversation.members?.filter { $0.uid != currentUserId } ?? []
 
             if filteredMembers.isEmpty {
-                // 👇 Aucun autre membre que moi
                 conversation.title = "Vous"
             } else {
                 let memberNames = filteredMembers.compactMap { $0.username }.joined(separator: " • ")
                 conversation.title = memberNames
             }
 
-            cell.populateCell(message: conversation, delegate: self, position: indexPath.row)
+            cell.configure(conversation: conversation, currentUserId: currentUserId, isSmallTalk: true)
             return cell
 
         case .filter(_):
@@ -292,7 +310,6 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
                         self.notificationsDisabled = false
                         self.loadConversations(reset: true)
                     } else {
-                        // Navigation vers l'écran de réglages de notifications dans l'app
                         let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
                         let vc = sb.instantiateViewController(withIdentifier: "paramsNotifsVC")
                         self.present(vc, animated: true, completion: nil)
@@ -302,11 +319,8 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             return
 
         case .conversation(let conversation):
-            // si small_talk, on appelle la bonne méthode
             if conversation.type == "small_talk" {
-                if let vc = storyboard?
-                    .instantiateViewController(withIdentifier: "detailMessagesVC")
-                    as? ConversationDetailMessagesViewController {
+                if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.type = "small_talk"
                     vc.setupFromSmallTalk(
                         smallTalkId: conversation.uid,
@@ -315,12 +329,8 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
                     )
                     present(vc, animated: true)
                 }
-            }
-            else {
-                // comportement « historique » pour events/discussions
-                if let vc = storyboard?
-                    .instantiateViewController(withIdentifier: "detailMessagesVC")
-                    as? ConversationDetailMessagesViewController {
+            } else {
+                if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.type = conversation.type ?? ""
                     vc.setupFromOtherVC(
                         conversationId: conversation.uid,

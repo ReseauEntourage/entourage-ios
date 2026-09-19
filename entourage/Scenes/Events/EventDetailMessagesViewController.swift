@@ -1,3 +1,4 @@
+import SwiftUI
 //
 //  EventDetailMessagesViewController.swift
 //  entourage
@@ -579,33 +580,13 @@ extension EventDetailMessagesViewController: UITextViewDelegate {
 // MARK: - MessageCellSignalDelegate
 extension EventDetailMessagesViewController: MessageCellSignalDelegate {
     func showFullScreenImage(_ image: UIImage) {
-        let overlay = UIView()
-        overlay.backgroundColor = .black
-        overlay.alpha = 0
-        overlay.frame = view.bounds
-        overlay.isUserInteractionEnabled = true
-        view.addSubview(overlay)
-
-        let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFit
-        imageView.frame = view.bounds
-        imageView.isUserInteractionEnabled = true
-        overlay.addSubview(imageView)
-
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissFullScreenImage(_:)))
-        overlay.addGestureRecognizer(tapGesture)
-
-        UIView.animate(withDuration: 0.3) {
-            overlay.alpha = 1
+        let fullScreenView = FullScreenImageView(image: image) { [weak self] in
+            self?.dismiss(animated: true)
         }
-    }
-
-    @objc private func dismissFullScreenImage(_ sender: UITapGestureRecognizer) {
-        UIView.animate(withDuration: 0.3, animations: {
-            sender.view?.alpha = 0
-        }) { _ in
-            sender.view?.removeFromSuperview()
-        }
+        let hostingController = UIHostingController(rootView: fullScreenView)
+        hostingController.modalPresentationStyle = .overFullScreen
+        hostingController.modalTransitionStyle = .crossDissolve
+        self.present(hostingController, animated: true)
     }
     
     func signalMessage(messageId: Int, userId: Int, textString: String) {

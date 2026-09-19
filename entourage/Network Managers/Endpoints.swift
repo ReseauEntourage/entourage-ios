@@ -74,6 +74,7 @@ let API_URL_CONVERSATION_PREPARE_IMAGE_POST_UPLOAD = "conversations/%@/chat_mess
 let API_URL_SMALLTALK_PREPARE_IMAGE_POST_UPLOAD = "smalltalks/%@/chat_messages/presigned_upload?token=%@"
 let API_URL_EVENT_PREPARE_IMAGE_POST_UPLOAD = "outings/%@/chat_messages/presigned_upload?token=%@"
 let API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD = "contributions/presigned_upload?token=%@"
+let API_URL_EVENT_PREPARE_IMAGE_UPLOAD = "outings/presigned_upload?token=%@"
 
 //Home
 let kAPIHomeSummary = "home/summary?token=%@"
@@ -125,7 +126,7 @@ let kAPIParticipateForUser           = "outings/%@/users/%@/participate?token=%@
 let kAPIAcceptPhotoForUser           = "outings/%@/users/%@/photo_acceptance?token=%@"
 let kAPICancelPhotoForUser           = "outings/%@/users/%@/cancel_photo_acceptance?token=%@"
 let kAPICancelParticipationForUser   = "outings/%@/users/%@/cancel_participation?token=%@"
-let kAPIUpdateUnsubscribedParticipants = "outings/%@/users/unsubscribed_participants?token=%@&offer_help=%d&ask_for_help=%d"
+let kAPIUpdateUnsubscribedParticipants = "outings/%@/users/unsubscribed_participants?token=%@&offer_help=%d&ask_for_help=%d&female=%d"
 
 let kAPIOutingsCount = "outings/count?token=%@&within_days=%d&travel_distance=%.2f&latitude=%.6f&longitude=%.6f"
 let kAPIOutingsWeekAverage = "outings/week_average?token=%@&travel_distance=%.2f&latitude=%.6f&longitude=%.6f"

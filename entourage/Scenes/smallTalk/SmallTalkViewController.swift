@@ -396,7 +396,7 @@ extension SmallTalkViewController: UITableViewDataSource, UITableViewDelegate {
 
         case let .grid(choices):
             let cell = tv.dequeueReusableCell(withIdentifier: "collectionViewCell", for: idx) as! EnhancedOnboardingCollectionCell
-            let obChoices = choices.map { OnboardingChoice(id: $0.id, img: $0.imageName, title: $0.title) }
+            let obChoices = choices.map { OnboardingChoice(id: $0.id, img: $0.imageName, title: $0.title, subtitle: $0.subtitle) }
             cell.setItems(obChoices, selectedIds: selectedIdsByStep[currentStepIndex] ?? [])
             cell.delegate = self
             return cell
@@ -439,43 +439,43 @@ private extension SmallTalkViewController {
         return [
             SmallTalkChoice(id: "sport",
                             title: NSLocalizedString("enhanced_onboarding_interest_sport", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("sport"),
                             imageName: "interest_sport"),
             SmallTalkChoice(id: "animaux",
                             title: NSLocalizedString("enhanced_onboarding_interest_animals", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("animaux"),
                             imageName: "interest_animaux"),
             SmallTalkChoice(id: "marauding",
                             title: NSLocalizedString("enhanced_onboarding_interest_social_marauding", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("marauding"),
                             imageName: "interest_rencontre-nomade"),
             SmallTalkChoice(id: "cuisine",
                             title: NSLocalizedString("enhanced_onboarding_interest_cooking", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("cuisine"),
                             imageName: "interest_cuisine"),
             SmallTalkChoice(id: "jeux",
                             title: NSLocalizedString("enhanced_onboarding_interest_games", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("jeux"),
                             imageName: "interest_jeux"),
             SmallTalkChoice(id: "activites",
                             title: NSLocalizedString("enhanced_onboarding_interest_manual_activities", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("activites"),
                             imageName: "interest_activite-manuelle"),
             SmallTalkChoice(id: "bien-etre",
                             title: NSLocalizedString("enhanced_onboarding_interest_wellbeing", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("bien-etre"),
                             imageName: "interest_bien-etre"),
             SmallTalkChoice(id: "nature",
                             title: NSLocalizedString("enhanced_onboarding_interest_nature", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("nature"),
                             imageName: "interest_nature"),
             SmallTalkChoice(id: "culture",
                             title: NSLocalizedString("enhanced_onboarding_interest_art_culture", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("culture"),
                             imageName: "interest_art"),
             SmallTalkChoice(id: "other",
                             title: NSLocalizedString("enhanced_onboarding_interest_other", comment: ""),
-                            subtitle: nil,
+                            subtitle: TagsUtils.showSubTagTranslated("other"),
                             imageName: "interest_autre")
         ]
     }

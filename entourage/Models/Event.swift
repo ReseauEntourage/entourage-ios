@@ -17,6 +17,7 @@ struct Event:Codable {
     var shareUrl:String? = nil
     var imageUrl:String? = nil
     var imageId:Int? = nil
+    var entourage_image_url:String? = nil
     
     var isOnline:Bool? = false
     var onlineEventUrl:String? = nil
@@ -241,7 +242,9 @@ struct Event:Codable {
             dict["description"] = descriptionEvent!
         }
         
-        if let imageId = imageId {
+        if let entourage_image_url = entourage_image_url {
+            dict["image_url"] = entourage_image_url
+        } else if let imageId = imageId {
             dict["entourage_image_id"] = imageId
         }
         
@@ -406,6 +409,7 @@ struct EventMetadata: Codable {
     var reservedFemale: Bool? = false
     var unsubscribed_participants_ask_for_help: String? = "0"
     var unsubscribed_participants_offer_help: String? = "0"
+    var unsubscribed_participants_female: String? = "0"
     
     var hasPlaceLimit: Bool? {
         get {
@@ -429,6 +433,7 @@ struct EventMetadata: Codable {
         case reservedFemale = "reserved_female"
         case unsubscribed_participants_ask_for_help
         case unsubscribed_participants_offer_help
+        case unsubscribed_participants_female
     }
     
     // 1. On garde un initialiseur vide par défaut pour ne pas casser le reste du code
@@ -463,6 +468,14 @@ struct EventMetadata: Codable {
             unsubscribed_participants_offer_help = stringValue
         } else {
             unsubscribed_participants_offer_help = "0"
+        }
+
+        if let intValue = try? container.decodeIfPresent(Int.self, forKey: .unsubscribed_participants_female) {
+            unsubscribed_participants_female = String(intValue)
+        } else if let stringValue = try? container.decodeIfPresent(String.self, forKey: .unsubscribed_participants_female) {
+            unsubscribed_participants_female = stringValue
+        } else {
+            unsubscribed_participants_female = "0"
         }
 
         // C'EST ICI QUE LA MAGIE OPÈRE ✨
@@ -571,6 +584,7 @@ struct EventEditing {
     var title:String? = nil
     var descriptionEvent:String? = nil
     var imageId:Int? = nil
+    var entourage_image_url:String? = nil
     
     var isOnline:Bool? = nil
     var onlineEventUrl:String? = nil
@@ -626,7 +640,9 @@ struct EventEditing {
         if let descriptionEvent = descriptionEvent {
             dict["description"] = descriptionEvent
         }
-        if let imageId = imageId {
+        if let entourage_image_url = entourage_image_url {
+            dict["image_url"] = entourage_image_url
+        } else if let imageId = imageId {
             dict["entourage_image_id"] = imageId
         }
         
@@ -852,6 +868,27 @@ class TagsUtils {
         case "Savon, protection hygiénique...":
             return NSLocalizedString("action_hygiene_subname".localized, comment: "")
             
+        case "sport":
+            return NSLocalizedString("interest_sport_subtitle", comment: "")
+        case "animaux":
+            return NSLocalizedString("interest_animaux_subtitle", comment: "")
+        case "marauding", "rencontres nomades":
+            return NSLocalizedString("interest_marauding_subtitle", comment: "")
+        case "bien-etre", "bien-être":
+            return NSLocalizedString("interest_bien_etre_subtitle", comment: "")
+        case "cuisine":
+            return NSLocalizedString("interest_cuisine_subtitle", comment: "")
+        case "culture", "art & culture":
+            return NSLocalizedString("interest_culture_subtitle", comment: "")
+        case "nature":
+            return NSLocalizedString("interest_nature_subtitle", comment: "")
+        case "jeux":
+            return NSLocalizedString("interest_jeux_subtitle", comment: "")
+        case "activites", "activités manuelles":
+            return NSLocalizedString("interest_activites_subtitle", comment: "")
+        case "other", "autre":
+            return NSLocalizedString("interest_other_subtitle", comment: "")
+
         default:
             return NSLocalizedString("interest_other".localized, comment: "")
         }

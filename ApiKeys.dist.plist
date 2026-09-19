@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>social.entourage.entourageios</key>
+    <dict>
+        <key>ApiKey</key>
+        <string>13f7d4ed0009b761df1c9400</string>
+        <key>HmacSecret</key>
+        <string></string>
+    </dict>
+    <key>social.entourage.entourageios.beta</key>
+    <dict>
+        <key>ApiKey</key>
+        <string>13f7d4ed0009b761df1c9400</string>
+        <key>HmacSecret</key>
+        <string></string>
+    </dict>
+</dict>
+</plist>

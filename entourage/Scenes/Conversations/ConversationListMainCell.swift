@@ -63,7 +63,21 @@ class ConversationListMainCell: UITableViewCell {
         } else {
             ui_username.text = message.title
         }
-        ui_role.text = message.getRolesWithPartnerFormated()
+        let rolesText = message.getRolesWithPartnerFormated()
+        ui_role.text = rolesText
+        ui_role.isHidden = (rolesText?.isEmpty ?? true)
+
+        if message.type == "outing" {
+            ui_date.isHidden = true
+
+            ui_role.isHidden = false
+            ui_role.text = message.subname
+            ui_role.textColor = .appOrangeLight
+        } else {
+            ui_date.isHidden = false
+            ui_date.text = message.createdDateFormatted
+        }
+
         if let _message = message.getLastMessage {
             ui_detail_message.text = _message
             ui_detail_message.handleURLTap { url in
@@ -77,7 +91,6 @@ class ConversationListMainCell: UITableViewCell {
         else {
             ui_detail_message.text = message.getLastMessage
         }
-        ui_date.text = message.subname
         
         self.delegate = delegate
         self.position = position
@@ -107,11 +120,15 @@ class ConversationListMainCell: UITableViewCell {
         if message.hasUnread {
             ui_nb_unread.isHidden = false
             ui_nb_unread.text = "\(message.numberUnreadMessages!)"
-            ui_date.textColor = .appOrange
+            if message.type != "outing" {
+                ui_date.textColor = .appOrange
+            }
             ui_detail_message.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .black))
         }
         else {
-            ui_date.textColor = .appGrisSombre40
+            if message.type != "outing" {
+                ui_date.textColor = .appGrisSombre40
+            }
             ui_nb_unread.isHidden = true
             ui_detail_message.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13, color: .appGrisSombre40))
         }

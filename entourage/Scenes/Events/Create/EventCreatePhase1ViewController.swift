@@ -17,6 +17,7 @@ class EventCreatePhase1ViewController: UIViewController {
     var hasGrowingTV = false
     
     var image:EventImage? = nil
+    var customImage:UIImage? = nil
     var event_title:String? = nil
     var event_description:String? = nil
     
@@ -36,6 +37,17 @@ class EventCreatePhase1ViewController: UIViewController {
         ui_tableview.estimatedRowHeight = 50
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateWithNewEvent), name: Notification.Name(kNotificationEventEditLoadedEvent), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(customPhotoUploaded), name: Notification.Name(kNotificationEventCreatePhase1CustomPhotoUploaded), object: nil)
+    }
+
+    @objc func customPhotoUploaded(notification: NSNotification) {
+        if let img = notification.userInfo?["image"] as? UIImage {
+            self.image = nil
+            self.customImage = img
+            DispatchQueue.main.async {
+                self.ui_tableview.reloadData()
+            }
+        }
     }
     
     @objc func updateWithNewEvent() {
@@ -112,7 +124,7 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! NeighborhoodCreatePhotoCell
             
-            var imgUrl:String?
+            var imgUrl: String?
             if image != nil {
                 if let img = image?.url_image_portrait {
                     imgUrl = img
@@ -125,7 +137,17 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
                 imgUrl = self.currentEvent?.getCurrentImageUrl
             }
             
-            cell.populateCell(urlImg: imgUrl,isEvent: true)
+            if let customImage = self.customImage {
+                // FIX HERE: Changed ui_image to ui_photo
+                cell.ui_photo.image = customImage
+                cell.ui_photo.contentMode = .scaleAspectFill
+                
+                // OPTIONAL: Since you are bypassing populateCell for custom images,
+                // you might want to hide the picker icon manually here:
+                cell.ui_picto_photo.isHidden = true
+            } else {
+                cell.populateCell(urlImg: imgUrl, isEvent: true)
+            }
             
             return cell
         }
@@ -138,6 +160,7 @@ extension EventCreatePhase1ViewController: ChoosePictureEventDelegate {
         Logger.print("***** image ? \(image)")
         pageDelegate?.addPhoto(image: image)
         self.image = image
+        self.customImage = nil
         self.ui_tableview.reloadData()
     }
 }

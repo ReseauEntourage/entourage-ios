@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Mantis
 
 class EventChoosePictureViewController: BasePopViewController {
     
@@ -21,6 +22,14 @@ class EventChoosePictureViewController: BasePopViewController {
     
     weak var delegate:ChoosePictureEventDelegate? = nil
     
+    var hasCustomAddImageRights: Bool {
+        guard let user = UserDefaults.currentUser else { return false }
+        if user.partner != nil { return true }
+        if let roles = user.roles, roles.contains("Équipe Entourage") || roles.contains("Equipe") { return true }
+        if user.isAmbassador() { return true }
+        return false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,7 +101,8 @@ class EventChoosePictureViewController: BasePopViewController {
     @IBAction func action_validate(_ sender: Any) {
         AnalyticsLoggerManager.logEvent(name: Action_NewGroup_Step3_PicGallery_Validate)
         if selectedImagePos >= 0 {
-            delegate?.selectedPicture(image: images[selectedImagePos])
+            let dataIndex = hasCustomAddImageRights ? selectedImagePos - 1 : selectedImagePos
+            delegate?.selectedPicture(image: images[dataIndex])
             self.dismiss(animated: true)
         }
         else {
@@ -106,14 +116,27 @@ class EventChoosePictureViewController: BasePopViewController {
 extension EventChoosePictureViewController: UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return hasCustomAddImageRights ? images.count + 1 : images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if hasCustomAddImageRights && indexPath.row == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellImage", for: indexPath) as! NeighborhoodChoosePhotoCell
+            cell.ui_image.image = UIImage(named: "ic_plus")?.withRenderingMode(.alwaysTemplate)
+            cell.ui_image.tintColor = .appOrange
+            cell.ui_image.contentMode = .center
+            cell.ui_contentview.backgroundColor = .appBeige
+            cell.ui_contentview.layer.borderWidth = 1
+            cell.ui_contentview.layer.borderColor = UIColor.appOrangeLight.cgColor
+            return cell
+        }
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellImage", for: indexPath) as! NeighborhoodChoosePhotoCell
+        cell.ui_image.contentMode = .scaleAspectFill
         
-        let image = images[indexPath.row]
+        let dataIndex = hasCustomAddImageRights ? indexPath.row - 1 : indexPath.row
+        let image = images[dataIndex]
         
         let isSelected = selectedImagePos == indexPath.row
         
@@ -132,6 +155,11 @@ extension EventChoosePictureViewController: UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if hasCustomAddImageRights && indexPath.row == 0 {
+            showPicker()
+            return
+        }
+
         selectedImagePos = indexPath.row == selectedImagePos ? -1 : indexPath.row
         collectionView.reloadData()
         self.changeButtonSelection()
@@ -144,6 +172,62 @@ extension EventChoosePictureViewController: UICollectionViewDataSource, UICollec
         let width = Int((collectionViewWidth - space) / numberofItemsByLine)
         
         return CGSize(width: width, height: width)
+    }
+}
+
+//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension EventChoosePictureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func showPicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = false
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        if let image = info[.originalImage] as? UIImage {
+            var config = Mantis.Config()
+            config.cropViewConfig.cropShapeType = .rect
+            config.presetFixedRatioType = .alwaysUsingOnePresetFixedRatio(ratio: 16.0 / 9.0)
+            let cropViewController = Mantis.cropViewController(image: image, config: config)
+            cropViewController.delegate = self
+            cropViewController.modalPresentationStyle = .fullScreen
+            self.present(cropViewController, animated: true)
+        }
+    }
+}
+
+//MARK: - CropViewControllerDelegate
+extension EventChoosePictureViewController: CropViewControllerDelegate {
+    func cropViewControllerDidCrop(_ cropViewController: Mantis.CropViewController, cropped: UIImage, transformation: Mantis.Transformation, cropInfo: Mantis.CropInfo) {
+        cropViewController.dismiss(animated: true) {
+            if let phase1Delegate = self.delegate as? EventCreatePhase1ViewController {
+                phase1Delegate.pageDelegate?.addCustomPhoto(image: cropped)
+            } else if let editMainDelegate = self.delegate as? EventEditMainViewController {
+                editMainDelegate.addCustomPhoto(image: cropped)
+            } else if let mainDelegate = self.delegate as? EventCreateMainDelegate {
+                mainDelegate.addCustomPhoto(image: cropped)
+            }
+            self.dismiss(animated: true)
+        }
+    }
+
+    func cropViewControllerDidCancel(_ cropViewController: Mantis.CropViewController, original: UIImage) {
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
+
+    func cropViewControllerDidFailToCrop(_ cropViewController: Mantis.CropViewController, original: UIImage) {
+        // Fallback or handle failure
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
+
+    func cropViewControllerDidBeginResize(_ cropViewController: Mantis.CropViewController) {
+    }
+
+    func cropViewControllerDidEndResize(_ cropViewController: Mantis.CropViewController, original: UIImage, cropInfo: Mantis.CropInfo) {
     }
 }
 

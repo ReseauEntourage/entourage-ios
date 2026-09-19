@@ -340,6 +340,50 @@ struct DeepLinkManager {
         }
     }
 
+    static func showWelcomeVideoUniversalLink() {
+        DispatchQueue.main.async {
+            if let vc = AppState.getTopViewController() {
+                if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                    _tabbar.showHome()
+
+                    let modalVC = WelcomeVideoModalViewController()
+                    modalVC.modalPresentationStyle = .overFullScreen
+                    modalVC.modalTransitionStyle = .crossDissolve
+                    if let homeVC = AppState.getTopViewController() as? HomeV2ViewController {
+                        modalVC.onComplete = { [weak homeVC] in
+                            homeVC?.initHome()
+                        }
+                        modalVC.onDismissOnly = { [weak homeVC] in
+                            homeVC?.initHome()
+                        }
+                    }
+                    AppState.getTopViewController()?.present(modalVC, animated: true)
+                }
+                else {
+                    vc.dismiss(animated: true) {
+                        if let _currentVc = AppState.getTopViewController() {
+                            if let _tabbar = _currentVc.tabBarController as? MainTabbarViewController {
+                                _tabbar.showHome()
+                            }
+                            let modalVC = WelcomeVideoModalViewController()
+                            modalVC.modalPresentationStyle = .overFullScreen
+                            modalVC.modalTransitionStyle = .crossDissolve
+                            if let homeVC = AppState.getTopViewController() as? HomeV2ViewController {
+                                modalVC.onComplete = { [weak homeVC] in
+                                    homeVC?.initHome()
+                                }
+                                modalVC.onDismissOnly = { [weak homeVC] in
+                                    homeVC?.initHome()
+                                }
+                            }
+                            AppState.getTopViewController()?.present(modalVC, animated: true)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     static func showWelcomeEvent() {
         DispatchQueue.main.async {
             let vc = WelcomeEventsListViewController()

@@ -93,16 +93,15 @@ class MainFilter: UIViewController, MainFilterLocationCellDelegate {
         switch self.mod {
         case .group, .event:
             let interestChoices = [
-                MainFilterTagItem(id: "sport", title: NSLocalizedString("filter_groupevent_sport", comment: ""), subtitle: ""),
-                MainFilterTagItem(id: "animaux", title: NSLocalizedString("filter_groupevent_animals", comment: ""), subtitle: ""),
-                MainFilterTagItem(id: "marauding", title: NSLocalizedString("filter_groupevent_social_marauding", comment: ""), subtitle: ""),
-                MainFilterTagItem(id: "cuisine", title: NSLocalizedString("filter_groupevent_cooking", comment: ""), subtitle: ""),
-                MainFilterTagItem(id: "jeux", title: NSLocalizedString("filter_groupevent_games", comment: ""), subtitle: ""),
-                MainFilterTagItem(id: "activites", title: NSLocalizedString("filter_groupevent_handicrafts", comment: ""), subtitle: ""),
-                MainFilterTagItem(id: "bien-etre", title: NSLocalizedString("filter_groupevent_wellbeing", comment: ""), subtitle: ""),
-                MainFilterTagItem(id: "nature", title: NSLocalizedString("filter_groupevent_nature", comment: ""), subtitle: ""),
-                MainFilterTagItem(id: "culture", title: NSLocalizedString("filter_groupevent_art_and_culture", comment: ""), subtitle: ""),
-                MainFilterTagItem(id: "other", title: NSLocalizedString("filter_groupevent_other", comment: ""), subtitle: "")
+                MainFilterTagItem(id: "sport", title: NSLocalizedString("filter_groupevent_sport", comment: ""), subtitle: " (" + TagsUtils.showSubTagTranslated("sport") + ")"),
+                MainFilterTagItem(id: "animaux", title: NSLocalizedString("filter_groupevent_animals", comment: ""), subtitle: " (" + TagsUtils.showSubTagTranslated("animaux") + ")"),
+                MainFilterTagItem(id: "marauding", title: NSLocalizedString("filter_groupevent_social_marauding", comment: ""), subtitle: " (" + TagsUtils.showSubTagTranslated("marauding") + ")"),
+                MainFilterTagItem(id: "cuisine", title: NSLocalizedString("filter_groupevent_cooking", comment: ""), subtitle: " (" + TagsUtils.showSubTagTranslated("cuisine") + ")"),
+                MainFilterTagItem(id: "jeux", title: NSLocalizedString("filter_groupevent_games", comment: ""), subtitle: " (" + TagsUtils.showSubTagTranslated("jeux") + ")"),
+                MainFilterTagItem(id: "activites", title: NSLocalizedString("filter_groupevent_handicrafts", comment: ""), subtitle: " (" + TagsUtils.showSubTagTranslated("activites") + ")"),
+                MainFilterTagItem(id: "bien-etre", title: NSLocalizedString("filter_groupevent_wellbeing", comment: ""), subtitle: " (" + TagsUtils.showSubTagTranslated("bien-etre") + ")"),
+                MainFilterTagItem(id: "nature", title: NSLocalizedString("filter_groupevent_nature", comment: ""), subtitle: " (" + TagsUtils.showSubTagTranslated("nature") + ")"),
+                MainFilterTagItem(id: "culture", title: NSLocalizedString("filter_groupevent_art_and_culture", comment: ""), subtitle: " (" + TagsUtils.showSubTagTranslated("culture") + ")")
             ]
             
             tableDTO.append(.titleCell(title: NSLocalizedString("filter_groupevent_filters", comment: "")))

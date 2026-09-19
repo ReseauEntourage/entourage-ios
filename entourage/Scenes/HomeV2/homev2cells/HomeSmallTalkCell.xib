@@ -16,34 +16,10 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kD6-b3-9Yf" id="Y9B-UO-tPz">
                 <rect key="frame" x="0.0" y="0.0" width="574" height="212"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="uwS-sG-2ad">
-                        <rect key="frame" x="0.0" y="0.0" width="574" height="212"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="y9a-GC-fdp">
-                            <size key="itemSize" width="128" height="128"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                    </collectionView>
-                </subviews>
-                <constraints>
-                    <constraint firstItem="uwS-sG-2ad" firstAttribute="leading" secondItem="Y9B-UO-tPz" secondAttribute="leading" id="QW7-th-zq4"/>
-                    <constraint firstItem="uwS-sG-2ad" firstAttribute="top" secondItem="Y9B-UO-tPz" secondAttribute="top" id="XDq-I3-PuW"/>
-                    <constraint firstAttribute="trailing" secondItem="uwS-sG-2ad" secondAttribute="trailing" id="YWV-Ij-6B2"/>
-                    <constraint firstAttribute="bottom" secondItem="uwS-sG-2ad" secondAttribute="bottom" id="mGz-zl-nty"/>
-                </constraints>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             </tableViewCellContentView>
-            <connections>
-                <outlet property="ui_collection_view" destination="uwS-sG-2ad" id="1sg-cJ-WoW"/>
-            </connections>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <point key="canvasLocation" x="151.14503816793894" y="78.873239436619727"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

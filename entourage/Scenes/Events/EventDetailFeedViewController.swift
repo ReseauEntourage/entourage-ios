@@ -399,6 +399,7 @@ class EventDetailFeedViewController: UIViewController {
                         let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                             vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: true, conversation: conversation)
+                            vc.type = "outing"
                             self.present(vc, animated: true)
                         }
                     }
@@ -418,6 +419,7 @@ class EventDetailFeedViewController: UIViewController {
                     let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                     if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                         vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: true, conversation: conversation)
+                        vc.type = "outing"
                         self.present(vc, animated: true)
                     }
                 }
@@ -818,6 +820,7 @@ extension EventDetailFeedViewController: EventDetailTopCellDelegate {
                 let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.setupFromOtherVC(conversationId: convId, title: self.event?.title, isOneToOne: false, conversation: conversation)
+                    vc.type = "outing"
 
                     if let presentedVC = self.presentedViewController {
                         if presentedVC is ConversationDetailMessagesViewController { return }

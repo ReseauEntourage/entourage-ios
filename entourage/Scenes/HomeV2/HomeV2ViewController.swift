@@ -576,26 +576,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "HomeSmallTalkCell") as? HomeSmallTalkCell {
                 cell.selectionStyle = .none
                 cell.parentViewController = self
-                var dto: [CollectionDTO] = []
-
-                let matchedRequests = userRequests.filter { $0.smalltalk != nil }
-                let pendingRequests = userRequests.filter { $0.smalltalk == nil }
-
-                for req in matchedRequests {
-                    dto.append(.talking(req))
-                }
-
-                let hasWaiting = !pendingRequests.isEmpty
-                if hasWaiting {
-                    dto.append(.waiting)
-                }
-
-                let shouldAddCreate = matchedRequests.count < 3 && !hasWaiting
-                if shouldAddCreate {
-                    dto.append(.create)
-                }
-
-                cell.data = dto
+                cell.configure(with: userRequests)
                 return cell
             }
         case .cellSolidarityTools:
@@ -719,7 +700,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .moderator(_, _): return UITableView.automaticDimension
         case .cellHZ: return UITableView.automaticDimension
         case .cellInitialPedago(_): return 115
-        case .cellSmallTalk(_): return 260
+        case .cellSmallTalk(_): return UITableView.automaticDimension
         case .cellSolidarityTools: return UITableView.automaticDimension
         case .cellWelcomeJourney(_): return UITableView.automaticDimension
         }
@@ -736,18 +717,14 @@ extension HomeV2ViewController {
     }
     
     func getUserSmallTalkRequests() {
-        SmallTalkService.listUserSmallTalkRequests { requests, error in
-            if let requests = requests {
-                self.userSmallTalkRequests = requests
-            } else {
-                self.userSmallTalkRequests = []
-            }
+        SmallTalkService.listUserSmallTalkRequests { [weak self] requests, error in
+            guard let self = self else { return }
+            self.userSmallTalkRequests = requests ?? []
             DispatchQueue.main.async {
                 self.configureDTO()
             }
         }
     }
-    
     func getDemandes() {
         if isContributionPreference {
             ActionsService.getAllActions(isContrib: true, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in

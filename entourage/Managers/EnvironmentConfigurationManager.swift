@@ -15,6 +15,7 @@ struct UserStorageKey {
     static let APIHostURL = "ApiBaseUrl"
     
     static let APIKey = "ApiKey"
+    static let hmacSecret = "HmacSecret"
     static let amazonPictureFolder = "AmazonPictureFolder"
     static let amazonAccessKey = "AmazonAccessKey"
     static let amazonSecretKey = "AmazonSecretKey"
@@ -75,6 +76,10 @@ class EnvironmentConfigurationManager {
     
     var APIKey: NSString {
         return apiKeysConfiguration(forKey: UserStorageKey.APIKey)
+    }
+
+    var HmacSecret: String {
+        return (self.apiKeys?[UserStorageKey.hmacSecret] as? String) ?? ""
     }
     
     var MixpanelToken : NSString {
