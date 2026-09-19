@@ -211,6 +211,10 @@ struct User: Codable {
         }
         return roles.contains("ambassador") || roles.contains("Animateur Entourage")
     }
+
+    func isFemale() -> Bool {
+        return gender == "female"
+    }
 }
 
 struct UserLightNeighborhood: Codable {

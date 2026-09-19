@@ -594,6 +594,8 @@
 "suppress_post_cell_subtitle" = "";
 "suppress_message_cell_subtitle" = "";
 "suppress_comment_cell_subtitle" = "";
+"edit_message_cell_subtitle" = "";
+"cancel_edit_message" = "Annuler la modification";
 
 "deleted_message" = "Ce message a été supprimé";
 "deleted_comment" = "Ce message a été supprimé";
@@ -737,6 +739,7 @@
 "neighborhood_post_group_section_title" = "Fil d’actualités";
 "neighborhood_post_group_section_new_posts_title" = "Nouvelles publications";
 "neighborhood_post_group_section_old_posts_title" = "Anciennes publications";
+"neighborhood_post_not_found_toast" = "Ce post n'est plus disponible";
 "neighborhood_empty_event_title" = "Pas encore d’événements prévus dans ce groupe";
 "neighborhood_empty_event_subtitle" = "Cliquez sur « + » pour en créer un";
 "neighborhood_empty_post_title" = "Il n'y a pas (encore) de publication sur ce groupe";
@@ -1063,6 +1066,7 @@
 "event_params_title" = "Paramètres de l’événement";
 "event_params_cgu" = "Charte des événements";
 "event_params_edit" = "Modifier l’événement";
+"event_params_duplicate" = "Dupliquer cet événement";
 "event_params_recurrency" = "Modifier la récurrence";
 "event_params_signal" = "Signaler l’événement ";
 "event_params_cgu_title" = "Charte des événements";
@@ -1558,7 +1562,7 @@ Choisissez un sujet pour démarrer.";
 "vote_plural" = "votes";
 
 "enhanced_onboarding_start_title" = "%@, faisons connaissance !";
-"enhanced_onboarding_start_subtitle" = "Avant de plonger dans notre application, prenons quelques instants pour mieux te connaître. Tes centres d'intérêts vont nous aider à te suggérer des activités et des contenus qui t'intéresseront.";
+"enhanced_onboarding_start_subtitle" = "Avant de plonger dans notre application, prenons quelques instants pour mieux vous connaître. Vos centres d'intérêts vont nous aider à vous suggérer des activités et des contenus qui vous intéresseront.";
 "enhanced_onboarding_button_title_start" = "Commencer";
 "enhanced_onboarding_button_title_later" = "Terminer plus tard";
 "enhanced_onboarding_button_title_configlater" = "Configurer plus tard";
@@ -1593,6 +1597,12 @@ Choisissez un sujet pour démarrer.";
 
 // filter group event
 "filter_groupevent_filters" = "Filtres";
+"filter_event_by_type" = "Type d'événement";
+"filter_event_type_entourage" = "Événements Entourage";
+"filter_event_type_reserved_female" = "Réservé aux femmes";
+"filter_event_by_format" = "Format";
+"filter_event_format_onsite" = "Présentiel";
+"filter_event_format_online" = "Visio";
 "filter_groupevent_by_theme" = "Par thématique";
 "filter_groupevent_by_location" = "Par localisation";
 "filter_groupevent_by_category" = "Par catégorie";
@@ -1700,6 +1710,11 @@ Choisissez un sujet pour démarrer.";
 "onboarding_start_action_title" = "C’est parti ! Donnez une seconde vie à vos objets";
 "onboarding_start_action_content" = "On vous propose de commencer par donner une seconde vie à un objet, un geste qui renforce la solidarité et crée des liens avec vos voisins.";
 "onboarding_start_action_button" = "Faire ma première action solidaire";
+
+"onboarding_start_action_title_preca" = "C'est parti ! Demandez un coup de pouce près de chez vous";
+"onboarding_start_action_content_preca" = "On vous propose de commencer par formuler une première demande : un coup de main, un objet utile ou juste un moment de partage. C'est gratuit, et c'est souvent le début d'une belle rencontre avec vos voisins.";
+"onboarding_start_action_button_preca" = "Faire ma première demande";
+"onboarding_start_action_remind_later" = "Me le rappeler plus tard";
 
 "day_monday" = "Lundi";
 "day_tuesday" = "Mardi";
@@ -2170,3 +2185,66 @@ Choisissez un sujet pour démarrer.";
 "badges_intro_cta" = "Découvrir mes badges";
 "badges_intro_later" = "Plus tard";
 "profile_description_placeholder" = "Description non renseignée";
+
+
+// Ambassador resources section
+"profile_ambassador_resources_section" = "Mes ressources bénévoles";
+"profile_ambassador_tool_toolkit" = "Boîte à outils";
+"profile_ambassador_tool_whatsapp" = "WhatsApp Entoureurs";
+"profile_ambassador_tool_charter" = "Charte des événements";
+"profile_ambassador_referent_section" = "Mon référent";
+"profile_ambassador_referent_role" = "Responsable engagement citoyen";
+"profile_ambassador_referent_cta" = "Envoyer un message";
+
+// MARK: - Fix traductions manquantes iOS (2026-08-18)
+"onboarding_phase1_title" = "Vos informations personnelles";
+"onboarding_phase1_required_fields" = "(*) champs obligatoires";
+"onboarding_phase1_nav_title" = "Informations";
+"onboarding_zone_city_placeholder_example" = "Ex. : Valence";
+
+"neighborhood_post_chip_info_label" = "Info de quartier 📢";
+"neighborhood_post_chip_info_draft" = "Je voulais partager une info qui concerne notre quartier : ";
+"neighborhood_post_chip_activity_label" = "Proposer une activité 🎉";
+"neighborhood_post_chip_activity_draft" = "J'organise une petite activité et j'aimerais vous inviter ! ";
+"neighborhood_post_chip_help_label" = "Demander un coup de main 🤝";
+"neighborhood_post_chip_help_draft" = "Bonjour à tous, j'aurais besoin d'un petit coup de main pour ";
+"neighborhood_post_chip_hello_label" = "Dire bonjour 👋";
+"neighborhood_post_chip_hello_draft" = "Bonjour à tous ! Je voulais juste prendre contact avec le groupe 😊";
+"neighborhood_post_chip_share_label" = "Partager un contenu 💡";
+"neighborhood_post_chip_share_draft" = "J'ai trouvé quelque chose d'intéressant à partager avec vous : ";
+"neighborhood_post_chip_question_label" = "Poser une question ❓";
+"neighborhood_post_chip_question_draft" = "Bonjour, j'aurais une question pour le groupe : ";
+"neighborhood_post_chip_exchange_label" = "Proposer un échange 💬";
+"neighborhood_post_chip_exchange_draft" = "J'aimerais qu'on échange sur ce sujet ensemble : ";
+"neighborhood_post_chip_meetup_label" = "Organiser une rencontre 📅";
+"neighborhood_post_chip_meetup_draft" = "Et si on se retrouvait prochainement ? Je propose ";
+
+"availability_day_mon" = "Lun";
+"availability_day_tue" = "Mar";
+"availability_day_wed" = "Mer";
+"availability_day_thu" = "Jeu";
+"availability_day_fri" = "Ven";
+"availability_day_sat" = "Sam";
+"availability_day_sun" = "Dim";
+
+// MARK: - Fix traductions manquantes iOS (2026-09-02)
+"onboarding_phase1_gender_label" = "Je suis";
+"onboarding_phase1_select_placeholder" = "Sélectionner dans la liste";
+"onboarding_phase1_clear_selection" = "Effacer";
+"onboarding_phase1_firstname_label" = "Prénom*";
+"onboarding_phase1_firstname_placeholder" = "Ex. : Marie";
+"onboarding_phase1_lastname_label" = "Nom*";
+"onboarding_phase1_lastname_placeholder" = "Ex. : Dupont";
+"onboarding_phase1_birthday_label" = "Date d’anniversaire";
+"onboarding_phase1_birthday_placeholder" = "Ex. : 22/10/1989";
+"onboarding_phase1_phone_label" = "Téléphone*";
+"onboarding_phase1_email_label" = "E-mail";
+"onboarding_phase1_email_placeholder" = "Ex. : marie.dupont@email.com";
+"onboarding_phase1_howwemet_label" = "Comment nous avez-vous connu ?";
+"onboarding_phase1_consent_label" = "Je souhaite recevoir des informations et des conseils de l’équipe Entourage";
+"onboarding_phase1_enterprise_label" = "Nom de votre entreprise";
+"onboarding_phase1_field_required_error" = "Champ requis";
+"onboarding_phase1_event_label" = "Événement auquel vous participez";
+"onboarding_phase1_event_select_enterprise_first_placeholder" = "Sélectionner une entreprise d’abord";
+"onboarding_phase1_select_date_title" = "Sélectionner une date";
+"react_action_button" = "Réagir";

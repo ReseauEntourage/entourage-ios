@@ -199,7 +199,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private func setupCitySection() {
         let label = (initialLabel ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         let isPlaceholder = label.isEmpty
-        let buttonTitle = isPlaceholder ? "Ex. : Valence" : label
+        let buttonTitle = isPlaceholder ? "onboarding_zone_city_placeholder_example".localized : label
 
         cityButton.setTitle(buttonTitle, for: .normal)
         cityButton.setTitleColor(isPlaceholder ? .secondaryLabel : .label, for: .normal)

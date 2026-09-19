@@ -23,20 +23,24 @@ class ReportGroupPageViewController: UIPageViewController {
     var titleDelegate:TitleDelegate? = nil
     var messageId:Int? = nil
     var textString:String? = nil
-    
+    var allowsMessageEdit = false
+    var messageStatus: String? = nil
+    /// Cf. ReportGroupMainViewController.startAtReportReason.
+    var startAtReportReason = false
+
     var reportVc:ReportGroupViewController? = nil
     var chooseVc:ReportGroupChoosePageViewController? = nil
     weak var parentDelegate:GroupDetailDelegate? = nil
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         reportVc = viewController(isSend:false) as? ReportGroupViewController
-        
+
         guard let reportVc = reportVc else {
             return
         }
-        if(signalType == .group || signalType == .event || signalType == .conversation){
+        if(signalType == .group || signalType == .event || signalType == .conversation || startAtReportReason){
             haveChosen = true
             self.titleDelegate?.setTitleForSignal()
             setViewControllers([reportVc], direction: .forward, animated: true)
@@ -50,6 +54,8 @@ class ReportGroupPageViewController: UIPageViewController {
             chooseVc?.conversationId = conversationId
             chooseVc?.actionId = actionId
             chooseVc?.textString = textString
+            chooseVc?.allowsMessageEdit = allowsMessageEdit
+            chooseVc?.messageStatus = messageStatus
             if let _userid = self.userId {
                 chooseVc?.userId = _userid
             }
@@ -83,6 +89,11 @@ extension ReportGroupPageViewController: ReportGroupPageDelegate {
     
     func translateItem(id: Int) {
         parentDelegate?.translateItem(id: id)
+        self.parent?.dismiss(animated: true)
+    }
+
+    func editItem(id: Int, textString: String?) {
+        parentDelegate?.editMessage(id: id, content: textString)
         self.parent?.dismiss(animated: true)
     }
     
@@ -143,4 +154,5 @@ protocol ReportGroupPageDelegate: AnyObject {
     func chooseReport()
     func translateItem(id:Int)
     func copyItemText()
+    func editItem(id:Int, textString:String?)
 }

@@ -30,14 +30,18 @@ class EventCreatePhase1ViewController: UIViewController {
         //Use for growing Textview
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(moveFromGrow), name: Notification.Name(kNotifGrowTextview), object: nil)
-        
+
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(updateWithNewEvent), name: Notification.Name(kNotificationEventEditLoadedEvent), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(customPhotoUploaded), name: Notification.Name(kNotificationEventCreatePhase1CustomPhotoUploaded), object: nil)
+
+        if pageDelegate?.isEdit() ?? false {
+            currentEvent = pageDelegate?.getCurrentEvent()
+        }
     }
 
     @objc func customPhotoUploaded(notification: NSNotification) {

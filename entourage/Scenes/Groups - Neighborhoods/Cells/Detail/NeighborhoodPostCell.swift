@@ -173,20 +173,14 @@ class NeighborhoodPostCell: UITableViewCell {
     @objc func handleLittleTap(gesture: UITapGestureRecognizer) {
         AnalyticsLoggerManager.logEvent(name: Clic_Post_Like)
         VibrationUtil.vibrate(style: .light)
-        if gesture.state == .ended {
-            // Vérifier si l'utilisateur a déjà réagi
-            if postMessage.reactionId == 0 || postMessage.reactionId == nil, let firstReactionType = getStoredReactionTypes()?.first {
-                // Ajouter la première réaction disponible
-                updateReaction(reactionType: firstReactionType, add: true)
-                delegate?.addReaction(post: self.postMessage, reactionType: firstReactionType)
-            } else {
-                // Supprimer la réaction existante si l'utilisateur a déjà réagi
-                if let existingReactionType = getReactionTypeById(postMessage.reactionId ?? 0) {
-                    updateReaction(reactionType: existingReactionType, add: false)
-                    delegate?.deleteReaction(post: self.postMessage, reactionType: existingReactionType)
-                }
-            }
-        }
+        guard gesture.state == .ended else { return }
+
+        let currentReactionId = postMessage.reactionId ?? 0
+        // Pas encore de réaction : le tap rapide pose la réaction par défaut (la première de la liste).
+        // Réaction existante : retaper la même réaction la retire (géré par le delegate).
+        let targetReactionType = currentReactionId == 0 ? getStoredReactionTypes()?.first : getReactionTypeById(currentReactionId)
+        guard let targetReactionType = targetReactionType else { return }
+        delegate?.didTapReaction(post: postMessage, reactionType: targetReactionType)
     }
     private func setupRoundedCorners() {
         if ui_view_sharing_header != nil {
@@ -330,7 +324,14 @@ class NeighborhoodPostCell: UITableViewCell {
     
     func toggleTranslation() {
         isTranslated.toggle()
-        // Mise à jour de ui_label_translate
+        refreshTranslationDisplay()
+    }
+
+    // Rafraîchit le libellé et le texte affiché pour l'état courant de `isTranslated`,
+    // sans le faire basculer. `toggleTranslation()` doit rester réservé au tap utilisateur :
+    // l'appeler depuis populateCell() faisait clignoter le texte original/traduit à chaque
+    // réutilisation de cellule pendant le scroll (et déclenchait le parsing HTML à chaque fois).
+    private func refreshTranslationDisplay() {
         if let ui_label_translate = ui_label_translate {
             let text = isTranslated ? "layout_translate_title_original".localized : "layout_translate_title_translation".localized
             let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
@@ -341,16 +342,8 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_label_translate.isHighlighted = true
         }
 
-        
-        // Mise à jour de ui_comment
-        if isTranslated {
-            if let _translation = postMessage.contentTranslationsHtml{
-                updateCommentAttributedText()
-            }
-        } else {
-            if let _translation = postMessage.contentTranslationsHtml {
-                updateCommentAttributedText()
-            }
+        if postMessage.contentTranslationsHtml != nil {
+            updateCommentAttributedText()
         }
     }
 
@@ -507,39 +500,6 @@ class NeighborhoodPostCell: UITableViewCell {
         delegate?.onReactClickSeeMember(post: postMessage) // Assure-toi que `delegate` et `postMessage` sont accessibles ici
     }
 
-    func updateReaction(reactionType: ReactionType, add: Bool) {
-        if add {
-            // Ajouter une réaction
-            postMessage.reactionId = reactionType.id
-            if let index = postMessage.reactions?.firstIndex(where: { $0.reactionId == reactionType.id }) {
-                // La réaction existe déjà, augmenter le compteur
-                postMessage.reactions?[index].reactionsCount += 1
-            } else {
-                // Ajouter une nouvelle réaction
-                let newReaction = Reaction(reactionId: reactionType.id, chatMessageId: postId, reactionsCount: 1)
-                if postMessage.reactions != nil {
-                    postMessage.reactions?.append(newReaction)
-                } else {
-                    postMessage.reactions = [newReaction]
-                }
-            }
-        } else {
-            // Supprimer une réaction
-            postMessage.reactionId = 0
-            if let index = postMessage.reactions?.firstIndex(where: { $0.reactionId == reactionType.id }) {
-                if postMessage.reactions?[index].reactionsCount ?? 0 > 1 {
-                    postMessage.reactions?[index].reactionsCount -= 1
-                } else {
-                    postMessage.reactions?.remove(at: index)
-                }
-            }
-        }
-
-        // Mettre à jour l'affichage des réactions
-        updateReactionIcon()
-        displayReactions(for: postMessage)
-    }
-    
     func updateCommentAttributedText() {
         // 1) Récupérer le HTML (ou pseudo-HTML) original
         var htmlContent = isTranslated ? postMessage.contentTranslationsHtml?.translation
@@ -547,31 +507,34 @@ class NeighborhoodPostCell: UITableViewCell {
         if htmlContent == nil {
             htmlContent = postMessage.contentHtml
         }
-        // 2) Si c’est nil ou vide, fallback
+        // 2) Si c'est nil ou vide, fallback
         guard let html = htmlContent, !html.isEmpty else {
             ui_comment.text = postMessage.content
             return
         }
-        // 3) Si tu veux t'assurer que les \n deviennent de vrais sauts de ligne en HTML
-        let replacedHtml = html.replacingOccurrences(of: "\n", with: "<br>")
-        // 4) Convertir en NSAttributedString
-        if let data = replacedHtml.data(using: .utf8),
-           let attributed = try? NSAttributedString(
-               data: data,
-               options: [
-                 .documentType: NSAttributedString.DocumentType.html,
-                 .characterEncoding: String.Encoding.utf8.rawValue
-               ],
-               documentAttributes: nil
-           ) {
-            ui_comment.text = attributed.string // On récupère la version brute.
-        } else {
-            // fallback
-            ui_comment.text = postMessage.content
-        }
+        // On ne garde jamais que .string (pas de mise en forme), donc pas besoin de
+        // NSAttributedString(html:) : cette API s'appuie sur WebKit et pompe une run loop
+        // imbriquée sur le thread principal, ce qui peut ré-entrer dans la UITableView en
+        // cours de layout (cellForRowAt) et crasher (NSRangeException). Un simple retrait
+        // de balises suffit ici et reste synchrone/sans run loop.
+        ui_comment.text = Self.plainText(fromHTML: html)
         ui_comment.numberOfLines = 0
         ui_comment.lineBreakMode = .byWordWrapping
         ui_comment.setFontBody(size: 15)
+    }
+
+    private static func plainText(fromHTML html: String) -> String {
+        var result = html.replacingOccurrences(of: "<br\\s*/?>", with: "\n", options: [.regularExpression, .caseInsensitive])
+        result = result.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+        result = result
+            .replacingOccurrences(of: "&nbsp;", with: " ")
+            .replacingOccurrences(of: "&amp;", with: "&")
+            .replacingOccurrences(of: "&lt;", with: "<")
+            .replacingOccurrences(of: "&gt;", with: ">")
+            .replacingOccurrences(of: "&quot;", with: "\"")
+            .replacingOccurrences(of: "&#39;", with: "'")
+            .replacingOccurrences(of: "&apos;", with: "'")
+        return result
     }
 
 
@@ -631,7 +594,7 @@ class NeighborhoodPostCell: UITableViewCell {
             } else{
                 ui_comment.textColor = .black
                 ui_btn_signal_post.isHidden = false
-                toggleTranslation()
+                refreshTranslationDisplay()
             }
         }
         
@@ -731,14 +694,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     
     func getStoredReactionTypes() -> [ReactionType]? {
-        guard let reactionsData = UserDefaults.standard.data(forKey: "StoredReactions") else { return nil }
-        do {
-            let reactions = try JSONDecoder().decode([ReactionType].self, from: reactionsData)
-            return reactions
-        } catch {
-            print("Erreur de décodage des réactions : \(error)")
-            return nil
-        }
+        return ReactionType.stored()
     }
 
 
@@ -765,8 +721,7 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showImage(imageUrl:URL?, postId:Int)
     func signalPost(postId:Int, userId:Int, textString:String)
     func showWebviewUrl(url:URL)
-    func addReaction(post:PostMessage, reactionType:ReactionType)
-    func deleteReaction(post:PostMessage, reactionType:ReactionType)
+    func didTapReaction(post:PostMessage, reactionType:ReactionType)
     func onReactClickSeeMember(post:PostMessage)
     func ifNotMemberWarnUser()
     func postSurveyResponse(forPostId postId: Int, withResponses responses: [Bool])
@@ -777,26 +732,10 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
 extension NeighborhoodPostCell: ReactionsPopupViewDelegate {
 
     func reactForPost(reactionType: ReactionType) {
-        if postMessage.reactionId != 0 {
-            if postMessage.reactionId == reactionType.id {
-                // L'utilisateur souhaite supprimer sa réaction précédente
-                updateReaction(reactionType: reactionType, add: false)
-                delegate?.deleteReaction(post: self.postMessage, reactionType: reactionType)
-            } else {
-                // Supprimer la réaction existante avant d'ajouter la nouvelle
-                if let existingReactionType = getReactionTypeById(postMessage.reactionId ?? 0) {
-                    updateReaction(reactionType: existingReactionType, add: false)
-                    delegate?.deleteReaction(post: self.postMessage, reactionType: existingReactionType)
-                }
-                // Ajouter la nouvelle réaction
-                updateReaction(reactionType: reactionType, add: true)
-                delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
-            }
-        } else {
-            // Ajouter une nouvelle réaction
-            updateReaction(reactionType: reactionType, add: true)
-            delegate?.addReaction(post: self.postMessage, reactionType: reactionType)
-        }
+        // La décision (ajout / suppression / changement) et l'enchaînement des appels réseau
+        // sont gérés par le delegate, seule source de vérité pour l'état de la réaction
+        // (voir NeighborhoodDetailViewController.didTapReaction).
+        delegate?.didTapReaction(post: postMessage, reactionType: reactionType)
     }
 
 

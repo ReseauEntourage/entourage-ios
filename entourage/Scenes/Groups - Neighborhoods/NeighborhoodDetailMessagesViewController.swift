@@ -62,9 +62,16 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     // MARK: - Propriétés pour la fonctionnalité de mention
     /// Liste filtrée affichée dans le tableau des suggestions (obtenue via l’appel serveur)
     var mentionSuggestions: [UserLightNeighborhood] = []
-    
+
     /// Hauteur d’une cellule “MentionCell” (à adapter selon ta maquette)
     private let mentionCellHeight: CGFloat = 44.0
+
+    private var socketToken: SocketManager.Token? = nil
+
+    // MARK: - Édition de commentaire
+    private var editingMessageId: Int? = nil
+    private let editBanner = UIView()
+    private let editBannerLabel = UILabel()
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -153,6 +160,84 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         
         // On met la hauteur à 0 au départ
         table_view_mention_height.constant = 0
+
+        setupEditBanner()
+    }
+
+    /// Bandeau "Modification du message" affiché au-dessus de la barre de saisie
+    /// lorsqu'on édite un commentaire existant (bouton "•••" → Modifier).
+    private func setupEditBanner() {
+        editBanner.translatesAutoresizingMaskIntoConstraints = false
+        editBanner.backgroundColor = .appBeige
+        editBanner.isHidden = true
+        view.addSubview(editBanner)
+
+        editBannerLabel.text = "cancel_edit_message".localized
+        editBannerLabel.font = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        editBannerLabel.textColor = .black
+        editBannerLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        let cancelButton = UIButton(type: .system)
+        cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        cancelButton.tintColor = .black
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.addTarget(self, action: #selector(handleCancelEditTap), for: .touchUpInside)
+
+        editBanner.addSubview(editBannerLabel)
+        editBanner.addSubview(cancelButton)
+
+        NSLayoutConstraint.activate([
+            editBanner.leadingAnchor.constraint(equalTo: ui_view_txtview.leadingAnchor),
+            editBanner.trailingAnchor.constraint(equalTo: ui_view_txtview.trailingAnchor),
+            editBanner.bottomAnchor.constraint(equalTo: ui_view_txtview.topAnchor),
+            editBanner.heightAnchor.constraint(equalToConstant: 32),
+
+            editBannerLabel.leadingAnchor.constraint(equalTo: editBanner.leadingAnchor, constant: 12),
+            editBannerLabel.centerYAnchor.constraint(equalTo: editBanner.centerYAnchor),
+
+            cancelButton.trailingAnchor.constraint(equalTo: editBanner.trailingAnchor, constant: -12),
+            cancelButton.centerYAnchor.constraint(equalTo: editBanner.centerYAnchor),
+            cancelButton.widthAnchor.constraint(equalToConstant: 24),
+            cancelButton.heightAnchor.constraint(equalToConstant: 24)
+        ])
+    }
+
+    @objc private func handleCancelEditTap() {
+        cancelEditingMessage()
+    }
+
+    private func startEditingMessage(id: Int, content: String?) {
+        editingMessageId = id
+        editBanner.isHidden = false
+        let plainText = (content ?? "").replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+        ui_textview_message.text = plainText.trimmingCharacters(in: .whitespacesAndNewlines)
+        ui_textview_message.textColor = .black
+        ui_iv_bt_send.image = UIImage(named: "ic_send_comment")
+        ui_textview_message.becomeFirstResponder()
+    }
+
+    private func cancelEditingMessage() {
+        editingMessageId = nil
+        editBanner.isHidden = true
+        ui_textview_message.text = placeholderTxt
+        ui_textview_message.attributedText = NSAttributedString(string: placeholderTxt)
+        ui_textview_message.textColor = .appOrange
+        ui_iv_bt_send.image = UIImage(named: "ic_send_comment_off")
+    }
+
+    private func sendEditedMessage(messageId: Int, text: String) {
+        NeighborhoodService.editComment(groupId: neighborhoodId, messageId: messageId, content: text) { [weak self] message, _ in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.cancelEditingMessage()
+                guard message != nil, let idx = self.messages.firstIndex(where: { $0.uid == messageId }) else { return }
+                // Piège backend : la traduction renvoyée par le PATCH peut ne pas être encore
+                // recalculée — on affiche directement le texte qu'on vient d'envoyer.
+                self.messages[idx].content = text
+                self.messages[idx].contentHtml = text
+                self.ui_tableview.reloadData()
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -161,6 +246,12 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             isStartEditing = false
             _ = ui_textview_message.becomeFirstResponder()
         }
+        subscribeToSocket()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromSocket()
     }
 
     override func viewDidLayoutSubviews() {
@@ -200,7 +291,137 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     }
 
     deinit {
+        unsubscribeFromSocket()
         NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Socket temps réel
+
+    private func subscribeToSocket() {
+        guard socketToken == nil, neighborhoodId != 0 else { return }
+        socketToken = SocketManager.shared.subscribe(
+            instanceType: "Neighborhood",
+            instanceId: neighborhoodId,
+            onEvent: { [weak self] event in
+                self?.handleSocketEvent(event)
+            },
+            onReconnected: { [weak self] in
+                self?.getMessages()
+            }
+        )
+    }
+
+    private func unsubscribeFromSocket() {
+        guard let token = socketToken else { return }
+        SocketManager.shared.unsubscribe(token)
+        socketToken = nil
+    }
+
+    private func handleSocketEvent(_ event: SocketChannelEvent) {
+        switch event.type {
+        case "chat_message_created":
+            applyIncomingMessage(event)
+        case "chat_message_updated":
+            applyMessageUpdate(event)
+        case "user_reaction_added":
+            applyReactionEvent(event, added: true)
+        case "user_reaction_removed":
+            applyReactionEvent(event, added: false)
+        default:
+            break
+        }
+    }
+
+    private func applyIncomingMessage(_ event: SocketChannelEvent) {
+        guard let incoming = event.decodeMessage(),
+              !messages.contains(where: { $0.uid == incoming.uid }) else { return }
+
+        // Un seul canal socket diffuse TOUS les chat_messages du groupe (posts ET commentaires
+        // confondus) — `post_id` sert normalement à ne garder que ceux de CE fil. Mais le
+        // payload `chat_message_created` omet parfois ce champ (constaté en prod) : dans ce cas
+        // impossible de savoir localement si le message appartient à ce post ou à un autre —
+        // on recharge via REST (qui, lui, est correctement scopé) plutôt que de risquer
+        // d'afficher à tort le commentaire d'un autre post dans ce fil.
+        guard let parentId = incoming.parentPostId else {
+            getMessages()
+            return
+        }
+        guard parentId == parentCommentId else { return }
+
+        // Capturé avant l'ajout du message : on ne force le scroll que si on lisait déjà le
+        // bas de la conversation, pour ne pas arracher l'utilisateur à un commentaire plus
+        // ancien qu'il est en train de consulter.
+        let wasAtBottom = isTableViewAtBottom()
+
+        messages.append(incoming)
+        ui_view_empty.isHidden = messages.count > 0
+        setItemsTranslated(messages: [incoming])
+        ui_tableview.reloadData()
+
+        guard wasAtBottom else { return }
+        let lastSection = ui_tableview.numberOfSections - 1
+        if lastSection >= 0 {
+            let lastRow = ui_tableview.numberOfRows(inSection: lastSection) - 1
+            if lastRow >= 0 {
+                ui_tableview.scrollToRow(at: IndexPath(row: lastRow, section: lastSection), at: .bottom, animated: true)
+            }
+        }
+    }
+
+    /// Vrai si le dernier message visible est déjà à l'écran (ou si le contenu tient dans la
+    /// hauteur de la table, auquel cas on est trivialement "en bas").
+    private func isTableViewAtBottom() -> Bool {
+        let contentHeight = ui_tableview.contentSize.height
+        let tableHeight = ui_tableview.bounds.height
+        let offsetY = ui_tableview.contentOffset.y
+        return offsetY >= contentHeight - tableHeight - 1
+    }
+
+    private func applyMessageUpdate(_ event: SocketChannelEvent) {
+        guard let updated = event.decodeMessage() else { return }
+
+        if updated.uid == parentCommentId {
+            postMessage = postMessage.map { updated.mergingOverLocal($0) } ?? updated
+            ui_tableview.reloadData()
+            return
+        }
+        // Pas de filtre par post_id ici : `messages` ne contient déjà que les commentaires de
+        // CE post (chargés via REST, correctement scopé) — matcher par uid suffit, et évite de
+        // dépendre de post_id qui est parfois absent du payload socket `chat_message_updated`.
+        guard let idx = messages.firstIndex(where: { $0.uid == updated.uid }) else { return }
+        messages[idx] = updated.mergingOverLocal(messages[idx])
+        ui_tableview.reloadData()
+    }
+
+    private func applyReactionEvent(_ event: SocketChannelEvent, added: Bool) {
+        // L'action de l'utilisateur courant est déjà appliquée en optimiste dans didTapReaction —
+        // ignorer l'écho socket de sa propre action pour éviter un double comptage.
+        guard event.userId != meId,
+              let reactionEvent = event.decodeData(as: ChatReactionEvent.self) else { return }
+
+        func applying(to reactions: [Reaction]?) -> [Reaction] {
+            var reactions = reactions ?? []
+            if let rIdx = reactions.firstIndex(where: { $0.reactionId == reactionEvent.reactionId }) {
+                var updatedReaction = reactions[rIdx]
+                updatedReaction.reactionsCount = max(0, updatedReaction.reactionsCount + (added ? 1 : -1))
+                if updatedReaction.reactionsCount == 0 {
+                    reactions.remove(at: rIdx)
+                } else {
+                    reactions[rIdx] = updatedReaction
+                }
+            } else if added {
+                reactions.append(Reaction(reactionId: reactionEvent.reactionId, chatMessageId: reactionEvent.chatMessageId, reactionsCount: 1))
+            }
+            return reactions
+        }
+
+        if reactionEvent.chatMessageId == parentCommentId {
+            postMessage?.reactions = applying(to: postMessage?.reactions)
+            ui_tableview.reloadData()
+        } else if let idx = messages.firstIndex(where: { $0.uid == reactionEvent.chatMessageId }) {
+            messages[idx].reactions = applying(to: messages[idx].reactions)
+            ui_tableview.reloadData()
+        }
     }
 
     func registerCellsNib() {
@@ -467,6 +688,16 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     // MARK: - Action de fermeture du clavier et envoi (conversion en HTML)
     @objc func closeKb(_ sender: UIBarButtonItem?) {
         // Conversion de l'attributedText en HTML (extraction du contenu <body>)
+        if let editingId = editingMessageId {
+            if let htmlMessage = getHTMLMessage(), !htmlMessage.isEmpty, htmlMessage != placeholderTxt {
+                sendEditedMessage(messageId: editingId, text: htmlMessage)
+            }
+            _ = ui_textview_message.resignFirstResponder()
+            hideMentionSuggestions()
+            // Le texte et le bandeau d'édition sont réinitialisés par cancelEditingMessage(),
+            // appelée depuis le callback de sendEditedMessage.
+            return
+        }
         if let htmlMessage = getHTMLMessage(), !htmlMessage.isEmpty, htmlMessage != placeholderTxt {
             sendMessage(message: htmlMessage, isRetry: false)
         }
@@ -705,7 +936,46 @@ extension NeighborhoodDetailMessagesViewController: MessageCellSignalDelegate {
         hostingController.modalTransitionStyle = .crossDissolve
         self.present(hostingController, animated: true)
     }
-    func signalMessage(messageId: Int, userId: Int, textString: String) {
+    func presentMessageOptions(anchorView: UIView, message: PostMessage, textString: String, isMe: Bool) {
+        guard let userId = message.user?.sid else { return }
+        let context = MessageActionContext(
+            groupId: neighborhoodId,
+            eventId: nil,
+            postId: message.uid,
+            chatMessageId: message.uid,
+            conversationId: nil,
+            userId: userId,
+            textString: textString,
+            allowsMessageEdit: true,
+            messageStatus: message.status
+        )
+        guard let coordinator = MessageActionsCoordinator(
+            context: context,
+            onEdit: { [weak self] id, text in self?.editMessage(id: id, content: text) },
+            onDeleted: { [weak self] in self?.publicationDeleted() },
+            onTranslate: { [weak self] id in self?.translateItem(id: id) }
+        ) else { return }
+
+        MessageActionOverlay.show(
+            anchorView: anchorView,
+            isMe: isMe,
+            reactionTypes: ReactionType.stored() ?? [],
+            selectedReactionId: message.reactionId,
+            options: coordinator.options,
+            paramType: coordinator.paramType,
+            onReaction: { [weak self] type in self?.didTapReaction(messageId: message.uid, reactionType: type) },
+            onOption: { [weak self] type in
+                guard let self else { return }
+                if case .report = type {
+                    self.presentReportReason(userId: userId, messageId: message.uid, textString: textString, status: message.status)
+                } else {
+                    coordinator.perform(type)
+                }
+            }
+        )
+    }
+
+    private func presentReportReason(userId: Int, messageId: Int, textString: String, status: String?) {
         if let navVC = UIStoryboard(name: StoryboardName.neighborhoodReport, bundle: nil)
             .instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController,
            let vc = navVC.topViewController as? ReportGroupMainViewController {
@@ -716,8 +986,72 @@ extension NeighborhoodDetailMessagesViewController: MessageCellSignalDelegate {
             vc.userId = userId
             vc.messageId = messageId
             vc.textString = textString
+            vc.allowsMessageEdit = true
+            vc.messageStatus = status
+            vc.startAtReportReason = true
             present(navVC, animated: true)
         }
+    }
+
+    func didTapReaction(messageId: Int, reactionType: ReactionType) {
+        guard let idx = messages.firstIndex(where: { $0.uid == messageId }) else { return }
+        let currentReactionId = messages[idx].reactionId ?? 0
+        let isRemoving = currentReactionId == reactionType.id
+
+        applyLocalReaction(atIndex: idx, reactionId: isRemoving ? 0 : reactionType.id)
+
+        let neighborhoodId = self.neighborhoodId
+
+        if isRemoving {
+            NeighborhoodService.deleteReactionToGroupPost(groupId: neighborhoodId, postId: messageId) { [weak self] error in
+                if error != nil { self?.revertLocalReaction(messageId: messageId, to: currentReactionId) }
+            }
+        } else if currentReactionId != 0 {
+            // On attend la suppression de l'ancienne réaction avant de poser la nouvelle :
+            // le back-end interdit d'avoir deux réactions en même temps sur un message.
+            NeighborhoodService.deleteReactionToGroupPost(groupId: neighborhoodId, postId: messageId) { [weak self] deleteError in
+                if deleteError != nil { self?.revertLocalReaction(messageId: messageId, to: currentReactionId); return }
+                let wrapper = ReactionWrapper(reactionId: reactionType.id)
+                NeighborhoodService.postReactionToGroupPost(groupId: neighborhoodId, postId: messageId, reactionWrapper: wrapper) { postError in
+                    if postError != nil { self?.revertLocalReaction(messageId: messageId, to: 0) }
+                }
+            }
+        } else {
+            let wrapper = ReactionWrapper(reactionId: reactionType.id)
+            NeighborhoodService.postReactionToGroupPost(groupId: neighborhoodId, postId: messageId, reactionWrapper: wrapper) { [weak self] error in
+                if error != nil { self?.revertLocalReaction(messageId: messageId, to: 0) }
+            }
+        }
+    }
+
+    /// Restaure l'état de réaction local après l'échec d'un appel réseau (le tableau a été mis à
+    /// jour de façon optimiste dans `didTapReaction` avant la réponse serveur).
+    private func revertLocalReaction(messageId: Int, to previousReactionId: Int) {
+        guard let idx = messages.firstIndex(where: { $0.uid == messageId }) else { return }
+        applyLocalReaction(atIndex: idx, reactionId: previousReactionId)
+    }
+
+    private func applyLocalReaction(atIndex idx: Int, reactionId: Int) {
+        var reactions = messages[idx].reactions ?? []
+        let previousReactionId = messages[idx].reactionId ?? 0
+
+        if previousReactionId != 0, let rIdx = reactions.firstIndex(where: { $0.reactionId == previousReactionId }) {
+            if reactions[rIdx].reactionsCount > 1 {
+                reactions[rIdx].reactionsCount -= 1
+            } else {
+                reactions.remove(at: rIdx)
+            }
+        }
+        if reactionId != 0 {
+            if let rIdx = reactions.firstIndex(where: { $0.reactionId == reactionId }) {
+                reactions[rIdx].reactionsCount += 1
+            } else {
+                reactions.append(Reaction(reactionId: reactionId, chatMessageId: messages[idx].uid, reactionsCount: 1))
+            }
+        }
+        messages[idx].reactions = reactions
+        messages[idx].reactionId = reactionId
+        ui_tableview.reloadData()
     }
 
     func retrySend(message: String, positionForRetry: Int) {
@@ -751,6 +1085,10 @@ extension NeighborhoodDetailMessagesViewController: GroupDetailDelegate {
     func publicationDeleted() {
         getMessages()
         ui_tableview.reloadData()
+    }
+
+    func editMessage(id: Int, content: String?) {
+        startEditingMessage(id: id, content: content)
     }
 
     func showMessage(signalType: GroupDetailSignalType) {

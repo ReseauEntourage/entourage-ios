@@ -12,17 +12,19 @@ struct NotificationPushData {
     var instanceId:Int = 0
     var instanceType:InstanceType = .none
     var postId:Int? = nil
+    var chatMessageId:Int? = nil
     var welcome: Bool? = false
     //value = h1, j2, j8, j11
     var url: String? = nil
     var stage:String? = nil
     var context:String? = nil
-    var tracking:String? = nil 
-    
-    init(instanceName:String, instanceId:Int, postId:Int?, context:String? = nil) {
+    var tracking:String? = nil
+
+    init(instanceName:String, instanceId:Int, postId:Int?, chatMessageId:Int? = nil, context:String? = nil) {
         self.instanceType = InstanceType.getFromString(key: instanceName)
         self.instanceId = instanceId
         self.postId = postId
+        self.chatMessageId = chatMessageId
         self.context = context
     }
 }

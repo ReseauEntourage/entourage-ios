@@ -72,6 +72,7 @@ class MainTabbarViewController: UITabBarController {
         //Notif for changing contrig / solicitation
         NotificationCenter.default.addObserver(self, selector: #selector(showActionsSolicitations), name: NSNotification.Name(rawValue: kNotificationActionShowSolicitation), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showActionsContrib), name: NSNotification.Name(rawValue: kNotificationActionShowContrib), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showActionsMyActions), name: NSNotification.Name(rawValue: kNotificationActionShowMyActions), object: nil)
         
         //Update message badge count
         NotificationCenter.default.addObserver(self, selector: #selector(updateBadgeCount(_:)), name: NSNotification.Name(rawValue: kNotificationMessagesUpdateCount), object: nil)
@@ -122,6 +123,14 @@ class MainTabbarViewController: UITabBarController {
     @objc func showActionsDemand() {
         if let vc = actionsVC.topViewController as? ActionsMainHomeViewController {
             vc.setSolicitationsFirst()
+        }
+        self.selectedIndex = 1
+        self.boldSelectedItem()
+    }
+
+    @objc func showActionsMyActions() {
+        if let vc = actionsVC.topViewController as? ActionsMainHomeViewController {
+            vc.action_myActions(nil)
         }
         self.selectedIndex = 1
         self.boldSelectedItem()

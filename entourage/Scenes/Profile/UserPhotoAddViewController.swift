@@ -9,6 +9,10 @@
 import UIKit
 import AVFoundation
 
+protocol ImageReUpLoadDelegate {
+    func reloadOnImageUpdate()
+}
+
 class UserPhotoAddViewController: BasePopViewController {
         
     @IBOutlet weak var ui_constraint_title_top: NSLayoutConstraint!

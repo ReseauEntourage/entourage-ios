@@ -242,7 +242,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch eventUserType {
         case .Creator:
-            return hasRecurrency ? 8 : 7
+            return hasRecurrency ? 9 : 8
         case .Member:
             return isRealAuthor ? 5 : 6
         case .Viewer:
@@ -300,6 +300,18 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                 return cell
 
             case 4:
+                let duplicateCell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
+                duplicateCell.populateCell(
+                    title: "event_params_duplicate".localized,
+                    imageName: "ic_charte",
+                    showArrow: true,
+                    showSeparator: true,
+                    delegate: self,
+                    type: .DuplicateEvent
+                )
+                return duplicateCell
+
+            case 5:
                 if hasRecurrency {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                     cell.populateCell(
@@ -324,7 +336,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     return cell
                 }
 
-            case 5:
+            case 6:
                 if hasRecurrency {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                     cell.populateCell(
@@ -347,7 +359,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     return cell
                 }
 
-            case 6:
+            case 7:
                 if hasRecurrency {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! EventParamSignalCell
                     cell.populateCell(
@@ -551,6 +563,7 @@ protocol EventParamCellDelegate: AnyObject {
     func quitEvent()
     func showCGU()
     func editEvent()
+    func duplicateEvent()
     func editRecurrency()
     func editNotif(notifType: EventUserNotifType, isOn: Bool)
     func share()
@@ -638,6 +651,15 @@ extension EventParamsViewController: EventParamCellDelegate {
         }
     }
 
+    func duplicateEvent() {
+        if let vc = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
+            .instantiateViewController(withIdentifier: "eventCreateVCMain") as? EventCreateMainViewController {
+            vc.modalPresentationStyle = .fullScreen
+            vc.sourceEvent = self.event
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
+
     func editRecurrency() {
         if let vc = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
             .instantiateViewController(withIdentifier: "eventEditRecurrencyVC") as? EventEditRecurrencyViewController {
@@ -678,6 +700,7 @@ enum EventUserType {
 enum EventCellEditType {
     case CGU
     case EditEvent
+    case DuplicateEvent
     case EditRecurrency
     case share
     case showMembers

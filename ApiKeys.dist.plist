@@ -5,14 +5,14 @@
     <key>social.entourage.entourageios</key>
     <dict>
         <key>ApiKey</key>
-        <string>13f7d4ed0009b761df1c9400</string>
+        <string></string>
         <key>HmacSecret</key>
         <string></string>
     </dict>
     <key>social.entourage.entourageios.beta</key>
     <dict>
         <key>ApiKey</key>
-        <string>13f7d4ed0009b761df1c9400</string>
+        <string></string>
         <key>HmacSecret</key>
         <string></string>
     </dict>

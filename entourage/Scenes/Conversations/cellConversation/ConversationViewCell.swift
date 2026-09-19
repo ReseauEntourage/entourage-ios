@@ -27,10 +27,60 @@ class ConversationViewCell: UITableViewCell {
     weak var delegate: MessageCellSignalDelegate?
     private var currentMessage: PostMessage?
     private var currentPositionForRetry: Int = 0
+    private var currentIsMe: Bool = false
 
     private var fixedLabelWidthConstraint: NSLayoutConstraint?
     private var imageWidthConstraint: NSLayoutConstraint?
     private var imageAspectConstraint: NSLayoutConstraint?
+
+    // MARK: - Réactions & options (pastille "Réagir" sous la bulle, ouvre l'overlay unifié
+    // réactions + options — cf. MessageActionOverlay. Masquée sur son propre message : seul
+    // l'appui long y donne alors accès, cf. handleLongPress/presentOverlay.)
+    private let optionsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 16
+        button.layer.masksToBounds = true
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.appGrisReaction.cgColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    private let optionsIcon: UIImageView = {
+        let iv = UIImageView(image: UIImage(systemName: "face.smiling"))
+        iv.tintColor = .appOrange
+        iv.contentMode = .scaleAspectFit
+        iv.isUserInteractionEnabled = false
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    private let optionsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "react_action_button".localized
+        label.font = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        label.textColor = .appGreyOff
+        label.isUserInteractionEnabled = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private lazy var optionsContentStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [optionsIcon, optionsLabel])
+        stack.axis = .horizontal
+        stack.spacing = 6
+        stack.alignment = .center
+        stack.isUserInteractionEnabled = false
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    private let reactionBadges = ReactionBadgesView()
+    private lazy var reactionsStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [reactionBadges, optionsButton])
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
 
     /// Map des mentions (sans @, normalisées) -> URL de profil (issue du HTML)
     private var mentionLinkMap: [String: URL] = [:]
@@ -112,11 +162,52 @@ class ConversationViewCell: UITableViewCell {
             ui_view_label.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
 
-        // Long press → signaler
+        // Long press → overlay unifié réactions + options, sur son propre message comme sur celui d'un autre
         ui_view_label.isUserInteractionEnabled = true
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         longPressGesture.minimumPressDuration = 0.5
         ui_view_label.addGestureRecognizer(longPressGesture)
+
+        setupOptionsAndReactions()
+    }
+
+    private func setupOptionsAndReactions() {
+        contentView.addSubview(reactionsStack)
+
+        optionsButton.addTarget(self, action: #selector(handleOptionsTap), for: .touchUpInside)
+        optionsButton.addSubview(optionsContentStack)
+        reactionBadges.onTap = nil
+
+        // Le .xib pin `ui_label_date.top` directement sous la bulle — on détache cette
+        // contrainte pour intercaler la barre de réactions AU-DESSUS du nom/heure
+        // (bulle → réactions → nom), sans toucher au reste de la mise en page.
+        detachTopConstraint(of: ui_label_date, from: ui_view_label)
+
+        NSLayoutConstraint.activate([
+            optionsIcon.widthAnchor.constraint(equalToConstant: 18),
+            optionsIcon.heightAnchor.constraint(equalToConstant: 18),
+            optionsContentStack.topAnchor.constraint(equalTo: optionsButton.topAnchor, constant: 7),
+            optionsContentStack.bottomAnchor.constraint(equalTo: optionsButton.bottomAnchor, constant: -7),
+            optionsContentStack.leadingAnchor.constraint(equalTo: optionsButton.leadingAnchor, constant: 14),
+            optionsContentStack.trailingAnchor.constraint(equalTo: optionsButton.trailingAnchor, constant: -14),
+
+            reactionsStack.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 4),
+            reactionsStack.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor),
+            reactionsStack.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10),
+
+            ui_label_date.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4)
+        ])
+    }
+
+    /// Détache la contrainte `.top` du .xib reliant `label` au bas de `anchorView`, pour
+    /// pouvoir la repositionner par code (ex: intercaler une vue entre les deux).
+    private func detachTopConstraint(of label: UIView, from anchorView: UIView) {
+        guard let container = label.superview else { return }
+        let toDeactivate = container.constraints.filter { constraint in
+            (constraint.firstItem === label && constraint.firstAttribute == .top) ||
+            (constraint.secondItem === label && constraint.secondAttribute == .top)
+        }
+        NSLayoutConstraint.deactivate(toDeactivate)
     }
 
     override func layoutSubviews() {
@@ -159,7 +250,14 @@ class ConversationViewCell: UITableViewCell {
     func configure(with message: PostMessage, isMe: Bool, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
+        currentIsMe = isMe
         mentionLinkMap.removeAll()
+
+        // Pas de réaction possible sur son propre message : seul l'appui long reste disponible
+        // pour accéder aux options (Copier/Modifier/Supprimer), le bouton "Réagir" est masqué.
+        optionsButton.isHidden = isMe
+
+        reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
 
         // Avatar
         if let urlStr = message.user?.avatarURL, let url = URL(string: urlStr) {
@@ -219,17 +317,28 @@ class ConversationViewCell: UITableViewCell {
             ui_label_min_width?.isActive = false
         }
 
+        // Force un passage de layout complet (pas seulement celui d'une éventuelle vue déjà
+        // marquée dirty) : une cellule réutilisée dont le contenu des réactions change après
+        // un premier affichage (ex : réaction reçue en direct) a sinon pu garder une hauteur
+        // de ligne obsolète.
+        setNeedsLayout()
         layoutIfNeeded()
     }
 
     // MARK: - Gestures
     @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        guard gesture.state == .began, let msg = currentMessage else { return }
-        delegate?.signalMessage(
-            messageId: msg.uid,
-            userId: msg.user?.sid ?? 0,
-            textString: (msg.contentHtml?.isEmpty == false ? msg.contentHtml : msg.content) ?? ""
-        )
+        guard gesture.state == .began else { return }
+        presentOverlay()
+    }
+
+    @objc private func handleOptionsTap() {
+        presentOverlay()
+    }
+
+    private func presentOverlay() {
+        guard let msg = currentMessage else { return }
+        let textString = (msg.contentHtml?.isEmpty == false ? msg.contentHtml : msg.content) ?? ""
+        delegate?.presentMessageOptions(anchorView: ui_view_label, message: msg, textString: textString, isMe: currentIsMe)
     }
 
     @objc private func handleImageTap(_ gesture: UITapGestureRecognizer) {

@@ -25,9 +25,6 @@ workflows:
     - BITRISE_SCHEME: EntourageBeta
       opts:
         is_expand: false
-    - HMAC_SECRET_IOS: 1a202605156f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b
-      opts:
-        is_expand: false
     steps:
     - manage-ios-code-signing@2: {}
     - xcode-archive:
@@ -210,8 +207,22 @@ workflows:
 
             # 3. On remplace les placeholders par les vrais secrets de Bitrise
             # Utilisation des noms exacts provenant de l'interface Bitrise
-            sed -i '' "s/13f7d4ed0009b761df1c9400/$ApiKey/g" ApiKeys.plist
-            sed -i '' "s/1a202605156f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b/$HMAC_SECRET_IOS/g" ApiKeys.plist
+            # ApiKey est une Secret env var Bitrise partagee entre prod et beta
+            # (jamais en clair ici) ; injectee via PlistBuddy plutot qu'un sed
+            # sur placeholder, car ApiKeys.dist.plist ne contient plus de valeur
+            # en clair pour cette cle.
+            /usr/libexec/PlistBuddy -c "Set :social.entourage.entourageios:ApiKey $ApiKey" ApiKeys.plist
+            /usr/libexec/PlistBuddy -c "Set :social.entourage.entourageios.beta:ApiKey $ApiKey" ApiKeys.plist
+
+            # HMAC_SECRET_IOS_PROD / HMAC_SECRET_IOS_PREPROD sont des Secret env vars
+            # Bitrise (jamais en clair ici), une par bundle ID / environnement backend.
+            # On force la valeur via PlistBuddy plutot qu'un sed sur placeholder,
+            # car ApiKeys.dist.plist ne contient pas de placeholder pour cette cle.
+            # Prepare est partage entre les deux workflows : on ecrit toujours les deux
+            # entrees, seule celle du bundle ID reellement lance est lue au runtime
+            # (cf EnvironmentConfigurationManager.swift).
+            /usr/libexec/PlistBuddy -c "Set :social.entourage.entourageios:HmacSecret $HMAC_SECRET_IOS_PROD" ApiKeys.plist
+            /usr/libexec/PlistBuddy -c "Set :social.entourage.entourageios.beta:HmacSecret $HMAC_SECRET_IOS_PREPROD" ApiKeys.plist
 
             echo "Le fichier ApiKeys.plist a été généré avec les clés secrètes !"
 

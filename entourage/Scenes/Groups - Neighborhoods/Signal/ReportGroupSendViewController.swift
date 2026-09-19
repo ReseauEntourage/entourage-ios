@@ -147,6 +147,13 @@ class ReportGroupSendViewController: UIViewController {
                     }
                 }
             }
+            else if let conversationId = conversationId {
+                MessagingService.reportConversation(conversationId: conversationId, message: message, tags: tagsSignalsWS) { error in
+                    DispatchQueue.main.async {
+                        self.pageDelegate?.closeMain()
+                    }
+                }
+            }
             else {
                 guard let groupId = groupId, let postId = postId else {
                     return

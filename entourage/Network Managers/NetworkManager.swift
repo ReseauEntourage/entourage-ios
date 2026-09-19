@@ -46,6 +46,24 @@ class NetworkManager {
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             urlRequest.addValue(version, forHTTPHeaderField: "X-App-Version")
         }
+        addHmacHeadersIfNeeded(urlRequest: &urlRequest)
+    }
+
+    /// Signe automatiquement tous les appels (hors création de compte, déjà signée en amont
+    /// par `AuthService` avec son propre format message). Ne fait rien si `HmacSecret` n'est
+    /// pas configuré (mode transition, cf. `HmacSigner`).
+    private func addHmacHeadersIfNeeded(urlRequest: inout URLRequest) {
+        guard urlRequest.value(forHTTPHeaderField: "X-Request-Signature") == nil,
+              let method = urlRequest.httpMethod,
+              let url = urlRequest.url else { return }
+
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let query = components?.query.map { "?\($0)" } ?? ""
+        let path = (components?.path ?? url.path) + query
+
+        guard let signed = HmacSigner.sign(method: method, path: path, body: urlRequest.httpBody) else { return }
+        urlRequest.addValue(signed.timestamp, forHTTPHeaderField: "X-Request-Timestamp")
+        urlRequest.addValue(signed.signature, forHTTPHeaderField: "X-Request-Signature")
     }
     
     private func postAPIErrorNotification(statusCode: Int) {

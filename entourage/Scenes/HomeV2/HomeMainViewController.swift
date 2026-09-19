@@ -234,11 +234,23 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
                         if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
                             let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
                             if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
+                                // "both_actions" can mean "give" or "ask" depending on the persona (see EnhancedOnboardingEnd); "no_event" always suggests a contribution.
+                                let isContrib = _category.contains("both_action") ? OnboardingEndChoicesManager.shared.isContribForBothActions : true
                                 OnboardingEndChoicesManager.shared.categoryForButton = ""
+                                OnboardingEndChoicesManager.shared.isContribForBothActions = true
                                 vc.modalPresentationStyle = .fullScreen
-                                vc.isContrib = true
+                                vc.isContrib = isContrib
                                 vc.parentController = self
-                                _tabbar.present(vc, animated: true)
+                                // Si une modale de gating (notif, etc.) a pris le slot de présentation
+                                // avant que ce retour d'onboarding ne soit traité, la dismiss d'abord :
+                                // sinon UIKit ignore silencieusement ce present() (EN-9530).
+                                if _tabbar.presentedViewController != nil {
+                                    _tabbar.dismiss(animated: false) {
+                                        _tabbar.present(vc, animated: true)
+                                    }
+                                } else {
+                                    _tabbar.present(vc, animated: true)
+                                }
                             }
                         }
                     }
@@ -266,18 +278,22 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         if config.isInterestsFromSetting {
             config.isInterestsFromSetting = false
             SVProgressHUD.dismiss()
-            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
-            navVC.modalPresentationStyle = .fullScreen
-            self.tabBarController?.present(navVC, animated: false)
+            let profileView = MyProfileView(viewModel: self.profileViewModel)
+            self.profileViewModel.navigationDelegate = self
+            let hc = MyProfileHostingController(rootView: profileView, viewModel: self.profileViewModel)
+            hc.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(hc, animated: false)
             return
         }
-        
+
         if config.isOnboardingFromSetting {
             config.isOnboardingFromSetting = false
             SVProgressHUD.dismiss()
-            let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "profileFull")
-            navVC.modalPresentationStyle = .fullScreen
-            self.tabBarController?.present(navVC, animated: false)
+            let profileView = MyProfileView(viewModel: self.profileViewModel)
+            self.profileViewModel.navigationDelegate = self
+            let hc = MyProfileHostingController(rootView: profileView, viewModel: self.profileViewModel)
+            hc.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(hc, animated: false)
             return
         }
     }
@@ -404,8 +420,23 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_image_user_avatar.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onAvatarClick))
         ui_image_user_avatar.addGestureRecognizer(tapGestureRecognizer)
+
+        #if DEBUG
+        ui_logo_entourage.isUserInteractionEnabled = true
+        ui_logo_entourage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onLogoDebugTestNotifClick)))
+        #endif
     }
-    
+
+    #if DEBUG
+    // Rejoue exactement le chemin d'une vraie notif in-app/push (voir NotificationsInAppViewController.didSelectRowAt)
+    // pour vérifier le scroll + highlight sur un post précis sans attendre un vrai envoi backend.
+    // Données de staging : groupe "Voisin Dijon" (id 286), post "Test pour click" (id 54621).
+    @objc private func onLogoDebugTestNotifClick() {
+        let notification = NotificationPushData(instanceName: "neighborhood", instanceId: 286, postId: 54621)
+        DeepLinkManager.presentAction(notification: notification, presenter: self)
+    }
+    #endif
+
     @objc func onAvatarClick() {
         AnalyticsLoggerManager.logEvent(name: Action__Tab__Profil)
         let profileView = MyProfileView(viewModel: self.profileViewModel)
@@ -1341,7 +1372,7 @@ extension HomeMainViewController: MyProfileNavigationDelegate, ImageReUpLoadDele
             vc.partner = partner
         }
         DispatchQueue.main.async {
-            self.present(navVc, animated: true)
+            AppState.getTopViewController()?.present(navVc, animated: true)
         }
     }
 
@@ -1351,7 +1382,7 @@ extension HomeMainViewController: MyProfileNavigationDelegate, ImageReUpLoadDele
                 let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.setupFromOtherVC(conversationId: convId, title: conversation?.title, isOneToOne: true, conversation: conversation)
-                    self.present(vc, animated: true)
+                    AppState.getTopViewController()?.present(vc, animated: true)
                 }
             }
         }
@@ -1363,7 +1394,7 @@ extension HomeMainViewController: MyProfileNavigationDelegate, ImageReUpLoadDele
             vc.user = user
             vc.parentDelegate = self
             DispatchQueue.main.async {
-                self.present(vc, animated: true)
+                AppState.getTopViewController()?.present(vc, animated: true)
             }
         }
     }
@@ -1645,7 +1676,16 @@ extension HomeMainViewController {
             print("[HomeEntryGating] SKIP: A view controller is already being presented.")
             return
         }
-        
+
+        // Un retour d'onboarding est en attente (handleEnhancedOnboardingReturn, appelé plus tard
+        // une fois loadMetadatas() terminé) : ne pas lui voler le slot de présentation avec un
+        // popup de gating (notif, zone, re-onboarding...), sinon la présentation de l'action à
+        // créer est silencieusement avalée par UIKit (EN-9530).
+        guard !EnhancedOnboardingConfiguration.shared.isFromOnboardingFromNormalWay else {
+            print("[HomeEntryGating] SKIP: onboarding return pending, deferring to handleEnhancedOnboardingReturn()")
+            return
+        }
+
         guard !hasRunEntryGating else {
             print("[HomeEntryGating] SKIP: already ran for this Home instance")
             return

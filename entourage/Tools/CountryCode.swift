@@ -28,4 +28,6 @@ public let allCountryCodes: [CountryCode] = [
     CountryCode(country: "La Réunion", code: "+262", flag: "🇷🇪", exampleNumber: "06 XX XX XX XX"),
     CountryCode(country: "Guadeloupe", code: "+590", flag: "🇬🇵", exampleNumber: "06 XX XX XX XX"),
     CountryCode(country: "Maroc",      code: "+212", flag: "🇲🇦", exampleNumber: "06 XX XX XX XX"),
+    CountryCode(country: "Allemagne",  code: "+49",  flag: "🇩🇪", exampleNumber: "XXXX XXXXXXX"),
+    CountryCode(country: "Suisse",     code: "+41",  flag: "🇨🇭", exampleNumber: "XX XXX XX XX"),
 ]

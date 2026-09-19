@@ -365,6 +365,7 @@ let onboarding_donations_categories_next_clic = "onboarding_donations_categories
 
 // Écran de fin
 let onboarding_end_browse_events_clic = "onboarding_end_browse_events_clic"
+let onboarding_end_remind_later_clic = "onboarding_end_remind_later_clic"
 
 
 let onboarding_welcome_view = "onboarding_welcome_view"

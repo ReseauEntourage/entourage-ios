@@ -34,6 +34,10 @@ class ReportGroupChoosePageViewController:UIViewController {
     var chatMessageId:Int? = nil
     var analyticsClickName = ""
     var textString:String? = nil
+    /// Édition autorisée sur l'écran de conversation et sur les commentaires de post de groupe
+    /// (jamais sur les posts de mur eux-mêmes) — réglé par ReportGroupMainViewController.
+    var allowsMessageEdit = false
+    var messageStatus: String? = nil
     
     var reportVc:ReportGroupViewController? = nil
     weak var delegate:ReportGroupPageDelegate? = nil
@@ -52,6 +56,9 @@ class ReportGroupChoosePageViewController:UIViewController {
             table_dto.append(.copy)
         }
         if checkIsMe() {
+            if canEditMessage() {
+                table_dto.append(.edit)
+            }
             table_dto.append(.suppress)
         }else{
             table_dto.append(.report)
@@ -59,19 +66,19 @@ class ReportGroupChoosePageViewController:UIViewController {
         if checkparameterType() == .commment && !checkIsMe() {
             table_dto.append(.translate)
         }
-        
+
         ui_tableview.reloadData()
     }
+
+    private func canEditMessage() -> Bool {
+        let type = checkparameterType()
+        guard allowsMessageEdit, type == .message || type == .commment else { return false }
+        let inactiveStatuses = ["deleted", "offensive", "offensible"]
+        return !inactiveStatuses.contains((messageStatus ?? "").lowercased())
+    }
     func checkIsMe() -> Bool{
-        if let _myId = UserDefaults.currentUser?.uuid{
-            if _myId == String(self.userId) {
-                return true
-            }else{
-                return false
-            }
-        }else{
-            return false
-        }
+        guard let me = UserDefaults.currentUser else { return false }
+        return me.sid == self.userId
     }
     
     func checkparameterType() -> ParamSupressType{
@@ -125,8 +132,14 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
                 cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
                 return cell
             }
+        case .edit:
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "ReportChooseViewCell", for: indexPath ) as? ReportChooseViewCell {
+                cell.selectionStyle = .none
+                cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
+                return cell
+            }
         }
-        
+
         return UITableViewCell()
     }
     
@@ -144,6 +157,8 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
             delegate?.translateItem(id: chatMessageId!)
         case .copy:
             delegate?.copyItemText()
+        case .edit:
+            delegate?.editItem(id: chatMessageId ?? 0, textString: textString)
         }
     }
     

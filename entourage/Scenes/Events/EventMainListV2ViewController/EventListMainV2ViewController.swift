@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 import SDWebImage
-import SVProgressHUD
 import MapKit
 
 private enum EventListTableDTO {
@@ -47,14 +46,23 @@ class EventListMainV2ViewController: UIViewController {
     private var isLoading = false
     private var isOnlyDiscoverPagination = false
     var pullRefreshControl = UIRefreshControl()
+    private var skeletonOverlayView: PostsSkeletonOverlayView?
+    private var skeletonShownAt: CFAbsoluteTime? = nil
+    private let skeletonMinimumDuration: TimeInterval = 1.0
     var isEndOfDiscoverList = false
     var isEndOfMyEventList = false
     var comeFromDetail = false
     var numberOfFilters = 0
     var selectedItemsFilter = [String: Bool]()
+    var selectedEventTypes = Set<String>()
+    var selectedFormat: String?
     var selectedAddress: String = ""
     var selectedRadius: Float = 0
     var selectedCoordinate: CLLocationCoordinate2D?
+    private var isOnlineFilterValue: Bool? {
+        guard let format = selectedFormat else { return nil }
+        return format == MainFilterFormatID.online
+    }
     private var searchText = ""
     private var mode: ViewMode = .normal
     private var isSearching = false
@@ -189,9 +197,36 @@ class EventListMainV2ViewController: UIViewController {
         }
     }
 
+    private func showSkeletonOverlay() {
+        guard skeletonOverlayView == nil else { return }
+        skeletonShownAt = CFAbsoluteTimeGetCurrent()
+        let overlay = PostsSkeletonOverlayView(frame: ui_table_view.frame)
+        self.view.insertSubview(overlay, aboveSubview: ui_table_view)
+        skeletonOverlayView = overlay
+    }
+
+    private func hideSkeletonOverlay() {
+        skeletonOverlayView?.removeFromSuperview()
+        skeletonOverlayView = nil
+        skeletonShownAt = nil
+    }
+
+    /// Laisse le skeleton visible au moins `skeletonMinimumDuration` au total, même si les données
+    /// arrivent plus vite — sinon le shimmer n'a pas le temps de s'animer.
+    private func hideSkeletonOverlayRespectingMinimumDuration(_ completion: @escaping () -> Void = {}) {
+        let elapsed = skeletonShownAt.map { CFAbsoluteTimeGetCurrent() - $0 } ?? skeletonMinimumDuration
+        let remaining = max(0, skeletonMinimumDuration - elapsed)
+        DispatchQueue.main.asyncAfter(deadline: .now() + remaining) { [weak self] in
+            self?.hideSkeletonOverlay()
+            completion()
+        }
+    }
+
     func loadForInit() {
         isLoading = true
-        SVProgressHUD.show()
+        if !pullRefreshControl.isRefreshing {
+            showSkeletonOverlay()
+        }
         if !isFromFilter {
             currentFilter = EventActionLocationFilters()
         }
@@ -294,7 +329,7 @@ class EventListMainV2ViewController: UIViewController {
 
         self.pullRefreshControl.endRefreshing()
         isLoading = false
-        SVProgressHUD.dismiss()
+        hideSkeletonOverlayRespectingMinimumDuration()
         if self.startSearching {
             self.startSearching = false
             if let filterCellIndexPath = getFilterCellIndexPath(), let filterCell = ui_table_view.cellForRow(at: filterCellIndexPath) as? CellMainFilter {
@@ -343,6 +378,8 @@ class EventListMainV2ViewController: UIViewController {
             vc.mod = .event
             vc.delegate = self
             vc.selectedItems = self.selectedItemsFilter
+            vc.selectedEventTypes = self.selectedEventTypes
+            vc.selectedFormat = self.selectedFormat
             vc.selectedAdressTitle = self.selectedAddress
             vc.selectedRadius = Int(self.selectedRadius)
             vc.selectedAdress = self.selectedCoordinate
@@ -502,7 +539,9 @@ extension EventListMainV2ViewController {
                 radius: self.selectedRadius,
                 latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
                 longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
-                selectedItem: selectedItemsList
+                selectedItem: selectedItemsList,
+                eventTypes: Array(selectedEventTypes),
+                isOnline: isOnlineFilterValue
             ) { events, error in
                 self.handleDiscoverEventResponse(events: events, error: error)
             }
@@ -533,7 +572,9 @@ extension EventListMainV2ViewController {
                 radius: self.selectedRadius,
                 latitude: Float(self.selectedCoordinate?.latitude ?? 0.0),
                 longitude: Float(self.selectedCoordinate?.longitude ?? 0.0),
-                selectedItem: selectedItemsList
+                selectedItem: selectedItemsList,
+                eventTypes: Array(selectedEventTypes),
+                isOnline: isOnlineFilterValue
             ) { events, error in
                 self.handleMyEventResponse(events: events, error: error)
             }
@@ -650,8 +691,8 @@ extension EventListMainV2ViewController: CellMainFilterDelegate {
 }
 
 extension EventListMainV2ViewController: MainFilterDelegate {
-    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String) {
-        let selectedCount = selectedItems.values.filter { $0 }.count
+    func didUpdateFilter(selectedItems: [String: Bool], radius: Float?, coordinate: CLLocationCoordinate2D?, adressTitle: String, eventTypes: Set<String>, format: String?) {
+        let selectedCount = selectedItems.values.filter { $0 }.count + eventTypes.count + (format != nil ? 1 : 0)
         self.numberOfFilters = selectedCount
         if numberOfFilters > 0 {
             self.ui_tv_number_of_filter.text = String(numberOfFilters)
@@ -660,6 +701,8 @@ extension EventListMainV2ViewController: MainFilterDelegate {
             self.ui_tv_number_of_filter.isHidden = true
         }
         self.selectedItemsFilter = selectedItems
+        self.selectedEventTypes = eventTypes
+        self.selectedFormat = format
         self.selectedCoordinate = coordinate
         self.selectedRadius = radius ?? 0
         self.selectedAddress = adressTitle
@@ -677,9 +720,16 @@ extension EventListMainV2ViewController: MainFilterDelegate {
 
 extension EventListMainV2ViewController {
     func showHighlightOverlay(targetView: UIView, withBubbleText text: String) {
+        // S'assure que targetView a bien sa position finale avant de calculer le cercle
+        self.view.layoutIfNeeded()
+
         // Crée l'overlay
         let overlayView = HighlightOverlayView(targetView: targetView)
         overlayView.frame = self.view.bounds
+
+        // Ajoute l'overlay à la vue principale avant de construire la bulle,
+        // pour que la conversion de coordonnées se fasse dans une hiérarchie de vues valide
+        self.view.addSubview(overlayView)
 
         // Ajoute la bulle
         overlayView.addBubble(with: text, below: targetView)
@@ -687,9 +737,6 @@ extension EventListMainV2ViewController {
         // Gérer le clic sur l'overlay pour le retirer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeOverlay(_:)))
         overlayView.addGestureRecognizer(tapGesture)
-
-        // Ajoute l'overlay à la vue principale
-        self.view.addSubview(overlayView)
     }
 
     @objc private func removeOverlay(_ sender: UITapGestureRecognizer) {

@@ -87,7 +87,7 @@ struct HomeSmallTalkCardView: View {
                 
                 // 2. Texte : Titre + Sous-titre
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Bientôt de nouvelles rencontres")
+                    Text("small_talk_title_waiting".localized)
                         .font(.custom("Quicksand-Bold", size: 15))
                         .foregroundColor(.black)
                     
@@ -148,20 +148,23 @@ struct HomeSmallTalkCardView: View {
                 
                 // 2. Textes : Titre + Sous-titres
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Vos discussions solidaires")
+                    Text("home_small_talk_active_title".localized)
                         .font(.custom("Quicksand-Bold", size: 16))
                         .foregroundColor(.black)
                         .lineLimit(1)
-                    
+
                     let activeText = activeCount > 1
-                    ? String(format: "%d discussions actives", activeCount)
-                    : String(format: "%d discussion active", activeCount)
+                    ? String(format: "home_small_talk_active_plural".localized, activeCount)
+                    : String(format: "home_small_talk_active_singular".localized, activeCount)
                     Text(activeText)
                         .font(.custom("NunitoSans-Regular", size: 13))
                         .foregroundColor(Color("grey_dark"))
-                    
+
                     if pendingCount > 0 {
-                        Text(String(format: "+%d en cours de matching", pendingCount))
+                        let pendingText = pendingCount > 1
+                        ? String(format: "home_small_talk_pending_plus_plural".localized, pendingCount)
+                        : String(format: "home_small_talk_pending_plus_singular".localized, pendingCount)
+                        Text(pendingText)
                             .font(.custom("NunitoSans-Regular", size: 13))
                             .foregroundColor(Color("orange_app"))
                     }
@@ -171,7 +174,7 @@ struct HomeSmallTalkCardView: View {
                 // 3. Bouton "Voir" + Badge
                 ZStack(alignment: .topTrailing) {
                     Button(action: { actionView() }) {
-                        Text("Voir")
+                        Text("home_small_talk_view_button".localized)
                             .font(.custom("Quicksand-Bold", size: 14))
                             .foregroundColor(.white)
                             .padding(.horizontal, 16)

@@ -223,9 +223,38 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     }
 
     private func rebuildTableDataFromUsers() {
-        tableData = [.searchCell] + users.map { .userCell(user: $0, reactionType: nil) }
-        ui_tableview.reloadData()
+        replaceResultRows(with: [.searchCell] + users.map { .userCell(user: $0, reactionType: nil) })
         updateUnsubscribedBottomViews()
+    }
+
+    private func rebuildTableDataFromUsersWithReactions() {
+        var newTableData: [TableDTO] = [.searchCell]
+        for (idx, user) in users.enumerated() {
+            newTableData.append(.userCell(user: user, reactionType: reactionTypeList[safe: idx]))
+        }
+        replaceResultRows(with: newTableData)
+    }
+
+    // Replaces the rows below the search cell (index 0) without reloading it, so the search
+    // UITextField (and its keyboard/first-responder state) isn't torn down while the user types.
+    private func replaceResultRows(with newTableData: [TableDTO]) {
+        let oldCount = tableData.count
+        tableData = newTableData
+        let newCount = tableData.count
+
+        guard oldCount > 0 else {
+            ui_tableview.reloadData()
+            return
+        }
+
+        ui_tableview.performBatchUpdates({
+            if oldCount > 1 {
+                ui_tableview.deleteRows(at: (1..<oldCount).map { IndexPath(row: $0, section: 0) }, with: .none)
+            }
+            if newCount > 1 {
+                ui_tableview.insertRows(at: (1..<newCount).map { IndexPath(row: $0, section: 0) }, with: .none)
+            }
+        })
     }
 
     // MARK: - SwiftUI Integration
@@ -347,18 +376,12 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         let searchedUsers = users.filter { $0.displayName.lowercased().contains(text.lowercased()) }
         usersSearch.append(contentsOf: searchedUsers)
 
-        tableData = [.searchCell]
-        if isSearch {
-            if usersSearch.isEmpty {
-                ui_view_no_result.isHidden = false
-            } else {
-                ui_view_no_result.isHidden = true
-                tableData += searchedUsers.map { .userCell(user: $0, reactionType: nil) }
-            }
-        } else {
-            tableData += searchedUsers.map { .userCell(user: $0, reactionType: nil) }
-        }
-        ui_tableview.reloadData()
+        // searchUser is only ever called with an active (non-empty) search text, so the
+        // empty-result view must reflect usersSearch regardless of the isSearch flag's timing.
+        ui_view_no_result.isHidden = !usersSearch.isEmpty
+
+        let newTableData: [TableDTO] = [.searchCell] + searchedUsers.map { .userCell(user: $0, reactionType: nil) }
+        replaceResultRows(with: newTableData)
     }
 
     // MARK: - Reactions (details)
@@ -372,15 +395,10 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
                     self.users = userReactions.map { $0.user }
                     self.reactionTypeList = userReactions.map { ReactionType(id: $0.reactionId, key: nil, imageUrl: nil) }
 
-                    self.tableData.removeAll()
-                    self.tableData = [.searchCell]
-                    for (idx, user) in self.users.enumerated() {
-                        self.tableData.append(.userCell(user: user, reactionType: self.reactionTypeList[safe: idx]))
-                    }
                     if !self.isSearch {
                         self.ui_view_no_result.isHidden = !self.users.isEmpty
                     }
-                    self.ui_tableview.reloadData()
+                    self.rebuildTableDataFromUsersWithReactions()
                 }
             }
         }
@@ -419,7 +437,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
         }
 
         let threshold = 5
-        if !isFromReact && !isFromSurvey && indexPath.row >= tableData.count - threshold && hasMorePages && !isLoading {
+        if !isFromReact && !isFromSurvey && !isSearch && indexPath.row >= tableData.count - threshold && hasMorePages && !isLoading {
             if isEvent { getEventusers() } else { getNeighborhoodUsers() }
         }
     }
@@ -507,6 +525,7 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
 extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelegate {
     func goSearch(_ text: String?) {
         if let text = text, !text.isEmpty {
+            self.isSearch = true
             if !isEvent { AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_Validate) }
             self.searchUser(text: text)
         } else {
@@ -514,7 +533,11 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
             self.isAlreadyClearRows = false
             self.isSearch = false
             ui_view_no_result.isHidden = !users.isEmpty
-            self.ui_tableview.reloadData()
+            if isFromReact {
+                self.rebuildTableDataFromUsersWithReactions()
+            } else {
+                self.rebuildTableDataFromUsers()
+            }
         }
     }
 
@@ -526,7 +549,8 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
         } else {
             isAlreadyClearRows = false
         }
-        ui_view_no_result.isHidden = !usersSearch.isEmpty
+        // No text has been typed yet, so there is no "no result" state to show.
+        ui_view_no_result.isHidden = true
     }
 }
 

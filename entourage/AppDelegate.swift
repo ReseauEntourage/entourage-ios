@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationCenter.default.addObserver(self, selector: #selector(goLogin), name: NSNotification.Name(notificationLoginError), object: nil)
         APIErrorPresenter.shared.start()
-        
+
         if UserDefaults.currentUser == nil || A0SimpleKeychain().string(forKey:kKeychainPassword) == nil {
             AppState.navigateToStartupScreen()
             return true
@@ -249,8 +249,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.print("***** extras : \(extras) ")
         Logger.print("***** Instance : \(instance) - id : \(instanceId)")
         let postId = extras["post_id"] as? Int
-        Logger.print("***** post id : \(postId) ")
-        let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId, postId: postId)
+        let chatMessageId = extras["chat_message_id"] as? Int
+        Logger.print("***** post id : \(postId) - chat message id : \(chatMessageId) ")
+        let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId, postId: postId, chatMessageId: chatMessageId)
         
         if isFromBackground {
             DeepLinkManager.presentAction(notification: notifData)

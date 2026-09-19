@@ -62,17 +62,17 @@ class NeighborhoodPostAddViewController: UIViewController {
     }
 
     private static let generalisteChips: [PostChip] = [
-        PostChip(label: "Info de quartier 📢", draft: "Je voulais partager une info qui concerne notre quartier : "),
-        PostChip(label: "Proposer une activité 🎉", draft: "J'organise une petite activité et j'aimerais vous inviter ! "),
-        PostChip(label: "Demander un coup de main 🤝", draft: "Bonjour à tous, j'aurais besoin d'un petit coup de main pour "),
-        PostChip(label: "Dire bonjour 👋", draft: "Bonjour à tous ! Je voulais juste prendre contact avec le groupe 😊"),
+        PostChip(label: "neighborhood_post_chip_info_label".localized, draft: "neighborhood_post_chip_info_draft".localized),
+        PostChip(label: "neighborhood_post_chip_activity_label".localized, draft: "neighborhood_post_chip_activity_draft".localized),
+        PostChip(label: "neighborhood_post_chip_help_label".localized, draft: "neighborhood_post_chip_help_draft".localized),
+        PostChip(label: "neighborhood_post_chip_hello_label".localized, draft: "neighborhood_post_chip_hello_draft".localized),
     ]
 
     private static let thematiqueChips: [PostChip] = [
-        PostChip(label: "Partager un contenu 💡", draft: "J'ai trouvé quelque chose d'intéressant à partager avec vous : "),
-        PostChip(label: "Poser une question ❓", draft: "Bonjour, j'aurais une question pour le groupe : "),
-        PostChip(label: "Proposer un échange 💬", draft: "J'aimerais qu'on échange sur ce sujet ensemble : "),
-        PostChip(label: "Organiser une rencontre 📅", draft: "Et si on se retrouvait prochainement ? Je propose "),
+        PostChip(label: "neighborhood_post_chip_share_label".localized, draft: "neighborhood_post_chip_share_draft".localized),
+        PostChip(label: "neighborhood_post_chip_question_label".localized, draft: "neighborhood_post_chip_question_draft".localized),
+        PostChip(label: "neighborhood_post_chip_exchange_label".localized, draft: "neighborhood_post_chip_exchange_draft".localized),
+        PostChip(label: "neighborhood_post_chip_meetup_label".localized, draft: "neighborhood_post_chip_meetup_draft".localized),
     ]
 
     private var selectedChipButton: UIButton? = nil

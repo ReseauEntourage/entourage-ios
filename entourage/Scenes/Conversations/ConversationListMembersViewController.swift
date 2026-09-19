@@ -174,10 +174,31 @@ class ConversationListMembersViewController: BasePopViewController {
         usersSearch = users.filter {
             $0.username?.lowercased().contains(text.lowercased()) ?? false
         }
-        if isSearch {
-            ui_view_no_result.isHidden = !usersSearch.isEmpty
+        // searchUser is only ever called with an active (non-empty) search text, so the
+        // empty-result view must reflect usersSearch regardless of the isSearch flag's timing.
+        ui_view_no_result.isHidden = !usersSearch.isEmpty
+        replaceResultRows()
+    }
+
+    // Reloads only the result rows (below the search cell at index 0) without reloading it,
+    // so the search UITextField (and its keyboard/first-responder state) isn't torn down while typing.
+    private func replaceResultRows() {
+        let oldCount = ui_tableview.numberOfRows(inSection: 0)
+        let newCount = (isSearch ? usersSearch.count : users.count) + 1
+
+        guard oldCount > 0 else {
+            ui_tableview.reloadData()
+            return
         }
-        ui_tableview.reloadData()
+
+        ui_tableview.performBatchUpdates({
+            if oldCount > 1 {
+                ui_tableview.deleteRows(at: (1..<oldCount).map { IndexPath(row: $0, section: 0) }, with: .none)
+            }
+            if newCount > 1 {
+                ui_tableview.insertRows(at: (1..<newCount).map { IndexPath(row: $0, section: 0) }, with: .none)
+            }
+        })
     }
 }
 
@@ -243,8 +264,8 @@ extension ConversationListMembersViewController: UITableViewDelegate {
                    willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath) {
         // si on atteint la dernière « vraie » cellule, on charge la page suivante
-        let total = isSearch ? usersSearch.count : users.count
-        if indexPath.row == total && nextPage != nil {
+        guard !isSearch else { return }
+        if indexPath.row == users.count && nextPage != nil {
             loadParticipants(page: nextPage!)
         }
     }
@@ -272,7 +293,7 @@ extension ConversationListMembersViewController: NeighborhoodHomeSearchDelegate 
             usersSearch.removeAll()
             isAlreadyClearRows = false
             ui_view_no_result.isHidden = !users.isEmpty
-            ui_tableview.reloadData()
+            replaceResultRows()
         }
     }
 

@@ -581,6 +581,8 @@
 "suppress_post_cell_subtitle" = "";
 "suppress_message_cell_subtitle" = "";
 "suppress_comment_cell_subtitle" = "";
+"edit_message_cell_subtitle" = "";
+"cancel_edit_message" = "Cancel editing";
 
 "deleted_message" = "This message has been deleted";
 "deleted_comment" = "This comment has been deleted";
@@ -714,6 +716,7 @@
 "neighborhood_post_group_section_title" = "Feed";
 "neighborhood_post_group_section_new_posts_title" = "New publications";
 "neighborhood_post_group_section_old_posts_title" = "Old publications";
+"neighborhood_post_not_found_toast" = "This post is no longer available";
 "neighborhood_empty_event_title" = "No events planned in this group yet";
 "neighborhood_empty_event_subtitle" = "Click “+” to create one";
 "neighborhood_empty_post_title" = "There are no posts (yet) on this group";
@@ -1242,17 +1245,17 @@
 "messaging_message_send" = "Send";
 "messaging_message_no_message" = "0 more messages";
 
-"messaging_empty_state_title" = "C'est le début de votre échange";
-"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
-Choisissez un sujet pour démarrer.";
-"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
-"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
-"messaging_empty_chip_question" = "Poser une question 💬";
-"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
-"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
-"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
-"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
-"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+"messaging_empty_state_title" = "This is the start of your conversation";
+"messaging_empty_state_subtitle" = "Not sure what to say?
+Choose a topic to get started.";
+"messaging_empty_chip_bonjour" = "Say hello 👋";
+"messaging_empty_chip_main" = "Offer help 🤝";
+"messaging_empty_chip_question" = "Ask a question 💬";
+"messaging_empty_chip_evenement" = "Talk about an event 📅";
+"messaging_empty_draft_bonjour" = "Hi! I just wanted to introduce myself and get in touch 😊";
+"messaging_empty_draft_main" = "Hi, I can lend you a hand if you need it. Feel free to let me know!";
+"messaging_empty_draft_question" = "Hi, I'd like to ask you a quick question if you have a moment?";
+"messaging_empty_draft_evenement" = "Hi, we met at an event and I just wanted to chat with you a bit!";
 
 "message_title_new_conv" = "New conversation";
 "message_subtitle_new_conv" = "You have not yet interacted with this user. If there is a problem, you can report the conversation in the settings.";
@@ -1735,6 +1738,11 @@ Choisissez un sujet pour démarrer.";
 "onboarding_start_action_content" = "We suggest starting by giving a second life to an item—a simple act that strengthens solidarity and builds bonds with your neighbors.";
 "onboarding_start_action_button" = "Do my first act of solidarity";
 
+"onboarding_start_action_title_preca" = "You're all set! Ask for a helping hand nearby";
+"onboarding_start_action_content_preca" = "We suggest starting by making your first request: a helping hand, a useful item, or just a moment to connect. It's free, and it's often the start of a great connection with your neighbors.";
+"onboarding_start_action_button_preca" = "Make my first request";
+"onboarding_start_action_remind_later" = "Remind me later";
+
 "day_monday" = "Monday";
 "day_tuesday" = "Tuesday";
 "day_wednesday" = "Wednesday";
@@ -2143,3 +2151,101 @@ Choisissez un sujet pour démarrer.";
 
 "badge_cta_see_badges" = "See my badges";
 "profile_description_placeholder" = "No description provided";
+
+
+// Ambassador resources section
+"profile_ambassador_resources_section" = "My volunteer resources";
+"profile_ambassador_tool_toolkit" = "Toolkit";
+"profile_ambassador_tool_whatsapp" = "WhatsApp Entoureurs";
+"profile_ambassador_tool_charter" = "Event charter";
+"profile_ambassador_referent_section" = "My contact";
+"profile_ambassador_referent_role" = "Citizen engagement manager";
+"profile_ambassador_referent_cta" = "Send a message";
+
+// MARK: - Fix missing translations iOS (2026-08-18)
+"login_forgot_code_title" = "Forgot your code?";
+"login_label_change_phone_question" = "Have you changed your phone number?";
+
+"onboard_sms_view_title" = "Enter the code received by SMS";
+"onboard_sms_view_sub" = "An SMS has just been sent to:";
+"onboard_sms_view_wait_countdown" = "You will be able to request a new code in %@";
+"onboard_sms_view_wait_ready" = "You can request a new code.";
+"onboard_retry_view_link" = "Receive a new code by SMS";
+
+"onboarding_zone_title" = "Your location";
+"onboarding_zone_subtitle" = "This information helps us fine-tune the activities suggested near you.";
+"onboarding_zone_city_placeholder_example" = "E.g.: Valence";
+
+"onboarding_phase1_title" = "Your personal information";
+"onboarding_phase1_required_fields" = "(*) required fields";
+"onboarding_phase1_nav_title" = "Information";
+
+"home_v2_small_talk_card_title" = "Join a solidarity discussion";
+"home_v2_small_talk_card_subtitle" = "We connect you with a small group who shares your interests, anywhere in France";
+"home_v2_small_talk_card_button" = "Chat";
+"home_v2_solidarity_tools_title" = "Your solidarity tools";
+"home_v2_tool_card_map" = "Map of solidarity places";
+"home_v2_tool_card_pedago" = "Useful resources";
+"home_v2_tool_card_ethics" = "Entourage code of ethics";
+
+"settings_back_subtitle" = "Back to settings";
+
+"interest_sport_subtitle" = "Football, yoga, basketball…";
+"interest_animaux_subtitle" = "Shelter, care, walking…";
+"interest_marauding_subtitle" = "Meals, coffee, conversation…";
+"interest_bien_etre_subtitle" = "Relaxation, care, hygiene…";
+"interest_cuisine_subtitle" = "Shared meals, recipes…";
+"interest_culture_subtitle" = "Outings, museums, cinema…";
+"interest_nature_subtitle" = "Gardening, parks, forest…";
+"interest_jeux_subtitle" = "Board games, cards, outdoor games…";
+"interest_activites_subtitle" = "DIY, sewing, repairs…";
+
+"neighborhood_post_chip_info_label" = "Neighborhood info 📢";
+"neighborhood_post_chip_info_draft" = "I wanted to share some info about our neighborhood: ";
+"neighborhood_post_chip_activity_label" = "Suggest an activity 🎉";
+"neighborhood_post_chip_activity_draft" = "I'm organizing a small activity and would like to invite you! ";
+"neighborhood_post_chip_help_label" = "Ask for a hand 🤝";
+"neighborhood_post_chip_help_draft" = "Hi everyone, I could use a little help with ";
+"neighborhood_post_chip_hello_label" = "Say hello 👋";
+"neighborhood_post_chip_hello_draft" = "Hi everyone! I just wanted to get in touch with the group 😊";
+"neighborhood_post_chip_share_label" = "Share content 💡";
+"neighborhood_post_chip_share_draft" = "I found something interesting to share with you: ";
+"neighborhood_post_chip_question_label" = "Ask a question ❓";
+"neighborhood_post_chip_question_draft" = "Hi, I have a question for the group: ";
+"neighborhood_post_chip_exchange_label" = "Suggest a discussion 💬";
+"neighborhood_post_chip_exchange_draft" = "I'd like us to discuss this topic together: ";
+"neighborhood_post_chip_meetup_label" = "Organize a meetup 📅";
+"neighborhood_post_chip_meetup_draft" = "How about we meet up soon? I suggest ";
+
+"availability_day_mon" = "Mon";
+"availability_day_tue" = "Tue";
+"availability_day_wed" = "Wed";
+"availability_day_thu" = "Thu";
+"availability_day_fri" = "Fri";
+"availability_day_sat" = "Sat";
+"availability_day_sun" = "Sun";
+
+// MARK: - Fix traductions manquantes iOS (2026-09-02)
+"onboarding_zone_radius_title" = "Within a radius of";
+"onboard_help_view_title" = "Need help?";
+"onboard_help_view_link" = "Contact the Entourage team";
+"onboarding_phase1_gender_label" = "I am";
+"onboarding_phase1_select_placeholder" = "Select from the list";
+"onboarding_phase1_clear_selection" = "Clear";
+"onboarding_phase1_firstname_label" = "First name*";
+"onboarding_phase1_firstname_placeholder" = "E.g.: Marie";
+"onboarding_phase1_lastname_label" = "Last name*";
+"onboarding_phase1_lastname_placeholder" = "E.g.: Dupont";
+"onboarding_phase1_birthday_label" = "Date of birth";
+"onboarding_phase1_birthday_placeholder" = "E.g.: 22/10/1989";
+"onboarding_phase1_phone_label" = "Phone*";
+"onboarding_phase1_email_label" = "E-mail";
+"onboarding_phase1_email_placeholder" = "E.g.: marie.dupont@email.com";
+"onboarding_phase1_howwemet_label" = "How did you hear about us?";
+"onboarding_phase1_consent_label" = "I would like to receive information and advice from the Entourage team";
+"onboarding_phase1_enterprise_label" = "Name of your company";
+"onboarding_phase1_field_required_error" = "Required field";
+"onboarding_phase1_event_label" = "Event you are attending";
+"onboarding_phase1_event_select_enterprise_first_placeholder" = "Select a company first";
+"onboarding_phase1_select_date_title" = "Select a date";
+"react_action_button" = "React";

@@ -62,6 +62,7 @@ let kAPIReportPostNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token
 let kAPIReportPostCommentNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token=%@"
 let kAPIGetNeighborhoodPostMessage = "neighborhoods/%@/chat_messages/%@?token=%@&image_size=high"
 let kAPIDeleteNeigborhoodPostMessage = "neighborhoods/%d/chat_messages/%d?token=%@"
+let kAPIPatchNeighborhoodPostMessage = "neighborhoods/%d/chat_messages/%d?token=%@"
 let kAPIPostReactionGroupPost = "neighborhoods/%d/chat_messages/%d/reactions?token=%@"
 let kAPIDeleteReactionGroupPost = "neighborhoods/%d/chat_messages/%d/reactions?token=%@"
 let kAPIGetDetailsReactionGroupPost = "neighborhoods/%d/chat_messages/%d/reactions/users?token=%@"
@@ -173,6 +174,18 @@ let kAPIConversationImages = "conversations/%@/images?token=%@"
 let kAPIConversationImagesPaged = "conversations/%@/images?token=%@&page=%d&per=%d"
 let kAPIConversationImageSingle = "conversations/%@/images/%@?token=%@"
 
+//Reactions (conversations & smalltalks)
+let kAPIPostReactionConversation = "conversations/%@/chat_messages/%@/reactions?token=%@"
+let kAPIDeleteReactionConversation = "conversations/%@/chat_messages/%@/reactions?token=%@"
+let kAPIGetDetailsReactionConversation = "conversations/%@/chat_messages/%@/reactions/users?token=%@"
+let kAPIPostReactionSmallTalk = "smalltalks/%@/chat_messages/%@/reactions?token=%@"
+let kAPIDeleteReactionSmallTalk = "smalltalks/%@/chat_messages/%@/reactions?token=%@"
+let kAPIGetDetailsReactionSmallTalk = "smalltalks/%@/chat_messages/%@/reactions/users?token=%@"
+
+//Message edit (PATCH)
+let kAPIPatchConversationMessage = "conversations/%@/chat_messages/%@?token=%@"
+let kAPIPatchSmallTalkMessage = "smalltalks/%@/chat_messages/%@?token=%@"
+
 //Chat message
 let kAPIChatMessageDelete = "/chat_messages/%d?token=%@"
 
@@ -193,6 +206,9 @@ let ENTOURAGE_WEB_URL = "https://www.entourage.social"
 let APPSTORE_URL = "https://apps.apple.com/fr/app/entourage-reseau-solidaire/id1072244410"
 let AMBASSADOR_URL = "https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
 let CHARTE_URL = "https://www.entourage.social/blog/charte-ethique-entourage-local/"
+let AMBASSADOR_TOOLKIT_URL = "https://drive.google.com/drive/folders/1H9_G4I7zgcJ7Y4DtZDws3coFPsoVnLLm"
+let AMBASSADOR_WHATSAPP_URL = "https://chat.whatsapp.com/IvpPJZS0aAKIJKVXmMRTr0"
+let AMBASSADOR_CHARTER_URL = "https://app.entourage.social/chart-event"
 let MENU_LICENSES_URL = "https://www.entourage.social"
 let PARTNER_URL = "https://www.entourage.social/mecenes-et-partenaires/"
 let MENU_SUGGEST_URL = "https://entourage-asso.typeform.com/to/NRhT8vmj"

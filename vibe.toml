@@ -81,8 +81,9 @@ contributing = "CONTRIBUTING.md"
 
 [secrets]
 # Secret management (these should not be committed)
-# HMAC secret for request signing
-hmac_secret_env = "HMAC_SECRET_IOS"
+# HMAC secret for request signing, one per bundle ID/environment
+hmac_secret_env_prod = "HMAC_SECRET_IOS_PROD"
+hmac_secret_env_preprod = "HMAC_SECRET_IOS_PREPROD"
 api_key_env = "API_KEY_IOS"
 
 [notifications]
