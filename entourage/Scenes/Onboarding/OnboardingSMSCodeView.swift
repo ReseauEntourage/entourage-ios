@@ -124,6 +124,7 @@ struct OnboardingSMSCodeView: View {
 
                     Button(action: {
                         if canRetry {
+                            AnalyticsLoggerManager.logEvent(name: Onboard_code_click_new_code)
                             onRequestNewCode()
                         }
                     }) {
@@ -280,6 +281,7 @@ struct OnboardingSMSCodeView: View {
     // MARK: - Actions auxiliaires
 
     private func openHelpEmail() {
+        AnalyticsLoggerManager.logEvent(name: Onboard_code_click_contact)
         let email = "contact@entourage.social"
         if let url = URL(string: "mailto:\(email)") {
             UIApplication.shared.open(url)

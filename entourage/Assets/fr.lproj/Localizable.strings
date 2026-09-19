@@ -1024,7 +1024,7 @@
 "event_filter_position_placeholder" = "Ma position";
 
 //Pop leave/cancel event
-"params_leave_event_pop_title" = "Quitter l'événement";
+"params_leave_event_pop_title" = "Je ne souhaite plus participer";
 "params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
 "params_leave_event_pop_bt_quit" = "Quitter";
 "params_leave_event_pop_bt_cancel" = "Annuler";
@@ -1066,7 +1066,7 @@
 "event_params_cgu_description" = "Charte des événements, à lire attentivement.";
 "event_params_participant" = "participant";
 "event_params_participants" = "participants";
-"event_params_quit" = "Quitter l’événement";
+"event_params_quit" = "Je ne souhaite plus participer";
 "event_params_cancel" = "Annuler l'événement";
 
 "event_params_notif_title" = "Me notifier de";
@@ -1966,3 +1966,54 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_moderator_subtitle" = "Je fais parti·e de l'équipe Entourage et je suis là pour vous accompagner. N'hésitez pas si vous avez des questions ! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "L’événement a-t-il un nombre de places limité ?";
 "eventCreatephase3_swiftUI_title_place" = "Lieu";
+
+"conversation_staff_warning_message" = "L’équipe est en pause... 🌙 En cas d'urgence : 15, 18 ou 115. Pour une aide immédiate, vos voisins sont sur le groupe ! 🏠 On vous répond vite.";
+"conversation_staff_warning_group_link" = "groupe";
+
+/* Welcome Journey */
+"home_v2_welcome_title" = "Votre parcours de bienvenue";
+"home_v2_welcome_progress" = "%d étape(s) sur %d complétée(s)";
+"home_v2_welcome_microcopy_0" = "Commençons 💛";
+"home_v2_welcome_microcopy_1" = "Vous êtes bien lancé(e) ✨";
+"home_v2_welcome_microcopy_2" = "Plus qu'une étape pour rejoindre la communauté 🎉";
+"home_v2_welcome_microcopy_3" = "Intégration complète ! Tu fais maintenant partie de la communauté !";
+"home_v2_welcome_video_title" = "1 min pour tout comprendre";
+"home_v2_welcome_video_subtitle" = "Qui sommes-nous, comment ça marche, et comment vous pouvez agir en 1 minute";
+"home_v2_welcome_video_btn" = "Regarder la vidéo";
+"home_v2_welcome_video_completed_title" = "Commencer par la vidéo de bienvenue";
+"home_v2_welcome_video_completed_subtitle" = "Découvrez l'esprit d'Entourage et voyez comment agir concrètement contre l'isolement.";
+"home_v2_welcome_webinar_title" = "Rencontrez l'équipe en visio";
+"home_v2_welcome_webinar_subtitle" = "Une session d'accueil en petit groupe pour poser vos questions à l'équipe avec plusieurs créneaux disponibles.";
+"home_v2_welcome_webinar_btn" = "Voir les prochaines dates";
+"home_v2_welcome_webinar_completed_title" = "S'inscrire au webinaire de prise en main";
+"home_v2_welcome_webinar_completed_subtitle" = "Découvrez l'application en 45 min avec notre équipe et posez toutes vos questions.";
+"home_v2_welcome_papotages_title" = "Papotages entre membres";
+"home_v2_welcome_papotages_subtitle" = "Chaque mardi à 18h, en petits groupes animés, pour discuter de tout et de rien. Pas d'ordre du jour, pas de pression — juste une conversation.";
+"home_v2_welcome_papotages_btn" = "Voir les prochaines sessions";
+"home_v2_welcome_papotages_completed_title" = "Rejoindre une session de papotages";
+"home_v2_welcome_papotages_completed_subtitle" = "Chaque mardi à 18h, un moment convivial en visio pour discuter de tout et de rien avec d'autres membres.";
+"home_v2_welcome_video_modal_title" = "Découvrez l'esprit Entourage";
+"home_v2_welcome_video_modal_desc" = "Dans cette vidéo, vous allez découvrir comment nous créons du lien social et luttons contre l'isolement. Rejoignez une communauté bienveillante où chaque action compte.\n\nPrenez 2 minutes pour découvrir l'esprit Entourage.";
+"home_v2_welcome_video_modal_btn" = "Continuer";
+"home_v2_welcome_celebration_title" = "Félicitations !";
+"home_v2_welcome_celebration_desc" = "Votre parcours d'intégration est terminé. Vous avez désormais toutes les clés pour agir et créer du lien autour de vous.";
+"home_v2_welcome_celebration_btn" = "C'est parti !";
+"home_v2_welcome_todo" = "À faire";
+"home_v2_welcome_done" = "Terminé";
+"event_discussion_title" = "Discussion de l'événement";
+
+"home_title_tools" = "Tes outils solidaires";
+"home_tools_map" = "Carte des lieux solidaires";
+"home_tools_pedago" = "Ressources utiles";
+"home_tools_charter" = "Charte éthique Entourage";
+"welcome_video_cta" = "Regarder la vidéo";
+"welcome_step3_title" = "Papotages entre membres";
+"welcome_welcome_list_title" = "Premiers pas sur Entourage";
+"welcome_welcome_list_subtitle" = "Prenez en main l'application et posez toutes vos questions à l'équipe — en petit groupe, en 45 minutes en visio.";
+"welcome_papotages_list_title" = "Papotages solidaires";
+"welcome_papotages_list_subtitle" = "Discussions libres en sous-groupes de 2 à 3 personnes, animées par un bénévole formé ou un membre de l'équipe. Vous restez le temps que vous voulez. Tous les mardis à 18h.";
+"welcome_webinar_list_title" = "Sensibilisations Entourage";
+"welcome_webinar_list_subtitle" = "L'équipe Entourage vous donne les clefs pour appréhender le monde de la rue et les solutions d'aide existantes lors d'un atelier en ligne de 1h.";
+"welcome_firststep_list_title" = "Premiers pas sur Entourage";
+"welcome_firststep_list_subtitle" = "Prenez en main l'application et posez toutes vos questions à l'équipe — en petit groupe, en 45 minutes en visio.";
+"event_discussion_desc" = "Vous pouvez poser vos questions et échanger avec l'organisateur et les participants de l'événement";

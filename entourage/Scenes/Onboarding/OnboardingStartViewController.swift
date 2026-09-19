@@ -192,8 +192,13 @@ final class OnboardingStartViewController: UIViewController {
     // MARK: - Navigation actions
 
     @IBAction func action_next(_ sender: Any) {
+        if currentPhasePosition == 1 {
+            AnalyticsLoggerManager.logEvent(name: Onboard_name_click_next)
+        }
+
         // Étape 2 : forcer la présence du code avant de lancer la requête
         if currentPhasePosition == 2 {
+            AnalyticsLoggerManager.logEvent(name: Onboard_code_click_next)
             // Étape 2 : on exige la saisie d'un code avant de procéder
             guard let code = temporaryPasscode,
                   !code.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {

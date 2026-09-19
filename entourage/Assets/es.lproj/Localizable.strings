@@ -3185,3 +3185,52 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_moderator_subtitle" = "Formo parte del equipo de Entourage y estoy aquí para acompañarte. ¡No dudes en preguntar si tienes alguna duda! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "¿El evento tiene un número limitado de plazas?";
 "eventCreatephase3_swiftUI_title_place" = "Lugar";
+
+"conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
+"conversation_staff_warning_group_link" = "group";
+
+/* Welcome Journey */
+"home_v2_welcome_title" = "Su viaje de bienvenida";
+"home_v2_welcome_progress" = "%d out of %d step(s) completed";
+"home_v2_welcome_microcopy_0" = "Comencemos 💛";
+"home_v2_welcome_microcopy_1" = "Has tenido un gran comienzo ✨";
+"home_v2_welcome_microcopy_2" = "Sólo un paso más para unirte a la comunidad 🎉";
+"home_v2_welcome_microcopy_3" = "¡Incorporación completada! ¡Ya formas parte de la comunidad!";
+"home_v2_welcome_video_title" = "Empezar con el vídeo de bienvenida";
+"home_v2_welcome_video_subtitle" = "Descubre el espíritu Entourage y cómo actuar concretamente contra el aislamiento.";
+"home_v2_welcome_video_btn" = "Ver el vídeo";
+"home_v2_welcome_video_completed_title" = "Empezar con el vídeo de bienvenida";
+"home_v2_welcome_video_completed_subtitle" = "Descubre el espíritu Entourage y cómo actuar concretamente contra el aislamiento.";
+"home_v2_welcome_webinar_title" = "Inscríbete en el seminario web";
+"home_v2_welcome_webinar_subtitle" = "Descubre la app en 45 min con nuestro equipo y haz todas tus preguntas.";
+"home_v2_welcome_webinar_btn" = "Inscribirse";
+"home_v2_welcome_webinar_completed_title" = "Inscríbete en el seminario web";
+"home_v2_welcome_webinar_completed_subtitle" = "Descubre la app en 45 min con nuestro equipo y haz todas tus preguntas.";
+"home_v2_welcome_papotages_title" = "Únete a una sesión de charla";
+"home_v2_welcome_papotages_subtitle" = "Cada martes a las 18h, una agradable sesión de vídeo para charlar.";
+"home_v2_welcome_papotages_btn" = "Unirse";
+"home_v2_welcome_papotages_completed_title" = "Únete a una sesión de charla";
+"home_v2_welcome_papotages_completed_subtitle" = "Cada martes a las 18h, una agradable sesión de vídeo para charlar.";
+"home_v2_welcome_video_modal_title" = "Descubre el espíritu Entourage";
+"home_v2_welcome_video_modal_desc" = "En este vídeo descubrirás cómo creamos conexión social y luchamos contra el aislamiento.\n\nTómese 2 minutos para descubrir el espíritu Entourage.";
+"home_v2_welcome_video_modal_btn" = "Continuar";
+"home_v2_welcome_celebration_title" = "¡Enhorabuena!";
+"home_v2_welcome_celebration_desc" = "Su viaje de incorporación ha finalizado. Ya dispone de las herramientas necesarias para actuar y crear vínculos.";
+"home_v2_welcome_celebration_btn" = "¡Vamos!";
+"home_v2_welcome_todo" = "Por hacer";
+"home_v2_welcome_done" = "Hecho";
+
+"home_title_tools" = "Tus herramientas solidarias";
+"home_tools_map" = "Mapa de lugares solidarios";
+"home_tools_pedago" = "Recursos útiles";
+"home_tools_charter" = "Carta ética de Entourage";
+"welcome_video_cta" = "Ver el video";
+"welcome_step3_title" = "Charlas entre miembros";
+"welcome_welcome_list_title" = "Primeros pasos en Entourage";
+"welcome_welcome_list_subtitle" = "Familiarízate con la aplicación y hazle todas tus preguntas al equipo — en pequeños grupos, 45 minutos por videollamada.";
+"welcome_papotages_list_title" = "Charlas solidarias";
+"welcome_papotages_list_subtitle" = "Debates abiertos en subgrupos de 2 a 3 personas, moderados por un voluntario capacitado o un miembro del equipo. Puedes quedarte todo el tiempo que quieras. Todos los martes a las 18h.";
+"welcome_webinar_list_title" = "Sesiones de sensibilización Entourage";
+"welcome_webinar_list_subtitle" = "El equipo de Entourage te da las claves para entender el mundo de la calle y las soluciones de ayuda existentes durante un taller online de 1 hora.";
+"welcome_firststep_list_title" = "Primeros pasos en Entourage";
+"welcome_firststep_list_subtitle" = "Familiarízate con la aplicación y hazle todas tus preguntas al equipo — en pequeños grupos, 45 minutos por videollamada.";

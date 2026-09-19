@@ -1025,7 +1025,7 @@
 "event_filter_position_placeholder" = "Ma position";
 
 //Pop leave/cancel event
-"params_leave_event_pop_title" = "Quitter l'événement";
+"params_leave_event_pop_title" = "Je ne souhaite plus participer";
 "params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
 "params_leave_event_pop_bt_quit" = "Quitter";
 "params_leave_event_pop_bt_cancel" = "Annuler";
@@ -1067,7 +1067,7 @@
 "event_params_cgu_description" = "Charte des événements, à lire attentivement.";
 "event_params_participant" = "participant";
 "event_params_participants" = "participants";
-"event_params_quit" = "Quitter l’événement";
+"event_params_quit" = "Je ne souhaite plus participer";
 "event_params_cancel" = "Annuler l'événement";
 
 "event_params_notif_title" = "Me notifier de";
@@ -1776,3 +1776,52 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_moderator_subtitle" = "Jestem częścią zespołu Entourage i jestem tutaj, aby ci towarzyszyć. Nie wahaj się, jeśli masz pytania! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "Czy wydarzenie ma ograniczoną liczbę miejsc?";
 "eventCreatephase3_swiftUI_title_place" = "Miejsce";
+
+"conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
+"conversation_staff_warning_group_link" = "group";
+
+/* Welcome Journey */
+"home_v2_welcome_title" = "Your welcome journey";
+"home_v2_welcome_progress" = "%d out of %d step(s) completed";
+"home_v2_welcome_microcopy_0" = "Let's get started 💛";
+"home_v2_welcome_microcopy_1" = "You're off to a great start ✨";
+"home_v2_welcome_microcopy_2" = "Just one more step to join the community 🎉";
+"home_v2_welcome_microcopy_3" = "Onboarding complete! You are now part of the community!";
+"home_v2_welcome_video_title" = "Start with the welcome video";
+"home_v2_welcome_video_subtitle" = "Discover the Entourage spirit and see how to take concrete action against isolation.";
+"home_v2_welcome_video_btn" = "Watch video";
+"home_v2_welcome_video_completed_title" = "Start with the welcome video";
+"home_v2_welcome_video_completed_subtitle" = "Discover the Entourage spirit and see how to take concrete action against isolation.";
+"home_v2_welcome_webinar_title" = "Sign up for the onboarding webinar";
+"home_v2_welcome_webinar_subtitle" = "Discover the app in 45 min with our team and ask any questions.";
+"home_v2_welcome_webinar_btn" = "Sign up";
+"home_v2_welcome_webinar_completed_title" = "Sign up for the onboarding webinar";
+"home_v2_welcome_webinar_completed_subtitle" = "Discover the app in 45 min with our team and ask any questions.";
+"home_v2_welcome_papotages_title" = "Join a chat session";
+"home_v2_welcome_papotages_subtitle" = "Every Tuesday at 6pm, a friendly video session to chat with other members.";
+"home_v2_welcome_papotages_btn" = "Join";
+"home_v2_welcome_papotages_completed_title" = "Join a chat session";
+"home_v2_welcome_papotages_completed_subtitle" = "Every Tuesday at 6pm, a friendly video session to chat with other members.";
+"home_v2_welcome_video_modal_title" = "Discover the Entourage spirit";
+"home_v2_welcome_video_modal_desc" = "In this video, you'll discover how we create social connection and fight against isolation. Join a caring community where every action counts.\n\nTake 2 minutes to discover the Entourage spirit.";
+"home_v2_welcome_video_modal_btn" = "Continue";
+"home_v2_welcome_celebration_title" = "Congratulations!";
+"home_v2_welcome_celebration_desc" = "Your onboarding journey is complete. You now have all the tools to take action and create connections around you.";
+"home_v2_welcome_celebration_btn" = "Let's go!";
+"home_v2_welcome_todo" = "To do";
+"home_v2_welcome_done" = "Done";
+
+"home_title_tools" = "Twoje narzędzia solidarnościowe";
+"home_tools_map" = "Mapa miejsc solidarnościowych";
+"home_tools_pedago" = "Przydatne zasoby";
+"home_tools_charter" = "Karta etyczna Entourage";
+"welcome_video_cta" = "Obejrzyj wideo";
+"welcome_step3_title" = "Pogawędki między członkami";
+"welcome_welcome_list_title" = "Pierwsze kroki w Entourage";
+"welcome_welcome_list_subtitle" = "Poznaj aplikację i zadaj wszystkie pytania zespołowi — w małych grupach, podczas 45-minutowej rozmowy wideo.";
+"welcome_papotages_list_title" = "Pogawędki solidarnościowe";
+"welcome_papotages_list_subtitle" = "Otwarte dyskusje w podgrupach od 2 do 3 osób, prowadzone przez przeszkolonego wolontariusza lub członka zespołu. Możesz zostać tak długo, jak chcesz. W każdy wtorek o 18:00.";
+"welcome_webinar_list_title" = "Sesje uświadamiające Entourage";
+"welcome_webinar_list_subtitle" = "Zespół Entourage daje Ci klucze do zrozumienia świata ulicy i istniejących rozwiązań pomocowych podczas 1-godzinnych warsztatów online.";
+"welcome_firststep_list_title" = "Pierwsze kroki w Entourage";
+"welcome_firststep_list_subtitle" = "Poznaj aplikację i zadaj wszystkie pytania zespołowi — w małych grupach, podczas 45-minutowej rozmowy wideo.";

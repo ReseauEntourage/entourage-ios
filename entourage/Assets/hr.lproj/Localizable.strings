@@ -1437,3 +1437,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "Pridružite se solidarnoj raspravi";
 "small_talk_subtitle_match" = "Povezujemo vas s malom grupom ljudi koji dijele vaše interese, bilo gdje u Francuskoj.";
 "Tomorrow" = "Sutra";
+
+"conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
+"conversation_staff_warning_group_link" = "group";

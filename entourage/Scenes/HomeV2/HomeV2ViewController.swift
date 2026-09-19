@@ -32,6 +32,7 @@ enum HomeV2DTO {
     case moderator(name: String, imageUrl: String? = nil)
     case cellHZ
     case cellInitialPedago(pedagos: [PedagogicResource])
+    case cellWelcomeJourney(viewModel: WelcomeJourneyViewModel)
     case cellSmallTalk(userRequests:[UserSmallTalkRequest])
     case cellSolidarityTools
 }
@@ -70,9 +71,9 @@ class HomeV2ViewController: UIViewController {
     var shouldTestOnboarding = false
     var userSmallTalkRequests: [UserSmallTalkRequest] = []
     private var hasRunEntryGating = false
+    private var hasShownCompletionStateThisSession = false
+    private var hasInitiallyCompletedAll: Bool? = nil
 
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -103,9 +104,10 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
+        ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
 
         self.checkAndCreateCookieIfNotExists()
-        //self.checkNotificationSettings()
+        
         if let _user = UserDefaults.currentUser {
             UserService.getDetailsForUser(userId: String(_user.sid)) { user, error in
                 if error == nil {
@@ -114,12 +116,12 @@ class HomeV2ViewController: UIViewController {
             }
         }
         
-        runHomeEntryGatingIfNeeded()
+        // SECURITE: Gating retiré d'ici pour éviter les présentations modales pendant le layout
         SVProgressHUD.dismiss()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         currentFilter.resetToDefault()
         self.loadMetadatas()
         self.initHome()
@@ -129,8 +131,12 @@ class HomeV2ViewController: UIViewController {
             print("Bundle Identifier: \(bundleIdentifier)")
         }
         getUserInfo()
-
-
+    }
+    
+    // SECURITE: Gating déplacé ici (quand la Home est stable graphiquement)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        runHomeEntryGatingIfNeeded()
     }
     
     func showVotePopupIfNeeded() {
@@ -151,22 +157,15 @@ class HomeV2ViewController: UIViewController {
         }
     }
 
-    
     func sendDiscussionSmokeTest() {
-        // Récupérer le compteur actuel depuis UserDefaults
         let discussionSmokeCount = UserDefaults.standard.integer(forKey: "discussionSmokeCount")
-        
-        // Incrémenter le compteur
         UserDefaults.standard.set(discussionSmokeCount + 1, forKey: "discussionSmokeCount")
         
-        // Vérifier si le compteur est supérieur à 2
         if discussionSmokeCount >= 1 {
-            // Vérifier si les cookies HasDeniedDiscussion ou HasAcceptedDiscussion n'existent pas
             let hasDeniedDiscussion = UserDefaults.standard.bool(forKey: "HasDeniedDiscussion")
             let hasAcceptedDiscussion = UserDefaults.standard.bool(forKey: "HasAcceptedDiscussion")
             
             if !hasDeniedDiscussion && !hasAcceptedDiscussion {
-                // Charger et présenter la vue DiscussionSmokeTestViewController
                 let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "DiscussionSmokeTestViewController") as? DiscussionSmokeTestViewController {
                     if let currentVc = AppState.getTopViewController() {
@@ -176,7 +175,6 @@ class HomeV2ViewController: UIViewController {
             }
         }
     }
-
     
     func handleEnhancedOnboardingReturn() {
         let config = EnhancedOnboardingConfiguration.shared
@@ -223,7 +221,6 @@ class HomeV2ViewController: UIViewController {
                     DeepLinkManager.showWelcomeTwo()
                 }
             }
-            
         }
         
         if config.isInterestsFromSetting {
@@ -245,7 +242,6 @@ class HomeV2ViewController: UIViewController {
         }
     }
 
-    
     func testEventLastDay() {
         getEventAndLaunchPopup(eventId: "136208")
     }
@@ -299,25 +295,15 @@ class HomeV2ViewController: UIViewController {
                     AnalyticsLoggerManager.logEvent(name: has_user_activated_notif)
                 } else {
                     AnalyticsLoggerManager.logEvent(name: has_user_disabled_notif)
-                    
-                    // Incrémenter le nombre de connexions
                     let connectionCount = self.incrementConnectionCount()
-                    // Vérifier si c'est la 2ème ou la 10ème connexion
                     if connectionCount == 1 || connectionCount == 4 || connectionCount == 9 {
                         self.presentNotificationDemandViewController()
-                    }else{
-//                        let alert = UIAlertController(title: "Connexion", message: "Nombre de connexions: \(connectionCount)", preferredStyle: .alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                        self.present(alert, animated: true, completion: nil)
                     }
-                    // Afficher une alerte avec le connectionCount
-                    
                 }
             }
         }
     }
 
-    
     func incrementConnectionCount() -> Int {
         let defaults = UserDefaults.standard
         let currentCount = defaults.integer(forKey: "connectionCount")
@@ -329,7 +315,7 @@ class HomeV2ViewController: UIViewController {
             NotificationDisplayManager.shared.hasBeenDisplayed = true
             let storyboard = UIStoryboard(name: StoryboardName.onboarding, bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "NotificationDemandViewController") as? NotificationDemandViewController {
-                vc.modalPresentationStyle = .overFullScreen // Optionnel
+                vc.modalPresentationStyle = .overFullScreen
                 self.present(vc, animated: true, completion: nil)
             } else {
                 print("ViewController with identifier 'NotificationDemandViewController' not found")
@@ -340,9 +326,7 @@ class HomeV2ViewController: UIViewController {
     func checkForUpdates() {
         let appStoreURL = URL(string: "http://itunes.apple.com/lookup?bundleId=social.entourage.entourage")!
         let task = URLSession.shared.dataTask(with: appStoreURL) { (data, response, error) in
-            guard error == nil, let data = data else {
-                return
-            }
+            guard error == nil, let data = data else { return }
 
             do {
                 if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -410,6 +394,31 @@ class HomeV2ViewController: UIViewController {
             showInitialPedago = true
         }
 
+        let welcomeJourneyVM = WelcomeJourneyViewModel()
+        welcomeJourneyVM.update(with: userHome.events, hasInitiallyCompletedAll: &self.hasInitiallyCompletedAll)
+
+        let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
+        let isUserProOrTeam = (UserDefaults.currentUser?.partner != nil)
+
+        if !welcomeJourneyVM.hideEntirely && !isUserProOrTeam {
+            tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
+
+            if welcomeJourneyVM.isFullyCompleted && !hasShownCelebration {
+                UserDefaults.standard.set(true, forKey: "hasShownWelcomeCelebration")
+                self.hasShownCompletionStateThisSession = true
+
+                DispatchQueue.main.async {
+                    let celebrationVC = WelcomeJourneyCelebrationPopupViewController()
+                    celebrationVC.modalPresentationStyle = .overFullScreen
+                    celebrationVC.modalTransitionStyle = .crossDissolve
+                    celebrationVC.onDismiss = { [weak self] in
+                        self?.configureDTO()
+                    }
+                    self.present(celebrationVC, animated: true)
+                }
+            }
+        }
+
         if showInitialPedago && initialPedagos.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
             tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
@@ -448,9 +457,7 @@ class HomeV2ViewController: UIViewController {
             }
         }
 
-        //add condition
         tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
-
         tableDTO.append(.cellSolidarityTools)
 
         if allPedagos.count > 0 {
@@ -458,11 +465,6 @@ class HomeV2ViewController: UIViewController {
                 tableDTO.append(.cellPedago(pedago: pedago))
             }
         }
-//        if allGroups.count > 0 {
-//            tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
-//            tableDTO.append(.cellGroup(groups: allGroups))
-//            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
-//        }
         
         self.ui_table_view.reloadData()
         self.handleEnhancedOnboardingReturn()
@@ -579,18 +581,15 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 let matchedRequests = userRequests.filter { $0.smalltalk != nil }
                 let pendingRequests = userRequests.filter { $0.smalltalk == nil }
 
-                // Ajouter les matched
                 for req in matchedRequests {
                     dto.append(.talking(req))
                 }
 
-                // Ajouter waiting s'il y en a
                 let hasWaiting = !pendingRequests.isEmpty
                 if hasWaiting {
                     dto.append(.waiting)
                 }
 
-                // Conditions d'affichage du bouton create
                 let shouldAddCreate = matchedRequests.count < 3 && !hasWaiting
                 if shouldAddCreate {
                     dto.append(.create)
@@ -605,16 +604,50 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.delegate = self
                 return cell
             }
+        case .cellWelcomeJourney(let viewModel):
+            if let cell = tableView.dequeueReusableCell(withIdentifier: HomeWelcomeJourneyCell.identifier) as? HomeWelcomeJourneyCell {
+                viewModel.onStepTapped = { [weak self] stepType in
+                    self?.handleWelcomeJourneyStep(stepType)
+                }
+                cell.configure(viewModel: viewModel, parentViewController: self)
+                return cell
+            }
         }
         return UITableViewCell()
     }
     
+    private func handleWelcomeJourneyStep(_ stepType: WelcomeJourneyStepType) {
+        switch stepType {
+        case .video:
+            let modalVC = WelcomeVideoModalViewController()
+            modalVC.modalPresentationStyle = .overFullScreen
+            modalVC.modalTransitionStyle = .crossDissolve
+            modalVC.onComplete = { [weak self] in
+                self?.initHome()
+            }
+            modalVC.onDismissOnly = { [weak self] in
+                self?.initHome()
+            }
+            self.present(modalVC, animated: true)
+
+        case .webinar:
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .firstStep
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+
+        case .papotages:
+            let vc = WelcomeEventsListViewController()
+            vc.eventType = .papotages
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableDTO[indexPath.row] {
-        case .cellTitle(_, _):
-            return
-        case .cellAction(let action):
-            return
+        case .cellTitle(_, _): return
+        case .cellAction(_): return
         case .cellSeeAll(let seeAllType):
             switch seeAllType {
             case .seeAllDemand:
@@ -635,10 +668,8 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 AnalyticsLoggerManager.logEvent(name: Action__Home__Pedago)
                 DeepLinkManager.showRessourceListUniversalLink()
             }
-        case .cellEvent(_):
-            return
-        case .cellGroup(_):
-            return
+        case .cellEvent(_): return
+        case .cellGroup(_): return
         case .cellPedago(let pedago):
             AnalyticsLoggerManager.logEvent(name: Action_Home_Article)
             showPedagogic(pedagogic: pedago)
@@ -668,43 +699,29 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellHZ:
             AnalyticsLoggerManager.logEvent(name: Action_Home_Buffet)
             return
-        case .cellInitialPedago(_):
-            return
-        case .cellSmallTalk(let userRequests): break
-            return
-        case .cellSolidarityTools:
-            return
+        case .cellInitialPedago(_): return
+        case .cellSmallTalk(_): return
+        case .cellSolidarityTools: return
+        case .cellWelcomeJourney(_): return
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tableDTO[indexPath.row] {
-        case .cellTitle(_, _):
-            return UITableView.automaticDimension
-        case .cellAction(_):
-            return 215
-        case .cellSeeAll(_):
-            return UITableView.automaticDimension
-        case .cellEvent(_):
-            return 215
-        case .cellGroup(_):
-            return 152
-        case .cellPedago(_):
-            return UITableView.automaticDimension
-        case .cellMap:
-            return UITableView.automaticDimension
-        case .cellIAmLost(_):
-            return UITableView.automaticDimension
-        case .moderator(_, _):
-            return UITableView.automaticDimension
-        case .cellHZ:
-            return UITableView.automaticDimension
-        case .cellInitialPedago(pedagos: let pedagos):
-            return 115
-        case .cellSmallTalk(let userRequests):
-            return 260
-        case .cellSolidarityTools:
-            return UITableView.automaticDimension
+        case .cellTitle(_, _): return UITableView.automaticDimension
+        case .cellAction(_): return 215
+        case .cellSeeAll(_): return UITableView.automaticDimension
+        case .cellEvent(_): return 215
+        case .cellGroup(_): return 152
+        case .cellPedago(_): return UITableView.automaticDimension
+        case .cellMap: return UITableView.automaticDimension
+        case .cellIAmLost(_): return UITableView.automaticDimension
+        case .moderator(_, _): return UITableView.automaticDimension
+        case .cellHZ: return UITableView.automaticDimension
+        case .cellInitialPedago(_): return 115
+        case .cellSmallTalk(_): return 260
+        case .cellSolidarityTools: return UITableView.automaticDimension
+        case .cellWelcomeJourney(_): return UITableView.automaticDimension
         }
     }
 }
@@ -765,7 +782,6 @@ extension HomeV2ViewController {
         HomeService.getInitialResources { resources, error in
           if let resources = resources {
             self.initialPedagos.removeAll()
-              print("resource count ", resources.count)
             var pedagoReads = [PedagogicResource]()
             for resource in resources {
               if resource.isRead == false {
@@ -851,23 +867,6 @@ extension HomeV2ViewController {
                 }
                 let config = EnhancedOnboardingConfiguration.shared
                 config.preference = userHome.preference ?? ""
-//              TODO uncomment this when ok 
-//                if UserDefaults.currentUser?.addressPrimary == nil || userHome.preference == nil {
-//                    let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-//                    if let onboardingPageVC = storyboard.instantiateViewController(withIdentifier: "onboardingStart") as? OnboardingStartViewController {
-//                        onboardingPageVC.currentPhasePosition = 3
-//                        onboardingPageVC.shouldLaunchThird = true
-//                        
-//                        if let _user = UserDefaults.currentUser {
-//                            onboardingPageVC.temporaryUser = _user
-//                        }
-//                        if let window = UIApplication.shared.windows.first {
-//                            window.rootViewController = onboardingPageVC
-//                            window.makeKeyAndVisible()
-//                        }
-//                    }
-//                }
-                
                 AppManager.shared.isContributionPreference = self?.isContributionPreference ?? false
                 
                 if userHome.unclosedAction != nil {
@@ -1012,15 +1011,10 @@ extension HomeV2ViewController {
 // MARK: - HomeInitialPedagoCCDelegate
 extension HomeV2ViewController: HomeInitialPedagoCCDelegate {
     func goToPedago(pedago: PedagogicResource) {
-        // Supprimez l'élément cliqué de la liste initialPedagos
         if let index = initialPedagos.firstIndex(where: { $0.id == pedago.id }) {
             initialPedagos.remove(at: index)
         }
-        
-        // Rafraîchissez la section de la tableView contenant les initialPedagos
         configureDTO()
-        
-        // Naviguez vers les détails de la ressource pédagogique
         showPedagogic(pedagogic: pedago)
     }
 }
@@ -1071,7 +1065,6 @@ extension HomeV2ViewController: WelcomeThreeDelegate {
 // MARK: - MJAlertControllerDelegate
 extension HomeV2ViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        let actionType = self.userHome.unclosedAction?.actionType
         let actionId = self.userHome.unclosedAction?.id
         
         DispatchQueue.main.async {
@@ -1147,8 +1140,6 @@ extension HomeV2ViewController: PlaceViewControllerDelegate {
     func modifyPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         if let gplace = googlePlace, let placeId = gplace.placeID {
             UserService.updateUserAddressWith(placeId: placeId, isSecondaryAddress: false) { error in
-                if error?.error == nil {
-                }
             }
         }
     }
@@ -1209,17 +1200,14 @@ extension HomeV2ViewController: PopupBienCommunViewControllerDelegate {
     }
 }
 
-
 class AppManager {
     static let shared = AppManager()
     var isContributionPreference: Bool = false
     private init() {}
 }
 
-
 extension HomeV2ViewController {
     func presentOnboardingMode2IfNeeded() {
-
             let initialCoordinate: CLLocationCoordinate2D? = nil
             let initialLabel: String? = nil
             let initialRadiusKm = 20
@@ -1229,11 +1217,9 @@ extension HomeV2ViewController {
                 initialLabel: initialLabel,
                 initialRadiusKm: initialRadiusKm,
                 onConfirm: { [weak self] result in
-
                     self?.dismiss(animated: true)
                 },
                 onCancel: { [weak self] in
-                    // L’utilisateur a annulé → on ferme simplement
                     self?.dismiss(animated: true)
                 }
             )
@@ -1401,17 +1387,20 @@ extension HomeV2ViewController {
     }
     
     func runHomeEntryGatingIfNeeded() {
-        // Log pour le debug
         print("[HomeEntryGating] runHomeEntryGatingIfNeeded() called. hasRunEntryGating=\(hasRunEntryGating)")
         
-        // 1. Vérifie si déjà exécuté pour cette instance de vue
+        // SECURITE ANTI-CRASH: Empêche l'affichage d'une modale si une est déjà en cours
+        guard presentedViewController == nil else {
+            print("[HomeEntryGating] SKIP: A view controller is already being presented.")
+            return
+        }
+        
         guard !hasRunEntryGating else {
             print("[HomeEntryGating] SKIP: already ran for this Home instance")
             return
         }
         hasRunEntryGating = true
         
-        // 2. Vérifie si déjà affiché dans la session (RAM/AppDelegate)
         if let ad = UIApplication.shared.delegate as? AppDelegate {
             if ad.homeEntryGatingDidPresentCriticalThisSession ||
                 ad.homeEntryGatingDidPresentNotifThisSession ||
@@ -1421,18 +1410,15 @@ extension HomeV2ViewController {
             }
         }
         
-        // 3. Vérifie l'utilisateur
         guard let user = UserDefaults.currentUser else {
             print("[HomeEntryGating] STOP: UserDefaults.currentUser is nil")
             return
         }
         
-        // Préparation des données pour la zone
         let prefill = makeZonePrefillFromCurrentUser()
         let missingRole = !userHasRole(user)
         let missingZone = !userHasZone(user)
         
-        // 4. Critical Onboarding (Goal / Zone)
         if missingRole || missingZone {
             if missingRole {
                 print("[HomeEntryGating] DECISION: missing role/goal -> presentPhase3Onboarding()")
@@ -1453,12 +1439,13 @@ extension HomeV2ViewController {
             }
         }
         
-        // 5. Vérification des Notifications
         UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 
-                // Revérification session (au cas où ça a changé pendant l'appel asynchrone)
+                // SECURITE ANTI-CRASH de la closure async
+                guard self.presentedViewController == nil else { return }
+                
                 if let ad = UIApplication.shared.delegate as? AppDelegate {
                     if ad.homeEntryGatingDidPresentCriticalThisSession ||
                         ad.homeEntryGatingDidPresentNotifThisSession ||
@@ -1468,16 +1455,10 @@ extension HomeV2ViewController {
                 }
                 
                 if settings.authorizationStatus != .authorized && settings.authorizationStatus != .provisional {
-                    
-                    // --- COOKIE CHECK (iOS) ---
-                    // On vérifie sur le disque si on a DÉJÀ montré la demande auparavant
                     let notifPopupAlreadyShown = UserDefaults.standard.bool(forKey: "hasPresentedNotificationDemand")
                     
                     if !notifPopupAlreadyShown {
-                        // Cas: Jamais montré -> On affiche
                         print("[HomeEntryGating] DECISION: notif not allowed & never shown -> presentNotificationDemandViewController()")
-                        
-                        // IMPORTANT: On écrit le cookie MAINTENANT
                         UserDefaults.standard.set(true, forKey: "hasPresentedNotificationDemand")
                         UserDefaults.standard.synchronize()
                         
@@ -1487,13 +1468,10 @@ extension HomeV2ViewController {
                         self.presentNotificationDemandViewController()
                         return
                     } else {
-                        // Cas: Déjà montré -> On ne fait rien et on laisse couler vers le code suivant
                         print("[HomeEntryGating] SKIP: Notification demand already presented historically (Cookie found).")
                     }
-                    // --- FIN COOKIE CHECK ---
                 }
                 
-                // 6. Enhanced Onboarding
                 let needsEO = self.userNeedsEnhancedOnboarding(user)
                 let hasEO = self.hasLaunchedEnhancedOnboarding()
                 
@@ -1506,7 +1484,6 @@ extension HomeV2ViewController {
                     self.presentEnhancedOnboardingIntro()
                     return
                 }
-                
                 print("[HomeEntryGating] DECISION: nothing to do")
             }
         }

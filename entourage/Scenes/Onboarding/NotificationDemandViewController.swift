@@ -15,6 +15,8 @@ class NotificationDemandViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AnalyticsLoggerManager.logEvent(name: Onboard_notifications_view)
+
         ui_title.text = "notif_demand_title".localized
         ui_subtitle.text = "notif_demand_subtitle".localized
         configureOrangeButton(ui_btn_accept_notif, withTitle: "notif_demand_btn_accept".localized)
@@ -70,6 +72,7 @@ class NotificationDemandViewController: UIViewController {
     }
     
     @objc func didTapAcceptNotif() {
+        AnalyticsLoggerManager.logEvent(name: Onboard_notifications_click_enable)
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, error in
             DispatchQueue.main.async {
                 if granted {
@@ -85,6 +88,7 @@ class NotificationDemandViewController: UIViewController {
     }
 
     @objc func didTapDisableNotif() {
+        AnalyticsLoggerManager.logEvent(name: Onboard_notifications_click_skip)
         // L'utilisateur refuse explicitement les notifications
         goHomeMain()
     }

@@ -130,7 +130,6 @@
 		025E917427F3619300D4A7A8 /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E917327F3619300D4A7A8 /* ReportUserViewController.swift */; };
 		025FFE0927DB980600783E8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0827DB980600783E8D /* Main.storyboard */; };
 		025FFE0B27DBAD5100783E8D /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0A27DBAD5100783E8D /* ApiKeys.plist */; };
-		025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0C27DBB18D00783E8D /* entourage-Info.plist */; };
 		0260E9D62936402100242A89 /* Intros.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0260E9D52936402100242A89 /* Intros.xcassets */; };
 		0260E9D82936434000242A89 /* IntroCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0260E9D72936434000242A89 /* IntroCarouselViewController.swift */; };
 		0262997927905FB700D84A6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262997827905FB700D84A6A /* Constants.swift */; };
@@ -374,6 +373,11 @@
 		02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */; };
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
+		241A6AEC2F6C3229005BF63B /* WelcomeVideoModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AEB2F6C3229005BF63B /* WelcomeVideoModalViewController.swift */; };
+		241A6AED2F6C3229005BF63B /* HomeWelcomeJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AE92F6C3229005BF63B /* HomeWelcomeJourneyView.swift */; };
+		241A6AEE2F6C3229005BF63B /* HomeWelcomeJourneyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AE82F6C3229005BF63B /* HomeWelcomeJourneyCell.swift */; };
+		241A6AEF2F6C3229005BF63B /* WelcomeJourneyCelebrationPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241A6AEA2F6C3229005BF63B /* WelcomeJourneyCelebrationPopupViewController.swift */; };
+		241A6AF02F6C3429005BF63B /* entourage-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0C27DBB18D00783E8D /* entourage-Info.plist */; };
 		2421081A2F4C97EB004D74E2 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108192F4C97EB004D74E2 /* BirthdayViewController.swift */; };
 		2421081C2F4CA9C8004D74E2 /* birthday_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 2421081B2F4CA9C8004D74E2 /* birthday_animation.json */; };
 		242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */; };
@@ -384,12 +388,16 @@
 		2432FE572F5825450033E711 /* HomeCellActionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */; };
 		2432FE592F5831A00033E711 /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2432FE582F5831A00033E711 /* AnimationUtils.swift */; };
 		244715262F15307400F8BFD1 /* AssociationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244715252F15307400F8BFD1 /* AssociationPresenter.swift */; };
+		247A2E752F7D34E400DB1661 /* WelcomeEventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A2E742F7D34E400DB1661 /* WelcomeEventsListView.swift */; };
+		247A2E772F7D351E00DB1661 /* WelcomeEventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */; };
 		24832E6C2F63011D00A78F03 /* CellCreateSmallTalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */; };
 		2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248360292F2A483300CAD0C7 /* UILabel+Animation.swift */; };
+		24B68C9B2F6847FA00B35F25 /* ConversationStaffWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */; };
 		24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 24CFFF392EF1828D0003509F /* SVProgressHUD */; };
 		24EAAA8A2F0BB94B002F2A41 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
 		24EAAA8C2F0E4FC0002F2A41 /* AssociationPresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */; };
 		24F3EF252F61D135005AD389 /* AddressAutocompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */; };
+		24F46AE62F8650A200A88B91 /* congrat_short_anim 2.json in Resources */ = {isa = PBXBuildFile; fileRef = 24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */; };
 		260377FC2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */; };
 		26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */; };
 		26043D952CE4EAB600F4083F /* ChoiceDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */; };
@@ -559,7 +567,6 @@
 		26BEEECB2C00C32B00169FBA /* EnahancedOnboardingButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BEEEC02C00C32B00169FBA /* EnahancedOnboardingButtonCell.swift */; };
 		26BEEECC2C00C32B00169FBA /* EnhancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BEEEC12C00C32B00169FBA /* EnhancedViewController.swift */; };
 		26BEEECD2C00C32B00169FBA /* EnhancedOnboardingIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BEEEC22C00C32B00169FBA /* EnhancedOnboardingIntro.swift */; };
-		26BEEECF2C00CE3800169FBA /* EventLastDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BEEECE2C00CE3800169FBA /* EventLastDayViewController.swift */; };
 		26BEEED12C06180D00169FBA /* congrats_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 26BEEED02C06180D00169FBA /* congrats_animation.json */; };
 		26BFC99E2ACD485600FDA030 /* HomeCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BFC99D2ACD485600FDA030 /* HomeCellAction.swift */; };
 		26BFC9A02ACD4DB400FDA030 /* HomeCellAction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BFC99F2ACD4DB400FDA030 /* HomeCellAction.xib */; };
@@ -997,6 +1004,10 @@
 		02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodHomeGroupCell.swift; sourceTree = "<group>"; };
 		02FE55B42939F6020076F57A /* OnboardingEndCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndCell.swift; sourceTree = "<group>"; };
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
+		241A6AE82F6C3229005BF63B /* HomeWelcomeJourneyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWelcomeJourneyCell.swift; sourceTree = "<group>"; };
+		241A6AE92F6C3229005BF63B /* HomeWelcomeJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWelcomeJourneyView.swift; sourceTree = "<group>"; };
+		241A6AEA2F6C3229005BF63B /* WelcomeJourneyCelebrationPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeJourneyCelebrationPopupViewController.swift; sourceTree = "<group>"; };
+		241A6AEB2F6C3229005BF63B /* WelcomeVideoModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVideoModalViewController.swift; sourceTree = "<group>"; };
 		242108192F4C97EB004D74E2 /* BirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
 		2421081B2F4CA9C8004D74E2 /* birthday_animation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = birthday_animation.json; sourceTree = "<group>"; };
 		242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSolidarityToolsCell.swift; sourceTree = "<group>"; };
@@ -1007,10 +1018,14 @@
 		2432FE552F5825450033E711 /* HomeCellActionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellActionCollectionViewCell.xib; sourceTree = "<group>"; };
 		2432FE582F5831A00033E711 /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
 		244715252F15307400F8BFD1 /* AssociationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresenter.swift; sourceTree = "<group>"; };
+		247A2E742F7D34E400DB1661 /* WelcomeEventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeEventsListView.swift; sourceTree = "<group>"; };
+		247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeEventsListViewController.swift; sourceTree = "<group>"; };
 		24832E6B2F63011D00A78F03 /* CellCreateSmallTalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCreateSmallTalkView.swift; sourceTree = "<group>"; };
 		248360292F2A483300CAD0C7 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
+		24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationStaffWarningView.swift; sourceTree = "<group>"; };
 		24EAAA8B2F0E4FBF002F2A41 /* AssociationPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationPresentationCell.swift; sourceTree = "<group>"; };
 		24F3EF242F61D135005AD389 /* AddressAutocompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAutocompleteViewModel.swift; sourceTree = "<group>"; };
+		24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "congrat_short_anim 2.json"; sourceTree = "<group>"; };
 		260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionSmokeTestViewController.swift; sourceTree = "<group>"; };
 		26043D922CE4EA6F00F4083F /* ChoiceDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDayCell.swift; sourceTree = "<group>"; };
 		26043D942CE4EAB600F4083F /* ChoiceDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChoiceDayCell.xib; sourceTree = "<group>"; };
@@ -1476,6 +1491,7 @@
 		0243DCC928AF8D0800273679 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
+				24B68C9A2F6847FA00B35F25 /* ConversationStaffWarningView.swift */,
 				26E25EF72E8E99D40073B46A /* imagelist */,
 				2698D2A52E40B34600B1A422 /* cellConversation */,
 				2649A4B22D7F57DB00FD100E /* cells */,
@@ -1604,6 +1620,7 @@
 		025D876C278DF44800909101 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				24F46AE52F8650A200A88B91 /* congrat_short_anim 2.json */,
 				2421081B2F4CA9C8004D74E2 /* birthday_animation.json */,
 				26BEEED02C06180D00169FBA /* congrats_animation.json */,
 				2636B9632A7BA199007EE1B2 /* anim_rugby.json */,
@@ -2351,6 +2368,7 @@
 		266B26372ABB16BC00C8EAD8 /* HomeV2 */ = {
 			isa = PBXGroup;
 			children = (
+				247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */,
 				26BEEECE2C00CE3800169FBA /* EventLastDayViewController.swift */,
 				266B263A2ABB17A600C8EAD8 /* homev2cells */,
 				266B26382ABB16CF00C8EAD8 /* HomeV2ViewController.swift */,
@@ -2363,6 +2381,10 @@
 		266B263A2ABB17A600C8EAD8 /* homev2cells */ = {
 			isa = PBXGroup;
 			children = (
+				241A6AE82F6C3229005BF63B /* HomeWelcomeJourneyCell.swift */,
+				241A6AE92F6C3229005BF63B /* HomeWelcomeJourneyView.swift */,
+				241A6AEA2F6C3229005BF63B /* WelcomeJourneyCelebrationPopupViewController.swift */,
+				241A6AEB2F6C3229005BF63B /* WelcomeVideoModalViewController.swift */,
 				242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */,
 				242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */,
 				268ADBD02DD48C1700031C6F /* HomeSmallTalkCell.swift */,
@@ -2384,6 +2406,7 @@
 				2694A7492ACD78D60042CFCA /* HomeEventHorizontalCollectionCell.xib */,
 				2694A74B2ACD90D70042CFCA /* HomeGroupCell.swift */,
 				2694A74D2ACD92510042CFCA /* HomeGroupCell.xib */,
+				247A2E742F7D34E400DB1661 /* WelcomeEventsListView.swift */,
 				2674FEB82ACD96BE0013D674 /* HomeGroupHorizontalCollectionCell.swift */,
 				2674FEBA2ACD96EB0013D674 /* HomeGroupHorizontalCollectionCell.xib */,
 				2674FEBC2ACD999A0013D674 /* HomeCellPedago.swift */,
@@ -2748,6 +2771,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				241A6AF02F6C3429005BF63B /* entourage-Info.plist in Resources */,
 				2644F1E82C2ADBB000039A07 /* CellMainFilter.xib in Resources */,
 				26BEEEC42C00C32B00169FBA /* EnhancedOnboardingCollectionCell.xib in Resources */,
 				02FB5455287DC38300E4B9FA /* EventDetailFullGroupTitleCell.xib in Resources */,
@@ -2787,7 +2811,7 @@
 				26C70B422B2B5D6F005C8846 /* CellGroupV2.xib in Resources */,
 				26F03C972A1B850C00450A61 /* WelcomeOneContentMain.xib in Resources */,
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
-				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
+				24F46AE62F8650A200A88B91 /* congrat_short_anim 2.json in Resources */,
 				26BEEECA2C00C32B00169FBA /* EnhancedOnboardingTitle.xib in Resources */,
 				021FD96E2876F12E00D3AA54 /* EventListSectionCell.xib in Resources */,
 				0243DCC828AF832D00273679 /* Messages.storyboard in Resources */,
@@ -3127,6 +3151,10 @@
 				02CCE68227D7968800D6976C /* MainProfileSettingsViewController.swift in Sources */,
 				021D2F3B289969460034D855 /* ActionCreateValidateViewController.swift in Sources */,
 				0268C255285A2B1400294055 /* FloatyDelegate.swift in Sources */,
+				241A6AEC2F6C3229005BF63B /* WelcomeVideoModalViewController.swift in Sources */,
+				241A6AED2F6C3229005BF63B /* HomeWelcomeJourneyView.swift in Sources */,
+				241A6AEE2F6C3229005BF63B /* HomeWelcomeJourneyCell.swift in Sources */,
+				241A6AEF2F6C3229005BF63B /* WelcomeJourneyCelebrationPopupViewController.swift in Sources */,
 				02B57D9827FC4329005A567B /* ReportUserPageViewController.swift in Sources */,
 				026819C3278E10DA00A98A4A /* User.swift in Sources */,
 				26C2C91A2DDDFEF800C8F320 /* SmallTalkNoBandFoundViewController.swift in Sources */,
@@ -3183,6 +3211,7 @@
 				26BB4D4A2CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift in Sources */,
 				2483602A2F2A483300CAD0C7 /* UILabel+Animation.swift in Sources */,
 				262820D52D49069A00A61C30 /* MainStatUserCell.swift in Sources */,
+				247A2E752F7D34E400DB1661 /* WelcomeEventsListView.swift in Sources */,
 				029D25332865FA5F00147F77 /* EventDatesCell.swift in Sources */,
 				24832E6C2F63011D00A78F03 /* CellCreateSmallTalkView.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
@@ -3190,6 +3219,7 @@
 				024131CB2862022100561FB4 /* EventCreateMainViewController.swift in Sources */,
 				261174FE29A670CB00735E9A /* ReportGroupChoosePageViewController.swift in Sources */,
 				268ADBD12DD48C1700031C6F /* HomeSmallTalkCell.swift in Sources */,
+				24B68C9B2F6847FA00B35F25 /* ConversationStaffWarningView.swift in Sources */,
 				02C54ADF2885BD4A00754222 /* EventFiltersViewController.swift in Sources */,
 				2630F61C2C21D320007BAE56 /* HomeInitialPedagoCell.swift in Sources */,
 				02A92C2828980F8C000DFF95 /* ActionAddPhotoViewController.swift in Sources */,
@@ -3205,6 +3235,7 @@
 				2619E14B2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift in Sources */,
 				02F578CD289AD4060040685C /* ActionContribDetailHomeCell.swift in Sources */,
 				02EB0B46292E1F3100CEB739 /* ParamsNotifsViewController.swift in Sources */,
+				247A2E772F7D351E00DB1661 /* WelcomeEventsListViewController.swift in Sources */,
 				0258E4F9288AAF1A000F107B /* ActionsService.swift in Sources */,
 				02C3ABF2279AB53800817B82 /* Extensions_UserDefaults.swift in Sources */,
 				02E2A9A5292FDDAD0037BA53 /* ProfileEditBlockedUsersViewController.swift in Sources */,
@@ -3292,7 +3323,6 @@
 				26BEEEC52C00C32B00169FBA /* EnhancedOnboardingCollectionCell.swift in Sources */,
 				02C9B4AA27E21BF70026450A /* ParamsAboutViewController.swift in Sources */,
 				02CCE69027D7B96700D6976C /* MainUserProfileTopCell.swift in Sources */,
-				26BEEECF2C00CE3800169FBA /* EventLastDayViewController.swift in Sources */,
 				02F5279B2799A1F300929431 /* GuideCells.swift in Sources */,
 				26B032F92D8C3CA300203CAD /* OnboardingPhase3TitleCell.swift in Sources */,
 				266B26282AB8BBA100C8EAD8 /* MyEventCollectionViewCell.swift in Sources */,

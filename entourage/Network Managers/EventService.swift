@@ -695,7 +695,7 @@ struct EventService:ParsingDataCodable {
         }
     }
 
-    static func getWelcomeEvent(completion: @escaping (Event?) -> Void) {
+    static func getWelcomeEvents(completion: @escaping ([Event]?) -> Void) {
         guard let token = UserDefaults.token else {return}
         let endpoint = String.init(format: kAPIEventWelcome, token)
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, _ in
@@ -704,12 +704,12 @@ struct EventService:ParsingDataCodable {
                 return
             }
 
-            let wrapper = try? JSONDecoder().decode(OutingWrapper.self, from: data)
-            completion(wrapper?.outing)
+            let events:[Event]? = self.parseDatas(data: data, key: "outings")
+            completion(events)
         }
     }
 
-    static func getWebinarEvent(completion: @escaping (Event?) -> Void) {
+    static func getWebinarEvents(completion: @escaping ([Event]?) -> Void) {
         guard let token = UserDefaults.token else {return}
         let endpoint = String.init(format: kAPIEventSensibilisation, token)
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, _ in
@@ -718,10 +718,25 @@ struct EventService:ParsingDataCodable {
                 return
             }
 
-            let wrapper = try? JSONDecoder().decode(OutingWrapper.self, from: data)
-            completion(wrapper?.outing)
+            let events:[Event]? = self.parseDatas(data: data, key: "outings")
+            completion(events)
         }
     }
+
+    static func getPapotagesEvents(completion: @escaping ([Event]?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String.init(format: kAPIEventPapotages, token)
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, _ in
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+
+            let events:[Event]? = self.parseDatas(data: data, key: "outings")
+            completion(events)
+        }
+    }
+
     // MARK: - Admin actions on members (participate / cancel / photo acceptance)
 
     static func participateForUser(eventId: Int,

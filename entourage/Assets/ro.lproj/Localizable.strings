@@ -1665,3 +1665,52 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_moderator_subtitle" = "Fac parte din echipa Entourage și sunt aici să te însoțesc. Nu ezita dacă ai întrebări! 🤗";
 "eventCreatephase3_swiftUI_title_limit" = "Evenimentul are un număr limitat de locuri?";
 "eventCreatephase3_swiftUI_title_place" = "Locație";
+
+"conversation_staff_warning_message" = "The team is taking a break... 🌙 In case of emergency: 15, 18, or 115. For immediate help, your neighbors are in the group ! 🏠 We will answer you quickly.";
+"conversation_staff_warning_group_link" = "group";
+
+/* Welcome Journey */
+"home_v2_welcome_title" = "Your welcome journey";
+"home_v2_welcome_progress" = "%d out of %d step(s) completed";
+"home_v2_welcome_microcopy_0" = "Let's get started 💛";
+"home_v2_welcome_microcopy_1" = "You're off to a great start ✨";
+"home_v2_welcome_microcopy_2" = "Just one more step to join the community 🎉";
+"home_v2_welcome_microcopy_3" = "Onboarding complete! You are now part of the community!";
+"home_v2_welcome_video_title" = "Start with the welcome video";
+"home_v2_welcome_video_subtitle" = "Discover the Entourage spirit and see how to take concrete action against isolation.";
+"home_v2_welcome_video_btn" = "Watch video";
+"home_v2_welcome_video_completed_title" = "Start with the welcome video";
+"home_v2_welcome_video_completed_subtitle" = "Discover the Entourage spirit and see how to take concrete action against isolation.";
+"home_v2_welcome_webinar_title" = "Sign up for the onboarding webinar";
+"home_v2_welcome_webinar_subtitle" = "Discover the app in 45 min with our team and ask any questions.";
+"home_v2_welcome_webinar_btn" = "Sign up";
+"home_v2_welcome_webinar_completed_title" = "Sign up for the onboarding webinar";
+"home_v2_welcome_webinar_completed_subtitle" = "Discover the app in 45 min with our team and ask any questions.";
+"home_v2_welcome_papotages_title" = "Join a chat session";
+"home_v2_welcome_papotages_subtitle" = "Every Tuesday at 6pm, a friendly video session to chat with other members.";
+"home_v2_welcome_papotages_btn" = "Join";
+"home_v2_welcome_papotages_completed_title" = "Join a chat session";
+"home_v2_welcome_papotages_completed_subtitle" = "Every Tuesday at 6pm, a friendly video session to chat with other members.";
+"home_v2_welcome_video_modal_title" = "Discover the Entourage spirit";
+"home_v2_welcome_video_modal_desc" = "In this video, you'll discover how we create social connection and fight against isolation. Join a caring community where every action counts.\n\nTake 2 minutes to discover the Entourage spirit.";
+"home_v2_welcome_video_modal_btn" = "Continue";
+"home_v2_welcome_celebration_title" = "Congratulations!";
+"home_v2_welcome_celebration_desc" = "Your onboarding journey is complete. You now have all the tools to take action and create connections around you.";
+"home_v2_welcome_celebration_btn" = "Let's go!";
+"home_v2_welcome_todo" = "To do";
+"home_v2_welcome_done" = "Done";
+
+"home_title_tools" = "Instrumentele tale de solidaritate";
+"home_tools_map" = "Harta locurilor de solidaritate";
+"home_tools_pedago" = "Resurse utile";
+"home_tools_charter" = "Carta etică Entourage";
+"welcome_video_cta" = "Urmărește videoclipul";
+"welcome_step3_title" = "Discuții între membri";
+"welcome_welcome_list_title" = "Primii pași pe Entourage";
+"welcome_welcome_list_subtitle" = "Familiarizează-te cu aplicația și pune-i echipei toate întrebările tale — în grupuri mici, printr-un apel video de 45 de minute.";
+"welcome_papotages_list_title" = "Discuții de solidaritate";
+"welcome_papotages_list_subtitle" = "Discuții libere în subgrupuri de 2 până la 3 persoane, moderate de un voluntar instruit sau de un membru al echipei. Poți rămâne cât timp dorești. În fiecare marți la ora 18:00.";
+"welcome_webinar_list_title" = "Sesiuni de conștientizare Entourage";
+"welcome_webinar_list_subtitle" = "Echipa Entourage îți oferă cheile pentru a înțelege lumea străzii și soluțiile de ajutor existente în timpul unui atelier online de 1 oră.";
+"welcome_firststep_list_title" = "Primii pași pe Entourage";
+"welcome_firststep_list_subtitle" = "Familiarizează-te cu aplicația și pune-i echipei toate întrebările tale — în grupuri mici, printr-un apel video de 45 de minute.";

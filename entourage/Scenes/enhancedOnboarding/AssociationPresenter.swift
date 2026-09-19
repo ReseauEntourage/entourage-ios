@@ -35,7 +35,7 @@ class AssociationPresenter {
                            newImage: UIImage?) {
         
         // 1. Si on a une image, on commence par le flow d'upload
-        if let image = newImage, let imageData = image.jpegData(compressionQuality: 0.8) {
+        if let image = newImage, let imageData = image.normalizedImage().jpegData(compressionQuality: 0.8) {
             
             AssociationService.getPresignedUploadUrl(contentType: "image/jpeg") { [weak self] uploadKey, presignedUrl, error in
                 // CORRECTION : On s'assure de bien récupérer le uploadKey ici

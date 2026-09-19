@@ -432,3 +432,25 @@ let View_SmallTalk_Charter = "View__SmallTalk__Charter"
 
 // Visio
 let Action_SmallTalk_Visio_Icon = "Action__SmallTalk__Visio_Icon"
+// ONBOARDING tracking added
+let Onboard_name_click_next = "Clic__Next__Onboarding__InputNames"
+
+let Onboard_code_click_new_code = "Clic__New__Code__Onboarding__InputCode"
+let Onboard_code_click_contact = "Clic__Contact__Onboarding__InputCode"
+let Onboard_code_click_next = "Clic__Next__Onboarding__InputCode"
+
+let Onboard_profile_click_next = "Clic__Next__Onboarding__Profile"
+
+let Onboard_asso_view = "View__Onboarding__AssoSearch"
+let Onboard_asso_click_back = "Clic__Back__Onboarding__AssoSearch"
+let Onboard_asso_click_next = "Clic__Next__Onboarding__AssoSearch"
+
+let Onboard_location_view = "View__Onboarding__Location"
+let Onboard_location_click_back = "Clic__Back__Onboarding__Location"
+let Onboard_location_click_next = "Clic__Next__Onboarding__Location"
+
+let Onboard_end_click_start = "Clic__Start__Onboarding__Confirmation"
+
+let Onboard_notifications_view = "View__Onboarding__Notifications"
+let Onboard_notifications_click_enable = "Clic__Enable__Onboarding__Notifications"
+let Onboard_notifications_click_skip = "Clic__Skip__Onboarding__Notifications"

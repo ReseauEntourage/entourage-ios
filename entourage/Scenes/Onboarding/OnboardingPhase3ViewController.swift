@@ -217,6 +217,7 @@ final class OnboardingPhase3ViewController: UIViewController {
     // MARK: - Actions
 
     @objc private func onNext() {
+        AnalyticsLoggerManager.logEvent(name: Onboard_profile_click_next)
         dismissKeyboard()
         guard userTypeSelected != .none else { return }
 
