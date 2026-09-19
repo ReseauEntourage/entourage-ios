@@ -108,7 +108,11 @@ struct UniversalLinkManager {
             if pathElements.count > 1 {
                 let subEntity = pathElements[1]
                 
-                if subEntity == "chat_messages" && pathElements.count > 3 {
+                if subEntity == "national" {
+                    let vc = WelcomeNationalGroupsListViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    AppState.getTopViewController()?.present(vc, animated: true)
+                } else if subEntity == "chat_messages" && pathElements.count > 3 {
                     DeepLinkManager.showNeighborhoodDetailMessageUniversalLink(instanceId: pathElements[2], postId: pathElements[3])
                 } else {
                     DeepLinkManager.showNeighborhoodDetailUniversalLink(id: subEntity)
