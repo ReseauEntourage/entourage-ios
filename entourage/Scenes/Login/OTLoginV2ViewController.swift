@@ -85,6 +85,9 @@ private struct AccessoryTextField: UIViewRepresentable {
         if uiView.text != text.wrappedValue {
             uiView.text = text.wrappedValue
         }
+        if uiView.placeholder != placeholder {
+            uiView.placeholder = placeholder
+        }
         // Mise à jour dynamique pour le toggle mot de passe
         if uiView.isSecureTextEntry != isSecureTextEntry {
             uiView.isSecureTextEntry = isSecureTextEntry
@@ -199,10 +202,7 @@ final class LoginViewModel: ObservableObject {
     @Published var showResendConfirmation: Bool = false
     
     // Constants
-    let countries: [CountryCode] = [
-        CountryCode(country: "France", code: "+33", flag: "🇫🇷"),
-        CountryCode(country: "Belgique", code: "+32", flag: "🇧🇪")
-    ]
+    let countries: [CountryCode] = allCountryCodes
     private let minimumCharacters = 9
     
     // External delegates (Navigation callbacks)
@@ -212,7 +212,7 @@ final class LoginViewModel: ObservableObject {
 
     init() {
         // Default Country logic
-        self.selectedCountry = countries.first ?? CountryCode(country: "France", code: "+33", flag: "🇫🇷")
+        self.selectedCountry = countries.first ?? defaultCountryCode
     }
     
     // MARK: - Keychain Logic
@@ -440,7 +440,7 @@ struct LoginView: View {
                             }
                             
                             // Champ numéro
-                            BoxedTextField(placeholder: "login_phone_placeholder".localized, text: $vm.phone)
+                            BoxedTextField(placeholder: vm.selectedCountry.exampleNumber, text: $vm.phone)
                         }
                     }
                     

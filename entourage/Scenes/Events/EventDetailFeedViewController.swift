@@ -75,6 +75,8 @@ class EventDetailFeedViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshEvent), name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+
         super.viewDidLoad()
         SVProgressHUD.show()
         ui_tableview.dataSource = self

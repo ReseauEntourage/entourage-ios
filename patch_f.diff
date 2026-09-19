@@ -1,0 +1,13 @@
+<<<<<<< SEARCH
+    func goBack() {
+        self.navigationController?.dismiss(animated: true) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+        }
+    }
+=======
+    func goBack() {
+        self.navigationController?.dismiss(animated: true) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RefreshEventDetail"), object: nil)
+        }
+    }
+>>>>>>> REPLACE

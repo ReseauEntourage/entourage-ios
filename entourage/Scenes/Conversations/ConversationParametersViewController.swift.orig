@@ -29,8 +29,6 @@ class ConversationParametersViewController: BasePopViewController {
         case signal
         case blockUser
         case leave
-        case deleteConversation
-        case leaveEvent
     }
     private var rows: [Row] = []
 
@@ -41,7 +39,7 @@ class ConversationParametersViewController: BasePopViewController {
 
         let title = isSmallTalkMode ? "small_talk_params_title".localized : "conversation_params_title".localized
         ui_top_view.populateView(title: title,
-                                 titleFont: ApplicationTheme.getFontNunitoRegular(size: 15),
+                                 titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
                                  titleColor: .black,
                                  delegate: self,
                                  backgroundColor: .appBeigeClair,
@@ -71,9 +69,6 @@ class ConversationParametersViewController: BasePopViewController {
         result.append(.signal)
         if isOneToOne && !isSeveral {
             if !imBlocker { result.append(.blockUser) }
-            result.append(.deleteConversation)
-        } else if isEvent {
-            result.append(.leaveEvent)
         } else {
             result.append(.leave)
         }
@@ -147,20 +142,8 @@ class ConversationParametersViewController: BasePopViewController {
                                              titleStyle: ApplicationTheme.getFontCourantBoldBlanc(),
                                              bgColor: .appOrangeLight,
                                              cornerRadius: -1)
-
-        var alertTitle = "params_delete_discussion_pop_title".localized
-        var alertMessage = "params_delete_discussion_pop_message".localized
-
-        if isEvent {
-            alertTitle = "params_leave_event_pop_title".localized
-            alertMessage = "params_leave_event_pop_message".localized
-        } else if isSmallTalkMode {
-            alertTitle = "params_leave_group_pop_title".localized
-            alertMessage = "params_leave_group_pop_message".localized
-        }
-
-        customAlert.configureAlert(alertTitle: alertTitle,
-                                   message: alertMessage,
+        customAlert.configureAlert(alertTitle: "params_leave_conv_pop_title".localized,
+                                   message: "params_leave_conv_pop_message".localized,
                                    buttonrightType: buttonAccept,
                                    buttonLeftType: buttonCancel,
                                    titleStyle: ApplicationTheme.getFontCourantBoldOrange(),
@@ -289,6 +272,7 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             cell.populateCell(title: isOneToOne ? "conv_param_title_profil".localized
                                                : "conv_param_title_members".localized,
                               subtitle: nil,
+                              isTitleOrange: false,
                               pictoStr: "ic_user_conv")
             return cell
 
@@ -296,6 +280,7 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_arrow", for: indexPath) as! ConversationParamCell
             cell.populateCell(title: "Photos de la conversation",
                               subtitle: nil,
+                              isTitleOrange: false,
                               pictoStr: "ic_param_gallery")
             return cell
 
@@ -305,8 +290,10 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
                                                : "conv_param_title_signal_action".localized,
                               subtitle: isOneToOne ? "conv_param_subtitle_signal".localized
                                                    : "conv_param_subtitle_signal_action".localized,
+                              isTitleOrange: true,
                               pictoStr: "ic_signal_orange",
-                              hideSeparator: false)
+                              hideSeparator: false,
+                              isIconOrange: true) // ✅ icône orange
             return cell
 
         case .blockUser:
@@ -314,51 +301,18 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             let subtitle = String(format: "conv_param_subtitle_block".localized, username)
             cell.populateCell(title: "conv_param_title_block".localized,
                               subtitle: subtitle,
+                              isTitleOrange: true,
                               pictoStr: "ic_user_block")
             return cell
 
         case .leave:
-            if isSmallTalkMode {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-                cell.populateCell(title: "conv_param_leave_group".localized,
-                                  subtitle: nil,
-                                  pictoStr: "ic_leave_conv",
-                                  hideSeparator: true)
-                return cell
-            } else if isOneToOne {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-                cell.populateCell(title: "conv_param_delete_discussion".localized,
-                                  subtitle: nil,
-                                  pictoStr: "ic_leave_conv",
-                                  hideSeparator: true)
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-                cell.populateCell(title: "conv_param_delete_discussion".localized,
-                                  subtitle: nil,
-                                  pictoStr: "ic_leave_conv",
-                                  hideSeparator: true)
-                return cell
-            }
-
-        case .deleteConversation:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-            cell.populateCell(title: "conv_param_delete_discussion".localized,
+            cell.populateCell(title: "conv_param_qui_action".localized,
                               subtitle: nil,
                               isTitleOrange: true,
                               pictoStr: "ic_leave_conv",
                               hideSeparator: true,
-                              isIconOrange: true)
-            return cell
-
-        case .leaveEvent:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
-            cell.populateCell(title: "conv_param_leave_event".localized,
-                              subtitle: nil,
-                              isTitleOrange: true,
-                              pictoStr: "ic_leave_conv",
-                              hideSeparator: true,
-                              isIconOrange: true)
+                              isIconOrange: true) // ✅ icône orange
             return cell
         }
     }
@@ -370,8 +324,6 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
         case .signal: self.signalConversation()
         case .blockUser: self.showPopBlockUser()
         case .leave: self.showPopLeave()
-        case .deleteConversation: self.showPopLeave()
-        case .leaveEvent: self.showPopLeave()
         }
     }
 }

@@ -19,7 +19,7 @@ class ConversationParamCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
+        ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_subtitle?.setupFontAndColor(style: ApplicationTheme.getFontChampDefault())
         ui_separator.isHidden = false
     }
@@ -37,14 +37,14 @@ class ConversationParamCell: UITableViewCell {
     func populateCell(
         title: String,
         subtitle: String?,
-        isTitleOrange: Bool,
+        isTitleOrange: Bool = false, // Ignored
         pictoStr: String,
         hideSeparator: Bool = false,
-        isIconOrange: Bool = false // ✅ permet de forcer une icône orange
+        isIconOrange: Bool = false // Ignored
     ) {
         // Titre
         ui_title.text = title
-        ui_title.textColor = isTitleOrange ? .appOrange : .black
+        ui_title.textColor = .black
 
         // Sous-titre
         if let st = subtitle, !st.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -57,7 +57,7 @@ class ConversationParamCell: UITableViewCell {
         // Picto
         if let base = UIImage(named: pictoStr) {
             ui_picto.image = base.withRenderingMode(.alwaysTemplate)
-            ui_picto.tintColor = isIconOrange ? .appOrange : .black
+            ui_picto.tintColor = .black
         } else {
             ui_picto.image = nil
         }

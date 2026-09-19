@@ -139,8 +139,7 @@ class NeighborhoodUserCell: UITableViewCell {
         }
 
         // La visibilité de la checkbox dépend du rôle + règles signable
-        let canShowCheckbox = !isMe
-            && AppSignableManager.shared.signableEvent
+        let canShowCheckbox = AppSignableManager.shared.signableEvent
             && AppSignableManager.shared.signablePermission
         print("eho signable : " , AppSignableManager.shared.signableEvent)
         print("eho signable permission : " , AppSignableManager.shared.signablePermission)

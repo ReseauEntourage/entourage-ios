@@ -378,33 +378,37 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="view-disc-id">
-                        <rect key="frame" x="20" y="263" width="366" height="136"/>
+                        <rect key="frame" x="20" y="263" width="366" height="74"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_messages_top" translatesAutoresizingMaskIntoConstraints="NO" id="img-disc-id">
-                                <rect key="frame" x="16" y="16" width="44" height="44"/>
+                                <rect key="frame" x="16" y="15" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="h-disc-img"/>
                                     <constraint firstAttribute="width" constant="44" id="w-disc-img"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discussion de l'événement" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-disc-title">
+                                <rect key="frame" x="76" y="15" width="234" height="20.5"/>
+                                <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discussion de l'événement" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-disc-id">
-                                <rect key="frame" x="76" y="28" width="274" height="20.5"/>
+                                <rect key="frame" x="76" y="37.5" width="234" height="19"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-disc-id">
-                                <rect key="frame" x="76" y="76" width="206" height="50"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_next_orange" translatesAutoresizingMaskIntoConstraints="NO" id="img-disc-chevron">
+                                <rect key="frame" x="326" y="30.5" width="9" height="13"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="h-btn-disc"/>
+                                    <constraint firstAttribute="height" constant="13" id="h-disc-chevron"/>
+                                    <constraint firstAttribute="width" constant="9" id="w-disc-chevron"/>
                                 </constraints>
-                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
-                                <state key="normal" title="Button"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                        <real key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-disc-id">
+                                <rect key="frame" x="0.0" y="0.0" width="366" height="74"/>
+                                <state key="normal" title=""/>
                                 <connections>
                                     <action selector="action_go_to_discussion:" destination="lzF-C2-Z1g" eventType="touchUpInside" id="act-disc-id"/>
                                 </connections>
@@ -413,14 +417,20 @@
                         <color key="backgroundColor" name="beige_lighter"/>
                         <constraints>
                             <constraint firstItem="img-disc-id" firstAttribute="leading" secondItem="view-disc-id" secondAttribute="leading" constant="16" id="c1-disc"/>
-                            <constraint firstItem="img-disc-id" firstAttribute="top" secondItem="view-disc-id" secondAttribute="top" constant="16" id="c2-disc"/>
-                            <constraint firstItem="lbl-disc-id" firstAttribute="leading" secondItem="img-disc-id" secondAttribute="trailing" constant="16" id="c3-disc"/>
-                            <constraint firstItem="lbl-disc-id" firstAttribute="centerY" secondItem="img-disc-id" secondAttribute="centerY" id="c4-disc"/>
-                            <constraint firstAttribute="trailing" secondItem="lbl-disc-id" secondAttribute="trailing" constant="16" id="c5-disc"/>
-                            <constraint firstItem="btn-disc-id" firstAttribute="top" secondItem="lbl-disc-id" secondAttribute="bottom" constant="16" id="c6-disc"/>
-                            <constraint firstItem="btn-disc-id" firstAttribute="leading" secondItem="lbl-disc-id" secondAttribute="leading" id="c7-disc-center"/>
-                            <constraint firstAttribute="bottom" secondItem="btn-disc-id" secondAttribute="bottom" constant="20" id="c9-disc"/>
-                            <constraint firstAttribute="height" constant="146" id="h-view-disc"/>
+                            <constraint firstItem="img-disc-id" firstAttribute="centerY" secondItem="view-disc-id" secondAttribute="centerY" id="c2-disc"/>
+                            <constraint firstItem="lbl-disc-title" firstAttribute="leading" secondItem="img-disc-id" secondAttribute="trailing" constant="16" id="c3-disc"/>
+                            <constraint firstItem="lbl-disc-title" firstAttribute="top" secondItem="img-disc-id" secondAttribute="top" id="c4-disc"/>
+                            <constraint firstItem="img-disc-chevron" firstAttribute="leading" secondItem="lbl-disc-title" secondAttribute="trailing" constant="16" id="c5-disc"/>
+                            <constraint firstItem="lbl-disc-id" firstAttribute="leading" secondItem="img-disc-id" secondAttribute="trailing" constant="16" id="c6-disc"/>
+                            <constraint firstItem="lbl-disc-id" firstAttribute="top" secondItem="lbl-disc-title" secondAttribute="bottom" constant="2" id="c7-disc"/>
+                            <constraint firstItem="img-disc-chevron" firstAttribute="leading" secondItem="lbl-disc-id" secondAttribute="trailing" constant="16" id="c8-disc"/>
+                            <constraint firstAttribute="trailing" secondItem="img-disc-chevron" secondAttribute="trailing" constant="31" id="c9-disc"/>
+                            <constraint firstItem="img-disc-chevron" firstAttribute="centerY" secondItem="view-disc-id" secondAttribute="centerY" id="c10-disc"/>
+                            <constraint firstItem="btn-disc-id" firstAttribute="top" secondItem="view-disc-id" secondAttribute="top" id="c11-disc"/>
+                            <constraint firstItem="btn-disc-id" firstAttribute="leading" secondItem="view-disc-id" secondAttribute="leading" id="c12-disc"/>
+                            <constraint firstAttribute="trailing" secondItem="btn-disc-id" secondAttribute="trailing" id="c13-disc"/>
+                            <constraint firstAttribute="bottom" secondItem="btn-disc-id" secondAttribute="bottom" id="c14-disc"/>
+                            <constraint firstAttribute="height" constant="74" id="h-view-disc"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -500,6 +510,7 @@
                 <outlet property="ui_title" destination="klB-o1-C0m" id="RDE-wl-Ymg"/>
                 <outlet property="ui_view_association" destination="DwY-20-5TL" id="HZX-l1-aAP"/>
                 <outlet property="ui_view_discussion_box" destination="view-disc-id" id="view-disc-id-conn"/>
+                <outlet property="ui_label_discussion_title" destination="lbl-disc-title" id="lbl-disc-title-conn"/>
                 <outlet property="ui_label_discussion_desc" destination="lbl-disc-id" id="lbl-disc-id-conn"/>
                 <outlet property="ui_view_organised_by" destination="BfH-VT-nZB" id="E5B-Jh-TwT"/>
                 <outlet property="ui_view_place_limit" destination="YLQ-hv-Eb2" id="ght-bZ-LHL"/>
@@ -515,6 +526,7 @@
         <image name="ic_event_time" width="20" height="20"/>
         <image name="ic_location" width="20" height="20"/>
         <image name="ic_messages_top" width="75" height="66"/>
+        <image name="ic_next_orange" width="9" height="13"/>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -817,4 +817,24 @@ struct EventService:ParsingDataCodable {
         }
     }
 
+    static func updateUnsubscribedParticipants(eventId: Int, offerHelp: Int, askForHelp: Int, completion: @escaping (_ error: EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else { return }
+        var endpoint = kAPIUpdateUnsubscribedParticipants
+        endpoint = String(format: endpoint, "\(eventId)", token, offerHelp, askForHelp)
+
+        Logger.print("Endpoint updateUnsubscribedParticipants: \(endpoint)")
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
+            let http = resp as? HTTPURLResponse
+            let statusCode = http?.statusCode ?? 500
+            Logger.print("Response updateUnsubscribedParticipants: \(statusCode)")
+
+            if error == nil && statusCode < 300 {
+                DispatchQueue.main.async { completion(nil) }
+            } else {
+                DispatchQueue.main.async { completion(error) }
+            }
+        }
+    }
+
 }
