@@ -24,6 +24,7 @@ class WelcomeVideoModalViewController: UIViewController {
 
     // Data from Backend
     private var welcomeVideoUrl: String?
+    private var welcomeVideoResourceId: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,6 +186,7 @@ class WelcomeVideoModalViewController: UIViewController {
         HomeService.getWelcomeResource { [weak self] pedago, error in
             guard let self = self, let pedago = pedago else { return }
             self.welcomeVideoUrl = pedago.url
+            self.welcomeVideoResourceId = pedago.id
             if let url = self.welcomeVideoUrl {
                 self.loadCleanVideo(url: url)
             }
@@ -241,13 +243,22 @@ class WelcomeVideoModalViewController: UIViewController {
     }
 
     @objc private func onContinueTap() {
-        UserDefaults.standard.set(true, forKey: "hasWatchedWelcomeVideo")
-        UserDefaults.standard.synchronize()
+        continueButton.isEnabled = false
 
-        animateDismiss { [weak self] in
-            self?.dismiss(animated: false) {
-                self?.onComplete?()
+        let doComplete = { [weak self] in
+            self?.animateDismiss {
+                self?.dismiss(animated: false) {
+                    self?.onComplete?()
+                }
             }
+        }
+
+        if let resourceId = welcomeVideoResourceId {
+            HomeService.postResourceRead(resourceId: resourceId) { _ in
+                DispatchQueue.main.async { doComplete() }
+            }
+        } else {
+            doComplete()
         }
     }
 

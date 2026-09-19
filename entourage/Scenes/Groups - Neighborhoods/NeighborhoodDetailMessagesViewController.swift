@@ -726,12 +726,7 @@ extension NeighborhoodDetailMessagesViewController: MessageCellSignalDelegate {
 
     func showUser(userId: Int?) {
         guard let userId = userId else { return }
-        if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-            .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-            profileVC.userIdToDisplay = "\(userId)"
-            profileVC.modalPresentationStyle = .fullScreen
-            present(profileVC, animated: true)
-        }
+        presentOtherUserProfile(userId: "\(userId)")
     }
 
     func showWebUrl(url: URL) {

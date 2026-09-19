@@ -323,6 +323,8 @@
 "home_button_map" = "Hartă";
 "home_button_list" = "Listă";
 "home_button_filters" = "Filtre";
+"guide_button_air_conditioned" = "Locuri climatizate";
+"detail_poi_air_conditioned" = "Loc climatizat";
 "home_button_filters_on" = "Filtrele activate";
 //Solidarity Guide
 "button_reset_filters" = "Anulează filtrele";
@@ -1245,6 +1247,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "Trimite";
 "messaging_message_no_message" = "Încă 0 mesaje";
 
+"messaging_empty_state_title" = "C'est le début de votre échange";
+"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
+Choisissez un sujet pour démarrer.";
+"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
+"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
+"messaging_empty_chip_question" = "Poser une question 💬";
+"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
+"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
+"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
+"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
+"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+
 "message_title_new_conv" = "Conversație nouă";
 "message_subtitle_new_conv" = "Încă nu ați interacționat cu acest utilizator. Dacă există o problemă, puteți raporta conversația în setări.";
 "message_error_create_conversation" = "Eroare la crearea conversației";
@@ -1403,6 +1417,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_map" = "Descoperiți adrese utile";
 "home_v2_subtitle_map" = "Toate structurile de solidaritate din apropiere";
 "home_v2_button_map" = "Harta locurilor de solidaritate din apropiere";
+"home_v2_climatisation_title" = "Locuri solidare climatizate";
+"home_v2_climatisation_subtitle" = "Găsiți un loc răcoros lângă dumneavoastră în timpul valului de căldură.";
+"home_v2_climatisation_badge" = "Special val de căldură";
 
 "home_v2_title_pedago" = "Tot ce trebuie să știi pentru a acționa";
 "home_v2_subtitle_pedago" = "Combaterea precarității este ca orice, se poate învăța!";
@@ -1728,3 +1745,76 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_small_talk_pending_plus_singular" = "+%d matching";
 "home_small_talk_start_new" = "+ Start a new discussion (%d/3)";
 "home_small_talk_view_button" = "See";
+
+// Badges
+"badges_section_title" = "Insignele mele";
+"badges_see_all" = "Vezi tot";
+"badges_none_yet" = "Nicio insignă obținută încă.";
+"badges_list_title" = "Insignele mele";
+"badges_list_main_title" = "Insignele tale Entourage";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
+"badges_list_subtitle" = "%d obținute, %d în curs, %d de descoperit. Fiecare insignă recompensează o acțiune concretă în comunitatea ta.";
+"badges_section_obtained" = "Obținute %d/%d";
+"badges_section_in_progress" = "În curs %d/%d";
+"badges_section_not_started" = "Neîncepute %d/%d";
+"badges_empty_start_label" = "ÎNCEPE CU";
+"badges_faq_link" = "Cum funcționează insignele?";
+"badge_detail_title" = "Detalii insignă";
+"badge_how_it_works_title" = "CUM FUNCȚIONEAZĂ";
+"badge_what_it_means_title" = "CE REPREZINTĂ";
+"badge_mechanism_title" = "MECANISM";
+"badge_obtained" = "Obținută";
+"badge_obtained_on" = "Obținută la %@";
+"badge_not_obtained" = "Neobținută încă";
+"badge_your_progress" = "Progresul tău";
+"badge_see_all_badges" = "Vezi toate insignele mele";
+"badge_unlocked_bravo" = "Bravo %@!";
+"badge_unlocked_subtitle" = "Tocmai ai deblocat insigna";
+"badge_unlocked_see_badges" = "Vezi insignele mele";
+"badge_unlocked_continue" = "Continuă";
+"badge_mechanism_irreversible" = "Ireversibil — odată obținută, este pentru totdeauna.";
+"badge_mechanism_reversible" = "Reversibilă — se reînnoiește la fiecare 90 de zile.";
+"badge_premier_pas_title" = "Primul pas";
+"badge_premier_pas_description_short" = "Finalizează onboarding-ul și efectuează prima ta acțiune.";
+"badge_premier_pas_how_it_works" = "Finalizează onboarding-ul și realizează prima ta acțiune în aplicație.";
+"badge_premier_pas_what_it_means" = "Această insignă celebrează sosirea ta în comunitate.";
+"badge_premier_pas_cta" = "Fă o primă acțiune";
+"badge_premier_pas_unlocked_message" = "Tocmai ai făcut primul tău pas în comunitatea Entourage. Prezența ta contează deja, bine ai venit printre noi.";
+"badge_premier_lien_title" = "Prima legătură";
+"badge_premier_lien_description_short" = "Schimbă un prim mesaj privat cu un alt membru";
+"badge_premier_lien_how_it_works" = "Schimbă primul tău mesaj privat cu un alt membru.";
+"badge_premier_lien_what_it_means" = "Primul mesaj direct cu un alt membru marchează un moment important.";
+"badge_premier_lien_cta" = "Discută cu cineva";
+"badge_premier_lien_unlocked_message" = "Tocmai ai schimbat primul tău mesaj cu un alt membru. Fiecare legătură țesută ține comunitatea vie.";
+"badge_diffuseur_liens_title" = "Creator de întâlniri";
+"badge_diffuseur_liens_description_short" = "Creează 3 evenimente în 90 de zile";
+"badge_diffuseur_liens_how_it_works" = "Creează sau co-animează cel puțin 3 evenimente în ultimele 90 de zile.";
+"badge_diffuseur_liens_what_it_means" = "Organizarea întâlnirilor necesită timp și energie. Această insignă valorifică pe cei care fac comunitatea să se miște.";
+"badge_diffuseur_liens_cta" = "Creează un eveniment";
+"badge_diffuseur_liens_unlocked_message" = "Ai organizat 3 evenimente în ultimele 90 de zile. Bravo!";
+"badge_as_papotage_title" = "As al papotage-ului";
+"badge_as_papotage_description_short" = "Participă la 3 Papotage-uri solidare în 90 de zile";
+"badge_as_papotage_how_it_works" = "Participă la cel puțin 3 Papotage-uri solidare în ultimele 90 de zile.";
+"badge_as_papotage_what_it_means" = "Papotage-urile sunt inima bătătoare a comunității online. Prezența regulată contribuie la menținerea unui spațiu viu de conversație.";
+"badge_as_papotage_cta" = "Alătură-te unui papotage";
+"badge_as_papotage_unlocked_message" = "3 Papotages solidare în o lună și jumătate — mulțumim pentru angajamentul tău constant.";
+"badge_tisseur_liens_title" = "Țesător de legături";
+"badge_tisseur_liens_description_short" = "Fii activ/ă în grupurile tale 3 săptămâni din 4";
+"badge_tisseur_liens_how_it_works" = "Fii activ/ă în grupurile de vecini cel puțin 3 din ultimele 4 săptămâni.";
+"badge_tisseur_liens_what_it_means" = "Regularitatea creează încredere. Această insignă onorează pe cei care sunt prezenți săptămână de săptămână.";
+"badge_tisseur_liens_cta" = "Mergi la grupurile mele";
+"badge_tisseur_liens_unlocked_message" = "3 săptămâni active din 4 — mulțumim pentru angajamentul tău constant.";
+"badges_all_title" = "Toate insignele %d/%d";
+
+"badges_intro_title" = "Fiecare gest contează";
+"badges_intro_subtitle" = "Acțiunile tale țes legături.\nInsignele tale le păstrează amintirea.";
+"badges_intro_point1_title" = "Acționează în ritmul tău";
+"badges_intro_point1_body" = "Fără presiune: fiecare gest în comunitate contează.";
+"badges_intro_point2_title" = "Fiecare acțiune lasă o urmă";
+"badges_intro_point2_body" = "Prin schimburile și participările tale, insignele marchează etapele.";
+"badges_intro_point3_title" = "Parcursul tău este vizibil";
+"badges_intro_point3_body" = "Insignele tale apar pe profilul tău și îți spun povestea în comunitate.";
+"badges_intro_cta" = "Descoperă insignele mele";
+"badges_intro_later" = "Mai târziu";
+
+"badge_cta_see_badges" = "Vezi insignele mele";

@@ -48,6 +48,11 @@ class NetworkManager {
         }
     }
     
+    private func postAPIErrorNotification(statusCode: Int) {
+        let userInfo: [String: Any] = ["statusCode": statusCode]
+        NotificationCenter.default.post(name: NSNotification.Name(kNotificationAPIError), object: nil, userInfo: userInfo)
+    }
+
     func requestGet(endPoint:String,headers:[String:String]?, params:[String:String]?, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
         let urlStr = getBaseUrl() + endPoint
         guard var url = URL(string: urlStr) else {return}
@@ -85,6 +90,7 @@ class NetworkManager {
                     return
                 }
                 else {
+                    self.postAPIErrorNotification(statusCode: resp.statusCode)
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
                         if let _json = json["error"] as? [String:AnyObject] {
                             let entourageError = EntourageNetworkError(json:_json)
@@ -96,11 +102,11 @@ class NetworkManager {
             }
             completionHandler(nil,response,nil)
         }
-        
+
         task.resume()
         session.finishTasksAndInvalidate()
     }
-    
+
     func requestPost(endPoint:String,headers:[String:String]?, body:Data?, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
         
         let url = getBaseUrl() + endPoint
@@ -151,6 +157,9 @@ class NetworkManager {
                     return
                 }
                 else {
+                    if endPoint != kAPILogin {
+                        self.postAPIErrorNotification(statusCode: resp.statusCode)
+                    }
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
                         if let _json = json["error"] as? [String:AnyObject] {
                             let entourageError = EntourageNetworkError(json:_json)
@@ -212,6 +221,7 @@ class NetworkManager {
                     //TODO: Call Ask new token ?
                 }
                 else {
+                    self.postAPIErrorNotification(statusCode: resp.statusCode)
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
                         if let _json = json["error"] as? [String:AnyObject] {
                             let entourageError = EntourageNetworkError(json:_json)
@@ -223,11 +233,11 @@ class NetworkManager {
             }
             completionHandler(nil,response,nil)
         }
-        
+
         task.resume()
         session.finishTasksAndInvalidate()
     }
-    
+
     func requestDelete(endPoint:String,headers:[String:String]?, body:Data?, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
         let url = getBaseUrl() + endPoint
         
@@ -266,6 +276,7 @@ class NetworkManager {
                     //TODO: Call Ask new token ?
                 }
                 else {
+                    self.postAPIErrorNotification(statusCode: resp.statusCode)
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
                         if let _json = json["error"] as? [String:AnyObject] {
                             let entourageError = EntourageNetworkError(json:_json)
@@ -277,11 +288,11 @@ class NetworkManager {
             }
             completionHandler(nil,response,nil)
         }
-        
+
         task.resume()
         session.finishTasksAndInvalidate()
     }
-    
+
     func requestPut(endPoint:String,headers:[String:String]?, body:Data?, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
         let url = getBaseUrl() + endPoint
         guard let url = URL(string: url) else {
@@ -318,6 +329,7 @@ class NetworkManager {
                     //TODO: Call Ask new token ?
                 }
                 else {
+                    self.postAPIErrorNotification(statusCode: resp.statusCode)
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
                         if let _json = json["error"] as? [String:AnyObject] {
                             let entourageError = EntourageNetworkError(json:_json)
@@ -329,11 +341,11 @@ class NetworkManager {
             }
             completionHandler(nil,response,nil)
         }
-        
+
         task.resume()
         session.finishTasksAndInvalidate()
     }
-    
+
     static func getUserToken() -> [String:String]? {
         if let token = UserDefaults.currentUser?.token {
             return ["token":token]

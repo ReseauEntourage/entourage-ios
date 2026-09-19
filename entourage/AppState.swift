@@ -95,11 +95,14 @@ struct AppState {
     }
     
     static func clearDatas(withKeychain:Bool) {
-        
+
         UserDefaults.currentUser = nil
         UserDefaults.temporaryUser = nil
         UserDefaults.pushToken = nil
-        
+
+        UserDefaults.standard.removeObject(forKey: "hasShownWelcomeCelebration")
+        UserDefaults.standard.removeObject(forKey: "hasShownWelcomeNationalGroupSnackbar")
+
         if withKeychain {
             SimpleKeychain.A0SimpleKeychain().deleteEntry(forKey: kKeychainPhone)
             SimpleKeychain.A0SimpleKeychain().deleteEntry(forKey: kKeychainPassword)

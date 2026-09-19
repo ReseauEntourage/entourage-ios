@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 //MARK: - OTGuideDetailTopTableViewCell -
@@ -19,24 +20,77 @@ class OTGuideDetailTopTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_picto_4: UIImageView!
     @IBOutlet weak var ui_picto_5: UIImageView!
     @IBOutlet weak var ui_picto_6: UIImageView!
-    
+
     @IBOutlet weak var ui_picto_sapce_1: UIImageView!
     @IBOutlet weak var ui_picto_sapce_2: UIImageView!
     @IBOutlet weak var ui_picto_sapce_3: UIImageView!
     @IBOutlet weak var ui_picto_sapce_4: UIImageView!
     @IBOutlet weak var ui_picto_sapce_5: UIImageView!
     @IBOutlet weak var ui_picto_sapce_6: UIImageView!
-    
-    
+
+    @IBOutlet weak var ui_constraint_picto_top: NSLayoutConstraint!
+
+    private let airConditionedBadgeSpacing: CGFloat = 8
+    private let airConditionedBadgeHeight: CGFloat = 22
+
+    private lazy var airConditionedBadge: UIView = {
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.backgroundColor = UIColor.appBeige
+        container.layer.cornerRadius = airConditionedBadgeHeight / 2
+        container.clipsToBounds = true
+
+        let icon = UIImageView(image: UIImage(named: "picto_air_conditioned")?.withRenderingMode(.alwaysTemplate))
+        icon.tintColor = UIColor.appOrange
+        icon.contentMode = .scaleAspectFit
+        icon.translatesAutoresizingMaskIntoConstraints = false
+
+        let label = UILabel()
+        label.text = "detail_poi_air_conditioned".localized
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textColor = UIColor.appOrange
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        container.addSubview(icon)
+        container.addSubview(label)
+
+        NSLayoutConstraint.activate([
+            icon.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 8),
+            icon.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            icon.widthAnchor.constraint(equalToConstant: 14),
+            icon.heightAnchor.constraint(equalToConstant: 14),
+            label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 6),
+            label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -8),
+            label.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            container.heightAnchor.constraint(equalToConstant: airConditionedBadgeHeight)
+        ])
+
+        return container
+    }()
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        contentView.addSubview(airConditionedBadge)
+        NSLayoutConstraint.activate([
+            airConditionedBadge.leadingAnchor.constraint(equalTo: ui_title.leadingAnchor),
+            airConditionedBadge.topAnchor.constraint(equalTo: ui_title.bottomAnchor, constant: airConditionedBadgeSpacing)
+        ])
+    }
+
     func populateCell(poi:MapPoi) {
         ui_title.text = poi.name
         ui_description.text = poi.details
-        
+
+        let isAirConditioned = poi.airConditioned == true
+        airConditionedBadge.isHidden = !isAirConditioned
+        ui_constraint_picto_top.constant = isAirConditioned ? airConditionedBadgeSpacing + airConditionedBadgeHeight + airConditionedBadgeSpacing : airConditionedBadgeSpacing
+
         for i in 0...5 {
             getPicto(position: i)?.isHidden = true
             getPictoSpacer(position: i)?.isHidden = true
         }
-        
+
         if let _catIds = poi.categories_id {
             for i in 0..<_catIds.count {
                 getPicto(position: i)?.isHidden = false
@@ -44,7 +98,7 @@ class OTGuideDetailTopTableViewCell: UITableViewCell {
                 let _catId = _catIds[i]
                 let imageName = String.init(format: "picto_cat_filter-%d", _catId)
                 getPicto(position: i)?.image = UIImage(named: imageName)
-                
+
             }
         }
     }

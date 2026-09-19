@@ -39,6 +39,8 @@ class MainGuideViewController: UIViewController {
     var mapWasCenteredOnUserLocation = false
     var isShowMap = false
     var isFirstLaunch = true
+    var isAirConditionedFilterOn = false
+    var airConditionedButton:UIButton!
     
     @objc var isFromDeeplink = false
      let kNotificationShowFeedsMapCurrentLocation = "NotificationFeedsMapCurrentLocation"
@@ -49,6 +51,7 @@ class MainGuideViewController: UIViewController {
         
         setup()
         setupButtons()
+        setupAirConditionedButton()
         fillCategories()
         configureOrangeButton(ui_button_filters, withTitle: "home_button_filters".localized)
         configureOrangeButton(ui_button_map_list, withTitle: "home_button_list".localized)
@@ -313,15 +316,50 @@ class MainGuideViewController: UIViewController {
         showCurrentLocationButton.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         
         showCurrentLocationButton.addTarget(self, action: #selector(requestCurrentLocation), for: .touchUpInside)
-        
+
         headerView.addSubview(mapView)
         headerView.addSubview(showCurrentLocationButton)
         headerView.bringSubviewToFront(showCurrentLocationButton)
         headerView.sendSubviewToBack(mapView)
-        
+
         return headerView
     }
-    
+
+    func updateAirConditionedButtonAppearance() {
+        airConditionedButton.backgroundColor = isAirConditionedFilterOn ? .appOrange : UIColor.lightGray
+        airConditionedButton.tintColor = .white
+    }
+
+    func setupAirConditionedButton() {
+        self.airConditionedButton = UIButton(type: .system)
+        airConditionedButton.translatesAutoresizingMaskIntoConstraints = false
+
+        airConditionedButton.setImage(UIImage(named: "picto_air_conditioned")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        airConditionedButton.setTitle("guide_button_air_conditioned".localized, for: .normal)
+        airConditionedButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        airConditionedButton.setTitleColor(.white, for: .normal)
+        airConditionedButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 12)
+        airConditionedButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
+        airConditionedButton.clipsToBounds = true
+        airConditionedButton.layer.cornerRadius = 15
+
+        airConditionedButton.layer.shadowColor = UIColor.black.cgColor
+        airConditionedButton.layer.shadowOpacity = 0.5
+        airConditionedButton.layer.shadowRadius = 4.0
+        airConditionedButton.layer.masksToBounds = false
+        airConditionedButton.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+
+        airConditionedButton.addTarget(self, action: #selector(toggleAirConditionedFilter), for: .touchUpInside)
+        updateAirConditionedButtonAppearance()
+
+        self.view.addSubview(airConditionedButton)
+        NSLayoutConstraint.activate([
+            airConditionedButton.leadingAnchor.constraint(equalTo: ui_button_filters.leadingAnchor),
+            airConditionedButton.topAnchor.constraint(equalTo: ui_button_filters.bottomAnchor, constant: 10),
+            airConditionedButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+
     func setupButtons() {
         addEffectToButton(customButton:  self.ui_button_filters)
         addEffectToButton(customButton: self.ui_button_map_list)
@@ -395,6 +433,18 @@ class MainGuideViewController: UIViewController {
     @objc func requestCurrentLocation() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationShowFeedsMapCurrentLocation), object: nil)
     }
+
+    @objc func toggleAirConditionedFilter() {
+        isAirConditionedFilterOn.toggle()
+        updateAirConditionedButtonAppearance()
+        clearMapAnnotations()
+        getPoiList()
+    }
+
+    func clearMapAnnotations() {
+        let annotationsToRemove = self.mapView.annotations.filter { !($0 is MKUserLocation) }
+        self.mapView.removeAnnotations(annotationsToRemove)
+    }
     
     @objc func handleTap(gesture:UITapGestureRecognizer) {
         Logger.print("Handle Tap ? \(gesture.state.rawValue) -- \(UIGestureRecognizer.State.ended.rawValue)")
@@ -418,7 +468,7 @@ class MainGuideViewController: UIViewController {
         let distance = getMapHeight()
         let categories = self.solidarityFilter.getActiveFilters()
         
-        PoiService.retrieveClustersAndPois(latitude: latitude, longitude: longitude, distance: distance, categoryIDs: categories, partnersFilters: nil) { [weak self] response, error in
+        PoiService.retrieveClustersAndPois(latitude: latitude, longitude: longitude, distance: distance, categoryIDs: categories, partnersFilters: nil, airConditioned: isAirConditionedFilterOn) { [weak self] response, error in
             SVProgressHUD.dismiss()
             guard let self = self else { return }
             self.isAllreadyCall = false

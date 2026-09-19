@@ -322,6 +322,8 @@
 "home_button_map" = "Map";
 "home_button_list" = "List";
 "home_button_filters" = "Filters";
+"guide_button_air_conditioned" = "Air-conditioned places";
+"detail_poi_air_conditioned" = "Air-conditioned place";
 "home_button_filters_on" = "Filters enabled";
 //"//Solidarity Guide" = "nan";
 "button_reset_filters" = "Cancel Filters";
@@ -669,6 +671,7 @@
 "neighborhood_add_post_image_title" = "Add a picture";
 "neighborhood_add_post_image_subtitle" = "- optional";
 "neighborhood_add_post_send_button" = "Share";
+"neighborhood_post_inspiration_title" = "Need some inspiration?";
 "neighborhood_add_post_title_image" = "Add a picture";
 "neighborhood_add_post_image_info_move" = "Move and zoom to adjust the photo.";
 "neighborhood_add_post_image_bt_validate" = "Confirm";
@@ -1239,6 +1242,18 @@
 "messaging_message_send" = "Send";
 "messaging_message_no_message" = "0 more messages";
 
+"messaging_empty_state_title" = "C'est le début de votre échange";
+"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
+Choisissez un sujet pour démarrer.";
+"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
+"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
+"messaging_empty_chip_question" = "Poser une question 💬";
+"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
+"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
+"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
+"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
+"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+
 "message_title_new_conv" = "New conversation";
 "message_subtitle_new_conv" = "You have not yet interacted with this user. If there is a problem, you can report the conversation in the settings.";
 "message_error_create_conversation" = "Error creating conversation";
@@ -1397,6 +1412,9 @@
 "home_v2_title_map" = "Discover useful addresses";
 "home_v2_subtitle_map" = "All solidarity structures nearby";
 "home_v2_button_map" = "Map of solidarity places";
+"home_v2_climatisation_title" = "Air-conditioned solidarity places";
+"home_v2_climatisation_subtitle" = "Find a cool place near you during the heatwave.";
+"home_v2_climatisation_badge" = "Heatwave special";
 
 "home_v2_title_pedago" = "Everything you need to know";
 "home_v2_subtitle_pedago" = "Fighting precarity, like everything else, can be learned!";
@@ -2044,3 +2062,84 @@
 "home_v2_welcome_national_title" = "Join a group that suits you";
 "home_v2_welcome_national_subtitle" = "Members all over France share your interests. Join them.";
 "home_v2_welcome_national_btn" = "Discover groups";
+
+// Badges
+"badges_section_title" = "My badges";
+"badges_see_all" = "See all";
+"badges_none_yet" = "No badges earned yet.";
+"badges_list_title" = "My badges";
+"badges_list_main_title" = "Your Entourage badges";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
+"badges_list_subtitle" = "%d earned, %d in progress, %d to discover. Each badge rewards a concrete action in your community.";
+"badges_section_obtained" = "Earned %d/%d";
+"badges_section_in_progress" = "In progress %d/%d";
+"badges_section_not_started" = "Not started %d/%d";
+"badges_empty_start_label" = "START WITH";
+"badges_empty_badge_title" = "The %@ badge";
+"badges_empty_cta" = "Let's go!";
+"badges_faq_link" = "How do badges work?";
+"badge_detail_title" = "Badge detail";
+"badge_how_it_works_title" = "HOW IT WORKS";
+"badge_what_it_means_title" = "WHAT IT MEANS";
+"badge_mechanism_title" = "MECHANISM";
+"badge_obtained" = "Earned";
+"badge_obtained_on" = "Earned on %@";
+"badge_not_obtained" = "Not yet earned";
+"badge_your_progress" = "Your progress";
+"badge_see_all_badges" = "See all my badges";
+"badge_unlocked_bravo" = "Bravo %@!";
+"badge_unlocked_subtitle" = "You just unlocked the badge";
+"badge_unlocked_see_badges" = "See my badges";
+"badge_unlocked_continue" = "Continue";
+"badge_mechanism_irreversible" = "Irreversible — once earned, it's yours forever.";
+"badge_mechanism_reversible" = "Reversible — renewed every 90 days.";
+"badge_premier_pas_title" = "First step";
+"badge_premier_pas_description_short" = "Complete your onboarding (interests, action wishes, help categories, availability) then perform your first action in the app.";
+"badge_premier_pas_hint" = "Just one action to earn this badge: join an event, send a message to a member, or share a mutual aid post.";
+"badge_premier_pas_how_it_works" = "Complete your onboarding (interests, action wishes, help categories, availability) then perform your first action in the app.";
+"badge_premier_pas_what_it_means" = "This badge celebrates your arrival in the community. It marks your first gesture — the one that turns a created account into a real intention.";
+"badge_premier_pas_cta" = "Take a first action";
+"badge_premier_pas_unlocked_message" = "You've just taken your first step in the Entourage community. Your presence already counts — welcome among us.";
+"badge_premier_lien_title" = "First connection";
+"badge_premier_lien_description_short" = "Exchange a first private message with another member";
+"badge_premier_lien_hint" = "A private exchange with another community member is all it takes to earn this badge.";
+"badge_premier_lien_how_it_works" = "Exchange your first private message with another member. Both need to send a message for the link to count.";
+"badge_premier_lien_what_it_means" = "The first direct message with another member marks an important milestone: moving from the collective to the relationship. That's often where the bond becomes real.";
+"badge_premier_lien_cta" = "Chat with someone";
+"badge_premier_lien_unlocked_message" = "You've just exchanged your first message with another member. Every link woven keeps the community alive.";
+"badge_diffuseur_liens_title" = "Meeting creator";
+"badge_diffuseur_liens_description_short" = "Create 3 events in 90 days";
+"badge_diffuseur_liens_hint" = "Create or co-host events over the last 90 days to earn this badge.";
+"badge_diffuseur_liens_how_it_works" = "Create or co-host at least 3 events (in-person or online) over the last 90 days. No minimum participant count required.";
+"badge_diffuseur_liens_what_it_means" = "Organising meetups takes time and energy. This badge values those who get the Entourage community moving by offering moments to connect.";
+"badge_diffuseur_liens_cta" = "Create an event";
+"badge_diffuseur_liens_unlocked_message" = "You organised 3 events over the last 90 days. You're making the Entourage community move — well done!";
+"badge_as_papotage_title" = "Chatter champion";
+"badge_as_papotage_description_short" = "Attend 3 solidarity Papotages in 90 days";
+"badge_as_papotage_hint" = "Take part in solidarity Papotages over the last 90 days to earn this badge.";
+"badge_as_papotage_how_it_works" = "Attend at least 3 solidarity Papotages in the last 90 days.";
+"badge_as_papotage_what_it_means" = "Papotages are the heartbeat of the online community. Being there regularly means contributing to a lively and warm space for conversation.";
+"badge_as_papotage_cta" = "Join a papotage";
+"badge_as_papotage_unlocked_message" = "3 solidarity Papotages in a month and a half — your regular presence creates bonds and spreads well-being. Thank you for your constant commitment.";
+"badge_tisseur_liens_title" = "Link weaver";
+"badge_tisseur_liens_description_short" = "Be active in your groups (posting, commenting, reacting) at least 3 weeks per month";
+"badge_tisseur_liens_hint" = "Be active in your groups at least 3 weeks per month to earn this badge.";
+"badge_tisseur_liens_how_it_works" = "Be active in your groups (by posting, commenting, reacting) at least 3 weeks per month";
+"badge_tisseur_liens_what_it_means" = "Regularity builds trust. This badge honours those who show up week after week, animating local life and maintaining the connection in their neighbourhood.";
+"badge_tisseur_liens_cta" = "Go to my groups";
+"badge_tisseur_liens_unlocked_message" = "3 active weeks out of 4 — you keep neighbourhood groups alive. Thank you for your constant commitment.";
+"badges_all_title" = "All badges %d/%d";
+
+"badges_intro_title" = "Every gesture counts";
+"badges_intro_subtitle" = "Your actions weave connections.\nYour badges keep their memory.";
+"badges_intro_point1_title" = "Act at your own pace";
+"badges_intro_point1_body" = "No pressure: every gesture in the community counts.";
+"badges_intro_point2_title" = "Every action leaves a mark";
+"badges_intro_point2_body" = "Through your exchanges and participation, badges mark the milestones.";
+"badges_intro_point3_title" = "Your journey is visible";
+"badges_intro_point3_body" = "Your badges appear on your profile and tell your story in the community.";
+"badges_intro_cta" = "Discover my badges";
+"badges_intro_later" = "Later";
+
+"badge_cta_see_badges" = "See my badges";
+"profile_description_placeholder" = "No description provided";

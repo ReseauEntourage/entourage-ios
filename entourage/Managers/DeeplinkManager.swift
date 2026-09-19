@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 struct DeepLinkManager {
@@ -209,13 +210,7 @@ struct DeepLinkManager {
     
     //MARK: - Navigation Actions -
     static func showUser(userId:Int) {
-        if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-            .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-            profileVC.userIdToDisplay = "\(userId)"
-            profileVC.isMe = false
-            profileVC.modalPresentationStyle = .fullScreen
-            AppState.getTopViewController()?.present(profileVC, animated: true)
-        }
+        AppState.getTopViewController()?.presentOtherUserProfile(userId: "\(userId)")
     }
     
     static func showPoi(id:Int) {
@@ -331,7 +326,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     vc.delegate = currentVc.self
                     currentVc.present(vc, animated: true)
                 }
@@ -349,7 +344,7 @@ struct DeepLinkManager {
                     let modalVC = WelcomeVideoModalViewController()
                     modalVC.modalPresentationStyle = .overFullScreen
                     modalVC.modalTransitionStyle = .crossDissolve
-                    if let homeVC = AppState.getTopViewController() as? HomeV2ViewController {
+                    if let homeVC = AppState.getTopViewController() as? HomeMainViewController {
                         modalVC.onComplete = { [weak homeVC] in
                             homeVC?.initHome()
                         }
@@ -368,7 +363,7 @@ struct DeepLinkManager {
                             let modalVC = WelcomeVideoModalViewController()
                             modalVC.modalPresentationStyle = .overFullScreen
                             modalVC.modalTransitionStyle = .crossDissolve
-                            if let homeVC = AppState.getTopViewController() as? HomeV2ViewController {
+                            if let homeVC = AppState.getTopViewController() as? HomeMainViewController {
                                 modalVC.onComplete = { [weak homeVC] in
                                     homeVC?.initHome()
                                 }
@@ -396,7 +391,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     vc.delegate = currentVc.self
                     currentVc.present(vc, animated: true)
                 }
@@ -408,7 +403,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomethreevc") as? WelcomeThreeViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     vc.delegate = currentVc.self
                     currentVc.present(vc, animated: true)
                 }
@@ -420,7 +415,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -431,7 +426,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomefivevc") as? WelcomeFiveViewController {
-                if let currentVc = AppState.getTopViewController() as? HomeV2ViewController{
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
                     currentVc.present(vc, animated: true)
                 }
             }
@@ -528,7 +523,7 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             if let vc = AppState.getTopViewController() {
                 if let _tabbar = vc.tabBarController as? MainTabbarViewController {
-                    if let homeVC = vc as? HomeV2ViewController {
+                    if let homeVC = vc as? HomeMainViewController {
                         homeVC.shouldLaunchEventPopup = eventId
                         _tabbar.showHome()
                     }
@@ -536,7 +531,7 @@ struct DeepLinkManager {
                 else{
                     vc.dismiss(animated: true) {
                         let _currentVc = AppState.getTopViewController()
-                        if let _home = _currentVc as? HomeV2ViewController{
+                        if let _home = _currentVc as? HomeMainViewController{
                             _home.shouldLaunchEventPopup = eventId
 
                         }
@@ -638,7 +633,7 @@ struct DeepLinkManager {
         }
     }
     static func showNeiborhoodListUniversalLink() {
-        if let vc = AppState.getTopViewController() as? HomeV2ViewController{
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
                 _tabbar.showMyNeighborhoods()
             }
@@ -705,10 +700,12 @@ struct DeepLinkManager {
     }
 
     static func showEventCreation() {
-        let sb = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "eventCreateVCMain") as? EventCreateMainViewController {
-            vc.modalPresentationStyle = .fullScreen
-            AppState.getTopViewController()?.present(vc, animated: true)
+        DispatchQueue.main.async {
+            let sb = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
+            if let vc = sb.instantiateViewController(withIdentifier: "eventCreateVCMain") as? EventCreateMainViewController {
+                vc.modalPresentationStyle = .fullScreen
+                AppState.getTopViewController()?.present(vc, animated: true)
+            }
         }
     }
 
@@ -735,7 +732,53 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
-    
+
+    static func showBadgesIntro() {
+        DispatchQueue.main.async {
+            var hostingVC: UIHostingController<BadgesIntroView>?
+            let view = BadgesIntroView(
+                onDiscover: { hostingVC?.dismiss(animated: true) },
+                onDismiss: { hostingVC?.dismiss(animated: true) }
+            )
+            hostingVC = UIHostingController(rootView: view)
+            hostingVC?.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(hostingVC!, animated: true)
+        }
+    }
+
+    static func showBadgeUnlocked(badgeTag: String) {
+        guard let badgeKey = BadgeKey(rawValue: badgeTag),
+              let definition = allBadgeDefinitions.first(where: { $0.key == badgeKey }) else {
+            print("❌ showBadgeUnlocked: no definition for tag '\(badgeTag)'")
+            return
+        }
+        let firstName = UserDefaults.currentUser?.firstname ?? ""
+        DispatchQueue.main.async {
+            var hostingVC: UIHostingController<BadgeUnlockedSheet>?
+            let sheet = BadgeUnlockedSheet(definition: definition, firstName: firstName, onSeeBadges: {
+                hostingVC?.dismiss(animated: true) {
+                    showBadgesList()
+                }
+            })
+            hostingVC = UIHostingController(rootView: sheet)
+            hostingVC?.modalPresentationStyle = .fullScreen
+            guard let top = AppState.getTopViewController() else {
+                print("❌ showBadgeUnlocked: no top VC")
+                return
+            }
+            print("✅ showBadgeUnlocked presenting on \(type(of: top))")
+            top.present(hostingVC!, animated: true)
+        }
+    }
+
+    static func showBadgesList(initialBadgeKey: BadgeKey? = nil) {
+        DispatchQueue.main.async {
+            let hostingVC = UIHostingController(rootView: BadgesListView(initialBadgeKey: initialBadgeKey))
+            hostingVC.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(hostingVC, animated: true)
+        }
+    }
+
 }
 
 enum RedirectionType {

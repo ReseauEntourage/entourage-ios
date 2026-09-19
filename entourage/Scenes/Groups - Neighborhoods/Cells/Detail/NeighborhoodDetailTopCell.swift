@@ -177,6 +177,10 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         button.layer.cornerRadius = 21
         button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 14)
         button.clipsToBounds = true
+        // Set insets in code to avoid first-load race with XIB deprecated edge insets
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
     }
     
     func populateCell(neighborhood: Neighborhood?, isFollowingGroup: Bool, isFromOnlyDetail: Bool, delegate: NeighborhoodDetailTopCellDelegate) {

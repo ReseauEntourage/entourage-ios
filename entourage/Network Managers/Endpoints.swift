@@ -102,7 +102,7 @@ let kAPIGetEventPostsMessage = "outings/%@/chat_messages?token=%@&page=%d&per=%d
 let kAPIJoinEvent = "outings/%@/users?token=%@"
 let kAPILeaveEvent = "outings/%@/users/%@?token=%@"
 let kAPIGetEventUsers = "outings/%@/users?token=%@"
-let kAPIEventCancel = "outings/%d?token=%@"
+let kAPIEventCancel = "outings/%d/cancel?token=%@"
 let kAPIEventCancelWithRecurrency = "outings/%d/batch_update?token=%@"
 let kAPISearchEvents = "outings?token=%@&page=%d&per=%d&q=%@"
 let kAPISearchMyEvents = "users/%@/outings?token=%@&page=%d&per=%d&q=%@"

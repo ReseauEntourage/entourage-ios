@@ -373,12 +373,7 @@ extension ConversationsMainHomeViewController: ConversationListMainCellDelegate 
         if case let .conversation(conversation) = dataSource[position] {
             guard let userId = conversation.user?.uid else { return }
 
-            if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-                .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-                profileVC.userIdToDisplay = "\(userId)"
-                profileVC.modalPresentationStyle = .fullScreen
-                self.present(profileVC, animated: true)
-            }
+            presentOtherUserProfile(userId: "\(userId)")
         }
     }
 }

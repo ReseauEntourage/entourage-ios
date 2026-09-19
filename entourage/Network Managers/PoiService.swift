@@ -54,11 +54,12 @@ struct PoiService:ParsingDataCodable {
             distance: Double,
             categoryIDs: String?,
             partnersFilters: String?,
+            airConditioned: Bool = false,
             completion: @escaping (_ response: ClusterPoiResponse?, _ error: EntourageNetworkError?) -> Void
         ) {
             // Vérification du token d'utilisateur
             guard let token = UserDefaults.token else { return }
-            
+
             // Construction des paramètres de la requête
             var params: [String: String] = [
                 "latitude": String(latitude),
@@ -66,13 +67,17 @@ struct PoiService:ParsingDataCodable {
                 "distance": String(distance),
                 "token": token
             ]
-            
+
             if let categoryIDs = categoryIDs {
                 params["category_ids"] = categoryIDs
             }
-            
+
             if let partnersFilters = partnersFilters {
                 params["partners_filters"] = partnersFilters
+            }
+
+            if airConditioned {
+                params["air_conditioned"] = "true"
             }
             
             // Utilisation du NetworkManager pour faire la requête GET

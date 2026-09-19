@@ -131,12 +131,26 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
             }
         }
         let _content = notif.getNotificationPushData()
+        print("🔔 notif context='\(notif.context ?? "nil")' instance='\(_content.instanceType)' tracking='\(_content.tracking ?? "nil")'")
+
         if _content.context == "outing_on_day_before"{
             delegate?.onEventLastDay(id: _content.instanceId)
             self.dismiss(animated: true)
             return
         }
-        
+
+        let rawContext = notif.context ?? ""
+        if BadgeKey(rawValue: rawContext) != nil {
+            print("🏅 badge context matched: \(rawContext)")
+            (self.navigationController ?? self).dismiss(animated: true) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    DeepLinkManager.showBadgeUnlocked(badgeTag: rawContext)
+                }
+            }
+            return
+        }
+        print("⚠️ no badge match for context '\(rawContext)', known keys: \(BadgeKey.allCases.map { $0.rawValue })")
+
         let presenter = self.navigationController?.presentingViewController ?? self.presentingViewController
         self.dismiss(animated: true) {
             print("eho notif " , notif.getNotificationPushData())

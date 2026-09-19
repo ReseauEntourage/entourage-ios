@@ -336,6 +336,8 @@
 "home_button_map" = "Carte";
 "home_button_list" = "Liste";
 "home_button_filters" = "Filtres";
+"guide_button_air_conditioned" = "Miejsca klimatyzowane";
+"detail_poi_air_conditioned" = "Miejsce klimatyzowane";
 "home_button_filters_on" = "Filtres activés";
 //Solidarity Guide
 "button_reset_filters" = "Annuler Filtres";
@@ -1253,6 +1255,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "Envoyer";
 "messaging_message_no_message" = "Pas encore de message";
 
+"messaging_empty_state_title" = "C'est le début de votre échange";
+"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
+Choisissez un sujet pour démarrer.";
+"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
+"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
+"messaging_empty_chip_question" = "Poser une question 💬";
+"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
+"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
+"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
+"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
+"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+
 "message_title_new_conv" = "Nouvelle conversation";
 "message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la conversation dans les paramètres.";
 "message_error_create_conversation" = "Erreur lors de la création de la conversation";
@@ -1411,6 +1425,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_map" = "Découvrir des adresses utiles";
 "home_v2_subtitle_map" = "Toutes les structures solidaires à proximité";
 "home_v2_button_map" = "Mapa miejsc solidarności";
+"home_v2_climatisation_title" = "Klimatyzowane miejsca solidarności";
+"home_v2_climatisation_subtitle" = "Znajdźcie Państwo chłodne miejsce w pobliżu podczas fali upałów.";
+"home_v2_climatisation_badge" = "Specjalnie na upały";
 
 "home_v2_title_pedago" = "Tout savoir pour passer à l‘action";
 "home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";
@@ -1839,3 +1856,76 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_small_talk_pending_plus_singular" = "+%d matching";
 "home_small_talk_start_new" = "+ Start a new discussion (%d/3)";
 "home_small_talk_view_button" = "See";
+
+// Badges
+"badges_section_title" = "Moje odznaki";
+"badges_see_all" = "Zobacz wszystkie";
+"badges_none_yet" = "Brak zdobytych odznak.";
+"badges_list_title" = "Moje odznaki";
+"badges_list_main_title" = "Twoje odznaki Entourage";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
+"badges_list_subtitle" = "%d zdobytych, %d w toku, %d do odkrycia. Każda odznaka nagradza konkretne działanie w Twojej społeczności.";
+"badges_section_obtained" = "Zdobyte %d/%d";
+"badges_section_in_progress" = "W toku %d/%d";
+"badges_section_not_started" = "Nierozpoczęte %d/%d";
+"badges_empty_start_label" = "ZACZNIJ OD";
+"badges_faq_link" = "Jak działają odznaki?";
+"badge_detail_title" = "Szczegóły odznaki";
+"badge_how_it_works_title" = "JAK TO DZIAŁA";
+"badge_what_it_means_title" = "CO TO OZNACZA";
+"badge_mechanism_title" = "MECHANIZM";
+"badge_obtained" = "Zdobyta";
+"badge_obtained_on" = "Zdobyta %@";
+"badge_not_obtained" = "Jeszcze nie zdobyta";
+"badge_your_progress" = "Twój postęp";
+"badge_see_all_badges" = "Zobacz wszystkie moje odznaki";
+"badge_unlocked_bravo" = "Brawo %@!";
+"badge_unlocked_subtitle" = "Właśnie odblokowałeś odznakę";
+"badge_unlocked_see_badges" = "Zobacz moje odznaki";
+"badge_unlocked_continue" = "Kontynuuj";
+"badge_mechanism_irreversible" = "Nieodwracalne — raz zdobyta, na zawsze.";
+"badge_mechanism_reversible" = "Odwracalna — odnawiana co 90 dni.";
+"badge_premier_pas_title" = "Pierwszy krok";
+"badge_premier_pas_description_short" = "Ukończ onboarding i wykonaj swoją pierwszą akcję.";
+"badge_premier_pas_how_it_works" = "Ukończ wdrożenie i wykonaj swoje pierwsze działanie w aplikacji.";
+"badge_premier_pas_what_it_means" = "Ta odznaka świętuje Twoje przybycie do społeczności.";
+"badge_premier_pas_cta" = "Wykonaj pierwsze działanie";
+"badge_premier_pas_unlocked_message" = "Właśnie zrobiłeś swój pierwszy krok w społeczności Entourage. Twoja obecność już się liczy, witaj wśród nas.";
+"badge_premier_lien_title" = "Pierwsze połączenie";
+"badge_premier_lien_description_short" = "Wymień pierwszą prywatną wiadomość z innym członkiem";
+"badge_premier_lien_how_it_works" = "Wymień swoją pierwszą prywatną wiadomość z innym członkiem.";
+"badge_premier_lien_what_it_means" = "Pierwsza bezpośrednia wiadomość z innym członkiem to ważny kamień milowy.";
+"badge_premier_lien_cta" = "Porozmawiaj z kimś";
+"badge_premier_lien_unlocked_message" = "Właśnie wymieniłeś swoją pierwszą wiadomość z innym członkiem. Każde nawiązane połączenie ożywia społeczność.";
+"badge_diffuseur_liens_title" = "Twórca spotkań";
+"badge_diffuseur_liens_description_short" = "Stwórz 3 wydarzenia w ciągu 90 dni";
+"badge_diffuseur_liens_how_it_works" = "Utwórz lub współorganizuj co najmniej 3 wydarzenia w ciągu ostatnich 90 dni.";
+"badge_diffuseur_liens_what_it_means" = "Organizowanie spotkań wymaga czasu i energii. Ta odznaka docenia tych, którzy napędzają społeczność Entourage.";
+"badge_diffuseur_liens_cta" = "Utwórz wydarzenie";
+"badge_diffuseur_liens_unlocked_message" = "Zorganizowałeś 3 wydarzenia w ciągu ostatnich 90 dni. Brawo!";
+"badge_as_papotage_title" = "Mistrz rozmów";
+"badge_as_papotage_description_short" = "Weź udział w 3 solidarnościowych Papotages w ciągu 90 dni";
+"badge_as_papotage_how_it_works" = "Weź udział w co najmniej 3 solidarnościowych Papotages w ostatnich 90 dniach.";
+"badge_as_papotage_what_it_means" = "Papotages to bijące serce społeczności online. Regularna obecność przyczynia się do tworzenia żywej przestrzeni rozmowy.";
+"badge_as_papotage_cta" = "Dołącz do papotage";
+"badge_as_papotage_unlocked_message" = "3 solidarnościowe Papotages w półtora miesiąca — dziękujemy za Twoje stałe zaangażowanie.";
+"badge_tisseur_liens_title" = "Tkacz więzi";
+"badge_tisseur_liens_description_short" = "Bądź aktywny/a w swoich grupach przez 3 z 4 tygodni";
+"badge_tisseur_liens_how_it_works" = "Bądź aktywny/a w swoich grupach sąsiedzkich przez co najmniej 3 z ostatnich 4 tygodni.";
+"badge_tisseur_liens_what_it_means" = "Regularność buduje zaufanie. Ta odznaka honoruje tych, którzy są obecni tydzień po tygodniu.";
+"badge_tisseur_liens_cta" = "Przejdź do moich grup";
+"badge_tisseur_liens_unlocked_message" = "3 aktywne tygodnie z 4 — dziękujemy za Twoje stałe zaangażowanie.";
+"badges_all_title" = "Wszystkie odznaki %d/%d";
+
+"badges_intro_title" = "Każdy gest ma znaczenie";
+"badges_intro_subtitle" = "Twoje działania tworzą więzi.\nTwoje odznaki zachowują ich pamięć.";
+"badges_intro_point1_title" = "Działaj we własnym tempie";
+"badges_intro_point1_body" = "Bez presji: każdy gest w społeczności ma znaczenie.";
+"badges_intro_point2_title" = "Każde działanie zostawia ślad";
+"badges_intro_point2_body" = "Poprzez Twoje wymiany i uczestnictwo, odznaki wyznaczają kolejne etapy.";
+"badges_intro_point3_title" = "Twoja droga jest widoczna";
+"badges_intro_point3_body" = "Twoje odznaki pojawiają się na Twoim profilu i opowiadają Twoją historię w społeczności.";
+"badges_intro_cta" = "Odkryj moje odznaki";
+"badges_intro_later" = "Później";
+
+"badge_cta_see_badges" = "Zobacz moje odznaki";

@@ -227,6 +227,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ui_constraint_picto_top" destination="51C-aQ-jss" id="aC1-mt-fLc"/>
                                             <outlet property="ui_description" destination="m02-OV-h2y" id="OTj-YO-e6S"/>
                                             <outlet property="ui_picto_1" destination="dPz-wv-cJe" id="fpN-BK-hQL"/>
                                             <outlet property="ui_picto_2" destination="rth-9M-lGv" id="uDh-Hg-E9E"/>

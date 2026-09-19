@@ -37,7 +37,17 @@ struct UniversalLinkManager {
 
         switch mainEntity {
         
-        // --- 1. Bonnes ondes ---
+        // --- 1. Badges ---
+        case "badges":
+            if pathElements.count > 1, pathElements[1] == "intro" {
+                DeepLinkManager.showBadgesIntro()
+            } else if pathElements.count > 1, let badgeKey = BadgeKey(rawValue: pathElements[1]) {
+                DeepLinkManager.showBadgesList(initialBadgeKey: badgeKey)
+            } else {
+                DeepLinkManager.showBadgesList()
+            }
+
+        // --- 2. Bonnes ondes ---
         case "good-waves":
             // Android: SmallTalkIntroActivity
             DeepLinkManager.showSmallTalkIntro()

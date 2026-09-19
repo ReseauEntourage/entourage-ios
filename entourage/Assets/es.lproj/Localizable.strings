@@ -323,6 +323,8 @@
 "home_button_map" = "Mapa";
 "home_button_list" = "Lista";
 "home_button_filters" = "Filtros";
+"guide_button_air_conditioned" = "Lugares climatizados";
+"detail_poi_air_conditioned" = "Lugar climatizado";
 "home_button_filters_on" = "Filtros habilitados";
 //Solidarity Guide
 "button_reset_filters" = "Cancelar filtros";
@@ -1241,6 +1243,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "enviar a";
 "messaging_message_no_message" = "0 mensajes más";
 
+"messaging_empty_state_title" = "C'est le début de votre échange";
+"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
+Choisissez un sujet pour démarrer.";
+"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
+"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
+"messaging_empty_chip_question" = "Poser une question 💬";
+"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
+"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
+"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
+"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
+"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+
 "message_title_new_conv" = "Nueva conversación";
 "message_subtitle_new_conv" = "Aún no has interactuado con este usuario. Si hay un problema, puedes reportar la conversación en la configuración.";
 "message_error_create_conversation" = "Error al crear la conversación";
@@ -1399,6 +1413,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_map" = "Descubra direcciones útiles";
 "home_v2_subtitle_map" = "Todas las estructuras solidarias cercanas";
 "home_v2_button_map" = "Mapa de lugares solidarios";
+"home_v2_climatisation_title" = "Lugares solidarios climatizados";
+"home_v2_climatisation_subtitle" = "Encuentre un lugar fresco cerca de usted durante la ola de calor.";
+"home_v2_climatisation_badge" = "Especial ola de calor";
 
 "home_v2_title_pedago" = "Todo lo que necesitas saber para actuar";
 "home_v2_subtitle_pedago" = "Luchar contra la precariedad es como todo, ¡se aprende!";
@@ -1753,6 +1770,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_button_map" = "Mapa";
 "home_button_list" = "Lista";
 "home_button_filters" = "Filtros";
+"guide_button_air_conditioned" = "Lugares climatizados";
+"detail_poi_air_conditioned" = "Lugar climatizado";
 "home_button_filters_on" = "Filtros habilitados";
 //Solidarity Guide
 "button_reset_filters" = "Cancelar filtros";
@@ -3248,3 +3267,76 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_small_talk_pending_plus_singular" = "+%d matching";
 "home_small_talk_start_new" = "+ Start a new discussion (%d/3)";
 "home_small_talk_view_button" = "See";
+
+// Badges
+"badges_section_title" = "Mis insignias";
+"badges_see_all" = "Ver todo";
+"badges_none_yet" = "Aún no hay insignias obtenidas.";
+"badges_list_title" = "Mis insignias";
+"badges_list_main_title" = "Tus insignias Entourage";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
+"badges_list_subtitle" = "%d obtenidas, %d en curso, %d por descubrir. Cada insignia recompensa una acción concreta en tu comunidad.";
+"badges_section_obtained" = "Obtenidas %d/%d";
+"badges_section_in_progress" = "En curso %d/%d";
+"badges_section_not_started" = "No iniciadas %d/%d";
+"badges_empty_start_label" = "EMPIEZA POR";
+"badges_faq_link" = "¿Cómo funcionan las insignias?";
+"badge_detail_title" = "Detalle de la insignia";
+"badge_how_it_works_title" = "CÓMO FUNCIONA";
+"badge_what_it_means_title" = "QUÉ REPRESENTA";
+"badge_mechanism_title" = "MECANISMO";
+"badge_obtained" = "Obtenida";
+"badge_obtained_on" = "Obtenida el %@";
+"badge_not_obtained" = "Aún no obtenida";
+"badge_your_progress" = "Tu progreso";
+"badge_see_all_badges" = "Ver todas mis insignias";
+"badge_unlocked_bravo" = "¡Felicidades %@!";
+"badge_unlocked_subtitle" = "Acabas de desbloquear la insignia";
+"badge_unlocked_see_badges" = "Ver mis insignias";
+"badge_unlocked_continue" = "Continuar";
+"badge_mechanism_irreversible" = "Irreversible — una vez obtenida, es para siempre.";
+"badge_mechanism_reversible" = "Reversible — se renueva cada 90 días.";
+"badge_premier_pas_title" = "Primer paso";
+"badge_premier_pas_description_short" = "Completa tu onboarding y realiza tu primera acción — reacción, publicación, grupo o evento.";
+"badge_premier_pas_how_it_works" = "Completa tu incorporación (intereses, deseos de acción, categorías de ayuda, disponibilidad) y luego realiza tu primera acción en la app.";
+"badge_premier_pas_what_it_means" = "Esta insignia celebra tu llegada a la comunidad. Marca tu primer gesto — el que convierte una cuenta creada en una intención real.";
+"badge_premier_pas_cta" = "Realizar una primera acción";
+"badge_premier_pas_unlocked_message" = "Acabas de dar tu primer paso en la comunidad Entourage. Tu presencia ya cuenta, bienvenido entre nosotros.";
+"badge_premier_lien_title" = "Primer vínculo";
+"badge_premier_lien_description_short" = "Intercambia un primer mensaje privado con otro miembro";
+"badge_premier_lien_how_it_works" = "Intercambia tu primer mensaje privado con otro miembro. Ambos deben enviar un mensaje para que el vínculo se contabilice.";
+"badge_premier_lien_what_it_means" = "El primer mensaje directo con otro miembro marca un hito importante: el paso del colectivo a la relación. Es ahí donde el vínculo se vuelve real.";
+"badge_premier_lien_cta" = "Chatear con alguien";
+"badge_premier_lien_unlocked_message" = "Acabas de intercambiar tu primer mensaje con otro miembro. Cada vínculo tejido hace vivir la comunidad.";
+"badge_diffuseur_liens_title" = "Creador de encuentros";
+"badge_diffuseur_liens_description_short" = "Crea 3 eventos en 90 días";
+"badge_diffuseur_liens_how_it_works" = "Crea o co-organiza al menos 3 eventos (presenciales o en línea) en los últimos 90 días. No se requiere un mínimo de participantes.";
+"badge_diffuseur_liens_what_it_means" = "Organizar encuentros requiere tiempo y energía. Esta insignia valora a quienes hacen que la comunidad Entourage se mueva.";
+"badge_diffuseur_liens_cta" = "Crear un evento";
+"badge_diffuseur_liens_unlocked_message" = "Has organizado 3 eventos en los últimos 90 días. ¡Estás haciendo que la comunidad Entourage se mueva, bravo!";
+"badge_as_papotage_title" = "As de la charla";
+"badge_as_papotage_description_short" = "Participa en 3 Papotages solidarios en 90 días";
+"badge_as_papotage_how_it_works" = "Participa en al menos 3 Papotages solidarios en los últimos 90 días.";
+"badge_as_papotage_what_it_means" = "Los Papotages son el corazón latiente de la comunidad en línea. Estar presente regularmente contribuye a mantener un espacio de conversación vivo y cálido.";
+"badge_as_papotage_cta" = "Unirse a un papotage";
+"badge_as_papotage_unlocked_message" = "3 Papotages solidarios en un mes y medio, tu presencia regular crea vínculos y hace bien. Gracias por tu compromiso constante.";
+"badge_tisseur_liens_title" = "Tejedor de vínculos";
+"badge_tisseur_liens_description_short" = "Sé activo/a en tus grupos 3 de cada 4 semanas";
+"badge_tisseur_liens_how_it_works" = "Sé activo/a en tus grupos de vecinos (publicación, comentario, reacción) durante al menos 3 de las últimas 4 semanas.";
+"badge_tisseur_liens_what_it_means" = "La regularidad genera confianza. Esta insignia honra a quienes están presentes semana tras semana.";
+"badge_tisseur_liens_cta" = "Ir a mis grupos";
+"badge_tisseur_liens_unlocked_message" = "3 semanas de actividad de 4 — haces latir el corazón de los grupos de vecinos. Gracias por tu compromiso constante.";
+"badges_all_title" = "Todas las insignias %d/%d";
+
+"badges_intro_title" = "Cada gesto cuenta";
+"badges_intro_subtitle" = "Tus acciones tejen vínculos.\nTus insignias guardan su memoria.";
+"badges_intro_point1_title" = "Actúa a tu ritmo";
+"badges_intro_point1_body" = "Sin presión: cada gesto en la comunidad cuenta.";
+"badges_intro_point2_title" = "Cada acción deja huella";
+"badges_intro_point2_body" = "A través de tus intercambios y participaciones, las insignias marcan los hitos.";
+"badges_intro_point3_title" = "Tu recorrido es visible";
+"badges_intro_point3_body" = "Tus insignias aparecen en tu perfil y cuentan tu historia en la comunidad.";
+"badges_intro_cta" = "Descubrir mis insignias";
+"badges_intro_later" = "Más tarde";
+
+"badge_cta_see_badges" = "Ver mis insignias";

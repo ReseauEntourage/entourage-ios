@@ -174,12 +174,7 @@ class ConversationParametersViewController: BasePopViewController {
 
     func showUser() {
         guard let userId = userId else { return }
-        let storyboard = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-        if let profileVC = storyboard.instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-            profileVC.userIdToDisplay = "\(userId)"
-            profileVC.modalPresentationStyle = .fullScreen
-            self.present(profileVC, animated: true, completion: nil)
-        }
+        presentOtherUserProfile(userId: "\(userId)")
     }
 
     func showMembers() {

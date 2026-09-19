@@ -26,7 +26,7 @@ struct UserHome:Codable {
 
     
     var congratulations = HomeActions()
-    
+
     var displayName:String {
         get {
             return _displayName ?? "-"

@@ -183,7 +183,6 @@ class UserPhotoAddViewController: BasePopViewController {
         pickerViewController?.delegate = self
         pickerViewController?.sourceType = sourceType
         pickerViewController?.navigationBar.tintColor = .appOrange
-        pickerViewController?.navigationBar.backgroundColor = .white
         self.navigationController?.present(pickerViewController!, animated: true, completion: nil)
     }
     

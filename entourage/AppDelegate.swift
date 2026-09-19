@@ -49,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(goLogin), name: NSNotification.Name(notificationLoginError), object: nil)
+        APIErrorPresenter.shared.start()
         
         if UserDefaults.currentUser == nil || A0SimpleKeychain().string(forKey:kKeychainPassword) == nil {
             AppState.navigateToStartupScreen()
@@ -200,6 +201,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.print("***** isFrom BG : \(isFromBackground)")
         Logger.print("***** isFrom Start : \(isFromStart)")
         
+        if let userInfos = userInfos, let content = userInfos["content"] as? [String:Any],let extras = content["extra"] as? [String:Any] {
+            if let tracking = extras["tracking"] as? String, tracking == "user_badge",
+               let badgeTag = extras["badge"] as? String {
+                DeepLinkManager.showBadgeUnlocked(badgeTag: badgeTag)
+                return
+            }
+        }
+
         if let userInfos = userInfos, let content = userInfos["content"] as? [String:Any],let extras = content["extra"] as? [String:Any], let stage = extras["stage"] as? String {
             if let popup = extras["popup"] as? String {
                 if popup == "outing_on_day_before" {

@@ -23,8 +23,10 @@ struct MetadatasService {
                 return
             }
             
-            parseMetadatas(data: data)
-            DispatchQueue.main.async { completion(nil) }
+            DispatchQueue.main.async {
+                parseMetadatas(data: data)
+                completion(nil)
+            }
         }
     }
     

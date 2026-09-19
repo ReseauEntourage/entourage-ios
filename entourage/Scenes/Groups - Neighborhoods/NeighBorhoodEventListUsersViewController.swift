@@ -496,11 +496,8 @@ extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITab
                 }
             }
 
-            if let profileVC = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
-                .instantiateViewController(withIdentifier: "profileFull") as? ProfilFullViewController {
-                if let u = tappedUser { profileVC.userIdToDisplay = "\(u.sid)" }
-                profileVC.modalPresentationStyle = .fullScreen
-                self.navigationController?.present(profileVC, animated: true)
+            if let u = tappedUser {
+                (navigationController ?? self).presentOtherUserProfile(userId: "\(u.sid)")
             }
         }
     }

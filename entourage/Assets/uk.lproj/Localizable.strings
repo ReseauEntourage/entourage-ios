@@ -323,6 +323,8 @@
 "home_button_map" = "Карта";
 "home_button_list" = "Список";
 "home_button_filters" = "Фільтри";
+"guide_button_air_conditioned" = "Кондиційовані місця";
+"detail_poi_air_conditioned" = "Кондиційоване місце";
 "home_button_filters_on" = "Фільтри включені";
 //Solidarity Guide
 "button_reset_filters" = "Скасувати фільтри";
@@ -1241,6 +1243,18 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "messaging_message_send" = "Надіслати";
 "messaging_message_no_message" = "Ще 0 повідомлень";
 
+"messaging_empty_state_title" = "C'est le début de votre échange";
+"messaging_empty_state_subtitle" = "Pas sûr de quoi dire ?
+Choisissez un sujet pour démarrer.";
+"messaging_empty_chip_bonjour" = "Dire bonjour 👋";
+"messaging_empty_chip_main" = "Proposer un coup de main 🤝";
+"messaging_empty_chip_question" = "Poser une question 💬";
+"messaging_empty_chip_evenement" = "Parler d'un événement 📅";
+"messaging_empty_draft_bonjour" = "Bonjour ! Je voulais juste me présenter et prendre contact 😊";
+"messaging_empty_draft_main" = "Bonjour, je peux vous donner un coup de main si vous en avez besoin. N'hésitez pas à me dire !";
+"messaging_empty_draft_question" = "Bonjour, j'aurais une petite question à vous poser si vous avez un moment ?";
+"messaging_empty_draft_evenement" = "Bonjour, je vous ai croisé à un événement et je voulais juste échanger un peu avec vous !";
+
 "message_title_new_conv" = "Нова розмова";
 "message_subtitle_new_conv" = "Ви ще не взаємодіяли з цим користувачем. Якщо виникла проблема, ви можете повідомити про розмову в налаштуваннях.";
 "message_error_create_conversation" = "Помилка створення бесіди";
@@ -1399,6 +1413,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_map" = "Відкрийте для себе корисні адреси";
 "home_v2_subtitle_map" = "Всі споруди солідарності поруч";
 "home_v2_button_map" = "Карта місць солідарності";
+"home_v2_climatisation_title" = "Кондиційовані місця солідарності";
+"home_v2_climatisation_subtitle" = "Знайдіть прохолодне місце поруч під час спеки.";
+"home_v2_climatisation_badge" = "Спецвипуск спеки";
 
 "home_v2_title_pedago" = "Усе, що вам потрібно знати, щоб діяти";
 "home_v2_subtitle_pedago" = "Боротьба з нестабільністю – це як усе, цьому можна навчитися!";
@@ -1805,3 +1822,76 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_small_talk_pending_plus_singular" = "+%d matching";
 "home_small_talk_start_new" = "+ Start a new discussion (%d/3)";
 "home_small_talk_view_button" = "See";
+
+// Badges
+"badges_section_title" = "Мої значки";
+"badges_see_all" = "Переглянути всі";
+"badges_none_yet" = "Ще немає отриманих значків.";
+"badges_list_title" = "Мої значки";
+"badges_list_main_title" = "Ваші значки Entourage";
+"badges_list_intro" = "Chaque badge valorise une action concrète qui crée du lien dans la communauté. À vous de jouer !";
+"badges_list_subtitle" = "%d отримано, %d у процесі, %d ще відкрити. Кожен значок нагороджує конкретну дію у вашій спільноті.";
+"badges_section_obtained" = "Отримано %d/%d";
+"badges_section_in_progress" = "У процесі %d/%d";
+"badges_section_not_started" = "Не розпочато %d/%d";
+"badges_empty_start_label" = "ПОЧНІТЬ З";
+"badges_faq_link" = "Як працюють значки?";
+"badge_detail_title" = "Деталі значка";
+"badge_how_it_works_title" = "ЯК ЦЕ ПРАЦЮЄ";
+"badge_what_it_means_title" = "ЩО ЦЕ ОЗНАЧАЄ";
+"badge_mechanism_title" = "МЕХАНІЗМ";
+"badge_obtained" = "Отримано";
+"badge_obtained_on" = "Отримано %@";
+"badge_not_obtained" = "Ще не отримано";
+"badge_your_progress" = "Ваш прогрес";
+"badge_see_all_badges" = "Переглянути всі мої значки";
+"badge_unlocked_bravo" = "Браво %@!";
+"badge_unlocked_subtitle" = "Ви щойно розблокували значок";
+"badge_unlocked_see_badges" = "Переглянути мої значки";
+"badge_unlocked_continue" = "Продовжити";
+"badge_mechanism_irreversible" = "Незворотний — отримавши, він ваш назавжди.";
+"badge_mechanism_reversible" = "Зворотний — оновлюється кожні 90 днів.";
+"badge_premier_pas_title" = "Перший крок";
+"badge_premier_pas_description_short" = "Завершіть онбординг і виконайте першу дію.";
+"badge_premier_pas_how_it_works" = "Завершіть реєстрацію та виконайте свою першу дію в додатку.";
+"badge_premier_pas_what_it_means" = "Цей значок святкує ваш прихід до спільноти.";
+"badge_premier_pas_cta" = "Зробити першу дію";
+"badge_premier_pas_unlocked_message" = "Ви щойно зробили свій перший крок у спільноті Entourage. Ваша присутність вже важлива, ласкаво просимо!";
+"badge_premier_lien_title" = "Перший зв'язок";
+"badge_premier_lien_description_short" = "Обміняйтесь першим приватним повідомленням з іншим учасником";
+"badge_premier_lien_how_it_works" = "Обміняйтеся першим приватним повідомленням з іншим членом.";
+"badge_premier_lien_what_it_means" = "Перше пряме повідомлення з іншим членом — важливий момент.";
+"badge_premier_lien_cta" = "Поспілкуватися з кимось";
+"badge_premier_lien_unlocked_message" = "Ви щойно обмінялися першим повідомленням з іншим членом. Кожен зв'язок оживляє спільноту.";
+"badge_diffuseur_liens_title" = "Організатор зустрічей";
+"badge_diffuseur_liens_description_short" = "Створіть 3 події за 90 днів";
+"badge_diffuseur_liens_how_it_works" = "Створіть або спільно організуйте щонайменше 3 події за останні 90 днів.";
+"badge_diffuseur_liens_what_it_means" = "Організація зустрічей вимагає часу та енергії. Цей значок цінує тих, хто рухає спільноту Entourage.";
+"badge_diffuseur_liens_cta" = "Створити подію";
+"badge_diffuseur_liens_unlocked_message" = "Ви організували 3 події за останні 90 днів. Браво!";
+"badge_as_papotage_title" = "Майстер спілкування";
+"badge_as_papotage_description_short" = "Беріть участь у 3 солідарних Папотажах за 90 днів";
+"badge_as_papotage_how_it_works" = "Беріть участь щонайменше у 3 солідарних Папотажах за останні 90 днів.";
+"badge_as_papotage_what_it_means" = "Папотажі — серце онлайн-спільноти. Регулярна присутність підтримує живий простір для спілкування.";
+"badge_as_papotage_cta" = "Приєднатися до папотажу";
+"badge_as_papotage_unlocked_message" = "3 солідарних Papotages за півтора місяця — дякуємо за вашу постійну участь.";
+"badge_tisseur_liens_title" = "Ткач зв'язків";
+"badge_tisseur_liens_description_short" = "Будьте активними у своїх групах 3 тижні з 4";
+"badge_tisseur_liens_how_it_works" = "Будьте активними у своїх сусідських групах щонайменше 3 з останніх 4 тижнів.";
+"badge_tisseur_liens_what_it_means" = "Регулярність будує довіру. Цей значок відзначає тих, хто присутній тиждень за тижнем.";
+"badge_tisseur_liens_cta" = "Перейти до моїх груп";
+"badge_tisseur_liens_unlocked_message" = "3 активних тижні з 4 — дякуємо за вашу постійну участь.";
+"badges_all_title" = "Всі значки %d/%d";
+
+"badges_intro_title" = "Кожен жест важливий";
+"badges_intro_subtitle" = "Ваші дії плетуть зв'язки.\nВаші значки зберігають їхню пам'ять.";
+"badges_intro_point1_title" = "Дійте у своєму темпі";
+"badges_intro_point1_body" = "Без тиску: кожен жест у спільноті важливий.";
+"badges_intro_point2_title" = "Кожна дія залишає слід";
+"badges_intro_point2_body" = "У ході ваших обмінів та участі значки відзначають важливі етапи.";
+"badges_intro_point3_title" = "Ваш шлях видимий";
+"badges_intro_point3_body" = "Ваші значки відображаються у вашому профілі та розповідають вашу історію у спільноті.";
+"badges_intro_cta" = "Відкрити мої значки";
+"badges_intro_later" = "Пізніше";
+
+"badge_cta_see_badges" = "Переглянути мої значки";

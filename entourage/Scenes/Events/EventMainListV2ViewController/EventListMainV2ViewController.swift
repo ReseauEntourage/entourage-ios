@@ -437,7 +437,7 @@ extension EventListMainV2ViewController: UITableViewDelegate, UITableViewDataSou
         case .firstHeader:
             return UITableView.automaticDimension
         case .myEventCell:
-            return 215
+            return 240
         case .secondHeader:
             return UITableView.automaticDimension
         case .discoverEventCell(_):

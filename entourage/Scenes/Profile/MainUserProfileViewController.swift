@@ -7,6 +7,7 @@
 
 import UIKit
 
+//OLD DOnt user this
 class MainUserProfileViewController: UIViewController {
     
     @IBOutlet weak var ui_tableview: UITableView?

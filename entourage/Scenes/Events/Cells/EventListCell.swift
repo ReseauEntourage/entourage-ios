@@ -36,9 +36,9 @@ class EventListCell: UITableViewCell {
         super.awakeFromNib()
         
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        ui_date.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
-        ui_location.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
-        ui_members.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
+        ui_date.setupFontAndColor(style: ApplicationTheme.getFontLegendGris(size: 15))
+        ui_location.setupFontAndColor(style: ApplicationTheme.getFontLegendGris(size: 15))
+        ui_members.setupFontAndColor(style: ApplicationTheme.getFontLegendGris(size: 15))
         
         ui_image.layer.cornerRadius = 20
         ui_alpha_view.layer.cornerRadius = 20

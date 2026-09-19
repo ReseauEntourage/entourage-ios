@@ -432,68 +432,72 @@ class ActionsMainHomeViewController: UIViewController {
     
     func handleActionsResponse(isReloadFromTab: Bool, reloadOther: Bool) -> ([Action]?, EntourageNetworkError?) -> Void {
         return { actions, error in
-            SVProgressHUD.dismiss()
-            self.isfirstLoadingContrib = false
-            self.pullRefreshControl.endRefreshing()
-            if let actions = actions {
-                if self.currentPageContribs > 1 {
-                    self.contribs.append(contentsOf: actions)
-                } else {
-                    self.contribs = actions
-                }
-                
-                if !isReloadFromTab {
-                    self.ui_tableview.reloadData()
-                    if self.contribs.count > 0 && self.currentPageContribs == 1 {
-                        self.gotoTop()
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                self.isfirstLoadingContrib = false
+                self.pullRefreshControl.endRefreshing()
+                if let actions = actions {
+                    if self.currentPageContribs > 1 {
+                        self.contribs.append(contentsOf: actions)
+                    } else {
+                        self.contribs = actions
+                    }
+
+                    if !isReloadFromTab {
+                        self.ui_tableview.reloadData()
+                        if self.contribs.count > 0 && self.currentPageContribs == 1 {
+                            self.gotoTop()
+                        }
                     }
                 }
-            }
-            
-            if !isReloadFromTab {
-                if self.contribs.count == 0 {
-                    self.showEmptyView()
-                } else {
-                    self.hideEmptyView()
+
+                if !isReloadFromTab {
+                    if self.contribs.count == 0 {
+                        self.showEmptyView()
+                    } else {
+                        self.hideEmptyView()
+                    }
+                    self.ui_tableview.reloadData()
                 }
-                self.ui_tableview.reloadData()
-            }
-            
-            self.isLoading = false
-            if reloadOther {
-                self.loadDataBasedOnMode(isReloadFromTab: true)
+
+                self.isLoading = false
+                if reloadOther {
+                    self.loadDataBasedOnMode(isReloadFromTab: true)
+                }
             }
         }
     }
     
     func handleSolicitationsResponse(isReloadFromTab: Bool, reloadOther: Bool) -> ([Action]?, EntourageNetworkError?) -> Void {
         return { actions, error in
-            SVProgressHUD.dismiss()
-            self.pullRefreshControl.endRefreshing()
-            
-            if let actions = actions {
-                if self.currentPageSolicitations > 1 {
-                    self.solicitations.append(contentsOf: actions)
-                } else {
-                    self.solicitations = actions
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                self.pullRefreshControl.endRefreshing()
+
+                if let actions = actions {
+                    if self.currentPageSolicitations > 1 {
+                        self.solicitations.append(contentsOf: actions)
+                    } else {
+                        self.solicitations = actions
+                    }
+
+                    if self.solicitations.count > 0 && self.currentPageSolicitations == 1 && !isReloadFromTab {
+                        self.gotoTop()
+                    }
                 }
-                
-                if self.solicitations.count > 0 && self.currentPageSolicitations == 1 && !isReloadFromTab {
-                    self.gotoTop()
+
+                if !isReloadFromTab {
+                    if self.solicitations.count == 0 {
+                        self.showEmptyView()
+                    } else {
+                        self.hideEmptyView()
+                    }
+                    self.ui_tableview.reloadData()
                 }
-            }
-            
-            if !isReloadFromTab {
-                if self.solicitations.count == 0 {
-                    self.showEmptyView()
-                } else {
-                    self.hideEmptyView()
+                self.isLoading = false
+                if reloadOther {
+                    self.loadDataBasedOnMode(isReloadFromTab: true)
                 }
-                self.ui_tableview.reloadData()
-            }
-            self.isLoading = false
-            if reloadOther {
-                self.loadDataBasedOnMode(isReloadFromTab: true)
             }
         }
     }
@@ -503,29 +507,24 @@ class ActionsMainHomeViewController: UIViewController {
         SVProgressHUD.show()
         self.isLoading = true
         ActionsService.getAllMyActions(currentPage: currentPageMyActions, per: numberOfItemsForWS) { actions, error in
-           
-            SVProgressHUD.dismiss()
-            self.isLoading = false
-            
-            if let actions = actions {
-                if self.currentPageMyActions > 1 {
-                    self.myActions.append(contentsOf: actions)
-                } else {
-                    self.myActions = actions
-                }
-                
-                self.ui_tableview.reloadData()
-                if self.myActions.count > 0 && self.currentPageMyActions == 1 {
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                self.isLoading = false
+
+                if let actions = actions {
+                    if self.currentPageMyActions > 1 {
+                        self.myActions.append(contentsOf: actions)
+                    } else {
+                        self.myActions = actions
+                    }
+
+                    self.ui_tableview.reloadData()
+                    if self.myActions.count > 0 && self.currentPageMyActions == 1 {
+                        let indexPath = IndexPath(row: 0, section: 0)
                         self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: true)
                     }
                 }
-            }
-            if self.myActions.count == 0 {
-                self.ui_view_empty.isHidden = false
-            } else {
-                self.ui_view_empty.isHidden = true
+                self.ui_view_empty.isHidden = self.myActions.count > 0
             }
         }
     }
@@ -830,24 +829,21 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard indexPath.row < contribs.count || indexPath.row < solicitations.count || indexPath.row < myActions.count else {
-            print("Incohérence détectée, réinitialisation de la vue.")
-            resetViewToInitialState()
-            return UITableViewCell() // Renvoie une cellule vide pour éviter un crash immédiat
-        }
-        let action: Action
         if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
-            action = contribs[indexPath.row]
+            guard indexPath.row < contribs.count else { return UITableViewCell() }
+            let action = contribs[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: ActionContribDetailHomeCell.identifier, for: indexPath) as! ActionContribDetailHomeCell
             cell.populateCell(action: action, hideSeparator: false)
             return cell
         } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
-            action = solicitations[indexPath.row]
+            guard indexPath.row < solicitations.count else { return UITableViewCell() }
+            let action = solicitations[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: ActionSolicitationDetailHomeCell.identifier, for: indexPath) as! ActionSolicitationDetailHomeCell
             cell.populateCell(action: action, hideSeparator: false)
             return cell
         } else {
-            action = myActions[indexPath.row]
+            guard indexPath.row < myActions.count else { return UITableViewCell() }
+            let action = myActions[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellMy", for: indexPath) as! ActionMineCell
             cell.populateCell(action: action)
             return cell
@@ -857,13 +853,16 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let action: Action
         if currentMode == .contribNormal || currentMode == .contribFiltered || currentMode == .contribSearch {
+            guard indexPath.row < contribs.count else { return }
             action = contribs[indexPath.row]
         } else if currentMode == .solicitationNormal || currentMode == .solicitationFiltered || currentMode == .solicitationSearch {
+            guard indexPath.row < solicitations.count else { return }
             action = solicitations[indexPath.row]
         } else {
+            guard indexPath.row < myActions.count else { return }
             action = myActions[indexPath.row]
         }
-        
+
         self.showAction(actionId: action.id, isContrib: action.isContrib(), action: action)
     }
     
