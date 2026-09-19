@@ -344,9 +344,13 @@ struct Event:Codable {
         if let place = metadata?.place_limit , place > 0 {
             metadatas["place_limit"] = place
         }
+        
+        if let reservedFemale = metadata?.reservedFemale {
+            metadatas["reserved_female"] = reservedFemale
+        }
 
         dict["metadata"] = metadatas
-        
+
         return dict
     }
     
@@ -388,18 +392,19 @@ struct EventLocation:Codable {
     }
 }
 
-struct EventMetadata:Codable {
-    var starts_at:String? = nil
-    var ends_at:String? = nil
-    var place_name:String = ""
-    var street_address:String = ""
-    var google_place_id:String? = nil
-    var display_address:String? = nil
-    var place_limit:Int? = 0
-    var portrait_url:String? = nil
-    var landscape_url:String? = nil
+struct EventMetadata: Codable {
+    var starts_at: String? = nil
+    var ends_at: String? = nil
+    var place_name: String = ""
+    var street_address: String = ""
+    var google_place_id: String? = nil
+    var display_address: String? = nil
+    var place_limit: Int? = 0
+    var portrait_url: String? = nil
+    var landscape_url: String? = nil
+    var reservedFemale: Bool? = false
     
-    var hasPlaceLimit:Bool? {
+    var hasPlaceLimit: Bool? {
         get {
             if place_limit == nil {
                 return nil
@@ -418,6 +423,39 @@ struct EventMetadata:Codable {
         case place_limit
         case portrait_url
         case landscape_url
+        case reservedFemale = "reserved_female"
+    }
+    
+    // 1. On garde un initialiseur vide par défaut pour ne pas casser le reste du code
+    init() {}
+    
+    // 2. Le décodeur personnalisé pour attraper l'erreur de type
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        starts_at = try container.decodeIfPresent(String.self, forKey: .starts_at)
+        ends_at = try container.decodeIfPresent(String.self, forKey: .ends_at)
+        place_name = try container.decodeIfPresent(String.self, forKey: .place_name) ?? ""
+        street_address = try container.decodeIfPresent(String.self, forKey: .street_address) ?? ""
+        google_place_id = try container.decodeIfPresent(String.self, forKey: .google_place_id)
+        display_address = try container.decodeIfPresent(String.self, forKey: .display_address)
+        place_limit = try container.decodeIfPresent(Int.self, forKey: .place_limit)
+        portrait_url = try container.decodeIfPresent(String.self, forKey: .portrait_url)
+        landscape_url = try container.decodeIfPresent(String.self, forKey: .landscape_url)
+        
+        // C'EST ICI QUE LA MAGIE OPÈRE ✨
+        // On essaie d'abord de lire un Bool classique
+        if let boolValue = try? container.decodeIfPresent(Bool.self, forKey: .reservedFemale) {
+            reservedFemale = boolValue
+        }
+        // Si ça échoue, on essaie de lire une String et on la convertit
+        else if let stringValue = try? container.decodeIfPresent(String.self, forKey: .reservedFemale) {
+            reservedFemale = (stringValue.lowercased() == "true" || stringValue == "1")
+        }
+        // Si la clé est absente, on met la valeur par défaut
+        else {
+            reservedFemale = false
+        }
     }
 }
 
@@ -615,7 +653,7 @@ struct EventEditing {
                 dict["recurrency"] = 31
             }
         }
-        
+
         var metadatas = [String:Any]()
         if let newStartDate = metadata?.starts_at {
             metadatas["starts_at"] = newStartDate
@@ -629,12 +667,20 @@ struct EventEditing {
             metadatas["place_name"] = place_name
         }
         
+        if let street_address = metadata?.street_address {
+            metadatas["street_address"] = street_address
+        }
+
         if let newGoogle_place_id = metadata?.google_place_id {
             metadatas["google_place_id"] = newGoogle_place_id
         }
         
         if let place = metadata?.place_limit  {
             metadatas["place_limit"] = place
+        }
+
+        if let reservedFemale = metadata?.reservedFemale {
+            metadatas["reserved_female"] = reservedFemale
         }
        
         if metadatas.count > 0 {
@@ -654,8 +700,10 @@ struct EventMetadataEditing {
     var starts_at:String? = nil
     var ends_at:String? = nil
     var place_name:String? = nil
+    var street_address:String? = nil
     var google_place_id:String? = nil
     var place_limit:Int? = 0
+    var reservedFemale:Bool? = nil
     var hasPlaceLimit:Bool? {
         get {
             if place_limit == nil {

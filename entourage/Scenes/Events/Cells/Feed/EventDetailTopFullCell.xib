@@ -34,6 +34,29 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abc-female-banner">
+                        <rect key="frame" x="20" y="62" width="366" height="0"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cet événement est réservé aux femmes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="def-female-label">
+                                <rect key="frame" x="12" y="4" width="342" height="18"/>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.49019607843137253" green="0.0" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0" id="hij-height-constraint"/>
+                            <constraint firstItem="def-female-label" firstAttribute="leading" secondItem="abc-female-banner" secondAttribute="leading" constant="12" id="klm-leading"/>
+                            <constraint firstAttribute="trailing" secondItem="def-female-label" secondAttribute="trailing" constant="12" id="nop-trailing"/>
+                            <constraint firstItem="def-female-label" firstAttribute="centerY" secondItem="abc-female-banner" secondAttribute="centerY" id="qrs-center-y"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="12"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfw-W1-dO7">
                         <rect key="frame" x="20" y="72" width="376" height="25"/>
                         <subviews>
@@ -76,31 +99,12 @@
                                     <action selector="action_show_members:" destination="lzF-C2-Z1g" eventType="touchUpInside" id="hBX-Ek-VIN"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IR4-sb-IgC">
-                                <rect key="frame" x="232" y="-7.5" width="144" height="40"/>
-                                <color key="backgroundColor" name="green_light"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="OmR-ih-bVW"/>
-                                </constraints>
-                                <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Je participe" image="ic_check_event_participate">
-                                    <color key="titleColor" name="green_middle"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="IR4-sb-IgC" firstAttribute="centerY" secondItem="Ih3-Zq-7lY" secondAttribute="centerY" id="BV3-23-6aO"/>
                             <constraint firstAttribute="trailing" secondItem="b3F-58-XAB" secondAttribute="trailing" id="Beq-iN-rJR"/>
                             <constraint firstAttribute="bottom" secondItem="CF5-px-Uga" secondAttribute="bottom" id="Exa-V3-F5M"/>
                             <constraint firstAttribute="height" constant="25" id="RCx-TQ-bM1"/>
                             <constraint firstItem="CF5-px-Uga" firstAttribute="top" secondItem="Nfw-W1-dO7" secondAttribute="top" id="SVq-JF-Qr6"/>
-                            <constraint firstAttribute="trailing" secondItem="IR4-sb-IgC" secondAttribute="trailing" id="ZWe-hj-jC7"/>
                             <constraint firstItem="Ih3-Zq-7lY" firstAttribute="top" secondItem="Nfw-W1-dO7" secondAttribute="top" id="Zy1-10-kg0"/>
                             <constraint firstItem="b3F-58-XAB" firstAttribute="centerY" secondItem="Nfw-W1-dO7" secondAttribute="centerY" id="esW-Bm-ADv"/>
                             <constraint firstAttribute="trailing" secondItem="Ih3-Zq-7lY" secondAttribute="trailing" id="gEb-oa-7lc"/>
@@ -463,7 +467,10 @@
                     <constraint firstAttribute="trailing" secondItem="fuU-Rj-r2w" secondAttribute="trailing" constant="20" id="RgV-tb-QmG"/>
                     <constraint firstItem="UXs-ZL-Ra7" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="UYw-0d-rgq"/>
                     <constraint firstItem="1xV-ay-YP1" firstAttribute="trailing" secondItem="1V4-oV-Dh3" secondAttribute="trailing" id="Ujl-4M-eMB"/>
-                    <constraint firstItem="Nfw-W1-dO7" firstAttribute="top" secondItem="klB-o1-C0m" secondAttribute="bottom" constant="15" id="VQC-kR-A9p"/>
+                            <constraint firstItem="abc-female-banner" firstAttribute="top" secondItem="klB-o1-C0m" secondAttribute="bottom" constant="5" id="tuv-banner-top"/>
+                            <constraint firstItem="abc-female-banner" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="wxy-banner-leading"/>
+                            <constraint firstItem="abc-female-banner" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="klB-o1-C0m" secondAttribute="trailing" id="xyz-banner-trailing"/>
+                            <constraint firstItem="Nfw-W1-dO7" firstAttribute="top" secondItem="abc-female-banner" secondAttribute="bottom" constant="10" id="VQC-kR-A9p"/>
                     <constraint firstAttribute="bottom" secondItem="1xV-ay-YP1" secondAttribute="bottom" constant="20" id="Vpw-kr-Z8k"/>
                     <constraint firstItem="lgR-Y6-WWf" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="Y0c-Lv-hqK"/>
                     <constraint firstItem="CsR-kO-usD" firstAttribute="leading" secondItem="UXs-ZL-Ra7" secondAttribute="leading" id="aoe-s2-pzF"/>
@@ -481,7 +488,9 @@
             <connections>
                 <outlet property="adress_view_top_constraint" destination="yX0-kE-283" id="tad-Gm-gRd"/>
                 <outlet property="ui_btn_agenda" destination="G9W-bu-4QC" id="BSR-SG-7Es"/>
-                <outlet property="ui_btn_i_participate" destination="IR4-sb-IgC" id="2Bw-Ef-4tt"/>
+                <outlet property="ui_view_reserved_female" destination="abc-female-banner" id="out-view-reserved"/>
+                <outlet property="ui_lbl_reserved_female" destination="def-female-label" id="out-lbl-reserved"/>
+                <outlet property="ui_constraint_height_reserved_female" destination="hij-height-constraint" id="out-constraint-height"/>
                 <outlet property="ui_btn_participate" destination="1xV-ay-YP1" id="H26-cy-lt3"/>
                 <outlet property="ui_btn_share" destination="lgR-Y6-WWf" id="Lqp-Ta-LcQ"/>
                 <outlet property="ui_button_go_to_discussion" destination="1xV-ay-YP1" id="Q8G-5Z-zcy"/>

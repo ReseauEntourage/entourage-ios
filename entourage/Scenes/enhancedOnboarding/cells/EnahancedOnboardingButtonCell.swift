@@ -26,14 +26,16 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
         configureWhiteButton(ui_btn_configure_later, withTitle: "enhanced_onboarding_button_title_later".localized)
         let config = EnhancedOnboardingConfiguration.shared
         if config.isInterestsFromSetting{
-            configureOrangeButton(ui_btn_next, withTitle: "button_title_for_setting_onboarding".localized)
+            configureOrangeButton(ui_btn_next, withTitle: "validate".localized)
+            configureWhiteButton(ui_btn_configure_later, withTitle: "cancel".localized)
+            ui_btn_configure_later.isHidden = false
+        } else {
+            ui_btn_configure_later.isHidden = false
         }
     }
     
     func configure(){
         ui_btn_configure_later.addTarget(self, action: #selector(onConfigureLaterClick), for: .touchUpInside)
-        self.ui_btn_next.setTitle("validate".localized, for: .normal)
-        self.ui_btn_configure_later.setTitle("cancel".localized, for: .normal)
         ui_btn_next.addTarget(self, action: #selector(onBtnNextClick), for: .touchUpInside)
     }
     
@@ -41,6 +43,7 @@ class EnahancedOnboardingButtonCell:UITableViewCell{
         self.configure()
         self.ui_btn_next.setTitle("validate".localized, for: .normal)
         self.ui_btn_configure_later.setTitle("cancel".localized, for: .normal)
+        self.ui_btn_configure_later.isHidden = false
     }
     
     @objc func onConfigureLaterClick(){

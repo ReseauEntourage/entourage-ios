@@ -44,8 +44,11 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_btn_agenda: UIButton!
     // **Nouvelle IBOutlet** pour la carte
     @IBOutlet weak var ui_mapview: MKMapView!
-    @IBOutlet weak var ui_btn_i_participate: UIButton!
     
+    @IBOutlet weak var ui_view_reserved_female: UIView!
+    @IBOutlet weak var ui_constraint_height_reserved_female: NSLayoutConstraint!
+    @IBOutlet weak var ui_lbl_reserved_female: UILabel!
+
     weak var delegate: EventDetailTopCellDelegate? = nil
     
     let topMarginConstraint: CGFloat = 24
@@ -85,6 +88,11 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
         
+        ui_view_reserved_female.layer.cornerRadius = 12
+        ui_view_reserved_female.backgroundColor = UIColor.appViolet
+        ui_lbl_reserved_female?.text = "event_detail_reserved_female_label".localized
+        ui_lbl_reserved_female.setFontTitle(size: 13)
+
         ui_view_place_limit.isHidden = true
         
         ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
@@ -100,8 +108,6 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_mapview.delegate = self
         ui_mapview.layer.cornerRadius = 20
         ui_mapview.isHidden = true // on la masquera si c'est un event en ligne
-        ui_btn_i_participate.semanticContentAttribute = .forceRightToLeft
-        ui_btn_i_participate.titleLabel?.setFontTitle(size: 15)
 
     }
     
@@ -152,10 +158,8 @@ class EventDetailTopFullCell: UITableViewCell {
         
         self.delegate = delegate
         if event?.isMember ?? false {
-            self.ui_btn_i_participate.isHidden = false
             self.ui_btn_agenda.isHidden = false
         }else{
-            self.ui_btn_i_participate.isHidden = true
             self.ui_btn_agenda.isHidden = true
         }
         
@@ -210,6 +214,14 @@ class EventDetailTopFullCell: UITableViewCell {
             })
         }
         
+        if let reservedFemale = event.metadata?.reservedFemale, reservedFemale {
+            ui_view_reserved_female.isHidden = false
+            ui_constraint_height_reserved_female.constant = 26
+        } else {
+            ui_view_reserved_female.isHidden = true
+            ui_constraint_height_reserved_female.constant = 0
+        }
+
         // --- PLACES LIMIT ---
         if let placeLimit = event.metadata?.place_limit, placeLimit > 0 {
             ui_view_place_limit.isHidden = false
@@ -368,6 +380,10 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBAction func action_show_place(_ sender: Any) {
         delegate?.showPlace()
     }
+
+    @IBAction func action_go_to_discussion(_ sender: Any) {
+        delegate?.showDiscussion()
+    }
 }
 
 // MARK: - MKMapViewDelegate
@@ -416,6 +432,7 @@ protocol EventDetailTopCellDelegate: AnyObject {
     func showMembers()
     func joinLeave()
     func showDetailFull()
+    func showDiscussion()
     func showPlace()
     func showWebUrl(url: URL)
     func showUser()

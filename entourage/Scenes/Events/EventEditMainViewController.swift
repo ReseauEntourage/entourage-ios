@@ -41,6 +41,7 @@ class EventEditMainViewController: UIViewController {
     var newOnlineEventUrl:String? = nil
     var newLocation:EventLocation? = nil
     var newAddressName:String? = nil
+    var newStreetAddress:String? = nil
     var newGoogle_place_id:String? = nil
     var newHasPlaceLimit:Bool? = nil
     var newPlace_limit:Int? = nil
@@ -58,6 +59,7 @@ class EventEditMainViewController: UIViewController {
     
     var hasRecurrency = false
     var selectedRecurrencyPosition = 0
+    var newReservedFemale: Bool? = nil
     
     weak var parentController:UIViewController? = nil // Use to open the ending screen
     
@@ -282,11 +284,13 @@ class EventEditMainViewController: UIViewController {
         newEvent.imageId = newImageId
         
         newEvent.recurrence = newRecurrence
+        newEvent.metadata?.reservedFemale = newReservedFemale
         newEvent.isOnline = newIsOnline
         newEvent.onlineEventUrl = newOnlineEventUrl
         newEvent.location = newLocation
         
         newEvent.metadata?.place_name = newAddressName
+        newEvent.metadata?.street_address = newStreetAddress
         newEvent.metadata?.google_place_id = newGoogle_place_id
         newEvent.metadata?.place_limit = newPlace_limit
         newEvent.startDate = newStartDate
@@ -302,6 +306,11 @@ class EventEditMainViewController: UIViewController {
 
 //MARK: - EventCreateMainDelegate -
 extension EventEditMainViewController: EventCreateMainDelegate {
+    func addReservedFemale(reserved: Bool) {
+        newReservedFemale = reserved // ✅ Simple et efficace
+        _ = checkValidation()
+    }
+    
     //Phase 1
     func addTitle(_ title: String) {
         newTitle = title
@@ -349,19 +358,23 @@ extension EventEditMainViewController: EventCreateMainDelegate {
     }
     func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         newOnlineEventUrl = nil
-        if let currentlocation = currentlocation {
+        if let googlePlace = googlePlace {
+            newGoogle_place_id = googlePlace.placeID
+            newAddressName = currentLocationName ?? googlePlace.name
+            newStreetAddress = googlePlace.formattedAddress ?? googlePlace.name
+            newLocation = EventLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
+        }
+        else if let currentlocation = currentlocation {
             newLocation = EventLocation(latitude: currentlocation.latitude, longitude: currentlocation.longitude)
             newAddressName = currentLocationName
-        }
-        else if let googlePlace = googlePlace {
-            newGoogle_place_id = googlePlace.placeID
-            newAddressName = googlePlace.name
-            newLocation = EventLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
+            newStreetAddress = currentLocationName
+            newGoogle_place_id = nil
         }
         else {
             newLocation = nil
             newGoogle_place_id = nil
             newAddressName = nil
+            newStreetAddress = nil
         }
         _ = checkValidation()
     }
@@ -528,12 +541,15 @@ extension EventEditMainViewController: MJNavBackViewDelegate {
 //MARK: - MJAlertControllerDelegate -
 extension EventEditMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        self.dismiss(animated: true)
+        // Le bouton gauche est "Annuler", la popup se ferme toute seule. On ne fait rien d'autre.
     }
     func validateRightButton(alertTag: MJAlertTAG) {
         if alertTag == .Suppress {
             let isAll = selectedRecurrencyPosition == 1
             self.createEvent(applyToAll:isAll)
+        } else if alertTag == .None {
+            // Le bouton droit est "Quitter" pour l'alerte de retour en arriere
+            self.dismiss(animated: true)
         }
     }
     

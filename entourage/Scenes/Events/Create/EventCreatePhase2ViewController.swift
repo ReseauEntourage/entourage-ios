@@ -27,7 +27,7 @@ class EventCreatePhase2ViewController: UIViewController {
         ui_tableview.delegate = self
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
-        
+
         if pageDelegate?.isEdit() ?? false {
             currentEvent = pageDelegate?.getCurrentEvent()
             hasCurrentRecurrency = pageDelegate?.hasCurrentRecurrency() ?? false
@@ -63,7 +63,7 @@ extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDele
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellSelector", for: indexPath) as! EventRecurrenceCell
         let recur = currentEvent != nil ? currentEvent!.recurrence : recurrenceSelected
-        
+
         cell.populateCell(recurrence:recur, delegate: self)
         return cell
     }

@@ -177,7 +177,7 @@ final class OnboardingPhase1VM: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    // Helpers ordre forcé (Femme → Homme → Autre → reste)
+    // Helpers ordre forcé (Femme → Homme → Non renseigné → reste)
     private func normalized(_ s: String) -> String {
         s.folding(options: .diacriticInsensitive, locale: .current)
          .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -187,7 +187,7 @@ final class OnboardingPhase1VM: ObservableObject {
         let n = normalized(label)
         if n.contains("femme") { return 0 }
         if n.contains("homme") { return 1 }
-        if n.contains("autre") || n.contains("non binaire") || n.contains("non-binaire") || n.contains("autres") { return 2 }
+        if n.contains("non renseigne") || n.contains("non renseigné") || n.contains("autre") || n.contains("non binaire") || n.contains("non-binaire") || n.contains("autres") { return 2 }
         return 3
     }
 
@@ -301,12 +301,16 @@ final class OnboardingPhase1VM: ObservableObject {
                     self.gendersMap = meta.user?.genders ?? [:]
                     self.discoverySourcesMap = meta.user?.discoverySources ?? [:]
 
-                    // Genders: ordre forcé Femme > Homme > Autre, puis le reste
-                    let labelsG = Array(self.gendersMap.values)
+                    // Genders: ordre forcé Femme > Homme > Non renseigné, puis le reste
+                    // Map "Autre" to "Non renseigné" in dynamic labels
+                    let labelsG = Array(self.gendersMap.values).map { $0.caseInsensitiveCompare("Autre") == .orderedSame ? "Non renseigné" : $0 }
+
                     if labelsG.isEmpty {
-                        self.genderOptions = ["Femme", "Homme", "Autre"]
+                        self.genderOptions = ["Femme", "Homme", "Non renseigné"]
                     } else {
-                        self.genderOptions = labelsG.sorted { a, b in
+                        // Remove duplicates in case both "Autre" and "Non renseigné" exist, though unlikely
+                        let uniqueLabels = Array(Set(labelsG))
+                        self.genderOptions = uniqueLabels.sorted { a, b in
                             let pa = self.genderPriority(a)
                             let pb = self.genderPriority(b)
                             if pa != pb { return pa < pb }
@@ -334,7 +338,7 @@ final class OnboardingPhase1VM: ObservableObject {
                 case .failure:
                     self.gendersMap = [:]
                     self.discoverySourcesMap = [:]
-                    self.genderOptions = ["Femme", "Homme", "Autre"]
+                    self.genderOptions = ["Femme", "Homme", "Non renseigné"]
                     self.howWeMetOptions = []
                 }
                 self.recomputeCanProceed()
@@ -387,6 +391,14 @@ final class OnboardingPhase1VM: ObservableObject {
         let companyId   = showCompanyAndEvent ? selectedEnterpriseId : nil
         let eventId     = showCompanyAndEvent ? selectedEventId     : nil
 
+        // Map "Non renseigné" back to "Autre" or the correct key if needed for backend compatibility
+        // Wait, backend expects the label if we are sending label. Actually PreOnboardingService might expect the dictionary key or label?
+        // Comment: "mapping côté service si besoin". I will leave it as is, or map to 'secret' or 'Autre' if required by the API. Let's send what the backend expects, which is the label. The backend likely handles 'Autre'. Actually, I'll send the original label if it mapped from gendersMap.
+        let originalGenderLabel = gendersMap.first(where: {
+            $0.value.caseInsensitiveCompare(genderLabel) == .orderedSame ||
+            ($0.value.caseInsensitiveCompare("Autre") == .orderedSame && genderLabel == "Non renseigné")
+        })?.value ?? genderLabel
+
         pageDelegate?.addUserInfos(
             firstname: isFirstnameValid ? trimmedFirst : nil,
             lastname:  isLastnameValid  ? trimmedLast  : nil,
@@ -394,7 +406,7 @@ final class OnboardingPhase1VM: ObservableObject {
             phone:     isPhoneValid ? digitsPhone : nil,
             email:     isEmailValid ? trimmedEmail : nil,
             consentEmail: consent,
-            gender:    genderLabel.isEmpty ? nil : genderLabel, // mapping côté service si besoin
+            gender:    originalGenderLabel.isEmpty ? nil : originalGenderLabel,
             howWeMet:  howWeMetKey,                              // ✅ clé (pas le label)
             birthdate: birthdayISO,                              // ✅ yyyy-MM-dd
             company:   companyId,                                // ✅ ID entreprise

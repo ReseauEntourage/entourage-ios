@@ -922,7 +922,7 @@
 "event_create_phase3_placeholder_place" = "Adresse, ville ...";
 "event_create_phase3_placeholder_online" = "Adresse web";
 
-"event_create_phase3_title_limit" = "L’événement a-t-il un nombre de places limité ? • obligatoire";
+"event_create_phase3_title_limit" = "L’événement a-t-il un nombre de places limité ?";
 "event_create_phase3_title_nb_places" = "Nombre de places disponibles • obligatoire";
 "event_create_phase3_title_nb_places_placeholder" = "Nombre de places";
 "event_create_phase3_limit_yes" = "Oui";
@@ -1446,7 +1446,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_help_title_two" = "Comment créer un événement ?";
 "home_v2_help_title_three" = "Une question ?\nContactez";
 
-"home_v2_pedag_item_lenght_title" = "%d min de lecture";
+"home_v2_pedag_item_lenght_title" = "%d min";
 
 "home_v2_action_type_social" = "Social";
 "home_v2_action_type_clothes" = "Vêtements";
@@ -1911,7 +1911,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboard_asso_title" = "Sélectionnez votre association";
 "onboard_asso_subtitle" = "Nom de votre association";
 "onboard_asso_dropdown_hint" = "Sélectionner dans la liste";
-"onboard_asso_info" = "Votre association ne figure pas dans la liste.\nCréez-en une nouvelle";
+"onboard_asso_info" = "Votre association ne figure pas dans la liste ? Ajoutez-la pour continuer.";
 "onboard_asso_other_label" = "Nom de votre association";
 "onboard_asso_other_placeholder" = "Ex. : Utopia 56 ou Femmes solidaires";
 "onboard_asso_other_required" = "Merci d’indiquer le nom de votre association.";
@@ -1947,3 +1947,22 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_zone_potential_event_plural" = "événements potentiels par semaine,";
 "guide_help_orientation" = "Aide & orientation";
 "Tomorrow" = "Demain";
+
+"birthday_title" = "Joyeux anniversaire !";
+"birthday_subtitle" = "Aujourd’hui, c’est votre jour.\nOn est heureux de vous compter parmi nous. Que cette journée soit pleine de chaleur humaine, d’échanges et de joie ✨";
+"birthday_button" = "Revenir à la page d'accueil";
+
+"event_create_reserved_female_title" = "Cet événement est-il réservé aux femmes ?";
+"event_create_reserved_female_info" = "L'événement sera uniquement visible par les utilisatrices de l'application.";
+"event_detail_reserved_female_label" = "Cet événement est réservé aux femmes";
+"home_v2_small_talk_card_title" = "Rejoindre une discussion solidaire";
+"home_v2_small_talk_card_subtitle" = "On vous met en relation avec un petit groupe qui partage vos centres d'intérêt, partout en France";
+"home_v2_small_talk_card_button" = "Discuter";
+"home_v2_solidarity_tools_title" = "Tes outils solidaires";
+"home_v2_tool_card_map" = "Carte des lieux solidaires";
+"home_v2_tool_card_pedago" = "Ressources utiles";
+"home_v2_tool_card_ethics" = "Charte éthique Entourage";
+"home_v2_moderator_title_format" = "%@, votre contact dédié";
+"home_v2_moderator_subtitle" = "Je fais parti·e de l'équipe Entourage et je suis là pour vous accompagner. N'hésitez pas si vous avez des questions ! 🤗";
+"eventCreatephase3_swiftUI_title_limit" = "L’événement a-t-il un nombre de places limité ?";
+"eventCreatephase3_swiftUI_title_place" = "Lieu";

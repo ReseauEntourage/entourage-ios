@@ -695,6 +695,20 @@ struct EventService:ParsingDataCodable {
         }
     }
 
+    static func getWelcomeEvent(completion: @escaping (Event?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String.init(format: kAPIEventWelcome, token)
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, _, _ in
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+
+            let wrapper = try? JSONDecoder().decode(OutingWrapper.self, from: data)
+            completion(wrapper?.outing)
+        }
+    }
+
     static func getWebinarEvent(completion: @escaping (Event?) -> Void) {
         guard let token = UserDefaults.token else {return}
         let endpoint = String.init(format: kAPIEventSensibilisation, token)

@@ -923,7 +923,7 @@
 "event_create_phase3_placeholder_place" = "Adresse, ville ...";
 "event_create_phase3_placeholder_online" = "Adresse web";
 
-"event_create_phase3_title_limit" = "L’événement a-t-il un nombre de places limité ? • obligatoire";
+"event_create_phase3_title_limit" = "L’événement a-t-il un nombre de places limité ?";
 "event_create_phase3_title_nb_places" = "Nombre de places disponibles • obligatoire";
 "event_create_phase3_title_nb_places_placeholder" = "Nombre de places";
 "event_create_phase3_limit_yes" = "Oui";
@@ -1772,3 +1772,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "Dołącz do dyskusji solidarnościowej";
 "small_talk_subtitle_match" = "Łączymy Cię z małą grupą osób o podobnych zainteresowaniach, w całej Francji.";
 "Tomorrow" = "Jutro";
+"home_v2_moderator_title_format" = "%@, twój uprzywilejowany kontakt";
+"home_v2_moderator_subtitle" = "Jestem częścią zespołu Entourage i jestem tutaj, aby ci towarzyszyć. Nie wahaj się, jeśli masz pytania! 🤗";
+"eventCreatephase3_swiftUI_title_limit" = "Czy wydarzenie ma ograniczoną liczbę miejsc?";
+"eventCreatephase3_swiftUI_title_place" = "Miejsce";

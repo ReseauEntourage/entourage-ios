@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +18,7 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="buttonCell" rowHeight="88" id="Rad-HS-ivA" customClass="EnahancedOnboardingButtonCell" customModule="Ent_Beta" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="525" height="88"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rad-HS-ivA" id="QeX-nZ-WjH">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rad-HS-ivA" id="QeX-nZ-WjH">
                 <rect key="frame" x="0.0" y="0.0" width="525" height="88"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -65,8 +65,8 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ku5-G9-opM" secondAttribute="trailing" id="6KX-0E-FsS"/>
                     <constraint firstItem="ku5-G9-opM" firstAttribute="top" secondItem="QeX-nZ-WjH" secondAttribute="top" id="d0U-He-nqb"/>
+                    <constraint firstAttribute="bottom" secondItem="ku5-G9-opM" secondAttribute="bottom" constant="-10" id="i1I-CB-pBG"/>
                     <constraint firstItem="ku5-G9-opM" firstAttribute="leading" secondItem="QeX-nZ-WjH" secondAttribute="leading" id="qR3-X7-jtX"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ku5-G9-opM" secondAttribute="bottom" id="vX4-eq-t3g"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

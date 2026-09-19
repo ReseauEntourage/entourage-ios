@@ -1,39 +1,44 @@
-//
-//  CellCreateSmallTalk.swift
-//  entourage
-//
-//  Created by Clement entourage on 14/05/2025.
-//
-
-import Foundation
 import UIKit
+import SwiftUI
 
-class CellCreateSmallTalk:UICollectionViewCell{
+class CellCreateSmallTalk: UICollectionViewCell {
     
-    //OUTLET
-    @IBOutlet weak var ui_iv: UIImageView!
-    @IBOutlet weak var ui_label_title: UILabel!
-    @IBOutlet weak var ui_btn: UIButton!
+    static let identifier = "CellCreateSmallTalk"
+    private var hostingController: UIHostingController<CellCreateSmallTalkView>?
     
-    //VARIABLE
-    
-    override func awakeFromNib() {
-        ui_label_title.text = "small_talk_subtitle_match".localized
-        ui_label_title.setFontBody(size: 15)
-        configureOrangeButton(ui_btn, withTitle: "home_button_start".localized)
-        ui_btn.addTarget(self, action: #selector(onBtnClick), for: .touchUpInside)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupSwiftUIView()
     }
     
-    func configureOrangeButton(_ button: UIButton, withTitle title: String) {
-        button.setTitle(title, for: .normal)
-        button.backgroundColor = UIColor.appOrange
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 15
-        button.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
-        button.clipsToBounds = true
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupSwiftUIView()
     }
     
-    @objc func onBtnClick(){
+    private func setupSwiftUIView() {
+        // Initialisation de la vue SwiftUI avec le callback du bouton
+        let swiftUIView = CellCreateSmallTalkView { [weak self] in
+            self?.onBtnClick()
+        }
+        
+        let hostingController = UIHostingController(rootView: swiftUIView)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.backgroundColor = .clear
+        
+        contentView.addSubview(hostingController.view)
+        
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: contentView.topAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+        
+        self.hostingController = hostingController
+    }
+    
+    @objc private func onBtnClick() {
         guard let collectionView = self.parentCollectionView(),
               let indexPath = self.indexPathInCollectionView(),
               let delegate = collectionView.delegate else {
@@ -42,5 +47,4 @@ class CellCreateSmallTalk:UICollectionViewCell{
 
         delegate.collectionView?(collectionView, didSelectItemAt: indexPath)
     }
-    
 }

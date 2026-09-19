@@ -49,18 +49,29 @@ class HomeCellEvent:UICollectionViewCell{
         else {
             ui_image_event.image = UIImage.init(named: "ic_placeholder_event")
         }
+        var isAmbassador = false
         if let _author = event.author {
             if let _roles = _author.communityRoles{
                 if _roles.contains("Équipe Entourage") || _roles.contains("Animateur Entourage") {
-                    self.ic_entoutou.isHidden = false
-                }else {
-                    self.ic_entoutou.isHidden = true
+                    isAmbassador = true
                 }
-            }else{
-                self.ic_entoutou.isHidden = true
             }
         }
         
+        let isReservedFemale = event.metadata?.reservedFemale ?? false
+
+        if isReservedFemale {
+            self.ic_entoutou.isHidden = false
+            self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_woman")
+        }
+        else if isAmbassador {
+            self.ic_entoutou.isHidden = false
+            self.ic_entoutou.image = UIImage(named: "ic_entoutou_logo_little")
+        }
+        else {
+            self.ic_entoutou.isHidden = true
+        }
+
         ui_label_date.text = event.startDateFormatted
         let addressComponents = event.addressName?.split(separator: ",")
         if let lastComponent = addressComponents?.last {

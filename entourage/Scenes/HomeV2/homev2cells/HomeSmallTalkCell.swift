@@ -38,7 +38,7 @@ class HomeSmallTalkCell: UITableViewCell {
         ui_collection_view.showsHorizontalScrollIndicator = false
 
         // Register cells
-        ui_collection_view.register(UINib(nibName: "CellCreateSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellCreateSmallTalk")
+        ui_collection_view.register(CellCreateSmallTalk.self, forCellWithReuseIdentifier: "CellCreateSmallTalk")
         ui_collection_view.register(UINib(nibName: "CellWaitingSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellWaitingSmallTalk")
         ui_collection_view.register(UINib(nibName: "CellDiscussionSmallTalk", bundle: nil), forCellWithReuseIdentifier: "CellDiscussionSmallTalk")
 
@@ -76,7 +76,7 @@ extension HomeSmallTalkCell: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width * 0.90
+        let width = collectionView.bounds.width * 0.99
         let height = collectionView.bounds.height
         return CGSize(width: width, height: height)
     }
@@ -147,5 +147,9 @@ extension HomeSmallTalkCell: UICollectionViewDelegateFlowLayout {
         case .waiting:
             print("nothing to do")
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        AnimationUtils.animateCell(cell, index: indexPath.row)
     }
 }

@@ -58,7 +58,7 @@ struct HomeMetadata: Codable {
 }
 
 struct MetadataUser: Codable {
-    let genders: [String: String]?              // ex: ["female":"Femme","male":"Homme","secret":"Autre"]
+    let genders: [String: String]?              // ex: ["female":"Femme","male":"Homme","secret":"Non renseigné"]
     let discoverySources: [String: String]?     // ex: ["word_of_mouth":"Bouche à oreille", ... ]
 
     enum CodingKeys: String, CodingKey {

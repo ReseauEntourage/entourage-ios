@@ -911,7 +911,7 @@
 "event_create_phase3_placeholder_place" = "Адреса, місто...";
 "event_create_phase3_placeholder_online" = "Веб-адреса";
 
-"event_create_phase3_title_limit" = "Чи кількість місць на заході обмежена? - ОБОВ'ЯЗКОВО";
+"event_create_phase3_title_limit" = "Чи кількість місць на заході обмежена?";
 "event_create_phase3_title_nb_places" = "Кількість місць - обов'язкова";
 "event_create_phase3_title_nb_places_placeholder" = "Кількість місць";
 "event_create_phase3_limit_yes" = "Так";
@@ -1738,3 +1738,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "Приєднуйтесь до солідарної дискусії";
 "small_talk_subtitle_match" = "Ми з'єднуємо вас з невеликою групою людей, які поділяють ваші інтереси, по всій Франції.";
 "Tomorrow" = "Завтра";
+"home_v2_moderator_title_format" = "%@, твій привілейований контакт";
+"home_v2_moderator_subtitle" = "Я є частиною команди Entourage і тут, щоб супроводжувати тебе. Не соромся, якщо у тебе є питання! 🤗";
+"eventCreatephase3_swiftUI_title_limit" = "Чи має подія обмежену кількість місць?";
+"eventCreatephase3_swiftUI_title_place" = "Місце";

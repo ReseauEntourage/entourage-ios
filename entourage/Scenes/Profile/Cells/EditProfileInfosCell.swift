@@ -59,7 +59,7 @@ class EditProfileInfosCell: UITableViewCell {
     let bioColor = UIColor.black
     let maxCharsBioString = "/\(ApplicationTheme.maxCharsBio)"
     
-    var pickerDayDateView = MJDayMonthPicker()
+    var pickerDayDateView = UIDatePicker()
     
     var hasNoErrorFirstname = false
     var hasNoErrorLastname = false
@@ -126,6 +126,14 @@ class EditProfileInfosCell: UITableViewCell {
         ui_tf_lastname.placeholder = "editUserPlaceholderLastname".localized
         setupTextFieldStyle(ui_tf_lastname)
         ui_tf_birthday.placeholder = "editUserPlaceholderBirthday".localized
+
+        if #available(iOS 13.4, *) {
+            pickerDayDateView.preferredDatePickerStyle = .wheels
+        }
+        pickerDayDateView.datePickerMode = .date
+        pickerDayDateView.locale = Locale.init(identifier: "fr_FR")
+        pickerDayDateView.maximumDate = Date()
+
         setupPickerDayMonthView()
         ui_tf_email.placeholder = "editUserPlaceholderEMail".localized
         setupTextFieldStyle(ui_tf_email)
@@ -275,7 +283,29 @@ class EditProfileInfosCell: UITableViewCell {
         ui_tf_firstname.text = firstname
         ui_tf_lastname.text = lastname
         ui_tf_email.text = email
-        ui_tf_birthday.text = birthdate
+
+        //Transformation de la date type yyyy-mm-dd (api) vers dd/mm/yyyy (affichage)
+        var birthdateDisplay = birthdate
+        if let _birthdate = birthdate {
+            let dateFormat = DateFormatter()
+            dateFormat.locale = Locale.init(identifier: "fr_FR")
+            dateFormat.dateFormat = "yyyy-MM-dd"
+            if let _date = dateFormat.date(from: _birthdate) {
+                pickerDayDateView.date = _date
+                dateFormat.dateFormat = "dd/MM/yyyy"
+                birthdateDisplay = dateFormat.string(from: _date)
+            }
+            else {
+                //If it's local date type dd/MM/yyyy
+                dateFormat.dateFormat = "dd/MM/yyyy"
+                if let _date = dateFormat.date(from: _birthdate) {
+                    pickerDayDateView.date = _date
+                    birthdateDisplay = _birthdate
+                }
+            }
+        }
+
+        ui_tf_birthday.text = birthdateDisplay
         ui_city_cp.text = cityName
         ui_phone.text = phone
 
@@ -340,7 +370,10 @@ class EditProfileInfosCell: UITableViewCell {
     }
     
     @objc func donedatePicker(){
-        ui_tf_birthday.text = String.init(format: "%@-%@", pickerDayDateView.getDateSelected().day,pickerDayDateView.getDateSelected().month)
+        let dateFormat = DateFormatter()
+        dateFormat.locale = Locale.init(identifier: "fr_FR")
+        dateFormat.dateFormat = "dd/MM/yyyy"
+        ui_tf_birthday.text = dateFormat.string(from: pickerDayDateView.date)
         delegate?.updateBirthDate(birthdate: ui_tf_birthday.text)
         self.contentView.endEditing(true)
     }

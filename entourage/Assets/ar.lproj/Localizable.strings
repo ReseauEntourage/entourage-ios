@@ -906,7 +906,7 @@
 "event_create_phase3_placeholder_place" = "العنوان .. المدينة ...";
 "event_create_phase3_placeholder_online" = "عنوان الموقع";
 
-"event_create_phase3_title_limit" = "هل الحدث له عدد محدود من الأماكن؟ - إلزامية";
+"event_create_phase3_title_limit" = "هل الحدث له عدد محدود من الأماكن؟";
 "event_create_phase3_title_nb_places" = "عدد الأماكن المتاحة - إلزامي";
 "event_create_phase3_title_nb_places_placeholder" = "عدد الأماكن";
 "event_create_phase3_limit_yes" = "نعم";
@@ -1697,3 +1697,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "انضم إلى مناقشة تضامنية";
 "small_talk_subtitle_match" = "نربطك بمجموعة صغيرة من الأشخاص الذين يشاركونك اهتماماتك، في أي مكان في فرنسا.";
 "Tomorrow" = "غدا";
+"home_v2_moderator_title_format" = "%@، جهة اتصالك المميزة";
+"home_v2_moderator_subtitle" = "أنا جزء من فريق Entourage وأنا هنا لمرافقتك. لا تتردد إذا كان لديك أي أسئلة! 🤗";
+"eventCreatephase3_swiftUI_title_limit" = "هل للحدث عدد محدود من الأماكن؟";
+"eventCreatephase3_swiftUI_title_place" = "المكان";

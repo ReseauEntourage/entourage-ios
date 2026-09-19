@@ -911,7 +911,7 @@
 "event_create_phase3_placeholder_place" = "Dirección, ciudad...";
 "event_create_phase3_placeholder_online" = "dirección web";
 
-"event_create_phase3_title_limit" = "¿El evento tiene un número limitado de plazas? - OBLIGATORIO";
+"event_create_phase3_title_limit" = "¿El evento tiene un número limitado de plazas?";
 "event_create_phase3_title_nb_places" = "Número de plazas disponibles - obligatorio";
 "event_create_phase3_title_nb_places_placeholder" = "Número de plazas";
 "event_create_phase3_limit_yes" = "Sí";
@@ -2333,7 +2333,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "event_create_phase3_placeholder_place" = "Dirección, ciudad...";
 "event_create_phase3_placeholder_online" = "dirección web";
 
-"event_create_phase3_title_limit" = "¿El evento tiene un número limitado de plazas? - OBLIGATORIO";
+"event_create_phase3_title_limit" = "¿El evento tiene un número limitado de plazas?";
 "event_create_phase3_title_nb_places" = "Número de plazas disponibles - obligatorio";
 "event_create_phase3_title_nb_places_placeholder" = "Número de plazas";
 "event_create_phase3_limit_yes" = "Sí";
@@ -3181,3 +3181,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_small_talk" = "Únete a una discusión solidaria";
 "small_talk_subtitle_match" = "Te conectamos con un pequeño grupo de personas que comparten tus intereses, en cualquier lugar de Francia.";
 "Tomorrow" = "Mañana";
+"home_v2_moderator_title_format" = "%@, tu contacto privilegiado";
+"home_v2_moderator_subtitle" = "Formo parte del equipo de Entourage y estoy aquí para acompañarte. ¡No dudes en preguntar si tienes alguna duda! 🤗";
+"eventCreatephase3_swiftUI_title_limit" = "¿El evento tiene un número limitado de plazas?";
+"eventCreatephase3_swiftUI_title_place" = "Lugar";

@@ -10,7 +10,7 @@ import Foundation
 
 struct DeepLinkManager {
     
-    static func presentAction(notification:NotificationPushData) {
+    static func presentAction(notification:NotificationPushData, presenter:UIViewController? = nil) {
         
      //   print("notification" , notification)
         if notification.context == "outing_on_day_before"{
@@ -64,6 +64,14 @@ struct DeepLinkManager {
             }
             
         }
+        if notification.stage == "birthday"{
+            showBirthday()
+            return
+        }
+        if notification.context == "birthday"{
+            showBirthday()
+            return
+        }
         if notification.tracking == "outing_message"{
             showConversation(conversationId: notification.instanceId)
             return
@@ -107,6 +115,8 @@ struct DeepLinkManager {
             showSmallTalk(conversationId: notification.instanceId)
         case .almost_matches:
             showAlmostMatch()
+        case .birthday:
+            showBirthday(presenter: presenter)
         }
     }
     
@@ -115,6 +125,7 @@ struct DeepLinkManager {
             showConversation(conversationId: notification.instanceId)
             return
         }
+        
         switch notification.instanceType {
         case .users:
             showUser(userId: notification.instanceId)
@@ -154,6 +165,8 @@ struct DeepLinkManager {
             showSmallTalk(conversationId: notification.instanceId)
         case .almost_matches:
             showAlmostMatch()
+        case .birthday:
+            showBirthday()
         }
     }
     
@@ -189,6 +202,8 @@ struct DeepLinkManager {
             return "placeholder_user"
         case .almost_matches:
             return "placeholder_user"
+        case .birthday:
+            return "ic_notif_placeholder" // Or appropriate icon
         }
     }
     
@@ -234,6 +249,17 @@ struct DeepLinkManager {
         }
     }
     
+    static func showBirthday(presenter:UIViewController? = nil) {
+        let vc = BirthdayViewController()
+        vc.modalPresentationStyle = .fullScreen
+        if let presenter = presenter {
+            presenter.present(vc, animated: true)
+        }
+        else {
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+
     static func showResource(id:Int) {
         if let vc = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {
             vc.resourceId = id
@@ -310,6 +336,21 @@ struct DeepLinkManager {
                     currentVc.present(vc, animated: true)
                 }
                 
+            }
+        }
+    }
+
+    static func showWelcomeEvent() {
+        EventService.getWelcomeEvent { event in
+            guard let event = event else { return }
+            DispatchQueue.main.async {
+                if let navVc = UIStoryboard(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+                    vc.eventId = event.uid
+                    vc.event = event
+                    vc.isAfterCreation = false
+                    vc.modalPresentationStyle = .fullScreen
+                    AppState.getTopViewController()?.present(navVc, animated: true)
+                }
             }
         }
     }

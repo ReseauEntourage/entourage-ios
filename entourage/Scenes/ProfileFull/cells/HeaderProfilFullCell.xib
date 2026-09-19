@@ -154,6 +154,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/01/1990" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bir-th-day">
+                                <rect key="frame" x="0.0" y="55.666666666666657" width="422" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0601886036" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6m-UW-JfR">
                                 <rect key="frame" x="0.0" y="27.666666666666657" width="422" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -210,6 +216,7 @@
                 <outlet property="ui_label_city" destination="C4W-kd-9go" id="NRb-ir-8qZ"/>
                 <outlet property="ui_label_description" destination="Kqo-Mg-fmZ" id="Mew-Ka-MM6"/>
                 <outlet property="ui_label_mail" destination="njw-q2-O8I" id="ZW8-FK-LlT"/>
+                <outlet property="ui_label_birthdate" destination="bir-th-day" id="bir-th-d2y"/>
                 <outlet property="ui_label_name" destination="Att-vO-Y0s" id="weU-mw-PWO"/>
                 <outlet property="ui_label_partner" destination="Bpe-U4-r6b" id="3po-ul-gJO"/>
                 <outlet property="ui_label_phone" destination="f6m-UW-JfR" id="uXR-zL-dnz"/>

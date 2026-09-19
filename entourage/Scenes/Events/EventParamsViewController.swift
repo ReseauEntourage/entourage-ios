@@ -345,7 +345,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                         isQuit: true,
                         hasCellBottom: false,
                         delegate: self,
-                        isCancelEvent: true
+                        isCancelEvent: self.isRealAuthor
                     )
                     return cell
                 }
@@ -356,7 +356,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     isQuit: true,
                     hasCellBottom: false,
                     delegate: self,
-                    isCancelEvent: true
+                    isCancelEvent: self.isRealAuthor
                 )
                 return cell
             }

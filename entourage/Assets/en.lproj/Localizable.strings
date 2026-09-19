@@ -896,6 +896,7 @@
 "event_create_phase3_placeholder_online" = "Web address";
 
 "event_create_phase3_title_limit" = "Does the event have a limited number of places? - required";
+
 "event_create_phase3_title_nb_places" = "Number of places available - mandatory";
 "event_create_phase3_title_nb_places_placeholder" = "Number of places";
 "event_create_phase3_limit_yes" = "Yes";
@@ -1956,3 +1957,15 @@
 "onboarding_zone_potential_event_plural" = "potential events per week,";
 "guide_help_orientation" = "Help & orientation";
 "Tomorrow" = "Tomorrow";
+
+"birthday_title" = "It's your birthday!";
+"birthday_subtitle" = "The entire Entourage team wishes you a happy birthday!";
+"birthday_button" = "Thank you!";
+
+"event_create_reserved_female_title" = "Is this event reserved for women?";
+"event_create_reserved_female_info" = "The event will only be visible to female users of the application.";
+"event_detail_reserved_female_label" = "This event is reserved for women";
+"home_v2_moderator_title_format" = "%@, your privileged contact";
+"home_v2_moderator_subtitle" = "I am part of the Entourage team and I am here to support you. Do not hesitate if you have any questions! 🤗";
+"eventCreatephase3_swiftUI_title_limit" = "Does the event have a limited number of places?";
+"eventCreatephase3_swiftUI_title_place" = "Location";

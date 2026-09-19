@@ -22,7 +22,7 @@ enum seeAllCellType {
 
 enum HomeV2DTO {
     case cellTitle(title: String, subtitle: String)
-    case cellAction(action: Action)
+    case cellAction(actions: [Action])
     case cellSeeAll(seeAllType: seeAllCellType)
     case cellEvent(events: [Event])
     case cellGroup(groups: [Neighborhood])
@@ -33,6 +33,7 @@ enum HomeV2DTO {
     case cellHZ
     case cellInitialPedago(pedagos: [PedagogicResource])
     case cellSmallTalk(userRequests:[UserSmallTalkRequest])
+    case cellSolidarityTools
 }
 
 class HomeV2ViewController: UIViewController {
@@ -92,6 +93,7 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeSeeAllCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSeeAllCell.identifier)
         ui_table_view.register(UINib(nibName: HomeCellMapButton.identifier, bundle: nil), forCellReuseIdentifier: HomeCellMapButton.identifier)
         ui_table_view.register(UINib(nibName: HomeCellAction.identifier, bundle: nil), forCellReuseIdentifier: HomeCellAction.identifier)
+        ui_table_view.register(UINib(nibName: HomeActionHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeActionHorizontalCollectionCell.identifier)
         ui_table_view.register(UINib(nibName: HomeEventHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeEventHorizontalCollectionCell.identifier)
         ui_table_view.register(UINib(nibName: HomeGroupHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeGroupHorizontalCollectionCell.identifier)
         ui_table_view.register(UINib(nibName: HomeCellPedago.identifier, bundle: nil), forCellReuseIdentifier: HomeCellPedago.identifier)
@@ -100,6 +102,7 @@ class HomeV2ViewController: UIViewController {
         ui_table_view.register(UINib(nibName: HomeInitialPedagogicHorizontalCell.identifier, bundle: nil), forCellReuseIdentifier: HomeInitialPedagogicHorizontalCell.identifier)
         ui_table_view.register(UINib(nibName: HomeHZCell.identifier, bundle: nil), forCellReuseIdentifier: HomeHZCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
+        ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
 
         self.checkAndCreateCookieIfNotExists()
         //self.checkNotificationSettings()
@@ -411,21 +414,15 @@ class HomeV2ViewController: UIViewController {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
             tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
         }
-        //add condition
-        tableDTO.append(.cellTitle(title: "home_v2_title_small_talk".localized, subtitle: ""))
-        tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
+
         if (allDemands.count > 0) {
             if isContributionPreference {
                 tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
-                for demand in allDemands {
-                    tableDTO.append(.cellAction(action: demand))
-                }
+                tableDTO.append(.cellAction(actions: allDemands))
                 tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
             } else {
                 tableDTO.append(.cellTitle(title: "home_v2_title_action".localized, subtitle: "home_v2_subtitle_action".localized))
-                for demand in allDemands {
-                    tableDTO.append(.cellAction(action: demand))
-                }
+                tableDTO.append(.cellAction(actions: allDemands))
                 tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
             }
         }
@@ -434,22 +431,7 @@ class HomeV2ViewController: UIViewController {
             tableDTO.append(.cellEvent(events: allEvents))
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
         }
-        if allPedagos.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_pedago".localized, subtitle: "home_v2_subtitle_pedago".localized))
-            for pedago in allPedagos {
-                tableDTO.append(.cellPedago(pedago: pedago))
-            }
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllPedago))
-        }
-//        if allGroups.count > 0 {
-//            tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
-//            tableDTO.append(.cellGroup(groups: allGroups))
-//            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
-//        }
-        
-        tableDTO.append(.cellTitle(title: "home_v2_title_map".localized, subtitle: "home_v2_subtitle_map".localized))
-        tableDTO.append(.cellMap)
-        
+
         var _offlineEvents = [Event]()
         for event in allEvents {
             if event.isOnline == false {
@@ -459,12 +441,29 @@ class HomeV2ViewController: UIViewController {
         if _offlineEvents.count == 0 && allDemands.count == 0 && !isContributionPreference {
             tableDTO.append(.cellHZ)
         }
-        tableDTO.append(.cellTitle(title: "home_v2_title_help".localized, subtitle: "home_v2_subtitle_help".localized))
+
         if let _moderator = userHome.moderator {
             if let _name = _moderator.displayName {
                 tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
             }
         }
+
+        //add condition
+        tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
+
+        tableDTO.append(.cellSolidarityTools)
+
+        if allPedagos.count > 0 {
+            for pedago in allPedagos {
+                tableDTO.append(.cellPedago(pedago: pedago))
+            }
+        }
+//        if allGroups.count > 0 {
+//            tableDTO.append(.cellTitle(title: "home_v2_title_group".localized, subtitle: "home_v2_subtitle_group".localized))
+//            tableDTO.append(.cellGroup(groups: allGroups))
+//            tableDTO.append(.cellSeeAll(seeAllType: .seeAllGroup))
+//        }
+        
         self.ui_table_view.reloadData()
         self.handleEnhancedOnboardingReturn()
         SVProgressHUD.dismiss()
@@ -507,10 +506,11 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.configure(title: title, subtitle: subtitle)
                 return cell
             }
-        case .cellAction(let action):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeCellAction") as? HomeCellAction {
+        case .cellAction(let actions):
+            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: HomeActionHorizontalCollectionCell.identifier) as? HomeActionHorizontalCollectionCell {
                 cell.selectionStyle = .none
-                cell.configure(action: action)
+                cell.delegate = self
+                cell.configure(actions: actions)
                 return cell
             }
         case .cellSeeAll(let seeAllType):
@@ -599,6 +599,12 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.data = dto
                 return cell
             }
+        case .cellSolidarityTools:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: HomeSolidarityToolsCell.identifier) as? HomeSolidarityToolsCell {
+                cell.selectionStyle = .none
+                cell.delegate = self
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -608,13 +614,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellTitle(_, _):
             return
         case .cellAction(let action):
-            if isContributionPreference {
-                AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_Detail)
-                self.showAction(actionId: action.id, isContrib: true, action: action)
-            } else {
-                AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
-                self.showAction(actionId: action.id, isContrib: false, action: action)
-            }
+            return
         case .cellSeeAll(let seeAllType):
             switch seeAllType {
             case .seeAllDemand:
@@ -658,7 +658,11 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             if let _moderator = self.userHome.moderator {
                 AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
                 if let _id = _moderator.id {
-                    showUserProfile(id: _id)
+                    MessagingService.createOrGetConversation(userId: String(_id)) { conversation, error in
+                        if let conversation = conversation {
+                            DeepLinkManager.showConversation(conversationId: conversation.uid)
+                        }
+                    }
                 }
             }
         case .cellHZ:
@@ -668,6 +672,8 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
             return
         case .cellSmallTalk(let userRequests): break
             return
+        case .cellSolidarityTools:
+            return
         }
     }
     
@@ -676,7 +682,7 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellTitle(_, _):
             return UITableView.automaticDimension
         case .cellAction(_):
-            return UITableView.automaticDimension
+            return 215
         case .cellSeeAll(_):
             return UITableView.automaticDimension
         case .cellEvent(_):
@@ -696,7 +702,9 @@ extension HomeV2ViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(pedagos: let pedagos):
             return 115
         case .cellSmallTalk(let userRequests):
-            return 200
+            return 260
+        case .cellSolidarityTools:
+            return UITableView.automaticDimension
         }
     }
 }
@@ -805,7 +813,7 @@ extension HomeV2ViewController {
                 }
                 for pedagoRead in pedagoReads {
                     self.allPedagos.append(pedagoRead)
-                    if self.allPedagos.count > 1 {
+                    if self.allPedagos.count >= 3 {
                         break
                     }
                 }
@@ -900,6 +908,27 @@ extension HomeV2ViewController {
                     currentVc.present(vc, animated: true)
                 }
             }
+        }
+    }
+}
+
+// MARK: - HomeSolidarityToolsCellDelegate
+extension HomeV2ViewController: HomeSolidarityToolsCellDelegate {
+    func onMapTapped() {
+        AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
+        self.showAllPois()
+    }
+
+    func onPedagoTapped() {
+        AnalyticsLoggerManager.logEvent(name: Action__Home__Pedago)
+        DeepLinkManager.showRessourceListUniversalLink()
+    }
+
+    func onEthicsTapped() {
+        let isProd = EnvironmentConfigurationManager.sharedInstance.runsOnProduction
+        let urlString = isProd ? "https://www.entourage.social/app/resources/eMU_InNSSJbE" : "https://preprod.entourage.social/app/resources/87203debda8b"
+        if let _url = URL(string: urlString){
+            WebLinkManager.openUrl(url: _url, openInApp: true, presenterViewController: AppState.getTopViewController())
         }
     }
 }
@@ -1484,4 +1513,15 @@ extension HomeV2ViewController {
     }
 }
 
-
+// MARK: - HomeActionHCCDelegate
+extension HomeV2ViewController: HomeActionHCCDelegate {
+    func goToMyActionHomeCell(action: Action) {
+        if isContributionPreference {
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Contrib_Detail)
+            self.showAction(actionId: action.id, isContrib: true, action: action)
+        } else {
+            AnalyticsLoggerManager.logEvent(name: Action_Home_Demand_Detail)
+            self.showAction(actionId: action.id, isContrib: false, action: action)
+        }
+    }
+}

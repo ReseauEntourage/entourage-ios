@@ -603,7 +603,13 @@ class NeighborhoodPostCell: UITableViewCell {
             configureWithSurvey(survey: self.postMessage.survey!)
         }
         updateReactionIcon()
-        ui_username.text = message.user?.displayName
+
+        var displayName = message.user?.displayName ?? ""
+        if message.user?.isBirthday == true {
+            displayName += " 🎂"
+        }
+        ui_username.text = displayName
+
         ui_date.text = message.createdDateFormatted
         ui_comment.handleURLTap { url in
             // Ouvrez le lien dans Safari, par exemple
