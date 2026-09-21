@@ -339,7 +339,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         // Gestion status
         if let status = message.status {
             if status == "deleted" {
-                let padding = NSAttributedString(string: "  ") // 3 espaces pour du padding
+                let padding = NSAttributedString(string: "        ") // padding gauche pour laisser la place à l'icône (cf. branche "offensive" ci-dessous)
                 let messageText = NSAttributedString(string: "deleted_comment".localized, attributes: [
                     .foregroundColor: UIColor.appGreyTextDeleted
                 ])
