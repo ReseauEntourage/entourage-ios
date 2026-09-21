@@ -255,16 +255,6 @@ struct MyProfileView: View {
                     }
                     .padding()
 
-                    if let user = viewModel.user {
-                        ImpactCounterView(isMe: true, user: user, onDiscoverNearby: {
-                            if let tabbar = AppState.getTopViewController()?.tabBarController as? MainTabbarViewController {
-                                tabbar.selectedIndex = 4
-                            }
-                        })
-                            .padding(.horizontal)
-                            .padding(.top, 10)
-                    }
-
                     BadgesSectionView(
                         apiBadges: viewModel.apiBadges,
                         isMe: true,
