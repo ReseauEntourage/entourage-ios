@@ -16,7 +16,7 @@ struct ActionCharterView: View {
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
+                VStack(alignment: .leading, spacing: 14) {
                     bannerView
                     examplesSection
                     limitsSection
@@ -27,9 +27,9 @@ struct ActionCharterView: View {
                         spiritView
                     }
                 }
-                .padding(.horizontal, 18)
-                .padding(.top, 18)
-                .padding(.bottom, 12)
+                .padding(.horizontal, 16)
+                .padding(.top, 14)
+                .padding(.bottom, 10)
             }
             ctaView
         }
@@ -39,35 +39,35 @@ struct ActionCharterView: View {
     // MARK: - Banner
 
     private var bannerView: some View {
-        HStack(alignment: .top, spacing: 14) {
+        HStack(alignment: .top, spacing: 12) {
             Text(isContrib ? "🤝" : "🙋")
-                .font(.system(size: 24))
-                .frame(width: 46, height: 46)
+                .font(.system(size: 22))
+                .frame(width: 42, height: 42)
                 .background(Color(UIColor.appOrange))
                 .clipShape(Circle())
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(isContrib ? "action_charter_contrib_eyebrow".localized : "action_charter_demand_eyebrow".localized)
-                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 11)))
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 10.5)))
                     .textCase(.uppercase)
                     .foregroundColor(Color(UIColor.appOrangeDark))
 
                 Text(isContrib ? "action_charter_contrib_title".localized : "action_charter_demand_title".localized)
-                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 17)))
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 16)))
                     .foregroundColor(.black)
-                    .lineSpacing(2)
+                    .lineSpacing(1)
 
                 Text(isContrib ? "action_charter_contrib_subtitle".localized : "action_charter_demand_subtitle".localized)
-                    .font(Font(ApplicationTheme.getFontNunitoRegular(size: 13.5)))
+                    .font(Font(ApplicationTheme.getFontNunitoRegular(size: 13)))
                     .foregroundColor(Color(UIColor.appGris112))
-                    .lineSpacing(3)
+                    .lineSpacing(2)
             }
         }
-        .padding(16)
+        .padding(14)
         .background(
             LinearGradient(colors: [Color("very_light_orange"), Color(UIColor.appOrangeLight_50)], startPoint: .topLeading, endPoint: .bottomTrailing)
         )
-        .cornerRadius(18)
+        .cornerRadius(16)
     }
 
     // MARK: - Examples
@@ -78,7 +78,7 @@ struct ActionCharterView: View {
                 let items = examples
                 ForEach(Array(items.enumerated()), id: \.offset) { index, item in
                     if index > 0 {
-                        Divider().padding(.leading, 46)
+                        Divider().padding(.leading, 42)
                     }
                     itemRow(icon: item.icon, text: item.text)
                 }
@@ -107,24 +107,24 @@ struct ActionCharterView: View {
 
     private var limitsSection: some View {
         sectionContainer(dot: "!", dotBackground: Color(UIColor.appOrangeLight_50), dotColor: Color(UIColor.appOrangeDark), title: "action_charter_limits_title".localized) {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 6) {
                 ForEach(Array(limits.enumerated()), id: \.offset) { _, text in
-                    HStack(alignment: .top, spacing: 10) {
+                    HStack(alignment: .top, spacing: 9) {
                         Text("✕")
-                            .font(Font(ApplicationTheme.getFontQuickSandBold(size: 13)))
+                            .font(Font(ApplicationTheme.getFontQuickSandBold(size: 12.5)))
                             .foregroundColor(Color(UIColor.appOrangeDark))
                         Text(text)
-                            .font(Font(ApplicationTheme.getFontNunitoRegular(size: 13)))
+                            .font(Font(ApplicationTheme.getFontNunitoRegular(size: 12.5)))
                             .foregroundColor(Color(UIColor.appGris112))
-                            .lineSpacing(2)
+                            .lineSpacing(1)
                     }
                 }
 
                 Text(limitFooter)
-                    .font(Font(ApplicationTheme.getFontNunitoRegular(size: 12.5)))
+                    .font(Font(ApplicationTheme.getFontNunitoRegular(size: 12)))
                     .foregroundColor(Color(UIColor.appGris112))
-                    .lineSpacing(2)
-                    .padding(.top, 9)
+                    .lineSpacing(1)
+                    .padding(.top, 7)
                     .overlay(
                         Rectangle()
                             .fill(Color(UIColor.appOrangeLight))
@@ -133,7 +133,7 @@ struct ActionCharterView: View {
                         alignment: .top
                     )
             }
-            .padding(16)
+            .padding(14)
             .background(Color("very_light_orange"))
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
@@ -177,7 +177,7 @@ struct ActionCharterView: View {
                 ]
                 ForEach(Array(items.enumerated()), id: \.offset) { index, item in
                     if index > 0 {
-                        Divider().padding(.leading, 46)
+                        Divider().padding(.leading, 42)
                     }
                     itemRow(icon: item.icon, text: item.text)
                 }
@@ -188,14 +188,14 @@ struct ActionCharterView: View {
     // MARK: - Spirit (contribution only)
 
     private var spiritView: some View {
-        HStack(alignment: .top, spacing: 12) {
-            Text("✨").font(.system(size: 20))
+        HStack(alignment: .top, spacing: 10) {
+            Text("✨").font(.system(size: 18))
             Text("action_charter_contrib_spirit".localized)
-                .font(Font(ApplicationTheme.getFontNunitoBold(size: 13)))
+                .font(Font(ApplicationTheme.getFontNunitoBold(size: 12.5)))
                 .foregroundColor(Color(UIColor.appGreenLogout))
-                .lineSpacing(3)
+                .lineSpacing(2)
         }
-        .padding(15)
+        .padding(13)
         .background(Color("green_light"))
         .cornerRadius(16)
     }
@@ -203,27 +203,27 @@ struct ActionCharterView: View {
     // MARK: - Sticky CTA
 
     private var ctaView: some View {
-        VStack(spacing: 9) {
+        VStack(spacing: 8) {
             Button(action: onReadFullCharter) {
                 Text("action_charter_read_full_link".localized)
-                    .font(Font(ApplicationTheme.getFontNunitoBold(size: 12)))
+                    .font(Font(ApplicationTheme.getFontNunitoBold(size: 11.5)))
                     .foregroundColor(Color(UIColor.appOrangeDark))
                     .underline()
             }
 
             Button(action: onAccept) {
                 Text("accept_charte".localized)
-                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 15.5)))
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 15)))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 15)
+                    .padding(.vertical, 13)
             }
             .background(Color(UIColor.appOrange))
             .cornerRadius(28)
         }
         .padding(.horizontal, 20)
-        .padding(.top, 14)
-        .padding(.bottom, 22)
+        .padding(.top, 12)
+        .padding(.bottom, 14)
         .background(Color(UIColor.appBeigeClair))
     }
 
@@ -231,17 +231,17 @@ struct ActionCharterView: View {
 
     @ViewBuilder
     private func sectionContainer<Content: View>(dot: String, dotBackground: Color, dotColor: Color, title: String, @ViewBuilder content: () -> Content) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
                 Text(dot)
-                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 12)))
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 11.5)))
                     .foregroundColor(dotColor)
-                    .frame(width: 22, height: 22)
+                    .frame(width: 20, height: 20)
                     .background(dotBackground)
                     .clipShape(Circle())
 
                 Text(title)
-                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 14.5)))
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 13.5)))
                     .foregroundColor(.black)
             }
             content()
@@ -258,16 +258,16 @@ struct ActionCharterView: View {
     }
 
     private func itemRow(icon: String, text: String) -> some View {
-        HStack(alignment: .top, spacing: 12) {
+        HStack(alignment: .top, spacing: 10) {
             Text(icon)
-                .font(.system(size: 18))
-                .frame(width: 22)
+                .font(.system(size: 16))
+                .frame(width: 20)
             Text(text)
-                .font(Font(ApplicationTheme.getFontNunitoRegular(size: 13.5)))
+                .font(Font(ApplicationTheme.getFontNunitoRegular(size: 12.5)))
                 .foregroundColor(.black)
-                .lineSpacing(2)
+                .lineSpacing(1)
         }
-        .padding(.vertical, 11)
-        .padding(.horizontal, 14)
+        .padding(.vertical, 9)
+        .padding(.horizontal, 12)
     }
 }
