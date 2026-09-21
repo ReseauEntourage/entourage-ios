@@ -282,7 +282,7 @@ class ConversationViewCell: UITableViewCell {
         if let status = message.status?.lowercased() {
             switch status {
             case "deleted":
-                applyDeletedStyle(text: NSLocalizedString("deleted_comment", comment: ""))
+                applyDeletedStyle(text: NSLocalizedString("deleted_message", comment: ""))
             case "offensive", "offensible":
                 applyDeletedStyle(text: NSLocalizedString("content_removed", comment: ""))
             default:
