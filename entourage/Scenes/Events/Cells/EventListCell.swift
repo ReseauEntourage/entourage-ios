@@ -73,7 +73,7 @@ class EventListCell: UITableViewCell {
         if isCancelled {
             ui_badge_cancelled.isHidden = false
             ui_title.textColor = .appGris112
-            ui_alpha_view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+            ui_alpha_view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
             ui_alpha_view.isHidden = false
         }
         else {

@@ -217,7 +217,7 @@ class EventDetailFeedViewController: UIViewController {
         ])
 
         // Cover wash overlay for the cancelled state (EN-9335), pinned over the header image.
-        ui_view_cover_wash.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        ui_view_cover_wash.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         ui_view_cover_wash.isHidden = true
         ui_view_cover_wash.isUserInteractionEnabled = false
         ui_view_cover_wash.translatesAutoresizingMaskIntoConstraints = false

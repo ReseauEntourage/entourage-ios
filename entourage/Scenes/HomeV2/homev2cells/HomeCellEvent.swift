@@ -44,7 +44,7 @@ class HomeCellEvent:UICollectionViewCell{
     }
 
     private func setupCancelledIndicators() {
-        ui_view_cancelled_wash.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        ui_view_cancelled_wash.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         ui_view_cancelled_wash.isHidden = true
         ui_view_cancelled_wash.isUserInteractionEnabled = false
         ui_view_cancelled_wash.translatesAutoresizingMaskIntoConstraints = false
