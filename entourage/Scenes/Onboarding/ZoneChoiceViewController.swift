@@ -30,7 +30,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     
     var initialCoordinate: CLLocationCoordinate2D?
     var initialLabel: String?
-    var initialRadiusKm: Int = 20
+    var initialRadiusKm: Int = 40
 
     weak var delegate: ZoneChoiceViewControllerDelegate?
 
@@ -78,7 +78,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private var selectedCoord: CLLocationCoordinate2D?
     private var selectedPlace: GMSPlace?
     private var selectedLabel: String?
-    private var currentRadiusKm: Int = 20
+    private var currentRadiusKm: Int = 40
     private var searchTimer: Timer?
 
     // MARK: - Init
@@ -86,7 +86,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     init(
         initialCoordinate: CLLocationCoordinate2D? = nil,
         initialLabel: String? = nil,
-        initialRadiusKm: Int = 20,
+        initialRadiusKm: Int = 40,
         delegate: ZoneChoiceViewControllerDelegate? = nil,
         nextStep: ZoneChoiceNextStep = .onboardingEnd,
         onConfirm: ((ZoneChoiceResult) -> Void)? = nil,
@@ -687,7 +687,7 @@ extension UIViewController {
     func presentZoneChoiceSwiftUI(
         initialCoordinate: CLLocationCoordinate2D? = nil,
         initialLabel: String? = nil,
-        initialRadiusKm: Int = 20,
+        initialRadiusKm: Int = 40,
         nextStep: ZoneChoiceNextStep = .onboardingEnd,
         onConfirm: @escaping (ZoneChoiceResult) -> Void,
         onCancel: @escaping () -> Void

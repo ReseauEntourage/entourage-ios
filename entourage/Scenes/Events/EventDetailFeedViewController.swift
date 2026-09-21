@@ -138,7 +138,6 @@ class EventDetailFeedViewController: UIViewController {
         }
         
         // Charger les infos côté serveur
-        getEventMembers()
         getEventDetail()
     }
     
@@ -332,6 +331,10 @@ class EventDetailFeedViewController: UIViewController {
             self.event = event
             AppSignableManager.shared.updateFromEvent(event: event!)
             self.eventId = event?.uid ?? 0
+            // Doit être appelé après la résolution de eventId : en arrivant via un deeplink
+            // (hashedEventId), eventId vaut encore 0 avant ce point, ce qui ferait échouer
+            // l'appel outings/0/users (404).
+            self.getEventMembers()
 
             // Nouveau format du bouton flottant en bas
             if event?.isMember ?? false {

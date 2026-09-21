@@ -517,7 +517,7 @@ final class OnboardingStartViewController: UIViewController {
         presentZoneChoiceSwiftUI(
             initialCoordinate: temporaryLocation,
             initialLabel: temporaryAddressName,
-            initialRadiusKm: 20,
+            initialRadiusKm: 40,
             nextStep: nextStep,
             onConfirm: { [weak self] result in
                 // On garde les infos localement si nécessaire,

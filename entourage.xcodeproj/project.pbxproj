@@ -336,6 +336,7 @@
 		02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EFE47B289BFD2A00D70C68 /* ActionsMyListViewController.swift */; };
 		02EFE47E289C056B00D70C68 /* ActionMineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EFE47D289C056B00D70C68 /* ActionMineCell.swift */; };
 		02F50E1C28A1608E00011FE6 /* ActionEditMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F50E1B28A1608E00011FE6 /* ActionEditMainViewController.swift */; };
+		A3A91A3543502244878C8E08 /* ActionCharterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCB5DA78304A2F71A8EF260 /* ActionCharterView.swift */; };
 		02F527782799990F00929431 /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02F527772799990F00929431 /* GuideSolidarity.storyboard */; };
 		02F5277D2799995900929431 /* GuideDetailTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5277A2799995900929431 /* GuideDetailTableViewCells.swift */; };
 		02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5277B2799995900929431 /* GDSSearchViewController.swift */; };
@@ -435,6 +436,7 @@
 		24EE59D42FC09292008E7291 /* ConversationNotifAskViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59B82FC09292008E7291 /* ConversationNotifAskViewCell.swift */; };
 		194EA84686976862D731B969 /* BonnesOndesCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777E8CA9AFDBA2DC285F9493 /* BonnesOndesCardCell.swift */; };
 		BD0AB0A11AB5FAA8495A5C0D /* BonnesOndesCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2350661C0BC3AE1E7AFB6 /* BonnesOndesCardView.swift */; };
+		53D7C9D6D1A942CF9496570C /* ConversationsHeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FB946716604F7EBEE6D173 /* ConversationsHeaderBarView.swift */; };
 		C313ABE1095FE492E280E4D3 /* ConversationSectionLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D494315B7391BF1A24F69 /* ConversationSectionLabelCell.swift */; };
 		24EE59D62FC09292008E7291 /* ImageGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59B02FC09292008E7291 /* ImageGridCell.swift */; };
 		24EE59D72FC09292008E7291 /* ConversationsMainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE59BD2FC09292008E7291 /* ConversationsMainHomeViewController.swift */; };
@@ -1008,6 +1010,7 @@
 		02EFE47B289BFD2A00D70C68 /* ActionsMyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsMyListViewController.swift; sourceTree = "<group>"; };
 		02EFE47D289C056B00D70C68 /* ActionMineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMineCell.swift; sourceTree = "<group>"; };
 		02F50E1B28A1608E00011FE6 /* ActionEditMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionEditMainViewController.swift; sourceTree = "<group>"; };
+		BCCB5DA78304A2F71A8EF260 /* ActionCharterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCharterView.swift; sourceTree = "<group>"; };
 		02F527772799990F00929431 /* GuideSolidarity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideSolidarity.storyboard; sourceTree = "<group>"; };
 		02F5277A2799995900929431 /* GuideDetailTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideDetailTableViewCells.swift; sourceTree = "<group>"; };
 		02F5277B2799995900929431 /* GDSSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDSSearchViewController.swift; sourceTree = "<group>"; };
@@ -1090,6 +1093,7 @@
 		24EE59AB2FC09292008E7291 /* DiscussionEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscussionEventCell.xib; sourceTree = "<group>"; };
 		777E8CA9AFDBA2DC285F9493 /* BonnesOndesCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonnesOndesCardCell.swift; sourceTree = "<group>"; };
 		81A2350661C0BC3AE1E7AFB6 /* BonnesOndesCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonnesOndesCardView.swift; sourceTree = "<group>"; };
+		E5FB946716604F7EBEE6D173 /* ConversationsHeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsHeaderBarView.swift; sourceTree = "<group>"; };
 		4C2D494315B7391BF1A24F69 /* ConversationSectionLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSectionLabelCell.swift; sourceTree = "<group>"; };
 		D20CA96658A44D04696F21EA /* ConversationFilterModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationFilterModalView.swift; sourceTree = "<group>"; };
 		24EE59AF2FC09292008E7291 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -1994,6 +1998,7 @@
 				026FF208289A71F700640572 /* Cells */,
 				02F50E1B28A1608E00011FE6 /* ActionEditMainViewController.swift */,
 				26BB4D492CCFBF1B00A8ACF7 /* ActionCreatePhase4ViewController.swift */,
+				BCCB5DA78304A2F71A8EF260 /* ActionCharterView.swift */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -2313,6 +2318,7 @@
 				24EE59AB2FC09292008E7291 /* DiscussionEventCell.xib */,
 				777E8CA9AFDBA2DC285F9493 /* BonnesOndesCardCell.swift */,
 				81A2350661C0BC3AE1E7AFB6 /* BonnesOndesCardView.swift */,
+				E5FB946716604F7EBEE6D173 /* ConversationsHeaderBarView.swift */,
 				4C2D494315B7391BF1A24F69 /* ConversationSectionLabelCell.swift */,
 			);
 			path = cells;
@@ -3399,6 +3405,7 @@
 				24EE59D72FC09292008E7291 /* ConversationsMainHomeViewController.swift in Sources */,
 				194EA84686976862D731B969 /* BonnesOndesCardCell.swift in Sources */,
 				BD0AB0A11AB5FAA8495A5C0D /* BonnesOndesCardView.swift in Sources */,
+				53D7C9D6D1A942CF9496570C /* ConversationsHeaderBarView.swift in Sources */,
 				C313ABE1095FE492E280E4D3 /* ConversationSectionLabelCell.swift in Sources */,
 				A87062E798E4837EFC208628 /* ConversationFilterModalView.swift in Sources */,
 				24EE59D82FC09292008E7291 /* ConversationListMembersViewController.swift in Sources */,
@@ -3437,6 +3444,7 @@
 				02B94C33284F92AD006059EF /* HomeActionTeachCell.swift in Sources */,
 				02A92C2C2898116B000DFF95 /* ActionCreatePhotoCell.swift in Sources */,
 				02F50E1C28A1608E00011FE6 /* ActionEditMainViewController.swift in Sources */,
+				A3A91A3543502244878C8E08 /* ActionCharterView.swift in Sources */,
 				02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */,
 				0268C253285A2B1400294055 /* FloatyViewController.swift in Sources */,
 				26D13E352BB1EBA500CAD4F7 /* SectionOptionNameCell.swift in Sources */,

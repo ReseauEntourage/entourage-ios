@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 import SVProgressHUD
 
 enum ConversationMainDTO {
@@ -37,11 +38,12 @@ class ConversationsMainHomeViewController: UIViewController {
     var maxViewHeight: CGFloat = 109
     var minViewHeight: CGFloat = 70
 
-    /// Fetched once per screen lifetime to identify the pinned "Votre contact Entourage" conversation.
-    private var moderatorUserId: Int?
+    /// Fetched once per screen lifetime — same source as the Home "contact dédié" card — EN-9487.
+    private var moderator: HomeModerator?
+    /// True once fetchModeratorIdThenLoad()'s network call has returned (success or nil) — EN-9487.
+    private var hasResolvedModeratorId = false
 
-    private let ui_btn_filter = UIButton(type: .system)
-    private let ui_view_filter_badge = UIView()
+    private var headerHostingController: UIHostingController<ConversationsHeaderBarView>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,50 +57,40 @@ class ConversationsMainHomeViewController: UIViewController {
         ui_tableview.register(BonnesOndesCardCell.self, forCellReuseIdentifier: BonnesOndesCardCell.identifier)
 
         setupViews()
-        setupHeaderFilterButton()
+        setupHeaderBar()
         checkNotificationStatus()
         fetchModeratorIdThenLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateFilterSmallTalk), name: NSNotification.Name(kNotificationMessagesUpdateSmallTalkFilter), object: nil)
     }
 
-    /// Round white "sliders" button in the header, matching the reference mockup — EN-9490.
-    private func setupHeaderFilterButton() {
-        ui_btn_filter.backgroundColor = .white
-        ui_btn_filter.layer.cornerRadius = 26
-        ui_btn_filter.layer.shadowColor = UIColor.black.cgColor
-        ui_btn_filter.layer.shadowOpacity = 0.08
-        ui_btn_filter.layer.shadowOffset = CGSize(width: 0, height: 2)
-        ui_btn_filter.layer.shadowRadius = 6
-        ui_btn_filter.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
-        ui_btn_filter.tintColor = .appOrange
-        ui_btn_filter.translatesAutoresizingMaskIntoConstraints = false
-        ui_btn_filter.addTarget(self, action: #selector(onFilterTapped), for: .touchUpInside)
-        view.addSubview(ui_btn_filter)
-
-        ui_view_filter_badge.backgroundColor = UIColor(red: 1, green: 0.16, blue: 0.16, alpha: 1)
-        ui_view_filter_badge.layer.cornerRadius = 7.5
-        ui_view_filter_badge.layer.borderWidth = 2.5
-        ui_view_filter_badge.layer.borderColor = UIColor.appOrange.cgColor
-        ui_view_filter_badge.isHidden = true
-        ui_view_filter_badge.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(ui_view_filter_badge)
+    /// SwiftUI title + round "sliders" filter button, hosted over the straight orange header — EN-9490.
+    private func setupHeaderBar() {
+        let host = UIHostingController(rootView: headerBarView())
+        host.view.backgroundColor = .clear
+        host.view.translatesAutoresizingMaskIntoConstraints = false
+        addChild(host)
+        view.addSubview(host.view)
+        host.didMove(toParent: self)
 
         NSLayoutConstraint.activate([
-            ui_btn_filter.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            ui_btn_filter.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            ui_btn_filter.widthAnchor.constraint(equalToConstant: 52),
-            ui_btn_filter.heightAnchor.constraint(equalToConstant: 52),
-
-            ui_view_filter_badge.topAnchor.constraint(equalTo: ui_btn_filter.topAnchor, constant: -1),
-            ui_view_filter_badge.trailingAnchor.constraint(equalTo: ui_btn_filter.trailingAnchor, constant: 1),
-            ui_view_filter_badge.widthAnchor.constraint(equalToConstant: 15),
-            ui_view_filter_badge.heightAnchor.constraint(equalToConstant: 15)
+            host.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            host.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            host.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            host.view.heightAnchor.constraint(equalToConstant: 52)
         ])
+
+        headerHostingController = host
     }
 
-    @objc private func onFilterTapped() {
-        onFilterTap()
+    private func headerBarView() -> ConversationsHeaderBarView {
+        ConversationsHeaderBarView(filterActive: !selectedTypes.isEmpty, onFilterTap: { [weak self] in
+            self?.onFilterTap()
+        })
+    }
+
+    private func refreshHeaderBar() {
+        headerHostingController?.rootView = headerBarView()
     }
 
     @objc private func updateFilterSmallTalk() {
@@ -109,13 +101,14 @@ class ConversationsMainHomeViewController: UIViewController {
 
     private func fetchModeratorIdThenLoad() {
         HomeService.getUserHome { [weak self] userHome, _ in
-            self?.moderatorUserId = userHome?.moderator?.id
+            self?.moderator = userHome?.moderator
+            self?.hasResolvedModeratorId = true
             self?.loadConversations(reset: true)
         }
     }
 
     private func updateFilterBadge() {
-        ui_view_filter_badge.isHidden = selectedTypes.isEmpty
+        refreshHeaderBar()
     }
 
     private func onFilterTap() {
@@ -141,6 +134,9 @@ class ConversationsMainHomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Skip the very first call: it would race fetchModeratorIdThenLoad() and load the list
+        // before moderatorUserId is known, silently dropping the pinned contact — EN-9487.
+        guard hasResolvedModeratorId else { return }
         loadConversations(reset: true)
     }
 
@@ -151,8 +147,7 @@ class ConversationsMainHomeViewController: UIViewController {
         ui_view_selector.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_view_selector.layer.maskedCorners = CACornerMask.radiusTopOnly()
 
-        ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: 23)
-        ui_label_title.text = "Messages_title".localized
+        ui_label_title.isHidden = true
     }
 
     func checkNotificationStatus() {
@@ -312,23 +307,64 @@ class ConversationsMainHomeViewController: UIViewController {
     }
 
     private func appendHeaderRows() {
-        dataSource.append(.bonnesOndesCard)
         if notificationsDisabled {
             dataSource.append(.notificationRequest)
         }
+        dataSource.append(.bonnesOndesCard)
         dataSource.append(.sectionLabel(text: "conversation_your_conversations".localized))
     }
 
-    /// Moves the moderator's 1-1 conversation (if present in `conversations`) to the top, with its own label.
+    /// Pins the dedicated contact at the top, same source as the Home "contact dédié" card — EN-9487.
+    /// Uses its real conversation content when one already exists, otherwise a placeholder invite row.
     private func pinModeratorConversation(in conversations: [Conversation]) -> [Conversation] {
-        guard let moderatorUserId = moderatorUserId,
-              let index = conversations.firstIndex(where: { $0.type == "private" && $0.user?.uid == moderatorUserId }) else {
+        guard let moderator = moderator, let moderatorId = moderator.id else {
             return conversations
         }
+
         var result = conversations
-        let moderatorConv = result.remove(at: index)
-        dataSource.append(.conversation(conversation: moderatorConv, isDedicatedContact: true))
+        // getConversationMemberships doesn't return the interlocutor's id, only their name/avatar —
+        // match on display name since that's the only moderator field the membership payload mirrors.
+        if let index = result.firstIndex(where: { $0.type == "private" && $0.title == moderator.displayName }) {
+            let moderatorConv = result.remove(at: index)
+            dataSource.append(.conversation(conversation: moderatorConv, isDedicatedContact: true))
+        } else {
+            dataSource.append(.conversation(conversation: placeholderConversation(for: moderator), isDedicatedContact: true))
+        }
         return result
+    }
+
+    private func placeholderConversation(for moderator: HomeModerator) -> Conversation {
+        var conversation = Conversation()
+        conversation.uid = moderator.id ?? 0
+        conversation.type = "private"
+        conversation.title = moderator.displayName
+        conversation.user = MemberConversation(uid: moderator.id ?? 0, displayName: moderator.displayName, imageUrl: moderator.imgUrl)
+        conversation.lastMessage = LastMessage(text: "home_v2_moderator_subtitle".localized, dateStr: nil)
+        conversation.numberUnreadMessages = 0
+        return conversation
+    }
+
+    /// Opens the dedicated contact's thread the same way the Home "contact dédié" card does —
+    /// createOrGetConversation always resolves to the right thread, whether it already exists or not.
+    private func openDedicatedContactConversation() {
+        guard let moderatorId = moderator?.id else { return }
+
+        SVProgressHUD.show()
+        MessagingService.createOrGetConversation(userId: String(moderatorId)) { [weak self] conversation, _ in
+            SVProgressHUD.dismiss()
+            guard let self = self, let conversation = conversation else { return }
+
+            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                vc.type = conversation.type ?? "private"
+                vc.setupFromOtherVC(
+                    conversationId: conversation.uid,
+                    title: conversation.title,
+                    isOneToOne: true,
+                    delegate: self
+                )
+                self.present(vc, animated: true)
+            }
+        }
     }
 
     func loadDTO(conversations: [Conversation], reset: Bool) {
@@ -458,7 +494,11 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
             }
             return
 
-        case .conversation(let conversation, _):
+        case .conversation(let conversation, let isDedicatedContact):
+            if isDedicatedContact {
+                openDedicatedContactConversation()
+                return
+            }
             if conversation.type == "small_talk" {
                 if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.type = "small_talk"

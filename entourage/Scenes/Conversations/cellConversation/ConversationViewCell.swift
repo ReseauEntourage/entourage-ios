@@ -176,7 +176,10 @@ class ConversationViewCell: UITableViewCell {
 
         optionsButton.addTarget(self, action: #selector(handleOptionsTap), for: .touchUpInside)
         optionsButton.addSubview(optionsContentStack)
-        reactionBadges.onTap = nil
+        reactionBadges.onTap = { [weak self] in
+            guard let self, let messageId = self.currentMessage?.uid else { return }
+            self.delegate?.showReactionUsers(messageId: messageId)
+        }
 
         // Le .xib pin `ui_label_date.top` directement sous la bulle — on détache cette
         // contrainte pour intercaler la barre de réactions AU-DESSUS du nom/heure
@@ -259,6 +262,9 @@ class ConversationViewCell: UITableViewCell {
         optionsButton.isHidden = isMe
 
         reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
+        // Aligné avec Android : dès qu'une réaction existe déjà (reactionBadges visible), le
+        // bouton ne garde que l'icône, le texte "Réagir" n'a plus lieu d'être.
+        optionsLabel.isHidden = !reactionBadges.isHidden
 
         // Avatar : jamais affiché pour ses propres messages (EN-9558), uniquement pour l'interlocuteur.
         if isMe {

@@ -32,10 +32,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_orange_light" translatesAutoresizingMaskIntoConstraints="NO" id="Asi-OY-tyB">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="499"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_orange_dark" translatesAutoresizingMaskIntoConstraints="NO" id="Asi-OY-tyB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="439.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Asi-OY-tyB" secondAttribute="height" multiplier="390:470" id="Tag-9V-Pbg"/>
+                                    <constraint firstAttribute="width" secondItem="Asi-OY-tyB" secondAttribute="height" multiplier="392:416" id="Tag-9V-Pbg"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3O-uL-Op3">
@@ -201,19 +201,19 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LA3-Gj-VqA">
                                 <rect key="frame" x="0.0" y="96" width="414" height="109"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_orange_light" translatesAutoresizingMaskIntoConstraints="NO" id="DIY-PJ-gYy">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="499"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_orange_dark" translatesAutoresizingMaskIntoConstraints="NO" id="DIY-PJ-gYy">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="439.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="DIY-PJ-gYy" secondAttribute="height" multiplier="390:470" id="v9L-2a-y6g"/>
+                                            <constraint firstAttribute="width" secondItem="DIY-PJ-gYy" secondAttribute="height" multiplier="392:416" id="v9L-2a-y6g"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTZ-7t-qL7">
+                                    <label opaque="NO" hidden="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTZ-7t-qL7">
                                         <rect key="frame" x="20" y="32" width="64.5" height="30"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_messages_top" translatesAutoresizingMaskIntoConstraints="NO" id="cRZ-PA-DJe">
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_messages_top" translatesAutoresizingMaskIntoConstraints="NO" id="cRZ-PA-DJe">
                                         <rect key="frame" x="323" y="8" width="75" height="66"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="66" id="t3j-NT-qTz"/>
@@ -239,7 +239,7 @@
                                     <constraint firstItem="kTZ-7t-qL7" firstAttribute="leading" secondItem="LA3-Gj-VqA" secondAttribute="leading" constant="20" id="apK-Qg-YB4"/>
                                     <constraint firstAttribute="trailing" secondItem="6Rf-5V-aAC" secondAttribute="trailing" constant="3" id="dll-t5-uQz"/>
                                     <constraint firstItem="DIY-PJ-gYy" firstAttribute="leading" secondItem="LA3-Gj-VqA" secondAttribute="leading" id="h4T-0q-O60"/>
-                                    <constraint firstItem="DIY-PJ-gYy" firstAttribute="top" secondItem="LA3-Gj-VqA" secondAttribute="top" id="haF-q3-TpP"/>
+                                    <constraint firstItem="DIY-PJ-gYy" firstAttribute="top" secondItem="JNN-bU-Jaj" secondAttribute="top" id="haF-q3-TpP"/>
                                     <constraint firstItem="6Rf-5V-aAC" firstAttribute="leading" secondItem="LA3-Gj-VqA" secondAttribute="leading" constant="3" id="sPl-Ww-5se"/>
                                 </constraints>
                             </view>

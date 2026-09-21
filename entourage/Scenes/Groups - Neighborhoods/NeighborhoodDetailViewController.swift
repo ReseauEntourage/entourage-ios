@@ -302,6 +302,9 @@ class NeighborhoodDetailViewController: UIViewController {
                 
                 // Mise à jour de la data source
                 self.neighborhood = group
+                // Nécessaire pour les ouvertures via deeplink (hashedNeighborhoodId), où neighborhoodId
+                // vaut encore 0 à ce stade et ferait échouer l'appel chat_messages/0 (404).
+                self.neighborhoodId = group.uid
                 // Met à jour le header et les vues associées
                 self.populateTopView()
                 // Réinitialise le tableau des messages et les tableaux auxiliaires

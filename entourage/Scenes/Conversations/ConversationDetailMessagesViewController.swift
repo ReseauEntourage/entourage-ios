@@ -565,6 +565,9 @@ private var imagePreviewOverlay: UIView?
                     self.messagesForRetry.remove(at: positionForRetry)
                 }
 
+                // Le message vient déjà d'être envoyé avec succès : ce rechargement n'a plus
+                // besoin d'afficher le HUD plein écran à chaque envoi.
+                self.isSilentRefresh = true
                 if self.isSmallTalkMode {
                     self.fetchSmallTalkData()
                 } else {
@@ -946,12 +949,18 @@ private var imagePreviewOverlay: UIView?
         if isLoading { return }
         isLoading = true
 
-        DispatchQueue.main.async { SVProgressHUD.show() }
+        // Pas de HUD plein écran pour un rechargement silencieux (ex: juste après l'envoi
+        // d'un message, ou reconnexion socket) — seulement pour un vrai chargement initial.
+        let showHUD = !isSilentRefresh
+        if showHUD {
+            DispatchQueue.main.async { SVProgressHUD.show() }
+        }
 
         SmallTalkService.getSmallTalk(id: smallTalkId) { smallTalk, error in
             guard let smallTalk = smallTalk else {
-                DispatchQueue.main.async { SVProgressHUD.dismiss() }
+                if showHUD { DispatchQueue.main.async { SVProgressHUD.dismiss() } }
                 self.isLoading = false
+                self.isSilentRefresh = false
                 return
             }
 
@@ -981,8 +990,9 @@ private var imagePreviewOverlay: UIView?
 
             SmallTalkService.listMessages(id: self.smallTalkId, page: self.currentPage, per: self.numberOfItemsForWS) { messages, _ in
                 DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
+                    if showHUD { SVProgressHUD.dismiss() }
                     self.isLoading = false
+                    self.isSilentRefresh = false
 
                     guard let messages = messages else { return }
 
@@ -2150,6 +2160,21 @@ extension ConversationDetailMessagesViewController: MessageCellSignalDelegate {
     private func revertLocalReaction(messageId: Int, to previousReactionId: Int) {
         guard let idx = messages.firstIndex(where: { $0.uid == messageId }) else { return }
         applyLocalReaction(atIndex: idx, reactionId: previousReactionId)
+    }
+
+    func showReactionUsers(messageId: Int) {
+        if let navVC = UIStoryboard(name: StoryboardName.neighborhood, bundle: nil)
+            .instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController,
+           let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.postId = messageId
+            vc.isFromReact = true
+            if isSmallTalkMode {
+                vc.smallTalkId = smallTalkId
+            } else {
+                vc.conversationId = conversationId
+            }
+            present(navVC, animated: true)
+        }
     }
 
     /// Mutation optimiste locale (toggle si même réaction déjà posée par l'utilisateur, sinon

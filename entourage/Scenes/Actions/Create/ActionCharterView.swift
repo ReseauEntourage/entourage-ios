@@ -1,0 +1,273 @@
+//
+//  ActionCharterView.swift
+//  entourage
+//
+//  Created by Claude on 16/09/2026.
+//
+
+import SwiftUI
+
+struct ActionCharterView: View {
+
+    let isContrib: Bool
+    let onAccept: () -> Void
+    let onReadFullCharter: () -> Void
+
+    var body: some View {
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    bannerView
+                    examplesSection
+                    limitsSection
+                    if !isContrib {
+                        respectSection
+                    }
+                    if isContrib {
+                        spiritView
+                    }
+                }
+                .padding(.horizontal, 18)
+                .padding(.top, 18)
+                .padding(.bottom, 12)
+            }
+            ctaView
+        }
+        .background(Color(UIColor.appBeigeClair))
+    }
+
+    // MARK: - Banner
+
+    private var bannerView: some View {
+        HStack(alignment: .top, spacing: 14) {
+            Text(isContrib ? "🤝" : "🙋")
+                .font(.system(size: 24))
+                .frame(width: 46, height: 46)
+                .background(Color(UIColor.appOrange))
+                .clipShape(Circle())
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(isContrib ? "action_charter_contrib_eyebrow".localized : "action_charter_demand_eyebrow".localized)
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 11)))
+                    .textCase(.uppercase)
+                    .foregroundColor(Color(UIColor.appOrangeDark))
+
+                Text(isContrib ? "action_charter_contrib_title".localized : "action_charter_demand_title".localized)
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 17)))
+                    .foregroundColor(.black)
+                    .lineSpacing(2)
+
+                Text(isContrib ? "action_charter_contrib_subtitle".localized : "action_charter_demand_subtitle".localized)
+                    .font(Font(ApplicationTheme.getFontNunitoRegular(size: 13.5)))
+                    .foregroundColor(Color(UIColor.appGris112))
+                    .lineSpacing(3)
+            }
+        }
+        .padding(16)
+        .background(
+            LinearGradient(colors: [Color("very_light_orange"), Color(UIColor.appOrangeLight_50)], startPoint: .topLeading, endPoint: .bottomTrailing)
+        )
+        .cornerRadius(18)
+    }
+
+    // MARK: - Examples
+
+    private var examplesSection: some View {
+        sectionContainer(dot: "✓", dotBackground: Color(UIColor.appGreenLogout).opacity(0.18), dotColor: Color(UIColor.appGreenLogout), title: "action_charter_examples_title".localized) {
+            cardContainer {
+                let items = examples
+                ForEach(Array(items.enumerated()), id: \.offset) { index, item in
+                    if index > 0 {
+                        Divider().padding(.leading, 46)
+                    }
+                    itemRow(icon: item.icon, text: item.text)
+                }
+            }
+        }
+    }
+
+    private var examples: [(icon: String, text: String)] {
+        if isContrib {
+            return [
+                (icon: "🧺", text: "action_charter_contrib_example_1".localized),
+                (icon: "☕", text: "action_charter_contrib_example_2".localized),
+                (icon: "🗣️", text: "action_charter_contrib_example_3".localized),
+                (icon: "🧥", text: "action_charter_contrib_example_4".localized)
+            ]
+        } else {
+            return [
+                (icon: "🧥", text: "action_charter_demand_example_1".localized),
+                (icon: "🧺", text: "action_charter_demand_example_2".localized),
+                (icon: "☕", text: "action_charter_demand_example_3".localized)
+            ]
+        }
+    }
+
+    // MARK: - Limits
+
+    private var limitsSection: some View {
+        sectionContainer(dot: "!", dotBackground: Color(UIColor.appOrangeLight_50), dotColor: Color(UIColor.appOrangeDark), title: "action_charter_limits_title".localized) {
+            VStack(alignment: .leading, spacing: 8) {
+                ForEach(Array(limits.enumerated()), id: \.offset) { _, text in
+                    HStack(alignment: .top, spacing: 10) {
+                        Text("✕")
+                            .font(Font(ApplicationTheme.getFontQuickSandBold(size: 13)))
+                            .foregroundColor(Color(UIColor.appOrangeDark))
+                        Text(text)
+                            .font(Font(ApplicationTheme.getFontNunitoRegular(size: 13)))
+                            .foregroundColor(Color(UIColor.appGris112))
+                            .lineSpacing(2)
+                    }
+                }
+
+                Text(limitFooter)
+                    .font(Font(ApplicationTheme.getFontNunitoRegular(size: 12.5)))
+                    .foregroundColor(Color(UIColor.appGris112))
+                    .lineSpacing(2)
+                    .padding(.top, 9)
+                    .overlay(
+                        Rectangle()
+                            .fill(Color(UIColor.appOrangeLight))
+                            .frame(height: 1)
+                            .padding(.top, 0),
+                        alignment: .top
+                    )
+            }
+            .padding(16)
+            .background(Color("very_light_orange"))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color(UIColor.appOrangeLight_70), lineWidth: 1)
+            )
+            .cornerRadius(16)
+        }
+    }
+
+    private var limits: [String] {
+        if isContrib {
+            return [
+                "action_charter_contrib_limit_1".localized,
+                "action_charter_contrib_limit_2".localized,
+                "action_charter_contrib_limit_3".localized,
+                "action_charter_contrib_limit_4".localized
+            ]
+        } else {
+            return [
+                "action_charter_demand_limit_1".localized,
+                "action_charter_demand_limit_2".localized,
+                "action_charter_demand_limit_3".localized,
+                "action_charter_demand_limit_4".localized
+            ]
+        }
+    }
+
+    private var limitFooter: String {
+        isContrib ? "action_charter_contrib_limit_footer".localized : "action_charter_demand_limit_footer".localized
+    }
+
+    // MARK: - Respect (demande only)
+
+    private var respectSection: some View {
+        sectionContainer(dot: "♥", dotBackground: Color(UIColor.appOrangeLight_50), dotColor: Color(UIColor.appOrangeDark), title: "action_charter_respect_title".localized) {
+            cardContainer {
+                let items: [(icon: String, text: String)] = [
+                    (icon: "🤲", text: "action_charter_demand_respect_1".localized),
+                    (icon: "🔒", text: "action_charter_demand_respect_2".localized),
+                    (icon: "🤝", text: "action_charter_demand_respect_3".localized)
+                ]
+                ForEach(Array(items.enumerated()), id: \.offset) { index, item in
+                    if index > 0 {
+                        Divider().padding(.leading, 46)
+                    }
+                    itemRow(icon: item.icon, text: item.text)
+                }
+            }
+        }
+    }
+
+    // MARK: - Spirit (contribution only)
+
+    private var spiritView: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Text("✨").font(.system(size: 20))
+            Text("action_charter_contrib_spirit".localized)
+                .font(Font(ApplicationTheme.getFontNunitoBold(size: 13)))
+                .foregroundColor(Color(UIColor.appGreenLogout))
+                .lineSpacing(3)
+        }
+        .padding(15)
+        .background(Color("green_light"))
+        .cornerRadius(16)
+    }
+
+    // MARK: - Sticky CTA
+
+    private var ctaView: some View {
+        VStack(spacing: 9) {
+            Button(action: onReadFullCharter) {
+                Text("action_charter_read_full_link".localized)
+                    .font(Font(ApplicationTheme.getFontNunitoBold(size: 12)))
+                    .foregroundColor(Color(UIColor.appOrangeDark))
+                    .underline()
+            }
+
+            Button(action: onAccept) {
+                Text("accept_charte".localized)
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 15.5)))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+            }
+            .background(Color(UIColor.appOrange))
+            .cornerRadius(28)
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 14)
+        .padding(.bottom, 22)
+        .background(Color(UIColor.appBeigeClair))
+    }
+
+    // MARK: - Shared building blocks
+
+    @ViewBuilder
+    private func sectionContainer<Content: View>(dot: String, dotBackground: Color, dotColor: Color, title: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 8) {
+                Text(dot)
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 12)))
+                    .foregroundColor(dotColor)
+                    .frame(width: 22, height: 22)
+                    .background(dotBackground)
+                    .clipShape(Circle())
+
+                Text(title)
+                    .font(Font(ApplicationTheme.getFontQuickSandBold(size: 14.5)))
+                    .foregroundColor(.black)
+            }
+            content()
+        }
+    }
+
+    @ViewBuilder
+    private func cardContainer<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            content()
+        }
+        .background(Color.white)
+        .cornerRadius(16)
+    }
+
+    private func itemRow(icon: String, text: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            Text(icon)
+                .font(.system(size: 18))
+                .frame(width: 22)
+            Text(text)
+                .font(Font(ApplicationTheme.getFontNunitoRegular(size: 13.5)))
+                .foregroundColor(.black)
+                .lineSpacing(2)
+        }
+        .padding(.vertical, 11)
+        .padding(.horizontal, 14)
+    }
+}

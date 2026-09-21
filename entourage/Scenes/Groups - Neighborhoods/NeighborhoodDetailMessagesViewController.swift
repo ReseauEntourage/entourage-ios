@@ -528,13 +528,11 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                     }
                 }
             }
-            SVProgressHUD.show()
             self.ui_iv_bt_send.isUserInteractionEnabled = false
             self.ui_view_txtview.isUserInteractionEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.ui_iv_bt_send.isUserInteractionEnabled = true
                 self.ui_view_txtview.isUserInteractionEnabled = true
-                SVProgressHUD.dismiss()
             }
         }
     }
@@ -1062,6 +1060,17 @@ extension NeighborhoodDetailMessagesViewController: MessageCellSignalDelegate {
 
     func retrySend(message: String, positionForRetry: Int) {
         sendMessage(message: message, isRetry: true, positionForRetry: positionForRetry)
+    }
+
+    func showReactionUsers(messageId: Int) {
+        if let navVC = UIStoryboard(name: StoryboardName.neighborhood, bundle: nil)
+            .instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController,
+           let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.groupId = neighborhoodId
+            vc.postId = messageId
+            vc.isFromReact = true
+            present(navVC, animated: true)
+        }
     }
 
     func showUser(userId: Int?) {

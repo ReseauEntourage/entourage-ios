@@ -814,6 +814,18 @@ extension EventDetailMessagesViewController: MessageCellSignalDelegate {
         applyLocalReaction(atIndex: idx, reactionId: previousReactionId)
     }
 
+    func showReactionUsers(messageId: Int) {
+        if let navVC = UIStoryboard(name: StoryboardName.neighborhood, bundle: nil)
+            .instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController,
+           let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
+            vc.eventId = eventId
+            vc.postId = messageId
+            vc.isFromReact = true
+            vc.isEvent = true
+            present(navVC, animated: true)
+        }
+    }
+
     private func applyLocalReaction(atIndex idx: Int, reactionId: Int) {
         var reactions = messages[idx].reactions ?? []
         let previousReactionId = messages[idx].reactionId ?? 0

@@ -6,15 +6,16 @@
 //
 
 import UIKit
+import SwiftUI
 import SVProgressHUD
 import GooglePlaces
 import CoreLocation
 
 class ActionEditMainViewController: UIViewController {
-    
-    
+
+
     @IBOutlet weak var ui_page_control: MJCustomPageControl!
-    
+
     @IBOutlet weak var ui_error_view: MJErrorInputView!
     @IBOutlet weak var ui_title_phase_nb: UILabel!
     @IBOutlet weak var ui_title_phase: UILabel!
@@ -23,14 +24,10 @@ class ActionEditMainViewController: UIViewController {
     @IBOutlet weak var ui_bt_previous: UIButton!
     @IBOutlet weak var ui_bt_next: UIButton!
     @IBOutlet weak var ui_top_view: MJNavBackView!
-    
+
     @IBOutlet weak var ui_view_charte: UIView!
-    @IBOutlet weak var ui_tableview_charte: UITableView!
-    @IBOutlet weak var ui_button_validate_charte: UIButton!
-    
-    var arrayDesc = [String]()
-    var arrayTitle = [String]()
-    
+    @IBOutlet weak var ui_charte_host: UIView!
+
     var currentPhasePosition = 1
     
     var pageViewController:ActionCreatePageViewController? = nil
@@ -85,29 +82,41 @@ class ActionEditMainViewController: UIViewController {
         
         self.modalPresentationStyle = .fullScreen
         
-        ui_top_view.populateCustom(title: "action_charte_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
+        ui_top_view.populateCustom(title: "action_charter_screen_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
         
         //Charte
         ui_view_charte.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-        ui_button_validate_charte.layer.cornerRadius = ui_bt_previous.frame.height / 2
-        ui_button_validate_charte.layer.borderColor = UIColor.appOrange.cgColor
-        ui_button_validate_charte.layer.borderWidth = 1
-        ui_button_validate_charte.backgroundColor = .appOrange
-        ui_button_validate_charte.setTitleColor(.white, for: .normal)
-        ui_button_validate_charte.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
-        ui_button_validate_charte.setTitle("accept_charte".localized, for: .normal)
-        
-        arrayDesc = ["action_charte_1".localized,"action_charte_2".localized,
-                     "action_charte_3".localized,"action_charte_4".localized,"action_charte_5".localized]
-        
-        arrayTitle = ["action_charte_1_title".localized,"action_charte_2_title".localized,
-                      "action_charte_3_title".localized,"action_charte_4_title".localized,"action_charte_5_title".localized]
-        ui_tableview_charte.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-        ui_tableview_charte.delegate = self
-        ui_tableview_charte.dataSource = self
-        
+        embedCharterView()
+
         _ = checkValidation()
         newAction = currentAction
+    }
+
+    private func embedCharterView() {
+        let charterView = ActionCharterView(isContrib: isContrib, onAccept: { [weak self] in
+            self?.validateCharte()
+        }, onReadFullCharter: { [weak self] in
+            self?.showFullCharter()
+        })
+        let hostingController = UIHostingController(rootView: charterView)
+        addChild(hostingController)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.backgroundColor = .clear
+        ui_charte_host.addSubview(hostingController.view)
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: ui_charte_host.topAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: ui_charte_host.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: ui_charte_host.trailingAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: ui_charte_host.bottomAnchor)
+        ])
+        hostingController.didMove(toParent: self)
+    }
+
+    private func showFullCharter() {
+        if let vc = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "params_CGU_VC") as? ActionParamsCGUViewController {
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
     }
     
     //MARK: - Network -
@@ -182,7 +191,7 @@ class ActionEditMainViewController: UIViewController {
         goPageBack()
     }
     
-    @IBAction func action_validate_charte(_ sender: Any) {
+    private func validateCharte() {
         ui_view_charte.isHidden = true
         ui_top_view.updateTitle(title: actionTitle)
     }
@@ -393,17 +402,3 @@ extension ActionEditMainViewController: MJAlertControllerDelegate {
     }
 }
 
-//MARK: - Protocol TableView DataSource/delegate -
-extension ActionEditMainViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayDesc.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodCguCell
-        
-        cell.populateCell(title: arrayTitle[indexPath.row], description: arrayDesc[indexPath.row])
-        
-        return cell
-    }
-}

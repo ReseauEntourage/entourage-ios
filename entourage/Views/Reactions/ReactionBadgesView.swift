@@ -17,7 +17,7 @@ final class ReactionBadgesView: UIView {
     private let stackView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .horizontal
-        sv.spacing = 4
+        sv.spacing = -3
         sv.alignment = .center
         sv.translatesAutoresizingMaskIntoConstraints = false
         return sv
@@ -95,7 +95,9 @@ final class ReactionBadgesView: UIView {
         let countLabel = UILabel()
         countLabel.font = UIFont(name: "NunitoSans-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
         countLabel.textColor = .black
-        countLabel.text = "\(totalCount)"
+        // Le spacing négatif de la stack (superposition des ronds) colle sinon le chiffre
+        // contre le dernier rond — même compensation que NeighborhoodPostCell.displayReactions.
+        countLabel.text = "  \(totalCount)"
         countLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         stackView.addArrangedSubview(countLabel)
 

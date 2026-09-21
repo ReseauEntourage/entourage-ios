@@ -29,7 +29,7 @@ final class ConversationSectionLabelCell: UITableViewCell {
         backgroundColor = .clear
         contentView.backgroundColor = .clear
 
-        label.font = ApplicationTheme.getFontNunitoBold(size: 11)
+        label.font = ApplicationTheme.getFontQuickSandBold(size: 15)
         label.textColor = .appGris112
         label.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(label)

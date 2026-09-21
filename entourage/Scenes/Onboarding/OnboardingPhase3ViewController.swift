@@ -224,7 +224,7 @@ final class OnboardingPhase3ViewController: UIViewController {
         let nextStep: ZoneChoiceNextStep = isAsso ? .associationOnboarding : .onboardingEnd
 
         let user = UserDefaults.currentUser
-        let radius = max(1, user?.radiusDistance ?? 20)
+        let radius = max(1, user?.radiusDistance ?? 40)
 
         var coord: CLLocationCoordinate2D? = nil
         var label: String? = nil

@@ -46,6 +46,8 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     var isFromReact = false
 
     var eventId: Int? = nil
+    var conversationId: Int? = nil
+    var smallTalkId: String? = nil
 
     // Survey
     var survey: Survey? = nil
@@ -407,6 +409,10 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
             NeighborhoodService.getPostReactionsDetails(groupId: groupId, postId: postId, completion: completion)
         } else if let eventId = self.eventId {
             EventService.getEventPostReactionDetails(eventId: eventId, postId: postId, completion: completion)
+        } else if let conversationId = self.conversationId {
+            MessagingService.getReactionDetails(conversationId: conversationId, messageId: postId, completion: completion)
+        } else if let smallTalkId = self.smallTalkId {
+            SmallTalkService.getReactionDetails(smallTalkId: smallTalkId, messageId: "\(postId)", completion: completion)
         }
     }
 

@@ -180,6 +180,10 @@ class NeighborhoodMessageCell: UITableViewCell {
 
         optionsButton.addTarget(self, action: #selector(handleOptionsTap), for: .touchUpInside)
         optionsButton.addSubview(optionsContentStack)
+        reactionBadges.onTap = { [weak self] in
+            guard let self, self.messageId != 0 else { return }
+            self.delegate?.showReactionUsers(messageId: self.messageId)
+        }
 
         // Le storyboard pin directement sous la bulle SOIT ui_date SOIT ui_username selon le
         // prototype (cellMe : ui_date.top ; cellOther : ui_username.top) — l'autre label suit
@@ -297,6 +301,9 @@ class NeighborhoodMessageCell: UITableViewCell {
         // Pas de réaction possible sur son propre message : seul l'appui long reste disponible
         // pour accéder aux options (Copier/Modifier/Supprimer), le bouton "Réagir" est masqué.
         optionsButton.isHidden = isMe
+        // Aligné avec Android : dès qu'une réaction existe déjà (reactionBadges visible), le
+        // bouton ne garde que l'icône, le texte "Réagir" n'a plus lieu d'être.
+        optionsLabel.isHidden = !reactionBadges.isHidden
 
         if isMe {
             ui_bt_signal_me?.isHidden = true
@@ -771,4 +778,6 @@ protocol MessageCellSignalDelegate: AnyObject {
     func showFullScreenImage(_ image: UIImage) // 🆕 Ajoute cette méthode
     /// Tap sur un emoji de la barre de réactions (jamais disponible sur son propre message).
     func didTapReaction(messageId: Int, reactionType: ReactionType)
+    /// Tap sur les pastilles de réactions déjà posées sur un message : affiche qui a réagi et avec quel emoji.
+    func showReactionUsers(messageId: Int)
 }
