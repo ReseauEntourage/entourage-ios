@@ -20,6 +20,14 @@ struct EventLimitedPlacesModalView: View {
         "event_limited_places_step3".localized
     ]
 
+    /// Renders `**bold**` markdown spans in localized copy without changing the surrounding text color.
+    private func markdownText(_ string: String) -> Text {
+        if #available(iOS 15, *), let attributed = try? AttributedString(markdown: string) {
+            return Text(attributed)
+        }
+        return Text(string.replacingOccurrences(of: "**", with: ""))
+    }
+
     var body: some View {
         ZStack(alignment: .bottom) {
             Color.black.opacity(0.4)
@@ -27,13 +35,23 @@ struct EventLimitedPlacesModalView: View {
                 .onTapGesture { onDecline() }
 
             VStack(alignment: .leading, spacing: 16) {
-                Text("event_limited_places_badge".localized)
-                    .font(Font(ApplicationTheme.getFontNunitoBold(size: 12)))
-                    .foregroundColor(Color(UIColor.appOrange))
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(Color(UIColor.appOrangeLight_50))
-                    .clipShape(Capsule())
+                HStack(alignment: .center) {
+                    Text("event_limited_places_badge".localized)
+                        .font(Font(ApplicationTheme.getFontNunitoBold(size: 12)))
+                        .foregroundColor(Color(UIColor.appOrangeDark))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Color(UIColor.appBeigeLighter))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                    Spacer()
+
+                    Button(action: onDecline) {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(Color(UIColor.appOrange))
+                    }
+                }
 
                 Text("event_limited_places_title".localized)
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 22) ?? UIFont.boldSystemFont(ofSize: 22)))
@@ -53,21 +71,28 @@ struct EventLimitedPlacesModalView: View {
                                 .background(Color(UIColor.appOrange))
                                 .clipShape(Circle())
 
-                            Text(step)
+                            markdownText(step)
                                 .font(Font(ApplicationTheme.getFontNunitoRegular(size: 14)))
                                 .foregroundColor(.black)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                     }
                 }
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: 35)
+                        .fill(Color(UIColor.appBeigeClair))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 35)
+                        .stroke(Color(UIColor(hexString: "#CDCDCD")), lineWidth: 1)
+                )
 
-                Text("event_limited_places_nudge".localized)
-                    .font(Font(ApplicationTheme.getFontNunitoRegularItalic(size: 13)))
+                markdownText("event_limited_places_nudge".localized)
+                    .font(Font(ApplicationTheme.getFontNunitoRegular(size: 13)))
                     .foregroundColor(Color(UIColor.appGris112))
-                    .padding(12)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color(UIColor.appBeigeLighter))
-                    .cornerRadius(12)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 Button(action: onRequestPlace) {
                     Text("event_limited_places_cta_primary".localized)
@@ -82,14 +107,16 @@ struct EventLimitedPlacesModalView: View {
                 Button(action: onDecline) {
                     Text("event_limited_places_cta_secondary".localized)
                         .font(Font(ApplicationTheme.getFontNunitoBold(size: 14)))
-                        .foregroundColor(Color(UIColor.appOrange))
+                        .foregroundColor(Color(UIColor.appGris112))
+                        .underline()
                         .frame(maxWidth: .infinity)
                 }
             }
-            .padding(20)
-            .padding(.bottom, 12)
+            .padding(.horizontal, 24)
+            .padding(.top, 26)
+            .padding(.bottom, 22)
             .background(Color.white)
-            .clipShape(RoundedCorner(radius: 28, corners: [.topLeft, .topRight]))
+            .clipShape(RoundedCorner(radius: 35, corners: [.topLeft, .topRight]))
         }
     }
 }
