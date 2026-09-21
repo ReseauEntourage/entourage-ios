@@ -846,6 +846,16 @@ private var imagePreviewOverlay: UIView?
 
     private func applyIncomingMessage(_ event: SocketChannelEvent) {
         guard let incoming = event.decodeMessage() else { return }
+
+        // Le canal "Outing" est partagé entre la discussion racine de l'événement et les fils
+        // de commentaires de chacune de ses publications (cf. EventDetailMessagesViewController,
+        // qui filtre sur parentPostId == parentCommentId). Ici on est sur la discussion racine :
+        // seuls les messages sans parentPostId lui appartiennent, les autres sont des
+        // commentaires d'une publication et ne doivent pas se mélanger dans ce fil.
+        if type == "outing", incoming.parentPostId != nil {
+            return
+        }
+
         guard !messages.contains(where: { $0.uid == incoming.uid }) else { return }
 
         // Capturé avant l'ajout : `hasMoved` ne redevient jamais false une fois qu'on a
