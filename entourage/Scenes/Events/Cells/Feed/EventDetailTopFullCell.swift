@@ -167,6 +167,7 @@ class EventDetailTopFullCell: UITableViewCell {
         
         // --- TITRE et DESCRIPTION ---
         ui_title.text = event.title
+        ui_title.textColor = event.isCanceled() ? .appGris112 : .black
         if let _desc = event.descriptionEvent {
             ui_lbl_about_desc?.text = _desc
             ui_lbl_about_desc?.handleURLTap({ url in

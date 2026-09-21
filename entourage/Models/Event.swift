@@ -194,7 +194,7 @@ struct Event:Codable {
     }
     
     func isCanceled() -> Bool {
-        return status == "closed"
+        return status == "closed" || status == "cancelled"
     }
     
     enum CodingKeys: String, CodingKey {

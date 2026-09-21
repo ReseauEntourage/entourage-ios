@@ -48,7 +48,7 @@ struct Action:Codable {
     }
     
     func isCanceled() -> Bool {
-        return status == "closed"
+        return status == "closed" || status == "cancelled"
     }
     mutating func setCancel() {
         status = "closed"

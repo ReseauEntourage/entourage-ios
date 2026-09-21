@@ -75,6 +75,9 @@ class EventListMainV2ViewController: UIViewController {
         super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
+        // Posted by EventDetailFeedViewController after a change (ex: annulation) so the list reflects it
+        // even when returning from detail skips the normal viewWillAppear refresh (EN-9335).
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshAfterEventUpdate), name: NSNotification.Name(rawValue: kNotificationEventsUpdate), object: nil)
 
         // Title
         self.ui_title_label.text = "tabbar_events".localized
@@ -273,6 +276,12 @@ class EventListMainV2ViewController: UIViewController {
     }
 
     @objc func refreshDatas() {
+        loadForInit()
+    }
+
+    /// A detail screen just posted that an event changed (ex: annulation) — refresh even though
+    /// `comeFromDetail` would otherwise skip the reload in `viewWillAppear`.
+    @objc private func refreshAfterEventUpdate() {
         loadForInit()
     }
 

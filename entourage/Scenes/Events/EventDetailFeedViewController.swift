@@ -72,6 +72,8 @@ class EventDetailFeedViewController: UIViewController {
     /// Subtitle under the cancelled banner + wash overlay on the cover, added in code (EN-9335).
     private let ui_lbl_canceled_subtitle = UILabel()
     private let ui_view_cover_wash = UIView()
+    /// Matches the `d07-9I-UNC` height constraint on `ui_view_canceled` in Event.storyboard.
+    private let cancelledBannerHeight: CGFloat = 52
 
     override func loadView(){
         super.loadView()
@@ -179,11 +181,9 @@ class EventDetailFeedViewController: UIViewController {
         viewNormalHeight = ui_view_height_constraint.constant
 
         let topPadding = ApplicationTheme.getTopIPhonePadding()
-        let inset = UIEdgeInsets(top: viewNormalHeight - topPadding, left: 0, bottom: 0, right: 0)
         minViewHeight += topPadding - 20
-        
-        ui_tableview.contentInset = inset
-        ui_tableview.scrollIndicatorInsets = inset
+
+        updateTableTopInset()
         
         ui_label_title_event.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_iv_event_mini.layer.cornerRadius = 8
@@ -217,7 +217,7 @@ class EventDetailFeedViewController: UIViewController {
         ])
 
         // Cover wash overlay for the cancelled state (EN-9335), pinned over the header image.
-        ui_view_cover_wash.backgroundColor = UIColor.white.withAlphaComponent(0.45)
+        ui_view_cover_wash.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         ui_view_cover_wash.isHidden = true
         ui_view_cover_wash.isUserInteractionEnabled = false
         ui_view_cover_wash.translatesAutoresizingMaskIntoConstraints = false
@@ -229,7 +229,20 @@ class EventDetailFeedViewController: UIViewController {
             ui_view_cover_wash.bottomAnchor.constraint(equalTo: ui_iv_event.bottomAnchor)
         ])
     }
-    
+
+    /// Reserves room, below the (dynamically sized) header, for the "Événement annulé" banner so the
+    /// scrollable content doesn't start on top of it (EN-9335). Call again once `event` is known.
+    private func updateTableTopInset() {
+        let topPadding = ApplicationTheme.getTopIPhonePadding()
+        var topInset = viewNormalHeight - topPadding
+        if event?.isCanceled() ?? false {
+            topInset += cancelledBannerHeight
+        }
+        let inset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
+        ui_tableview.contentInset = inset
+        ui_tableview.scrollIndicatorInsets = inset
+    }
+
     func populateTopView(isAfterLoading: Bool) {
         let imageName = "placeholder_photo_group"
         
@@ -363,6 +376,7 @@ class EventDetailFeedViewController: UIViewController {
                 self.ui_view_canceled.isHidden = true
                 self.ui_btn_participate_and_see_conv.isEnabled = true
             }
+            self.updateTableTopInset()
 
             // Met à jour la topView
             self.populateTopView(isAfterLoading: true)
