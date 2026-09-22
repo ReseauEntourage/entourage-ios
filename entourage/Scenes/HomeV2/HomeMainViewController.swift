@@ -30,10 +30,8 @@ enum HomeV2DTO {
     case cellPedago(pedago: PedagogicResource)
     case cellMap
     case cellIAmLost(helpType: HomeNeedHelpType)
-    case moderator(name: String, imageUrl: String? = nil)
     case cellInitialPedago(pedagos: [PedagogicResource])
     case cellWelcomeJourney(viewModel: WelcomeJourneyViewModel)
-    case cellSmallTalk(userRequests:[UserSmallTalkRequest])
     case cellSolidarityTools
     case cellClimatisation
 }
@@ -71,7 +69,6 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     var isContributionPreference = false
     var shouldLaunchEventPopup: Int? = nil
     var shouldTestOnboarding = false
-    var userSmallTalkRequests: [UserSmallTalkRequest] = []
     private var hasRunEntryGating = false
     private var hasShownCompletionStateThisSession = false
     private var hasInitiallyCompletedAll: Bool? = nil
@@ -103,9 +100,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_table_view.register(UINib(nibName: HomeGroupHorizontalCollectionCell.identifier, bundle: nil), forCellReuseIdentifier: HomeGroupHorizontalCollectionCell.identifier)
         ui_table_view.register(UINib(nibName: HomeCellPedago.identifier, bundle: nil), forCellReuseIdentifier: HomeCellPedago.identifier)
         ui_table_view.register(UINib(nibName: HomeNeedHelpCell.identifier, bundle: nil), forCellReuseIdentifier: HomeNeedHelpCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeModeratorCell.identifier, bundle: nil), forCellReuseIdentifier: HomeModeratorCell.identifier)
         ui_table_view.register(UINib(nibName: HomeInitialPedagogicHorizontalCell.identifier, bundle: nil), forCellReuseIdentifier: HomeInitialPedagogicHorizontalCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeSmallTalkCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSmallTalkCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
         ui_table_view.register(UINib(nibName: HomeCellClimatisation.identifier, bundle: nil), forCellReuseIdentifier: HomeCellClimatisation.identifier)
         ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
@@ -514,13 +509,6 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
             tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
         }
 
-        if let _moderator = userHome.moderator {
-            if let _name = _moderator.displayName {
-                tableDTO.append(.moderator(name: _name, imageUrl: _moderator.imgUrl))
-            }
-        }
-
-        tableDTO.append(.cellSmallTalk(userRequests: self.userSmallTalkRequests))
         tableDTO.append(.cellSolidarityTools)
         tableDTO.append(.cellClimatisation)
 
@@ -617,24 +605,11 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.configure(homeNeedHelpType: helpType)
                 return cell
             }
-        case .moderator(let name, let imageUrl):
-            if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeModeratorCell") as? HomeModeratorCell {
-                cell.selectionStyle = .none
-                cell.configure(title: name, imageUrl: imageUrl)
-                return cell
-            }
         case .cellInitialPedago(let pedagos):
             if let cell = ui_table_view.dequeueReusableCell(withIdentifier: "HomeInitialPedagogicHorizontalCell") as? HomeInitialPedagogicHorizontalCell {
                 cell.selectionStyle = .none
                 cell.delegate = self
                 cell.configure(pedagos: pedagos)
-                return cell
-            }
-        case .cellSmallTalk(let userRequests):
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "HomeSmallTalkCell") as? HomeSmallTalkCell {
-                cell.selectionStyle = .none
-                cell.parentViewController = self
-                cell.configure(with: userRequests)
                 return cell
             }
         case .cellSolidarityTools:
@@ -738,19 +713,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                 AnalyticsLoggerManager.logEvent(name: Action_Home_CreateGroup)
                 showPedagogic(pedagogic: pedagoCreateGroup!)
             }
-        case .moderator(_, _):
-            if let _moderator = self.userHome.moderator {
-                AnalyticsLoggerManager.logEvent(name: Action__Home__Moderator)
-                if let _id = _moderator.id {
-                    MessagingService.createOrGetConversation(userId: String(_id)) { conversation, error in
-                        if let conversation = conversation {
-                            DeepLinkManager.showConversation(conversationId: conversation.uid)
-                        }
-                    }
-                }
-            }
         case .cellInitialPedago(_): return
-        case .cellSmallTalk(_): return
         case .cellSolidarityTools: return
         case .cellClimatisation:
             AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
@@ -769,9 +732,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellPedago(_): return UITableView.automaticDimension
         case .cellMap: return UITableView.automaticDimension
         case .cellIAmLost(_): return UITableView.automaticDimension
-        case .moderator(_, _): return UITableView.automaticDimension
         case .cellInitialPedago(_): return 115
-        case .cellSmallTalk(_): return UITableView.automaticDimension
         case .cellSolidarityTools: return UITableView.automaticDimension
         case .cellClimatisation: return UITableView.automaticDimension
         case .cellWelcomeJourney(_): return UITableView.automaticDimension
@@ -788,15 +749,6 @@ extension HomeMainViewController {
         }
     }
     
-    func getUserSmallTalkRequests() {
-        SmallTalkService.listUserSmallTalkRequests { [weak self] requests, error in
-            guard let self = self else { return }
-            self.userSmallTalkRequests = requests ?? []
-            DispatchQueue.main.async {
-                self.configureDTO()
-            }
-        }
-    }
     func getDemandes() {
         if isContributionPreference {
             ActionsService.getAllActions(isContrib: true, currentPage: 1, per: 3, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
@@ -841,7 +793,7 @@ extension HomeMainViewController {
               self.initialPedagos.append(pedagoRead)
             }
           }
-            self.getUserSmallTalkRequests()
+            self.configureDTO()
         }
       }
     
