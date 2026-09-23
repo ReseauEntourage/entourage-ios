@@ -392,9 +392,8 @@ class ConversationViewCell: UITableViewCell {
 
         // Pas de réaction possible sur son propre message : seul l'appui long reste disponible
         // pour accéder aux options (Copier/Modifier/Supprimer), le bouton "Réagir" est masqué.
-        // Sur les messages reçus, un seul "Réagir" par groupe, sous le dernier message (EN-9558) ;
-        // l'appui long reste possible sur chaque bulle.
-        optionsButton.isHidden = isMe || !isLastInGroup
+        // Sur les messages reçus, "Réagir" reste affiché sous chaque message, même groupé.
+        optionsButton.isHidden = isMe
 
         reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
         // Aligné avec Android : dès qu'une réaction existe déjà (reactionBadges visible), le
