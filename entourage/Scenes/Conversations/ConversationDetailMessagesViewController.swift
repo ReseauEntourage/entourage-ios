@@ -31,8 +31,14 @@ struct MessagesSorted {
 /// - Les cellules “message en échec / retry”
 private enum ConversationCellDTO {
     case dateString(title:String)
-    case message(message:PostMessage, isFirstInGroup: Bool)
-    case retryMessage(message:PostMessage, positionRetry: Int, isFirstInGroup: Bool)
+    case message(message:PostMessage, grouping: MessageGrouping)
+    case retryMessage(message:PostMessage, positionRetry: Int, grouping: MessageGrouping)
+}
+
+/// Position d'un message dans son groupe visuel (EN-9558).
+private struct MessageGrouping {
+    var isFirst: Bool
+    var isLast: Bool
 }
 
 /// Deux messages consécutifs du même expéditeur à moins de 5 minutes d'écart forment un même groupe (EN-9558).
@@ -183,6 +189,11 @@ private var imagePreviewOverlay: UIView?
         ui_tableview.register(UINib(nibName: DiscussionEventCell.identifier, bundle: nil),
                               forCellReuseIdentifier: DiscussionEventCell.identifier)
         ui_tableview.delegate = self
+        // EN-9558 : fond blanc sur toute la conversation (le fond beige de la table transparaissait
+        // derrière les séparateurs de date) et trait gris pleine largeur sous le header.
+        ui_tableview.backgroundColor = .white
+        ui_top_view.superview?.backgroundColor = .white
+        ui_top_view.useFullWidthSeparator(color: .appMessagingSeparator)
         // Vue "vide" — masquée définitivement, remplacée par emptyStateView
         ui_view_empty.isHidden = true
         setupConversationEmptyState()
@@ -984,7 +995,7 @@ private var imagePreviewOverlay: UIView?
                     titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
                     titleColor: .black,
                     imageName: nil,
-                    backgroundColor: .appBeigeClair,
+                    backgroundColor: .white,
                     delegate: self,
                     showSeparator: true,
                     cornerRadius: nil,
@@ -1375,7 +1386,7 @@ func checkNewConv() {
                             titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
                             titleColor: .black,
                             delegate: self,
-                            backgroundColor: .appBeigeClair,
+                            backgroundColor: .white,
                             isClose: false,
                             doubleRightMargin: true,
                             event: event
@@ -1388,7 +1399,7 @@ func checkNewConv() {
                         titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
                         titleColor: .black,
                         delegate: self,
-                        backgroundColor: .appBeigeClair,
+                        backgroundColor: .white,
                         isClose: false,
                         doubleRightMargin: true
                     )
@@ -1439,19 +1450,42 @@ func checkNewConv() {
             newDTOs.append(.dateString(title: k.dateString))
             lastMessageOverall = nil // un nouveau jour démarre toujours un nouveau groupe
             for msg in v {
-                newDTOs.append(.message(message: msg, isFirstInGroup: isFirstInGroup(msg, after: lastMessageOverall)))
+                let grouping = MessageGrouping(isFirst: isFirstInGroup(msg, after: lastMessageOverall), isLast: true)
+                newDTOs.append(.message(message: msg, grouping: grouping))
                 lastMessageOverall = msg
             }
         }
 
         // 2) On ajoute les messages en “retry”
         for (idx, retryMsg) in messagesForRetry.enumerated() {
-            let firstInGroup = isFirstInGroup(retryMsg, after: lastMessageOverall)
-            newDTOs.append(.retryMessage(message: retryMsg, positionRetry: idx, isFirstInGroup: firstInGroup))
+            let grouping = MessageGrouping(isFirst: isFirstInGroup(retryMsg, after: lastMessageOverall), isLast: true)
+            newDTOs.append(.retryMessage(message: retryMsg, positionRetry: idx, grouping: grouping))
             lastMessageOverall = retryMsg
         }
 
-        // 3) On affecte le tableau final
+        // 3) Un message clôt son groupe si l'élément suivant n'est pas un message du même groupe
+        // (séparateur de date, fin de liste, ou message qui démarre un nouveau groupe).
+        func groupingOf(_ dto: ConversationCellDTO) -> MessageGrouping? {
+            switch dto {
+            case .dateString: return nil
+            case .message(_, let grouping), .retryMessage(_, _, let grouping): return grouping
+            }
+        }
+        for index in newDTOs.indices {
+            let nextStartsNewGroup = index + 1 >= newDTOs.count || (groupingOf(newDTOs[index + 1])?.isFirst ?? true)
+            switch newDTOs[index] {
+            case .dateString:
+                break
+            case .message(let message, var grouping):
+                grouping.isLast = nextStartsNewGroup
+                newDTOs[index] = .message(message: message, grouping: grouping)
+            case .retryMessage(let message, let position, var grouping):
+                grouping.isLast = nextStartsNewGroup
+                newDTOs[index] = .retryMessage(message: message, positionRetry: position, grouping: grouping)
+            }
+        }
+
+        // 4) On affecte le tableau final
         self.conversationCellDTOs = newDTOs
     }
 
@@ -1806,7 +1840,7 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
             return cell
 
         // MARK: – Message « normal »
-        case .message(let message, let isFirstInGroup):
+        case .message(let message, let grouping):
             let isMe = (message.user?.sid == self.meId)
             let reuseId = isMe
                 ? ConversationMeCell.identifier
@@ -1818,14 +1852,16 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
             else { return UITableViewCell() }
 
             // Configure selon le contenu
-            cell.configure(with: message, isMe: isMe, isFirstInGroup: isFirstInGroup)
+            cell.configure(with: message, isMe: isMe,
+                           isFirstInGroup: grouping.isFirst, isLastInGroup: grouping.isLast,
+                           showSenderName: !isOneToOne)
             cell.selectionStyle = .none
             cell.delegate = self
 
             return cell
 
         // MARK: – Message en échec (retry)
-        case .retryMessage(let message, _, let isFirstInGroup):
+        case .retryMessage(let message, _, let grouping):
             // Toujours « me » pour les retry
             guard let cell = tableView
                     .dequeueReusableCell(withIdentifier: ConversationMeCell.identifier,
@@ -1833,7 +1869,9 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
             else { return UITableViewCell() }
 
             // On affiche le message dans l’état « retry »
-            cell.configure(with: message, isMe: true, isFirstInGroup: isFirstInGroup)
+            cell.configure(with: message, isMe: true,
+                           isFirstInGroup: grouping.isFirst, isLastInGroup: grouping.isLast,
+                           showSenderName: !isOneToOne)
             return cell
         }
     }

@@ -9,6 +9,15 @@ private let conversationBaseFont: UIFont = UIFont(name: "NunitoSans-Regular", si
 private let deletedBackgroundColor = UIColor.appPaleGrey
 private let deletedTextColor = UIColor(named: "appGreyTextDeleted") ?? UIColor.darkGray
 
+// Regroupement des messages (EN-9558) : bulles d'un même groupe collées, coins resserrés côté
+// expéditeur à l'intérieur du groupe, espace normal entre deux groupes.
+private let groupOuterSpacing: CGFloat = 7
+private let groupInnerSpacing: CGFloat = 1.5
+private let bubbleOuterRadius: CGFloat = 18
+private let bubbleInnerRadius: CGFloat = 6
+/// Marge droite des messages envoyés, alignée sur l'icône du header.
+private let outgoingBubbleTrailingMargin: CGFloat = 20
+
 // MARK: - Base Cell
 
 class ConversationViewCell: UITableViewCell {
@@ -33,6 +42,17 @@ class ConversationViewCell: UITableViewCell {
     private var imageWidthConstraint: NSLayoutConstraint?
     private var imageAspectConstraint: NSLayoutConstraint?
 
+    // MARK: - Regroupement (EN-9558)
+    /// Mise en page « message envoyé » (bulle calée à droite). Surchargé par ConversationMeCell.
+    class var isOutgoingLayout: Bool { return false }
+    private var isFirstInGroup = true
+    private var isLastInGroup = true
+    private var bubbleTopConstraint: NSLayoutConstraint?
+    private var reactionsTopConstraint: NSLayoutConstraint?
+    private var dateTopConstraint: NSLayoutConstraint?
+    private var bottomConstraint: NSLayoutConstraint?
+    private let bubbleMaskLayer = CAShapeLayer()
+
     // MARK: - Réactions & options (pastille "Réagir" sous la bulle, ouvre l'overlay unifié
     // réactions + options — cf. MessageActionOverlay. Masquée sur son propre message : seul
     // l'appui long y donne alors accès, cf. handleLongPress/presentOverlay.)
@@ -42,7 +62,7 @@ class ConversationViewCell: UITableViewCell {
         button.layer.cornerRadius = 16
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.appGrisReaction.cgColor
+        button.layer.borderColor = UIColor.appMessagingBorder.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -57,8 +77,9 @@ class ConversationViewCell: UITableViewCell {
     private let optionsLabel: UILabel = {
         let label = UILabel()
         label.text = "react_action_button".localized
-        label.font = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
-        label.textColor = .appGreyOff
+        label.font = UIFont(name: "NunitoSans-SemiBold", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        // Contraste WCAG AA (EN-9558) : texte standard foncé, l'icône orange garde le repère couleur.
+        label.textColor = .appAnthracite
         label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -104,7 +125,8 @@ class ConversationViewCell: UITableViewCell {
         ui_image_comment.addGestureRecognizer(tapGesture)
 
         // Date
-        ui_label_date.setFontBody(size: 12)
+        ui_label_date.setFontBody(size: 13)
+        ui_label_date.textColor = .appTextDisabled
 
         // ActiveLabel config
         ui_label_comment.numberOfLines = 0
@@ -168,7 +190,48 @@ class ConversationViewCell: UITableViewCell {
         longPressGesture.minimumPressDuration = 0.5
         ui_view_label.addGestureRecognizer(longPressGesture)
 
+        // Coins de bulle "groupés" (rayons différents par coin) : le cornerRadius uniforme du .xib
+        // est remplacé par un masque, recalculé à chaque layout (cf. updateBubbleMask).
+        ui_view_label.layer.cornerRadius = 0
+        ui_view_label.layer.mask = bubbleMaskLayer
+
         setupOptionsAndReactions()
+        setupGroupingLayout()
+    }
+
+    /// Ajuste la mise en page du .xib pour le regroupement des messages (EN-9558).
+    private func setupGroupingLayout() {
+        bubbleTopConstraint = contentView.constraints.first {
+            $0.firstItem === ui_view_label && $0.firstAttribute == .top && $0.secondItem === contentView
+        }
+        bottomConstraint = contentView.constraints.first {
+            $0.firstItem === contentView && $0.firstAttribute == .bottom && $0.secondItem === ui_label_date
+        }
+
+        // Avatar de l'interlocuteur(trice) aligné sur le bas de la bulle : affiché une seule fois,
+        // à côté du dernier message du groupe.
+        NSLayoutConstraint.deactivate(contentView.constraints.filter {
+            $0.firstItem === ui_image_avatar && $0.firstAttribute == .top
+        })
+        ui_image_avatar.bottomAnchor.constraint(equalTo: ui_view_label.bottomAnchor).isActive = true
+
+        guard type(of: self).isOutgoingLayout else { return }
+
+        // Plus d'avatar sur ses propres messages : on supprime l'espace qui lui était réservé et
+        // la bulle est calée à droite de l'écran, au niveau de l'icône du header.
+        NSLayoutConstraint.deactivate(contentView.constraints.filter {
+            ($0.firstItem === ui_image_avatar && $0.secondItem === ui_view_label) ||
+            ($0.firstItem === ui_view_label && $0.secondItem === ui_image_avatar)
+        })
+        // L'heure passe à droite, sous la bulle.
+        NSLayoutConstraint.deactivate(contentView.constraints.filter {
+            $0.firstItem === ui_label_date && $0.firstAttribute == .leading
+        })
+        NSLayoutConstraint.activate([
+            ui_view_label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -outgoingBubbleTrailingMargin),
+            ui_label_date.trailingAnchor.constraint(equalTo: ui_view_label.trailingAnchor, constant: -4),
+            ui_label_date.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 20)
+        ])
     }
 
     private func setupOptionsAndReactions() {
@@ -186,6 +249,18 @@ class ConversationViewCell: UITableViewCell {
         // (bulle → réactions → nom), sans toucher au reste de la mise en page.
         detachTopConstraint(of: ui_label_date, from: ui_view_label)
 
+        let reactionsTop = reactionsStack.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 4)
+        let dateTop = ui_label_date.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4)
+        reactionsTopConstraint = reactionsTop
+        dateTopConstraint = dateTop
+
+        // Réactions alignées sur le bord de la bulle côté expéditeur(trice).
+        let reactionsHorizontal: [NSLayoutConstraint] = type(of: self).isOutgoingLayout
+            ? [reactionsStack.trailingAnchor.constraint(equalTo: ui_view_label.trailingAnchor),
+               reactionsStack.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 20)]
+            : [reactionsStack.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor),
+               reactionsStack.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10)]
+
         NSLayoutConstraint.activate([
             optionsIcon.widthAnchor.constraint(equalToConstant: 18),
             optionsIcon.heightAnchor.constraint(equalToConstant: 18),
@@ -194,12 +269,9 @@ class ConversationViewCell: UITableViewCell {
             optionsContentStack.leadingAnchor.constraint(equalTo: optionsButton.leadingAnchor, constant: 14),
             optionsContentStack.trailingAnchor.constraint(equalTo: optionsButton.trailingAnchor, constant: -14),
 
-            reactionsStack.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 4),
-            reactionsStack.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor),
-            reactionsStack.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10),
-
-            ui_label_date.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4)
-        ])
+            reactionsTop,
+            dateTop
+        ] + reactionsHorizontal)
     }
 
     /// Détache la contrainte `.top` du .xib reliant `label` au bas de `anchorView`, pour
@@ -215,7 +287,60 @@ class ConversationViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        // La bulle doit avoir sa taille finale pour calculer son masque.
+        contentView.layoutIfNeeded()
         ui_image_avatar.layer.cornerRadius = ui_image_avatar.bounds.height / 2
+        updateBubbleMask()
+    }
+
+    /// Coins de la bulle selon sa position dans le groupe : côté expéditeur(trice), seuls le haut
+    /// du premier message et le bas du dernier restent bien arrondis (EN-9558).
+    private func updateBubbleMask() {
+        let bounds = ui_view_label.bounds
+        let senderTop = isFirstInGroup ? bubbleOuterRadius : bubbleInnerRadius
+        let senderBottom = isLastInGroup ? bubbleOuterRadius : bubbleInnerRadius
+        let outgoing = type(of: self).isOutgoingLayout
+
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        bubbleMaskLayer.frame = bounds
+        bubbleMaskLayer.path = roundedBubblePath(
+            in: bounds,
+            topLeft: outgoing ? bubbleOuterRadius : senderTop,
+            topRight: outgoing ? senderTop : bubbleOuterRadius,
+            bottomLeft: outgoing ? bubbleOuterRadius : senderBottom,
+            bottomRight: outgoing ? senderBottom : bubbleOuterRadius
+        ).cgPath
+        CATransaction.commit()
+    }
+
+    private func roundedBubblePath(in rect: CGRect, topLeft: CGFloat, topRight: CGFloat, bottomLeft: CGFloat, bottomRight: CGFloat) -> UIBezierPath {
+        let maxRadius = min(rect.width, rect.height) / 2
+        let tl = min(topLeft, maxRadius), tr = min(topRight, maxRadius)
+        let bl = min(bottomLeft, maxRadius), br = min(bottomRight, maxRadius)
+
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: rect.minX + tl, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX - tr, y: rect.minY))
+        path.addArc(withCenter: CGPoint(x: rect.maxX - tr, y: rect.minY + tr), radius: tr, startAngle: -.pi / 2, endAngle: 0, clockwise: true)
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY - br))
+        path.addArc(withCenter: CGPoint(x: rect.maxX - br, y: rect.maxY - br), radius: br, startAngle: 0, endAngle: .pi / 2, clockwise: true)
+        path.addLine(to: CGPoint(x: rect.minX + bl, y: rect.maxY))
+        path.addArc(withCenter: CGPoint(x: rect.minX + bl, y: rect.maxY - bl), radius: bl, startAngle: .pi / 2, endAngle: .pi, clockwise: true)
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.minY + tl))
+        path.addArc(withCenter: CGPoint(x: rect.minX + tl, y: rect.minY + tl), radius: tl, startAngle: .pi, endAngle: 3 * .pi / 2, clockwise: true)
+        path.close()
+        return path
+    }
+
+    /// Espacements selon la position dans le groupe : bulles collées à l'intérieur d'un groupe,
+    /// et les lignes réactions / heure ne prennent de place que lorsqu'elles sont affichées.
+    private func applyGroupSpacing() {
+        let hasReactionsRow = !reactionBadges.isHidden || !optionsButton.isHidden
+        bubbleTopConstraint?.constant = isFirstInGroup ? groupOuterSpacing : groupInnerSpacing
+        reactionsTopConstraint?.constant = hasReactionsRow ? 4 : 0
+        dateTopConstraint?.constant = isLastInGroup ? 4 : 0
+        bottomConstraint?.constant = isLastInGroup ? groupOuterSpacing : groupInnerSpacing
     }
 
     override func prepareForReuse() {
@@ -248,26 +373,38 @@ class ConversationViewCell: UITableViewCell {
         delegate = nil
         currentMessage = nil
         currentPositionForRetry = 0
+        isFirstInGroup = true
+        isLastInGroup = true
     }
 
     // MARK: - Configuration
-    func configure(with message: PostMessage, isMe: Bool, isFirstInGroup: Bool = true, positionForRetry: Int = 0) {
+    /// - Parameters:
+    ///   - isFirstInGroup / isLastInGroup: position du message dans son groupe (même expéditeur(trice),
+    ///     moins de 5 min d'écart) — EN-9558.
+    ///   - showSenderName: `false` en tête-à-tête (le nom figure déjà dans le header).
+    func configure(with message: PostMessage, isMe: Bool, isFirstInGroup: Bool = true, isLastInGroup: Bool = true, showSenderName: Bool = true, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
         currentIsMe = isMe
+        self.isFirstInGroup = isFirstInGroup
+        self.isLastInGroup = isLastInGroup
         mentionLinkMap.removeAll()
 
         // Pas de réaction possible sur son propre message : seul l'appui long reste disponible
         // pour accéder aux options (Copier/Modifier/Supprimer), le bouton "Réagir" est masqué.
-        optionsButton.isHidden = isMe
+        // Sur les messages reçus, un seul "Réagir" par groupe, sous le dernier message (EN-9558) ;
+        // l'appui long reste possible sur chaque bulle.
+        optionsButton.isHidden = isMe || !isLastInGroup
 
         reactionBadges.configure(reactions: message.reactions, types: ReactionType.stored())
         // Aligné avec Android : dès qu'une réaction existe déjà (reactionBadges visible), le
         // bouton ne garde que l'icône, le texte "Réagir" n'a plus lieu d'être.
         optionsLabel.isHidden = !reactionBadges.isHidden
 
-        // Avatar : jamais affiché pour ses propres messages (EN-9558), uniquement pour l'interlocuteur.
-        if isMe {
+        // Avatar : jamais affiché pour ses propres messages, et une seule fois par groupe pour
+        // l'interlocuteur(trice), à côté du dernier message (EN-9558). Masqué ≠ retiré : la place
+        // reste réservée pour garder les bulles du groupe alignées.
+        if isMe || !isLastInGroup {
             ui_image_avatar.isHidden = true
         } else {
             ui_image_avatar.isHidden = false
@@ -292,8 +429,12 @@ class ConversationViewCell: UITableViewCell {
             applyNormalContent(message: message, isMe: isMe)
         }
 
-        // Nom (si premier message du groupe) + heure (HH:mm, toujours affichée) — EN-9558
-        ui_label_date.text = formattedNameAndTime(from: message, showName: isFirstInGroup)
+        // Heure une seule fois par groupe, sous le dernier message. Le nom n'y est ajouté qu'en
+        // discussion de groupe / événement / bonnes ondes, et jamais sur ses propres messages — EN-9558
+        ui_label_date.text = isLastInGroup
+            ? formattedNameAndTime(from: message, showName: showSenderName && !isMe)
+            : nil
+        applyGroupSpacing()
 
         // ----- Image attachée -----
         if let imgUrl = message.messageImageUrl, let url = URL(string: imgUrl) {
@@ -418,12 +559,20 @@ class ConversationViewCell: UITableViewCell {
 
 
     private func applyNormalContent(message: PostMessage, isMe: Bool) {
-        ui_view_label.backgroundColor = isMe ? UIColor.appBeige : UIColor.orangeMedium
-        if message.messageType == "auto" {
+        // Reçu : pêche clair / texte anthracite ; envoyé : orange / texte blanc (EN-9558).
+        let isAuto = message.messageType == "auto"
+        let isOutgoingBubble = isMe && !isAuto
+        if isAuto {
             ui_view_label.backgroundColor = UIColor.appBleuAuto
+        } else {
+            ui_view_label.backgroundColor = isMe ? UIColor.appMessageSentBubble : UIColor.appMessageReceivedBubble
         }
 
-        ui_label_comment.textColor = .black
+        let linkColor: UIColor = isOutgoingBubble ? .white : unifiedBlue
+        ui_label_comment.textColor = isOutgoingBubble ? .white : .appAnthracite
+        ui_label_comment.URLColor = linkColor
+        ui_label_comment.hashtagColor = linkColor
+        ui_label_comment.mentionColor = linkColor
         ui_label_comment.enabledTypes = [.url, .mention, .hashtag, phoneType]
 
         if let html = message.contentHtml, !html.isEmpty {
@@ -524,6 +673,7 @@ class ConversationViewCell: UITableViewCell {
 
 class ConversationMeCell: ConversationViewCell {
     static let identifier = "cellMeWithImage"
+    override class var isOutgoingLayout: Bool { return true }
 }
 
 class ConversationOtherCell: ConversationViewCell {

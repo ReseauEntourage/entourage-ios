@@ -154,6 +154,14 @@ extension UIColor {
     static var appTagUnderstand: UIColor { return UIColor(hexString: "#3F6AD7") }
     static var appTagUnderstandBackground: UIColor { return UIColor(hexString: "#E3EBFF") }
 
+    //MARK: - Messaging colors (EN-9558) -
+    static var appMessageReceivedBubble: UIColor { return UIColor(hexString: "#FEEAE3") }
+    static var appMessageSentBubble: UIColor { return UIColor(hexString: "#FF9C5D") }
+    static var appTextSecondary: UIColor { return UIColor(hexString: "#6D6C6C") }
+    static var appTextDisabled: UIColor { return UIColor(hexString: "#A0A0A0") }
+    static var appMessagingSeparator: UIColor { return UIColor(hexString: "#E8E8E8") }
+    static var appMessagingBorder: UIColor { return UIColor(hexString: "#EFE7E2") }
+
     convenience init(hexString: String) {
         let scanner = Scanner(string: hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
         var hexNumber: UInt64 = 0

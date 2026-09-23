@@ -182,6 +182,22 @@ class MJNavBackView: UIView {
         }
     }
     
+    /// Remplace le trait de séparation inséré (32pt de marge de chaque côté) par un trait
+    /// pleine largeur de la couleur donnée. Opt-in, utilisé par l'écran de conversation (EN-9558).
+    func useFullWidthSeparator(color: UIColor) {
+        for separator in ui_views_bottom_separator {
+            separator.backgroundColor = color
+            guard let container = separator.superview else { continue }
+            for constraint in container.constraints {
+                let involvesSeparator = constraint.firstItem === separator || constraint.secondItem === separator
+                let isHorizontalEdge = [.leading, .trailing].contains(constraint.firstAttribute)
+                if involvesSeparator && isHorizontalEdge {
+                    constraint.constant = 0
+                }
+            }
+        }
+    }
+
     func changeTitleColor(titleColor:UIColor) {
         for _uititle in ui_titles {
             _uititle.textColor = titleColor
