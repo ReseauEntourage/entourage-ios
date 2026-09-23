@@ -77,6 +77,7 @@ class ActionCreateMainViewController: UIViewController {
         
         //Charte
         ui_view_charte.layer.cornerRadius = ApplicationTheme.bigCornerRadius
+        ui_view_charte.clipsToBounds = true
         embedCharterView()
 
         if isContrib {

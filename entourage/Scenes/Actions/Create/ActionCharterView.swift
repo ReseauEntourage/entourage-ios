@@ -13,27 +13,66 @@ struct ActionCharterView: View {
     let onAccept: () -> Void
     let onReadFullCharter: () -> Void
 
+    @State private var contentFrame: CGRect = .zero
+    @State private var viewportHeight: CGFloat = 0
+
+    private let scrollSpace = "action_charter_scroll"
+    private let sheetColor = Color(UIColor.appBeigeClair)
+
+    // EN-9620 : le lien "Lire la charte complète" et le CTA terminent le contenu scrollable
+    // (plus de footer sticky rapporté, et il faut atteindre le bas pour valider). Un fondu en
+    // haut/bas de la zone scrollable évite que le contenu soit coupé net.
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 14) {
-                    bannerView
-                    examplesSection
-                    limitsSection
-                    if !isContrib {
-                        respectSection
-                    }
-                    if isContrib {
-                        spiritView
-                    }
+        ScrollView {
+            VStack(alignment: .leading, spacing: 14) {
+                bannerView
+                examplesSection
+                limitsSection
+                if !isContrib {
+                    respectSection
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, 14)
-                .padding(.bottom, 10)
+                if isContrib {
+                    spiritView
+                }
+                ctaView
+                    .padding(.top, 10)
             }
-            ctaView
+            .padding(.horizontal, 16)
+            .padding(.top, 14)
+            .padding(.bottom, 14)
+            .background(
+                GeometryReader { proxy in
+                    Color.clear.preference(key: CharterContentFrameKey.self, value: proxy.frame(in: .named(scrollSpace)))
+                }
+            )
         }
-        .background(Color(UIColor.appBeigeClair))
+        .coordinateSpace(name: scrollSpace)
+        .background(
+            GeometryReader { proxy in
+                Color.clear.preference(key: CharterViewportHeightKey.self, value: proxy.size.height)
+            }
+        )
+        .onPreferenceChange(CharterContentFrameKey.self) { contentFrame = $0 }
+        .onPreferenceChange(CharterViewportHeightKey.self) { viewportHeight = $0 }
+        .overlay(scrollFade(fromTop: true).opacity(canScrollBackward ? 1 : 0), alignment: .top)
+        .overlay(scrollFade(fromTop: false).opacity(canScrollForward ? 1 : 0), alignment: .bottom)
+        .background(sheetColor)
+    }
+
+    private var canScrollBackward: Bool {
+        contentFrame.minY < -1
+    }
+
+    private var canScrollForward: Bool {
+        viewportHeight > 0 && contentFrame.maxY > viewportHeight + 1
+    }
+
+    /// Masque dégradé (couleur de la feuille → transparent) posé sur un bord de la zone scrollable.
+    private func scrollFade(fromTop: Bool) -> some View {
+        LinearGradient(colors: fromTop ? [sheetColor, sheetColor.opacity(0)] : [sheetColor.opacity(0), sheetColor],
+                       startPoint: .top, endPoint: .bottom)
+            .frame(height: 26)
+            .allowsHitTesting(false)
     }
 
     // MARK: - Banner
@@ -200,7 +239,7 @@ struct ActionCharterView: View {
         .cornerRadius(16)
     }
 
-    // MARK: - Sticky CTA
+    // MARK: - CTA (fin du contenu scrollable)
 
     private var ctaView: some View {
         VStack(spacing: 8) {
@@ -219,12 +258,10 @@ struct ActionCharterView: View {
                     .padding(.vertical, 13)
             }
             .background(Color(UIColor.appOrange))
-            .cornerRadius(28)
+            .cornerRadius(32)
         }
-        .padding(.horizontal, 20)
-        .padding(.top, 12)
-        .padding(.bottom, 14)
-        .background(Color(UIColor.appBeigeClair))
+        .padding(.horizontal, 4)
+        .frame(maxWidth: .infinity)
     }
 
     // MARK: - Shared building blocks
@@ -270,4 +307,14 @@ struct ActionCharterView: View {
         .padding(.vertical, 9)
         .padding(.horizontal, 12)
     }
+}
+
+private struct CharterContentFrameKey: PreferenceKey {
+    static var defaultValue: CGRect = .zero
+    static func reduce(value: inout CGRect, nextValue: () -> CGRect) { value = nextValue() }
+}
+
+private struct CharterViewportHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) { value = nextValue() }
 }
