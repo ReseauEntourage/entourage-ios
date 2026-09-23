@@ -72,7 +72,7 @@ struct ConversationListMainCellSwiftUI: View {
         HStack(alignment: .top, spacing: 12) {
             // Avatar
             ZStack {
-                if let urlString = isEvent ? conversation.imageUrl : conversation.user?.imageUrl,
+                if let urlString = avatarUrlString,
                    let url = URL(string: urlString), !urlString.isEmpty {
                     LoadableImage(url: url) { phase in
                         switch phase {
@@ -84,6 +84,8 @@ struct ConversationListMainCellSwiftUI: View {
                         case .failure: avatarPlaceholder
                         }
                     }
+                    // Recrée le loader quand la cellule est réutilisée pour une autre conversation.
+                    .id(url)
                 } else {
                     avatarPlaceholder
                 }
@@ -162,6 +164,15 @@ struct ConversationListMainCellSwiftUI: View {
 
     // MARK: - Properties
     private var isEvent: Bool { conversation.type == "outing" }
+
+    /// EN-9490 : la liste est construite depuis `conversations/memberships`, qui ne renvoie pas
+    /// d'objet `user` — la photo de l'interlocuteur(trice) arrive dans `image_url`. Sans ce repli,
+    /// on affichait toujours l'avatar par défaut même quand une photo existe.
+    private var avatarUrlString: String? {
+        if isEvent { return conversation.imageUrl }
+        if let userImageUrl = conversation.user?.imageUrl, !userImageUrl.isEmpty { return userImageUrl }
+        return conversation.imageUrl
+    }
 
     private var title: String {
         if isSmallTalk {
