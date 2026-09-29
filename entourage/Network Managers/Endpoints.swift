@@ -241,6 +241,10 @@ let kAPIGetSurveyResponsesForEvent = "outings/%d/chat_messages/%d/survey_respons
 let kAPIDeleteSurveyResponseForEvent = "outings/%d/chat_messages/%d/survey_responses?token=%@"
 let kAPICreateSurveyInEvent = "outings/%d/chat_messages?token=%@"
 
+// Survey Responses for Conversations / Smalltalks (suppression de vote)
+let kAPIDeleteSurveyResponseForConversation = "conversations/%@/chat_messages/%d/survey_responses?token=%@"
+let kAPIDeleteSurveyResponseForSmallTalk = "smalltalks/%@/chat_messages/%d/survey_responses?token=%@"
+
 //Smalltalk
 let kAPIUserSmallTalkRequests              = "user_smalltalks"
 let kAPIUserSmallTalkRequestDetail        = "user_smalltalks/%@"

@@ -729,6 +729,7 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func onReactClickSeeMember(post:PostMessage)
     func ifNotMemberWarnUser()
     func postSurveyResponse(forPostId postId: Int, withResponses responses: [Bool])
+    func deleteSurveyResponse(forPostId postId: Int)
     func sendVoteView(post:PostMessage)
 
 }
@@ -826,7 +827,12 @@ extension NeighborhoodPostCell: SurveyOptionViewDelegate {
         }
 
         // Appeler le délégué pour effectuer l'action de réseau avec les réponses mises à jour
-        delegate?.postSurveyResponse(forPostId: postMessage.uid, withResponses: surveyResponse)
+        if surveyResponse.contains(true) {
+            delegate?.postSurveyResponse(forPostId: postMessage.uid, withResponses: surveyResponse)
+        } else {
+            // Plus aucune option cochée : on retire le vote ("dévoter")
+            delegate?.deleteSurveyResponse(forPostId: postMessage.uid)
+        }
     }
 }
 

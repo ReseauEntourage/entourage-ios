@@ -57,7 +57,7 @@ struct SurveyService {
         let endpoint = String(format: kAPIDeleteSurveyResponseForGroup, groupId, postId, token)
         
         NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
-            let isSuccess = data != nil && error == nil && (resp as? HTTPURLResponse)!.statusCode < 300
+            let isSuccess = error == nil && ((resp as? HTTPURLResponse)?.statusCode ?? 999) < 300
             DispatchQueue.main.async { completion(isSuccess) }
         }
     }
@@ -115,7 +115,28 @@ struct SurveyService {
         let endpoint = String(format: kAPIDeleteSurveyResponseForEvent, eventId, postId, token)
         
         NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
-            let isSuccess = data != nil && error == nil && (resp as? HTTPURLResponse)!.statusCode < 300
+            let isSuccess = error == nil && ((resp as? HTTPURLResponse)?.statusCode ?? 999) < 300
+            DispatchQueue.main.async { completion(isSuccess) }
+        }
+    }
+
+    static func deleteSurveyResponseForConversation(conversationId: String, postId: Int, completion: @escaping (_ isSuccess: Bool) -> Void) {
+        deleteSurveyResponse(format: kAPIDeleteSurveyResponseForConversation, containerId: conversationId, postId: postId, completion: completion)
+    }
+
+    static func deleteSurveyResponseForSmallTalk(smallTalkId: String, postId: Int, completion: @escaping (_ isSuccess: Bool) -> Void) {
+        deleteSurveyResponse(format: kAPIDeleteSurveyResponseForSmallTalk, containerId: smallTalkId, postId: postId, completion: completion)
+    }
+
+    private static func deleteSurveyResponse(format: String, containerId: String, postId: Int, completion: @escaping (_ isSuccess: Bool) -> Void) {
+        guard let token = UserDefaults.token else {
+            completion(false)
+            return
+        }
+        let endpoint = String(format: format, containerId, postId, token)
+
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
+            let isSuccess = error == nil && ((resp as? HTTPURLResponse)?.statusCode ?? 999) < 300
             DispatchQueue.main.async { completion(isSuccess) }
         }
     }

@@ -56,6 +56,8 @@ class EventDetailTopFullCell: UITableViewCell {
     
     let topMarginConstraint: CGFloat = 24
     let cornerRadiusTag: CGFloat = 15
+    let regionRadius: CLLocationDistance = 500
+    let mapHeight: CGFloat = 180
 
     class var identifier: String { return String(describing: self) }
     
@@ -102,6 +104,9 @@ class EventDetailTopFullCell: UITableViewCell {
         self.ui_label_discussion_title.font = ApplicationTheme.getFontQuickSandBold(size: 14)
         self.ui_label_discussion_desc.text = "event_discussion_desc".localized
         self.ui_label_discussion_desc.numberOfLines = 0
+
+        ui_mapview.delegate = self
+        ui_mapview.layer.cornerRadius = 20
     }
     
     @objc func onParticipateClick() {
@@ -212,6 +217,8 @@ class EventDetailTopFullCell: UITableViewCell {
             ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
         }
         
+        configureMap(event: event)
+
         // --- ORGA + ASSO ---
         if let _author = event.author {
             ui_label_organised_by.text = "event_top_cell_organised_by".localized + _author.displayName
@@ -256,6 +263,28 @@ class EventDetailTopFullCell: UITableViewCell {
     }
 
     
+    private func configureMap(event: Event) {
+        ui_mapview.removeAnnotations(ui_mapview.annotations)
+
+        guard !(event.isOnline ?? true),
+              let lat = event.location?.latitude,
+              let lon = event.location?.longitude,
+              !(lat == 0 && lon == 0) else {
+            ui_mapview.isHidden = true
+            ui_height_map_view.constant = 0
+            return
+        }
+
+        ui_mapview.isHidden = false
+        ui_height_map_view.constant = mapHeight
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        ui_mapview.addAnnotation(PoiAnnot(title: "", coordinate: coordinate))
+        ui_mapview.setRegion(MKCoordinateRegion(center: coordinate,
+                                                latitudinalMeters: regionRadius,
+                                                longitudinalMeters: regionRadius),
+                             animated: false)
+    }
+
     private func adjustConstraintForLabel(label: UILabel, constraint: NSLayoutConstraint) {
         let text = label.text ?? ""
         let font = label.font ?? UIFont.systemFont(ofSize: 17)
@@ -316,6 +345,19 @@ class EventDetailTopFullCell: UITableViewCell {
     }
 }
 
+// MARK: - MKMapViewDelegate -
+extension EventDetailTopFullCell: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is PoiAnnot else { return nil }
+        let identifier = "pin"
+        let view = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            ?? MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        view.annotation = annotation
+        view.canShowCallout = false
+        view.image = UIImage(named: "ic_poi_event_map")
+        return view
+    }
+}
 
 // MARK: - Protocol -
 protocol EventDetailTopCellDelegate: AnyObject {

@@ -947,6 +947,16 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
         }
     }
     
+    func deleteSurveyResponse(forPostId postId: Int) {
+        SurveyService.deleteSurveyResponseForGroup(groupId: self.neighborhoodId, postId: postId) { isSuccess in
+            if isSuccess {
+                print("Vote au sondage supprimé avec succès.")
+            } else {
+                print("Échec de la suppression du vote au sondage.")
+            }
+        }
+    }
+    
     func ifNotMemberWarnUser() {
         let alertController = UIAlertController(title: "Attention", message: "Vous devez rejoindre le groupe pour effectuer cette action.", preferredStyle: .alert)
                 
