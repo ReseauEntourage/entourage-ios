@@ -117,6 +117,25 @@ struct HomeService:ParsingDataCodable {
         }
     }
     
+    /// Marque une étape du parcours de bienvenue comme "passée" côté backend.
+    /// `step` : welcome_watched, webinar_or_first_steps, papotages ou neighborhood_national.
+    static func postOnboardingStepSkipped(step: String, completion: @escaping (_ error: EntourageNetworkError?) -> Void) {
+
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String.init(format: kAPIOnboardingStepSkipped, token)
+        let body = try? JSONSerialization.data(withJSONObject: ["step": step], options: [])
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: body) { data, resp, error in
+
+            guard error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error ?? EntourageNetworkError()) }
+                return
+            }
+
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+
     static func markRecoWebUrlRead( webUrl:String, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}

@@ -85,6 +85,7 @@ let kAPIHomeInitialResources = "resources/home?token=%@"
 let kAPIHomeWelcomeResource = "resources/welcome?token=%@"
 let kAPIHomeGetResource = "resources/%@?token=%@"
 let kAPIHomeResourceRead = "resources/%d/users?token=%@"
+let kAPIOnboardingStepSkipped = "users/onboarding_step_skipped?token=%@"
 let kAPIHomeWebRecoRead = "webviews/url?url=%@&token=%@"
 
 //Event

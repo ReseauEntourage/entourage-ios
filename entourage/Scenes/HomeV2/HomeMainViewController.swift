@@ -72,6 +72,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     private var hasRunEntryGating = false
     private var hasShownCompletionStateThisSession = false
     private var hasInitiallyCompletedAll: Bool? = nil
+    private var hasEvaluatedWelcomeAutoSkip = false
     
     var profileViewModel = MyProfileViewModel()
 
@@ -416,7 +417,13 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
 
         #if DEBUG
         ui_logo_entourage.isUserInteractionEnabled = true
-        ui_logo_entourage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onLogoDebugTestNotifClick)))
+        // prepareUINotifAndAvatar est rappelée à chaque refresh : on n'ajoute les gestes qu'une fois.
+        if ui_logo_entourage.gestureRecognizers?.isEmpty != false {
+            ui_logo_entourage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onLogoDebugTestNotifClick)))
+            ui_logo_entourage.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(onLogoDebugWelcomeJourneyLongPress(_:))))
+        }
+        ui_logo_entourage.isAccessibilityElement = true
+        ui_logo_entourage.accessibilityIdentifier = "home_logo"
         #endif
     }
 
@@ -427,6 +434,12 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     @objc private func onLogoDebugTestNotifClick() {
         let notification = NotificationPushData(instanceName: "neighborhood", instanceId: 286, postId: 54621)
         DeepLinkManager.presentAction(notification: notification, presenter: self)
+    }
+
+    // Long click sur le logo : affiche / masque le tableau temporaire du parcours de bienvenue.
+    @objc private func onLogoDebugWelcomeJourneyLongPress(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else { return }
+        WelcomeJourneyDebugPanel.toggle(in: self)
     }
     #endif
 
@@ -462,8 +475,20 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
             showInitialPedago = true
         }
 
+        // J14 / J30 : on décide avant le premier affichage pour que le parcours ne clignote pas.
+        let stepsToAutoSkip = welcomeStepsToAutoSkipIfNeeded()
+        if !stepsToAutoSkip.isEmpty {
+            self.hasInitiallyCompletedAll = true
+        }
+
         let welcomeJourneyVM = WelcomeJourneyViewModel()
         welcomeJourneyVM.update(with: userHome.events, groupCount: userHome.neighborhoodParticipationsCount, hasInitiallyCompletedAll: &self.hasInitiallyCompletedAll)
+        if !stepsToAutoSkip.isEmpty {
+            skipWelcomeSteps(stepsToAutoSkip)
+        }
+        #if DEBUG
+        WelcomeJourneyDebugModel.shared.refresh(events: userHome.events ?? [], hiddenEntirely: welcomeJourneyVM.hideEntirely)
+        #endif
 
         let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
         let isUserProOrTeam = (UserDefaults.currentUser?.partner != nil)
@@ -471,7 +496,8 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         if !welcomeJourneyVM.hideEntirely && !isUserProOrTeam {
             tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
 
-            if welcomeJourneyVM.isFullyCompleted && !hasShownCelebration {
+            // Pas de félicitations si toutes les étapes ont simplement été passées
+            if welcomeJourneyVM.isFullyCompleted && welcomeJourneyVM.completedCount > 0 && !hasShownCelebration {
                 UserDefaults.standard.set(true, forKey: "hasShownWelcomeCelebration")
                 self.hasShownCompletionStateThisSession = true
 
@@ -629,6 +655,9 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                 viewModel.onStepTapped = { [weak self] stepType in
                     self?.handleWelcomeJourneyStep(stepType)
                 }
+                viewModel.onSkipTapped = { [weak self] stepType in
+                    self?.handleWelcomeJourneySkip(stepType)
+                }
                 cell.configure(viewModel: viewModel, parentViewController: self)
                 return cell
             }
@@ -636,7 +665,70 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    /// Une fois par session : renvoie les étapes à passer automatiquement (J14 sans connexion, J30 de compte),
+    /// et mémorise la date de connexion. Vide si rien à faire ou si le summary n'est pas encore chargé.
+    private func welcomeStepsToAutoSkipIfNeeded() -> [WelcomeJourneyStepType] {
+        guard !hasEvaluatedWelcomeAutoSkip, userHome.id != 0 else { return [] }
+        hasEvaluatedWelcomeAutoSkip = true
+
+        let now = Date()
+        let reason = WelcomeJourneyAutoSkip.reason(now: now,
+                                                   lastConnection: WelcomeJourneyAutoSkip.lastConnection(),
+                                                   accountCreation: UserDefaults.currentUser?.creationDate)
+        let events = userHome.events ?? []
+        let pending = WelcomeJourneyStepType.allCases.filter {
+            WelcomeJourneyViewModel.state(of: $0, events: events) == .active
+        }
+        let isProOrTeam = UserDefaults.currentUser?.partner != nil
+
+        guard reason != nil, !isProOrTeam, !pending.isEmpty else {
+            WelcomeJourneyAutoSkip.recordConnection(at: now)
+            return []
+        }
+        #if DEBUG
+        WelcomeJourneyDebugModel.shared.log("Auto-skip \(reason == .inactiveFor14Days ? "J14" : "J30") → \(pending.map(\.identifier).joined(separator: ","))")
+        #endif
+        return pending
+    }
+
+    /// Envoie un skip par étape, puis recharge la home. La date de connexion n'est mémorisée que si tout a réussi,
+    /// sinon la règle sera réévaluée au prochain lancement.
+    private func skipWelcomeSteps(_ types: [WelcomeJourneyStepType]) {
+        let group = DispatchGroup()
+        var hasFailure = false
+        for type in types {
+            group.enter()
+            HomeService.postOnboardingStepSkipped(step: type.skipApiStep) { error in
+                if error != nil { hasFailure = true }
+                group.leave()
+            }
+        }
+        group.notify(queue: .main) { [weak self] in
+            if !hasFailure {
+                WelcomeJourneyAutoSkip.recordConnection()
+            }
+            self?.initHome()
+        }
+    }
+
+    /// "Passer cette étape" : prévient le backend puis recharge le summary pour afficher l'état "Passée".
+    private func handleWelcomeJourneySkip(_ stepType: WelcomeJourneyStepType) {
+        #if DEBUG
+        WelcomeJourneyDebugModel.shared.log("Tap « Passer » → \(stepType.skipApiStep)")
+        #endif
+        HomeService.postOnboardingStepSkipped(step: stepType.skipApiStep) { [weak self] error in
+            #if DEBUG
+            WelcomeJourneyDebugModel.shared.log("POST onboarding_step_skipped(\(stepType.skipApiStep)) → \(error == nil ? "OK" : "ERREUR")")
+            #endif
+            guard error == nil else { return }
+            self?.initHome()
+        }
+    }
+
     private func handleWelcomeJourneyStep(_ stepType: WelcomeJourneyStepType) {
+        #if DEBUG
+        WelcomeJourneyDebugModel.shared.log("Tap étape → \(stepType.identifier)")
+        #endif
         switch stepType {
         case .video:
             let modalVC = WelcomeVideoModalViewController()

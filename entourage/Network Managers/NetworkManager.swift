@@ -21,6 +21,14 @@ class NetworkManager {
     
     private var sessionConfig = URLSessionConfiguration.default
     private var session:URLSession
+
+    #if DEBUG
+    /// Permet aux tests (unitaires ou UI) d'intercepter les appels via un `URLProtocol` factice.
+    /// La session étant recréée à chaque requête depuis `sessionConfig`, le changement est pris en compte immédiatement.
+    func setProtocolClasses(_ classes: [AnyClass]?) {
+        sessionConfig.protocolClasses = classes
+    }
+    #endif
     
     private func envConfig() -> EnvironmentConfigurationManager {
         let envConfigManager = EnvironmentConfigurationManager.sharedInstance

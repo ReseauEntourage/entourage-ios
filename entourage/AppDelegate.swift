@@ -35,16 +35,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         
         initEnvironmentConfigManager()
+        #if DEBUG
+        UITestBootstrap.configureIfNeeded()
+        if UITestBootstrap.isActive {
+            // Pas de popups d'entrée sur l'accueil (onboarding rôle/zone, notifs…) pendant les tests UI.
+            homeEntryGatingDidPresentCriticalThisSession = true
+        }
+        #endif
         configureFirebase()
         configureGooglePlace()
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-            if granted {
-                print("Notifications granted")
-                DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
+        #if DEBUG
+        let skipNotificationPrompt = UITestBootstrap.isActive
+        #else
+        let skipNotificationPrompt = false
+        #endif
+        if !skipNotificationPrompt {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+                if granted {
+                    print("Notifications granted")
+                    DispatchQueue.main.async {
+                        application.registerForRemoteNotifications()
+                    }
+                } else {
+                    print("Notifications denied: \(String(describing: error))")
                 }
-            } else {
-                print("Notifications denied: \(String(describing: error))")
             }
         }
 

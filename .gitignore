@@ -94,3 +94,6 @@ Temporary Items
 # Hide Amazon/Api keys/tokens data
 AppConfigurations.plist
 ApiKeys.plist
+
+# Screenshots générés par les tests UI (entourageUITests)
+test-screenshots/

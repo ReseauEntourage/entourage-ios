@@ -16,7 +16,14 @@ xcrun simctl list devices available
 ```
 
 Schemes: `Entourage-ios` (prod), `EntourageBeta` (preprod/staging), `EntourageStore` (App Store).  
-No test targets exist in this project.
+Tests (scheme `EntourageBeta`, simulateur iOS 26.x — l'iOS 18.3 plante avec XCUITest sous Xcode 26) :
+```bash
+# unitaires (logique + faux backend)
+xcodebuild -scheme EntourageBeta -destination "platform=iOS Simulator,id=<UDID>" test -only-testing:entourageTests
+# end-to-end (XCUITest) : une capture par étape dans test-screenshots/<scénario>/
+xcodebuild -scheme EntourageBeta -destination "platform=iOS Simulator,id=<UDID>" test -only-testing:entourageUITests
+```
+Les tests tournent sur un faux backend (`entourage/Tools/Testing/StubBackend.swift`, DEBUG uniquement) : l'app lancée avec `-UITestMode` charge les fake data du `home/summary` via `UITEST_EVENTS` et journalise les requêtes envoyées (`UITEST_REQUEST_LOG`). Voir `entourageUITests/Support/UITestCase.swift` pour écrire un nouveau scénario.
 
 ## Architecture
 

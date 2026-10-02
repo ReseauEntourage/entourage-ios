@@ -2,17 +2,50 @@ import Foundation
 import SwiftUI
 import Combine
 
-enum WelcomeJourneyStepType: Equatable {
+enum WelcomeJourneyStepType: Equatable, CaseIterable {
     case video
     case nationalGroups
     case webinar
     case papotages
+
+    /// Event renvoyé par `home/summary` quand l'étape est réellement faite.
+    var completedEvent: String {
+        switch self {
+        case .video: return "onboarding.resource.welcome_watched"
+        case .nationalGroups: return "onboarding.neighborhood.national"
+        case .webinar: return "onboarding.outing.webinar_or_first_steps"
+        case .papotages: return "onboarding.outing.papotages"
+        }
+    }
+
+    /// Event renvoyé par `home/summary` quand l'étape a été passée (`..._skipped`).
+    var skippedEvent: String { completedEvent + "_skipped" }
+
+    /// Valeur du paramètre `step` de `POST users/onboarding_step_skipped`.
+    var skipApiStep: String {
+        switch self {
+        case .video: return "welcome_watched"
+        case .nationalGroups: return "neighborhood_national"
+        case .webinar: return "webinar_or_first_steps"
+        case .papotages: return "papotages"
+        }
+    }
+
+    /// Suffixe des accessibilityIdentifier (tests UI) : welcome_step_<id>, welcome_step_<id>_skip…
+    var identifier: String {
+        switch self {
+        case .video: return "video"
+        case .nationalGroups: return "national"
+        case .webinar: return "webinar"
+        case .papotages: return "papotages"
+        }
+    }
 }
 
 enum WelcomeJourneyStepState {
     case completed
+    case skipped
     case active
-    case future
 }
 
 struct WelcomeJourneyStep {
@@ -21,7 +54,7 @@ struct WelcomeJourneyStep {
     let subtitle: String
     let buttonTitle: String
     let iconName: String
-    var state: WelcomeJourneyStepState = .future
+    var state: WelcomeJourneyStepState = .active
 }
 
 class WelcomeJourneyViewModel: ObservableObject {
@@ -30,47 +63,36 @@ class WelcomeJourneyViewModel: ObservableObject {
     @Published var hideEntirely: Bool = false
 
     var onStepTapped: ((WelcomeJourneyStepType) -> Void)?
+    var onSkipTapped: ((WelcomeJourneyStepType) -> Void)?
+
+    /// Les étapes ne sont plus verrouillées : chacune est "terminée", "passée" ou "à faire"
+    /// indépendamment des autres.
+    static func state(of type: WelcomeJourneyStepType, events: [String]) -> WelcomeJourneyStepState {
+        if events.contains(type.completedEvent) { return .completed }
+        if events.contains(type.skippedEvent) { return .skipped }
+        return .active
+    }
 
     func update(with userEvents: [String]?, groupCount: Int, hasInitiallyCompletedAll: inout Bool?) {
         let events = userEvents ?? []
 
         // On se fie uniquement au backend pour l'état d'avancement
-        let hasWatchedVideo = events.contains("onboarding.resource.welcome_watched")
-        let hasJoinedNationalGroup = events.contains("onboarding.neighborhood.national")
-        let hasJoinedWebinar = events.contains("onboarding.outing.webinar_or_first_steps")
-        let hasJoinedPapotages = events.contains("onboarding.outing.papotages")
-
-        let allCompleted = hasWatchedVideo && hasJoinedNationalGroup && hasJoinedWebinar && hasJoinedPapotages
+        let states = WelcomeJourneyStepType.allCases.map { Self.state(of: $0, events: events) }
+        // Une étape passée est considérée comme résolue, comme une étape terminée.
+        let allResolved = states.allSatisfy { $0 != .active }
 
         if hasInitiallyCompletedAll == nil {
-            hasInitiallyCompletedAll = allCompleted
+            hasInitiallyCompletedAll = allResolved
         }
 
-        // Si l'utilisateur avait déjà tout complété initialement, on cache entièrement
+        // Si l'utilisateur avait déjà tout résolu initialement, on cache entièrement
         if hasInitiallyCompletedAll == true {
             self.hideEntirely = true
             return
         }
 
         self.hideEntirely = false
-        self.isFullyCompleted = allCompleted
-
-        var step1State: WelcomeJourneyStepState = hasWatchedVideo ? .completed : .active
-        var step2State: WelcomeJourneyStepState = .future
-        var step3State: WelcomeJourneyStepState = .future
-        var step4State: WelcomeJourneyStepState = .future
-
-        if step1State == .completed {
-            step2State = hasJoinedNationalGroup ? .completed : .active
-        }
-
-        if step2State == .completed {
-            step3State = hasJoinedWebinar ? .completed : .active
-        }
-
-        if step3State == .completed {
-            step4State = hasJoinedPapotages ? .completed : .active
-        }
+        self.isFullyCompleted = allResolved
 
         steps = [
             WelcomeJourneyStep(
@@ -79,7 +101,7 @@ class WelcomeJourneyViewModel: ObservableObject {
                 subtitle: "home_v2_welcome_video_subtitle".localized,
                 buttonTitle: "home_v2_welcome_video_btn".localized,
                 iconName: "video.fill",
-                state: step1State
+                state: states[0]
             ),
             WelcomeJourneyStep(
                 type: .nationalGroups,
@@ -87,7 +109,7 @@ class WelcomeJourneyViewModel: ObservableObject {
                 subtitle: "home_v2_welcome_national_subtitle".localized,
                 buttonTitle: "home_v2_welcome_national_btn".localized,
                 iconName: "person.3.fill",
-                state: step2State
+                state: states[1]
             ),
             WelcomeJourneyStep(
                 type: .webinar,
@@ -95,7 +117,7 @@ class WelcomeJourneyViewModel: ObservableObject {
                 subtitle: "home_v2_welcome_webinar_subtitle".localized,
                 buttonTitle: "home_v2_welcome_webinar_btn".localized,
                 iconName: "person.2.fill",
-                state: step3State
+                state: states[2]
             ),
             WelcomeJourneyStep(
                 type: .papotages,
@@ -103,12 +125,16 @@ class WelcomeJourneyViewModel: ObservableObject {
                 subtitle: "home_v2_welcome_papotages_subtitle".localized,
                 buttonTitle: "home_v2_welcome_papotages_btn".localized,
                 iconName: "message.fill",
-                state: step4State
+                state: states[3]
             )
         ]
     }
     var completedCount: Int {
         steps.filter { $0.state == .completed }.count
+    }
+
+    var skippedCount: Int {
+        steps.filter { $0.state == .skipped }.count
     }
 
     var progressText: String {
@@ -145,6 +171,7 @@ struct HomeWelcomeJourneyView: View {
                     Text("\(viewModel.completedCount)/\(max(viewModel.steps.count, 3))")
                         .font(.custom("Quicksand-Bold", size: 15))
                         .foregroundColor(Color("orange_app"))
+                        .accessibilityIdentifier("welcome_journey_counter")
                 }
                 .padding(.horizontal, 16)
 
@@ -171,6 +198,7 @@ struct HomeWelcomeJourneyView: View {
                     )
                     .padding(.horizontal, 16)
                     .padding(.bottom, 16)
+                    .accessibilityIdentifier("welcome_journey_success")
                 } else {
                     // Microcopy
                     Text(viewModel.microcopy)
@@ -178,16 +206,15 @@ struct HomeWelcomeJourneyView: View {
                         .foregroundColor(Color.gray)
                         .padding(.horizontal, 16)
 
-                    // Steps List
+                    // Steps List : toutes les étapes sont accessibles, dans l'ordre souhaité
                     VStack(spacing: 10) {
                         ForEach(viewModel.steps.indices, id: \.self) { index in
                             let step = viewModel.steps[index]
-                            WelcomeJourneyStepView(step: step) {
-                                if step.state != .future {
-                                    viewModel.onStepTapped?(step.type)
-                                }
-                            }
-                            .disabled(step.state == .future)
+                            WelcomeJourneyStepView(
+                                step: step,
+                                onTap: { viewModel.onStepTapped?(step.type) },
+                                onSkip: { viewModel.onSkipTapped?(step.type) }
+                            )
                         }
                     }
                     .padding(.horizontal, 16)
@@ -204,84 +231,176 @@ struct HomeWelcomeJourneyView: View {
 struct WelcomeJourneyStepView: View {
     let step: WelcomeJourneyStep
     let onTap: () -> Void
+    let onSkip: () -> Void
+
+    private var id: String { "welcome_step_\(step.type.identifier)" }
+    private var isSkipped: Bool { step.state == .skipped }
 
     var body: some View {
-        Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 10) { // Espacement plus compact
-                HStack(alignment: .top, spacing: 12) {
-                    // Icon
-                    ZStack {
-                        Circle()
-                            .fill(step.state == .completed ? Color("green_middle") : Color("orange_light_a50").opacity(0.3))
-                            .frame(width: 36, height: 36)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .top, spacing: 12) {
+                // Icon
+                ZStack {
+                    Circle()
+                        .fill(iconBackground)
+                        .frame(width: 36, height: 36)
 
-                        Image(systemName: step.state == .completed ? "checkmark" : step.iconName)
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(step.state == .completed ? .white : Color("orange_app"))
-                    }
-
-                    // Texts
-                    VStack(alignment: .leading, spacing: 4) {
-                        HStack(alignment: .top) {
-                            Text(step.title)
-                                .font(.custom("Quicksand-Bold", size: 14))
-                                .foregroundColor(step.state == .completed ? Color("green_middle") : (step.state == .future ? Color.gray : Color.black))
-                                .multilineTextAlignment(.leading)
-                            Spacer(minLength: 8)
-                            if step.state == .completed {
-                                Text("home_v2_welcome_done".localized)
-                                    .font(.custom("NunitoSans-Bold", size: 12))
-                                    .foregroundColor(Color("green_middle"))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 4)
-                                    .background(Color("green_light").opacity(0.15))
-                                    .cornerRadius(12)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color("green_middle"), lineWidth: 1)
-                                    )
-                            } else if step.state == .active {
-                                Text("home_v2_welcome_todo".localized)
-                                    .font(.custom("NunitoSans-Bold", size: 12))
-                                    .foregroundColor(Color("orange_app"))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 4)
-                                    .background(Color("orange_light_a50").opacity(0.3))
-                                    .cornerRadius(12)
-                            }
-                        }
-
-                        Text(step.subtitle)
-                            .font(.custom("NunitoSans-Regular", size: 13))
-                            .foregroundColor(step.state == .completed ? Color("green_middle") : Color.gray)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.top, 2)
-                    }
+                    Image(systemName: step.state == .completed ? "checkmark" : step.iconName)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(iconForeground)
                 }
 
-                // CTA Button (only if active)
-                if step.state == .active {
+                // Texts
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(alignment: .top) {
+                        Text(step.title)
+                            .font(.custom("Quicksand-Bold", size: 14))
+                            .foregroundColor(titleColor)
+                            .multilineTextAlignment(.leading)
+                        Spacer(minLength: 8)
+                        chip
+                    }
+
+                    Text(step.subtitle)
+                        .font(.custom("NunitoSans-Regular", size: 13))
+                        .foregroundColor(step.state == .completed ? Color("green_middle") : Color.gray)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 2)
+
+                    if isSkipped {
+                        Button(action: onTap) {
+                            Text("home_v2_welcome_redo".localized)
+                                .font(.custom("Quicksand-Bold", size: 13))
+                                .foregroundColor(Color("orange_app"))
+                                .underline()
+                                .frame(minHeight: 40, alignment: .leading)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .accessibilityIdentifier("\(id)_redo")
+                    }
+                }
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if step.state == .active { onTap() }
+            }
+
+            // CTA + "Passer" (uniquement si l'étape est à faire)
+            if step.state == .active {
+                Button(action: onTap) {
                     Text(step.buttonTitle)
                         .font(.custom("Quicksand-Bold", size: 14))
                         .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
+                        .frame(maxWidth: .infinity, minHeight: 44)
                         .background(Color("orange_app"))
                         .cornerRadius(32)
-                        .padding(.top, 8)
                 }
+                .buttonStyle(PlainButtonStyle())
+                .padding(.top, 8)
+                .accessibilityIdentifier("\(id)_cta")
+
+                Button(action: onSkip) {
+                    Text("home_v2_welcome_skip".localized)
+                        .font(.custom("Quicksand-Bold", size: 13))
+                        .foregroundColor(Color.gray)
+                        .underline()
+                        .frame(maxWidth: .infinity, minHeight: 40)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .accessibilityIdentifier("\(id)_skip")
             }
-            .padding(14)
-            .background(Color.white)
-            .cornerRadius(14)
-            .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(step.state == .active ? Color("orange_app") : (step.state == .completed ? Color("green_middle") : Color(UIColor.systemGray5)), lineWidth: step.state == .active ? 2 : 1)
-            )
-            .shadow(color: Color.black.opacity(step.state == .active ? 0.05 : 0), radius: 8, x: 0, y: 2)
-            .opacity(step.state == .future ? 0.6 : (step.state == .completed ? 0.9 : 1.0))
         }
-        .buttonStyle(PlainButtonStyle())
+        .padding(14)
+        .background(cardBackground)
+        .cornerRadius(14)
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(borderColor, style: StrokeStyle(lineWidth: step.state == .active ? 2 : 1, dash: isSkipped ? [5, 4] : []))
+        )
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier(id)
+        .accessibilityValue(stateValue)
+    }
+
+    // MARK: - Style
+
+    /// Valeur exposée à VoiceOver et aux tests UI : done / skipped / todo.
+    private var stateValue: String {
+        switch step.state {
+        case .completed: return "done"
+        case .skipped: return "skipped"
+        case .active: return "todo"
+        }
+    }
+
+    private var iconBackground: Color {
+        switch step.state {
+        case .completed: return Color("green_middle")
+        case .skipped: return Color(red: 0.925, green: 0.906, blue: 0.894)
+        case .active: return Color("orange_light_a50").opacity(0.3)
+        }
+    }
+
+    private var iconForeground: Color {
+        switch step.state {
+        case .completed: return .white
+        case .skipped: return Color.gray
+        case .active: return Color("orange_app")
+        }
+    }
+
+    private var titleColor: Color {
+        switch step.state {
+        case .completed: return Color("green_middle")
+        case .skipped: return Color.gray
+        case .active: return Color.black
+        }
+    }
+
+    private var cardBackground: Color {
+        isSkipped ? Color(red: 0.969, green: 0.957, blue: 0.949) : Color.white
+    }
+
+    private var borderColor: Color {
+        switch step.state {
+        case .active: return Color("orange_app")
+        case .completed: return Color("green_middle")
+        case .skipped: return Color(red: 0.812, green: 0.792, blue: 0.792)
+        }
+    }
+
+    @ViewBuilder
+    private var chip: some View {
+        switch step.state {
+        case .completed:
+            Text("home_v2_welcome_done".localized)
+                .font(.custom("NunitoSans-Bold", size: 12))
+                .foregroundColor(Color("green_middle"))
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(Color("green_light").opacity(0.15))
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color("green_middle"), lineWidth: 1)
+                )
+        case .skipped:
+            Text("home_v2_welcome_skipped".localized)
+                .font(.custom("NunitoSans-Bold", size: 12))
+                .foregroundColor(Color(red: 0.373, green: 0.353, blue: 0.341))
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(Color(red: 0.925, green: 0.906, blue: 0.894))
+                .cornerRadius(12)
+        case .active:
+            Text("home_v2_welcome_todo".localized)
+                .font(.custom("NunitoSans-Bold", size: 12))
+                .foregroundColor(Color("orange_app"))
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(Color("orange_light_a50").opacity(0.3))
+                .cornerRadius(12)
+        }
     }
 }

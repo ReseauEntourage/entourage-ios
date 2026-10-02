@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A8E907FB39D27B87F1054583"
+               BuildableName = "entourageTests.xctest"
+               BlueprintName = "entourageTests"
+               ReferencedContainer = "container:entourage.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0F26DA9D26D25A2DB2FC95CA"
+               BuildableName = "entourageUITests.xctest"
+               BlueprintName = "entourageUITests"
+               ReferencedContainer = "container:entourage.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
