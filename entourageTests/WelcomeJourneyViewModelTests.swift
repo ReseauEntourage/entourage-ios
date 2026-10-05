@@ -103,7 +103,7 @@ final class WelcomeJourneyViewModelTests: XCTestCase {
 
     // MARK: - Fin de parcours
 
-    func testJourneyIsResolvedWhenEveryStepIsDoneOrSkipped() {
+    func testJourneyDisappearsWithoutSuccessBannerWhenResolvedWithASkippedStep() {
         let viewModel = makeViewModel(events: [
             Event.video,
             "onboarding.neighborhood.national_skipped",
@@ -111,9 +111,17 @@ final class WelcomeJourneyViewModelTests: XCTestCase {
             "onboarding.outing.papotages_skipped"
         ], initiallyAllResolved: false)
 
-        XCTAssertTrue(viewModel.isFullyCompleted)
-        XCTAssertEqual(viewModel.completedCount, 2)
+        XCTAssertTrue(viewModel.hideEntirely, "Une étape passée : tout le bloc doit disparaître")
+        XCTAssertFalse(viewModel.isFullyCompleted, "Pas d'encart vert de réussite")
+    }
+
+    func testSuccessBannerIsShownOnlyWhenEveryStepWasReallyDone() {
+        let viewModel = makeViewModel(events: [Event.video, Event.national, Event.webinar, Event.papotages],
+                                      initiallyAllResolved: false)
+
         XCTAssertFalse(viewModel.hideEntirely)
+        XCTAssertTrue(viewModel.isFullyCompleted)
+        XCTAssertEqual(viewModel.completedCount, 4)
     }
 
     func testJourneyIsHiddenWhenAlreadyResolvedAtLaunch() {
@@ -127,13 +135,11 @@ final class WelcomeJourneyViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.hideEntirely)
     }
 
-    func testResolvingTheLastStepDuringSessionDoesNotHideTheJourney() {
-        // hasInitiallyCompletedAll = false : l'utilisateur voit le message de réussite avant que le parcours disparaisse.
+    func testSkippingTheLastStepHidesTheJourneyImmediately() {
         let viewModel = makeViewModel(events: [
             Event.video, Event.national, Event.webinar, "onboarding.outing.papotages_skipped"
         ], initiallyAllResolved: false)
 
-        XCTAssertFalse(viewModel.hideEntirely)
-        XCTAssertTrue(viewModel.isFullyCompleted)
+        XCTAssertTrue(viewModel.hideEntirely)
     }
 }

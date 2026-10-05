@@ -95,9 +95,9 @@ final class WelcomeJourneyNetworkTests: XCTestCase {
         let viewModel = WelcomeJourneyViewModel()
         viewModel.update(with: fetchSummary()?.events, groupCount: 0, hasInitiallyCompletedAll: &initial)
 
-        XCTAssertTrue(viewModel.isFullyCompleted)
-        XCTAssertEqual(viewModel.skippedCount, 4)
-        XCTAssertEqual(viewModel.completedCount, 0)
+        // Tout a été passé : le parcours disparaît, sans encart de réussite.
+        XCTAssertTrue(viewModel.hideEntirely)
+        XCTAssertFalse(viewModel.isFullyCompleted)
     }
 
     func testSkipIsReportedAsErrorWhenBackendRejectsTheStep() {

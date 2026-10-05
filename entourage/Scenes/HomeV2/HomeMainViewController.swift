@@ -496,8 +496,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         if !welcomeJourneyVM.hideEntirely && !isUserProOrTeam {
             tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
 
-            // Pas de félicitations si toutes les étapes ont simplement été passées
-            if welcomeJourneyVM.isFullyCompleted && welcomeJourneyVM.completedCount > 0 && !hasShownCelebration {
+            if welcomeJourneyVM.isFullyCompleted && !hasShownCelebration {
                 UserDefaults.standard.set(true, forKey: "hasShownWelcomeCelebration")
                 self.hasShownCompletionStateThisSession = true
 

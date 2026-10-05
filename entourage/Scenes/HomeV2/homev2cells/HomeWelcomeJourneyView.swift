@@ -91,6 +91,14 @@ class WelcomeJourneyViewModel: ObservableObject {
             return
         }
 
+        // Tout est résolu mais au moins une étape a été passée : pas d'encart de réussite,
+        // on retire simplement tout le parcours. L'encart vert n'est affiché que si tout a été réellement fait.
+        if allResolved && states.contains(.skipped) {
+            self.hideEntirely = true
+            self.isFullyCompleted = false
+            return
+        }
+
         self.hideEntirely = false
         self.isFullyCompleted = allResolved
 

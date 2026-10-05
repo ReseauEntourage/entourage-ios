@@ -124,7 +124,10 @@ final class WelcomeJourneyUITests: UITestCase {
             }
         }
 
-        XCTAssertTrue(journey.successBanner.waitForExistence(timeout: 10), "Le message de fin de parcours doit apparaître")
+        // Tout a été passé : plus d'étapes et pas d'encart vert de réussite.
+        let gone = NSPredicate(format: "exists == false")
+        wait(for: [expectation(for: gone, evaluatedWith: journey.card(.video))], timeout: 10)
+        XCTAssertFalse(journey.successBanner.exists, "Pas d'encart de réussite quand les étapes ont été passées")
         XCTAssertEqual(requests(matching: skipRoute).compactMap { $0.body["step"] as? String },
                        ["welcome_watched", "neighborhood_national", "webinar_or_first_steps", "papotages"])
         screenshot("Parcours terminé")
