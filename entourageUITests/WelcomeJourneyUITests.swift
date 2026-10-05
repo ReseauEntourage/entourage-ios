@@ -91,6 +91,26 @@ final class WelcomeJourneyUITests: UITestCase {
         }
     }
 
+    /// Régression : le « Passer » doit s'afficher immédiatement, même si le serveur met 5 s à répondre.
+    func testSkipIsInstantEvenWhenTheServerIsSlow() {
+        launchApp(events: [], skipDelayMs: 5_000)
+        XCTAssertTrue(journey.waitUntilVisible())
+
+        let tapDate = Date()
+        step("Passer l'étape vidéo avec un serveur lent") {
+            journey.skip(.video)
+            XCTAssertTrue(journey.waitForState(.skipped, of: .video, timeout: 1.5),
+                          "L'étape doit passer en « Passée » sans attendre la réponse du serveur")
+        }
+        XCTAssertLessThan(Date().timeIntervalSince(tapDate), 4, "Le basculement ne doit pas dépendre du serveur")
+
+        // La requête est bien partie, et l'état reste « Passée » quand le serveur finit par répondre.
+        XCTAssertEqual(requests(matching: skipRoute).first?.body["step"] as? String, "welcome_watched")
+        RunLoop.current.run(until: Date().addingTimeInterval(6))
+        XCTAssertEqual(journey.state(of: .video), .skipped)
+        XCTAssertEqual(requests(matching: skipRoute).count, 1)
+    }
+
     func testSkippingEveryStepEndsTheJourney() {
         launchApp(events: [])
         XCTAssertTrue(journey.waitUntilVisible())

@@ -716,12 +716,23 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         #if DEBUG
         WelcomeJourneyDebugModel.shared.log("Tap « Passer » → \(stepType.skipApiStep)")
         #endif
+        // Mise à jour optimiste : l'étape passe en "Passée" tout de suite, sans attendre le POST
+        // ni le rechargement complet de la home (une dizaine d'appels en chaîne). Le prochain
+        // `home/summary` renverra de toute façon l'event `*_skipped`.
+        let previousEvents = userHome.events
+        var events = previousEvents ?? []
+        if !events.contains(stepType.skippedEvent) { events.append(stepType.skippedEvent) }
+        userHome.events = events
+        configureDTO()
+
         HomeService.postOnboardingStepSkipped(step: stepType.skipApiStep) { [weak self] error in
             #if DEBUG
             WelcomeJourneyDebugModel.shared.log("POST onboarding_step_skipped(\(stepType.skipApiStep)) → \(error == nil ? "OK" : "ERREUR")")
             #endif
-            guard error == nil else { return }
-            self?.initHome()
+            guard error != nil, let self = self else { return }
+            // Échec : on remet l'étape "à faire" pour ne pas afficher un état que le backend ne connaît pas.
+            self.userHome.events = previousEvents
+            self.configureDTO()
         }
     }
 

@@ -26,6 +26,10 @@ final class StubBackend {
     /// c'est ainsi que le process XCUITest lit ce que l'app a réellement envoyé.
     var requestLogURL: URL?
 
+    /// Délai artificiel avant la réponse du `POST users/onboarding_step_skipped` (serveur lent simulé).
+    /// Sert à vérifier que l'interface n'attend pas le serveur pour afficher l'étape "Passée".
+    var skipResponseDelay: TimeInterval = 0
+
     private init() {}
 
     // MARK: - État
@@ -188,16 +192,28 @@ final class StubURLProtocol: URLProtocol {
     override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
 
     override func startLoading() {
+        // La requête est enregistrée tout de suite ; seule la réponse peut être retardée.
         let result = StubBackend.shared.handle(request)
-        guard let url = request.url,
-              let response = HTTPURLResponse(url: url, statusCode: result.status, httpVersion: "HTTP/1.1",
-                                             headerFields: ["Content-Type": "application/json"]) else {
-            client?.urlProtocol(self, didFailWithError: URLError(.badURL))
-            return
+        let isSkip = request.httpMethod == "POST" && request.url?.path.hasSuffix("users/onboarding_step_skipped") == true
+        let delay = isSkip ? StubBackend.shared.skipResponseDelay : 0
+
+        let respond = { [self] in
+            guard let url = request.url,
+                  let response = HTTPURLResponse(url: url, statusCode: result.status, httpVersion: "HTTP/1.1",
+                                                 headerFields: ["Content-Type": "application/json"]) else {
+                client?.urlProtocol(self, didFailWithError: URLError(.badURL))
+                return
+            }
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocol(self, didLoad: result.data)
+            client?.urlProtocolDidFinishLoading(self)
         }
-        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-        client?.urlProtocol(self, didLoad: result.data)
-        client?.urlProtocolDidFinishLoading(self)
+
+        if delay > 0 {
+            DispatchQueue.global().asyncAfter(deadline: .now() + delay, execute: respond)
+        } else {
+            respond()
+        }
     }
 
     override func stopLoading() {}

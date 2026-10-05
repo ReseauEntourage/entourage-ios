@@ -16,6 +16,8 @@ enum UITestBootstrap {
     static let lastConnectionDaysAgoEnvKey = "UITEST_LAST_CONNECTION_DAYS_AGO"
     /// Simule un compte créé il y a N jours (règle J30 du parcours de bienvenue).
     static let accountAgeDaysEnvKey = "UITEST_ACCOUNT_AGE_DAYS"
+    /// Retarde la réponse du skip de N millisecondes (serveur lent).
+    static let skipDelayMsEnvKey = "UITEST_SKIP_DELAY_MS"
 
     static var isActive: Bool {
         ProcessInfo.processInfo.arguments.contains(launchArgument)
@@ -34,6 +36,7 @@ enum UITestBootstrap {
             .map { $0.trimmingCharacters(in: .whitespaces) }
             .filter { !$0.isEmpty }
         StubBackend.shared.reset(events: events)
+        StubBackend.shared.skipResponseDelay = (Double(env[skipDelayMsEnvKey] ?? "") ?? 0) / 1000
         NetworkManager.sharedInstance.setProtocolClasses([StubURLProtocol.self])
 
         // Faux utilisateur connecté + état propre du parcours de bienvenue.

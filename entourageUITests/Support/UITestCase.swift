@@ -73,12 +73,14 @@ class UITestCase: XCTestCase {
     /// - Parameters:
     ///   - lastConnectionDaysAgo: simule une dernière connexion il y a N jours (nil = première connexion).
     ///   - accountAgeDays: simule un compte créé il y a N jours (nil = date inconnue).
-    func launchApp(events: [String] = [], lastConnectionDaysAgo: Int? = nil, accountAgeDays: Int? = nil) {
+    ///   - skipDelayMs: retarde la réponse du serveur au « Passer » (serveur lent simulé).
+    func launchApp(events: [String] = [], lastConnectionDaysAgo: Int? = nil, accountAgeDays: Int? = nil, skipDelayMs: Int? = nil) {
         app = XCUIApplication()
         app.launchArguments += ["-UITestMode", "-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
         app.launchEnvironment["UITEST_EVENTS"] = events.joined(separator: ",")
         if let days = lastConnectionDaysAgo { app.launchEnvironment["UITEST_LAST_CONNECTION_DAYS_AGO"] = String(days) }
         if let days = accountAgeDays { app.launchEnvironment["UITEST_ACCOUNT_AGE_DAYS"] = String(days) }
+        if let delay = skipDelayMs { app.launchEnvironment["UITEST_SKIP_DELAY_MS"] = String(delay) }
         app.launchEnvironment["UITEST_REQUEST_LOG"] = requestLogURL.path
         app.launch()
     }
