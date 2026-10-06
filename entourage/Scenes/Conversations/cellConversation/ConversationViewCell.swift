@@ -150,7 +150,15 @@ class ConversationViewCell: UITableViewCell {
         }
         return result
     }
-    private var phoneWarningTopConstraint: NSLayoutConstraint?
+    // Deux ordres verticaux (EN-8022) :
+    //  - sans avertissement : bulle → réactions → nom/heure (inchangé) ;
+    //  - avec avertissement : bulle → nom/heure → bandeau → réactions.
+    private var plainOrderConstraints: [NSLayoutConstraint] = []
+    private var warningOrderConstraints: [NSLayoutConstraint] = []
+    private var warningDateTop: NSLayoutConstraint?
+    private var warningBannerTop: NSLayoutConstraint?
+    private var warningReactionsTop: NSLayoutConstraint?
+    private var warningBottom: NSLayoutConstraint?
     private let reactionBadges = ReactionBadgesView()
     private lazy var reactionsStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [reactionBadges, optionsButton])
@@ -307,11 +315,9 @@ class ConversationViewCell: UITableViewCell {
         // (bulle → réactions → nom), sans toucher au reste de la mise en page.
         detachTopConstraint(of: ui_label_date, from: ui_view_label)
 
-        // Avertissement numéro de téléphone (EN-8022) : entre la bulle et la barre de réactions.
-        // Sans texte, le label a une hauteur nulle et son espacement haut passe à 0.
+        // Avertissement numéro de téléphone (EN-8022) : bandeau sans hauteur tant qu'il n'est
+        // pas affiché ; sa position verticale dépend de l'ordre actif (cf. applyGroupSpacing).
         contentView.addSubview(phoneWarningBanner)
-        let warningTop = phoneWarningBanner.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 0)
-        phoneWarningTopConstraint = warningTop
         let hiddenHeight = phoneWarningBanner.heightAnchor.constraint(equalToConstant: 0)
         phoneWarningHiddenConstraint = hiddenHeight
         // Reçu : aligné après l'avatar (38 + 10) ; envoyé : calé à droite sous la bulle.
@@ -321,14 +327,29 @@ class ConversationViewCell: UITableViewCell {
             : [phoneWarningBanner.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 48),
                phoneWarningBanner.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10)]
         NSLayoutConstraint.activate([
-            warningTop, hiddenHeight,
+            hiddenHeight,
             phoneWarningBanner.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.88)
         ] + warningHorizontal)
 
-        let reactionsTop = reactionsStack.topAnchor.constraint(equalTo: phoneWarningBanner.bottomAnchor, constant: 4)
+        let reactionsTop = reactionsStack.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 4)
         let dateTop = ui_label_date.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4)
         reactionsTopConstraint = reactionsTop
         dateTopConstraint = dateTop
+        // Ordre sans avertissement : le bandeau (hauteur nulle) reste collé sous la bulle.
+        let plainBannerTop = phoneWarningBanner.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor)
+        plainOrderConstraints = [reactionsTop, dateTop, plainBannerTop]
+
+        // Ordre avec avertissement : bulle → nom/heure → bandeau → réactions.
+        let wDateTop = ui_label_date.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 4)
+        let wBannerTop = phoneWarningBanner.topAnchor.constraint(equalTo: ui_label_date.bottomAnchor, constant: 2)
+        let wReactionsTop = reactionsStack.topAnchor.constraint(equalTo: phoneWarningBanner.bottomAnchor, constant: 14)
+        let wBottom = contentView.bottomAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: groupOuterSpacing)
+        warningDateTop = wDateTop
+        warningBannerTop = wBannerTop
+        warningReactionsTop = wReactionsTop
+        warningBottom = wBottom
+        warningOrderConstraints = [wDateTop, wBannerTop, wReactionsTop, wBottom]
+        NSLayoutConstraint.activate(plainOrderConstraints)
 
         // Réactions alignées sur le bord de la bulle côté expéditeur(trice).
         let reactionsHorizontal: [NSLayoutConstraint] = type(of: self).isOutgoingLayout
@@ -413,13 +434,27 @@ class ConversationViewCell: UITableViewCell {
     /// et les lignes réactions / heure ne prennent de place que lorsqu'elles sont affichées.
     private func applyGroupSpacing() {
         let hasReactionsRow = !reactionBadges.isHidden || !optionsButton.isHidden
-        phoneWarningTopConstraint?.constant = hasPhoneWarning ? 2 : 0
         phoneWarningHiddenConstraint?.isActive = !hasPhoneWarning
         phoneWarningBanner.isHidden = !hasPhoneWarning
         bubbleTopConstraint?.constant = isFirstInGroup ? groupOuterSpacing : groupInnerSpacing
-        reactionsTopConstraint?.constant = hasPhoneWarning ? (hasReactionsRow ? 14 : 0) : (hasReactionsRow ? 4 : 0)
-        dateTopConstraint?.constant = isLastInGroup ? ((hasPhoneWarning && !hasReactionsRow) ? 14 : 4) : 0
-        bottomConstraint?.constant = isLastInGroup ? groupOuterSpacing : groupInnerSpacing
+
+        if hasPhoneWarning {
+            NSLayoutConstraint.deactivate(plainOrderConstraints)
+            bottomConstraint?.isActive = false   // bas de cellule = bas des réactions dans cet ordre
+            NSLayoutConstraint.activate(warningOrderConstraints)
+            // Le bandeau s'affiche même si l'heure est masquée (message non dernier du groupe).
+            warningDateTop?.constant = isLastInGroup ? 4 : 0
+            warningBannerTop?.constant = 2
+            warningReactionsTop?.constant = hasReactionsRow ? 14 : 0
+            warningBottom?.constant = (isLastInGroup ? groupOuterSpacing : groupInnerSpacing) + (hasReactionsRow ? 0 : 14)
+        } else {
+            NSLayoutConstraint.deactivate(warningOrderConstraints)
+            NSLayoutConstraint.activate(plainOrderConstraints)
+            bottomConstraint?.isActive = true
+            reactionsTopConstraint?.constant = hasReactionsRow ? 4 : 0
+            dateTopConstraint?.constant = isLastInGroup ? 4 : 0
+            bottomConstraint?.constant = isLastInGroup ? groupOuterSpacing : groupInnerSpacing
+        }
     }
 
     override func prepareForReuse() {
@@ -497,7 +532,10 @@ class ConversationViewCell: UITableViewCell {
             }
         }
 
-        // Contenu / statut
+        // Contenu / statut. L'avertissement numéro de téléphone (EN-8022) n'existe qu'en conversation
+        // privée, sur les messages normaux (ni supprimés/modérés, ni automatiques) dont le texte
+        // affiché contient un numéro : même décision pour le bandeau et la surbrillance du numéro.
+        var phoneNumberFound = false
         if let status = message.status?.lowercased() {
             switch status {
             case "deleted":
@@ -505,10 +543,17 @@ class ConversationViewCell: UITableViewCell {
             case "offensive", "offensible":
                 applyDeletedStyle(text: NSLocalizedString("content_removed", comment: ""))
             default:
-                applyNormalContent(message: message, isMe: isMe)
+                phoneNumberFound = applyNormalContent(message: message, isMe: isMe, highlightPhone: showPhoneWarning)
             }
         } else {
-            applyNormalContent(message: message, isMe: isMe)
+            phoneNumberFound = applyNormalContent(message: message, isMe: isMe, highlightPhone: showPhoneWarning)
+        }
+        hasPhoneWarning = phoneNumberFound
+        if hasPhoneWarning {
+            let key = isMe ? "conversation_phone_warning_sender" : "conversation_phone_warning_receiver"
+            phoneWarningLabel.attributedText = ConversationViewCell.phoneWarningAttributedText(key.localized)
+        } else {
+            phoneWarningLabel.attributedText = nil
         }
 
         // Heure une seule fois par groupe, sous le dernier message. Le nom n'y est ajouté qu'en
@@ -517,20 +562,6 @@ class ConversationViewCell: UITableViewCell {
             ? formattedNameAndTime(from: message, showName: showSenderName && !isMe)
             : nil
 
-        // Avertissement numéro de téléphone (EN-8022) : conversation privée uniquement, messages
-        // normaux uniquement (ni supprimés/modérés, ni automatiques).
-        let status = message.status?.lowercased()
-        let isRegularMessage = status != "deleted" && status != "offensive" && status != "offensible"
-            && message.messageType != "auto"
-        let plainText = (message.content?.isEmpty == false ? message.content : message.contentHtml)
-        if showPhoneWarning && isRegularMessage && PhoneNumberDetector.containsPhoneNumber(plainText) {
-            let key = isMe ? "conversation_phone_warning_sender" : "conversation_phone_warning_receiver"
-            phoneWarningLabel.attributedText = ConversationViewCell.phoneWarningAttributedText(key.localized)
-            hasPhoneWarning = true
-        } else {
-            phoneWarningLabel.attributedText = nil
-            hasPhoneWarning = false
-        }
         applyGroupSpacing()
 
         // ----- Image attachée -----
@@ -655,7 +686,10 @@ class ConversationViewCell: UITableViewCell {
     }
 
 
-    private func applyNormalContent(message: PostMessage, isMe: Bool) {
+    /// - Returns: `true` si `highlightPhone` est demandé et qu'un numéro de téléphone français a été
+    ///   repéré (et surligné) dans le texte affiché.
+    @discardableResult
+    private func applyNormalContent(message: PostMessage, isMe: Bool, highlightPhone: Bool = false) -> Bool {
         // Reçu : pêche clair / texte anthracite ; envoyé : orange / texte blanc (EN-9558).
         let isAuto = message.messageType == "auto"
         let isOutgoingBubble = isMe && !isAuto
@@ -672,13 +706,45 @@ class ConversationViewCell: UITableViewCell {
         ui_label_comment.mentionColor = linkColor
         ui_label_comment.enabledTypes = [.url, .mention, .hashtag, phoneType]
 
+        let displayed: String
         if let html = message.contentHtml, !html.isEmpty {
-            ui_label_comment.text = htmlToPlainWithLinksAndMentionMap(html)
+            displayed = htmlToPlainWithLinksAndMentionMap(html)
         } else if let content = message.content, !content.isEmpty {
-            ui_label_comment.text = content.trimmingCharacters(in: .whitespacesAndNewlines)
+            displayed = content.trimmingCharacters(in: .whitespacesAndNewlines)
         } else {
-            ui_label_comment.text = ""
+            displayed = ""
         }
+
+        let phoneRanges = (highlightPhone && message.messageType != "auto")
+            ? PhoneNumberDetector.findFrenchPhoneNumbers(in: displayed)
+            : []
+        guard !phoneRanges.isEmpty else {
+            ui_label_comment.text = displayed
+            return false
+        }
+
+        // Surbrillance du numéro (EN-8022) : fond orange translucide + gras. On retire phoneType
+        // pour ce message (son seul effet était une couleur par défaut, le tap est sans action) :
+        // ActiveLabel ne réécrit alors pas les attributs de la plage du numéro. Liens, mentions
+        // et hashtags restent actifs. ActiveLabel recopie les attributs du premier caractère sur
+        // chaque élément actif : si le numéro ouvre le message, un caractère invisible est
+        // préfixé pour que ce premier caractère reste neutre.
+        ui_label_comment.enabledTypes = [.url, .mention, .hashtag]
+        let leadsWithPhone = phoneRanges.first?.location == 0
+        let prefix = leadsWithPhone ? "\u{200B}" : ""
+        let shift = (prefix as NSString).length
+        let attributed = NSMutableAttributedString(string: prefix + displayed, attributes: [
+            .font: conversationBaseFont,
+            .foregroundColor: ui_label_comment.textColor ?? UIColor.black
+        ])
+        for range in phoneRanges {
+            attributed.addAttributes([
+                .backgroundColor: UIColor.appPhoneNumberHighlight,
+                .font: UIFont(name: "NunitoSans-Bold", size: 15) ?? UIFont.boldSystemFont(ofSize: 15)
+            ], range: NSRange(location: range.location + shift, length: range.length))
+        }
+        ui_label_comment.attributedText = attributed
+        return true
     }
 
     // MARK: - Name + Time (HH:mm)

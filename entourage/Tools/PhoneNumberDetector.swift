@@ -11,9 +11,14 @@ enum PhoneNumberDetector {
 
     private static let regex = try? NSRegularExpression(pattern: pattern)
 
+    /// Plages (en UTF-16, utilisables directement avec NSAttributedString) des numéros français du texte.
+    static func findFrenchPhoneNumbers(in text: String?) -> [NSRange] {
+        guard let text, !text.isEmpty, let regex else { return [] }
+        let range = NSRange(location: 0, length: (text as NSString).length)
+        return regex.matches(in: text, options: [], range: range).map { $0.range }
+    }
+
     static func containsPhoneNumber(_ text: String?) -> Bool {
-        guard let text, !text.isEmpty, let regex else { return false }
-        let range = NSRange(text.startIndex..., in: text)
-        return regex.firstMatch(in: text, options: [], range: range) != nil
+        return !findFrenchPhoneNumbers(in: text).isEmpty
     }
 }

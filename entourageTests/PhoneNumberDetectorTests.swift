@@ -36,4 +36,13 @@ final class PhoneNumberDetectorTests: XCTestCase {
         XCTAssertFalse(PhoneNumberDetector.containsPhoneNumber("+44 7911 123456"))
         XCTAssertFalse(PhoneNumberDetector.containsPhoneNumber("00 12 34 56 78"))
     }
+
+    func testFindFrenchPhoneNumbersReturnsRanges() {
+        let text = "Appelle le 06 12 34 56 78 ou le +33 7 98 76 54 32 !"
+        let found = PhoneNumberDetector.findFrenchPhoneNumbers(in: text).map { (text as NSString).substring(with: $0) }
+        XCTAssertEqual(found, ["06 12 34 56 78", "+33 7 98 76 54 32"])
+        XCTAssertEqual(PhoneNumberDetector.findFrenchPhoneNumbers(in: "0612345678").first, NSRange(location: 0, length: 10))
+        XCTAssertTrue(PhoneNumberDetector.findFrenchPhoneNumbers(in: "rien à signaler").isEmpty)
+        XCTAssertTrue(PhoneNumberDetector.findFrenchPhoneNumbers(in: nil).isEmpty)
+    }
 }

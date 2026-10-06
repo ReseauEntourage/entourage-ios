@@ -166,6 +166,8 @@ extension UIColor {
     static var appPhoneWarningBorder: UIColor { return UIColor(hexString: "#FFD5A8") }
     static var appPhoneWarningAccent: UIColor { return UIColor(hexString: "#D53F00") }
     static var appPhoneWarningText: UIColor { return UIColor(hexString: "#5C4632") }
+    /// Surbrillance du numéro dans la bulle : rgba(255,151,57,0.28)
+    static var appPhoneNumberHighlight: UIColor { return UIColor(red: 255/255, green: 151/255, blue: 57/255, alpha: 0.28) }
 
     convenience init(hexString: String) {
         let scanner = Scanner(string: hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))
