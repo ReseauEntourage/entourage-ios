@@ -1945,5 +1945,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "اختر شركة أولاً";
 "onboarding_phase1_select_date_title" = "اختر تاريخًا";
 "react_action_button" = "تفاعل";
-"conversation_phone_warning_sender" = "تنبيه: بمشاركتك رقم هاتف، فإنك تخرج من شبكة Entourage الآمنة. ابقَ يقظًا وتأكد من أنك تعرف محاورك جيدًا.";
-"conversation_phone_warning_receiver" = "تنبيه: تحتوي هذه الرسالة على رقم هاتف. بالتواصل خارج Entourage، فإنك تغادر الشبكة الآمنة. ابقَ يقظًا وتأكد من أنك تعرف محاورك جيدًا.";
+"conversation_phone_warning_sender" = "تنبيه: بمشاركتك رقم هاتف، فإنك تخرج من إطار Entourage. ابقَ يقظًا وتأكد من أنك تعرف محاورك جيدًا.";
+"conversation_phone_warning_receiver" = "تنبيه: تحتوي هذه الرسالة على رقم هاتف. بالتواصل خارج التطبيق، فإنك تغادر إطار Entourage. ابقَ يقظًا وتأكد من أنك تعرف محاورك جيدًا.";

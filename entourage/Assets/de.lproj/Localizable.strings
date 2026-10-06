@@ -2006,5 +2006,5 @@ Wählen Sie ein Thema, um zu beginnen.";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Wählen Sie zuerst ein Unternehmen aus";
 "onboarding_phase1_select_date_title" = "Datum auswählen";
 "react_action_button" = "Reagieren";
-"conversation_phone_warning_sender" = "Achtung: Wenn Sie eine Telefonnummer teilen, verlassen Sie das sichere Netzwerk von Entourage. Bleiben Sie wachsam und stellen Sie sicher, dass Sie Ihr Gegenüber gut kennen.";
-"conversation_phone_warning_receiver" = "Achtung: Diese Nachricht enthält eine Telefonnummer. Wenn Sie außerhalb von Entourage kommunizieren, verlassen Sie das sichere Netzwerk. Bleiben Sie wachsam und stellen Sie sicher, dass Sie Ihr Gegenüber gut kennen.";
+"conversation_phone_warning_sender" = "Achtung: Wenn Sie eine Telefonnummer teilen, verlassen Sie den Rahmen von Entourage. Bleiben Sie wachsam und stellen Sie sicher, dass Sie Ihr Gegenüber gut kennen.";
+"conversation_phone_warning_receiver" = "Achtung: Diese Nachricht enthält eine Telefonnummer. Wenn Sie außerhalb der App kommunizieren, verlassen Sie den Rahmen von Entourage. Bleiben Sie wachsam und stellen Sie sicher, dass Sie Ihr Gegenüber gut kennen.";

@@ -3427,5 +3427,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Selecciona primero una empresa";
 "onboarding_phase1_select_date_title" = "Seleccionar una fecha";
 "react_action_button" = "Reaccionar";
-"conversation_phone_warning_sender" = "Atención: al compartir un número de teléfono, sales de la red segura de Entourage. Mantente alerta y asegúrate de conocer bien a tu interlocutor.";
-"conversation_phone_warning_receiver" = "Atención: este mensaje contiene un número de teléfono. Al comunicarte fuera de Entourage, sales de la red segura. Mantente alerta y asegúrate de conocer bien a tu interlocutor.";
+"conversation_phone_warning_sender" = "Atención: al compartir un número de teléfono, sales del marco de Entourage. Mantente alerta y asegúrate de conocer bien a tu interlocutor.";
+"conversation_phone_warning_receiver" = "Atención: este mensaje contiene un número de teléfono. Al comunicarte fuera de la aplicación, sales del marco de Entourage. Mantente alerta y asegúrate de conocer bien a tu interlocutor.";
