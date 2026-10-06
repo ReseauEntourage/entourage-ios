@@ -474,6 +474,7 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dto = dataSource[indexPath.row]
+        markAsReadLocally(at: indexPath)
 
         switch dto {
         case .bonnesOndesCard, .sectionLabel:
@@ -530,6 +531,27 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
                 present(vc, animated: true)
             }
         }
+    }
+
+    /// Mise à jour optimiste : une conversation non lue qu'on ouvre passe tout de suite à « lue »
+    /// dans la liste, sans rechargement réseau.
+    private func markAsReadLocally(at indexPath: IndexPath) {
+        guard indexPath.row < dataSource.count else { return }
+
+        switch dataSource[indexPath.row] {
+        case .conversation(var conversation, let isDedicatedContact):
+            guard conversation.hasUnread else { return }
+            conversation.numberUnreadMessages = 0
+            dataSource[indexPath.row] = .conversation(conversation: conversation, isDedicatedContact: isDedicatedContact)
+        case .smalltalk(var smallTalk):
+            guard (smallTalk.number_of_unread_messages ?? 0) > 0 else { return }
+            smallTalk.number_of_unread_messages = 0
+            dataSource[indexPath.row] = .smalltalk(smallTalk: smallTalk)
+        default:
+            return
+        }
+
+        ui_tableview.reloadRows(at: [indexPath], with: .none)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
