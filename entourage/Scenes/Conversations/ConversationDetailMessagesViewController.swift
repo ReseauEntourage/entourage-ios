@@ -1854,7 +1854,8 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
             // Configure selon le contenu
             cell.configure(with: message, isMe: isMe,
                            isFirstInGroup: grouping.isFirst, isLastInGroup: grouping.isLast,
-                           showSenderName: !isOneToOne)
+                           showSenderName: !isOneToOne,
+                           showPhoneWarning: isOneToOne)
             cell.selectionStyle = .none
             cell.delegate = self
 

@@ -2318,3 +2318,5 @@ Choisissez un sujet pour démarrer.";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Sélectionner une entreprise d’abord";
 "onboarding_phase1_select_date_title" = "Sélectionner une date";
 "react_action_button" = "Réagir";
+"conversation_phone_warning_sender" = "Attention : en partageant un numéro, vous sortez du réseau sécurisé d'Entourage. Restez vigilant et assurez-vous de bien connaître votre interlocuteur.";
+"conversation_phone_warning_receiver" = "Attention : ce message contient un numéro de téléphone. En échangeant en dehors d'Entourage, vous quittez le réseau sécurisé. Restez vigilant et assurez-vous de bien connaître votre interlocuteur.";

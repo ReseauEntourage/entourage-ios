@@ -1986,3 +1986,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Спочатку виберіть компанію";
 "onboarding_phase1_select_date_title" = "Виберіть дату";
 "react_action_button" = "Реагувати";
+"conversation_phone_warning_sender" = "Увага: ділячись номером телефону, ви виходите за межі захищеної мережі Entourage. Будьте пильними та переконайтеся, що добре знаєте свого співрозмовника.";
+"conversation_phone_warning_receiver" = "Увага: це повідомлення містить номер телефону. Спілкуючись поза Entourage, ви залишаєте захищену мережу. Будьте пильними та переконайтеся, що добре знаєте свого співрозмовника.";

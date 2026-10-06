@@ -1909,3 +1909,5 @@ Alegeți un subiect pentru a începe.";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Selectați mai întâi o companie";
 "onboarding_phase1_select_date_title" = "Selectați o dată";
 "react_action_button" = "Reacționează";
+"conversation_phone_warning_sender" = "Atenție: împărtășind un număr de telefon, ieși din rețeaua sigură Entourage. Rămâi vigilent și asigură-te că îți cunoști bine interlocutorul.";
+"conversation_phone_warning_receiver" = "Atenție: acest mesaj conține un număr de telefon. Comunicând în afara Entourage, părăsești rețeaua sigură. Rămâi vigilent și asigură-te că îți cunoști bine interlocutorul.";

@@ -93,6 +93,17 @@ class ConversationViewCell: UITableViewCell {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    // MARK: - Avertissement numéro de téléphone (EN-8022)
+    // Texte non bloquant sous la bulle d'un message privé (1-to-1) contenant un numéro de téléphone.
+    private let phoneWarningLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont(name: "NunitoSans-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
+        label.textColor = .appAnthracite
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private var phoneWarningTopConstraint: NSLayoutConstraint?
     private let reactionBadges = ReactionBadgesView()
     private lazy var reactionsStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [reactionBadges, optionsButton])
@@ -249,7 +260,19 @@ class ConversationViewCell: UITableViewCell {
         // (bulle → réactions → nom), sans toucher au reste de la mise en page.
         detachTopConstraint(of: ui_label_date, from: ui_view_label)
 
-        let reactionsTop = reactionsStack.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 4)
+        // Avertissement numéro de téléphone (EN-8022) : entre la bulle et la barre de réactions.
+        // Sans texte, le label a une hauteur nulle et son espacement haut passe à 0.
+        contentView.addSubview(phoneWarningLabel)
+        let warningTop = phoneWarningLabel.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 0)
+        phoneWarningTopConstraint = warningTop
+        let warningHorizontal: [NSLayoutConstraint] = type(of: self).isOutgoingLayout
+            ? [phoneWarningLabel.trailingAnchor.constraint(equalTo: ui_view_label.trailingAnchor),
+               phoneWarningLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 20)]
+            : [phoneWarningLabel.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor),
+               phoneWarningLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20)]
+        NSLayoutConstraint.activate([warningTop] + warningHorizontal)
+
+        let reactionsTop = reactionsStack.topAnchor.constraint(equalTo: phoneWarningLabel.bottomAnchor, constant: 4)
         let dateTop = ui_label_date.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4)
         reactionsTopConstraint = reactionsTop
         dateTopConstraint = dateTop
@@ -337,6 +360,8 @@ class ConversationViewCell: UITableViewCell {
     /// et les lignes réactions / heure ne prennent de place que lorsqu'elles sont affichées.
     private func applyGroupSpacing() {
         let hasReactionsRow = !reactionBadges.isHidden || !optionsButton.isHidden
+        let hasPhoneWarning = !(phoneWarningLabel.text ?? "").isEmpty
+        phoneWarningTopConstraint?.constant = hasPhoneWarning ? 4 : 0
         bubbleTopConstraint?.constant = isFirstInGroup ? groupOuterSpacing : groupInnerSpacing
         reactionsTopConstraint?.constant = hasReactionsRow ? 4 : 0
         dateTopConstraint?.constant = isLastInGroup ? 4 : 0
@@ -362,6 +387,7 @@ class ConversationViewCell: UITableViewCell {
         ui_label_comment.text = nil
         ui_label_comment.attributedText = nil
         ui_label_date.text = nil
+        phoneWarningLabel.text = nil
         mentionLinkMap.removeAll()
 
         // Reset styles
@@ -382,7 +408,9 @@ class ConversationViewCell: UITableViewCell {
     ///   - isFirstInGroup / isLastInGroup: position du message dans son groupe (même expéditeur(trice),
     ///     moins de 5 min d'écart) — EN-9558.
     ///   - showSenderName: `false` en tête-à-tête (le nom figure déjà dans le header).
-    func configure(with message: PostMessage, isMe: Bool, isFirstInGroup: Bool = true, isLastInGroup: Bool = true, showSenderName: Bool = true, positionForRetry: Int = 0) {
+    ///   - showPhoneWarning: `true` en conversation privée (1-to-1) : affiche sous la bulle un
+    ///     avertissement non bloquant si le message contient un numéro de téléphone (EN-8022).
+    func configure(with message: PostMessage, isMe: Bool, isFirstInGroup: Bool = true, isLastInGroup: Bool = true, showSenderName: Bool = true, showPhoneWarning: Bool = false, positionForRetry: Int = 0) {
         currentMessage = message
         currentPositionForRetry = positionForRetry
         currentIsMe = isMe
@@ -433,6 +461,19 @@ class ConversationViewCell: UITableViewCell {
         ui_label_date.text = isLastInGroup
             ? formattedNameAndTime(from: message, showName: showSenderName && !isMe)
             : nil
+
+        // Avertissement numéro de téléphone (EN-8022) : conversation privée uniquement, messages
+        // normaux uniquement (ni supprimés/modérés, ni automatiques).
+        let status = message.status?.lowercased()
+        let isRegularMessage = status != "deleted" && status != "offensive" && status != "offensible"
+            && message.messageType != "auto"
+        let plainText = (message.content?.isEmpty == false ? message.content : message.contentHtml)
+        if showPhoneWarning && isRegularMessage && PhoneNumberDetector.containsPhoneNumber(plainText) {
+            phoneWarningLabel.text = (isMe ? "conversation_phone_warning_sender" : "conversation_phone_warning_receiver").localized
+            phoneWarningLabel.textAlignment = type(of: self).isOutgoingLayout ? .right : .left
+        } else {
+            phoneWarningLabel.text = nil
+        }
         applyGroupSpacing()
 
         // ----- Image attachée -----

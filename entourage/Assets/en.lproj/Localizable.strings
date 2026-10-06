@@ -2280,3 +2280,5 @@ Choose a topic to get started.";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Select a company first";
 "onboarding_phase1_select_date_title" = "Select a date";
 "react_action_button" = "React";
+"conversation_phone_warning_sender" = "Warning: by sharing a phone number, you are leaving Entourage's secure network. Stay vigilant and make sure you really know who you are talking to.";
+"conversation_phone_warning_receiver" = "Warning: this message contains a phone number. By communicating outside Entourage, you leave the secure network. Stay vigilant and make sure you really know who you are talking to.";

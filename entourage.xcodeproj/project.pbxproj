@@ -143,6 +143,8 @@
 		02681980278DF72D00A98A4A /* OTCarrouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268197B278DF72D00A98A4A /* OTCarrouselLayout.swift */; };
 		026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 026819A6278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m */; };
 		026819AA278E00A200A98A4A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819A9278E00A200A98A4A /* Utils.swift */; };
+		7A1C0D8E2F0B4C6A9D3E5F11 /* PhoneNumberDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D8E2F0B4C6A9D3E5F10 /* PhoneNumberDetector.swift */; };
+		7A1C0D8E2F0B4C6A9D3E5F13 /* PhoneNumberDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D8E2F0B4C6A9D3E5F12 /* PhoneNumberDetectorTests.swift */; };
 		026819BD278E105600A98A4A /* OTLoginV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819B8278E105600A98A4A /* OTLoginV2ViewController.swift */; };
 		026819BE278E105600A98A4A /* OTLoginPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819B9278E105600A98A4A /* OTLoginPlaceViewController.swift */; };
 		026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819BA278E105600A98A4A /* OTLoginNextViewController.swift */; };
@@ -855,6 +857,8 @@
 		026819A6278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCountryCodePickerViewDataSource.m; sourceTree = "<group>"; };
 		026819A7278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCountryCodePickerViewDataSource.h; sourceTree = "<group>"; };
 		026819A9278E00A200A98A4A /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		7A1C0D8E2F0B4C6A9D3E5F10 /* PhoneNumberDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberDetector.swift; sourceTree = "<group>"; };
+		7A1C0D8E2F0B4C6A9D3E5F12 /* PhoneNumberDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberDetectorTests.swift; sourceTree = "<group>"; };
 		026819B8278E105600A98A4A /* OTLoginV2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginV2ViewController.swift; sourceTree = "<group>"; };
 		026819B9278E105600A98A4A /* OTLoginPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginPlaceViewController.swift; sourceTree = "<group>"; };
 		026819BA278E105600A98A4A /* OTLoginNextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginNextViewController.swift; sourceTree = "<group>"; };
@@ -1737,6 +1741,7 @@
 				02D64F492799CA5400F6C4BD /* Map */,
 				025D8763278DEB3A00909101 /* Logger.swift */,
 				026819A9278E00A200A98A4A /* Utils.swift */,
+				7A1C0D8E2F0B4C6A9D3E5F10 /* PhoneNumberDetector.swift */,
 				026819A7278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.h */,
 				026819A6278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m */,
 				26445C4A2BB46AAF0010A8D8 /* SimpleMJAlertDialog.swift */,
@@ -2340,6 +2345,7 @@
 				599DA1ACFF315CB9B5BB4B5B /* WelcomeJourneyNetworkTests.swift */,
 				9E6D18B5FF299CF8D887C22B /* WelcomeJourneyViewModelTests.swift */,
 				A1E30EA046F12F7FB43AE813 /* WelcomeJourneyAutoSkipTests.swift */,
+				7A1C0D8E2F0B4C6A9D3E5F12 /* PhoneNumberDetectorTests.swift */,
 			);
 			name = entourageTests;
 			path = entourageTests;
@@ -3705,6 +3711,7 @@
 				02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */,
 				0264C5D628B4E51B001EA654 /* Conversation.swift in Sources */,
 				026819AA278E00A200A98A4A /* Utils.swift in Sources */,
+				7A1C0D8E2F0B4C6A9D3E5F11 /* PhoneNumberDetector.swift in Sources */,
 				02D10D8B2873236500ACC267 /* MJPopupViewController.swift in Sources */,
 				02E7845F2811A91900177F13 /* NeighborhoodHomeViewController.swift in Sources */,
 				264C6AB82C19E5F200E3518D /* NotificationDemandViewController.swift in Sources */,
@@ -3784,6 +3791,7 @@
 				7C1CA4A3D6A1C4063976F49C /* WelcomeJourneyNetworkTests.swift in Sources */,
 				D4DE3C7AAB3FD4B84BE2146A /* WelcomeJourneyViewModelTests.swift in Sources */,
 				2DE4C673A1B82EEB686190F9 /* WelcomeJourneyAutoSkipTests.swift in Sources */,
+				7A1C0D8E2F0B4C6A9D3E5F13 /* PhoneNumberDetectorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

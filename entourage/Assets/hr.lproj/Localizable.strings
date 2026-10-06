@@ -1672,3 +1672,5 @@ Odaberite temu za početak.";
 "onboarding_phase1_event_select_enterprise_first_placeholder" = "Prvo odaberite tvrtku";
 "onboarding_phase1_select_date_title" = "Odaberite datum";
 "react_action_button" = "Reagiraj";
+"conversation_phone_warning_sender" = "Pozor: dijeleći telefonski broj, napuštate sigurnu mrežu Entouragea. Budite oprezni i provjerite da dobro poznajete svog sugovornika.";
+"conversation_phone_warning_receiver" = "Pozor: ova poruka sadrži telefonski broj. Komunicirajući izvan Entouragea, napuštate sigurnu mrežu. Budite oprezni i provjerite da dobro poznajete svog sugovornika.";
