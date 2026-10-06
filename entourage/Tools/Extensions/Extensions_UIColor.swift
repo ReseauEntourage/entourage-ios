@@ -161,6 +161,11 @@ extension UIColor {
     static var appTextDisabled: UIColor { return UIColor(hexString: "#A0A0A0") }
     static var appMessagingSeparator: UIColor { return UIColor(hexString: "#E8E8E8") }
     static var appMessagingBorder: UIColor { return UIColor(hexString: "#EFE7E2") }
+    // Bandeau d'avertissement numéro de téléphone (EN-8022)
+    static var appPhoneWarningBackground: UIColor { return UIColor(hexString: "#FFF1E3") }
+    static var appPhoneWarningBorder: UIColor { return UIColor(hexString: "#FFD5A8") }
+    static var appPhoneWarningAccent: UIColor { return UIColor(hexString: "#D53F00") }
+    static var appPhoneWarningText: UIColor { return UIColor(hexString: "#5C4632") }
 
     convenience init(hexString: String) {
         let scanner = Scanner(string: hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted))

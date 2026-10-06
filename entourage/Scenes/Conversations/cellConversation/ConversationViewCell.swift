@@ -98,11 +98,58 @@ class ConversationViewCell: UITableViewCell {
     private let phoneWarningLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont(name: "NunitoSans-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
-        label.textColor = .appAnthracite
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    private let phoneWarningIcon: UIImageView = {
+        let iv = UIImageView(image: UIImage(systemName: "exclamationmark.triangle"))
+        iv.tintColor = .appPhoneWarningAccent
+        iv.contentMode = .scaleAspectFit
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    private lazy var phoneWarningBanner: UIView = {
+        let banner = UIView()
+        banner.backgroundColor = .appPhoneWarningBackground
+        banner.layer.cornerRadius = 16
+        banner.layer.borderWidth = 1
+        banner.layer.borderColor = UIColor.appPhoneWarningBorder.cgColor
+        banner.clipsToBounds = true
+        banner.translatesAutoresizingMaskIntoConstraints = false
+        banner.addSubview(phoneWarningIcon)
+        banner.addSubview(phoneWarningLabel)
+        func padded(_ c: NSLayoutConstraint) -> NSLayoutConstraint { c.priority = UILayoutPriority(999); return c }
+        NSLayoutConstraint.activate([
+            phoneWarningIcon.leadingAnchor.constraint(equalTo: banner.leadingAnchor, constant: 14),
+            padded(phoneWarningIcon.topAnchor.constraint(equalTo: banner.topAnchor, constant: 12)),
+            phoneWarningIcon.widthAnchor.constraint(equalToConstant: 22),
+            padded(phoneWarningIcon.heightAnchor.constraint(equalToConstant: 22)),
+            phoneWarningLabel.leadingAnchor.constraint(equalTo: phoneWarningIcon.trailingAnchor, constant: 11),
+            padded(phoneWarningLabel.topAnchor.constraint(equalTo: banner.topAnchor, constant: 12)),
+            padded(phoneWarningLabel.trailingAnchor.constraint(equalTo: banner.trailingAnchor, constant: -14)),
+            padded(phoneWarningLabel.bottomAnchor.constraint(equalTo: banner.bottomAnchor, constant: -12))
+        ])
+        return banner
+    }()
+    private var phoneWarningHiddenConstraint: NSLayoutConstraint?
+    private var hasPhoneWarning = false
+
+    /// Texte du bandeau : « Attention : » en semi-gras orange, le reste en normal (EN-8022).
+    private static func phoneWarningAttributedText(_ text: String) -> NSAttributedString {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.minimumLineHeight = 19.5   // 13pt × 1.5
+        paragraph.maximumLineHeight = 19.5
+        let regular = UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        let semibold = UIFont(name: "NunitoSans-SemiBold", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .semibold)
+        let result = NSMutableAttributedString(string: text, attributes: [
+            .font: regular, .foregroundColor: UIColor.appPhoneWarningText, .paragraphStyle: paragraph
+        ])
+        if let colon = text.range(of: ":") {
+            let lead = NSRange(text.startIndex..<colon.upperBound, in: text)
+            result.addAttributes([.font: semibold, .foregroundColor: UIColor.appPhoneWarningAccent], range: lead)
+        }
+        return result
+    }
     private var phoneWarningTopConstraint: NSLayoutConstraint?
     private let reactionBadges = ReactionBadgesView()
     private lazy var reactionsStack: UIStackView = {
@@ -262,17 +309,23 @@ class ConversationViewCell: UITableViewCell {
 
         // Avertissement numéro de téléphone (EN-8022) : entre la bulle et la barre de réactions.
         // Sans texte, le label a une hauteur nulle et son espacement haut passe à 0.
-        contentView.addSubview(phoneWarningLabel)
-        let warningTop = phoneWarningLabel.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 0)
+        contentView.addSubview(phoneWarningBanner)
+        let warningTop = phoneWarningBanner.topAnchor.constraint(equalTo: ui_view_label.bottomAnchor, constant: 0)
         phoneWarningTopConstraint = warningTop
+        let hiddenHeight = phoneWarningBanner.heightAnchor.constraint(equalToConstant: 0)
+        phoneWarningHiddenConstraint = hiddenHeight
+        // Reçu : aligné après l'avatar (38 + 10) ; envoyé : calé à droite sous la bulle.
         let warningHorizontal: [NSLayoutConstraint] = type(of: self).isOutgoingLayout
-            ? [phoneWarningLabel.trailingAnchor.constraint(equalTo: ui_view_label.trailingAnchor),
-               phoneWarningLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 20)]
-            : [phoneWarningLabel.leadingAnchor.constraint(equalTo: ui_view_label.leadingAnchor),
-               phoneWarningLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20)]
-        NSLayoutConstraint.activate([warningTop] + warningHorizontal)
+            ? [phoneWarningBanner.trailingAnchor.constraint(equalTo: ui_view_label.trailingAnchor),
+               phoneWarningBanner.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 20)]
+            : [phoneWarningBanner.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 48),
+               phoneWarningBanner.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10)]
+        NSLayoutConstraint.activate([
+            warningTop, hiddenHeight,
+            phoneWarningBanner.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.88)
+        ] + warningHorizontal)
 
-        let reactionsTop = reactionsStack.topAnchor.constraint(equalTo: phoneWarningLabel.bottomAnchor, constant: 4)
+        let reactionsTop = reactionsStack.topAnchor.constraint(equalTo: phoneWarningBanner.bottomAnchor, constant: 4)
         let dateTop = ui_label_date.topAnchor.constraint(equalTo: reactionsStack.bottomAnchor, constant: 4)
         reactionsTopConstraint = reactionsTop
         dateTopConstraint = dateTop
@@ -360,11 +413,12 @@ class ConversationViewCell: UITableViewCell {
     /// et les lignes réactions / heure ne prennent de place que lorsqu'elles sont affichées.
     private func applyGroupSpacing() {
         let hasReactionsRow = !reactionBadges.isHidden || !optionsButton.isHidden
-        let hasPhoneWarning = !(phoneWarningLabel.text ?? "").isEmpty
-        phoneWarningTopConstraint?.constant = hasPhoneWarning ? 4 : 0
+        phoneWarningTopConstraint?.constant = hasPhoneWarning ? 2 : 0
+        phoneWarningHiddenConstraint?.isActive = !hasPhoneWarning
+        phoneWarningBanner.isHidden = !hasPhoneWarning
         bubbleTopConstraint?.constant = isFirstInGroup ? groupOuterSpacing : groupInnerSpacing
-        reactionsTopConstraint?.constant = hasReactionsRow ? 4 : 0
-        dateTopConstraint?.constant = isLastInGroup ? 4 : 0
+        reactionsTopConstraint?.constant = hasPhoneWarning ? (hasReactionsRow ? 14 : 0) : (hasReactionsRow ? 4 : 0)
+        dateTopConstraint?.constant = isLastInGroup ? ((hasPhoneWarning && !hasReactionsRow) ? 14 : 4) : 0
         bottomConstraint?.constant = isLastInGroup ? groupOuterSpacing : groupInnerSpacing
     }
 
@@ -387,7 +441,8 @@ class ConversationViewCell: UITableViewCell {
         ui_label_comment.text = nil
         ui_label_comment.attributedText = nil
         ui_label_date.text = nil
-        phoneWarningLabel.text = nil
+        phoneWarningLabel.attributedText = nil
+        hasPhoneWarning = false
         mentionLinkMap.removeAll()
 
         // Reset styles
@@ -469,10 +524,12 @@ class ConversationViewCell: UITableViewCell {
             && message.messageType != "auto"
         let plainText = (message.content?.isEmpty == false ? message.content : message.contentHtml)
         if showPhoneWarning && isRegularMessage && PhoneNumberDetector.containsPhoneNumber(plainText) {
-            phoneWarningLabel.text = (isMe ? "conversation_phone_warning_sender" : "conversation_phone_warning_receiver").localized
-            phoneWarningLabel.textAlignment = type(of: self).isOutgoingLayout ? .right : .left
+            let key = isMe ? "conversation_phone_warning_sender" : "conversation_phone_warning_receiver"
+            phoneWarningLabel.attributedText = ConversationViewCell.phoneWarningAttributedText(key.localized)
+            hasPhoneWarning = true
         } else {
-            phoneWarningLabel.text = nil
+            phoneWarningLabel.attributedText = nil
+            hasPhoneWarning = false
         }
         applyGroupSpacing()
 
