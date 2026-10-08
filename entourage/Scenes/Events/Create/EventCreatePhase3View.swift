@@ -153,7 +153,7 @@ struct EventCreatePhase3View: View {
                     placeholder: "event_form_link_placeholder".localized,
                     text: store.binding(\.onlineUrl),
                     hasError: store.errors[.onlineUrl] != nil,
-                    leadingSystemImage: "link",
+                    trailingSystemImage: "link",
                     keyboard: .URL,
                     autocapitalization: .none
                 )
@@ -167,7 +167,7 @@ struct EventCreatePhase3View: View {
                     placeholder: "event_form_address_placeholder".localized,
                     text: $address.query,
                     hasError: store.errors[.address] != nil,
-                    leadingSystemImage: "mappin.and.ellipse",
+                    trailingSystemImage: "mappin.and.ellipse",
                     autocapitalization: .none
                 )
                 if viewModel.isShowingSuggestions && !address.suggestions.isEmpty {

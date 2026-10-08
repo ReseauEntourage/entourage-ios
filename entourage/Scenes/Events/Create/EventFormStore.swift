@@ -54,7 +54,8 @@ final class EventFormStore: ObservableObject {
     // MARK: Étape 1
 
     func setGalleryImage(_ image: EventImage) {
-        let url = [image.url_image_portrait, image.url_image_landscape].compactMap { $0 }.first { !$0.isEmpty }
+        // Paysage d'abord (affiché en bandeau) : le portrait agrandi serait pixellisé.
+        let url = [image.url_image_landscape, image.url_image_portrait].compactMap { $0 }.first { !$0.isEmpty }
         update {
             $0.imageId = image.id
             $0.entourageImageUrl = nil

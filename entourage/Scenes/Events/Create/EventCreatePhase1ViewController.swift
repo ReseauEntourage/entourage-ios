@@ -124,10 +124,12 @@ struct EventStepPresentationView: View {
                         .font(EventFormStyle.bold(13.5))
                         .foregroundColor(EventFormStyle.ink)
                         .underline()
-                    Text((store.values.hasPhoto ? "event_form_photo_added" : "event_form_photo_hint").localized)
-                        .font(EventFormStyle.regular(12))
-                        .foregroundColor(EventFormStyle.ink2)
-                        .multilineTextAlignment(.center)
+                    if store.values.hasPhoto {
+                        Text("event_form_photo_added".localized)
+                            .font(EventFormStyle.regular(12))
+                            .foregroundColor(EventFormStyle.ink2)
+                            .multilineTextAlignment(.center)
+                    }
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity, minHeight: 120)

@@ -25,7 +25,8 @@ extension EventFormValues {
         title = event.title
         descriptionText = event.descriptionEvent ?? ""
         imageId = event.imageId
-        imageDisplayUrl = event.getCurrentImageUrl ?? event.imageUrl
+        // Paysage d'abord : l'image est affichée en bandeau, le portrait serait agrandi (pixellisé).
+        imageDisplayUrl = event.metadata?.landscape_url ?? event.getCurrentImageUrl ?? event.imageUrl
         if forDuplication && event.imageId == nil {
             // Les événements issus de l'API stockent l'image dans les URLs des métadonnées.
             entourageImageUrl = event.entourage_image_url ?? event.metadata?.portrait_url ?? event.metadata?.landscape_url
@@ -60,6 +61,11 @@ extension EventFormValues {
 
         interests = event.interests ?? []
         otherInterestMessage = event.tagOtherMessage ?? ""
+        if forDuplication {
+            // « Autre » n'est plus proposée à la création : on ne la reprend pas d'un événement dupliqué.
+            interests.removeAll { $0 == Tag.tagOther }
+            otherInterestMessage = ""
+        }
         groups = event.neighborhoods ?? []
     }
 

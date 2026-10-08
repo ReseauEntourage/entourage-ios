@@ -4,7 +4,7 @@
 //
 //  Created by Jerome on 21/06/2022.
 //
-//  Étape 2 « Quand ça se passe ? » : date, heures de début et de fin, récurrence.
+//  Étape 2 « Quand a lieu votre événement ? » : date, heures de début et de fin, récurrence.
 //
 
 import UIKit

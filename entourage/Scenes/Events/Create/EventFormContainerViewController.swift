@@ -190,7 +190,8 @@ class EventFormContainerViewController: UIViewController, EventCreateMainDelegat
 
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            topBar.topAnchor.constraint(equalTo: safe.topAnchor),
+            // Marge sous la zone sûre (barre d'état / encoche / Dynamic Island).
+            topBar.topAnchor.constraint(equalTo: safe.topAnchor, constant: 10),
             topBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             topBar.heightAnchor.constraint(equalToConstant: 48),

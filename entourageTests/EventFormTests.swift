@@ -13,7 +13,7 @@ final class EventFormTests: XCTestCase {
     private func validValues() -> EventFormValues {
         var values = EventFormValues()
         values.title = "Discussion entre voisins"
-        values.descriptionText = "Venez nombreux"
+        values.descriptionText = "Venez nombreux jouer à la pétanque avec nous"
         values.imageId = 3
         values.day = tomorrow()
         values.startMinutes = 16 * 60
@@ -46,6 +46,35 @@ final class EventFormTests: XCTestCase {
         XCTAssertEqual(errors[.description], "event_form_error_description".localized)
         XCTAssertEqual(errors[.photo], "event_form_error_photo".localized)
         XCTAssertTrue(EventFormValidator.errors(for: .presentation, values: validValues()).isEmpty)
+    }
+
+    func testDescriptionMinimumLength() {
+        var values = validValues()
+        values.descriptionText = "Trop court"
+        XCTAssertEqual(EventFormValidator.errors(for: .presentation, values: values)[.description], "event_form_error_description_short".localized)
+        XCTAssertNotEqual("event_form_error_description_short".localized, "event_form_error_description".localized)
+
+        // Les espaces de bord ne comptent pas.
+        values.descriptionText = String(repeating: " ", count: 40) + "court"
+        XCTAssertEqual(EventFormValidator.errors(for: .presentation, values: values)[.description], "event_form_error_description_short".localized)
+
+        values.descriptionText = String(repeating: "a", count: EventFormValidator.minDescriptionChars - 1)
+        XCTAssertNotNil(EventFormValidator.errors(for: .presentation, values: values)[.description])
+        values.descriptionText = String(repeating: "a", count: EventFormValidator.minDescriptionChars)
+        XCTAssertNil(EventFormValidator.errors(for: .presentation, values: values)[.description])
+    }
+
+    func testFrenchMessagesFromProductOwner() {
+        XCTAssertEqual(EventFormValidator.errors(for: .presentation, values: EventFormValues())[.title], "Donnez un nom à votre événement pour continuer.")
+        XCTAssertEqual(EventFormValidator.errors(for: .presentation, values: EventFormValues())[.description], "Ajoutez quelques mots pour présenter votre événement.")
+        XCTAssertEqual(EventFormValidator.errors(for: .presentation, values: EventFormValues())[.photo], "Ajoutez une photo pour continuer.")
+    }
+
+    func testOtherCategoryIsNotRequired() {
+        var values = validValues()
+        values.interests = [Tag.tagOther]
+        XCTAssertNil(EventFormValidator.errors(for: .categories, values: values)[.categories])
+        XCTAssertTrue(EventFormValidator.errors(for: .categories, values: values).isEmpty)
     }
 
     func testScheduleErrors() {
@@ -383,6 +412,11 @@ final class EventFormTests: XCTestCase {
         XCTAssertEqual(vc.pageViewController?.currentPage, .step(.presentation))
         XCTAssertTrue(vc.isEdit())
         XCTAssertTrue(vc.hasCurrentRecurrency())
+        XCTAssertFalse(vc.supportsDraft)
+    }
+
+    func testCreationDoesNotRestoreDraft() {
+        let vc = EventCreateMainViewController()
         XCTAssertFalse(vc.supportsDraft)
     }
 }

@@ -62,7 +62,6 @@ enum EventFormField: Hashable {
     case onlineUrl
     case placeLimit
     case categories
-    case otherCategory
 }
 
 // MARK: - Valeurs du formulaire -
@@ -148,6 +147,8 @@ struct EventFormValidationContext {
 enum EventFormValidator {
 
     static let httpsPrefix = "https://"
+    /// Longueur minimale de la description (caractères, espaces de bord exclus).
+    static let minDescriptionChars = 30
 
     static func errors(for step: EventCreateStep,
                        values v: EventFormValues,
@@ -159,8 +160,12 @@ enum EventFormValidator {
             if v.title.trimmingCharacters(in: .whitespacesAndNewlines).count < ApplicationTheme.minGroupNameChars {
                 errors[.title] = "event_form_error_title".localized
             }
-            if v.descriptionText.trimmingCharacters(in: .whitespacesAndNewlines).count <= 2 {
+            let description = v.descriptionText.trimmingCharacters(in: .whitespacesAndNewlines)
+            if description.isEmpty {
                 errors[.description] = "event_form_error_description".localized
+            }
+            else if description.count < minDescriptionChars {
+                errors[.description] = "event_form_error_description_short".localized
             }
             if !v.hasPhoto {
                 errors[.photo] = "event_form_error_photo".localized
@@ -210,10 +215,7 @@ enum EventFormValidator {
             if v.interests.isEmpty {
                 errors[.categories] = "event_form_error_category".localized
             }
-            else if v.isOtherInterestSelected && !context.isEdit
-                        && v.otherInterestMessage.trimmingCharacters(in: .whitespacesAndNewlines).count < ApplicationTheme.minOthersCatChars {
-                errors[.otherCategory] = "event_form_error_category_other".localized
-            }
+            // La catégorie « Autre » n'est plus proposée dans ce parcours : plus de précision à valider.
 
         case .groups:
             // Zéro, un ou plusieurs groupes : toujours valide.

@@ -187,7 +187,8 @@ struct EventFormTextField: View {
     let placeholder: String
     @Binding var text: String
     var hasError = false
-    var leadingSystemImage: String? = nil
+    /// Icône à l'extrémité droite du champ.
+    var trailingSystemImage: String? = nil
     var keyboard: UIKeyboardType = .default
     var autocapitalization: UITextAutocapitalizationType = .sentences
     @State private var isFocused = false
@@ -195,11 +196,6 @@ struct EventFormTextField: View {
     var body: some View {
         EventInputBox(hasError: hasError, isFocused: isFocused) {
             HStack(spacing: 10) {
-                if let image = leadingSystemImage {
-                    Image(systemName: image)
-                        .font(.system(size: 17, weight: .regular))
-                        .foregroundColor(EventFormStyle.accent)
-                }
                 TextField(placeholder, text: $text, onEditingChanged: { editing in
                     isFocused = editing
                 })
@@ -208,6 +204,12 @@ struct EventFormTextField: View {
                 .keyboardType(keyboard)
                 .autocapitalization(autocapitalization)
                 .disableAutocorrection(keyboard == .URL)
+                if let image = trailingSystemImage {
+                    Spacer(minLength: 0)
+                    Image(systemName: image)
+                        .font(.system(size: 17, weight: .regular))
+                        .foregroundColor(EventFormStyle.accent)
+                }
             }
         }
     }
@@ -313,6 +315,7 @@ struct EventPickerField: View {
     var body: some View {
         EventInputBox(hasError: hasError, isFocused: isFocused, padded: false) {
             ZStack(alignment: .trailing) {
+                Color.clear.frame(maxWidth: .infinity, minHeight: 54)
                 EventPickerTextField(
                     mode: mode,
                     placeholder: placeholder,
@@ -324,6 +327,7 @@ struct EventPickerField: View {
                     onFocusChange: { isFocused = $0 },
                     onCommit: onCommit
                 )
+                .frame(maxWidth: .infinity)
                 .frame(height: 54)
                 Image(systemName: trailingSystemImage)
                     .font(.system(size: 18, weight: .regular))
@@ -478,11 +482,11 @@ struct EventSelectableCard: View {
                 .frame(width: 24, height: 24)
             }
             .padding(isOn ? 13 : 14)
-            .background(Color.white)
+            .background(isOn ? EventFormStyle.accentSoft.opacity(0.55) : Color.white)
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(isOn ? EventFormStyle.ink : EventFormStyle.line, lineWidth: isOn ? 2 : 1)
+                    .stroke(isOn ? EventFormStyle.ink : EventFormStyle.line, lineWidth: isOn ? 3 : 1)
             )
         }
         .buttonStyle(PlainButtonStyle())
@@ -499,14 +503,14 @@ struct EventChip: View {
         Button(action: action) {
             Text(title)
                 .font(EventFormStyle.semibold(14))
-                .foregroundColor(EventFormStyle.ink)
-                .padding(.horizontal, isOn ? 14 : 15)
-                .padding(.vertical, isOn ? 9 : 10)
-                .background(Color.white)
+                .foregroundColor(isOn ? .white : EventFormStyle.ink)
+                .padding(.horizontal, 15)
+                .padding(.vertical, 10)
+                .background(isOn ? EventFormStyle.ink : Color.white)
                 .cornerRadius(24)
                 .overlay(
                     RoundedRectangle(cornerRadius: 24)
-                        .stroke(isOn ? EventFormStyle.ink : EventFormStyle.line, lineWidth: isOn ? 2 : 1)
+                        .stroke(isOn ? EventFormStyle.ink : EventFormStyle.line, lineWidth: 1)
                 )
         }
         .buttonStyle(PlainButtonStyle())

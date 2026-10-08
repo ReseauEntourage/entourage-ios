@@ -224,7 +224,7 @@ struct EventPreviewView: View {
             }
             .frame(width: 34, height: 34)
 
-            (Text(headline).font(EventFormStyle.bold(12.5)).foregroundColor(EventFormStyle.ink)
+            (Text(headline).font(EventFormStyle.bold(12.5)).bold().foregroundColor(EventFormStyle.ink)
                 + Text(" " + notice).font(EventFormStyle.regular(12.5)).foregroundColor(EventFormStyle.ink2))
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)

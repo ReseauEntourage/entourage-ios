@@ -19,27 +19,23 @@ class EventCreateMainViewController: EventFormContainerViewController {
 
     private var restoredPageIndex: Int? = nil
 
-    override var supportsDraft: Bool { return true }
+    /// « Enregistrer » (brouillon) est masqué : le code du brouillon est conservé mais inaccessible,
+    /// et la création ne restaure plus de brouillon.
+    override var supportsDraft: Bool { return false }
     override var finalActionTitle: String { return "event_form_publish".localized }
     override var startPageIndex: Int { return restoredPageIndex ?? 0 }
 
-    // MARK: Etat initial : duplication, sinon dernier brouillon de l'utilisateur -
+    // MARK: Etat initial : duplication éventuelle (plus de restauration de brouillon) -
 
     override func loadInitialState() {
         var values = EventFormValues()
-        var isRestoredFromDraft = false
 
         if let source = sourceEvent {
             values = EventFormValues(event: source, forDuplication: true)
         }
-        else if let userId = EventDraftStore.currentUserId, let draft = EventDraftStore.load(userId: userId) {
-            values = draft.values
-            isRestoredFromDraft = true
-            restoreDraftPosition(draft)
-        }
 
         // Création depuis la page d'un groupe : ce groupe est pré-sélectionné pour le partage.
-        if !isRestoredFromDraft, values.groups.isEmpty, let groupId = currentNeighborhoodId {
+        if values.groups.isEmpty, let groupId = currentNeighborhoodId {
             values.groups = [EventNeighborhood(id: groupId, name: "")]
         }
 

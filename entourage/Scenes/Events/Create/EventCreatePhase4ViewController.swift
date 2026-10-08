@@ -4,7 +4,7 @@
 //
 //  Created by Jerome on 21/06/2022.
 //
-//  Étape 4 « De quoi allez-vous parler ? » : catégories en pastilles sélectionnables.
+//  Étape 4 « Quel type d'activité proposez-vous ? » : catégories en pastilles sélectionnables.
 //
 
 import UIKit
@@ -20,8 +20,11 @@ class EventCreatePhase4ViewController: UIViewController {
         guard let delegate = pageDelegate else { return }
 
         // Les catégories sont celles de l'app (Metadatas) ; la sélection vit dans le formulaire.
-        let tags = (Metadatas.sharedInstance.tagsInterest?.getTags() ?? []).map { (key: $0.key, name: $0.name) }
-        embedSwiftUI(EventStepCategoriesView(store: delegate.formStore, tags: tags, allowsOtherMessage: !delegate.isEdit()))
+        // La catégorie « Autre » (et sa saisie libre) n'est plus proposée dans ce parcours.
+        let tags = (Metadatas.sharedInstance.tagsInterest?.getTags() ?? [])
+            .filter { $0.key != Tag.tagOther }
+            .map { (key: $0.key, name: $0.name) }
+        embedSwiftUI(EventStepCategoriesView(store: delegate.formStore, tags: tags))
     }
 }
 
@@ -30,8 +33,6 @@ class EventCreatePhase4ViewController: UIViewController {
 struct EventStepCategoriesView: View {
     @ObservedObject var store: EventFormStore
     let tags: [(key: String, name: String)]
-    /// En modification, la précision de la catégorie « Autre » n'est pas éditable (comme avant la refonte).
-    let allowsOtherMessage: Bool
 
     private func name(for key: String) -> String {
         return tags.first { $0.key == key }?.name ?? key
@@ -51,16 +52,6 @@ struct EventStepCategoriesView: View {
                     }
                 }
                 .eventFormError(store.errors[.categories])
-
-                if allowsOtherMessage && store.values.isOtherInterestSelected {
-                    EventFormTextField(
-                        placeholder: "event_form_category_other_placeholder".localized,
-                        text: store.binding(\.otherInterestMessage),
-                        hasError: store.errors[.otherCategory] != nil
-                    )
-                    .eventFormError(store.errors[.otherCategory])
-                    .padding(.top, 8)
-                }
             }
             .padding(.horizontal, 22)
             .padding(.top, 24)
