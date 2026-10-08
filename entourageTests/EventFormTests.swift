@@ -155,28 +155,61 @@ final class EventFormTests: XCTestCase {
         XCTAssertTrue(store.values.isFamilyFriendly)
     }
 
-    func testAccessibilityCardsAreNeverSerialized() {
+    func testAccessibilityCardsAreSerialized() {
         var values = validValues()
         values.isWheelchairAccessible = true
         values.isFamilyFriendly = true
-        values.isReservedFemale = true
 
-        let dict = values.makeEvent().dictionaryForWS()
-        let metadata = dict["metadata"] as? [String: Any]
-        XCTAssertEqual(metadata?["reserved_female"] as? Bool, true)
+        var metadata = values.makeEvent().dictionaryForWS()["metadata"] as? [String: Any]
+        XCTAssertEqual(metadata?["pmr"] as? Bool, true)
+        XCTAssertEqual(metadata?["kids_friendly"] as? Bool, true)
 
-        let flattened = String(describing: dict).lowercased()
-        XCTAssertFalse(flattened.contains("wheelchair"))
-        XCTAssertFalse(flattened.contains("fauteuil"))
-        XCTAssertFalse(flattened.contains("family"))
-        XCTAssertFalse(flattened.contains("famille"))
+        let initial = validValues()
+        metadata = values.makeEditing(eventId: 1, initial: initial).dictionaryForWS()["metadata"] as? [String: Any]
+        XCTAssertEqual(metadata?["pmr"] as? Bool, true)
+        XCTAssertEqual(metadata?["kids_friendly"] as? Bool, true)
 
+        // Inchangées : absentes du body d'édition.
+        let same = values.makeEditing(eventId: 1, initial: values).dictionaryForWS()
+        XCTAssertNil(same["metadata"])
+    }
+
+    func testPmrIsFalseWhenOnline() {
+        var values = validValues()
+        values.isOnline = true
+        values.onlineUrl = "https://zoom.us/j/123"
+        values.isWheelchairAccessible = true
+        values.isFamilyFriendly = true
+        var metadata = values.makeEvent().dictionaryForWS()["metadata"] as? [String: Any]
+        XCTAssertEqual(metadata?["pmr"] as? Bool, false)
+        XCTAssertEqual(metadata?["kids_friendly"] as? Bool, true)
+
+        // Édition : le store remet la carte à false en passant en ligne.
         var initial = validValues()
-        initial.isReservedFemale = true
-        let editing = values.makeEditing(eventId: 1, initial: initial).dictionaryForWS()
-        let editingFlat = String(describing: editing).lowercased()
-        XCTAssertFalse(editingFlat.contains("wheelchair"))
-        XCTAssertFalse(editingFlat.contains("family"))
+        initial.isWheelchairAccessible = true
+        values.isWheelchairAccessible = false
+        metadata = values.makeEditing(eventId: 1, initial: initial).dictionaryForWS()["metadata"] as? [String: Any]
+        XCTAssertEqual(metadata?["pmr"] as? Bool, false)
+    }
+
+    func testMetadataDecodesAccessibilityWithDefaults() throws {
+        let full = try JSONDecoder().decode(EventMetadata.self, from: Data(#"{"pmr":true,"kids_friendly":true}"#.utf8))
+        XCTAssertTrue(full.pmr)
+        XCTAssertTrue(full.kidsFriendly)
+        let empty = try JSONDecoder().decode(EventMetadata.self, from: Data(#"{"pmr":null}"#.utf8))
+        XCTAssertFalse(empty.pmr)
+        XCTAssertFalse(empty.kidsFriendly)
+    }
+
+    func testEditionPrefillsAccessibilityFromMetadata() {
+        var event = Event()
+        var md = EventMetadata()
+        md.pmr = true
+        md.kidsFriendly = true
+        event.metadata = md
+        let values = EventFormValues(event: event)
+        XCTAssertTrue(values.isWheelchairAccessible)
+        XCTAssertTrue(values.isFamilyFriendly)
     }
 
     func testReservedFemaleIsSentOnCreationAndWhenChangedOnEdition() {

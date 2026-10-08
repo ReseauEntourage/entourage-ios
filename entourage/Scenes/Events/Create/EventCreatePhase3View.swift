@@ -242,7 +242,7 @@ struct EventCreatePhase3View: View {
     }
 
     // Cartes « fauteuil » (présentiel uniquement), « en famille », « réservé aux femmes ».
-    // Fauteuil et famille sont gardées dans le formulaire / le brouillon / l'aperçu mais jamais envoyées à l'API.
+    // Fauteuil (pmr) et famille (kids_friendly) sont envoyées à l'API dans metadata.
     @ViewBuilder
     private var cards: some View {
         VStack(spacing: 11) {

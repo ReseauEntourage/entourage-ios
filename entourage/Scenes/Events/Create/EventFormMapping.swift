@@ -4,10 +4,8 @@
 //
 //  Passage entre les valeurs du formulaire et les modèles réseau (Event / EventEditing).
 //
-//  IMPORTANT : `isWheelchairAccessible` et `isFamilyFriendly` ne sont lus nulle part ici.
-//  Tant que le backend ne porte pas ces champs (EN-9582), ils ne sont NI dans
-//  `Event.dictionaryForWS` NI dans `EventEditing.dictionaryForWS`.
-//  `reserved_female` reste envoyé comme avant.
+//  `isWheelchairAccessible` -> metadata.pmr (toujours false en ligne),
+//  `isFamilyFriendly` -> metadata.kids_friendly.
 //
 
 import Foundation
@@ -57,6 +55,8 @@ extension EventFormValues {
         hasPlaceLimit = limit > 0
         placeLimit = max(limit, 0)
         isReservedFemale = event.metadata?.reservedFemale ?? false
+        isWheelchairAccessible = isOnline ? false : (event.metadata?.pmr ?? false)
+        isFamilyFriendly = event.metadata?.kidsFriendly ?? false
 
         interests = event.interests ?? []
         otherInterestMessage = event.tagOtherMessage ?? ""
@@ -95,8 +95,9 @@ extension EventFormValues {
         event.recurrence = recurrence
 
         event.metadata?.place_limit = hasPlaceLimit ? placeLimit : 0
-        // Seule « Réservé aux femmes » est envoyée. Fauteuil et famille restent locaux (EN-9582).
         event.metadata?.reservedFemale = isReservedFemale
+        event.metadata?.pmr = isOnline ? false : isWheelchairAccessible
+        event.metadata?.kidsFriendly = isFamilyFriendly
 
         event.interests = interests
         event.tagOtherMessage = (isOtherInterestSelected && !otherInterestMessage.trimmed.isEmpty) ? otherInterestMessage.trimmed : nil
@@ -154,7 +155,12 @@ extension EventFormValues {
         if isReservedFemale != initial.isReservedFemale {
             editing.metadata?.reservedFemale = isReservedFemale
         }
-        // Fauteuil et famille : volontairement ignorés (EN-9582).
+        if isWheelchairAccessible != initial.isWheelchairAccessible {
+            editing.metadata?.pmr = isOnline ? false : isWheelchairAccessible
+        }
+        if isFamilyFriendly != initial.isFamilyFriendly {
+            editing.metadata?.kidsFriendly = isFamilyFriendly
+        }
 
         if interests != initial.interests {
             editing.interests = interests

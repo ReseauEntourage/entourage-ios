@@ -353,6 +353,10 @@ struct Event:Codable {
             metadatas["reserved_female"] = reservedFemale
         }
 
+        // Accessibilité : pmr est toujours false pour un événement en ligne.
+        metadatas["pmr"] = (isOnline == true) ? false : (metadata?.pmr ?? false)
+        metadatas["kids_friendly"] = metadata?.kidsFriendly ?? false
+
         dict["metadata"] = metadatas
 
         return dict
@@ -407,6 +411,8 @@ struct EventMetadata: Codable {
     var portrait_url: String? = nil
     var landscape_url: String? = nil
     var reservedFemale: Bool? = false
+    var pmr: Bool = false
+    var kidsFriendly: Bool = false
     var unsubscribed_participants_ask_for_help: String? = "0"
     var unsubscribed_participants_offer_help: String? = "0"
     var unsubscribed_participants_female: String? = "0"
@@ -431,6 +437,8 @@ struct EventMetadata: Codable {
         case portrait_url
         case landscape_url
         case reservedFemale = "reserved_female"
+        case pmr
+        case kidsFriendly = "kids_friendly"
         case unsubscribed_participants_ask_for_help
         case unsubscribed_participants_offer_help
         case unsubscribed_participants_female
@@ -477,6 +485,9 @@ struct EventMetadata: Codable {
         } else {
             unsubscribed_participants_female = "0"
         }
+
+        pmr = (try? container.decodeIfPresent(Bool.self, forKey: .pmr)) ?? false
+        kidsFriendly = (try? container.decodeIfPresent(Bool.self, forKey: .kidsFriendly)) ?? false
 
         // C'EST ICI QUE LA MAGIE OPÈRE ✨
         // On essaie d'abord de lire un Bool classique
@@ -720,6 +731,14 @@ struct EventEditing {
         if let reservedFemale = metadata?.reservedFemale {
             metadatas["reserved_female"] = reservedFemale
         }
+
+        // Accessibilité : envoyée seulement si modifiée (nil = inchangée) ; pmr forcé à false en ligne.
+        if let pmr = metadata?.pmr {
+            metadatas["pmr"] = (isOnline == true) ? false : pmr
+        }
+        if let kidsFriendly = metadata?.kidsFriendly {
+            metadatas["kids_friendly"] = kidsFriendly
+        }
        
         if metadatas.count > 0 {
             dict["metadata"] = metadatas
@@ -742,6 +761,8 @@ struct EventMetadataEditing {
     var google_place_id:String? = nil
     var place_limit:Int? = 0
     var reservedFemale:Bool? = nil
+    var pmr:Bool? = nil
+    var kidsFriendly:Bool? = nil
     var hasPlaceLimit:Bool? {
         get {
             if place_limit == nil {
