@@ -4,182 +4,140 @@
 //
 //  Created by Jerome on 21/06/2022.
 //
+//  Étape 1 « Présentez votre événement » : nom, description, photo.
+//
 
 import UIKit
-import IQKeyboardManagerSwift
+import SwiftUI
 
 class EventCreatePhase1ViewController: UIViewController {
-    
-    @IBOutlet weak var ui_tableview: UITableView!
-    weak var pageDelegate:EventCreateMainDelegate? = nil
-    
-    //Use for growing Textview
-    var hasGrowingTV = false
-    
-    var image:EventImage? = nil
-    var customImage:UIImage? = nil
-    var event_title:String? = nil
-    var event_description:String? = nil
-    
-    var currentEvent:Event? = nil
-    
+
+    weak var pageDelegate: EventCreateMainDelegate? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerCellsNib()
-        IQKeyboardManager.shared.enable = true
-        //Use for growing Textview
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(moveFromGrow), name: Notification.Name(kNotifGrowTextview), object: nil)
+        view.backgroundColor = .white
+        guard let store = pageDelegate?.formStore else { return }
 
-        ui_tableview.dataSource = self
-        ui_tableview.delegate = self
-        ui_tableview.rowHeight = UITableView.automaticDimension
-        ui_tableview.estimatedRowHeight = 50
-
-        NotificationCenter.default.addObserver(self, selector: #selector(updateWithNewEvent), name: Notification.Name(kNotificationEventEditLoadedEvent), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(customPhotoUploaded), name: Notification.Name(kNotificationEventCreatePhase1CustomPhotoUploaded), object: nil)
-
-        if pageDelegate?.isEdit() ?? false {
-            currentEvent = pageDelegate?.getCurrentEvent()
-        }
-    }
-
-    @objc func customPhotoUploaded(notification: NSNotification) {
-        if let img = notification.userInfo?["image"] as? UIImage {
-            self.image = nil
-            self.customImage = img
-            DispatchQueue.main.async {
-                self.ui_tableview.reloadData()
-            }
-        }
-    }
-    
-    @objc func updateWithNewEvent() {
-        if pageDelegate?.isEdit() ?? false && pageDelegate?.getCurrentEvent() != nil {
-            self.currentEvent = pageDelegate?.getCurrentEvent()
-
-            DispatchQueue.main.async {
-                self.ui_tableview.reloadData()
-            }
-        }
-    }
-    
-    //Use for growing Textview
-    @objc func moveFromGrow(notification: NSNotification) {
-        guard let isUp = notification.userInfo?[kNotifGrowTextviewKeyISUP] as? Bool else {return}
-        hasGrowingTV = true
-        animateViewMoving(isUp, moveValue: 18)
-    }
-    
-    func animateViewMoving (_ up:Bool, moveValue :CGFloat){
-        let movementDuration:TimeInterval = 0.3
-        let movement:CGFloat = ( up ? -moveValue : moveValue)
-        UIView.beginAnimations( "animateView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration )
-        self.view.frame = self.view.frame.offsetBy(dx: 0,  dy: movement)
-        UIView.commitAnimations()
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if hasGrowingTV {
-            UIView.beginAnimations( "animateView", context: nil)
-            self.view.frame.origin.y = 0
-            UIView.commitAnimations()
-            hasGrowingTV = false
-        }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    func registerCellsNib() {
-        ui_tableview.register(UINib(nibName: AddDescriptionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionTableViewCell.identifier)
-        ui_tableview.register(UINib(nibName: AddDescriptionFixedTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionFixedTableViewCell.identifier)
-        
-    }
-    
-    @IBAction func action_show_images(_ sender: Any) {
-        self.pageDelegate?.showChooseImage(delegate: self)
-    }
-}
-//MARK: - UITableView datasource / Delegate -
-extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.row {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
-            let title = event_title != nil ? event_title : self.currentEvent?.title
-            cell.populateCell(delegate: self,name: title, isEvent: true, placeholder: "")
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionTableViewCell.identifier, for: indexPath) as! AddDescriptionTableViewCell
-            
-            let titleAttributted = Utils.formatString(messageTxt: "event_create_phase_1_desc".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(), fontColorTypeHighlight: ApplicationTheme.getFontLegend())
-            let _about = event_description != nil ? event_description : self.currentEvent?.descriptionEvent
-            
-            cell.populateCell(title: "",titleAttributted: titleAttributted, description: "event_create_phase_1_desc_subtitle".localized, placeholder: "event_create_phase_1_desc_placeholder".localized, delegate: self,about: _about, textInputType:.descriptionAbout, tableview: ui_tableview)
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! NeighborhoodCreatePhotoCell
-            
-            var imgUrl: String?
-            if image != nil {
-                if let img = image?.url_image_portrait {
-                    imgUrl = img
-                }
-                else if let img = image?.url_image_landscape {
-                    imgUrl = img
-                }
-            }
-            else {
-                imgUrl = self.currentEvent?.getCurrentImageUrl
-            }
-            
-            if let customImage = self.customImage {
-                // FIX HERE: Changed ui_image to ui_photo
-                cell.ui_photo.image = customImage
-                cell.ui_photo.contentMode = .scaleAspectFill
-                
-                // OPTIONAL: Since you are bypassing populateCell for custom images,
-                // you might want to hide the picker icon manually here:
-                cell.ui_picto_photo.isHidden = true
-            } else {
-                cell.populateCell(urlImg: imgUrl, isEvent: true)
-            }
-            
-            return cell
-        }
+        embedSwiftUI(EventStepPresentationView(store: store, onPickPhoto: { [weak self] in
+            guard let self = self else { return }
+            self.pageDelegate?.showChooseImage(delegate: self)
+        }))
     }
 }
 
 //MARK: - Delegates -
 extension EventCreatePhase1ViewController: ChoosePictureEventDelegate {
-    func selectedPicture(image:EventImage) {
-        Logger.print("***** image ? \(image)")
-        pageDelegate?.addPhoto(image: image)
-        self.image = image
-        self.customImage = nil
-        self.ui_tableview.reloadData()
+    func selectedPicture(image: EventImage) {
+        pageDelegate?.formStore.setGalleryImage(image)
     }
 }
 
-extension EventCreatePhase1ViewController: AddDescriptionCellDelegate {
-    func updateFromTextView(text: String?, textInputType: TextInputType) {
-        self.event_description = text
-        pageDelegate?.addDescription(text)
+// MARK: - Vue SwiftUI -
+
+struct EventStepPresentationView: View {
+    @ObservedObject var store: EventFormStore
+    let onPickPhoto: () -> Void
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                EventStepHeader(step: .presentation)
+
+                // Nom
+                VStack(alignment: .leading, spacing: 0) {
+                    EventFormLabel(title: "event_form_name_label".localized, isRequired: true)
+                    EventFormTextField(
+                        placeholder: "event_form_name_placeholder".localized,
+                        text: store.binding(\.title),
+                        hasError: store.errors[.title] != nil
+                    )
+                    .eventFormError(store.errors[.title])
+                }
+                .padding(.bottom, 20)
+
+                // Description
+                VStack(alignment: .leading, spacing: 0) {
+                    EventFormLabel(title: "event_form_description_label".localized, isRequired: true)
+                    EventFormHint(text: "event_form_description_hint".localized)
+                    EventFormTextArea(
+                        placeholder: "event_form_description_placeholder".localized,
+                        text: store.binding(\.descriptionText),
+                        maxLength: ApplicationTheme.maxCharsDescription,
+                        hasError: store.errors[.description] != nil
+                    )
+                    .eventFormError(store.errors[.description])
+                }
+                .padding(.bottom, 20)
+
+                // Photo
+                VStack(alignment: .leading, spacing: 0) {
+                    EventFormLabel(title: "event_form_photo_label".localized, isRequired: true)
+                    photoTile
+                        .eventFormError(store.errors[.photo])
+                }
+            }
+            .padding(.horizontal, 22)
+            .padding(.top, 24)
+            .padding(.bottom, 40)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.white.onTapGesture { EventFormStyle.hideKeyboard() })
+        }
+        .background(Color.white)
+    }
+
+    @ViewBuilder
+    private var photoTile: some View {
+        let photo = EventPhotoImage(localImage: store.localPhoto, remoteUrl: store.values.imageDisplayUrl)
+        let hasError = store.errors[.photo] != nil
+
+        Button(action: onPickPhoto) {
+            if store.values.hasPhoto && photo.hasImage {
+                ZStack(alignment: .bottomTrailing) {
+                    photo
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 190)
+                        .clipped()
+                    Text("event_form_photo_change".localized)
+                        .font(EventFormStyle.semibold(12.5))
+                        .foregroundColor(EventFormStyle.ink)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 7)
+                        .background(Color.white)
+                        .cornerRadius(16)
+                        .padding(10)
+                }
+                .cornerRadius(14)
+                .overlay(RoundedRectangle(cornerRadius: 14).stroke(EventFormStyle.line, lineWidth: 1))
+            }
+            else {
+                VStack(spacing: 7) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 13).fill(EventFormStyle.accentSoft)
+                        Image(systemName: store.values.hasPhoto ? "checkmark" : "photo")
+                            .font(.system(size: 20, weight: .regular))
+                            .foregroundColor(EventFormStyle.accent)
+                    }
+                    .frame(width: 46, height: 46)
+
+                    Text((store.values.hasPhoto ? "event_form_photo_change" : "event_form_photo_add").localized)
+                        .font(EventFormStyle.bold(13.5))
+                        .foregroundColor(EventFormStyle.ink)
+                        .underline()
+                    Text((store.values.hasPhoto ? "event_form_photo_added" : "event_form_photo_hint").localized)
+                        .font(EventFormStyle.regular(12))
+                        .foregroundColor(EventFormStyle.ink2)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity, minHeight: 120)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14)
+                        .stroke(hasError ? EventFormStyle.errorBorder : EventFormStyle.line,
+                                style: StrokeStyle(lineWidth: hasError ? 1.5 : 1, dash: hasError ? [] : [5, 4]))
+                )
+            }
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
-
-extension EventCreatePhase1ViewController: NeighborhoodCreateNameCellDelegate {
-    func updateFromGroupNameTF(text:String?) {
-        self.event_title = text
-        pageDelegate?.addTitle(text!)
-    }
-}
-

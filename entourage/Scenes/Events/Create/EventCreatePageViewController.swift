@@ -7,86 +7,80 @@
 
 import UIKit
 
+/// Page des étapes (une étape = un contrôleur SwiftUI), suivie de l'aperçu.
+/// Les pages sont dérivées de `EventFormPage.all`.
 class EventCreatePageViewController: UIPageViewController {
-    
-    
-    var createPhase1VC:EventCreatePhase1ViewController? = nil
-    var createPhase2VC:EventCreatePhase2ViewController? = nil
-    var createPhase3VC:EventCreatePhase3ViewController? = nil
-    var createPhase4VC:EventCreatePhase4ViewController? = nil
-    var createPhase5VC:EventCreatePhase5ViewController? = nil
-    
-    weak var parentDelegate:EventCreateMainDelegate? = nil
-    
-    var currentPhasePosition = 1
-    
+
+    weak var parentDelegate: EventCreateMainDelegate? = nil
+
     var isCreating = false
-    
+
+    private(set) var currentPage: EventFormPage = .step(EventCreateStep.all[0])
+    private var cache = [Int: UIViewController]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addRadiusBottomOnly(radius: ApplicationTheme.bigCornerRadius)
-        
-        self.isPagingEnabled = false
-        
-        createPhase1VC = viewController(phase: currentPhasePosition) as? EventCreatePhase1ViewController
-        
-        guard let createPhase1VC = createPhase1VC else {
-            return
-        }
-        
-        setViewControllers([createPhase1VC], direction: .forward, animated: true)
-    }
-    
-    func viewController(phase:Int) -> UIViewController? {
-        
-        switch phase {
-        case 1:
-            if createPhase1VC == nil {
-                createPhase1VC = storyboard?.instantiateViewController(withIdentifier: "createPhase1") as? EventCreatePhase1ViewController
-                createPhase1VC?.pageDelegate = parentDelegate
-            }
-            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_1)}
-            return createPhase1VC
-        case 2:
-            if createPhase2VC == nil {
-                createPhase2VC = storyboard?.instantiateViewController(withIdentifier: "createPhase2") as? EventCreatePhase2ViewController
-                createPhase2VC?.pageDelegate = parentDelegate
-            }
-            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_2)}
-            return createPhase2VC
-        case 3:
-            if createPhase3VC == nil {
-                createPhase3VC = storyboard?.instantiateViewController(withIdentifier: "createPhase3") as? EventCreatePhase3ViewController
-                createPhase3VC?.pageDelegate = parentDelegate
-            }
-            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_3)}
-            return createPhase3VC
-        case 4:
-            if createPhase4VC == nil {
-                createPhase4VC = storyboard?.instantiateViewController(withIdentifier: "createPhase4") as? EventCreatePhase4ViewController
-                createPhase4VC?.pageDelegate = parentDelegate
-            }
-            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_4)}
-            return createPhase4VC
-        case 5:
-            if createPhase5VC == nil {
-                createPhase5VC = storyboard?.instantiateViewController(withIdentifier: "createPhase5") as? EventCreatePhase5ViewController
-                createPhase5VC?.pageDelegate = parentDelegate
-            }
-            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_5)}
-            return createPhase5VC
-        default:
-            return nil
+        view.backgroundColor = .white
+        isPagingEnabled = false
+
+        if let vc = viewController(for: currentPage) {
+            setViewControllers([vc], direction: .forward, animated: false)
         }
     }
-    
-    func goPagePosition(position:Int) {
-        
-        let direction = currentPhasePosition > position ? UIPageViewController.NavigationDirection.reverse : UIPageViewController.NavigationDirection.forward
-        
-        currentPhasePosition = position
-        guard let vc = viewController(phase: currentPhasePosition) else { return }
-        
-        setViewControllers([vc], direction: direction, animated: true)
+
+    func viewController(for page: EventFormPage) -> UIViewController? {
+        guard let delegate = parentDelegate else { return nil }
+        if let cached = cache[page.index] { return cached }
+
+        let vc: UIViewController
+        switch page {
+        case .preview:
+            vc = EventPreviewViewController(store: delegate.formStore, delegate: delegate)
+        case .step(let step):
+            switch step {
+            case .presentation:
+                let phase = EventCreatePhase1ViewController()
+                phase.pageDelegate = delegate
+                vc = phase
+            case .schedule:
+                let phase = EventCreatePhase2ViewController()
+                phase.pageDelegate = delegate
+                vc = phase
+            case .location:
+                let phase = EventCreatePhase3ViewController()
+                phase.pageDelegate = delegate
+                vc = phase
+            case .categories:
+                let phase = EventCreatePhase4ViewController()
+                phase.pageDelegate = delegate
+                vc = phase
+            case .groups:
+                let phase = EventCreatePhase5ViewController()
+                phase.pageDelegate = delegate
+                vc = phase
+            }
+        }
+        cache[page.index] = vc
+        return vc
+    }
+
+    func goPage(_ page: EventFormPage, animated: Bool) {
+        loadViewIfNeeded()
+        let direction: UIPageViewController.NavigationDirection = currentPage.index > page.index ? .reverse : .forward
+        currentPage = page
+        logAnalytics(for: page)
+        guard let vc = viewController(for: page) else { return }
+        setViewControllers([vc], direction: direction, animated: animated)
+    }
+
+    private func logAnalytics(for page: EventFormPage) {
+        guard isCreating, case .step(let step) = page else { return }
+        switch step {
+        case .presentation: AnalyticsLoggerManager.logEvent(name: Event_create_1)
+        case .schedule: AnalyticsLoggerManager.logEvent(name: Event_create_2)
+        case .location: AnalyticsLoggerManager.logEvent(name: Event_create_3)
+        case .categories: AnalyticsLoggerManager.logEvent(name: Event_create_4)
+        case .groups: AnalyticsLoggerManager.logEvent(name: Event_create_5)
+        }
     }
 }

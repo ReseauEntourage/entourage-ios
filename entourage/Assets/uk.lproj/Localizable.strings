@@ -892,7 +892,7 @@
 "event_create_phase2_date" = "Дата - обов'язково";
 "event_create_phase2_date_placeholder" = "дд/мм/рррр";
 "event_create_phase2_time_start" = "Час початку";
-"event_create_phase2_time_start" = "чч-хм";
+"event_create_phase2_time_start_placeholder" = "чч-хм";
 "event_create_phase2_time_end" = "Час закінчення";
 "event_create_phase2_time_end_placeholder" = "чч-хм";
 

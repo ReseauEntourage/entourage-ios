@@ -3,255 +3,271 @@ import CoreLocation
 import GooglePlaces
 import Combine
 
-// MARK: - ViewModel
-class EventCreatePhase3ViewModel: ObservableObject {
-    var isInitializing: Bool = false
+// MARK: - ViewModel (adresse) -
 
-    @Published var isOnline: Bool = false {
-        didSet {
-            guard !isInitializing else { return }
-            if isOnline {
-                placeName = nil
-                addressViewModel.query = ""
-                delegate?.addPlace(currentlocation: nil, currentLocationName: nil, googlePlace: nil)
-                delegate?.addOnline(url: onlineUrl)
-            } else {
-                onlineUrl = nil
-                delegate?.addOnline(url: nil)
-            }
-            delegate?.addPlaceType(isOnline: isOnline)
-        }
-    }
-    
-    @Published var onlineUrl: String? = nil {
-        didSet {
-            guard !isInitializing else { return }
-            delegate?.addOnline(url: onlineUrl)
-        }
-    }
-
-    @Published var placeName: String? = nil
-    @Published var addressViewModel = AddressAutocompleteViewModel()
+/// Gère l'autocomplétion de l'adresse (Google Places) et la cohérence entre le texte saisi
+/// et le lieu enregistré dans le formulaire : si l'utilisateur retape l'adresse, le lieu
+/// précédent est invalidé et il doit en choisir un nouveau dans les suggestions.
+final class EventCreatePhase3ViewModel: ObservableObject {
+    let address = AddressAutocompleteViewModel()
     @Published var isShowingSuggestions = false
-    private var cancellables = Set<AnyCancellable>()
 
-    init() {
-        addressViewModel.$query
+    private weak var store: EventFormStore?
+    private var cancellables = Set<AnyCancellable>()
+    private var selectedText = ""
+
+    init(store: EventFormStore) {
+        self.store = store
+
+        selectedText = store.values.addressName
+        address.query = store.values.addressName
+
+        address.$query
             .receive(on: RunLoop.main)
-            .sink { [weak self] newQuery in
-                if newQuery.isEmpty || newQuery == self?.placeName {
-                    self?.isShowingSuggestions = false
-                } else {
-                    self?.isShowingSuggestions = true
-                }
+            .sink { [weak self] query in self?.queryChanged(query) }
+            .store(in: &cancellables)
+
+        // Adresse renseignée de l'extérieur (chargement d'un événement à modifier, brouillon).
+        store.$values
+            .map { $0.addressName }
+            .removeDuplicates()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] name in
+                guard let self = self, !name.isEmpty, name != self.selectedText else { return }
+                self.selectedText = name
+                self.address.query = name
             }
             .store(in: &cancellables)
     }
 
-    @Published var hasPlaceLimit: Bool = false {
-        didSet {
-            guard !isInitializing else { return }
-            delegate?.addPlaceLimit(hasLimit: hasPlaceLimit, nbPlaces: hasPlaceLimit ? nbPlaceLimit : 0)
+    private func queryChanged(_ query: String) {
+        if query == selectedText {
+            isShowingSuggestions = false
+            return
         }
-    }
-    
-    @Published var nbPlaceLimitString: String = "" {
-        didSet {
-            guard !isInitializing else { return }
-            let limit = Int(nbPlaceLimitString) ?? 0
-            delegate?.addPlaceLimit(hasLimit: hasPlaceLimit, nbPlaces: limit)
-        }
-    }
-    
-    var nbPlaceLimit: Int {
-        return Int(nbPlaceLimitString) ?? 0
-    }
-
-    @Published var isReservedFemale: Bool = false {
-        didSet {
-            guard !isInitializing else { return }
-            delegate?.addReservedFemale(reserved: isReservedFemale)
+        isShowingSuggestions = !query.isEmpty
+        if let store = store, store.values.hasPlace {
+            store.clearPlace()
+            selectedText = ""
         }
     }
 
-    weak var delegate: EventCreateMainDelegate?
-    var onShowSelectLocation: (() -> Void)?
+    func select(_ suggestion: GMSAutocompletePrediction) {
+        let text = suggestion.attributedFullText.string
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 
-    func load(currentEvent: Event?, delegate: EventCreateMainDelegate?) {
-        isInitializing = true
-        self.delegate = delegate
-        if let currentEvent = currentEvent {
-            if let eventIsOnline = currentEvent.isOnline { self.isOnline = eventIsOnline }
-            self.onlineUrl = currentEvent.onlineEventUrl
-            self.placeName = currentEvent.addressName
-            if let name = self.placeName { self.addressViewModel.query = name }
-
-            if let metadata = currentEvent.metadata {
-                if let limit = metadata.place_limit, limit > 0 {
-                    self.hasPlaceLimit = true
-                    self.nbPlaceLimitString = "\(limit)"
-                } else if let hasLimit = metadata.hasPlaceLimit {
-                    self.hasPlaceLimit = hasLimit
-                }
-                self.isReservedFemale = metadata.reservedFemale ?? false
+        address.getPlaceDetails(placeID: suggestion.placeID) { [weak self] place, _ in
+            guard let self = self, let place = place else { return }
+            DispatchQueue.main.async {
+                self.selectedText = text
+                self.address.query = text
+                self.isShowingSuggestions = false
+                self.store?.setPlace(
+                    name: text,
+                    street: place.formattedAddress ?? place.name ?? "",
+                    placeId: place.placeID,
+                    latitude: place.coordinate.latitude,
+                    longitude: place.coordinate.longitude
+                )
             }
-        }
-        isInitializing = false
-    }
-
-    func setLocation(currentlocation: CLLocationCoordinate2D?, displayAddress: String?, backEndAddress: String?, googlePlace: GMSPlace?) {
-        self.placeName = displayAddress
-        self.isOnline = false
-        self.onlineUrl = nil
-        
-        if let name = displayAddress {
-            self.addressViewModel.query = name
-        }
-
-        DispatchQueue.main.async { [weak self] in
-            self?.delegate?.addOnline(url: nil)
-            self?.delegate?.addPlaceType(isOnline: false)
-            self?.delegate?.addPlace(currentlocation: currentlocation, currentLocationName: backEndAddress, googlePlace: googlePlace)
         }
     }
 }
 
-// MARK: - View
+// MARK: - View -
+
+/// Étape 3 « Où et pour qui ? » : présentiel / en ligne, adresse ou lien, places, cartes.
 struct EventCreatePhase3View: View {
+    @ObservedObject var store: EventFormStore
     @ObservedObject var viewModel: EventCreatePhase3ViewModel
+    @ObservedObject var address: AddressAutocompleteViewModel
+
+    init(store: EventFormStore, viewModel: EventCreatePhase3ViewModel) {
+        self.store = store
+        self.viewModel = viewModel
+        self.address = viewModel.address
+    }
+
+    private var isOnline: Bool { store.values.isOnline }
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 48) {
-                // Section Lieu / Online
-                VStack(alignment: .leading, spacing: 16) {
-                    
-                    // On utilise notre vue blindée pour le titre
-                    MandatoryTitleView(titleKey: "eventCreatephase3_swiftUI_title_place")
+            VStack(alignment: .leading, spacing: 0) {
+                EventStepHeader(step: .location)
 
-                    HStack(spacing: 20) {
-                        RadioButton(title: "event_create_phase3_presentiel".localized, isSelected: !viewModel.isOnline) { viewModel.isOnline = false }
-                        RadioButton(title: "event_create_phase3_online".localized, isSelected: viewModel.isOnline) { viewModel.isOnline = true }
-                    }
+                modeSwitch
+                    .padding(.bottom, 20)
 
-                    if viewModel.isOnline {
-                        VStack(alignment: .leading, spacing: 8) {
-                            TextField("event_create_phase3_placeholder_online".localized, text: Binding(
-                                get: { viewModel.onlineUrl ?? "" },
-                                set: { viewModel.onlineUrl = $0.isEmpty ? nil : $0 }
-                            ))
-                            .font(.custom("NunitoSans-Regular", size: 13))
-                            .padding(.bottom, 8)
-                            .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
-                            .keyboardType(.URL).autocapitalization(.none)
-                        }
-                    } else {
-                        VStack(alignment: .leading, spacing: 8) {
-                            TextField("event_create_phase3_placeholder_place".localized, text: $viewModel.addressViewModel.query)
-                                .font(.custom("NunitoSans-Regular", size: 13))
-                                .padding(.bottom, 8)
-                                .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
-                                .disableAutocorrection(true)
+                placeField
+                    .padding(.bottom, 20)
 
-                            if viewModel.isShowingSuggestions && !viewModel.addressViewModel.suggestions.isEmpty {
-                                VStack(alignment: .leading, spacing: 0) {
-                                    ForEach(viewModel.addressViewModel.suggestions, id: \.placeID) { suggestion in
-                                        Button(action: {
-                                            let selectedText = suggestion.attributedFullText.string
-                                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                            
-                                            viewModel.addressViewModel.getPlaceDetails(placeID: suggestion.placeID) { place, error in
-                                                guard let place = place else { return }
-                                                viewModel.setLocation(
-                                                    currentlocation: place.coordinate,
-                                                    displayAddress: selectedText,
-                                                    backEndAddress: "",
-                                                    googlePlace: place
-                                                )
-                                            }
-                                        }) {
-                                            VStack(alignment: .leading) {
-                                                Text(suggestion.attributedFullText.string)
-                                                    .font(.custom("NunitoSans-Regular", size: 13))
-                                                    .foregroundColor(.black).padding(.vertical, 12)
-                                                Divider()
-                                            }
-                                        }
-                                    }
-                                }
-                                .background(Color.white).cornerRadius(8).shadow(radius: 4)
-                            }
-                        }
-                    }
-                }
-                .padding(.horizontal, 20)
+                placeLimitField
+                    .padding(.bottom, 22)
 
-                // Section Limite
-                VStack(alignment: .leading, spacing: 16) {
-                    
-                    // On réutilise la même vue blindée pour la limite
-                    MandatoryTitleView(titleKey: "eventCreatephase3_swiftUI_title_limit")
-                    
-                    HStack(spacing: 20) {
-                        RadioButton(title: "event_create_phase3_limit_yes".localized, isSelected: viewModel.hasPlaceLimit) { viewModel.hasPlaceLimit = true }
-                        RadioButton(title: "event_create_phase3_limit_no".localized, isSelected: !viewModel.hasPlaceLimit) {
-                            viewModel.hasPlaceLimit = false
-                            viewModel.nbPlaceLimitString = ""
-                        }
-                    }
-                    if viewModel.hasPlaceLimit {
-                        TextField("10", text: $viewModel.nbPlaceLimitString).keyboardType(.numberPad)
-                            .overlay(Rectangle().frame(height: 1).padding(.top, 35), alignment: .bottom)
-                    }
-                }.padding(.horizontal, 20)
+                Text((isOnline ? "event_form_section_public" : "event_form_section_access_public").localized)
+                    .font(EventFormStyle.bold(13))
+                    .foregroundColor(EventFormStyle.ink)
+                    .padding(.bottom, 12)
 
-                // Section Reserved Female
-                HStack {
-                    Text("event_create_reserved_female_title".localized).font(.custom("NunitoSans-Bold", size: 15))
-                    Spacer()
-                    Toggle("", isOn: $viewModel.isReservedFemale).toggleStyle(SwitchToggleStyle(tint: Color("orange_app"))).scaleEffect(0.8)
-                }.padding(.horizontal, 20)
-                
-                Spacer()
+                cards
             }
-            .padding(.top, 32)
+            .padding(.horizontal, 22)
+            .padding(.top, 24)
+            .padding(.bottom, 40)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.white.onTapGesture { EventFormStyle.hideKeyboard() })
+        }
+        .background(Color.white)
+    }
+
+    // Bascule « En présentiel » / « En ligne » (orange, comme sur la maquette)
+    private var modeSwitch: some View {
+        HStack(spacing: 4) {
+            modeButton(title: "event_create_phase3_presentiel".localized, isOn: !isOnline) { store.setOnline(false) }
+            modeButton(title: "event_create_phase3_online".localized, isOn: isOnline) { store.setOnline(true) }
+        }
+        .padding(4)
+        .overlay(RoundedRectangle(cornerRadius: 14).stroke(EventFormStyle.line, lineWidth: 1))
+    }
+
+    private func modeButton(title: String, isOn: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .font(EventFormStyle.bold(14.5))
+                .foregroundColor(isOn ? .white : EventFormStyle.ink2)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 11)
+                .background(isOn ? EventFormStyle.accent : Color.clear)
+                .cornerRadius(10)
+        }
+        .buttonStyle(PlainButtonStyle())
+        .accessibility(addTraits: isOn ? [.isButton, .isSelected] : [.isButton])
+    }
+
+    @ViewBuilder
+    private var placeField: some View {
+        if isOnline {
+            VStack(alignment: .leading, spacing: 0) {
+                EventFormLabel(title: "event_form_link_label".localized, isRequired: true)
+                EventFormTextField(
+                    placeholder: "event_form_link_placeholder".localized,
+                    text: store.binding(\.onlineUrl),
+                    hasError: store.errors[.onlineUrl] != nil,
+                    leadingSystemImage: "link",
+                    keyboard: .URL,
+                    autocapitalization: .none
+                )
+                .eventFormError(store.errors[.onlineUrl])
+            }
+        }
+        else {
+            VStack(alignment: .leading, spacing: 0) {
+                EventFormLabel(title: "event_form_address_label".localized, isRequired: true)
+                EventFormTextField(
+                    placeholder: "event_form_address_placeholder".localized,
+                    text: $address.query,
+                    hasError: store.errors[.address] != nil,
+                    leadingSystemImage: "mappin.and.ellipse",
+                    autocapitalization: .none
+                )
+                if viewModel.isShowingSuggestions && !address.suggestions.isEmpty {
+                    suggestionsList
+                }
+                else if let message = store.errors[.address] {
+                    EventFormErrorText(message: message)
+                }
+            }
         }
     }
-}
 
-// MARK: - Subcomponents
-
-/// Composant robuste pour gérer les titres obligatoires sans casser l'alignement SwiftUI
-struct MandatoryTitleView: View {
-    let titleKey: String
-    
-    var body: some View {
-        (Text(titleKey.localized)
-            .font(.custom("NunitoSans-Bold", size: 15))
-        + Text(" ")
-            .font(.custom("NunitoSans-Regular", size: 13)) // Fix: aide SwiftUI à lier les textes
-        + Text("event_create_mandatory".localized)
-            .font(.custom("NunitoSans-Regular", size: 13)))
-        .multilineTextAlignment(.leading)
-    }
-}
-
-struct RadioButton: View {
-    let title: String
-    let isSelected: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: 8) {
-                Image(isSelected ? "ic_selector_on" : "ic_selector_off")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-
-                Text(title)
-                    .font(.custom(isSelected ? "NunitoSans-Bold" : "NunitoSans-Regular", size: 15))
-                    .foregroundColor(.black)
+    private var suggestionsList: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(address.suggestions, id: \.placeID) { suggestion in
+                Button(action: { viewModel.select(suggestion) }) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(suggestion.attributedFullText.string)
+                            .font(EventFormStyle.regular(14))
+                            .foregroundColor(EventFormStyle.ink)
+                            .multilineTextAlignment(.leading)
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 15)
+                        Rectangle().fill(EventFormStyle.line2).frame(height: 1)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(PlainButtonStyle())
             }
+        }
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.12), radius: 6, x: 0, y: 2)
+        .padding(.top, 8)
+    }
+
+    // Stepper de places : « Non », puis 1, 2, 3...
+    private var placeLimitField: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            EventFormLabel(title: "event_form_places_label".localized)
+            HStack {
+                Text("event_form_places_row".localized)
+                    .font(EventFormStyle.regular(14))
+                    .foregroundColor(EventFormStyle.ink2)
+                Spacer()
+                HStack(spacing: 18) {
+                    stepperButton(systemImage: "minus", isEnabled: store.values.hasPlaceLimit) { store.decrementPlaceLimit() }
+                        .accessibility(label: Text("event_form_places_less".localized))
+                    Text(store.values.hasPlaceLimit ? "\(store.values.placeLimit)" : "event_create_phase3_limit_no".localized)
+                        .font(EventFormStyle.bold(16))
+                        .foregroundColor(EventFormStyle.ink)
+                        .frame(minWidth: 36)
+                    stepperButton(systemImage: "plus", isEnabled: true) { store.incrementPlaceLimit() }
+                        .accessibility(label: Text("event_form_places_more".localized))
+                }
+            }
+            .eventFormError(store.errors[.placeLimit])
+        }
+    }
+
+    private func stepperButton(systemImage: String, isEnabled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(isEnabled ? EventFormStyle.ink : EventFormStyle.ink3)
+                .frame(width: 40, height: 40)
+                .overlay(Circle().stroke(EventFormStyle.line, lineWidth: 1))
+        }
+        .buttonStyle(PlainButtonStyle())
+        .disabled(!isEnabled)
+    }
+
+    // Cartes « fauteuil » (présentiel uniquement), « en famille », « réservé aux femmes ».
+    // Fauteuil et famille sont gardées dans le formulaire / le brouillon / l'aperçu mais jamais envoyées à l'API.
+    @ViewBuilder
+    private var cards: some View {
+        VStack(spacing: 11) {
+            if !isOnline {
+                EventSelectableCard(
+                    symbolNames: ["figure.roll", "accessibility", "person.fill"],
+                    title: "event_form_card_wheelchair_title".localized,
+                    subtitle: "event_form_card_wheelchair_subtitle".localized,
+                    isOn: store.values.isWheelchairAccessible,
+                    action: { store.update { $0.isWheelchairAccessible.toggle() } }
+                )
+            }
+            EventSelectableCard(
+                symbolNames: ["figure.2.and.child.holdinghands", "person.2.fill"],
+                title: "event_form_card_family_title".localized,
+                subtitle: "event_form_card_family_subtitle".localized,
+                isOn: store.values.isFamilyFriendly,
+                action: { store.update { $0.isFamilyFriendly.toggle() } }
+            )
+            EventSelectableCard(
+                symbolNames: ["figure.stand.dress", "person.fill"],
+                title: "event_form_card_women_title".localized,
+                isOn: store.values.isReservedFemale,
+                action: { store.update { $0.isReservedFemale.toggle() } }
+            )
         }
     }
 }

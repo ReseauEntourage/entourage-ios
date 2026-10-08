@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33DF9EFC31A0506F03EE3EFB /* EventFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87296D85D09AEC92527B975 /* EventFormModel.swift */; };
+		F529BD5456B0F66FC2B592AA /* EventFormStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85B9544156C3121F2EFA9DC /* EventFormStore.swift */; };
+		5B54C1E86A5C2AD91B95B416 /* EventFormMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C662B59505244F416C181 /* EventFormMapping.swift */; };
+		170E16C4883B8D495593280B /* EventFormComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68582B22089210F24F78D662 /* EventFormComponents.swift */; };
+		0A550A1B8FC0EBCFD31783F7 /* EventFormContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6043CBF8EC4DF4833E5AFF /* EventFormContainerViewController.swift */; };
+		94DCC90AFE52C0466902D900 /* EventPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7181C8BB66EF125A5AF92534 /* EventPreviewViewController.swift */; };
+		026881530F2009BDA8E28B22 /* EventFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D36D1D77001E9F00E5E4E7C /* EventFormTests.swift */; };
 		0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */; };
 		02040CF2288E8C2E00AB1FBB /* EventParamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */; };
 		02040CF5288E97E000AB1FBB /* EventParamTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF4288E97E000AB1FBB /* EventParamTopCell.swift */; };
@@ -714,6 +721,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F87296D85D09AEC92527B975 /* EventFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormModel.swift; sourceTree = "<group>"; };
+		B85B9544156C3121F2EFA9DC /* EventFormStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormStore.swift; sourceTree = "<group>"; };
+		FE3C662B59505244F416C181 /* EventFormMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormMapping.swift; sourceTree = "<group>"; };
+		68582B22089210F24F78D662 /* EventFormComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormComponents.swift; sourceTree = "<group>"; };
+		DE6043CBF8EC4DF4833E5AFF /* EventFormContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormContainerViewController.swift; sourceTree = "<group>"; };
+		7181C8BB66EF125A5AF92534 /* EventPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPreviewViewController.swift; sourceTree = "<group>"; };
+		2D36D1D77001E9F00E5E4E7C /* EventFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormTests.swift; sourceTree = "<group>"; };
 		004C9978909256CDCC2C4BA4 /* EventCancelledBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCancelledBadgeView.swift; sourceTree = "<group>"; };
 		0084A9874BF753C88F6F98F3 /* BadgeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeModels.swift; sourceTree = "<group>"; };
 		0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInterestCell.swift; sourceTree = "<group>"; };
@@ -1627,6 +1641,12 @@
 				024131CC2862024A00561FB4 /* EventCreatePageViewController.swift */,
 				02E854512865CA090012D941 /* EventChoosePictureViewController.swift */,
 				024131CE2862026500561FB4 /* EventCreatePhase1ViewController.swift */,
+				F87296D85D09AEC92527B975 /* EventFormModel.swift */,
+				B85B9544156C3121F2EFA9DC /* EventFormStore.swift */,
+				FE3C662B59505244F416C181 /* EventFormMapping.swift */,
+				68582B22089210F24F78D662 /* EventFormComponents.swift */,
+				DE6043CBF8EC4DF4833E5AFF /* EventFormContainerViewController.swift */,
+				7181C8BB66EF125A5AF92534 /* EventPreviewViewController.swift */,
 				024131D02862030A00561FB4 /* EventCreatePhase2ViewController.swift */,
 				024131D12862030A00561FB4 /* EventCreatePhase3ViewController.swift */,
 				024131D22862030A00561FB4 /* EventCreatePhase4ViewController.swift */,
@@ -2344,6 +2364,7 @@
 			children = (
 				599DA1ACFF315CB9B5BB4B5B /* WelcomeJourneyNetworkTests.swift */,
 				9E6D18B5FF299CF8D887C22B /* WelcomeJourneyViewModelTests.swift */,
+				2D36D1D77001E9F00E5E4E7C /* EventFormTests.swift */,
 				A1E30EA046F12F7FB43AE813 /* WelcomeJourneyAutoSkipTests.swift */,
 				7A1C0D8E2F0B4C6A9D3E5F12 /* PhoneNumberDetectorTests.swift */,
 			);
@@ -3355,6 +3376,12 @@
 				02040CF5288E97E000AB1FBB /* EventParamTopCell.swift in Sources */,
 				26C2C9182DDDF0DE00C8F320 /* SmallTalkAlmostMatchingViewController.swift in Sources */,
 				024131CF2862026500561FB4 /* EventCreatePhase1ViewController.swift in Sources */,
+				33DF9EFC31A0506F03EE3EFB /* EventFormModel.swift in Sources */,
+				F529BD5456B0F66FC2B592AA /* EventFormStore.swift in Sources */,
+				5B54C1E86A5C2AD91B95B416 /* EventFormMapping.swift in Sources */,
+				170E16C4883B8D495593280B /* EventFormComponents.swift in Sources */,
+				0A550A1B8FC0EBCFD31783F7 /* EventFormContainerViewController.swift in Sources */,
+				94DCC90AFE52C0466902D900 /* EventPreviewViewController.swift in Sources */,
 				2674FEC72ACDB6AC0013D674 /* HomeModeratorCell.swift in Sources */,
 				0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */,
 				2630F6352C247C13007BAE56 /* MainFilterLocationCell.swift in Sources */,
@@ -3790,6 +3817,7 @@
 			files = (
 				7C1CA4A3D6A1C4063976F49C /* WelcomeJourneyNetworkTests.swift in Sources */,
 				D4DE3C7AAB3FD4B84BE2146A /* WelcomeJourneyViewModelTests.swift in Sources */,
+				026881530F2009BDA8E28B22 /* EventFormTests.swift in Sources */,
 				2DE4C673A1B82EEB686190F9 /* WelcomeJourneyAutoSkipTests.swift in Sources */,
 				7A1C0D8E2F0B4C6A9D3E5F13 /* PhoneNumberDetectorTests.swift in Sources */,
 			);

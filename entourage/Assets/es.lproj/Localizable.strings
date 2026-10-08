@@ -892,7 +892,7 @@
 "event_create_phase2_date" = "Fecha requerida";
 "event_create_phase2_date_placeholder" = "dd/mm/aaaa";
 "event_create_phase2_time_start" = "Hora de inicio";
-"event_create_phase2_time_start" = "hh-mm";
+"event_create_phase2_time_start_placeholder" = "hh-mm";
 "event_create_phase2_time_end" = "Hora de finalización";
 "event_create_phase2_time_end_placeholder" = "hh-mm";
 
@@ -2327,7 +2327,7 @@ Elige un tema para empezar.";
 "event_create_phase2_date" = "Fecha requerida";
 "event_create_phase2_date_placeholder" = "dd/mm/aaaa";
 "event_create_phase2_time_start" = "Hora de inicio";
-"event_create_phase2_time_start" = "hh-mm";
+"event_create_phase2_time_start_placeholder" = "hh-mm";
 "event_create_phase2_time_end" = "Hora de finalización";
 "event_create_phase2_time_end_placeholder" = "hh-mm";
 

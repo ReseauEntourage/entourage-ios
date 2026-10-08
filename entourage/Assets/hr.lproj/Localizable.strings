@@ -886,7 +886,7 @@
 "event_create_phase2_date" = "Date - obligatoire";
 "event_create_phase2_date_placeholder" = "jj/mm/aaaa";
 "event_create_phase2_time_start" = "Heure de début";
-"event_create_phase2_time_start" = "hh-mm";
+"event_create_phase2_time_start_placeholder" = "hh-mm";
 "event_create_phase2_time_end" = "Heure de fin";
 "event_create_phase2_time_end_placeholder" = "hh-mm";
 

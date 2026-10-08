@@ -548,7 +548,7 @@ struct EventImage:Codable {
 }
 
 
-enum EventRecurrence: Int {
+enum EventRecurrence: Int, Codable {
     case once = 1
     case week = 2
     case every2Weeks = 3
@@ -568,7 +568,7 @@ enum EventRecurrence: Int {
     }
 }
 
-struct EventNeighborhood:Codable {
+struct EventNeighborhood:Codable, Equatable {
     var id:Int
     var name:String
     

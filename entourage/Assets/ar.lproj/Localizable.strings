@@ -887,7 +887,7 @@
 "event_create_phase2_date" = "التاريخ - مطلوب";
 "event_create_phase2_date_placeholder" = "ي ي/ش ش/س س س س";
 "event_create_phase2_time_start" = "وقت البدء";
-"event_create_phase2_time_start" = "سمومم";
+"event_create_phase2_time_start_placeholder" = "سمومم";
 "event_create_phase2_time_end" = "وقت الانتهاء";
 "event_create_phase2_time_end_placeholder" = "سمومم";
 
