@@ -70,9 +70,11 @@ class EventFormContainerViewController: UIViewController, EventCreateMainDelegat
     private let backButton = UIButton(type: .custom)
     private let saveButton = UIButton(type: .custom)
     private let progressView = ProgressRadiusView()
-    private let footerView = UIView()
-    private let previousButton = UIButton(type: .custom)
-    private let nextButton = UIButton(type: .custom)
+    /// Pied de page : mêmes boutons que l'onboarding enrichi (Retour = bouton blanc contour orange,
+    /// Continuer / Publier / Modifier = bouton orange plein).
+    private var footerView: EnahancedOnboardingButtonCell!
+    private var previousButton: UIButton { return footerView.ui_btn_configure_later }
+    private var nextButton: UIButton { return footerView.ui_btn_next }
 
     // MARK: Hooks à surcharger -
 
@@ -164,29 +166,16 @@ class EventFormContainerViewController: UIViewController, EventCreateMainDelegat
         progressView.isOpaque = false
         view.addSubview(progressView)
 
-        // Pied de page : Retour / Continuer.
+        // Pied de page : Retour / Continuer (cellule de boutons de l'onboarding enrichi).
+        guard let buttonView = Bundle.main.loadNibNamed("EnahancedOnboardingButtonCell", owner: self, options: nil)?.first as? EnahancedOnboardingButtonCell else {
+            return
+        }
+        footerView = buttonView
         footerView.translatesAutoresizingMaskIntoConstraints = false
-        footerView.backgroundColor = .white
         view.addSubview(footerView)
-
-        let separator = UIView()
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = EventFormStyle.uiLine2
-        footerView.addSubview(separator)
-
-        previousButton.translatesAutoresizingMaskIntoConstraints = false
-        previousButton.setAttributedTitle(underlined("event_form_back".localized, font: ApplicationTheme.getFontNunitoSemiBold(size: 14.5)), for: .normal)
+        previousButton.setTitle("event_form_back".localized, for: .normal)
         previousButton.addTarget(self, action: #selector(action_back(_:)), for: .touchUpInside)
-        footerView.addSubview(previousButton)
-
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.backgroundColor = .appOrange
-        nextButton.setTitleColor(.white, for: .normal)
-        nextButton.titleLabel?.font = ApplicationTheme.getFontQuickSandBold(size: 15)
-        nextButton.layer.cornerRadius = 12
-        nextButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
         nextButton.addTarget(self, action: #selector(action_next(_:)), for: .touchUpInside)
-        footerView.addSubview(nextButton)
 
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
@@ -209,23 +198,11 @@ class EventFormContainerViewController: UIViewController, EventCreateMainDelegat
             progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
             progressView.heightAnchor.constraint(equalToConstant: 4),
 
+            // Même géométrie que le pied de page de l'onboarding enrichi (EnhancedViewController).
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            footerView.topAnchor.constraint(equalTo: nextButton.topAnchor, constant: -12),
-
-            separator.topAnchor.constraint(equalTo: footerView.topAnchor),
-            separator.leadingAnchor.constraint(equalTo: footerView.leadingAnchor),
-            separator.trailingAnchor.constraint(equalTo: footerView.trailingAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 1),
-
-            nextButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -22),
-            nextButton.bottomAnchor.constraint(equalTo: safe.bottomAnchor, constant: -12),
-            nextButton.heightAnchor.constraint(equalToConstant: 48),
-
-            previousButton.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 22),
-            previousButton.centerYAnchor.constraint(equalTo: nextButton.centerYAnchor),
-            previousButton.heightAnchor.constraint(equalToConstant: 44),
+            footerView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
+            footerView.heightAnchor.constraint(equalToConstant: 85),
 
             ui_container_view.topAnchor.constraint(equalTo: progressView.bottomAnchor),
             ui_container_view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
