@@ -439,11 +439,17 @@
 "impact_row_entraides_me" = "J'ai partagé une entraide";
 "impact_row_entraides_other" = "Entraides partagées";
 "impact_row_groups_other" = "Groupes de voisins rejoints";
-"impact_hero_subtitle" = "actions depuis votre inscription";
+"impact_hero_unit_me" = "fois engagé";
+"impact_hero_unit_other" = "actions";
+"impact_hero_subtitle_me" = "au sein de la communauté";
+"impact_hero_subtitle_low" = "Chaque geste compte";
+"impact_row_groups_me" = "J'ai animé mes groupes de voisins";
+"impact_row_exchanges_me" = "J'ai échangé avec d'autres membres";
 "impact_detail_title" = "Ce que j'ai fait";
 "impact_new_member_message" = "Bienvenue ! Votre histoire commence ici.\nDès votre première action — un bonjour, un café, un événement — elle apparaîtra ici. Même les petits gestes comptent.";
 "impact_new_member_cta" = "Découvrir près de chez moi";
 "member_since_recent_format" = "Membre depuis %@";
+"member_since_months_format" = "Membre depuis %d mois, %@";
 "member_since_year_format" = "Membre depuis %d an, %@";
 "member_since_years_format" = "Membre depuis %d ans, %@";
 

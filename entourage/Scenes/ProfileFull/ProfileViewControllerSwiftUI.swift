@@ -244,25 +244,66 @@ private struct ImpactRow: Identifiable {
     let icon: String
 }
 
+struct SeniorityPill: View {
+    let date: Date
+
+    private var text: String {
+        let parts = Calendar.current.dateComponents([.year, .month], from: date, to: Date())
+        let years = parts.year ?? 0
+        let months = parts.month ?? 0
+        let fmt = DateFormatter()
+        fmt.locale = Locale.getPreferredLocale()
+        fmt.dateFormat = "LLLL yyyy"
+        let monthYear = fmt.string(from: date)
+
+        if years >= 2 {
+            return String(format: "member_since_years_format".localized, years, monthYear)
+        } else if years == 1 {
+            return String(format: "member_since_year_format".localized, years, monthYear)
+        } else if months > 0 {
+            return String(format: "member_since_months_format".localized, months, monthYear)
+        } else {
+            return String(format: "member_since_recent_format".localized, monthYear)
+        }
+    }
+
+    var body: some View {
+        Text(text)
+            .font(.custom("NunitoSans-SemiBold", size: 13))
+            .foregroundColor(Color(UIColor.appOrange))
+            .padding(.horizontal, 14)
+            .padding(.vertical, 6)
+            .background(Color(UIColor.appOrangeLight_50))
+            .clipShape(Capsule())
+    }
+}
+
 struct ImpactCounterView: View {
     let isMe: Bool
     let user: User
+    /// Own profile only: past outings, actions created, neighborhood messages, conversation members (from `home/summary`).
+    var counts: [Int] = []
     /// Called when the new-member state's CTA is tapped (own profile only) — should navigate to the events tab.
     var onDiscoverNearby: (() -> Void)? = nil
 
     private var rows: [ImpactRow] {
-        let stats = user.stats
-        let events = stats?.eventsParticipatedCount ?? 0
-        let entraides = stats?.entraidesCount ?? 0
+        var all: [ImpactRow]
 
-        var all: [ImpactRow] = [
-            ImpactRow(id: "events", count: events, label: isMe ? "impact_row_events_me".localized : "impact_row_events_other".localized, icon: "calendar"),
-            ImpactRow(id: "entraides", count: entraides, label: isMe ? "impact_row_entraides_me".localized : "impact_row_entraides_other".localized, icon: "heart.fill")
-        ]
-
-        if !isMe {
-            let groups = stats?.neighborhoodsCount ?? 0
-            all.append(ImpactRow(id: "groups", count: groups, label: "impact_row_groups_other".localized, icon: "person.2.fill"))
+        if isMe {
+            let c = counts + Array(repeating: 0, count: max(0, 4 - counts.count))
+            all = [
+                ImpactRow(id: "events", count: c[0], label: "impact_row_events_me".localized, icon: "calendar"),
+                ImpactRow(id: "entraides", count: c[1], label: "impact_row_entraides_me".localized, icon: "heart.fill"),
+                ImpactRow(id: "groups", count: c[2], label: "impact_row_groups_me".localized, icon: "person.2.fill"),
+                ImpactRow(id: "exchanges", count: c[3], label: "impact_row_exchanges_me".localized, icon: "bubble.left.and.bubble.right.fill")
+            ]
+        } else {
+            let stats = user.stats
+            all = [
+                ImpactRow(id: "events", count: stats?.eventsParticipatedCount ?? 0, label: "impact_row_events_other".localized, icon: "calendar"),
+                ImpactRow(id: "entraides", count: stats?.entraidesCount ?? 0, label: "impact_row_entraides_other".localized, icon: "heart.fill"),
+                ImpactRow(id: "groups", count: stats?.neighborhoodsCount ?? 0, label: "impact_row_groups_other".localized, icon: "person.2.fill")
+            ]
         }
 
         // Etat faible activité : une typologie à 0 n'est pas affichée.
@@ -273,23 +314,13 @@ struct ImpactCounterView: View {
         rows.reduce(0) { $0 + $1.count }
     }
 
-    private func seniorityText(_ date: Date) -> String {
-        let years = Calendar.current.dateComponents([.year], from: date, to: Date()).year ?? 0
-        let fmt = DateFormatter()
-        fmt.locale = Locale.getPreferredLocale()
-        fmt.dateFormat = "LLLL yyyy"
-        let monthYear = fmt.string(from: date)
-
-        if years <= 0 {
-            return String(format: "member_since_recent_format".localized, monthYear)
-        } else if years == 1 {
-            return String(format: "member_since_year_format".localized, years, monthYear)
-        } else {
-            return String(format: "member_since_years_format".localized, years, monthYear)
+    var body: some View {
+        if isMe || totalCount > 0 {
+            content
         }
     }
 
-    var body: some View {
+    private var content: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(isMe ? "impact_title_me".localized : "impact_title_other".localized)
                 .font(.custom("Quicksand-Bold", size: 16))
@@ -297,31 +328,27 @@ struct ImpactCounterView: View {
                 .padding(.top, 10)
                 .padding(.bottom, 18)
 
-            if let date = user.creationDate {
-                Text(seniorityText(date))
-                    .font(.custom("NunitoSans-SemiBold", size: 13))
-                    .foregroundColor(Color(UIColor.appOrange))
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 6)
-                    .background(Color(UIColor.appOrangeLight_50))
-                    .clipShape(Capsule())
-                    .padding(.bottom, 14)
-            }
-
             if isMe && totalCount == 0 {
                 newMemberState
             } else {
-                if isMe {
-                    VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack(alignment: .lastTextBaseline, spacing: 6) {
                         Text("\(totalCount)")
                             .font(.custom("Quicksand-Bold", size: 34))
                             .foregroundColor(.black)
-                        Text("impact_hero_subtitle".localized)
+                        Text((isMe ? "impact_hero_unit_me" : "impact_hero_unit_other").localized)
+                            .font(.custom("Quicksand-Bold", size: 16))
+                            .foregroundColor(.black)
+                    }
+                    if isMe {
+                        Text((rows.count <= 2 ? "impact_hero_subtitle_low" : "impact_hero_subtitle_me").localized)
                             .font(.custom("NunitoSans-Regular", size: 13))
                             .foregroundColor(Color(UIColor.appGris112))
                     }
-                    .padding(.bottom, 14)
+                }
+                .padding(.bottom, 14)
 
+                if isMe {
                     Text("impact_detail_title".localized)
                         .font(.custom("NunitoSans-Bold", size: 13))
                         .foregroundColor(.black)

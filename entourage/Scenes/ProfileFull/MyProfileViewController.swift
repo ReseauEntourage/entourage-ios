@@ -46,6 +46,7 @@ class MyProfileViewModel: ObservableObject {
     @Published var numberOfBlocked: Int = 0
     @Published var apiBadges: [UserBadgeAPI] = []
     @Published var referentBenevole: HomeReferentBenevole?
+    @Published var impactCounts: [Int] = [0, 0, 0, 0]
 
     weak var navigationDelegate: MyProfileNavigationDelegate?
 
@@ -64,6 +65,18 @@ class MyProfileViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.activatedNotif = activeNotifs
                 }
+            }
+        }
+
+        HomeService.getUserHome { [weak self] userHome, _ in
+            guard let userHome = userHome else { return }
+            DispatchQueue.main.async {
+                self?.impactCounts = [
+                    userHome.pastOutingParticipationsCount,
+                    userHome.actionCreationsCount,
+                    userHome.neighborhoodMessagesCount,
+                    userHome.conversationMembersCount
+                ]
             }
         }
 
@@ -191,6 +204,10 @@ struct MyProfileView: View {
 
                         rolePartnerPills
 
+                        if let date = viewModel.user?.creationDate {
+                            SeniorityPill(date: date)
+                        }
+
                         VStack(spacing: 8) {
                             if let city = viewModel.user?.addressPrimary?.displayAddress, !city.isEmpty {
                                 let radiusString = String(viewModel.user?.radiusDistance ?? 0)
@@ -286,6 +303,16 @@ struct MyProfileView: View {
                                 }
                             }
                         )
+                    }
+
+                    if let user = viewModel.user {
+                        ImpactCounterView(isMe: true, user: user, counts: viewModel.impactCounts, onDiscoverNearby: {
+                            if let tabbar = AppState.getTopViewController()?.tabBarController as? MainTabbarViewController {
+                                tabbar.selectedIndex = 4
+                            }
+                        })
+                            .padding(.horizontal)
+                            .padding(.top, 10)
                     }
 
                     if let user = viewModel.user {

@@ -138,10 +138,13 @@ struct OtherUserProfileView: View {
 
                         rolePartnerPills
 
+                        if let date = viewModel.user?.creationDate {
+                            SeniorityPill(date: date)
+                        }
+
                         VStack(spacing: 8) {
                             if let city = viewModel.user?.addressPrimary?.displayAddress, !city.isEmpty {
-                                let radiusString = String(viewModel.user?.radiusDistance ?? 0)
-                                Text("\(city) - \(radiusString) km")
+                                Text(city)
                                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
                                     .foregroundColor(Color(UIColor.appGris112))
                                     .frame(maxWidth: .infinity, alignment: .center)

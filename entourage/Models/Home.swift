@@ -24,9 +24,18 @@ struct UserHome:Codable {
     var events: [String]? = nil
     var signablePermission:Bool? = nil
     var association:Bool? = false
+    private var _pastOutingParticipationsCount: Int? = nil
+    private var _actionCreationsCount: Int? = nil
+    private var _neighborhoodMessagesCount: Int? = nil
+    private var _conversationMembersCount: Int? = nil
 
     
     var congratulations = HomeActions()
+
+    var pastOutingParticipationsCount: Int { _pastOutingParticipationsCount ?? 0 }
+    var actionCreationsCount: Int { _actionCreationsCount ?? 0 }
+    var neighborhoodMessagesCount: Int { _neighborhoodMessagesCount ?? 0 }
+    var conversationMembersCount: Int { _conversationMembersCount ?? 0 }
 
     var displayName:String {
         get {
@@ -54,6 +63,10 @@ struct UserHome:Codable {
         case events = "events"
         case signablePermission = "signable_permission"
         case association
+        case _pastOutingParticipationsCount = "past_outing_participations_count"
+        case _actionCreationsCount = "action_creations_count"
+        case _neighborhoodMessagesCount = "neighborhood_messages_count"
+        case _conversationMembersCount = "conversation_members_count"
     }
 }
 

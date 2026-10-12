@@ -74,6 +74,10 @@ final class StubBackend {
             "chat_messages_count": 0,
             "outing_participations_count": 0,
             "neighborhood_participations_count": 0,
+            "past_outing_participations_count": 0,
+            "action_creations_count": 0,
+            "neighborhood_messages_count": 0,
+            "conversation_members_count": 0,
             "recommandations": [Any](),
             "congratulations": [Any](),
             "events": events
