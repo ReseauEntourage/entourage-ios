@@ -60,7 +60,7 @@ extension NeighborhoodEventsTableviewCell: UICollectionViewDataSource, UICollect
         let event = events[indexPath.row]
         Logger.print("***** Event future : \(event)")
         let _addressName = event.addressName ?? ""
-        cell.configure(event: event)
+        cell.configure(event: event, showMembersCount: true)
         //cell.populateCell(title: event.title, imageUrl: event.getCurrentImageUrl, dateFormatted: event.startDateFormatted, addressName: _addressName)
         return cell
     }
@@ -70,7 +70,7 @@ extension NeighborhoodEventsTableviewCell: UICollectionViewDataSource, UICollect
         delegate?.showEvent(eventId: event.uid, isAfterCreation: false)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 160, height: 215)
+        return CGSize(width: 160, height: 235)
     }
     
 }

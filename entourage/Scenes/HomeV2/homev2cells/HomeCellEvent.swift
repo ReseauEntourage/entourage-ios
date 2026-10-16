@@ -28,6 +28,10 @@ class HomeCellEvent:UICollectionViewCell{
     private let ui_view_cancelled_wash = UIView()
     private let ui_badge_cancelled = EventCancelledBadgeView()
 
+    /// Participants count row (icon + label) shown below the place, opt-in via `configure(event:showMembersCount:)` (EN-9680).
+    private let ui_icon_members = UIImageView(image: UIImage(named: "ic_event_list_user"))
+    private let ui_label_members = UILabel()
+
     //VARIABLE
     class var identifier: String {
         return String(describing: self)
@@ -41,6 +45,30 @@ class HomeCellEvent:UICollectionViewCell{
         ui_label_title.numberOfLines = 2
         ui_label_title.lineBreakMode = .byTruncatingTail
         setupCancelledIndicators()
+        setupMembersCount()
+    }
+
+    private func setupMembersCount() {
+        ui_icon_members.contentMode = .scaleAspectFit
+        ui_icon_members.isHidden = true
+        ui_icon_members.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(ui_icon_members)
+
+        ui_label_members.font = UIFont(name: "NunitoSans-Regular", size: 12)
+        ui_label_members.textColor = UIColor(named: "grey_light")
+        ui_label_members.isHidden = true
+        ui_label_members.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(ui_label_members)
+
+        NSLayoutConstraint.activate([
+            ui_label_members.topAnchor.constraint(equalTo: ui_label_place.bottomAnchor, constant: 2),
+            ui_label_members.leadingAnchor.constraint(equalTo: ui_icon_members.trailingAnchor, constant: 6),
+            ui_label_members.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            ui_icon_members.leadingAnchor.constraint(equalTo: ui_label_place.leadingAnchor),
+            ui_icon_members.centerYAnchor.constraint(equalTo: ui_label_members.centerYAnchor),
+            ui_icon_members.widthAnchor.constraint(equalToConstant: 10),
+            ui_icon_members.heightAnchor.constraint(equalToConstant: 10)
+        ])
     }
 
     private func setupCancelledIndicators() {
@@ -67,7 +95,7 @@ class HomeCellEvent:UICollectionViewCell{
     }
 
     
-    func configure(event:Event){
+    func configure(event:Event, showMembersCount:Bool = false){
         ui_label_title.text = event.title + "\n"
         
         if let imageUrl = event.metadata?.portrait_url, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
@@ -141,6 +169,16 @@ class HomeCellEvent:UICollectionViewCell{
                 ui_label_interest.text = "Autre"
                 ui_image_interest.image = UIImage(named: "interest_others")
             }
+        }
+
+        if showMembersCount, let membersCount = event.membersCount {
+            let key = membersCount > 1 ? "event_members_cell_list" : "event_member_cell_list"
+            ui_label_members.text = String(format: key.localized, membersCount)
+            ui_label_members.isHidden = false
+            ui_icon_members.isHidden = false
+        } else {
+            ui_label_members.isHidden = true
+            ui_icon_members.isHidden = true
         }
 
         let isCancelled = event.isCanceled()

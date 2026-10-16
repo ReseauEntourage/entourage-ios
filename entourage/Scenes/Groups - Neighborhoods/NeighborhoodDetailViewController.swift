@@ -805,7 +805,8 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Vérifie si la cellule est HomeEventHorizontalCollectionCell
         if indexPath.section == 0 && indexPath.row == 1 {
-            return 265
+            // 20pt de plus quand les cartes d'événements affichent le nombre de participants (EN-9680)
+            return (neighborhood?.futureEvents?.isEmpty ?? true) ? 265 : 285
         } else {
             return UITableView.automaticDimension
         }

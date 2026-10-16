@@ -80,10 +80,10 @@
                         </constraints>
                     </view>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="610-fr-Vlz">
-                        <rect key="frame" x="20" y="51" width="386" height="215"/>
+                        <rect key="frame" x="20" y="51" width="386" height="235"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="215" id="99G-XH-06X"/>
+                            <constraint firstAttribute="height" constant="235" id="99G-XH-06X"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kIt-YM-g9o">
                             <size key="itemSize" width="136" height="150"/>
