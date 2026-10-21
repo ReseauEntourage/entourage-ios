@@ -2365,3 +2365,24 @@ Choose a topic to get started.";
 "member_since_recent_format" = "Membre depuis %@";
 "member_since_year_format" = "Membre depuis %d an, %@";
 "member_since_years_format" = "Membre depuis %d ans, %@";
+
+// MARK: - Création / modification d'un groupe (flux-creation-unifie)
+"group_form_step_details_title" = "Introduce your group";
+"group_form_step_interests_title" = "What is your group about?";
+"group_form_step_photo_title" = "Illustrate your group";
+"group_form_name_label" = "Group name";
+"group_form_description_label" = "Description";
+"group_form_place_label" = "Group location";
+"group_form_interests_label" = "Select one or more categories.";
+"group_form_photo_label" = "Photo";
+"group_form_welcome_label" = "Welcome message";
+"group_form_welcome_hint" = "Optional. Welcome new members: they will read this message as soon as they join the group.";
+"group_form_preview_title" = "Preview of your group";
+"group_form_error_name" = "Give your group a name of at least 2 characters to continue.";
+"group_form_error_description" = "Add a few words to introduce your group.";
+"group_form_error_address" = "Enter a location to continue.";
+"group_form_error_photo" = "Choose a photo to continue.";
+"group_form_edit_action" = "Edit";
+"group_form_edit_quit_message" = "If you leave the group editing, all the changes you made will be lost.";
+"group_form_create_error" = "Error while creating the group.";
+"group_form_update_error" = "Error while updating the group.";

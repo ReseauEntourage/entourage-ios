@@ -383,7 +383,7 @@ class NeighborhoodHomeViewController: UIViewController {
     
     @IBAction func action_create_group(_ sender: Any) {
         AnalyticsLoggerManager.logEvent(name: Action_Group_Plus)
-        let navVC = UIStoryboard.init(name: StoryboardName.neighborhoodCreate, bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
+        let navVC = GroupFormContainerViewController()
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)

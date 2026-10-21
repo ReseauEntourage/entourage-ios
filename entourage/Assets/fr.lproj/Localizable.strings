@@ -2394,3 +2394,24 @@ Choisissez un sujet pour démarrer.";
 "event_form_error_link" = "Ce lien ne semble pas valide. Vérifiez qu’il commence par « https:// ».";
 "event_form_error_places" = "Indiquez au moins 1 place disponible.";
 "event_form_error_category" = "Choisissez au moins une catégorie.";
+
+// MARK: - Création / modification d'un groupe (flux-creation-unifie)
+"group_form_step_details_title" = "Présentez votre groupe";
+"group_form_step_interests_title" = "De quoi parle votre groupe ?";
+"group_form_step_photo_title" = "Illustrez votre groupe";
+"group_form_name_label" = "Nom du groupe";
+"group_form_description_label" = "Description";
+"group_form_place_label" = "Lieu du groupe";
+"group_form_interests_label" = "Sélectionnez une ou plusieurs catégories.";
+"group_form_photo_label" = "Photo";
+"group_form_welcome_label" = "Message de bienvenue";
+"group_form_welcome_hint" = "Facultatif. Souhaitez la bienvenue aux nouveaux membres : ils liront ce message dès qu’ils rejoindront le groupe.";
+"group_form_preview_title" = "Aperçu de votre groupe";
+"group_form_error_name" = "Donnez un nom d’au moins 2 caractères à votre groupe pour continuer.";
+"group_form_error_description" = "Ajoutez quelques mots pour présenter votre groupe.";
+"group_form_error_address" = "Indiquez un lieu pour continuer.";
+"group_form_error_photo" = "Choisissez une photo pour continuer.";
+"group_form_edit_action" = "Modifier";
+"group_form_edit_quit_message" = "Si vous quittez la modification du groupe, toutes les modifications saisies seront perdues.";
+"group_form_create_error" = "Erreur lors de la création du groupe.";
+"group_form_update_error" = "Erreur lors de la modification du groupe.";

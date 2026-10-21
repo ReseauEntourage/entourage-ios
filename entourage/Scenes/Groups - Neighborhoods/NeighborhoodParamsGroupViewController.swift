@@ -271,12 +271,12 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     
     func editGroup() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupOption_EditGroup)
-        if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodCreate, bundle: nil).instantiateViewController(withIdentifier: "editGroupVC") as? NeighborhoodEditViewController {
-            vc.modalPresentationStyle = .fullScreen
-            vc.currentNeighborhoodId = self.neighborhood!.uid
-            
-            self.navigationController?.present(vc, animated: true)
-        }
+        // Modification : même assistant que la création, pré-rempli avec le groupe.
+        let vc = GroupFormContainerViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.neighborhoodId = self.neighborhood!.uid
+        vc.currentNeighborhood = self.neighborhood
+        self.navigationController?.present(vc, animated: true)
     }
     
     func editNotif(notifType:GroupUserNotifType,isOn:Bool) {
