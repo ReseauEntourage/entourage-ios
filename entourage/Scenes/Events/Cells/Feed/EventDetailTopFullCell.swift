@@ -240,8 +240,12 @@ class EventDetailTopFullCell: UITableViewCell {
         }
         
         // --- TAGS / INTERETS ---
+        ui_taglist_view?.removeAllTags()
+        let extraTags = event.accessibilityTagTitles
+        for tag in extraTags {
+            ui_taglist_view?.addTag(tag)
+        }
         if let _interests = event.interests {
-            ui_taglist_view?.removeAllTags()
             for interest in _interests {
                 if let tagName = Metadatas.sharedInstance.tagsInterest?.getTagNameFrom(key: interest) {
                     ui_taglist_view?.addTag(tagName)
@@ -250,7 +254,7 @@ class EventDetailTopFullCell: UITableViewCell {
                 }
             }
             
-            ui_constraint_listview_top_margin?.constant = _interests.isEmpty ? 0 : topMarginConstraint
+            ui_constraint_listview_top_margin?.constant = (_interests.isEmpty && extraTags.isEmpty) ? 0 : topMarginConstraint
         } else {
             ui_constraint_listview_top_margin?.constant = topMarginConstraint
         }

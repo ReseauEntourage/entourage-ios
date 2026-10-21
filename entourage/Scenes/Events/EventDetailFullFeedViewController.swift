@@ -132,7 +132,7 @@ extension EventDetailFullFeedViewController: UITableViewDataSource, UITableViewD
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailFullInterestCell.identifier, for: indexPath) as! EventDetailFullInterestCell
-        cell.populateCell(interests: event?.interests)
+        cell.populateCell(interests: event?.interests, extraTags: event?.accessibilityTagTitles ?? [])
         return cell
     }
     

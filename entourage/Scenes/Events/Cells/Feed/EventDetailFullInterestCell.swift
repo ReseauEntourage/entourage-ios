@@ -35,9 +35,13 @@ class EventDetailFullInterestCell: UITableViewCell {
         ui_taglist_view?.paddingY = 9
     }
 
-    func populateCell(interests:[String]?) {
+    func populateCell(interests:[String]?, extraTags:[String] = []) {
         ui_taglist_view?.removeAllTags()
-        guard let interests = interests else {return}
+        let interests = interests ?? []
+        
+        for tag in extraTags {
+            ui_taglist_view?.addTag(tag)
+        }
         
         if interests.count > 1 {
             ui_title?.text = "event_detail_cats_title".localized

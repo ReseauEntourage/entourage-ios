@@ -775,6 +775,18 @@ struct EventMetadataEditing {
 
 
 extension Event {
+    /// Pastilles d'accessibilité et de public, affichées au même niveau que les catégories.
+    var accessibilityTagTitles: [String] {
+        var titles = [String]()
+        if isOnline != true && metadata?.pmr == true {
+            titles.append("event_form_chip_wheelchair".localized)
+        }
+        if metadata?.kidsFriendly == true {
+            titles.append("event_form_chip_family".localized)
+        }
+        return titles
+    }
+
     
     //Function to see if event is passed or not
     func checkIsEventPassed()-> Bool{
