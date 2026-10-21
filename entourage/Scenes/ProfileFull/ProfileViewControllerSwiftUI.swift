@@ -323,7 +323,7 @@ struct ImpactCounterView: View {
     private var content: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(isMe ? "impact_title_me".localized : "impact_title_other".localized)
-                .font(.custom("Quicksand-Bold", size: 16))
+                .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)))
                 .foregroundColor(.black)
                 .padding(.top, 10)
                 .padding(.bottom, 18)
