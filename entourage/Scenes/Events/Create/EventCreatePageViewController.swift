@@ -9,7 +9,7 @@ import UIKit
 
 /// Page des étapes (une étape = un contrôleur SwiftUI), suivie de l'aperçu.
 /// Les pages sont dérivées de `EventFormPage.all`.
-class EventCreatePageViewController: UIPageViewController {
+class EventCreatePageViewController: UIPageViewController, FormFlowPageHost {
 
     weak var parentDelegate: EventCreateMainDelegate? = nil
 
@@ -62,6 +62,10 @@ class EventCreatePageViewController: UIPageViewController {
         }
         cache[page.index] = vc
         return vc
+    }
+
+    func showPage(at index: Int, animated: Bool) {
+        goPage(EventFormPage.all[min(max(index, 0), EventFormPage.lastIndex)], animated: animated)
     }
 
     func goPage(_ page: EventFormPage, animated: Bool) {

@@ -701,6 +701,8 @@
 		EEFE9370C9C9C5076DD3332A /* WelcomeJourneyDebugPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E1A0B93BB4E8ADEBC5DD95 /* WelcomeJourneyDebugPanel.swift */; };
 		EFA65B66341DE92F2ACCFF17 /* error_404_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 047657E2E9D4DFF8EDEB98F5 /* error_404_animation.json */; };
 		F2D89EF82A1F819783159595 /* APIErrorBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F24C295CCA61EDF2ACDD08 /* APIErrorBottomSheetViewController.swift */; };
+		070425AF325338FD53C3F2B9 /* FormFlowComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4A045D2E203AAC49431062 /* FormFlowComponents.swift */; };
+		C142FF289743C2C925B27B9B /* FormFlowContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5A742EE22B0D895554B966 /* FormFlowContainerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1422,6 +1424,8 @@
 		E5FB946716604F7EBEE6D173 /* ConversationsHeaderBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsHeaderBarView.swift; sourceTree = "<group>"; };
 		F5F24C295CCA61EDF2ACDD08 /* APIErrorBottomSheetViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIErrorBottomSheetViewController.swift; sourceTree = "<group>"; };
 		F763168D06774C2CBB93621C /* ReactionBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionBadgesView.swift; sourceTree = "<group>"; };
+		CD4A045D2E203AAC49431062 /* FormFlowComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFlowComponents.swift; sourceTree = "<group>"; };
+		FB5A742EE22B0D895554B966 /* FormFlowContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFlowContainerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1902,6 +1906,7 @@
 		02681953278DF6E400A98A4A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FB74DAFC983319BEACCCBC3B /* FormFlow */,
 				24DE086F2FE0244900806810 /* Badges */,
 				268ADBC12DD3681500031C6F /* smallTalk */,
 				26192DE42D300C5400944D32 /* ProfileFull */,
@@ -2983,6 +2988,15 @@
 			path = Testing;
 			sourceTree = "<group>";
 		};
+		FB74DAFC983319BEACCCBC3B /* FormFlow */ = {
+			isa = PBXGroup;
+			children = (
+				FB5A742EE22B0D895554B966 /* FormFlowContainerViewController.swift */,
+				CD4A045D2E203AAC49431062 /* FormFlowComponents.swift */,
+			);
+			path = FormFlow;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3318,6 +3332,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C142FF289743C2C925B27B9B /* FormFlowContainerViewController.swift in Sources */,
+				070425AF325338FD53C3F2B9 /* FormFlowComponents.swift in Sources */,
 				2421081A2F4C97EB004D74E2 /* BirthdayViewController.swift in Sources */,
 				02728DDB27F19A1000512DC0 /* PartnerDetailViewController.swift in Sources */,
 				0229376F27A43AA600206201 /* GMSAutoCompleteVC.swift in Sources */,

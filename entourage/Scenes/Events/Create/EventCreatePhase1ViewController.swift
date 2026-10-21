@@ -42,53 +42,53 @@ struct EventStepPresentationView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                EventStepHeader(step: .presentation)
+                FormFlowStepHeader(step: .presentation)
 
                 // Nom
                 VStack(alignment: .leading, spacing: 0) {
-                    EventFormLabel(title: "event_form_name_label".localized, isRequired: true)
-                    EventFormTextField(
+                    FormFlowLabel(title: "event_form_name_label".localized, isRequired: true)
+                    FormFlowTextField(
                         placeholder: "event_form_name_placeholder".localized,
                         text: store.binding(\.title),
                         hasError: store.errors[.title] != nil
                     )
-                    .eventFormError(store.errors[.title])
+                    .formFlowError(store.errors[.title])
                 }
                 .padding(.bottom, 20)
 
                 // Description
                 VStack(alignment: .leading, spacing: 0) {
-                    EventFormLabel(title: "event_form_description_label".localized, isRequired: true)
-                    EventFormHint(text: "event_form_description_hint".localized)
-                    EventFormTextArea(
+                    FormFlowLabel(title: "event_form_description_label".localized, isRequired: true)
+                    FormFlowHint(text: "event_form_description_hint".localized)
+                    FormFlowTextArea(
                         placeholder: "event_form_description_placeholder".localized,
                         text: store.binding(\.descriptionText),
                         maxLength: ApplicationTheme.maxCharsDescription,
                         hasError: store.errors[.description] != nil
                     )
-                    .eventFormError(store.errors[.description])
+                    .formFlowError(store.errors[.description])
                 }
                 .padding(.bottom, 20)
 
                 // Photo
                 VStack(alignment: .leading, spacing: 0) {
-                    EventFormLabel(title: "event_form_photo_label".localized, isRequired: true)
+                    FormFlowLabel(title: "event_form_photo_label".localized, isRequired: true)
                     photoTile
-                        .eventFormError(store.errors[.photo])
+                        .formFlowError(store.errors[.photo])
                 }
             }
             .padding(.horizontal, 22)
             .padding(.top, 24)
             .padding(.bottom, 40)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.white.onTapGesture { EventFormStyle.hideKeyboard() })
+            .background(Color.white.onTapGesture { FormFlowStyle.hideKeyboard() })
         }
         .background(Color.white)
     }
 
     @ViewBuilder
     private var photoTile: some View {
-        let photo = EventPhotoImage(localImage: store.localPhoto, remoteUrl: store.values.imageDisplayUrl)
+        let photo = FormFlowPhotoImage(localImage: store.localPhoto, remoteUrl: store.values.imageDisplayUrl)
         let hasError = store.errors[.photo] != nil
 
         Button(action: onPickPhoto) {
@@ -99,8 +99,8 @@ struct EventStepPresentationView: View {
                         .frame(height: 190)
                         .clipped()
                     Text("event_form_photo_change".localized)
-                        .font(EventFormStyle.semibold(12.5))
-                        .foregroundColor(EventFormStyle.ink)
+                        .font(FormFlowStyle.semibold(12.5))
+                        .foregroundColor(FormFlowStyle.ink)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 7)
                         .background(Color.white)
@@ -108,26 +108,26 @@ struct EventStepPresentationView: View {
                         .padding(10)
                 }
                 .cornerRadius(14)
-                .overlay(RoundedRectangle(cornerRadius: 14).stroke(EventFormStyle.line, lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 14).stroke(FormFlowStyle.line, lineWidth: 1))
             }
             else {
                 VStack(spacing: 7) {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 13).fill(EventFormStyle.accentSoft)
+                        RoundedRectangle(cornerRadius: 13).fill(FormFlowStyle.accentSoft)
                         Image(systemName: store.values.hasPhoto ? "checkmark" : "photo")
                             .font(.system(size: 20, weight: .regular))
-                            .foregroundColor(EventFormStyle.accent)
+                            .foregroundColor(FormFlowStyle.accent)
                     }
                     .frame(width: 46, height: 46)
 
                     Text((store.values.hasPhoto ? "event_form_photo_change" : "event_form_photo_add").localized)
-                        .font(EventFormStyle.bold(13.5))
-                        .foregroundColor(EventFormStyle.ink)
+                        .font(FormFlowStyle.bold(13.5))
+                        .foregroundColor(FormFlowStyle.ink)
                         .underline()
                     if store.values.hasPhoto {
                         Text("event_form_photo_added".localized)
-                            .font(EventFormStyle.regular(12))
-                            .foregroundColor(EventFormStyle.ink2)
+                            .font(FormFlowStyle.regular(12))
+                            .foregroundColor(FormFlowStyle.ink2)
                             .multilineTextAlignment(.center)
                     }
                 }
@@ -135,7 +135,7 @@ struct EventStepPresentationView: View {
                 .frame(maxWidth: .infinity, minHeight: 120)
                 .overlay(
                     RoundedRectangle(cornerRadius: 14)
-                        .stroke(hasError ? EventFormStyle.errorBorder : EventFormStyle.line,
+                        .stroke(hasError ? FormFlowStyle.errorBorder : FormFlowStyle.line,
                                 style: StrokeStyle(lineWidth: hasError ? 1.5 : 1, dash: hasError ? [] : [5, 4]))
                 )
             }

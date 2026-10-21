@@ -93,7 +93,7 @@ struct EventCreatePhase3View: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                EventStepHeader(step: .location)
+                FormFlowStepHeader(step: .location)
 
                 modeSwitch
                     .padding(.bottom, 20)
@@ -105,8 +105,8 @@ struct EventCreatePhase3View: View {
                     .padding(.bottom, 22)
 
                 Text((isOnline ? "event_form_section_public" : "event_form_section_access_public").localized)
-                    .font(EventFormStyle.bold(13))
-                    .foregroundColor(EventFormStyle.ink)
+                    .font(FormFlowStyle.bold(13))
+                    .foregroundColor(FormFlowStyle.ink)
                     .padding(.bottom, 12)
 
                 cards
@@ -115,7 +115,7 @@ struct EventCreatePhase3View: View {
             .padding(.top, 24)
             .padding(.bottom, 40)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.white.onTapGesture { EventFormStyle.hideKeyboard() })
+            .background(Color.white.onTapGesture { FormFlowStyle.hideKeyboard() })
         }
         .background(Color.white)
     }
@@ -127,17 +127,17 @@ struct EventCreatePhase3View: View {
             modeButton(title: "event_create_phase3_online".localized, isOn: isOnline) { store.setOnline(true) }
         }
         .padding(4)
-        .overlay(RoundedRectangle(cornerRadius: 14).stroke(EventFormStyle.line, lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 14).stroke(FormFlowStyle.line, lineWidth: 1))
     }
 
     private func modeButton(title: String, isOn: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
-                .font(EventFormStyle.bold(14.5))
-                .foregroundColor(isOn ? .white : EventFormStyle.ink2)
+                .font(FormFlowStyle.bold(14.5))
+                .foregroundColor(isOn ? .white : FormFlowStyle.ink2)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 11)
-                .background(isOn ? EventFormStyle.accent : Color.clear)
+                .background(isOn ? FormFlowStyle.accent : Color.clear)
                 .cornerRadius(10)
         }
         .buttonStyle(PlainButtonStyle())
@@ -148,8 +148,8 @@ struct EventCreatePhase3View: View {
     private var placeField: some View {
         if isOnline {
             VStack(alignment: .leading, spacing: 0) {
-                EventFormLabel(title: "event_form_link_label".localized, isRequired: true)
-                EventFormTextField(
+                FormFlowLabel(title: "event_form_link_label".localized, isRequired: true)
+                FormFlowTextField(
                     placeholder: "event_form_link_placeholder".localized,
                     text: store.binding(\.onlineUrl),
                     hasError: store.errors[.onlineUrl] != nil,
@@ -157,13 +157,13 @@ struct EventCreatePhase3View: View {
                     keyboard: .URL,
                     autocapitalization: .none
                 )
-                .eventFormError(store.errors[.onlineUrl])
+                .formFlowError(store.errors[.onlineUrl])
             }
         }
         else {
             VStack(alignment: .leading, spacing: 0) {
-                EventFormLabel(title: "event_form_address_label".localized, isRequired: true)
-                EventFormTextField(
+                FormFlowLabel(title: "event_form_address_label".localized, isRequired: true)
+                FormFlowTextField(
                     placeholder: "event_form_address_placeholder".localized,
                     text: $address.query,
                     hasError: store.errors[.address] != nil,
@@ -174,7 +174,7 @@ struct EventCreatePhase3View: View {
                     suggestionsList
                 }
                 else if let message = store.errors[.address] {
-                    EventFormErrorText(message: message)
+                    FormFlowErrorText(message: message)
                 }
             }
         }
@@ -186,12 +186,12 @@ struct EventCreatePhase3View: View {
                 Button(action: { viewModel.select(suggestion) }) {
                     VStack(alignment: .leading, spacing: 0) {
                         Text(suggestion.attributedFullText.string)
-                            .font(EventFormStyle.regular(14))
-                            .foregroundColor(EventFormStyle.ink)
+                            .font(FormFlowStyle.regular(14))
+                            .foregroundColor(FormFlowStyle.ink)
                             .multilineTextAlignment(.leading)
                             .padding(.vertical, 12)
                             .padding(.horizontal, 15)
-                        Rectangle().fill(EventFormStyle.line2).frame(height: 1)
+                        Rectangle().fill(FormFlowStyle.line2).frame(height: 1)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
@@ -208,24 +208,24 @@ struct EventCreatePhase3View: View {
     // Stepper de places : « Non », puis 1, 2, 3...
     private var placeLimitField: some View {
         VStack(alignment: .leading, spacing: 0) {
-            EventFormLabel(title: "event_form_places_label".localized)
+            FormFlowLabel(title: "event_form_places_label".localized)
             HStack {
                 Text("event_form_places_row".localized)
-                    .font(EventFormStyle.regular(14))
-                    .foregroundColor(EventFormStyle.ink2)
+                    .font(FormFlowStyle.regular(14))
+                    .foregroundColor(FormFlowStyle.ink2)
                 Spacer()
                 HStack(spacing: 18) {
                     stepperButton(systemImage: "minus", isEnabled: store.values.hasPlaceLimit) { store.decrementPlaceLimit() }
                         .accessibility(label: Text("event_form_places_less".localized))
                     Text(store.values.hasPlaceLimit ? "\(store.values.placeLimit)" : "event_create_phase3_limit_no".localized)
-                        .font(EventFormStyle.bold(16))
-                        .foregroundColor(EventFormStyle.ink)
+                        .font(FormFlowStyle.bold(16))
+                        .foregroundColor(FormFlowStyle.ink)
                         .frame(minWidth: 36)
                     stepperButton(systemImage: "plus", isEnabled: true) { store.incrementPlaceLimit() }
                         .accessibility(label: Text("event_form_places_more".localized))
                 }
             }
-            .eventFormError(store.errors[.placeLimit])
+            .formFlowError(store.errors[.placeLimit])
         }
     }
 
@@ -233,9 +233,9 @@ struct EventCreatePhase3View: View {
         Button(action: action) {
             Image(systemName: systemImage)
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(isEnabled ? EventFormStyle.ink : EventFormStyle.ink3)
+                .foregroundColor(isEnabled ? FormFlowStyle.ink : FormFlowStyle.ink3)
                 .frame(width: 40, height: 40)
-                .overlay(Circle().stroke(EventFormStyle.line, lineWidth: 1))
+                .overlay(Circle().stroke(FormFlowStyle.line, lineWidth: 1))
         }
         .buttonStyle(PlainButtonStyle())
         .disabled(!isEnabled)
@@ -247,7 +247,7 @@ struct EventCreatePhase3View: View {
     private var cards: some View {
         VStack(spacing: 11) {
             if !isOnline {
-                EventSelectableCard(
+                FormFlowSelectableCard(
                     symbolNames: ["figure.roll", "accessibility", "person.fill"],
                     title: "event_form_card_wheelchair_title".localized,
                     subtitle: "event_form_card_wheelchair_subtitle".localized,
@@ -255,14 +255,14 @@ struct EventCreatePhase3View: View {
                     action: { store.update { $0.isWheelchairAccessible.toggle() } }
                 )
             }
-            EventSelectableCard(
+            FormFlowSelectableCard(
                 symbolNames: ["figure.2.and.child.holdinghands", "person.2.fill"],
                 title: "event_form_card_family_title".localized,
                 subtitle: "event_form_card_family_subtitle".localized,
                 isOn: store.values.isFamilyFriendly,
                 action: { store.update { $0.isFamilyFriendly.toggle() } }
             )
-            EventSelectableCard(
+            FormFlowSelectableCard(
                 symbolNames: ["figure.stand.dress", "person.fill"],
                 title: "event_form_card_women_title".localized,
                 isOn: store.values.isReservedFemale,

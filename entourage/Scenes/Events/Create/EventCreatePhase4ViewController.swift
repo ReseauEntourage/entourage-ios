@@ -41,23 +41,23 @@ struct EventStepCategoriesView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                EventStepHeader(step: .categories)
+                FormFlowStepHeader(step: .categories)
 
-                EventFormLabel(title: "event_form_categories_label".localized, isRequired: true)
+                FormFlowLabel(title: "event_form_categories_label".localized, isRequired: true)
                     .padding(.bottom, 6)
 
-                EventFlowLayout(items: tags.map { $0.key }) { key in
-                    EventChip(title: name(for: key), isOn: store.values.interests.contains(key)) {
+                FormFlowLayout(items: tags.map { $0.key }) { key in
+                    FormFlowChip(title: name(for: key), isOn: store.values.interests.contains(key)) {
                         store.toggleInterest(key)
                     }
                 }
-                .eventFormError(store.errors[.categories])
+                .formFlowError(store.errors[.categories])
             }
             .padding(.horizontal, 22)
             .padding(.top, 24)
             .padding(.bottom, 40)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.white.onTapGesture { EventFormStyle.hideKeyboard() })
+            .background(Color.white.onTapGesture { FormFlowStyle.hideKeyboard() })
         }
         .background(Color.white)
     }

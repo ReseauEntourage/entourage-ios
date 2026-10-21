@@ -105,14 +105,14 @@ struct EventPreviewView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                EventStepHeader(eyebrow: "event_form_preview_eyebrow".localized, title: "event_form_preview_title".localized, isSmall: true)
+                FormFlowStepHeader(eyebrow: "event_form_preview_eyebrow".localized, title: "event_form_preview_title".localized, isSmall: true)
 
                 photo
                     .padding(.bottom, 14)
 
                 Text(values.title)
-                    .font(EventFormStyle.title(18))
-                    .foregroundColor(EventFormStyle.ink)
+                    .font(FormFlowStyle.title(18))
+                    .foregroundColor(FormFlowStyle.ink)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.bottom, 8)
 
@@ -124,7 +124,7 @@ struct EventPreviewView: View {
                 }
 
                 if !chips.isEmpty {
-                    EventFlowLayout(items: chips, spacing: 7) { chip in
+                    FormFlowLayout(items: chips, spacing: 7) { chip in
                         chipView(chip)
                     }
                     .padding(.top, 12)
@@ -133,8 +133,8 @@ struct EventPreviewView: View {
 
                 if !values.descriptionText.isEmpty {
                     Text(values.descriptionText)
-                        .font(EventFormStyle.regular(14))
-                        .foregroundColor(EventFormStyle.ink)
+                        .font(FormFlowStyle.regular(14))
+                        .foregroundColor(FormFlowStyle.ink)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom, 18)
                 }
@@ -153,7 +153,7 @@ struct EventPreviewView: View {
 
     @ViewBuilder
     private var photo: some View {
-        let image = EventPhotoImage(localImage: store.localPhoto, remoteUrl: values.imageDisplayUrl)
+        let image = FormFlowPhotoImage(localImage: store.localPhoto, remoteUrl: values.imageDisplayUrl)
         ZStack {
             LinearGradient(
                 gradient: Gradient(colors: [Color(red: 243 / 255, green: 236 / 255, blue: 230 / 255), Color(red: 231 / 255, green: 221 / 255, blue: 211 / 255)]),
@@ -166,7 +166,7 @@ struct EventPreviewView: View {
             else {
                 Image(systemName: "photo")
                     .font(.system(size: 34, weight: .light))
-                    .foregroundColor(EventFormStyle.ink3)
+                    .foregroundColor(FormFlowStyle.ink3)
             }
         }
         .frame(maxWidth: .infinity)
@@ -179,12 +179,12 @@ struct EventPreviewView: View {
         HStack(alignment: .top, spacing: 9) {
             Image(systemName: systemImage)
                 .font(.system(size: 14, weight: .regular))
-                .foregroundColor(EventFormStyle.ink2)
+                .foregroundColor(FormFlowStyle.ink2)
                 .frame(width: 16)
                 .padding(.top, 2)
             Text(text)
-                .font(EventFormStyle.regular(13.5))
-                .foregroundColor(EventFormStyle.ink2)
+                .font(FormFlowStyle.regular(13.5))
+                .foregroundColor(FormFlowStyle.ink2)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.bottom, 6)
@@ -193,19 +193,19 @@ struct EventPreviewView: View {
     private func chipView(_ chip: EventPreviewChip) -> some View {
         HStack(spacing: 5) {
             if let symbols = chip.symbolNames {
-                Image(systemName: EventFormStyle.symbol(symbols))
+                Image(systemName: FormFlowStyle.symbol(symbols))
                     .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(EventFormStyle.accent)
+                    .foregroundColor(FormFlowStyle.accent)
             }
             Text(chip.title)
-                .font(EventFormStyle.semibold(11.5))
-                .foregroundColor(EventFormStyle.ink)
+                .font(FormFlowStyle.semibold(11.5))
+                .foregroundColor(FormFlowStyle.ink)
         }
         .padding(.horizontal, 11)
         .padding(.vertical, 5)
         .background(Color.white)
         .cornerRadius(20)
-        .overlay(RoundedRectangle(cornerRadius: 20).stroke(EventFormStyle.line, lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 20).stroke(FormFlowStyle.line, lineWidth: 1))
     }
 
     /// Rappel : « N groupes sélectionnés. Les membres de ces groupes recevront une notification. »
@@ -217,19 +217,19 @@ struct EventPreviewView: View {
 
         return HStack(spacing: 11) {
             ZStack {
-                RoundedRectangle(cornerRadius: 10).fill(EventFormStyle.tint)
+                RoundedRectangle(cornerRadius: 10).fill(FormFlowStyle.tint)
                 Image(systemName: "info.circle")
                     .font(.system(size: 16, weight: .regular))
-                    .foregroundColor(EventFormStyle.accent)
+                    .foregroundColor(FormFlowStyle.accent)
             }
             .frame(width: 34, height: 34)
 
-            (Text(headline).font(EventFormStyle.bold(12.5)).bold().foregroundColor(EventFormStyle.ink)
-                + Text(" " + notice).font(EventFormStyle.regular(12.5)).foregroundColor(EventFormStyle.ink2))
+            (Text(headline).font(FormFlowStyle.bold(12.5)).bold().foregroundColor(FormFlowStyle.ink)
+                + Text(" " + notice).font(FormFlowStyle.regular(12.5)).foregroundColor(FormFlowStyle.ink2))
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)
         }
         .padding(13)
-        .overlay(RoundedRectangle(cornerRadius: 14).stroke(EventFormStyle.line, lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 14).stroke(FormFlowStyle.line, lineWidth: 1))
     }
 }

@@ -75,11 +75,11 @@ struct EventStepGroupsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                EventStepHeader(step: .groups)
+                FormFlowStepHeader(step: .groups)
 
-                EventFormLabel(title: "event_form_groups_label".localized)
+                FormFlowLabel(title: "event_form_groups_label".localized)
                     .padding(.bottom, -2)
-                EventFormHint(text: "event_form_groups_hint".localized)
+                FormFlowHint(text: "event_form_groups_hint".localized)
 
                 if viewModel.isLoading {
                     HStack { Spacer(); ActivityIndicator(); Spacer() }
@@ -87,8 +87,8 @@ struct EventStepGroupsView: View {
                 }
                 else if viewModel.groups.isEmpty {
                     Text("event_form_groups_empty".localized)
-                        .font(EventFormStyle.regular(14))
-                        .foregroundColor(EventFormStyle.ink2)
+                        .font(FormFlowStyle.regular(14))
+                        .foregroundColor(FormFlowStyle.ink2)
                         .padding(.top, 8)
                 }
                 else {
@@ -111,16 +111,16 @@ struct EventStepGroupsView: View {
             VStack(spacing: 0) {
                 HStack(spacing: 12) {
                     Text(group.name)
-                        .font(EventFormStyle.regular(14))
-                        .foregroundColor(EventFormStyle.ink)
+                        .font(FormFlowStyle.regular(14))
+                        .foregroundColor(FormFlowStyle.ink)
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
                     Spacer(minLength: 8)
                     ZStack {
                         RoundedRectangle(cornerRadius: 7)
-                            .fill(isOn ? EventFormStyle.ink : Color.white)
+                            .fill(isOn ? FormFlowStyle.ink : Color.white)
                         RoundedRectangle(cornerRadius: 7)
-                            .stroke(isOn ? EventFormStyle.ink : EventFormStyle.line, lineWidth: 1.8)
+                            .stroke(isOn ? FormFlowStyle.ink : FormFlowStyle.line, lineWidth: 1.8)
                         if isOn {
                             Image(systemName: "checkmark")
                                 .font(.system(size: 11, weight: .heavy))
@@ -132,7 +132,7 @@ struct EventStepGroupsView: View {
                 .padding(.vertical, 14)
                 .padding(.horizontal, 2)
                 .contentShape(Rectangle())
-                Rectangle().fill(EventFormStyle.line2).frame(height: 1)
+                Rectangle().fill(FormFlowStyle.line2).frame(height: 1)
             }
         }
         .buttonStyle(PlainButtonStyle())

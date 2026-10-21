@@ -88,12 +88,12 @@ struct EventStepScheduleView: View {
         let bounds = dateBounds()
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                EventStepHeader(step: .schedule)
+                FormFlowStepHeader(step: .schedule)
 
                 // Date
                 VStack(alignment: .leading, spacing: 0) {
-                    EventFormLabel(title: "event_form_date_label".localized, isRequired: true)
-                    EventPickerField(
+                    FormFlowLabel(title: "event_form_date_label".localized, isRequired: true)
+                    FormFlowPickerField(
                         mode: .date,
                         placeholder: "event_form_date_placeholder".localized,
                         text: store.values.day.map { Self.dayFormatter.string(from: $0) } ?? "",
@@ -105,7 +105,7 @@ struct EventStepScheduleView: View {
                         maximumDate: bounds.max,
                         onCommit: { store.setDay($0) }
                     )
-                    .eventFormError(store.errors[.date])
+                    .formFlowError(store.errors[.date])
                 }
                 .padding(.bottom, 20)
 
@@ -113,8 +113,8 @@ struct EventStepScheduleView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack(alignment: .top, spacing: 12) {
                         VStack(alignment: .leading, spacing: 0) {
-                            EventFormLabel(title: "event_create_phase2_time_start".localized)
-                            EventPickerField(
+                            FormFlowLabel(title: "event_create_phase2_time_start".localized)
+                            FormFlowPickerField(
                                 mode: .time,
                                 placeholder: "event_form_time_placeholder".localized,
                                 text: timeText(store.values.startMinutes),
@@ -129,8 +129,8 @@ struct EventStepScheduleView: View {
                             )
                         }
                         VStack(alignment: .leading, spacing: 0) {
-                            EventFormLabel(title: "event_create_phase2_time_end".localized)
-                            EventPickerField(
+                            FormFlowLabel(title: "event_create_phase2_time_end".localized)
+                            FormFlowPickerField(
                                 mode: .time,
                                 placeholder: "event_form_time_placeholder".localized,
                                 text: timeText(store.values.endMinutes),
@@ -146,10 +146,10 @@ struct EventStepScheduleView: View {
                         }
                     }
                     if let message = store.errors[.timeStart] {
-                        EventFormErrorText(message: message)
+                        FormFlowErrorText(message: message)
                     }
                     if let message = store.errors[.timeEnd] {
-                        EventFormErrorText(message: message)
+                        FormFlowErrorText(message: message)
                     }
                 }
                 .padding(.bottom, 22)
@@ -157,10 +157,10 @@ struct EventStepScheduleView: View {
                 // Récurrence
                 if !isRecurrenceHidden {
                     VStack(alignment: .leading, spacing: 0) {
-                        EventFormLabel(title: "event_form_recurrence_label".localized)
+                        FormFlowLabel(title: "event_form_recurrence_label".localized)
                         let options = recurrenceOptions
                         ForEach(0..<options.count, id: \.self) { index in
-                            EventRadioRow(
+                            FormFlowRadioRow(
                                 title: options[index].getDescription(),
                                 isOn: store.values.recurrence == options[index],
                                 showsSeparator: index < options.count - 1,
