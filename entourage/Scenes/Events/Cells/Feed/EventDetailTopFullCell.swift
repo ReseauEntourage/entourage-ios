@@ -109,6 +109,22 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_mapview.layer.cornerRadius = 20
     }
     
+    private var lastTagListWidth: CGFloat = 0
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // Largeur définitive connue : on refait la répartition des tags en lignes pour qu'aucun ne déborde à droite.
+        guard let tagList = ui_taglist_view, tagList.bounds.width != lastTagListWidth else { return }
+        lastTagListWidth = tagList.bounds.width
+        tagList.setNeedsLayout()
+        tagList.invalidateIntrinsicContentSize()
+        DispatchQueue.main.async { [weak self] in
+            self?.superview?.setNeedsLayout()
+            (self?.superview as? UITableView)?.beginUpdates()
+            (self?.superview as? UITableView)?.endUpdates()
+        }
+    }
+    
     @objc func onParticipateClick() {
         delegate?.joinLeave()
     }
@@ -258,6 +274,11 @@ class EventDetailTopFullCell: UITableViewCell {
         } else {
             ui_constraint_listview_top_margin?.constant = topMarginConstraint
         }
+        // Les tags sont répartis en lignes selon la largeur de la vue : on la recalcule une fois la cellule dimensionnée.
+        contentView.layoutIfNeeded()
+        ui_taglist_view?.setNeedsLayout()
+        ui_taglist_view?.layoutIfNeeded()
+        ui_taglist_view?.invalidateIntrinsicContentSize()
         
         // Désactive éventuellement le bouton si l’événement est annulé ou passé
         self.disableButtonIfCancelOrPast(event: event)
