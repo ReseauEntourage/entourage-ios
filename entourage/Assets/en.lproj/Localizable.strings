@@ -2386,3 +2386,18 @@ Choose a topic to get started.";
 "group_form_edit_quit_message" = "If you leave the group editing, all the changes you made will be lost.";
 "group_form_create_error" = "Error while creating the group.";
 "group_form_update_error" = "Error while updating the group.";
+
+// MARK: - Création / modification d'une entraide (flux-creation-unifie)
+"action_form_step_category_title" = "What is the category of your %@?";
+"action_form_step_details_title" = "Describe your %@";
+"action_form_category_label" = "Category";
+"action_form_title_label" = "Title";
+"action_form_description_label" = "Description";
+"action_form_image_label" = "Image (optional)";
+"action_form_place_label" = "Location";
+"action_form_preview_title" = "Preview of your %@";
+"action_form_edit_action" = "Edit";
+"action_form_error_title" = "Give a title of at least 2 characters to continue.";
+"action_form_error_description" = "Add a description to continue.";
+"action_form_error_share" = "Answer yes or no to continue.";
+"action_form_save_error" = "Error while saving your %@.";

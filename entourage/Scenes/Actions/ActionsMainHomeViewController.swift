@@ -321,13 +321,11 @@ class ActionsMainHomeViewController: UIViewController {
     }
 
     func createAction(isContrib: Bool) {
-        let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
-            vc.modalPresentationStyle = .fullScreen
-            vc.isContrib = isContrib
-            vc.parentController = self
-            self.tabBarController?.present(vc, animated: true)
-        }
+        let vc = ActionFormContainerViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.isContrib = isContrib
+        vc.parentController = self
+        self.tabBarController?.present(vc, animated: true)
     }
     
     func resetViewToInitialState() {

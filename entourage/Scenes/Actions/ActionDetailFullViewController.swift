@@ -226,14 +226,13 @@ class ActionDetailFullViewController: UIViewController {
         }
         ActionCreateStateManager.shared.storeSection(self.action?.sectionName ?? "services", isContrib: self.isContrib)
 
-        let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "actionEditVCMain") as? ActionEditMainViewController {
-            vc.modalPresentationStyle = .fullScreen
-            vc.isContrib = isContrib
-            vc.parentController = self
-            vc.currentAction = action
-            self.present(vc, animated: true)
-        }
+        // Modification : même assistant que la création, pré-rempli avec l'entraide.
+        let vc = ActionFormContainerViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.isContrib = isContrib
+        vc.parentController = self
+        vc.currentAction = action
+        self.present(vc, animated: true)
     }
     
     @IBAction func action_contact(_ sender: Any) {

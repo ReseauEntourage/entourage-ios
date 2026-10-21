@@ -226,8 +226,8 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
                 if _category.contains("both_action") || _category.contains("no_event") {
                     if let _vc = AppState.getTopViewController() {
                         if let _tabbar = _vc.tabBarController as? MainTabbarViewController {
-                            let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
-                            if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
+                            do {
+                                let vc = ActionFormContainerViewController()
                                 // "both_actions" can mean "give" or "ask" depending on the persona (see EnhancedOnboardingEnd); "no_event" always suggests a contribution.
                                 let isContrib = _category.contains("both_action") ? OnboardingEndChoicesManager.shared.isContribForBothActions : true
                                 OnboardingEndChoicesManager.shared.categoryForButton = ""

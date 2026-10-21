@@ -2415,3 +2415,18 @@ Choisissez un sujet pour démarrer.";
 "group_form_edit_quit_message" = "Si vous quittez la modification du groupe, toutes les modifications saisies seront perdues.";
 "group_form_create_error" = "Erreur lors de la création du groupe.";
 "group_form_update_error" = "Erreur lors de la modification du groupe.";
+
+// MARK: - Création / modification d'une entraide (flux-creation-unifie)
+"action_form_step_category_title" = "Quelle est la catégorie de votre %@ ?";
+"action_form_step_details_title" = "Décrivez votre %@";
+"action_form_category_label" = "Catégorie";
+"action_form_title_label" = "Titre";
+"action_form_description_label" = "Description";
+"action_form_image_label" = "Image (facultatif)";
+"action_form_place_label" = "Lieu";
+"action_form_preview_title" = "Aperçu de votre %@";
+"action_form_edit_action" = "Modifier";
+"action_form_error_title" = "Donnez un titre d’au moins 2 caractères pour continuer.";
+"action_form_error_description" = "Ajoutez une description pour continuer.";
+"action_form_error_share" = "Répondez par oui ou par non pour continuer.";
+"action_form_save_error" = "Erreur lors de l’enregistrement de votre %@.";
