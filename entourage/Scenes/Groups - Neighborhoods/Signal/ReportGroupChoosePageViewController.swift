@@ -34,8 +34,8 @@ class ReportGroupChoosePageViewController:UIViewController {
     var chatMessageId:Int? = nil
     var analyticsClickName = ""
     var textString:String? = nil
-    /// Édition autorisée sur l'écran de conversation et sur les commentaires de post de groupe
-    /// (jamais sur les posts de mur eux-mêmes) — réglé par ReportGroupMainViewController.
+    /// Édition autorisée sur l'écran de conversation, sur les commentaires de post de groupe et
+    /// sur les publications du mur d'un groupe (neighborhood) — réglé par ReportGroupMainViewController.
     var allowsMessageEdit = false
     var messageStatus: String? = nil
     
@@ -72,7 +72,7 @@ class ReportGroupChoosePageViewController:UIViewController {
 
     private func canEditMessage() -> Bool {
         let type = checkparameterType()
-        guard allowsMessageEdit, type == .message || type == .commment else { return false }
+        guard allowsMessageEdit, type == .message || type == .commment || type == .publication else { return false }
         let inactiveStatuses = ["deleted", "offensive", "offensible"]
         return !inactiveStatuses.contains((messageStatus ?? "").lowercased())
     }
@@ -158,7 +158,7 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
         case .copy:
             delegate?.copyItemText()
         case .edit:
-            delegate?.editItem(id: chatMessageId ?? 0, textString: textString)
+            delegate?.editItem(id: chatMessageId ?? postId ?? 0, textString: textString)
         }
     }
     
