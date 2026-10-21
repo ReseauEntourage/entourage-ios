@@ -403,7 +403,7 @@ struct ImpactCounterView: View {
                 .clipShape(Circle())
 
             Text(row.label)
-                .font(Font(UIFont(name: "NunitoSans-SemiBold", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .semibold)))
+                .font(Font(UIFont(name: "Quicksand-Bold", size: 14) ?? UIFont.boldSystemFont(ofSize: 14)))
                 .foregroundColor(.black)
                 .fixedSize(horizontal: false, vertical: true)
 
