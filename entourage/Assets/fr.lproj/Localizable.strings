@@ -2356,7 +2356,7 @@ Choisissez un sujet pour démarrer.";
 "event_form_link_label" = "Lien de connexion";
 "event_form_link_placeholder" = "Ex : https://zoom.us/j/…";
 "event_form_address_label" = "Adresse";
-"event_form_address_placeholder" = "Adresse, ville ou département";
+"event_form_address_placeholder" = "Ex : 12 rue de la Paix, 75002 Paris";
 "event_form_places_label" = "Nombre de places limité ?";
 "event_form_places_row" = "Places limitées";
 "event_form_places_less" = "Moins de places";

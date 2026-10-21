@@ -2312,7 +2312,7 @@ Choose a topic to get started.";
 "event_form_link_label" = "Connection link";
 "event_form_link_placeholder" = "E.g. https://zoom.us/j/…";
 "event_form_address_label" = "Address";
-"event_form_address_placeholder" = "Address, city or department";
+"event_form_address_placeholder" = "E.g. 12 rue de la Paix, 75002 Paris";
 "event_form_places_label" = "Limited number of places?";
 "event_form_places_row" = "Limited places";
 "event_form_places_less" = "Fewer places";
