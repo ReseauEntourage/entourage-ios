@@ -292,17 +292,17 @@ struct ImpactCounterView: View {
         if isMe {
             let c = counts + Array(repeating: 0, count: max(0, 4 - counts.count))
             all = [
-                ImpactRow(id: "events", count: c[0], label: "impact_row_events_me".localized, icon: "calendar"),
-                ImpactRow(id: "entraides", count: c[1], label: "impact_row_entraides_me".localized, icon: "heart.fill"),
-                ImpactRow(id: "groups", count: c[2], label: "impact_row_groups_me".localized, icon: "person.2.fill"),
-                ImpactRow(id: "exchanges", count: c[3], label: "impact_row_exchanges_me".localized, icon: "bubble.left.and.bubble.right.fill")
+                ImpactRow(id: "events", count: c[0], label: "impact_row_events_me".localized, icon: "🎉"),
+                ImpactRow(id: "entraides", count: c[1], label: "impact_row_entraides_me".localized, icon: "🤝"),
+                ImpactRow(id: "groups", count: c[2], label: "impact_row_groups_me".localized, icon: "🏘️"),
+                ImpactRow(id: "exchanges", count: c[3], label: "impact_row_exchanges_me".localized, icon: "💬")
             ]
         } else {
             let stats = user.stats
             all = [
-                ImpactRow(id: "events", count: stats?.eventsParticipatedCount ?? 0, label: "impact_row_events_other".localized, icon: "calendar"),
-                ImpactRow(id: "entraides", count: stats?.entraidesCount ?? 0, label: "impact_row_entraides_other".localized, icon: "heart.fill"),
-                ImpactRow(id: "groups", count: stats?.neighborhoodsCount ?? 0, label: "impact_row_groups_other".localized, icon: "person.2.fill")
+                ImpactRow(id: "events", count: stats?.eventsParticipatedCount ?? 0, label: "impact_row_events_other".localized, icon: "🎉"),
+                ImpactRow(id: "entraides", count: stats?.entraidesCount ?? 0, label: "impact_row_entraides_other".localized, icon: "🤝"),
+                ImpactRow(id: "groups", count: stats?.neighborhoodsCount ?? 0, label: "impact_row_groups_other".localized, icon: "🏘️")
             ]
         }
 
@@ -331,27 +331,34 @@ struct ImpactCounterView: View {
             if isMe && totalCount == 0 {
                 newMemberState
             } else {
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(spacing: 2) {
                     HStack(alignment: .lastTextBaseline, spacing: 6) {
                         Text("\(totalCount)")
-                            .font(.custom("Quicksand-Bold", size: 34))
-                            .foregroundColor(.black)
+                            .font(Font(UIFont(name: "Quicksand-Bold", size: 46) ?? UIFont.boldSystemFont(ofSize: 46)))
+                            .foregroundColor(Color(UIColor.appOrange))
                         Text((isMe ? "impact_hero_unit_me" : "impact_hero_unit_other").localized)
-                            .font(.custom("Quicksand-Bold", size: 16))
+                            .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)))
                             .foregroundColor(.black)
                     }
                     if isMe {
                         Text((rows.count <= 2 ? "impact_hero_subtitle_low" : "impact_hero_subtitle_me").localized)
-                            .font(.custom("NunitoSans-Regular", size: 13))
-                            .foregroundColor(Color(UIColor.appGris112))
+                            .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)))
+                            .foregroundColor(.black)
                     }
                 }
-                .padding(.bottom, 14)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 18)
+                .padding(.horizontal, 16)
+                .background(Color.white)
+                .cornerRadius(16)
+                .padding(.bottom, 6)
 
                 if isMe {
-                    Text("impact_detail_title".localized)
-                        .font(.custom("NunitoSans-Bold", size: 13))
-                        .foregroundColor(.black)
+                    Text("impact_detail_title".localized.uppercased())
+                        .font(Font(UIFont(name: "NunitoSans-Bold", size: 12) ?? UIFont.boldSystemFont(ofSize: 12)))
+                        .foregroundColor(Color(UIColor.appGris112))
+                        .padding(.top, 12)
+                        .padding(.leading, 4)
                         .padding(.bottom, 8)
                 }
 
@@ -388,30 +395,29 @@ struct ImpactCounterView: View {
     }
 
     private func impactRow(_ row: ImpactRow) -> some View {
-        HStack(spacing: 10) {
-            Image(systemName: row.icon)
-                .font(.system(size: 14))
-                .foregroundColor(.white)
-                .frame(width: 30, height: 30)
-                .background(Color(UIColor.appOrange))
+        HStack(spacing: 12) {
+            Text(row.icon)
+                .font(.system(size: 18))
+                .frame(width: 38, height: 38)
+                .background(Color(UIColor.appOrangeLight_50))
                 .clipShape(Circle())
 
             Text(row.label)
-                .font(.custom("NunitoSans-Regular", size: 13))
+                .font(Font(UIFont(name: "NunitoSans-SemiBold", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .semibold)))
                 .foregroundColor(.black)
                 .fixedSize(horizontal: false, vertical: true)
 
             Spacer()
 
             Text("\(row.count)")
-                .font(.custom("Quicksand-Bold", size: 16))
+                .font(Font(UIFont(name: "Quicksand-Bold", size: 20) ?? UIFont.boldSystemFont(ofSize: 20)))
                 .foregroundColor(.black)
         }
-        .padding(10)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
         .frame(maxWidth: .infinity)
         .background(Color.white)
         .cornerRadius(14)
-        .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color(UIColor.appOrangeLight), lineWidth: 1))
         .accessibilityElement(children: .combine)
     }
 }
