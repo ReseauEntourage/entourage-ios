@@ -342,7 +342,7 @@ struct ImpactCounterView: View {
                     }
                     if isMe {
                         Text((rows.count <= 2 ? "impact_hero_subtitle_low" : "impact_hero_subtitle_me").localized)
-                            .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)))
+                            .font(Font(UIFont(name: "Quicksand-Bold", size: 14) ?? UIFont.boldSystemFont(ofSize: 14)))
                             .foregroundColor(.black)
                     }
                 }
