@@ -667,6 +667,7 @@
 "neighborhood_menu_post_survey" = "Create survey";
 
 "neighborhood_add_post_title" = "Create post";
+"neighborhood_edit_post_title" = "Edit post";
 "neighborhood_add_post_message_title" = "Write your message";
 "neighborhood_add_post_message_subtitle" = "";
 "neighborhood_add_post_message_placeholder" = "Write your message…";

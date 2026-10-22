@@ -1222,23 +1222,17 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
 }
 extension NeighborhoodDetailViewController:GroupDetailDelegate{
     func editMessage(id: Int, content: String?) {
-        let plainText = (content ?? "").replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
-        let alert = UIAlertController(title: "modify".localized, message: nil, preferredStyle: .alert)
-        alert.addTextField { $0.text = plainText.trimmingCharacters(in: .whitespacesAndNewlines) }
-        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel))
-        alert.addAction(UIAlertAction(title: "validate".localized, style: .default) { [weak self, weak alert] _ in
-            guard let self = self, let text = alert?.textFields?.first?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty else { return }
-            NeighborhoodService.editComment(groupId: self.neighborhoodId, messageId: id, content: text) { [weak self] message, _ in
-                guard let self = self, var message = message else { return }
-                // Piège backend : la traduction renvoyée par le PATCH peut ne pas être encore
-                // recalculée — on affiche directement le texte qu'on vient d'envoyer.
-                message.content = text
-                message.contentHtml = text
-                self.replacePostInArray(post: message)
-                self.ui_tableview.reloadData()
-            }
-        })
-        present(alert, animated: true)
+        let post = (messagesNew + messagesOld).first(where: { $0.uid == id })
+            ?? neighborhood?.messages?.first(where: { $0.uid == id })
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController {
+            isAfterCreation = false
+            vc.neighborhoodId = self.neighborhoodId
+            vc.neighborhood = self.neighborhood
+            vc.editingPostId = id
+            vc.editingPostContentHtml = post?.contentHtml ?? post?.content ?? content
+            self.navigationController?.present(vc, animated: true)
+        }
     }
 
     func translateItem(id: Int) {

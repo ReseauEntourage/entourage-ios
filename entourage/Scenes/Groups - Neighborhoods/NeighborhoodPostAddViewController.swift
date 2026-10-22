@@ -49,6 +49,12 @@ class NeighborhoodPostAddViewController: UIViewController {
 
     var isNeighborhood = true
 
+    /// Mode édition : même écran que la création, prérempli avec la publication à modifier.
+    /// Renseigné → le bouton s'appelle « Modifier » et l'envoi fait un PATCH au lieu d'une création.
+    var editingPostId: Int? = nil
+    var editingPostContentHtml: String? = nil
+    private var isEditingPost: Bool { editingPostId != nil }
+
     var isLoading = false
 
     // MARK: - Propriétés pour la fonctionnalité de mention
@@ -81,7 +87,7 @@ class NeighborhoodPostAddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if isNeighborhood {
+        if isNeighborhood && !isEditingPost {
             setupInspirationChips()
         }
 
@@ -119,6 +125,10 @@ class NeighborhoodPostAddViewController: UIViewController {
         ui_tv_error.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegularItalic(size: 11), color: .rougeErreur))
         
         showButton(isAdd: true)
+        
+        if isEditingPost {
+            setupEditMode()
+        }
         changeButtonShare()
         
         // Intégration du delegate du UITextView pour la gestion des mentions
@@ -140,6 +150,41 @@ class NeighborhoodPostAddViewController: UIViewController {
         }
     }
     
+    // MARK: - Mode édition
+    private func setupEditMode() {
+        ui_top_view.populateView(title: "neighborhood_edit_post_title".localized,
+                                 titleFont: ApplicationTheme.getFontQuickSandBold(size: 15),
+                                 titleColor: .black,
+                                 delegate: self,
+                                 isClose: false)
+        ui_title_button_validate.text = "modify".localized
+        // L'image d'une publication n'est pas modifiable : on masque la section photo.
+        ui_image.superview?.isHidden = true
+
+        guard let html = editingPostContentHtml,
+              let data = html.data(using: .utf8),
+              let attributed = try? NSMutableAttributedString(
+                data: data,
+                options: [.documentType: NSAttributedString.DocumentType.html,
+                          .characterEncoding: String.Encoding.utf8.rawValue],
+                documentAttributes: nil) else { return }
+        let font = ApplicationTheme.getFontNunitoRegular(size: 15)
+        let fullRange = NSRange(location: 0, length: attributed.length)
+        attributed.enumerateAttributes(in: fullRange) { attrs, range, _ in
+            attributed.addAttribute(.font, value: font, range: range)
+            if attrs[.link] == nil {
+                attributed.addAttribute(.foregroundColor, value: UIColor.black, range: range)
+            }
+        }
+        // Retire le saut de ligne final ajouté par la conversion HTML
+        while attributed.length > 0, attributed.string.last?.isNewline == true {
+            attributed.deleteCharacters(in: NSRange(location: attributed.length - 1, length: 1))
+        }
+        ui_tv_message.attributedText = attributed
+        ui_tv_message.typingAttributes = [.font: font, .foregroundColor: UIColor.black]
+        textViewDidChange(ui_tv_message)
+    }
+
     // MARK: - Méthode de configuration de bouton (existant)
     func configureOrangeButton(_ button: UIButton, withTitle title: String) {
         button.setTitle(title, for: .normal)
@@ -321,6 +366,10 @@ class NeighborhoodPostAddViewController: UIViewController {
         if !isValid || isLoading { return }
         hideMentionSuggestions()
         _ = ui_tv_message.resignFirstResponder()
+        if let postId = editingPostId {
+            sendEditedPost(postId: postId)
+            return
+        }
         if currentImage == nil {
             sendMessageOnly()
         } else {
@@ -358,6 +407,24 @@ class NeighborhoodPostAddViewController: UIViewController {
         return nil
     }
     
+    // MARK: - Modification du post (PATCH)
+    func sendEditedPost(postId: Int) {
+        guard let htmlMessage = getHTMLMessage(), !htmlMessage.isEmpty else { return }
+        isLoading = true
+        SVProgressHUD.show()
+        NeighborhoodService.editComment(groupId: neighborhoodId, messageId: postId, content: htmlMessage) { [weak self] message, _ in
+            guard let self = self else { return }
+            self.isLoading = false
+            if message == nil {
+                SVProgressHUD.dismiss()
+                self.ui_view_error.isHidden = false
+            } else {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+                self.goBack()
+            }
+        }
+    }
+
     // MARK: - Envoi du post (texte seul)
     func sendMessageOnly() {
         isLoading = true

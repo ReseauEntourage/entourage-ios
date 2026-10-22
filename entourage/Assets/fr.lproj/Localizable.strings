@@ -707,6 +707,7 @@
 
 
 "neighborhood_add_post_title" = "Créer une publication";
+"neighborhood_edit_post_title" = "Modifier la publication";
 "neighborhood_add_post_message_title" = "Écrire votre message";
 "neighborhood_add_post_message_subtitle" = "";
 "neighborhood_add_post_message_placeholder" = "Écrivez votre message…";
