@@ -330,16 +330,11 @@ class ActionFormContainerViewController: FormFlowContainerViewController {
 
     private func goEnd(action: Action) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionCreateEnd), object: nil)
-        let sb = UIStoryboard(name: StoryboardName.actionCreate, bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "action_validateVC") as? ActionCreateValidateViewController {
-            vc.modalPresentationStyle = .fullScreen
-            vc.actionId = action.id
-            vc.isContrib = isContrib
-            AnalyticsLoggerManager.logEvent(name: isContrib ? Help_create_contrib_end : Help_create_demand_end)
-            let parent = parentController
-            dismiss(animated: false) {
-                parent?.present(vc, animated: true)
-            }
+        AnalyticsLoggerManager.logEvent(name: isContrib ? Help_create_contrib_end : Help_create_demand_end)
+        let isContrib = self.isContrib
+        dismiss(animated: true) {
+            SVProgressHUD.showSuccess(withStatus: (isContrib ? "contribCreateEnd_title" : "solicitationCreateEnd_title").localized)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationCreateShowNewAction), object: nil, userInfo: [kNotificationActionShowId: action.id, kNotificationActionIsContrib: isContrib])
         }
     }
 

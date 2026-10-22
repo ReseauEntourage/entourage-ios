@@ -176,10 +176,15 @@ class NeighborhoodPostAddViewController: UIViewController {
                 documentAttributes: nil) else { return }
         let font = ApplicationTheme.getFontNunitoRegular(size: 15)
         let fullRange = NSRange(location: 0, length: attributed.length)
+        // On relève d'abord les plages : modifier la chaîne pendant son énumération est indéfini.
+        var runs: [(range: NSRange, hasLink: Bool)] = []
         attributed.enumerateAttributes(in: fullRange) { attrs, range, _ in
-            attributed.addAttribute(.font, value: font, range: range)
-            if attrs[.link] == nil {
-                attributed.addAttribute(.foregroundColor, value: UIColor.black, range: range)
+            runs.append((range, attrs[.link] != nil))
+        }
+        for run in runs {
+            attributed.addAttribute(.font, value: font, range: run.range)
+            if !run.hasLink {
+                attributed.addAttribute(.foregroundColor, value: UIColor.black, range: run.range)
             }
         }
         // Retire le saut de ligne final ajouté par la conversion HTML
@@ -633,8 +638,8 @@ class NeighborhoodPostAddViewController: UIViewController {
 extension NeighborhoodPostAddViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         deselectCurrentChip()
-        let cursorPosition = textView.selectedRange.location
-        let textNSString = textView.text as NSString
+        let textNSString = (textView.text ?? "") as NSString
+        let cursorPosition = min(textView.selectedRange.location, textNSString.length)
         let textUpToCursor = textNSString.substring(to: cursorPosition)
         
         if let atIndex = textUpToCursor.lastIndex(of: "@") {

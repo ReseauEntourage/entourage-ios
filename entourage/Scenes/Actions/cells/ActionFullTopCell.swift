@@ -137,14 +137,13 @@ class ActionFullTopCell: UITableViewCell {
         
         let isTranslatedByDefault = LanguageManager.getTranslatedByDefaultValue()
 
+        // Une action tout juste créée n'a pas encore de traductions : on garde alors titre et description d'origine.
         if isTranslatedByDefault {
-            // Si l'utilisateur préfère la traduction par défaut
-            ui_title_main.text = action.titleTranslations?.translation
-            ui_description.text = action.descriptionTranslations?.translation
+            ui_title_main.text = action.titleTranslations?.translation ?? action.title
+            ui_description.text = action.descriptionTranslations?.translation ?? action.description
         } else {
-            // Sinon, afficher le texte original
-            ui_title_main.text = action.titleTranslations?.original
-            ui_description.text = action.descriptionTranslations?.original
+            ui_title_main.text = action.titleTranslations?.original ?? action.title
+            ui_description.text = action.descriptionTranslations?.original ?? action.description
         }
         
         self.action = action
