@@ -33,6 +33,13 @@ import UIKit
         }
     }
     
+    /// Pré-remplit avec un texte enrichi : sans cela `showingPlaceholder` resterait vrai,
+    /// `text` renverrait "" et le placeholder écraserait le contenu à l'affichage.
+    func setAttributedContent(_ content: NSAttributedString) {
+        showingPlaceholder = content.length == 0
+        attributedText = content
+    }
+    
     //MARK: - Overrides -
     override func didMoveToWindow() {
         super.didMoveToWindow()

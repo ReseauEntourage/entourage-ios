@@ -191,7 +191,7 @@ class NeighborhoodPostAddViewController: UIViewController {
         while attributed.length > 0, attributed.string.last?.isNewline == true {
             attributed.deleteCharacters(in: NSRange(location: attributed.length - 1, length: 1))
         }
-        ui_tv_message.attributedText = attributed
+        ui_tv_message.setAttributedContent(attributed)
         ui_tv_message.typingAttributes = [.font: font, .foregroundColor: UIColor.black]
         textViewDidChange(ui_tv_message)
     }
