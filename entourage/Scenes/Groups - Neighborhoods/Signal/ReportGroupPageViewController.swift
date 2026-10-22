@@ -93,8 +93,11 @@ extension ReportGroupPageViewController: ReportGroupPageDelegate {
     }
 
     func editItem(id: Int, textString: String?) {
-        parentDelegate?.editMessage(id: id, content: textString)
-        self.parent?.dismiss(animated: true)
+        // L'écran d'édition ne peut se présenter qu'une fois ce menu fermé.
+        let delegate = parentDelegate
+        self.parent?.dismiss(animated: true) {
+            delegate?.editMessage(id: id, content: textString)
+        }
     }
     
     func chooseReport() {
