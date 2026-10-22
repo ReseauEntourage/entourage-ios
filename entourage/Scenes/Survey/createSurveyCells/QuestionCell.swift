@@ -71,6 +71,12 @@ class QuestionCell: UITableViewCell, UITextViewDelegate {
     func configure() {
         // Configuration supplémentaire si nécessaire
     }
+
+    /// Mode édition : préremplit la question.
+    func configure(text: String) {
+        ui_text_view.text = text
+        placeholderLabel.isHidden = !text.isEmpty
+    }
     private func addToolbarToKeyboard() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()

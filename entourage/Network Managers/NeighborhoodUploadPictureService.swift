@@ -10,7 +10,7 @@ import Foundation
 struct NeighborhoodUploadPictureService {
     
     //First step Prepare
-    static func prepareUploadWith(neighborhoodId:Int, image:UIImage, message:String? , completion: @escaping (_ result: Bool)->()) {
+    static func prepareUploadWith(neighborhoodId:Int, image:UIImage, message:String? , editingPostId:Int? = nil, completion: @escaping (_ result: Bool)->()) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = API_URL_NEIGHBORHOOD_PREPARE_IMAGE_POST_UPLOAD
@@ -24,6 +24,13 @@ struct NeighborhoodUploadPictureService {
             
             uploadtoS3(urlS3: _presigneUrl, image: image, completion: {isOk in
                     if isOk {
+                        // Mode édition : PATCH du post existant (nouvelle image + texte) au lieu d'une création
+                        if let postId = editingPostId {
+                            NeighborhoodService.editComment(groupId: neighborhoodId, messageId: postId, content: message ?? "", imageKey: _uploadKey) { updated, _ in
+                                completion(updated != nil)
+                            }
+                            return
+                        }
                         postWithImageAndText(imageKey: _uploadKey, neighborhoodId: neighborhoodId, message: message, completion: {isOk in
                             completion(isOk)
                         })

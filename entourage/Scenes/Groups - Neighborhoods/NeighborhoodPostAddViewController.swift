@@ -9,6 +9,7 @@
 
 import UIKit
 import SVProgressHUD
+import SDWebImage
 
 class NeighborhoodPostAddViewController: UIViewController {
 
@@ -53,6 +54,7 @@ class NeighborhoodPostAddViewController: UIViewController {
     /// Renseigné → le bouton s'appelle « Modifier » et l'envoi fait un PATCH au lieu d'une création.
     var editingPostId: Int? = nil
     var editingPostContentHtml: String? = nil
+    var editingPostImageUrl: String? = nil
     private var isEditingPost: Bool { editingPostId != nil }
 
     var isLoading = false
@@ -158,8 +160,12 @@ class NeighborhoodPostAddViewController: UIViewController {
                                  delegate: self,
                                  isClose: false)
         ui_title_button_validate.text = "modify".localized
-        // L'image d'une publication n'est pas modifiable : on masque la section photo.
-        ui_image.superview?.isHidden = true
+        // Photo actuelle de la publication (remplaçable via le sélecteur de photo).
+        if let urlString = editingPostImageUrl, let url = URL(string: urlString) {
+            ui_image.sd_setImage(with: url)
+            ui_image.backgroundColor = .clear
+            ui_image_placeholder.isHidden = true
+        }
 
         guard let html = editingPostContentHtml,
               let data = html.data(using: .utf8),
@@ -331,7 +337,7 @@ class NeighborhoodPostAddViewController: UIViewController {
     }
     
     func changeButtonShare() {
-        if currentImage != nil || !(ui_tv_message.text?.isEmpty ?? true) {
+        if currentImage != nil || editingPostImageUrl != nil || !(ui_tv_message.text?.isEmpty ?? true) {
             ui_view_button_validate.backgroundColor = .appOrange
             isValid = true
         } else {
@@ -342,7 +348,7 @@ class NeighborhoodPostAddViewController: UIViewController {
     
     // MARK: - Actions sur l'image (ajout / suppression)
     @IBAction func action_add_or_clear(_ sender: Any) {
-        if currentImage != nil {
+        if currentImage != nil && !isEditingPost {
             currentImage = nil
             self.ui_image.image = nil
             showButton(isAdd: true)
@@ -409,9 +415,25 @@ class NeighborhoodPostAddViewController: UIViewController {
     
     // MARK: - Modification du post (PATCH)
     func sendEditedPost(postId: Int) {
-        guard let htmlMessage = getHTMLMessage(), !htmlMessage.isEmpty else { return }
+        // Texte vide autorisé seulement si la publication a (ou reçoit) une image
+        let htmlMessage = getHTMLMessage() ?? ""
+        if htmlMessage.isEmpty && currentImage == nil && editingPostImageUrl == nil { return }
         isLoading = true
         SVProgressHUD.show()
+        if let image = currentImage {
+            NeighborhoodUploadPictureService.prepareUploadWith(neighborhoodId: neighborhoodId, image: image, message: htmlMessage, editingPostId: postId) { [weak self] isOk in
+                guard let self = self else { return }
+                self.isLoading = false
+                if isOk {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+                    self.goBack()
+                } else {
+                    SVProgressHUD.dismiss()
+                    self.ui_view_error.isHidden = false
+                }
+            }
+            return
+        }
         NeighborhoodService.editComment(groupId: neighborhoodId, messageId: postId, content: htmlMessage) { [weak self] message, _ in
             guard let self = self else { return }
             self.isLoading = false

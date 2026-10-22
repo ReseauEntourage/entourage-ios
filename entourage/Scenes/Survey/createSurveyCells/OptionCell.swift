@@ -80,6 +80,16 @@ class OptionCell: UITableViewCell, UITextViewDelegate {
         placeholderLabel.isHidden = !textView.text.isEmpty
     }
     
+    /// Mode édition : affiche un choix existant, non modifiable (le back ne gère pas la
+    /// modification des choix d'un sondage déjà publié).
+    func configure(text: String, isEditable: Bool) {
+        ui_text_view.text = text
+        ui_text_view.isEditable = isEditable
+        ui_text_view.isSelectable = isEditable
+        ui_text_view.textColor = isEditable ? .black : .gray
+        placeholderLabel.isHidden = !text.isEmpty
+    }
+
     func configure(numberInList:Int) {
         self.numberInList = numberInList
         addUnderlineToTextView()

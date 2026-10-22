@@ -496,10 +496,12 @@ struct NeighborhoodService:ParsingDataCodable {
     }
     
     //MARK: - Édition
-    static func editComment(groupId: Int, messageId: Int, content: String, completion: @escaping (_ message: PostMessage?, _ error: EntourageNetworkError?) -> Void) {
+    static func editComment(groupId: Int, messageId: Int, content: String, imageKey: String? = nil, completion: @escaping (_ message: PostMessage?, _ error: EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else { return }
         let endpoint = String(format: kAPIPatchNeighborhoodPostMessage, groupId, messageId, token)
-        let parameters = ["chat_message": ["content": content]]
+        var chatMessage = ["content": content]
+        if let imageKey = imageKey { chatMessage["image_url"] = imageKey }
+        let parameters = ["chat_message": chatMessage]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
 
         NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in

@@ -1224,12 +1224,26 @@ extension NeighborhoodDetailViewController:GroupDetailDelegate{
     func editMessage(id: Int, content: String?) {
         let post = (messagesNew + messagesOld).first(where: { $0.uid == id })
             ?? neighborhood?.messages?.first(where: { $0.uid == id })
+        if let survey = post?.survey {
+            let sbSurvey = UIStoryboard.init(name: StoryboardName.survey, bundle: nil)
+            if let vc = sbSurvey.instantiateViewController(withIdentifier: "create_survey") as? CreateSurveyViewController {
+                vc.groupId = self.neighborhoodId
+                vc.delegate = self
+                vc.editingPostId = id
+                vc.editingSurvey = survey
+                vc.surveyTitle = (post?.content ?? content ?? "").replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression).trimmingCharacters(in: .whitespacesAndNewlines)
+                vc.modalPresentationStyle = .fullScreen
+                self.navigationController?.present(vc, animated: true)
+            }
+            return
+        }
         let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController {
             isAfterCreation = false
             vc.neighborhoodId = self.neighborhoodId
             vc.neighborhood = self.neighborhood
             vc.editingPostId = id
+            vc.editingPostImageUrl = post?.messageImageUrl
             vc.editingPostContentHtml = post?.contentHtml ?? post?.content ?? content
             self.navigationController?.present(vc, animated: true)
         }

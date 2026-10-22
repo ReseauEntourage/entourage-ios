@@ -43,6 +43,12 @@ class CreateSurveyViewController:UIViewController{
     var isQCM: Bool = false
     var delegate:CreateSurveyValidationDelegate? = nil
 
+    /// Mode édition : seule la question est modifiable (le back n'accepte que `content`
+    /// à l'update) ; choix et choix multiple sont affichés en lecture seule.
+    var editingPostId: Int? = nil
+    var editingSurvey: Survey? = nil
+    private var isEditingSurvey: Bool { editingPostId != nil }
+
     override func viewDidLoad() {
         self.ui_tableview.dataSource = self
         self.ui_tableview.delegate = self
@@ -53,7 +59,7 @@ class CreateSurveyViewController:UIViewController{
         ui_button_validate.addTarget(self, action: #selector(validateSurvey), for: .touchUpInside)
         ui_button_cancel.addTarget(self, action: #selector(cancelSurveyCreation), for: .touchUpInside)
         ui_back_button.isUserInteractionEnabled = true
-        configureOrangeButton(ui_button_validate, withTitle: "validate".localized)
+        configureOrangeButton(ui_button_validate, withTitle: (isEditingSurvey ? "modify" : "validate").localized)
         configureWhiteButton(ui_button_cancel, withTitle: "cancel".localized)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleBackTap))
         ui_back_button.addGestureRecognizer(tapGestureRecognizer)
@@ -95,8 +101,15 @@ class CreateSurveyViewController:UIViewController{
     private func initDTO(){
         self.tableDTO.append(.questionCell)
         self.tableDTO.append(.titleOptionCell)
-        for _ in 0...numberOfFieldFill{
-            self.tableDTO.append(.optionCell)
+        if isEditingSurvey, let survey = editingSurvey {
+            for _ in survey.choices {
+                self.tableDTO.append(.optionCell)
+            }
+            isQCM = survey.multiple
+        } else {
+            for _ in 0...numberOfFieldFill{
+                self.tableDTO.append(.optionCell)
+            }
         }
         self.tableDTO.append(.qcmCell)
         self.ui_tableview.reloadData()
@@ -126,6 +139,16 @@ class CreateSurveyViewController:UIViewController{
 
 
     @objc func validateSurvey() {
+        if let postId = editingPostId {
+            let question = surveyTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !question.isEmpty else { self.invalidDataAlert(); return }
+            NeighborhoodService.editComment(groupId: groupId, messageId: postId, content: question) { [weak self] message, _ in
+                guard let self = self, message != nil else { return }
+                self.delegate?.onSurveyCreate()
+                self.dismiss(animated: true)
+            }
+            return
+        }
         
         if(self.surveyTitle.isEmpty || self.surveyOptions[0].isEmpty){
             self.invalidDataAlert()
@@ -201,6 +224,7 @@ extension CreateSurveyViewController:UITableViewDelegate, UITableViewDataSource{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath) as? QuestionCell{
                 cell.delegate = self
                 cell.selectionStyle = .none
+                if isEditingSurvey { cell.configure(text: surveyTitle) }
                 return cell
             }
             
@@ -217,6 +241,9 @@ extension CreateSurveyViewController:UITableViewDelegate, UITableViewDataSource{
                 let optionIndex = indexPath.row - tableDTO.filter { $0 == .questionCell || $0 == .titleOptionCell }.count
                 cell.selectionStyle = .none
                 cell.configure(numberInList: optionIndex)
+                if isEditingSurvey, let choices = editingSurvey?.choices, optionIndex < choices.count {
+                    cell.configure(text: choices[optionIndex], isEditable: false)
+                }
                 cell.delegate = self
                 return cell
             }
@@ -225,7 +252,7 @@ extension CreateSurveyViewController:UITableViewDelegate, UITableViewDataSource{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "QcmCell", for: indexPath) as? QcmCell{
                 cell.delegate = self
                 cell.selectionStyle = .none
-
+                if isEditingSurvey { cell.configure(isOn: isQCM, isEnabled: false) }
                 return cell
             }
         }

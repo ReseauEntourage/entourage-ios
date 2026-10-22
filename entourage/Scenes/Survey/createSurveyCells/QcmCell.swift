@@ -36,6 +36,12 @@ class QcmCell: UITableViewCell {
         delegate?.onSwitchChanged(isQCM: uiSwitch.isOn)
     }
     
+    /// Mode édition : affiche l'état du choix multiple, non modifiable.
+    func configure(isOn: Bool, isEnabled: Bool) {
+        ui_switch.isOn = isOn
+        ui_switch.isEnabled = isEnabled
+    }
+
     func configure() {
         // Tu peux ajouter ici la configuration initiale de ta cellule si nécessaire
     }
