@@ -309,7 +309,7 @@ final class MessageActionOverlay: NSObject {
         case .report: return UIImage(named: "ic_report")
         case .suppress: return UIImage(named: "ic_supress")
         case .translate: return UIImage(named: "ic_translation")
-        case .copy: return UIImage(named: "ic_copy")
+        case .copy: return UIImage(named: "ic_copy")?.withRenderingMode(.alwaysTemplate)
         case .edit: return UIImage(named: "ic_profil_full_pen")?.withRenderingMode(.alwaysTemplate)
         }
     }
