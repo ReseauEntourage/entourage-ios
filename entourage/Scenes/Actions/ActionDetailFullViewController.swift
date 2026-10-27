@@ -78,9 +78,7 @@ class ActionDetailFullViewController: UIViewController {
     
     func getAction() {
         var _actionId = ""
-        if let action = action, action.id != 0 {
-            _actionId = action.routeId
-        } else if actionId != 0 {
+        if actionId != 0 {
             _actionId = String(actionId)
         }else if hashedActionId != "" {
             _actionId = hashedActionId

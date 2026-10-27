@@ -63,7 +63,7 @@ class EventEditMainViewController: EventFormContainerViewController {
     /// Recharge l'événement. Les valeurs de référence deviennent celles du serveur ; les
     /// modifications déjà saisies par l'organisateur sont conservées.
     private func getEvent() {
-        EventService.getEventWithId(currentEvent?.routeId ?? String(eventId)) { [weak self] event, _ in
+        EventService.getEventWithId(String(eventId)) { [weak self] event, _ in
             guard let self = self, let event = event else { return }
             self.currentEvent = event
             let fresh = EventFormValues(event: event)

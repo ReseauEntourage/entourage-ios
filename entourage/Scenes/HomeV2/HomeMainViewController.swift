@@ -110,7 +110,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         self.checkAndCreateCookieIfNotExists()
         
         if let _user = UserDefaults.currentUser {
-            UserService.getDetailsForUser(userId: _user.uuid ?? String(_user.sid)) { user, error in
+            UserService.getDetailsForUser(userId: String(_user.sid)) { user, error in
                 if error == nil {
                     UserDefaults.currentUser = user
                 }

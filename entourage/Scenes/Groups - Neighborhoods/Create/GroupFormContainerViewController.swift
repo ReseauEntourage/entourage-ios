@@ -125,7 +125,7 @@ class GroupFormContainerViewController: FormFlowContainerViewController {
     /// déjà saisies par l'admin sont conservées.
     private func getCurrentNeighborhood() {
         guard let id = neighborhoodId else { return }
-        NeighborhoodService.getNeighborhoodDetail(id: currentNeighborhood?.routeId ?? String(id)) { [weak self] group, error in
+        NeighborhoodService.getNeighborhoodDetail(id: String(id)) { [weak self] group, error in
             guard let self = self else { return }
             if error != nil || group == nil {
                 if self.currentNeighborhood == nil { self.dismiss(animated: true) }
