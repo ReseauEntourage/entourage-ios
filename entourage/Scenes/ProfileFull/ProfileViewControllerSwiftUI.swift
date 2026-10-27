@@ -375,22 +375,40 @@ struct ImpactCounterView: View {
     }
 
     private var newMemberState: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(spacing: 0) {
+            Text("🌱")
+                .font(.system(size: 36))
+                .padding(.bottom, 12)
+
+            Text("impact_new_member_title".localized)
+                .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)))
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 6)
+
             Text("impact_new_member_message".localized)
                 .font(.custom("NunitoSans-Regular", size: 14))
-                .foregroundColor(.black)
+                .foregroundColor(Color(UIColor.appGris112))
+                .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
 
             Button(action: { onDiscoverNearby?() }) {
                 Text("impact_new_member_cta".localized)
                     .font(.custom("Quicksand-Bold", size: 14))
                     .foregroundColor(.white)
-                    .padding(.horizontal, 18)
+                    .padding(.horizontal, 24)
                     .padding(.vertical, 12)
                     .background(Color(UIColor.appOrange))
                     .clipShape(Capsule())
             }
+            .padding(.top, 16)
         }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 20)
+        .padding(.horizontal, 16)
+        .background(Color.white)
+        .cornerRadius(16)
         .padding(.bottom, 6)
     }
 

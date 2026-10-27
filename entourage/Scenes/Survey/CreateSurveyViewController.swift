@@ -31,6 +31,7 @@ class CreateSurveyViewController:UIViewController{
     @IBOutlet weak var ui_button_cancel: UIButton!
     
     @IBOutlet weak var ui_back_button: UIImageView!
+    @IBOutlet weak var ui_title_label: UILabel!
     //VARIABLE
     
     
@@ -61,6 +62,7 @@ class CreateSurveyViewController:UIViewController{
         ui_back_button.isUserInteractionEnabled = true
         configureOrangeButton(ui_button_validate, withTitle: (isEditingSurvey ? "modify" : "validate").localized)
         configureWhiteButton(ui_button_cancel, withTitle: "cancel".localized)
+        if isEditingSurvey { ui_title_label.text = "neighborhood_edit_post_title".localized }
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleBackTap))
         ui_back_button.addGestureRecognizer(tapGestureRecognizer)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

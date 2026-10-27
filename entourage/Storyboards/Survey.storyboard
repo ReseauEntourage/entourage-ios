@@ -114,6 +114,7 @@
                         <outlet property="ui_back_button" destination="3cQ-95-8W2" id="EGE-4s-5T4"/>
                         <outlet property="ui_button_cancel" destination="yrL-09-1Af" id="CEg-wv-ucW"/>
                         <outlet property="ui_button_validate" destination="npP-xV-5sS" id="xfY-tE-4Mr"/>
+                        <outlet property="ui_title_label" destination="YIK-g9-Kyn" id="Tq3-Ti-9Lb"/>
                         <outlet property="ui_tableview" destination="dAg-4z-5YQ" id="bbf-Ho-k04"/>
                     </connections>
                 </viewController>
