@@ -1722,6 +1722,14 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 /* Welcome Journey */
 "home_v2_welcome_title" = "Your welcome journey";
 "home_v2_welcome_progress" = "%d out of %d step(s) completed";
+"home_v2_welcome_progress_one" = "%d step done out of %d";
+"home_v2_welcome_progress_other" = "%d steps done out of %d";
+"home_v2_welcome_more" = "More options";
+"home_v2_welcome_hide_menu" = "Hide the journey";
+"home_v2_welcome_hide_title" = "Do you want to hide the welcome journey?";
+"home_v2_welcome_hide_message" = "This action is irreversible, but you will always find these contents in your app.";
+"home_v2_welcome_hide_confirm" = "Hide";
+"home_v2_welcome_hide_cancel" = "Cancel";
 "home_v2_welcome_microcopy_0" = "Let's get started 💛";
 "home_v2_welcome_microcopy_1" = "You're off to a great start ✨";
 "home_v2_welcome_microcopy_2" = "Just one more step to join the community 🎉";
@@ -1736,9 +1744,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_webinar_btn" = "Sign up";
 "home_v2_welcome_webinar_completed_title" = "Sign up for the onboarding webinar";
 "home_v2_welcome_webinar_completed_subtitle" = "Discover the app in 45 min with our team and ask any questions.";
-"home_v2_welcome_papotages_title" = "Join a chat session";
-"home_v2_welcome_papotages_subtitle" = "Every Tuesday at 6pm, a friendly video session to chat with other members.";
-"home_v2_welcome_papotages_btn" = "Join";
+"home_v2_welcome_papotages_title" = "Join a first event";
+"home_v2_welcome_papotages_subtitle" = "A coffee, a walk, a workshop or an online chat: choose what you feel like.";
+"home_v2_welcome_papotages_btn" = "See events";
 "home_v2_welcome_papotages_completed_title" = "Join a chat session";
 "home_v2_welcome_papotages_completed_subtitle" = "Every Tuesday at 6pm, a friendly video session to chat with other members.";
 "home_v2_welcome_video_modal_title" = "Discover the Entourage spirit";

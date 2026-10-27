@@ -45,3 +45,20 @@ struct WelcomeJourneyAutoSkip {
         defaults.set(date, forKey: lastConnectionKey)
     }
 }
+
+/// « Masquer le parcours » (menu ⋯) : le backend ne porte pas d'état « masqué », l'app passe donc les étapes
+/// restantes (ce qui arrête aussi les relances) et mémorise le masquage localement, par utilisateur.
+struct WelcomeJourneyHiddenFlag {
+
+    private static func key(userId: String) -> String { "welcomeJourneyHidden_\(userId)" }
+
+    static func isHidden(userId: String?, defaults: UserDefaults = .standard) -> Bool {
+        guard let userId = userId, !userId.isEmpty else { return false }
+        return defaults.bool(forKey: key(userId: userId))
+    }
+
+    static func markHidden(userId: String?, defaults: UserDefaults = .standard) {
+        guard let userId = userId, !userId.isEmpty else { return }
+        defaults.set(true, forKey: key(userId: userId))
+    }
+}

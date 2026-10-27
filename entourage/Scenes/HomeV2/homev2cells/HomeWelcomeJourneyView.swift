@@ -8,7 +8,16 @@ enum WelcomeJourneyStepType: Equatable, CaseIterable {
     case webinar
     case papotages
 
-    /// Event renvoyé par `home/summary` quand l'étape est réellement faite.
+    /// Events renvoyés par `home/summary` quand l'étape est réellement faite. L'étape « premier événement »
+    /// accepte aussi `onboarding.outing.first_event` (inscription à n'importe quel événement hors webinaire).
+    var completedEvents: [String] {
+        switch self {
+        case .papotages: return [completedEvent, "onboarding.outing.first_event"]
+        default: return [completedEvent]
+        }
+    }
+
+    /// Event historique de l'étape (sert aussi à fabriquer l'event `..._skipped`).
     var completedEvent: String {
         switch self {
         case .video: return "onboarding.resource.welcome_watched"
@@ -64,11 +73,12 @@ class WelcomeJourneyViewModel: ObservableObject {
 
     var onStepTapped: ((WelcomeJourneyStepType) -> Void)?
     var onSkipTapped: ((WelcomeJourneyStepType) -> Void)?
+    var onHideTapped: (() -> Void)?
 
     /// Les étapes ne sont plus verrouillées : chacune est "terminée", "passée" ou "à faire"
     /// indépendamment des autres.
     static func state(of type: WelcomeJourneyStepType, events: [String]) -> WelcomeJourneyStepState {
-        if events.contains(type.completedEvent) { return .completed }
+        if type.completedEvents.contains(where: events.contains) { return .completed }
         if events.contains(type.skippedEvent) { return .skipped }
         return .active
     }
@@ -145,23 +155,30 @@ class WelcomeJourneyViewModel: ObservableObject {
         steps.filter { $0.state == .skipped }.count
     }
 
+    /// Phrase lue par VoiceOver à la place du compteur : « 1 étape faite sur 4 » (pluriel dès 2).
     var progressText: String {
-        return String(format: "home_v2_welcome_progress".localized, completedCount, steps.count)
+        let key = completedCount >= 2 ? "home_v2_welcome_progress_other" : "home_v2_welcome_progress_one"
+        return String(format: key.localized, completedCount, max(steps.count, 1))
+    }
+
+    /// Prochaine étape à faire, dans l'ordre suggéré : c'est la seule avec le bouton plein.
+    var nextStepType: WelcomeJourneyStepType? {
+        steps.first(where: { $0.state == .active })?.type
+    }
+
+    /// Étapes encore à faire (ni faites, ni passées).
+    var pendingStepTypes: [WelcomeJourneyStepType] {
+        steps.filter { $0.state == .active }.map(\.type)
     }
 
     var microcopy: String {
-        switch completedCount {
-        case 0: return "home_v2_welcome_microcopy_0".localized
-        case 1: return "home_v2_welcome_microcopy_1".localized
-        case 2: return "home_v2_welcome_microcopy_2".localized
-        case 3: return "home_v2_welcome_microcopy_3".localized
-        default: return "home_v2_welcome_microcopy_4".localized
-        }
+        (completedCount == 0 ? "home_v2_welcome_microcopy_0" : "home_v2_welcome_microcopy_1").localized
     }
 }
 
 struct HomeWelcomeJourneyView: View {
     @ObservedObject var viewModel: WelcomeJourneyViewModel
+    @State private var showHideConfirmation = false
 
     var body: some View {
         if viewModel.hideEntirely {
@@ -170,23 +187,40 @@ struct HomeWelcomeJourneyView: View {
             // Espacements réduits pour compacter la vue
             VStack(alignment: .leading, spacing: 10) {
                 // Header
-                HStack(alignment: .bottom) {
+                HStack(alignment: .center) {
                     Text("home_v2_welcome_title".localized)
                         .font(.custom("Quicksand-Bold", size: 18))
                         .foregroundColor(.black)
                     Spacer()
-                    // Affichage du texte uniquement pour le compteur
-                    Text("\(viewModel.completedCount)/\(max(viewModel.steps.count, 3))")
-                        .font(.custom("Quicksand-Bold", size: 15))
-                        .foregroundColor(Color("orange_app"))
-                        .accessibilityIdentifier("welcome_journey_counter")
+                    Menu {
+                        Button(action: { showHideConfirmation = true }) {
+                            Text("home_v2_welcome_hide_menu".localized)
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(.black)
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    }
+                    .accessibilityLabel("home_v2_welcome_more".localized)
+                    .accessibilityIdentifier("welcome_journey_more")
                 }
                 .padding(.horizontal, 16)
 
-                ProgressView(value: Double(viewModel.completedCount), total: Double(max(viewModel.steps.count, 3)))
-                    .progressViewStyle(LinearProgressViewStyle(tint: Color("orange_app")))
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 4)
+                // Progression : une barre par étape, remplie seulement quand l'étape est faite (jamais si passée)
+                HStack(spacing: 6) {
+                    ForEach(viewModel.steps.indices, id: \.self) { index in
+                        Capsule()
+                            .fill(viewModel.steps[index].state == .completed ? Color("orange_app") : Color("orange_light_a50").opacity(0.5))
+                            .frame(height: 6)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 4)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(viewModel.progressText)
+                .accessibilityIdentifier("welcome_journey_progress")
 
                 if viewModel.isFullyCompleted {
                     // Success Layout
@@ -220,6 +254,7 @@ struct HomeWelcomeJourneyView: View {
                             let step = viewModel.steps[index]
                             WelcomeJourneyStepView(
                                 step: step,
+                                isNextStep: step.type == viewModel.nextStepType,
                                 onTap: { viewModel.onStepTapped?(step.type) },
                                 onSkip: { viewModel.onSkipTapped?(step.type) }
                             )
@@ -232,12 +267,23 @@ struct HomeWelcomeJourneyView: View {
             .padding(.top, 32)
             .background(Color("white_orange_home")) // matches the table view background
             .fixedSize(horizontal: false, vertical: true)
+            .sheet(isPresented: $showHideConfirmation) {
+                WelcomeJourneyHideSheet(
+                    onConfirm: {
+                        showHideConfirmation = false
+                        viewModel.onHideTapped?()
+                    },
+                    onCancel: { showHideConfirmation = false }
+                )
+            }
         }
     }
 }
 
 struct WelcomeJourneyStepView: View {
     let step: WelcomeJourneyStep
+    /// Seule la prochaine étape à faire a le bouton plein ; les autres ont un bouton en contour.
+    var isNextStep: Bool = true
     let onTap: () -> Void
     let onSkip: () -> Void
 
@@ -291,7 +337,7 @@ struct WelcomeJourneyStepView: View {
             }
             .contentShape(Rectangle())
             .onTapGesture {
-                if step.state == .active { onTap() }
+                if step.state != .completed { onTap() }
             }
 
             // CTA + "Passer" (uniquement si l'étape est à faire)
@@ -299,10 +345,14 @@ struct WelcomeJourneyStepView: View {
                 Button(action: onTap) {
                     Text(step.buttonTitle)
                         .font(.custom("Quicksand-Bold", size: 14))
-                        .foregroundColor(.white)
+                        .foregroundColor(isNextStep ? .white : Color("orange_app"))
                         .frame(maxWidth: .infinity, minHeight: 44)
-                        .background(Color("orange_app"))
+                        .background(isNextStep ? Color("orange_app") : Color.white)
                         .cornerRadius(32)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 32)
+                                .stroke(Color("orange_app"), lineWidth: isNextStep ? 0 : 2)
+                        )
                 }
                 .buttonStyle(PlainButtonStyle())
                 .padding(.top, 8)
@@ -409,6 +459,69 @@ struct WelcomeJourneyStepView: View {
                 .padding(.vertical, 4)
                 .background(Color("orange_light_a50").opacity(0.3))
                 .cornerRadius(12)
+        }
+    }
+}
+
+/// Bottom sheet de confirmation avant de masquer le parcours de bienvenue.
+struct WelcomeJourneyHideSheet: View {
+    let onConfirm: () -> Void
+    let onCancel: () -> Void
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("home_v2_welcome_hide_title".localized)
+                .font(.custom("Quicksand-Bold", size: 18))
+                .foregroundColor(.black)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, 28)
+
+            Text("home_v2_welcome_hide_message".localized)
+                .font(.custom("NunitoSans-Regular", size: 14))
+                .foregroundColor(Color.gray)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Button(action: onConfirm) {
+                Text("home_v2_welcome_hide_confirm".localized)
+                    .font(.custom("Quicksand-Bold", size: 14))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, minHeight: 48)
+                    .background(Color("orange_app"))
+                    .cornerRadius(32)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .accessibilityIdentifier("welcome_journey_hide_confirm")
+
+            Button(action: onCancel) {
+                Text("home_v2_welcome_hide_cancel".localized)
+                    .font(.custom("Quicksand-Bold", size: 14))
+                    .foregroundColor(Color("orange_app"))
+                    .frame(maxWidth: .infinity, minHeight: 48)
+                    .background(Color.white)
+                    .cornerRadius(32)
+                    .overlay(RoundedRectangle(cornerRadius: 32).stroke(Color("orange_app"), lineWidth: 2))
+            }
+            .buttonStyle(PlainButtonStyle())
+            .accessibilityIdentifier("welcome_journey_hide_cancel")
+
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 24)
+        .padding(.bottom, 16)
+        .background(Color.white.edgesIgnoringSafeArea(.all))
+        .modifier(WelcomeJourneyHideSheetDetents())
+    }
+}
+
+/// Hauteur de la bottom sheet (iOS 16+) ; sur iOS 14-15 la sheet reste pleine hauteur.
+private struct WelcomeJourneyHideSheetDetents: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 16.0, *) {
+            content.presentationDetents([.height(340)])
+        } else {
+            content
         }
     }
 }

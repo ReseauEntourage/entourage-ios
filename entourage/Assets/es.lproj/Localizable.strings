@@ -3204,6 +3204,14 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 /* Welcome Journey */
 "home_v2_welcome_title" = "Su viaje de bienvenida";
 "home_v2_welcome_progress" = "%d out of %d step(s) completed";
+"home_v2_welcome_progress_one" = "%d paso completado de %d";
+"home_v2_welcome_progress_other" = "%d pasos completados de %d";
+"home_v2_welcome_more" = "Más opciones";
+"home_v2_welcome_hide_menu" = "Ocultar el recorrido";
+"home_v2_welcome_hide_title" = "¿Quieres ocultar el recorrido de bienvenida?";
+"home_v2_welcome_hide_message" = "Esta acción es irreversible, pero siempre podrás encontrar estos contenidos en tu aplicación.";
+"home_v2_welcome_hide_confirm" = "Ocultar";
+"home_v2_welcome_hide_cancel" = "Cancelar";
 "home_v2_welcome_microcopy_0" = "Comencemos 💛";
 "home_v2_welcome_microcopy_1" = "Has tenido un gran comienzo ✨";
 "home_v2_welcome_microcopy_2" = "Sólo un paso más para unirte a la comunidad 🎉";
@@ -3218,9 +3226,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_welcome_webinar_btn" = "Inscribirse";
 "home_v2_welcome_webinar_completed_title" = "Inscríbete en el seminario web";
 "home_v2_welcome_webinar_completed_subtitle" = "Descubre la app en 45 min con nuestro equipo y haz todas tus preguntas.";
-"home_v2_welcome_papotages_title" = "Únete a una sesión de charla";
-"home_v2_welcome_papotages_subtitle" = "Cada martes a las 18h, una agradable sesión de vídeo para charlar.";
-"home_v2_welcome_papotages_btn" = "Unirse";
+"home_v2_welcome_papotages_title" = "Participa en un primer evento";
+"home_v2_welcome_papotages_subtitle" = "Un café, un paseo, un taller o una charla en línea: elige lo que más te apetezca.";
+"home_v2_welcome_papotages_btn" = "Ver los eventos";
 "home_v2_welcome_papotages_completed_title" = "Únete a una sesión de charla";
 "home_v2_welcome_papotages_completed_subtitle" = "Cada martes a las 18h, una agradable sesión de vídeo para charlar.";
 "home_v2_welcome_video_modal_title" = "Descubre el espíritu Entourage";

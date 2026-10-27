@@ -26,7 +26,9 @@ struct WelcomeJourneyScreen {
     func skipButton(_ step: Step) -> XCUIElement { app.buttons["welcome_step_\(step.rawValue)_skip"] }
     func redoButton(_ step: Step) -> XCUIElement { app.buttons["welcome_step_\(step.rawValue)_redo"] }
 
-    var counter: XCUIElement { element("welcome_journey_counter") }
+    /// Barres de progression (une par étape) : le label est lu par VoiceOver, ex. « 1 étape faite sur 4 ».
+    var progress: XCUIElement { element("welcome_journey_progress") }
+    var moreButton: XCUIElement { app.buttons["welcome_journey_more"] }
     var successBanner: XCUIElement { element("welcome_journey_success") }
 
     // MARK: - Lecture

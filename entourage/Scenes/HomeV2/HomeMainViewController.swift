@@ -493,7 +493,8 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
         let isUserProOrTeam = (UserDefaults.currentUser?.partner != nil)
 
-        if !welcomeJourneyVM.hideEntirely && !isUserProOrTeam {
+        let isHiddenByUser = WelcomeJourneyHiddenFlag.isHidden(userId: UserDefaults.currentUser?.uuid)
+        if !welcomeJourneyVM.hideEntirely && !isUserProOrTeam && !isHiddenByUser {
             tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
 
             if welcomeJourneyVM.isFullyCompleted && !hasShownCelebration {
@@ -657,6 +658,9 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                 viewModel.onSkipTapped = { [weak self] stepType in
                     self?.handleWelcomeJourneySkip(stepType)
                 }
+                viewModel.onHideTapped = { [weak self, weak viewModel] in
+                    self?.handleWelcomeJourneyHide(pending: viewModel?.pendingStepTypes ?? [])
+                }
                 cell.configure(viewModel: viewModel, parentViewController: self)
                 return cell
             }
@@ -735,6 +739,20 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    /// « Masquer le parcours » confirmé : le parcours disparaît tout de suite et pour de bon (mémorisé localement),
+    /// et les étapes restantes sont passées côté backend pour couper les relances.
+    private func handleWelcomeJourneyHide(pending: [WelcomeJourneyStepType]) {
+        #if DEBUG
+        WelcomeJourneyDebugModel.shared.log("Masquer le parcours → passe \(pending.map(\.identifier).joined(separator: ","))")
+        #endif
+        WelcomeJourneyHiddenFlag.markHidden(userId: UserDefaults.currentUser?.uuid)
+        configureDTO()
+
+        for type in pending {
+            HomeService.postOnboardingStepSkipped(step: type.skipApiStep) { _ in }
+        }
+    }
+
     private func handleWelcomeJourneyStep(_ stepType: WelcomeJourneyStepType) {
         #if DEBUG
         WelcomeJourneyDebugModel.shared.log("Tap étape → \(stepType.identifier)")
@@ -766,11 +784,8 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
             self.present(vc, animated: true)
 
         case .papotages:
-            let vc = WelcomeEventsListViewController()
-            vc.eventType = .papotages
-            vc.modalPresentationStyle = .fullScreen
-            vc.onDismiss = { [weak self] in self?.initHome() }
-            self.present(vc, animated: true)
+            // Étape « premier événement » : page événements classique, sans filtre.
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventShowDiscover), object: nil)
         }
     }
 

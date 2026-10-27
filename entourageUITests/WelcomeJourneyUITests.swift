@@ -24,7 +24,7 @@ final class WelcomeJourneyUITests: UITestCase {
         .video: "GET resources/welcome",
         .national: "GET neighborhoods/national",
         .webinar: "GET outings/firsts_steps",
-        .papotages: "GET outings/papotages"
+        .papotages: "GET outings"
     ]
 
     // MARK: - Affichage
@@ -54,7 +54,7 @@ final class WelcomeJourneyUITests: UITestCase {
         XCTAssertEqual(journey.state(of: .national), .skipped)
         XCTAssertEqual(journey.state(of: .webinar), .todo)
         XCTAssertEqual(journey.state(of: .papotages), .todo)
-        XCTAssertEqual(journey.counter.label, "1/4", "Seule l'étape réellement faite compte dans la progression")
+        XCTAssertEqual(journey.progress.label, "1 étape faite sur 4", "Seule l'étape réellement faite compte dans la progression")
         XCTAssertTrue(journey.redoButton(.national).exists, "« Découvrir cette étape » attendu sur l'étape passée")
         XCTAssertFalse(journey.skipButton(.video).exists, "Pas de « Passer » sur une étape terminée")
         screenshot("Une étape faite, une passée")
@@ -85,7 +85,7 @@ final class WelcomeJourneyUITests: UITestCase {
         // Ce qui est affiché
         XCTAssertTrue(journey.redoButton(step).exists, file: file, line: line)
         XCTAssertFalse(journey.skipButton(step).exists, "Plus de « Passer » une fois l'étape passée", file: file, line: line)
-        XCTAssertEqual(journey.counter.label, "0/4", "Passer une étape ne la compte pas comme terminée", file: file, line: line)
+        XCTAssertEqual(journey.progress.label, "0 étape faite sur 4", "Passer une étape ne la compte pas comme terminée", file: file, line: line)
         for other in WelcomeJourneyScreen.Step.allCases where other != step {
             XCTAssertEqual(journey.state(of: other), .todo, "\(other) ne doit pas être impactée", file: file, line: line)
         }
@@ -133,6 +133,33 @@ final class WelcomeJourneyUITests: UITestCase {
         screenshot("Parcours terminé")
     }
 
+    // MARK: - Masquer le parcours (menu ⋯)
+
+    func testHidingTheJourneyRemovesItAndSkipsRemainingSteps() {
+        launchApp(events: ["onboarding.resource.welcome_watched"])
+        XCTAssertTrue(journey.waitUntilVisible())
+
+        step("Ouvrir le menu ⋯ puis « Masquer le parcours »") {
+            journey.scrollTo(journey.moreButton)
+            journey.moreButton.tap()
+            app.buttons["Masquer le parcours"].tap()
+        }
+        step("Confirmer dans la bottom sheet") {
+            let confirm = app.buttons["welcome_journey_hide_confirm"]
+            XCTAssertTrue(confirm.waitForExistence(timeout: 5))
+            screenshot("Bottom sheet de confirmation")
+            confirm.tap()
+        }
+
+        let gone = NSPredicate(format: "exists == false")
+        wait(for: [expectation(for: gone, evaluatedWith: journey.card(.national))], timeout: 10)
+        XCTAssertFalse(journey.successBanner.exists)
+        // Les étapes restantes sont passées côté backend (la vidéo, déjà faite, ne l'est pas).
+        XCTAssertEqual(requests(matching: skipRoute).compactMap { $0.body["step"] as? String }.sorted(),
+                       ["neighborhood_national", "papotages", "webinar_or_first_steps"])
+        screenshot("Parcours masqué")
+    }
+
     // MARK: - Clics et vues : chaque étape ouvre le bon écran / appelle le bon endpoint
 
     func testTapVideoStepOpensWelcomeVideo() { assertOpening(.video) }
@@ -153,7 +180,8 @@ final class WelcomeJourneyUITests: UITestCase {
         // Ouvrir une étape ne la saute ni ne la termine.
         XCTAssertTrue(requests(matching: skipRoute).isEmpty, "Ouvrir une étape ne doit pas la passer", file: file, line: line)
         // Et un seul endpoint d'étape est appelé : pas de fuite vers une autre étape.
-        let otherRoutes = routeOpenedByStep.filter { $0.key != step }.map(\.value)
+        // (« GET outings » de l'onglet événements est un préfixe des routes webinaire : on ne le contrôle pas ici.)
+        let otherRoutes = routeOpenedByStep.filter { $0.key != step && $0.key != .papotages }.map(\.value)
         for route in otherRoutes {
             XCTAssertTrue(requests(matching: route).isEmpty, "\(route) ne devrait pas être appelé en ouvrant \(step)", file: file, line: line)
         }
@@ -178,7 +206,7 @@ final class WelcomeJourneyUITests: UITestCase {
         XCTAssertNotNil(waitForRequest("POST resources/4242/users"))
         XCTAssertTrue(journey.waitUntilVisible())
         XCTAssertTrue(journey.waitForState(.done, of: .video, timeout: 15))
-        XCTAssertEqual(journey.counter.label, "1/4")
+        XCTAssertEqual(journey.progress.label, "1 étape faite sur 4")
         XCTAssertTrue(requests(matching: skipRoute).isEmpty)
         screenshot("Vidéo terminée")
     }
@@ -189,7 +217,7 @@ final class WelcomeJourneyUITests: UITestCase {
         journey.scrollTo(journey.redoButton(.papotages))
 
         step("Découvrir cette étape (papotages)") { journey.redoButton(.papotages).tap() }
-        XCTAssertNotNil(waitForRequest("GET outings/papotages"))
+        XCTAssertNotNil(waitForRequest("GET outings"))
         XCTAssertTrue(requests(matching: skipRoute).isEmpty)
     }
 
