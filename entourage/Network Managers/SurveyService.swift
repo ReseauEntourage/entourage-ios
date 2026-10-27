@@ -81,7 +81,7 @@ struct SurveyService {
         
         NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: headers, body: requestBody) { data, resp, error in
             let isSuccess = data != nil && error == nil && (resp as? HTTPURLResponse)!.statusCode < 300
-            DispatchQueue.main.async { completion(isSuccess) }
+            DispatchQueue.main.async { if isSuccess { AppReviewManager.shared.recordPositiveAction() }; completion(isSuccess) }
         }
     }
 
@@ -160,7 +160,7 @@ struct SurveyService {
         
         NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: headers, body: requestBody) { data, resp, error in
             let isSuccess = data != nil && error == nil && (resp as? HTTPURLResponse)!.statusCode < 300
-            DispatchQueue.main.async { completion(isSuccess) }
+            DispatchQueue.main.async { if isSuccess { AppReviewManager.shared.recordPositiveAction() }; completion(isSuccess) }
         }
     }
 

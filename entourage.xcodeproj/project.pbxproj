@@ -296,6 +296,7 @@
 		02DB43BF2967366B003C4FF8 /* ProfileEditPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB43BE2967366B003C4FF8 /* ProfileEditPasswordViewController.swift */; };
 		02DDF1D727D9117700EE22DE /* ProgressRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDF1D627D9117700EE22DE /* ProgressRadiusView.swift */; };
 		02E0098927E33DD200BB23CA /* WebLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E0098827E33DD200BB23CA /* WebLinkManager.swift */; };
+		A1B2C3D4E5F60718293A4B5D /* AppReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* AppReviewManager.swift */; };
 		02E0098C27E37B1100BB23CA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 02E0098B27E37B1100BB23CA /* FirebaseAnalytics */; };
 		02E0098E27E37B1100BB23CA /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 02E0098D27E37B1100BB23CA /* FirebaseCrashlytics */; };
 		02E0099027E37B1100BB23CA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 02E0098F27E37B1100BB23CA /* FirebaseMessaging */; };
@@ -1009,6 +1010,7 @@
 		02DB43BE2967366B003C4FF8 /* ProfileEditPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditPasswordViewController.swift; sourceTree = "<group>"; };
 		02DDF1D627D9117700EE22DE /* ProgressRadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRadiusView.swift; sourceTree = "<group>"; };
 		02E0098827E33DD200BB23CA /* WebLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLinkManager.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5C /* AppReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewManager.swift; sourceTree = "<group>"; };
 		02E0099427E3863D00BB23CA /* MenuItemInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemInfos.swift; sourceTree = "<group>"; };
 		02E0EF9F28783900009B2C65 /* EventDetailFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailFeedViewController.swift; sourceTree = "<group>"; };
 		02E0EFA128787082009B2C65 /* EventDetailTopFullCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailTopFullCell.swift; sourceTree = "<group>"; };
@@ -1569,6 +1571,7 @@
 				022744752795D1D8005600A1 /* NotificationManager.swift */,
 				021F084E2798113D00F32A34 /* LocationManager.swift */,
 				02E0098827E33DD200BB23CA /* WebLinkManager.swift */,
+				A1B2C3D4E5F60718293A4B5C /* AppReviewManager.swift */,
 				022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */,
 				2684542B29DAC63700C944EA /* UniversalLinkManager.swift */,
 				2619CCF82AE94E5F00276D67 /* LanguageManager.swift */,
@@ -3549,6 +3552,7 @@
 				021FD963287442C700D3AA54 /* NeighborhoodListEventsViewController.swift in Sources */,
 				0208B0CB289D2EAB009A7A58 /* ActionFullAuthorCell.swift in Sources */,
 				02E0098927E33DD200BB23CA /* WebLinkManager.swift in Sources */,
+				A1B2C3D4E5F60718293A4B5D /* AppReviewManager.swift in Sources */,
 				026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */,
 				2674FEC32ACDA5800013D674 /* HomeNeedHelpCell.swift in Sources */,
 				26C1BB662A3AF0D100C81C09 /* WelcomeFourImageCell.swift in Sources */,

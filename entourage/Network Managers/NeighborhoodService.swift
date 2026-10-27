@@ -407,7 +407,7 @@ struct NeighborhoodService:ParsingDataCodable {
                 return
             }
             
-            DispatchQueue.main.async { completion(nil) }
+            DispatchQueue.main.async { AppReviewManager.shared.recordPositiveAction(); completion(nil) }
         }
     }
     
@@ -491,7 +491,7 @@ struct NeighborhoodService:ParsingDataCodable {
                 return
             }
             
-            DispatchQueue.main.async { completion(nil) }
+            DispatchQueue.main.async { AppReviewManager.shared.recordPositiveAction(); completion(nil) }
         }
     }
     
@@ -529,7 +529,7 @@ struct NeighborhoodService:ParsingDataCodable {
                 DispatchQueue.main.async { completion(error) }
                 return
             }
-            DispatchQueue.main.async { completion(nil) }
+            DispatchQueue.main.async { AppReviewManager.shared.recordPositiveAction(); completion(nil) }
         }
     }
 
