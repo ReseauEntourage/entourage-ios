@@ -48,7 +48,7 @@ struct ActionsService:ParsingDataCodable {
                 let key = isContrib ? _contribution : _solicitation
                 let action: Action? = self.parseData(data: data, key: key)
                 Logger.print("Action créée : \(action)")
-                DispatchQueue.main.async { AppReviewManager.shared.recordPositiveAction(); completion(action, nil) }
+                DispatchQueue.main.async { completion(action, nil) }
             }
         } catch {
             Logger.print("Erreur de sérialisation JSON : \(error)")
@@ -135,7 +135,7 @@ struct ActionsService:ParsingDataCodable {
                 }
                 let key = isContrib ? _contribution : _solicitation
                 let action: Action? = self.parseData(data: data, key: key)
-                DispatchQueue.main.async { if isClosedOk { AppReviewManager.shared.recordPositiveAction() }; completion(action, nil) }
+                DispatchQueue.main.async { completion(action, nil) }
             }
         } catch {
             Logger.print("Error serializing parameters: \(error)")

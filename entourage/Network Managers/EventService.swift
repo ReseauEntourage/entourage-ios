@@ -65,7 +65,7 @@ struct EventService:ParsingDataCodable {
             }
             
             let event:Event? = self.parseData(data: data,key: "outing")
-            DispatchQueue.main.async { AppReviewManager.shared.recordPositiveAction(); completion(event, nil) }
+            DispatchQueue.main.async { completion(event, nil) }
         }
     }
     
@@ -325,7 +325,7 @@ struct EventService:ParsingDataCodable {
             }
             
             let user:MemberLight? = self.parseData(data: data,key: "user")
-            DispatchQueue.main.async { AppReviewManager.shared.recordPositiveAction(); completion(user, nil) }
+            DispatchQueue.main.async { completion(user, nil) }
         }
     }
     
@@ -501,7 +501,7 @@ struct EventService:ParsingDataCodable {
                 return
             }
             
-            DispatchQueue.main.async { AppReviewManager.shared.recordPositiveAction(); completion(nil) }
+            DispatchQueue.main.async { completion(nil) }
         }
     }
     
@@ -584,7 +584,7 @@ struct EventService:ParsingDataCodable {
                 return
             }
             
-            DispatchQueue.main.async { AppReviewManager.shared.recordPositiveAction(); completion(nil) }
+            DispatchQueue.main.async { completion(nil) }
         }
     }
     
@@ -603,7 +603,7 @@ struct EventService:ParsingDataCodable {
                 DispatchQueue.main.async { completion(error) }
                 return
             }
-            DispatchQueue.main.async { AppReviewManager.shared.recordPositiveAction(); completion(nil) }
+            DispatchQueue.main.async { completion(nil) }
         }
     }
 
