@@ -103,6 +103,10 @@ class EventCreateMainViewController: EventFormContainerViewController {
 
     private func goEnd(event: Event) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
+        if sourceEvent != nil {
+            showDuplicatedEvent(event)
+            return
+        }
         if let vc = storyboard?.instantiateViewController(withIdentifier: "event_validateVC") as? EventCreateValidateViewController {
             AnalyticsLoggerManager.logEvent(name: Event_create_end)
             vc.modalPresentationStyle = .fullScreen
@@ -110,6 +114,27 @@ class EventCreateMainViewController: EventFormContainerViewController {
             self.dismiss(animated: false) {
                 self.parentController?.present(vc, animated: true)
             }
+        }
+    }
+
+    /// Duplication : le formulaire est ouvert au-dessus des paramètres de l'événement d'origine
+    /// (lui-même au-dessus de sa page). On ferme toute la pile puis on ouvre la page du nouvel événement.
+    private func showDuplicatedEvent(_ event: Event) {
+        AnalyticsLoggerManager.logEvent(name: Event_create_end)
+        guard let navVc = UIStoryboard(name: StoryboardName.event, bundle: nil)
+                .instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController,
+              let vc = navVc.topViewController as? EventDetailFeedViewController else {
+            dismiss(animated: true)
+            return
+        }
+        vc.eventId = event.uid
+        vc.isAfterCreation = true
+        navVc.modalPresentationStyle = .fullScreen
+
+        var root: UIViewController = self
+        while let presenting = root.presentingViewController { root = presenting }
+        root.dismiss(animated: false) {
+            root.present(navVc, animated: true)
         }
     }
 }
