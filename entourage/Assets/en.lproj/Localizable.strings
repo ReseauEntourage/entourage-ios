@@ -1218,6 +1218,8 @@
 //"//detail my actions" = "nan";
 "action_your" = "Your action";
 "actions_my_title" = "My listings";
+"action_myActions_empty_title" = "You haven’t published any listing yet";
+"action_myActions_empty_subtitle" = "You can create a contribution or a request by tapping the “+” on the “Mutual aid” page";
 "action_detail_title_location" = "Location";
 "atKm" = "%.4g km from me";
 "AtKm" = "%.4g km from me";

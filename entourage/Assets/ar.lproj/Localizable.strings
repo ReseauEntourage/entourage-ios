@@ -1177,6 +1177,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 //detail my actions
 "action_your" = "عملك";
 "actions_my_title" = "إعلاناتي";
+"action_myActions_empty_title" = "لم تنشر أي إعلان";
+"action_myActions_empty_subtitle" = "يمكنك إنشاء مساهمة أو طلب بالضغط على «+» في صفحة «المساعدة المتبادلة»";
 "action_detail_title_location" = "موقع";
 "atKm" = "%4 جرام كيلومتر مني";
 "AtKm" = "على بعد %.4 جرام مني";

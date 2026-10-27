@@ -1182,6 +1182,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 //detail my actions
 "action_your" = "Tu acción";
 "actions_my_title" = "Mis anuncios";
+"action_myActions_empty_title" = "No ha publicado ningún anuncio";
+"action_myActions_empty_subtitle" = "Puede crear una contribución o una solicitud pulsando el «+» de la página «Ayuda mutua»";
 "action_detail_title_location" = "Ubicación";
 "atKm" = "%.4g km de mí";
 "AtKm" = "%.4g km de mí";

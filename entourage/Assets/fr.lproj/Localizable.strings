@@ -1268,6 +1268,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 //detail my actions
 "action_your" = "Votre action";
 "actions_my_title" = "Mes annonces";
+"action_myActions_empty_title" = "Vous n’avez publié aucune annonce";
+"action_myActions_empty_subtitle" = "Vous pouvez créer une contribution ou une demande en cliquant sur le « + » de la page « Entraide »";
 "action_detail_title_location" = "Localisation";
 "atKm" = "à %.4g km de moi";
 "AtKm" = "À %.4g km de moi";
