@@ -136,3 +136,8 @@ struct ActionMetadata:Codable {
         case displayAddress = "display_address"
     }
 }
+
+extension Action {
+    /// Identifiant utilisé dans les routes API : l'uuid_v2 (difficile à deviner), sinon l'id numérique (EN-9257).
+    var routeId: String { uuid_v2.isEmpty ? String(id) : uuid_v2 }
+}

@@ -942,3 +942,8 @@ class TagsUtils {
         }
     }
 }
+
+extension Event {
+    /// Identifiant utilisé dans les routes API : l'uuid_v2 (difficile à deviner), sinon l'id numérique (EN-9257).
+    var routeId: String { uuid_v2.isEmpty ? String(uid) : uuid_v2 }
+}

@@ -550,13 +550,13 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
                     return
                 }
 
-                guard let sid = UserDefaults.currentUser?.sid else {
+                guard let currentUser = UserDefaults.currentUser else {
                     self.updateNextButtonEnabled(true)
                     self.routeNextStep()
                     return
                 }
 
-                UserService.getDetailsForUser(userId: String(sid)) { [weak self] user, _ in
+                UserService.getDetailsForUser(userId: currentUser.uuid ?? String(currentUser.sid)) { [weak self] user, _ in
                     guard let self = self else { return }
 
                     if let user = user {

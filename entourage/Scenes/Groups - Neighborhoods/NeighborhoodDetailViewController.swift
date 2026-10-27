@@ -275,7 +275,9 @@ class NeighborhoodDetailViewController: UIViewController {
         self.currentPagingPage = 1
         self.isLoading = true
         var groupId = ""
-        if neighborhoodId != 0 {
+        if let neighborhood = neighborhood, neighborhood.uid != 0 {
+            groupId = neighborhood.routeId
+        } else if neighborhoodId != 0 {
             groupId = String(neighborhoodId)
         } else if !hashedNeighborhoodId.isEmpty {
             groupId = hashedNeighborhoodId
