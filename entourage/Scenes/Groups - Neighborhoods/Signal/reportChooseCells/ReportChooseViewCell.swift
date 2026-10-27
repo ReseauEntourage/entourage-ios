@@ -85,11 +85,15 @@ class ReportChooseViewCell:UITableViewCell {
             ui_subtitle?.text = "copy_the_text_explanation".localized
         case .edit:
             // L'icône source a un trait blanc (prévue pour un fond coloré) : on la force en
-            // template pour la teinter en orange, cohérent avec les autres lignes du menu.
+            // template pour la teinter (couleur appliquée plus bas pour toutes les lignes).
             ui_image?.image = UIImage(named: "ic_profil_full_pen")?.withRenderingMode(.alwaysTemplate)
-            ui_image?.tintColor = .appOrange
             ui_title?.text = "modify".localized
             ui_subtitle?.text = "edit_message_cell_subtitle".localized
         }
+        // Menu d'options : tout en noir, sauf « Supprimer » en orange.
+        let color: UIColor = (type == .suppress) ? .appOrange : .black
+        ui_image?.image = ui_image?.image?.withRenderingMode(.alwaysTemplate)
+        ui_image?.tintColor = color
+        ui_title?.textColor = color
     }
 }

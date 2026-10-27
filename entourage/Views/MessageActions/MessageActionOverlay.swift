@@ -240,7 +240,7 @@ final class MessageActionOverlay: NSObject {
         let button = UIButton(type: .system)
         button.tag = tag(for: type)
         var color: UIColor = .black
-        if case .edit = type { color = .appOrange }
+        if case .suppress = type { color = .appOrange }
 
         // Icône et libellé posés manuellement (taille fixe) plutôt que via
         // setImage/setTitle : les assets ic_report/ic_supress/... ont des tailles
@@ -306,9 +306,9 @@ final class MessageActionOverlay: NSObject {
     /// utilisé par d'autres écrans de signalement hors périmètre).
     private static func icon(for type: ReportCellType) -> UIImage? {
         switch type {
-        case .report: return UIImage(named: "ic_report")
-        case .suppress: return UIImage(named: "ic_supress")
-        case .translate: return UIImage(named: "ic_translation")
+        case .report: return UIImage(named: "ic_report")?.withRenderingMode(.alwaysTemplate)
+        case .suppress: return UIImage(named: "ic_supress")?.withRenderingMode(.alwaysTemplate)
+        case .translate: return UIImage(named: "ic_translation")?.withRenderingMode(.alwaysTemplate)
         case .copy: return UIImage(named: "ic_copy")?.withRenderingMode(.alwaysTemplate)
         case .edit: return UIImage(named: "ic_profil_full_pen")?.withRenderingMode(.alwaysTemplate)
         }
