@@ -13,7 +13,7 @@ struct BadgesSectionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("badges_section_title".localized)
+                Text((isMe ? "badges_section_title" : "badges_section_title_other").localized)
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 16) ?? .systemFont(ofSize: 16, weight: .bold)))
                     .foregroundColor(.black)
 

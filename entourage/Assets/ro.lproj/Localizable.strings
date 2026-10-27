@@ -1745,6 +1745,7 @@ Alegeți un subiect pentru a începe.";
 
 // Badges
 "badges_section_title" = "Insignele mele";
+"badges_section_title_other" = "Insignele lor";
 "badges_see_all" = "Vezi tot";
 "badges_none_yet" = "Nicio insignă obținută încă.";
 "badges_list_title" = "Insignele mele";
@@ -1926,10 +1927,11 @@ Alegeți un subiect pentru a începe.";
 "impact_row_groups_me" = "J'ai animé mes groupes de voisins";
 "impact_row_exchanges_me" = "J'ai échangé avec d'autres membres";
 "impact_detail_title" = "Ce que j'ai fait";
+"impact_detail_title_other" = "Ce que %@ a fait";
 "impact_new_member_title" = "Bienvenue ! Votre histoire commence ici.";
 "impact_new_member_message" = "Dès votre première action — un bonjour, un café, un événement — elle apparaîtra ici. Même les petits gestes comptent.";
-"impact_new_member_cta" = "Découvrir près de chez moi";
+"impact_new_member_cta" = "Découvrir les événements";
 "member_since_recent_format" = "Membre depuis %@";
-"member_since_months_format" = "Membre depuis %d mois, %@";
-"member_since_year_format" = "Membre depuis %d an, %@";
-"member_since_years_format" = "Membre depuis %d ans, %@";
+"member_since_months_format" = "Membre depuis **%d mois** · %@";
+"member_since_year_format" = "Membre depuis **%d an** · %@";
+"member_since_years_format" = "Membre depuis **%d ans** · %@";

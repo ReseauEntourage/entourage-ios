@@ -2105,6 +2105,7 @@ Choose a topic to get started.";
 
 // Badges
 "badges_section_title" = "My badges";
+"badges_section_title_other" = "Their badges";
 "badges_see_all" = "See all";
 "badges_none_yet" = "No badges earned yet.";
 "badges_list_title" = "My badges";
@@ -2361,12 +2362,13 @@ Choose a topic to get started.";
 "impact_row_groups_other" = "Groupes de voisins rejoints";
 "impact_hero_subtitle" = "actions depuis votre inscription";
 "impact_detail_title" = "Ce que j'ai fait";
+"impact_detail_title_other" = "Ce que %@ a fait";
 "impact_new_member_title" = "Bienvenue ! Votre histoire commence ici.";
 "impact_new_member_message" = "Dès votre première action — un bonjour, un café, un événement — elle apparaîtra ici. Même les petits gestes comptent.";
-"impact_new_member_cta" = "Découvrir près de chez moi";
+"impact_new_member_cta" = "Découvrir les événements";
 "member_since_recent_format" = "Membre depuis %@";
-"member_since_year_format" = "Membre depuis %d an, %@";
-"member_since_years_format" = "Membre depuis %d ans, %@";
+"member_since_year_format" = "Membre depuis **%d an** · %@";
+"member_since_years_format" = "Membre depuis **%d ans** · %@";
 
 // MARK: - Création / modification d'un groupe (flux-creation-unifie)
 "group_form_step_details_title" = "Introduce your group";

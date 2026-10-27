@@ -1822,6 +1822,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 // Badges
 "badges_section_title" = "Мої значки";
+"badges_section_title_other" = "Їхні значки";
 "badges_see_all" = "Переглянути всі";
 "badges_none_yet" = "Ще немає отриманих значків.";
 "badges_list_title" = "Мої значки";
@@ -1998,9 +1999,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "impact_row_groups_other" = "Groupes de voisins rejoints";
 "impact_hero_subtitle" = "actions depuis votre inscription";
 "impact_detail_title" = "Ce que j'ai fait";
+"impact_detail_title_other" = "Ce que %@ a fait";
 "impact_new_member_title" = "Bienvenue ! Votre histoire commence ici.";
 "impact_new_member_message" = "Dès votre première action — un bonjour, un café, un événement — elle apparaîtra ici. Même les petits gestes comptent.";
-"impact_new_member_cta" = "Découvrir près de chez moi";
+"impact_new_member_cta" = "Découvrir les événements";
 "member_since_recent_format" = "Membre depuis %@";
-"member_since_year_format" = "Membre depuis %d an, %@";
-"member_since_years_format" = "Membre depuis %d ans, %@";
+"member_since_year_format" = "Membre depuis **%d an** · %@";
+"member_since_years_format" = "Membre depuis **%d ans** · %@";

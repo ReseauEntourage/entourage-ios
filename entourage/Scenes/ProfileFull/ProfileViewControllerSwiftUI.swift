@@ -267,14 +267,24 @@ struct SeniorityPill: View {
         }
     }
 
+    /// Les segments entre `**` dans la chaîne localisée sont mis en avant (durée d'ancienneté).
+    private var segments: [(text: String, highlighted: Bool)] {
+        text.components(separatedBy: "**").enumerated().compactMap { index, part in
+            part.isEmpty ? nil : (part, index % 2 == 1)
+        }
+    }
+
     var body: some View {
-        Text(text)
-            .font(.custom("NunitoSans-SemiBold", size: 13))
-            .foregroundColor(Color(UIColor.appOrange))
-            .padding(.horizontal, 14)
-            .padding(.vertical, 6)
-            .background(Color(UIColor.appOrangeLight_50))
-            .clipShape(Capsule())
+        segments.reduce(Text("🧡 ").font(.custom("NunitoSans-SemiBold", size: 13))) { result, segment in
+            result + Text(segment.text)
+                .font(.custom(segment.highlighted ? "NunitoSans-Bold" : "NunitoSans-SemiBold", size: 13))
+                .foregroundColor(segment.highlighted ? Color(UIColor.appOrange) : .black)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 6)
+        .background(Color(UIColor.appOrangeLight_50))
+        .clipShape(Capsule())
+        .accessibilityLabel(text.replacingOccurrences(of: "**", with: ""))
     }
 }
 
@@ -310,6 +320,12 @@ struct ImpactCounterView: View {
         return all.filter { $0.count > 0 }
     }
 
+    private var detailTitle: String {
+        if isMe { return "impact_detail_title".localized }
+        let firstName = user.firstname == "-" ? (user.displayName.components(separatedBy: " ").first ?? "") : user.firstname
+        return String(format: "impact_detail_title_other".localized, firstName)
+    }
+
     private var totalCount: Int {
         rows.reduce(0) { $0 + $1.count }
     }
@@ -340,11 +356,9 @@ struct ImpactCounterView: View {
                             .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)))
                             .foregroundColor(.black)
                     }
-                    if isMe {
-                        Text((rows.count <= 2 ? "impact_hero_subtitle_low" : "impact_hero_subtitle_me").localized)
-                            .font(Font(UIFont(name: "Quicksand-Bold", size: 14) ?? UIFont.boldSystemFont(ofSize: 14)))
-                            .foregroundColor(.black)
-                    }
+                    Text((isMe && rows.count <= 2 ? "impact_hero_subtitle_low" : "impact_hero_subtitle_me").localized)
+                        .font(Font(UIFont(name: "Quicksand-Bold", size: 14) ?? UIFont.boldSystemFont(ofSize: 14)))
+                        .foregroundColor(.black)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 18)
@@ -353,14 +367,12 @@ struct ImpactCounterView: View {
                 .cornerRadius(16)
                 .padding(.bottom, 6)
 
-                if isMe {
-                    Text("impact_detail_title".localized.uppercased())
-                        .font(Font(UIFont(name: "NunitoSans-Bold", size: 12) ?? UIFont.boldSystemFont(ofSize: 12)))
-                        .foregroundColor(Color(UIColor.appGris112))
-                        .padding(.top, 12)
-                        .padding(.leading, 4)
-                        .padding(.bottom, 8)
-                }
+                Text(detailTitle.uppercased())
+                    .font(Font(UIFont(name: "NunitoSans-Bold", size: 12) ?? UIFont.boldSystemFont(ofSize: 12)))
+                    .foregroundColor(Color(UIColor.appGris112))
+                    .padding(.top, 12)
+                    .padding(.leading, 4)
+                    .padding(.bottom, 8)
 
                 VStack(spacing: 8) {
                     ForEach(rows) { row in

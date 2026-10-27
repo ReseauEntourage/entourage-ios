@@ -148,6 +148,18 @@ struct MyProfileView: View {
     @State private var selectedBadgeProgress: UserBadgeProgress?
     @State private var showSettings = false
 
+    /// Le profil est présenté en plein écran au-dessus du tabbar : on le ferme avant de basculer sur l'onglet événements.
+    private func showEventsTab() {
+        let showEvents = {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventShowDiscover), object: nil)
+        }
+        if let top = AppState.getTopViewController(), top.presentingViewController != nil {
+            top.dismiss(animated: true, completion: showEvents)
+        } else {
+            showEvents()
+        }
+    }
+
     private var safeAreaTop: CGFloat {
         UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
@@ -217,13 +229,6 @@ struct MyProfileView: View {
                                     .frame(maxWidth: .infinity, alignment: .center)
                             }
 
-                            if let phone = viewModel.user?.phone, !phone.isEmpty {
-                                Text(ProfileViewHelpers.formatPhoneNumber(phone))
-                                    .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
-                                    .foregroundColor(Color(UIColor.appGris112))
-                                    .frame(maxWidth: .infinity, alignment: .center)
-                            }
-
                             if let email = viewModel.user?.email, !email.isEmpty {
                                 Text(email)
                                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13)))
@@ -272,6 +277,15 @@ struct MyProfileView: View {
                     }
                     .padding()
 
+                    if let user = viewModel.user {
+                        ImpactCounterView(isMe: true, user: user, counts: viewModel.impactCounts, onDiscoverNearby: {
+                            showEventsTab()
+                        })
+                            .padding(.horizontal)
+                            .padding(.top, 10)
+                            .padding(.bottom, 16)
+                    }
+
                     BadgesSectionView(
                         apiBadges: viewModel.apiBadges,
                         isMe: true,
@@ -280,6 +294,7 @@ struct MyProfileView: View {
                     )
                     .padding(.horizontal)
                     .padding(.top, 8)
+                    .padding(.bottom, 16)
                     .fullScreenCover(isPresented: $showBadgesList) {
                         BadgesListView()
                     }
@@ -303,16 +318,6 @@ struct MyProfileView: View {
                                 }
                             }
                         )
-                    }
-
-                    if let user = viewModel.user {
-                        ImpactCounterView(isMe: true, user: user, counts: viewModel.impactCounts, onDiscoverNearby: {
-                            if let tabbar = AppState.getTopViewController()?.tabBarController as? MainTabbarViewController {
-                                tabbar.selectedIndex = 4
-                            }
-                        })
-                            .padding(.horizontal)
-                            .padding(.top, 10)
                     }
 
                     if let user = viewModel.user {
