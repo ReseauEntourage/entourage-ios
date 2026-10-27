@@ -30,6 +30,10 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
     private var bottomViewModel = UnsubscribedViewModel()
     private var bottomHostingController: UIHostingController<UnsubscribedBottomSwiftUIView>?
 
+    // Chip « +N sur place » dans l'en-tête (EN-9158)
+    private let onSiteChipView = UIView()
+    private let onSiteChipLabel = UILabel()
+
     var neighborhood: Neighborhood? = nil
     var event: Event? = nil
     var isEvent = false
@@ -93,6 +97,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         loadStoredReactionTypes()
 
         ui_top_view.populateView(title: title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
+        setupOnSiteChip()
         ui_lb_no_result.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lb_no_result.text = txtSearch
         ui_view_no_result.isHidden = true
@@ -291,6 +296,52 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         self.bottomHostingController = hostingController
     }
 
+    // MARK: - Chip « +N sur place » (EN-9158)
+    private func setupOnSiteChip() {
+        guard isEvent, !isFromSurvey, !isFromReact else { return }
+
+        let orange = UIColor(named: "appOrange") ?? .orange
+        onSiteChipView.translatesAutoresizingMaskIntoConstraints = false
+        onSiteChipView.backgroundColor = orange.withAlphaComponent(0.15)
+        onSiteChipView.layer.cornerRadius = 13
+        onSiteChipView.isHidden = true
+        onSiteChipView.isAccessibilityElement = true
+        onSiteChipView.accessibilityTraits = .button
+
+        onSiteChipLabel.translatesAutoresizingMaskIntoConstraints = false
+        onSiteChipLabel.font = ApplicationTheme.getFontQuickSandBold(size: 13)
+        onSiteChipLabel.textColor = orange
+        onSiteChipView.addSubview(onSiteChipLabel)
+
+        view.addSubview(onSiteChipView)
+        NSLayoutConstraint.activate([
+            onSiteChipLabel.topAnchor.constraint(equalTo: onSiteChipView.topAnchor, constant: 4),
+            onSiteChipLabel.bottomAnchor.constraint(equalTo: onSiteChipView.bottomAnchor, constant: -4),
+            onSiteChipLabel.leadingAnchor.constraint(equalTo: onSiteChipView.leadingAnchor, constant: 10),
+            onSiteChipLabel.trailingAnchor.constraint(equalTo: onSiteChipView.trailingAnchor, constant: -10),
+            // Entre le titre « Participants » (à gauche) et le bouton de fermeture (32 pt du bord, 20 pt de large)
+            onSiteChipView.trailingAnchor.constraint(equalTo: ui_top_view.trailingAnchor, constant: -(32 + 20 + 12)),
+            onSiteChipView.centerYAnchor.constraint(equalTo: ui_top_view.centerYAnchor, constant: -1)
+        ])
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onSiteChipTapped))
+        onSiteChipView.addGestureRecognizer(tap)
+    }
+
+    @objc private func onSiteChipTapped() {
+        showBottomSheet()
+    }
+
+    /// Visible seulement si au moins un participant a été ajouté sur place ; affiche le total isolés + riverains.
+    private func updateOnSiteChip(askCount: Int, offerCount: Int) {
+        let total = askCount + offerCount
+        onSiteChipView.isHidden = total <= 0
+        onSiteChipLabel.text = "+\(total) sur place"
+        onSiteChipView.accessibilityLabel = "+\(total) sur place"
+        // Le chip ne doit pas passer sous la vue de la liste lors du chargement
+        view.bringSubviewToFront(onSiteChipView)
+    }
+
     private func updateUnsubscribedBottomViews() {
         guard isEvent, let event = event else { return }
 
@@ -306,6 +357,7 @@ class NeighBorhoodEventListUsersViewController: BasePopViewController {
         bottomViewModel.askCount = askForHelp
         bottomViewModel.offerCount = offerHelp
         bottomViewModel.femaleCount = femaleCount
+        updateOnSiteChip(askCount: askForHelp, offerCount: offerHelp)
 
         // Ajuste le padding de la tableView pour pouvoir scroller jusqu'au bout
         DispatchQueue.main.async { [weak self] in
@@ -732,45 +784,9 @@ struct UnsubscribedBottomSwiftUIView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             
-            // 1. Fond blanc et contenu textuel (Sticky View)
-            if viewModel.askCount > 0 || viewModel.offerCount > 0 || viewModel.femaleCount > 0 {
-                VStack(alignment: .leading, spacing: 0) {
-                    Divider()
-                        .background(Color.clear)
-                        .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: -2)
-                    
-                    Text("PARTICIPANTS AJOUTÉS SUR PLACE")
-                        .font(.system(size: 13, weight: .bold)) // Match ApplicationTheme
-                        .foregroundColor(.black)
-                        .padding(.top, 16)
-                        .padding(.horizontal, 32)
-                        .padding(.bottom, 16)
-
-                    if viewModel.askCount > 0 {
-                        let title = viewModel.askCount > 1 ? "personnes isolées" : "personne isolée"
-                        ParticipantRow(count: viewModel.askCount, title: title)
-                    }
-
-                    if viewModel.offerCount > 0 {
-                        let title = viewModel.offerCount > 1 ? "riverains" : "riverain"
-                        ParticipantRow(count: viewModel.offerCount, title: title)
-                    }
-
-                    if viewModel.femaleCount > 0 {
-                        let title = viewModel.femaleCount > 1 ? "femmes isolées" : "femme isolée"
-                        ParticipantRow(count: viewModel.femaleCount, title: title)
-                    }
-                    
-                    // 🔥 On force un grand espace en bas de la Stack pour contourner la ligne/encoche système de l'iPhone et aérer la vue sur petits écrans (augmenté à 70)
-                    Spacer().frame(height: 70)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                // C'est ce background qui colore tout l'espace vide en dessous (safe area ignorée), MAIS le texte reste poussé vers le haut !
-                .background(Color.white.ignoresSafeArea())
-            } else {
-                // Vue transparente invisible pour que le bouton puisse exister seul
-                Color.clear.frame(maxWidth: .infinity, maxHeight: 1)
-            }
+            // Le récapitulatif des participants ajoutés sur place est désormais un chip dans l'en-tête (EN-9158) :
+            // il ne reste ici que le bouton flottant, sur une vue transparente.
+            Color.clear.frame(maxWidth: .infinity, maxHeight: 1)
 
             // 2. Le Nouveau Bouton Flottant (+)
             if viewModel.showFab {
@@ -789,44 +805,10 @@ struct UnsubscribedBottomSwiftUIView: View {
                     }
                 }
                 .padding(.trailing, 20)
-                // 🔥 On remonte généreusement le bouton pour qu'il soit bien au-dessus du texte et de l'encoche (augmenté à 90 / 60)
-                .padding(.bottom, (viewModel.askCount > 0 || viewModel.offerCount > 0) ? 90 : 60)
+                // On remonte le bouton pour qu'il soit au-dessus de l'encoche système
+                .padding(.bottom, 60)
             }
         }
-        .animation(.easeInOut, value: viewModel.askCount)
-        .animation(.easeInOut, value: viewModel.offerCount)
         .animation(.easeInOut, value: viewModel.showFab)
-    }
-}
-
-struct ParticipantRow: View {
-    var count: Int
-    var title: String
-
-    var body: some View {
-        HStack(spacing: 16) {
-            // Icone bonhomme orange
-            ZStack {
-                Circle()
-                    .fill(Color(UIColor(named: "appOrange") ?? .orange).opacity(0.2))
-                Image(systemName: "person.fill")
-                    .foregroundColor(Color(UIColor(named: "appOrange") ?? .orange))
-                    .font(.system(size: 18))
-            }
-            .frame(width: 48, height: 48)
-
-            // Textes
-            VStack(alignment: .leading, spacing: 4) {
-                Text("\(count) \(title)")
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(.black)
-                Text("Ajoutés sur place")
-                    .font(.system(size: 13))
-                    .foregroundColor(Color.gray)
-            }
-            Spacer()
-        }
-        .padding(.horizontal, 32)
-        .padding(.bottom, 16)
     }
 }
