@@ -399,3 +399,18 @@ extension UIView {
         return collectionView.indexPath(for: self as! UICollectionViewCell)
     }
 }
+
+
+extension UIView {
+    /// Pose un identifiant d'accessibilité sur le bouton relié à `selector` (action de storyboard) dans cette
+    /// hiérarchie. Sert aux scénarios XCUITest pour les boutons sans outlet (ex. icône seule).
+    func tagButton(action selector: String, target: AnyObject, identifier: String) {
+        for subview in subviews {
+            if let button = subview as? UIButton,
+               button.actions(forTarget: target, forControlEvent: .touchUpInside)?.contains(selector) == true {
+                button.accessibilityIdentifier = identifier
+            }
+            subview.tagButton(action: selector, target: target, identifier: identifier)
+        }
+    }
+}

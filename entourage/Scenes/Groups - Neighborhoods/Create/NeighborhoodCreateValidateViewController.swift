@@ -34,6 +34,7 @@ class NeighborhoodCreateValidateViewController: UIViewController {
         
         ui_title.text = "neighborhoodCreateValidateTitle".localized
         ui_subtitle.text = "neighborhoodCreateValidateSubtitle".localized
+        ui_title.accessibilityIdentifier = "creation_end_title"
         ui_title.setFontTitle(size: 28)
         ui_subtitle.setFontBody(size: 15)
         

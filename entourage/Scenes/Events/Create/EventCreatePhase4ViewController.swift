@@ -47,7 +47,7 @@ struct EventStepCategoriesView: View {
                     .padding(.bottom, 6)
 
                 FormFlowLayout(items: tags.map { $0.key }) { key in
-                    FormFlowChip(title: name(for: key), isOn: store.values.interests.contains(key)) {
+                    FormFlowChip(title: name(for: key), isOn: store.values.interests.contains(key), identifier: "event_form_interest_\(key)") {
                         store.toggleInterest(key)
                     }
                 }

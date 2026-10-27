@@ -1,0 +1,38 @@
+{
+  "user": {
+    "id": 4079,
+    "email": "test@example.org",
+    "first_name": "Test",
+    "last_name": "Utilisateur",
+    "display_name": "Test U.",
+    "birthdate": "1990-05-17",
+    "gender": "female",
+    "avatar_url": "https://cdn.example.org/avatars/4079.png",
+    "token": "fake-token-0000",
+    "about": "Bénévole depuis 2024",
+    "goal": "offer_help",
+    "engaged": true,
+    "unread_count": 3,
+    "travel_distance": 15,
+    "willing_to_engage_locally": true,
+    "created_at": "2024-01-15T09:30:00.000+0000",
+    "is_birthday": false,
+    "interests": ["sport", "cuisine"],
+    "involvements": ["event"],
+    "orientations": ["share"],
+    "concerns": ["isolation"],
+    "roles": ["Animateur Entourage"],
+    "availability": { "1": ["09:00-12:00", "14:00-18:00"], "6": ["10:00-13:00"] },
+    "firebase_properties": { "ActionZoneCP": "75003", "Goal": "offer_help" },
+    "permissions": { "outing": { "creation": true } },
+    "address": { "latitude": 48.8675, "longitude": 2.3636, "display_address": "Paris 3e" },
+    "address_2": { "latitude": 45.76, "longitude": 4.83, "display_address": "Lyon" },
+    "stats": {
+      "entourage_count": 1, "actions_count": 2, "events_count": 3, "good_waves_participation": true,
+      "contribution_creation_count": 4, "outings_count": 5, "neighborhoods_count": 6, "ask_for_help_creation_count": 7
+    },
+    "organization": { "name": "Asso Test", "description": "Une asso", "phone": "0102030405", "address": "1 rue X", "logo_url": "https://cdn.example.org/org.png" },
+    "partner": { "id": 12, "name": "Partenaire", "small_logo_url": "https://cdn.example.org/p_small.png", "large_logo_url": "https://cdn.example.org/p_large.png", "default": false, "user_role_title": "Référent", "postal_code": "75003", "following": true },
+    "badges": [ { "name": "first_event", "active": true, "awarded_at": "2025-02-01", "metadata": { "target": 5, "current": 2 } } ]
+  }
+}

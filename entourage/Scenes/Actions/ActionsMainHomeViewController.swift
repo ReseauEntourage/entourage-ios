@@ -178,6 +178,9 @@ class ActionsMainHomeViewController: UIViewController {
         ui_floaty_button.overlayColor = .white.withAlphaComponent(0.10)
         ui_floaty_button.addBlurOverlay = true
         ui_floaty_button.itemSpace = 24
+        ui_floaty_button.accessibilityIdentifier = "actions_create_fab"
+        floatItem1.accessibilityIdentifier = "actions_create_contribution"
+        floatItem2.accessibilityIdentifier = "actions_create_demand"
         ui_floaty_button.addItem(item: floatItem2)
         ui_floaty_button.addItem(item: floatItem1)
         ui_floaty_button.sticky = true

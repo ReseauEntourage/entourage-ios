@@ -1,0 +1,13 @@
+{
+  "solicitation" : {
+    "auto_post_at_create" : false,
+    "description" : "Action creee automatiquement par le test.",
+    "location" : {
+      "latitude" : 48.8566,
+      "longitude" : 2.3521983
+    },
+    "recipient_consent_obtained" : true,
+    "section" : "social",
+    "title" : "Unit test Demande 1"
+  }
+}

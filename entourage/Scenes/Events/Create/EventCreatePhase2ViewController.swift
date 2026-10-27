@@ -103,6 +103,7 @@ struct EventStepScheduleView: View {
                         currentDate: store.values.day,
                         minimumDate: bounds.min,
                         maximumDate: bounds.max,
+                        identifier: "event_form_date",
                         onCommit: { store.setDay($0) }
                     )
                     .formFlowError(store.errors[.date])
@@ -122,6 +123,7 @@ struct EventStepScheduleView: View {
                                 hasError: store.errors[.timeStart] != nil,
                                 defaultDate: date(atMinutes: 18 * 60),
                                 currentDate: store.values.startMinutes.map { date(atMinutes: $0) },
+                                identifier: "event_form_time_start",
                                 onCommit: { picked in
                                     let minutes = EventFormStore.minutes(of: picked)
                                     store.update { $0.startMinutes = minutes }
@@ -138,6 +140,7 @@ struct EventStepScheduleView: View {
                                 hasError: store.errors[.timeEnd] != nil,
                                 defaultDate: date(atMinutes: min((store.values.startMinutes ?? 18 * 60) + 180, 23 * 60 + 59)),
                                 currentDate: store.values.endMinutes.map { date(atMinutes: $0) },
+                                identifier: "event_form_time_end",
                                 onCommit: { picked in
                                     let minutes = EventFormStore.minutes(of: picked)
                                     store.update { $0.endMinutes = minutes }

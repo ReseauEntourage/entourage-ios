@@ -67,6 +67,8 @@ class NeighborhoodV2ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         AnalyticsLoggerManager.logEvent(name: View_Group_Show)
+        ui_btn_create_group.accessibilityIdentifier = "groups_create"
+        ui_expanded_btn.accessibilityIdentifier = "groups_create_expanded"
         ui_title.text = "mainTitleGroup".localized
         ui_expanded_btn.setTitle("create_group_btn_title".localized, for: .normal)
         pullRefreshControl.attributedTitle = NSAttributedString(string: "Loading".localized)

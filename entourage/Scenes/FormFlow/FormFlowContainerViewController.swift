@@ -160,6 +160,7 @@ class FormFlowContainerViewController: UIViewController {
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = UIColor(red: 221 / 255, green: 221 / 255, blue: 221 / 255, alpha: 1).cgColor
         backButton.accessibilityLabel = "event_form_back".localized
+        backButton.accessibilityIdentifier = "form_flow_close"
         backButton.addTarget(self, action: #selector(quitTapped), for: .touchUpInside)
         topBar.addSubview(backButton)
 
@@ -183,6 +184,8 @@ class FormFlowContainerViewController: UIViewController {
         footerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(footerView)
         previousButton.setTitle("event_form_back".localized, for: .normal)
+        previousButton.accessibilityIdentifier = "form_flow_previous"
+        nextButton.accessibilityIdentifier = "form_flow_next"
         previousButton.addTarget(self, action: #selector(action_back(_:)), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(action_next(_:)), for: .touchUpInside)
 

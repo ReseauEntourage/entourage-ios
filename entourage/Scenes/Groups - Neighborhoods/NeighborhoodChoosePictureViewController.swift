@@ -40,6 +40,8 @@ class NeighborhoodChoosePictureViewController: BasePopViewController {
         
         ui_collectionview.delegate = self
         ui_collectionview.dataSource = self
+        ui_collectionview.accessibilityIdentifier = "photo_gallery_list"
+        ui_bt_validate.accessibilityIdentifier = "photo_gallery_validate"
         
         setupFlowLayout()
         

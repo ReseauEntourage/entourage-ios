@@ -1,0 +1,25 @@
+{
+  "neighborhood": {
+    "id": 12,
+    "uuid_v2": "n_xyz",
+    "name": "Paris Centre",
+    "description": "Le groupe du centre de Paris",
+    "welcome_message": "Bienvenue !",
+    "address": { "latitude": 48.86, "longitude": 2.34, "display_address": "Paris" },
+    "interests": ["sport", "cuisine"],
+    "image_url": "https://cdn.example.org/groups/12.jpg",
+    "members_count": 42,
+    "member": true,
+    "national": false,
+    "future_outings_count": 1,
+    "latitude": 48.86,
+    "longitude": 2.34,
+    "radius": 5,
+    "group_type": "neighborhood",
+    "created_at": "2026-01-02T03:04:05.000Z",
+    "unread_posts_count": 3,
+    "user": { "id": 5, "display_name": "Admin", "is_birthday": false },
+    "members": [ { "id": 5, "display_name": "Admin", "is_birthday": false } ],
+    "children": [ { "id": 13, "name": "Sous-groupe" } ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": 301,
+  "uuid_v2": "1_list_me_with_3",
+  "type": "private",
+  "name": "Jean M.",
+  "image_url": "https://cdn.example.org/avatars/3.png",
+  "number_of_unread_messages": 2,
+  "section": "social",
+  "has_personal_post": false,
+  "member": true,
+  "members_count": 2,
+  "creator": true,
+  "blockers": ["user-5"],
+  "last_message": { "text": "À demain !", "date": "2026-05-01T09:15:00.000+0000", "imageUrl": "https://cdn.example.org/m.jpg" },
+  "user": { "id": 3, "display_name": "Jean M.", "avatar_url": "https://cdn.example.org/avatars/3.png", "partner_role_title": "Bénévole", "roles": ["Animateur Entourage"], "is_birthday": false },
+  "author": { "id": 3, "display_name": "Jean M." },
+  "members": [ { "id": 3, "display_name": "Jean M.", "is_birthday": false } ]
+}

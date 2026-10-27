@@ -1,0 +1,19 @@
+{
+  "id": 8001,
+  "content": "Bonjour à tous !",
+  "content_html": "<p>Bonjour à tous !</p>",
+  "created_at": "2026-02-10T18:00:00.000+0000",
+  "message_type": "text",
+  "post_id": 7000,
+  "has_comments": true,
+  "comments_count": 4,
+  "image_url": "https://cdn.example.org/posts/8001.jpg",
+  "status": "visible",
+  "read": true,
+  "reaction_id": 2,
+  "user": { "id": 5, "display_name": "Admin" },
+  "reactions": [ { "reaction_id": 2, "chat_message_id": 8001, "reactions_count": 3 } ],
+  "survey": { "choices": ["Oui", "Non"], "multiple": false, "summary": [5, 1] },
+  "survey_response": [true, false],
+  "auto_post_from": { "instance_type": "Neighborhood", "instance_id": 12 }
+}

@@ -1,0 +1,29 @@
+{
+  "id": 9,
+  "display_name": "Alex P.",
+  "avatar_url": "https://cdn.example.org/avatars/9.png",
+  "meetings_count": 4,
+  "chat_messages_count": 120,
+  "outing_participations_count": 6,
+  "past_outing_participations_count": 5,
+  "action_creations_count": 2,
+  "neighborhood_messages_count": 17,
+  "conversation_members_count": 8,
+  "signable_permission": true,
+  "association": false,
+  "neighborhood_participations_count": 3,
+  "preference": "contribution",
+  "events": ["evt-1", "evt-2"],
+  "moderator": { "id": 3, "display_name": "Modo", "avatar_url": "https://cdn.example.org/avatars/3.png" },
+  "unclosed_action": { "id": 55, "action_type": "contribution", "title": "Don de vêtements" },
+  "recommandations": [
+    {
+      "name": "Rejoindre un groupe",
+      "type": "neighborhood",
+      "action": "show",
+      "image_url": "https://cdn.example.org/reco/1.png",
+      "params": { "id": 12, "uuid": "n_xyz", "url": "https://example.org", "post_id": 99 }
+    }
+  ],
+  "congratulations": []
+}

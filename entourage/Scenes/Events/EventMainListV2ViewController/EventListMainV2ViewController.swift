@@ -99,6 +99,8 @@ class EventListMainV2ViewController: UIViewController {
         ui_table_view.refreshControl = pullRefreshControl
 
         expandedfloatingButton.setTitle("event_title_btn_create_event".localized, for: .normal)
+        floatingButton.accessibilityIdentifier = "events_create"
+        expandedfloatingButton.accessibilityIdentifier = "events_create_expanded"
         deployButton()
         configureUserLocationAndRadius()
         let searchTapGesture = UITapGestureRecognizer(target: self, action: #selector(onSearchClick))

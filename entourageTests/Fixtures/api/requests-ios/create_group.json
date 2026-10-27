@@ -1,0 +1,13 @@
+{
+  "neighborhood" : {
+    "description" : "Groupe cree automatiquement par le test.",
+    "interests" : [
+      "activites"
+    ],
+    "latitude" : 48.8566,
+    "longitude" : 2.3521999999999998,
+    "name" : "Unit test group 1",
+    "neighborhood_image_id" : 15,
+    "place_name" : "Paris - 75004"
+  }
+}

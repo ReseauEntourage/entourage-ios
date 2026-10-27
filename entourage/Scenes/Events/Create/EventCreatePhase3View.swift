@@ -123,14 +123,14 @@ struct EventCreatePhase3View: View {
     // Bascule « En présentiel » / « En ligne » (orange, comme sur la maquette)
     private var modeSwitch: some View {
         HStack(spacing: 4) {
-            modeButton(title: "event_create_phase3_presentiel".localized, isOn: !isOnline) { store.setOnline(false) }
-            modeButton(title: "event_create_phase3_online".localized, isOn: isOnline) { store.setOnline(true) }
+            modeButton(title: "event_create_phase3_presentiel".localized, isOn: !isOnline, identifier: "event_form_mode_presential") { store.setOnline(false) }
+            modeButton(title: "event_create_phase3_online".localized, isOn: isOnline, identifier: "event_form_mode_online") { store.setOnline(true) }
         }
         .padding(4)
         .overlay(RoundedRectangle(cornerRadius: 14).stroke(FormFlowStyle.line, lineWidth: 1))
     }
 
-    private func modeButton(title: String, isOn: Bool, action: @escaping () -> Void) -> some View {
+    private func modeButton(title: String, isOn: Bool, identifier: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
                 .font(FormFlowStyle.bold(14.5))
@@ -141,6 +141,7 @@ struct EventCreatePhase3View: View {
                 .cornerRadius(10)
         }
         .buttonStyle(PlainButtonStyle())
+        .accessibilityIdentifier(identifier)
         .accessibility(addTraits: isOn ? [.isButton, .isSelected] : [.isButton])
     }
 
@@ -155,7 +156,8 @@ struct EventCreatePhase3View: View {
                     hasError: store.errors[.onlineUrl] != nil,
                     trailingSystemImage: "link",
                     keyboard: .URL,
-                    autocapitalization: .none
+                    autocapitalization: .none,
+                    identifier: "event_form_online_url"
                 )
                 .formFlowError(store.errors[.onlineUrl])
             }

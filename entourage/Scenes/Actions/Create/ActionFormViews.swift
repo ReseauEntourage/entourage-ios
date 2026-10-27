@@ -48,6 +48,7 @@ struct ActionStepCategoryView: View {
                             title: TagsUtils.showTagTranslated(section.key),
                             subtitle: TagsUtils.showSubTagTranslated(section.key),
                             isOn: store.values.sectionKey == section.key,
+                            identifier: "action_form_section_\(section.key)",
                             action: { store.selectSection(section.key) }
                         )
                     }
@@ -91,7 +92,8 @@ struct ActionStepDetailsView: View {
                     FormFlowTextField(
                         placeholder: placeholders.title.isEmpty ? String(format: "action_create_phase_1_name_placeholder".localized, type) : placeholders.title,
                         text: store.binding(\.title),
-                        hasError: store.errors[.title] != nil
+                        hasError: store.errors[.title] != nil,
+                        identifier: "action_form_title"
                     )
                     .formFlowError(store.errors[.title])
                 }
@@ -105,7 +107,8 @@ struct ActionStepDetailsView: View {
                         placeholder: placeholders.description.isEmpty ? String(format: "action_create_phase_1_desc_placeholder".localized, type) : placeholders.description,
                         text: store.binding(\.descriptionText),
                         maxLength: ApplicationTheme.maxCharsDescription,
-                        hasError: store.errors[.description] != nil
+                        hasError: store.errors[.description] != nil,
+                        identifier: "action_form_description"
                     )
                     .formFlowError(store.errors[.description])
                 }
@@ -156,6 +159,7 @@ struct ActionStepLocationView: View {
                     placeholder: "neighborhoodCreatePlaceInfos".localized,
                     text: store.values.placeName,
                     hasError: store.errors[.address] != nil,
+                    identifier: "action_form_place",
                     action: onPickPlace
                 )
                 .formFlowError(store.errors[.address])

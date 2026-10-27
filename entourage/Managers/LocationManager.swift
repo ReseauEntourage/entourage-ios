@@ -45,6 +45,15 @@ class LocationManger:NSObject {
     }
     
     func startLocationUpdate() {
+        #if DEBUG
+        // Scénarios XCUITest : position fixe (Paris), sans permission ni service de localisation.
+        if UITestBootstrap.isActive {
+            let paris = CLLocation(latitude: 48.8566, longitude: 2.3522)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationLocationUpdated), object: nil,
+                                            userInfo: [kNotificationLocationUpdatedInfoKey: [paris]])
+            return
+        }
+        #endif
         getAuthorizationLocation()
         startUpdate()
     }

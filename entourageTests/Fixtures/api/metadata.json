@@ -1,0 +1,268 @@
+{
+  "user": {
+    "genders": {
+      "female": "Femme",
+      "male": "Homme",
+      "secret": "Non renseigné"
+    },
+    "discovery_sources": {
+      "newspaper": "Articles de presse",
+      "panel": "Affichage (panneaux, métro...)",
+      "social": "Réseaux sociaux",
+      "word_of_mouth": "Bouche à oreille",
+      "television": "Télévision",
+      "entreprise": "Partenariat entreprise (avec votre employeur)",
+      "social_event": "Événement salon",
+      "association": "Orienté par une association"
+    }
+  },
+  "tags": {
+    "sections": [
+      {
+        "id": "social",
+        "name": "Temps de partage",
+        "subname": "café, activité..."
+      },
+      {
+        "id": "services",
+        "name": "Service",
+        "subname": "lessive, impression de documents..."
+      },
+      {
+        "id": "clothes",
+        "name": "Vêtement",
+        "subname": "chaussures, manteau..."
+      },
+      {
+        "id": "equipment",
+        "name": "Équipement",
+        "subname": "téléphone, duvet..."
+      },
+      {
+        "id": "hygiene",
+        "name": "Produit d'hygiène",
+        "subname": "savon, protection hygiénique..."
+      }
+    ],
+    "orientations": [
+      {
+        "id": "share",
+        "name": "Relayer vos événements de convivialité sur l'application"
+      },
+      {
+        "id": "guide",
+        "name": "Orienter vos bénéficiaires aux événements de convivialité"
+      },
+      {
+        "id": "help",
+        "name": "Donner ou solliciter un coup de pouce"
+      }
+    ],
+    "interests": [
+      {
+        "id": "activites",
+        "name": "Activités manuelles"
+      },
+      {
+        "id": "animaux",
+        "name": "Animaux"
+      },
+      {
+        "id": "bien-etre",
+        "name": "Bien-être"
+      },
+      {
+        "id": "cuisine",
+        "name": "Cuisine"
+      },
+      {
+        "id": "culture",
+        "name": "Art & culture"
+      },
+      {
+        "id": "jeux",
+        "name": "Jeux"
+      },
+      {
+        "id": "nature",
+        "name": "Nature"
+      },
+      {
+        "id": "sport",
+        "name": "Sport"
+      },
+      {
+        "id": "marauding",
+        "name": "Maraudes sociales"
+      },
+      {
+        "id": "other",
+        "name": "Autre"
+      }
+    ],
+    "involvements": [
+      {
+        "id": "resources",
+        "name": "Apprendre avec des contenus pédagogiques"
+      },
+      {
+        "id": "outings",
+        "name": "Participer à des événements de convivialité"
+      },
+      {
+        "id": "both_actions",
+        "name": "Donner ou solliciter un coup de pouce"
+      },
+      {
+        "id": "solicitations",
+        "name": "Solliciter un coup de pouce"
+      },
+      {
+        "id": "neighborhoods",
+        "name": "Rejoindre un groupe de voisins et tisser des liens"
+      },
+      {
+        "id": "pois",
+        "name": "Trouver des structures solidaires à proximité"
+      }
+    ],
+    "concerns": [
+      {
+        "id": "sharing_time",
+        "name": "Temps de partage"
+      },
+      {
+        "id": "material_donations",
+        "name": "Dons matériels"
+      },
+      {
+        "id": "services",
+        "name": "Services"
+      }
+    ],
+    "signals": [
+      {
+        "id": "spam",
+        "name": "Spam"
+      },
+      {
+        "id": "fraud",
+        "name": "Arnaque"
+      },
+      {
+        "id": "insults",
+        "name": "Propos déplacés"
+      },
+      {
+        "id": "in_danger",
+        "name": "Mise en danger"
+      },
+      {
+        "id": "other",
+        "name": "Autre"
+      }
+    ]
+  },
+  "reactions": [
+    {
+      "id": 2,
+      "name": "Pouce up",
+      "key": "thumbup",
+      "image_url": "https://entourage-images-development.s3.eu-west-1.amazonaws.com/reactions/thumbsup.png"
+    },
+    {
+      "id": 3,
+      "name": "Entourage",
+      "key": "entourage",
+      "image_url": "https://entourage-images-development.s3.eu-west-1.amazonaws.com/reactions/fire.png"
+    },
+    {
+      "id": 4,
+      "name": "Pray",
+      "key": "pray",
+      "image_url": "https://entourage-images-development.s3.eu-west-1.amazonaws.com/reactions/pray.png"
+    },
+    {
+      "id": 5,
+      "name": "Sun",
+      "key": "sun",
+      "image_url": "https://entourage-images-development.s3.eu-west-1.amazonaws.com/reactions/sun.png"
+    },
+    {
+      "id": 1,
+      "name": "Coeur",
+      "key": "heart",
+      "image_url": "https://entourage-images-development.s3.eu-west-1.amazonaws.com/reactions/heart.png"
+    }
+  ],
+  "poi_categories": [
+    {
+      "id": 1,
+      "name": "Se nourrir"
+    },
+    {
+      "id": 2,
+      "name": "Se loger"
+    },
+    {
+      "id": 3,
+      "name": "Se soigner"
+    },
+    {
+      "id": 4,
+      "name": "Se rafraîchir"
+    },
+    {
+      "id": 5,
+      "name": "S'orienter"
+    },
+    {
+      "id": 6,
+      "name": "S'occuper de soi"
+    },
+    {
+      "id": 7,
+      "name": "Se réinsérer"
+    },
+    {
+      "id": 8,
+      "name": "Partenaires"
+    },
+    {
+      "id": 40,
+      "name": "Toilettes"
+    },
+    {
+      "id": 41,
+      "name": "Fontaines"
+    },
+    {
+      "id": 42,
+      "name": "Douches"
+    },
+    {
+      "id": 43,
+      "name": "Laver son linge"
+    },
+    {
+      "id": 61,
+      "name": "Vêtements, matériel"
+    },
+    {
+      "id": 62,
+      "name": "Boîtes à dons"
+    },
+    {
+      "id": 63,
+      "name": "Bagageries"
+    },
+    {
+      "id": 9,
+      "name": "Se déplacer"
+    },
+    {
+      "id": 10,
+      "name": "foo6-4177"
+    }
+  ]
+}

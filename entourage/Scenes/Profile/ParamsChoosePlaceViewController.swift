@@ -87,7 +87,11 @@ class ParamsChoosePlaceViewController: BasePopViewController {
         ui_bt_validate.titleLabel?.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         configureOrangeButton(ui_bt_validate, withTitle: "validate".localized)
         ui_view_error.hide()
-        
+
+        // Identifiants pour les scénarios XCUITest (le bouton de géolocalisation n'a qu'une image, sans outlet).
+        ui_bt_validate.accessibilityIdentifier = "place_validate"
+        ui_bt_address.accessibilityIdentifier = "place_search_address"
+        view.tagButton(action: "action_location:", target: self, identifier: "place_use_my_position")
         
         NotificationCenter.default.addObserver(self, selector: #selector(updatePosition), name: NSNotification.Name(rawValue: kNotificationLocationUpdated), object: nil)
         setupGooglePlaceViewController()

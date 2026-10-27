@@ -27,6 +27,7 @@ class EventCreateValidateViewController: UIViewController {
         
         ui_title.text = "eventCreateEnd_title".localized
         ui_subtitle.text = "eventCreateEnd_subtitle".localized
+        ui_title.accessibilityIdentifier = "creation_end_title"
         ui_title.setFontTitle(size: 28)
         ui_subtitle.setFontBody(size: 15)
         configureOrangeButton(ui_bt_post, withTitle: "eventCreateEnd_button_show".localized)

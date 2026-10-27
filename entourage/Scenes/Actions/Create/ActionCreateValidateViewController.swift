@@ -45,6 +45,7 @@ class ActionCreateValidateViewController: UIViewController {
             ui_title.text = "solicitationCreateEnd_title".localized
             ui_subtitle.text = "solicitationCreateEnd_subtitle".localized
         }
+        ui_title.accessibilityIdentifier = "creation_end_title"
         ui_title.setFontTitle(size: 28)
         ui_subtitle.setFontBody(size: 15)
     }

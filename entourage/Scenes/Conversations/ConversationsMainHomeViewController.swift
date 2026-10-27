@@ -383,7 +383,13 @@ class ConversationsMainHomeViewController: UIViewController {
                 self.ui_tableview.reloadData()
             } else {
                 let indexPaths = (startIndex..<self.dataSource.count).map { IndexPath(row: $0, section: 0) }
-                self.ui_tableview.insertRows(at: indexPaths, with: .fade)
+                // Deux chargements qui se chevauchent peuvent laisser la table en retard sur `dataSource` :
+                // un `insertRows` planterait (« Invalid batch updates »), on recharge alors tout.
+                if self.ui_tableview.numberOfRows(inSection: 0) == startIndex {
+                    self.ui_tableview.insertRows(at: indexPaths, with: .fade)
+                } else {
+                    self.ui_tableview.reloadData()
+                }
             }
         }
     }
@@ -403,7 +409,13 @@ class ConversationsMainHomeViewController: UIViewController {
                 self.ui_tableview.reloadData()
             } else {
                 let indexPaths = (startIndex..<self.dataSource.count).map { IndexPath(row: $0, section: 0) }
-                self.ui_tableview.insertRows(at: indexPaths, with: .fade)
+                // Deux chargements qui se chevauchent peuvent laisser la table en retard sur `dataSource` :
+                // un `insertRows` planterait (« Invalid batch updates »), on recharge alors tout.
+                if self.ui_tableview.numberOfRows(inSection: 0) == startIndex {
+                    self.ui_tableview.insertRows(at: indexPaths, with: .fade)
+                } else {
+                    self.ui_tableview.reloadData()
+                }
             }
         }
     }

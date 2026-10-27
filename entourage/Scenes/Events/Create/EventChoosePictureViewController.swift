@@ -49,6 +49,8 @@ class EventChoosePictureViewController: BasePopViewController {
         
         ui_collectionview.delegate = self
         ui_collectionview.dataSource = self
+        ui_collectionview.accessibilityIdentifier = "event_gallery_list"
+        ui_bt_validate.accessibilityIdentifier = "event_gallery_validate"
         
         setupFlowLayout()
         

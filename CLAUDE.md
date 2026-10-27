@@ -25,6 +25,16 @@ xcodebuild -scheme EntourageBeta -destination "platform=iOS Simulator,id=<UDID>"
 ```
 Les tests tournent sur un faux backend (`entourage/Tools/Testing/StubBackend.swift`, DEBUG uniquement) : l'app lancée avec `-UITestMode` charge les fake data du `home/summary` via `UITEST_EVENTS` et journalise les requêtes envoyées (`UITEST_REQUEST_LOG`). Voir `entourageUITests/Support/UITestCase.swift` pour écrire un nouveau scénario.
 
+### Stratégie de test (alignée sur Android)
+
+- **Filet JSON, lecture** (`ApiJsonCharacterizationTests`) : décode les fixtures de `entourageTests/Fixtures/api/` (copiées d'Android, même contrat serveur) dans les vrais modèles. Les modèles iOS exigent des clés que les fixtures n'ont pas (`uuid`, `past_outings_count`, `user_type`…) : le test les ajoute et fige la liste. Un test rouge = le format lu par l'app a changé.
+- **Filet JSON, écriture** (`WriteRequestFixturesTests`) : appelle les vrais services sur le faux backend et compare le corps envoyé aux fixtures de `Fixtures/api/requests-ios/`. Changement voulu : `TEST_RUNNER_UPDATE_FIXTURES=1 xcodebuild … test -only-testing:entourageTests/WriteRequestFixturesTests`, puis relire le diff.
+- **Smoke de lecture** (`ApiReadEndpointsSmokeTests`) : GET sur le vrai staging avec le compte de test, décodage dans les modèles ; ignoré sans identifiants. Lancer après toute modification de `Models/` :
+  `TEST_RUNNER_TEST_ACCOUNT_LOGIN=… TEST_RUNNER_TEST_ACCOUNT_PWD=… xcodebuild … test -only-testing:entourageTests/ApiReadEndpointsSmokeTests` (jamais d'identifiants dans le repo).
+- **Scénarios E2E** (`entourageUITests/`, une capture par étape) : sur le faux backend, contrairement à Android qui tape le staging. Nouvel écran ou changement de comportement d'un écran = scénario ajouté ou mis à jour.
+- **Scénarios de création et de conversation** (`CreationScenariosUITests`) : groupe, événement en ligne, contribution, demande, envoi d'un message. Le `StubBackend` répond aux routes de création (la réponse reprend le corps envoyé) et à la conversation de test ; la position est celle de Paris en mode `-UITestMode`. Les identifiants d'accessibilité des parcours sont posés via `.formFlowIdentifier(...)` / `accessibilityIdentifier`.
+- **Pas encore couvert** : deeplinks (`UniversalLinkManager` appelle directement l'interface, il faut une couture pour le tester), connexion, événement en présentiel (autocomplétion Google Places), édition, suppression et réactions sur les messages.
+
 ## Architecture
 
 ### Navigation

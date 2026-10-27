@@ -27,7 +27,8 @@ struct GroupStepDetailsView: View {
                     FormFlowTextField(
                         placeholder: "neighborhoodCreateNamePlaceholderName".localized,
                         text: store.binding(\.name),
-                        hasError: store.errors[.name] != nil
+                        hasError: store.errors[.name] != nil,
+                        identifier: "group_form_name"
                     )
                     .formFlowError(store.errors[.name])
                 }
@@ -40,7 +41,8 @@ struct GroupStepDetailsView: View {
                         placeholder: "neighborhoodCreateTitleDescriptionPlaceholder".localized,
                         text: store.binding(\.descriptionText),
                         maxLength: ApplicationTheme.maxCharsDescription,
-                        hasError: store.errors[.description] != nil
+                        hasError: store.errors[.description] != nil,
+                        identifier: "group_form_description"
                     )
                     .formFlowError(store.errors[.description])
                 }
@@ -54,6 +56,7 @@ struct GroupStepDetailsView: View {
                         placeholder: "neighborhoodCreatePlaceInfos".localized,
                         text: store.values.addressName,
                         hasError: store.errors[.address] != nil,
+                        identifier: "group_form_place",
                         action: onPickPlace
                     )
                     .formFlowError(store.errors[.address])
@@ -88,7 +91,7 @@ struct GroupStepInterestsView: View {
                     .padding(.bottom, 6)
 
                 FormFlowLayout(items: tags.map { $0.key }) { key in
-                    FormFlowChip(title: name(for: key), isOn: store.values.interests.contains(key)) {
+                    FormFlowChip(title: name(for: key), isOn: store.values.interests.contains(key), identifier: "group_form_interest_\(key)") {
                         store.toggleInterest(key)
                     }
                 }
@@ -140,6 +143,7 @@ struct GroupStepPhotoView: View {
                         addTitle: "event_form_photo_add".localized,
                         changeTitle: "event_form_photo_change".localized,
                         addedCaption: "event_form_photo_added".localized,
+                        identifier: "group_form_photo",
                         action: onPickPhoto
                     )
                     .formFlowError(store.errors[.photo])

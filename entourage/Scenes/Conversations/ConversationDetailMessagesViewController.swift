@@ -174,6 +174,11 @@ private var imagePreviewOverlay: UIView?
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Identifiants pour les scénarios XCUITest.
+        ui_textview_message.accessibilityIdentifier = "conversation_input"
+        view.tagButton(action: "btnSend:", target: self, identifier: "conversation_send")
+        ui_tableview.accessibilityIdentifier = "conversation_messages"
+
         // GESTION DU TAP GESTURE
         ui_tap_gesture.cancelsTouchesInView = false
         ui_tap_gesture.delegate = self

@@ -49,6 +49,14 @@ enum FormFlowStyle {
     }
 }
 
+/// Identifiant d'accessibilité pour les scénarios XCUITest (`entourageUITests`), posé seulement s'il est fourni.
+extension View {
+    @ViewBuilder
+    func formFlowIdentifier(_ identifier: String?) -> some View {
+        if let identifier { self.accessibilityIdentifier(identifier) } else { self }
+    }
+}
+
 // MARK: - En-tête d'étape -
 
 struct FormFlowStepHeader: View {
@@ -192,6 +200,7 @@ struct FormFlowTextField: View {
     var trailingSystemImage: String? = nil
     var keyboard: UIKeyboardType = .default
     var autocapitalization: UITextAutocapitalizationType = .sentences
+    var identifier: String? = nil
     @State private var isFocused = false
 
     var body: some View {
@@ -200,6 +209,7 @@ struct FormFlowTextField: View {
                 TextField(placeholder, text: $text, onEditingChanged: { editing in
                     isFocused = editing
                 })
+                .formFlowIdentifier(identifier)
                 .font(FormFlowStyle.regular(15.5))
                 .foregroundColor(FormFlowStyle.ink)
                 .keyboardType(keyboard)
@@ -223,13 +233,14 @@ struct FormFlowTextArea: View {
     @Binding var text: String
     var maxLength: Int
     var hasError = false
+    var identifier: String? = nil
     @State private var isFocused = false
 
     var body: some View {
         VStack(alignment: .trailing, spacing: 6) {
             FormFlowInputBox(hasError: hasError, isFocused: isFocused, padded: false, minHeight: 112) {
                 ZStack(alignment: .topLeading) {
-                    FormFlowTextViewRepresentable(text: $text, maxLength: maxLength, onFocusChange: { isFocused = $0 })
+                    FormFlowTextViewRepresentable(text: $text, maxLength: maxLength, identifier: identifier, onFocusChange: { isFocused = $0 })
                         .frame(height: 112)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 6)
@@ -253,6 +264,7 @@ struct FormFlowTextArea: View {
 private struct FormFlowTextViewRepresentable: UIViewRepresentable {
     @Binding var text: String
     let maxLength: Int
+    var identifier: String? = nil
     let onFocusChange: (Bool) -> Void
 
     func makeCoordinator() -> Coordinator { Coordinator(self) }
@@ -266,6 +278,7 @@ private struct FormFlowTextViewRepresentable: UIViewRepresentable {
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         textView.textContainer.lineFragmentPadding = 5
         textView.autocapitalizationType = .sentences
+        textView.accessibilityIdentifier = identifier
         return textView
     }
 
@@ -310,6 +323,7 @@ struct FormFlowPickerField: View {
     var currentDate: Date? = nil
     var minimumDate: Date? = nil
     var maximumDate: Date? = nil
+    var identifier: String? = nil
     let onCommit: (Date) -> Void
     @State private var isFocused = false
 
@@ -325,6 +339,7 @@ struct FormFlowPickerField: View {
                     currentDate: currentDate,
                     minimumDate: minimumDate,
                     maximumDate: maximumDate,
+                    identifier: identifier,
                     onFocusChange: { isFocused = $0 },
                     onCommit: onCommit
                 )
@@ -358,6 +373,7 @@ private struct FormFlowPickerTextField: UIViewRepresentable {
     let currentDate: Date?
     let minimumDate: Date?
     let maximumDate: Date?
+    var identifier: String? = nil
     let onFocusChange: (Bool) -> Void
     let onCommit: (Date) -> Void
 
@@ -365,6 +381,7 @@ private struct FormFlowPickerTextField: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UITextField {
         let textField = FormFlowInsetTextField()
+        textField.accessibilityIdentifier = identifier
         textField.delegate = context.coordinator
         textField.font = ApplicationTheme.getFontNunitoRegular(size: 15.5)
         textField.textColor = FormFlowStyle.uiInk
@@ -384,6 +401,7 @@ private struct FormFlowPickerTextField: UIViewRepresentable {
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let done = UIBarButtonItem(title: "validate".localized, style: .plain, target: context.coordinator, action: #selector(Coordinator.validate))
         done.tintColor = .appOrange
+        done.accessibilityIdentifier = "form_flow_picker_validate"
         toolbar.setItems([cancel, space, done], animated: false)
         textField.inputAccessoryView = toolbar
         context.coordinator.textField = textField
@@ -444,6 +462,7 @@ struct FormFlowSelectableCard: View {
     let title: String
     var subtitle: String? = nil
     let isOn: Bool
+    var identifier: String? = nil
     let action: () -> Void
 
     var body: some View {
@@ -501,6 +520,7 @@ struct FormFlowSelectableCard: View {
             )
         }
         .buttonStyle(PlainButtonStyle())
+        .formFlowIdentifier(identifier)
         .accessibility(addTraits: isOn ? [.isButton, .isSelected] : [.isButton])
     }
 }
@@ -508,6 +528,7 @@ struct FormFlowSelectableCard: View {
 struct FormFlowChip: View {
     let title: String
     let isOn: Bool
+    var identifier: String? = nil
     let action: () -> Void
 
     var body: some View {
@@ -525,6 +546,7 @@ struct FormFlowChip: View {
                 )
         }
         .buttonStyle(PlainButtonStyle())
+        .formFlowIdentifier(identifier)
         .accessibility(addTraits: isOn ? [.isButton, .isSelected] : [.isButton])
     }
 }
@@ -683,6 +705,7 @@ struct FormFlowPhotoPickerTile: View {
     let changeTitle: String
     var addedCaption: String? = nil
     var height: CGFloat = 190
+    var identifier: String? = nil
     let action: () -> Void
 
     var body: some View {
@@ -736,6 +759,7 @@ struct FormFlowPhotoPickerTile: View {
                 )
             }
         }
+        .formFlowIdentifier(identifier)
         .buttonStyle(PlainButtonStyle())
     }
 }
@@ -746,6 +770,7 @@ struct FormFlowPlaceField: View {
     let placeholder: String
     let text: String
     var hasError = false
+    var identifier: String? = nil
     let action: () -> Void
 
     var body: some View {
@@ -764,6 +789,7 @@ struct FormFlowPlaceField: View {
                 }
             }
         }
+        .formFlowIdentifier(identifier)
         .buttonStyle(PlainButtonStyle())
     }
 }

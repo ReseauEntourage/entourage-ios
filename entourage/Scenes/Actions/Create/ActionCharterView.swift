@@ -259,6 +259,7 @@ struct ActionCharterView: View {
             }
             .background(Color(UIColor.appOrange))
             .cornerRadius(32)
+            .accessibilityIdentifier("action_charter_accept")
         }
         .padding(.horizontal, 4)
         .frame(maxWidth: .infinity)

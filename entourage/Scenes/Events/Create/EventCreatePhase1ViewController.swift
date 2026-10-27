@@ -50,7 +50,8 @@ struct EventStepPresentationView: View {
                     FormFlowTextField(
                         placeholder: "event_form_name_placeholder".localized,
                         text: store.binding(\.title),
-                        hasError: store.errors[.title] != nil
+                        hasError: store.errors[.title] != nil,
+                        identifier: "event_form_title"
                     )
                     .formFlowError(store.errors[.title])
                 }
@@ -64,7 +65,8 @@ struct EventStepPresentationView: View {
                         placeholder: "event_form_description_placeholder".localized,
                         text: store.binding(\.descriptionText),
                         maxLength: ApplicationTheme.maxCharsDescription,
-                        hasError: store.errors[.description] != nil
+                        hasError: store.errors[.description] != nil,
+                        identifier: "event_form_description"
                     )
                     .formFlowError(store.errors[.description])
                 }
@@ -140,6 +142,7 @@ struct EventStepPresentationView: View {
                 )
             }
         }
+        .formFlowIdentifier("event_form_photo")
         .buttonStyle(PlainButtonStyle())
     }
 }
