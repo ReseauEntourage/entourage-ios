@@ -796,20 +796,29 @@ extension NeighborhoodPostCell: SurveyOptionViewDelegate {
         // Ce guard est maintenant sûr grâce à l'initialisation ci-dessus
         guard var surveyResponse = postMessage.surveyResponse else { return }
 
-        // Réinitialiser les votes si le sondage n'est pas à choix multiples
+        // État avant le tap : permet de savoir si on re-clique sur l'option déjà votée (retrait du vote)
+        let previousResponse = surveyResponse
+        let wasSelected = previousResponse[optionIndex]
+
+        // Choix unique : on décoche tout, mais sans toucher au total des autres options
         if !localSurvey.multiple {
             surveyResponse.indices.forEach { surveyResponse[$0] = false }
-            localSurvey.summary.indices.forEach { localSurvey.summary[$0] = 0 }
+            if let previousIndex = previousResponse.firstIndex(of: true) {
+                localSurvey.summary[previousIndex] = max(localSurvey.summary[previousIndex] - 1, 0)
+            }
         }
-        
-        // Inverser la réponse actuelle et ajuster le compteur de votes
-        surveyResponse[optionIndex].toggle()
-        if surveyResponse[optionIndex] {
-            localSurvey.summary[optionIndex] += 1
+
+        // Re-taper l'option déjà cochée retire le vote, y compris en choix unique
+        if wasSelected {
+            surveyResponse[optionIndex] = false
+            if localSurvey.multiple {
+                localSurvey.summary[optionIndex] = max(localSurvey.summary[optionIndex] - 1, 0)
+            }
         } else {
-            localSurvey.summary[optionIndex] = max(localSurvey.summary[optionIndex] - 1, 0)
+            surveyResponse[optionIndex] = true
+            localSurvey.summary[optionIndex] += 1
         }
-        
+
         // Sauvegarder les modifications
         postMessage.survey = localSurvey
         postMessage.surveyResponse = surveyResponse
