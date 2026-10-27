@@ -419,4 +419,36 @@ final class EventFormTests: XCTestCase {
         let vc = EventCreateMainViewController()
         XCTAssertFalse(vc.supportsDraft)
     }
+
+    /// EN-8983 : la duplication reprend les champs, laisse les dates vides, et ne renvoie pas l'URL de
+    /// la photo (l'API attend une clé d'envoi) : la photo est recopiée à part par le contrôleur.
+    func testDuplicationKeepsFieldsClearsDatesAndDefersPhotoCopy() {
+        var event = Event()
+        event.uid = 42
+        event.title = "Atelier"
+        event.descriptionEvent = "Venez"
+        event.imageUrl = "https://example.com/photo.jpg"
+        event.entourage_image_url = "https://example.com/photo.jpg"
+        var md = EventMetadata()
+        md.reservedFemale = true
+        event.metadata = md
+
+        let values = EventFormValues(event: event, forDuplication: true)
+        XCTAssertEqual(values.title, "Atelier")
+        XCTAssertEqual(values.descriptionText, "Venez")
+        XCTAssertTrue(values.isReservedFemale)
+        XCTAssertNil(values.day)
+        XCTAssertNil(values.startMinutes)
+        XCTAssertNil(values.endMinutes)
+        XCTAssertEqual(values.entourageImageUrl, "https://example.com/photo.jpg")
+
+        let storyboard = UIStoryboard(name: StoryboardName.eventCreate, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
+        vc.sourceEvent = event
+        vc.loadViewIfNeeded()
+
+        XCTAssertNil(vc.formStore.values.entourageImageUrl)
+        XCTAssertTrue(vc.formStore.values.hasPhoto)
+        XCTAssertNil(vc.formStore.values.makeEvent().dictionaryForWS()["image_url"])
+    }
 }

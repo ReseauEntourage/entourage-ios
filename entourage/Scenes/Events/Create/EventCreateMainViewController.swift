@@ -19,6 +19,9 @@ class EventCreateMainViewController: EventFormContainerViewController {
 
     private var restoredPageIndex: Int? = nil
 
+    /// URL de la photo de l'événement dupliqué, à recopier une fois l'écran affiché.
+    private var duplicatedPhotoUrl: String? = nil
+
     /// « Enregistrer » (brouillon) est masqué : le code du brouillon est conservé mais inaccessible,
     /// et la création ne restaure plus de brouillon.
     override var supportsDraft: Bool { return false }
@@ -32,6 +35,11 @@ class EventCreateMainViewController: EventFormContainerViewController {
 
         if let source = sourceEvent {
             values = EventFormValues(event: source, forDuplication: true)
+            // L'API de création attend un identifiant du catalogue ou une clé d'envoi, pas l'URL
+            // d'une image existante : la photo est recopiée à part (`copyDuplicatedPhoto`), l'URL
+            // ne sert que d'aperçu en attendant.
+            duplicatedPhotoUrl = values.entourageImageUrl
+            values.entourageImageUrl = nil
         }
 
         // Création depuis la page d'un groupe : ce groupe est pré-sélectionné pour le partage.
@@ -41,6 +49,33 @@ class EventCreateMainViewController: EventFormContainerViewController {
 
         formStore.values = values
         initialValues = values
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        copyDuplicatedPhoto()
+    }
+
+    /// Télécharge la photo de l'événement dupliqué puis l'envoie comme une photo choisie par
+    /// l'utilisateur. En cas d'échec la photo est retirée : l'étape demandera d'en choisir une.
+    private func copyDuplicatedPhoto() {
+        guard let urlString = duplicatedPhotoUrl, let url = URL(string: urlString) else { return }
+        duplicatedPhotoUrl = nil
+        formStore.isUploadingPhoto = true
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
+            let image = data.flatMap { UIImage(data: $0) }
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                if let image = image {
+                    self.addCustomPhoto(image: image)
+                }
+                else {
+                    Logger.print("***** copie de la photo de l'événement dupliqué impossible : \(urlString)")
+                    self.formStore.isUploadingPhoto = false
+                    self.formStore.clearPhoto()
+                }
+            }
+        }.resume()
     }
 
     /// Revalidation du brouillon : si une étape déjà franchie contient une valeur devenue
