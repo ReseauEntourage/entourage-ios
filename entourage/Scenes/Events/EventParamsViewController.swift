@@ -303,7 +303,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                 let duplicateCell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 duplicateCell.populateCell(
                     title: "event_params_duplicate".localized,
-                    imageName: "ic_charte",
+                    imageName: "ic_duplicate_event",
                     showArrow: true,
                     showSeparator: true,
                     delegate: self,
