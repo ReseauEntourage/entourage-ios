@@ -1182,8 +1182,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 //detail my actions
 "action_your" = "Ваша дія";
 "actions_my_title" = "Мої оголошення";
-"action_myActions_empty_title" = "Ви ще не опублікували жодного оголошення";
-"action_myActions_empty_subtitle" = "Ви можете створити внесок або запит, натиснувши «+» на сторінці «Взаємодопомога»";
 "action_detail_title_location" = "Місцезнаходження";
 "atKm" = "%.4g км від мене";
 "AtKm" = "%.4g км від мене";

@@ -554,12 +554,7 @@ class ActionsMainHomeViewController: UIViewController {
                         self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: true)
                     }
                 }
-                // Onglet « Mes annonces » : placeholder quand aucune annonce n'a été créée (EN-7617)
-                if self.currentMode == .myActions && self.myActions.isEmpty {
-                    self.showEmptyView()
-                } else {
-                    self.hideEmptyView()
-                }
+                self.ui_view_empty.isHidden = self.myActions.count > 0
             }
         }
     }

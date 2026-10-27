@@ -1182,8 +1182,6 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 //detail my actions
 "action_your" = "Deine Handlung";
 "actions_my_title" = "Meine Anzeigen";
-"action_myActions_empty_title" = "Sie haben noch keine Anzeige veröffentlicht";
-"action_myActions_empty_subtitle" = "Sie können einen Beitrag oder eine Anfrage erstellen, indem Sie auf der Seite „Hilfe“ auf das „+“ tippen";
 "action_detail_title_location" = "Standort";
 "atKm" = "%.4g km von mir entfernt";
 "AtKm" = "%.4g km von mir entfernt";
