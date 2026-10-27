@@ -39,8 +39,7 @@ struct PictureUploadS3Service {
     
     //2nd step upload to Amazon
     static func uploadtoS3(urlS3:String, avatar_key:String, image:UIImage,completion: @escaping (_ result: Bool)->()) {
-        let normalizedImage = image.normalizedImage()
-        guard let url = URL(string: urlS3), let data = normalizedImage.jpegData(compressionQuality: 0.8) else {
+        guard let url = URL(string: urlS3), let data = image.uploadJPEGData(compressionQuality: 0.8) else {
             completion(false)
             return
         }

@@ -377,6 +377,29 @@ extension UIImage {
     }
 }
 
+extension UIImage {
+    /// Encode l'image en JPEG pour l'envoi au serveur (EN-8843) : jamais de HEIF/HEIC, jamais de HDR.
+    /// L'image est redessinée en sRGB standard (SDR, orientation appliquée, fond blanc) avant l'encodage,
+    /// pour que le redimensionnement côté serveur reçoive un JPEG classique.
+    func uploadJPEGData(compressionQuality: CGFloat = 0.8) -> Data? {
+        let format = UIGraphicsImageRendererFormat.default()
+        format.scale = scale
+        format.opaque = true
+        format.preferredRange = .standard
+        let renderer = UIGraphicsImageRenderer(size: size, format: format)
+        let data = renderer.jpegData(withCompressionQuality: compressionQuality) { context in
+            UIColor.white.setFill()
+            context.fill(CGRect(origin: .zero, size: size))
+            draw(in: CGRect(origin: .zero, size: size))
+        }
+        // Garde-fou : signature JPEG (FF D8) ; sinon on retombe sur l'encodage standard.
+        if data.count > 2, data[0] == 0xFF, data[1] == 0xD8 {
+            return data
+        }
+        return normalizedImage().jpegData(compressionQuality: compressionQuality)
+    }
+}
+
 class ImageLoaderSwift {
     
     private static let cache = NSCache<NSString, NSData>()
