@@ -28,17 +28,21 @@ class EventParamEditShow: UITableViewCell {
         imageName: String? = nil,
         showArrow: Bool = true,
         showSeparator: Bool = true,
+        forceBlackIcon: Bool = false,
         delegate: EventParamCellDelegate,
         type: EventCellEditType
     ) {
         self.delegate = delegate
         self.cellType = type
-        
+
         ui_image.tintColor = UIColor.black
         ui_title.text = title
-        
+
         if let imageName = imageName {
-            ui_image.image = UIImage(named: imageName)
+            let image = UIImage(named: imageName)
+            // Un asset en couleur (ex. l'icône orange partagée avec les groupes) ignore la teinte :
+            // le rendu « template » la force en noir comme les autres lignes.
+            ui_image.image = forceBlackIcon ? image?.withRenderingMode(.alwaysTemplate) : image
         }
 
         ui_image_arrow.isHidden = !showArrow

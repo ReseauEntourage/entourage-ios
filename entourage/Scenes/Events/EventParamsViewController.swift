@@ -319,6 +319,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                         imageName: "ic_edit_group",
                         showArrow: true,
                         showSeparator: true,
+                        forceBlackIcon: true,
                         delegate: self,
                         type: .EditRecurrency
                     )
