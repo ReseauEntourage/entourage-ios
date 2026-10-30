@@ -43,10 +43,8 @@ class HomeCellDonation: UITableViewCell {
         ui_card.layer.cornerRadius = 16
         ui_card.layer.borderWidth = 1
         ui_card.layer.borderColor = UIColor(hexString: "#FEEAE3").cgColor
-        ui_card.layer.shadowColor = UIColor.black.cgColor
-        ui_card.layer.shadowOpacity = 0.08
-        ui_card.layer.shadowRadius = 4
-        ui_card.layer.shadowOffset = CGSize(width: 0, height: 2)
+        ui_card.layer.shadowColor = UIColor.clear.cgColor
+        ui_card.layer.shadowOpacity = 0
         contentView.addSubview(ui_card)
 
         ui_icon_circle.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +82,7 @@ class HomeCellDonation: UITableViewCell {
         let textStack = UIStackView(arrangedSubviews: [ui_label_title, ui_label_text])
         textStack.translatesAutoresizingMaskIntoConstraints = false
         textStack.axis = .vertical
-        textStack.spacing = 4
+        textStack.spacing = 2
         ui_card.addSubview(textStack)
         ui_card.addSubview(ui_button_donate)
 
@@ -96,22 +94,22 @@ class HomeCellDonation: UITableViewCell {
 
             ui_icon_circle.widthAnchor.constraint(equalToConstant: 40),
             ui_icon_circle.heightAnchor.constraint(equalToConstant: 40),
-            ui_icon_circle.leadingAnchor.constraint(equalTo: ui_card.leadingAnchor, constant: 16),
-            ui_icon_circle.topAnchor.constraint(equalTo: ui_card.topAnchor, constant: 16),
+            ui_icon_circle.leadingAnchor.constraint(equalTo: ui_card.leadingAnchor, constant: 12),
+            ui_icon_circle.topAnchor.constraint(equalTo: ui_card.topAnchor, constant: 12),
 
             ui_icon.centerXAnchor.constraint(equalTo: ui_icon_circle.centerXAnchor),
             ui_icon.centerYAnchor.constraint(equalTo: ui_icon_circle.centerYAnchor),
             ui_icon.widthAnchor.constraint(equalToConstant: 20),
             ui_icon.heightAnchor.constraint(equalToConstant: 20),
 
-            textStack.topAnchor.constraint(equalTo: ui_card.topAnchor, constant: 16),
+            textStack.topAnchor.constraint(equalTo: ui_card.topAnchor, constant: 12),
             textStack.leadingAnchor.constraint(equalTo: ui_icon_circle.trailingAnchor, constant: 12),
-            textStack.trailingAnchor.constraint(equalTo: ui_card.trailingAnchor, constant: -16),
+            textStack.trailingAnchor.constraint(equalTo: ui_card.trailingAnchor, constant: -12),
 
-            ui_button_donate.topAnchor.constraint(equalTo: textStack.bottomAnchor, constant: 12),
+            ui_button_donate.topAnchor.constraint(equalTo: textStack.bottomAnchor, constant: 8),
             ui_button_donate.leadingAnchor.constraint(equalTo: textStack.leadingAnchor),
             ui_button_donate.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
-            ui_button_donate.bottomAnchor.constraint(equalTo: ui_card.bottomAnchor, constant: -16)
+            ui_button_donate.bottomAnchor.constraint(equalTo: ui_card.bottomAnchor, constant: -12)
         ])
     }
 
