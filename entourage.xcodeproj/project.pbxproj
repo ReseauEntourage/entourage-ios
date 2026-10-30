@@ -651,7 +651,6 @@
 		323DFB9DE77E5EA59770393F /* BadgeDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E4678DC6351C68998AE52 /* BadgeDetailSheet.swift */; };
 		4F7CE641A48EBB9BB1436A81 /* EventLimitedPlacesModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E5B1A516C8C8AB5C153073 /* EventLimitedPlacesModalView.swift */; };
 		53D7C9D6D1A942CF9496570C /* ConversationsHeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FB946716604F7EBEE6D173 /* ConversationsHeaderBarView.swift */; };
-		5C879E9935784BE79435B827 /* HomeCellClimatisation.xib in Resources */ = {isa = PBXBuildFile; fileRef = A26ACD37313DE88FC1B62C9D /* HomeCellClimatisation.xib */; };
 		671B17CB453E9377DABE42E0 /* WelcomeJourneyAutoSkipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA001453330A09ED2CB9A3D3 /* WelcomeJourneyAutoSkipUITests.swift */; };
 		72936E4258FC09BB960849C8 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD618FF02B2E54F937FA00 /* SocketManager.swift */; };
 		7B708F4B8EA25053A117A0C3 /* BadgesSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C2147360325CB38A5E787E /* BadgesSectionView.swift */; };
@@ -659,7 +658,7 @@
 		7FDDC1E7C9EDFC09AECDB828 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 5944ADF5ABBA34EC41DC55FD /* Mantis */; };
 		806656B8FABE830EA5287ECE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 988506C8FEC713F130A8113F /* Foundation.framework */; };
 		84F3EDC186C5BE174F15DAF6 /* WelcomeJourneyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B5B0D23F87B14F24C9F9D3 /* WelcomeJourneyScreen.swift */; };
-		86384CF3B8823D5B7D619D64 /* HomeCellClimatisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86253553A998914FD3B9CD21 /* HomeCellClimatisation.swift */; };
+		86384CF3B8823D5B7D619D64 /* HomeCellDonation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86253553A998914FD3B9CD21 /* HomeCellDonation.swift */; };
 		8847117D3A4A502C946E4E72 /* BadgesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D082C7559556949BF6C4E6 /* BadgesListView.swift */; };
 		8F05CDFBE1F3D3DAD23EE275 /* MessageActionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635ED36512E7A2B6F85E9721 /* MessageActionsCoordinator.swift */; };
 		97B923BAF1476CD5F6FC777A /* EventCancelledBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004C9978909256CDCC2C4BA4 /* EventCancelledBadgeView.swift */; };
@@ -1381,14 +1380,13 @@
 		75E5B1A516C8C8AB5C153073 /* EventLimitedPlacesModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLimitedPlacesModalView.swift; sourceTree = "<group>"; };
 		777E8CA9AFDBA2DC285F9493 /* BonnesOndesCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonnesOndesCardCell.swift; sourceTree = "<group>"; };
 		81A2350661C0BC3AE1E7AFB6 /* BonnesOndesCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonnesOndesCardView.swift; sourceTree = "<group>"; };
-		86253553A998914FD3B9CD21 /* HomeCellClimatisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellClimatisation.swift; sourceTree = "<group>"; };
+		86253553A998914FD3B9CD21 /* HomeCellDonation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellDonation.swift; sourceTree = "<group>"; };
 		94C2CFEE2F5124ECED8B6115 /* entourageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = entourageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		988506C8FEC713F130A8113F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		9E6D18B5FF299CF8D887C22B /* WelcomeJourneyViewModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WelcomeJourneyViewModelTests.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A7B8C9D0E1F3 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A7B8C9D0E1F5 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		A1E30EA046F12F7FB43AE813 /* WelcomeJourneyAutoSkipTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WelcomeJourneyAutoSkipTests.swift; sourceTree = "<group>"; };
-		A26ACD37313DE88FC1B62C9D /* HomeCellClimatisation.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCellClimatisation.xib; sourceTree = "<group>"; };
 		B4D082C7559556949BF6C4E6 /* BadgesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesListView.swift; sourceTree = "<group>"; };
 		BBCF4BE1D7F24AA0D9C75E90 /* MessageActionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionOverlay.swift; sourceTree = "<group>"; };
 		BCCB5DA78304A2F71A8EF260 /* ActionCharterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCharterView.swift; sourceTree = "<group>"; };
@@ -2642,8 +2640,7 @@
 				241A6AEB2F6C3229005BF63B /* WelcomeVideoModalViewController.swift */,
 				242108212F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift */,
 				242108222F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib */,
-				86253553A998914FD3B9CD21 /* HomeCellClimatisation.swift */,
-				A26ACD37313DE88FC1B62C9D /* HomeCellClimatisation.xib */,
+				86253553A998914FD3B9CD21 /* HomeCellDonation.swift */,
 				268ADBD02DD48C1700031C6F /* HomeSmallTalkCell.swift */,
 				268ADBD22DD48F5900031C6F /* HomeSmallTalkCell.xib */,
 				268ADBD42DD4910900031C6F /* cell_small_talks */,
@@ -3250,7 +3247,6 @@
 				02E2192328352552002A1FCB /* Neighborhood_Message.storyboard in Resources */,
 				26BEEED12C06180D00169FBA /* congrats_animation.json in Resources */,
 				242108242F4EF9B6004D74E2 /* HomeSolidarityToolsCell.xib in Resources */,
-				5C879E9935784BE79435B827 /* HomeCellClimatisation.xib in Resources */,
 				0236971A296D9F6A00E2CACC /* DetailMessageTopPostImageCell.xib in Resources */,
 				26195B252C09F7E000BEAD84 /* InterestsCollectionViewCell.xib in Resources */,
 				025C92B828340CFC000970D9 /* NeighborhoodPostImageCell.xib in Resources */,
@@ -3735,7 +3731,7 @@
 				26043D932CE4EA6F00F4083F /* ChoiceDayCell.swift in Sources */,
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
 				242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */,
-				86384CF3B8823D5B7D619D64 /* HomeCellClimatisation.swift in Sources */,
+				86384CF3B8823D5B7D619D64 /* HomeCellDonation.swift in Sources */,
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,
 				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,

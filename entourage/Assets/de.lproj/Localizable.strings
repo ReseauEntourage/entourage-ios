@@ -1412,9 +1412,10 @@ Wählen Sie ein Thema, um zu beginnen.";
 "home_v2_title_map" = "Entdecken Sie nützliche Adressen";
 "home_v2_subtitle_map" = "Alle Solidaritätsstrukturen in der Nähe";
 "home_v2_button_map" = "Karte der solidarischen Orte";
-"home_v2_climatisation_title" = "Klimatisierte solidarische Orte";
-"home_v2_climatisation_subtitle" = "Finden Sie einen kühlen Ort in Ihrer Nähe während der Hitzewelle.";
-"home_v2_climatisation_badge" = "Hitzewelle Spezial";
+"home_v2_donation_title" = "Entourage lives thanks to you";
+"home_v2_donation_text" = "Entourage is a charity funded by public generosity. You can support us by making a donation.";
+"home_v2_donation_button" = "Donate";
+"home_v2_title_discover_contents" = "Content to discover";
 
 "home_v2_title_pedago" = "Alles, was Sie wissen müssen, um Maßnahmen zu ergreifen";
 "home_v2_subtitle_pedago" = "Prekarität zu bekämpfen ist wie alles, man kann es lernen!";

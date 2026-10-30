@@ -319,6 +319,7 @@ let   Action_Home_Event_All = "Action_Home_Event_All"//
 let   Action_Home_Group_Detail = "Action_Home_Group_Detail"
 let   Action_Home_Group_All = "Action_Home_Group_All"//
 let   Action__Home__Map = "Action__Home__Map"//
+let   Click_Home_Donation_Banner = "click_home_donation_banner"
 let   Action_Home_Article = "Action_Home_Article"//
 let   Action__Home__Pedago = "Action__Home__Pedago"//
 let   Action_Home_CreateEvent = "Action_Home_CreateEvent"//

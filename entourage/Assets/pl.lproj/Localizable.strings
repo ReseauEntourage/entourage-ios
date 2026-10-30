@@ -1456,9 +1456,10 @@ Wybierz temat, aby zacząć.";
 "home_v2_title_map" = "Découvrir des adresses utiles";
 "home_v2_subtitle_map" = "Toutes les structures solidaires à proximité";
 "home_v2_button_map" = "Mapa miejsc solidarności";
-"home_v2_climatisation_title" = "Klimatyzowane miejsca solidarności";
-"home_v2_climatisation_subtitle" = "Znajdźcie Państwo chłodne miejsce w pobliżu podczas fali upałów.";
-"home_v2_climatisation_badge" = "Specjalnie na upały";
+"home_v2_donation_title" = "Entourage lives thanks to you";
+"home_v2_donation_text" = "Entourage is a charity funded by public generosity. You can support us by making a donation.";
+"home_v2_donation_button" = "Donate";
+"home_v2_title_discover_contents" = "Content to discover";
 
 "home_v2_title_pedago" = "Tout savoir pour passer à l‘action";
 "home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";

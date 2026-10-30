@@ -1412,9 +1412,10 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "home_v2_title_map" = "Відкрийте для себе корисні адреси";
 "home_v2_subtitle_map" = "Всі споруди солідарності поруч";
 "home_v2_button_map" = "Карта місць солідарності";
-"home_v2_climatisation_title" = "Кондиційовані місця солідарності";
-"home_v2_climatisation_subtitle" = "Знайдіть прохолодне місце поруч під час спеки.";
-"home_v2_climatisation_badge" = "Спецвипуск спеки";
+"home_v2_donation_title" = "Entourage lives thanks to you";
+"home_v2_donation_text" = "Entourage is a charity funded by public generosity. You can support us by making a donation.";
+"home_v2_donation_button" = "Donate";
+"home_v2_title_discover_contents" = "Content to discover";
 
 "home_v2_title_pedago" = "Усе, що вам потрібно знати, щоб діяти";
 "home_v2_subtitle_pedago" = "Боротьба з нестабільністю – це як усе, цьому можна навчитися!";

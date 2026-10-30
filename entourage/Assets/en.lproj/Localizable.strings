@@ -1447,9 +1447,10 @@ Choose a topic to get started.";
 "home_v2_title_map" = "Discover useful addresses";
 "home_v2_subtitle_map" = "All solidarity structures nearby";
 "home_v2_button_map" = "Map of solidarity places";
-"home_v2_climatisation_title" = "Air-conditioned solidarity places";
-"home_v2_climatisation_subtitle" = "Find a cool place near you during the heatwave.";
-"home_v2_climatisation_badge" = "Heatwave special";
+"home_v2_donation_title" = "Entourage lives thanks to you";
+"home_v2_donation_text" = "Entourage is a charity funded by public generosity. You can support us by making a donation.";
+"home_v2_donation_button" = "Donate";
+"home_v2_title_discover_contents" = "Content to discover";
 
 "home_v2_title_pedago" = "Everything you need to know";
 "home_v2_subtitle_pedago" = "Fighting precarity, like everything else, can be learned!";

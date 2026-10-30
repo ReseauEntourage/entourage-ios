@@ -33,7 +33,7 @@ enum HomeV2DTO {
     case cellInitialPedago(pedagos: [PedagogicResource])
     case cellWelcomeJourney(viewModel: WelcomeJourneyViewModel)
     case cellSolidarityTools
-    case cellClimatisation
+    case cellDonation
 }
 
 class HomeMainViewController: UIViewController, UIPopoverPresentationControllerDelegate {
@@ -103,7 +103,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_table_view.register(UINib(nibName: HomeNeedHelpCell.identifier, bundle: nil), forCellReuseIdentifier: HomeNeedHelpCell.identifier)
         ui_table_view.register(UINib(nibName: HomeInitialPedagogicHorizontalCell.identifier, bundle: nil), forCellReuseIdentifier: HomeInitialPedagogicHorizontalCell.identifier)
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
-        ui_table_view.register(UINib(nibName: HomeCellClimatisation.identifier, bundle: nil), forCellReuseIdentifier: HomeCellClimatisation.identifier)
+        ui_table_view.register(HomeCellDonation.self, forCellReuseIdentifier: HomeCellDonation.identifier)
         ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
 
 
@@ -536,9 +536,10 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         }
 
         tableDTO.append(.cellSolidarityTools)
-        tableDTO.append(.cellClimatisation)
+        tableDTO.append(.cellDonation)
 
         if allPedagos.count > 0 {
+            tableDTO.append(.cellTitle(title: "home_v2_title_discover_contents".localized, subtitle: ""))
             for pedago in allPedagos {
                 tableDTO.append(.cellPedago(pedago: pedago))
             }
@@ -644,10 +645,11 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.delegate = self
                 return cell
             }
-        case .cellClimatisation:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: HomeCellClimatisation.identifier) as? HomeCellClimatisation {
-                cell.selectionStyle = .none
-                cell.configure(title: "home_v2_climatisation_title".localized, subtitle: "home_v2_climatisation_subtitle".localized, badge: "home_v2_climatisation_badge".localized)
+        case .cellDonation:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: HomeCellDonation.identifier) as? HomeCellDonation {
+                cell.onDonateTapped = { [weak self] in
+                    self?.openDonationPage()
+                }
                 return cell
             }
         case .cellWelcomeJourney(let viewModel):
@@ -832,9 +834,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case .cellInitialPedago(_): return
         case .cellSolidarityTools: return
-        case .cellClimatisation:
-            AnalyticsLoggerManager.logEvent(name: Action__Home__Map)
-            self.showAllPois(airConditionedFilter: true)
+        case .cellDonation: return
         case .cellWelcomeJourney(_): return
         }
     }
@@ -851,7 +851,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellIAmLost(_): return UITableView.automaticDimension
         case .cellInitialPedago(_): return 115
         case .cellSolidarityTools: return UITableView.automaticDimension
-        case .cellClimatisation: return UITableView.automaticDimension
+        case .cellDonation: return UITableView.automaticDimension
         case .cellWelcomeJourney(_): return UITableView.automaticDimension
         }
     }
@@ -1099,6 +1099,13 @@ extension HomeMainViewController {
     @objc func onWelcomeNationalGroupSnackbarTapped(_ sender: UIButton) {
         sender.removeFromSuperview()
         DeepLinkManager.showNeiborhoodListUniversalLink()
+    }
+
+    func openDonationPage() {
+        AnalyticsLoggerManager.logEvent(name: Click_Home_Donation_Banner)
+        if let url = URL(string: "http://don.entourage.social/?cid=97") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 
     func showAllPois(airConditionedFilter: Bool = false) {

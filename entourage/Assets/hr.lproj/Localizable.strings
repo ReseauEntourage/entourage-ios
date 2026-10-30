@@ -1436,9 +1436,10 @@ Odaberite temu za početak.";
 "home_v2_title_map" = "Découvrir des adresses utiles";
 "home_v2_subtitle_map" = "Toutes les structures solidaires à proximité";
 "home_v2_button_map" = "Carte des lieux solidaires près de vous";
-"home_v2_climatisation_title" = "Klimatizirana solidarna mjesta";
-"home_v2_climatisation_subtitle" = "Pronađite hladno mjesto u blizini tijekom vrućinskog vala.";
-"home_v2_climatisation_badge" = "Posebno za vrućine";
+"home_v2_donation_title" = "Entourage lives thanks to you";
+"home_v2_donation_text" = "Entourage is a charity funded by public generosity. You can support us by making a donation.";
+"home_v2_donation_button" = "Donate";
+"home_v2_title_discover_contents" = "Content to discover";
 
 "home_v2_title_pedago" = "Tout savoir pour passer à l‘action";
 "home_v2_subtitle_pedago" = "Combattre la précarité, c’est comme tout, ça s’apprend !";

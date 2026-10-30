@@ -1416,9 +1416,10 @@ Alegeți un subiect pentru a începe.";
 "home_v2_title_map" = "Descoperiți adrese utile";
 "home_v2_subtitle_map" = "Toate structurile de solidaritate din apropiere";
 "home_v2_button_map" = "Harta locurilor de solidaritate din apropiere";
-"home_v2_climatisation_title" = "Locuri solidare climatizate";
-"home_v2_climatisation_subtitle" = "Găsiți un loc răcoros lângă dumneavoastră în timpul valului de căldură.";
-"home_v2_climatisation_badge" = "Special val de căldură";
+"home_v2_donation_title" = "Entourage lives thanks to you";
+"home_v2_donation_text" = "Entourage is a charity funded by public generosity. You can support us by making a donation.";
+"home_v2_donation_button" = "Donate";
+"home_v2_title_discover_contents" = "Content to discover";
 
 "home_v2_title_pedago" = "Tot ce trebuie să știi pentru a acționa";
 "home_v2_subtitle_pedago" = "Combaterea precarității este ca orice, se poate învăța!";
