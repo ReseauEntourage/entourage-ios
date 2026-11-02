@@ -104,9 +104,9 @@ final class SuggestionCardView: UIView {
         ui_badge_stack.spacing = 6
         ui_badge_stack.alignment = .center
 
-        ui_info_button.setTitle("ⓘ", for: .normal)
+        ui_info_button.setTitle("?", for: .normal)
         ui_info_button.setTitleColor(UIColor(hexString: "#D53F00"), for: .normal)
-        ui_info_button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        ui_info_button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         ui_info_button.backgroundColor = UIColor(red: 1, green: 149 / 255, blue: 57 / 255, alpha: 0.18)
         ui_info_button.layer.cornerRadius = 15
         ui_info_button.addTarget(self, action: #selector(infoTapped), for: .touchUpInside)
