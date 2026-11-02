@@ -35,6 +35,13 @@ final class StubBackend {
     /// Sert à vérifier que l'interface n'attend pas le serveur pour afficher l'étape "Passée".
     var skipResponseDelay: TimeInterval = 0
 
+    /// Si vrai, `home/summary` renvoie `user.onboarding_journey` (backend qui porte l'état du parcours) ;
+    /// sinon le faux backend se comporte comme l'ancien : le champ est absent.
+    var emitsOnboardingJourney = false
+    /// Faux erreur serveur sur `POST users/onboarding_journey_hidden`.
+    var failsJourneyHidden = false
+    private var storedJourneyHidden = false
+
     private init() {}
 
     // MARK: - État
@@ -42,6 +49,9 @@ final class StubBackend {
     func reset(events: [String] = []) {
         lock.lock(); defer { lock.unlock() }
         storedEvents = events
+        storedJourneyHidden = false
+        emitsOnboardingJourney = false
+        failsJourneyHidden = false
         storedRequests = []
         storedConversationMessages = [Self.firstConversationMessage]
         nextCreatedId = 9000
@@ -90,7 +100,40 @@ final class StubBackend {
             "congratulations": [Any](),
             "events": events
         ]
-        return Self.json(["user": user])
+        var summary = user
+        if emitsOnboardingJourney { summary["onboarding_journey"] = onboardingJourneyJSON() }
+        return Self.json(["user": summary])
+    }
+
+    /// Même forme que `Onboarding::Journey#summary` côté backend (clés de `steps` = argument de `onboarding_step_skipped`).
+    private func onboardingJourneyJSON() -> [String: Any] {
+        let doneEventsByStep: [String: [String]] = [
+            "welcome_watched": ["onboarding.resource.welcome_watched"],
+            "neighborhood_national": ["onboarding.neighborhood.national"],
+            "webinar_or_first_steps": ["onboarding.outing.webinar_or_first_steps"],
+            "papotages": ["onboarding.outing.first_event", "onboarding.outing.papotages"]
+        ]
+        let current = events
+        var steps: [String: String] = [:]
+        for (step, doneEvents) in doneEventsByStep {
+            if doneEvents.contains(where: current.contains) {
+                steps[step] = "done"
+            } else if let skipped = Self.skippedEventByStep[step], current.contains(skipped) {
+                steps[step] = "skipped"
+            } else {
+                steps[step] = "todo"
+            }
+        }
+        lock.lock(); let hidden = storedJourneyHidden; lock.unlock()
+        let allCrossed = steps.values.allSatisfy { $0 != "todo" }
+        let reason: Any
+        if hidden { reason = "hidden" } else if allCrossed { reason = "completed" } else { reason = NSNull() }
+        return [
+            "removed": hidden || allCrossed,
+            "removed_reason": reason,
+            "steps": steps,
+            "done_steps_count": steps.values.filter { $0 == "done" }.count
+        ]
     }
 
     private static func json(_ object: Any) -> Data {
@@ -124,6 +167,13 @@ final class StubBackend {
             }
             addEvent(event)
             return (200, Self.json(["status": "ok"]))
+
+        case ("POST", "users/onboarding_journey_hidden"):
+            if failsJourneyHidden {
+                return (500, Self.json(["error": ["code": "SERVER_ERROR", "message": "stub failure"]]))
+            }
+            lock.lock(); storedJourneyHidden = true; lock.unlock()
+            return (200, Self.json(["onboarding_journey": onboardingJourneyJSON()]))
 
         case ("GET", "resources/welcome"):
             let resource: [String: Any] = [

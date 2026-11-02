@@ -136,6 +136,30 @@ struct HomeService:ParsingDataCodable {
         }
     }
 
+    /// « Masquer le parcours » : le backend retire le parcours pour de bon (raison `hidden`) et renvoie son nouvel état.
+    /// Idempotent côté serveur.
+    static func postOnboardingJourneyHidden(completion: @escaping (_ journey: OnboardingJourney?, _ error: EntourageNetworkError?) -> Void) {
+
+        guard let token = UserDefaults.token else {return}
+        let endpoint = String.init(format: kAPIOnboardingJourneyHidden, token)
+
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
+
+            guard error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error ?? EntourageNetworkError()) }
+                return
+            }
+
+            let journey = data.flatMap { try? JSONDecoder().decode(OnboardingJourneyWrapper.self, from: $0).onboardingJourney }
+            DispatchQueue.main.async { completion(journey, nil) }
+        }
+    }
+
+    private struct OnboardingJourneyWrapper: Decodable {
+        let onboardingJourney: OnboardingJourney?
+        enum CodingKeys: String, CodingKey { case onboardingJourney = "onboarding_journey" }
+    }
+
     static func markRecoWebUrlRead( webUrl:String, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}

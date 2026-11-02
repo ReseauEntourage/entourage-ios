@@ -142,4 +142,131 @@ final class WelcomeJourneyViewModelTests: XCTestCase {
 
         XCTAssertTrue(viewModel.hideEntirely)
     }
+
+    // MARK: - Parcours porté par le backend (`user.onboarding_journey`)
+
+    private func makeViewModel(events: [String]?, journey: OnboardingJourney?, initiallyAllResolved: Bool? = nil) -> WelcomeJourneyViewModel {
+        var initial = initiallyAllResolved
+        let viewModel = WelcomeJourneyViewModel()
+        viewModel.update(with: events, groupCount: 0, hasInitiallyCompletedAll: &initial, journey: journey)
+        return viewModel
+    }
+
+    private func journey(removed: Bool = false, reason: String? = nil, steps: [String: String]? = nil) -> OnboardingJourney {
+        OnboardingJourney(removed: removed, removedReason: reason, steps: steps, doneStepsCount: nil)
+    }
+
+    private let allTodo = [
+        "welcome_watched": "todo", "neighborhood_national": "todo",
+        "webinar_or_first_steps": "todo", "papotages": "todo"
+    ]
+
+    func testJourneyDecodesFromSummaryJSON() throws {
+        let json = """
+        {"removed": true, "removed_reason": "inactivity", "done_steps_count": 1,
+         "steps": {"welcome_watched": "done", "papotages": "skipped"}}
+        """
+        let decoded = try JSONDecoder().decode(OnboardingJourney.self, from: Data(json.utf8))
+
+        XCTAssertTrue(decoded.isRemoved)
+        XCTAssertEqual(decoded.removedReason, "inactivity")
+        XCTAssertEqual(decoded.doneStepsCount, 1)
+        XCTAssertEqual(decoded.steps?["papotages"], "skipped")
+    }
+
+    func testJourneyDecodesWithNullReasonAndMissingFields() throws {
+        let decoded = try JSONDecoder().decode(OnboardingJourney.self, from: Data(#"{"removed": false, "removed_reason": null}"#.utf8))
+
+        XCTAssertFalse(decoded.isRemoved)
+        XCTAssertNil(decoded.removedReason)
+        XCTAssertNil(decoded.steps)
+    }
+
+    func testStepsFromBackendOverrideEvents() {
+        var steps = allTodo
+        steps["welcome_watched"] = "done"
+        steps["papotages"] = "skipped"
+        // Les events disent l'inverse : c'est `steps` qui fait foi.
+        let viewModel = makeViewModel(events: [Event.webinar], journey: journey(steps: steps))
+
+        XCTAssertEqual(states(viewModel), [
+            .video: .completed, .nationalGroups: .active, .webinar: .active, .papotages: .skipped
+        ])
+    }
+
+    func testMissingStepKeyFallsBackOnEvents() {
+        let viewModel = makeViewModel(events: [Event.national], journey: journey(steps: ["welcome_watched": "todo"]))
+
+        XCTAssertEqual(states(viewModel)[.nationalGroups], .completed)
+        XCTAssertEqual(states(viewModel)[.video], .active)
+    }
+
+    func testJourneyWithoutStepsFallsBackOnEvents() {
+        let viewModel = makeViewModel(events: [Event.video], journey: journey())
+
+        XCTAssertEqual(states(viewModel)[.video], .completed)
+        XCTAssertFalse(viewModel.hideEntirely)
+    }
+
+    func testBackendRemovedJourneyIsHiddenAtLaunchWhateverTheSteps() {
+        var initial: Bool? = nil
+        let viewModel = WelcomeJourneyViewModel()
+        viewModel.update(with: [], groupCount: 0, hasInitiallyCompletedAll: &initial,
+                         journey: journey(removed: true, reason: "ceiling", steps: allTodo))
+
+        XCTAssertTrue(viewModel.hideEntirely)
+        XCTAssertFalse(viewModel.isFullyCompleted)
+        XCTAssertEqual(initial, true)
+    }
+
+    func testBackendRemovalForInactivityOrHiddenHidesAJourneyDisplayedEarlier() {
+        for reason in ["inactivity", "ceiling", "hidden"] {
+            let viewModel = makeViewModel(events: [], journey: journey(removed: true, reason: reason, steps: allTodo),
+                                          initiallyAllResolved: false)
+            XCTAssertTrue(viewModel.hideEntirely, reason)
+        }
+    }
+
+    func testNotRemovedJourneyStaysVisible() {
+        let viewModel = makeViewModel(events: [], journey: journey(removed: false, steps: allTodo))
+
+        XCTAssertFalse(viewModel.hideEntirely)
+        XCTAssertEqual(viewModel.steps.count, 4)
+    }
+
+    func testJourneyCompletedDuringTheSessionStillShowsTheSuccessBanner() {
+        let done = ["welcome_watched": "done", "neighborhood_national": "done",
+                    "webinar_or_first_steps": "done", "papotages": "done"]
+        let viewModel = makeViewModel(events: [], journey: journey(removed: true, reason: "completed", steps: done),
+                                      initiallyAllResolved: false)
+
+        XCTAssertFalse(viewModel.hideEntirely)
+        XCTAssertTrue(viewModel.isFullyCompleted)
+    }
+
+    func testJourneyCompletedWithASkippedStepShowsNoSuccessBanner() {
+        let steps = ["welcome_watched": "done", "neighborhood_national": "done",
+                     "webinar_or_first_steps": "skipped", "papotages": "done"]
+        let viewModel = makeViewModel(events: [], journey: journey(removed: true, reason: "completed", steps: steps),
+                                      initiallyAllResolved: false)
+
+        XCTAssertTrue(viewModel.hideEntirely)
+        XCTAssertFalse(viewModel.isFullyCompleted)
+    }
+
+    func testAbsentJourneyKeepsTheLocalBehavior() {
+        let viewModel = makeViewModel(events: [Event.video], journey: nil)
+
+        XCTAssertFalse(viewModel.hideEntirely)
+        XCTAssertEqual(states(viewModel)[.video], .completed)
+        XCTAssertEqual(states(viewModel)[.nationalGroups], .active)
+    }
+
+    func testMarkingAStepSkippedNeverDowngradesADoneStep() {
+        let current = journey(steps: ["welcome_watched": "done", "papotages": "todo"])
+
+        XCTAssertEqual(current.markingSkipped(step: "welcome_watched").steps?["welcome_watched"], "done")
+        XCTAssertEqual(current.markingSkipped(step: "papotages").steps?["papotages"], "skipped")
+        XCTAssertNil(journey().markingSkipped(step: "papotages").steps)
+    }
 }

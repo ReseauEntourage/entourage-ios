@@ -1,6 +1,7 @@
 import Foundation
 
-/// Règles qui passent automatiquement toutes les étapes du parcours de bienvenue (100 % front) :
+/// Règles locales qui passent automatiquement toutes les étapes du parcours de bienvenue. Elles ne servent plus que de repli
+/// quand `home/summary` ne renvoie pas `user.onboarding_journey` (backend ancien) : sinon le backend porte le retrait :
 /// - J14 : 14 jours ou plus écoulés depuis la dernière connexion (date stockée localement) ;
 /// - J30 : compte créé il y a 30 jours ou plus (`created_at` du profil).
 /// Quand une règle s'applique, l'app envoie `POST users/onboarding_step_skipped` pour chaque étape encore à faire.
@@ -46,8 +47,9 @@ struct WelcomeJourneyAutoSkip {
     }
 }
 
-/// « Masquer le parcours » (menu ⋯) : le backend ne porte pas d'état « masqué », l'app passe donc les étapes
-/// restantes (ce qui arrête aussi les relances) et mémorise le masquage localement, par utilisateur.
+/// Masquage mémorisé localement, par utilisateur : repli quand le backend ne porte pas l'état du parcours
+/// (`onboarding_journey` absent) ou quand `onboarding_journey_hidden` a échoué. Les étapes restantes sont alors passées
+/// côté backend, ce qui arrête aussi les relances.
 struct WelcomeJourneyHiddenFlag {
 
     private static func key(userId: String) -> String { "welcomeJourneyHidden_\(userId)" }

@@ -22,6 +22,8 @@ struct UserHome:Codable {
     var unclosedAction:SummaryAction? = nil
     var preference:String? = nil
     var events: [String]? = nil
+    /// État du parcours de bienvenue porté par le backend ; `nil` tant que le backend ne le renvoie pas.
+    var onboardingJourney: OnboardingJourney? = nil
     var signablePermission:Bool? = nil
     var association:Bool? = false
     private var _pastOutingParticipationsCount: Int? = nil
@@ -61,12 +63,41 @@ struct UserHome:Codable {
         case unclosedAction = "unclosed_action"
         case preference = "preference"
         case events = "events"
+        case onboardingJourney = "onboarding_journey"
         case signablePermission = "signable_permission"
         case association
         case _pastOutingParticipationsCount = "past_outing_participations_count"
         case _actionCreationsCount = "action_creations_count"
         case _neighborhoodMessagesCount = "neighborhood_messages_count"
         case _conversationMembersCount = "conversation_members_count"
+    }
+}
+
+/// `user.onboarding_journey` de `home/summary` (et réponse de `POST users/onboarding_journey_hidden`).
+/// `steps` est indexé par la valeur `step` de `POST users/onboarding_step_skipped` : todo, done ou skipped.
+struct OnboardingJourney: Codable, Equatable {
+    var removed: Bool? = nil
+    /// completed, hidden, inactivity, ceiling ou nil.
+    var removedReason: String? = nil
+    var steps: [String: String]? = nil
+    var doneStepsCount: Int? = nil
+
+    enum CodingKeys: String, CodingKey {
+        case removed
+        case removedReason = "removed_reason"
+        case steps
+        case doneStepsCount = "done_steps_count"
+    }
+
+    var isRemoved: Bool { removed == true }
+
+    /// Même parcours avec l'étape passée (sans toucher à une étape déjà faite) : mise à jour optimiste du bouton « Passer ».
+    func markingSkipped(step: String) -> OnboardingJourney {
+        var copy = self
+        guard var current = copy.steps, current[step] != "done" else { return self }
+        current[step] = "skipped"
+        copy.steps = current
+        return copy
     }
 }
 

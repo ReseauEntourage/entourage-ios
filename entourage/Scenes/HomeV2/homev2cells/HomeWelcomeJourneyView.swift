@@ -83,13 +83,37 @@ class WelcomeJourneyViewModel: ObservableObject {
         return .active
     }
 
-    func update(with userEvents: [String]?, groupCount: Int, hasInitiallyCompletedAll: inout Bool?) {
+    /// État d'une étape : `journey.steps` (porté par le backend) quand il connaît l'étape, sinon les events.
+    static func state(of type: WelcomeJourneyStepType, events: [String], journey: OnboardingJourney?) -> WelcomeJourneyStepState {
+        switch journey?.steps?[type.skipApiStep] {
+        case "done": return .completed
+        case "skipped": return .skipped
+        case "todo": return .active
+        default: return state(of: type, events: events)
+        }
+    }
+
+    /// `journey` : `user.onboarding_journey` de `home/summary`. Quand il est présent, le backend décide du retrait
+    /// du parcours (terminé, masqué, 14 jours d'inactivité, 30 jours) ; absent, on garde la logique locale.
+    func update(with userEvents: [String]?, groupCount: Int, hasInitiallyCompletedAll: inout Bool?, journey: OnboardingJourney? = nil) {
         let events = userEvents ?? []
 
         // On se fie uniquement au backend pour l'état d'avancement
-        let states = WelcomeJourneyStepType.allCases.map { Self.state(of: $0, events: events) }
+        let states = WelcomeJourneyStepType.allCases.map { Self.state(of: $0, events: events, journey: journey) }
         // Une étape passée est considérée comme résolue, comme une étape terminée.
         let allResolved = states.allSatisfy { $0 != .active }
+
+        if let journey = journey, journey.isRemoved {
+            // Parcours retiré par le backend. Seule exception : il vient d'être terminé pendant cette session
+            // (il était affiché au lancement) : on laisse passer la logique ci-dessous pour l'encart de réussite.
+            let justCompleted = hasInitiallyCompletedAll == false && journey.removedReason == "completed"
+            if hasInitiallyCompletedAll == nil { hasInitiallyCompletedAll = true }
+            if !justCompleted {
+                self.hideEntirely = true
+                self.isFullyCompleted = false
+                return
+            }
+        }
 
         if hasInitiallyCompletedAll == nil {
             hasInitiallyCompletedAll = allResolved

@@ -77,6 +77,8 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     private var hasShownCompletionStateThisSession = false
     private var hasInitiallyCompletedAll: Bool? = nil
     private var hasEvaluatedWelcomeAutoSkip = false
+    /// Masquage du parcours demandé par le membre, appliqué sans attendre la réponse du backend.
+    private var isWelcomeJourneyHiddenOptimistically = false
     
     var profileViewModel = MyProfileViewModel()
 
@@ -490,7 +492,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         }
 
         let welcomeJourneyVM = WelcomeJourneyViewModel()
-        welcomeJourneyVM.update(with: userHome.events, groupCount: userHome.neighborhoodParticipationsCount, hasInitiallyCompletedAll: &self.hasInitiallyCompletedAll)
+        welcomeJourneyVM.update(with: userHome.events, groupCount: userHome.neighborhoodParticipationsCount, hasInitiallyCompletedAll: &self.hasInitiallyCompletedAll, journey: userHome.onboardingJourney)
         if !stepsToAutoSkip.isEmpty {
             skipWelcomeSteps(stepsToAutoSkip)
         }
@@ -501,7 +503,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
         let isUserProOrTeam = (UserDefaults.currentUser?.partner != nil)
 
-        let isHiddenByUser = WelcomeJourneyHiddenFlag.isHidden(userId: UserDefaults.currentUser?.uuid)
+        let isHiddenByUser = isWelcomeJourneyHiddenOptimistically || WelcomeJourneyHiddenFlag.isHidden(userId: UserDefaults.currentUser?.uuid)
         if !welcomeJourneyVM.hideEntirely && !isUserProOrTeam && !isHiddenByUser {
             tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
 
@@ -742,6 +744,11 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         hasEvaluatedWelcomeAutoSkip = true
 
         let now = Date()
+        // Le backend porte le retrait du parcours (14 jours sans étape franchie, 30 jours) : plus de règle locale.
+        if userHome.onboardingJourney != nil {
+            WelcomeJourneyAutoSkip.recordConnection(at: now)
+            return []
+        }
         let reason = WelcomeJourneyAutoSkip.reason(now: now,
                                                    lastConnection: WelcomeJourneyAutoSkip.lastConnection(),
                                                    accountCreation: UserDefaults.currentUser?.creationDate)
@@ -790,9 +797,11 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         // ni le rechargement complet de la home (une dizaine d'appels en chaîne). Le prochain
         // `home/summary` renverra de toute façon l'event `*_skipped`.
         let previousEvents = userHome.events
+        let previousJourney = userHome.onboardingJourney
         var events = previousEvents ?? []
         if !events.contains(stepType.skippedEvent) { events.append(stepType.skippedEvent) }
         userHome.events = events
+        userHome.onboardingJourney = previousJourney?.markingSkipped(step: stepType.skipApiStep)
         configureDTO()
 
         HomeService.postOnboardingStepSkipped(step: stepType.skipApiStep) { [weak self] error in
@@ -802,16 +811,38 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
             guard error != nil, let self = self else { return }
             // Échec : on remet l'étape "à faire" pour ne pas afficher un état que le backend ne connaît pas.
             self.userHome.events = previousEvents
+            self.userHome.onboardingJourney = previousJourney
             self.configureDTO()
         }
     }
 
-    /// « Masquer le parcours » confirmé : le parcours disparaît tout de suite et pour de bon (mémorisé localement),
-    /// et les étapes restantes sont passées côté backend pour couper les relances.
+    /// « Masquer le parcours » confirmé : le parcours disparaît tout de suite. Le backend le retire pour de bon
+    /// (`onboarding_journey_hidden`) ; s'il ne porte pas encore l'état du parcours, ou en cas d'échec réseau, le masquage
+    /// est mémorisé localement et les étapes restantes sont passées côté backend pour couper les relances.
     private func handleWelcomeJourneyHide(pending: [WelcomeJourneyStepType]) {
         #if DEBUG
-        WelcomeJourneyDebugModel.shared.log("Masquer le parcours → passe \(pending.map(\.identifier).joined(separator: ","))")
+        WelcomeJourneyDebugModel.shared.log("Masquer le parcours → \(userHome.onboardingJourney != nil ? "onboarding_journey_hidden" : "passe " + pending.map(\.identifier).joined(separator: ","))")
         #endif
+
+        guard userHome.onboardingJourney != nil else {
+            hideWelcomeJourneyLocally(skipping: pending)
+            return
+        }
+
+        isWelcomeJourneyHiddenOptimistically = true
+        configureDTO()
+
+        HomeService.postOnboardingJourneyHidden { [weak self] journey, error in
+            guard let self = self else { return }
+            if error != nil {
+                self.hideWelcomeJourneyLocally(skipping: pending)
+            } else if let journey = journey {
+                self.userHome.onboardingJourney = journey
+            }
+        }
+    }
+
+    private func hideWelcomeJourneyLocally(skipping pending: [WelcomeJourneyStepType]) {
         WelcomeJourneyHiddenFlag.markHidden(userId: UserDefaults.currentUser?.uuid)
         configureDTO()
 

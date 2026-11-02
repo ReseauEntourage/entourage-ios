@@ -149,4 +149,72 @@ final class WelcomeJourneyNetworkTests: XCTestCase {
                        ["GET resources/welcome", "POST resources/\(id)/users"])
         XCTAssertEqual(fetchSummary()?.events, ["onboarding.resource.welcome_watched"])
     }
+
+    // MARK: - Parcours porté par le backend
+
+    private func hideJourney() -> (journey: OnboardingJourney?, error: EntourageNetworkError?) {
+        let done = expectation(description: "journey hidden")
+        var result: (OnboardingJourney?, EntourageNetworkError?) = (nil, nil)
+        HomeService.postOnboardingJourneyHidden { journey, error in
+            result = (journey, error)
+            done.fulfill()
+        }
+        wait(for: [done], timeout: 5)
+        return result
+    }
+
+    func testSummaryHasNoJourneyWhenTheBackendDoesNotCarryIt() {
+        XCTAssertNil(fetchSummary()?.onboardingJourney)
+    }
+
+    func testSummaryExposesTheBackendJourney() {
+        StubBackend.shared.emitsOnboardingJourney = true
+        skip(step: WelcomeJourneyStepType.webinar.skipApiStep)
+
+        let journey = fetchSummary()?.onboardingJourney
+        XCTAssertEqual(journey?.removed, false)
+        XCTAssertNil(journey?.removedReason)
+        XCTAssertEqual(journey?.steps?["webinar_or_first_steps"], "skipped")
+        XCTAssertEqual(journey?.steps?["papotages"], "todo")
+        XCTAssertEqual(journey?.doneStepsCount, 0)
+    }
+
+    func testHidingTheJourneyPostsTheHiddenRouteAndTheJourneyComesBackRemoved() {
+        StubBackend.shared.emitsOnboardingJourney = true
+
+        let hidden = hideJourney()
+        XCTAssertNil(hidden.error)
+        XCTAssertEqual(hidden.journey?.removed, true)
+        XCTAssertEqual(hidden.journey?.removedReason, "hidden")
+        XCTAssertEqual(StubBackend.shared.requests.map(\.signature), ["POST users/onboarding_journey_hidden"])
+
+        // Même après réinstallation : le prochain summary porte le retrait.
+        let summaryJourney = fetchSummary()?.onboardingJourney
+        XCTAssertEqual(summaryJourney?.removed, true)
+        XCTAssertEqual(summaryJourney?.removedReason, "hidden")
+
+        var initial: Bool? = nil
+        let viewModel = WelcomeJourneyViewModel()
+        viewModel.update(with: fetchSummary()?.events, groupCount: 0, hasInitiallyCompletedAll: &initial,
+                         journey: summaryJourney)
+        XCTAssertTrue(viewModel.hideEntirely)
+    }
+
+    func testHidingTheJourneyReportsAnErrorWhenTheServerFails() {
+        StubBackend.shared.emitsOnboardingJourney = true
+        StubBackend.shared.failsJourneyHidden = true
+
+        let hidden = hideJourney()
+        XCTAssertNil(hidden.journey)
+        XCTAssertNotNil(hidden.error)
+    }
+
+    func testFirstEventValidatesTheLastStepInTheBackendJourney() {
+        StubBackend.shared.reset(events: ["onboarding.outing.first_event"])
+        StubBackend.shared.emitsOnboardingJourney = true
+
+        let journey = fetchSummary()?.onboardingJourney
+        XCTAssertEqual(journey?.steps?["papotages"], "done")
+        XCTAssertEqual(journey?.doneStepsCount, 1)
+    }
 }
