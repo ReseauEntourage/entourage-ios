@@ -69,6 +69,8 @@ final class SuggestionCoordinator {
 
     func infoTapped(_ card: SuggestionCard, from presenter: UIViewController) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Why, parameters: ["type": card.type.rawValue, "id": card.id])
+        let why = SuggestionWhyViewController(card: card, isolatedProfile: payload?.isIsolatedProfile ?? false)
+        presenter.present(why, animated: true)
     }
 
     /// « Plus tard » : retire la suggestion (le moteur la remplace) avec possibilité d'annuler.

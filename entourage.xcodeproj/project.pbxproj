@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB9CE866A26FEC5889D38CEA /* SuggestionWhyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483AED6D0E65DC86D012F61 /* SuggestionWhyViewController.swift */; };
 		72F6E3E90DDAAA8B74D7D7ED /* SuggestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */; };
 		459C129E2DFA5F33D5AE3C60 /* SuggestionSnackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96837C243ADD0F77701A788A /* SuggestionSnackbar.swift */; };
 		DD0DA324F29BCC6390880BE9 /* SuggestionHeroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356538A56B07F4C4AAD05443 /* SuggestionHeroCell.swift */; };
@@ -721,6 +722,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A483AED6D0E65DC86D012F61 /* SuggestionWhyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionWhyViewController.swift; sourceTree = "<group>"; };
 		5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCoordinator.swift; sourceTree = "<group>"; };
 		96837C243ADD0F77701A788A /* SuggestionSnackbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionSnackbar.swift; sourceTree = "<group>"; };
 		356538A56B07F4C4AAD05443 /* SuggestionHeroCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionHeroCell.swift; sourceTree = "<group>"; };
@@ -1470,6 +1472,7 @@
 		BBABD02D0C77C87BBB78C467 /* Suggestion */ = {
 			isa = PBXGroup;
 			children = (
+				A483AED6D0E65DC86D012F61 /* SuggestionWhyViewController.swift */,
 				5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */,
 				96837C243ADD0F77701A788A /* SuggestionSnackbar.swift */,
 				356538A56B07F4C4AAD05443 /* SuggestionHeroCell.swift */,
@@ -3758,6 +3761,7 @@
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
 				242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */,
 				86384CF3B8823D5B7D619D64 /* HomeCellDonation.swift in Sources */,
+				CB9CE866A26FEC5889D38CEA /* SuggestionWhyViewController.swift in Sources */,
 				72F6E3E90DDAAA8B74D7D7ED /* SuggestionCoordinator.swift in Sources */,
 				459C129E2DFA5F33D5AE3C60 /* SuggestionSnackbar.swift in Sources */,
 				DD0DA324F29BCC6390880BE9 /* SuggestionHeroCell.swift in Sources */,
