@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72F6E3E90DDAAA8B74D7D7ED /* SuggestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */; };
+		459C129E2DFA5F33D5AE3C60 /* SuggestionSnackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96837C243ADD0F77701A788A /* SuggestionSnackbar.swift */; };
+		DD0DA324F29BCC6390880BE9 /* SuggestionHeroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356538A56B07F4C4AAD05443 /* SuggestionHeroCell.swift */; };
+		ED5CEEA72E95E57B58D0A72A /* SuggestionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25B3AEEACC16715CD081D9 /* SuggestionCardView.swift */; };
+		1AA1764330D0D968001C57D6 /* SuggestionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650738C8144D7A87E5CFE5E6 /* SuggestionProvider.swift */; };
+		2B3821DA6255753607952655 /* SuggestionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598136EE6A7E9E508321C7EC /* SuggestionModels.swift */; };
 		A69BF8C76EC9709598497789 /* CreationScenariosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A95F6E3EB7F906B96438A8F /* CreationScenariosUITests.swift */; };
 		46CFD967B854C22F7FC8B10F /* TabNavigationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4682F8CA6BD6DC0774103C1B /* TabNavigationUITests.swift */; };
 		EE0AAE67A45F5B499EAC5C65 /* ApiReadEndpointsSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878E1F2379AF7AC73C86725E /* ApiReadEndpointsSmokeTests.swift */; };
@@ -715,6 +721,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCoordinator.swift; sourceTree = "<group>"; };
+		96837C243ADD0F77701A788A /* SuggestionSnackbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionSnackbar.swift; sourceTree = "<group>"; };
+		356538A56B07F4C4AAD05443 /* SuggestionHeroCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionHeroCell.swift; sourceTree = "<group>"; };
+		DD25B3AEEACC16715CD081D9 /* SuggestionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCardView.swift; sourceTree = "<group>"; };
+		650738C8144D7A87E5CFE5E6 /* SuggestionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProvider.swift; sourceTree = "<group>"; };
+		598136EE6A7E9E508321C7EC /* SuggestionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionModels.swift; sourceTree = "<group>"; };
 		4A95F6E3EB7F906B96438A8F /* CreationScenariosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationScenariosUITests.swift; sourceTree = "<group>"; };
 		4682F8CA6BD6DC0774103C1B /* TabNavigationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationUITests.swift; sourceTree = "<group>"; };
 		878E1F2379AF7AC73C86725E /* ApiReadEndpointsSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiReadEndpointsSmokeTests.swift; sourceTree = "<group>"; };
@@ -1455,6 +1467,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BBABD02D0C77C87BBB78C467 /* Suggestion */ = {
+			isa = PBXGroup;
+			children = (
+				5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */,
+				96837C243ADD0F77701A788A /* SuggestionSnackbar.swift */,
+				356538A56B07F4C4AAD05443 /* SuggestionHeroCell.swift */,
+				DD25B3AEEACC16715CD081D9 /* SuggestionCardView.swift */,
+				650738C8144D7A87E5CFE5E6 /* SuggestionProvider.swift */,
+				598136EE6A7E9E508321C7EC /* SuggestionModels.swift */,
+			);
+			path = Suggestion;
+			sourceTree = "<group>";
+		};
 		02040CF3288E97B700AB1FBB /* Params */ = {
 			isa = PBXGroup;
 			children = (
@@ -2625,6 +2650,7 @@
 				247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */,
 				26BEEECE2C00CE3800169FBA /* EventLastDayViewController.swift */,
 				266B263A2ABB17A600C8EAD8 /* homev2cells */,
+				BBABD02D0C77C87BBB78C467 /* Suggestion */,
 				260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */,
 				26D853452C8740850006C9D8 /* PopupBienCommunViewController.swift */,
 			);
@@ -3732,6 +3758,12 @@
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
 				242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */,
 				86384CF3B8823D5B7D619D64 /* HomeCellDonation.swift in Sources */,
+				72F6E3E90DDAAA8B74D7D7ED /* SuggestionCoordinator.swift in Sources */,
+				459C129E2DFA5F33D5AE3C60 /* SuggestionSnackbar.swift in Sources */,
+				DD0DA324F29BCC6390880BE9 /* SuggestionHeroCell.swift in Sources */,
+				ED5CEEA72E95E57B58D0A72A /* SuggestionCardView.swift in Sources */,
+				1AA1764330D0D968001C57D6 /* SuggestionProvider.swift in Sources */,
+				2B3821DA6255753607952655 /* SuggestionModels.swift in Sources */,
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,
 				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,

@@ -2443,3 +2443,39 @@ Choisissez un sujet pour démarrer.";
 "action_form_error_description" = "Ajoutez une description pour continuer.";
 "action_form_error_share" = "Répondez par oui ou par non pour continuer.";
 "action_form_save_error" = "Erreur lors de l’enregistrement de votre %@.";
+
+/* Suggestion : card « Votre prochain pas », écran « Pourquoi », zone Explorer */
+"suggestion_hero_title" = "Votre prochain pas";
+"suggestion_badge_entraide" = "🤝 Entraide";
+"suggestion_badge_contenu" = "📘 Comprendre";
+"suggestion_badge_evenement" = "📅 Événement";
+"suggestion_badge_groupe" = "👥 Groupe";
+"suggestion_badge_connexion" = "👋 Connexion";
+"suggestion_badge_lieu" = "📍 Lieu solidaire";
+"suggestion_chip_remote" = "💻 En visio";
+"suggestion_cta_answer" = "Répondre";
+"suggestion_cta_read" = "Lire";
+"suggestion_cta_participate" = "Je participe !";
+"suggestion_cta_register" = "Je m'inscris";
+"suggestion_cta_join" = "Rejoindre";
+"suggestion_cta_say_hello" = "Dire bonjour";
+"suggestion_cta_see_place" = "Voir le lieu";
+"suggestion_later" = "Plus tard";
+"suggestion_later_toast" = "Suggestion retirée pour le moment.";
+"suggestion_undo" = "Annuler";
+"suggestion_why_a11y" = "Pourquoi cette suggestion ?";
+"suggestion_body_a11y_hint" = "Ouvre le détail";
+"suggestion_loading_a11y" = "Chargement de votre prochain pas";
+
+"suggestion_why_title_entraide" = "Pourquoi cette demande ?";
+"suggestion_why_title_contenu" = "Pourquoi ce contenu ?";
+"suggestion_why_title_evenement" = "Pourquoi cet événement ?";
+"suggestion_why_title_groupe" = "Pourquoi ce groupe ?";
+"suggestion_why_title_connexion" = "Pourquoi cette personne ?";
+"suggestion_why_title_lieu" = "Pourquoi ce lieu ?";
+"suggestion_why_footer" = "Vous pouvez ignorer une suggestion à tout moment.";
+"suggestion_why_close" = "J'ai compris";
+
+"suggestion_explorer_title" = "Pour vous aujourd'hui";
+"suggestion_explorer_a11y_hint" = "Ouvre l'onglet correspondant";
+"suggestion_explorer_loading_a11y" = "Chargement de vos accès personnalisés";
