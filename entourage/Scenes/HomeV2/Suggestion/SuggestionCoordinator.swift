@@ -55,6 +55,19 @@ final class SuggestionCoordinator {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_View, parameters: ["type": card.type.rawValue, "id": card.id])
     }
 
+    func explorerDidDisplay(_ accesses: [ExplorerAccess]) {
+        guard !hasLoggedExplorerView else { return }
+        hasLoggedExplorerView = true
+        AnalyticsLoggerManager.logEvent(name: Suggestion_Explorer_View, parameters: ["count": accesses.count])
+    }
+
+    /// Mène à l'onglet cible. Les onglets n'acceptent pas encore de filtre en argument :
+    /// le pré-filtrage (ex. rayon de 2 km) reste à brancher quand le contrat du moteur sera figé.
+    func explorerTapped(_ access: ExplorerAccess) {
+        AnalyticsLoggerManager.logEvent(name: Suggestion_Explorer_Click, parameters: ["type": access.type.rawValue, "id": access.id])
+        navigate(to: access.target)
+    }
+
     // MARK: Actions de la card
 
     func primaryTapped(_ card: SuggestionCard) {

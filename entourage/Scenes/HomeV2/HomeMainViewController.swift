@@ -35,6 +35,7 @@ enum HomeV2DTO {
     case cellSolidarityTools
     case cellDonation
     case cellSuggestionHero(card: SuggestionCard?)
+    case cellSuggestionExplorer(accesses: [ExplorerAccess]?)
 }
 
 class HomeMainViewController: UIViewController, UIPopoverPresentationControllerDelegate {
@@ -111,6 +112,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_table_view.register(HomeCellDonation.self, forCellReuseIdentifier: HomeCellDonation.identifier)
         ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
         ui_table_view.register(SuggestionHeroCell.self, forCellReuseIdentifier: SuggestionHeroCell.identifier)
+        ui_table_view.register(SuggestionExplorerCell.self, forCellReuseIdentifier: SuggestionExplorerCell.identifier)
         suggestionCoordinator.onStateChanged = { [weak self] in self?.reloadSuggestionRows() }
 
 
@@ -570,8 +572,11 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         switch suggestionCoordinator.state {
         case .loading:
             rows.append(.cellSuggestionHero(card: nil))
+            rows.append(.cellSuggestionExplorer(accesses: nil))
         case .loaded(let payload):
             if let hero = payload.hero { rows.append(.cellSuggestionHero(card: hero)) }
+            // Zéro accès : toute la zone (titre compris) est masquée, pas de titre orphelin.
+            if !payload.explorer.isEmpty { rows.append(.cellSuggestionExplorer(accesses: payload.explorer)) }
         case .empty, .failed:
             break
         }
@@ -580,7 +585,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
 
     func isSuggestionRow(_ row: HomeV2DTO) -> Bool {
         switch row {
-        case .cellSuggestionHero: return true
+        case .cellSuggestionHero, .cellSuggestionExplorer: return true
         default: return false
         }
     }
@@ -705,6 +710,13 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                     self.suggestionCoordinator.infoTapped(card, from: self)
                 }
                 if let card = card { suggestionCoordinator.heroDidDisplay(card) }
+                return cell
+            }
+        case .cellSuggestionExplorer(let accesses):
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SuggestionExplorerCell.identifier) as? SuggestionExplorerCell {
+                cell.configure(accesses: accesses)
+                cell.onAccessTapped = { [weak self] access in self?.suggestionCoordinator.explorerTapped(access) }
+                if let accesses = accesses { suggestionCoordinator.explorerDidDisplay(accesses) }
                 return cell
             }
         case .cellWelcomeJourney(let viewModel):
@@ -920,6 +932,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellSolidarityTools: return
         case .cellDonation: return
         case .cellSuggestionHero(_): return
+        case .cellSuggestionExplorer(_): return
         case .cellWelcomeJourney(_): return
         }
     }
@@ -938,6 +951,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellSolidarityTools: return UITableView.automaticDimension
         case .cellDonation: return UITableView.automaticDimension
         case .cellSuggestionHero(_): return UITableView.automaticDimension
+        case .cellSuggestionExplorer(_): return UITableView.automaticDimension
         case .cellWelcomeJourney(_): return UITableView.automaticDimension
         }
     }
