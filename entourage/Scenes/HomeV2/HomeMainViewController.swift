@@ -34,6 +34,7 @@ enum HomeV2DTO {
     case cellWelcomeJourney(viewModel: WelcomeJourneyViewModel)
     case cellSolidarityTools
     case cellDonation
+    case cellSuggestionHero(card: SuggestionCard?)
 }
 
 class HomeMainViewController: UIViewController, UIPopoverPresentationControllerDelegate {
@@ -57,6 +58,8 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     var allDemands = [Action]()
     var allPedagos = [PedagogicResource]()
     var initialPedagos = [PedagogicResource]()
+    let suggestionCoordinator = SuggestionCoordinator()
+    var suggestionInsertIndex: Int?
     
     var currentFilter = EventActionLocationFilters()
     var currentLocationFilter = EventActionLocationFilters()
@@ -105,6 +108,8 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
         ui_table_view.register(HomeCellDonation.self, forCellReuseIdentifier: HomeCellDonation.identifier)
         ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
+        ui_table_view.register(SuggestionHeroCell.self, forCellReuseIdentifier: SuggestionHeroCell.identifier)
+        suggestionCoordinator.onStateChanged = { [weak self] in self?.reloadSuggestionRows() }
 
 
         self.checkAndCreateCookieIfNotExists()
@@ -159,6 +164,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         currentFilter.resetToDefault()
         self.loadMetadatas()
         self.initHome()
+        suggestionCoordinator.refresh()
         self.checkForUpdates()
         self.ifEventLastDay()
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
@@ -513,6 +519,9 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
             }
         }
 
+        suggestionInsertIndex = tableDTO.count
+        tableDTO.append(contentsOf: suggestionRows())
+
         if showInitialPedago && initialPedagos.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
             tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
@@ -550,6 +559,37 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         SVProgressHUD.dismiss()
     }
     
+    // MARK: - Suggestion (moteur de suggestion, données mock tant qu'EN-9473 n'est pas livré)
+
+    /// Lignes de suggestion selon l'état : squelette pendant le chargement, rien si vide ou en erreur.
+    func suggestionRows() -> [HomeV2DTO] {
+        guard SuggestionFeature.isEnabled else { return [] }
+        var rows = [HomeV2DTO]()
+        switch suggestionCoordinator.state {
+        case .loading:
+            rows.append(.cellSuggestionHero(card: nil))
+        case .loaded(let payload):
+            if let hero = payload.hero { rows.append(.cellSuggestionHero(card: hero)) }
+        case .empty, .failed:
+            break
+        }
+        return rows
+    }
+
+    func isSuggestionRow(_ row: HomeV2DTO) -> Bool {
+        switch row {
+        case .cellSuggestionHero: return true
+        default: return false
+        }
+    }
+
+    func reloadSuggestionRows() {
+        guard let index = suggestionInsertIndex, index <= tableDTO.count else { return }
+        tableDTO.removeAll(where: { isSuggestionRow($0) })
+        tableDTO.insert(contentsOf: suggestionRows(), at: min(index, tableDTO.count))
+        ui_table_view.reloadData()
+    }
+
     func initHome() {
         self.ui_label_subtitle.text = "home_v2_title".localized
         self.getNotif()
@@ -650,6 +690,19 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.onDonateTapped = { [weak self] in
                     self?.openDonationPage()
                 }
+                return cell
+            }
+        case .cellSuggestionHero(let card):
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SuggestionHeroCell.identifier) as? SuggestionHeroCell {
+                cell.configure(card: card)
+                cell.onPrimaryTapped = { [weak self] card in self?.suggestionCoordinator.primaryTapped(card) }
+                cell.onBodyTapped = { [weak self] card in self?.suggestionCoordinator.bodyTapped(card) }
+                cell.onLaterTapped = { [weak self] card in self?.suggestionCoordinator.laterTapped(card) }
+                cell.onInfoTapped = { [weak self] card in
+                    guard let self = self else { return }
+                    self.suggestionCoordinator.infoTapped(card, from: self)
+                }
+                if let card = card { suggestionCoordinator.heroDidDisplay(card) }
                 return cell
             }
         case .cellWelcomeJourney(let viewModel):
@@ -835,6 +888,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(_): return
         case .cellSolidarityTools: return
         case .cellDonation: return
+        case .cellSuggestionHero(_): return
         case .cellWelcomeJourney(_): return
         }
     }
@@ -852,6 +906,7 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(_): return 115
         case .cellSolidarityTools: return UITableView.automaticDimension
         case .cellDonation: return UITableView.automaticDimension
+        case .cellSuggestionHero(_): return UITableView.automaticDimension
         case .cellWelcomeJourney(_): return UITableView.automaticDimension
         }
     }
