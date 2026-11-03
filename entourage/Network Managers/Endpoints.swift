@@ -158,7 +158,7 @@ let kAPIReportSolicitation = "solicitations/%@/report?token=%@"
 
 //Messaging
 let kAPIConversationGetAllConversations = "conversations?token=%@&page=%d&per=%d"
-let kAPIGetConversationDetailMessages = "conversations/%@/chat_messages?token=%@&page=%d&per=%d"
+let kAPIGetConversationDetailMessages = "conversations/%@/chat_messages?token=%@&page=%d&per=%d&image_size=high"
 let kAPIPostConversationMessage = "conversations/%@/chat_messages?token=%@"
 let kAPIConversationPostCreateConversation = "conversations?token=%@"
 let kAPIConversationReportConversation = "conversations/%@/report?token=%@"
