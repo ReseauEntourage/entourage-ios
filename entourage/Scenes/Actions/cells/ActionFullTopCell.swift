@@ -106,20 +106,13 @@ class ActionFullTopCell: UITableViewCell {
         if ui_label_translate != nil{
             ui_label_translate.attributedText = fullAttributedString
         }
+        // Traductions absentes (ex. action tout juste créée) : on garde titre et description bruts.
         if(isTranslated){
-            if let _title_translation = action?.titleTranslations{
-                ui_title_main.text = _title_translation.translation
-            }
-            if let _desc_translation = action?.descriptionTranslations{
-                ui_description.text = _desc_translation.translation
-            }
+            ui_title_main.text = action?.titleTranslations?.translation ?? action?.title
+            ui_description.text = action?.descriptionTranslations?.translation ?? action?.description
         }else{
-            if let _title_translation = action?.titleTranslations{
-                ui_title_main.text = _title_translation.original
-            }
-            if let _desc_translation = action?.descriptionTranslations{
-                ui_description.text = _desc_translation.original
-            }
+            ui_title_main.text = action?.titleTranslations?.original ?? action?.title
+            ui_description.text = action?.descriptionTranslations?.original ?? action?.description
         }
     }
     
