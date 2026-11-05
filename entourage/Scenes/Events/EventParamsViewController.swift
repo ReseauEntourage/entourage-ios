@@ -239,10 +239,16 @@ class EventParamsViewController: BasePopViewController {
 // MARK: - UITableViewDataSource / UITableViewDelegate
 extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate {
 
+    /// Dupliquer un événement est réservé à l'équipe, aux bénévoles (ambassadeurs / animateurs) et aux associations.
+    private var canDuplicateEvent: Bool {
+        return UserDefaults.currentUser?.hasEventPrivilegedRights ?? false
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch eventUserType {
         case .Creator:
-            return hasRecurrency ? 9 : 8
+            let count = hasRecurrency ? 9 : 8
+            return canDuplicateEvent ? count : count - 1
         case .Member:
             return isRealAuthor ? 5 : 6
         case .Viewer:
@@ -262,7 +268,9 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
         switch eventUserType {
 
         case .Creator:
-            switch indexPath.row {
+            // Sans le droit de dupliquer, la ligne 4 est absente : les suivantes remontent d'un cran.
+            let creatorRow = (!canDuplicateEvent && indexPath.row >= 4) ? indexPath.row + 1 : indexPath.row
+            switch creatorRow {
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(

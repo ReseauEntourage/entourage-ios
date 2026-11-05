@@ -205,6 +205,13 @@ struct User: Codable {
         return false
     }
     
+    /// Équipe Entourage, bénévole (ambassadeur / animateur) ou association : droits étendus sur les événements.
+    var hasEventPrivilegedRights: Bool {
+        if partner != nil { return true }
+        if let roles = roles, roles.contains("Équipe Entourage") || roles.contains("Equipe") { return true }
+        return isAmbassador()
+    }
+
     func isAmbassador() -> Bool {
         guard let roles = roles else {
             return false

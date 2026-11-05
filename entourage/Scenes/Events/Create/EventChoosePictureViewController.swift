@@ -23,11 +23,7 @@ class EventChoosePictureViewController: BasePopViewController {
     weak var delegate:ChoosePictureEventDelegate? = nil
     
     var hasCustomAddImageRights: Bool {
-        guard let user = UserDefaults.currentUser else { return false }
-        if user.partner != nil { return true }
-        if let roles = user.roles, roles.contains("Équipe Entourage") || roles.contains("Equipe") { return true }
-        if user.isAmbassador() { return true }
-        return false
+        return UserDefaults.currentUser?.hasEventPrivilegedRights ?? false
     }
 
     override func viewDidLoad() {
