@@ -47,6 +47,38 @@ enum FormFlowStyle {
     static func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+
+    /// Barre « Valider » affichée au-dessus du clavier pour le refermer (UIKit, iOS 14+).
+    static func makeKeyboardDoneToolbar(target: Any?, action: Selector) -> UIToolbar {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done = UIBarButtonItem(title: "validate".localized, style: .done, target: target, action: action)
+        done.tintColor = .appOrange
+        done.accessibilityIdentifier = "form_flow_keyboard_validate"
+        toolbar.setItems([space, done], animated: false)
+        return toolbar
+    }
+}
+
+extension View {
+    /// Ajoute le bouton « Valider » au-dessus du clavier (iOS 15+ ; le champ texte SwiftUI n'a pas d'API plus ancienne).
+    @ViewBuilder
+    func formFlowKeyboardDoneButton() -> some View {
+        if #available(iOS 15.0, *) {
+            self.toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("validate".localized) { FormFlowStyle.hideKeyboard() }
+                        .font(FormFlowStyle.semibold(16))
+                        .foregroundColor(Color(UIColor.appOrange))
+                        .accessibilityIdentifier("form_flow_keyboard_validate")
+                }
+            }
+        } else {
+            self
+        }
+    }
 }
 
 /// Identifiant d'accessibilité pour les scénarios XCUITest (`entourageUITests`), posé seulement s'il est fourni.
@@ -215,6 +247,7 @@ struct FormFlowTextField: View {
                 .keyboardType(keyboard)
                 .autocapitalization(autocapitalization)
                 .disableAutocorrection(keyboard == .URL)
+                .formFlowKeyboardDoneButton()
                 if let image = trailingSystemImage {
                     Spacer(minLength: 0)
                     Image(systemName: image)
@@ -279,6 +312,8 @@ private struct FormFlowTextViewRepresentable: UIViewRepresentable {
         textView.textContainer.lineFragmentPadding = 5
         textView.autocapitalizationType = .sentences
         textView.accessibilityIdentifier = identifier
+        textView.inputAccessoryView = FormFlowStyle.makeKeyboardDoneToolbar(target: context.coordinator, action: #selector(Coordinator.dismissKeyboard))
+        context.coordinator.textView = textView
         return textView
     }
 
@@ -291,7 +326,10 @@ private struct FormFlowTextViewRepresentable: UIViewRepresentable {
 
     final class Coordinator: NSObject, UITextViewDelegate {
         var parent: FormFlowTextViewRepresentable
+        weak var textView: UITextView?
         init(_ parent: FormFlowTextViewRepresentable) { self.parent = parent }
+
+        @objc func dismissKeyboard() { textView?.resignFirstResponder() }
 
         func textViewDidChange(_ textView: UITextView) {
             parent.text = textView.text
