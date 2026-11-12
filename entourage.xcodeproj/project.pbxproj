@@ -156,6 +156,7 @@
 		026819AA278E00A200A98A4A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819A9278E00A200A98A4A /* Utils.swift */; };
 		7A1C0D8E2F0B4C6A9D3E5F11 /* PhoneNumberDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D8E2F0B4C6A9D3E5F10 /* PhoneNumberDetector.swift */; };
 		7A1C0D8E2F0B4C6A9D3E5F13 /* PhoneNumberDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D8E2F0B4C6A9D3E5F12 /* PhoneNumberDetectorTests.swift */; };
+		7A1C0D8E2F0B4C6A9D3E5F92 /* SystemOpenedLinksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0D8E2F0B4C6A9D3E5F91 /* SystemOpenedLinksTests.swift */; };
 		026819BD278E105600A98A4A /* OTLoginV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819B8278E105600A98A4A /* OTLoginV2ViewController.swift */; };
 		026819BE278E105600A98A4A /* OTLoginPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819B9278E105600A98A4A /* OTLoginPlaceViewController.swift */; };
 		026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819BA278E105600A98A4A /* OTLoginNextViewController.swift */; };
@@ -871,6 +872,7 @@
 		026819A9278E00A200A98A4A /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7A1C0D8E2F0B4C6A9D3E5F10 /* PhoneNumberDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberDetector.swift; sourceTree = "<group>"; };
 		7A1C0D8E2F0B4C6A9D3E5F12 /* PhoneNumberDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberDetectorTests.swift; sourceTree = "<group>"; };
+		7A1C0D8E2F0B4C6A9D3E5F91 /* SystemOpenedLinksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemOpenedLinksTests.swift; sourceTree = "<group>"; };
 		026819B8278E105600A98A4A /* OTLoginV2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginV2ViewController.swift; sourceTree = "<group>"; };
 		026819B9278E105600A98A4A /* OTLoginPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginPlaceViewController.swift; sourceTree = "<group>"; };
 		026819BA278E105600A98A4A /* OTLoginNextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginNextViewController.swift; sourceTree = "<group>"; };
@@ -2342,6 +2344,7 @@
 				2D36D1D77001E9F00E5E4E7C /* EventFormTests.swift */,
 				A1E30EA046F12F7FB43AE813 /* WelcomeJourneyAutoSkipTests.swift */,
 				7A1C0D8E2F0B4C6A9D3E5F12 /* PhoneNumberDetectorTests.swift */,
+				7A1C0D8E2F0B4C6A9D3E5F91 /* SystemOpenedLinksTests.swift */,
 			);
 			name = entourageTests;
 			path = entourageTests;
@@ -3786,6 +3789,7 @@
 				026881530F2009BDA8E28B22 /* EventFormTests.swift in Sources */,
 				2DE4C673A1B82EEB686190F9 /* WelcomeJourneyAutoSkipTests.swift in Sources */,
 				7A1C0D8E2F0B4C6A9D3E5F13 /* PhoneNumberDetectorTests.swift in Sources */,
+				7A1C0D8E2F0B4C6A9D3E5F92 /* SystemOpenedLinksTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
