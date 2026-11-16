@@ -8,16 +8,20 @@
 
 import UIKit
 
-extension SuggestionReasonKind {
+extension SuggestionReason {
+    /// L'icône dépend du code de la raison ; un code inconnu (moteur plus récent) prend l'icône par défaut.
     var icon: String {
-        switch self {
-        case .proximity: return "📍"
-        case .interests: return "❤️"
-        case .moment: return "🗓"
-        case .history: return "🕘"
-        case .need: return "🔎"
-        case .accessibility: return "✅"
-        case .socialProof: return "👥"
+        switch code {
+        case "near_you": return "📍"
+        case "shared_interests": return "❤️"
+        case "upcoming_event", "online_event": return "🗓"
+        case "popular", "help_offered", "neighbor_needs_help": return "👥"
+        case "answers_your_need", "poi_for_need": return "🔎"
+        case "local_group", "national_group", "group_member_message": return "🏘️"
+        case "content_path": return "📘"
+        case "smalltalk", "papotage": return "💬"
+        case "become_ambassador": return "🌟"
+        default: return "✅"
         }
     }
 }
@@ -26,19 +30,18 @@ final class SuggestionWhyViewController: UIViewController {
 
     static let maxReasons = 3
 
-    /// 2 à 3 raisons maximum. La preuve sociale (« des voisins y participent déjà ») est écartée
-    /// pour une personne isolée : elle peut l'intimider, on la réserve aux riverains.
-    static func displayedReasons(for card: SuggestionCard, isolatedProfile: Bool) -> [SuggestionReason] {
-        let filtered = card.reasons.filter { !(isolatedProfile && $0.kind == .socialProof) }
-        return Array(filtered.prefix(maxReasons))
+    /// Les phrases du moteur, telles quelles : il a déjà choisi la variante adaptée à la personne
+    /// (variante douce comprise). L'app n'en reformule, n'en construit et n'en masque aucune.
+    static func displayedReasons(for card: SuggestionCard) -> [SuggestionReason] {
+        return Array(card.reasons.prefix(maxReasons))
     }
 
     private let card: SuggestionCard
     private let reasons: [SuggestionReason]
 
-    init(card: SuggestionCard, isolatedProfile: Bool) {
+    init(card: SuggestionCard) {
         self.card = card
-        self.reasons = SuggestionWhyViewController.displayedReasons(for: card, isolatedProfile: isolatedProfile)
+        self.reasons = SuggestionWhyViewController.displayedReasons(for: card)
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .pageSheet
         if #available(iOS 15.0, *), let sheet = sheetPresentationController {
@@ -118,7 +121,7 @@ final class SuggestionWhyViewController: UIViewController {
         iconBg.layer.cornerRadius = 20
         iconBg.translatesAutoresizingMaskIntoConstraints = false
         let icon = UILabel()
-        icon.text = reason.kind.icon
+        icon.text = reason.icon
         icon.font = UIFont.systemFont(ofSize: 18)
         icon.translatesAutoresizingMaskIntoConstraints = false
         iconBg.addSubview(icon)

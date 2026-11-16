@@ -79,7 +79,7 @@ class NetworkManager {
         NotificationCenter.default.post(name: NSNotification.Name(kNotificationAPIError), object: nil, userInfo: userInfo)
     }
 
-    func requestGet(endPoint:String,headers:[String:String]?, params:[String:String]?, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
+    func requestGet(endPoint:String,headers:[String:String]?, params:[String:String]?, reportsErrors: Bool = true, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
         let urlStr = getBaseUrl() + endPoint
         guard var url = URL(string: urlStr) else {return}
         
@@ -116,7 +116,7 @@ class NetworkManager {
                     return
                 }
                 else {
-                    self.postAPIErrorNotification(statusCode: resp.statusCode)
+                    if reportsErrors { self.postAPIErrorNotification(statusCode: resp.statusCode) }
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
                         if let _json = json["error"] as? [String:AnyObject] {
                             let entourageError = EntourageNetworkError(json:_json)
@@ -133,7 +133,7 @@ class NetworkManager {
         session.finishTasksAndInvalidate()
     }
 
-    func requestPost(endPoint:String,headers:[String:String]?, body:Data?, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
+    func requestPost(endPoint:String,headers:[String:String]?, body:Data?, reportsErrors: Bool = true, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
         
         let url = getBaseUrl() + endPoint
         
@@ -183,7 +183,7 @@ class NetworkManager {
                     return
                 }
                 else {
-                    if endPoint != kAPILogin {
+                    if endPoint != kAPILogin && reportsErrors {
                         self.postAPIErrorNotification(statusCode: resp.statusCode)
                     }
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {

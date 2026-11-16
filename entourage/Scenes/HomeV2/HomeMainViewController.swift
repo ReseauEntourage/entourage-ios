@@ -61,6 +61,8 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     var initialPedagos = [PedagogicResource]()
     let suggestionCoordinator = SuggestionCoordinator()
     var suggestionInsertIndex: Int?
+    /// Les sections d'origine (entraides, événements) étaient-elles affichées à la dernière construction de la home ?
+    var legacySectionsWereShown: Bool?
     /// Le parcours de bienvenue et les suggestions ne s'affichent jamais ensemble.
     var isWelcomeJourneyDisplayed = false
     
@@ -530,8 +532,11 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         suggestionInsertIndex = tableDTO.count
         tableDTO.append(contentsOf: suggestionRows())
 
-        // Avec le moteur de suggestion : parcours OU suggestions, puis la partie basse (plus de sections entraides, événements).
-        let keepsLegacySections = !SuggestionFeature.isEnabled
+        // Quand la zone affiche des suggestions : parcours OU suggestions, puis la partie basse (plus de sections entraides,
+        // événements). Quand le moteur ne renvoie rien (parcours de bienvenue, moteur coupé) ou est en erreur,
+        // la home retrouve ses sections d'origine : elle ne reste jamais sans contenu.
+        let keepsLegacySections = !suggestionCoordinator.isShowingSuggestions
+        legacySectionsWereShown = keepsLegacySections
 
         if keepsLegacySections && showInitialPedago && initialPedagos.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
@@ -570,11 +575,11 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         SVProgressHUD.dismiss()
     }
     
-    // MARK: - Suggestion (moteur de suggestion, données mock tant qu'EN-9473 n'est pas livré)
+    // MARK: - Suggestion (moteur « Votre prochain pas », EN-9473)
 
     /// Lignes de suggestion selon l'état : squelette pendant le chargement, rien si vide ou en erreur.
     func suggestionRows() -> [HomeV2DTO] {
-        guard SuggestionFeature.isEnabled, !isWelcomeJourneyDisplayed else { return [] }
+        guard !isWelcomeJourneyDisplayed else { return [] }
         var rows = [HomeV2DTO]()
         switch suggestionCoordinator.state {
         case .loading:
@@ -598,6 +603,11 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     }
 
     func reloadSuggestionRows() {
+        // La réponse du moteur change ce que la home affiche en dessous (sections d'origine) : on reconstruit tout.
+        if let wereShown = legacySectionsWereShown, wereShown == suggestionCoordinator.isShowingSuggestions {
+            configureDTO()
+            return
+        }
         guard let index = suggestionInsertIndex, index <= tableDTO.count else { return }
         tableDTO.removeAll(where: { isSuggestionRow($0) })
         tableDTO.insert(contentsOf: suggestionRows(), at: min(index, tableDTO.count))

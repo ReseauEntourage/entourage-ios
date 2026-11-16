@@ -3,24 +3,38 @@
 //  entourage
 //
 //  Porte l'état de la suggestion sur la home (chargement, erreur, vide, chargé),
-//  l'instrumentation et la navigation. La home ne fait que l'afficher.
+//  l'instrumentation, la mesure auprès du moteur et la navigation. La home ne fait que l'afficher.
 //
 
 import UIKit
 
 final class SuggestionCoordinator {
 
+    /// Affiche le message « Plus tard » avec son action « Annuler » ; `onExpire` est appelé quand il disparaît sans annulation.
+    typealias SnackbarPresenter = (_ message: String, _ actionTitle: String,
+                                   _ onUndo: @escaping () -> Void, _ onExpire: @escaping () -> Void) -> Void
+
     private let provider: SuggestionProviding
+    private let presentSnackbar: SnackbarPresenter
+    private let navigator: (SuggestionDestination) -> Void
+
     private(set) var state: SuggestionLoadState = .loading
     /// Appelé quand l'état change : la home reconstruit ses lignes.
     var onStateChanged: (() -> Void)?
 
-    private var hasLoggedHeroView = false
+    private var loggedHeroId: String?
+    private var loggedAccessIds = Set<String>()
     private var hasLoggedExplorerView = false
     private var isFetching = false
+    /// Suggestion retirée par « Plus tard », en attendant la fin du message « Annuler ».
+    private var pendingLater: SuggestionCard?
 
-    init(provider: SuggestionProviding = MockSuggestionProvider.shared) {
+    init(provider: SuggestionProviding = SuggestionProviderFactory.make(),
+         presentSnackbar: @escaping SnackbarPresenter = SuggestionCoordinator.defaultSnackbar,
+         navigator: @escaping (SuggestionDestination) -> Void = SuggestionCoordinator.open) {
         self.provider = provider
+        self.presentSnackbar = presentSnackbar
+        self.navigator = navigator
     }
 
     var payload: SuggestionPayload? {
@@ -28,10 +42,22 @@ final class SuggestionCoordinator {
         return nil
     }
 
-    /// Chargement à l'ouverture et au retour sur la home. Garde la dernière suggestion affichée
-    /// pendant le rafraîchissement pour ne pas faire clignoter la zone.
+    /// Le moteur ne renvoie rien (parcours de bienvenue, moteur coupé), ou la home n'a pas encore
+    /// de réponse : les sections d'origine de la home ne sont masquées que lorsque la zone affiche quelque chose.
+    var isShowingSuggestions: Bool {
+        switch state {
+        case .loading: return true
+        case .loaded(let payload): return !payload.isEmpty
+        case .empty, .failed: return false
+        }
+    }
+
+    /// Chargement à l'ouverture et au retour sur la home : une suggestion réalisée est remplacée
+    /// par le moteur, sans que l'app le signale. Garde la dernière suggestion affichée pendant le
+    /// rafraîchissement, pour ne pas faire clignoter la zone.
     func refresh() {
-        guard SuggestionFeature.isEnabled, !isFetching else { return }
+        // Pendant le message « Annuler », la suggestion retirée ne doit pas revenir.
+        guard !isFetching, pendingLater == nil else { return }
         isFetching = true
         provider.fetch { [weak self] result in
             guard let self = self else { return }
@@ -40,77 +66,143 @@ final class SuggestionCoordinator {
             case .success(let payload):
                 self.state = payload.isEmpty ? .empty : .loaded(payload)
             case .failure:
-                // Erreur réseau : on garde ce qui est affiché, sinon la zone est masquée.
+                // Erreur : on garde ce qui est affiché, sinon la zone est masquée.
                 if self.payload == nil { self.state = .failed }
             }
             self.onStateChanged?()
         }
     }
 
-    // MARK: Affichage (instrumentation)
+    // MARK: Affichage (instrumentation et mesure)
 
     func heroDidDisplay(_ card: SuggestionCard) {
-        guard !hasLoggedHeroView else { return }
-        hasLoggedHeroView = true
+        guard loggedHeroId != card.id else { return }
+        loggedHeroId = card.id
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_View, parameters: ["type": card.type.rawValue, "id": card.id])
+        record(.displayed, card: card)
     }
 
     func explorerDidDisplay(_ accesses: [ExplorerAccess]) {
-        guard !hasLoggedExplorerView else { return }
-        hasLoggedExplorerView = true
-        AnalyticsLoggerManager.logEvent(name: Suggestion_Explorer_View, parameters: ["count": accesses.count])
-    }
-
-    /// Mène à l'onglet cible. Les onglets n'acceptent pas encore de filtre en argument :
-    /// le pré-filtrage (ex. rayon de 2 km) reste à brancher quand le contrat du moteur sera figé.
-    func explorerTapped(_ access: ExplorerAccess) {
-        AnalyticsLoggerManager.logEvent(name: Suggestion_Explorer_Click, parameters: ["type": access.type.rawValue, "id": access.id])
-        navigate(to: access.target)
+        if !hasLoggedExplorerView {
+            hasLoggedExplorerView = true
+            AnalyticsLoggerManager.logEvent(name: Suggestion_Explorer_View, parameters: ["count": accesses.count])
+        }
+        for access in accesses where loggedAccessIds.insert(access.id).inserted {
+            record(.displayed, access: access)
+        }
     }
 
     // MARK: Actions de la card
 
+    /// Mène à l'écran ou au flux existant de la suggestion.
+    func explorerTapped(_ access: ExplorerAccess) {
+        AnalyticsLoggerManager.logEvent(name: Suggestion_Explorer_Click, parameters: ["type": access.type.rawValue, "id": access.id])
+        record(.tapped, access: access)
+        navigator(access.destination)
+    }
+
     func primaryTapped(_ card: SuggestionCard) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Cta, parameters: ["type": card.type.rawValue, "id": card.id])
-        navigate(to: card.target)
+        record(.tapped, card: card)
+        navigator(card.destination)
     }
 
     func bodyTapped(_ card: SuggestionCard) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Body, parameters: ["type": card.type.rawValue, "id": card.id])
-        navigate(to: card.target)
+        record(.tapped, card: card)
+        navigator(card.destination)
     }
 
     func infoTapped(_ card: SuggestionCard, from presenter: UIViewController) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Why, parameters: ["type": card.type.rawValue, "id": card.id])
-        let why = SuggestionWhyViewController(card: card, isolatedProfile: payload?.isIsolatedProfile ?? false)
-        presenter.present(why, animated: true)
+        record(.whyOpened, card: card)
+        presenter.present(SuggestionWhyViewController(card: card), animated: true)
     }
 
-    /// « Plus tard » : retire la suggestion (le moteur la remplace) avec possibilité d'annuler.
+    // MARK: « Plus tard »
+
+    /// « Plus tard » retire la card et laisse le temps d'annuler. Le moteur n'est prévenu qu'à la fin
+    /// du message, sans annulation : il n'a pas de route pour revenir en arrière.
     func laterTapped(_ card: SuggestionCard) {
+        guard pendingLater == nil else { return }
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Later, parameters: ["type": card.type.rawValue, "id": card.id])
-        provider.dismiss(suggestionId: card.id)
-        hasLoggedHeroView = false
-        refresh()
-        SuggestionSnackbar.show(message: "suggestion_later_toast".localized, actionTitle: "suggestion_undo".localized) { [weak self] in
+        pendingLater = card
+        setHero(nil)
+        presentSnackbar("suggestion_later_toast".localized, "suggestion_undo".localized,
+                        { [weak self] in self?.undoLater(card) },
+                        { [weak self] in self?.confirmLater(card) })
+    }
+
+    /// Annulation : la card revient telle quelle et le moteur n'est pas prévenu.
+    private func undoLater(_ card: SuggestionCard) {
+        guard pendingLater?.id == card.id else { return }
+        pendingLater = nil
+        AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Undo_Later, parameters: ["type": card.type.rawValue, "id": card.id])
+        setHero(card)
+    }
+
+    /// Le message a disparu sans annulation : le moteur ignore la suggestion et renvoie la suivante.
+    private func confirmLater(_ card: SuggestionCard) {
+        guard pendingLater?.id == card.id else { return }
+        pendingLater = nil
+        provider.dismiss(card) { [weak self] result in
             guard let self = self else { return }
-            AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Undo_Later, parameters: ["type": card.type.rawValue, "id": card.id])
-            self.provider.undoDismiss(suggestionId: card.id)
-            self.hasLoggedHeroView = false
-            self.refresh()
+            switch result {
+            case .success(let next):
+                self.loggedHeroId = nil
+                self.setHero(next)
+            case .failure:
+                // Le moteur n'a pas pris en compte l'abandon : on se recale sur lui.
+                self.refresh()
+            }
         }
+    }
+
+    /// Remplace le prochain pas en gardant les autres pistes.
+    private func setHero(_ hero: SuggestionCard?) {
+        var current = payload ?? SuggestionPayload(hero: nil, explorer: [])
+        current.hero = hero
+        state = current.isEmpty ? .empty : .loaded(current)
+        onStateChanged?()
+    }
+
+    // MARK: Mesure
+
+    private func record(_ kind: NextStepInteraction.Kind, card: SuggestionCard) {
+        guard let nextStepId = card.nextStepId else { return }
+        provider.record(NextStepInteraction(placement: .hero, kind: kind, nextStepId: nextStepId, itemKind: nil, targetId: nil))
+    }
+
+    private func record(_ kind: NextStepInteraction.Kind, access: ExplorerAccess) {
+        provider.record(NextStepInteraction(placement: .others, kind: kind, nextStepId: nil,
+                                            itemKind: access.type.rawValue, targetId: access.targetId))
     }
 
     // MARK: Navigation
 
-    func navigate(to target: SuggestionTarget) {
-        switch target {
-        case .events: DeepLinkManager.showDiscoverOutingListUniversalLink()
-        case .groups: DeepLinkManager.showNeiborhoodListUniversalLink()
-        case .demands: DeepLinkManager.showDemandListUniversalLink()
-        case .contributions: DeepLinkManager.showContribListUniversalLink()
-        case .resources: DeepLinkManager.showRessourceListUniversalLink()
-        case .places: DeepLinkManager.showMap()
+    static let defaultSnackbar: SnackbarPresenter = { message, actionTitle, onUndo, onExpire in
+        SuggestionSnackbar.show(message: message, actionTitle: actionTitle, onAction: onUndo, onExpire: onExpire)
+    }
+
+    /// Ouvre l'écran ou le flux existant. Les onglets n'acceptent pas de filtre en argument.
+    static func open(_ destination: SuggestionDestination) {
+        switch destination {
+        case .outing(let id): DeepLinkManager.showOuting(id: id)
+        case .neighborhood(let id): DeepLinkManager.showNeighborhoodDetail(id: id)
+        case .action(let id, let isContrib): DeepLinkManager.showAction(id: id, isContrib: isContrib)
+        case .resource(let id): DeepLinkManager.showResource(id: id)
+        case .poi(let id): DeepLinkManager.showPoi(id: id)
+        case .smallTalk: DeepLinkManager.showSmallTalkIntro()
+        case .link(let url): WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: AppState.getTopViewController())
+        case .list(let target):
+            switch target {
+            case .events: DeepLinkManager.showDiscoverOutingListUniversalLink()
+            case .groups: DeepLinkManager.showNeiborhoodListUniversalLink()
+            case .demands: DeepLinkManager.showDemandListUniversalLink()
+            case .contributions: DeepLinkManager.showContribListUniversalLink()
+            case .resources: DeepLinkManager.showRessourceListUniversalLink()
+            case .places: DeepLinkManager.showMap()
+            }
         }
     }
 }

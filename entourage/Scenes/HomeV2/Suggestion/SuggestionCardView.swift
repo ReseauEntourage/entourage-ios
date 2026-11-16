@@ -12,34 +12,41 @@ import UIKit
 extension SuggestionType {
     var badgeColor: UIColor {
         switch self {
-        case .entraide: return UIColor(hexString: "#D53F00")
-        case .contenu: return UIColor(hexString: "#2F6DB5")
-        case .evenement: return UIColor(hexString: "#FF9739")
-        case .groupe: return UIColor(hexString: "#1E7F51")
+        case .action: return UIColor(hexString: "#D53F00")
+        case .contentPath: return UIColor(hexString: "#2F6DB5")
+        case .outing: return UIColor(hexString: "#FF9739")
+        case .neighborhood, .postMessage: return UIColor(hexString: "#1E7F51")
         case .connexion: return UIColor(hexString: "#47A8B9")
-        case .lieu: return UIColor(hexString: "#B84D0E")
+        case .poi: return UIColor(hexString: "#B84D0E")
+        case .smalltalk: return UIColor(hexString: "#5B4BB7")
+        case .becomeAmbassador: return UIColor(hexString: "#8A5A00")
         }
     }
 
     var thumbBackground: UIColor {
         switch self {
-        case .entraide: return UIColor(hexString: "#FEEAE3")
-        case .contenu, .lieu: return UIColor(hexString: "#EAF2FB")
-        case .evenement: return UIColor(hexString: "#FDDCD0")
-        case .groupe: return UIColor(hexString: "#DEF1E8")
+        case .action: return UIColor(hexString: "#FEEAE3")
+        case .contentPath, .poi: return UIColor(hexString: "#EAF2FB")
+        case .outing: return UIColor(hexString: "#FDDCD0")
+        case .neighborhood, .postMessage: return UIColor(hexString: "#DEF1E8")
         case .connexion: return UIColor(hexString: "#ECF8FB")
+        case .smalltalk: return UIColor(hexString: "#EEEAFB")
+        case .becomeAmbassador: return UIColor(hexString: "#FFF1D6")
         }
     }
 
     /// Repli quand le moteur ne fournit pas de média (photo / avatar absent).
     var fallbackEmoji: String {
         switch self {
-        case .entraide: return "🤝"
-        case .contenu: return "📘"
-        case .evenement: return "📅"
-        case .groupe: return "👥"
+        case .action: return "🤝"
+        case .contentPath: return "📘"
+        case .outing: return "📅"
+        case .neighborhood: return "👥"
         case .connexion: return "👋"
-        case .lieu: return "📍"
+        case .poi: return "📍"
+        case .smalltalk: return "💬"
+        case .postMessage: return "✉️"
+        case .becomeAmbassador: return "🌟"
         }
     }
 
@@ -56,6 +63,9 @@ extension SuggestionCTA {
         case .join: return "suggestion_cta_join"
         case .sayHello: return "suggestion_cta_say_hello"
         case .seePlace: return "suggestion_cta_see_place"
+        case .smallTalk: return "suggestion_cta_smalltalk"
+        case .writeMessage: return "suggestion_cta_write_message"
+        case .becomeAmbassador: return "suggestion_cta_become_ambassador"
         }
     }
 }
@@ -259,7 +269,7 @@ final class SuggestionCardView: UIView {
         }
 
         // Média : avatar (initiales) pour une personne, sinon vignette emoji, repli par type.
-        if let author = card.authorName, (card.type == .entraide || card.type == .connexion), card.mediaEmoji == nil {
+        if let author = card.authorName, (card.type == .action || card.type == .connexion), card.mediaEmoji == nil {
             ui_media.layer.cornerRadius = 26
             ui_media.backgroundColor = card.type.thumbBackground
             ui_media_label.font = ApplicationTheme.getFontQuickSandBold(size: 16)

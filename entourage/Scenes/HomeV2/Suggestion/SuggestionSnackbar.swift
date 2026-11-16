@@ -11,14 +11,22 @@ final class SuggestionSnackbar: UIView {
 
     private static weak var current: SuggestionSnackbar?
     private var onAction: (() -> Void)?
+    /// Appelé quand le message disparaît sans que « Annuler » ait été touché (délai écoulé, ou remplacé par un autre message).
+    private var onExpire: (() -> Void)?
     private var dismissWork: DispatchWorkItem?
 
-    static func show(message: String, actionTitle: String, duration: TimeInterval = 5, onAction: @escaping () -> Void) {
-        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
-        current?.removeFromSuperview()
+    static func show(message: String, actionTitle: String, duration: TimeInterval = 5,
+                     onAction: @escaping () -> Void, onExpire: @escaping () -> Void = {}) {
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
+            // Pas de fenêtre pour l'afficher : « Plus tard » est acté, aucune annulation n'est possible.
+            onExpire()
+            return
+        }
+        current?.expire()
 
         let bar = SuggestionSnackbar()
         bar.onAction = onAction
+        bar.onExpire = onExpire
         bar.build(message: message, actionTitle: actionTitle)
         window.addSubview(bar)
         current = bar
@@ -29,7 +37,7 @@ final class SuggestionSnackbar: UIView {
         ])
         UIAccessibility.post(notification: .announcement, argument: message)
 
-        let work = DispatchWorkItem { [weak bar] in bar?.dismiss() }
+        let work = DispatchWorkItem { [weak bar] in bar?.expire() }
         bar.dismissWork = work
         DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: work)
     }
@@ -73,8 +81,19 @@ final class SuggestionSnackbar: UIView {
     @objc private func actionTapped() {
         dismissWork?.cancel()
         let action = onAction
+        onExpire = nil
         dismiss()
         action?()
+    }
+
+    /// Le message s'en va sans annulation : acte « Plus tard ».
+    private func expire() {
+        dismissWork?.cancel()
+        let callback = onExpire
+        onExpire = nil
+        onAction = nil
+        dismiss()
+        callback?()
     }
 
     private func dismiss() {

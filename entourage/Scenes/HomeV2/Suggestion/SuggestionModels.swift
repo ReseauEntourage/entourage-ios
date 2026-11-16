@@ -2,22 +2,29 @@
 //  SuggestionModels.swift
 //  entourage
 //
-//  Contrat de données du moteur de suggestion (EN-9473) : { hero, explorer[] }.
-//  Le décodage est tolérant : un type, une raison ou une cible inconnus (ancienne
-//  version de l'app face à un moteur plus récent) sont ignorés, jamais bloquants.
+//  Modèles d'affichage du moteur de suggestion (EN-9473) : { hero, explorer[] }.
+//  Le moteur (`/api/v1/next_steps`) est converti vers ces modèles par `NextStepAdapter`.
+//  Le décodage JSON de ces types ne sert plus qu'au fournisseur factice (tests, prévisualisations) :
+//  un type, une raison ou une cible inconnus (ancienne version de l'app face à un moteur plus récent)
+//  sont ignorés, jamais bloquants.
 //
 
 import Foundation
 
 // MARK: - Types
 
+/// Les valeurs sont les `kind` du moteur. `connexion` n'est jamais envoyé par le moteur :
+/// son affichage reste dans l'app, mais il n'est alimenté par rien.
 enum SuggestionType: String, Decodable {
-    case entraide
-    case contenu
-    case evenement
-    case groupe
+    case action                              // entraide
+    case contentPath = "content_path"        // mini-parcours de contenus
+    case outing                              // événement (papotage = événement en visio)
+    case neighborhood                        // groupe local ou national
+    case smalltalk                           // Bonnes ondes
+    case poi                                 // lieu solidaire
+    case postMessage = "post_message"        // poster un message dans un groupe
+    case becomeAmbassador = "become_ambassador"
     case connexion
-    case lieu
 }
 
 enum SuggestionCTA: String, Decodable {
@@ -28,19 +35,12 @@ enum SuggestionCTA: String, Decodable {
     case join        // Rejoindre
     case sayHello    // Dire bonjour
     case seePlace    // Voir le lieu
+    case smallTalk       // Essayer les Bonnes ondes
+    case writeMessage    // Écrire un message
+    case becomeAmbassador // Devenir Animateur
 }
 
-enum SuggestionReasonKind: String, Decodable {
-    case proximity
-    case interests
-    case moment
-    case history
-    case need
-    case accessibility
-    case socialProof = "social_proof"
-}
-
-/// Onglet / liste cible d'un accès Explorer ou du corps de la card.
+/// Onglet / liste cible d'un accès Explorer ou du corps de la card (fournisseur factice).
 enum SuggestionTarget: String, Decodable {
     case events
     case groups
@@ -48,6 +48,18 @@ enum SuggestionTarget: String, Decodable {
     case contributions
     case resources
     case places
+}
+
+/// Ce que la card ou une ligne de l'Explorer ouvre : l'écran ou le flux existant du type.
+enum SuggestionDestination: Equatable {
+    case outing(id: Int)
+    case neighborhood(id: Int)
+    case action(id: Int, isContrib: Bool)
+    case resource(id: Int)
+    case poi(id: Int)
+    case smallTalk
+    case link(URL)
+    case list(SuggestionTarget)
 }
 
 // MARK: - Tolerant decoding
@@ -77,8 +89,10 @@ struct LossyArray<Element: Decodable>: Decodable {
 
 // MARK: - Models
 
+/// Une raison du « Pourquoi cette suggestion ? » : le code sert à choisir l'icône, la phrase
+/// est celle du moteur, affichée telle quelle (déjà traduite, variante douce comprise).
 struct SuggestionReason: Decodable, Equatable {
-    let kind: SuggestionReasonKind
+    let code: String
     let text: String
 }
 
@@ -105,6 +119,12 @@ struct SuggestionCard: Decodable {
     let mediaEmoji: String?
     let ctaOverride: SuggestionCTA?
     let reasons: [SuggestionReason]
+    /// Écran ou flux ouvert par le CTA et par le tap sur le corps de la card.
+    let destination: SuggestionDestination
+    /// Identifiant du prochain pas (`placement` hero) : nécessaire pour ignorer et pour la mesure.
+    let nextStepId: Int?
+    /// Identifiant de la cible (autre piste) : nécessaire pour la mesure.
+    let targetId: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, type, chip, title, body, metas, reasons
@@ -115,45 +135,82 @@ struct SuggestionCard: Decodable {
         case ctaOverride = "cta"
     }
 
+    init(id: String,
+         type: SuggestionType,
+         isRemote: Bool = false,
+         isNational: Bool = false,
+         chip: String? = nil,
+         authorName: String? = nil,
+         title: String,
+         body: String? = nil,
+         metas: [SuggestionMeta] = [],
+         mediaEmoji: String? = nil,
+         ctaOverride: SuggestionCTA? = nil,
+         reasons: [SuggestionReason] = [],
+         destination: SuggestionDestination? = nil,
+         nextStepId: Int? = nil,
+         targetId: Int? = nil) {
+        self.id = id
+        self.type = type
+        self.isRemote = isRemote
+        self.isNational = isNational
+        self.chip = chip
+        self.authorName = authorName
+        self.title = title
+        self.body = body
+        // Chaque ligne de méta est optionnelle ; 3 au maximum.
+        self.metas = Array(metas.prefix(3))
+        self.mediaEmoji = mediaEmoji
+        self.ctaOverride = ctaOverride
+        self.reasons = reasons
+        self.destination = destination ?? .list(SuggestionCard.defaultList(for: type))
+        self.nextStepId = nextStepId
+        self.targetId = targetId
+    }
+
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        id = try c.decode(String.self, forKey: .id)
-        type = try c.decode(SuggestionType.self, forKey: .type)
-        title = try c.decode(String.self, forKey: .title)
-        isRemote = (try? c.decode(Bool.self, forKey: .isRemote)) ?? false
-        isNational = (try? c.decode(Bool.self, forKey: .isNational)) ?? false
-        chip = try? c.decode(String.self, forKey: .chip)
-        authorName = try? c.decode(String.self, forKey: .authorName)
-        body = try? c.decode(String.self, forKey: .body)
-        mediaEmoji = try? c.decode(String.self, forKey: .mediaEmoji)
-        ctaOverride = try? c.decode(SuggestionCTA.self, forKey: .ctaOverride)
-        // Chaque ligne de méta est optionnelle ; 3 au maximum.
-        let lossyMetas = (try? c.decode(LossyArray<SuggestionMeta>.self, forKey: .metas))?.elements ?? []
-        metas = Array(lossyMetas.prefix(3))
-        reasons = (try? c.decode(LossyArray<SuggestionReason>.self, forKey: .reasons))?.elements ?? []
+        let decodedType = try c.decode(SuggestionType.self, forKey: .type)
+        self.init(
+            id: try c.decode(String.self, forKey: .id),
+            type: decodedType,
+            isRemote: (try? c.decode(Bool.self, forKey: .isRemote)) ?? false,
+            isNational: (try? c.decode(Bool.self, forKey: .isNational)) ?? false,
+            chip: try? c.decode(String.self, forKey: .chip),
+            authorName: try? c.decode(String.self, forKey: .authorName),
+            title: try c.decode(String.self, forKey: .title),
+            body: try? c.decode(String.self, forKey: .body),
+            metas: (try? c.decode(LossyArray<SuggestionMeta>.self, forKey: .metas))?.elements ?? [],
+            mediaEmoji: try? c.decode(String.self, forKey: .mediaEmoji),
+            ctaOverride: try? c.decode(SuggestionCTA.self, forKey: .ctaOverride),
+            reasons: (try? c.decode(LossyArray<SuggestionReason>.self, forKey: .reasons))?.elements ?? []
+        )
     }
 
     var cta: SuggestionCTA {
         if let override = ctaOverride { return override }
         switch type {
-        case .entraide: return .answer
-        case .contenu: return .read
-        case .evenement: return isRemote ? .register : .participate
-        case .groupe: return .join
+        case .action: return .answer
+        case .contentPath: return .read
+        case .outing: return isRemote ? .register : .participate
+        case .neighborhood: return .join
+        case .smalltalk: return .smallTalk
+        case .poi: return .seePlace
+        case .postMessage: return .writeMessage
+        case .becomeAmbassador: return .becomeAmbassador
         case .connexion: return .sayHello
-        case .lieu: return .seePlace
         }
     }
 
-    /// Cible ouverte par le CTA et par le tap sur le corps de la card.
-    var target: SuggestionTarget {
+    /// Liste ouverte quand le fournisseur ne donne pas de cible précise (fournisseur factice).
+    static func defaultList(for type: SuggestionType) -> SuggestionTarget {
         switch type {
-        case .entraide: return .demands
-        case .contenu: return .resources
-        case .evenement: return .events
-        case .groupe: return .groups
-        case .connexion: return .groups
-        case .lieu: return .places
+        case .action: return .demands
+        case .contentPath: return .resources
+        case .outing: return .events
+        case .neighborhood, .postMessage, .connexion: return .groups
+        case .poi: return .places
+        case .smalltalk, .becomeAmbassador: return .events
         }
     }
 }
@@ -163,27 +220,52 @@ struct ExplorerAccess: Decodable {
     let type: SuggestionType
     let label: String
     let context: String?
-    let target: SuggestionTarget
-}
-
-struct SuggestionPayload: Decodable {
-    let hero: SuggestionCard?
-    let explorer: [ExplorerAccess]
-    /// Profil « personne isolée » : la preuve sociale (« des voisins y participent ») est masquée.
-    let isIsolatedProfile: Bool
+    let destination: SuggestionDestination
+    /// Pour la mesure (`placement` others) : `item_kind` est le `type`, `target_id` celui-ci.
+    let targetId: Int?
 
     enum CodingKeys: String, CodingKey {
-        case hero, explorer
-        case isIsolatedProfile = "is_isolated_profile"
+        case id, type, label, context, target
+    }
+
+    init(id: String, type: SuggestionType, label: String, context: String?, destination: SuggestionDestination, targetId: Int? = nil) {
+        self.id = id
+        self.type = type
+        self.label = label
+        self.context = context
+        self.destination = destination
+        self.targetId = targetId
     }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        hero = try? c.decode(SuggestionCard.self, forKey: .hero)
-        // Entre 2 et 4 accès affichés ; moins si le moteur en renvoie moins.
+        let type = try c.decode(SuggestionType.self, forKey: .type)
+        let list = (try? c.decode(SuggestionTarget.self, forKey: .target)) ?? SuggestionCard.defaultList(for: type)
+        self.init(id: try c.decode(String.self, forKey: .id),
+                  type: type,
+                  label: try c.decode(String.self, forKey: .label),
+                  context: try? c.decode(String.self, forKey: .context),
+                  destination: .list(list))
+    }
+}
+
+struct SuggestionPayload: Decodable {
+    var hero: SuggestionCard?
+    let explorer: [ExplorerAccess]
+
+    enum CodingKeys: String, CodingKey {
+        case hero, explorer
+    }
+
+    init(hero: SuggestionCard?, explorer: [ExplorerAccess]) {
+        self.hero = hero
+        self.explorer = Array(explorer.prefix(4))
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
         let all = (try? c.decode(LossyArray<ExplorerAccess>.self, forKey: .explorer))?.elements ?? []
-        explorer = Array(all.prefix(4))
-        isIsolatedProfile = (try? c.decode(Bool.self, forKey: .isIsolatedProfile)) ?? false
+        self.init(hero: try? c.decode(SuggestionCard.self, forKey: .hero), explorer: all)
     }
 
     var isEmpty: Bool { hero == nil && explorer.isEmpty }
