@@ -24,7 +24,13 @@ struct NextStepTarget: Decodable {
     /// Distance en kilomètres, quand le moteur la connaît.
     let distanceKm: Double?
     let startsAt: String?
+    /// Adresse affichable : jamais vide (un texte vide est ramené à `nil`).
     let address: String?
+    /// L'adresse à afficher : `nil` si elle est absente ou vide (le moteur renvoie parfois `display_address: ""`).
+    var visibleAddress: String? {
+        guard let trimmed = address?.trimmingCharacters(in: .whitespacesAndNewlines), !trimmed.isEmpty else { return nil }
+        return trimmed
+    }
     let authorName: String?
     /// `solicitation` (demande) ou `contribution` (proposition d'aide), pour une entraide.
     let actionType: String?
@@ -42,6 +48,11 @@ struct NextStepTarget: Decodable {
 
     enum MetadataKeys: String, CodingKey {
         case startsAt = "starts_at"
+        case displayAddress = "display_address"
+    }
+
+    /// Adresse d'un groupe : un objet `{ latitude, longitude, display_address }`.
+    enum AddressKeys: String, CodingKey {
         case displayAddress = "display_address"
     }
 
@@ -69,7 +80,14 @@ struct NextStepTarget: Decodable {
             address = try? meta.decode(String.self, forKey: .displayAddress)
         } else {
             startsAt = nil
-            address = (try? c.decode(String.self, forKey: .adress)) ?? (try? c.decode(String.self, forKey: .address))
+            // Un lieu donne `adress` en texte ; un groupe donne `address` en objet (ou, ailleurs, en texte).
+            if let text = (try? c.decode(String.self, forKey: .adress)) ?? (try? c.decode(String.self, forKey: .address)) {
+                address = text
+            } else if let object = try? c.nestedContainer(keyedBy: AddressKeys.self, forKey: .address) {
+                address = try? object.decode(String.self, forKey: .displayAddress)
+            } else {
+                address = nil
+            }
         }
         if let author = try? c.nestedContainer(keyedBy: AuthorKeys.self, forKey: .author) {
             authorName = try? author.decode(String.self, forKey: .displayName)
@@ -177,7 +195,7 @@ enum NextStepAdapter {
             if target.isOnline {
                 metas.append(SuggestionMeta(icon: "💻", text: "suggestion_meta_remote".localized))
             } else {
-                if let address = target.address, !address.isEmpty { metas.append(SuggestionMeta(icon: "📍", text: address)) }
+                if let address = target.visibleAddress { metas.append(SuggestionMeta(icon: "📍", text: address)) }
                 if let distance = distanceText(target.distanceKm) { metas.append(SuggestionMeta(icon: nil, text: distance)) }
             }
             return make(title: title, isRemote: target.isOnline, metas: metas, destination: .outing(id: id))
@@ -186,6 +204,7 @@ enum NextStepAdapter {
             guard let target = target, let id = id, let title = target.title else { return nil }
             let chip = target.isNational ? "suggestion_chip_national".localized : "suggestion_chip_local".localized
             var metas = [SuggestionMeta]()
+            if let address = target.visibleAddress { metas.append(SuggestionMeta(icon: "📍", text: address)) }
             if let description = target.description, !description.isEmpty { metas.append(SuggestionMeta(icon: nil, text: description)) }
             return make(title: title, isNational: target.isNational, chip: chip, metas: metas, destination: .neighborhood(id: id))
 
@@ -214,7 +233,7 @@ enum NextStepAdapter {
         case .poi:
             guard let target = target, let id = id, let title = target.title else { return nil }
             var metas = [SuggestionMeta]()
-            if let address = target.address, !address.isEmpty { metas.append(SuggestionMeta(icon: "📍", text: address)) }
+            if let address = target.visibleAddress { metas.append(SuggestionMeta(icon: "📍", text: address)) }
             if let distance = distanceText(target.distanceKm) { metas.append(SuggestionMeta(icon: nil, text: distance)) }
             return make(title: title, metas: metas, destination: .poi(id: id))
 

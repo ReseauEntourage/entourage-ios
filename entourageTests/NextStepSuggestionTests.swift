@@ -66,6 +66,26 @@ final class NextStepSuggestionTests: XCTestCase {
         XCTAssertEqual(national.chip, "suggestion_chip_national".localized)
     }
 
+    /// Forme réelle d'un groupe (préprod, 16/11) : `address` est un objet, `display_address` peut être vide.
+    func testNeighborhoodAddressIsAnObjectWithEmptyDisplayAddress() throws {
+        let card = try self.card("""
+        {"id":29,"kind":"neighborhood","placement":"hero","target":{"id":522,"name":"Voisins du 11e","zone":null,"national":false,
+         "address":{"latitude":48.8566,"longitude":2.3522,"display_address":""}},"reasons":[]}
+        """)
+        XCTAssertEqual(card.destination, .neighborhood(id: 522))
+        XCTAssertFalse(card.isNational)
+        XCTAssertFalse(card.metas.contains { $0.icon == "📍" }, "pas de ligne d'adresse quand elle est vide")
+    }
+
+    func testNeighborhoodAddressIsShownWhenFilled() throws {
+        let card = try self.card("""
+        {"id":30,"kind":"neighborhood","placement":"hero","target":{"id":522,"name":"Voisins du 11e","zone":null,"national":false,
+         "address":{"latitude":48.8566,"longitude":2.3522,"display_address":"Paris 11e"}},"reasons":[]}
+        """)
+        XCTAssertEqual(card.metas.first?.text, "Paris 11e")
+        XCTAssertEqual(card.metas.first?.icon, "📍")
+    }
+
     func testActionDemandKeepsUserTextAsIs() throws {
         let card = try self.card("""
         {"id":16,"kind":"action","placement":"hero",
