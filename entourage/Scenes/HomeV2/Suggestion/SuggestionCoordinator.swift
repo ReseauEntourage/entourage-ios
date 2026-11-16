@@ -75,6 +75,14 @@ final class SuggestionCoordinator {
 
     // MARK: Affichage (instrumentation et mesure)
 
+    /// La home s'affiche (ou se réaffiche) : `displayed` repart une fois pour le prochain pas affiché,
+    /// et pas à chaque rafraîchissement ni à chaque reconstruction de la table.
+    func homeWillAppear() {
+        loggedHeroId = nil
+        loggedAccessIds.removeAll()
+        hasLoggedExplorerView = false
+    }
+
     func heroDidDisplay(_ card: SuggestionCard) {
         guard loggedHeroId != card.id else { return }
         loggedHeroId = card.id
@@ -174,8 +182,10 @@ final class SuggestionCoordinator {
     }
 
     private func record(_ kind: NextStepInteraction.Kind, access: ExplorerAccess) {
+        // Ces trois types n'ont pas de cible : le moteur n'attend pas de `target_id`.
+        let hasNoTarget = [SuggestionType.contentPath, .smalltalk, .becomeAmbassador].contains(access.type)
         provider.record(NextStepInteraction(placement: .others, kind: kind, nextStepId: nil,
-                                            itemKind: access.type.rawValue, targetId: access.targetId))
+                                            itemKind: access.type.rawValue, targetId: hasNoTarget ? nil : access.targetId))
     }
 
     // MARK: Navigation
@@ -189,6 +199,13 @@ final class SuggestionCoordinator {
         switch destination {
         case .outing(let id): DeepLinkManager.showOuting(id: id)
         case .neighborhood(let id): DeepLinkManager.showNeighborhoodDetail(id: id)
+        case .neighborhoodPost(let id, let name, let zone, let isNational):
+            var group = Neighborhood()
+            group.uid = id
+            group.name = name
+            group.zone = zone
+            group.national = isNational
+            DeepLinkManager.showNeighborhoodDetailWithCreatePost(id: id, group: group)
         case .action(let id, let isContrib): DeepLinkManager.showAction(id: id, isContrib: isContrib)
         case .resource(let id): DeepLinkManager.showResource(id: id)
         case .poi(let id): DeepLinkManager.showPoi(id: id)

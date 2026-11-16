@@ -172,6 +172,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         currentFilter.resetToDefault()
         self.loadMetadatas()
         self.initHome()
+        suggestionCoordinator.homeWillAppear()
         suggestionCoordinator.refresh()
         self.checkForUpdates()
         self.ifEventLastDay()

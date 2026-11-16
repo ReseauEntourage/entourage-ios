@@ -54,6 +54,8 @@ enum SuggestionTarget: String, Decodable {
 enum SuggestionDestination: Equatable {
     case outing(id: Int)
     case neighborhood(id: Int)
+    /// Le fil du groupe, prêt à écrire un message (comme après la création d'un groupe).
+    case neighborhoodPost(id: Int, name: String, zone: String?, isNational: Bool)
     case action(id: Int, isContrib: Bool)
     case resource(id: Int)
     case poi(id: Int)

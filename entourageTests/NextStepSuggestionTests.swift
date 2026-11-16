@@ -110,8 +110,33 @@ final class NextStepSuggestionTests: XCTestCase {
 
     func testPostMessageOpensTheGroup() throws {
         let card = try self.card(#"{"id":21,"kind":"post_message","placement":"hero","target":{"id":7,"name":"Voisins Ménilmontant"},"reasons":[{"code":"group_member_message","text":"Un petit message suffit."}]}"#)
-        XCTAssertEqual(card.destination, .neighborhood(id: 7))
+        XCTAssertEqual(card.destination, .neighborhoodPost(id: 7, name: "Voisins Ménilmontant", zone: nil, isNational: false))
         XCTAssertEqual(card.cta, .writeMessage)
+    }
+
+    /// Un groupe thématique national n'a pas de zone : l'écran d'écriture le traite comme tel.
+    func testPostMessageKeepsTheGroupZone() throws {
+        let card = try self.card(#"{"id":26,"kind":"post_message","placement":"hero","target":{"id":9,"name":"Quartier Nord","zone":"paris","national":false},"reasons":[]}"#)
+        XCTAssertEqual(card.destination, .neighborhoodPost(id: 9, name: "Quartier Nord", zone: "paris", isNational: false))
+    }
+
+    func testContentPathOpensTheFirstUnreadResource() throws {
+        let card = try self.card("""
+        {"id":27,"kind":"content_path","placement":"hero","target":null,
+         "targets":[{"id":31,"name":"A","duration":2,"watched":true},{"id":32,"name":"B","duration":3,"watched":false},{"id":33,"name":"C","duration":2,"watched":false}],
+         "reasons":[]}
+        """)
+        XCTAssertEqual(card.destination, .resource(id: 32))
+        XCTAssertEqual(card.metas.count, 3)
+    }
+
+    func testContentPathWithAllResourcesReadOpensTheFirst() throws {
+        let card = try self.card("""
+        {"id":28,"kind":"content_path","placement":"hero","target":null,
+         "targets":[{"id":31,"name":"A","watched":true},{"id":32,"name":"B","watched":true},{"id":33,"name":"C","watched":true}],
+         "reasons":[]}
+        """)
+        XCTAssertEqual(card.destination, .resource(id: 31))
     }
 
     func testBecomeAmbassadorOpensTheLink() throws {
@@ -276,6 +301,51 @@ final class NextStepSuggestionTests: XCTestCase {
 
         if case .empty = h.coordinator.state {} else { XCTFail("sans suggestion suivante ni autre piste, la zone est vide") }
         XCTAssertFalse(h.coordinator.isShowingSuggestions, "la home retrouve ses sections d'origine")
+    }
+
+    /// Les autres pistes sans cible (mini-parcours, Bonnes ondes, Animateur) n'envoient pas de `target_id`.
+    func testOthersWithoutTargetOmitTargetId() throws {
+        let h = makeHarness(hero: hero(1), next: nil)
+        let noTarget: [SuggestionType] = [.contentPath, .smalltalk, .becomeAmbassador]
+        for (index, type) in noTarget.enumerated() {
+            h.coordinator.explorerTapped(ExplorerAccess(id: "o\(index)", type: type, label: "x", context: nil, destination: .smallTalk, targetId: 5))
+        }
+        h.coordinator.explorerTapped(ExplorerAccess(id: "o9", type: .outing, label: "x", context: nil, destination: .outing(id: 5), targetId: 5))
+
+        let sent = h.provider.interactions
+        XCTAssertEqual(sent.map { $0.itemKind }, ["content_path", "smalltalk", "become_ambassador", "outing"])
+        XCTAssertEqual(sent.map { $0.targetId }, [nil, nil, nil, 5])
+        for interaction in sent.prefix(3) {
+            let fields = try XCTUnwrap(interaction.body["interaction"] as? [String: Any])
+            XCTAssertNil(fields["target_id"])
+        }
+    }
+
+    /// `displayed` part une fois par affichage de la home : ni à chaque rafraîchissement, ni jamais.
+    func testDisplayedIsSentOncePerHomeDisplay() throws {
+        let h = makeHarness(hero: hero(1), next: nil)
+        let card = hero(1)
+        func displayedCount() -> Int { h.provider.interactions.filter { $0.kind == .displayed }.count }
+
+        h.coordinator.homeWillAppear()
+        h.coordinator.heroDidDisplay(card)
+        XCTAssertEqual(displayedCount(), 1)
+
+        // Reconstruction de la table et rafraîchissement du moteur pendant le même affichage.
+        h.coordinator.heroDidDisplay(card)
+        h.coordinator.refresh()
+        h.coordinator.heroDidDisplay(card)
+        XCTAssertEqual(displayedCount(), 1)
+
+        // La home revient à l'écran : le prochain pas est de nouveau affiché.
+        h.coordinator.homeWillAppear()
+        h.coordinator.refresh()
+        h.coordinator.heroDidDisplay(card)
+        XCTAssertEqual(displayedCount(), 2)
+
+        // Un autre prochain pas affiché pendant le même affichage est un nouvel affichage.
+        h.coordinator.heroDidDisplay(hero(2))
+        XCTAssertEqual(displayedCount(), 3)
     }
 
     func testDisplayAndTapAreReportedToTheEngine() throws {

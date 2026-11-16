@@ -30,9 +30,13 @@ struct NextStepTarget: Decodable {
     let actionType: String?
     /// Durée en minutes, pour une ressource.
     let durationMinutes: Int?
+    /// Une ressource déjà lue par l'utilisateur (mini-parcours : on ouvre la première non lue).
+    let isWatched: Bool
+    /// Zone d'un groupe : absente pour un groupe thématique national.
+    let zone: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, title, name, description, online, national, distance, metadata, author, adress, address, duration
+        case id, title, name, description, online, national, distance, metadata, author, adress, address, duration, watched, zone
         case actionType = "action_type"
     }
 
@@ -74,6 +78,8 @@ struct NextStepTarget: Decodable {
         }
         actionType = try? c.decode(String.self, forKey: .actionType)
         durationMinutes = try? c.decode(Int.self, forKey: .duration)
+        isWatched = (try? c.decode(Bool.self, forKey: .watched)) ?? false
+        zone = try? c.decode(String.self, forKey: .zone)
     }
 }
 
@@ -192,13 +198,15 @@ enum NextStepAdapter {
                         destination: .action(id: id, isContrib: isContrib))
 
         case .contentPath:
-            guard let first = item.targets.first, let firstId = first.id else { return nil }
+            // On ouvre le premier contenu non lu ; si tous sont lus, le premier.
+            guard let opened = item.targets.first(where: { !$0.isWatched && $0.id != nil }) ?? item.targets.first,
+                  let openedId = opened.id else { return nil }
             let metas = item.targets.prefix(3).compactMap { resource -> SuggestionMeta? in
                 guard let title = resource.title else { return nil }
                 let duration = resource.durationMinutes.map { " · " + String(format: "suggestion_meta_minutes".localized, $0) } ?? ""
                 return SuggestionMeta(icon: "📘", text: title + duration)
             }
-            return make(title: "suggestion_content_path_title".localized, metas: metas, destination: .resource(id: firstId))
+            return make(title: "suggestion_content_path_title".localized, metas: metas, destination: .resource(id: openedId))
 
         case .smalltalk:
             return make(title: "suggestion_smalltalk_title".localized, body: "suggestion_smalltalk_body".localized, destination: .smallTalk)
@@ -212,7 +220,7 @@ enum NextStepAdapter {
 
         case .postMessage:
             guard let target = target, let id = id, let title = target.title else { return nil }
-            return make(title: title, destination: .neighborhood(id: id))
+            return make(title: title, destination: .neighborhoodPost(id: id, name: title, zone: target.zone, isNational: target.isNational))
 
         case .becomeAmbassador:
             guard let link = item.link, let url = URL(string: link), url.scheme?.hasPrefix("http") == true else { return nil }
