@@ -128,6 +128,23 @@ final class NextStepSuggestionTests: XCTestCase {
         XCTAssertEqual(card.cta, .seePlace)
     }
 
+    /// Badges de groupe (mêmes mots qu'Android) : groupe de voisins, groupe thématique rejoint, groupe à découvrir.
+    func testGroupBadgesAndEngineSentenceAsText() throws {
+        let neighbors = try self.card(#"{"id":40,"kind":"post_message","placement":"hero","target":{"id":522,"name":"Voisins","national":false,"zone":null},"reasons":[{"code":"member_group","text":"Vous êtes membre de ce groupe."}]}"#)
+        XCTAssertEqual(neighbors.badgeKey, "suggestion_badge_post_message")
+        XCTAssertEqual(neighbors.body, "Vous êtes membre de ce groupe.")
+
+        let thematic = try self.card(#"{"id":41,"kind":"post_message","placement":"hero","target":{"id":5,"name":"Cuisine et partage","national":true},"reasons":[]}"#)
+        XCTAssertEqual(thematic.badgeKey, "suggestion_badge_post_message_group")
+
+        let discovered = try self.card(#"{"id":42,"kind":"neighborhood","placement":"hero","target":{"id":6,"name":"Cuisine","national":true},"reasons":[]}"#)
+        XCTAssertEqual(discovered.badgeKey, "suggestion_badge_neighborhood")
+
+        XCTAssertEqual("suggestion_badge_post_message".localized, "✉️ Discuter avec vos voisins")
+        XCTAssertEqual("suggestion_badge_post_message_group".localized, "✉️ Discuter dans votre groupe")
+        XCTAssertEqual("suggestion_badge_neighborhood".localized, "👥 Un groupe qui pourrait vous plaire")
+    }
+
     /// Réponse réelle de préprod (artifact du 16/11) : cible `action` sans clé racine, `metadata` vide.
     func testRealPreprodActionTarget() throws {
         let card = try self.card("""

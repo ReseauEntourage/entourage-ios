@@ -228,7 +228,8 @@ enum NextStepAdapter {
             return make(title: "suggestion_content_path_title".localized, metas: metas, destination: .resource(id: openedId))
 
         case .smalltalk:
-            return make(title: "suggestion_smalltalk_title".localized, body: "suggestion_smalltalk_body".localized, destination: .smallTalk)
+            // Comme Android : la phrase du moteur sert de texte.
+            return make(title: "suggestion_smalltalk_title".localized, body: reasons.first?.text, destination: .smallTalk)
 
         case .poi:
             guard let target = target, let id = id, let title = target.title else { return nil }
@@ -239,11 +240,13 @@ enum NextStepAdapter {
 
         case .postMessage:
             guard let target = target, let id = id, let title = target.title else { return nil }
-            return make(title: title, destination: .neighborhoodPost(id: id, name: title, zone: target.zone, isNational: target.isNational))
+            // Le badge distingue le groupe de voisins du groupe thématique (national) ; le texte est la phrase du moteur, comme Android.
+            return make(title: title, isNational: target.isNational, body: reasons.first?.text,
+                        destination: .neighborhoodPost(id: id, name: title, zone: target.zone, isNational: target.isNational))
 
         case .becomeAmbassador:
             guard let link = item.link, let url = URL(string: link), url.scheme?.hasPrefix("http") == true else { return nil }
-            return make(title: "suggestion_ambassador_title".localized, body: "suggestion_ambassador_body".localized, destination: .link(url))
+            return make(title: "suggestion_ambassador_title".localized, body: reasons.first?.text, destination: .link(url))
 
         case .connexion:
             return nil

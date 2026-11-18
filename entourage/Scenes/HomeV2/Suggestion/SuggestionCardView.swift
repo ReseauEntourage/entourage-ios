@@ -53,6 +53,16 @@ extension SuggestionType {
     var badgeKey: String { "suggestion_badge_\(rawValue)" }
 }
 
+extension SuggestionCard {
+    /// Badge de la card : « Poster un message » distingue le groupe de voisins du groupe thématique rejoint.
+    var badgeKey: String {
+        if type == .postMessage {
+            return isNational ? "suggestion_badge_post_message_group" : "suggestion_badge_post_message"
+        }
+        return type.badgeKey
+    }
+}
+
 extension SuggestionCTA {
     var titleKey: String {
         switch self {
@@ -260,7 +270,7 @@ final class SuggestionCardView: UIView {
     func configure(card: SuggestionCard) {
         // Badge de type + chip optionnel.
         ui_badge_stack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        ui_badge_stack.addArrangedSubview(makeBadge(text: card.type.badgeKey.localized, color: card.type.badgeColor, filled: true))
+        ui_badge_stack.addArrangedSubview(makeBadge(text: card.badgeKey.localized, color: card.type.badgeColor, filled: true))
         var chips = [String]()
         if card.isRemote { chips.append("suggestion_chip_remote".localized) }
         if let chip = card.chip, !chip.isEmpty { chips.append(chip) }
@@ -307,7 +317,7 @@ final class SuggestionCardView: UIView {
     }
 
     private func accessibilityText(for card: SuggestionCard) -> String {
-        var parts = [card.type.badgeKey.localized, card.title]
+        var parts = [card.badgeKey.localized, card.title]
         if let body = card.body, !body.isEmpty { parts.append(body) }
         parts.append(contentsOf: card.metas.map { $0.text })
         return parts.joined(separator: ". ")
