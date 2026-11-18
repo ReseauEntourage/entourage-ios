@@ -17,6 +17,12 @@ struct ProfileImageView: UIViewRepresentable {
     func makeUIView(context: Context) -> UIImageView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        // Sans ça, SwiftUI donne à la vue la taille intrinsèque de l'image (ex. 300 pt) :
+        // le clip circulaire n'en montre alors que le centre, d'où un avatar "zoomé".
+        imageView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        imageView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         imageView.layer.cornerRadius = size.width / 2
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 1
