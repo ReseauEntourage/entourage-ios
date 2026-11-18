@@ -25,6 +25,8 @@ class PicturePreviewResizeViewController: BasePopViewController {
     var currentImage:UIImage? = nil
     weak var delegate:TakePhotoDelegate? = nil
     let MaxImageSize:CGFloat = 300
+    let MaxZoomScale:CGFloat = 2.0
+    private var laidOutFrameSize: CGSize = .zero
     var isSmallTalkMode: Bool = false
 
     var isFromProfile = false
@@ -44,9 +46,14 @@ class PicturePreviewResizeViewController: BasePopViewController {
         
         ui_top_view.populateView(title: "", titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
         
-        self.currentImage = currentImage?.toSquare()
+        // Comme sur Android (CropMe) : l'image entière est affichée en remplissant le cadre,
+        // on peut la déplacer et zoomer jusqu'à x2 maximum (cf. cropme_max_scale = 2.0).
         self.ui_iv_preview.image = self.currentImage
-        self.ui_scrollview.maximumZoomScale = 10
+        self.ui_iv_preview.contentMode = .scaleToFill
+        self.ui_scrollview.minimumZoomScale = 1
+        self.ui_scrollview.maximumZoomScale = MaxZoomScale
+        self.ui_scrollview.bouncesZoom = false
+        self.ui_scrollview.contentInsetAdjustmentBehavior = .never
         
         if isFromProfile {
             ui_bt_cancel.isHidden = true
@@ -69,6 +76,32 @@ class PicturePreviewResizeViewController: BasePopViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutImageToFillFrame()
+    }
+    
+    /// Affiche l'image en "aspect fill" dans le cadre carré, avec un contenu réellement déplaçable.
+    private func layoutImageToFillFrame() {
+        guard let image = currentImage, image.size.width > 0, image.size.height > 0 else { return }
+        let frameSize = ui_scrollview.bounds.size
+        guard frameSize.width > 0, frameSize.height > 0, frameSize != laidOutFrameSize else { return }
+        laidOutFrameSize = frameSize
+        
+        // L'image est positionnée à la main : on retire les contraintes du storyboard
+        let imageConstraints = ui_scrollview.constraints.filter { $0.firstItem === ui_iv_preview || $0.secondItem === ui_iv_preview }
+        NSLayoutConstraint.deactivate(imageConstraints)
+        ui_iv_preview.translatesAutoresizingMaskIntoConstraints = true
+        
+        ui_scrollview.zoomScale = 1
+        let fillScale = max(frameSize.width / image.size.width, frameSize.height / image.size.height)
+        let fillSize = CGSize(width: image.size.width * fillScale, height: image.size.height * fillScale)
+        ui_iv_preview.frame = CGRect(origin: .zero, size: fillSize)
+        ui_scrollview.contentSize = fillSize
+        ui_scrollview.contentOffset = CGPoint(x: (fillSize.width - frameSize.width) / 2,
+                                              y: (fillSize.height - frameSize.height) / 2)
+    }
+    
     //MARK: - Methods Images -
     func processImage() -> UIImage? {
         if let _finalImage = self.cropVisibleArea() {
@@ -78,19 +111,26 @@ class PicturePreviewResizeViewController: BasePopViewController {
     }
     
     func cropVisibleArea() -> UIImage? {
-        guard let _currentImg = self.currentImage else {
+        guard let _currentImg = self.currentImage, let cgImage = _currentImg.cgImage else {
             return nil
         }
-        var visibleRect = CGRect.zero
-        let scale = 1.0 / self.ui_scrollview.zoomScale
-        visibleRect.origin.x = self.ui_scrollview.contentOffset.x / self.ui_scrollview.contentSize.width * _currentImg.size.width;
-        visibleRect.origin.y = self.ui_scrollview.contentOffset.y / self.ui_scrollview.contentSize.height * _currentImg.size.height;
-        visibleRect.size.width = _currentImg.size.width * scale;
-        visibleRect.size.height = _currentImg.size.height * scale;
-        if let image = self.imageByCropping(image: _currentImg, toCroppedArea: visibleRect) {
-            return image
-        }
-        return nil
+        let zoom = self.ui_scrollview.zoomScale
+        let imageViewSize = self.ui_iv_preview.bounds.size
+        guard imageViewSize.width > 0, imageViewSize.height > 0 else { return nil }
+        
+        // Zone visible (dans le repère de l'image affichée, sans zoom) -> pixels de l'image source
+        let pixelsPerPointX = CGFloat(cgImage.width) / imageViewSize.width
+        let pixelsPerPointY = CGFloat(cgImage.height) / imageViewSize.height
+        var visibleRect = CGRect(
+            x: self.ui_scrollview.contentOffset.x / zoom * pixelsPerPointX,
+            y: self.ui_scrollview.contentOffset.y / zoom * pixelsPerPointY,
+            width: self.ui_scrollview.bounds.width / zoom * pixelsPerPointX,
+            height: self.ui_scrollview.bounds.height / zoom * pixelsPerPointY
+        )
+        visibleRect = visibleRect.intersection(CGRect(x: 0, y: 0, width: cgImage.width, height: cgImage.height))
+        guard !visibleRect.isNull, visibleRect.width > 0, visibleRect.height > 0 else { return nil }
+        
+        return self.imageByCropping(image: _currentImg, toCroppedArea: visibleRect.integral)
     }
     
     func imageByCropping(image _image: UIImage, toCroppedArea:CGRect) -> UIImage? {

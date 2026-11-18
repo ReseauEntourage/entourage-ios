@@ -3978,7 +3978,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.3.buildNumberNotSet;
+				MARKETING_VERSION = 15.4.buildNumberNotSet;
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_MODULE_NAME = entourage;
 				PRODUCT_NAME = "Ent-Beta";
@@ -4087,7 +4087,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.3.buildNumberNotSet;
+				MARKETING_VERSION = 15.4.buildNumberNotSet;
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
 				PRODUCT_MODULE_NAME = entourage;
 				PRODUCT_NAME = Entourage;
@@ -4202,7 +4202,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.3.buildNumberNotSet;
+				MARKETING_VERSION = 15.4.buildNumberNotSet;
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_MODULE_NAME = entourage;
 				PRODUCT_NAME = "Ent-Beta";
