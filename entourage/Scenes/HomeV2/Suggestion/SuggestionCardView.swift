@@ -90,6 +90,8 @@ final class SuggestionCardView: UIView {
 
     private let ui_badge_stack = UIStackView()
     private let ui_info_button = UIButton(type: .custom)
+    /// Zone tactile du bouton « ? » : elle reste réservée même sans bouton, pour garder la hauteur de la card.
+    private let ui_info_container = UIView()
     private let ui_media = UIView()
     private let ui_media_label = UILabel()
     private let ui_author = UILabel()
@@ -136,7 +138,7 @@ final class SuggestionCardView: UIView {
         ui_info_button.accessibilityIdentifier = "suggestion_info_button"
 
         // Zone tactile ≥ 44 pt autour du cercle visuel de 30 pt.
-        let infoHit = UIView()
+        let infoHit = ui_info_container
         infoHit.translatesAutoresizingMaskIntoConstraints = false
         ui_info_button.translatesAutoresizingMaskIntoConstraints = false
         infoHit.addSubview(ui_info_button)
@@ -313,8 +315,16 @@ final class SuggestionCardView: UIView {
 
         ui_primary.setTitle(card.cta.titleKey.localized, for: .normal)
 
+        // Sans phrase du moteur à montrer, pas de bouton « ? » : il ouvrirait une feuille vide.
+        let hasReasons = !SuggestionWhyViewController.displayedReasons(for: card).isEmpty
+        ui_info_container.subviews.forEach { $0.isHidden = !hasReasons }
+        accessibilityElements = hasReasons ? [ui_content, ui_info_button, ui_primary, ui_later] : [ui_content, ui_primary, ui_later]
+
         ui_content.accessibilityLabel = accessibilityText(for: card)
     }
+
+    /// Vrai quand la card n'a aucune phrase du moteur : le bouton « ? » est alors masqué.
+    var isWhyButtonHidden: Bool { ui_info_button.isHidden }
 
     private func accessibilityText(for card: SuggestionCard) -> String {
         var parts = [card.badgeKey.localized, card.title]

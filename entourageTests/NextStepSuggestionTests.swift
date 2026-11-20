@@ -373,7 +373,6 @@ final class NextStepSuggestionTests: XCTestCase {
         h.snackbar.expire?()
 
         if case .empty = h.coordinator.state {} else { XCTFail("sans suggestion suivante ni autre piste, la zone est vide") }
-        XCTAssertFalse(h.coordinator.isShowingSuggestions, "la home retrouve ses sections d'origine")
     }
 
     /// Les autres pistes sans cible (mini-parcours, Bonnes ondes, Animateur) n'envoient pas de `target_id`.
@@ -430,5 +429,100 @@ final class NextStepSuggestionTests: XCTestCase {
 
         XCTAssertEqual(h.provider.interactions.map { $0.kind }, [.displayed, .tapped])
         XCTAssertTrue(h.provider.interactions.allSatisfy { $0.placement == .hero && $0.nextStepId == 1 })
+    }
+
+    // MARK: - Parité avec Android
+
+    /// Mêmes icônes qu'Android pour chaque code de raison du moteur.
+    func testReasonIconsMatchAndroid() {
+        let expected: [String: String] = [
+            "near_you": "📍", "shared_interests": "✨", "popular": "👥", "upcoming_event": "🗓️",
+            "online_event": "💻", "papotage": "💻", "answers_your_need": "🔎", "poi_for_need": "🔎",
+            "local_group": "👥", "national_group": "👥", "neighbor_needs_help": "🤝", "help_offered": "🤝",
+            "content_path": "📘", "group_member_message": "💬", "smalltalk": "💬", "become_ambassador": "🌟"
+        ]
+        for (code, icon) in expected {
+            XCTAssertEqual(SuggestionReason(code: code, text: "x").icon, icon, code)
+        }
+    }
+
+    /// Une card sans phrase du moteur n'ouvre pas de feuille vide : pas de bouton « ? ».
+    func testWhyButtonIsHiddenWithoutReasons() throws {
+        let view = SuggestionCardView()
+        view.configure(card: try card(#"{"id":50,"kind":"smalltalk","placement":"hero","target":null,"reasons":[]}"#))
+        XCTAssertTrue(view.isWhyButtonHidden)
+        view.configure(card: try card(#"{"id":51,"kind":"smalltalk","placement":"hero","target":null,"reasons":[{"code":"smalltalk","text":"Les Bonnes ondes."},{"code":"x","text":"  "}]}"#))
+        XCTAssertFalse(view.isWhyButtonHidden)
+    }
+
+    /// Toutes les clés de suggestion du français existent en anglais : sinon un iPhone en anglais afficherait les clés brutes.
+    func testSuggestionStringsAreTranslatedToEnglish() throws {
+        func keys(_ language: String) throws -> Set<String> {
+            let path = try XCTUnwrap(Bundle.main.path(forResource: "Localizable", ofType: "strings", inDirectory: nil, forLocalization: language))
+            let dictionary = try XCTUnwrap(NSDictionary(contentsOfFile: path) as? [String: String])
+            return Set(dictionary.keys.filter { $0.hasPrefix("suggestion_") })
+        }
+        let missing = try keys("fr").subtracting(keys("en"))
+        XCTAssertTrue(missing.isEmpty, "clés sans traduction anglaise : \(missing.sorted())")
+    }
+
+    // MARK: - Alignement sur Android
+
+    /// Un groupe local montre son adresse, un groupe national rien, et aucune description de groupe.
+    func testGroupCardsShowTheAddressOnlyForALocalGroup() throws {
+        let local = try card(#"{"id":60,"kind":"neighborhood","placement":"hero","target":{"id":7,"name":"Voisins","national":false,"description":"Un groupe de voisins","address":{"display_address":"Paris 11e"}},"reasons":[]}"#)
+        XCTAssertEqual(local.metas.map { $0.text }, ["Paris 11e"], "pas de description de groupe sur la card")
+        let national = try card(#"{"id":61,"kind":"neighborhood","placement":"hero","target":{"id":8,"name":"Cuisine","national":true,"description":"Un groupe","address":{"display_address":"Paris"}},"reasons":[]}"#)
+        XCTAssertTrue(national.metas.isEmpty)
+        let post = try card(#"{"id":62,"kind":"post_message","placement":"hero","target":{"id":9,"name":"Voisins","national":false,"address":{"display_address":"Paris 11e"}},"reasons":[]}"#)
+        XCTAssertEqual(post.metas.map { $0.text }, ["Paris 11e"])
+    }
+
+    /// Comme Android : seule une adresse https ouvre le formulaire « devenir Animateur ».
+    func testAmbassadorLinkMustBeHttps() throws {
+        let http = try item(#"{"id":63,"kind":"become_ambassador","placement":"hero","target":null,"link":"http://forms.example.com/x","reasons":[]}"#)
+        XCTAssertNil(NextStepAdapter.card(from: http))
+    }
+
+    /// Une autre piste sans information affiche la phrase du moteur comme ligne de contexte.
+    func testExplorerContextFallsBackToTheEngineSentence() throws {
+        let other = try item(#"{"id":null,"kind":"smalltalk","placement":"others","target":null,"reasons":[{"code":"smalltalk","text":"Les Bonnes ondes vous mettent en relation."}]}"#)
+        let access = try XCTUnwrap(NextStepAdapter.access(from: other))
+        XCTAssertEqual(access.context, "Les Bonnes ondes vous mettent en relation.")
+    }
+
+    /// Comme Android : appel au premier affichage et après un geste sur une suggestion, pas à chaque retour.
+    func testEngineIsCalledOnFirstDisplayAndAfterATapOnly() throws {
+        let provider = FakeProvider()
+        provider.payload = SuggestionPayload(hero: hero(1), explorer: [])
+        let coordinator = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in })
+        coordinator.refreshIfNeeded()
+        XCTAssertEqual(provider.fetchCount, 1)
+        coordinator.refreshIfNeeded()   // retour sur la home sans geste
+        XCTAssertEqual(provider.fetchCount, 1)
+        coordinator.primaryTapped(hero(1))
+        coordinator.refreshIfNeeded()   // retour après un tap sur la card
+        XCTAssertEqual(provider.fetchCount, 2)
+        coordinator.refreshIfNeeded()
+        XCTAssertEqual(provider.fetchCount, 2)
+    }
+
+    /// Le parcours de bienvenue masque la card : pas d'appel, puis un appel dès qu'il se termine.
+    func testNoCallWhileTheWelcomeJourneyIsDisplayed() throws {
+        let provider = FakeProvider()
+        provider.payload = SuggestionPayload(hero: hero(1), explorer: [])
+        let coordinator = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in })
+        coordinator.setSuppressed(true)
+        coordinator.refreshIfNeeded()
+        XCTAssertEqual(provider.fetchCount, 0)
+        coordinator.setSuppressed(false)
+        XCTAssertEqual(provider.fetchCount, 1)
+    }
+
+    /// Fonction coupée (production) : état vide dès le départ, jamais de squelette.
+    func testDisabledFeatureStartsEmpty() {
+        let coordinator = SuggestionCoordinator(provider: EmptySuggestionProvider(), presentSnackbar: { _, _, _, _ in },
+                                                navigator: { _ in }, isEnabled: false)
+        guard case .empty = coordinator.state else { return XCTFail("l'état doit être vide") }
     }
 }

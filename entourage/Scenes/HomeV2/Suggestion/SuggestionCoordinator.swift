@@ -18,7 +18,14 @@ final class SuggestionCoordinator {
     private let presentSnackbar: SnackbarPresenter
     private let navigator: (SuggestionDestination) -> Void
 
-    private(set) var state: SuggestionLoadState = .loading
+    private(set) var state: SuggestionLoadState
+
+    /// Comme Android : le moteur est appelé au premier affichage et après un geste sur une suggestion,
+    /// pas à chaque retour sur la home.
+    private var started = false
+    private var needsRefresh = false
+    /// Le parcours de bienvenue est affiché : la card ne l'est pas, le moteur n'est donc pas appelé.
+    private var isSuppressed = false
     /// Appelé quand l'état change : la home reconstruit ses lignes.
     var onStateChanged: (() -> Void)?
 
@@ -31,10 +38,13 @@ final class SuggestionCoordinator {
 
     init(provider: SuggestionProviding = SuggestionProviderFactory.make(),
          presentSnackbar: @escaping SnackbarPresenter = SuggestionCoordinator.defaultSnackbar,
-         navigator: @escaping (SuggestionDestination) -> Void = SuggestionCoordinator.open) {
+         navigator: @escaping (SuggestionDestination) -> Void = SuggestionCoordinator.open,
+         isEnabled: Bool = SuggestionFeature.isEnabled) {
         self.provider = provider
         self.presentSnackbar = presentSnackbar
         self.navigator = navigator
+        // Fonction coupée (production, tests d'interface) : rien à charger, pas de squelette.
+        self.state = isEnabled ? .loading : .empty
     }
 
     var payload: SuggestionPayload? {
@@ -42,19 +52,30 @@ final class SuggestionCoordinator {
         return nil
     }
 
-    /// Le moteur ne renvoie rien (parcours de bienvenue, moteur coupé), ou la home n'a pas encore
-    /// de réponse : les sections d'origine de la home ne sont masquées que lorsque la zone affiche quelque chose.
-    var isShowingSuggestions: Bool {
-        switch state {
-        case .loading: return true
-        case .loaded(let payload): return !payload.isEmpty
-        case .empty, .failed: return false
+    /// Retour sur la home, comme Android : appel au premier affichage et après un geste sur une suggestion
+    /// (une suggestion réalisée est alors remplacée par le moteur, sans que l'app le signale). Aucun appel
+    /// tant que le parcours de bienvenue masque la card.
+    func refreshIfNeeded() {
+        guard !isSuppressed, !started || needsRefresh else { return }
+        started = true
+        needsRefresh = false
+        refresh()
+    }
+
+    /// Le parcours de bienvenue est affiché ou non. Quand il se termine ou se masque, la card devient
+    /// visible : le moteur est appelé à ce moment.
+    func setSuppressed(_ value: Bool) {
+        let wasSuppressed = isSuppressed
+        isSuppressed = value
+        if wasSuppressed && !value {
+            started = true
+            needsRefresh = false
+            refresh()
         }
     }
 
-    /// Chargement à l'ouverture et au retour sur la home : une suggestion réalisée est remplacée
-    /// par le moteur, sans que l'app le signale. Garde la dernière suggestion affichée pendant le
-    /// rafraîchissement, pour ne pas faire clignoter la zone.
+    /// Chargement depuis le moteur. Garde la dernière suggestion affichée pendant le rafraîchissement,
+    /// pour ne pas faire clignoter la zone.
     func refresh() {
         // Pendant le message « Annuler », la suggestion retirée ne doit pas revenir.
         guard !isFetching, pendingLater == nil else { return }
@@ -106,18 +127,21 @@ final class SuggestionCoordinator {
     func explorerTapped(_ access: ExplorerAccess) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Explorer_Click, parameters: ["type": access.type.rawValue, "id": access.id])
         record(.tapped, access: access)
+        needsRefresh = true
         navigator(access.destination)
     }
 
     func primaryTapped(_ card: SuggestionCard) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Cta, parameters: ["type": card.type.rawValue, "id": card.id])
         record(.tapped, card: card)
+        needsRefresh = true
         navigator(card.destination)
     }
 
     func bodyTapped(_ card: SuggestionCard) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Body, parameters: ["type": card.type.rawValue, "id": card.id])
         record(.tapped, card: card)
+        needsRefresh = true
         navigator(card.destination)
     }
 

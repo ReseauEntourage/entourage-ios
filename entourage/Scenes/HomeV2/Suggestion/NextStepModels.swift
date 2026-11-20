@@ -190,7 +190,7 @@ enum NextStepAdapter {
             guard let target = target, let id = id, let title = target.title else { return nil }
             var metas = [SuggestionMeta]()
             if let date = Utils.getDateFromWSDateString(target.startsAt) {
-                metas.append(SuggestionMeta(icon: "🗓", text: Utils.formatEventDateTimeFull(date: date)))
+                metas.append(SuggestionMeta(icon: "🗓", text: eventDateFormatter.string(from: date)))
             }
             if target.isOnline {
                 metas.append(SuggestionMeta(icon: "💻", text: "suggestion_meta_remote".localized))
@@ -203,10 +203,7 @@ enum NextStepAdapter {
         case .neighborhood:
             guard let target = target, let id = id, let title = target.title else { return nil }
             let chip = target.isNational ? "suggestion_chip_national".localized : "suggestion_chip_local".localized
-            var metas = [SuggestionMeta]()
-            if let address = target.visibleAddress { metas.append(SuggestionMeta(icon: "📍", text: address)) }
-            if let description = target.description, !description.isEmpty { metas.append(SuggestionMeta(icon: nil, text: description)) }
-            return make(title: title, isNational: target.isNational, chip: chip, metas: metas, destination: .neighborhood(id: id))
+            return make(title: title, isNational: target.isNational, chip: chip, metas: groupMetas(target), destination: .neighborhood(id: id))
 
         case .action:
             guard let target = target, let id = id, let title = target.title else { return nil }
@@ -241,11 +238,13 @@ enum NextStepAdapter {
         case .postMessage:
             guard let target = target, let id = id, let title = target.title else { return nil }
             // Le badge distingue le groupe de voisins du groupe thématique (national) ; le texte est la phrase du moteur, comme Android.
-            return make(title: title, isNational: target.isNational, body: reasons.first?.text,
+            return make(title: title, isNational: target.isNational, body: reasons.first?.text, metas: groupMetas(target),
                         destination: .neighborhoodPost(id: id, name: title, zone: target.zone, isNational: target.isNational))
 
         case .becomeAmbassador:
-            guard let link = item.link, let url = URL(string: link), url.scheme?.hasPrefix("http") == true else { return nil }
+            // Comme Android : seule une adresse https ouvre le formulaire, sinon pas de card.
+            guard let link = item.link?.trimmingCharacters(in: .whitespacesAndNewlines), let url = URL(string: link),
+                  url.scheme?.lowercased() == "https" else { return nil }
             return make(title: "suggestion_ambassador_title".localized, body: reasons.first?.text, destination: .link(url))
 
         case .connexion:
@@ -254,11 +253,26 @@ enum NextStepAdapter {
     }
 
     /// Une autre piste devient une ligne de la zone : son titre, une ligne de contexte tirée de ses
-    /// informations (la première), et un tap qui ouvre la piste elle-même.
+    /// informations (la première, sinon la phrase du moteur, comme Android), et un tap qui ouvre la piste elle-même.
     static func access(from item: NextStepItem) -> ExplorerAccess? {
         guard let card = card(from: item) else { return nil }
+        let context = card.metas.first(where: { !$0.text.isEmpty })?.text ?? card.body
         return ExplorerAccess(id: card.id, type: card.type, label: card.title,
-                              context: card.metas.first?.text, destination: card.destination, targetId: card.targetId)
+                              context: context, destination: card.destination, targetId: card.targetId)
+    }
+
+    /// Date d'un événement, comme Android : date moyenne et heure courte, dans la langue de l'appareil.
+    private static let eventDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
+
+    /// Un groupe : son adresse seulement quand il est local (comme Android), jamais sa description.
+    private static func groupMetas(_ target: NextStepTarget) -> [SuggestionMeta] {
+        guard !target.isNational, let address = target.visibleAddress else { return [] }
+        return [SuggestionMeta(icon: "📍", text: address)]
     }
 
     /// « 800 m » sous 1 km, « 3 km » au-delà.

@@ -12,14 +12,16 @@ extension SuggestionReason {
     /// L'icône dépend du code de la raison ; un code inconnu (moteur plus récent) prend l'icône par défaut.
     var icon: String {
         switch code {
+        // Mêmes icônes qu'Android, code par code.
         case "near_you": return "📍"
-        case "shared_interests": return "❤️"
-        case "upcoming_event", "online_event": return "🗓"
-        case "popular", "help_offered", "neighbor_needs_help": return "👥"
+        case "shared_interests": return "✨"
+        case "popular", "local_group", "national_group": return "👥"
+        case "upcoming_event": return "🗓️"
+        case "online_event", "papotage": return "💻"
         case "answers_your_need", "poi_for_need": return "🔎"
-        case "local_group", "national_group", "group_member_message": return "🏘️"
+        case "neighbor_needs_help", "help_offered": return "🤝"
         case "content_path": return "📘"
-        case "smalltalk", "papotage": return "💬"
+        case "group_member_message", "smalltalk": return "💬"
         case "become_ambassador": return "🌟"
         default: return "✅"
         }
@@ -31,9 +33,11 @@ final class SuggestionWhyViewController: UIViewController {
     static let maxReasons = 3
 
     /// Les phrases du moteur, telles quelles : il a déjà choisi la variante adaptée à la personne
-    /// (variante douce comprise). L'app n'en reformule, n'en construit et n'en masque aucune.
+    /// (variante douce comprise). L'app n'en reformule, n'en construit et n'en masque aucune, sauf une
+    /// phrase vide (comme Android) ; sans phrase, la card n'a pas de bouton « ? ».
     static func displayedReasons(for card: SuggestionCard) -> [SuggestionReason] {
-        return Array(card.reasons.prefix(maxReasons))
+        let readable = card.reasons.filter { !$0.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+        return Array(readable.prefix(maxReasons))
     }
 
     private let card: SuggestionCard

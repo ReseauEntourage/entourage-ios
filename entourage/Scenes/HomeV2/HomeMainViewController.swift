@@ -61,8 +61,6 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     var initialPedagos = [PedagogicResource]()
     let suggestionCoordinator = SuggestionCoordinator()
     var suggestionInsertIndex: Int?
-    /// Les sections d'origine (entraides, événements) étaient-elles affichées à la dernière construction de la home ?
-    var legacySectionsWereShown: Bool?
     /// Le parcours de bienvenue et les suggestions ne s'affichent jamais ensemble.
     var isWelcomeJourneyDisplayed = false
     
@@ -173,7 +171,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         self.loadMetadatas()
         self.initHome()
         suggestionCoordinator.homeWillAppear()
-        suggestionCoordinator.refresh()
+        suggestionCoordinator.refreshIfNeeded()
         self.checkForUpdates()
         self.ifEventLastDay()
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
@@ -533,11 +531,10 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         suggestionInsertIndex = tableDTO.count
         tableDTO.append(contentsOf: suggestionRows())
 
-        // Quand la zone affiche des suggestions : parcours OU suggestions, puis la partie basse (plus de sections entraides,
-        // événements). Quand le moteur ne renvoie rien (parcours de bienvenue, moteur coupé) ou est en erreur,
-        // la home retrouve ses sections d'origine : elle ne reste jamais sans contenu.
-        let keepsLegacySections = !suggestionCoordinator.isShowingSuggestions
-        legacySectionsWereShown = keepsLegacySections
+        // Comme Android : avec le moteur de suggestion, la home ne garde que le parcours de bienvenue OU les
+        // suggestions, puis la partie basse (plus de sections entraides ni événements), même quand le moteur
+        // ne propose rien. Sans le moteur (production, tests d'interface), la home garde ses sections d'origine.
+        let keepsLegacySections = !SuggestionFeature.isEnabled
 
         if keepsLegacySections && showInitialPedago && initialPedagos.count > 0 {
             tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
@@ -572,10 +569,13 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         }
         
         self.ui_table_view.reloadData()
+        // Comme Android : le moteur n'est pas appelé tant que le parcours de bienvenue masque la card, et il
+        // l'est dès que le parcours se termine ou se masque.
+        suggestionCoordinator.setSuppressed(isWelcomeJourneyDisplayed)
         self.handleEnhancedOnboardingReturn()
         SVProgressHUD.dismiss()
     }
-    
+
     // MARK: - Suggestion (moteur « Votre prochain pas », EN-9473)
 
     /// Lignes de suggestion selon l'état : squelette pendant le chargement, rien si vide ou en erreur.
@@ -604,11 +604,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     }
 
     func reloadSuggestionRows() {
-        // La réponse du moteur change ce que la home affiche en dessous (sections d'origine) : on reconstruit tout.
-        if let wereShown = legacySectionsWereShown, wereShown == suggestionCoordinator.isShowingSuggestions {
-            configureDTO()
-            return
-        }
+        // Les sections d'origine ne dépendent plus de la réponse du moteur : seules les lignes de suggestion changent.
         guard let index = suggestionInsertIndex, index <= tableDTO.count else { return }
         tableDTO.removeAll(where: { isSuggestionRow($0) })
         tableDTO.insert(contentsOf: suggestionRows(), at: min(index, tableDTO.count))
