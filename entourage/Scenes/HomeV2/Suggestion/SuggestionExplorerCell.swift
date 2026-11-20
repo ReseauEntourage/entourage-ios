@@ -20,14 +20,11 @@ final class ExplorerRowView: UIControl {
     init(access: ExplorerAccess) {
         super.init(frame: .zero)
         backgroundColor = .white
-        // Ombre alignée sur les cards d'événements d'Android (CardView : coins 16 dp, élévation 2 dp), sans bordure.
-        // Ni la ligne, ni la pile, ni la cellule ne clippent (pas de clipsToBounds) : l'ombre (≈ 6 pt vers le bas)
-        // tient dans les marges de la cellule (8 pt en bas, 20 pt sur les côtés).
+        // Liseré des cartes des outils solidaires de la home (HomeSolidarityToolsCell) : fond blanc, trait beige
+        // de 1 pt, sans ombre. Coins de 16, ceux des lignes.
         layer.cornerRadius = 16
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.15
-        layer.shadowRadius = 4
-        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.borderColor = UIColor.appBeige.cgColor
+        layer.borderWidth = 1
 
         ui_icon_bg.backgroundColor = access.type.thumbBackground
         ui_icon_bg.layer.cornerRadius = 12
@@ -154,6 +151,8 @@ final class SuggestionExplorerCell: UITableViewCell {
             let placeholder = UIView()
             placeholder.backgroundColor = .white
             placeholder.layer.cornerRadius = 16
+            placeholder.layer.borderColor = UIColor.appBeige.cgColor
+            placeholder.layer.borderWidth = 1
             placeholder.heightAnchor.constraint(equalToConstant: skeletonHeight - 9).isActive = true
             placeholder.isAccessibilityElement = true
             placeholder.accessibilityLabel = "suggestion_explorer_loading_a11y".localized
