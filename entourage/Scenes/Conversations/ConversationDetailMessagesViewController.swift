@@ -123,6 +123,12 @@ private var imagePreviewOverlay: UIView?
     private var isOptionViewVisible = false
     private var shouldScrollToBottomAfterReload = false
 
+    /// Message ciblé par une notification (`chat_message_id`, EN-9375) : scrollé et mis en évidence
+    /// une fois chargé, en remontant l'historique page par page tant qu'il manque.
+    var targetChatMessageId: Int? = nil
+    private var highlightedMessageId: Int? = nil
+    private var targetLookupPagesLeft = 5
+
     // MARK: - Édition de message (bouton "•••" → Modifier, écran conversation uniquement)
     private var editingMessageId: Int? = nil
     private let editBanner = UIView()
@@ -1053,6 +1059,62 @@ private var imagePreviewOverlay: UIView?
         }
     }
 
+    // MARK: - Message ciblé par une notification (EN-9375)
+
+    /// Appelé après chaque chargement de messages. Quand une notification vise un message précis,
+    /// le scrolle et le met en évidence dès qu'il est dans la liste ; sinon remonte l'historique
+    /// d'une page (l'API n'accepte que `page`/`per`), dans la limite de `targetLookupPagesLeft`.
+    /// Retourne `true` si un message était ciblé (le scroll vers le bas est alors géré ici),
+    /// `false` quand rien n'est ciblé.
+    private func handleTargetMessageAfterLoad() -> Bool {
+        guard let targetId = targetChatMessageId else { return false }
+
+        let row = conversationCellDTOs.firstIndex { dto in
+            if case .message(let message, _) = dto { return message.uid == targetId }
+            return false
+        }
+        if let row = row {
+            targetChatMessageId = nil
+            scrollToTargetMessage(at: row, messageId: targetId)
+            return true
+        }
+
+        if messages.count >= numberOfItemsForWS * currentPage && targetLookupPagesLeft > 0 {
+            targetLookupPagesLeft -= 1
+            currentPage += 1
+            // `isLoading` n'est relâché qu'une seconde plus tard (setLoadingFalse) : on le libère
+            // ici pour enchaîner la page suivante sans attendre.
+            isLoading = false
+            getMessages()
+            return true
+        }
+
+        // Message introuvable (supprimé, trop ancien ou plus de pages) : bas du fil.
+        targetChatMessageId = nil
+        scrollToBottomIfNeeded()
+        return true
+    }
+
+    /// Scrolle sur la ligne du message ciblé et la surligne (fond orange clair) puis l'estompe,
+    /// comme sur Android. L'état vit dans `highlightedMessageId` (lu par `cellForRowAt`) : une
+    /// cellule recyclée n'hérite jamais du surlignage d'un autre message.
+    private func scrollToTargetMessage(at row: Int, messageId: Int) {
+        let indexPath = IndexPath(row: row, section: 0)
+        ui_tableview.layoutIfNeeded()
+        guard row < ui_tableview.numberOfRows(inSection: 0) else { return }
+        highlightedMessageId = messageId
+        ui_tableview.scrollToRow(at: indexPath, at: .middle, animated: false)
+        // Cellule déjà visible : on applique le fond tout de suite ; sinon cellForRowAt s'en charge.
+        ui_tableview.cellForRow(at: indexPath)?.contentView.backgroundColor = .appOrangeLight_50
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
+            guard let self = self, self.highlightedMessageId == messageId else { return }
+            self.highlightedMessageId = nil
+            UIView.animate(withDuration: 0.6) {
+                self.ui_tableview.cellForRow(at: indexPath)?.contentView.backgroundColor = .clear
+            }
+        }
+    }
+
     //MARK: - Setup & Navigation
     func setupFromOtherVC(
         conversationId: Int,
@@ -1285,7 +1347,10 @@ func checkNewConv() {
                 // 10. Auto-scroll en bas :
                 //     - après envoi (flag shouldScrollToBottomAfterReload)
                 //     - ou si reload normal (non-silencieux)
-                if self.currentPage == 1, !self.conversationCellDTOs.isEmpty {
+                // Message ciblé par une notification (EN-9375) : sa recherche décide du scroll.
+                if self.handleTargetMessageAfterLoad() {
+                    // scroll géré par handleTargetMessageAfterLoad()
+                } else if self.currentPage == 1, !self.conversationCellDTOs.isEmpty {
                     if !self.hasMoved {
                         let lastRow = self.conversationCellDTOs.count - 1
                         let ip = IndexPath(row: lastRow, section: 0)
@@ -1863,6 +1928,7 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
                            showPhoneWarning: isOneToOne)
             cell.selectionStyle = .none
             cell.delegate = self
+            cell.contentView.backgroundColor = (message.uid == highlightedMessageId) ? UIColor.appOrangeLight_50 : UIColor.clear
 
             return cell
 
@@ -1878,6 +1944,7 @@ extension ConversationDetailMessagesViewController: UITableViewDataSource, UITab
             cell.configure(with: message, isMe: true,
                            isFirstInGroup: grouping.isFirst, isLastInGroup: grouping.isLast,
                            showSenderName: !isOneToOne)
+            cell.contentView.backgroundColor = .clear
             return cell
         }
     }

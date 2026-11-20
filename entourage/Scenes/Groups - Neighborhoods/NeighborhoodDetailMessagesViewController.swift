@@ -59,6 +59,11 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     weak var parentDelegate: UpdateCommentCountDelegate? = nil
     var postMessage: PostMessage? = nil
 
+    /// Commentaire ciblé par une notification (`chat_message_id`, EN-9375) : scrollé et mis en
+    /// évidence à l'ouverture, au lieu de descendre en bas du fil.
+    var targetChatMessageId: Int? = nil
+    private var highlightedMessageId: Int? = nil
+
     // MARK: - Propriétés pour la fonctionnalité de mention
     /// Liste filtrée affichée dans le tableau des suggestions (obtenue via l’appel serveur)
     var mentionSuggestions: [UserLightNeighborhood] = []
@@ -473,6 +478,9 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                     return
                 }
 
+                // Commentaire ciblé par une notification (EN-9375) : on y va plutôt qu'en bas du fil
+                if self.scrollToTargetCommentIfNeeded() { return }
+
                 // Scroller tout en bas
                 let lastSection = self.ui_tableview.numberOfSections - 1
                 if lastSection >= 0 {
@@ -544,6 +552,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         ) { message, error in
             self.postMessage = message
             self.ui_tableview.reloadData()
+            if self.scrollToTargetCommentIfNeeded() { return }
             if self.messages.count + self.messagesForRetry.count > 0 {
                 DispatchQueue.main.async {
                     let indexPath = IndexPath(
@@ -554,6 +563,35 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                 }
             }
         }
+    }
+
+    // MARK: - Commentaire ciblé par une notification (EN-9375)
+
+    /// Si un commentaire est ciblé et présent dans le fil, scrolle dessus et le met en évidence
+    /// (fond orange clair puis estompé, comme sur Android). Retourne `true` quand la cible a été
+    /// traitée : le scroll vers le bas est alors inutile. Le ciblage n'est consommé qu'une fois ;
+    /// un commentaire introuvable (supprimé) laisse le comportement par défaut (bas du fil).
+    private func scrollToTargetCommentIfNeeded() -> Bool {
+        guard let targetId = targetChatMessageId else { return false }
+        targetChatMessageId = nil
+        guard let index = messages.firstIndex(where: { $0.uid == targetId }) else { return false }
+
+        let indexPath = IndexPath(row: index + (postMessage != nil ? 1 : 0), section: 0)
+        ui_tableview.layoutIfNeeded()
+        guard indexPath.row < ui_tableview.numberOfRows(inSection: 0) else { return false }
+
+        highlightedMessageId = targetId
+        ui_tableview.scrollToRow(at: indexPath, at: .middle, animated: false)
+        // Cellule déjà visible : on applique le fond tout de suite ; sinon cellForRowAt s'en charge.
+        ui_tableview.cellForRow(at: indexPath)?.contentView.backgroundColor = .appOrangeLight_50
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
+            guard let self = self, self.highlightedMessageId == targetId else { return }
+            self.highlightedMessageId = nil
+            UIView.animate(withDuration: 0.6) {
+                self.ui_tableview.cellForRow(at: indexPath)?.contentView.backgroundColor = .clear
+            }
+        }
+        return true
     }
 
     // MARK: - IBActions
@@ -794,6 +832,7 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
             let message = messagesForRetry[realIndex - messages.count]
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe", for: indexPath)
                 as! NeighborhoodMessageCell
+            cell.contentView.backgroundColor = .clear
             let isTranslated = translatedMessageIDs.contains(message.uid)
             cell.populateCell(
                 isMe: true,
@@ -816,6 +855,7 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
             as! NeighborhoodMessageCell
+        cell.contentView.backgroundColor = (message.uid == highlightedMessageId) ? UIColor.appOrangeLight_50 : UIColor.clear
         let isTranslated = translatedMessageIDs.contains(message.uid)
         cell.populateCell(
             isMe: isMe,

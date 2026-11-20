@@ -74,7 +74,7 @@ struct DeepLinkManager {
             return
         }
         if notification.tracking == "outing_message"{
-            showConversation(conversationId: notification.instanceId)
+            showConversation(conversationId: notification.instanceId, targetChatMessageId: notification.chatMessageId)
             return
         }
         switch notification.instanceType {
@@ -83,7 +83,7 @@ struct DeepLinkManager {
         case .pois:
             showPoi(id: notification.instanceId)
         case .conversations:
-            showConversation(conversationId: notification.instanceId)
+            showConversation(conversationId: notification.instanceId, targetChatMessageId: notification.chatMessageId)
         case .neighborhoods:
             showNeighborhoodDetail(id: notification.instanceId, targetChatMessageId: notification.chatMessageId)
         case .outings:
@@ -98,7 +98,7 @@ struct DeepLinkManager {
             showAction(id: notification.instanceId, isContrib: false)
         case .neighborhood_post:
             if let _postId = notification.postId{
-                showNeighborhoodDetailMessage(instanceId: notification.instanceId, postId: _postId)
+                showNeighborhoodDetailMessage(instanceId: notification.instanceId, postId: _postId, targetChatMessageId: notification.chatMessageId)
             }else{
                 showNeighborhoodDetail(id: notification.instanceId)
             }
@@ -111,7 +111,7 @@ struct DeepLinkManager {
         case .none:
             break
         case .outing_message:
-            showConversation(conversationId: notification.instanceId)
+            showConversation(conversationId: notification.instanceId, targetChatMessageId: notification.chatMessageId)
         case .smalltalk:
             showSmallTalk(conversationId: notification.instanceId)
         case .almost_matches:
@@ -123,7 +123,7 @@ struct DeepLinkManager {
 
     static func presentActionFromDeeplink(notification:NotificationPushData) {
         if notification.tracking == "outing_message"{
-            showConversation(conversationId: notification.instanceId)
+            showConversation(conversationId: notification.instanceId, targetChatMessageId: notification.chatMessageId)
             return
         }
         
@@ -133,7 +133,7 @@ struct DeepLinkManager {
         case .pois:
             showPoi(id: notification.instanceId)
         case .conversations:
-            showConversation(conversationId: notification.instanceId)
+            showConversation(conversationId: notification.instanceId, targetChatMessageId: notification.chatMessageId)
         case .neighborhoods:
             showNeighborhoodDetail(id: notification.instanceId, targetChatMessageId: notification.chatMessageId)
         case .outings:
@@ -148,7 +148,7 @@ struct DeepLinkManager {
             showAction(id: notification.instanceId, isContrib: false)
         case .neighborhood_post:
             if let _postId = notification.postId{
-                showNeighborhoodDetailMessage(instanceId: notification.instanceId, postId: _postId)
+                showNeighborhoodDetailMessage(instanceId: notification.instanceId, postId: _postId, targetChatMessageId: notification.chatMessageId)
             }else{
                 showNeighborhoodDetail(id: notification.instanceId)
             }
@@ -161,7 +161,7 @@ struct DeepLinkManager {
         case .none:
             break
         case .outing_message:
-            showConversation(conversationId: notification.instanceId)
+            showConversation(conversationId: notification.instanceId, targetChatMessageId: notification.chatMessageId)
         case .smalltalk:
             showSmallTalk(conversationId: notification.instanceId)
         case .almost_matches:
@@ -222,9 +222,12 @@ struct DeepLinkManager {
         }
     }
     
-    static func showConversation(conversationId:Int) {
+    /// `targetChatMessageId` : message à mettre en évidence dans la discussion (EN-9375), absent pour
+    /// les notifications qui ne visent pas un message précis.
+    static func showConversation(conversationId:Int, targetChatMessageId:Int? = nil) {
         if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
             vc.setupFromOtherVC(conversationId: conversationId, title: nil, isOneToOne: true)
+            vc.targetChatMessageId = targetChatMessageId
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
@@ -436,10 +439,12 @@ struct DeepLinkManager {
 
     
     //TODO : display message from group
-    static func showNeighborhoodDetailMessage(instanceId:Int, postId:Int) {
+    /// `targetChatMessageId` : commentaire à mettre en évidence dans le fil du post (EN-9375).
+    static func showNeighborhoodDetailMessage(instanceId:Int, postId:Int, targetChatMessageId:Int? = nil) {
         let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? NeighborhoodDetailMessagesViewController {
             vc.parentCommentId = postId
+            vc.targetChatMessageId = targetChatMessageId
             vc.neighborhoodId = instanceId
             vc.isStartEditing = false
             vc.isGroupMember = true
