@@ -463,6 +463,7 @@
 		262337592EE81493007EA8ED /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 250F348F3267754AC4BF77CD /* GooglePlaces */; };
 		2623375B2EE8229E007EA8ED /* AppCheckTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2623375A2EE8229E007EA8ED /* AppCheckTokenProvider.swift */; };
 		2623375E2EE82704007EA8ED /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 2623375D2EE82704007EA8ED /* FirebaseAppCheck */; };
+		26F1A0012FB0A00100AAC001 /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 26F1A0022FB0A00100AAC001 /* FirebaseInAppMessaging-Beta */; };
 		262820D32D49042A00A61C30 /* MainStatUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262820D22D49042A00A61C30 /* MainStatUserCell.xib */; };
 		262820D52D49069A00A61C30 /* MainStatUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262820D42D49069A00A61C30 /* MainStatUserCell.swift */; };
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
@@ -1433,6 +1434,7 @@
 				24CFFF3A2EF1828D0003509F /* SVProgressHUD in Frameworks */,
 				02E9D6C22970124900F9625D /* ActiveLabel in Frameworks */,
 				2623375E2EE82704007EA8ED /* FirebaseAppCheck in Frameworks */,
+				26F1A0012FB0A00100AAC001 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				020AF5DE286064AC0012AE60 /* Lottie in Frameworks */,
 				7FDDC1E7C9EDFC09AECDB828 /* Mantis in Frameworks */,
 			);
@@ -2991,6 +2993,7 @@
 				02E9D6C12970124900F9625D /* ActiveLabel */,
 				250F348F3267754AC4BF77CD /* GooglePlaces */,
 				2623375D2EE82704007EA8ED /* FirebaseAppCheck */,
+				26F1A0022FB0A00100AAC001 /* FirebaseInAppMessaging-Beta */,
 				24CFFF392EF1828D0003509F /* SVProgressHUD */,
 			);
 			productName = entourageios;
@@ -3979,6 +3982,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 15.4.buildNumberNotSet;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_MODULE_NAME = entourage;
 				PRODUCT_NAME = "Ent-Beta";
@@ -4088,6 +4095,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 15.4.buildNumberNotSet;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios;
 				PRODUCT_MODULE_NAME = entourage;
 				PRODUCT_NAME = Entourage;
@@ -4203,6 +4214,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 15.4.buildNumberNotSet;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_MODULE_NAME = entourage;
 				PRODUCT_NAME = "Ent-Beta";
@@ -4525,6 +4540,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAppCheck;
+		};
+		26F1A0022FB0A00100AAC001 /* FirebaseInAppMessaging-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseInAppMessaging-Beta";
 		};
 		5944ADF5ABBA34EC41DC55FD /* Mantis */ = {
 			isa = XCSwiftPackageProductDependency;
