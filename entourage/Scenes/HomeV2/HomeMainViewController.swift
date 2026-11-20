@@ -34,6 +34,8 @@ enum HomeV2DTO {
     case cellWelcomeJourney(viewModel: WelcomeJourneyViewModel)
     case cellSolidarityTools
     case cellDonation
+    case cellSuggestionHero(card: SuggestionCard?)
+    case cellSuggestionExplorer(accesses: [ExplorerAccess]?)
 }
 
 class HomeMainViewController: UIViewController, UIPopoverPresentationControllerDelegate {
@@ -57,6 +59,10 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     var allDemands = [Action]()
     var allPedagos = [PedagogicResource]()
     var initialPedagos = [PedagogicResource]()
+    let suggestionCoordinator = SuggestionCoordinator()
+    var suggestionInsertIndex: Int?
+    /// Le parcours de bienvenue et les suggestions ne s'affichent jamais ensemble.
+    var isWelcomeJourneyDisplayed = false
     
     var currentFilter = EventActionLocationFilters()
     var currentLocationFilter = EventActionLocationFilters()
@@ -107,6 +113,9 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_table_view.register(UINib(nibName: HomeSolidarityToolsCell.identifier, bundle: nil), forCellReuseIdentifier: HomeSolidarityToolsCell.identifier)
         ui_table_view.register(HomeCellDonation.self, forCellReuseIdentifier: HomeCellDonation.identifier)
         ui_table_view.register(HomeWelcomeJourneyCell.self, forCellReuseIdentifier: HomeWelcomeJourneyCell.identifier)
+        ui_table_view.register(SuggestionHeroCell.self, forCellReuseIdentifier: SuggestionHeroCell.identifier)
+        ui_table_view.register(SuggestionExplorerCell.self, forCellReuseIdentifier: SuggestionExplorerCell.identifier)
+        suggestionCoordinator.onStateChanged = { [weak self] in self?.reloadSuggestionRows() }
 
 
         self.checkAndCreateCookieIfNotExists()
@@ -161,6 +170,8 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         currentFilter.resetToDefault()
         self.loadMetadatas()
         self.initHome()
+        suggestionCoordinator.homeWillAppear()
+        suggestionCoordinator.refreshIfNeeded()
         self.checkForUpdates()
         self.ifEventLastDay()
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
@@ -495,9 +506,11 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         let hasShownCelebration = UserDefaults.standard.bool(forKey: "hasShownWelcomeCelebration")
         let isUserProOrTeam = (UserDefaults.currentUser?.partner != nil)
 
+        isWelcomeJourneyDisplayed = false
         let isHiddenByUser = isWelcomeJourneyHiddenOptimistically || WelcomeJourneyHiddenFlag.isHidden(userId: UserDefaults.currentUser?.uuid)
         if !welcomeJourneyVM.hideEntirely && !isUserProOrTeam && !isHiddenByUser {
             tableDTO.append(.cellWelcomeJourney(viewModel: welcomeJourneyVM))
+            isWelcomeJourneyDisplayed = true
 
             if welcomeJourneyVM.isFullyCompleted && !hasShownCelebration {
                 UserDefaults.standard.set(true, forKey: "hasShownWelcomeCelebration")
@@ -515,28 +528,11 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
             }
         }
 
-        if showInitialPedago && initialPedagos.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
-            tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
-        }
+        suggestionInsertIndex = tableDTO.count
+        tableDTO.append(contentsOf: suggestionRows())
 
-        if (allDemands.count > 0) {
-            if isContributionPreference {
-                tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
-                tableDTO.append(.cellAction(actions: allDemands))
-                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
-            } else {
-                tableDTO.append(.cellTitle(title: "home_v2_title_action".localized, subtitle: "home_v2_subtitle_action".localized))
-                tableDTO.append(.cellAction(actions: allDemands))
-                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
-            }
-        }
-        if allEvents.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_event".localized, subtitle: "home_v2_subtitle_event".localized))
-            tableDTO.append(.cellEvent(events: allEvents))
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
-        }
-
+        // Comme Android : la home ne garde que le parcours de bienvenue OU les suggestions, puis la partie basse
+        // (outils, contenus) : plus de sections entraides ni événements, même quand le moteur ne propose rien.
         tableDTO.append(.cellSolidarityTools)
         tableDTO.append(.cellDonation)
 
@@ -548,10 +544,48 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         }
         
         self.ui_table_view.reloadData()
+        // Comme Android : le moteur n'est pas appelé tant que le parcours de bienvenue masque la card, et il
+        // l'est dès que le parcours se termine ou se masque.
+        suggestionCoordinator.setSuppressed(isWelcomeJourneyDisplayed)
         self.handleEnhancedOnboardingReturn()
         SVProgressHUD.dismiss()
     }
-    
+
+    // MARK: - Suggestion (moteur « Votre prochain pas », EN-9473)
+
+    /// Lignes de suggestion selon l'état : squelette pendant le chargement, rien si vide ou en erreur.
+    func suggestionRows() -> [HomeV2DTO] {
+        guard !isWelcomeJourneyDisplayed else { return [] }
+        var rows = [HomeV2DTO]()
+        switch suggestionCoordinator.state {
+        case .loading:
+            rows.append(.cellSuggestionHero(card: nil))
+            rows.append(.cellSuggestionExplorer(accesses: nil))
+        case .loaded(let payload):
+            if let hero = payload.hero { rows.append(.cellSuggestionHero(card: hero)) }
+            // Zéro accès : toute la zone (titre compris) est masquée, pas de titre orphelin.
+            if !payload.explorer.isEmpty { rows.append(.cellSuggestionExplorer(accesses: payload.explorer)) }
+        case .empty, .failed:
+            break
+        }
+        return rows
+    }
+
+    func isSuggestionRow(_ row: HomeV2DTO) -> Bool {
+        switch row {
+        case .cellSuggestionHero, .cellSuggestionExplorer: return true
+        default: return false
+        }
+    }
+
+    func reloadSuggestionRows() {
+        // Les sections d'origine ne dépendent plus de la réponse du moteur : seules les lignes de suggestion changent.
+        guard let index = suggestionInsertIndex, index <= tableDTO.count else { return }
+        tableDTO.removeAll(where: { isSuggestionRow($0) })
+        tableDTO.insert(contentsOf: suggestionRows(), at: min(index, tableDTO.count))
+        ui_table_view.reloadData()
+    }
+
     func initHome() {
         self.ui_label_subtitle.text = "home_v2_title".localized
         self.getNotif()
@@ -652,6 +686,26 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.onDonateTapped = { [weak self] in
                     self?.openDonationPage()
                 }
+                return cell
+            }
+        case .cellSuggestionHero(let card):
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SuggestionHeroCell.identifier) as? SuggestionHeroCell {
+                cell.configure(card: card)
+                cell.onPrimaryTapped = { [weak self] card in self?.suggestionCoordinator.primaryTapped(card) }
+                cell.onBodyTapped = { [weak self] card in self?.suggestionCoordinator.bodyTapped(card) }
+                cell.onLaterTapped = { [weak self] card in self?.suggestionCoordinator.laterTapped(card) }
+                cell.onInfoTapped = { [weak self] card in
+                    guard let self = self else { return }
+                    self.suggestionCoordinator.infoTapped(card, from: self)
+                }
+                if let card = card { suggestionCoordinator.heroDidDisplay(card) }
+                return cell
+            }
+        case .cellSuggestionExplorer(let accesses):
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SuggestionExplorerCell.identifier) as? SuggestionExplorerCell {
+                cell.configure(accesses: accesses)
+                cell.onAccessTapped = { [weak self] access in self?.suggestionCoordinator.explorerTapped(access) }
+                if let accesses = accesses { suggestionCoordinator.explorerDidDisplay(accesses) }
                 return cell
             }
         case .cellWelcomeJourney(let viewModel):
@@ -866,6 +920,8 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(_): return
         case .cellSolidarityTools: return
         case .cellDonation: return
+        case .cellSuggestionHero(_): return
+        case .cellSuggestionExplorer(_): return
         case .cellWelcomeJourney(_): return
         }
     }
@@ -883,6 +939,8 @@ extension HomeMainViewController: UITableViewDelegate, UITableViewDataSource {
         case .cellInitialPedago(_): return 115
         case .cellSolidarityTools: return UITableView.automaticDimension
         case .cellDonation: return UITableView.automaticDimension
+        case .cellSuggestionHero(_): return UITableView.automaticDimension
+        case .cellSuggestionExplorer(_): return UITableView.automaticDimension
         case .cellWelcomeJourney(_): return UITableView.automaticDimension
         }
     }
