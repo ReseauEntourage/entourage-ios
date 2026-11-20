@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 extension SuggestionType {
     var badgeColor: UIColor {
@@ -94,6 +95,10 @@ final class SuggestionCardView: UIView {
     private let ui_info_container = UIView()
     private let ui_media = UIView()
     private let ui_media_label = UILabel()
+    /// Photo de profil de l'auteur d'une entraide, posée au-dessus des initiales (décorative : le nom est déjà lu).
+    private let ui_media_image = UIImageView()
+    /// Photo demandée pour la card affichée : écarte la réponse tardive d'un chargement devenu obsolète.
+    private var mediaPhotoURL: URL?
     private let ui_author = UILabel()
     private let ui_title = UILabel()
     private let ui_body = UILabel()
@@ -170,11 +175,26 @@ final class SuggestionCardView: UIView {
         ui_media_label.translatesAutoresizingMaskIntoConstraints = false
         ui_media_label.textAlignment = .center
         ui_media.addSubview(ui_media_label)
+        // La photo épouse le rond du média (le rayon est posé dans `configure`) ; transparente tant qu'elle
+        // n'est pas chargée, pour que les initiales servent de placeholder.
+        ui_media.clipsToBounds = true
+        ui_media_image.translatesAutoresizingMaskIntoConstraints = false
+        ui_media_image.contentMode = .scaleAspectFill
+        ui_media_image.clipsToBounds = true
+        ui_media_image.isHidden = true
+        ui_media_image.isAccessibilityElement = false
+        ui_media_image.accessibilityIdentifier = "suggestion_media_photo"
+        ui_media_label.accessibilityIdentifier = "suggestion_media_label"
+        ui_media.addSubview(ui_media_image)
         NSLayoutConstraint.activate([
             ui_media.widthAnchor.constraint(equalToConstant: 52),
             ui_media.heightAnchor.constraint(equalToConstant: 52),
             ui_media_label.centerXAnchor.constraint(equalTo: ui_media.centerXAnchor),
-            ui_media_label.centerYAnchor.constraint(equalTo: ui_media.centerYAnchor)
+            ui_media_label.centerYAnchor.constraint(equalTo: ui_media.centerYAnchor),
+            ui_media_image.topAnchor.constraint(equalTo: ui_media.topAnchor),
+            ui_media_image.bottomAnchor.constraint(equalTo: ui_media.bottomAnchor),
+            ui_media_image.leadingAnchor.constraint(equalTo: ui_media.leadingAnchor),
+            ui_media_image.trailingAnchor.constraint(equalTo: ui_media.trailingAnchor)
         ])
 
         ui_author.font = scaled(ApplicationTheme.getFontNunitoBold(size: 13), style: .footnote)
@@ -280,13 +300,24 @@ final class SuggestionCardView: UIView {
             ui_badge_stack.addArrangedSubview(makeBadge(text: chip, color: UIColor(hexString: "#6D6C6C"), filled: false))
         }
 
-        // Média : avatar (initiales) pour une personne, sinon vignette emoji, repli par type.
-        if let author = card.authorName, (card.type == .action || card.type == .connexion), card.mediaEmoji == nil {
+        // Média : pour une personne, sa photo (entraide) sur ses initiales, qui restent le repli ;
+        // sans nom ni photo, comme pour les autres types, une vignette emoji (repli par type).
+        resetMediaPhoto()
+        let photoURL = card.type == .action ? card.authorAvatarURL : nil
+        if (card.type == .action || card.type == .connexion), card.mediaEmoji == nil,
+           (card.authorName != nil || photoURL != nil) {
             ui_media.layer.cornerRadius = 26
             ui_media.backgroundColor = card.type.thumbBackground
-            ui_media_label.font = ApplicationTheme.getFontQuickSandBold(size: 16)
-            ui_media_label.textColor = card.type.badgeColor
-            ui_media_label.text = initials(of: author)
+            if let author = card.authorName {
+                ui_media_label.font = ApplicationTheme.getFontQuickSandBold(size: 16)
+                ui_media_label.textColor = card.type.badgeColor
+                ui_media_label.text = initials(of: author)
+            } else {
+                // Photo sans nom : l'emoji du type attend le chargement.
+                ui_media_label.font = UIFont.systemFont(ofSize: 24)
+                ui_media_label.text = card.type.fallbackEmoji
+            }
+            if let photoURL = photoURL { showMediaPhoto(photoURL) }
         } else {
             ui_media.layer.cornerRadius = 12
             ui_media.backgroundColor = card.type.thumbBackground
@@ -325,6 +356,31 @@ final class SuggestionCardView: UIView {
 
     /// Vrai quand la card n'a aucune phrase du moteur : le bouton « ? » est alors masqué.
     var isWhyButtonHidden: Bool { ui_info_button.isHidden }
+
+    /// Réutilisation de la card (cellule de la home) : annule le chargement en cours et retire la photo,
+    /// pour qu'elle ne reste pas sur la suggestion suivante.
+    func prepareForReuse() {
+        resetMediaPhoto()
+    }
+
+    private func resetMediaPhoto() {
+        ui_media_image.sd_cancelCurrentImageLoad()
+        ui_media_image.image = nil
+        ui_media_image.isHidden = true
+        ui_media_label.isHidden = false
+        mediaPhotoURL = nil
+    }
+
+    /// Charge la photo avec SDWebImage (comme la liste des entraides de la home). Pendant le chargement et
+    /// en cas d'échec, les initiales restent visibles, sans message d'erreur.
+    private func showMediaPhoto(_ url: URL) {
+        mediaPhotoURL = url
+        ui_media_image.isHidden = false
+        ui_media_image.sd_setImage(with: url, placeholderImage: nil, options: [], completed: { [weak self] image, _, _, _ in
+            guard let self = self, image != nil, self.mediaPhotoURL == url else { return }
+            self.ui_media_label.isHidden = true
+        })
+    }
 
     private func accessibilityText(for card: SuggestionCard) -> String {
         var parts = [card.badgeKey.localized, card.title]

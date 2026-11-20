@@ -114,6 +114,9 @@ struct SuggestionCard: Decodable {
     /// Chip secondaire du badge (catégorie d'entraide, « Quartier », « National »…).
     let chip: String?
     let authorName: String?
+    /// Photo de profil de l'auteur (entraide) : affichée dans le rond du média, les initiales restant
+    /// le repli (absente ou chargement en échec). Jamais l'image jointe à une proposition d'aide.
+    let authorAvatarURL: URL?
     let title: String
     /// Texte saisi par l'utilisateur (entraide) : affiché brut, jamais reformulé.
     let body: String?
@@ -143,6 +146,7 @@ struct SuggestionCard: Decodable {
          isNational: Bool = false,
          chip: String? = nil,
          authorName: String? = nil,
+         authorAvatarURL: URL? = nil,
          title: String,
          body: String? = nil,
          metas: [SuggestionMeta] = [],
@@ -158,6 +162,7 @@ struct SuggestionCard: Decodable {
         self.isNational = isNational
         self.chip = chip
         self.authorName = authorName
+        self.authorAvatarURL = authorAvatarURL
         self.title = title
         self.body = body
         // Chaque ligne de méta est optionnelle ; 3 au maximum.

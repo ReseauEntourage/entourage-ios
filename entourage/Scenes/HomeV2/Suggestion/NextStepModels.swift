@@ -32,6 +32,10 @@ struct NextStepTarget: Decodable {
         return trimmed
     }
     let authorName: String?
+    /// Photo de profil de l'auteur d'une entraide (`author.avatar_url`, miniature 300×300) : `nil` quand
+    /// la personne n'a pas de photo ou que l'adresse n'est pas exploitable. On ne lit jamais `image_url`
+    /// (l'image jointe à une proposition d'aide) : le média de la card est le portrait de la personne.
+    let authorAvatarURL: URL?
     /// `solicitation` (demande) ou `contribution` (proposition d'aide), pour une entraide.
     let actionType: String?
     /// Durée en minutes, pour une ressource.
@@ -58,6 +62,15 @@ struct NextStepTarget: Decodable {
 
     enum AuthorKeys: String, CodingKey {
         case displayName = "display_name"
+        case avatarURL = "avatar_url"
+    }
+
+    /// Adresse d'image affichable : `http(s)` seulement. Vide, absente ou illisible (`null`, `""`, `n/a`) : `nil`.
+    static func imageURL(from text: String?) -> URL? {
+        guard let trimmed = text?.trimmingCharacters(in: .whitespacesAndNewlines), !trimmed.isEmpty,
+              let url = URL(string: trimmed), let scheme = url.scheme?.lowercased(),
+              scheme == "http" || scheme == "https" else { return nil }
+        return url
     }
 
     init(from decoder: Decoder) throws {
@@ -91,8 +104,10 @@ struct NextStepTarget: Decodable {
         }
         if let author = try? c.nestedContainer(keyedBy: AuthorKeys.self, forKey: .author) {
             authorName = try? author.decode(String.self, forKey: .displayName)
+            authorAvatarURL = NextStepTarget.imageURL(from: try? author.decode(String.self, forKey: .avatarURL))
         } else {
             authorName = nil
+            authorAvatarURL = nil
         }
         actionType = try? c.decode(String.self, forKey: .actionType)
         durationMinutes = try? c.decode(Int.self, forKey: .duration)
@@ -177,10 +192,10 @@ enum NextStepAdapter {
         let id = target?.id
 
         func make(title: String, isRemote: Bool = false, isNational: Bool = false, chip: String? = nil,
-                  author: String? = nil, body: String? = nil, metas: [SuggestionMeta] = [],
+                  author: String? = nil, authorAvatarURL: URL? = nil, body: String? = nil, metas: [SuggestionMeta] = [],
                   destination: SuggestionDestination) -> SuggestionCard {
             return SuggestionCard(id: cardId, type: type, isRemote: isRemote, isNational: isNational, chip: chip,
-                                  authorName: author, title: title, body: body, metas: metas,
+                                  authorName: author, authorAvatarURL: authorAvatarURL, title: title, body: body, metas: metas,
                                   reasons: reasons, destination: destination,
                                   nextStepId: isHero ? item.id : nil, targetId: id)
         }
@@ -210,8 +225,8 @@ enum NextStepAdapter {
             var metas = [SuggestionMeta]()
             if let distance = distanceText(target.distanceKm) { metas.append(SuggestionMeta(icon: "📍", text: distance)) }
             let isContrib = target.actionType == "contribution"
-            return make(title: title, author: target.authorName, body: target.description, metas: metas,
-                        destination: .action(id: id, isContrib: isContrib))
+            return make(title: title, author: target.authorName, authorAvatarURL: target.authorAvatarURL,
+                        body: target.description, metas: metas, destination: .action(id: id, isContrib: isContrib))
 
         case .contentPath:
             // On ouvre le premier contenu non lu ; si tous sont lus, le premier.

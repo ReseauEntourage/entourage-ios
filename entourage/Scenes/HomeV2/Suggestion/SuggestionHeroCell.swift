@@ -95,6 +95,11 @@ final class SuggestionHeroCell: UITableViewCell {
         ])
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        card.prepareForReuse()
+    }
+
     /// `card == nil` : état de chargement (squelette).
     func configure(card model: SuggestionCard?) {
         currentCard = model

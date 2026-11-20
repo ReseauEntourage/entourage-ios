@@ -164,6 +164,150 @@ final class NextStepSuggestionTests: XCTestCase {
         XCTAssertEqual(card.authorName, "Clem T.")
     }
 
+    // MARK: - Photo de l'auteur d'une entraide (design.md, décision 13)
+
+    private let avatar = "https://example.org/avatars/5100-300x300.jpg"
+
+    private func actionCard(author: String?, imageUrl: String = "null", type: String = "solicitation") throws -> SuggestionCard {
+        let authorJson = author.map { #","author":\#($0)"# } ?? ""
+        return try self.card("""
+        {"id":50,"kind":"action","placement":"hero",
+         "target":{"id":101,"title":"Besoin d'un téléphone","action_type":"\(type)","image_url":\(imageUrl)\(authorJson)},
+         "reasons":[]}
+        """)
+    }
+
+    /// Scénario « Auteur avec photo » : `target.author.avatar_url` est décodé puis porté par la card.
+    func testActionAuthorAvatarIsDecodedAndCarriedByTheCard() throws {
+        let json = """
+        {"id":50,"kind":"action","placement":"hero",
+         "target":{"id":101,"title":"Besoin d'un téléphone","action_type":"solicitation",
+                   "author":{"id":5100,"display_name":"Clem T.","avatar_url":"\(avatar)"}},
+         "reasons":[]}
+        """
+        let decoded = try item(json)
+        XCTAssertEqual(decoded.target?.authorAvatarURL?.absoluteString, avatar)
+
+        let card = try XCTUnwrap(NextStepAdapter.card(from: decoded))
+        XCTAssertEqual(card.authorAvatarURL?.absoluteString, avatar)
+        XCTAssertEqual(card.authorName, "Clem T.", "les initiales restent le repli")
+    }
+
+    /// Scénario « Proposition d'aide avec une image jointe » : on affiche la photo de l'auteur, jamais `image_url`.
+    func testContributionWithAttachedImageKeepsTheAuthorPhoto() throws {
+        let card = try actionCard(author: #"{"id":5100,"display_name":"Clem T.","avatar_url":"\#(avatar)"}"#,
+                                  imageUrl: #""https://example.org/images/jointe.jpg""#, type: "contribution")
+        XCTAssertEqual(card.destination, .action(id: 101, isContrib: true))
+        XCTAssertEqual(card.authorAvatarURL?.absoluteString, avatar)
+
+        // Sans photo d'auteur, l'image jointe ne la remplace pas.
+        let withoutPhoto = try actionCard(author: #"{"id":5100,"display_name":"Clem T.","avatar_url":null}"#,
+                                          imageUrl: #""https://example.org/images/jointe.jpg""#, type: "contribution")
+        XCTAssertNil(withoutPhoto.authorAvatarURL)
+    }
+
+    /// Scénario « Auteur sans photo » : pas d'URL, le nom reste pour les initiales.
+    func testActionAuthorWithoutAvatarHasNoPhotoURL() throws {
+        let withNull = try actionCard(author: #"{"id":5100,"display_name":"Clem T.","avatar_url":null}"#)
+        XCTAssertNil(withNull.authorAvatarURL)
+        XCTAssertEqual(withNull.authorName, "Clem T.")
+
+        let keyAbsent = try actionCard(author: #"{"id":5100,"display_name":"Clem T."}"#)
+        XCTAssertNil(keyAbsent.authorAvatarURL)
+        XCTAssertEqual(keyAbsent.authorName, "Clem T.")
+
+        // Une adresse vide ou inexploitable vaut « pas de photo ».
+        for unusable in [#""""#, #""   ""#, #""n/a""#, #""ftp://example.org/a.jpg""#, "12"] {
+            let card = try actionCard(author: #"{"id":5100,"display_name":"Clem T.","avatar_url":\#(unusable)}"#)
+            XCTAssertNil(card.authorAvatarURL, "avatar_url \(unusable) ne doit pas donner de photo")
+            XCTAssertEqual(card.authorName, "Clem T.")
+        }
+    }
+
+    /// Scénario « Ni photo ni nom » : ni URL ni nom, la card retombe sur l'emoji du type.
+    func testActionWithoutNameNorPhoto() throws {
+        let authors: [String?] = [#"{"id":5100}"#, #"{"id":5100,"display_name":null,"avatar_url":null}"#, nil]
+        for author in authors {
+            let card = try actionCard(author: author)
+            XCTAssertNil(card.authorName)
+            XCTAssertNil(card.authorAvatarURL)
+        }
+    }
+
+    // MARK: Rendu du média de la card (sans attendre le réseau)
+
+    private func descendants(of view: UIView, identifier: String) -> [UIView] {
+        view.subviews.flatMap { sub -> [UIView] in
+            (sub.accessibilityIdentifier == identifier ? [sub] : []) + descendants(of: sub, identifier: identifier)
+        }
+    }
+
+    private func media(of view: SuggestionCardView) throws -> (photo: UIImageView, label: UILabel) {
+        let photo = try XCTUnwrap(descendants(of: view, identifier: "suggestion_media_photo").first as? UIImageView)
+        let label = try XCTUnwrap(descendants(of: view, identifier: "suggestion_media_label").first as? UILabel)
+        return (photo, label)
+    }
+
+    /// Adresse qui ne se résout jamais : le chargement échoue, sans dépendre d'un serveur.
+    private let unreachableAvatar = "https://avatar.invalid/5100.jpg"
+
+    func testCardWithPhotoShowsItOverTheInitialsAndStaysDecorative() throws {
+        let view = SuggestionCardView()
+        view.configure(card: try actionCard(author: #"{"id":5100,"display_name":"Clem T.","avatar_url":"\#(unreachableAvatar)"}"#))
+        let (photo, label) = try media(of: view)
+
+        XCTAssertFalse(photo.isHidden, "la photo est demandée")
+        XCTAssertNil(photo.image, "pas encore chargée : les initiales servent de placeholder")
+        XCTAssertFalse(label.isHidden)
+        XCTAssertEqual(label.text, "CT")
+        XCTAssertFalse(photo.isAccessibilityElement, "l'image est décorative : le nom de l'auteur est déjà lu")
+    }
+
+    func testCardWithoutPhotoShowsInitialsOnly() throws {
+        let view = SuggestionCardView()
+        view.configure(card: try actionCard(author: #"{"id":5100,"display_name":"Clem T.","avatar_url":null}"#))
+        let (photo, label) = try media(of: view)
+
+        XCTAssertTrue(photo.isHidden)
+        XCTAssertFalse(label.isHidden)
+        XCTAssertEqual(label.text, "CT")
+    }
+
+    func testCardWithoutNameNorPhotoShowsTheTypeEmoji() throws {
+        let view = SuggestionCardView()
+        view.configure(card: try actionCard(author: nil))
+        let (photo, label) = try media(of: view)
+
+        XCTAssertTrue(photo.isHidden)
+        XCTAssertFalse(label.isHidden)
+        XCTAssertEqual(label.text, SuggestionType.action.fallbackEmoji)
+    }
+
+    /// Une photo ne doit pas rester sur la card suivante (réutilisation de la cellule de la home).
+    func testPhotoDoesNotStayOnTheNextCard() throws {
+        let view = SuggestionCardView()
+        view.configure(card: try actionCard(author: #"{"id":5100,"display_name":"Clem T.","avatar_url":"\#(unreachableAvatar)"}"#))
+        let (photo, label) = try media(of: view)
+        // Simule une photo chargée : la photo masque les initiales.
+        photo.image = UIImage()
+        label.isHidden = true
+
+        view.prepareForReuse()
+        XCTAssertNil(photo.image)
+        XCTAssertTrue(photo.isHidden)
+        XCTAssertFalse(label.isHidden)
+
+        // Reconfiguration directe, sans prepareForReuse, avec une card d'un autre type.
+        photo.isHidden = false
+        photo.image = UIImage()
+        label.isHidden = true
+        view.configure(card: try self.card(#"{"id":51,"kind":"smalltalk","placement":"hero","target":null,"reasons":[]}"#))
+        XCTAssertNil(photo.image)
+        XCTAssertTrue(photo.isHidden)
+        XCTAssertFalse(label.isHidden)
+        XCTAssertEqual(label.text, SuggestionType.smalltalk.fallbackEmoji)
+    }
+
     /// Réponse réelle de préprod (artifact du 16/11) : cible `poi`, `address` en texte, `category_ids`, `partner_id` nul.
     func testRealPreprodPoiTarget() throws {
         let card = try self.card("""
