@@ -531,33 +531,8 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         suggestionInsertIndex = tableDTO.count
         tableDTO.append(contentsOf: suggestionRows())
 
-        // Comme Android : avec le moteur de suggestion, la home ne garde que le parcours de bienvenue OU les
-        // suggestions, puis la partie basse (plus de sections entraides ni événements), même quand le moteur
-        // ne propose rien. Sans le moteur (production, tests d'interface), la home garde ses sections d'origine.
-        let keepsLegacySections = !SuggestionFeature.isEnabled
-
-        if keepsLegacySections && showInitialPedago && initialPedagos.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_initial_pedago".localized, subtitle: "home_v2_subtitle_initial_pedago".localized))
-            tableDTO.append(.cellInitialPedago(pedagos: self.initialPedagos))
-        }
-
-        if keepsLegacySections && allDemands.count > 0 {
-            if isContributionPreference {
-                tableDTO.append(.cellTitle(title: "home_v2_title_action_contrib".localized, subtitle: "home_v2_subtitle_action_contrib".localized))
-                tableDTO.append(.cellAction(actions: allDemands))
-                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
-            } else {
-                tableDTO.append(.cellTitle(title: "home_v2_title_action".localized, subtitle: "home_v2_subtitle_action".localized))
-                tableDTO.append(.cellAction(actions: allDemands))
-                tableDTO.append(.cellSeeAll(seeAllType: .seeAllDemand))
-            }
-        }
-        if keepsLegacySections && allEvents.count > 0 {
-            tableDTO.append(.cellTitle(title: "home_v2_title_event".localized, subtitle: "home_v2_subtitle_event".localized))
-            tableDTO.append(.cellEvent(events: allEvents))
-            tableDTO.append(.cellSeeAll(seeAllType: .seeAllEvent))
-        }
-
+        // Comme Android : la home ne garde que le parcours de bienvenue OU les suggestions, puis la partie basse
+        // (outils, contenus) : plus de sections entraides ni événements, même quand le moteur ne propose rien.
         tableDTO.append(.cellSolidarityTools)
         tableDTO.append(.cellDonation)
 

@@ -662,11 +662,4 @@ final class NextStepSuggestionTests: XCTestCase {
         coordinator.setSuppressed(false)
         XCTAssertEqual(provider.fetchCount, 1)
     }
-
-    /// Fonction coupée (production) : état vide dès le départ, jamais de squelette.
-    func testDisabledFeatureStartsEmpty() {
-        let coordinator = SuggestionCoordinator(provider: EmptySuggestionProvider(), presentSnackbar: { _, _, _, _ in },
-                                                navigator: { _ in }, isEnabled: false)
-        guard case .empty = coordinator.state else { return XCTFail("l'état doit être vide") }
-    }
 }

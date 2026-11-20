@@ -18,7 +18,7 @@ final class SuggestionCoordinator {
     private let presentSnackbar: SnackbarPresenter
     private let navigator: (SuggestionDestination) -> Void
 
-    private(set) var state: SuggestionLoadState
+    private(set) var state: SuggestionLoadState = .loading
 
     /// Comme Android : le moteur est appelé au premier affichage et après un geste sur une suggestion,
     /// pas à chaque retour sur la home.
@@ -38,13 +38,10 @@ final class SuggestionCoordinator {
 
     init(provider: SuggestionProviding = SuggestionProviderFactory.make(),
          presentSnackbar: @escaping SnackbarPresenter = SuggestionCoordinator.defaultSnackbar,
-         navigator: @escaping (SuggestionDestination) -> Void = SuggestionCoordinator.open,
-         isEnabled: Bool = SuggestionFeature.isEnabled) {
+         navigator: @escaping (SuggestionDestination) -> Void = SuggestionCoordinator.open) {
         self.provider = provider
         self.presentSnackbar = presentSnackbar
         self.navigator = navigator
-        // Fonction coupée (production, tests d'interface) : rien à charger, pas de squelette.
-        self.state = isEnabled ? .loading : .empty
     }
 
     var payload: SuggestionPayload? {

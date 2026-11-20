@@ -25,20 +25,11 @@ protocol SuggestionProviding: AnyObject {
     func record(_ interaction: NextStepInteraction)
 }
 
-/// Interrupteur de l'affichage des suggestions du moteur (EN-9473), le même qu'Android : actif dans tous les
-/// builds, production comprise (décision du 20 novembre 2026). Coupé pendant les tests d'interface
-/// (`-UITestMode`) : la home garde ses sections d'origine. Pour couper la card d'un build, renvoyer `false` ;
-/// l'interrupteur du back (`NEXT_STEPS_ENABLED`) la coupe sans release.
-enum SuggestionFeature {
-    static var isEnabled: Bool {
-        return !ProcessInfo.processInfo.arguments.contains("-UITestMode")
-    }
-}
-
-/// Fournisseur de l'app : le moteur, ou aucune suggestion quand la fonction est coupée.
+/// Fournisseur de l'app : le moteur, dans tous les builds. Pendant les tests d'interface (`-UITestMode`),
+/// aucune suggestion : le faux backend ne connaît pas les routes du moteur.
 enum SuggestionProviderFactory {
     static func make() -> SuggestionProviding {
-        guard SuggestionFeature.isEnabled else { return EmptySuggestionProvider() }
+        if ProcessInfo.processInfo.arguments.contains("-UITestMode") { return EmptySuggestionProvider() }
         return NextStepSuggestionProvider()
     }
 }
