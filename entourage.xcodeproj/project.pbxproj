@@ -7,15 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45D9DBA78DA4CADE637832F8 /* SuggestionExplorerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BFE7FCCF99E38068EB14FC /* SuggestionExplorerCell.swift */; };
-		CB9CE866A26FEC5889D38CEA /* SuggestionWhyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483AED6D0E65DC86D012F61 /* SuggestionWhyViewController.swift */; };
-		72F6E3E90DDAAA8B74D7D7ED /* SuggestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */; };
-		459C129E2DFA5F33D5AE3C60 /* SuggestionSnackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96837C243ADD0F77701A788A /* SuggestionSnackbar.swift */; };
-		DD0DA324F29BCC6390880BE9 /* SuggestionHeroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356538A56B07F4C4AAD05443 /* SuggestionHeroCell.swift */; };
-		ED5CEEA72E95E57B58D0A72A /* SuggestionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD25B3AEEACC16715CD081D9 /* SuggestionCardView.swift */; };
-		1AA1764330D0D968001C57D6 /* SuggestionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650738C8144D7A87E5CFE5E6 /* SuggestionProvider.swift */; };
-		2B3821DA6255753607952655 /* SuggestionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598136EE6A7E9E508321C7EC /* SuggestionModels.swift */; };
-		FF3744AD447272139D627EF2 /* NextStepModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D46AE6929783508806DE43 /* NextStepModels.swift */; };
 		A69BF8C76EC9709598497789 /* CreationScenariosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A95F6E3EB7F906B96438A8F /* CreationScenariosUITests.swift */; };
 		46CFD967B854C22F7FC8B10F /* TabNavigationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4682F8CA6BD6DC0774103C1B /* TabNavigationUITests.swift */; };
 		EE0AAE67A45F5B499EAC5C65 /* ApiReadEndpointsSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878E1F2379AF7AC73C86725E /* ApiReadEndpointsSmokeTests.swift */; };
@@ -543,7 +534,6 @@
 		2689F3B62A3B6D3E0009920D /* WelcomeFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */; };
 		268ADBBE2DD1D80100031C6F /* SmallTalksModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ADBBD2DD1D80100031C6F /* SmallTalksModels.swift */; };
 		268ADBC02DD1D85A00031C6F /* SmallTalkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ADBBF2DD1D85A00031C6F /* SmallTalkService.swift */; };
-		2B320A63CBFBAF06444CEB0E /* NextStepService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB046A55EB77EB88F6BCAC2 /* NextStepService.swift */; };
 		268ADBC52DD3684000031C6F /* SmallTalkIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268ADBC42DD3684000031C6F /* SmallTalkIntro.swift */; };
 		268ADBCB2DD372E900031C6F /* SmallTalk.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 268ADBCA2DD372E900031C6F /* SmallTalk.storyboard */; };
 		268ADBCF2DD3757700031C6F /* SmallTalk.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 268ADBCE2DD3757700031C6F /* SmallTalk.xcassets */; };
@@ -660,7 +650,6 @@
 		26F4C7812B485D4E0084070D /* NeighborhoodPostTranslationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F4C7802B485D4E0084070D /* NeighborhoodPostTranslationCell.xib */; };
 		29661BA7659D4853B8D5A9BD /* ReactionBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F763168D06774C2CBB93621C /* ReactionBadgesView.swift */; };
 		2DE4C673A1B82EEB686190F9 /* WelcomeJourneyAutoSkipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E30EA046F12F7FB43AE813 /* WelcomeJourneyAutoSkipTests.swift */; };
-		4C05785DA97EE9884D32B543 /* NextStepSuggestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E9EA6DF8689B390EBB7E84 /* NextStepSuggestionTests.swift */; };
 		323DFB9DE77E5EA59770393F /* BadgeDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E4678DC6351C68998AE52 /* BadgeDetailSheet.swift */; };
 		4F7CE641A48EBB9BB1436A81 /* EventLimitedPlacesModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E5B1A516C8C8AB5C153073 /* EventLimitedPlacesModalView.swift */; };
 		53D7C9D6D1A942CF9496570C /* ConversationsHeaderBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FB946716604F7EBEE6D173 /* ConversationsHeaderBarView.swift */; };
@@ -728,15 +717,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		66BFE7FCCF99E38068EB14FC /* SuggestionExplorerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionExplorerCell.swift; sourceTree = "<group>"; };
-		A483AED6D0E65DC86D012F61 /* SuggestionWhyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionWhyViewController.swift; sourceTree = "<group>"; };
-		5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCoordinator.swift; sourceTree = "<group>"; };
-		96837C243ADD0F77701A788A /* SuggestionSnackbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionSnackbar.swift; sourceTree = "<group>"; };
-		356538A56B07F4C4AAD05443 /* SuggestionHeroCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionHeroCell.swift; sourceTree = "<group>"; };
-		DD25B3AEEACC16715CD081D9 /* SuggestionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCardView.swift; sourceTree = "<group>"; };
-		650738C8144D7A87E5CFE5E6 /* SuggestionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProvider.swift; sourceTree = "<group>"; };
-		598136EE6A7E9E508321C7EC /* SuggestionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionModels.swift; sourceTree = "<group>"; };
-		17D46AE6929783508806DE43 /* NextStepModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextStepModels.swift; sourceTree = "<group>"; };
 		4A95F6E3EB7F906B96438A8F /* CreationScenariosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationScenariosUITests.swift; sourceTree = "<group>"; };
 		4682F8CA6BD6DC0774103C1B /* TabNavigationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationUITests.swift; sourceTree = "<group>"; };
 		878E1F2379AF7AC73C86725E /* ApiReadEndpointsSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiReadEndpointsSmokeTests.swift; sourceTree = "<group>"; };
@@ -1272,7 +1252,6 @@
 		2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFiveViewController.swift; sourceTree = "<group>"; };
 		268ADBBD2DD1D80100031C6F /* SmallTalksModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalksModels.swift; sourceTree = "<group>"; };
 		268ADBBF2DD1D85A00031C6F /* SmallTalkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkService.swift; sourceTree = "<group>"; };
-		8DB046A55EB77EB88F6BCAC2 /* NextStepService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextStepService.swift; sourceTree = "<group>"; };
 		268ADBC42DD3684000031C6F /* SmallTalkIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTalkIntro.swift; sourceTree = "<group>"; };
 		268ADBCA2DD372E900031C6F /* SmallTalk.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SmallTalk.storyboard; sourceTree = "<group>"; };
 		268ADBCE2DD3757700031C6F /* SmallTalk.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SmallTalk.xcassets; sourceTree = "<group>"; };
@@ -1411,7 +1390,6 @@
 		A1B2C3D4E5F6A7B8C9D0E1F3 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A7B8C9D0E1F5 /* OtherUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserProfileViewController.swift; sourceTree = "<group>"; };
 		A1E30EA046F12F7FB43AE813 /* WelcomeJourneyAutoSkipTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WelcomeJourneyAutoSkipTests.swift; sourceTree = "<group>"; };
-		41E9EA6DF8689B390EBB7E84 /* NextStepSuggestionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NextStepSuggestionTests.swift; sourceTree = "<group>"; };
 		B4D082C7559556949BF6C4E6 /* BadgesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesListView.swift; sourceTree = "<group>"; };
 		BBCF4BE1D7F24AA0D9C75E90 /* MessageActionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageActionOverlay.swift; sourceTree = "<group>"; };
 		BCCB5DA78304A2F71A8EF260 /* ActionCharterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCharterView.swift; sourceTree = "<group>"; };
@@ -1481,22 +1459,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BBABD02D0C77C87BBB78C467 /* Suggestion */ = {
-			isa = PBXGroup;
-			children = (
-				66BFE7FCCF99E38068EB14FC /* SuggestionExplorerCell.swift */,
-				A483AED6D0E65DC86D012F61 /* SuggestionWhyViewController.swift */,
-				5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */,
-				96837C243ADD0F77701A788A /* SuggestionSnackbar.swift */,
-				356538A56B07F4C4AAD05443 /* SuggestionHeroCell.swift */,
-				DD25B3AEEACC16715CD081D9 /* SuggestionCardView.swift */,
-				650738C8144D7A87E5CFE5E6 /* SuggestionProvider.swift */,
-				598136EE6A7E9E508321C7EC /* SuggestionModels.swift */,
-				17D46AE6929783508806DE43 /* NextStepModels.swift */,
-			);
-			path = Suggestion;
-			sourceTree = "<group>";
-		};
 		02040CF3288E97B700AB1FBB /* Params */ = {
 			isa = PBXGroup;
 			children = (
@@ -2192,7 +2154,6 @@
 				02B57DA127FCB652005A567B /* ParsingDataCodable.swift */,
 				26D13E2B2BA43E8A00CAD4F7 /* SurveyService.swift */,
 				268ADBBF2DD1D85A00031C6F /* SmallTalkService.swift */,
-				8DB046A55EB77EB88F6BCAC2 /* NextStepService.swift */,
 				2667575C2E856F8F0039FF88 /* PreOnboardingAPI.swift */,
 				266757602E8570120039FF88 /* PreOnboardingService.swift */,
 			);
@@ -2384,7 +2345,6 @@
 				9E6D18B5FF299CF8D887C22B /* WelcomeJourneyViewModelTests.swift */,
 				2D36D1D77001E9F00E5E4E7C /* EventFormTests.swift */,
 				A1E30EA046F12F7FB43AE813 /* WelcomeJourneyAutoSkipTests.swift */,
-				41E9EA6DF8689B390EBB7E84 /* NextStepSuggestionTests.swift */,
 				7A1C0D8E2F0B4C6A9D3E5F12 /* PhoneNumberDetectorTests.swift */,
 				7A1C0D8E2F0B4C6A9D3E5F91 /* SystemOpenedLinksTests.swift */,
 			);
@@ -2670,7 +2630,6 @@
 				247A2E762F7D351E00DB1661 /* WelcomeEventsListViewController.swift */,
 				26BEEECE2C00CE3800169FBA /* EventLastDayViewController.swift */,
 				266B263A2ABB17A600C8EAD8 /* homev2cells */,
-				BBABD02D0C77C87BBB78C467 /* Suggestion */,
 				260377FB2C6261F800E1BC0A /* DiscussionSmokeTestViewController.swift */,
 				26D853452C8740850006C9D8 /* PopupBienCommunViewController.swift */,
 			);
@@ -3596,7 +3555,6 @@
 				2674FEC32ACDA5800013D674 /* HomeNeedHelpCell.swift in Sources */,
 				26C1BB662A3AF0D100C81C09 /* WelcomeFourImageCell.swift in Sources */,
 				268ADBC02DD1D85A00031C6F /* SmallTalkService.swift in Sources */,
-				2B320A63CBFBAF06444CEB0E /* NextStepService.swift in Sources */,
 				263D7D6B2D4D076300C4D99E /* TranslationCell.swift in Sources */,
 				264BD9172EDDE06E004EAD10 /* AssociationOnboardingView.swift in Sources */,
 				26D13E222BA35F1700CAD4F7 /* QcmCell.swift in Sources */,
@@ -3780,15 +3738,6 @@
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
 				242108232F4EF9B6004D74E2 /* HomeSolidarityToolsCell.swift in Sources */,
 				86384CF3B8823D5B7D619D64 /* HomeCellDonation.swift in Sources */,
-				45D9DBA78DA4CADE637832F8 /* SuggestionExplorerCell.swift in Sources */,
-				CB9CE866A26FEC5889D38CEA /* SuggestionWhyViewController.swift in Sources */,
-				72F6E3E90DDAAA8B74D7D7ED /* SuggestionCoordinator.swift in Sources */,
-				459C129E2DFA5F33D5AE3C60 /* SuggestionSnackbar.swift in Sources */,
-				DD0DA324F29BCC6390880BE9 /* SuggestionHeroCell.swift in Sources */,
-				ED5CEEA72E95E57B58D0A72A /* SuggestionCardView.swift in Sources */,
-				1AA1764330D0D968001C57D6 /* SuggestionProvider.swift in Sources */,
-				2B3821DA6255753607952655 /* SuggestionModels.swift in Sources */,
-				FF3744AD447272139D627EF2 /* NextStepModels.swift in Sources */,
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,
 				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,
@@ -3842,7 +3791,6 @@
 				D4DE3C7AAB3FD4B84BE2146A /* WelcomeJourneyViewModelTests.swift in Sources */,
 				026881530F2009BDA8E28B22 /* EventFormTests.swift in Sources */,
 				2DE4C673A1B82EEB686190F9 /* WelcomeJourneyAutoSkipTests.swift in Sources */,
-				4C05785DA97EE9884D32B543 /* NextStepSuggestionTests.swift in Sources */,
 				7A1C0D8E2F0B4C6A9D3E5F13 /* PhoneNumberDetectorTests.swift in Sources */,
 				7A1C0D8E2F0B4C6A9D3E5F92 /* SystemOpenedLinksTests.swift in Sources */,
 			);

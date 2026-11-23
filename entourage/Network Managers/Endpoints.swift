@@ -247,12 +247,6 @@ let kAPICreateSurveyInEvent = "outings/%d/chat_messages?token=%@"
 let kAPIDeleteSurveyResponseForConversation = "conversations/%@/chat_messages/%d/survey_responses?token=%@"
 let kAPIDeleteSurveyResponseForSmallTalk = "smalltalks/%@/chat_messages/%d/survey_responses?token=%@"
 
-//Next steps (« Votre prochain pas », EN-9473)
-let kAPINextStepsCurrent       = "next_steps/current?token=%@"
-let kAPINextStepsOthers        = "next_steps/others?token=%@"
-let kAPINextStepsIgnore        = "next_steps/%d/ignore?token=%@"
-let kAPINextStepsInteractions  = "next_steps/interactions?token=%@"
-
 //Smalltalk
 let kAPIUserSmallTalkRequests              = "user_smalltalks"
 let kAPIUserSmallTalkRequestDetail        = "user_smalltalks/%@"
