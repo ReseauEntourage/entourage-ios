@@ -188,6 +188,7 @@ struct MyProfileView: View {
                                 .clipShape(Circle())
                         }
                         .accessibilityLabel("a11y_back".a11y)
+                        .minimumTouchTarget()
                         Spacer()
                         Button(action: { showSettings = true }) {
                             Image(systemName: "gearshape.fill")
@@ -198,6 +199,7 @@ struct MyProfileView: View {
                                 .clipShape(Circle())
                         }
                         .accessibilityLabel("a11y_settings".a11y)
+                        .minimumTouchTarget()
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, safeAreaTop + 8),
@@ -364,6 +366,7 @@ struct MyProfileView: View {
                                 .clipShape(Circle())
                         }
                         .accessibilityLabel("a11y_edit_photo".a11y)
+                        .minimumTouchTarget()
                         .frame(width: 32, height: 32)
                     }
                     .frame(width: 120, height: 120)

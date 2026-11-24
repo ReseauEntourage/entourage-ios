@@ -8,18 +8,18 @@ class UnsubscribedParticipantsBottomSheet: UIViewController {
     private let titleLabel = UILabel()
 
     private let helpAskLabel = UILabel()
-    private let helpAskMinusButton = UIButton()
-    private let helpAskPlusButton = UIButton()
+    private let helpAskMinusButton = ExpandedHitAreaButton()
+    private let helpAskPlusButton = ExpandedHitAreaButton()
     private let helpAskCountLabel = UILabel()
 
     private let helpOfferLabel = UILabel()
-    private let helpOfferMinusButton = UIButton()
-    private let helpOfferPlusButton = UIButton()
+    private let helpOfferMinusButton = ExpandedHitAreaButton()
+    private let helpOfferPlusButton = ExpandedHitAreaButton()
     private let helpOfferCountLabel = UILabel()
 
     private let helpFemaleLabel = UILabel()
-    private let helpFemaleMinusButton = UIButton()
-    private let helpFemalePlusButton = UIButton()
+    private let helpFemaleMinusButton = ExpandedHitAreaButton()
+    private let helpFemalePlusButton = ExpandedHitAreaButton()
     private let helpFemaleCountLabel = UILabel()
 
     private let validateButton = UIButton()

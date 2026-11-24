@@ -109,6 +109,8 @@ def scan(kind):
                 if button_image(btn) and not button_title(btn) and not has_accessibility_label(btn):
                     rows.append(row)
             else:
+                if btn.get("customClass") in ("ExpandedHitAreaButton", "Checkbox"):
+                    continue   # zone à toucher déjà élargie à 44 pt (Views/ExpandedHitAreaButton.swift)
                 fixed = [(a, c) for a, c in own_fixed_sizes(btn, root) if c < MIN_SIZE]
                 if fixed:
                     row["fixed"] = fixed
@@ -213,8 +215,40 @@ def check_keys():
     return 1 if failures else 0
 
 
+def scan_code_small():
+    """Boutons posés en code avec une dimension fixe sous 44 pt (heuristique, à relire)."""
+    import re
+    swiftui, uikit = [], []
+    frame = re.compile(r"\.frame\(\s*width:\s*(\d+(?:\.\d+)?)\s*(?:,\s*height:\s*(\d+(?:\.\d+)?))?")
+    anchor = re.compile(r"(\w*(?:[bB]utton|[bB]tn)\w*)\.(?:width|height)Anchor\.constraint\(equalToConstant:\s*(\d+(?:\.\d+)?)")
+    for path in swift_files():
+        lines = path.read_text(encoding="utf-8", errors="ignore").splitlines()
+        rel = str(path.relative_to(ROOT.parent))
+        for n, line in enumerate(lines):
+            stripped = line.strip()
+            if stripped.startswith("Button") and ("{" in stripped or "(" in stripped):
+                block = swiftui_blocks(lines, n)
+                if "expandedTouchArea" in block:
+                    continue
+                sizes = [float(v) for m in frame.finditer(block) for v in m.groups() if v]
+                if sizes and min(sizes) < MIN_SIZE and "Image(" in block:
+                    swiftui.append((rel, n + 1, f"frame {sorted(set(sizes))}"))
+            m = anchor.search(stripped)
+            if m and float(m.group(2)) < MIN_SIZE and not is_known_ok(rel, stripped):
+                uikit.append((rel, n + 1, stripped[:80]))
+    return swiftui, uikit
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if args and args[0] == "code-small":
+        swiftui, uikit = scan_code_small()
+        for title, rows in (("SwiftUI", swiftui), ("UIKit", uikit)):
+            print(f"== {title}")
+            for rel, line, text in rows:
+                print(f"{rel}:{line}  {text}")
+        print(f"\n{len(swiftui)} SwiftUI, {len(uikit)} UIKit (candidats à relire)")
+        return 0
     if args and args[0] == "keys":
         return check_keys()
     if args and args[0] == "code":

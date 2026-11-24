@@ -334,7 +334,7 @@ class MainGuideViewController: UIViewController {
     }
 
     func setupAirConditionedButton() {
-        self.airConditionedButton = UIButton(type: .system)
+        self.airConditionedButton = ExpandedHitAreaButton(type: .system)
         airConditionedButton.translatesAutoresizingMaskIntoConstraints = false
 
         airConditionedButton.setImage(UIImage(named: "picto_air_conditioned")?.withRenderingMode(.alwaysTemplate), for: .normal)

@@ -116,6 +116,7 @@ struct FullScreenImageView: View {
                             .clipShape(Circle())
                     }
                     .accessibilityLabel("a11y_back".a11y)
+                    .minimumTouchTarget()
 
                     Spacer()
 
@@ -131,6 +132,7 @@ struct FullScreenImageView: View {
                                 .clipShape(Circle())
                         }
                         .accessibilityLabel("a11y_save_image".a11y)
+                        .minimumTouchTarget()
                     }
                 }
                 .padding(.horizontal)

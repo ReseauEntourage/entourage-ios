@@ -67,7 +67,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzD-rr-kGH">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzD-rr-kGH" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="20" y="259.5" width="125" height="40"/>
                                         <color key="backgroundColor" name="orange_medium"/>
                                         <constraints>
@@ -86,7 +86,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTt-sR-PMM">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTt-sR-PMM" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="209.5" y="259.5" width="152.5" height="40"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
@@ -104,7 +104,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjl-JY-i9W">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjl-JY-i9W" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="337" y="20" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="eLa-UW-Yid"/>
@@ -214,7 +214,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="localizationKey" value="popup_discussion_test_text"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QS-u6-y20">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QS-u6-y20" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="122" y="773.5" width="170" height="40"/>
                                 <color key="backgroundColor" name="orange_app"/>
                                 <constraints>
@@ -242,7 +242,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="localizationKey" value="popup_discussion_test_btn_cancel"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaB-uT-EB9">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaB-uT-EB9" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="369" y="20" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="eir-qI-WC9"/>
@@ -1606,7 +1606,7 @@ Ligne 2</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EER-3J-dhC">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EER-3J-dhC" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="102.5" y="164" width="169" height="40"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
@@ -1698,7 +1698,7 @@ Ligne 2</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebB-us-L2b">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebB-us-L2b" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="197" y="284" width="100" height="40"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
@@ -1717,7 +1717,7 @@ Ligne 2</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KM-XV-l0D">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KM-XV-l0D" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="77" y="284" width="100" height="40"/>
                                         <color key="backgroundColor" name="orange_medium"/>
                                         <constraints>
@@ -1814,7 +1814,7 @@ Ligne 2</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSg-nC-Rrn">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSg-nC-Rrn" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="197" y="117.5" width="100" height="40"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
@@ -1833,7 +1833,7 @@ Ligne 2</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbz-uJ-Trl">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbz-uJ-Trl" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="77" y="117.5" width="100" height="40"/>
                                         <color key="backgroundColor" name="orange_light"/>
                                         <constraints>
@@ -1925,7 +1925,7 @@ Ligne 2</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbd-yL-eAX">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbd-yL-eAX" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="197" y="120" width="100" height="40"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
@@ -1944,7 +1944,7 @@ Ligne 2</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxh-7e-XqX">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxh-7e-XqX" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="77" y="120" width="100" height="40"/>
                                         <color key="backgroundColor" name="orange_light"/>
                                         <constraints>
@@ -2036,7 +2036,7 @@ Ligne 2</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gd-RY-uLU">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gd-RY-uLU" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="161.5" y="468.5" width="59" height="40"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
@@ -2054,7 +2054,7 @@ Ligne 2</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xli-ox-7j9">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xli-ox-7j9" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="342" y="15" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="W49-4O-Aet"/>

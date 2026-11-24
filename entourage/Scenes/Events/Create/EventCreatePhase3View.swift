@@ -240,6 +240,7 @@ struct EventCreatePhase3View: View {
                 .overlay(Circle().stroke(FormFlowStyle.line, lineWidth: 1))
         }
         .buttonStyle(PlainButtonStyle())
+        .minimumTouchTarget()
         .disabled(!isEnabled)
     }
 

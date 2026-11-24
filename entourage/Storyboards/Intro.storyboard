@@ -529,7 +529,7 @@ sera réalisé.</string>
                                                         <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8IF-8s-Akh">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8IF-8s-Akh" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                         <rect key="frame" x="105" y="109" width="164" height="30"/>
                                                         <color key="backgroundColor" name="BeigeClair"/>
                                                         <constraints>
@@ -588,7 +588,7 @@ sera réalisé.</string>
                                             <constraint firstItem="Xeo-7d-WF8" firstAttribute="leading" secondItem="Ve5-fC-ch2" secondAttribute="leading" id="xcn-4h-jgx"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aC-kN-Pmm">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aC-kN-Pmm" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="62" y="551" width="250" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="4VK-j9-K9x"/>
@@ -766,7 +766,7 @@ sera réalisé.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-jq-i0Q">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-jq-i0Q" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="243" y="67" width="99" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="5MT-nk-crc"/>

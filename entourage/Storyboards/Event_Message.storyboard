@@ -39,7 +39,7 @@
                                             <constraint firstAttribute="height" constant="68" id="nXL-XT-PeG"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcl-Jv-5Qk">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcl-Jv-5Qk" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="356" y="14" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="LeX-dl-9Ie"/>
@@ -141,7 +141,7 @@
                                                                 <constraint firstItem="XDW-LZ-RjS" firstAttribute="centerY" secondItem="N57-C1-vZT" secondAttribute="centerY" constant="-1" id="wI0-wR-mli"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmP-6J-tGz">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmP-6J-tGz" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                             <rect key="frame" x="233" y="52" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="DOu-pH-pL1"/>
@@ -223,7 +223,7 @@
                                                                 <constraint firstItem="agu-kz-8j8" firstAttribute="top" secondItem="VcX-hE-lk0" secondAttribute="top" constant="12" id="y2M-Zp-X3j"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kic-MK-STi">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kic-MK-STi" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                             <rect key="frame" x="26" y="57.5" width="30" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="vSM-T1-YiG"/>
@@ -246,7 +246,7 @@
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL1-IT-2V8">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL1-IT-2V8" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                             <rect key="frame" x="161" y="52" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="3XP-G4-12p"/>

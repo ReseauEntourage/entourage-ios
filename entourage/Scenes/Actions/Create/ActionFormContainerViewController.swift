@@ -153,7 +153,7 @@ class ActionFormContainerViewController: FormFlowContainerViewController {
         overlay.backgroundColor = .white
         view.addSubview(overlay)
 
-        let backButton = UIButton(type: .custom)
+        let backButton = ExpandedHitAreaButton(type: .custom)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         backButton.tintColor = FormFlowStyle.uiInk

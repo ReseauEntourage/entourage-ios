@@ -51,6 +51,7 @@ struct BadgesIntroView: View {
                         .clipShape(Circle())
                 }
                 .accessibilityLabel("a11y_close".a11y)
+                .minimumTouchTarget()
                 .padding(.trailing, 20)
                 .padding(.top, 16)
             }

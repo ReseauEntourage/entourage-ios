@@ -210,7 +210,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                     <constraint firstAttribute="height" constant="48" id="qTn-ZD-2PL"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKC-qc-Kbb">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKC-qc-Kbb" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="368" y="373.66666666666669" width="30" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Ndn-Go-RF0"/>
@@ -226,7 +226,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cA-QV-fYb">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cA-QV-fYb" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="362" y="13" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="aC4-Hg-dAS"/>

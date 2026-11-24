@@ -98,7 +98,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-rm-TR2">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-rm-TR2" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="344" y="129" width="30" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="LDe-lL-dvI"/>
@@ -108,7 +108,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                     <action selector="action_show_comments:" destination="cgn-YR-w6m" eventType="touchUpInside" id="Jni-aJ-ruD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7B-cf-Hxf">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7B-cf-Hxf" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="338" y="2.6666666666666679" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="6ll-y8-T07"/>

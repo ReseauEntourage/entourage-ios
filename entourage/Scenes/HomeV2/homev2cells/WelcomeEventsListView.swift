@@ -62,6 +62,7 @@ struct WelcomeEventsListView: View {
                             .foregroundColor(.black)
                     }
                     .accessibilityLabel("a11y_back".a11y)
+                    .minimumTouchTarget()
                     .padding(.leading, 10)
                     .padding(.top, 10)
 

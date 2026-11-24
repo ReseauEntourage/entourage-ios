@@ -148,6 +148,7 @@ private struct PasswordFloatingField: View {
                             .padding(8)
                     }
                     .accessibilityLabel((isSecured ? "a11y_show_password" : "a11y_hide_password").a11y)
+                    .minimumTouchTarget()
                 }
                 .padding(.horizontal, 12)
                 .frame(height: 52)
@@ -381,6 +382,7 @@ struct LoginView: View {
                         .padding(.vertical, 12)
                 }
                 .accessibilityLabel("a11y_back".a11y)
+                .minimumTouchTarget()
                 
                 Text("login_title".localized) // "Connexion"
                     .font(.entourageTitle(24))

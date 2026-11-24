@@ -108,6 +108,7 @@ struct OtherUserProfileView: View {
                                 .clipShape(Circle())
                         }
                         .accessibilityLabel("a11y_back".a11y)
+                        .minimumTouchTarget()
                         Spacer()
                         Button(action: { viewModel.reportUser() }) {
                             Image("ic_signal_orange")
@@ -120,6 +121,7 @@ struct OtherUserProfileView: View {
                                 .clipShape(Circle())
                         }
                         .accessibilityLabel("a11y_report_user".a11y)
+                        .minimumTouchTarget()
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, safeAreaTop + 8),

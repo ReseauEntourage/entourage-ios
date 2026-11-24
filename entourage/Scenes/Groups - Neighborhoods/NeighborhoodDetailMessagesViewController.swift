@@ -182,7 +182,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         editBannerLabel.textColor = .black
         editBannerLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        let cancelButton = UIButton(type: .system)
+        let cancelButton = ExpandedHitAreaButton(type: .system)
         cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         cancelButton.tintColor = .black
         cancelButton.accessibilityLabel = "a11y_cancel_edit".a11y

@@ -39,6 +39,7 @@ struct ConversationsHeaderBarView: View {
                 }
             }
             .accessibilityLabel("a11y_filter".a11y)
+            .minimumTouchTarget()
         }
         .padding(.horizontal, 20)
     }

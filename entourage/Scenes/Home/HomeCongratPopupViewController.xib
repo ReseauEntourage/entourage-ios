@@ -235,7 +235,7 @@
                                 <constraint firstAttribute="height" constant="9" id="uLb-C8-XKm"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fA-bi-bam">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fA-bi-bam" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                             <rect key="frame" x="307" y="4.5" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="385-cI-5m0"/>

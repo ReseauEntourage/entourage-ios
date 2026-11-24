@@ -10,7 +10,7 @@ class ConversationStaffWarningView: UIView, UITextViewDelegate {
 
     private let backgroundView = UIView()
     private let messageTextView = UITextView()
-    private let closeButton = UIButton(type: .system)
+    private let closeButton = ExpandedHitAreaButton(type: .system)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

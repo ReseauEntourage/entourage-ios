@@ -310,7 +310,7 @@
                                             <constraint firstAttribute="height" constant="68" id="Th1-jG-T9b"/>
                                         </constraints>
                                     </view>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiX-Wb-u2e">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiX-Wb-u2e" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="306" y="14" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="9uY-Mu-oCe"/>
@@ -322,7 +322,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_add_photo"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ft8-DI-A89">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ft8-DI-A89" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="356" y="14" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="euU-so-7rl"/>
@@ -359,7 +359,7 @@
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSE-HM-1QO">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSE-HM-1QO" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                 <rect key="frame" x="356" y="16" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="CTO-1y-cge"/>
@@ -612,7 +612,7 @@
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="kNl-8A-yZN"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOo-Bw-Knd">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOo-Bw-Knd" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                             <rect key="frame" x="26" y="52.5" width="30" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="PVH-nD-aeV"/>
@@ -1257,7 +1257,7 @@ L2</string>
                                                                         <action selector="action_search_show:" destination="s2e-GG-r76" eventType="touchUpInside" id="FNA-zp-jIe"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5F-fb-btA">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5F-fb-btA" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                                     <rect key="frame" x="334" y="19" width="40" height="40"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="40" id="TUu-iW-DWa"/>
@@ -1334,7 +1334,7 @@ L2</string>
                                                                         <constraint firstAttribute="width" constant="20" id="BwK-cD-iFj"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0R-KR-UuD">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0R-KR-UuD" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                                     <rect key="frame" x="352" y="21" width="40" height="40"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="40" id="CBZ-v8-8WD"/>

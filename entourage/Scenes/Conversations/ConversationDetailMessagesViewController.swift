@@ -396,7 +396,7 @@ private var imagePreviewOverlay: UIView?
         editBannerLabel.textColor = .black
         editBannerLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        let cancelButton = UIButton(type: .system)
+        let cancelButton = ExpandedHitAreaButton(type: .system)
         cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         cancelButton.tintColor = .black
         cancelButton.accessibilityLabel = "a11y_cancel_edit".a11y
@@ -690,7 +690,7 @@ private var imagePreviewOverlay: UIView?
         ])
 
         // 3. Bouton "fermer" (en haut à droite)
-        let closeButton = UIButton(type: .custom)
+        let closeButton = ExpandedHitAreaButton(type: .custom)
         if #available(iOS 13.0, *) {
             let img = UIImage(systemName: "xmark")?.withRenderingMode(.alwaysTemplate)
             closeButton.setImage(img, for: .normal)

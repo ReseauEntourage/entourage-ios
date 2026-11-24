@@ -103,7 +103,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0w-CA-fAE">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0w-CA-fAE" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="344" y="170.66666666666666" width="30" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="gue-oK-o7l"/>
@@ -205,7 +205,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                     <constraint firstItem="ejE-Ps-q2Q" firstAttribute="leading" secondItem="COi-xh-bTZ" secondAttribute="leading" id="juK-X3-Kdm"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAO-1z-tpk">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAO-1z-tpk" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="338" y="2.6666666666666679" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="amL-iK-MEe"/>

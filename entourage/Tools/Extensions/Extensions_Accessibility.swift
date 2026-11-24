@@ -6,6 +6,7 @@
 //  et clé de libellé posable depuis Interface Builder.
 //
 
+import SwiftUI
 import UIKit
 
 extension String {
@@ -40,5 +41,35 @@ extension UIView {
             isAccessibilityElement = true
             accessibilityLabel = key.a11y
         }
+    }
+}
+
+// MARK: - Zone à toucher (SwiftUI) -
+
+private struct TouchTargetSizeKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) { value = nextValue() }
+}
+
+private struct MinimumTouchTarget: ViewModifier {
+    @State private var size: CGSize = .zero
+
+    func body(content: Content) -> some View {
+        let dx = max(0, (ExpandedHitAreaButton.minimumTouchSize - size.width) / 2)
+        let dy = max(0, (ExpandedHitAreaButton.minimumTouchSize - size.height) / 2)
+        return content
+            .background(GeometryReader { Color.clear.preference(key: TouchTargetSizeKey.self, value: $0.size) })
+            .onPreferenceChange(TouchTargetSizeKey.self) { size = $0 }
+            .padding(.horizontal, dx).padding(.vertical, dy)
+            .contentShape(Rectangle())
+            .padding(.horizontal, -dx).padding(.vertical, -dy)
+    }
+}
+
+extension View {
+    /// Zone à toucher d'au moins 44 pt, sans changer la taille visible ni la mise en page
+    /// (équivalent SwiftUI de `ExpandedHitAreaButton`).
+    func minimumTouchTarget() -> some View {
+        modifier(MinimumTouchTarget())
     }
 }

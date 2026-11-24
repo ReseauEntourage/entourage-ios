@@ -72,7 +72,7 @@
                                 <constraint firstAttribute="height" constant="20" id="xZM-cc-zRO"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PE6-w9-kU3">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PE6-w9-kU3" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                             <rect key="frame" x="304" y="10" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="CnX-5V-0Ob"/>

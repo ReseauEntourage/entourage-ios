@@ -37,7 +37,7 @@ class FormFlowContainerViewController: UIViewController {
     var pageHost: FormFlowPageHost?
 
     // Habillage
-    private let backButton = UIButton(type: .custom)
+    private let backButton = ExpandedHitAreaButton(type: .custom)
     private let saveButton = UIButton(type: .custom)
     private let progressView = ProgressRadiusView()
     /// Pied de page : mêmes boutons que l'onboarding enrichi (Retour = bouton blanc contour orange,

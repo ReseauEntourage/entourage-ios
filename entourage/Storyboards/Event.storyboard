@@ -66,7 +66,7 @@
                                     <action selector="OnBtnNewClick:" destination="VrH-NF-DrI" eventType="touchUpInside" id="JL9-hz-hKx"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQT-pv-D3x">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQT-pv-D3x" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="224" y="760" width="158" height="34"/>
                                 <color key="backgroundColor" name="orange_app"/>
                                 <constraints>
@@ -339,7 +339,7 @@
                                             <constraint firstAttribute="trailing" secondItem="YYH-4Q-VtS" secondAttribute="trailing" constant="32" id="xF0-T3-h0d"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UvO-2u-qWB">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UvO-2u-qWB" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="92.5" y="259.5" width="221.5" height="40"/>
                                         <color key="backgroundColor" name="orange_medium"/>
                                         <constraints>
@@ -607,7 +607,7 @@
                                     <constraint firstAttribute="height" constant="68" id="fNr-mg-IJK"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tG7-Gh-1Qg">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tG7-Gh-1Qg" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="342" y="110" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>

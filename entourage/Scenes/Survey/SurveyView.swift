@@ -15,7 +15,7 @@ protocol SurveyOptionViewDelegate: AnyObject {
 }
 
 class SurveyOptionView: UIView {
-    let radioButton = UIButton(type: .custom)
+    let radioButton = ExpandedHitAreaButton(type: .custom)
     let questionLabel = UILabel()
     let progressBar = UIProgressView(progressViewStyle: .default)
     let answerCountLabel = UILabel()

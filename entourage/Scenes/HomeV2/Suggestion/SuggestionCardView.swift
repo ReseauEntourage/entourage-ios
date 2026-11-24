@@ -103,7 +103,7 @@ final class SuggestionCardView: UIView {
     var onBodyTapped: (() -> Void)?
 
     private let ui_badge_stack = UIStackView()
-    private let ui_info_button = UIButton(type: .custom)
+    private let ui_info_button = ExpandedHitAreaButton(type: .custom)
     /// Zone tactile du bouton « ? » : elle reste réservée même sans bouton, pour garder la hauteur de la card.
     private let ui_info_container = UIView()
     private let ui_media = UIView()

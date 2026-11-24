@@ -79,6 +79,7 @@ struct BadgeUnlockedSheet: View {
                     .clipShape(Circle())
             }
             .accessibilityLabel("a11y_close".a11y)
+            .minimumTouchTarget()
             .padding(16),
             alignment: .topTrailing
         )

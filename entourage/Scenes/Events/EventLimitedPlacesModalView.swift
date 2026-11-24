@@ -52,6 +52,7 @@ struct EventLimitedPlacesModalView: View {
                             .foregroundColor(Color(UIColor.appOrange))
                     }
                     .accessibilityLabel("a11y_close".a11y)
+                    .minimumTouchTarget()
                 }
 
                 Text("event_limited_places_title".localized)

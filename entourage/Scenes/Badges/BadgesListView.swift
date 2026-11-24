@@ -116,6 +116,7 @@ struct BadgesListView: View {
                         .padding(.leading, hPad)
                 }
                 .accessibilityLabel("a11y_back".a11y)
+                .minimumTouchTarget()
                 Spacer()
             }
         }

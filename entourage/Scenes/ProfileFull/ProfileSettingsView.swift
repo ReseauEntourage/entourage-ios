@@ -29,6 +29,7 @@ struct ProfileSettingsView: View {
                             .foregroundColor(.black)
                     }
                     .accessibilityLabel("a11y_back".a11y)
+                    .minimumTouchTarget()
                 }
             }
         }

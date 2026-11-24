@@ -1145,7 +1145,7 @@ si posiible</string>
                                                                         <constraint firstAttribute="height" constant="1" id="AA4-lx-NTS"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YgO-GD-Dwn">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YgO-GD-Dwn" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="3" width="276" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="VqJ-YA-MEE"/>

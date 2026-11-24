@@ -65,6 +65,7 @@ struct WelcomeJourneyDebugView: View {
                     Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
                 }
                 .accessibilityLabel("a11y_close".a11y)
+                .minimumTouchTarget()
                 .accessibilityIdentifier("welcome_debug_close")
             }
 

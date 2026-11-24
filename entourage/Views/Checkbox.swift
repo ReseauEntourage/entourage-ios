@@ -1,6 +1,6 @@
 import UIKit
 
-final class Checkbox: UIButton {
+final class Checkbox: ExpandedHitAreaButton {
     var isChecked: Bool = false {
         didSet {
             updateImage()

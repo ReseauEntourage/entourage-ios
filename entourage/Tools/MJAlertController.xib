@@ -147,7 +147,7 @@
                                 <constraint firstAttribute="height" constant="15" id="y4Q-ya-h32"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehc-OJ-ldJ">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehc-OJ-ldJ" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                             <rect key="frame" x="307" y="7.5" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="3gs-RM-QQS"/>

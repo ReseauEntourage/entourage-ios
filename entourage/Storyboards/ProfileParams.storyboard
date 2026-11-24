@@ -2618,7 +2618,7 @@
                                                     <constraint firstAttribute="height" constant="1" id="dhT-nm-DwD"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3E-iB-OI4">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3E-iB-OI4" customClass="ExpandedHitAreaButton" customModule="Ent_Beta" customModuleProvider="target">
                                                 <rect key="frame" x="294" y="10" width="56" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="56" id="iM8-cm-aD7"/>
