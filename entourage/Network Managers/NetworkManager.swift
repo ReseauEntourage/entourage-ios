@@ -79,7 +79,7 @@ class NetworkManager {
         NotificationCenter.default.post(name: NSNotification.Name(kNotificationAPIError), object: nil, userInfo: userInfo)
     }
 
-    func requestGet(endPoint:String,headers:[String:String]?, params:[String:String]?, reportsErrors: Bool = true, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
+    func requestGet(endPoint:String,headers:[String:String]?, params:[String:String]?, reportsErrors: Bool = true, timeout: TimeInterval? = nil, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
         let urlStr = getBaseUrl() + endPoint
         guard var url = URL(string: urlStr) else {return}
         
@@ -88,7 +88,7 @@ class NetworkManager {
         }
         
         var urlRequest = URLRequest.init(url: url)
-        urlRequest.timeoutInterval = 120
+        urlRequest.timeoutInterval = timeout ?? 120
         urlRequest.httpMethod = "GET"
         
         if let _headers = headers {
@@ -133,7 +133,7 @@ class NetworkManager {
         session.finishTasksAndInvalidate()
     }
 
-    func requestPost(endPoint:String,headers:[String:String]?, body:Data?, reportsErrors: Bool = true, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
+    func requestPost(endPoint:String,headers:[String:String]?, body:Data?, reportsErrors: Bool = true, timeout: TimeInterval? = nil, completionHandler: @escaping (_ data:Data?, _ resp:URLResponse?, _ error:EntourageNetworkError?) -> Void) {
         
         let url = getBaseUrl() + endPoint
         
@@ -143,7 +143,7 @@ class NetworkManager {
         }
         
         var urlRequest = URLRequest.init(url: url)
-        urlRequest.timeoutInterval = 40
+        urlRequest.timeoutInterval = timeout ?? 40
         urlRequest.httpMethod = "POST"
 
         // Afficher l'URL et la méthode

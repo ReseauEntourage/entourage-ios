@@ -41,6 +41,10 @@ struct NextStepService {
 
     typealias Completion<T> = (Swift.Result<T, Error>) -> Void
 
+    /// Délai des appels au moteur : 15 s, comme Android. Le délai de lecture par défaut d'iOS (120 s) laisserait
+    /// la home en squelette pendant deux minutes sur un mauvais réseau, alors qu'elle n'a plus d'autres sections.
+    static let timeout: TimeInterval = 15
+
     /// `GET /next_steps/current` : le prochain pas, ou `nil` (parcours de bienvenue, moteur coupé).
     static func current(completion: @escaping Completion<NextStepItem?>) {
         get(kAPINextStepsCurrent) { data in
@@ -59,7 +63,7 @@ struct NextStepService {
     static func ignore(nextStepId: Int, completion: @escaping Completion<NextStepItem?>) {
         guard let token = UserDefaults.token else { return completion(.failure(NextStepError.notAuthenticated)) }
         let endpoint = String(format: kAPINextStepsIgnore, nextStepId, token)
-        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil, reportsErrors: false) { data, resp, _ in
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil, reportsErrors: false, timeout: timeout) { data, resp, _ in
             guard let data = data, let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
                 DispatchQueue.main.async { completion(.failure(NextStepError.failed)) }
                 return
@@ -74,7 +78,7 @@ struct NextStepService {
         guard let token = UserDefaults.token,
               let body = try? JSONSerialization.data(withJSONObject: interaction.body) else { return }
         let endpoint = String(format: kAPINextStepsInteractions, token)
-        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: body, reportsErrors: false) { _, _, _ in }
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: body, reportsErrors: false, timeout: timeout) { _, _, _ in }
     }
 
     // MARK: - Privé
@@ -82,7 +86,7 @@ struct NextStepService {
     private static func get(_ route: String, success: @escaping (Data) -> Void, failure: @escaping (Error) -> Void) {
         guard let token = UserDefaults.token else { return failure(NextStepError.notAuthenticated) }
         let endpoint = String(format: route, token)
-        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil, reportsErrors: false) { data, resp, _ in
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil, reportsErrors: false, timeout: timeout) { data, resp, _ in
             guard let data = data, let http = resp as? HTTPURLResponse, http.statusCode < 300 else {
                 DispatchQueue.main.async { failure(NextStepError.failed) }
                 return
