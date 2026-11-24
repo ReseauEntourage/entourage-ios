@@ -2443,3 +2443,60 @@ Choisissez un sujet pour démarrer.";
 "action_form_error_description" = "Ajoutez une description pour continuer.";
 "action_form_error_share" = "Répondez par oui ou par non pour continuer.";
 "action_form_save_error" = "Erreur lors de l’enregistrement de votre %@.";
+
+/* Suggestion : card « Votre prochain pas », écran « Pourquoi », zone Explorer */
+"suggestion_hero_title" = "Notre suggestion pour vous";
+"suggestion_badge_action" = "🤝 Entraide";
+"suggestion_badge_content_path" = "📘 Pour démarrer";
+"suggestion_badge_outing" = "📅 Événement";
+"suggestion_badge_neighborhood" = "👥 Un groupe qui pourrait vous plaire";
+"suggestion_badge_connexion" = "👋 Connexion";
+"suggestion_badge_poi" = "📍 Lieu solidaire";
+"suggestion_badge_smalltalk" = "💬 Bonnes ondes";
+"suggestion_badge_post_message" = "✉️ Discuter avec vos voisins";
+"suggestion_badge_post_message_group" = "✉️ Discuter dans votre groupe";
+"suggestion_badge_become_ambassador" = "🌟 Devenir Animateur";
+"suggestion_chip_remote" = "En visio";
+"suggestion_chip_national" = "National";
+"suggestion_chip_local" = "Quartier";
+"suggestion_cta_answer" = "Répondre";
+"suggestion_cta_read" = "Lire";
+"suggestion_cta_participate" = "Je participe !";
+"suggestion_cta_register" = "Je m'inscris";
+"suggestion_cta_join" = "Rejoindre";
+"suggestion_cta_say_hello" = "Dire bonjour";
+"suggestion_cta_see_place" = "Voir le lieu";
+"suggestion_cta_smalltalk" = "Essayer";
+"suggestion_cta_write_message" = "Écrire un message";
+"suggestion_cta_become_ambassador" = "En savoir plus";
+"suggestion_later" = "Plus tard";
+"suggestion_later_toast" = "Suggestion mise de côté. Nous ne vous la proposerons pas tout de suite.";
+"suggestion_undo" = "Annuler";
+"suggestion_why_a11y" = "Pourquoi cette suggestion ?";
+"suggestion_body_a11y_hint" = "Ouvrir le détail";
+"suggestion_loading_a11y" = "Chargement de votre prochain pas";
+
+"suggestion_why_title_action" = "Pourquoi cette entraide ?";
+"suggestion_why_title_content_path" = "Pourquoi ces lectures ?";
+"suggestion_why_title_outing" = "Pourquoi cet événement ?";
+"suggestion_why_title_neighborhood" = "Pourquoi ce groupe ?";
+"suggestion_why_title_connexion" = "Pourquoi cette personne ?";
+"suggestion_why_title_poi" = "Pourquoi ce lieu ?";
+"suggestion_why_title_smalltalk" = "Pourquoi les Bonnes ondes ?";
+"suggestion_why_title_post_message" = "Pourquoi ce message ?";
+"suggestion_why_title_become_ambassador" = "Pourquoi ce rôle ?";
+"suggestion_why_footer" = "Vous pouvez ignorer une suggestion à tout moment.";
+"suggestion_why_close" = "J'ai compris";
+
+"suggestion_explorer_title" = "D'autres idées pour vous aujourd'hui";
+"suggestion_explorer_a11y_hint" = "Ouvre la suggestion";
+"suggestion_explorer_loading_a11y" = "Chargement de vos accès personnalisés";
+
+// Suggestion : contenus proposés par l'app pour les types sans titre saisi par un utilisateur
+"suggestion_content_path_title" = "Trois lectures pour bien démarrer";
+"suggestion_smalltalk_title" = "Discutez avec quelques personnes";
+"suggestion_ambassador_title" = "Animez des rencontres près de chez vous";
+"suggestion_meta_remote" = "En visio, depuis chez vous";
+"suggestion_meta_distance_m" = "À %d m de vous";
+"suggestion_meta_distance_km" = "À %d km de vous";
+"suggestion_meta_minutes" = "%d min";
