@@ -31,6 +31,12 @@ class MainTabbarViewController: UITabBarController {
 
         setupVCs()
 
+        // Réglage « Contraste amélioré » : activation automatique avec VoiceOver tant qu'aucun choix n'est enregistré
+        // (sans effet tant que `AccessibilityModeSettings.isContrastModeAvailable` est faux).
+        AccessibilityModeSettings.forCurrentUser?.refresh()
+        NotificationCenter.default.addObserver(self, selector: #selector(voiceOverStatusChanged),
+                                               name: UIAccessibility.voiceOverStatusDidChangeNotification, object: nil)
+
         // --- FIX POUR IPHONE 17 / iOS 15+ (Fond blanc & Layout) ---
         let itemsCount = CGFloat(self.tabBar.items?.count ?? 5)
         let indicatorWidth = UIScreen.main.bounds.width / itemsCount
@@ -168,6 +174,10 @@ class MainTabbarViewController: UITabBarController {
         }
     }
     
+    @objc private func voiceOverStatusChanged() {
+        AccessibilityModeSettings.forCurrentUser?.refresh()
+    }
+
     func setupVCs() {
         
         let _homeVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "homev2vc")

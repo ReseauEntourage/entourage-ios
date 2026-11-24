@@ -2524,3 +2524,8 @@ Choisissez un sujet pour démarrer.";
 "a11y_add_unsubscribed" = "Renseigner les participants non inscrits";
 "a11y_cancel_edit" = "Annuler la modification";
 "a11y_search" = "Rechercher";
+"settings_accessibility_title" = "Accessibilité";
+"accessibility_contrast_title" = "Contraste amélioré";
+"accessibility_contrast_explanation" = "Des couleurs plus foncées pour rendre les textes et les boutons plus lisibles.";
+"accessibility_contrast_on" = "Activé";
+"accessibility_contrast_off" = "Désactivé";

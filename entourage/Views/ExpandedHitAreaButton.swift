@@ -14,32 +14,33 @@ class ExpandedHitAreaButton: UIButton {
     /// Côté minimal de la zone à toucher, en points.
     static let minimumTouchSize: CGFloat = 44
 
-    /// Marges à ajouter de chaque côté pour atteindre `minimumTouchSize` (0 si le bouton est déjà assez grand).
-    private func hitOutsets(for size: CGSize) -> UIEdgeInsets {
-        let dx = max(0, (Self.minimumTouchSize - size.width) / 2)
-        let dy = max(0, (Self.minimumTouchSize - size.height) / 2)
-        return UIEdgeInsets(top: dy, left: dx, bottom: dy, right: dx)
+    /// `rect` agrandi de chaque côté pour atteindre `minimumTouchSize` (inchangé s'il est déjà assez grand).
+    static func expandedTouchArea(of rect: CGRect) -> CGRect {
+        let dx = max(0, (minimumTouchSize - rect.width) / 2)
+        let dy = max(0, (minimumTouchSize - rect.height) / 2)
+        return rect.insetBy(dx: -dx, dy: -dy)
     }
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        let outsets = hitOutsets(for: bounds.size)
-        let area = CGRect(x: bounds.minX - outsets.left,
-                          y: bounds.minY - outsets.top,
-                          width: bounds.width + outsets.left + outsets.right,
-                          height: bounds.height + outsets.top + outsets.bottom)
-        return area.contains(point)
+        return Self.expandedTouchArea(of: bounds).contains(point)
     }
 
     /// VoiceOver (focus, audit d'accessibilité) voit la même zone que le toucher.
     override var accessibilityFrame: CGRect {
-        get {
-            let frame = super.accessibilityFrame
-            let outsets = hitOutsets(for: frame.size)
-            return CGRect(x: frame.minX - outsets.left,
-                          y: frame.minY - outsets.top,
-                          width: frame.width + outsets.left + outsets.right,
-                          height: frame.height + outsets.top + outsets.bottom)
-        }
+        get { return Self.expandedTouchArea(of: super.accessibilityFrame) }
+        set { super.accessibilityFrame = newValue }
+    }
+}
+
+/// Même zone à toucher pour une image cliquable (UIImageView + geste), qui n'est pas un UIButton.
+class ExpandedHitAreaImageView: UIImageView {
+
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return ExpandedHitAreaButton.expandedTouchArea(of: bounds).contains(point)
+    }
+
+    override var accessibilityFrame: CGRect {
+        get { return ExpandedHitAreaButton.expandedTouchArea(of: super.accessibilityFrame) }
         set { super.accessibilityFrame = newValue }
     }
 }

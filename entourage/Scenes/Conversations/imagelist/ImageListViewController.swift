@@ -9,7 +9,7 @@ final class ImageListViewController: UIViewController {
 
     // Top bar
     private let topBar = UIView()
-    private let backButton = UIImageView()
+    private let backButton = ExpandedHitAreaImageView()
     private let titleLabel = UILabel()
 
     // Content

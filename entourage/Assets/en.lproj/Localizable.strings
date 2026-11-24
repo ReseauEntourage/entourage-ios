@@ -2494,3 +2494,8 @@ Choose a topic to get started.";
 "a11y_add_unsubscribed" = "Add participants without an account";
 "a11y_cancel_edit" = "Cancel editing";
 "a11y_search" = "Search";
+"settings_accessibility_title" = "Accessibility";
+"accessibility_contrast_title" = "Enhanced contrast";
+"accessibility_contrast_explanation" = "Darker colors to make texts and buttons easier to read.";
+"accessibility_contrast_on" = "On";
+"accessibility_contrast_off" = "Off";

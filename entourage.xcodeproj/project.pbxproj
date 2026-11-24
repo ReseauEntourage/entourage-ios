@@ -714,6 +714,9 @@
 		98DC1F1A1FFC7DAB2A67FE3C /* AccessibilityAnnouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AFD79E19AD988744A6BF13 /* AccessibilityAnnouncer.swift */; };
 		67AD12F43E2B0ABBEE3C2902 /* ExpandedHitAreaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C02E5C8D53C19FDA2F74F /* ExpandedHitAreaButton.swift */; };
 		BC10686968AF65AA57E15BEA /* ExpandedHitAreaButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AE24FFA0CB05206ACDF886 /* ExpandedHitAreaButtonTests.swift */; };
+		27469034FE4A51EA5BBC5D1A /* AccessibilityModeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7AC278B8825714C9C2958 /* AccessibilityModeSettings.swift */; };
+		563AB42FD425AA420994109E /* AccessibilitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E7B6D5FDB37B4687100C2 /* AccessibilitySettingsView.swift */; };
+		3BBD519BA316170A7778E54D /* AccessibilityModeSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA60F9BB07F0233D9CE7259E /* AccessibilityModeSettingsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1447,6 +1450,9 @@
 		F8AFD79E19AD988744A6BF13 /* AccessibilityAnnouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityAnnouncer.swift; sourceTree = "<group>"; };
 		4F8C02E5C8D53C19FDA2F74F /* ExpandedHitAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedHitAreaButton.swift; sourceTree = "<group>"; };
 		50AE24FFA0CB05206ACDF886 /* ExpandedHitAreaButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedHitAreaButtonTests.swift; sourceTree = "<group>"; };
+		FFB7AC278B8825714C9C2958 /* AccessibilityModeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityModeSettings.swift; sourceTree = "<group>"; };
+		2E6E7B6D5FDB37B4687100C2 /* AccessibilitySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilitySettingsView.swift; sourceTree = "<group>"; };
+		CA60F9BB07F0233D9CE7259E /* AccessibilityModeSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityModeSettingsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1809,6 +1815,7 @@
 				26E2877E2E9E51C20045A9FA /* CountryCode.swift */,
 				F90CBEFBAFC7A854F6527EFB /* Testing */,
 				F8AFD79E19AD988744A6BF13 /* AccessibilityAnnouncer.swift */,
+				FFB7AC278B8825714C9C2958 /* AccessibilityModeSettings.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -2405,6 +2412,7 @@
 				622862A75F7F18E5668AEE6F /* AccessibilityLabelsTests.swift */,
 				406129B8A2A0091138E51196 /* AccessibilityAnnouncerTests.swift */,
 				50AE24FFA0CB05206ACDF886 /* ExpandedHitAreaButtonTests.swift */,
+				CA60F9BB07F0233D9CE7259E /* AccessibilityModeSettingsTests.swift */,
 			);
 			name = entourageTests;
 			path = entourageTests;
@@ -2539,6 +2547,7 @@
 				A1B2C3D4E5F6A7B8C9D0E1F5 /* OtherUserProfileViewController.swift */,
 				24037BAB2FD8B7F400D52EE0 /* ProfileSettingsView.swift */,
 				26192DE92D300EE100944D32 /* cells */,
+				2E6E7B6D5FDB37B4687100C2 /* AccessibilitySettingsView.swift */,
 			);
 			path = ProfileFull;
 			sourceTree = "<group>";
@@ -3847,6 +3856,8 @@
 				04F57DA993CD0210BED60B1C /* Extensions_Accessibility.swift in Sources */,
 				98DC1F1A1FFC7DAB2A67FE3C /* AccessibilityAnnouncer.swift in Sources */,
 				67AD12F43E2B0ABBEE3C2902 /* ExpandedHitAreaButton.swift in Sources */,
+				27469034FE4A51EA5BBC5D1A /* AccessibilityModeSettings.swift in Sources */,
+				563AB42FD425AA420994109E /* AccessibilitySettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3869,6 +3880,7 @@
 				F5BBE498607986546B68E83E /* AccessibilityLabelsTests.swift in Sources */,
 				6F24F4ABD005553F63F3AF44 /* AccessibilityAnnouncerTests.swift in Sources */,
 				BC10686968AF65AA57E15BEA /* ExpandedHitAreaButtonTests.swift in Sources */,
+				3BBD519BA316170A7778E54D /* AccessibilityModeSettingsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

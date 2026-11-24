@@ -3,6 +3,7 @@ import SwiftUI
 struct ProfileSettingsView: View {
     @ObservedObject var viewModel: MyProfileViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State private var showAccessibilitySettings = false
 
     var body: some View {
         NavigationView {
@@ -22,6 +23,7 @@ struct ProfileSettingsView: View {
             }
             .background(Color(UIColor.systemGray6).edgesIgnoringSafeArea(.all))
             .navigationBarTitle("settings_section_title".localized, displayMode: .inline)
+            .sheet(isPresented: $showAccessibilitySettings) { AccessibilitySettingsView() }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { presentationMode.wrappedValue.dismiss() }) {
@@ -62,6 +64,21 @@ struct ProfileSettingsView: View {
             .buttonStyle(PlainButtonStyle())
 
             Divider().padding(.leading, 52)
+
+            // Ligne « Accessibilité » : visible quand le moteur de palette est livré (change add-accessibility-mode, groupe 9).
+            if AccessibilityModeSettings.isContrastModeAvailable {
+                Button(action: { showAccessibilitySettings = true }) {
+                    ProfileStandardRow(
+                        imageName: "ic_profile_help",
+                        title: "settings_accessibility_title".localized,
+                        subtitle: accessibilitySubtitle(),
+                        isMe: true
+                    )
+                }
+                .buttonStyle(PlainButtonStyle())
+
+                Divider().padding(.leading, 52)
+            }
 
             Button(action: { viewModel.navigationDelegate?.showBlockedContacts() }) {
                 ProfileStandardRow(
@@ -150,6 +167,11 @@ struct ProfileSettingsView: View {
     }
 
     // MARK: - Formatters
+    private func accessibilitySubtitle() -> String {
+        let enabled = AccessibilityModeSettings.forCurrentUser?.isHighContrastEnabled ?? false
+        return (enabled ? "accessibility_contrast_on" : "accessibility_contrast_off").localized
+    }
+
 
     private func formatLanguage() -> String {
         let preferredLanguage = LanguageManager.loadLanguageFromPreferences()
