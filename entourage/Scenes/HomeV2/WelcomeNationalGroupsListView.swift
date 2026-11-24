@@ -58,6 +58,7 @@ struct WelcomeNationalGroupsListView: View {
                     // Title
                     Text("welcome_national_groups_title".localized)
                         .font(.custom("Quicksand-Bold", size: 18))
+                        .accessibilityAddTraits(.isHeader)
                         .foregroundColor(.black)
                         .padding(.horizontal, 12)
                         .padding(.top, 8)

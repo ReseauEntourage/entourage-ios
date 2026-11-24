@@ -17,6 +17,7 @@ struct ConversationsHeaderBarView: View {
         HStack {
             Text("Messages_title".localized)
                 .font(Font(ApplicationTheme.getFontQuickSandBold(size: 24)))
+                .accessibilityAddTraits(.isHeader)
                 .foregroundColor(.white)
 
             Spacer()

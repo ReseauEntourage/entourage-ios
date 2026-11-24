@@ -16,6 +16,7 @@ class WelcomeOneTitleCell:UITableViewCell{
     }
     
     override func awakeFromNib() {
+        ui_label_title.accessibilityTraits.insert(.header)
         initTitle()
     }
     

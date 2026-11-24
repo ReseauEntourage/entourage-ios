@@ -145,6 +145,7 @@ struct BadgesListView: View {
 
                 Text("badges_list_main_title".localized)
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 20) ?? .systemFont(ofSize: 20, weight: .bold)))
+                    .accessibilityAddTraits(.isHeader)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)

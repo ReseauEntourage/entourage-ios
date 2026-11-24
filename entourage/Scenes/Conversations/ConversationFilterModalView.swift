@@ -38,6 +38,7 @@ struct ConversationFilterModalView: View {
             VStack(alignment: .leading, spacing: 18) {
                 Text("conversation_filter_title".localized)
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 20) ?? UIFont.boldSystemFont(ofSize: 20)))
+                    .accessibilityAddTraits(.isHeader)
                     .foregroundColor(.black)
 
                 VStack(spacing: 12) {

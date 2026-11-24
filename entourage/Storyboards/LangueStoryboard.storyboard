@@ -31,6 +31,9 @@
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="a11yHeader" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ecH-Vc-eaj">
                                         <rect key="frame" x="0.0" y="96.333333333333314" width="385" height="755.66666666666674"/>

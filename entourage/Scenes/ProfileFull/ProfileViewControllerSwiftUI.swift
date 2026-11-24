@@ -346,6 +346,7 @@ struct ImpactCounterView: View {
         VStack(alignment: .leading, spacing: 0) {
             Text(isMe ? "impact_title_me".localized : "impact_title_other".localized)
                 .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)))
+                .accessibilityAddTraits(.isHeader)
                 .foregroundColor(.black)
                 .padding(.top, 10)
                 .padding(.bottom, 18)
@@ -400,6 +401,7 @@ struct ImpactCounterView: View {
 
             Text("impact_new_member_title".localized)
                 .font(Font(UIFont(name: "Quicksand-Bold", size: 18) ?? UIFont.boldSystemFont(ofSize: 18)))
+                .accessibilityAddTraits(.isHeader)
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)

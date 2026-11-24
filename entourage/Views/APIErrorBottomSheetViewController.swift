@@ -43,6 +43,7 @@ class APIErrorBottomSheetViewController: UIViewController {
     private let titleLabel: UILabel = {
         let l = UILabel()
         l.font = UIFont(name: "Quicksand-Bold", size: 20)
+        l.accessibilityTraits.insert(.header)
         l.textColor = UIColor.appGrisSombre
         l.textAlignment = .center
         l.numberOfLines = 0

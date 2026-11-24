@@ -24,6 +24,7 @@ struct BadgeUnlockedSheet: View {
             VStack(spacing: 16) {
                 Text(String(format: "badge_unlocked_bravo".localized, firstName))
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 24) ?? .systemFont(ofSize: 24)))
+                    .accessibilityAddTraits(.isHeader)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
 

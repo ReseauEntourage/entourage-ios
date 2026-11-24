@@ -57,6 +57,7 @@ struct EventLimitedPlacesModalView: View {
 
                 Text("event_limited_places_title".localized)
                     .font(Font(UIFont(name: "Quicksand-Bold", size: 22) ?? UIFont.boldSystemFont(ofSize: 22)))
+                    .accessibilityAddTraits(.isHeader)
                     .foregroundColor(.black)
 
                 Text("event_limited_places_context".localized)

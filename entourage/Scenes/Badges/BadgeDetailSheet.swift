@@ -28,6 +28,7 @@ struct BadgeDetailSheet: View {
 
                         Text(def.titleKey.localized)
                             .font(Font(UIFont(name: "Quicksand-Bold", size: 22) ?? .systemFont(ofSize: 22)))
+                            .accessibilityAddTraits(.isHeader)
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                     }

@@ -44,6 +44,17 @@ extension UIView {
     }
 }
 
+extension UIView {
+    /// Titre de section pour le rotor « Titres » de VoiceOver, posé depuis Interface Builder
+    /// (attribut d'exécution `a11yHeader`, type Boolean).
+    @objc var a11yHeader: Bool {
+        get { return accessibilityTraits.contains(.header) }
+        set {
+            if newValue { accessibilityTraits.insert(.header) } else { accessibilityTraits.remove(.header) }
+        }
+    }
+}
+
 // MARK: - Zone à toucher (SwiftUI) -
 
 private struct TouchTargetSizeKey: PreferenceKey {

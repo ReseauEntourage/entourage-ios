@@ -24,6 +24,7 @@ final class EventRuleSectionTitle: UITableViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.numberOfLines = 0
         titleLabel.font = ApplicationTheme.getFontQuickSandBold(size: 18)
+        titleLabel.accessibilityTraits.insert(.header)
         titleLabel.textColor = .black
 
         contentView.addSubview(titleLabel)

@@ -65,6 +65,7 @@ class EventDetailFullCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        ui_title.accessibilityTraits.insert(.header)
         
         ui_view_cancel.isHidden = true
         ui_view_cancel.layer.cornerRadius = 8

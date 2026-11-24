@@ -58,6 +58,7 @@ class EventDetailTopLightCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        ui_title.accessibilityTraits.insert(.header)
         ui_main_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())

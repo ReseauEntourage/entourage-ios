@@ -71,6 +71,7 @@ struct WelcomeEventsListView: View {
                          viewModel.type == .webinar ? "welcome_webinar_list_title".localized :
                          "welcome_papotages_list_title".localized)
                         .font(.custom("Quicksand-Bold", size: 18))
+                        .accessibilityAddTraits(.isHeader)
                         .foregroundColor(.black)
                         .padding(.horizontal, 20)
                         .padding(.top, 8)

@@ -171,6 +171,7 @@ final class ZoneChoiceViewController: UIViewController, GMSAutocompleteViewContr
     private func setupHeader() {
         titleLabel.text = NSLocalizedString("onboarding_zone_title", comment: "")
         titleLabel.font = UIFont(name: "Quicksand-Bold", size: 20)
+        titleLabel.accessibilityTraits.insert(.header)
         titleLabel.numberOfLines = 0
         titleLabel.textColor = UIColor(white: 0.1, alpha: 1.0)
 

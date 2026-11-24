@@ -32,6 +32,7 @@ class PartnerDetailTopCell: UITableViewCell {
         
         ui_partner_name.textColor = .black
         ui_partner_name.font = ApplicationTheme.getFontQuickSandBold(size: 18)
+        ui_partner_name.accessibilityTraits.insert(.header)
     }
     
     func populateCell(partner:Partner?,delegate:PartnerDetailInfoCellDelegate) {

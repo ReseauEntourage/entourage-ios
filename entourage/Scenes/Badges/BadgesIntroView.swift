@@ -78,6 +78,7 @@ struct BadgesIntroView: View {
                         VStack(spacing: 10) {
                             Text("badges_intro_title".localized)
                                 .font(Font(UIFont(name: "Quicksand-Bold", size: 26) ?? .systemFont(ofSize: 26, weight: .bold)))
+                                .accessibilityAddTraits(.isHeader)
                                 .foregroundColor(.black)
                                 .multilineTextAlignment(.center)
 

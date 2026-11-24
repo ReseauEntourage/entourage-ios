@@ -160,6 +160,7 @@ class MJNavBackView: UIView {
         
         for _uititle in ui_titles {
             _uititle.text = title ?? ""
+            _uititle.accessibilityTraits.insert(.header)
             if let titleFont = titleFont {
                 _uititle.font = titleFont
             }

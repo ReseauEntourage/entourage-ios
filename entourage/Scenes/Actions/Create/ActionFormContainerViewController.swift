@@ -168,6 +168,7 @@ class ActionFormContainerViewController: FormFlowContainerViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "action_charter_screen_title".localized
         titleLabel.font = ApplicationTheme.getFontQuickSandBold(size: 20)
+        titleLabel.accessibilityTraits.insert(.header)
         titleLabel.textColor = FormFlowStyle.uiInk
         overlay.addSubview(titleLabel)
 

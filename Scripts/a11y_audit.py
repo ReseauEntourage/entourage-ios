@@ -239,8 +239,56 @@ def scan_code_small():
     return swiftui, uikit
 
 
+# Textes en Quicksand Bold >= 18 pt qui ne sont pas des titres (chiffres, initiales, nom d'une personne) : relus à la main.
+HEADER_NOT_TITLES = (
+    "ProfileViewControllerSwiftUI.swift:Text(\"\\(totalCount)\")", "ProfileViewControllerSwiftUI.swift:Text(\"\\(row.count)\")",
+    "ProfileViewControllerSwiftUI.swift:impact_hero_unit", "MyProfileViewController.swift:initials",
+    "BadgeUnlockedSheet.swift:definition.titleKey",
+    # trait « titre » posé dans awakeFromNib, hors de la fenêtre de recherche :
+    "EventDetailFullCell.swift", "EventDetailTopLightCell.swift", "WelcomeOneTitleCell.swift",
+    # titre posé par MJNavBackView.populateCustom (trait « titre » central) :
+    "EventEditRecurrencyViewController.swift", "OTLoginChangePhoneViewController.swift", "OnboardingStartViewController.swift",
+    "SuggestionExplorerCell.swift", "SuggestionHeroCell.swift", "SuggestionWhyViewController.swift",
+)
+
+
+def scan_headers():
+    """Titres probables (Quicksand Bold >= 18 pt) sans trait « titre » : xib/storyboards puis code."""
+    import re
+    missing = []
+    for path in interface_files():
+        root = ET.parse(path).getroot()
+        for lab in root.iter("label"):
+            fd = lab.find("fontDescription")
+            if fd is None or "Quicksand-Bold" not in (fd.get("name") or ""):
+                continue
+            if float(fd.get("pointSize") or 0) >= 18 and (lab.get("text") or "").strip():
+                if not any(a.get("keyPath") == "a11yHeader" for a in lab.iter("userDefinedRuntimeAttribute")):
+                    missing.append((str(path.relative_to(ROOT.parent)), lab.get("id"), (lab.get("text") or "")[:40]))
+    for path in swift_files():
+        lines = path.read_text(encoding="utf-8", errors="ignore").splitlines()
+        for n, line in enumerate(lines):
+            m = re.search(r'Quicksand-Bold"\s*,\s*size:\s*(\d+)|getFontQuickSandBold\(size:\s*(\d+)', line)
+            if not m or int(m.group(1) or m.group(2)) < 18:
+                continue
+            window = "\n".join(lines[n: n + 8])
+            if ".isHeader" in window or ".header" in window:
+                continue
+            context = " ".join(l.strip() for l in lines[max(0, n - 3): n + 1])
+            if any(path.name in k and (k.split(":", 1)[1] in context if ":" in k else True) for k in HEADER_NOT_TITLES):
+                continue
+            missing.append((str(path.relative_to(ROOT.parent)), n + 1, line.strip()[:60]))
+    return missing
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if args and args[0] == "headers":
+        rows = scan_headers()
+        for row in rows:
+            print("  ".join(str(x) for x in row))
+        print(f"\n{len(rows)} titres probables sans trait « titre »")
+        return 0
     if args and args[0] == "code-small":
         swiftui, uikit = scan_code_small()
         for title, rows in (("SwiftUI", swiftui), ("UIKit", uikit)):

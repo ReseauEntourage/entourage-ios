@@ -214,6 +214,7 @@ struct HomeWelcomeJourneyView: View {
                 HStack(alignment: .center) {
                     Text("home_v2_welcome_title".localized)
                         .font(.custom("Quicksand-Bold", size: 18))
+                        .accessibilityAddTraits(.isHeader)
                         .foregroundColor(.black)
                     Spacer()
                     Menu {
@@ -496,6 +497,7 @@ struct WelcomeJourneyHideSheet: View {
         VStack(spacing: 16) {
             Text("home_v2_welcome_hide_title".localized)
                 .font(.custom("Quicksand-Bold", size: 18))
+                .accessibilityAddTraits(.isHeader)
                 .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
