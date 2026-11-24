@@ -143,9 +143,11 @@ struct WelcomeEventsListView: View {
                                     Image("ic_placeholder_event")
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
+                                        .accessibilityHidden(true)
                                 }
                                 .frame(width: 94, height: 94)
                                 .clipShape(RoundedRectangle(cornerRadius: 20))
+                                .accessibilityHidden(true)
                             } else {
                                 // Fallback on earlier versions
                                 Image("ic_placeholder_event")
@@ -153,6 +155,7 @@ struct WelcomeEventsListView: View {
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 94, height: 94)
                                     .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .accessibilityHidden(true)
                             }
                         } else {
                             Image("ic_placeholder_event")
@@ -160,6 +163,7 @@ struct WelcomeEventsListView: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 94, height: 94)
                                 .clipShape(RoundedRectangle(cornerRadius: 20))
+                                .accessibilityHidden(true)
                         }
                         
                         if event.isCanceled() {
@@ -175,12 +179,14 @@ struct WelcomeEventsListView: View {
                                 .frame(width: 22, height: 22)
                                 .padding(.leading, 5)
                                 .padding(.top, 68)
+                                .accessibilityHidden(true)
                         } else if event.author?.communityRoles?.contains("Équipe Entourage") == true || event.author?.communityRoles?.contains("Animateur Entourage") == true {
                             Image("ic_entoutou_logo_little")
                                 .resizable()
                                 .frame(width: 23, height: 23)
                                 .padding(.leading, 5)
                                 .padding(.top, 68)
+                                .accessibilityHidden(true)
                         }
                         
                         if event.isCanceled() {
@@ -189,6 +195,7 @@ struct WelcomeEventsListView: View {
                                 .frame(width: 20, height: 20)
                                 .padding(.leading, -4)
                                 .padding(.top, -3)
+                                .accessibilityHidden(true)
                         }
                     }
                     
@@ -224,6 +231,7 @@ struct WelcomeEventsListView: View {
                         Image("ic_event_list_date")
                             .resizable()
                             .frame(width: 10, height: 10)
+                            .accessibilityHidden(true)
                         
                         Text(event.startDateFormatted)
                             .font(.custom("NunitoSans-Light", size: 13))
@@ -236,6 +244,7 @@ struct WelcomeEventsListView: View {
                         Image("ic_event_list_loc")
                             .resizable()
                             .frame(width: 11, height: 10)
+                            .accessibilityHidden(true)
                         Text(event.addressName ?? "")
                             .font(.custom("NunitoSans-Light", size: 13))
                             .foregroundColor(Color("gris_112"))
@@ -248,6 +257,7 @@ struct WelcomeEventsListView: View {
                             Image("ic_event_list_user")
                                 .resizable()
                                 .frame(width: 10, height: 10)
+                                .accessibilityHidden(true)
                             
                             let memberString = membersCount > 1 ? String(format: "event_members_cell_list".localized, membersCount) : String(format: "event_member_cell_list".localized, membersCount)
                             Text(memberString)

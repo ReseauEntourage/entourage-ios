@@ -215,6 +215,7 @@ struct ProfileStandardRow: View {
             Image(imageName)
                 .resizable()
                 .frame(width: 24, height: 24)
+                .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
@@ -233,6 +234,7 @@ struct ProfileStandardRow: View {
             if isMe {
                 Image(systemName: "chevron.right")
                     .foregroundColor(isDestructive ? Color(UIColor.appOrange) : .black)
+                    .accessibilityHidden(true)
             }
         }
         .padding()

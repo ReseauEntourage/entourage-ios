@@ -139,6 +139,7 @@ struct BadgesListView: View {
                             .scaledToFit()
                             .frame(width: 32, height: 32)
                             .opacity(0.5)
+                            .accessibilityHidden(true)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -169,6 +170,7 @@ struct BadgesListView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 44, height: 44)
+                            .accessibilityHidden(true)
                         VStack(alignment: .leading, spacing: 2) {
                             Text("badges_empty_start_label".localized.uppercased())
                                 .font(Font(UIFont(name: "NunitoSans-Bold", size: 11) ?? .systemFont(ofSize: 11, weight: .bold)))
@@ -279,6 +281,7 @@ struct BadgeListRowView: View {
                 .scaledToFit()
                 .frame(width: 44, height: 44)
                 .opacity(isActive ? 1.0 : 0.4)
+                .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(def.titleKey.localized)

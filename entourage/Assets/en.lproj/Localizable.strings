@@ -2499,3 +2499,6 @@ Choose a topic to get started.";
 "accessibility_contrast_explanation" = "Darker colors to make texts and buttons easier to read.";
 "accessibility_contrast_on" = "On";
 "accessibility_contrast_off" = "Off";
+"a11y_photo" = "Photo";
+"a11y_create" = "Create";
+"a11y_notifications" = "Notifications";

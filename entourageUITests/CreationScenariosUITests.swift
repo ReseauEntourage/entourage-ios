@@ -65,6 +65,7 @@ final class CreationScenariosUITests: UITestCase {
             type("Groupe créé automatiquement par le test E2E.", into: "group_form_description")
             dismissKeyboard()
         }
+        auditAccessibility("Création de groupe, étape 1")
         step("Lieu : ma position") { pickCurrentPlace(from: "group_form_place") }
         step("Continuer") { next() }
 

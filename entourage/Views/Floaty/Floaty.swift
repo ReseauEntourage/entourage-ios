@@ -1442,6 +1442,7 @@ extension Floaty {
         self.addSubview(accessibilityView)
         accessibilityView.isAccessibilityElement = true
         accessibilityView.accessibilityTraits.insert(.button)
+        accessibilityView.accessibilityLabel = "a11y_create".a11y
     }
     
     open override var accessibilityLabel : String? {

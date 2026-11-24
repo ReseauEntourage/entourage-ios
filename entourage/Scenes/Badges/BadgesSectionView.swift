@@ -61,6 +61,7 @@ private struct BadgeProfileCardView: View {
                 .scaledToFit()
                 .frame(width: 44, height: 44)
                 .opacity(isObtained || isInProgress ? 1.0 : 0.4)
+                .accessibilityHidden(true)
 
             Text(progress.definition.titleKey.localized)
                 .font(Font(UIFont(name: "Quicksand-Bold", size: 15) ?? .systemFont(ofSize: 15)))

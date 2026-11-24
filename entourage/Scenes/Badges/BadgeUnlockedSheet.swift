@@ -16,6 +16,7 @@ struct BadgeUnlockedSheet: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
+                    .accessibilityHidden(true)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 280)

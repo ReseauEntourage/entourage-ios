@@ -167,6 +167,7 @@ struct EventPreviewView: View {
                 Image(systemName: "photo")
                     .font(.system(size: 34, weight: .light))
                     .foregroundColor(FormFlowStyle.ink3)
+                    .accessibilityHidden(true)
             }
         }
         .frame(maxWidth: .infinity)
@@ -182,6 +183,7 @@ struct EventPreviewView: View {
                 .foregroundColor(FormFlowStyle.ink2)
                 .frame(width: 16)
                 .padding(.top, 2)
+                .accessibilityHidden(true)
             Text(text)
                 .font(FormFlowStyle.regular(13.5))
                 .foregroundColor(FormFlowStyle.ink2)
@@ -196,6 +198,7 @@ struct EventPreviewView: View {
                 Image(systemName: FormFlowStyle.symbol(symbols))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(FormFlowStyle.accent)
+                    .accessibilityHidden(true)
             }
             Text(chip.title)
                 .font(FormFlowStyle.semibold(11.5))
@@ -221,6 +224,7 @@ struct EventPreviewView: View {
                 Image(systemName: "info.circle")
                     .font(.system(size: 16, weight: .regular))
                     .foregroundColor(FormFlowStyle.accent)
+                    .accessibilityHidden(true)
             }
             .frame(width: 34, height: 34)
 

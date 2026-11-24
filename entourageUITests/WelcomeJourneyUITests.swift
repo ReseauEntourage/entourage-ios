@@ -33,6 +33,7 @@ final class WelcomeJourneyUITests: UITestCase {
         launchApp(events: [])
         XCTAssertTrue(journey.waitUntilVisible(), "Le parcours de bienvenue doit s'afficher")
         screenshot("Accueil – parcours au premier affichage")
+        auditAccessibility("Parcours de bienvenue")
 
         for step in WelcomeJourneyScreen.Step.allCases {
             XCTAssertEqual(journey.state(of: step), .todo, "\(step) doit être à faire")

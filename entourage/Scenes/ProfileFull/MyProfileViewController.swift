@@ -176,6 +176,7 @@ struct MyProfileView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(height: safeAreaTop + 120)
                         .clipped()
+                        .accessibilityHidden(true)
                 }
                 .overlay(
                     HStack {

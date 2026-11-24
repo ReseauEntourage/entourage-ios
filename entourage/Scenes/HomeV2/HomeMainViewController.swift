@@ -426,6 +426,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         ui_image_user_avatar.layer.cornerRadius = 18
         ui_image_user_avatar.clipsToBounds = true
         ui_button_notif.addTarget(self, action: #selector(onNotifClick), for: .touchUpInside)
+        ui_button_notif.accessibilityLabel = "a11y_notifications".a11y
         ui_image_user_avatar.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onAvatarClick))
         ui_image_user_avatar.addGestureRecognizer(tapGestureRecognizer)
@@ -439,6 +440,7 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
         }
         ui_logo_entourage.isAccessibilityElement = true
         ui_logo_entourage.accessibilityIdentifier = "home_logo"
+        ui_logo_entourage.accessibilityLabel = "Entourage"
         #endif
     }
 

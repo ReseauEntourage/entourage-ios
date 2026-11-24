@@ -212,10 +212,12 @@ struct ConversationListMainCellSwiftUI: View {
                 .resizable()
                 .scaledToFit()
                 .padding(10)
+                .accessibilityHidden(true)
         } else {
             Image("placeholder_user")
                 .resizable()
                 .scaledToFill()
+                .accessibilityHidden(true)
         }
     }
 }

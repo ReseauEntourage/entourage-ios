@@ -163,6 +163,7 @@ struct FormFlowErrorText: View {
             Image(systemName: "exclamationmark.circle")
                 .font(.system(size: 14, weight: .regular))
                 .padding(.top, 1)
+                .accessibilityHidden(true)
             Text(message)
                 .font(FormFlowStyle.regular(12.5))
                 .fixedSize(horizontal: false, vertical: true)
@@ -255,6 +256,7 @@ struct FormFlowTextField: View {
                     Image(systemName: image)
                         .font(.system(size: 17, weight: .regular))
                         .foregroundColor(FormFlowStyle.accent)
+                        .accessibilityHidden(true)
                 }
             }
         }
@@ -390,6 +392,7 @@ struct FormFlowPickerField: View {
                     .foregroundColor(FormFlowStyle.accent)
                     .padding(.trailing, 14)
                     .allowsHitTesting(false)
+                    .accessibilityHidden(true)
             }
         }
     }
@@ -726,6 +729,7 @@ struct FormFlowPhotoImage: View {
             Image(uiImage: localImage)
                 .resizable()
                 .scaledToFill()
+                .accessibilityLabel("a11y_photo".a11y)
         }
         else {
             FormFlowRemoteImage(urlString: remoteUrl)
@@ -847,6 +851,7 @@ struct FormFlowMetaRow: View {
                 .foregroundColor(FormFlowStyle.ink2)
                 .frame(width: 16)
                 .padding(.top, 2)
+                .accessibilityHidden(true)
             Text(text)
                 .font(FormFlowStyle.regular(13.5))
                 .foregroundColor(FormFlowStyle.ink2)
@@ -892,6 +897,7 @@ struct FormFlowPreviewPhoto: View {
                 Image(systemName: "photo")
                     .font(.system(size: 34, weight: .light))
                     .foregroundColor(FormFlowStyle.ink3)
+                    .accessibilityHidden(true)
             }
         }
         .frame(maxWidth: .infinity)

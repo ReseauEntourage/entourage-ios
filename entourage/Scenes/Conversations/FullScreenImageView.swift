@@ -95,6 +95,7 @@ struct FullScreenImageView: View {
                     Image(uiImage: img)
                         .resizable()
                         .scaledToFit()
+                        .accessibilityLabel("a11y_photo".a11y)
                 }
                 .ignoresSafeArea()
             } else {

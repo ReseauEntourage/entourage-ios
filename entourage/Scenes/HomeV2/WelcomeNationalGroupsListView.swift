@@ -162,15 +162,18 @@ struct NationalGroupListCellWrap: View {
                         Image("ic_placeholder_group")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
+                            .accessibilityHidden(true)
                     }
                     .frame(width: 94, height: 94)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .accessibilityHidden(true)
                 } else {
                     Image("ic_placeholder_group")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 94, height: 94)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .accessibilityHidden(true)
                 }
             } else {
                 Image("ic_placeholder_group")
@@ -178,6 +181,7 @@ struct NationalGroupListCellWrap: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 94, height: 94)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .accessibilityHidden(true)
             }
 
             VStack(alignment: .leading, spacing: 4) {

@@ -65,6 +65,7 @@ struct BadgesIntroView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 40, height: 40)
+                                .accessibilityHidden(true)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .center)

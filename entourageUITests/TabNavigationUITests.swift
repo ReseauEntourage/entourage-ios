@@ -28,6 +28,7 @@ final class TabNavigationUITests: UITestCase {
         XCTAssertTrue(tabButton(.home).isSelected, "L'accueil est l'onglet de départ")
         waitForRequest("GET home/summary")
         screenshot("Accueil")
+        auditAccessibility("Accueil")
     }
 
     func testEveryTabOpensAndLoadsItsData() {
@@ -37,6 +38,7 @@ final class TabNavigationUITests: UITestCase {
         for tab in [Tab.actions, .messages, .groups, .events, .home] {
             step("Onglet \(tab)") { open(tab) }
             XCTAssertTrue(app.tabBars.firstMatch.exists, "L'app doit rester utilisable après l'ouverture de \(tab)")
+            auditAccessibility("Onglet \(tab)")
         }
         XCTAssertTrue(app.state == .runningForeground, "L'app a planté pendant la navigation")
     }

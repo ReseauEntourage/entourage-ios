@@ -545,6 +545,7 @@ private struct ContactSection: View {
                             .font(.entourageBody(15))
                             .foregroundColor(Color(UIColor.appOrange))
                             .padding(.trailing, 10)
+                            .accessibilityHidden(true)
                     }
                     .contentShape(Rectangle())
                     .allowsHitTesting(false)

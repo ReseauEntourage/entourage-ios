@@ -117,6 +117,7 @@ struct AssociationOnboardingView: View {
                     Image(systemName: "chevron.down")
                         .foregroundColor(Color(UIColor.appGrey151))
                         .font(.system(size: 14, weight: .medium))
+                        .accessibilityHidden(true)
                 }
                 .padding(.horizontal, 12)
                 .frame(height: 44)
@@ -134,6 +135,7 @@ struct AssociationOnboardingView: View {
             Image(systemName: "info.circle.fill")
                 .font(.system(size: 18))
                 .foregroundColor(Color(UIColor.appOrange))
+                .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(NSLocalizedString("onboard_asso_info", comment: ""))

@@ -113,6 +113,49 @@ class UITestCase: XCTestCase {
         }
     }
 
+    // MARK: - Audit d'accessibilité
+
+    /// Passe l'audit d'accessibilité d'Apple (iOS 17+) sur l'écran affiché ; chaque écart est un échec du test.
+    ///
+    /// Types d'écarts ignorés, à retirer au fur et à mesure :
+    /// - `.contrast` : le mode « contraste amélioré » n'est pas encore livré (change add-accessibility-mode, groupe 9) ;
+    /// - `.dynamicType` : Dynamic Type est un change séparé.
+    func auditAccessibility(_ screen: String, file: StaticString = #filePath, line: UInt = #line) {
+        guard #available(iOS 17.0, *) else { return }
+        XCTContext.runActivity(named: "Audit d'accessibilité : \(screen)") { _ in
+            do {
+                let types = XCUIAccessibilityAuditType.all.subtracting([.contrast, .dynamicType])
+                try app.performAccessibilityAudit(for: types) { issue in
+                    // Le détail de chaque écart va au journal (l'erreur seule ne nomme pas l'élément).
+                    let element = issue.element.map { "\($0.elementType) « \($0.label) » id=\($0.identifier) \($0.frame) \($0.debugDescription.prefix(160))" } ?? "élément inconnu"
+                    print("[a11y-audit] \(screen) | \(issue.auditType) | \(issue.compactDescription) | \(issue.detailedDescription) | \(element)")
+                    return Self.isKnownAuditIssue(screen: screen, issue: issue)   // true = écart connu, ignoré
+                }
+            } catch {
+                XCTFail("Audit d'accessibilité « \(screen) » : \(error)", file: file, line: line)
+            }
+        }
+    }
+
+    /// Écarts relevés par le premier audit (24/11/2026), pas encore corrigés : à corriger puis à retirer d'ici.
+    /// Tout autre écart fait échouer le test.
+    @available(iOS 17.0, *)
+    private static func isKnownAuditIssue(screen: String, issue: XCUIAccessibilityAuditIssue) -> Bool {
+        let element = issue.element?.elementType
+        switch (screen, issue.auditType) {
+        // 3 filtres (120×32 pt) de l'onglet Entraide sans nom
+        case ("Onglet actions", .sufficientElementDescription) where element == .button: return true
+        // listes (groupes, messages) exposées comme un seul élément sans description
+        case (_, .sufficientElementDescription) where element == .table: return true
+        // accueil : du texte vu à l'écran mais absent de l'arbre d'accessibilité (élément non identifié)
+        case ("Accueil", .elementDetection), ("Onglet home", .elementDetection): return true
+        // nœuds SwiftUI de l'accueil et du parcours de bienvenue sous 44 pt (le cadre d'accessibilité SwiftUI
+        // ne suit pas `minimumTouchTarget` : il faudrait un `.frame(minWidth:minHeight:)`, qui change la mise en page)
+        case ("Accueil", .hitRegion), ("Onglet home", .hitRegion), ("Parcours de bienvenue", .hitRegion): return issue.element == nil
+        default: return false
+        }
+    }
+
     // MARK: - Requêtes envoyées par l'app
 
     var sentRequests: [SentRequest] {

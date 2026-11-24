@@ -25,6 +25,7 @@ struct BadgeDetailSheet: View {
                             .scaledToFit()
                             .frame(width: 100, height: 100)
                             .padding(.top, 8)
+                            .accessibilityHidden(true)
 
                         Text(def.titleKey.localized)
                             .font(Font(UIFont(name: "Quicksand-Bold", size: 22) ?? .systemFont(ofSize: 22)))
@@ -120,6 +121,7 @@ struct BadgeDetailSheet: View {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(Color(red: 0.18, green: 0.65, blue: 0.37))
                     .font(.system(size: 16, weight: .bold))
+                    .accessibilityHidden(true)
                 let dateText = progress.obtainedDate.map { formatBadgeDate($0) } ?? ""
                 if dateText.isEmpty {
                     Text("badge_obtained".localized)
@@ -204,6 +206,7 @@ struct BadgeDetailSheet: View {
                     .foregroundColor(def.isReversible ? Color(UIColor.appOrange) : Color(red: 0.18, green: 0.65, blue: 0.37))
                     .font(.system(size: 18))
                     .frame(width: 20)
+                    .accessibilityHidden(true)
                 Text(def.mechanismKey.localized)
                     .font(Font(UIFont(name: "NunitoSans-Regular", size: 14) ?? .systemFont(ofSize: 14)))
                     .foregroundColor(.black)

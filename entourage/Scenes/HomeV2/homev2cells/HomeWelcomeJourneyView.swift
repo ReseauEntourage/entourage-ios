@@ -327,6 +327,7 @@ struct WelcomeJourneyStepView: View {
                     Image(systemName: step.state == .completed ? "checkmark" : step.iconName)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(iconForeground)
+                        .accessibilityHidden(true)
                 }
 
                 // Texts

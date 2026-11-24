@@ -2529,3 +2529,6 @@ Choisissez un sujet pour démarrer.";
 "accessibility_contrast_explanation" = "Des couleurs plus foncées pour rendre les textes et les boutons plus lisibles.";
 "accessibility_contrast_on" = "Activé";
 "accessibility_contrast_off" = "Désactivé";
+"a11y_photo" = "Photo";
+"a11y_create" = "Créer";
+"a11y_notifications" = "Notifications";

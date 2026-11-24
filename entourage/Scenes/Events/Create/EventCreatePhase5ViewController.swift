@@ -125,6 +125,7 @@ struct EventStepGroupsView: View {
                             Image(systemName: "checkmark")
                                 .font(.system(size: 11, weight: .heavy))
                                 .foregroundColor(.white)
+                                .accessibilityHidden(true)
                         }
                     }
                     .frame(width: 24, height: 24)

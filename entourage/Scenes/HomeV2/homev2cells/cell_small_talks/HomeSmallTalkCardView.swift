@@ -37,6 +37,7 @@ struct HomeSmallTalkCardView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 70, height: 70)
+                .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 6) {
                 Text("home_v2_small_talk_card_title".localized)
@@ -83,6 +84,7 @@ struct HomeSmallTalkCardView: View {
                         .scaledToFit()
                         .frame(width: 26, height: 26) // 50 - (12 * 2) = 26
                         .foregroundColor(Color("orange_app"))
+                        .accessibilityHidden(true)
                 }
                 
                 // 2. Texte : Titre + Sous-titre
@@ -121,6 +123,7 @@ struct HomeSmallTalkCardView: View {
                                 Image("placeholder_user")
                                     .resizable()
                                     .scaledToFill()
+                                    .accessibilityHidden(true)
                             } else {
                                 if #available(iOS 15.0, *) {
                                     AsyncImage(url: URL(string: avatarUrlStr)) { image in
@@ -129,11 +132,14 @@ struct HomeSmallTalkCardView: View {
                                         Image("placeholder_user")
                                             .resizable()
                                             .scaledToFill()
+                                            .accessibilityHidden(true)
                                     }
+                                    .accessibilityHidden(true)
                                 } else {
                                     Image("placeholder_user")
                                         .resizable()
                                         .scaledToFill()
+                                        .accessibilityHidden(true)
                                 }
                             }
                         }

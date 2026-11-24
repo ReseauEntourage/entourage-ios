@@ -814,6 +814,7 @@ struct ParticipantRow: View {
                 Image(systemName: "person.fill")
                     .foregroundColor(Color(UIColor(named: "appOrange") ?? .orange))
                     .font(.system(size: 18))
+                    .accessibilityHidden(true)
             }
             .frame(width: 48, height: 48)
 
