@@ -38,8 +38,8 @@ final class SuggestionHeroCell: UITableViewCell {
         contentView.backgroundColor = UIColor(named: "white_orange_home")
 
         ui_title.text = "suggestion_hero_title".localized
-        // Comme Android : titre de zone en Nunito gras 18.
-        ui_title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontNunitoBold(size: 18))
+        // Titre de zone : Quicksand Bold (police des titres de l'app), taille 18 comme Android et comme les titres de section de la home.
+        ui_title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontQuickSandBold(size: 18))
         ui_title.adjustsFontForContentSizeCategory = true
         ui_title.textColor = UIColor(hexString: "#1A1A1A")
         ui_title.numberOfLines = 0

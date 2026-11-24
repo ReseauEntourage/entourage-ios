@@ -68,7 +68,7 @@ final class SuggestionWhyViewController: UIViewController {
     private func buildUI() {
         let title = UILabel()
         title.text = "suggestion_why_title_\(card.type.rawValue)".localized
-        title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontNunitoBold(size: 20))
+        title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontQuickSandBold(size: 20))
         title.adjustsFontForContentSizeCategory = true
         title.textColor = UIColor(hexString: "#1A1A1A")
         title.numberOfLines = 0

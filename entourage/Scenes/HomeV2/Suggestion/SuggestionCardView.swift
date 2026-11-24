@@ -217,7 +217,8 @@ final class SuggestionCardView: UIView {
         ui_author.adjustsFontForContentSizeCategory = true
 
         // Champs libres : nombre de lignes borné, texte brut, jamais reformulé.
-        ui_title.font = scaled(ApplicationTheme.getFontNunitoBold(size: 17), style: .headline)
+        // Titre de la card : Quicksand Bold (police des titres de l'app), le reste de la card est en Nunito.
+        ui_title.font = scaled(ApplicationTheme.getFontQuickSandBold(size: 17), style: .headline)
         ui_title.textColor = UIColor(hexString: "#1A1A1A")
         ui_title.numberOfLines = 3
         ui_title.adjustsFontForContentSizeCategory = true
