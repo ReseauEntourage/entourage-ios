@@ -285,8 +285,7 @@ enum NextStepAdapter {
         guard let card = card(from: item) else { return nil }
         let context = card.metas.compactMap { $0.context }.first(where: { !$0.isEmpty }) ?? card.body
         return ExplorerAccess(id: card.id, type: card.type, label: card.title,
-                              context: context, destination: card.destination, targetId: card.targetId,
-                              badgeKey: card.badgeKey)
+                              context: context, destination: card.destination, targetId: card.targetId)
     }
 
     /// Date d'un événement, comme Android : date moyenne et heure courte, dans la langue de l'appareil.
