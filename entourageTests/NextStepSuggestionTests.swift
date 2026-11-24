@@ -769,4 +769,25 @@ final class NextStepSuggestionTests: XCTestCase {
         coordinator.setSuppressed(false) // le parcours se termine
         XCTAssertEqual(provider.fetchCount, 1)
     }
+
+    /// Comme le badge de la card : chaque ligne de l'Explorer porte le type de sa piste (« 📅 Événement »,
+    /// « 🤝 Entraide »…), pour qu'on voie de quoi il s'agit (demande de l'équipe produit, 24/11/2026).
+    func testExplorerAccessCarriesTheBadgeOfItsType() throws {
+        func badge(_ json: String) throws -> String {
+            try XCTUnwrap(NextStepAdapter.access(from: try item(json))).badgeKey
+        }
+        XCTAssertEqual(try badge(#"{"id":null,"kind":"outing","placement":"others","target":{"id":42,"title":"Café solidaire","online":false},"reasons":[]}"#),
+                       "suggestion_badge_outing")
+        XCTAssertEqual(try badge(#"{"id":null,"kind":"action","placement":"others","target":{"id":99,"title":"Besoin d'un téléphone","action_type":"solicitation"},"reasons":[]}"#),
+                       "suggestion_badge_action")
+        XCTAssertEqual(try badge(#"{"id":null,"kind":"neighborhood","placement":"others","target":{"id":7,"name":"Voisins","national":false},"reasons":[]}"#),
+                       "suggestion_badge_neighborhood")
+        XCTAssertEqual(try badge(#"{"id":null,"kind":"smalltalk","placement":"others","target":null,"reasons":[]}"#),
+                       "suggestion_badge_smalltalk")
+        // « Poster un message » distingue le groupe de voisins du groupe thématique, comme sur la card.
+        XCTAssertEqual(try badge(#"{"id":null,"kind":"post_message","placement":"others","target":{"id":522,"name":"Voisins","national":false,"zone":null},"reasons":[]}"#),
+                       "suggestion_badge_post_message")
+        XCTAssertEqual(try badge(#"{"id":null,"kind":"post_message","placement":"others","target":{"id":523,"name":"Marche","national":true},"reasons":[]}"#),
+                       "suggestion_badge_post_message_group")
+    }
 }

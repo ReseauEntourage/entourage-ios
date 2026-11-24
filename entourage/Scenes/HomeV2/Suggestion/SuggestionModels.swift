@@ -258,18 +258,23 @@ struct ExplorerAccess: Decodable {
     let destination: SuggestionDestination
     /// Pour la mesure (`placement` others) : `item_kind` est le `type`, `target_id` celui-ci.
     let targetId: Int?
+    /// Clé du badge de type (« 📅 Événement », « 🤝 Entraide »…), la même que sur la card : la ligne l'affiche
+    /// en chip pour qu'on voie de quoi il s'agit.
+    let badgeKey: String
 
     enum CodingKeys: String, CodingKey {
         case id, type, label, context, target
     }
 
-    init(id: String, type: SuggestionType, label: String, context: String?, destination: SuggestionDestination, targetId: Int? = nil) {
+    init(id: String, type: SuggestionType, label: String, context: String?, destination: SuggestionDestination,
+         targetId: Int? = nil, badgeKey: String? = nil) {
         self.id = id
         self.type = type
         self.label = label
         self.context = context
         self.destination = destination
         self.targetId = targetId
+        self.badgeKey = badgeKey ?? type.badgeKey
     }
 
     init(from decoder: Decoder) throws {

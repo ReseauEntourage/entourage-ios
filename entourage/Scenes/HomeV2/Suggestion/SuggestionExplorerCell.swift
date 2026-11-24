@@ -57,9 +57,35 @@ final class ExplorerRowView: UIControl {
         ui_chevron.setContentHuggingPriority(.required, for: .horizontal)
         ui_chevron.setContentCompressionResistancePriority(.required, for: .horizontal)
 
-        let texts = UIStackView(arrangedSubviews: [ui_label, ui_context])
+        // Type de la piste (« 📅 Événement », « 🤝 Entraide »…), comme le badge de la card : sans lui, on ne voit pas
+        // toujours de quoi il s'agit. Sur le fond du type, pour rester lisible sur la ligne blanche.
+        let chipLabel = UILabel()
+        chipLabel.text = access.badgeKey.localized
+        chipLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: ApplicationTheme.getFontNunitoBold(size: 12))
+        chipLabel.adjustsFontForContentSizeCategory = true
+        chipLabel.textColor = access.type.badgeColor
+        chipLabel.numberOfLines = 1
+        chipLabel.translatesAutoresizingMaskIntoConstraints = false
+        let chip = UIView()
+        chip.backgroundColor = access.type.thumbBackground
+        chip.layer.cornerRadius = 12
+        chip.addSubview(chipLabel)
+        NSLayoutConstraint.activate([
+            chipLabel.topAnchor.constraint(equalTo: chip.topAnchor, constant: 4),
+            chipLabel.bottomAnchor.constraint(equalTo: chip.bottomAnchor, constant: -4),
+            chipLabel.leadingAnchor.constraint(equalTo: chip.leadingAnchor, constant: 11),
+            chipLabel.trailingAnchor.constraint(equalTo: chip.trailingAnchor, constant: -11)
+        ])
+        // Le chip garde sa largeur (espace souple à droite) et se tronque s'il est trop long.
+        chip.setContentHuggingPriority(.required, for: .horizontal)
+        chip.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        let chipRow = UIStackView(arrangedSubviews: [chip, UIView()])
+        chipRow.axis = .horizontal
+
+        let texts = UIStackView(arrangedSubviews: [chipRow, ui_label, ui_context])
         texts.axis = .vertical
         texts.spacing = 0
+        texts.setCustomSpacing(4, after: chipRow)
         let row = UIStackView(arrangedSubviews: [ui_icon_bg, texts, ui_chevron])
         row.axis = .horizontal
         row.alignment = .center
@@ -83,7 +109,7 @@ final class ExplorerRowView: UIControl {
         // Un seul élément VoiceOver : teaser, contexte, puis ce que fait le tap.
         isAccessibilityElement = true
         accessibilityTraits = .button
-        accessibilityLabel = [access.label, access.context].compactMap { $0 }.joined(separator: ". ")
+        accessibilityLabel = [access.badgeKey.localized, access.label, access.context].compactMap { $0 }.joined(separator: ". ")
         accessibilityHint = "suggestion_explorer_a11y_hint".localized
         accessibilityIdentifier = "suggestion_explorer_\(access.id)"
     }
