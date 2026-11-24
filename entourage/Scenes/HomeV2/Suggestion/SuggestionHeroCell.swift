@@ -53,25 +53,16 @@ final class SuggestionHeroCell: UITableViewCell {
 
         buildSkeleton()
 
-        // Titre décalé de 2 et marges verticales de 12, comme Android.
-        let titleWrap = UIView()
-        ui_title.translatesAutoresizingMaskIntoConstraints = false
-        titleWrap.addSubview(ui_title)
-        NSLayoutConstraint.activate([
-            ui_title.topAnchor.constraint(equalTo: titleWrap.topAnchor),
-            ui_title.bottomAnchor.constraint(equalTo: titleWrap.bottomAnchor),
-            ui_title.leadingAnchor.constraint(equalTo: titleWrap.leadingAnchor, constant: 2),
-            ui_title.trailingAnchor.constraint(equalTo: titleWrap.trailingAnchor)
-        ])
-
-        let stack = UIStackView(arrangedSubviews: [titleWrap, card, skeleton])
+        // Marges de la grille de la home iOS : cartes à 20 (comme la carte de don et les outils solidaires),
+        // 12 en haut et 8 en bas, titre aligné sur la card.
+        let stack = UIStackView(arrangedSubviews: [ui_title, card, skeleton])
         stack.axis = .vertical
         stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stack)
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
