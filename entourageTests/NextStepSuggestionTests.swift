@@ -635,6 +635,57 @@ final class NextStepSuggestionTests: XCTestCase {
         XCTAssertEqual(access.context, "Les Bonnes ondes vous mettent en relation.")
     }
 
+    /// Comme Android : le contexte d'une ligne Explorer est la première information venue de la cible, jamais
+    /// la distance calculée par l'app. Une entraide affiche donc sa description, pas « À 800 m de vous ».
+    func testExplorerContextOfAnActionIsItsDescriptionNotTheDistance() throws {
+        let other = try item("""
+        {"id":null,"kind":"action","placement":"others",
+         "target":{"id":99,"title":"Besoin d'un téléphone","description":"Bonjour à tous, je cherche un télé…","action_type":"solicitation","distance":0.8,
+                   "author":{"id":5,"display_name":"Nino D."}},"reasons":[]}
+        """)
+        let access = try XCTUnwrap(NextStepAdapter.access(from: other))
+        XCTAssertEqual(access.context, "Bonjour à tous, je cherche un télé…")
+        // La card, elle, garde la distance.
+        let card = try XCTUnwrap(NextStepAdapter.card(from: other))
+        XCTAssertEqual(card.metas.first?.text, String(format: "suggestion_meta_distance_m".localized, 800))
+    }
+
+    /// Une entraide sans description n'a pas de ligne de contexte : la distance n'en tient pas lieu.
+    func testExplorerContextOfAnActionWithoutDescriptionIsEmpty() throws {
+        let other = try item(#"{"id":null,"kind":"action","placement":"others","target":{"id":100,"title":"Je prête une perceuse","action_type":"contribution","distance":2.0},"reasons":[]}"#)
+        let access = try XCTUnwrap(NextStepAdapter.access(from: other))
+        XCTAssertNil(access.context)
+    }
+
+    /// Un mini-parcours : le contexte est le titre du premier contenu, sans la durée (qui reste sur la card).
+    func testExplorerContextOfAContentPathIsTheFirstTitleWithoutTheDuration() throws {
+        let other = try item("""
+        {"id":null,"kind":"content_path","placement":"others","target":null,
+         "targets":[{"id":31,"name":"Comprendre l'isolement","duration":2},{"id":32,"name":"Un geste simple","duration":3}],"reasons":[]}
+        """)
+        let access = try XCTUnwrap(NextStepAdapter.access(from: other))
+        XCTAssertEqual(access.context, "Comprendre l'isolement")
+        let card = try XCTUnwrap(NextStepAdapter.card(from: other))
+        XCTAssertEqual(card.metas.first?.text, "Comprendre l'isolement · " + String(format: "suggestion_meta_minutes".localized, 2))
+    }
+
+    /// Un événement en visio sans date : « En visio, depuis chez vous » est calculé par l'app, il ne sert pas de contexte.
+    func testExplorerContextOfAnOnlineOutingWithoutDateIsEmpty() throws {
+        let other = try item(#"{"id":null,"kind":"outing","placement":"others","target":{"id":43,"title":"Papotage solidaire","online":true,"distance":5.0,"metadata":{"starts_at":null,"display_address":null}},"reasons":[]}"#)
+        let access = try XCTUnwrap(NextStepAdapter.access(from: other))
+        XCTAssertNil(access.context)
+        let card = try XCTUnwrap(NextStepAdapter.card(from: other))
+        XCTAssertTrue(card.metas.contains { $0.text == "suggestion_meta_remote".localized }, "la card garde la mention visio")
+    }
+
+    /// Un événement ou un lieu sans date : l'adresse, avant la distance.
+    func testExplorerContextIsTheAddressBeforeTheDistance() throws {
+        let outing = try item(#"{"id":null,"kind":"outing","placement":"others","target":{"id":42,"title":"Café solidaire","online":false,"distance":0.8,"metadata":{"display_address":"Ménilmontant, Paris"}},"reasons":[]}"#)
+        XCTAssertEqual(try XCTUnwrap(NextStepAdapter.access(from: outing)).context, "Ménilmontant, Paris")
+        let poi = try item(#"{"id":null,"kind":"poi","placement":"others","target":{"id":55,"name":"Bagagerie solidaire du 20e","adress":"12 rue X, Paris","distance":1.2},"reasons":[]}"#)
+        XCTAssertEqual(try XCTUnwrap(NextStepAdapter.access(from: poi)).context, "12 rue X, Paris")
+    }
+
     /// Comme Android : appel au premier affichage et après un geste sur une suggestion, pas à chaque retour.
     func testEngineIsCalledOnFirstDisplayAndAfterATapOnly() throws {
         let provider = FakeProvider()
@@ -660,6 +711,36 @@ final class NextStepSuggestionTests: XCTestCase {
         coordinator.refreshIfNeeded()
         XCTAssertEqual(provider.fetchCount, 0)
         coordinator.setSuppressed(false)
+        XCTAssertEqual(provider.fetchCount, 1)
+    }
+
+    /// Comme Android : la home démarre retenue. `viewWillAppear` tourne avant la réponse du résumé de la home ;
+    /// le moteur n'est appelé qu'une fois le parcours de bienvenue connu, et une seule fois.
+    func testNoCallBeforeTheHomeKnowsTheWelcomeJourney() throws {
+        let provider = FakeProvider()
+        provider.payload = SuggestionPayload(hero: hero(1), explorer: [])
+        let coordinator = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in },
+                                                startsSuppressed: true)
+        coordinator.homeWillAppear()
+        coordinator.refreshIfNeeded()    // viewWillAppear, avant la réponse du résumé
+        XCTAssertEqual(provider.fetchCount, 0)
+        coordinator.setSuppressed(false) // le résumé dit : pas de parcours de bienvenue
+        XCTAssertEqual(provider.fetchCount, 1)
+        coordinator.refreshIfNeeded()    // retour sur la home sans geste
+        XCTAssertEqual(provider.fetchCount, 1)
+    }
+
+    /// Le résumé montre le parcours de bienvenue : toujours aucun appel, puis un appel dès qu'il se termine.
+    func testNoCallWhenTheSummaryShowsTheWelcomeJourney() throws {
+        let provider = FakeProvider()
+        provider.payload = SuggestionPayload(hero: hero(1), explorer: [])
+        let coordinator = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in },
+                                                startsSuppressed: true)
+        coordinator.refreshIfNeeded()
+        coordinator.setSuppressed(true)  // le résumé dit : parcours de bienvenue affiché
+        coordinator.refreshIfNeeded()
+        XCTAssertEqual(provider.fetchCount, 0)
+        coordinator.setSuppressed(false) // le parcours se termine
         XCTAssertEqual(provider.fetchCount, 1)
     }
 }

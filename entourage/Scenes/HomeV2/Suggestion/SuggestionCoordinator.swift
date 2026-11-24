@@ -25,7 +25,9 @@ final class SuggestionCoordinator {
     private var started = false
     private var needsRefresh = false
     /// Le parcours de bienvenue est affiché : la card ne l'est pas, le moteur n'est donc pas appelé.
-    private var isSuppressed = false
+    /// La home démarre retenue (`startsSuppressed`) : tant que son résumé n'a pas dit si le parcours est
+    /// affiché, le moteur n'est pas appelé, comme sur Android.
+    private var isSuppressed: Bool
     /// Appelé quand l'état change : la home reconstruit ses lignes.
     var onStateChanged: (() -> Void)?
 
@@ -38,10 +40,12 @@ final class SuggestionCoordinator {
 
     init(provider: SuggestionProviding = SuggestionProviderFactory.make(),
          presentSnackbar: @escaping SnackbarPresenter = SuggestionCoordinator.defaultSnackbar,
-         navigator: @escaping (SuggestionDestination) -> Void = SuggestionCoordinator.open) {
+         navigator: @escaping (SuggestionDestination) -> Void = SuggestionCoordinator.open,
+         startsSuppressed: Bool = false) {
         self.provider = provider
         self.presentSnackbar = presentSnackbar
         self.navigator = navigator
+        self.isSuppressed = startsSuppressed
     }
 
     var payload: SuggestionPayload? {

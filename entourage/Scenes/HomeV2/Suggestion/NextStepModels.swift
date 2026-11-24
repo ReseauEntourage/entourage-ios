@@ -208,10 +208,10 @@ enum NextStepAdapter {
                 metas.append(SuggestionMeta(icon: "🗓", text: eventDateFormatter.string(from: date)))
             }
             if target.isOnline {
-                metas.append(SuggestionMeta(icon: "💻", text: "suggestion_meta_remote".localized))
+                metas.append(.computed(icon: "💻", text: "suggestion_meta_remote".localized))
             } else {
                 if let address = target.visibleAddress { metas.append(SuggestionMeta(icon: "📍", text: address)) }
-                if let distance = distanceText(target.distanceKm) { metas.append(SuggestionMeta(icon: nil, text: distance)) }
+                if let distance = distanceText(target.distanceKm) { metas.append(.computed(icon: nil, text: distance)) }
             }
             return make(title: title, isRemote: target.isOnline, metas: metas, destination: .outing(id: id))
 
@@ -223,7 +223,7 @@ enum NextStepAdapter {
         case .action:
             guard let target = target, let id = id, let title = target.title else { return nil }
             var metas = [SuggestionMeta]()
-            if let distance = distanceText(target.distanceKm) { metas.append(SuggestionMeta(icon: "📍", text: distance)) }
+            if let distance = distanceText(target.distanceKm) { metas.append(.computed(icon: "📍", text: distance)) }
             let isContrib = target.actionType == "contribution"
             return make(title: title, author: target.authorName, authorAvatarURL: target.authorAvatarURL,
                         body: target.description, metas: metas, destination: .action(id: id, isContrib: isContrib))
@@ -235,7 +235,8 @@ enum NextStepAdapter {
             let metas = item.targets.prefix(3).compactMap { resource -> SuggestionMeta? in
                 guard let title = resource.title else { return nil }
                 let duration = resource.durationMinutes.map { " · " + String(format: "suggestion_meta_minutes".localized, $0) } ?? ""
-                return SuggestionMeta(icon: "📘", text: title + duration)
+                // La durée s'affiche sur la card ; le contexte d'une ligne Explorer est le titre seul, comme sur Android.
+                return SuggestionMeta(icon: "📘", text: title + duration, context: title)
             }
             return make(title: "suggestion_content_path_title".localized, metas: metas, destination: .resource(id: openedId))
 
@@ -247,7 +248,7 @@ enum NextStepAdapter {
             guard let target = target, let id = id, let title = target.title else { return nil }
             var metas = [SuggestionMeta]()
             if let address = target.visibleAddress { metas.append(SuggestionMeta(icon: "📍", text: address)) }
-            if let distance = distanceText(target.distanceKm) { metas.append(SuggestionMeta(icon: nil, text: distance)) }
+            if let distance = distanceText(target.distanceKm) { metas.append(.computed(icon: nil, text: distance)) }
             return make(title: title, metas: metas, destination: .poi(id: id))
 
         case .postMessage:
@@ -267,11 +268,13 @@ enum NextStepAdapter {
         }
     }
 
-    /// Une autre piste devient une ligne de la zone : son titre, une ligne de contexte tirée de ses
-    /// informations (la première, sinon la phrase du moteur, comme Android), et un tap qui ouvre la piste elle-même.
+    /// Une autre piste devient une ligne de la zone : son titre, une ligne de contexte, et un tap qui ouvre la piste
+    /// elle-même. Le contexte est, comme sur Android, la première information venue de la cible (date, adresse,
+    /// titre du contenu), jamais une information calculée par l'app (distance, « En visio ») ; sinon le texte
+    /// de la card (description d'une entraide, phrase du moteur).
     static func access(from item: NextStepItem) -> ExplorerAccess? {
         guard let card = card(from: item) else { return nil }
-        let context = card.metas.first(where: { !$0.text.isEmpty })?.text ?? card.body
+        let context = card.metas.compactMap { $0.context }.first(where: { !$0.isEmpty }) ?? card.body
         return ExplorerAccess(id: card.id, type: card.type, label: card.title,
                               context: context, destination: card.destination, targetId: card.targetId)
     }

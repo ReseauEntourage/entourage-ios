@@ -102,6 +102,34 @@ struct SuggestionMeta: Decodable, Equatable {
     /// Emoji ou nom de symbole : le moteur ne fournit pas d'icônes, l'app a un repli par type.
     let icon: String?
     let text: String
+    /// Texte repris comme ligne de contexte d'une ligne de la zone Explorer. Par défaut, le texte de la méta ;
+    /// `nil` pour une information calculée par l'app (distance, « En visio »), qui n'y figure pas, comme sur Android.
+    let context: String?
+
+    enum CodingKeys: String, CodingKey {
+        case icon, text
+    }
+
+    init(icon: String?, text: String, context: String?) {
+        self.icon = icon
+        self.text = text
+        self.context = context
+    }
+
+    init(icon: String?, text: String) {
+        self.init(icon: icon, text: text, context: text)
+    }
+
+    /// Information calculée par l'app (distance, « En visio ») : affichée sur la card, jamais reprise
+    /// comme contexte d'une ligne de la zone Explorer.
+    static func computed(icon: String?, text: String) -> SuggestionMeta {
+        SuggestionMeta(icon: icon, text: text, context: nil)
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        self.init(icon: try c.decodeIfPresent(String.self, forKey: .icon), text: try c.decode(String.self, forKey: .text))
+    }
 }
 
 struct SuggestionCard: Decodable {

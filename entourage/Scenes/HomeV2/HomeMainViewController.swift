@@ -59,7 +59,9 @@ class HomeMainViewController: UIViewController, UIPopoverPresentationControllerD
     var allDemands = [Action]()
     var allPedagos = [PedagogicResource]()
     var initialPedagos = [PedagogicResource]()
-    let suggestionCoordinator = SuggestionCoordinator()
+    /// Retenu jusqu'à ce que le résumé de la home dise si le parcours de bienvenue est affiché (`configureDTO`) :
+    /// le moteur n'est pas appelé dès `viewWillAppear`, comme sur Android.
+    let suggestionCoordinator = SuggestionCoordinator(startsSuppressed: true)
     var suggestionInsertIndex: Int?
     /// Le parcours de bienvenue et les suggestions ne s'affichent jamais ensemble.
     var isWelcomeJourneyDisplayed = false
