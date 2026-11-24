@@ -28,6 +28,7 @@ struct ProfileSettingsView: View {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.black)
                     }
+                    .accessibilityLabel("a11y_back".a11y)
                 }
             }
         }

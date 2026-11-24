@@ -185,6 +185,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         let cancelButton = UIButton(type: .system)
         cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         cancelButton.tintColor = .black
+        cancelButton.accessibilityLabel = "a11y_cancel_edit".a11y
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.addTarget(self, action: #selector(handleCancelEditTap), for: .touchUpInside)
 

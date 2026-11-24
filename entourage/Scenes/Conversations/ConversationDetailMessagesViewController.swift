@@ -399,6 +399,7 @@ private var imagePreviewOverlay: UIView?
         let cancelButton = UIButton(type: .system)
         cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         cancelButton.tintColor = .black
+        cancelButton.accessibilityLabel = "a11y_cancel_edit".a11y
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.addTarget(self, action: #selector(handleCancelEditTap), for: .touchUpInside)
 
@@ -698,6 +699,7 @@ private var imagePreviewOverlay: UIView?
             closeButton.setImage(img, for: .normal)
         }
         closeButton.tintColor = UIColor.appOrange
+        closeButton.accessibilityLabel = "a11y_close".a11y
         closeButton.backgroundColor = UIColor.appBeige
         closeButton.layer.cornerRadius = 16
         closeButton.layer.masksToBounds = true

@@ -708,6 +708,10 @@
 		5510F3B64A8C1EB6AC34C0FA /* ActionFormViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996446ACBF81466348030CC3 /* ActionFormViews.swift */; };
 		1DD44258C9D00F6B0CE2268D /* ActionFormContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E33D4945ADEE682572ED1 /* ActionFormContainerViewController.swift */; };
 		1E330F8B3BEA5F522B7F1E38 /* CreationFlowFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CAD46BE786B96ACCFF125 /* CreationFlowFormTests.swift */; };
+		04F57DA993CD0210BED60B1C /* Extensions_Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BBD8A75DB6CA2349D5B6FB /* Extensions_Accessibility.swift */; };
+		F5BBE498607986546B68E83E /* AccessibilityLabelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622862A75F7F18E5668AEE6F /* AccessibilityLabelsTests.swift */; };
+		6F24F4ABD005553F63F3AF44 /* AccessibilityAnnouncerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406129B8A2A0091138E51196 /* AccessibilityAnnouncerTests.swift */; };
+		98DC1F1A1FFC7DAB2A67FE3C /* AccessibilityAnnouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AFD79E19AD988744A6BF13 /* AccessibilityAnnouncer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1435,6 +1439,10 @@
 		996446ACBF81466348030CC3 /* ActionFormViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFormViews.swift; sourceTree = "<group>"; };
 		065E33D4945ADEE682572ED1 /* ActionFormContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFormContainerViewController.swift; sourceTree = "<group>"; };
 		2F6CAD46BE786B96ACCFF125 /* CreationFlowFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationFlowFormTests.swift; sourceTree = "<group>"; };
+		B1BBD8A75DB6CA2349D5B6FB /* Extensions_Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_Accessibility.swift; sourceTree = "<group>"; };
+		622862A75F7F18E5668AEE6F /* AccessibilityLabelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityLabelsTests.swift; sourceTree = "<group>"; };
+		406129B8A2A0091138E51196 /* AccessibilityAnnouncerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityAnnouncerTests.swift; sourceTree = "<group>"; };
+		F8AFD79E19AD988744A6BF13 /* AccessibilityAnnouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityAnnouncer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1520,6 +1528,7 @@
 				0224597927FF454A00944DE4 /* Extensions_UITextField.swift */,
 				2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */,
 				248360292F2A483300CAD0C7 /* UILabel+Animation.swift */,
+				B1BBD8A75DB6CA2349D5B6FB /* Extensions_Accessibility.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1795,6 +1804,7 @@
 				26E66F112E7044B900E65BFB /* AppSignableManager.swift */,
 				26E2877E2E9E51C20045A9FA /* CountryCode.swift */,
 				F90CBEFBAFC7A854F6527EFB /* Testing */,
+				F8AFD79E19AD988744A6BF13 /* AccessibilityAnnouncer.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -2387,6 +2397,8 @@
 				41E9EA6DF8689B390EBB7E84 /* NextStepSuggestionTests.swift */,
 				7A1C0D8E2F0B4C6A9D3E5F12 /* PhoneNumberDetectorTests.swift */,
 				7A1C0D8E2F0B4C6A9D3E5F91 /* SystemOpenedLinksTests.swift */,
+				622862A75F7F18E5668AEE6F /* AccessibilityLabelsTests.swift */,
+				406129B8A2A0091138E51196 /* AccessibilityAnnouncerTests.swift */,
 			);
 			name = entourageTests;
 			path = entourageTests;
@@ -3826,6 +3838,8 @@
 				A37EE1CCBA3FF8A07267FCB7 /* StubBackend.swift in Sources */,
 				11A55A2672B5E9321A2AB747 /* UITestBootstrap.swift in Sources */,
 				D673E233741D1CC202E8C1CF /* WelcomeJourneyAutoSkip.swift in Sources */,
+				04F57DA993CD0210BED60B1C /* Extensions_Accessibility.swift in Sources */,
+				98DC1F1A1FFC7DAB2A67FE3C /* AccessibilityAnnouncer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3845,6 +3859,8 @@
 				4C05785DA97EE9884D32B543 /* NextStepSuggestionTests.swift in Sources */,
 				7A1C0D8E2F0B4C6A9D3E5F13 /* PhoneNumberDetectorTests.swift in Sources */,
 				7A1C0D8E2F0B4C6A9D3E5F92 /* SystemOpenedLinksTests.swift in Sources */,
+				F5BBE498607986546B68E83E /* AccessibilityLabelsTests.swift in Sources */,
+				6F24F4ABD005553F63F3AF44 /* AccessibilityAnnouncerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

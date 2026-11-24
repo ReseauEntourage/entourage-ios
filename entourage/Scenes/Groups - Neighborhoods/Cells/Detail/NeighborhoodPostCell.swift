@@ -212,6 +212,7 @@ class NeighborhoodPostCell: UITableViewCell {
         survey.choices.enumerated().forEach { index, choice in
             let surveyOptionView = SurveyOptionView()
             surveyOptionView.questionLabel.text = choice
+            surveyOptionView.radioButton.accessibilityLabel = choice
             surveyOptionView.optionIndex = index
             surveyOptionView.radioButton.isSelected = surveyResponses[index]
 

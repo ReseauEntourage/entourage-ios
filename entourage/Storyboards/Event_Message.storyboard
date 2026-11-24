@@ -47,6 +47,9 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="ic_signal_post_message"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_report"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="action_signal:" destination="Jyh-f0-1s0" eventType="touchUpInside" id="8rP-zS-quh"/>
                                         </connections>

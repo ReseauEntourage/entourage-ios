@@ -174,7 +174,7 @@ class MainTabbarViewController: UITabBarController {
         homeVC = UINavigationController.init(rootViewController: _homeVC)
         homeVC.isNavigationBarHidden = true
         homeVC.tabBarItem.title = "tabbar_home".localized
-        homeVC.tabBarItem.accessibilityLabel = "Home"
+        homeVC.tabBarItem.accessibilityLabel = "tabbar_home".localized
         homeVC.tabBarItem.tag = 0 //
         homeVC.tabBarItem.image = UIImage.init(named: "ic_home_off")?.withRenderingMode(.alwaysOriginal)
         homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_home_on")

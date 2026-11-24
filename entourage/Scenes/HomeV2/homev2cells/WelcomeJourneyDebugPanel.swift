@@ -64,6 +64,7 @@ struct WelcomeJourneyDebugView: View {
                 Button(action: onClose) {
                     Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
                 }
+                .accessibilityLabel("a11y_close".a11y)
                 .accessibilityIdentifier("welcome_debug_close")
             }
 

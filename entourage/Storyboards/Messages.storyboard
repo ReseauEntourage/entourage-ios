@@ -318,6 +318,9 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="ic_camera"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_add_photo"/>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ft8-DI-A89">
                                         <rect key="frame" x="356" y="14" width="40" height="40"/>
@@ -327,6 +330,9 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="ic_more_vertical"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_more_options"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="action_show_params:" destination="l3V-U8-gfv" eventType="touchUpInside" id="GjF-Nk-8Cv"/>
                                         </connections>
@@ -361,6 +367,9 @@
                                                 </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="ic_close_orange_v8"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_close"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="action_close_new_view:" destination="l3V-U8-gfv" eventType="touchUpInside" id="bAy-H7-3hD"/>
                                                 </connections>
@@ -1256,6 +1265,9 @@ L2</string>
                                                                     </constraints>
                                                                     <inset key="imageEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
                                                                     <state key="normal" image="ic_close_orange_v8"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_clear_search"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <action selector="action_clear:" destination="s2e-GG-r76" eventType="touchUpInside" id="Ix5-MM-t5b"/>
                                                                     </connections>

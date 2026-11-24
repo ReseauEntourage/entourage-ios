@@ -61,6 +61,7 @@ struct WelcomeEventsListView: View {
                             .renderingMode(.template)
                             .foregroundColor(.black)
                     }
+                    .accessibilityLabel("a11y_back".a11y)
                     .padding(.leading, 10)
                     .padding(.top, 10)
 

@@ -51,6 +51,7 @@ struct EventLimitedPlacesModalView: View {
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(Color(UIColor.appOrange))
                     }
+                    .accessibilityLabel("a11y_close".a11y)
                 }
 
                 Text("event_limited_places_title".localized)

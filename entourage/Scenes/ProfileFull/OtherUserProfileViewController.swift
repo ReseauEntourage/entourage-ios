@@ -107,6 +107,7 @@ struct OtherUserProfileView: View {
                                 .background(Color.black.opacity(0.45))
                                 .clipShape(Circle())
                         }
+                        .accessibilityLabel("a11y_back".a11y)
                         Spacer()
                         Button(action: { viewModel.reportUser() }) {
                             Image("ic_signal_orange")
@@ -118,6 +119,7 @@ struct OtherUserProfileView: View {
                                 .background(Color.black.opacity(0.45))
                                 .clipShape(Circle())
                         }
+                        .accessibilityLabel("a11y_report_user".a11y)
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, safeAreaTop + 8),

@@ -50,6 +50,7 @@ struct BadgesIntroView: View {
                         .background(Color(UIColor.systemGray6))
                         .clipShape(Circle())
                 }
+                .accessibilityLabel("a11y_close".a11y)
                 .padding(.trailing, 20)
                 .padding(.top, 16)
             }

@@ -31,6 +31,9 @@
                     <rect key="frame" x="353" y="78.333333333333329" width="20" height="22"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" image="ic_close_orange_v8"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_close"/>
+                    </userDefinedRuntimeAttributes>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxI-ZQ-I1H">
                     <rect key="frame" x="20" y="119.66666666666667" width="353" height="1"/>

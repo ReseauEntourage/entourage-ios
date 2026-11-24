@@ -171,6 +171,8 @@ struct FormFlowErrorText: View {
         .foregroundColor(FormFlowStyle.errorText)
         .padding(.top, 7)
         .accessibility(label: Text(message))
+        .onAppear { AccessibilityAnnouncer.announce(message) }
+        .onChange(of: message) { AccessibilityAnnouncer.announce($0) }
     }
 }
 

@@ -147,6 +147,7 @@ private struct PasswordFloatingField: View {
                             .foregroundColor(.secondary)
                             .padding(8)
                     }
+                    .accessibilityLabel((isSecured ? "a11y_show_password" : "a11y_hide_password").a11y)
                 }
                 .padding(.horizontal, 12)
                 .frame(height: 52)
@@ -379,6 +380,7 @@ struct LoginView: View {
                         .foregroundColor(.black)
                         .padding(.vertical, 12)
                 }
+                .accessibilityLabel("a11y_back".a11y)
                 
                 Text("login_title".localized) // "Connexion"
                     .font(.entourageTitle(24))

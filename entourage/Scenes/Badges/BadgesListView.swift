@@ -115,6 +115,7 @@ struct BadgesListView: View {
                         .foregroundColor(.black)
                         .padding(.leading, hPad)
                 }
+                .accessibilityLabel("a11y_back".a11y)
                 Spacer()
             }
         }

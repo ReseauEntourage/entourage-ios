@@ -1,0 +1,44 @@
+//
+//  Extensions_Accessibility.swift
+//  entourage
+//
+//  Noms vocaux (VoiceOver) : libellés localisés avec repli sur le français,
+//  et clé de libellé posable depuis Interface Builder.
+//
+
+import UIKit
+
+extension String {
+    /// Libellé vocal localisé.
+    ///
+    /// `"clé".localized` renvoie la **clé brute** quand elle manque dans la langue choisie dans l'app
+    /// (`LanguageManager`, aucun repli) : VoiceOver la lirait telle quelle. Ici, on retombe sur le français,
+    /// et sur une chaîne vide (donc le comportement par défaut de VoiceOver) si la clé manque aussi en français.
+    var a11y: String {
+        let value = localized
+        if value != self { return value }
+        let fallback = String.a11yFallbackBundle?.localizedString(forKey: self, value: nil, table: nil) ?? self
+        return fallback == self ? "" : fallback
+    }
+
+    private static let a11yFallbackBundle: Bundle? = {
+        guard let path = Bundle.main.path(forResource: "fr", ofType: "lproj") else { return nil }
+        return Bundle(path: path)
+    }()
+}
+
+extension UIView {
+    /// Clé du libellé vocal, posée depuis Interface Builder (attribut d'exécution `a11yKey`, type String).
+    ///
+    /// Résolue au chargement du xib ou du storyboard, donc dans la langue choisie dans l'app
+    /// (le changement de langue recharge l'écran racine, voir `LanguageManager.setLocale`).
+    /// Un libellé saisi directement dans l'inspecteur Interface Builder ne suivrait pas ce choix.
+    @objc var a11yKey: String? {
+        get { return nil }
+        set {
+            guard let key = newValue, !key.isEmpty else { return }
+            isAccessibilityElement = true
+            accessibilityLabel = key.a11y
+        }
+    }
+}

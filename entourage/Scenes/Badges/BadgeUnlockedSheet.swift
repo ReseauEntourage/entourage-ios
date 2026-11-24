@@ -78,6 +78,7 @@ struct BadgeUnlockedSheet: View {
                     .background(Color(UIColor.systemGray6))
                     .clipShape(Circle())
             }
+            .accessibilityLabel("a11y_close".a11y)
             .padding(16),
             alignment: .topTrailing
         )

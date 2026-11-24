@@ -75,7 +75,7 @@ class MJErrorInputView: UIView {
         self.timerFadeOutTrigger = timerFadeOutTrigger ?? self.timerFadeOutTrigger
         self.fadeInTime = fadeInTime ?? self.fadeInTime
         self.fadeOutTime = fadeOutTime ?? self.fadeOutTime
-        
+        AccessibilityAnnouncer.announce(ui_title.text)
         
         UIView.animate(withDuration: TimeInterval(self.fadeInTime), delay: 0, options: .curveEaseIn) {
             self.ui_content_view.isHidden = false

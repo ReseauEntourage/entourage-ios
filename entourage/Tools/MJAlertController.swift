@@ -68,6 +68,14 @@ class MJAlertController: UIViewController {
             setupAlert()
         }
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // VoiceOver : l'alerte est modale et son contenu est lu dès son ouverture (titre puis message).
+        ui_alert_view?.accessibilityViewIsModal = true
+        let spoken = [alertTitle, alertMessage].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: ". ")
+        UIAccessibility.post(notification: .screenChanged, argument: spoken.isEmpty ? ui_alert_view : spoken)
+    }
     
     private func revertWindow() {
         window?.resignKey()

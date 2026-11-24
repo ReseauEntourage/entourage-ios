@@ -161,6 +161,7 @@ class MainGuideViewController: UIViewController {
             let btnLeftMenu: UIButton = UIButton()
             btnLeftMenu.setImage(UIImage(named: "backItem"), for: .normal)
             btnLeftMenu.addTarget(self, action: #selector(onBack), for: .touchUpInside)
+            btnLeftMenu.accessibilityLabel = "a11y_back".a11y
             btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 34/2, height: 28/2)
             let barButton = UIBarButtonItem(customView: btnLeftMenu)
             self.navigationItem.leftBarButtonItem = barButton
@@ -169,6 +170,7 @@ class MainGuideViewController: UIViewController {
         let btnRightMenu: UIButton = UIButton()
         btnRightMenu.setImage(UIImage(named: "search_new_orange"), for: .normal)
         btnRightMenu.addTarget(self, action: #selector(showSearch), for: .touchUpInside)
+        btnRightMenu.accessibilityLabel = "a11y_search".a11y
         btnRightMenu.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
         let barButtonRight = UIBarButtonItem(customView: btnRightMenu)
         self.navigationItem.rightBarButtonItem = barButtonRight
@@ -305,6 +307,7 @@ class MainGuideViewController: UIViewController {
         let showCurrentLocationButton = UIButton(frame: CGRect(x: x, y: y, width: buttonSize, height: buttonSize))
         
         showCurrentLocationButton.setImage(UIImage.init(named: "geoloc"), for: .normal)
+        showCurrentLocationButton.accessibilityLabel = "a11y_use_my_location".a11y
         showCurrentLocationButton.backgroundColor = .white
         showCurrentLocationButton.clipsToBounds = true
         showCurrentLocationButton.layer.cornerRadius = buttonSize / 2

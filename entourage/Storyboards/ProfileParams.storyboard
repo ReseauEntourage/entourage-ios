@@ -2625,6 +2625,9 @@
                                                     <constraint firstAttribute="height" constant="40" id="kpG-fn-Ixq"/>
                                                 </constraints>
                                                 <state key="normal" image="ic_bt_location"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_use_my_location"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="action_location:" destination="rXC-aO-CgB" eventType="touchUpInside" id="pUr-bM-H4I"/>
                                                 </connections>

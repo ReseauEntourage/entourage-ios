@@ -49,6 +49,7 @@ class ConversationStaffWarningView: UIView, UITextViewDelegate {
         let closeImage = UIImage(systemName: "xmark")?.withConfiguration(symbolConfig)
         closeButton.setImage(closeImage, for: .normal)
         closeButton.tintColor = .appOrange
+        closeButton.accessibilityLabel = "a11y_close".a11y
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(closeButton)

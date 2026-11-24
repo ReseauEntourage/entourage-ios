@@ -788,6 +788,7 @@ struct UnsubscribedBottomSwiftUIView: View {
                             .foregroundColor(.white)
                     }
                 }
+                .accessibilityLabel("a11y_add_unsubscribed".a11y)
                 .padding(.trailing, 20)
                 // 🔥 On remonte généreusement le bouton pour qu'il soit bien au-dessus du texte et de l'encoche (augmenté à 90 / 60)
                 .padding(.bottom, (viewModel.askCount > 0 || viewModel.offerCount > 0) ? 90 : 60)

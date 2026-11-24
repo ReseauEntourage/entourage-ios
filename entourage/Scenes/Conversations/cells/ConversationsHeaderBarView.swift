@@ -38,6 +38,7 @@ struct ConversationsHeaderBarView: View {
                     }
                 }
             }
+            .accessibilityLabel("a11y_filter".a11y)
         }
         .padding(.horizontal, 20)
     }

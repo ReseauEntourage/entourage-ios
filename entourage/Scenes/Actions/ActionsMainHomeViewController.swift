@@ -198,6 +198,7 @@ class ActionsMainHomeViewController: UIViewController {
             // Fallback on earlier versions
         }
         arrowButton.tintColor = UIColor.appOrange
+        arrowButton.accessibilityLabel = "a11y_back".a11y
         arrowButton.addTarget(self, action: #selector(closeTextField), for: .touchUpInside)
         arrowButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
@@ -215,6 +216,7 @@ class ActionsMainHomeViewController: UIViewController {
             // Fallback on earlier versions
         }
         crossButton.tintColor = UIColor.appOrange
+        crossButton.accessibilityLabel = "a11y_clear_search".a11y
         crossButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
         crossButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         

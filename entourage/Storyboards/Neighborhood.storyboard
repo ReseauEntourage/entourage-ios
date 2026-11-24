@@ -493,6 +493,9 @@
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
                                                             <state key="normal" image="ic_close_orange_v8"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_clear_search"/>
+                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
                                                                 <action selector="action_clear:" destination="R8o-mI-l8x" eventType="touchUpInside" id="X1G-bd-uAn"/>
                                                             </connections>
@@ -836,6 +839,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_button_plus_fill"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_create_group"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="action_create_group:" destination="m6W-wa-xuK" eventType="touchUpInside" id="Cbv-S1-2Oj"/>
                                 </connections>
@@ -1559,6 +1565,9 @@
                                                                     </constraints>
                                                                     <inset key="imageEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
                                                                     <state key="normal" image="ic_close_orange_v8"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_clear_search"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                     <connections>
                                                                         <action selector="action_clear:" destination="JyK-wL-SND" eventType="touchUpInside" id="U1R-Ha-u7e"/>
                                                                     </connections>
@@ -1912,6 +1921,9 @@
                                 <color key="tintColor" name="orange_app"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_settings"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_group_settings"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="action_show_params:" destination="pqB-Ol-icc" eventType="touchUpInside" id="p5Q-VL-2B0"/>
                                 </connections>
@@ -2293,6 +2305,9 @@
                                 <color key="tintColor" name="orange_app"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_settings"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_group_settings"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="action_show_params:" destination="JNd-Ds-RaG" eventType="touchUpInside" id="5dc-pD-2TE"/>
                                 </connections>
@@ -2372,6 +2387,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_button_plus_fill"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_create_event"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="action_create_event:" destination="6Fk-xK-AMG" eventType="touchUpInside" id="SpO-Y6-mI8"/>
                                 </connections>
@@ -2608,6 +2626,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_button_plus_fill"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_create_group"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="create_group:" destination="yD5-G4-0ul" eventType="touchUpInside" id="KjS-g0-Jga"/>
                                 </connections>

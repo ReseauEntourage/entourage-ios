@@ -2470,3 +2470,27 @@ Choose a topic to get started.";
 "suggestion_meta_distance_m" = "%d m from you";
 "suggestion_meta_distance_km" = "%d km from you";
 "suggestion_meta_minutes" = "%d min";
+
+/* Accessibilité : noms vocaux (VoiceOver), voir Extensions_Accessibility.swift */
+"a11y_close" = "Close";
+"a11y_back" = "Back";
+"a11y_share" = "Share";
+"a11y_report" = "Report";
+"a11y_create_event" = "Create an event";
+"a11y_create_group" = "Create a group";
+"a11y_event_options" = "Event options";
+"a11y_group_settings" = "Group settings";
+"a11y_add_photo" = "Add a photo";
+"a11y_more_options" = "More options";
+"a11y_clear_search" = "Clear search";
+"a11y_use_my_location" = "Use my location";
+"a11y_save_image" = "Save image";
+"a11y_filter" = "Filter";
+"a11y_settings" = "Settings";
+"a11y_edit_photo" = "Edit photo";
+"a11y_report_user" = "Report user";
+"a11y_show_password" = "Show password";
+"a11y_hide_password" = "Hide password";
+"a11y_add_unsubscribed" = "Add participants without an account";
+"a11y_cancel_edit" = "Cancel editing";
+"a11y_search" = "Search";

@@ -187,6 +187,7 @@ struct MyProfileView: View {
                                 .background(Color.black.opacity(0.45))
                                 .clipShape(Circle())
                         }
+                        .accessibilityLabel("a11y_back".a11y)
                         Spacer()
                         Button(action: { showSettings = true }) {
                             Image(systemName: "gearshape.fill")
@@ -196,6 +197,7 @@ struct MyProfileView: View {
                                 .background(Color.black.opacity(0.45))
                                 .clipShape(Circle())
                         }
+                        .accessibilityLabel("a11y_settings".a11y)
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, safeAreaTop + 8),
@@ -361,6 +363,7 @@ struct MyProfileView: View {
                                 .background(Color.orange)
                                 .clipShape(Circle())
                         }
+                        .accessibilityLabel("a11y_edit_photo".a11y)
                         .frame(width: 32, height: 32)
                     }
                     .frame(width: 120, height: 120)

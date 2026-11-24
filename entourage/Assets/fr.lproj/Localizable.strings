@@ -2500,3 +2500,27 @@ Choisissez un sujet pour démarrer.";
 "suggestion_meta_distance_m" = "À %d m de vous";
 "suggestion_meta_distance_km" = "À %d km de vous";
 "suggestion_meta_minutes" = "%d min";
+
+/* Accessibilité : noms vocaux (VoiceOver), voir Extensions_Accessibility.swift */
+"a11y_close" = "Fermer";
+"a11y_back" = "Retour";
+"a11y_share" = "Partager";
+"a11y_report" = "Signaler";
+"a11y_create_event" = "Créer un événement";
+"a11y_create_group" = "Créer un groupe";
+"a11y_event_options" = "Options de l'événement";
+"a11y_group_settings" = "Paramètres du groupe";
+"a11y_add_photo" = "Ajouter une photo";
+"a11y_more_options" = "Plus d'options";
+"a11y_clear_search" = "Effacer la recherche";
+"a11y_use_my_location" = "Utiliser ma position";
+"a11y_save_image" = "Enregistrer l'image";
+"a11y_filter" = "Filtrer";
+"a11y_settings" = "Paramètres";
+"a11y_edit_photo" = "Modifier la photo";
+"a11y_report_user" = "Signaler l'utilisateur";
+"a11y_show_password" = "Afficher le mot de passe";
+"a11y_hide_password" = "Masquer le mot de passe";
+"a11y_add_unsubscribed" = "Renseigner les participants non inscrits";
+"a11y_cancel_edit" = "Annuler la modification";
+"a11y_search" = "Rechercher";

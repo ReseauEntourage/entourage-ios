@@ -59,6 +59,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_button_plus_fill"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_create_event"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="OnBtnNewClick:" destination="VrH-NF-DrI" eventType="touchUpInside" id="JL9-hz-hKx"/>
                                 </connections>
@@ -449,6 +452,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_button_plus_fill"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_create_event"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="action_create_event:" destination="H4x-rh-57L" eventType="touchUpInside" id="sD2-FV-ZN6"/>
                                 </connections>
@@ -611,6 +617,9 @@
                                 <color key="tintColor" name="orange_app"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_setting_mini"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_event_options"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="action_show_params:" destination="1Sc-VH-DcS" eventType="touchUpInside" id="2mn-Sb-9N8"/>
                                 </connections>

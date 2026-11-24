@@ -752,6 +752,9 @@
                                             <constraint firstAttribute="height" constant="30" id="RKO-Kd-sFE"/>
                                         </constraints>
                                         <state key="normal" image="close_new_orange"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_close"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="action_close_pop:" destination="lY2-rt-Wu4" eventType="touchUpInside" id="GNv-Wi-qwG"/>
                                         </connections>
@@ -1239,6 +1242,9 @@ un autre mot-clé ?</string>
                                             <constraint firstAttribute="height" constant="22" id="e8Q-mY-QaN"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="whiteClose"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_close"/>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="anm-6m-LN4">
                                         <rect key="frame" x="11" y="53" width="313" height="141.5"/>
@@ -1278,6 +1284,9 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                             <constraint firstAttribute="width" constant="22" id="atx-d0-1ct"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="whiteClose"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="a11yKey" value="a11y_close"/>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DrQ-fQ-qnH">
                                         <rect key="frame" x="11" y="53" width="313" height="217"/>

@@ -82,7 +82,7 @@ final class ImageListViewController: UIViewController {
         backButton.image = img?.withRenderingMode(.alwaysTemplate)
         backButton.contentMode = .scaleAspectFit
         backButton.isUserInteractionEnabled = true
-        backButton.accessibilityLabel = "Retour"
+        backButton.accessibilityLabel = "a11y_back".a11y
         backButton.accessibilityTraits = UIAccessibilityTraits.button
         if #available(iOS 13.0, *) {
             backButton.tintColor = .label

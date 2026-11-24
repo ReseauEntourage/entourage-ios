@@ -348,6 +348,7 @@ extension UIView {
 extension UIView {
     func showToast(message: String, duration: TimeInterval = 2.0) {
         guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return }
+        AccessibilityAnnouncer.announce(message)
 
         let toastLabel = UILabel(frame: CGRect(x: window.frame.size.width / 2 - 150, y: window.frame.size.height - 100, width: 300, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
