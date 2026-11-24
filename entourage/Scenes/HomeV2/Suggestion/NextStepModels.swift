@@ -44,9 +44,16 @@ struct NextStepTarget: Decodable {
     let isWatched: Bool
     /// Zone d'un groupe : absente pour un groupe thématique national.
     let zone: String?
+    /// Horaires d'un lieu solidaire (texte brut, parfois sur plusieurs lignes).
+    let hours: String?
+    /// Les horaires à afficher : `nil` s'ils sont absents ou vides.
+    var visibleHours: String? {
+        guard let trimmed = hours?.trimmingCharacters(in: .whitespacesAndNewlines), !trimmed.isEmpty else { return nil }
+        return trimmed
+    }
 
     enum CodingKeys: String, CodingKey {
-        case id, title, name, description, online, national, distance, metadata, author, adress, address, duration, watched, zone
+        case id, title, name, description, online, national, distance, metadata, author, adress, address, duration, watched, zone, hours
         case actionType = "action_type"
     }
 
@@ -113,6 +120,7 @@ struct NextStepTarget: Decodable {
         durationMinutes = try? c.decode(Int.self, forKey: .duration)
         isWatched = (try? c.decode(Bool.self, forKey: .watched)) ?? false
         zone = try? c.decode(String.self, forKey: .zone)
+        hours = try? c.decode(String.self, forKey: .hours)
     }
 }
 
@@ -247,8 +255,9 @@ enum NextStepAdapter {
         case .poi:
             guard let target = target, let id = id, let title = target.title else { return nil }
             var metas = [SuggestionMeta]()
+            // Comme Android : l'adresse puis les horaires, jamais de distance (design.md, décision 14).
             if let address = target.visibleAddress { metas.append(SuggestionMeta(icon: "📍", text: address)) }
-            if let distance = distanceText(target.distanceKm) { metas.append(.computed(icon: nil, text: distance)) }
+            if let hours = target.visibleHours { metas.append(SuggestionMeta(icon: "🕒", text: hours)) }
             return make(title: title, metas: metas, destination: .poi(id: id))
 
         case .postMessage:

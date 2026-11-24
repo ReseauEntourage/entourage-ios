@@ -678,12 +678,38 @@ final class NextStepSuggestionTests: XCTestCase {
         XCTAssertTrue(card.metas.contains { $0.text == "suggestion_meta_remote".localized }, "la card garde la mention visio")
     }
 
-    /// Un événement ou un lieu sans date : l'adresse, avant la distance.
+    /// Un événement sans date : l'adresse, avant la distance. Un lieu : son adresse, pas ses horaires.
     func testExplorerContextIsTheAddressBeforeTheDistance() throws {
         let outing = try item(#"{"id":null,"kind":"outing","placement":"others","target":{"id":42,"title":"Café solidaire","online":false,"distance":0.8,"metadata":{"display_address":"Ménilmontant, Paris"}},"reasons":[]}"#)
         XCTAssertEqual(try XCTUnwrap(NextStepAdapter.access(from: outing)).context, "Ménilmontant, Paris")
-        let poi = try item(#"{"id":null,"kind":"poi","placement":"others","target":{"id":55,"name":"Bagagerie solidaire du 20e","adress":"12 rue X, Paris","distance":1.2},"reasons":[]}"#)
+        let poi = try item(#"{"id":null,"kind":"poi","placement":"others","target":{"id":55,"name":"Bagagerie solidaire du 20e","adress":"12 rue X, Paris","hours":"lun : 8h30 à 11h00","distance":1.2},"reasons":[]}"#)
         XCTAssertEqual(try XCTUnwrap(NextStepAdapter.access(from: poi)).context, "12 rue X, Paris")
+    }
+
+    /// Comme Android : un lieu solidaire affiche son adresse puis ses horaires, jamais de distance (décision 14).
+    func testPoiShowsAddressThenOpeningHoursAndNoDistance() throws {
+        let card = try self.card(#"{"id":20,"kind":"poi","placement":"hero","target":{"id":55,"name":"Bagagerie solidaire du 20e","adress":"12 rue X, Paris","hours":"lun : 8h30 à 11h00\nmar : Fermé","distance":1.2},"reasons":[]}"#)
+        XCTAssertEqual(card.metas.map { $0.icon }, ["📍", "🕒"])
+        XCTAssertEqual(card.metas.map { $0.text }, ["12 rue X, Paris", "lun : 8h30 à 11h00\nmar : Fermé"])
+        // Des horaires vides ne font pas de ligne.
+        let noHours = try self.card(#"{"id":21,"kind":"poi","placement":"hero","target":{"id":56,"name":"Accueil de jour","adress":"3 rue Y, Lyon","hours":"  "},"reasons":[]}"#)
+        XCTAssertEqual(noHours.metas.map { $0.text }, ["3 rue Y, Lyon"])
+    }
+
+    /// Comme Android : le texte lu par VoiceOver suit l'ordre type, puces, auteur, titre, texte, informations.
+    func testHeroReadoutFollowsTheAndroidOrder() throws {
+        let action = try self.card(#"{"id":16,"kind":"action","placement":"hero","target":{"id":99,"title":"Besoin d'un téléphone","description":"Bonjour à tous","action_type":"solicitation","distance":0.8,"author":{"id":5,"display_name":"Nino D."}},"reasons":[]}"#)
+        XCTAssertEqual(action.accessibilityReadout,
+                       ["suggestion_badge_action".localized, "Nino D.", "Besoin d'un téléphone", "Bonjour à tous",
+                        String(format: "suggestion_meta_distance_m".localized, 800)].joined(separator: ". "))
+        let group = try self.card(#"{"id":14,"kind":"neighborhood","placement":"hero","target":{"id":7,"name":"Voisins Ménilmontant","national":false,"address":{"display_address":"Paris 11e"}},"reasons":[]}"#)
+        XCTAssertEqual(group.accessibilityReadout,
+                       ["suggestion_badge_neighborhood".localized, "suggestion_chip_local".localized, "Voisins Ménilmontant", "Paris 11e"]
+                        .joined(separator: ". "))
+        let online = try self.card(#"{"id":13,"kind":"outing","placement":"hero","target":{"id":43,"title":"Papotage solidaire","online":true,"metadata":{"starts_at":null,"display_address":null}},"reasons":[]}"#)
+        XCTAssertEqual(online.accessibilityReadout,
+                       ["suggestion_badge_outing".localized, "suggestion_chip_remote".localized, "Papotage solidaire",
+                        "suggestion_meta_remote".localized].joined(separator: ". "))
     }
 
     /// Comme Android : appel au premier affichage et après un geste sur une suggestion, pas à chaque retour.

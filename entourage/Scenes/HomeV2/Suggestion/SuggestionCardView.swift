@@ -62,6 +62,19 @@ extension SuggestionCard {
         }
         return type.badgeKey
     }
+
+    /// Texte lu par VoiceOver pour le contenu de la card, dans l'ordre d'Android : type, puces (visio, quartier,
+    /// national), auteur, titre, texte, informations.
+    var accessibilityReadout: String {
+        var parts = [badgeKey.localized]
+        if isRemote { parts.append("suggestion_chip_remote".localized) }
+        if let chip = chip, !chip.isEmpty { parts.append(chip) }
+        if let author = authorName, !author.isEmpty, type != .connexion { parts.append(author) }
+        parts.append(title)
+        if let body = body, !body.isEmpty { parts.append(body) }
+        parts.append(contentsOf: metas.map { $0.text })
+        return parts.joined(separator: ". ")
+    }
 }
 
 extension SuggestionCTA {
@@ -351,7 +364,7 @@ final class SuggestionCardView: UIView {
         ui_info_container.subviews.forEach { $0.isHidden = !hasReasons }
         accessibilityElements = hasReasons ? [ui_content, ui_info_button, ui_primary, ui_later] : [ui_content, ui_primary, ui_later]
 
-        ui_content.accessibilityLabel = accessibilityText(for: card)
+        ui_content.accessibilityLabel = card.accessibilityReadout
     }
 
     /// Vrai quand la card n'a aucune phrase du moteur : le bouton « ? » est alors masqué.
@@ -380,13 +393,6 @@ final class SuggestionCardView: UIView {
             guard let self = self, image != nil, self.mediaPhotoURL == url else { return }
             self.ui_media_label.isHidden = true
         })
-    }
-
-    private func accessibilityText(for card: SuggestionCard) -> String {
-        var parts = [card.badgeKey.localized, card.title]
-        if let body = card.body, !body.isEmpty { parts.append(body) }
-        parts.append(contentsOf: card.metas.map { $0.text })
-        return parts.joined(separator: ". ")
     }
 
     private func makeBadge(text: String, color: UIColor, filled: Bool) -> UIView {
