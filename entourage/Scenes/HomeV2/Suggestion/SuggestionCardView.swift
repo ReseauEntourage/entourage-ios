@@ -119,6 +119,7 @@ final class SuggestionCardView: UIView {
     private let ui_primary = UIButton(type: .custom)
     private let ui_later = UIButton(type: .custom)
     private let ui_content = UIView()
+    private let ui_actions = UIStackView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -155,7 +156,7 @@ final class SuggestionCardView: UIView {
         ui_info_button.accessibilityTraits = .button
         ui_info_button.accessibilityIdentifier = "suggestion_info_button"
 
-        // Zone tactile ≥ 44 pt autour du cercle visuel de 30 pt.
+        // Zone tactile de 48 pt (comme Android) autour du cercle visuel de 30 pt.
         let infoHit = ui_info_container
         infoHit.translatesAutoresizingMaskIntoConstraints = false
         ui_info_button.translatesAutoresizingMaskIntoConstraints = false
@@ -166,8 +167,8 @@ final class SuggestionCardView: UIView {
         infoTap.isAccessibilityElement = false
         infoHit.addSubview(infoTap)
         NSLayoutConstraint.activate([
-            infoHit.widthAnchor.constraint(equalToConstant: 44),
-            infoHit.heightAnchor.constraint(equalToConstant: 44),
+            infoHit.widthAnchor.constraint(equalToConstant: 48),
+            infoHit.heightAnchor.constraint(equalToConstant: 48),
             ui_info_button.widthAnchor.constraint(equalToConstant: 30),
             ui_info_button.heightAnchor.constraint(equalToConstant: 30),
             ui_info_button.centerXAnchor.constraint(equalTo: infoHit.centerXAnchor),
@@ -181,7 +182,7 @@ final class SuggestionCardView: UIView {
         let topRow = UIStackView(arrangedSubviews: [ui_badge_stack, UIView(), infoHit])
         topRow.axis = .horizontal
         topRow.alignment = .center
-        topRow.spacing = 8
+        topRow.spacing = 0
 
         ui_media.layer.cornerRadius = 12
         ui_media.translatesAutoresizingMaskIntoConstraints = false
@@ -210,12 +211,13 @@ final class SuggestionCardView: UIView {
             ui_media_image.trailingAnchor.constraint(equalTo: ui_media.trailingAnchor)
         ])
 
-        ui_author.font = scaled(ApplicationTheme.getFontNunitoBold(size: 13), style: .footnote)
+        ui_author.font = scaled(ApplicationTheme.getFontNunitoSemiBold(size: 13), style: .footnote)
         ui_author.textColor = UIColor(hexString: "#363636")
+        ui_author.numberOfLines = 1
         ui_author.adjustsFontForContentSizeCategory = true
 
         // Champs libres : nombre de lignes borné, texte brut, jamais reformulé.
-        ui_title.font = scaled(ApplicationTheme.getFontQuickSandBold(size: 17), style: .headline)
+        ui_title.font = scaled(ApplicationTheme.getFontNunitoBold(size: 17), style: .headline)
         ui_title.textColor = UIColor(hexString: "#1A1A1A")
         ui_title.numberOfLines = 3
         ui_title.adjustsFontForContentSizeCategory = true
@@ -228,9 +230,12 @@ final class SuggestionCardView: UIView {
         ui_metas_stack.axis = .vertical
         ui_metas_stack.spacing = 2
 
+        // Espacements d'Android : titre → texte 6, texte → informations 4, informations entre elles 2.
         let textStack = UIStackView(arrangedSubviews: [ui_author, ui_title, ui_body, ui_metas_stack])
         textStack.axis = .vertical
-        textStack.spacing = 4
+        textStack.spacing = 0
+        textStack.setCustomSpacing(6, after: ui_title)
+        textStack.setCustomSpacing(4, after: ui_body)
 
         let mediaRow = UIStackView(arrangedSubviews: [ui_media, textStack])
         mediaRow.axis = .horizontal
@@ -244,7 +249,8 @@ final class SuggestionCardView: UIView {
             mediaRow.topAnchor.constraint(equalTo: ui_content.topAnchor),
             mediaRow.bottomAnchor.constraint(equalTo: ui_content.bottomAnchor),
             mediaRow.leadingAnchor.constraint(equalTo: ui_content.leadingAnchor),
-            mediaRow.trailingAnchor.constraint(equalTo: ui_content.trailingAnchor)
+            // 12 de plus qu'au bord de la card, comme Android (la rangée média + texte n'atteint pas le bord).
+            mediaRow.trailingAnchor.constraint(equalTo: ui_content.trailingAnchor, constant: -12)
         ])
         ui_content.isAccessibilityElement = true
         ui_content.accessibilityTraits = .button
@@ -253,12 +259,12 @@ final class SuggestionCardView: UIView {
 
         ui_primary.backgroundColor = .appOrange
         ui_primary.setTitleColor(.white, for: .normal)
-        ui_primary.titleLabel?.font = scaled(ApplicationTheme.getFontQuickSandBold(size: 14), style: .callout)
+        ui_primary.titleLabel?.font = scaled(ApplicationTheme.getFontNunitoBold(size: 14), style: .callout)
         ui_primary.titleLabel?.adjustsFontForContentSizeCategory = true
         ui_primary.titleLabel?.numberOfLines = 2
         ui_primary.titleLabel?.textAlignment = .center
-        ui_primary.layer.cornerRadius = 22
-        ui_primary.contentEdgeInsets = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
+        // Coins en pilule (32 plafonné à la demi-hauteur) : posés dans `layoutSubviews`.
+        ui_primary.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
         ui_primary.addTarget(self, action: #selector(primaryTapped), for: .touchUpInside)
         ui_primary.accessibilityIdentifier = "suggestion_primary_button"
 
@@ -266,7 +272,6 @@ final class SuggestionCardView: UIView {
         ui_later.setTitleColor(UIColor(hexString: "#363636"), for: .normal)
         ui_later.titleLabel?.font = scaled(ApplicationTheme.getFontNunitoSemiBold(size: 13), style: .footnote)
         ui_later.titleLabel?.adjustsFontForContentSizeCategory = true
-        ui_later.layer.cornerRadius = 22
         ui_later.layer.borderWidth = 1.5
         ui_later.layer.borderColor = UIColor(hexString: "#D9D9D9").cgColor
         ui_later.contentEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
@@ -274,26 +279,41 @@ final class SuggestionCardView: UIView {
         ui_later.addTarget(self, action: #selector(laterTapped), for: .touchUpInside)
         ui_later.accessibilityIdentifier = "suggestion_later_button"
 
-        let actions = UIStackView(arrangedSubviews: [ui_primary, ui_later])
-        actions.axis = .horizontal
-        actions.spacing = 10
-        actions.alignment = .fill
-        actions.distribution = .fill
+        ui_actions.addArrangedSubview(ui_primary)
+        ui_actions.addArrangedSubview(ui_later)
+        ui_actions.axis = .horizontal
+        ui_actions.spacing = 10
+        ui_actions.alignment = .fill
+        ui_actions.distribution = .fill
+        ui_actions.translatesAutoresizingMaskIntoConstraints = false
         ui_primary.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
-        let root = UIStackView(arrangedSubviews: [topRow, ui_content, actions])
+        // Les boutons gardent 12 de marge de plus au bord droit, comme Android.
+        let actionsWrapper = UIView()
+        actionsWrapper.addSubview(ui_actions)
+        NSLayoutConstraint.activate([
+            ui_actions.topAnchor.constraint(equalTo: actionsWrapper.topAnchor),
+            ui_actions.bottomAnchor.constraint(equalTo: actionsWrapper.bottomAnchor),
+            ui_actions.leadingAnchor.constraint(equalTo: actionsWrapper.leadingAnchor),
+            ui_actions.trailingAnchor.constraint(equalTo: actionsWrapper.trailingAnchor, constant: -12)
+        ])
+
+        // Marges et espacements d'Android : 18 / 6 / 6 / 18, rien entre la rangée du haut et le contenu, 16 avant les boutons.
+        let root = UIStackView(arrangedSubviews: [topRow, ui_content, actionsWrapper])
         root.axis = .vertical
-        root.spacing = 12
+        root.spacing = 0
+        root.setCustomSpacing(16, after: ui_content)
         root.translatesAutoresizingMaskIntoConstraints = false
         addSubview(root)
         NSLayoutConstraint.activate([
-            root.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            root.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            root.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            root.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            ui_primary.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
-            ui_later.heightAnchor.constraint(greaterThanOrEqualToConstant: 44)
+            root.topAnchor.constraint(equalTo: topAnchor, constant: 6),
+            root.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -18),
+            root.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
+            root.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6),
+            ui_primary.heightAnchor.constraint(greaterThanOrEqualToConstant: 48),
+            ui_later.heightAnchor.constraint(greaterThanOrEqualToConstant: 48)
         ])
+        updateActionsAxis()
 
         // Ordre de lecture logique : type + titre + méta, ⓘ, action principale, action secondaire.
         isAccessibilityElement = false
@@ -322,7 +342,7 @@ final class SuggestionCardView: UIView {
             ui_media.layer.cornerRadius = 26
             ui_media.backgroundColor = card.type.thumbBackground
             if let author = card.authorName {
-                ui_media_label.font = ApplicationTheme.getFontQuickSandBold(size: 16)
+                ui_media_label.font = ApplicationTheme.getFontNunitoBold(size: 16)
                 ui_media_label.textColor = card.type.badgeColor
                 ui_media_label.text = initials(of: author)
             } else {
@@ -397,7 +417,8 @@ final class SuggestionCardView: UIView {
 
     private func makeBadge(text: String, color: UIColor, filled: Bool) -> UIView {
         let label = UILabel()
-        label.font = scaled(ApplicationTheme.getFontNunitoBold(size: 11), style: .caption1)
+        // Comme Android : badge en gras 12 (marges 11), puce en semi-gras 12 (marges 10).
+        label.font = scaled(filled ? ApplicationTheme.getFontNunitoBold(size: 12) : ApplicationTheme.getFontNunitoSemiBold(size: 12), style: .caption1)
         label.adjustsFontForContentSizeCategory = true
         label.textColor = color
         label.text = text
@@ -410,8 +431,8 @@ final class SuggestionCardView: UIView {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: container.topAnchor, constant: 4),
             label.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -4),
-            label.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 11),
-            label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -11)
+            label.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: filled ? 11 : 10),
+            label.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: filled ? -11 : -10)
         ])
         return container
     }
@@ -419,6 +440,31 @@ final class SuggestionCardView: UIView {
     private func initials(of name: String) -> String {
         let letters = name.split(separator: " ").prefix(2).compactMap { $0.first }
         return String(letters).uppercased()
+    }
+
+    // MARK: Layout
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // Boutons en pilule comme sur Android : coins de 32 plafonnés à la demi-hauteur.
+        for button in [ui_primary, ui_later] {
+            button.layer.cornerRadius = min(32, button.bounds.height / 2)
+        }
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        updateActionsAxis()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateActionsAxis()
+    }
+
+    /// Comme Android (échelle de police au-delà de 1,3) : en très grande taille de texte, les deux boutons s'empilent.
+    private func updateActionsAxis() {
+        ui_actions.axis = traitCollection.preferredContentSizeCategory >= .extraExtraExtraLarge ? .vertical : .horizontal
     }
 
     // MARK: Actions

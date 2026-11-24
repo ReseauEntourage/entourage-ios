@@ -68,7 +68,7 @@ final class SuggestionWhyViewController: UIViewController {
     private func buildUI() {
         let title = UILabel()
         title.text = "suggestion_why_title_\(card.type.rawValue)".localized
-        title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontQuickSandBold(size: 20))
+        title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontNunitoBold(size: 20))
         title.adjustsFontForContentSizeCategory = true
         title.textColor = UIColor(hexString: "#1A1A1A")
         title.numberOfLines = 0
@@ -84,11 +84,12 @@ final class SuggestionWhyViewController: UIViewController {
         footer.adjustsFontForContentSizeCategory = true
         footer.textColor = UIColor(hexString: "#6D6C6C")
         footer.numberOfLines = 0
+        footer.textAlignment = .center
 
         let close = UIButton(type: .custom)
         close.setTitle("suggestion_why_close".localized, for: .normal)
         close.setTitleColor(.white, for: .normal)
-        close.titleLabel?.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: ApplicationTheme.getFontQuickSandBold(size: 15))
+        close.titleLabel?.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: ApplicationTheme.getFontNunitoBold(size: 15))
         close.titleLabel?.adjustsFontForContentSizeCategory = true
         close.backgroundColor = .appOrange
         close.layer.cornerRadius = 24
@@ -98,8 +99,9 @@ final class SuggestionWhyViewController: UIViewController {
 
         let stack = UIStackView(arrangedSubviews: [title, reasonsStack, footer, close])
         stack.axis = .vertical
-        stack.spacing = 20
-        stack.setCustomSpacing(16, after: reasonsStack)
+        // Espacements d'Android : titre → raisons 16, raisons → pied 20, pied → bouton 16.
+        stack.spacing = 16
+        stack.setCustomSpacing(20, after: reasonsStack)
         stack.translatesAutoresizingMaskIntoConstraints = false
 
         let scroll = UIScrollView()
@@ -112,7 +114,7 @@ final class SuggestionWhyViewController: UIViewController {
             scroll.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scroll.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             stack.topAnchor.constraint(equalTo: scroll.contentLayoutGuide.topAnchor),
-            stack.bottomAnchor.constraint(equalTo: scroll.contentLayoutGuide.bottomAnchor, constant: -16),
+            stack.bottomAnchor.constraint(equalTo: scroll.contentLayoutGuide.bottomAnchor, constant: -20),
             stack.leadingAnchor.constraint(equalTo: scroll.contentLayoutGuide.leadingAnchor, constant: 24),
             stack.trailingAnchor.constraint(equalTo: scroll.contentLayoutGuide.trailingAnchor, constant: -24),
             stack.widthAnchor.constraint(equalTo: scroll.frameLayoutGuide.widthAnchor, constant: -48)

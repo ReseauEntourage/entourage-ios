@@ -36,29 +36,30 @@ final class ExplorerRowView: UIControl {
         ui_icon.translatesAutoresizingMaskIntoConstraints = false
         ui_icon_bg.addSubview(ui_icon)
 
-        // Libellé et contexte passent sur plusieurs lignes en police agrandie, sans couper le chevron.
+        // Libellé (3 lignes au plus) et contexte (2) passent sur plusieurs lignes en police agrandie, comme Android,
+        // sans couper le chevron.
         ui_label.text = access.label
-        ui_label.font = UIFontMetrics(forTextStyle: .subheadline).scaledFont(for: ApplicationTheme.getFontNunitoBold(size: 14))
+        ui_label.font = UIFontMetrics(forTextStyle: .subheadline).scaledFont(for: ApplicationTheme.getFontNunitoSemiBold(size: 14))
         ui_label.adjustsFontForContentSizeCategory = true
         ui_label.textColor = UIColor(hexString: "#1A1A1A")
-        ui_label.numberOfLines = 0
+        ui_label.numberOfLines = 3
 
         ui_context.text = access.context
         ui_context.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: ApplicationTheme.getFontNunitoRegular(size: 12))
         ui_context.adjustsFontForContentSizeCategory = true
         ui_context.textColor = UIColor(hexString: "#6D6C6C")
-        ui_context.numberOfLines = 0
+        ui_context.numberOfLines = 2
         ui_context.isHidden = (access.context ?? "").isEmpty
 
         ui_chevron.text = "›"
-        ui_chevron.font = UIFont.boldSystemFont(ofSize: 20)
+        ui_chevron.font = ApplicationTheme.getFontNunitoBold(size: 22)
         ui_chevron.textColor = UIColor(hexString: "#FF9739")
         ui_chevron.setContentHuggingPriority(.required, for: .horizontal)
         ui_chevron.setContentCompressionResistancePriority(.required, for: .horizontal)
 
         let texts = UIStackView(arrangedSubviews: [ui_label, ui_context])
         texts.axis = .vertical
-        texts.spacing = 2
+        texts.spacing = 0
         let row = UIStackView(arrangedSubviews: [ui_icon_bg, texts, ui_chevron])
         row.axis = .horizontal
         row.alignment = .center
@@ -103,8 +104,6 @@ final class SuggestionExplorerCell: UITableViewCell {
     private let ui_title = UILabel()
     private let ui_rows = UIStackView()
     private var accesses = [ExplorerAccess]()
-    /// Hauteur d'un squelette de 2 lignes : réservée pendant le chargement.
-    private let skeletonHeight: CGFloat = 2 * 72
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -121,7 +120,8 @@ final class SuggestionExplorerCell: UITableViewCell {
         contentView.backgroundColor = UIColor(named: "white_orange_home")
 
         ui_title.text = "suggestion_explorer_title".localized
-        ui_title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontQuickSandBold(size: 17))
+        // Comme Android : titre de zone en Nunito gras 18.
+        ui_title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontNunitoBold(size: 18))
         ui_title.adjustsFontForContentSizeCategory = true
         ui_title.textColor = UIColor(hexString: "#1A1A1A")
         ui_title.numberOfLines = 0
@@ -130,14 +130,25 @@ final class SuggestionExplorerCell: UITableViewCell {
         ui_rows.axis = .vertical
         ui_rows.spacing = 9
 
-        let stack = UIStackView(arrangedSubviews: [ui_title, ui_rows])
+        // Titre décalé de 2, 9 entre le titre et les lignes, marges verticales de 12, comme Android.
+        let titleWrap = UIView()
+        ui_title.translatesAutoresizingMaskIntoConstraints = false
+        titleWrap.addSubview(ui_title)
+        NSLayoutConstraint.activate([
+            ui_title.topAnchor.constraint(equalTo: titleWrap.topAnchor),
+            ui_title.bottomAnchor.constraint(equalTo: titleWrap.bottomAnchor),
+            ui_title.leadingAnchor.constraint(equalTo: titleWrap.leadingAnchor, constant: 2),
+            ui_title.trailingAnchor.constraint(equalTo: titleWrap.trailingAnchor)
+        ])
+
+        let stack = UIStackView(arrangedSubviews: [titleWrap, ui_rows])
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = 9
         stack.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stack)
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
@@ -148,15 +159,16 @@ final class SuggestionExplorerCell: UITableViewCell {
         ui_rows.arrangedSubviews.forEach { $0.removeFromSuperview() }
         guard let newAccesses = newAccesses else {
             accesses = []
-            let placeholder = UIView()
-            placeholder.backgroundColor = .white
-            placeholder.layer.cornerRadius = 16
-            placeholder.layer.borderColor = UIColor.appBeige.cgColor
-            placeholder.layer.borderWidth = 1
-            placeholder.heightAnchor.constraint(equalToConstant: skeletonHeight - 9).isActive = true
-            placeholder.isAccessibilityElement = true
-            placeholder.accessibilityLabel = "suggestion_explorer_loading_a11y".localized
-            ui_rows.addArrangedSubview(placeholder)
+            // Comme Android : deux blocs gris de 66, coins de 16, sans liseré, lus comme un seul élément.
+            for index in 0..<2 {
+                let placeholder = UIView()
+                placeholder.backgroundColor = UIColor(hexString: "#F3F0EE")
+                placeholder.layer.cornerRadius = 16
+                placeholder.heightAnchor.constraint(equalToConstant: 66).isActive = true
+                placeholder.isAccessibilityElement = (index == 0)
+                if index == 0 { placeholder.accessibilityLabel = "suggestion_explorer_loading_a11y".localized }
+                ui_rows.addArrangedSubview(placeholder)
+            }
             return
         }
         accesses = newAccesses

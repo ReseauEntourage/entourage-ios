@@ -38,7 +38,8 @@ final class SuggestionHeroCell: UITableViewCell {
         contentView.backgroundColor = UIColor(named: "white_orange_home")
 
         ui_title.text = "suggestion_hero_title".localized
-        ui_title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontQuickSandBold(size: 17))
+        // Comme Android : titre de zone en Nunito gras 18.
+        ui_title.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: ApplicationTheme.getFontNunitoBold(size: 18))
         ui_title.adjustsFontForContentSizeCategory = true
         ui_title.textColor = UIColor(hexString: "#1A1A1A")
         ui_title.numberOfLines = 0
@@ -52,47 +53,39 @@ final class SuggestionHeroCell: UITableViewCell {
 
         buildSkeleton()
 
-        let stack = UIStackView(arrangedSubviews: [ui_title, card, skeleton])
+        // Titre décalé de 2 et marges verticales de 12, comme Android.
+        let titleWrap = UIView()
+        ui_title.translatesAutoresizingMaskIntoConstraints = false
+        titleWrap.addSubview(ui_title)
+        NSLayoutConstraint.activate([
+            ui_title.topAnchor.constraint(equalTo: titleWrap.topAnchor),
+            ui_title.bottomAnchor.constraint(equalTo: titleWrap.bottomAnchor),
+            ui_title.leadingAnchor.constraint(equalTo: titleWrap.leadingAnchor, constant: 2),
+            ui_title.trailingAnchor.constraint(equalTo: titleWrap.trailingAnchor)
+        ])
+
+        let stack = UIStackView(arrangedSubviews: [titleWrap, card, skeleton])
         stack.axis = .vertical
         stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stack)
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
     }
 
     private func buildSkeleton() {
-        skeleton.backgroundColor = UIColor(hexString: "#FEEAE3")
+        // Comme Android : un bloc plein de 200, coins de 16, sans barres.
+        skeleton.backgroundColor = UIColor(hexString: "#F6E7E0")
         skeleton.layer.cornerRadius = 16
         skeleton.translatesAutoresizingMaskIntoConstraints = false
         skeleton.heightAnchor.constraint(equalToConstant: 200).isActive = true
         skeleton.isAccessibilityElement = true
         skeleton.accessibilityLabel = "suggestion_loading_a11y".localized
 
-        let widths: [CGFloat] = [90, 220, 160]
-        let bars = widths.map { width -> UIView in
-            let bar = UIView()
-            bar.backgroundColor = UIColor(white: 1, alpha: 0.7)
-            bar.layer.cornerRadius = 7
-            bar.translatesAutoresizingMaskIntoConstraints = false
-            bar.heightAnchor.constraint(equalToConstant: 14).isActive = true
-            bar.widthAnchor.constraint(equalToConstant: width).isActive = true
-            return bar
-        }
-        let barsStack = UIStackView(arrangedSubviews: bars)
-        barsStack.axis = .vertical
-        barsStack.alignment = .leading
-        barsStack.spacing = 12
-        barsStack.translatesAutoresizingMaskIntoConstraints = false
-        skeleton.addSubview(barsStack)
-        NSLayoutConstraint.activate([
-            barsStack.topAnchor.constraint(equalTo: skeleton.topAnchor, constant: 18),
-            barsStack.leadingAnchor.constraint(equalTo: skeleton.leadingAnchor, constant: 16)
-        ])
     }
 
     override func prepareForReuse() {
