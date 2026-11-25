@@ -184,6 +184,8 @@ final class SuggestionCoordinator {
             case .success(let next):
                 self.loggedHeroId = nil
                 self.setHero(next)
+                // Comme Android : sans suivante dans la réponse, on relit le moteur (`current`) avant de laisser la zone sans card.
+                if next == nil { self.refresh() }
             case .failure:
                 // Le moteur n'a pas pris en compte l'abandon : on se recale sur lui.
                 self.refresh()
