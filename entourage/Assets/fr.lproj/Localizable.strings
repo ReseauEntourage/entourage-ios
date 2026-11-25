@@ -2445,7 +2445,7 @@ Choisissez un sujet pour démarrer.";
 "action_form_save_error" = "Erreur lors de l’enregistrement de votre %@.";
 
 /* Suggestion : card « Votre prochain pas », écran « Pourquoi », zone Explorer */
-"suggestion_hero_title" = "Notre suggestion pour vous";
+"suggestion_hero_title" = "Une idée de rencontre pour vous";
 "suggestion_badge_action" = "🤝 Entraide";
 "suggestion_badge_content_path" = "📘 Pour démarrer";
 "suggestion_badge_outing" = "📅 Événement";
@@ -2488,7 +2488,7 @@ Choisissez un sujet pour démarrer.";
 "suggestion_why_footer" = "Vous pouvez ignorer une suggestion à tout moment.";
 "suggestion_why_close" = "J'ai compris";
 
-"suggestion_explorer_title" = "D'autres idées pour vous aujourd'hui";
+"suggestion_explorer_title" = "D'autres occasions de se retrouver";
 "suggestion_explorer_a11y_hint" = "Ouvre la suggestion";
 "suggestion_explorer_loading_a11y" = "Chargement de vos accès personnalisés";
 
