@@ -26,10 +26,11 @@ protocol SuggestionProviding: AnyObject {
 }
 
 /// Fournisseur de l'app : le moteur, dans tous les builds. Pendant les tests d'interface (`-UITestMode`),
-/// aucune suggestion : le faux backend ne connaît pas les routes du moteur.
+/// aucune suggestion, sauf avec `-UITestSuggestions` : le vrai fournisseur appelle alors le faux moteur du `StubBackend`.
 enum SuggestionProviderFactory {
     static func make() -> SuggestionProviding {
-        if ProcessInfo.processInfo.arguments.contains("-UITestMode") { return EmptySuggestionProvider() }
+        let arguments = ProcessInfo.processInfo.arguments
+        if arguments.contains("-UITestMode") && !arguments.contains("-UITestSuggestions") { return EmptySuggestionProvider() }
         return NextStepSuggestionProvider()
     }
 }

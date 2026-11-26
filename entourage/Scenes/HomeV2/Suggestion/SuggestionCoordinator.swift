@@ -87,7 +87,10 @@ final class SuggestionCoordinator {
             switch result {
             case .success(let payload):
                 self.state = payload.isEmpty ? .empty : .loaded(payload)
+                // `current` a renvoyé `null`. Le back ne distingue pas « tout exclu » de « aucun candidat » dans sa réponse.
+                if payload.hero == nil { self.logNextStepNull(reason: "no_candidates") }
             case .failure:
+                self.logNextStepNull(reason: "error")
                 // Erreur : on garde ce qui est affiché, sinon la zone est masquée.
                 if self.payload == nil { self.state = .failed }
             }
@@ -127,6 +130,7 @@ final class SuggestionCoordinator {
     /// Mène à l'écran ou au flux existant de la suggestion.
     func explorerTapped(_ access: ExplorerAccess) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Explorer_Click, parameters: ["type": access.type.rawValue, "id": access.id])
+        logNextStepExplorerTapped(access)
         record(.tapped, access: access)
         needsRefresh = true
         navigator(access.destination)
@@ -134,6 +138,7 @@ final class SuggestionCoordinator {
 
     func primaryTapped(_ card: SuggestionCard) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Cta, parameters: ["type": card.type.rawValue, "id": card.id])
+        logNextStepRealisedByTap(card)
         record(.tapped, card: card)
         needsRefresh = true
         navigator(card.destination)
@@ -141,6 +146,7 @@ final class SuggestionCoordinator {
 
     func bodyTapped(_ card: SuggestionCard) {
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Body, parameters: ["type": card.type.rawValue, "id": card.id])
+        logNextStepRealisedByTap(card)
         record(.tapped, card: card)
         needsRefresh = true
         navigator(card.destination)
@@ -159,6 +165,7 @@ final class SuggestionCoordinator {
     func laterTapped(_ card: SuggestionCard) {
         guard pendingLater == nil else { return }
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Click_Later, parameters: ["type": card.type.rawValue, "id": card.id])
+        logNextStep(Next_Step_Later_Tapped, card: card)
         pendingLater = card
         setHero(nil)
         presentSnackbar("suggestion_later_toast".localized, "suggestion_undo".localized,
@@ -171,6 +178,7 @@ final class SuggestionCoordinator {
         guard pendingLater?.id == card.id else { return }
         pendingLater = nil
         AnalyticsLoggerManager.logEvent(name: Suggestion_Hero_Undo_Later, parameters: ["type": card.type.rawValue, "id": card.id])
+        logNextStep(Next_Step_Later_Cancelled, card: card)
         setHero(card)
     }
 
@@ -182,6 +190,8 @@ final class SuggestionCoordinator {
             guard let self = self else { return }
             switch result {
             case .success(let next):
+                // Après la réponse 2xx. `days_active` : le contrat du moteur n'expose pas `created_at`, donc absent.
+                self.logNextStep(Next_Step_Ignored, card: card)
                 self.loggedHeroId = nil
                 self.setHero(next)
                 // Comme Android : sans suivante dans la réponse, on relit le moteur (`current`) avant de laisser la zone sans card.
@@ -199,6 +209,39 @@ final class SuggestionCoordinator {
         current.hero = hero
         state = current.isEmpty ? .empty : .loaded(current)
         onStateChanged?()
+    }
+
+    // MARK: Événements « Prochain Pas » (EN-9892)
+
+    /// `kind` (celui du moteur) et `target_id` de la suggestion, lus en mémoire ; `target_id` est omis sans cible.
+    private func logNextStep(_ name: String, card: SuggestionCard, extra: [String: Any] = [:]) {
+        var parameters: [String: Any] = ["kind": card.type.rawValue]
+        if let targetId = card.targetId { parameters["target_id"] = targetId }
+        parameters.merge(extra) { _, new in new }
+        AnalyticsLoggerManager.logEvent(name: name, parameters: parameters)
+    }
+
+    /// `poi` et `become_ambassador` sont réalisés par le tap : le back n'a aucune trace à détecter.
+    /// `days_to_realise` : le contrat n'expose pas `first_displayed_at`, donc absent. Les autres `kind` sont
+    /// détectés par le back, qui ne le signale pas à l'app (il remplace la suggestion) : pas de `auto` possible.
+    private func logNextStepRealisedByTap(_ card: SuggestionCard) {
+        guard [SuggestionType.poi, .becomeAmbassador].contains(card.type) else { return }
+        logNextStep(Next_Step_Realised, card: card, extra: ["realisation_trigger": "tap"])
+    }
+
+    private func logNextStepExplorerTapped(_ access: ExplorerAccess) {
+        var parameters: [String: Any] = ["explorer_kind": access.type.rawValue]
+        if let hero = payload?.hero {
+            parameters["kind"] = hero.type.rawValue
+            if let targetId = hero.targetId { parameters["target_id"] = targetId }
+        }
+        if let index = payload?.explorer.firstIndex(where: { $0.id == access.id }) { parameters["position"] = index + 1 }
+        if let targetId = access.targetId { parameters["explorer_target_id"] = targetId }
+        AnalyticsLoggerManager.logEvent(name: Next_Step_Explorer_Tapped, parameters: parameters)
+    }
+
+    private func logNextStepNull(reason: String) {
+        AnalyticsLoggerManager.logEvent(name: Next_Step_Null, parameters: ["reason": reason])
     }
 
     // MARK: Mesure

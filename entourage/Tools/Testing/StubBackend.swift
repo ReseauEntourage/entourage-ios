@@ -42,6 +42,11 @@ final class StubBackend {
     var failsJourneyHidden = false
     private var storedJourneyHidden = false
 
+    /// Scénario du moteur « Votre prochain pas » (`UITEST_SUGGESTIONS`, voir `NextStepScenario`).
+    /// Sans scénario (`none`, défaut), le moteur ne propose rien.
+    var nextStepScenario: NextStepScenario = .none
+    private var ignoredNextStepIds: [Int] = []
+
     private init() {}
 
     // MARK: - État
@@ -56,6 +61,7 @@ final class StubBackend {
         storedConversationMessages = [Self.firstConversationMessage]
         nextCreatedId = 9000
         storedCreated = [:]
+        ignoredNextStepIds = []
         if let url = requestLogURL {
             try? Data().write(to: url)
         }
@@ -193,6 +199,23 @@ final class StubBackend {
             return (200, Self.json(["outings": [Any]()]))
 
 
+        // --- Moteur « Votre prochain pas » (EN-9473)
+        case ("GET", "next_steps/current"):
+            return (200, Self.json(["next_step": (currentNextStep() as Any?) ?? NSNull()]))
+
+        case ("GET", "next_steps/others"):
+            return (200, Self.json(["next_steps": othersNextSteps()]))
+
+        case ("POST", "next_steps/interactions"):
+            return (204, Data())
+
+        case ("POST", _) where path.range(of: "^next_steps/[0-9]+/ignore$", options: .regularExpression) != nil:
+            let id = Int(path.split(separator: "/")[1]) ?? 0
+            lock.lock(); ignoredNextStepIds.append(id); lock.unlock()
+            // `ignoreReturnsNext` : la réponse porte la suivante ; sinon `null` (le client relit `current`).
+            let next = nextNextStep(afterIgnoring: id)
+            return (200, Self.json(["next_step": ((nextStepScenario.ignoreReturnsNext ? next : nil) as Any?) ?? NSNull()]))
+
         // --- Référentiels (catégories, rubriques d'entraide, images de la galerie)
         case ("GET", "home/metadata"):
             return (200, Self.json(["tags": [
@@ -285,6 +308,61 @@ final class StubBackend {
     }
 
 
+    // MARK: - Moteur « Votre prochain pas »
+
+    /// Les deux prochains pas successifs du faux moteur : l'identifiant est celui du `next_step`, la cible celui de l'objet.
+    private static func nextStepJSON(id: Int, kind: String, targetId: Int, title: String, extra: [String: Any] = [:]) -> [String: Any] {
+        var target: [String: Any] = ["id": targetId, "title": title, "online": true,
+                                     "metadata": ["starts_at": "2026-12-05T14:00:00.000Z", "display_address": NSNull()]]
+        target.merge(extra) { _, new in new }
+        return ["id": id, "kind": kind, "placement": "hero", "target": target,
+                "reasons": [["code": "near_you", "text": "C'est près de chez vous."],
+                            ["code": "shared_interests", "text": "Vous aimez les rencontres."]]]
+    }
+
+    static let firstNextStepId = 11
+    static let secondNextStepId = 12
+    static let firstNextStepTitle = "Café solidaire du 11e"
+    static let secondNextStepTitle = "Papotage du jeudi"
+    /// Identifiants des cibles des autres pistes : la ligne est `suggestion_explorer_others-outing-<id>`.
+    static let otherOutingId = 701
+    static let otherGroupId = 702
+
+    private func currentNextStep() -> [String: Any]? {
+        lock.lock(); let ignored = ignoredNextStepIds; lock.unlock()
+        switch nextStepScenario {
+        case .none, .explorerOnly: return nil
+        case .full, .ignoreWithoutNext:
+            if !ignored.contains(Self.firstNextStepId) {
+                return Self.nextStepJSON(id: Self.firstNextStepId, kind: "outing", targetId: 501, title: Self.firstNextStepTitle)
+            }
+            if !ignored.contains(Self.secondNextStepId) {
+                return Self.nextStepJSON(id: Self.secondNextStepId, kind: "outing", targetId: 502, title: Self.secondNextStepTitle)
+            }
+            return nil
+        }
+    }
+
+    private func nextNextStep(afterIgnoring id: Int) -> [String: Any]? {
+        id == Self.firstNextStepId
+            ? Self.nextStepJSON(id: Self.secondNextStepId, kind: "outing", targetId: 502, title: Self.secondNextStepTitle)
+            : nil
+    }
+
+    private func othersNextSteps() -> [[String: Any]] {
+        switch nextStepScenario {
+        case .none: return []
+        case .full, .explorerOnly, .ignoreWithoutNext:
+            return [
+                ["kind": "outing", "placement": "others",
+                 "target": ["id": Self.otherOutingId, "title": "Atelier cuisine partagé", "online": false,
+                            "metadata": ["starts_at": "2026-12-06T10:00:00.000Z", "display_address": "Paris 11e"]]],
+                ["kind": "neighborhood", "placement": "others",
+                 "target": ["id": Self.otherGroupId, "name": "Voisins du quartier", "national": true, "description": "Un groupe d'entraide"]]
+            ]
+        }
+    }
+
     // MARK: - Conversation de test
 
     private static let conversationId = 301
@@ -376,6 +454,20 @@ final class StubBackend {
               let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return [:] }
         return object
     }
+}
+
+/// Réponses du faux moteur « Votre prochain pas » (`UITEST_SUGGESTIONS`).
+enum NextStepScenario: String {
+    /// Aucune suggestion (défaut des tests d'interface).
+    case none
+    /// Un prochain pas, deux autres pistes ; `ignore` renvoie le suivant.
+    case full
+    /// Pas de prochain pas : la zone Autres seule.
+    case explorerOnly = "explorer_only"
+    /// `ignore` ne renvoie pas de suivante : l'app relit `GET next_steps/current`.
+    case ignoreWithoutNext = "ignore_without_next"
+
+    var ignoreReturnsNext: Bool { self == .full }
 }
 
 /// `URLProtocol` qui redirige tout vers `StubBackend`. À installer via `NetworkManager.setProtocolClasses`.

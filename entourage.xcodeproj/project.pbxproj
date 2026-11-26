@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1B2C3D4E5F60718293A4B5C /* SuggestionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5D /* SuggestionUITests.swift */; };
 		45D9DBA78DA4CADE637832F8 /* SuggestionExplorerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BFE7FCCF99E38068EB14FC /* SuggestionExplorerCell.swift */; };
 		CB9CE866A26FEC5889D38CEA /* SuggestionWhyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483AED6D0E65DC86D012F61 /* SuggestionWhyViewController.swift */; };
 		72F6E3E90DDAAA8B74D7D7ED /* SuggestionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */; };
@@ -737,6 +738,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A1B2C3D4E5F60718293A4B5D /* SuggestionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionUITests.swift; sourceTree = "<group>"; };
 		66BFE7FCCF99E38068EB14FC /* SuggestionExplorerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionExplorerCell.swift; sourceTree = "<group>"; };
 		A483AED6D0E65DC86D012F61 /* SuggestionWhyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionWhyViewController.swift; sourceTree = "<group>"; };
 		5DA1BB2939FEBBEF5F472957 /* SuggestionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCoordinator.swift; sourceTree = "<group>"; };
@@ -2984,6 +2986,7 @@
 			children = (
 				4A95F6E3EB7F906B96438A8F /* CreationScenariosUITests.swift */,
 				4682F8CA6BD6DC0774103C1B /* TabNavigationUITests.swift */,
+				A1B2C3D4E5F60718293A4B5D /* SuggestionUITests.swift */,
 				EF88DA0D2E389E6FCDD03B0E /* Screens */,
 				10BEF6F21D72DD4E89A36725 /* Support */,
 				E4E512DC1EFC2FBE2977744F /* WelcomeJourneyUITests.swift */,
@@ -3890,6 +3893,7 @@
 			files = (
 				A69BF8C76EC9709598497789 /* CreationScenariosUITests.swift in Sources */,
 				46CFD967B854C22F7FC8B10F /* TabNavigationUITests.swift in Sources */,
+				A1B2C3D4E5F60718293A4B5C /* SuggestionUITests.swift in Sources */,
 				84F3EDC186C5BE174F15DAF6 /* WelcomeJourneyScreen.swift in Sources */,
 				065DC016025DCBB4094BC28D /* UITestCase.swift in Sources */,
 				D7D654DF2B28B261845DA89A /* WelcomeJourneyUITests.swift in Sources */,

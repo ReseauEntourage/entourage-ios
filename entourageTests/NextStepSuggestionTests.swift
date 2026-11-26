@@ -433,14 +433,21 @@ final class NextStepSuggestionTests: XCTestCase {
         var dismissed = [SuggestionCard]()
         var fetchCount = 0
         var interactions = [NextStepInteraction]()
+        /// Ce que le moteur renvoie à la lecture suivante un « Plus tard » confirmé (par défaut : `payload`).
+        var payloadAfterDismiss: SuggestionPayload?
+        /// Le moteur répond en erreur à `ignore`.
+        var dismissFails = false
+        /// `GET current` échoue (réseau, API).
+        var fetchFails = false
 
         func fetch(completion: @escaping (Swift.Result<SuggestionPayload, Error>) -> Void) {
             fetchCount += 1
-            completion(.success(payload))
+            if fetchFails { return completion(.failure(NextStepError.failed)) }
+            completion(.success(dismissed.isEmpty ? payload : (payloadAfterDismiss ?? payload)))
         }
         func dismiss(_ card: SuggestionCard, completion: @escaping (Swift.Result<SuggestionCard?, Error>) -> Void) {
             dismissed.append(card)
-            completion(.success(next))
+            completion(dismissFails ? .failure(NextStepError.failed) : .success(next))
         }
         func record(_ interaction: NextStepInteraction) { interactions.append(interaction) }
     }
@@ -513,10 +520,50 @@ final class NextStepSuggestionTests: XCTestCase {
 
     func testNoNextSuggestionEmptiesTheZone() throws {
         let h = makeHarness(hero: hero(1), next: nil)
+        h.provider.payloadAfterDismiss = SuggestionPayload(hero: nil, explorer: [])
         h.coordinator.laterTapped(hero(1))
         h.snackbar.expire?()
 
         if case .empty = h.coordinator.state {} else { XCTFail("sans suggestion suivante ni autre piste, la zone est vide") }
+    }
+
+    /// Correctif `confirmLater` : sans suivante dans la réponse de `ignore`, l'app relit le moteur (`current`).
+    func testIgnoreWithoutNextRereadsTheEngine() throws {
+        let h = makeHarness(hero: hero(1), next: nil)
+        h.provider.payloadAfterDismiss = SuggestionPayload(hero: hero(2), explorer: [])
+        let fetchesBefore = h.provider.fetchCount
+
+        h.coordinator.laterTapped(hero(1))
+        h.snackbar.expire?()
+
+        XCTAssertEqual(h.provider.dismissed.map { $0.id }, ["1"])
+        XCTAssertEqual(h.provider.fetchCount, fetchesBefore + 1, "le moteur est relu une fois")
+        XCTAssertEqual(h.coordinator.payload?.hero?.id, "2", "la carte relue remplace l'ancienne")
+    }
+
+    /// Une suivante donnée par `ignore` suffit : pas de relecture.
+    func testIgnoreWithNextDoesNotRereadTheEngine() throws {
+        let h = makeHarness(hero: hero(1), next: hero(2))
+        let fetchesBefore = h.provider.fetchCount
+
+        h.coordinator.laterTapped(hero(1))
+        h.snackbar.expire?()
+
+        XCTAssertEqual(h.provider.fetchCount, fetchesBefore)
+        XCTAssertEqual(h.coordinator.payload?.hero?.id, "2")
+    }
+
+    /// Un `ignore` en erreur : l'app se recale sur le moteur au lieu de laisser la zone sans card.
+    func testFailedIgnoreRereadsTheEngine() throws {
+        let h = makeHarness(hero: hero(1), next: nil)
+        h.provider.dismissFails = true
+        let fetchesBefore = h.provider.fetchCount
+
+        h.coordinator.laterTapped(hero(1))
+        h.snackbar.expire?()
+
+        XCTAssertEqual(h.provider.fetchCount, fetchesBefore + 1)
+        XCTAssertEqual(h.coordinator.payload?.hero?.id, "1")
     }
 
     /// Les autres pistes sans cible (mini-parcours, Bonnes ondes, Animateur) n'envoient pas de `target_id`.
@@ -768,5 +815,155 @@ final class NextStepSuggestionTests: XCTestCase {
         XCTAssertEqual(provider.fetchCount, 0)
         coordinator.setSuppressed(false) // le parcours se termine
         XCTAssertEqual(provider.fetchCount, 1)
+    }
+
+    // MARK: - Événements Firebase « Prochain Pas » (EN-9892)
+
+    private typealias LoggedEvent = (name: String, parameters: [String: Any])
+
+    /// Capte les événements envoyés pendant `body` (les nouveaux noms du ticket seulement).
+    private func capturingEvents(_ body: () -> Void) -> [LoggedEvent] {
+        var events = [LoggedEvent]()
+        AnalyticsLoggerManager.eventSink = { name, parameters in events.append((name, parameters ?? [:])) }
+        defer { AnalyticsLoggerManager.eventSink = nil }
+        body()
+        return events.filter { $0.name.hasPrefix("next_step_") }
+    }
+
+    private func typedHero(_ id: Int, _ type: SuggestionType, targetId: Int?) -> SuggestionCard {
+        SuggestionCard(id: "\(id)", type: type, title: "Hero \(id)", nextStepId: id, targetId: targetId)
+    }
+
+    func testLaterTappedEvent() throws {
+        let card = typedHero(1, .outing, targetId: 501)
+        let h = makeHarness(hero: card, next: nil)
+        let events = capturingEvents { h.coordinator.laterTapped(card) }
+        XCTAssertEqual(events.map { $0.name }, ["next_step_later_tapped"])
+        XCTAssertEqual(events.first?.parameters["kind"] as? String, "outing")
+        XCTAssertEqual(events.first?.parameters["target_id"] as? Int, 501)
+        XCTAssertEqual(events.first?.parameters.count, 2)
+    }
+
+    func testLaterCancelledEvent() throws {
+        let card = typedHero(1, .outing, targetId: 501)
+        let h = makeHarness(hero: card, next: nil)
+        h.coordinator.laterTapped(card)
+        let events = capturingEvents { h.snackbar.undo?() }
+        XCTAssertEqual(events.map { $0.name }, ["next_step_later_cancelled"])
+        XCTAssertEqual(events.first?.parameters["kind"] as? String, "outing")
+        XCTAssertEqual(events.first?.parameters["target_id"] as? Int, 501)
+    }
+
+    func testIgnoredEventIsLoggedAfterTheEngineAnswered() throws {
+        let card = typedHero(1, .outing, targetId: 501)
+        let h = makeHarness(hero: card, next: nil)
+        h.provider.payloadAfterDismiss = SuggestionPayload(hero: nil, explorer: [])
+        h.coordinator.laterTapped(card)
+        var before = [LoggedEvent]()
+        let events = capturingEvents { before = []; h.snackbar.expire?() }
+        XCTAssertTrue(before.isEmpty)
+        XCTAssertEqual(events.filter { $0.name == "next_step_ignored" }.count, 1)
+        let ignored = try XCTUnwrap(events.first { $0.name == "next_step_ignored" })
+        XCTAssertEqual(ignored.parameters["kind"] as? String, "outing")
+        XCTAssertEqual(ignored.parameters["target_id"] as? Int, 501)
+        XCTAssertNil(ignored.parameters["days_active"], "le contrat du moteur n'expose pas created_at")
+    }
+
+    func testIgnoredEventIsNotLoggedWhenTheEngineFails() throws {
+        let card = typedHero(1, .outing, targetId: 501)
+        let h = makeHarness(hero: card, next: nil)
+        h.provider.dismissFails = true
+        h.coordinator.laterTapped(card)
+        let events = capturingEvents { h.snackbar.expire?() }
+        XCTAssertFalse(events.contains { $0.name == "next_step_ignored" })
+    }
+
+    func testIgnoredEventIsNotLoggedWhenCancelled() throws {
+        let card = typedHero(1, .outing, targetId: 501)
+        let h = makeHarness(hero: card, next: nil)
+        h.coordinator.laterTapped(card)
+        let events = capturingEvents { h.snackbar.undo?(); h.snackbar.expire?() }
+        XCTAssertEqual(events.map { $0.name }, ["next_step_later_cancelled"])
+    }
+
+    func testRealisedEventOnTapForPoiAndAmbassador() throws {
+        for (type, targetId) in [(SuggestionType.poi, Optional(77)), (.becomeAmbassador, nil)] {
+            let card = typedHero(1, type, targetId: targetId)
+            let h = makeHarness(hero: card, next: nil)
+            let events = capturingEvents { h.coordinator.primaryTapped(card) }
+            XCTAssertEqual(events.map { $0.name }, ["next_step_realised"], "\(type)")
+            XCTAssertEqual(events.first?.parameters["kind"] as? String, type.rawValue)
+            XCTAssertEqual(events.first?.parameters["target_id"] as? Int, targetId)
+            XCTAssertEqual(events.first?.parameters["realisation_trigger"] as? String, "tap")
+        }
+    }
+
+    func testRealisedEventIsNotLoggedForOtherKinds() throws {
+        let card = typedHero(1, .outing, targetId: 501)
+        let h = makeHarness(hero: card, next: nil)
+        let events = capturingEvents { h.coordinator.primaryTapped(card) }
+        XCTAssertTrue(events.isEmpty, "les autres kinds sont réalisés côté back, sans signal vers l'app")
+    }
+
+    func testExplorerTappedEvent() throws {
+        let card = typedHero(1, .outing, targetId: 501)
+        let accesses = [
+            ExplorerAccess(id: "others-outing-701", type: .outing, label: "A", context: nil, destination: .outing(id: 701), targetId: 701),
+            ExplorerAccess(id: "others-neighborhood-702", type: .neighborhood, label: "B", context: nil, destination: .neighborhood(id: 702), targetId: 702)
+        ]
+        let provider = FakeProvider()
+        provider.payload = SuggestionPayload(hero: card, explorer: accesses)
+        let coordinator = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in })
+        coordinator.refresh()
+
+        let events = capturingEvents { coordinator.explorerTapped(accesses[1]) }
+        XCTAssertEqual(events.map { $0.name }, ["next_step_explorer_tapped"])
+        let p = try XCTUnwrap(events.first?.parameters)
+        XCTAssertEqual(p["kind"] as? String, "outing")
+        XCTAssertEqual(p["target_id"] as? Int, 501)
+        XCTAssertEqual(p["position"] as? Int, 2)
+        XCTAssertEqual(p["explorer_kind"] as? String, "neighborhood")
+        XCTAssertEqual(p["explorer_target_id"] as? Int, 702)
+    }
+
+    func testExplorerTappedEventWithoutMainSuggestion() throws {
+        let access = ExplorerAccess(id: "others-outing-701", type: .outing, label: "A", context: nil, destination: .outing(id: 701), targetId: 701)
+        let provider = FakeProvider()
+        provider.payload = SuggestionPayload(hero: nil, explorer: [access])
+        let coordinator = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in })
+        coordinator.refresh()
+
+        let events = capturingEvents { coordinator.explorerTapped(access) }
+        let p = try XCTUnwrap(events.first?.parameters)
+        XCTAssertNil(p["kind"])
+        XCTAssertNil(p["target_id"])
+        XCTAssertEqual(p["position"] as? Int, 1)
+    }
+
+    func testNullEventWhenCurrentIsNull() throws {
+        let provider = FakeProvider()
+        let coordinator = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in })
+        let events = capturingEvents { coordinator.refresh() }
+        XCTAssertEqual(events.map { $0.name }, ["next_step_null"])
+        XCTAssertEqual(events.first?.parameters["reason"] as? String, "no_candidates")
+    }
+
+    func testNullEventOnError() throws {
+        let provider = FakeProvider()
+        provider.fetchFails = true
+        let coordinator = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in })
+        let events = capturingEvents { coordinator.refresh() }
+        XCTAssertEqual(events.map { $0.name }, ["next_step_null"])
+        XCTAssertEqual(events.first?.parameters["reason"] as? String, "error")
+    }
+
+    func testNullEventIsNotLoggedDuringWelcomeJourneyOrWithAHero() throws {
+        let provider = FakeProvider()
+        let suppressed = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in }, startsSuppressed: true)
+        XCTAssertTrue(capturingEvents { suppressed.refreshIfNeeded() }.isEmpty)
+
+        provider.payload = SuggestionPayload(hero: hero(1), explorer: [])
+        let active = SuggestionCoordinator(provider: provider, presentSnackbar: { _, _, _, _ in }, navigator: { _ in })
+        XCTAssertTrue(capturingEvents { active.refresh() }.isEmpty)
     }
 }

@@ -10,7 +10,11 @@ import FirebaseAnalytics
 
 struct AnalyticsLoggerManager {
     
+    /// Couture de test : quand elle est posée, les événements lui sont remis au lieu de partir vers Firebase.
+    static var eventSink: ((_ name: String, _ parameters: [String: Any]?) -> Void)?
+
     static func logEvent(name:String, parameters:[String : Any]? = nil) {
+        if let sink = eventSink { return sink(name, parameters) }
         Analytics.logEvent(name, parameters: parameters)
     }
  

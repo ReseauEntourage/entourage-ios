@@ -467,3 +467,11 @@ let Suggestion_Hero_Undo_Later = "Clic__Home__Suggestion_Hero_UndoLater"
 let Suggestion_Explorer_View = "View__Home__Suggestion_Explorer"
 let Suggestion_Explorer_Click = "Clic__Home__Suggestion_Explorer_Access"
 let Suggestion_Why_View = "View__Home__Suggestion_Why"
+
+// « Prochain Pas » (EN-9892) : noms du ticket, en snake_case.
+let Next_Step_Later_Tapped = "next_step_later_tapped"
+let Next_Step_Later_Cancelled = "next_step_later_cancelled"
+let Next_Step_Ignored = "next_step_ignored"
+let Next_Step_Realised = "next_step_realised"
+let Next_Step_Explorer_Tapped = "next_step_explorer_tapped"
+let Next_Step_Null = "next_step_null"

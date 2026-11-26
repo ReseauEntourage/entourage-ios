@@ -19,6 +19,15 @@ enum UITestBootstrap {
     /// Retarde la réponse du skip de N millisecondes (serveur lent).
     static let skipDelayMsEnvKey = "UITEST_SKIP_DELAY_MS"
 
+    /// Active le vrai fournisseur « Votre prochain pas » (sinon aucune suggestion) ; le scénario du faux moteur
+    /// est lu dans `UITEST_SUGGESTIONS` (`NextStepScenario`, `full` par défaut).
+    static let suggestionsLaunchArgument = "-UITestSuggestions"
+    static let suggestionsScenarioEnvKey = "UITEST_SUGGESTIONS"
+
+    static var usesSuggestionEngine: Bool {
+        ProcessInfo.processInfo.arguments.contains(suggestionsLaunchArgument)
+    }
+
     static var isActive: Bool {
         ProcessInfo.processInfo.arguments.contains(launchArgument)
     }
@@ -37,6 +46,8 @@ enum UITestBootstrap {
             .filter { !$0.isEmpty }
         StubBackend.shared.reset(events: events)
         StubBackend.shared.skipResponseDelay = (Double(env[skipDelayMsEnvKey] ?? "") ?? 0) / 1000
+        StubBackend.shared.nextStepScenario = usesSuggestionEngine
+            ? (NextStepScenario(rawValue: env[suggestionsScenarioEnvKey] ?? "") ?? .full) : .none
         NetworkManager.sharedInstance.setProtocolClasses([StubURLProtocol.self])
 
         // Faux utilisateur connecté + état propre du parcours de bienvenue.
