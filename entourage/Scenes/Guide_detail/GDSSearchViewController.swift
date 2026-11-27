@@ -88,6 +88,8 @@ class GDSSearchViewController: UIViewController {
     
     //MARK: - IBActions
     @IBAction func action_clear(_ sender: Any) {
+        // Croix : retire le focus et remet la liste initiale.
+        ui_tf_search.resignFirstResponder()
         if ui_tf_search.text?.count ?? 0 > 0 {
             ui_tf_search.text = ""
             pois.removeAll()

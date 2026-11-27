@@ -96,6 +96,9 @@ class CellMainFilter: UITableViewCell, UITextFieldDelegate {
     }
     
     @objc private func clearTextField() {
+        // Croix : annule la recherche en attente, retire le focus et remet la liste initiale.
+        textChangeTimer?.invalidate()
+        ui_textfield.resignFirstResponder()
         ui_textfield.text = ""
         delegate?.didUpdateText(text: "")
     }

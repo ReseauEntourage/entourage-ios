@@ -55,8 +55,10 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
     }
     
     @IBAction func action_clear(_ sender: Any) {
+        // Croix : retire le focus même si le champ est déjà vide.
+        ui_search_textfield.resignFirstResponder()
         if ui_search_textfield.text?.isEmpty ?? true { return }
-        
+
         ui_search_textfield.text = ""
         delegate?.goSearch("")
         ui_bt_search.isHidden = true

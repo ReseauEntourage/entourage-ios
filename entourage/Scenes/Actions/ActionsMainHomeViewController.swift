@@ -271,7 +271,15 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     @objc private func clearTextField() {
+        // Croix : vide le champ, retire le focus et remet la liste initiale (pas celle de recherche).
+        textChangeTimer?.invalidate()
         ui_search_textfield.text = ""
+        ui_search_textfield.resignFirstResponder()
+        searchText = ""
+        currentMode = self.isContribSelected ? .contribNormal : .solicitationNormal
+        if numberOfFilter > 0 {
+            currentMode = self.isContribSelected ? .contribFiltered : .solicitationFiltered
+        }
         loadDataBasedOnMode()
     }
     
