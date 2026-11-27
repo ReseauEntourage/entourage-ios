@@ -271,15 +271,9 @@ final class CreationScenariosUITests: UITestCase {
         step("Onglet Discussions") { tab(2) }
 
         step("Ouvrir la conversation") {
+            // Non-régression : la réponse du statut des notifications ne doit plus vider la liste quand elle arrive
+            // après `conversations/memberships` (instantané sur le faux backend), sans changer d'onglet.
             let row = app.staticTexts["Jean M."].firstMatch
-            if !row.waitForExistence(timeout: 10) {
-                // Contournement d'une course de l'app (non corrigée ici) : dans `ConversationsMainHomeViewController`,
-                // la réponse asynchrone de `checkNotificationStatus()` appelle `loadDTO(conversations: [], reset: true)`
-                // et vide la liste quand elle arrive après `conversations/memberships` (instantané sur le faux backend).
-                // Revenir sur l'onglet relance le chargement (`viewWillAppear`).
-                tab(0)
-                tab(2)
-            }
             XCTAssertTrue(row.waitForExistence(timeout: 15), "La conversation de test doit être listée")
             row.tap()
         }

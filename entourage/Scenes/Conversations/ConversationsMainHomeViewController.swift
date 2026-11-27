@@ -154,9 +154,34 @@ class ConversationsMainHomeViewController: UIViewController {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
                 self.notificationsDisabled = settings.authorizationStatus != .authorized
-                self.loadDTO(conversations: [], reset: true)
+                self.syncNotificationRequestRow()
             }
         }
+    }
+
+    /// Met à jour la seule ligne « activer les notifications », sans toucher aux conversations déjà chargées.
+    /// Avant, un `loadDTO(conversations: [], reset: true)` reconstruisait toute la liste : quand cette réponse
+    /// arrivait après celle de `conversations/memberships`, la liste se retrouvait vide jusqu'au prochain
+    /// `viewWillAppear`.
+    private func syncNotificationRequestRow() {
+        // Liste pas encore chargée : on affiche déjà l'en-tête ; le chargement le reconstruira (appendHeaderRows).
+        guard !dataSource.isEmpty else {
+            appendHeaderRows()
+            ui_tableview.reloadData()
+            return
+        }
+        let hasRow: Bool = {
+            if case .notificationRequest = dataSource[0] { return true }
+            return false
+        }()
+        if notificationsDisabled && !hasRow {
+            dataSource.insert(.notificationRequest, at: 0)
+        } else if !notificationsDisabled && hasRow {
+            dataSource.remove(at: 0)
+        } else {
+            return
+        }
+        ui_tableview.reloadData()
     }
     
     func loadConversations(reset: Bool) {
