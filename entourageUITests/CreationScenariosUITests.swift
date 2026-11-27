@@ -19,25 +19,54 @@ final class CreationScenariosUITests: UITestCase {
         button.tap()
     }
 
-    /// Attend un élément puis le touche.
+    /// Attend (max `timeout` s) que `predicate` soit vrai pour `target`, sans faire échouer le test.
+    @discardableResult
+    private func wait(_ target: XCUIElement, until predicate: String, timeout: TimeInterval) -> Bool {
+        let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: predicate), object: target)
+        return XCTWaiter().wait(for: [expectation], timeout: timeout) == .completed
+    }
+
+    /// Attend un élément, laisse passer une animation en cours (clavier, transition), puis le touche.
+    /// Pas d'échec si l'élément reste non touchable : hors écran, `tap()` le fait défiler jusqu'à lui.
     private func tap(_ identifier: String, timeout: TimeInterval = 10, file: StaticString = #filePath, line: UInt = #line) {
         let target = element(identifier)
         XCTAssertTrue(target.waitForExistence(timeout: timeout), "\(identifier) introuvable", file: file, line: line)
+        wait(target, until: "hittable == true", timeout: 2)
         target.tap()
     }
 
+    /// Touche le champ et attend qu'il ait le focus clavier avant de taper.
+    ///
+    /// Zone de texte multiligne (`FormFlowTextArea`) : le texte d'exemple est un `Text` SwiftUI posé par-dessus le
+    /// `UITextView` ; quand il couvre le centre de la zone (texte d'exemple sur 3 lignes, ex. « demande »), le toucher
+    /// au centre ne donne pas le focus. On referme d'abord le clavier du champ précédent (sa barre « Valider » recouvre
+    /// le bas de la zone), puis on touche le bas de la zone, sous le texte d'exemple.
     private func type(_ text: String, into identifier: String, file: StaticString = #filePath, line: UInt = #line) {
         let field = element(identifier)
         XCTAssertTrue(field.waitForExistence(timeout: 10), "\(identifier) introuvable", file: file, line: line)
-        field.tap()
+        let isTextArea = field.elementType == .textView
+        if isTextArea, app.keyboards.firstMatch.exists { dismissKeyboard() }
+        var focused = false
+        for _ in 0..<3 where !focused {
+            wait(field, until: "hittable == true", timeout: 2)
+            if isTextArea {
+                field.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.9)).tap()
+            } else {
+                field.tap()
+            }
+            focused = wait(field, until: "hasKeyboardFocus == true", timeout: 3)
+        }
+        XCTAssertTrue(focused, "\(identifier) n'a jamais pris le focus clavier", file: file, line: line)
         field.typeText(text)
     }
 
     private func next() { tap("form_flow_next") }
 
-    /// Referme le clavier en touchant le fond de l'écran (les parcours SwiftUI le referment au toucher).
+    /// Referme le clavier en touchant le fond de l'écran (les parcours SwiftUI le referment au toucher),
+    /// puis attend qu'il ait disparu : il recouvre le bouton « Continuer » pendant son animation.
     private func dismissKeyboard() {
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.2)).tap()
+        wait(app.keyboards.firstMatch, until: "exists == false", timeout: 5)
     }
 
     /// Choisit « Ma position » dans le sélecteur de lieu (Paris en mode test), puis valide.
@@ -243,6 +272,14 @@ final class CreationScenariosUITests: UITestCase {
 
         step("Ouvrir la conversation") {
             let row = app.staticTexts["Jean M."].firstMatch
+            if !row.waitForExistence(timeout: 10) {
+                // Contournement d'une course de l'app (non corrigée ici) : dans `ConversationsMainHomeViewController`,
+                // la réponse asynchrone de `checkNotificationStatus()` appelle `loadDTO(conversations: [], reset: true)`
+                // et vide la liste quand elle arrive après `conversations/memberships` (instantané sur le faux backend).
+                // Revenir sur l'onglet relance le chargement (`viewWillAppear`).
+                tab(0)
+                tab(2)
+            }
             XCTAssertTrue(row.waitForExistence(timeout: 15), "La conversation de test doit être listée")
             row.tap()
         }

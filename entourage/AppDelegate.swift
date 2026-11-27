@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureFirebase()
         configureGooglePlace()
         #if DEBUG
+        UITestBootstrap.configureFirebaseIfNeeded()
         let skipNotificationPrompt = UITestBootstrap.isActive
         #else
         let skipNotificationPrompt = false

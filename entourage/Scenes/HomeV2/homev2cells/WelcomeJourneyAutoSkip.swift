@@ -63,4 +63,10 @@ struct WelcomeJourneyHiddenFlag {
         guard let userId = userId, !userId.isEmpty else { return }
         defaults.set(true, forKey: key(userId: userId))
     }
+
+    /// Oublie le masquage (sert aux tests UI, qui repartent d'un parcours affiché à chaque lancement).
+    static func clear(userId: String?, defaults: UserDefaults = .standard) {
+        guard let userId = userId, !userId.isEmpty else { return }
+        defaults.removeObject(forKey: key(userId: userId))
+    }
 }

@@ -1,6 +1,10 @@
 #if DEBUG
 import Foundation
 import SimpleKeychain
+import FirebaseCore
+#if canImport(FirebaseInAppMessaging)
+import FirebaseInAppMessaging
+#endif
 
 /// Prépare l'app pour les tests UI (XCUITest) quand elle est lancée avec l'argument `-UITestMode`.
 ///
@@ -30,6 +34,17 @@ enum UITestBootstrap {
 
     static var isActive: Bool {
         ProcessInfo.processInfo.arguments.contains(launchArgument)
+    }
+
+    /// À appeler dans `didFinishLaunching`, après `FirebaseApp.configure`.
+    /// Firebase In-App Messaging n'est pas branché sur le `StubBackend` : il récupère les campagnes du vrai projet
+    /// Firebase (ex. la campagne « Test iOS ») et affiche sa modale par-dessus l'app à un moment imprévisible,
+    /// ce qui bloque les taps des tests UI. On en coupe l'affichage pendant les tests.
+    static func configureFirebaseIfNeeded() {
+        guard isActive, FirebaseApp.app() != nil else { return }
+        #if canImport(FirebaseInAppMessaging)
+        InAppMessaging.inAppMessaging().messageDisplaySuppressed = true
+        #endif
     }
 
     /// À appeler dans `didFinishLaunching`, une fois l'environnement initialisé.
@@ -80,6 +95,9 @@ enum UITestBootstrap {
             UserDefaults.standard.removeObject(forKey: WelcomeJourneyAutoSkip.lastConnectionKey)
         }
         A0SimpleKeychain().setString("uitest", forKey: kKeychainPassword)
+        // « Masquer le parcours » mémorise le masquage par utilisateur : sans ce reset, le scénario qui le masque
+        // cache le parcours pour tous les lancements suivants (même faux utilisateur) sur ce simulateur.
+        WelcomeJourneyHiddenFlag.clear(userId: user.uuid)
         UserDefaults.standard.removeObject(forKey: "hasShownWelcomeCelebration")
         UserDefaults.standard.removeObject(forKey: "hasShownWelcomeNationalGroupSnackbar")
     }
